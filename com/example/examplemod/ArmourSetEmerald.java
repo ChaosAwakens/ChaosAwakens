@@ -12,6 +12,7 @@ public class ArmourSetEmerald extends ItemArmor {
 	this.setCreativeTab(getCreativeTab().COMBAT);
 	
 	
+	
 	}
 
 }

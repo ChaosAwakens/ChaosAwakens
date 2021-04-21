@@ -2,11 +2,11 @@ package com.example.examplemod;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemHoe;
 
-public class EmeraldPic extends ItemPickaxe implements IHadModels {
-	public EmeraldPic(String name, ToolMaterial material) {
+public class EmeraldHoe extends ItemHoe implements IHadModels {
+
+	public EmeraldHoe(String name, ToolMaterial material) {
 		super(material);
 		// TODO Auto-generated constructor stub
 		
@@ -22,4 +22,23 @@ public class EmeraldPic extends ItemPickaxe implements IHadModels {
 			// TODO Auto-generated method stub
 		 ExampleMod.proxy.registerItemRenderer(this, 0, "inventory");
 		}
-}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+
+	
+	
+	
+	
+	
+	
+	
+

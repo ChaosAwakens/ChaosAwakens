@@ -1,18 +1,19 @@
 package com.example.examplemod;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemSword;
 
-public class EmeraldPic extends ItemPickaxe implements IHadModels {
-	public EmeraldPic(String name, ToolMaterial material) {
+public class EmeraldSword extends ItemSword implements IHadModels {
+
+	
+	public EmeraldSword(String name, ToolMaterial material) {
 		super(material);
 		// TODO Auto-generated constructor stub
 		
 			setUnlocalizedName(name);
 			setRegistryName(name);
-			setCreativeTab(CreativeTabs.TOOLS);
+			setCreativeTab(CreativeTabs.MATERIALS);
 			ExampleMod.ITEMS.add(this);
 	}
 		
@@ -22,4 +23,6 @@ public class EmeraldPic extends ItemPickaxe implements IHadModels {
 			// TODO Auto-generated method stub
 		 ExampleMod.proxy.registerItemRenderer(this, 0, "inventory");
 		}
+	
+	
 }
