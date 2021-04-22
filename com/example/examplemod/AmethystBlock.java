@@ -6,9 +6,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class AmathestBlock extends Block implements IHadModels {
+public class AmethystBlock extends Block implements IHadModels {
 
-	public AmathestBlock(String name, Material material) {
+	public AmethystBlock(String name, Material material) {
 		super(material);
 		// TODO Auto-generated constructor stub
 	setUnlocalizedName(name);
