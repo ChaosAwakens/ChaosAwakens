@@ -5,10 +5,10 @@ import net.minecraft.item.Item;
 
 
 
-public class Amathest extends Item implements IHadModels{
+public class Amethyst extends Item implements IHadModels{
 
 	
-	public Amathest(String name)
+	public Amethyst(String name)
 	{
 	setUnlocalizedName(name);
 		setRegistryName(name);
@@ -23,5 +23,4 @@ public class Amathest extends Item implements IHadModels{
 		// TODO Auto-generated method stub
 	 ExampleMod.proxy.registerItemRenderer(this, 0, "inventory");
 	}
-
 }
