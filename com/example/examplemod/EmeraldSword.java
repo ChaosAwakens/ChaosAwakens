@@ -13,7 +13,7 @@ public class EmeraldSword extends ItemSword implements IHadModels {
 		
 			setUnlocalizedName(name);
 			setRegistryName(name);
-			setCreativeTab(CreativeTabs.MATERIALS);
+			setCreativeTab(CreativeTabs.COMBAT);
 			ExampleMod.ITEMS.add(this);
 	}
 		

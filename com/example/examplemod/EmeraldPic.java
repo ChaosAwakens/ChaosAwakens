@@ -3,6 +3,7 @@ package com.example.examplemod;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
 
 public class EmeraldPic extends ItemPickaxe implements IHadModels {
@@ -14,9 +15,9 @@ public class EmeraldPic extends ItemPickaxe implements IHadModels {
 			setRegistryName(name);
 			setCreativeTab(CreativeTabs.TOOLS);
 			ExampleMod.ITEMS.add(this);
+
 	}
-		
-		
+				
 		@Override
 		public void registerModels() {
 			// TODO Auto-generated method stub
