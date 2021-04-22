@@ -14,13 +14,13 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenCustomOres implements IWorldGenerator{
 
-	private WorldGenerator ore_overworld_ruby, ore_overworld_tigereye, ore_overworld_amathest, ore_overworld_oil, ore_overworld_titanium, ore_overworld_uranium, ore_overworld_aluminium, ore_overworld_salt;
+	private WorldGenerator ore_overworld_ruby, ore_overworld_tigereye, ore_overworld_amethyst, ore_overworld_oil, ore_overworld_titanium, ore_overworld_uranium, ore_overworld_aluminium, ore_overworld_salt;
 	
 	public WorldGenCustomOres()
 	{
 		ore_overworld_ruby = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.RUBY), 4, BlockMatcher.forBlock(Blocks.STONE));
 		ore_overworld_tigereye = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.TIGEREYE), 6, BlockMatcher.forBlock(Blocks.STONE));
-		ore_overworld_amathest = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.AMATHYEST), 5, BlockMatcher.forBlock(Blocks.STONE));
+		ore_overworld_amethyst = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.AMETHYST), 5, BlockMatcher.forBlock(Blocks.STONE));
 ore_overworld_oil = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.UNPROCESSEDOIL), 15, BlockMatcher.forBlock(Blocks.STONE));
 ore_overworld_titanium = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.TITANIUM), 3, BlockMatcher.forBlock(Blocks.STONE));
 ore_overworld_uranium = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.URANIUM), 2, BlockMatcher.forBlock(Blocks.STONE));
@@ -50,7 +50,7 @@ ore_overworld_salt = new WorldGenMinable(ExampleMod.ore_overworld.getDefaultStat
 
 			runGenerator(ore_overworld_tigereye, world, random, chunkX, chunkZ, 40, 100, 250);
 			
-			runGenerator(ore_overworld_amathest, world, random, chunkX, chunkZ, 30, 100, 250);
+			runGenerator(ore_overworld_amethyst, world, random, chunkX, chunkZ, 30, 100, 250);
 
 			runGenerator(ore_overworld_oil, world, random, chunkX, chunkZ, 300, 5, 250);
 			runGenerator(ore_overworld_salt, world, random, chunkX, chunkZ, 200, 5, 250);

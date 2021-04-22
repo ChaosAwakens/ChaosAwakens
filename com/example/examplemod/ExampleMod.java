@@ -57,32 +57,32 @@ public static ExampleMod instance;
 public static final List<Item> ITEMS = new ArrayList<Item>();
 public static final List<Block> BLOCKS = new ArrayList<Block>();
 
-public static final Item amathest = new Amathest("amathest");
-public static final Block amathestblock = new AmathestBlock("amathestblock", Material.IRON);
-//public static final Block ore_overworld_amathest = new AmathestBlock("ore_overworld_amathest", Material.IRON);
+public static final Item amethyst = new Amethyst("amethyst");
+public static final Block amethystblock = new AmethystBlock("amethystblock", Material.IRON);
+//public static final Block ore_overworld_amethyst = new AmethystBlock("ore_overworld_amethyst", Material.IRON);
 
-//Same Characteristics as Amathyest
-public static final Item Ruby = new Amathest("Ruby");
-public static final Block RubyBlock = new AmathestBlock("RubyBlock", Material.IRON);
+//Same Characteristics as Amethyst
+public static final Item Ruby = new Amethyst("Ruby");
+public static final Block RubyBlock = new AmethystBlock("RubyBlock", Material.IRON);
 public static final Block ore_overworld = new RubyOre("ore_overworld", "overworld");
-public static final Item TigerEye = new Amathest("TigerEye");
+public static final Item TigerEye = new Amethyst("TigerEye");
 //public static final Block ore_overworld_tigereye = new ore_tigereye_overworld("ore_overworld_tigereye", "overworld");
-public static final Block TigerEyeBlock = new AmathestBlock("TigerEyeBlock", Material.IRON);
+public static final Block TigerEyeBlock = new AmethystBlock("TigerEyeBlock", Material.IRON);
 //public static final Item Oil = new Oil("Oil");
 //public static final Block ore_unprocessedoil_overworld = new ore_unprocessedoil_overworld("ore_unprocessedoil_overworld", "overworld");
 //public static final Item Salt = new Salt("Salt"); //Ant Functionality Delayed
 //public static final Block ore_salt_overworld = new SaltOre("SaltOre", "overworld"); //Ant Functionality Delayed
-public static final Item Titanium = new Amathest("Titanium");
-public static final Item TitaniumNugget = new Amathest("TitaniumNugget");
+public static final Item Titanium = new Amethyst("Titanium");
+public static final Item TitaniumNugget = new Amethyst("TitaniumNugget");
 //public static final Block ore_titanium_overworld = new ore_titanium_overworld("ore_titanium_overworld", "overworld");
-public static final Block TitaniumBlock = new AmathestBlock("TitaniumBlock", Material.IRON);
-public static final Item Uranium = new Amathest("Uranium");
-public static final Item UraniumNugget = new Amathest("UraniumNugget");
+public static final Block TitaniumBlock = new AmethystBlock("TitaniumBlock", Material.IRON);
+public static final Item Uranium = new Amethyst("Uranium");
+public static final Item UraniumNugget = new Amethyst("UraniumNugget");
 //public static final Block ore_uranium_overworld = new ore_uranium_overworld("ore_uranium_overworld", "overworld");
-public static final Block UraniumBlock = new AmathestBlock("UraniumBlock", Material.IRON);
-public static final Item Aluminium = new Amathest("Aluminium");
+public static final Block UraniumBlock = new AmethystBlock("UraniumBlock", Material.IRON);
+public static final Item Aluminium = new Amethyst("Aluminium");
 //public static final Block ore_aluminium_overworld = new ore_aluminium_overworld("ore_aluminium_overworld", "overworld");
-public static final Block AluminiumBlock = new AmathestBlock("AluminiumBlock", Material.IRON);
+public static final Block AluminiumBlock = new AmethystBlock("AluminiumBlock", Material.IRON);
 
 
 //I will do troll blocks later but also with better Ores like Uranium or Titanium and worser Ores Like Coal/Oil or Salt
@@ -94,7 +94,7 @@ public static final Block AluminiumBlock = new AmathestBlock("AluminiumBlock", M
 
 ////Armour Materials
 public static final ArmorMaterial ArmourSetOSEmerald = EnumHelper.addArmorMaterial("OSEmerald", Reference.MODID + ":emerald", 25, new int[] {5, 10, 10, 5}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 20.0F );
-public static final ArmorMaterial ArmourSetAmethyst = EnumHelper.addArmorMaterial("ArmourSetAmethyst", Reference.MODID + ":ametheyst", 25, new int[] {10, 20, 20, 10}, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 30.0F );
+public static final ArmorMaterial ArmourSetAmethyst = EnumHelper.addArmorMaterial("ArmourSetAmethyst", Reference.MODID + ":amethyst", 25, new int[] {10, 20, 20, 10}, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 30.0F );
 public static final ArmorMaterial RubyArmour = EnumHelper.addArmorMaterial("RubyArmour", Reference.MODID + ":ruby", 50, new int[] {15, 25, 25, 15}, 60, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 40.0F );
 public static final ArmorMaterial TigerEyeArmour = EnumHelper.addArmorMaterial("TigerEyeArmour", Reference.MODID + ":tigereye", 35, new int[] {10, 15, 15, 10}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 25.0F );
 

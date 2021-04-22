@@ -9,7 +9,7 @@ public class EnumHandler0 {
 	
 		RUBY(0, "ruby"),
 		TIGEREYE(1, "tigereye"),
-				AMATHYEST(2, "amathyest"),
+				AMETHYST(2, "amethyst"),
 				UNPROCESSEDOIL(3, "unprocessedoil"),
 				TITANIUM(4, "titanium"),
 URANIUM(5, "uranium"),
