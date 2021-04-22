@@ -54,8 +54,8 @@ public static ExampleMod instance;
 public static final List<Item> ITEMS = new ArrayList<Item>();
 public static final List<Block> BLOCKS = new ArrayList<Block>();
 
-public static final Item amathest = new Amathest("amathest");
-public static final Block amathestblock = new AmathestBlock("amathestblock", Material.IRON);
+public static final Item amethyst = new Amethyst("amethyst");
+public static final Block amethystblock = new AmethystBlock("amethystblock", Material.IRON);
 
 
 
