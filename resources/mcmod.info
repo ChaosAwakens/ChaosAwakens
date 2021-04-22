@@ -1,0 +1,18 @@
+[
+{
+"modid": "chaosawakened",
+"name" "Chaos Awakened",
+"description": "A sucessor Mod to OreSpawn",
+"version": "${version}",
+"mcversion": "${mcversion}",
+"url": "",
+"updateUrl": "",
+"authorList": ["ExampleDude"],
+"credits": "",
+"logoFile": "",
+"screenshots": [],
+"dependencies": []
+
+}
+
+]
