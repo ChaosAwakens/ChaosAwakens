@@ -7,7 +7,7 @@ TheyCallMeRandom,
 Coders:
 Meme Man,
 WeirdNerd,
-Asbestosstar,
+Asbestosstar (amerigovespuccip in MC),
 Yanbere,
 
 Artists:
