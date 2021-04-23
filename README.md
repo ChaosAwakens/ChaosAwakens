@@ -2,30 +2,30 @@
 ChaosAwakens is a sucessor mod for OreSpawn for Minecraft created after Danger Exit Scammed.
 
 Lead Dev
-TheyCallMeRandom
+TheyCallMeRandom,
 
-Coders
-Meme Man
-WeirdNerd
-Asbestosstar
-Yanbere
+Coders:
+Meme Man,
+WeirdNerd,
+Asbestosstar,
+Yanbere,
 
-Artist
-VDA Spoop
-FBG_Bolushi
-ElectricKhan
-The Cleaning Lady
-LuisRandomness
-YanbereGev
-Asbestosstar (some)
-AbsoluteKhan
-Spawn of Ore
-DeuceWins
-jjwiggs
-killerking
-Peeko
-Spooder
-Chromatic
+Artists:
+VDA Spoop,
+FBG_Bolushi,
+ElectricKhan,
+The Cleaning Lady,
+LuisRandomness,
+YanbereGev,
+Asbestosstar (some),
+AbsoluteKhan,
+Spawn of Ore,
+DeuceWins,
+jjwiggs,
+killerking,
+Peeko,
+Spooder,
+Chromatic,
 
 If i got anything wrong please update it.
 
