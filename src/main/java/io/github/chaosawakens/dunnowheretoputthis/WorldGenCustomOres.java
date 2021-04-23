@@ -12,6 +12,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
+//import io.github.chaosawakens.Blocks;
+
 
 public class WorldGenCustomOres implements IWorldGenerator{
 
@@ -19,14 +21,14 @@ public class WorldGenCustomOres implements IWorldGenerator{
 	
 	public WorldGenCustomOres()
 	{
-		ore_overworld_ruby = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.RUBY), 4, BlockMatcher.forBlock(Blocks.STONE));
-		ore_overworld_tigereye = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.TIGEREYE), 6, BlockMatcher.forBlock(Blocks.STONE));
-		ore_overworld_amathest = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.AMATHYEST), 5, BlockMatcher.forBlock(Blocks.STONE));
-ore_overworld_oil = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.UNPROCESSEDOIL), 15, BlockMatcher.forBlock(Blocks.STONE));
-ore_overworld_titanium = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.TITANIUM), 3, BlockMatcher.forBlock(Blocks.STONE));
-ore_overworld_uranium = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.URANIUM), 2, BlockMatcher.forBlock(Blocks.STONE));
-ore_overworld_aluminium = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.ALUMINIUM), 6, BlockMatcher.forBlock(Blocks.STONE));
-ore_overworld_salt = new WorldGenMinable(ChaosAwakens.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.SALT), 10, BlockMatcher.forBlock(Blocks.STONE));
+		ore_overworld_ruby = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.RUBY), 4, BlockMatcher.forBlock(Blocks.STONE));
+		ore_overworld_tigereye = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.TIGEREYE), 6, BlockMatcher.forBlock(Blocks.STONE));
+		ore_overworld_amathest = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.AMATHYEST), 5, BlockMatcher.forBlock(Blocks.STONE));
+ore_overworld_oil = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.UNPROCESSEDOIL), 15, BlockMatcher.forBlock(Blocks.STONE));
+ore_overworld_titanium = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.TITANIUM), 3, BlockMatcher.forBlock(Blocks.STONE));
+ore_overworld_uranium = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.URANIUM), 2, BlockMatcher.forBlock(Blocks.STONE));
+ore_overworld_aluminium = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.ALUMINIUM), 6, BlockMatcher.forBlock(Blocks.STONE));
+ore_overworld_salt = new WorldGenMinable(io.github.chaosawakens.Blocks.ore_overworld.getDefaultState().withProperty(RubyOre.VARIANT, EnumHandler0.EnumType.SALT), 10, BlockMatcher.forBlock(Blocks.STONE));
 
 	
 	}
