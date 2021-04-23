@@ -1,6 +1,8 @@
 package io.github.chaosawakens.dunnowheretoputthis;
 
+import io.github.chaosawakens.Blocks;
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.Items;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -32,8 +34,8 @@ public class RubyOre extends Block implements IHadModels, IMetaName{
 	this.name = name;
 	this.dimension = dimension;
 	
-	ChaosAwakens.BLOCKS.add(this);
-	ChaosAwakens.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
+	Blocks.BLOCKS.add(this);
+	Items.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
 	}
 
 	@Override
@@ -87,7 +89,7 @@ public class RubyOre extends Block implements IHadModels, IMetaName{
 	for(int i = 0; i < EnumHandler0.EnumType.values().length; i++)
 	{
 		
-		ChaosAwakens.proxy.registerVariantRenderer(Item.getItemFromBlock(this), i, "ore_" + this.dimension + "_" + EnumHandler0.EnumType.values()[i].getName(), "inventory");
+		ChaosAwakens.proxy.registerItemVariantRenderer(Item.getItemFromBlock(this), i, "ore_" + this.dimension + "_" + EnumHandler0.EnumType.values()[i].getName(), "inventory");
 	}
 	
 	
