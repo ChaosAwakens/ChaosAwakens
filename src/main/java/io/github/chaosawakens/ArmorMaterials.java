@@ -1,84 +1,113 @@
 package io.github.chaosawakens;
 
-import net.minecraft.init.SoundEvents;
+import io.github.chaosawakens.registry.ModItems;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-/**
- * Enum dedicated to storing armor material data
- * @author invalid2
- *
- */
-public enum ArmorMaterials
-{
-	EMERALD("emerald", "emerald", 25, new int[] {5, 10, 10, 5}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND , 20.0F),
-	AMETHYST("amethyst", "amethyst", 25, new int[] {10, 20, 20, 10}, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND , 20.0F),
-	RUBY("ruby", "ruby", 50, new int[] {15, 25, 25, 15}, 60, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND , 40.0F),
-	TIGERS_EYE("ruby", "ruby", 35, new int[] {10, 15, 15, 10}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND , 25.0F);
-	
-	private String name;
-	private String textureName;
-	private int durability;
-	private int[] reductionAmounts;
-	private int enchantability;
-	private SoundEvent soundOnEquip;
-	private float thoughness;
-	
-	/**
-	 * 
-	 * @param name Name
-	 * @param textureName Texture name
-	 * @param durability Durability
-	 * @param reductionAmounts Defense value
-	 * @param enchantability Enchantability
-	 * @param soundOnEquip Sound made when armor is equipped
-	 * @param thoughness Thoughness
-	 * 
-	 * @apiNote Arg javadoc names are a stub
-	 */
-	ArmorMaterials(String name, String textureName, int durability, int[] reductionAmounts, int enchantability, SoundEvent soundOnEquip, float thoughness)
-	{
-		this.name = name;
-		this.textureName = String.format("%s:%s", Reference.MODID, textureName);
-		this.durability = durability;
-		this.reductionAmounts = reductionAmounts;
-		this.enchantability = enchantability;
-		this.soundOnEquip = soundOnEquip;
-		this.thoughness = thoughness;
-	}
+import java.util.function.Supplier;
 
-	public String getName()
-	{
-		return name;
-	}
+public enum ArmorMaterials implements IArmorMaterial {
 
-	public String getTextureName()
-	{
-		return textureName;
-	}
+    //Name, Durability multiplier, Damage Reduction multiplier, 
+    //Damage Reduction, Enchantability, Toughness, Knockback Resistance, Repair Material
+    EMERALD(ChaosAwakens.MODID + ":emerald", 25, new int[] {5, 10, 10, 5}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 20.0f, 1.0f, () -> {
+        return Ingredient.fromItems(Items.EMERALD);
+    }),
 
-	public int getDurability()
-	{
-		return durability;
-	}
+    AMETHYST(ChaosAwakens.MODID + ":amethyst", 25, new int[] {10, 20, 20, 10}, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 20.0f, 1.0f, () -> {
+        return Ingredient.fromItems(ModItems.AMETHYST.get());
+    }),
 
-	public int[] getReductionAmounts()
-	{
-		return reductionAmounts;
-	}
+    RUBY(ChaosAwakens.MODID + ":ruby", 50, new int[] {15, 25, 25, 15}, 60, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 40.0F, 1.0f, () -> {
+        return Ingredient.fromItems(ModItems.AMETHYST.get());
+    }),
 
-	public int getEnchantability()
-	{
-		return enchantability;
-	}
+    TIGERS_EYE(ChaosAwakens.MODID + ":tigers_eye", 35, new int[] {10, 15, 15, 10}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 25.0f, 1.0f, () -> {
+        return Ingredient.fromItems(ModItems.AMETHYST.get());
+    });
 
-	public SoundEvent getSoundOnEquip()
-	{
-		return soundOnEquip;
-	}
+    private final int[] MAX_DAMAGE_ARRAY = new int[] {13, 15, 16, 11};
+    private final String name;
+    private final int durability;
+    private final int[] damageReductionAmountArray;
+    private final int enchantability;
+    private SoundEvent soundOnEquip;
+    private final float toughness;
+    private final float knockbackResistance;
+    private final Supplier<Ingredient> repairMaterial;
 
-	public float getThoughness()
-	{
-		return thoughness;
-	}
-	
+    private ArmorMaterials(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn,
+                             float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
+
+        this.name = nameIn;
+        this.durability = durabilityIn;
+        this.damageReductionAmountArray = damageReductionAmountArrayIn;
+        this.enchantability = enchantabilityIn;
+        this.soundOnEquip = soundOnEquip;
+        this.toughness = toughnessIn;
+        this.knockbackResistance = knockbackResistanceIn;
+        this.repairMaterial = repairMaterialIn;
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public String getName() {
+
+        return this.name;
+
+    }
+
+    @Override
+    public int getDurability(EquipmentSlotType slotIn) {
+
+        return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * this.durability;
+
+    }
+
+    @Override
+    public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+
+        return this.damageReductionAmountArray[slotIn.getIndex()];
+
+    }
+
+    @Override
+    public int getEnchantability() {
+
+        return this.enchantability;
+
+    }
+
+    @Override
+    public SoundEvent getSoundEvent() {
+        return this.soundOnEquip;
+    }
+
+    @Override
+    public float getToughness() {
+
+        return this.toughness;
+
+    }
+
+    @Override
+    public float getKnockbackResistance() {
+
+        return this.knockbackResistance;
+
+    }
+
+    @Override
+    public Ingredient getRepairMaterial() {
+
+        return this.repairMaterial.get();
+
+    }
+
 }
