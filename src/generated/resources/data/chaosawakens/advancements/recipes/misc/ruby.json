@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "chaosawakens:amethyst_leggings"
+      "chaosawakens:ruby"
     ]
   },
   "criteria": {
-    "amethyst": {
+    "ruby": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:amethyst"
+            "item": "chaosawakens:ruby_block"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "chaosawakens:amethyst_leggings"
+        "recipe": "chaosawakens:ruby"
       }
     }
   },
   "requirements": [
     [
-      "amethyst",
+      "ruby",
       "has_the_recipe"
     ]
   ]

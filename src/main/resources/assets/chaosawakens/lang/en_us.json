@@ -1,10 +1,10 @@
 {
   "block.chaosawakens.aluminium_ore": "Aluminium Ore",
-  "block.chaosawakens.aluminium_block": "Aluminium Block",
+  "block.chaosawakens.aluminium_block": "Block of Aluminium",
   "item.chaosawakens.aluminium": "Aluminium",
 
   "block.chaosawakens.amethyst_ore": "Amethyst Ore",
-  "block.chaosawakens.amethyst_block": "Amethyst Block",
+  "block.chaosawakens.amethyst_block": "Block of Amethyst",
   "item.chaosawakens.amethyst": "Amethyst",
   "item.chaosawakens.amethyst_sword": "Amethyst Sword",
   "item.chaosawakens.amethyst_pickaxe": "Amethyst Pickaxe",
@@ -27,7 +27,7 @@
   "item.chaosawakens.emerald_boots": "Emerald Boots",
 
   "block.chaosawakens.ruby_ore": "Ruby Ore",
-  "block.chaosawakens.ruby_block": "Ruby Block",
+  "block.chaosawakens.ruby_block": "Block of Ruby",
   "item.chaosawakens.ruby": "Ruby",
   "item.chaosawakens.ruby_sword": "Ruby Sword",
   "item.chaosawakens.ruby_pickaxe": "Ruby Pickaxe",
@@ -40,7 +40,7 @@
   "item.chaosawakens.ruby_boots": "Ruby Boots",
 
   "block.chaosawakens.tigers_eye_ore": "Tigers Eye Ore",
-  "block.chaosawakens.tigers_eye_block": "Tigers Eye Block",
+  "block.chaosawakens.tigers_eye_block": "Block of Tigers Eye",
   "item.chaosawakens.tigers_eye": "Tigers Eye",
   "item.chaosawakens.tigers_eye_ore": "Tigers Eye Ore",
   "item.chaosawakens.tigers_eye_sword": "Tigers Eye Sword",
@@ -54,11 +54,11 @@
   "item.chaosawakens.tigers_eye_boots": "Tigers Eye Boots",
 
   "block.chaosawakens.titanium_ore": "Titanium Ore",
-  "block.chaosawakens.titanium_block": "Titanium Block",
+  "block.chaosawakens.titanium_block": "Block of Titanium",
   "item.chaosawakens.titanium": "Titanium",
   "item.chaosawakens.titanium_nugget": "Titanium Nugget",
   "block.chaosawakens.uranium_ore": "Uranium Ore",
-  "block.chaosawakens.uranium_block": "Uranium Block",
+  "block.chaosawakens.uranium_block": "Block of Uranium",
   "item.chaosawakens.uranium": "Uranium",
   "item.chaosawakens.uranium_nugget": "Uranium Nugget"
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "chaosawakens:amethyst_leggings"
+      "chaosawakens:amethyst"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:amethyst"
+            "item": "chaosawakens:amethyst_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "chaosawakens:amethyst_leggings"
+        "recipe": "chaosawakens:amethyst"
       }
     }
   },

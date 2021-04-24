@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "ruby": {
+    "amethyst": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "ruby",
+      "amethyst",
       "has_the_recipe"
     ]
   ]

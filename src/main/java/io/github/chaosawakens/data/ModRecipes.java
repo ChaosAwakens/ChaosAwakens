@@ -1,11 +1,9 @@
 package io.github.chaosawakens.data;
 
+import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
@@ -52,7 +50,6 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .key('s', Items.STICK)
                 .addCriterion("emerald", InventoryChangeTrigger.Instance.forItems(Items.EMERALD))
                 .build(consumer);
-
         ShapedRecipeBuilder.shapedRecipe(ModItems.EMERALD_HOE.get())
                 .patternLine("EE")
                 .patternLine("s ")
@@ -121,7 +118,6 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .key('s', Items.STICK)
                 .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.RUBY.get()))
                 .build(consumer);
-
         ShapedRecipeBuilder.shapedRecipe(ModItems.RUBY_HOE.get())
                 .patternLine("RR")
                 .patternLine("s ")
@@ -156,6 +152,17 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .key('R', ModItems.RUBY.get())
                 .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.RUBY.get()))
                 .build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.RUBY_BLOCK.get())
+                .patternLine("RRR")
+                .patternLine("RRR")
+                .patternLine("RRR")
+                .key('R', ModItems.RUBY.get())
+                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.RUBY.get()))
+                .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.RUBY.get(), 9)
+                .addIngredient(ModBlocks.RUBY_BLOCK.get())
+                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModBlocks.RUBY_BLOCK.get()))
+                .build(consumer);
 
         // AMETHYST
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_PICKAXE.get())
@@ -164,7 +171,7 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .patternLine(" s ")
                 .key('A', ModItems.AMETHYST.get())
                 .key('s', Items.STICK)
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_SWORD.get())
                 .patternLine("A")
@@ -172,7 +179,7 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .patternLine("s")
                 .key('A', ModItems.AMETHYST.get())
                 .key('s', Items.STICK)
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_AXE.get())
                 .patternLine("AA")
@@ -180,7 +187,7 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .patternLine("s ")
                 .key('A', ModItems.AMETHYST.get())
                 .key('s', Items.STICK)
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_SHOVEL.get())
                 .patternLine("A")
@@ -188,42 +195,52 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .patternLine("s")
                 .key('A', ModItems.AMETHYST.get())
                 .key('s', Items.STICK)
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
-
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_HOE.get())
                 .patternLine("AA")
                 .patternLine("s ")
                 .patternLine("s ")
                 .key('A', ModItems.AMETHYST.get())
                 .key('s', Items.STICK)
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_HELMET.get())
                 .patternLine("AAA")
                 .patternLine("A A")
                 .key('A', ModItems.AMETHYST.get())
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_CHESTPLATE.get())
                 .patternLine("A A")
                 .patternLine("AAA")
                 .patternLine("AAA")
                 .key('A', ModItems.AMETHYST.get())
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_LEGGINGS.get())
                 .patternLine("AAA")
                 .patternLine("A A")
                 .patternLine("A A")
                 .key('A', ModItems.AMETHYST.get())
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
                 .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModItems.AMETHYST_BOOTS.get())
                 .patternLine("A A")
                 .patternLine("A A")
                 .key('A', ModItems.AMETHYST.get())
-                .addCriterion("ruby", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.AMETHYST_BLOCK.get())
+                .patternLine("AAA")
+                .patternLine("AAA")
+                .patternLine("AAA")
+                .key('A', ModItems.AMETHYST.get())
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModItems.AMETHYST.get()))
+                .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.AMETHYST.get(), 9)
+                .addIngredient(ModBlocks.AMETHYST_BLOCK.get())
+                .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModBlocks.AMETHYST_BLOCK.get()))
                 .build(consumer);
     }
 }
