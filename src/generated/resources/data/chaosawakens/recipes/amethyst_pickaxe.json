@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    " s ",
+    " s "
+  ],
+  "key": {
+    "A": {
+      "item": "chaosawakens:amethyst"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:amethyst_pickaxe"
+  }
+}

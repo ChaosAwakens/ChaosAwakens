@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E",
+    "s",
+    "s"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:emerald_shovel"
+  }
+}

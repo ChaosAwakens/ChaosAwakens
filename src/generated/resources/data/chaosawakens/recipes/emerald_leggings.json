@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "E E",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:emerald_leggings"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:amethyst_sword"
+    ]
+  },
+  "criteria": {
+    "ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:amethyst"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:amethyst_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ruby",
+      "has_the_recipe"
+    ]
+  ]
+}

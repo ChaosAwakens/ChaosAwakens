@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ruby_chestplate"
+    ]
+  },
+  "criteria": {
+    "ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ruby"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ruby_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ruby",
+      "has_the_recipe"
+    ]
+  ]
+}
