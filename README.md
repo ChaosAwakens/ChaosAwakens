@@ -9,6 +9,7 @@ Meme Man,
 WeirdNerd,
 Asbestosstar (amerigovespuccip in MC),
 Yanbere,
+Memer Teamer (very minimal),
 
 Artists:
 VDA Spoop,
@@ -19,13 +20,16 @@ LuisRandomness,
 YanbereGev,
 Asbestosstar (some),
 AbsoluteKhan,
-Spawn of Ore (Memer Teamer),
+Memer Teamer,
 DeuceWins,
 jjwiggs,
 killerking,
 Peeko,
 Spooder,
 Chromatic,
+
+Builders:
+Memer Teamer
 
 If i got anything wrong please update it.
 
