@@ -1,5 +1,6 @@
-package io.github.chaosawakens;
+package io.github.chaosawakens.enums;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
@@ -14,8 +15,7 @@ import java.util.function.Supplier;
 
 public enum ArmorMaterials implements IArmorMaterial {
 
-    //Name, Durability multiplier, Damage Reduction multiplier, 
-    //Damage Reduction, Enchantability, Toughness, Knockback Resistance, Repair Material
+    //Name, Durability multiplier, Damage Reduction multiplier, Damage Reduction, Enchantability, Sound Events, Toughness, Knockback Resistance, Repair Material
     EMERALD(ChaosAwakens.MODID + ":emerald", 25, new int[] {5, 10, 10, 5}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 20.0f, 1.0f, () -> {
         return Ingredient.fromItems(Items.EMERALD);
     }),

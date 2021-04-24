@@ -1,5 +1,6 @@
-package io.github.chaosawakens;
+package io.github.chaosawakens.enums;
 
+import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -7,7 +8,11 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum ToolMaterials implements IItemTier {
-    TOOL_EMERALD(2, 2000, 10.0F, 9.0F, 10, () -> Ingredient.fromItems(Items.EMERALD.getItem()));
+    TOOL_EMERALD(2, 2000, 10.0F, 9.0F, 10, () -> Ingredient.fromItems(Items.EMERALD.getItem())),
+    TOOL_AMETHYST(8, 5000, 20.0F, 18.0F, 20, () -> Ingredient.fromItems(ModItems.AMETHYST.get())),
+    TOOL_RUBY(12, 8000, 20.0F, 30.0F, 30, () -> Ingredient.fromItems(ModItems.RUBY.get())),
+    TOOL_TIGERS_EYE(15, 3500, 15.0F, 10.0F, 15, () -> Ingredient.fromItems(ModItems.TIGERS_EYE.get())),
+    TOOL_OPTIMISED(15, 13000, 75.0F, 8.0F, 45, () -> null);
 
     private final int harvestLevel;
     private final int maxUses;
@@ -45,6 +50,7 @@ public enum ToolMaterials implements IItemTier {
         return this.maxUses;
     }
 
+    @Override
     public Ingredient getRepairMaterial() {
         return this.repairMaterial.get();
     }

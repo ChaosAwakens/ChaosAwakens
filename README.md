@@ -1,5 +1,6 @@
 # ChaosAwakens
 ChaosAwakens is a sucessor mod for OreSpawn for Minecraft created after Danger Exit Scammed.
+This is the Repository for the 1.16 version
 
 Lead Dev
 TheyCallMeRandom,
@@ -9,6 +10,7 @@ Meme Man,
 WeirdNerd,
 Asbestosstar (amerigovespuccip in MC),
 Yanbere,
+Blackout,
 
 Artists:
 VDA Spoop,

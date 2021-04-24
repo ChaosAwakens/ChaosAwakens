@@ -2,10 +2,12 @@ package io.github.chaosawakens;
 
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
+import io.github.chaosawakens.worldgen.OreGeneration;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,11 +33,17 @@ public class ChaosAwakens {
     public ChaosAwakens() {
         INSTANCE = this;
 
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.ITEMS.register(eventBus);
         ModBlocks.ITEMS.register(eventBus);
         ModBlocks.BLOCKS.register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void setup(FMLCommonSetupEvent event) {
+        OreGeneration.registerOres();
     }
 
     public static ResourceLocation location(String name) {
