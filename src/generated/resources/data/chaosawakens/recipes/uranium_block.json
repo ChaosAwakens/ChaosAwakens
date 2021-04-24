@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "UUU",
+    "UUU",
+    "UUU"
+  ],
+  "key": {
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:uranium_block"
+  }
+}

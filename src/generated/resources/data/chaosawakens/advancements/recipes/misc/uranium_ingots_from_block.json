@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:uranium_ingots_from_block"
+    ]
+  },
+  "criteria": {
+    "uranium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:uranium_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:uranium_ingots_from_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "uranium",
+      "has_the_recipe"
+    ]
+  ]
+}

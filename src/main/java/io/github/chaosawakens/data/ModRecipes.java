@@ -1,10 +1,12 @@
 package io.github.chaosawakens.data;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
@@ -242,5 +244,53 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
                 .addIngredient(ModBlocks.AMETHYST_BLOCK.get())
                 .addCriterion("amethyst", InventoryChangeTrigger.Instance.forItems(ModBlocks.AMETHYST_BLOCK.get()))
                 .build(consumer);
+
+        // TITANIUM
+        ShapedRecipeBuilder.shapedRecipe(ModItems.TITANIUM_INGOT.get())
+                .patternLine("ttt")
+                .patternLine("ttt")
+                .patternLine("ttt")
+                .key('t', ModItems.TITANIUM_NUGGET.get())
+                .addCriterion("titanium", InventoryChangeTrigger.Instance.forItems(ModItems.TITANIUM_NUGGET.get()))
+                .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.TITANIUM_NUGGET.get(), 9)
+                .addIngredient(ModItems.TITANIUM_INGOT.get())
+                .addCriterion("titanium", InventoryChangeTrigger.Instance.forItems(ModItems.TITANIUM_INGOT.get()))
+                .build(consumer, new ResourceLocation(ChaosAwakens.MODID, "titanium_nuggets_from_ingot"));
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.TITANIUM_BLOCK.get())
+                .patternLine("TTT")
+                .patternLine("TTT")
+                .patternLine("TTT")
+                .key('T', ModItems.TITANIUM_INGOT.get())
+                .addCriterion("titanium", InventoryChangeTrigger.Instance.forItems(ModItems.TITANIUM_INGOT.get()))
+                .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.TITANIUM_INGOT.get(), 9)
+                .addIngredient(ModBlocks.TITANIUM_BLOCK.get())
+                .addCriterion("titanium", InventoryChangeTrigger.Instance.forItems(ModBlocks.TITANIUM_BLOCK.get()))
+                .build(consumer, new ResourceLocation(ChaosAwakens.MODID, "titanium_ingots_from_block"));
+
+        // URANIUM
+        ShapedRecipeBuilder.shapedRecipe(ModItems.URANIUM_INGOT.get())
+                .patternLine("uuu")
+                .patternLine("uuu")
+                .patternLine("uuu")
+                .key('u', ModItems.URANIUM_NUGGET.get())
+                .addCriterion("uranium", InventoryChangeTrigger.Instance.forItems(ModItems.URANIUM_NUGGET.get()))
+                .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.URANIUM_NUGGET.get(), 9)
+                .addIngredient(ModItems.URANIUM_INGOT.get())
+                .addCriterion("uranium", InventoryChangeTrigger.Instance.forItems(ModItems.URANIUM_INGOT.get()))
+                .build(consumer, new ResourceLocation(ChaosAwakens.MODID, "uranium_nuggets_from_ingot"));
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.URANIUM_BLOCK.get())
+                .patternLine("UUU")
+                .patternLine("UUU")
+                .patternLine("UUU")
+                .key('U', ModItems.URANIUM_INGOT.get())
+                .addCriterion("uranium", InventoryChangeTrigger.Instance.forItems(ModItems.URANIUM_INGOT.get()))
+                .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.URANIUM_INGOT.get(), 9)
+                .addIngredient(ModBlocks.URANIUM_BLOCK.get())
+                .addCriterion("uranium", InventoryChangeTrigger.Instance.forItems(ModBlocks.URANIUM_BLOCK.get()))
+                .build(consumer, new ResourceLocation(ChaosAwakens.MODID, "uranium_ingots_from_block"));
     }
 }
