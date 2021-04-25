@@ -1,7 +1,9 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
 import io.github.chaosawakens.data.ModRecipes;
+import io.github.chaosawakens.registry.ModAttributes;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
 import io.github.chaosawakens.worldgen.OreGeneration;
@@ -9,6 +11,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.loot.LootTables;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -22,6 +25,7 @@ import org.apache.logging.log4j.Logger;
 public class ChaosAwakens {
 
     public static final String MODID = "chaosawakens";
+    public static final String MODNAME = "Chaos Awakens";
 
     public static ChaosAwakens INSTANCE;
 
@@ -45,7 +49,10 @@ public class ChaosAwakens {
         ModItems.ITEMS.register(eventBus);
         ModBlocks.ITEMS.register(eventBus);
         ModBlocks.BLOCKS.register(eventBus);
+        ModAttributes.ATTRIBUTES.register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
+
+        MinecraftForge.EVENT_BUS.register(GameEvents.class);
     }
 
     private void setup(FMLCommonSetupEvent event) {
@@ -59,10 +66,12 @@ public class ChaosAwakens {
     private void gatherData(final GatherDataEvent event) {
 
         DataGenerator dataGenerator = event.getGenerator();
+        final ExistingFileHelper existing = event.getExistingFileHelper();
 
         if(event.includeServer()) {
             dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
             dataGenerator.addProvider(new ModRecipes(dataGenerator));
+            dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
         }
     }
 }

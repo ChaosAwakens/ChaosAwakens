@@ -25,10 +25,14 @@ public enum ArmorMaterials implements IArmorMaterial {
     }),
 
     RUBY(ChaosAwakens.MODID + ":ruby", 50, new int[] {15, 25, 25, 15}, 60, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 40.0F, 1.0f, () -> {
-        return Ingredient.fromItems(ModItems.AMETHYST.get());
+        return Ingredient.fromItems(ModItems.RUBY.get());
     }),
 
     TIGERS_EYE(ChaosAwakens.MODID + ":tigers_eye", 35, new int[] {10, 15, 15, 10}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 25.0f, 1.0f, () -> {
+        return Ingredient.fromItems(ModItems.TIGERS_EYE.get());
+    }),
+
+    ULTIMATE(ChaosAwakens.MODID + ":ultimate", 35, new int[] {10, 15, 15, 10}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 25.0f, 1.0f, () -> {
         return Ingredient.fromItems(ModItems.AMETHYST.get());
     });
 
