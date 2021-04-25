@@ -2,7 +2,6 @@ package io.github.chaosawakens.equipment;
 
 import io.github.chaosawakens.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 
 /**

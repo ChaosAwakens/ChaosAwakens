@@ -35,6 +35,8 @@ public class ModItems
 	public static final Item URANIUM = new GenericItem("uranium");
 	public static final Item URANIUMNUGGET = new GenericItem("uranium_nugget");
 	public static final Item ALUMINUM = new GenericItem("aluminum");
+	public static final Item DRUID_KEY = new GenericItem("druid_key");
+	
 	//public static final Item Oil = new Oil("Oil");
 	//public static final Item Salt = new Salt("Salt"); //Ant Functionality Delayed
 	
@@ -103,6 +105,30 @@ public class ModItems
 	public static final ItemArmor RUBY_CHESTPLATE = new GenericArmor("ruby_chestplate", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
 	public static final ItemArmor RUBY_LEGGINGS = new GenericArmor("ruby_leggings", ArmorMaterials.RUBY.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
 	public static final ItemArmor RUBY_BOOTS = new GenericArmor("ruby_boots", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
-		
+	
+	//Experience set
+	public static final ItemArmor EXPERIENCE_HELMET = new GenericArmor("experience_helmet", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor EXPERIENCE_CHESTPLATE = new GenericArmor("experience_chestplate", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor EXPERIENCE_LEGGINGS = new GenericArmor("experience_leggings", ArmorMaterials.RUBY.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor EXPERIENCE_BOOTS = new GenericArmor("experience_boots", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
+	
+	//Ultimate set
+	public static final ItemArmor ULTIMATE_HELMET = new GenericArmor("ultimate_helmet", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor ULTIMATE_CHESTPLATE = new GenericArmor("ultimate_chestplate", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor ULTIMATE_LEGGINGS = new GenericArmor("ultimate_leggings", ArmorMaterials.RUBY.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor ULTIMATE_BOOTS = new GenericArmor("ultimate_boots", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
+	
+	//Royal Guardian set
+	public static final ItemArmor ROYAL_GUARDIAN_HELMET = new GenericArmor("royal_guardian_helmet", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor ROYAL_GUARDIAN_CHESTPLATE = new GenericArmor("royal_guardian_chestplate", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor ROYAL_GUARDIAN_LEGGINGS = new GenericArmor("royal_guardian_leggings", ArmorMaterials.RUBY.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor ROYAL_GUARDIAN_BOOTS = new GenericArmor("royal_guardian_boots", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
+	
+	//Queen set
+	public static final ItemArmor QUEEN_SCALE_HELMET = new GenericArmor("queen_scale_helmet", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor QUEEN_SCALE_CHESTPLATE = new GenericArmor("queen_scale_leggings", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor QUEEN_SCALE_LEGGINGS = new GenericArmor("queen_scale_leggings", ArmorMaterials.RUBY.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor QUEEN_SCALE_BOOTS = new GenericArmor("queen_scale_boots", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
+	
 	public ModItems() {}
 }
