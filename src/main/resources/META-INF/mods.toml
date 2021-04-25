@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[35,)"
+issueTrackerURL="https://github.com/Blackout03/extended-slabs/issues"
+displayURL=""
+license="MIT License"
+
+[[mods]]
+modId="chaosawakens"
+version="${file.jarVersion}"
+displayName="Chaos Awakens"
+description='''A sucessor Mod to OreSpawn'''
+
+[[dependencies.chaosawakens]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.chaosawakens]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17]"
+    ordering="NONE"
+    side="BOTH"

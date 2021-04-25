@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "uranium_ingot",
+  "ingredients": [
+    {
+      "item": "chaosawakens:uranium_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:uranium_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/ruby_ore"
+    },
+	{
+      "model": "chaosawakens:block/ruby_ore_1"
+    },
+	{
+      "model": "chaosawakens:block/ruby_ore_2"
+    },
+	{
+      "model": "chaosawakens:block/ruby_ore_3"
+    }
+  }
+}
