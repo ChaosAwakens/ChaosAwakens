@@ -3,65 +3,40 @@ package io.github.chaosawakens;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.chaosawakens.equipments.GenericArmor;
-import io.github.chaosawakens.equipments.GenericAxe;
-import io.github.chaosawakens.equipments.GenericHoe;
-import io.github.chaosawakens.equipments.GenericPickaxe;
-import io.github.chaosawakens.equipments.GenericShovel;
-import io.github.chaosawakens.equipments.GenericSword;
+import io.github.chaosawakens.equipment.GenericArmor;
+import io.github.chaosawakens.equipment.GenericAxe;
+import io.github.chaosawakens.equipment.GenericHoe;
+import io.github.chaosawakens.equipment.GenericPickaxe;
+import io.github.chaosawakens.equipment.GenericShovel;
+import io.github.chaosawakens.equipment.GenericSword;
 import io.github.chaosawakens.items.GenericItem;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraftforge.common.util.EnumHelper;
 
 /**
  * Class for item creation, such that the main class is not unreadable
  * @author invalid2
  */
-public class Items {
+public class ModItems
+{
 	
 	/**
 	 * List holding ALL mod items
 	 */
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	
-	//Data enums
-	
-	//Armor materials
-	public static final ArmorMaterial EMERALD_ARMOR_MATERIAL = EnumHelper.addArmorMaterial(ArmorMaterials.EMERALD.getName(),
-			ArmorMaterials.EMERALD.getTextureName(), ArmorMaterials.EMERALD.getDurability(), ArmorMaterials.EMERALD.getReductionAmounts(),
-			ArmorMaterials.EMERALD.getEnchantability(), ArmorMaterials.EMERALD.getSoundOnEquip(), ArmorMaterials.EMERALD.getThoughness());
-	public static final ArmorMaterial AMETHYST_ARMOR_MATERIAL = EnumHelper.addArmorMaterial(ArmorMaterials.EMERALD.getName(),
-			ArmorMaterials.EMERALD.getTextureName(), ArmorMaterials.AMETHYST.getDurability(), ArmorMaterials.AMETHYST.getReductionAmounts(),
-			ArmorMaterials.EMERALD.getEnchantability(), ArmorMaterials.AMETHYST.getSoundOnEquip(), ArmorMaterials.AMETHYST.getThoughness());
-	public static final ArmorMaterial RUBY_ARMOR_MATERIAL = EnumHelper.addArmorMaterial(ArmorMaterials.RUBY.getName(),
-			ArmorMaterials.RUBY.getTextureName(), ArmorMaterials.RUBY.getDurability(), ArmorMaterials.RUBY.getReductionAmounts(),
-			ArmorMaterials.RUBY.getEnchantability(), ArmorMaterials.RUBY.getSoundOnEquip(), ArmorMaterials.RUBY.getThoughness());
-	public static final ArmorMaterial TIGERS_EYE_ARMOR_MATERIAL = EnumHelper.addArmorMaterial(ArmorMaterials.TIGERS_EYE.getName(),
-			ArmorMaterials.TIGERS_EYE.getTextureName(), ArmorMaterials.TIGERS_EYE.getDurability(), ArmorMaterials.TIGERS_EYE.getReductionAmounts(),
-			ArmorMaterials.TIGERS_EYE.getEnchantability(), ArmorMaterials.TIGERS_EYE.getSoundOnEquip(), ArmorMaterials.TIGERS_EYE.getThoughness());
-	
-	
 	//Misc items
-	public static final Item AMETHYST = new GenericItem("amethyst", CreativeTabs.MISC); //Needs a texture
-		public static final Item Ruby = new GenericItem("Ruby");
-	public static final Item TigerEye = new GenericItem("TigerEye");
-		public static final Item Titanium = new GenericItem("Titanium");
-	public static final Item TitaniumNugget = new GenericItem("TitaniumNugget");
-	public static final Item Uranium = new GenericItem("Uranium");
-	public static final Item UraniumNugget = new GenericItem("UraniumNugget");
-	public static final Item Aluminium = new GenericItem("Aluminium");
+	public static final Item AMETHYST = new GenericItem("amethyst"); 
+	public static final Item RUBY = new GenericItem("ruby");
+	public static final Item TIGEREYE = new GenericItem("tigers_eye");
+	public static final Item TITANIUM = new GenericItem("titanium");
+	public static final Item TITANIUMNUGGET = new GenericItem("titanium_nugget");
+	public static final Item URANIUM = new GenericItem("uranium");
+	public static final Item URANIUMNUGGET = new GenericItem("uranium_nugget");
+	public static final Item ALUMINUM = new GenericItem("aluminum");
 	//public static final Item Oil = new Oil("Oil");
 	//public static final Item Salt = new Salt("Salt"); //Ant Functionality Delayed
-	
-	
-	
 	
 	/**
 	 * Equipment
@@ -71,86 +46,63 @@ public class Items {
 	 * Tools
 	 */
 	
-	public static final ToolMaterial EMERALD_TOOL_MATERIAL = EnumHelper.addToolMaterial(ToolMaterials.EMERALD.getName(),
-			ToolMaterials.EMERALD.getHarvestLevel(), ToolMaterials.EMERALD.getMaxUses(), ToolMaterials.EMERALD.getEfficiency(),
-			ToolMaterials.EMERALD.getDamage(), ToolMaterials.EMERALD.getEnchantability());
-	public static final ToolMaterial AMETHYST_TOOL_MATERIAL = EnumHelper.addToolMaterial(ToolMaterials.AMETHYST.getName(),
-			ToolMaterials.AMETHYST.getHarvestLevel(), ToolMaterials.AMETHYST.getMaxUses(), ToolMaterials.AMETHYST.getEfficiency(),
-			ToolMaterials.AMETHYST.getDamage(), ToolMaterials.AMETHYST.getEnchantability());
-	public static final ToolMaterial TIGERS_EYE_TOOL_MATERIAL = EnumHelper.addToolMaterial(ToolMaterials.TIGERS_EYE.getName(),
-			ToolMaterials.TIGERS_EYE.getHarvestLevel(), ToolMaterials.TIGERS_EYE.getMaxUses(), ToolMaterials.TIGERS_EYE.getEfficiency(),
-			ToolMaterials.TIGERS_EYE.getDamage(), ToolMaterials.TIGERS_EYE.getEnchantability());
-	public static final ToolMaterial RUBY_TOOL_MATERIAL = EnumHelper.addToolMaterial(ToolMaterials.RUBY.getName(),
-			ToolMaterials.RUBY.getHarvestLevel(), ToolMaterials.RUBY.getMaxUses(), ToolMaterials.RUBY.getEfficiency(),
-			ToolMaterials.RUBY.getDamage(), ToolMaterials.RUBY.getEnchantability());
-	public static final ToolMaterial OPTIMISED_TOOL_MATERIAL = EnumHelper.addToolMaterial(ToolMaterials.RUBY.getName(),
-			ToolMaterials.OPTIMISED.getHarvestLevel(), ToolMaterials.OPTIMISED.getMaxUses(), ToolMaterials.OPTIMISED.getEfficiency(),
-			ToolMaterials.OPTIMISED.getDamage(), ToolMaterials.OPTIMISED.getEnchantability());
-	
-	
-	public static final Item emerald_pickaxe = new GenericPickaxe("emerald_pickaxe", EMERALD_TOOL_MATERIAL);
-	public static final Item emerald_hoe = new GenericHoe("emerald_hoe", EMERALD_TOOL_MATERIAL);
-	public static final Item emerald_sword = new GenericSword("emerald_sword", EMERALD_TOOL_MATERIAL);
-	public static final Item emerald_shovel = new GenericShovel("emerald_shovel", EMERALD_TOOL_MATERIAL);
-	//public static final Item emerald_axe = new GenericAxe("emerald_axe", EMERALD_TOOL_MATERIAL);
+	public static final Item EMERALD_PICKAXE = new GenericPickaxe("emerald_pickaxe", ToolMaterials.EMERALD.getToolMaterial());
+	public static final Item EMERALD_HOE = new GenericHoe("emerald_hoe", ToolMaterials.EMERALD.getToolMaterial());
+	public static final Item EMERALD_SWORD = new GenericSword("emerald_sword", ToolMaterials.EMERALD.getToolMaterial());
+	public static final Item EMERALD_SHOVEL = new GenericShovel("emerald_shovel", ToolMaterials.EMERALD.getToolMaterial());
+	public static final Item EMERALD_AXE = new GenericAxe("emerald_axe", ToolMaterials.EMERALD.getToolMaterial());
 
-	public static final Item amethyst_pickaxe = new GenericPickaxe("amethyst_pickaxe", AMETHYST_TOOL_MATERIAL);
-	public static final Item amethyst_hoe = new GenericHoe("amethyst_hoe", AMETHYST_TOOL_MATERIAL);
-	public static final Item amethyst_sword = new GenericSword("amethyst_sword", AMETHYST_TOOL_MATERIAL);
-	public static final Item amethyst_shovel = new GenericShovel("amethyst_shovel", AMETHYST_TOOL_MATERIAL);
-	//public static final Item amethyst_axe = new GenericAxe("amythyst_axe", AMETHYST_TOOL_MATERIAL);
+	public static final Item AMETHYST_PICKAXE = new GenericPickaxe("amethyst_pickaxe", ToolMaterials.AMETHYST.getToolMaterial());
+	public static final Item AMETHYST_HOE = new GenericHoe("amethyst_hoe", ToolMaterials.AMETHYST.getToolMaterial());
+	public static final Item AMETHYST_SWORD = new GenericSword("amethyst_sword", ToolMaterials.AMETHYST.getToolMaterial());
+	public static final Item AMETHYST_SHOVEL = new GenericShovel("amethyst_shovel", ToolMaterials.AMETHYST.getToolMaterial());
+	public static final Item AMETHYST_AXE = new GenericAxe("amythyst_axe", ToolMaterials.AMETHYST.getToolMaterial());
 
 	
-	public static final Item tigereye_pickaxe = new GenericPickaxe("tigereye_pickaxe", TIGERS_EYE_TOOL_MATERIAL);
-	public static final Item tigereye_hoe = new GenericHoe("tigereye_hoe", TIGERS_EYE_TOOL_MATERIAL);
-	public static final Item tigereye_sword = new GenericSword("tigereye_sword", TIGERS_EYE_TOOL_MATERIAL);
-	public static final Item tigereye_shovel = new GenericShovel("tigereye_shovel", TIGERS_EYE_TOOL_MATERIAL);
-	//public static final Item tigereye_axe = new GenericAxe("tigereye_axe", TIGERS_EYE_TOOL_MATERIAL);
+	public static final Item TIGERS_EYE_PICKAXE = new GenericPickaxe("tigers_eye_pickaxe", ToolMaterials.TIGERS_EYE.getToolMaterial());
+	public static final Item TIGERS_EYE_HOE = new GenericHoe("tigers_eye_hoe", ToolMaterials.TIGERS_EYE.getToolMaterial());
+	public static final Item TIGERS_EYE_SWORD = new GenericSword("tigers_eye_sword", ToolMaterials.TIGERS_EYE.getToolMaterial());
+	public static final Item TIGERS_EYE_SHOVEL = new GenericShovel("tigers_eye_shovel", ToolMaterials.TIGERS_EYE.getToolMaterial());
+	public static final Item TIGERS_EYE_AXE = new GenericAxe("tigers_eye_axe", ToolMaterials.TIGERS_EYE.getToolMaterial());
 
 	
-	public static final Item ruby_pickaxe = new GenericPickaxe("ruby_pickaxe", RUBY_TOOL_MATERIAL);
-	public static final Item ruby_hoe = new GenericHoe("ruby_hoe", RUBY_TOOL_MATERIAL);
-	public static final Item ruby_sword = new GenericSword("ruby_sword", RUBY_TOOL_MATERIAL);
-	public static final Item ruby_shovel = new GenericShovel("ruby_shovel", RUBY_TOOL_MATERIAL);
-	//public static final Item ruby_axe = new GenericAxe("ruby_axe", RUBY_TOOL_MATERIAL);
+	public static final Item RUBY_PICKAXE = new GenericPickaxe("ruby_pickaxe", ToolMaterials.RUBY.getToolMaterial());
+	public static final Item RUBY_HOE = new GenericHoe("ruby_hoe", ToolMaterials.RUBY.getToolMaterial());
+	public static final Item RUBY_SWORD = new GenericSword("ruby_sword", ToolMaterials.RUBY.getToolMaterial());
+	public static final Item RUBY_SHOVEL = new GenericShovel("ruby_shovel", ToolMaterials.RUBY.getToolMaterial());
+	public static final Item RUBY_AXE = new GenericAxe("ruby_axe", ToolMaterials.RUBY.getToolMaterial());
 
 
-	public static final Item optimised_miners_pic = new GenericPickaxe("optimised_miners_pic", OPTIMISED_TOOL_MATERIAL);
-	public static final Item optimised_trench_diggers_shovel = new GenericShovel("optimised_trench_diggers_shovel", OPTIMISED_TOOL_MATERIAL);
-
-	
-	
+	public static final Item OPTIMISED_MINERS_PICKAXE = new GenericPickaxe("optimised_miners_pickaxe", ToolMaterials.OPTIMISED.getToolMaterial());
+	public static final Item OPTIMISED_TRENCH_DIGGERS_SHOVEL = new GenericShovel("optimised_trench_diggers_shovel", ToolMaterials.OPTIMISED.getToolMaterial());
 	
 	/*
 	 * Armors
 	 */
 	
 	//Emerald set
-	public static final ItemArmor EMERALD_HELMET = new GenericArmor("emerald_helmet", EMERALD_ARMOR_MATERIAL, 1, EntityEquipmentSlot.HEAD);
-	public static final ItemArmor EMERALD_CHESTPLATE = new GenericArmor("emerald_chestplate", EMERALD_ARMOR_MATERIAL, 1, EntityEquipmentSlot.CHEST);
-	public static final ItemArmor EMERALD_LEGGINGS = new GenericArmor("emerald_leggings", EMERALD_ARMOR_MATERIAL, 2, EntityEquipmentSlot.LEGS);
-	public static final ItemArmor EMERALD_BOOTS = new GenericArmor("emerald_boots", EMERALD_ARMOR_MATERIAL, 1, EntityEquipmentSlot.FEET);
+	public static final ItemArmor EMERALD_HELMET = new GenericArmor("emerald_helmet", ArmorMaterials.EMERALD.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor EMERALD_CHESTPLATE = new GenericArmor("emerald_chestplate", ArmorMaterials.EMERALD.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor EMERALD_LEGGINGS = new GenericArmor("emerald_leggings", ArmorMaterials.EMERALD.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor EMERALD_BOOTS = new GenericArmor("emerald_boots", ArmorMaterials.EMERALD.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
 	
 	//Amethyst set
-	public static final ItemArmor AMETHYST_HELMET = new GenericArmor("amethyst_helmet", AMETHYST_ARMOR_MATERIAL, 1, EntityEquipmentSlot.HEAD);
-	public static final ItemArmor AMETHYST_CHESTPLATE = new GenericArmor("amethyst_chestplate", AMETHYST_ARMOR_MATERIAL, 1, EntityEquipmentSlot.CHEST);
-	public static final ItemArmor AMETHYST_LEGGINGS = new GenericArmor("aethyst_leggings", AMETHYST_ARMOR_MATERIAL, 2, EntityEquipmentSlot.LEGS);
-	public static final ItemArmor AMETHYST_BOOTS = new GenericArmor("amethyst_boots", AMETHYST_ARMOR_MATERIAL, 1, EntityEquipmentSlot.FEET);
+	public static final ItemArmor AMETHYST_HELMET = new GenericArmor("amethyst_helmet", ArmorMaterials.AMETHYST.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor AMETHYST_CHESTPLATE = new GenericArmor("amethyst_chestplate", ArmorMaterials.AMETHYST.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor AMETHYST_LEGGINGS = new GenericArmor("aethyst_leggings", ArmorMaterials.AMETHYST.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor AMETHYST_BOOTS = new GenericArmor("amethyst_boots", ArmorMaterials.AMETHYST.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
 	
 	//Tiger's Eye set
-		public static final ItemArmor TIGEREYE_HELMET = new GenericArmor("tigereye_helmet", TIGERS_EYE_ARMOR_MATERIAL, 1, EntityEquipmentSlot.HEAD);
-		public static final ItemArmor TIGEREYE_CHESTPLATE = new GenericArmor("tigereye_chestplate", TIGERS_EYE_ARMOR_MATERIAL, 1, EntityEquipmentSlot.CHEST);
-		public static final ItemArmor TIGEREYE_LEGGINGS = new GenericArmor("tigereye_leggings", TIGERS_EYE_ARMOR_MATERIAL, 2, EntityEquipmentSlot.LEGS);
-		public static final ItemArmor TIGEREYE_BOOTS = new GenericArmor("tigereye_boots", TIGERS_EYE_ARMOR_MATERIAL, 1, EntityEquipmentSlot.FEET);
+	public static final ItemArmor TIGEREYE_HELMET = new GenericArmor("tigereye_helmet", ArmorMaterials.TIGERS_EYE.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor TIGEREYE_CHESTPLATE = new GenericArmor("tigereye_chestplate", ArmorMaterials.TIGERS_EYE.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor TIGEREYE_LEGGINGS = new GenericArmor("tigereye_leggings", ArmorMaterials.TIGERS_EYE.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor TIGEREYE_BOOTS = new GenericArmor("tigereye_boots", ArmorMaterials.TIGERS_EYE.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
+	
+	//Ruby set
+	public static final ItemArmor RUBY_HELMET = new GenericArmor("ruby_helmet", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.HEAD);
+	public static final ItemArmor RUBY_CHESTPLATE = new GenericArmor("ruby_chestplate", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.CHEST);
+	public static final ItemArmor RUBY_LEGGINGS = new GenericArmor("ruby_leggings", ArmorMaterials.RUBY.getArmorMaterial(), 2, EntityEquipmentSlot.LEGS);
+	public static final ItemArmor RUBY_BOOTS = new GenericArmor("ruby_boots", ArmorMaterials.RUBY.getArmorMaterial(), 1, EntityEquipmentSlot.FEET);
 		
-		//Ruby set
-		public static final ItemArmor RUBY_HELMET = new GenericArmor("ruby_helmet", RUBY_ARMOR_MATERIAL, 1, EntityEquipmentSlot.HEAD);
-		public static final ItemArmor RUBY_CHESTPLATE = new GenericArmor("ruby_chestplate", RUBY_ARMOR_MATERIAL, 1, EntityEquipmentSlot.CHEST);
-		public static final ItemArmor RUBY_LEGGINGS = new GenericArmor("ruby_leggings", RUBY_ARMOR_MATERIAL, 2, EntityEquipmentSlot.LEGS);
-		public static final ItemArmor RUBY_BOOTS = new GenericArmor("ruby_boots", RUBY_ARMOR_MATERIAL, 1, EntityEquipmentSlot.FEET);
-		
-	public Items() {
-		
-	}
-
+	public ModItems() {}
 }

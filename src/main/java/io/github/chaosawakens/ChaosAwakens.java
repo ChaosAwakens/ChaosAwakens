@@ -1,5 +1,6 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.worldgenerators.OreWorldGenerator;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -7,6 +8,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class ChaosAwakens
@@ -19,15 +21,15 @@ public class ChaosAwakens
 	public static CommonProxy proxy;
 	
 	//Items class holding ALL the items
-	Items items = new Items();
+	ModItems items = new ModItems();
 	
 	//Blocks class holding ALL the blocks
-	Blocks blocks = new Blocks();
+	ModBlocks blocks = new ModBlocks();
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		//GameRegistry
+		GameRegistry.registerWorldGenerator( new OreWorldGenerator(), 0);
 	}
 	
 	@EventHandler

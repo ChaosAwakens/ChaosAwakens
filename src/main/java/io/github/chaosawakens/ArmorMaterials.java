@@ -1,7 +1,9 @@
 package io.github.chaosawakens;
 
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.common.util.EnumHelper;
 
 /**
  * Enum dedicated to storing armor material data
@@ -22,6 +24,7 @@ public enum ArmorMaterials
 	private int enchantability;
 	private SoundEvent soundOnEquip;
 	private float thoughness;
+	private ArmorMaterial material;
 	
 	/**
 	 * 
@@ -44,6 +47,8 @@ public enum ArmorMaterials
 		this.enchantability = enchantability;
 		this.soundOnEquip = soundOnEquip;
 		this.thoughness = thoughness;
+		
+		this.material = EnumHelper.addArmorMaterial(name, textureName, durability, reductionAmounts, enchantability, soundOnEquip, thoughness);
 	}
 
 	public String getName()
@@ -81,4 +86,8 @@ public enum ArmorMaterials
 		return thoughness;
 	}
 	
+	public ArmorMaterial getArmorMaterial()
+	{
+		return material;
+	}
 }

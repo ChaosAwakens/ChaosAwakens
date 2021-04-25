@@ -1,6 +1,6 @@
-package io.github.chaosawakens.equipments;
+package io.github.chaosawakens.equipment;
 
-import io.github.chaosawakens.Items;
+import io.github.chaosawakens.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemHoe;
 
@@ -24,6 +24,6 @@ public class GenericHoe extends ItemHoe
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.TOOLS);
 		
-		Items.ITEMS.add(this);
+		ModItems.ITEMS.add(this);
 	}
 }

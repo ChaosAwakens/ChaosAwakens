@@ -1,7 +1,8 @@
-package io.github.chaosawakens.equipments;
+package io.github.chaosawakens.equipment;
 
-import io.github.chaosawakens.Items;
+import io.github.chaosawakens.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 
@@ -31,26 +32,6 @@ public class GenericArmor extends ItemArmor
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.MATERIALS);
 		
-		Items.ITEMS.add(this);
+		ModItems.ITEMS.add(this);
 	}
-	
-	
-	/**
-	 * Dont know what this code below for, so i didnt remove it -invalid2
-	 */
-//	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer)
-//	{
-//		if(stack.toString().contains("leggings"))
-//		{
-//			return "chaosawakens:" + armourName + "_2.png";
-//		}
-//	if(stack.toString().contains("Leggings")) if (itemID == ExampleMod.EmeraldLeggings.item);
-//	{
-//		return "chaosawakens:" + armourName + "_2.png";
-//
-//		
-//	}
-//	return "chaosawakens:" + armourName + "_1.png";
-//
-//	}
 }

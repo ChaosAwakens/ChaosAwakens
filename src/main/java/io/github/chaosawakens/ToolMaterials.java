@@ -1,5 +1,8 @@
 package io.github.chaosawakens;
 
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.common.util.EnumHelper;
+
 /**
  * Enum dedicated to storing tool material data
  * @author invalid2
@@ -19,7 +22,17 @@ public enum ToolMaterials
 	private float efficiency;
 	private float damage;
 	private int enchantability;
+	private ToolMaterial material;
 	
+	/**
+	 * 
+	 * @param name Unlocalized and registry names
+	 * @param harvestLevel Harvest level
+	 * @param maxUses Durability
+	 * @param efficiency efficiency
+	 * @param damage Material base damage
+	 * @param enchantability Material base enchantability
+	 */
 	private ToolMaterials(String name, int harvestLevel, int maxUses, float efficiency, float damage,
 			int enchantability) {
 		this.name = name;
@@ -28,36 +41,41 @@ public enum ToolMaterials
 		this.efficiency = efficiency;
 		this.damage = damage;
 		this.enchantability = enchantability;
+		this.material = EnumHelper.addToolMaterial(name, harvestLevel, maxUses, efficiency, damage, enchantability);
 	}
-
+	
 	public String getName()
 	{
 		return name;
 	}
-
+	
 	public int getHarvestLevel()
 	{
 		return harvestLevel;
 	}
-
+	
 	public int getMaxUses()
 	{
 		return maxUses;
 	}
-
+	
 	public float getEfficiency()
 	{
 		return efficiency;
 	}
-
+	
 	public float getDamage()
 	{
 		return damage;
 	}
-
+	
 	public int getEnchantability()
 	{
 		return enchantability;
 	}
 	
+	public ToolMaterial getToolMaterial()
+	{
+		return material;
+	}
 }

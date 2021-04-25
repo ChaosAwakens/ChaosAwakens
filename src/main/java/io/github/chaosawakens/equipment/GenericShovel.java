@@ -1,6 +1,6 @@
-package io.github.chaosawakens.equipments;
+package io.github.chaosawakens.equipment;
 
-import io.github.chaosawakens.Items;
+import io.github.chaosawakens.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemSpade;
 
@@ -23,6 +23,6 @@ public class GenericShovel extends ItemSpade
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.MATERIALS);
 		
-		Items.ITEMS.add(this);
+		ModItems.ITEMS.add(this);
 	}
 }
