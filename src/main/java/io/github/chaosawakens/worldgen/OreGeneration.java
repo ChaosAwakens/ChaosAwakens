@@ -33,17 +33,17 @@ public class OreGeneration {
         overworldOres.add(register("amethyst_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.AMETHYST_ORE.get().getDefaultState(), 4)) //vein Size
                 .range(53).square() //maximum height
-                .count(11))); //count per chunk
+                .count(7))); //count per chunk
 
         overworldOres.add(register("uranium_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.URANIUM_ORE.get().getDefaultState(), 3)) //vein Size
                 .range(24).square() //maximum height
-                .count(9))); //count per chunk
+                .count(5))); //count per chunk
 
         overworldOres.add(register("titanium_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.TITANIUM_ORE.get().getDefaultState(), 3)) //vein Size
                 .range(24).square() //maximum height
-                .count(9))); //count per chunk
+                .count(5))); //count per chunk
 
         overworldOres.add(register("aluminium_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.ALUMINIUM_ORE.get().getDefaultState(), 5)) //vein Size

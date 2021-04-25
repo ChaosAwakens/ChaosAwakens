@@ -1,14 +1,9 @@
 package io.github.chaosawakens;
 
-import java.lang.reflect.Field;
-import java.util.Map;
-import java.util.Random;
-
 import io.github.chaosawakens.items.ThunderStaffItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +16,6 @@ public class GameEvents {
         Entity entity = event.getEntity();
 
         if (entity instanceof PlayerEntity) {
-//    		event.getEntity().stepHeight = 1.0f;
 
             PlayerEntity player = (PlayerEntity)event.getEntity();
 
