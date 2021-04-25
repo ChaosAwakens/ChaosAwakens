@@ -37,7 +37,7 @@ public class ModItems {
     public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato", () -> new Item(new Item.Properties().food(ModItems.FOOD_TOMATO).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> LETTUCE = ITEMS.register("lettuce", () -> new Item(new Item.Properties().food(ModItems.FOOD_LETTUCE).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().food(ModItems.FOOD_CHEESE).group(ItemGroup.FOOD)));
-    public static final RegistryObject<Item> GARDEN_SALAD = ITEMS.register("garden_salad", () -> new Item(new Item.Properties().food(ModItems.FOOD_GARDEN_SALAD).maxStackSize(1).group(ItemGroup.FOOD)));
+    public static final RegistryObject<Item> GARDEN_SALAD = ITEMS.register("garden_salad", () -> new SoupItem(new Item.Properties().food(ModItems.FOOD_GARDEN_SALAD).maxStackSize(1).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> BLT = ITEMS.register("blt", () -> new Item(new Item.Properties().food(ModItems.FOOD_BLT).group(ItemGroup.FOOD)));
 
     // GEMST0NES
@@ -103,10 +103,10 @@ public class ModItems {
     public static final RegistryObject<ArmorItem> TIGERS_EYE_BOOTS = ITEMS.register("tigers_eye_boots", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
 
     // ULTIMATE TOOLS
-    public static final RegistryObject<SwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new SwordItem(ToolMaterials.TOOL_ULTIMATE, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<PickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_ULTIMATE, 1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<ShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new ShovelItem(ToolMaterials.TOOL_ULTIMATE, 1.5F, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new AxeItem(ToolMaterials.TOOL_ULTIMATE, 1, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<SwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new SwordItem(ToolMaterials.TOOL_ULTIMATE, 31, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<PickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_ULTIMATE, 29, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<ShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new ShovelItem(ToolMaterials.TOOL_ULTIMATE, 28, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new AxeItem(ToolMaterials.TOOL_ULTIMATE, 30, -3, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<HoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new HoeItem(ToolMaterials.TOOL_ULTIMATE, -8, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
     // ULTIMATE ARMOR
