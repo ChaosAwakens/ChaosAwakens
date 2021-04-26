@@ -16,24 +16,24 @@ import java.util.function.Supplier;
 public enum ArmorMaterials implements IArmorMaterial {
 
     //Name, Durability multiplier, Damage Reduction multiplier, Damage Reduction, Enchantability, Sound Events, Toughness, Knockback Resistance, Repair Material
-    EMERALD(ChaosAwakens.MODID + ":emerald", 25, new int[] {3, 8, 6, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 20.0f, 1.0f, () -> {
+    EMERALD(ChaosAwakens.MODID + ":emerald", 25, new int[] {3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.75f, 0f, () -> {
         return Ingredient.fromItems(Items.EMERALD);
     }),
 
-    AMETHYST(ChaosAwakens.MODID + ":amethyst", 25, new int[] {4, 8, 7, 3}, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 20.0f, 1.0f, () -> {
+    AMETHYST(ChaosAwakens.MODID + ":amethyst", 25, new int[] {3, 7, 8, 4}, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> {
         return Ingredient.fromItems(ModItems.AMETHYST.get());
     }),
 
-    RUBY(ChaosAwakens.MODID + ":ruby", 50, new int[] {4, 9, 8, 4}, 60, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 40.0F, 1.0f, () -> {
+    RUBY(ChaosAwakens.MODID + ":ruby", 50, new int[] {4, 8, 9, 4}, 60, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
         return Ingredient.fromItems(ModItems.RUBY.get());
     }),
 
-    TIGERS_EYE(ChaosAwakens.MODID + ":tigers_eye", 35, new int[] {4, 8, 7, 4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 25.0f, 1.0f, () -> {
+    TIGERS_EYE(ChaosAwakens.MODID + ":tigers_eye", 35, new int[] {4, 7, 8, 4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
         return Ingredient.fromItems(ModItems.TIGERS_EYE.get());
     }),
 
-    ULTIMATE(ChaosAwakens.MODID + ":ultimate", 35, new int[] {6, 12, 10, 6}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 25.0f, 1.0f, () -> {
-        return null;
+    ULTIMATE(ChaosAwakens.MODID + ":ultimate", 35, new int[] {6, 10, 12, 6}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3f, 0.125f, () -> {
+        return Ingredient.fromItems(ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get());
     });
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] {13, 15, 16, 11};

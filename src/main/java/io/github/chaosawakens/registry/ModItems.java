@@ -52,9 +52,9 @@ public class ModItems {
 
     // EMERALD TOOLS
     public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 0, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<PickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_EMERALD, -2, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new ShovelItem(ToolMaterials.TOOL_EMERALD, -3, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new AxeItem(ToolMaterials.TOOL_EMERALD, -1, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_EMERALD, -2, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new AxeItem(ToolMaterials.TOOL_EMERALD, 2, -3, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(ToolMaterials.TOOL_EMERALD, -9, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
     // EMERALD ARMOR
@@ -65,9 +65,9 @@ public class ModItems {
 
     // AMETHYST TOOLS
     public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, -4, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, -6, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(ToolMaterials.TOOL_AMETHYST, -7, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(ToolMaterials.TOOL_AMETHYST, -5, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, -6, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(ToolMaterials.TOOL_AMETHYST, -2, -3, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(ToolMaterials.TOOL_AMETHYST, -18, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
     // AMETHYST ARMOR
@@ -78,9 +78,9 @@ public class ModItems {
 
     // RUBY TOOLS
     public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(ToolMaterials.TOOL_RUBY, -11, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, -13, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ToolMaterials.TOOL_RUBY, -14, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ToolMaterials.TOOL_RUBY, -12, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, -13, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ToolMaterials.TOOL_RUBY, -9, -3, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ToolMaterials.TOOL_RUBY, -30, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
     // RUBY ARMOR
@@ -91,9 +91,9 @@ public class ModItems {
 
     // TIGERS EYE TOOLS
     public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_TIGERS_EYE, 1, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, -1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, -2, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_TIGERS_EYE, 0, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, -1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_TIGERS_EYE, 3, -3, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, -10, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
     // TIGERS EYE ARMOR
@@ -104,9 +104,9 @@ public class ModItems {
 
     // ULTIMATE TOOLS
     public static final RegistryObject<SwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new SwordItem(ToolMaterials.TOOL_ULTIMATE, 31, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<PickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_ULTIMATE, 29, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<ShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new ShovelItem(ToolMaterials.TOOL_ULTIMATE, 28, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new AxeItem(ToolMaterials.TOOL_ULTIMATE, 30, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_ULTIMATE, 29, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new AxeItem(ToolMaterials.TOOL_ULTIMATE, 33, -3, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<HoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new HoeItem(ToolMaterials.TOOL_ULTIMATE, -8, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
     // ULTIMATE ARMOR
