@@ -4,8 +4,6 @@ import io.github.chaosawakens.items.util.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModItems implements ModInitializer {
     //Amethyst
@@ -55,6 +53,13 @@ public class ModItems implements ModInitializer {
     public static final Item RUBY_LEGGINGS = new ArmorItem(RUBY_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item RUBY_BOOTS = new ArmorItem(RUBY_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
+    //Ultimate
+    //public static final ToolMaterial RUBY_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, ModItems.RUBY);
+    //public static final ArmorMaterial RUBY_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.RUBY, "ruby");
+    //public static final Item RUBY = new Item(new Item.Settings().group(ItemGroup.MISC));
+
+    public static final BowItem ULTIMATE_BOW = new UltimateBow(new Item.Settings().group(ItemGroup.COMBAT));
+
     @Override
     public void onInitialize() {
         RegisterItem.register("amethyst", AMETHYST);
@@ -88,5 +93,7 @@ public class ModItems implements ModInitializer {
         RegisterItem.register("ruby_chestplate", RUBY_CHESTPLATE);
         RegisterItem.register("ruby_leggings", RUBY_LEGGINGS);
         RegisterItem.register("ruby_boots", RUBY_BOOTS);
+
+        RegisterItem.register("ultimate_bow", ULTIMATE_BOW);
     }
 }

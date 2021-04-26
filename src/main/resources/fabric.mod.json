@@ -10,6 +10,9 @@
   "icon": "assets/ChaosAwakens/icon.png",
   "environment": "*",
   "entrypoints": {
+    "client" : [
+      "io.github.chaosawakens.client.Client"
+    ],
     "main": [
       "io.github.chaosawakens.ChaosAwakens",
       "io.github.chaosawakens.items.ModItems",
