@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "ChaosAwakens",
+  "version": "${version}",
+  "name": "ChaosAwakens",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "unlicense",
+  "icon": "assets/ChaosAwakens/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "java.io.github.chaosawakens.chaosawakens.client.ChaosAwakensClient"
+    ],
+    "main": [
+      "java.io.github.chaosawakens.chaosawakens.ChaosAwakens"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}
