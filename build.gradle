@@ -11,20 +11,19 @@ buildscript {
 
 apply plugin: "net.minecraftforge.gradle"
 
-group = 'io.github.chaosawakens'
+group = 'io.github'
 version = "${project.minecraft}-${project.modVersion}"
 archivesBaseName = project.modId
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: project.mappingsChannel, version: project.mappings
-    accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
+    mappings channel: 'snapshot', version: '20210309-1.16.5'
     runs {
         client {
-            workingDirectory project.file("run")
-            property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
-            property "forge.logging.console.level", "debug"
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
             mods {
                 chaosawakens {
                     source sourceSets.main
@@ -32,9 +31,9 @@ minecraft {
             }
         }
         server {
-            workingDirectory project.file("run")
-            property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
-            property "forge.logging.console.level", "debug"
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
             mods {
                 chaosawakens {
                     source sourceSets.main
@@ -42,9 +41,9 @@ minecraft {
             }
         }
         data {
-            workingDirectory project.file("run")
-            property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
-            property "forge.logging.console.level", "debug"
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
             args '--mod', 'chaosawakens', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
                 chaosawakens {
@@ -54,6 +53,8 @@ minecraft {
         }
     }
 }
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
@@ -87,6 +88,7 @@ jar {
                 "Specification-Vendor"    : "Chaos Awakens Team",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.modName,
+                "Implementation-Vendor"   : "Chaos Awakens Team",
                 "Implementation-Version"  : project.modVersion,
                 "Implementation-Vendor"   : "Chaos Awakens Team",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")

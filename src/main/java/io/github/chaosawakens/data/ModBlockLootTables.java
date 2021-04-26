@@ -1,15 +1,10 @@
 package io.github.chaosawakens.data;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public class ModBlockLootTables extends BlockLootTables
 {

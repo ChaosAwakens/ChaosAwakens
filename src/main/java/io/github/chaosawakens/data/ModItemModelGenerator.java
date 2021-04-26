@@ -43,7 +43,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
         this.simpleWithExistingParent(ModBlocks.RUBY_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.RUBY_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.TIGERS_EYE_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
-        //this.simpleWithExistingParent(ModBlocks.TIGERS_EYE_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
+        // this.simpleWithExistingParent(ModBlocks.TIGERS_EYE_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.TITANIUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.TITANIUM_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.URANIUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
