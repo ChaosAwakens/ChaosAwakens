@@ -20,6 +20,10 @@ public enum ArmorMaterials implements IArmorMaterial {
         return Ingredient.fromItems(Items.EMERALD);
     }),
 
+    EXPERIENCE(ChaosAwakens.MODID + ":experience", 25, new int[] {3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.75f, 0f, () -> {
+        return null;
+    }),
+
     AMETHYST(ChaosAwakens.MODID + ":amethyst", 25, new int[] {3, 7, 8, 4}, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> {
         return Ingredient.fromItems(ModItems.AMETHYST.get());
     }),
