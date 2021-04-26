@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "ChaosAwakens",
+  "id": "chaosawakens",
   "version": "${version}",
-  "name": "ChaosAwakens",
+  "name": "Chaos Awakens",
   "description": "",
   "authors": [],
   "contact": {},
@@ -10,11 +10,9 @@
   "icon": "assets/ChaosAwakens/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "java.io.github.chaosawakens.chaosawakens.client.ChaosAwakensClient"
-    ],
     "main": [
-      "java.io.github.chaosawakens.chaosawakens.ChaosAwakens"
+      "io.github.chaosawakens.ChaosAwakens",
+      "io.github.chaosawakens.items.ModItems"
     ]
   },
   "depends": {

@@ -1,4 +1,4 @@
-package java.io.github.chaosawakens.chaosawakens;
+package io.github.chaosawakens;
 
 import net.fabricmc.api.ModInitializer;
 
