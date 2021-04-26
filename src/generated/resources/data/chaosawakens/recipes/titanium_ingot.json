@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ttt",
+    "ttt",
+    "ttt"
+  ],
+  "key": {
+    "t": {
+      "item": "chaosawakens:titanium_nugget"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:titanium_ingot"
+  }
+}

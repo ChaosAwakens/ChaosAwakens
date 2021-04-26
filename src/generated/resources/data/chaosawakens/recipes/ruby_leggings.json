@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "R R",
+    "R R"
+  ],
+  "key": {
+    "R": {
+      "item": "chaosawakens:ruby"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ruby_leggings"
+  }
+}

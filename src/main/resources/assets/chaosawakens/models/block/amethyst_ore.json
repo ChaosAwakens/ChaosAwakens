@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "chaosawakens:block/amethyst_ore_0",
-    "particle": "chaosawakens:block/amethyst_ore_0"
+    "all": "chaosawakens:block/amethyst_ore",
+    "particle": "chaosawakens:block/amethyst_ore"
   }
 }

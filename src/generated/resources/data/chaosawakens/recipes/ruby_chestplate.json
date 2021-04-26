@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R R",
+    "RRR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "chaosawakens:ruby"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ruby_chestplate"
+  }
+}
