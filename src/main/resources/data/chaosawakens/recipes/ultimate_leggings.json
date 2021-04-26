@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "T T",
+    "U U"
+  ],
+  "key": {
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ultimate_leggings"
+  }
+}

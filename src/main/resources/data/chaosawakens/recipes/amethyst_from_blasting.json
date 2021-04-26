@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "chaosawakens:amethyst_ore"
+  },
+  "result": "chaosawakens:amethyst",
+  "experience": 1.0,
+  "cookingtime": 100
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DX ",
+    "XX ",
+    "  X"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "X": {
+      "item": "chaosawakens:ruby"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:thunder_staff"
+  }
+}
