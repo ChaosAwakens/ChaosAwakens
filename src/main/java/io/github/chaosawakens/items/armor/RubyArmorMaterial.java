@@ -7,11 +7,11 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
-public class AmethystArmorMaterial implements ArmorMaterial {
+public class RubyArmorMaterial implements ArmorMaterial {
     private static final int[] DURABILITY = new int[] {13, 15, 16, 11};
     private static final int[] PROTECTION = new int[] {3, 6, 8, 3};
 
-    public static final AmethystArmorMaterial INSTANCE = new AmethystArmorMaterial();
+    public static final RubyArmorMaterial INSTANCE = new RubyArmorMaterial();
 
     @Override
     public int getDurability(EquipmentSlot slot) {
@@ -35,12 +35,12 @@ public class AmethystArmorMaterial implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(ModItems.AMETHYST);
+        return Ingredient.ofItems(ModItems.RUBY);
     }
 
     @Override
     public String getName() {
-        return "amethyst";
+        return "ruby";
     }
 
     @Override

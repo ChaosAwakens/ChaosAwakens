@@ -1,12 +1,12 @@
 package io.github.chaosawakens.items.tools;
 
-import io.github.chaosawakens.items.ModItems;
+import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
-public class AmethystToolMaterial implements ToolMaterial {
+public class EmeraldToolMaterial implements ToolMaterial {
 
-    public static final AmethystToolMaterial INSTANCE = new AmethystToolMaterial();
+    public static final EmeraldToolMaterial INSTANCE = new EmeraldToolMaterial();
 
     @Override
     public int getDurability() {
@@ -35,6 +35,6 @@ public class AmethystToolMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(ModItems.AMETHYST);
+        return Ingredient.ofItems(Items.EMERALD);
     }
 }

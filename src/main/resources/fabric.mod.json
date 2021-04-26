@@ -12,7 +12,8 @@
   "entrypoints": {
     "main": [
       "io.github.chaosawakens.ChaosAwakens",
-      "io.github.chaosawakens.items.ModItems"
+      "io.github.chaosawakens.items.ModItems",
+      "io.github.chaosawakens.blocks.ModBlocks"
     ]
   },
   "depends": {

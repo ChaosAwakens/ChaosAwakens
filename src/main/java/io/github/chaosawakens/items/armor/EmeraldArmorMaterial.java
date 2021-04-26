@@ -3,15 +3,16 @@ package io.github.chaosawakens.items.armor;
 import io.github.chaosawakens.items.ModItems;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
-public class AmethystArmorMaterial implements ArmorMaterial {
+public class EmeraldArmorMaterial implements ArmorMaterial {
     private static final int[] DURABILITY = new int[] {13, 15, 16, 11};
     private static final int[] PROTECTION = new int[] {3, 6, 8, 3};
 
-    public static final AmethystArmorMaterial INSTANCE = new AmethystArmorMaterial();
+    public static final EmeraldArmorMaterial INSTANCE = new EmeraldArmorMaterial();
 
     @Override
     public int getDurability(EquipmentSlot slot) {
@@ -35,12 +36,12 @@ public class AmethystArmorMaterial implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(ModItems.AMETHYST);
+        return Ingredient.ofItems(Items.EMERALD);
     }
 
     @Override
     public String getName() {
-        return "amethyst";
+        return "emerald";
     }
 
     @Override

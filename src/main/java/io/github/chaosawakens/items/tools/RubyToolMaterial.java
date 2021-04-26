@@ -4,9 +4,9 @@ import io.github.chaosawakens.items.ModItems;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
-public class AmethystToolMaterial implements ToolMaterial {
+public class RubyToolMaterial implements ToolMaterial {
 
-    public static final AmethystToolMaterial INSTANCE = new AmethystToolMaterial();
+    public static final RubyToolMaterial INSTANCE = new RubyToolMaterial();
 
     @Override
     public int getDurability() {
@@ -35,6 +35,6 @@ public class AmethystToolMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(ModItems.AMETHYST);
+        return Ingredient.ofItems(ModItems.RUBY);
     }
 }
