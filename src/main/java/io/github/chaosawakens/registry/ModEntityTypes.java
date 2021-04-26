@@ -1,7 +1,7 @@
 package io.github.chaosawakens.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.entities.EntEntity;
+import io.github.chaosawakens.entity.EntEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;

@@ -3,7 +3,7 @@ package io.github.chaosawakens;
 import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
 import io.github.chaosawakens.data.ModRecipes;
-import io.github.chaosawakens.entities.EntEntity;
+import io.github.chaosawakens.entity.EntEntity;
 import io.github.chaosawakens.registry.ModAttributes;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModEntityTypes;

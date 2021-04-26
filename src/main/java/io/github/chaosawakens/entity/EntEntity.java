@@ -1,13 +1,10 @@
-package io.github.chaosawakens.entities;
+package io.github.chaosawakens.entity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -41,18 +38,20 @@ public class EntEntity extends MonsterEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0F, false));
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
-        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 15.0D)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 150.0D)
                 .createMutableAttribute(Attributes.ARMOR, 3.0D)
                 .createMutableAttribute(Attributes.ATTACK_SPEED, 5.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.35D)
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 3.0D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 24.0D);
     }
