@@ -1,4 +1,4 @@
-package io.github.chaosawakens.items.tools;
+package io.github.chaosawakens.items.util;
 
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ToolMaterial;
