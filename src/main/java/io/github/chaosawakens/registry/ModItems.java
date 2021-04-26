@@ -3,7 +3,12 @@ package io.github.chaosawakens.registry;
 import io.github.chaosawakens.enums.ArmorMaterials;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.enums.ToolMaterials;
+import io.github.chaosawakens.items.EnchantedArmor;
+import io.github.chaosawakens.items.EnchantedPickaxe;
+import io.github.chaosawakens.items.EnchantedSword;
 import io.github.chaosawakens.items.ThunderStaffItem;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
@@ -53,7 +58,7 @@ public class ModItems {
     // EMERALD TOOLS
     public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 0, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
     public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new ShovelItem(ToolMaterials.TOOL_EMERALD, -3, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<PickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_EMERALD, -2, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<EnchantedPickaxe> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxe(ToolMaterials.TOOL_EMERALD, -2, -2.8F, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.SILK_TOUCH},new int[]{1}));
     public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new AxeItem(ToolMaterials.TOOL_EMERALD, 2, -3, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(ToolMaterials.TOOL_EMERALD, -9, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
@@ -118,10 +123,10 @@ public class ModItems {
     public static final RegistryObject<HoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new HoeItem(ToolMaterials.TOOL_ULTIMATE, -8, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
     // ULTIMATE ARMOR
-    public static final RegistryObject<ArmorItem> ULTIMATE_HELMET = ITEMS.register("ultimate_helmet", () -> new ArmorItem(ArmorMaterials.ULTIMATE, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> ULTIMATE_CHESTPLATE = ITEMS.register("ultimate_chestplate", () -> new ArmorItem(ArmorMaterials.ULTIMATE, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> ULTIMATE_LEGGINGS = ITEMS.register("ultimate_leggings", () -> new ArmorItem(ArmorMaterials.ULTIMATE, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> ULTIMATE_BOOTS = ITEMS.register("ultimate_boots", () -> new ArmorItem(ArmorMaterials.ULTIMATE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<EnchantedArmor> ULTIMATE_HELMET = ITEMS.register("ultimate_helmet", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION,Enchantments.RESPIRATION,Enchantments.AQUA_AFFINITY},new int[]{5,5,5,5,3,1}));
+    public static final RegistryObject<EnchantedArmor> ULTIMATE_CHESTPLATE = ITEMS.register("ultimate_chestplate", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{5,5,5,5}));
+    public static final RegistryObject<EnchantedArmor> ULTIMATE_LEGGINGS = ITEMS.register("ultimate_leggings", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{5,5,5,5}));
+    public static final RegistryObject<EnchantedArmor> ULTIMATE_BOOTS = ITEMS.register("ultimate_boots", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION,Enchantments.FEATHER_FALLING},new int[]{5,5,5,5,3}));
 
     // STAFFS
     public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(ItemGroup.COMBAT).maxDamage(50)));
