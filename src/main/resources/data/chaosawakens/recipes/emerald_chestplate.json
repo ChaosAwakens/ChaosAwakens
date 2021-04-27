@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:emerald"
+      "tag": "forge:gems/emerald"
     }
   },
   "result": {
-    "item": "chaosawakens:emerald_leggings"
+    "item": "chaosawakens:emerald_chestplate"
   }
 }

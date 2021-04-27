@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     },
     "X": {
-      "item": "chaosawakens:tigers_eye"
+      "tag": "forge:gems/tigers_eye"
     }
   },
   "result": {

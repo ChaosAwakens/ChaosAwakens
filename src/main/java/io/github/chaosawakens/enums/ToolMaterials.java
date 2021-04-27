@@ -8,11 +8,12 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum ToolMaterials implements IItemTier {
-    TOOL_EMERALD(2, 2000, 10.0F, 9.0F, 10, () -> Ingredient.fromItems(Items.EMERALD.getItem())),
-    TOOL_AMETHYST(8, 2000, 20.0F, 18.0F, 20, () -> Ingredient.fromItems(ModItems.AMETHYST.get())),
-    TOOL_RUBY(12, 1800, 20.0F, 30.0F, 30, () -> Ingredient.fromItems(ModItems.RUBY.get())),
-    TOOL_TIGERS_EYE(15, 1750, 15.0F, 10.0F, 15, () -> Ingredient.fromItems(ModItems.TIGERS_EYE.get())),
-    TOOL_ULTIMATE(15, 3000, 75.0F, 8.0F, 45, () -> Ingredient.fromItems(ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get()));
+    TOOL_EMERALD(3, 2000, 10, 6, 24, () -> Ingredient.fromItems(Items.EMERALD.getItem())),
+    TOOL_AMETHYST(3, 2000, 11, 11, 18, () -> Ingredient.fromItems(ModItems.AMETHYST.get())),
+    TOOL_RUBY(4, 1800, 11, 16, 22, () -> Ingredient.fromItems(ModItems.RUBY.get())),
+    TOOL_TIGERS_EYE(3, 600, 11, 8, 20, () -> Ingredient.fromItems(ModItems.TIGERS_EYE.get())),
+    TOOL_ULTIMATE(10, 3000, 15, 36, 64, () -> Ingredient.fromItems(ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get())),
+    TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.fromItems(ModItems.TITANIUM_INGOT.get()));
 
     private final int harvestLevel;
     private final int maxUses;

@@ -48,12 +48,13 @@ public class EntEntity extends MonsterEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 150.0D)
-                .createMutableAttribute(Attributes.ARMOR, 3.0D)
-                .createMutableAttribute(Attributes.ATTACK_SPEED, 5.0D)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 150)
+                .createMutableAttribute(Attributes.ARMOR, 3)
+                .createMutableAttribute(Attributes.ATTACK_SPEED, 5)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.35D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 3.0D)
-                .createMutableAttribute(Attributes.FOLLOW_RANGE, 24.0D);
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 3)
+                .createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 1.5D)
+                .createMutableAttribute(Attributes.FOLLOW_RANGE, 24);
     }
 
     @Override

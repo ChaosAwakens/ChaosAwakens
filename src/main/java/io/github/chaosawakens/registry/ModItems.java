@@ -3,10 +3,7 @@ package io.github.chaosawakens.registry;
 import io.github.chaosawakens.enums.ArmorMaterials;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.enums.ToolMaterials;
-import io.github.chaosawakens.items.EnchantedArmor;
-import io.github.chaosawakens.items.EnchantedPickaxe;
-import io.github.chaosawakens.items.EnchantedSword;
-import io.github.chaosawakens.items.ThunderStaffItem;
+import io.github.chaosawakens.items.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -55,79 +52,95 @@ public class ModItems {
     public static final RegistryObject<Item> URANIUM_NUGGET = ITEMS.register("uranium_nugget", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
 
-    // EMERALD TOOLS
-    public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 0, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new ShovelItem(ToolMaterials.TOOL_EMERALD, -3, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<EnchantedPickaxe> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxe(ToolMaterials.TOOL_EMERALD, -2, -2.8F, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.SILK_TOUCH},new int[]{1}));
-    public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new AxeItem(ToolMaterials.TOOL_EMERALD, 2, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(ToolMaterials.TOOL_EMERALD, -9, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
+    // TOOLS
+    // Ultimate
+    public static final RegistryObject<EnchantedSword> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSword(ToolMaterials.TOOL_ULTIMATE, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.KNOCKBACK,Enchantments.LOOTING,Enchantments.UNBREAKING,Enchantments.FIRE_ASPECT},new int[]{5,5,5,3,3,2,2}));
+    public static final RegistryObject<EnchantedShovel> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new EnchantedShovel(ToolMaterials.TOOL_ULTIMATE, 1.5F, -3, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
+    public static final RegistryObject<EnchantedPickaxe> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new EnchantedPickaxe(ToolMaterials.TOOL_ULTIMATE, 1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
+    public static final RegistryObject<EnchantedAxe> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new EnchantedAxe(ToolMaterials.TOOL_ULTIMATE, 5, -3, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
+    public static final RegistryObject<EnchantedHoe> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new EnchantedHoe(ToolMaterials.TOOL_ULTIMATE, -34, 0.0F, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
 
-    // EMERALD ARMOR
-    public static final RegistryObject<ArmorItem> EMERALD_HELMET = ITEMS.register("emerald_helmet", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> EMERALD_CHESTPLATE = ITEMS.register("emerald_chestplate", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> EMERALD_LEGGINGS = ITEMS.register("emerald_leggings", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> EMERALD_BOOTS = ITEMS.register("emerald_boots", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+    // Nightmare Sword
+    public static final RegistryObject<EnchantedSword> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSword(ToolMaterials.TOOL_NIGHTMARE, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.KNOCKBACK,Enchantments.LOOTING,Enchantments.UNBREAKING,Enchantments.FIRE_ASPECT},new int[]{5,5,5,3,3,2,2}));
 
-    // EXPERIENCE SWORD & ARMOR
-    public static final RegistryObject<SwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 0, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    // Emerald
+    public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new ShovelItem(ToolMaterials.TOOL_EMERALD, 1.5F, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<EnchantedPickaxe> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxe(ToolMaterials.TOOL_EMERALD, 1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.SILK_TOUCH},new int[]{1}));
+    public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new AxeItem(ToolMaterials.TOOL_EMERALD, 5, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(ToolMaterials.TOOL_EMERALD, -4, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
-    public static final RegistryObject<ArmorItem> EXPERIENCE_HELMET = ITEMS.register("experience_helmet", () -> new ArmorItem(ArmorMaterials.EXPERIENCE, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> EXPERIENCE_CHESTPLATE = ITEMS.register("experience_chestplate", () -> new ArmorItem(ArmorMaterials.EXPERIENCE, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> EXPERIENCE_LEGGINGS = ITEMS.register("experience_leggings", () -> new ArmorItem(ArmorMaterials.EXPERIENCE, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> EXPERIENCE_BOOTS = ITEMS.register("experience_boots", () -> new ArmorItem(ArmorMaterials.EXPERIENCE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+    // Misc. Swords
+    public static final RegistryObject<EnchantedSword> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSword(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.UNBREAKING,Enchantments.MENDING},new int[]{2,3,1}));
+    public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
 
-    // AMETHYST TOOLS
-    public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, -4, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(ToolMaterials.TOOL_AMETHYST, -7, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, -6, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(ToolMaterials.TOOL_AMETHYST, -2, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(ToolMaterials.TOOL_AMETHYST, -18, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
+    // Ruby
+    public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(ToolMaterials.TOOL_RUBY, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ToolMaterials.TOOL_RUBY, 1.5F, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, 1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ToolMaterials.TOOL_RUBY, 5, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ToolMaterials.TOOL_RUBY, -14, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
-    // AMETHYST ARMOR
-    public static final RegistryObject<ArmorItem> AMETHYST_HELMET = ITEMS.register("amethyst_helmet", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> AMETHYST_CHESTPLATE = ITEMS.register("amethyst_chestplate", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> AMETHYST_LEGGINGS = ITEMS.register("amethyst_leggings", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> AMETHYST_BOOTS = ITEMS.register("amethyst_boots", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+    // Amethyst
+    public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(ToolMaterials.TOOL_AMETHYST, 1.5F, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, 1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(ToolMaterials.TOOL_AMETHYST, 5, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(ToolMaterials.TOOL_AMETHYST, -9, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
-    // RUBY TOOLS
-    public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(ToolMaterials.TOOL_RUBY, -11, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ToolMaterials.TOOL_RUBY, -14, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, -13, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ToolMaterials.TOOL_RUBY, -9, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ToolMaterials.TOOL_RUBY, -30, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
+    // Tiger's Eye
+    public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_TIGERS_EYE, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, 1.5F, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, 1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_TIGERS_EYE, 5, -3, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, -6, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
 
-    // RUBY ARMOR
-    public static final RegistryObject<ArmorItem> RUBY_HELMET = ITEMS.register("ruby_helmet", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+    // STAFFS/MISC WEAPONS
+    public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(ItemGroup.COMBAT).maxDamage(50)));
 
-    // TIGERS EYE TOOLS
-    public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_TIGERS_EYE, 1, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, -2, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, -1, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_TIGERS_EYE, 3, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, -10, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
-
-    // TIGERS EYE ARMOR
-    public static final RegistryObject<ArmorItem> TIGERS_EYE_HELMET = ITEMS.register("tigers_eye_helmet", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> TIGERS_EYE_CHESTPLATE = ITEMS.register("tigers_eye_chestplate", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> TIGERS_EYE_LEGGINGS = ITEMS.register("tigers_eye_leggings", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ArmorItem> TIGERS_EYE_BOOTS = ITEMS.register("tigers_eye_boots", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
-
-    // ULTIMATE TOOLS
-    public static final RegistryObject<SwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new SwordItem(ToolMaterials.TOOL_ULTIMATE, 31, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final RegistryObject<ShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new ShovelItem(ToolMaterials.TOOL_ULTIMATE, 28, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<PickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_ULTIMATE, 29, -2.8F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<AxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new AxeItem(ToolMaterials.TOOL_ULTIMATE, 33, -3, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final RegistryObject<HoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new HoeItem(ToolMaterials.TOOL_ULTIMATE, -8, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
-
-    // ULTIMATE ARMOR
+    // ARMOR
+    // Ultimate
     public static final RegistryObject<EnchantedArmor> ULTIMATE_HELMET = ITEMS.register("ultimate_helmet", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION,Enchantments.RESPIRATION,Enchantments.AQUA_AFFINITY},new int[]{5,5,5,5,3,1}));
     public static final RegistryObject<EnchantedArmor> ULTIMATE_CHESTPLATE = ITEMS.register("ultimate_chestplate", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{5,5,5,5}));
     public static final RegistryObject<EnchantedArmor> ULTIMATE_LEGGINGS = ITEMS.register("ultimate_leggings", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{5,5,5,5}));
     public static final RegistryObject<EnchantedArmor> ULTIMATE_BOOTS = ITEMS.register("ultimate_boots", () -> new EnchantedArmor(ArmorMaterials.ULTIMATE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.FIRE_PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.PROJECTILE_PROTECTION,Enchantments.FEATHER_FALLING},new int[]{5,5,5,5,3}));
 
-    // STAFFS
-    public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(ItemGroup.COMBAT).maxDamage(50)));
+    // Emerald
+    public static final RegistryObject<ArmorItem> EMERALD_HELMET = ITEMS.register("emerald_helmet", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> EMERALD_CHESTPLATE = ITEMS.register("emerald_chestplate", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> EMERALD_LEGGINGS = ITEMS.register("emerald_leggings", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> EMERALD_BOOTS = ITEMS.register("emerald_boots", () -> new ArmorItem(ArmorMaterials.EMERALD, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+
+    // Experience
+    public static final RegistryObject<EnchantedArmor> EXPERIENCE_HELMET = ITEMS.register("experience_helmet", () -> new EnchantedArmor(ArmorMaterials.EXPERIENCE, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.MENDING},new int[]{2,1,1}));
+    public static final RegistryObject<EnchantedArmor> EXPERIENCE_CHESTPLATE = ITEMS.register("experience_chestplate", () -> new EnchantedArmor(ArmorMaterials.EXPERIENCE, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.MENDING},new int[]{2,1,1}));
+    public static final RegistryObject<EnchantedArmor> EXPERIENCE_LEGGINGS = ITEMS.register("experience_leggings", () -> new EnchantedArmor(ArmorMaterials.EXPERIENCE, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.MENDING},new int[]{2,1,1}));
+    public static final RegistryObject<EnchantedArmor> EXPERIENCE_BOOTS = ITEMS.register("experience_boots", () -> new EnchantedArmor(ArmorMaterials.EXPERIENCE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.BLAST_PROTECTION,Enchantments.FEATHER_FALLING,Enchantments.MENDING},new int[]{2,1,1,1}));
+
+    // Ruby
+    public static final RegistryObject<ArmorItem> RUBY_HELMET = ITEMS.register("ruby_helmet", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots", () -> new ArmorItem(ArmorMaterials.RUBY, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+
+    // Amethyst
+    public static final RegistryObject<ArmorItem> AMETHYST_HELMET = ITEMS.register("amethyst_helmet", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> AMETHYST_CHESTPLATE = ITEMS.register("amethyst_chestplate", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> AMETHYST_LEGGINGS = ITEMS.register("amethyst_leggings", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> AMETHYST_BOOTS = ITEMS.register("amethyst_boots", () -> new ArmorItem(ArmorMaterials.AMETHYST, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+
+    // Tiger's Eye
+    public static final RegistryObject<ArmorItem> TIGERS_EYE_HELMET = ITEMS.register("tigers_eye_helmet", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> TIGERS_EYE_CHESTPLATE = ITEMS.register("tigers_eye_chestplate", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> TIGERS_EYE_LEGGINGS = ITEMS.register("tigers_eye_leggings", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<ArmorItem> TIGERS_EYE_BOOTS = ITEMS.register("tigers_eye_boots", () -> new ArmorItem(ArmorMaterials.TIGERS_EYE, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+
+    // Lapis Lazuli
+    public static final RegistryObject<EnchantedArmor> LAPIS_HELMET = ITEMS.register("lapis_helmet", () -> new EnchantedArmor(ArmorMaterials.LAPIS, EquipmentSlotType.HEAD, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION,Enchantments.RESPIRATION,Enchantments.AQUA_AFFINITY},new int[]{1,1,1,1}));
+    public static final RegistryObject<EnchantedArmor> LAPIS_CHESTPLATE = ITEMS.register("lapis_chestplate", () -> new EnchantedArmor(ArmorMaterials.LAPIS, EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
+    public static final RegistryObject<EnchantedArmor> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new EnchantedArmor(ArmorMaterials.LAPIS, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
+    public static final RegistryObject<EnchantedArmor> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new EnchantedArmor(ArmorMaterials.LAPIS, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
 }

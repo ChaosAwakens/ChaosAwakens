@@ -14,7 +14,7 @@ public class EnchantedShovel extends ShovelItem {
     private int[] enchantmentLevels;
     private Enchantment[] enchantmentIds;
 
-    public EnchantedShovel(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
+    public EnchantedShovel(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
         super(tier,attackDamageIn,attackSpeedIn,builderIn);
         enchantmentIds = enchants;
         enchantmentLevels = lvls;

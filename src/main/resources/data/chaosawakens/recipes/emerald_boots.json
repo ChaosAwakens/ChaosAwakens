@@ -6,7 +6,7 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:emerald"
+      "tag": "forge:gems/emerald"
     }
   },
   "result": {

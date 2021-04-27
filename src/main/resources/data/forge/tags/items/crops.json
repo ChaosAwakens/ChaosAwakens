@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:crops/corn",
+    "#forge:crops/tomato",
+    "#forge:crops/lettuce"
+  ]
+}

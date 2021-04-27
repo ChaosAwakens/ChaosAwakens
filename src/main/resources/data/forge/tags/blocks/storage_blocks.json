@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:storage_blocks/aluminium",
+    "#forge:storage_blocks/amethyst",
+    "#forge:storage_blocks/ruby",
+    "#forge:storage_blocks/tigers_eye",
+    "#forge:storage_blocks/titanium",
+    "#forge:storage_blocks/uranium"
+  ]
+}

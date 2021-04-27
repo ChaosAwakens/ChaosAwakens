@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ores/aluminium",
+    "#forge:ores/amethyst",
+    "#forge:ores/ruby",
+    "#forge:ores/tigers_eye",
+    "#forge:ores/titanium",
+    "#forge:ores/uranium"
+  ]
+}

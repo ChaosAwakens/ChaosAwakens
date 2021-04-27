@@ -7,10 +7,10 @@
   ],
   "key": {
     "D": {
-      "item": "minecraft:diamond"
+      "tag": "forge:gems/diamond"
     },
     "X": {
-      "item": "chaosawakens:ruby"
+      "tag": "forge:gems/ruby"
     }
   },
   "result": {

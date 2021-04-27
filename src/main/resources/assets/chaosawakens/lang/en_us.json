@@ -79,6 +79,7 @@
   "block.chaosawakens.uranium_block": "Block of Uranium",
   "item.chaosawakens.uranium_ingot": "Uranium Ingot",
   "item.chaosawakens.uranium_nugget": "Uranium Nugget",
+
   "item.chaosawakens.ultimate_sword": "The Ultimate Sword",
   "item.chaosawakens.ultimate_pickaxe": "The Ultimate Pickaxe",
   "item.chaosawakens.ultimate_shovel": "The Ultimate Shovel",
@@ -88,6 +89,17 @@
   "item.chaosawakens.ultimate_chestplate": "The Ultimate Chestplate",
   "item.chaosawakens.ultimate_leggings": "The Ultimate Leggings",
   "item.chaosawakens.ultimate_boots": "The Ultimate Boots",
+
+  "item.chaosawakens.lapis_helmet": "Lapis Lazuli Helmet",
+  "item.chaosawakens.lapis_chestplate": "Lapis Lazuli Chestplate",
+  "item.chaosawakens.lapis_leggings": "Lapis Lazuli Leggings",
+  "item.chaosawakens.lapis_boots": "Lapis Lazuli Boots",
+
+  "item.chaosawakens.poison_sword": "Poison Sword",
+  "item.chaosawakens.rat_sword": "Rat Sword",
+  "item.chaosawakens.fairy_sword": "Fairy Sword",
+  "item.chaosawakens.big_hammer": "Big Hammer",
+  "item.chaosawakens.ray_gun": "A Freakin' Ray Gun!",
 
   "item.chaosawakens.thunder_staff": "Thunder Staff"
 }

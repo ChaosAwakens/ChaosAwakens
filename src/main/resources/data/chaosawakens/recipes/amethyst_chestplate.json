@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "chaosawakens:amethyst"
+      "tag": "forge:gems/amethyst"
     }
   },
   "result": {
-    "item": "chaosawakens:amethyst_leggings"
+    "item": "chaosawakens:amethyst_chestplate"
   }
 }

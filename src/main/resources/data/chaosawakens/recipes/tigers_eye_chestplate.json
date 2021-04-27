@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "chaosawakens:tigers_eye"
+      "tag": "forge:gems/tigers_eye"
     }
   },
   "result": {
-    "item": "chaosawakens:tigers_eye_leggings"
+    "item": "chaosawakens:tigers_eye_chestplate"
   }
 }
