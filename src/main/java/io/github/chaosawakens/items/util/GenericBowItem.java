@@ -1,4 +1,4 @@
-package io.github.chaosawakens.items;
+package io.github.chaosawakens.items.util;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -13,14 +13,21 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class UltimateBow extends BowItem {
-    public UltimateBow(Settings settings) {
+import java.util.Optional;
+
+public class GenericBowItem extends BowItem {
+    private int maxUseTime;
+    private int fireRate;
+    public GenericBowItem(Settings settings, @Nullable Integer maxUseTime, @Nullable Integer fireRate) {
         super(settings);
+        this.maxUseTime = Optional.ofNullable(maxUseTime).orElse(72000);
+        this.fireRate = Optional.ofNullable(fireRate).orElse(20);
     }
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return 72000;
+        return this.maxUseTime;
     }
 
     @Override
@@ -35,7 +42,7 @@ public class UltimateBow extends BowItem {
                 }
 
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
-                float f = getPullProgress(i);
+                float f = this.getNewPullProgress(i);
                 if (!((double)f < 0.1D)) {
                     boolean bl2 = bl && itemStack.getItem() == Items.ARROW;
                     if (!world.isClient) {
@@ -84,8 +91,8 @@ public class UltimateBow extends BowItem {
         }
     }
 
-    public static float getPullProgress(int useTicks) {
-        float f = (float)useTicks / 5.0F;
+    public float getNewPullProgress(int useTicks) {
+        float f = (float)useTicks / (float)this.fireRate;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;
