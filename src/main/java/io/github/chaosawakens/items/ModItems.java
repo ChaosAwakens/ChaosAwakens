@@ -8,7 +8,7 @@ import net.minecraft.item.*;
 
 public class ModItems implements ModInitializer {
     //Misc Items
-    public static final Item ALUMINUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item ALUMINIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item DRUID_KEY = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item OIL = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item SALT = new Item(new Item.Settings().group(ItemGroup.MISC));
@@ -80,20 +80,20 @@ public class ModItems implements ModInitializer {
     public static final Item ULTIMATE_BOOTS = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Tiger's Eye
-    public static final ToolMaterial TIGERSEYE_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, ModItems.TIGERSEYE);
-    public static final ArmorMaterial TIGERSEYE_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.TIGERSEYE, "tigerseye");
-    public static final Item TIGERSEYE = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final ToolMaterial TIGERS_EYE_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, ModItems.TIGERS_EYE);
+    public static final ArmorMaterial TIGERS_EYE_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.TIGERS_EYE, "TIGERS_EYE");
+    public static final Item TIGERS_EYE = new Item(new Item.Settings().group(ItemGroup.MISC));
 
-    public static final ToolItem TIGERSEYE_SWORD = new SwordItem(TIGERSEYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem TIGERSEYE_SHOVEL = new ShovelItem(TIGERSEYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem TIGERSEYE_PICKAXE = new GenericPickaxeItem(TIGERSEYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem TIGERSEYE_AXE = new GenericAxeItem(TIGERSEYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem TIGERSEYE_HOE = new GenericHoeItem(TIGERSEYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem TIGERS_EYE_SWORD = new SwordItem(TIGERS_EYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem TIGERS_EYE_SHOVEL = new ShovelItem(TIGERS_EYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem TIGERS_EYE_PICKAXE = new GenericPickaxeItem(TIGERS_EYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem TIGERS_EYE_AXE = new GenericAxeItem(TIGERS_EYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem TIGERS_EYE_HOE = new GenericHoeItem(TIGERS_EYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
 
-    public static final Item TIGERSEYE_HELMET = new ArmorItem(TIGERSEYE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item TIGERSEYE_CHESTPLATE = new ArmorItem(TIGERSEYE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item TIGERSEYE_LEGGINGS = new ArmorItem(TIGERSEYE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item TIGERSEYE_BOOTS = new ArmorItem(TIGERSEYE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item TIGERS_EYE_HELMET = new ArmorItem(TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item TIGERS_EYE_CHESTPLATE = new ArmorItem(TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item TIGERS_EYE_LEGGINGS = new ArmorItem(TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item TIGERS_EYE_BOOTS = new ArmorItem(TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Optimised
     public static final ToolMaterial OPTIMISED_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null);
@@ -163,7 +163,7 @@ public class ModItems implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        RegisterItem.register("aluminum_ingot", ALUMINUM_INGOT);
+        RegisterItem.register("aluminium_ingot", ALUMINIUM_INGOT);
         RegisterItem.register("druid_key", DRUID_KEY);
         RegisterItem.register("oil", OIL);
         RegisterItem.register("salt", SALT);
@@ -214,16 +214,16 @@ public class ModItems implements ModInitializer {
         RegisterItem.register("ultimate_leggings", ULTIMATE_LEGGINGS);
         RegisterItem.register("ultimate_boots", ULTIMATE_BOOTS);
 
-        RegisterItem.register("tigerseye", TIGERSEYE);
-        RegisterItem.register("tigerseye_sword", TIGERSEYE_SWORD);
-        RegisterItem.register("tigerseye_shovel", TIGERSEYE_SHOVEL);
-        RegisterItem.register("tigerseye_pickaxe", TIGERSEYE_PICKAXE);
-        RegisterItem.register("tigerseye_axe", TIGERSEYE_AXE);
-        RegisterItem.register("tigerseye_hoe", TIGERSEYE_HOE);
-        RegisterItem.register("tigerseye_helmet", TIGERSEYE_HELMET);
-        RegisterItem.register("tigerseye_chestplate", TIGERSEYE_CHESTPLATE);
-        RegisterItem.register("tigerseye_leggings", TIGERSEYE_LEGGINGS);
-        RegisterItem.register("tigerseye_boots", TIGERSEYE_BOOTS);
+        RegisterItem.register("tigers_eye", TIGERS_EYE);
+        RegisterItem.register("tigers_eye_sword", TIGERS_EYE_SWORD);
+        RegisterItem.register("tigers_eye_shovel", TIGERS_EYE_SHOVEL);
+        RegisterItem.register("tigers_eye_pickaxe", TIGERS_EYE_PICKAXE);
+        RegisterItem.register("tigers_eye_axe", TIGERS_EYE_AXE);
+        RegisterItem.register("tigers_eye_hoe", TIGERS_EYE_HOE);
+        RegisterItem.register("tigers_eye_helmet", TIGERS_EYE_HELMET);
+        RegisterItem.register("tigers_eye_chestplate", TIGERS_EYE_CHESTPLATE);
+        RegisterItem.register("tigers_eye_leggings", TIGERS_EYE_LEGGINGS);
+        RegisterItem.register("tigers_eye_boots", TIGERS_EYE_BOOTS);
 
         RegisterItem.register("optimised_shovel", OPTIMISED_SHOVEL);
         RegisterItem.register("optimised_pickaxe", OPTIMISED_PICKAXE);

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/ruby_block",
+    "particle": "chaosawakens:block/ruby_block"
+  }
+}
