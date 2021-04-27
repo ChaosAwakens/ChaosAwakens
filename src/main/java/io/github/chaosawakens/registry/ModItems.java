@@ -61,7 +61,7 @@ public class ModItems {
     public static final RegistryObject<EnchantedHoe> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new EnchantedHoe(ToolMaterials.TOOL_ULTIMATE, -34, 0.0F, new Item.Properties().group(ItemGroup.TOOLS),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
 
     // Nightmare Sword
-    public static final RegistryObject<EnchantedSword> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSword(ToolMaterials.TOOL_NIGHTMARE, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.KNOCKBACK,Enchantments.LOOTING,Enchantments.UNBREAKING,Enchantments.FIRE_ASPECT},new int[]{5,5,5,3,3,2,2}));
+    public static final RegistryObject<EnchantedSword> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSword(ToolMaterials.TOOL_NIGHTMARE, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.KNOCKBACK,Enchantments.FIRE_ASPECT},new int[]{1,3,1}));
 
     // Emerald
     public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));

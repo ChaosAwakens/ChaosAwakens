@@ -19,7 +19,7 @@ public class GameEvents {
 
             PlayerEntity player = (PlayerEntity)event.getEntity();
 
-            double baseReach = 3.5;
+            double baseReach = 5;
 
             if (player.isCreative()) {
                 baseReach = 8.0;

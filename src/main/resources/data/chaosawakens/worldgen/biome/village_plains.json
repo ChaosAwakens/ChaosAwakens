@@ -13,12 +13,6 @@
     "water_fog_color": 329011
   },
   "surface_builder": "minecraft:grass",
-  "carvers": {
-    "air": [
-      "minecraft:cave",
-      "minecraft:canyon"
-    ]
-  },
   "features": [
     [
       "minecraft:ore_dirt",
@@ -35,11 +29,16 @@
       "minecraft:disk_sand",
       "minecraft:disk_clay",
       "minecraft:disk_gravel"
+    ],
+    [
+      "minecraft:patch_grass_normal",
+      "minecraft:plain_vegetation",
+      "minecraft:flower_plain_decorated",
+      "minecraft:spring_water"
     ]
   ],
   "starts": [
-    "minecraft:village_plains",
-	  "minecraft:village_taiga"
+    "minecraft:village_plains"
   ],
   "spawners": {
     "monster": [

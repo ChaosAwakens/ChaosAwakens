@@ -136,6 +136,13 @@
       "minecraft:disk_sand",
       "minecraft:disk_clay",
       "minecraft:disk_gravel"
+    ],
+    [
+      "minecraft:patch_grass_normal",
+      "minecraft:plain_vegetation",
+      "minecraft:flower_plain_decorated",
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
     ]
   ]
 }
