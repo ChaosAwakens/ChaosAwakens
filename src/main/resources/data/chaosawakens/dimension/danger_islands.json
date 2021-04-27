@@ -8,7 +8,7 @@
       "features": true,
       "layers": [
         {
-          "block": "minecraft:grass_block",
+          "block": "minecraft:bedrock",
           "height": 1
         },
         {
@@ -16,7 +16,7 @@
           "height": 2
         },
         {
-          "block": "minecraft:bedrock",
+          "block": "minecraft:grass_block",
           "height": 1
         }
       ],
