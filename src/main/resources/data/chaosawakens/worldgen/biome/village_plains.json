@@ -10,9 +10,17 @@
     "sky_color": 7907327,
     "fog_color": 12638463,
     "water_color": 4159204,
-    "water_fog_color": 329011
+    "water_fog_color": 329011,
+    "grass_color": 353825,
+    "foliage_color": 353825
   },
   "surface_builder": "minecraft:grass",
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:canyon"
+    ]
+  },
   "features": [
     [
       "minecraft:ore_dirt",
@@ -32,13 +40,12 @@
     ],
     [
       "minecraft:patch_grass_normal",
-      "minecraft:plain_vegetation",
-      "minecraft:flower_plain_decorated",
-      "minecraft:spring_water"
+      "minecraft:plain_vegetation"
     ]
   ],
   "starts": [
-    "minecraft:village_plains"
+    "minecraft:village_plains",
+	  "minecraft:village_taiga"
   ],
   "spawners": {
     "monster": [
@@ -139,8 +146,6 @@
     ]
   },
   "spawn_costs": {},
-  "carvers": {},
-  "features": {},
   "player_spawn_friendly": true,
   "precipitation": "rain",
   "temperature": 0.7,

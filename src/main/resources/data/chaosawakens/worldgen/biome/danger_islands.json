@@ -26,6 +26,11 @@
   "spawners": {
   },
   "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:canyon"
+    ]
+  },
   "player_spawn_friendly": false,
   "precipitation": "rain",
   "temperature": 0.8,

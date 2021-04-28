@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "chaosawakens:raw_bacon"
+  },
+  "result": "chaosawakens:cooked_bacon",
+  "experience": 1.0,
+  "cookingtime": 100
+}

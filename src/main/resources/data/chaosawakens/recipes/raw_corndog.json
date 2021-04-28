@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:crops/corn"
+    },
+    {
+      "tag": "forge:rods/wooden"
+    },
+    {
+      "item": "minecraft:porkchop"
+    },
+    {
+      "item": "minecraft:chicken"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:blt",
+    "count": 1
+  }
+}

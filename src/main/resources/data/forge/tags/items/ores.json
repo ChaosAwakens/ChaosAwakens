@@ -6,6 +6,7 @@
     "#forge:ores/ruby",
     "#forge:ores/tigers_eye",
     "#forge:ores/titanium",
-    "#forge:ores/uranium"
+    "#forge:ores/uranium",
+    "#forge:ores/salt"
   ]
 }

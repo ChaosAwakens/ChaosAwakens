@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "uranium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    " B "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:crops/radish"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:radish_stew"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "orespawn:corn_plant_stage_0"
+    },
+    "age=1": {
+      "model": "orespawn:corn_plant_stage_1"
+    },
+    "age=2": {
+      "model": "orespawn:corn_plant_stage_2"
+    },
+    "age=3": {
+      "model": "chaosawakens:corn_plant_stage_3"
+    }
+  }
+}
