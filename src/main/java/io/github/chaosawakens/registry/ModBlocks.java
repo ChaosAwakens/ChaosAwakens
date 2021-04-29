@@ -26,6 +26,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TITANIUM_ORE = registerBlock("titanium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> URANIUM_ORE = registerBlock("uranium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> ALUMINIUM_ORE = registerBlock("aluminium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> UNPROCESSED_OIL_ORE = registerBlock("Unprocessed_oil_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
 
     // GEMSTONE BLOCKS
     public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
