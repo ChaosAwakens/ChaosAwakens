@@ -6,10 +6,10 @@
 
 	"entity.chaosawakens.ent": "Ent",
 
-	"item.chaosawakens.raw_corndog": "Cooked Corndog",
-	"item.chaosawakens.cooked_corndog": "Raw Corndog",
-	"item.chaosawakens.raw_bacon": "Cooked Bacon",
-	"item.chaosawakens.cooked_bacon": "Raw Bacon",
+	"item.chaosawakens.raw_corndog": "Raw Corndog",
+	"item.chaosawakens.cooked_corndog": "Cooked Corndog",
+	"item.chaosawakens.raw_bacon": "Raw Bacon",
+	"item.chaosawakens.cooked_bacon": "Cooked Bacon",
 	"item.chaosawakens.corn": "Corn",
 	"item.chaosawakens.tomato": "Tomato",
 	"item.chaosawakens.lettuce": "Lettuce",
@@ -133,6 +133,7 @@
 	"item.chaosawakens.butter": "Butter",
 	"item.chaosawakens.cherries": "Cherries",
 	"item.chaosawakens.apple_seeds": "Apple Tree Seeds",
+	"item.chaosawakens.strawberry": "Strawberry",
 	"item.chaosawakens.strawberry_seeds": "Strawberry Seeds",
 	"item.chaosawakens.tomato_seeds": "Tomato Seeds",
 	"item.chaosawakens.green_fish": "Green Fish",

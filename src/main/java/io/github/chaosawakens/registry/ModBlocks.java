@@ -28,12 +28,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> ALUMINIUM_ORE = registerBlock("aluminium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
 
     // GEMSTONE BLOCKS
-    public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> TIGERS_EYE_BLOCK = registerBlock("tigers_eye_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> TITANIUM_BLOCK = registerBlock("titanium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> TIGERS_EYE_BLOCK = registerBlock("tigers_eye_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> TITANIUM_BLOCK = registerBlock("titanium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).notSolid()), ModItemGroups.blocksItemGroup);
 
     public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> BROWN_ANT_NEST = registerBlock("brown_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
