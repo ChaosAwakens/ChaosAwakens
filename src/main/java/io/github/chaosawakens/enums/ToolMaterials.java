@@ -14,7 +14,11 @@ public enum ToolMaterials implements IItemTier {
     TOOL_TIGERS_EYE(3, 600, 11, 8, 20, () -> Ingredient.fromItems(ModItems.TIGERS_EYE.get())),
     TOOL_ULTIMATE(10, 3000, 15, 36, 64, () -> Ingredient.fromItems(ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get())),
     TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.fromItems(ModItems.TITANIUM_INGOT.get()));
-
+TOOL_OPTIMISED(15, 13000, 75, 8, 45, () -> Ingredient.fromItems(ModItems.TITANIUM_INGOT.get()));
+    
+    
+    
+    
     private final int harvestLevel;
     private final int maxUses;
     private final float efficiency;
