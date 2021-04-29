@@ -71,6 +71,7 @@ public class ModItems {
     public static final RegistryObject<Item> URANIUM_INGOT = ITEMS.register("uranium_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> URANIUM_NUGGET = ITEMS.register("uranium_nugget", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> Oil = ITEMS.register("oil", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 
     // TOOLS
     // Ultimate
