@@ -11,9 +11,10 @@
   "environment": "*",
   "entrypoints": {
     "client" : [
-      "io.github.chaosawakens.client.Client"
+      "io.github.chaosawakens.client.ClientInitializer"
     ],
     "main": [
+      "io.github.chaosawakens.entities.ModEntities",
       "io.github.chaosawakens.ChaosAwakens",
       "io.github.chaosawakens.items.ModItems",
       "io.github.chaosawakens.blocks.ModBlocks"

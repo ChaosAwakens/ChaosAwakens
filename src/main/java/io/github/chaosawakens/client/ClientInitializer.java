@@ -1,11 +1,14 @@
 package io.github.chaosawakens.client;
 
+import io.github.chaosawakens.entities.ModEntities;
+import io.github.chaosawakens.entities.entities.ent.EntEntityRenderer;
 import io.github.chaosawakens.items.ModItems;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.util.Identifier;
 
-public class Client implements ClientModInitializer {
+public class ClientInitializer implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FabricModelPredicateProviderRegistry.register(ModItems.ULTIMATE_BOW, new Identifier("pull"), (itemStack, clientWorld, livingEntity) -> {
@@ -21,5 +24,8 @@ public class Client implements ClientModInitializer {
             }
             return livingEntity.isUsingItem() && livingEntity.getActiveItem() == itemStack ? 1.0F : 0.0F;
         });
+
+
+        EntityRendererRegistry.INSTANCE.register(ModEntities.ENT, (entityRenderDispatcher, context) -> new EntEntityRenderer(entityRenderDispatcher));
     }
 }

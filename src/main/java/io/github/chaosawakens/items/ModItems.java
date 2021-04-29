@@ -9,6 +9,7 @@ import net.minecraft.item.*;
 public class ModItems implements ModInitializer {
     //Misc Items
     public static final Item ALUMINIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item ALUMINIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item DRUID_KEY = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item OIL = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item SALT = new Item(new Item.Settings().group(ItemGroup.MISC));
@@ -145,7 +146,7 @@ public class ModItems implements ModInitializer {
     public static final ToolItem RAT_SWORD = new SwordItem(new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null), 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Ranged Weapons
-    public static final BowItem ULTIMATE_BOW = new GenericBowItem(new Item.Settings().group(ItemGroup.COMBAT), null, 5);
+    public static final BowItem ULTIMATE_BOW = new GenericBowItem(new Item.Settings().group(ItemGroup.COMBAT), null, 5);public static final ToolMaterial THUNDER_STAFF_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null);
     public static final Item THUNDER_STAFF = new ThunderStaff(new Item.Settings().group(ItemGroup.COMBAT));
     //Ray gun
 
@@ -164,6 +165,7 @@ public class ModItems implements ModInitializer {
     @Override
     public void onInitialize() {
         RegisterItem.register("aluminium_ingot", ALUMINIUM_INGOT);
+        RegisterItem.register("aluminium_nugget", ALUMINIUM_NUGGET);
         RegisterItem.register("druid_key", DRUID_KEY);
         RegisterItem.register("oil", OIL);
         RegisterItem.register("salt", SALT);
