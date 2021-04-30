@@ -19,7 +19,7 @@ public class RedAntEntityRender extends GeoEntityRenderer<RedAntEntity> {
 
     public RedAntEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RedAntEntityModel());
-        this.shadowSize = 0.125F;
+        this.shadowSize = 0.1F;
     }
 
     @Override

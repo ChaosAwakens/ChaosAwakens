@@ -59,7 +59,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.31')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.32')
 
 }
 
@@ -77,7 +77,7 @@ repositories {
         url = "https://www.cursemaven.com"
     }
     maven {
-        url 'https://repo.repsy.io/mvn/gandiber/geckolib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
 }
 

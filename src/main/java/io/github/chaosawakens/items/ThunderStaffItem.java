@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -49,6 +50,8 @@ public class ThunderStaffItem extends Item {
              ((ServerWorld) worldIn).summonEntity(lightning);
              ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), 6, true, Explosion.Mode.DESTROY);
          }
+
+        playerIn.addStat(Stats.ITEM_USED.get(this));
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

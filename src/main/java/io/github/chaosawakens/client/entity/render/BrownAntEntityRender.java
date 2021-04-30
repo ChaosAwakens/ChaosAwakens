@@ -19,7 +19,7 @@ public class BrownAntEntityRender extends GeoEntityRenderer<BrownAntEntity> {
 
     public BrownAntEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new BrownAntEntityModel());
-        this.shadowSize = 0.125F;
+        this.shadowSize = 0.1F;
     }
 
     @Override

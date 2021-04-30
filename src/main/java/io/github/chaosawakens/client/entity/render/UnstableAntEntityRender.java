@@ -19,7 +19,7 @@ public class UnstableAntEntityRender extends GeoEntityRenderer<UnstableAntEntity
 
     public UnstableAntEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new UnstableAntEntityModel());
-        this.shadowSize = 0.125F;
+        this.shadowSize = 0.1F;
     }
 
     @Override

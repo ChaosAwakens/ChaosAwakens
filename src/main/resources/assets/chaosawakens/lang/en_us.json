@@ -54,6 +54,9 @@
 	"item.chaosawakens.lava_eel": "Lava Eel",
 	"item.chaosawakens.cheese": "Cheese",
 
+	"block.chaosawakens.unprocessed_oil_ore": "Unprocessed Oil Ore",
+	"item.chaosawakens.oil": "Oil",
+
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",
 	"block.chaosawakens.aluminium_ore": "Aluminium Ore",
@@ -166,7 +169,6 @@
 	"item.chaosawakens.big_hammer": "Big Hammer",
 	"item.chaosawakens.ray_gun": "A Freakin' Ray Gun!",
 
-
 	"block.chaosawakens.brown_ant_nest": "Brown Ant Nest",
 	"block.chaosawakens.red_ant_nest": "Red Ant Nest",
 	"block.chaosawakens.rainbow_ant_nest": "Rainbow Ant Nest",
@@ -175,6 +177,9 @@
 
 	"block.chaosawakens.red_ant_infected_ore": "Red Ant Infected Ore",
 	"block.chaosawakens.termite_infected_ore": "Termite Infected Ore",
+
+	"item.chaosawakens.optimised_shovel": "Optimised Shovel",
+	"item.chaosawakens.optimised_pickaxe": "Optimised Pickaxe",
 
 	"item.chaosawakens.thunder_staff": "Thunder Staff"
 }
