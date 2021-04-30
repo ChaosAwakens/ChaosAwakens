@@ -18,8 +18,15 @@ description='''A successor mod that brings OreSpawn content into newer Minecraft
     side="BOTH"
 
 [[dependencies.chaosawakens]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.16.5,1.17]"
-    ordering="NONE"
-    side="BOTH"
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.5,1.17]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.chaosawakens]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.5,1.17]"
+ordering="NONE"
+side="BOTH"

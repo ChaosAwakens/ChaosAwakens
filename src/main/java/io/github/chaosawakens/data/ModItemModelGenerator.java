@@ -22,26 +22,33 @@ public class ModItemModelGenerator extends ItemModelProvider {
     @Override
     protected void registerModels() {
         generated(ModItems.RAW_CORNDOG, ModItems.COOKED_CORNDOG, ModItems.RAW_BACON, ModItems.COOKED_BACON,
+                ModItems.APPLE_SEEDS, ModItems.BUTTER, ModItems.RADISH, ModItems.RADISH_STEW, ModItems.SALT,
+                ModItems.STRAWBERRY, ModItems.STRAWBERRY_SEEDS, ModItems.TOMATO_SEEDS, ModItems.CHERRIES,
                 ModItems.CORN, ModItems.TOMATO, ModItems.LETTUCE, ModItems.CHEESE, ModItems.GARDEN_SALAD,
+                ModItems.GREEN_FISH, ModItems.ROCK_FISH, ModItems.SPARK_FISH, ModItems.WOOD_FISH,
                 ModItems.BLT, ModItems.AMETHYST, ModItems.RUBY, ModItems.TIGERS_EYE, ModItems.TITANIUM_INGOT,
                 ModItems.TITANIUM_NUGGET, ModItems.URANIUM_INGOT, ModItems.URANIUM_NUGGET, ModItems.ALUMINIUM_INGOT,
                 ModItems.AMETHYST_HELMET, ModItems.AMETHYST_CHESTPLATE, ModItems.AMETHYST_LEGGINGS, ModItems.AMETHYST_BOOTS,
                 ModItems.EMERALD_HELMET, ModItems.EMERALD_CHESTPLATE, ModItems.EMERALD_LEGGINGS, ModItems.EMERALD_BOOTS,
                 ModItems.RUBY_HELMET, ModItems.RUBY_CHESTPLATE, ModItems.RUBY_LEGGINGS, ModItems.RUBY_BOOTS,
                 ModItems.TIGERS_EYE_HELMET, ModItems.TIGERS_EYE_CHESTPLATE, ModItems.TIGERS_EYE_LEGGINGS, ModItems.TIGERS_EYE_BOOTS,
-                ModItems.ULTIMATE_HELMET, ModItems.ULTIMATE_CHESTPLATE, ModItems.ULTIMATE_LEGGINGS, ModItems.ULTIMATE_BOOTS, ModItems.EXPERIENCE_HELMET, ModItems.EXPERIENCE_CHESTPLATE, ModItems.EXPERIENCE_LEGGINGS, ModItems.EXPERIENCE_BOOTS);
+                ModItems.ULTIMATE_HELMET, ModItems.ULTIMATE_CHESTPLATE, ModItems.ULTIMATE_LEGGINGS, ModItems.ULTIMATE_BOOTS,
+                ModItems.EXPERIENCE_HELMET, ModItems.EXPERIENCE_CHESTPLATE, ModItems.EXPERIENCE_LEGGINGS, ModItems.EXPERIENCE_BOOTS,
+                ModItems.LAPIS_HELMET, ModItems.LAPIS_CHESTPLATE, ModItems.LAPIS_LEGGINGS, ModItems.LAPIS_BOOTS);
         handHeld(ModItems.AMETHYST_SWORD, ModItems.AMETHYST_PICKAXE, ModItems.AMETHYST_SHOVEL, ModItems.AMETHYST_AXE, ModItems.AMETHYST_HOE,
                 ModItems.EMERALD_SWORD, ModItems.EMERALD_PICKAXE, ModItems.EMERALD_SHOVEL, ModItems.EMERALD_AXE, ModItems.EMERALD_HOE,
                 ModItems.RUBY_SWORD, ModItems.RUBY_PICKAXE, ModItems.RUBY_SHOVEL, ModItems.RUBY_AXE, ModItems.RUBY_HOE,
                 ModItems.TIGERS_EYE_SWORD, ModItems.TIGERS_EYE_PICKAXE, ModItems.TIGERS_EYE_SHOVEL, ModItems.TIGERS_EYE_AXE, ModItems.TIGERS_EYE_HOE,
-                ModItems.ULTIMATE_SWORD, ModItems.ULTIMATE_PICKAXE, ModItems.ULTIMATE_SHOVEL, ModItems.ULTIMATE_AXE, ModItems.ULTIMATE_HOE, ModItems.EXPERIENCE_SWORD,
-                ModItems.THUNDER_STAFF);
+                ModItems.ULTIMATE_SWORD, ModItems.ULTIMATE_PICKAXE, ModItems.ULTIMATE_SHOVEL, ModItems.ULTIMATE_AXE, ModItems.ULTIMATE_HOE,
+                ModItems.EXPERIENCE_SWORD, ModItems.THUNDER_STAFF, ModItems.BIG_HAMMER, ModItems.FAIRY_SWORD, ModItems.NIGHTMARE_SWORD,
+                ModItems.POISON_SWORD, ModItems.RAT_SWORD);
         this.simpleWithExistingParent(ModBlocks.ALUMINIUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.ALUMINIUM_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.AMETHYST_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.AMETHYST_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.RUBY_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.RUBY_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.SALT_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.TIGERS_EYE_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.TIGERS_EYE_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.TITANIUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
