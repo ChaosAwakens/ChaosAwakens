@@ -68,26 +68,6 @@ public class UnstableAntEntity extends AnimalEntity implements IAnimatable {
         return this.factory;
     }
 
-    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-        ItemStack itemstack = playerIn.getHeldItem(hand);
-        if (itemstack.getItem() == null || itemstack.getItem() == Items.AIR) {
-            if (!this.world.isRemote && this.world instanceof ServerWorld) {
-                int i = this.getMaxInPortalTime();
-                ServerWorld serverworld = (ServerWorld)this.world;
-                MinecraftServer minecraftserver = serverworld.getServer();
-                RegistryKey<World> worldReg = this.world.getDimensionKey() == ModDimensions.DANGER_ISLANDS? World.OVERWORLD : ModDimensions.DANGER_ISLANDS;
-                ServerWorld serverWord1 = minecraftserver.getWorld(worldReg);
-                if (serverWord1 != null && minecraftserver.getAllowNether()) {
-                    this.changeDimension(serverWord1);
-                    this.world.getProfiler().endSection();
-                    return ActionResultType.PASS;
-                }
-                return ActionResultType.CONSUME;
-            }
-        }
-        return super.getEntityInteractionResult(playerIn, hand);
-    }
-
     @Nullable
     @Override
     public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {

@@ -1,6 +1,7 @@
 package io.github.chaosawakens.entity;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.registry.ModDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -8,11 +9,16 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.world.Dimension;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -76,26 +82,6 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
-    }
-
-    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-        ItemStack itemstack = playerIn.getHeldItem(hand);
-        if (itemstack.getItem() == null || itemstack.getItem() == Items.AIR) {
-            if (!this.world.isRemote && this.world instanceof ServerWorld) {
-                int i = this.getMaxInPortalTime();
-                ServerWorld serverworld = (ServerWorld)this.world;
-                MinecraftServer minecraftserver = serverworld.getServer();
-                RegistryKey<World> worldReg = this.world.getDimensionKey() == ModDimensions.MINING_DIMENSION? World.OVERWORLD : ModDimensions.MINING_DIMENSION;
-                ServerWorld serverWord1 = minecraftserver.getWorld(worldReg);
-                if (serverWord1 != null && minecraftserver.getAllowNether()) {
-                    this.changeDimension(serverWord1);
-                    this.world.getProfiler().endSection();
-                    return ActionResultType.PASS;
-                }
-                return ActionResultType.CONSUME;
-            }
-        }
-        return super.getEntityInteractionResult(playerIn, hand);
     }
 
 }
