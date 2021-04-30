@@ -1,5 +1,6 @@
 package io.github.chaosawakens.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -7,6 +8,10 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.world.Dimension;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -55,6 +60,12 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1)
                 .createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 0.5D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+    }
+
+    @Override
+    public ActionResultType getEntityInteractionResult(PlayerEntity player, Hand hand) {
+
+        return super.getEntityInteractionResult(player, hand);
     }
 
     @Override

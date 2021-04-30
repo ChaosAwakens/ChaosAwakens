@@ -54,7 +54,8 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
         return MobEntity.registerAttributes()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 1)
                 .createMutableAttribute(Attributes.ARMOR, 3)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D);
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+                .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
     }
 
     @Override

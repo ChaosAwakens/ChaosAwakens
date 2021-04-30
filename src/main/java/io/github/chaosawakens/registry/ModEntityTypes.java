@@ -12,11 +12,19 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ChaosAwakens.MODID);
 
-    // Entity Types
+    // ENTITY TYPES
+    // Ent
     public static final RegistryObject<EntityType<EntEntity>> ENT = ENTITY_TYPES.register("ent",
             () -> EntityType.Builder.create(EntEntity::new, EntityClassification.MONSTER)
                     .size(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID,"ent").toString()));
+
+    // Hercules Beetle
+    public static final RegistryObject<EntityType<HerculesBeetleEntity>> HERCULES_BEETLE = ENTITY_TYPES.register("hercules_beetle",
+            () -> EntityType.Builder.create(HerculesBeetleEntity::new, EntityClassification.MONSTER)
+                    .size(4.5f, 3.125f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID,"hercules_beetle").toString()));
+    // Ants
     public static final RegistryObject<EntityType<BrownAntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",
             () -> EntityType.Builder.create(BrownAntEntity::new, EntityClassification.CREATURE)
                     .size(0.25f, 0.25f) // Hitbox Size ()

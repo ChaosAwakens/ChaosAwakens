@@ -1,7 +1,7 @@
 package io.github.chaosawakens.util;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.client.entity.render.EntEntityRender;
+import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.registry.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,6 +17,11 @@ public class ClientEventBusSubcriber {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ENT.get(), EntEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BROWN_ANT.get(), BrownAntEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.RAINBOW_ANT.get(), RainbowAntEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.RED_ANT.get(), RedAntEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntityRender::new);
     }
 
     @SubscribeEvent

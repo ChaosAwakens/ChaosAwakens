@@ -1,6 +1,7 @@
 package io.github.chaosawakens.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
@@ -36,7 +37,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
 
-    public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setOpaque(AbstractBlock.AbstractBlockState::isOpaqueCube)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> BROWN_ANT_NEST = registerBlock("brown_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
