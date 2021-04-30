@@ -50,15 +50,15 @@ public class OreGeneration {
                 .range(53).square() //maximum height
                 .count(7))); //count per chunk
  
-     overworldOres.add(register("Unprocessed_oil_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
+     overworldOres.add(register("unprocessed_oil_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.UNPROCESSED_OIL_ORE.get().getDefaultState(), 4)) //vein Size
                 .range(53).square() //maximum height
                 .count(50))); //count per chunk
    
         
         
-     overworldOres.add(register("Unprocessed_oil_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
-                OreFeatureConfig.FillerBlockType.BASE_SAND_OVERWORLD, ModBlocks.UNPROCESSED_OIL_ORE.get().getDefaultState(), 4)) //vein Size
+     overworldOres.add(register("unprocessed_oil_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
+                new BlockMatchRuleTest(Blocks.SAND), ModBlocks.UNPROCESSED_OIL_ORE.get().getDefaultState(), 4)) //vein Size
                 .range(53).square() //maximum height
                 .count(50))); //count per chunk
         

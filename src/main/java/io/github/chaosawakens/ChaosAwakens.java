@@ -64,6 +64,10 @@ public class ChaosAwakens {
 
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BROWN_ANT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RAINBOW_ANT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RED_ANT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.UNSTABLE_ANT.get(), EntEntity.setCustomAttributes().create());
         });
     }
 

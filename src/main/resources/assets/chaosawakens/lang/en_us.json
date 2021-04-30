@@ -5,6 +5,13 @@
 	"itemGroup.chaosawakens_eggs_item_group": "Chaos Awakens Spawn Eggs",
 
 	"entity.chaosawakens.ent": "Ent",
+	"entity.chaosawakens.brown_ant": "Brown Ant",
+	"entity.chaosawakens.rainbow_ant": "Rainbow Ant",
+	"entity.chaosawakens.red_ant": "Red Ant",
+	"entity.chaosawakens.unstable_ant": "Unstable Ant",
+
+	"block.chaosawakens.salt_ore": "Salt Ore",
+	"item.chaosawakens.salt": "Salt",
 
 	"item.chaosawakens.raw_corndog": "Raw Corndog",
 	"item.chaosawakens.cooked_corndog": "Cooked Corndog",
@@ -16,6 +23,21 @@
 	"item.chaosawakens.cheese": "Cheese",
 	"item.chaosawakens.garden_salad": "Garden Salad",
 	"item.chaosawakens.blt": "BLT Sandwich",
+	"item.chaosawakens.radish": "Radish",
+	"item.chaosawakens.radish_stew": "Radish Stew",
+	"item.chaosawakens.butter": "Butter",
+	"item.chaosawakens.cherries": "Cherries",
+	"item.chaosawakens.apple_seeds": "Apple Tree Seeds",
+	"item.chaosawakens.strawberry": "Strawberry",
+	"item.chaosawakens.strawberry_seeds": "Strawberry Seeds",
+	"item.chaosawakens.tomato_seeds": "Tomato Seeds",
+	"item.chaosawakens.green_fish": "Green Fish",
+	"item.chaosawakens.rock_fish": "Rock Fish",
+	"item.chaosawakens.wood_fish": "Wood Fish",
+	"item.chaosawakens.spark_fish": "Spark Fish",
+
+	"block.chaosawakens.unprocessed_oil_ore": "Unprocessed Oil Ore",
+	"item.chaosawakens.oil": "Oil",
 
 	"block.chaosawakens.aluminium_ore": "Aluminium Ore",
 	"block.chaosawakens.aluminium_block": "Block of Aluminium",
@@ -114,11 +136,6 @@
 	"item.chaosawakens.moth_scale_leggings": "Moth Scale Leggings",
 	"item.chaosawakens.moth_scale_boots": "Moth Scale Boots",
 
-	"item.chaosawakens.lapis_helmet": "Lapis Lazuli Helmet",
-	"item.chaosawakens.lapis_chestplate": "Lapis Lazuli Chestplate",
-	"item.chaosawakens.lapis_leggings": "Lapis Lazuli Leggings",
-	"item.chaosawakens.lapis_boots": "Lapis Lazuli Boots",
-
 	"item.chaosawakens.nightmare_sword": "Nightmare Sword",
 	"item.chaosawakens.poison_sword": "Poison Sword",
 	"item.chaosawakens.rat_sword": "Rat Sword",
@@ -126,27 +143,14 @@
 	"item.chaosawakens.big_hammer": "Big Hammer",
 	"item.chaosawakens.ray_gun": "A Freakin' Ray Gun!",
 
-	"item.chaosawakens.salt": "Salt",
-	"item.chaosawakens.radish": "Radish",
-	"item.chaosawakens.radish_stew": "Radish Stew",
-	"block.chaosawakens.salt_ore": "Salt Ore",
-	"item.chaosawakens.butter": "Butter",
-	"item.chaosawakens.cherries": "Cherries",
-	"item.chaosawakens.apple_seeds": "Apple Tree Seeds",
-	"item.chaosawakens.strawberry": "Strawberry",
-	"item.chaosawakens.strawberry_seeds": "Strawberry Seeds",
-	"item.chaosawakens.tomato_seeds": "Tomato Seeds",
-	"item.chaosawakens.green_fish": "Green Fish",
-	"item.chaosawakens.rock_fish": "Rock Fish",
-	"item.chaosawakens.wood_fish": "Wood Fish",
-	"item.chaosawakens.spark_fish": "Spark Fish",
-	"item.chaosawakens.cheese": "Cheese",
-
 	"block.chaosawakens.brown_ant_nest": "Brown Ant Nest",
 	"block.chaosawakens.red_ant_nest": "Red Ant Nest",
 	"block.chaosawakens.rainbow_ant_nest": "Rainbow Ant Nest",
 	"block.chaosawakens.unstable_ant_nest": "Unstable Ant Nest",
 	"block.chaosawakens.termite_nest": "Termite Nest",
+
+	"item.chaosawakens.optimised_shovel": "Optimised Shovel",
+	"item.chaosawakens.optimised_pickaxe": "Optimised Pickaxe",
 
 	"item.chaosawakens.thunder_staff": "Thunder Staff"
 }
