@@ -2,7 +2,8 @@ package io.github.chaosawakens;
 
 import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
-import io.github.chaosawakens.entity.EntEntity;
+import io.github.chaosawakens.entity.*;
+import io.github.chaosawakens.network.PacketHandler;
 import io.github.chaosawakens.registry.ModAttributes;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModEntityTypes;
@@ -22,6 +23,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
+
+import java.util.Locale;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
@@ -61,13 +64,15 @@ public class ChaosAwakens {
 
     private void setup(FMLCommonSetupEvent event) {
         OreGeneration.registerOres();
+        PacketHandler.init();
 
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.BROWN_ANT.get(), EntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.RAINBOW_ANT.get(), EntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.RED_ANT.get(), EntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.UNSTABLE_ANT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BROWN_ANT.get(), BrownAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RAINBOW_ANT.get(), RainbowAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
         });
     }
 
@@ -80,5 +85,9 @@ public class ChaosAwakens {
             dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
             dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
         }
+    }
+
+    public static ResourceLocation prefix(String name) {
+        return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
     }
 }
