@@ -33,4 +33,8 @@ public class EnchantedArmor extends ArmorItem {
         }
     }
 
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
 }

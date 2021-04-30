@@ -34,4 +34,8 @@ public class EnchantedShovel extends ShovelItem {
         }
     }
 
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
 }

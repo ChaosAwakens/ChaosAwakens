@@ -34,4 +34,8 @@ public class EnchantedHoe extends HoeItem {
         }
     }
 
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
 }

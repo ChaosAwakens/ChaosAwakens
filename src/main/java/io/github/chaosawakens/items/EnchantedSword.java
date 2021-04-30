@@ -34,4 +34,8 @@ public class EnchantedSword extends SwordItem {
         }
     }
 
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
 }

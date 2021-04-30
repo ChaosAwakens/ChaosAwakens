@@ -42,6 +42,10 @@ public enum ArmorMaterials implements IArmorMaterial {
 
     ULTIMATE(ChaosAwakens.MODID + ":ultimate", 48, new int[] {6, 10, 12, 6}, 64, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3f, 0.025f, () -> {
         return Ingredient.fromItems(ModItems.TITANIUM_INGOT.get(), ModItems.URANIUM_INGOT.get());
+    }),
+
+    LAVA_EEL(ChaosAwakens.MODID + ":lava_eel", 34, new int[] {2, 5, 7, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0f, 0f, () -> {
+        return Ingredient.fromItems(ModItems.LAVA_EEL.get());
     });
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] {13, 15, 16, 11};

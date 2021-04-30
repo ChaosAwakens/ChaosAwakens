@@ -1,20 +1,30 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "uranium_ingot",
-  "pattern": [
-    "###",
-    "###",
-    " B "
-  ],
-  "key": {
-    "#": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
       "tag": "forge:crops/radish"
     },
-    "B": {
-      "item": "minecraft:bowl"
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
     }
-  },
+  ],
   "result": {
-    "item": "chaosawakens:radish_stew"
+    "item": "chaosawakens:radish_stew",
+    "count": 1
   }
 }

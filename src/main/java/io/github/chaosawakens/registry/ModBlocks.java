@@ -19,13 +19,16 @@ public class ModBlocks {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
 
     // GEMSTONE ORES
-    public static final RegistryObject<Block> SALT_ORE = registerBlock("salt_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> AMETHYST_ORE = registerBlock("amethyst_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> RUBY_ORE = registerBlock("ruby_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> TIGERS_EYE_ORE = registerBlock("tigers_eye_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> TITANIUM_ORE = registerBlock("titanium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> URANIUM_ORE = registerBlock("uranium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> ALUMINIUM_ORE = registerBlock("aluminium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> SALT_ORE = registerBlock("salt_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
+
+    public static final RegistryObject<Block> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore",() -> new Block(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore",() -> new Block(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
 
     // GEMSTONE BLOCKS
     public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);

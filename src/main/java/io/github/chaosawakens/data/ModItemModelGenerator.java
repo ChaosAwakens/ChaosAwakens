@@ -21,7 +21,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        generated(ModItems.RAW_CORNDOG, ModItems.COOKED_CORNDOG, ModItems.RAW_BACON, ModItems.COOKED_BACON,
+        generated(ModItems.CORNDOG, ModItems.COOKED_CORNDOG, ModItems.BACON, ModItems.COOKED_BACON,
                 ModItems.CORN, ModItems.TOMATO, ModItems.LETTUCE, ModItems.CHEESE, ModItems.GARDEN_SALAD,
                 ModItems.BLT, ModItems.AMETHYST, ModItems.RUBY, ModItems.TIGERS_EYE, ModItems.TITANIUM_INGOT,
                 ModItems.TITANIUM_NUGGET, ModItems.URANIUM_INGOT, ModItems.URANIUM_NUGGET, ModItems.ALUMINIUM_INGOT,

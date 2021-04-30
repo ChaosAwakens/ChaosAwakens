@@ -2,7 +2,7 @@ package io.github.chaosawakens;
 
 import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
-import io.github.chaosawakens.entity.EntEntity;
+import io.github.chaosawakens.entity.*;
 import io.github.chaosawakens.registry.ModAttributes;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModEntityTypes;
@@ -52,8 +52,8 @@ public class ChaosAwakens {
         ModItems.ITEMS.register(eventBus);
         ModBlocks.ITEMS.register(eventBus);
         ModBlocks.BLOCKS.register(eventBus);
-        ModAttributes.ATTRIBUTES.register(eventBus);
         ModEntityTypes.ENTITY_TYPES.register(eventBus);
+        ModAttributes.ATTRIBUTES.register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
 
         MinecraftForge.EVENT_BUS.register(GameEvents.class);
@@ -64,6 +64,11 @@ public class ChaosAwakens {
 
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BROWN_ANT.get(), BrownAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RAINBOW_ANT.get(), RainbowAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.TERMITE.get(), TermiteEntity.setCustomAttributes().create());
         });
     }
 

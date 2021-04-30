@@ -34,4 +34,8 @@ public class EnchantedAxe extends AxeItem {
         }
     }
 
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
 }

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "chaosawakens:raw_corndog"
+    "item": "chaosawakens:corndog"
   },
   "result": "chaosawakens:cooked_corndog",
   "experience": 1.0,

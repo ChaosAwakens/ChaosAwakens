@@ -34,4 +34,8 @@ public class EnchantedPickaxe extends PickaxeItem {
         }
     }
 
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
+
 }
