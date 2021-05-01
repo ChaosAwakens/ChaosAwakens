@@ -10,13 +10,16 @@
 	"entity.chaosawakens.rainbow_ant": "Rainbow Ant",
 	"entity.chaosawakens.unstable_ant": "Unstable Ant",
 	"entity.chaosawakens.termite": "Termite",
+	"entity.chaosawakens.hercules_beetle": "Hercules Beetle",
+	"entity.chaosawakens.ultimate_arrow": "Ultimate Arrow",
 
 	"item.chaosawakens.ent_spawn_egg": "Ent Spawn Egg",
-	"item.chaosawakens.red_ant_spawn_egg": "Red Ant Spawn Egg",
 	"item.chaosawakens.brown_ant_spawn_egg": "Brown Ant Spawn Egg",
 	"item.chaosawakens.rainbow_ant_spawn_egg": "Rainbow Ant Spawn Egg",
+	"item.chaosawakens.red_ant_spawn_egg": "Red Ant Spawn Egg",
 	"item.chaosawakens.unstable_ant_spawn_egg": "Unstable Ant Spawn Egg",
 	"item.chaosawakens.termite_spawn_egg": "Termite Spawn Egg",
+	"item.chaosawakens.hercules_beetle_spawn_egg": "Hercules Beetle Spawn Egg",
 
 	"item.chaosawakens.corndog": "Raw Corndog",
 	"item.chaosawakens.cooked_corndog": "Cooked Corndog",
@@ -53,9 +56,6 @@
 	"item.chaosawakens.spark_fish": "Spark Fish",
 	"item.chaosawakens.lava_eel": "Lava Eel",
 	"item.chaosawakens.cheese": "Cheese",
-
-	"block.chaosawakens.unprocessed_oil_ore": "Unprocessed Oil Ore",
-	"item.chaosawakens.oil": "Oil",
 
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",

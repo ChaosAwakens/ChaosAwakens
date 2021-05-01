@@ -27,8 +27,8 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 
     @Override
     public void startExecuting() {
-        this.throwTimer = 10 + attacker.getRNG().nextInt(30); // Wait 0.5 to 2 seconds before we throw the target
-        timeout = 80 + attacker.getRNG().nextInt(40); // Lets only try to chase for around 4-6 seconds
+        this.throwTimer = 30 + attacker.getRNG().nextInt(40); // Wait 1.5 to 3.5 seconds before we throw the target
+        timeout = 100 + attacker.getRNG().nextInt(40); // Lets only try to chase for around 5-6 seconds
         super.startExecuting();
     }
 
@@ -61,8 +61,8 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
             Entity rider = attacker.getPassengers().get(0);
             rider.stopRiding();
 
-            Vector3d throwVec = attacker.getLookVec().scale(2);
-            throwVec = new Vector3d(throwVec.x, 0.9, throwVec.z);
+            Vector3d throwVec = attacker.getLookVec().scale(3);
+            throwVec = new Vector3d(throwVec.x, 1.9, throwVec.z);
 
             rider.addVelocity(throwVec.x, throwVec.y, throwVec.z);
 

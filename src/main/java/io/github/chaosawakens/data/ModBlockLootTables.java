@@ -24,9 +24,6 @@ public class ModBlockLootTables extends BlockLootTables
         registerLootTable(ModBlocks.SALT_ORE.get(), (ore) -> {
             return droppingItemWithFortune(ore, ModItems.SALT.get());
         });
-        registerLootTable(ModBlocks.UNPROCESSED_OIL_ORE.get(), (ore) -> {
-            return droppingItemWithFortune(ore, ModItems.OIL.get());
-        });
 
         // BLOCKS
         registerDropSelfLootTable(ModBlocks.AMETHYST_BLOCK.get());
@@ -39,10 +36,12 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(ModBlocks.ALUMINIUM_ORE.get());
         registerDropSelfLootTable(ModBlocks.ALUMINIUM_BLOCK.get());
         registerDropSelfLootTable(ModBlocks.BROWN_ANT_NEST.get());
-        registerDropSelfLootTable(ModBlocks.RED_ANT_NEST.get());
         registerDropSelfLootTable(ModBlocks.RAINBOW_ANT_NEST.get());
+        registerDropSelfLootTable(ModBlocks.RED_ANT_NEST.get());
         registerDropSelfLootTable(ModBlocks.UNSTABLE_ANT_NEST.get());
         registerDropSelfLootTable(ModBlocks.TERMITE_NEST.get());
+        registerDropSelfLootTable(ModBlocks.RED_ANT_INFESTED_ORE.get());
+        registerDropSelfLootTable(ModBlocks.TERMITE_INFESTED_ORE.get());
     }
 
     @Override

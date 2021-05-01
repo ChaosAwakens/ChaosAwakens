@@ -30,6 +30,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore",() -> new Block(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore",() -> new Block(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
+
     // GEMSTONE BLOCKS
     public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), ModItemGroups.blocksItemGroup);
