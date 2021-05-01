@@ -18,15 +18,18 @@ public class TermiteInfestedOre extends OreBlock {
 
     private void spawnTermite(ServerWorld world, BlockPos pos) {
         TermiteEntity termiteentity = ModEntityTypes.TERMITE.get().create(world);
-        termiteentity.setLocationAndAngles((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
+        assert termiteentity != null;
+        termiteentity.setLocationAndAngles((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addEntity(termiteentity);
         termiteentity.spawnExplosionParticle();
     }
 
     public void spawnAdditionalDrops(BlockState state, ServerWorld worldIn, BlockPos pos, ItemStack stack) {
         super.spawnAdditionalDrops(state, worldIn, pos, stack);
-        for (int index0 = 0; index0 < (int) (25); index0++) {
-            this.spawnTermite(worldIn, pos);
+        if (!worldIn.isRemote && worldIn.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
+            for (int index0 = 0; index0 < (25); index0++) {
+                this.spawnTermite(worldIn, pos);
+            }
         }
     }
 }
