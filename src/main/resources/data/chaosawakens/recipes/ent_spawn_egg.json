@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "chaosawakens:fossilised_ent"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:ent_spawn_egg",
+    "count": 1
+  }
+}

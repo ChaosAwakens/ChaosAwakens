@@ -8,13 +8,17 @@ import io.github.chaosawakens.registry.ModAttributes;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModEntityTypes;
 import io.github.chaosawakens.registry.ModItems;
+import io.github.chaosawakens.worldgen.ModBiomeFeatures;
 import io.github.chaosawakens.worldgen.OreGeneration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -78,6 +82,11 @@ public class ChaosAwakens {
             GlobalEntityTypeAttributes.put(ModEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
         });
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void biomeLoadingAdd(final BiomeLoadingEvent event) {
+        ModBiomeFeatures.addMobSpawns(event);
     }
 
     private void gatherData(final GatherDataEvent event) {
