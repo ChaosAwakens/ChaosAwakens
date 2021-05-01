@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ThrowRiderAttackGoal extends MeleeAttackGoal {
@@ -27,7 +26,7 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 
     @Override
     public void startExecuting() {
-        this.throwTimer = 30 + attacker.getRNG().nextInt(40); // Wait 1.5 to 3.5 seconds before we throw the target
+        this.throwTimer = 30 + attacker.getRNG().nextInt(40); // Wait 1.5 to 2.5 seconds before we throw the target
         timeout = 100 + attacker.getRNG().nextInt(40); // Lets only try to chase for around 5-6 seconds
         super.startExecuting();
     }
@@ -41,7 +40,6 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
             super.tick();
     }
 
-    // Vanilla Copy with edits
     @Override
     protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_) {
         double d0 = this.getAttackReachSqr(p_190102_1_);
@@ -59,17 +57,14 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
     public void resetTask() {
         if (!attacker.getPassengers().isEmpty()) {
             Entity rider = attacker.getPassengers().get(0);
-            rider.stopRiding();
+            attacker.removePassengers();
 
-            Vector3d throwVec = attacker.getLookVec().scale(3);
-            throwVec = new Vector3d(throwVec.x, 1.9, throwVec.z);
-
-            rider.addVelocity(throwVec.x, throwVec.y, throwVec.z);
+            rider.addVelocity(3, 5, 3);
 
             if (rider instanceof ServerPlayerEntity) {
                 ServerPlayerEntity player = (ServerPlayerEntity) rider;
 
-                PacketThrowPlayer message = new PacketThrowPlayer((float) throwVec.x, (float) throwVec.y, (float) throwVec.z);
+                PacketThrowPlayer message = new PacketThrowPlayer(3, 5, 3);
                 PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
             }
         }

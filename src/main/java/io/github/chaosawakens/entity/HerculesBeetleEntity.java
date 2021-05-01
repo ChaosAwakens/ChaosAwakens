@@ -48,7 +48,7 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(5, new ThrowRiderAttackGoal(this, 1.0F, false) {
+        this.goalSelector.addGoal(5, new ThrowRiderAttackGoal(this, 0.125F, false) {
             @Override
             protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_) {
                 super.checkAndPerformAttack(p_190102_1_, p_190102_2_);
