@@ -1,7 +1,6 @@
 package io.github.chaosawakens.entity;
 
 import io.github.chaosawakens.entity.ai.ThrowRiderAttackGoal;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;

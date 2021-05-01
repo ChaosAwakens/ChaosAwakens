@@ -5,7 +5,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -19,21 +21,21 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class BrownAntEntity extends AnimalEntity implements IAnimatable {
+public class RubyBugEntity extends AnimalEntity implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
 
-    public BrownAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+    public RubyBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
         this.ignoreFrustumCheck = true;
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if(event.isMoving()== true){
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
-			return PlayState.CONTINUE;
-		}
+        if(event.isMoving()== true){
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walking_animation", true));
+            return PlayState.CONTINUE;
+        }
         if (event.isMoving() == false) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.idle_animation", true));
             return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
@@ -56,7 +58,7 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<BrownAntEntity>(this, "antcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<RubyBugEntity>(this, "rubybugcontroller", 0, this::predicate));
     }
 
     @Override
