@@ -51,9 +51,24 @@ public class OreGeneration {
                 .count(8))); //count per chunk
 
         overworldOres.add(register("salt_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
-                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.ALUMINIUM_ORE.get().getDefaultState(), 12)) //vein Size
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.SALT_ORE.get().getDefaultState(), 12)) //vein Size
                 .range(128).square() //maximum height
                 .count(28))); //count per chunk
+
+        overworldOres.add(register("fossilised_ent", Feature.ORE.withConfiguration(new OreFeatureConfig(
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.FOSSILISED_ENT.get().getDefaultState(), 1)) //vein Size
+                .range(128).square() //maximum height
+                .count(12))); //count per chunk
+
+        overworldOres.add(register("fossilised_hercules_beetle", Feature.ORE.withConfiguration(new OreFeatureConfig(
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.FOSSILISED_HERCULES_BEETLE.get().getDefaultState(), 1)) //vein Size
+                .range(128).square() //maximum height
+                .count(12))); //count per chunk
+
+        overworldOres.add(register("fossilised_ruby_bug", Feature.ORE.withConfiguration(new OreFeatureConfig(
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.FOSSILISED_RUBY_BUG.get().getDefaultState(), 1)) //vein Size
+                .range(128).square() //maximum height
+                .count(12))); //count per chunk
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

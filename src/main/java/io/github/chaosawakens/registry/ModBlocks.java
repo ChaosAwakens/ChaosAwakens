@@ -28,8 +28,14 @@ public class ModBlocks {
     public static final RegistryObject<Block> ALUMINIUM_ORE = registerBlock("aluminium_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> SALT_ORE = registerBlock("salt_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
 
+    // INFESTED ORES
     public static final RegistryObject<Block> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore",() -> new Block(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore",() -> new Block(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
+
+    // MOB ORES
+    public static final RegistryObject<Block> FOSSILISED_ENT = registerBlock("fossilised_ent",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> FOSSILISED_RUBY_BUG = registerBlock("fossilised_ruby_bug",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
 
     // GEMSTONE BLOCKS
     public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);

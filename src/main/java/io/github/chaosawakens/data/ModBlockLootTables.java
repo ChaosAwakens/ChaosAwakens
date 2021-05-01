@@ -42,6 +42,9 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(ModBlocks.TERMITE_NEST.get());
         registerDropSelfLootTable(ModBlocks.RED_ANT_INFESTED_ORE.get());
         registerDropSelfLootTable(ModBlocks.TERMITE_INFESTED_ORE.get());
+        registerDropSelfLootTable(ModBlocks.FOSSILISED_ENT.get());
+        registerDropSelfLootTable(ModBlocks.FOSSILISED_HERCULES_BEETLE.get());
+        registerDropSelfLootTable(ModBlocks.FOSSILISED_RUBY_BUG.get());
     }
 
     @Override

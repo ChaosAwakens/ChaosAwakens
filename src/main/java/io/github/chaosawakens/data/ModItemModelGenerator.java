@@ -59,6 +59,9 @@ public class ModItemModelGenerator extends ItemModelProvider {
         this.simpleWithExistingParent(ModBlocks.TITANIUM_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.URANIUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.URANIUM_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.FOSSILISED_ENT.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.FOSSILISED_HERCULES_BEETLE.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.FOSSILISED_RUBY_BUG.getId().toString().replaceFirst("chaosawakens:", ""));
     }
 
     private ModelBuilder<ItemModelBuilder> simpleWithExistingParent(String path)
