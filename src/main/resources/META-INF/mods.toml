@@ -9,13 +9,14 @@ modId="chaosawakens"
 version="${file.jarVersion}"
 displayName="Chaos Awakens"
 description='''A successor mod that brings OreSpawn content into newer Minecraft versions.'''
+itemIcon="chaosawakens:ultimate_pickaxe"
 
 [[dependencies.chaosawakens]]
-    modId="forge"
-    mandatory=true
-    versionRange="[36,)"
-    ordering="NONE"
-    side="BOTH"
+modId="forge"
+mandatory=true
+versionRange="[36,)"
+ordering="NONE"
+side="BOTH"
 
 [[dependencies.chaosawakens]]
 modId="minecraft"
@@ -25,8 +26,8 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.chaosawakens]]
-modId="minecraft"
+modId="geckolib3"
 mandatory=true
-versionRange="[1.16.5,1.17]"
+versionRange="[3.0,)"
 ordering="NONE"
 side="BOTH"

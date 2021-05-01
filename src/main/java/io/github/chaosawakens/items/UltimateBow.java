@@ -5,6 +5,7 @@ import net.minecraft.enchantment.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
@@ -63,13 +64,16 @@ public class UltimateBow extends BowItem implements IVanishable {
                         abstractarrowentity = (UltimateArrowEntity) customArrow(abstractarrowentity);
                         abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
                         abstractarrowentity.setIsCritical(true);
-                        abstractarrowentity.setDamage(abstractarrowentity.getDamage() + 1.5D);
+                        abstractarrowentity.setDamage(abstractarrowentity.getDamage() + 3D);
                         abstractarrowentity.setKnockbackStrength(2);
                         abstractarrowentity.setFire(300);
 
-                        stack.damageItem(1, playerentity, (player) -> {
-                            player.sendBreakAnimation(playerentity.getActiveHand());
-                        });
+                        if (!playerentity.isCreative()) {
+                            stack.damageItem(1, entityLiving, (entity) -> {
+                                entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                            });
+                        }
+
                         worldIn.addEntity(abstractarrowentity);
 
                         worldIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);

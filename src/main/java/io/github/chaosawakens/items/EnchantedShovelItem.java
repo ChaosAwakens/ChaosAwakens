@@ -9,12 +9,12 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EnchantedShovel extends ShovelItem {
+public class EnchantedShovelItem extends ShovelItem {
 
     private int[] enchantmentLevels;
     private Enchantment[] enchantmentIds;
 
-    public EnchantedShovel(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
+    public EnchantedShovelItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
         super(tier,attackDamageIn,attackSpeedIn,builderIn);
         enchantmentIds = enchants;
         enchantmentLevels = lvls;

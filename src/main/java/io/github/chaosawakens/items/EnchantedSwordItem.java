@@ -4,17 +4,18 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.world.World;
 
-public class EnchantedArmor extends ArmorItem {
+public class EnchantedSwordItem extends SwordItem {
 
     private int[] enchantmentLevels;
     private Enchantment[] enchantmentIds;
 
-    public EnchantedArmor(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, Enchantment[] enchants, int[] lvls) {
-        super(materialIn, slot, builderIn);
+    public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn);
         enchantmentIds = enchants;
         enchantmentLevels = lvls;
     }

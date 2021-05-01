@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 public class UltimateArrowEntityRender extends ArrowRenderer<UltimateArrowEntity> {
 
     private IRenderTypeBuffer renderTypeBuffer;
+    private UltimateArrowEntity entity;
     private static final ResourceLocation ARROW_TEXTURE = new ResourceLocation("textures/entity/arrow.png");
 
     public UltimateArrowEntityRender(EntityRendererManager renderManager) {

@@ -6,16 +6,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.AxeItem;
+import net.minecraft.item.SwordItem;
 import net.minecraft.world.World;
 
-public class EnchantedAxe extends AxeItem {
+public class EnchantedScytheItem extends ScytheItem {
 
     private int[] enchantmentLevels;
     private Enchantment[] enchantmentIds;
 
-    public EnchantedAxe(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
-        super(tier,attackDamageIn,attackSpeedIn,builderIn);
+    public EnchantedScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn);
         enchantmentIds = enchants;
         enchantmentLevels = lvls;
     }

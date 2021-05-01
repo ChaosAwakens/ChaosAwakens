@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "chaosawakens:block/crystal_log",
+    "side": "chaosawakens:block/crystal_log"
+  }
+}

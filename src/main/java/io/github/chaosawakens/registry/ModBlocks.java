@@ -1,13 +1,13 @@
 package io.github.chaosawakens.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.blocks.GateBlock;
-import io.github.chaosawakens.blocks.RedAntInfestedOre;
-import io.github.chaosawakens.blocks.TermiteInfestedOre;
+import io.github.chaosawakens.blocks.*;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -50,16 +50,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
 
-    // ANT NESTS
-    public static final RegistryObject<Block> BROWN_ANT_NEST = registerBlock("brown_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<Block> TERMITE_NEST = registerBlock("termite_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setOpaque(ModBlocks::nonSolid)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> BROWN_ANT_NEST = registerBlock("brown_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setOpaque(ModBlocks::nonSolid)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setOpaque(ModBlocks::nonSolid)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setOpaque(ModBlocks::nonSolid)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> TERMITE_NEST = registerBlock("termite_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setOpaque(ModBlocks::nonSolid)), ModItemGroups.blocksItemGroup);
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
         RegistryObject<B> block = ModBlocks.BLOCKS.register(name, supplier);
         ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup)));
         return block;
+    }
+
+    private static boolean nonSolid(BlockState state, IBlockReader reader, BlockPos pos) {
+        return false;
     }
 }
