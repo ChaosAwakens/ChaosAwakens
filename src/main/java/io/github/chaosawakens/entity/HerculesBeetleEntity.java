@@ -80,14 +80,6 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
     }
 
     @Override
-    public void addPassenger(Entity passenger)
-    {
-        this.setPosition(this.getPosX() + 3, this.getPosY(), this.getPosZ() + 1);
-        this.rotationYaw = this.getRotationYawHead();
-        this.rotationPitch = this.getPitch(10);
-    }
-
-    @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<HerculesBeetleEntity>(this, "herculesbeetlecontroller", 0, this::predicate));
     }

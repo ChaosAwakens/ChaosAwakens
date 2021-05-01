@@ -44,7 +44,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'chaosawakens', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'chaosawakens', '--all', '--output', file('src/main/generated/'), '--existing', file('src/main/resources/')
             mods {
                 chaosawakens {
                     source sourceSets.main
@@ -54,7 +54,9 @@ minecraft {
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets {
+    main.resources.srcDirs += 'src/main/generated'
+}
 
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"

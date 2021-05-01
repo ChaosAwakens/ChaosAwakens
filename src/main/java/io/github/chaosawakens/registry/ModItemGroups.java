@@ -35,7 +35,7 @@ public class ModItemGroups {
 		
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(Items.BAT_SPAWN_EGG);
+			return new ItemStack(ModItems.RAINBOW_ANT_SPAWN_EGG.get());
 		}
 	};
 }

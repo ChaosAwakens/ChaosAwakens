@@ -101,7 +101,6 @@ public class ModItems {
     public static final RegistryObject<Item> URANIUM_INGOT = ITEMS.register("uranium_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> URANIUM_NUGGET = ITEMS.register("uranium_nugget", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> OIL = ITEMS.register("oil", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 
     // TOOLS
     // Ultimate
@@ -204,12 +203,13 @@ public class ModItems {
     public static final RegistryObject<EnchantedArmor> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new EnchantedArmor(ArmorMaterials.LAPIS, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
     public static final RegistryObject<EnchantedArmor> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new EnchantedArmor(ArmorMaterials.LAPIS, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
 
-    // SPAWN EGGS - all greyed out due to a crash, will probably create a custom item for this kind of stuff
-    //public static final RegistryObject<SpawnEggItem> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.ENT.get(),16777215,16777215,new Item.Properties().group(ModItemGroups.eggsItemGroup)));
-    //public static final RegistryObject<SpawnEggItem> RED_ANT_SPAWN_EGG = ITEMS.register("red_ant_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.RED_ANT.get(),16777215,16777215,new Item.Properties().group(ModItemGroups.eggsItemGroup)));
-    //public static final RegistryObject<SpawnEggItem> BROWN_ANT_SPAWN_EGG = ITEMS.register("brown_ant_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.BROWN_ANT.get(), 16777215,16777215,new Item.Properties().group(ModItemGroups.eggsItemGroup)));
-    //public static final RegistryObject<SpawnEggItem> RAINBOW_ANT_SPAWN_EGG = ITEMS.register("rainbow_ant_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.RAINBOW_ANT.get(), 16777215,16777215,new Item.Properties().group(ModItemGroups.eggsItemGroup)));
-    //public static final RegistryObject<SpawnEggItem> UNSTABLE_ANT_SPAWN_EGG = ITEMS.register("unstable_ant_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.UNSTABLE_ANT.get(), 16777215,16777215,new Item.Properties().group(ModItemGroups.eggsItemGroup)));
-    //public static final RegistryObject<SpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.TERMITE.get(), 16777215,16777215,new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    // SPAWN EGGS
+    public static final RegistryObject<ModSpawnEggItem> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.ENT, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> RED_ANT_SPAWN_EGG = ITEMS.register("red_ant_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.RED_ANT, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> BROWN_ANT_SPAWN_EGG = ITEMS.register("brown_ant_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.BROWN_ANT, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> RAINBOW_ANT_SPAWN_EGG = ITEMS.register("rainbow_ant_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.RAINBOW_ANT, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> UNSTABLE_ANT_SPAWN_EGG = ITEMS.register("unstable_ant_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.UNSTABLE_ANT, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.TERMITE, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.HERCULES_BEETLE, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
 
 }
