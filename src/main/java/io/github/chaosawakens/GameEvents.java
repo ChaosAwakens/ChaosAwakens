@@ -1,9 +1,11 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.items.ScytheItem;
 import io.github.chaosawakens.items.ThunderStaffItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,11 +27,11 @@ public class GameEvents {
                 baseReach = 8.0;
             }
 
-            player.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).setBaseValue(baseReach);
+            player.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(baseReach);
             if (player.getHeldItemMainhand() != null) {
                 Item item = player.getHeldItemMainhand().getItem();
                 if (item instanceof ThunderStaffItem) {
-                    player.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).setBaseValue(baseReach + 20.0);
+                    player.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(baseReach + 20.0);
                 }
             }
         }

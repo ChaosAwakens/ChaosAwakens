@@ -6,6 +6,7 @@ import io.github.chaosawakens.enums.ToolMaterials;
 import io.github.chaosawakens.items.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
@@ -49,29 +50,34 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_CORNDOG = ITEMS.register("cooked_corndog", () -> new Item(new Item.Properties().food(ModItems.FOOD_COOKED_CORNDOG).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> BACON = ITEMS.register("bacon", () -> new Item(new Item.Properties().food(ModItems.FOOD_RAW_BACON).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> COOKED_BACON = ITEMS.register("cooked_bacon", () -> new Item(new Item.Properties().food(ModItems.FOOD_COOKED_BACON).group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> PEACOCK_LEG = ITEMS.register("peacock_leg", () -> new Item(new Item.Properties().food(ModItems.FOOD_PEACOCK_LEG).group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> COOKED_PEACOCK_LEG = ITEMS.register("cooked_peacock_leg", () -> new Item(new Item.Properties().food(ModItems.FOOD_COOKED_PEACOCK_LEG).group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> CRAB_MEAT = ITEMS.register("crab_meat", () -> new Item(new Item.Properties().food(ModItems.FOOD_CRAB_MEAT).group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> COOKED_CRAB_MEAT = ITEMS.register("cooked_crab_meat", () -> new Item(new Item.Properties().food(ModItems.FOOD_COOKED_CRAB_MEAT).group(ModItemGroups.itemsItemGroup)));
+
     public static final RegistryObject<Item> CORN = ITEMS.register("corn", () -> new Item(new Item.Properties().food(ModItems.FOOD_CORN).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato", () -> new Item(new Item.Properties().food(ModItems.FOOD_TOMATO).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () -> new Item(new Item.Properties().food(ModItems.FOOD_STRAWBERRY).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> PEACH = ITEMS.register("peach", () -> new Item(new Item.Properties().food(ModItems.FOOD_PEACH).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> RADISH = ITEMS.register("radish", () -> new Item(new Item.Properties().food(ModItems.FOOD_RADISH).group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> RADISH_STEW = ITEMS.register("radish_stew", () -> new SoupItem(new Item.Properties().food(ModItems.FOOD_RADISH_STEW).group(ModItemGroups.itemsItemGroup).maxStackSize(1)));
     public static final RegistryObject<Item> LETTUCE = ITEMS.register("lettuce", () -> new Item(new Item.Properties().food(ModItems.FOOD_LETTUCE).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().food(ModItems.FOOD_CHEESE).group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> CHERRIES = ITEMS.register("cherries", () -> new Item(new Item.Properties().food(ModItems.FOOD_CHERRIES).group(ModItemGroups.itemsItemGroup)));
+
+    public static final RegistryObject<Item> RADISH_STEW = ITEMS.register("radish_stew", () -> new SoupItem(new Item.Properties().food(ModItems.FOOD_RADISH_STEW).maxStackSize(1).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> GARDEN_SALAD = ITEMS.register("garden_salad", () -> new SoupItem(new Item.Properties().food(ModItems.FOOD_GARDEN_SALAD).maxStackSize(1).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> BLT = ITEMS.register("blt", () -> new Item(new Item.Properties().food(ModItems.FOOD_BLT).group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> PEACOCK_LEG = ITEMS.register("peacock_leg", () -> new Item(new Item.Properties().food(ModItems.FOOD_PEACOCK_LEG).group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> COOKED_PEACOCK_LEG = ITEMS.register("cooked_peacock_leg", () -> new Item(new Item.Properties().food(ModItems.FOOD_COOKED_PEACOCK_LEG).group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> SEAFOOD_PATTY = ITEMS.register("seafood_patty", () -> new Item(new Item.Properties().food(ModItems.FOOD_SEAFOOD_PATTY).group(ModItemGroups.itemsItemGroup)));
 
     public static final RegistryObject<Item> GREEN_FISH = ITEMS.register("green_fish", () -> new Item(new Item.Properties().food(Foods.COD).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> ROCK_FISH = ITEMS.register("rock_fish", () -> new Item(new Item.Properties().food(Foods.COD).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> WOOD_FISH = ITEMS.register("wood_fish", () -> new Item(new Item.Properties().food(Foods.COD).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> SPARK_FISH = ITEMS.register("spark_fish", () -> new Item(new Item.Properties().food(ModItems.FOOD_SPARK_FISH).isImmuneToFire().group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> LAVA_EEL = ITEMS.register("lava_eel", () -> new Item(new Item.Properties().isImmuneToFire().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> LAVA_EEL = ITEMS.register("lava_eel", () -> new Item(new Item.Properties().food(ModItems.FOOD_LAVA_EEL).isImmuneToFire().group(ModItemGroups.itemsItemGroup)));
 
     public static final RegistryObject<Item> BUTTER = ITEMS.register("butter", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 
     public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> CHERRIES = ITEMS.register("cherries", () -> new Item(new Item.Properties().food(ModItems.FOOD_CHERRIES).group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> CHERRY_SEEDS = ITEMS.register("cherry_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> APPLE_SEEDS = ITEMS.register("apple_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
@@ -79,10 +85,6 @@ public class ModItems {
     public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
-
-    public static final RegistryObject<Item> CRAB_MEAT = ITEMS.register("crab_meat", () -> new Item(new Item.Properties().food(ModItems.FOOD_CRAB_MEAT).group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> COOKED_CRAB_MEAT = ITEMS.register("cooked_crab_meat", () -> new Item(new Item.Properties().food(ModItems.FOOD_COOKED_CRAB_MEAT).group(ModItemGroups.itemsItemGroup)));
-    public static final RegistryObject<Item> SEAFOOD_PATTY = ITEMS.register("seafood_patty", () -> new Item(new Item.Properties().food(ModItems.FOOD_COOKED_CRAB_MEAT).group(ModItemGroups.itemsItemGroup)));
 
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 
@@ -146,6 +148,7 @@ public class ModItems {
     public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<EnchantedScythe> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScythe(ToolMaterials.TOOL_ULTIMATE, -8, -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[]{Enchantments.UNBREAKING,Enchantments.SWEEPING},new int[]{4,4}));
 
 	//Optimised Tools
     public static final RegistryObject<ShovelItem> OPTIMISED_SHOVEL = ITEMS.register("optimised_shovel", () -> new ShovelItem(ToolMaterials.TOOL_OPTIMISED, 1.5F, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
@@ -211,5 +214,9 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEggItem> UNSTABLE_ANT_SPAWN_EGG = ITEMS.register("unstable_ant_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.UNSTABLE_ANT, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.TERMITE, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.HERCULES_BEETLE, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
-
+    public static final RegistryObject<ModSpawnEggItem> RUBY_BUG_SPAWN_EGG = ITEMS.register("ruby_bug_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.RUBY_BUG, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> APPLE_COW_SPAWN_EGG = ITEMS.register("apple_cow_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.APPLE_COW, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("golden_apple_cow_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.GOLDEN_APPLE_COW, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xffffff, 0xe38a1d, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
 }

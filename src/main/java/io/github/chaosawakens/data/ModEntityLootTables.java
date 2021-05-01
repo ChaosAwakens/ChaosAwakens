@@ -5,7 +5,6 @@ import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
-import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
@@ -25,25 +24,50 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
 
     @Override
     protected void addTables() {
-        registerLootTable(ModEntityTypes.ENT.get(),
+        registerLootTable(ModEntityTypes.RUBY_BUG.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
-                                .addEntry(ItemLootEntry.builder(Items.OAK_LOG)
-                                        .acceptFunction(SetCount.builder(RandomValueRange.of(18.0F, 24.0F)))
-                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 3.0F)))))
+                                .addEntry(ItemLootEntry.builder(ModItems.RUBY.get())
+                                        .acceptCondition(RandomChance.builder(0.1F)))));
+        registerLootTable(ModEntityTypes.APPLE_COW.get(),
+                LootTable.builder()
                         .addLootPool(LootPool.builder()
-                                .rolls(ConstantRange.of(3))
-                                .addEntry(ItemLootEntry.builder(Items.BROWN_MUSHROOM)
-                                        .acceptCondition(RandomChance.builder(0.5F))))
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.BEEF)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 3.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
                         .addLootPool(LootPool.builder()
-                                .rolls(ConstantRange.of(3))
-                                .addEntry(ItemLootEntry.builder(Items.RED_MUSHROOM)
-                                        .acceptCondition(RandomChance.builder(0.5F))))
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.LEATHER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 2.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
                         .addLootPool(LootPool.builder()
-                                .rolls(ConstantRange.of(2))
-                                .addEntry(ItemLootEntry.builder(Items.DIAMOND)
-                                        .acceptCondition(RandomChance.builder(0.85F)))));
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.APPLE)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F))))));
+        registerLootTable(ModEntityTypes.GOLDEN_APPLE_COW.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.BEEF)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 3.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.LEATHER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 2.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.APPLE)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.GOLDEN_APPLE)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F))))));
     }
 
     public LootTable.Builder emptyLootTable() {
