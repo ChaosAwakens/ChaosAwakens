@@ -1,5 +1,6 @@
 package io.github.chaosawakens.worldgen;
 
+import com.mojang.serialization.Codec;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModBlocks;
 import net.minecraft.block.Blocks;
@@ -11,6 +12,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
+import net.minecraft.world.gen.feature.template.RandomBlockMatchRuleTest;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.placement.RangeBiasedPlacement;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -26,9 +30,9 @@ public class OreGeneration {
 
     public static void registerOres() {
         overworldOres.add(register("ruby_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
-                new BlockMatchRuleTest(Blocks.LAVA), ModBlocks.RUBY_ORE.get().getDefaultState(), 3)) //vein Size
+                new RandomBlockMatchRuleTest(Blocks.LAVA, 0.75f), ModBlocks.RUBY_ORE.get().getDefaultState(), 4)) //vein Size
                 .range(36).square() //maximum height
-                .count(3))); //count per chunk
+                .count(4))); //count per chunk
 
         overworldOres.add(register("amethyst_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.AMETHYST_ORE.get().getDefaultState(), 4)) //vein Size
@@ -38,12 +42,12 @@ public class OreGeneration {
         overworldOres.add(register("uranium_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.URANIUM_ORE.get().getDefaultState(), 3)) //vein Size
                 .range(24).square() //maximum height
-                .count(1))); //count per chunk
+                .count(2))); //count per chunk
 
         overworldOres.add(register("titanium_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.TITANIUM_ORE.get().getDefaultState(), 3)) //vein Size
                 .range(24).square() //maximum height
-                .count(1))); //count per chunk
+                .count(2))); //count per chunk
 
         overworldOres.add(register("aluminium_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.ALUMINIUM_ORE.get().getDefaultState(), 5)) //vein Size
@@ -51,9 +55,24 @@ public class OreGeneration {
                 .count(8))); //count per chunk
 
         overworldOres.add(register("salt_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(
-                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.ALUMINIUM_ORE.get().getDefaultState(), 12)) //vein Size
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.SALT_ORE.get().getDefaultState(), 12)) //vein Size
                 .range(128).square() //maximum height
                 .count(28))); //count per chunk
+
+        overworldOres.add(register("fossilised_ent", Feature.ORE.withConfiguration(new OreFeatureConfig(
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.FOSSILISED_ENT.get().getDefaultState(), 3)) //vein Size
+                .range(128).square() //maximum height
+                .count(24))); //count per chunk
+
+        overworldOres.add(register("fossilised_hercules_beetle", Feature.ORE.withConfiguration(new OreFeatureConfig(
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.FOSSILISED_HERCULES_BEETLE.get().getDefaultState(), 3)) //vein Size
+                .range(128).square() //maximum height
+                .count(24))); //count per chunk
+
+        overworldOres.add(register("fossilised_ruby_bug", Feature.ORE.withConfiguration(new OreFeatureConfig(
+                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.FOSSILISED_RUBY_BUG.get().getDefaultState(), 3)) //vein Size
+                .range(128).square() //maximum height
+                .count(24))); //count per chunk
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

@@ -4,6 +4,9 @@ import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.item.Items;
+import net.minecraft.loot.LootTable;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.RegistryObject;
 
 public class ModBlockLootTables extends BlockLootTables
@@ -40,8 +43,11 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(ModBlocks.RED_ANT_NEST.get());
         registerDropSelfLootTable(ModBlocks.UNSTABLE_ANT_NEST.get());
         registerDropSelfLootTable(ModBlocks.TERMITE_NEST.get());
-        registerDropSelfLootTable(ModBlocks.RED_ANT_INFESTED_ORE.get());
-        registerDropSelfLootTable(ModBlocks.TERMITE_INFESTED_ORE.get());
+        registerDropSelfLootTable(ModBlocks.FOSSILISED_ENT.get());
+        registerDropSelfLootTable(ModBlocks.FOSSILISED_HERCULES_BEETLE.get());
+        registerDropSelfLootTable(ModBlocks.FOSSILISED_RUBY_BUG.get());
+        registerDropSelfLootTable(ModBlocks.GATE_BLOCK.get());
+        registerDropSelfLootTable(ModBlocks.ENT_DUNGEON_WOOD.get());
     }
 
     @Override

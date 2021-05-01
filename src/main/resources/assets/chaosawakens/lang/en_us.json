@@ -102,6 +102,13 @@
 	"item.chaosawakens.experience_leggings": "Experience Leggings",
 	"item.chaosawakens.experience_boots": "Experience Boots",
 
+	"block.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
+	"block.chaosawakens.termite_infested_ore": "Termite Infested Ore",
+
+	"block.chaosawakens.fossilised_ent": "Fossilised Ent",
+	"block.chaosawakens.fossilised_hercules_beetle": "Fossilised Hercules Beetle",
+	"block.chaosawakens.fossilised_ruby_bug": "Fossilised Ruby Bug",
+
 	"block.chaosawakens.ruby_ore": "Ruby Ore",
 	"block.chaosawakens.ruby_block": "Block of Ruby",
 	"item.chaosawakens.ruby": "Ruby",
@@ -188,6 +195,12 @@
 
 	"item.chaosawakens.optimised_shovel": "Optimised Shovel",
 	"item.chaosawakens.optimised_pickaxe": "Optimised Pickaxe",
+
+	"block.chaosawakens.gate_block": "Gate Block",
+	"block.chaosawakens.druid_keyhole": "Druid Keyhole",
+	"block.chaosawakens.ent_dungeon_wood": "Ent Dungeon Wood",
+	"block.chaosawakens.ent_dungeon_wood_stairs": "Ent Dungeon Wood Stairs",
+	"block.chaosawakens.ent_dungeon_wood_slab": "Ent Dungeon Wood Slab",
 
 	"item.chaosawakens.thunder_staff": "Thunder Staff"
 }

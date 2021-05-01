@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:termite_infested_ore"
+          "name": "chaosawakens:fossilised_ent"
         }
       ],
       "conditions": [
