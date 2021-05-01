@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:red_ant_infested_ore"
+          "name": "chaosawakens:gate_block"
         }
       ],
       "conditions": [

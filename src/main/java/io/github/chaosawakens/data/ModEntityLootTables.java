@@ -70,10 +70,6 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
                                         .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F))))));
     }
 
-    public LootTable.Builder emptyLootTable() {
-        return LootTable.builder();
-    }
-
     public LootTable.Builder fromEntityLootTable(EntityType<?> parent) {
         return LootTable.builder()
                 .addLootPool(LootPool.builder()

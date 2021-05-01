@@ -1,11 +1,10 @@
 package io.github.chaosawakens.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.blocks.GateBlock;
 import io.github.chaosawakens.blocks.RedAntInfestedOre;
 import io.github.chaosawakens.blocks.TermiteInfestedOre;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -21,6 +20,10 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
 
+    // ENT DUNGEON BLOCKS
+    public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block",() -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> ENT_DUNGEON_WOOD = registerBlock("ent_dungeon_wood",() -> new Block(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), ModItemGroups.blocksItemGroup);
+
     // GEMSTONE ORES
     public static final RegistryObject<Block> AMETHYST_ORE = registerBlock("amethyst_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> RUBY_ORE = registerBlock("ruby_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(3)), ModItemGroups.blocksItemGroup);
@@ -31,8 +34,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> SALT_ORE = registerBlock("salt_ore",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
 
     // INFESTED ORES
-    public static final RegistryObject<RedAntInfestedOre> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore",() -> new RedAntInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<TermiteInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore",() -> new TermiteInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).harvestLevel(0)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<RedAntInfestedOre> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore",() -> new RedAntInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<TermiteInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore",() -> new TermiteInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), ModItemGroups.blocksItemGroup);
 
     // MOB ORES
     public static final RegistryObject<Block> FOSSILISED_ENT = registerBlock("fossilised_ent",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
@@ -47,9 +50,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);
 
-    public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setOpaque(AbstractBlock.AbstractBlockState::isOpaqueCube)), ModItemGroups.blocksItemGroup);
+    // ANT NESTS
     public static final RegistryObject<Block> BROWN_ANT_NEST = registerBlock("brown_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> TERMITE_NEST = registerBlock("termite_nest",() -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), ModItemGroups.blocksItemGroup);
 

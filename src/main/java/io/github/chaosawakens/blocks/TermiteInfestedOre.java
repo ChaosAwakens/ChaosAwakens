@@ -25,9 +25,8 @@ public class TermiteInfestedOre extends OreBlock {
 
     public void spawnAdditionalDrops(BlockState state, ServerWorld worldIn, BlockPos pos, ItemStack stack) {
         super.spawnAdditionalDrops(state, worldIn, pos, stack);
-        if (worldIn.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
+        for (int index0 = 0; index0 < (int) (25); index0++) {
             this.spawnTermite(worldIn, pos);
         }
-
     }
 }

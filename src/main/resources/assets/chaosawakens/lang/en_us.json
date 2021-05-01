@@ -196,5 +196,11 @@
 	"item.chaosawakens.optimised_shovel": "Optimised Shovel",
 	"item.chaosawakens.optimised_pickaxe": "Optimised Pickaxe",
 
+	"block.chaosawakens.gate_block": "Gate Block",
+	"block.chaosawakens.druid_keyhole": "Druid Keyhole",
+	"block.chaosawakens.ent_dungeon_wood": "Ent Dungeon Wood",
+	"block.chaosawakens.ent_dungeon_wood_stairs": "Ent Dungeon Wood Stairs",
+	"block.chaosawakens.ent_dungeon_wood_slab": "Ent Dungeon Wood Slab",
+
 	"item.chaosawakens.thunder_staff": "Thunder Staff"
 }
