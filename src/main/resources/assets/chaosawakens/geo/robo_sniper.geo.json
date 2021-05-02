@@ -1,0 +1,116 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.Robo_Sniper",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "robo_gunner",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "wheel_connectors",
+					"parent": "robo_gunner",
+					"pivot": [-5.29167, 3.57292, 0.5],
+					"cubes": [
+						{"origin": [-7.25, 2.6875, -0.5], "size": [5, 2, 2], "inflate": 0.9, "uv": [0, 8]},
+						{"origin": [-7.25, 5.375, -0.5], "size": [4, 1, 2], "inflate": 0.5, "uv": [42, 42]},
+						{"origin": [-7.25, 2.625, -2.25], "size": [4, 1, 2], "inflate": 0.5, "pivot": [-4.25, 3.125, -1.75], "rotation": [90, 0, 0], "uv": [0, 42]},
+						{"origin": [-7.25, 2.625, 1.75], "size": [4, 1, 2], "inflate": 0.5, "pivot": [-4.25, 3.125, 2.25], "rotation": [90, 0, 0], "uv": [36, 15]},
+						{"origin": [-7.25, 1.375, -0.5], "size": [4, 1, 2], "inflate": 0.5, "uv": [35, 0]}
+					]
+				},
+				{
+					"name": "wheel_1",
+					"parent": "wheel_connectors",
+					"pivot": [-5.25, 3.6875, 0.5],
+					"cubes": [
+						{"origin": [-8.25, 2.1875, -3.12132], "size": [6, 3, 1], "inflate": -0.01, "pivot": [-5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [0, 38]},
+						{"origin": [-8.25, 2.1875, -3.12132], "size": [6, 3, 1], "uv": [37, 11]},
+						{"origin": [-8.25, 2.1875, 3.12132], "size": [6, 3, 1], "inflate": -0.01, "pivot": [-5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [37, 7]},
+						{"origin": [-8.25, 2.1875, 3.12132], "size": [6, 3, 1], "uv": [37, 3]},
+						{"origin": [-8.25, 0.06618, -1], "size": [6, 1, 3], "inflate": -0.01, "pivot": [-5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [32, 28]},
+						{"origin": [-8.25, 0.06618, -1], "size": [6, 1, 3], "uv": [30, 22]},
+						{"origin": [-8.25, 6.30882, -1], "size": [6, 1, 3], "inflate": -0.01, "pivot": [-5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [30, 18]},
+						{"origin": [-8.25, 6.30882, -1], "size": [6, 1, 3], "uv": [0, 30]}
+					]
+				},
+				{
+					"name": "wheel_connectors2",
+					"parent": "robo_gunner",
+					"pivot": [5.5, 4, 0],
+					"cubes": [
+						{"origin": [2.25, 2.6875, -0.5], "size": [5, 2, 2], "inflate": 0.9, "uv": [0, 8], "mirror": true},
+						{"origin": [3.25, 5.375, -0.5], "size": [4, 1, 2], "inflate": 0.5, "uv": [42, 42], "mirror": true},
+						{"origin": [3.25, 2.625, -2.25], "size": [4, 1, 2], "inflate": 0.5, "pivot": [4.25, 3.125, -1.75], "rotation": [90, 0, 0], "uv": [0, 42], "mirror": true},
+						{"origin": [3.25, 2.625, 1.75], "size": [4, 1, 2], "inflate": 0.5, "pivot": [4.25, 3.125, 2.25], "rotation": [90, 0, 0], "uv": [36, 15], "mirror": true},
+						{"origin": [3.25, 1.375, -0.5], "size": [4, 1, 2], "inflate": 0.5, "uv": [35, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "wheel_2",
+					"parent": "wheel_connectors2",
+					"pivot": [5.25, 3.6875, 0.5],
+					"cubes": [
+						{"origin": [2.25, 2.1875, -3.12132], "size": [6, 3, 1], "inflate": -0.01, "pivot": [5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [32, 36]},
+						{"origin": [2.25, 2.1875, -3.12132], "size": [6, 3, 1], "uv": [0, 34]},
+						{"origin": [2.25, 2.1875, 3.12132], "size": [6, 3, 1], "inflate": -0.01, "pivot": [5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [32, 32]},
+						{"origin": [2.25, 2.1875, 3.12132], "size": [6, 3, 1], "uv": [0, 12]},
+						{"origin": [2.25, 0.06618, -1], "size": [6, 1, 3], "inflate": -0.01, "pivot": [5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [20, 12]},
+						{"origin": [2.25, 0.06618, -1], "size": [6, 1, 3], "uv": [20, 8]},
+						{"origin": [2.25, 6.30882, -1], "size": [6, 1, 3], "inflate": -0.01, "pivot": [5.25, 3.6875, 0.5], "rotation": [-45, 0, 0], "uv": [20, 4]},
+						{"origin": [2.25, 6.30882, -1], "size": [6, 1, 3], "uv": [20, 0]}
+					]
+				},
+				{
+					"name": "main_body",
+					"parent": "robo_gunner",
+					"pivot": [0, 2.91667, 0.33333],
+					"cubes": [
+						{"origin": [-2, 2.75, -0.5], "size": [4, 2, 2], "inflate": 1, "uv": [32, 40]},
+						{"origin": [-1, 4, -0.5], "size": [2, 2, 2], "inflate": 0.5, "uv": [16, 18]}
+					]
+				},
+				{
+					"name": "cannon_connector",
+					"parent": "main_body",
+					"pivot": [0, 6.75, 0.25],
+					"cubes": [
+						{"origin": [-1, 6, -0.5], "size": [2, 15, 2], "inflate": -0.3, "uv": [24, 28]},
+						{"origin": [-1, 16.8125, -2.793], "size": [2, 6, 2], "inflate": -0.6, "pivot": [0, 19.8125, -1.793], "rotation": [51, 0, 0], "uv": [0, 18]},
+						{"origin": [-1, 15.1875, -2.793], "size": [2, 9, 2], "inflate": -0.6, "pivot": [0, 18.1875, -1.793], "rotation": [49, 0, 0], "uv": [16, 32]}
+					]
+				},
+				{
+					"name": "cannon",
+					"parent": "cannon_connector",
+					"pivot": [0, 20.375, 0.5],
+					"rotation": [0, 180, 0],
+					"cubes": [
+						{"origin": [-1, 20.375, -0.5], "size": [2, 1, 2], "inflate": 0.5, "uv": [16, 22]},
+						{"origin": [-0.85, 20.375, -5.5], "size": [1.6, 1, 4], "inflate": 0.5, "uv": [10, 39]},
+						{"origin": [-1.5, 21.375, -0.75], "size": [3, 2, 10], "inflate": 0.5, "uv": [0, 18]},
+						{"origin": [-1.5, 21.375, -5.75], "size": [3, 2, 8], "inflate": 0.77, "uv": [16, 18]}
+					]
+				},
+				{
+					"name": "cannon_segment",
+					"parent": "cannon",
+					"pivot": [0, 22.125, 0.5],
+					"cubes": [
+						{"origin": [-1, 22.125, -0.5], "size": [2, 2, 16], "uv": [0, 0]},
+						{"origin": [-1, 22.125, 14], "size": [2, 2, 6], "inflate": -0.3, "uv": [0, 0]},
+						{"origin": [-1, 22.125, 16.5], "size": [2, 2, 6], "uv": [0, 45]}
+					]
+				}
+			]
+		}
+	]
+}

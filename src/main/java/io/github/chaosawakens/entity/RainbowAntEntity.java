@@ -1,14 +1,15 @@
 package io.github.chaosawakens.entity;
 
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -50,10 +51,15 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 1)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 1.0D)
                 .createMutableAttribute(Attributes.ARMOR, 3)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+    }
+
+    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
+
+        return super.getEntityInteractionResult(playerIn, hand);
     }
 
     @Override

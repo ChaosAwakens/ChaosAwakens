@@ -12,6 +12,9 @@
 	"entity.chaosawakens.termite": "Termite",
 	"entity.chaosawakens.hercules_beetle": "Hercules Beetle",
 	"entity.chaosawakens.ruby_bug": "Ruby Bug",
+	"entity.chaosawakens.emerald_gator": "Emerald Gator",
+	"entity.chaosawakens.robo_sniper": "Robo Sniper",
+	"entity.chaosawakens.beaver": "Beaver",
 	"entity.chaosawakens.apple_cow": "Apple Cow",
 	"entity.chaosawakens.golden_apple_cow": "Golden Apple Cow",
 	"entity.chaosawakens.ultimate_arrow": "Ultimate Arrow",
@@ -24,6 +27,9 @@
 	"item.chaosawakens.termite_spawn_egg": "Termite Spawn Egg",
 	"item.chaosawakens.hercules_beetle_spawn_egg": "Hercules Beetle Spawn Egg",
 	"item.chaosawakens.ruby_bug_spawn_egg": "Ruby Bug Spawn Egg",
+	"item.chaosawakens.emerald_gator_spawn_egg": "Emerald Gator Spawn Egg",
+	"item.chaosawakens.robo_sniper_spawn_egg": "Robo Sniper Spawn Egg",
+	"item.chaosawakens.beaver_spawn_egg": "Beaver Spawn Egg",
 	"item.chaosawakens.apple_cow_spawn_egg": "Apple Cow Spawn Egg",
 	"item.chaosawakens.golden_apple_cow_spawn_egg": "Golden Apple Cow Spawn Egg",
 	"item.chaosawakens.iron_golem_spawn_egg": "Iron Golem Spawn Egg",
@@ -108,6 +114,7 @@
 	"block.chaosawakens.fossilised_ent": "Fossilised Ent",
 	"block.chaosawakens.fossilised_hercules_beetle": "Fossilised Hercules Beetle",
 	"block.chaosawakens.fossilised_ruby_bug": "Fossilised Ruby Bug",
+	"block.chaosawakens.fossilised_emerald_gator": "Fossilised Emerald Gator",
 
 	"block.chaosawakens.ruby_ore": "Ruby Ore",
 	"block.chaosawakens.ruby_block": "Block of Ruby",
@@ -192,9 +199,6 @@
 
 	"block.chaosawakens.red_ant_infected_ore": "Red Ant Infected Ore",
 	"block.chaosawakens.termite_infected_ore": "Termite Infected Ore",
-
-	"item.chaosawakens.optimised_shovel": "Optimised Shovel",
-	"item.chaosawakens.optimised_pickaxe": "Optimised Pickaxe",
 
 	"block.chaosawakens.gate_block": "Gate Block",
 	"block.chaosawakens.druid_keyhole": "Druid Keyhole",

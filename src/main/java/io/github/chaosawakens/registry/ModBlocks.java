@@ -41,6 +41,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> FOSSILISED_ENT = registerBlock("fossilised_ent",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<Block> FOSSILISED_RUBY_BUG = registerBlock("fossilised_ruby_bug",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<Block> FOSSILISED_EMERALD_GATOR = registerBlock("fossilised_emerald_gator",() -> new Block(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
 
     // GEMSTONE BLOCKS
     public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), ModItemGroups.blocksItemGroup);

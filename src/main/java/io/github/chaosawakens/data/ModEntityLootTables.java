@@ -30,6 +30,12 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(ModItems.RUBY.get())
                                         .acceptCondition(RandomChance.builder(0.1F)))));
+        registerLootTable(ModEntityTypes.EMERALD_GATOR.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.EMERALD)
+                                        .acceptCondition(RandomChance.builder(0.1F)))));
         registerLootTable(ModEntityTypes.APPLE_COW.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()

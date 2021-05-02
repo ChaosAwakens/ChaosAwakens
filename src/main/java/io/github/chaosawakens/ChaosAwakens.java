@@ -78,6 +78,9 @@ public class ChaosAwakens {
             GlobalEntityTypeAttributes.put(ModEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
         });
     }
 

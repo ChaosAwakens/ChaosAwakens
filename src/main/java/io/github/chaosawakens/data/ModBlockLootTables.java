@@ -46,6 +46,7 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(ModBlocks.FOSSILISED_ENT.get());
         registerDropSelfLootTable(ModBlocks.FOSSILISED_HERCULES_BEETLE.get());
         registerDropSelfLootTable(ModBlocks.FOSSILISED_RUBY_BUG.get());
+        registerDropSelfLootTable(ModBlocks.FOSSILISED_EMERALD_GATOR.get());
         registerDropSelfLootTable(ModBlocks.GATE_BLOCK.get());
         registerDropSelfLootTable(ModBlocks.ENT_DUNGEON_WOOD.get());
     }
