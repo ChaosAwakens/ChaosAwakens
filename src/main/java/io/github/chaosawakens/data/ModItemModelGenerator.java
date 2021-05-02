@@ -62,6 +62,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
         this.simpleWithExistingParent(ModBlocks.FOSSILISED_ENT.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.FOSSILISED_HERCULES_BEETLE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.FOSSILISED_RUBY_BUG.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.FOSSILISED_EMERALD_GATOR.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.GATE_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.ENT_DUNGEON_WOOD.getId().toString().replaceFirst("chaosawakens:", ""));
     }

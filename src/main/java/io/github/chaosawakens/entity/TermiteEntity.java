@@ -50,7 +50,7 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 5)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 2.0D)
                 .createMutableAttribute(Attributes.ARMOR, 0)
                 .createMutableAttribute(Attributes.ATTACK_SPEED, 1)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
@@ -61,7 +61,6 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
 
     @Override
     public ActionResultType getEntityInteractionResult(PlayerEntity player, Hand hand) {
-
         return super.getEntityInteractionResult(player, hand);
     }
 

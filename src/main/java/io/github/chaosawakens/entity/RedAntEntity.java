@@ -50,7 +50,7 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 2)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 2.0D)
                 .createMutableAttribute(Attributes.ARMOR, 0)
                 .createMutableAttribute(Attributes.ATTACK_SPEED, 1)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
@@ -59,10 +59,9 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
     }
 
-    @Override
-    public ActionResultType getEntityInteractionResult(PlayerEntity player, Hand hand) {
+    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
 
-        return super.getEntityInteractionResult(player, hand);
+        return super.getEntityInteractionResult(playerIn, hand);
     }
 
     @Override

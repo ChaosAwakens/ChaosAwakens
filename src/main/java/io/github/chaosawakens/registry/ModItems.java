@@ -150,10 +150,6 @@ public class ModItems {
     public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, -8, -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[]{Enchantments.UNBREAKING,Enchantments.SWEEPING},new int[]{4,4}));
 
-	//Optimised Tools
-    public static final RegistryObject<ShovelItem> OPTIMISED_SHOVEL = ITEMS.register("optimised_shovel", () -> new ShovelItem(ToolMaterials.TOOL_OPTIMISED, 1.5F, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<PickaxeItem> OPTIMISED_PICKAXE = ITEMS.register("optimised_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_OPTIMISED, 1, -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-
     // Staffs
     public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(ModItemGroups.equipmentItemGroup).maxDamage(50)));
 
@@ -215,6 +211,9 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.TERMITE, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.HERCULES_BEETLE, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> RUBY_BUG_SPAWN_EGG = ITEMS.register("ruby_bug_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.RUBY_BUG, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> EMERALD_GATOR_SPAWN_EGG = ITEMS.register("emerald_gator_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.EMERALD_GATOR, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> ROBO_SNIPER_SPAWN_EGG = ITEMS.register("robo_sniper_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.ROBO_SNIPER, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<ModSpawnEggItem> BEAVER_SPAWN_EGG = ITEMS.register("beaver_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.BEAVER, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> APPLE_COW_SPAWN_EGG = ITEMS.register("apple_cow_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.APPLE_COW, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("golden_apple_cow_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.GOLDEN_APPLE_COW, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Properties().group(ModItemGroups.eggsItemGroup)));

@@ -1,6 +1,7 @@
 package io.github.chaosawakens.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.client.entity.model.EmeraldGatorEntityModel;
 import io.github.chaosawakens.entity.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -80,6 +81,24 @@ public class ModEntityTypes {
             () -> EntityType.Builder.create(TermiteEntity::new, EntityClassification.CREATURE)
                     .size(0.5f, 0.25f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "termite").toString()));
+
+    // Beaver
+    public static final RegistryObject<EntityType<BeaverEntity>> BEAVER = ENTITY_TYPES.register("beaver",
+            () -> EntityType.Builder.create(BeaverEntity::new, EntityClassification.CREATURE)
+                    .size(0.75f, 0.7f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "beaver").toString()));
+
+    // Emerald Gator
+    public static final RegistryObject<EntityType<EmeraldGatorEntity>> EMERALD_GATOR = ENTITY_TYPES.register("emerald_gator",
+            () -> EntityType.Builder.create(EmeraldGatorEntity::new, EntityClassification.CREATURE)
+                    .size(1.5f, 1.0f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "emerald_gator").toString()));
+
+    // Robo Sniper
+    public static final RegistryObject<EntityType<RoboSniperEntity>> ROBO_SNIPER = ENTITY_TYPES.register("robo_sniper",
+            () -> EntityType.Builder.create(RoboSniperEntity::new, EntityClassification.MONSTER)
+                    .size(1.0f, 1.5f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper").toString()));
 
     // Arrow
     public static final RegistryObject<EntityType<UltimateArrowEntity>> ULTIMATE_ARROW = ENTITY_TYPES.register("ultimate_arrow",

@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 public class ModBiomeFeatures {
 
     private ModBiomeFeatures() {
-
     }
 
     public static void addMobSpawns(BiomeLoadingEvent event) {
@@ -23,15 +22,45 @@ public class ModBiomeFeatures {
 
         if (isSwampBiome(category)) {
             withRubyBug(spawnInfoBuilder);
+            withEmeraldGator(spawnInfoBuilder);
+        }
+        if (isForestBiome(category)) {
+            withBeaver(spawnInfoBuilder);
+        }
+        if (isOverworldBiome(category)) {
+            withOverworldAnt(spawnInfoBuilder);
         }
     }
 
     public static void withRubyBug(MobSpawnInfoBuilder builder) {
-        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.RUBY_BUG.get(), 10, 1, 3));
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.RUBY_BUG.get(), 25, 3, 6));
     }
 
+    public static void withEmeraldGator(MobSpawnInfoBuilder builder) {
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.EMERALD_GATOR.get(), 3, 1, 2));
+    }
+
+    public static void withBeaver(MobSpawnInfoBuilder builder) {
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.BEAVER.get(), 15, 1, 2));
+    }
+
+    public static void withOverworldAnt(MobSpawnInfoBuilder builder) {
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.BROWN_ANT.get(), 20, 1, 5));
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.RAINBOW_ANT.get(), 20, 1, 5));
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.RED_ANT.get(), 20, 1, 5));
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.UNSTABLE_ANT.get(), 20, 1, 5));
+        builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.TERMITE.get(), 20, 1, 5));
+    }
 
     public static boolean isSwampBiome(Biome.Category category) {
         return category == Biome.Category.SWAMP;
+    }
+
+    public static boolean isForestBiome(Biome.Category category) {
+        return category == Biome.Category.FOREST;
+    }
+
+    public static boolean isOverworldBiome(Biome.Category category) {
+        return category != Biome.Category.NETHER || category != Biome.Category.THEEND;
     }
 }

@@ -48,7 +48,7 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 1)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 1.0D)
                 .createMutableAttribute(Attributes.ARMOR, 3)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);

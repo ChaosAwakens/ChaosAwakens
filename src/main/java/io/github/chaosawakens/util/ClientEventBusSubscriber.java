@@ -11,8 +11,6 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import javax.annotation.Nullable;
-
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
 
@@ -29,10 +27,12 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.APPLE_COW.get(), AppleCowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAVER.get(), BeaverEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);
     }
 
     @SubscribeEvent
     public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
     }
-
 }
