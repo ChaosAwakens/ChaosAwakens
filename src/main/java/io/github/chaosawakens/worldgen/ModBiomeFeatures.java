@@ -30,6 +30,9 @@ public class ModBiomeFeatures {
         if (isOverworldBiome(category)) {
             withOverworldAnt(spawnInfoBuilder);
         }
+//        if (isVillageManiaBiome(category)) {
+//            withRoboSniper(spawnInfoBuilder);
+//        }
     }
 
     public static void withRubyBug(MobSpawnInfoBuilder builder) {
@@ -52,6 +55,10 @@ public class ModBiomeFeatures {
         builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.TERMITE.get(), 20, 1, 5));
     }
 
+//    public static void withRoboSniper(MobSpawnInfoBuilder builder) {
+//        builder.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntityTypes.ROBO_SNIPER.get(), 500, 5, 10));
+//    }
+
     public static boolean isSwampBiome(Biome.Category category) {
         return category == Biome.Category.SWAMP;
     }
@@ -63,4 +70,8 @@ public class ModBiomeFeatures {
     public static boolean isOverworldBiome(Biome.Category category) {
         return category != Biome.Category.NETHER || category != Biome.Category.THEEND;
     }
+
+//    public static boolean isVillageManiaBiome(Biome.Category category) {
+//        return category == Biome.Category.byName("chaosawakens:village_plains");
+//    }
 }
