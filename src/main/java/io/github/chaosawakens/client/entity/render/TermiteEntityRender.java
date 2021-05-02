@@ -19,7 +19,7 @@ public class TermiteEntityRender extends GeoEntityRenderer<TermiteEntity> {
 
     public TermiteEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new TermiteEntityModel());
-        this.shadowSize = 0.125F;
+        this.shadowSize = 0.2F;
     }
 
     @Override

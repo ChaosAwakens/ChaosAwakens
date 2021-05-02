@@ -19,7 +19,7 @@ public class RubyBugEntityRender extends GeoEntityRenderer<RubyBugEntity> {
 
     public RubyBugEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RubyBugEntityModel<>());
-        this.shadowSize = 0.1F;
+        this.shadowSize = 0.4F;
     }
 
     @Override

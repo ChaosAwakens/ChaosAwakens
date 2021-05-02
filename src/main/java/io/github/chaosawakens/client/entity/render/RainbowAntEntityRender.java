@@ -19,7 +19,7 @@ public class RainbowAntEntityRender extends GeoEntityRenderer<RainbowAntEntity> 
 
     public RainbowAntEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RainbowAntEntityModel());
-        this.shadowSize = 0.1F;
+        this.shadowSize = 0.2F;
     }
 
     @Override
