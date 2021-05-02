@@ -2,6 +2,7 @@ package io.github.chaosawakens.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.entity.*;
+import io.github.chaosawakens.entity.projectile.UltimateArrowEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;

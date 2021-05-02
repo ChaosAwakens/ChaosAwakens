@@ -1,10 +1,12 @@
 package io.github.chaosawakens.items;
 
-import io.github.chaosawakens.entity.UltimateArrowEntity;
+import io.github.chaosawakens.entity.projectile.UltimateArrowEntity;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
@@ -15,14 +17,13 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import java.util.function.Predicate;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
 
-public class UltimateBow extends BowItem implements IVanishable {
+public class UltimateBowItem extends BowItem implements IVanishable {
         private int[] enchantmentLevels;
         private Enchantment[] enchantmentIds;
 
-        public UltimateBow(Item.Properties builder,Enchantment[] enchants, int[] lvls) {
+        public UltimateBowItem(Item.Properties builder, Enchantment[] enchants, int[] lvls) {
             super(builder);
             enchantmentIds = enchants;
             enchantmentLevels = lvls;
@@ -45,40 +46,31 @@ public class UltimateBow extends BowItem implements IVanishable {
         @Override
         public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
             if (entityLiving instanceof PlayerEntity) {
-                PlayerEntity playerentity = (PlayerEntity)entityLiving;
-                boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
+                PlayerEntity playerentity = (PlayerEntity)entityLiving;;
                 ItemStack itemstack = playerentity.findAmmo(stack);
 
                 int i = this.getUseDuration(stack) - timeLeft;
-                i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, !itemstack.isEmpty() || flag);
+                i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
                 if (i < 0) return;
+                if (!worldIn.isRemote) {
+                    AbstractArrowEntity abstractarrowentity = createArrow(worldIn, itemstack, playerentity);
+                    abstractarrowentity = customArrow(abstractarrowentity);
+                    abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
+                    abstractarrowentity.setIsCritical(true);
+                    abstractarrowentity.setDamage(abstractarrowentity.getDamage() + 3D);
+                    abstractarrowentity.setKnockbackStrength(2);
+                    abstractarrowentity.setFire(300);
 
-                if (!itemstack.isEmpty() || flag) {
-                    if (itemstack.isEmpty()) {
-                        itemstack = new ItemStack(Items.ARROW);
+                    if (!playerentity.isCreative()) {
+                        stack.damageItem(1, entityLiving, (entity) -> {
+                            entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                        });
                     }
 
-                    if (!worldIn.isRemote) {
-                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        UltimateArrowEntity abstractarrowentity = new UltimateArrowEntity(worldIn, playerentity);
-                        abstractarrowentity = (UltimateArrowEntity) customArrow(abstractarrowentity);
-                        abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
-                        abstractarrowentity.setIsCritical(true);
-                        abstractarrowentity.setDamage(abstractarrowentity.getDamage() + 3D);
-                        abstractarrowentity.setKnockbackStrength(2);
-                        abstractarrowentity.setFire(300);
+                    worldIn.addEntity(abstractarrowentity);
 
-                        if (!playerentity.isCreative()) {
-                            stack.damageItem(1, entityLiving, (entity) -> {
-                                entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-                            });
-                        }
-
-                        worldIn.addEntity(abstractarrowentity);
-
-                        worldIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
-                        playerentity.addStat(Stats.ITEM_USED.get(this));
-                    }
+                    worldIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+                    playerentity.addStat(Stats.ITEM_USED.get(this));
                 }
             }
         }
@@ -113,8 +105,7 @@ public class UltimateBow extends BowItem implements IVanishable {
         return true;
     }
 
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return 1000;
-    }
+        public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
+            return new UltimateArrowEntity(worldIn, shooter);
+        }
 }
