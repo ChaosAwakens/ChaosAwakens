@@ -1,6 +1,5 @@
 package io.github.chaosawakens.worldgen;
 
-import com.mojang.serialization.Codec;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModBlocks;
 import net.minecraft.block.Blocks;
@@ -11,10 +10,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.feature.template.RandomBlockMatchRuleTest;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.RangeBiasedPlacement;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;

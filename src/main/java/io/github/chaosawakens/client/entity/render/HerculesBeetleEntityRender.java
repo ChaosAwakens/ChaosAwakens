@@ -19,7 +19,7 @@ public class HerculesBeetleEntityRender extends GeoEntityRenderer<HerculesBeetle
 
     public HerculesBeetleEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new HerculesBeetleEntityModel());
-        this.shadowSize = 0.5F;
+        this.shadowSize = 2.5F;
     }
 
     @Override

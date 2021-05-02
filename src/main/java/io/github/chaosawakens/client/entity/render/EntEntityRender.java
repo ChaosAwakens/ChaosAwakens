@@ -19,7 +19,7 @@ public class EntEntityRender extends GeoEntityRenderer<EntEntity> {
 
     public EntEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new EntEntityModel());
-        this.shadowSize = 0.5F;
+        this.shadowSize = 2.0F;
     }
 
     @Override
