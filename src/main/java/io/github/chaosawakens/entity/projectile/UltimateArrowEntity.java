@@ -9,9 +9,13 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.SpectralArrowEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 
 public class UltimateArrowEntity extends AbstractArrowEntity {
+
+    private int duration = 200;
 
     public UltimateArrowEntity(EntityType<? extends UltimateArrowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -25,7 +29,6 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
         super(ModEntityTypes.ULTIMATE_ARROW.get(), shooter, worldIn);
     }
 
-    @Override
     protected void arrowHit(LivingEntity living) {
         if (living instanceof PlayerEntity || living instanceof TameableEntity) {
             living.heal(1.0F);
@@ -37,7 +40,25 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 
     @Override
     protected ItemStack getArrowStack() {
-        return null;
+        return new ItemStack(Items.AIR);
+    }
+
+    @Override
+    public void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        if (compound.contains("Duration")) {
+            this.duration = compound.getInt("Duration");
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+    }
+
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        compound.putInt("Duration", this.duration);
     }
 
     public double getDamage() { return 10.0D; }

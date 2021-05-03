@@ -1,5 +1,6 @@
 package io.github.chaosawakens.entity;
 
+import io.github.chaosawakens.registry.ModDimensions;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -8,9 +9,19 @@ import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.network.play.server.SChangeGameStatePacket;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
+import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -58,7 +69,23 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
     }
 
     public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-
+        ItemStack itemstack = playerIn.getHeldItem(hand);
+        if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
+            int i = this.getMaxInPortalTime();
+            ServerWorld serverworld = (ServerWorld)this.world;
+            MinecraftServer minecraftserver = serverworld.getServer();
+            RegistryKey<World> registrykey = this.world.getDimensionKey() == ModDimensions.VILLAGE_MANIA ? World.OVERWORLD : ModDimensions.VILLAGE_MANIA;
+            ServerWorld serverworld1 = minecraftserver.getWorld(registrykey);
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity)playerIn;
+            if (serverworld1 != null) {
+                serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN,0));
+                serverPlayer.teleport(serverworld1,playerIn.getPosX(),serverworld1.getHeight(Heightmap.Type.WORLD_SURFACE,(int)playerIn.getPosX(),(int)playerIn.getPosZ()),playerIn.getPosZ(),serverPlayer.rotationYaw,serverPlayer.rotationPitch);
+                serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
+                for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
+                    serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
+                }
+            }
+        }
         return super.getEntityInteractionResult(playerIn, hand);
     }
 
