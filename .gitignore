@@ -1,9 +1,15 @@
 # User-specific stuff
 .idea/
-
+.gitignore
 *.iml
 *.ipr
 *.iws
+*.launch
+.classpath
+.project
+.settings
+run/
+build/
 
 # IntelliJ
 out/

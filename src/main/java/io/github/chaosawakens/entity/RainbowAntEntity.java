@@ -1,5 +1,6 @@
 package io.github.chaosawakens.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModDimensions;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -34,74 +35,88 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+	private AnimationFactory factory = new AnimationFactory(this);
 
-    public RainbowAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
-        super(type, worldIn);
-        this.ignoreFrustumCheck = true;
-    }
+	public RainbowAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+		super(type, worldIn);
+		this.ignoreFrustumCheck = true;
+	}
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if(event.isMoving()== true){
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving() == true) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
-        if (event.isMoving() == false) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.CONTINUE;
-    }
+		if (event.isMoving() == false) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
+			return PlayState.CONTINUE;
+		}
+		return PlayState.CONTINUE;
+	}
 
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
-        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-    }
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
+		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+	}
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 1.0D)
-                .createMutableAttribute(Attributes.ARMOR, 3)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-                .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
-    }
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 1.0D)
+				.createMutableAttribute(Attributes.ARMOR, 3).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+	}
 
-    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-        ItemStack itemstack = playerIn.getHeldItem(hand);
-        if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
-            int i = this.getMaxInPortalTime();
-            ServerWorld serverworld = (ServerWorld)this.world;
-            MinecraftServer minecraftserver = serverworld.getServer();
-            RegistryKey<World> registrykey = this.world.getDimensionKey() == ModDimensions.VILLAGE_MANIA ? World.OVERWORLD : ModDimensions.VILLAGE_MANIA;
-            ServerWorld serverworld1 = minecraftserver.getWorld(registrykey);
-            ServerPlayerEntity serverPlayer = (ServerPlayerEntity)playerIn;
-            if (serverworld1 != null) {
-                serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN,0));
-                serverPlayer.teleport(serverworld1,playerIn.getPosX(),serverworld1.getHeight(Heightmap.Type.WORLD_SURFACE,(int)playerIn.getPosX(),(int)playerIn.getPosZ()),playerIn.getPosZ(),serverPlayer.rotationYaw,serverPlayer.rotationPitch);
-                serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
-                for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
-                    serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
-                }
-            }
-        }
-        return super.getEntityInteractionResult(playerIn, hand);
-    }
+	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
+		ItemStack itemstack = playerIn.getHeldItem(hand);
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<RainbowAntEntity>(this, "antcontroller", 0, this::predicate));
-    }
+		if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
+			//int i = this.getMaxInPortalTime();
+			ServerWorld currentWorld = (ServerWorld) this.world;
+			MinecraftServer minecraftServer = currentWorld.getServer();
+			RegistryKey<World> dimensionRegistrykey = this.world.getDimensionKey() == ModDimensions.VILLAGE_MANIA ? World.OVERWORLD : ModDimensions.VILLAGE_MANIA;
+			ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistrykey);
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+			
+			if (targetWorld != null) {
+				serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
+				//ChaosAwakens.LOGGER.debug("before: "+targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()));
+				
+				/*
+				 * Tp twice because the dimension hasnt yet loaded on the first one which results in HeightMap
+				 * returning zero, thus the player spawns at bedrock
+				 */
+				serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+				serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+				
+				//ChaosAwakens.LOGGER.debug("after: "+targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()));
+				
+				serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
+				
+				for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
+					serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
+				}
+			}
+		}
+		return super.getEntityInteractionResult(playerIn, hand);
+	}
 
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
+	@Override
+	public void registerControllers(AnimationData data) {
+		data.addAnimationController(
+				new AnimationController<RainbowAntEntity>(this, "antcontroller", 0, this::predicate));
+	}
 
-    @Nullable
-    @Override
-    public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
-        return null;
-    }
+	@Override
+	public AnimationFactory getFactory() {
+		return this.factory;
+	}
+
+	@Nullable
+	@Override
+	public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+		return null;
+	}
 }
