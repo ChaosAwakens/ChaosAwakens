@@ -1,12 +1,12 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.config.CAConfig;
 import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
 import io.github.chaosawakens.entity.*;
 import io.github.chaosawakens.network.PacketHandler;
 import io.github.chaosawakens.registry.*;
 import io.github.chaosawakens.worldgen.ModBiomeFeatures;
-import io.github.chaosawakens.worldgen.OreGeneration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +17,9 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -61,10 +63,11 @@ public class ChaosAwakens {
         MinecraftForge.EVENT_BUS.register(this);
 
         MinecraftForge.EVENT_BUS.register(GameEvents.class);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        OreGeneration.registerOres();
         PacketHandler.init();
 
         DeferredWorkQueue.runLater(() -> {
