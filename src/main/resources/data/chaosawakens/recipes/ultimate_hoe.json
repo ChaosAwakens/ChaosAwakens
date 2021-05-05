@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TU",
+    " I",
+    " I"
+  ],
+  "key": {
+    "T": {
+      "tag": "forge:ingots/titanium"
+    },
+    "U": {
+      "tag": "forge:ingots/uranium"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ultimate_hoe"
+  }
+}

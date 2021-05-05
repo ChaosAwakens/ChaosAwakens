@@ -1,0 +1,17 @@
+{
+  "variants":
+  {
+    "normal":
+    {
+      "model": "chaosawakens:ent_dungeon_wood_slab_double"
+    },
+    "half=bottom":
+    {
+      "model": "chaosawakens:ent_dungeon_wood_slab_double"
+    },
+    "half=top":
+    {
+      "model": "chaosawakens:ent_dungeon_wood_slab_double"
+    }
+  }
+}

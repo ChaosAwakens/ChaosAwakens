@@ -1,0 +1,91 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.Ant",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "head",
+					"pivot": [0, 1, -2],
+					"cubes": [
+						{"origin": [-1, 0, -4], "size": [2, 2, 2], "uv": [0, 0]},
+						{"origin": [0.5, -0.2, -5], "size": [0, 1, 1], "uv": [14, 4]},
+						{"origin": [-0.5, -0.2, -5], "size": [0, 1, 1], "uv": [14, 4]},
+						{"origin": [0.5, 2, -4.5], "size": [0, 1, 1], "uv": [14, 6]},
+						{"origin": [-0.5, 2, -4.5], "size": [0, 1, 1], "uv": [14, 6]}
+					]
+				},
+				{
+					"name": "neck",
+					"pivot": [0, 9, 0],
+					"cubes": [
+						{"origin": [-0.5, 0.2, -2], "size": [1, 1, 1], "uv": [10, 2]}
+					]
+				},
+				{
+					"name": "body",
+					"pivot": [0, 9, 9],
+					"cubes": [
+						{"origin": [-1, 0, -1], "size": [2, 2, 3], "uv": [0, 5]},
+						{"origin": [0, 0.5, 2], "size": [0, 1, 1], "uv": [12, 4]}
+					]
+				},
+				{
+					"name": "leg1",
+					"pivot": [1, 0, 0.5],
+					"rotation": [0, 0, -5],
+					"cubes": [
+						{"origin": [-2.91284, 0.345, -1], "size": [3, 0, 1], "uv": [8, 0]}
+					]
+				},
+				{
+					"name": "leg2",
+					"pivot": [-1, 0, 0.5],
+					"rotation": [0, 0, 5],
+					"cubes": [
+						{"origin": [-0.08716, 0.345, -1], "size": [3, 0, 1], "uv": [8, 1]}
+					]
+				},
+				{
+					"name": "leg3",
+					"pivot": [1, 0, -1],
+					"rotation": [0, 0, -5],
+					"cubes": [
+						{"origin": [-2.91284, 0.345, -2], "size": [3, 0, 1], "uv": [8, 0]}
+					]
+				},
+				{
+					"name": "leg4",
+					"pivot": [-1, 0, -1],
+					"rotation": [0, 0, 5],
+					"cubes": [
+						{"origin": [-0.08716, 0.345, -2], "size": [3, 0, 1], "uv": [8, 1]}
+					]
+				},
+				{
+					"name": "leg5",
+					"pivot": [1, 0, -2.5],
+					"rotation": [0, 0, -5],
+					"cubes": [
+						{"origin": [-2.91284, 0.345, -3], "size": [3, 0, 1], "uv": [8, 0]}
+					]
+				},
+				{
+					"name": "leg6",
+					"pivot": [-1, 0, -2.5],
+					"rotation": [0, 0, 5],
+					"cubes": [
+						{"origin": [-0.08716, 0.345, -3], "size": [3, 0, 1], "uv": [8, 1]}
+					]
+				}
+			]
+		}
+	]
+}

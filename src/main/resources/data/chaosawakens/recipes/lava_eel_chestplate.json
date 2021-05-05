@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "chaosawakens:lava_eel"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:lava_eel_chestplate"
+  }
+}

@@ -17,7 +17,8 @@
       "io.github.chaosawakens.entities.ModEntities",
       "io.github.chaosawakens.ChaosAwakens",
       "io.github.chaosawakens.items.ModItems",
-      "io.github.chaosawakens.blocks.ModBlocks"
+      "io.github.chaosawakens.blocks.ModBlocks",
+      "io.github.chaosawakens.items.SpawnEggs"
     ]
   },
   "depends": {

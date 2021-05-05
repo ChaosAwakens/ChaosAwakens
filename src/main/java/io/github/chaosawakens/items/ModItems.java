@@ -7,28 +7,62 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 
 public class ModItems implements ModInitializer {
-    //Misc Items
+    //Food Items
+    public static final Item RAW_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item COOKED_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item RAW_BACON = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item COOKED_BACON = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item CORN = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item TOMATO = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item LETTUCE = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item CHEESE = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item GARDEN_SALAD = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item BLT = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item STRAWBERRY = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item RADISH = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item RADISH_STEW = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item CHERRIES = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item SPARK_FISH = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item LAVA_EEL = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item COOKED_CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item SEAFOOD_PATTY = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item PEACH = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item COOKED_PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC));
+
+    //Gemstones
+    public static final Item AMETHYST = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item RUBY = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item TIGERS_EYE = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item TITANIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item TITANIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item URANIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item URANIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item ALUMINIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item ALUMINIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
+
+
     public static final Item DRUID_KEY = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item OIL = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item SALT = new Item(new Item.Settings().group(ItemGroup.MISC));
 
-    //Amethyst
-    public static final ToolMaterial AMETHYST_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, ModItems.AMETHYST);
-    public static final ArmorMaterial AMETHYST_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.AMETHYST, "amethyst");
-    public static final Item AMETHYST = new Item(new Item.Settings().group(ItemGroup.MISC));
+    //Misc Items
 
-    public static final ToolItem AMETHYST_SWORD = new SwordItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem AMETHYST_SHOVEL = new ShovelItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem AMETHYST_PICKAXE = new GenericPickaxeItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem AMETHYST_AXE = new GenericAxeItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem AMETHYST_HOE = new GenericHoeItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    //Ultimate
+    public static final ToolMaterial ULTIMATE_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null);
+    public static final ArmorMaterial ULTIMATE_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{30, 60, 80, 30}, 37, 10, null, "ultimate");
 
-    public static final Item AMETHYST_HELMET = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item AMETHYST_CHESTPLATE = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item AMETHYST_LEGGINGS = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item AMETHYST_BOOTS = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem ULTIMATE_SWORD = new SwordItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem ULTIMATE_SHOVEL = new ShovelItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem ULTIMATE_PICKAXE = new GenericPickaxeItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem ULTIMATE_AXE = new GenericAxeItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem ULTIMATE_HOE = new GenericHoeItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+
+    public static final Item ULTIMATE_HELMET = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ULTIMATE_CHESTPLATE = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ULTIMATE_LEGGINGS = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ULTIMATE_BOOTS = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Emerald
     public static final ToolMaterial EMERALD_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, Items.EMERALD);
@@ -48,7 +82,6 @@ public class ModItems implements ModInitializer {
     //Ruby
     public static final ToolMaterial RUBY_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, ModItems.RUBY);
     public static final ArmorMaterial RUBY_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.RUBY, "ruby");
-    public static final Item RUBY = new Item(new Item.Settings().group(ItemGroup.MISC));
 
     public static final ToolItem RUBY_SWORD = new SwordItem(RUBY_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem RUBY_SHOVEL = new ShovelItem(RUBY_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
@@ -61,29 +94,24 @@ public class ModItems implements ModInitializer {
     public static final Item RUBY_LEGGINGS = new ArmorItem(RUBY_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item RUBY_BOOTS = new ArmorItem(RUBY_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
-    //Ultimate
-    public static final ToolMaterial ULTIMATE_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null);
-    public static final ArmorMaterial ULTIMATE_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, null, "ultimate");
-    public static final Item URANIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item URANIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item TITANIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item TITANIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
+    //Amethyst
+    public static final ToolMaterial AMETHYST_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, ModItems.AMETHYST);
+    public static final ArmorMaterial AMETHYST_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.AMETHYST, "amethyst");
 
-    public static final ToolItem ULTIMATE_SWORD = new SwordItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem ULTIMATE_SHOVEL = new ShovelItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem ULTIMATE_PICKAXE = new GenericPickaxeItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem ULTIMATE_AXE = new GenericAxeItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem ULTIMATE_HOE = new GenericHoeItem(ULTIMATE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem AMETHYST_SWORD = new SwordItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem AMETHYST_SHOVEL = new ShovelItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem AMETHYST_PICKAXE = new GenericPickaxeItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem AMETHYST_AXE = new GenericAxeItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem AMETHYST_HOE = new GenericHoeItem(AMETHYST_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
 
-    public static final Item ULTIMATE_HELMET = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ULTIMATE_CHESTPLATE = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ULTIMATE_LEGGINGS = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ULTIMATE_BOOTS = new ArmorItem(ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item AMETHYST_HELMET = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item AMETHYST_CHESTPLATE = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item AMETHYST_LEGGINGS = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item AMETHYST_BOOTS = new ArmorItem(AMETHYST_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Tiger's Eye
     public static final ToolMaterial TIGERS_EYE_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, ModItems.TIGERS_EYE);
     public static final ArmorMaterial TIGERS_EYE_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.TIGERS_EYE, "TIGERS_EYE");
-    public static final Item TIGERS_EYE = new Item(new Item.Settings().group(ItemGroup.MISC));
 
     public static final ToolItem TIGERS_EYE_SWORD = new SwordItem(TIGERS_EYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem TIGERS_EYE_SHOVEL = new ShovelItem(TIGERS_EYE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
@@ -96,20 +124,11 @@ public class ModItems implements ModInitializer {
     public static final Item TIGERS_EYE_LEGGINGS = new ArmorItem(TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item TIGERS_EYE_BOOTS = new ArmorItem(TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
-    //Optimised
-    public static final ToolMaterial OPTIMISED_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null);
-    public static final ToolItem OPTIMISED_SHOVEL = new ShovelItem(OPTIMISED_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem OPTIMISED_PICKAXE = new GenericPickaxeItem(OPTIMISED_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-
     //Experience
     public static final ToolMaterial EXPERIENCE_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null);
     public static final ArmorMaterial EXPERIENCE_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, null, "experience");
 
     public static final ToolItem EXPERIENCE_SWORD = new SwordItem(EXPERIENCE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem EXPERIENCE_SHOVEL = new ShovelItem(EXPERIENCE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem EXPERIENCE_PICKAXE = new GenericPickaxeItem(EXPERIENCE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem EXPERIENCE_AXE = new GenericAxeItem(EXPERIENCE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
-    public static final ToolItem EXPERIENCE_HOE = new GenericHoeItem(EXPERIENCE_TOOL_MATERIAL, 0, 0, new Item.Settings().group(ItemGroup.TOOLS));
 
     public static final Item EXPERIENCE_HELMET = new ArmorItem(EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item EXPERIENCE_CHESTPLATE = new ArmorItem(EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
@@ -138,32 +157,62 @@ public class ModItems implements ModInitializer {
     public static final Item QUEEN_SCALE_LEGGINGS = new ArmorItem(QUEEN_SCALE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item QUEEN_SCALE_BOOTS = new ArmorItem(QUEEN_SCALE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
+    //Lava Eel
+    public static final ArmorMaterial LAVA_EEL_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, ModItems.LAVA_EEL, "lava_eel");
+
+    public static final Item LAVA_EEL_HELMET = new ArmorItem(LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item LAVA_EEL_CHESTPLATE = new ArmorItem(LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item LAVA_EEL_LEGGINGS = new ArmorItem(LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item LAVA_EEL_BOOTS = new ArmorItem(LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
+
+    //Lapis Lazuli
+    public static final ArmorMaterial LAPIS_LAZULI_ARMOR_MATERIAL = new GenericArmorMaterial(new int[]{13, 15, 16, 11}, new int[]{3, 6, 8, 3}, 37, 10, Items.LAPIS_LAZULI, "lapis_lazuli");
+
+    public static final Item LAPIS_LAZULI_HELMET = new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item LAPIS_LAZULI_CHESTPLATE = new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item LAPIS_LAZULI_LEGGINGS = new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item LAPIS_LAZULI_BOOTS = new ArmorItem(LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Misc Weapons
     public static final ToolItem FAIRY_SWORD = new SwordItem(new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null), 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem NIGHTMARE_SWORD = new SwordItem(new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null), 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem POISON_SWORD = new SwordItem(new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null), 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem RAT_SWORD = new SwordItem(new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null), 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem BIG_HAMMER = new SwordItem(new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null), 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem PRISMATIC_REAPER = new SwordItem(new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null), 0, 0, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Ranged Weapons
     public static final BowItem ULTIMATE_BOW = new GenericBowItem(new Item.Settings().group(ItemGroup.COMBAT), null, 5);public static final ToolMaterial THUNDER_STAFF_TOOL_MATERIAL = new GenericToolMaterial(500, 5.0F, 3.0F, 2, 15, null);
     public static final Item THUNDER_STAFF = new ThunderStaff(new Item.Settings().group(ItemGroup.COMBAT));
     //Ray gun
 
-    //Food Items
-    public static final Item RAW_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item COOKED_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item RAW_BACON = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item COOKED_BACON = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item CORN = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item TOMATO = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item LETTUCE = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item CHEESE = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item GARDEN_SALAD = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item BLT = new Item(new Item.Settings().group(ItemGroup.MISC));
+
 
     @Override
     public void onInitialize() {
+        RegisterItem.register("raw_corndog", RAW_CORNDOG);
+        RegisterItem.register("cooked_corndog", COOKED_CORNDOG);
+        RegisterItem.register("raw_bacon", RAW_BACON);
+        RegisterItem.register("cooked_bacon", COOKED_BACON);
+        RegisterItem.register("corn", CORN);
+        RegisterItem.register("tomato", TOMATO);
+        RegisterItem.register("lettuce", LETTUCE);
+        RegisterItem.register("cheese", CHEESE);
+        RegisterItem.register("garden_salad", GARDEN_SALAD);
+        RegisterItem.register("blt", BLT);
+        RegisterItem.register("strawberry", STRAWBERRY);
+        RegisterItem.register("radish", RADISH);
+        RegisterItem.register("radish_stew", RADISH_STEW);
+        RegisterItem.register("cherries", CHERRIES);
+        RegisterItem.register("spark_fish", SPARK_FISH);
+        RegisterItem.register("lava_eel", LAVA_EEL);
+        RegisterItem.register("crab_meat", CRAB_MEAT);
+        RegisterItem.register("cooked_crab_meat", COOKED_CRAB_MEAT);
+        RegisterItem.register("seafood_patty", SEAFOOD_PATTY);
+        RegisterItem.register("peach", PEACH);
+        RegisterItem.register("peacock_leg", PEACOCK_LEG);
+        RegisterItem.register("cooked_peacock_leg", COOKED_PEACOCK_LEG);
+
         RegisterItem.register("aluminium_ingot", ALUMINIUM_INGOT);
         RegisterItem.register("aluminium_nugget", ALUMINIUM_NUGGET);
         RegisterItem.register("druid_key", DRUID_KEY);
@@ -227,14 +276,7 @@ public class ModItems implements ModInitializer {
         RegisterItem.register("tigers_eye_leggings", TIGERS_EYE_LEGGINGS);
         RegisterItem.register("tigers_eye_boots", TIGERS_EYE_BOOTS);
 
-        RegisterItem.register("optimised_shovel", OPTIMISED_SHOVEL);
-        RegisterItem.register("optimised_pickaxe", OPTIMISED_PICKAXE);
-
         RegisterItem.register("experience_sword", EXPERIENCE_SWORD);
-        RegisterItem.register("experience_shovel", EXPERIENCE_SHOVEL);
-        RegisterItem.register("experience_pickaxe", EXPERIENCE_PICKAXE);
-        RegisterItem.register("experience_axe", EXPERIENCE_AXE);
-        RegisterItem.register("experience_hoe", EXPERIENCE_HOE);
         RegisterItem.register("experience_helmet", EXPERIENCE_HELMET);
         RegisterItem.register("experience_chestplate", EXPERIENCE_CHESTPLATE);
         RegisterItem.register("experience_leggings", EXPERIENCE_LEGGINGS);
@@ -252,23 +294,26 @@ public class ModItems implements ModInitializer {
         RegisterItem.register("queen_scale_leggings", QUEEN_SCALE_LEGGINGS);
         RegisterItem.register("queen_scale_boots", QUEEN_SCALE_BOOTS);
 
+        RegisterItem.register("lava_eel_helmet", LAVA_EEL_HELMET);
+        RegisterItem.register("lava_eel_chestplate", LAVA_EEL_CHESTPLATE);
+        RegisterItem.register("lava_eel_leggings", LAVA_EEL_LEGGINGS);
+        RegisterItem.register("lava_eel_boots", LAVA_EEL_BOOTS);
+
+        RegisterItem.register("lapis_lazuli_helmet", LAPIS_LAZULI_HELMET);
+        RegisterItem.register("lapis_lazuli_chestplate", LAPIS_LAZULI_CHESTPLATE);
+        RegisterItem.register("lapis_lazuli_leggings", LAPIS_LAZULI_LEGGINGS);
+        RegisterItem.register("lapis_lazuli_boots", LAPIS_LAZULI_BOOTS);
+
         RegisterItem.register("fairy_sword", FAIRY_SWORD);
         RegisterItem.register("nightmare_sword", NIGHTMARE_SWORD);
         RegisterItem.register("poison_sword", POISON_SWORD);
         RegisterItem.register("rat_sword", RAT_SWORD);
+        RegisterItem.register("big_hammer", BIG_HAMMER);
+        RegisterItem.register("prismatic_reaper", PRISMATIC_REAPER);
 
         RegisterItem.register("ultimate_bow", ULTIMATE_BOW);
         RegisterItem.register("thunder_staff", THUNDER_STAFF);
 
-        RegisterItem.register("raw_corndog", RAW_CORNDOG);
-        RegisterItem.register("cooked_corndog", COOKED_CORNDOG);
-        RegisterItem.register("raw_bacon", RAW_BACON);
-        RegisterItem.register("cooked_bacon", COOKED_BACON);
-        RegisterItem.register("corn", CORN);
-        RegisterItem.register("tomato", TOMATO);
-        RegisterItem.register("lettuce", LETTUCE);
-        RegisterItem.register("cheese", CHEESE);
-        RegisterItem.register("garden_salad", GARDEN_SALAD);
-        RegisterItem.register("blt", BLT);
+
     }
 }

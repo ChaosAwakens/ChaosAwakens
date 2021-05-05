@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "crop": "chaosawakens:blocks/strawberry_plant_stage_1"
+  }
+}

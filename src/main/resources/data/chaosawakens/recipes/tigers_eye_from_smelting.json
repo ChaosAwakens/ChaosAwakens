@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "chaosawakens:tigers_eye_ore"
+  },
+  "result": "chaosawakens:tigers_eye",
+  "experience": 1.0,
+  "cookingtime": 200
+}

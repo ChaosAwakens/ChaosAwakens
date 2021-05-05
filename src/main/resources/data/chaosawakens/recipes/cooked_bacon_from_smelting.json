@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "chaosawakens:bacon"
+  },
+  "result": "chaosawakens:cooked_bacon",
+  "experience": 1.0,
+  "cookingtime": 200
+}

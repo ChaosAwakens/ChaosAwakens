@@ -1,0 +1,7 @@
+{
+  "parent": "chaosawakens:block/crystal_leaves",
+  "textures": {
+    "0": "chaosawakens:block/yellow_crystal_leaves",
+    "particle": "chaosawakens:block/yellow_crystal_leaves"
+  }
+}

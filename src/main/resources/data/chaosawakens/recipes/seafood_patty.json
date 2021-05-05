@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:crops/lettuce"
+    },
+    {
+      "item": "minecraft:bread"
+    },
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "item": "chaosawakens:cooked_crab_meat"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:seafood_patty",
+    "count": 1
+  }
+}
