@@ -68,6 +68,7 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 0.3));
         this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));

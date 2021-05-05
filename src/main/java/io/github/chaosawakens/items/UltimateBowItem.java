@@ -53,11 +53,12 @@ public class UltimateBowItem extends BowItem implements IVanishable {
                 i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
                 if (i < 0) return;
                 if (!worldIn.isRemote) {
-                    // AbstractArrowEntity abstractarrowentity = createArrow(worldIn, itemstack, playerentity);
 
                     ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                    AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
+                    //AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
 
+                    AbstractArrowEntity abstractarrowentity = createArrow(worldIn, itemstack, playerentity);
+                    
                     abstractarrowentity = customArrow(abstractarrowentity);
                     abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
                     abstractarrowentity.setIsCritical(true);
