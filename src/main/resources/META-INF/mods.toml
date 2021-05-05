@@ -10,6 +10,7 @@ version="${file.jarVersion}"
 displayName="Chaos Awakens"
 description='''A successor mod that brings OreSpawn content into newer Minecraft versions.'''
 itemIcon="chaosawakens:ultimate_pickaxe"
+configBackground="chaosawakens:textures/block/gate_block.png"
 
 [[dependencies.chaosawakens]]
 modId="forge"

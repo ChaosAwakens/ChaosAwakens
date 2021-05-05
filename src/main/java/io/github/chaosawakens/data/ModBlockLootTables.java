@@ -27,6 +27,9 @@ public class ModBlockLootTables extends BlockLootTables
         registerLootTable(ModBlocks.SALT_ORE.get(), (ore) -> {
             return droppingItemWithFortune(ore, ModItems.SALT.get());
         });
+        registerLootTable(ModBlocks.GOLDEN_MELON.get(), (food) -> {
+            return droppingItemWithFortune(food, ModItems.GOLDEN_MELON_SLICE.get());
+        });
 
         // BLOCKS
         registerDropSelfLootTable(ModBlocks.AMETHYST_BLOCK.get());

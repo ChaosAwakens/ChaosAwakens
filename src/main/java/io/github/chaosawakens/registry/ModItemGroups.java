@@ -18,6 +18,14 @@ public class ModItemGroups {
 		
 		@Override
 		public ItemStack createIcon() {
+			return new ItemStack(ModItems.URANIUM_INGOT.get());
+		}
+	};
+
+	public static ItemGroup foodItemGroup = new ItemGroup("chaosawakens_food_item_group") {
+
+		@Override
+		public ItemStack createIcon() {
 			return new ItemStack(ModItems.CORN.get());
 		}
 	};

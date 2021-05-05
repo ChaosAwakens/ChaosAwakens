@@ -2,9 +2,11 @@ package io.github.chaosawakens.worldgen;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModEntityTypes;
+import io.github.chaosawakens.registry.ModStructures;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -33,6 +35,20 @@ public class ModBiomeFeatures {
 //        if (isVillageManiaBiome(category)) {
 //            withRoboSniper(spawnInfoBuilder);
 //        }
+    }
+
+    public static void addStructureSpawns(BiomeLoadingEvent event) {
+
+        Biome.Category category = event.getCategory();
+        BiomeGenerationSettingsBuilder spawnInfoBuilder = event.getGeneration();
+
+        if (isForestBiome(category)) {
+            withEntDungeon(spawnInfoBuilder);
+        }
+    }
+
+    public static void withEntDungeon(BiomeGenerationSettingsBuilder builder) {
+        builder.withStructure(ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
     }
 
     public static void withRubyBug(MobSpawnInfoBuilder builder) {

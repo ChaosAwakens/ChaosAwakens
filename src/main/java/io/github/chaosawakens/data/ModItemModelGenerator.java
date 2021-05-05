@@ -29,6 +29,8 @@ public class ModItemModelGenerator extends ItemModelProvider {
                 ModItems.PEACH, ModItems.PEACH_SEED, ModItems.LETTUCE_SEEDS, ModItems.RADISH_SEEDS,
                 ModItems.SEAFOOD_PATTY, ModItems.CORN_SEEDS, ModItems.LAVA_EEL, ModItems.CHERRY_SEEDS,
                 ModItems.GREEN_FISH, ModItems.ROCK_FISH, ModItems.SPARK_FISH, ModItems.WOOD_FISH, ModItems.BLT,
+                ModItems.GOLDEN_BREAD, ModItems.GOLDEN_CHICKEN, ModItems.GOLDEN_CLOWNFISH, ModItems.GOLDEN_COD,
+                ModItems.GOLDEN_PORKCHOP,ModItems.GOLDEN_MELON_SLICE,ModItems.GOLDEN_MUSHROOM_STEW,ModItems.GOLDEN_STEAK,
                 ModItems.AMETHYST, ModItems.RUBY, ModItems.TIGERS_EYE, ModItems.TITANIUM_INGOT,
                 ModItems.TITANIUM_NUGGET, ModItems.URANIUM_INGOT, ModItems.URANIUM_NUGGET, ModItems.ALUMINIUM_INGOT,
                 ModItems.AMETHYST_HELMET, ModItems.AMETHYST_CHESTPLATE, ModItems.AMETHYST_LEGGINGS, ModItems.AMETHYST_BOOTS,
@@ -65,6 +67,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
         this.simpleWithExistingParent(ModBlocks.FOSSILISED_EMERALD_GATOR.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.GATE_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.ENT_DUNGEON_WOOD.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.GOLDEN_MELON.getId().toString().replaceFirst("chaosawakens:", ""));
     }
 
     private ModelBuilder<ItemModelBuilder> simpleWithExistingParent(String path)

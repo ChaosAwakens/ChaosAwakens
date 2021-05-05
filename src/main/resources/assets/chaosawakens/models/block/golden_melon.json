@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "top": "chaosawakens:block/golden_melon_top",
+    "side": "chaosawakens:block/golden_melon_side",
+    "bottom": "chaosawakens:block/golden_melon_top"
+  }
+}

@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,6 +20,9 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
+
+    // SHINY FOODS
+    public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon",() -> new Block(Block.Properties.from(Blocks.MELON).harvestTool(ToolType.AXE)), ModItemGroups.foodItemGroup);
 
     // ENT DUNGEON BLOCKS
     public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block",() -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), ModItemGroups.blocksItemGroup);
