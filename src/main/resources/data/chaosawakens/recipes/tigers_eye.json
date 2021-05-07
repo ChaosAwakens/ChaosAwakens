@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "chaosawakens:tigers_eye_block"
+      "tag": "c:tigers_eye_blocks"
     }
   ],
   "result": {

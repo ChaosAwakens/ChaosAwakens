@@ -1,4 +1,18 @@
 {
+	"text.autoconfig.chaosawakens.category.itemstats": "Item Stats",
+	"text.autoconfig.chaosawakens.category.default": "Main",
+	"text.autoconfig.chaosawakens.option.emerald": "Emerald Set",
+	"text.autoconfig.chaosawakens.option.emerald.emeraldSwordDamage": "Emerald Sword Damage",
+	"text.autoconfig.chaosawakens.option.emerald.emeraldAxeDamage": "Emerald Axe Damage",
+	"text.autoconfig.chaosawakens.option.emerald.emeraldPickaxeDamage": "Emerald Pickaxe Damage",
+	"text.autoconfig.chaosawakens.option.emerald.emeraldShovelDamage": "Emerald Shovel Damage",
+	"text.autoconfig.chaosawakens.option.emerald.emeraldHoeDamage": "Emerald Hoe Damage",
+	"text.autoconfig.chaosawakens.option.ruby": "Ruby Set",
+	"text.autoconfig.chaosawakens.option.amethyst": "Amethyst Set",
+	"text.autoconfig.chaosawakens.option.tigersEye": "Tiger's Eye Set",
+	"text.autoconfig.chaosawakens.option.misc": "Miscellaneous",
+
+
 	"itemGroup.chaosawakens_blocks_item_group": "Chaos Awakens Blocks",
 	"itemGroup.chaosawakens_items_item_group": "Chaos Awakens Items",
 	"itemGroup.chaosawakens_equipment_item_group": "Chaos Awakens Equipment",

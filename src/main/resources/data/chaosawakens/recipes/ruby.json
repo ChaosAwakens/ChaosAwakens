@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "chaosawakens:ruby_block"
+      "tag": "c:ruby_blocks"
     }
   ],
   "result": {

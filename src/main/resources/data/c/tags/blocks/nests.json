@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "values": [
+        "chaosawakens:red_ant_nest",
+        "chaosawakens:brown_ant_nest",
+        "chaosawakens:rainbow_ant_nest",
+        "chaosawakens:unstable_ant_nest",
+        "chaosawakens:termite_nest"
+    ]
+}

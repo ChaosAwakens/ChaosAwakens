@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:rods/wooden"
+      "item": "stick"
     },
     "X": {
-      "tag": "forge:gems/ruby"
+      "tag": "c:rubies"
     }
   },
   "result": {

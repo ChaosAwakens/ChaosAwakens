@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:crops/lettuce"
+      "item": "chaosawakens:lettuce"
     },
     {
       "item": "minecraft:bread"
     },
     {
-      "tag": "forge:crops/tomato"
+      "tag": "c:tomato"
     },
     {
       "item": "chaosawakens:cooked_bacon"
     },
     {
-      "tag": "forge:butter"
+      "tag": "c:butter"
     }
   ],
   "result": {

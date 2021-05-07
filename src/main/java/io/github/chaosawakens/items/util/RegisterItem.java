@@ -9,6 +9,4 @@ public class RegisterItem {
     public static void register(String identifier, Item item) {
         Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modId, identifier), item);
     }
-
-
 }

@@ -10,7 +10,7 @@
   "icon": "assets/ChaosAwakens/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client" : [
+    "client": [
       "io.github.chaosawakens.client.ClientInitializer"
     ],
     "main": [
@@ -18,7 +18,11 @@
       "io.github.chaosawakens.ChaosAwakens",
       "io.github.chaosawakens.items.ModItems",
       "io.github.chaosawakens.blocks.ModBlocks",
-      "io.github.chaosawakens.items.SpawnEggs"
+      "io.github.chaosawakens.items.SpawnEggs",
+      "io.github.chaosawakens.worldgen.Initializer"
+    ],
+    "modmenu": [
+      "io.github.chaosawakens.config.ModMenuIntegration"
     ]
   },
   "depends": {

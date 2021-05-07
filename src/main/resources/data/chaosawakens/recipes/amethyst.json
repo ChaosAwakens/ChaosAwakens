@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "chaosawakens:amethyst_block"
+      "tag": "c:amethyst_blocks"
     }
   ],
   "result": {

@@ -7,19 +7,19 @@
   ],
   "key": {
     "s": {
-      "tag": "forge:rods/wooden"
+      "item": "minecraft:stick"
     },
     "A": {
-      "tag": "forge:gems/amethyst"
+      "tag": "c:amethyst"
     },
     "D": {
-      "tag": "forge:gems/diamond"
+      "tag": "c:diamonds"
     },
     "E": {
-      "tag": "forge:gems/emerald"
+      "tag": "c:emeralds"
     },
     "R": {
-      "tag": "forge:gems/ruby"
+      "tag": "c:rubies"
     }
   },
   "result": {

@@ -3,7 +3,7 @@
   "group": "titanium_ingot",
   "ingredients": [
     {
-      "item": "chaosawakens:titanium_block"
+      "tag": "c:titanium_blocks"
     }
   ],
   "result": {

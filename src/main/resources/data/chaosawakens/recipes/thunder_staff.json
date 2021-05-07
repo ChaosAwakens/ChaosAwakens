@@ -7,10 +7,10 @@
   ],
   "key": {
     "D": {
-      "tag": "forge:gems/diamond"
+      "tag": "c:diamonds"
     },
     "X": {
-      "tag": "forge:gems/ruby"
+      "tag": "c:rubies"
     }
   },
   "result": {

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "chaosawakens:uranium_ingot"
+      "tag": "c:uranium_ingots"
     }
   ],
   "result": {

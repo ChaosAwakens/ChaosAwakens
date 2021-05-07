@@ -7,13 +7,13 @@
   ],
   "key": {
     "T": {
-      "tag": "forge:ingots/titanium"
+      "tag": "c:titanium_ingots"
     },
     "U": {
-      "tag": "forge:ingots/uranium"
+      "tag": "c:uranium_ingots"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {

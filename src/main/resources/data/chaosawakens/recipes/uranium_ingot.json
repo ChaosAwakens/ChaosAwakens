@@ -3,7 +3,7 @@
   "group": "uranium_ingot",
   "ingredients": [
     {
-      "item": "chaosawakens:uranium_block"
+      "tag": "c:uranium_blocks"
     }
   ],
   "result": {

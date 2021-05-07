@@ -12,7 +12,7 @@ public class GenericToolMaterial implements ToolMaterial {
     private int enchantability;
     private Item repairIngredient;
 
-    public GenericToolMaterial(int durability, float miningSpeedMultiplier, float attackDamage, int miningLevel, int enchantability, Item repairIngredient) {
+    public GenericToolMaterial(int miningLevel, int durability, float miningSpeedMultiplier, float attackDamage, int enchantability, Item repairIngredient) {
         this.durability = durability;
         this.miningSpeedMultiplier = miningSpeedMultiplier;
         this.attackDamage = attackDamage;

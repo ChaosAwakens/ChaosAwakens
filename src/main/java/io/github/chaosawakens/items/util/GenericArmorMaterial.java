@@ -8,15 +8,16 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
 public class GenericArmorMaterial implements ArmorMaterial {
-    private int[] durability;
-    private int[] protection;
-    private int toughness;
-    private int enchantability;
-    private Item repairIngredient;
-    private String name;
+    public int[] durability = new int[] {13, 15, 16, 11};
+    public int durabilityMod;
+    public int[] protection;
+    public int toughness;
+    public int enchantability;
+    public Item repairIngredient;
+    public String name;
 
-    public GenericArmorMaterial(int[] durability, int[] protection, int toughness, int enchantability, Item repairIngredient, String name) {
-        this.durability = durability;
+    public GenericArmorMaterial(int durabilityMod, int[] protection, int enchantability, int toughness, Item repairIngredient, String name) {
+        this.durabilityMod = durabilityMod;
         this.protection = protection;
         this.toughness = toughness;
         this.enchantability = enchantability;
@@ -26,7 +27,7 @@ public class GenericArmorMaterial implements ArmorMaterial {
 
     @Override
     public int getDurability(EquipmentSlot slot) {
-        return this.protection[slot.getEntitySlotId()] * toughness;
+        return this.durability[slot.getEntitySlotId()] * durabilityMod;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class GenericArmorMaterial implements ArmorMaterial {
 
     @Override
     public SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
+        return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
     }
 
     @Override
