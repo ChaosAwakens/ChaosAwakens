@@ -7,6 +7,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @me.shedaniel.autoconfig.annotation.Config(name = ChaosAwakens.modId)
 public class Config implements ConfigData {
     @ConfigEntry.Category("itemstats")
+    @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Gui.CollapsibleObject
     public Ultimate ultimate = new Ultimate();
 
@@ -67,6 +68,12 @@ public class Config implements ConfigData {
     }
     public static class Misc {
         public float prismaticReaperDamage = 29.0f;
+        public float fairySwordDamage = 10.0f;
+        public float nightmareSwordDamage = 10.0f;
+        public float poisonSwordDamage = 10.0f;
+        public float ratSwordDamage = 10.0f;
+        public float bigHammerDamage = 10.0f;
+        public float experienceSwordDamage = 10.0f;
     }
 
 

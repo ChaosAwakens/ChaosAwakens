@@ -8,34 +8,33 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 
-import javax.tools.Tool;
-
 public class ModItems implements ModInitializer {
-    static Config config = AutoConfig.getConfigHolder(Config.class).getConfig();
+    private static final Config config = AutoConfig.getConfigHolder(Config.class).getConfig();
 
     //Food Items
-    public static final Item RAW_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item COOKED_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item RAW_BACON = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item COOKED_BACON = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item CORN = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item TOMATO = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item LETTUCE = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item CHEESE = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item GARDEN_SALAD = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item BLT = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item STRAWBERRY = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item RADISH = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item RADISH_STEW = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item CHERRIES = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item SPARK_FISH = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item LAVA_EEL = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item COOKED_CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item SEAFOOD_PATTY = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item PEACH = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item COOKED_PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC));
+
+    public static final Item RAW_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RAW_CORNDOG));
+    public static final Item COOKED_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_CORNDOG));
+    public static final Item RAW_BACON = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RAW_BACON));
+    public static final Item COOKED_BACON = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_BACON));
+    public static final Item CORN = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CORN));
+    public static final Item TOMATO = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.TOMATO));
+    public static final Item LETTUCE = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.LETTUCE));
+    public static final Item CHEESE = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CHEESE));
+    public static final Item GARDEN_SALAD = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.GARDEN_SALAD));
+    public static final Item BLT = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.BLT));
+    public static final Item STRAWBERRY = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.STRAWBERRY));
+    public static final Item RADISH = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RADISH));
+    public static final Item RADISH_STEW = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RADISH_STEW));
+    public static final Item CHERRIES = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CHERRIES));
+    public static final Item SPARK_FISH = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.SPARK_FISH));
+    public static final Item LAVA_EEL = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.LAVA_EEL));
+    public static final Item CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CRAB_MEAT));
+    public static final Item COOKED_CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_CRAB_MEAT));
+    public static final Item SEAFOOD_PATTY = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.SEAFOOD_PATTY));
+    public static final Item PEACH = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.PEACH));
+    public static final Item PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.PEACOCK_LEG));
+    public static final Item COOKED_PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_PEACOCK_LEG));
 
     public static final Item BUTTER = new Item(new Item.Settings().group(ItemGroup.MISC));
 
@@ -61,7 +60,7 @@ public class ModItems implements ModInitializer {
     public static final ArmorMaterial ULTIMATE_ARMOR_MATERIAL = new GenericArmorMaterial(48, new int[]{6, 10, 12, 6}, 64, (int) 2.5f, null, "ultimate");
 
     public static final ToolItem ULTIMATE_SWORD = new SwordItem(ULTIMATE_TOOL_MATERIAL, (int) (config.ultimate.ultimateSwordDamage - 37), -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem ULTIMATE_SHOVEL = new ShovelItem(ULTIMATE_TOOL_MATERIAL, (int) (config.ultimate.ultimateAxeDamage - 37), -3, new Item.Settings().group(ItemGroup.TOOLS));
+    public static final ToolItem ULTIMATE_SHOVEL = new ShovelItem(ULTIMATE_TOOL_MATERIAL, (int) (config.ultimate.ultimateShovelDamage - 37), -3, new Item.Settings().group(ItemGroup.TOOLS));
     public static final ToolItem ULTIMATE_PICKAXE = new GenericPickaxeItem(ULTIMATE_TOOL_MATERIAL, (int) (config.ultimate.ultimatePickaxeDamage - 37), -2.8f, new Item.Settings().group(ItemGroup.TOOLS));
     public static final ToolItem ULTIMATE_AXE = new GenericAxeItem(ULTIMATE_TOOL_MATERIAL, (int) (config.ultimate.ultimateAxeDamage - 37), -3, new Item.Settings().group(ItemGroup.TOOLS));
     public static final ToolItem ULTIMATE_HOE = new GenericHoeItem(ULTIMATE_TOOL_MATERIAL, (int) (config.ultimate.ultimateHoeDamage - 37), 0, new Item.Settings().group(ItemGroup.TOOLS));
@@ -135,7 +134,7 @@ public class ModItems implements ModInitializer {
     public static final ToolMaterial EXPERIENCE_TOOL_MATERIAL = new GenericToolMaterial(500, 5, 3.0F, 2, 15, null);
     public static final ArmorMaterial EXPERIENCE_ARMOR_MATERIAL = new GenericArmorMaterial(39, new int[]{4, 7, 9, 5}, 32, (int) 2.5f, Items.EMERALD, "experience");
 
-    public static final ToolItem EXPERIENCE_SWORD = new SwordItem(EXPERIENCE_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem EXPERIENCE_SWORD = new SwordItem(EXPERIENCE_TOOL_MATERIAL, (int) (config.misc.experienceSwordDamage), -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
 
     public static final Item EXPERIENCE_HELMET = new ArmorItem(EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item EXPERIENCE_CHESTPLATE = new ArmorItem(EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
@@ -183,11 +182,11 @@ public class ModItems implements ModInitializer {
     //Misc Weapons
     public static final ToolMaterial NIGHTMARE_TOOL_MATERIAL = new GenericToolMaterial(500, 5, 3.0F, 2, 15, null);
 
-    public static final ToolItem FAIRY_SWORD = new SwordItem(EMERALD_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem NIGHTMARE_SWORD = new SwordItem(NIGHTMARE_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem POISON_SWORD = new SwordItem(EMERALD_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem RAT_SWORD = new SwordItem(EMERALD_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final ToolItem BIG_HAMMER = new SwordItem(AMETHYST_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem FAIRY_SWORD = new SwordItem(EMERALD_TOOL_MATERIAL, (int) (config.misc.fairySwordDamage - 7), -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem NIGHTMARE_SWORD = new SwordItem(NIGHTMARE_TOOL_MATERIAL, (int) (config.misc.nightmareSwordDamage - 7), -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem POISON_SWORD = new SwordItem(EMERALD_TOOL_MATERIAL, (int) (config.misc.poisonSwordDamage - 7), -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem RAT_SWORD = new SwordItem(EMERALD_TOOL_MATERIAL, (int) (config.misc.ratSwordDamage - 7), -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem BIG_HAMMER = new SwordItem(AMETHYST_TOOL_MATERIAL, (int) (config.misc.bigHammerDamage - 7), -2.4f, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem PRISMATIC_REAPER = new SwordItem(ULTIMATE_TOOL_MATERIAL, (int) (config.misc.prismaticReaperDamage - 9), -1.9f, new Item.Settings().group(ItemGroup.COMBAT));
 
     //Ranged Weapons

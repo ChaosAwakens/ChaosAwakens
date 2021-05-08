@@ -1,5 +1,7 @@
 package io.github.chaosawakens.blocks;
 
+import io.github.chaosawakens.blocks.custom.RedAntInfestedOre;
+import io.github.chaosawakens.blocks.custom.TermiteInfestedOre;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -21,8 +23,8 @@ public class ModBlocks implements ModInitializer {
     public static final Block SALT_ORE = new Block(FabricBlockSettings.of(Material.STONE));
 
     //Infested Ores
-    public static final Block RED_ANT_INFESTED_ORE = new Block(FabricBlockSettings.of(Material.STONE));
-    public static final Block TERMITE_INFESTED_ORE = new Block(FabricBlockSettings.of(Material.STONE));
+    public static final Block RED_ANT_INFESTED_ORE = new RedAntInfestedOre(FabricBlockSettings.of(Material.STONE));
+    public static final Block TERMITE_INFESTED_ORE = new TermiteInfestedOre(FabricBlockSettings.of(Material.STONE));
 
     //Mob Ores
     public static final Block FOSSILISED_EMERALD_GATOR = new Block(FabricBlockSettings.of(Material.STONE));

@@ -14,6 +14,7 @@ repositories {
     maven { url 'https://repo.repsy.io/mvn/gandiber/geckolib' }
     maven { url 'https://maven.shedaniel.me/' }
     maven { url 'https://maven.terraformersmc.com/releases/' }
+    maven { url 'https://bai.jfrog.io/artifactory/maven' }
 }
 
 dependencies {
@@ -32,6 +33,7 @@ dependencies {
     modApi('me.shedaniel.cloth:cloth-config-fabric:4.11.19') {
         exclude(group: "net.fabricmc.fabric-api")
     }
+    modCompileOnly "mcp.mobius.waila:wthit-api:fabric-2.7.1"
 }
 
 processResources {

@@ -22,12 +22,16 @@
       "io.github.chaosawakens.worldgen.Initializer"
     ],
     "modmenu": [
-      "io.github.chaosawakens.config.ModMenuIntegration"
+      "io.github.chaosawakens.integrations.ModMenuIntegration"
     ]
   },
   "depends": {
     "fabricloader": ">=0.11.3",
-    "fabric": "*",
+    "fabric": ">=0.30.0",
     "minecraft": "1.16.5"
+  },
+  "waila:plugins": {
+    "id": "chaosawakens:overrides",
+    "initializer": "io.github.chaosawakens.blocks.WailaPlugin"
   }
 }
