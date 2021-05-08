@@ -1,7 +1,7 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "chaosawakens:block/aluminium_block",
-    "particle": "chaosawakens:block/aluminium_block"
-  }
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "chaosawakens:block/aluminium_block",
+		"particle": "chaosawakens:block/aluminium_block"
+	}
 }

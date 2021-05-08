@@ -1,8 +1,12 @@
 {
-  "parent": "minecraft:block/cube",
-  "textures": {
-    "top": "chaosawakens:block/golden_melon_top",
-    "side": "chaosawakens:block/golden_melon_side",
-    "bottom": "chaosawakens:block/golden_melon_top"
-  }
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"up": "chaosawakens:block/golden_melon_top",
+		"north": "chaosawakens:block/golden_melon_side",
+		"south": "chaosawakens:block/golden_melon_side",
+		"west": "chaosawakens:block/golden_melon_side",
+		"east": "chaosawakens:block/golden_melon_side",
+		"down": "chaosawakens:block/golden_melon_top",
+		"particle": "chaosawakens:block/golden_melon_side"
+	}
 }
