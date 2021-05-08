@@ -13,30 +13,39 @@ public class ModItems implements ModInitializer {
 
     //Food Items
 
-    public static final Item RAW_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RAW_CORNDOG));
-    public static final Item COOKED_CORNDOG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_CORNDOG));
-    public static final Item RAW_BACON = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RAW_BACON));
-    public static final Item COOKED_BACON = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_BACON));
-    public static final Item CORN = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CORN));
-    public static final Item TOMATO = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.TOMATO));
-    public static final Item LETTUCE = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.LETTUCE));
-    public static final Item CHEESE = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CHEESE));
-    public static final Item GARDEN_SALAD = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.GARDEN_SALAD));
-    public static final Item BLT = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.BLT));
-    public static final Item STRAWBERRY = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.STRAWBERRY));
-    public static final Item RADISH = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RADISH));
-    public static final Item RADISH_STEW = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.RADISH_STEW));
-    public static final Item CHERRIES = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CHERRIES));
-    public static final Item SPARK_FISH = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.SPARK_FISH));
-    public static final Item LAVA_EEL = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.LAVA_EEL));
-    public static final Item CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.CRAB_MEAT));
-    public static final Item COOKED_CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_CRAB_MEAT));
-    public static final Item SEAFOOD_PATTY = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.SEAFOOD_PATTY));
-    public static final Item PEACH = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.PEACH));
-    public static final Item PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.PEACOCK_LEG));
-    public static final Item COOKED_PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.MISC).food(Foods.foods.COOKED_PEACOCK_LEG));
+    public static final Item RAW_CORNDOG = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.RAW_CORNDOG));
+    public static final Item COOKED_CORNDOG = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.COOKED_CORNDOG));
+    public static final Item RAW_BACON = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.RAW_BACON));
+    public static final Item COOKED_BACON = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.COOKED_BACON));
+    public static final Item CORN = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.CORN));
+    public static final Item TOMATO = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.TOMATO));
+    public static final Item LETTUCE = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.LETTUCE));
+    public static final Item CHEESE = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.CHEESE));
+    public static final Item GARDEN_SALAD = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.GARDEN_SALAD));
+    public static final Item BLT = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.BLT));
+    public static final Item STRAWBERRY = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.STRAWBERRY));
+    public static final Item RADISH = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.RADISH));
+    public static final Item RADISH_STEW = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.RADISH_STEW));
+    public static final Item CHERRIES = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.CHERRIES));
+    public static final Item SPARK_FISH = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.SPARK_FISH));
+    public static final Item LAVA_EEL = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.LAVA_EEL));
+    public static final Item CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.CRAB_MEAT));
+    public static final Item COOKED_CRAB_MEAT = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.COOKED_CRAB_MEAT));
+    public static final Item SEAFOOD_PATTY = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.SEAFOOD_PATTY));
+    public static final Item PEACH = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.PEACH));
+    public static final Item PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.PEACOCK_LEG));
+    public static final Item COOKED_PEACOCK_LEG = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.foods.COOKED_PEACOCK_LEG));
 
     public static final Item BUTTER = new Item(new Item.Settings().group(ItemGroup.MISC));
+
+    public static final Item GOLDEN_BREAD = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.BREAD));
+    public static final Item GOLDEN_CHICKEN = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.CHICKEN));
+    public static final Item GOLDEN_TROPICAL_FISH = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.TROPICAL_FISH));
+    public static final Item GOLDEN_COD = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.COD));
+    public static final Item GOLDEN_PORKCHOP = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.PORKCHOP));
+    public static final Item GOLDEN_MELON_SLICE = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.MELON_SLICE));
+    public static final Item GOLDEN_MUSHROOM_STEW = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.MUSHROOM_STEW));
+    public static final Item GOLDEN_STEAK = new Item(new Item.Settings().group(ItemGroup.FOOD).food(Foods.shinyFoods.STEAK));
 
     //Gemstones
     public static final Item AMETHYST = new Item(new Item.Settings().group(ItemGroup.MISC));
@@ -48,7 +57,6 @@ public class ModItems implements ModInitializer {
     public static final Item URANIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item ALUMINIUM_INGOT = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item ALUMINIUM_NUGGET = new Item(new Item.Settings().group(ItemGroup.MISC));
-
 
     public static final Item DRUID_KEY = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item SALT = new Item(new Item.Settings().group(ItemGroup.MISC));
@@ -223,6 +231,15 @@ public class ModItems implements ModInitializer {
         RegisterItem.register("cooked_peacock_leg", COOKED_PEACOCK_LEG);
 
         RegisterItem.register("butter", BUTTER);
+
+        RegisterItem.register("golden_bread", GOLDEN_BREAD);
+        RegisterItem.register("golden_chicken", GOLDEN_CHICKEN);
+        RegisterItem.register("golden_tropical_fish", GOLDEN_TROPICAL_FISH);
+        RegisterItem.register("golden_cod", GOLDEN_COD);
+        RegisterItem.register("golden_porkchop", GOLDEN_PORKCHOP);
+        RegisterItem.register("golden_melon_slice", GOLDEN_MELON_SLICE);
+        RegisterItem.register("golden_mushroom_stew", GOLDEN_MUSHROOM_STEW);
+        RegisterItem.register("golden_steak", GOLDEN_STEAK);
 
         RegisterItem.register("aluminium_ingot", ALUMINIUM_INGOT);
         RegisterItem.register("aluminium_nugget", ALUMINIUM_NUGGET);

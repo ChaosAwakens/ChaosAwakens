@@ -38,7 +38,7 @@ public class Foods {
     public static class shinyFoods {
         public static final FoodComponent BREAD = build(8, 0.8f, true).build();
         public static final FoodComponent CHICKEN = build(6, 0.45f, true).build();
-        public static final FoodComponent CLOWNFISH = build(4, 0.2f, true).build();
+        public static final FoodComponent TROPICAL_FISH = build(4, 0.2f, true).build();
         public static final FoodComponent COD = build(5, 0.3f, true).build();
         public static final FoodComponent PORKCHOP = build(8, 1.1f, true).build();
         public static final FoodComponent MELON_SLICE = build(8, 0.45f, true).build();

@@ -22,8 +22,8 @@ public class SpawnEggs implements ModInitializer {
     public static final Item BEAVER_EGG = new SpawnEggItem(ModEntities.ENT, 0, 0, new Item.Settings().group(ItemGroup.MISC));
     public static final Item APPLE_COW_EGG = new SpawnEggItem(ModEntities.ENT, 0, 0, new Item.Settings().group(ItemGroup.MISC));
     public static final Item GOLDEN_APPLE_COW_EGG = new SpawnEggItem(ModEntities.ENT, 0, 0, new Item.Settings().group(ItemGroup.MISC));
-    public static final Item IRON_GOLEM_EGG = new SpawnEggItem(EntityType.IRON_GOLEM, 0, 0, new Item.Settings().group(ItemGroup.MISC));
-    public static final Item SNOW_GOLEM_EGG = new SpawnEggItem(EntityType.SNOW_GOLEM, 0, 0, new Item.Settings().group(ItemGroup.MISC));
+    public static final Item IRON_GOLEM_EGG = new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Settings().group(ItemGroup.MISC));
+    public static final Item SNOW_GOLEM_EGG = new SpawnEggItem(EntityType.SNOW_GOLEM, 0xffffff, 0xe38a1d, new Item.Settings().group(ItemGroup.MISC));
 
     @Override
     public void onInitialize() {
