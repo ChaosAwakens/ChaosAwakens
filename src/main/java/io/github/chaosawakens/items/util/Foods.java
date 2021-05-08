@@ -22,7 +22,7 @@ public class Foods {
         public static final FoodComponent STRAWBERRY = build(2, 0.65f).build();
         public static final FoodComponent RADISH = build(2, 0.45f).build();
         public static final FoodComponent RADISH_STEW = build(8, 6.4f).build();
-        public static final FoodComponent CHERRIES = build(3, 0.45f).build();
+        public static final FoodComponent CHERRIES = build(3, 0.45f, false, true).build();
         public static final FoodComponent SPARK_FISH = build(3, 0.2f, false, false, true)
                 .statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 100, 0), 1.0f).build();
         public static final FoodComponent LAVA_EEL = build(2, 0.6f, false, false, true)

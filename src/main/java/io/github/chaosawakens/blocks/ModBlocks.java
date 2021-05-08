@@ -11,10 +11,10 @@ import net.minecraft.item.ItemGroup;
 
 public class ModBlocks implements ModInitializer {
     //Ent Dungeon Blocks
-    public static final Block GATE_BLOCK = new Block(FabricBlockSettings.copyOf(Blocks.OAK_LOG).hardness(-1.0f).resistance(3600000.0f));
-    public static final Block END_DUNGEON_WOOD = new Block(FabricBlockSettings.copyOf(Blocks.OAK_LOG).hardness(-1.0f).resistance(3600000.0f));
+    public static final Block GATE_BLOCK = new Block(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).hardness(-1.0f).resistance(3600000.0f));
+    public static final Block END_DUNGEON_WOOD = new Block(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).hardness(-1.0f).resistance(3600000.0f));
 
-    //public static final Block GOLDEN_MELON = new Block(FabricBlockSettings.copyOf(Blocks.MELON).breakByTool(FabricToolTags.AXES));
+    public static final Block GOLDEN_MELON = new Block(FabricBlockSettings.copyOf(Blocks.MELON).breakByTool(FabricToolTags.AXES));
 
     //Gemstone Ores
     public static final Block AMETHYST_ORE = new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE).breakByTool(FabricToolTags.PICKAXES, 2));
@@ -58,7 +58,7 @@ public class ModBlocks implements ModInitializer {
         RegisterBlock.register("gate_block",  GATE_BLOCK, ItemGroup.BUILDING_BLOCKS);
         RegisterBlock.register("ent_dungeon_wood",  END_DUNGEON_WOOD, ItemGroup.BUILDING_BLOCKS);
 
-        //RegisterBlock.register("golden_melon", GOLDEN_MELON, ItemGroup.DECORATIONS);
+        RegisterBlock.register("golden_melon", GOLDEN_MELON, ItemGroup.DECORATIONS);
 
         //Gemstone Ores
         RegisterBlock.register("amethyst_ore",  AMETHYST_ORE, ItemGroup.BUILDING_BLOCKS);
