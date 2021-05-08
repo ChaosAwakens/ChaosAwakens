@@ -1,6 +1,7 @@
 {
 	"itemGroup.chaosawakens_blocks_item_group": "Chaos Awakens Blocks",
 	"itemGroup.chaosawakens_items_item_group": "Chaos Awakens Items",
+	"itemGroup.chaosawakens_food_item_group": "Chaos Awakens Food",
 	"itemGroup.chaosawakens_equipment_item_group": "Chaos Awakens Equipment",
 	"itemGroup.chaosawakens_eggs_item_group": "Chaos Awakens Spawn Eggs",
 
@@ -17,6 +18,7 @@
 	"entity.chaosawakens.beaver": "Beaver",
 	"entity.chaosawakens.apple_cow": "Apple Cow",
 	"entity.chaosawakens.golden_apple_cow": "Golden Apple Cow",
+	"entity.chaosawakens.enchanted_golden_apple_cow": "Enchanted Golden Apple Cow",
 	"entity.chaosawakens.ultimate_arrow": "Ultimate Arrow",
 
 	"item.chaosawakens.ent_spawn_egg": "Ent Spawn Egg",
@@ -32,6 +34,7 @@
 	"item.chaosawakens.beaver_spawn_egg": "Beaver Spawn Egg",
 	"item.chaosawakens.apple_cow_spawn_egg": "Apple Cow Spawn Egg",
 	"item.chaosawakens.golden_apple_cow_spawn_egg": "Golden Apple Cow Spawn Egg",
+	"item.chaosawakens.enchanted_golden_apple_cow_spawn_egg": "Enchanted Golden Apple Cow Spawn Egg",
 	"item.chaosawakens.iron_golem_spawn_egg": "Iron Golem Spawn Egg",
 	"item.chaosawakens.snow_golem_spawn_egg": "Snow Golem Spawn Egg",
 
@@ -69,6 +72,16 @@
 	"item.chaosawakens.wood_fish": "Wood Fish",
 	"item.chaosawakens.spark_fish": "Spark Fish",
 	"item.chaosawakens.lava_eel": "Lava Eel",
+
+	"block.chaosawakens.golden_melon": "Golden Melon",
+	"item.chaosawakens.golden_melon_slice": "Golden Melon Slice",
+	"item.chaosawakens.golden_steak": "Golden Steak",
+	"item.chaosawakens.golden_porkchop": "Golden Porkchop",
+	"item.chaosawakens.golden_chicken": "Golden Chicken",
+	"item.chaosawakens.golden_bread": "Golden Bread",
+	"item.chaosawakens.golden_mushroom_stew": "Golden Mushroom Stew",
+	"item.chaosawakens.golden_cod": "Golden Cod",
+	"item.chaosawakens.golden_tropical_fish": "Golden Tropical Fish",
 
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",

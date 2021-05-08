@@ -32,8 +32,16 @@ public class CAConfig {
         public final ConfigValue<Float> tigersEyePickaxeDamage;
         public final ConfigValue<Float> tigersEyeShovelDamage;
         public final ConfigValue<Float> tigersEyeHoeDamage;
+        public final ConfigValue<Float> nightmareSwordDamage;
+        public final ConfigValue<Float> experienceSwordDamage;
+        public final ConfigValue<Float> poisonSwordDamage;
+        public final ConfigValue<Float> ratSwordDamage;
+        public final ConfigValue<Float> fairySwordDamage;
+        public final ConfigValue<Float> bigHammerDamage;
         public final ConfigValue<Float> prismaticReaperDamage;
-
+        public final ConfigValue<Integer> explosionSize;
+        public final ConfigValue<Integer> explosionType;
+        public final ConfigValue<Boolean> explosionFire;
 
         Common(ForgeConfigSpec.Builder builder) {
             builder.push("Attack Damage");
@@ -72,9 +80,24 @@ public class CAConfig {
             tigersEyeShovelDamage = builder.define("Damage of the Tiger's Eye Shovel:", 10.5F);
             tigersEyeHoeDamage = builder.define("Damage of the Tiger's Eye Hoe:", 1.0F);
             builder.pop();
-            builder.push("Misc. Weapons/Tools");
+            builder.push("Misc Weapons/Tools");
+            nightmareSwordDamage = builder.define("Damage of the Nightmare Sword", 30.0F);
+            experienceSwordDamage = builder.define("Damage of the Experience Sword", 10.0F);
+            poisonSwordDamage = builder.define("Damage of the Poison Sword", 10.0F);
+            ratSwordDamage = builder.define("Damage of the Rat Sword", 10.0F);
+            fairySwordDamage = builder.define("Damage of the Fairy Sword", 10.0F);
+            bigHammerDamage = builder.define("Damage of the Big Hammer", 15.0F);
             prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper:", 29.0F);
             builder.pop();
+            builder.pop();
+            builder.push("Thunder Staff");
+            explosionSize = builder.define("Thunder Staff Explosion Size", 5);
+            explosionType = builder
+                    .comment("0 = NONE - The Thunder Staff will no break blocks." + "\n" +
+                            "1 = BREAK - The Thunder Staff will drop some blocks that it breaks. (May not work due to lightning)" + "\n" +
+                            "2 = DESTROY - The Thunder Staff will destroy blocks and never drop them.")
+                    .defineInRange("Thunder Staff Explosion Type:", 2, 0, 2);
+            explosionFire = builder.define("Fire From Explosion:", true);
             builder.pop();
         }
     }

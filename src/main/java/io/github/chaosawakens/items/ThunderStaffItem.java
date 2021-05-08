@@ -1,6 +1,7 @@
 package io.github.chaosawakens.items;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.config.CAConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.LightningBoltEntity;
@@ -48,7 +49,15 @@ public class ThunderStaffItem extends Item {
              }
 
              ((ServerWorld) worldIn).summonEntity(lightning);
-             ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), 6, true, Explosion.Mode.DESTROY);
+             if (CAConfig.COMMON.explosionType.get() == 0) {
+                 ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.NONE);
+             }
+             if (CAConfig.COMMON.explosionType.get() == 1) {
+                 ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.BREAK);
+             }
+             if (CAConfig.COMMON.explosionType.get() == 2) {
+                 ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.DESTROY);
+             }
          }
 
         playerIn.addStat(Stats.ITEM_USED.get(this));

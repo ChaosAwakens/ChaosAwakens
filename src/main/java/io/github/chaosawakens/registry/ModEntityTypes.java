@@ -53,9 +53,14 @@ public class ModEntityTypes {
 				.build(new ResourceLocation(ChaosAwakens.MODID, "apple_cow").toString()));
 	public static final RegistryObject<EntityType<GoldenAppleCowEntity>> GOLDEN_APPLE_COW = ENTITY_TYPES.register("golden_apple_cow",
 			() -> EntityType.Builder.create(GoldenAppleCowEntity::new, EntityClassification.CREATURE)
-				.size(0.9F, 1.4F)
-				.trackingRange(10)// Hitbox Size ()
-				.build(new ResourceLocation(ChaosAwakens.MODID, "golden_apple_cow").toString()));
+					.size(0.9F, 1.4F)
+					.trackingRange(10)// Hitbox Size ()
+					.build(new ResourceLocation(ChaosAwakens.MODID, "golden_apple_cow").toString()));
+	public static final RegistryObject<EntityType<EnchantedGoldenAppleCowEntity>> ENCHANTED_GOLDEN_APPLE_COW = ENTITY_TYPES.register("enchanted_golden_apple_cow",
+			() -> EntityType.Builder.create(EnchantedGoldenAppleCowEntity::new, EntityClassification.CREATURE)
+					.size(0.9F, 1.4F)
+					.trackingRange(10)// Hitbox Size ()
+					.build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_apple_cow").toString()));
 	
 	// Ants
 	public static final RegistryObject<EntityType<BrownAntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",

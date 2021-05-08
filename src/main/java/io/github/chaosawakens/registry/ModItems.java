@@ -45,21 +45,21 @@ public class ModItems {
     public static final Food FOOD_COOKED_PEACOCK_LEG = new Food.Builder().hunger(12).saturation(1.4F).build();
 
     // SHINY FOOD
-    public static final Food FOOD_GOLDEN_BREAD = new Food.Builder().hunger(8).saturation(0.8F).meat().build();
-    public static final Food FOOD_GOLDEN_CHICKEN = new Food.Builder().hunger(6).saturation(0.45F).meat().build();
-    public static final Food FOOD_GOLDEN_CLOWNFISH = new Food.Builder().hunger(4).saturation(0.2F).meat().build();
-    public static final Food FOOD_GOLDEN_COD = new Food.Builder().hunger(5).saturation(0.3F).meat().build();
-    public static final Food FOOD_GOLDEN_PORKCHOP = new Food.Builder().hunger(8).saturation(1.1F).meat().build();
-    public static final Food FOOD_GOLDEN_MELON_SLICE = new Food.Builder().hunger(8).saturation(0.45F).meat().build();
-    public static final Food FOOD_GOLDEN_MUSHROOM_STEW = new Food.Builder().hunger(6).saturation(0.25F).meat().build();
-    public static final Food FOOD_GOLDEN_STEAK = new Food.Builder().hunger(8).saturation(1.1F).meat().build();
+    public static final Food FOOD_GOLDEN_BREAD = new Food.Builder().hunger(8).saturation(0.8F).setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_CHICKEN = new Food.Builder().hunger(6).saturation(0.45F).meat().setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_TROPICAL_FISH = new Food.Builder().hunger(4).saturation(0.2F).setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_COD = new Food.Builder().hunger(5).saturation(0.3F).setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_PORKCHOP = new Food.Builder().hunger(8).saturation(1.1F).meat().setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_MELON_SLICE = new Food.Builder().hunger(8).saturation(0.45F).setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_MUSHROOM_STEW = new Food.Builder().hunger(6).saturation(0.25F).setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_STEAK = new Food.Builder().hunger(8).saturation(1.1F).meat().setAlwaysEdible().build();
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
 
     // SHINY FOOD
     public static final RegistryObject<Item> GOLDEN_BREAD = ITEMS.register("golden_bread", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_BREAD).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> GOLDEN_CHICKEN = ITEMS.register("golden_chicken", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_CHICKEN).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_CLOWNFISH = ITEMS.register("golden_clownfish", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_CLOWNFISH).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_TROPICAL_FISH = ITEMS.register("golden_tropical_fish", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_TROPICAL_FISH).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> GOLDEN_COD = ITEMS.register("golden_cod", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_COD).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> GOLDEN_PORKCHOP = ITEMS.register("golden_porkchop", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_PORKCHOP).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> GOLDEN_MELON_SLICE = ITEMS.register("golden_melon_slice", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_MELON_SLICE).group(ModItemGroups.foodItemGroup)));
@@ -163,12 +163,12 @@ public class ModItems {
     public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 
     // Misc. Weapons
-    public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_NIGHTMARE, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.KNOCKBACK,Enchantments.FIRE_ASPECT},new int[]{1,3,1}));
-    public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.UNBREAKING,Enchantments.MENDING},new int[]{2,3,1}));
-    public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, 3, -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_NIGHTMARE, (int) (CAConfig.COMMON.nightmareSwordDamage.get() - 27), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.KNOCKBACK,Enchantments.FIRE_ASPECT},new int[]{1,3,1}));
+    public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.experienceSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.UNBREAKING,Enchantments.MENDING},new int[]{2,3,1}));
+    public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.poisonSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.ratSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.fairySwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.bigHammerDamage.get() - 12), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[]{Enchantments.UNBREAKING,Enchantments.SWEEPING},new int[]{4,4}));
 
     // Staffs
@@ -237,6 +237,7 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEggItem> BEAVER_SPAWN_EGG = ITEMS.register("beaver_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.BEAVER, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> APPLE_COW_SPAWN_EGG = ITEMS.register("apple_cow_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.APPLE_COW, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<ModSpawnEggItem> GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("golden_apple_cow_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.GOLDEN_APPLE_COW, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
+    public static final RegistryObject<EnchantedModSpawnEggItem> ENCHANTED_GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("enchanted_golden_apple_cow_spawn_egg", () -> new EnchantedModSpawnEggItem(ModEntityTypes.ENCHANTED_GOLDEN_APPLE_COW, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
     public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xffffff, 0xe38a1d, new Item.Properties().group(ModItemGroups.eggsItemGroup)));
 }

@@ -2,7 +2,6 @@ package io.github.chaosawakens.worldgen;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModEntityTypes;
-import io.github.chaosawakens.registry.ModStructures;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
