@@ -5,6 +5,7 @@ import io.github.chaosawakens.enums.ArmorMaterials;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.enums.ToolMaterials;
 import io.github.chaosawakens.items.*;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -45,26 +46,30 @@ public class ModItems {
     public static final Food FOOD_COOKED_PEACOCK_LEG = new Food.Builder().hunger(12).saturation(1.4F).build();
 
     // SHINY FOOD
+    public static final Food FOOD_CANDYCANE = new Food.Builder().hunger(2).saturation(0.15F).setAlwaysEdible().build();
     public static final Food FOOD_GOLDEN_BREAD = new Food.Builder().hunger(8).saturation(0.8F).setAlwaysEdible().build();
-    public static final Food FOOD_GOLDEN_CHICKEN = new Food.Builder().hunger(6).saturation(0.45F).meat().setAlwaysEdible().build();
-    public static final Food FOOD_GOLDEN_TROPICAL_FISH = new Food.Builder().hunger(4).saturation(0.2F).setAlwaysEdible().build();
-    public static final Food FOOD_GOLDEN_COD = new Food.Builder().hunger(5).saturation(0.3F).setAlwaysEdible().build();
-    public static final Food FOOD_GOLDEN_PORKCHOP = new Food.Builder().hunger(8).saturation(1.1F).meat().setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_CHICKEN = new Food.Builder().hunger(6).saturation(0.45F).meat().setAlwaysEdible().effect(new EffectInstance(Effects.STRENGTH, 600, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_TROPICAL_FISH = new Food.Builder().hunger(4).saturation(0.2F).setAlwaysEdible().effect(new EffectInstance(Effects.REGENERATION, 2400, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_COD = new Food.Builder().hunger(5).saturation(0.3F).setAlwaysEdible().effect(new EffectInstance(Effects.REGENERATION, 200, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_PORKCHOP = new Food.Builder().hunger(8).saturation(1.1F).meat().setAlwaysEdible().effect(new EffectInstance(Effects.STRENGTH, 600, 0), 1.0F).build();
     public static final Food FOOD_GOLDEN_MELON_SLICE = new Food.Builder().hunger(8).saturation(0.45F).setAlwaysEdible().build();
-    public static final Food FOOD_GOLDEN_MUSHROOM_STEW = new Food.Builder().hunger(6).saturation(0.25F).setAlwaysEdible().build();
-    public static final Food FOOD_GOLDEN_STEAK = new Food.Builder().hunger(8).saturation(1.1F).meat().setAlwaysEdible().build();
+    public static final Food FOOD_GOLDEN_MUSHROOM_STEW = new Food.Builder().hunger(6).saturation(0.25F).setAlwaysEdible().effect(new EffectInstance(Effects.SPEED, 700, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_STEAK = new Food.Builder().hunger(8).saturation(1.1F).meat().setAlwaysEdible().effect(new EffectInstance(Effects.STRENGTH, 400, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_COOKIE = new Food.Builder().hunger(2).saturation(0.15F).setAlwaysEdible().effect(new EffectInstance(Effects.REGENERATION, 100, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_POTATO = new Food.Builder().hunger(6).saturation(0.65F).setAlwaysEdible().effect(new EffectInstance(Effects.REGENERATION, 400, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_PUMPKIN_PIE = new Food.Builder().hunger(8).saturation(9).setAlwaysEdible().effect(new EffectInstance(Effects.NIGHT_VISION, 600, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_FLESH = new Food.Builder().hunger(4).saturation(0.3F).setAlwaysEdible().effect(new EffectInstance(Effects.SATURATION, 40, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_PUFFERFISH = new Food.Builder().hunger(4).saturation(0.3F).setAlwaysEdible().effect(new EffectInstance(Effects.POISON, 100, 0), 1.0F).effect(new EffectInstance(Effects.NIGHT_VISION, 1800, 0), 1.0F).effect(new EffectInstance(Effects.WATER_BREATHING, 3600, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_SALMON = new Food.Builder().hunger(8).saturation(0.85F).setAlwaysEdible().effect(new EffectInstance(Effects.JUMP_BOOST, 1800, 0), 1.0F).effect(new EffectInstance(Effects.SPEED, 1800, 1), 1.0F).build();
+    public static final Food FOOD_GOLDEN_CANDYCANE = new Food.Builder().hunger(4).saturation(0.25F).setAlwaysEdible().effect(new EffectInstance(Effects.HASTE, 300, 0), 1.0F).effect(new EffectInstance(Effects.JUMP_BOOST, 600, 0), 1.0F).effect(new EffectInstance(Effects.SPEED, 600, 0), 1.0F).build();
+    public static final Food FOOD_ULTIMATE_APPLE = new Food.Builder().hunger(10).saturation(1.5F).setAlwaysEdible().effect(new EffectInstance(Effects.STRENGTH, 3900, 2), 1.0F).effect(new EffectInstance(Effects.REGENERATION, 4800, 3), 1.0F).effect(new EffectInstance(Effects.HEALTH_BOOST, 5400, 2), 1.0F).effect(new EffectInstance(Effects.RESISTANCE, 7200, 0), 1.0F).effect(new EffectInstance(Effects.FIRE_RESISTANCE, 7200, 0), 1.0F).build();
+    public static final Food FOOD_ENCHANTED_GOLDEN_CARROT = new Food.Builder().hunger(8).saturation(0.85F).setAlwaysEdible().effect(new EffectInstance(Effects.REGENERATION, 600, 2), 1.0F).effect(new EffectInstance(Effects.NIGHT_VISION, 1200, 0), 1.0F).effect(new EffectInstance(Effects.ABSORPTION, 1200, 0), 1.0F).build();
+    public static final Food FOOD_ENCHANTED_GOLDEN_STEAK = new Food.Builder().hunger(10).saturation(1.2F).setAlwaysEdible().effect(new EffectInstance(Effects.ABSORPTION, 900, 0), 1.0F).effect(new EffectInstance(Effects.STRENGTH, 1800, 1), 1.0F).effect(new EffectInstance(Effects.REGENERATION, 1800, 0), 1.0F).build();
+    public static final Food FOOD_ENCHANTED_GOLDEN_COD = new Food.Builder().hunger(8).saturation(0.85F).setAlwaysEdible().effect(new EffectInstance(Effects.REGENERATION, 600, 2), 1.0F).effect(new EffectInstance(Effects.WATER_BREATHING, 900, 0), 1.0F).build();
+    public static final Food FOOD_ENCHANTED_GOLDEN_COOKIE = new Food.Builder().hunger(4).saturation(0.85F).setAlwaysEdible().effect(new EffectInstance(Effects.REGENERATION, 600, 1), 1.0F).effect(new EffectInstance(Effects.SPEED, 1000, 1), 1.0F).build();
+    public static final Food FOOD_ENCHANTED_GOLDEN_CANDYCANE = new Food.Builder().hunger(6).saturation(0.3F).setAlwaysEdible().effect(new EffectInstance(Effects.STRENGTH, 300, 0), 1.0F).effect(new EffectInstance(Effects.REGENERATION, 300, 0), 1.0F).effect(new EffectInstance(Effects.HASTE, 600, 1), 1.0F).effect(new EffectInstance(Effects.JUMP_BOOST, 900, 1), 1.0F).effect(new EffectInstance(Effects.SPEED, 900, 1), 1.0F).build();
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
-
-    // SHINY FOOD
-    public static final RegistryObject<Item> GOLDEN_BREAD = ITEMS.register("golden_bread", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_BREAD).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_CHICKEN = ITEMS.register("golden_chicken", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_CHICKEN).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_TROPICAL_FISH = ITEMS.register("golden_tropical_fish", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_TROPICAL_FISH).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_COD = ITEMS.register("golden_cod", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_COD).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_PORKCHOP = ITEMS.register("golden_porkchop", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_PORKCHOP).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_MELON_SLICE = ITEMS.register("golden_melon_slice", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_MELON_SLICE).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_MUSHROOM_STEW = ITEMS.register("golden_mushroom_stew", () -> new SoupItem(new Item.Properties().food(ModItems.FOOD_GOLDEN_MUSHROOM_STEW).maxStackSize(1).group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> GOLDEN_STEAK = ITEMS.register("golden_steak", () -> new Item(new Item.Properties().food(ModItems.FOOD_GOLDEN_STEAK).group(ModItemGroups.foodItemGroup)));
 
     // ORESPAWN FOODS
     public static final RegistryObject<Item> CORNDOG = ITEMS.register("corndog", () -> new Item(new Item.Properties().food(ModItems.FOOD_RAW_CORNDOG).group(ModItemGroups.foodItemGroup)));
@@ -79,6 +84,7 @@ public class ModItems {
     public static final RegistryObject<Item> CORN = ITEMS.register("corn", () -> new Item(new Item.Properties().food(ModItems.FOOD_CORN).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato", () -> new Item(new Item.Properties().food(ModItems.FOOD_TOMATO).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () -> new Item(new Item.Properties().food(ModItems.FOOD_STRAWBERRY).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> CHERRIES = ITEMS.register("cherries", () -> new Item(new Item.Properties().food(ModItems.FOOD_CHERRIES).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> PEACH = ITEMS.register("peach", () -> new Item(new Item.Properties().food(ModItems.FOOD_PEACH).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> RADISH = ITEMS.register("radish", () -> new Item(new Item.Properties().food(ModItems.FOOD_RADISH).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> LETTUCE = ITEMS.register("lettuce", () -> new Item(new Item.Properties().food(ModItems.FOOD_LETTUCE).group(ModItemGroups.foodItemGroup)));
@@ -98,7 +104,6 @@ public class ModItems {
     public static final RegistryObject<Item> BUTTER = ITEMS.register("butter", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
 
     public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> CHERRIES = ITEMS.register("cherries", () -> new Item(new Item.Properties().food(ModItems.FOOD_CHERRIES).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> CHERRY_SEEDS = ITEMS.register("cherry_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> APPLE_SEEDS = ITEMS.register("apple_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
@@ -108,6 +113,31 @@ public class ModItems {
     public static final RegistryObject<Item> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
 
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
+
+    // SHINY FOOD
+    public static final RegistryObject<Item> GOLDEN_MELON_SEEDS = ITEMS.register("golden_melon_seeds", () -> new Item(new Item.Properties().group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> CANDYCANE = ITEMS.register("candycane", () -> new Item(new Item.Properties().rarity(Rarity.COMMON).food(ModItems.FOOD_CANDYCANE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_BREAD = ITEMS.register("golden_bread", () -> new Item(new Item.Properties().rarity(Rarity.COMMON).food(ModItems.FOOD_GOLDEN_BREAD).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_CHICKEN = ITEMS.register("golden_chicken", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_CHICKEN).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_TROPICAL_FISH = ITEMS.register("golden_tropical_fish", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_TROPICAL_FISH).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_COD = ITEMS.register("golden_cod", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_COD).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_PORKCHOP = ITEMS.register("golden_porkchop", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_PORKCHOP).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_MELON_SLICE = ITEMS.register("golden_melon_slice", () -> new Item(new Item.Properties().rarity(Rarity.COMMON).food(ModItems.FOOD_GOLDEN_MELON_SLICE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_MUSHROOM_STEW = ITEMS.register("golden_mushroom_stew", () -> new SoupItem(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_MUSHROOM_STEW).maxStackSize(1).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_STEAK = ITEMS.register("golden_steak", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_STEAK).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_COOKIE = ITEMS.register("golden_cookie", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_COOKIE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_POTATO = ITEMS.register("golden_potato", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_POTATO).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_PUMPKIN_PIE = ITEMS.register("golden_pumpkin_pie", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_PUMPKIN_PIE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_FLESH = ITEMS.register("golden_flesh", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_FLESH).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_PUFFERFISH = ITEMS.register("golden_pufferfish", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_PUFFERFISH).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_SALMON = ITEMS.register("golden_salmon", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_SALMON).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GOLDEN_CANDYCANE = ITEMS.register("golden_candycane", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(ModItems.FOOD_GOLDEN_CANDYCANE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<EnchantedItem> ULTIMATE_APPLE = ITEMS.register("ultimate_apple", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(ModItems.FOOD_ULTIMATE_APPLE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_CARROT = ITEMS.register("enchanted_golden_carrot", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(ModItems.FOOD_ENCHANTED_GOLDEN_CARROT).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_STEAK = ITEMS.register("enchanted_golden_steak", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(ModItems.FOOD_ENCHANTED_GOLDEN_STEAK).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_COOKIE = ITEMS.register("enchanted_golden_cookie", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(ModItems.FOOD_ENCHANTED_GOLDEN_COOKIE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_COD = ITEMS.register("enchanted_golden_cod", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(ModItems.FOOD_ENCHANTED_GOLDEN_COD).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_CANDYCANE = ITEMS.register("enchanted_golden_candycane", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(ModItems.FOOD_ENCHANTED_GOLDEN_CANDYCANE).group(ModItemGroups.foodItemGroup)));
 
     // DEV ITEMS
     public static final RegistryObject<DevItem> DEV_ITEM1 = ITEMS.register("dev_item1", () -> new DevItem(new Item.Properties().maxStackSize(1)));
@@ -127,49 +157,49 @@ public class ModItems {
 
     // TOOLS
     // Ultimate
-    public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimateSwordDamage.get() - 37), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.KNOCKBACK,Enchantments.LOOTING,Enchantments.UNBREAKING,Enchantments.FIRE_ASPECT},new int[]{5,5,5,3,3,2,2}));
-    public static final RegistryObject<EnchantedAxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new EnchantedAxeItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimateAxeDamage.get() - 37), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
-    public static final RegistryObject<EnchantedPickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new EnchantedPickaxeItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimatePickaxeDamage.get() - 37), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
+    public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_ULTIMATE, (CAConfig.COMMON.ultimateSwordDamage.get() - 37), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.SMITE,Enchantments.BANE_OF_ARTHROPODS,Enchantments.KNOCKBACK,Enchantments.LOOTING,Enchantments.UNBREAKING,Enchantments.FIRE_ASPECT},new int[]{5,5,5,3,3,2,2}));
+    public static final RegistryObject<EnchantedAxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new EnchantedAxeItem(ToolMaterials.TOOL_ULTIMATE, (CAConfig.COMMON.ultimateAxeDamage.get() - 37), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
+    public static final RegistryObject<EnchantedPickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new EnchantedPickaxeItem(ToolMaterials.TOOL_ULTIMATE, (CAConfig.COMMON.ultimatePickaxeDamage.get() - 37), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
     public static final RegistryObject<EnchantedShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new EnchantedShovelItem(ToolMaterials.TOOL_ULTIMATE, (CAConfig.COMMON.ultimateShovelDamage.get() - 37), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
-    public static final RegistryObject<EnchantedHoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new EnchantedHoeItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimateHoeDamage.get() - 37), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
+    public static final RegistryObject<EnchantedHoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new EnchantedHoeItem(ToolMaterials.TOOL_ULTIMATE, (CAConfig.COMMON.ultimateHoeDamage.get() - 37), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.EFFICIENCY,Enchantments.FORTUNE,Enchantments.UNBREAKING},new int[]{5,5,2}));
     public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().group(ModItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(1000).defaultMaxDamage(1000),new Enchantment[]{Enchantments.POWER,Enchantments.FLAME,Enchantments.PUNCH,Enchantments.INFINITY},new int[]{5,3,2,1}));
 
     // Emerald
-    public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.emeraldSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.emeraldSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new AxeItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.emeraldAxeDamage.get() - 7), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<EnchantedPickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.emeraldPickaxeDamage.get() - 7), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SILK_TOUCH},new int[]{1}));
+    public static final RegistryObject<EnchantedPickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.emeraldPickaxeDamage.get() - 7), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SILK_TOUCH},new int[]{1}));
     public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new ShovelItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.emeraldShovelDamage.get() - 7), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.emeraldHoeDamage.get() - 7), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.emeraldHoeDamage.get() - 7), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 
     // Ruby
-    public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(ToolMaterials.TOOL_RUBY, (int) (CAConfig.COMMON.rubySwordDamage.get() - 17), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(ToolMaterials.TOOL_RUBY, (CAConfig.COMMON.rubySwordDamage.get() - 17), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ToolMaterials.TOOL_RUBY, (CAConfig.COMMON.rubyAxeDamage.get() - 17), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, (int) (CAConfig.COMMON.rubyPickaxeDamage.get() - 17), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, (CAConfig.COMMON.rubyPickaxeDamage.get() - 17), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ToolMaterials.TOOL_RUBY, (CAConfig.COMMON.rubyShovelDamage.get() - 17), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ToolMaterials.TOOL_RUBY, (int) (CAConfig.COMMON.rubyHoeDamage.get() - 17), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ToolMaterials.TOOL_RUBY, (CAConfig.COMMON.rubyHoeDamage.get() - 17), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 
     // Amethyst
-    public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.amethystSwordDamage.get() - 12), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.amethystSwordDamage.get() - 12), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.amethystAxeDamage.get() - 12), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.amethystPickaxeDamage.get() - 12), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.amethystPickaxeDamage.get() - 12), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.amethystShovelDamage.get() - 12), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.amethystHoeDamage.get() - 12), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.amethystHoeDamage.get() - 12), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 
     // Tiger's Eye
-    public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyeSwordDamage.get() - 9), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeSwordDamage.get() - 9), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeAxeDamage.get() - 9), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyePickaxeDamage.get() - 9), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyePickaxeDamage.get() - 9), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeShovelDamage.get() - 9), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 
     // Misc. Weapons
-    public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_NIGHTMARE, (int) (CAConfig.COMMON.nightmareSwordDamage.get() - 27), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.KNOCKBACK,Enchantments.FIRE_ASPECT},new int[]{1,3,1}));
-    public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.experienceSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.UNBREAKING,Enchantments.MENDING},new int[]{2,3,1}));
-    public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.poisonSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.ratSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.fairySwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.bigHammerDamage.get() - 12), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[]{Enchantments.UNBREAKING,Enchantments.SWEEPING},new int[]{4,4}));
+    public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_NIGHTMARE, (CAConfig.COMMON.nightmareSwordDamage.get() - 27), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.KNOCKBACK,Enchantments.FIRE_ASPECT},new int[]{1,3,1}));
+    public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.experienceSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.UNBREAKING,Enchantments.MENDING},new int[]{2,3,1}));
+    public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.poisonSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.ratSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (CAConfig.COMMON.fairySwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.bigHammerDamage.get() - 12), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[]{Enchantments.UNBREAKING,Enchantments.SWEEPING},new int[]{4,4}));
 
     // Staffs
     public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(ModItemGroups.equipmentItemGroup).maxDamage(50)));
