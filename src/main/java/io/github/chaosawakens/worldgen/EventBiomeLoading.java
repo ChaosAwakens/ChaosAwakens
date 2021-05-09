@@ -1,49 +1,37 @@
 package io.github.chaosawakens.worldgen;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.registry.ModBiomes;
-import io.github.chaosawakens.registry.ModDimensions;
+import java.util.Objects;
+
 import io.github.chaosawakens.registry.ModFeatures;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeRegistry;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Collection;
-import java.util.Objects;
-
-@Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 
 public class EventBiomeLoading {
 	
 	@SubscribeEvent
-	public static void onBiomeLoading(BiomeLoadingEvent event) {
+	public static void onBiomeLoading(final BiomeLoadingEvent event) {
 		
 		BiomeGenerationSettingsBuilder gen = event.getGeneration();
 		
-		RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES,
-				Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
+		RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 		
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
-			//ChaosAwakens.LOGGER.debug("Ores Overworld Gen");
 			addCustomOres(gen);
+			
+			gen.getStructures().add( () -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 		}
 		
 		if (event.getName().toString().equals("chaosawakens:mining_biome")) {
-			//ChaosAwakens.LOGGER.debug("Ores Mining Gen");
 			addCustomOres(gen);
 		}
+		
 	}
 	
 	public static void addCustomOres(BiomeGenerationSettingsBuilder gen) {

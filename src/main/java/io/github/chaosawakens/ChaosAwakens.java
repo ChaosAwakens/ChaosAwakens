@@ -25,6 +25,7 @@ import io.github.chaosawakens.entity.UnstableAntEntity;
 import io.github.chaosawakens.network.PacketHandler;
 import io.github.chaosawakens.registry.*;
 import io.github.chaosawakens.worldgen.ConfiguredStructures;
+import io.github.chaosawakens.worldgen.EventBiomeLoading;
 import io.github.chaosawakens.worldgen.ModBiomeFeatures;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.data.DataGenerator;
@@ -101,9 +102,10 @@ public class ChaosAwakens {
 		ModStructures.STRUCTURES.register(eventBus);
 		ModAttributes.ATTRIBUTES.register(eventBus);
 		
-		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> new SafeRunnable() {@Override public void run() { eventBus.register(new ModBIColors()); } } );
+		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> new SafeRunnable() {@Override public void run() { eventBus.register(new BlockItemColors()); } } );
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);
 		MinecraftForge.EVENT_BUS.register(this);
 		
 		MinecraftForge.EVENT_BUS.register(GameEvents.class);
@@ -116,7 +118,6 @@ public class ChaosAwakens {
 	public void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (event.getWorld() instanceof ServerWorld) {
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
-			
 			try {
 				if (GETCODEC_METHOD == null)
 					GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
@@ -126,18 +127,18 @@ public class ChaosAwakens {
 					return;
 				
 			} catch (Exception e) {
-				ChaosAwakens.LOGGER.error("Was unable to check if " + serverWorld.getDimensionKey().getLocation() + " is using Terraforged's ChunkGenerator.");
+				ChaosAwakens.LOGGER.error(String.format("%s: Was unable to check if %s is using Terraforged's ChunkGenerator.", e.getCause(), serverWorld.getDimensionKey().getLocation()) );
 			}
 			
-			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator
-					&& serverWorld.getDimensionKey().equals(World.OVERWORLD)) {
+			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD)) {
 				return;
 			}
 			
 			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>( serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
+			
 			tempMap.putIfAbsent(ModStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(ModStructures.ENT_DUNGEON.get()));
-			// serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ =
-			// tempMap;
+			
+			serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
 		}
 	}
 	
@@ -169,7 +170,7 @@ public class ChaosAwakens {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void biomeLoadingAdd(final BiomeLoadingEvent event) {
 		ModBiomeFeatures.addMobSpawns(event);
-		ModBiomeFeatures.addStructureSpawns(event);
+		//ModBiomeFeatures.addStructureSpawns(event);
 	}
 	
 	private void gatherData(final GatherDataEvent event) {
