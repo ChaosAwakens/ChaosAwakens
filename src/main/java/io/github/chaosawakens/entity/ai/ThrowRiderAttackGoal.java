@@ -10,6 +10,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.PacketDistributor;
 
+import java.util.Random;
+
 public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 
     private int throwTimer;
@@ -26,8 +28,8 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 
     @Override
     public void startExecuting() {
-        this.throwTimer = 30 + attacker.getRNG().nextInt(40); // Wait 1.5 to 2.5 seconds before we throw the target
-        timeout = 100 + attacker.getRNG().nextInt(40); // Lets only try to chase for around 5-6 seconds
+        this.throwTimer = 1 + attacker.getRNG().nextInt(5); // Wait 1.5 to 2.5 seconds before we throw the target
+        timeout = 1 + attacker.getRNG().nextInt(5); // Lets only try to chase for around 5-6 seconds
         super.startExecuting();
     }
 
@@ -46,7 +48,6 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 
         if (p_190102_2_ <= d0 && this.getSwingCooldown() <= 0) {
             this.resetSwingCooldown();
-            this.attacker.swingArm(Hand.MAIN_HAND);
             if (attacker.getPassengers().isEmpty() && p_190102_1_.getRidingEntity() == null) {
                 p_190102_1_.startRiding(attacker);
             }
@@ -59,12 +60,11 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
             Entity rider = attacker.getPassengers().get(0);
             attacker.removePassengers();
 
-            rider.addVelocity(0.5, 1, 0.5);
+            rider.addVelocity(0.8, 1, 0.8);
 
             if (rider instanceof ServerPlayerEntity) {
                 ServerPlayerEntity player = (ServerPlayerEntity) rider;
-
-                PacketThrowPlayer message = new PacketThrowPlayer(0.5f, 1, 0.5f);
+                PacketThrowPlayer message = new PacketThrowPlayer(0.8f, 1, 0.8f);
                 PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
             }
         }

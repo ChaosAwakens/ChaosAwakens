@@ -74,6 +74,30 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(Items.GOLDEN_APPLE)
                                         .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F))))));
+        registerLootTable(ModEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.BEEF)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 3.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.LEATHER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 2.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.APPLE)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.GOLDEN_APPLE)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.ENCHANTED_GOLDEN_APPLE))));
     }
 
     public LootTable.Builder fromEntityLootTable(EntityType<?> parent) {

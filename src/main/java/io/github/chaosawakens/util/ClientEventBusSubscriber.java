@@ -33,6 +33,7 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.APPLE_COW.get(), AppleCowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAVER.get(), BeaverEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);

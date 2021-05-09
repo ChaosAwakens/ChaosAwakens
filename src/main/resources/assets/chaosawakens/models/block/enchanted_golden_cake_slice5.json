@@ -1,0 +1,44 @@
+{
+  "textures": {
+    "particle": "chaosawakens:block/enchanted_golden_cake_side",
+    "bottom": "chaosawakens:block/enchanted_golden_cake_bottom",
+    "top": "chaosawakens:block/enchanted_golden_cake_top",
+    "side": "chaosawakens:block/enchanted_golden_cake_side",
+    "inside": "chaosawakens:block/enchanted_golden_cake_inner"
+  },
+  "elements": [
+    {
+      "from": [
+        11,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        8,
+        15
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#inside"
+        },
+        "east": {
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

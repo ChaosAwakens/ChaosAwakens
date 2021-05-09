@@ -2,6 +2,7 @@ package io.github.chaosawakens;
 
 import java.util.Locale;
 
+import io.github.chaosawakens.entity.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,19 +10,6 @@ import com.mojang.serialization.Codec;
 import io.github.chaosawakens.config.CAConfig;
 import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
-import io.github.chaosawakens.entity.AppleCowEntity;
-import io.github.chaosawakens.entity.BeaverEntity;
-import io.github.chaosawakens.entity.BrownAntEntity;
-import io.github.chaosawakens.entity.EmeraldGatorEntity;
-import io.github.chaosawakens.entity.EntEntity;
-import io.github.chaosawakens.entity.GoldenAppleCowEntity;
-import io.github.chaosawakens.entity.HerculesBeetleEntity;
-import io.github.chaosawakens.entity.RainbowAntEntity;
-import io.github.chaosawakens.entity.RedAntEntity;
-import io.github.chaosawakens.entity.RoboSniperEntity;
-import io.github.chaosawakens.entity.RubyBugEntity;
-import io.github.chaosawakens.entity.TermiteEntity;
-import io.github.chaosawakens.entity.UnstableAntEntity;
 import io.github.chaosawakens.network.PacketHandler;
 import io.github.chaosawakens.registry.*;
 import io.github.chaosawakens.worldgen.ConfiguredStructures;
@@ -97,6 +85,8 @@ public class ChaosAwakens {
 		ModItems.ITEMS.register(eventBus);
 		ModBlocks.ITEMS.register(eventBus);
 		ModBlocks.BLOCKS.register(eventBus);
+		ModBlocks.ENCHANTEDCAKEITEMS.register(eventBus);
+		ModBlocks.ENCHANTEDCAKEBLOCKS.register(eventBus);
 		
 		ModEntityTypes.ENTITY_TYPES.register(eventBus);
 		ModStructures.STRUCTURES.register(eventBus);
@@ -151,19 +141,20 @@ public class ChaosAwakens {
 		});
 		
 		DeferredWorkQueue.runLater(() -> {
-			GlobalEntityTypeAttributes.put(ModEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.BROWN_ANT.get(), BrownAntEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.RAINBOW_ANT.get(), RainbowAntEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.TERMITE.get(), TermiteEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BROWN_ANT.get(), BrownAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RAINBOW_ANT.get(), RainbowAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.TERMITE.get(), TermiteEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
 		});
 	}
 	
