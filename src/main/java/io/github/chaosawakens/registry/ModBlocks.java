@@ -3,10 +3,8 @@ package io.github.chaosawakens.registry;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.blocks.*;
 import net.minecraft.block.*;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.*;
+import net.minecraft.item.*;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -96,4 +94,15 @@ public class ModBlocks {
     private static boolean _true(BlockState state, IBlockReader reader, BlockPos pos) {
         return true;
     }
+
+    public static final DeferredRegister<Block> ENCHANTEDCAKEBLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
+  	public static final DeferredRegister<Item> ENCHANTEDCAKEITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
+
+  	public static final RegistryObject<EnchantedGoldenCakeBlock> ENCHANTED_GOLDEN_CAKE = registerEnchantedBlock("enchanted_golden_cake", () -> new EnchantedGoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), ModItemGroups.foodItemGroup, 1);
+
+  	public static <E extends Block> RegistryObject<E> registerEnchantedBlock(String name, Supplier<? extends E> supplier, ItemGroup itemGroup, int stackSize) {
+  		RegistryObject<E> enchantedblock = ModBlocks.ENCHANTEDCAKEBLOCKS.register(name, supplier);
+  		ENCHANTEDCAKEITEMS.register(name, () -> new EnchantedBlockItem(enchantedblock.get(), new Item.Properties().group(itemGroup).maxStackSize(stackSize)));
+  		return enchantedblock;
+  	}
 }
