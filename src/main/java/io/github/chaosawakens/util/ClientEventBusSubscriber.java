@@ -31,18 +31,31 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.TERMITE.get(), TermiteEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowRender::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.APPLE_COW.get(), AppleCowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAVER.get(), BeaverEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);
-		
+
+		RenderTypeLookup.setRenderLayer(ModBlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CATS_EYE_BLOCK.get(), RenderType.getCutout());
+
 		RenderTypeLookup.setRenderLayer(ModBlocks.RED_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.BROWN_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.RAINBOW_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.UNSTABLE_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.TERMITE_NEST.get(), RenderType.getCutout());
+
+		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_GRASS_BLOCK.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.KYANITE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_LOG.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_WOOD.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_WOOD_PLANKS.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.RED_CRYSTAL_LEAVES.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.GREEN_CRYSTAL_LEAVES.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CRYSTAL_LEAVES.get(), RenderType.getCutout());
 	}
 
 	@SubscribeEvent

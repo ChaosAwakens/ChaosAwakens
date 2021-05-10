@@ -2,6 +2,7 @@ package io.github.chaosawakens.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.entity.*;
+import io.github.chaosawakens.entity.projectile.IrukandjiArrowEntity;
 import io.github.chaosawakens.entity.projectile.UltimateArrowEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -111,6 +112,11 @@ public class ModEntityTypes {
 			() -> EntityType.Builder.<UltimateArrowEntity>create(UltimateArrowEntity::new, EntityClassification.MISC)
 				.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
 				.build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_arrow").toString()));
+
+	public static final RegistryObject<EntityType<IrukandjiArrowEntity>> IRUKANDJI_ARROW = ENTITY_TYPES.register("irukandji_arrow",
+			() -> EntityType.Builder.<IrukandjiArrowEntity>create(IrukandjiArrowEntity::new, EntityClassification.MISC)
+					.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "irukandji_arrow").toString()));
 	
 	//"The method build(ResourceLocation, EntityType.Builder<E>) from the type ModEntityTypes is never used locally", so whats it for ???
 	@SuppressWarnings("unchecked")

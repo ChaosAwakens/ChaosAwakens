@@ -49,14 +49,16 @@ public class ThunderStaffItem extends Item {
              }
 
              ((ServerWorld) worldIn).summonEntity(lightning);
-             if (CAConfig.COMMON.explosionType.get() == 0) {
-                 ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.NONE);
-             }
-             if (CAConfig.COMMON.explosionType.get() == 1) {
-                 ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.BREAK);
-             }
-             if (CAConfig.COMMON.explosionType.get() == 2) {
-                 ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.DESTROY);
+             switch (CAConfig.COMMON.explosionType.get()) {
+                 case 0:
+                    ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.NONE);
+                    break;
+                 case 1:
+                    ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.BREAK);
+                    break;
+                 case 2:
+                    ((ServerWorld) worldIn).createExplosion(playerIn, lookingAt.getHitVec().getX(), lookingAt.getHitVec().getY(), lookingAt.getHitVec().getZ(), CAConfig.COMMON.explosionSize.get(), CAConfig.COMMON.explosionFire.get(), Explosion.Mode.DESTROY);
+                    break;
              }
          }
 

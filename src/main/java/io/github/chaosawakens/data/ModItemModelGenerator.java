@@ -47,7 +47,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
                 ModItems.TIGERS_EYE_SWORD, ModItems.TIGERS_EYE_PICKAXE, ModItems.TIGERS_EYE_SHOVEL, ModItems.TIGERS_EYE_AXE, ModItems.TIGERS_EYE_HOE,
                 ModItems.ULTIMATE_SWORD, ModItems.ULTIMATE_PICKAXE, ModItems.ULTIMATE_SHOVEL, ModItems.ULTIMATE_AXE, ModItems.ULTIMATE_HOE,
                 ModItems.EXPERIENCE_SWORD, ModItems.THUNDER_STAFF, ModItems.BIG_HAMMER, ModItems.FAIRY_SWORD, ModItems.NIGHTMARE_SWORD,
-                ModItems.POISON_SWORD, ModItems.RAT_SWORD, ModItems.ULTIMATE_BOW);
+                ModItems.POISON_SWORD, ModItems.RAT_SWORD, ModItems.TIN_BOOTS);
         this.simpleWithExistingParent(ModBlocks.ALUMINIUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.ALUMINIUM_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.AMETHYST_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
@@ -68,6 +68,14 @@ public class ModItemModelGenerator extends ItemModelProvider {
         this.simpleWithExistingParent(ModBlocks.GATE_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.ENT_DUNGEON_WOOD.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.GOLDEN_MELON.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.COPPER_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.TIN_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.SILVER_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.PLATINUM_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.COPPER_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.SILVER_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.TIN_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
+        this.simpleWithExistingParent(ModBlocks.PLATINUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
     }
 
     private ModelBuilder<ItemModelBuilder> simpleWithExistingParent(String path)

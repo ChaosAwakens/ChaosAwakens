@@ -19,7 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems {
-	
+
     // ORESPAWN FOOD
     public static final Food FOOD_RAW_CORNDOG = new Food.Builder().hunger(4).saturation(0.6F).build();
     public static final Food FOOD_COOKED_CORNDOG = new Food.Builder().hunger(14).saturation(1.5F).build();
@@ -43,6 +43,7 @@ public class ModItems {
     public static final Food FOOD_PEACH = new Food.Builder().hunger(4).saturation(0.55F).build();
     public static final Food FOOD_PEACOCK_LEG = new Food.Builder().hunger(6).saturation(0.7F).build();
     public static final Food FOOD_COOKED_PEACOCK_LEG = new Food.Builder().hunger(12).saturation(1.4F).build();
+    public static final Food FOOD_CRYSTAL_APPLE = new Food.Builder().hunger(5).saturation(0.85F).effect(new EffectInstance(Effects.STRENGTH, 3000, 0), 1.0F).effect(new EffectInstance(Effects.REGENERATION, 3000, 0), 1.0F).build();
 
     // SHINY FOOD
     public static final Food FOOD_GOLDEN_BREAD = new Food.Builder().hunger(8).saturation(0.8F).setAlwaysEdible().build();
@@ -83,6 +84,7 @@ public class ModItems {
     public static final RegistryObject<Item> RADISH = ITEMS.register("radish", () -> new Item(new Item.Properties().food(ModItems.FOOD_RADISH).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> LETTUCE = ITEMS.register("lettuce", () -> new Item(new Item.Properties().food(ModItems.FOOD_LETTUCE).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().food(ModItems.FOOD_CHEESE).group(ModItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> CRYSTAL_APPLE = ITEMS.register("crystal_apple", () -> new Item(new Item.Properties().food(ModItems.FOOD_CRYSTAL_APPLE).group(ModItemGroups.foodItemGroup)));
 
     public static final RegistryObject<Item> RADISH_STEW = ITEMS.register("radish_stew", () -> new SoupItem(new Item.Properties().food(ModItems.FOOD_RADISH_STEW).maxStackSize(1).group(ModItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> GARDEN_SALAD = ITEMS.register("garden_salad", () -> new SoupItem(new Item.Properties().food(ModItems.FOOD_GARDEN_SALAD).maxStackSize(1).group(ModItemGroups.foodItemGroup)));
@@ -115,7 +117,7 @@ public class ModItems {
     public static final RegistryObject<DevItem> DEV_ITEM64 = ITEMS.register("dev_item64", () -> new DevItem(new Item.Properties().maxStackSize(64)));
     public static final RegistryObject<DevItem> DEV_ITEM_DAMAGE = ITEMS.register("dev_item_damage", () -> new DevItem(new Item.Properties().maxDamage(50)));
 
-    // GEMST0NES
+    // MINERALS
     public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> TIGERS_EYE = ITEMS.register("tigers_eye", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
@@ -124,6 +126,20 @@ public class ModItems {
     public static final RegistryObject<Item> URANIUM_INGOT = ITEMS.register("uranium_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> URANIUM_NUGGET = ITEMS.register("uranium_nugget", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> COPPER_LUMP = ITEMS.register("copper_lump", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> TIN_LUMP = ITEMS.register("tin_lump", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> SILVER_LUMP = ITEMS.register("silver_lump", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> PLATINUM_LUMP = ITEMS.register("platinum_lump", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> PINK_TOURMALINE_INGOT = ITEMS.register("pink_tourmaline_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> PINK_TOURMALINE_NUGGET = ITEMS.register("pink_tourmaline_nugget", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> CATS_EYE_INGOT = ITEMS.register("cats_eye_ingot", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> CATS_EYE_NUGGET = ITEMS.register("cats_eye_nugget", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+
+    // MISC
+    public static final RegistryObject<Item> CRYSTAL_SHARD = ITEMS.register("crystal_shard", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 
     // TOOLS
     // Ultimate
@@ -162,6 +178,34 @@ public class ModItems {
     public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeShovelDamage.get() - 9), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 
+    // Copper
+    public static final RegistryObject<SwordItem> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(ToolMaterials.TOOL_COPPER, (int) (CAConfig.COMMON.copperSwordDamage.get() - 2.5F), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<AxeItem> COPPER_AXE = ITEMS.register("copper_axe", () -> new AxeItem(ToolMaterials.TOOL_COPPER, CAConfig.COMMON.copperAxeDamage.get() - 2.5F, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<PickaxeItem> COPPER_PICKAXE = ITEMS.register("copper_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_COPPER, (int) (CAConfig.COMMON.copperPickaxeDamage.get() - 2.5F), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ShovelItem> COPPER_SHOVEL = ITEMS.register("copper_shovel", () -> new ShovelItem(ToolMaterials.TOOL_COPPER, CAConfig.COMMON.copperShovelDamage.get() - 2.5F, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> COPPER_HOE = ITEMS.register("copper_hoe", () -> new HoeItem(ToolMaterials.TOOL_COPPER, (int) (CAConfig.COMMON.copperHoeDamage.get() - 2.5F), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+    // Tin
+    public static final RegistryObject<SwordItem> TIN_SWORD = ITEMS.register("tin_sword", () -> new SwordItem(ToolMaterials.TOOL_TIN, (int) (CAConfig.COMMON.tinSwordDamage.get() - 3), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<AxeItem> TIN_AXE = ITEMS.register("tin_axe", () -> new AxeItem(ToolMaterials.TOOL_TIN, CAConfig.COMMON.tinAxeDamage.get() - 3, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<PickaxeItem> TIN_PICKAXE = ITEMS.register("tin_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIN, (int) (CAConfig.COMMON.tinPickaxeDamage.get() - 3), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ShovelItem> TIN_SHOVEL = ITEMS.register("tin_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIN, CAConfig.COMMON.tinShovelDamage.get() - 3, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> TIN_HOE = ITEMS.register("tin_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIN, (int) (CAConfig.COMMON.tinHoeDamage.get() - 3), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+    // Silver
+    public static final RegistryObject<SwordItem> SILVER_SWORD = ITEMS.register("silver_sword", () -> new SwordItem(ToolMaterials.TOOL_SILVER, (int) (CAConfig.COMMON.silverSwordDamage.get() - 3.5F), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<AxeItem> SILVER_AXE = ITEMS.register("silver_axe", () -> new AxeItem(ToolMaterials.TOOL_SILVER, CAConfig.COMMON.silverAxeDamage.get() - 3.5F, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<PickaxeItem> SILVER_PICKAXE = ITEMS.register("silver_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_SILVER, (int) (CAConfig.COMMON.silverPickaxeDamage.get() - 3.5F), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ShovelItem> SILVER_SHOVEL = ITEMS.register("silver_shovel", () -> new ShovelItem(ToolMaterials.TOOL_SILVER, CAConfig.COMMON.silverShovelDamage.get() - 3.5F, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> SILVER_HOE = ITEMS.register("silver_hoe", () -> new HoeItem(ToolMaterials.TOOL_SILVER, (int) (CAConfig.COMMON.silverHoeDamage.get() - 3.5F), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+    // Platinum
+    public static final RegistryObject<SwordItem> PLATINUM_SWORD = ITEMS.register("platinum_sword", () -> new SwordItem(ToolMaterials.TOOL_PLATINUM, (int) (CAConfig.COMMON.platinumSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<AxeItem> PLATINUM_AXE = ITEMS.register("platinum_axe", () -> new AxeItem(ToolMaterials.TOOL_PLATINUM, (CAConfig.COMMON.platinumAxeDamage.get() - 7), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<PickaxeItem> PLATINUM_PICKAXE = ITEMS.register("platinum_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_PLATINUM, (int) (CAConfig.COMMON.platinumPickaxeDamage.get() - 7), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ShovelItem> PLATINUM_SHOVEL = ITEMS.register("platinum_shovel", () -> new ShovelItem(ToolMaterials.TOOL_PLATINUM, (CAConfig.COMMON.platinumShovelDamage.get() - 7), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<HoeItem> PLATINUM_HOE = ITEMS.register("platinum_hoe", () -> new HoeItem(ToolMaterials.TOOL_PLATINUM, (int) (CAConfig.COMMON.platinumHoeDamage.get() - 7), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
     // Misc. Weapons
     public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_NIGHTMARE, (int) (CAConfig.COMMON.nightmareSwordDamage.get() - 27), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.KNOCKBACK,Enchantments.FIRE_ASPECT},new int[]{1,3,1}));
     public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.experienceSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.SHARPNESS,Enchantments.UNBREAKING,Enchantments.MENDING},new int[]{2,3,1}));
@@ -169,7 +213,7 @@ public class ModItems {
     public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.ratSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.fairySwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.bigHammerDamage.get() - 12), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[]{Enchantments.UNBREAKING,Enchantments.SWEEPING},new int[]{4,4}));
+    public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.prismaticReaperDamage.get() - 9), -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[]{Enchantments.UNBREAKING,Enchantments.SWEEPING},new int[]{4,4}));
 
     // Staffs
     public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(ModItemGroups.equipmentItemGroup).maxDamage(50)));
@@ -222,6 +266,31 @@ public class ModItems {
     public static final RegistryObject<EnchantedArmorItem> LAPIS_CHESTPLATE = ITEMS.register("lapis_chestplate", () -> new EnchantedArmorItem(ArmorMaterials.LAPIS, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
     public static final RegistryObject<EnchantedArmorItem> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new EnchantedArmorItem(ArmorMaterials.LAPIS, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
     public static final RegistryObject<EnchantedArmorItem> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new EnchantedArmorItem(ArmorMaterials.LAPIS, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[]{Enchantments.PROTECTION,Enchantments.PROJECTILE_PROTECTION},new int[]{1,1}));
+
+    // Copper
+    public static final RegistryObject<ArmorItem> COPPER_HELMET = ITEMS.register("copper_helmet", () -> new ArmorItem(ArmorMaterials.COPPER, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(ArmorMaterials.COPPER, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(ArmorMaterials.COPPER, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(ArmorMaterials.COPPER, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+    // Tin
+    public static final RegistryObject<ArmorItem> TIN_HELMET = ITEMS.register("tin_helmet", () -> new ArmorItem(ArmorMaterials.TIN, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> TIN_CHESTPLATE = ITEMS.register("tin_chestplate", () -> new ArmorItem(ArmorMaterials.TIN, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> TIN_LEGGINGS = ITEMS.register("tin_leggings", () -> new ArmorItem(ArmorMaterials.TIN, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> TIN_BOOTS = ITEMS.register("tin_boots", () -> new ArmorItem(ArmorMaterials.TIN, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+    // Silver
+    public static final RegistryObject<ArmorItem> SILVER_HELMET = ITEMS.register("silver_helmet", () -> new ArmorItem(ArmorMaterials.SILVER, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> SILVER_CHESTPLATE = ITEMS.register("silver_chestplate", () -> new ArmorItem(ArmorMaterials.SILVER, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> SILVER_LEGGINGS = ITEMS.register("silver_leggings", () -> new ArmorItem(ArmorMaterials.SILVER, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> SILVER_BOOTS = ITEMS.register("silver_boots", () -> new ArmorItem(ArmorMaterials.SILVER, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+    // Platinum
+    public static final RegistryObject<ArmorItem> PLATINUM_HELMET = ITEMS.register("platinum_helmet", () -> new ArmorItem(ArmorMaterials.PLATINUM, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> PLATINUM_CHESTPLATE = ITEMS.register("platinum_chestplate", () -> new ArmorItem(ArmorMaterials.PLATINUM, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> PLATINUM_LEGGINGS = ITEMS.register("platinum_leggings", () -> new ArmorItem(ArmorMaterials.PLATINUM, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> PLATINUM_BOOTS = ITEMS.register("platinum_boots", () -> new ArmorItem(ArmorMaterials.PLATINUM, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
 
     // SPAWN EGGS
     public static final RegistryObject<ModSpawnEggItem> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new ModSpawnEggItem(ModEntityTypes.ENT, new Item.Properties().group(ModItemGroups.eggsItemGroup)));

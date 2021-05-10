@@ -1,5 +1,6 @@
 package io.github.chaosawakens.items;
 
+import io.github.chaosawakens.config.CAConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -21,12 +22,14 @@ public class EnchantedScytheItem extends ScytheItem {
     }
 
     public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-            for (int i = 0; i < enchantmentIds.length; i++) {
-                stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
-            }
+        if (!CAConfig.COMMON.enableAutoEnchanting.get()) return;
+        for (int i = 0; i < enchantmentIds.length; i++) {
+            stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
         }
+    }
 
     public void inventoryTick(ItemStack stack, World worldInD, Entity entityIn, int itemSlot, boolean isSelected) {
+        if (!CAConfig.COMMON.enableAutoEnchanting.get()) return;
         if (EnchantmentHelper.getEnchantmentLevel(enchantmentIds[0],stack) <= 0) {
             for (int i = 0; i < enchantmentIds.length; i++) {
                 stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);

@@ -76,7 +76,6 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 
 		if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
-			int i = this.getMaxInPortalTime();
 			ServerWorld currentWorld = (ServerWorld) this.world;
 			MinecraftServer minecraftServer = currentWorld.getServer();
 			RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == ModDimensions.MINING_DIMENSION ? World.OVERWORLD : ModDimensions.MINING_DIMENSION;

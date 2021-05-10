@@ -1,5 +1,6 @@
 package io.github.chaosawakens.items;
 
+import io.github.chaosawakens.config.CAConfig;
 import io.github.chaosawakens.entity.projectile.UltimateArrowEntity;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.Entity;
@@ -30,16 +31,18 @@ public class UltimateBowItem extends BowItem implements IVanishable {
         }
 
         public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+            if (!CAConfig.COMMON.enableAutoEnchanting.get()) return;
             for (int i = 0; i < enchantmentIds.length; i++) {
                 stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
             }
         }
 
         public void inventoryTick(ItemStack stack, World worldInD, Entity entityIn, int itemSlot, boolean isSelected) {
+            if (!CAConfig.COMMON.enableAutoEnchanting.get()) return;
             if (EnchantmentHelper.getEnchantmentLevel(enchantmentIds[0],stack) <= 0) {
                 for (int i = 0; i < enchantmentIds.length; i++) {
                     stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
-                }
+               }
             }
         }
 
@@ -53,10 +56,6 @@ public class UltimateBowItem extends BowItem implements IVanishable {
                 i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
                 if (i < 0) return;
                 if (!worldIn.isRemote) {
-
-                    ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                    //AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
-
                     AbstractArrowEntity abstractarrowentity = createArrow(worldIn, itemstack, playerentity);
                     
                     abstractarrowentity = customArrow(abstractarrowentity);
