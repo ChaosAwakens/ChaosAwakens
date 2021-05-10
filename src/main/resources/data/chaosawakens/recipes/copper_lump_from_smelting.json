@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelcopperg",
+  "ingredient": {
+    "item": "chaosawakens:copper_ore"
+  },
+  "result": "chaosawakens:copper_lump",
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -43,14 +43,14 @@ public class ModItemModelGenerator extends ItemModelProvider {
                 ModItems.ULTIMATE_HELMET, ModItems.ULTIMATE_CHESTPLATE, ModItems.ULTIMATE_LEGGINGS, ModItems.ULTIMATE_BOOTS,
                 ModItems.EXPERIENCE_HELMET, ModItems.EXPERIENCE_CHESTPLATE, ModItems.EXPERIENCE_LEGGINGS, ModItems.EXPERIENCE_BOOTS,
                 ModItems.LAPIS_HELMET, ModItems.LAPIS_CHESTPLATE, ModItems.LAPIS_LEGGINGS, ModItems.LAPIS_BOOTS,
-                ModItems.LAVA_EEL_HELMET, ModItems.LAVA_EEL_CHESTPLATE, ModItems.LAVA_EEL_LEGGINGS, ModItems.LAVA_EEL_BOOTS);
+                ModItems.LAVA_EEL_HELMET, ModItems.LAVA_EEL_CHESTPLATE, ModItems.LAVA_EEL_LEGGINGS, ModItems.LAVA_EEL_BOOTS, ModItems.COPPER_HELMET, ModItems.COPPER_CHESTPLATE, ModItems.COPPER_LEGGINGS, ModItems.COPPER_BOOTS, ModItems.TIN_HELMET, ModItems.TIN_CHESTPLATE, ModItems.TIN_LEGGINGS, ModItems.TIN_BOOTS, ModItems.SILVER_HELMET, ModItems.SILVER_CHESTPLATE, ModItems.SILVER_LEGGINGS, ModItems.SILVER_BOOTS, ModItems.PLATINUM_HELMET, ModItems.PLATINUM_CHESTPLATE, ModItems.PLATINUM_LEGGINGS, ModItems.PLATINUM_BOOTS, ModItems.PINK_TOURMALINE_HELMET, ModItems.PINK_TOURMALINE_CHESTPLATE, ModItems.PINK_TOURMALINE_LEGGINGS, ModItems.PINK_TOURMALINE_BOOTS, ModItems.CATS_EYE_HELMET, ModItems.CATS_EYE_CHESTPLATE, ModItems.CATS_EYE_LEGGINGS, ModItems.CATS_EYE_BOOTS, ModItems.PEACOCK_FEATHER_HELMET, ModItems.PEACOCK_FEATHER_CHESTPLATE, ModItems.PEACOCK_FEATHER_LEGGINGS, ModItems.PEACOCK_FEATHER_BOOTS);
         handHeld(ModItems.AMETHYST_SWORD, ModItems.AMETHYST_PICKAXE, ModItems.AMETHYST_SHOVEL, ModItems.AMETHYST_AXE, ModItems.AMETHYST_HOE,
                 ModItems.EMERALD_SWORD, ModItems.EMERALD_PICKAXE, ModItems.EMERALD_SHOVEL, ModItems.EMERALD_AXE, ModItems.EMERALD_HOE,
                 ModItems.RUBY_SWORD, ModItems.RUBY_PICKAXE, ModItems.RUBY_SHOVEL, ModItems.RUBY_AXE, ModItems.RUBY_HOE,
                 ModItems.TIGERS_EYE_SWORD, ModItems.TIGERS_EYE_PICKAXE, ModItems.TIGERS_EYE_SHOVEL, ModItems.TIGERS_EYE_AXE, ModItems.TIGERS_EYE_HOE,
                 ModItems.ULTIMATE_SWORD, ModItems.ULTIMATE_PICKAXE, ModItems.ULTIMATE_SHOVEL, ModItems.ULTIMATE_AXE, ModItems.ULTIMATE_HOE,
                 ModItems.EXPERIENCE_SWORD, ModItems.THUNDER_STAFF, ModItems.BIG_HAMMER, ModItems.FAIRY_SWORD, ModItems.NIGHTMARE_SWORD,
-                ModItems.POISON_SWORD, ModItems.RAT_SWORD, ModItems.TIN_BOOTS);
+                ModItems.POISON_SWORD, ModItems.RAT_SWORD);
         this.simpleWithExistingParent(ModBlocks.ALUMINIUM_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.ALUMINIUM_ORE.getId().toString().replaceFirst("chaosawakens:", ""));
         this.simpleWithExistingParent(ModBlocks.AMETHYST_BLOCK.getId().toString().replaceFirst("chaosawakens:", ""));
