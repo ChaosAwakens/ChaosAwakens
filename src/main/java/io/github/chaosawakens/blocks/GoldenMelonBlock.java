@@ -9,10 +9,10 @@ public class GoldenMelonBlock extends StemGrownBlock {
     }
 
     public StemBlock getStem() {
-        return (StemBlock) ModBlocks.GOLDEN_MELON_STEM.get();
+        return (StemBlock) Blocks.MELON_STEM;
     }
 
     public AttachedStemBlock getAttachedStem() {
-        return (AttachedStemBlock)ModBlocks.ATTACHED_GOLDEN_MELON_STEM.get();
+        return (AttachedStemBlock) Blocks.ATTACHED_MELON_STEM;
     }
 }

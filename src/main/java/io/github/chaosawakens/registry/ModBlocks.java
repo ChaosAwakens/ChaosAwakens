@@ -5,6 +5,7 @@ import io.github.chaosawakens.blocks.*;
 import net.minecraft.block.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -74,9 +75,9 @@ public class ModBlocks {
 	// CRYSTAL DIMENSION
     public static final RegistryObject<GlassBlock> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block",() -> new GlassBlock(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<GlassBlock> KYANITE = registerBlock("kyanite",() -> new GlassBlock(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<CrystalPillarBlock> CRYSTAL_LOG = registerBlock("crystal_log",() -> new CrystalPillarBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<CrystalPillarBlock> CRYSTAL_WOOD = registerBlock("crystal_wood",() -> new CrystalPillarBlock(Block.Properties.from(Blocks.OAK_WOOD).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
-    public static final RegistryObject<GlassBlock> CRYSTAL_WOOD_PLANKS = registerBlock("crystal_wood_planks",() -> new GlassBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> CRYSTAL_LOG = registerBlock("crystal_log",() -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<RotatedPillarBlock> CRYSTAL_WOOD = registerBlock("crystal_wood",() -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_WOOD).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
+    public static final RegistryObject<GlassBlock> CRYSTAL_WOOD_PLANKS = registerBlock("crystal_wood_planks",() -> new GlassBlock(Block.Properties.from(Blocks.OAK_PLANKS).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<GlassBlock> RED_CRYSTAL_LEAVES = registerBlock("red_crystal_leaves",() -> new GlassBlock(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<GlassBlock> GREEN_CRYSTAL_LEAVES = registerBlock("green_crystal_leaves",() -> new GlassBlock(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
     public static final RegistryObject<GlassBlock> YELLOW_CRYSTAL_LEAVES = registerBlock("yellow_crystal_leaves",() -> new GlassBlock(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
