@@ -9,13 +9,15 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 
 public class CrystalPillarBlock extends AbstractGlassBlock {
+	
+	public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
     public CrystalPillarBlock(Properties properties) {
-        super(properties);
-        this.setDefaultState(this.getDefaultState().with(AXIS, Direction.Axis.Y));;
+	    super(properties);
+        this.setDefaultState(this.getDefaultState().with(AXIS, Direction.Axis.Y));
     }
-
-    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
-
+    
+    
+    
     public BlockState rotate(BlockState state, Rotation rot) {
         switch(rot) {
             case COUNTERCLOCKWISE_90:

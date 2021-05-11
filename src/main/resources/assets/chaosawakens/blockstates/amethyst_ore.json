@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "chaosawakens:block/amethyst_ore"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "chaosawakens:block/amethyst_ore"
+		}
+	}
 }

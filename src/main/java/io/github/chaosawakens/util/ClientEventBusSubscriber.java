@@ -1,15 +1,29 @@
 package io.github.chaosawakens.util;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.client.entity.render.*;
+import io.github.chaosawakens.client.entity.render.AppleCowRender;
+import io.github.chaosawakens.client.entity.render.BeaverEntityRender;
+import io.github.chaosawakens.client.entity.render.BrownAntEntityRender;
+import io.github.chaosawakens.client.entity.render.EmeraldGatorEntityRender;
+import io.github.chaosawakens.client.entity.render.EnchantedGoldenAppleCowRender;
+import io.github.chaosawakens.client.entity.render.EntEntityRender;
+import io.github.chaosawakens.client.entity.render.GoldenAppleCowRender;
+import io.github.chaosawakens.client.entity.render.HerculesBeetleEntityRender;
+import io.github.chaosawakens.client.entity.render.IrukandjiArrowRender;
+import io.github.chaosawakens.client.entity.render.RainbowAntEntityRender;
+import io.github.chaosawakens.client.entity.render.RedAntEntityRender;
+import io.github.chaosawakens.client.entity.render.RoboSniperEntityRender;
+import io.github.chaosawakens.client.entity.render.RubyBugEntityRender;
+import io.github.chaosawakens.client.entity.render.TermiteEntityRender;
+import io.github.chaosawakens.client.entity.render.UltimateArrowRender;
+import io.github.chaosawakens.client.entity.render.UnstableAntEntityRender;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModEntityTypes;
+import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.entity.ArrowRenderer;
-import net.minecraft.client.renderer.entity.SpectralArrowRenderer;
-import net.minecraft.client.renderer.entity.TippedArrowRenderer;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,7 +33,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
-
+	
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRender::new);
@@ -38,16 +52,19 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAVER.get(), BeaverEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);
-
+		
 		RenderTypeLookup.setRenderLayer(ModBlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.CATS_EYE_BLOCK.get(), RenderType.getCutout());
-
+		
 		RenderTypeLookup.setRenderLayer(ModBlocks.RED_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.BROWN_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.RAINBOW_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.UNSTABLE_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.TERMITE_NEST.get(), RenderType.getCutout());
-
+		
+		RenderTypeLookup.setRenderLayer(ModBlocks.GOLDEN_MELON_STEM.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(ModBlocks.ATTACHED_GOLDEN_MELON_STEM.get(), RenderType.getCutoutMipped());
+		
 		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_GRASS_BLOCK.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.KYANITE.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_LOG.get(), RenderType.getCutout());
@@ -57,8 +74,7 @@ public class ClientEventBusSubscriber {
 		RenderTypeLookup.setRenderLayer(ModBlocks.GREEN_CRYSTAL_LEAVES.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CRYSTAL_LEAVES.get(), RenderType.getCutout());
 	}
-
+	
 	@SubscribeEvent
-	public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
-	}
+	public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {}
 }

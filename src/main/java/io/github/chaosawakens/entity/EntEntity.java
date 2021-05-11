@@ -28,27 +28,23 @@ public class EntEntity extends MonsterEntity implements IAnimatable {
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		ChaosAwakens.LOGGER.debug(this.isAggressive());
-
+		ChaosAwakens.LOGGER.debug(event.getAnimatable());
 		
-		if (event.isMoving() && !this.isAggressive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
-			return PlayState.CONTINUE;
-		}
-		else if (!event.isMoving() && !this.isAggressive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.idle_animation", true));
-			return PlayState.CONTINUE;
-		}
-		else if (this.isAggressive() && event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true).addAnimation("animation.ent.walking_animation", true));
-			return PlayState.CONTINUE;
-		}
-		else if (this.isAggressive()) {
+		ChaosAwakens.LOGGER.debug(event.getController().getCurrentAnimation());
+		
+		if (this.isSwingInProgress) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		
-		return PlayState.CONTINUE;
+		if (event.isMoving()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
+			return PlayState.CONTINUE;
+		} else {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.idle_animation", true));
+			return PlayState.CONTINUE;
+		}
+		//return PlayState.CONTINUE;
 	}
 	
 	@Override

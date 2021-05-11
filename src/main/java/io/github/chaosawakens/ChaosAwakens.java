@@ -85,14 +85,12 @@ public class ChaosAwakens {
 		ModItems.ITEMS.register(eventBus);
 		ModBlocks.ITEMS.register(eventBus);
 		ModBlocks.BLOCKS.register(eventBus);
-		ModBlocks.ENCHANTEDCAKEITEMS.register(eventBus);
-		ModBlocks.ENCHANTEDCAKEBLOCKS.register(eventBus);
+		ModBlocks.ENCHANTED_CAKE_ITEMS.register(eventBus);
+		ModBlocks.ENCHANTED_CAKE_BLOCKS.register(eventBus);
 		
 		ModEntityTypes.ENTITY_TYPES.register(eventBus);
 		ModStructures.STRUCTURES.register(eventBus);
 		ModAttributes.ATTRIBUTES.register(eventBus);
-		
-		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> new SafeRunnable() {@Override public void run() { eventBus.register(new BlockItemColors()); } } );
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);
@@ -161,7 +159,7 @@ public class ChaosAwakens {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void biomeLoadingAdd(final BiomeLoadingEvent event) {
 		ModBiomeFeatures.addMobSpawns(event);
-		//ModBiomeFeatures.addStructureSpawns(event);
+		ModBiomeFeatures.addStructureSpawns(event);
 	}
 	
 	private void gatherData(final GatherDataEvent event) {
@@ -169,7 +167,7 @@ public class ChaosAwakens {
 		final ExistingFileHelper existing = event.getExistingFileHelper();
 		
 		if (event.includeServer()) {
-			dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
+			//dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
 			dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
 		}
 	}

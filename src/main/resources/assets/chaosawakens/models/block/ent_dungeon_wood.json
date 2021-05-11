@@ -1,7 +1,6 @@
 {
-  "parent": "block/cube_all",
-  "textures":
-  {
-    "all": "minecraft:block/oak_log"
-  }
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "minecraft:block/oak_log"
+	}
 }
