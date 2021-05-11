@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafcopperg_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:copper_lump"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:copper_block"
+  }
+}

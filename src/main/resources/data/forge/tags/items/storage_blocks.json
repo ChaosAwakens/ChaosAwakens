@@ -6,6 +6,8 @@
     "#forge:storage_blocks/ruby",
     "#forge:storage_blocks/tigers_eye",
     "#forge:storage_blocks/titanium",
-    "#forge:storage_blocks/uranium"
+    "#forge:storage_blocks/uranium",
+    "#forge:storage_blocks/cats_eye",
+    "#forge:storage_blocks/pink_tourmaline"
   ]
 }

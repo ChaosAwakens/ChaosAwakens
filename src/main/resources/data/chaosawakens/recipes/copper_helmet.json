@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafcopperg_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:lumps/copper"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:copper_helmet"
+  }
+}

@@ -3,7 +3,6 @@ package io.github.chaosawakens.registry;
 import java.util.function.Supplier;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.blocks.CrystalPillarBlock;
 import io.github.chaosawakens.blocks.EnchantedBlockItem;
 import io.github.chaosawakens.blocks.EnchantedGoldenCakeBlock;
 import io.github.chaosawakens.blocks.GateBlock;
@@ -16,8 +15,6 @@ import net.minecraft.block.AttachedStemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.block.GlassBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.StemBlock;

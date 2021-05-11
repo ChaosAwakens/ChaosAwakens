@@ -1,0 +1,21 @@
+package io.github.chaosawakens.items;
+
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.item.ArrowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+public class IrukandjiArrowItem extends ArrowItem {
+    public IrukandjiArrowItem(Properties builder) {
+        super(builder);
+    }
+
+    @Override
+    public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
+        ArrowEntity arrowentity = new ArrowEntity(worldIn, shooter);
+        arrowentity.setPotionEffect(stack);
+        return arrowentity;
+    }
+}

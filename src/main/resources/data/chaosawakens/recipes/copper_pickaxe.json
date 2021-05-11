@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafcopperg_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "tag": "forge:lumps/copper"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:copper_pickaxe"
+  }
+}
