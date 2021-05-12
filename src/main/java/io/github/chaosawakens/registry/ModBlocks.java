@@ -3,13 +3,7 @@ package io.github.chaosawakens.registry;
 import java.util.function.Supplier;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.blocks.EnchantedBlockItem;
-import io.github.chaosawakens.blocks.EnchantedGoldenCakeBlock;
-import io.github.chaosawakens.blocks.GateBlock;
-import io.github.chaosawakens.blocks.GoldenMelonBlock;
-import io.github.chaosawakens.blocks.ModOreBlock;
-import io.github.chaosawakens.blocks.RedAntInfestedOre;
-import io.github.chaosawakens.blocks.TermiteInfestedOre;
+import io.github.chaosawakens.blocks.*;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AttachedStemBlock;
 import net.minecraft.block.Block;
@@ -59,7 +53,9 @@ public class ModBlocks {
 	public static final RegistryObject<ModOreBlock> TIN_ORE = registerBlock("tin_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<ModOreBlock> SILVER_ORE = registerBlock("silver_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<ModOreBlock> PLATINUM_ORE = registerBlock("platinum_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
-	
+	public static final RegistryObject<CrystalClusterBlock> PINK_TOURMALINE_CLUSTER = registerBlock("pink_tourmaline_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), ModItemGroups.blocksItemGroup);
+	public static final RegistryObject<CrystalClusterBlock> CATS_EYE_CLUSTER = registerBlock("cats_eye_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
+
 	// INFESTED ORES
 	public static final RegistryObject<RedAntInfestedOre> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore", () -> new RedAntInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<TermiteInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new TermiteInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), ModItemGroups.blocksItemGroup);
@@ -100,7 +96,10 @@ public class ModBlocks {
 	public static final RegistryObject<Block> RED_CRYSTAL_LEAVES = registerBlock("red_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> GREEN_CRYSTAL_LEAVES = registerBlock("green_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> YELLOW_CRYSTAL_LEAVES = registerBlock("yellow_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
-	
+	public static final RegistryObject<Block> BUDDING_PINK_TOURMALINE = registerBlock("budding_pink_tourmaline", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), ModItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), ModItemGroups.blocksItemGroup);
+
+
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
 		RegistryObject<B> block = ModBlocks.BLOCKS.register(name, supplier);
 		ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup)));

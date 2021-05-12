@@ -1,11 +1,17 @@
 {
-	"replace": false,
-	"values": [
-		"#forge:storage_blocks/aluminium",
-		"#forge:storage_blocks/amethyst",
-		"#forge:storage_blocks/ruby",
-		"#forge:storage_blocks/tigers_eye",
-		"#forge:storage_blocks/titanium",
-		"#forge:storage_blocks/uranium"
-	]
+  "replace": false,
+  "values": [
+    "#forge:storage_blocks/aluminium",
+    "#forge:storage_blocks/amethyst",
+    "#forge:storage_blocks/ruby",
+    "#forge:storage_blocks/tigers_eye",
+    "#forge:storage_blocks/titanium",
+    "#forge:storage_blocks/uranium",
+    "#forge:storage_blocks/cats_eye",
+    "#forge:storage_blocks/pink_tourmaline",
+    "#forge:storage_blocks/copper",
+    "#forge:storage_blocks/tin",
+    "#forge:storage_blocks/silver",
+    "#forge:storage_blocks/platinum"
+  ]
 }

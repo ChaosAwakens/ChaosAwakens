@@ -165,10 +165,10 @@ public class ModItems {
 	public static final RegistryObject<Item> CATS_EYE_NUGGET = ITEMS.register("cats_eye_nugget", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 	
 	// MISC
-	public static final RegistryObject<Item> CRYSTAL_SHARD = ITEMS.register("crystal_shard", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+	public static final RegistryObject<Item> CRYSTAL_WOOD_SHARD = ITEMS.register("crystal_wood_shard", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
-	public static final RegistryObject<Item> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new Item(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
+	public static final RegistryObject<IrukandjiArrowItem> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new IrukandjiArrowItem(new Item.Properties().group(ModItemGroups.itemsItemGroup)));
 	
 	// TOOLS
 	// Ultimate
@@ -176,7 +176,7 @@ public class ModItems {
 	public static final RegistryObject<EnchantedAxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new EnchantedAxeItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimateAxeDamage.get() - 37), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.EFFICIENCY, Enchantments.FORTUNE, Enchantments.UNBREAKING }, new int[] { 5, 5, 2 }));
 	public static final RegistryObject<EnchantedPickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new EnchantedPickaxeItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimatePickaxeDamage.get() - 37), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.EFFICIENCY, Enchantments.FORTUNE, Enchantments.UNBREAKING }, new int[] { 5, 5, 2 }));
 	public static final RegistryObject<EnchantedShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new EnchantedShovelItem(ToolMaterials.TOOL_ULTIMATE, (CAConfig.COMMON.ultimateShovelDamage.get() - 37), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.EFFICIENCY, Enchantments.FORTUNE, Enchantments.UNBREAKING }, new int[] { 5, 5, 2 }));
-	public static final RegistryObject<EnchantedHoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new EnchantedHoeItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimateHoeDamage.get() - 37), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.EFFICIENCY, Enchantments.FORTUNE, Enchantments.UNBREAKING }, new int[] { 5, 5, 2 }));
+	public static final RegistryObject<UltimateHoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new UltimateHoeItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimateHoeDamage.get() - 37), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.EFFICIENCY, Enchantments.FORTUNE, Enchantments.UNBREAKING }, new int[] { 5, 5, 2 }));
 	public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().group(ModItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(1000).defaultMaxDamage(1000), new Enchantment[] { Enchantments.POWER, Enchantments.FLAME, Enchantments.PUNCH, Enchantments.INFINITY }, new int[] { 5, 3, 2, 1 }));
 	
 	// Emerald
@@ -207,6 +207,34 @@ public class ModItems {
 	public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeShovelDamage.get() - 9), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	
+	// Crystal Wood
+	public static final RegistryObject<SwordItem> CRYSTAL_WOOD_SWORD = ITEMS.register("crystal_wood_sword", () -> new SwordItem(ToolMaterials.TOOL_CRYSTAL_WOOD, (int) (CAConfig.COMMON.crystalWoodSwordDamage.get() - 2), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> CRYSTAL_WOOD_AXE = ITEMS.register("crystal_wood_axe", () -> new AxeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, CAConfig.COMMON.crystalWoodAxeDamage.get() - 2, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> CRYSTAL_WOOD_PICKAXE = ITEMS.register("crystal_wood_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, (int) (CAConfig.COMMON.crystalWoodPickaxeDamage.get() - 2), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> CRYSTAL_WOOD_SHOVEL = ITEMS.register("crystal_wood_shovel", () -> new ShovelItem(ToolMaterials.TOOL_CRYSTAL_WOOD, CAConfig.COMMON.crystalWoodShovelDamage.get() - 2, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> CRYSTAL_WOOD_HOE = ITEMS.register("crystal_wood_hoe", () -> new HoeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, (int) (CAConfig.COMMON.crystalWoodHoeDamage.get() - 2), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+	// Kyanite
+	public static final RegistryObject<SwordItem> KYANITE_SWORD = ITEMS.register("kyanite_sword", () -> new SwordItem(ToolMaterials.TOOL_KYANITE, (int) (CAConfig.COMMON.kyaniteSwordDamage.get() - 3), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> KYANITE_AXE = ITEMS.register("kyanite_axe", () -> new AxeItem(ToolMaterials.TOOL_KYANITE, CAConfig.COMMON.kyaniteAxeDamage.get() - 3, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> KYANITE_PICKAXE = ITEMS.register("kyanite_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_KYANITE, (int) (CAConfig.COMMON.kyanitePickaxeDamage.get() - 3), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> KYANITE_SHOVEL = ITEMS.register("kyanite_shovel", () -> new ShovelItem(ToolMaterials.TOOL_KYANITE, CAConfig.COMMON.kyaniteShovelDamage.get() - 3, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> KYANITE_HOE = ITEMS.register("kyanite_hoe", () -> new HoeItem(ToolMaterials.TOOL_KYANITE, (int) (CAConfig.COMMON.kyaniteHoeDamage.get() - 3), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+	// Cat's Eye
+	public static final RegistryObject<SwordItem> CATS_EYE_SWORD = ITEMS.register("cats_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_CATS_EYE, (int) (CAConfig.COMMON.catsEyeSwordDamage.get() - 9), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> CATS_EYE_AXE = ITEMS.register("cats_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_CATS_EYE, (CAConfig.COMMON.catsEyeAxeDamage.get() - 9), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> CATS_EYE_PICKAXE = ITEMS.register("cats_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_CATS_EYE, (int) (CAConfig.COMMON.catsEyePickaxeDamage.get() - 9), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> CATS_EYE_SHOVEL = ITEMS.register("cats_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_CATS_EYE, (CAConfig.COMMON.catsEyeShovelDamage.get() - 9), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> CATS_EYE_HOE = ITEMS.register("cats_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_CATS_EYE, (int) (CAConfig.COMMON.catsEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+	// Pink Tourmaline
+	public static final RegistryObject<SwordItem> PINK_TOURMALINE_SWORD = ITEMS.register("pink_tourmaline_sword", () -> new SwordItem(ToolMaterials.TOOL_PINK_TOURMALINE, (int) (CAConfig.COMMON.pinkTourmSwordDamage.get() - 8), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> PINK_TOURMALINE_AXE = ITEMS.register("pink_tourmaline_axe", () -> new AxeItem(ToolMaterials.TOOL_PINK_TOURMALINE, (CAConfig.COMMON.pinkTourmAxeDamage.get() - 8), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> PINK_TOURMALINE_PICKAXE = ITEMS.register("pink_tourmaline_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_PINK_TOURMALINE, (int) (CAConfig.COMMON.pinkTourmPickaxeDamage.get() - 8), -2.8F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> PINK_TOURMALINE_SHOVEL = ITEMS.register("pink_tourmaline_shovel", () -> new ShovelItem(ToolMaterials.TOOL_PINK_TOURMALINE, (CAConfig.COMMON.pinkTourmShovelDamage.get() - 8), -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> PINK_TOURMALINE_HOE = ITEMS.register("pink_tourmaline_hoe", () -> new HoeItem(ToolMaterials.TOOL_PINK_TOURMALINE, (int) (CAConfig.COMMON.pinkTourmHoeDamage.get() - 8), 0.0F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
 	// Copper
 	public static final RegistryObject<SwordItem> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(ToolMaterials.TOOL_COPPER, (int) (CAConfig.COMMON.copperSwordDamage.get() - 2.5F), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<AxeItem> COPPER_AXE = ITEMS.register("copper_axe", () -> new AxeItem(ToolMaterials.TOOL_COPPER, CAConfig.COMMON.copperAxeDamage.get() - 2.5F, -3, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
@@ -238,12 +266,13 @@ public class ModItems {
 	// Misc. Weapons
 	public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_NIGHTMARE, (int) (CAConfig.COMMON.nightmareSwordDamage.get() - 27), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.SHARPNESS, Enchantments.KNOCKBACK, Enchantments.FIRE_ASPECT }, new int[] { 1, 3, 1 }));
 	public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.experienceSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.SHARPNESS, Enchantments.UNBREAKING, Enchantments.MENDING }, new int[] { 2, 3, 1 }));
-	public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.poisonSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PoisonSwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new PoisonSwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.poisonSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup),new Enchantment[] {Enchantments.SHARPNESS}, new int[] {1}));
 	public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.ratSwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.fairySwordDamage.get() - 7), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.bigHammerDamage.get() - 12), -2.4F, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.prismaticReaperDamage.get() - 9), -1.9F, new Item.Properties().group(ModItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.UNBREAKING, Enchantments.SWEEPING }, new int[] { 4, 4 }));
-	
+	public static final RegistryObject<SkateBowItem> SKATE_STRING_BOW = ITEMS.register("skate_string_bow", () -> new SkateBowItem(new Item.Properties().group(ModItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(384).defaultMaxDamage(384)));
+
 	// Staffs
 	public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(ModItemGroups.equipmentItemGroup).maxDamage(50)));
 	
@@ -319,8 +348,20 @@ public class ModItems {
 	public static final RegistryObject<ArmorItem> PLATINUM_CHESTPLATE = ITEMS.register("platinum_chestplate", () -> new ArmorItem(ArmorMaterials.PLATINUM, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ArmorItem> PLATINUM_LEGGINGS = ITEMS.register("platinum_leggings", () -> new ArmorItem(ArmorMaterials.PLATINUM, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ArmorItem> PLATINUM_BOOTS = ITEMS.register("platinum_boots", () -> new ArmorItem(ArmorMaterials.PLATINUM, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
-	
-	 // Cats's Eye
+
+	// Peacock Feather
+	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_HELMET = ITEMS.register("peacock_feather_helmet", () -> new ArmorItem(ArmorMaterials.PEACOCK_FEATHER, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_CHESTPLATE = ITEMS.register("peacock_feather_chestplate", () -> new ArmorItem(ArmorMaterials.PEACOCK_FEATHER, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_LEGGINGS = ITEMS.register("peacock_feather_leggings", () -> new ArmorItem(ArmorMaterials.PEACOCK_FEATHER, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PeacockBootsItem> PEACOCK_FEATHER_BOOTS = ITEMS.register("peacock_feather_boots", () -> new PeacockBootsItem(ArmorMaterials.PEACOCK_FEATHER, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+	// Pink Tourmaline
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_HELMET = ITEMS.register("pink_tourmaline_helmet", () -> new ArmorItem(ArmorMaterials.PINK_TOURMALINE, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_CHESTPLATE = ITEMS.register("pink_tourmaline_chestplate", () -> new ArmorItem(ArmorMaterials.PINK_TOURMALINE, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_LEGGINGS = ITEMS.register("pink_tourmaline_leggings", () -> new ArmorItem(ArmorMaterials.PINK_TOURMALINE, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_BOOTS = ITEMS.register("pink_tourmaline_boots", () -> new ArmorItem(ArmorMaterials.PINK_TOURMALINE, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
+
+	// Cats's Eye
     public static final RegistryObject<ArmorItem> CATS_EYE_HELMET = ITEMS.register("cats_eye_helmet", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ArmorItem> CATS_EYE_CHESTPLATE = ITEMS.register("cats_eye_chestplate", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ArmorItem> CATS_EYE_LEGGINGS = ITEMS.register("cats_eye_leggings", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.equipmentItemGroup)));

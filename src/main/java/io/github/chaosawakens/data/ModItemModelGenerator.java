@@ -1,9 +1,11 @@
 package io.github.chaosawakens.data;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -24,7 +26,7 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class ModItemModelGenerator extends ItemModelProvider {
-	
+
 	public ModItemModelGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, ChaosAwakens.MODID, existingFileHelper);
 	}
@@ -158,13 +160,12 @@ public class ModItemModelGenerator extends ItemModelProvider {
 			if (name.contains("enchanted"))
 				name = name.substring(name.indexOf("_") + 1);
 			
-			// Skip elements that have no texture
-			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE))
+			// Skip elements that have no texture or already have an existing model
+			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
 			
 			ChaosAwakens.LOGGER.debug(item.getId());
-			
-			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 ? parentGenerated : parentHandheld).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
+			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
 		}
 	}
 	
@@ -172,12 +173,12 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		for (RegistryObject<Item> item : itemBlocks) {
 			String name = item.getId().getPath();
 			
-			// Skip elements that have no model
-			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "block/" + name), MODEL))
+			// Skip elements that have no model or already have an existing item model
+			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "block/" + name), MODEL) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
 			
 			ChaosAwakens.LOGGER.debug(item.getId());
-			
+
 			withExistingParent(name, new ResourceLocation(ChaosAwakens.MODID, "block/" + name));
 			
 		}
