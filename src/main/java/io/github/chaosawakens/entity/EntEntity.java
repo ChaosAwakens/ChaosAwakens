@@ -28,9 +28,7 @@ public class EntEntity extends MonsterEntity implements IAnimatable {
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		ChaosAwakens.LOGGER.debug(event.getAnimatable());
-		
-		ChaosAwakens.LOGGER.debug(event.getController().getCurrentAnimation());
+		//ChaosAwakens.LOGGER.debug(event.animationTick += 50);
 		
 		if (this.isSwingInProgress) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
