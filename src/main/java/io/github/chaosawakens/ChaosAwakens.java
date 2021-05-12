@@ -85,8 +85,6 @@ public class ChaosAwakens {
 		ModItems.ITEMS.register(eventBus);
 		ModBlocks.ITEMS.register(eventBus);
 		ModBlocks.BLOCKS.register(eventBus);
-		ModBlocks.ENCHANTED_CAKE_ITEMS.register(eventBus);
-		ModBlocks.ENCHANTED_CAKE_BLOCKS.register(eventBus);
 		
 		ModEntityTypes.ENTITY_TYPES.register(eventBus);
 		ModStructures.STRUCTURES.register(eventBus);

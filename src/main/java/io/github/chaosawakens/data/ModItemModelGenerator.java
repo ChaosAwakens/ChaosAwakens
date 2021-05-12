@@ -30,7 +30,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 	public ModItemModelGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, ChaosAwakens.MODID, existingFileHelper);
 	}
-	
+
 	@Override
 	protected void registerModels() {
 		generate(ModItems.ITEMS.getEntries());
@@ -81,7 +81,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		 * ModItems.BIG_HAMMER, ModItems.FAIRY_SWORD, ModItems.NIGHTMARE_SWORD,
 		 * ModItems.POISON_SWORD, ModItems.RAT_SWORD, ModItems.TIN_BOOTS);
 		 */
-		
+
 		generateBlockItems(ModBlocks.ITEMS.getEntries());
 		/*
 		 * this.simpleWithExistingParent(ModBlocks.ALUMINIUM_BLOCK.getId().toString().
@@ -141,46 +141,46 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		 * this.simpleWithExistingParent(ModBlocks.PLATINUM_BLOCK.getId().toString().
 		 * replaceFirst("chaosawakens:", ""));
 		 */
-		
+
 	}
-	
+
 	@Nonnull
 	@Override
 	public String getName() {
 		return ChaosAwakens.MODNAME + " Item models";
 	}
-	
+
 	private final void generate(final Collection<RegistryObject<Item>> items) {
 		final ModelFile parentGenerated = getExistingFile(mcLoc("item/generated"));
 		final ExistingModelFile parentHandheld = getExistingFile(mcLoc("item/handheld"));
-		
+
 		for (RegistryObject<Item> item : items) {
 			String name = item.getId().getPath();
-			
+
 			if (name.contains("enchanted"))
 				name = name.substring(name.indexOf("_") + 1);
-			
+
 			// Skip elements that have no texture or already have an existing model
 			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
-			
+
 			ChaosAwakens.LOGGER.debug(item.getId());
 			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
 		}
 	}
-	
+
 	private void generateBlockItems(Collection<RegistryObject<Item>> itemBlocks) {
 		for (RegistryObject<Item> item : itemBlocks) {
 			String name = item.getId().getPath();
-			
+
 			// Skip elements that have no model or already have an existing item model
 			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "block/" + name), MODEL) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
-			
+
 			ChaosAwakens.LOGGER.debug(item.getId());
 
 			withExistingParent(name, new ResourceLocation(ChaosAwakens.MODID, "block/" + name));
-			
+
 		}
 	}
 }

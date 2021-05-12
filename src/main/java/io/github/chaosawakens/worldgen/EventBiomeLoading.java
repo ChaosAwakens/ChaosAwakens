@@ -2,6 +2,7 @@ package io.github.chaosawakens.worldgen;
 
 import java.util.Objects;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModFeatures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -24,7 +25,7 @@ public class EventBiomeLoading {
 		
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 			addCustomOres(gen);
-			
+			ChaosAwakens.LOGGER.debug(event);
 			gen.getStructures().add( () -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 		}
 		

@@ -114,15 +114,12 @@ public class ModBlocks {
 		return true;
 	}
 	
-	public static final DeferredRegister<Block> ENCHANTED_CAKE_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
-	public static final DeferredRegister<Item> ENCHANTED_CAKE_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
-	
 	public static final RegistryObject<EnchantedGoldenCakeBlock> ENCHANTED_GOLDEN_CAKE = registerEnchantedBlock("enchanted_golden_cake", () -> new EnchantedGoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), ModItemGroups.foodItemGroup, 1);
 	
 	public static <E extends Block> RegistryObject<E> registerEnchantedBlock(String name, Supplier<? extends E> supplier, ItemGroup itemGroup, int stackSize) {
-		RegistryObject<E> enchantedBlock = ModBlocks.ENCHANTED_CAKE_BLOCKS.register(name, supplier);
+		RegistryObject<E> block = ModBlocks.BLOCKS.register(name, supplier);
 		
-		ENCHANTED_CAKE_ITEMS.register(name, () -> new EnchantedBlockItem(enchantedBlock.get(), new Item.Properties().group(itemGroup).maxStackSize(stackSize)));
-		return enchantedBlock;
+		ITEMS.register(name, () -> new EnchantedBlockItem(block.get(), new Item.Properties().group(itemGroup).maxStackSize(stackSize)));
+		return block;
 	}
 }
