@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "chaosawakens:item/silver_sword"
+    "layer0": "chaosawakens:item/cats_eye_chestplate"
   }
 }

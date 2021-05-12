@@ -164,7 +164,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 			
 			ChaosAwakens.LOGGER.debug(item.getId());
 			
-			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 ? parentGenerated : parentHandheld).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
+			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
 		}
 	}
 	
