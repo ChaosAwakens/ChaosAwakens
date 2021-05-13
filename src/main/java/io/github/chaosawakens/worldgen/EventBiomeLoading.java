@@ -25,7 +25,6 @@ public class EventBiomeLoading {
 		
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 			addCustomOres(gen);
-			ChaosAwakens.LOGGER.debug(event);
 			gen.getStructures().add( () -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 		}
 		

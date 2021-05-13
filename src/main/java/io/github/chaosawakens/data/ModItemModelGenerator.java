@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -24,11 +25,11 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class ModItemModelGenerator extends ItemModelProvider {
-	
+
 	public ModItemModelGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, ChaosAwakens.MODID, existingFileHelper);
 	}
-	
+
 	@Override
 	protected void registerModels() {
 		generate(ModItems.ITEMS.getEntries());
@@ -79,7 +80,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		 * ModItems.BIG_HAMMER, ModItems.FAIRY_SWORD, ModItems.NIGHTMARE_SWORD,
 		 * ModItems.POISON_SWORD, ModItems.RAT_SWORD, ModItems.TIN_BOOTS);
 		 */
-		
+
 		generateBlockItems(ModBlocks.ITEMS.getEntries());
 		/*
 		 * this.simpleWithExistingParent(ModBlocks.ALUMINIUM_BLOCK.getId().toString().
@@ -139,47 +140,53 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		 * this.simpleWithExistingParent(ModBlocks.PLATINUM_BLOCK.getId().toString().
 		 * replaceFirst("chaosawakens:", ""));
 		 */
-		
+
 	}
-	
+
 	@Nonnull
 	@Override
 	public String getName() {
 		return ChaosAwakens.MODNAME + " Item models";
 	}
-	
+
 	private final void generate(final Collection<RegistryObject<Item>> items) {
 		final ModelFile parentGenerated = getExistingFile(mcLoc("item/generated"));
 		final ExistingModelFile parentHandheld = getExistingFile(mcLoc("item/handheld"));
-		
+
 		for (RegistryObject<Item> item : items) {
 			String name = item.getId().getPath();
-			
+
 			if (name.contains("enchanted"))
 				name = name.substring(name.indexOf("_") + 1);
-			
-			// Skip elements that have no texture
-			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE))
+
+			/*
+			 *  Skip elements that have no texture at assets/chaosawakens/textures
+			 *  or already have an existing model at assets/chaosawakens/models
+			 */
+			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
+
+			ChaosAwakens.LOGGER.info(item.getId());
 			
-			ChaosAwakens.LOGGER.debug(item.getId());
-			
-			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
+			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
 		}
 	}
-	
+
 	private void generateBlockItems(Collection<RegistryObject<Item>> itemBlocks) {
 		for (RegistryObject<Item> item : itemBlocks) {
 			String name = item.getId().getPath();
-			
-			// Skip elements that have no model
-			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "block/" + name), MODEL))
+
+			/*
+			 *  Skip elements that have no block model inside of assets/chaosawakens/models
+			 *  or already have an existing item model at the same path
+			 */
+			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "block/" + name), MODEL) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
 			
-			ChaosAwakens.LOGGER.debug(item.getId());
+			ChaosAwakens.LOGGER.info(item.getId());
 			
 			withExistingParent(name, new ResourceLocation(ChaosAwakens.MODID, "block/" + name));
-			
+
 		}
 	}
 }

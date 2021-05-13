@@ -1,16 +1,7 @@
 {
-<<<<<<< HEAD
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/crystal_wood_planks"
-		}
-	}
-}
-=======
   "variants": {
     "": {
       "model": "chaosawakens:block/crystal_wood_planks"
     }
   }
 }
->>>>>>> refs/remotes/origin/1.16.5

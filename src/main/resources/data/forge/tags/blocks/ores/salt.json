@@ -1,6 +1,6 @@
 {
-	"replace": false,
-	"values": [
-		"chaosawakens:salt_ore"
-	]
+  "replace": false,
+  "values": [
+    "chaosawakens:salt_ore"
+  ]
 }

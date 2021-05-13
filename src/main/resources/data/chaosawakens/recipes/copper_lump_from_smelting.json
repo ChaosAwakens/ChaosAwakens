@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smelcopperg",
+  "type": "minecraft:smelting",
   "ingredient": {
     "item": "chaosawakens:copper_ore"
   },
