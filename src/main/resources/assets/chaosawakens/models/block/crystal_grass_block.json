@@ -2,7 +2,7 @@
   "parent": "block/cube_bottom_top",
   "textures": {
     "bottom": "chaosawakens:block/kyanite",
-    "top": "chaosawakens:block/crystal_grass_top",
+    "top": "chaosawakens:block/crystal_grass",
     "side": "chaosawakens:block/crystal_grass_side"
   }
 }

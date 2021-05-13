@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargeableMob {
-    private static final DataParameter<Boolean> ENCHANTED = EntityDataManager.createKey(CreeperEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ENCHANTED = EntityDataManager.createKey(EnchantedGoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
 
     public EnchantedGoldenAppleCowEntity(EntityType<? extends CowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -31,7 +31,6 @@ public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargea
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.WHEAT), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
@@ -96,10 +95,6 @@ public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargea
         } else {
             return super.getEntityInteractionResult(playerIn, hand);
         }
-    }
-
-    public CowEntity createChild(ServerWorld world, AgeableEntity mate) {
-        return EntityType.COW.create(world);
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {

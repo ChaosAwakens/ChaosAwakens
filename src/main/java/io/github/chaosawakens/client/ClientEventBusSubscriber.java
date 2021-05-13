@@ -23,7 +23,9 @@ import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -77,7 +79,19 @@ public class ClientEventBusSubscriber {
 		RenderTypeLookup.setRenderLayer(ModBlocks.CATS_EYE_CLUSTER.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.BUDDING_PINK_TOURMALINE.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.BUDDING_CATS_EYE.get(), RenderType.getCutout());
-
+		
+		ItemModelsProperties.registerProperty(ModItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"),
+				(stack, world, living) -> {
+					if (living == null) {
+						return 0.0F;
+					} else {
+						return living.getActiveItemStack() != stack ? 0.0F : (float)(stack.getUseDuration() - living.getItemInUseCount()) / 20.0F;
+					}
+		});
+		ItemModelsProperties.registerProperty(ModItems.SKATE_STRING_BOW.get(), new ResourceLocation("pulling"),
+				(stack, world, living) -> {
+					return living != null && living.isHandActive() && living.getActiveItemStack() == stack ? 1.0F : 0.0F;
+		});
 	}
 	
 	@SubscribeEvent

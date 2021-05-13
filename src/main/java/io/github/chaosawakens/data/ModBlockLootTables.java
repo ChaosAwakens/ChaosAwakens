@@ -30,6 +30,9 @@ public class ModBlockLootTables extends BlockLootTables
         registerLootTable(ModBlocks.GOLDEN_MELON.get(), (food) -> {
             return droppingItemWithFortune(food, ModItems.GOLDEN_MELON_SLICE.get());
         });
+        registerLootTable(ModBlocks.CRYSTAL_GRASS_BLOCK.get(), (food) -> {
+            return dropping(ModBlocks.KYANITE.get());
+        });
 
         // BLOCKS
         registerDropSelfLootTable(ModBlocks.AMETHYST_BLOCK.get());
@@ -52,6 +55,11 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(ModBlocks.FOSSILISED_EMERALD_GATOR.get());
         registerDropSelfLootTable(ModBlocks.GATE_BLOCK.get());
         registerDropSelfLootTable(ModBlocks.ENT_DUNGEON_WOOD.get());
+        registerDropSelfLootTable(ModBlocks.KYANITE.get());
+        registerDropSelfLootTable(ModBlocks.CRYSTAL_LOG.get());
+        registerDropSelfLootTable(ModBlocks.CRYSTAL_WOOD.get());
+        registerDropSelfLootTable(ModBlocks.CRYSTAL_WOOD_PLANKS.get());
+
     }
 
     @Override
