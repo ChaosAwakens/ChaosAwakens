@@ -77,7 +77,6 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::func_233680_b_));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, AbstractSkeletonEntity.class, false));
         this.targetSelector.addGoal(8, new ResetAngerGoal<>(this, true));
     }
 

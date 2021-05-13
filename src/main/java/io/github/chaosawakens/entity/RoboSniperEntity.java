@@ -56,7 +56,7 @@ public class RoboSniperEntity extends MonsterEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 150)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 25)
                 .createMutableAttribute(Attributes.ARMOR, 3)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
                 .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1)

@@ -26,13 +26,16 @@ public class EventBiomeLoading {
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 			addCustomOres(gen);
 			ChaosAwakens.LOGGER.debug(event);
+		}
+
+		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
 			gen.getStructures().add( () -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 		}
 		
 		if (event.getName().toString().equals("chaosawakens:mining_biome")) {
 			addCustomOres(gen);
+			addCustomOres(gen);
 		}
-		
 	}
 	
 	public static void addCustomOres(BiomeGenerationSettingsBuilder gen) {

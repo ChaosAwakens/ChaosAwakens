@@ -49,6 +49,7 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.75, true));
 		this.goalSelector.addGoal(5, new ThrowRiderAttackGoal(this, 0.125F, false) {
 			@Override
 			protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_) {
@@ -63,18 +64,20 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 100)
-				.createMutableAttribute(Attributes.ARMOR, 10).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
+		return MobEntity.registerAttributes()
+				.createMutableAttribute(Attributes.MAX_HEALTH, 250)
+				.createMutableAttribute(Attributes.ARMOR, 19)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
 				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 2.5D)
 				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 11)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 7)
+				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 30)
+				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 7.5)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 16);
 	}
 

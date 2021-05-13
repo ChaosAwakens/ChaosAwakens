@@ -14,6 +14,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.StemBlock;
 import net.minecraft.block.StemGrownBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -40,6 +41,9 @@ public class ModBlocks {
 	// ENT DUNGEON BLOCKS
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> ENT_DUNGEON_WOOD = registerBlock("ent_dungeon_wood", () -> new Block(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), ModItemGroups.blocksItemGroup);
+	
+    // SPAWNER BLOCK
+	public static final RegistryObject<ModSpawnerBlock> SPAWNER_BLOCK = registerBlock("spawner_block", () -> new ModSpawnerBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(-1.0F).notSolid().sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), ModItemGroups.blocksItemGroup);
 	
 	// MINERAL ORES
 	public static final RegistryObject<ModOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), ModItemGroups.blocksItemGroup);

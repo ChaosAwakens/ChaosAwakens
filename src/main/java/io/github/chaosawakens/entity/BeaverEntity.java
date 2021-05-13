@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -43,6 +44,7 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.OAK_LOG, this, 1.0D, 16));
         this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.BIRCH_LOG, this, 1.0D, 16));

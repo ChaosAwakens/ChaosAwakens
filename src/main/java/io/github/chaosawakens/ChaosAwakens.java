@@ -3,6 +3,7 @@ package io.github.chaosawakens;
 import java.util.Locale;
 
 import io.github.chaosawakens.entity.*;
+import io.github.chaosawakens.tileentity.CATileEntities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -82,9 +83,12 @@ public class ChaosAwakens {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		eventBus.addListener(this::gatherData);
 		ModBiomes.BIOMES.register(eventBus);
+
 		ModItems.ITEMS.register(eventBus);
 		ModBlocks.ITEMS.register(eventBus);
 		ModBlocks.BLOCKS.register(eventBus);
+		
+		CATileEntities.TILE_ENTITIES.register(eventBus);
 		
 		ModEntityTypes.ENTITY_TYPES.register(eventBus);
 		ModStructures.STRUCTURES.register(eventBus);

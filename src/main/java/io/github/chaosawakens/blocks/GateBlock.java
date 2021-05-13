@@ -131,9 +131,9 @@ public class GateBlock extends Block {
         double d0 = 0.0625D;
 
         for (int i = 0; i < 6; ++i) {
-            double d1 = (double) ((float) pos.getX() + random.nextFloat());
-            double d2 = (double) ((float) pos.getY() + random.nextFloat());
-            double d3 = (double) ((float) pos.getZ() + random.nextFloat());
+            double d1 = ((float) pos.getX() + random.nextFloat());
+            double d2 = ((float) pos.getY() + random.nextFloat());
+            double d3 = ((float) pos.getZ() + random.nextFloat());
 
             if (i == 0 && !worldIn.getBlockState(pos.up()).isOpaqueCube(worldIn, pos)) {
                 d2 = (double) pos.getY() + d0 + 1.25D;
@@ -159,10 +159,7 @@ public class GateBlock extends Block {
                 d1 = (double) pos.getX() - d0;
             }
 
-            float f1 = 1.25F * 0.85F + 0.65F;
-            float f2 = Math.max(0.25F, 1.25F * 1.25F * 0.95F - 0.75F);
-            float f3 = Math.max(0.25F, 1.25F * 1.25F * 0.85F - 0.95F);
-            if (d1 < (double) pos.getX() || d1 > (double) (pos.getX() + 1.25F) || d2 < 0.25D || d2 > (double) (pos.getY() + 1.25D) || d3 < (double) pos.getZ() || d3 > (double) (pos.getZ() + 1.25D)) {
+            if (d1 < (double) pos.getX() || d1 > (double) (pos.getX() + 1.25F) || d2 < 0.25D || d2 > (pos.getY() + 1.25D) || d3 < (double) pos.getZ() || d3 > (pos.getZ() + 1.25D)) {
                 worldIn.addParticle(new BlockParticleData(ParticleTypes.FALLING_DUST, getDefaultState()), d1, d2, d3, 0.0D, 0.0D, 0.0D);
             }
         }
