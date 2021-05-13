@@ -4,15 +4,7 @@ import java.util.function.Supplier;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.blocks.*;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AttachedStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.StemBlock;
-import net.minecraft.block.StemGrownBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
@@ -102,7 +94,8 @@ public class ModBlocks {
 	public static final RegistryObject<Block> YELLOW_CRYSTAL_LEAVES = registerBlock("yellow_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> BUDDING_PINK_TOURMALINE = registerBlock("budding_pink_tourmaline", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), ModItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), ModItemGroups.blocksItemGroup);
-
+	public static final RegistryObject<CraftingTableBlock> CRYSTAL_CRAFTING_TABLE = registerBlock("crystal_crafting_table", () -> new CraftingTableBlock(Block.Properties.from(Blocks.CRAFTING_TABLE).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
+	public static final RegistryObject<FurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new FurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(ModBlocks::_false).notSolid()), ModItemGroups.blocksItemGroup);
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
 		RegistryObject<B> block = ModBlocks.BLOCKS.register(name, supplier);

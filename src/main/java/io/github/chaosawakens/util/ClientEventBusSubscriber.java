@@ -63,6 +63,8 @@ public class ClientEventBusSubscriber {
 		RenderTypeLookup.setRenderLayer(ModBlocks.CATS_EYE_CLUSTER.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.BUDDING_PINK_TOURMALINE.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.BUDDING_CATS_EYE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_CRAFTING_TABLE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_FURNACE.get(), RenderType.getCutout());
 
 		ItemModelsProperties.registerProperty(ModItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"), (stack, world, living) -> {
 			if (living == null) {
