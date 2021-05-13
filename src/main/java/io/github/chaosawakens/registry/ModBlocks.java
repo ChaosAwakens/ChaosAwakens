@@ -3,13 +3,13 @@ package io.github.chaosawakens.registry;
 import java.util.function.Supplier;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.blocks.EnchantedBlockItem;
 import io.github.chaosawakens.blocks.EnchantedGoldenCakeBlock;
 import io.github.chaosawakens.blocks.GateBlock;
 import io.github.chaosawakens.blocks.GoldenMelonBlock;
 import io.github.chaosawakens.blocks.ModOreBlock;
 import io.github.chaosawakens.blocks.RedAntInfestedOre;
 import io.github.chaosawakens.blocks.TermiteInfestedOre;
+import io.github.chaosawakens.items.EnchantedBlockItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AttachedStemBlock;
 import net.minecraft.block.Block;
