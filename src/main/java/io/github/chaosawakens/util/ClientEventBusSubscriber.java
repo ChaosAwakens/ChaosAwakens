@@ -1,29 +1,15 @@
 package io.github.chaosawakens.util;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.client.entity.render.AppleCowRender;
-import io.github.chaosawakens.client.entity.render.BeaverEntityRender;
-import io.github.chaosawakens.client.entity.render.BrownAntEntityRender;
-import io.github.chaosawakens.client.entity.render.EmeraldGatorEntityRender;
-import io.github.chaosawakens.client.entity.render.EnchantedGoldenAppleCowRender;
-import io.github.chaosawakens.client.entity.render.EntEntityRender;
-import io.github.chaosawakens.client.entity.render.GoldenAppleCowRender;
-import io.github.chaosawakens.client.entity.render.HerculesBeetleEntityRender;
-import io.github.chaosawakens.client.entity.render.IrukandjiArrowRender;
-import io.github.chaosawakens.client.entity.render.RainbowAntEntityRender;
-import io.github.chaosawakens.client.entity.render.RedAntEntityRender;
-import io.github.chaosawakens.client.entity.render.RoboSniperEntityRender;
-import io.github.chaosawakens.client.entity.render.RubyBugEntityRender;
-import io.github.chaosawakens.client.entity.render.TermiteEntityRender;
-import io.github.chaosawakens.client.entity.render.UltimateArrowRender;
-import io.github.chaosawakens.client.entity.render.UnstableAntEntityRender;
+import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.registry.ModBlocks;
 import io.github.chaosawakens.registry.ModEntityTypes;
 import io.github.chaosawakens.registry.ModItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +19,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
-	
+
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRender::new);
@@ -78,6 +64,16 @@ public class ClientEventBusSubscriber {
 		RenderTypeLookup.setRenderLayer(ModBlocks.BUDDING_PINK_TOURMALINE.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.BUDDING_CATS_EYE.get(), RenderType.getCutout());
 
+		ItemModelsProperties.registerProperty(ModItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"), (stack, world, living) -> {
+			if (living == null) {
+				return 0.0F;
+			} else {
+				return living.getActiveItemStack() != stack ? 0.0F : (float)(stack.getUseDuration() - living.getItemInUseCount()) / 20.0F;
+			}
+		});
+		ItemModelsProperties.registerProperty(ModItems.SKATE_STRING_BOW.get(), new ResourceLocation("pulling"), (stack, world, living) -> {
+			return living != null && living.isHandActive() && living.getActiveItemStack() == stack ? 1.0F : 0.0F;
+		});
 	}
 	
 	@SubscribeEvent
