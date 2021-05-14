@@ -36,7 +36,7 @@ public class CABlocks {
 	public static final RegistryObject<Block> ENT_DUNGEON_WOOD = registerBlock("ent_dungeon_wood", () -> new Block(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
 
 	// SPAWNER BLOCK
-	public static final RegistryObject<ModSpawnerBlock> SPAWNER_BLOCK = registerBlock("spawner_block", () -> new ModSpawnerBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(-1.0F).notSolid().noDrops().sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<ModSpawnerBlock> SPAWNER_BLOCK = registerBlock("spawner_block", () -> new ModSpawnerBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(-1.0F).notSolid().noDrops().sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), null);
 
 	// MINERAL ORES
 	public static final RegistryObject<ModOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), CAItemGroups.blocksItemGroup);
