@@ -1,22 +1,16 @@
 package io.github.chaosawakens;
 
-import java.util.Locale;
-
-import io.github.chaosawakens.entity.*;
-import io.github.chaosawakens.tileentity.CATileEntities;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.mojang.serialization.Codec;
 import io.github.chaosawakens.config.CAConfig;
 import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
+import io.github.chaosawakens.entity.*;
 import io.github.chaosawakens.network.PacketHandler;
 import io.github.chaosawakens.registry.*;
+import io.github.chaosawakens.tileentity.CATileEntities;
+import io.github.chaosawakens.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.worldgen.EventBiomeLoading;
-import io.github.chaosawakens.worldgen.CABiomeFeatures;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
@@ -28,9 +22,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -39,16 +30,15 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.DistExecutor.SafeRunnable;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.lang.reflect.Method;
@@ -65,15 +55,7 @@ public class ChaosAwakens {
 	public static ChaosAwakens INSTANCE;
 	
 	public static final Logger LOGGER = LogManager.getLogger();
-	
-	public static ResourceLocation locate(String name) {
-		return new ResourceLocation(MODID, name);
-	}
-	
-	public static String find(String name) {
-		return MODID + ":" + name;
-	}
-	
+
 	public ChaosAwakens() {
 		INSTANCE = this;
 		GeckoLib.initialize();
@@ -167,9 +149,9 @@ public class ChaosAwakens {
 	private void gatherData(final GatherDataEvent event) {
 		DataGenerator dataGenerator = event.getGenerator();
 		final ExistingFileHelper existing = event.getExistingFileHelper();
-		
+
 		if (event.includeServer()) {
-			//dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
+			dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
 			dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
 		}
 	}

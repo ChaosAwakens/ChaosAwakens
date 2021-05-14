@@ -19,7 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CAItems {
-	
+
 	// ORESPAWN FOOD
 	public static final Food FOOD_RAW_CORNDOG = new Food.Builder().hunger(4).saturation(0.6F).build();
 	public static final Food FOOD_COOKED_CORNDOG = new Food.Builder().hunger(14).saturation(1.5F).build();
@@ -361,12 +361,12 @@ public class CAItems {
 	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_LEGGINGS = ITEMS.register("pink_tourmaline_leggings", () -> new ArmorItem(ArmorMaterials.PINK_TOURMALINE, EquipmentSlotType.LEGS, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_BOOTS = ITEMS.register("pink_tourmaline_boots", () -> new ArmorItem(ArmorMaterials.PINK_TOURMALINE, EquipmentSlotType.FEET, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 
-	// Cats's Eye
-    public static final RegistryObject<ArmorItem> CATS_EYE_HELMET = ITEMS.register("cats_eye_helmet", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.HEAD, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<ArmorItem> CATS_EYE_CHESTPLATE = ITEMS.register("cats_eye_chestplate", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.CHEST, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<ArmorItem> CATS_EYE_LEGGINGS = ITEMS.register("cats_eye_leggings", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.LEGS, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<ArmorItem> CATS_EYE_BOOTS = ITEMS.register("cats_eye_boots", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.FEET, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-    
+	// Cat's Eye
+	public static final RegistryObject<ArmorItem> CATS_EYE_HELMET = ITEMS.register("cats_eye_helmet", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.HEAD, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> CATS_EYE_CHESTPLATE = ITEMS.register("cats_eye_chestplate", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.CHEST, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> CATS_EYE_LEGGINGS = ITEMS.register("cats_eye_leggings", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.LEGS, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ArmorItem> CATS_EYE_BOOTS = ITEMS.register("cats_eye_boots", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.FEET, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+
 	// SPAWN EGGS
 	public static final RegistryObject<ModSpawnEggItem> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.ENT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<ModSpawnEggItem> RED_ANT_SPAWN_EGG = ITEMS.register("red_ant_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.RED_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));

@@ -1,8 +1,5 @@
 package io.github.chaosawakens.worldgen;
 
-import java.util.Objects;
-
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.CAFeatures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -12,6 +9,8 @@ import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 
 public class EventBiomeLoading {

@@ -1,18 +1,13 @@
 package io.github.chaosawakens.entity;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.AbstractSkeletonEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WolfEntity;
-import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.DyeColor;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -34,23 +29,15 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-
-import io.github.chaosawakens.ChaosAwakens;
-
 import java.util.UUID;
-import java.util.function.Predicate;
 
 public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAnimatable {
 	
     private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.createKey(WolfEntity.class, DataSerializers.VARINT);
-    public static final Predicate<LivingEntity> TARGET_ENTITIES = (p_213440_0_) -> {
-        EntityType<?> entitytype = p_213440_0_.getType();
-        return entitytype == EntityType.SHEEP || entitytype == EntityType.RABBIT || entitytype == EntityType.FOX;
-    };
     private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.convertRange(20, 39);
     private UUID field_234231_bH_;
 
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
     public EmeraldGatorEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -161,17 +148,17 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
 
     @OnlyIn(Dist.CLIENT)
     public Vector3d getLeashStartPosition() {
-        return new Vector3d(0.0D, (double)(0.6F * this.getEyeHeight()), (double)(this.getWidth() * 0.4F));
+        return new Vector3d(0.0D, 0.6F * this.getEyeHeight(), this.getWidth() * 0.4F);
     }
 
     public void tick() {
-        EmeraldGatorEntity.this.setAttackTarget((LivingEntity)null);
+        EmeraldGatorEntity.this.setAttackTarget(null);
         super.tick();
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<EmeraldGatorEntity>(this, "emeraldgatorcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "emeraldgatorcontroller", 0, this::predicate));
     }
 
     @Override

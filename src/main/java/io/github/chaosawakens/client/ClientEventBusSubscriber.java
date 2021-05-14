@@ -1,22 +1,7 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.client.entity.render.AppleCowRender;
-import io.github.chaosawakens.client.entity.render.BeaverEntityRender;
-import io.github.chaosawakens.client.entity.render.BrownAntEntityRender;
-import io.github.chaosawakens.client.entity.render.EmeraldGatorEntityRender;
-import io.github.chaosawakens.client.entity.render.EnchantedGoldenAppleCowRender;
-import io.github.chaosawakens.client.entity.render.EntEntityRender;
-import io.github.chaosawakens.client.entity.render.GoldenAppleCowRender;
-import io.github.chaosawakens.client.entity.render.HerculesBeetleEntityRender;
-import io.github.chaosawakens.client.entity.render.IrukandjiArrowRender;
-import io.github.chaosawakens.client.entity.render.RainbowAntEntityRender;
-import io.github.chaosawakens.client.entity.render.RedAntEntityRender;
-import io.github.chaosawakens.client.entity.render.RoboSniperEntityRender;
-import io.github.chaosawakens.client.entity.render.RubyBugEntityRender;
-import io.github.chaosawakens.client.entity.render.TermiteEntityRender;
-import io.github.chaosawakens.client.entity.render.UltimateArrowRender;
-import io.github.chaosawakens.client.entity.render.UnstableAntEntityRender;
+import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.registry.CABlocks;
 import io.github.chaosawakens.registry.CAEntityTypes;
 import io.github.chaosawakens.registry.CAItems;
@@ -24,7 +9,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
@@ -91,9 +75,7 @@ public class ClientEventBusSubscriber {
 					}
 		});
 		ItemModelsProperties.registerProperty(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pulling"),
-				(stack, world, living) -> {
-					return living != null && living.isHandActive() && living.getActiveItemStack() == stack ? 1.0F : 0.0F;
-		});
+				(stack, world, living) -> living != null && living.isHandActive() && living.getActiveItemStack() == stack ? 1.0F : 0.0F);
 	}
 	
 	@SubscribeEvent

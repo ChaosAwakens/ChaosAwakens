@@ -7,13 +7,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.world.World;
 
 public class EnchantedScytheItem extends ScytheItem {
 
-    private int[] enchantmentLevels;
-    private Enchantment[] enchantmentIds;
+    private final int[] enchantmentLevels;
+    private final Enchantment[] enchantmentIds;
 
     public EnchantedScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);

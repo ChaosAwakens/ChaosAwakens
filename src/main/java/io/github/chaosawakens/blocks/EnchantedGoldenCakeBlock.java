@@ -1,14 +1,8 @@
 package io.github.chaosawakens.blocks;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.entity.ItemFrameRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -38,7 +32,7 @@ public class EnchantedGoldenCakeBlock extends Block {
 
     public EnchantedGoldenCakeBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(BITES, Integer.valueOf(0)));
+        this.setDefaultState(this.stateContainer.getBaseState().with(BITES, 0));
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -72,7 +66,7 @@ public class EnchantedGoldenCakeBlock extends Block {
             player.getFoodStats().addStats(7, 0.85F);
             int i = state.get(BITES);
             if (i < 6) {
-                worldIn.setBlockState(pos, state.with(BITES, Integer.valueOf(i + 1)), 3);
+                worldIn.setBlockState(pos, state.with(BITES, i + 1), 3);
             } else {
                 worldIn.removeBlock(pos, false);
             }

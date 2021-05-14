@@ -1,6 +1,5 @@
 package io.github.chaosawakens.tileentity.spawner;
 
-import io.github.chaosawakens.entity.EntEntity;
 import io.github.chaosawakens.entity.HerculesBeetleEntity;
 import io.github.chaosawakens.registry.CAEntityTypes;
 import io.github.chaosawakens.tileentity.CATileEntities;

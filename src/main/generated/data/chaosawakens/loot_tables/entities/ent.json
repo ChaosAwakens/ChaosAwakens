@@ -28,24 +28,40 @@
       ]
     },
     {
-      "rolls": 6,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
+          "functions": [
             {
-              "condition": "minecraft:random_chance",
-              "chance": 0.33
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
             }
           ],
           "name": "minecraft:red_mushroom"
         },
         {
           "type": "minecraft:item",
-          "conditions": [
+          "functions": [
             {
-              "condition": "minecraft:random_chance",
-              "chance": 0.33
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
             }
           ],
           "name": "minecraft:brown_mushroom"
@@ -53,14 +69,18 @@
       ]
     },
     {
-      "rolls": 2,
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
       "entries": [
         {
           "type": "minecraft:item",
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.85
+              "chance": 0.65
             }
           ],
           "name": "minecraft:diamond"

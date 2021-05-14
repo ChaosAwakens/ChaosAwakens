@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class EnchantedModSpawnEggItem extends ModSpawnEgg {
-    private Supplier<? extends EntityType<?>> typeGetter;
+    private final Supplier<? extends EntityType<?>> typeGetter;
 
     public EnchantedModSpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties) {
         super(null, properties);

@@ -14,9 +14,6 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class RoboSniperEntityRender extends GeoEntityRenderer<RoboSniperEntity> {
 
-    private IRenderTypeBuffer renderTypeBuffer;
-    private RoboSniperEntity roboSniperEntity;
-
     public RoboSniperEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RoboSniperEntityModel());
         this.shadowSize = 0.4F;
@@ -24,9 +21,6 @@ public class RoboSniperEntityRender extends GeoEntityRenderer<RoboSniperEntity> 
 
     @Override
     public void renderEarly(RoboSniperEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        this.roboSniperEntity = animatable;
-        this.renderTypeBuffer = renderTypeBuffer;
-
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

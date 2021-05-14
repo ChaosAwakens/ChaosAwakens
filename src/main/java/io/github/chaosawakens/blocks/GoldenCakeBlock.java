@@ -31,7 +31,7 @@ public class GoldenCakeBlock extends Block {
 
     public GoldenCakeBlock(AbstractBlock.Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(BITES, Integer.valueOf(0)));
+        this.setDefaultState(this.stateContainer.getBaseState().with(BITES, 0));
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -62,7 +62,7 @@ public class GoldenCakeBlock extends Block {
             player.getFoodStats().addStats(4, 0.35F);
             int i = state.get(BITES);
             if (i < 6) {
-                world.setBlockState(pos, state.with(BITES, Integer.valueOf(i + 1)), 3);
+                world.setBlockState(pos, state.with(BITES, i + 1), 3);
             } else {
                 world.removeBlock(pos, false);
             }

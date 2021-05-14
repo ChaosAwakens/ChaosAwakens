@@ -5,9 +5,7 @@ import io.github.chaosawakens.client.entity.model.EnchantedGoldenAppleCowModel;
 import io.github.chaosawakens.entity.EnchantedGoldenAppleCowEntity;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.EnergyLayer;
-import net.minecraft.client.renderer.entity.model.CreeperModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class CowGlintLayer extends EnergyLayer<EnchantedGoldenAppleCowEntity, EnchantedGoldenAppleCowModel<EnchantedGoldenAppleCowEntity>> {
     private static final ResourceLocation GLINT_TEXTURE = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-    private final EnchantedGoldenAppleCowModel<EnchantedGoldenAppleCowEntity> cowModel = new EnchantedGoldenAppleCowModel<>(2.0F);
+    private final EnchantedGoldenAppleCowModel<EnchantedGoldenAppleCowEntity> cowModel = new EnchantedGoldenAppleCowModel<>();
 
     public CowGlintLayer(IEntityRenderer<EnchantedGoldenAppleCowEntity, EnchantedGoldenAppleCowModel<EnchantedGoldenAppleCowEntity>> p_i50947_1_) {
         super(p_i50947_1_);

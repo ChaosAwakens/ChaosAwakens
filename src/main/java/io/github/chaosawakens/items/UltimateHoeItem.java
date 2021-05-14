@@ -31,9 +31,7 @@ public class UltimateHoeItem extends EnchantedHoeItem {
                 PlayerEntity playerentity = context.getPlayer();
                 world.playSound(playerentity, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 if (!world.isRemote && playerentity != null) {
-                    context.getItem().damageItem(1, playerentity, (player) -> {
-                        player.sendBreakAnimation(context.getHand());
-                    });
+                    context.getItem().damageItem(1, playerentity, (player) -> player.sendBreakAnimation(context.getHand()));
                 }
                 for (int x = -1; x < 2; x++) {
                     for (int y = -1; y < 2; y++) {

@@ -15,14 +15,8 @@ import net.minecraft.world.World;
 
 public class PeacockBootsItem extends ArmorItem {
 
-    private int[] enchantmentLevels = new int[0];
-    private Enchantment[] enchantmentIds = new Enchantment[0];
-
-    public PeacockBootsItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn, Enchantment[] enchants, int[] lvls) {
-        super(materialIn, slot, builderIn);
-        enchantmentIds = enchants;
-        enchantmentLevels = lvls;
-    }
+    private final int[] enchantmentLevels = new int[0];
+    private final Enchantment[] enchantmentIds = new Enchantment[0];
 
     public PeacockBootsItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
         super(materialIn, slot, builderIn);

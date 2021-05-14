@@ -1,16 +1,15 @@
 package io.github.chaosawakens.worldgen;
 
-import java.util.function.Consumer;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.CAEntityTypes;
 import net.minecraft.entity.EntityClassification;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.function.Consumer;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID)
 public class CABiomeFeatures {
@@ -48,13 +47,9 @@ public class CABiomeFeatures {
 				OVERWORLD_MOBS.accept(spawnInfoBuilder);
 				break;
 		}
-		/*if (isVillageManiaBiome(category)) {
-			withRoboSniper(spawnInfoBuilder);
-		}*/
 	}
 	
 	public static void addStructureSpawns(BiomeLoadingEvent event) {
-		
 		BiomeGenerationSettingsBuilder builder = event.getGeneration();
 		switch(event.getCategory()) {
 			case FOREST:
@@ -63,14 +58,4 @@ public class CABiomeFeatures {
 				break;
 		}
 	}
-	
-	/*public static void withRoboSniper(MobSpawnInfoBuilder builder) {
-		builder.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntityTypes.ROBO_SNIPER.get(), 500, 5, 10));
-	}*/
-	
-	/*public static boolean isVillageManiaBiome(Biome.Category category) {
-		return category == Biome.Category.byName("chaosawakens:village_plains");
-	}*/
-	
-	private CABiomeFeatures() {}
 }

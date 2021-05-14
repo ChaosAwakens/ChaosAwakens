@@ -14,9 +14,6 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class HerculesBeetleEntityRender extends GeoEntityRenderer<HerculesBeetleEntity> {
 
-    private IRenderTypeBuffer renderTypeBuffer;
-    private HerculesBeetleEntity herculesBeetleEntity;
-
     public HerculesBeetleEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new HerculesBeetleEntityModel());
         this.shadowSize = 2.5F;
@@ -24,9 +21,6 @@ public class HerculesBeetleEntityRender extends GeoEntityRenderer<HerculesBeetle
 
     @Override
     public void renderEarly(HerculesBeetleEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        this.herculesBeetleEntity = animatable;
-        this.renderTypeBuffer = renderTypeBuffer;
-
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

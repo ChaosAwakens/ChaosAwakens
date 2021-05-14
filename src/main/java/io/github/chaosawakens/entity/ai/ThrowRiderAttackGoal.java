@@ -7,10 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.PacketDistributor;
-
-import java.util.Random;
 
 public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 

@@ -17,8 +17,6 @@ public enum BossVariant implements IStringSerializable, SkullBlock.ISkullType {
 
     private final Supplier<? extends TileEntityBossSpawner<?>> factory;
 
-    public static final BossVariant[] VARIANTS = values();
-
     BossVariant(@Nullable Supplier<? extends TileEntityBossSpawner<?>> factory) {
         this.factory = factory;
     }
@@ -35,9 +33,5 @@ public enum BossVariant implements IStringSerializable, SkullBlock.ISkullType {
     @Nullable
     public TileEntityBossSpawner<?> getSpawner() {
         return factory != null ? factory.get() : null;
-    }
-
-    public static BossVariant getVariant(int id) {
-        return id >= 0 && id < VARIANTS.length ? VARIANTS[id] : ENT;
     }
 }

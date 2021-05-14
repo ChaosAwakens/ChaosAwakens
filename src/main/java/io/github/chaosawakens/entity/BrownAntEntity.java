@@ -20,7 +20,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public class BrownAntEntity extends AnimalEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
     public BrownAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -28,11 +28,11 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if(event.isMoving()== true){
+		if(event.isMoving()){
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
-        if (event.isMoving() == false) {
+        if (!event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
             return PlayState.CONTINUE;
         }
@@ -56,7 +56,7 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<BrownAntEntity>(this, "antcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
     }
 
     @Override

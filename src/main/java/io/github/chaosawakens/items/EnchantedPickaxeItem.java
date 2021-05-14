@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 public class EnchantedPickaxeItem extends PickaxeItem {
 
-    private int[] enchantmentLevels;
-    private Enchantment[] enchantmentIds;
+    private final int[] enchantmentLevels;
+    private final Enchantment[] enchantmentIds;
 
     public EnchantedPickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
         super(tier,attackDamageIn,attackSpeedIn,builderIn);

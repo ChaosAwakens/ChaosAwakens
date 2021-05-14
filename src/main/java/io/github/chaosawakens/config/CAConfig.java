@@ -83,6 +83,11 @@ public class CAConfig {
 		public final ConfigValue<Integer> explosionType;
 		public final ConfigValue<Boolean> explosionFire;
 		public final ConfigValue<Boolean> enableAutoEnchanting;
+		public final ConfigValue<Boolean> enableBrownAntTeleport;
+		public final ConfigValue<Boolean> enableRainbowAntTeleport;
+		public final ConfigValue<Boolean> enableRedAntTeleport;
+		public final ConfigValue<Boolean> enableUnstableAntTeleport;
+		public final ConfigValue<Boolean> enableTermiteTeleport;
 		
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Attack Damage");
@@ -198,6 +203,13 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Tools/Weapons");
 			enableAutoEnchanting = builder.define("Auto-enchant specific tools and weapons:", true);
+			builder.pop();
+			builder.push("Dimensions");
+			enableBrownAntTeleport = builder.comment("Will the Brown Ant teleport you to its Dimension?").define("Brown Ant Teleport:", true);
+			enableRainbowAntTeleport = builder.comment("Will the Rainbow Ant teleport you to its Dimension?").define("Rainbow Ant Teleport:", true);
+			enableRedAntTeleport = builder.comment("Will the Red Ant teleport you to its Dimension?").define("Red Ant Teleport:", true);
+			enableUnstableAntTeleport = builder.comment("Will the Unstable Ant teleport you to its Dimension?").define("Unstable Ant Teleport:", true);
+			enableTermiteTeleport = builder.comment("Will the Termite teleport you to its Dimension?").define("Termite Teleport:", true);
 			builder.pop();
 			builder.pop();
 		}

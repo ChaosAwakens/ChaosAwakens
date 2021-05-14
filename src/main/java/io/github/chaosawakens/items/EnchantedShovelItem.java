@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 public class EnchantedShovelItem extends ShovelItem {
 
-    private int[] enchantmentLevels;
-    private Enchantment[] enchantmentIds;
+    private final int[] enchantmentLevels;
+    private final Enchantment[] enchantmentIds;
 
     public EnchantedShovelItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
         super(tier,attackDamageIn,attackSpeedIn,builderIn);

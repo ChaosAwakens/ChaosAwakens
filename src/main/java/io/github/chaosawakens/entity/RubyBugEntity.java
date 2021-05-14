@@ -22,7 +22,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public class RubyBugEntity extends AnimalEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
     public RubyBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -30,11 +30,11 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if(event.isMoving()== true){
+        if(event.isMoving()){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walking_animation", true));
             return PlayState.CONTINUE;
         }
-        if (event.isMoving() == false) {
+        if (!event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.idle_animation", true));
             return PlayState.CONTINUE;
         }
@@ -58,7 +58,7 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<RubyBugEntity>(this, "rubybugcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "rubybugcontroller", 0, this::predicate));
     }
 
     @Override

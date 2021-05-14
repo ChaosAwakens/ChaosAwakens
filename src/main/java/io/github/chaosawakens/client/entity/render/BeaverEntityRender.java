@@ -14,9 +14,6 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class BeaverEntityRender extends GeoEntityRenderer<BeaverEntity> {
 
-    private IRenderTypeBuffer renderTypeBuffer;
-    private BeaverEntity beaverEntity;
-
     public BeaverEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new BeaverEntityModel());
         this.shadowSize = 0.4F;
@@ -24,9 +21,6 @@ public class BeaverEntityRender extends GeoEntityRenderer<BeaverEntity> {
 
     @Override
     public void renderEarly(BeaverEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        this.beaverEntity = animatable;
-        this.renderTypeBuffer = renderTypeBuffer;
-
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

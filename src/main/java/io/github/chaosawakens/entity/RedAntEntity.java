@@ -1,6 +1,6 @@
 package io.github.chaosawakens.entity;
 
-import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.config.CAConfig;
 import io.github.chaosawakens.registry.CADimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -32,7 +32,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RedAntEntity extends MonsterEntity implements IAnimatable {
-	private AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public RedAntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -40,12 +40,12 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if (event.isMoving() == true) {
+		if (event.isMoving()) {
 			event.getController()
 					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
-		if (event.isMoving() == false) {
+		if (!event.isMoving()) {
 			event.getController()
 					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
 			return PlayState.CONTINUE;
@@ -75,27 +75,29 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 
-		if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
-			ServerWorld currentWorld = (ServerWorld) this.world;
-			MinecraftServer minecraftServer = currentWorld.getServer();
-			RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.MINING_DIMENSION ? World.OVERWORLD : CADimensions.MINING_DIMENSION;
-			ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
-			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-			
-			if (targetWorld != null) {
-				serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
-				
-				/*
-				 * Tp twice because the dimension hasnt yet loaded on the first one which results in HeightMap
-				 * returning zero, thus the player spawns at bedrock
-				 */
-				serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-				serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-				
-				serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
-				
-				for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
-					serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
+		if (CAConfig.COMMON.enableRedAntTeleport.get()) {
+			if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
+				ServerWorld currentWorld = (ServerWorld) this.world;
+				MinecraftServer minecraftServer = currentWorld.getServer();
+				RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.MINING_DIMENSION ? World.OVERWORLD : CADimensions.MINING_DIMENSION;
+				ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
+				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+
+				if (targetWorld != null) {
+					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
+
+					/*
+					 * Tp twice because the dimension hasn't yet loaded on the first one which results in HeightMap
+					 * returning zero, thus the player spawns at bedrock
+					 */
+					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+
+					serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
+
+					for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
+						serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
+					}
 				}
 			}
 		}
@@ -104,7 +106,7 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 	
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<RedAntEntity>(this, "antcontroller", 0, this::predicate));
+		data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
 	}
 	
 	@Override

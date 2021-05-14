@@ -15,7 +15,7 @@ public class EnchantedGoldenAppleCowRender extends MobRenderer<EnchantedGoldenAp
     private static final ResourceLocation GOLDEN_APPLE_COW_TEXTURES = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/golden_apple_cow.png");
 
     public EnchantedGoldenAppleCowRender(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn, new EnchantedGoldenAppleCowModel<>(2.0F), 0.7F);
+        super(renderManagerIn, new EnchantedGoldenAppleCowModel<>(), 0.7F);
         this.addLayer(new CowGlintLayer(this));
     }
 

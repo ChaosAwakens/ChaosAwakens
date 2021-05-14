@@ -8,21 +8,14 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nonnull;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-
 import java.util.Collection;
-import java.util.function.Supplier;
 
 public class ModItemModelGenerator extends ItemModelProvider {
 
@@ -139,7 +132,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		return ChaosAwakens.MODNAME + " Item models";
 	}
 
-	private final void generate(final Collection<RegistryObject<Item>> items) {
+	private void generate(final Collection<RegistryObject<Item>> items) {
 		final ModelFile parentGenerated = getExistingFile(mcLoc("item/generated"));
 		final ExistingModelFile parentHandheld = getExistingFile(mcLoc("item/handheld"));
 

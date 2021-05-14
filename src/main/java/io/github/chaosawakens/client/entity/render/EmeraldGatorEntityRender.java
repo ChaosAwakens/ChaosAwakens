@@ -14,9 +14,6 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class EmeraldGatorEntityRender extends GeoEntityRenderer<EmeraldGatorEntity> {
 
-    private IRenderTypeBuffer renderTypeBuffer;
-    private EmeraldGatorEntity emeraldGatorEntity;
-
     public EmeraldGatorEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new EmeraldGatorEntityModel());
         this.shadowSize = 0.4F;
@@ -24,9 +21,6 @@ public class EmeraldGatorEntityRender extends GeoEntityRenderer<EmeraldGatorEnti
 
     @Override
     public void renderEarly(EmeraldGatorEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        this.emeraldGatorEntity = animatable;
-        this.renderTypeBuffer = renderTypeBuffer;
-
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

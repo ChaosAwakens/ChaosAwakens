@@ -1,6 +1,5 @@
 package io.github.chaosawakens.entity;
 
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -20,7 +19,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntEntity extends MonsterEntity implements IAnimatable {
-	private AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -34,15 +33,12 @@ public class EntEntity extends MonsterEntity implements IAnimatable {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
-			return PlayState.CONTINUE;
 		} else {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.idle_animation", true));
-			return PlayState.CONTINUE;
 		}
-		//return PlayState.CONTINUE;
+		return PlayState.CONTINUE;
 	}
 	
 	@Override
@@ -69,7 +65,7 @@ public class EntEntity extends MonsterEntity implements IAnimatable {
 	
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<EntEntity>(this, "entcontroller", 0, this::predicate));
+		data.addAnimationController(new AnimationController<>(this, "entcontroller", 0, this::predicate));
 	}
 	
 	@Override

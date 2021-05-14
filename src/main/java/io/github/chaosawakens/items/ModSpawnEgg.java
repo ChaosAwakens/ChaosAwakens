@@ -1,17 +1,9 @@
 package io.github.chaosawakens.items;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import javax.annotation.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -29,15 +21,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.AbstractSpawner;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class ModSpawnEgg extends Item {
-    private static final Map<EntityType<?>, net.minecraft.item.SpawnEggItem> EGGS = Maps.newIdentityHashMap();
     private final EntityType<?> typeIn;
 
     public ModSpawnEgg(EntityType<?> typeIn, Item.Properties builder) {
@@ -92,17 +83,16 @@ public class ModSpawnEgg extends Item {
      */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
+        BlockRayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
         if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
             return ActionResult.resultPass(itemstack);
         } else if (!(worldIn instanceof ServerWorld)) {
             return ActionResult.resultSuccess(itemstack);
         } else {
-            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult)raytraceresult;
-            BlockPos blockpos = blockraytraceresult.getPos();
+            BlockPos blockpos = raytraceresult.getPos();
             if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
                 return ActionResult.resultPass(itemstack);
-            } else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
+            } else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, raytraceresult.getFace(), itemstack)) {
                 EntityType<?> entitytype = this.getType(itemstack.getTag());
                 if (entitytype.spawn((ServerWorld)worldIn, itemstack, playerIn, blockpos, SpawnReason.SPAWN_EGG, false, false) == null) {
                     return ActionResult.resultPass(itemstack);
@@ -120,20 +110,6 @@ public class ModSpawnEgg extends Item {
         }
     }
 
-    public boolean hasType(@Nullable CompoundNBT nbt, EntityType<?> type) {
-        return Objects.equals(this.getType(nbt), type);
-    }
-
-    @Nullable
-    @OnlyIn(Dist.CLIENT)
-    public static net.minecraft.item.SpawnEggItem getEgg(@Nullable EntityType<?> type) {
-        return EGGS.get(type);
-    }
-
-    public static Iterable<net.minecraft.item.SpawnEggItem> getEggs() {
-        return Iterables.unmodifiableIterable(EGGS.values());
-    }
-
     public EntityType<?> getType(@Nullable CompoundNBT nbt) {
         if (nbt != null && nbt.contains("EntityTag", 10)) {
             CompoundNBT compoundnbt = nbt.getCompound("EntityTag");
@@ -145,37 +121,4 @@ public class ModSpawnEgg extends Item {
         return this.typeIn;
     }
 
-    public Optional<MobEntity> getChildToSpawn(PlayerEntity player, MobEntity mob, EntityType<? extends MobEntity> entityType, ServerWorld world, Vector3d pos, ItemStack stack) {
-        if (!this.hasType(stack.getTag(), entityType)) {
-            return Optional.empty();
-        } else {
-            MobEntity mobentity;
-            if (mob instanceof AgeableEntity) {
-                mobentity = ((AgeableEntity)mob).createChild(world, (AgeableEntity)mob);
-            } else {
-                mobentity = entityType.create(world);
-            }
-
-            if (mobentity == null) {
-                return Optional.empty();
-            } else {
-                mobentity.setChild(true);
-                if (!mobentity.isChild()) {
-                    return Optional.empty();
-                } else {
-                    mobentity.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0.0F, 0.0F);
-                    world.func_242417_l(mobentity);
-                    if (stack.hasDisplayName()) {
-                        mobentity.setCustomName(stack.getDisplayName());
-                    }
-
-                    if (!player.abilities.isCreativeMode) {
-                        stack.shrink(1);
-                    }
-
-                    return Optional.of(mobentity);
-                }
-            }
-        }
-    }
 }

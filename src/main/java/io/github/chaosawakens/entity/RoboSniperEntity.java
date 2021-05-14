@@ -19,7 +19,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboSniperEntity extends MonsterEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
     public RoboSniperEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
@@ -68,7 +68,7 @@ public class RoboSniperEntity extends MonsterEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<RoboSniperEntity>(this, "robosnipercontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "robosnipercontroller", 0, this::predicate));
     }
 
     @Override

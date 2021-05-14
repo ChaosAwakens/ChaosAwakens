@@ -81,13 +81,13 @@ public enum ArmorMaterials implements IArmorMaterial {
     private final int durability;
     private final int[] damageReductionAmountArray;
     private final int enchantability;
-    private SoundEvent soundOnEquip;
+    private final SoundEvent soundOnEquip;
     private final float toughness;
     private final float knockbackResistance;
     private final Supplier<Ingredient> repairMaterial;
 
-    private ArmorMaterials(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn,
-                             float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
+    ArmorMaterials(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn,
+                   float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
 
         this.name = nameIn;
         this.durability = durabilityIn;

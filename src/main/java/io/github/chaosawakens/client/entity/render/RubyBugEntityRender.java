@@ -14,9 +14,6 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class RubyBugEntityRender extends GeoEntityRenderer<RubyBugEntity> {
 
-    private IRenderTypeBuffer renderTypeBuffer;
-    private RubyBugEntity rubyBugEntity;
-
     public RubyBugEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RubyBugEntityModel());
         this.shadowSize = 0.4F;
@@ -24,9 +21,6 @@ public class RubyBugEntityRender extends GeoEntityRenderer<RubyBugEntity> {
 
     @Override
     public void renderEarly(RubyBugEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        this.rubyBugEntity = animatable;
-        this.renderTypeBuffer = renderTypeBuffer;
-
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 

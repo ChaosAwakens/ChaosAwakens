@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 public class EnchantedSwordItem extends SwordItem {
 
-    private int[] enchantmentLevels;
-    private Enchantment[] enchantmentIds;
+    private final int[] enchantmentLevels;
+    private final Enchantment[] enchantmentIds;
 
     public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);

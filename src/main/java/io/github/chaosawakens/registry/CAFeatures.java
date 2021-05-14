@@ -30,7 +30,6 @@ public class CAFeatures {
     }
 
     public static final class States {
-        protected static final BlockState STONE = Blocks.STONE.getDefaultState();
         protected static final BlockState RUBY_ORE = CABlocks.RUBY_ORE.get().getDefaultState();
         protected static final BlockState AMETHYST_ORE = CABlocks.AMETHYST_ORE.get().getDefaultState();
         protected static final BlockState URANIUM_ORE = CABlocks.URANIUM_ORE.get().getDefaultState();

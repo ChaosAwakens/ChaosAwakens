@@ -4,9 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.CABlocks;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.BlockItem;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GrassColors;
-import net.minecraft.world.IBlockDisplayReader;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -16,9 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus =  Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class BlockItemColors {
 	
-	public static final IBlockColor GRASS_BLOCK_COLOR = (state, reader,  pos, color) -> {
-		return reader != null && pos != null ? BiomeColors.getGrassColor(reader, pos) : GrassColors.get(0.5, 1);
-	};
+	public static final IBlockColor GRASS_BLOCK_COLOR = (state, reader,  pos, color) -> reader != null && pos != null ? BiomeColors.getGrassColor(reader, pos) : GrassColors.get(0.5, 1);
 	
 	@SubscribeEvent
 	public static void registerBlockColors(ColorHandlerEvent.Block event) {
@@ -30,8 +26,6 @@ public class BlockItemColors {
 	@SubscribeEvent
 	public static void registerItemColors(ColorHandlerEvent.Item event) {
 		
-		event.getItemColors().register((stack, color) -> {
-			return event.getBlockColors().getColor(((BlockItem) stack.getItem()).getBlock().getDefaultState(), (IBlockDisplayReader) null, (BlockPos) null, color);
-		}, CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get());
+		event.getItemColors().register((stack, color) -> event.getBlockColors().getColor(((BlockItem) stack.getItem()).getBlock().getDefaultState(), null, null, color), CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get());
 	}
 }

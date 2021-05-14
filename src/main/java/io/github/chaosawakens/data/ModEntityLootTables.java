@@ -24,18 +24,37 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
 
     @Override
     protected void addTables() {
+        registerLootTable(CAEntityTypes.ENT.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.OAK_LOG)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(18.0F, 24.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 3.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.RED_MUSHROOM)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 4.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F))))
+                                .addEntry(ItemLootEntry.builder(Items.BROWN_MUSHROOM)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 4.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F)))))
+                        .addLootPool(LootPool.builder()
+                                .rolls(RandomValueRange.of(1, 2))
+                                .addEntry(ItemLootEntry.builder(Items.DIAMOND)
+                                        .acceptCondition(RandomChance.builder(0.65F)))));
         registerLootTable(CAEntityTypes.RUBY_BUG.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(CAItems.RUBY.get())
-                                        .acceptCondition(RandomChance.builder(0.1F)))));
+                                        .acceptCondition(RandomChance.builder(0.3F)))));
         registerLootTable(CAEntityTypes.EMERALD_GATOR.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(Items.EMERALD)
-                                        .acceptCondition(RandomChance.builder(0.1F)))));
+                                        .acceptCondition(RandomChance.builder(0.3F)))));
         registerLootTable(CAEntityTypes.APPLE_COW.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
@@ -98,13 +117,6 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(Items.ENCHANTED_GOLDEN_APPLE))));
-    }
-
-    public LootTable.Builder fromEntityLootTable(EntityType<?> parent) {
-        return LootTable.builder()
-                .addLootPool(LootPool.builder()
-                        .rolls(ConstantRange.of(1))
-                        .addEntry(TableLootEntry.builder(parent.getLootTable())));
     }
 
     @Override

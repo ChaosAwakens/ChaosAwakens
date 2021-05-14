@@ -1,13 +1,8 @@
 package io.github.chaosawakens.client.entity.model;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.entity.EntEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.example.client.model.entity.ExampleEntityModel;
-import software.bernie.example.client.renderer.entity.ExampleGeoRenderer;
-import software.bernie.example.entity.GeoExampleEntity;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;

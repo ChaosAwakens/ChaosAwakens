@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 
 public class EnchantedArmorItem extends ArmorItem {
 
-    private int[] enchantmentLevels;
-    private Enchantment[] enchantmentIds;
+    private final int[] enchantmentLevels;
+    private final Enchantment[] enchantmentIds;
 
     public EnchantedArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, Enchantment[] enchants, int[] lvls) {
         super(materialIn, slot, builderIn);
