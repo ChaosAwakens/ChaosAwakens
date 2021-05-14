@@ -1,6 +1,6 @@
 package io.github.chaosawakens.blocks;
 
-import io.github.chaosawakens.registry.ModBlocks;
+import io.github.chaosawakens.registry.CABlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,13 +22,13 @@ public class ModOreBlock extends Block {
     }
 
     protected int getExperience(Random rand) {
-        if (ModBlocks.AMETHYST_ORE.get().equals(this)) {
+        if (CABlocks.AMETHYST_ORE.get().equals(this)) {
             return MathHelper.nextInt(rand, 3, 7);
-        } else if (ModBlocks.RUBY_ORE.get().equals(this)) {
+        } else if (CABlocks.RUBY_ORE.get().equals(this)) {
             return MathHelper.nextInt(rand, 4, 9);
-        } else if (ModBlocks.TIGERS_EYE_ORE.get().equals(this)) {
+        } else if (CABlocks.TIGERS_EYE_ORE.get().equals(this)) {
             return MathHelper.nextInt(rand, 4, 8);
-        } else if (ModBlocks.SALT_ORE.get().equals(this)) {
+        } else if (CABlocks.SALT_ORE.get().equals(this)) {
             return MathHelper.nextInt(rand, 0, 2);
         }
         return this.isFossilisedOre ? MathHelper.nextInt(rand, 0, 2) : 0;

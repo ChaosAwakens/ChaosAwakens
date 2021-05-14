@@ -10,7 +10,7 @@ import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
 
 public class CAFeatures {
-    public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), ModBlocks.RUBY_ORE.get().getDefaultState(), 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 24))).square().count(28));
+    public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), CABlocks.RUBY_ORE.get().getDefaultState(), 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 24))).square().count(28));
     public static final ConfiguredFeature<?, ?> ORE_RUBY_NO_SURFACE = register("ore_ruby", Feature.NO_SURFACE_ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.RUBY_ORE, 2)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12, 12))).square().count(1));
     public static final ConfiguredFeature<?, ?> ORE_AMETHYST = register("ore_amethyst", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.AMETHYST_ORE, 4)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(28, 24))).square().count(4));
     public static final ConfiguredFeature<?, ?> ORE_URANIUM = register("ore_uranium", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.URANIUM_ORE, 3)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12, 12))).square().count(2));
@@ -31,18 +31,18 @@ public class CAFeatures {
 
     public static final class States {
         protected static final BlockState STONE = Blocks.STONE.getDefaultState();
-        protected static final BlockState RUBY_ORE = ModBlocks.RUBY_ORE.get().getDefaultState();
-        protected static final BlockState AMETHYST_ORE = ModBlocks.AMETHYST_ORE.get().getDefaultState();
-        protected static final BlockState URANIUM_ORE = ModBlocks.URANIUM_ORE.get().getDefaultState();
-        protected static final BlockState TITANIUM_ORE = ModBlocks.TITANIUM_ORE.get().getDefaultState();
-        protected static final BlockState TIGERS_EYE_ORE = ModBlocks.TIGERS_EYE_ORE.get().getDefaultState();
-        protected static final BlockState ALUMINIUM_ORE = ModBlocks.ALUMINIUM_ORE.get().getDefaultState();
-        protected static final BlockState SALT_ORE = ModBlocks.SALT_ORE.get().getDefaultState();
-        protected static final BlockState FOSSILISED_ENT = ModBlocks.FOSSILISED_ENT.get().getDefaultState();
-        protected static final BlockState FOSSILISED_HERCULES_BEETLE = ModBlocks.FOSSILISED_HERCULES_BEETLE.get().getDefaultState();
-        protected static final BlockState FOSSILISED_RUBY_BUG = ModBlocks.FOSSILISED_RUBY_BUG.get().getDefaultState();
-        protected static final BlockState FOSSILISED_EMERALD_GATOR = ModBlocks.FOSSILISED_EMERALD_GATOR.get().getDefaultState();
-        protected static final BlockState RED_ANT_INFESTED_ORE = ModBlocks.RED_ANT_INFESTED_ORE.get().getDefaultState();
-        protected static final BlockState TERMITE_INFESTED_ORE = ModBlocks.TERMITE_INFESTED_ORE.get().getDefaultState();
+        protected static final BlockState RUBY_ORE = CABlocks.RUBY_ORE.get().getDefaultState();
+        protected static final BlockState AMETHYST_ORE = CABlocks.AMETHYST_ORE.get().getDefaultState();
+        protected static final BlockState URANIUM_ORE = CABlocks.URANIUM_ORE.get().getDefaultState();
+        protected static final BlockState TITANIUM_ORE = CABlocks.TITANIUM_ORE.get().getDefaultState();
+        protected static final BlockState TIGERS_EYE_ORE = CABlocks.TIGERS_EYE_ORE.get().getDefaultState();
+        protected static final BlockState ALUMINIUM_ORE = CABlocks.ALUMINIUM_ORE.get().getDefaultState();
+        protected static final BlockState SALT_ORE = CABlocks.SALT_ORE.get().getDefaultState();
+        protected static final BlockState FOSSILISED_ENT = CABlocks.FOSSILISED_ENT.get().getDefaultState();
+        protected static final BlockState FOSSILISED_HERCULES_BEETLE = CABlocks.FOSSILISED_HERCULES_BEETLE.get().getDefaultState();
+        protected static final BlockState FOSSILISED_RUBY_BUG = CABlocks.FOSSILISED_RUBY_BUG.get().getDefaultState();
+        protected static final BlockState FOSSILISED_EMERALD_GATOR = CABlocks.FOSSILISED_EMERALD_GATOR.get().getDefaultState();
+        protected static final BlockState RED_ANT_INFESTED_ORE = CABlocks.RED_ANT_INFESTED_ORE.get().getDefaultState();
+        protected static final BlockState TERMITE_INFESTED_ORE = CABlocks.TERMITE_INFESTED_ORE.get().getDefaultState();
     }
 }

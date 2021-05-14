@@ -10,7 +10,7 @@ public class CAItemGroups {
 		
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ModBlocks.TITANIUM_BLOCK.get());
+			return new ItemStack(CABlocks.TITANIUM_BLOCK.get());
 		}
 	};
 	

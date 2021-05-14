@@ -1,6 +1,6 @@
 package io.github.chaosawakens.data;
 
-import io.github.chaosawakens.registry.ModBlocks;
+import io.github.chaosawakens.registry.CABlocks;
 import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
@@ -15,55 +15,55 @@ public class ModBlockLootTables extends BlockLootTables
     protected void addTables()
     {
         // ORES
-        registerLootTable(ModBlocks.AMETHYST_ORE.get(), (ore) -> {
+        registerLootTable(CABlocks.AMETHYST_ORE.get(), (ore) -> {
             return droppingItemWithFortune(ore, CAItems.AMETHYST.get());
         });
-        registerLootTable(ModBlocks.RUBY_ORE.get(), (ore) -> {
+        registerLootTable(CABlocks.RUBY_ORE.get(), (ore) -> {
             return droppingItemWithFortune(ore, CAItems.RUBY.get());
         });
-        registerLootTable(ModBlocks.TIGERS_EYE_ORE.get(), (ore) -> {
+        registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> {
             return droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get());
         });
-        registerLootTable(ModBlocks.SALT_ORE.get(), (ore) -> {
+        registerLootTable(CABlocks.SALT_ORE.get(), (ore) -> {
             return droppingItemWithFortune(ore, CAItems.SALT.get());
         });
-        registerLootTable(ModBlocks.GOLDEN_MELON.get(), (food) -> {
+        registerLootTable(CABlocks.GOLDEN_MELON.get(), (food) -> {
             return droppingItemWithFortune(food, CAItems.GOLDEN_MELON_SLICE.get());
         });
-        registerLootTable(ModBlocks.CRYSTAL_GRASS_BLOCK.get(), (food) -> {
-            return dropping(ModBlocks.KYANITE.get());
+        registerLootTable(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (food) -> {
+            return dropping(CABlocks.KYANITE.get());
         });
 
         // BLOCKS
-        registerDropSelfLootTable(ModBlocks.AMETHYST_BLOCK.get());
-        registerDropSelfLootTable(ModBlocks.RUBY_BLOCK.get());
-        registerDropSelfLootTable(ModBlocks.TIGERS_EYE_BLOCK.get());
-        registerDropSelfLootTable(ModBlocks.URANIUM_ORE.get());
-        registerDropSelfLootTable(ModBlocks.URANIUM_BLOCK.get());
-        registerDropSelfLootTable(ModBlocks.TITANIUM_ORE.get());
-        registerDropSelfLootTable(ModBlocks.TITANIUM_BLOCK.get());
-        registerDropSelfLootTable(ModBlocks.ALUMINIUM_ORE.get());
-        registerDropSelfLootTable(ModBlocks.ALUMINIUM_BLOCK.get());
-        registerDropSelfLootTable(ModBlocks.BROWN_ANT_NEST.get());
-        registerDropSelfLootTable(ModBlocks.RAINBOW_ANT_NEST.get());
-        registerDropSelfLootTable(ModBlocks.RED_ANT_NEST.get());
-        registerDropSelfLootTable(ModBlocks.UNSTABLE_ANT_NEST.get());
-        registerDropSelfLootTable(ModBlocks.TERMITE_NEST.get());
-        registerDropSelfLootTable(ModBlocks.FOSSILISED_ENT.get());
-        registerDropSelfLootTable(ModBlocks.FOSSILISED_HERCULES_BEETLE.get());
-        registerDropSelfLootTable(ModBlocks.FOSSILISED_RUBY_BUG.get());
-        registerDropSelfLootTable(ModBlocks.FOSSILISED_EMERALD_GATOR.get());
-        registerDropSelfLootTable(ModBlocks.GATE_BLOCK.get());
-        registerDropSelfLootTable(ModBlocks.ENT_DUNGEON_WOOD.get());
-        registerDropSelfLootTable(ModBlocks.KYANITE.get());
-        registerDropSelfLootTable(ModBlocks.CRYSTAL_LOG.get());
-        registerDropSelfLootTable(ModBlocks.CRYSTAL_WOOD.get());
-        registerDropSelfLootTable(ModBlocks.CRYSTAL_WOOD_PLANKS.get());
+        registerDropSelfLootTable(CABlocks.AMETHYST_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.RUBY_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.TIGERS_EYE_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.URANIUM_ORE.get());
+        registerDropSelfLootTable(CABlocks.URANIUM_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.TITANIUM_ORE.get());
+        registerDropSelfLootTable(CABlocks.TITANIUM_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.ALUMINIUM_ORE.get());
+        registerDropSelfLootTable(CABlocks.ALUMINIUM_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.BROWN_ANT_NEST.get());
+        registerDropSelfLootTable(CABlocks.RAINBOW_ANT_NEST.get());
+        registerDropSelfLootTable(CABlocks.RED_ANT_NEST.get());
+        registerDropSelfLootTable(CABlocks.UNSTABLE_ANT_NEST.get());
+        registerDropSelfLootTable(CABlocks.TERMITE_NEST.get());
+        registerDropSelfLootTable(CABlocks.FOSSILISED_ENT.get());
+        registerDropSelfLootTable(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
+        registerDropSelfLootTable(CABlocks.FOSSILISED_RUBY_BUG.get());
+        registerDropSelfLootTable(CABlocks.FOSSILISED_EMERALD_GATOR.get());
+        registerDropSelfLootTable(CABlocks.GATE_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.ENT_DUNGEON_WOOD.get());
+        registerDropSelfLootTable(CABlocks.KYANITE.get());
+        registerDropSelfLootTable(CABlocks.CRYSTAL_LOG.get());
+        registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD.get());
+        registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD_PLANKS.get());
 
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+        return CABlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 }

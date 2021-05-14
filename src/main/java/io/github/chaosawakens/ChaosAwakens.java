@@ -15,7 +15,7 @@ import io.github.chaosawakens.network.PacketHandler;
 import io.github.chaosawakens.registry.*;
 import io.github.chaosawakens.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.worldgen.EventBiomeLoading;
-import io.github.chaosawakens.worldgen.ModBiomeFeatures;
+import io.github.chaosawakens.worldgen.CABiomeFeatures;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
@@ -85,8 +85,8 @@ public class ChaosAwakens {
 		CABiomes.BIOMES.register(eventBus);
 
 		CAItems.ITEMS.register(eventBus);
-		ModBlocks.ITEMS.register(eventBus);
-		ModBlocks.BLOCKS.register(eventBus);
+		CABlocks.ITEMS.register(eventBus);
+		CABlocks.BLOCKS.register(eventBus);
 		
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		
@@ -160,8 +160,8 @@ public class ChaosAwakens {
 	
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void biomeLoadingAdd(final BiomeLoadingEvent event) {
-		ModBiomeFeatures.addMobSpawns(event);
-		ModBiomeFeatures.addStructureSpawns(event);
+		CABiomeFeatures.addMobSpawns(event);
+		CABiomeFeatures.addStructureSpawns(event);
 	}
 	
 	private void gatherData(final GatherDataEvent event) {

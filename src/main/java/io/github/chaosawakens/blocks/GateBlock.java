@@ -1,6 +1,6 @@
 package io.github.chaosawakens.blocks;
 
-import io.github.chaosawakens.registry.ModBlocks;
+import io.github.chaosawakens.registry.CABlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -61,7 +61,7 @@ public class GateBlock extends Block {
                     world.removeBlock(pos, false);
                 }
 
-                world.playSound(null, pos, state.getBlock() == ModBlocks.GATE_BLOCK.get() ? SoundType.ANVIL.getPlaceSound() : SoundType.ANVIL.getPlaceSound(), SoundCategory.BLOCKS, 0.3F, 0.5F);
+                world.playSound(null, pos, state.getBlock() == CABlocks.GATE_BLOCK.get() ? SoundType.ANVIL.getPlaceSound() : SoundType.ANVIL.getPlaceSound(), SoundCategory.BLOCKS, 0.3F, 0.5F);
 
                 for (Direction e : Direction.values()) {
                     activate(world, pos.offset(e));

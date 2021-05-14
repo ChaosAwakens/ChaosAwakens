@@ -1,7 +1,7 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.registry.ModBlocks;
+import io.github.chaosawakens.registry.CABlocks;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.util.math.BlockPos;
@@ -24,7 +24,7 @@ public class BlockItemColors {
 	public static void registerBlockColors(ColorHandlerEvent.Block event) {
 		
 		event.getBlockColors().register(GRASS_BLOCK_COLOR,
-				ModBlocks.RED_ANT_NEST.get(), ModBlocks.BROWN_ANT_NEST.get(), ModBlocks.RAINBOW_ANT_NEST.get(), ModBlocks.UNSTABLE_ANT_NEST.get(), ModBlocks.TERMITE_NEST.get());
+				CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get());
 	}
 	
 	@SubscribeEvent
@@ -32,6 +32,6 @@ public class BlockItemColors {
 		
 		event.getItemColors().register((stack, color) -> {
 			return event.getBlockColors().getColor(((BlockItem) stack.getItem()).getBlock().getDefaultState(), (IBlockDisplayReader) null, (BlockPos) null, color);
-		}, ModBlocks.RED_ANT_NEST.get(), ModBlocks.BROWN_ANT_NEST.get(), ModBlocks.RAINBOW_ANT_NEST.get(), ModBlocks.UNSTABLE_ANT_NEST.get(), ModBlocks.TERMITE_NEST.get());
+		}, CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get());
 	}
 }

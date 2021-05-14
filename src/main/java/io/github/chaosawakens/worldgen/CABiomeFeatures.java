@@ -13,7 +13,7 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID)
-public class ModBiomeFeatures {
+public class CABiomeFeatures {
 	
 	//Mobs that appear on any biome, but only on the overworld
 	private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> {
@@ -72,5 +72,5 @@ public class ModBiomeFeatures {
 		return category == Biome.Category.byName("chaosawakens:village_plains");
 	}*/
 	
-	private ModBiomeFeatures() {}
+	private CABiomeFeatures() {}
 }

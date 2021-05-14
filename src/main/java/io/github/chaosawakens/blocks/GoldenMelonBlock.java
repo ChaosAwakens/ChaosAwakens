@@ -1,6 +1,6 @@
 package io.github.chaosawakens.blocks;
 
-import io.github.chaosawakens.registry.ModBlocks;
+import io.github.chaosawakens.registry.CABlocks;
 import net.minecraft.block.*;
 
 public class GoldenMelonBlock extends StemGrownBlock {

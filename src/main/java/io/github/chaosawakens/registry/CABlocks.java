@@ -30,7 +30,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModBlocks {
+public class CABlocks {
 	
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
@@ -60,8 +60,8 @@ public class ModBlocks {
 	public static final RegistryObject<ModOreBlock> TIN_ORE = registerBlock("tin_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<ModOreBlock> SILVER_ORE = registerBlock("silver_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<ModOreBlock> PLATINUM_ORE = registerBlock("platinum_ore", () -> new ModOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CrystalClusterBlock> PINK_TOURMALINE_CLUSTER = registerBlock("pink_tourmaline_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).notSolid().setSuffocates(ModBlocks::_false).setBlocksVision(ModBlocks::_false).setOpaque(ModBlocks::_false).harvestLevel(1)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CrystalClusterBlock> CATS_EYE_CLUSTER = registerBlock("cats_eye_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).notSolid().setSuffocates(ModBlocks::_false).setBlocksVision(ModBlocks::_false).setOpaque(ModBlocks::_false).harvestLevel(2)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CrystalClusterBlock> PINK_TOURMALINE_CLUSTER = registerBlock("pink_tourmaline_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).notSolid().setSuffocates(CABlocks::_false).setBlocksVision(CABlocks::_false).setOpaque(CABlocks::_false).harvestLevel(1)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CrystalClusterBlock> CATS_EYE_CLUSTER = registerBlock("cats_eye_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).notSolid().setSuffocates(CABlocks::_false).setBlocksVision(CABlocks::_false).setOpaque(CABlocks::_false).harvestLevel(2)), CAItemGroups.blocksItemGroup);
 	
 	// INFESTED ORES
 	public static final RegistryObject<RedAntInfestedOre> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore", () -> new RedAntInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
@@ -84,8 +84,8 @@ public class ModBlocks {
 	public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(1)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> SILVER_BLOCK = registerBlock("silver_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> PLATINUM_BLOCK = registerBlock("platinum_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> PINK_TOURMALINE_BLOCK = registerBlock("pink_tourmaline_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> CATS_EYE_BLOCK = registerBlock("cats_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> PINK_TOURMALINE_BLOCK = registerBlock("pink_tourmaline_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CATS_EYE_BLOCK = registerBlock("cats_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 	
 	// ANT NESTS
 	public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
@@ -95,21 +95,21 @@ public class ModBlocks {
 	public static final RegistryObject<Block> TERMITE_NEST = registerBlock("termite_nest", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
 	
 	// CRYSTAL DIMENSION
-	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> KYANITE = registerBlock("kyanite", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(ModBlocks::_false)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_LOG = registerBlock("crystal_log", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_WOOD = registerBlock("crystal_wood", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_WOOD).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> CRYSTAL_WOOD_PLANKS = registerBlock("crystal_wood_planks", () -> new Block(Block.Properties.from(Blocks.OAK_PLANKS).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> RED_CRYSTAL_LEAVES = registerBlock("red_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> GREEN_CRYSTAL_LEAVES = registerBlock("green_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> YELLOW_CRYSTAL_LEAVES = registerBlock("yellow_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<BuddingBlock> BUDDING_PINK_TOURMALINE = registerBlock("budding_pink_tourmaline", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(ModBlocks::_false), PINK_TOURMALINE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<BuddingBlock> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(ModBlocks::_false), CATS_EYE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CraftingTableBlock> CRYSTAL_CRAFTING_TABLE = registerBlock("crystal_crafting_table", () -> new CraftingTableBlock(Block.Properties.from(Blocks.CRAFTING_TABLE).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<FurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new FurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(ModBlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> KYANITE = registerBlock("kyanite", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_LOG = registerBlock("crystal_log", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_WOOD = registerBlock("crystal_wood", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_WOOD).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CRYSTAL_WOOD_PLANKS = registerBlock("crystal_wood_planks", () -> new Block(Block.Properties.from(Blocks.OAK_PLANKS).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> RED_CRYSTAL_LEAVES = registerBlock("red_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> GREEN_CRYSTAL_LEAVES = registerBlock("green_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> YELLOW_CRYSTAL_LEAVES = registerBlock("yellow_crystal_leaves", () -> new Block(Block.Properties.from(Blocks.OAK_LEAVES).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<BuddingBlock> BUDDING_PINK_TOURMALINE = registerBlock("budding_pink_tourmaline", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(CABlocks::_false), PINK_TOURMALINE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<BuddingBlock> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(CABlocks::_false), CATS_EYE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CraftingTableBlock> CRYSTAL_CRAFTING_TABLE = registerBlock("crystal_crafting_table", () -> new CraftingTableBlock(Block.Properties.from(Blocks.CRAFTING_TABLE).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<FurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new FurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
-		RegistryObject<B> block = ModBlocks.BLOCKS.register(name, supplier);
+		RegistryObject<B> block = CABlocks.BLOCKS.register(name, supplier);
 		ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup)));
 		return block;
 	}
@@ -125,7 +125,7 @@ public class ModBlocks {
 	public static final RegistryObject<EnchantedGoldenCakeBlock> ENCHANTED_GOLDEN_CAKE = registerEnchantedBlock("enchanted_golden_cake", () -> new EnchantedGoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup, 1);
 	
 	public static <E extends Block> RegistryObject<E> registerEnchantedBlock(String name, Supplier<? extends E> supplier, ItemGroup itemGroup, int stackSize) {
-		RegistryObject<E> block = ModBlocks.BLOCKS.register(name, supplier);
+		RegistryObject<E> block = CABlocks.BLOCKS.register(name, supplier);
 		
 		ITEMS.register(name, () -> new EnchantedBlockItem(block.get(), new Item.Properties().group(itemGroup).maxStackSize(stackSize)));
 		return block;

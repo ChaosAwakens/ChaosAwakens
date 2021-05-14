@@ -1,7 +1,7 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.registry.ModBlocks;
+import io.github.chaosawakens.registry.CABlocks;
 import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.ArmorItem;
@@ -71,7 +71,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		 * ModItems.POISON_SWORD, ModItems.RAT_SWORD, ModItems.TIN_BOOTS);
 		 */
 
-		generateBlockItems(ModBlocks.ITEMS.getEntries());
+		generateBlockItems(CABlocks.ITEMS.getEntries());
 		/*
 		 * this.simpleWithExistingParent(ModBlocks.ALUMINIUM_BLOCK.getId().toString().
 		 * replaceFirst("chaosawakens:", ""));
