@@ -1,7 +1,7 @@
 package io.github.chaosawakens.entity;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.registry.ModDimensions;
+import io.github.chaosawakens.registry.CADimensions;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -76,7 +76,7 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 			//int i = this.getMaxInPortalTime();
 			ServerWorld currentWorld = (ServerWorld) this.world;
 			MinecraftServer minecraftServer = currentWorld.getServer();
-			RegistryKey<World> dimensionRegistrykey = this.world.getDimensionKey() == ModDimensions.VILLAGE_MANIA ? World.OVERWORLD : ModDimensions.VILLAGE_MANIA;
+			RegistryKey<World> dimensionRegistrykey = this.world.getDimensionKey() == CADimensions.VILLAGE_MANIA ? World.OVERWORLD : CADimensions.VILLAGE_MANIA;
 			ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistrykey);
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
 			

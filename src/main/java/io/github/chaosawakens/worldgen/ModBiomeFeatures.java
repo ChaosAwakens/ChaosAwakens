@@ -3,7 +3,7 @@ package io.github.chaosawakens.worldgen;
 import java.util.function.Consumer;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.registry.ModEntityTypes;
+import io.github.chaosawakens.registry.CAEntityTypes;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
@@ -17,20 +17,20 @@ public class ModBiomeFeatures {
 	
 	//Mobs that appear on any biome, but only on the overworld
 	private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> {
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.BROWN_ANT.get(), 20, 1, 5));
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.RAINBOW_ANT.get(), 20, 1, 5));
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.RED_ANT.get(), 20, 1, 5));
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.UNSTABLE_ANT.get(), 20, 1, 5));
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.TERMITE.get(), 20, 1, 5));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BROWN_ANT.get(), 20, 1, 5));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RAINBOW_ANT.get(), 20, 1, 5));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RED_ANT.get(), 20, 1, 5));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.UNSTABLE_ANT.get(), 20, 1, 5));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.TERMITE.get(), 20, 1, 5));
 	};
 	
 	private static final Consumer<MobSpawnInfoBuilder> SWAMP_MOBS = (builder) -> {
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.RUBY_BUG.get(), 25, 3, 6));
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.EMERALD_GATOR.get(), 3, 1, 2));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 25, 3, 6));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 3, 1, 2));
 	};
 	
 	private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntityTypes.BEAVER.get(), 15, 1, 2));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 15, 1, 2));
 	};
 	
 	public static void addMobSpawns(BiomeLoadingEvent event) {

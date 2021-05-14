@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "chaosawakens:blocks/cats_eye_cluster"
-  }
+	"parent": "minecraft:block/cross",
+	"textures": {
+		"cross": "chaosawakens:block/cats_eye_cluster"
+	}
 }

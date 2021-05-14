@@ -3,7 +3,7 @@ package io.github.chaosawakens.registry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-public class ModItemGroups {
+public class CAItemGroups {
 	
 	// ITEM GROUPS
 	public static ItemGroup blocksItemGroup = new ItemGroup("chaosawakens_blocks_item_group") {
@@ -18,7 +18,7 @@ public class ModItemGroups {
 		
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ModItems.URANIUM_INGOT.get());
+			return new ItemStack(CAItems.URANIUM_INGOT.get());
 		}
 	};
 
@@ -26,7 +26,7 @@ public class ModItemGroups {
 
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ModItems.CORN.get());
+			return new ItemStack(CAItems.CORN.get());
 		}
 	};
 	
@@ -34,7 +34,7 @@ public class ModItemGroups {
 		
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ModItems.ULTIMATE_AXE.get());
+			return new ItemStack(CAItems.ULTIMATE_AXE.get());
 		}
 	};
 	
@@ -42,7 +42,7 @@ public class ModItemGroups {
 		
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ModItems.RAINBOW_ANT_SPAWN_EGG.get());
+			return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGG.get());
 		}
 	};
 }

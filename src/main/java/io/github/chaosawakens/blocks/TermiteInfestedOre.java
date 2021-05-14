@@ -1,7 +1,7 @@
 package io.github.chaosawakens.blocks;
 
 import io.github.chaosawakens.entity.TermiteEntity;
-import io.github.chaosawakens.registry.ModEntityTypes;
+import io.github.chaosawakens.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,7 +17,7 @@ public class TermiteInfestedOre extends OreBlock {
     }
 
     private void spawnTermite(ServerWorld world, BlockPos pos) {
-        TermiteEntity termiteentity = ModEntityTypes.TERMITE.get().create(world);
+        TermiteEntity termiteentity = CAEntityTypes.TERMITE.get().create(world);
         assert termiteentity != null;
         termiteentity.setLocationAndAngles((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addEntity(termiteentity);

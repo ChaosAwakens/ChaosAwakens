@@ -1,7 +1,7 @@
 package io.github.chaosawakens.entity.projectile;
 
-import io.github.chaosawakens.registry.ModEntityTypes;
-import io.github.chaosawakens.registry.ModItems;
+import io.github.chaosawakens.registry.CAEntityTypes;
+import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -23,16 +23,16 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 	}
 
 	public IrukandjiArrowEntity(World worldIn, double x, double y, double z) {
-		super(ModEntityTypes.IRUKANDJI_ARROW.get(), x, y, z, worldIn);
+		super(CAEntityTypes.IRUKANDJI_ARROW.get(), x, y, z, worldIn);
 	}
 
 	public IrukandjiArrowEntity(World worldIn, LivingEntity shooter) {
-		super(ModEntityTypes.IRUKANDJI_ARROW.get(), shooter, worldIn);
+		super(CAEntityTypes.IRUKANDJI_ARROW.get(), shooter, worldIn);
 	}
 	
 	@Override
 	protected ItemStack getArrowStack() {
-		return new ItemStack(ModItems.IRUKANDJI_ARROW.get());
+		return new ItemStack(CAItems.IRUKANDJI_ARROW.get());
 	}
 	
 	@Override

@@ -1,7 +1,7 @@
 package io.github.chaosawakens.data;
 
-import io.github.chaosawakens.registry.ModEntityTypes;
-import io.github.chaosawakens.registry.ModItems;
+import io.github.chaosawakens.registry.CAEntityTypes;
+import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
@@ -24,19 +24,19 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
 
     @Override
     protected void addTables() {
-        registerLootTable(ModEntityTypes.RUBY_BUG.get(),
+        registerLootTable(CAEntityTypes.RUBY_BUG.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
-                                .addEntry(ItemLootEntry.builder(ModItems.RUBY.get())
+                                .addEntry(ItemLootEntry.builder(CAItems.RUBY.get())
                                         .acceptCondition(RandomChance.builder(0.1F)))));
-        registerLootTable(ModEntityTypes.EMERALD_GATOR.get(),
+        registerLootTable(CAEntityTypes.EMERALD_GATOR.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(Items.EMERALD)
                                         .acceptCondition(RandomChance.builder(0.1F)))));
-        registerLootTable(ModEntityTypes.APPLE_COW.get(),
+        registerLootTable(CAEntityTypes.APPLE_COW.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
@@ -53,7 +53,7 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
                                 .addEntry(ItemLootEntry.builder(Items.APPLE)
                                         .acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F)))
                                         .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1.0F, 1.0F))))));
-        registerLootTable(ModEntityTypes.GOLDEN_APPLE_COW.get(),
+        registerLootTable(CAEntityTypes.GOLDEN_APPLE_COW.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
@@ -74,7 +74,7 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(Items.GOLDEN_APPLE)
                                         .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F))))));
-        registerLootTable(ModEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(),
+        registerLootTable(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))

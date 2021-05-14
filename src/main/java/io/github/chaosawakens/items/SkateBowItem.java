@@ -1,6 +1,6 @@
 package io.github.chaosawakens.items;
 
-import io.github.chaosawakens.registry.ModItems;
+import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -35,7 +35,7 @@ public class SkateBowItem extends BowItem {
 
             if (!itemstack.isEmpty() || flag) {
                 if (itemstack.isEmpty()) {
-                    itemstack = new ItemStack(ModItems.IRUKANDJI_ARROW.get());
+                    itemstack = new ItemStack(CAItems.IRUKANDJI_ARROW.get());
                 }
 
                 float f = getArrowVelocity(i);

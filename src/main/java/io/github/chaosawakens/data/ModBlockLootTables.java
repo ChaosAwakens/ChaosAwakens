@@ -1,7 +1,7 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.registry.ModBlocks;
-import io.github.chaosawakens.registry.ModItems;
+import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.item.Items;
@@ -16,19 +16,19 @@ public class ModBlockLootTables extends BlockLootTables
     {
         // ORES
         registerLootTable(ModBlocks.AMETHYST_ORE.get(), (ore) -> {
-            return droppingItemWithFortune(ore, ModItems.AMETHYST.get());
+            return droppingItemWithFortune(ore, CAItems.AMETHYST.get());
         });
         registerLootTable(ModBlocks.RUBY_ORE.get(), (ore) -> {
-            return droppingItemWithFortune(ore, ModItems.RUBY.get());
+            return droppingItemWithFortune(ore, CAItems.RUBY.get());
         });
         registerLootTable(ModBlocks.TIGERS_EYE_ORE.get(), (ore) -> {
-            return droppingItemWithFortune(ore, ModItems.TIGERS_EYE.get());
+            return droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get());
         });
         registerLootTable(ModBlocks.SALT_ORE.get(), (ore) -> {
-            return droppingItemWithFortune(ore, ModItems.SALT.get());
+            return droppingItemWithFortune(ore, CAItems.SALT.get());
         });
         registerLootTable(ModBlocks.GOLDEN_MELON.get(), (food) -> {
-            return droppingItemWithFortune(food, ModItems.GOLDEN_MELON_SLICE.get());
+            return droppingItemWithFortune(food, CAItems.GOLDEN_MELON_SLICE.get());
         });
         registerLootTable(ModBlocks.CRYSTAL_GRASS_BLOCK.get(), (food) -> {
             return dropping(ModBlocks.KYANITE.get());

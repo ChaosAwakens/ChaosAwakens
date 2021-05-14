@@ -1,6 +1,6 @@
 package io.github.chaosawakens.entity.projectile;
 
-import io.github.chaosawakens.registry.ModEntityTypes;
+import io.github.chaosawakens.registry.CAEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -22,11 +22,11 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 	}
 	
 	public UltimateArrowEntity(World worldIn, double x, double y, double z) {
-		super(ModEntityTypes.ULTIMATE_ARROW.get(), x, y, z, worldIn);
+		super(CAEntityTypes.ULTIMATE_ARROW.get(), x, y, z, worldIn);
 	}
 	
 	public UltimateArrowEntity(World worldIn, LivingEntity shooter) {
-		super(ModEntityTypes.ULTIMATE_ARROW.get(), shooter, worldIn);
+		super(CAEntityTypes.ULTIMATE_ARROW.get(), shooter, worldIn);
 	}
 	
 	@Override

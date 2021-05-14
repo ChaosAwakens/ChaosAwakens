@@ -1,7 +1,7 @@
 package io.github.chaosawakens.blocks;
 
 import io.github.chaosawakens.entity.RedAntEntity;
-import io.github.chaosawakens.registry.ModEntityTypes;
+import io.github.chaosawakens.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,7 +17,7 @@ public class RedAntInfestedOre extends OreBlock {
     }
 
     private void spawnRedAnt(ServerWorld world, BlockPos pos) {
-        RedAntEntity redantentity = ModEntityTypes.RED_ANT.get().create(world);
+        RedAntEntity redantentity = CAEntityTypes.RED_ANT.get().create(world);
         redantentity.setLocationAndAngles((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addEntity(redantentity);
         redantentity.spawnExplosionParticle();

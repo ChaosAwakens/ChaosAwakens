@@ -3,7 +3,7 @@ package io.github.chaosawakens.worldgen;
 import java.util.Objects;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.registry.ModFeatures;
+import io.github.chaosawakens.registry.CAFeatures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
@@ -26,7 +26,7 @@ public class EventBiomeLoading {
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 			addCustomOres(gen);
 
-			ChaosAwakens.LOGGER.debug(event);
+			//ChaosAwakens.LOGGER.debug(event.getName());
 		}
 
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
@@ -40,20 +40,20 @@ public class EventBiomeLoading {
 	
 	public static void addCustomOres(BiomeGenerationSettingsBuilder gen) {
 		
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_RUBY_LAVA);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_RUBY_NO_SURFACE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_AMETHYST);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_URANIUM);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_TITANIUM);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_TIGERS_EYE_ORE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_ALUMINIUM);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.ORE_SALT);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.FOSSILISED_ENT);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.FOSSILISED_HERCULES_BEETLE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.FOSSILISED_RUBY_BUG);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.FOSSILISED_EMERALD_GATOR);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.RED_ANT_INFESTED_ORE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ModFeatures.TERMITE_INFESTED_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_LAVA);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_NO_SURFACE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_AMETHYST);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_URANIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TITANIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIGERS_EYE_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_ALUMINIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SALT);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_ENT);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_HERCULES_BEETLE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_RUBY_BUG);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_EMERALD_GATOR);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.RED_ANT_INFESTED_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.TERMITE_INFESTED_ORE);
 		
 	}
 }

@@ -14,7 +14,7 @@ import net.minecraftforge.registries.*;
 
 import java.util.*;
 
-public class ModStructures {
+public class CAStructures {
 
 	public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister
 			.create(ForgeRegistries.STRUCTURE_FEATURES, ChaosAwakens.MODID);

@@ -2,7 +2,7 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.registry.ModBlocks;
-import io.github.chaosawakens.registry.ModItems;
+import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
@@ -32,7 +32,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 
 	@Override
 	protected void registerModels() {
-		generate(ModItems.ITEMS.getEntries());
+		generate(CAItems.ITEMS.getEntries());
 		/*
 		 * generated(ModItems.CORNDOG, ModItems.COOKED_CORNDOG, ModItems.BACON,
 		 * ModItems.COOKED_BACON, ModItems.APPLE_SEEDS, ModItems.BUTTER,

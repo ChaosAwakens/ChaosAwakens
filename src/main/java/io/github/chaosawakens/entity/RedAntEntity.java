@@ -1,7 +1,7 @@
 package io.github.chaosawakens.entity;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.registry.ModDimensions;
+import io.github.chaosawakens.registry.CADimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -78,7 +78,7 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 		if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
 			ServerWorld currentWorld = (ServerWorld) this.world;
 			MinecraftServer minecraftServer = currentWorld.getServer();
-			RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == ModDimensions.MINING_DIMENSION ? World.OVERWORLD : ModDimensions.MINING_DIMENSION;
+			RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.MINING_DIMENSION ? World.OVERWORLD : CADimensions.MINING_DIMENSION;
 			ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
 			

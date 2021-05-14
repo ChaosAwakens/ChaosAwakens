@@ -16,7 +16,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModDimensions {
+public class CADimensions {
 	
 	public static final RegistryKey<World> MINING_DIMENSION = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(ChaosAwakens.MODID + ":mining_dimension"));
 	public static final RegistryKey<World> VILLAGE_MANIA = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(ChaosAwakens.MODID + ":village_mania"));

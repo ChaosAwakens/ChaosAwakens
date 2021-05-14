@@ -82,17 +82,17 @@ public class ChaosAwakens {
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		eventBus.addListener(this::gatherData);
-		ModBiomes.BIOMES.register(eventBus);
+		CABiomes.BIOMES.register(eventBus);
 
-		ModItems.ITEMS.register(eventBus);
+		CAItems.ITEMS.register(eventBus);
 		ModBlocks.ITEMS.register(eventBus);
 		ModBlocks.BLOCKS.register(eventBus);
 		
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		
-		ModEntityTypes.ENTITY_TYPES.register(eventBus);
-		ModStructures.STRUCTURES.register(eventBus);
-		ModAttributes.ATTRIBUTES.register(eventBus);
+		CAEntityTypes.ENTITY_TYPES.register(eventBus);
+		CAStructures.STRUCTURES.register(eventBus);
+		CAAttributes.ATTRIBUTES.register(eventBus);
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);
@@ -126,7 +126,7 @@ public class ChaosAwakens {
 			
 			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>( serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
 			
-			tempMap.putIfAbsent(ModStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(ModStructures.ENT_DUNGEON.get()));
+			tempMap.putIfAbsent(CAStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.ENT_DUNGEON.get()));
 			
 			serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
 		}
@@ -136,25 +136,25 @@ public class ChaosAwakens {
 		PacketHandler.init();
 		
 		event.enqueueWork(() -> {
-			ModStructures.setupStructures();
+			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
 		});
 		
 		DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.BROWN_ANT.get(), BrownAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.RAINBOW_ANT.get(), RainbowAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.TERMITE.get(), TermiteEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.BROWN_ANT.get(), BrownAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.RAINBOW_ANT.get(), RainbowAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.TERMITE.get(), TermiteEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
+            GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
 		});
 	}
 	
