@@ -111,7 +111,13 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.create(RoboSniperEntity::new, EntityClassification.MONSTER)
 				.size(1.0f, 1.5f) // Hitbox Size ()
 				.build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper").toString()));
-	
+
+	public static final RegistryObject<EntityType<RoboSniperLaserEntity>> ROBO_SNIPER_LASER = ENTITY_TYPES.register("robo_sniper_laser",
+			() -> EntityType.Builder.<RoboSniperLaserEntity>create(RoboSniperLaserEntity::new, EntityClassification.MISC)
+					.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper_laser").toString()));
+
+
 	// Arrow
 	public static final RegistryObject<EntityType<UltimateArrowEntity>> ULTIMATE_ARROW = ENTITY_TYPES.register("ultimate_arrow",
 			() -> EntityType.Builder.<UltimateArrowEntity>create(UltimateArrowEntity::new, EntityClassification.MISC)

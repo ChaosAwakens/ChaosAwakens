@@ -39,6 +39,7 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BEAVER.get(), BeaverEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_SNIPER_LASER.get(), RoboSniperLaserRender::new);
 		
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.getCutout());
