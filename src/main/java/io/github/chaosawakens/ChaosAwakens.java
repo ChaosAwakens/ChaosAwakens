@@ -152,7 +152,7 @@ public class ChaosAwakens {
 		final ExistingFileHelper existing = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
+			//dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
 			dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
 		}
 	}

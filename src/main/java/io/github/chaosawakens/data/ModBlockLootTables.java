@@ -3,6 +3,7 @@ package io.github.chaosawakens.data;
 import io.github.chaosawakens.registry.CABlocks;
 import io.github.chaosawakens.registry.CAItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -19,7 +20,7 @@ public class ModBlockLootTables extends BlockLootTables
         registerLootTable(CABlocks.GOLDEN_MELON.get(), (food) -> dropping(CAItems.GOLDEN_MELON_SLICE.get()));
         registerLootTable(CABlocks.ATTACHED_GOLDEN_MELON_STEM.get(), (seeds) -> dropping(CAItems.GOLDEN_MELON_SEEDS.get()));
         registerLootTable(CABlocks.GOLDEN_MELON_STEM.get(), (seeds) -> dropping(CAItems.GOLDEN_MELON_SEEDS.get()));
-        registerLootTable(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (food) -> dropping(CABlocks.KYANITE.get()));
+        registerLootTable(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (block) -> dropping(CABlocks.KYANITE.get()));
 
         // BLOCKS
         registerDropSelfLootTable(CABlocks.AMETHYST_BLOCK.get());
@@ -39,6 +40,8 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(CABlocks.SILVER_BLOCK.get());
         registerDropSelfLootTable(CABlocks.PLATINUM_ORE.get());
         registerDropSelfLootTable(CABlocks.PLATINUM_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.PINK_TOURMALINE_CLUSTER.get());
+        registerDropSelfLootTable(CABlocks.CATS_EYE_CLUSTER.get());
         registerDropSelfLootTable(CABlocks.PINK_TOURMALINE_BLOCK.get());
         registerDropSelfLootTable(CABlocks.CATS_EYE_BLOCK.get());
         registerDropSelfLootTable(CABlocks.BROWN_ANT_NEST.get());
@@ -58,7 +61,13 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD_PLANKS.get());
         registerDropSelfLootTable(CABlocks.CRYSTAL_CRAFTING_TABLE.get());
         registerDropSelfLootTable(CABlocks.CRYSTAL_FURNACE.get());
-
+        registerDropSelfLootTable(CABlocks.CRYSTAL_ENERGY.get());
+        registerDropSelfLootTable(CABlocks.RED_CRYSTAL_LEAVES.get());
+        registerDropSelfLootTable(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
+        registerDropSelfLootTable(CABlocks.GREEN_CRYSTAL_LEAVES.get());
+        registerLootTable(CABlocks.BUDDING_PINK_TOURMALINE.get(), (block) -> dropping(CABlocks.KYANITE.get()));
+        registerLootTable(CABlocks.BUDDING_CATS_EYE.get(), (block) -> dropping(CABlocks.KYANITE.get()));
+        registerLootTable(CABlocks.SPAWNER_BLOCK.get(), (block) -> dropping(Blocks.AIR));
     }
 
     @Override
