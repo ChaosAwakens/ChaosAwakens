@@ -23,9 +23,7 @@ public class EventBiomeLoading {
 		RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 		
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
-			addCustomOres(gen);
-
-			//ChaosAwakens.LOGGER.debug(event.getName());
+			addOverworldOres(gen);
 		}
 
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
@@ -33,19 +31,16 @@ public class EventBiomeLoading {
 		}
 		
 		if (event.getName().toString().equals("chaosawakens:mining_biome")) {
-			addCustomOres(gen);
+			addMiningDimOres(gen);
 		}
 	}
-	
-	public static void addCustomOres(BiomeGenerationSettingsBuilder gen) {
-		
+
+	public static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_LAVA);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_NO_SURFACE);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_AMETHYST);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_URANIUM);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TITANIUM);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIGERS_EYE_ORE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_ALUMINIUM);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SALT);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_ENT);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_HERCULES_BEETLE);
@@ -53,6 +48,26 @@ public class EventBiomeLoading {
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_EMERALD_GATOR);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.RED_ANT_INFESTED_ORE);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.TERMITE_INFESTED_ORE);
-		
+	}
+
+	public static void addMiningDimOres(BiomeGenerationSettingsBuilder gen) {
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_LAVA);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_NO_SURFACE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_AMETHYST);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_URANIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TITANIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIGERS_EYE_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_ALUMINIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_COPPER);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIN);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SILVER);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_PLATINUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SALT);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_ENT);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_HERCULES_BEETLE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_RUBY_BUG);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_EMERALD_GATOR);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.RED_ANT_INFESTED_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.TERMITE_INFESTED_ORE);
 	}
 }
