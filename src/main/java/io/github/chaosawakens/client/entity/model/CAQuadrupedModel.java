@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ModQuadrupedModel<T extends Entity> extends AgeableModel<T> {
+public class CAQuadrupedModel<T extends Entity> extends AgeableModel<T> {
     protected ModelRenderer headModel = new ModelRenderer(this, 0, 0);
     protected ModelRenderer modelGlint = new ModelRenderer(this, 32, 0);
     protected ModelRenderer body;
@@ -18,7 +18,7 @@ public class ModQuadrupedModel<T extends Entity> extends AgeableModel<T> {
     protected ModelRenderer legFrontRight;
     protected ModelRenderer legFrontLeft;
 
-    public ModQuadrupedModel(int p_i225948_1_, float p_i225948_2_, boolean p_i225948_3_, float p_i225948_4_, float p_i225948_5_, float p_i225948_6_, float p_i225948_7_, int p_i225948_8_) {
+    public CAQuadrupedModel(int p_i225948_1_, float p_i225948_2_, boolean p_i225948_3_, float p_i225948_4_, float p_i225948_5_, float p_i225948_6_, float p_i225948_7_, int p_i225948_8_) {
         super(p_i225948_3_, p_i225948_4_, p_i225948_5_, p_i225948_6_, p_i225948_7_, (float)p_i225948_8_);
         this.headModel.addBox(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F, p_i225948_2_);
         this.headModel.setRotationPoint(0.0F, (float)(18 - p_i225948_1_), -6.0F);

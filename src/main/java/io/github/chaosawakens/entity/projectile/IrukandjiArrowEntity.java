@@ -14,6 +14,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class IrukandjiArrowEntity extends AbstractArrowEntity {
 
 	private int duration = 200;
+	private double damage = 20.0D;
 
 	public IrukandjiArrowEntity(EntityType<? extends IrukandjiArrowEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -59,9 +60,13 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
-	
+
+	@Override
+	public void setDamage(double damageIn) {
+		this.damage = damageIn;
+	}
 	@Override
 	public double getDamage() {
-		return 100.0D;
+		return this.damage;
 	}
 }

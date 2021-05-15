@@ -271,6 +271,9 @@
 	"block.chaosawakens.fossilised_ruby_bug": "Fossilised Ruby Bug",
 	"block.chaosawakens.fossilised_emerald_gator": "Fossilised Emerald Gator",
 
+	"block.chaosawakens.crystalised_fairy": "Crystalised Fairy",
+	"block.chaosawakens.crystalised_rat": "Crystalised Rat",
+
 	"block.chaosawakens.crystal_grass_block": "Crystal Grass Block",
 	"block.chaosawakens.kyanite": "Kyanite",
 	"block.chaosawakens.crystal_log": "Crystal Log",
@@ -280,16 +283,19 @@
 	"block.chaosawakens.green_crystal_leaves": "Green Crystal Leaves",
 	"block.chaosawakens.yellow_crystal_leaves": "Yellow Crystal Leaves",
 	"block.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
+	"block.chaosawakens.crystal_energy": "Crystal Energy",
+	"block.chaosawakens.crystal_torch": "Crystal Torch",
+	"block.chaosawakens.wall_crystal_torch": "Wall Crystal Torch",
 	"block.chaosawakens.crystal_furnace": "Crystal Furnace",
 	"item.chaosawakens.crystal_wood_shard": "Crystal Wood Shard",
 	"item.chaosawakens.peacock_feather": "Peacock Feather",
 	"item.chaosawakens.dead_irukandji": "Dead Irukandji",
 
-	"item.chaosawakens.crystal_wood_sword": "Crystal_Wood Sword",
-	"item.chaosawakens.crystal_wood_pickaxe": "Crystal_Wood Pickaxe",
-	"item.chaosawakens.crystal_wood_shovel": "Crystal_Wood Shovel",
-	"item.chaosawakens.crystal_wood_axe": "Crystal_Wood Axe",
-	"item.chaosawakens.crystal_wood_hoe": "Crystal_Wood Hoe",
+	"item.chaosawakens.crystal_wood_sword": "Crystal Wood Sword",
+	"item.chaosawakens.crystal_wood_pickaxe": "Crystal Wood Pickaxe",
+	"item.chaosawakens.crystal_wood_shovel": "Crystal Wood Shovel",
+	"item.chaosawakens.crystal_wood_axe": "Crystal Wood Axe",
+	"item.chaosawakens.crystal_wood_hoe": "Crystal Wood Hoe",
 	"item.chaosawakens.kyanite_sword": "Kyanite Sword",
 	"item.chaosawakens.kyanite_pickaxe": "Kyanite Pickaxe",
 	"item.chaosawakens.kyanite_shovel": "Kyanite Shovel",
@@ -334,6 +340,8 @@
 	"block.chaosawakens.termite_nest": "Termite Nest",
 	"block.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
 	"block.chaosawakens.termite_infested_ore": "Termite Infested Ore",
+
+	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
 
 	"item.chaosawakens.dev_item1": "Dev Item",
 	"item.chaosawakens.dev_item16": "Dev Item",

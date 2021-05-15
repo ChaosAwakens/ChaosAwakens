@@ -22,10 +22,10 @@ public class GameEvents {
 
             PlayerEntity player = (PlayerEntity)event.getEntity();
 
-            double baseReach = 5;
+            double baseReach = 5.0D;
 
             if (player.isCreative()) {
-                baseReach = 8.0;
+                baseReach = 8.0D;
             }
 
             Objects.requireNonNull(player.getAttribute(ForgeMod.REACH_DISTANCE.get())).setBaseValue(baseReach);

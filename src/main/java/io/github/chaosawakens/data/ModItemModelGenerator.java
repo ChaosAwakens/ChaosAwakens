@@ -139,7 +139,7 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		for (RegistryObject<Item> item : items) {
 			String name = item.getId().getPath();
 
-			if (name.contains("enchanted"))
+			if (name.startsWith("enchanted"))
 				name = name.substring(name.indexOf("_") + 1);
 
 			/*

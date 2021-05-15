@@ -12,11 +12,11 @@ import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nullable;
 
-public class ModSpawnerBlock extends Block {
+public class CASpawnerBlock extends Block {
 
     public static final EnumProperty<BossVariant> VARIANT = EnumProperty.create("boss", BossVariant.class);
 
-    public ModSpawnerBlock(Block.Properties props) {
+    public CASpawnerBlock(Block.Properties props) {
         super(props);
         this.setDefaultState(stateContainer.getBaseState().with(VARIANT, BossVariant.ENT));
     }

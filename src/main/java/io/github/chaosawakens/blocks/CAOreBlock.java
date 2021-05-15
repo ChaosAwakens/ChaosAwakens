@@ -9,15 +9,15 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.Random;
 
-public class ModOreBlock extends Block {
+public class CAOreBlock extends Block {
     private boolean isFossilisedOre = false;
 
-    public ModOreBlock(AbstractBlock.Properties properties, boolean fossilised) {
+    public CAOreBlock(AbstractBlock.Properties properties, boolean fossilised) {
         super(properties);
         this.isFossilisedOre = fossilised;
     }
 
-    public ModOreBlock(AbstractBlock.Properties properties) {
+    public CAOreBlock(AbstractBlock.Properties properties) {
         super(properties);
     }
 
