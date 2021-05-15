@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class EnchantedGoldenAppleCowModel<T extends Entity> extends ModQuadrupedModel<T> {
+public class EnchantedGoldenAppleCowModel<T extends Entity> extends CAQuadrupedModel<T> {
     public EnchantedGoldenAppleCowModel() {
         super(12, 0.0F, false, 10.0F, 4.0F, 2.0F, 2.0F, 24);
         this.headModel = new ModelRenderer(this, 0, 0);
