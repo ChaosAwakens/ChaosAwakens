@@ -5,11 +5,10 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -17,11 +16,14 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
-public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargeableMob {
+import javax.annotation.Nullable;
+
+public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChargeableMob {
     private static final DataParameter<Boolean> ENCHANTED = EntityDataManager.createKey(EnchantedGoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
 
-    public EnchantedGoldenAppleCowEntity(EntityType<? extends CowEntity> type, World worldIn) {
+    public EnchantedGoldenAppleCowEntity(EntityType<? extends EnchantedGoldenAppleCowEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -29,8 +31,6 @@ public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargea
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.WHEAT), false));
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
@@ -41,6 +41,17 @@ public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargea
                 .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 10);
+    }
+
+    @Nullable
+    @Override
+    public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+        return null;
+    }
+
+    @Override
+    public boolean canFallInLove() {
+        return false;
     }
 
     protected void registerData() {
@@ -85,7 +96,7 @@ public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargea
 
     public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
         ItemStack itemstack = playerIn.getHeldItem(hand);
-        if (itemstack.getItem() == Items.BUCKET && !this.isChild()) {
+        if (itemstack.getItem() == Items.BUCKET) {
             playerIn.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
             ItemStack itemstack1 = DrinkHelper.fill(itemstack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
             playerIn.setHeldItem(hand, itemstack1);
@@ -96,7 +107,7 @@ public class EnchantedGoldenAppleCowEntity extends CowEntity implements IChargea
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-        return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
+        return 1.3F;
     }
 
     @Override

@@ -1,11 +1,12 @@
 package io.github.chaosawakens.entity;
 
+import io.github.chaosawakens.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -15,9 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-public class AppleCowEntity extends CowEntity {
+public class AppleCowEntity extends AnimalEntity {
 
-    public AppleCowEntity(EntityType<? extends CowEntity> type, World worldIn) {
+    public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -73,8 +74,8 @@ public class AppleCowEntity extends CowEntity {
         }
     }
 
-    public CowEntity createChild(ServerWorld world, AgeableEntity mate) {
-        return EntityType.COW.create(world);
+    public AppleCowEntity createChild(ServerWorld world, AgeableEntity mate) {
+        return CAEntityTypes.APPLE_COW.get().create(world);
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {

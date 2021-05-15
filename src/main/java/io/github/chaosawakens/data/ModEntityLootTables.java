@@ -142,6 +142,20 @@ public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTable
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(Items.ENCHANTED_GOLDEN_APPLE))
                                 .acceptCondition(KilledByPlayer.builder())));
+        registerLootTable(CAEntityTypes.BEAVER.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.PORKCHOP)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 2.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0.0F, 1.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.LEATHER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 1.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0.0F, 1.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))));
     }
 
     @Override
