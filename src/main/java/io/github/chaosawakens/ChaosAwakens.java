@@ -134,6 +134,7 @@ public class ChaosAwakens {
             GlobalEntityTypeAttributes.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());

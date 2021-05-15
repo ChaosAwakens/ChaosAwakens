@@ -382,6 +382,7 @@ public class CAItems {
 	public static final RegistryObject<ModSpawnEggItem> APPLE_COW_SPAWN_EGG = ITEMS.register("apple_cow_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<ModSpawnEggItem> GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("golden_apple_cow_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.GOLDEN_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<EnchantedModSpawnEggItem> ENCHANTED_GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("enchanted_golden_apple_cow_spawn_egg", () -> new EnchantedModSpawnEggItem(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<ModSpawnEggItem> CRYSTAL_APPLE_COW_SPAWN_EGG = ITEMS.register("crystal_apple_cow_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.CRYSTAL_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xffffff, 0xe38a1d, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 }

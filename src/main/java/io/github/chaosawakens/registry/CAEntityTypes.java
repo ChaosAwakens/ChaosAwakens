@@ -62,6 +62,11 @@ public class CAEntityTypes {
 					.size(0.9F, 1.4F)
 					.trackingRange(10)// Hitbox Size ()
 					.build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_apple_cow").toString()));
+	public static final RegistryObject<EntityType<CrystalAppleCowEntity>> CRYSTAL_APPLE_COW = ENTITY_TYPES.register("crystal_apple_cow",
+			() -> EntityType.Builder.create(CrystalAppleCowEntity::new, EntityClassification.CREATURE)
+					.size(0.9F, 1.4F)
+					.trackingRange(10)// Hitbox Size ()
+					.build(new ResourceLocation(ChaosAwakens.MODID, "crystal_apple_cow").toString()));
 	
 	// Ants
 	public static final RegistryObject<EntityType<BrownAntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",
