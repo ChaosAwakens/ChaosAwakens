@@ -39,6 +39,8 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(CABlocks.SILVER_BLOCK.get());
         registerDropSelfLootTable(CABlocks.PLATINUM_ORE.get());
         registerDropSelfLootTable(CABlocks.PLATINUM_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.PINK_TOURMALINE_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.CATS_EYE_BLOCK.get());
         registerDropSelfLootTable(CABlocks.BROWN_ANT_NEST.get());
         registerDropSelfLootTable(CABlocks.RAINBOW_ANT_NEST.get());
         registerDropSelfLootTable(CABlocks.RED_ANT_NEST.get());
@@ -54,6 +56,8 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(CABlocks.CRYSTAL_LOG.get());
         registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD.get());
         registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD_PLANKS.get());
+        registerDropSelfLootTable(CABlocks.CRYSTAL_CRAFTING_TABLE.get());
+        registerDropSelfLootTable(CABlocks.CRYSTAL_FURNACE.get());
 
     }
 
