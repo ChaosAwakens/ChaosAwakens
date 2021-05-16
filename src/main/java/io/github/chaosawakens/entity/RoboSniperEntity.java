@@ -33,15 +33,19 @@ public class RoboSniperEntity extends MonsterEntity implements IAnimatable, IRan
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if(event.isMoving()){
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.walking_animation", true));
-			return PlayState.CONTINUE;
-		}
-        if (!event.isMoving()) {
+        if(event.isMoving() && !this.isAggressive()){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.walking_animation", true));
             return PlayState.CONTINUE;
         }
-        if(this.isAggressive()) {
+        if(event.isMoving() && this.isAggressive()){
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.accelerate_animation", true));
+            return PlayState.CONTINUE;
+        }
+        if (!event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
+            return PlayState.CONTINUE;
+        }
+        if(this.didLaser) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
             return PlayState.CONTINUE;
         }
