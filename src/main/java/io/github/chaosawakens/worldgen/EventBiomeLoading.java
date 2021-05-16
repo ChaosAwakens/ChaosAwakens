@@ -1,5 +1,6 @@
 package io.github.chaosawakens.worldgen;
 
+import io.github.chaosawakens.registry.CABiomes;
 import io.github.chaosawakens.registry.CAFeatures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -30,7 +31,7 @@ public class EventBiomeLoading {
 			gen.getStructures().add( () -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 		}
 		
-		if (event.getName().toString().equals("chaosawakens:mining_biome")) {
+		if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
 			addMiningDimOres(gen);
 		}
 	}

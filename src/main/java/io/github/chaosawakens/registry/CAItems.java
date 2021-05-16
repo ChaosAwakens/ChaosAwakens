@@ -5,13 +5,16 @@ import io.github.chaosawakens.enums.ArmorMaterials;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.enums.ToolMaterials;
 import io.github.chaosawakens.items.*;
+import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -133,12 +136,12 @@ public class CAItems {
 	public static final RegistryObject<Item> GOLDEN_PUFFERFISH = ITEMS.register("golden_pufferfish", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_PUFFERFISH).group(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> GOLDEN_SALMON = ITEMS.register("golden_salmon", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_SALMON).group(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> GOLDEN_CANDYCANE = ITEMS.register("golden_candycane", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_CANDYCANE).group(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<EnchantedItem> ULTIMATE_APPLE = ITEMS.register("ultimate_apple", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ULTIMATE_APPLE).group(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_CARROT = ITEMS.register("enchanted_golden_carrot", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_CARROT).group(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_STEAK = ITEMS.register("enchanted_golden_steak", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_STEAK).group(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_COOKIE = ITEMS.register("enchanted_golden_cookie", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_COOKIE).group(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_COD = ITEMS.register("enchanted_golden_cod", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_COD).group(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<EnchantedItem> ENCHANTED_GOLDEN_CANDYCANE = ITEMS.register("enchanted_golden_candycane", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_CANDYCANE).group(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> ULTIMATE_APPLE = ITEMS.register("ultimate_apple", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ULTIMATE_APPLE).group(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> ENCHANTED_GOLDEN_CARROT = ITEMS.register("enchanted_golden_carrot", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_CARROT).group(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> ENCHANTED_GOLDEN_STEAK = ITEMS.register("enchanted_golden_steak", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_STEAK).group(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> ENCHANTED_GOLDEN_COOKIE = ITEMS.register("enchanted_golden_cookie", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_COOKIE).group(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> ENCHANTED_GOLDEN_COD = ITEMS.register("enchanted_golden_cod", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_COD).group(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> ENCHANTED_GOLDEN_CANDYCANE = ITEMS.register("enchanted_golden_candycane", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_CANDYCANE).group(CAItemGroups.foodItemGroup)));
 	
 	// DEV ITEMS
 	public static final RegistryObject<DevItem> DEV_ITEM1 = ITEMS.register("dev_item1", () -> new DevItem(new Item.Properties().maxStackSize(1)));

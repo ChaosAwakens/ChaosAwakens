@@ -13,6 +13,7 @@ import io.github.chaosawakens.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.worldgen.EventBiomeLoading;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -22,6 +23,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -37,6 +39,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -139,6 +143,9 @@ public class ChaosAwakens {
             GlobalEntityTypeAttributes.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
 		});
+		
+		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
+		
 	}
 	
 	@SubscribeEvent(priority = EventPriority.HIGH)

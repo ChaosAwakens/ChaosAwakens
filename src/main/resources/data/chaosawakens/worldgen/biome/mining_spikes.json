@@ -1,11 +1,11 @@
 {
 	"surface_builder": "minecraft:grass",
-	"depth": 4,
-	"scale": 0.5,
+	"depth": 0,
+	"scale": 0.2,
 	"temperature": 0.2,
-	"downfall": 0.3,
+	"downfall": 0.15,
 	"precipitation": "rain",
-	"category": "extreme_hills",
+	"category": "plains",
 	"player_spawn_friendly": true,
 	"effects": {
 		"sky_color": 7907327,

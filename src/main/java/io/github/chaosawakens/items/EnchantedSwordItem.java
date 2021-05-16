@@ -11,34 +11,36 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.world.World;
 
 public class EnchantedSwordItem extends SwordItem {
-
-    private final int[] enchantmentLevels;
-    private final Enchantment[] enchantmentIds;
-
-    public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
-        enchantmentIds = enchants;
-        enchantmentLevels = lvls;
-    }
-
-    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-        if (!CAConfig.COMMON.enableAutoEnchanting.get()) return;
-        for (int i = 0; i < enchantmentIds.length; i++) {
-            stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
-        }
-    }
-
-    public void inventoryTick(ItemStack stack, World worldInD, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!CAConfig.COMMON.enableAutoEnchanting.get()) return;
-        if (EnchantmentHelper.getEnchantmentLevel(enchantmentIds[0],stack) <= 0) {
-            for (int i = 0; i < enchantmentIds.length; i++) {
-                stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
-            }
-        }
-    }
-
-    public boolean hasEffect(ItemStack stack) {
-        return true;
-    }
-
+	
+	private final int[] enchantmentLevels;
+	private final Enchantment[] enchantmentIds;
+	
+	public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
+		super(tier, attackDamageIn, attackSpeedIn, builderIn);
+		enchantmentIds = enchants;
+		enchantmentLevels = lvls;
+	}
+	
+	public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+		if (!CAConfig.COMMON.enableAutoEnchanting.get())return;
+		if (stack.isEnchanted())return;
+		for (int i = 0; i < enchantmentIds.length; i++) {
+			stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
+		}
+	}
+	
+	public void inventoryTick(ItemStack stack, World worldInD, Entity entityIn, int itemSlot, boolean isSelected) {
+		if (!CAConfig.COMMON.enableAutoEnchanting.get())return;
+		if (stack.isEnchanted())return;
+		if (EnchantmentHelper.getEnchantmentLevel(enchantmentIds[0], stack) <= 0) {
+			for (int i = 0; i < enchantmentIds.length; i++) {
+				stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
+			}
+		}
+	}
+	
+	public boolean hasEffect(ItemStack stack) {
+		return true;
+	}
+	
 }
