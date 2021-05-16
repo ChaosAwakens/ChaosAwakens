@@ -16,7 +16,7 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GameEvents {
 	
-	@SubscribeEvent
+	/*@SubscribeEvent
 	public static void livingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
 		Entity entity = event.getEntity();
 		
@@ -37,15 +37,5 @@ public class GameEvents {
 				Objects.requireNonNull(player.getAttribute(ForgeMod.REACH_DISTANCE.get())).setBaseValue(baseReach + 20.0);
 			}
 		}
-	}
-	
-	@SubscribeEvent
-	public static void crafted(final ItemCraftedEvent event) {
-		ChaosAwakens.LOGGER.debug(event);
-	}
-	
-	@SubscribeEvent
-	public static void item(final ItemEvent event) {
-		ChaosAwakens.LOGGER.debug(event);
-	}
+	}*/
 }

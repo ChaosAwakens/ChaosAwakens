@@ -1,6 +1,7 @@
 package io.github.chaosawakens.worldgen;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.registry.CABiomes;
 import io.github.chaosawakens.registry.CAEntityTypes;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.MobSpawnInfo;
@@ -39,7 +40,7 @@ public class CABiomeFeatures {
 			case SWAMP:
 				SWAMP_MOBS.accept(spawnInfoBuilder);
 			case FOREST:
-				FOREST_MOBS.accept(spawnInfoBuilder);
+				FOREST_MOBS.accept(spawnInfoBuilder);				
 			case THEEND:
 			case NETHER:
 				break;
