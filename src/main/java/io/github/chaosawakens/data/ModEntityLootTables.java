@@ -2,6 +2,7 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.registry.CAEntityTypes;
 import io.github.chaosawakens.registry.CAItems;
+import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
@@ -13,7 +14,7 @@ import net.minecraft.loot.functions.SetCount;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ModEntityLootTables extends net.minecraft.data.loot.EntityLootTables {
+public class ModEntityLootTables extends EntityLootTables {
 
     private final Set<EntityType<?>> knownEntities = new HashSet<>();
 

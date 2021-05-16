@@ -39,8 +39,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
@@ -78,7 +76,6 @@ public class ChaosAwakens {
 		
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
-		CAAttributes.ATTRIBUTES.register(eventBus);
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);
@@ -159,7 +156,7 @@ public class ChaosAwakens {
 		final ExistingFileHelper existing = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			//dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
+			dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
 			dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
 		}
 	}

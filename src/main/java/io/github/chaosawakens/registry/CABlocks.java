@@ -1,8 +1,5 @@
 package io.github.chaosawakens.registry;
 
-import java.util.function.Supplier;
-import java.util.function.ToIntFunction;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.blocks.*;
 import io.github.chaosawakens.items.EnchantedBlockItem;
@@ -22,6 +19,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CABlocks {
@@ -30,11 +28,11 @@ public class CABlocks {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
 
 	// SHINY FOODS
-	public static final RegistryObject<GoldenCakeBlock> GOLDEN_CAKE = registerBlock("golden_cake", () -> new GoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup);
+//	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsBlock(Block.Properties.from(Blocks.SUGAR_CANE)), CAItemGroups.foodItemGroup);
 	public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon", () -> new GoldenMelonBlock(Block.Properties.from(Blocks.MELON).harvestTool(ToolType.AXE)), CAItemGroups.foodItemGroup);
 	public static final RegistryObject<Block> ATTACHED_GOLDEN_MELON_STEM = registerBlock("attached_golden_melon_stem", () -> new AttachedStemBlock((StemGrownBlock)GOLDEN_MELON.get(), AbstractBlock.Properties.from(Blocks.ATTACHED_MELON_STEM)), null);
 	public static final RegistryObject<Block> GOLDEN_MELON_STEM = registerBlock("golden_melon_stem", () -> new StemBlock((StemGrownBlock)GOLDEN_MELON.get(), AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.STEM)), null);
-	//public static final RegistryObject<Block> CORN_CROP = registerBlock("corn_plant", () -> new CropsBlock(Block.Properties.from(Blocks.WHEAT)), null);
+	public static final RegistryObject<GoldenCakeBlock> GOLDEN_CAKE = registerBlock("golden_cake", () -> new GoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup);
 
 	// ENT DUNGEON BLOCKS
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
@@ -57,7 +55,7 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> PLATINUM_ORE = registerBlock("platinum_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CrystalClusterBlock> PINK_TOURMALINE_CLUSTER = registerBlock("pink_tourmaline_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).notSolid().setSuffocates(CABlocks::_false).setBlocksVision(CABlocks::_false).setOpaque(CABlocks::_false).harvestLevel(1)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CrystalClusterBlock> CATS_EYE_CLUSTER = registerBlock("cats_eye_cluster", () -> new CrystalClusterBlock(Block.Properties.from(Blocks.IRON_ORE).notSolid().setSuffocates(CABlocks::_false).setBlocksVision(CABlocks::_false).setOpaque(CABlocks::_false).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CrystalEnergyBlock> CRYSTAL_ENERGY = registerBlock("crystal_energy", () -> new CrystalEnergyBlock(Block.Properties.from(Blocks.COAL_ORE).notSolid().setSuffocates(CABlocks::_false).setBlocksVision(CABlocks::_false).setOpaque(CABlocks::_false).harvestLevel(0).setLightLevel((state) -> { return 8; })), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CrystalEnergyBlock> CRYSTAL_ENERGY = registerBlock("crystal_energy", () -> new CrystalEnergyBlock(Block.Properties.from(Blocks.COAL_ORE).notSolid().setSuffocates(CABlocks::_false).setBlocksVision(CABlocks::_false).setOpaque(CABlocks::_false).harvestLevel(0).setLightLevel((state) -> 8)), CAItemGroups.blocksItemGroup);
 
 	// INFESTED ORES
 	public static final RegistryObject<RedAntInfestedOre> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore", () -> new RedAntInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
@@ -123,9 +121,7 @@ public class CABlocks {
 	}
 
 	private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
-		return (state) -> {
-			return state.get(BlockStateProperties.LIT) ? lightValue : 0;
-		};
+		return (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
 	}
 
 	public static final RegistryObject<EnchantedGoldenCakeBlock> ENCHANTED_GOLDEN_CAKE = registerEnchantedBlock("enchanted_golden_cake", () -> new EnchantedGoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup, 1);

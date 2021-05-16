@@ -1,5 +1,6 @@
 package io.github.chaosawakens.entity;
 
+import io.github.chaosawakens.entity.projectile.RoboSniperLaserEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.LivingEntity;

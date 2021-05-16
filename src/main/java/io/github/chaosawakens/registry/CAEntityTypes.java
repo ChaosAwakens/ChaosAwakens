@@ -3,6 +3,7 @@ package io.github.chaosawakens.registry;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.entity.*;
 import io.github.chaosawakens.entity.projectile.IrukandjiArrowEntity;
+import io.github.chaosawakens.entity.projectile.RoboSniperLaserEntity;
 import io.github.chaosawakens.entity.projectile.UltimateArrowEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -114,9 +115,8 @@ public class CAEntityTypes {
 
 	public static final RegistryObject<EntityType<RoboSniperLaserEntity>> ROBO_SNIPER_LASER = ENTITY_TYPES.register("robo_sniper_laser",
 			() -> EntityType.Builder.<RoboSniperLaserEntity>create(RoboSniperLaserEntity::new, EntityClassification.MISC)
-					.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
-					.build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper_laser").toString()));
-
+				.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
+				.build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper_laser").toString()));
 
 	// Arrow
 	public static final RegistryObject<EntityType<UltimateArrowEntity>> ULTIMATE_ARROW = ENTITY_TYPES.register("ultimate_arrow",
@@ -126,8 +126,8 @@ public class CAEntityTypes {
 
 	public static final RegistryObject<EntityType<IrukandjiArrowEntity>> IRUKANDJI_ARROW = ENTITY_TYPES.register("irukandji_arrow",
 			() -> EntityType.Builder.<IrukandjiArrowEntity>create(IrukandjiArrowEntity::new, EntityClassification.MISC)
-					.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
-					.build(new ResourceLocation(ChaosAwakens.MODID, "irukandji_arrow").toString()));
+				.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
+				.build(new ResourceLocation(ChaosAwakens.MODID, "irukandji_arrow").toString()));
 	
 	//"The method build(ResourceLocation, EntityType.Builder<E>) from the type ModEntityTypes is never used locally", so whats it for ???
 	@SuppressWarnings("unchecked")

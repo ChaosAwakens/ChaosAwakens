@@ -1,7 +1,7 @@
 package io.github.chaosawakens.client.entity.render;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.entity.RoboSniperLaserEntity;
+import io.github.chaosawakens.entity.projectile.RoboSniperLaserEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

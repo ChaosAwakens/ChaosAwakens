@@ -26,7 +26,9 @@ public class ModLootTableProvider extends LootTableProvider {
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootParameterSet>> getTables() {
         return ImmutableList.of(Pair.of(ModBlockLootTables::new, LootParameterSets.BLOCK),
-                                Pair.of(ModEntityLootTables::new, LootParameterSets.ENTITY));
+                                Pair.of(ModEntityLootTables::new, LootParameterSets.ENTITY),
+                                Pair.of(ModChestLootTables::new, LootParameterSets.CHEST),
+                                Pair.of(ModFishingLootTables::new, LootParameterSets.FISHING));
     }
 
     @Override

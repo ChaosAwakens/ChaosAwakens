@@ -63,7 +63,7 @@ sourceSets {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.33')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.35')
 
 }
 

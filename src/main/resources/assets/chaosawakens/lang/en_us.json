@@ -347,5 +347,7 @@
 	"item.chaosawakens.dev_item1": "Dev Item",
 	"item.chaosawakens.dev_item16": "Dev Item",
 	"item.chaosawakens.dev_item64": "Dev Item",
-	"item.chaosawakens.dev_item_damage": "Dev Item"
+	"item.chaosawakens.dev_item_damage": "Dev Item",
+
+	"item.chaosawakens.instant_survival_shelter": "Instant Survival Shelter"
 }

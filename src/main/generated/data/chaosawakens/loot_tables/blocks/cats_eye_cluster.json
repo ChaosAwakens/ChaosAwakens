@@ -2,15 +2,11 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": {
-        "min": 3.0,
-        "max": 7.0,
-        "type": "minecraft:uniform"
-      },
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:golden_melon_slice"
+          "name": "chaosawakens:cats_eye_cluster"
         }
       ],
       "conditions": [
