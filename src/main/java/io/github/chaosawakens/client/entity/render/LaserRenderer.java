@@ -2,13 +2,13 @@ package io.github.chaosawakens.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.chaosawakens.entity.projectile.CAProjectileEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Matrix4f;
@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public abstract class LaserRenderer<R extends CAProjectileEntity> extends EntityRenderer {
+public abstract class LaserRenderer<R extends DamagingProjectileEntity> extends EntityRenderer {
     public LaserRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
     }

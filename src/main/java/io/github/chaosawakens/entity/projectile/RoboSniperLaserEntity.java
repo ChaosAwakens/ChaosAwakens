@@ -6,6 +6,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SSpawnObjectPacket;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RoboSniperLaserEntity extends CAProjectileEntity {
+public class RoboSniperLaserEntity extends DamagingProjectileEntity {
     public RoboSniperLaserEntity(EntityType<RoboSniperLaserEntity> entityType, World worldIn) {
         super(entityType, worldIn);
     }

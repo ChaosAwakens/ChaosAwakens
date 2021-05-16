@@ -21,4 +21,3 @@ public class RoboSniperLaserRender extends LaserRenderer<RoboSniperLaserEntity> 
         return LASER_TEXTURE;
     }
 }
-
