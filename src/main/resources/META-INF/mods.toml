@@ -36,6 +36,13 @@ side="BOTH"
 [[dependencies.chaosawakens]]
 modId="projecte"
 mandatory=false
-versionRange="[PE1.0.1B]"
+versionRange="[PE1.0,]"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.chaosawakens]]
+modId="jeresources"
+mandatory=false
+versionRange="[0.12,]"
 ordering="AFTER"
 side="BOTH"

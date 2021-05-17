@@ -78,10 +78,13 @@ public class ChaosAwakens {
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
 
-		if (ModList.get().isLoaded("projecte"))
-		{
+		if (ModList.get().isLoaded("projecte")) {
 			CAEMCValues.init();
 		}
+
+//		if (ModList.get().isLoaded("jeresources")) {
+//			CAJER.init();
+//		}
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);
