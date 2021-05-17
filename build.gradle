@@ -64,7 +64,10 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.35')
+    implementation fg.deobf("curse.maven:projecte-226410:3223221")
 
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.0.98")
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3312305")
 }
 
 repositories {

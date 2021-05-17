@@ -5,6 +5,7 @@ import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.data.ModItemModelGenerator;
 import io.github.chaosawakens.common.data.ModLootTableProvider;
 import io.github.chaosawakens.common.entity.*;
+import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
@@ -31,6 +32,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -75,6 +77,11 @@ public class ChaosAwakens {
 		
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
+
+		if (ModList.get().isLoaded("projecte"))
+		{
+			CAEMCValues.init();
+		}
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);

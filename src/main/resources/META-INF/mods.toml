@@ -32,3 +32,10 @@ mandatory=true
 versionRange="[3.0,)"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.chaosawakens]]
+modId="projecte"
+mandatory=false
+versionRange="[PE1.0.1B]"
+ordering="AFTER"
+side="BOTH"

@@ -13,10 +13,12 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.server.ServerWorld;
 
-public class ShelterItem extends Item {
+public class StructureItem extends Item {
+    String structureName;
 
-    public ShelterItem(Properties builderIn) {
+    public StructureItem(Properties builderIn, String structureName) {
         super(builderIn);
+        this.structureName = structureName;
     }
 
     @Override
@@ -29,10 +31,10 @@ public class ShelterItem extends Item {
 
         if (world instanceof ServerWorld) {
             Template template = ((ServerWorld) world).getStructureTemplateManager()
-                    .getTemplateDefaulted(new ResourceLocation("chaosawakens", "shelter"));
+                    .getTemplateDefaulted(new ResourceLocation("chaosawakens", structureName));
             if (template != null) {
-                template.func_237144_a_((ServerWorld) world, new BlockPos(x, y, z),
-                        new PlacementSettings().setRotation(Rotation.randomRotation(random)).setMirror(Mirror.NONE).setChunk(null).setIgnoreEntities(false),
+                template.func_237144_a_((ServerWorld) world, new BlockPos(x - template.getSize().getX()/2, y, z - template.getSize().getZ()/2),
+                        new PlacementSettings().setRotation(Rotation.CLOCKWISE_180).setMirror(Mirror.NONE).setChunk(null).setIgnoreEntities(false),
                         (world).rand);
                 context.getPlayer().addStat(Stats.ITEM_USED.get(this));
                 context.getItem().shrink(1);

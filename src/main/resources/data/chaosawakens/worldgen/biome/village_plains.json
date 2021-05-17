@@ -50,6 +50,18 @@
 	"spawners": {
 		"monster": [
 			{
+				"type": "chaosawakens:robo_warrior",
+				"weight": 85,
+				"minCount": 1,
+				"maxCount": 3
+			},
+			{
+				"type": "chaosawakens:robo_sniper",
+				"weight": 75,
+				"minCount": 1,
+				"maxCount": 5
+			},
+			{
 				"type": "minecraft:spider",
 				"weight": 100,
 				"minCount": 4,
@@ -122,26 +134,6 @@
 				"weight": 8,
 				"minCount": 4,
 				"maxCount": 4
-			},
-			{
-				"type": "minecraft:horse",
-				"weight": 5,
-				"minCount": 2,
-				"maxCount": 6
-			},
-			{
-				"type": "minecraft:donkey",
-				"weight": 1,
-				"minCount": 1,
-				"maxCount": 3
-			}
-		],
-		"ambient": [
-			{
-				"type": "minecraft:bat",
-				"weight": 10,
-				"minCount": 8,
-				"maxCount": 8
 			}
 		]
 	},

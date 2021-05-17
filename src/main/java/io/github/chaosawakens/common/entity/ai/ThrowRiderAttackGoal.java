@@ -57,11 +57,11 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
             Entity rider = attacker.getPassengers().get(0);
             attacker.removePassengers();
 
-            rider.addVelocity(0.8, 1, 0.8);
+            rider.addVelocity(0.8, 1.1, 0.8);
 
             if (rider instanceof ServerPlayerEntity) {
                 ServerPlayerEntity player = (ServerPlayerEntity) rider;
-                PacketThrowPlayer message = new PacketThrowPlayer(0.8f, 1, 0.8f);
+                PacketThrowPlayer message = new PacketThrowPlayer(0.8f, 1.1f, 0.8f);
                 PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
             }
         }

@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.ThrowRiderAttackGoal;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -50,7 +49,7 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.75, true));
-		this.goalSelector.addGoal(5, new ThrowRiderAttackGoal(this, 0.125F, false));
+		this.goalSelector.addGoal(6, new ThrowRiderAttackGoal(this, 0.125F, false));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));

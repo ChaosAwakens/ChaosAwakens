@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "uranium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:cats_eye_nugget"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:cats_eye_ingot"
+  }
+}

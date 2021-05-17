@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "projecte:philosophers_stone"
+    },
+    {
+      "tag": "chaosawakens:ingots/pink_tourmaline"
+    },
+    {
+      "tag": "chaosawakens:ingots/pink_tourmaline"
+    },
+    {
+      "tag": "chaosawakens:ingots/pink_tourmaline"
+    },
+    {
+      "tag": "chaosawakens:ingots/pink_tourmaline"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:cats_eye_ingot"
+  }
+}

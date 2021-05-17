@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "projecte:philosophers_stone"
+    },
+    {
+      "tag": "chaosawakens:lumps/copper"
+    },
+    {
+      "tag": "chaosawakens:lumps/copper"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:tin_lump"
+  }
+}
