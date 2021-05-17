@@ -1,7 +1,7 @@
 package io.github.chaosawakens.client.entity.model;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.entity.RainbowAntEntity;
+import io.github.chaosawakens.common.entity.RainbowAntEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;

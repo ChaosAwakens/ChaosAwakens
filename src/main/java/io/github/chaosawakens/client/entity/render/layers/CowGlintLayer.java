@@ -2,7 +2,7 @@ package io.github.chaosawakens.client.entity.render.layers;
 
 
 import io.github.chaosawakens.client.entity.model.EnchantedGoldenAppleCowModel;
-import io.github.chaosawakens.entity.EnchantedGoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.EnergyLayer;
 import net.minecraft.client.renderer.entity.model.EntityModel;

@@ -1,7 +1,7 @@
 package io.github.chaosawakens.client.entity.render;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.entity.projectile.IrukandjiArrowEntity;
+import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;

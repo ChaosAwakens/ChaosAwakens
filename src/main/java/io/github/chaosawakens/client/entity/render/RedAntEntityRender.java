@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.RedAntEntityModel;
-import io.github.chaosawakens.entity.RedAntEntity;
+import io.github.chaosawakens.common.entity.RedAntEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

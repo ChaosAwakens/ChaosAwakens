@@ -1,7 +1,7 @@
 package io.github.chaosawakens.client.entity.render;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.entity.GoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.GoldenAppleCowEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.model.CowModel;

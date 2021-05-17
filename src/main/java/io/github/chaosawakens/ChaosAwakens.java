@@ -1,16 +1,43 @@
 package io.github.chaosawakens;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.mojang.serialization.Codec;
-import io.github.chaosawakens.config.CAConfig;
-import io.github.chaosawakens.data.ModItemModelGenerator;
-import io.github.chaosawakens.data.ModLootTableProvider;
-import io.github.chaosawakens.entity.*;
-import io.github.chaosawakens.network.PacketHandler;
-import io.github.chaosawakens.registry.*;
-import io.github.chaosawakens.tileentity.CATileEntities;
-import io.github.chaosawakens.worldgen.CABiomeFeatures;
-import io.github.chaosawakens.worldgen.ConfiguredStructures;
-import io.github.chaosawakens.worldgen.EventBiomeLoading;
+
+import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.data.ModItemModelGenerator;
+import io.github.chaosawakens.common.data.ModLootTableProvider;
+import io.github.chaosawakens.common.entity.AppleCowEntity;
+import io.github.chaosawakens.common.entity.BeaverEntity;
+import io.github.chaosawakens.common.entity.BrownAntEntity;
+import io.github.chaosawakens.common.entity.CrystalAppleCowEntity;
+import io.github.chaosawakens.common.entity.EmeraldGatorEntity;
+import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.EntEntity;
+import io.github.chaosawakens.common.entity.GoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.RainbowAntEntity;
+import io.github.chaosawakens.common.entity.RedAntEntity;
+import io.github.chaosawakens.common.entity.RoboSniperEntity;
+import io.github.chaosawakens.common.entity.RubyBugEntity;
+import io.github.chaosawakens.common.entity.TermiteEntity;
+import io.github.chaosawakens.common.entity.UnstableAntEntity;
+import io.github.chaosawakens.common.network.PacketHandler;
+import io.github.chaosawakens.common.registry.CABiomes;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CAStructures;
+import io.github.chaosawakens.common.registry.CATileEntities;
+import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
+import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
+import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.RegistryKey;
@@ -39,14 +66,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
-
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
@@ -80,8 +100,6 @@ public class ChaosAwakens {
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);
 		MinecraftForge.EVENT_BUS.register(this);
-		
-		MinecraftForge.EVENT_BUS.register(GameEvents.class);
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}

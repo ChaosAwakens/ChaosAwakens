@@ -3,7 +3,7 @@ package io.github.chaosawakens.client.entity.render;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.EnchantedGoldenAppleCowModel;
 import io.github.chaosawakens.client.entity.render.layers.CowGlintLayer;
-import io.github.chaosawakens.entity.EnchantedGoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
