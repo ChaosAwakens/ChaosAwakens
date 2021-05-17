@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.data;
 
+import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
@@ -11,9 +13,6 @@ import net.minecraft.loot.functions.SetCount;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAItems;
 
 public class ModEntityLootTables extends EntityLootTables {
 
@@ -184,6 +183,58 @@ public class ModEntityLootTables extends EntityLootTables {
                                         .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0.0F, 1.0F)))
                                         .acceptCondition(KilledByPlayer.builder()))));
         registerLootTable(CAEntityTypes.ROBO_SNIPER.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.REDSTONE_BLOCK)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 4.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0.0F, 1.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.REDSTONE)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(20.0F, 32.0F)))
+                                        .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0.0F, 1.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.REPEATER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.COMPARATOR)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.PISTON)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.STICKY_PISTON)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.DROPPER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.DISPENSER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.HOPPER)
+                                        .acceptFunction(SetCount.builder(ConstantRange.of(1)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.OBSERVER)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.REDSTONE_TORCH)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.REDSTONE_LAMP)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))));
+        registerLootTable(CAEntityTypes.ROBO_WARRIOR.get(),
                 LootTable.builder()
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
