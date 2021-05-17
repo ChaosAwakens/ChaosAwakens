@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import io.github.chaosawakens.common.entity.RoboSniperEntity;
+import io.github.chaosawakens.common.entity.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.entity.Entity;
@@ -20,20 +20,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RoboSniperLaserEntity extends DamagingProjectileEntity {
-    public RoboSniperLaserEntity(EntityType<RoboSniperLaserEntity> entityType, World worldIn) {
+public class RoboLaserEntity extends DamagingProjectileEntity {
+
+    public RoboLaserEntity(EntityType<RoboLaserEntity> entityType, World worldIn) {
         super(entityType, worldIn);
     }
 
-    public RoboSniperLaserEntity(World worldIn, RoboSniperEntity p_i47273_2_) {
-        this(CAEntityTypes.ROBO_SNIPER_LASER.get(), worldIn);
+    public RoboLaserEntity(World worldIn, RoboEntity p_i47273_2_) {
+        this(CAEntityTypes.ROBO_LASER.get(), worldIn);
         super.setShooter(p_i47273_2_);
         this.setPosition(p_i47273_2_.getPosX() - (double)(p_i47273_2_.getWidth() + 1.0F) * 0.5D * (double) MathHelper.sin(p_i47273_2_.renderYawOffset * ((float)Math.PI / 180F)), p_i47273_2_.getPosYEye() - (double)0.1F, p_i47273_2_.getPosZ() + (double)(p_i47273_2_.getWidth() + 1.0F) * 0.5D * (double)MathHelper.cos(p_i47273_2_.renderYawOffset * ((float)Math.PI / 180F)));
     }
 
     @OnlyIn(Dist.CLIENT)
-    public RoboSniperLaserEntity(World worldIn, double x, double y, double z, double p_i47274_8_, double p_i47274_10_, double p_i47274_12_) {
-        this(CAEntityTypes.ROBO_SNIPER_LASER.get(), worldIn);
+    public RoboLaserEntity(World worldIn, double x, double y, double z, double p_i47274_8_, double p_i47274_10_, double p_i47274_12_) {
+        this(CAEntityTypes.ROBO_LASER.get(), worldIn);
         this.setPosition(x, y, z);
 
         for(int i = 0; i < 7; ++i) {
@@ -41,6 +42,10 @@ public class RoboSniperLaserEntity extends DamagingProjectileEntity {
             worldIn.addParticle(ParticleTypes.CRIT, x, y, z, p_i47274_8_ * d0, p_i47274_10_, p_i47274_12_ * d0);
         }
         this.setMotion(p_i47274_8_, p_i47274_10_, p_i47274_12_);
+    }
+
+    public RoboLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
+        super(CAEntityTypes.ROBO_LASER.get(), shooter, accelX, accelY, accelZ, worldIn);
     }
 
     public void tick() {
@@ -67,8 +72,8 @@ public class RoboSniperLaserEntity extends DamagingProjectileEntity {
     protected void onEntityHit(EntityRayTraceResult result) {
         super.onEntityHit(result);
         Entity entity = this.getShooter();
-        if (!(entity instanceof RoboSniperEntity) || !(entity instanceof RoboSniperLaserEntity)) {
-            result.getEntity().attackEntityFrom(DamageSource.causeIndirectDamage(this, (LivingEntity)entity).setProjectile(), 7.5F);
+        if (entity instanceof RoboEntity) {
+            result.getEntity().attackEntityFrom(DamageSource.causeIndirectDamage(this, (RoboEntity)entity).setProjectile(), 13.0F);
         }
 
     }

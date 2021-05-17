@@ -1,40 +1,12 @@
 package io.github.chaosawakens;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.data.ModItemModelGenerator;
 import io.github.chaosawakens.common.data.ModLootTableProvider;
-import io.github.chaosawakens.common.entity.AppleCowEntity;
-import io.github.chaosawakens.common.entity.BeaverEntity;
-import io.github.chaosawakens.common.entity.BrownAntEntity;
-import io.github.chaosawakens.common.entity.CrystalAppleCowEntity;
-import io.github.chaosawakens.common.entity.EmeraldGatorEntity;
-import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.EntEntity;
-import io.github.chaosawakens.common.entity.GoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
-import io.github.chaosawakens.common.entity.RainbowAntEntity;
-import io.github.chaosawakens.common.entity.RedAntEntity;
-import io.github.chaosawakens.common.entity.RoboSniperEntity;
-import io.github.chaosawakens.common.entity.RubyBugEntity;
-import io.github.chaosawakens.common.entity.TermiteEntity;
-import io.github.chaosawakens.common.entity.UnstableAntEntity;
+import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.network.PacketHandler;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CAStructures;
-import io.github.chaosawakens.common.registry.CATileEntities;
+import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
@@ -66,7 +38,14 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
@@ -156,7 +135,8 @@ public class ChaosAwakens {
 			GlobalEntityTypeAttributes.put(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().create());
 		});
 
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
