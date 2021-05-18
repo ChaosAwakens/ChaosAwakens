@@ -1,27 +1,43 @@
 package io.github.chaosawakens.client;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.client.entity.render.*;
+import io.github.chaosawakens.client.entity.render.AppleCowRender;
+import io.github.chaosawakens.client.entity.render.BeaverEntityRender;
+import io.github.chaosawakens.client.entity.render.BrownAntEntityRender;
+import io.github.chaosawakens.client.entity.render.CrystalAppleCowRender;
+import io.github.chaosawakens.client.entity.render.EmeraldGatorEntityRender;
+import io.github.chaosawakens.client.entity.render.EnchantedGoldenAppleCowRender;
+import io.github.chaosawakens.client.entity.render.EntEntityRender;
+import io.github.chaosawakens.client.entity.render.GoldenAppleCowRender;
+import io.github.chaosawakens.client.entity.render.HerculesBeetleEntityRender;
+import io.github.chaosawakens.client.entity.render.IrukandjiArrowRender;
+import io.github.chaosawakens.client.entity.render.RainbowAntEntityRender;
+import io.github.chaosawakens.client.entity.render.RedAntEntityRender;
+import io.github.chaosawakens.client.entity.render.RoboLaserRender;
+import io.github.chaosawakens.client.entity.render.RoboSniperEntityRender;
+import io.github.chaosawakens.client.entity.render.RoboWarriorEntityRender;
+import io.github.chaosawakens.client.entity.render.RubyBugEntityRender;
+import io.github.chaosawakens.client.entity.render.TermiteEntityRender;
+import io.github.chaosawakens.client.entity.render.ThunderStaffProjectileRender;
+import io.github.chaosawakens.client.entity.render.UltimateArrowRender;
+import io.github.chaosawakens.client.entity.render.UnstableAntEntityRender;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetupEvent {
 	
-	@SubscribeEvent
-	public static void onClientSetup(FMLClientSetupEvent event) {
+	public static void register() {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::onFMLClientSetupEvent);
+	}
+	
+	public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RUBY_BUG.get(), RubyBugEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENT.get(), EntEntityRender::new);

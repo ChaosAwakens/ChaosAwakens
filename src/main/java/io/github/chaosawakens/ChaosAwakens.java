@@ -1,6 +1,8 @@
 package io.github.chaosawakens;
 
 import com.mojang.serialization.Codec;
+
+import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.data.ModItemModelGenerator;
 import io.github.chaosawakens.common.data.ModLootTableProvider;
@@ -11,6 +13,7 @@ import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
+import io.github.chaosawakens.server.ServerSetupEvent;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.RegistryKey;
@@ -23,6 +26,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -32,6 +36,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -63,12 +68,11 @@ public class ChaosAwakens {
 		INSTANCE = this;
 		GeckoLib.initialize();
 		
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		eventBus.addListener(this::setup);
 		eventBus.addListener(this::gatherData);
+		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetupEvent::register);
 		CABiomes.BIOMES.register(eventBus);
-
 		CAItems.ITEMS.register(eventBus);
 		CABlocks.ITEMS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
@@ -87,7 +91,7 @@ public class ChaosAwakens {
 //		}
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoading);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoadingEvent);
 		MinecraftForge.EVENT_BUS.register(this);
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);

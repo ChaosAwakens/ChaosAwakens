@@ -10,10 +10,10 @@
       "tag": "forge:rods/crystal"
     },
     "X": {
-      "tag": "forge:ingots/pink_tourmaline"
+      "item": "chaosawakens:crystal_wood_planks"
     }
   },
   "result": {
-    "item": "chaosawakens:pink_tourmaline_axe"
+    "item": "chaosawakens:crystal_wood_axe"
   }
 }

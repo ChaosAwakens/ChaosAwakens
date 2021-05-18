@@ -18,7 +18,7 @@ import io.github.chaosawakens.common.registry.CAFeatures;
 public class EventBiomeLoading {
 	
 	@SubscribeEvent
-	public static void onBiomeLoading(final BiomeLoadingEvent event) {
+	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
 		
 		BiomeGenerationSettingsBuilder gen = event.getGeneration();
 		
