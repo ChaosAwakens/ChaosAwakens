@@ -6,18 +6,34 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
+import java.util.function.Predicate;
+
 public class SkateBowItem extends BowItem {
     public SkateBowItem(Properties builder) {
         super(builder);
+    }
+
+    private ItemStack findAmmo(ItemStack shootable, PlayerEntity playerEntity) {
+        Predicate<ItemStack> predicate = ((ShootableItem)shootable.getItem()).getAmmoPredicate();
+        ItemStack itemstack = ShootableItem.getHeldAmmo(playerEntity, predicate);
+        if (!itemstack.isEmpty()) {
+            return itemstack;
+        } else {
+            predicate = ((ShootableItem)shootable.getItem()).getInventoryAmmoPredicate();
+            for(int i = 0; i < playerEntity.inventory.getSizeInventory(); ++i) {
+                ItemStack itemstack1 = playerEntity.inventory.getStackInSlot(i);
+                if (predicate.test(itemstack1)) {
+                    return itemstack1;
+                }
+            }
+            return playerEntity.abilities.isCreativeMode ? new ItemStack(CAItems.IRUKANDJI_ARROW.get()) : ItemStack.EMPTY;
+        }
     }
 
     @Override
@@ -25,7 +41,7 @@ public class SkateBowItem extends BowItem {
         if (entityLiving instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity)entityLiving;
             boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
-            ItemStack itemstack = playerentity.findAmmo(stack);
+            ItemStack itemstack = findAmmo(stack,playerentity);
 
             int i = this.getUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, !itemstack.isEmpty() || flag);
@@ -40,7 +56,7 @@ public class SkateBowItem extends BowItem {
                 if (!((double)f < 0.1D)) {
                     boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
                     if (!worldIn.isRemote) {
-                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : CAItems.IRUKANDJI_ARROW.get());
                         AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
                         abstractarrowentity = customArrow(abstractarrowentity);
                         abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
@@ -63,7 +79,7 @@ public class SkateBowItem extends BowItem {
                         }
 
                         stack.damageItem(1, playerentity, (player) -> player.sendBreakAnimation(playerentity.getActiveHand()));
-                        if (flag1 || playerentity.abilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW)) {
+                        if (flag1 || playerentity.abilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW || itemstack.getItem() == Items.ARROW)) {
                             abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
                         }
 

@@ -27,8 +27,8 @@ public class ModBlockLootTables extends BlockLootTables
         registerLootTable(CABlocks.SALT_ORE.get(), (ore) -> randomDropping(CAItems.SALT.get(), 4, 8));
         registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
 
-        registerDropSelfLootTable(CABlocks.ALUMINIUM_ORE.get());
-        registerDropSelfLootTable(CABlocks.ALUMINIUM_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.ALUMINUM_ORE.get());
+        registerDropSelfLootTable(CABlocks.ALUMINUM_BLOCK.get());
         registerDropSelfLootTable(CABlocks.AMETHYST_BLOCK.get());
         registerDropSelfLootTable(CABlocks.BROWN_ANT_NEST.get());
         registerDropSelfLootTable(CABlocks.CATS_EYE_BLOCK.get());

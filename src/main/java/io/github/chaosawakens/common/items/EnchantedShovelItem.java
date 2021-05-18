@@ -40,7 +40,7 @@ public class EnchantedShovelItem extends ShovelItem {
 	}
 	
 	public boolean hasEffect(ItemStack stack) {
-		return true;
+		return CAConfig.COMMON.enableAutoEnchanting.get();
 	}
 	
 }

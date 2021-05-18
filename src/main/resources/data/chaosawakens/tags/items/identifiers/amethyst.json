@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:amethyst",
+    "chaosawakens:amethyst_block",
+    "chaosawakens:amethyst_ore",
+    "chaosawakens:amethyst_helmet",
+    "chaosawakens:amethyst_chestplate",
+    "chaosawakens:amethyst_leggings",
+    "chaosawakens:amethyst_boots",
+    "chaosawakens:amethyst_sword",
+    "chaosawakens:amethyst_shovel",
+    "chaosawakens:amethyst_pickaxe",
+    "chaosawakens:amethyst_axe",
+    "chaosawakens:amethyst_hoe"
+  ]
+}

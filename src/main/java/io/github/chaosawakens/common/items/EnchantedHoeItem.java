@@ -40,7 +40,7 @@ public class EnchantedHoeItem extends HoeItem {
 	}
 	
 	public boolean hasEffect(ItemStack stack) {
-		return true;
+		return CAConfig.COMMON.enableAutoEnchanting.get();
 	}
 	
 }

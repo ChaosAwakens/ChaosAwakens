@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:tin_lump",
+    "chaosawakens:tin_block",
+    "chaosawakens:tin_ore",
+    "chaosawakens:tin_helmet",
+    "chaosawakens:tin_chestplate",
+    "chaosawakens:tin_leggings",
+    "chaosawakens:tin_boots",
+    "chaosawakens:tin_sword",
+    "chaosawakens:tin_shovel",
+    "chaosawakens:tin_pickaxe",
+    "chaosawakens:tin_axe",
+    "chaosawakens:tin_hoe"
+  ]
+}

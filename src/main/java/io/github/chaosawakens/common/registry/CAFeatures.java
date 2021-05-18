@@ -16,7 +16,7 @@ public class CAFeatures {
     public static final ConfiguredFeature<?, ?> ORE_URANIUM = register("ore_uranium", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.URANIUM_ORE, 3)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12, 12))).square().count(2));
     public static final ConfiguredFeature<?, ?> ORE_TITANIUM = register("ore_titanium", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.TITANIUM_ORE, 3)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12, 12))).square().count(2));
     public static final ConfiguredFeature<?, ?> ORE_TIGERS_EYE_ORE = register("ore_tigers_eye_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.TIGERS_EYE_ORE, 7)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 24))).square().count(5));
-    public static final ConfiguredFeature<?, ?> ORE_ALUMINIUM = register("ore_aluminium", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.ALUMINIUM_ORE, 5)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(28, 24))).square().count(8));
+    public static final ConfiguredFeature<?, ?> ORE_ALUMINUM = register("ore_aluminum", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.ALUMINIUM_ORE, 5)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(28, 24))).square().count(8));
     public static final ConfiguredFeature<?, ?> ORE_COPPER = register("ore_copper", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.COPPER_ORE, 5)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 12))).square().count(6));
     public static final ConfiguredFeature<?, ?> ORE_TIN = register("ore_tin", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.TIN_ORE, 4)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 12))).square().count(5));
     public static final ConfiguredFeature<?, ?> ORE_SILVER = register("ore_silver", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.SILVER_ORE, 3)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(18, 12))).square().count(4));
@@ -39,7 +39,7 @@ public class CAFeatures {
         protected static final BlockState URANIUM_ORE = CABlocks.URANIUM_ORE.get().getDefaultState();
         protected static final BlockState TITANIUM_ORE = CABlocks.TITANIUM_ORE.get().getDefaultState();
         protected static final BlockState TIGERS_EYE_ORE = CABlocks.TIGERS_EYE_ORE.get().getDefaultState();
-        protected static final BlockState ALUMINIUM_ORE = CABlocks.ALUMINIUM_ORE.get().getDefaultState();
+        protected static final BlockState ALUMINIUM_ORE = CABlocks.ALUMINUM_ORE.get().getDefaultState();
         protected static final BlockState COPPER_ORE = CABlocks.COPPER_ORE.get().getDefaultState();
         protected static final BlockState TIN_ORE = CABlocks.TIN_ORE.get().getDefaultState();
         protected static final BlockState SILVER_ORE = CABlocks.SILVER_ORE.get().getDefaultState();

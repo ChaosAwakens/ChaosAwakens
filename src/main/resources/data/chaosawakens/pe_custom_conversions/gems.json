@@ -1,22 +1,9 @@
 {
-  "comment": "Sets default conversions for various metals from other mods and their default values.",
   "values": {
     "before": {
-      "#chaosawakens:gems/tigers_eye": 24288,
-      "#chaosawakens:gems/amethyst": 32768,
-      "#forge:gems/ruby": 65536,
-      "#forge:ingots/aluminium": 4096,
-      "#forge:ingots/titanium": 131072,
-      "#forge:ingots/uranium": 131072,
-      "#chaosawakens:lumps/copper": 1024,
-      "#chaosawakens:lumps/tin": 2048,
-      "#chaosawakens:lumps/silver": 4096,
-      "#chaosawakens:lumps/platinum": 8192,
-      "#chaosawakens:ingots/pink_tourmaline": 2048,
-      "#chaosawakens:ingots/cats_eye": 8192,
-      "#chaosawakens:food/caseeds": 16,
-      "#chaosawakens:food/caplants": 64,
-      "#chaosawakens:food/cafish": 64
+      "#chaosawakens:identifiers/tigers_eye": 24288,
+      "#chaosawakens:identifiers/amethyst": 32768,
+      "#chaosawakens:identifiers/ruby": 65536
     }
   }
 }
