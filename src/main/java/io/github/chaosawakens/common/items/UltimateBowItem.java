@@ -109,7 +109,7 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 	}
 	
 	public boolean hasEffect(ItemStack stack) {
-		return true;
+		return CAConfig.COMMON.enableAutoEnchanting.get();
 	}
 	
 	public AbstractArrowEntity createArrow(World worldIn, LivingEntity shooter) {

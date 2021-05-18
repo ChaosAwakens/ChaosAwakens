@@ -40,7 +40,7 @@ public class EnchantedSwordItem extends SwordItem {
 	}
 	
 	public boolean hasEffect(ItemStack stack) {
-		return true;
+		return CAConfig.COMMON.enableAutoEnchanting.get();
 	}
 	
 }

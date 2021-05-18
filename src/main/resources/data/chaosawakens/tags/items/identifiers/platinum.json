@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:platinum_lump",
+    "chaosawakens:platinum_block",
+    "chaosawakens:platinum_ore",
+    "chaosawakens:platinum_helmet",
+    "chaosawakens:platinum_chestplate",
+    "chaosawakens:platinum_leggings",
+    "chaosawakens:platinum_boots",
+    "chaosawakens:platinum_sword",
+    "chaosawakens:platinum_shovel",
+    "chaosawakens:platinum_pickaxe",
+    "chaosawakens:platinum_axe",
+    "chaosawakens:platinum_hoe"
+  ]
+}

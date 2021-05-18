@@ -59,7 +59,7 @@ public class EventBiomeLoading {
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_URANIUM);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TITANIUM);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIGERS_EYE_ORE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_ALUMINIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_ALUMINUM);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_COPPER);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIN);
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SILVER);

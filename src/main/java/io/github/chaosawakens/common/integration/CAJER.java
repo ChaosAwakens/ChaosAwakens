@@ -13,7 +13,7 @@ public class CAJER {
 
     private static void registerOres() {
         JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.AMETHYST_ORE.get()), new DistributionTriangular(28, 24, 4));
-        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.ALUMINIUM_ORE.get()), new DistributionTriangular(28, 24, 8));
+        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.ALUMINUM_ORE.get()), new DistributionTriangular(28, 24, 8));
         JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.RUBY_ORE.get()), new DistributionTriangular(24, 24, 28));
         JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.TIGERS_EYE_ORE.get()), new DistributionTriangular(24, 24, 5));
 

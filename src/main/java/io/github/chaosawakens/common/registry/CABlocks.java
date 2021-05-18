@@ -47,7 +47,7 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> TIGERS_EYE_ORE = registerBlock("tigers_eye_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> TITANIUM_ORE = registerBlock("titanium_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(5).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> URANIUM_ORE = registerBlock("uranium_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(5).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> ALUMINIUM_ORE = registerBlock("aluminium_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> ALUMINUM_ORE = registerBlock("aluminum_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> SALT_ORE = registerBlock("salt_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.COAL_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> COPPER_ORE = registerBlock("copper_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> TIN_ORE = registerBlock("tin_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.DIAMOND_ORE).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
@@ -59,24 +59,24 @@ public class CABlocks {
 	public static final RegistryObject<TermiteInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new TermiteInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
 
 	// MOB ORES
-	public static final RegistryObject<CAOreBlock> FOSSILISED_ENT = registerBlock("fossilised_ent", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1), true), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1), true), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> FOSSILISED_RUBY_BUG = registerBlock("fossilised_ruby_bug", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1), true), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> FOSSILISED_EMERALD_GATOR = registerBlock("fossilised_emerald_gator", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1), true), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_ENT = registerBlock("fossilised_ent", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool(), true), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool(), true), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_RUBY_BUG = registerBlock("fossilised_ruby_bug", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool(), true), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_EMERALD_GATOR = registerBlock("fossilised_emerald_gator", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool(), true), CAItemGroups.blocksItemGroup);
 
 	// MINERAL BLOCKS
-	public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> TIGERS_EYE_BLOCK = registerBlock("tigers_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> TITANIUM_BLOCK = registerBlock("titanium_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> COPPER_BLOCK = registerBlock("copper_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(1)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(1)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> SILVER_BLOCK = registerBlock("silver_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> PLATINUM_BLOCK = registerBlock("platinum_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> PINK_TOURMALINE_BLOCK = registerBlock("pink_tourmaline_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> CATS_EYE_BLOCK = registerBlock("cats_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> TIGERS_EYE_BLOCK = registerBlock("tigers_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> TITANIUM_BLOCK = registerBlock("titanium_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(3).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> ALUMINUM_BLOCK = registerBlock("aluminum_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> COPPER_BLOCK = registerBlock("copper_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(1).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(1).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> SILVER_BLOCK = registerBlock("silver_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> PLATINUM_BLOCK = registerBlock("platinum_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> PINK_TOURMALINE_BLOCK = registerBlock("pink_tourmaline_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).setRequiresTool().setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CATS_EYE_BLOCK = registerBlock("cats_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).setRequiresTool().setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 
 	// ANT NESTS
 	public static final RegistryObject<Block> RED_ANT_NEST = registerBlock("red_ant_nest", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
@@ -86,8 +86,8 @@ public class CABlocks {
 	public static final RegistryObject<Block> TERMITE_NEST = registerBlock("termite_nest", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
 
 	// CRYSTAL DIMENSION
-	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> KYANITE = registerBlock("kyanite", () -> new Block(Block.Properties.from(Blocks.STONE).setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.STONE).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> KYANITE = registerBlock("kyanite", () -> new Block(Block.Properties.from(Blocks.STONE).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_LOG = registerBlock("crystal_log", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_WOOD = registerBlock("crystal_wood", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_WOOD).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> CRYSTAL_WOOD_PLANKS = registerBlock("crystal_wood_planks", () -> new Block(Block.Properties.from(Blocks.OAK_PLANKS).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
@@ -101,6 +101,7 @@ public class CABlocks {
 	public static final RegistryObject<BuddingBlock> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(CABlocks::_false), CATS_EYE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CrystalCraftingTableBlock> CRYSTAL_CRAFTING_TABLE = registerBlock("crystal_crafting_table", () -> new CrystalCraftingTableBlock(Block.Properties.from(Blocks.CRAFTING_TABLE).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<FurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new FurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(CABlocks::_false).notSolid().setLightLevel(getLightValueLit(13))), CAItemGroups.blocksItemGroup);
+
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
 		return registerBlock(name,supplier,itemGroup,true);

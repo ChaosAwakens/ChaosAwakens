@@ -24,6 +24,7 @@ public class PeacockBootsItem extends ArmorItem {
 
     public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
         if (!CAConfig.COMMON.enableAutoEnchanting.get() || enchantmentIds.length < 1) return;
+        if (stack.isEnchanted())return;
         for (int i = 0; i < enchantmentIds.length; i++) {
             stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
         }
@@ -31,10 +32,9 @@ public class PeacockBootsItem extends ArmorItem {
 
     public void inventoryTick(ItemStack stack, World worldInD, Entity entityIn, int itemSlot, boolean isSelected) {
         if (!CAConfig.COMMON.enableAutoEnchanting.get() || enchantmentIds.length < 1) return;
-        if (EnchantmentHelper.getEnchantmentLevel(enchantmentIds[0],stack) <= 0) {
-            for (int i = 0; i < enchantmentIds.length; i++) {
-                stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
-            }
+        if (stack.isEnchanted())return;
+        for (int i = 0; i < enchantmentIds.length; i++) {
+            stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
         }
     }
 
@@ -45,7 +45,7 @@ public class PeacockBootsItem extends ArmorItem {
     }
 
     public boolean hasEffect(ItemStack stack) {
-        return enchantmentIds.length > 0;
+        return enchantmentIds.length > 0 && CAConfig.COMMON.enableAutoEnchanting.get();
     }
 
 }

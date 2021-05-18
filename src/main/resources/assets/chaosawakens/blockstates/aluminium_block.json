@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"": {
-			"model": "chaosawakens:block/aluminium_block"
+			"model": "chaosawakens:block/aluminum_block"
 		}
 	}
 }

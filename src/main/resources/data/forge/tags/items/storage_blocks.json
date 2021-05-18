@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:storage_blocks/aluminium",
+    "#forge:storage_blocks/aluminum",
     "#forge:storage_blocks/amethyst",
     "#forge:storage_blocks/ruby",
     "#forge:storage_blocks/tigers_eye",

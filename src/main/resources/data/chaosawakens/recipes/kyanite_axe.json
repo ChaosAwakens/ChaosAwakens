@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "X#",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/crystal"
+    },
+    "X": {
+      "item": "chaosawakens:kyanite"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:kyanite_axe"
+  }
+}
