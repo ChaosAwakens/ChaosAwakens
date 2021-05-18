@@ -70,13 +70,12 @@ public class ChaosAwakens {
 		eventBus.addListener(this::setup);
 		eventBus.addListener(this::gatherData);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetupEvent::register);
+		
 		CABiomes.BIOMES.register(eventBus);
 		CAItems.ITEMS.register(eventBus);
 		CABlocks.ITEMS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
-		
 		CATileEntities.TILE_ENTITIES.register(eventBus);
-		
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
 
