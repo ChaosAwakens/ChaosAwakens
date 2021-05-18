@@ -1,7 +1,6 @@
 package io.github.chaosawakens;
 
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.data.ModItemModelGenerator;
@@ -13,7 +12,6 @@ import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
-import io.github.chaosawakens.server.ServerSetupEvent;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.RegistryKey;

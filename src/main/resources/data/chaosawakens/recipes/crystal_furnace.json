@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "chaosawakens:kyanite"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:crystal_furnace"
+  }
+}

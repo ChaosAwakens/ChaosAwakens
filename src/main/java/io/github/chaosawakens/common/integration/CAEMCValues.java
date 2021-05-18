@@ -37,14 +37,10 @@ public class CAEMCValues implements IEMCMapper<NormalizedSimpleStack, Long> {
         registerCustomEMC(NSSItem.createItem(CABlocks.KYANITE.getId()), 2);
         registerCustomEMC(NSSItem.createItem(CABlocks.CRYSTAL_LOG.getId()), 64);
         registerCustomEMC(NSSItem.createItem(CABlocks.CRYSTAL_WOOD.getId()), 64);
-        registerCustomEMC(NSSItem.createItem(CABlocks.CRYSTAL_WOOD_PLANKS.getId()), 16);
         registerCustomEMC(NSSItem.createItem(CABlocks.GREEN_CRYSTAL_LEAVES.getId()), 2);
         registerCustomEMC(NSSItem.createItem(CABlocks.RED_CRYSTAL_LEAVES.getId()), 2);
         registerCustomEMC(NSSItem.createItem(CABlocks.YELLOW_CRYSTAL_LEAVES.getId()), 2);
-        registerCustomEMC(NSSItem.createItem(CABlocks.CRYSTAL_CRAFTING_TABLE.getId()), 64);
-        registerCustomEMC(NSSItem.createItem(CABlocks.CRYSTAL_FURNACE.getId()), 16);
         registerCustomEMC(NSSItem.createItem(CABlocks.GOLDEN_MELON.getId()), 16528);
-        registerCustomEMC(NSSItem.createItem(CAItems.CRYSTAL_WOOD_SHARD.getId()), 8);
         registerCustomEMC(NSSItem.createItem(CAItems.LAVA_EEL.getId()), 128);
         registerCustomEMC(NSSItem.createItem(CAItems.SALT.getId()), 16);
         registerCustomEMC(NSSItem.createItem(CAItems.CRYSTAL_APPLE.getId()), 33024);
