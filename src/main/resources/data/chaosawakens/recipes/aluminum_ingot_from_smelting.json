@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "chaosawakens:aluminium_ore"
+    "item": "chaosawakens:aluminum_ore"
   },
-  "result": "chaosawakens:aluminium_ingot",
+  "result": "chaosawakens:aluminum_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }
