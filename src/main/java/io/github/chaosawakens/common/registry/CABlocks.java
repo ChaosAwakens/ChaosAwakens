@@ -29,7 +29,7 @@ public class CABlocks {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
 
 	// SHINY FOODS
-//	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsBlock(Block.Properties.from(Blocks.SUGAR_CANE)), CAItemGroups.foodItemGroup);
+//	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsBlock(Block.Properties.from(Blocks.SUGAR_CANE)), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon", () -> new GoldenMelonBlock(Block.Properties.from(Blocks.MELON).harvestTool(ToolType.AXE)), CAItemGroups.foodItemGroup);
 	public static final RegistryObject<Block> ATTACHED_GOLDEN_MELON_STEM = registerBlock("attached_golden_melon_stem", () -> new AttachedStemBlock((StemGrownBlock)GOLDEN_MELON.get(), AbstractBlock.Properties.from(Blocks.ATTACHED_MELON_STEM)), null);
 	public static final RegistryObject<Block> GOLDEN_MELON_STEM = registerBlock("golden_melon_stem", () -> new StemBlock((StemGrownBlock)GOLDEN_MELON.get(), AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.STEM)), null);

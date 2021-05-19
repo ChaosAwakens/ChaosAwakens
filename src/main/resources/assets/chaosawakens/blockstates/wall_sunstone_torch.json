@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east": { "model": "chaosawakens:block/wall_sunstone_torch" },
+        "facing=south": { "model": "chaosawakens:block/wall_sunstone_torch", "y": 90 },
+        "facing=west": { "model": "chaosawakens:block/wall_sunstone_torch", "y": 180 },
+        "facing=north": { "model": "chaosawakens:block/wall_sunstone_torch", "y": 270 }
+    }
+}
