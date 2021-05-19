@@ -4,6 +4,8 @@
 	"itemGroup.chaosawakens_food_item_group": "Chaos Awakens Food",
 	"itemGroup.chaosawakens_equipment_item_group": "Chaos Awakens Equipment",
 	"itemGroup.chaosawakens_eggs_item_group": "Chaos Awakens Spawn Eggs",
+	
+	"container.crystalcrafting":"Crystal Crafting Table",
 
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Red Ant",
