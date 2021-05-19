@@ -6,6 +6,7 @@ import io.github.chaosawakens.common.items.EnchantedBlockItem;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.inventory.container.FurnaceContainer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -100,7 +101,7 @@ public class CABlocks {
 	public static final RegistryObject<BuddingBlock> BUDDING_PINK_TOURMALINE = registerBlock("budding_pink_tourmaline", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(CABlocks::_false), PINK_TOURMALINE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<BuddingBlock> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(CABlocks::_false), CATS_EYE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CrystalCraftingTableBlock> CRYSTAL_CRAFTING_TABLE = registerBlock("crystal_crafting_table", () -> new CrystalCraftingTableBlock(Block.Properties.from(Blocks.CRAFTING_TABLE).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<FurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new FurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(CABlocks::_false).notSolid().setLightLevel(getLightValueLit(13))), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CrystalFurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new CrystalFurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(CABlocks::_false).notSolid().setLightLevel(getLightValueLit(13))), CAItemGroups.blocksItemGroup);
 
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {

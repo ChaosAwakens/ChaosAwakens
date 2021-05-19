@@ -143,8 +143,8 @@ public class ModItemModelGenerator extends ItemModelProvider {
 				name = name.substring(name.indexOf("_") + 1);
 
 			/*
-			 *  Skip elements that have no texture at assets/chaosawakens/textures
-			 *  or already have an existing model at assets/chaosawakens/models
+			 *  Skip elements that have no texture at assets/chaosawakens/textures/item
+			 *  or already have an existing model at assets/chaosawakens/models/item
 			 */
 			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
@@ -155,14 +155,15 @@ public class ModItemModelGenerator extends ItemModelProvider {
 		}
 	}
 
-	private void generateBlockItems(Collection<RegistryObject<Item>> itemBlocks) {
+	private void generateBlockItems(final Collection<RegistryObject<Item>> itemBlocks) {
 		for (RegistryObject<Item> item : itemBlocks) {
 			String name = item.getId().getPath();
 
 			/*
-			 *  Skip elements that have no block model inside of assets/chaosawakens/models
-			 *  or already have an existing item model at the same path
+			 *  Skip elements that have no block model inside of assets/chaosawakens/models/block
+			 *  or already have an existing item model at assets/chaosawakens/models/item
 			 */
+			
 			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "block/" + name), MODEL) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
 			
