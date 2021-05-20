@@ -33,6 +33,7 @@ public class EventBiomeLoading {
 		}
 		
 		if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
+			gen.withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAFeatures.GREEN_CRYSTAL_TREE);
 			addMiningDimOres(gen);
 		}
 	}
@@ -53,23 +54,23 @@ public class EventBiomeLoading {
 	}
 
 	public static void addMiningDimOres(BiomeGenerationSettingsBuilder gen) {
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_LAVA);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_NO_SURFACE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_AMETHYST);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_URANIUM);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TITANIUM);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIGERS_EYE_ORE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_ALUMINUM);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_COPPER);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIN);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SILVER);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_PLATINUM);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SALT);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_ENT);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_HERCULES_BEETLE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_RUBY_BUG);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_EMERALD_GATOR);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.RED_ANT_INFESTED_ORE);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.TERMITE_INFESTED_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_RUBY_LAVA);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_RUBY_NO_SURFACE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_AMETHYST);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_URANIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TITANIUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TIGERS_EYE_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_ALUMINUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_COPPER);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TIN);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SILVER);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_PLATINUM);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SALT);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_FOSSILISED_ENT);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_FOSSILISED_HERCULES_BEETLE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_FOSSILISED_RUBY_BUG);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_FOSSILISED_EMERALD_GATOR);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_RED_ANT_INFESTED_ORE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_TERMITE_INFESTED_ORE);
 	}
 }

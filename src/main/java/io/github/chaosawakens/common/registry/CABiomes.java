@@ -16,11 +16,12 @@ public class CABiomes {
 	public static RegistryObject<Biome> MINING_SPIKES = BIOMES.register("mining_spikes", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> VILLAGE_PLAINS = BIOMES.register("village_plains", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> DANGER_ISLANDS = BIOMES.register("danger_islands", BiomeMaker::makeVoidBiome);
-
-
+	public static RegistryObject<Biome> CRYSTAL_PLAINS = BIOMES.register("crystal_plains", BiomeMaker::makeVoidBiome);
+	
 	public static final class Type {
 		public static final BiomeDictionary.Type MINING_DIMENSION = BiomeDictionary.Type.getType("MINING");
 		public static final BiomeDictionary.Type VILLAGE_DIMENSION = BiomeDictionary.Type.getType("VILLAGE");
 		public static final BiomeDictionary.Type DANGER_DIMENSION = BiomeDictionary.Type.getType("DANGER");
+		public static final BiomeDictionary.Type CRYSTAL_DIMENSION = BiomeDictionary.Type.getType("CRYSTAL");
 	}
 }

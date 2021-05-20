@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.data;
+package io.github.chaosawakens.data;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;

@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.data;
+package io.github.chaosawakens.data;
 
 import net.minecraft.data.loot.FishingLootTables;
 import net.minecraft.item.Items;

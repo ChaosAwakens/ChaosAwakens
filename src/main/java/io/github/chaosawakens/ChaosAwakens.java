@@ -3,8 +3,6 @@ package io.github.chaosawakens;
 import com.mojang.serialization.Codec;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.data.ModItemModelGenerator;
-import io.github.chaosawakens.common.data.ModLootTableProvider;
 import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.network.PacketHandler;
@@ -12,6 +10,8 @@ import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
+import io.github.chaosawakens.data.ModItemModelGenerator;
+import io.github.chaosawakens.data.ModLootTableProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.RegistryKey;
@@ -154,7 +154,7 @@ public class ChaosAwakens {
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_SPIKES.getId()), CABiomes.Type.MINING_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
-
+		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
 	}
 	
 	@SubscribeEvent(priority = EventPriority.HIGH)
