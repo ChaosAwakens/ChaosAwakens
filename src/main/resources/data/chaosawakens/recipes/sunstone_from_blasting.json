@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "chaosawakens:sunstone_ore"
+  },
+  "result": "chaosawakens:sunstone",
+  "experience": 1.0,
+  "cookingtime": 100
+}

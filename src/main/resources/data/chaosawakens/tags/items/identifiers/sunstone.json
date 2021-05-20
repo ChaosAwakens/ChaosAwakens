@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:sunstone",
+    "chaosawakens:sunstone_block",
+    "chaosawakens:sunstone_ore",
+    "chaosawakens:sunstone_torch"
+  ]
+}

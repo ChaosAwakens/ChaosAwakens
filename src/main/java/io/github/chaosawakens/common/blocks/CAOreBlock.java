@@ -29,6 +29,10 @@ public class CAOreBlock extends Block {
             return MathHelper.nextInt(rand, 4, 9);
         } else if (CABlocks.TIGERS_EYE_ORE.get().equals(this)) {
             return MathHelper.nextInt(rand, 4, 8);
+        } else if (CABlocks.BLOODSTONE_ORE.get().equals(this)) {
+            return MathHelper.nextInt(rand, 2, 5);
+        } else if (CABlocks.SUNSTONE_ORE.get().equals(this)) {
+            return MathHelper.nextInt(rand, 3, 6);
         } else if (CABlocks.SALT_ORE.get().equals(this)) {
             return MathHelper.nextInt(rand, 0, 2);
         }

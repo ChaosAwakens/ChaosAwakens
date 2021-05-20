@@ -26,6 +26,8 @@ public class ModBlockLootTables extends BlockLootTables
         registerLootTable(CABlocks.RUBY_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.RUBY.get()));
         registerLootTable(CABlocks.SALT_ORE.get(), (ore) -> randomDropping(CAItems.SALT.get(), 4, 8));
         registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
+        registerLootTable(CABlocks.SUNSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
+        registerLootTable(CABlocks.BLOODSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
 
         registerDropSelfLootTable(CABlocks.ALUMINUM_ORE.get());
         registerDropSelfLootTable(CABlocks.ALUMINUM_BLOCK.get());
@@ -69,6 +71,10 @@ public class ModBlockLootTables extends BlockLootTables
         registerDropSelfLootTable(CABlocks.URANIUM_BLOCK.get());
         registerDropSelfLootTable(CABlocks.URANIUM_ORE.get());
         registerDropSelfLootTable(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
+        registerDropSelfLootTable(CABlocks.CRYSTAL_TORCH.get());
+        registerDropSelfLootTable(CABlocks.SUNSTONE_TORCH.get());
+        registerDropSelfLootTable(CABlocks.SUNSTONE_BLOCK.get());
+        registerDropSelfLootTable(CABlocks.BLOODSTONE_BLOCK.get());
     }
 
     protected static LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {
