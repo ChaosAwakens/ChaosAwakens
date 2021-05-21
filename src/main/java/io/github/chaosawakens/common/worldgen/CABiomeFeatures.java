@@ -25,11 +25,17 @@ public class CABiomeFeatures {
 	
 	private static final Consumer<MobSpawnInfoBuilder> SWAMP_MOBS = (builder) -> {
 		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 25, 3, 6));
-		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 3, 1, 2));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 20, 1, 2));
 	};
 
 	private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
 		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 15, 1, 2));
+	};
+
+	private static final Consumer<MobSpawnInfoBuilder> PLAINS_MOBS = (builder) -> {
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.APPLE_COW.get(), 7, 4, 4));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.GOLDEN_APPLE_COW.get(), 4, 3, 3));
+		builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), 1, 1, 1));
 	};
 
 	public static void addMobSpawns(BiomeLoadingEvent event) {
@@ -38,6 +44,8 @@ public class CABiomeFeatures {
 		switch (event.getCategory()) {
 			case SWAMP:
 				SWAMP_MOBS.accept(spawnInfoBuilder);
+			case PLAINS:
+				PLAINS_MOBS.accept(spawnInfoBuilder);
 			case FOREST:
 				FOREST_MOBS.accept(spawnInfoBuilder);				
 			case THEEND:
