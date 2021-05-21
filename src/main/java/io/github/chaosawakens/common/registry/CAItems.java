@@ -164,13 +164,17 @@ public class CAItems {
 	public static final RegistryObject<Item> PINK_TOURMALINE_NUGGET = ITEMS.register("pink_tourmaline_nugget", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> CATS_EYE_INGOT = ITEMS.register("cats_eye_ingot", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> CATS_EYE_NUGGET = ITEMS.register("cats_eye_nugget", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
-	
+	public static final RegistryObject<Item> SUNSTONE = ITEMS.register("sunstone", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
+	public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
+
 	// MISC
 	public static final RegistryObject<Item> CRYSTAL_WOOD_SHARD = ITEMS.register("crystal_wood_shard", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<IrukandjiArrowItem> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new IrukandjiArrowItem(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
-	
+	public static final RegistryObject<WallOrFloorItem> CRYSTAL_TORCH = ITEMS.register("crystal_torch", () -> new WallOrFloorItem(CABlocks.CRYSTAL_TORCH.get(), CABlocks.WALL_CRYSTAL_TORCH.get(), new Item.Properties().group(CAItemGroups.blocksItemGroup)));
+	public static final RegistryObject<WallOrFloorItem> SUNSTONE_TORCH = ITEMS.register("sunstone_torch", () -> new WallOrFloorItem(CABlocks.SUNSTONE_TORCH.get(), CABlocks.WALL_SUNSTONE_TORCH.get(), new Item.Properties().group(CAItemGroups.blocksItemGroup)));
+
 	// TOOLS
 	// Ultimate
 	public static final RegistryObject<SwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.ultimateSwordDamage.get() - 37), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup), new Enchantment[] { Enchantments.SHARPNESS, Enchantments.SMITE, Enchantments.BANE_OF_ARTHROPODS, Enchantments.KNOCKBACK, Enchantments.LOOTING, Enchantments.UNBREAKING, Enchantments.FIRE_ASPECT }, new int[] { 5, 5, 5, 3, 3, 2, 2 }));

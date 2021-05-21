@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "chaosawakens:item/cats_eye_axe"
+  }
+}

@@ -9,7 +9,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CADimensions {
-	
+
+	public static final RegistryKey<World> CRYSTAL_DIMENSION_LEGACY = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(ChaosAwakens.MODID + ":crystal_dimension"));
 	public static final RegistryKey<World> MINING_DIMENSION = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(ChaosAwakens.MODID + ":mining_dimension"));
 	public static final RegistryKey<World> VILLAGE_MANIA = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(ChaosAwakens.MODID + ":village_mania"));
 	public static final RegistryKey<World> DANGER_ISLANDS = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(ChaosAwakens.MODID + ":danger_islands"));
