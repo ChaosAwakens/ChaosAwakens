@@ -4,6 +4,7 @@ import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -49,7 +50,9 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 			}
 		}
 	}
-	
+
+
+
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
@@ -65,9 +68,20 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 				abstractarrowentity = customArrow(abstractarrowentity);
 				abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
 				abstractarrowentity.setIsCritical(true);
-				abstractarrowentity.setDamage(abstractarrowentity.getDamage() + 3D);
-				abstractarrowentity.setKnockbackStrength(2);
-				abstractarrowentity.setFire(300);
+				abstractarrowentity.setFire(EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0 ? 250 : 75);
+
+				int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+				if (!CAConfig.COMMON.enableAutoEnchanting.get()) {
+					abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double) j * 0.5D + 2D);
+				}
+				else {
+					abstractarrowentity.setDamage(abstractarrowentity.getDamage() + 3D);
+				}
+
+				int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+				if (!CAConfig.COMMON.enableAutoEnchanting.get()) {
+					abstractarrowentity.setKnockbackStrength(k+1);
+				}
 				
 				if (!playerentity.isCreative()) {
 					stack.damageItem(1, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));

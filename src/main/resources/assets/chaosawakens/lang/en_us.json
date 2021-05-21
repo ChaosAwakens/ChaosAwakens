@@ -4,8 +4,8 @@
 	"itemGroup.chaosawakens_food_item_group": "Chaos Awakens Food",
 	"itemGroup.chaosawakens_equipment_item_group": "Chaos Awakens Equipment",
 	"itemGroup.chaosawakens_eggs_item_group": "Chaos Awakens Spawn Eggs",
-	
-	"container.crystalcrafting":"Crystal Crafting Table",
+
+	"container.crystal_crafting_table": "Crystal Crafting Table",
 
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Red Ant",
@@ -180,6 +180,7 @@
 	"block.chaosawakens.uranium_block": "Block of Uranium",
 	"item.chaosawakens.ultimate_sword": "The Ultimate Sword",
 	"item.chaosawakens.ultimate_bow": "The Ultimate Bow",
+	"item.chaosawakens.ultimate_fishing_rod": "The Ultimate Fishing Rod",
 	"item.chaosawakens.ultimate_pickaxe": "The Ultimate Pickaxe",
 	"item.chaosawakens.ultimate_shovel": "The Ultimate Shovel",
 	"item.chaosawakens.ultimate_axe": "The Ultimate Axe",
@@ -241,6 +242,17 @@
 	"item.chaosawakens.platinum_leggings": "Platinum Leggings",
 	"item.chaosawakens.platinum_boots": "Platinum Boots",
 
+	"item.chaosawakens.sunstone": "Sunstone",
+	"block.chaosawakens.sunstone_ore": "Sunstone Ore",
+	"block.chaosawakens.sunstone_block": "Block of Sunstone",
+	"item.chaosawakens.sunstone_torch": "Sunstone Torch",
+	"block.chaosawakens.sunstone_torch": "Sunstone Torch",
+	"block.chaosawakens.wall_sunstone_torch": "Wall Sunstone Torch",
+
+	"item.chaosawakens.bloodstone": "Bloodstone",
+	"block.chaosawakens.bloodstone_ore": "Bloodstone Ore",
+	"block.chaosawakens.bloodstone_block": "Block of Bloodstone",
+
 	"item.chaosawakens.pink_tourmaline_ingot": "Pink Tourmaline Ingot",
 	"item.chaosawakens.pink_tourmaline_nugget": "Pink Tourmaline Nugget",
 	"block.chaosawakens.pink_tourmaline_cluster": "Pink Tourmaline Cluster",
@@ -289,6 +301,7 @@
 	"block.chaosawakens.yellow_crystal_leaves": "Yellow Crystal Leaves",
 	"block.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
 	"block.chaosawakens.crystal_energy": "Crystal Energy",
+	"item.chaosawakens.crystal_torch": "Crystal Torch",
 	"block.chaosawakens.crystal_torch": "Crystal Torch",
 	"block.chaosawakens.wall_crystal_torch": "Wall Crystal Torch",
 	"block.chaosawakens.crystal_furnace": "Crystal Furnace",
@@ -354,9 +367,12 @@
 	"item.chaosawakens.dev_item_damage": "Dev Item",
 
 	"item.chaosawakens.instant_survival_shelter": "Instant Survival Shelter",
-	"item.chaosawakens.zoo_cage_extra_small": "Zoo Cage Extra Small",
-	"item.chaosawakens.zoo_cage_small": "Zoo Cage Small",
-	"item.chaosawakens.zoo_cage_medium": "Zoo Cage Medium",
-	"item.chaosawakens.zoo_cage_large": "Zoo Cage Large",
-	"item.chaosawakens.zoo_cage_extra_large": "Zoo Cage Extra Large"
+	"item.chaosawakens.zoo_cage_extra_small": "Extra Small Zoo Cage",
+	"item.chaosawakens.zoo_cage_small": "Small Zoo Cage",
+	"item.chaosawakens.zoo_cage_medium": "Medium Zoo Cage",
+	"item.chaosawakens.zoo_cage_large": "Large Zoo Cage",
+	"item.chaosawakens.zoo_cage_extra_large": "Extra Large Zoo Cage",
+
+	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
+	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet."
 }

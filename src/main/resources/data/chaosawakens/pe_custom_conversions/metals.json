@@ -1,15 +1,15 @@
 {
   "values": {
     "before": {
-      "#chaosawakens:identifiers/aluminum": 4096,
-      "#chaosawakens:identifiers/titanium": 131072,
-      "#chaosawakens:identifiers/uranium": 131072,
-      "#chaosawakens:identifiers/copper": 1024,
-      "#chaosawakens:identifiers/tin": 2048,
-      "#chaosawakens:identifiers/silver": 4096,
-      "#chaosawakens:identifiers/platinum": 8192,
-      "#chaosawakens:identifiers/pink_tourmaline": 2048,
-      "#chaosawakens:identifiers/cats_eye": 8192
+      "chaosawakens:aluminum_ingot": 4096,
+      "chaosawakens:titanium_ingot": 131072,
+      "chaosawakens:uranium_ingot": 131072,
+      "chaosawakens:copper_lump": 1024,
+      "chaosawakens:tin_lump": 2048,
+      "chaosawakens:silver_lump": 4096,
+      "chaosawakens:platinum_lump": 8192,
+      "chaosawakens:pink_tourmaline_ingot": 2048,
+      "chaosawakens:cats_eye_ingot": 8192
     }
   }
 }

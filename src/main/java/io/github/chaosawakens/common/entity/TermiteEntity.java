@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -7,9 +10,23 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.network.play.server.SChangeGameStatePacket;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
+import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -20,6 +37,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class TermiteEntity extends MonsterEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
+    private final ITextComponent emptyInventoryMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
 
     public TermiteEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
@@ -60,8 +79,42 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
     }
 
     @Override
-    public ActionResultType getEntityInteractionResult(PlayerEntity player, Hand hand) {
-        return super.getEntityInteractionResult(player, hand);
+    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
+        ItemStack itemstack = playerIn.getHeldItem(hand);
+
+        if (CAConfig.COMMON.enableTermiteTeleport.get()) {
+            if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
+                ServerWorld currentWorld = (ServerWorld) this.world;
+                MinecraftServer minecraftServer = currentWorld.getServer();
+                RegistryKey<World> dimensionRegistryKey = null;
+                dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION_LEGACY ? World.OVERWORLD : CADimensions.CRYSTAL_DIMENSION_LEGACY;
+                ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
+                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+
+                if (!playerIn.inventory.isEmpty() && this.world.getDimensionKey() != CADimensions.CRYSTAL_DIMENSION_LEGACY) {
+                    playerIn.sendStatusMessage(this.emptyInventoryMessage,true);
+                    return ActionResultType.FAIL;
+                }
+
+                if (targetWorld != null) {
+                    serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
+
+                    /*
+                     * Tp twice because the dimension hasn't yet loaded on the first one which results in HeightMap
+                     * returning zero, thus the player spawns at bedrock
+                     */
+                    serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+                    serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+
+                    serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
+
+                    for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
+                        serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
+                    }
+                }
+            }
+        }
+        return super.getEntityInteractionResult(playerIn, hand);
     }
 
     @Override
