@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.registry;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Codec;
+
+import io.github.chaosawakens.common.worldgen.trunkplacer.CrystalStraightTrunkPlacer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
@@ -8,9 +12,12 @@ import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.trunkplacer.AbstractTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
+import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
 
 public class CAFeatures {
 	public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), CABlocks.RUBY_ORE.get().getDefaultState(), 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 24))).square().count(28));
@@ -51,8 +58,11 @@ public class CAFeatures {
 	public static final ConfiguredFeature<?, ?> MINING_RED_ANT_INFESTED_ORE = register("mining_ore_red_ant_infested_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.RED_ANT_INFESTED_ORE, 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12 + 12, 12))).square().count(5));
 	public static final ConfiguredFeature<?, ?> MINING_TERMITE_INFESTED_ORE = register("mining_ore_termite_infested_ore", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, States.TERMITE_INFESTED_ORE, 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12 + 12, 12))).square().count(2));
 	
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GREEN_CRYSTAL_TREE = register("green_crystal_tree", Feature.TREE.withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.GREEN_CRYSTAL_LEAVES.get().getDefaultState()),
-			new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(0), 3), new StraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GREEN_CRYSTAL_TREE = register("green_crystal_tree", Feature.TREE.withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.GREEN_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(0), 3), new CrystalStraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> RED_CRYSTAL_TREE = register("green_crystal_tree", Feature.TREE.withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.GREEN_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(0), 3), new CrystalStraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> YELLOW_CRYSTAL_TREE = register("green_crystal_tree", Feature.TREE.withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.GREEN_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(0), 3), new CrystalStraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
+	
+	public static final ConfiguredFeature<?, ?> TREES_CRYSTAL_DIMENSION = register("trees_crystal_dimension", Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(GREEN_CRYSTAL_TREE.withChance(0.6F)), GREEN_CRYSTAL_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(2, 0.1F, 1))));
 	
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
@@ -76,5 +86,14 @@ public class CAFeatures {
 		protected static final BlockState FOSSILISED_EMERALD_GATOR = CABlocks.FOSSILISED_EMERALD_GATOR.get().getDefaultState();
 		protected static final BlockState RED_ANT_INFESTED_ORE = CABlocks.RED_ANT_INFESTED_ORE.get().getDefaultState();
 		protected static final BlockState TERMITE_INFESTED_ORE = CABlocks.TERMITE_INFESTED_ORE.get().getDefaultState();
+	}
+	
+	public static final class CATrunkPlacerType<P extends AbstractTrunkPlacer> {
+		
+		public static final TrunkPlacerType<CrystalStraightTrunkPlacer> CRYSTAL_STRAIGHT_TRUNK_PLACER = register("crystal_straight_trunk_placer", CrystalStraightTrunkPlacer.CODEC);
+		
+		private static <P extends AbstractTrunkPlacer> TrunkPlacerType<P> register(String key, Codec<P> codec) {
+			return Registry.register(Registry.TRUNK_REPLACER, key, new TrunkPlacerType<>(codec));
+		}
 	}
 }

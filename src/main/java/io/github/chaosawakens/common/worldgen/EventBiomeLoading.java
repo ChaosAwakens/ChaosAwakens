@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Objects;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAFeatures;
 
@@ -33,9 +34,15 @@ public class EventBiomeLoading {
 		}
 		
 		if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
-			gen.withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAFeatures.GREEN_CRYSTAL_TREE);
 			addMiningDimOres(gen);
+			
 		}
+		
+		if(BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
+			//ChaosAwakens.LOGGER.debug("state");
+			gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAFeatures.TREES_CRYSTAL_DIMENSION);
+		}
+		
 	}
 
 	public static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {

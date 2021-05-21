@@ -103,7 +103,7 @@
 		],
 		"creature": [
 			{
-				"type": "chaoswakens:crystal_cow",
+				"type": "chaosawakens:crystal_cow",
 				"weight": 8,
 				"minCount": 4,
 				"maxCount": 4
