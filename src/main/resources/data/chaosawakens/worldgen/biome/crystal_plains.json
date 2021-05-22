@@ -39,12 +39,6 @@
 			}
 		],
 		"creature": [
-			{
-				"type": "chaosawakens:crystal_cow",
-				"weight": 8,
-				"minCount": 4,
-				"maxCount": 4
-			}
 		]
 	},
 	"spawn_costs": {

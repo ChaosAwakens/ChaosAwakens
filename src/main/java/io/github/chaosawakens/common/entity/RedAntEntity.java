@@ -72,6 +72,7 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
 	
+	@Override
 	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 

@@ -70,7 +70,8 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 				.createMutableAttribute(Attributes.ARMOR, 3).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
-
+	
+	@Override
 	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 

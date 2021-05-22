@@ -42,31 +42,17 @@ public class CrystalStraightTrunkPlacer extends AbstractTrunkPlacer {
 		super(baseHeight, heightRandA, heightRandB);
 	}
 	
+	@Override
 	protected TrunkPlacerType<?> getPlacerType() {
 		return CATrunkPlacerType.CRYSTAL_STRAIGHT_TRUNK_PLACER;
 	}
 	
+	@Override
 	public List<FoliagePlacer.Foliage> getFoliages(IWorldGenerationReader reader, Random rand, int treeHeight, BlockPos p_230382_4_, Set<BlockPos> p_230382_5_, MutableBoundingBox p_230382_6_, BaseTreeFeatureConfig p_230382_7_) {
-		func_236909_a(reader, p_230382_4_.down());
-		//ChaosAwakens.LOGGER.debug("state");
 		for (int i = 0; i < treeHeight; ++i) {
 			func_236911_a_(reader, rand, p_230382_4_.up(i), p_230382_5_, p_230382_6_, p_230382_7_);
 		}
 		
 		return ImmutableList.of(new FoliagePlacer.Foliage(p_230382_4_.up(treeHeight), 0, false));
-	}
-	
-	private static boolean func_236912_a(IWorldGenerationBaseReader reader, BlockPos pos) {
-		return reader.hasBlockState(pos, (state) -> {
-			ChaosAwakens.LOGGER.debug("pos: "+state+" "+state.matchesBlock(CABlocks.CRYSTAL_GRASS_BLOCK.get()));
-			return state.matchesBlock(CABlocks.CRYSTAL_GRASS_BLOCK.get());
-		});
-	}
-	
-	protected static final void func_236909_a(IWorldGenerationReader reader, BlockPos pos) {
-		if (func_236912_a(reader, pos)) {
-			TreeFeature.setBlockStateWithoutUpdate(reader, pos, CABlocks.CRYSTAL_GRASS_BLOCK.get().getDefaultState());
-		}
-		
 	}
 }

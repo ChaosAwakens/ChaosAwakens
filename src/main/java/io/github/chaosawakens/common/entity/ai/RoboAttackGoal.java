@@ -5,43 +5,63 @@ import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
-
 public class RoboAttackGoal extends Goal {
-    private final RoboEntity parentEntity;
-
-    public RoboAttackGoal(RoboEntity robo) {
-        this.parentEntity = robo;
-    }
-
-    public boolean shouldExecute() {
-        return this.parentEntity.getAttackTarget() != null;
-    }
-
-    public void tick() {
-        LivingEntity livingentity = this.parentEntity.getAttackTarget();
-        double d0 = 64.0D;
-        if (livingentity.getDistanceSq(this.parentEntity) < 4096.0D && this.parentEntity.canEntityBeSeen(livingentity)) {
-            World world = this.parentEntity.world;
-            world.playEvent(null, 1015, this.parentEntity.getPosition(), 0);
-
-            double d1 = 4.0D;
-            Vector3d vector3d = this.parentEntity.getLook(1.0F);
-            double d2 = livingentity.getPosX() - this.parentEntity.getPosX();
-            double d3 = livingentity.getPosYHeight(0.3333333333333333D) - this.parentEntity.getPosY();
-            double d4 = livingentity.getPosZ() - this.parentEntity.getPosZ();
-            if (!this.parentEntity.isSilent()) {
-                world.playEvent(null, 1016, this.parentEntity.getPosition(), 0);
-            }
-
-            RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.parentEntity, d2, d3, d4);
-            float f = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
-            roboLaserEntity.shoot(d0, d1 + (double)f, d2, 1.5F, 0.0F);
-            this.parentEntity.world.playSound(null, this.parentEntity.getPosX(), this.parentEntity.getPosY(), this.parentEntity.getPosZ(), SoundEvents.BLOCK_DISPENSER_DISPENSE, this.parentEntity.getSoundCategory(), 1.0F, 1.0F + 1 * 0.2F);
-            world.addEntity(roboLaserEntity);
-        }
-    }
+	private final RoboEntity projectileOwner;
+	private int attackTimer;
+	private int fireRateBase;
+	
+	private float damage;
+	private float ownerHeightYScale;
+	
+	public RoboAttackGoal(RoboEntity robo, int fireRateBase, float damage, float ownerHeightYScale) {
+		this.projectileOwner = robo;
+		this.fireRateBase = fireRateBase;
+		this.damage = damage;
+		this.ownerHeightYScale = ownerHeightYScale;
+	}
+	
+	@Override
+	public boolean shouldExecute() {
+		return this.projectileOwner.getAttackTarget() != null;
+	}
+	
+	@Override
+	public void startExecuting() {
+		this.attackTimer = 0;
+	}
+	
+	@Override
+	public void tick() {
+		LivingEntity targetEntity = this.projectileOwner.getAttackTarget();
+		if (targetEntity.getDistanceSq(this.projectileOwner) < 4096.0D && this.projectileOwner.canEntityBeSeen(targetEntity)) {
+			World world = this.projectileOwner.world;
+			
+			this.attackTimer++;
+			if (this.attackTimer == fireRateBase && !this.projectileOwner.isSilent())
+				world.playEvent(null, 1015, this.projectileOwner.getPosition(), 0);
+			
+			if (this.attackTimer == fireRateBase*2) {
+				Vector3d lookVector = this.projectileOwner.getLook(1.0F);
+				Vector3d directionNormal = new Vector3d(targetEntity.getPosX() - (this.projectileOwner.getPosX() - lookVector.getX()), targetEntity.getPosYHeight(0.5) - (0.5 + this.projectileOwner.getPosYHeight(0.5)), targetEntity.getPosZ() - (this.projectileOwner.getPosZ() - lookVector.getZ())).normalize();
+				
+				if (!this.projectileOwner.isSilent()) {
+					world.playEvent(null, 1016, this.projectileOwner.getPosition(), 0);
+				}
+				//ChaosAwakens.LOGGER.debug(directionNormal.getX()+" "+directionNormal.getY()+" "+directionNormal.getZ());
+				
+				RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.getX()/5, directionNormal.getY()/5, directionNormal.getZ()/5);
+				roboLaserEntity.setPosition(this.projectileOwner.getPosX(), this.projectileOwner.getPosYHeight(ownerHeightYScale), this.projectileOwner.getPosZ());
+				roboLaserEntity.setDamage(damage);
+				this.projectileOwner.world.playSound(null, this.projectileOwner.getPosX(), this.projectileOwner.getPosY(), this.projectileOwner.getPosZ(), SoundEvents.BLOCK_DISPENSER_DISPENSE, this.projectileOwner.getSoundCategory(), 1.0F, 1.0F + 1 * 0.2F);
+				world.addEntity(roboLaserEntity);
+				this.attackTimer = -fireRateBase*4;
+			}
+		} else if (this.attackTimer > 0) {
+			this.attackTimer--;
+		}
+		this.projectileOwner.setAttacking(this.attackTimer > 10);
+	}
 }
