@@ -79,9 +79,7 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 				}
 
 				int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
-				if (!CAConfig.COMMON.enableAutoEnchanting.get()) {
-					abstractarrowentity.setKnockbackStrength(k+1);
-				}
+				abstractarrowentity.setKnockbackStrength(!CAConfig.COMMON.enableAutoEnchanting.get() ? k+1 : 1);
 				
 				if (!playerentity.isCreative()) {
 					stack.damageItem(1, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));

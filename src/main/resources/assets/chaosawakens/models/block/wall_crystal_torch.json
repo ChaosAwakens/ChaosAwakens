@@ -1,5 +1,5 @@
 {
-	"parent": "minecraft:block/torch_wall",
+	"parent": "minecraft:block/template_torch_wall",
 	"textures": {
 		"torch": "chaosawakens:block/crystal_torch"
 	}

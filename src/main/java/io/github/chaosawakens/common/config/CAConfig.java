@@ -210,7 +210,7 @@ public class CAConfig {
 			enableTrollOreGen = builder.define("Enable ant infested ore generation", true);
 			builder.pop();
 			builder.push("Tools/Weapons");
-			enableAutoEnchanting = builder.define("Auto-enchant specific tools and weapons", true);
+			enableAutoEnchanting = builder.comment("If disabled, auto-enchanted items will be able to be enchanted manually.").define("Auto-enchant specific tools and weapons", true);
 			builder.pop();
 			builder.push("Dimensions");
 			enableBrownAntTeleport = builder.comment("Will the Brown Ant teleport you to its Dimension?").define("Brown Ant Teleport", true);

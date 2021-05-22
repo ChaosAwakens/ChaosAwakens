@@ -25,8 +25,7 @@ public class EventBiomeLoading {
 		RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 		
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
-			if (CAConfig.COMMON.enableOreGen.get())
-				addOverworldOres(gen);
+			if (CAConfig.COMMON.enableOreGen.get()) addOverworldOres(gen);
 		}
 
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
@@ -34,13 +33,13 @@ public class EventBiomeLoading {
 		}
 		
 		if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
-			if (CAConfig.COMMON.enableOreGen.get())
-				addMiningDimOres(gen);
+			if (CAConfig.COMMON.enableOreGen.get()) addMiningDimOres(gen);
 		}
 		
 		if(BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
 			//ChaosAwakens.LOGGER.debug("state");
 			gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAFeatures.TREES_CRYSTAL_DIMENSION);
+			if (CAConfig.COMMON.enableOreGen.get()) addCrystalDimOres(gen);
 		}
 		
 	}
@@ -92,6 +91,8 @@ public class EventBiomeLoading {
 	}
 
 	public static void addCrystalDimOres(BiomeGenerationSettingsBuilder gen) {
-
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_ENERGY);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_CATS_EYE_BUDDING);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_PINK_BUDDING);
 	}
 }

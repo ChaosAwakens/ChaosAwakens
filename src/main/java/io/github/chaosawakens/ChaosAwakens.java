@@ -10,8 +10,8 @@ import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
-import io.github.chaosawakens.data.ModItemModelGenerator;
-import io.github.chaosawakens.data.ModLootTableProvider;
+import io.github.chaosawakens.data.CAItemModelGenerator;
+import io.github.chaosawakens.data.CALootTableProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.RegistryKey;
@@ -168,8 +168,8 @@ public class ChaosAwakens {
 		final ExistingFileHelper existing = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
-			dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
+			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
+			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
 		}
 	}
 	

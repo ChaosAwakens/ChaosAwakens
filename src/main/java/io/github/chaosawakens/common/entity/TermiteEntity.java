@@ -22,7 +22,6 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
@@ -37,7 +36,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class TermiteEntity extends MonsterEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
     private final ITextComponent emptyInventoryMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
 
     public TermiteEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -87,11 +85,11 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
                 ServerWorld currentWorld = (ServerWorld) this.world;
                 MinecraftServer minecraftServer = currentWorld.getServer();
                 RegistryKey<World> dimensionRegistryKey = null;
-                dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION_LEGACY ? World.OVERWORLD : CADimensions.CRYSTAL_DIMENSION_LEGACY;
+                dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION ? World.OVERWORLD : CADimensions.CRYSTAL_DIMENSION;
                 ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
                 ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
 
-                if (!playerIn.inventory.isEmpty() && this.world.getDimensionKey() != CADimensions.CRYSTAL_DIMENSION_LEGACY) {
+                if (!playerIn.inventory.isEmpty() && this.world.getDimensionKey() != CADimensions.CRYSTAL_DIMENSION) {
                     playerIn.sendStatusMessage(this.emptyInventoryMessage,true);
                     return ActionResultType.FAIL;
                 }

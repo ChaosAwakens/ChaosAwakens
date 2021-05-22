@@ -7,13 +7,13 @@
   ],
   "key": {
     "T": {
-      "tag": "forge:ingots/titanium"
+      "tag": "forge:storage_blocks/titanium"
     },
     "U": {
-      "tag": "forge:ingots/uranium"
+      "tag": "forge:storage_blocks/uranium"
     },
     "I": {
-      "tag": "forge:lumps/platinum"
+      "tag": "forge:storage_blocks/platinum"
     },
     "S": {
       "tag": "forge:string"

@@ -92,7 +92,7 @@ public class CABlocks {
 	public static final RegistryObject<Block> TERMITE_NEST = registerBlock("termite_nest", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
 
 	// LEGACY CRYSTAL DIMENSION
-	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.STONE).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> KYANITE = registerBlock("kyanite", () -> new Block(Block.Properties.from(Blocks.STONE).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_LOG = registerBlock("crystal_log", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_WOOD = registerBlock("crystal_wood", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_WOOD).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);

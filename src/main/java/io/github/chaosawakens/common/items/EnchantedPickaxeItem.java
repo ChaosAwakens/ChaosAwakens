@@ -1,14 +1,19 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.common.config.CAConfig;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EnchantedPickaxeItem extends PickaxeItem {
 	
@@ -42,5 +47,4 @@ public class EnchantedPickaxeItem extends PickaxeItem {
 	public boolean hasEffect(ItemStack stack) {
 		return  CAConfig.COMMON.enableAutoEnchanting.get();
 	}
-	
 }
