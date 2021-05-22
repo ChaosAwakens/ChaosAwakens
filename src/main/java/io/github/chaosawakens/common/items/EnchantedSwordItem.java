@@ -4,6 +4,7 @@ import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -38,7 +39,7 @@ public class EnchantedSwordItem extends SwordItem {
 			}
 		}
 	}
-	
+
 	public boolean hasEffect(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get();
 	}

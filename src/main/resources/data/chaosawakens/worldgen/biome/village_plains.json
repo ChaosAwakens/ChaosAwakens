@@ -86,13 +86,13 @@
 				"maxCount": 4
 			},
 			{
-				"type": "minecraft:creeper",
+				"type": "minecraft:slime",
 				"weight": 100,
 				"minCount": 4,
 				"maxCount": 4
 			},
 			{
-				"type": "minecraft:slime",
+				"type": "minecraft:creeper",
 				"weight": 100,
 				"minCount": 4,
 				"maxCount": 4
@@ -134,6 +134,24 @@
 				"weight": 8,
 				"minCount": 4,
 				"maxCount": 4
+			},
+			{
+				"type": "chaosawakens:apple_cow",
+				"weight": 7,
+				"minCount": 4,
+				"maxCount": 4
+			},
+			{
+				"type": "chaosawakens:golden_apple_cow",
+				"weight": 4,
+				"minCount": 3,
+				"maxCount": 3
+			},
+			{
+				"type": "chaosawakens:enchanted_golden_apple_cow",
+				"weight": 1,
+				"minCount": 1,
+				"maxCount": 1
 			}
 		]
 	},

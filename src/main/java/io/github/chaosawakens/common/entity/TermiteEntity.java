@@ -32,6 +32,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class TermiteEntity extends MonsterEntity implements IAnimatable {
+	
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public TermiteEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -107,5 +108,4 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
-	
 }

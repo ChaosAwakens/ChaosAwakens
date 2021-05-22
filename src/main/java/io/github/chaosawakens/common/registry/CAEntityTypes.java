@@ -2,10 +2,7 @@ package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.*;
-import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
-import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
-import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
-import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
+import io.github.chaosawakens.common.entity.projectile.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
@@ -118,13 +115,12 @@ public class CAEntityTypes {
 					.size(2.0f, 4.0f) // Hitbox Size ()
 					.build(new ResourceLocation(ChaosAwakens.MODID, "robo_warrior").toString()));
 
-	// Robo Laser
+	// Projectiles
 	public static final RegistryObject<EntityType<RoboLaserEntity>> ROBO_LASER = ENTITY_TYPES.register("robo_laser",
 			() -> EntityType.Builder.<RoboLaserEntity>create(RoboLaserEntity::new, EntityClassification.MISC)
 				.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
 				.build(new ResourceLocation(ChaosAwakens.MODID, "robo_laser").toString()));
-	
-	// Arrow
+
 	public static final RegistryObject<EntityType<UltimateArrowEntity>> ULTIMATE_ARROW = ENTITY_TYPES.register("ultimate_arrow",
 			() -> EntityType.Builder.<UltimateArrowEntity>create(UltimateArrowEntity::new, EntityClassification.MISC)
 				.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)

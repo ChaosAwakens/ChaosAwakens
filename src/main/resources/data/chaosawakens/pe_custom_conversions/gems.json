@@ -1,9 +1,9 @@
 {
   "values": {
     "before": {
-      "#chaosawakens:identifiers/tigers_eye": 24288,
-      "#chaosawakens:identifiers/amethyst": 32768,
-      "#chaosawakens:identifiers/ruby": 65536
+      "chaosawakens:tigers_eye": 24288,
+      "chaosawakens:amethyst": 32768,
+      "chaosawakens:ruby": 65536
     }
   }
 }
