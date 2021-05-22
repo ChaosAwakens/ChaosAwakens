@@ -38,7 +38,7 @@ public class EventBiomeLoading {
 
 		if(BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
 			//ChaosAwakens.LOGGER.debug("state");
-			gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAFeatures.TREES_CRYSTAL_DIMENSION);
+			gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAFeatures.TREES_CRYSTAL_PLAINS);
 			if (CAConfig.COMMON.enableOreGen.get()) addCrystalDimOres(gen);
 		}
 

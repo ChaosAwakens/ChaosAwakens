@@ -249,6 +249,10 @@
 	"block.chaosawakens.sunstone_torch": "Sunstone Torch",
 	"block.chaosawakens.wall_sunstone_torch": "Wall Sunstone Torch",
 
+	"item.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.wall_extreme_torch": "Wall Extreme Torch",
+
 	"item.chaosawakens.bloodstone": "Bloodstone",
 	"block.chaosawakens.bloodstone_ore": "Bloodstone Ore",
 	"block.chaosawakens.bloodstone_block": "Block of Bloodstone",

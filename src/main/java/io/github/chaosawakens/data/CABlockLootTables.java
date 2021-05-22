@@ -21,6 +21,9 @@ public class CABlockLootTables extends BlockLootTables
         registerLootTable(CABlocks.BUDDING_CATS_EYE.get(), (block) -> dropping(CABlocks.KYANITE.get()));
         registerLootTable(CABlocks.BUDDING_PINK_TOURMALINE.get(), (block) -> dropping(CABlocks.KYANITE.get()));
         registerLootTable(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (block) -> dropping(CABlocks.KYANITE.get()));
+        registerLootTable(CABlocks.CRYSTAL_TORCH.get(), (block) -> dropping(CABlocks.CRYSTAL_TORCH.get()));
+        registerLootTable(CABlocks.SUNSTONE_TORCH.get(), (block) -> dropping(CABlocks.SUNSTONE_TORCH.get()));
+        registerLootTable(CABlocks.EXTREME_TORCH.get(), (block) -> dropping(CAItems.EXTREME_TORCH.get()));
         registerLootTable(CABlocks.GOLDEN_MELON.get(), (food) -> randomDropping(CAItems.GOLDEN_MELON_SLICE.get(), 3, 7));
         registerLootTable(CABlocks.GOLDEN_MELON_STEM.get(), (seeds) -> dropping(CAItems.GOLDEN_MELON_SEEDS.get()));
         registerLootTable(CABlocks.RUBY_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.RUBY.get()));
@@ -71,8 +74,6 @@ public class CABlockLootTables extends BlockLootTables
         registerDropSelfLootTable(CABlocks.URANIUM_BLOCK.get());
         registerDropSelfLootTable(CABlocks.URANIUM_ORE.get());
         registerDropSelfLootTable(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
-        registerDropSelfLootTable(CABlocks.CRYSTAL_TORCH.get());
-        registerDropSelfLootTable(CABlocks.SUNSTONE_TORCH.get());
         registerDropSelfLootTable(CABlocks.SUNSTONE_BLOCK.get());
         registerDropSelfLootTable(CABlocks.BLOODSTONE_BLOCK.get());
     }
