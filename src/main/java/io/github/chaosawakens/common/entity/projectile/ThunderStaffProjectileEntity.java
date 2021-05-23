@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import javax.annotation.Nonnull;
-
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.Entity;
@@ -19,9 +17,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import javax.annotation.Nonnull;
+
 public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 	
-	private static final float EXPLOSION_POWER = CAConfig.COMMON.explosionSize.get();
+	private static final float EXPLOSION_POWER = CAConfig.COMMON.thunderStaffExplosionSize.get();
 	
 	public ThunderStaffProjectileEntity(EntityType<? extends AbstractFireballEntity> p_i50166_1_, World p_i50166_2_) {
 		super(p_i50166_1_, p_i50166_2_);
@@ -46,8 +46,8 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 			lightning.setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0);
 			this.world.addEntity(lightning);
 			
-			boolean hasFire = CAConfig.COMMON.explosionFire.get();
-			switch (CAConfig.COMMON.explosionType.get()) {
+			boolean hasFire = CAConfig.COMMON.thunderStaffExplosionFire.get();
+			switch (CAConfig.COMMON.thunderStaffExplosionType.get()) {
 				case 0:
 					this.world.createExplosion((Entity) null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
 					break;

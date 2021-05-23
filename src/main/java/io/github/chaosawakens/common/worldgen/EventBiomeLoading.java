@@ -15,34 +15,30 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 
 public class EventBiomeLoading {
-	
+
 	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
-		
+
 		BiomeGenerationSettingsBuilder gen = event.getGeneration();
-		
+
 		RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
-		
+
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
-			if (CAConfig.COMMON.enableOreGen.get())
-				addOverworldOres(gen);
+			if (CAConfig.COMMON.enableOreGen.get()) addOverworldOres(gen);
 		}
 
 		if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
 			gen.getStructures().add( () -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 		}
-		
+
 		if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
-			if (CAConfig.COMMON.enableOreGen.get())
-				addMiningDimOres(gen);
+			if (CAConfig.COMMON.enableOreGen.get()) addMiningDimOres(gen);
 		}
-		
+
 		if(BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
-			//ChaosAwakens.LOGGER.debug("state");
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.GEODE_PINK_TOURMALINE);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.GEODE_CATS_EYE);
-			gen.withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAFeatures.TREES_CRYSTAL_PLAINS);
+			gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAFeatures.TREES_CRYSTAL_PLAINS);
+			if (CAConfig.COMMON.enableOreGen.get()) addCrystalDimOres(gen);
 		}
-		
+
 	}
 
 	public static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {
@@ -92,6 +88,8 @@ public class EventBiomeLoading {
 	}
 
 	public static void addCrystalDimOres(BiomeGenerationSettingsBuilder gen) {
-
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_ENERGY);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_CATS_EYE_BUDDING);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_PINK_BUDDING);
 	}
 }

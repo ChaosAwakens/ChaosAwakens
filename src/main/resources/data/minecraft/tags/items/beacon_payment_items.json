@@ -1,18 +1,8 @@
-
 {
-	"replace": false,
-	"values": [
-		"chaosawakens:amethyst",
-		"chaosawakens:ruby",
-		"chaosawakens:tigers_eye",
-		"chaosawakens:titanium_ingot",
-		"chaosawakens:uranium_ingot",
-		"chaosawakens:aluminum_ingot",
-		"chaosawakens:copper_lump",
-		"chaosawakens:tin_lump",
-		"chaosawakens:silver_lump",
-		"chaosawakens:platinum_lump",
-		"chaosawakens:pink_tourmaline_ingot",
-		"chaosawakens:cats_eye_ingot"
-	]
+  "replace": false,
+  "values": [
+    "#chaosawakens:gemstones",
+    "#chaosawakens:ingots",
+    "#chaosawakens:mineral_lumps"
+  ]
 }

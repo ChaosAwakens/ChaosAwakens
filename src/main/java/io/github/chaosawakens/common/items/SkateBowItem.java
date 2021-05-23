@@ -60,6 +60,7 @@ public class SkateBowItem extends BowItem {
                         AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
                         abstractarrowentity = customArrow(abstractarrowentity);
                         abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+                        if (arrowitem instanceof IrukandjiArrowItem) abstractarrowentity.setDamage(50.0D);
                         if (f == 1.0F) {
                             abstractarrowentity.setIsCritical(true);
                         }

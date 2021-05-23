@@ -5,13 +5,43 @@ import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.enums.ArmorMaterials;
 import io.github.chaosawakens.common.enums.ToolMaterials;
-import io.github.chaosawakens.common.items.*;
+import io.github.chaosawakens.common.items.BigHammerItem;
+import io.github.chaosawakens.common.items.CASpawnEggItem;
+import io.github.chaosawakens.common.items.DevItem;
+import io.github.chaosawakens.common.items.EnchantedArmorItem;
+import io.github.chaosawakens.common.items.EnchantedAxeItem;
+import io.github.chaosawakens.common.items.EnchantedCASpawnEggItem;
+import io.github.chaosawakens.common.items.EnchantedItem;
+import io.github.chaosawakens.common.items.EnchantedPickaxeItem;
+import io.github.chaosawakens.common.items.EnchantedScytheItem;
+import io.github.chaosawakens.common.items.EnchantedShovelItem;
+import io.github.chaosawakens.common.items.EnchantedSwordItem;
+import io.github.chaosawakens.common.items.IrukandjiArrowItem;
+import io.github.chaosawakens.common.items.PeacockBootsItem;
+import io.github.chaosawakens.common.items.PoisonSwordItem;
+import io.github.chaosawakens.common.items.RayGunItem;
+import io.github.chaosawakens.common.items.ScytheItem;
+import io.github.chaosawakens.common.items.SkateBowItem;
 import io.github.chaosawakens.common.items.StructureItem;
-import net.minecraft.enchantment.Enchantment;
+import io.github.chaosawakens.common.items.ThunderStaffItem;
+import io.github.chaosawakens.common.items.UltimateBowItem;
+import io.github.chaosawakens.common.items.UltimateHoeItem;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.Food;
+import net.minecraft.item.Foods;
+import net.minecraft.item.HoeItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.Rarity;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.SoupItem;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.RegistryObject;
@@ -175,6 +205,7 @@ public class CAItems {
 	public static final RegistryObject<IrukandjiArrowItem> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new IrukandjiArrowItem(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<WallOrFloorItem> CRYSTAL_TORCH = ITEMS.register("crystal_torch", () -> new WallOrFloorItem(CABlocks.CRYSTAL_TORCH.get(), CABlocks.WALL_CRYSTAL_TORCH.get(), new Item.Properties().group(CAItemGroups.blocksItemGroup)));
 	public static final RegistryObject<WallOrFloorItem> SUNSTONE_TORCH = ITEMS.register("sunstone_torch", () -> new WallOrFloorItem(CABlocks.SUNSTONE_TORCH.get(), CABlocks.WALL_SUNSTONE_TORCH.get(), new Item.Properties().group(CAItemGroups.blocksItemGroup)));
+	public static final RegistryObject<WallOrFloorItem> EXTREME_TORCH = ITEMS.register("extreme_torch", () -> new WallOrFloorItem(CABlocks.EXTREME_TORCH.get(), CABlocks.WALL_EXTREME_TORCH.get(), new Item.Properties().group(CAItemGroups.blocksItemGroup)));
 
 	// TOOLS
 	// Ultimate
@@ -199,53 +230,53 @@ public class CAItems {
 	public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.emeraldHoeDamage.get() - 7), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Ruby
-	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(ToolMaterials.TOOL_RUBY, (int) (CAConfig.COMMON.rubySwordDamage.get() - 17), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ToolMaterials.TOOL_RUBY, (CAConfig.COMMON.rubyAxeDamage.get() - 17), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, (int) (CAConfig.COMMON.rubyPickaxeDamage.get() - 17), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ToolMaterials.TOOL_RUBY, (CAConfig.COMMON.rubyShovelDamage.get() - 17), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ToolMaterials.TOOL_RUBY, (int) (CAConfig.COMMON.rubyHoeDamage.get() - 17), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(ToolMaterials.TOOL_RUBY, CAConfig.COMMON.rubySwordDamage.get() - 17, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ToolMaterials.TOOL_RUBY, CAConfig.COMMON.rubyAxeDamage.get() - 17, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_RUBY, CAConfig.COMMON.rubyPickaxeDamage.get() - 17, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ToolMaterials.TOOL_RUBY, CAConfig.COMMON.rubyShovelDamage.get() - 17, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ToolMaterials.TOOL_RUBY, CAConfig.COMMON.rubyHoeDamage.get() - 17, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Amethyst
-	public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.amethystSwordDamage.get() - 12), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.amethystAxeDamage.get() - 12), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.amethystPickaxeDamage.get() - 12), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(ToolMaterials.TOOL_AMETHYST, (CAConfig.COMMON.amethystShovelDamage.get() - 12), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.amethystHoeDamage.get() - 12), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, CAConfig.COMMON.amethystSwordDamage.get() - 12, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(ToolMaterials.TOOL_AMETHYST, CAConfig.COMMON.amethystAxeDamage.get() - 12, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_AMETHYST, CAConfig.COMMON.amethystPickaxeDamage.get() - 12, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(ToolMaterials.TOOL_AMETHYST, CAConfig.COMMON.amethystShovelDamage.get() - 12, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(ToolMaterials.TOOL_AMETHYST, CAConfig.COMMON.amethystHoeDamage.get() - 12, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Tiger's Eye
-	public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyeSwordDamage.get() - 9), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeAxeDamage.get() - 9), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyePickaxeDamage.get() - 9), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, (CAConfig.COMMON.tigersEyeShovelDamage.get() - 9), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, (int) (CAConfig.COMMON.tigersEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_TIGERS_EYE, CAConfig.COMMON.tigersEyeSwordDamage.get() - 9, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_TIGERS_EYE, CAConfig.COMMON.tigersEyeAxeDamage.get() - 9, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIGERS_EYE, CAConfig.COMMON.tigersEyePickaxeDamage.get() - 9, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIGERS_EYE, CAConfig.COMMON.tigersEyeShovelDamage.get() - 9, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIGERS_EYE, CAConfig.COMMON.tigersEyeHoeDamage.get() - 9, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Crystal Wood
-	public static final RegistryObject<SwordItem> CRYSTAL_WOOD_SWORD = ITEMS.register("crystal_wood_sword", () -> new SwordItem(ToolMaterials.TOOL_CRYSTAL_WOOD, (int) (CAConfig.COMMON.crystalWoodSwordDamage.get() - 2), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> CRYSTAL_WOOD_SWORD = ITEMS.register("crystal_wood_sword", () -> new SwordItem(ToolMaterials.TOOL_CRYSTAL_WOOD, CAConfig.COMMON.crystalWoodSwordDamage.get() - 2, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<AxeItem> CRYSTAL_WOOD_AXE = ITEMS.register("crystal_wood_axe", () -> new AxeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, CAConfig.COMMON.crystalWoodAxeDamage.get() - 2, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> CRYSTAL_WOOD_PICKAXE = ITEMS.register("crystal_wood_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, (int) (CAConfig.COMMON.crystalWoodPickaxeDamage.get() - 2), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> CRYSTAL_WOOD_PICKAXE = ITEMS.register("crystal_wood_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, CAConfig.COMMON.crystalWoodPickaxeDamage.get() - 2, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ShovelItem> CRYSTAL_WOOD_SHOVEL = ITEMS.register("crystal_wood_shovel", () -> new ShovelItem(ToolMaterials.TOOL_CRYSTAL_WOOD, CAConfig.COMMON.crystalWoodShovelDamage.get() - 2, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> CRYSTAL_WOOD_HOE = ITEMS.register("crystal_wood_hoe", () -> new HoeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, (int) (CAConfig.COMMON.crystalWoodHoeDamage.get() - 2), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> CRYSTAL_WOOD_HOE = ITEMS.register("crystal_wood_hoe", () -> new HoeItem(ToolMaterials.TOOL_CRYSTAL_WOOD, CAConfig.COMMON.crystalWoodHoeDamage.get() - 2, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 
 	// Kyanite
-	public static final RegistryObject<SwordItem> KYANITE_SWORD = ITEMS.register("kyanite_sword", () -> new SwordItem(ToolMaterials.TOOL_KYANITE, (int) (CAConfig.COMMON.kyaniteSwordDamage.get() - 3), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> KYANITE_SWORD = ITEMS.register("kyanite_sword", () -> new SwordItem(ToolMaterials.TOOL_KYANITE, CAConfig.COMMON.kyaniteSwordDamage.get() - 3, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<AxeItem> KYANITE_AXE = ITEMS.register("kyanite_axe", () -> new AxeItem(ToolMaterials.TOOL_KYANITE, CAConfig.COMMON.kyaniteAxeDamage.get() - 3, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> KYANITE_PICKAXE = ITEMS.register("kyanite_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_KYANITE, (int) (CAConfig.COMMON.kyanitePickaxeDamage.get() - 3), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> KYANITE_PICKAXE = ITEMS.register("kyanite_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_KYANITE, CAConfig.COMMON.kyanitePickaxeDamage.get() - 3, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ShovelItem> KYANITE_SHOVEL = ITEMS.register("kyanite_shovel", () -> new ShovelItem(ToolMaterials.TOOL_KYANITE, CAConfig.COMMON.kyaniteShovelDamage.get() - 3, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> KYANITE_HOE = ITEMS.register("kyanite_hoe", () -> new HoeItem(ToolMaterials.TOOL_KYANITE, (int) (CAConfig.COMMON.kyaniteHoeDamage.get() - 3), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> KYANITE_HOE = ITEMS.register("kyanite_hoe", () -> new HoeItem(ToolMaterials.TOOL_KYANITE, CAConfig.COMMON.kyaniteHoeDamage.get() - 3, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 
 	// Cat's Eye
-	public static final RegistryObject<SwordItem> CATS_EYE_SWORD = ITEMS.register("cats_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_CATS_EYE, (int) (CAConfig.COMMON.catsEyeSwordDamage.get() - 9), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<AxeItem> CATS_EYE_AXE = ITEMS.register("cats_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_CATS_EYE, (CAConfig.COMMON.catsEyeAxeDamage.get() - 9), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> CATS_EYE_PICKAXE = ITEMS.register("cats_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_CATS_EYE, (int) (CAConfig.COMMON.catsEyePickaxeDamage.get() - 9), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<ShovelItem> CATS_EYE_SHOVEL = ITEMS.register("cats_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_CATS_EYE, (CAConfig.COMMON.catsEyeShovelDamage.get() - 9), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> CATS_EYE_HOE = ITEMS.register("cats_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_CATS_EYE, (int) (CAConfig.COMMON.catsEyeHoeDamage.get() - 9), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> CATS_EYE_SWORD = ITEMS.register("cats_eye_sword", () -> new SwordItem(ToolMaterials.TOOL_CATS_EYE, CAConfig.COMMON.catsEyeSwordDamage.get() - 9, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> CATS_EYE_AXE = ITEMS.register("cats_eye_axe", () -> new AxeItem(ToolMaterials.TOOL_CATS_EYE, CAConfig.COMMON.catsEyeAxeDamage.get() - 9, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> CATS_EYE_PICKAXE = ITEMS.register("cats_eye_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_CATS_EYE, CAConfig.COMMON.catsEyePickaxeDamage.get() - 9, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> CATS_EYE_SHOVEL = ITEMS.register("cats_eye_shovel", () -> new ShovelItem(ToolMaterials.TOOL_CATS_EYE, CAConfig.COMMON.catsEyeShovelDamage.get() - 9, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> CATS_EYE_HOE = ITEMS.register("cats_eye_hoe", () -> new HoeItem(ToolMaterials.TOOL_CATS_EYE, CAConfig.COMMON.catsEyeHoeDamage.get() - 9, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 
 	// Pink Tourmaline
-	public static final RegistryObject<SwordItem> PINK_TOURMALINE_SWORD = ITEMS.register("pink_tourmaline_sword", () -> new SwordItem(ToolMaterials.TOOL_PINK_TOURMALINE, (int) (CAConfig.COMMON.pinkTourmSwordDamage.get() - 8), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<AxeItem> PINK_TOURMALINE_AXE = ITEMS.register("pink_tourmaline_axe", () -> new AxeItem(ToolMaterials.TOOL_PINK_TOURMALINE, (CAConfig.COMMON.pinkTourmAxeDamage.get() - 8), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> PINK_TOURMALINE_PICKAXE = ITEMS.register("pink_tourmaline_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_PINK_TOURMALINE, (int) (CAConfig.COMMON.pinkTourmPickaxeDamage.get() - 8), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<ShovelItem> PINK_TOURMALINE_SHOVEL = ITEMS.register("pink_tourmaline_shovel", () -> new ShovelItem(ToolMaterials.TOOL_PINK_TOURMALINE, (CAConfig.COMMON.pinkTourmShovelDamage.get() - 8), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> PINK_TOURMALINE_HOE = ITEMS.register("pink_tourmaline_hoe", () -> new HoeItem(ToolMaterials.TOOL_PINK_TOURMALINE, (int) (CAConfig.COMMON.pinkTourmHoeDamage.get() - 8), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> PINK_TOURMALINE_SWORD = ITEMS.register("pink_tourmaline_sword", () -> new SwordItem(ToolMaterials.TOOL_PINK_TOURMALINE, CAConfig.COMMON.pinkTourmSwordDamage.get() - 8, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> PINK_TOURMALINE_AXE = ITEMS.register("pink_tourmaline_axe", () -> new AxeItem(ToolMaterials.TOOL_PINK_TOURMALINE, CAConfig.COMMON.pinkTourmAxeDamage.get() - 8, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> PINK_TOURMALINE_PICKAXE = ITEMS.register("pink_tourmaline_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_PINK_TOURMALINE, CAConfig.COMMON.pinkTourmPickaxeDamage.get() - 8, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> PINK_TOURMALINE_SHOVEL = ITEMS.register("pink_tourmaline_shovel", () -> new ShovelItem(ToolMaterials.TOOL_PINK_TOURMALINE, CAConfig.COMMON.pinkTourmShovelDamage.get() - 8, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> PINK_TOURMALINE_HOE = ITEMS.register("pink_tourmaline_hoe", () -> new HoeItem(ToolMaterials.TOOL_PINK_TOURMALINE, CAConfig.COMMON.pinkTourmHoeDamage.get() - 8, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 
 	// Copper
 	public static final RegistryObject<SwordItem> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(ToolMaterials.TOOL_COPPER, (int) (CAConfig.COMMON.copperSwordDamage.get() - 2.5F), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
@@ -255,11 +286,11 @@ public class CAItems {
 	public static final RegistryObject<HoeItem> COPPER_HOE = ITEMS.register("copper_hoe", () -> new HoeItem(ToolMaterials.TOOL_COPPER, (int) (CAConfig.COMMON.copperHoeDamage.get() - 2.5F), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Tin
-	public static final RegistryObject<SwordItem> TIN_SWORD = ITEMS.register("tin_sword", () -> new SwordItem(ToolMaterials.TOOL_TIN, (int) (CAConfig.COMMON.tinSwordDamage.get() - 3), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> TIN_SWORD = ITEMS.register("tin_sword", () -> new SwordItem(ToolMaterials.TOOL_TIN, CAConfig.COMMON.tinSwordDamage.get() - 3, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<AxeItem> TIN_AXE = ITEMS.register("tin_axe", () -> new AxeItem(ToolMaterials.TOOL_TIN, CAConfig.COMMON.tinAxeDamage.get() - 3, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> TIN_PICKAXE = ITEMS.register("tin_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIN, (int) (CAConfig.COMMON.tinPickaxeDamage.get() - 3), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> TIN_PICKAXE = ITEMS.register("tin_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_TIN, CAConfig.COMMON.tinPickaxeDamage.get() - 3, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ShovelItem> TIN_SHOVEL = ITEMS.register("tin_shovel", () -> new ShovelItem(ToolMaterials.TOOL_TIN, CAConfig.COMMON.tinShovelDamage.get() - 3, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> TIN_HOE = ITEMS.register("tin_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIN, (int) (CAConfig.COMMON.tinHoeDamage.get() - 3), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> TIN_HOE = ITEMS.register("tin_hoe", () -> new HoeItem(ToolMaterials.TOOL_TIN, CAConfig.COMMON.tinHoeDamage.get() - 3, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Silver
 	public static final RegistryObject<SwordItem> SILVER_SWORD = ITEMS.register("silver_sword", () -> new SwordItem(ToolMaterials.TOOL_SILVER, (int) (CAConfig.COMMON.silverSwordDamage.get() - 3.5F), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
@@ -269,11 +300,11 @@ public class CAItems {
 	public static final RegistryObject<HoeItem> SILVER_HOE = ITEMS.register("silver_hoe", () -> new HoeItem(ToolMaterials.TOOL_SILVER, (int) (CAConfig.COMMON.silverHoeDamage.get() - 3.5F), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Platinum
-	public static final RegistryObject<SwordItem> PLATINUM_SWORD = ITEMS.register("platinum_sword", () -> new SwordItem(ToolMaterials.TOOL_PLATINUM, (int) (CAConfig.COMMON.platinumSwordDamage.get() - 7), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<AxeItem> PLATINUM_AXE = ITEMS.register("platinum_axe", () -> new AxeItem(ToolMaterials.TOOL_PLATINUM, (CAConfig.COMMON.platinumAxeDamage.get() - 7), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<PickaxeItem> PLATINUM_PICKAXE = ITEMS.register("platinum_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_PLATINUM, (int) (CAConfig.COMMON.platinumPickaxeDamage.get() - 7), -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<ShovelItem> PLATINUM_SHOVEL = ITEMS.register("platinum_shovel", () -> new ShovelItem(ToolMaterials.TOOL_PLATINUM, (CAConfig.COMMON.platinumShovelDamage.get() - 7), -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<HoeItem> PLATINUM_HOE = ITEMS.register("platinum_hoe", () -> new HoeItem(ToolMaterials.TOOL_PLATINUM, (int) (CAConfig.COMMON.platinumHoeDamage.get() - 7), 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<SwordItem> PLATINUM_SWORD = ITEMS.register("platinum_sword", () -> new SwordItem(ToolMaterials.TOOL_PLATINUM, CAConfig.COMMON.platinumSwordDamage.get() - 7, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<AxeItem> PLATINUM_AXE = ITEMS.register("platinum_axe", () -> new AxeItem(ToolMaterials.TOOL_PLATINUM, CAConfig.COMMON.platinumAxeDamage.get() - 7, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<PickaxeItem> PLATINUM_PICKAXE = ITEMS.register("platinum_pickaxe", () -> new PickaxeItem(ToolMaterials.TOOL_PLATINUM, CAConfig.COMMON.platinumPickaxeDamage.get() - 7, -2.8F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<ShovelItem> PLATINUM_SHOVEL = ITEMS.register("platinum_shovel", () -> new ShovelItem(ToolMaterials.TOOL_PLATINUM, CAConfig.COMMON.platinumShovelDamage.get() - 7, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<HoeItem> PLATINUM_HOE = ITEMS.register("platinum_hoe", () -> new HoeItem(ToolMaterials.TOOL_PLATINUM, CAConfig.COMMON.platinumHoeDamage.get() - 7, 0.0F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	
 	// Misc. Weapons
 	public static final RegistryObject<SwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(ToolMaterials.TOOL_NIGHTMARE, (int) (CAConfig.COMMON.nightmareSwordDamage.get() - 27), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup),
@@ -284,10 +315,11 @@ public class CAItems {
 			new EnchantmentAndLevel[] { new EnchantmentAndLevel(Enchantments.SHARPNESS, 1)}));
 	public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.ratSwordDamage.get() - 7), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(ToolMaterials.TOOL_EMERALD, (int) (CAConfig.COMMON.fairySwordDamage.get() - 7), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
-	public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new SwordItem(ToolMaterials.TOOL_AMETHYST, (int) (CAConfig.COMMON.bigHammerDamage.get() - 12), -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<BigHammerItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new BigHammerItem(ToolMaterials.TOOL_AMETHYST, CAConfig.COMMON.bigHammerDamage.get() - 12, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(ToolMaterials.TOOL_ULTIMATE, (int) (CAConfig.COMMON.prismaticReaperDamage.get() - 9), -1.9F, new Item.Properties().group(CAItemGroups.equipmentItemGroup),
 			new EnchantmentAndLevel[] { new EnchantmentAndLevel(Enchantments.UNBREAKING, 4), new EnchantmentAndLevel(Enchantments.SWEEPING, 4)}));
 	public static final RegistryObject<SkateBowItem> SKATE_STRING_BOW = ITEMS.register("skate_string_bow", () -> new SkateBowItem(new Item.Properties().group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(384).defaultMaxDamage(384)));
+	public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(new Item.Properties().group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(50).defaultMaxDamage(50)));
 
 	// Staffs
 	public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().group(CAItemGroups.equipmentItemGroup).maxDamage(50)));
@@ -400,22 +432,22 @@ public class CAItems {
 	public static final RegistryObject<ArmorItem> CATS_EYE_BOOTS = ITEMS.register("cats_eye_boots", () -> new ArmorItem(ArmorMaterials.CATS_EYE, EquipmentSlotType.FEET, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 
 	// SPAWN EGGS
-	public static final RegistryObject<ModSpawnEggItem> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.ENT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> RED_ANT_SPAWN_EGG = ITEMS.register("red_ant_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.RED_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> BROWN_ANT_SPAWN_EGG = ITEMS.register("brown_ant_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.BROWN_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> RAINBOW_ANT_SPAWN_EGG = ITEMS.register("rainbow_ant_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.RAINBOW_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> UNSTABLE_ANT_SPAWN_EGG = ITEMS.register("unstable_ant_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.UNSTABLE_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.TERMITE, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.HERCULES_BEETLE, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> RUBY_BUG_SPAWN_EGG = ITEMS.register("ruby_bug_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.RUBY_BUG, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> EMERALD_GATOR_SPAWN_EGG = ITEMS.register("emerald_gator_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.EMERALD_GATOR, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> ROBO_SNIPER_SPAWN_EGG = ITEMS.register("robo_sniper_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.ROBO_SNIPER, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> ROBO_WARRIOR_SPAWN_EGG = ITEMS.register("robo_warrior_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.ROBO_WARRIOR, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> BEAVER_SPAWN_EGG = ITEMS.register("beaver_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.BEAVER, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> APPLE_COW_SPAWN_EGG = ITEMS.register("apple_cow_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("golden_apple_cow_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.GOLDEN_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<EnchantedModSpawnEggItem> ENCHANTED_GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("enchanted_golden_apple_cow_spawn_egg", () -> new EnchantedModSpawnEggItem(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
-	public static final RegistryObject<ModSpawnEggItem> CRYSTAL_APPLE_COW_SPAWN_EGG = ITEMS.register("crystal_apple_cow_spawn_egg", () -> new ModSpawnEggItem(CAEntityTypes.CRYSTAL_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> ENT_SPAWN_EGG = ITEMS.register("ent_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.ENT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> RED_ANT_SPAWN_EGG = ITEMS.register("red_ant_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.RED_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> BROWN_ANT_SPAWN_EGG = ITEMS.register("brown_ant_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.BROWN_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> RAINBOW_ANT_SPAWN_EGG = ITEMS.register("rainbow_ant_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.RAINBOW_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> UNSTABLE_ANT_SPAWN_EGG = ITEMS.register("unstable_ant_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.UNSTABLE_ANT, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.TERMITE, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.HERCULES_BEETLE, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> RUBY_BUG_SPAWN_EGG = ITEMS.register("ruby_bug_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.RUBY_BUG, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> EMERALD_GATOR_SPAWN_EGG = ITEMS.register("emerald_gator_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.EMERALD_GATOR, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> ROBO_SNIPER_SPAWN_EGG = ITEMS.register("robo_sniper_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.ROBO_SNIPER, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> ROBO_WARRIOR_SPAWN_EGG = ITEMS.register("robo_warrior_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.ROBO_WARRIOR, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> BEAVER_SPAWN_EGG = ITEMS.register("beaver_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.BEAVER, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> APPLE_COW_SPAWN_EGG = ITEMS.register("apple_cow_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("golden_apple_cow_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.GOLDEN_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<EnchantedCASpawnEggItem> ENCHANTED_GOLDEN_APPLE_COW_SPAWN_EGG = ITEMS.register("enchanted_golden_apple_cow_spawn_egg", () -> new EnchantedCASpawnEggItem(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<CASpawnEggItem> CRYSTAL_APPLE_COW_SPAWN_EGG = ITEMS.register("crystal_apple_cow_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.CRYSTAL_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xffffff, 0xe38a1d, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 

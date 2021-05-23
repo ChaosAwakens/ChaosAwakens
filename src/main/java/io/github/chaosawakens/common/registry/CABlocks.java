@@ -4,7 +4,19 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.*;
+import io.github.chaosawakens.common.blocks.BuddingBlock;
+import io.github.chaosawakens.common.blocks.CAOreBlock;
+import io.github.chaosawakens.common.blocks.CASpawnerBlock;
+import io.github.chaosawakens.common.blocks.CrystalClusterBlock;
+import io.github.chaosawakens.common.blocks.CrystalCraftingTableBlock;
+import io.github.chaosawakens.common.blocks.CrystalEnergyBlock;
+import io.github.chaosawakens.common.blocks.CrystalFurnaceBlock;
+import io.github.chaosawakens.common.blocks.EnchantedGoldenCakeBlock;
+import io.github.chaosawakens.common.blocks.GateBlock;
+import io.github.chaosawakens.common.blocks.GoldenCakeBlock;
+import io.github.chaosawakens.common.blocks.GoldenMelonBlock;
+import io.github.chaosawakens.common.blocks.RedAntInfestedOre;
+import io.github.chaosawakens.common.blocks.TermiteInfestedOre;
 import io.github.chaosawakens.common.items.EnchantedBlockItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AttachedStemBlock;
@@ -45,11 +57,8 @@ public class CABlocks {
 	public static final RegistryObject<Block> GOLDEN_MELON_STEM = registerBlock("golden_melon_stem", () -> new StemBlock((StemGrownBlock)GOLDEN_MELON.get(), AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.STEM)), null);
 	public static final RegistryObject<GoldenCakeBlock> GOLDEN_CAKE = registerBlock("golden_cake", () -> new GoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup);
 
-	// ENT DUNGEON BLOCKS
+	// DUNGEON BLOCKS
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<Block> ENT_DUNGEON_WOOD = registerBlock("ent_dungeon_wood", () -> new Block(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
-
-	// SPAWNER BLOCK
 	public static final RegistryObject<CASpawnerBlock> SPAWNER_BLOCK = registerBlock("spawner_block", () -> new CASpawnerBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(-1.0F).notSolid().noDrops().sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), null);
 
 	// MINERAL ORES
@@ -101,7 +110,7 @@ public class CABlocks {
 	public static final RegistryObject<Block> TERMITE_NEST = registerBlock("termite_nest", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
 
 	// LEGACY CRYSTAL DIMENSION
-	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.STONE).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> KYANITE = registerBlock("kyanite", () -> new Block(Block.Properties.from(Blocks.STONE).setRequiresTool().setOpaque(CABlocks::_false)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_LOG = registerBlock("crystal_log", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_LOG).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> CRYSTAL_WOOD = registerBlock("crystal_wood", () -> new RotatedPillarBlock(Block.Properties.from(Blocks.OAK_WOOD).setOpaque(CABlocks::_false).notSolid()), CAItemGroups.blocksItemGroup);
@@ -119,8 +128,11 @@ public class CABlocks {
 	public static final RegistryObject<Block> CRYSTAL_TORCH = registerBlock("crystal_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 14).sound(SoundType.WOOD), ParticleTypes.FLAME), null, false);
 	public static final RegistryObject<Block> WALL_CRYSTAL_TORCH = registerBlock("wall_crystal_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 14).sound(SoundType.WOOD).lootFrom( () -> CABlocks.CRYSTAL_TORCH.get()), ParticleTypes.FLAME), null, false);
 
-	public static final RegistryObject<Block> SUNSTONE_TORCH = registerBlock("sunstone_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 15).sound(SoundType.WOOD), ParticleTypes.FLASH), null, false);
-	public static final RegistryObject<Block> WALL_SUNSTONE_TORCH = registerBlock("wall_sunstone_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 15).sound(SoundType.WOOD).lootFrom(  () -> CABlocks.SUNSTONE_TORCH.get()), ParticleTypes.FLASH), null, false);
+	public static final RegistryObject<Block> SUNSTONE_TORCH = registerBlock("sunstone_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 12).sound(SoundType.WOOD), ParticleTypes.END_ROD), null, false);
+	public static final RegistryObject<Block> WALL_SUNSTONE_TORCH = registerBlock("wall_sunstone_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 12).sound(SoundType.WOOD).lootFrom( () -> CABlocks.SUNSTONE_TORCH.get()), ParticleTypes.END_ROD), null, false);
+
+	public static final RegistryObject<Block> EXTREME_TORCH = registerBlock("extreme_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 16).sound(SoundType.WOOD), ParticleTypes.FLAME), null, false);
+	public static final RegistryObject<Block> WALL_EXTREME_TORCH = registerBlock("wall_extreme_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 16).sound(SoundType.WOOD).lootFrom( () -> CABlocks.EXTREME_TORCH.get()), ParticleTypes.FLAME), null, false);
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
 		return registerBlock(name,supplier,itemGroup,true);

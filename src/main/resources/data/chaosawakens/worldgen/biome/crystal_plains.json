@@ -27,20 +27,8 @@
 			"minecraft:canyon"
 		]
 	},
-	"features": [
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[],
-		[]
-	],
-	"starts": [
-	],
+	"features": [],
+	"starts": [],
 	"spawners": {
 		"monster": [
 			{

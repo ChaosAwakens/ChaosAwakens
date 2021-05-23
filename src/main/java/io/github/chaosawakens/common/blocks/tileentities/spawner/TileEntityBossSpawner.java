@@ -21,14 +21,15 @@ public abstract class TileEntityBossSpawner<T extends MobEntity> extends TileEnt
         this.entityType = entityType;
     }
 
+//    public boolean anyPlayerInRange() {
+//        assert world != null;
+//        return world.isPlayerWithin(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, getRange());
+//    }
+
     public boolean anyPlayerInRange() {
         assert world != null;
-        return world.isPlayerWithin(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, getRange());
+        return world.isPlayerWithin(0, 0, 0, 0);
     }
-
-//    public boolean anyPlayerInRange() {
-//        return world.isPlayerWithin(0, 0, 0, 0);
-//    }
 
     @Override
     public void tick() {

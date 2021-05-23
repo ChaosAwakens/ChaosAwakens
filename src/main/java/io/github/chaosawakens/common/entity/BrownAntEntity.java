@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -7,6 +9,13 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -21,6 +30,7 @@ import javax.annotation.Nullable;
 
 public class BrownAntEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
 
     public BrownAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -57,6 +67,19 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
+    }
+
+    @Override
+    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
+        ItemStack itemstack = playerIn.getHeldItem(hand);
+
+        if (CAConfig.COMMON.enableBrownAntTeleport.get()) {
+            if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
+                playerIn.sendStatusMessage(this.inaccessibleMessage,true);
+                return ActionResultType.FAIL;
+            }
+        }
+        return super.getEntityInteractionResult(playerIn, hand);
     }
 
     @Override

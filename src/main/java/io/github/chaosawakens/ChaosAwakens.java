@@ -26,8 +26,8 @@ import io.github.chaosawakens.common.registry.CATileEntities;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
-import io.github.chaosawakens.data.ModItemModelGenerator;
-import io.github.chaosawakens.data.ModLootTableProvider;
+import io.github.chaosawakens.data.CAItemModelGenerator;
+import io.github.chaosawakens.data.CALootTableProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -57,6 +57,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
 
 @Mod(ChaosAwakens.MODID)
@@ -78,6 +79,7 @@ public class ChaosAwakens {
 	public ChaosAwakens() {
 		INSTANCE = this;
 		GeckoLib.initialize();
+		GeckoLibMod.DISABLE_IN_DEV = true;
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		eventBus.addListener(this::setup);
@@ -108,7 +110,7 @@ public class ChaosAwakens {
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
-	
+
 	private static Method GETCODEC_METHOD;
 	
 	public void addDimensionalSpacing(final WorldEvent.Load event) {
@@ -160,8 +162,8 @@ public class ChaosAwakens {
 		final ExistingFileHelper existing = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
-			dataGenerator.addProvider(new ModItemModelGenerator(dataGenerator, existing));
+			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
+			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
 		}
 	}
 	

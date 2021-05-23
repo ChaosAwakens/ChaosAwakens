@@ -130,11 +130,16 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.<IrukandjiArrowEntity>create(IrukandjiArrowEntity::new, EntityClassification.MISC)
 				.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
 				.build(new ResourceLocation(ChaosAwakens.MODID, "irukandji_arrow").toString()));
-	
+
 	public static final RegistryObject<EntityType<ThunderStaffProjectileEntity>> THUNDER_BALL = ENTITY_TYPES.register("thunder_ball",
 			() -> EntityType.Builder.<ThunderStaffProjectileEntity>create(ThunderStaffProjectileEntity::new, EntityClassification.MISC)
-				.size(0.25F, 0.25F).trackingRange(4).updateInterval(20)
-				.build(new ResourceLocation(ChaosAwakens.MODID, "thunder_ball").toString()));
+					.size(0.25F, 0.25F).trackingRange(4).updateInterval(20)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "thunder_ball").toString()));
+
+	public static final RegistryObject<EntityType<RayGunProjectileEntity>> EXPLOSIVE_BALL = ENTITY_TYPES.register("explosive_ball",
+			() -> EntityType.Builder.<RayGunProjectileEntity>create(RayGunProjectileEntity::new, EntityClassification.MISC)
+					.size(0.25F, 0.25F).trackingRange(4).updateInterval(20)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "explosive_ball").toString()));
 	
 	
 	

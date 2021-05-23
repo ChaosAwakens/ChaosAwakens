@@ -35,5 +35,4 @@ public class EnchantedPickaxeItem extends PickaxeItem {
 	public boolean hasEffect(ItemStack stack) {
 		return  CAConfig.COMMON.enableAutoEnchanting.get();
 	}
-	
 }
