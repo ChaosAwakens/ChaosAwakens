@@ -13,7 +13,6 @@ public class PacketHandler {
             PROTOCOL_VERSION::equals
     );
 
-    @SuppressWarnings("UnusedAssignment")
     public static void init() {
         int id = 0;
         CHANNEL.messageBuilder(PacketThrowPlayer.class, id++).encoder(PacketThrowPlayer::encode).decoder(PacketThrowPlayer::new).consumer(PacketThrowPlayer.Handler::onMessage).add();

@@ -1,19 +1,34 @@
 package io.github.chaosawakens;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.mojang.serialization.Codec;
+
+import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
 import io.github.chaosawakens.client.ClientSetupEvent;
+import io.github.chaosawakens.common.CraftingEventHandler;
+import io.github.chaosawakens.common.EntitySetAttributeEventHandler;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.network.PacketHandler;
-import io.github.chaosawakens.common.registry.*;
+import io.github.chaosawakens.common.registry.CABiomes;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CAStructures;
+import io.github.chaosawakens.common.registry.CATileEntities;
 import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
 import io.github.chaosawakens.data.ModItemModelGenerator;
 import io.github.chaosawakens.data.ModLootTableProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -33,7 +48,6 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -43,14 +57,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
-
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
@@ -61,6 +68,12 @@ public class ChaosAwakens {
 	public static ChaosAwakens INSTANCE;
 	
 	public static final Logger LOGGER = LogManager.getLogger();
+	
+	/**
+	 * Map that contains all the EALs mapped to their items respective registry name,
+	 * would go on a common setup class, but we dont we have so... :shrug:
+	 */
+	public static Map<ResourceLocation, EnchantmentAndLevel[]> enchantedItems = new HashMap<>();
 
 	public ChaosAwakens() {
 		INSTANCE = this;
@@ -78,7 +91,8 @@ public class ChaosAwakens {
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
-
+		eventBus.addListener(EntitySetAttributeEventHandler::onEntityAttributeCreationEvent);
+		
 		if (ModList.get().isLoaded("projecte")) {
 			CAEMCValues.init();
 		}
@@ -89,6 +103,7 @@ public class ChaosAwakens {
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoadingEvent);
+		MinecraftForge.EVENT_BUS.addListener(CraftingEventHandler::onItemCraftedEvent);
 		MinecraftForge.EVENT_BUS.register(this);
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
@@ -114,9 +129,7 @@ public class ChaosAwakens {
 			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD))return;
 			
 			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>( serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
-			
 			tempMap.putIfAbsent(CAStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.ENT_DUNGEON.get()));
-			
 			serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
 		}
 	}
@@ -127,25 +140,6 @@ public class ChaosAwakens {
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
-		});
-		
-		DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(CAEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.BROWN_ANT.get(), BrownAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.RAINBOW_ANT.get(), RainbowAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.TERMITE.get(), TermiteEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().create());
 		});
 
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);

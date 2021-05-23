@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.items;
 
+import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemUseContext;
@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 
 public class UltimateHoeItem extends EnchantedHoeItem {
 
-    public UltimateHoeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
-        super(tier,attackDamageIn,attackSpeedIn,builderIn,enchants,lvls);
+    public UltimateHoeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentAndLevel[] enchantments) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn, enchantments);
     }
 
     @Override

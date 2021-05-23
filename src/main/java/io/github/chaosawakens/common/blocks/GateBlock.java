@@ -78,7 +78,7 @@ public class GateBlock extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
-        return isVanished(state) ? VANISHED_SHAPE : super.getShape(state, world, pos, ctx);
+        return isVanished(state) ? VANISHED_SHAPE : VoxelShapes.fullCube();
     }
 
     @Override
@@ -89,7 +89,7 @@ public class GateBlock extends Block {
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
-        return isVanished(state) ? VoxelShapes.empty() : super.getCollisionShape(state, world, pos, ctx);
+        return isVanished(state) ? VoxelShapes.empty() : this.canCollide ? state.getShape(world, pos) : VoxelShapes.empty();
     }
 
     @Override

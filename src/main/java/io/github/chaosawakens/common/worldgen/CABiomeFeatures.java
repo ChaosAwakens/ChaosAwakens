@@ -45,9 +45,11 @@ public class CABiomeFeatures {
 			case SWAMP:
 				SWAMP_MOBS.accept(spawnInfoBuilder);
 			case PLAINS:
-				PLAINS_MOBS.accept(spawnInfoBuilder);
+				if(!event.getName().toString().contains("crystal"))
+					PLAINS_MOBS.accept(spawnInfoBuilder);
 			case FOREST:
-				FOREST_MOBS.accept(spawnInfoBuilder);				
+				if(!event.getName().toString().contains("crystal"))
+					FOREST_MOBS.accept(spawnInfoBuilder);				
 			case THEEND:
 			case NETHER:
 				break;

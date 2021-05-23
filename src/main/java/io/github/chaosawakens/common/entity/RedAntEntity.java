@@ -86,12 +86,8 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 
 				if (targetWorld != null) {
 					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
-
-					/*
-					 * Tp twice because the dimension hasn't yet loaded on the first one which results in HeightMap
-					 * returning zero, thus the player spawns at bedrock
-					 */
-					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+					
+					targetWorld.getChunk(playerIn.getPosition());
 					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
 
 					serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));

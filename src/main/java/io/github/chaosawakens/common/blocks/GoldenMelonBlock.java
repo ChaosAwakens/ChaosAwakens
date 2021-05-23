@@ -1,7 +1,10 @@
 package io.github.chaosawakens.common.blocks;
 
-import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AttachedStemBlock;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.StemBlock;
+import net.minecraft.block.StemGrownBlock;
 
 public class GoldenMelonBlock extends StemGrownBlock {
     public GoldenMelonBlock(AbstractBlock.Properties builder) {

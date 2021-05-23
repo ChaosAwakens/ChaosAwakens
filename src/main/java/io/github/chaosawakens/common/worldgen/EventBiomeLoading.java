@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.worldgen;
 
 import java.util.Objects;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAFeatures;
@@ -12,7 +11,6 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 
@@ -40,6 +38,8 @@ public class EventBiomeLoading {
 		
 		if(BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
 			//ChaosAwakens.LOGGER.debug("state");
+			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.GEODE_PINK_TOURMALINE);
+			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.GEODE_CATS_EYE);
 			gen.withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAFeatures.TREES_CRYSTAL_PLAINS);
 		}
 		

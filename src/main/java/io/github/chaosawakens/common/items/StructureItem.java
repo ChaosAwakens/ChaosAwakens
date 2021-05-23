@@ -34,7 +34,7 @@ public class StructureItem extends Item {
 		int y = pos.getY();
 		int z = pos.getZ();
 		
-		ChaosAwakens.LOGGER.debug(context.getPlacementHorizontalFacing());
+		//ChaosAwakens.LOGGER.debug(context.getPlacementHorizontalFacing());
 		
 		if (world instanceof ServerWorld) {
 			Template template = ((ServerWorld) world).getStructureTemplateManager()

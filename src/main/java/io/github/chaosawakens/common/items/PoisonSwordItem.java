@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.items;
 
-import net.minecraft.enchantment.Enchantment;
+import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -9,8 +9,8 @@ import net.minecraft.potion.Effects;
 
 public class PoisonSwordItem extends EnchantedSwordItem {
 
-    public PoisonSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn,enchants,lvls);
+    public PoisonSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentAndLevel[] enchantments) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn, enchantments);
     }
 
     @Override

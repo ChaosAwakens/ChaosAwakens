@@ -1,58 +1,51 @@
 package io.github.chaosawakens.common.items;
 
+import java.util.function.Predicate;
+
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BowItem;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-import java.util.function.Predicate;
-
 public class UltimateBowItem extends BowItem implements IVanishable {
-	private final int[] enchantmentLevels;
-	private final Enchantment[] enchantmentIds;
 	
-	public UltimateBowItem(Item.Properties builder, Enchantment[] enchants, int[] lvls) {
-		super(builder);
-		enchantmentIds = enchants;
-		enchantmentLevels = lvls;
+	private final EnchantmentAndLevel[] enchantments;
+	
+	public UltimateBowItem(Properties builderIn, EnchantmentAndLevel[] enchantments) {
+		super(builderIn);
+		this.enchantments = enchantments;
 	}
 	
-	public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		if (!CAConfig.COMMON.enableAutoEnchanting.get())
-			return;
-		for (int i = 0; i < enchantmentIds.length; i++) {
-			stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if (this.isInGroup(group)) {
+			ItemStack stack = new ItemStack(this);
+			if (CAConfig.COMMON.enableAutoEnchanting.get())
+				for(EnchantmentAndLevel enchant : enchantments) {
+					stack.addEnchantment( enchant.getEnchantment(), enchant.getEnchantLevel());
+				}
+			items.add(stack);
 		}
+		ChaosAwakens.enchantedItems.put(this.getRegistryName(), enchantments);
 	}
 	
-	public void inventoryTick(ItemStack stack, World worldInD, Entity entityIn, int itemSlot, boolean isSelected) {
-		if (!CAConfig.COMMON.enableAutoEnchanting.get())
-			return;
-		if (EnchantmentHelper.getEnchantmentLevel(enchantmentIds[0], stack) <= 0) {
-			for (int i = 0; i < enchantmentIds.length; i++) {
-				stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
-			}
-		}
-	}
-
-
-
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
@@ -122,11 +115,12 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 		return 15;
 	}
 	
+	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get();
 	}
 	
-	public AbstractArrowEntity createArrow(World worldIn, LivingEntity shooter) {
+	private AbstractArrowEntity createArrow(World worldIn, LivingEntity shooter) {
 		return new UltimateArrowEntity(worldIn, shooter);
 	}
 }

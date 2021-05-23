@@ -1,44 +1,37 @@
 package io.github.chaosawakens.common.items;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
 import io.github.chaosawakens.common.config.CAConfig;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
-import net.minecraft.world.World;
+import net.minecraft.util.NonNullList;
 
 public class EnchantedPickaxeItem extends PickaxeItem {
 	
-	private final int[] enchantmentLevels;
-	private final Enchantment[] enchantmentIds;
+	private final EnchantmentAndLevel[] enchantments;
 	
-	public EnchantedPickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Enchantment[] enchants, int[] lvls) {
+	public EnchantedPickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentAndLevel[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
-		enchantmentIds = enchants;
-		enchantmentLevels = lvls;
+		this.enchantments = enchantments;
 	}
 	
-	public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		if (!CAConfig.COMMON.enableAutoEnchanting.get())return;
-		if (stack.isEnchanted())return;
-		for (int i = 0; i < enchantmentIds.length; i++) {
-			stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if (this.isInGroup(group)) {
+			ItemStack stack = new ItemStack(this);
+			if (CAConfig.COMMON.enableAutoEnchanting.get())
+				for(EnchantmentAndLevel enchant : enchantments) {
+					stack.addEnchantment( enchant.getEnchantment(), enchant.getEnchantLevel());
+				}
+			items.add(stack);
 		}
+		ChaosAwakens.enchantedItems.put(this.getRegistryName(), enchantments);
 	}
 	
-	public void inventoryTick(ItemStack stack, World worldInD, Entity entityIn, int itemSlot, boolean isSelected) {
-		if (!CAConfig.COMMON.enableAutoEnchanting.get())return;
-		if (stack.isEnchanted())return;
-		if (EnchantmentHelper.getEnchantmentLevel(enchantmentIds[0], stack) <= 0) {
-			for (int i = 0; i < enchantmentIds.length; i++) {
-				stack.addEnchantment(enchantmentIds[i], enchantmentLevels[i]);
-			}
-		}
-	}
-	
+	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return  CAConfig.COMMON.enableAutoEnchanting.get();
 	}

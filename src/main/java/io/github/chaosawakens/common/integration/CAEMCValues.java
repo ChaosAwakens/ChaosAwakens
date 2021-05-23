@@ -20,7 +20,7 @@ import java.util.Map.Entry;
 @EMCMapper
 public class CAEMCValues implements IEMCMapper<NormalizedSimpleStack, Long> {
 
-    private static final Map<NormalizedSimpleStack, Long> customEmcValues = new HashMap();
+    private static final Map<NormalizedSimpleStack, Long> customEmcValues = new HashMap<>();
 
     @Override
     public String getName() {
@@ -57,10 +57,10 @@ public class CAEMCValues implements IEMCMapper<NormalizedSimpleStack, Long> {
     @Override
     public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mapper, CommentedFileConfig config, DataPackRegistries registry, IResourceManager resourceManager) {
 
-        Iterator var4 = customEmcValues.entrySet().iterator();
+        Iterator<Entry<NormalizedSimpleStack, Long>> var4 = customEmcValues.entrySet().iterator();
 
         while (var4.hasNext()) {
-            Entry<NormalizedSimpleStack, Long> entry = (Entry) var4.next();
+            Entry<NormalizedSimpleStack, Long> entry = var4.next();
             NormalizedSimpleStack normStack = entry.getKey();
             long value = entry.getValue();
             mapper.setValueBefore(normStack, value);

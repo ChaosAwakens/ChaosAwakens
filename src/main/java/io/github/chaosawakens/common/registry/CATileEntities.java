@@ -4,7 +4,6 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.CrystalFurnaceTileEntity;
 import io.github.chaosawakens.common.blocks.tileentities.spawner.TileEntityEntSpawner;
 import io.github.chaosawakens.common.blocks.tileentities.spawner.TileEntityHerculesBeetleSpawner;
-import net.minecraft.tileentity.FurnaceTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

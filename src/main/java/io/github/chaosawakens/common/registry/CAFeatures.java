@@ -4,7 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.worldgen.feature.CrystalTreeFeature;
+import io.github.chaosawakens.common.worldgen.feature.GeodeFeature;
+import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
 import io.github.chaosawakens.common.worldgen.trunkplacer.CrystalStraightTrunkPlacer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,10 +32,6 @@ import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.trunkplacer.AbstractTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
-import net.minecraftforge.registries.ForgeRegistries;
-import software.bernie.example.client.renderer.entity.BikeGeoRenderer;
-import software.bernie.example.entity.GeoExampleEntity;
-import software.bernie.geckolib3.renderers.geo.GeoReplacedEntityRenderer;
 
 public class CAFeatures {
 	public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), CABlocks.RUBY_ORE.get().getDefaultState(), 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 24))).square().count(28));
@@ -83,11 +80,16 @@ public class CAFeatures {
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_PINK_BUDDING = register("crystal_ore_pink_budding", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, 2)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24 + 12, 5))).square().count(5));
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_CATS_EYE_BUDDING = register("crystal_ore_cats_eye_budding", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, 1)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12, 3))).square().count(5));
 	
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GREEN_CRYSTAL_TREE = register("green_crystal_tree", new CrystalTreeFeature(BaseTreeFeatureConfig.CODEC).withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.GREEN_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(0), 2), new CrystalStraightTrunkPlacer(3, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> RED_CRYSTAL_TREE = register("red_crystal_tree", new CrystalTreeFeature(BaseTreeFeatureConfig.CODEC).withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.RED_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(3), FeatureSpread.create(2), 2), new CrystalStraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> YELLOW_CRYSTAL_TREE = register("yellow_crystal_tree", new CrystalTreeFeature(BaseTreeFeatureConfig.CODEC).withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.YELLOW_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(4), FeatureSpread.create(3), 3), new CrystalStraightTrunkPlacer(7, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GREEN_CRYSTAL_TREE = register("green_crystal_tree", Feature.TREE.withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.GREEN_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(0), 2), new CrystalStraightTrunkPlacer(3, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> RED_CRYSTAL_TREE = register("red_crystal_tree", Feature.TREE.withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.RED_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(3), FeatureSpread.create(2), 2), new CrystalStraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> YELLOW_CRYSTAL_TREE = register("yellow_crystal_tree", Feature.TREE.withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CABlocks.YELLOW_CRYSTAL_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.create(4), FeatureSpread.create(3), 3), new CrystalStraightTrunkPlacer(7, 2, 0), new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build()));
 	
 	public static final ConfiguredFeature<?, ?> TREES_CRYSTAL_PLAINS = register("trees_crystal_dimension", Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(GREEN_CRYSTAL_TREE.withChance(0.4F), RED_CRYSTAL_TREE.withChance(0.3F), YELLOW_CRYSTAL_TREE.withChance(0.1F)), GREEN_CRYSTAL_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(2, 0.1F, 1))));
+	
+	public static final Feature<GeodeFeatureConfig> GEODE =  new GeodeFeature(GeodeFeatureConfig.CODEC);
+	
+	public static final ConfiguredFeature<?, ?> GEODE_PINK_TOURMALINE = register("geode_pink_tourmaline", GEODE.withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, States.CLUSTER_PINK_TOURMALINE, 28, 48, 40)));
+	public static final ConfiguredFeature<?, ?> GEODE_CATS_EYE = register("geode_cats_eye", GEODE.withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, States.CLUSTER_CATS_EYE, 5, 28, 15)));
 	
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
@@ -116,6 +118,8 @@ public class CAFeatures {
 		protected static final BlockState CRYSTAL_ENERGY = CABlocks.CRYSTAL_ENERGY.get().getDefaultState();
 		protected static final BlockState PINK_TOURMALINE = CABlocks.BUDDING_PINK_TOURMALINE.get().getDefaultState();
 		protected static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().getDefaultState();
+		protected static final BlockState CLUSTER_PINK_TOURMALINE = CABlocks.PINK_TOURMALINE_CLUSTER.get().getDefaultState();
+		protected static final BlockState CLUSTER_CATS_EYE = CABlocks.CATS_EYE_CLUSTER.get().getDefaultState();
 	}
 	
 	public static final class RuleTests {

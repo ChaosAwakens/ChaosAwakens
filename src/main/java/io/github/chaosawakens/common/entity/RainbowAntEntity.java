@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.entity;
 
+import javax.annotation.Nullable;
+
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.AgeableEntity;
@@ -33,8 +36,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nullable;
 
 public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -83,16 +84,12 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 				RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.VILLAGE_MANIA ? World.OVERWORLD : CADimensions.VILLAGE_MANIA;
 				ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-
+				
 				if (targetWorld != null) {
 					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
 					//ChaosAwakens.LOGGER.debug("before: "+targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()));
 
-					/*
-					 * Tp twice because the dimension hasn't yet loaded on the first one which results in HeightMap
-					 * returning zero, thus the player spawns at bedrock
-					 */
-					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
+					targetWorld.getChunk(playerIn.getPosition());
 					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
 
 					//ChaosAwakens.LOGGER.debug("after: "+targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()));
