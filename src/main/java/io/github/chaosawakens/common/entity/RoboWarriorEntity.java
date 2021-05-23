@@ -71,7 +71,7 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 75)
+		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 180)
 				.createMutableAttribute(Attributes.ARMOR, 10)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.105D)
 				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 3.5)
