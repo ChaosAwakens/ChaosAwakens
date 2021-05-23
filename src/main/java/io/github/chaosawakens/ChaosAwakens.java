@@ -45,6 +45,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.lang.reflect.Method;
@@ -65,6 +66,7 @@ public class ChaosAwakens {
 	public ChaosAwakens() {
 		INSTANCE = this;
 		GeckoLib.initialize();
+		GeckoLibMod.DISABLE_IN_DEV = true;
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		eventBus.addListener(this::setup);
@@ -93,7 +95,7 @@ public class ChaosAwakens {
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
-	
+
 	private static Method GETCODEC_METHOD;
 	
 	public void addDimensionalSpacing(final WorldEvent.Load event) {
