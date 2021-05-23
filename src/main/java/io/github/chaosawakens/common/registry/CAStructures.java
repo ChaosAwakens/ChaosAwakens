@@ -24,7 +24,7 @@ public class CAStructures {
 	
 	public static void setupStructures() {
 		setupMapSpacingAndLand(ENT_DUNGEON.get(),
-				new StructureSeparationSettings(20 , 16, 32034987),
+				new StructureSeparationSettings(30 , 24, 32034987),
 				true);
 	}
 

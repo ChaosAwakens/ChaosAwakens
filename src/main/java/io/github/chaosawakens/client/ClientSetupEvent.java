@@ -1,25 +1,6 @@
 package io.github.chaosawakens.client;
 
-import io.github.chaosawakens.client.entity.render.AppleCowRender;
-import io.github.chaosawakens.client.entity.render.BeaverEntityRender;
-import io.github.chaosawakens.client.entity.render.BrownAntEntityRender;
-import io.github.chaosawakens.client.entity.render.CrystalAppleCowRender;
-import io.github.chaosawakens.client.entity.render.EmeraldGatorEntityRender;
-import io.github.chaosawakens.client.entity.render.EnchantedGoldenAppleCowRender;
-import io.github.chaosawakens.client.entity.render.EntEntityRender;
-import io.github.chaosawakens.client.entity.render.GoldenAppleCowRender;
-import io.github.chaosawakens.client.entity.render.HerculesBeetleEntityRender;
-import io.github.chaosawakens.client.entity.render.IrukandjiArrowRender;
-import io.github.chaosawakens.client.entity.render.RainbowAntEntityRender;
-import io.github.chaosawakens.client.entity.render.RedAntEntityRender;
-import io.github.chaosawakens.client.entity.render.RoboLaserRender;
-import io.github.chaosawakens.client.entity.render.RoboSniperEntityRender;
-import io.github.chaosawakens.client.entity.render.RoboWarriorEntityRender;
-import io.github.chaosawakens.client.entity.render.RubyBugEntityRender;
-import io.github.chaosawakens.client.entity.render.TermiteEntityRender;
-import io.github.chaosawakens.client.entity.render.ThunderStaffProjectileRender;
-import io.github.chaosawakens.client.entity.render.UltimateArrowRender;
-import io.github.chaosawakens.client.entity.render.UnstableAntEntityRender;
+import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -49,6 +30,7 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRender::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EXPLOSIVE_BALL.get(), RayGunProjectileRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.APPLE_COW.get(), AppleCowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowRender::new);

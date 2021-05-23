@@ -8,6 +8,7 @@ import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
+import net.minecraft.loot.functions.EnchantWithLevels;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 
@@ -54,6 +55,53 @@ public class CAEntityLootTables extends EntityLootTables {
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(CAItems.BIG_HAMMER.get())
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.DIAMOND_HELMET)
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(3.0F, 9.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.DIAMOND_CHESTPLATE)
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(3.0F, 9.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.DIAMOND_LEGGINGS)
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(3.0F, 9.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.DIAMOND_BOOTS)
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(3.0F, 9.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(RandomValueRange.of(1.0F, 3.0F))
+                                .addEntry(ItemLootEntry.builder(CAItems.TIGERS_EYE_HELMET.get())
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(18.0F, 26.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(CAItems.TIGERS_EYE_CHESTPLATE.get())
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(18.0F, 26.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(CAItems.TIGERS_EYE_LEGGINGS.get())
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(18.0F, 26.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(CAItems.TIGERS_EYE_BOOTS.get())
+                                        .acceptFunction(EnchantWithLevels.func_215895_a(RandomValueRange.of(18.0F, 26.0F)))
+                                        .acceptCondition(KilledByPlayer.builder())))
+                        .addLootPool(LootPool.builder()
+                                .rolls(RandomValueRange.of(1, 2))
+                                .addEntry(ItemLootEntry.builder(Items.DIAMOND)
+                                        .acceptCondition(RandomChance.builder(0.975F))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(Items.EMERALD)
+                                        .acceptCondition(RandomChance.builder(0.75F))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(CAItems.TIGERS_EYE.get())
+                                        .acceptCondition(RandomChance.builder(0.5F))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(CAItems.AMETHYST.get())
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 1.0F)))
+                                        .acceptCondition(RandomChance.builder(0.35F))
+                                        .acceptCondition(KilledByPlayer.builder()))
+                                .addEntry(ItemLootEntry.builder(CAItems.RUBY.get())
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 1.0F)))
+                                        .acceptCondition(RandomChance.builder(0.2F))
                                         .acceptCondition(KilledByPlayer.builder()))));
         registerLootTable(CAEntityTypes.RUBY_BUG.get(),
                 LootTable.builder()
@@ -236,6 +284,10 @@ public class CAEntityLootTables extends EntityLootTables {
                                         .acceptCondition(KilledByPlayer.builder()))));
         registerLootTable(CAEntityTypes.ROBO_WARRIOR.get(),
                 LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(CAItems.RAY_GUN.get())
+                                        .acceptCondition(KilledByPlayer.builder())))
                         .addLootPool(LootPool.builder()
                                 .rolls(ConstantRange.of(1))
                                 .addEntry(ItemLootEntry.builder(Items.REDSTONE_BLOCK)

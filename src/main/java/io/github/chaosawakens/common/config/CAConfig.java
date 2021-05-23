@@ -79,9 +79,12 @@ public class CAConfig {
 		public final ConfigValue<Integer> fairySwordDamage;
 		public final ConfigValue<Integer> bigHammerDamage;
 		public final ConfigValue<Integer> prismaticReaperDamage;
-		public final ConfigValue<Integer> explosionSize;
-		public final ConfigValue<Integer> explosionType;
-		public final ConfigValue<Boolean> explosionFire;
+		public final ConfigValue<Integer> thunderStaffExplosionSize;
+		public final ConfigValue<Integer> thunderStaffExplosionType;
+		public final ConfigValue<Boolean> thunderStaffExplosionFire;
+		public final ConfigValue<Integer> rayGunExplosionSize;
+		public final ConfigValue<Integer> rayGunExplosionType;
+		public final ConfigValue<Boolean> rayGunExplosionFire;
 		public final ConfigValue<Boolean> enableAutoEnchanting;
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
 		public final ConfigValue<Boolean> enableRainbowAntTeleport;
@@ -197,12 +200,20 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Functionality");
 			builder.push("Thunder Staff");
-			explosionSize = builder.define("Thunder Staff explosion size", 5);
-			explosionType = builder.comment("0 = NONE - The Thunder Staff will not affect the terrain." + "\n" +
+			thunderStaffExplosionSize = builder.define("Thunder Staff explosion size", 4);
+			thunderStaffExplosionType = builder.comment("0 = NONE - The Thunder Staff will not affect the terrain." + "\n" +
 					"1 = BREAK - The Thunder Staff will drop some blocks that it breaks. (May not work due to lightning)" + "\n" +
 					"2 = DESTROY - The Thunder Staff will destroy blocks and never drop them.")
 					.defineInRange("Thunder Staff explosion type", 2, 0, 2);
-			explosionFire = builder.define("Fire from explosion", true);
+			thunderStaffExplosionFire = builder.define("Fire from Thunder Staff explosion", true);
+			builder.pop();
+			builder.push("Ray Gun");
+			rayGunExplosionSize = builder.define("Ray Gun explosion size", 6);
+			rayGunExplosionType = builder.comment("0 = NONE - The Ray Gun will not affect the terrain." + "\n" +
+					"1 = BREAK - The Ray Gun will drop some blocks that it breaks." + "\n" +
+					"2 = DESTROY - The Ray Gun will destroy blocks and never drop them.")
+					.defineInRange("Ray Gun explosion type", 2, 0, 2);
+			rayGunExplosionFire = builder.define("Fire from Ray Gun explosion", false);
 			builder.pop();
 			builder.push("World Generation");
 			enableOreGen = builder.define("Enable ore generation", true);
