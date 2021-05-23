@@ -46,7 +46,6 @@ public class CABlockLootTables extends BlockLootTables
         registerDropSelfLootTable(CABlocks.CRYSTAL_LOG.get());
         registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD.get());
         registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD_PLANKS.get());
-        registerDropSelfLootTable(CABlocks.ENT_DUNGEON_WOOD.get());
         registerDropSelfLootTable(CABlocks.FOSSILISED_EMERALD_GATOR.get());
         registerDropSelfLootTable(CABlocks.FOSSILISED_ENT.get());
         registerDropSelfLootTable(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
