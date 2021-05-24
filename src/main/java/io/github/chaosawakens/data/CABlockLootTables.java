@@ -23,7 +23,7 @@ public class CABlockLootTables extends BlockLootTables
         registerLootTable(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (block) -> dropping(CABlocks.KYANITE.get()));
         registerLootTable(CABlocks.CRYSTAL_TORCH.get(), (block) -> dropping(CABlocks.CRYSTAL_TORCH.get()));
         registerLootTable(CABlocks.SUNSTONE_TORCH.get(), (block) -> dropping(CABlocks.SUNSTONE_TORCH.get()));
-        registerLootTable(CABlocks.EXTREME_TORCH.get(), (block) -> dropping(CAItems.EXTREME_TORCH.get()));
+        //registerLootTable(CABlocks.EXTREME_TORCH.get(), (block) -> dropping(CAItems.EXTREME_TORCH.get()));
         registerLootTable(CABlocks.GOLDEN_MELON.get(), (food) -> randomDropping(CAItems.GOLDEN_MELON_SLICE.get(), 3, 7));
         registerLootTable(CABlocks.GOLDEN_MELON_STEM.get(), (seeds) -> dropping(CAItems.GOLDEN_MELON_SEEDS.get()));
         registerLootTable(CABlocks.RUBY_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.RUBY.get()));

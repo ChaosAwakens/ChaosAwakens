@@ -2,13 +2,23 @@ package io.github.chaosawakens.common.worldgen;
 
 import java.util.Objects;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAFeatures;
+import io.github.chaosawakens.common.registry.CAFeatures.RuleTests;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagCollectionManager;
+import net.minecraft.tags.TagCollectionReader;
+import net.minecraft.tags.TagRegistry;
+import net.minecraft.tags.TagRegistryManager;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.Blocks;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -35,8 +45,11 @@ public class EventBiomeLoading {
 		}
 
 		if(BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
+			
 			gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAFeatures.TREES_CRYSTAL_PLAINS);
-			if (CAConfig.COMMON.enableOreGen.get()) addCrystalDimOres(gen);
+			if (CAConfig.COMMON.enableOreGen.get()) {
+				addCrystalDimOres(gen);ChaosAwakens.LOGGER.debug("");
+			}
 		}
 
 	}
@@ -89,7 +102,7 @@ public class EventBiomeLoading {
 
 	public static void addCrystalDimOres(BiomeGenerationSettingsBuilder gen) {
 		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_ENERGY);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_CATS_EYE_BUDDING);
-		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.CRYSTAL_ORE_PINK_BUDDING);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.GEODE_CATS_EYE);
+		gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.GEODE_PINK_TOURMALINE);
 	}
 }

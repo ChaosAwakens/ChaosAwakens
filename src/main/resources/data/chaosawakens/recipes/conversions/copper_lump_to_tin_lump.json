@@ -5,10 +5,10 @@
       "item": "projecte:philosophers_stone"
     },
     {
-      "tag": "chaosawakens:lumps/copper"
+      "item": "chaosawakens:copper_lump"
     },
     {
-      "tag": "chaosawakens:lumps/copper"
+      "item": "chaosawakens:copper_lump"
     }
   ],
   "result": {
