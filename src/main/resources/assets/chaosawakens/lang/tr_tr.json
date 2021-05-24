@@ -27,6 +27,7 @@
 	"entity.chaosawakens.ultimate_arrow": "Ultimate Ok",
 	"entity.chaosawakens.irukandji_arrow": "Irukandji Ok",
 	"entity.chaosawakens.thunder_ball": "Şimşek Topu",
+	"entity.chaosawakens.explosive_ball": "Explosive Ball",
 
 	"item.chaosawakens.ent_spawn_egg": "Karınca Çağırma Yumurtası",
 	"item.chaosawakens.brown_ant_spawn_egg": "Kahverengi Karınca Çağırma Yumurtası",
@@ -250,6 +251,10 @@
 	"block.chaosawakens.sunstone_torch": "Güneş Taşı Meşalesi",
 	"block.chaosawakens.wall_sunstone_torch": "Güneş Taşı Duvar Meşalesi",
 
+	"item.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.wall_extreme_torch": "Wall Extreme Torch",
+
 	"item.chaosawakens.bloodstone": "Kan Taşı",
 	"block.chaosawakens.bloodstone_ore": "Kan Taşı Cevheri",
 	"block.chaosawakens.bloodstone_block": "Kan Taşı Bloğu",
@@ -350,6 +355,7 @@
 	"item.chaosawakens.irukandji_arrow": "Irukandji Ok",
 
 	"block.chaosawakens.gate_block": "Geçit Bloğu",
+	"block.chaosawakens.spawner_block": "Spawner Block",
 
 	"block.chaosawakens.brown_ant_nest": "Kahverengi Karınca Yuvası",
 	"block.chaosawakens.red_ant_nest": "Kırmızı Karınca Yuvası",
@@ -374,9 +380,5 @@
 	"item.chaosawakens.zoo_cage_extra_large": "Ekstra Büyük Hayvanat Bahçesi Kafesi",
 
 	"misc.chaosawakens.empty_inventory": "Önce envanterini boşalttım!",
-	"misc.chaosawakens.inaccessible_dimension": "Hedef boyut henüz burada görünmüyor.",
-	"entity.chaosawakens.explosive_ball": "Explosive Ball",
-	"item.chaosawakens.extreme_torch": "Extreme Torch",
-	"block.chaosawakens.extreme_torch": "Extreme Torch",
-	"block.chaosawakens.wall_extreme_torch": "Wall Extreme Torch"
+	"misc.chaosawakens.inaccessible_dimension": "Hedef boyut henüz burada görünmüyor."
 }

@@ -27,6 +27,7 @@
 	"entity.chaosawakens.ultimate_arrow": "Flecha Ultimate",
 	"entity.chaosawakens.irukandji_arrow": "Flecha de Irukandji",
 	"entity.chaosawakens.thunder_ball": "Carga de Rayo",
+	"entity.chaosawakens.explosive_ball": "Explosive Charge",
 
 	"item.chaosawakens.ent_spawn_egg": "Huevo de Ent",
 	"item.chaosawakens.brown_ant_spawn_egg": "Huevo de Hormiga Cafe",
@@ -243,12 +244,16 @@
 	"item.chaosawakens.platinum_leggings": "Pantalones de Platino",
 	"item.chaosawakens.platinum_boots": "Botas de Platinio",
 
-	"item.chaosawakens.sunstone": "	Piedra Solar",
+	"item.chaosawakens.sunstone": "Piedra Solar",
 	"block.chaosawakens.sunstone_ore": "Mineral de Piedra Solar",
 	"block.chaosawakens.sunstone_block": "Bloque de Piedra Solar",
 	"item.chaosawakens.sunstone_torch": "Antorcha de Piedra Solar",
 	"block.chaosawakens.sunstone_torch": "Antorcha de Piedra Solar",
 	"block.chaosawakens.wall_sunstone_torch": "Antorcha de Pared de Piedra Solar",
+
+	"item.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.wall_extreme_torch": "Wall Extreme Torch",
 
 	"item.chaosawakens.bloodstone": "Piedra de Sangre",
 	"block.chaosawakens.bloodstone_ore": "Mineral de Piedra de Sangre",
@@ -350,7 +355,7 @@
 	"item.chaosawakens.irukandji_arrow": "Flecha de Irukandji",
 
 	"block.chaosawakens.gate_block": "Bloque de Puerta",
-	"block.chaosawakens.ent_dungeon_wood": "Madera de Calabozo de Ent",
+	"block.chaosawakens.spawner_block": "Spawner Block",
 
 	"block.chaosawakens.brown_ant_nest": "Nido de Hormiga Cafe",
 	"block.chaosawakens.red_ant_nest": "Nido de Hormiga Roja",

@@ -27,6 +27,7 @@
 	"entity.chaosawakens.ultimate_arrow": "Ультимативная стрела",
 	"entity.chaosawakens.irukandji_arrow": "Стрела ируканджи",
 	"entity.chaosawakens.thunder_ball": "Громовой заряд",
+	"entity.chaosawakens.explosive_ball": "Explosive Charge",
 
 	"item.chaosawakens.ent_spawn_egg": "Яйцо призыва Ent",
 	"item.chaosawakens.brown_ant_spawn_egg": "Яйцо призыва Коричневого муравья",
@@ -250,6 +251,10 @@
 	"block.chaosawakens.sunstone_torch": "Факел из солнечного камня",
 	"block.chaosawakens.wall_sunstone_torch": "Настенный Факел из солнечного камня",
 
+	"item.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.wall_extreme_torch": "Wall Extreme Torch",
+
 	"item.chaosawakens.bloodstone": "Кровавый камень",
 	"block.chaosawakens.bloodstone_ore": "Руда кровавого камня",
 	"block.chaosawakens.bloodstone_block": "Блок кровавого камня",
@@ -350,7 +355,7 @@
 	"item.chaosawakens.irukandji_arrow": "Стрела ируканджи",
 
 	"block.chaosawakens.gate_block": "Блок ворот",
-	"block.chaosawakens.ent_dungeon_wood": "Дерево из главной башни Ent",
+	"block.chaosawakens.spawner_block": "Spawner Block",
 
 	"block.chaosawakens.brown_ant_nest": "Гнездо коричневых муравьёв",
 	"block.chaosawakens.red_ant_nest": "Гнездо красных муравьёв",
