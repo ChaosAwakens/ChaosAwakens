@@ -73,7 +73,8 @@ public class ClientSetupEvent {
 		
 		RenderTypeLookup.setRenderLayer(CABlocks.SUNSTONE_TORCH.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.WALL_SUNSTONE_TORCH.get(), RenderType.getCutoutMipped());
-		//RenderTypeLookup.setRenderLayer(CABlocks.EXTREME_TORCH.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.EXTREME_TORCH.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.WALL_EXTREME_TORCH.get(), RenderType.getCutoutMipped());
 		
 		ItemModelsProperties.registerProperty(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {

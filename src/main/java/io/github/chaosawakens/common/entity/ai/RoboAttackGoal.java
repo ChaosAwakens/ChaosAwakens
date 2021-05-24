@@ -49,8 +49,7 @@ public class RoboAttackGoal extends Goal {
 				
 				/*if (!this.projectileOwner.isSilent()) {
 					world.playEvent(null, 1016, this.projectileOwner.getPosition(), 0);
-				}
-				ChaosAwakens.LOGGER.debug(directionNormal.getX()+" "+directionNormal.getY()+" "+directionNormal.getZ());*/
+				}*/
 				
 				RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.getX()/5, directionNormal.getY()/5, directionNormal.getZ()/5);
 				roboLaserEntity.setPosition(this.projectileOwner.getPosX(), this.projectileOwner.getPosYHeight(ownerHeightYScale), this.projectileOwner.getPosZ());

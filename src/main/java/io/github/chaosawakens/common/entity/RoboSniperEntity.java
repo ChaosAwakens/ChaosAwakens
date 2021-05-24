@@ -63,9 +63,9 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
