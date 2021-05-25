@@ -40,16 +40,16 @@ public class RoboAttackGoal extends Goal {
 			World world = this.projectileOwner.world;
 			
 			this.attackTimer++;
-			if (this.attackTimer == fireRateBase && !this.projectileOwner.isSilent())
+			/*if (this.attackTimer == fireRateBase && !this.projectileOwner.isSilent())
 				world.playEvent(null, 1015, this.projectileOwner.getPosition(), 0);
-			
+			*/
 			if (this.attackTimer == fireRateBase*2) {
 				Vector3d lookVector = this.projectileOwner.getLook(1.0F);
 				Vector3d directionNormal = new Vector3d(targetEntity.getPosX() - (this.projectileOwner.getPosX() - lookVector.getX()), targetEntity.getPosYHeight(0.5) - (0.5 + this.projectileOwner.getPosYHeight(0.5)), targetEntity.getPosZ() - (this.projectileOwner.getPosZ() - lookVector.getZ())).normalize();
 				
-				/*if (!this.projectileOwner.isSilent()) {
+				if (!this.projectileOwner.isSilent()) {
 					world.playEvent(null, 1016, this.projectileOwner.getPosition(), 0);
-				}*/
+				}
 				
 				RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.getX()/5, directionNormal.getY()/5, directionNormal.getZ()/5);
 				roboLaserEntity.setPosition(this.projectileOwner.getPosX(), this.projectileOwner.getPosYHeight(ownerHeightYScale), this.projectileOwner.getPosZ());

@@ -23,9 +23,8 @@ import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CAStructures;
 import io.github.chaosawakens.common.registry.CATileEntities;
-import io.github.chaosawakens.common.worldgen.CABiomeFeatures;
+import io.github.chaosawakens.common.worldgen.BiomeLoadEventHandler;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
-import io.github.chaosawakens.common.worldgen.EventBiomeLoading;
 import io.github.chaosawakens.data.CAItemModelGenerator;
 import io.github.chaosawakens.data.CALootTableProvider;
 import net.minecraft.data.DataGenerator;
@@ -43,11 +42,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -104,7 +101,7 @@ public class ChaosAwakens {
 //		}
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, EventBiomeLoading::onBiomeLoadingEvent);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventHandler::onBiomeLoadingEvent);
 		MinecraftForge.EVENT_BUS.addListener(CraftingEventHandler::onItemCraftedEvent);
 		MinecraftForge.EVENT_BUS.register(this);
 		
@@ -149,12 +146,6 @@ public class ChaosAwakens {
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
-	}
-	
-	@SubscribeEvent(priority = EventPriority.HIGH)
-	public void biomeLoadingAdd(final BiomeLoadingEvent event) {
-		CABiomeFeatures.addMobSpawns(event);
-		CABiomeFeatures.addStructureSpawns(event);
 	}
 	
 	private void gatherData(final GatherDataEvent event) {

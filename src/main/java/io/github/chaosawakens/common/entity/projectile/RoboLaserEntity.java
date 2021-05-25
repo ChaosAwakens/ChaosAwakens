@@ -89,9 +89,6 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 	@Nonnull
 	@Override
 	public IPacket<?> createSpawnPacket() {
-		//Entity entity = this.getShooter();
-		//int i = entity == null ? 0 : entity.getEntityId();
-		//return new SSpawnObjectPacket(this.getEntityId(), this.getUniqueID(), this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationPitch, this.rotationYaw, this.getType(), i, new Vector3d(this.accelerationX, this.accelerationY, this.accelerationZ));
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	

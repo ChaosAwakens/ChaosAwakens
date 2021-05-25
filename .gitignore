@@ -1,20 +1,19 @@
 # User-specific stuff
-.idea/
-.gitignore
 *.iml
 *.ipr
 *.iws
+
+# IntelliJ
+.idea/
+out/
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# Eclipse
 *.launch
 .classpath
 .project
 .settings
-run/
-build/
-
-# IntelliJ
-out/
-# mpeltonen/sbt-idea plugin
-.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml

@@ -11,22 +11,12 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CAFeatures.CATrunkPlacerType;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.FoliagePlacer.Foliage;
 import net.minecraft.world.gen.trunkplacer.AbstractTrunkPlacer;
-import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
 
 /**
@@ -44,7 +34,7 @@ public class CrystalStraightTrunkPlacer extends AbstractTrunkPlacer {
 	
 	@Override
 	protected TrunkPlacerType<?> getPlacerType() {
-		return CATrunkPlacerType.CRYSTAL_STRAIGHT_TRUNK_PLACER;
+		return null; //CATrunkPlacerType.CRYSTAL_STRAIGHT_TRUNK_PLACER;
 	}
 	
 	@Override
