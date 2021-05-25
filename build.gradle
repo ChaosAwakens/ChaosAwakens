@@ -9,6 +9,7 @@ buildscript {
     }
 }
 
+apply plugin: "eclipse"
 apply plugin: "net.minecraftforge.gradle"
 
 group = 'io.github'
