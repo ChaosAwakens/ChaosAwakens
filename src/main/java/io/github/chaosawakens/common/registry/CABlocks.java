@@ -1,34 +1,9 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.function.Supplier;
-import java.util.function.ToIntFunction;
-
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.BuddingBlock;
-import io.github.chaosawakens.common.blocks.CAOreBlock;
-import io.github.chaosawakens.common.blocks.CASpawnerBlock;
-import io.github.chaosawakens.common.blocks.CrystalClusterBlock;
-import io.github.chaosawakens.common.blocks.CrystalCraftingTableBlock;
-import io.github.chaosawakens.common.blocks.CrystalEnergyBlock;
-import io.github.chaosawakens.common.blocks.CrystalFurnaceBlock;
-import io.github.chaosawakens.common.blocks.EnchantedGoldenCakeBlock;
-import io.github.chaosawakens.common.blocks.GateBlock;
-import io.github.chaosawakens.common.blocks.GoldenCakeBlock;
-import io.github.chaosawakens.common.blocks.GoldenMelonBlock;
-import io.github.chaosawakens.common.blocks.RedAntInfestedOre;
-import io.github.chaosawakens.common.blocks.TermiteInfestedOre;
+import io.github.chaosawakens.common.blocks.*;
 import io.github.chaosawakens.common.items.EnchantedBlockItem;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AttachedStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.StemBlock;
-import net.minecraft.block.StemGrownBlock;
-import net.minecraft.block.TorchBlock;
-import net.minecraft.block.WallTorchBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
@@ -44,6 +19,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
+
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CABlocks {
 
@@ -55,7 +33,7 @@ public class CABlocks {
 	public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon", () -> new GoldenMelonBlock(Block.Properties.from(Blocks.MELON).harvestTool(ToolType.AXE)), CAItemGroups.foodItemGroup);
 	public static final RegistryObject<Block> ATTACHED_GOLDEN_MELON_STEM = registerBlock("attached_golden_melon_stem", () -> new AttachedStemBlock((StemGrownBlock)GOLDEN_MELON.get(), AbstractBlock.Properties.from(Blocks.ATTACHED_MELON_STEM)), null);
 	public static final RegistryObject<Block> GOLDEN_MELON_STEM = registerBlock("golden_melon_stem", () -> new StemBlock((StemGrownBlock)GOLDEN_MELON.get(), AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.STEM)), null);
-	public static final RegistryObject<GoldenCakeBlock> GOLDEN_CAKE = registerBlock("golden_cake", () -> new GoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup);
+	public static final RegistryObject<GoldenCakeBlock> GOLDEN_CAKE = registerSingleBlock("golden_cake", () -> new GoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup);
 
 	// DUNGEON BLOCKS
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
@@ -135,12 +113,22 @@ public class CABlocks {
 	public static final RegistryObject<Block> WALL_EXTREME_TORCH = registerBlock("wall_extreme_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 16).sound(SoundType.WOOD).lootFrom( () -> CABlocks.EXTREME_TORCH.get()), ParticleTypes.FLAME), null, false);
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
-		return registerBlock(name,supplier,itemGroup,true);
+		return registerBlock(name, supplier, itemGroup, true);
 	}
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, boolean generateItem) {
 		RegistryObject<B> block = CABlocks.BLOCKS.register(name, supplier);
 		if (generateItem) ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup)));
+		return block;
+	}
+
+	public static <B extends Block> RegistryObject<B> registerSingleBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
+		return registerSingleBlock(name, supplier, itemGroup, true);
+	}
+
+	public static <B extends Block> RegistryObject<B> registerSingleBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, boolean generateItem) {
+		RegistryObject<B> block = CABlocks.BLOCKS.register(name, supplier);
+		if (generateItem) ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup).maxStackSize(1)));
 		return block;
 	}
 
