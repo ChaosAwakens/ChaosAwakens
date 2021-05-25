@@ -1,6 +1,3 @@
-/**
- * 
- */
 package io.github.chaosawakens.server;
 
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
