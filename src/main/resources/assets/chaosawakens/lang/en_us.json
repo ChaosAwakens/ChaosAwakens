@@ -356,6 +356,7 @@
 
 	"block.chaosawakens.gate_block": "Gate Block",
 	"block.chaosawakens.spawner_block": "Spawner Block",
+	"block.chaosawakens.random_teleport_block": "Random Teleport Block",
 
 	"block.chaosawakens.brown_ant_nest": "Brown Ant Nest",
 	"block.chaosawakens.red_ant_nest": "Red Ant Nest",

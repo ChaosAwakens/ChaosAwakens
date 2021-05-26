@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeature;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
@@ -12,15 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureSpread;
-import net.minecraft.world.gen.feature.Features;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.TwoLayerFeature;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
@@ -64,7 +55,7 @@ public class CAFeatures {
 	public static final ConfiguredFeature<?, ?> MINING_ORE_BLOODSTONE = register("mining_ore_bloodstone", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_MINING, States.BLOODSTONE_ORE, 5)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(28, 6))).square().count(8));
 	public static final ConfiguredFeature<?, ?> MINING_RED_ANT_INFESTED = register("mining_ore_red_ant_infested", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_MINING, States.RED_ANT_INFESTED_ORE, 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 12))).square().count(5));
 	public static final ConfiguredFeature<?, ?> MINING_TERMITE_INFESTED = register("mining_ore_termite_infested", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_MINING, States.TERMITE_INFESTED_ORE, 8)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(24, 12))).square().count(2));
-	
+
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_ENERGY = register("crystal_ore_energy", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CRYSTAL_ENERGY, 5)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(60, 7))).square().count(5));
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_PINK_BUDDING = register("crystal_ore_pink_budding", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, 2)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(36, 5))).square().count(5));
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_CATS_EYE_BUDDING = register("crystal_ore_cats_eye_budding", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, 1)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(12, 3))).square().count(5));
