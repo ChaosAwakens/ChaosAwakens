@@ -38,6 +38,7 @@ public class CABlocks {
 	// DUNGEON BLOCKS
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CASpawnerBlock> SPAWNER_BLOCK = registerBlock("spawner_block", () -> new CASpawnerBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(-1.0F).notSolid().noDrops().sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), null);
+	public static final RegistryObject<RandomTeleportBlock> RANDOM_TELEPORT_BLOCK = registerBlock("random_teleport_block", () -> new RandomTeleportBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
 
 	// MINERAL ORES
 	public static final RegistryObject<CAOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.ANCIENT_DEBRIS).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
