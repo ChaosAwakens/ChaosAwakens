@@ -1,0 +1,14 @@
+{
+	"entity.robo.shoot": {
+		"subtitle": "subtitles.entity.robo.shoot",
+		"sounds": ["chaosawakens:entity/robo/shoot"]
+	},
+	"entity.robo.hurt": {
+		"subtitle": "subtitles.entity.robo.hurt",
+		"sounds": ["chaosawakens:entity/robo/hurt"]
+	},
+	"entity.robo.death": {
+		"subtitle": "subtitles.entity.robo.death",
+		"sounds": ["chaosawakens:entity/robo/death"]
+	}
+}

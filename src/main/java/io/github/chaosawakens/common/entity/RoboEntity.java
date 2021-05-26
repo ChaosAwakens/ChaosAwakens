@@ -1,7 +1,11 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -19,9 +23,13 @@ abstract public class RoboEntity extends MonsterEntity {
 	
 	abstract public void setAttacking(boolean attacking);
 	
-	/*
-	 *private void setDidLaser(boolean didLaserIn) {
-	 *	this.didLaser = didLaserIn;
-	 *}
-	 */
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return CASoundEvents.ROBO_HURT.get();
+	}
+	
+	@Override
+	protected SoundEvent getDeathSound() {
+		return CASoundEvents.ROBO_DEATH.get();
+	}
 }

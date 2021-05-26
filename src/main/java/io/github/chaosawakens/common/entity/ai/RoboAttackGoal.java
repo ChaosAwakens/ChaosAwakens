@@ -1,7 +1,9 @@
 package io.github.chaosawakens.common.entity.ai;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.RoboEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundEvents;
@@ -34,6 +36,12 @@ public class RoboAttackGoal extends Goal {
 	}
 	
 	@Override
+	public void resetTask() {
+		this.attackTimer = 0;
+		this.projectileOwner.setAttacking(false);
+	}
+	
+	@Override
 	public void tick() {
 		LivingEntity targetEntity = this.projectileOwner.getAttackTarget();
 		if (targetEntity.getDistanceSq(this.projectileOwner) < 4096.0D && this.projectileOwner.canEntityBeSeen(targetEntity)) {
@@ -54,13 +62,15 @@ public class RoboAttackGoal extends Goal {
 				RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.getX()/5, directionNormal.getY()/5, directionNormal.getZ()/5);
 				roboLaserEntity.setPosition(this.projectileOwner.getPosX(), this.projectileOwner.getPosYHeight(ownerHeightYScale), this.projectileOwner.getPosZ());
 				roboLaserEntity.setDamage(damage);
-				this.projectileOwner.world.playSound(null, this.projectileOwner.getPosX(), this.projectileOwner.getPosY(), this.projectileOwner.getPosZ(), SoundEvents.BLOCK_DISPENSER_DISPENSE, this.projectileOwner.getSoundCategory(), 1.0F, 1.0F + 1 * 0.2F);
+				this.projectileOwner.world.playSound(null, this.projectileOwner.getPosX(), this.projectileOwner.getPosY(), this.projectileOwner.getPosZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundCategory(), 1.0F, 1.0F + 1 * 0.2F);
 				world.addEntity(roboLaserEntity);
 				this.attackTimer = -fireRateBase*4;
+				
 			}
 		} else if (this.attackTimer > 0) {
 			this.attackTimer--;
 		}
 		this.projectileOwner.setAttacking(this.attackTimer > 10);
+		ChaosAwakens.LOGGER.debug(this.projectileOwner+" -> "+this.projectileOwner.isAttacking()+" : "+this.attackTimer);
 	}
 }

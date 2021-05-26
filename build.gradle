@@ -70,7 +70,7 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-1.16.5:7.7.0.98")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3066754")
 
-    implementation fg.deobf("curse.maven:shutup-experimental-settings-407174:3188120")
+    //implementation fg.deobf("curse.maven:shutup-experimental-settings-407174:3188120")
 
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3312305")
 }

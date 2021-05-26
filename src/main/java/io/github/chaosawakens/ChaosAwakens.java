@@ -21,6 +21,7 @@ import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStructures;
 import io.github.chaosawakens.common.registry.CATileEntities;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventHandler;
@@ -90,6 +91,7 @@ public class ChaosAwakens {
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
+		CASoundEvents.SOUND_EVENTS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventHandler::onEntityAttributeCreationEvent);
 		
 		if (ModList.get().isLoaded("projecte")) {
