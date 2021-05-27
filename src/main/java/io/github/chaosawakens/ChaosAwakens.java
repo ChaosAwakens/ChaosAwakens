@@ -53,14 +53,14 @@ import java.util.Map;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
-	
+
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
-	
+
 	public static ChaosAwakens INSTANCE;
-	
+
 	public static final Logger LOGGER = LogManager.getLogger();
-	
+
 	/**
 	 * Map that contains all the EALs mapped to their items respective registry name,
 	 * would go on a common setup class, but we dont we have so... :shrug:
@@ -71,12 +71,12 @@ public class ChaosAwakens {
 		INSTANCE = this;
 		GeckoLib.initialize();
 		GeckoLibMod.DISABLE_IN_DEV = true;
-		
+
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		eventBus.addListener(this::setup);
 		eventBus.addListener(this::gatherData);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetupEvent::register);
-		
+
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEMS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
@@ -86,7 +86,7 @@ public class ChaosAwakens {
 		CAStructures.STRUCTURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventHandler::onEntityAttributeCreationEvent);
-		
+
 		if (ModList.get().isLoaded("projecte")) {
 			CAEMCValues.init();
 		}
@@ -94,43 +94,43 @@ public class ChaosAwakens {
 //		if (ModList.get().isLoaded("jeresources")) {
 //			CAJER.init();
 //		}
-		
+
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventHandler::onBiomeLoadingEvent);
 		MinecraftForge.EVENT_BUS.addListener(CraftingEventHandler::onItemCraftedEvent);
 		MinecraftForge.EVENT_BUS.register(this);
-		
+
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
 
 	private static Method GETCODEC_METHOD;
-	
+
 	public void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (event.getWorld() instanceof ServerWorld) {
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
 			try {
 				if (GETCODEC_METHOD == null)
 					GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
-				
+
 				ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(serverWorld.getChunkProvider().generator));
 				if (cgRL != null && cgRL.getNamespace().equals("terraforged"))
 					return;
-				
+
 			} catch (Exception e) {
 				ChaosAwakens.LOGGER.error(String.format("%s: Was unable to check if %s is using Terraforged's ChunkGenerator.", e.getCause(), serverWorld.getDimensionKey().getLocation()) );
 			}
-			
+
 			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD))return;
-			
+
 			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>( serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
 			tempMap.putIfAbsent(CAStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.ENT_DUNGEON.get()));
 			serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
 		}
 	}
-	
+
 	private void setup(FMLCommonSetupEvent event) {
 		PacketHandler.init();
-		
+
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
@@ -142,7 +142,7 @@ public class ChaosAwakens {
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
 	}
-	
+
 	private void gatherData(final GatherDataEvent event) {
 		DataGenerator dataGenerator = event.getGenerator();
 		final ExistingFileHelper existing = event.getExistingFileHelper();
@@ -153,7 +153,7 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
 		}
 	}
-	
+
 	public static ResourceLocation prefix(String name) {
 		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
 	}
