@@ -94,6 +94,7 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOreGen;
 		public final ConfigValue<Boolean> enableFossilGen;
 		public final ConfigValue<Boolean> enableTrollOreGen;
+		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Attack Damage");
@@ -229,6 +230,9 @@ public class CAConfig {
 			enableRedAntTeleport = builder.comment("Will the Red Ant teleport you to its Dimension?").define("Red Ant Teleport", true);
 			enableUnstableAntTeleport = builder.comment("Will the Unstable Ant teleport you to its Dimension?").define("Unstable Ant Teleport", true);
 			enableTermiteTeleport = builder.comment("Will the Termite teleport you to its Dimension?").define("Termite Teleport", true);
+			builder.pop();
+			builder.push("Breeding");
+			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);
 			builder.pop();
 			builder.pop();
 		}
