@@ -26,7 +26,7 @@ public class EntEntityModel extends AnimatedGeoModel<EntEntity> {
 	}
 	
 	@Override
-	public void setLivingAnimations(EntEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
+	public void setLivingAnimations(EntEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 		
 		IBone head = this.getAnimationProcessor().getBone("Head");

@@ -26,11 +26,10 @@ public class BrownAntEntityModel extends AnimatedGeoModel<BrownAntEntity> {
 	}
 	
 	@Override
-	public void setLivingAnimations(BrownAntEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
+	public void setLivingAnimations(BrownAntEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 		
 		IBone head = this.getAnimationProcessor().getBone("head");
-		//ChaosAwakens.LOGGER.debug(entity);
 		EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
 		head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
 		head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));

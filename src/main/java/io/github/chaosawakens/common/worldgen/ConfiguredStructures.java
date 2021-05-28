@@ -3,12 +3,14 @@ package io.github.chaosawakens.common.worldgen;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.*;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.FlatGenerationSettings;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 
 public class ConfiguredStructures {
-
+	
 	public static StructureFeature<?, ?> CONFIGURED_ENT_DUNGEON = CAStructures.ENT_DUNGEON.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);
 	
 	public static void registerConfiguredStructures() {

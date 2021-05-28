@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CrystalClusterBlock;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -23,15 +22,14 @@ public class GeodeFeature extends Feature<GeodeFeatureConfig> {
 	public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, GeodeFeatureConfig config) {
 		int yPos = rand.nextInt(config.upperBound - config.lowerBound) + config.lowerBound;
 		
-		// ChaosAwakens.LOGGER.debug(reader.getBlockState(pos.add(0, yPos, 0)));
 		if (rand.nextInt(config.frequency) < rand.nextInt(4))
 			return true;
 		
 		int numClusters = rand.nextInt(3) + rand.nextInt(3);
 		
 		BlockPos targetBudPos = pos.add(rand.nextInt(8), yPos, rand.nextInt(8));
-		ChaosAwakens.LOGGER.debug(config.target.test(reader.getBlockState(targetBudPos), rand)+" "+reader.getBlockState(targetBudPos));
 		reader.setBlockState(targetBudPos, config.budState.with(BlockStateProperties.AGE_0_25, rand.nextInt(8)+17), 2);
+		
 		for (int i = 0; i < numClusters; i++) {
 			BlockPos targetClusterPos = targetBudPos;
 			Direction direction = Direction.values()[rand.nextInt(Direction.values().length - 1)];

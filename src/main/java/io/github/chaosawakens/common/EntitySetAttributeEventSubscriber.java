@@ -4,9 +4,13 @@ import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
-public class EntitySetAttributeEventHandler {
+/**
+ * Class with method(s) that subscribe to the EntityAttributeCreationEvent
+ * @author invalid2
+ */
+public class EntitySetAttributeEventSubscriber {
 	
-	public static void onEntityAttributeCreationEvent(EntityAttributeCreationEvent event) {
+	public static void onEntityAttributeCreationEvent(final EntityAttributeCreationEvent event) {
 		
 		event.put(CAEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
         event.put(CAEntityTypes.RED_ANT.get(), RedAntEntity.setCustomAttributes().create());

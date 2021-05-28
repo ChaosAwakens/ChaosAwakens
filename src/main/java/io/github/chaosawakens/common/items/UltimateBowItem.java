@@ -23,6 +23,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class UltimateBowItem extends BowItem implements IVanishable {
 	
@@ -51,34 +52,29 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity) entityLiving;
 			
-			int i = this.getUseDuration(stack) - timeLeft;
-			i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
-			if (i < 0)
-				return;
+			if (ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, this.getUseDuration(stack) - timeLeft, true) < 0)return;
 			if (!worldIn.isRemote) {
-				AbstractArrowEntity abstractarrowentity = createArrow(worldIn, playerentity);
-				
-				abstractarrowentity = customArrow(abstractarrowentity);
-				abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
-				abstractarrowentity.setIsCritical(true);
-				abstractarrowentity.setFire(EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0 ? 250 : 75);
+				AbstractArrowEntity arrowEntity = new UltimateArrowEntity(worldIn, entityLiving);
+				arrowEntity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
+				arrowEntity.setIsCritical(true);
+				arrowEntity.setFire(EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0 ? 250 : 75);
 
-				int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+				int powerLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 				if (!CAConfig.COMMON.enableAutoEnchanting.get()) {
-					abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double) j * 0.5D + 2D);
+					arrowEntity.setDamage(arrowEntity.getDamage() + (double) powerLevel * 0.5D + 2D);
 				}
 				else {
-					abstractarrowentity.setDamage(abstractarrowentity.getDamage() + 3D);
+					arrowEntity.setDamage(arrowEntity.getDamage() + 3D);
 				}
 
 				int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
-				abstractarrowentity.setKnockbackStrength(!CAConfig.COMMON.enableAutoEnchanting.get() ? k+1 : 1);
+				arrowEntity.setKnockbackStrength(!CAConfig.COMMON.enableAutoEnchanting.get() ? k+1 : 1);
 				
 				if (!playerentity.isCreative()) {
 					stack.damageItem(1, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
 				}
 				
-				worldIn.addEntity(abstractarrowentity);
+				worldIn.addEntity(arrowEntity);
 				
 				worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
 				playerentity.addStat(Stats.ITEM_USED.get(this));
@@ -116,9 +112,5 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get();
-	}
-	
-	private AbstractArrowEntity createArrow(World worldIn, LivingEntity shooter) {
-		return new UltimateArrowEntity(worldIn, shooter);
 	}
 }

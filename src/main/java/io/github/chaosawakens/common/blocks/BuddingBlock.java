@@ -76,12 +76,17 @@ public class BuddingBlock extends Block {
 			
 			if(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName().equals(budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isSolidSide(worldIn, budTargetPos, direction))
 				 validStatePos.add( new BlockStatePos(budTargetPos, budState.with(BlockStateProperties.FACING, direction)
-								.with(BlockStateProperties.AGE_0_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).get(BlockStateProperties.AGE_0_3) < 3 ? budState.get(BlockStateProperties.AGE_0_3)+1 : budState.get(BlockStateProperties.AGE_0_3) )));
+						.with(BlockStateProperties.AGE_0_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).get(BlockStateProperties.AGE_0_3) < 3 ? budState.get(BlockStateProperties.AGE_0_3)+1 : budState.get(BlockStateProperties.AGE_0_3) )));
 		}
 		
 		return validStatePos;
 	}
 	
+	/**
+	 * DTO so that both BlockState and BlockPos are returned
+	 * @author invalid2
+	 *
+	 */
 	class BlockStatePos {
 		private BlockPos pos;
 		private BlockState state;

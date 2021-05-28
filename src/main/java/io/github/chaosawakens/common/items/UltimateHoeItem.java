@@ -11,6 +11,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class UltimateHoeItem extends EnchantedHoeItem {
 
@@ -21,27 +23,27 @@ public class UltimateHoeItem extends EnchantedHoeItem {
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
-        BlockPos blockpos2;
-        int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(context);
+        BlockPos eventPos = context.getPos();
+        
+        int hook = ForgeEventFactory.onHoeUse(context);
         if (hook != 0) return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
-        if (context.getFace() != Direction.DOWN && world.isAirBlock(blockpos.up())) {
-            BlockState blockstate = world.getBlockState(blockpos).getToolModifiedState(world, blockpos, context.getPlayer(), context.getItem(), net.minecraftforge.common.ToolType.HOE);
-            if (blockstate != null) {
+        if (context.getFace() != Direction.DOWN && world.isAirBlock(eventPos.up())) {
+            BlockState blockState = world.getBlockState(eventPos).getToolModifiedState(world, eventPos, context.getPlayer(), context.getItem(), ToolType.HOE);
+            if (blockState != null) {
                 PlayerEntity playerentity = context.getPlayer();
-                world.playSound(playerentity, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(playerentity, eventPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 if (!world.isRemote && playerentity != null) {
                     context.getItem().damageItem(1, playerentity, (player) -> player.sendBreakAnimation(context.getHand()));
                 }
                 for (int x = -1; x < 2; x++) {
                     for (int y = -1; y < 2; y++) {
                         for (int z = -1; z < 2; z++) {
-                            blockpos2 = new BlockPos(blockpos.getX() + x, blockpos.getY() + y, blockpos.getZ() + z);
-                            if (world.isAirBlock(blockpos2.up())) {
-                                blockstate = world.getBlockState(blockpos2).getToolModifiedState(world, blockpos2, context.getPlayer(), context.getItem(), net.minecraftforge.common.ToolType.HOE);
-                                if (blockstate != null) {
+                        	BlockPos targetPos = new BlockPos(eventPos.getX() + x, eventPos.getY() + y, eventPos.getZ() + z);
+                            if (world.isAirBlock(targetPos.up())) {
+                                blockState = world.getBlockState(targetPos).getToolModifiedState(world, targetPos, context.getPlayer(), context.getItem(), ToolType.HOE);
+                                if (blockState != null) {
                                     if (!world.isRemote) {
-                                        world.setBlockState(blockpos2, blockstate, 11);
+                                        world.setBlockState(targetPos, blockState, 11);
                                     }
                                 }
                             }
