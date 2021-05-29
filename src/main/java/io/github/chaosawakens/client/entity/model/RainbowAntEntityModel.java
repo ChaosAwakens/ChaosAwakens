@@ -26,7 +26,7 @@ public class RainbowAntEntityModel extends AnimatedGeoModel<RainbowAntEntity> {
 	}
 	
 	@Override
-	public void setLivingAnimations(RainbowAntEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
+	public void setLivingAnimations(RainbowAntEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 		
 		IBone head = this.getAnimationProcessor().getBone("head");

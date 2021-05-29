@@ -18,7 +18,11 @@ import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BiomeLoadEventHandler {
+/**
+ * Class with method(s) that subscribe to the BiomeLoadingEvent
+ * @author invalid2
+ */
+public class BiomeLoadEventSubscriber {
 	
 	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
 		StructureHandler.addfeatures(event);
@@ -76,7 +80,6 @@ public class BiomeLoadEventHandler {
 	}
 	
 	private static class StructureHandler {
-		
 		
 		public static void addfeatures(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();

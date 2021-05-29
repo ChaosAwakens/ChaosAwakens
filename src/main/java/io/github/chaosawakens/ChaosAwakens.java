@@ -3,13 +3,13 @@ package io.github.chaosawakens;
 import com.mojang.serialization.Codec;
 import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
 import io.github.chaosawakens.client.ClientSetupEvent;
-import io.github.chaosawakens.common.CraftingEventHandler;
-import io.github.chaosawakens.common.EntitySetAttributeEventHandler;
+import io.github.chaosawakens.common.CraftingEventSubscriber;
+import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.network.PacketHandler;
+import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.common.registry.*;
-import io.github.chaosawakens.common.worldgen.BiomeLoadEventHandler;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.data.CAAdvancementProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
@@ -24,6 +24,7 @@ import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
@@ -85,8 +86,8 @@ public class ChaosAwakens {
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
-		eventBus.addListener(EntitySetAttributeEventHandler::onEntityAttributeCreationEvent);
-
+		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
+		
 		if (ModList.get().isLoaded("projecte")) {
 			CAEMCValues.init();
 		}
@@ -96,8 +97,8 @@ public class ChaosAwakens {
 //		}
 
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventHandler::onBiomeLoadingEvent);
-		MinecraftForge.EVENT_BUS.addListener(CraftingEventHandler::onItemCraftedEvent);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
+		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
 		MinecraftForge.EVENT_BUS.register(this);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
@@ -108,11 +109,12 @@ public class ChaosAwakens {
 	public void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (event.getWorld() instanceof ServerWorld) {
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
+			ServerChunkProvider chunkProvider = serverWorld.getChunkProvider();
 			try {
 				if (GETCODEC_METHOD == null)
 					GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
-
-				ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(serverWorld.getChunkProvider().generator));
+				
+				ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(chunkProvider.generator));
 				if (cgRL != null && cgRL.getNamespace().equals("terraforged"))
 					return;
 
@@ -121,10 +123,10 @@ public class ChaosAwakens {
 			}
 
 			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD))return;
-
-			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>( serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
+			
+			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>( chunkProvider.generator.func_235957_b_().func_236195_a_());
 			tempMap.putIfAbsent(CAStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.ENT_DUNGEON.get()));
-			serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
+			chunkProvider.generator.func_235957_b_().field_236193_d_ = tempMap;
 		}
 	}
 

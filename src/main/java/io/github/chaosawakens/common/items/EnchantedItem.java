@@ -8,8 +8,9 @@ public class EnchantedItem extends Item {
     public EnchantedItem(Item.Properties builderIn) {
         super(builderIn);
     }
-
+    
+    @Override
     public boolean hasEffect(ItemStack stack) {
-        return true;
+		return true;
     }
 }

@@ -32,7 +32,6 @@ public class RayGunItem extends Item {
 		projectile.setPosition(playerIn.getPosX(), playerIn.getPosY()+1.5, playerIn.getPosZ());
 		projectile.setDirectionAndMovement(projectile, playerIn.rotationPitch, playerIn.rotationYawHead, 0, 1F, 0);
 		
-		//ChaosAwakens.LOGGER.debug(xA + "  " + yA + " " + zA);
 		if (!playerIn.isCreative()) {
 			heldStack.damageItem(1, playerIn, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
 		}

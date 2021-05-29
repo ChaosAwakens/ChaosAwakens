@@ -10,7 +10,7 @@
 				{
 					"parameters": {
 						"altitude": 0.0,
-						"weirdness": 0.0,
+						"weirdness": 0.5,
 						"offset": 0.0,
 						"temperature": 0.0,
 						"humidity": 0.0
@@ -20,7 +20,7 @@
 				{
 					"parameters": {
 						"altitude": 0.0,
-						"weirdness": 0.0,
+						"weirdness": 0.5,
 						"offset": 0.0,
 						"temperature": 0.0,
 						"humidity": 0.0

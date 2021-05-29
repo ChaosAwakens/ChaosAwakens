@@ -7,10 +7,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 import io.github.chaosawakens.common.registry.CABlocks;
 
 public class CAOreBlock extends Block {
+	private Supplier<Integer> expFormula = () -> {
+		return 0;
+	};
     private boolean isFossilisedOre = false;
 
     public CAOreBlock(AbstractBlock.Properties properties, boolean fossilised) {
@@ -38,9 +42,21 @@ public class CAOreBlock extends Block {
         }
         return this.isFossilisedOre ? MathHelper.nextInt(rand, 0, 2) : 0;
     }
+    
+    public CAOreBlock withExpDrop(Supplier<Integer> expFormula) {
+    	this.expFormula = expFormula;
+    	return this;
+    }
+    
+    public CAOreBlock withFossilExp() {
+    	this.expFormula = () -> {
+    		return MathHelper.nextInt( new Random(), 0, 2);
+    	};
+    	return this;
+    }
 
     @Override
     public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
-        return silktouch == 0 || isFossilisedOre ? this.getExperience(RANDOM) : 0;
+        return silktouch == 0  ? this.expFormula.get() : 0;
     }
 }
