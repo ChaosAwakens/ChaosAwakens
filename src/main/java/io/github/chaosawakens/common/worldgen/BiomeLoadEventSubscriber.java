@@ -3,7 +3,6 @@ package io.github.chaosawakens.common.worldgen;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -73,7 +72,6 @@ public class BiomeLoadEventSubscriber {
 				case NETHER:
 					break;
 				default:
-					ChaosAwakens.LOGGER.debug(biome);
 					if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
 						OVERWORLD_MOBS.accept(spawnInfoBuilder);
 					break;
@@ -82,7 +80,6 @@ public class BiomeLoadEventSubscriber {
 	}
 	
 	private static class StructureHandler {
-		
 		
 		public static void addfeatures(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();

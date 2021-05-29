@@ -74,6 +74,36 @@
 		],
 		"creature": [
 			{
+				"type": "chaosawakens:brown_ant",
+				"weight": 12,
+				"minCount": 4,
+				"maxCount": 4
+			},
+			{
+				"type": "chaosawakens:red_ant",
+				"weight": 12,
+				"minCount": 4,
+				"maxCount": 4
+			},
+			{
+				"type": "chaosawakens:rainbow_ant",
+				"weight": 12,
+				"minCount": 4,
+				"maxCount": 4
+			},
+			{
+				"type": "chaosawakens:unstable_ant",
+				"weight": 12,
+				"minCount": 4,
+				"maxCount": 4
+			},
+			{
+				"type": "chaosawakens:termite",
+				"weight": 12,
+				"minCount": 4,
+				"maxCount": 4
+			},
+			{
 				"type": "minecraft:sheep",
 				"weight": 12,
 				"minCount": 4,
