@@ -16,6 +16,7 @@ public class CABlockLootTables extends BlockLootTables {
 	protected void addTables() {
 		registerLootTable(CABlocks.AMETHYST_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.AMETHYST.get()));
 		registerLootTable(CABlocks.ATTACHED_GOLDEN_MELON_STEM.get(), (seeds) -> dropping(CAItems.GOLDEN_MELON_SEEDS.get()));
+		registerLootTable(CABlocks.BLOODSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.BLOODSTONE.get()));
 		registerLootTable(CABlocks.BUDDING_CATS_EYE.get(), (block) -> dropping(CABlocks.KYANITE.get()));
 		registerLootTable(CABlocks.BUDDING_PINK_TOURMALINE.get(), (block) -> dropping(CABlocks.KYANITE.get()));
 		registerLootTable(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (block) -> dropping(CABlocks.KYANITE.get()));
@@ -26,13 +27,13 @@ public class CABlockLootTables extends BlockLootTables {
 		registerLootTable(CABlocks.GOLDEN_MELON_STEM.get(), (seeds) -> dropping(CAItems.GOLDEN_MELON_SEEDS.get()));
 		registerLootTable(CABlocks.RUBY_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.RUBY.get()));
 		registerLootTable(CABlocks.SALT_ORE.get(), (ore) -> randomDropping(CAItems.SALT.get(), 4, 8));
-		registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
 		registerLootTable(CABlocks.SUNSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.SUNSTONE.get()));
-		registerLootTable(CABlocks.BLOODSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.BLOODSTONE.get()));
+		registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
 		
 		registerDropSelfLootTable(CABlocks.ALUMINUM_ORE.get());
 		registerDropSelfLootTable(CABlocks.ALUMINUM_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.AMETHYST_BLOCK.get());
+		registerDropSelfLootTable(CABlocks.BLOODSTONE_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.BROWN_ANT_NEST.get());
 		registerDropSelfLootTable(CABlocks.CATS_EYE_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.CATS_EYE_CLUSTER.get());
@@ -44,6 +45,8 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.CRYSTAL_LOG.get());
 		registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD.get());
 		registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD_PLANKS.get());
+		registerDropSelfLootTable(CABlocks.ENDER_EYE_BLOCK.get());
+		registerDropSelfLootTable(CABlocks.ENDER_PEARL_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.FOSSILISED_EMERALD_GATOR.get());
 		registerDropSelfLootTable(CABlocks.FOSSILISED_ENT.get());
 		registerDropSelfLootTable(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
@@ -62,6 +65,7 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.RUBY_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.SILVER_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.SILVER_ORE.get());
+		registerDropSelfLootTable(CABlocks.SUNSTONE_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.TERMITE_NEST.get());
 		registerDropSelfLootTable(CABlocks.TIGERS_EYE_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.TIN_BLOCK.get());
@@ -72,8 +76,6 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.URANIUM_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.URANIUM_ORE.get());
 		registerDropSelfLootTable(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
-		registerDropSelfLootTable(CABlocks.SUNSTONE_BLOCK.get());
-		registerDropSelfLootTable(CABlocks.BLOODSTONE_BLOCK.get());
 	}
 	
 	protected static LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {
