@@ -31,7 +31,7 @@ public class CAStructures {
 	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure,
 			StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {
 		
-		Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);
+		Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);                                                                                                                                                                                                                                          
 		
 		if (transformSurroundingLand) {
 			Structure.field_236384_t_ = ImmutableList.<Structure<?>>builder().addAll(Structure.field_236384_t_)
