@@ -20,12 +20,6 @@ public class PeacockBootsItem extends ArmorItem {
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		super.onArmorTick(stack, world, player);
 		if (!player.isOnGround())
-			player.addPotionEffect(new EffectInstance(Effects.SLOW_FALLING, 200, 0, false, false));
+			player.addPotionEffect(new EffectInstance(Effects.SLOW_FALLING, 60, 0, false, false));
 	}
-	
-	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get();
-	}
-	
 }
