@@ -56,6 +56,18 @@
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
 	"entity.chaosawakens.explosive_ball": "Explosive Charge",
 
+	"biome.chaosawakens.mining_biome": "Mining Fields",
+	"biome.chaosawakens.mining_spikes": "Mining Spikes",
+	"biome.chaosawakens.village_plains": "Village Plains",
+	"biome.chaosawakens.danger_islands": "Danger Islands",
+	"biome.chaosawakens.crystal_plains": "Crystal Plains",
+	"biome.chaosawakens.crystal_hills": "Crystal Hills",
+
+	"dimension.chaosawakens.crystal_dimension": "Crystal Dimension",
+	"dimension.chaosawakens.mining_dimension": "Mining Dimension",
+	"dimension.chaosawakens.village_mania": "Village Mania",
+	"dimension.chaosawakens.danger_islands": "Danger Islands",
+
 	"item.chaosawakens.ent_spawn_egg": "Ent Spawn Egg",
 	"item.chaosawakens.brown_ant_spawn_egg": "Brown Ant Spawn Egg",
 	"item.chaosawakens.rainbow_ant_spawn_egg": "Rainbow Ant Spawn Egg",
@@ -138,8 +150,8 @@
 	"item.chaosawakens.enchanted_golden_candycane": "Enchanted Golden Candycane",
 	"item.chaosawakens.golden_melon_seeds": "Golden Melon Seeds",
 
-	"block.chaosawakens.ender_eye_block": "Ender Eye Block",
-	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
+	"block.chaosawakens.ender_eye_block": "Block of Eyes of Ender",
+	"block.chaosawakens.ender_pearl_block": "Block of Ender Pearls",
 
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",
@@ -373,6 +385,20 @@
 	"item.chaosawakens.peacock_feather_leggings": "Peacock Feather Leggings",
 	"item.chaosawakens.peacock_feather_boots": "Peacock Feather Boots",
 
+	"item.chaosawakens.royal_guardian_helmet": "Royal Guardian Helmet",
+	"item.chaosawakens.royal_guardian_chestplate": "Royal Guardian Chestplate",
+	"item.chaosawakens.royal_guardian_leggings": "Royal Guardian Leggings",
+	"item.chaosawakens.royal_guardian_boots": "Royal Guardian Boots",
+
+	"item.chaosawakens.battle_axe": "Battle Axe",
+
+	"item.chaosawakens.queen_scale": "Queen Scale",
+	"item.chaosawakens.queen_scale_battle_axe": "Queen Scale Battle Axe",
+	"item.chaosawakens.queen_scale_helmet": "Queen Scale Helmet",
+	"item.chaosawakens.queen_scale_chestplate": "Queen Scale Chestplate",
+	"item.chaosawakens.queen_scale_leggings": "Queen Scale Leggings",
+	"item.chaosawakens.queen_scale_boots": "Queen Scale Boots",
+
 	"item.chaosawakens.nightmare_sword": "Nightmare Sword",
 	"item.chaosawakens.poison_sword": "Poison Sword",
 	"item.chaosawakens.rat_sword": "Rat Sword",
@@ -396,6 +422,9 @@
 	"block.chaosawakens.red_ant_infested_ore": "Diamond Ore",
 	"block.chaosawakens.termite_infested_ore": "Emerald Ore",
 
+	"item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
+	"item.chaosawakens.termite_infested_ore": "Termite Infested Ore",
+
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
 
 	"item.chaosawakens.dev_item1": "Dev Item",
@@ -409,6 +438,11 @@
 	"item.chaosawakens.zoo_cage_medium": "Medium Zoo Cage",
 	"item.chaosawakens.zoo_cage_large": "Large Zoo Cage",
 	"item.chaosawakens.zoo_cage_extra_large": "Extra Large Zoo Cage",
+
+	"block.chaosawakens.corn_plant": "Corn Plant",
+	"block.chaosawakens.tomato_plant": "Tomato Plant",
+	"block.chaosawakens.lettuce_plant": "Lettuce Plant",
+	"block.chaosawakens.strawberry_plant": "Strawberry Bush",
 
 	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
 	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet."
