@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
-public enum ArmorMaterials implements IArmorMaterial {
+public enum CAArmorMaterial implements IArmorMaterial {
 
     //Name, Durability multiplier, Damage Reduction multiplier, Damage Reduction, Enchantability, Sound Events, Toughness, Knockback Resistance, Repair Material
     EMERALD(ChaosAwakens.MODID + ":emerald", 35, new int[] {3, 6, 8, 3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> {
@@ -74,6 +74,14 @@ public enum ArmorMaterials implements IArmorMaterial {
 
     PLATINUM(ChaosAwakens.MODID + ":platinum", 35, new int[] {3, 6, 8, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
         return Ingredient.fromItems(CAItems.PLATINUM_LUMP.get());
+    }),
+
+    ROYAL_GUARDIAN(ChaosAwakens.MODID + ":royal_guardian", 72, new int[] {8, 12, 14, 8}, 84, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6f, 0.075f, () -> {
+        return Ingredient.fromItems();
+    }),
+
+    QUEEN_SCALE(ChaosAwakens.MODID + ":queen_scale", 68, new int[] {9, 14, 16, 9}, 96, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.5f, 0.06f, () -> {
+        return Ingredient.fromItems();
     });
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] {13, 15, 16, 11};
@@ -86,8 +94,8 @@ public enum ArmorMaterials implements IArmorMaterial {
     private final float knockbackResistance;
     private final Supplier<Ingredient> repairMaterial;
 
-    ArmorMaterials(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn,
-                   float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
+    CAArmorMaterial(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn,
+                    float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
 
         this.name = nameIn;
         this.durability = durabilityIn;
