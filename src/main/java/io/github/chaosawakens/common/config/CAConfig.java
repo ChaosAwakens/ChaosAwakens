@@ -94,7 +94,24 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOreGen;
 		public final ConfigValue<Boolean> enableFossilGen;
 		public final ConfigValue<Boolean> enableTrollOreGen;
+		public final ConfigValue<Boolean> enableDzMineralOreGen;
+		public final ConfigValue<Boolean> spawnDzOresInOverworld;
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
+		public final ConfigValue<Boolean> enableOreRubyGen;
+		public final ConfigValue<Boolean> enableOreTigersEyeGen;
+		public final ConfigValue<Boolean> enableOreAmethystGen;
+		public final ConfigValue<Boolean> enableOreTitaniumGen;
+		public final ConfigValue<Boolean> enableOreUraniumGen;
+		public final ConfigValue<Boolean> enableOreSaltGen;
+		public final ConfigValue<Boolean> enableOreAluminumGen;
+		public final ConfigValue<Boolean> enableOreCopperGen;
+		public final ConfigValue<Boolean> enableOreTinGen;
+		public final ConfigValue<Boolean> enableOreSilverGen;
+		public final ConfigValue<Boolean> enableOrePlatinumGen;
+		public final ConfigValue<Boolean> enableOreSunstoneGen;
+		public final ConfigValue<Boolean> enableOreBloodstoneGen;
+
+
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Attack Damage");
@@ -218,8 +235,25 @@ public class CAConfig {
 			builder.pop();
 			builder.push("World Generation");
 			enableOreGen = builder.define("Enable ore generation", true);
+			builder.push("Specific Ore Spawning");
+			enableOreSaltGen = builder.define("Salt ore generation", true);
+			enableOreAmethystGen = builder.define("Amethyst ore generation", true);
+			enableOreRubyGen = builder.define("Ruby ore generation", true);
+			enableOreTigersEyeGen = builder.define("Tiger's Eye ore generation", true);
+			enableOreTitaniumGen = builder.define("Titanium ore generation", true);
+			enableOreUraniumGen = builder.define("Uranium ore generation", true);
+			enableOreCopperGen = builder.define("Copper ore generation", true);
+			enableOreTinGen = builder.define("Tin ore generation", true);
+			enableOreSilverGen = builder.define("Silver ore generation", true);
+			enableOrePlatinumGen = builder.define("Platinum ore generation", true);
+			enableOreSunstoneGen = builder.define("Sunstone ore generation", true);
+			enableOreBloodstoneGen = builder.define("Bloodstone ore generation", true);
+			enableOreAluminumGen = builder.define("Aluminum ore generation", true);
+			builder.pop();
 			enableFossilGen = builder.define("Enable fossilised spawn egg generation", true);
 			enableTrollOreGen = builder.define("Enable ant infested ore generation", true);
+			enableDzMineralOreGen = builder.define("Enable DangerZone material ore generation", true);
+			spawnDzOresInOverworld = builder.define("Will DZ ores spawn in the Overworld?", false);
 			builder.pop();
 			builder.push("Tools/Weapons");
 			enableAutoEnchanting = builder.comment("If disabled, auto-enchanted items will be able to be enchanted manually.").define("Auto-enchant specific tools and weapons", true);

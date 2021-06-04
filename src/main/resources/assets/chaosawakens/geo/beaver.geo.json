@@ -5,7 +5,7 @@
 			"description": {
 				"identifier": "geometry.Beaver",
 				"texture_width": 64,
-				"texture_height": 64,
+				"texture_height": 32,
 				"visible_bounds_width": 3,
 				"visible_bounds_height": 2.5,
 				"visible_bounds_offset": [0, 0.75, 0]

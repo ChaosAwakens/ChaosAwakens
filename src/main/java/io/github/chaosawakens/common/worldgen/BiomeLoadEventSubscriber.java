@@ -118,12 +118,12 @@ public class BiomeLoadEventSubscriber {
 		}
 		
 		private static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_LAVA);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_AMETHYST);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_URANIUM);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TITANIUM);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIGERS_EYE);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SALT);
+			if (CAConfig.COMMON.enableOreRubyGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_RUBY_LAVA);
+			if (CAConfig.COMMON.enableOreAmethystGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_AMETHYST);
+			if (CAConfig.COMMON.enableOreUraniumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_URANIUM);
+			if (CAConfig.COMMON.enableOreTitaniumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TITANIUM);
+			if (CAConfig.COMMON.enableOreTigersEyeGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_TIGERS_EYE);
+			if (CAConfig.COMMON.enableOreSaltGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.ORE_SALT);
 			if (CAConfig.COMMON.enableFossilGen.get()) {
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_ENT);
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.FOSSILISED_HERCULES_BEETLE);
@@ -137,20 +137,20 @@ public class BiomeLoadEventSubscriber {
 		}
 		
 		private static void addMiningDimOres(BiomeGenerationSettingsBuilder gen) {
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_RUBY_LAVA);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_RUBY_NO_SURFACE);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_AMETHYST);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_URANIUM);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TITANIUM);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TIGERS_EYE);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_ALUMINUM);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_COPPER);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TIN);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SILVER);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_PLATINUM);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SUNSTONE);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_BLOODSTONE);
-			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SALT);
+			if (CAConfig.COMMON.enableOreRubyGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_RUBY_LAVA);
+			if (CAConfig.COMMON.enableOreRubyGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_RUBY_NO_SURFACE);
+			if (CAConfig.COMMON.enableOreAmethystGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_AMETHYST);
+			if (CAConfig.COMMON.enableOreUraniumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_URANIUM);
+			if (CAConfig.COMMON.enableOreTitaniumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TITANIUM);
+			if (CAConfig.COMMON.enableOreTigersEyeGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TIGERS_EYE);
+			if (CAConfig.COMMON.enableOreAluminumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_ALUMINUM);
+			if (CAConfig.COMMON.enableOreCopperGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_COPPER);
+			if (CAConfig.COMMON.enableOreTinGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_TIN);
+			if (CAConfig.COMMON.enableOreSilverGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SILVER);
+			if (CAConfig.COMMON.enableOrePlatinumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_PLATINUM);
+			if (CAConfig.COMMON.enableOreSunstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SUNSTONE);
+			if (CAConfig.COMMON.enableOreBloodstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_BLOODSTONE);
+			if (CAConfig.COMMON.enableOreSaltGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_ORE_SALT);
 			if (CAConfig.COMMON.enableFossilGen.get()) {
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_FOSSILISED_ENT);
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAFeatures.MINING_FOSSILISED_HERCULES_BEETLE);
