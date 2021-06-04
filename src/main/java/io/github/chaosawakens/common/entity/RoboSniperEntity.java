@@ -54,28 +54,22 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
-		//return PlayState.CONTINUE;
 	}
 	
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-		this.goalSelector.addGoal(2, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
-		this.goalSelector.addGoal(2, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
+		super.registerGoals();
 		this.goalSelector.addGoal(3, new RoboAttackGoal(this, 11, 7.0F, 0.75F));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 25)
 				.createMutableAttribute(Attributes.ARMOR, 3)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.2)
 				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 25)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)
@@ -98,7 +92,6 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 	}
 	
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public boolean isAttacking() {
 		return this.dataManager.get(ATTACKING);
 	}

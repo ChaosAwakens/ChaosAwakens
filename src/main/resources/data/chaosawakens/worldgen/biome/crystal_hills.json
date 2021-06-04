@@ -5,7 +5,7 @@
 	"downfall": 0.5,
 	"category": "plains",
 	"depth": 0.125,
-	"scale": 0.1,
+	"scale": 0.5,
 	"effects": {
 		"mood_sound": {
 			"sound": "minecraft:ambient.cave",
@@ -21,12 +21,7 @@
 		"foliage_color": 353825
 	},
 	"surface_builder": "chaosawakens:crystal_grass",
-	"carvers": {
-		"air": [
-			"minecraft:cave",
-			"minecraft:canyon"
-		]
-	},
+	"carvers": {},
 	"features": [
 		[],
 		[],
@@ -39,8 +34,7 @@
 		[],
 		[]
 	],
-	"starts": [
-	],
+	"starts": [],
 	"spawners": {
 		"monster": [
 			{
@@ -89,6 +83,5 @@
 			}
 		]
 	},
-	"spawn_costs": {
-	}
+	"spawn_costs": {}
 }

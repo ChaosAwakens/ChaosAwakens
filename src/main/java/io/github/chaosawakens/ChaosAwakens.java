@@ -1,15 +1,34 @@
 package io.github.chaosawakens;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.mojang.serialization.Codec;
-import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
+
+import io.github.chaosawakens.api.EnchantmentAndLevel;
+import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
 import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.network.PacketHandler;
+import io.github.chaosawakens.common.registry.CABiomes;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAFeatures;
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CASoundEvents;
+import io.github.chaosawakens.common.registry.CAStructures;
+import io.github.chaosawakens.common.registry.CATileEntities;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
-import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.data.CAAdvancementProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
@@ -42,15 +61,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
-
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
@@ -64,17 +76,21 @@ public class ChaosAwakens {
 
 	/**
 	 * Map that contains all the EALs mapped to their items respective registry name,
-	 * would go on a common setup class, but we dont we have so... :shrug:
+	 * would go on a common setup class, but we dont we one have so... :shrug:
 	 */
 	public static Map<ResourceLocation, EnchantmentAndLevel[]> enchantedItems = new HashMap<>();
-
+	
+	//public static List<FeatureWrapper> features= new ArrayList<>(); --Unused, probably will be removed
+	
 	public ChaosAwakens() {
 		INSTANCE = this;
 		GeckoLib.initialize();
 		GeckoLibMod.DISABLE_IN_DEV = true;
-
+		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		eventBus.addListener(this::setup);
+		
+		//Register to the mod event bus
+		eventBus.addListener(this::setup); //TODO Detach this from the mod main class
 		eventBus.addListener(this::gatherData);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetupEvent::register);
 
@@ -95,7 +111,8 @@ public class ChaosAwakens {
 //		if (ModList.get().isLoaded("jeresources")) {
 //			CAJER.init();
 //		}
-
+		
+		//Register to the forge event bus
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
@@ -136,8 +153,12 @@ public class ChaosAwakens {
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
+			
+			//This should work, but feels wrong
+			new CAFeatures();
 		});
-
+		
+		//TODO Make it so we don't have to add stuff here manually
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_SPIKES.getId()), CABiomes.Type.MINING_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_DIMENSION);

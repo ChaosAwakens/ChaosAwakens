@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.items;
 import java.util.function.Predicate;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
+import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
 import net.minecraft.enchantment.EnchantmentHelper;

@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
+import io.github.chaosawakens.api.EnchantmentAndLevel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;

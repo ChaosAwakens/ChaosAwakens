@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.api.HeightmapTeleporter;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
@@ -28,6 +29,7 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.util.ITeleporter;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -68,7 +70,13 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 2.0D).createMutableAttribute(Attributes.ARMOR, 0).createMutableAttribute(Attributes.ATTACK_SPEED, 1).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D).createMutableAttribute(Attributes.ATTACK_DAMAGE, 1).createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 0.5D).createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 2.0D)
+				.createMutableAttribute(Attributes.ARMOR, 0)
+				.createMutableAttribute(Attributes.ATTACK_SPEED, 1)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1)
+				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 0.5D)
+				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
 	
 	@Override
@@ -84,6 +92,7 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
 				
 				if (targetWorld != null) {
+					/*playerIn.changeDimension(targetWorld, new HeightmapTeleporter());*/
 					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
 					
 					targetWorld.getChunk(playerIn.getPosition());

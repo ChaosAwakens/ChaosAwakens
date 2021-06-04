@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
+import io.github.chaosawakens.api.EnchantmentAndLevel;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 
 /**

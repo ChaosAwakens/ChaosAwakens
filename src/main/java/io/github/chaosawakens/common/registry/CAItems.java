@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
+import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.enums.ArmorMaterials;
 import io.github.chaosawakens.common.enums.ToolMaterials;

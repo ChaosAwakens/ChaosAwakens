@@ -48,8 +48,8 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.75, true));
-		this.goalSelector.addGoal(6, new ThrowRiderAttackGoal(this, 0.125F, false));
+		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.75, true));
+		this.goalSelector.addGoal(3, new ThrowRiderAttackGoal(this, 0.125F, false));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));
@@ -63,7 +63,7 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 				.createMutableAttribute(Attributes.MAX_HEALTH, 250)
 				.createMutableAttribute(Attributes.ARMOR, 19)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 2.5D)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
 				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 30)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 7.5)

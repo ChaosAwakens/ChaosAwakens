@@ -49,7 +49,7 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
 		registerDropSelfLootTable(CABlocks.FOSSILISED_RUBY_BUG.get());
 		registerDropSelfLootTable(CABlocks.GATE_BLOCK.get());
-		registerDropSelfLootTable(CABlocks.RANDOM_TELEPORT_BLOCK.get());
+		//registerDropSelfLootTable(CABlocks.RANDOM_TELEPORT_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.GREEN_CRYSTAL_LEAVES.get());
 		registerDropSelfLootTable(CABlocks.KYANITE.get());
 		registerDropSelfLootTable(CABlocks.PINK_TOURMALINE_BLOCK.get());

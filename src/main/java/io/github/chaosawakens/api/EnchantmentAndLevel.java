@@ -1,12 +1,12 @@
 /**
  * 
  */
-package io.github.chaosawakens.api.dto;
+package io.github.chaosawakens.api;
 
 import net.minecraft.enchantment.Enchantment;
 
 /**
- * Enchantment and enchantment level DTO
+ * Enchantment and enchantment level thingy
  * @author invalid2
  */
 public class EnchantmentAndLevel {

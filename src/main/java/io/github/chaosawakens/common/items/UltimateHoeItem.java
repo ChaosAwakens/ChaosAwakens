@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
+import io.github.chaosawakens.api.EnchantmentAndLevel;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;

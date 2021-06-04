@@ -47,10 +47,9 @@ public class RoboAttackGoal extends Goal {
 		if (targetEntity.getDistanceSq(this.projectileOwner) < 4096.0D && this.projectileOwner.canEntityBeSeen(targetEntity)) {
 			World world = this.projectileOwner.world;
 			
+			this.projectileOwner.getLookController().setLookPositionWithEntity(projectileOwner.getAttackTarget(), 30.0F, 30.0F);
+			
 			this.attackTimer++;
-			/*if (this.attackTimer == fireRateBase && !this.projectileOwner.isSilent())
-				world.playEvent(null, 1015, this.projectileOwner.getPosition(), 0);
-			*/
 			if (this.attackTimer == fireRateBase*2) {
 				Vector3d lookVector = this.projectileOwner.getLook(1.0F);
 				Vector3d directionNormal = new Vector3d(targetEntity.getPosX() - (this.projectileOwner.getPosX() - lookVector.getX()), targetEntity.getPosYHeight(0.5) - (0.5 + this.projectileOwner.getPosYHeight(0.5)), targetEntity.getPosZ() - (this.projectileOwner.getPosZ() - lookVector.getZ())).normalize();
@@ -62,15 +61,16 @@ public class RoboAttackGoal extends Goal {
 				RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.getX()/5, directionNormal.getY()/5, directionNormal.getZ()/5);
 				roboLaserEntity.setPosition(this.projectileOwner.getPosX(), this.projectileOwner.getPosYHeight(ownerHeightYScale), this.projectileOwner.getPosZ());
 				roboLaserEntity.setDamage(damage);
-				this.projectileOwner.world.playSound(null, this.projectileOwner.getPosX(), this.projectileOwner.getPosY(), this.projectileOwner.getPosZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundCategory(), 1.0F, 1.0F + 1 * 0.2F);
-				world.addEntity(roboLaserEntity);
-				this.attackTimer = -fireRateBase*4;
 				
+				this.projectileOwner.world.playSound(null, this.projectileOwner.getPosX(), this.projectileOwner.getPosY(), this.projectileOwner.getPosZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundCategory(), 1.0F, 1.0F + 1 * 0.2F);
+				
+				world.addEntity(roboLaserEntity);
+				
+				this.attackTimer = -fireRateBase*4;
 			}
 		} else if (this.attackTimer > 0) {
 			this.attackTimer--;
 		}
 		this.projectileOwner.setAttacking(this.attackTimer > 10);
-		ChaosAwakens.LOGGER.debug(this.projectileOwner+" -> "+this.projectileOwner.isAttacking()+" : "+this.attackTimer);
 	}
 }

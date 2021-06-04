@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.api.HeightmapTeleporter;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
@@ -85,13 +86,14 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
 
 				if (targetWorld != null) {
+					/*playerIn.changeDimension(targetWorld, new HeightmapTeleporter());*/
 					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
 					
 					targetWorld.getChunk(playerIn.getPosition());
 					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-
+					
 					serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
-
+					
 					for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
 						serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
 					}

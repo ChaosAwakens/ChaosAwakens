@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.ai;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.network.PacketThrowPlayer;
 import net.minecraft.entity.CreatureEntity;
@@ -20,7 +21,7 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 
     @Override
     public boolean shouldExecute() {
-        return this.attacker.getPassengers().isEmpty() && super.shouldExecute();
+    	return this.attacker.getPassengers().isEmpty() && super.shouldExecute();
     }
 
     @Override

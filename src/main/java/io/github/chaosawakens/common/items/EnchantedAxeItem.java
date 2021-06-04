@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.dto.EnchantmentAndLevel;
+import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.IItemTier;
