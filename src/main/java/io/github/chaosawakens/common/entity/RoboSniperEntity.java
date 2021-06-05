@@ -8,20 +8,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.SnowGolemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -31,7 +21,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRangedAttackMob {
-	private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(RoboEntity.class, DataSerializers.BOOLEAN);
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public RoboSniperEntity(EntityType<? extends RoboEntity> type, World worldIn) {
@@ -41,7 +30,7 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		
-		if (this.isAttacking()) {
+		if (this.getAttacking()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
 			ChaosAwakens.LOGGER.debug(this);
 			return PlayState.CONTINUE;
@@ -89,21 +78,5 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 		this.getAttackTarget();
-	}
-	
-	@Override
-	public boolean isAttacking() {
-		return this.dataManager.get(ATTACKING);
-	}
-	
-	@Override
-	public void setAttacking(boolean attacking) {
-		this.dataManager.set(ATTACKING, attacking);
-	}
-	
-	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(ATTACKING, false);
 	}
 }
