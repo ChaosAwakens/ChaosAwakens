@@ -8,7 +8,7 @@ import net.minecraft.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum ToolMaterials implements IItemTier {
+public enum CAToolMaterial implements IItemTier {
     TOOL_EMERALD(3, 1300, 8, 6, 24, () -> Ingredient.fromItems(Items.EMERALD.getItem())),
 
     TOOL_AMETHYST(3, 2000, 9, 11, 18, () -> Ingredient.fromItems(CAItems.AMETHYST.get())),
@@ -44,7 +44,7 @@ public enum ToolMaterials implements IItemTier {
     private final int enchantability;
     private final Supplier<Ingredient> repairMaterial;
 
-    ToolMaterials(int harvestLevel, int maxUses, float efficiency, float damage, int enchantability, Supplier<Ingredient> repairMaterial) {
+    CAToolMaterial(int harvestLevel, int maxUses, float efficiency, float damage, int enchantability, Supplier<Ingredient> repairMaterial) {
         this.harvestLevel = harvestLevel;
         this.maxUses = maxUses;
         this.efficiency = efficiency;

@@ -12,14 +12,14 @@ import io.github.chaosawakens.common.blocks.tileentities.spawner.TileEntityHercu
 import java.util.Locale;
 import java.util.function.Supplier;
 
-public enum BossVariant implements IStringSerializable, SkullBlock.ISkullType {
+public enum CABossVariant implements IStringSerializable, SkullBlock.ISkullType {
 
     HERCULES_BEETLE(TileEntityHerculesBeetleSpawner::new),
     ENT(TileEntityEntSpawner::new);
 
     private final Supplier<? extends TileEntityBossSpawner<?>> factory;
 
-    BossVariant(@Nullable Supplier<? extends TileEntityBossSpawner<?>> factory) {
+    CABossVariant(@Nullable Supplier<? extends TileEntityBossSpawner<?>> factory) {
         this.factory = factory;
     }
 
