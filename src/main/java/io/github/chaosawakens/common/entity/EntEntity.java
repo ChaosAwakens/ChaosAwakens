@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.entity.ai.GeoMeleeAttackGoal;
+import io.github.chaosawakens.common.entity.ai.AnimatedMeleeAttackGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -52,7 +52,7 @@ public class EntEntity extends AnimatedMonsterEntity implements IAnimatable {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-		this.goalSelector.addGoal(1, new GeoMeleeAttackGoal(this, 1.0F, 48, false));
+		this.goalSelector.addGoal(1, new AnimatedMeleeAttackGoal(this, 1.0F, 48, false));
 		this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));

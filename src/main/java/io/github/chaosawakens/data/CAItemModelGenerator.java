@@ -1,5 +1,9 @@
 package io.github.chaosawakens.data;
 
+import java.util.Collection;
+
+import javax.annotation.Nonnull;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -14,11 +18,6 @@ import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
 
-import javax.annotation.Nonnull;
-
-import java.io.File;
-import java.util.Collection;
-
 public class CAItemModelGenerator extends ItemModelProvider {
 
 	public CAItemModelGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
@@ -28,7 +27,7 @@ public class CAItemModelGenerator extends ItemModelProvider {
 	@Override
 	protected void registerModels() {
 		generate(CAItems.ITEMS.getEntries());
-		generateBlockItems(CABlocks.ITEMS.getEntries());
+		generateBlockItems(CABlocks.ITEM_BLOCKS.getEntries());
 	}
 
 	@Nonnull

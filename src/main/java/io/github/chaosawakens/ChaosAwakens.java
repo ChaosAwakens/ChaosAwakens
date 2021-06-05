@@ -1,9 +1,7 @@
 package io.github.chaosawakens;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -13,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.api.EnchantmentAndLevel;
-import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
 import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
@@ -95,7 +92,7 @@ public class ChaosAwakens {
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetupEvent::register);
 
 		CABiomes.BIOMES.register(eventBus);
-		CABlocks.ITEMS.register(eventBus);
+		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
 		CAItems.ITEMS.register(eventBus);
 		CATileEntities.TILE_ENTITIES.register(eventBus);

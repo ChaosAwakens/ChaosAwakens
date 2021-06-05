@@ -1,12 +1,10 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.RoboEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 

@@ -10,9 +10,6 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -23,7 +20,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRangedAttackMob {
-	private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(RoboEntity.class, DataSerializers.BOOLEAN);
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public RoboWarriorEntity(EntityType<? extends RoboEntity> type, World worldIn) {
@@ -33,7 +29,7 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		
-		if(this.isAttacking()) {
+		if(this.getAttacking()) {
 			if (event.isMoving()) {
 				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.walking_shooting_animation", true));
 				return PlayState.CONTINUE;
@@ -62,7 +58,8 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 180)
+		return MobEntity.registerAttributes()
+				.createMutableAttribute(Attributes.MAX_HEALTH, 180)
 				.createMutableAttribute(Attributes.ARMOR, 10)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.105D)
 				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.4)
@@ -85,21 +82,5 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 		this.getAttackTarget();
-	}
-	
-	@Override
-	public boolean isAttacking() {
-		return this.dataManager.get(ATTACKING);
-	}
-	
-	@Override
-	public void setAttacking(boolean attacking) {
-		this.dataManager.set(ATTACKING, attacking);
-	}
-	
-	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(ATTACKING, false);
 	}
 }

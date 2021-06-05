@@ -12,13 +12,13 @@ import net.minecraft.util.Hand;
 /**
  * @author invalid2
  */
-public class GeoMeleeAttackGoal extends MeleeAttackGoal {
+public class AnimatedMeleeAttackGoal extends MeleeAttackGoal {
 	private AnimatedMonsterEntity attacker;
 	private double hittingFrame;
 	private long tickDelta;
 	private double animationTick;
 	
-	public GeoMeleeAttackGoal(AnimatedMonsterEntity monster, double speedIn, double hittingFrame, boolean useLongMemory) {
+	public AnimatedMeleeAttackGoal(AnimatedMonsterEntity monster, double speedIn, double hittingFrame, boolean useLongMemory) {
 		super(monster, speedIn, useLongMemory);
 		this.attacker = monster;
 		this.hittingFrame = hittingFrame;
