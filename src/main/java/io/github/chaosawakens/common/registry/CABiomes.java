@@ -13,7 +13,7 @@ public class CABiomes {
 	public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ChaosAwakens.MODID);
 
 	public static RegistryObject<Biome> MINING_BIOME = BIOMES.register("mining_biome", BiomeMaker::makeVoidBiome);
-	public static RegistryObject<Biome> MINING_SPIKES = BIOMES.register("mining_spikes", BiomeMaker::makeVoidBiome);
+	public static RegistryObject<Biome> STALAGMITE_VALLEY = BIOMES.register("stalagmite_valley", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> VILLAGE_PLAINS = BIOMES.register("village_plains", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> DANGER_ISLANDS = BIOMES.register("danger_islands", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> CRYSTAL_PLAINS = BIOMES.register("crystal_plains", BiomeMaker::makeVoidBiome);

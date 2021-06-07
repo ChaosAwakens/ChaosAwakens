@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DirectionalBlock;
@@ -17,6 +16,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -25,35 +25,32 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 
 public class CrystalClusterBlock extends DirectionalBlock {
-	protected static final Map<String, VoxelShape> SHAPES = new HashMap<>();
-	
-	{
-		SHAPES.put("[age=0,facing=up]", Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 10.0D, 6.0D, 10.0D));
-		SHAPES.put("[age=1,facing=up]", Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 7.0D, 11.0D));
-		SHAPES.put("[age=2,facing=up]", Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D));
-		SHAPES.put("[age=3,facing=up]", Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 12.0D, 13.0D));
-		SHAPES.put("[age=0,facing=down]", Block.makeCuboidShape(5.0D, 10.0D, 5.0D, 11.0D, 16.0D, 11.0D));
-		SHAPES.put("[age=1,facing=down]", Block.makeCuboidShape(5.0D, 9.0D, 5.0D, 11.0D, 16.0D, 11.0D));
-		SHAPES.put("[age=2,facing=down]", Block.makeCuboidShape(4.0D, 6.0D, 4.0D, 12.0D, 16.0D, 12.0D));
-		SHAPES.put("[age=3,facing=down]", Block.makeCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D));
-		SHAPES.put("[age=0,facing=north]", Block.makeCuboidShape(5.0D, 10.0D, 5.0D, 10.0D, 16.0D, 10.0D));
-		SHAPES.put("[age=1,facing=north]", Block.makeCuboidShape(5.0D, 5.0D, 9.0D, 11.0D, 11.0D, 16.0D));
-		SHAPES.put("[age=2,facing=north]", Block.makeCuboidShape(4.0D, 4.0D, 6.0D, 12.0D, 12.0D, 16.0D));
-		SHAPES.put("[age=3,facing=north]", Block.makeCuboidShape(3.0D, 3.0D, 4.0D, 13.0D, 13.0D, 16.0D));
-		SHAPES.put("[age=0,facing=south]", Block.makeCuboidShape(5.0D, 5.0D, 0.0D, 10.0D, 10.0D, 6.0D));
-		SHAPES.put("[age=1,facing=south]", Block.makeCuboidShape(5.0D, 5.0D, 0.0D, 11.0D, 7.0D, 11.0D));
-		SHAPES.put("[age=2,facing=south]", Block.makeCuboidShape(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 10.0D));
-		SHAPES.put("[age=3,facing=south]", Block.makeCuboidShape(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 12.0D));
-		SHAPES.put("[age=0,facing=east]", Block.makeCuboidShape(0.0D, 5.0D, 5.0D, 6.0D, 10.0D, 10.0D));
-		SHAPES.put("[age=1,facing=east]", Block.makeCuboidShape(0.0D, 5.0D, 5.0D, 7.0D, 11.0D, 11.0D));
-		SHAPES.put("[age=2,facing=east]", Block.makeCuboidShape(0.0D, 4.0D, 4.0D, 10.0D, 12.0D, 12.0D));
-		SHAPES.put("[age=3,facing=east]", Block.makeCuboidShape(0.0D, 3.0D, 3.0D, 12.0D, 13.0D, 13.0D));
-		SHAPES.put("[age=0,facing=west]", Block.makeCuboidShape(10.0D, 5.0D, 5.0D, 16.0D, 11.0D, 11.0D));
-		SHAPES.put("[age=1,facing=west]", Block.makeCuboidShape(9.0D, 5.0D, 5.0D, 16.0D, 11.0D, 11.0D));
-		SHAPES.put("[age=2,facing=west]", Block.makeCuboidShape(6.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D));
-		SHAPES.put("[age=3,facing=west]", Block.makeCuboidShape(4.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D));
-		
-	};
+	protected static final Map<String, VoxelShape> SHAPES = Util.make( new HashMap<>(), (map) -> {
+		map.put("[age=0,facing=up]", Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 10.0D, 6.0D, 10.0D));
+		map.put("[age=1,facing=up]", Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 7.0D, 11.0D));
+		map.put("[age=2,facing=up]", Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D));
+		map.put("[age=3,facing=up]", Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 12.0D, 13.0D));
+		map.put("[age=0,facing=down]", Block.makeCuboidShape(5.0D, 10.0D, 5.0D, 11.0D, 16.0D, 11.0D));
+		map.put("[age=1,facing=down]", Block.makeCuboidShape(5.0D, 9.0D, 5.0D, 11.0D, 16.0D, 11.0D));
+		map.put("[age=2,facing=down]", Block.makeCuboidShape(4.0D, 6.0D, 4.0D, 12.0D, 16.0D, 12.0D));
+		map.put("[age=3,facing=down]", Block.makeCuboidShape(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D));
+		map.put("[age=0,facing=north]", Block.makeCuboidShape(5.0D, 10.0D, 5.0D, 10.0D, 16.0D, 10.0D));
+		map.put("[age=1,facing=north]", Block.makeCuboidShape(5.0D, 5.0D, 9.0D, 11.0D, 11.0D, 16.0D));
+		map.put("[age=2,facing=north]", Block.makeCuboidShape(4.0D, 4.0D, 6.0D, 12.0D, 12.0D, 16.0D));
+		map.put("[age=3,facing=north]", Block.makeCuboidShape(3.0D, 3.0D, 4.0D, 13.0D, 13.0D, 16.0D));
+		map.put("[age=0,facing=south]", Block.makeCuboidShape(5.0D, 5.0D, 0.0D, 10.0D, 10.0D, 6.0D));
+		map.put("[age=1,facing=south]", Block.makeCuboidShape(5.0D, 5.0D, 0.0D, 11.0D, 7.0D, 11.0D));
+		map.put("[age=2,facing=south]", Block.makeCuboidShape(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 10.0D));
+		map.put("[age=3,facing=south]", Block.makeCuboidShape(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 12.0D));
+		map.put("[age=0,facing=east]", Block.makeCuboidShape(0.0D, 5.0D, 5.0D, 6.0D, 10.0D, 10.0D));
+		map.put("[age=1,facing=east]", Block.makeCuboidShape(0.0D, 5.0D, 5.0D, 7.0D, 11.0D, 11.0D));
+		map.put("[age=2,facing=east]", Block.makeCuboidShape(0.0D, 4.0D, 4.0D, 10.0D, 12.0D, 12.0D));
+		map.put("[age=3,facing=east]", Block.makeCuboidShape(0.0D, 3.0D, 3.0D, 12.0D, 13.0D, 13.0D));
+		map.put("[age=0,facing=west]", Block.makeCuboidShape(10.0D, 5.0D, 5.0D, 16.0D, 11.0D, 11.0D));
+		map.put("[age=1,facing=west]", Block.makeCuboidShape(9.0D, 5.0D, 5.0D, 16.0D, 11.0D, 11.0D));
+		map.put("[age=2,facing=west]", Block.makeCuboidShape(6.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D));
+		map.put("[age=3,facing=west]", Block.makeCuboidShape(4.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D));
+	});
 	
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 	
@@ -65,7 +62,6 @@ public class CrystalClusterBlock extends DirectionalBlock {
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		VoxelShape shape = SHAPES.get(state.toString().substring(state.toString().indexOf("}")+1));
-		//ChaosAwakens.LOGGER.debug(state.toString().substring(state.toString().indexOf("}")+1));
 		return shape != null ? shape: VoxelShapes.fullCube();
 	}
 	

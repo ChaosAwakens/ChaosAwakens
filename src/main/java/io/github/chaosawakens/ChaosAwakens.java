@@ -1,7 +1,9 @@
 package io.github.chaosawakens;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.api.EnchantmentAndLevel;
+import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
 import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
@@ -19,11 +22,13 @@ import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStructures;
+import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.registry.CATileEntities;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
@@ -34,6 +39,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
@@ -77,12 +83,17 @@ public class ChaosAwakens {
 	 */
 	public static Map<ResourceLocation, EnchantmentAndLevel[]> enchantedItems = new HashMap<>();
 	
-	//public static List<FeatureWrapper> features= new ArrayList<>(); --Unused, probably will be removed
+	/**
+	 * Same as above, but for configured features
+	 */
+	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
 	
 	public ChaosAwakens() {
 		INSTANCE = this;
 		GeckoLib.initialize();
 		GeckoLibMod.DISABLE_IN_DEV = true;
+		
+		new CATags();
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
@@ -98,6 +109,7 @@ public class ChaosAwakens {
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
+		CAFeatures.FEATURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 		
@@ -127,13 +139,13 @@ public class ChaosAwakens {
 			try {
 				if (GETCODEC_METHOD == null)
 					GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
-				
+				//TODO Fix this
 				ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(chunkProvider.generator));
 				if (cgRL != null && cgRL.getNamespace().equals("terraforged"))
 					return;
 
 			} catch (Exception e) {
-				ChaosAwakens.LOGGER.error(String.format("%s: Was unable to check if %s is using Terraforged's ChunkGenerator.", e.getCause(), serverWorld.getDimensionKey().getLocation()) );
+				ChaosAwakens.warn("WORLDGEN", String.format("%s: Was unable to check if %s is using Terraforged's ChunkGenerator.", e.getCause(), serverWorld.getDimensionKey().getLocation()) );
 			}
 
 			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD))return;
@@ -143,21 +155,22 @@ public class ChaosAwakens {
 			chunkProvider.generator.func_235957_b_().field_236193_d_ = tempMap;
 		}
 	}
-
-	private void setup(FMLCommonSetupEvent event) {
+	
+	private void setup(final FMLCommonSetupEvent event) {
 		PacketHandler.init();
 
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
 			
-			//This should work, but feels wrong
-			new CAFeatures();
+			//This should work, but feels wrong so //TODO
+			new CAConfiguredFeatures();
+			configFeatures.forEach( (wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
 		});
 		
 		//TODO Make it so we don't have to add stuff here manually
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_SPIKES.getId()), CABiomes.Type.MINING_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
@@ -173,8 +186,20 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
 		}
 	}
-
+	
 	public static ResourceLocation prefix(String name) {
 		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
+	}
+	
+	public static <D> void debug(String domain, D message) {
+		LOGGER.debug("[" + domain + "]: " + message == null ? "null" : message.toString());
+	}
+	
+	public static <I> void info(String domain, I message) {
+		LOGGER.info("[" + domain + "]: " + message == null ? "null" : message.toString());
+	}
+	
+	public static <W> void warn(String domain, W message) {
+		LOGGER.warn("[" + domain + "]: " + message == null ? "null" : message.toString());
 	}
 }

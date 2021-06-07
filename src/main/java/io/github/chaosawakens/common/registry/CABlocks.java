@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.Random;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
@@ -16,6 +16,7 @@ import io.github.chaosawakens.common.blocks.EnchantedGoldenCakeBlock;
 import io.github.chaosawakens.common.blocks.GateBlock;
 import io.github.chaosawakens.common.blocks.GoldenCakeBlock;
 import io.github.chaosawakens.common.blocks.GoldenMelonBlock;
+import io.github.chaosawakens.common.blocks.RandomTeleportBlock;
 import io.github.chaosawakens.common.blocks.RedAntInfestedOre;
 import io.github.chaosawakens.common.blocks.TermiteInfestedOre;
 import io.github.chaosawakens.common.items.EnchantedBlockItem;
@@ -38,9 +39,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -56,17 +55,19 @@ public class CABlocks {
 	private static IPositionPredicate isFalse = (state, reader, pos) -> false;
 //	private static IPositionPredicate isTrue = (state, reader, pos) -> true; --Unused
 	
+	private static Function<Integer, ToIntFunction<BlockState>> lightValueFunction = (lightValue) -> (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
+	
 	// SHINY FOODS
 //	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsBlock(Block.Properties.from(Blocks.SUGAR_CANE)), CAItemGroups.foodItemGroup, false); //TODO Do the plants
 	public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon", () -> new GoldenMelonBlock(Block.Properties.from(Blocks.MELON).harvestTool(ToolType.AXE)), CAItemGroups.foodItemGroup);
 	public static final RegistryObject<Block> ATTACHED_GOLDEN_MELON_STEM = registerBlock("attached_golden_melon_stem", () -> new AttachedStemBlock((StemGrownBlock) GOLDEN_MELON.get(), AbstractBlock.Properties.from(Blocks.ATTACHED_MELON_STEM)), null);
 	public static final RegistryObject<Block> GOLDEN_MELON_STEM = registerBlock("golden_melon_stem", () -> new StemBlock((StemGrownBlock) GOLDEN_MELON.get(), AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.STEM)), null);
-	public static final RegistryObject<GoldenCakeBlock> GOLDEN_CAKE = registerSingleBlock("golden_cake", () -> new GoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup);
+	public static final RegistryObject<GoldenCakeBlock> GOLDEN_CAKE = registerBlock("golden_cake", () -> new GoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup, 1);
 	
 	// DUNGEON BLOCKS
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CASpawnerBlock> SPAWNER_BLOCK = registerBlock("spawner_block", () -> new CASpawnerBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(-1.0F).notSolid().noDrops().sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), null);
-//	public static final RegistryObject<RandomTeleportBlock> RANDOM_TELEPORT_BLOCK = registerBlock("random_teleport_block", () -> new RandomTeleportBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<RandomTeleportBlock> RANDOM_TELEPORT_BLOCK = registerBlock("random_teleport_block", () -> new RandomTeleportBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
 	
 	// MINERAL ORES
 	public static final RegistryObject<CAOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.ANCIENT_DEBRIS).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)).withExpDrop((rand) -> MathHelper.nextInt(rand, 3, 7)), CAItemGroups.blocksItemGroup);
@@ -135,7 +136,7 @@ public class CABlocks {
 	public static final RegistryObject<BuddingBlock> BUDDING_PINK_TOURMALINE = registerBlock("budding_pink_tourmaline", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(isFalse).notSolid(), PINK_TOURMALINE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<BuddingBlock> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(isFalse).notSolid(), CATS_EYE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CrystalCraftingTableBlock> CRYSTAL_CRAFTING_TABLE = registerBlock("crystal_crafting_table", () -> new CrystalCraftingTableBlock(Block.Properties.from(Blocks.CRAFTING_TABLE).setOpaque(isFalse).notSolid()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CrystalFurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new CrystalFurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(isFalse).notSolid().setLightLevel(getLightValueLit(13))), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CrystalFurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new CrystalFurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(isFalse).notSolid().setLightLevel(lightValueFunction.apply(13))), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> CRYSTAL_TORCH = registerBlock("crystal_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 14).sound(SoundType.WOOD), ParticleTypes.FLAME), null, false);
 	public static final RegistryObject<Block> WALL_CRYSTAL_TORCH = registerBlock("wall_crystal_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 14).sound(SoundType.WOOD).lootFrom(() -> CABlocks.CRYSTAL_TORCH.get()), ParticleTypes.FLAME), null, false);
 	
@@ -152,23 +153,17 @@ public class CABlocks {
 	}
 	
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, boolean generateItem) {
+		return registerBlock(name, supplier, itemGroup, 64, generateItem);
+	}
+	
+	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, int stackSize) {
+		return registerBlock(name, supplier, itemGroup, stackSize, true);
+	}
+	
+	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, int stackSize, boolean generateItem) {
 		RegistryObject<B> block = CABlocks.BLOCKS.register(name, supplier);
-		if (generateItem)ITEM_BLOCKS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup)));
+		if (generateItem)ITEM_BLOCKS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup).maxStackSize(stackSize)));
 		return block;
-	}
-	
-	public static <B extends Block> RegistryObject<B> registerSingleBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
-		return registerSingleBlock(name, supplier, itemGroup, true);
-	}
-	
-	public static <B extends Block> RegistryObject<B> registerSingleBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, boolean generateItem) {
-		RegistryObject<B> block = CABlocks.BLOCKS.register(name, supplier);
-		if (generateItem)ITEM_BLOCKS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup).maxStackSize(1)));
-		return block;
-	}
-	
-	private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
-		return (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
 	}
 	
 	public static <E extends Block> RegistryObject<E> registerEnchantedBlock(String name, Supplier<? extends E> supplier, ItemGroup itemGroup, int stackSize) {
