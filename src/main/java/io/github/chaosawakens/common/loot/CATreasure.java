@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class CATreasure {
     // For easy testing:
-    // /give @p chest 1 0 {"BlockEntityTag":{"LootTable":"chaosawakens:ent_dungeon"}}
+    // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_dungeon"}} 1
     private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
 
     public static final CATreasure ent_dungeon = new CATreasure("ent_dungeon");
