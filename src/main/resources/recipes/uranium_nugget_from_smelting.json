@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "chaosawakens:uranium_ore"
+  },
+  "result": "chaosawakens:uranium_nugget",
+  "experience": 1.0,
+  "cookingtime": 200
+}

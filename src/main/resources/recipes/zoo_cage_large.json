@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:zoo_cage_medium"
+    },
+    {
+      "tag": "forge:storage_blocks/iron"
+    },
+    {
+      "tag": "forge:storage_blocks/quartz"
+    },
+    {
+      "tag": "forge:glass"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:zoo_cage_large",
+    "count": 1
+  }
+}

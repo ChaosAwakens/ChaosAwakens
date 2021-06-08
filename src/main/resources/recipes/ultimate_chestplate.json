@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I I",
+    "TTT",
+    "UUU"
+  ],
+  "key": {
+    "T": {
+      "tag": "forge:ingots/titanium"
+    },
+    "U": {
+      "tag": "forge:ingots/uranium"
+    },
+    "I": {
+      "tag": "chaosawakens:ultimate_gear_handles"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ultimate_chestplate"
+  }
+}

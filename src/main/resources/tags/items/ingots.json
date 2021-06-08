@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/aluminum",
+    "#forge:ingots/cats_eye",
+    "#forge:ingots/pink_tourmaline",
+    "#forge:ingots/titanium",
+    "#forge:ingots/uranium"
+  ]
+}

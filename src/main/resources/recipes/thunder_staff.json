@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DX ",
+    "XX ",
+    "  X"
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "X": {
+      "tag": "forge:gems/ruby"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:thunder_staff"
+  }
+}

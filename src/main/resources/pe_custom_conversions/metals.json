@@ -1,0 +1,15 @@
+{
+  "values": {
+    "before": {
+      "chaosawakens:aluminum_ingot": 4096,
+      "chaosawakens:titanium_ingot": 131072,
+      "chaosawakens:uranium_ingot": 131072,
+      "chaosawakens:copper_lump": 1024,
+      "chaosawakens:tin_lump": 2048,
+      "chaosawakens:silver_lump": 4096,
+      "chaosawakens:platinum_lump": 8192,
+      "chaosawakens:pink_tourmaline_ingot": 2048,
+      "chaosawakens:cats_eye_ingot": 8192
+    }
+  }
+}

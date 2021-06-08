@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/crystal"
+    },
+    "X": {
+      "tag": "forge:ingots/pink_tourmaline"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:pink_tourmaline_hoe"
+  }
+}

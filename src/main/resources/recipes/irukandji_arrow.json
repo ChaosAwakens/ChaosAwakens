@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I",
+    "#",
+    "P"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rods/crystal"
+    },
+    "I": {
+      "item": "chaosawakens:dead_irukandji"
+    },
+    "P": {
+      "item": "chaosawakens:peacock_feather"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:irukandji_arrow",
+    "count": 4
+  }
+}

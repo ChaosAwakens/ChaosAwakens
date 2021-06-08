@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "chaosawakens:corndog"
+  },
+  "result": "chaosawakens:cooked_corndog",
+  "experience": 1.0,
+  "cookingtime": 100
+}

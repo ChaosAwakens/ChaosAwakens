@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:crops/lettuce"
+    },
+    {
+      "item": "minecraft:bread"
+    },
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "item": "chaosawakens:cooked_bacon"
+    },
+    {
+      "tag": "forge:butter"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:blt",
+    "count": 1
+  }
+}

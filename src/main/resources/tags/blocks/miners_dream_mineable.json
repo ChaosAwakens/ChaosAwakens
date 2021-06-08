@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:base_stone_nether",
+    "minecraft:end_stone",
+    "#chaosawakens:base_stone_crystal",
+    "#chaosawakens:base_stone_mining",
+    "#minecraft:water",
+    "#minecraft:lava",
+    "minecraft:dirt",
+    "minecraft:gravel"
+  ]
+}

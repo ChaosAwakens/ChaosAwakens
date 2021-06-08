@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    },
+    {
+      "tag": "forge:crops/radish"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:radish_stew",
+    "count": 1
+  }
+}

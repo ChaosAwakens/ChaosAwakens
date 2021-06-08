@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "chaosawakens:ruby_ore"
+  },
+  "result": "chaosawakens:ruby",
+  "experience": 1.0,
+  "cookingtime": 100
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/titanium_block",
+    "particle": "chaosawakens:block/titanium_block"
+  }
+}
