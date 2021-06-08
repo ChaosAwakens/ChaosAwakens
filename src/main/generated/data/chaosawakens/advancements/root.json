@@ -20,13 +20,11 @@
   },
   "criteria": {
     "root": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "minecraft:location",
       "conditions": {
-        "items": [
-          {
-            "item": "minecraft:crafting_table"
-          }
-        ]
+        "location": {
+          "dimension": "minecraft:overworld"
+        }
       }
     }
   },

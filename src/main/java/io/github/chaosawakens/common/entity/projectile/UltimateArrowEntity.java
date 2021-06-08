@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.projectile;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -28,15 +30,16 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 	public UltimateArrowEntity(World worldIn, LivingEntity shooter) {
 		super(CAEntityTypes.ULTIMATE_ARROW.get(), shooter, worldIn);
 	}
-	
+
 	@Override
-	protected void arrowHit(LivingEntity living) {
-		if (living instanceof PlayerEntity || living instanceof TameableEntity) {
-			living.heal(1.0F);
-			setDead();
+	protected void onEntityHit(EntityRayTraceResult result) {
+		Entity entity = result.getEntity();
+		if (entity instanceof PlayerEntity || entity instanceof TameableEntity) {
+			((LivingEntity) entity).heal(5.0F);
+			remove();
 			return;
 		}
-		super.arrowHit(living);
+		super.onEntityHit(result);
 	}
 	
 	@Override
