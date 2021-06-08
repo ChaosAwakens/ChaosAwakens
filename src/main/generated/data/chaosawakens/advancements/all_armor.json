@@ -11,11 +11,14 @@
     "description": {
       "translate": "advancements.chaosawakens.all_armor.description"
     },
-    "frame": "task",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "rewards": {
+    "experience": 420
   },
   "criteria": {
     "copper_helmet": {

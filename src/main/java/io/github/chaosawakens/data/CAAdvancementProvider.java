@@ -20,6 +20,7 @@ import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.criterion.BredAnimalsTrigger;
 import net.minecraft.advancements.criterion.ChangeDimensionTrigger;
 import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
@@ -94,10 +95,10 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		Advancement rubyArmor = itemAdvancement("ruby_armor", FrameType.TASK, CAItems.RUBY_CHESTPLATE.get()).withParent(experienceArmor).withCriterion("ruby_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.RUBY_HELMET.get(), CAItems.RUBY_CHESTPLATE.get(), CAItems.RUBY_LEGGINGS.get(), CAItems.RUBY_BOOTS.get())).register(t, id("ruby_armor"));
 		// Ultimate Armor
-		Advancement ultimateArmor = itemAdvancement("ultimate_armor", FrameType.TASK, CAItems.ULTIMATE_CHESTPLATE.get()).withParent(root).withCriterion("ultimate_helmet",
+		Advancement ultimateArmor = itemAdvancement("ultimate_armor", FrameType.CHALLENGE, CAItems.ULTIMATE_CHESTPLATE.get()).withParent(root).withRewards(experience(69)).withCriterion("ultimate_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get())).register(t, id("ultimate_armor"));
 		// ALL ARMOR
-		Advancement allArmor = itemAdvancement("all_armor", FrameType.TASK, CAItems.TIGERS_EYE_CHESTPLATE.get()).withParent(ultimateArmor).withCriterion("copper_helmet",
+		Advancement allArmor = itemAdvancement("all_armor", FrameType.CHALLENGE, CAItems.TIGERS_EYE_CHESTPLATE.get()).withParent(ultimateArmor).withRewards(experience(420)).withCriterion("copper_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.COPPER_HELMET.get(), CAItems.COPPER_CHESTPLATE.get(), CAItems.COPPER_LEGGINGS.get(), CAItems.COPPER_BOOTS.get())).withCriterion("peacock_feather_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.PEACOCK_FEATHER_HELMET.get(), CAItems.PEACOCK_FEATHER_CHESTPLATE.get(), CAItems.PEACOCK_FEATHER_LEGGINGS.get(), CAItems.PEACOCK_FEATHER_BOOTS.get())).withCriterion("tin_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.TIN_HELMET.get(), CAItems.TIN_CHESTPLATE.get(), CAItems.TIN_LEGGINGS.get(), CAItems.TIN_BOOTS.get())).withCriterion("lava_eel_helmet",
@@ -115,14 +116,28 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				InventoryChangeTrigger.Instance.forItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get())).register(t, id("all_armor"));
 		
 		Advancement crystalDimension = itemAdvancement("crystal_dimension", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).withParent(root).withCriterion("crystal_dimension", ChangeDimensionTrigger.Instance.toWorld(CADimensions.CRYSTAL_DIMENSION_LEGACY)).register(t, id("crystal_dimension"));
+		
 		Advancement miningDimension = itemAdvancement("mining_dimension", FrameType.TASK, CABlocks.URANIUM_ORE.get()).withParent(root).withCriterion("mining_dimension", ChangeDimensionTrigger.Instance.toWorld(CADimensions.MINING_DIMENSION)).register(t, id("mining_dimension"));
+		
 		Advancement villageDimension = itemAdvancement("village_dimension", FrameType.TASK, Blocks.OAK_LOG).withParent(root).withCriterion("village_dimension", ChangeDimensionTrigger.Instance.toWorld(CADimensions.VILLAGE_MANIA)).register(t, id("village_dimension"));
+		
 		Advancement roboSlayer = itemAdvancement("robo_slayer", FrameType.TASK, CAItems.RAY_GUN.get()).withParent(root).withCriterion("robo_sniper",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.ROBO_SNIPER.get()))).withCriterion("robo_warrior", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.ROBO_WARRIOR.get()))).register(t, id("robo_slayer"));
 		
 		Advancement bugSquasher = itemAdvancement("bug_squasher", FrameType.TASK, CAItems.LAVA_EEL.get())/*Replace with Dead Stink Bug when it is added!*/.withParent(root).withCriterion("hercules_beetle",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.HERCULES_BEETLE.get()))).withCriterion("ruby_bug",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.RUBY_BUG.get()))).register(t, id("bug_squasher"));
+		
+		Advancement trophyWorthy = itemAdvancement("trophy_worthy", FrameType.CHALLENGE, CABlocks.PLATINUM_BLOCK.get()).withParent(root).withRewards(experience(100)).withCriterion("platinum_block",
+				InventoryChangeTrigger.Instance.forItems(CABlocks.PLATINUM_BLOCK.get(), CABlocks.URANIUM_BLOCK.get(), CABlocks.TITANIUM_BLOCK.get())).register(t, id("trophy_worthy"));
+		
+		Advancement anAppleCowADay = itemAdvancement("an_apple_cow_a_day", FrameType.TASK, CAItems.APPLE_COW_SPAWN_EGG.get()).withParent(root).withCriterion("apple_cow",
+				BredAnimalsTrigger.Instance.any()).register(t, id("an_apple_cow_a_day"));/*Always do BredAnimalsTrigger.Instance.any()
+				and change the json manually. If you don't change anything here, runData will not affect the json file*/
+		
+		Advancement shinyCows = itemAdvancement("shiny_cows", FrameType.TASK, CAItems.GOLDEN_APPLE_COW_SPAWN_EGG.get()).withParent(anAppleCowADay).withCriterion("golden_apple_cow",
+				BredAnimalsTrigger.Instance.any()).register(t, id("shiny_cows"));
+		
 		Advancement entDestroyer = itemAdvancement("ent_destroyer", FrameType.TASK, Blocks.OAK_LEAVES).withParent(root).withCriterion("ent",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.ENT.get()))).register(t, id("ent_destroyer"));
 	}

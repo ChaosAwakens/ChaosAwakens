@@ -15,6 +15,7 @@ import com.mojang.serialization.Codec;
 import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.client.ClientSetupEvent;
+import io.github.chaosawakens.common.CAVillagerInit;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
 import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
 import io.github.chaosawakens.common.config.CAConfig;
@@ -111,6 +112,8 @@ public class ChaosAwakens {
 		CAStructures.STRUCTURES.register(eventBus);
 		CAFeatures.FEATURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
+		CAVillagerInit.POINT_OF_INTEREST_TYPES.register(eventBus);
+		CAVillagerInit.VILLAGER_PROFESSIONS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 		
 		if (ModList.get().isLoaded("projecte")) {
@@ -162,6 +165,8 @@ public class ChaosAwakens {
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
+			CAVillagerInit.fillTradeData();
+			CAVillagerInit.registerPOI();
 			
 			//This should work, but feels wrong so //TODO
 			new CAConfiguredFeatures();
