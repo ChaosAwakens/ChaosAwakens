@@ -42,8 +42,8 @@ public class CAVillagerInit{
 	public static final RegistryObject<PointOfInterestType> BLAST_BUILDING = POINT_OF_INTEREST_TYPES.register("blast_building",
 			()->new PointOfInterestType("blast_building", PointOfInterestType.getAllStates(CABlocks.CRYSTAL_FURNACE.get()), 1, 2));
 	
-	public static final RegistryObject<VillagerProfession> CHAOTIC_BLASTER = VILLAGER_PROFESSIONS.register("chaotic_blaster",
-			()->new VillagerProfession("chaotic_blaster", BLAST_BUILDING.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_ARMORER));
+	public static final RegistryObject<VillagerProfession> DIMENSIONAL_TRADER = VILLAGER_PROFESSIONS.register("dimensional_trader",
+			()->new VillagerProfession("dimensional_trader", BLAST_BUILDING.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_ARMORER));
 	
 	public static void registerPOI(){
 		try {
@@ -59,7 +59,7 @@ public class CAVillagerInit{
 		VillagerTrades.ITrade[] level3 = new VillagerTrades.ITrade[]{multiTrade};
 		VillagerTrades.ITrade[] level4 = new VillagerTrades.ITrade[]{multiTrade};
 		VillagerTrades.ITrade[] level5 = new VillagerTrades.ITrade[]{multiTrade};
-		VillagerTrades.VILLAGER_DEFAULT_TRADES.put(CHAOTIC_BLASTER.get(), gatAsIntMap(ImmutableMap.of(1, level1, 2, level2, 3, level3, 4, level4, 5, level5)));
+		VillagerTrades.VILLAGER_DEFAULT_TRADES.put(DIMENSIONAL_TRADER.get(), gatAsIntMap(ImmutableMap.of(1, level1, 2, level2, 3, level3, 4, level4, 5, level5)));
 	}
     private static Int2ObjectMap<VillagerTrades.ITrade[]> gatAsIntMap(ImmutableMap<Integer, VillagerTrades.ITrade[]> p_221238_0_) {
 		    return new Int2ObjectOpenHashMap<>(p_221238_0_);

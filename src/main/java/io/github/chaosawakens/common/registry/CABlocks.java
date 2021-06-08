@@ -156,6 +156,10 @@ public class CABlocks {
 		return registerBlock(name, supplier, itemGroup, 64, generateItem);
 	}
 	
+	public static <B extends Block> RegistryObject<B> registerBlockAlt(String name, Supplier<? extends B> supplier, boolean generateItem) {
+		return registerBlockAlt(name, supplier, generateItem);
+	}
+	
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, int stackSize) {
 		return registerBlock(name, supplier, itemGroup, stackSize, true);
 	}
