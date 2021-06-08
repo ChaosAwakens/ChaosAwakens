@@ -140,6 +140,11 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.<RayGunProjectileEntity>create(RayGunProjectileEntity::new, EntityClassification.MISC)
 					.size(0.25F, 0.25F).trackingRange(4).updateInterval(20)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "explosive_ball").toString()));
+
+	public static final RegistryObject<EntityType<UltimateFishingBobberEntity>> ULTIMATE_FISHING_BOBBER = ENTITY_TYPES.register("ultimate_fishing_bobber",
+			() -> EntityType.Builder.<UltimateFishingBobberEntity>create(EntityClassification.MISC).disableSerialization().disableSummoning().size(0.25F, 0.25F).trackingRange(4).updateInterval(5)
+					.size(0.5F, 0.5F).trackingRange(4).updateInterval(20)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_fishing_bobber").toString()));
 	
 	
 	

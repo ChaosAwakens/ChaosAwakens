@@ -81,7 +81,7 @@ public enum CAArmorMaterial implements IArmorMaterial {
     }),
 
     QUEEN_SCALE(ChaosAwakens.MODID + ":queen_scale", 68, new int[] {9, 14, 16, 9}, 96, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.5f, 0.06f, () -> {
-        return Ingredient.fromItems();
+        return Ingredient.fromItems(CAItems.QUEEN_SCALE.get());
     });
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] {13, 15, 16, 11};
