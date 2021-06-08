@@ -181,7 +181,7 @@ public class CAItems {
 	public static final RegistryObject<Item> CATS_EYE_NUGGET = ITEMS.register("cats_eye_nugget", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> SUNSTONE = ITEMS.register("sunstone", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new Item(new Item.Properties().group(CAItemGroups.itemsItemGroup)));
-	public static final RegistryObject<Item> QUEEN_SCALE = ITEMS.register("queen_scale", () -> new Item(new Item.Properties().rarity(RARITY_ROYALTY).group(CAItemGroups.equipmentItemGroup)));
+	public static final RegistryObject<Item> QUEEN_SCALE = ITEMS.register("queen_scale", () -> new Item(new Item.Properties().rarity(RARITY_ROYALTY).group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> BIG_BERTHA_BLADE = ITEMS.register("big_bertha_blade", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> BIG_BERTHA_GUARD = ITEMS.register("big_bertha_guard", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).group(CAItemGroups.itemsItemGroup)));
 	public static final RegistryObject<Item> BIG_BERTHA_HANDLE = ITEMS.register("big_bertha_handle", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).group(CAItemGroups.itemsItemGroup)));
