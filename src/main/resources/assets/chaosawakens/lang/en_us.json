@@ -6,7 +6,7 @@
 	"itemGroup.chaosawakens_eggs_item_group": "Chaos Awakens Spawn Eggs",
 
 	"advancements.chaosawakens.root.title": "Thank You for installing Chaos Awakens!",
-	"advancements.chaosawakens.root.description": "Craft a Crafting Table.",
+	"advancements.chaosawakens.root.description": "Have fun :)",
 	"advancements.chaosawakens.cats_eye_armor.title": "Woah! Its Clear!",
 	"advancements.chaosawakens.cats_eye_armor.description": "Obtain Cat's Eye Armor.",
 	"advancements.chaosawakens.platinum_armor.title": "Platinum Time",
@@ -31,9 +31,16 @@
 	"advancements.chaosawakens.bug_squasher.description": "Kill every Bug.",
 	"advancements.chaosawakens.ent_destroyer.title": "It Ents Here!",
 	"advancements.chaosawakens.ent_destroyer.description": "Kill the Ent.",
+	"advancements.chaosawakens.trophy_worthy.title": "Trophy Worthy!",
+	"advancements.chaosawakens.trophy_worthy.description": "Get a Block of Platinum, Uranium, and Titanium",
+	"advancements.chaosawakens.an_apple_cow_a_day.title": "An Apple Cow a day...",
+	"advancements.chaosawakens.an_apple_cow_a_day.description": "Keeps the tree farming away!",
+	"advancements.chaosawakens.shiny_cows.title": "Shiny Cows!",
+	"advancements.chaosawakens.shiny_cows.description": "Breed 2 Golden Apple Cows.",
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
+    "entity.minecraft.villager.chaosawakens.chaotic_blaster": "Chaotic Blaster",
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Red Ant",
 	"entity.chaosawakens.brown_ant": "Brown Ant",
