@@ -64,7 +64,7 @@ public class EntEntity extends AnimatedMonsterEntity implements IAnimatable {
 				.createMutableAttribute(Attributes.MAX_HEALTH, 150)
 				.createMutableAttribute(Attributes.ARMOR, 3)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 25)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)

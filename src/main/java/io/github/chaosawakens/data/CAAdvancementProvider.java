@@ -116,7 +116,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		
 		Advancement bugSquasher = itemAdvancement("bug_squasher", FrameType.TASK, CAItems.LAVA_EEL.get())/*Replace with Dead Stink Bug when it is added!*/.withParent(root).withCriterion("hercules_beetle",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.HERCULES_BEETLE.get()))).withCriterion("ruby_bug",
-				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.RUBY_BUG.get()))).register(t, id("bug_squasher"));
+				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.RUBY_BUG.get()))).withCriterion("stink_bug",
+				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.STINK_BUG.get()))).register(t, id("bug_squasher"));
 		
 		Advancement trophyWorthy = itemAdvancement("trophy_worthy", FrameType.CHALLENGE, CABlocks.PLATINUM_BLOCK.get()).withParent(root).withCriterion("platinum_block",
 				InventoryChangeTrigger.Instance.forItems(CABlocks.PLATINUM_BLOCK.get(), CABlocks.URANIUM_BLOCK.get(), CABlocks.TITANIUM_BLOCK.get())).register(t, id("trophy_worthy"));

@@ -21,21 +21,21 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class RubyBugEntity extends AnimalEntity implements IAnimatable {
+public class StinkBugEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public RubyBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+    public StinkBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
         this.ignoreFrustumCheck = true;
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if(event.isMoving()){
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walking_animation", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walking_animation", true));
             return PlayState.CONTINUE;
         }
         if (!event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.idle_animation", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.idle_animation", true));
             return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
@@ -43,7 +43,7 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
+        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.3));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
     }
@@ -57,7 +57,7 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "rubybugcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "stinkbugcontroller", 0, this::predicate));
     }
 
     @Override

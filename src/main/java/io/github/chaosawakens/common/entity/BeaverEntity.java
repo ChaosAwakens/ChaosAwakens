@@ -1,12 +1,15 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.entity.ai.BeaverBreakWoodGoal;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -46,36 +49,35 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.OAK_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.BIRCH_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.SPRUCE_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.JUNGLE_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.DARK_OAK_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.ACACIA_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_OAK_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_BIRCH_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_SPRUCE_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_JUNGLE_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_DARK_OAK_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_ACACIA_LOG, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.OAK_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.BIRCH_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.SPRUCE_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.JUNGLE_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.DARK_OAK_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.ACACIA_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_OAK_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_BIRCH_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_SPRUCE_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_JUNGLE_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_DARK_OAK_WOOD, this, 1.0D, 16));
-        this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_ACACIA_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.OAK_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.BIRCH_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.SPRUCE_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.JUNGLE_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.DARK_OAK_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.ACACIA_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_OAK_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_BIRCH_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_SPRUCE_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_JUNGLE_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_DARK_OAK_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_ACACIA_LOG, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.OAK_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.BIRCH_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.SPRUCE_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.JUNGLE_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.DARK_OAK_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.ACACIA_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_OAK_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_BIRCH_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_SPRUCE_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_JUNGLE_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_DARK_OAK_WOOD, this, 1.0D, 16));
+        this.goalSelector.addGoal(7, new BeaverBreakWoodGoal(Blocks.STRIPPED_ACACIA_WOOD, this, 1.0D, 16));
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 6.0D)
-                .createMutableAttribute(Attributes.ARMOR, 3)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 6)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
     }

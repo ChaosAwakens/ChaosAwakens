@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.api.HeightmapTeleporter;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
@@ -65,8 +64,9 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 2.0D)
-				.createMutableAttribute(Attributes.ARMOR, 0).createMutableAttribute(Attributes.ATTACK_SPEED, 1)
+		return MobEntity.registerAttributes()
+				.createMutableAttribute(Attributes.MAX_HEALTH, 2)
+				.createMutableAttribute(Attributes.ATTACK_SPEED, 1)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 0.5D)

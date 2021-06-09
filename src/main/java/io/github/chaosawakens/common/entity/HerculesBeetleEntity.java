@@ -63,12 +63,12 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.registerAttributes()
 				.createMutableAttribute(Attributes.MAX_HEALTH, 250)
-				.createMutableAttribute(Attributes.ARMOR, 19)
+				.createMutableAttribute(Attributes.ARMOR, 20)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
 				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
 				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 30)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 7.5)
+				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 7.5D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 16);
 	}
 

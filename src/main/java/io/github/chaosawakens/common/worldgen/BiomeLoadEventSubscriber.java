@@ -1,12 +1,9 @@
 package io.github.chaosawakens.common.worldgen;
 
-import java.util.Objects;
-import java.util.function.Consumer;
-
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -17,6 +14,9 @@ import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * Class with method(s) that subscribe to the BiomeLoadingEvent
@@ -41,12 +41,14 @@ public class BiomeLoadEventSubscriber {
 			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.TERMITE.get(), 20, 1, 5));
 		};
 		private static final Consumer<MobSpawnInfoBuilder> SWAMP_MOBS = (builder) -> {
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 25, 3, 6));
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 20, 1, 2));
+			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 20, 3, 6));
+			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 15, 1, 2));
+			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 30, 2, 5));
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 15, 1, 2));
+			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 10, 1, 2));
+			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> PLAINS_MOBS = (builder) -> {
@@ -61,12 +63,13 @@ public class BiomeLoadEventSubscriber {
 			
 			switch (event.getCategory()) {
 				case SWAMP:
-					SWAMP_MOBS.accept(spawnInfoBuilder);
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+						SWAMP_MOBS.accept(spawnInfoBuilder);
 				case PLAINS:
-					if (!BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION))
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
 						PLAINS_MOBS.accept(spawnInfoBuilder);
 				case FOREST:
-					if (!BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION))
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
 						FOREST_MOBS.accept(spawnInfoBuilder);
 				case THEEND:
 				case NETHER:
@@ -109,6 +112,8 @@ public class BiomeLoadEventSubscriber {
 		
 		public static void addStructureSpawns(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder builder = event.getGeneration();
+			RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
+
 			switch (event.getCategory()) {
 				case FOREST:
 					builder.withStructure(ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
