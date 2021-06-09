@@ -49,7 +49,7 @@ public class EventHandler {
             //Drop #1: Ender Dragon Scales
             int amount = 8 + (int)(Math.random() * 6) + (int)(Math.random() * event.getLootingLevel() * 4);
             if (dragon.getFightManager().hasPreviouslyKilledDragon()) amount /= 2; //Amount is halved with repeat kills.
-            stack = new ItemStack(CAItems.PEACOCK_FEATHER.get(), amount);
+            stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
             drop = new ItemEntity(event.getEntityLiving().world, 0, 90, 0, stack);
             event.getDrops().add(drop);
 

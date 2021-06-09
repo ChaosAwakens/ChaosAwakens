@@ -76,6 +76,7 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.URANIUM_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.URANIUM_ORE.get());
 		registerDropSelfLootTable(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
+		registerDropSelfLootTable(CABlocks.RANDOM_TELEPORT_BLOCK.get());
 	}
 	
 	protected static LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {

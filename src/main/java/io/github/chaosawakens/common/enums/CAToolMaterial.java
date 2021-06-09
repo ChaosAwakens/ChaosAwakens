@@ -35,7 +35,11 @@ public enum CAToolMaterial implements IItemTier {
 
     TOOL_SILVER(2, 450, 7, 4, 10, () -> Ingredient.fromItems(CAItems.SILVER_LUMP.get())),
 
-    TOOL_PLATINUM(3, 1600, 8, 6, 12, () -> Ingredient.fromItems(CAItems.PLATINUM_LUMP.get()));
+    TOOL_PLATINUM(3, 1600, 8, 6, 12, () -> Ingredient.fromItems(CAItems.PLATINUM_LUMP.get())),
+
+    WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
+
+    WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.fromItems(CAItems.QUEEN_SCALE.get()));
 
     private final int harvestLevel;
     private final int maxUses;
