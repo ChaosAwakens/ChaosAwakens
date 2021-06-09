@@ -1,15 +1,11 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.ThrowRiderAttackGoal;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.monster.ElderGuardianEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
@@ -52,13 +48,8 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, MonsterEntity.class, 24.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, CreatureEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, EnderDragonEntity.class, 24.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, WitherEntity.class, 24.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, ElderGuardianEntity.class, 24.0F));
 		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.75, true));
 		this.goalSelector.addGoal(3, new ThrowRiderAttackGoal(this, 0.125F, false));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
@@ -67,11 +58,6 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, CreatureEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EnderDragonEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, WitherEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ElderGuardianEntity.class, true));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

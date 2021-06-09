@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#forge:gems/amethyst",
-    "#forge:gems/ruby",
-    "#forge:gems/sunstone",
-    "#forge:gems/bloodstone"
-  ]
-}

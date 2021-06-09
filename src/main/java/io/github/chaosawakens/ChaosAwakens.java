@@ -1,36 +1,15 @@
 package io.github.chaosawakens;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.client.ClientSetupEvent;
-import io.github.chaosawakens.common.CAVillagerInit;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
 import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.network.PacketHandler;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAFeatures;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CASoundEvents;
-import io.github.chaosawakens.common.registry.CAStructures;
-import io.github.chaosawakens.common.registry.CATags;
-import io.github.chaosawakens.common.registry.CATileEntities;
+import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import io.github.chaosawakens.data.CAAdvancementProvider;
@@ -65,8 +44,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
+
+import java.lang.reflect.Method;
+import java.util.*;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
@@ -80,7 +64,7 @@ public class ChaosAwakens {
 
 	/**
 	 * Map that contains all the EALs mapped to their items respective registry name,
-	 * would go on a common setup class, but we dont we one have so... :shrug:
+	 * would go on a common setup class, but we don't have one so... :shrug:
 	 */
 	public static Map<ResourceLocation, EnchantmentAndLevel[]> enchantedItems = new HashMap<>();
 	
@@ -112,8 +96,8 @@ public class ChaosAwakens {
 		CAStructures.STRUCTURES.register(eventBus);
 		CAFeatures.FEATURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
-		CAVillagerInit.POINT_OF_INTEREST_TYPES.register(eventBus);
-		CAVillagerInit.VILLAGER_PROFESSIONS.register(eventBus);
+		CAVillagers.POI_TYPES.register(eventBus);
+		CAVillagers.PROFESSIONS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 		
 		if (ModList.get().isLoaded("projecte")) {
@@ -165,8 +149,8 @@ public class ChaosAwakens {
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
-			CAVillagerInit.fillTradeData();
-			CAVillagerInit.registerPOI();
+			CAVillagers.registerVillagerTypes();
+			CAVillagers.registerPOIs();
 			
 			//This should work, but feels wrong so //TODO
 			new CAConfiguredFeatures();

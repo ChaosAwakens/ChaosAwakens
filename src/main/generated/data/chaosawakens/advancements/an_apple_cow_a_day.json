@@ -20,15 +20,24 @@
     "apple_cow": {
       "trigger": "minecraft:bred_animals",
       "conditions": {
-      "child": {
-        "type":"chaosawakens:apple_cow"
-       },
-      "parent": {
-        "type": "chaosawakens:apple_cow"
-       },
-      "partner": {
-        "type": "chaosawakens:apple_cow"
-       } 
+        "parent": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:apple_cow"
+            },
+            "entity": "this"
+          }
+        ],
+        "partner": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:apple_cow"
+            },
+            "entity": "this"
+          }
+        ]
       }
     }
   },
