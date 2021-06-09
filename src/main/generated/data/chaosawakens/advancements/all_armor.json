@@ -17,9 +17,6 @@
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
-  "rewards": {
-    "experience": 420
-  },
   "criteria": {
     "copper_helmet": {
       "trigger": "minecraft:inventory_changed",

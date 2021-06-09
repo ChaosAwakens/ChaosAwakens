@@ -1,6 +1,0 @@
-{
-	"parent": "minecraft:block/crop",
-	"textures": {
-		"crop": "chaosawakens:blocks/corn_plant_stage_0"
-	}
-}

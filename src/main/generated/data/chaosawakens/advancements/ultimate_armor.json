@@ -11,14 +11,11 @@
     "description": {
       "translate": "advancements.chaosawakens.ultimate_armor.description"
     },
-    "frame": "challenge",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
-  },
-  "rewards": {
-    "experience": 69
   },
   "criteria": {
     "ultimate_helmet": {

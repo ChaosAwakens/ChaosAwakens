@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "chaosawakens:peacock_leg"
-  },
-  "result": "chaosawakens:cooked_peacock_leg",
-  "experience": 1.0,
-  "cookingtime": 100
-}

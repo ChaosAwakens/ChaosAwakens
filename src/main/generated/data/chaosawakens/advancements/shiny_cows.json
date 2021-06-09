@@ -20,15 +20,24 @@
     "golden_apple_cow": {
       "trigger": "minecraft:bred_animals",
       "conditions": {
-            "child": {
-        "type":"chaosawakens:golden_apple_cow"
-       },
-      "parent": {
-        "type": "chaosawakens:golden_apple_cow"
-       },
-      "partner": {
-        "type": "chaosawakens:golden_apple_cow"
-       } 
+        "parent": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:golden_apple_cow"
+            },
+            "entity": "this"
+          }
+        ],
+        "partner": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:golden_apple_cow"
+            },
+            "entity": "this"
+          }
+        ]
       }
     }
   },

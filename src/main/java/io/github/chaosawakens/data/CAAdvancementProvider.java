@@ -1,18 +1,8 @@
 package io.github.chaosawakens.data;
 
-import static net.minecraft.advancements.AdvancementRewards.Builder.experience;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Set;
-import java.util.function.Consumer;
-
-import org.apache.commons.lang3.Validate;
-
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CADimensions;
@@ -20,13 +10,7 @@ import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.criterion.BredAnimalsTrigger;
-import net.minecraft.advancements.criterion.ChangeDimensionTrigger;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.KilledTrigger;
-import net.minecraft.advancements.criterion.LocationPredicate;
-import net.minecraft.advancements.criterion.PositionTrigger;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.AdvancementProvider;
 import net.minecraft.data.DataGenerator;
@@ -37,6 +21,12 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
+import org.apache.commons.lang3.Validate;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Set;
+import java.util.function.Consumer;
 
 public class CAAdvancementProvider extends AdvancementProvider {
 	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/gui/advancement_bg.png");
@@ -78,8 +68,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
 	public void register(Consumer<Advancement> t) {
 		
 		
-		Advancement root = itemAdvancement("root", FrameType.TASK, CAItems.RUBY.get()).withRewards(experience(10))
-				.withCriterion("root", PositionTrigger.Instance.forLocation(LocationPredicate.forRegistryKey(RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation("overworld"))))).register(t, id("root"));
+		Advancement root = itemAdvancement("root", FrameType.TASK, CAItems.RUBY.get()).withCriterion("root",
+				PositionTrigger.Instance.forLocation(LocationPredicate.forRegistryKey(RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation("overworld"))))).register(t, id("root"));
 		
 		// ARMOR
 		// Cat's Eye Armor
@@ -95,10 +85,10 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		Advancement rubyArmor = itemAdvancement("ruby_armor", FrameType.TASK, CAItems.RUBY_CHESTPLATE.get()).withParent(experienceArmor).withCriterion("ruby_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.RUBY_HELMET.get(), CAItems.RUBY_CHESTPLATE.get(), CAItems.RUBY_LEGGINGS.get(), CAItems.RUBY_BOOTS.get())).register(t, id("ruby_armor"));
 		// Ultimate Armor
-		Advancement ultimateArmor = itemAdvancement("ultimate_armor", FrameType.CHALLENGE, CAItems.ULTIMATE_CHESTPLATE.get()).withParent(root).withRewards(experience(69)).withCriterion("ultimate_helmet",
+		Advancement ultimateArmor = itemAdvancement("ultimate_armor", FrameType.GOAL, CAItems.ULTIMATE_CHESTPLATE.get()).withParent(root).withCriterion("ultimate_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get())).register(t, id("ultimate_armor"));
 		// ALL ARMOR
-		Advancement allArmor = itemAdvancement("all_armor", FrameType.CHALLENGE, CAItems.TIGERS_EYE_CHESTPLATE.get()).withParent(ultimateArmor).withRewards(experience(420)).withCriterion("copper_helmet",
+		Advancement allArmor = itemAdvancement("all_armor", FrameType.CHALLENGE, CAItems.TIGERS_EYE_CHESTPLATE.get()).withParent(ultimateArmor).withCriterion("copper_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.COPPER_HELMET.get(), CAItems.COPPER_CHESTPLATE.get(), CAItems.COPPER_LEGGINGS.get(), CAItems.COPPER_BOOTS.get())).withCriterion("peacock_feather_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.PEACOCK_FEATHER_HELMET.get(), CAItems.PEACOCK_FEATHER_CHESTPLATE.get(), CAItems.PEACOCK_FEATHER_LEGGINGS.get(), CAItems.PEACOCK_FEATHER_BOOTS.get())).withCriterion("tin_helmet",
 				InventoryChangeTrigger.Instance.forItems(CAItems.TIN_HELMET.get(), CAItems.TIN_CHESTPLATE.get(), CAItems.TIN_LEGGINGS.get(), CAItems.TIN_BOOTS.get())).withCriterion("lava_eel_helmet",
@@ -128,15 +118,14 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.HERCULES_BEETLE.get()))).withCriterion("ruby_bug",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.RUBY_BUG.get()))).register(t, id("bug_squasher"));
 		
-		Advancement trophyWorthy = itemAdvancement("trophy_worthy", FrameType.CHALLENGE, CABlocks.PLATINUM_BLOCK.get()).withParent(root).withRewards(experience(100)).withCriterion("platinum_block",
+		Advancement trophyWorthy = itemAdvancement("trophy_worthy", FrameType.CHALLENGE, CABlocks.PLATINUM_BLOCK.get()).withParent(root).withCriterion("platinum_block",
 				InventoryChangeTrigger.Instance.forItems(CABlocks.PLATINUM_BLOCK.get(), CABlocks.URANIUM_BLOCK.get(), CABlocks.TITANIUM_BLOCK.get())).register(t, id("trophy_worthy"));
 		
 		Advancement anAppleCowADay = itemAdvancement("an_apple_cow_a_day", FrameType.TASK, CAItems.APPLE_COW_SPAWN_EGG.get()).withParent(root).withCriterion("apple_cow",
-				BredAnimalsTrigger.Instance.any()).register(t, id("an_apple_cow_a_day"));/*Always do BredAnimalsTrigger.Instance.any()
-				and change the json manually. If you don't change anything here, runData will not affect the json file*/
+				BredAnimalsTrigger.Instance.forAll(EntityPredicate.Builder.create().type(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.Builder.create().type(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.ANY)).register(t, id("an_apple_cow_a_day"));
 		
 		Advancement shinyCows = itemAdvancement("shiny_cows", FrameType.TASK, CAItems.GOLDEN_APPLE_COW_SPAWN_EGG.get()).withParent(anAppleCowADay).withCriterion("golden_apple_cow",
-				BredAnimalsTrigger.Instance.any()).register(t, id("shiny_cows"));
+				BredAnimalsTrigger.Instance.forAll(EntityPredicate.Builder.create().type(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.Builder.create().type(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.ANY)).register(t, id("shiny_cows"));
 		
 		Advancement entDestroyer = itemAdvancement("ent_destroyer", FrameType.TASK, Blocks.OAK_LEAVES).withParent(root).withCriterion("ent",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.ENT.get()))).register(t, id("ent_destroyer"));
