@@ -26,9 +26,10 @@ public class CALootTableProvider extends LootTableProvider {
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootParameterSet>> getTables() {
         return ImmutableList.of(Pair.of(CABlockLootTables::new, LootParameterSets.BLOCK),
-                                Pair.of(CAEntityLootTables::new, LootParameterSets.ENTITY),
-                                Pair.of(CAChestLootTables::new, LootParameterSets.CHEST),
-                                Pair.of(CAFishingLootTables::new, LootParameterSets.FISHING));
+                Pair.of(CAEntityLootTables::new, LootParameterSets.ENTITY),
+                Pair.of(CAChestLootTables::new, LootParameterSets.CHEST),
+                Pair.of(CAFishingLootTables::new, LootParameterSets.FISHING),
+                Pair.of(CAGiftLootTable::new, LootParameterSets.GIFT));
     }
 
     @Override

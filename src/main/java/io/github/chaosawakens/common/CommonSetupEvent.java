@@ -3,14 +3,7 @@
  */
 package io.github.chaosawakens.common;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.api.FeatureWrapper;
@@ -18,6 +11,7 @@ import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
 import io.github.chaosawakens.common.registry.CAStructures;
+import io.github.chaosawakens.common.registry.CAVillagers;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -35,6 +29,12 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author invalid2
@@ -61,6 +61,8 @@ public class CommonSetupEvent {
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
+			CAVillagers.registerVillagerTypes();
+			CAVillagers.registerPOIs();
 			
 			//This should work, but feels wrong so //TODO
 			new CAConfiguredFeatures();
