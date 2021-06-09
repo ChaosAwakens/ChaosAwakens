@@ -34,7 +34,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 //Made by ya boi Meme Man
 
-public class CAVillagerInit{
+public class CAVillagerInit {
 	public static final DeferredRegister<PointOfInterestType> POINT_OF_INTEREST_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, ChaosAwakens.MODID);
 	
 	public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, ChaosAwakens.MODID);
@@ -45,13 +45,14 @@ public class CAVillagerInit{
 	public static final RegistryObject<VillagerProfession> DIMENSIONAL_TRADER = VILLAGER_PROFESSIONS.register("dimensional_trader",
 			()->new VillagerProfession("dimensional_trader", BLAST_BUILDING.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_ARMORER));
 	
-	public static void registerPOI(){
+	public static void registerPOI() {
 		try {
 			ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "registerBlockStates", PointOfInterestType.class).invoke(null, BLAST_BUILDING.get());
-		}catch(IllegalAccessException | InvocationTargetException e) {//Catching errors and exceptions be like (yay I learned how to use those :D)
+		} catch (IllegalAccessException | InvocationTargetException e) {//Catching errors and exceptions be like (yay I learned how to use those :D)
 			e.printStackTrace();
 		}
 	}
+	
 	public static void fillTradeData() {
 		MultiItemsForEmeraldsTrade multiTrade = new MultiItemsForEmeraldsTrade(ImmutableList.of(Items.DIAMOND, CAItems.RUBY.get(), Items.IRON_INGOT), ImmutableList.of(5, 4, 1), ImmutableList.of(6, 3, 1), 5, 50);
 		VillagerTrades.ITrade[] level1 = new VillagerTrades.ITrade[]{new VillagerTrades.EmeraldForItemsTrade(CAItems.ALUMINUM_INGOT.get(), 3, 4, 3), new VillagerTrades.ItemsForEmeraldsTrade(CAItems.TIN_LUMP.get(), 2, 7, 2)};
@@ -61,6 +62,7 @@ public class CAVillagerInit{
 		VillagerTrades.ITrade[] level5 = new VillagerTrades.ITrade[]{multiTrade};
 		VillagerTrades.VILLAGER_DEFAULT_TRADES.put(DIMENSIONAL_TRADER.get(), gatAsIntMap(ImmutableMap.of(1, level1, 2, level2, 3, level3, 4, level4, 5, level5)));
 	}
+	
     private static Int2ObjectMap<VillagerTrades.ITrade[]> gatAsIntMap(ImmutableMap<Integer, VillagerTrades.ITrade[]> p_221238_0_) {
 		    return new Int2ObjectOpenHashMap<>(p_221238_0_);
     }//Needed part from minecraft's VillagerTrades class

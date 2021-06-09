@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.Robo_Warrior",
+				"identifier": "geometry.Robo.warrior",
 				"texture_width": 128,
 				"texture_height": 128,
 				"visible_bounds_width": 4,
@@ -182,7 +182,7 @@
 				},
 				{
 					"name": "arm",
-					"parent": "robo_warrior",
+					"parent": "torso",
 					"pivot": [-6.75, 26, 1],
 					"rotation": [0, 0, 88]
 				},
@@ -209,7 +209,7 @@
 				},
 				{
 					"name": "arm2",
-					"parent": "robo_warrior",
+					"parent": "torso",
 					"pivot": [6.75, 26, 1],
 					"rotation": [0, 0, -88]
 				},

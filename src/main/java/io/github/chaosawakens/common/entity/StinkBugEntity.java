@@ -1,4 +1,9 @@
+/**
+ * 
+ */
 package io.github.chaosawakens.common.entity;
+
+import javax.annotation.Nullable;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -19,23 +24,27 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
-
-public class RubyBugEntity extends AnimalEntity implements IAnimatable {
+/**
+ * @author invalid2
+ */
+public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
-	public RubyBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+	/**
+	 * @param type
+	 * @param worldIn
+	 */
+	public StinkBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.ignoreFrustumCheck = true;
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walk", true));
 			return PlayState.CONTINUE;
 		}
 		
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.stand", true));
 		return PlayState.CONTINUE;
 	}
 	
@@ -43,20 +52,20 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0));
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 1)
-				.createMutableAttribute(Attributes.ARMOR, 3)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 2)
+				.createMutableAttribute(Attributes.ARMOR, 2)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
 	
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "rubybugcontroller", 0, this::predicate));
+		data.addAnimationController(new AnimationController<>(this, "stinkbugcontroller", 0, this::predicate));
 	}
 	
 	@Override
@@ -69,4 +78,5 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 	public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
 		return null;
 	}
+	
 }

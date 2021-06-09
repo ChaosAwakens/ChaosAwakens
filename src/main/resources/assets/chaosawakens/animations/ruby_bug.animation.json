@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.ruby_bug.idle_animation": {
+		"model.ruby.bug.stand.animation": {
 			"loop": true,
 			"animation_length": 4.08,
 			"anim_time_update": "0",
@@ -10,13 +10,13 @@
 				"ruby_bug": {
 					"scale": {
 						"0.0": {
-							"vector": [1, 1, 1]
+							"vector": [2, 2, 2]
 						},
 						"2.08": {
-							"vector": [1.01, 1.01, 1.01]
+							"vector": [2.01, 2.01, 2.01]
 						},
 						"4.08": {
-							"vector": [1, 1, 1]
+							"vector": [2, 2, 2]
 						}
 					}
 				},
@@ -379,7 +379,7 @@
 				}
 			}
 		},
-		"animation.ruby_bug.walking_animation": {
+		"model.ruby.bug.walk.animation": {
 			"loop": true,
 			"animation_length": 2.48,
 			"bones": {
@@ -1019,7 +1019,8 @@
 							"easing": "easeInOutExpo"
 						},
 						"1.2": {
-							"vector": [0, 0, 0]
+							"vector": [0, 0, 0],
+							"easing": "easeInElastic"
 						},
 						"1.52": {
 							"vector": [0, 0, 8],
@@ -1080,6 +1081,11 @@
 							"vector": [0, 0, 0],
 							"easing": "easeInExpo"
 						}
+					}
+				},
+				"ruby_bug": {
+					"scale": {
+						"vector": [2, 2, 2]
 					}
 				}
 			}

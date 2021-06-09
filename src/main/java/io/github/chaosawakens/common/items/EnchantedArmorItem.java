@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.EnchantmentAndLevel;
+import io.github.chaosawakens.common.CommonSetupEvent;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -30,7 +30,7 @@ public class EnchantedArmorItem extends ArmorItem {
 				}
 			items.add(stack);
 		}
-		ChaosAwakens.enchantedItems.put(this.getRegistryName(), enchantments);
+		CommonSetupEvent.enchantedItems.put(this.getRegistryName(), enchantments);
 	}
 	
 	@Override
