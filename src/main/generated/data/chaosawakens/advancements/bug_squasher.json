@@ -2,7 +2,7 @@
   "parent": "chaosawakens:root",
   "display": {
     "icon": {
-      "item": "chaosawakens:lava_eel"
+      "item": "chaosawakens:dead_stink_bug"
     },
     "title": {
       "translate": "advancements.chaosawakens.bug_squasher.title"

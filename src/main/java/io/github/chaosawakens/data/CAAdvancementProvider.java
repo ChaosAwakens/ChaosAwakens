@@ -114,7 +114,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		Advancement roboSlayer = itemAdvancement("robo_slayer", FrameType.TASK, CAItems.RAY_GUN.get()).withParent(root).withCriterion("robo_sniper",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.ROBO_SNIPER.get()))).withCriterion("robo_warrior", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.ROBO_WARRIOR.get()))).register(t, id("robo_slayer"));
 		
-		Advancement bugSquasher = itemAdvancement("bug_squasher", FrameType.TASK, CAItems.LAVA_EEL.get())/*Replace with Dead Stink Bug when it is added!*/.withParent(root).withCriterion("hercules_beetle",
+		Advancement bugSquasher = itemAdvancement("bug_squasher", FrameType.TASK, CAItems.DEAD_STINK_BUG.get()).withParent(root).withCriterion("hercules_beetle",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.HERCULES_BEETLE.get()))).withCriterion("ruby_bug",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.RUBY_BUG.get()))).withCriterion("stink_bug",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.create().type(CAEntityTypes.STINK_BUG.get()))).register(t, id("bug_squasher"));

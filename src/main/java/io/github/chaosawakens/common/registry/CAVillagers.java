@@ -2,10 +2,15 @@ package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableSet;
 import io.github.chaosawakens.ChaosAwakens;
+import net.minecraft.entity.ai.brain.task.GiveHeroGiftsTask;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.villager.VillagerType;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.village.PointOfInterestType;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
@@ -24,19 +29,19 @@ public class CAVillagers {
 	public static void registerVillagerTypes() {
 		VillagerTrades.VILLAGER_DEFAULT_TRADES.isEmpty();
 
-//		GiveHeroGiftsTask.GIFTS.put(DIMENSIONAL_TRADER.get(), new ResourceLocation(ChaosAwakens.MODID, "gameplay/hero_of_the_village/dimensional_trader_gift"));
+		GiveHeroGiftsTask.GIFTS.put(DIMENSIONAL_TRADER.get(), new ResourceLocation(ChaosAwakens.MODID, "gameplay/hero_of_the_village/dimensional_trader_gift"));
 	}
 
-//	private static VillagerType createType(String type) {
-//		return VillagerType.register(ChaosAwakens.MODID + ":" + type);
-//	}
+	private static VillagerType createType(String type) {
+		return VillagerType.register(ChaosAwakens.MODID + ":" + type);
+	}
 
-//	@SafeVarargs
-//	private static void registerVillagerType(VillagerType type, RegistryKey<Biome>... biomes) {
-//		for (RegistryKey<Biome> biome : biomes) {
-//			VillagerType.BY_BIOME.put(biome, type);
-//		}
-//	}
+	@SafeVarargs
+	private static void registerVillagerType(VillagerType type, RegistryKey<Biome>... biomes) {
+		for (RegistryKey<Biome> biome : biomes) {
+			VillagerType.BY_BIOME.put(biome, type);
+		}
+	}
 
 	public static void registerPOIs() {
 		try {
