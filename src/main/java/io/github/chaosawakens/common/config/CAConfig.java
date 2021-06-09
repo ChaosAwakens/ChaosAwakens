@@ -113,6 +113,9 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOrePlatinumGen;
 		public final ConfigValue<Boolean> enableOreSunstoneGen;
 		public final ConfigValue<Boolean> enableOreBloodstoneGen;
+		public final ConfigValue<Integer> battleAxeDamage;
+		public final ConfigValue<Integer> queenAxeDamage;
+
 
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
 
@@ -222,6 +225,8 @@ public class CAConfig {
 			fairySwordDamage = builder.define("Damage of the Fairy Sword", 10);
 			bigHammerDamage = builder.define("Damage of the Big Hammer", 15);
 			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 29);
+			battleAxeDamage = builder.define("Damage of the Battle Axe", 50);
+			queenAxeDamage = builder.define("Damage of the Queen Scale Battle Axe", 666);
 			builder.pop();
 			builder.pop();
 			builder.push("Functionality");
