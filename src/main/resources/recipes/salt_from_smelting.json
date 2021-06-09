@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "chaosawakens:salt_ore"
-  },
-  "result": "chaosawakens:salt",
-  "experience": 1.0,
-  "cookingtime": 200
-}

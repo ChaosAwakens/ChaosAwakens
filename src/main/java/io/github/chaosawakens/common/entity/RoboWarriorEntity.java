@@ -60,8 +60,8 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 				.createMutableAttribute(Attributes.MAX_HEALTH, 180)
 				.createMutableAttribute(Attributes.ARMOR, 10)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.105D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.4)
-				.createMutableAttribute(Attributes.ATTACK_SPEED, 7.5)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
+				.createMutableAttribute(Attributes.ATTACK_SPEED, 7.5D)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 50)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 32);

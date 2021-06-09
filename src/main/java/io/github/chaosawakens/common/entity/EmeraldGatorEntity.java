@@ -62,23 +62,21 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
         this.goalSelector.addGoal(2, new RandomWalkingGoal(this, 1.0));
         this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0, true));
-        this.goalSelector.addGoal(7, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomWalkingGoal(this, 1.0));
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::func_233680_b_));
         this.targetSelector.addGoal(8, new ResetAngerGoal<>(this, true));
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 18.0D)
-                .createMutableAttribute(Attributes.ARMOR, 3)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 3.0D)
-                .createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 1.0D)
-                .createMutableAttribute(Attributes.ATTACK_SPEED, 1.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.35F)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 18)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 3)
+                .createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 1)
+                .createMutableAttribute(Attributes.ATTACK_SPEED, 1)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.35D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
     }
 

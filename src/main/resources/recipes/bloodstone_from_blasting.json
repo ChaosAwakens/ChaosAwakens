@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "chaosawakens:bloodstone_ore"
-  },
-  "result": "chaosawakens:bloodstone",
-  "experience": 1.0,
-  "cookingtime": 100
-}

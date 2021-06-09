@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "chaosawakens:platinum_ore"
-  },
-  "result": "chaosawakens:platinum_lump",
-  "experience": 1.0,
-  "cookingtime": 200
-}

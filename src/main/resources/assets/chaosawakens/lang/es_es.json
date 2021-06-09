@@ -5,8 +5,42 @@
 	"itemGroup.chaosawakens_equipment_item_group": "Equipo de Chaos Awakens",
 	"itemGroup.chaosawakens_eggs_item_group": "Huevos de Aparición de Chaos Awakens",
 
+	"advancements.chaosawakens.root.title": "Thank You for installing Chaos Awakens!",
+	"advancements.chaosawakens.root.description": "Have fun :)",
+	"advancements.chaosawakens.cats_eye_armor.title": "Woah! Its Clear!",
+	"advancements.chaosawakens.cats_eye_armor.description": "Obtain Cat's Eye Armor.",
+	"advancements.chaosawakens.platinum_armor.title": "Platinum Time",
+	"advancements.chaosawakens.platinum_armor.description": "Obtain Platinum Armor.",
+	"advancements.chaosawakens.experience_armor.title": "Experience It All!",
+	"advancements.chaosawakens.experience_armor.description": "Obtain Experience Armor.",
+	"advancements.chaosawakens.ruby_armor.title": "So Much Lava...",
+	"advancements.chaosawakens.ruby_armor.description": "Obtain Ruby Armor.",
+	"advancements.chaosawakens.ultimate_armor.title": "Ultimate Power!",
+	"advancements.chaosawakens.ultimate_armor.description": "Obtain Ultimate Armor.",
+	"advancements.chaosawakens.all_armor.title": "Armor Collector",
+	"advancements.chaosawakens.all_armor.description": "Obtain all the Armor in the mod.",
+	"advancements.chaosawakens.crystal_dimension.title": "All Crystalline!",
+	"advancements.chaosawakens.crystal_dimension.description": "Enter the Crystal Dimension.",
+	"advancements.chaosawakens.mining_dimension.title": "Digging Even Deeper!",
+	"advancements.chaosawakens.mining_dimension.description": "Enter the Mining Dimension.",
+	"advancements.chaosawakens.village_dimension.title": "Villages Afar!",
+	"advancements.chaosawakens.village_dimension.description": "Enter the Village Dimension.",
+	"advancements.chaosawakens.robo_slayer.title": "Robo Slayer!",
+	"advancements.chaosawakens.robo_slayer.description": "Kill every Robo.",
+	"advancements.chaosawakens.bug_squasher.title": "Bug Squasher!",
+	"advancements.chaosawakens.bug_squasher.description": "Kill every Bug.",
+	"advancements.chaosawakens.ent_destroyer.title": "It Ents Here!",
+	"advancements.chaosawakens.ent_destroyer.description": "Kill the Ent.",
+	"advancements.chaosawakens.trophy_worthy.title": "Trophy Worthy!",
+	"advancements.chaosawakens.trophy_worthy.description": "Get a Block of Platinum, Uranium, and Titanium",
+	"advancements.chaosawakens.an_apple_cow_a_day.title": "An Apple Cow a day...",
+	"advancements.chaosawakens.an_apple_cow_a_day.description": "Keeps the tree farming away!",
+	"advancements.chaosawakens.shiny_cows.title": "Shiny Cows!",
+	"advancements.chaosawakens.shiny_cows.description": "Breed 2 Golden Apple Cows.",
+
 	"container.crystal_crafting_table": "Mesa de Trabajo de Cristal",
 
+	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Hormiga Roja",
 	"entity.chaosawakens.brown_ant": "Hormiga Marrón",
@@ -14,8 +48,9 @@
 	"entity.chaosawakens.unstable_ant": "Hormiga Inestable",
 	"entity.chaosawakens.termite": "Termita",
 	"entity.chaosawakens.hercules_beetle": "Escarabajo Hércules",
-	"entity.chaosawakens.ruby_bug": "Escarabajo Rubí",
 	"entity.chaosawakens.emerald_gator": "Cocodrilo de Esmeralda",
+	"entity.chaosawakens.ruby_bug": "Escarabajo Rubí",
+	"entity.chaosawakens.stink_bug": "Stink Bug",
 	"entity.chaosawakens.robo_sniper": "Robot Francotirador",
 	"entity.chaosawakens.robo_warrior": "Robot Guerrero",
 	"entity.chaosawakens.robo_laser": "Robot Laser",
@@ -27,6 +62,7 @@
 	"entity.chaosawakens.ultimate_arrow": "Flecha Definitiva",
 	"entity.chaosawakens.irukandji_arrow": "Flecha Irukandji",
 	"entity.chaosawakens.thunder_ball": "Carga de Trueno",
+	"entity.chaosawakens.explosive_ball": "Explosive Charge",
 
 	"item.chaosawakens.ent_spawn_egg": "Huevo de Aparición de Ent",
 	"item.chaosawakens.brown_ant_spawn_egg": "Huevo de Aparición de Hormiga Marrón",
@@ -35,8 +71,9 @@
 	"item.chaosawakens.unstable_ant_spawn_egg": "Huevo de Aparición de Hormiga Inestable",
 	"item.chaosawakens.termite_spawn_egg": "Huevo de Aparición de Termita",
 	"item.chaosawakens.hercules_beetle_spawn_egg": "Huevo de Aparición de Escarabajo Hércules",
-	"item.chaosawakens.ruby_bug_spawn_egg": "Huevo de Aparición de Escarabajo Rubí",
 	"item.chaosawakens.emerald_gator_spawn_egg": "Huevo de Aparición de Cocodrilo de Esmeralda",
+	"item.chaosawakens.ruby_bug_spawn_egg": "Huevo de Aparición de Escarabajo Rubí",
+	"item.chaosawakens.stink_bug_spawn_egg": "Stink Bug Spawn Egg",
 	"item.chaosawakens.robo_sniper_spawn_egg": "Huevo de Aparición de Robot Francotirador",
 	"item.chaosawakens.robo_warrior_spawn_egg": "Huevo de Aparición de Robot Guerrero",
 	"item.chaosawakens.beaver_spawn_egg": "Huevo de Aparición de Castor",
@@ -46,6 +83,18 @@
 	"item.chaosawakens.crystal_apple_cow_spawn_egg": "Huevo de Aparición de Vaca de Manzanas de Cristal",
 	"item.chaosawakens.iron_golem_spawn_egg": "Huevo de Aparición de Gólem de Hierro",
 	"item.chaosawakens.snow_golem_spawn_egg": "Huevo de Aparición de Gólem de Nieve",
+
+	"biome.chaosawakens.mining_biome": "Mining Fields",
+	"biome.chaosawakens.mining_spikes": "Mining Spikes",
+	"biome.chaosawakens.village_plains": "Village Plains",
+	"biome.chaosawakens.danger_islands": "Danger Islands",
+	"biome.chaosawakens.crystal_plains": "Crystal Plains",
+	"biome.chaosawakens.crystal_hills": "Crystal Hills",
+
+	"dimension.chaosawakens.crystal_dimension": "Crystal Dimension",
+	"dimension.chaosawakens.mining_dimension": "Mining Dimension",
+	"dimension.chaosawakens.village_mania": "Village Mania",
+	"dimension.chaosawakens.danger_islands": "Danger Islands",
 
 	"item.chaosawakens.corndog": "Perrito Caliente Crudo",
 	"item.chaosawakens.cooked_corndog": "Perrito Caliente Cocinado",
@@ -109,6 +158,9 @@
 	"item.chaosawakens.enchanted_golden_cod": "Anguila Dorada Encantada",
 	"item.chaosawakens.enchanted_golden_candycane": "Piruleta Dorada Encantada",
 	"item.chaosawakens.golden_melon_seeds": "Semillas de Melón Doradas",
+
+	"block.chaosawakens.ender_eye_block": "Eye of Ender Block",
+	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
 
 	"item.chaosawakens.salt": "Sal",
 	"block.chaosawakens.salt_ore": "Mena de Sal",
@@ -248,7 +300,11 @@
 	"block.chaosawakens.sunstone_block": "Bloque de Piedra Solar",
 	"item.chaosawakens.sunstone_torch": "Antorcha de Piedra Solar",
 	"block.chaosawakens.sunstone_torch": "Antorcha de Piedra Solar",
-	"block.chaosawakens.wall_sunstone_torch": "Antorcha de Pared de Piedra Solar,
+	"block.chaosawakens.wall_sunstone_torch": "Antorcha de Pared de Piedra Solar",
+
+	"item.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.extreme_torch": "Extreme Torch",
+	"block.chaosawakens.wall_extreme_torch": "Wall Extreme Torch",
 
 	"item.chaosawakens.bloodstone": "Piedra de Sangre",
 	"block.chaosawakens.bloodstone_ore": "Mena de Piedra de Sangre",
@@ -338,6 +394,24 @@
 	"item.chaosawakens.peacock_feather_leggings": "Pantalones de Pluma de Pavo Real",
 	"item.chaosawakens.peacock_feather_boots": "Botas de Pluma de Pavo Real",
 
+	"item.chaosawakens.royal_guardian_helmet": "Royal Guardian Helmet",
+	"item.chaosawakens.royal_guardian_chestplate": "Royal Guardian Chestplate",
+	"item.chaosawakens.royal_guardian_leggings": "Royal Guardian Leggings",
+	"item.chaosawakens.royal_guardian_boots": "Royal Guardian Boots",
+
+	"item.chaosawakens.battle_axe": "Battle Axe",
+	"item.chaosawakens.big_bertha": "Big Bertha",
+	"item.chaosawakens.big_bertha_blade": "Big Bertha Blade",
+	"item.chaosawakens.big_bertha_handle": "Big Bertha Handle",
+	"item.chaosawakens.big_bertha_guard": "Big Bertha Guard",
+
+	"item.chaosawakens.queen_scale": "Queen Scale",
+	"item.chaosawakens.queen_scale_battle_axe": "Queen Scale Battle Axe",
+	"item.chaosawakens.queen_scale_helmet": "Queen Scale Helmet",
+	"item.chaosawakens.queen_scale_chestplate": "Queen Scale Chestplate",
+	"item.chaosawakens.queen_scale_leggings": "Queen Scale Leggings",
+	"item.chaosawakens.queen_scale_boots": "Queen Scale Boots",
+
 	"item.chaosawakens.nightmare_sword": "Espada de Pesadilla",
 	"item.chaosawakens.poison_sword": "Espada de Veneno",
 	"item.chaosawakens.rat_sword": "Espada de Rata",
@@ -350,7 +424,8 @@
 	"item.chaosawakens.irukandji_arrow": "Flecha Irukandji",
 
 	"block.chaosawakens.gate_block": "Bloque de Compuerta",
-	"block.chaosawakens.ent_dungeon_wood": "Madera de La Mazmorra del Ent",
+	"block.chaosawakens.spawner_block": "Spawner Block",
+	"block.chaosawakens.random_teleport_block": "Random Teleport Block",
 
 	"block.chaosawakens.brown_ant_nest": "Nido de Hormigas Marrones",
 	"block.chaosawakens.red_ant_nest": "Nido de Hormigas Rojas",
@@ -359,6 +434,9 @@
 	"block.chaosawakens.termite_nest": "Nido de Termitas",
 	"block.chaosawakens.red_ant_infested_ore": "Mena Infestada de Hormigas Rojas",
 	"block.chaosawakens.termite_infested_ore": "Mena Infestada de Termitas",
+
+	"item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
+	"item.chaosawakens.termite_infested_ore": "Termite Infested Ore",
 
 	"container.chaosawakens.crystal_furnace": "Horno Cristalizado",
 
@@ -373,6 +451,11 @@
 	"item.chaosawakens.zoo_cage_medium": "Jáula Animal Mediana",
 	"item.chaosawakens.zoo_cage_large": "Jáula Animal Grande",
 	"item.chaosawakens.zoo_cage_extra_large": "Jáula Animal Súper Grande",
+
+	"block.chaosawakens.corn_plant": "Corn Plant",
+	"block.chaosawakens.tomato_plant": "Tomato Plant",
+	"block.chaosawakens.lettuce_plant": "Lettuce Plant",
+	"block.chaosawakens.strawberry_plant": "Strawberry Bush",
 
 	"misc.chaosawakens.empty_inventory": "¡Vacía tu inventario primero!",
 	"misc.chaosawakens.inaccessible_dimension": "El objetivo de la dimensión no está aquí todavía."

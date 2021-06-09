@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import javax.annotation.Nullable;
-
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.AgeableEntity;
@@ -37,6 +34,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
 public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 
@@ -67,8 +66,9 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 1.0D)
-				.createMutableAttribute(Attributes.ARMOR, 3).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+		return MobEntity.registerAttributes()
+				.createMutableAttribute(Attributes.MAX_HEALTH, 1)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
 	

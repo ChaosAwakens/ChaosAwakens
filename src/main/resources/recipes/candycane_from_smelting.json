@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "minecraft:sugar"
-  },
-  "result": "chaosawakens:candycane",
-  "experience": 1.0,
-  "cookingtime": 200
-}

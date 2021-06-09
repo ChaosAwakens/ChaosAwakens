@@ -15,9 +15,6 @@
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
-  "rewards": {
-    "experience": 10
-  },
   "criteria": {
     "root": {
       "trigger": "minecraft:location",

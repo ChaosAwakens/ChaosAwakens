@@ -1,6 +1,3 @@
-/**
- * 
- */
 package io.github.chaosawakens.common.entity;
 
 import javax.annotation.Nullable;
@@ -57,8 +54,7 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 2)
-				.createMutableAttribute(Attributes.ARMOR, 2)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 8)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
@@ -78,5 +74,4 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
 		return null;
 	}
-	
 }

@@ -5,8 +5,42 @@
 	"itemGroup.chaosawakens_equipment_item_group": "Снаряжение из Chaos Awakens",
 	"itemGroup.chaosawakens_eggs_item_group": "Яйца призыва из Chaos Awakens",
 
+	"advancements.chaosawakens.root.title": "Thank You for installing Chaos Awakens!",
+	"advancements.chaosawakens.root.description": "Have fun :)",
+	"advancements.chaosawakens.cats_eye_armor.title": "Woah! Its Clear!",
+	"advancements.chaosawakens.cats_eye_armor.description": "Obtain Cat's Eye Armor.",
+	"advancements.chaosawakens.platinum_armor.title": "Platinum Time",
+	"advancements.chaosawakens.platinum_armor.description": "Obtain Platinum Armor.",
+	"advancements.chaosawakens.experience_armor.title": "Experience It All!",
+	"advancements.chaosawakens.experience_armor.description": "Obtain Experience Armor.",
+	"advancements.chaosawakens.ruby_armor.title": "So Much Lava...",
+	"advancements.chaosawakens.ruby_armor.description": "Obtain Ruby Armor.",
+	"advancements.chaosawakens.ultimate_armor.title": "Ultimate Power!",
+	"advancements.chaosawakens.ultimate_armor.description": "Obtain Ultimate Armor.",
+	"advancements.chaosawakens.all_armor.title": "Armor Collector",
+	"advancements.chaosawakens.all_armor.description": "Obtain all the Armor in the mod.",
+	"advancements.chaosawakens.crystal_dimension.title": "All Crystalline!",
+	"advancements.chaosawakens.crystal_dimension.description": "Enter the Crystal Dimension.",
+	"advancements.chaosawakens.mining_dimension.title": "Digging Even Deeper!",
+	"advancements.chaosawakens.mining_dimension.description": "Enter the Mining Dimension.",
+	"advancements.chaosawakens.village_dimension.title": "Villages Afar!",
+	"advancements.chaosawakens.village_dimension.description": "Enter the Village Dimension.",
+	"advancements.chaosawakens.robo_slayer.title": "Robo Slayer!",
+	"advancements.chaosawakens.robo_slayer.description": "Kill every Robo.",
+	"advancements.chaosawakens.bug_squasher.title": "Bug Squasher!",
+	"advancements.chaosawakens.bug_squasher.description": "Kill every Bug.",
+	"advancements.chaosawakens.ent_destroyer.title": "It Ents Here!",
+	"advancements.chaosawakens.ent_destroyer.description": "Kill the Ent.",
+	"advancements.chaosawakens.trophy_worthy.title": "Trophy Worthy!",
+	"advancements.chaosawakens.trophy_worthy.description": "Get a Block of Platinum, Uranium, and Titanium",
+	"advancements.chaosawakens.an_apple_cow_a_day.title": "An Apple Cow a day...",
+	"advancements.chaosawakens.an_apple_cow_a_day.description": "Keeps the tree farming away!",
+	"advancements.chaosawakens.shiny_cows.title": "Shiny Cows!",
+	"advancements.chaosawakens.shiny_cows.description": "Breed 2 Golden Apple Cows.",
+
 	"container.crystal_crafting_table": "Кристальный верстак",
 
+	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Красный муравей",
 	"entity.chaosawakens.brown_ant": "Коричневый муравей",
@@ -14,8 +48,9 @@
 	"entity.chaosawakens.unstable_ant": "Нестабильный муравей",
 	"entity.chaosawakens.termite": "Термит",
 	"entity.chaosawakens.hercules_beetle": "Жук-геркулес",
-	"entity.chaosawakens.ruby_bug": "Рубиновый жук",
 	"entity.chaosawakens.emerald_gator": "Изумрудный аллигатор",
+	"entity.chaosawakens.ruby_bug": "Рубиновый жук",
+	"entity.chaosawakens.stink_bug": "Stink Bug",
 	"entity.chaosawakens.robo_sniper": "Робо-снайпер",
 	"entity.chaosawakens.robo_warrior": "Робо-воин",
 	"entity.chaosawakens.robo_laser": "Робо-лазер",
@@ -36,8 +71,9 @@
 	"item.chaosawakens.unstable_ant_spawn_egg": "Яйцо призыва Нестабильного муравья",
 	"item.chaosawakens.termite_spawn_egg": "Яйцо призыва Термита",
 	"item.chaosawakens.hercules_beetle_spawn_egg": "Яйцо призыва Жука-геркулеса",
-	"item.chaosawakens.ruby_bug_spawn_egg": "Яйцо призыва Рубинового жука",
 	"item.chaosawakens.emerald_gator_spawn_egg": "Яйцо призыва Изумрудного аллигатора",
+	"item.chaosawakens.ruby_bug_spawn_egg": "Яйцо призыва Рубинового жука",
+	"item.chaosawakens.stink_bug_spawn_egg": "Stink Bug Spawn Egg",
 	"item.chaosawakens.robo_sniper_spawn_egg": "Яйцо призыва Робо-снайпера",
 	"item.chaosawakens.robo_warrior_spawn_egg": "Яйцо призыва Робо-воина",
 	"item.chaosawakens.beaver_spawn_egg": "Яйцо призыва Бобра",
@@ -47,6 +83,18 @@
 	"item.chaosawakens.crystal_apple_cow_spawn_egg": "Яйцо призыва Кристальной яблочной коровы",
 	"item.chaosawakens.iron_golem_spawn_egg": "Яйцо призыва Железного голема",
 	"item.chaosawakens.snow_golem_spawn_egg": "Яйцо призыва Снежного голема",
+
+	"biome.chaosawakens.mining_biome": "Mining Fields",
+	"biome.chaosawakens.mining_spikes": "Mining Spikes",
+	"biome.chaosawakens.village_plains": "Village Plains",
+	"biome.chaosawakens.danger_islands": "Danger Islands",
+	"biome.chaosawakens.crystal_plains": "Crystal Plains",
+	"biome.chaosawakens.crystal_hills": "Crystal Hills",
+
+	"dimension.chaosawakens.crystal_dimension": "Crystal Dimension",
+	"dimension.chaosawakens.mining_dimension": "Mining Dimension",
+	"dimension.chaosawakens.village_mania": "Village Mania",
+	"dimension.chaosawakens.danger_islands": "Danger Islands",
 
 	"item.chaosawakens.corndog": "Сырой Корн-дог",
 	"item.chaosawakens.cooked_corndog": "Приготовленный Корн-дог",
@@ -110,6 +158,9 @@
 	"item.chaosawakens.enchanted_golden_cod": "Зачарованная золотая треска",
 	"item.chaosawakens.enchanted_golden_candycane": "Зачарованный золотой леденец",
 	"item.chaosawakens.golden_melon_seeds": "Золотые семена арбуза",
+
+	"block.chaosawakens.ender_eye_block": "Eye of Ender Block",
+	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
 
 	"item.chaosawakens.salt": "Соль",
 	"block.chaosawakens.salt_ore": "Соляная руда",
@@ -343,6 +394,24 @@
 	"item.chaosawakens.peacock_feather_leggings": "Поножи из пера павлина",
 	"item.chaosawakens.peacock_feather_boots": "Ботинки из пера павлина",
 
+	"item.chaosawakens.royal_guardian_helmet": "Royal Guardian Helmet",
+	"item.chaosawakens.royal_guardian_chestplate": "Royal Guardian Chestplate",
+	"item.chaosawakens.royal_guardian_leggings": "Royal Guardian Leggings",
+	"item.chaosawakens.royal_guardian_boots": "Royal Guardian Boots",
+
+	"item.chaosawakens.battle_axe": "Battle Axe",
+	"item.chaosawakens.big_bertha": "Big Bertha",
+	"item.chaosawakens.big_bertha_blade": "Big Bertha Blade",
+	"item.chaosawakens.big_bertha_handle": "Big Bertha Handle",
+	"item.chaosawakens.big_bertha_guard": "Big Bertha Guard",
+
+	"item.chaosawakens.queen_scale": "Queen Scale",
+	"item.chaosawakens.queen_scale_battle_axe": "Queen Scale Battle Axe",
+	"item.chaosawakens.queen_scale_helmet": "Queen Scale Helmet",
+	"item.chaosawakens.queen_scale_chestplate": "Queen Scale Chestplate",
+	"item.chaosawakens.queen_scale_leggings": "Queen Scale Leggings",
+	"item.chaosawakens.queen_scale_boots": "Queen Scale Boots",
+
 	"item.chaosawakens.nightmare_sword": "Кошмарный меч",
 	"item.chaosawakens.poison_sword": "Ядовитый меч",
 	"item.chaosawakens.rat_sword": "Крысиный меч",
@@ -356,6 +425,7 @@
 
 	"block.chaosawakens.gate_block": "Блок ворот",
 	"block.chaosawakens.spawner_block": "Spawner Block",
+	"block.chaosawakens.random_teleport_block": "Random Teleport Block",
 
 	"block.chaosawakens.brown_ant_nest": "Гнездо коричневых муравьёв",
 	"block.chaosawakens.red_ant_nest": "Гнездо красных муравьёв",
@@ -364,6 +434,9 @@
 	"block.chaosawakens.termite_nest": "Гнездо термитов",
 	"block.chaosawakens.red_ant_infested_ore": "Заражённая красными муравьями руда",
 	"block.chaosawakens.termite_infested_ore": "Заражённая термитами руда",
+
+	"item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
+	"item.chaosawakens.termite_infested_ore": "Termite Infested Ore",
 
 	"container.chaosawakens.crystal_furnace": "Кристальная печь",
 
@@ -378,6 +451,11 @@
 	"item.chaosawakens.zoo_cage_medium": "Средняя клетка",
 	"item.chaosawakens.zoo_cage_large": "Большая клетка",
 	"item.chaosawakens.zoo_cage_extra_large": "Очень большая клетка",
+
+	"block.chaosawakens.corn_plant": "Corn Plant",
+	"block.chaosawakens.tomato_plant": "Tomato Plant",
+	"block.chaosawakens.lettuce_plant": "Lettuce Plant",
+	"block.chaosawakens.strawberry_plant": "Strawberry Bush",
 
 	"misc.chaosawakens.empty_inventory": "Сперва опустошите ваш инвентарь!",
 	"misc.chaosawakens.inaccessible_dimension": "Похоже, это измерение еще не добавлено."

@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "chaosawakens:block/crystal_furnace_top",
-        "front": "chaosawakens:block/crystal_furnace_front",
-        "side": "chaosawakens:block/crystal_furnace_side"
-    }
-}

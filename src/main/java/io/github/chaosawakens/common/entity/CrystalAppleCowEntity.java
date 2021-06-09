@@ -37,8 +37,8 @@ public class CrystalAppleCowEntity extends AnimalEntity {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 10)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE, 10);
     }
 

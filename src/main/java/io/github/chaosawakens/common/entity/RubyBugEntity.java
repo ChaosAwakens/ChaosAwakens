@@ -22,6 +22,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public class RubyBugEntity extends AnimalEntity implements IAnimatable {
+	
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public RubyBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {

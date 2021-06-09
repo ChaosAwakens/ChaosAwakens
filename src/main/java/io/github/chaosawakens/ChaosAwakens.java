@@ -6,10 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.github.chaosawakens.client.ClientSetupEvent;
-import io.github.chaosawakens.common.CAVillagerInit;
 import io.github.chaosawakens.common.CommonSetupEvent;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
 import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
+import io.github.chaosawakens.common.EventHandler;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.registry.CABiomes;
@@ -20,6 +20,7 @@ import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStructures;
 import io.github.chaosawakens.common.registry.CATileEntities;
+import io.github.chaosawakens.common.registry.CAVillagers;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.CAAdvancementProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
@@ -78,8 +79,8 @@ public class ChaosAwakens {
 		CAStructures.STRUCTURES.register(eventBus);
 		CAFeatures.FEATURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
-		CAVillagerInit.POINT_OF_INTEREST_TYPES.register(eventBus);
-		CAVillagerInit.VILLAGER_PROFESSIONS.register(eventBus);
+		CAVillagers.POI_TYPES.register(eventBus);
+		CAVillagers.PROFESSIONS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 		
 		if (ModList.get().isLoaded("projecte")) {
@@ -92,6 +93,7 @@ public class ChaosAwakens {
 		
 		//Register to the forge event bus
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
+		MinecraftForge.EVENT_BUS.register(new EventHandler());
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
 		MinecraftForge.EVENT_BUS.register(this);

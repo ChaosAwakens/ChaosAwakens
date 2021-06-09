@@ -55,10 +55,10 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 25)
-				.createMutableAttribute(Attributes.ARMOR, 3)
+		return MobEntity.registerAttributes()
+				.createMutableAttribute(Attributes.MAX_HEALTH, 25)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.2)
+				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
 				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
 				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 25)
 				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)

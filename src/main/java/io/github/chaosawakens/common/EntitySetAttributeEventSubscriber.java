@@ -19,13 +19,14 @@ public class EntitySetAttributeEventSubscriber {
                 event.put(CAEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.TERMITE.get(), TermiteEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().create());
-                event.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().create());
+                event.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().create());
+                event.put(CAEntityTypes.STINK_BUG.get(), StinkBugEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().create());
                 event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().create());
         }

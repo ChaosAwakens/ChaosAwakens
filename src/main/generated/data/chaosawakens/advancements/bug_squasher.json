@@ -44,6 +44,20 @@
           }
         ]
       }
+    },
+    "stink_bug": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:stink_bug"
+            },
+            "entity": "this"
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -52,6 +66,9 @@
     ],
     [
       "ruby_bug"
+    ],
+    [
+      "stink_bug"
     ]
   ]
 }

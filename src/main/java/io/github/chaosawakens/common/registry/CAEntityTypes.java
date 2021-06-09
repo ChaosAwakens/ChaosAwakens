@@ -58,12 +58,6 @@ public class CAEntityTypes {
 			.size(4.5f, 3.125f) // Hitbox Size ()
 			.build(new ResourceLocation(ChaosAwakens.MODID, "hercules_beetle").toString()));
 	
-	// Ruby Bug
-	public static final RegistryObject<EntityType<RubyBugEntity>> RUBY_BUG = ENTITY_TYPES.register("ruby_bug",
-		() -> EntityType.Builder.create(RubyBugEntity::new, EntityClassification.CREATURE)
-			.size(0.5f, 0.5f) // Hitbox Size ()
-			.build(new ResourceLocation(ChaosAwakens.MODID, "ruby_bug").toString()));
-	
 	// Apple Cows
 	public static final RegistryObject<EntityType<AppleCowEntity>> APPLE_COW = ENTITY_TYPES.register("apple_cow",
 		() -> EntityType.Builder.create(AppleCowEntity::new, EntityClassification.CREATURE)
@@ -127,6 +121,18 @@ public class CAEntityTypes {
 			.size(1.5f, 1.0f) // Hitbox Size ()
 			.build(new ResourceLocation(ChaosAwakens.MODID, "emerald_gator").toString()));
 
+	// Ruby Bug
+	public static final RegistryObject<EntityType<RubyBugEntity>> RUBY_BUG = ENTITY_TYPES.register("ruby_bug",
+			() -> EntityType.Builder.create(RubyBugEntity::new, EntityClassification.CREATURE)
+					.size(0.5f, 0.5f) // Hitbox Size ()
+					.build(new ResourceLocation(ChaosAwakens.MODID, "ruby_bug").toString()));
+
+	// Stink Bug
+	public static final RegistryObject<EntityType<StinkBugEntity>> STINK_BUG = ENTITY_TYPES.register("stink_bug",
+			() -> EntityType.Builder.create(StinkBugEntity::new, EntityClassification.CREATURE)
+					.size(0.5f, 0.5f) // Hitbox Size ()
+					.build(new ResourceLocation(ChaosAwakens.MODID, "stink_bug").toString()));
+
 	// Robo Sniper
 	public static final RegistryObject<EntityType<RoboSniperEntity>> ROBO_SNIPER = ENTITY_TYPES.register("robo_sniper",
 			() -> EntityType.Builder.create(RoboSniperEntity::new, EntityClassification.MONSTER)
@@ -138,12 +144,6 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.create(RoboWarriorEntity::new, EntityClassification.MONSTER)
 				.size(2.0f, 4.0f) // Hitbox Size ()
 				.build(new ResourceLocation(ChaosAwakens.MODID, "robo_warrior").toString()));
-	
-	//Stink Bug
-	public static final RegistryObject<EntityType<StinkBugEntity>> STINK_BUG = ENTITY_TYPES.register("stink_bug",
-			() -> EntityType.Builder.create(StinkBugEntity::new, EntityClassification.CREATURE)
-				.size(2.0f, 4.0f) // Hitbox Size ()
-				.build(new ResourceLocation(ChaosAwakens.MODID, "stink_bug").toString()));
 	
 	// Projectiles
 	public static final RegistryObject<EntityType<RoboLaserEntity>> ROBO_LASER = ENTITY_TYPES.register("robo_laser",
