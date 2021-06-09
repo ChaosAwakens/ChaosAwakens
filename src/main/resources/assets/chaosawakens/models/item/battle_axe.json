@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"0": "chaosawakens:item/battle_axe",
+		"layer0": "chaosawakens:item/battle_axe"
 	},
 	"display": {
 		"thirdperson_righthand": {
