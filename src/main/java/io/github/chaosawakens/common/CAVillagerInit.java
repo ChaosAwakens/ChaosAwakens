@@ -85,6 +85,6 @@ public class CAVillagerInit{
 			int choose = (int) (random.nextFloat() * items.size());
 			return new MerchantOffer(new ItemStack(Items.EMERALD, amountOfEmeralds.get(choose)), new ItemStack((IItemProvider) items.get(choose), amountOfItems.get(0)), this.uses, this.villagerEXP, 0.05f);//.05 float is the default villager increase in price value.
 		}
-    	//MultiItemsForEmeraldsTrade. Specify the items in brackets of course. First 3 integers are the item amounts in respective order. Second 3 integers are emerald amounts each in respective order. after that it's the max uses, then the xp gained for the villager and you (in points)
+    	//MultiItemsForEmeraldsTrade. Specify the items in brackets of course. First 3 integers are the item amounts in respective order. Second 3 integers are emerald amounts each in respective order. after that it's the max uses, then the xp gained for the villager and you (in points).
     }
 }
