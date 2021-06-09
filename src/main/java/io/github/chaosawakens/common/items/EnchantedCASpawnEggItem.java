@@ -7,19 +7,12 @@ import net.minecraft.nbt.CompoundNBT;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-public class EnchantedCASpawnEggItem extends CASpawnEgg {
-	private final Supplier<? extends EntityType<?>> typeGetter;
+public class EnchantedCASpawnEggItem extends CASpawnEggItem {
 	
 	public EnchantedCASpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties) {
-		super(null, properties);
-		typeGetter = typeIn;
+		super(typeIn, properties);
 	}
-	
-	@Override
-	public EntityType<?> getType(@Nullable CompoundNBT p_208076_1_) {
-		return typeGetter.get();
-	}
-	
+
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return true;

@@ -3,12 +3,16 @@
   "values": [
     "#minecraft:base_stone_overworld",
     "#minecraft:base_stone_nether",
-    "minecraft:end_stone",
     "#chaosawakens:base_stone_crystal",
     "#chaosawakens:base_stone_mining",
-    "#minecraft:water",
-    "#minecraft:lava",
-    "minecraft:dirt",
-    "minecraft:gravel"
+    "#forge:stone",
+    "#forge:netherrack",
+    "#forge:sandstone",
+    "#forge:dirt",
+    "#forge:end_stones",
+    "minecraft:water",
+    "minecraft:lava",
+    "#forge:gravel",
+    "#forge:sand"
   ]
 }

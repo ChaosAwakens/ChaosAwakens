@@ -5,28 +5,7 @@ import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.enums.CAArmorMaterial;
 import io.github.chaosawakens.common.enums.CAToolMaterial;
-import io.github.chaosawakens.common.items.BigHammerItem;
-import io.github.chaosawakens.common.items.CASpawnEggItem;
-import io.github.chaosawakens.common.items.DevItem;
-import io.github.chaosawakens.common.items.EnchantedArmorItem;
-import io.github.chaosawakens.common.items.EnchantedAxeItem;
-import io.github.chaosawakens.common.items.EnchantedItem;
-import io.github.chaosawakens.common.items.EnchantedPickaxeItem;
-import io.github.chaosawakens.common.items.EnchantedScytheItem;
-import io.github.chaosawakens.common.items.EnchantedShovelItem;
-import io.github.chaosawakens.common.items.EnchantedSwordItem;
-import io.github.chaosawakens.common.items.IrukandjiArrowItem;
-import io.github.chaosawakens.common.items.PeacockBootsItem;
-import io.github.chaosawakens.common.items.PoisonSwordItem;
-import io.github.chaosawakens.common.items.RayGunItem;
-import io.github.chaosawakens.common.items.RoyaltyBootsItem;
-import io.github.chaosawakens.common.items.ScytheItem;
-import io.github.chaosawakens.common.items.SkateBowItem;
-import io.github.chaosawakens.common.items.StructureItem;
-import io.github.chaosawakens.common.items.ThunderStaffItem;
-import io.github.chaosawakens.common.items.UltimateBowItem;
-import io.github.chaosawakens.common.items.UltimateFishingRodItem;
-import io.github.chaosawakens.common.items.UltimateHoeItem;
+import io.github.chaosawakens.common.items.*;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -337,9 +316,9 @@ public class CAItems {
 			new EnchantmentAndLevel[] { new EnchantmentAndLevel(Enchantments.UNBREAKING, 4), new EnchantmentAndLevel(Enchantments.SWEEPING, 4)}));
 	public static final RegistryObject<SkateBowItem> SKATE_STRING_BOW = ITEMS.register("skate_string_bow", () -> new SkateBowItem(new Item.Properties().group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(384).defaultMaxDamage(384)));
 	public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(new Item.Properties().group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(50).defaultMaxDamage(50)));
-	public static final RegistryObject<AxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedAxeItem(CAToolMaterial.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 47, -3F, new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup),
+	public static final RegistryObject<AxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedAxeItem(CAToolMaterial.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3F, new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup),
 			new EnchantmentAndLevel[] { new EnchantmentAndLevel(Enchantments.LOOTING, 3), new EnchantmentAndLevel(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<AxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedAxeItem(CAToolMaterial.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenAxeDamage.get() - 663, -2.8F, new Item.Properties().rarity(RARITY_ROYALTY).group(CAItemGroups.equipmentItemGroup),
+	public static final RegistryObject<AxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedAxeItem(CAToolMaterial.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenAxeDamage.get() - 664, -2.8F, new Item.Properties().rarity(RARITY_ROYALTY).group(CAItemGroups.equipmentItemGroup),
 			new EnchantmentAndLevel[] { new EnchantmentAndLevel(Enchantments.SHARPNESS, 5), new EnchantmentAndLevel(Enchantments.SMITE, 5), new EnchantmentAndLevel(Enchantments.BANE_OF_ARTHROPODS, 5), new EnchantmentAndLevel(Enchantments.KNOCKBACK, 3), new EnchantmentAndLevel(Enchantments.LOOTING, 3), new EnchantmentAndLevel(Enchantments.UNBREAKING, 2), new EnchantmentAndLevel(Enchantments.FIRE_ASPECT, 2) }));
 
 	// Staffs
@@ -496,4 +475,5 @@ public class CAItems {
 	public static final RegistryObject<Item> ZOO_CAGE_MEDIUM = ITEMS.register("zoo_cage_medium", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "cage_m"));
 	public static final RegistryObject<Item> ZOO_CAGE_LARGE = ITEMS.register("zoo_cage_large", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "cage_l"));
 	public static final RegistryObject<Item> ZOO_CAGE_EXTRA_LARGE = ITEMS.register("zoo_cage_extra_large", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "cage_xl"));
+	public static final RegistryObject<Item> MINERS_DREAM = ITEMS.register("miners_dream", () -> new MinersDreamItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), new int[] {5,5,64}, 5));
 }

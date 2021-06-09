@@ -16,6 +16,9 @@ public class CATags {
 	
 	//Block tags
 	public static final ITag.INamedTag<Block> BASE_STONE_CRYSTAL = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":base_stone_crystal");
-	
+	public static final ITag.INamedTag<Block> MINERS_DREAM_MINEABLE = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":miners_dream_mineable");
+	public static final ITag.INamedTag<Block> MINERS_DREAM_UNSAFE = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":miners_dream_unsafe");
+	public static final ITag.INamedTag<Block> AIR_BLOCKS = BlockTags.makeWrapperTag("air");
+
 	//Item tags
 }
