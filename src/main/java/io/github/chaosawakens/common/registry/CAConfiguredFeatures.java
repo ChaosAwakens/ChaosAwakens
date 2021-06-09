@@ -7,8 +7,11 @@ import io.github.chaosawakens.common.CommonSetupEvent;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.gen.blockplacer.ColumnBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureSpread;
@@ -78,6 +81,8 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> GEODE_PINK_TOURMALINE = register("geode_pink_tourmaline", CAFeatures.GEODE.get().withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, States.CLUSTER_PINK_TOURMALINE, 28, 48, 40)));
 	public static final ConfiguredFeature<?, ?> GEODE_CATS_EYE = register("geode_cats_eye", CAFeatures.GEODE.get().withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, States.CLUSTER_CATS_EYE, 5, 28, 15)));
 	
+	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("corn", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN_GROWN), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
+	
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		CommonSetupEvent.configFeatures.add( new FeatureWrapper(key, configuredFeature));
 		return configuredFeature;
@@ -108,6 +113,7 @@ public class CAConfiguredFeatures {
 		protected static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().getDefaultState();
 		protected static final BlockState CLUSTER_PINK_TOURMALINE = CABlocks.PINK_TOURMALINE_CLUSTER.get().getDefaultState();
 		protected static final BlockState CLUSTER_CATS_EYE = CABlocks.CATS_EYE_CLUSTER.get().getDefaultState();
+		protected static final BlockState CORN_GROWN = CABlocks.CORN_PLANT.get().getDefaultState().with( BlockStateProperties.AGE_0_3, 3);
 	}
 	
 	public static final class RuleTests {

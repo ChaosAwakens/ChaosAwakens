@@ -19,6 +19,7 @@ import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStructures;
+import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.registry.CATileEntities;
 import io.github.chaosawakens.common.registry.CAVillagers;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
@@ -57,11 +58,12 @@ public class ChaosAwakens {
 		GeckoLib.initialize();
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		
-		try {
-			Class.forName("io.github.chaosawakens.common.registry.CATags");
+		new CATags();
+		/*try {
+			Class.forName("io.github.chaosawakens.common.registry.CATags"); //TODO This part would probably break in production due to re-obfuscation
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		

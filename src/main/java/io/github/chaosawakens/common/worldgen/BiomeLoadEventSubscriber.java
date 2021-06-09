@@ -90,6 +90,7 @@ public class BiomeLoadEventSubscriber {
 			RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
+				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addOverworldOres(gen);
 			}
@@ -101,6 +102,7 @@ public class BiomeLoadEventSubscriber {
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addMiningDimOres(gen);
+				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 			}
 			
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {

@@ -32,7 +32,6 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 		
 		if (this.getAttacking()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
-			ChaosAwakens.LOGGER.debug(this);
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving()) {

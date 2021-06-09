@@ -8,6 +8,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.BuddingBlock;
 import io.github.chaosawakens.common.blocks.CAOreBlock;
 import io.github.chaosawakens.common.blocks.CASpawnerBlock;
+import io.github.chaosawakens.common.blocks.CornBlock;
 import io.github.chaosawakens.common.blocks.CrystalClusterBlock;
 import io.github.chaosawakens.common.blocks.CrystalCraftingTableBlock;
 import io.github.chaosawakens.common.blocks.CrystalEnergyBlock;
@@ -58,7 +59,7 @@ public class CABlocks {
 	private static Function<Integer, ToIntFunction<BlockState>> lightValueFunction = (lightValue) -> (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
 	
 	// SHINY FOODS
-//	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsBlock(Block.Properties.from(Blocks.SUGAR_CANE)), CAItemGroups.foodItemGroup, false); //TODO Do the plants
+	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CornBlock(Block.Properties.from(Blocks.SUGAR_CANE).tickRandomly()), CAItemGroups.foodItemGroup, false); //TODO Do the plants
 	public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon", () -> new GoldenMelonBlock(Block.Properties.from(Blocks.MELON).harvestTool(ToolType.AXE)), CAItemGroups.foodItemGroup);
 	public static final RegistryObject<Block> ATTACHED_GOLDEN_MELON_STEM = registerBlock("attached_golden_melon_stem", () -> new AttachedStemBlock((StemGrownBlock) GOLDEN_MELON.get(), AbstractBlock.Properties.from(Blocks.ATTACHED_MELON_STEM)), null);
 	public static final RegistryObject<Block> GOLDEN_MELON_STEM = registerBlock("golden_melon_stem", () -> new StemBlock((StemGrownBlock) GOLDEN_MELON.get(), AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.STEM)), null);
@@ -70,29 +71,29 @@ public class CABlocks {
 	public static final RegistryObject<RandomTeleportBlock> RANDOM_TELEPORT_BLOCK = registerBlock("random_teleport_block", () -> new RandomTeleportBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
 	
 	// MINERAL ORES
-	public static final RegistryObject<CAOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.ANCIENT_DEBRIS).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)).withExpDrop((rand) -> MathHelper.nextInt(rand, 3, 7)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> RUBY_ORE = registerBlock("ruby_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.ANCIENT_DEBRIS).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)).withExpDrop((rand) -> MathHelper.nextInt(rand, 4, 9)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> TIGERS_EYE_ORE = registerBlock("tigers_eye_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()).withExpDrop((rand) -> MathHelper.nextInt(rand, 4, 8)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> TITANIUM_ORE = registerBlock("titanium_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> URANIUM_ORE = registerBlock("uranium_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> ALUMINUM_ORE = registerBlock("aluminum_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> SALT_ORE = registerBlock("salt_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.COAL_ORE).harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> COPPER_ORE = registerBlock("copper_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.COAL_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> TIN_ORE = registerBlock("tin_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> SILVER_ORE = registerBlock("silver_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> PLATINUM_ORE = registerBlock("platinum_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.DIAMOND_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> SUNSTONE_ORE = registerBlock("sunstone_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE).setLightLevel((state) -> 8)).withExpDrop((rand) -> MathHelper.nextInt(rand, 3, 6)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> BLOODSTONE_ORE = registerBlock("bloodstone_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)).withExpDrop((rand) -> MathHelper.nextInt(rand, 2, 5)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.ANCIENT_DEBRIS).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)).withExpDrop((rand) -> MathHelper.nextInt(rand, 3, 7)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> RUBY_ORE = registerBlock("ruby_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.ANCIENT_DEBRIS).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)).withExpDrop((rand) -> MathHelper.nextInt(rand, 4, 9)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> TIGERS_EYE_ORE = registerBlock("tigers_eye_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()).withExpDrop((rand) -> MathHelper.nextInt(rand, 4, 8)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> TITANIUM_ORE = registerBlock("titanium_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> URANIUM_ORE = registerBlock("uranium_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> ALUMINUM_ORE = registerBlock("aluminum_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> SALT_ORE = registerBlock("salt_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.COAL_ORE).harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> COPPER_ORE = registerBlock("copper_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.COAL_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> TIN_ORE = registerBlock("tin_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> SILVER_ORE = registerBlock("silver_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> PLATINUM_ORE = registerBlock("platinum_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.DIAMOND_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> SUNSTONE_ORE = registerBlock("sunstone_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE).setLightLevel((state) -> 8)).withExpDrop((rand) -> MathHelper.nextInt(rand, 3, 6)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> BLOODSTONE_ORE = registerBlock("bloodstone_ore", () -> new CAOreBlock(Block.Properties.from(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)).withExpDrop((rand) -> MathHelper.nextInt(rand, 2, 5)), CAItemGroups.blocksItemGroup);
 	
 	// INFESTED ORES
-	public static final RegistryObject<RedAntInfestedOre> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore", () -> new RedAntInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<TermiteInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new TermiteInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore", () -> new RedAntInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new TermiteInfestedOre(Block.Properties.from(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
 	
 	// MOB ORES
-	public static final RegistryObject<CAOreBlock> FOSSILISED_ENT = registerBlock("fossilised_ent", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> FOSSILISED_RUBY_BUG = registerBlock("fossilised_ruby_bug", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CAOreBlock> FOSSILISED_EMERALD_GATOR = registerBlock("fossilised_emerald_gator", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> FOSSILISED_ENT = registerBlock("fossilised_ent", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> FOSSILISED_RUBY_BUG = registerBlock("fossilised_ruby_bug", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> FOSSILISED_EMERALD_GATOR = registerBlock("fossilised_emerald_gator", () -> new CAOreBlock(Block.Properties.from(Blocks.IRON_ORE).harvestLevel(1).setRequiresTool()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	
 	// MINERAL BLOCKS
 	public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block", () -> new Block(Block.Properties.from(Blocks.DIAMOND_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)), CAItemGroups.blocksItemGroup);
