@@ -79,25 +79,27 @@ public class CAConfig {
 		public final ConfigValue<Integer> fairySwordDamage;
 		public final ConfigValue<Integer> bigHammerDamage;
 		public final ConfigValue<Integer> prismaticReaperDamage;
+
 		public final ConfigValue<Integer> thunderStaffExplosionSize;
 		public final ConfigValue<Integer> thunderStaffExplosionType;
 		public final ConfigValue<Boolean> thunderStaffExplosionFire;
 		public final ConfigValue<Integer> rayGunExplosionSize;
 		public final ConfigValue<Integer> rayGunExplosionType;
 		public final ConfigValue<Boolean> rayGunExplosionFire;
+
 		public final ConfigValue<Boolean> enableAutoEnchanting;
+
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
 		public final ConfigValue<Boolean> enableRainbowAntTeleport;
 		public final ConfigValue<Boolean> enableRedAntTeleport;
 		public final ConfigValue<Boolean> enableUnstableAntTeleport;
 		public final ConfigValue<Boolean> enableTermiteTeleport;
+
 		public final ConfigValue<Boolean> enableOreGen;
 		public final ConfigValue<Boolean> enableFossilGen;
 		public final ConfigValue<Boolean> enableTrollOreGen;
 		public final ConfigValue<Boolean> enableDzMineralOreGen;
 		public final ConfigValue<Boolean> spawnDzOresInOverworld;
-		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
-		public final ConfigValue<Boolean> enableDragonEggRespawns;
 		public final ConfigValue<Boolean> enableOreRubyGen;
 		public final ConfigValue<Boolean> enableOreTigersEyeGen;
 		public final ConfigValue<Boolean> enableOreAmethystGen;
@@ -111,6 +113,11 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOrePlatinumGen;
 		public final ConfigValue<Boolean> enableOreSunstoneGen;
 		public final ConfigValue<Boolean> enableOreBloodstoneGen;
+
+		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
+
+		public final ConfigValue<Boolean> enableDragonEggRespawns;
+		public final ConfigValue<Boolean> mobHeadDrops;
 
 
 
@@ -269,8 +276,9 @@ public class CAConfig {
 			builder.push("Breeding");
 			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);
 			builder.pop();
-			builder.push("Ender Dragon");
+			builder.push("Drops");
 			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the First Death?").define("Ender Dragon Egg Respawn", true);
+			mobHeadDrops = builder.comment("Will mobs with Mob Heads drop their item?").define("Mob Head Drops", true);
 			builder.pop();
 			builder.pop();
 		}
