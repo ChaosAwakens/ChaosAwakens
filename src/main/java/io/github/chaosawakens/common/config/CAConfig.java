@@ -97,6 +97,7 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableDzMineralOreGen;
 		public final ConfigValue<Boolean> spawnDzOresInOverworld;
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
+		public final ConfigValue<Boolean> enableDragonEggRespawns;
 		public final ConfigValue<Boolean> enableOreRubyGen;
 		public final ConfigValue<Boolean> enableOreTigersEyeGen;
 		public final ConfigValue<Boolean> enableOreAmethystGen;
@@ -267,6 +268,9 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Breeding");
 			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);
+			builder.pop();
+			builder.push("Ender Dragon");
+			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the First Death?").define("Ender Dragon Egg Respawn", true);
 			builder.pop();
 			builder.pop();
 		}
