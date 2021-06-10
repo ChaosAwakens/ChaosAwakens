@@ -445,12 +445,13 @@
 	"item.chaosawakens.dev_item64": "Item de Desenvolvedor",
 	"item.chaosawakens.dev_item_damage": "Item de Desenvolvedor",
 
-	"item.chaosawakens.instant_survival_shelter": "Tenda de Sobrevivência",
+	"item.chaosawakens.instant_survival_shelter": "Abrigo de Sobrevivência Instantâneo",
 	"item.chaosawakens.zoo_cage_extra_small": "Jaula Extra Pequena",
 	"item.chaosawakens.zoo_cage_small": "Jaula Pequena",
 	"item.chaosawakens.zoo_cage_medium": "Jaula Média",
 	"item.chaosawakens.zoo_cage_large": "Jaula Grande",
 	"item.chaosawakens.zoo_cage_extra_large": "Jaula Extra Grande",
+	"item.chaosawakens.miners_dream": "Sonho do Minero",
 
 	"block.chaosawakens.corn_plant": "Planta de Milho",
 	"block.chaosawakens.tomato_plant": "Planta de Tomate",

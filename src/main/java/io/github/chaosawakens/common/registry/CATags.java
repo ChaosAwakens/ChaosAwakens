@@ -20,6 +20,7 @@ public class CATags {
 	
 	public static final ITag.INamedTag<Block> MINERS_DREAM_MINEABLE = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":miners_dream_mineable");
 	public static final ITag.INamedTag<Block> MINERS_DREAM_UNSAFE = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":miners_dream_unsafe");
+	public static final ITag.INamedTag<Block> MINERS_DREAM_TORCH_SAFE = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":miners_dream_torch_safe");
 	public static final ITag.INamedTag<Block> AIR_BLOCKS = BlockTags.makeWrapperTag("air");
 	//Item tags
 }
