@@ -1,12 +1,17 @@
-/**
- * 
- */
 package io.github.chaosawakens.common;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.mojang.serialization.Codec;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.api.FeatureWrapper;
+import io.github.chaosawakens.common.items.CASpawnEggItem;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
@@ -26,15 +31,10 @@ import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author invalid2
@@ -43,8 +43,7 @@ import java.util.Map;
 public class CommonSetupEvent {
 	
 	/**
-	 * Map that contains all the EALs mapped to their items respective registry name,
-	 * would go on a common setup class, but we dont we one have so... :shrug:
+	 * Map that contains all the EALs mapped to their items respective registry name
 	 */
 	public static Map<ResourceLocation, EnchantmentAndLevel[]> enchantedItems = new HashMap<>();
 	
@@ -52,7 +51,7 @@ public class CommonSetupEvent {
 	 * Same as above, but for configured features
 	 */
 	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
-	
+	public static List<CASpawnEggItem> EGGS = new ArrayList<>();
 	private static Method GETCODEC_METHOD;
 	
 	public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {

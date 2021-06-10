@@ -16,6 +16,7 @@ public class CATags {
 	
 	//Block tags
 	public static final ITag.INamedTag<Block> BASE_STONE_CRYSTAL = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":base_stone_crystal");
+	public static final ITag.INamedTag<Block> CORNS = BlockTags.makeWrapperTag(ChaosAwakens.MODID+":corn");
 	
 	//Item tags
 }

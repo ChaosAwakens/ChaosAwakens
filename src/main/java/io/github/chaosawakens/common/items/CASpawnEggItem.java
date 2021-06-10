@@ -5,8 +5,11 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.NonNullList;
 
 public class CASpawnEggItem extends SpawnEggItem {
 	private final Supplier<? extends EntityType<?>> typeGetter;
@@ -20,6 +23,12 @@ public class CASpawnEggItem extends SpawnEggItem {
 	
 	public CASpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties) {
 		this(typeIn, properties, false);
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		SpawnEggItem.EGGS.put(this.getType(null), this);
+		super.fillItemGroup(group, items);
 	}
 	
 	@Override

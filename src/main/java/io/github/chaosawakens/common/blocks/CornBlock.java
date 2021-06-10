@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.blocks;
 
 import java.util.Random;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -67,12 +66,12 @@ public class CornBlock extends BushBlock implements IGrowable {
 	
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return!stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
 	}
 	
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.matchesBlock(Blocks.GRASS_BLOCK) || state.matchesBlock(Blocks.FARMLAND) || state.getBlock() instanceof CornBlock;
+		return state.matchesBlock(Blocks.GRASS_BLOCK) || state.matchesBlock(Blocks.FARMLAND) || (state.matchesBlock(this) && state.get(AGE) == 3);
 	}
 	
 	@Override

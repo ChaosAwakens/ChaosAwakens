@@ -59,6 +59,7 @@ public class ChaosAwakens {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		
 		new CATags();
+		
 		/*try {
 			Class.forName("io.github.chaosawakens.common.registry.CATags"); //TODO This part would probably break in production due to re-obfuscation
 		} catch (ClassNotFoundException e) {
@@ -75,9 +76,9 @@ public class ChaosAwakens {
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
+		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAItems.ITEMS.register(eventBus);
 		CATileEntities.TILE_ENTITIES.register(eventBus);
-		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
 		CAFeatures.FEATURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);

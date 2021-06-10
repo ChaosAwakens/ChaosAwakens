@@ -81,7 +81,7 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> GEODE_PINK_TOURMALINE = register("geode_pink_tourmaline", CAFeatures.GEODE.get().withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, States.CLUSTER_PINK_TOURMALINE, 28, 48, 40)));
 	public static final ConfiguredFeature<?, ?> GEODE_CATS_EYE = register("geode_cats_eye", CAFeatures.GEODE.get().withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, States.CLUSTER_CATS_EYE, 5, 28, 15)));
 	
-	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("corn", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN_GROWN), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
+	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("corn", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN_GROWN.with( BlockStateProperties.AGE_0_3, 3)), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
 	
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		CommonSetupEvent.configFeatures.add( new FeatureWrapper(key, configuredFeature));
