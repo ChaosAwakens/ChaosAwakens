@@ -113,7 +113,7 @@ public class CAConfiguredFeatures {
 		protected static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().getDefaultState();
 		protected static final BlockState CLUSTER_PINK_TOURMALINE = CABlocks.PINK_TOURMALINE_CLUSTER.get().getDefaultState();
 		protected static final BlockState CLUSTER_CATS_EYE = CABlocks.CATS_EYE_CLUSTER.get().getDefaultState();
-		protected static final BlockState CORN_GROWN = CABlocks.CORN_PLANT.get().getDefaultState().with( BlockStateProperties.AGE_0_3, 3);
+		protected static final BlockState CORN_GROWN = CABlocks.CORN_BLOCK.get().getDefaultState().with( BlockStateProperties.AGE_0_3, 3);
 	}
 	
 	public static final class RuleTests {

@@ -5,6 +5,8 @@ import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -69,6 +71,28 @@ public class EventHandler {
             double chance = 0.1D + event.getLootingLevel() * 0.1D;
             if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
                 stack = new ItemStack(Items.ZOMBIE_HEAD, 1);
+                drop = new ItemEntity(event.getEntityLiving().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), stack);
+                event.getDrops().add(drop);
+            }
+        }
+        // SKELETON
+        if (event.getEntityLiving() instanceof SkeletonEntity)
+        {
+            // Drop #1: Skeleton Skull
+            double chance = 0.1D + event.getLootingLevel() * 0.1D;
+            if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
+                stack = new ItemStack(Items.SKELETON_SKULL, 1);
+                drop = new ItemEntity(event.getEntityLiving().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), stack);
+                event.getDrops().add(drop);
+            }
+        }
+        // CREEPER
+        if (event.getEntityLiving() instanceof CreeperEntity)
+        {
+            // Drop #1: Creeper Head
+            double chance = 0.1D + event.getLootingLevel() * 0.1D;
+            if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
+                stack = new ItemStack(Items.CREEPER_HEAD, 1);
                 drop = new ItemEntity(event.getEntityLiving().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), stack);
                 event.getDrops().add(drop);
             }

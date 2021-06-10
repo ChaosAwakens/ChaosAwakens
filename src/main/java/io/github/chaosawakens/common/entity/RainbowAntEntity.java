@@ -71,7 +71,7 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
-	
+
 	@Override
 	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
@@ -84,7 +84,7 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 				RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.VILLAGE_MANIA ? World.OVERWORLD : CADimensions.VILLAGE_MANIA;
 				ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-				
+
 				if (targetWorld != null) {
 					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
 					//ChaosAwakens.LOGGER.debug("before: "+targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()));
