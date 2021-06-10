@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#forge:end_stones",
     "minecraft:water",
     "#minecraft:air",
     "minecraft:lava",
