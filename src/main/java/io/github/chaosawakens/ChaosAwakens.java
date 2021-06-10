@@ -1,10 +1,5 @@
 package io.github.chaosawakens;
 
-import java.util.Locale;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.CommonSetupEvent;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
@@ -12,16 +7,7 @@ import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
 import io.github.chaosawakens.common.EventHandler;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAFeatures;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CASoundEvents;
-import io.github.chaosawakens.common.registry.CAStructures;
-import io.github.chaosawakens.common.registry.CATags;
-import io.github.chaosawakens.common.registry.CATileEntities;
-import io.github.chaosawakens.common.registry.CAVillagers;
+import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.CAAdvancementProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
@@ -40,8 +26,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
+
+import java.util.Locale;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
@@ -113,7 +103,7 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
 		}
 	}
-	
+
 	public static ResourceLocation prefix(String name) {
 		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
 	}

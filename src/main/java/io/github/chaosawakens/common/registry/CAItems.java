@@ -9,20 +9,7 @@ import io.github.chaosawakens.common.items.*;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.Food;
-import net.minecraft.item.Foods;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.Rarity;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SoupItem;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.WallOrFloorItem;
+import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.text.TextFormatting;
@@ -467,6 +454,9 @@ public class CAItems {
 	public static final RegistryObject<CASpawnEggItem> CRYSTAL_APPLE_COW_SPAWN_EGG = ITEMS.register("crystal_apple_cow_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.CRYSTAL_APPLE_COW, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xffffff, 0xe38a1d, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+
+	// MOB HEADS
+	public static final RegistryObject<Item>  HUSK_HEAD = ITEMS.register("husk_head", () -> new CASkullItem(CABlocks.HUSK_HEAD.get(), CABlocks.HUSK_WALL_HEAD.get(), (new Item.Properties()).group(CAItemGroups.itemsItemGroup).rarity(Rarity.UNCOMMON)));
 
 	// STRUCTURE SPAWN
 	public static final RegistryObject<Item> INSTANT_SURVIVAL_SHELTER = ITEMS.register("instant_survival_shelter", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "shelter"));

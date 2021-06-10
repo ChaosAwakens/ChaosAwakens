@@ -11,13 +11,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GoldenAppleCowRender extends MobRenderer<GoldenAppleCowEntity, CowModel<GoldenAppleCowEntity>> {
-    private static final ResourceLocation GOLDEN_APPLE_COW_TEXTURES = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/golden_apple_cow.png");
+    private static final ResourceLocation GOLDEN_APPLE_COW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/golden_apple_cow.png");
 
     public GoldenAppleCowRender(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new CowModel<>(), 0.7F);
     }
 
     public ResourceLocation getEntityTexture(GoldenAppleCowEntity entity) {
-        return GOLDEN_APPLE_COW_TEXTURES;
+        return GOLDEN_APPLE_COW_TEXTURE;
     }
 }

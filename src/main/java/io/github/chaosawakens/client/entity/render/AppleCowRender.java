@@ -11,7 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class AppleCowRender extends MobRenderer<AppleCowEntity, CowModel<AppleCowEntity>> {
-	private static final ResourceLocation APPLE_COW_TEXTURES = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow.png");
+	private static final ResourceLocation APPLE_COW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow.png");
 	
 	public AppleCowRender(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new CowModel<>(), 0.7F);
@@ -19,6 +19,6 @@ public class AppleCowRender extends MobRenderer<AppleCowEntity, CowModel<AppleCo
 	
 	@Override
 	public ResourceLocation getEntityTexture(AppleCowEntity entity) {
-		return APPLE_COW_TEXTURES;
+		return APPLE_COW_TEXTURE;
 	}
 }

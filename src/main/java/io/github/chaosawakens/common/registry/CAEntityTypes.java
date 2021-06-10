@@ -1,32 +1,8 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.entity.AppleCowEntity;
-import io.github.chaosawakens.common.entity.BeaverEntity;
-import io.github.chaosawakens.common.entity.BrownAntEntity;
-import io.github.chaosawakens.common.entity.CrystalAppleCowEntity;
-import io.github.chaosawakens.common.entity.EmeraldGatorEntity;
-import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.EntEntity;
-import io.github.chaosawakens.common.entity.GoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
-import io.github.chaosawakens.common.entity.RainbowAntEntity;
-import io.github.chaosawakens.common.entity.RedAntEntity;
-import io.github.chaosawakens.common.entity.RoboSniperEntity;
-import io.github.chaosawakens.common.entity.RoboWarriorEntity;
-import io.github.chaosawakens.common.entity.RubyBugEntity;
-import io.github.chaosawakens.common.entity.StinkBugEntity;
-import io.github.chaosawakens.common.entity.TermiteEntity;
-import io.github.chaosawakens.common.entity.UnstableAntEntity;
-import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
-import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
-import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
-import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
-import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
-import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
+import io.github.chaosawakens.common.entity.*;
+import io.github.chaosawakens.common.entity.projectile.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
@@ -39,6 +15,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CAEntityTypes {
 	
@@ -183,13 +162,9 @@ public class CAEntityTypes {
 		EntitySpawnPlacementRegistry.register(ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canSpawnOn);
 		EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canSpawnOn);
 		EntitySpawnPlacementRegistry.register(RUBY_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
-		EntitySpawnPlacementRegistry.register(APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canSpawnOn);
+		EntitySpawnPlacementRegistry.register(APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
 		EntitySpawnPlacementRegistry.register(GOLDEN_APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
-		EntitySpawnPlacementRegistry.register(BROWN_ANT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
-		EntitySpawnPlacementRegistry.register(RAINBOW_ANT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
-		EntitySpawnPlacementRegistry.register(RED_ANT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canSpawnOn);
-		EntitySpawnPlacementRegistry.register(UNSTABLE_ANT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
-		EntitySpawnPlacementRegistry.register(TERMITE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canSpawnOn);
+		EntitySpawnPlacementRegistry.register(ENCHANTED_GOLDEN_APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
 		EntitySpawnPlacementRegistry.register(STINK_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canSpawnOn);
 	}
 }

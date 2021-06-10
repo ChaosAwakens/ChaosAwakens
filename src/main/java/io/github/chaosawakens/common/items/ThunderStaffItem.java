@@ -24,7 +24,7 @@ public class ThunderStaffItem extends Item {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (!(worldIn instanceof ServerWorld))
-			return new ActionResult<ItemStack>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
+			return new ActionResult<>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
 		
 		ItemStack heldStack = playerIn.getHeldItem(handIn);
 		
@@ -44,6 +44,6 @@ public class ThunderStaffItem extends Item {
 		worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
 		
 		playerIn.addStat(Stats.ITEM_USED.get(this));
-		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
+		return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 }

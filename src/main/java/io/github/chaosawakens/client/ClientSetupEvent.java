@@ -1,15 +1,18 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.client.entity.render.*;
+import io.github.chaosawakens.client.entity.render.tileentities.CASkullTileEntityRenderer;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CATileEntities;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -44,6 +47,8 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserRender::new);
+
+		ClientRegistry.bindTileEntityRenderer(CATileEntities.CA_SKULL.get(), CASkullTileEntityRenderer::new);
 
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.getCutout());
@@ -80,6 +85,9 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.WALL_SUNSTONE_TORCH.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.EXTREME_TORCH.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.WALL_EXTREME_TORCH.get(), RenderType.getCutoutMipped());
+
+		RenderTypeLookup.setRenderLayer(CABlocks.HUSK_HEAD.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.HUSK_WALL_HEAD.get(), RenderType.getCutoutMipped());
 		
 		ItemModelsProperties.registerProperty(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
