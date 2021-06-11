@@ -7,7 +7,6 @@ import io.github.chaosawakens.common.CommonSetupEvent;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.world.gen.blockplacer.ColumnBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
