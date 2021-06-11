@@ -69,7 +69,7 @@ public class MinersDreamItem extends Item {
 			for (int l = 0; l < size[2]; l += this.torchDistance) {
 				BlockPos pos3 = new BlockPos(conX + l * deltaX, conY, conZ + l * deltaZ);
 				BlockPos pos4 = new BlockPos(conX + l * deltaX, conY - 1, conZ + l * deltaZ);
-				if (!world.getBlockState(pos4).getBlock().isIn(CATags.MINERS_DREAM_TORCH_SAFE) && world.getBlockState(pos3).getBlock().isIn(CATags.AIR_BLOCKS)) world.setBlockState(pos3, torchBlock);
+				if (world.getBlockState(pos4).getBlock().isIn(CATags.MINERS_DREAM_TORCH_SAFE) && world.getBlockState(pos3).getBlock().isIn(CATags.AIR_BLOCKS)) world.setBlockState(pos3, torchBlock);
 			}
 			context.getPlayer().addStat(Stats.ITEM_USED.get(this));
 			context.getItem().shrink(1);
