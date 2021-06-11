@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -36,7 +37,8 @@ public class CASpawnEggItem extends SpawnEggItem {
 		return typeGetter.get();
 	}
 	
-	public boolean hasEffect() {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return this.isEnchanted;
 	}
 }

@@ -29,17 +29,17 @@ public class HerculesBeetleEntity extends MonsterEntity implements IAnimatable {
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.isAggressive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attacking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walk.attacking", true));
 			return PlayState.CONTINUE;
 		}
 		
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walk", true));
 			return PlayState.CONTINUE;
 		}
 		
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.stand", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;

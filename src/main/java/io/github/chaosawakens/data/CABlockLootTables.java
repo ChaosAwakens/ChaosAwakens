@@ -2,12 +2,16 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTables;
 import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -29,6 +33,14 @@ public class CABlockLootTables extends BlockLootTables {
 		registerLootTable(CABlocks.SALT_ORE.get(), (ore) -> randomDropping(CAItems.SALT.get(), 4, 8));
 		registerLootTable(CABlocks.SUNSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.SUNSTONE.get()));
 		registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
+		
+		registerLootTable(CABlocks.CORN_BLOCK.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.CORN.get(), CAItems.CORN_SEEDS.get(),
+				BlockStateProperty.builder(plant).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(BlockStateProperties.AGE_0_3, 3))));
+		registerLootTable(CABlocks.STRAWBERRY_BUSH_BLOCK.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.STRAWBERRY.get(), CAItems.STRAWBERRY_SEEDS.get(),
+				BlockStateProperty.builder(plant).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(BlockStateProperties.AGE_0_3, 3))));
+		
+//		registerLootTable(CABlocks.HUSK_WALL_HEAD.get(), (block) -> dropping(CABlocks.HUSK_HEAD.get()));
+//		registerDropSelfLootTable(CABlocks.HUSK_HEAD.get());
 		
 		registerDropSelfLootTable(CABlocks.ALUMINUM_ORE.get());
 		registerDropSelfLootTable(CABlocks.ALUMINUM_BLOCK.get());

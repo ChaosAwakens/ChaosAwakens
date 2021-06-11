@@ -138,8 +138,8 @@ public class CABlocks {
 	public static final RegistryObject<Block> WALL_EXTREME_TORCH = registerBlock("wall_extreme_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 15).sound(SoundType.WOOD).lootFrom(() -> CABlocks.EXTREME_TORCH.get()), ParticleTypes.FLAME), null, false);
 
 	// MOB HEADS
-	public static final RegistryObject<CASkullBlock> HUSK_HEAD = BLOCKS.register("husk_head", () -> new CASkullBlock(CASkullBlock.Types.HUSK, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0F)));
-	public static final RegistryObject<CASkullWallBlock> HUSK_WALL_HEAD = BLOCKS.register("husk_wall_head", () -> new CASkullWallBlock(CASkullBlock.Types.HUSK, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0F).lootFrom(HUSK_HEAD)));
+//	public static final RegistryObject<CASkullBlock> HUSK_HEAD = BLOCKS.register("husk_head", () -> new CASkullBlock(CASkullBlock.Types.HUSK, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0F)));
+//	public static final RegistryObject<CASkullWallBlock> HUSK_WALL_HEAD = BLOCKS.register("husk_wall_head", () -> new CASkullWallBlock(CASkullBlock.Types.HUSK, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0F).lootFrom(HUSK_HEAD)));
 
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
 		return registerBlock(name, supplier, itemGroup, true);

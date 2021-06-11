@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"model.ruby.bug.stand.animation": {
+		"animation.ruby_bug.stand": {
 			"loop": true,
 			"animation_length": 4.08,
 			"anim_time_update": "0",
@@ -379,7 +379,7 @@
 				}
 			}
 		},
-		"model.ruby.bug.walk.animation": {
+		"animation.ruby_bug.walk": {
 			"loop": true,
 			"animation_length": 2.48,
 			"bones": {

@@ -48,7 +48,7 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserRender::new);
 
-		ClientRegistry.bindTileEntityRenderer(CATileEntities.CA_SKULL.get(), CASkullTileEntityRenderer::new);
+//		ClientRegistry.bindTileEntityRenderer(CATileEntities.CA_SKULL.get(), CASkullTileEntityRenderer::new);
 
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.getCutout());
@@ -87,8 +87,8 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.EXTREME_TORCH.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.WALL_EXTREME_TORCH.get(), RenderType.getCutoutMipped());
 
-		RenderTypeLookup.setRenderLayer(CABlocks.HUSK_HEAD.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.HUSK_WALL_HEAD.get(), RenderType.getCutoutMipped());
+//		RenderTypeLookup.setRenderLayer(CABlocks.HUSK_HEAD.get(), RenderType.getCutoutMipped());
+//		RenderTypeLookup.setRenderLayer(CABlocks.HUSK_WALL_HEAD.get(), RenderType.getCutoutMipped());
 		
 		ItemModelsProperties.registerProperty(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
