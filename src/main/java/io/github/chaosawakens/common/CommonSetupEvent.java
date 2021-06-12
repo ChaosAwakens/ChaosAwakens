@@ -10,10 +10,8 @@ import java.util.Map;
 import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.EnchantmentAndLevel;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.items.CASpawnEggItem;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
@@ -35,25 +33,20 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper.UnableToFindMethodException;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
  * @author invalid2
- *
  */
 public class CommonSetupEvent {
 	
 	/**
-	 * Map that contains all the EALs mapped to their items respective registry name
-	 */
-	public static Map<ResourceLocation, EnchantmentAndLevel[]> enchantedItems = new HashMap<>();
-	
-	/**
-	 * Same as above, but for configured features
+	 * List for configured features, so they get registered at the correct time
 	 */
 	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
-	public static List<CASpawnEggItem> EGGS = new ArrayList<>();
-	private static Method GETCODEC_METHOD;
+	
+	private static Method codecMethod;
 	
 	public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {
 		PacketHandler.init();
@@ -83,21 +76,15 @@ public class CommonSetupEvent {
 			ServerChunkProvider chunkProvider = serverWorld.getChunkProvider();
 			
 			try {
-				if (GETCODEC_METHOD == null)GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
+				if (codecMethod == null)codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
 				// TODO Fix this
-				ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(chunkProvider.generator));
+				ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
 				if (cgRL != null && cgRL.getNamespace().equals("terraforged"))return;
-			} catch (IllegalAccessException e) {
-				ChaosAwakens.error("WORLDGEN", e);
+			} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
+				ChaosAwakens.warn("WORLDGEN", e);
 				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				ChaosAwakens.error("WORLDGEN", e);
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				ChaosAwakens.error("WORLDGEN", e);
-				e.printStackTrace();
-			} finally {
-				if (GETCODEC_METHOD == null && CAConfig.COMMON.terraforgedCheckMsg.get())
+			} catch(UnableToFindMethodException e) {
+				if (CAConfig.COMMON.terraforgedCheckMsg.get())
 					ChaosAwakens.info("WORLDGEN", "Unable to check if "+serverWorld.getDimensionKey().getLocation()+" is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessable ");
 			}
 			

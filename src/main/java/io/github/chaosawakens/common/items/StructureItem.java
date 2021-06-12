@@ -1,18 +1,14 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.AxisRotation;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Rotations;
-import net.minecraft.util.math.vector.Orientation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
@@ -30,11 +26,6 @@ public class StructureItem extends Item {
 	public ActionResultType onItemUse(ItemUseContext context) {
 		World world = context.getWorld();
 		BlockPos pos = context.getPos();
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		
-		//ChaosAwakens.LOGGER.debug(context.getPlacementHorizontalFacing());
 		
 		if (world instanceof ServerWorld) {
 			Template template = ((ServerWorld) world).getStructureTemplateManager()

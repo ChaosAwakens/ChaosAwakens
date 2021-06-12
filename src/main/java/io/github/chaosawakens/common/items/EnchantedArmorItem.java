@@ -1,8 +1,8 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.api.EnchantmentAndLevel;
-import io.github.chaosawakens.common.CommonSetupEvent;
+import io.github.chaosawakens.api.IPreEnchanted;
 import io.github.chaosawakens.common.config.CAConfig;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
@@ -11,11 +11,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class EnchantedArmorItem extends ArmorItem {
+public class EnchantedArmorItem extends ArmorItem implements IPreEnchanted {
 	
-	private final EnchantmentAndLevel[] enchantments;
+	private final EnchantmentData[] enchantments;
 	
-	public EnchantedArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, EnchantmentAndLevel[] enchantments) {
+	public EnchantedArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, EnchantmentData[] enchantments) {
 		super(materialIn, slot, builderIn);
 		this.enchantments = enchantments;
 	}
@@ -25,17 +25,21 @@ public class EnchantedArmorItem extends ArmorItem {
 		if (this.isInGroup(group)) {
 			ItemStack stack = new ItemStack(this);
 			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for(EnchantmentAndLevel enchant : enchantments) {
-					stack.addEnchantment( enchant.getEnchantment(), enchant.getEnchantLevel());
+				for(EnchantmentData enchant : enchantments) {
+					stack.addEnchantment( enchant.enchantment, enchant.enchantmentLevel);
 				}
 			items.add(stack);
 		}
-		CommonSetupEvent.enchantedItems.put(this.getRegistryName(), enchantments);
 	}
 	
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get();
+	}
+
+	@Override
+	public EnchantmentData[] enchant() {
+		return this.enchantments;
 	}
 	
 }

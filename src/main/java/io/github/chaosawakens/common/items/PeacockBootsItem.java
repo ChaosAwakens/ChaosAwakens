@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;

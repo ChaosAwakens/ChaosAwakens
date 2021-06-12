@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

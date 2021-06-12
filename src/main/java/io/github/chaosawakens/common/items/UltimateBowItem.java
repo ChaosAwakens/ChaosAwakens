@@ -2,10 +2,10 @@ package io.github.chaosawakens.common.items;
 
 import java.util.function.Predicate;
 
-import io.github.chaosawakens.api.EnchantmentAndLevel;
-import io.github.chaosawakens.common.CommonSetupEvent;
+import io.github.chaosawakens.api.IPreEnchanted;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
@@ -25,11 +25,11 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class UltimateBowItem extends BowItem implements IVanishable {
+public class UltimateBowItem extends BowItem implements IVanishable, IPreEnchanted {
 	
-	private final EnchantmentAndLevel[] enchantments;
+	private final EnchantmentData[] enchantments;
 	
-	public UltimateBowItem(Properties builderIn, EnchantmentAndLevel[] enchantments) {
+	public UltimateBowItem(Properties builderIn, EnchantmentData[] enchantments) {
 		super(builderIn);
 		this.enchantments = enchantments;
 	}
@@ -39,12 +39,11 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 		if (this.isInGroup(group)) {
 			ItemStack stack = new ItemStack(this);
 			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for(EnchantmentAndLevel enchant : enchantments) {
-					stack.addEnchantment( enchant.getEnchantment(), enchant.getEnchantLevel());
+				for(EnchantmentData enchant : enchantments) {
+					stack.addEnchantment( enchant.enchantment, enchant.enchantmentLevel);
 				}
 			items.add(stack);
 		}
-		CommonSetupEvent.enchantedItems.put(this.getRegistryName(), enchantments);
 	}
 	
 	@Override
@@ -112,5 +111,11 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get();
+	}
+
+	@Override
+	public EnchantmentData[] enchant() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

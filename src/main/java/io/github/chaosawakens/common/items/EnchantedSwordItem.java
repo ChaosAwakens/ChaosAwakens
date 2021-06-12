@@ -1,19 +1,19 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.api.EnchantmentAndLevel;
-import io.github.chaosawakens.common.CommonSetupEvent;
+import io.github.chaosawakens.api.IPreEnchanted;
 import io.github.chaosawakens.common.config.CAConfig;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.NonNullList;
 
-public class EnchantedSwordItem extends SwordItem {
+public class EnchantedSwordItem extends SwordItem implements IPreEnchanted{
 	
-private final EnchantmentAndLevel[] enchantments;
+private final EnchantmentData[] enchantments;
 	
-	public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentAndLevel[] enchantments) {
+	public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
 		this.enchantments = enchantments;
 	}
@@ -23,17 +23,21 @@ private final EnchantmentAndLevel[] enchantments;
 		if (this.isInGroup(group)) {
 			ItemStack stack = new ItemStack(this);
 			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for(EnchantmentAndLevel enchant : enchantments) {
-					stack.addEnchantment( enchant.getEnchantment(), enchant.getEnchantLevel());
+				for(EnchantmentData enchant : enchantments) {
+					stack.addEnchantment( enchant.enchantment, enchant.enchantmentLevel);
 				}
 			items.add(stack);
 		}
-		CommonSetupEvent.enchantedItems.put(this.getRegistryName(), enchantments);
 	}
 	
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get();
+	}
+
+	@Override
+	public EnchantmentData[] enchant() {
+		return this.enchantments;
 	}
 	
 }

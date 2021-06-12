@@ -1,9 +1,8 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.api.EnchantmentAndLevel;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -12,7 +11,7 @@ import net.minecraft.world.World;
 
 public class RoyaltyBootsItem extends EnchantedArmorItem {
 
-	public RoyaltyBootsItem(IArmorMaterial materialIn, Properties builderIn, EnchantmentAndLevel[] enchantments) {
+	public RoyaltyBootsItem(IArmorMaterial materialIn, Properties builderIn, EnchantmentData[] enchantments) {
 		super(materialIn, EquipmentSlotType.FEET, builderIn, enchantments);
 	}
 
