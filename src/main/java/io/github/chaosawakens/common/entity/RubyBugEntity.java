@@ -32,11 +32,11 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walk", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.stand", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 	
