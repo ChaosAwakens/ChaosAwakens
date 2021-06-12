@@ -141,7 +141,12 @@ public class BiomeLoadEventSubscriber {
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.TERMITE_INFESTED);
 			}
 		}
-		
+
+		private static void addNetherOres(BiomeGenerationSettingsBuilder gen) {
+			if (CAConfig.COMMON.enableOreRubyGen.get())
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.NETHER_ORE_RUBY_LAVA);
+		}
+
 		private static void addMiningDimOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableOreRubyGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_RUBY_LAVA);
 			if (CAConfig.COMMON.enableOreRubyGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_RUBY_NO_SURFACE);
