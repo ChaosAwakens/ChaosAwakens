@@ -30,7 +30,7 @@ public class UltimateBowItem extends BowItem implements IVanishable {
 	private final EnchantmentAndLevel[] enchantments;
 	
 	public UltimateBowItem(Properties builderIn, EnchantmentAndLevel[] enchantments) {
-		super(builderIn.maxStackSize(1));
+		super(builderIn);
 		this.enchantments = enchantments;
 	}
 	

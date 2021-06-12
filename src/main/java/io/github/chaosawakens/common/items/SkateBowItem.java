@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 
 public class SkateBowItem extends BowItem {
     public SkateBowItem(Properties builder) {
-        super(builder.maxStackSize(1));
+        super(builder);
     }
 
     private ItemStack findAmmo(ItemStack shootable, PlayerEntity playerEntity) {
