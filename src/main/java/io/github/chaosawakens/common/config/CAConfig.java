@@ -116,15 +116,16 @@ public class CAConfig {
 		public final ConfigValue<Integer> battleAxeDamage;
 		public final ConfigValue<Integer> queenAxeDamage;
 
-
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
-
+		
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
 		public final ConfigValue<Boolean> mobHeadDrops;
-
-
-
+		
+		public final ConfigValue<Boolean> terraforgedCheckMsg;
+		
 		Common(ForgeConfigSpec.Builder builder) {
+			builder.push("Log messages");
+			this.terraforgedCheckMsg = builder.define("Terraforged check message active", true);
 			builder.push("Attack Damage");
 			builder.push("Ultimate Weapons/Tools");
 			ultimateSwordDamage = builder.define("Damage of the Ultimate Sword", 40);

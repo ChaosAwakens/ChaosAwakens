@@ -120,4 +120,8 @@ public class ChaosAwakens {
 	public static <W> void warn(String domain, W message) {
 		LOGGER.warn("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
+	
+	public static <E> void error(String domain, E message) {
+		LOGGER.error("[" + domain + "]: " + (message == null ? "null" : message.toString()));
+	}
 }

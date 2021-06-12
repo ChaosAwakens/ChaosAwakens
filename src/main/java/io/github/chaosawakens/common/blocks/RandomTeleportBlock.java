@@ -14,7 +14,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class RandomTeleportBlock extends Block {
-    public RandomTeleportBlock(Properties props) {
+    
+	public RandomTeleportBlock(Properties props) {
         super(props);
     }
 
@@ -38,7 +39,7 @@ public class RandomTeleportBlock extends Block {
                 }
 
                 net.minecraftforge.event.entity.living.EntityTeleportEvent.ChorusFruit event = net.minecraftforge.event.ForgeEventFactory.onChorusFruitTeleport((LivingEntity) entityIn, d3, d4, d5);
-                if (((LivingEntity) entityIn).attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true)) {
+                if (entityIn instanceof LivingEntity && ((LivingEntity) entityIn).attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true)) {
                     SoundEvent soundevent = entityIn instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
                     worldIn.playSound(null, d0, d1, d2, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     entityIn.playSound(soundevent, 1.0F, 1.0F);

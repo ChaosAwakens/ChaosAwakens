@@ -25,7 +25,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.markers', 'SCAN'
             property 'forge.logging.console.level', 'debug'
             mods {
                 chaosawakens {
@@ -35,7 +35,7 @@ minecraft {
         }
         server {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.markers', 'SCAN'
             property 'forge.logging.console.level', 'debug'
             mods {
                 chaosawakens {
