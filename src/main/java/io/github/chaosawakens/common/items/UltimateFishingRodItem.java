@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 public class UltimateFishingRodItem extends FishingRodItem {
     public UltimateFishingRodItem(Properties builder) {
-        super(builder);
+        super(builder.maxStackSize(1));
     }
 
     @Override
