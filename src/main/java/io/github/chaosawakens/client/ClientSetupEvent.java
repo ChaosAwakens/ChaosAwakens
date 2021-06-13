@@ -1,18 +1,15 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.client.entity.render.*;
-import io.github.chaosawakens.client.entity.render.tileentities.CASkullTileEntityRenderer;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CATileEntities;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -59,8 +56,9 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.UNSTABLE_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.TERMITE_NEST.get(), RenderType.getCutout());
 		
-		RenderTypeLookup.setRenderLayer(CABlocks.CORN_BLOCK.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.STRAWBERRY_BUSH_BLOCK.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CORN_PLANT.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.STRAWBERRY_PLANT.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.TOMATO_PLANT.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.GOLDEN_MELON_STEM.get(), RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.ATTACHED_GOLDEN_MELON_STEM.get(), RenderType.getCutoutMipped());
 

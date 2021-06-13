@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/crop",
+	"parent": "minecraft:block/cross",
 	"textures": {
-		"crop": "chaosawakens:blocks/tomato_plant_stage_1"
+		"cross": "chaosawakens:blocks/tomato_plant_stage_1"
 	}
 }

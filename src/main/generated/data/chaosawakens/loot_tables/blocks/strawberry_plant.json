@@ -12,7 +12,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "chaosawakens:strawberry_bush_block",
+                  "block": "chaosawakens:strawberry_plant",
                   "properties": {
                     "age": "3"
                   }
@@ -50,7 +50,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "chaosawakens:strawberry_bush_block",
+          "block": "chaosawakens:strawberry_plant",
           "properties": {
             "age": "3"
           }

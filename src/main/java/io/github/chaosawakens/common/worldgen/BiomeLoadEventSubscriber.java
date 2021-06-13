@@ -91,8 +91,14 @@ public class BiomeLoadEventSubscriber {
 			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
+				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addOverworldOres(gen);
+			}
+
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
+				if (CAConfig.COMMON.enableOreGen.get())
+					addNetherOres(gen);
 			}
 			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {

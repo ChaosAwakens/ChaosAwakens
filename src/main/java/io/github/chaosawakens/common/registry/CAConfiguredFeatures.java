@@ -81,9 +81,10 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_ENERGY = register("crystal_ore_energy", Feature.ORE.withConfiguration(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CRYSTAL_ENERGY, 5)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(60, 7))).square().count(5));	
 	public static final ConfiguredFeature<?, ?> GEODE_PINK_TOURMALINE = register("geode_pink_tourmaline", CAFeatures.GEODE.get().withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, States.CLUSTER_PINK_TOURMALINE, 28, 48, 40)));
 	public static final ConfiguredFeature<?, ?> GEODE_CATS_EYE = register("geode_cats_eye", CAFeatures.GEODE.get().withConfiguration( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, States.CLUSTER_CATS_EYE, 5, 28, 15)));
-	
-	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("corn", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN_GROWN), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
-	
+
+	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("plants_corn", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN_GROWN), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
+	public static final ConfiguredFeature<?, ?> TOMATO_PATCH = register("plants_tomatoes", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TOMATO_GROWN), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
+
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		CommonSetupEvent.configFeatures.add( new FeatureWrapper(key, configuredFeature));
 		return configuredFeature;
@@ -115,7 +116,8 @@ public class CAConfiguredFeatures {
 		protected static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().getDefaultState();
 		protected static final BlockState CLUSTER_PINK_TOURMALINE = CABlocks.PINK_TOURMALINE_CLUSTER.get().getDefaultState();
 		protected static final BlockState CLUSTER_CATS_EYE = CABlocks.CATS_EYE_CLUSTER.get().getDefaultState();
-		protected static final BlockState CORN_GROWN = CABlocks.CORN_BLOCK.get().getDefaultState();
+		protected static final BlockState CORN_GROWN = CABlocks.CORN_PLANT.get().getDefaultState();
+		protected static final BlockState TOMATO_GROWN = CABlocks.TOMATO_PLANT.get().getDefaultState();
 	}
 	
 	public static final class RuleTests {
