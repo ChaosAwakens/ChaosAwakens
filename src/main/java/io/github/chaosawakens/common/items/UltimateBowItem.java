@@ -80,7 +80,7 @@ public class UltimateBowItem extends BowItem implements IVanishable, IPreEnchant
 			}
 		}
 	}
-	
+
 	@Override
 	public int getUseDuration(ItemStack stack) {
 		return 9000;
@@ -93,11 +93,7 @@ public class UltimateBowItem extends BowItem implements IVanishable, IPreEnchant
 		playerIn.setActiveHand(handIn);
 		return ActionResult.resultConsume(itemstack);
 	}
-	
-	/**
-	 * Get the predicate to match ammunition when searching the player's inventory,
-	 * not their main/offhand
-	 */
+
 	@Override
 	public Predicate<ItemStack> getInventoryAmmoPredicate() {
 		return ARROWS;
@@ -115,7 +111,6 @@ public class UltimateBowItem extends BowItem implements IVanishable, IPreEnchant
 
 	@Override
 	public EnchantmentData[] enchant() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.enchantments;
 	}
 }
