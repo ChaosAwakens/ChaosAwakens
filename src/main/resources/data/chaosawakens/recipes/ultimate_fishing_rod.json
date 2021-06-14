@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " TS",
-    "I S",
-    " US"
+    "  T",
+    " US",
+    "I S"
   ],
   "key": {
     "T": {
@@ -20,6 +20,6 @@
     }
   },
   "result": {
-    "item": "chaosawakens:ultimate_bow"
+    "item": "chaosawakens:ultimate_fishing_rod"
   }
 }

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "chaosawakens:platinum_lump"
+    "#forge:lumps/platinum",
+    "#forge:ingots/platinum"
   ]
 }
