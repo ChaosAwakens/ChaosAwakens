@@ -1,7 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:lumps/platinum",
+    "#forge:lumps/platinum"
+  ],
+  "optional": [
     "#forge:ingots/platinum"
   ]
 }
