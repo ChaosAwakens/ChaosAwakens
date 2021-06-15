@@ -208,9 +208,9 @@ public class CAItems {
 			new EnchantmentData[] { new EnchantmentData(Enchantments.EFFICIENCY, 5), new EnchantmentData(Enchantments.FORTUNE, 5),  new EnchantmentData(Enchantments.UNBREAKING, 2) }));
 	public static final RegistryObject<HoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new UltimateHoeItem(CAToolMaterial.TOOL_ULTIMATE, CAConfig.COMMON.ultimateHoeDamage.get() - 37, 0.0F, new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup),
 			new EnchantmentData[] { new EnchantmentData(Enchantments.EFFICIENCY, 5), new EnchantmentData(Enchantments.FORTUNE, 5), new EnchantmentData(Enchantments.UNBREAKING, 2)}));
-	public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(100),
+	public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(1000),
 			new EnchantmentData[] { new EnchantmentData(Enchantments.POWER, 5), new EnchantmentData(Enchantments.FLAME, 3), new EnchantmentData(Enchantments.PUNCH, 2), new EnchantmentData(Enchantments.INFINITY, 1)}));
-	public static final RegistryObject<UltimateFishingRodItem> ULTIMATE_FISHING_ROD = ITEMS.register("ultimate_fishing_rod", () -> new UltimateFishingRodItem(new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(100),
+	public static final RegistryObject<UltimateFishingRodItem> ULTIMATE_FISHING_ROD = ITEMS.register("ultimate_fishing_rod", () -> new UltimateFishingRodItem(new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(1000),
 			new EnchantmentData[] {new EnchantmentData(Enchantments.UNBREAKING, 2)}));
 
 	// Emerald
