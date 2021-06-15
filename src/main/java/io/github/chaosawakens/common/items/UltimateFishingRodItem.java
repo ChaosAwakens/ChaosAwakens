@@ -1,21 +1,38 @@
 package io.github.chaosawakens.common.items;
 
+import io.github.chaosawakens.api.IPreEnchanted;
+import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.FishingRodItem;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public class UltimateFishingRodItem extends FishingRodItem {
-    public UltimateFishingRodItem(Properties builder) {
+public class UltimateFishingRodItem extends FishingRodItem implements IPreEnchanted {
+
+    private final EnchantmentData[] enchantments;
+
+    public UltimateFishingRodItem(Properties builder, EnchantmentData[] enchantments) {
         super(builder);
+        this.enchantments = enchantments;
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.isInGroup(group)) {
+            ItemStack stack = new ItemStack(this);
+            if (CAConfig.COMMON.enableAutoEnchanting.get())
+                for(EnchantmentData enchant : enchantments) {
+                    stack.addEnchantment( enchant.enchantment, enchant.enchantmentLevel);
+                }
+            items.add(stack);
+        }
     }
 
     @Override
@@ -42,5 +59,15 @@ public class UltimateFishingRodItem extends FishingRodItem {
         }
 
         return ActionResult.func_233538_a_(itemstack, worldIn.isRemote());
+    }
+
+    @Override
+    public EnchantmentData[] enchant() {
+        return this.enchantments;
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack stack) {
+        return CAConfig.COMMON.enableAutoEnchanting.get();
     }
 }
