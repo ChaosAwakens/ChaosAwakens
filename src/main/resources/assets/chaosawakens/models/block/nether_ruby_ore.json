@@ -1,7 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "chaosawakens:block/ruby_ore",
-    "particle": "chaosawakens:block/ruby_ore"
+    "all": "chaosawakens:block/nether_ruby_ore"
   }
 }

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "chaosawakens:ruby_ore"
+    "tag": "chaosawakens:ruby_ores"
   },
   "result": "chaosawakens:ruby",
   "experience": 1.0,
