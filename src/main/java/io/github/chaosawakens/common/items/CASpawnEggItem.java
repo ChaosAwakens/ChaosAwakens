@@ -10,13 +10,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CASpawnEggItem extends SpawnEggItem {
 	private final Supplier<? extends EntityType<?>> typeGetter;
 	private boolean isEnchanted;
 	
 	public CASpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties, boolean isEnchanted) {
-		super(null, 0, 0, properties);
+		super(null, 0xFFFFFFF, 0xFFFFFFF, properties);
 		this.typeGetter = typeIn;
 		this.isEnchanted = isEnchanted;
 	}
@@ -32,12 +34,8 @@ public class CASpawnEggItem extends SpawnEggItem {
 	}
 	
 	@Override
-	public EntityType<?> getType(@Nullable CompoundNBT p_208076_1_) {
-		return typeGetter.get();
-	}
+	public EntityType<?> getType(@Nullable CompoundNBT p_208076_1_) { return typeGetter.get(); }
 	
 	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return this.isEnchanted;
-	}
+	public boolean hasEffect(ItemStack stack) { return this.isEnchanted; }
 }
