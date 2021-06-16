@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/crop",
 	"textures": {
-		"crop": "chaosawakens:blocks/lettuce_plant_stage_3"
+		"crop": "chaosawakens:block/lettuce_plant_stage_3"
 	}
 }
