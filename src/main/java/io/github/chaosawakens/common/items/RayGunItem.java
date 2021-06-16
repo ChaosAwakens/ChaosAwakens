@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.items;
 import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
@@ -12,15 +13,25 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class RayGunItem extends Item {
+	private final IItemTier tier;
 
-	public RayGunItem(Properties builderIn) {
+	public RayGunItem(IItemTier tierIn, Properties builderIn) {
 		super(builderIn);
+		this.tier = tierIn;
 	}
-	
+
+	public IItemTier getTier() {
+		return this.tier;
+	}
+
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return this.tier.getRepairMaterial().test(repair) || super.getIsRepairable(toRepair, repair);
+	}
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (!(worldIn instanceof ServerWorld))
-			return new ActionResult<ItemStack>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
+			return new ActionResult(ActionResultType.PASS, playerIn.getHeldItem(handIn));
 		
 		ItemStack heldStack = playerIn.getHeldItem(handIn);
 		
@@ -40,6 +51,6 @@ public class RayGunItem extends Item {
 		worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
 		
 		playerIn.addStat(Stats.ITEM_USED.get(this));
-		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
+		return new ActionResult(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 }

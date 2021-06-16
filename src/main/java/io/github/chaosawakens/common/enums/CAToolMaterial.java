@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.enums;
 
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -39,7 +40,9 @@ public enum CAToolMaterial implements IItemTier {
 
     WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 
-    WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.fromItems(CAItems.QUEEN_SCALE.get()));
+    WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.fromItems(CAItems.QUEEN_SCALE.get())),
+
+    WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.fromItems(Blocks.REDSTONE_BLOCK));
 
     private final int harvestLevel;
     private final int maxUses;
