@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,6 +57,8 @@ public class StrawberryBushBlock extends SweetBerryBushBlock {
 			return ActionResultType.func_233537_a_(worldIn.isRemote);
 		}
 		return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
-		
 	}
+	
+	@Override
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {}
 }

@@ -10,6 +10,7 @@ import java.util.Map;
 import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.network.PacketHandler;
@@ -57,8 +58,7 @@ public class CommonSetupEvent {
 			CAVillagers.registerVillagerTypes();
 			CAVillagers.registerPOIs();
 			
-			// This should work, but feels wrong so //TODO
-			new CAConfiguredFeatures();
+			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
 		});
 		

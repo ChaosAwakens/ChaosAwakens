@@ -1,5 +1,6 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.CommonSetupEvent;
 import io.github.chaosawakens.common.CraftingEventSubscriber;
@@ -26,6 +27,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.example.GeckoLibMod;
@@ -48,20 +51,16 @@ public class ChaosAwakens {
 		GeckoLib.initialize();
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		
-		new CATags();
-		
-		/*try {
-			Class.forName("io.github.chaosawakens.common.registry.CATags"); //TODO This part would probably break in production due to re-obfuscation
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}*/
+		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		//Register to the mod event bus
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
-		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetupEvent::register);
+		
+		if(FMLEnvironment.dist == Dist.CLIENT)
+			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);

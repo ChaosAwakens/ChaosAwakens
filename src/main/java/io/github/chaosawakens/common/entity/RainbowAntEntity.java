@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.entity;
 
+import javax.annotation.Nullable;
+
+import io.github.chaosawakens.api.IAntEntity;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.AgeableEntity;
@@ -15,16 +18,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.play.server.SChangeGameStatePacket;
-import net.minecraft.network.play.server.SPlayEntityEffectPacket;
-import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -33,8 +29,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nullable;
 
 public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -77,29 +71,9 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 
 		if (CAConfig.COMMON.enableRainbowAntTeleport.get()) {
-			if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
-				//int i = this.getMaxInPortalTime();
-				ServerWorld currentWorld = (ServerWorld) this.world;
-				MinecraftServer minecraftServer = currentWorld.getServer();
-				RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.VILLAGE_MANIA ? World.OVERWORLD : CADimensions.VILLAGE_MANIA;
-				ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
-				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-
-				if (targetWorld != null) {
-					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
-					//ChaosAwakens.LOGGER.debug("before: "+targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()));
-
-					targetWorld.getChunk(playerIn.getPosition());
-					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-
-					//ChaosAwakens.LOGGER.debug("after: "+targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()));
-
-					serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
-
-					for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
-						serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
-					}
-				}
+			if (!this.world.isRemote && itemstack.getItem() == Items.AIR) {
+				IAntEntity.doTeleport((ServerPlayerEntity) playerIn, (ServerWorld) this.world,
+						this.world.getDimensionKey() == CADimensions.VILLAGE_MANIA ? World.OVERWORLD : CADimensions.VILLAGE_MANIA);
 			}
 		}
 		return super.getEntityInteractionResult(playerIn, hand);

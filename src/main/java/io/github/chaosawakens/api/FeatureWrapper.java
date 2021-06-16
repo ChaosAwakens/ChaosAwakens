@@ -3,7 +3,7 @@ package io.github.chaosawakens.api;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 /**
- * Wrapper for a feature's data ig
+ * Wrapper class containing a ConfiguredFeature and its id
  * @author invalid2
  */
 public class FeatureWrapper {
@@ -15,6 +15,10 @@ public class FeatureWrapper {
 		this.featureType = featureType;
 	}
 	
+	@Override
+	public String toString() {
+		return identifier + ":" + featureType.toString();
+	}
 	public String getIdentifier() { return identifier; }
 	public ConfiguredFeature<?, ?> getFeatureType() { return featureType; }
 }

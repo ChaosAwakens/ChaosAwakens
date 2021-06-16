@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.api.HeightmapTeleporter;
+import io.github.chaosawakens.api.IAntEntity;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
@@ -31,7 +33,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RedAntEntity extends MonsterEntity implements IAnimatable {
+public class RedAntEntity extends MonsterEntity implements IAnimatable, IAntEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public RedAntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -78,26 +80,9 @@ public class RedAntEntity extends MonsterEntity implements IAnimatable {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 
 		if (CAConfig.COMMON.enableRedAntTeleport.get()) {
-			if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
-				ServerWorld currentWorld = (ServerWorld) this.world;
-				MinecraftServer minecraftServer = currentWorld.getServer();
-				RegistryKey<World> dimensionRegistryKey = this.world.getDimensionKey() == CADimensions.MINING_DIMENSION ? World.OVERWORLD : CADimensions.MINING_DIMENSION;
-				ServerWorld targetWorld = minecraftServer.getWorld(dimensionRegistryKey);
-				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-
-				if (targetWorld != null) {
-					/*playerIn.changeDimension(targetWorld, new HeightmapTeleporter());*/
-					serverPlayer.connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.PERFORM_RESPAWN, 0));
-					
-					targetWorld.getChunk(playerIn.getPosition());
-					serverPlayer.teleport(targetWorld, playerIn.getPosX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getPosX(), (int) playerIn.getPosZ()), playerIn.getPosZ(), serverPlayer.rotationYaw, serverPlayer.rotationPitch);
-					
-					serverPlayer.connection.sendPacket(new SPlayerAbilitiesPacket(serverPlayer.abilities));
-					
-					for (EffectInstance effectinstance : (serverPlayer.getActivePotionEffects())) {
-						serverPlayer.connection.sendPacket(new SPlayEntityEffectPacket(serverPlayer.getEntityId(), effectinstance));
-					}
-				}
+			if (!this.world.isRemote && itemstack.getItem() == Items.AIR) {
+				IAntEntity.doTeleport((ServerPlayerEntity) playerIn, (ServerWorld) this.world,
+					this.world.getDimensionKey() == CADimensions.MINING_DIMENSION ? World.OVERWORLD : CADimensions.MINING_DIMENSION);
 			}
 		}
 		return super.getEntityInteractionResult(playerIn, hand);
