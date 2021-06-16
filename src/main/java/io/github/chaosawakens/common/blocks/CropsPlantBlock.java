@@ -1,14 +1,7 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.Random;
-
-import io.github.chaosawakens.common.registry.CAItems;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BushBlock;
-import net.minecraft.block.IGrowable;
+import net.minecraft.block.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -25,14 +18,19 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
 
-public class CornBlock extends BushBlock implements IGrowable {
+import java.util.Random;
+import java.util.function.Supplier;
+
+public class CropsPlantBlock extends BushBlock implements IGrowable {
 	private static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	private boolean isAboveAir = true;
 	private int maxAge = 3;
-	
-	public CornBlock(AbstractBlock.Properties properties) {
+	private Supplier<? extends Item> seedItem;
+
+	public CropsPlantBlock(Supplier<? extends Item> seedItem, Properties properties) {
 		super(properties);
+		this.seedItem = seedItem;
 		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
 	}
 	
@@ -85,7 +83,7 @@ public class CornBlock extends BushBlock implements IGrowable {
 	}
 	
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-		return new ItemStack(CAItems.CORN_SEEDS.get());
+		return new ItemStack(seedItem.get());
 	}
 	
 	@Override
@@ -95,7 +93,7 @@ public class CornBlock extends BushBlock implements IGrowable {
 		return;
 	}
 	
-	public CornBlock withMaxAge(int maxAge) {
+	public CropsPlantBlock withMaxAge(int maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}
