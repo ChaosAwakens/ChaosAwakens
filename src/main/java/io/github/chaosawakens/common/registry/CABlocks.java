@@ -1,24 +1,10 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.function.ToIntFunction;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.*;
 import io.github.chaosawakens.common.items.EnchantedBlockItem;
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.IPositionPredicate;
-import net.minecraft.block.AttachedStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.StemBlock;
-import net.minecraft.block.StemGrownBlock;
-import net.minecraft.block.TorchBlock;
-import net.minecraft.block.WallTorchBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
@@ -32,6 +18,10 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CABlocks {
@@ -52,7 +42,7 @@ public class CABlocks {
 	public static final RegistryObject<EnchantedGoldenCakeBlock> ENCHANTED_GOLDEN_CAKE = registerEnchantedBlock("enchanted_golden_cake", () -> new EnchantedGoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup, 1);
 	
 	// PLANTS
-	public static final RegistryObject<Block> CORN_BLOCK = registerBlock("corn_block", () -> new CornBlock(Block.Properties.from(Blocks.SUGAR_CANE).tickRandomly()), CAItemGroups.foodItemGroup, false);
+	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CornBlock(Block.Properties.from(Blocks.SUGAR_CANE).tickRandomly()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> TOMATO_PLANT = registerBlock("tomato_plant", () -> new TomatoBlock(Block.Properties.from(Blocks.SUGAR_CANE).tickRandomly()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> STRAWBERRY_PLANT = registerBlock("strawberry_plant", () -> new StrawberryBushBlock( CAItems.STRAWBERRY_SEEDS, CAItems.STRAWBERRY, Block.Properties.from(Blocks.SWEET_BERRY_BUSH).tickRandomly()), CAItemGroups.foodItemGroup, false);
 	

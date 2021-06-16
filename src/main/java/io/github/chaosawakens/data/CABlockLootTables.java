@@ -34,7 +34,7 @@ public class CABlockLootTables extends BlockLootTables {
 		registerLootTable(CABlocks.SUNSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.SUNSTONE.get()));
 		registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
 		
-		registerLootTable(CABlocks.CORN_BLOCK.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.CORN.get(), CAItems.CORN_SEEDS.get(),
+		registerLootTable(CABlocks.CORN_PLANT.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.CORN.get(), CAItems.CORN_SEEDS.get(),
 				BlockStateProperty.builder(plant).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(BlockStateProperties.AGE_0_3, 3))));
 		registerLootTable(CABlocks.TOMATO_PLANT.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.TOMATO.get(), CAItems.TOMATO_SEEDS.get(),
 				BlockStateProperty.builder(plant).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(BlockStateProperties.AGE_0_3, 3))));
