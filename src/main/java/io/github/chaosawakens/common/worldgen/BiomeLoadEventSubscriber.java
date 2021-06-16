@@ -96,7 +96,7 @@ public class BiomeLoadEventSubscriber {
 					addOverworldOres(gen);
 			}
 
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addNetherOres(gen);
 			}
