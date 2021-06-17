@@ -75,7 +75,7 @@ public class TermiteEntity extends MonsterEntity implements IAnimatable {
 	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 		
-		if (CAConfig.COMMON.enableRedAntTeleport.get()) {
+		if (CAConfig.COMMON.enableTermiteTeleport.get()) {
 			if (!this.world.isRemote && itemstack.getItem() == Items.AIR) {
 				IAntEntity.doTeleport((ServerPlayerEntity) playerIn, (ServerWorld) this.world,
 					this.world.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION_LEGACY ? World.OVERWORLD : CADimensions.CRYSTAL_DIMENSION_LEGACY);
