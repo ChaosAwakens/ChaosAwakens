@@ -77,6 +77,7 @@ public class CAConfig {
 		public final ConfigValue<Integer> poisonSwordDamage;
 		public final ConfigValue<Integer> ratSwordDamage;
 		public final ConfigValue<Integer> fairySwordDamage;
+		public final ConfigValue<Integer> mantisClawDamage;
 		public final ConfigValue<Integer> bigHammerDamage;
 		public final ConfigValue<Integer> prismaticReaperDamage;
 
@@ -224,6 +225,7 @@ public class CAConfig {
 			poisonSwordDamage = builder.define("Damage of the Poison Sword", 10);
 			ratSwordDamage = builder.define("Damage of the Rat Sword", 10);
 			fairySwordDamage = builder.define("Damage of the Fairy Sword", 10);
+			mantisClawDamage = builder.define("Damage of the Mantis Claw", 10);
 			bigHammerDamage = builder.define("Damage of the Big Hammer", 15);
 			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 29);
 			battleAxeDamage = builder.define("Damage of the Battle Axe", 50);

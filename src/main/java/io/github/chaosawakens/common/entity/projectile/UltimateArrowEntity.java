@@ -34,7 +34,7 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 	@Override
 	protected void onEntityHit(EntityRayTraceResult result) {
 		Entity entity = result.getEntity();
-		if (entity instanceof PlayerEntity || entity instanceof TameableEntity) {
+		if (entity instanceof PlayerEntity || (entity instanceof TameableEntity && ((TameableEntity) entity).isTamed() && ((TameableEntity) entity).getOwner() == this.getShooter())) {
 			((LivingEntity) entity).heal(5.0F);
 			remove();
 			return;

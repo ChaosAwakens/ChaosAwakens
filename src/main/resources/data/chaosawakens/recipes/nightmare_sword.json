@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NDN",
+    "RTR",
+    "NIN"
+  ],
+  "key": {
+    "N": {
+      "item": "chaosawakens:nightmare_scale"
+    },
+    "T": {
+      "tag": "forge:ingots/titanium"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "I": {
+      "tag": "chaosawakens:ultimate_gear_handles"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:nightmare_sword"
+  }
+}

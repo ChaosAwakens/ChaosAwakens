@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum CAToolMaterial implements IItemTier {
+public enum CAItemTier implements IItemTier {
     TOOL_EMERALD(3, 1300, 8, 6, 24, () -> Ingredient.fromItems(Items.EMERALD.getItem())),
 
     TOOL_AMETHYST(3, 2000, 9, 11, 18, () -> Ingredient.fromItems(CAItems.AMETHYST.get())),
@@ -28,7 +28,7 @@ public enum CAToolMaterial implements IItemTier {
 
     TOOL_ULTIMATE(5, 3000, 15, 36, 64, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 
-    TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get())),
+    TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.fromItems(CAItems.NIGHTMARE_SCALE.get())),
 
     TOOL_COPPER(1, 150, 4, 2, 6, () -> Ingredient.fromItems(CAItems.COPPER_LUMP.get())),
 
@@ -42,7 +42,12 @@ public enum CAToolMaterial implements IItemTier {
 
     WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.fromItems(CAItems.QUEEN_SCALE.get())),
 
-    WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.fromItems(Blocks.REDSTONE_BLOCK));
+    WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.fromItems(Blocks.REDSTONE_BLOCK)),
+
+    WEAPON_GENERIC(2, 1024, 6, 6, 8, Ingredient::fromItems),
+
+    WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, Ingredient::fromItems);
+
 
     private final int harvestLevel;
     private final int maxUses;
@@ -51,7 +56,7 @@ public enum CAToolMaterial implements IItemTier {
     private final int enchantability;
     private final Supplier<Ingredient> repairMaterial;
 
-    CAToolMaterial(int harvestLevel, int maxUses, float efficiency, float damage, int enchantability, Supplier<Ingredient> repairMaterial) {
+    CAItemTier(int harvestLevel, int maxUses, float efficiency, float damage, int enchantability, Supplier<Ingredient> repairMaterial) {
         this.harvestLevel = harvestLevel;
         this.maxUses = maxUses;
         this.efficiency = efficiency;

@@ -460,7 +460,12 @@
 	"block.chaosawakens.strawberry_plant": "Arbusto de Morango",
 
 	"item.chaosawakens.dead_stink_bug": "Besouro Fedido Morto",
+
 	"item.chaosawakens.triffid_goo": "Gosma de Triffid",
+	"item.chaosawakens.moth_scale": "Escama de Mariposa",
+	"item.chaosawakens.nightmare_scale": "Escama de Nightmare",
+	"item.chaosawakens.vortex_eye": "Olho da Vortex",
+	"item.chaosawakens.mantis_claw": "Garras de Mantis",
 
 	"item.chaosawakens.silver_coin": "Moeda de Prata",
 	"item.chaosawakens.gold_coin": "Moeda de Ouro",
@@ -469,6 +474,5 @@
 	"item.chaosawakens.ender_dragon_scale": "Escama do Dragão Ender",
 
 	"misc.chaosawakens.empty_inventory": "Esvazie seu inventário primeiro!",
-	"misc.chaosawakens.inaccessible_dimension": "A dimensão não pode ser acessada no momento.",
-	"block.chaosawakens.ent_dungeon_wood": "Madeira de Masmorra Ent"
+	"misc.chaosawakens.inaccessible_dimension": "A dimensão não pode ser acessada no momento."
 }
