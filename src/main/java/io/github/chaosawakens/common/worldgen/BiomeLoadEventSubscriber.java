@@ -146,6 +146,14 @@ public class BiomeLoadEventSubscriber {
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RED_ANT_INFESTED);
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.TERMITE_INFESTED);
 			}
+			if (CAConfig.COMMON.spawnDzOresInOverworld.get() && CAConfig.COMMON.enableDzMineralOreGen.get()) {
+				if (CAConfig.COMMON.enableOreCopperGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_COPPER);
+				if (CAConfig.COMMON.enableOreTinGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_TIN);
+				if (CAConfig.COMMON.enableOreSilverGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_SILVER);
+				if (CAConfig.COMMON.enableOrePlatinumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_PLATINUM);
+				if (CAConfig.COMMON.enableOreSunstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_SUNSTONE);
+				if (CAConfig.COMMON.enableOreBloodstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_BLOODSTONE);
+			}
 		}
 
 		private static void addNetherOres(BiomeGenerationSettingsBuilder gen) {
@@ -161,12 +169,14 @@ public class BiomeLoadEventSubscriber {
 			if (CAConfig.COMMON.enableOreTitaniumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_TITANIUM);
 			if (CAConfig.COMMON.enableOreTigersEyeGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_TIGERS_EYE);
 			if (CAConfig.COMMON.enableOreAluminumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_ALUMINUM);
-			if (CAConfig.COMMON.enableOreCopperGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_COPPER);
-			if (CAConfig.COMMON.enableOreTinGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_TIN);
-			if (CAConfig.COMMON.enableOreSilverGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_SILVER);
-			if (CAConfig.COMMON.enableOrePlatinumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_PLATINUM);
-			if (CAConfig.COMMON.enableOreSunstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_SUNSTONE);
-			if (CAConfig.COMMON.enableOreBloodstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_BLOODSTONE);
+			if (CAConfig.COMMON.enableDzMineralOreGen.get()) {
+				if (CAConfig.COMMON.enableOreCopperGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_COPPER);
+				if (CAConfig.COMMON.enableOreTinGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_TIN);
+				if (CAConfig.COMMON.enableOreSilverGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_SILVER);
+				if (CAConfig.COMMON.enableOrePlatinumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_PLATINUM);
+				if (CAConfig.COMMON.enableOreSunstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_SUNSTONE);
+				if (CAConfig.COMMON.enableOreBloodstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_BLOODSTONE);
+			}
 			if (CAConfig.COMMON.enableOreSaltGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_SALT);
 			if (CAConfig.COMMON.enableFossilGen.get()) {
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_ENT);
