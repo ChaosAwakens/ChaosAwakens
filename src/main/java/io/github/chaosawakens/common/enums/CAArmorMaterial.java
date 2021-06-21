@@ -16,71 +16,73 @@ import java.util.function.Supplier;
 public enum CAArmorMaterial implements IArmorMaterial {
 
     //Name, Durability multiplier, Damage Reduction multiplier, Damage Reduction, Enchantability, Sound Events, Toughness, Knockback Resistance, Repair Material
-    EMERALD(ChaosAwakens.MODID + ":emerald", 35, new int[] {3, 6, 8, 3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> {
+    EMERALD("emerald", 35, new int[] {3, 6, 8, 3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> {
         return Ingredient.fromItems(Items.EMERALD);
     }),
 
-    EXPERIENCE(ChaosAwakens.MODID + ":experience", 39, new int[] {4, 7, 9, 5}, 32, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
+    EXPERIENCE("experience", 39, new int[] {4, 7, 9, 5}, 32, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
         return Ingredient.fromItems(Items.EMERALD);
     }),
 
-    AMETHYST(ChaosAwakens.MODID + ":amethyst", 39, new int[] {3, 7, 8, 4}, 18, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> {
+    AMETHYST("amethyst", 38, new int[] {3, 7, 8, 4}, 18, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> {
         return Ingredient.fromItems(CAItems.AMETHYST.get());
     }),
 
-    RUBY(ChaosAwakens.MODID + ":ruby", 37, new int[] {4, 8, 9, 4}, 22, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
+    RUBY("ruby", 37, new int[] {4, 8, 9, 4}, 22, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3f, 0f, () -> {
         return Ingredient.fromItems(CAItems.RUBY.get());
     }),
 
-    TIGERS_EYE(ChaosAwakens.MODID + ":tigers_eye", 36, new int[] {4, 7, 8, 4}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
+    TIGERS_EYE("tigers_eye", 36, new int[] {4, 7, 8, 4}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
         return Ingredient.fromItems(CAItems.TIGERS_EYE.get());
     }),
 
-    LAPIS(ChaosAwakens.MODID + ":lapis", 22, new int[] {2, 5, 7, 2}, 24, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.75f, 0f, () -> {
+    LAPIS("lapis", 22, new int[] {2, 5, 7, 2}, 24, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.75f, 0f, () -> {
         return Ingredient.fromItems(Items.LAPIS_BLOCK);
     }),
 
-    ULTIMATE(ChaosAwakens.MODID + ":ultimate", 48, new int[] {6, 10, 12, 6}, 64, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3f, 0.025f, () -> {
+    ULTIMATE("ultimate", 48, new int[] {6, 10, 12, 6}, 64, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4.5f, 0.125f, () -> {
         return Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get());
     }),
 
-    LAVA_EEL(ChaosAwakens.MODID + ":lava_eel", 34, new int[] {2, 5, 7, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0f, 0f, () -> {
+    LAVA_EEL("lava_eel", 33, new int[] {2, 5, 7, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0f, 0f, () -> {
         return Ingredient.fromItems(CAItems.LAVA_EEL.get());
     }),
 
-    PEACOCK_FEATHER(ChaosAwakens.MODID + ":peacock_feather", 8, new int[] {2, 4, 5, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0f, 0f, () -> {
+    MOTH_SCALE("moth_scale", 35, new int[] {2, 5, 7, 2}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.75f, 0.05f, () -> {
+        return Ingredient.fromItems(CAItems.MOTH_SCALE.get());
+    }),
+
+    PEACOCK_FEATHER("peacock_feather", 8, new int[] {2, 4, 5, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0f, 0f, () -> {
         return Ingredient.fromItems(CAItems.PEACOCK_FEATHER.get());
     }),
 
-    PINK_TOURMALINE(ChaosAwakens.MODID + ":pink_tourmaline", 24, new int[] {2, 5, 7, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.25f, 0f, () -> {
+    PINK_TOURMALINE("pink_tourmaline", 24, new int[] {2, 5, 7, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.25f, 0f, () -> {
         return Ingredient.fromItems(CAItems.PINK_TOURMALINE_INGOT.get());
     }),
 
-    CATS_EYE(ChaosAwakens.MODID + ":cats_eye", 36, new int[] {4, 7, 8, 4}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
+    CATS_EYE("cats_eye", 36, new int[] {4, 7, 8, 4}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
         return Ingredient.fromItems(CAItems.CATS_EYE_INGOT.get());
     }),
 
-    COPPER(ChaosAwakens.MODID + ":copper", 9, new int[] {1, 3, 4, 1}, 6, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0f, 0f, () -> {
+    COPPER("copper", 9, new int[] {1, 3, 4, 1}, 6, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0f, 0f, () -> {
         return Ingredient.fromItems(CAItems.COPPER_LUMP.get());
     }),
 
-    TIN(ChaosAwakens.MODID + ":tin", 12, new int[] {1, 4, 5, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0f, 0f, () -> {
+    TIN("tin", 12, new int[] {1, 4, 5, 2}, 8, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0f, 0f, () -> {
         return Ingredient.fromItems(CAItems.TIN_LUMP.get());
     }),
 
-    SILVER(ChaosAwakens.MODID + ":silver", 21, new int[] {2, 4, 7, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1f, 0f, () -> {
+    SILVER("silver", 21, new int[] {2, 4, 7, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1f, 0f, () -> {
         return Ingredient.fromItems(CAItems.SILVER_LUMP.get());
     }),
 
-    PLATINUM(ChaosAwakens.MODID + ":platinum", 35, new int[] {3, 6, 8, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
+    PLATINUM("platinum", 35, new int[] {3, 6, 8, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> {
         return Ingredient.fromItems(CAItems.PLATINUM_LUMP.get());
     }),
 
-    ROYAL_GUARDIAN(ChaosAwakens.MODID + ":royal_guardian", 72, new int[] {8, 12, 14, 8}, 84, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6f, 0.075f, () -> {
-        return Ingredient.fromItems();
-    }),
+    ROYAL_GUARDIAN("royal_guardian", 72, new int[] {8, 12, 14, 8}, 84, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 7.5f, 0.4f, Ingredient::fromItems),
 
-    QUEEN_SCALE(ChaosAwakens.MODID + ":queen_scale", 68, new int[] {9, 14, 16, 9}, 96, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.5f, 0.06f, () -> {
+    QUEEN_SCALE("queen_scale", 68, new int[] {9, 14, 16, 9}, 96, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8f, 0.3f, () -> {
         return Ingredient.fromItems(CAItems.QUEEN_SCALE.get());
     });
 
@@ -97,7 +99,7 @@ public enum CAArmorMaterial implements IArmorMaterial {
     CAArmorMaterial(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn,
                     float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
 
-        this.name = nameIn;
+        this.name = ChaosAwakens.MODID + ":" + nameIn;
         this.durability = durabilityIn;
         this.damageReductionAmountArray = damageReductionAmountArrayIn;
         this.enchantability = enchantabilityIn;

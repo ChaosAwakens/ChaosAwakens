@@ -94,6 +94,25 @@
         ]
       }
     },
+    "moth_scale_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:moth_scale_helmet"
+          },
+          {
+            "item": "chaosawakens:moth_scale_chestplate"
+          },
+          {
+            "item": "chaosawakens:moth_scale_leggings"
+          },
+          {
+            "item": "chaosawakens:moth_scale_boots"
+          }
+        ]
+      }
+    },
     "silver_helmet": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -316,6 +335,9 @@
     ],
     [
       "lava_eel_helmet"
+    ],
+    [
+      "moth_scale_helmet"
     ],
     [
       "silver_helmet"
