@@ -1,10 +1,15 @@
 package io.github.chaosawakens.common;
 
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.entity.RoboSniperEntity;
+import io.github.chaosawakens.common.entity.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
@@ -14,6 +19,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -96,6 +102,21 @@ public class EventHandler {
                 drop = new ItemEntity(event.getEntityLiving().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), stack);
                 event.getDrops().add(drop);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityJoin(EntityJoinWorldEvent event) {
+        //Make villagers afraid of our entities
+        if (event.getEntity() instanceof VillagerEntity) {
+            VillagerEntity villager = (VillagerEntity) event.getEntity();
+            villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
+            villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
+        }
+        if (event.getEntity() instanceof WanderingTraderEntity) {
+            WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) event.getEntity();
+            wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
+            wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
         }
     }
 }

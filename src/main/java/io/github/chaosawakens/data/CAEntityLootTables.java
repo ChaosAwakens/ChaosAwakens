@@ -338,6 +338,13 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .addEntry(ItemLootEntry.builder(Items.REDSTONE_LAMP)
                                         .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))
                                         .acceptCondition(KilledByPlayer.builder()))));
+        registerLootTable(CAEntityTypes.STINK_BUG.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(CAItems.DEAD_STINK_BUG.get())
+                                        .acceptFunction(SetCount.builder(ConstantRange.of(1)))
+                                        .acceptCondition(KilledByPlayer.builder()))));
     }
 
     @Override
