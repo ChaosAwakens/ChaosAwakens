@@ -1,11 +1,16 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.entity.ai.AnimatedMeleeAttackGoal;
+import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
+import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
@@ -19,8 +24,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EntEntity extends AnimatedMonsterEntity implements IAnimatable {
+public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private boolean isDespawnable;
 	
 	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -30,7 +36,7 @@ public class EntEntity extends AnimatedMonsterEntity implements IAnimatable {
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		super.doTickBase(event);
 		
-		if (this.getAttacking()) {
+		if (this.getHitting()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
 			return PlayState.CONTINUE;
 		}
@@ -50,7 +56,8 @@ public class EntEntity extends AnimatedMonsterEntity implements IAnimatable {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
-		this.goalSelector.addGoal(1, new AnimatedMeleeAttackGoal(this, 1.0F, 48, false));
+		this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 10));
+		this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3));
 		this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));
@@ -77,7 +84,14 @@ public class EntEntity extends AnimatedMonsterEntity implements IAnimatable {
 	}
 	
 	@Override
+	public boolean canDespawn(double distanceToClosestPlayer) {
+		return this.isDespawnable;
+	}
+	
+	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
+	
+	public void seDespawable(boolean isDespawnable) { this.isDespawnable = isDespawnable; }
 }

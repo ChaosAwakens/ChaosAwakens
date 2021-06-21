@@ -19,11 +19,11 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  * 
  * @author invalid2
  */
-public abstract class AnimatedMonsterEntity extends MonsterEntity implements IAnimatable {
+public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatable {
 	
-	protected static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(AnimatedMonsterEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(AnimatedMonsterEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> HITTING = EntityDataManager.createKey(AnimatedMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> HITTING = EntityDataManager.createKey(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
 	
 	private Animation animationLast;
 	
@@ -36,7 +36,7 @@ public abstract class AnimatedMonsterEntity extends MonsterEntity implements IAn
 	 * @param type
 	 * @param worldIn
 	 */
-	public AnimatedMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 	

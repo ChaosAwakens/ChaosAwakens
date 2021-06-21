@@ -30,7 +30,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RainbowAntEntity extends AnimalEntity implements IAnimatable {
+public class RainbowAntEntity extends AnimalEntity implements IAnimatable, IAntEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 
 	public RainbowAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {

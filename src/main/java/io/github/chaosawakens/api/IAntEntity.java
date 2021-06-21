@@ -15,7 +15,7 @@ public interface IAntEntity {
 	static void doTeleport(ServerPlayerEntity serverPlayer, ServerWorld currentWorld, RegistryKey<World> targetKey) {
 		MinecraftServer minecraftServer = currentWorld.getServer();
 		ServerWorld targetWorld = minecraftServer.getWorld(targetKey);
-
+		
 		if (targetWorld != null)
 			serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 		

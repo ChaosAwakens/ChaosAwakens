@@ -13,9 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-abstract public class RoboEntity extends AnimatedMonsterEntity {
-	
-	public boolean didLaser;
+abstract public class RoboEntity extends AnimatableMonsterEntity {
 	
 	public RoboEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);

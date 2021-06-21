@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.PortalInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -24,6 +25,7 @@ public class HeightmapTeleporter implements ITeleporter {
 	
 	@Nullable
 	public PortalInfo getPortalInfo(Entity entity, ServerWorld targetWorld, Function<ServerWorld, PortalInfo> defaultPortalInfo) {
+		ChaosAwakens.debug("TELEPORTER", entity+" "+targetWorld);
 		WorldBorder border = targetWorld.getWorldBorder();
 		double coordDiff = DimensionType.getCoordinateDifference(entity.world.getDimensionType(), targetWorld.getDimensionType());
 		
@@ -36,7 +38,7 @@ public class HeightmapTeleporter implements ITeleporter {
 		
 		BlockPos entityPos = entity.getPosition();
 		//Load target chunk
-		targetWorld.getChunk(entityPos);
+		targetWorld.getChunk(new BlockPos(newPosVector));
 		
 		//Get a valid Y pos for the targeted block
 		BlockPos targetPos;
