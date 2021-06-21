@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CASpawnEggItem extends SpawnEggItem {
 	private final Supplier<? extends EntityType<?>> typeGetter;
-	private boolean isEnchanted;
+	private final boolean isEnchanted;
 	
 	public CASpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties, boolean isEnchanted) {
 		super(null, 0xFFFFFFF, 0xFFFFFFF, properties);

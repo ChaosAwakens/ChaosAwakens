@@ -7,8 +7,8 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
  * @author invalid2
  */
 public class FeatureWrapper {
-	private String identifier;
-	private ConfiguredFeature<?, ?> featureType;
+	private final String identifier;
+	private final ConfiguredFeature<?, ?> featureType;
 	
 	public FeatureWrapper(String identifier, ConfiguredFeature<?, ?> featureType) {
 		this.identifier = identifier;

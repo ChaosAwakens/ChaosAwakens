@@ -24,8 +24,8 @@ import net.minecraft.world.World;
  */
 public class StrawberryBushBlock extends SweetBerryBushBlock {
 	
-	private Supplier<? extends Item> seedItem;
-	private Supplier<? extends Item> foodItem;
+	private final Supplier<? extends Item> seedItem;
+	private final Supplier<? extends Item> foodItem;
 	
 	/**
 	 * @param properties
@@ -51,7 +51,7 @@ public class StrawberryBushBlock extends SweetBerryBushBlock {
 		} else if (age > 1) {
 			int j = 1 + worldIn.rand.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(this.foodItem.get(), j + (flag ? 1 : 0)));
-			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
 			
 			return ActionResultType.func_233537_a_(worldIn.isRemote);

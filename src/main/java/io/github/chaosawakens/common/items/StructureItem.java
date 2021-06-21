@@ -48,8 +48,8 @@ public class StructureItem extends Item {
 	 * @author invalid2
 	 */
 	class PlacementHelper {
-		private BlockPos pos;
-		private Rotation rotation;
+		private final BlockPos pos;
+		private final Rotation rotation;
 		
 		public PlacementHelper(BlockPos pos, BlockPos templateSize, Direction direction) {
 			super();

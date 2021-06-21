@@ -49,13 +49,13 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 			boolean hasFire = CAConfig.COMMON.thunderStaffExplosionFire.get();
 			switch (CAConfig.COMMON.thunderStaffExplosionType.get()) {
 				case 0:
-					this.world.createExplosion((Entity) null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+					this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
 					break;
 				case 1:
-					this.world.createExplosion((Entity) null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+					this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
 					break;
 				case 2:
-					this.world.createExplosion((Entity) null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+					this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
 					break;
 			}
 			this.remove();

@@ -26,7 +26,7 @@ public class CropsPlantBlock extends BushBlock implements IGrowable {
 	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	private boolean isAboveAir = true;
 	private int maxAge = 3;
-	private Supplier<? extends Item> seedItem;
+	private final Supplier<? extends Item> seedItem;
 
 	public CropsPlantBlock(Supplier<? extends Item> seedItem, Properties properties) {
 		super(properties);

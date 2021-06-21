@@ -480,9 +480,6 @@ public class CAItems {
 	public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xe2dbd6, 0x74a332, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xffffff, 0xe38a1d, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 
-	// MOB HEADS
-//	public static final RegistryObject<Item>  HUSK_HEAD = ITEMS.register("husk_head", () -> new CASkullItem(CABlocks.HUSK_HEAD.get(), CABlocks.HUSK_WALL_HEAD.get(), (new Item.Properties()).group(CAItemGroups.itemsItemGroup).rarity(Rarity.UNCOMMON)));
-
 	// STRUCTURE SPAWN
 	public static final RegistryObject<Item> INSTANT_SURVIVAL_SHELTER = ITEMS.register("instant_survival_shelter", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "shelter"));
 	public static final RegistryObject<Item> ZOO_CAGE_EXTRA_SMALL = ITEMS.register("zoo_cage_extra_small", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "cage_xs"));

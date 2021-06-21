@@ -11,10 +11,10 @@ import net.minecraft.world.World;
 public class RoboAttackGoal extends Goal {
 	private final RoboEntity projectileOwner;
 	private int attackTimer;
-	private int fireRateBase;
+	private final int fireRateBase;
 	
-	private float damage;
-	private float ownerHeightYScale;
+	private final float damage;
+	private final float ownerHeightYScale;
 	
 	public RoboAttackGoal(RoboEntity robo, int fireRateBase, float damage, float ownerHeightYScale) {
 		this.projectileOwner = robo;

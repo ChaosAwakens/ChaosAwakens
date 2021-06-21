@@ -13,7 +13,7 @@ import net.minecraft.world.server.ServerWorld;
 
 public class AntNestBlock extends Block {
 	
-	private Supplier<? extends EntityType<? extends CreatureEntity>> ant;
+	private final Supplier<? extends EntityType<? extends CreatureEntity>> ant;
 	
 	public AntNestBlock(Supplier<? extends EntityType<? extends CreatureEntity>> ant, Properties builder) {
 		super(builder);

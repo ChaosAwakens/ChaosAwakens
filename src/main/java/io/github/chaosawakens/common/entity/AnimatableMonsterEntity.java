@@ -87,6 +87,5 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	public boolean getAnimationFinished() { return this.isAnimationFinished; }
 	public void setAnimationFinished(boolean animationFinished) { this.isAnimationFinished = animationFinished; }
 	
-	public double getCurrentAnimationTick() { return this.currentAnimationTick; }
-	
+	public double getCurrentAnimationTick() {return this.currentAnimationTick; }
 }

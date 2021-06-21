@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.IntegerProperty;
@@ -13,10 +9,14 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class BuddingBlock extends Block {
 	
 	private static final IntegerProperty MAX_GENERATABLE = BlockStateProperties.AGE_0_25;
-	private CrystalClusterBlock budBlock;
+	private final CrystalClusterBlock budBlock;
 	
 	public BuddingBlock(Properties builder, CrystalClusterBlock budBlock) {
 		super(builder);
@@ -38,7 +38,7 @@ public class BuddingBlock extends Block {
 		if(state.get(MAX_GENERATABLE) == 0)return;
 		
 		//Check which spots are available/valid
-		List<BlockStatePos> valids = this.checkValidPositions(state, worldIn, pos);
+		List<BlockStatePos> valids = this.checkValidPositions(worldIn, pos);
 		
 		//if there are none available, return
 		if(valids.size() == 0)return;
@@ -59,7 +59,7 @@ public class BuddingBlock extends Block {
 		
 	}
 	
-	private List<BlockStatePos> checkValidPositions(BlockState state, ServerWorld worldIn, BlockPos pos) {
+	private List<BlockStatePos> checkValidPositions(ServerWorld worldIn, BlockPos pos) {
 		List<BlockStatePos> validStatePos = new ArrayList<>();
 		
 		//Loop through all possible directions
@@ -88,8 +88,8 @@ public class BuddingBlock extends Block {
 	 *
 	 */
 	class BlockStatePos {
-		private BlockPos pos;
-		private BlockState state;
+		private final BlockPos pos;
+		private final BlockState state;
 		
 		public BlockStatePos(BlockPos pos, BlockState state) {
 			this.pos = pos;

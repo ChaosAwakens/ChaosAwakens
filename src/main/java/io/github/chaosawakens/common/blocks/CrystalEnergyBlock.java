@@ -29,7 +29,7 @@ public class CrystalEnergyBlock extends CAOreBlock {
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!player.isCreative() && !worldIn.isRemote && worldIn.rand.nextInt(3) == 0)
-			worldIn.createExplosion((Entity) null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1.5F, worldIn.getGameRules().getBoolean(GameRules.MOB_GRIEFING) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+			worldIn.createExplosion(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1.5F, worldIn.getGameRules().getBoolean(GameRules.MOB_GRIEFING) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 		super.onBlockHarvested(worldIn, pos, state, player);
 	}
 	

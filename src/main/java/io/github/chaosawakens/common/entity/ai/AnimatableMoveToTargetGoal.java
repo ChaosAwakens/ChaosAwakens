@@ -15,8 +15,8 @@ import net.minecraft.util.EntityPredicates;
  */
 public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 	
-	private double moveSpeed;
-	private int checkRate;
+	private final double moveSpeed;
+	private final int checkRate;
 	private Path path;
 	
 	/**
@@ -80,10 +80,8 @@ public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 			
 			double distance = goal.entity.getDistanceSq(target.getPosX(), target.getPosY(), target.getPosZ());
 			goal.path = attacker.getNavigator().pathfind(target, 0);
-			
-			if(attacker.getEntitySenses().canSee(target) && distance >= AnimatableGoal.getAttackReachSq(attacker, target)) {
-				return true;
-			}
+
+			return attacker.getEntitySenses().canSee(target) && distance >= AnimatableGoal.getAttackReachSq(attacker, target);
 		}
 		return false;
 	}

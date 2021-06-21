@@ -29,10 +29,10 @@ public class CABlocks {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
 	public static final DeferredRegister<Item> ITEM_BLOCKS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
 	
-	private static IPositionPredicate isFalse = (state, reader, pos) -> false;
+	private static final IPositionPredicate isFalse = (state, reader, pos) -> false;
 //	private static IPositionPredicate isTrue = (state, reader, pos) -> true; --Unused
 	
-	private static Function<Integer, ToIntFunction<BlockState>> lightValueFunction = (lightValue) -> (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
+	private static final Function<Integer, ToIntFunction<BlockState>> lightValueFunction = (lightValue) -> (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
 	
 	// SHINY FOODS
 	public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon", () -> new GoldenMelonBlock(Block.Properties.from(Blocks.MELON).harvestTool(ToolType.AXE)), CAItemGroups.foodItemGroup);
@@ -129,20 +129,12 @@ public class CABlocks {
 	public static final RegistryObject<TorchBlock> EXTREME_TORCH = registerBlock("extreme_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 15).sound(SoundType.WOOD), ParticleTypes.FLAME), null, false);
 	public static final RegistryObject<WallTorchBlock> WALL_EXTREME_TORCH = registerBlock("wall_extreme_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 15).sound(SoundType.WOOD).lootFrom(() -> CABlocks.EXTREME_TORCH.get()), ParticleTypes.FLAME), null, false);
 
-	// MOB HEADS
-//	public static final RegistryObject<CASkullBlock> HUSK_HEAD = BLOCKS.register("husk_head", () -> new CASkullBlock(CASkullBlock.Types.HUSK, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0F)));
-//	public static final RegistryObject<CASkullWallBlock> HUSK_WALL_HEAD = BLOCKS.register("husk_wall_head", () -> new CASkullWallBlock(CASkullBlock.Types.HUSK, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0F).lootFrom(HUSK_HEAD)));
-
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
 		return registerBlock(name, supplier, itemGroup, true);
 	}
 	
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, boolean generateItem) {
 		return registerBlock(name, supplier, itemGroup, 64, generateItem);
-	}
-	
-	public static <B extends Block> RegistryObject<B> registerBlockAlt(String name, Supplier<? extends B> supplier, boolean generateItem) {
-		return registerBlockAlt(name, supplier, generateItem);
 	}
 	
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, int stackSize) {

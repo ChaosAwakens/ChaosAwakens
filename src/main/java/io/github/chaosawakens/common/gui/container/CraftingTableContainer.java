@@ -38,7 +38,7 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 	private final CraftResultInventory craftResult = new CraftResultInventory();
 	private final IWorldPosCallable worldPosCallable;
 	private final PlayerEntity player;
-	private Block craftingTable;
+	private final Block craftingTable;
 	
 	public CraftingTableContainer(int id, PlayerInventory playerInventory, Block craftingTable) {
 		this(id, playerInventory, IWorldPosCallable.DUMMY, craftingTable);

@@ -15,7 +15,7 @@ import net.minecraft.util.Hand;
  */
 public class AnimatableMeleeGoal extends AnimatableGoal {
 	
-	private double animationLength;
+	private final double animationLength;
 	
 	/**
 	 * 

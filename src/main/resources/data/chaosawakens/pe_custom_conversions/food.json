@@ -1,9 +1,11 @@
 {
   "values": {
     "before": {
-      "#chaosawakens:seeds": 16,
-      "#chaosawakens:plants": 64,
-      "#chaosawakens:fish": 64
+      "#chaosawakens:seeds": 32,
+      "#chaosawakens:plants": 96,
+      "#chaosawakens:fish": 96,
+      "chaosawakens:peacock_leg": 128,
+      "chaosawakens:crab_meat": 128
     }
   }
 }

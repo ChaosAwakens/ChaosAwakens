@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.tileentities.CASkullTileEntity;
 import io.github.chaosawakens.common.blocks.tileentities.CrystalFurnaceTileEntity;
 import io.github.chaosawakens.common.blocks.tileentities.spawner.TileEntityEntSpawner;
 import io.github.chaosawakens.common.blocks.tileentities.spawner.TileEntityHerculesBeetleSpawner;
@@ -19,9 +18,6 @@ public class CATileEntities {
 	
 	public static final RegistryObject<TileEntityType<TileEntityHerculesBeetleSpawner>> HERCULES_BEETLE_SPAWNER = TILE_ENTITIES.register("hercules_beetle_spawner",
 			() -> TileEntityType.Builder.create(TileEntityHerculesBeetleSpawner::new, CABlocks.SPAWNER_BLOCK.get()).build(null));
-	
-//	public static final RegistryObject<TileEntityType<CASkullTileEntity>> CA_SKULL = TILE_ENTITIES.register("ca_skull",
-//			() -> TileEntityType.Builder.create(CASkullTileEntity::new, CABlocks.HUSK_HEAD.get(), CABlocks.HUSK_WALL_HEAD.get()).build(null));
 	
 	public static final RegistryObject<TileEntityType<CrystalFurnaceTileEntity>> CRYSTAL_FURNACE = TILE_ENTITIES.register("crystal_furnace",
 			() -> TileEntityType.Builder.create(CrystalFurnaceTileEntity::new, CABlocks.CRYSTAL_FURNACE.get()).build(null));

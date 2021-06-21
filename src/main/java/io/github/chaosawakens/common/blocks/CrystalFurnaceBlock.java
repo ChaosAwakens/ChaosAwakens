@@ -40,7 +40,7 @@ public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if (stateIn.get(LIT)) {
             double d0 = (double)pos.getX() + 0.5D;
-            double d1 = (double)pos.getY();
+            double d1 = pos.getY();
             double d2 = (double)pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
                 worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
