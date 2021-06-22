@@ -8,6 +8,7 @@ import io.github.chaosawakens.common.EntitySetAttributeEventSubscriber;
 import io.github.chaosawakens.common.EventHandler;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
+import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.CAAdvancementProvider;
@@ -70,15 +71,15 @@ public class ChaosAwakens {
 		CAVillagers.POI_TYPES.register(eventBus);
 		CAVillagers.PROFESSIONS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
-		
+
 		if (ModList.get().isLoaded("projecte")) {
 			CAEMCValues.init();
 		}
 
-//		if (ModList.get().isLoaded("jeresources")) {
-//			CAJER.init();
-//		}
-		
+		if (ModList.get().isLoaded("jeresources")) {
+			CAJER.init();
+		}
+
 		//Register to the forge event bus
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
