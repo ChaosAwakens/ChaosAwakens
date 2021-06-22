@@ -88,12 +88,16 @@ public class BiomeLoadEventSubscriber {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();
 			
 			RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
-			
+
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addOverworldOres(gen);
+			}
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)) {
+				if (CAConfig.COMMON.enableOreGen.get())
+					addMountainOres(gen);
 			}
 
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER)) {
@@ -104,10 +108,16 @@ public class BiomeLoadEventSubscriber {
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
 				gen.getStructures().add(() -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 			}
-			
+
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addMiningDimOres(gen);
+				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
+			}
+
+			if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_DIMENSION)) {
+				if (CAConfig.COMMON.enableOreGen.get())
+					addVillageDimOres(gen);
 				gen.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 			}
 			
@@ -128,7 +138,7 @@ public class BiomeLoadEventSubscriber {
 					break;
 			}
 		}
-		
+
 		private static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableOreRubyGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_RUBY_LAVA);
 			if (CAConfig.COMMON.enableOreAmethystGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_AMETHYST);
@@ -144,7 +154,6 @@ public class BiomeLoadEventSubscriber {
 			}
 			if (CAConfig.COMMON.enableTrollOreGen.get()) {
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RED_ANT_INFESTED);
-				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.TERMITE_INFESTED);
 			}
 			if (CAConfig.COMMON.spawnDzOresInOverworld.get() && CAConfig.COMMON.enableDzMineralOreGen.get()) {
 				if (CAConfig.COMMON.enableOreCopperGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_COPPER);
@@ -153,6 +162,19 @@ public class BiomeLoadEventSubscriber {
 				if (CAConfig.COMMON.enableOrePlatinumGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_PLATINUM);
 				if (CAConfig.COMMON.enableOreSunstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_SUNSTONE);
 				if (CAConfig.COMMON.enableOreBloodstoneGen.get()) gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_BLOODSTONE);
+			}
+			if (CAConfig.COMMON.enableNestGen.get()) {
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BROWN_ANT_NEST);
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RAINBOW_ANT_NEST);
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RED_ANT_NEST);
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.UNSTABLE_ANT_NEST);
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.TERMITE_NEST);
+			}
+		}
+
+		private static void addMountainOres(BiomeGenerationSettingsBuilder gen) {
+			if (CAConfig.COMMON.enableTrollOreGen.get()) {
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.TERMITE_INFESTED);
 			}
 		}
 
@@ -188,13 +210,38 @@ public class BiomeLoadEventSubscriber {
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_RED_ANT_INFESTED);
 				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_TERMITE_INFESTED);
 			}
+			if (CAConfig.COMMON.enableNestGen.get()) {
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RED_ANT_NEST);
+			}
+		}
+
+		private static void addVillageDimOres(BiomeGenerationSettingsBuilder gen) {
+			if (CAConfig.COMMON.enableNestGen.get()) {
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RAINBOW_ANT_NEST);
+			}
 		}
 		
 		private static void addCrystalDimOres(BiomeGenerationSettingsBuilder gen) {
 			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_ORE_ENERGY);
 			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
 			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_PINK_TOURMALINE);
+
+//			if (CAConfig.COMMON.enableNestGen.get()) {
+//				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_TERMITE_NEST);
+//			}
 		}
+
+//		private static void addDangerDimOres(BiomeGenerationSettingsBuilder gen) {
+//			if (CAConfig.COMMON.enableNestGen.get()) {
+//				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.UNSTABLE_ANT_NEST);
+//			}
+//		}
+
+//		private static void addUtopiaDimOres(BiomeGenerationSettingsBuilder gen) {
+//			if (CAConfig.COMMON.enableNestGen.get()) {
+//				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BROWN_ANT_NEST);
+//			}
+//		}
 	}
 	
 }

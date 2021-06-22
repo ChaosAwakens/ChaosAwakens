@@ -101,6 +101,8 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableTrollOreGen;
 		public final ConfigValue<Boolean> enableDzMineralOreGen;
 		public final ConfigValue<Boolean> spawnDzOresInOverworld;
+		public final ConfigValue<Boolean> enableNestGen;
+
 		public final ConfigValue<Boolean> enableOreRubyGen;
 		public final ConfigValue<Boolean> enableOreTigersEyeGen;
 		public final ConfigValue<Boolean> enableOreAmethystGen;
@@ -270,6 +272,7 @@ public class CAConfig {
 			enableTrollOreGen = builder.define("Enable ant infested ore generation", true);
 			enableDzMineralOreGen = builder.define("Enable DangerZone material ore generation", true);
 			spawnDzOresInOverworld = builder.define("Will DZ ores spawn in the Overworld?", false);
+			enableNestGen = builder.define("Will Nests spawn in the Overworld or the Ant Dimensions?", true);
 			builder.pop();
 			builder.push("Tools/Weapons");
 			enableAutoEnchanting = builder.comment("If disabled, auto-enchanted items will be able to be enchanted manually.").define("Auto-enchant specific tools and weapons", true);
