@@ -77,11 +77,13 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("plants_corn", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN_GROWN), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
 	public static final ConfiguredFeature<?, ?> TOMATO_PATCH = register("plants_tomatoes", Feature.RANDOM_PATCH.withConfiguration((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TOMATO_GROWN), new ColumnBlockPlacer(2, 4))).tries(20).xSpread(4).ySpread(0).zSpread(4).preventProjection().build()));
 
-	public static final ConfiguredFeature<?, ?> BROWN_ANT_NEST = register("nest_brown_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.BROWN_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(60, 30))));
-	public static final ConfiguredFeature<?, ?> RAINBOW_ANT_NEST = register("nest_rainbow_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.RAINBOW_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(60, 30))));
-	public static final ConfiguredFeature<?, ?> RED_ANT_NEST = register("nest_red_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.RED_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(60, 30))));
-	public static final ConfiguredFeature<?, ?> UNSTABLE_ANT_NEST = register("nest_unstable_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.UNSTABLE_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(60, 30))));
-	public static final ConfiguredFeature<?, ?> TERMITE_NEST = register("nest_termite", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.TERMITE_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(60, 30))));
+	public static final ConfiguredFeature<?, ?> BROWN_ANT_NEST = register("nest_brown_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.BROWN_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(80, 50))));
+	public static final ConfiguredFeature<?, ?> RAINBOW_ANT_NEST = register("nest_rainbow_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.RAINBOW_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(80, 50))));
+	public static final ConfiguredFeature<?, ?> RED_ANT_NEST = register("nest_red_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.RED_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(80, 50))));
+	public static final ConfiguredFeature<?, ?> UNSTABLE_ANT_NEST = register("nest_unstable_ant", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.UNSTABLE_ANT_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(80, 50))));
+	public static final ConfiguredFeature<?, ?> TERMITE_NEST = register("nest_termite", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.GRASS_BLOCK, States.TERMITE_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(80, 50))));
+
+//	public static final ConfiguredFeature<?, ?> CRYSTAL_TERMITE_NEST = register("nest_crystal_termite", Feature.EMERALD_ORE.withConfiguration(new ReplaceBlockConfig(States.CRYSTAL_GRASS_BLOCK, States.CRYSTAL_TERMITE_NEST)).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(80, 50))));
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		CommonSetupEvent.configFeatures.add( new FeatureWrapper(key, configuredFeature));
@@ -123,6 +125,9 @@ public class CAConfiguredFeatures {
 		protected static final BlockState RED_ANT_NEST = CABlocks.RED_ANT_NEST.get().getDefaultState();
 		protected static final BlockState UNSTABLE_ANT_NEST = CABlocks.UNSTABLE_ANT_NEST.get().getDefaultState();
 		protected static final BlockState TERMITE_NEST = CABlocks.TERMITE_NEST.get().getDefaultState();
+
+//		protected static final BlockState CRYSTAL_GRASS_BLOCK = CABlocks.CRYSTAL_GRASS_BLOCK.get().getDefaultState();
+//		protected static final BlockState CRYSTAL_TERMITE_NEST = CABlocks.CRYSTAL_TERMITE_NEST.get().getDefaultState();
 	}
 	
 	public static final class RuleTests {
