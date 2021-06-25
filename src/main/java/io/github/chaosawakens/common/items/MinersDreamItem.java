@@ -16,8 +16,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class MinersDreamItem extends Item {
-	public int[] size;
-	public int torchDistance;
+	private int[] size;
+	private static final int HOLE_LENGTH = 36;
+	private static final int HOLE_WIDTH = 9;
+	private static final int HOLE_HEIGHT = 8;
+	private int torchDistance;
 
 	public MinersDreamItem(Properties builderIn, int[] sizeIn, int torchDistanceIn) {
 		super(builderIn);
@@ -27,49 +30,47 @@ public class MinersDreamItem extends Item {
 	
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
-		World world = context.getWorld();
-		BlockPos pos = context.getPos();
-		PlayerEntity playerIn = context.getPlayer();
 		Direction direction = context.getPlacementHorizontalFacing();
-
-		BlockState torchBlock = world.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION_LEGACY ? CABlocks.CRYSTAL_TORCH.get().getDefaultState() : CABlocks.EXTREME_TORCH.get().getDefaultState();
-		BlockState supportBlock = world.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION_LEGACY ? CABlocks.KYANITE.get().getDefaultState() : Blocks.COBBLESTONE.getDefaultState();
-
-		int conX = pos.getX(), conY = (int) playerIn.getPosY(), conZ = pos.getZ();
-
 		if (direction == Direction.UP || direction == Direction.DOWN) return ActionResultType.FAIL;
+		
+		World worldIn = context.getWorld();
+		BlockPos breakPos = context.getPos();
+		PlayerEntity playerIn = context.getPlayer();
+
+		BlockState torchBlock = worldIn.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION_LEGACY ? CABlocks.CRYSTAL_TORCH.get().getDefaultState() : CABlocks.EXTREME_TORCH.get().getDefaultState();
+		BlockState supportBlock = worldIn.getDimensionKey() == CADimensions.CRYSTAL_DIMENSION_LEGACY ? CABlocks.KYANITE.get().getDefaultState() : Blocks.COBBLESTONE.getDefaultState();
+		
 		int deltaX = direction.getDirectionVec().getX(), deltaZ = direction.getDirectionVec().getZ();
 
-		if (!world.isRemote) {
-
+		if (!worldIn.isRemote) {
 			playerIn.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
-			world.addParticle(ParticleTypes.EXPLOSION.getType(), conX, conY, conZ, 0.25F, 0.25F, 0.25F);
+			worldIn.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F, 0.25F, 0.25F);
 
-			for (int i = 0; i < size[1]; i++) {
-				for (int j = 0; j < size[2]; j++) {
-					for (int k = -size[0]; k <= size[0]; k++) {
+			for (int i = 0; i < HOLE_HEIGHT; i++) {
+				for (int j = 0; j < HOLE_LENGTH; j++) {
+					for (int k = -HOLE_WIDTH/2; k <= HOLE_WIDTH/2; k++) {
 
-						int x2 = conX + j * deltaX + k * deltaZ;
-						int z2 = conZ + j * deltaZ + k * deltaX;
-						BlockPos pos2 = new BlockPos(x2, conY + i, z2);
-						BlockState bid = world.getBlockState(pos2);
+						int x2 = breakPos.getX() + j * deltaX + k * deltaZ;
+						int z2 = breakPos.getZ() + j * deltaZ + k * deltaX;
+						BlockPos pos2 = new BlockPos(x2, breakPos.getY() + i, z2);
+						BlockState bid = worldIn.getBlockState(pos2);
 
 						if (bid.getBlock().isIn(CATags.MINERS_DREAM_MINEABLE)) {
-							world.setBlockState(pos2, Blocks.AIR.getDefaultState());
+							worldIn.removeBlock(pos2, false);
 						}
 						if (i == size[1] - 1) {
-							pos2 = new BlockPos(x2, conY + i + 1, z2);
-							bid = world.getBlockState(pos2);
-							if (!bid.isIn(CATags.AIR_BLOCKS) && bid.isIn(CATags.MINERS_DREAM_UNSAFE)) world.setBlockState(pos2, supportBlock);
-							else if (bid.isIn(CATags.AIR_BLOCKS)) world.setBlockState(pos2, Blocks.AIR.getDefaultState());
+							pos2 = new BlockPos(x2, breakPos.getY() + i + 1, z2);
+							bid = worldIn.getBlockState(pos2);
+							if (!bid.isIn(CATags.AIR_BLOCKS) && bid.isIn(CATags.MINERS_DREAM_UNSAFE)) worldIn.setBlockState(pos2, supportBlock);
+							else if (bid.isIn(CATags.AIR_BLOCKS)) worldIn.setBlockState(pos2, Blocks.AIR.getDefaultState());
 						}
 					}
 				}
 			}
 			for (int l = 0; l < size[2]; l += this.torchDistance) {
-				BlockPos pos3 = new BlockPos(conX + l * deltaX, conY, conZ + l * deltaZ);
-				BlockPos pos4 = new BlockPos(conX + l * deltaX, conY - 1, conZ + l * deltaZ);
-				if (world.getBlockState(pos4).getBlock().isIn(CATags.MINERS_DREAM_TORCH_SAFE) && world.getBlockState(pos3).getBlock().isIn(CATags.AIR_BLOCKS)) world.setBlockState(pos3, torchBlock);
+				BlockPos pos3 = new BlockPos(breakPos.getX() + l * deltaX, breakPos.getY(), breakPos.getZ() + l * deltaZ);
+				BlockPos pos4 = new BlockPos(breakPos.getX() + l * deltaX, breakPos.getY() - 1, breakPos.getZ() + l * deltaZ);
+				if (worldIn.getBlockState(pos4).getBlock().isIn(CATags.MINERS_DREAM_TORCH_SAFE) && worldIn.getBlockState(pos3).getBlock().isIn(CATags.AIR_BLOCKS)) worldIn.setBlockState(pos3, torchBlock);
 			}
 			context.getPlayer().addStat(Stats.ITEM_USED.get(this));
 			context.getItem().shrink(1);
