@@ -1,5 +1,5 @@
 # ChaosAwakens
-ChaosAwakens is a successor mod for OreSpawn, being a from-the-grounds-up remake. This is the Branch for the 1.16.5 Forge version
+ChaosAwakens is a remaster of the old Minecraft/DangerZone mod OreSpawn, built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
 
 **Project Lead:** TheyCallMeRandom
 
