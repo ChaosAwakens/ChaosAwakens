@@ -32,7 +32,7 @@ public class EnchantedAxeItem extends AxeItem implements IPreEnchanted {
 	
 	@Override
 	public boolean hasEffect(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get();
+		return CAConfig.COMMON.enableAutoEnchanting.get() || stack.isEnchanted();
 	}
 
 	@Override
