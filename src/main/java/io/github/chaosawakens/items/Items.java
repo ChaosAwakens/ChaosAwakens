@@ -16,6 +16,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import static io.github.chaosawakens.items.util.ToolMaterials.*;
+import static io.github.chaosawakens.items.util.ArmorMaterials.*;
+import static io.github.chaosawakens.ChaosAwakens.config;
 
 public class Items implements ModInitializer {
 
@@ -62,14 +64,64 @@ public class Items implements ModInitializer {
     public static final Item DRUID_KEY;
     public static final Item SALT;
     public static final ToolItem ULTIMATE_SWORD;
-    //public static final ToolItem ULTIMATE_SHOVEL;
-    //public static final ToolItem ULTIMATE_PICKAXE;
-    //public static final ToolItem ULTIMATE_AXE;
-    //public static final ToolItem ULTIMATE_HOE;
-    //public static final Item ULTIMATE_HELMET;
-    //public static final Item ULTIMATE_CHESTPLATE;
-    //public static final Item ULTIMATE_LEGGINGS;
-    //public static final Item ULTIMATE_BOOTS;
+    public static final ToolItem ULTIMATE_SHOVEL;
+    public static final ToolItem ULTIMATE_PICKAXE;
+    public static final ToolItem ULTIMATE_AXE;
+    public static final ToolItem ULTIMATE_HOE;
+    public static final Item ULTIMATE_HELMET;
+    public static final Item ULTIMATE_CHESTPLATE;
+    public static final Item ULTIMATE_LEGGINGS;
+    public static final Item ULTIMATE_BOOTS;
+    public static final ToolItem EMERALD_SWORD;
+    public static final ToolItem EMERALD_SHOVEL;
+    public static final ToolItem EMERALD_PICKAXE;
+    public static final ToolItem EMERALD_AXE;
+    public static final ToolItem EMERALD_HOE;
+    public static final Item EMERALD_HELMET;
+    public static final Item EMERALD_CHESTPLATE;
+    public static final Item EMERALD_LEGGINGS;
+    public static final Item EMERALD_BOOTS;
+    public static final ToolItem RUBY_SWORD;
+    public static final ToolItem RUBY_SHOVEL;
+    public static final ToolItem RUBY_PICKAXE;
+    public static final ToolItem RUBY_AXE;
+    public static final ToolItem RUBY_HOE;
+    public static final Item RUBY_HELMET;
+    public static final Item RUBY_CHESTPLATE;
+    public static final Item RUBY_LEGGINGS;
+    public static final Item RUBY_BOOTS;
+    public static final ToolItem AMETHYST_SWORD;
+    public static final ToolItem AMETHYST_SHOVEL;
+    public static final ToolItem AMETHYST_PICKAXE;
+    public static final ToolItem AMETHYST_AXE;
+    public static final ToolItem AMETHYST_HOE;
+    public static final Item AMETHYST_HELMET;
+    public static final Item AMETHYST_CHESTPLATE;
+    public static final Item AMETHYST_LEGGINGS;
+    public static final Item AMETHYST_BOOTS;
+    public static final ToolItem TIGERS_EYE_SWORD;
+    public static final ToolItem TIGERS_EYE_SHOVEL;
+    public static final ToolItem TIGERS_EYE_PICKAXE;
+    public static final ToolItem TIGERS_EYE_AXE;
+    public static final ToolItem TIGERS_EYE_HOE;
+    public static final Item TIGERS_EYE_HELMET;
+    public static final Item TIGERS_EYE_CHESTPLATE;
+    public static final Item TIGERS_EYE_LEGGINGS;
+    public static final Item TIGERS_EYE_BOOTS;
+    public static final ToolItem EXPERIENCE_SWORD;
+    public static final Item EXPERIENCE_HELMET;
+    public static final Item EXPERIENCE_CHESTPLATE;
+    public static final Item EXPERIENCE_LEGGINGS;
+    public static final Item EXPERIENCE_BOOTS;
+    public static final Item LAVA_EEL_HELMET;
+    public static final Item LAVA_EEL_CHESTPLATE;
+    public static final Item LAVA_EEL_LEGGINGS;
+    public static final Item LAVA_EEL_BOOTS;
+    public static final Item LAPIS_LAZULI_HELMET;
+    public static final Item LAPIS_LAZULI_CHESTPLATE;
+    public static final Item LAPIS_LAZULI_LEGGINGS;
+    public static final Item LAPIS_LAZULI_BOOTS;
+    public static final ToolItem NIGHTMARE_SWORD;
     public static final Item ENT_EGG;
     public static final Item RED_ANT_EGG;
     public static final Item BROWN_ANT_EGG;
@@ -89,23 +141,20 @@ public class Items implements ModInitializer {
     public static ArmorItem register(String identifier, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot) {
         return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new ArmorItem(armorMaterial, equipmentSlot, new FabricItemSettings().group(ItemGroup.COMBAT)));
     }
-    public static HoeItem registerHoe(String identifier, ToolMaterial toolMaterial, Config.Default config) {
-        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new GenericHoeItem(toolMaterial, (int) config.hoeDamage, (float) config.hoeAttackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
+    public static HoeItem registerHoe(String identifier, ToolMaterial toolMaterial, float damage, float attackSpeed) {
+        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new GenericHoeItem(toolMaterial, (int) damage, (float) attackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
     }
-    public static AxeItem registerAxe(String identifier, ToolMaterial toolMaterial, Config.Default config) {
-        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new GenericAxeItem(toolMaterial, (float) config.axeDamage, (float) config.axeAttackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
+    public static AxeItem registerAxe(String identifier, ToolMaterial toolMaterial, float damage, float attackSpeed) {
+        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new GenericAxeItem(toolMaterial, (float) damage, (float) attackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
     }
-    public static PickaxeItem registerPickaxe(String identifier, ToolMaterial toolMaterial, Config.Default config) {
-        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new GenericPickaxeItem(toolMaterial, (int) config.pickaxeDamage, (float) config.pickaxeAttackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
+    public static PickaxeItem registerPickaxe(String identifier, ToolMaterial toolMaterial, float damage, float attackSpeed) {
+        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new GenericPickaxeItem(toolMaterial, (int) damage, (float) attackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
     }
-    public static ShovelItem registerShovel(String identifier, ToolMaterial toolMaterial, Config.Default config) {
-        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new ShovelItem(toolMaterial, (float) config.shovelDamage, (float) config.shovelAttackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
+    public static ShovelItem registerShovel(String identifier, ToolMaterial toolMaterial, float damage, float attackSpeed) {
+        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new ShovelItem(toolMaterial, (float) damage, (float) attackSpeed, new FabricItemSettings().group(ItemGroup.TOOLS)));
     }
-    public static SwordItem registerSword(String identifier, ToolMaterial toolMaterial, Config.Default config) {
-        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new SwordItem(toolMaterial, (int) config.swordDamage, (float) config.swordAttackSpeed, new FabricItemSettings().group(ItemGroup.COMBAT)));
-    }
-    public static SwordItem registerSword(String identifier, ToolMaterial toolMaterial, int damage, float attackSpeed) {
-        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new SwordItem(toolMaterial, damage, attackSpeed, new FabricItemSettings().group(ItemGroup.COMBAT)));
+    public static SwordItem registerSword(String identifier, ToolMaterial toolMaterial, float damage, float attackSpeed) {
+        return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new SwordItem(toolMaterial, (int) damage, attackSpeed, new FabricItemSettings().group(ItemGroup.COMBAT)));
     }
     public static Item registerFood(String identifier, FoodComponent foodComponent) {
         return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new Item(new FabricItemSettings().group(ItemGroup.FOOD).food(foodComponent)));
@@ -169,13 +218,65 @@ public class Items implements ModInitializer {
         ALUMINIUM_NUGGET = register("aluminum_nugget");
         DRUID_KEY = register("druid_key");
         SALT = register("salt");
-        ULTIMATE_SWORD = registerSword("ultimate_sword", ULTIMATE_TOOL_MATERIAL, new Config.Ultimate());
-
-
-
-
-
-
+        ULTIMATE_SWORD = registerSword("ultimate_sword", ULTIMATE_TOOL_MATERIAL, config.ultimate.swordDamage, config.ultimate.swordAttackSpeed);
+        ULTIMATE_SHOVEL = registerShovel("ultimate_shovel", ULTIMATE_TOOL_MATERIAL, config.ultimate.shovelDamage, config.ultimate.shovelAttackSpeed);
+        ULTIMATE_PICKAXE = registerPickaxe("ultimate_pickaxe", ULTIMATE_TOOL_MATERIAL, config.ultimate.pickaxeDamage, config.ultimate.pickaxeAttackSpeed);
+        ULTIMATE_AXE = registerAxe("ultimate_axe", ULTIMATE_TOOL_MATERIAL, config.ultimate.axeDamage, config.ultimate.axeAttackSpeed);
+        ULTIMATE_HOE = registerHoe("ultimate_hoe", ULTIMATE_TOOL_MATERIAL, config.ultimate.hoeDamage, config.ultimate.hoeAttackSpeed);
+        ULTIMATE_HELMET = register("ultimate_helmet", ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        ULTIMATE_CHESTPLATE = register("ultimate_chestplate", ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        ULTIMATE_LEGGINGS = register("ultimate_leggings", ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        ULTIMATE_BOOTS = register("ultimate_boots", ULTIMATE_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        EMERALD_SWORD = registerSword("emerald_sword", EMERALD_TOOL_MATERIAL, config.emerald.swordDamage, config.emerald.swordAttackSpeed);
+        EMERALD_SHOVEL = registerShovel("emerald_shovel", EMERALD_TOOL_MATERIAL, config.emerald.shovelDamage, config.emerald.shovelAttackSpeed);
+        EMERALD_PICKAXE = registerPickaxe("emerald_pickaxe", EMERALD_TOOL_MATERIAL, config.emerald.pickaxeDamage, config.emerald.pickaxeAttackSpeed);
+        EMERALD_AXE = registerAxe("emerald_axe", EMERALD_TOOL_MATERIAL, config.emerald.axeDamage, config.emerald.axeAttackSpeed);
+        EMERALD_HOE = registerHoe("emerald_hoe", EMERALD_TOOL_MATERIAL, config.emerald.hoeDamage, config.emerald.hoeAttackSpeed);
+        EMERALD_HELMET = register("emerald_helmet", EMERALD_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        EMERALD_CHESTPLATE = register("emerald_chestplate", EMERALD_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        EMERALD_LEGGINGS = register("emerald_leggings", EMERALD_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        EMERALD_BOOTS = register("emerald_boots", EMERALD_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        RUBY_SWORD = registerSword("ruby_sword", RUBY_TOOL_MATERIAL, config.ruby.swordDamage, config.ruby.swordAttackSpeed);
+        RUBY_SHOVEL = registerShovel("ruby_shovel", RUBY_TOOL_MATERIAL, config.ruby.shovelDamage, config.ruby.shovelAttackSpeed);
+        RUBY_PICKAXE = registerPickaxe("ruby_pickaxe", RUBY_TOOL_MATERIAL, config.ruby.pickaxeDamage, config.ruby.pickaxeAttackSpeed);
+        RUBY_AXE = registerAxe("ruby_axe", RUBY_TOOL_MATERIAL, config.ruby.axeDamage, config.ruby.axeAttackSpeed);
+        RUBY_HOE = registerHoe("ruby_hoe", RUBY_TOOL_MATERIAL, config.ruby.hoeDamage, config.ruby.hoeAttackSpeed);
+        RUBY_HELMET = register("ruby_helmet", RUBY_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        RUBY_CHESTPLATE = register("ruby_chestplate", RUBY_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        RUBY_LEGGINGS = register("ruby_leggings", RUBY_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        RUBY_BOOTS = register("ruby_boots", RUBY_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        AMETHYST_SWORD = registerSword("amethyst_sword", AMETHYST_TOOL_MATERIAL, config.amethyst.swordDamage, config.amethyst.swordAttackSpeed);
+        AMETHYST_SHOVEL = registerShovel("amethyst_shovel", AMETHYST_TOOL_MATERIAL, config.amethyst.shovelDamage, config.amethyst.shovelAttackSpeed);
+        AMETHYST_PICKAXE = registerPickaxe("amethyst_pickaxe", AMETHYST_TOOL_MATERIAL, config.amethyst.pickaxeDamage, config.amethyst.pickaxeAttackSpeed);
+        AMETHYST_AXE = registerAxe("amethyst_axe", AMETHYST_TOOL_MATERIAL, config.amethyst.axeDamage, config.amethyst.axeAttackSpeed);
+        AMETHYST_HOE = registerHoe("amethyst_hoe", AMETHYST_TOOL_MATERIAL, config.amethyst.hoeDamage, config.amethyst.hoeAttackSpeed);
+        AMETHYST_HELMET = register("amethyst_helmet", AMETHYST_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        AMETHYST_CHESTPLATE = register("amethyst_chestplate", AMETHYST_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        AMETHYST_LEGGINGS = register("amethyst_leggings", AMETHYST_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        AMETHYST_BOOTS = register("amethyst_boots", AMETHYST_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        TIGERS_EYE_SWORD = registerSword("tigers_eye_sword", TIGERS_EYE_TOOL_MATERIAL, config.tigersEye.swordDamage, config.tigersEye.swordAttackSpeed);
+        TIGERS_EYE_SHOVEL = registerShovel("tigers_eye_shovel", TIGERS_EYE_TOOL_MATERIAL, config.tigersEye.shovelDamage, config.tigersEye.shovelAttackSpeed);
+        TIGERS_EYE_PICKAXE = registerPickaxe("tigers_eye_pickaxe", TIGERS_EYE_TOOL_MATERIAL, config.tigersEye.pickaxeDamage, config.tigersEye.pickaxeAttackSpeed);
+        TIGERS_EYE_AXE = registerAxe("tigers_eye_axe", TIGERS_EYE_TOOL_MATERIAL, config.tigersEye.axeDamage, config.tigersEye.axeAttackSpeed);
+        TIGERS_EYE_HOE = registerHoe("tigers_eye_hoe", TIGERS_EYE_TOOL_MATERIAL, config.tigersEye.hoeDamage, config.tigersEye.hoeAttackSpeed);
+        TIGERS_EYE_HELMET = register("tigers_eye_helmet", TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        TIGERS_EYE_CHESTPLATE = register("tigers_eye_chestplate", TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        TIGERS_EYE_LEGGINGS = register("tigers_eye_leggings", TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        TIGERS_EYE_BOOTS = register("tigers_eye_boots", TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        EXPERIENCE_SWORD = registerSword("experience_sword", EXPERIENCE_TOOL_MATERIAL, config.miscWeapons.experienceSwordDamage, config.miscWeapons.swordAttackSpeed);
+        EXPERIENCE_HELMET = register("experience_helmet", EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        EXPERIENCE_CHESTPLATE = register("experience_chestplate", EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        EXPERIENCE_LEGGINGS = register("experience_leggings", EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        EXPERIENCE_BOOTS = register("experience_boots", EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        LAVA_EEL_HELMET = register("lava_eel_helmet", LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        LAVA_EEL_CHESTPLATE = register("lava_eel_chestplate", LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        LAVA_EEL_LEGGINGS = register("lava_eel_leggings", LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        LAVA_EEL_BOOTS = register("lava_eel_boots", LAVA_EEL_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        LAPIS_LAZULI_HELMET = register("lapis_helmet", LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.HEAD);
+        LAPIS_LAZULI_CHESTPLATE = register("lapis_chestplate", LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.CHEST);
+        LAPIS_LAZULI_LEGGINGS = register("lapis_leggings", LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.LEGS);
+        LAPIS_LAZULI_BOOTS = register("lapis_boots", LAPIS_LAZULI_ARMOR_MATERIAL, EquipmentSlot.FEET);
+        NIGHTMARE_SWORD = registerSword("nightmare_sword", NIGHTMARE_TOOL_MATERIAL, config.miscWeapons.nightmareSwordDamage, config.miscWeapons.swordAttackSpeed);
         ENT_EGG = registerSpawnEgg("ent_spawn_egg", Entities.ENT);
         RED_ANT_EGG = registerSpawnEgg("red_ant_egg", Entities.ENT);
         BROWN_ANT_EGG = registerSpawnEgg("brown_ant_egg", Entities.ENT);

@@ -1,9 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "io.github.chaosawakens.chaosawakens.mixin",
+  "package": "io.github.chaosawakens.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "SpawnEggItemMixin"
   ],
   "client": [
   ],
