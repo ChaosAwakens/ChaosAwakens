@@ -6,11 +6,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.renderer.geo.GeoEntityRenderer;
+import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class EntEntityRenderer extends GeoEntityRenderer<EntEntity> {
@@ -18,8 +17,8 @@ public class EntEntityRenderer extends GeoEntityRenderer<EntEntity> {
     private VertexConsumerProvider vertexConsumerProvider;
     private EntEntity entEntity;
 
-    public EntEntityRenderer(EntityRenderDispatcher renderManager) {
-        super(renderManager, new EntEntityModel());
+    public EntEntityRenderer(EntityRendererFactory.Context ctx) {
+        super(ctx, new EntEntityModel());
         this.shadowRadius = 0.5f;
     }
 
@@ -33,7 +32,7 @@ public class EntEntityRenderer extends GeoEntityRenderer<EntEntity> {
 
     @Override
     public Identifier getTextureLocation(EntEntity instance) {
-        return new Identifier(ChaosAwakens.modId, "textures/entity/ent.png");
+        return new Identifier(ChaosAwakens.modID, "textures/entity/ent.png");
     }
 
     @Override

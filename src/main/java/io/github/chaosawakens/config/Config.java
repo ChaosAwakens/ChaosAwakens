@@ -4,7 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-@me.shedaniel.autoconfig.annotation.Config(name = ChaosAwakens.modId)
+@me.shedaniel.autoconfig.annotation.Config(name = ChaosAwakens.modID)
 public class Config implements ConfigData {
     @ConfigEntry.Category("itemstats")
     @ConfigEntry.Gui.PrefixText
@@ -31,40 +31,35 @@ public class Config implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public Misc misc = new Misc();
 
-    public static class Ultimate {
-        public float ultimateSwordDamage = 40.0f;
-        public float ultimateAxeDamage = 42.0f;
-        public float ultimatePickaxeDamage = 38.0f;
-        public float ultimateShovelDamage = 38.5f;
-        public float ultimateHoeDamage = 1.0f;
+    public static class Ultimate extends Default {
+        public float swordDamage = 40.0f;
+        public float axeDamage = 42.0f;
+        public float pickaxeDamage = 38.0f;
+        public float shovelDamage = 38.5f;
     }
-    public static class Emerald {
-        public float emeraldSwordDamage = 10.0f;
-        public float emeraldAxeDamage = 12.0f;
-        public float emeraldPickaxeDamage = 8.0f;
-        public float emeraldShovelDamage = 8.5f;
-        public float emeraldHoeDamage = 1.0f;
+    public static class Emerald extends Default {
+        public float swordDamage = 10.0f;
+        public float axeDamage = 12.0f;
+        public float pickaxeDamage = 8.0f;
+        public float shovelDamage = 8.5f;
     }
-    public static class Ruby {
-        public float rubySwordDamage = 20.0f;
-        public float rubyAxeDamage = 22.0f;
-        public float rubyPickaxeDamage = 18.0f;
-        public float rubyShovelDamage = 18.5f;
-        public float rubyHoeDamage = 1.0f;
+    public static class Ruby extends Default {
+        public float swordDamage = 20.0f;
+        public float axeDamage = 22.0f;
+        public float pickaxeDamage = 18.0f;
+        public float shovelDamage = 18.5f;
     }
-    public static class Amethyst {
-        public float amethystSwordDamage = 15.0f;
-        public float amethystAxeDamage = 17.0f;
-        public float amethystPickaxeDamage = 13.0f;
-        public float amethystShovelDamage = 13.5f;
-        public float amethystHoeDamage = 1.0f;
+    public static class Amethyst extends Default {
+        public float swordDamage = 15.0f;
+        public float axeDamage = 17.0f;
+        public float pickaxeDamage = 13.0f;
+        public float shovelDamage = 13.5f;
     }
-    public static class TigersEye {
-        public float tigersEyeSwordDamage = 12.0f;
-        public float tigersEyeAxeDamage = 14.0f;
-        public float tigersEyePickaxeDamage = 10.0f;
-        public float tigersEyeShovelDamage = 10.5f;
-        public float tigersEyeHoeDamage = 1.0f;
+    public static class TigersEye extends Default {
+        public float swordDamage = 12.0f;
+        public float axeDamage = 14.0f;
+        public float pickaxeDamage = 10.0f;
+        public float shovelDamage = 10.5f;
     }
     public static class Misc {
         public float prismaticReaperDamage = 29.0f;
@@ -76,5 +71,16 @@ public class Config implements ConfigData {
         public float experienceSwordDamage = 10.0f;
     }
 
-
+    public static class Default {
+        public float swordDamage = 10.0f;
+        public float swordAttackSpeed = -2.4f;
+        public float axeDamage = 12.0f;
+        public float axeAttackSpeed = -3.0f;
+        public float pickaxeDamage = 8.0f;
+        public float pickaxeAttackSpeed = -2.8f;
+        public float shovelDamage = 8.5f;
+        public float shovelAttackSpeed = -3.0f;
+        public float hoeDamage = 1.0f;
+        public float hoeAttackSpeed = 0;
+    }
 }

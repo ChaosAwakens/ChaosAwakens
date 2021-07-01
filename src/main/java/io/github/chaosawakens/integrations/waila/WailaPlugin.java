@@ -1,7 +1,7 @@
 package io.github.chaosawakens.integrations.waila;
 
-import io.github.chaosawakens.blocks.custom.RedAntInfestedOre;
-import io.github.chaosawakens.blocks.custom.TermiteInfestedOre;
+import io.github.chaosawakens.blocks.RedAntInfestedOre;
+import io.github.chaosawakens.blocks.TermiteInfestedOre;
 import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import net.fabricmc.api.EnvType;

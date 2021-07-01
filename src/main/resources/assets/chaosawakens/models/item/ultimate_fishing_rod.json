@@ -1,0 +1,14 @@
+{
+    "parent": "item/handheld_rod",
+    "textures": {
+        "layer0": "chaosawakens:item/ultimate_fishing_rod"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "cast": 1
+            },
+            "model": "chaosawakens:item/ultimate_fishing_rod_cast"
+        }
+    ]
+}

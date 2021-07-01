@@ -2,33 +2,35 @@
   "schemaVersion": 1,
   "id": "chaosawakens",
   "version": "${version}",
-  "name": "Chaos Awakens",
+  "name": "ChaosAwakens",
   "description": "",
   "authors": [],
   "contact": {},
-  "license": "do i look like i know what a license is?",
+  "license": "All-Rights-Reserved",
   "icon": "assets/ChaosAwakens/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "io.github.chaosawakens.client.ClientInitializer"
+      "io.github.chaosawakens.ChaosAwakens"
     ],
     "main": [
-      "io.github.chaosawakens.entities.ModEntities",
       "io.github.chaosawakens.ChaosAwakens",
-      "io.github.chaosawakens.items.ModItems",
-      "io.github.chaosawakens.blocks.ModBlocks",
-      "io.github.chaosawakens.items.SpawnEggs",
-      "io.github.chaosawakens.worldgen.Initializer"
+      "io.github.chaosawakens.blocks.Blocks",
+      "io.github.chaosawakens.items.Items",
+      "io.github.chaosawakens.entities.Entities"
     ],
     "modmenu": [
       "io.github.chaosawakens.integrations.ModMenuIntegration"
     ]
   },
+  "mixins": [
+    "ChaosAwakens.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": ">=0.30.0",
-    "minecraft": "1.16.5"
+    "minecraft": "1.17.x",
+    "java": ">=16"
   },
   "waila:plugins": {
     "id": "chaosawakens:overrides",

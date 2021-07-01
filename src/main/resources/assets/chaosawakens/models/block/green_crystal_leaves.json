@@ -1,7 +1,6 @@
 {
-  "parent": "chaosawakens:block/crystal_leaves",
+  "parent": "minecraft:block/cross",
   "textures": {
-    "0": "chaosawakens:block/green_crystal_leaves",
-    "particle": "chaosawakens:block/green_crystal_leaves"
+    "cross": "chaosawakens:block/green_crystal_leaves"
   }
 }

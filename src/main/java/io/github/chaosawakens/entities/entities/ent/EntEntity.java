@@ -54,7 +54,9 @@ public class EntEntity extends HostileEntity implements IAnimatable {
         this.targetSelector.add(3, new FollowTargetGoal(this, PlayerEntity.class, true).setMaxTimeWithoutVisibility(30));
     }
 
-    public static DefaultAttributeContainer.Builder setCustomAttributes() {
+
+
+    public static DefaultAttributeContainer.Builder createLivingAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 150)
                 .add(EntityAttributes.GENERIC_ARMOR, 3.0D)
