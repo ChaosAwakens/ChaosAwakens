@@ -92,7 +92,7 @@ public class Config implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("dimensionworldgen")
     @ConfigEntry.Gui.CollapsibleObject
-    public Ant ant = new Ant();
+    public Dimension dimension = new Dimension();
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Category("dimensionworldgen")
@@ -284,7 +284,7 @@ public class Config implements ConfigData {
         @ConfigEntry.Gui.Tooltip
         public boolean rayGunExplosionFire = false;
     }
-    public static class Ant {
+    public static class Dimension {
         @ConfigEntry.Gui.Tooltip
         public boolean enableBrownAntTeleport = true;
         @ConfigEntry.Gui.Tooltip
@@ -295,6 +295,8 @@ public class Config implements ConfigData {
         public boolean enableUnstableAntTeleport = true;
         @ConfigEntry.Gui.Tooltip
         public boolean enableTermiteTeleport = true;
+        @ConfigEntry.Gui.Tooltip
+        public boolean enableButterflyTeleport = true;
     }
     public static class WorldGen {
         @ConfigEntry.Gui.Tooltip

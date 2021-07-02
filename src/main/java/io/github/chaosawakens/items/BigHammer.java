@@ -1,4 +1,4 @@
-package io.github.chaosawakens.items.util;
+package io.github.chaosawakens.items;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
