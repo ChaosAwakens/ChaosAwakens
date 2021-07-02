@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.ThrowRiderAttackGoal;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -10,6 +11,8 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -80,5 +83,15 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
+	}
+	
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return CASoundEvents.HERCULES_BEETLE_HURT.get();
+	}
+	
+	@Override
+	protected SoundEvent getDeathSound() {
+		return CASoundEvents.HERCULES_BEETLE_DEATH.get();
 	}
 }

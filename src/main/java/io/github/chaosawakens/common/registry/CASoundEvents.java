@@ -20,4 +20,9 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> EMERALD_GATOR_HURT = SOUND_EVENTS.register("entity.emerald_gator.hurt", () -> new SoundEvent( new ResourceLocation(ChaosAwakens.MODID, "entity.emerald_gator.hurt")));
 	public static final RegistryObject<SoundEvent> EMERALD_GATOR_DEATH = SOUND_EVENTS.register("entity.emerald_gator.death", () -> new SoundEvent( new ResourceLocation(ChaosAwakens.MODID, "entity.emerald_gator.death")));
 	
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_WALK = SOUND_EVENTS.register("entity.hercules_beetle.walk", () -> new SoundEvent( new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.walk")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_ATTACK = SOUND_EVENTS.register("entity.hercules_beetle.attack", () -> new SoundEvent( new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.attack")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_HURT = SOUND_EVENTS.register("entity.hercules_beetle.hurt", () -> new SoundEvent( new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.hurt")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DEATH = SOUND_EVENTS.register("entity.hercules_beetle.death", () -> new SoundEvent( new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.death")));
+	
 }
