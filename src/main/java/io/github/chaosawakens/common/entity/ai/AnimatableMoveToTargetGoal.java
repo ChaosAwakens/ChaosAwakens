@@ -32,7 +32,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 	@Override
 	public boolean shouldExecute() {
 		this.baseTick();
-		if(this.animationProgress/50000 < this.checkRate)return false;
+		if(this.animationProgress/10000 < this.checkRate)return false;
 		
 		this.animationProgress = 0;
 		return AnimatableMoveToTargetGoal.checkIfValid(this, this.entity, this.entity.getAttackTarget());

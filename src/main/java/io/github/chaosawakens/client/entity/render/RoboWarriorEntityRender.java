@@ -31,7 +31,7 @@ public class RoboWarriorEntityRender extends GeoEntityRenderer<RoboWarriorEntity
 
     @Override
     public RenderType getRenderType(RoboWarriorEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntitySmoothCutout(getTextureLocation(animatable));
+        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

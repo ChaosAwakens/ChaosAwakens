@@ -31,7 +31,7 @@ public class BeaverEntityRender extends GeoEntityRenderer<BeaverEntity> {
 
     @Override
     public RenderType getRenderType(BeaverEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntitySmoothCutout(getTextureLocation(animatable));
+        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

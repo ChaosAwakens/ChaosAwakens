@@ -31,7 +31,7 @@ public class BrownAntEntityRender extends GeoEntityRenderer<BrownAntEntity> {
 
     @Override
     public RenderType getRenderType(BrownAntEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntitySmoothCutout(getTextureLocation(animatable));
+        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

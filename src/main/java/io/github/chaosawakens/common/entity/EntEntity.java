@@ -56,7 +56,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
-		this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 10));
+		this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
 		this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3));
 		this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));

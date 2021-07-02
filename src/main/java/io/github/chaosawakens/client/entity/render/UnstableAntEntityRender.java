@@ -31,7 +31,7 @@ public class UnstableAntEntityRender extends GeoEntityRenderer<UnstableAntEntity
 
     @Override
     public RenderType getRenderType(UnstableAntEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntitySmoothCutout(getTextureLocation(animatable));
+        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

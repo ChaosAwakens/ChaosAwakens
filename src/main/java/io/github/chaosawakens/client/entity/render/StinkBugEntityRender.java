@@ -31,7 +31,7 @@ public class StinkBugEntityRender extends GeoEntityRenderer<StinkBugEntity> {
 
     @Override
     public RenderType getRenderType(StinkBugEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntitySmoothCutout(getTextureLocation(animatable));
+        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

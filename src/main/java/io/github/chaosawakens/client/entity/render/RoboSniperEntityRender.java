@@ -31,7 +31,7 @@ public class RoboSniperEntityRender extends GeoEntityRenderer<RoboSniperEntity> 
 
     @Override
     public RenderType getRenderType(RoboSniperEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntitySmoothCutout(getTextureLocation(animatable));
+        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

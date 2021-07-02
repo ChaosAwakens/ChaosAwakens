@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -65,7 +66,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		LivingEntity target = this.entity.getAttackTarget();
 		if(target != null) {
 			this.entity.faceEntity(target, 30.0F, 30.0F);
-			this.entity.rotateTowards(this.entity.rotationYawHead, this.entity.rotationPitch);
+			ChaosAwakens.debug("GOAL", this.animationProgress +" "+this.animationProgress/70000+" "+(this.animationProgress/50000 >= this.animationLength));
 			if(this.animationProgress/70000 >= this.animationLength) {
 				this.animationProgress = 0;
 				this.entity.swingArm(Hand.MAIN_HAND);
