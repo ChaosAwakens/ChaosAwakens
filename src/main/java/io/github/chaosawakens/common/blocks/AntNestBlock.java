@@ -12,19 +12,18 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.server.ServerWorld;
 
 public class AntNestBlock extends Block {
-	
+
 	private final Supplier<? extends EntityType<? extends CreatureEntity>> ant;
-	
+
 	public AntNestBlock(Supplier<? extends EntityType<? extends CreatureEntity>> ant, Properties builder) {
 		super(builder);
 		this.ant = ant;
 	}
-	
+
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (worldIn.isRemote)return;
-		if (worldIn.isRaining())return;
-		
+		if (worldIn.isRemote || worldIn.isRaining()) return;
+
 		final BlockPos abovePos = pos.up();
 		final int amountToSpawn = MathHelper.nextInt(random, 0, 3);
 		if (worldIn.getBlockState(abovePos).isAir(worldIn, abovePos)) {
