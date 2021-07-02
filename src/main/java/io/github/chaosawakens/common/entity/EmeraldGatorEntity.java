@@ -14,6 +14,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.RangedInteger;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.TickRangeConverter;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -29,6 +30,9 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+
+import io.github.chaosawakens.common.registry.CASoundEvents;
+
 import java.util.UUID;
 
 public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAnimatable {
@@ -169,4 +173,14 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
     public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
         return null;
     }
+    
+    @Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return CASoundEvents.EMERALD_GATOR_HURT.get();
+	}
+	
+	@Override
+	protected SoundEvent getDeathSound() {
+		return CASoundEvents.EMERALD_GATOR_DEATH.get();
+	}
 }

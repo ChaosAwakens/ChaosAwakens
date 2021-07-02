@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
+import java.util.function.BiFunction;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
@@ -16,28 +17,34 @@ import net.minecraft.util.Hand;
  */
 public class AnimatableMeleeGoal extends AnimatableGoal {
 	
+	private boolean hasHit;
 	private final double animationLength;
-	
+	private final BiFunction<Double, Double, Boolean> attackPredicate;
 	/**
 	 * 
 	 * @param entity Attacking entity
 	 * @param animationLength
 	 */
-	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, BiFunction<Double, Double, Boolean> attackPredicate) {
 		this.entity = entity;
 		this.animationLength = animationLength;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+		this.attackPredicate = attackPredicate;
+		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 	
 	@Override
 	public boolean shouldExecute() {
 		this.baseTick();
+		if(Math.random() <= 0.1)return false;
+		
 		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getAttackTarget());
 	}
 	
 	@Override
 	public boolean shouldContinueExecuting() {
 		this.baseTick();
+		if(Math.random() <= 0.1)return true;
+		
 		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getAttackTarget());
 	}
 	
@@ -57,6 +64,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		}
 		this.entity.setHitting(false);
 		this.entity.setAggroed(false);
+		this.hasHit = false;
 		this.animationProgress = 0;
 	}
 	
@@ -66,11 +74,15 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		LivingEntity target = this.entity.getAttackTarget();
 		if(target != null) {
 			this.entity.faceEntity(target, 30.0F, 30.0F);
-			ChaosAwakens.debug("GOAL", this.animationProgress +" "+this.animationProgress/70000+" "+(this.animationProgress/50000 >= this.animationLength));
-			if(this.animationProgress/70000 >= this.animationLength) {
-				this.animationProgress = 0;
+			if(this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
 				this.entity.swingArm(Hand.MAIN_HAND);
 				this.entity.attackEntityAsMob(target);
+				this.hasHit = true;
+			}
+			
+			if(this.animationProgress > this.animationLength) {
+				this.animationProgress = 0;
+				this.hasHit = false;
 			}
 		}
 	}

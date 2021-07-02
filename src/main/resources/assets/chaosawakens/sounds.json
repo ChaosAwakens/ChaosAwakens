@@ -10,5 +10,21 @@
 	"entity.robo.death": {
 		"subtitle": "subtitles.entity.robo.death",
 		"sounds": ["chaosawakens:entity/robo/death"]
+	},
+	"entity.emerald_gator.walk": {
+		"subtitle": "subtitles.entity.emerald_gator.walk",
+		"sounds": ["chaosawakens:entity/emerald_gator/walk"]
+	},
+	"entity.emerald_gator.attack": {
+		"subtitle": "subtitles.entity.emerald_gator.attack",
+		"sounds": ["chaosawakens:entity/emerald_gator/attack"]
+	},
+	"entity.emerald_gator.hurt": {
+		"subtitle": "subtitles.entity.emerald_gator.hurt",
+		"sounds": ["chaosawakens:entity/emerald_gator/hurt"]
+	},
+	"entity.emerald_gator.death": {
+		"subtitle": "subtitles.entity.emerald_gator.death",
+		"sounds": ["chaosawakens:entity/emerald_gator/death"]
 	}
 }

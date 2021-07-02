@@ -12,7 +12,7 @@ public abstract class AnimatableGoal extends Goal {
 	
 	protected AnimatableMonsterEntity entity;
 	protected long tickDelta;
-	protected long animationProgress;
+	protected double animationProgress;
 	private boolean isFirsLoop = true;
 	
 	public void baseTick() {
@@ -21,7 +21,7 @@ public abstract class AnimatableGoal extends Goal {
 			this.tickDelta = this.entity.world.getGameTime();
 		}
 		this.tickDelta = this.entity.world.getGameTime() - this.tickDelta;
-		this.animationProgress += this.tickDelta;
+		this.animationProgress += this.tickDelta/20000.0;
 	}
 	
 	protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {

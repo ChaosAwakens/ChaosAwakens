@@ -34,17 +34,15 @@ public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 		this.baseTick();
 		if(Math.random() <= 0.1)return false;
 		
-		this.animationProgress = 0;
 		return AnimatableMoveToTargetGoal.checkIfValid(this, this.entity, this.entity.getAttackTarget());
 	}
 	
 	@Override
 	public boolean shouldContinueExecuting() {
 		this.baseTick();
-		if(this.entity.getAttackTarget() != null)if(this.animationProgress/25000 < this.checkRate)return true;
+		if(Math.random() <= 0.1)return true;
 		
-		boolean check = AnimatableMoveToTargetGoal.checkIfValid(this, this.entity, this.entity.getAttackTarget());
-		return check;
+		return AnimatableMoveToTargetGoal.checkIfValid(this, this.entity, this.entity.getAttackTarget());
 	}
 	
 	@Override
@@ -69,6 +67,8 @@ public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 	public void tick() {
 		this.baseTick();
 		LivingEntity target = this.entity.getAttackTarget();
+		if(target == null)return;
+		
 		this.entity.getLookController().setLookPositionWithEntity(target, 30F, 30F);
 		this.entity.getNavigator().tryMoveToEntityLiving(target, this.moveSpeed);
 	}
