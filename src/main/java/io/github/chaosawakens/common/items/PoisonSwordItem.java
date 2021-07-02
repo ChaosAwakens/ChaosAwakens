@@ -16,11 +16,11 @@ public class PoisonSwordItem extends EnchantedSwordItem {
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (target != null) {
-            target.addPotionEffect(new EffectInstance(Effects.POISON,(10 + target.world.rand.nextInt(10))*20,0));
-            target.addPotionEffect(new EffectInstance(Effects.WITHER,(10 + target.world.rand.nextInt(10))*20,0));
-            target.addPotionEffect(new EffectInstance(Effects.WEAKNESS,(10 + target.world.rand.nextInt(10))*20,0));
+            target.addPotionEffect(new EffectInstance(Effects.POISON,(10 + target.getRNG().nextInt(10)) * 20,0));
+            target.addPotionEffect(new EffectInstance(Effects.WITHER,(10 + target.getRNG().nextInt(10)) * 20,0));
+            target.addPotionEffect(new EffectInstance(Effects.WEAKNESS,(10 + target.getRNG().nextInt(10)) * 20,0));
         }
-        return true;
+        return super.hitEntity(stack, target, attacker);
     }
 }
 
