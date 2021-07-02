@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"all": "chaosawakens:block/aluminum_ore"
+		"all": "chaosawakens:block/mouldy_wood"
 	}
 }

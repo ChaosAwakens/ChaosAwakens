@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -76,10 +77,10 @@ public class MinersDreamItem extends Item {
 		if(i != 0 && i % 8 == 0) {
 			if(k == -HOLE_WIDTH || k == HOLE_WIDTH) {
 				if(j == HOLE_HEIGHT-1) {
-					worldIn.setBlockState(pos, Blocks.OAK_PLANKS.getDefaultState());
+					worldIn.setBlockState(pos, CABlocks.MOULDY_PLANKS.get().getDefaultState());
 					return;
 				}
-				worldIn.setBlockState(pos, Blocks.OAK_FENCE.getDefaultState());
+				worldIn.setBlockState(pos, CABlocks.MOULDY_FENCE.get().getDefaultState());
 				return;
 			}
 			
@@ -88,7 +89,7 @@ public class MinersDreamItem extends Item {
 					worldIn.setBlockState(pos, Blocks.GLOWSTONE.getDefaultState());
 					return;
 				}
-				worldIn.setBlockState(pos, Blocks.OAK_SLAB.getDefaultState().with(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
+				worldIn.setBlockState(pos, CABlocks.MOULDY_SLAB.get().getDefaultState().with(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
 				return;
 			}
 		}

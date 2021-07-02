@@ -1,7 +1,6 @@
 {
-	"parent": "block/cube_all",
+	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"all": "chaosawakens:block/aluminum_block",
-		"particle": "chaosawakens:block/aluminum_block"
+		"all": "chaosawakens:block/aluminum_block"
 	}
 }

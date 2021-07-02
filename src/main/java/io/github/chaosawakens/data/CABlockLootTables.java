@@ -5,6 +5,7 @@ import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.item.Items;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
@@ -34,6 +35,7 @@ public class CABlockLootTables extends BlockLootTables {
 		registerLootTable(CABlocks.SUNSTONE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.SUNSTONE.get()));
 		registerLootTable(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> droppingItemWithFortune(ore, CAItems.TIGERS_EYE.get()));
 		
+		//Plants
 		registerLootTable(CABlocks.CORN_PLANT.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.CORN.get(), CAItems.CORN_SEEDS.get(),
 				BlockStateProperty.builder(plant).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(BlockStateProperties.AGE_0_3, 3))));
 		registerLootTable(CABlocks.TOMATO_PLANT.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.TOMATO.get(), CAItems.TOMATO_SEEDS.get(),
@@ -43,6 +45,9 @@ public class CABlockLootTables extends BlockLootTables {
 		
 //		registerLootTable(CABlocks.HUSK_WALL_HEAD.get(), (block) -> dropping(CABlocks.HUSK_HEAD.get()));
 //		registerDropSelfLootTable(CABlocks.HUSK_HEAD.get());
+		registerDropping(CABlocks.MOULDY_PLANKS.get(), Items.AIR);
+		registerDropping(CABlocks.MOULDY_SLAB.get(), Items.AIR);
+		registerDropping(CABlocks.MOULDY_FENCE.get(), Items.AIR);
 		
 		registerDropSelfLootTable(CABlocks.ALUMINUM_ORE.get());
 		registerDropSelfLootTable(CABlocks.ALUMINUM_BLOCK.get());

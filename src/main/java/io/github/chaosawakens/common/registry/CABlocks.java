@@ -128,19 +128,60 @@ public class CABlocks {
 	public static final RegistryObject<WallTorchBlock> WALL_SUNSTONE_TORCH = registerBlock("wall_sunstone_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 12).sound(SoundType.WOOD).lootFrom(() -> CABlocks.SUNSTONE_TORCH.get()), ParticleTypes.END_ROD), null, false);
 	public static final RegistryObject<TorchBlock> EXTREME_TORCH = registerBlock("extreme_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 15).sound(SoundType.WOOD), ParticleTypes.FLAME), null, false);
 	public static final RegistryObject<WallTorchBlock> WALL_EXTREME_TORCH = registerBlock("wall_extreme_torch", () -> new WallTorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 15).sound(SoundType.WOOD).lootFrom(() -> CABlocks.EXTREME_TORCH.get()), ParticleTypes.FLAME), null, false);
-
+	
+	//MINERS DREAM BLOCKS
+	public static final RegistryObject<Block> MOULDY_PLANKS = registerBlock("mouldy_planks", () -> new Block(Block.Properties.from(Blocks.OAK_PLANKS)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> MOULDY_SLAB = registerBlock("mouldy_slab", () -> new SlabBlock(Block.Properties.from(Blocks.OAK_SLAB)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> MOULDY_FENCE = registerBlock("mouldy_fence", () -> new FenceBlock(Block.Properties.from(Blocks.OAK_FENCE)), CAItemGroups.blocksItemGroup);
+	
+	/**
+	 * No stack size and generateItem variant, defaults to 64 and true, respectively
+	 * @param <B> Block type
+	 * @param name Block registry name
+	 * @param supplier Block instance supplier
+	 * @param itemGroup Block item group, {@code null} for no item group
+	 * @return A RegistryObject<B>
+	 */
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
 		return registerBlock(name, supplier, itemGroup, true);
 	}
 	
+	/**
+	 * No stack size variant, defaults to 64
+	 * @param <B> Block type
+	 * @param name Block registry name
+	 * @param supplier Block instance supplier
+	 * @param itemGroup Block item group, {@code null} for no item group
+	 * @param generateItem If a BlockItem should be generated for this block
+	 * @return A RegistryObject<B>
+	 */
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, boolean generateItem) {
 		return registerBlock(name, supplier, itemGroup, 64, generateItem);
 	}
 	
+	/**
+	 * No generateItem variant, defaults to true
+	 * @param <B> Block type
+	 * @param name Block registry name
+	 * @param supplier Block instance supplier
+	 * @param itemGroup Block item group, {@code null} for no item group
+	 * @param stackSize Block stack size
+	 * @return A RegistryObject<B>
+	 */
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, int stackSize) {
 		return registerBlock(name, supplier, itemGroup, stackSize, true);
 	}
 	
+	/**
+	 * Registers a block to the BLOCKS deferred register and BlockItem to the ITEM_BLOCKS deferred register
+	 * @param <B> Block type
+	 * @param name Block registry name
+	 * @param supplier Block instance supplier
+	 * @param itemGroup Block item group, {@code null} for no item group
+	 * @param stackSize Block stack size
+	 * @param generateItem If a BlockItem should be generated for this block
+	 * @return A RegistryObject<B>
+	 */
 	public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup, int stackSize, boolean generateItem) {
 		RegistryObject<B> block = CABlocks.BLOCKS.register(name, supplier);
 		if (generateItem)ITEM_BLOCKS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(itemGroup).maxStackSize(stackSize)));
