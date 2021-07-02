@@ -30,6 +30,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.Locale;
@@ -46,6 +47,7 @@ public class ChaosAwakens {
 
 	public ChaosAwakens() {
 		INSTANCE = this;
+		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
 		
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");

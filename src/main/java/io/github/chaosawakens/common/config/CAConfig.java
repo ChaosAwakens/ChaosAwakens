@@ -95,6 +95,7 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableRedAntTeleport;
 		public final ConfigValue<Boolean> enableUnstableAntTeleport;
 		public final ConfigValue<Boolean> enableTermiteTeleport;
+		public final ConfigValue<Boolean> enableButterflyTeleport;
 
 		public final ConfigValue<Boolean> enableOreGen;
 		public final ConfigValue<Boolean> enableFossilGen;
@@ -283,6 +284,7 @@ public class CAConfig {
 			enableRedAntTeleport = builder.comment("Will the Red Ant teleport you to its Dimension?").define("Red Ant Teleport", true);
 			enableUnstableAntTeleport = builder.comment("Will the Unstable Ant teleport you to its Dimension?").define("Unstable Ant Teleport", true);
 			enableTermiteTeleport = builder.comment("Will the Termite teleport you to its Dimension?").define("Termite Teleport", true);
+			enableButterflyTeleport = builder.comment("Will the Butterfly teleport you to its Dimension?").define("Butterfly Teleport", true);
 			builder.pop();
 			builder.push("Breeding");
 			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);

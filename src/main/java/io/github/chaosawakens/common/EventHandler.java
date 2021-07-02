@@ -63,7 +63,6 @@ public class EventHandler {
 
             // Drop #2: Ender Dragon Head
             double chance = 0.1D + event.getLootingLevel() * 0.1D;
-            if (!dragon.getFightManager().hasPreviouslyKilledDragon()) amount = 1; // 1st kill is guaranteed.
             if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
                 stack = new ItemStack(Items.DRAGON_HEAD, 1);
                 drop = new ItemEntity(event.getEntityLiving().world, 0, 90, 0, stack);
