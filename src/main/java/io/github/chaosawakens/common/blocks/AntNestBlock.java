@@ -22,7 +22,7 @@ public class AntNestBlock extends Block {
 	
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (!worldIn.isRemote)return;
+		if (worldIn.isRemote)return;
 		if (worldIn.isRaining())return;
 		
 		final BlockPos abovePos = pos.up();

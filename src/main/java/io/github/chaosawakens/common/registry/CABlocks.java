@@ -98,11 +98,11 @@ public class CABlocks {
 	public static final RegistryObject<Block> ENDER_EYE_BLOCK = registerBlock("ender_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.SHROOMLIGHT)), CAItemGroups.blocksItemGroup);
 	
 	// ANT NESTS
-	public static final RegistryObject<AntNestBlock> BROWN_ANT_NEST = registerBlock("brown_ant_nest", () -> new AntNestBlock(CAEntityTypes.BROWN_ANT, Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest", () -> new AntNestBlock(CAEntityTypes.RAINBOW_ANT, Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> RED_ANT_NEST = registerBlock("red_ant_nest", () -> new AntNestBlock(CAEntityTypes.RED_ANT, Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest", () -> new AntNestBlock(CAEntityTypes.UNSTABLE_ANT, Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> TERMITE_NEST = registerBlock("termite_nest", () -> new AntNestBlock(CAEntityTypes.TERMITE, Block.Properties.from(Blocks.GRASS_BLOCK)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> BROWN_ANT_NEST = registerBlock("brown_ant_nest", () -> new AntNestBlock(CAEntityTypes.BROWN_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest", () -> new AntNestBlock(CAEntityTypes.RAINBOW_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> RED_ANT_NEST = registerBlock("red_ant_nest", () -> new AntNestBlock(CAEntityTypes.RED_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest", () -> new AntNestBlock(CAEntityTypes.UNSTABLE_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> TERMITE_NEST = registerBlock("termite_nest", () -> new AntNestBlock(CAEntityTypes.TERMITE, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
 	
 	// LEGACY CRYSTAL DIMENSION
 	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setRequiresTool().setOpaque(isFalse)), CAItemGroups.blocksItemGroup);
