@@ -23,11 +23,11 @@ public class ClientSetupEvent {
 	public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENT.get(), EntEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RED_ANT.get(), RedAntEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BROWN_ANT.get(), BrownAntEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RAINBOW_ANT.get(), RainbowAntEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.UNSTABLE_ANT.get(), UnstableAntEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TERMITE.get(), TermiteEntityRender::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RED_ANT.get(),  (manager) -> new AggressiveAntEntityRender(manager, CAEntityTypes.RED_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BROWN_ANT.get(), (manager) -> new AntEntityRender(manager, CAEntityTypes.BROWN_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RAINBOW_ANT.get(), (manager) -> new AntEntityRender(manager, CAEntityTypes.RAINBOW_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.UNSTABLE_ANT.get(), (manager) -> new AntEntityRender(manager, CAEntityTypes.UNSTABLE_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TERMITE.get(),  (manager) -> new AggressiveAntEntityRender(manager, CAEntityTypes.TERMITE.getId().getPath()));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRender::new);

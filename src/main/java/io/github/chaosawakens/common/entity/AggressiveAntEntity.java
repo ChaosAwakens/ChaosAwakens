@@ -1,27 +1,31 @@
 package io.github.chaosawakens.common.entity;
 
-import javax.annotation.Nullable;
-
+import io.github.chaosawakens.api.HeightmapTeleporter;
 import io.github.chaosawakens.api.IAntEntity;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -30,14 +34,19 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RainbowAntEntity extends AnimalEntity implements IAnimatable, IAntEntity {
+public class AggressiveAntEntity extends MonsterEntity implements IAnimatable, IAntEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-
-	public RainbowAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+	
+	private final ConfigValue<Boolean> tpConfig;
+	private final RegistryKey<World> targetDimension;
+	
+	public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
 		this.ignoreFrustumCheck = true;
+		this.tpConfig = tpConfig;
+		this.targetDimension = targetDimension;
 	}
-
+	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController()
@@ -51,48 +60,49 @@ public class RainbowAntEntity extends AnimalEntity implements IAnimatable, IAntE
 		}
 		return PlayState.CONTINUE;
 	}
-
+	
 	@Override
 	protected void registerGoals() {
+		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0F, false));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 	}
-
+	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 1)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 2)
+				.createMutableAttribute(Attributes.ATTACK_SPEED, 1)
 				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
+				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1)
+				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 0.5D)
 				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
 	}
-
+	
 	@Override
 	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getHeldItem(hand);
 
-		if (CAConfig.COMMON.enableRainbowAntTeleport.get()) {
-			if (!this.world.isRemote && itemstack.getItem() == Items.AIR) {
-				IAntEntity.doTeleport((ServerPlayerEntity) playerIn, (ServerWorld) this.world,
-						this.world.getDimensionKey() == CADimensions.VILLAGE_MANIA ? World.OVERWORLD : CADimensions.VILLAGE_MANIA);
-			}
+		if (tpConfig.get() && !this.world.isRemote && itemstack.getItem() == Items.AIR) {
+			MinecraftServer minecraftServer = ((ServerWorld)this.world).getServer();
+			ServerWorld targetWorld = minecraftServer.getWorld(this.world.getDimensionKey() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+			if (targetWorld != null)
+				serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 		}
+		
 		return super.getEntityInteractionResult(playerIn, hand);
 	}
-
+	
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(
-				new AnimationController<>(this, "antcontroller", 0, this::predicate));
+		data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
 	}
-
+	
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
-	}
-
-	@Nullable
-	@Override
-	public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
-		return null;
 	}
 }

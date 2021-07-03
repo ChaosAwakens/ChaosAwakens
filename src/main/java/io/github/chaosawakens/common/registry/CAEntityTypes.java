@@ -1,11 +1,34 @@
 package io.github.chaosawakens.common.registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.entity.*;
-import io.github.chaosawakens.common.entity.projectile.*;
+import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.entity.AggressiveAntEntity;
+import io.github.chaosawakens.common.entity.AntEntity;
+import io.github.chaosawakens.common.entity.AppleCowEntity;
+import io.github.chaosawakens.common.entity.BeaverEntity;
+import io.github.chaosawakens.common.entity.CrystalAppleCowEntity;
+import io.github.chaosawakens.common.entity.EmeraldGatorEntity;
+import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.EntEntity;
+import io.github.chaosawakens.common.entity.GoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.RoboSniperEntity;
+import io.github.chaosawakens.common.entity.RoboWarriorEntity;
+import io.github.chaosawakens.common.entity.RubyBugEntity;
+import io.github.chaosawakens.common.entity.StinkBugEntity;
+import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
+import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
+import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
+import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
+import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
+import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityType.IFactory;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.ResourceLocation;
@@ -15,9 +38,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CAEntityTypes {
 	
@@ -63,28 +83,32 @@ public class CAEntityTypes {
 			.build(new ResourceLocation(ChaosAwakens.MODID, "crystal_apple_cow").toString()));
 	
 	// Ants
-	public static final RegistryObject<EntityType<BrownAntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",
-			() -> EntityType.Builder.create(BrownAntEntity::new, EntityClassification.CREATURE)
+	public static final RegistryObject<EntityType<AntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",
+			() -> EntityType.Builder.create((IFactory<AntEntity>)(type, world) -> new AntEntity(type, world, CAConfig.COMMON.enableBrownAntTeleport, null), EntityClassification.CREATURE)
 				.size(0.25f, 0.25f) // Hitbox Size ()
 				.build(new ResourceLocation(ChaosAwakens.MODID, "brown_ant").toString()));
 	
-	public static final RegistryObject<EntityType<RainbowAntEntity>> RAINBOW_ANT = ENTITY_TYPES.register("rainbow_ant",
-			() -> EntityType.Builder.create(RainbowAntEntity::new, EntityClassification.CREATURE)
+	public static final RegistryObject<EntityType<AntEntity>> RAINBOW_ANT = ENTITY_TYPES.register("rainbow_ant",
+			() -> EntityType.Builder.create((IFactory<AntEntity>)(type, world) -> new AntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.VILLAGE_MANIA),
+					EntityClassification.CREATURE)
 			.size(0.25f, 0.25f) // Hitbox Size ()
 			.build(new ResourceLocation(ChaosAwakens.MODID, "rainbow_ant").toString()));
 	
-	public static final RegistryObject<EntityType<RedAntEntity>> RED_ANT = ENTITY_TYPES.register("red_ant",
-			() -> EntityType.Builder.create(RedAntEntity::new, EntityClassification.MONSTER)
+	public static final RegistryObject<EntityType<AggressiveAntEntity>> RED_ANT = ENTITY_TYPES.register("red_ant",
+			() -> EntityType.Builder.create((IFactory<AggressiveAntEntity>)(type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.MINING_DIMENSION),
+					EntityClassification.MONSTER)
 			.size(0.25f, 0.25f) // Hitbox Size ()
 			.build(new ResourceLocation(ChaosAwakens.MODID, "red_ant").toString()));
-	public static final RegistryObject<EntityType<UnstableAntEntity>> UNSTABLE_ANT = ENTITY_TYPES.register("unstable_ant",
-			() -> EntityType.Builder.create(UnstableAntEntity::new, EntityClassification.CREATURE)
+	
+	public static final RegistryObject<EntityType<AntEntity>> UNSTABLE_ANT = ENTITY_TYPES.register("unstable_ant",
+			() -> EntityType.Builder.create((IFactory<AntEntity>)(type, world) -> new AntEntity(type, world, CAConfig.COMMON.enableUnstableAntTeleport, null), EntityClassification.CREATURE)
 			.size(0.25f, 0.25f) // Hitbox Size ()
 			.build(new ResourceLocation(ChaosAwakens.MODID, "unstable_ant").toString()));
 	
 	// Termite
-	public static final RegistryObject<EntityType<TermiteEntity>> TERMITE = ENTITY_TYPES.register("termite",
-			() -> EntityType.Builder.create(TermiteEntity::new, EntityClassification.CREATURE)
+	public static final RegistryObject<EntityType<AggressiveAntEntity>> TERMITE = ENTITY_TYPES.register("termite",
+			() -> EntityType.Builder.create((IFactory<AggressiveAntEntity>)(type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.CRYSTAL_DIMENSION_LEGACY),
+					EntityClassification.CREATURE)
 			.size(0.5f, 0.25f) // Hitbox Size ()
 			.build(new ResourceLocation(ChaosAwakens.MODID, "termite").toString()));
 	

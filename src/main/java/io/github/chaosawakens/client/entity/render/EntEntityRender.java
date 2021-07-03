@@ -38,4 +38,9 @@ public class EntEntityRender extends GeoEntityRenderer<EntEntity> {
     public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
+    
+    @Override
+    protected float getDeathMaxRotation(EntEntity entity) {
+		return 0.0F;
+	}
 }

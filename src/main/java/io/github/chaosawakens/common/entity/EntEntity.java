@@ -35,13 +35,17 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		super.doTickBase(event);
+		if(this.dead) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.death_animation", true));
+			return PlayState.CONTINUE;
+		}
 		
-		if (this.getHitting()) {
+		if(this.getHitting()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		
-		if (event.isMoving()) {
+		if(event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
 			return PlayState.CONTINUE;
 		}

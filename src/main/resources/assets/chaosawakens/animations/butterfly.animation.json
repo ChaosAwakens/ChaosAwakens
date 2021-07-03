@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.butterfly.idle_animation": {
+		"idle": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -25,7 +25,7 @@
 				}
 			}
 		},
-		"animation.butterfly.death_animation": {
+		"death": {
 			"animation_length": 5.16,
 			"bones": {
 				"rightwing": {

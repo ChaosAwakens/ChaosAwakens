@@ -1,20 +1,28 @@
 package io.github.chaosawakens.common.entity.ai;
 
+import java.util.Random;
+
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 /**
+ * Base goal for Animatable entities
  * @author invalid2
- *
  */
 public abstract class AnimatableGoal extends Goal {
 	
 	protected AnimatableMonsterEntity entity;
+	
+	protected static final Random RANDOM = new Random();
+	
 	protected long tickDelta;
 	protected double animationProgress;
 	private boolean isFirsLoop = true;
 	
+	/**
+	 * Basic tick functionality that most AnimatableGoals will use
+	 */
 	public void baseTick() {
 		if(this.isFirsLoop) {
 			this.isFirsLoop = false;

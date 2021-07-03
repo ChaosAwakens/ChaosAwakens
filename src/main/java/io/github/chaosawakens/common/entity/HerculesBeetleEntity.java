@@ -32,20 +32,22 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if (this.isAggressive()) {
+		if(this.dead) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", true));
+			return PlayState.CONTINUE;
+		}
+		
+		if (this.getHitting()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_attack_animation", true));
 			return PlayState.CONTINUE;
 		}
 		
-		if (event.isMoving()) {
+		if (this.getMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		
-		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", true));
-			return PlayState.CONTINUE;
-		}
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 

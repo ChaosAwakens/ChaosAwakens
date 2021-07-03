@@ -941,6 +941,67 @@
 					}
 				}
 			}
+		},
+		"animation.robo_sniper.death": {
+			"animation_length": 6,
+			"bones": {
+				"robo_gunner": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, "math.cos(query.anim_time * 3600 ) * 15", 0]
+						},
+						"0.52": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutSine"
+						}
+					},
+					"scale": {
+						"1.04": {
+							"vector": [1, 1, 1]
+						},
+						"1.56": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"cannon_connector": {
+					"rotation": {
+						"0.52": {
+							"vector": [0, 0, 0]
+						},
+						"1.04": {
+							"vector": [95, 0, 0],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"cannon": {
+					"rotation": {
+						"0.52": {
+							"vector": [0, 0, 0]
+						},
+						"1.04": {
+							"vector": [70, 90, 55],
+							"easing": "easeInOutSine"
+						}
+					},
+					"position": {
+						"0.52": {
+							"vector": [0, 0, 0]
+						},
+						"1.04": {
+							"vector": [0, 0, -4],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"firing_effect": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
 		}
 	}
 }

@@ -16,32 +16,33 @@ import net.minecraft.util.EntityPredicates;
  */
 public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 	
-	private final double moveSpeed;
+	private final double speedMultiplier;
 	private final int checkRate;
 	private Path path;
 	
 	/**
-	 * 
+	 * Move an AnimatableMonsterEntity to a target entity
+	 * @param entity AnimatableMonsterEntity instance
+	 * @param speedMultiplier Entity will move by base speed * this
+	 * @param checkRate Check rate with formula: {@code if(RANDOM.nextInt(rate) == 0)}, so bigger = less often
 	 */
-	public AnimatableMoveToTargetGoal(AnimatableMonsterEntity entity, double moveSpeed, int checkRate) {
+	public AnimatableMoveToTargetGoal(AnimatableMonsterEntity entity, double speedMultiplier, int checkRate) {
 		this.entity = entity;
-		this.moveSpeed = moveSpeed;
+		this.speedMultiplier = speedMultiplier;
 		this.checkRate = checkRate;
 		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 	}
 	
 	@Override
 	public boolean shouldExecute() {
-		this.baseTick();
-		if(Math.random() <= 0.1)return false;
+		if(RANDOM.nextInt(this.checkRate) == 0)return false;
 		
 		return AnimatableMoveToTargetGoal.checkIfValid(this, this.entity, this.entity.getAttackTarget());
 	}
 	
 	@Override
 	public boolean shouldContinueExecuting() {
-		this.baseTick();
-		if(Math.random() <= 0.1)return true;
+		if(RANDOM.nextInt(this.checkRate) == 0)return true;
 		
 		return AnimatableMoveToTargetGoal.checkIfValid(this, this.entity, this.entity.getAttackTarget());
 	}
@@ -49,8 +50,8 @@ public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 	@Override
 	public void startExecuting() {
 		this.entity.setAggroed(true);
-		this.entity.getNavigator().setPath(this.path, this.moveSpeed);
-		this.animationProgress = 0;
+		this.entity.setMoving(true);
+		this.entity.getNavigator().setPath(this.path, this.speedMultiplier);
 	}
 	
 	@Override
@@ -59,20 +60,18 @@ public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 		if (!EntityPredicates.CAN_AI_TARGET.test(target)) {
 			this.entity.setAttackTarget(null);
 		}
-		this.animationProgress = 0;
 		this.entity.setAggroed(false);
+		this.entity.setMoving(false);
 		this.entity.getNavigator().clearPath();
 	}
 	
 	@Override
 	public void tick() {
-		this.baseTick();
 		LivingEntity target = this.entity.getAttackTarget();
-		ChaosAwakens.debug("GOAL", this.entity);
 		if(target == null)return;
 		
 		this.entity.getLookController().setLookPositionWithEntity(target, 30F, 30F);
-		this.entity.getNavigator().tryMoveToEntityLiving(target, this.moveSpeed);
+		this.entity.getNavigator().tryMoveToEntityLiving(target, this.speedMultiplier);
 	}
 	
 	private static boolean checkIfValid(AnimatableMoveToTargetGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {

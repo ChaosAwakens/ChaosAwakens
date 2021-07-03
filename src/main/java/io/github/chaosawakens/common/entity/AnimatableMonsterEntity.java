@@ -76,7 +76,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 	
 	public boolean getMoving() { return this.dataManager.get(MOVING); }
-	public void setMoving(boolean attacking) { this.dataManager.set(MOVING, attacking); }
+	public void setMoving(boolean moving) { this.dataManager.set(MOVING, moving); }
 	
 	public boolean getAttacking() { return this.dataManager.get(ATTACKING); }
 	public void setAttacking(boolean attacking) { this.dataManager.set(ATTACKING, attacking); }

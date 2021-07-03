@@ -83,7 +83,9 @@ public class CommonSetupEvent {
 				e.printStackTrace();
 			} catch(UnableToFindMethodException e) {
 				if (CAConfig.COMMON.terraforgedCheckMsg.get())
-					ChaosAwakens.info("WORLDGEN", "Unable to check if "+serverWorld.getDimensionKey().getLocation()+" is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessable ");
+					ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.getDimensionKey().getLocation()
+						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessable,"
+						+ " if you aren't using Terraforged please ignore this message");
 			}
 			
 			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD))return;
