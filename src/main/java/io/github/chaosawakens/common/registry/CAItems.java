@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.client.entity.render.BigBerthaItemRender;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.enums.CAArmorMaterial;
 import io.github.chaosawakens.common.enums.CAItemTier;
@@ -219,6 +220,9 @@ public class CAItems {
 	public static final RegistryObject<UltimateFishingRodItem> ULTIMATE_FISHING_ROD = ITEMS.register("ultimate_fishing_rod", () -> new UltimateFishingRodItem(new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(1000),
 			new EnchantmentData[] {new EnchantmentData(Enchantments.UNBREAKING, 2)}));
 
+	public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new ExtendedHitWeaponItem(CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, 5F, new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).setISTER(() -> BigBerthaItemRender::new),
+			new EnchantmentData[] { new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
+
 	// Emerald
 	public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldSwordDamage.get() - 7, -2.4F, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
 	public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new ShovelItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldShovelDamage.get() - 7, -3, new Item.Properties().group(CAItemGroups.equipmentItemGroup)));
@@ -318,6 +322,7 @@ public class CAItems {
 			new EnchantmentData[] { new EnchantmentData(Enchantments.UNBREAKING, 4), new EnchantmentData(Enchantments.SWEEPING, 4)}));
 	public static final RegistryObject<SkateBowItem> SKATE_STRING_BOW = ITEMS.register("skate_string_bow", () -> new SkateBowItem(new Item.Properties().group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(384)));
 	public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(CAItemTier.WEAPON_RAY_GUN, new Item.Properties().group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(50)));
+
 	public static final RegistryObject<AxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedAxeItem(CAItemTier.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3F, new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup),
 			new EnchantmentData[] { new EnchantmentData(Enchantments.LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 	public static final RegistryObject<AxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedAxeItem(CAItemTier.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenAxeDamage.get() - 664, -2.8F, new Item.Properties().rarity(RARITY_ROYALTY).group(CAItemGroups.equipmentItemGroup),
