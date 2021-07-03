@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -67,6 +68,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableGoal {
 	public void tick() {
 		this.baseTick();
 		LivingEntity target = this.entity.getAttackTarget();
+		ChaosAwakens.debug("GOAL", this.entity);
 		if(target == null)return;
 		
 		this.entity.getLookController().setLookPositionWithEntity(target, 30F, 30F);

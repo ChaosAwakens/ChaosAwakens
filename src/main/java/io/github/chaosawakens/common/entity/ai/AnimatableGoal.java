@@ -19,9 +19,11 @@ public abstract class AnimatableGoal extends Goal {
 		if(this.isFirsLoop) {
 			this.isFirsLoop = false;
 			this.tickDelta = this.entity.world.getGameTime();
+			this.animationProgress += 1;
+			return;
 		}
 		this.tickDelta = this.entity.world.getGameTime() - this.tickDelta;
-		this.animationProgress += this.tickDelta/20000.0;
+		this.animationProgress += 1 + this.tickDelta/100000.0;
 	}
 	
 	protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {

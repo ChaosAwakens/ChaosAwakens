@@ -34,7 +34,6 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	
 	@Override
 	public boolean shouldExecute() {
-		this.baseTick();
 		if(Math.random() <= 0.1)return false;
 		
 		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getAttackTarget());
@@ -42,7 +41,6 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	
 	@Override
 	public boolean shouldContinueExecuting() {
-		this.baseTick();
 		if(Math.random() <= 0.1)return true;
 		
 		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getAttackTarget());
