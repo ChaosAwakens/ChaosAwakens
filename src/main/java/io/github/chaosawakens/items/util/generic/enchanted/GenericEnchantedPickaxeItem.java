@@ -31,7 +31,7 @@ public class GenericEnchantedPickaxeItem extends PickaxeItem implements IPreEnch
 
     @Override
     public boolean hasGlint(ItemStack stack) {
-        return super.hasGlint(stack);
+        return ChaosAwakens.config.misc.enableAutoEnchanting || super.hasGlint(stack);
     }
 
 

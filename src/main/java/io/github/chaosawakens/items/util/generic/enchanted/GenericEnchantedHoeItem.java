@@ -31,7 +31,7 @@ public class GenericEnchantedHoeItem extends HoeItem implements IPreEnchanted {
 
     @Override
     public boolean hasGlint(ItemStack stack) {
-        return super.hasGlint(stack);
+        return ChaosAwakens.config.misc.enableAutoEnchanting || super.hasGlint(stack);
     }
 
 

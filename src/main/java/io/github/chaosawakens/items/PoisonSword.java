@@ -15,12 +15,11 @@ public class PoisonSword extends GenericEnchantedSwordItem {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        super.postHit(stack, target, attacker);
         if (target != null) {
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, (10 + target.getRandom().nextInt(10)) * 20, 0));
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, (10 + target.getRandom().nextInt(10)) * 20, 0));
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, (10 + target.getRandom().nextInt(10)) * 20, 0));
         }
-        return true;
+        return super.postHit(stack, target, attacker);
     }
 }
