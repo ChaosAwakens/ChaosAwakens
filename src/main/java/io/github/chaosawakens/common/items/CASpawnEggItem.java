@@ -37,5 +37,5 @@ public class CASpawnEggItem extends SpawnEggItem {
 	public EntityType<?> getType(@Nullable CompoundNBT p_208076_1_) { return typeGetter.get(); }
 	
 	@Override
-	public boolean hasEffect(ItemStack stack) { return this.isEnchanted; }
+	public boolean hasEffect(ItemStack stack) { return this.isEnchanted || super.hasEffect(stack); }
 }

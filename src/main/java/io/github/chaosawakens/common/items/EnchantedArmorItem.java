@@ -34,7 +34,7 @@ public class EnchantedArmorItem extends ArmorItem implements IPreEnchanted {
 	
 	@Override
 	public boolean hasEffect(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get() || stack.isEnchanted();
+		return CAConfig.COMMON.enableAutoEnchanting.get() || super.hasEffect(stack);
 	}
 
 	@Override
