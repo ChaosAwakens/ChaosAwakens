@@ -12,6 +12,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
 
 public class ChaosAwakens implements ModInitializer, ClientModInitializer {
@@ -28,6 +29,7 @@ public class ChaosAwakens implements ModInitializer, ClientModInitializer {
 
         @Override
         public void onInitialize() {
+                GeckoLibMod.DISABLE_IN_DEV = true;
                 GeckoLib.initialize();
                 AutoConfig.register(Config.class, JanksonConfigSerializer::new);
                 config = AutoConfig.getConfigHolder(Config.class).getConfig();
