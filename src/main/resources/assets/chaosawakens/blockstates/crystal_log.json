@@ -1,7 +1,0 @@
-{
-  "variants": {
-      "axis=y":  { "model": "chaosawakens:block/crystal_log" },
-      "axis=z":   { "model": "chaosawakens:block/crystal_log", "x": 90 },
-      "axis=x":   { "model": "chaosawakens:block/crystal_log", "x": 90, "y": 90 }
-  }
-}
