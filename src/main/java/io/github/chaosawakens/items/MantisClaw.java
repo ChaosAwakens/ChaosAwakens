@@ -20,9 +20,7 @@ public class MantisClaw extends SwordItem {
             attacker.heal(1F);
             target.damage(attacker instanceof PlayerEntity ? DamageSource.player((PlayerEntity) attacker) : DamageSource.mob(attacker), 1F);
         }
-        stack.damage(damageMultiplier, attacker, (entity) -> {
-            entity.sendToolBreakStatus(Hand.MAIN_HAND);
-        });
+        stack.damage(damageMultiplier, attacker, (e) -> { e.sendToolBreakStatus(Hand.MAIN_HAND); });
         return true;
     }
 }

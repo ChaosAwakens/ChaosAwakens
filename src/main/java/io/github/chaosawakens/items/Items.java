@@ -263,7 +263,7 @@ public class Items implements ModInitializer {
         TIGERS_EYE_CHESTPLATE = register("tigers_eye_chestplate", TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.CHEST);
         TIGERS_EYE_LEGGINGS = register("tigers_eye_leggings", TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.LEGS);
         TIGERS_EYE_BOOTS = register("tigers_eye_boots", TIGERS_EYE_ARMOR_MATERIAL, EquipmentSlot.FEET);
-        EXPERIENCE_SWORD = registerSword("experience_sword", EXPERIENCE_TOOL_MATERIAL, config.miscWeapons.experienceSwordDamage, config.miscWeapons.swordAttackSpeed);
+        EXPERIENCE_SWORD = registerSword("experience_sword", GENERIC_WEAPON_TOOL_MATERIAL, config.miscWeapons.experienceSwordDamage, config.miscWeapons.swordAttackSpeed);
         EXPERIENCE_HELMET = register("experience_helmet", EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.HEAD);
         EXPERIENCE_CHESTPLATE = register("experience_chestplate", EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.CHEST);
         EXPERIENCE_LEGGINGS = register("experience_leggings", EXPERIENCE_ARMOR_MATERIAL, EquipmentSlot.LEGS);

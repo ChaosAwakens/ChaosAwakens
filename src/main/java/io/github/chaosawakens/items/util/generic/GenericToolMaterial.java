@@ -3,6 +3,7 @@ package io.github.chaosawakens.items.util.generic;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import org.jetbrains.annotations.Nullable;
 
 public class GenericToolMaterial implements ToolMaterial {
     private int durability;
@@ -10,9 +11,9 @@ public class GenericToolMaterial implements ToolMaterial {
     private float attackDamage;
     private int miningLevel;
     private int enchantability;
-    private Item repairIngredient;
+    private Ingredient repairIngredient;
 
-    public GenericToolMaterial(int miningLevel, int durability, float miningSpeedMultiplier, float attackDamage, int enchantability, Item repairIngredient) {
+    public GenericToolMaterial(int miningLevel, int durability, float miningSpeedMultiplier, float attackDamage, int enchantability, Ingredient repairIngredient) {
         this.durability = durability;
         this.miningSpeedMultiplier = miningSpeedMultiplier;
         this.attackDamage = attackDamage;
@@ -48,6 +49,6 @@ public class GenericToolMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(this.repairIngredient);
+        return this.repairIngredient;
     }
 }

@@ -264,6 +264,8 @@ public class Config implements ConfigData {
         @ConfigEntry.Gui.Tooltip
         public float battleAxeDamage = 50.0f;
         @ConfigEntry.Gui.Tooltip
+        public float berthaDamage = 500.0f;
+        @ConfigEntry.Gui.Tooltip
         public float queenAxeDamage = 666.0f;
     }
     public static class ThunderStaff {

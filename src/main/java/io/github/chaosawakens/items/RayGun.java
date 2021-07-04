@@ -32,9 +32,8 @@ public class RayGun extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        super.use(world, user, hand);
-        ItemStack stack = user.getStackInHand(hand);
-        if (world.isClient()) return new TypedActionResult<>(ActionResult.PASS, stack);
+        ItemStack heldStack = user.getStackInHand(hand);
+        if (world.isClient()) return new TypedActionResult<>(ActionResult.PASS, heldStack);
 
         float xA = -MathHelper.sin(user.headYaw * ((float) Math.PI / 180F)) * MathHelper.cos(user.getPitch() * ((float) Math.PI / 180F));
         float yA = -MathHelper.sin(user.getPitch() * ((float) Math.PI / 180F));
@@ -47,7 +46,7 @@ public class RayGun extends Item {
         */
 
         if (!user.isCreative()) {
-            stack.damage(1, user, (entity) -> entity.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+            heldStack.damage(1, user, (e) -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
         }
 
         //world.addEntity(projectile);
@@ -55,6 +54,6 @@ public class RayGun extends Item {
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
 
-        return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+        return new TypedActionResult<>(ActionResult.SUCCESS, heldStack);
     }
 }

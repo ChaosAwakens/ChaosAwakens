@@ -29,14 +29,22 @@ public class GenericScytheItem extends SwordItem implements Vanishable {
         this.entityAttributeModifiers = builder.build();
     }
 
+    //??? https://discord.com/channels/836004632648089640/836006526300848138/861001459322322955
+
     public boolean canPlayerBreakBlockWhileHolding(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity) {
         return !playerEntity.isCreative();
     }
 
     @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damage(1, attacker, (e) -> { e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND); });
+        return true;
+    }
+
+    @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
         if (state.getHardness(world, pos) != 0.0F) {
-            stack.damage(2, miner, (entity) -> entity.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+            stack.damage(2, miner, (e) -> { e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND); });
         }
         return true;
     }

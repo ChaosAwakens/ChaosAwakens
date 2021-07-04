@@ -16,9 +16,7 @@ public class BigHammer extends SwordItem {
         if (target != null && !target.world.isClient()) {
             target.addVelocity(0.0D, Math.abs(target.world.random.nextFloat() * 1.5F), 0.0D);
         }
-        stack.damage(1, attacker, (entity) -> {
-            entity.sendToolBreakStatus(Hand.MAIN_HAND);
-        });
+        stack.damage(1, attacker, (e) -> { e.sendToolBreakStatus(Hand.MAIN_HAND); });
         return true;
     }
 }

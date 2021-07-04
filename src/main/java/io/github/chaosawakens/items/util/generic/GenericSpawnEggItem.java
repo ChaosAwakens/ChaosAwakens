@@ -16,13 +16,13 @@ public class GenericSpawnEggItem extends SpawnEggItem {
     private final Supplier<? extends EntityType<?>> typeGetter;
     private final boolean isEnchanted;
 
-    public GenericSpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Settings settings, boolean isEnchanted) {
+    public GenericSpawnEggItem(Supplier<? extends EntityType<?>> type, Settings settings, boolean isEnchanted) {
         super(null, 0xFFFFFF, 0xFFFFFF, settings);
-        this.typeGetter = typeIn;
+        this.typeGetter = type;
         this.isEnchanted = isEnchanted;
     }
-    public GenericSpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Settings settings) {
-        this(typeIn, settings, false);
+    public GenericSpawnEggItem(Supplier<? extends EntityType<?>> type, Settings settings) {
+        this(type, settings, false);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class GenericSpawnEggItem extends SpawnEggItem {
 
     @Override
     public boolean hasGlint(ItemStack stack) {
-        return this.isEnchanted;
+        return this.isEnchanted || super.hasGlint(stack);
     }
 }
