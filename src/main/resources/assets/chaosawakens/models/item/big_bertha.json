@@ -1,116 +1,19 @@
 {
-  "credit": "Made with Blockbench",
   "parent": "builtin/entity",
-  "texture_size": [
-    32,
-    64
-  ],
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [
-        -6,
-        0,
-        0
-      ],
-      "scale": [
-        0.975,
-        0.975,
-        0.975
-      ]
-    },
-    "thirdperson_lefthand": {
-      "rotation": [
-        -6,
-        0,
-        0
-      ],
-      "scale": [
-        0.975,
-        0.975,
-        0.975
-      ]
-    },
-    "firstperson_righthand": {
-      "rotation": [
-        5,
-        30,
-        -5
-      ],
-      "translation": [
-        1.75,
-        -1.25,
-        0
-      ],
-      "scale": [
-        0.5,
-        0.5,
-        0.5
-      ]
-    },
-    "firstperson_lefthand": {
-      "rotation": [
-        5,
-        30,
-        -5
-      ],
-      "translation": [
-        1.75,
-        -1.25,
-        0
-      ],
-      "scale": [
-        0.5,
-        0.5,
-        0.5
-      ]
-    },
-    "ground": {
-      "translation": [
-        0,
-        2,
-        0
-      ],
-      "scale": [
-        0.35,
-        0.35,
-        0.35
-      ]
-    },
+  "gui_light": "front",
+  "loader": "forge:separate-perspective",
+  "base": {
+    "parent": "chaosawakens:item/big_bertha_in_hand"
+  },
+  "perspectives": {
     "gui": {
-      "rotation": [
-        30,
-        225,
-        0
-      ],
-      "scale": [
-        0.325,
-        0.325,
-        0.325
-      ]
-    },
-    "head": {
-      "translation": [
-        0,
-        22.75,
-        0
-      ]
+      "parent": "chaosawakens:item/big_bertha_gui"
     },
     "fixed": {
-      "rotation": [
-        0,
-        90,
-        0
-      ],
-      "translation": [
-        0,
-        -5.25,
-        0
-      ],
-      "scale": [
-        0.325,
-        0.325,
-        0.325
-      ]
+      "parent": "chaosawakens:item/big_bertha_gui"
+    },
+    "ground": {
+      "parent": "chaosawakens:item/big_bertha_gui"
     }
   }
 }

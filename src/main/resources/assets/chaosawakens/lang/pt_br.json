@@ -179,7 +179,7 @@
 	"item.chaosawakens.amethyst_hoe": "Enxada de Ametista",
 	"item.chaosawakens.amethyst_helmet": "Capacete de Ametista",
 	"item.chaosawakens.amethyst_chestplate": "Peitoral de Ametista",
-	"item.chaosawakens.amethyst_leggings": "Perneiras de Ametista",
+	"item.chaosawakens.amethyst_leggings": "Calças de Ametista",
 	"item.chaosawakens.amethyst_boots": "Botas de Ametista",
 
 	"item.chaosawakens.emerald_sword": "Espada de Esmeralda",
@@ -189,12 +189,12 @@
 	"item.chaosawakens.emerald_hoe": "Enxada de Esmeralda",
 	"item.chaosawakens.emerald_helmet": "Capacete de Esmeralda",
 	"item.chaosawakens.emerald_chestplate": "Peitoral de Esmeralda",
-	"item.chaosawakens.emerald_leggings": "Perneiras de Esmeralda",
+	"item.chaosawakens.emerald_leggings": "Calças de Esmeralda",
 	"item.chaosawakens.emerald_boots": "Botas de Esmeralda",
 	"item.chaosawakens.experience_sword": "Espada de Experiência",
 	"item.chaosawakens.experience_helmet": "Capacete de Experiência",
 	"item.chaosawakens.experience_chestplate": "Peitoral de Experiência",
-	"item.chaosawakens.experience_leggings": "Perneiras de Experiência",
+	"item.chaosawakens.experience_leggings": "Calças de Experiência",
 	"item.chaosawakens.experience_boots": "Botas de Experiência",
 
 	"item.chaosawakens.ruby": "Rubi",
@@ -208,7 +208,7 @@
 	"item.chaosawakens.ruby_hoe": "Enxada de Rubi",
 	"item.chaosawakens.ruby_helmet": "Capacete de Rubi",
 	"item.chaosawakens.ruby_chestplate": "Peitoral de Rubi",
-	"item.chaosawakens.ruby_leggings": "Perneiras de Rubi",
+	"item.chaosawakens.ruby_leggings": "Calças de Rubi",
 	"item.chaosawakens.ruby_boots": "Botas de Rubi",
 
 	"item.chaosawakens.tigers_eye": "Olho de Tigre",
@@ -221,7 +221,7 @@
 	"item.chaosawakens.tigers_eye_hoe": "Enxada de Olho de Tigre",
 	"item.chaosawakens.tigers_eye_helmet": "Capacete de Olho de Tigre",
 	"item.chaosawakens.tigers_eye_chestplate": "Peitoral de Olho de Tigre",
-	"item.chaosawakens.tigers_eye_leggings": "Perneiras de Olho de Tigre",
+	"item.chaosawakens.tigers_eye_leggings": "Calças de Olho de Tigre",
 	"item.chaosawakens.tigers_eye_boots": "Botas de Olho de Tigre",
 
 	"item.chaosawakens.titanium_ingot": "Barra de Titânio",
@@ -241,7 +241,7 @@
 	"item.chaosawakens.ultimate_hoe": "Enxada Suprema",
 	"item.chaosawakens.ultimate_helmet": "Capacete Supremo",
 	"item.chaosawakens.ultimate_chestplate": "Peitoral Supremo",
-	"item.chaosawakens.ultimate_leggings": "Perneiras Supremas",
+	"item.chaosawakens.ultimate_leggings": "Calças Supremas",
 	"item.chaosawakens.ultimate_boots": "Botas Supremas",
 
 	"item.chaosawakens.copper_lump": "Pedaço de Cobre",
@@ -254,7 +254,7 @@
 	"item.chaosawakens.copper_hoe": "Enxada de Cobre",
 	"item.chaosawakens.copper_helmet": "Capacete de Cobre",
 	"item.chaosawakens.copper_chestplate": "Peitoral de Cobre",
-	"item.chaosawakens.copper_leggings": "Perneiras de Cobre",
+	"item.chaosawakens.copper_leggings": "Calças de Cobre",
 	"item.chaosawakens.copper_boots": "Botas de Cobre",
 
 	"item.chaosawakens.tin_lump": "Pedaço de Estanho",
@@ -267,7 +267,7 @@
 	"item.chaosawakens.tin_hoe": "Enxada de Estanho",
 	"item.chaosawakens.tin_helmet": "Capacete de Estanho",
 	"item.chaosawakens.tin_chestplate": "Peitoral de Estanho",
-	"item.chaosawakens.tin_leggings": "Perneiras de Estanho",
+	"item.chaosawakens.tin_leggings": "Calças de Estanho",
 	"item.chaosawakens.tin_boots": "Botas de Estanho",
 
 	"item.chaosawakens.silver_lump": "Pedaço de Prata",
@@ -280,7 +280,7 @@
 	"item.chaosawakens.silver_hoe": "Enxada de Prata",
 	"item.chaosawakens.silver_helmet": "Capacete de Prata",
 	"item.chaosawakens.silver_chestplate": "Peitoral de Prata",
-	"item.chaosawakens.silver_leggings": "Perneiras de Prata",
+	"item.chaosawakens.silver_leggings": "Calças de Prata",
 	"item.chaosawakens.silver_boots": "Botas de Prata",
 
 	"item.chaosawakens.platinum_lump": "Pedaço de Platina",
@@ -293,7 +293,7 @@
 	"item.chaosawakens.platinum_hoe": "Enxada de Platina",
 	"item.chaosawakens.platinum_helmet": "Capacete de Platina",
 	"item.chaosawakens.platinum_chestplate": "Peitoral de Platina",
-	"item.chaosawakens.platinum_leggings": "Perneiras de Platina",
+	"item.chaosawakens.platinum_leggings": "Calças de Platina",
 	"item.chaosawakens.platinum_boots": "Botas de Platina",
 
 	"item.chaosawakens.sunstone": "Pedra Solar",
@@ -323,7 +323,7 @@
 	"item.chaosawakens.pink_tourmaline_hoe": "Enxada de Turmalina Rosa",
 	"item.chaosawakens.pink_tourmaline_helmet": "Capacete de Turmalina Rosa",
 	"item.chaosawakens.pink_tourmaline_chestplate": "Peitoral de Turmalina Rosa",
-	"item.chaosawakens.pink_tourmaline_leggings": "Perneiras de Turmalina Rosa",
+	"item.chaosawakens.pink_tourmaline_leggings": "Calças de Turmalina Rosa",
 	"item.chaosawakens.pink_tourmaline_boots": "Botas de Turmalina Rosa",
 
 	"item.chaosawakens.cats_eye_ingot": "Barra de Olho de Gato",
@@ -338,7 +338,7 @@
 	"item.chaosawakens.cats_eye_hoe": "Enxada de Olho de Gato",
 	"item.chaosawakens.cats_eye_helmet": "Capacete de Olho de Gato",
 	"item.chaosawakens.cats_eye_chestplate": "Peitoral de Olho de Gato",
-	"item.chaosawakens.cats_eye_leggings": "Perneiras de Olho de Gato",
+	"item.chaosawakens.cats_eye_leggings": "Calças de Olho de Gato",
 	"item.chaosawakens.cats_eye_boots": "Botas de Olho de Gato",
 
 	"block.chaosawakens.fossilised_ent": "Ent Fossilizado",
@@ -380,19 +380,19 @@
 
 	"item.chaosawakens.lapis_helmet": "Capacete de Lápis-lazúli",
 	"item.chaosawakens.lapis_chestplate": "Peitoral de Lápis-lazúli",
-	"item.chaosawakens.lapis_leggings": "Perneiras de Lápis-lazúli",
+	"item.chaosawakens.lapis_leggings": "Calças de Lápis-lazúli",
 	"item.chaosawakens.lapis_boots": "Botas de Lápis-lazúli",
 	"item.chaosawakens.moth_scale_helmet": "Capacete de Mariposa",
 	"item.chaosawakens.moth_scale_chestplate": "Peitoral de Mariposa",
-	"item.chaosawakens.moth_scale_leggings": "Perneiras de Mariposa",
+	"item.chaosawakens.moth_scale_leggings": "Calças de Mariposa",
 	"item.chaosawakens.moth_scale_boots": "Botas de Mariposa",
 	"item.chaosawakens.lava_eel_helmet": "Capacete de Enguia-lava",
 	"item.chaosawakens.lava_eel_chestplate": "Peitoral de Enguia-lava",
-	"item.chaosawakens.lava_eel_leggings": "Perneiras de Enguia-lava",
+	"item.chaosawakens.lava_eel_leggings": "Calças de Enguia-lava",
 	"item.chaosawakens.lava_eel_boots": "Botas de Enguia-lava",
 	"item.chaosawakens.peacock_feather_helmet": "Capacete de Pena-pavão",
 	"item.chaosawakens.peacock_feather_chestplate": "Peitoral de Pena-pavão",
-	"item.chaosawakens.peacock_feather_leggings": "Perneiras de Pena-pavão",
+	"item.chaosawakens.peacock_feather_leggings": "Calças de Pena-pavão",
 	"item.chaosawakens.peacock_feather_boots": "Botas de Pena-pavão",
 
 	"item.chaosawakens.royal_guardian_helmet": "Royal Guardian Helmet",
@@ -410,7 +410,7 @@
 	"item.chaosawakens.queen_scale_battle_axe": "Machado de Guerra da Queen",
 	"item.chaosawakens.queen_scale_helmet": "Capacete de Escamas da Queen",
 	"item.chaosawakens.queen_scale_chestplate": "Peitoral de Escamas da Queen",
-	"item.chaosawakens.queen_scale_leggings": "Perneiras de Escamas da Queen",
+	"item.chaosawakens.queen_scale_leggings": "Calças de Escamas da Queen",
 	"item.chaosawakens.queen_scale_boots": "Botas de Escamas da Queen",
 
 	"item.chaosawakens.nightmare_sword": "Espada de Nightmare",

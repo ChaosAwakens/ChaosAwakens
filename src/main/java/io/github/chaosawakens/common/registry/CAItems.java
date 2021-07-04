@@ -220,7 +220,7 @@ public class CAItems {
 	public static final RegistryObject<UltimateFishingRodItem> ULTIMATE_FISHING_ROD = ITEMS.register("ultimate_fishing_rod", () -> new UltimateFishingRodItem(new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).maxStackSize(1).maxDamage(1000),
 			new EnchantmentData[] {new EnchantmentData(Enchantments.UNBREAKING, 2)}));
 
-	public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new ExtendedHitWeaponItem(CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, 5F, new Item.Properties().rarity(Rarity.RARE).group(CAItemGroups.equipmentItemGroup).setISTER(() -> BigBerthaItemRender::new),
+	public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new ExtendedHitWeaponItem(CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, 5F, new Item.Properties().rarity(Rarity.EPIC).group(CAItemGroups.equipmentItemGroup).setISTER(() -> BigBerthaItemRender::new),
 			new EnchantmentData[] { new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
 
 	// Emerald

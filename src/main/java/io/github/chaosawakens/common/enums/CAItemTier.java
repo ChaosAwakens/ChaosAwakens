@@ -48,7 +48,7 @@ public enum CAItemTier implements IItemTier {
 
     WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, Ingredient::fromItems),
 
-    WEAPON_BERTHA(5, 6000, 16, 47, 72, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
+    WEAPON_BERTHA(5, 6000, 16, 496, 72, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
 
 
     private final int harvestLevel;
