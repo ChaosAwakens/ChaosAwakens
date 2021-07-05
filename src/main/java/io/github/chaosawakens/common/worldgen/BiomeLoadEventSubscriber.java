@@ -104,9 +104,10 @@ public class BiomeLoadEventSubscriber {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addNetherOres(gen);
 			}
-			
+
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
 				gen.getStructures().add(() -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
+				gen.getStructures().add(() -> ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
 
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
@@ -134,6 +135,7 @@ public class BiomeLoadEventSubscriber {
 			switch (event.getCategory()) {
 				case FOREST:
 					builder.withStructure(ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
+					builder.withStructure(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 				default:
 					break;
 			}

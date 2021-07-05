@@ -10,6 +10,7 @@ import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAStructures;
 import io.github.chaosawakens.common.registry.CAVillagers;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -20,6 +21,7 @@ import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.raid.Raid;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
@@ -49,12 +51,11 @@ public class CommonSetupEvent {
 	
 	public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {
 		PacketHandler.init();
-		
+
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
 			CAVillagers.registerVillagerTypes();
-			CAVillagers.registerPOIs();
 			
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
@@ -92,6 +93,7 @@ public class CommonSetupEvent {
 			
 			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.func_235957_b_().func_236195_a_());
 			tempMap.putIfAbsent(CAStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.ENT_DUNGEON.get()));
+			tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.WASP_DUNGEON.get()));
 			chunkProvider.generator.func_235957_b_().field_236193_d_ = tempMap;
 		}
 	}

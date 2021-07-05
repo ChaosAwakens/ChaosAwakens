@@ -42,9 +42,7 @@ public class CABlockLootTables extends BlockLootTables {
 				BlockStateProperty.builder(plant).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(BlockStateProperties.AGE_0_3, 3))));
 		registerLootTable(CABlocks.STRAWBERRY_PLANT.get(), (plant) -> droppingAndBonusWhen(plant, CAItems.STRAWBERRY.get(), CAItems.STRAWBERRY_SEEDS.get(),
 				BlockStateProperty.builder(plant).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(BlockStateProperties.AGE_0_3, 3))));
-		
-//		registerLootTable(CABlocks.HUSK_WALL_HEAD.get(), (block) -> dropping(CABlocks.HUSK_HEAD.get()));
-//		registerDropSelfLootTable(CABlocks.HUSK_HEAD.get());
+
 		registerDropping(CABlocks.MOULDY_PLANKS.get(), Items.AIR);
 		registerDropping(CABlocks.MOULDY_SLAB.get(), Items.AIR);
 		registerDropping(CABlocks.MOULDY_FENCE.get(), Items.AIR);
@@ -74,6 +72,7 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.RANDOM_TELEPORT_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.GREEN_CRYSTAL_LEAVES.get());
 		registerDropSelfLootTable(CABlocks.KYANITE.get());
+		registerDropSelfLootTable(CABlocks.NEST_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.PINK_TOURMALINE_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.PINK_TOURMALINE_CLUSTER.get());
 		registerDropSelfLootTable(CABlocks.PLATINUM_BLOCK.get());
@@ -95,7 +94,6 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.URANIUM_BLOCK.get());
 		registerDropSelfLootTable(CABlocks.URANIUM_ORE.get());
 		registerDropSelfLootTable(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
-		registerDropSelfLootTable(CABlocks.RANDOM_TELEPORT_BLOCK.get());
 	}
 	
 	protected static LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {

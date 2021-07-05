@@ -6,6 +6,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.worldgen.structures.*;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.FortressStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.*;
 
@@ -16,16 +17,14 @@ import java.util.*;
 
 public class CAStructures {
 
-	public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister
-			.create(ForgeRegistries.STRUCTURE_FEATURES, ChaosAwakens.MODID);
+	public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ChaosAwakens.MODID);
 
-	public static final RegistryObject<Structure<NoFeatureConfig>> ENT_DUNGEON = STRUCTURES.register("ent_dungeon",
-			() -> (new EntDungeonStructure(NoFeatureConfig.CODEC)));
-	
+	public static final RegistryObject<Structure<NoFeatureConfig>> ENT_DUNGEON = STRUCTURES.register("ent_dungeon", () -> (new EntDungeonStructure(NoFeatureConfig.CODEC)));
+	public static final RegistryObject<Structure<NoFeatureConfig>> WASP_DUNGEON = STRUCTURES.register("wasp_dungeon", () -> (new WaspDungeonStructure(NoFeatureConfig.CODEC)));
+
 	public static void setupStructures() {
-		setupMapSpacingAndLand(ENT_DUNGEON.get(),
-				new StructureSeparationSettings(30 , 24, 32034987),
-				true);
+		setupMapSpacingAndLand(ENT_DUNGEON.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
+		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21 , 19, 139369349), true);
 	}
 
 	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure,
@@ -34,13 +33,11 @@ public class CAStructures {
 		Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);                                                                                                                                                                                                                                          
 		
 		if (transformSurroundingLand) {
-			Structure.field_236384_t_ = ImmutableList.<Structure<?>>builder().addAll(Structure.field_236384_t_)
-					.add(structure).build();
+			Structure.field_236384_t_ = ImmutableList.<Structure<?>>builder().addAll(Structure.field_236384_t_).add(structure).build();
 		}
 		
 		DimensionStructuresSettings.field_236191_b_ = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
-				.putAll(DimensionStructuresSettings.field_236191_b_).put(structure, structureSeparationSettings)
-				.build();
+				.putAll(DimensionStructuresSettings.field_236191_b_).put(structure, structureSeparationSettings).build();
 		
 		WorldGenRegistries.NOISE_SETTINGS.getEntries().forEach(settings -> {
 			Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue()

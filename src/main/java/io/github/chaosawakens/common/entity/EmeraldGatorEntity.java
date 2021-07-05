@@ -5,7 +5,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -37,7 +36,7 @@ import java.util.UUID;
 
 public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAnimatable {
 	
-    private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.createKey(WolfEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.createKey(EmeraldGatorEntity.class, DataSerializers.VARINT);
     private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.convertRange(20, 39);
     private UUID field_234231_bH_;
 

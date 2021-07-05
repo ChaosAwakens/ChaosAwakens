@@ -19,11 +19,12 @@ import net.minecraft.world.IWorld;
 import java.util.Set;
 
 public class CATreasure {
-    // For easy testing:
-    // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_dungeon"}} 1
     private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
 
+    // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_dungeon"}} 1
     public static final CATreasure ent_dungeon = new CATreasure("ent_dungeon");
+    // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon"}} 1
+    public static final CATreasure wasp_dungeon = new CATreasure("wasp_dungeon");
 
     public static LootFunctionType ENCHANT;
 

@@ -39,6 +39,7 @@
 	"advancements.chaosawakens.shiny_cows.description": "Breed 2 Golden Apple Cows.",
 
 	"dungeon.chaosawakens.jer.ent_dungeon": "Ent Dungeon",
+	"dungeon.chaosawakens.jer.wasp_dungeon": "Wasp Dungeon",
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
@@ -62,6 +63,7 @@
 	"entity.chaosawakens.golden_apple_cow": "Golden Apple Cow",
 	"entity.chaosawakens.enchanted_golden_apple_cow": "Enchanted Golden Apple Cow",
 	"entity.chaosawakens.crystal_apple_cow": "Crystal Apple Cow",
+	"entity.chaosawakens.wasp": "Wasp",
 	"entity.chaosawakens.ultimate_arrow": "Ultimate Arrow",
 	"entity.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
@@ -84,6 +86,7 @@
 	"item.chaosawakens.golden_apple_cow_spawn_egg": "Golden Apple Cow Spawn Egg",
 	"item.chaosawakens.enchanted_golden_apple_cow_spawn_egg": "Enchanted Golden Apple Cow Spawn Egg",
 	"item.chaosawakens.crystal_apple_cow_spawn_egg": "Crystal Apple Cow Spawn Egg",
+	"item.chaosawakens.wasp_spawn_egg": "Wasp Spawn Egg",
 	"item.chaosawakens.iron_golem_spawn_egg": "Iron Golem Spawn Egg",
 	"item.chaosawakens.snow_golem_spawn_egg": "Snow Golem Spawn Egg",
 	"item.chaosawakens.illusioner_spawn_egg": "Illusioner Spawn Egg",
@@ -428,6 +431,7 @@
 	"item.chaosawakens.skate_string_bow": "Skate String Bow",
 	"item.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 
+	"block.chaosawakens.nest_block": "Nest Block",
 	"block.chaosawakens.gate_block": "Gate Block",
 	"block.chaosawakens.spawner_block": "Spawner Block",
 	"block.chaosawakens.random_teleport_block": "Random Teleport Block",
@@ -437,11 +441,16 @@
 	"block.chaosawakens.rainbow_ant_nest": "Rainbow Ant Nest",
 	"block.chaosawakens.unstable_ant_nest": "Unstable Ant Nest",
 	"block.chaosawakens.termite_nest": "Termite Nest",
-	"block.chaosawakens.red_ant_infested_ore": "Diamond Ore",
-	"block.chaosawakens.termite_infested_ore": "Emerald Ore",
+
 
 	"item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
 	"item.chaosawakens.termite_infested_ore": "Termite Infested Ore",
+	"block.chaosawakens.red_ant_infested_ore": "Diamond Ore",
+	"block.chaosawakens.termite_infested_ore": "Emerald Ore",
+
+	"block.chaosawakens.mouldy_planks": "Mouldy Planks",
+	"block.chaosawakens.mouldy_slab": "Mouldy Slab",
+	"block.chaosawakens.mouldy_fence": "Mouldy Fence",
 
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
 

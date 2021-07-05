@@ -43,14 +43,6 @@ public class CAVillagers {
 		}
 	}
 
-	public static void registerPOIs() {
-		try {
-			ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "func_221052_a", PointOfInterestType.class).invoke(null, DIMENSIONAL_TRADER.get());
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 //	private static void setupVillagerHouses() {
 //		PlainsVillagePools.init();
 //		SnowyVillagePools.init();

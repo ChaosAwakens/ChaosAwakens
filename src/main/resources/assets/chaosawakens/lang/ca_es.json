@@ -86,7 +86,6 @@
 	"item.chaosawakens.snow_golem_spawn_egg": "Ou de Golem de neu",
 
 	"biome.chaosawakens.mining_biome": "Mining Fields",
-	"biome.chaosawakens.mining_spikes": "Mining Spikes",
 	"biome.chaosawakens.village_plains": "Village Plains",
 	"biome.chaosawakens.danger_islands": "Danger Islands",
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
@@ -460,5 +459,4 @@
 
 	"misc.chaosawakens.empty_inventory": "Buideu primer el vostre inventari!",
 	"misc.chaosawakens.inaccessible_dimension": "Sembla que la dimensió objectiu encara no és aquí.",
-	"block.chaosawakens.ent_dungeon_wood": "Calabós de fusta Ent"
 }

@@ -86,7 +86,6 @@
 	"item.chaosawakens.snow_golem_spawn_egg": "Oeuf d'apparition de golem de neige",
 
 	"biome.chaosawakens.mining_biome": "Mining Fields",
-	"biome.chaosawakens.mining_spikes": "Mining Spikes",
 	"biome.chaosawakens.village_plains": "Village Plains",
 	"biome.chaosawakens.danger_islands": "Danger Islands",
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
@@ -459,6 +458,5 @@
 	"block.chaosawakens.strawberry_plant": "Strawberry Bush",
 
 	"misc.chaosawakens.empty_inventory": "Videz votre inventaire en premier!",
-	"misc.chaosawakens.inaccessible_dimension": "La dimension cibl�e ne semble pas encore �tre op�rationnelle.",
-	"block.chaosawakens.ent_dungeon_wood": "Bois du donjon d'Ent"
+	"misc.chaosawakens.inaccessible_dimension": "La dimension cibl�e ne semble pas encore �tre op�rationnelle."
 }

@@ -1,0 +1,15 @@
+{
+	"name": "chaosawakens:wasp_dungeon/start_pool",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 2,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "chaosawakens:wasp_dungeon",
+				"processors": "minecraft:empty",
+				"projection": "rigid"
+			}
+		}
+	]
+}

@@ -345,6 +345,13 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .addEntry(ItemLootEntry.builder(CAItems.DEAD_STINK_BUG.get())
                                         .acceptFunction(SetCount.builder(ConstantRange.of(1)))
                                         .acceptCondition(KilledByPlayer.builder()))));
+        registerLootTable(CAEntityTypes.WASP.get(),
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.GOLD_NUGGET)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(12.0F, 24.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))));
     }
 
     @Override

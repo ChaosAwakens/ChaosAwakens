@@ -14,6 +14,8 @@ public class CAJER {
     private static void registerDungeonLoot() {
         JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon", "dungeon.chaosawakens.jer.ent_dungeon");
         JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon", new ResourceLocation("chaosawakens:chests/ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/wasp_dungeon", "dungeon.chaosawakens.jer.wasp_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/wasp_dungeon", new ResourceLocation("chaosawakens:chests/wasp_dungeon"));
     }
 
     private static void registerPlants() {

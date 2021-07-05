@@ -5,20 +5,7 @@ import java.util.List;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.entity.AggressiveAntEntity;
-import io.github.chaosawakens.common.entity.AntEntity;
-import io.github.chaosawakens.common.entity.AppleCowEntity;
-import io.github.chaosawakens.common.entity.BeaverEntity;
-import io.github.chaosawakens.common.entity.CrystalAppleCowEntity;
-import io.github.chaosawakens.common.entity.EmeraldGatorEntity;
-import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.EntEntity;
-import io.github.chaosawakens.common.entity.GoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
-import io.github.chaosawakens.common.entity.RoboSniperEntity;
-import io.github.chaosawakens.common.entity.RoboWarriorEntity;
-import io.github.chaosawakens.common.entity.RubyBugEntity;
-import io.github.chaosawakens.common.entity.StinkBugEntity;
+import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
@@ -141,12 +128,20 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.create(RoboSniperEntity::new, EntityClassification.MONSTER)
 				.size(1.0f, 1.5f) // Hitbox Size ()
 				.build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper").toString()));
-	
+
 	// Robo Warrior
 	public static final RegistryObject<EntityType<RoboWarriorEntity>> ROBO_WARRIOR = ENTITY_TYPES.register("robo_warrior",
 			() -> EntityType.Builder.create(RoboWarriorEntity::new, EntityClassification.MONSTER)
-				.size(2.0f, 4.0f) // Hitbox Size ()
-				.build(new ResourceLocation(ChaosAwakens.MODID, "robo_warrior").toString()));
+					.size(2.0f, 4.0f) // Hitbox Size ()
+					.build(new ResourceLocation(ChaosAwakens.MODID, "robo_warrior").toString()));
+
+	// Robo Warrior
+	public static final RegistryObject<EntityType<WaspEntity>> WASP = ENTITY_TYPES.register("wasp",
+			() -> EntityType.Builder.create(WaspEntity::new, EntityClassification.MONSTER)
+					.size(2.0f, 4.0f) // Hitbox Size ()
+					.build(new ResourceLocation(ChaosAwakens.MODID, "wasp").toString()));
+
+
 	
 	// Projectiles
 	public static final RegistryObject<EntityType<RoboLaserEntity>> ROBO_LASER = ENTITY_TYPES.register("robo_laser",
