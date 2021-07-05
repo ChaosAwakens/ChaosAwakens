@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common;
+package io.github.chaosawakens.common.events;
 
 import com.mojang.serialization.Codec;
 import io.github.chaosawakens.ChaosAwakens;

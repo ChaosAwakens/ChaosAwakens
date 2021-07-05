@@ -2,7 +2,7 @@ package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
 import io.github.chaosawakens.api.FeatureWrapper;
-import io.github.chaosawakens.common.CommonSetupEvent;
+import io.github.chaosawakens.common.events.CommonSetupEvent;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

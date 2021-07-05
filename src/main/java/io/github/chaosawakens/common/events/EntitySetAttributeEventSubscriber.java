@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common;
+package io.github.chaosawakens.common.events;
 
 import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
