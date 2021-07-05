@@ -352,6 +352,14 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .addEntry(ItemLootEntry.builder(Items.GOLD_NUGGET)
                                         .acceptFunction(SetCount.builder(RandomValueRange.of(12.0F, 24.0F)))
                                         .acceptCondition(KilledByPlayer.builder()))));
+        registerLootTable(EntityType.ILLUSIONER,
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.EMERALD)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 3.0F)))
+                                        .acceptCondition(KilledByPlayer.builder()))));
+
     }
 
     @Override

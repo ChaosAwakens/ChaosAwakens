@@ -51,6 +51,7 @@ public class CommonSetupEvent {
 	
 	public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {
 		PacketHandler.init();
+		Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[] { 0,0, 0, 0, 1, 1, 0, 2 });
 
 		event.enqueueWork(() -> {
 			CAStructures.setupStructures();
