@@ -7,12 +7,12 @@
 			"block_search_extent": 8,
 			"offset": 2.0
 		},
-		"sky_color": 7907327,
+		"sky_color": 7254527,
 		"fog_color": 12638463,
 		"water_color": 4159204,
 		"water_fog_color": 329011
 	},
-	"surface_builder": "minecraft:grass",
+	"surface_builder": "minecraft:desert",
 	"carvers": {
 		"air": [
 			"minecraft:cave",
@@ -20,6 +20,13 @@
 		]
 	},
 	"features": [
+		[
+			"minecraft:fossil",
+			"minecraft:monster_room"
+		],
+		[
+			"minecraft:desert_well"
+		],
 		[
 			"minecraft:ore_dirt",
 			"minecraft:ore_gravel",
@@ -37,15 +44,15 @@
 			"minecraft:disk_gravel"
 		],
 		[
-			"minecraft:patch_tall_grass_2",
-			"minecraft:plain_vegetation",
-			"minecraft:flower_plain_decorated",
-			"minecraft:patch_grass_plain",
-			"minecraft:patch_pumpkin"
+			"minecraft:flower_default",
+			"minecraft:patch_grass_badlands",
+			"minecraft:patch_dead_bush_2",
+			"minecraft:patch_pumpkin",
+			"minecraft:patch_cactus_desert"
 		]
 	],
 	"starts": [
-		"minecraft:village_plains",
+		"minecraft:village_desert",
 		"minecraft:pillager_outpost"
 	],
 	"spawners": {
@@ -109,61 +116,19 @@
 				"weight": 5,
 				"minCount": 1,
 				"maxCount": 1
+			},
+			{
+				"type": "minecraft:husk",
+				"weight": 80,
+				"minCount": 4,
+				"maxCount": 4
 			}
 		],
 		"creature": [
 			{
-				"type": "minecraft:sheep",
-				"weight": 12,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "minecraft:pig",
-				"weight": 10,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "minecraft:chicken",
-				"weight": 10,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "minecraft:cow",
-				"weight": 8,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "chaosawakens:apple_cow",
-				"weight": 7,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "chaosawakens:golden_apple_cow",
+				"type": "minecraft:rabbit",
 				"weight": 4,
-				"minCount": 3,
-				"maxCount": 3
-			},
-			{
-				"type": "chaosawakens:enchanted_golden_apple_cow",
-				"weight": 1,
-				"minCount": 1,
-				"maxCount": 1
-			},
-			{
-				"type": "minecraft:horse",
-				"weight": 5,
 				"minCount": 2,
-				"maxCount": 6
-			},
-			{
-				"type": "minecraft:donkey",
-				"weight": 1,
-				"minCount": 1,
 				"maxCount": 3
 			}
 		]
@@ -171,9 +136,9 @@
 	"spawn_costs": {
 	},
 	"player_spawn_friendly": true,
-	"precipitation": "rain",
-	"temperature": 0.8,
-	"downfall": 0.4,
-	"category": "plains",
+	"precipitation": "none",
+	"temperature": 2,
+	"downfall": 0,
+	"category": "desert",
 	"depth": 0.125
 }

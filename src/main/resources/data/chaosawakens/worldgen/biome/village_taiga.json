@@ -1,5 +1,5 @@
 {
-	"scale": 0.05,
+	"scale": 0.2,
 	"effects": {
 		"mood_sound": {
 			"sound": "minecraft:ambient.cave",
@@ -7,7 +7,7 @@
 			"block_search_extent": 8,
 			"offset": 2.0
 		},
-		"sky_color": 7907327,
+		"sky_color": 8233983,
 		"fog_color": 12638463,
 		"water_color": 4159204,
 		"water_fog_color": 329011
@@ -37,15 +37,18 @@
 			"minecraft:disk_gravel"
 		],
 		[
-			"minecraft:patch_tall_grass_2",
-			"minecraft:plain_vegetation",
-			"minecraft:flower_plain_decorated",
-			"minecraft:patch_grass_plain",
-			"minecraft:patch_pumpkin"
+			"minecraft:patch_large_fern",
+			"minecraft:taiga_vegetation",
+			"minecraft:flower_default",
+			"minecraft:patch_grass_taiga_2",
+			"minecraft:brown_mushroom_taiga",
+			"minecraft:red_mushroom_taiga",
+			"minecraft:patch_pumpkin",
+			"minecraft:patch_berry_sparse"
 		]
 	],
 	"starts": [
-		"minecraft:village_plains",
+		"minecraft:village_taiga",
 		"minecraft:pillager_outpost"
 	],
 	"spawners": {
@@ -155,25 +158,30 @@
 				"maxCount": 1
 			},
 			{
-				"type": "minecraft:horse",
-				"weight": 5,
-				"minCount": 2,
-				"maxCount": 6
+				"type": "minecraft:wolf",
+				"weight": 8,
+				"minCount": 4,
+				"maxCount": 4
 			},
 			{
-				"type": "minecraft:donkey",
-				"weight": 1,
-				"minCount": 1,
+				"type": "minecraft:rabbit",
+				"weight": 4,
+				"minCount": 2,
 				"maxCount": 3
+			},
+			{
+				"type": "minecraft:fox",
+				"weight": 8,
+				"minCount": 2,
+				"maxCount": 4
 			}
 		]
 	},
-	"spawn_costs": {
-	},
+	"spawn_costs": {},
 	"player_spawn_friendly": true,
 	"precipitation": "rain",
-	"temperature": 0.8,
-	"downfall": 0.4,
-	"category": "plains",
-	"depth": 0.125
+	"temperature": 0.25,
+	"downfall": 0.8,
+	"category": "taiga",
+	"depth": 0.2
 }
