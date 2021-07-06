@@ -38,6 +38,7 @@ public class CAEMCValues implements IEMCMapper<NormalizedSimpleStack, Long> {
         registerCustomEMC(NSSItem.createItem(CABlocks.RED_ANT_NEST.getId()), 3);
         registerCustomEMC(NSSItem.createItem(CABlocks.UNSTABLE_ANT_NEST.getId()), 3);
         registerCustomEMC(NSSItem.createItem(CABlocks.TERMITE_NEST.getId()), 3);
+        registerCustomEMC(NSSItem.createItem(CABlocks.CRYSTAL_TERMITE_NEST.getId()), 3);
 
         registerCustomEMC(NSSItem.createItem(CABlocks.CRYSTAL_GRASS_BLOCK.getId()), 2);
         registerCustomEMC(NSSItem.createItem(CABlocks.KYANITE.getId()), 2);

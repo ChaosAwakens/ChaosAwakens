@@ -40,12 +40,6 @@
 		],
 		"creature": [
 			{
-				"type": "chaosawakens:termite",
-				"weight": 12,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
 				"type": "chaosawakens:crystal_apple_cow",
 				"weight": 6,
 				"minCount": 1,

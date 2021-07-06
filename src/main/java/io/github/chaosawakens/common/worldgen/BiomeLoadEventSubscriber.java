@@ -223,9 +223,9 @@ public class BiomeLoadEventSubscriber {
 			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
 			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_PINK_TOURMALINE);
 
-//			if (CAConfig.COMMON.enableNestGen.get()) {
-//				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_TERMITE_NEST);
-//			}
+			if (CAConfig.COMMON.enableNestGen.get()) {
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_TERMITE_NEST);
+			}
 		}
 
 //		private static void addDangerDimOres(BiomeGenerationSettingsBuilder gen) {
