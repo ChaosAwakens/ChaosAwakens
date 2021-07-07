@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "mmobs:block/tube_worm"
+      "model": "chaosawakens:block/tube_worm"
     }
   }
 }
