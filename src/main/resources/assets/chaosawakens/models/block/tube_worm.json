@@ -2,6 +2,6 @@
 {
   "parent": "block/template_seagrass",
   "textures": {
-    "texture": "mmobs:block/tube_worm"
+    "texture": "chaosawakens:block/tube_worm"
   }
 }
