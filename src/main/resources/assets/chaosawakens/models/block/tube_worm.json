@@ -1,0 +1,7 @@
+
+{
+  "parent": "block/template_seagrass",
+  "textures": {
+    "texture": "mmobs:block/tube_worm"
+  }
+}
