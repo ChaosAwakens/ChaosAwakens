@@ -48,8 +48,8 @@ public class ClientSetupEvent {
 
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(RegistryHandler.TUBE.get(), RenderType.getCutout());
-        	RenderTypeLookup.setRenderLayer(RegistryHandler.TUBE_PLANT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.TUBE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_PLANT.get(), RenderType.getCutout());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.RED_ANT_NEST.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.BROWN_ANT_NEST.get(), RenderType.getCutout());
