@@ -1,19 +1,27 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.api.IGrabber;
+import io.github.chaosawakens.common.entity.ai.AnimatableGrabGoal;
+import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.ThrowRiderAttackGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -23,9 +31,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAnimatable {
+public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAnimatable, IGrabber {
 	private final AnimationFactory factory = new AnimationFactory(this);
-
+	protected final Vector3d grabOffset = new Vector3d(0, 0.5, 2);
+	
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.ignoreFrustumCheck = true;
@@ -37,8 +46,15 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 			return PlayState.CONTINUE;
 		}
 		
-		if (this.getHitting()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_attack_animation", true));
+		if (this.getAttacking()) {
+			switch(this.getAttackType()) {
+				case 0:
+					event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", true));
+					break;
+				case 1:
+					event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.ram_attack_animation", true));
+					break;
+			}
 			return PlayState.CONTINUE;
 		}
 		
@@ -57,6 +73,8 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new AnimatableMoveToTargetGoal(this, 1.75, 10));
+		this.goalSelector.addGoal(4, new AnimatableGrabGoal(this));
+		this.goalSelector.addGoal(3, new AnimatableMeleeGoal(this, 68.8, 0.55, 0.65));
 //		this.goalSelector.addGoal(3, new ThrowRiderAttackGoal(this, 0.125F, false));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
@@ -86,6 +104,20 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
+	}
+	
+	@Override
+	public boolean shouldRiderSit() {
+		return false;
+	}
+	
+	@Override
+	public void updatePassenger(Entity passenger) {
+		this.positionRider(this, passenger, Entity::setPosition);
+	}
+	
+	public Vector3d getGrabOffset() {
+		return this.grabOffset;
 	}
 	
 	@Override

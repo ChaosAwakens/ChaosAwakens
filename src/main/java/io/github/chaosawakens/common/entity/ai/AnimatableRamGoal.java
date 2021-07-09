@@ -5,27 +5,27 @@ import java.util.EnumSet;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.math.BlockPos;
 
 /**
- * Move a given entity towards another targeted entity
  * @author invalid2
+ *
  */
-public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
+public class AnimatableRamGoal extends AnimatableMovableGoal {
 	
 	private final double speedMultiplier;
 	private final int checkRate;
 	
 	/**
-	 * Move an AnimatableMonsterEntity to a target entity
-	 * @param entity AnimatableMonsterEntity instance
-	 * @param speedMultiplier Entity will move by base speed * this
-	 * @param checkRate Check rate with formula: {@code if(RANDOM.nextInt(rate) == 0)}, so bigger = less often
+	 * 
 	 */
-	public AnimatableMoveToTargetGoal(AnimatableMonsterEntity entity, double speedMultiplier, int checkRate) {
+	public AnimatableRamGoal(AnimatableMonsterEntity entity, double speedMultiplier, int checkRate) {
 		this.entity = entity;
 		this.speedMultiplier = speedMultiplier;
 		this.checkRate = checkRate;
+		
 		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 	}
 	
@@ -66,7 +66,24 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		LivingEntity target = this.entity.getAttackTarget();
 		if(target == null)return;
 		
-		this.entity.getLookController().setLookPositionWithEntity(target, 30F, 30F);
-		this.entity.getNavigator().tryMoveToEntityLiving(target, this.speedMultiplier);
+		this.entity.faceEntity(target, 30, 30);
+		//BlockPos targetPos = this.entity.getNavigator().getPath().getTarget();
+		
+		//this.entity.getLookController().setLookPosition(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 30, 30);
+		
+		//this.entity.getNavigator().tryMoveToXYZ(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speedMultiplier);
+	}
+	
+	@Override
+	protected boolean isExecutable(AnimatableMovableGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+		if(target == null)return false;
+		if(target.isAlive() && !target.isSpectator()) {
+			if(target instanceof PlayerEntity && ((PlayerEntity) target).isCreative())return false;
+			
+			double distance = goal.entity.getDistanceSq(target.getPosX(), target.getPosY(), target.getPosZ());
+
+			return attacker.getEntitySenses().canSee(target) && distance >= AnimatableGoal.getAttackReachSq(attacker, target);
+		}
+		return false;
 	}
 }

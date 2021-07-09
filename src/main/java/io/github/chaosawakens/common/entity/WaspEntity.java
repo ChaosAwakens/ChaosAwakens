@@ -44,13 +44,12 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		super.doTickBase(event);
 		if(this.dead) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("death", true));
 			return PlayState.CONTINUE;
 		}
 		
-		if(this.getHitting()) {
+		if(this.getAttacking()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("attacking", true));
 			return PlayState.CONTINUE;
 		}
@@ -65,7 +64,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, BeeEntity.class, 24.0F));
 		this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
-		this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, (progress, length) -> 0.7 < progress/length && progress/length < 0.8 ));
+		this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, 0.7, 0.8 ));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomFlyingGoal(this, 1.6));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));

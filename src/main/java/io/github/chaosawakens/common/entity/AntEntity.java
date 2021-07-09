@@ -4,8 +4,6 @@ import javax.annotation.Nullable;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.HeightmapTeleporter;
-import io.github.chaosawakens.api.IAntEntity;
-import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;

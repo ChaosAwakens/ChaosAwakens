@@ -3,7 +3,6 @@ package io.github.chaosawakens.common.entity.ai;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -25,10 +24,10 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	 * @param entity Attacking entity
 	 * @param animationLength
 	 */
-	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, BiFunction<Double, Double, Boolean> attackPredicate) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
 		this.entity = entity;
 		this.animationLength = animationLength;
-		this.attackPredicate = attackPredicate;
+		this.attackPredicate = (progress, length) -> attackBegin < progress/length && progress/length < attackEnd;
 		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 	
@@ -49,7 +48,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 
 	@Override
 	public void startExecuting() {
-		this.entity.setHitting(true);
+		this.entity.setAttacking(true, 0);
 		this.entity.setAggroed(true);
 		this.animationProgress = 0;
 	}
@@ -60,7 +59,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		if (!EntityPredicates.CAN_AI_TARGET.test(target)) {
 			this.entity.setAttackTarget(null);
 		}
-		this.entity.setHitting(false);
+		this.entity.setAttacking(false);
 		this.entity.setAggroed(false);
 		this.hasHit = false;
 		this.animationProgress = 0;
@@ -89,13 +88,13 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		if(target == null)return false;
 		if(target.isAlive() && !target.isSpectator()) {
 			if(target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
-				attacker.setHitting(false);
+				attacker.setAttacking(false);
 				return false;
 			}
 			double distance = goal.entity.getDistanceSq(target.getPosX(), target.getPosY(), target.getPosZ());
-			if(attacker.getEntitySenses().canSee(target) && distance <= AnimatableGoal.getAttackReachSq(attacker, target))return true;
+			if(distance <= AnimatableGoal.getAttackReachSq(attacker, target))return true;
 		}
-		attacker.setHitting(false);
+		attacker.setAttacking(false);
 		return false;
 	}
 }

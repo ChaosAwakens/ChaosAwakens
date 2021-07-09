@@ -35,7 +35,7 @@ public abstract class AnimatableGoal extends Goal {
 	}
 	
 	protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
-		return attacker.getWidth() * 2.0F * attacker.getWidth() * 2.0F + target.getWidth();
+		return attacker.getWidth() * 2F * attacker.getWidth() * 2F + target.getWidth();
 	}
 	
 	@Override
