@@ -44,6 +44,6 @@ All previous downloads are now located [in this page](https://invalid2.github.io
 
 **Coders:** Meme Man, WeirdNerd, Blackout, LuisRandomness, Crosby, Akio, HugoMage, Mglucas0123
 
-**Artists:** VDA Spoop, LuisRandomness, Absolute Kun, Spawn of Ore, jjwiggs, killerking, Peeko, Spooder, Chromatic Aethernus
+**Artists:** VDA Spoop, LuisRandomness, Absolute Kun, Spawn of Ore, jjwiggs, killerking, Peeko, Spooder, Chromatic Aeternus
 
 **Former Members:** Asbestosstar, ElectricKhan, The Cleaning Lady, DeuceWins, FBG_Bolushi
