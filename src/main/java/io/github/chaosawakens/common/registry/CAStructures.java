@@ -1,19 +1,22 @@
 package io.github.chaosawakens.common.registry;
 
-import com.google.common.collect.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.worldgen.structures.*;
+import io.github.chaosawakens.common.worldgen.structures.EntDungeonStructure;
+import io.github.chaosawakens.common.worldgen.structures.WaspDungeonStructure;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.FortressStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.settings.*;
-
+import net.minecraft.world.gen.settings.DimensionStructuresSettings;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.*;
-
-import java.util.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class CAStructures {
 

@@ -94,6 +94,10 @@
 	"biome.chaosawakens.mining_biome": "Mining Fields",
 	"biome.chaosawakens.stalagmite_valley": "Stalagmite Valley",
 	"biome.chaosawakens.village_plains": "Village Plains",
+	"biome.chaosawakens.village_savanna": "Village Savanna",
+	"biome.chaosawakens.village_taiga": "Village Taiga",
+	"biome.chaosawakens.village_snowy": "Village Snowy",
+	"biome.chaosawakens.village_desert": "Village Desert",
 	"biome.chaosawakens.danger_islands": "Danger Islands",
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
 	"biome.chaosawakens.crystal_hills": "Crystal Hills",
@@ -441,6 +445,7 @@
 	"block.chaosawakens.rainbow_ant_nest": "Rainbow Ant Nest",
 	"block.chaosawakens.unstable_ant_nest": "Unstable Ant Nest",
 	"block.chaosawakens.termite_nest": "Termite Nest",
+	"block.chaosawakens.crystal_termite_nest": "Crystal Termite Nest",
 
 
 	"item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
@@ -479,12 +484,11 @@
 	"item.chaosawakens.nightmare_scale": "Nightmare Scale",
 	"item.chaosawakens.vortex_eye": "Vortex Eye",
 	"item.chaosawakens.mantis_claw": "Mantis Claw",
+	"item.chaosawakens.ender_dragon_scale": "Ender Dragon Scale",
 
 	"item.chaosawakens.silver_coin": "Silver Coin",
 	"item.chaosawakens.gold_coin": "Gold Coin",
 	"item.chaosawakens.platinum_coin": "Platinum Coin",
-
-	"item.chaosawakens.ender_dragon_scale": "Ender Dragon Scale",
 
 	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
 	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet."

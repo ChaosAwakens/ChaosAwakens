@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common;
+package io.github.chaosawakens.common.events;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IPreEnchanted;

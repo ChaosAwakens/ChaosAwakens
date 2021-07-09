@@ -1,0 +1,7 @@
+
+{
+  "parent": "block/template_seagrass",
+  "textures": {
+    "texture": "chaosawakens:block/tube_worm_plant"
+  }
+}

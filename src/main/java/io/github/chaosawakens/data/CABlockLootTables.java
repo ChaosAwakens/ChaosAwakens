@@ -60,6 +60,7 @@ public class CABlockLootTables extends BlockLootTables {
 		registerDropSelfLootTable(CABlocks.CRYSTAL_ENERGY.get());
 		registerDropSelfLootTable(CABlocks.CRYSTAL_FURNACE.get());
 		registerDropSelfLootTable(CABlocks.CRYSTAL_LOG.get());
+		registerDropSelfLootTable(CABlocks.CRYSTAL_TERMITE_NEST.get());
 		registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD.get());
 		registerDropSelfLootTable(CABlocks.CRYSTAL_WOOD_PLANKS.get());
 		registerDropSelfLootTable(CABlocks.ENDER_EYE_BLOCK.get());

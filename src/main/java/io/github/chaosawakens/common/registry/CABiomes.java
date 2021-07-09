@@ -15,6 +15,10 @@ public class CABiomes {
 	public static RegistryObject<Biome> MINING_BIOME = BIOMES.register("mining_biome", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> STALAGMITE_VALLEY = BIOMES.register("stalagmite_valley", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> VILLAGE_PLAINS = BIOMES.register("village_plains", BiomeMaker::makeVoidBiome);
+	public static RegistryObject<Biome> VILLAGE_SAVANNA = BIOMES.register("village_savanna", BiomeMaker::makeVoidBiome);
+	public static RegistryObject<Biome> VILLAGE_TAIGA = BIOMES.register("village_taiga", BiomeMaker::makeVoidBiome);
+	public static RegistryObject<Biome> VILLAGE_SNOWY = BIOMES.register("village_snowy", BiomeMaker::makeVoidBiome);
+	public static RegistryObject<Biome> VILLAGE_DESERT = BIOMES.register("village_desert", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> DANGER_ISLANDS = BIOMES.register("danger_islands", BiomeMaker::makeVoidBiome);
 	public static RegistryObject<Biome> CRYSTAL_PLAINS = BIOMES.register("crystal_plains", BiomeMaker::makeVoidBiome);
 	

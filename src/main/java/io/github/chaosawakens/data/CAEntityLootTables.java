@@ -359,6 +359,12 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .addEntry(ItemLootEntry.builder(Items.EMERALD)
                                         .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 3.0F)))
                                         .acceptCondition(KilledByPlayer.builder()))));
+        registerLootTable(EntityType.GIANT,
+                LootTable.builder()
+                        .addLootPool(LootPool.builder()
+                                .rolls(ConstantRange.of(1))
+                                .addEntry(ItemLootEntry.builder(Items.ROTTEN_FLESH)
+                                        .acceptFunction(SetCount.builder(RandomValueRange.of(14.0F, 31.0F))))));
 
     }
 

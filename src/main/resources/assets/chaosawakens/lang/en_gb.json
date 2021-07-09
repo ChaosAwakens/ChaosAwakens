@@ -38,6 +38,9 @@
 	"advancements.chaosawakens.shiny_cows.title": "Shiny Cows!",
 	"advancements.chaosawakens.shiny_cows.description": "Breed 2 Golden Apple Cows.",
 
+	"dungeon.chaosawakens.jer.ent_dungeon": "Ent Dungeon",
+	"dungeon.chaosawakens.jer.wasp_dungeon": "Wasp Dungeon",
+
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
     "entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
@@ -60,6 +63,7 @@
 	"entity.chaosawakens.golden_apple_cow": "Golden Apple Cow",
 	"entity.chaosawakens.enchanted_golden_apple_cow": "Enchanted Golden Apple Cow",
 	"entity.chaosawakens.crystal_apple_cow": "Crystal Apple Cow",
+	"entity.chaosawakens.wasp": "Wasp",
 	"entity.chaosawakens.ultimate_arrow": "Ultimate Arrow",
 	"entity.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
@@ -82,12 +86,18 @@
 	"item.chaosawakens.golden_apple_cow_spawn_egg": "Golden Apple Cow Spawn Egg",
 	"item.chaosawakens.enchanted_golden_apple_cow_spawn_egg": "Enchanted Golden Apple Cow Spawn Egg",
 	"item.chaosawakens.crystal_apple_cow_spawn_egg": "Crystal Apple Cow Spawn Egg",
+	"item.chaosawakens.wasp_spawn_egg": "Wasp Spawn Egg",
 	"item.chaosawakens.iron_golem_spawn_egg": "Iron Golem Spawn Egg",
 	"item.chaosawakens.snow_golem_spawn_egg": "Snow Golem Spawn Egg",
+	"item.chaosawakens.illusioner_spawn_egg": "Illusioner Spawn Egg",
 
 	"biome.chaosawakens.mining_biome": "Mining Fields",
 	"biome.chaosawakens.stalagmite_valley": "Stalagmite Valley",
 	"biome.chaosawakens.village_plains": "Village Plains",
+	"biome.chaosawakens.village_savanna": "Village Savanna",
+	"biome.chaosawakens.village_taiga": "Village Taiga",
+	"biome.chaosawakens.village_snowy": "Village Snowy",
+	"biome.chaosawakens.village_desert": "Village Desert",
 	"biome.chaosawakens.danger_islands": "Danger Islands",
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
 	"biome.chaosawakens.crystal_hills": "Crystal Hills",
@@ -425,6 +435,7 @@
 	"item.chaosawakens.skate_string_bow": "Skate String Bow",
 	"item.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 
+	"block.chaosawakens.nest_block": "Nest Block",
 	"block.chaosawakens.gate_block": "Gate Block",
 	"block.chaosawakens.spawner_block": "Spawner Block",
 	"block.chaosawakens.random_teleport_block": "Random Teleport Block",
@@ -434,11 +445,16 @@
 	"block.chaosawakens.rainbow_ant_nest": "Rainbow Ant Nest",
 	"block.chaosawakens.unstable_ant_nest": "Unstable Ant Nest",
 	"block.chaosawakens.termite_nest": "Termite Nest",
-	"block.chaosawakens.red_ant_infested_ore": "Diamond Ore",
-	"block.chaosawakens.termite_infested_ore": "Emerald Ore",
+	"block.chaosawakens.crystal_termite_nest": "Crystal Termite Nest",
 
 	"item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
 	"item.chaosawakens.termite_infested_ore": "Termite Infested Ore",
+	"block.chaosawakens.red_ant_infested_ore": "Diamond Ore",
+	"block.chaosawakens.termite_infested_ore": "Emerald Ore",
+
+	"block.chaosawakens.mouldy_planks": "Mouldy Planks",
+	"block.chaosawakens.mouldy_slab": "Mouldy Slab",
+	"block.chaosawakens.mouldy_fence": "Mouldy Fence",
 
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
 
@@ -467,12 +483,11 @@
 	"item.chaosawakens.nightmare_scale": "Nightmare Scale",
 	"item.chaosawakens.vortex_eye": "Vortex Eye",
 	"item.chaosawakens.mantis_claw": "Mantis Claw",
+	"item.chaosawakens.ender_dragon_scale": "Ender Dragon Scale",
 
 	"item.chaosawakens.silver_coin": "Silver Coin",
 	"item.chaosawakens.gold_coin": "Gold Coin",
 	"item.chaosawakens.platinum_coin": "Platinum Coin",
-
-	"item.chaosawakens.ender_dragon_scale": "Ender Dragon Scale",
 
 	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
 	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet."

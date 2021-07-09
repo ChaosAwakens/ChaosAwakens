@@ -42,6 +42,8 @@ public class CABlocks {
 	public static final RegistryObject<EnchantedGoldenCakeBlock> ENCHANTED_GOLDEN_CAKE = registerEnchantedBlock("enchanted_golden_cake", () -> new EnchantedGoldenCakeBlock(Block.Properties.from(Blocks.CAKE).noDrops()), CAItemGroups.foodItemGroup, 1);
 	
 	// PLANTS
+	public static final RegistryObject<TopTubeBlock> TUBE = registerBlock("tube_worm",() -> new TopTubeBlock(AbstractBlock.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).sound(SoundType.BONE).doesNotBlockMovement().zeroHardnessAndResistance()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<TubeBlock> TUBE_PLANT = registerBlock("tube_worm_plant",() -> new TubeBlock(AbstractBlock.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).sound(SoundType.BONE).doesNotBlockMovement().zeroHardnessAndResistance()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsPlantBlock(CAItems.CORN_SEEDS, Block.Properties.from(Blocks.SUGAR_CANE).tickRandomly()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> TOMATO_PLANT = registerBlock("tomato_plant", () -> new CropsPlantBlock(CAItems.TOMATO_SEEDS, Block.Properties.from(Blocks.SUGAR_CANE).tickRandomly()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> STRAWBERRY_PLANT = registerBlock("strawberry_plant", () -> new StrawberryBushBlock(CAItems.STRAWBERRY_SEEDS, CAItems.STRAWBERRY, Block.Properties.from(Blocks.SWEET_BERRY_BUSH).tickRandomly()), CAItemGroups.foodItemGroup, false);
@@ -97,14 +99,7 @@ public class CABlocks {
 	// MOB DROP BLOCKS
 	public static final RegistryObject<Block> ENDER_PEARL_BLOCK = registerBlock("ender_pearl_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.SHROOMLIGHT)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> ENDER_EYE_BLOCK = registerBlock("ender_eye_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.SHROOMLIGHT)), CAItemGroups.blocksItemGroup);
-	
-	// ANT NESTS
-	public static final RegistryObject<AntNestBlock> BROWN_ANT_NEST = registerBlock("brown_ant_nest", () -> new AntNestBlock(CAEntityTypes.BROWN_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest", () -> new AntNestBlock(CAEntityTypes.RAINBOW_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> RED_ANT_NEST = registerBlock("red_ant_nest", () -> new AntNestBlock(CAEntityTypes.RED_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest", () -> new AntNestBlock(CAEntityTypes.UNSTABLE_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<AntNestBlock> TERMITE_NEST = registerBlock("termite_nest", () -> new AntNestBlock(CAEntityTypes.TERMITE, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
-	
+
 	// LEGACY CRYSTAL DIMENSION
 	public static final RegistryObject<Block> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK).setRequiresTool().setOpaque(isFalse)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> KYANITE = registerBlock("kyanite", () -> new Block(Block.Properties.from(Blocks.STONE).setRequiresTool().setOpaque(isFalse)), CAItemGroups.blocksItemGroup);
@@ -121,6 +116,14 @@ public class CABlocks {
 	public static final RegistryObject<BuddingBlock> BUDDING_CATS_EYE = registerBlock("budding_cats_eye", () -> new BuddingBlock(Block.Properties.from(Blocks.STONE).tickRandomly().setOpaque(isFalse).notSolid(), CATS_EYE_CLUSTER.get()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CrystalCraftingTableBlock> CRYSTAL_CRAFTING_TABLE = registerBlock("crystal_crafting_table", () -> new CrystalCraftingTableBlock(Block.Properties.from(Blocks.CRAFTING_TABLE).setOpaque(isFalse).notSolid()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CrystalFurnaceBlock> CRYSTAL_FURNACE = registerBlock("crystal_furnace", () -> new CrystalFurnaceBlock(Block.Properties.from(Blocks.FURNACE).setOpaque(isFalse).notSolid().setLightLevel(lightValueFunction.apply(13))), CAItemGroups.blocksItemGroup);
+
+	// ANT NESTS
+	public static final RegistryObject<AntNestBlock> BROWN_ANT_NEST = registerBlock("brown_ant_nest", () -> new AntNestBlock(CAEntityTypes.BROWN_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest", () -> new AntNestBlock(CAEntityTypes.RAINBOW_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> RED_ANT_NEST = registerBlock("red_ant_nest", () -> new AntNestBlock(CAEntityTypes.RED_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest", () -> new AntNestBlock(CAEntityTypes.UNSTABLE_ANT, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> TERMITE_NEST = registerBlock("termite_nest", () -> new AntNestBlock(CAEntityTypes.TERMITE, Block.Properties.from(Blocks.GRASS_BLOCK).tickRandomly()), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<AntNestBlock> CRYSTAL_TERMITE_NEST = registerBlock("crystal_termite_nest", () -> new AntNestBlock(CAEntityTypes.TERMITE, Block.Properties.from(CABlocks.CRYSTAL_GRASS_BLOCK.get()).tickRandomly()), CAItemGroups.blocksItemGroup);
 
 	// TORCHES
 	public static final RegistryObject<TorchBlock> CRYSTAL_TORCH = registerBlock("crystal_torch", () -> new TorchBlock(AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().setLightLevel((state) -> 14).sound(SoundType.WOOD), ParticleTypes.FLAME), null, false);

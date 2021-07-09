@@ -7,7 +7,7 @@
 			"block_search_extent": 8,
 			"offset": 2.0
 		},
-		"sky_color": 7907327,
+		"sky_color": 7711487,
 		"fog_color": 12638463,
 		"water_color": 4159204,
 		"water_fog_color": 329011
@@ -37,15 +37,12 @@
 			"minecraft:disk_gravel"
 		],
 		[
-			"minecraft:patch_tall_grass_2",
-			"minecraft:plain_vegetation",
-			"minecraft:flower_plain_decorated",
-			"minecraft:patch_grass_plain",
-			"minecraft:patch_pumpkin"
+			"minecraft:patch_grass_normal",
+			"minecraft:plain_vegetation"
 		]
 	],
 	"starts": [
-		"minecraft:village_plains",
+		"minecraft:village_savanna",
 		"minecraft:pillager_outpost"
 	],
 	"spawners": {
@@ -156,7 +153,7 @@
 			},
 			{
 				"type": "minecraft:horse",
-				"weight": 5,
+				"weight": 1,
 				"minCount": 2,
 				"maxCount": 6
 			},
@@ -164,16 +161,16 @@
 				"type": "minecraft:donkey",
 				"weight": 1,
 				"minCount": 1,
-				"maxCount": 3
+				"maxCount": 1
 			}
 		]
 	},
 	"spawn_costs": {
 	},
 	"player_spawn_friendly": true,
-	"precipitation": "rain",
-	"temperature": 0.8,
-	"downfall": 0.4,
-	"category": "plains",
+	"precipitation": "none",
+	"temperature": 1.2,
+	"downfall": 0,
+	"category": "savanna",
 	"depth": 0.125
 }

@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common;
+package io.github.chaosawakens.common.events;
 
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
@@ -11,6 +11,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.item.ItemStack;
@@ -111,11 +112,13 @@ public class EventHandler {
             VillagerEntity villager = (VillagerEntity) event.getEntity();
             villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
             villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
+            villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, GiantEntity.class, 32.0F, 0.5D, 0.5D));
         }
         if (event.getEntity() instanceof WanderingTraderEntity) {
             WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) event.getEntity();
             wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
             wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
+            wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, GiantEntity.class, 32.0F, 0.5D, 0.5D));
         }
     }
 }

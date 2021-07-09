@@ -7,7 +7,7 @@
 			"block_search_extent": 8,
 			"offset": 2.0
 		},
-		"sky_color": 7907327,
+		"sky_color": 8364543,
 		"fog_color": 12638463,
 		"water_color": 4159204,
 		"water_fog_color": 329011
@@ -37,15 +37,18 @@
 			"minecraft:disk_gravel"
 		],
 		[
-			"minecraft:patch_tall_grass_2",
-			"minecraft:plain_vegetation",
-			"minecraft:flower_plain_decorated",
-			"minecraft:patch_grass_plain",
+			"minecraft:spruce_snowy",
+			"minecraft:flower_default",
+			"minecraft:patch_grass_badlands",
 			"minecraft:patch_pumpkin"
+		],
+		[
+			"minecraft:freeze_top_layer"
 		]
 	],
 	"starts": [
-		"minecraft:village_plains",
+		"minecraft:village_snowy",
+		"minecraft:igloo",
 		"minecraft:pillager_outpost"
 	],
 	"spawners": {
@@ -109,71 +112,36 @@
 				"weight": 5,
 				"minCount": 1,
 				"maxCount": 1
+			},
+			{
+				"type": "minecraft:stray",
+				"weight": 80,
+				"minCount": 4,
+				"maxCount": 4
 			}
 		],
 		"creature": [
 			{
-				"type": "minecraft:sheep",
-				"weight": 12,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "minecraft:pig",
+				"type": "minecraft:rabbit",
 				"weight": 10,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "minecraft:chicken",
-				"weight": 10,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "minecraft:cow",
-				"weight": 8,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "chaosawakens:apple_cow",
-				"weight": 7,
-				"minCount": 4,
-				"maxCount": 4
-			},
-			{
-				"type": "chaosawakens:golden_apple_cow",
-				"weight": 4,
-				"minCount": 3,
-				"maxCount": 3
-			},
-			{
-				"type": "chaosawakens:enchanted_golden_apple_cow",
-				"weight": 1,
-				"minCount": 1,
-				"maxCount": 1
-			},
-			{
-				"type": "minecraft:horse",
-				"weight": 5,
 				"minCount": 2,
-				"maxCount": 6
+				"maxCount": 3
 			},
 			{
-				"type": "minecraft:donkey",
+				"type": "minecraft:polar_bear",
 				"weight": 1,
 				"minCount": 1,
-				"maxCount": 3
+				"maxCount": 2
 			}
 		]
 	},
 	"spawn_costs": {
 	},
 	"player_spawn_friendly": true,
-	"precipitation": "rain",
-	"temperature": 0.8,
-	"downfall": 0.4,
-	"category": "plains",
+	"precipitation": "snow",
+	"temperature": 0,
+	"downfall": 0.5,
+	"category": "icy",
+	"creature_spawn_probability": 0.07,
 	"depth": 0.125
 }

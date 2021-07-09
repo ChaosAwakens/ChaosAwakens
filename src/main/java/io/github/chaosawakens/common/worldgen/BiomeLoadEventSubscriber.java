@@ -33,13 +33,8 @@ public class BiomeLoadEventSubscriber {
 	private static class MobSpawnHandler {
 		
 		// Mobs that appear on any biome, but only on the overworld
-		private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> {
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BROWN_ANT.get(), 20, 4, 6));
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RAINBOW_ANT.get(), 20, 4, 6));
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RED_ANT.get(), 20, 4, 6));
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.TERMITE.get(), 20, 4, 6));
-			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.UNSTABLE_ANT.get(), 20, 4, 6));
-		};
+//		private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> {
+//		};
 		private static final Consumer<MobSpawnInfoBuilder> SWAMP_MOBS = (builder) -> {
 			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 20, 3, 6));
 			builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 15, 1, 2));
@@ -76,7 +71,7 @@ public class BiomeLoadEventSubscriber {
 					break;
 				default:
 					if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
-						OVERWORLD_MOBS.accept(spawnInfoBuilder);
+//						OVERWORLD_MOBS.accept(spawnInfoBuilder);
 					break;
 			}
 		}
@@ -228,9 +223,9 @@ public class BiomeLoadEventSubscriber {
 			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
 			gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_PINK_TOURMALINE);
 
-//			if (CAConfig.COMMON.enableNestGen.get()) {
-//				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_TERMITE_NEST);
-//			}
+			if (CAConfig.COMMON.enableNestGen.get()) {
+				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_TERMITE_NEST);
+			}
 		}
 
 //		private static void addDangerDimOres(BiomeGenerationSettingsBuilder gen) {
