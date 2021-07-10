@@ -48,7 +48,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 
 	@Override
 	public void startExecuting() {
-		this.entity.setAttacking(true, 0);
+		this.entity.setAttacking(true);
 		this.entity.setAggroed(true);
 		this.animationProgress = 0;
 	}

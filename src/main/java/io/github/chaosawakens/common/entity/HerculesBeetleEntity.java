@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IGrabber;
 import io.github.chaosawakens.common.entity.ai.AnimatableGrabGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
@@ -47,14 +48,13 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		}
 		
 		if (this.getAttacking()) {
-			switch(this.getAttackType()) {
-				case 0:
-					event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", true));
-					break;
-				case 1:
-					event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.ram_attack_animation", true));
-					break;
+			if(this.getGrabbing()) {
+				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.ram_attack_animation", true));
+				//ChaosAwakens.debug("ANIMATION", event.getController().getCurrentAnimation().animationLength);
+				return PlayState.CONTINUE;
 			}
+			
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", true));
 			return PlayState.CONTINUE;
 		}
 		
@@ -73,8 +73,8 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new AnimatableMoveToTargetGoal(this, 1.75, 10));
-		this.goalSelector.addGoal(4, new AnimatableGrabGoal(this));
-		this.goalSelector.addGoal(3, new AnimatableMeleeGoal(this, 68.8, 0.55, 0.65));
+		this.goalSelector.addGoal(4, new AnimatableGrabGoal<HerculesBeetleEntity>(this));
+		this.goalSelector.addGoal(3, new AnimatableMeleeGoal(this, 30.4, 0.75, 0.85));
 //		this.goalSelector.addGoal(3, new ThrowRiderAttackGoal(this, 0.125F, false));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
@@ -107,18 +107,19 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 	
 	@Override
-	public boolean shouldRiderSit() {
-		return false;
+	protected void registerData() {
+		super.registerData();
+		this.dataManager.register(GRABBING, false);
 	}
+	@Override
+	public boolean shouldRiderSit() { return false; }
 	
 	@Override
 	public void updatePassenger(Entity passenger) {
 		this.positionRider(this, passenger, Entity::setPosition);
 	}
 	
-	public Vector3d getGrabOffset() {
-		return this.grabOffset;
-	}
+	public Vector3d getGrabOffset() { return this.grabOffset; }
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
@@ -129,4 +130,10 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	protected SoundEvent getDeathSound() {
 		return CASoundEvents.HERCULES_BEETLE_DEATH.get();
 	}
+	
+	@Override
+	public boolean getGrabbing() { return this.dataManager.get(GRABBING); }
+	
+	@Override
+	public void setGrabbing(boolean grabbing) { this.dataManager.set(GRABBING, grabbing); }
 }

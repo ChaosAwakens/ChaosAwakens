@@ -2,19 +2,17 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
 
-import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.IGrabber;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
 
 /**
  * @author invalid2
  *
  */
-public class AnimatableGrabGoal extends AnimatableGoal {
+public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> extends AnimatableGoal {
 	
 	private boolean isGrabbing;
 	private boolean hasGrabbed;
@@ -22,7 +20,7 @@ public class AnimatableGrabGoal extends AnimatableGoal {
 	/**
 	 * Grabs the target entity and deals some damage
 	 */
-	public AnimatableGrabGoal(AnimatableMonsterEntity entity) {
+	public AnimatableGrabGoal(G entity) {
 		this.entity = entity;
 		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
@@ -64,8 +62,9 @@ public class AnimatableGrabGoal extends AnimatableGoal {
 			return;
 		}
 		target.startRiding(entity);
-		this.entity.setAttacking(true, 1);
+		this.entity.setAttacking(true);
 		this.isGrabbing = true;
+		((IGrabber) this.entity).setGrabbing(true);
 	}
 	
 	protected void attackWhileGrab(LivingEntity target) {
@@ -81,11 +80,12 @@ public class AnimatableGrabGoal extends AnimatableGoal {
 			this.hasGrabbed = true;
 			this.isGrabbing = false;
 			this.entity.setAttacking(false);
+			((IGrabber) this.entity).setGrabbing(false);
 		}
 		
 	}
 	
-	private boolean checkIfValid(AnimatableGrabGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+	private boolean checkIfValid(AnimatableGrabGoal<?> goal, AnimatableMonsterEntity attacker, LivingEntity target) {
 		if(target == null)return false;
 		if(target.isAlive() && !target.isSpectator()) {
 			if(target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {

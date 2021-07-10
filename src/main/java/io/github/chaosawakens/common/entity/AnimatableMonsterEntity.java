@@ -21,7 +21,6 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	
 	protected static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
 	protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Integer> ATTACK_TYPE = EntityDataManager.createKey(AnimatableMonsterEntity.class, DataSerializers.VARINT);
 	
 	protected boolean isAnimationFinished = false;
 	
@@ -44,12 +43,6 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.registerData();
 		this.dataManager.register(MOVING, false);
 		this.dataManager.register(ATTACKING, false);
-		this.dataManager.register(ATTACK_TYPE, 0);
-	}
-	
-	public void setAttacking(boolean attacking, int attackType) {
-		this.dataManager.set(ATTACKING, attacking);
-		this.dataManager.set(ATTACK_TYPE, attackType);
 	}
 	
 	public boolean getMoving() { return this.dataManager.get(MOVING); }
@@ -57,6 +50,4 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	
 	public boolean getAttacking() { return this.dataManager.get(ATTACKING); }
 	public void setAttacking(boolean attacking) { this.dataManager.set(ATTACKING, attacking); }
-	
-	public int getAttackType() { return this.dataManager.get(ATTACK_TYPE); }
 }
