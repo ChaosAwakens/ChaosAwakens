@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.api.IPreEnchanted;
+import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.AxeItem;
@@ -9,7 +9,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class EnchantedAxeItem extends AxeItem implements IPreEnchanted {
+public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;
 	
@@ -36,7 +36,7 @@ public class EnchantedAxeItem extends AxeItem implements IPreEnchanted {
 	}
 
 	@Override
-	public EnchantmentData[] enchant() {
+	public EnchantmentData[] enchantments() {
 		return this.enchantments;
 	}
 	

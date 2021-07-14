@@ -2,7 +2,7 @@ package io.github.chaosawakens.common.items;
 
 import java.util.function.Predicate;
 
-import io.github.chaosawakens.api.IPreEnchanted;
+import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
 import net.minecraft.enchantment.EnchantmentData;
@@ -25,7 +25,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class UltimateBowItem extends BowItem implements IVanishable, IPreEnchanted {
+public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;
 	
@@ -110,7 +110,7 @@ public class UltimateBowItem extends BowItem implements IVanishable, IPreEnchant
 	}
 
 	@Override
-	public EnchantmentData[] enchant() {
+	public EnchantmentData[] enchantments() {
 		return this.enchantments;
 	}
 }

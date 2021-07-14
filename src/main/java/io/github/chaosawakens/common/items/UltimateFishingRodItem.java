@@ -1,20 +1,23 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.api.IPreEnchanted;
+import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.FishingRodItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-public class UltimateFishingRodItem extends FishingRodItem implements IPreEnchanted {
+public class UltimateFishingRodItem extends FishingRodItem implements IAutoEnchantable {
 
     private final EnchantmentData[] enchantments;
 
@@ -62,7 +65,7 @@ public class UltimateFishingRodItem extends FishingRodItem implements IPreEnchan
     }
 
     @Override
-    public EnchantmentData[] enchant() {
+    public EnchantmentData[] enchantments() {
         return this.enchantments;
     }
 

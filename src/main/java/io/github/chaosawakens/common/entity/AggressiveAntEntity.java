@@ -1,9 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.api.HeightmapTeleporter;
-import io.github.chaosawakens.api.IAntEntity;
-import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -34,7 +31,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class AggressiveAntEntity extends MonsterEntity implements IAnimatable, IAntEntity {
+public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	private final ConfigValue<Boolean> tpConfig;
