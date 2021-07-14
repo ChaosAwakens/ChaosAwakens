@@ -2,9 +2,11 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.Random;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import software.bernie.geckolib3.network.ISyncable;
 
 /**
  * Base goal for Animatable entities
@@ -16,6 +18,7 @@ public abstract class AnimatableGoal extends Goal {
 	
 	protected static final Random RANDOM = new Random();
 	
+	private long lastGameTime;
 	protected long tickDelta;
 	protected double animationProgress;
 	private boolean isFirsLoop = true;
@@ -26,12 +29,13 @@ public abstract class AnimatableGoal extends Goal {
 	public void baseTick() {
 		if(this.isFirsLoop) {
 			this.isFirsLoop = false;
-			this.tickDelta = this.entity.world.getGameTime();
 			this.animationProgress += 1;
+			this.lastGameTime = this.entity.world.getGameTime();
 			return;
 		}
-		this.tickDelta = this.entity.world.getGameTime() - this.tickDelta;
+		this.tickDelta = this.entity.world.getGameTime() - this.lastGameTime;
 		this.animationProgress += 1 + this.tickDelta/100000.0;
+		this.lastGameTime = this.entity.world.getGameTime();
 	}
 	
 	protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {

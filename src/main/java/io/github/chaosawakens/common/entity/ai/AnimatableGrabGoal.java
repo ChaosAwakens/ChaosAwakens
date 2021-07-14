@@ -16,12 +16,15 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 	
 	private boolean isGrabbing;
 	private boolean hasGrabbed;
+	private final int avrgNumHits;
+	private int numOfHits;
 	
 	/**
 	 * Grabs the target entity and deals some damage
 	 */
-	public AnimatableGrabGoal(G entity) {
+	public AnimatableGrabGoal(G entity, int avrgNumHits) {
 		this.entity = entity;
+		this.avrgNumHits = avrgNumHits;
 		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 	
@@ -42,6 +45,7 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 	@Override
 	public void resetTask() {
 		this.isGrabbing = false;
+		((IGrabber) this.entity).setGrabbing(this.entity, false);
 		this.hasGrabbed = false;
 	}
 	
@@ -64,24 +68,23 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 		target.startRiding(entity);
 		this.entity.setAttacking(true);
 		this.isGrabbing = true;
-		((IGrabber) this.entity).setGrabbing(true);
+		((IGrabber) this.entity).setGrabbing(this.entity, true);
 	}
 	
 	protected void attackWhileGrab(LivingEntity target) {
-		if(RANDOM.nextInt(4) == 0) {
+		if(RANDOM.nextInt(this.avrgNumHits) < this.avrgNumHits - this.numOfHits) {
 			this.entity.attackEntityAsMob(target);
-			this.releaseTarget(target);
+			this.numOfHits++;
+			return;
 		}
-		
+		this.releaseTarget(target);
 	}
 	
 	protected void releaseTarget(LivingEntity target) {
-		if(RANDOM.nextInt(2) == 0) {
-			this.hasGrabbed = true;
-			this.isGrabbing = false;
-			this.entity.setAttacking(false);
-			((IGrabber) this.entity).setGrabbing(false);
-		}
+		this.hasGrabbed = true;
+		this.isGrabbing = false;
+		this.entity.setAttacking(false);
+		((IGrabber) this.entity).setGrabbing(this.entity, false);
 		
 	}
 	

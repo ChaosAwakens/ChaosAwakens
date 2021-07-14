@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.ai;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -27,7 +28,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
 		this.entity = entity;
 		this.animationLength = animationLength;
-		this.attackPredicate = (progress, length) -> attackBegin < progress/length && progress/length < attackEnd;
+		this.attackPredicate = (progress, length) -> attackBegin < progress/(length) && progress/(length) < attackEnd;
 		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 	
@@ -70,8 +71,9 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		this.baseTick();
 		LivingEntity target = this.entity.getAttackTarget();
 		if(target != null) {
-			this.entity.faceEntity(target, 30.0F, 30.0F);
+			//ChaosAwakens.debug("GOAL", this.animationProgress+" "+this.animationLength+" "+this.tickDelta+" "+this.animationProgress/this.animationLength);
 			if(this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
+				this.entity.faceEntity(target, 30.0F, 30.0F);
 				this.entity.swingArm(Hand.MAIN_HAND);
 				this.entity.attackEntityAsMob(target);
 				this.hasHit = true;

@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IGrabber;
-import io.github.chaosawakens.common.entity.ai.AnimatableGrabGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
@@ -31,8 +30,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.network.ISyncable;
 
-public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAnimatable, IGrabber {
+public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAnimatable, IGrabber, ISyncable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	protected final Vector3d grabOffset = new Vector3d(0, 0.5, 2);
 	
@@ -48,7 +48,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		}
 		
 		if (this.getAttacking()) {
-			if(this.getGrabbing()) {
+			if(this.getGrabbing(this)) {
 				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.ram_attack_animation", true));
 				//ChaosAwakens.debug("ANIMATION", event.getController().getCurrentAnimation().animationLength);
 				return PlayState.CONTINUE;
@@ -73,7 +73,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new AnimatableMoveToTargetGoal(this, 1.75, 10));
-		this.goalSelector.addGoal(4, new AnimatableGrabGoal<HerculesBeetleEntity>(this));
+//		this.goalSelector.addGoal(4, new AnimatableGrabGoal<HerculesBeetleEntity>(this, 8));
 		this.goalSelector.addGoal(3, new AnimatableMeleeGoal(this, 30.4, 0.75, 0.85));
 //		this.goalSelector.addGoal(3, new ThrowRiderAttackGoal(this, 0.125F, false));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
@@ -130,10 +130,9 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	protected SoundEvent getDeathSound() {
 		return CASoundEvents.HERCULES_BEETLE_DEATH.get();
 	}
-	
+
 	@Override
-	public boolean getGrabbing() { return this.dataManager.get(GRABBING); }
-	
-	@Override
-	public void setGrabbing(boolean grabbing) { this.dataManager.set(GRABBING, grabbing); }
+	public void onAnimationSync(int id, int state) {
+		ChaosAwakens.debug("SYNC", id+" "+state);
+	}
 }
