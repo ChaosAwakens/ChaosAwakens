@@ -513,7 +513,7 @@ public class CAItems {
 	public static final RegistryObject<SpawnEggItem> ILLUSIONER_SPAWN_EGG = ITEMS.register("illusioner_spawn_egg", () -> new SpawnEggItem(EntityType.ILLUSIONER, 0xFFFFFF, 0xFFFFFF, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 
 	// STRUCTURE SPAWN
-	public static final RegistryObject<Item> INSTANT_SURVIVAL_SHELTER = ITEMS.register("instant_survival_shelter", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "shelter"));
+	public static final RegistryObject<Item> INSTANT_SURVIVAL_SHELTER = ITEMS.register("instant_survival_shelter", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "survival_shelter"));
 	public static final RegistryObject<Item> ZOO_CAGE_EXTRA_SMALL = ITEMS.register("zoo_cage_extra_small", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "cage_xs"));
 	public static final RegistryObject<Item> ZOO_CAGE_SMALL = ITEMS.register("zoo_cage_small", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "cage_s"));
 	public static final RegistryObject<Item> ZOO_CAGE_MEDIUM = ITEMS.register("zoo_cage_medium", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "cage_m"));

@@ -82,7 +82,7 @@ repositories {
     }
     maven {
         name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
+        url = "https://modmaven.dev"
     }
     maven {
         name = "CurseForge"
