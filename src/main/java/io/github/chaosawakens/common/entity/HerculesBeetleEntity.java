@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IGrabber;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
@@ -30,9 +29,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.network.ISyncable;
 
-public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAnimatable, IGrabber, ISyncable {
+public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAnimatable, IGrabber {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	protected final Vector3d grabOffset = new Vector3d(0, 0.5, 2);
 	
@@ -132,7 +130,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 
 	@Override
-	public void onAnimationSync(int id, int state) {
-		ChaosAwakens.debug("SYNC", id+" "+state);
+	public boolean isNoDespawnRequired() {
+		return true;
 	}
 }

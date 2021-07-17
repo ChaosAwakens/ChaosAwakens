@@ -26,7 +26,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private boolean isDespawnable;
 	
 	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -87,14 +86,12 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	}
 	
 	@Override
-	public boolean canDespawn(double distanceToClosestPlayer) {
-		return this.isDespawnable;
+	public boolean isNoDespawnRequired() {
+		return true;
 	}
 	
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
-	
-	public void seDespawable(boolean isDespawnable) { this.isDespawnable = isDespawnable; }
 }
