@@ -22,14 +22,14 @@ public class CAVillagers {
 	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, ChaosAwakens.MODID);
 	public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, ChaosAwakens.MODID);
 
-	public static final RegistryObject<PointOfInterestType> BLAST_BUILDING = POI_TYPES.register("blast_building", () -> new PointOfInterestType("blast_building", PointOfInterestType.getAllStates(CABlocks.CRYSTAL_FURNACE.get()), 1, 2));
+	public static final RegistryObject<PointOfInterestType> BLAST_BUILDING = POI_TYPES.register("blast_building", () -> new PointOfInterestType("blast_building", PointOfInterestType.getBlockStates(CABlocks.CRYSTAL_FURNACE.get()), 1, 2));
 
-	public static final RegistryObject<VillagerProfession> DIMENSIONAL_TRADER = PROFESSIONS.register("dimensional_trader", () -> new VillagerProfession("dimensional_trader", BLAST_BUILDING.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_ARMORER));
+	public static final RegistryObject<VillagerProfession> DIMENSIONAL_TRADER = PROFESSIONS.register("dimensional_trader", () -> new VillagerProfession("dimensional_trader", BLAST_BUILDING.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_ARMORER));
 
 	public static void registerVillagerTypes() {
-		VillagerTrades.VILLAGER_DEFAULT_TRADES.isEmpty();
+		VillagerTrades.TRADES.isEmpty();
 
-		GiveHeroGiftsTask.GIFTS.put(DIMENSIONAL_TRADER.get(), new ResourceLocation(ChaosAwakens.MODID, "gameplay/hero_of_the_village/dimensional_trader_gift"));
+		GiveHeroGiftsTask.gifts.put(DIMENSIONAL_TRADER.get(), new ResourceLocation(ChaosAwakens.MODID, "gameplay/hero_of_the_village/dimensional_trader_gift"));
 	}
 
 	private static VillagerType createType(String type) {
@@ -64,6 +64,6 @@ public class CAVillagers {
 //	}
 
 //	private static void addVillagerHouse(String type, String biome, int weight) {
-//		DataUtil.addToJigsawPattern(new ResourceLocation("village/" + biome + "/houses"), JigsawPiece.func_242859_b(ChaosAwakens.MODID + ":village/" + type + "_house_" + biome + "_1").apply(JigsawPattern.PlacementBehaviour.RIGID), weight);
+//		DataUtil.addToJigsawPattern(new ResourceLocation("village/" + biome + "/houses"), JigsawPiece.single(ChaosAwakens.MODID + ":village/" + type + "_house_" + biome + "_1").apply(JigsawPattern.PlacementBehaviour.RIGID), weight);
 //	}
 }

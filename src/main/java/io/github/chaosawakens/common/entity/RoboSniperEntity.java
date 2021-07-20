@@ -25,7 +25,7 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 	
 	public RoboSniperEntity(EntityType<? extends RoboEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.ignoreFrustumCheck = true;
+		this.noCulling = true;
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -54,14 +54,14 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 25)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
-				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 25)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 24);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 25)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
+				.add(Attributes.ATTACK_SPEED, 10)
+				.add(Attributes.ATTACK_DAMAGE, 25)
+				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
+				.add(Attributes.FOLLOW_RANGE, 24);
 	}
 	
 	@Override
@@ -75,7 +75,7 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 	}
 	
 	@Override
-	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
-		this.getAttackTarget();
+	public void performRangedAttack(LivingEntity target, float distanceFactor) {
+		this.getTarget();
 	}
 }

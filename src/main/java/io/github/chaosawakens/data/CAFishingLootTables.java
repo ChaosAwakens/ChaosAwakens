@@ -15,34 +15,34 @@ public class CAFishingLootTables extends FishingLootTables {
 
     @Override
     public void accept(BiConsumer<ResourceLocation, Builder> p_accept_1_) {
-        p_accept_1_.accept(LootTables.GAMEPLAY_FISHING, LootTable.builder().addLootPool(LootPool.builder()
-                .rolls(ConstantRange.of(1))
-                .addEntry(TableLootEntry.builder(LootTables.GAMEPLAY_FISHING_FISH).weight(85).quality(-1))
-                .addEntry(TableLootEntry.builder(CALootTables.CHAOS_AWAKENS_FISHING_FISH).weight(75).quality(-1))
-                .addEntry(TableLootEntry.builder(LootTables.GAMEPLAY_FISHING_TREASURE).weight(10).quality(2))
-                .addEntry(TableLootEntry.builder(CALootTables.CHAOS_AWAKENS_FISHING_TREASURE).weight(5).quality(2))
-                .addEntry(TableLootEntry.builder(LootTables.GAMEPLAY_FISHING_JUNK).weight(15).quality(-2))
-                .addEntry(TableLootEntry.builder(CALootTables.CHAOS_AWAKENS_FISHING_JUNK).weight(10).quality(-2))));
+        p_accept_1_.accept(LootTables.FISHING, LootTable.lootTable().withPool(LootPool.lootPool()
+                .setRolls(ConstantRange.exactly(1))
+                .add(TableLootEntry.lootTableReference(LootTables.FISHING_FISH).setWeight(85).setQuality(-1))
+                .add(TableLootEntry.lootTableReference(CALootTables.CHAOS_AWAKENS_FISHING_FISH).setWeight(75).setQuality(-1))
+                .add(TableLootEntry.lootTableReference(LootTables.FISHING_TREASURE).setWeight(10).setQuality(2))
+                .add(TableLootEntry.lootTableReference(CALootTables.CHAOS_AWAKENS_FISHING_TREASURE).setWeight(5).setQuality(2))
+                .add(TableLootEntry.lootTableReference(LootTables.FISHING_JUNK).setWeight(15).setQuality(-2))
+                .add(TableLootEntry.lootTableReference(CALootTables.CHAOS_AWAKENS_FISHING_JUNK).setWeight(10).setQuality(-2))));
 
-        p_accept_1_.accept(CALootTables.CHAOS_AWAKENS_FISHING_FISH, LootTable.builder()
-                .addLootPool(LootPool.builder()
-                        .addEntry(ItemLootEntry.builder(CAItems.GREEN_FISH.get()))
-                        .addEntry(ItemLootEntry.builder(CAItems.ROCK_FISH.get()))
-                        .addEntry(ItemLootEntry.builder(CAItems.SPARK_FISH.get()))
-                        .addEntry(ItemLootEntry.builder(CAItems.WOOD_FISH.get()))));
+        p_accept_1_.accept(CALootTables.CHAOS_AWAKENS_FISHING_FISH, LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(ItemLootEntry.lootTableItem(CAItems.GREEN_FISH.get()))
+                        .add(ItemLootEntry.lootTableItem(CAItems.ROCK_FISH.get()))
+                        .add(ItemLootEntry.lootTableItem(CAItems.SPARK_FISH.get()))
+                        .add(ItemLootEntry.lootTableItem(CAItems.WOOD_FISH.get()))));
 
-        p_accept_1_.accept(CALootTables.CHAOS_AWAKENS_FISHING_TREASURE, LootTable.builder()
-                .addLootPool(LootPool.builder()
-                        .addEntry(ItemLootEntry.builder(CAItems.AMETHYST.get()))
-                        .addEntry(ItemLootEntry.builder(Items.DIAMOND))
-                        .addEntry(ItemLootEntry.builder(Items.EMERALD))
-                        .addEntry(ItemLootEntry.builder(CAItems.RUBY.get()))
-                        .addEntry(ItemLootEntry.builder(CAItems.TIGERS_EYE.get()))));
+        p_accept_1_.accept(CALootTables.CHAOS_AWAKENS_FISHING_TREASURE, LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(ItemLootEntry.lootTableItem(CAItems.AMETHYST.get()))
+                        .add(ItemLootEntry.lootTableItem(Items.DIAMOND))
+                        .add(ItemLootEntry.lootTableItem(Items.EMERALD))
+                        .add(ItemLootEntry.lootTableItem(CAItems.RUBY.get()))
+                        .add(ItemLootEntry.lootTableItem(CAItems.TIGERS_EYE.get()))));
 
-        p_accept_1_.accept(CALootTables.CHAOS_AWAKENS_FISHING_JUNK, LootTable.builder()
-                .addLootPool(LootPool.builder()
-                        .addEntry(ItemLootEntry.builder(CAItems.CANDYCANE.get()))
-                        .addEntry(ItemLootEntry.builder(CAItems.CHEESE.get()))));
+        p_accept_1_.accept(CALootTables.CHAOS_AWAKENS_FISHING_JUNK, LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(ItemLootEntry.lootTableItem(CAItems.CANDYCANE.get()))
+                        .add(ItemLootEntry.lootTableItem(CAItems.CHEESE.get()))));
 
 
     }

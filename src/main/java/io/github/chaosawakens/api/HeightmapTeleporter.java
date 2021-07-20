@@ -26,26 +26,26 @@ public class HeightmapTeleporter implements ITeleporter {
 	public PortalInfo getPortalInfo(Entity entity, ServerWorld targetWorld, Function<ServerWorld, PortalInfo> defaultPortalInfo) {
 		//ChaosAwakens.debug("TELEPORTER", entity+" "+targetWorld);
 		WorldBorder border = targetWorld.getWorldBorder();
-		double coordDiff = DimensionType.getCoordinateDifference(entity.world.getDimensionType(), targetWorld.getDimensionType());
+		double coordDiff = DimensionType.getTeleportationScale(entity.level.dimensionType(), targetWorld.dimensionType());
 		
 		//You know how walking a block on the nether equals to X in the overworld, this is checking for it
 		Vector3d newPosVector = new Vector3d(
-				MathHelper.clamp(entity.getPosX() * coordDiff * 1.0, Math.max(-2.9999872E7D, border.minX() + 16.0D), Math.min(2.9999872E7D, border.maxX() - 16.0D)),
-				entity.getPosY(),
-				MathHelper.clamp(entity.getPosZ() * coordDiff * 1.0, Math.max(-2.9999872E7D, border.minZ() + 16.0D), Math.min(2.9999872E7D, border.maxZ() - 16.0D)));
+				MathHelper.clamp(entity.getX() * coordDiff * 1.0, Math.max(-2.9999872E7D, border.getMinX() + 16.0D), Math.min(2.9999872E7D, border.getMaxX() - 16.0D)),
+				entity.getY(),
+				MathHelper.clamp(entity.getZ() * coordDiff * 1.0, Math.max(-2.9999872E7D, border.getMinZ() + 16.0D), Math.min(2.9999872E7D, border.getMaxZ() - 16.0D)));
 		
 		
-		BlockPos entityPos = entity.getPosition();
+		BlockPos entityPos = entity.blockPosition();
 		//Load target chunk
 		targetWorld.getChunk(new BlockPos(newPosVector));
 		
 		//Get a valid Y pos for the targeted block
 		BlockPos targetPos;
 		do {
-			targetPos = new BlockPos(newPosVector.getX(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) newPosVector.getX(), (int) newPosVector.getZ()), newPosVector.getZ());
+			targetPos = new BlockPos(newPosVector.x(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) newPosVector.x(), (int) newPosVector.z()), newPosVector.z());
 		} while(targetPos.getY() == 0);
 		
-		return new PortalInfo(new Vector3d(newPosVector.getX(), targetPos.getY(), newPosVector.getZ()), new Vector3d(0, 0, 0), entity.rotationYaw, entity.rotationPitch);
+		return new PortalInfo(new Vector3d(newPosVector.x(), targetPos.getY(), newPosVector.z()), new Vector3d(0, 0, 0), entity.yRot, entity.xRot);
 	}
 	
 	@Override

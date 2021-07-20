@@ -19,7 +19,7 @@ public class GeodeFeature extends Feature<GeodeFeatureConfig> {
 	}
 	
 	@Override
-	public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, GeodeFeatureConfig config) {
+	public boolean place(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, GeodeFeatureConfig config) {
 		int yPos = rand.nextInt(config.upperBound - config.lowerBound) + config.lowerBound;
 		
 		if (rand.nextInt(config.frequency) < rand.nextInt(4))
@@ -27,15 +27,15 @@ public class GeodeFeature extends Feature<GeodeFeatureConfig> {
 		
 		int numClusters = rand.nextInt(3) + rand.nextInt(3);
 		
-		BlockPos targetBudPos = pos.add(rand.nextInt(8), yPos, rand.nextInt(8));
-		reader.setBlockState(targetBudPos, config.budState.with(BlockStateProperties.AGE_0_25, rand.nextInt(8)+17), 2);
+		BlockPos targetBudPos = pos.offset(rand.nextInt(8), yPos, rand.nextInt(8));
+		reader.setBlock(targetBudPos, config.budState.setValue(BlockStateProperties.AGE_25, rand.nextInt(8)+17), 2);
 		
 		for (int i = 0; i < numClusters; i++) {
 			BlockPos targetClusterPos = targetBudPos;
 			Direction direction = Direction.values()[rand.nextInt(Direction.values().length - 1)];
-			targetClusterPos = targetClusterPos.add(direction.getDirectionVec());
+			targetClusterPos = targetClusterPos.offset(direction.getNormal());
 			
-			reader.setBlockState(targetClusterPos, config.clusterState.with(CrystalClusterBlock.FACING, direction).with(CrystalClusterBlock.AGE, rand.nextInt(2)), 2);
+			reader.setBlock(targetClusterPos, config.clusterState.setValue(CrystalClusterBlock.FACING, direction).setValue(CrystalClusterBlock.AGE, rand.nextInt(2)), 2);
 		}
 		
 		return true;

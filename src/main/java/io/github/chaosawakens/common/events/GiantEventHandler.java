@@ -21,7 +21,7 @@ public class GiantEventHandler {
     @SubscribeEvent
     public void onEntityJoin(EntityJoinWorldEvent event) {
         World world = event.getWorld();
-        if (world.isRemote) {
+        if (world.isClientSide) {
             return;
         }
 

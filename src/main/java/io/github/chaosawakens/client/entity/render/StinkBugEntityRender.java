@@ -16,7 +16,7 @@ public class StinkBugEntityRender extends GeoEntityRenderer<StinkBugEntity> {
 
     public StinkBugEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new StinkBugEntityModel());
-        this.shadowSize = 0.4F;
+        this.shadowRadius = 0.4F;
     }
 
     @Override
@@ -25,13 +25,13 @@ public class StinkBugEntityRender extends GeoEntityRenderer<StinkBugEntity> {
     }
 
     @Override
-    public ResourceLocation getEntityTexture(StinkBugEntity entity) {
+    public ResourceLocation getTextureLocation(StinkBugEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/stink_bug.png");
     }
 
     @Override
     public RenderType getRenderType(StinkBugEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

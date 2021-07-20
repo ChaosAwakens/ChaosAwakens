@@ -11,7 +11,7 @@ public class EnchantedBlockItem extends BlockItem {
 		super(blockIn, builder);
 	}
 	
-	public boolean hasEffect(ItemStack stack) {
+	public boolean isFoil(ItemStack stack) {
 		return true;
 	}
 }

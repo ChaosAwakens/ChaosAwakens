@@ -35,11 +35,11 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 
 	public WaspEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.moveController = new FlyingMovementController(this, 20, true);
-		this.ignoreFrustumCheck = true;
+		this.moveControl = new FlyingMovementController(this, 20, true);
+		this.noCulling = true;
 	}
 
-	public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
+	public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
 		return worldIn.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
 	
@@ -85,37 +85,37 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 //	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 80)
-				.createMutableAttribute(Attributes.ARMOR, 10)
-				.createMutableAttribute(Attributes.FLYING_SPEED, 0.8F)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.4F)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 12)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 36);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 80)
+				.add(Attributes.ARMOR, 10)
+				.add(Attributes.FLYING_SPEED, 0.8F)
+				.add(Attributes.MOVEMENT_SPEED, 0.4F)
+				.add(Attributes.ATTACK_DAMAGE, 12)
+				.add(Attributes.FOLLOW_RANGE, 36);
 	}
 
-	protected PathNavigator createNavigator(World worldIn) {
+	protected PathNavigator createNavigation(World worldIn) {
 		FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, worldIn) {
-			public boolean canEntityStandOnPos(BlockPos pos) {
-				return !this.world.getBlockState(pos.down()).isAir();
+			public boolean isStableDestination(BlockPos pos) {
+				return !this.level.getBlockState(pos.below()).isAir();
 			}
 
 		};
 		flyingpathnavigator.setCanOpenDoors(false);
-		flyingpathnavigator.setCanSwim(false);
-		flyingpathnavigator.setCanEnterDoors(false);
+		flyingpathnavigator.setCanFloat(false);
+		flyingpathnavigator.setCanPassDoors(false);
 		return flyingpathnavigator;
 	}
 
-	public boolean attackEntityAsMob(Entity entityIn) {
-		boolean flag = entityIn.attackEntityFrom(DamageSource.causeBeeStingDamage(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+	public boolean doHurtTarget(Entity entityIn) {
+		boolean flag = entityIn.hurt(DamageSource.sting(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
 		if (flag) {
-			this.applyEnchantments(this, entityIn);
+			this.doEnchantDamageEffects(this, entityIn);
 			if (entityIn instanceof LivingEntity) {
-				((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.POISON, rand.nextInt(20) * 20, 0));
+				((LivingEntity)entityIn).addEffect(new EffectInstance(Effects.POISON, random.nextInt(20) * 20, 0));
 			}
 
-			this.playSound(SoundEvents.ENTITY_BEE_STING, 1.0F, 1.0F);
+			this.playSound(SoundEvents.BEE_STING, 1.0F, 1.0F);
 		}
 
 		return flag;
@@ -131,11 +131,11 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	}
 
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_BEE_HURT;
+		return SoundEvents.BEE_HURT;
 	}
 
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_BEE_DEATH;
+		return SoundEvents.BEE_DEATH;
 	}
 
 	/**
@@ -146,18 +146,18 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	}
 
 
-	public boolean onLivingFall(float distance, float damageMultiplier) {
+	public boolean causeFallDamage(float distance, float damageMultiplier) {
 		return false;
 	}
 
-	protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
 
 	protected boolean makeFlySound() {
 		return true;
 	}
 
-	public CreatureAttribute getCreatureAttribute() {
+	public CreatureAttribute getMobType() {
 		return CreatureAttribute.ARTHROPOD;
 	}
 	

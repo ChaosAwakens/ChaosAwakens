@@ -18,6 +18,8 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * @author invalid2
  *
@@ -38,27 +40,27 @@ public class StrawberryBushBlock extends SweetBerryBushBlock {
 	}
 	
 	@Override
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(seedItem.get());
 	}
 	
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		int age = state.get(AGE);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		int age = state.getValue(AGE);
 		boolean flag = age == 3;
-		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
+		if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
 			return ActionResultType.PASS;
 		} else if (age > 1) {
-			int j = 1 + worldIn.rand.nextInt(2);
-			spawnAsEntity(worldIn, pos, new ItemStack(this.foodItem.get(), j + (flag ? 1 : 0)));
-			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
+			int j = 1 + worldIn.random.nextInt(2);
+			popResource(worldIn, pos, new ItemStack(this.foodItem.get(), j + (flag ? 1 : 0)));
+			worldIn.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
+			worldIn.setBlock(pos, state.setValue(AGE, Integer.valueOf(1)), 2);
 			
-			return ActionResultType.func_233537_a_(worldIn.isRemote);
+			return ActionResultType.sidedSuccess(worldIn.isClientSide);
 		}
-		return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+		return super.use(state, worldIn, pos, player, handIn, hit);
 	}
 	
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {}
+	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {}
 }

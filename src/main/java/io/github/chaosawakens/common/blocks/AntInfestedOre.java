@@ -13,6 +13,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class AntInfestedOre extends OreBlock {
 
     private final Supplier<? extends EntityType<?>> ant;
@@ -24,14 +26,14 @@ public class AntInfestedOre extends OreBlock {
 
     private void spawnAnt(ServerWorld world, BlockPos pos) {
         MonsterEntity antEntity = (MonsterEntity) ant.get().create(world);
-        antEntity.setLocationAndAngles((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
-        world.addEntity(antEntity);
-        antEntity.spawnExplosionParticle();
+        antEntity.moveTo((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
+        world.addFreshEntity(antEntity);
+        antEntity.spawnAnim();
     }
 
-    public void spawnAdditionalDrops(BlockState state, ServerWorld worldIn, BlockPos pos, ItemStack stack) {
-        super.spawnAdditionalDrops(state, worldIn, pos, stack);
-        if (!worldIn.isRemote && worldIn.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
+    public void spawnAfterBreak(BlockState state, ServerWorld worldIn, BlockPos pos, ItemStack stack) {
+        super.spawnAfterBreak(state, worldIn, pos, stack);
+        if (!worldIn.isClientSide && worldIn.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
             for (int index0 = 0; index0 < (25); index0++) {
                 this.spawnAnt(worldIn, pos);
             }

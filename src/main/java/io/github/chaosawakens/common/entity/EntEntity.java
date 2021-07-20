@@ -6,11 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
@@ -29,7 +25,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	
 	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.ignoreFrustumCheck = true;
+		this.noCulling = true;
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -37,20 +33,16 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.death_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
 		if(this.getAttacking()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
 		if(event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.idle_animation", true));
 		return PlayState.CONTINUE;
-		
 	}
 	
 	@Override
@@ -69,27 +61,27 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 150)
-				.createMutableAttribute(Attributes.ARMOR, 3)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 25)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 24);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 150)
+				.add(Attributes.ARMOR, 3)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+				.add(Attributes.ATTACK_SPEED, 10)
+				.add(Attributes.ATTACK_DAMAGE, 25)
+				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
+				.add(Attributes.FOLLOW_RANGE, 24);
 	}
 	
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "entcontroller", 0, this::predicate));
 	}
-	
+
 	@Override
-	public boolean isNoDespawnRequired() {
+	public boolean isPersistenceRequired() {
 		return true;
 	}
-	
+
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;

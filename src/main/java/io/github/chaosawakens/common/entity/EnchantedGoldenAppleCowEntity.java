@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 	_interface = IChargeableMob.class
 )
 public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChargeableMob {
-	private static final DataParameter<Boolean> ENCHANTED = EntityDataManager.createKey(EnchantedGoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> ENCHANTED = EntityDataManager.defineId(EnchantedGoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
 	
 	public EnchantedGoldenAppleCowEntity(EntityType<? extends EnchantedGoldenAppleCowEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -43,7 +43,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
 		if (CAConfig.COMMON.enableEnchantedGoldenAppleCowBreeding.get()) {
 			this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-			this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.WHEAT), false));
+			this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
 			this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		}
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
@@ -52,15 +52,15 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 10)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 10);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D)
+				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
 	@Nullable
 	@Override
-	public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
 		return CAConfig.COMMON.enableEnchantedGoldenAppleCowBreeding.get() ? CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(world) : null;
 	}
 	
@@ -70,15 +70,15 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 	}
 
 	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(ENCHANTED, true);
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(ENCHANTED, true);
 	}
 	
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
-		if (this.dataManager.get(ENCHANTED)) {
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
+		if (this.entityData.get(ENCHANTED)) {
 			compound.putBoolean("enchanted", true);
 		}
 	}
@@ -87,29 +87,29 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
-		this.dataManager.set(ENCHANTED, compound.getBoolean("enchanted"));
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
+		this.entityData.set(ENCHANTED, compound.getBoolean("enchanted"));
 	}
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_COW_AMBIENT;
+		return SoundEvents.COW_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_COW_HURT;
+		return SoundEvents.COW_HURT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_COW_DEATH;
+		return SoundEvents.COW_DEATH;
 	}
 	
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
+		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
 	}
 	
 	@Override
@@ -118,25 +118,25 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 	}
 	
 	@Override
-	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-		ItemStack itemstack = playerIn.getHeldItem(hand);
+	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+		ItemStack itemstack = playerIn.getItemInHand(hand);
 		if (itemstack.getItem() == Items.BUCKET) {
-			playerIn.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.fill(itemstack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
-			playerIn.setHeldItem(hand, itemstack1);
-			return ActionResultType.func_233537_a_(this.world.isRemote);
+			playerIn.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
+			playerIn.setItemInHand(hand, itemstack1);
+			return ActionResultType.sidedSuccess(this.level.isClientSide);
 		} else {
-			return super.getEntityInteractionResult(playerIn, hand);
+			return super.mobInteract(playerIn, hand);
 		}
 	}
 	
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.isChild() ? sizeIn.height * 0.95F : 1.3F;
+		return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
 	}
 	
 	@Override
-	public boolean isCharged() {
-		return this.dataManager.get(ENCHANTED);
+	public boolean isPowered() {
+		return this.entityData.get(ENCHANTED);
 	}
 }

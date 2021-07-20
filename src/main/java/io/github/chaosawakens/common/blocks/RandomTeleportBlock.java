@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.EntityTeleportEvent;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RandomTeleportBlock extends Block {
 	
 	public RandomTeleportBlock(Properties props) {
@@ -26,23 +28,23 @@ public class RandomTeleportBlock extends Block {
 	}
 	
 	@Override
-	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-		if (!worldIn.isRemote && entityIn instanceof LivingEntity) {
-			double d0 = entityIn.getPosX();
-			double d1 = entityIn.getPosY();
-			double d2 = entityIn.getPosZ();
+	public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
+		if (!worldIn.isClientSide && entityIn instanceof LivingEntity) {
+			double d0 = entityIn.getX();
+			double d1 = entityIn.getY();
+			double d2 = entityIn.getZ();
 			
 			for (int i = 0; i < 16; ++i) {
-				double d3 = entityIn.getPosX() + (getRNG().nextDouble() - 0.5D) * 16.0D;
-				double d4 = MathHelper.clamp(entityIn.getPosY() + (double) (getRNG().nextInt(16) - 8), 0.0D, (worldIn.func_234938_ad_() - 1));
-				double d5 = entityIn.getPosZ() + (getRNG().nextDouble() - 0.5D) * 16.0D;
+				double d3 = entityIn.getX() + (getRNG().nextDouble() - 0.5D) * 16.0D;
+				double d4 = MathHelper.clamp(entityIn.getY() + (double) (getRNG().nextInt(16) - 8), 0.0D, (worldIn.getHeight() - 1));
+				double d5 = entityIn.getZ() + (getRNG().nextDouble() - 0.5D) * 16.0D;
 				if (entityIn.isPassenger())
 					entityIn.stopRiding();
 				
 				LivingEntity livingEntityIn = (LivingEntity) entityIn;
 				EntityTeleportEvent.ChorusFruit event = ForgeEventFactory.onChorusFruitTeleport(livingEntityIn, d3, d4, d5);
-				if (livingEntityIn.attemptTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true)) {
-					SoundEvent soundevent = entityIn instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+				if (livingEntityIn.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true)) {
+					SoundEvent soundevent = entityIn instanceof FoxEntity ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
 					worldIn.playSound(null, d0, d1, d2, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
 					entityIn.playSound(soundevent, 1.0F, 1.0F);
 					break;

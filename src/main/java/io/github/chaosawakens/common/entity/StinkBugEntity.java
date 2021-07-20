@@ -53,10 +53,10 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 8)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 8)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 	
 	@Override
@@ -71,7 +71,7 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	
 	@Nullable
 	@Override
-	public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
 		return null;
 	}
 }

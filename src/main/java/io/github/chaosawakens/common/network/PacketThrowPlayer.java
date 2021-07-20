@@ -32,7 +32,7 @@ public class PacketThrowPlayer {
     public static class Handler {
 
         public static boolean onMessage(PacketThrowPlayer message, Supplier<NetworkEvent.Context> ctx) {
-            ctx.get().enqueueWork(() -> Minecraft.getInstance().player.addVelocity(message.motionX, message.motionY, message.motionZ));
+            ctx.get().enqueueWork(() -> Minecraft.getInstance().player.push(message.motionX, message.motionY, message.motionZ));
 
             return true;
         }

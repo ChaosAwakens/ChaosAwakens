@@ -29,7 +29,7 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity {
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

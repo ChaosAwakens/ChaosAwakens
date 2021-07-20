@@ -29,7 +29,7 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
 
     public BeaverEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
-        this.ignoreFrustumCheck = true;
+        this.noCulling = true;
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -76,10 +76,10 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 6)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-                .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 6)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.FOLLOW_RANGE, 8);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
 
     @Nullable
     @Override
-    public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
         return null;
     }
 }

@@ -18,7 +18,7 @@ public class WaspEntityRender extends GeoEntityRenderer<WaspEntity> {
 
     public WaspEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new WaspEntityModel());
-        this.shadowSize = 2.0F;
+        this.shadowRadius = 2.0F;
     }
 
     @Override
@@ -27,13 +27,13 @@ public class WaspEntityRender extends GeoEntityRenderer<WaspEntity> {
     }
 
     @Override
-    public ResourceLocation getEntityTexture(WaspEntity entity) {
+    public ResourceLocation getTextureLocation(WaspEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/wasp.png");
     }
 
     @Override
     public RenderType getRenderType(WaspEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

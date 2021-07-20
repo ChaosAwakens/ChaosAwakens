@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
+import net.minecraft.item.Item.Properties;
+
 public class PoisonSwordItem extends EnchantedSwordItem {
 
     public PoisonSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
@@ -14,13 +16,13 @@ public class PoisonSwordItem extends EnchantedSwordItem {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (target != null) {
-            target.addPotionEffect(new EffectInstance(Effects.POISON,(10 + target.getRNG().nextInt(10)) * 20,0));
-            target.addPotionEffect(new EffectInstance(Effects.WITHER,(10 + target.getRNG().nextInt(10)) * 20,0));
-            target.addPotionEffect(new EffectInstance(Effects.WEAKNESS,(10 + target.getRNG().nextInt(10)) * 20,0));
+            target.addEffect(new EffectInstance(Effects.POISON,(10 + target.getRandom().nextInt(10)) * 20,0));
+            target.addEffect(new EffectInstance(Effects.WITHER,(10 + target.getRandom().nextInt(10)) * 20,0));
+            target.addEffect(new EffectInstance(Effects.WEAKNESS,(10 + target.getRandom().nextInt(10)) * 20,0));
         }
-        return super.hitEntity(stack, target, attacker);
+        return super.hurtEnemy(stack, target, attacker);
     }
 }
 

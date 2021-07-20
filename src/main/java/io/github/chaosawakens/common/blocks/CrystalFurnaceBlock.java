@@ -24,26 +24,26 @@ public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
         super(properties);
     }
 
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity newBlockEntity(IBlockReader worldIn) {
         return new CrystalFurnaceTileEntity();
     }
 
     @Override
-    protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    protected void openContainer(World worldIn, BlockPos pos, PlayerEntity player) {
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof CrystalFurnaceTileEntity) {
-            player.openContainer((INamedContainerProvider)tileentity);
+            player.openMenu((INamedContainerProvider)tileentity);
         }
     }
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (stateIn.get(LIT)) {
+        if (stateIn.getValue(LIT)) {
             double d0 = (double)pos.getX() + 0.5D;
             double d1 = pos.getY();
             double d2 = (double)pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
-                worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                worldIn.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
 
             worldIn.addParticle(ParticleTypes.FLAME, d0, d1 + 1.1D, d2, 0.0D, 0.0D, 0.0D);

@@ -34,11 +34,11 @@ public class EventHandler {
             if (event.getEntityLiving() == null) return;
             MinecraftServer server = event.getEntity().getServer();
             if (server == null) return;
-            if (event.getEntity().getEntityWorld().equals(server.getWorld(World.THE_END))) {
+            if (event.getEntity().getCommandSenderWorld().equals(server.getLevel(World.END))) {
                 if (event.getEntity() instanceof EnderDragonEntity) {
                     EnderDragonEntity dragon = (EnderDragonEntity) event.getEntity();
-                    if (dragon.getFightManager() != null && dragon.getFightManager().hasPreviouslyKilledDragon()) {
-                        event.getEntity().getEntityWorld().setBlockState(event.getEntity().getEntityWorld().getHeight(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.getDefaultState());
+                    if (dragon.getDragonFight() != null && dragon.getDragonFight().hasPreviouslyKilledDragon()) {
+                        event.getEntity().getCommandSenderWorld().setBlockAndUpdate(event.getEntity().getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
                     }
                 }
             }
@@ -57,16 +57,16 @@ public class EventHandler {
 
             //Drop #1: Ender Dragon Scales
             int amount = 8 + (int)(Math.random() * 6) + (int)(Math.random() * event.getLootingLevel() * 4);
-            if (dragon.getFightManager().hasPreviouslyKilledDragon()) amount /= 2; //Amount is halved with repeat kills.
+            if (dragon.getDragonFight().hasPreviouslyKilledDragon()) amount /= 2; //Amount is halved with repeat kills.
             stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
-            drop = new ItemEntity(event.getEntityLiving().world, 0, 90, 0, stack);
+            drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
             event.getDrops().add(drop);
 
             // Drop #2: Ender Dragon Head
             double chance = 0.1D + event.getLootingLevel() * 0.1D;
             if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
                 stack = new ItemStack(Items.DRAGON_HEAD, 1);
-                drop = new ItemEntity(event.getEntityLiving().world, 0, 90, 0, stack);
+                drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
                 event.getDrops().add(drop);
             }
         }
@@ -77,7 +77,7 @@ public class EventHandler {
             double chance = 0.1D + event.getLootingLevel() * 0.1D;
             if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
                 stack = new ItemStack(Items.ZOMBIE_HEAD, 1);
-                drop = new ItemEntity(event.getEntityLiving().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), stack);
+                drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
                 event.getDrops().add(drop);
             }
         }
@@ -88,7 +88,7 @@ public class EventHandler {
             double chance = 0.1D + event.getLootingLevel() * 0.1D;
             if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
                 stack = new ItemStack(Items.SKELETON_SKULL, 1);
-                drop = new ItemEntity(event.getEntityLiving().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), stack);
+                drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
                 event.getDrops().add(drop);
             }
         }
@@ -99,7 +99,7 @@ public class EventHandler {
             double chance = 0.1D + event.getLootingLevel() * 0.1D;
             if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
                 stack = new ItemStack(Items.CREEPER_HEAD, 1);
-                drop = new ItemEntity(event.getEntityLiving().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), stack);
+                drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
                 event.getDrops().add(drop);
             }
         }

@@ -9,6 +9,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
+import net.minecraft.item.Item.Properties;
+
 public class EnchantedHoeItem extends HoeItem implements IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;
@@ -19,20 +21,20 @@ public class EnchantedHoeItem extends HoeItem implements IAutoEnchantable {
 	}
 	
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if (this.isInGroup(group)) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
 			if (CAConfig.COMMON.enableAutoEnchanting.get())
 				for(EnchantmentData enchant : enchantments) {
-					stack.addEnchantment( enchant.enchantment, enchant.enchantmentLevel);
+					stack.enchant( enchant.enchantment, enchant.level);
 				}
 			items.add(stack);
 		}
 	}
 
 	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get() || super.hasEffect(stack);
+	public boolean isFoil(ItemStack stack) {
+		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
 	}
 
 	@Override

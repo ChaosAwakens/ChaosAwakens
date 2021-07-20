@@ -7,6 +7,8 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import net.minecraft.item.Item.Properties;
+
 public class IrukandjiArrowItem extends ArrowItem {
     public IrukandjiArrowItem(Properties builder) {
         super(builder);

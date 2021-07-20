@@ -17,7 +17,7 @@ public class CrystalAppleCowRender extends MobRenderer<CrystalAppleCowEntity, Co
         super(renderManagerIn, new CowModel<>(), 0.7F);
     }
 
-    public ResourceLocation getEntityTexture(CrystalAppleCowEntity entity) {
+    public ResourceLocation getTextureLocation(CrystalAppleCowEntity entity) {
         return CRYSTAL_APPLE_COW_TEXTURE;
     }
 }

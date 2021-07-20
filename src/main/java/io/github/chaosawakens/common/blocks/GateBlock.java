@@ -29,36 +29,38 @@ import java.util.Random;
 
 import io.github.chaosawakens.common.registry.CABlocks;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class GateBlock extends Block {
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
     public static final BooleanProperty VANISHED = BooleanProperty.create("vanished");
-    private static final VoxelShape VANISHED_SHAPE = makeCuboidShape(6, 6, 6, 10, 10, 10);
+    private static final VoxelShape VANISHED_SHAPE = box(6, 6, 6, 10, 10, 10);
 
     public GateBlock(Properties props) {
         super(props);
-        this.setDefaultState(stateContainer.getBaseState().with(ACTIVE, false));
+        this.registerDefaultState(stateDefinition.any().setValue(ACTIVE, false));
     }
 
     @Override
     @Deprecated
     public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.isRemote) {
+        if (world.isClientSide) {
             return;
         }
 
         if (isVanished(state)) {
-            if (state.get(ACTIVE)) {
-                world.setBlockState(pos, state.with(VANISHED, false).with(ACTIVE, false));
+            if (state.getValue(ACTIVE)) {
+                world.setBlockAndUpdate(pos, state.setValue(VANISHED, false).setValue(ACTIVE, false));
             } else {
-                world.setBlockState(pos, state.with(ACTIVE, true));
-                world.getPendingBlockTicks().scheduleTick(pos, this, 15);
+                world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
+                world.getBlockTicks().scheduleTick(pos, this, 15);
             }
             world.playSound(null, pos, SoundType.ANVIL.getPlaceSound(), SoundCategory.BLOCKS, 0.3F, 0.6F);
         } else {
-            if (state.get(ACTIVE)) {
+            if (state.getValue(ACTIVE)) {
                 if (state.hasProperty(VANISHED)) {
-                    world.setBlockState(pos, state.with(ACTIVE, false).with(VANISHED, true));
-                    world.getPendingBlockTicks().scheduleTick(pos, this, 80);
+                    world.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(VANISHED, true));
+                    world.getBlockTicks().scheduleTick(pos, this, 80);
                 } else {
                     world.removeBlock(pos, false);
                 }
@@ -66,40 +68,40 @@ public class GateBlock extends Block {
                 world.playSound(null, pos, state.getBlock() == CABlocks.GATE_BLOCK.get() ? SoundType.ANVIL.getPlaceSound() : SoundType.ANVIL.getPlaceSound(), SoundCategory.BLOCKS, 0.3F, 0.5F);
 
                 for (Direction e : Direction.values()) {
-                    activate(world, pos.offset(e));
+                    activate(world, pos.relative(e));
                 }
             }
         }
     }
 
     private boolean isVanished(BlockState state) {
-        return state.hasProperty(VANISHED) && state.get(VANISHED);
+        return state.hasProperty(VANISHED) && state.getValue(VANISHED);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
-        return isVanished(state) ? VANISHED_SHAPE : VoxelShapes.fullCube();
+        return isVanished(state) ? VANISHED_SHAPE : VoxelShapes.block();
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(ACTIVE);
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
-        return isVanished(state) ? VoxelShapes.empty() : this.canCollide ? state.getShape(world, pos) : VoxelShapes.empty();
+        return isVanished(state) ? VoxelShapes.empty() : this.hasCollision ? state.getShape(world, pos) : VoxelShapes.empty();
     }
 
     @Override
     @Deprecated
     public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        if (world.isRemote) {
+        if (world.isClientSide) {
             return;
         }
 
-        if (!isVanished(state) && !state.get(ACTIVE) && world.isBlockPowered(pos)) {
+        if (!isVanished(state) && !state.getValue(ACTIVE) && world.hasNeighborSignal(pos)) {
             activate(world, pos);
         }
     }
@@ -107,21 +109,21 @@ public class GateBlock extends Block {
     @Override
     public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity) {
         super.canEntityDestroy(state, world, pos, entity);
-        return !state.get(ACTIVE);
+        return !state.getValue(ACTIVE);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.get(ACTIVE)) {
+        if (state.getValue(ACTIVE)) {
             this.sparkle(world, pos);
         }
     }
 
     @Override
     @Deprecated
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!isVanished(state) && !state.get(ACTIVE)) {
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!isVanished(state) && !state.getValue(ACTIVE)) {
             activate(world, pos);
             return ActionResultType.SUCCESS;
         }
@@ -129,7 +131,7 @@ public class GateBlock extends Block {
     }
 
     public void sparkle(World worldIn, BlockPos pos) {
-        Random random = worldIn.rand;
+        Random random = worldIn.random;
         double d0 = 0.0625D;
 
         for (int i = 0; i < 6; ++i) {
@@ -137,46 +139,46 @@ public class GateBlock extends Block {
             double d2 = ((float) pos.getY() + random.nextFloat());
             double d3 = ((float) pos.getZ() + random.nextFloat());
 
-            if (i == 0 && !worldIn.getBlockState(pos.up()).isOpaqueCube(worldIn, pos)) {
+            if (i == 0 && !worldIn.getBlockState(pos.above()).isSolidRender(worldIn, pos)) {
                 d2 = (double) pos.getY() + d0 + 1.25D;
             }
 
-            if (i == 1 && !worldIn.getBlockState(pos.down()).isOpaqueCube(worldIn, pos)) {
+            if (i == 1 && !worldIn.getBlockState(pos.below()).isSolidRender(worldIn, pos)) {
                 d2 = (double) pos.getY() - d0;
             }
 
-            if (i == 2 && !worldIn.getBlockState(pos.south()).isOpaqueCube(worldIn, pos)) {
+            if (i == 2 && !worldIn.getBlockState(pos.south()).isSolidRender(worldIn, pos)) {
                 d3 = (double) pos.getZ() + d0 + 1.25D;
             }
 
-            if (i == 3 && !worldIn.getBlockState(pos.north()).isOpaqueCube(worldIn, pos)) {
+            if (i == 3 && !worldIn.getBlockState(pos.north()).isSolidRender(worldIn, pos)) {
                 d3 = (double) pos.getZ() - d0;
             }
 
-            if (i == 4 && !worldIn.getBlockState(pos.east()).isOpaqueCube(worldIn, pos)) {
+            if (i == 4 && !worldIn.getBlockState(pos.east()).isSolidRender(worldIn, pos)) {
                 d1 = (double) pos.getX() + d0 + 1.25D;
             }
 
-            if (i == 5 && !worldIn.getBlockState(pos.west()).isOpaqueCube(worldIn, pos)) {
+            if (i == 5 && !worldIn.getBlockState(pos.west()).isSolidRender(worldIn, pos)) {
                 d1 = (double) pos.getX() - d0;
             }
 
             if (d1 < (double) pos.getX() || d1 > (double) (pos.getX() + 1.25F) || d2 < 0.25D || d2 > (pos.getY() + 1.25D) || d3 < (double) pos.getZ() || d3 > (pos.getZ() + 1.25D)) {
-                worldIn.addParticle(new BlockParticleData(ParticleTypes.FALLING_DUST, getDefaultState()), d1, d2, d3, 0.0D, 0.0D, 0.0D);
+                worldIn.addParticle(new BlockParticleData(ParticleTypes.FALLING_DUST, defaultBlockState()), d1, d2, d3, 0.0D, 0.0D, 0.0D);
             }
         }
     }
 
     @Override
     public float getExplosionResistance(BlockState state, IBlockReader world, BlockPos pos, Explosion explosion) {
-        return !state.get(ACTIVE) ? 6000F : super.getExplosionResistance(state, world, pos, explosion);
+        return !state.getValue(ACTIVE) ? 6000F : super.getExplosionResistance(state, world, pos, explosion);
     }
 
     private void activate(World world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof GateBlock && !isVanished(state) && !state.get(ACTIVE)) {
-            world.setBlockState(pos, state.with(ACTIVE, true));
-            world.getPendingBlockTicks().scheduleTick(pos, state.getBlock(), 2 + world.rand.nextInt(5));
+        if (state.getBlock() instanceof GateBlock && !isVanished(state) && !state.getValue(ACTIVE)) {
+            world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
+            world.getBlockTicks().scheduleTick(pos, state.getBlock(), 2 + world.random.nextInt(5));
         }
     }
 }

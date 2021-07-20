@@ -15,7 +15,7 @@ public class RayGunProjectileRender extends EntityRenderer<RayGunProjectileEntit
         super(manager);
     }
 
-    public ResourceLocation getEntityTexture(RayGunProjectileEntity entity) {
+    public ResourceLocation getTextureLocation(RayGunProjectileEntity entity) {
         return ARROW_TEXTURE;
     }
 

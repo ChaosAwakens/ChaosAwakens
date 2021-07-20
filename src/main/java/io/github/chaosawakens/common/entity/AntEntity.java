@@ -43,7 +43,7 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
 	
 	public AntEntity(EntityType<? extends AntEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
-		this.ignoreFrustumCheck = true;
+		this.noCulling = true;
 		this.tpConfig = tpConfig;
 		this.targetDimension = targetDimension;
 	}
@@ -70,29 +70,29 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 1)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 1)
+				.add(Attributes.MOVEMENT_SPEED, 0.15)
+				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
 	@Override
-	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-		ItemStack itemstack = playerIn.getHeldItem(hand);
+	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+		ItemStack itemstack = playerIn.getItemInHand(hand);
 
-		if (tpConfig.get() && !this.world.isRemote && itemstack.getItem() == Items.AIR) {
+		if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
 			if(targetDimension == null) {
-				playerIn.sendStatusMessage(this.inaccessibleMessage ,true);
+				playerIn.displayClientMessage(this.inaccessibleMessage ,true);
                 return ActionResultType.PASS;
 			} else {
-				MinecraftServer minecraftServer = ((ServerWorld)this.world).getServer();
-				ServerWorld targetWorld = minecraftServer.getWorld(this.world.getDimensionKey() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+				MinecraftServer minecraftServer = ((ServerWorld)this.level).getServer();
+				ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
 				if (targetWorld != null)
 					serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 			}
 		}
-		return super.getEntityInteractionResult(playerIn, hand);
+		return super.mobInteract(playerIn, hand);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
 
 	@Nullable
 	@Override
-	public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
 		return null;
 	}
 }

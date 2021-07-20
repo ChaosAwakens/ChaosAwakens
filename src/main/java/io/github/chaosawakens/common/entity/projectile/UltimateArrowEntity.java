@@ -32,24 +32,24 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 	}
 
 	@Override
-	protected void onEntityHit(EntityRayTraceResult result) {
+	protected void onHitEntity(EntityRayTraceResult result) {
 		Entity entity = result.getEntity();
-		if (entity instanceof PlayerEntity || (entity instanceof TameableEntity && ((TameableEntity) entity).isTamed() && ((TameableEntity) entity).getOwner() == this.getShooter())) {
+		if (entity instanceof PlayerEntity || (entity instanceof TameableEntity && ((TameableEntity) entity).isTame() && ((TameableEntity) entity).getOwner() == this.getOwner())) {
 			((LivingEntity) entity).heal(5.0F);
 			remove();
 			return;
 		}
-		super.onEntityHit(result);
+		super.onHitEntity(result);
 	}
 	
 	@Override
-	protected ItemStack getArrowStack() {
+	protected ItemStack getPickupItem() {
 		return new ItemStack(Items.AIR);
 	}
 	
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
 		if (compound.contains("Duration")) {
 			this.duration = compound.getInt("Duration");
 		}
@@ -58,25 +58,25 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.world.isRemote && this.inGround && this.timeInGround != 0 && this.timeInGround >= 600) {
-			this.world.setEntityState(this, (byte) 0);
+		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) {
+			this.level.broadcastEntityEvent(this, (byte) 0);
 		}
 		
 	}
 	
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
 		compound.putInt("Duration", this.duration);
 	}
 	
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	
 	@Override
-	public double getDamage() {
+	public double getBaseDamage() {
 		return 10.0D;
 	}
 }

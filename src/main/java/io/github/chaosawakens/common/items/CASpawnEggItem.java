@@ -11,6 +11,8 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 
+import net.minecraft.item.Item.Properties;
+
 public class CASpawnEggItem extends SpawnEggItem {
 	private final Supplier<? extends EntityType<?>> typeGetter;
 	private final boolean isEnchanted;
@@ -26,14 +28,14 @@ public class CASpawnEggItem extends SpawnEggItem {
 	}
 	
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		SpawnEggItem.EGGS.put(this.getType(null), this);
-		super.fillItemGroup(group, items);
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+		SpawnEggItem.BY_ID.put(this.getType(null), this);
+		super.fillItemCategory(group, items);
 	}
 	
 	@Override
 	public EntityType<?> getType(@Nullable CompoundNBT p_208076_1_) { return typeGetter.get(); }
 	
 	@Override
-	public boolean hasEffect(ItemStack stack) { return this.isEnchanted || super.hasEffect(stack); }
+	public boolean isFoil(ItemStack stack) { return this.isEnchanted || super.isFoil(stack); }
 }

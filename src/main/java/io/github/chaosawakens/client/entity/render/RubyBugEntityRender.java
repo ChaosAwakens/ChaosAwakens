@@ -16,7 +16,7 @@ public class RubyBugEntityRender extends GeoEntityRenderer<RubyBugEntity> {
 
     public RubyBugEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RubyBugEntityModel());
-        this.shadowSize = 0.4F;
+        this.shadowRadius = 0.4F;
     }
 
     @Override
@@ -25,13 +25,13 @@ public class RubyBugEntityRender extends GeoEntityRenderer<RubyBugEntity> {
     }
 
     @Override
-    public ResourceLocation getEntityTexture(RubyBugEntity entity) {
+    public ResourceLocation getTextureLocation(RubyBugEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ruby_bug.png");
     }
 
     @Override
     public RenderType getRenderType(RubyBugEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

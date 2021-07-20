@@ -20,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 
+import net.minecraft.item.Item.Properties;
+
 public class MinersDreamItem extends Item {
 	private static final int HOLE_LENGTH = 36;
 	private static final int HOLE_WIDTH = 4;
@@ -30,20 +32,20 @@ public class MinersDreamItem extends Item {
 	}
 	
 	@Override
-	public ActionResultType onItemUse(ItemUseContext context) {
-		Direction direction = context.getPlacementHorizontalFacing();
-		World worldIn = context.getWorld();
+	public ActionResultType useOn(ItemUseContext context) {
+		Direction direction = context.getHorizontalDirection();
+		World worldIn = context.getLevel();
 		
-		if (worldIn.isRemote)return ActionResultType.FAIL;
+		if (worldIn.isClientSide)return ActionResultType.FAIL;
 		if (direction == Direction.UP || direction == Direction.DOWN)return ActionResultType.FAIL;
 		
-		BlockPos breakPos = context.getPos();
+		BlockPos breakPos = context.getClickedPos();
 		int targetY = breakPos.getY() % 8;
 		PlayerEntity playerIn = context.getPlayer();
 		ChaosAwakens.debug("AA", targetY);
-		Vector3i facing = direction.getDirectionVec();
+		Vector3i facing = direction.getNormal();
 		
-		playerIn.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
+		playerIn.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
 		worldIn.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F, 0.25F, 0.25F);
 		
 		for (int i = 0; i < HOLE_LENGTH; i++) {
@@ -51,16 +53,16 @@ public class MinersDreamItem extends Item {
 				for (int k = -HOLE_WIDTH ; k <= HOLE_WIDTH; k++) {
 					int lengthDelta = i * facing.getX() + k * facing.getZ();
 					int widthDelta = i * facing.getZ() + k * facing.getX();
-					BlockPos targetPos = breakPos.add(lengthDelta, -targetY + j, widthDelta);
+					BlockPos targetPos = breakPos.offset(lengthDelta, -targetY + j, widthDelta);
 					BlockState targetState = worldIn.getBlockState(targetPos);
-					if(targetState.isIn(CATags.MINERS_DREAM_MINEABLE)) {
+					if(targetState.is(CATags.MINERS_DREAM_MINEABLE)) {
 						this.placeWoodPillars(worldIn, targetPos, i, j, k);
 					}	
 				}
 			}
 		}
-		context.getPlayer().addStat(Stats.ITEM_USED.get(this));
-		context.getItem().shrink(1);
+		context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
+		context.getItemInHand().shrink(1);
 		
 		return ActionResultType.SUCCESS;
 	}
@@ -77,19 +79,19 @@ public class MinersDreamItem extends Item {
 		if(i != 0 && i % 8 == 0) {
 			if(k == -HOLE_WIDTH || k == HOLE_WIDTH) {
 				if(j == HOLE_HEIGHT-1) {
-					worldIn.setBlockState(pos, CABlocks.MOULDY_PLANKS.get().getDefaultState());
+					worldIn.setBlockAndUpdate(pos, CABlocks.MOULDY_PLANKS.get().defaultBlockState());
 					return;
 				}
-				worldIn.setBlockState(pos, CABlocks.MOULDY_FENCE.get().getDefaultState());
+				worldIn.setBlockAndUpdate(pos, CABlocks.MOULDY_FENCE.get().defaultBlockState());
 				return;
 			}
 			
 			if (j == HOLE_HEIGHT-1) {
 				if(k == 0) {
-					worldIn.setBlockState(pos, Blocks.GLOWSTONE.getDefaultState());
+					worldIn.setBlockAndUpdate(pos, Blocks.GLOWSTONE.defaultBlockState());
 					return;
 				}
-				worldIn.setBlockState(pos, CABlocks.MOULDY_SLAB.get().getDefaultState().with(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
+				worldIn.setBlockAndUpdate(pos, CABlocks.MOULDY_SLAB.get().defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
 				return;
 			}
 		}

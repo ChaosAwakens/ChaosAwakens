@@ -16,7 +16,7 @@ public class IrukandjiArrowRender extends ArrowRenderer<IrukandjiArrowEntity> {
         super(manager);
     }
 
-    public ResourceLocation getEntityTexture(IrukandjiArrowEntity entity) {
+    public ResourceLocation getTextureLocation(IrukandjiArrowEntity entity) {
         return IRUKANDJI_ARROW_TEXTURE;
     }
 

@@ -63,43 +63,43 @@ public class CommonSetupEvent {
 		});
 		
 		// TODO Make it so we don't have to add stuff here manually
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_SAVANNA.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_TAIGA.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_SNOWY.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
-		BiomeDictionary.addTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SAVANNA.getId()), CABiomes.Type.VILLAGE_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_TAIGA.getId()), CABiomes.Type.VILLAGE_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SNOWY.getId()), CABiomes.Type.VILLAGE_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
 	}
 	
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (event.getWorld() instanceof ServerWorld) {
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
-			ServerChunkProvider chunkProvider = serverWorld.getChunkProvider();
+			ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
 			
 			try {
 				if (codecMethod == null)codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
 				// TODO Fix this
-				ResourceLocation cgRL = Registry.CHUNK_GENERATOR_CODEC.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
+				ResourceLocation cgRL = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
 				if (cgRL != null && cgRL.getNamespace().equals("terraforged"))return;
 			} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
 				ChaosAwakens.warn("WORLDGEN", e);
 				e.printStackTrace();
 			} catch(UnableToFindMethodException e) {
 				if (CAConfig.COMMON.terraforgedCheckMsg.get())
-					ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.getDimensionKey().getLocation()
+					ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.dimension().location()
 						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessable,"
 						+ " if you aren't using Terraforged please ignore this message");
 			}
 			
-			if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD))return;
+			if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD))return;
 			
-			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.func_235957_b_().func_236195_a_());
-			tempMap.putIfAbsent(CAStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.ENT_DUNGEON.get()));
-			tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.field_236191_b_.get(CAStructures.WASP_DUNGEON.get()));
-			chunkProvider.generator.func_235957_b_().field_236193_d_ = tempMap;
+			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
+			tempMap.putIfAbsent(CAStructures.ENT_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.ENT_DUNGEON.get()));
+			tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
+			chunkProvider.generator.getSettings().structureConfig = tempMap;
 		}
 	}
 }

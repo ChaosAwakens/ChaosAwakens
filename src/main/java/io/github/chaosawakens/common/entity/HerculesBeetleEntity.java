@@ -36,7 +36,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.ignoreFrustumCheck = true;
+		this.noCulling = true;
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -83,15 +83,15 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 250)
-				.createMutableAttribute(Attributes.ARMOR, 20)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
-				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 30)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 7.5D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 16);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 250)
+				.add(Attributes.ARMOR, 20)
+				.add(Attributes.MOVEMENT_SPEED, 0.25D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
+				.add(Attributes.ATTACK_SPEED, 10)
+				.add(Attributes.ATTACK_DAMAGE, 30)
+				.add(Attributes.ATTACK_KNOCKBACK, 7.5D)
+				.add(Attributes.FOLLOW_RANGE, 16);
 	}
 
 	@Override
@@ -105,16 +105,16 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 	
 	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(GRABBING, false);
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(GRABBING, false);
 	}
 	@Override
 	public boolean shouldRiderSit() { return false; }
 	
 	@Override
-	public void updatePassenger(Entity passenger) {
-		this.positionRider(this, passenger, Entity::setPosition);
+	public void positionRider(Entity passenger) {
+		this.positionRider(this, passenger, Entity::setPos);
 	}
 	
 	public Vector3d getGrabOffset() { return this.grabOffset; }
@@ -130,7 +130,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 
 	@Override
-	public boolean isNoDespawnRequired() {
+	public boolean isPersistenceRequired() {
 		return true;
 	}
 }

@@ -19,10 +19,10 @@ import java.util.Random;
 
 public class TopTubeBlock extends AbstractTopPlantBlock implements ILiquidContainer
 {
-    public static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+    public static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
 
-    protected boolean canGrowIn(BlockState state) {
-        return state.matchesBlock(Blocks.WATER);
+    protected boolean canGrowInto(BlockState state) {
+        return state.is(Blocks.WATER);
     }
     public TopTubeBlock(AbstractBlock.Properties properties) {
         super(properties, Direction.UP, SHAPE, false, 0.1D);
@@ -32,43 +32,43 @@ public class TopTubeBlock extends AbstractTopPlantBlock implements ILiquidContai
         return SHAPE;
     }
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return state.isSolidSide(worldIn, pos, Direction.UP) && !state.matchesBlock(Blocks.MAGMA_BLOCK);
+        return state.isFaceSturdy(worldIn, pos, Direction.UP) && !state.is(Blocks.MAGMA_BLOCK);
     }
 
-    protected Block getBodyPlantBlock() {
+    protected Block getBodyBlock() {
         return CABlocks.TUBE_PLANT.get();
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-        return fluidstate.isTagged(FluidTags.WATER) && fluidstate.getLevel() == 8 ? super.getStateForPlacement(context) : null;
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        return fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8 ? super.getStateForPlacement(context) : null;
     }
 
 
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        BlockState blockstate = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        BlockState blockstate = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
         if (!blockstate.isAir()) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
         return blockstate;
     }
 
-    protected int getGrowthAmount(Random rand) {
+    protected int getBlocksToGrowWhenBonemealed(Random rand) {
         return 1;
     }
 
 
-    public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+    public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
         return false;
     }
 
-    public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+    public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
         return false;
     }
 
     public FluidState getFluidState(BlockState state) {
-        return Fluids.WATER.getStillFluidState(false);
+        return Fluids.WATER.getSource(false);
     }
 }

@@ -39,15 +39,15 @@ public class CATreasure {
     }
 
     public void generateChest(IWorld world, BlockPos pos, Direction dir, boolean trapped) {
-        world.setBlockState(pos, (trapped ? Blocks.TRAPPED_CHEST : Blocks.CHEST).getDefaultState().with(ChestBlock.FACING, dir), 2);
-        TileEntity te = world.getTileEntity(pos);
+        world.setBlock(pos, (trapped ? Blocks.TRAPPED_CHEST : Blocks.CHEST).defaultBlockState().setValue(ChestBlock.FACING, dir), 2);
+        TileEntity te = world.getBlockEntity(pos);
         if (te instanceof ChestTileEntity) {
             ((ChestTileEntity) te).setLootTable(lootTable, ((ISeedReader)world).getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
         }
     }
 
     public void generateChestContents(ISeedReader world, BlockPos pos) {
-        TileEntity te = world.getTileEntity(pos);
+        TileEntity te = world.getBlockEntity(pos);
         if (te instanceof ChestTileEntity)
             ((ChestTileEntity) te).setLootTable(lootTable, world.getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
     }

@@ -36,7 +36,7 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
 
     public BrownAntEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
-        this.ignoreFrustumCheck = true;
+        this.noCulling = true;
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -59,10 +59,10 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 1)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-                .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 1)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.FOLLOW_RANGE, 8);
     }
 
     @Override
@@ -71,16 +71,16 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
     }
 
     @Override
-    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-        ItemStack itemstack = playerIn.getHeldItem(hand);
+    public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+        ItemStack itemstack = playerIn.getItemInHand(hand);
 
         if (CAConfig.COMMON.enableBrownAntTeleport.get()) {
-            if (this.world instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
-                playerIn.sendStatusMessage(this.inaccessibleMessage,true);
+            if (this.level instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
+                playerIn.displayClientMessage(this.inaccessibleMessage,true);
                 return ActionResultType.FAIL;
             }
         }
-        return super.getEntityInteractionResult(playerIn, hand);
+        return super.mobInteract(playerIn, hand);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
 
     @Nullable
     @Override
-    public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
         return null;
     }
 }

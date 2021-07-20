@@ -19,7 +19,7 @@ public class AggressiveAntEntityRender extends GeoEntityRenderer<AggressiveAntEn
     public AggressiveAntEntityRender(EntityRendererManager renderManager, String textureName) {
         super(renderManager, new AggressiveAntEntityModel(textureName));
         this.textureName = textureName;
-        this.shadowSize = 0.2F;
+        this.shadowRadius = 0.2F;
     }
 
     @Override
@@ -28,13 +28,13 @@ public class AggressiveAntEntityRender extends GeoEntityRenderer<AggressiveAntEn
     }
 
     @Override
-    public ResourceLocation getEntityTexture(AggressiveAntEntity entity) {
+    public ResourceLocation getTextureLocation(AggressiveAntEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ant/" + textureName + ".png");
     }
 
     @Override
     public RenderType getRenderType(AggressiveAntEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

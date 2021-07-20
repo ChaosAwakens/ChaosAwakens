@@ -29,13 +29,13 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 	}
 	
 	@Override
-	protected ItemStack getArrowStack() {
+	protected ItemStack getPickupItem() {
 		return new ItemStack(CAItems.IRUKANDJI_ARROW.get());
 	}
 	
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
 		if (compound.contains("Duration")) {
 			this.duration = compound.getInt("Duration");
 		}
@@ -44,29 +44,29 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.world.isRemote && this.inGround && this.timeInGround != 0 && this.timeInGround >= 600) {
-			this.world.setEntityState(this, (byte) 0);
+		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) {
+			this.level.broadcastEntityEvent(this, (byte) 0);
 		}
 		
 	}
 	
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
 		compound.putInt("Duration", this.duration);
 	}
 	
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
-	public void setDamage(double damageIn) {
+	public void setBaseDamage(double damageIn) {
 		this.damage = damageIn;
 	}
 	@Override
-	public double getDamage() {
+	public double getBaseDamage() {
 		return this.damage;
 	}
 }

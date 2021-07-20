@@ -30,18 +30,18 @@ public abstract class AnimatableGoal extends Goal {
 		if(this.isFirsLoop) {
 			this.isFirsLoop = false;
 			this.animationProgress += 1;
-			this.lastGameTime = this.entity.world.getGameTime();
+			this.lastGameTime = this.entity.level.getGameTime();
 			return;
 		}
-		this.tickDelta = this.entity.world.getGameTime() - this.lastGameTime;
+		this.tickDelta = this.entity.level.getGameTime() - this.lastGameTime;
 		this.animationProgress += 1 + this.tickDelta/100000.0;
-		this.lastGameTime = this.entity.world.getGameTime();
+		this.lastGameTime = this.entity.level.getGameTime();
 	}
 	
 	protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
-		return attacker.getWidth() * 2F * attacker.getWidth() * 2F + target.getWidth();
+		return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
 	}
 	
 	@Override
-	abstract public boolean shouldExecute();
+	abstract public boolean canUse();
 }

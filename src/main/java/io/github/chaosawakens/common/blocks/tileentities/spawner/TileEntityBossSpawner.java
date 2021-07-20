@@ -24,8 +24,8 @@ public abstract class TileEntityBossSpawner<T extends MobEntity> extends TileEnt
 	}
 	
 	public boolean anyPlayerInRange() {
-		assert world != null;
-		return world.isPlayerWithin(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, getRange());
+		assert level != null;
+		return level.hasNearbyAlivePlayer(worldPosition.getX() + 0.5D, worldPosition.getY() + 0.5D, worldPosition.getZ() + 0.5D, getRange());
 	}
 	
 	@Override
@@ -33,18 +33,18 @@ public abstract class TileEntityBossSpawner<T extends MobEntity> extends TileEnt
 		if (spawnedBoss || !anyPlayerInRange()) 
 			return;
 		
-		assert world != null;
-		if (world.isRemote) {
+		assert level != null;
+		if (level.isClientSide) {
 			// particles
-			double rx = pos.getX() + world.rand.nextFloat();
-			double ry = pos.getY() + world.rand.nextFloat();
-			double rz = pos.getZ() + world.rand.nextFloat();
-			world.addParticle(ParticleTypes.SMOKE, rx, ry, rz, 0.0D, 0.0D, 0.0D);
-			world.addParticle(ParticleTypes.FLAME, rx, ry, rz, 0.0D, 0.0D, 0.0D);
+			double rx = worldPosition.getX() + level.random.nextFloat();
+			double ry = worldPosition.getY() + level.random.nextFloat();
+			double rz = worldPosition.getZ() + level.random.nextFloat();
+			level.addParticle(ParticleTypes.SMOKE, rx, ry, rz, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.FLAME, rx, ry, rz, 0.0D, 0.0D, 0.0D);
 		} else {
-			if (world.getDifficulty() != Difficulty.PEACEFUL) {
-				if (spawnMyBoss((ServerWorld) world)) {
-					world.destroyBlock(pos, false);
+			if (level.getDifficulty() != Difficulty.PEACEFUL) {
+				if (spawnMyBoss((ServerWorld) level)) {
+					level.destroyBlock(worldPosition, false);
 					spawnedBoss = true;
 				}
 			}
@@ -55,18 +55,18 @@ public abstract class TileEntityBossSpawner<T extends MobEntity> extends TileEnt
 		// create creature
 		T myCreature = makeMyCreature();
 		
-		myCreature.moveToBlockPosAndAngles(pos, world.getWorld().rand.nextFloat() * 360F, 0.0F);
-		myCreature.onInitialSpawn(world, world.getDifficultyForLocation(pos), SpawnReason.SPAWNER, null, null);
+		myCreature.moveTo(worldPosition, world.getLevel().random.nextFloat() * 360F, 0.0F);
+		myCreature.finalizeSpawn(world, world.getCurrentDifficultyAt(worldPosition), SpawnReason.SPAWNER, null, null);
 		
 		// set creature's home to this
 		initializeCreature(myCreature);
 		
 		// spawn it
-		return world.addEntity(myCreature);
+		return world.addFreshEntity(myCreature);
 	}
 	
 	protected void initializeCreature(T myCreature) {
-		myCreature.setHomePosAndDistance(pos, 46);
+		myCreature.restrictTo(worldPosition, 46);
 	}
 	
 	protected int getRange() {
@@ -74,7 +74,7 @@ public abstract class TileEntityBossSpawner<T extends MobEntity> extends TileEnt
 	}
 	
 	protected T makeMyCreature() {
-		assert world != null;
-		return entityType.create(world);
+		assert level != null;
+		return entityType.create(level);
 	}
 }

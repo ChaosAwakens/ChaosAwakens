@@ -16,7 +16,7 @@ public class RoboWarriorEntityRender extends GeoEntityRenderer<RoboWarriorEntity
 
     public RoboWarriorEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RoboWarriorEntityModel());
-        this.shadowSize = 0.4F;
+        this.shadowRadius = 0.4F;
     }
 
     @Override
@@ -25,13 +25,13 @@ public class RoboWarriorEntityRender extends GeoEntityRenderer<RoboWarriorEntity
     }
 
     @Override
-    public ResourceLocation getEntityTexture(RoboWarriorEntity entity) {
+    public ResourceLocation getTextureLocation(RoboWarriorEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robo_warrior.png");
     }
 
     @Override
     public RenderType getRenderType(RoboWarriorEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

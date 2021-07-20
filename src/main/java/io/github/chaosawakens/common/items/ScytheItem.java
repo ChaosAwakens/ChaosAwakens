@@ -24,14 +24,14 @@ public class ScytheItem extends SwordItem implements IVanishable {
 	
 	public ScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builderIn) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
-		float attackDamage = (float) attackDamageIn + tier.getAttackDamage();
+		float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = builder.build();
 	}
 	
-	public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+	public boolean canAttackBlock(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		return !player.isCreative();
 	}
 	
@@ -40,8 +40,8 @@ public class ScytheItem extends SwordItem implements IVanishable {
 	 * argument beside ev. They just raise the damage on the stack.
 	 */
 	@Override
-	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.damageItem(1, attacker, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 	
@@ -50,9 +50,9 @@ public class ScytheItem extends SwordItem implements IVanishable {
 	 * "Use Item" statistic.
 	 */
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-		if (state.getBlockHardness(worldIn, pos) != 0.0F) {
-			stack.damageItem(2, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+	public boolean mineBlock(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+		if (state.getDestroySpeed(worldIn, pos) != 0.0F) {
+			stack.hurtAndBreak(2, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
 		
 		return true;
@@ -62,8 +62,8 @@ public class ScytheItem extends SwordItem implements IVanishable {
 	 * Check whether this Item can harvest the given Block
 	 */
 	@Override
-	public boolean canHarvestBlock(BlockState blockIn) {
-		return blockIn.matchesBlock(Blocks.COBWEB);
+	public boolean isCorrectToolForDrops(BlockState blockIn) {
+		return blockIn.is(Blocks.COBWEB);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class ScytheItem extends SwordItem implements IVanishable {
 	 * damage.
 	 */
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(equipmentSlot);
+	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
+		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
 	}
 }

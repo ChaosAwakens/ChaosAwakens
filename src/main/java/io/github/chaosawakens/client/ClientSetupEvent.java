@@ -46,78 +46,78 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserRender::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WASP.get(), WaspEntityRender::new);
 
-		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.TUBE.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_PLANT.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.TUBE.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_PLANT.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(CABlocks.RED_ANT_NEST.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.BROWN_ANT_NEST.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.RAINBOW_ANT_NEST.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.UNSTABLE_ANT_NEST.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.TERMITE_NEST.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_TERMITE_NEST.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.RED_ANT_NEST.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.BROWN_ANT_NEST.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.RAINBOW_ANT_NEST.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.UNSTABLE_ANT_NEST.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.TERMITE_NEST.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_TERMITE_NEST.get(), RenderType.cutout());
 		
-		RenderTypeLookup.setRenderLayer(CABlocks.CORN_PLANT.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.STRAWBERRY_PLANT.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.TOMATO_PLANT.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.GOLDEN_MELON_STEM.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.ATTACHED_GOLDEN_MELON_STEM.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CORN_PLANT.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.STRAWBERRY_PLANT.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.TOMATO_PLANT.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.GOLDEN_MELON_STEM.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ATTACHED_GOLDEN_MELON_STEM.get(), RenderType.cutoutMipped());
 
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_GRASS_BLOCK.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.KYANITE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_LOG.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_WOOD.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_WOOD_PLANKS.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_CLUSTER.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_CLUSTER.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.BUDDING_PINK_TOURMALINE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.BUDDING_CATS_EYE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_ENERGY.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_TORCH.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.WALL_CRYSTAL_TORCH.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_CRAFTING_TABLE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_FURNACE.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_GRASS_BLOCK.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.KYANITE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_LOG.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_WOOD.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_WOOD_PLANKS.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_CLUSTER.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_CLUSTER.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.BUDDING_PINK_TOURMALINE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.BUDDING_CATS_EYE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_ENERGY.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_TORCH.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.WALL_CRYSTAL_TORCH.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_CRAFTING_TABLE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_FURNACE.get(), RenderType.cutoutMipped());
 		
-		RenderTypeLookup.setRenderLayer(CABlocks.SUNSTONE_TORCH.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.WALL_SUNSTONE_TORCH.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.EXTREME_TORCH.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.WALL_EXTREME_TORCH.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.SUNSTONE_TORCH.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.WALL_SUNSTONE_TORCH.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.EXTREME_TORCH.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.WALL_EXTREME_TORCH.get(), RenderType.cutoutMipped());
 		
-		ItemModelsProperties.registerProperty(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pull"),
+		ItemModelsProperties.register(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
 					if (living == null) {
 						return 0.0F;
 					} else {
-						return living.getActiveItemStack() != stack ? 0.0F : (float)(stack.getUseDuration() - living.getItemInUseCount()) / 20.0F;
+						return living.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration() - living.getUseItemRemainingTicks()) / 20.0F;
 					}
 		});
-		ItemModelsProperties.registerProperty(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pulling"),
-				(stack, world, living) -> living != null && living.isHandActive() && living.getActiveItemStack() == stack ? 1.0F : 0.0F);
-		ItemModelsProperties.registerProperty(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"),
+		ItemModelsProperties.register(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pulling"),
+				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);
+		ItemModelsProperties.register(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
 					if (living == null) {
 						return 0.0F;
 					} else {
-						return living.getActiveItemStack() != stack ? 0.0F : (float)(stack.getUseDuration() - living.getItemInUseCount()) / 20.0F;
+						return living.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration() - living.getUseItemRemainingTicks()) / 20.0F;
 					}
 				});
-		ItemModelsProperties.registerProperty(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pulling"),
-				(stack, world, living) -> living != null && living.isHandActive() && living.getActiveItemStack() == stack ? 1.0F : 0.0F);
-		ItemModelsProperties.registerProperty(CAItems.ULTIMATE_FISHING_ROD.get(), new ResourceLocation("cast"), (p_239422_0_, p_239422_1_, p_239422_2_) -> {
+		ItemModelsProperties.register(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pulling"),
+				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);
+		ItemModelsProperties.register(CAItems.ULTIMATE_FISHING_ROD.get(), new ResourceLocation("cast"), (p_239422_0_, p_239422_1_, p_239422_2_) -> {
 			if (p_239422_2_ == null) {
 				return 0.0F;
 			} else {
-				boolean flag = p_239422_2_.getHeldItemMainhand() == p_239422_0_;
-				boolean flag1 = p_239422_2_.getHeldItemOffhand() == p_239422_0_;
-				if (p_239422_2_.getHeldItemMainhand().getItem() instanceof UltimateFishingRodItem) {
+				boolean flag = p_239422_2_.getMainHandItem() == p_239422_0_;
+				boolean flag1 = p_239422_2_.getOffhandItem() == p_239422_0_;
+				if (p_239422_2_.getMainHandItem().getItem() instanceof UltimateFishingRodItem) {
 					flag1 = false;
 				}
 
-				return (flag || flag1) && p_239422_2_ instanceof PlayerEntity && ((PlayerEntity)p_239422_2_).fishingBobber != null ? 1.0F : 0.0F;
+				return (flag || flag1) && p_239422_2_ instanceof PlayerEntity && ((PlayerEntity)p_239422_2_).fishing != null ? 1.0F : 0.0F;
 			}
 		});
 	}

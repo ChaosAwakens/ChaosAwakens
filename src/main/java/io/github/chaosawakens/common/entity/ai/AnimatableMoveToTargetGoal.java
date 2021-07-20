@@ -26,47 +26,47 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		this.entity = entity;
 		this.speedMultiplier = speedMultiplier;
 		this.checkRate = checkRate;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 	}
 	
 	@Override
-	public boolean shouldExecute() {
+	public boolean canUse() {
 		if(RANDOM.nextInt(this.checkRate) == 0)return false;
 		
-		return this.isExecutable(this, this.entity, this.entity.getAttackTarget());
+		return this.isExecutable(this, this.entity, this.entity.getTarget());
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
+	public boolean canContinueToUse() {
 		if(RANDOM.nextInt(this.checkRate) == 0)return true;
 		
-		return this.isExecutable(this, this.entity, this.entity.getAttackTarget());
+		return this.isExecutable(this, this.entity, this.entity.getTarget());
 	}
 	
 	@Override
-	public void startExecuting() {
-		this.entity.setAggroed(true);
+	public void start() {
+		this.entity.setAggressive(true);
 		this.entity.setMoving(true);
-		this.entity.getNavigator().setPath(this.path, this.speedMultiplier);
+		this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
 	}
 	
 	@Override
-	public void resetTask() {
-		LivingEntity target = this.entity.getAttackTarget();
-		if (!EntityPredicates.CAN_AI_TARGET.test(target)) {
-			this.entity.setAttackTarget(null);
+	public void stop() {
+		LivingEntity target = this.entity.getTarget();
+		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
+			this.entity.setTarget(null);
 		}
-		this.entity.setAggroed(false);
+		this.entity.setAggressive(false);
 		this.entity.setMoving(false);
-		this.entity.getNavigator().clearPath();
+		this.entity.getNavigation().stop();
 	}
 	
 	@Override
 	public void tick() {
-		LivingEntity target = this.entity.getAttackTarget();
+		LivingEntity target = this.entity.getTarget();
 		if(target == null)return;
 		
-		this.entity.getLookController().setLookPositionWithEntity(target, 30F, 30F);
-		this.entity.getNavigator().tryMoveToEntityLiving(target, this.speedMultiplier);
+		this.entity.getLookControl().setLookAt(target, 30F, 30F);
+		this.entity.getNavigation().moveTo(target, this.speedMultiplier);
 	}
 }

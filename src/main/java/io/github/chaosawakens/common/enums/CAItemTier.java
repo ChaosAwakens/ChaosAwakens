@@ -10,45 +10,45 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum CAItemTier implements IItemTier {
-    TOOL_EMERALD(3, 1300, 8, 6, 24, () -> Ingredient.fromItems(Items.EMERALD.getItem())),
+    TOOL_EMERALD(3, 1300, 8, 6, 24, () -> Ingredient.of(Items.EMERALD.getItem())),
 
-    TOOL_AMETHYST(3, 2000, 9, 11, 18, () -> Ingredient.fromItems(CAItems.AMETHYST.get())),
+    TOOL_AMETHYST(3, 2000, 9, 11, 18, () -> Ingredient.of(CAItems.AMETHYST.get())),
 
-    TOOL_RUBY(4, 1800, 10, 16, 22, () -> Ingredient.fromItems(CAItems.RUBY.get())),
+    TOOL_RUBY(4, 1800, 10, 16, 22, () -> Ingredient.of(CAItems.RUBY.get())),
 
-    TOOL_TIGERS_EYE(3, 1600, 10, 8, 20, () -> Ingredient.fromItems(CAItems.TIGERS_EYE.get())),
+    TOOL_TIGERS_EYE(3, 1600, 10, 8, 20, () -> Ingredient.of(CAItems.TIGERS_EYE.get())),
 
-    TOOL_CRYSTAL_WOOD(0, 300, 2, 1, 6, () -> Ingredient.fromItems(CABlocks.CRYSTAL_WOOD.get())),
+    TOOL_CRYSTAL_WOOD(0, 300, 2, 1, 6, () -> Ingredient.of(CABlocks.CRYSTAL_WOOD.get())),
 
-    TOOL_KYANITE(1, 800, 3, 2, 6, () -> Ingredient.fromItems(CABlocks.KYANITE.get())),
+    TOOL_KYANITE(1, 800, 3, 2, 6, () -> Ingredient.of(CABlocks.KYANITE.get())),
 
-    TOOL_PINK_TOURMALINE(2, 1100, 7, 8, 6, () -> Ingredient.fromItems(CAItems.PINK_TOURMALINE_INGOT.get())),
+    TOOL_PINK_TOURMALINE(2, 1100, 7, 8, 6, () -> Ingredient.of(CAItems.PINK_TOURMALINE_INGOT.get())),
 
-    TOOL_CATS_EYE(3, 1600, 8, 8, 20, () -> Ingredient.fromItems(CAItems.CATS_EYE_INGOT.get())),
+    TOOL_CATS_EYE(3, 1600, 8, 8, 20, () -> Ingredient.of(CAItems.CATS_EYE_INGOT.get())),
 
-    TOOL_ULTIMATE(5, 3000, 15, 36, 64, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
+    TOOL_ULTIMATE(5, 3000, 15, 36, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 
-    TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.fromItems(CAItems.NIGHTMARE_SCALE.get())),
+    TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.of(CAItems.NIGHTMARE_SCALE.get())),
 
-    TOOL_COPPER(1, 150, 4, 2, 6, () -> Ingredient.fromItems(CAItems.COPPER_LUMP.get())),
+    TOOL_COPPER(1, 150, 4, 2, 6, () -> Ingredient.of(CAItems.COPPER_LUMP.get())),
 
-    TOOL_TIN(1, 180, 5, 3, 8, () -> Ingredient.fromItems(CAItems.TIN_LUMP.get())),
+    TOOL_TIN(1, 180, 5, 3, 8, () -> Ingredient.of(CAItems.TIN_LUMP.get())),
 
-    TOOL_SILVER(2, 450, 7, 4, 10, () -> Ingredient.fromItems(CAItems.SILVER_LUMP.get())),
+    TOOL_SILVER(2, 450, 7, 4, 10, () -> Ingredient.of(CAItems.SILVER_LUMP.get())),
 
-    TOOL_PLATINUM(3, 1600, 8, 6, 12, () -> Ingredient.fromItems(CAItems.PLATINUM_LUMP.get())),
+    TOOL_PLATINUM(3, 1600, 8, 6, 12, () -> Ingredient.of(CAItems.PLATINUM_LUMP.get())),
 
-    WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
+    WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 
-    WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.fromItems(CAItems.QUEEN_SCALE.get())),
+    WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.of(CAItems.QUEEN_SCALE.get())),
 
-    WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.fromItems(Blocks.REDSTONE_BLOCK)),
+    WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.of(Blocks.REDSTONE_BLOCK)),
 
-    WEAPON_GENERIC(2, 1024, 6, 6, 8, Ingredient::fromItems),
+    WEAPON_GENERIC(2, 1024, 6, 6, 8, null),
 
-    WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, Ingredient::fromItems),
+    WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, null),
 
-    WEAPON_BERTHA(5, 6000, 16, 496, 72, () -> Ingredient.fromItems(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
+    WEAPON_BERTHA(5, 6000, 16, 496, 72, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
 
 
     private final int harvestLevel;
@@ -67,28 +67,28 @@ public enum CAItemTier implements IItemTier {
         this.repairMaterial = repairMaterial;
     }
 
-    public float getAttackDamage() {
+    public float getAttackDamageBonus() {
         return this.attackDamage;
     }
 
-    public float getEfficiency() {
+    public float getSpeed() {
         return this.efficiency;
     }
 
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return this.enchantability;
     }
 
-    public int getHarvestLevel() {
+    public int getLevel() {
         return this.harvestLevel;
     }
 
-    public int getMaxUses() {
+    public int getUses() {
         return this.maxUses;
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
+    public Ingredient getRepairIngredient() {
         return this.repairMaterial.get();
     }
 }

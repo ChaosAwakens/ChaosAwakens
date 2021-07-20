@@ -29,39 +29,39 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		this.entity = entity;
 		this.animationLength = animationLength;
 		this.attackPredicate = (progress, length) -> attackBegin < progress/(length) && progress/(length) < attackEnd;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
+		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 	
 	@Override
-	public boolean shouldExecute() {
+	public boolean canUse() {
 		if(Math.random() <= 0.1)return false;
 		
-		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getAttackTarget());
+		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
+	public boolean canContinueToUse() {
 		if(Math.random() <= 0.1)return true;
 		
-		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getAttackTarget());
+		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
 	}
 	
 
 	@Override
-	public void startExecuting() {
+	public void start() {
 		this.entity.setAttacking(true);
-		this.entity.setAggroed(true);
+		this.entity.setAggressive(true);
 		this.animationProgress = 0;
 	}
 	
 	@Override
-	public void resetTask() {
-		LivingEntity target = this.entity.getAttackTarget();
-		if (!EntityPredicates.CAN_AI_TARGET.test(target)) {
-			this.entity.setAttackTarget(null);
+	public void stop() {
+		LivingEntity target = this.entity.getTarget();
+		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
+			this.entity.setTarget(null);
 		}
 		this.entity.setAttacking(false);
-		this.entity.setAggroed(false);
+		this.entity.setAggressive(false);
 		this.hasHit = false;
 		this.animationProgress = 0;
 	}
@@ -69,13 +69,13 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	@Override
 	public void tick() {
 		this.baseTick();
-		LivingEntity target = this.entity.getAttackTarget();
+		LivingEntity target = this.entity.getTarget();
 		if(target != null) {
 			//ChaosAwakens.debug("GOAL", this.animationProgress+" "+this.animationLength+" "+this.tickDelta+" "+this.animationProgress/this.animationLength);
 			if(this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
-				this.entity.faceEntity(target, 30.0F, 30.0F);
-				this.entity.swingArm(Hand.MAIN_HAND);
-				this.entity.attackEntityAsMob(target);
+				this.entity.lookAt(target, 30.0F, 30.0F);
+				this.entity.swing(Hand.MAIN_HAND);
+				this.entity.doHurtTarget(target);
 				this.hasHit = true;
 			}
 			
@@ -93,7 +93,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 				attacker.setAttacking(false);
 				return false;
 			}
-			double distance = goal.entity.getDistanceSq(target.getPosX(), target.getPosY(), target.getPosZ());
+			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
 			if(distance <= AnimatableGoal.getAttackReachSq(attacker, target))return true;
 		}
 		attacker.setAttacking(false);

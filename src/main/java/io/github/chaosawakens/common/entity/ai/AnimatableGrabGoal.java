@@ -25,25 +25,25 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 	public AnimatableGrabGoal(G entity, int avrgNumHits) {
 		this.entity = entity;
 		this.avrgNumHits = avrgNumHits;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
+		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 	
 	@Override
-	public boolean shouldExecute() {
+	public boolean canUse() {
 		if(RANDOM.nextInt(10) == 0)return false;
 		
-		return this.checkIfValid(this, this.entity, this.entity.getAttackTarget());
+		return this.checkIfValid(this, this.entity, this.entity.getTarget());
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
+	public boolean canContinueToUse() {
 		if(RANDOM.nextInt(10) == 0)return true;
 		
-		return this.checkIfValid(this, this.entity, this.entity.getAttackTarget());
+		return this.checkIfValid(this, this.entity, this.entity.getTarget());
 	}
 	
 	@Override
-	public void resetTask() {
+	public void stop() {
 		this.isGrabbing = false;
 		((IGrabber) this.entity).setGrabbing(this.entity, false);
 		this.hasGrabbed = false;
@@ -52,12 +52,12 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 	@Override
 	public void tick() {
 		this.baseTick();
-		LivingEntity target = this.entity.getAttackTarget();
+		LivingEntity target = this.entity.getTarget();
 		if(target == null || this.hasGrabbed)return;
 		
 		this.grabTarget(target);
 		
-		target.updateRidden();
+		target.rideTick();
 	}
 	
 	protected void grabTarget(LivingEntity target) {
@@ -73,7 +73,7 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 	
 	protected void attackWhileGrab(LivingEntity target) {
 		if(RANDOM.nextInt(this.avrgNumHits) < this.avrgNumHits - this.numOfHits) {
-			this.entity.attackEntityAsMob(target);
+			this.entity.doHurtTarget(target);
 			this.numOfHits++;
 			return;
 		}
@@ -95,7 +95,7 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 				attacker.setAttacking(false);
 				return false;
 			}
-			double distance = goal.entity.getDistanceSq(target.getPosX(), target.getPosY(), target.getPosZ());
+			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
 			if(distance <= AnimatableGoal.getAttackReachSq(attacker, target))return true;
 		}
 		attacker.setAttacking(false);

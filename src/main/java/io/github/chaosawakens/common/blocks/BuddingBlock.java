@@ -13,20 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BuddingBlock extends Block {
 	
-	private static final IntegerProperty MAX_GENERATABLE = BlockStateProperties.AGE_0_25;
+	private static final IntegerProperty MAX_GENERATABLE = BlockStateProperties.AGE_25;
 	private final CrystalClusterBlock budBlock;
 	
 	public BuddingBlock(Properties builder, CrystalClusterBlock budBlock) {
 		super(builder);
-		this.setDefaultState(this.stateContainer.getBaseState().with(MAX_GENERATABLE, new Random().nextInt(8)+17));
+		this.registerDefaultState(this.stateDefinition.any().setValue(MAX_GENERATABLE, new Random().nextInt(8)+17));
 		this.budBlock = budBlock;
 	}
 	
 	//TODO Maximum number off clusters generated ever
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(MAX_GENERATABLE);
 	}
 	
@@ -35,7 +37,7 @@ public class BuddingBlock extends Block {
 		//ChaosAwakens.LOGGER.debug(state);
 		//See if we should grow
 		if(random.nextInt(1) != 0)return;
-		if(state.get(MAX_GENERATABLE) == 0)return;
+		if(state.getValue(MAX_GENERATABLE) == 0)return;
 		
 		//Check which spots are available/valid
 		List<BlockStatePos> valids = this.checkValidPositions(worldIn, pos);
@@ -49,12 +51,12 @@ public class BuddingBlock extends Block {
 		
 		for(int i = 0; i < numLoops; i++) {
 			BlockStatePos stateAndPos = valids.get(numLoops-1); 
-			worldIn.setBlockState(stateAndPos.getPos(), stateAndPos.getState(), 2);
+			worldIn.setBlock(stateAndPos.getPos(), stateAndPos.getState(), 2);
 		}
 		
 		//Update the maximum creatable property
 		if(random.nextInt(2) == 0) {
-			worldIn.setBlockState(pos, state.with(MAX_GENERATABLE, state.get(MAX_GENERATABLE)-1));
+			worldIn.setBlockAndUpdate(pos, state.setValue(MAX_GENERATABLE, state.getValue(MAX_GENERATABLE)-1));
 		}
 		
 	}
@@ -65,18 +67,18 @@ public class BuddingBlock extends Block {
 		//Loop through all possible directions
 		for(Direction direction : Direction.values()) {
 			BlockPos budTargetPos = pos;
-			budTargetPos = budTargetPos.add(direction.getDirectionVec());
+			budTargetPos = budTargetPos.offset(direction.getNormal());
 			
-			BlockState budState =  budBlock.getDefaultState();
+			BlockState budState =  budBlock.defaultBlockState();
 			boolean newBudBlock = true;
 			if(worldIn.getBlockState(budTargetPos).getBlock() instanceof CrystalClusterBlock) {
 				budState =  worldIn.getBlockState(budTargetPos);
 				newBudBlock = false;
 			}
 			
-			if(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName().equals(budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isSolidSide(worldIn, budTargetPos, direction))
-				 validStatePos.add( new BlockStatePos(budTargetPos, budState.with(BlockStateProperties.FACING, direction)
-						.with(BlockStateProperties.AGE_0_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).get(BlockStateProperties.AGE_0_3) < 3 ? budState.get(BlockStateProperties.AGE_0_3)+1 : budState.get(BlockStateProperties.AGE_0_3) )));
+			if(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName().equals(budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
+				 validStatePos.add( new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction)
+						.setValue(BlockStateProperties.AGE_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3 ? budState.getValue(BlockStateProperties.AGE_3)+1 : budState.getValue(BlockStateProperties.AGE_3) )));
 		}
 		
 		return validStatePos;

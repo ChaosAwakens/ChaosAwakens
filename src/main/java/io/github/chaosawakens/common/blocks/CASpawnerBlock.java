@@ -19,28 +19,28 @@ public class CASpawnerBlock extends Block {
 
     public CASpawnerBlock(Block.Properties props) {
         super(props);
-        this.setDefaultState(stateContainer.getBaseState().with(VARIANT, CABossVariant.ENT));
+        this.registerDefaultState(stateDefinition.any().setValue(VARIANT, CABossVariant.ENT));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(VARIANT);
     }
 
     @Override
     public boolean hasTileEntity(BlockState state) {
-        return state.get(VARIANT).hasSpawner();
+        return state.getValue(VARIANT).hasSpawner();
     }
 
     @Override
     @Nullable
     public TileEntity createTileEntity(BlockState state, IBlockReader reader) {
-        return state.get(VARIANT).getSpawner();
+        return state.getValue(VARIANT).getSpawner();
     }
 
     @Override
     public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity) {
-        return state.getBlockHardness(world, pos) >= 0f;
+        return state.getDestroySpeed(world, pos) >= 0f;
     }
 }

@@ -36,15 +36,15 @@ import java.util.UUID;
 
 public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAnimatable {
 	
-    private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.createKey(EmeraldGatorEntity.class, DataSerializers.VARINT);
-    private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.convertRange(20, 39);
-    private UUID field_234231_bH_;
+    private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(EmeraldGatorEntity.class, DataSerializers.INT);
+    private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
+    private UUID persistentAngerTarget;
 
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public EmeraldGatorEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
-        this.ignoreFrustumCheck = true;
+        this.noCulling = true;
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -69,91 +69,91 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::func_233680_b_));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(8, new ResetAngerGoal<>(this, true));
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.registerAttributes()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 18)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 3)
-                .createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 1)
-                .createMutableAttribute(Attributes.ATTACK_SPEED, 1)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.35D)
-                .createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 18)
+                .add(Attributes.ATTACK_DAMAGE, 3)
+                .add(Attributes.ATTACK_KNOCKBACK, 1)
+                .add(Attributes.ATTACK_SPEED, 1)
+                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.FOLLOW_RANGE, 8);
     }
 
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(ANGER_TIME, 0);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(ANGER_TIME, 0);
     }
 
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
-        this.writeAngerNBT(compound);
+    public void addAdditionalSaveData(CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
+        this.addPersistentAngerSaveData(compound);
     }
 
-    public void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
+    public void readAdditionalSaveData(CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
 
-        if(!world.isRemote)
-            this.readAngerNBT((ServerWorld)this.world, compound);
+        if(!level.isClientSide)
+            this.readPersistentAngerSaveData((ServerWorld)this.level, compound);
     }
 
-    public boolean attackEntityFrom(DamageSource source, float amount) {
+    public boolean hurt(DamageSource source, float amount) {
         if (this.isInvulnerableTo(source)) {
             return false;
         } else {
-            Entity entity = source.getTrueSource();
+            Entity entity = source.getEntity();
             if (entity != null && !(entity instanceof PlayerEntity) && !(entity instanceof AbstractArrowEntity)) {
                 amount = (amount + 1.0F) / 2.0F;
             }
 
-            return super.attackEntityFrom(source, amount);
+            return super.hurt(source, amount);
         }
     }
 
-    public boolean attackEntityAsMob(Entity entityIn) {
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+    public boolean doHurtTarget(Entity entityIn) {
+        boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
         if (flag) {
-            this.applyEnchantments(this, entityIn);
+            this.doEnchantDamageEffects(this, entityIn);
         }
 
         return flag;
     }
 
-    public int getAngerTime() {
-        return this.dataManager.get(ANGER_TIME);
+    public int getRemainingPersistentAngerTime() {
+        return this.entityData.get(ANGER_TIME);
     }
 
-    public void setAngerTime(int time) {
-        this.dataManager.set(ANGER_TIME, time);
+    public void setRemainingPersistentAngerTime(int time) {
+        this.entityData.set(ANGER_TIME, time);
     }
 
-    public void func_230258_H__() {
-        this.setAngerTime(ANGER_TIME_RANGE.getRandomWithinRange(this.rand));
+    public void startPersistentAngerTimer() {
+        this.setRemainingPersistentAngerTime(ANGER_TIME_RANGE.randomValue(this.random));
     }
 
     @Nullable
-    public UUID getAngerTarget() {
-        return this.field_234231_bH_;
+    public UUID getPersistentAngerTarget() {
+        return this.persistentAngerTarget;
     }
 
-    public void setAngerTarget(@Nullable UUID target) {
-        this.field_234231_bH_ = target;
+    public void setPersistentAngerTarget(@Nullable UUID target) {
+        this.persistentAngerTarget = target;
     }
 
-    public boolean canBeLeashedTo(PlayerEntity player) {
-        return !this.isAngry() && super.canBeLeashedTo(player);
+    public boolean canBeLeashed(PlayerEntity player) {
+        return !this.isAngry() && super.canBeLeashed(player);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public Vector3d getLeashStartPosition() {
-        return new Vector3d(0.0D, 0.6F * this.getEyeHeight(), this.getWidth() * 0.4F);
+    public Vector3d getLeashOffset() {
+        return new Vector3d(0.0D, 0.6F * this.getEyeHeight(), this.getBbWidth() * 0.4F);
     }
 
     public void tick() {
-        EmeraldGatorEntity.this.setAttackTarget(null);
+        EmeraldGatorEntity.this.setTarget(null);
         super.tick();
     }
 
@@ -169,7 +169,7 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
 
     @Nullable
     @Override
-    public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
+    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
         return null;
     }
     

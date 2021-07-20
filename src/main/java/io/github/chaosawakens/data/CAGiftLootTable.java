@@ -16,14 +16,14 @@ public class CAGiftLootTable  extends GiftLootTables {
 	@Override
 	public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 		consumer.accept(CALootTables.GAMEPLAY_HERO_OF_THE_VILLAGE_DIMENSIONAL_TRADER_GIFT,
-				LootTable.builder()
-						.addLootPool(LootPool.builder()
-								.rolls(ConstantRange.of(1))
-								.addEntry(ItemLootEntry.builder(Items.EMERALD))
-								.addEntry(ItemLootEntry.builder(CAItems.TIN_LUMP.get()))
-								.addEntry(ItemLootEntry.builder(CAItems.COPPER_LUMP.get()))
-								.addEntry(ItemLootEntry.builder(CAItems.PINK_TOURMALINE_INGOT.get()))
-								.addEntry(ItemLootEntry.builder(CAItems.CATS_EYE_INGOT.get()))
-								.addEntry(ItemLootEntry.builder(CAItems.PLATINUM_LUMP.get()))));
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(Items.EMERALD))
+								.add(ItemLootEntry.lootTableItem(CAItems.TIN_LUMP.get()))
+								.add(ItemLootEntry.lootTableItem(CAItems.COPPER_LUMP.get()))
+								.add(ItemLootEntry.lootTableItem(CAItems.PINK_TOURMALINE_INGOT.get()))
+								.add(ItemLootEntry.lootTableItem(CAItems.CATS_EYE_INGOT.get()))
+								.add(ItemLootEntry.lootTableItem(CAItems.PLATINUM_LUMP.get()))));
 	}
 }

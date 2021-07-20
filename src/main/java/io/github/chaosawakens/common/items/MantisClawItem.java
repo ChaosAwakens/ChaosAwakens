@@ -9,6 +9,8 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.world.NoteBlockEvent;
 
+import net.minecraft.item.Item.Properties;
+
 public class MantisClawItem extends SwordItem {
 
     public MantisClawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
@@ -16,14 +18,14 @@ public class MantisClawItem extends SwordItem {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         int damageMultiplier = attacker.getHealth() >= attacker.getMaxHealth() ? 2 : 1;
-        if (target != null && !target.world.isRemote) {
+        if (target != null && !target.level.isClientSide) {
             attacker.heal(1F);
-            target.attackEntityFrom(attacker instanceof PlayerEntity ? DamageSource.causePlayerDamage((PlayerEntity) attacker) : DamageSource.causeMobDamage(attacker), 1F);
+            target.hurt(attacker instanceof PlayerEntity ? DamageSource.playerAttack((PlayerEntity) attacker) : DamageSource.mobAttack(attacker), 1F);
         }
-        stack.damageItem(damageMultiplier, attacker, (entity) -> {
-            entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+        stack.hurtAndBreak(damageMultiplier, attacker, (entity) -> {
+            entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
         });
         return true;
     }

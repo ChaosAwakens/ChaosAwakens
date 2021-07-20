@@ -24,6 +24,8 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+import net.minecraft.world.gen.feature.structure.Structure.IStartFactory;
+
 public class ShelterStructure extends Structure<NoFeatureConfig> {
 
 	public ShelterStructure(Codec<NoFeatureConfig> codec) {
@@ -36,17 +38,17 @@ public class ShelterStructure extends Structure<NoFeatureConfig> {
 	}
 	
 	@Override
-	public GenerationStage.Decoration getDecorationStage() {
+	public GenerationStage.Decoration step() {
 		return GenerationStage.Decoration.SURFACE_STRUCTURES;
 	}
 	
 	@Override
-	protected boolean func_230363_a_(ChunkGenerator chunkGenerator, BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig) {
+	protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig) {
 		BlockPos centerOfChunk = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
 		
-		int landHeight = chunkGenerator.getHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
-		IBlockReader columnOfBlocks = chunkGenerator.func_230348_a_(centerOfChunk.getX(), centerOfChunk.getZ());
-		BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.up(landHeight));
+		int landHeight = chunkGenerator.getBaseHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
+		IBlockReader columnOfBlocks = chunkGenerator.getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ());
+		BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.above(landHeight));
 		
 		return topBlock.getFluidState().isEmpty();
 	}
@@ -58,18 +60,18 @@ public class ShelterStructure extends Structure<NoFeatureConfig> {
 		}
 
 		@Override
-		public void func_230364_a_(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn, NoFeatureConfig config) {
+		public void generatePieces(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn, NoFeatureConfig config) {
 			int x = (chunkX << 4) + 7;
 			int z = (chunkZ << 4) + 7;
 			
 			BlockPos blockpos = new BlockPos(x, 0, z);
 			
-			JigsawManager.func_242837_a(dynamicRegistryManager,
+			JigsawManager.addPieces(dynamicRegistryManager,
 					new VillageConfig(
-							() -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY).getOrDefault(new ResourceLocation(ChaosAwakens.MODID, "shelter/start_pool")), 10),
-					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, blockpos, components, rand, false, true);
+							() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, "shelter/start_pool")), 10),
+					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, blockpos, pieces, random, false, true);
 			
-			this.recalculateStructureSize();
+			this.calculateBoundingBox();
 		}
 	}
 }

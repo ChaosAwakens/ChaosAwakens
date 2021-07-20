@@ -15,6 +15,8 @@ import software.bernie.geckolib3.core.manager.*;
 
 import java.util.UUID;
 
+import net.minecraft.item.Item.Properties;
+
 public class ExtendedHitWeaponItem extends EnchantedSwordItem implements IVanishable, IAnimatable {
 
 	public AnimationFactory factory = new AnimationFactory(this);
@@ -23,10 +25,10 @@ public class ExtendedHitWeaponItem extends EnchantedSwordItem implements IVanish
 
 	public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, float attackKnockbackIn, Properties builderIn, EnchantmentData[] enchants) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn, enchants);
-		float attackDamage = (float) attackDamageIn + tier.getAttackDamage();
+		float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
 		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
 		builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", attackKnockbackIn, AttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = builder.build();
 	}
@@ -43,7 +45,7 @@ public class ExtendedHitWeaponItem extends EnchantedSwordItem implements IVanish
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(equipmentSlot);
+	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
+		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
 	}
 }

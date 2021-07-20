@@ -24,45 +24,45 @@ public class RoboAttackGoal extends Goal {
 	}
 	
 	@Override
-	public boolean shouldExecute() {
-		return this.projectileOwner.getAttackTarget() != null;
+	public boolean canUse() {
+		return this.projectileOwner.getTarget() != null;
 	}
 	
 	@Override
-	public void startExecuting() {
+	public void start() {
 		this.attackTimer = 0;
 	}
 	
 	@Override
-	public void resetTask() {
+	public void stop() {
 		this.attackTimer = 0;
 		this.projectileOwner.setAttacking(false);
 	}
 	
 	@Override
 	public void tick() {
-		LivingEntity targetEntity = this.projectileOwner.getAttackTarget();
-		if (targetEntity.getDistanceSq(this.projectileOwner) < 4096.0D && this.projectileOwner.canEntityBeSeen(targetEntity)) {
-			World world = this.projectileOwner.world;
+		LivingEntity targetEntity = this.projectileOwner.getTarget();
+		if (targetEntity.distanceToSqr(this.projectileOwner) < 4096.0D && this.projectileOwner.canSee(targetEntity)) {
+			World world = this.projectileOwner.level;
 			
-			this.projectileOwner.getLookController().setLookPositionWithEntity(projectileOwner.getAttackTarget(), 30.0F, 30.0F);
+			this.projectileOwner.getLookControl().setLookAt(projectileOwner.getTarget(), 30.0F, 30.0F);
 			
 			this.attackTimer++;
 			if (this.attackTimer == fireRateBase*2) {
-				Vector3d lookVector = this.projectileOwner.getLook(1.0F);
-				Vector3d directionNormal = new Vector3d(targetEntity.getPosX() - (this.projectileOwner.getPosX() - lookVector.getX()), targetEntity.getPosYHeight(0.5) - (0.5 + this.projectileOwner.getPosYHeight(0.5)), targetEntity.getPosZ() - (this.projectileOwner.getPosZ() - lookVector.getZ())).normalize();
+				Vector3d lookVector = this.projectileOwner.getViewVector(1.0F);
+				Vector3d directionNormal = new Vector3d(targetEntity.getX() - (this.projectileOwner.getX() - lookVector.x()), targetEntity.getY(0.5) - (0.5 + this.projectileOwner.getY(0.5)), targetEntity.getZ() - (this.projectileOwner.getZ() - lookVector.z())).normalize();
 				
 				if (!this.projectileOwner.isSilent()) {
-					world.playEvent(null, 1016, this.projectileOwner.getPosition(), 0);
+					world.levelEvent(null, 1016, this.projectileOwner.blockPosition(), 0);
 				}
 				
-				RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.getX()/5, directionNormal.getY()/5, directionNormal.getZ()/5);
-				roboLaserEntity.setPosition(this.projectileOwner.getPosX(), this.projectileOwner.getPosYHeight(ownerHeightYScale), this.projectileOwner.getPosZ());
+				RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.x()/5, directionNormal.y()/5, directionNormal.z()/5);
+				roboLaserEntity.setPos(this.projectileOwner.getX(), this.projectileOwner.getY(ownerHeightYScale), this.projectileOwner.getZ());
 				roboLaserEntity.setDamage(damage);
 				
-				this.projectileOwner.world.playSound(null, this.projectileOwner.getPosX(), this.projectileOwner.getPosY(), this.projectileOwner.getPosZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundCategory(), 1.0F, 1.0F + 1 * 0.2F);
+				this.projectileOwner.level.playSound(null, this.projectileOwner.getX(), this.projectileOwner.getY(), this.projectileOwner.getZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
 				
-				world.addEntity(roboLaserEntity);
+				world.addFreshEntity(roboLaserEntity);
 				
 				this.attackTimer = -fireRateBase*4;
 			}

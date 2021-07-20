@@ -17,7 +17,7 @@ public class GoldenAppleCowRender extends MobRenderer<GoldenAppleCowEntity, CowM
         super(renderManagerIn, new CowModel<>(), 0.7F);
     }
 
-    public ResourceLocation getEntityTexture(GoldenAppleCowEntity entity) {
+    public ResourceLocation getTextureLocation(GoldenAppleCowEntity entity) {
         return GOLDEN_APPLE_COW_TEXTURE;
     }
 }

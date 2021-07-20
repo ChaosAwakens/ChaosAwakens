@@ -19,7 +19,7 @@ public class CraftingEventSubscriber {
 		Item enchantedItem = event.getCrafting().getItem();
 		if(event.getCrafting().getItem() instanceof IAutoEnchantable) {
 			for(EnchantmentData enchant : ((IAutoEnchantable) enchantedItem).enchantments()) {
-				event.getCrafting().addEnchantment( enchant.enchantment, enchant.enchantmentLevel);
+				event.getCrafting().enchant( enchant.enchantment, enchant.level);
 			}
 		}
 	}

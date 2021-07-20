@@ -15,7 +15,7 @@ public class UltimateArrowRender extends ArrowRenderer<UltimateArrowEntity> {
         super(manager);
     }
 
-    public ResourceLocation getEntityTexture(UltimateArrowEntity entity) {
+    public ResourceLocation getTextureLocation(UltimateArrowEntity entity) {
         return ARROW_TEXTURE;
     }
 

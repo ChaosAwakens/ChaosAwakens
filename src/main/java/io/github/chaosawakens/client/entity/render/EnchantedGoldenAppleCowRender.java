@@ -19,7 +19,7 @@ public class EnchantedGoldenAppleCowRender extends MobRenderer<EnchantedGoldenAp
         this.addLayer(new CowGlintLayer(this));
     }
 
-    public ResourceLocation getEntityTexture(EnchantedGoldenAppleCowEntity entity) {
+    public ResourceLocation getTextureLocation(EnchantedGoldenAppleCowEntity entity) {
         return GOLDEN_APPLE_COW_TEXTURE;
     }
 }

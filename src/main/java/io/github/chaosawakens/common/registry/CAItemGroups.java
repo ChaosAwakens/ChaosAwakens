@@ -9,7 +9,7 @@ public class CAItemGroups {
 	public static ItemGroup blocksItemGroup = new ItemGroup("chaosawakens_blocks_item_group") {
 		
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(CABlocks.TITANIUM_BLOCK.get());
 		}
 	};
@@ -17,7 +17,7 @@ public class CAItemGroups {
 	public static ItemGroup itemsItemGroup = new ItemGroup("chaosawakens_items_item_group") {
 		
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(CAItems.URANIUM_INGOT.get());
 		}
 	};
@@ -25,7 +25,7 @@ public class CAItemGroups {
 	public static ItemGroup foodItemGroup = new ItemGroup("chaosawakens_food_item_group") {
 
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(CAItems.CORN.get());
 		}
 	};
@@ -33,7 +33,7 @@ public class CAItemGroups {
 	public static ItemGroup equipmentItemGroup = new ItemGroup("chaosawakens_equipment_item_group") {
 		
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(CAItems.ULTIMATE_AXE.get());
 		}
 	};
@@ -41,7 +41,7 @@ public class CAItemGroups {
 	public static ItemGroup eggsItemGroup = new ItemGroup("chaosawakens_eggs_item_group") {
 		
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGG.get());
 		}
 	};

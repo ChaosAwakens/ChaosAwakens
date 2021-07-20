@@ -19,21 +19,21 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
-    public boolean shouldExecute() {
-    	return this.attacker.getPassengers().isEmpty() && super.shouldExecute();
+    public boolean canUse() {
+    	return this.mob.getPassengers().isEmpty() && super.canUse();
     }
 
     @Override
-    public void startExecuting() {
-        this.throwTimer = 1 + attacker.getRNG().nextInt(5); // Wait 1.5 to 2.5 seconds before we throw the target
-        timeout = 1 + attacker.getRNG().nextInt(5); // Lets only try to chase for around 5-6 seconds
-        super.startExecuting();
+    public void start() {
+        this.throwTimer = 1 + mob.getRandom().nextInt(5); // Wait 1.5 to 2.5 seconds before we throw the target
+        timeout = 1 + mob.getRandom().nextInt(5); // Lets only try to chase for around 5-6 seconds
+        super.start();
     }
 
     @Override
     public void tick() {
         timeout--;
-        if (!attacker.getPassengers().isEmpty())
+        if (!mob.getPassengers().isEmpty())
             throwTimer--;
         else
             super.tick();
@@ -43,21 +43,21 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
     protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_) {
         double d0 = this.getAttackReachSqr(p_190102_1_);
 
-        if (p_190102_2_ <= d0 && this.getSwingCooldown() <= 0) {
-            this.resetSwingCooldown();
-            if (attacker.getPassengers().isEmpty() && p_190102_1_.getRidingEntity() == null) {
-                p_190102_1_.startRiding(attacker);
+        if (p_190102_2_ <= d0 && this.getTicksUntilNextAttack() <= 0) {
+            this.resetAttackCooldown();
+            if (mob.getPassengers().isEmpty() && p_190102_1_.getVehicle() == null) {
+                p_190102_1_.startRiding(mob);
             }
         }
     }
 
     @Override
-    public void resetTask() {
-        if (!attacker.getPassengers().isEmpty()) {
-            Entity rider = attacker.getPassengers().get(0);
-            attacker.removePassengers();
+    public void stop() {
+        if (!mob.getPassengers().isEmpty()) {
+            Entity rider = mob.getPassengers().get(0);
+            mob.ejectPassengers();
 
-            rider.addVelocity(0.8, 1.1, 0.8);
+            rider.push(0.8, 1.1, 0.8);
 
             if (rider instanceof ServerPlayerEntity) {
                 ServerPlayerEntity player = (ServerPlayerEntity) rider;
@@ -65,12 +65,12 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
                 PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
             }
         }
-        super.resetTask();
+        super.stop();
     }
 
     @Override
-    public boolean shouldContinueExecuting() {
-        return (throwTimer > 0 && !attacker.getPassengers().isEmpty()) || (timeout > 0 && super.shouldContinueExecuting() && attacker.getPassengers().isEmpty());
+    public boolean canContinueToUse() {
+        return (throwTimer > 0 && !mob.getPassengers().isEmpty()) || (timeout > 0 && super.canContinueToUse() && mob.getPassengers().isEmpty());
     }
 
 }

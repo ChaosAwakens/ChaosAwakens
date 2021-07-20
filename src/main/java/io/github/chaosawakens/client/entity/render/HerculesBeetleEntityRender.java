@@ -16,7 +16,7 @@ public class HerculesBeetleEntityRender extends GeoEntityRenderer<HerculesBeetle
 
     public HerculesBeetleEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new HerculesBeetleEntityModel());
-        this.shadowSize = 2.5F;
+        this.shadowRadius = 2.5F;
     }
 
     @Override
@@ -25,13 +25,13 @@ public class HerculesBeetleEntityRender extends GeoEntityRenderer<HerculesBeetle
     }
 
     @Override
-    public ResourceLocation getEntityTexture(HerculesBeetleEntity entity) {
+    public ResourceLocation getTextureLocation(HerculesBeetleEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/hercules_beetle.png");
     }
 
     @Override
     public RenderType getRenderType(HerculesBeetleEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

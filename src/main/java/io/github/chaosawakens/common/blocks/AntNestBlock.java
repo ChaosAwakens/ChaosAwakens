@@ -11,6 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.server.ServerWorld;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class AntNestBlock extends Block {
 
 	private final Supplier<? extends EntityType<? extends CreatureEntity>> ant;
@@ -22,16 +24,16 @@ public class AntNestBlock extends Block {
 
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (worldIn.isRemote || worldIn.isRaining()) return;
+		if (worldIn.isClientSide || worldIn.isRaining()) return;
 
-		final BlockPos abovePos = pos.up();
+		final BlockPos abovePos = pos.above();
 		final int amountToSpawn = MathHelper.nextInt(random, 0, 3);
 		if (worldIn.getBlockState(abovePos).isAir(worldIn, abovePos)) {
 			for (int i = 0; i < amountToSpawn; ++i) {
 //				if ((Math.random() <= 0.1)) {
 				CreatureEntity entity = ant.get().create(worldIn);
-				entity.setPosition(pos.getX() + Math.random(), pos.getY() + 1, pos.getZ() + Math.random());
-				worldIn.addEntity(entity);
+				entity.setPos(pos.getX() + Math.random(), pos.getY() + 1, pos.getZ() + Math.random());
+				worldIn.addFreshEntity(entity);
 //				}
 			}
 		}

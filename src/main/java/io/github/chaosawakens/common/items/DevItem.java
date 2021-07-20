@@ -8,6 +8,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import net.minecraft.item.Item.Properties;
+
 public class DevItem extends Item {
 
     public DevItem(Properties builderIn) {
@@ -15,8 +17,8 @@ public class DevItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        playerIn.addStat(Stats.ITEM_USED.get(this));
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        playerIn.awardStat(Stats.ITEM_USED.get(this));
+        return super.use(worldIn, playerIn, handIn);
     }
 }

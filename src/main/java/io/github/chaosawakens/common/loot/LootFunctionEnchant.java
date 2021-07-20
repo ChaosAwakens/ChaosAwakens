@@ -30,17 +30,17 @@ public class LootFunctionEnchant extends LootFunction {
     }
 
     @Override
-    public LootFunctionType getFunctionType() {
+    public LootFunctionType getType() {
         return CATreasure.ENCHANT;
     }
 
     @Override
-    public ItemStack doApply(ItemStack stack, LootContext context) {
+    public ItemStack run(ItemStack stack, LootContext context) {
         for (Map.Entry<IRegistryDelegate<Enchantment>, Short> e : enchantments.entrySet()) {
             if (stack.getItem() == Items.ENCHANTED_BOOK) {
                 EnchantedBookItem.addEnchantment(stack, new EnchantmentData(e.getKey().get(), e.getValue()));
             } else {
-                stack.addEnchantment(e.getKey().get(), e.getValue());
+                stack.enchant(e.getKey().get(), e.getValue());
             }
         }
         return stack;
@@ -53,7 +53,7 @@ public class LootFunctionEnchant extends LootFunction {
     public static class Builder extends LootFunction.Builder<LootFunctionEnchant.Builder> {
         private final Map<IRegistryDelegate<Enchantment>, Short> enchants = Maps.newHashMap();
 
-        protected LootFunctionEnchant.Builder doCast() {
+        protected LootFunctionEnchant.Builder getThis() {
             return this;
         }
 
@@ -87,7 +87,7 @@ public class LootFunctionEnchant extends LootFunction {
             Map<IRegistryDelegate<Enchantment>, Short> enchantments = new HashMap<>();
 
             if (object.has("enchantments")) {
-                JsonObject enchantObj = JSONUtils.getJsonObject(object, "enchantments");
+                JsonObject enchantObj = JSONUtils.getAsJsonObject(object, "enchantments");
 
                 for (Map.Entry<String, JsonElement> e : enchantObj.entrySet()) {
                     ResourceLocation id = new ResourceLocation(e.getKey());

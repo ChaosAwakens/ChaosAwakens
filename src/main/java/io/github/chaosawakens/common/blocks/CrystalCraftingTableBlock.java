@@ -16,6 +16,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * This class nothing yet, thus 
  * 
@@ -30,19 +32,19 @@ public class CrystalCraftingTableBlock extends Block {
 		super(properties);
 	}
 	
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isClientSide) {
 			return ActionResultType.SUCCESS;
 		} else {
-			player.openContainer(state.getContainer(worldIn, pos));
-			player.addStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+			player.openMenu(state.getMenuProvider(worldIn, pos));
+			player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
 			return ActionResultType.CONSUME;
 		}
 	}
 	
-	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
+	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
 		return new SimpleNamedContainerProvider((id, inventory, player) -> {
-			return new CraftingTableContainer(id, inventory, IWorldPosCallable.of(worldIn, pos), this);
+			return new CraftingTableContainer(id, inventory, IWorldPosCallable.create(worldIn, pos), this);
 		}, CONTAINER_NAME);
 	}
 }

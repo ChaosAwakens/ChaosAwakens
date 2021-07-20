@@ -21,9 +21,11 @@ import net.minecraftforge.common.PlantType;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class CropsPlantBlock extends BushBlock implements IGrowable {
-	private static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
-	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+	private static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	private boolean isAboveAir = true;
 	private int maxAge = 3;
 	private final Supplier<? extends Item> seedItem;
@@ -31,7 +33,7 @@ public class CropsPlantBlock extends BushBlock implements IGrowable {
 	public CropsPlantBlock(Supplier<? extends Item> seedItem, Properties properties) {
 		super(properties);
 		this.seedItem = seedItem;
-		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
 	}
 	
 	@Override
@@ -40,56 +42,56 @@ public class CropsPlantBlock extends BushBlock implements IGrowable {
 	}
 	
 	@Override
-	public boolean ticksRandomly(BlockState state) {
-		return state.get(AGE) < this.getMaxAge() || this.isAboveAir;
+	public boolean isRandomlyTicking(BlockState state) {
+		return state.getValue(AGE) < this.getMaxAge() || this.isAboveAir;
 	}
 	
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isAreaLoaded(pos, 1))return;
-		if (worldIn.getLightSubtracted(pos, 0) >= 9) {
-			int i = state.get(AGE);
+		if (worldIn.getRawBrightness(pos, 0) >= 9) {
+			int i = state.getValue(AGE);
 			if (i < this.getMaxAge()) {
 				if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(4) == 0)) {
-					worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
+					worldIn.setBlock(pos, state.setValue(AGE, i + 1), 2);
 					ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 				}
-			} else if(worldIn.getBlockState(pos.up()).isAir(worldIn, pos.up())) {
-				worldIn.setBlockState(pos.up(), state.with(AGE, 0));
+			} else if(worldIn.getBlockState(pos.above()).isAir(worldIn, pos.above())) {
+				worldIn.setBlockAndUpdate(pos.above(), state.setValue(AGE, 0));
 			}	
 		}
 		
-		this.isAboveAir = worldIn.getBlockState(pos.up()).isAir(worldIn, pos.up());
+		this.isAboveAir = worldIn.getBlockState(pos.above()).isAir(worldIn, pos.above());
 	}
 	
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 	}
 	
 	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.matchesBlock(Blocks.GRASS_BLOCK) || state.matchesBlock(Blocks.FARMLAND) || (state.matchesBlock(this) && state.get(AGE) == 3);
+	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.FARMLAND) || (state.is(this) && state.getValue(AGE) == 3);
 	}
 	
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.isValidPosition(state, worldIn, pos);
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.canSurvive(state, worldIn, pos);
 	}
 	
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
 	}
 	
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(seedItem.get());
 	}
 	
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if(state.get(AGE) < this.getMaxAge())
-			worldIn.setBlockState(pos, state.with(AGE, state.get(AGE)+1), 2);
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		if(state.getValue(AGE) < this.getMaxAge())
+			worldIn.setBlock(pos, state.setValue(AGE, state.getValue(AGE)+1), 2);
 		return;
 	}
 	
@@ -102,13 +104,13 @@ public class CropsPlantBlock extends BushBlock implements IGrowable {
 	public PlantType getPlantType(IBlockReader world, BlockPos pos) { return PlantType.PLAINS; }
 	
 	@Override
-	public BlockState getPlant(IBlockReader world, BlockPos pos) { return getDefaultState(); }
+	public BlockState getPlant(IBlockReader world, BlockPos pos) { return defaultBlockState(); }
 	
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) { return true; }
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) { return true; }
 	
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) { return true; }
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) { return true; }
 	
 	public int getMaxAge() { return this.maxAge; }
 }

@@ -16,7 +16,7 @@ public class EmeraldGatorEntityRender extends GeoEntityRenderer<EmeraldGatorEnti
 
     public EmeraldGatorEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new EmeraldGatorEntityModel());
-        this.shadowSize = 0.4F;
+        this.shadowRadius = 0.4F;
     }
 
     @Override
@@ -25,13 +25,13 @@ public class EmeraldGatorEntityRender extends GeoEntityRenderer<EmeraldGatorEnti
     }
 
     @Override
-    public ResourceLocation getEntityTexture(EmeraldGatorEntity entity) {
+    public ResourceLocation getTextureLocation(EmeraldGatorEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/emerald_gator.png");
     }
 
     @Override
     public RenderType getRenderType(EmeraldGatorEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

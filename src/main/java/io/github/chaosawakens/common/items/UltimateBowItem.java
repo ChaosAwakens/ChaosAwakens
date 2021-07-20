@@ -25,6 +25,8 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import net.minecraft.item.Item.Properties;
+
 public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;
@@ -35,48 +37,48 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	}
 	
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if (this.isInGroup(group)) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
 			if (CAConfig.COMMON.enableAutoEnchanting.get())
 				for(EnchantmentData enchant : enchantments) {
-					stack.addEnchantment( enchant.enchantment, enchant.enchantmentLevel);
+					stack.enchant( enchant.enchantment, enchant.level);
 				}
 			items.add(stack);
 		}
 	}
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+	public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity) entityLiving;
 			
 			if (ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, this.getUseDuration(stack) - timeLeft, true) < 0)return;
-			if (!worldIn.isRemote) {
+			if (!worldIn.isClientSide) {
 				AbstractArrowEntity arrowEntity = new UltimateArrowEntity(worldIn, entityLiving);
-				arrowEntity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F, 0F);
-				arrowEntity.setIsCritical(true);
-				arrowEntity.setFire(EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0 ? 250 : 75);
+				arrowEntity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, 3.0F, 0F);
+				arrowEntity.setCritArrow(true);
+				arrowEntity.setSecondsOnFire(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0 ? 250 : 75);
 
-				int powerLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+				int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
 				if (!CAConfig.COMMON.enableAutoEnchanting.get()) {
-					arrowEntity.setDamage(arrowEntity.getDamage() + (double) powerLevel * 0.5D + 2D);
+					arrowEntity.setBaseDamage(arrowEntity.getBaseDamage() + (double) powerLevel * 0.5D + 2D);
 				}
 				else {
-					arrowEntity.setDamage(arrowEntity.getDamage() + 3D);
+					arrowEntity.setBaseDamage(arrowEntity.getBaseDamage() + 3D);
 				}
 
-				int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
-				arrowEntity.setKnockbackStrength(!CAConfig.COMMON.enableAutoEnchanting.get() ? k+1 : 1);
+				int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
+				arrowEntity.setKnockback(!CAConfig.COMMON.enableAutoEnchanting.get() ? k+1 : 1);
 				
 				if (!playerentity.isCreative()) {
-					stack.damageItem(1, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+					stack.hurtAndBreak(1, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 				}
 				
-				worldIn.addEntity(arrowEntity);
+				worldIn.addFreshEntity(arrowEntity);
 				
-				worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
-				playerentity.addStat(Stats.ITEM_USED.get(this));
+				worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+				playerentity.awardStat(Stats.ITEM_USED.get(this));
 			}
 		}
 	}
@@ -87,26 +89,26 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack = playerIn.getHeldItem(handIn);
+	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		ItemStack itemstack = playerIn.getItemInHand(handIn);
 		
-		playerIn.setActiveHand(handIn);
-		return ActionResult.resultConsume(itemstack);
+		playerIn.startUsingItem(handIn);
+		return ActionResult.consume(itemstack);
 	}
 
 	@Override
-	public Predicate<ItemStack> getInventoryAmmoPredicate() {
-		return ARROWS;
+	public Predicate<ItemStack> getAllSupportedProjectiles() {
+		return ARROW_ONLY;
 	}
 	
 	@Override
-	public int func_230305_d_() {
+	public int getDefaultProjectileRange() {
 		return 15;
 	}
 	
 	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get() || super.hasEffect(stack);
+	public boolean isFoil(ItemStack stack) {
+		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
 	}
 
 	@Override

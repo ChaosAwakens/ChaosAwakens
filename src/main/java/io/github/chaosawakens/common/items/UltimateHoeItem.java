@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import net.minecraft.item.Item.Properties;
+
 public class UltimateHoeItem extends EnchantedHoeItem {
 
     public UltimateHoeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
@@ -21,36 +23,36 @@ public class UltimateHoeItem extends EnchantedHoeItem {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        BlockPos eventPos = context.getPos();
+    public ActionResultType useOn(ItemUseContext context) {
+        World world = context.getLevel();
+        BlockPos eventPos = context.getClickedPos();
         
         int hook = ForgeEventFactory.onHoeUse(context);
         if (hook != 0) return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
-        if (context.getFace() != Direction.DOWN && world.isAirBlock(eventPos.up())) {
-            BlockState blockState = world.getBlockState(eventPos).getToolModifiedState(world, eventPos, context.getPlayer(), context.getItem(), ToolType.HOE);
+        if (context.getClickedFace() != Direction.DOWN && world.isEmptyBlock(eventPos.above())) {
+            BlockState blockState = world.getBlockState(eventPos).getToolModifiedState(world, eventPos, context.getPlayer(), context.getItemInHand(), ToolType.HOE);
             if (blockState != null) {
                 PlayerEntity playerentity = context.getPlayer();
-                world.playSound(playerentity, eventPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                if (!world.isRemote && playerentity != null) {
-                    context.getItem().damageItem(1, playerentity, (player) -> player.sendBreakAnimation(context.getHand()));
+                world.playSound(playerentity, eventPos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                if (!world.isClientSide && playerentity != null) {
+                    context.getItemInHand().hurtAndBreak(1, playerentity, (player) -> player.broadcastBreakEvent(context.getHand()));
                 }
                 for (int x = -1; x < 2; x++) {
                     for (int y = -1; y < 2; y++) {
                         for (int z = -1; z < 2; z++) {
                         	BlockPos targetPos = new BlockPos(eventPos.getX() + x, eventPos.getY() + y, eventPos.getZ() + z);
-                            if (world.isAirBlock(targetPos.up())) {
-                                blockState = world.getBlockState(targetPos).getToolModifiedState(world, targetPos, context.getPlayer(), context.getItem(), ToolType.HOE);
+                            if (world.isEmptyBlock(targetPos.above())) {
+                                blockState = world.getBlockState(targetPos).getToolModifiedState(world, targetPos, context.getPlayer(), context.getItemInHand(), ToolType.HOE);
                                 if (blockState != null) {
-                                    if (!world.isRemote) {
-                                        world.setBlockState(targetPos, blockState, 11);
+                                    if (!world.isClientSide) {
+                                        world.setBlock(targetPos, blockState, 11);
                                     }
                                 }
                             }
                         }
                     }
                 }
-                return ActionResultType.func_233537_a_(world.isRemote);
+                return ActionResultType.sidedSuccess(world.isClientSide);
             }
         }
         return ActionResultType.PASS;

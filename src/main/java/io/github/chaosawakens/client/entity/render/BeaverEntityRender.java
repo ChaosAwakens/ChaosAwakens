@@ -16,7 +16,7 @@ public class BeaverEntityRender extends GeoEntityRenderer<BeaverEntity> {
 
     public BeaverEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new BeaverEntityModel());
-        this.shadowSize = 0.4F;
+        this.shadowRadius = 0.4F;
     }
 
     @Override
@@ -25,13 +25,13 @@ public class BeaverEntityRender extends GeoEntityRenderer<BeaverEntity> {
     }
 
     @Override
-    public ResourceLocation getEntityTexture(BeaverEntity entity) {
+    public ResourceLocation getTextureLocation(BeaverEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/beaver.png");
     }
 
     @Override
     public RenderType getRenderType(BeaverEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

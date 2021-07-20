@@ -6,6 +6,8 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
+import net.minecraft.item.Item.Properties;
+
 public class BigHammerItem extends SwordItem {
 
     public BigHammerItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
@@ -13,12 +15,12 @@ public class BigHammerItem extends SwordItem {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (target != null && !target.world.isRemote) {
-            target.addVelocity(0.0D, Math.abs(target.world.rand.nextFloat() * 1.5F), 0.0D);
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (target != null && !target.level.isClientSide) {
+            target.push(0.0D, Math.abs(target.level.random.nextFloat() * 1.5F), 0.0D);
         }
-        stack.damageItem(1, attacker, (entity) -> {
-            entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+        stack.hurtAndBreak(1, attacker, (entity) -> {
+            entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
         });
         return true;
     }

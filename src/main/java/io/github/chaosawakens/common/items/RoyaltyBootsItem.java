@@ -9,6 +9,8 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
+import net.minecraft.item.Item.Properties;
+
 public class RoyaltyBootsItem extends EnchantedArmorItem {
 
 	public RoyaltyBootsItem(IArmorMaterial materialIn, Properties builderIn, EnchantmentData[] enchantments) {
@@ -19,6 +21,6 @@ public class RoyaltyBootsItem extends EnchantedArmorItem {
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		super.onArmorTick(stack, world, player);
 		if (!player.isOnGround())
-			player.addPotionEffect(new EffectInstance(Effects.SLOW_FALLING, 60, 0, false, false));
+			player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 60, 0, false, false));
 	}
 }

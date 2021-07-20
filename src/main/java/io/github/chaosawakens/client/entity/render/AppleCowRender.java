@@ -18,7 +18,7 @@ public class AppleCowRender extends MobRenderer<AppleCowEntity, CowModel<AppleCo
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(AppleCowEntity entity) {
+	public ResourceLocation getTextureLocation(AppleCowEntity entity) {
 		return APPLE_COW_TEXTURE;
 	}
 }

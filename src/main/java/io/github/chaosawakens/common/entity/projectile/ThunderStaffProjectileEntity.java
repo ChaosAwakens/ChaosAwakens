@@ -38,24 +38,24 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 	/**
 	 * Called when this EntityFireball hits a block or entity.
 	 */
-	protected void onImpact(RayTraceResult result) {
-		super.onImpact(result);
-		if (!this.world.isRemote) {
-			boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this.getShooter());
-			LightningBoltEntity lightning = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, world);
-			lightning.setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0);
-			this.world.addEntity(lightning);
+	protected void onHit(RayTraceResult result) {
+		super.onHit(result);
+		if (!this.level.isClientSide) {
+			boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+			LightningBoltEntity lightning = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, level);
+			lightning.moveTo(this.getX(), this.getY(), this.getZ(), 0, 0);
+			this.level.addFreshEntity(lightning);
 			
 			boolean hasFire = CAConfig.COMMON.thunderStaffExplosionFire.get();
 			switch (CAConfig.COMMON.thunderStaffExplosionType.get()) {
 				case 0:
-					this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
 					break;
 				case 1:
-					this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
 					break;
 				case 2:
-					this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
 					break;
 			}
 			this.remove();
@@ -64,13 +64,13 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 	
 	@OnlyIn(Dist.CLIENT)
 	public ItemStack getItem() {
-		ItemStack itemstack = this.getStack();
+		ItemStack itemstack = this.getItemRaw();
 		return itemstack.isEmpty() ? new ItemStack(Items.FIRE_CHARGE) : itemstack;
 	}
 	
 	@Nonnull
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

@@ -16,7 +16,7 @@ public class RoboSniperEntityRender extends GeoEntityRenderer<RoboSniperEntity> 
 
     public RoboSniperEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RoboSniperEntityModel());
-        this.shadowSize = 0.4F;
+        this.shadowRadius = 0.4F;
     }
 
     @Override
@@ -25,13 +25,13 @@ public class RoboSniperEntityRender extends GeoEntityRenderer<RoboSniperEntity> 
     }
 
     @Override
-    public ResourceLocation getEntityTexture(RoboSniperEntity entity) {
+    public ResourceLocation getTextureLocation(RoboSniperEntity entity) {
         return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robo_sniper.png");
     }
 
     @Override
     public RenderType getRenderType(RoboSniperEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityTranslucent(getTextureLocation(animatable));
+        return RenderType.entityTranslucent(getTextureLocation(animatable));
     }
 
     @Override

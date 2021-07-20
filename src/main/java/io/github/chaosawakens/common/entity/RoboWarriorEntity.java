@@ -24,7 +24,7 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 	
 	public RoboWarriorEntity(EntityType<? extends RoboEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.ignoreFrustumCheck = true;
+		this.noCulling = true;
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -56,15 +56,15 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 180)
-				.createMutableAttribute(Attributes.ARMOR, 10)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.105D)
-				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
-				.createMutableAttribute(Attributes.ATTACK_SPEED, 7.5D)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 50)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 32);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 180)
+				.add(Attributes.ARMOR, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.105D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
+				.add(Attributes.ATTACK_SPEED, 7.5D)
+				.add(Attributes.ATTACK_DAMAGE, 50)
+				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
+				.add(Attributes.FOLLOW_RANGE, 32);
 	}
 	
 	@Override
@@ -78,7 +78,7 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 	}
 	
 	@Override
-	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
-		this.getAttackTarget();
+	public void performRangedAttack(LivingEntity target, float distanceFactor) {
+		this.getTarget();
 	}
 }

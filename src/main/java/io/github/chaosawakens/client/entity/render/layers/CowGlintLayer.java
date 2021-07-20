@@ -19,15 +19,15 @@ public class CowGlintLayer extends EnergyLayer<EnchantedGoldenAppleCowEntity, En
         super(p_i50947_1_);
     }
 
-    protected float func_225634_a_(float p_225634_1_) {
+    protected float xOffset(float p_225634_1_) {
         return p_225634_1_ * 0.01F;
     }
 
-    protected ResourceLocation func_225633_a_() {
+    protected ResourceLocation getTextureLocation() {
         return GLINT_TEXTURE;
     }
 
-    protected EntityModel<EnchantedGoldenAppleCowEntity> func_225635_b_() {
+    protected EntityModel<EnchantedGoldenAppleCowEntity> model() {
         return this.cowModel;
     }
 }

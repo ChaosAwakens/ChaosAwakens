@@ -39,7 +39,7 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 	
 	public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
-		this.ignoreFrustumCheck = true;
+		this.noCulling = true;
 		this.tpConfig = tpConfig;
 		this.targetDimension = targetDimension;
 	}
@@ -69,28 +69,28 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.registerAttributes()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 2)
-				.createMutableAttribute(Attributes.ATTACK_SPEED, 1)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1)
-				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 0.5D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 8);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 2)
+				.add(Attributes.ATTACK_SPEED, 1)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.ATTACK_DAMAGE, 1)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.5D)
+				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 	
 	@Override
-	public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
-		ItemStack itemstack = playerIn.getHeldItem(hand);
+	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+		ItemStack itemstack = playerIn.getItemInHand(hand);
 
-		if (tpConfig.get() && !this.world.isRemote && itemstack.getItem() == Items.AIR) {
-			MinecraftServer minecraftServer = ((ServerWorld)this.world).getServer();
-			ServerWorld targetWorld = minecraftServer.getWorld(this.world.getDimensionKey() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+		if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
+			MinecraftServer minecraftServer = ((ServerWorld)this.level).getServer();
+			ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
 			if (targetWorld != null)
 				serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 		}
 		
-		return super.getEntityInteractionResult(playerIn, hand);
+		return super.mobInteract(playerIn, hand);
 	}
 	
 	@Override
