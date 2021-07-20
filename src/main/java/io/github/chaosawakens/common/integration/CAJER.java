@@ -22,8 +22,9 @@ public class CAJER {
     }
 
     private static void registerOres() {
+//        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()), new DistributionSquare(8, 5, 22, 34));
 //        IWorldGenRegistry worldGenRegistry = JERAPI.getInstance().getWorldGenRegistry();
-
+//
 //        worldGenRegistry.register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()).copy(), new DistributionSquare(8, 5, 22, 34));
 //        worldGenRegistry.register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()), new DistributionSquare(8, 5, 22, 34), new Restriction(new DimensionRestriction(CADimensions.MINING_DIMENSION)), true, new LootDrop[]{new LootDrop(new ItemStack(CAItems.BLOODSTONE.get()))});
 //        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.AMETHYST_ORE.get()), new DistributionTriangular(28, 24, 4));
@@ -49,5 +50,4 @@ public class CAJER {
 //        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.RED_ANT_INFESTED_ORE.get()), new DistributionTriangular(12, 12, 5));
 //        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.TERMITE_INFESTED_ORE.get()), new DistributionTriangular(12, 12, 2));
     }
-
 }

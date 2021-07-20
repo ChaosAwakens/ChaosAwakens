@@ -36,7 +36,7 @@ public class TopTubeBlock extends AbstractTopPlantBlock implements ILiquidContai
     }
 
     protected Block getBodyBlock() {
-        return CABlocks.TUBE_PLANT.get();
+        return CABlocks.TUBE_WORM_PLANT.get();
     }
 
     @Nullable

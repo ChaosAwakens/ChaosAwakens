@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -26,10 +27,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
-
-import io.github.chaosawakens.common.registry.CABlocks;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class GateBlock extends Block {
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");

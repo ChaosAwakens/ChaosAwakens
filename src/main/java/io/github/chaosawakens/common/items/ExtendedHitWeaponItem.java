@@ -2,20 +2,18 @@ package io.github.chaosawakens.common.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
-import software.bernie.geckolib3.core.*;
-import software.bernie.geckolib3.core.manager.*;
+import net.minecraft.item.IItemTier;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.UUID;
-
-import net.minecraft.item.Item.Properties;
 
 public class ExtendedHitWeaponItem extends EnchantedSwordItem implements IVanishable, IAnimatable {
 

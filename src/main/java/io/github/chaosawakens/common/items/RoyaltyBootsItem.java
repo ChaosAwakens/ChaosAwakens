@@ -9,8 +9,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
-import net.minecraft.item.Item.Properties;
-
 public class RoyaltyBootsItem extends EnchantedArmorItem {
 
 	public RoyaltyBootsItem(IArmorMaterial materialIn, Properties builderIn, EnchantmentData[] enchantments) {

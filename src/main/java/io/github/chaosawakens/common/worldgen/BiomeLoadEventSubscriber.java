@@ -131,6 +131,8 @@ public class BiomeLoadEventSubscriber {
 				case FOREST:
 					builder.addStructureStart(ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 					builder.addStructureStart(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+				case SWAMP:
+					builder.addStructureStart(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 				default:
 					break;
 			}

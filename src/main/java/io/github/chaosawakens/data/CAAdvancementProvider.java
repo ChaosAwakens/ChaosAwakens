@@ -39,7 +39,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 	}
 	
 	@Override
-	public void run(DirectoryCache cache) throws IOException {
+	public void run(DirectoryCache cache) {
 		Path path = this.generator.getOutputFolder();
 		Set<ResourceLocation> set = Sets.newHashSet();
 		Consumer<Advancement> consumer = (advancement) -> {

@@ -9,8 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.util.NonNullList;
 
-import net.minecraft.item.Item.Properties;
-
 public class EnchantedShovelItem extends ShovelItem implements IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;

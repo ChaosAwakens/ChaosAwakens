@@ -13,7 +13,6 @@ import net.minecraft.resources.IResourceManager;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -67,10 +66,7 @@ public class CAEMCValues implements IEMCMapper<NormalizedSimpleStack, Long> {
     @Override
     public void addMappings(IMappingCollector<NormalizedSimpleStack, Long> mapper, CommentedFileConfig config, DataPackRegistries registry, IResourceManager resourceManager) {
 
-        Iterator<Entry<NormalizedSimpleStack, Long>> var4 = customEmcValues.entrySet().iterator();
-
-        while (var4.hasNext()) {
-            Entry<NormalizedSimpleStack, Long> entry = var4.next();
+        for (Entry<NormalizedSimpleStack, Long> entry : customEmcValues.entrySet()) {
             NormalizedSimpleStack normStack = entry.getKey();
             long value = entry.getValue();
             mapper.setValueBefore(normStack, value);

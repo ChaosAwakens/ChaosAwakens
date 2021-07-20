@@ -36,6 +36,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> createOreDrop(ore, CAItems.TIGERS_EYE.get()));
 		
 		//Plants
+		add(CABlocks.TUBE_WORM.get(), (plant) -> createShearsOnlyDrop(CABlocks.TUBE_WORM.get()));
 		add(CABlocks.CORN_PLANT.get(), (plant) -> createCropDrops(plant, CAItems.CORN.get(), CAItems.CORN_SEEDS.get(),
 				BlockStateProperty.hasBlockStateProperties(plant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.AGE_3, 3))));
 		add(CABlocks.TOMATO_PLANT.get(), (plant) -> createCropDrops(plant, CAItems.TOMATO.get(), CAItems.TOMATO_SEEDS.get(),

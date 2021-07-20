@@ -8,8 +8,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import net.minecraft.item.Item.Properties;
-
 public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;

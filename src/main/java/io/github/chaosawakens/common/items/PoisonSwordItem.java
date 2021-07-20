@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
-import net.minecraft.item.Item.Properties;
-
 public class PoisonSwordItem extends EnchantedSwordItem {
 
     public PoisonSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {

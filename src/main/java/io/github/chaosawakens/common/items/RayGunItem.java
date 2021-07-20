@@ -12,8 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-import net.minecraft.item.Item.Properties;
-
 public class RayGunItem extends Item {
 	private final IItemTier tier;
 
@@ -35,7 +33,7 @@ public class RayGunItem extends Item {
 		ItemStack heldStack = playerIn.getItemInHand(handIn);
 
 		if (!(worldIn instanceof ServerWorld))
-			return new ActionResult(ActionResultType.PASS, heldStack);
+			return new ActionResult<>(ActionResultType.PASS, heldStack);
 		
 		float xA = -MathHelper.sin(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
 		float yA = -MathHelper.sin(playerIn.xRot * ((float) Math.PI / 180F));
@@ -53,6 +51,6 @@ public class RayGunItem extends Item {
 		worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
 		
 		playerIn.awardStat(Stats.ITEM_USED.get(this));
-		return new ActionResult(ActionResultType.SUCCESS, heldStack);
+		return new ActionResult<>(ActionResultType.SUCCESS, heldStack);
 	}
 }

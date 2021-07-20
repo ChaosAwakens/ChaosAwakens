@@ -14,8 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import net.minecraft.item.Item.Properties;
-
 public class UltimateHoeItem extends EnchantedHoeItem {
 
     public UltimateHoeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {

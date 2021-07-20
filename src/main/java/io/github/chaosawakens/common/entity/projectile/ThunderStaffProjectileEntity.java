@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity.projectile;
 
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;

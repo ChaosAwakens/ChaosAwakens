@@ -13,8 +13,6 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class AntInfestedOre extends OreBlock {
 
     private final Supplier<? extends EntityType<?>> ant;
@@ -26,6 +24,7 @@ public class AntInfestedOre extends OreBlock {
 
     private void spawnAnt(ServerWorld world, BlockPos pos) {
         MonsterEntity antEntity = (MonsterEntity) ant.get().create(world);
+        assert antEntity != null;
         antEntity.moveTo((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addFreshEntity(antEntity);
         antEntity.spawnAnim();

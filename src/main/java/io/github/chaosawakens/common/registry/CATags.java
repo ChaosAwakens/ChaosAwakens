@@ -1,6 +1,3 @@
-/**
- * 
- */
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;

@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.function.Supplier;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.Entity;
@@ -18,7 +16,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import java.util.function.Supplier;
 
 /**
  * @author invalid2
@@ -54,7 +52,7 @@ public class StrawberryBushBlock extends SweetBerryBushBlock {
 			int j = 1 + worldIn.random.nextInt(2);
 			popResource(worldIn, pos, new ItemStack(this.foodItem.get(), j + (flag ? 1 : 0)));
 			worldIn.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
-			worldIn.setBlock(pos, state.setValue(AGE, Integer.valueOf(1)), 2);
+			worldIn.setBlock(pos, state.setValue(AGE, 1), 2);
 			
 			return ActionResultType.sidedSuccess(worldIn.isClientSide);
 		}

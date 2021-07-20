@@ -90,7 +90,7 @@ public class CommonSetupEvent {
 			} catch(UnableToFindMethodException e) {
 				if (CAConfig.COMMON.terraforgedCheckMsg.get())
 					ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.dimension().location()
-						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessable,"
+						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
 						+ " if you aren't using Terraforged please ignore this message");
 			}
 			

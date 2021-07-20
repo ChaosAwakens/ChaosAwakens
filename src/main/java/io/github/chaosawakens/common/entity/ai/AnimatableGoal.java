@@ -1,12 +1,10 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import java.util.Random;
-
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import software.bernie.geckolib3.network.ISyncable;
+
+import java.util.Random;
 
 /**
  * Base goal for Animatable entities

@@ -11,9 +11,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class BuddingBlock extends Block {
 	
@@ -36,7 +35,7 @@ public class BuddingBlock extends Block {
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		//ChaosAwakens.LOGGER.debug(state);
 		//See if we should grow
-		if(random.nextInt(1) != 0)return;
+		random.nextInt(1);
 		if(state.getValue(MAX_GENERATABLE) == 0)return;
 		
 		//Check which spots are available/valid
@@ -47,7 +46,7 @@ public class BuddingBlock extends Block {
 		
 		//Loop 1 to 3 times between them and pick random ones
 		int numLoops = random.nextInt(3)+1;
-		numLoops = numLoops > valids.size() ? valids.size() : numLoops;
+		numLoops = Math.min(numLoops, valids.size());
 		
 		for(int i = 0; i < numLoops; i++) {
 			BlockStatePos stateAndPos = valids.get(numLoops-1); 
@@ -76,9 +75,9 @@ public class BuddingBlock extends Block {
 				newBudBlock = false;
 			}
 			
-			if(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName().equals(budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
-				 validStatePos.add( new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction)
-						.setValue(BlockStateProperties.AGE_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3 ? budState.getValue(BlockStateProperties.AGE_3)+1 : budState.getValue(BlockStateProperties.AGE_3) )));
+			if(Objects.equals(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName(), budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
+				 validStatePos.add(new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction)
+						 .setValue(BlockStateProperties.AGE_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3 ? budState.getValue(BlockStateProperties.AGE_3) + 1 : budState.getValue(BlockStateProperties.AGE_3))));
 		}
 		
 		return validStatePos;
@@ -89,7 +88,7 @@ public class BuddingBlock extends Block {
 	 * @author invalid2
 	 *
 	 */
-	class BlockStatePos {
+	static class BlockStatePos {
 		private final BlockPos pos;
 		private final BlockState state;
 		

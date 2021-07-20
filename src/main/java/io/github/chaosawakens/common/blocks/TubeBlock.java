@@ -30,7 +30,7 @@ public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContaine
     }
 
     protected AbstractTopPlantBlock getHeadBlock() {
-        return CABlocks.TUBE.get();
+        return CABlocks.TUBE_WORM.get();
     }
 
     @Nullable

@@ -9,8 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.NonNullList;
 
-import net.minecraft.item.Item.Properties;
-
 public class EnchantedPickaxeItem extends PickaxeItem implements IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;

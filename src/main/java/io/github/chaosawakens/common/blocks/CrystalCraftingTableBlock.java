@@ -16,8 +16,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 /**
  * This class nothing yet, thus 
  * 
@@ -43,8 +41,6 @@ public class CrystalCraftingTableBlock extends Block {
 	}
 	
 	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
-		return new SimpleNamedContainerProvider((id, inventory, player) -> {
-			return new CraftingTableContainer(id, inventory, IWorldPosCallable.create(worldIn, pos), this);
-		}, CONTAINER_NAME);
+		return new SimpleNamedContainerProvider((id, inventory, player) -> new CraftingTableContainer(id, inventory, IWorldPosCallable.create(worldIn, pos), this), CONTAINER_NAME);
 	}
 }

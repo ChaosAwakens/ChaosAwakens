@@ -3,18 +3,12 @@ package io.github.chaosawakens.common.items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.server.ServerWorld;
-
-import net.minecraft.item.Item.Properties;
 
 public class StructureItem extends Item {
 	String structureName;
@@ -49,7 +43,7 @@ public class StructureItem extends Item {
 	 * Does the necessary value manipulation to figure out where to put the structure
 	 * @author invalid2
 	 */
-	class PlacementHelper {
+	static class PlacementHelper {
 		private final BlockPos pos;
 		private final Rotation rotation;
 		

@@ -1,8 +1,6 @@
-/**
- * 
- */
 package io.github.chaosawakens.common.gui.container;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import net.minecraft.block.Block;
@@ -73,7 +71,7 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 		if (!world.isClientSide) {
 			ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
 			ItemStack itemstack = ItemStack.EMPTY;
-			Optional<ICraftingRecipe> optional = world.getServer().getRecipeManager().getRecipeFor(IRecipeType.CRAFTING, inventory, world);
+			Optional<ICraftingRecipe> optional = Objects.requireNonNull(world.getServer()).getRecipeManager().getRecipeFor(IRecipeType.CRAFTING, inventory, world);
 			if (optional.isPresent()) {
 				ICraftingRecipe icraftingrecipe = optional.get();
 				if (inventoryResult.setRecipeUsed(world, serverplayerentity, icraftingrecipe)) {
@@ -90,9 +88,7 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 	 * Callback for when the crafting matrix is changed.
 	 */
 	public void slotsChanged(IInventory inventoryIn) {
-		this.worldPosCallable.execute((p_217069_1_, p_217069_2_) -> {
-			updateCraftingResult(this.containerId, p_217069_1_, this.player, this.craftMatrix, this.craftResult);
-		});
+		this.worldPosCallable.execute((p_217069_1_, p_217069_2_) -> updateCraftingResult(this.containerId, p_217069_1_, this.player, this.craftMatrix, this.craftResult));
 	}
 	
 	public void fillCraftSlotsStackedContents(RecipeItemHelper itemHelperIn) {
@@ -113,9 +109,7 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 	 */
 	public void removed(PlayerEntity playerIn) {
 		super.removed(playerIn);
-		this.worldPosCallable.execute((p_217068_2_, p_217068_3_) -> {
-			this.clearContainer(playerIn, p_217068_2_, this.craftMatrix);
-		});
+		this.worldPosCallable.execute((p_217068_2_, p_217068_3_) -> this.clearContainer(playerIn, p_217068_2_, this.craftMatrix));
 	}
 	
 	/**
@@ -136,9 +130,7 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 			if (index == 0) {
-				this.worldPosCallable.execute((p_217067_2_, p_217067_3_) -> {
-					itemstack1.getItem().onCraftedBy(itemstack1, p_217067_2_, playerIn);
-				});
+				this.worldPosCallable.execute((p_217067_2_, p_217067_3_) -> itemstack1.getItem().onCraftedBy(itemstack1, p_217067_2_, playerIn));
 				if (!this.moveItemStackTo(itemstack1, 10, 46, true)) {
 					return ItemStack.EMPTY;
 				}

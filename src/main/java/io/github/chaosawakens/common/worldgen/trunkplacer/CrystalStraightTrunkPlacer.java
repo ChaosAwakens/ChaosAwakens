@@ -1,6 +1,3 @@
-/**
- * 
- */
 package io.github.chaosawakens.common.worldgen.trunkplacer;
 
 import java.util.List;
@@ -24,9 +21,7 @@ import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
  *
  */
 public class CrystalStraightTrunkPlacer extends AbstractTrunkPlacer {
-	public static final Codec<CrystalStraightTrunkPlacer> CODEC = RecordCodecBuilder.create((builderInstance) -> {
-		return trunkPlacerParts(builderInstance).apply(builderInstance, CrystalStraightTrunkPlacer::new);
-	});
+	public static final Codec<CrystalStraightTrunkPlacer> CODEC = RecordCodecBuilder.create((builderInstance) -> trunkPlacerParts(builderInstance).apply(builderInstance, CrystalStraightTrunkPlacer::new));
 	
 	public CrystalStraightTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
 		super(baseHeight, heightRandA, heightRandB);

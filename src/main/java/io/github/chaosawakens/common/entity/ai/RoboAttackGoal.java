@@ -42,6 +42,7 @@ public class RoboAttackGoal extends Goal {
 	@Override
 	public void tick() {
 		LivingEntity targetEntity = this.projectileOwner.getTarget();
+		assert targetEntity != null;
 		if (targetEntity.distanceToSqr(this.projectileOwner) < 4096.0D && this.projectileOwner.canSee(targetEntity)) {
 			World world = this.projectileOwner.level;
 			

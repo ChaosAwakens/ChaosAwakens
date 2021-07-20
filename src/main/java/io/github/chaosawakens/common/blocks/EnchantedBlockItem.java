@@ -26,6 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 public class EnchantedBlockItem extends Item {
 	private final Block block;
@@ -40,7 +41,7 @@ public class EnchantedBlockItem extends Item {
 	 */
 	public ActionResultType useOn(ItemUseContext context) {
 		ActionResultType actionresulttype = this.tryPlace(new BlockItemUseContext(context));
-		return !actionresulttype.consumesAction() && this.isEdible() ? this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult() : actionresulttype;
+		return !actionresulttype.consumesAction() && this.isEdible() ? this.use(context.getLevel(), Objects.requireNonNull(context.getPlayer()), context.getHand()).getResult() : actionresulttype;
 	}
 	
 	public ActionResultType tryPlace(BlockItemUseContext context) {
@@ -120,7 +121,7 @@ public class EnchantedBlockItem extends Item {
 			for (String s : compoundnbt1.getAllKeys()) {
 				Property<?> property = statecontainer.getProperty(s);
 				if (property != null) {
-					String s1 = compoundnbt1.get(s).getAsString();
+					String s1 = Objects.requireNonNull(compoundnbt1.get(s)).getAsString();
 					blockstate = updateState(blockstate, property, s1);
 				}
 			}
@@ -153,8 +154,7 @@ public class EnchantedBlockItem extends Item {
 	
 	public static void setTileEntityNBT(World worldIn, @Nullable PlayerEntity player, BlockPos pos, ItemStack stackIn) {
 		MinecraftServer minecraftserver = worldIn.getServer();
-		if (minecraftserver == null) {
-		} else {
+		if (minecraftserver != null) {
 			CompoundNBT compoundnbt = stackIn.getTagElement("BlockEntityTag");
 			if (compoundnbt != null) {
 				TileEntity tileentity = worldIn.getBlockEntity(pos);

@@ -1,15 +1,14 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import java.util.EnumSet;
-import java.util.function.BiFunction;
-
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
+
+import java.util.EnumSet;
+import java.util.function.BiFunction;
 
 /**
  * Melee attack a given entity

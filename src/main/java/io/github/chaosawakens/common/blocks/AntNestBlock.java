@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureEntity;
@@ -11,7 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.server.ServerWorld;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class AntNestBlock extends Block {
 
@@ -30,11 +28,10 @@ public class AntNestBlock extends Block {
 		final int amountToSpawn = MathHelper.nextInt(random, 0, 3);
 		if (worldIn.getBlockState(abovePos).isAir(worldIn, abovePos)) {
 			for (int i = 0; i < amountToSpawn; ++i) {
-//				if ((Math.random() <= 0.1)) {
 				CreatureEntity entity = ant.get().create(worldIn);
+				assert entity != null;
 				entity.setPos(pos.getX() + Math.random(), pos.getY() + 1, pos.getZ() + Math.random());
 				worldIn.addFreshEntity(entity);
-//				}
 			}
 		}
 	}

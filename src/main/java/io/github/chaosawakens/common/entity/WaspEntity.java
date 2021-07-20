@@ -71,18 +71,6 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BeeEntity.class, true));
 	}
-	
-//	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-//		return MobEntity.registerAttributes()
-//				.createMutableAttribute(Attributes.MAX_HEALTH, 150)
-//				.createMutableAttribute(Attributes.ARMOR, 3)
-//				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D)
-//				.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-//				.createMutableAttribute(Attributes.ATTACK_SPEED, 10)
-//				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 25)
-//				.createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 3.5D)
-//				.createMutableAttribute(Attributes.FOLLOW_RANGE, 24);
-//	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()

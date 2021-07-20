@@ -56,7 +56,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 		super.tick();
 		Vector3d vector3d = this.getDeltaMovement();
 		RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
-		if (raytraceresult != null && raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
+		if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
 			this.onHit(raytraceresult);
 		}
 		this.setSecondsOnFire(0);

@@ -440,7 +440,6 @@
 
 	"block.chaosawakens.nest_block": "Nest Block",
 	"block.chaosawakens.gate_block": "Gate Block",
-	"block.chaosawakens.spawner_block": "Spawner Block",
 	"block.chaosawakens.random_teleport_block": "Random Teleport Block",
 
 	"block.chaosawakens.brown_ant_nest": "Brown Ant Nest",
@@ -449,6 +448,8 @@
 	"block.chaosawakens.unstable_ant_nest": "Unstable Ant Nest",
 	"block.chaosawakens.termite_nest": "Termite Nest",
 	"block.chaosawakens.crystal_termite_nest": "Crystal Termite Nest",
+
+	"block.chaosawakens.ent_boss_spawner": "Ent Boss Spawner",
 
 	"item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
 	"item.chaosawakens.termite_infested_ore": "Termite Infested Ore",

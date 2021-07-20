@@ -27,7 +27,7 @@ public class CAStructures {
 
 	public static void setupStructures() {
 		setupMapSpacingAndLand(ENT_DUNGEON.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21 , 19, 139369349), true);
+		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21 , 19, 159332311), true);
 	}
 
 	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure,

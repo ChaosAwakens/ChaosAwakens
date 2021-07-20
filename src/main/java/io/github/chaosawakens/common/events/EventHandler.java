@@ -26,6 +26,8 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.Objects;
+
 public class EventHandler {
 
     @SubscribeEvent
@@ -57,7 +59,7 @@ public class EventHandler {
 
             //Drop #1: Ender Dragon Scales
             int amount = 8 + (int)(Math.random() * 6) + (int)(Math.random() * event.getLootingLevel() * 4);
-            if (dragon.getDragonFight().hasPreviouslyKilledDragon()) amount /= 2; //Amount is halved with repeat kills.
+            if (Objects.requireNonNull(dragon.getDragonFight()).hasPreviouslyKilledDragon()) amount /= 2; //Amount is halved with repeat kills.
             stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
             drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
             event.getDrops().add(drop);

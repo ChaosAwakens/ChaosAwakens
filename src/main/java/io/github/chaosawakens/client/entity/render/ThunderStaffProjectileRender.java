@@ -1,8 +1,6 @@
 package io.github.chaosawakens.client.entity.render;
 
 import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
-import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
-import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;

@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity.projectile;
 
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
@@ -41,7 +40,7 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
 		super.onHit(result);
 		if (!this.level.isClientSide) {
 			boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-			
+
 			boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
 			switch (CAConfig.COMMON.rayGunExplosionType.get()) {
 				case 0:

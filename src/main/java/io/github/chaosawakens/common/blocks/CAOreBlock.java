@@ -24,9 +24,7 @@ public class CAOreBlock extends Block {
 	}
 	
 	public CAOreBlock withFossilExp() {
-		this.expFormula = (rand) -> {
-			return MathHelper.nextInt(rand, 0, 2);
-		};
+		this.expFormula = (rand) -> MathHelper.nextInt(rand, 0, 2);
 		return this;
 	}
 	

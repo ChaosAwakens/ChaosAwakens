@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.ai.RoboAttackGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRangedAttackMob;
@@ -37,11 +36,10 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.walking_animation", true));
 			//event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.accelerate_animation", true));
-			return PlayState.CONTINUE;
-		} else {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
-			return PlayState.CONTINUE;
 		}
+
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
+		return PlayState.CONTINUE;
 	}
 	
 	@Override

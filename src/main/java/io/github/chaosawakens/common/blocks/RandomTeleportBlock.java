@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.EntityTeleportEvent;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import java.util.Random;
 
 public class RandomTeleportBlock extends Block {
 	

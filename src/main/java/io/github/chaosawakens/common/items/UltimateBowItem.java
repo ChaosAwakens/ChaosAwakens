@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.function.Predicate;
-
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
@@ -17,15 +15,11 @@ import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import net.minecraft.item.Item.Properties;
+import java.util.function.Predicate;
 
 public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchantable {
 	

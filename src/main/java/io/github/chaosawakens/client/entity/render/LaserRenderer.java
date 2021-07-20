@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Matrix4f;
@@ -17,7 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public abstract class LaserRenderer<R extends DamagingProjectileEntity> extends EntityRenderer {
+public abstract class LaserRenderer extends EntityRenderer {
     public LaserRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
     }
@@ -26,16 +25,6 @@ public abstract class LaserRenderer<R extends DamagingProjectileEntity> extends 
         matrixStackIn.pushPose();
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.yRotO, entityIn.yRot) - 90.0F));
         matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.xRotO, entityIn.xRot)));
-        int i = 0;
-        float f = 0.0F;
-        float f1 = 0.5F;
-        float f2 = 0.0F;
-        float f3 = 0.15625F;
-        float f4 = 0.0F;
-        float f5 = 0.15625F;
-        float f6 = 0.15625F;
-        float f7 = 0.3125F;
-        float f8 = 0.05625F;
 
         matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(45.0F));
         matrixStackIn.scale(0.05625F, 0.05625F, 0.05625F);

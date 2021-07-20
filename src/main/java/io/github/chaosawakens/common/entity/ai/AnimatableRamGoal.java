@@ -1,13 +1,12 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import java.util.EnumSet;
-
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.math.BlockPos;
+
+import java.util.EnumSet;
 
 /**
  * @author invalid2
@@ -67,11 +66,11 @@ public class AnimatableRamGoal extends AnimatableMovableGoal {
 		if(target == null)return;
 		
 		this.entity.lookAt(target, 30, 30);
-		//BlockPos targetPos = this.entity.getNavigator().getPath().getTarget();
-		
-		//this.entity.getLookController().setLookPosition(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 30, 30);
-		
-		//this.entity.getNavigator().tryMoveToXYZ(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speedMultiplier);
+//		BlockPos targetPos = this.entity.getNavigator().getPath().getTarget();
+//
+//		this.entity.getLookController().setLookPosition(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 30, 30);
+//
+//		this.entity.getNavigator().tryMoveToXYZ(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speedMultiplier);
 	}
 	
 	@Override

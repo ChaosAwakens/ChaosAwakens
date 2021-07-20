@@ -14,8 +14,6 @@ import net.minecraft.world.World;
 
 import java.util.function.Predicate;
 
-import net.minecraft.item.Item.Properties;
-
 public class SkateBowItem extends BowItem {
     public SkateBowItem(Properties builder) {
         super(builder);
