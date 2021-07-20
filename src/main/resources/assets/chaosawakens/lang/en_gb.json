@@ -43,7 +43,7 @@
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
-    "entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
+	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
 
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Red Ant",
@@ -90,6 +90,9 @@
 	"item.chaosawakens.iron_golem_spawn_egg": "Iron Golem Spawn Egg",
 	"item.chaosawakens.snow_golem_spawn_egg": "Snow Golem Spawn Egg",
 	"item.chaosawakens.illusioner_spawn_egg": "Illusioner Spawn Egg",
+	"item.chaosawakens.giant_spawn_egg": "Giant Spawn Egg",
+	"item.chaosawakens.wither_spawn_egg": "Wither Spawn Egg",
+	"item.chaosawakens.ender_dragon_spawn_egg": "Ender Dragon Spawn Egg",
 
 	"biome.chaosawakens.mining_biome": "Mining Fields",
 	"biome.chaosawakens.stalagmite_valley": "Stalagmite Valley",

@@ -511,6 +511,9 @@ public class CAItems {
 	public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 	public static final RegistryObject<SpawnEggItem> ILLUSIONER_SPAWN_EGG = ITEMS.register("illusioner_spawn_egg", () -> new SpawnEggItem(EntityType.ILLUSIONER, 0xFFFFFF, 0xFFFFFF, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<SpawnEggItem> GIANT_SPAWN_EGG = ITEMS.register("giant_spawn_egg", () -> new SpawnEggItem(EntityType.GIANT, 0xFFFFFF, 0xFFFFFF, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<SpawnEggItem> WITHER_SPAWN_EGG = ITEMS.register("wither_spawn_egg", () -> new SpawnEggItem(EntityType.WITHER, 0xFFFFFF, 0xFFFFFF, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
+	public static final RegistryObject<SpawnEggItem> ENDER_DRAGON_SPAWN_EGG = ITEMS.register("ender_dragon_spawn_egg", () -> new SpawnEggItem(EntityType.ENDER_DRAGON, 0xFFFFFF, 0xFFFFFF, new Item.Properties().group(CAItemGroups.eggsItemGroup)));
 
 	// STRUCTURE SPAWN
 	public static final RegistryObject<Item> INSTANT_SURVIVAL_SHELTER = ITEMS.register("instant_survival_shelter", () -> new StructureItem(new Item.Properties().group(CAItemGroups.itemsItemGroup).maxStackSize(16), "survival_shelter"));

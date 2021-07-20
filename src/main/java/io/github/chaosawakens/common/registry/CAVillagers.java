@@ -64,6 +64,6 @@ public class CAVillagers {
 //	}
 
 //	private static void addVillagerHouse(String type, String biome, int weight) {
-//		DataUtil.addToJigsawPattern(new ResourceLocation("village/" + biome + "/houses"), JigsawPiece.func_242859_b(Environmental.MOD_ID + ":village/" + type + "_house_" + biome + "_1").apply(JigsawPattern.PlacementBehaviour.RIGID), weight);
+//		DataUtil.addToJigsawPattern(new ResourceLocation("village/" + biome + "/houses"), JigsawPiece.func_242859_b(ChaosAwakens.MODID + ":village/" + type + "_house_" + biome + "_1").apply(JigsawPattern.PlacementBehaviour.RIGID), weight);
 //	}
 }

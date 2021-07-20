@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 public class EntitySetAttributeEventSubscriber {
 	
 	public static void onEntityAttributeCreationEvent(final EntityAttributeCreationEvent event) {
-		
 		event.put(CAEntityTypes.ENT.get(), EntEntity.setCustomAttributes().create());
 		event.put(CAEntityTypes.RED_ANT.get(), AggressiveAntEntity.setCustomAttributes().create());
 		event.put(CAEntityTypes.BROWN_ANT.get(), AntEntity.setCustomAttributes().create());
