@@ -1,6 +1,21 @@
 package io.github.chaosawakens.common.integration;
 
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CADimensions;
+import io.github.chaosawakens.common.registry.CAItems;
+import jeresources.api.distributions.DistributionSquare;
+import jeresources.api.distributions.DistributionTriangular;
+import jeresources.api.drop.LootDrop;
+import jeresources.api.restrictions.DimensionRestriction;
+import jeresources.api.restrictions.Restriction;
 import jeresources.compatibility.JERAPI;
+import jeresources.entry.WorldGenEntry;
+import jeresources.registry.WorldGenRegistry;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 public class CAJER {
@@ -22,6 +37,7 @@ public class CAJER {
     }
 
     private static void registerOres() {
+//        registerWorldGen(new WorldGenEntry(new ItemStack(CABlocks.AMETHYST_ORE.get()), new DistributionSquare(8, 5, 22, 34), new Restriction(new DimensionRestriction(CADimensions.MINING_DIMENSION)), true, new LootDrop(new ItemStack(CAItems.BLOODSTONE.get(), 1))));
 //        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()), new DistributionSquare(8, 5, 22, 34));
 //        IWorldGenRegistry worldGenRegistry = JERAPI.getInstance().getWorldGenRegistry();
 //
@@ -50,4 +66,8 @@ public class CAJER {
 //        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.RED_ANT_INFESTED_ORE.get()), new DistributionTriangular(12, 12, 5));
 //        JERAPI.getInstance().getWorldGenRegistry().register(new ItemStack(CABlocks.TERMITE_INFESTED_ORE.get()), new DistributionTriangular(12, 12, 2));
     }
+//
+//    public static void registerWorldGen(WorldGenEntry entry) {
+//        WorldGenRegistry.getInstance().registerEntry(entry);
+//    }
 }

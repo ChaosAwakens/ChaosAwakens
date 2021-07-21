@@ -71,14 +71,6 @@ public class ChaosAwakens {
 		CAVillagers.PROFESSIONS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 
-		//Register to the forge event bus
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
-		MinecraftForge.EVENT_BUS.register(new GiantEventHandler());
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
-		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
-		MinecraftForge.EVENT_BUS.register(this);
-
 		if (ModList.get().isLoaded("projecte")) {
 			CAEMCValues.init();
 		}
@@ -86,6 +78,14 @@ public class ChaosAwakens {
 		if (ModList.get().isLoaded("jeresources")) {
 			CAJER.init();
 		}
+
+		//Register to the forge event bus
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
+		MinecraftForge.EVENT_BUS.register(new EventHandler());
+		MinecraftForge.EVENT_BUS.register(new GiantEventHandler());
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
+		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
+		MinecraftForge.EVENT_BUS.register(this);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
