@@ -6,22 +6,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.FoxEntity;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.entity.living.EntityTeleportEvent;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
 public class BossSpawnerBlock extends Block {
-
 	private final Supplier<? extends EntityType<? extends LivingEntity>> boss;
 
 	public BossSpawnerBlock(Supplier<? extends EntityType<? extends LivingEntity>> boss, Properties builder) {
