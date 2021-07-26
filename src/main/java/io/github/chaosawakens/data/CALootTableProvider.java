@@ -34,6 +34,5 @@ public class CALootTableProvider extends LootTableProvider {
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
-
     }
 }
