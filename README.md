@@ -42,7 +42,7 @@ All previous downloads are now located [in this page](https://invalid2.github.io
 ## Credits/Staff Team
 **Project Lead:** RandomUser, WeirdNerd
 
-**Coders:** Meme Man, WeirdNerd, Blackout, LuisRandomness, Crosby, Akio, HugoMage, Mglucas0123
+**Coders:** Meme Man, WeirdNerd, Blackout, LuisRandomness, Crosby, HugoMage, Mglucas0123
 
 **Artists:** VDA Spoop, LuisRandomness, Absolute Kun, Spawn of Ore, jjwiggs, killerking, Peeko, Spooder, Chromatic Aeternus
 
