@@ -46,12 +46,12 @@ _If you still want the original mod with no changes, please instead play the ori
 ## Credits/Staff Team
 **Project Lead:** WeirdNerd, thewoundedknight
 
-**Coders:** Meme Man, WeirdNerd, Blackout, LuisRandomness, Crosby, HugoMage, Reda
-
 **Artists/Modellers:** VDA Spoop, Blackout, LuisRandomness, Absolute Kun, Meamer Teamer, Phobos, Sipilus, TheLoneCyberman, TheTrone, jjwiggs, killerking, TechnoCreeper, Spooder, Chromatic Aeternus, Renato, BS Guy, crydigo, Pear, DinoDave, RetDwist, Franz Drameh, AlexanderTheNotSoGreat
 
 **Sound Designers:** mattster, WeirdNerd
 
+**Coders:** Meme Man, WeirdNerd, Blackout, LuisRandomness, HugoMage, Reda
+
 **Builders:** Blackout, crydigo, thewoundedknight, TheLoneCyberman, Lymen
 
-**Former Members:** RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123
+**Former Members:** Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123

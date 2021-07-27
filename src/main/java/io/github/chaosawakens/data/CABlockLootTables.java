@@ -34,7 +34,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.SALT_ORE.get(), (ore) -> randomDropping(CAItems.SALT.get(), 4, 8));
 		add(CABlocks.SUNSTONE_ORE.get(), (ore) -> createOreDrop(ore, CAItems.SUNSTONE.get()));
 		add(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> createOreDrop(ore, CAItems.TIGERS_EYE.get()));
-		
+
 		//Plants
 		add(CABlocks.TUBE_WORM.get(), (plant) -> createShearsOnlyDrop(CABlocks.TUBE_WORM.get()));
 		add(CABlocks.CORN_PLANT.get(), (plant) -> createCropDrops(plant, CAItems.CORN.get(), CAItems.CORN_SEEDS.get(),
@@ -47,7 +47,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropOther(CABlocks.MOULDY_PLANKS.get(), Items.AIR);
 		dropOther(CABlocks.MOULDY_SLAB.get(), Items.AIR);
 		dropOther(CABlocks.MOULDY_FENCE.get(), Items.AIR);
-		
+
 		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		dropSelf(CABlocks.ALUMINUM_BLOCK.get());
 		dropSelf(CABlocks.AMETHYST_BLOCK.get());
@@ -97,11 +97,11 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.URANIUM_ORE.get());
 		dropSelf(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
 	}
-	
+
 	protected static LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {
 		return LootTable.lootTable().withPool(applyExplosionCondition(item, LootPool.lootPool().setRolls(RandomValueRange.between(random1, random2))).add(ItemLootEntry.lootTableItem(item)));
 	}
-	
+
 	@Override
 	protected Iterable<Block> getKnownBlocks() {
 		return CABlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
