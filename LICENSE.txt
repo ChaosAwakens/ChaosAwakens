@@ -6,4 +6,4 @@ Everything else we have made is All Rights Reserved, including models, textures,
 
 All code above Chaos Awakens Beta v0.8 is ARR! No permission is given to use any of it, code from Beta v0.8d and below are under GNU and is public code, again, any new code or versions are not public domain! They are all licensed as All Rights Reserved.
 
-You are allowed to use the mod in mod packs or servers, regardless if they are public or not. However, linking back to either https://github.com/Chaos-Awakens-Mod-Team/ChaosAwakens or https://invalid2.github.io/ would be highly appreciated if possible.
+You are allowed to use the mod in mod packs or servers, regardless if they are public or not. However, linking back to either https://github.com/Chaos-Awakens-Mod-Team/ChaosAwakens or https://chaosawakens.github.io/ would be highly appreciated if possible.

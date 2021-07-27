@@ -26,7 +26,7 @@ public class EntEntityRender extends GeoEntityRenderer<EntEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(EntEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent/oak_ent.png");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EntEntityRender extends GeoEntityRenderer<EntEntity> {
     public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
-    
+
     @Override
     protected float getDeathMaxRotation(EntEntity entity) {
 		return 0.0F;

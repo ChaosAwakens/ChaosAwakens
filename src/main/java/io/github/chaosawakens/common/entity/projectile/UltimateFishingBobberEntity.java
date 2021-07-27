@@ -1,14 +1,19 @@
 package io.github.chaosawakens.common.entity.projectile;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.play.server.SSpawnObjectPacket;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
 
 public class UltimateFishingBobberEntity extends FishingBobberEntity {
 
@@ -23,8 +28,28 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity {
 
 	@Override
 	public IPacket<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+		Entity entity = this.getOwner();
+		return new SSpawnObjectPacket(this, entity == null ? this.getId() : entity.getId());
 	}
+
+	private boolean shouldStopFishing(PlayerEntity p_234600_1_) {
+		ItemStack itemstack = p_234600_1_.getMainHandItem();
+		ItemStack itemstack1 = p_234600_1_.getOffhandItem();
+		boolean flag = itemstack.getItem() == CAItems.ULTIMATE_FISHING_ROD.get();
+		boolean flag1 = itemstack1.getItem() == CAItems.ULTIMATE_FISHING_ROD.get();
+		if (p_234600_1_.isAlive() && (flag || flag1) && !(this.distanceToSqr(p_234600_1_) > 1024.0D)) {
+			return false;
+		} else {
+			this.remove();
+			return true;
+		}
+	}
+
+	private void checkCollision() {
+		RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
+		this.onHit(raytraceresult);
+	}
+
 
 	@Override
 	public EntityType<?> getType() {

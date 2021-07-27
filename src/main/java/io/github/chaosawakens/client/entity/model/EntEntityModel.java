@@ -17,7 +17,7 @@ public class EntEntityModel extends AnimatedGeoModel<EntEntity> {
 	
 	@Override
 	public ResourceLocation getTextureLocation(EntEntity object) {
-		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent.png");
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent/oak_ent.png");
 	}
 	
 	@Override
