@@ -82,9 +82,6 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, CreatureEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EntEntity.class, true));
-		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(HerculesBeetleEntity.class));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

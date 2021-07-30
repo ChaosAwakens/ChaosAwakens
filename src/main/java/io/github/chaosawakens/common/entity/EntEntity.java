@@ -60,11 +60,6 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, WitchEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, RoboEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, RoboSniperEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, HerculesBeetleEntity.class, true));
-		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(EntEntity.class));
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
