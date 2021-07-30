@@ -4,11 +4,13 @@ import io.github.chaosawakens.api.IGrabber;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
@@ -80,6 +82,9 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, CreatureEntity.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EntEntity.class, true));
+		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(HerculesBeetleEntity.class));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

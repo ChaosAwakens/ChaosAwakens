@@ -70,6 +70,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 		this.goalSelector.addGoal(7, new SwimGoal(this));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BeeEntity.class, true));
+		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(WaspEntity.class));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
