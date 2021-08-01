@@ -12,7 +12,14 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 public class EntitySetAttributeEventSubscriber {
 	
 	public static void onEntityAttributeCreationEvent(final EntityAttributeCreationEvent event) {
-		event.put(CAEntityTypes.ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.OAK_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.ACACIA_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.BIRCH_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.DARK_OAK_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.JUNGLE_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.SPRUCE_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.CRIMSON_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.WARPED_ENT.get(), EntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.RED_ANT.get(), AggressiveAntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.BROWN_ANT.get(), AntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.RAINBOW_ANT.get(), AntEntity.setCustomAttributes().build());

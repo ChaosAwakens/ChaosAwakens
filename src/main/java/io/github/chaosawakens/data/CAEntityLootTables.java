@@ -27,7 +27,7 @@ public class CAEntityLootTables extends EntityLootTables {
 
     @Override
     protected void addTables() {
-        add(CAEntityTypes.ENT.get(),
+        add(CAEntityTypes.OAK_ENT.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(1))

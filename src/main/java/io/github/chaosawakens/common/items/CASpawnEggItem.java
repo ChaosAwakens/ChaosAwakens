@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class CASpawnEggItem extends SpawnEggItem {
-	private final Supplier<? extends EntityType<?>> typeGetter;
+	protected final Supplier<? extends EntityType<?>> typeGetter;
 	private final boolean isEnchanted;
 	
 	public CASpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties, boolean isEnchanted) {

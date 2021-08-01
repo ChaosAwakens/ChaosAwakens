@@ -6,10 +6,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.WitchEntity;
-import net.minecraft.entity.monster.ZombifiedPiglinEntity;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,10 +25,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final Types entType;
 	
-	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+	public EntEntity(EntityType<? extends AnimatableMonsterEntity> type, World worldIn, Types entType) {
 		super(type, worldIn);
 		this.noCulling = true;
+		this.entType = entType;
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -87,5 +90,20 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
+	}
+	
+	public static enum Types {
+		OAK("oak"), ACACIA("acacia"), DARK_OAK("dark_oak"), JUNGLE("jungle"), SPRUCE("spruce"), BIRCH("birch"),
+		CRIMSON("crimson"), WARPED("warped");
+		
+		private final String name;
+		
+		Types(String name) {
+			this.name = name;
+		}
+		
+		public String getNameString() {
+			return this.name;
+		}
 	}
 }

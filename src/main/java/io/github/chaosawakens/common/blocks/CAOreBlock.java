@@ -18,11 +18,14 @@ public class CAOreBlock extends Block {
 		super(properties);
 	}
 	
-	public CAOreBlock withExpDrop(Function<Random, Integer> expFormula) {
-		this.expFormula = expFormula;
+	public CAOreBlock withExpDrop(int min, int max) {
+		this.expFormula = (rand) -> MathHelper.nextInt(rand, min, max);
 		return this;
 	}
 	
+	/**
+	 * Builder for default exp for fossils(0-2)
+	 */
 	public CAOreBlock withFossilExp() {
 		this.expFormula = (rand) -> MathHelper.nextInt(rand, 0, 2);
 		return this;

@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.worldgen;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
@@ -83,7 +84,9 @@ public class BiomeLoadEventSubscriber {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();
 			
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
-
+			
+			ChaosAwakens.debug("BIOME", event.getName()+" "+BiomeDictionary.getTypes(biome));
+			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
