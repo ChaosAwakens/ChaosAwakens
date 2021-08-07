@@ -1,6 +1,9 @@
 package io.github.chaosawakens.common.worldgen;
 
-import io.github.chaosawakens.ChaosAwakens;
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
@@ -10,14 +13,12 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Objects;
-import java.util.function.Consumer;
 
 /**
  * Class with method(s) that subscribe to the BiomeLoadingEvent
@@ -85,7 +86,7 @@ public class BiomeLoadEventSubscriber {
 			
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 			
-			ChaosAwakens.debug("BIOME", event.getName()+" "+BiomeDictionary.getTypes(biome));
+			BiomeLoadEventSubscriber.setEntDungeon((struct) -> gen.getStructures().add(() -> struct), event);
 			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
@@ -104,7 +105,6 @@ public class BiomeLoadEventSubscriber {
 			}
 
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
-				gen.getStructures().add(() -> ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 				gen.getStructures().add(() -> ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
 
@@ -130,9 +130,10 @@ public class BiomeLoadEventSubscriber {
 		public static void addStructureSpawns(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder builder = event.getGeneration();
 			
+			BiomeLoadEventSubscriber.setEntDungeon((struct) -> builder.addStructureStart(struct), event);
+			
 			switch (event.getCategory()) {
 				case FOREST:
-					builder.addStructureStart(ConfiguredStructures.CONFIGURED_ENT_DUNGEON);
 					builder.addStructureStart(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 				case SWAMP:
 					builder.addStructureStart(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
@@ -246,4 +247,26 @@ public class BiomeLoadEventSubscriber {
 //		}
 	}
 	
+	public static void setEntDungeon(Function<StructureFeature<?, ?>, ?> func, BiomeLoadingEvent event) {
+		RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
+		
+		if(biome.getRegistryName().toString().contains("birch")) {func.apply(ConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);return;}
+		if(biome.getRegistryName().toString().contains("dark")){func.apply(ConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);return;}
+		if(biome.getRegistryName().toString().contains("crimson")){func.apply(ConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);return;}
+		if(biome.getRegistryName().toString().contains("warped")){func.apply(ConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);return;}
+		
+		switch(event.getCategory()) {
+			case JUNGLE:
+				func.apply(ConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);
+				break;
+			case SAVANNA:
+				func.apply(ConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
+				break;
+			case TAIGA:
+				func.apply(ConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
+				break;
+			default:
+				func.apply(ConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+		}
+	}
 }
