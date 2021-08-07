@@ -106,7 +106,10 @@
 	"biome.chaosawakens.danger_islands": "Danger Islands",
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
 	"biome.chaosawakens.crystal_hills": "Crystal Hills",
-
+	
+	"tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info",
+	"tooltip.chaosawakens.aluminum_block": "Aluminum is one of the more common ores in the overworld, it is found between y40-y24",
+	
 	"dimension.chaosawakens.crystal_dimension": "Crystal Dimension",
 	"dimension.chaosawakens.mining_dimension": "Mining Dimension",
 	"dimension.chaosawakens.village_mania": "Village Mania",
@@ -177,6 +180,8 @@
 
 	"block.chaosawakens.ender_eye_block": "Eye of Ender Block",
 	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
+	
+	"block.chaosawakens.duplication_log": "Duplication Tree Log",
 
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",

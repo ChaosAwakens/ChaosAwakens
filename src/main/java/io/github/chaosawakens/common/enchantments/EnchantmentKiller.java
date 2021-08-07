@@ -6,6 +6,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -71,18 +72,27 @@ public class EnchantmentKiller extends Enchantment {
 	          return this.type == 5 && attribute == CreatureAttribute.ARTHROPOD ? (float)damage * 5.5F : 0.0F;
 	       }
 	}
-
+	
 	@Override
 	public void doPostAttack(LivingEntity liveentity, Entity entity, int duration) {
 		    if (entity instanceof LivingEntity) {
 		       LivingEntity livingentity = (LivingEntity)entity;
 		       if (this.type == 5) {
-		          int d = 20 + liveentity.getRandom().nextInt(40 * duration);
+		          int d = 20 + liveentity.getRandom().nextInt(50 * duration);
 		          livingentity.addEffect(new EffectInstance(Effects.WITHER, d, 3));
 		          livingentity.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, d, 4));
 		          livingentity.addEffect(new EffectInstance(Effects.WEAKNESS, d, 2));
 			       }
 		          }
+		    if (entity instanceof PlayerEntity) {
+		    	PlayerEntity playerentity = (PlayerEntity)entity;
+		    	if (this.type == 5) {
+		     	 int d = 20 + playerentity.getRandom().nextInt(50 * duration);
+		    		playerentity.addEffect(new EffectInstance(Effects.REGENERATION, d, 2));
+		    		playerentity.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, d, 1));
+		    		playerentity.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, d, 4));
+		    	}
+		    }
 		        }
 	       
 public float getDuration(int duration) {

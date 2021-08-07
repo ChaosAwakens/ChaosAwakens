@@ -34,6 +34,10 @@ public class CABlocks {
 	
 	private static final Function<Integer, ToIntFunction<BlockState>> lightValueFunction = (lightValue) -> (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
 	
+	//DUPE TREE
+	//public static final RegistryObject<Block> DUPLICATION_LOG = registerBlock("duplication_log", ()-> new Block(Block.Properties.copy(Blocks.SPRUCE_LOG).harvestLevel(3).harvestTool(ToolType.AXE).requiresCorrectToolForDrops().sound(SoundType.WOOD)), CAItemGroups.blocksItemGroup);
+	
+	
 	// SHINY FOODS
 	public static final RegistryObject<Block> GOLDEN_MELON = registerBlock("golden_melon", () -> new GoldenMelonBlock(Block.Properties.copy(Blocks.MELON).harvestTool(ToolType.AXE)), CAItemGroups.foodItemGroup);
 	public static final RegistryObject<Block> ATTACHED_GOLDEN_MELON_STEM = registerBlock("attached_golden_melon_stem", () -> new AttachedStemBlock((StemGrownBlock) GOLDEN_MELON.get(), AbstractBlock.Properties.copy(Blocks.ATTACHED_MELON_STEM)), null, false);

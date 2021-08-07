@@ -3,8 +3,11 @@ package io.github.chaosawakens.common.events;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
+import net.java.games.input.Keyboard;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -14,15 +17,20 @@ import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -106,6 +114,21 @@ public class EventHandler {
             }
         }
     }
+    
+    //Not functional for now, idk why :(
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @OnlyIn(Dist.CLIENT)
+    public static void itemToolTips(ItemTooltipEvent event) {
+    	if(Screen.hasShiftDown() || Screen.hasControlDown()) {
+    		if(event.getItemStack().getItem() == Item.byBlock(CABlocks.ALUMINUM_BLOCK.get())) {
+    			event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens.aluminum_block"));
+    		}
+		}
+    		else {
+    			event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens.default"));
+    		}
+    	}
+    
 
     @SubscribeEvent
     public void onEntityJoin(EntityJoinWorldEvent event) {
