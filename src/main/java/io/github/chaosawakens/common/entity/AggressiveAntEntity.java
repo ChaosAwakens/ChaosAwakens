@@ -70,14 +70,7 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, RoboEntity.class, false));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, WaspEntity.class, false));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, StinkBugEntity.class, false));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, HerculesBeetleEntity.class, false));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, RubyBugEntity.class, false));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BrownAntEntity.class, false));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, ZombieEntity.class, false));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, WitchEntity.class, false));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AntEntity.class, false));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(AggressiveAntEntity.class));
 	}
 	

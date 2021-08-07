@@ -1,12 +1,12 @@
 {
-	"name": "chaosawakens:ent_dungeon/start_pool",
+	"name": "chaosawakens:entity/ent/oak",
 	"fallback": "minecraft:empty",
 	"elements": [
 		{
-			"weight": 2,
+			"weight":1,
 			"element": {
 				"element_type": "minecraft:single_pool_element",
-				"location": "chaosawakens:ent_dungeon",
+				"location": "chaosawakens:entity/ent/oak",
 				"processors": "minecraft:empty",
 				"projection": "rigid"
 			}

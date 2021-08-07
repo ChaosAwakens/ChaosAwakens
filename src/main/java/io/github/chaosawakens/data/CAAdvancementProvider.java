@@ -130,7 +130,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.ANY)).save(t, id("shiny_cows"));
 		
 		Advancement entDestroyer = itemAdvancement("ent_destroyer", FrameType.TASK, Blocks.OAK_LEAVES).parent(root).addCriterion("ent",
-				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ENT.get()))).save(t, id("ent_destroyer"));
+				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.OAK_ENT.get()))).save(t, id("ent_destroyer"));
 	}
 	
 	private Advancement.Builder itemAdvancement(String name, FrameType type, IItemProvider... items) {

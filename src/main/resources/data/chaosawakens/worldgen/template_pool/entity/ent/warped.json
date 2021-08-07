@@ -1,0 +1,15 @@
+{
+	"name":"chaosawakens:entity/ent/warped",
+	"fallback":"minecraft:empty",
+	"elements": [
+		{
+			"weight":1,
+			"element": {
+				"element_type":"minecraft:single_pool_element",
+				"location":"chaosawakens:entity/ent/warped",
+				"projection":"rigid",
+				"processors":"minecraft:empty"
+			}
+		}
+	]
+}

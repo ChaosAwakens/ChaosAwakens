@@ -32,12 +32,48 @@ public class CAEntityTypes {
 	
 	private static final List<EntityType<?>> ALL = new ArrayList<>();
 	// ENTITY TYPES
-	// Ent
-	public static final RegistryObject<EntityType<EntEntity>> ENT = ENTITY_TYPES.register("ent",
-		() -> EntityType.Builder.of(EntEntity::new, EntityClassification.MONSTER)
-			.sized(2.5f, 3.125f) // Hitbox Size ()
-			.build(new ResourceLocation(ChaosAwakens.MODID, "ent").toString()));
 	
+	// Ents
+	public static final RegistryObject<EntityType<EntEntity>> OAK_ENT = ENTITY_TYPES.register("oak_ent",
+		() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.OAK), EntityClassification.MONSTER)
+			.sized(2.5f, 3.125f) // Hitbox Size ()
+			.build(new ResourceLocation(ChaosAwakens.MODID, "oak_ent").toString()));
+	
+	public static final RegistryObject<EntityType<EntEntity>> ACACIA_ENT = ENTITY_TYPES.register("acacia_ent",
+			() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.ACACIA), EntityClassification.MONSTER)
+				.sized(2.5f, 3.125f) // Hitbox Size ()
+				.build(new ResourceLocation(ChaosAwakens.MODID, "acacia_ent").toString()));
+		
+	public static final RegistryObject<EntityType<EntEntity>> BIRCH_ENT = ENTITY_TYPES.register("birch_ent",
+			() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.BIRCH), EntityClassification.MONSTER)
+				.sized(2.5f, 3.125f) // Hitbox Size ()
+				.build(new ResourceLocation(ChaosAwakens.MODID, "birch_ent").toString()));
+		
+	public static final RegistryObject<EntityType<EntEntity>> JUNGLE_ENT = ENTITY_TYPES.register("jungle_ent",
+			() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.JUNGLE), EntityClassification.MONSTER)
+				.sized(2.5f, 3.125f) // Hitbox Size ()
+				.build(new ResourceLocation(ChaosAwakens.MODID, "jungle_ent").toString()));
+		
+	public static final RegistryObject<EntityType<EntEntity>> SPRUCE_ENT = ENTITY_TYPES.register("spruce_ent",
+			() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.SPRUCE), EntityClassification.MONSTER)
+				.sized(2.5f, 3.125f) // Hitbox Size ()
+				.build(new ResourceLocation(ChaosAwakens.MODID, "spruce_ent").toString()));
+		
+	public static final RegistryObject<EntityType<EntEntity>> DARK_OAK_ENT = ENTITY_TYPES.register("dark_oak_ent",
+			() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.DARK_OAK), EntityClassification.MONSTER)
+				.sized(2.5f, 3.125f) // Hitbox Size ()
+				.build(new ResourceLocation(ChaosAwakens.MODID, "dark_oak_ent").toString()));
+		
+	public static final RegistryObject<EntityType<EntEntity>> CRIMSON_ENT = ENTITY_TYPES.register("crimson_ent",
+			() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.CRIMSON), EntityClassification.MONSTER)
+				.sized(2.5f, 3.125f) // Hitbox Size ()
+				.build(new ResourceLocation(ChaosAwakens.MODID, "crimson_ent").toString()));
+		
+	public static final RegistryObject<EntityType<EntEntity>> WARPED_ENT = ENTITY_TYPES.register("warped_ent",
+			() -> EntityType.Builder.of((IFactory<EntEntity>)(type, world) -> new EntEntity(type, world, EntEntity.Types.WARPED), EntityClassification.MONSTER)
+				.sized(2.5f, 3.125f) // Hitbox Size ()
+				.build(new ResourceLocation(ChaosAwakens.MODID, "warped_ent").toString()));
+		
 	// Hercules Beetle
 	public static final RegistryObject<EntityType<HerculesBeetleEntity>> HERCULES_BEETLE = ENTITY_TYPES.register("hercules_beetle",
 		() -> EntityType.Builder.of(HerculesBeetleEntity::new, EntityClassification.MONSTER)
@@ -178,7 +214,7 @@ public class CAEntityTypes {
 	public static void registerEntities(RegistryEvent.Register<EntityType<?>> evt) {
 		evt.getRegistry().registerAll(ALL.toArray(new EntityType<?>[0]));
 		
-		EntitySpawnPlacementRegistry.register(ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
+		EntitySpawnPlacementRegistry.register(OAK_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
 		EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
 		EntitySpawnPlacementRegistry.register(RUBY_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
 		EntitySpawnPlacementRegistry.register(APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);

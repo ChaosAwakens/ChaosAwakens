@@ -24,15 +24,17 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class EntDungeonStructure extends Structure<NoFeatureConfig> {
+public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
+	private final String path;
 	
-	public EntDungeonStructure(Codec<NoFeatureConfig> codec) {
+	public SurfaceDungeonStructure(Codec<NoFeatureConfig> codec, String path) {
 		super(codec);
+		this.path = path;
 	}
 	
 	@Override
 	public IStartFactory<NoFeatureConfig> getStartFactory() {
-		return EntDungeonStructure.Start::new;
+		return SurfaceDungeonStructure.Start::new;
 	}
 	
 	@Override
@@ -51,7 +53,7 @@ public class EntDungeonStructure extends Structure<NoFeatureConfig> {
 		return topBlock.getFluidState().isEmpty();
 	}
 	
-	public static class Start extends StructureStart<NoFeatureConfig> {
+	public class Start extends StructureStart<NoFeatureConfig> {
 		
 		public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
@@ -66,7 +68,7 @@ public class EntDungeonStructure extends Structure<NoFeatureConfig> {
 			
 			JigsawManager.addPieces(dynamicRegistryManager,
 					new VillageConfig(
-							() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, "ent_dungeon/start_pool")), 10),
+							() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, path)), 10),
 					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, blockpos, pieces, random, false, true);
 			
 			this.calculateBoundingBox();

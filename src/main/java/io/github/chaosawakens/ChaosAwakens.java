@@ -62,7 +62,6 @@ public class ChaosAwakens {
 		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
-		CAEnchantments.ENCHANTMENTS.register(eventBus);
 		CAItems.ITEMS.register(eventBus);
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);

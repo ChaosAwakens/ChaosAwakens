@@ -2,6 +2,7 @@ package io.github.chaosawakens.client.entity.model;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.EntEntity;
+import io.github.chaosawakens.common.entity.EntEntity.Types;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
@@ -10,14 +11,21 @@ import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class EntEntityModel extends AnimatedGeoModel<EntEntity> {
 	
+	private final EntEntity.Types entType;
+	
+	public EntEntityModel(Types entType) {
+		super();
+		this.entType = entType;
+	}
+
 	@Override
 	public ResourceLocation getModelLocation(EntEntity object) {
-		return new ResourceLocation(ChaosAwakens.MODID, "geo/ent.geo.json");
+		return new ResourceLocation(ChaosAwakens.MODID, "geo/ent/"+this.entType.getNameString()+"_ent.geo.json");
 	}
 	
 	@Override
 	public ResourceLocation getTextureLocation(EntEntity object) {
-		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent/oak_ent.png");
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent/"+this.entType.getNameString()+"_ent.png");
 	}
 	
 	@Override
