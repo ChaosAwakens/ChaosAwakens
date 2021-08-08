@@ -65,17 +65,20 @@ sourceSets {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.35')
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.16.5:${project.geckolib}")
 
-    implementation fg.deobf("curse.maven:projecte-226410:3223221")
+    implementation fg.deobf("curse.maven:projecte-226410:${project.projecte}")
 
-    implementation fg.deobf("mezz.jei:jei-1.16.5:7.7.0.98")
-    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3336760")
-    implementation fg.deobf("curse.maven:attributefix-280510:3232225")
+    implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
+    implementation fg.deobf("curse.maven:attributefix-280510:${project.attributefix}")
 
-    implementation fg.deobf("curse.maven:worldedit-225608:3283693")
+    implementation fg.deobf("curse.maven:worldedit-225608:${project.worldedit}")
 
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3312305")
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
+
+    compile fg.deobf("slimeknights.mantle:Mantle:1.16.5-${project.mantle}")
+    compile fg.deobf("slimeknights.tconstruct:TConstruct:1.16.5-${project.tconstruct}")
 }
 
 repositories {

@@ -1,4 +1,4 @@
-package io.github.chaosawakens.dupetree;
+package io.github.chaosawakens.common.blocks;
 
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.BlockState;

@@ -176,6 +176,8 @@
 	"block.chaosawakens.ender_eye_block": "Eye of Ender Block",
 	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
 
+	"block.chaosawakens.duplication_log": "Duplication Tree Log",
+
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",
 
@@ -359,6 +361,10 @@
 	"block.chaosawakens.fossilised_hercules_beetle": "Fossilised Hercules Beetle",
 	"block.chaosawakens.fossilised_ruby_bug": "Fossilised Ruby Bug",
 	"block.chaosawakens.fossilised_emerald_gator": "Fossilised Emerald Gator",
+	"block.chaosawakens.fossilised_wtf": "Fossilised WTF",
+	"block.chaosawakens.fossilised_scorpion": "Fossilised Scorpion",
+	"block.chaosawakens.fossilised_wasp": "Fossilised Wasp",
+	"block.chaosawakens.fossilised_piraporu": "Fossilised Piráporu",
 
 	"block.chaosawakens.crystalised_fairy": "Crystalised Fairy",
 	"block.chaosawakens.crystalised_rat": "Crystalised Rat",
@@ -475,6 +481,8 @@
 	"item.chaosawakens.zoo_cage_extra_large": "Extra Large Zoo Cage",
 	"item.chaosawakens.miners_dream": "Miner's Dream",
 
+	"block.chaosawakens.tube_worm": "Tube Worm",
+	"block.chaosawakens.tube_worm_plant": "Tube Worm",
 	"block.chaosawakens.corn_plant": "Corn Plant",
 	"block.chaosawakens.tomato_plant": "Tomato Plant",
 	"block.chaosawakens.lettuce_plant": "Lettuce Plant",
@@ -494,5 +502,11 @@
 	"item.chaosawakens.platinum_coin": "Platinum Coin",
 
 	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
-	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet."
+	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet.",
+
+	"tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info",
+	"tooltip.chaosawakens.aluminum_ore": "Aluminum is one of the more common ores in the overworld, it is found between y40-y24",
+	"tooltip.chaosawakens.fossilised_piraporu": "The Fossilised Piráporu cannot be turned into a Piráporu yet",
+	"tooltip.chaosawakens.fossilised_scorpion": "The Fossilised Scorpion cannot be turned into a Scorpion yet",
+	"tooltip.chaosawakens.fossilised_wtf": "The Fossilised WTF cannot be turned into a WTF yet"
 }

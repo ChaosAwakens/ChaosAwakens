@@ -75,7 +75,7 @@ public class CABlocks {
 	
 	// PLANTS
 	public static final RegistryObject<TopTubeBlock> TUBE_WORM = registerBlock("tube_worm",() -> new TopTubeBlock(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.BONE_BLOCK).noCollission().instabreak()), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<TubeBlock> TUBE_WORM_PLANT = registerBlock("tube_worm_plant",() -> new TubeBlock(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.BONE_BLOCK).noCollission().instabreak().lootFrom(CABlocks.TUBE_WORM)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<TubeBlock> TUBE_WORM_PLANT = registerBlock("tube_worm_plant",() -> new TubeBlock(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.BONE_BLOCK).noCollission().instabreak().lootFrom(CABlocks.TUBE_WORM)), null, false);
 	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsPlantBlock(CAItems.CORN_SEEDS, Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> TOMATO_PLANT = registerBlock("tomato_plant", () -> new CropsPlantBlock(CAItems.TOMATO_SEEDS, Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> STRAWBERRY_PLANT = registerBlock("strawberry_plant", () -> new StrawberryBushBlock(CAItems.STRAWBERRY_SEEDS, CAItems.STRAWBERRY, Block.Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks()), CAItemGroups.foodItemGroup, false);
