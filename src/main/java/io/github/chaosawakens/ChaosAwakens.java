@@ -44,7 +44,7 @@ public class ChaosAwakens {
 
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
-	public static final String VERSION = "0.8";
+	public static final String VERSION = "0.9-preview4";
 
 	public static ChaosAwakens INSTANCE;
 
