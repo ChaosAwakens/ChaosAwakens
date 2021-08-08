@@ -17,14 +17,112 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "ent": {
+    "acacia_ent": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "predicate": {
-              "type": "chaosawakens:ent"
+              "type": "chaosawakens:acacia_ent"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "birch_ent": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:birch_ent"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "crimson_ent": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:crimson_ent"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "dark_oak_ent": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:dark_oak_ent"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "jungle_ent": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:jungle_ent"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "oak_ent": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:oak_ent"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "spruce_ent": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:spruce_ent"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "warped_ent": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:warped_ent"
             },
             "entity": "this"
           }
@@ -34,7 +132,28 @@
   },
   "requirements": [
     [
-      "ent"
+      "acacia_ent"
+    ],
+    [
+      "birch_ent"
+    ],
+    [
+      "crimson_ent"
+    ],
+    [
+      "dark_oak_ent"
+    ],
+    [
+      "jungle_ent"
+    ],
+    [
+      "oak_ent"
+    ],
+    [
+      "spruce_ent"
+    ],
+    [
+      "warped_ent"
     ]
   ]
 }

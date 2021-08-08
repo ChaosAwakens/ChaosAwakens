@@ -1,7 +1,9 @@
 package io.github.chaosawakens;
 
+import com.electronwill.nightconfig.toml.TomlParser;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.ClientSetupEvent;
+import io.github.chaosawakens.common.UpdateHandler;
 import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
@@ -12,6 +14,7 @@ import io.github.chaosawakens.data.CAAdvancementProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
 import io.github.chaosawakens.data.CALootTableProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.MinecraftVersion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,6 +28,10 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.loading.moddiscovery.ModFile;
+import net.minecraftforge.fml.mclanguageprovider.MinecraftModLanguageProvider;
+import net.minecraftforge.forgespi.language.IModInfo;
+import net.minecraftforge.forgespi.locating.IModFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.example.GeckoLibMod;
@@ -37,6 +44,7 @@ public class ChaosAwakens {
 
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
+	public static final String VERSION = "0.8";
 
 	public static ChaosAwakens INSTANCE;
 
@@ -46,7 +54,9 @@ public class ChaosAwakens {
 		INSTANCE = this;
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
-		
+
+		LOGGER.debug(MODNAME + " Version is:" + VERSION);
+
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -81,7 +91,10 @@ public class ChaosAwakens {
 
 		//Register to the forge event bus
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
+		MinecraftForge.EVENT_BUS.register(new MiscEventHandler());
+		MinecraftForge.EVENT_BUS.register(new LoginEventHandler());
+		if (CAConfig.COMMON.showUpdateMessage.get())
+			UpdateHandler.init();
 		MinecraftForge.EVENT_BUS.register(new GiantEventHandler());
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);

@@ -17,7 +17,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_planks"
+          "name": "minecraft:jungle_planks"
         },
         {
           "type": "minecraft:item",
@@ -32,7 +32,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_planks"
+          "name": "minecraft:jungle_planks"
         },
         {
           "type": "minecraft:item",
@@ -47,7 +47,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_planks"
+          "name": "minecraft:jungle_planks"
         },
         {
           "type": "minecraft:item",
@@ -62,7 +62,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_planks"
+          "name": "minecraft:jungle_planks"
         },
         {
           "type": "minecraft:item",
@@ -77,7 +77,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_log"
+          "name": "minecraft:jungle_log"
         },
         {
           "type": "minecraft:item",
@@ -92,7 +92,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_log"
+          "name": "minecraft:jungle_log"
         },
         {
           "type": "minecraft:item",
@@ -107,7 +107,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_log"
+          "name": "minecraft:jungle_log"
         },
         {
           "type": "minecraft:item",
@@ -122,7 +122,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_log"
+          "name": "minecraft:jungle_log"
         }
       ]
     },
@@ -142,7 +142,7 @@
               }
             }
           ],
-          "name": "minecraft:red_mushroom"
+          "name": "minecraft:jungle_leaves"
         },
         {
           "type": "minecraft:item",
@@ -157,7 +157,7 @@
               }
             }
           ],
-          "name": "minecraft:red_mushroom"
+          "name": "minecraft:jungle_leaves"
         },
         {
           "type": "minecraft:item",
@@ -172,7 +172,7 @@
               }
             }
           ],
-          "name": "minecraft:brown_mushroom"
+          "name": "minecraft:vine"
         },
         {
           "type": "minecraft:item",
@@ -187,7 +187,7 @@
               }
             }
           ],
-          "name": "minecraft:brown_mushroom"
+          "name": "minecraft:vine"
         }
       ]
     },
@@ -237,7 +237,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_sapling"
+          "name": "minecraft:jungle_sapling"
         },
         {
           "type": "minecraft:item",
@@ -252,7 +252,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_sapling"
+          "name": "minecraft:jungle_sapling"
         }
       ]
     },

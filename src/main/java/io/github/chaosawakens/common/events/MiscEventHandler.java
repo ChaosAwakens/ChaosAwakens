@@ -43,7 +43,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.List;
 import java.util.Objects;
 
-public class EventHandler {
+public class MiscEventHandler {
 
     @SubscribeEvent
     public void LivingDeathEvent(LivingDeathEvent event) {
