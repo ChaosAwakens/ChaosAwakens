@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.events;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CAOreBlock;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
@@ -19,11 +20,12 @@ import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -33,13 +35,16 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -122,28 +127,53 @@ public class MiscEventHandler {
         }
     }
     
-    //Not functional for now, idk why :(
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    @OnlyIn(Dist.CLIENT)
-    public static void itemToolTips(final ItemTooltipEvent event) {
-        ItemStack stack = event.getItemStack();
-        List<ITextComponent> tooltip = event.getToolTip();
-        if(stack.getItem() instanceof BlockItem) {
-            Block block = ((BlockItem) stack.getItem()).getBlock();
-            if (block instanceof CAOreBlock) {
-                if (stack.getItem() == CABlocks.ALUMINUM_ORE.get().asItem()) {
-                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.aluminum_ore").withStyle(TextFormatting.AQUA));
-                } else if (stack.getItem() == CABlocks.FOSSILISED_PIRAPORU.get().asItem().getItem()) {
-                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.fossilised_piraporu").withStyle(TextFormatting.AQUA));
-                } else if (stack.getItem() == CABlocks.FOSSILISED_SCORPION.get().asItem().getItem()) {
-                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.fossilised_scorpion").withStyle(TextFormatting.AQUA));
-                } else if (stack.getItem() == CABlocks.FOSSILISED_WTF.get().asItem().getItem()) {
-//                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.fossilised_wtf").withStyle(TextFormatting.AQUA));
-                    tooltip.add(new StringTextComponent("tooltip.chaosawakens.fossilised_wtf").withStyle(TextFormatting.AQUA));
-                }
-//                else {
-//                    tooltip.add(new TranslationTextComponent("tooltip.chaosawakens.default"));
+//    //Not functional for now, idk why :(
+//    @SubscribeEvent(priority = EventPriority.HIGHEST)
+//    @OnlyIn(Dist.CLIENT)
+//    public static void itemToolTips(final ItemTooltipEvent event) {
+//        ItemStack stack = event.getItemStack();
+//        List<ITextComponent> tooltip = event.getToolTip();
+//        if(stack.getItem() instanceof BlockItem) {
+//            Block block = ((BlockItem) stack.getItem()).getBlock();
+//            if (block instanceof CAOreBlock) {
+//                if (stack.getItem() == CABlocks.ALUMINUM_ORE.get().asItem()) {
+//                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.aluminum_ore").withStyle(TextFormatting.AQUA));
+//                } else if (stack.getItem() == CABlocks.FOSSILISED_PIRAPORU.get().asItem().getItem()) {
+//                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.fossilised_piraporu").withStyle(TextFormatting.AQUA));
+//                } else if (stack.getItem() == CABlocks.FOSSILISED_SCORPION.get().asItem().getItem()) {
+//                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.fossilised_scorpion").withStyle(TextFormatting.AQUA));
+//                } else if (stack.getItem() == CABlocks.FOSSILISED_WTF.get().asItem().getItem()) {
+////                    tooltip.add(1, new TranslationTextComponent("tooltip.chaosawakens.fossilised_wtf").withStyle(TextFormatting.AQUA));
+//                    tooltip.add(new StringTextComponent("tooltip.chaosawakens.fossilised_wtf").withStyle(TextFormatting.AQUA));
 //                }
+////                else {
+////                    tooltip.add(new TranslationTextComponent("tooltip.chaosawakens.default"));
+////                }
+//            }
+//        }
+//    }
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void onToolTipEvent(ItemTooltipEvent event) {
+        if (event.getFlags().isAdvanced() && CAConfig.COMMON.enableTooltips.get()) {
+            final Collection<RegistryObject<Block>> blocks = CABlocks.BLOCKS.getEntries();
+            for (RegistryObject<Block> block : blocks) {
+
+                if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+                    event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + block.getId().toString().replaceAll("chaosawakens:", "")));
+                } else {
+                    event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens.default"));
+                }
+            }
+            final Collection<RegistryObject<Item>> items = CAItems.ITEMS.getEntries();
+            for (RegistryObject<Item> item : items) {
+
+                if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+                    event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getId().toString().replaceAll("chaosawakens:", "")));
+                } else {
+                    event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens.default"));
+                }
             }
         }
     }

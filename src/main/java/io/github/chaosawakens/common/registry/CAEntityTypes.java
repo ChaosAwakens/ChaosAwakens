@@ -171,10 +171,10 @@ public class CAEntityTypes {
 					.sized(2.0f, 4.0f) // Hitbox Size ()
 					.build(new ResourceLocation(ChaosAwakens.MODID, "robo_warrior").toString()));
 
-	// Robo Warrior
+	// Wasp
 	public static final RegistryObject<EntityType<WaspEntity>> WASP = ENTITY_TYPES.register("wasp",
 			() -> EntityType.Builder.of(WaspEntity::new, EntityClassification.MONSTER)
-					.sized(2.0f, 4.0f) // Hitbox Size ()
+					.sized(1.5f, 2.0f) // Hitbox Size ()
 					.build(new ResourceLocation(ChaosAwakens.MODID, "wasp").toString()));
 
 
@@ -206,8 +206,8 @@ public class CAEntityTypes {
 					.build(new ResourceLocation(ChaosAwakens.MODID, "explosive_ball").toString()));
 
 	public static final RegistryObject<EntityType<UltimateFishingBobberEntity>> ULTIMATE_FISHING_BOBBER = ENTITY_TYPES.register("ultimate_fishing_bobber",
-			() -> EntityType.Builder.<UltimateFishingBobberEntity>createNothing(EntityClassification.MISC).noSave().noSummon().sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(5)
-					.sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
+			() -> EntityType.Builder.<UltimateFishingBobberEntity>createNothing(EntityClassification.MISC).noSave().noSummon()
+					.sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(5)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_fishing_bobber").toString()));
 	
 	@SubscribeEvent

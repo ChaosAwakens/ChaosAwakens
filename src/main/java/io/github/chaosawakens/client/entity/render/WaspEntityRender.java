@@ -16,7 +16,7 @@ public class WaspEntityRender extends GeoEntityRenderer<WaspEntity> {
 
     public WaspEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new WaspEntityModel());
-        this.shadowRadius = 2.0F;
+        this.shadowRadius = 0.75F;
     }
 
     @Override

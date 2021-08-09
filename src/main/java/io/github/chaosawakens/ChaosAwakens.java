@@ -1,6 +1,5 @@
 package io.github.chaosawakens;
 
-import com.electronwill.nightconfig.toml.TomlParser;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.common.UpdateHandler;
@@ -14,7 +13,6 @@ import io.github.chaosawakens.data.CAAdvancementProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
 import io.github.chaosawakens.data.CALootTableProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.MinecraftVersion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,10 +26,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fml.loading.moddiscovery.ModFile;
-import net.minecraftforge.fml.mclanguageprovider.MinecraftModLanguageProvider;
-import net.minecraftforge.forgespi.language.IModInfo;
-import net.minecraftforge.forgespi.locating.IModFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.example.GeckoLibMod;

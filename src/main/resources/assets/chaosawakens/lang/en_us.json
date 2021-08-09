@@ -506,7 +506,21 @@
 
 	"tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info",
 	"tooltip.chaosawakens.aluminum_ore": "Aluminum is one of the more common ores in the overworld, it is found between y40-y24",
-	"tooltip.chaosawakens.fossilised_piraporu": "The Fossilised Piráporu cannot be turned into a Piráporu yet",
+	"tooltip.chaosawakens.fossilised_ent": "The Fossilised Ent can be turned into a Ent",
+	"tooltip.chaosawakens.fossilised_hercules_beetle": "The Fossilised Hercules Beetle can be turned into a Hercules Beetle",
+	"tooltip.chaosawakens.fossilised_ruby_bug": "The Fossilised Ruby Bug can be turned into a Ruby Bug",
+	"tooltip.chaosawakens.fossilised_emerald_gator": "The Fossilised Emerald Gator can be turned into a Emerald Gator",
+	"tooltip.chaosawakens.fossilised_wtf": "The Fossilised WTF cannot be turned into a WTF yet",
 	"tooltip.chaosawakens.fossilised_scorpion": "The Fossilised Scorpion cannot be turned into a Scorpion yet",
-	"tooltip.chaosawakens.fossilised_wtf": "The Fossilised WTF cannot be turned into a WTF yet"
+	"tooltip.chaosawakens.fossilised_wasp": "The Fossilised Wasp can be turned into a Wasp",
+	"tooltip.chaosawakens.fossilised_piraporu": "The Fossilised Piráporu cannot be turned into a Piráporu yet",
+	"tooltip.chaosawakens.crystal_torch": "A Fancy Crystal Torch",
+	"tooltip.chaosawakens.wall_crystal_torch": "A Fancy Crystal Torch",
+	"tooltip.chaosawakens.sunstone_torch": "A Fancy Sunstone Torch",
+	"tooltip.chaosawakens.wall_sunstone_torch": "A Fancy Sunstone Torch",
+	"tooltip.chaosawakens.extreme_torch": "A Fancy Extreme Torch",
+	"tooltip.chaosawakens.wall_extreme_torch": "A Fancy Extreme Torch",
+	"tooltip.chaosawakens.mouldy_planks": "A Mouldy Set of Wood, Found when using the Miners Dream",
+	"tooltip.chaosawakens.mouldy_slab": "A Mouldy Set of Wood, Found when using the Miners Dream",
+	"tooltip.chaosawakens.mouldy_fence": "A Mouldy Set of Wood, Found when using the Miners Dream"
 }

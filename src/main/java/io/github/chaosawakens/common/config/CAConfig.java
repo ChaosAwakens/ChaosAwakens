@@ -129,7 +129,9 @@ public class CAConfig {
 		public final ConfigValue<Boolean> mobHeadDrops;
 
 		public final ConfigValue<Boolean> terraforgedCheckMsg;
+
 		public final ConfigValue<Boolean> showUpdateMessage;
+		public final ConfigValue<Boolean> enableTooltips;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Log messages");
@@ -301,6 +303,7 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Update Checker");
 			showUpdateMessage = builder.comment("Send messages when there is a new update!").define("Show Update Messages", true);
+			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
 			builder.pop();
 		}
 	}

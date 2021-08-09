@@ -44,17 +44,17 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	}
 	
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if(this.dead) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("death", true));
-			return PlayState.CONTINUE;
-		}
+//		if(this.dead) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("death", true));
+//			return PlayState.CONTINUE;
+//		}
 		
 		if(this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("attacking", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly_attack", true));
 			return PlayState.CONTINUE;
 		}
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("flying", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly", true));
 		return PlayState.CONTINUE;
 
 	}
@@ -70,7 +70,6 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 		this.goalSelector.addGoal(7, new SwimGoal(this));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BeeEntity.class, true));
-		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(WaspEntity.class));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
