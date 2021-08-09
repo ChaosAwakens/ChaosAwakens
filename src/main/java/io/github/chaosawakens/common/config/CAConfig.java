@@ -303,6 +303,8 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Update Checker");
 			showUpdateMessage = builder.comment("Send messages when there is a new update!").define("Show Update Messages", true);
+			builder.pop();
+			builder.push("Tooltips");
 			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
 			builder.pop();
 		}
