@@ -37,17 +37,17 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	
+
 	private final ConfigValue<Boolean> tpConfig;
 	private final RegistryKey<World> targetDimension;
-	
+
 	public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
 		this.noCulling = true;
 		this.tpConfig = tpConfig;
 		this.targetDimension = targetDimension;
 	}
-	
+
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController()
@@ -61,7 +61,7 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 		}
 		return PlayState.CONTINUE;
 	}
-	
+
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 8.0F));
@@ -73,7 +73,7 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AntEntity.class, false));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(AggressiveAntEntity.class));
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 2)
@@ -83,7 +83,7 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 				.add(Attributes.ATTACK_KNOCKBACK, 0.5D)
 				.add(Attributes.FOLLOW_RANGE, 8);
 	}
-	
+
 	@Override
 	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
@@ -95,15 +95,15 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 			if (targetWorld != null)
 				serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 		}
-		
+
 		return super.mobInteract(playerIn, hand);
 	}
-	
+
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
 	}
-	
+
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;

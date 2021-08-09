@@ -11,7 +11,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 /**
- * 
+ *
  * @author invalid2
  */
 public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatable {

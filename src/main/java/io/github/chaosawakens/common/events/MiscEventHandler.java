@@ -1,13 +1,10 @@
 package io.github.chaosawakens.common.events;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.CAOreBlock;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
-import net.java.games.input.Keyboard;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
@@ -20,22 +17,14 @@ import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -45,7 +34,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 public class MiscEventHandler {
@@ -126,7 +114,7 @@ public class MiscEventHandler {
             }
         }
     }
-    
+
 //    //Not functional for now, idk why :(
 //    @SubscribeEvent(priority = EventPriority.HIGHEST)
 //    @OnlyIn(Dist.CLIENT)
@@ -156,10 +144,9 @@ public class MiscEventHandler {
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void onToolTipEvent(ItemTooltipEvent event) {
-        if (event.getFlags().isAdvanced() && CAConfig.COMMON.enableTooltips.get()) {
+        if (event.getFlags().isAdvanced() && CAConfig.COMMON.enableTooltips.get())  {
             final Collection<RegistryObject<Block>> blocks = CABlocks.BLOCKS.getEntries();
             for (RegistryObject<Block> block : blocks) {
-
                 if (Screen.hasShiftDown() || Screen.hasControlDown()) {
                     event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + block.getId().toString().replaceAll("chaosawakens:", "")));
                 } else {

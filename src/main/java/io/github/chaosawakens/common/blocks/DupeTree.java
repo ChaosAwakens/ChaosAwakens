@@ -19,12 +19,12 @@ public class DupeTree extends SaplingBlock{
 	public boolean addDestroyEffects(BlockState state, World world, BlockPos pos, ParticleManager manager) {
 		return super.addDestroyEffects(state, world, pos, manager);
 	}
-	
+
 	@Override
 	public void onPlantGrow(BlockState state, IWorld world, BlockPos pos, BlockPos source) {
 		if(state.getBlock() == CABlocks.ALUMINUM_BLOCK.get()) {
-			
+
 		}
 	}
-	
+
 }

@@ -7,7 +7,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
  *
  */
 public class ServerSetupEvent {
-	
+
 	public void onFMLServerSetupEvent(FMLDedicatedServerSetupEvent event) {
 		//Nothing here at the moment
 	}

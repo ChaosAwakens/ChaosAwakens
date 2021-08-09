@@ -51,52 +51,52 @@ public class CrystalClusterBlock extends DirectionalBlock {
 		map.put("[age=2,facing=west]", Block.box(6.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D));
 		map.put("[age=3,facing=west]", Block.box(4.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D));
 	});
-	
+
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-	
+
 	public CrystalClusterBlock(Properties builder) {
 		super(builder);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(AGE, new Random().nextInt(4) ));
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		VoxelShape shape = SHAPES.get(state.toString().substring(state.toString().indexOf("}")+1));
 		return shape != null ? shape: VoxelShapes.block();
 	}
-	
+
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
 		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
-	
+
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.setValue(FACING, mirrorIn.mirror(state.getValue(FACING)));
 	}
-	
+
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		Direction direction = context.getClickedFace();
 		BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
 		return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(AGE, 3) : this.defaultBlockState().setValue(FACING, direction).setValue(AGE, 3);
 	}
-	
+
 	@Override
 	public PushReaction getPistonPushReaction(BlockState state) {
 		return PushReaction.DESTROY;
 	}
-	
+
 	@Override
 	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
 	}
-	
+
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING).add(AGE);
 	}
-	
+
 	@Override
 	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		Direction direction = state.getValue(FACING);

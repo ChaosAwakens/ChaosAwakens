@@ -14,8 +14,8 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class AggressiveAntEntityRender extends GeoEntityRenderer<AggressiveAntEntity> {
-	private final String textureName;
-	
+    private final String textureName;
+
     public AggressiveAntEntityRender(EntityRendererManager renderManager, String textureName) {
         super(renderManager, new AggressiveAntEntityModel(textureName));
         this.textureName = textureName;

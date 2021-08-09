@@ -11,16 +11,16 @@ import java.util.Random;
  * @author invalid2
  */
 public abstract class AnimatableGoal extends Goal {
-	
+
 	protected AnimatableMonsterEntity entity;
-	
+
 	protected static final Random RANDOM = new Random();
-	
+
 	private long lastGameTime;
 	protected long tickDelta;
 	protected double animationProgress;
 	private boolean isFirsLoop = true;
-	
+
 	/**
 	 * Basic tick functionality that most AnimatableGoals will use
 	 */
@@ -35,11 +35,11 @@ public abstract class AnimatableGoal extends Goal {
 		this.animationProgress += 1 + this.tickDelta/100000.0;
 		this.lastGameTime = this.entity.level.getGameTime();
 	}
-	
+
 	protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
 		return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
 	}
-	
+
 	@Override
 	abstract public boolean canUse();
 }

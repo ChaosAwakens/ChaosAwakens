@@ -10,14 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 public class EnchantedHoeItem extends HoeItem implements IAutoEnchantable {
-	
+
 	private final EnchantmentData[] enchantments;
-	
+
 	public EnchantedHoeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
 		this.enchantments = enchantments;
 	}
-	
+
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
@@ -39,5 +39,5 @@ public class EnchantedHoeItem extends HoeItem implements IAutoEnchantable {
 	public EnchantmentData[] enchantments() {
 		return this.enchantments;
 	}
-	
+
 }

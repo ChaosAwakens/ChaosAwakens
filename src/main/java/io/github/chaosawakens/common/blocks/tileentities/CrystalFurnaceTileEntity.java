@@ -23,12 +23,12 @@ public class CrystalFurnaceTileEntity extends AbstractFurnaceTileEntity {
     }
 
     protected ITextComponent getDefaultName() {
-            return new TranslationTextComponent("container."+ ChaosAwakens.MODID +".crystal_furnace");
-        }
+        return new TranslationTextComponent("container."+ ChaosAwakens.MODID +".crystal_furnace");
+    }
 
     protected int getBurnDuration(ItemStack fuel) {
-            return super.getBurnDuration(fuel) / 2;
-        }
+        return super.getBurnDuration(fuel) / 2;
+    }
 
     protected Container createMenu(int id, PlayerInventory player) {
         return new FurnaceContainer(id, player, this, this.dataAccess);

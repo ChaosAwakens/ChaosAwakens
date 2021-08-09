@@ -16,6 +16,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraftforge.fml.RegistryObject;
 
 public class CABlockLootTables extends BlockLootTables {
+
 	@Override
 	protected void addTables() {
 		add(CABlocks.AMETHYST_ORE.get(), (ore) -> createOreDrop(ore, CAItems.AMETHYST.get()));

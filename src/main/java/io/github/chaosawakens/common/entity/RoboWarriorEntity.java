@@ -25,14 +25,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRangedAttackMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	
+
 	public RoboWarriorEntity(EntityType<? extends RoboEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.noCulling = true;
 	}
-	
+
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		
+
 		if(this.getAttacking()) {
 			if (event.isMoving()) {
 				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.walking_shooting_animation", true));
@@ -41,7 +41,7 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.shooting_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
+
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.walking_animation", true));
 			return PlayState.CONTINUE;
@@ -49,7 +49,7 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
-	
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
@@ -57,7 +57,7 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 180)
@@ -69,17 +69,17 @@ public class RoboWarriorEntity extends RoboEntity implements IAnimatable, IRange
 				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
 				.add(Attributes.FOLLOW_RANGE, 32);
 	}
-	
+
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "robowarriorcontroller", 0, this::predicate));
 	}
-	
+
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
-	
+
 	@Override
 	public void performRangedAttack(LivingEntity target, float distanceFactor) {
 		this.getTarget();

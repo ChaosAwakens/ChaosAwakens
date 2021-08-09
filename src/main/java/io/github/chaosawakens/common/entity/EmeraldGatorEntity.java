@@ -35,7 +35,7 @@ import io.github.chaosawakens.common.registry.CASoundEvents;
 import java.util.UUID;
 
 public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAnimatable {
-	
+
     private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(EmeraldGatorEntity.class, DataSerializers.INT);
     private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
     private UUID persistentAngerTarget;
@@ -172,14 +172,14 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
     public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
         return null;
     }
-    
+
     @Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return CASoundEvents.EMERALD_GATOR_HURT.get();
-	}
-	
-	@Override
-	protected SoundEvent getDeathSound() {
-		return CASoundEvents.EMERALD_GATOR_DEATH.get();
-	}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return CASoundEvents.EMERALD_GATOR_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return CASoundEvents.EMERALD_GATOR_DEATH.get();
+    }
 }

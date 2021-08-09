@@ -4,7 +4,7 @@
 	"itemGroup.chaosawakens_food_item_group": "Chaos Awakens Food",
 	"itemGroup.chaosawakens_equipment_item_group": "Chaos Awakens Equipment",
 	"itemGroup.chaosawakens_eggs_item_group": "Chaos Awakens Spawn Eggs",
-	
+
 	"advancements.chaosawakens.root.title": "Thank You for installing Chaos Awakens!",
 	"advancements.chaosawakens.root.description": "Have fun :)",
 	"advancements.chaosawakens.cats_eye_armor.title": "Woah! Its Clear!",
@@ -43,7 +43,7 @@
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
-    "entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
+	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
 
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Red Ant",
@@ -104,7 +104,7 @@
 	"biome.chaosawakens.danger_islands": "Danger Islands",
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
 	"biome.chaosawakens.crystal_hills": "Crystal Hills",
-	
+
 	"dimension.chaosawakens.crystal_dimension": "Crystal Dimension",
 	"dimension.chaosawakens.mining_dimension": "Mining Dimension",
 	"dimension.chaosawakens.village_mania": "Village Mania",
@@ -175,7 +175,7 @@
 
 	"block.chaosawakens.ender_eye_block": "Eye of Ender Block",
 	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
-	
+
 	"block.chaosawakens.duplication_log": "Duplication Tree Log",
 
 	"item.chaosawakens.salt": "Salt",

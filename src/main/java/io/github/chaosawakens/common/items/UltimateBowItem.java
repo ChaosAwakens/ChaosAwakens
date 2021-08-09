@@ -22,14 +22,14 @@ import net.minecraftforge.event.ForgeEventFactory;
 import java.util.function.Predicate;
 
 public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchantable {
-	
+
 	private final EnchantmentData[] enchantments;
-	
+
 	public UltimateBowItem(Properties builderIn, EnchantmentData[] enchantments) {
 		super(builderIn);
 		this.enchantments = enchantments;
 	}
-	
+
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
@@ -41,12 +41,12 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 			items.add(stack);
 		}
 	}
-	
+
 	@Override
 	public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity) entityLiving;
-			
+
 			if (ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, this.getUseDuration(stack) - timeLeft, true) < 0)return;
 			if (!worldIn.isClientSide) {
 				AbstractArrowEntity arrowEntity = new UltimateArrowEntity(worldIn, entityLiving);
@@ -64,13 +64,13 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 
 				int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
 				arrowEntity.setKnockback(!CAConfig.COMMON.enableAutoEnchanting.get() ? k+1 : 1);
-				
+
 				if (!playerentity.isCreative()) {
 					stack.hurtAndBreak(1, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 				}
-				
+
 				worldIn.addFreshEntity(arrowEntity);
-				
+
 				worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
 				playerentity.awardStat(Stats.ITEM_USED.get(this));
 			}
@@ -81,11 +81,11 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	public int getUseDuration(ItemStack stack) {
 		return 9000;
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getItemInHand(handIn);
-		
+
 		playerIn.startUsingItem(handIn);
 		return ActionResult.consume(itemstack);
 	}
@@ -94,12 +94,12 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
 		return ARROW_ONLY;
 	}
-	
+
 	@Override
 	public int getDefaultProjectileRange() {
 		return 15;
 	}
-	
+
 	@Override
 	public boolean isFoil(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);

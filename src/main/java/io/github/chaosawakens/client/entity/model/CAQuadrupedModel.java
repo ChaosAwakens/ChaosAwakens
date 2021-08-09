@@ -17,7 +17,7 @@ public class CAQuadrupedModel<T extends Entity> extends AgeableModel<T> {
 	protected ModelRenderer legBackLeft;
 	protected ModelRenderer legFrontRight;
 	protected ModelRenderer legFrontLeft;
-	
+
 	public CAQuadrupedModel(int p_i225948_1_, float p_i225948_2_, boolean p_i225948_3_, float p_i225948_4_, float p_i225948_5_, float p_i225948_6_, float p_i225948_7_, int p_i225948_8_) {
 		super(p_i225948_3_, p_i225948_4_, p_i225948_5_, p_i225948_6_, p_i225948_7_, (float) p_i225948_8_);
 		this.headModel.addBox(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F, p_i225948_2_);
@@ -38,15 +38,15 @@ public class CAQuadrupedModel<T extends Entity> extends AgeableModel<T> {
 		this.legFrontLeft.addBox(-2.0F, 0.0F, -2.0F, 4.0F, (float) p_i225948_1_, 4.0F, p_i225948_2_);
 		this.legFrontLeft.setPos(3.0F, (float) (24 - p_i225948_1_), -5.0F);
 	}
-	
+
 	protected Iterable<ModelRenderer> headParts() {
 		return ImmutableList.of(this.headModel);
 	}
-	
+
 	protected Iterable<ModelRenderer> bodyParts() {
 		return ImmutableList.of(this.body, this.legBackRight, this.legBackLeft, this.legFrontRight, this.legFrontLeft);
 	}
-	
+
 	/**
 	 * Sets this entity's model rotation angles
 	 */

@@ -35,7 +35,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAnimatable, IGrabber {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	protected final Vector3d grabOffset = new Vector3d(0, 0.5, 2);
-	
+
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.noCulling = true;
@@ -46,23 +46,23 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
+
 		if (this.getAttacking()) {
 			if(this.getGrabbing(this)) {
 				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.ram_attack_animation", true));
 				//ChaosAwakens.debug("ANIMATION", event.getController().getCurrentAnimation().animationLength);
 				return PlayState.CONTINUE;
 			}
-			
+
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
+
 		if (this.getMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
-		
+
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
@@ -105,7 +105,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
-	
+
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
@@ -113,19 +113,19 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 	@Override
 	public boolean shouldRiderSit() { return false; }
-	
+
 	@Override
 	public void positionRider(Entity passenger) {
 		this.positionRider(this, passenger, Entity::setPos);
 	}
-	
+
 	public Vector3d getGrabOffset() { return this.grabOffset; }
-	
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
 		return CASoundEvents.HERCULES_BEETLE_HURT.get();
 	}
-	
+
 	@Override
 	protected SoundEvent getDeathSound() {
 		return CASoundEvents.HERCULES_BEETLE_DEATH.get();

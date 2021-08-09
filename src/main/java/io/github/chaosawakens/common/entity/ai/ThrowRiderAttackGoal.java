@@ -20,7 +20,7 @@ public class ThrowRiderAttackGoal extends MeleeAttackGoal {
 
     @Override
     public boolean canUse() {
-    	return this.mob.getPassengers().isEmpty() && super.canUse();
+        return this.mob.getPassengers().isEmpty() && super.canUse();
     }
 
     @Override

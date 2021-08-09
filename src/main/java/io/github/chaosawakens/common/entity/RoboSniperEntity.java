@@ -25,14 +25,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRangedAttackMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	
+
 	public RoboSniperEntity(EntityType<? extends RoboEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.noCulling = true;
 	}
-	
+
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		
+
 		if (this.getAttacking()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
 			return PlayState.CONTINUE;
@@ -45,7 +45,7 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
-	
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
@@ -53,7 +53,7 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 25)
@@ -64,17 +64,17 @@ public class RoboSniperEntity extends RoboEntity implements IAnimatable, IRanged
 				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
 				.add(Attributes.FOLLOW_RANGE, 24);
 	}
-	
+
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "robosnipercontroller", 0, this::predicate));
 	}
-	
+
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
-	
+
 	@Override
 	public void performRangedAttack(LivingEntity target, float distanceFactor) {
 		this.getTarget();

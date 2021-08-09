@@ -8,6 +8,6 @@ import net.minecraft.enchantment.EnchantmentData;
  */
 @FunctionalInterface
 public interface IAutoEnchantable {
-	
+
 	EnchantmentData[] enchantments();
 }

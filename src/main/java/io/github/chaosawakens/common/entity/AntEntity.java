@@ -37,10 +37,10 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class AntEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
-	
+
 	private final ConfigValue<Boolean> tpConfig;
 	private final RegistryKey<World> targetDimension;
-	
+
 	public AntEntity(EntityType<? extends AntEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
 		this.noCulling = true;
@@ -83,7 +83,7 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
 		if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
 			if(targetDimension == null) {
 				playerIn.displayClientMessage(this.inaccessibleMessage ,true);
-                return ActionResultType.PASS;
+				return ActionResultType.PASS;
 			} else {
 				MinecraftServer minecraftServer = ((ServerWorld)this.level).getServer();
 				ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);

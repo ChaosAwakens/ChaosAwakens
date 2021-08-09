@@ -6,7 +6,7 @@ import io.github.chaosawakens.ChaosAwakens;
  * @author invalid2
  */
 public class CAReflectionHelper {
-	
+
 	public static void classLoad(String classNamePath) {
 		try {
 			Class.forName(classNamePath);

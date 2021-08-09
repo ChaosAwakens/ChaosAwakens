@@ -52,13 +52,13 @@ public class ChaosAwakens {
 		LOGGER.debug(MODNAME + " Version is:" + VERSION);
 
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
-		
+
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		
+
 		//Register to the mod event bus
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
-		
+
 		if(FMLEnvironment.dist == Dist.CLIENT)
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 
@@ -96,7 +96,7 @@ public class ChaosAwakens {
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
-	
+
 	private void gatherData(final GatherDataEvent event) {
 		DataGenerator dataGenerator = event.getGenerator();
 		final ExistingFileHelper existing = event.getExistingFileHelper();
@@ -111,19 +111,19 @@ public class ChaosAwakens {
 	public static ResourceLocation prefix(String name) {
 		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
 	}
-	
+
 	public static <D> void debug(String domain, D message) {
 		LOGGER.debug("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
-	
+
 	public static <I> void info(String domain, I message) {
 		LOGGER.info("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
-	
+
 	public static <W> void warn(String domain, W message) {
 		LOGGER.warn("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
-	
+
 	public static <E> void error(String domain, E message) {
 		LOGGER.error("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}

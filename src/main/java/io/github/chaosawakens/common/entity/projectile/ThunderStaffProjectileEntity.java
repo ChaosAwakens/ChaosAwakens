@@ -19,21 +19,21 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 
 public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
-	
+
 	private static final float EXPLOSION_POWER = CAConfig.COMMON.thunderStaffExplosionSize.get();
-	
+
 	public ThunderStaffProjectileEntity(EntityType<? extends AbstractFireballEntity> p_i50166_1_, World p_i50166_2_) {
 		super(p_i50166_1_, p_i50166_2_);
 	}
-	
+
 	public ThunderStaffProjectileEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
 		super(CAEntityTypes.THUNDER_BALL.get(), x, y, z, accelX, accelY, accelZ, worldIn);
 	}
-	
+
 	public ThunderStaffProjectileEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
 		super(CAEntityTypes.THUNDER_BALL.get(), shooter, accelX, accelY, accelZ, worldIn);
 	}
-	
+
 	/**
 	 * Called when this EntityFireball hits a block or entity.
 	 */
@@ -44,7 +44,7 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 			LightningBoltEntity lightning = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, level);
 			lightning.moveTo(this.getX(), this.getY(), this.getZ(), 0, 0);
 			this.level.addFreshEntity(lightning);
-			
+
 			boolean hasFire = CAConfig.COMMON.thunderStaffExplosionFire.get();
 			switch (CAConfig.COMMON.thunderStaffExplosionType.get()) {
 				case 0:
@@ -60,13 +60,13 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 			this.remove();
 		}
 	}
-	
+
 	@OnlyIn(Dist.CLIENT)
 	public ItemStack getItem() {
 		ItemStack itemstack = this.getItemRaw();
 		return itemstack.isEmpty() ? new ItemStack(Items.FIRE_CHARGE) : itemstack;
 	}
-	
+
 	@Nonnull
 	@Override
 	public IPacket<?> getAddEntityPacket() {

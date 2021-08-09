@@ -24,28 +24,28 @@ public class MinersDreamItem extends Item {
 	private static final int HOLE_LENGTH = 36;
 	private static final int HOLE_WIDTH = 4;
 	private static final int HOLE_HEIGHT = 8;
-	
+
 	public MinersDreamItem(Properties builderIn) {
 		super(builderIn);
 	}
-	
+
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
 		Direction direction = context.getHorizontalDirection();
 		World worldIn = context.getLevel();
-		
+
 		if (worldIn.isClientSide)return ActionResultType.FAIL;
 		if (direction == Direction.UP || direction == Direction.DOWN)return ActionResultType.FAIL;
-		
+
 		BlockPos breakPos = context.getClickedPos();
 		int targetY = breakPos.getY() % 8;
 		PlayerEntity playerIn = context.getPlayer();
 		ChaosAwakens.debug("AA", targetY);
 		Vector3i facing = direction.getNormal();
-		
+
 		playerIn.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
 		worldIn.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F, 0.25F, 0.25F);
-		
+
 		for (int i = 0; i < HOLE_LENGTH; i++) {
 			for (int j = 0; j < HOLE_HEIGHT; j++) {
 				for (int k = -HOLE_WIDTH ; k <= HOLE_WIDTH; k++) {
@@ -55,16 +55,16 @@ public class MinersDreamItem extends Item {
 					BlockState targetState = worldIn.getBlockState(targetPos);
 					if(targetState.is(CATags.MINERS_DREAM_MINEABLE)) {
 						this.placeWoodPillars(worldIn, targetPos, i, j, k);
-					}	
+					}
 				}
 			}
 		}
 		context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
 		context.getItemInHand().shrink(1);
-		
+
 		return ActionResultType.SUCCESS;
 	}
-	
+
 	/**
 	 * Places the wood pillars that the mineshaft has
 	 * @param worldIn The world this is being placed on
@@ -83,7 +83,7 @@ public class MinersDreamItem extends Item {
 				worldIn.setBlockAndUpdate(pos, CABlocks.MOULDY_FENCE.get().defaultBlockState());
 				return;
 			}
-			
+
 			if (j == HOLE_HEIGHT-1) {
 				if(k == 0) {
 					worldIn.setBlockAndUpdate(pos, Blocks.GLOWSTONE.defaultBlockState());

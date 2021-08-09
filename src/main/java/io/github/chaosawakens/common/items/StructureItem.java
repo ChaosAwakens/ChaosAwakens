@@ -12,33 +12,33 @@ import net.minecraft.world.server.ServerWorld;
 
 public class StructureItem extends Item {
 	String structureName;
-	
+
 	public StructureItem(Properties builderIn, String structureName) {
 		super(builderIn);
 		this.structureName = structureName;
 	}
-	
+
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
 		World world = context.getLevel();
 		BlockPos pos = context.getClickedPos();
-		
+
 		if (world instanceof ServerWorld) {
 			Template template = ((ServerWorld) world).getStructureManager()
 					.getOrCreate(new ResourceLocation("chaosawakens", structureName));
 			PlacementHelper targetPlacement = new PlacementHelper(pos, template.getSize(), context.getHorizontalDirection());
 			if (template != null) {
-				template.placeInWorldChunk((ServerWorld) world, 
-						targetPlacement.getPos(), 
+				template.placeInWorldChunk((ServerWorld) world,
+						targetPlacement.getPos(),
 						new PlacementSettings().setRotation( targetPlacement.getRotation()).setMirror(Mirror.NONE).setChunkPos(null).setIgnoreEntities(false), (world).random);
 				context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
 				context.getItemInHand().shrink(1);
 			}
 		}
-		
+
 		return ActionResultType.SUCCESS;
 	}
-	
+
 	/**
 	 * Does the necessary value manipulation to figure out where to put the structure
 	 * @author invalid2
@@ -46,7 +46,7 @@ public class StructureItem extends Item {
 	static class PlacementHelper {
 		private final BlockPos pos;
 		private final Rotation rotation;
-		
+
 		public PlacementHelper(BlockPos pos, BlockPos templateSize, Direction direction) {
 			super();
 			switch(direction) {
@@ -71,7 +71,7 @@ public class StructureItem extends Item {
 					this.rotation = Rotation.NONE;
 			}
 		}
-		
+
 		public BlockPos getPos() { return pos; }
 		public Rotation getRotation() { return rotation; }
 	}

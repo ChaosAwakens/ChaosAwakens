@@ -50,25 +50,25 @@ public class WaspDungeonStructure extends Structure<NoFeatureConfig> {
 
 		return topBlock.getFluidState().isEmpty();
 	}
-	
+
 	public static class Start extends StructureStart<NoFeatureConfig> {
-		
+
 		public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
-		
+
 		@Override
 		public void generatePieces(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn, NoFeatureConfig config) {
 			int x = (chunkX << 4) + 7;
 			int z = (chunkZ << 4) + 7;
-			
+
 			BlockPos blockpos = new BlockPos(x, 0, z);
-			
+
 			JigsawManager.addPieces(dynamicRegistryManager,
 					new VillageConfig(
 							() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, "wasp_dungeon/start_pool")), 10),
 					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, blockpos, pieces, random, false, true);
-			
+
 			this.calculateBoundingBox();
 		}
 	}

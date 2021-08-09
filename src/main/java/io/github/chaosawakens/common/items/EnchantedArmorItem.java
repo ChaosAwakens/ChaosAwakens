@@ -12,14 +12,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
-	
+
 	private final EnchantmentData[] enchantments;
-	
+
 	public EnchantedArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, EnchantmentData[] enchantments) {
 		super(materialIn, slot, builderIn);
 		this.enchantments = enchantments;
 	}
-	
+
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
@@ -31,7 +31,7 @@ public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
 			items.add(stack);
 		}
 	}
-	
+
 	@Override
 	public boolean isFoil(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
@@ -41,5 +41,5 @@ public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
 	public EnchantmentData[] enchantments() {
 		return this.enchantments;
 	}
-	
+
 }

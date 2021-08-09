@@ -30,12 +30,12 @@ import java.util.Objects;
 
 public class EnchantedBlockItem extends Item {
 	private final Block block;
-	
+
 	public EnchantedBlockItem(Block blockIn, Item.Properties builder) {
 		super(builder);
 		this.block = blockIn;
 	}
-	
+
 	/**
 	 * Called when this item is used when targetting a Block
 	 */
@@ -43,7 +43,7 @@ public class EnchantedBlockItem extends Item {
 		ActionResultType actionresulttype = this.tryPlace(new BlockItemUseContext(context));
 		return !actionresulttype.consumesAction() && this.isEdible() ? this.use(context.getLevel(), Objects.requireNonNull(context.getPlayer()), context.getHand()).getResult() : actionresulttype;
 	}
-	
+
 	public ActionResultType tryPlace(BlockItemUseContext context) {
 		if (!context.canPlace()) {
 			return ActionResultType.FAIL;
@@ -72,52 +72,52 @@ public class EnchantedBlockItem extends Item {
 							CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) playerentity, blockpos, itemstack);
 						}
 					}
-					
+
 					SoundType soundtype = blockstate1.getSoundType(world, blockpos, context.getPlayer());
 					world.playSound(playerentity, blockpos, this.getPlaceSound(blockstate1, world, blockpos, context.getPlayer()), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 					if (playerentity == null || !playerentity.abilities.instabuild) {
 						itemstack.shrink(1);
 					}
-					
+
 					return ActionResultType.sidedSuccess(world.isClientSide);
 				}
 			}
 		}
 	}
-	
+
 	@Deprecated // Forge: Use more sensitive version {@link BlockItem#getPlaceSound(BlockState,
-				// IBlockReader, BlockPos, Entity) }
+	// IBlockReader, BlockPos, Entity) }
 	protected SoundEvent getPlaceSound(BlockState state) {
 		return state.getSoundType().getPlaceSound();
 	}
-	
+
 	// Forge: Sensitive version of BlockItem#getPlaceSound
 	protected SoundEvent getPlaceSound(BlockState state, World world, BlockPos pos, PlayerEntity entity) {
 		return state.getSoundType(world, pos, entity).getPlaceSound();
 	}
-	
+
 	@Nullable
 	public BlockItemUseContext getBlockItemUseContext(BlockItemUseContext context) {
 		return context;
 	}
-	
+
 	protected void onBlockPlaced(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack) {
 		setTileEntityNBT(worldIn, player, pos, stack);
 	}
-	
+
 	@Nullable
 	protected BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockState blockstate = this.getBlock().getStateForPlacement(context);
 		return blockstate != null && this.canPlace(context, blockstate) ? blockstate : null;
 	}
-	
+
 	private BlockState updateBlockStateFromTag(BlockPos p_219985_1_, World p_219985_2_, ItemStack p_219985_3_, BlockState p_219985_4_) {
 		BlockState blockstate = p_219985_4_;
 		CompoundNBT compoundnbt = p_219985_3_.getTag();
 		if (compoundnbt != null) {
 			CompoundNBT compoundnbt1 = compoundnbt.getCompound("BlockStateTag");
 			StateContainer<Block, BlockState> statecontainer = p_219985_4_.getBlock().getStateDefinition();
-			
+
 			for (String s : compoundnbt1.getAllKeys()) {
 				Property<?> property = statecontainer.getProperty(s);
 				if (property != null) {
@@ -126,32 +126,32 @@ public class EnchantedBlockItem extends Item {
 				}
 			}
 		}
-		
+
 		if (blockstate != p_219985_4_) {
 			p_219985_2_.setBlock(p_219985_1_, blockstate, 2);
 		}
-		
+
 		return blockstate;
 	}
-	
+
 	private static <T extends Comparable<T>> BlockState updateState(BlockState p_219988_0_, Property<T> p_219988_1_, String p_219988_2_) {
 		return p_219988_1_.getValue(p_219988_2_).map((p_219986_2_) -> p_219988_0_.setValue(p_219988_1_, p_219986_2_)).orElse(p_219988_0_);
 	}
-	
+
 	protected boolean canPlace(BlockItemUseContext p_195944_1_, BlockState p_195944_2_) {
 		PlayerEntity playerentity = p_195944_1_.getPlayer();
 		ISelectionContext iselectioncontext = playerentity == null ? ISelectionContext.empty() : ISelectionContext.of(playerentity);
 		return (!this.checkPosition() || p_195944_2_.canSurvive(p_195944_1_.getLevel(), p_195944_1_.getClickedPos())) && p_195944_1_.getLevel().isUnobstructed(p_195944_2_, p_195944_1_.getClickedPos(), iselectioncontext);
 	}
-	
+
 	protected boolean checkPosition() {
 		return true;
 	}
-	
+
 	protected boolean placeBlock(BlockItemUseContext context, BlockState state) {
 		return context.getLevel().setBlock(context.getClickedPos(), state, 11);
 	}
-	
+
 	public static void setTileEntityNBT(World worldIn, @Nullable PlayerEntity player, BlockPos pos, ItemStack stackIn) {
 		MinecraftServer minecraftserver = worldIn.getServer();
 		if (minecraftserver != null) {
@@ -162,7 +162,7 @@ public class EnchantedBlockItem extends Item {
 					if (!worldIn.isClientSide && tileentity.onlyOpCanSetNbt() && (player == null || !player.canUseGameMasterBlocks())) {
 						return;
 					}
-					
+
 					CompoundNBT compoundnbt1 = tileentity.save(new CompoundNBT());
 					CompoundNBT compoundnbt2 = compoundnbt1.copy();
 					compoundnbt1.merge(compoundnbt);
@@ -178,14 +178,14 @@ public class EnchantedBlockItem extends Item {
 
 		}
 	}
-	
+
 	/**
 	 * Returns the unlocalized name of this item.
 	 */
 	public String getDescriptionId() {
 		return this.getBlock().getDescriptionId();
 	}
-	
+
 	/**
 	 * returns a list of items with the same ID, but different meta (eg: dye returns
 	 * 16 items)
@@ -194,9 +194,9 @@ public class EnchantedBlockItem extends Item {
 		if (this.allowdedIn(group)) {
 			this.getBlock().fillItemCategory(group, items);
 		}
-		
+
 	}
-	
+
 	/**
 	 * allows items to add custom lines of information to the mouseover description
 	 */
@@ -205,11 +205,11 @@ public class EnchantedBlockItem extends Item {
 		super.appendHoverText(stack, worldIn, tooltip, flagIn);
 		this.getBlock().appendHoverText(stack, worldIn, tooltip, flagIn);
 	}
-	
+
 	public Block getBlock() {
 		return this.getBlockRaw() == null ? null : this.getBlockRaw().delegate.get();
 	}
-	
+
 	private Block getBlockRaw() {
 		return this.block;
 	}

@@ -13,15 +13,15 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus =  Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class CABlockItemColors {
-	
+
 	public static final IBlockColor GRASS_BLOCK_COLOR = (state, reader,  pos, color) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5, 1);
-	
+
 	@SubscribeEvent
 	public static void registerBlockColors(ColorHandlerEvent.Block event) {
 		event.getBlockColors().register(GRASS_BLOCK_COLOR,
 				CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get());
 	}
-	
+
 	@SubscribeEvent
 	public static void registerItemColors(ColorHandlerEvent.Item event) {
 		event.getItemColors().register((stack, color) -> event.getBlockColors().getColor(((BlockItem) stack.getItem()).getBlock().defaultBlockState(), null, null, color),
