@@ -4,7 +4,7 @@
 	"itemGroup.chaosawakens_food_item_group": "Chaos Awakens Food",
 	"itemGroup.chaosawakens_equipment_item_group": "Chaos Awakens Equipment",
 	"itemGroup.chaosawakens_eggs_item_group": "Chaos Awakens Spawn Eggs",
-	
+
 	"advancements.chaosawakens.root.title": "Thank You for installing Chaos Awakens!",
 	"advancements.chaosawakens.root.description": "Have fun :)",
 	"advancements.chaosawakens.cats_eye_armor.title": "Woah! Its Clear!",
@@ -43,7 +43,7 @@
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
-    "entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
+	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
 
 	"entity.chaosawakens.ent": "Ent",
 	"entity.chaosawakens.red_ant": "Red Ant",
@@ -175,6 +175,8 @@
 
 	"block.chaosawakens.ender_eye_block": "Eye of Ender Block",
 	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
+
+	"block.chaosawakens.duplication_log": "Duplication Tree Log",
 
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",
@@ -359,6 +361,10 @@
 	"block.chaosawakens.fossilised_hercules_beetle": "Fossilised Hercules Beetle",
 	"block.chaosawakens.fossilised_ruby_bug": "Fossilised Ruby Bug",
 	"block.chaosawakens.fossilised_emerald_gator": "Fossilised Emerald Gator",
+	"block.chaosawakens.fossilised_wtf": "Fossilised WTF",
+	"block.chaosawakens.fossilised_scorpion": "Fossilised Scorpion",
+	"block.chaosawakens.fossilised_wasp": "Fossilised Wasp",
+	"block.chaosawakens.fossilised_piraporu": "Fossilised Piráporu",
 
 	"block.chaosawakens.crystalised_fairy": "Crystalised Fairy",
 	"block.chaosawakens.crystalised_rat": "Crystalised Rat",
@@ -475,6 +481,8 @@
 	"item.chaosawakens.zoo_cage_extra_large": "Extra Large Zoo Cage",
 	"item.chaosawakens.miners_dream": "Miner's Dream",
 
+	"block.chaosawakens.tube_worm": "Tube Worm",
+	"block.chaosawakens.tube_worm_plant": "Tube Worm",
 	"block.chaosawakens.corn_plant": "Corn Plant",
 	"block.chaosawakens.tomato_plant": "Tomato Plant",
 	"block.chaosawakens.lettuce_plant": "Lettuce Plant",
@@ -494,5 +502,25 @@
 	"item.chaosawakens.platinum_coin": "Platinum Coin",
 
 	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
-	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet."
+	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet.",
+
+	"tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info",
+	"tooltip.chaosawakens.aluminum_ore": "Aluminum is one of the more common ores in the overworld, it is found between y40-y24",
+	"tooltip.chaosawakens.fossilised_ent": "The Fossilised Ent can be turned into a Ent",
+	"tooltip.chaosawakens.fossilised_hercules_beetle": "The Fossilised Hercules Beetle can be turned into a Hercules Beetle",
+	"tooltip.chaosawakens.fossilised_ruby_bug": "The Fossilised Ruby Bug can be turned into a Ruby Bug",
+	"tooltip.chaosawakens.fossilised_emerald_gator": "The Fossilised Emerald Gator can be turned into a Emerald Gator",
+	"tooltip.chaosawakens.fossilised_wtf": "The Fossilised WTF cannot be turned into a WTF yet",
+	"tooltip.chaosawakens.fossilised_scorpion": "The Fossilised Scorpion cannot be turned into a Scorpion yet",
+	"tooltip.chaosawakens.fossilised_wasp": "The Fossilised Wasp can be turned into a Wasp",
+	"tooltip.chaosawakens.fossilised_piraporu": "The Fossilised Piráporu cannot be turned into a Piráporu yet",
+	"tooltip.chaosawakens.crystal_torch": "A Fancy Crystal Torch",
+	"tooltip.chaosawakens.wall_crystal_torch": "A Fancy Crystal Torch",
+	"tooltip.chaosawakens.sunstone_torch": "A Fancy Sunstone Torch",
+	"tooltip.chaosawakens.wall_sunstone_torch": "A Fancy Sunstone Torch",
+	"tooltip.chaosawakens.extreme_torch": "A Fancy Extreme Torch",
+	"tooltip.chaosawakens.wall_extreme_torch": "A Fancy Extreme Torch",
+	"tooltip.chaosawakens.mouldy_planks": "A Mouldy Set of Wood, Found when using the Miners Dream",
+	"tooltip.chaosawakens.mouldy_slab": "A Mouldy Set of Wood, Found when using the Miners Dream",
+	"tooltip.chaosawakens.mouldy_fence": "A Mouldy Set of Wood, Found when using the Miners Dream"
 }

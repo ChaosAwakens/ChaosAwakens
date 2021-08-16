@@ -41,14 +41,14 @@ import java.util.Map;
  * @author invalid2
  */
 public class CommonSetupEvent {
-	
+
 	/**
 	 * List for configured features, so they get registered at the correct time
 	 */
 	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
-	
+
 	private static Method codecMethod;
-	
+
 	public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {
 		PacketHandler.init();
 		Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[] { 0,0, 0, 0, 1, 1, 0, 2 });
@@ -57,11 +57,11 @@ public class CommonSetupEvent {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
 			CAVillagers.registerVillagerTypes();
-			
+
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
 		});
-		
+
 		// TODO Make it so we don't have to add stuff here manually
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_DIMENSION);
@@ -73,12 +73,12 @@ public class CommonSetupEvent {
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
 	}
-	
+
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (event.getWorld() instanceof ServerWorld) {
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
 			ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
-			
+
 			try {
 				if (codecMethod == null)codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
 				// TODO Fix this
@@ -90,12 +90,12 @@ public class CommonSetupEvent {
 			} catch(UnableToFindMethodException e) {
 				if (CAConfig.COMMON.terraforgedCheckMsg.get())
 					ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.dimension().location()
-						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
-						+ " if you aren't using Terraforged please ignore this message");
+							+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
+							+ " if you aren't using Terraforged please ignore this message");
 			}
-			
+
 			if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD))return;
-			
+
 			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
 			tempMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
 			tempMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));

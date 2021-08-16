@@ -69,8 +69,8 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> YELLOW_CRYSTAL_TREE = register("yellow_crystal_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CABlocks.CRYSTAL_LOG.get().defaultBlockState()), new SimpleBlockStateProvider(CABlocks.YELLOW_CRYSTAL_LEAVES.get().defaultBlockState()), new BlobFoliagePlacer(FeatureSpread.fixed(4), FeatureSpread.fixed(3), 3), new StraightTrunkPlacer(7, 2, 0), new TwoLayerFeature(2, 0, 2)).ignoreVines().build()));
 
 	public static final ConfiguredFeature<?, ?> TREES_CRYSTAL_PLAINS = register("trees_crystal_dimension", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(GREEN_CRYSTAL_TREE.weighted(0.4F), RED_CRYSTAL_TREE.weighted(0.3F), YELLOW_CRYSTAL_TREE.weighted(0.1F)), GREEN_CRYSTAL_TREE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.1F, 1))));
-	
-	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_ENERGY = register("crystal_ore_energy", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CRYSTAL_ENERGY, 5)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(60, 7))).squared().count(5));	
+
+	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_ENERGY = register("crystal_ore_energy", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CRYSTAL_ENERGY, 5)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(60, 7))).squared().count(5));
 	public static final ConfiguredFeature<?, ?> GEODE_PINK_TOURMALINE = register("geode_pink_tourmaline", CAFeatures.GEODE.get().configured( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, States.CLUSTER_PINK_TOURMALINE, 28, 48, 40)));
 	public static final ConfiguredFeature<?, ?> GEODE_CATS_EYE = register("geode_cats_eye", CAFeatures.GEODE.get().configured( new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, States.CLUSTER_CATS_EYE, 5, 28, 15)));
 
@@ -89,7 +89,7 @@ public class CAConfiguredFeatures {
 		CommonSetupEvent.configFeatures.add( new FeatureWrapper(key, configuredFeature));
 		return configuredFeature;
 	}
-	
+
 	public static final class States {
 		protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.defaultBlockState();
 		protected static final BlockState STONE = Blocks.STONE.defaultBlockState();
@@ -128,7 +128,7 @@ public class CAConfiguredFeatures {
 		protected static final BlockState CRYSTAL_GRASS_BLOCK = CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState();
 		protected static final BlockState CRYSTAL_TERMITE_NEST = CABlocks.CRYSTAL_TERMITE_NEST.get().defaultBlockState();
 	}
-	
+
 	public static final class RuleTests {
 		//public static final RuleTest BASE_STONE_MINING = new TagMatchRuleTest(BlockTags.getCollection().getTagByID(new ResourceLocation(ChaosAwakens.MODID + "base_stone_mining")));
 		public static final RuleTest BASE_STONE_CRYSTAL = new TagMatchRuleTest(CATags.BASE_STONE_CRYSTAL);

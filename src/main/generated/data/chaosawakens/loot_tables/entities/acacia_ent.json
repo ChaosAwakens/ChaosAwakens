@@ -28,7 +28,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_log"
+          "name": "minecraft:acacia_log"
         }
       ]
     },
@@ -56,7 +56,7 @@
               "count": 1.0
             }
           ],
-          "name": "minecraft:red_mushroom"
+          "name": "minecraft:acacia_leaves"
         },
         {
           "type": "minecraft:item",
@@ -79,7 +79,35 @@
               "count": 1.0
             }
           ],
-          "name": "minecraft:brown_mushroom"
+          "name": "minecraft:acacia_sapling"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 0.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
+            }
+          ],
+          "name": "minecraft:grass"
         }
       ]
     },

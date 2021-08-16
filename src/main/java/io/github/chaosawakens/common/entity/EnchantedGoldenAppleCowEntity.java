@@ -26,12 +26,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 
 @OnlyIn(
-	value = Dist.CLIENT,
-	_interface = IChargeableMob.class
+		value = Dist.CLIENT,
+		_interface = IChargeableMob.class
 )
 public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChargeableMob {
 	private static final DataParameter<Boolean> ENCHANTED = EntityDataManager.defineId(EnchantedGoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
-	
+
 	public EnchantedGoldenAppleCowEntity(EntityType<? extends EnchantedGoldenAppleCowEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
@@ -50,7 +50,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 10)
@@ -63,7 +63,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
 		return CAConfig.COMMON.enableEnchantedGoldenAppleCowBreeding.get() ? CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(world) : null;
 	}
-	
+
 	@Override
 	public boolean canFallInLove() {
 		return CAConfig.COMMON.enableEnchantedGoldenAppleCowBreeding.get();
@@ -74,7 +74,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 		super.defineSynchedData();
 		this.entityData.define(ENCHANTED, true);
 	}
-	
+
 	@Override
 	public void addAdditionalSaveData(CompoundNBT compound) {
 		super.addAdditionalSaveData(compound);
@@ -82,7 +82,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 			compound.putBoolean("enchanted", true);
 		}
 	}
-	
+
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
@@ -91,32 +91,32 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 		super.readAdditionalSaveData(compound);
 		this.entityData.set(ENCHANTED, compound.getBoolean("enchanted"));
 	}
-	
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.COW_AMBIENT;
 	}
-	
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
 		return SoundEvents.COW_HURT;
 	}
-	
+
 	@Override
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COW_DEATH;
 	}
-	
+
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
 	}
-	
+
 	@Override
 	protected float getSoundVolume() {
 		return 0.4F;
 	}
-	
+
 	@Override
 	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
@@ -129,12 +129,12 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 			return super.mobInteract(playerIn, hand);
 		}
 	}
-	
+
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
 	}
-	
+
 	@Override
 	public boolean isPowered() {
 		return this.entityData.get(ENCHANTED);

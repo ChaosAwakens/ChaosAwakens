@@ -12,11 +12,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class AppleCowRender extends MobRenderer<AppleCowEntity, CowModel<AppleCowEntity>> {
 	private static final ResourceLocation APPLE_COW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow.png");
-	
+
 	public AppleCowRender(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new CowModel<>(), 0.7F);
 	}
-	
+
 	@Override
 	public ResourceLocation getTextureLocation(AppleCowEntity entity) {
 		return APPLE_COW_TEXTURE;

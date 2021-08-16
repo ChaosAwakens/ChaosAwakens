@@ -10,11 +10,11 @@ import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
 public class PeacockBootsItem extends ArmorItem {
-	
+
 	public PeacockBootsItem(IArmorMaterial materialIn, Properties builderIn) {
 		super(materialIn, EquipmentSlotType.FEET, builderIn);
 	}
-	
+
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		super.onArmorTick(stack, world, player);

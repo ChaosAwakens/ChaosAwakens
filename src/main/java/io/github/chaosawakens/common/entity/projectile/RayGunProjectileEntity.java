@@ -32,7 +32,7 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
 	public RayGunProjectileEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
 		super(CAEntityTypes.EXPLOSIVE_BALL.get(), shooter, accelX, accelY, accelZ, worldIn);
 	}
-	
+
 	/**
 	 * Called when this EntityFireball hits a block or entity.
 	 */
@@ -56,13 +56,13 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
 			this.remove();
 		}
 	}
-	
+
 	@OnlyIn(Dist.CLIENT)
 	public ItemStack getItem() {
 		ItemStack itemstack = this.getItemRaw();
 		return itemstack.isEmpty() ? new ItemStack(Items.FIRE_CHARGE) : itemstack;
 	}
-	
+
 	@Nonnull
 	@Override
 	public IPacket<?> getAddEntityPacket() {

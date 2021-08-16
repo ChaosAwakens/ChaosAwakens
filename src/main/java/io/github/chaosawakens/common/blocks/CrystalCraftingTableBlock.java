@@ -17,19 +17,19 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 /**
- * This class nothing yet, thus 
- * 
+ * This class nothing yet, thus
+ *
  * @author invalid2
  *
  */
 public class CrystalCraftingTableBlock extends Block {
-	
+
 	private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent("container.crystal_crafting_table");
-	
+
 	public CrystalCraftingTableBlock(Properties properties) {
 		super(properties);
 	}
-	
+
 	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (worldIn.isClientSide) {
 			return ActionResultType.SUCCESS;
@@ -39,7 +39,7 @@ public class CrystalCraftingTableBlock extends Block {
 			return ActionResultType.CONSUME;
 		}
 	}
-	
+
 	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
 		return new SimpleNamedContainerProvider((id, inventory, player) -> new CraftingTableContainer(id, inventory, IWorldPosCallable.create(worldIn, pos), this), CONTAINER_NAME);
 	}

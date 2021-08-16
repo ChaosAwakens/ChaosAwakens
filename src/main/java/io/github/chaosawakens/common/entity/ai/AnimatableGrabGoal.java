@@ -13,12 +13,12 @@ import net.minecraft.entity.player.PlayerEntity;
  *
  */
 public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> extends AnimatableGoal {
-	
+
 	private boolean isGrabbing;
 	private boolean hasGrabbed;
 	private final int avrgNumHits;
 	private int numOfHits;
-	
+
 	/**
 	 * Grabs the target entity and deals some damage
 	 */
@@ -27,39 +27,39 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 		this.avrgNumHits = avrgNumHits;
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
-	
+
 	@Override
 	public boolean canUse() {
 		if(RANDOM.nextInt(10) == 0)return false;
-		
+
 		return this.checkIfValid(this, this.entity, this.entity.getTarget());
 	}
-	
+
 	@Override
 	public boolean canContinueToUse() {
 		if(RANDOM.nextInt(10) == 0)return true;
-		
+
 		return this.checkIfValid(this, this.entity, this.entity.getTarget());
 	}
-	
+
 	@Override
 	public void stop() {
 		this.isGrabbing = false;
 		((IGrabber) this.entity).setGrabbing(this.entity, false);
 		this.hasGrabbed = false;
 	}
-	
+
 	@Override
 	public void tick() {
 		this.baseTick();
 		LivingEntity target = this.entity.getTarget();
 		if(target == null || this.hasGrabbed)return;
-		
+
 		this.grabTarget(target);
-		
+
 		target.rideTick();
 	}
-	
+
 	protected void grabTarget(LivingEntity target) {
 		if(this.isGrabbing) {
 			this.attackWhileGrab(target);
@@ -70,7 +70,7 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 		this.isGrabbing = true;
 		((IGrabber) this.entity).setGrabbing(this.entity, true);
 	}
-	
+
 	protected void attackWhileGrab(LivingEntity target) {
 		if(RANDOM.nextInt(this.avrgNumHits) < this.avrgNumHits - this.numOfHits) {
 			this.entity.doHurtTarget(target);
@@ -79,15 +79,15 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 		}
 		this.releaseTarget(target);
 	}
-	
+
 	protected void releaseTarget(LivingEntity target) {
 		this.hasGrabbed = true;
 		this.isGrabbing = false;
 		this.entity.setAttacking(false);
 		((IGrabber) this.entity).setGrabbing(this.entity, false);
-		
+
 	}
-	
+
 	private boolean checkIfValid(AnimatableGrabGoal<?> goal, AnimatableMonsterEntity attacker, LivingEntity target) {
 		if(target == null)return false;
 		if(target.isAlive() && !target.isSpectator()) {

@@ -54,7 +54,7 @@ public class CAItemModelGenerator extends ItemModelProvider {
 				continue;
 
 			ChaosAwakens.LOGGER.info(item.getId());
-			
+
 			getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
 		}
 	}
@@ -67,12 +67,12 @@ public class CAItemModelGenerator extends ItemModelProvider {
 			 *  Skip elements that have no block model inside of assets/chaosawakens/models/block
 			 *  or already have an existing item model at assets/chaosawakens/models/item
 			 */
-			
+
 			if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "block/" + name), MODEL) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
 				continue;
-			
+
 			ChaosAwakens.LOGGER.info(item.getId());
-			
+
 			withExistingParent(name, new ResourceLocation(ChaosAwakens.MODID, "block/" + name));
 
 		}

@@ -25,15 +25,15 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author invalid2
  */
 public class BiomeLoadEventSubscriber {
-	
+
 	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
 		StructureHandler.addfeatures(event);
 		StructureHandler.addStructureSpawns(event);
 		MobSpawnHandler.addMobSpawns(event);
 	}
-	
+
 	private static class MobSpawnHandler {
-		
+
 		// Mobs that appear on any biome, but only on the overworld
 //		private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> {
 //		};
@@ -42,22 +42,22 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 15, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 30, 2, 5));
 		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 10, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
 		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> PLAINS_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.APPLE_COW.get(), 7, 4, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.GOLDEN_APPLE_COW.get(), 4, 3, 3));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), 1, 1, 1));
 		};
-		
+
 		public static void addMobSpawns(BiomeLoadingEvent event) {
 			MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
-			
+
 			switch (event.getCategory()) {
 				case SWAMP:
 					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
@@ -74,20 +74,20 @@ public class BiomeLoadEventSubscriber {
 				default:
 					if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
 //						OVERWORLD_MOBS.accept(spawnInfoBuilder);
-					break;
+						break;
 			}
 		}
 	}
-	
+
 	private static class StructureHandler {
-		
+
 		public static void addfeatures(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();
-			
+
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
-			
+
 			BiomeLoadEventSubscriber.setEntDungeon((struct) -> gen.getStructures().add(() -> struct), event);
-			
+
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
@@ -119,19 +119,19 @@ public class BiomeLoadEventSubscriber {
 					addVillageDimOres(gen);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 			}
-			
+
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CRYSTAL_PLAINS);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addCrystalDimOres(gen);
 			}
 		}
-		
+
 		public static void addStructureSpawns(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder builder = event.getGeneration();
-			
+
 			BiomeLoadEventSubscriber.setEntDungeon((struct) -> builder.addStructureStart(struct), event);
-			
+
 			switch (event.getCategory()) {
 				case FOREST:
 					builder.addStructureStart(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
@@ -223,7 +223,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RAINBOW_ANT_NEST);
 			}
 		}
-		
+
 		private static void addCrystalDimOres(BiomeGenerationSettingsBuilder gen) {
 			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_ORE_ENERGY);
 			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
@@ -246,15 +246,15 @@ public class BiomeLoadEventSubscriber {
 //			}
 //		}
 	}
-	
+
 	public static void setEntDungeon(Function<StructureFeature<?, ?>, ?> func, BiomeLoadingEvent event) {
 		RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
-		
-		if(biome.getRegistryName().toString().contains("birch")) {func.apply(ConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);return;}
+
+		if(biome.getRegistryName().toString().contains("birch")){func.apply(ConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);return;}
 		if(biome.getRegistryName().toString().contains("dark")){func.apply(ConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);return;}
 		if(biome.getRegistryName().toString().contains("crimson")){func.apply(ConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);return;}
 		if(biome.getRegistryName().toString().contains("warped")){func.apply(ConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);return;}
-		
+
 		switch(event.getCategory()) {
 			case JUNGLE:
 				func.apply(ConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);

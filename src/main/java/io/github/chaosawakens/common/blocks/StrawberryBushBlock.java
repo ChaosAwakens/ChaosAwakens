@@ -23,25 +23,25 @@ import java.util.function.Supplier;
  *
  */
 public class StrawberryBushBlock extends SweetBerryBushBlock {
-	
+
 	private final Supplier<? extends Item> seedItem;
 	private final Supplier<? extends Item> foodItem;
-	
+
 	/**
 	 * @param properties
 	 */
 	public StrawberryBushBlock(Supplier<? extends Item> seedItem, Supplier<? extends Item> foodItem, Properties properties) {
 		super(properties);
-		
+
 		this.seedItem = seedItem;
 		this.foodItem = foodItem;
 	}
-	
+
 	@Override
 	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(seedItem.get());
 	}
-	
+
 	@Override
 	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		int age = state.getValue(AGE);
@@ -53,12 +53,12 @@ public class StrawberryBushBlock extends SweetBerryBushBlock {
 			popResource(worldIn, pos, new ItemStack(this.foodItem.get(), j + (flag ? 1 : 0)));
 			worldIn.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
 			worldIn.setBlock(pos, state.setValue(AGE, 1), 2);
-			
+
 			return ActionResultType.sidedSuccess(worldIn.isClientSide);
 		}
 		return super.use(state, worldIn, pos, player, handIn, hit);
 	}
-	
+
 	@Override
 	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {}
 }

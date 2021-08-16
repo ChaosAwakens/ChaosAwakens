@@ -10,14 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
-	
+
 	private final EnchantmentData[] enchantments;
-	
+
 	public EnchantedAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
 		this.enchantments = enchantments;
 	}
-	
+
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
@@ -29,7 +29,7 @@ public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 			items.add(stack);
 		}
 	}
-	
+
 	@Override
 	public boolean isFoil(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
@@ -39,5 +39,5 @@ public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 	public EnchantmentData[] enchantments() {
 		return this.enchantments;
 	}
-	
+
 }

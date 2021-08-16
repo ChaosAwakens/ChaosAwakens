@@ -27,12 +27,12 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 	public IrukandjiArrowEntity(World worldIn, LivingEntity shooter) {
 		super(CAEntityTypes.IRUKANDJI_ARROW.get(), shooter, worldIn);
 	}
-	
+
 	@Override
 	protected ItemStack getPickupItem() {
 		return new ItemStack(CAItems.IRUKANDJI_ARROW.get());
 	}
-	
+
 	@Override
 	public void readAdditionalSaveData(CompoundNBT compound) {
 		super.readAdditionalSaveData(compound);
@@ -40,22 +40,22 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 			this.duration = compound.getInt("Duration");
 		}
 	}
-	
+
 	@Override
 	public void tick() {
 		super.tick();
 		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) {
 			this.level.broadcastEntityEvent(this, (byte) 0);
 		}
-		
+
 	}
-	
+
 	@Override
 	public void addAdditionalSaveData(CompoundNBT compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putInt("Duration", this.duration);
 	}
-	
+
 	@Override
 	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);

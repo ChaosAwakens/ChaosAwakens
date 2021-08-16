@@ -24,7 +24,7 @@ public class UltimateHoeItem extends EnchantedHoeItem {
     public ActionResultType useOn(ItemUseContext context) {
         World world = context.getLevel();
         BlockPos eventPos = context.getClickedPos();
-        
+
         int hook = ForgeEventFactory.onHoeUse(context);
         if (hook != 0) return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
         if (context.getClickedFace() != Direction.DOWN && world.isEmptyBlock(eventPos.above())) {
@@ -38,7 +38,7 @@ public class UltimateHoeItem extends EnchantedHoeItem {
                 for (int x = -1; x < 2; x++) {
                     for (int y = -1; y < 2; y++) {
                         for (int z = -1; z < 2; z++) {
-                        	BlockPos targetPos = new BlockPos(eventPos.getX() + x, eventPos.getY() + y, eventPos.getZ() + z);
+                            BlockPos targetPos = new BlockPos(eventPos.getX() + x, eventPos.getY() + y, eventPos.getZ() + z);
                             if (world.isEmptyBlock(targetPos.above())) {
                                 blockState = world.getBlockState(targetPos).getToolModifiedState(world, targetPos, context.getPlayer(), context.getItemInHand(), ToolType.HOE);
                                 if (blockState != null) {

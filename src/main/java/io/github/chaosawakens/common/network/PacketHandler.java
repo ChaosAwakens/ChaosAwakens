@@ -9,10 +9,10 @@ public class PacketHandler {
 	public static final SimpleChannel CHANNEL = NetworkRegistry
 			.newSimpleChannel(ChaosAwakens.prefix("channel"),
 					() -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-	
+
 	public static void init() {
 		int id = 0;
 		CHANNEL.messageBuilder(PacketThrowPlayer.class, id++).encoder(PacketThrowPlayer::encode)
-			.decoder(PacketThrowPlayer::new).consumer(PacketThrowPlayer.Handler::onMessage).add();
+				.decoder(PacketThrowPlayer::new).consumer(PacketThrowPlayer.Handler::onMessage).add();
 	}
 }

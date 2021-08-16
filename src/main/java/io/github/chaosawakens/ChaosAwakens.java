@@ -2,6 +2,7 @@ package io.github.chaosawakens;
 
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.ClientSetupEvent;
+import io.github.chaosawakens.common.UpdateHandler;
 import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAEMCValues;
@@ -37,6 +38,7 @@ public class ChaosAwakens {
 
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
+	public static final String VERSION = "0.9-preview4";
 
 	public static ChaosAwakens INSTANCE;
 
@@ -46,15 +48,17 @@ public class ChaosAwakens {
 		INSTANCE = this;
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
-		
+
+		LOGGER.debug(MODNAME + " Version is:" + VERSION);
+
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
-		
+
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		
+
 		//Register to the mod event bus
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
-		
+
 		if(FMLEnvironment.dist == Dist.CLIENT)
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 
@@ -81,7 +85,10 @@ public class ChaosAwakens {
 
 		//Register to the forge event bus
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
+		MinecraftForge.EVENT_BUS.register(new MiscEventHandler());
+		MinecraftForge.EVENT_BUS.register(new LoginEventHandler());
+		if (CAConfig.COMMON.showUpdateMessage.get())
+			UpdateHandler.init();
 		MinecraftForge.EVENT_BUS.register(new GiantEventHandler());
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
@@ -89,7 +96,7 @@ public class ChaosAwakens {
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
-	
+
 	private void gatherData(final GatherDataEvent event) {
 		DataGenerator dataGenerator = event.getGenerator();
 		final ExistingFileHelper existing = event.getExistingFileHelper();
@@ -104,19 +111,19 @@ public class ChaosAwakens {
 	public static ResourceLocation prefix(String name) {
 		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
 	}
-	
+
 	public static <D> void debug(String domain, D message) {
 		LOGGER.debug("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
-	
+
 	public static <I> void info(String domain, I message) {
 		LOGGER.info("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
-	
+
 	public static <W> void warn(String domain, W message) {
 		LOGGER.warn("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
-	
+
 	public static <E> void error(String domain, E message) {
 		LOGGER.error("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}

@@ -5,7 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class CAConfig {
-	
+
 	public static class Common {
 		public final ConfigValue<Integer> ultimateSwordDamage;
 		public final ConfigValue<Integer> ultimateAxeDamage;
@@ -124,15 +124,19 @@ public class CAConfig {
 		public final ConfigValue<Integer> queenAxeDamage;
 
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
-		
+
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
 		public final ConfigValue<Boolean> mobHeadDrops;
-		
+
 		public final ConfigValue<Boolean> terraforgedCheckMsg;
-		
+
+		public final ConfigValue<Boolean> showUpdateMessage;
+		public final ConfigValue<Boolean> enableTooltips;
+
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Log messages");
 			this.terraforgedCheckMsg = builder.define("Terraforged check message active", true);
+			builder.pop();
 			builder.push("Attack Damage");
 			builder.push("Ultimate Weapons/Tools");
 			ultimateSwordDamage = builder.define("Damage of the Ultimate Sword", 40);
@@ -297,13 +301,18 @@ public class CAConfig {
 			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the First Death?").define("Ender Dragon Egg Respawn", true);
 			mobHeadDrops = builder.comment("Will mobs with Mob Heads drop their item?").define("Mob Head Drops", true);
 			builder.pop();
+			builder.push("Update Checker");
+			showUpdateMessage = builder.comment("Send messages when there is a new update!").define("Show Update Messages", true);
+			builder.pop();
+			builder.push("Tooltips");
+			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
 			builder.pop();
 		}
 	}
-	
+
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
-	
+
 	static {
 		final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();

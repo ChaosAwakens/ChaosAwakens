@@ -40,10 +40,10 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if(event.isMoving()){
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
-			return PlayState.CONTINUE;
-		}
+        if(event.isMoving()){
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
+            return PlayState.CONTINUE;
+        }
         if (!event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
             return PlayState.CONTINUE;

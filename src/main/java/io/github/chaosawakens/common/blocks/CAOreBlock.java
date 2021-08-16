@@ -11,18 +11,18 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorldReader;
 
 public class CAOreBlock extends Block {
-	
+
 	private Function<Random, Integer> expFormula = (rand) -> 0;
-	
+
 	public CAOreBlock(AbstractBlock.Properties properties) {
 		super(properties);
 	}
-	
+
 	public CAOreBlock withExpDrop(int min, int max) {
 		this.expFormula = (rand) -> MathHelper.nextInt(rand, min, max);
 		return this;
 	}
-	
+
 	/**
 	 * Builder for default exp for fossils(0-2)
 	 */
@@ -30,7 +30,7 @@ public class CAOreBlock extends Block {
 		this.expFormula = (rand) -> MathHelper.nextInt(rand, 0, 2);
 		return this;
 	}
-	
+
 	@Override
 	public int getExpDrop(BlockState state, IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
 		return silktouch == 0 ? this.expFormula.apply(RANDOM) : 0;

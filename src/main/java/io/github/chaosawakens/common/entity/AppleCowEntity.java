@@ -17,11 +17,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class AppleCowEntity extends AnimalEntity {
-	
+
 	public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
-	
+
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
@@ -33,39 +33,39 @@ public class AppleCowEntity extends AnimalEntity {
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 10)
 				.add(Attributes.MOVEMENT_SPEED, 0.2F)
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
-	
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.COW_AMBIENT;
 	}
-	
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
 		return SoundEvents.COW_HURT;
 	}
-	
+
 	@Override
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COW_DEATH;
 	}
-	
+
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
 	}
-	
+
 	@Override
 	protected float getSoundVolume() {
 		return 0.4F;
 	}
-	
+
 	@Override
 	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
@@ -78,12 +78,12 @@ public class AppleCowEntity extends AnimalEntity {
 			return super.mobInteract(playerIn, hand);
 		}
 	}
-	
+
 	@Override
 	public AppleCowEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
 		return CAEntityTypes.APPLE_COW.get().create(world);
 	}
-	
+
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;

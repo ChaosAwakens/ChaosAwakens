@@ -42,19 +42,19 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
 		return worldIn.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
-	
+
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if(this.dead) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("death", true));
-			return PlayState.CONTINUE;
-		}
-		
+//		if(this.dead) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("death", true));
+//			return PlayState.CONTINUE;
+//		}
+
 		if(this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("attacking", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly_attack", true));
 			return PlayState.CONTINUE;
 		}
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("flying", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly", true));
 		return PlayState.CONTINUE;
 
 	}
@@ -70,7 +70,6 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 		this.goalSelector.addGoal(7, new SwimGoal(this));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BeeEntity.class, true));
-		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(WaspEntity.class));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -109,7 +108,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 
 		return flag;
 	}
-	
+
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "waspcontroller", 0, this::predicate));
@@ -149,7 +148,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	public CreatureAttribute getMobType() {
 		return CreatureAttribute.ARTHROPOD;
 	}
-	
+
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;

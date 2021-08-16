@@ -13,13 +13,13 @@ import net.minecraft.world.gen.feature.template.RuleTest;
 public class GeodeFeatureConfig implements IFeatureConfig {
 	public static final Codec<GeodeFeatureConfig> CODEC = RecordCodecBuilder
 			.create( (builder) -> builder.group(RuleTest.CODEC.fieldOf("target")
-			.forGetter( (config) -> config.target), BlockState.CODEC.fieldOf("budState")
-			.forGetter( (config) -> config.budState), BlockState.CODEC.fieldOf("clusterState")
-			.forGetter( (config) -> config.clusterState), Codec.intRange(0, 64).fieldOf("lowerBound")
-			.forGetter( (config) -> config.frequency), Codec.intRange(0, 64).fieldOf("upperBound")
-			.forGetter( (config) -> config.frequency), Codec.intRange(0, 64).fieldOf("frequency")
-			.forGetter( (config) -> config.frequency)).apply(builder, GeodeFeatureConfig::new));
-	
+					.forGetter( (config) -> config.target), BlockState.CODEC.fieldOf("budState")
+					.forGetter( (config) -> config.budState), BlockState.CODEC.fieldOf("clusterState")
+					.forGetter( (config) -> config.clusterState), Codec.intRange(0, 64).fieldOf("lowerBound")
+					.forGetter( (config) -> config.frequency), Codec.intRange(0, 64).fieldOf("upperBound")
+					.forGetter( (config) -> config.frequency), Codec.intRange(0, 64).fieldOf("frequency")
+					.forGetter( (config) -> config.frequency)).apply(builder, GeodeFeatureConfig::new));
+
 	public final RuleTest target;
 	public final BlockState budState;
 	public final BlockState clusterState;

@@ -33,17 +33,17 @@ public class CropsPlantBlock extends BushBlock implements IGrowable {
 		this.seedItem = seedItem;
 		this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
-	
+
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
 		return state.getValue(AGE) < this.getMaxAge() || this.isAboveAir;
 	}
-	
+
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isAreaLoaded(pos, 1))return;
@@ -56,58 +56,58 @@ public class CropsPlantBlock extends BushBlock implements IGrowable {
 				}
 			} else if(worldIn.getBlockState(pos.above()).isAir(worldIn, pos.above())) {
 				worldIn.setBlockAndUpdate(pos.above(), state.setValue(AGE, 0));
-			}	
+			}
 		}
-		
+
 		this.isAboveAir = worldIn.getBlockState(pos.above()).isAir(worldIn, pos.above());
 	}
-	
+
 	@Override
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 	}
-	
+
 	@Override
 	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.FARMLAND) || (state.is(this) && state.getValue(AGE) == 3);
 	}
-	
+
 	@Override
 	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.canSurvive(state, worldIn, pos);
 	}
-	
+
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
 	}
-	
+
 	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(seedItem.get());
 	}
-	
+
 	@Override
 	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		if(state.getValue(AGE) < this.getMaxAge())
 			worldIn.setBlock(pos, state.setValue(AGE, state.getValue(AGE)+1), 2);
 	}
-	
+
 	public CropsPlantBlock withMaxAge(int maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}
-	
+
 	@Override
 	public PlantType getPlantType(IBlockReader world, BlockPos pos) { return PlantType.PLAINS; }
-	
+
 	@Override
 	public BlockState getPlant(IBlockReader world, BlockPos pos) { return defaultBlockState(); }
-	
+
 	@Override
 	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) { return true; }
-	
+
 	@Override
 	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) { return true; }
-	
+
 	public int getMaxAge() { return this.maxAge; }
 }

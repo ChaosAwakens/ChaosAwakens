@@ -10,14 +10,14 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.util.NonNullList;
 
 public class EnchantedSwordItem extends SwordItem implements IAutoEnchantable {
-	
-private final EnchantmentData[] enchantments;
-	
+
+	private final EnchantmentData[] enchantments;
+
 	public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
 		this.enchantments = enchantments;
 	}
-	
+
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
@@ -29,7 +29,7 @@ private final EnchantmentData[] enchantments;
 			items.add(stack);
 		}
 	}
-	
+
 	@Override
 	public boolean isFoil(ItemStack stack) {
 		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
@@ -39,5 +39,5 @@ private final EnchantmentData[] enchantments;
 	public EnchantmentData[] enchantments() {
 		return this.enchantments;
 	}
-	
+
 }
