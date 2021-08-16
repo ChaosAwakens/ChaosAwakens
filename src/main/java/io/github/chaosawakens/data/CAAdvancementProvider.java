@@ -108,7 +108,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		
 		Advancement crystalDimension = itemAdvancement("crystal_dimension", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root).addCriterion("crystal_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTAL_DIMENSION_LEGACY)).save(t, id("crystal_dimension"));
 		
-		Advancement miningDimension = itemAdvancement("mining_dimension", FrameType.TASK, CABlocks.URANIUM_ORE.get()).parent(root).addCriterion("mining_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_DIMENSION)).save(t, id("mining_dimension"));
+		Advancement miningDimension = itemAdvancement("mining_dimension", FrameType.TASK, CABlocks.URANIUM_ORE.get()).parent(root).addCriterion("mining_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_PARADISE)).save(t, id("mining_dimension"));
 		
 		Advancement villageDimension = itemAdvancement("village_dimension", FrameType.TASK, Blocks.OAK_LOG).parent(root).addCriterion("village_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.VILLAGE_MANIA)).save(t, id("village_dimension"));
 		

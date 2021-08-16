@@ -118,7 +118,7 @@ public class CAEntityTypes {
 			.build(new ResourceLocation(ChaosAwakens.MODID, "rainbow_ant").toString()));
 	
 	public static final RegistryObject<EntityType<AggressiveAntEntity>> RED_ANT = ENTITY_TYPES.register("red_ant",
-			() -> EntityType.Builder.of((IFactory<AggressiveAntEntity>)(type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.MINING_DIMENSION),
+			() -> EntityType.Builder.of((IFactory<AggressiveAntEntity>)(type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.MINING_PARADISE),
 					EntityClassification.MONSTER)
 			.sized(0.25f, 0.25f) // Hitbox Size ()
 			.build(new ResourceLocation(ChaosAwakens.MODID, "red_ant").toString()));
