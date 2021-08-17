@@ -105,10 +105,10 @@
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
 	"biome.chaosawakens.crystal_hills": "Crystal Hills",
 
-	"dimension.chaosawakens.crystal_dimension": "Crystal Dimension",
-	"dimension.chaosawakens.mining_dimension": "Mining Dimension",
+	"dimension.chaosawakens.crystal_dimension": "Crystalworld",
+	"dimension.chaosawakens.mining_dimension": "Mining Paradise",
 	"dimension.chaosawakens.village_mania": "Village Mania",
-	"dimension.chaosawakens.danger_islands": "Danger Islands",
+	"dimension.chaosawakens.danger_islands": "No Dragon's Land",
 
 	"item.chaosawakens.corndog": "Raw Corndog",
 	"item.chaosawakens.cooked_corndog": "Cooked Corndog",
@@ -119,7 +119,7 @@
 	"item.chaosawakens.lettuce": "Lettuce",
 	"item.chaosawakens.cheese": "Cheese",
 	"item.chaosawakens.garden_salad": "Garden Salad",
-	"item.chaosawakens.blt": "BLT Sandwich",
+	"item.chaosawakens.blt_sandwich": "BLT Sandwich",
 	"item.chaosawakens.radish": "Radish",
 	"item.chaosawakens.radish_stew": "Radish Stew",
 	"item.chaosawakens.crab_meat": "Raw Crab Meat",

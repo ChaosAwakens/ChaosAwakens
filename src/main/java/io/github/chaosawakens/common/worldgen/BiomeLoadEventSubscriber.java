@@ -225,10 +225,11 @@ public class BiomeLoadEventSubscriber {
 		}
 
 		private static void addCrystalDimOres(BiomeGenerationSettingsBuilder gen) {
-			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_ORE_ENERGY);
-			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
-			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_PINK_TOURMALINE);
-
+			if (CAConfig.COMMON.enableOreGen.get()) {
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_ORE_ENERGY);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_PINK_TOURMALINE);
+			}
 			if (CAConfig.COMMON.enableNestGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_TERMITE_NEST);
 			}
@@ -250,10 +251,22 @@ public class BiomeLoadEventSubscriber {
 	public static void setEntDungeon(Function<StructureFeature<?, ?>, ?> func, BiomeLoadingEvent event) {
 		RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 
-		if(biome.getRegistryName().toString().contains("birch")){func.apply(ConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);return;}
-		if(biome.getRegistryName().toString().contains("dark")){func.apply(ConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);return;}
-		if(biome.getRegistryName().toString().contains("crimson")){func.apply(ConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);return;}
-		if(biome.getRegistryName().toString().contains("warped")){func.apply(ConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);return;}
+		if (biome.getRegistryName().toString().contains("birch")) {
+			func.apply(ConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);
+			return;
+		}
+		if (biome.getRegistryName().toString().contains("dark")) {
+			func.apply(ConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);
+			return;
+		}
+		if (biome.getRegistryName().toString().contains("crimson")) {
+			func.apply(ConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);
+			return;
+		}
+		if (biome.getRegistryName().toString().contains("warped")) {
+			func.apply(ConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);
+			return;
+		}
 
 		switch(event.getCategory()) {
 			case JUNGLE:
@@ -263,10 +276,13 @@ public class BiomeLoadEventSubscriber {
 				func.apply(ConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
 				break;
 			case TAIGA:
+			case EXTREME_HILLS:
 				func.apply(ConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
 				break;
-			default:
+			case FOREST:
+			case PLAINS:
 				func.apply(ConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+				break;
 		}
 	}
 }

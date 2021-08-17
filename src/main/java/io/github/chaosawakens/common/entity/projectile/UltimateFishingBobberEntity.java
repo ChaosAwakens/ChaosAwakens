@@ -50,7 +50,6 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity {
 		this.onHit(raytraceresult);
 	}
 
-
 	@Override
 	public EntityType<?> getType() {
 		return CAEntityTypes.ULTIMATE_FISHING_BOBBER.get();
