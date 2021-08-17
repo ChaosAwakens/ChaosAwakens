@@ -75,38 +75,40 @@ public class CommonSetupEvent {
 	}
 
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
-		if (event.getWorld() instanceof ServerWorld) {
-			ServerWorld serverWorld = (ServerWorld) event.getWorld();
-			ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
-
-			try {
-				if (codecMethod == null)codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
-				// TODO Fix this
-				ResourceLocation cgRL = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
-				if (cgRL != null && cgRL.getNamespace().equals("terraforged"))return;
-			} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
-				ChaosAwakens.warn("WORLDGEN", e);
-				e.printStackTrace();
-			} catch(UnableToFindMethodException e) {
-				if (CAConfig.COMMON.terraforgedCheckMsg.get())
-					ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.dimension().location()
-							+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
-							+ " if you aren't using Terraforged please ignore this message");
-			}
-
-			if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD))return;
-
-			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
-			tempMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.CRIMSON_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.DARK_OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.JUNGLE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
-			chunkProvider.generator.getSettings().structureConfig = tempMap;
+		if (!(event.getWorld() instanceof ServerWorld))return;
+		
+		ServerWorld serverWorld = (ServerWorld) event.getWorld();
+		ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
+		
+		try {
+			if (codecMethod == null)codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
+			// TODO Fix this
+			ResourceLocation cgRL = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
+			if (cgRL != null && cgRL.getNamespace().equals("terraforged"))return;
+		} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
+			ChaosAwakens.warn("WORLDGEN", e);
+			e.printStackTrace();
+		} catch(UnableToFindMethodException e) {
+			if (CAConfig.COMMON.terraforgedCheckMsg.get())
+				ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.dimension().location()
+						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
+						+ " if you aren't using Terraforged please ignore this message");
 		}
+
+		if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD))return;
+
+		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
+		
+		tempMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.ACACIA_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.BIRCH_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.CRIMSON_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.CRIMSON_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.DARK_OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.DARK_OAK_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.JUNGLE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.JUNGLE_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
+		
+		chunkProvider.generator.getSettings().structureConfig = tempMap;
 	}
 }

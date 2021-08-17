@@ -250,20 +250,22 @@ public class BiomeLoadEventSubscriber {
 
 	public static void setEntDungeon(Function<StructureFeature<?, ?>, ?> func, BiomeLoadingEvent event) {
 		RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
-
-		if (biome.getRegistryName().toString().contains("birch")) {
+		
+		final String location = biome.location().toString();
+		
+		if (location.contains("birch")) {
 			func.apply(ConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);
 			return;
 		}
-		if (biome.getRegistryName().toString().contains("dark")) {
+		if (location.contains("dark")) {
 			func.apply(ConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);
 			return;
 		}
-		if (biome.getRegistryName().toString().contains("crimson")) {
+		if (location.contains("crimson")) {
 			func.apply(ConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);
 			return;
 		}
-		if (biome.getRegistryName().toString().contains("warped")) {
+		if (location.contains("warped")) {
 			func.apply(ConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);
 			return;
 		}
@@ -282,6 +284,8 @@ public class BiomeLoadEventSubscriber {
 			case FOREST:
 			case PLAINS:
 				func.apply(ConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+				break;
+			default:
 				break;
 		}
 	}
