@@ -18,10 +18,8 @@ public class RoyaltyBootsItem extends EnchantedArmorItem {
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		super.onArmorTick(stack, world, player);
-		if (!player.isOnGround()) {
-			if (player.isShiftKeyDown()) {
-				player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 60, 0, true, false));
-			}
+		if (!player.isOnGround() && player.isShiftKeyDown()) {
+			player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 60, 0, true, false));
 		}
 	}
 }

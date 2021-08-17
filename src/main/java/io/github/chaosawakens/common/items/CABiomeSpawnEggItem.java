@@ -52,12 +52,12 @@ public class CABiomeSpawnEggItem extends CASpawnEggItem {
 	private Supplier<? extends EntityType<?>> getEntType(ItemUseContext context) {
 		Biome targetBiome = context.getLevel().getBiome(context.getClickedPos());
 
-		if(targetBiome.getRegistryName().toString().contains("birch"))return CAEntityTypes.BIRCH_ENT;
-		if(targetBiome.getRegistryName().toString().contains("dark"))return CAEntityTypes.DARK_OAK_ENT;
-		if(targetBiome.getRegistryName().toString().contains("crimson"))return CAEntityTypes.CRIMSON_ENT;
-		if(targetBiome.getRegistryName().toString().contains("warped"))return CAEntityTypes.WARPED_ENT;
+		if (targetBiome.getRegistryName().toString().contains("birch")) return CAEntityTypes.BIRCH_ENT;
+		if (targetBiome.getRegistryName().toString().contains("dark")) return CAEntityTypes.DARK_OAK_ENT;
+		if (targetBiome.getRegistryName().toString().contains("crimson")) return CAEntityTypes.CRIMSON_ENT;
+		if (targetBiome.getRegistryName().toString().contains("warped")) return CAEntityTypes.WARPED_ENT;
 
-		switch(targetBiome.getBiomeCategory()) {
+		switch (targetBiome.getBiomeCategory()) {
 			case JUNGLE:
 				return CAEntityTypes.JUNGLE_ENT;
 			case SAVANNA:

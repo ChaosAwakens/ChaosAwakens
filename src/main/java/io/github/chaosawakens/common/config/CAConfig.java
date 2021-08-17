@@ -278,10 +278,10 @@ public class CAConfig {
 			enableOreAluminumGen = builder.define("Aluminum ore generation", true);
 			builder.pop();
 			enableFossilGen = builder.define("Enable fossilised spawn egg generation", true);
-			enableTrollOreGen = builder.define("Enable ant infested ore generation", true);
-			enableDzMineralOreGen = builder.define("Enable DangerZone material ore generation", true);
-			spawnDzOresInOverworld = builder.define("Will DZ ores spawn in the Overworld?", false);
-			enableNestGen = builder.define("Will Nests spawn in the Overworld or the Ant Dimensions?", true);
+			enableTrollOreGen = builder.define("Enable infested ore generation", true);
+			enableDzMineralOreGen = builder.define("Enable DZ ore generation", true);
+			spawnDzOresInOverworld = builder.comment("Will DZ ores spawn in the Overworld?").define("Overworld DZ Ores", false);
+			enableNestGen = builder.comment("Will Nests spawn in the Overworld or the Ant Dimensions?").define("Ant Nest generation", true);
 			builder.pop();
 			builder.push("Tools/Weapons");
 			enableAutoEnchanting = builder.comment("If disabled, auto-enchanted items will be able to be enchanted manually.").define("Auto-enchant specific tools and weapons", true);
@@ -298,11 +298,11 @@ public class CAConfig {
 			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);
 			builder.pop();
 			builder.push("Drops");
-			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the First Death?").define("Ender Dragon Egg Respawn", true);
+			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the first death?").define("Ender Dragon Egg Respawn", true);
 			mobHeadDrops = builder.comment("Will mobs with Mob Heads drop their item?").define("Mob Head Drops", true);
 			builder.pop();
 			builder.push("Update Checker");
-			showUpdateMessage = builder.comment("Send messages when there is a new update!").define("Show Update Messages", true);
+			showUpdateMessage = builder.comment("Send messages when there is a new update?").define("Show Update Messages", true);
 			builder.pop();
 			builder.push("Tooltips");
 			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);

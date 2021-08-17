@@ -9,9 +9,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class DupeTree extends SaplingBlock{
+public class DuplicatorTreeBlock extends SaplingBlock{
 
-	public DupeTree(Tree tree, Properties properties) {
+	public DuplicatorTreeBlock(Tree tree, Properties properties) {
 		super(tree, properties);
 	}
 

@@ -48,7 +48,7 @@ public class CAItems {
 	public static final Food FOOD_LETTUCE = new Food.Builder().nutrition(3).saturationMod(0.45F).build();
 	public static final Food FOOD_CHEESE = new Food.Builder().nutrition(4).saturationMod(0.5F).build();
 	public static final Food FOOD_GARDEN_SALAD = new Food.Builder().nutrition(10).saturationMod(0.95F).build();
-	public static final Food FOOD_BLT = new Food.Builder().nutrition(12).saturationMod(0.95F).build();
+	public static final Food FOOD_BLT_SANDWICH = new Food.Builder().nutrition(12).saturationMod(0.95F).build();
 	public static final Food FOOD_STRAWBERRY = new Food.Builder().nutrition(2).saturationMod(0.65F).build();
 	public static final Food FOOD_RADISH = new Food.Builder().nutrition(2).saturationMod(0.45F).build();
 	public static final Food FOOD_RADISH_STEW = new Food.Builder().nutrition(8).saturationMod(6.4F).build();
@@ -111,7 +111,7 @@ public class CAItems {
 
 	public static final RegistryObject<Item> RADISH_STEW = ITEMS.register("radish_stew", () -> new SoupItem(new Item.Properties().food(CAItems.FOOD_RADISH_STEW).stacksTo(1).tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> GARDEN_SALAD = ITEMS.register("garden_salad", () -> new SoupItem(new Item.Properties().food(CAItems.FOOD_GARDEN_SALAD).stacksTo(1).tab(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<Item> BLT = ITEMS.register("blt", () -> new Item(new Item.Properties().food(CAItems.FOOD_BLT).tab(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> BLT_SANDWICH = ITEMS.register("blt_sandwich", () -> new Item(new Item.Properties().food(CAItems.FOOD_BLT_SANDWICH).tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> SEAFOOD_PATTY = ITEMS.register("seafood_patty", () -> new Item(new Item.Properties().food(CAItems.FOOD_SEAFOOD_PATTY).tab(CAItemGroups.foodItemGroup)));
 
 	public static final RegistryObject<Item> GREEN_FISH = ITEMS.register("green_fish", () -> new Item(new Item.Properties().food(Foods.COD).tab(CAItemGroups.foodItemGroup)));
@@ -221,7 +221,7 @@ public class CAItems {
 			new EnchantmentData[] {new EnchantmentData(Enchantments.UNBREAKING, 2)}));
 
 	public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new ExtendedHitWeaponItem(CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, 5F, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.equipmentItemGroup).setISTER(() -> BigBerthaItemRender::new),
-			new EnchantmentData[] { new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
+			new EnchantmentData[] { new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2), new EnchantmentData(Enchantments.KNOCKBACK, 2)}));
 
 	// Emerald
 	public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup)));
