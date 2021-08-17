@@ -2,6 +2,7 @@ package io.github.chaosawakens;
 
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.ClientSetupEvent;
+import io.github.chaosawakens.client.ToolTipEventSubscriber;
 import io.github.chaosawakens.common.UpdateHandler;
 import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.config.CAConfig;
@@ -59,8 +60,10 @@ public class ChaosAwakens {
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
 
-		if(FMLEnvironment.dist == Dist.CLIENT)
+		if(FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
+			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
+		}
 
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);

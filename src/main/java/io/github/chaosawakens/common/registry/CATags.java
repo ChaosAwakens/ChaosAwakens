@@ -2,8 +2,10 @@ package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
 
 /**
  * Class dedicated to tag wrapper constants, so they can be referenced somewhere else
@@ -19,5 +21,8 @@ public class CATags {
 	public static final ITag.INamedTag<Block> MINERS_DREAM_UNSAFE = BlockTags.bind(ChaosAwakens.MODID+":miners_dream_unsafe");
 	public static final ITag.INamedTag<Block> MINERS_DREAM_TORCH_SAFE = BlockTags.bind(ChaosAwakens.MODID+":miners_dream_torch_safe");
 	public static final ITag.INamedTag<Block> AIR_BLOCKS = BlockTags.bind("air");
+	
 	//Item tags
+	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID+":custom_tooltips");
+	
 }
