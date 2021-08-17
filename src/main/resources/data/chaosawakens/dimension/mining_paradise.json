@@ -9,13 +9,23 @@
 			"biomes": [
 				{
 					"parameters": {
-						"altitude": 0.0,
+						"altitude": 1.0,
 						"weirdness": 0.0,
 						"offset": 0.0,
-						"temperature": 0.0,
-						"humidity": 0.0
+						"temperature": 0.6,
+						"humidity": 1.2
 					},
 					"biome": "chaosawakens:mining_biome"
+				},
+				{
+					"parameters": {
+						"altitude": 0.2,
+						"weirdness": 0.3,
+						"offset": 0.0,
+						"temperature": 1.0,
+						"humidity": 0.8
+					},
+					"biome": "chaosawakens:stalagmite_valley"
 				}
 			],
 			"temperature_noise": {

@@ -106,13 +106,15 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				InventoryChangeTrigger.Instance.hasItems(CAItems.RUBY_HELMET.get(), CAItems.RUBY_CHESTPLATE.get(), CAItems.RUBY_LEGGINGS.get(), CAItems.RUBY_BOOTS.get())).addCriterion("ultimate_helmet",
 				InventoryChangeTrigger.Instance.hasItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get())).save(t, id("all_armor"));
 
+		
 		Advancement crystalDimension = registerAdvancement("crystal_dimension", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root).addCriterion("crystal_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTAL_DIMENSION_LEGACY)).save(t, id("crystal_dimension"));
-
-		Advancement miningDimension = registerAdvancement("mining_dimension", FrameType.TASK, CABlocks.URANIUM_ORE.get()).parent(root).addCriterion("mining_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_DIMENSION)).save(t, id("mining_dimension"));
-
+		
+		Advancement miningDimension = registerAdvancement("mining_dimension", FrameType.TASK, CABlocks.URANIUM_ORE.get()).parent(root).addCriterion("mining_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_PARADISE)).save(t, id("mining_dimension"));
+		
 		Advancement villageDimension = registerAdvancement("village_dimension", FrameType.TASK, Blocks.OAK_LOG).parent(root).addCriterion("village_dimension", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.VILLAGE_MANIA)).save(t, id("village_dimension"));
-
+		
 		Advancement roboSlayer = registerAdvancement("robo_slayer", FrameType.TASK, CAItems.RAY_GUN.get()).parent(root).addCriterion("robo_sniper",
+
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_SNIPER.get()))).addCriterion("robo_warrior", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_WARRIOR.get()))).save(t, id("robo_slayer"));
 
 		Advancement bugSquasher = registerAdvancement("bug_squasher", FrameType.TASK, CAItems.DEAD_STINK_BUG.get()).parent(root).addCriterion("hercules_beetle",
