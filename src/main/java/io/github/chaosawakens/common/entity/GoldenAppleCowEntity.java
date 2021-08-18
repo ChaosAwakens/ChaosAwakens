@@ -6,11 +6,13 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.BlazeEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -60,6 +62,13 @@ public class GoldenAppleCowEntity extends AnimalEntity {
 
     protected float getSoundVolume() {
         return 0.4F;
+    }
+
+    public void aiStep() {
+        if (this.level.isClientSide) {
+            this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, this.getRandomX(0.5D), this.getY(0.85D), this.getRandomZ(0.5D), -1000, -1000, -1000);
+        }
+        super.aiStep();
     }
 
     public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {

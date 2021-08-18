@@ -1,12 +1,12 @@
 {
-	"name": "chaosawakens:dungeon/ent_tree/oak",
+	"name": "chaosawakens:dungeon/ent_tree/birch",
 	"fallback": "minecraft:empty",
 	"elements": [
 		{
 			"weight": 2,
 			"element": {
 				"element_type": "minecraft:single_pool_element",
-				"location": "chaosawakens:dungeon/ent_tree/oak",
+				"location": "chaosawakens:dungeon/ent_tree/birch",
 				"processors": "minecraft:empty",
 				"projection": "rigid"
 			}

@@ -16,6 +16,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,10 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-@OnlyIn(
-		value = Dist.CLIENT,
-		_interface = IChargeableMob.class
-)
+@OnlyIn(value = Dist.CLIENT, _interface = IChargeableMob.class)
 public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChargeableMob {
 	private static final DataParameter<Boolean> ENCHANTED = EntityDataManager.defineId(EnchantedGoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
 
@@ -115,6 +113,13 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
 	@Override
 	protected float getSoundVolume() {
 		return 0.4F;
+	}
+
+	public void aiStep() {
+		if (this.level.isClientSide) {
+			this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, this.getRandomX(0.5D), this.getY(0.85D), this.getRandomZ(0.5D), -1000, -1000, -1000);
+		}
+		super.aiStep();
 	}
 
 	@Override
