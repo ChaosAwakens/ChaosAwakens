@@ -1,7 +1,22 @@
 {
 	"replace": false,
 	"values": [
+		"chaosawakens:ruby_ore",
+		"chaosawakens:nether_ruby_ore",
+		"chaosawakens:amethyst_ore",
+		"chaosawakens:uranium_ore",
+		"chaosawakens:titanium_ore",
+		"chaosawakens:tigers_eye_ore",
+		"chaosawakens:salt_ore",
+		"chaosawakens:copper_ore",
+		"chaosawakens:tin_ore",
+		"chaosawakens:silver_ore",
+		"chaosawakens:platinum_ore",
 		"chaosawakens:aluminum_ore",
+		"chaosawakens:sunstone_ore",
+		"chaosawakens:bloodstone_ore",
+		"chaosawakens:red_ant_infested_ore",
+		"chaosawakens:termite_infested_ore",
 		"chaosawakens:fossilised_ent",
 		"chaosawakens:fossilised_hercules_beetle",
 		"chaosawakens:fossilised_ruby_bug",
@@ -9,6 +24,18 @@
 		"chaosawakens:fossilised_wtf",
 		"chaosawakens:fossilised_scorpion",
 		"chaosawakens:fossilised_wasp",
-		"chaosawakens:fossilised_piraporu"
+		"chaosawakens:fossilised_piraporu",
+		"chaosawakens:brown_ant_nest",
+		"chaosawakens:rainbow_ant_nest",
+		"chaosawakens:red_ant_nest",
+		"chaosawakens:unstable_ant_nest",
+		"chaosawakens:termite_nest",
+		"chaosawakens:crystal_termite_nest",
+		"chaosawakens:crystal_torch",
+		"chaosawakens:sunstone_torch",
+		"chaosawakens:extreme_torch",
+		"chaosawakens:mouldy_planks",
+		"chaosawakens:mouldy_slab",
+		"chaosawakens:mouldy_fence"
 	]
 }
