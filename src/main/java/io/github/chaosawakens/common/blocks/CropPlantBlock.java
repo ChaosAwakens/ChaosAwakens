@@ -21,14 +21,14 @@ import net.minecraftforge.common.PlantType;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class CropsPlantBlock extends BushBlock implements IGrowable {
+public class CropPlantBlock extends BushBlock implements IGrowable {
 	private static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	private boolean isAboveAir = true;
 	private int maxAge = 3;
 	private final Supplier<? extends Item> seedItem;
 
-	public CropsPlantBlock(Supplier<? extends Item> seedItem, Properties properties) {
+	public CropPlantBlock(Supplier<? extends Item> seedItem, Properties properties) {
 		super(properties);
 		this.seedItem = seedItem;
 		this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
@@ -92,7 +92,7 @@ public class CropsPlantBlock extends BushBlock implements IGrowable {
 			worldIn.setBlock(pos, state.setValue(AGE, state.getValue(AGE)+1), 2);
 	}
 
-	public CropsPlantBlock withMaxAge(int maxAge) {
+	public CropPlantBlock withMaxAge(int maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}
