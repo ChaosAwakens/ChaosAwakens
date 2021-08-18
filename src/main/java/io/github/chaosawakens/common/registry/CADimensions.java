@@ -10,8 +10,8 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CADimensions {
 
-	public static final RegistryKey<World> CRYSTAL_DIMENSION_LEGACY = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID + ":crystal_dimension"));
-	public static final RegistryKey<World> MINING_PARADISE = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID + ":mining_paradise"));
-	public static final RegistryKey<World> VILLAGE_MANIA = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID + ":village_mania"));
-	public static final RegistryKey<World> DANGER_ISLANDS = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID + ":danger_islands"));
+	public static final RegistryKey<World> CRYSTAL_DIMENSION_LEGACY = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID, "crystalworld"));
+	public static final RegistryKey<World> MINING_PARADISE = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID, "mining_paradise"));
+	public static final RegistryKey<World> VILLAGE_MANIA = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID, "village_mania"));
+	public static final RegistryKey<World> NO_DRAGONS_LAND = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID, "no_dragons_land"));
 }

@@ -44,8 +44,7 @@ public class CAStructures {
 		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21 , 19, 159332311), true);
 	}
 
-	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure,
-																	   StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {
+	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {
 
 		Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 
@@ -57,8 +56,7 @@ public class CAStructures {
 				.putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build();
 
 		WorldGenRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
-			Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue()
-					.structureSettings().structureConfig;
+			Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().structureSettings().structureConfig;
 
 			if (structureMap instanceof ImmutableMap) {
 				Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);

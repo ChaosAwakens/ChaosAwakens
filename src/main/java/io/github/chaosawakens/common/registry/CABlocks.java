@@ -9,11 +9,13 @@ import io.github.chaosawakens.common.blocks.*;
 import io.github.chaosawakens.common.items.EnchantedBlockItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.IPositionPredicate;
+import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.AttachedStemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
@@ -26,6 +28,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.common.ToolType;
@@ -62,7 +65,15 @@ public class CABlocks {
 	public static final RegistryObject<Block> CORN_PLANT = registerBlock("corn_plant", () -> new CropsPlantBlock(CAItems.CORN_SEEDS, Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> TOMATO_PLANT = registerBlock("tomato_plant", () -> new CropsPlantBlock(CAItems.TOMATO_SEEDS, Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<Block> STRAWBERRY_PLANT = registerBlock("strawberry_plant", () -> new StrawberryBushBlock(CAItems.STRAWBERRY_SEEDS, CAItems.STRAWBERRY, Block.Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks()), CAItemGroups.foodItemGroup, false);
-
+	
+	// TREES
+	public static final RegistryObject<Block> APPLE_LOG = registerBlock("apple_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> CHERRY_LOG = registerBlock("cherry_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> PEACH_LOG = registerBlock("peach_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> PEACH_LEAVES = registerBlock("peach_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> PEACH_PLANKS = registerBlock("peach_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<Block> STRIPPED_PEACH_LOG = registerBlock("stripped_peach_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)), CAItemGroups.blocksItemGroup);
+	
 	// DUNGEON BLOCKS
 	public static final RegistryObject<Block> NEST_BLOCK = registerBlock("nest_block", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_YELLOW).strength(0.3F).sound(SoundType.WOOD)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.copy(Blocks.OAK_PLANKS).strength(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
@@ -70,66 +81,37 @@ public class CABlocks {
 
 	// MINERAL ORES
 	public static final RegistryObject<CAOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new CAOreBlock(AbstractBlock.Properties.of(Material.STONE)
-			.strength(4.5F,3.25F)
-			.harvestLevel(2)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.sound(SoundType.STONE))
-			.withExpDrop(3, 7), CAItemGroups.blocksItemGroup);
+		.strength(4.5F,3.25F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()
+		.sound(SoundType.STONE)).withExpDrop(3, 7), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> RUBY_ORE = registerBlock("ruby_ore", () -> new CAOreBlock(AbstractBlock.Properties.of(Material.STONE)
-			.strength(6.5F,3.25F)
-			.harvestLevel(3)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.sound(SoundType.STONE))
-			.withExpDrop(4, 9), CAItemGroups.blocksItemGroup);
+		.strength(6.5F,3.25F).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()
+		.sound(SoundType.STONE)).withExpDrop(4, 9), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> NETHER_RUBY_ORE = registerBlock("nether_ruby_ore", () -> new CAOreBlock(Block.Properties.of(Material.STONE)
-			.strength(6.5F,3F)
-			.harvestLevel(3)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.sound(SoundType.NETHER_ORE))
-			.withExpDrop(4, 9), CAItemGroups.blocksItemGroup);
+		.strength(6.5F,3F).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()
+		.sound(SoundType.NETHER_ORE)).withExpDrop(4, 9), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> TIGERS_EYE_ORE = registerBlock("tigers_eye_ore", () -> new CAOreBlock(Block.Properties.of(Material.STONE)
-			.strength(4F,3.25F)
-			.harvestLevel(2)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.sound(SoundType.STONE))
-			.withExpDrop(2, 8), CAItemGroups.blocksItemGroup);
+		.strength(4F,3.25F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()
+		.sound(SoundType.STONE)).withExpDrop(2, 8), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> TITANIUM_ORE = registerBlock("titanium_ore", () -> new CAOreBlock(Block.Properties.of(Material.STONE)
-			.strength(9F, 3.5F)
-			.harvestLevel(3)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
+		.strength(9F, 3.5F).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()
+		.sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> URANIUM_ORE = registerBlock("uranium_ore", () -> new UraniumOreBlock(Block.Properties.of(Material.STONE)
-			.strength(7.5F,3.5F)
-			.harvestLevel(3)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.randomTicks()
-			.lightLevel((state) -> state.getValue(UraniumOreBlock.GLOW_STRENGTH))
-			.sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
+		.strength(7.5F,3.5F).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().randomTicks()
+		.lightLevel((state) -> state.getValue(UraniumOreBlock.GLOW_STRENGTH))
+		.sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> ALUMINUM_ORE = registerBlock("aluminum_ore", () -> new CAOreBlock(Block.Properties.of(Material.STONE)
-			.strength(3F)
-			.harvestLevel(2)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
+		.strength(3F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()
+		.sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> SALT_ORE = registerBlock("salt_ore", () -> new CAOreBlock(Block.Properties.of(Material.STONE)
-			.strength(2.5F)
-			.harvestLevel(0)
-			.harvestTool(ToolType.PICKAXE)
-			.requiresCorrectToolForDrops()
-			.sound(SoundType.STONE)).withExpDrop(0,3), CAItemGroups.blocksItemGroup);
+		.strength(2.5F).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()
+		.sound(SoundType.STONE)).withExpDrop(0,3), CAItemGroups.blocksItemGroup);
 
 	public static final RegistryObject<CAOreBlock> COPPER_ORE = registerBlock("copper_ore", () -> new CAOreBlock(Block.Properties.copy(Blocks.COAL_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> TIN_ORE = registerBlock("tin_ore", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), CAItemGroups.blocksItemGroup);
