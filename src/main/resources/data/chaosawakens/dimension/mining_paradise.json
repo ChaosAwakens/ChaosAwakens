@@ -1,5 +1,5 @@
 {
-	"type": "minecraft:overworld",
+	"type": "chaosawakens:mining_paradise",
 	"generator": {
 		"type": "minecraft:noise",
 		"seed": 0,
@@ -20,7 +20,7 @@
 				{
 					"parameters": {
 						"altitude": 0.2,
-						"weirdness": 0.3,
+						"weirdness": 0.6,
 						"offset": 0.0,
 						"temperature": 1.0,
 						"humidity": 0.8

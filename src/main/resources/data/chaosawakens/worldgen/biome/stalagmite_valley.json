@@ -1,7 +1,7 @@
 {
-	"surface_builder": "minecraft:grass",
+	"surface_builder": "chaosawakens:valley_stone",
 	"depth": 0,
-	"scale": 0.2,
+	"scale": 0.12,
 	"temperature": 0.2,
 	"downfall": 0.15,
 	"precipitation": "rain",

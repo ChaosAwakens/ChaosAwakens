@@ -1,0 +1,15 @@
+{
+	"name": "mining_paradise",
+	"ultrawarm": false,
+	"natural": true,
+	"coordinate_scale": 1,
+	"has_skylight": true,
+	"has_ceiling": false,
+	"ambient_light": 0.5,
+	"pinglin_safe": true,
+	"bed_works": true,
+	"respawn_anchor_works": false,
+	"has_raids": true,
+	"infiniburn":"minecraft:infiniburn_overworld",
+	"effects": "minecraft:overworld"
+}

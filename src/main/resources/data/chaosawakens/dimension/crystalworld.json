@@ -1,5 +1,5 @@
 {
-	"type": "minecraft:overworld",
+	"type": "chaosawakens:crystalworld",
 	"generator": {
 		"type": "minecraft:noise",
 		"seed": 0,

@@ -1,5 +1,5 @@
 {
-	"type": "minecraft:overworld",
+	"type": "chaosawakens:village_mania",
 	"generator": {
 		"type": "minecraft:noise",
 		"seed": 0,
