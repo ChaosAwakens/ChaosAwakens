@@ -54,4 +54,4 @@ _If you still want the original mod with no changes, please instead play the ori
 
 **Builders:** Blackout, crydigo, thewoundedknight, TheLoneCyberman, Lymen
 
-**Former Members:** Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123
+**Former Members:** Asbestosstar, Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123
