@@ -29,7 +29,7 @@ public class EnchantmentKiller extends Enchantment {
 
 	@Override
 	public int getMinCost(int cost) {
-		return 50;
+		return 80;
 	}
 	
 	@Override

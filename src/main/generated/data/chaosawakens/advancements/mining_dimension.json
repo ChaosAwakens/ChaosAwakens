@@ -20,7 +20,7 @@
     "mining_dimension": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "chaosawakens:mining_dimension"
+        "to": "chaosawakens:mining_paradise"
       }
     }
   },

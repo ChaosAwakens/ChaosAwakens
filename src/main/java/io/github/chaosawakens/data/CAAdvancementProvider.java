@@ -140,6 +140,9 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.OAK_ENT.get()))).addCriterion("spruce_ent",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.SPRUCE_ENT.get()))).addCriterion("warped_ent",
 				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.WARPED_ENT.get()))).save(t, id("ent_destroyer"));
+		
+		Advancement deezNuts = registerAdvancement("deez_nuts", FrameType.CHALLENGE, CAItems.BEAVER_SPAWN_EGG.get()).parent(root).addCriterion("deez_nuts", 
+				KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.BEAVER.get()))).save(t, id("deez_nuts"));
 	}
 
 	private Advancement.Builder registerAdvancement(String name, FrameType type, IItemProvider... items) {

@@ -48,7 +48,9 @@ public class CABlockLootTables extends BlockLootTables {
 		dropOther(CABlocks.MOULDY_PLANKS.get(), Items.AIR);
 		dropOther(CABlocks.MOULDY_SLAB.get(), Items.AIR);
 		dropOther(CABlocks.MOULDY_FENCE.get(), Items.AIR);
+		dropOther(CABlocks.PEACH_LEAVES.get(), Items.AIR);
 
+		dropSelf(CABlocks.APPLE_LOG.get());
 		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		dropSelf(CABlocks.ALUMINUM_BLOCK.get());
 		dropSelf(CABlocks.AMETHYST_BLOCK.get());
@@ -56,6 +58,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.BROWN_ANT_NEST.get());
 		dropSelf(CABlocks.CATS_EYE_BLOCK.get());
 		dropSelf(CABlocks.CATS_EYE_CLUSTER.get());
+		dropSelf(CABlocks.CHERRY_LOG.get());
 		dropSelf(CABlocks.COPPER_BLOCK.get());
 		dropSelf(CABlocks.COPPER_ORE.get());
 		dropSelf(CABlocks.CRYSTAL_CRAFTING_TABLE.get());
@@ -84,12 +87,15 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.PINK_TOURMALINE_CLUSTER.get());
 		dropSelf(CABlocks.PLATINUM_BLOCK.get());
 		dropSelf(CABlocks.PLATINUM_ORE.get());
+		dropSelf(CABlocks.PEACH_LOG.get());
+		dropSelf(CABlocks.PEACH_PLANKS.get());
 		dropSelf(CABlocks.RAINBOW_ANT_NEST.get());
 		dropSelf(CABlocks.RED_ANT_NEST.get());
 		dropSelf(CABlocks.RED_CRYSTAL_LEAVES.get());
 		dropSelf(CABlocks.RUBY_BLOCK.get());
 		dropSelf(CABlocks.SILVER_BLOCK.get());
 		dropSelf(CABlocks.SILVER_ORE.get());
+		dropSelf(CABlocks.STRIPPED_PEACH_LOG.get());
 		dropSelf(CABlocks.SUNSTONE_BLOCK.get());
 		dropSelf(CABlocks.TERMITE_NEST.get());
 		dropSelf(CABlocks.TIGERS_EYE_BLOCK.get());
