@@ -34,7 +34,6 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumn("peach_log", newRL(cA, "peach_log"), newRL(cA, "peach_log_top"));
 		this.cubeColumnHorizontal("peach_log", newRL(cA, "peach_log"), newRL(cA, "peach_log_top"));
 		this.cubeColumn("stripped_peach_log", newRL(cA, "stripped_peach_log"), newRL(cA, "stripped_peach_log_top"));
-		this.cubeAll("peach_leaves", newRL(cA, "peach_leaves"));
 		this.cubeAll("peach_planks", newRL(cA, "peach_planks"));
 		this.cubeColumnHorizontal("stripped_peach_log", newRL(cA, "stripped_peach_log"), newRL(cA, "stripped_peach_log_top"));
 		
