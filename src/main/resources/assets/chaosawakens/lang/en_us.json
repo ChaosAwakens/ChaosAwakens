@@ -43,6 +43,11 @@
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
+
+    "entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
+    "enchantment.chaosawakens.killer": "Killer",
+    "enchantment.chaosawakens.curse_of_withering": "Curse Of Withering",
+
 	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
 
 	"entity.chaosawakens.ent": "Ent",
