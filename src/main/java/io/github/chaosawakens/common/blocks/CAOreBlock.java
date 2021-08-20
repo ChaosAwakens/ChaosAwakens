@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.blocks;
 
 import java.util.Random;
+
 import java.util.function.Function;
 
 import net.minecraft.block.AbstractBlock;
