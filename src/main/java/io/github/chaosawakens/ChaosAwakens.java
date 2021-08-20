@@ -11,6 +11,8 @@ import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.CAAdvancementProvider;
+import io.github.chaosawakens.data.CABlockModelProvider;
+import io.github.chaosawakens.data.CABlockStateProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
 import io.github.chaosawakens.data.CALootTableProvider;
 import net.minecraft.data.DataGenerator;
@@ -107,7 +109,9 @@ public class ChaosAwakens {
 		if (event.includeServer()) {
 			dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator));
 			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
+			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
 			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
+			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
 		}
 	}
 

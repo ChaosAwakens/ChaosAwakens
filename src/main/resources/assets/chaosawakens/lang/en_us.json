@@ -18,13 +18,13 @@
 	"advancements.chaosawakens.ultimate_armor.title": "Ultimate Power!",
 	"advancements.chaosawakens.ultimate_armor.description": "Obtain Ultimate Armor.",
 	"advancements.chaosawakens.all_armor.title": "Armor Collector",
-	"advancements.chaosawakens.all_armor.description": "Obtain all the Armor in the mod.",
+	"advancements.chaosawakens.all_armor.description": "Obtain all the armor sets",
 	"advancements.chaosawakens.crystal_dimension.title": "All Crystalline!",
-	"advancements.chaosawakens.crystal_dimension.description": "Enter the Crystal Dimension.",
+	"advancements.chaosawakens.crystal_dimension.description": "Enter the Crystalworld.",
 	"advancements.chaosawakens.mining_dimension.title": "Digging Even Deeper!",
-	"advancements.chaosawakens.mining_dimension.description": "Enter the Mining Dimension.",
+	"advancements.chaosawakens.mining_dimension.description": "Enter the Mining Paradise.",
 	"advancements.chaosawakens.village_dimension.title": "Villages Afar!",
-	"advancements.chaosawakens.village_dimension.description": "Enter the Village Dimension.",
+	"advancements.chaosawakens.village_dimension.description": "Enter Village Mania.",
 	"advancements.chaosawakens.robo_slayer.title": "Robo Slayer!",
 	"advancements.chaosawakens.robo_slayer.description": "Kill every Robo.",
 	"advancements.chaosawakens.bug_squasher.title": "Bug Squasher!",
@@ -38,14 +38,21 @@
 	"advancements.chaosawakens.shiny_cows.title": "Shiny Cows!",
 	"advancements.chaosawakens.shiny_cows.description": "Breed 2 Golden Apple Cows.",
 
-	"dungeon.chaosawakens.jer.ent_dungeon": "Ent Dungeon",
+	"dungeon.chaosawakens.jer.ent_dungeon": "Ent Tree",
 	"dungeon.chaosawakens.jer.wasp_dungeon": "Wasp Dungeon",
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
-	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Dimensional Trader",
+	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Oddities Purveyor",
 
-	"entity.chaosawakens.ent": "Ent",
+	"entity.chaosawakens.acacia_ent": "Acacia Ent",
+	"entity.chaosawakens.birch_ent": "Birch Ent",
+	"entity.chaosawakens.crimson_ent": "Crimson Ent",
+	"entity.chaosawakens.dark_oak_ent": "Dark Oak Ent",
+	"entity.chaosawakens.jungle": "Jungle Ent",
+	"entity.chaosawakens.oak_ent": "Oak Ent",
+	"entity.chaosawakens.spruce_ent": "Spruce Ent",
+	"entity.chaosawakens.warped_ent": "Warped Ent",
 	"entity.chaosawakens.red_ant": "Red Ant",
 	"entity.chaosawakens.brown_ant": "Brown Ant",
 	"entity.chaosawakens.rainbow_ant": "Rainbow Ant",
@@ -105,10 +112,10 @@
 	"biome.chaosawakens.crystal_plains": "Crystal Plains",
 	"biome.chaosawakens.crystal_hills": "Crystal Hills",
 
-	"dimension.chaosawakens.crystal_dimension": "Crystalworld",
-	"dimension.chaosawakens.mining_dimension": "Mining Paradise",
+	"dimension.chaosawakens.crystalworld": "Crystalworld",
+	"dimension.chaosawakens.mining_paradise": "Mining Paradise",
 	"dimension.chaosawakens.village_mania": "Village Mania",
-	"dimension.chaosawakens.danger_islands": "No Dragon's Land",
+	"dimension.chaosawakens.no_dragons_land": "No Dragon's Land",
 
 	"item.chaosawakens.corndog": "Raw Corndog",
 	"item.chaosawakens.cooked_corndog": "Cooked Corndog",
@@ -487,7 +494,14 @@
 	"block.chaosawakens.tomato_plant": "Tomato Plant",
 	"block.chaosawakens.lettuce_plant": "Lettuce Plant",
 	"block.chaosawakens.strawberry_plant": "Strawberry Bush",
-
+	
+	"block.chaosawakens.apple_log": "Apple Log",
+	"block.chaosawakens.cherry_log": "Cherry Log",
+	"block.chaosawakens.peach_log": "Peach Log",
+	"block.chaosawakens.peach_leaves": "Peach Leaves",
+	"block.chaosawakens.peach_planks": "Peach Planks",
+	"block.chaosawakens.stripped_peach_log": "Stripped Peach Log",
+	
 	"item.chaosawakens.dead_stink_bug": "Dead Stink Bug",
 
 	"item.chaosawakens.triffid_goo": "Triffid Goo",
@@ -502,7 +516,7 @@
 	"item.chaosawakens.platinum_coin": "Platinum Coin",
 
 	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
-	"misc.chaosawakens.inaccessible_dimension": "The target dimension doesn't seem to be here yet.",
+	"misc.chaosawakens.inaccessible_dimension": "This part of the anthill seems to be blocked off...",
 
 	"tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info.",
 	"tooltip.chaosawakens.ruby_ore": "Ruby is an uncommon ore found in lava in the Overworld, it is found between y0 and y48. \nIt is also found in the Mining Dimension in lava between y12 and y60 as well as between y0 and y48 with no surface ore.",

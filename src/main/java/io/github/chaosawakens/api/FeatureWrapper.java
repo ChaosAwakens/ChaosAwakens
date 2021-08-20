@@ -3,7 +3,7 @@ package io.github.chaosawakens.api;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 /**
- * Wrapper class containing a ConfiguredFeature and its id
+ * Wrapper POJO containing a ConfiguredFeature and its id
  * @author invalid2
  */
 public class FeatureWrapper {

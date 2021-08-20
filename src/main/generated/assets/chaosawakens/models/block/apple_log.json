@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chaosawakens:block/apple_log",
+    "end": "chaosawakens:block/apple_log_top"
+  }
+}

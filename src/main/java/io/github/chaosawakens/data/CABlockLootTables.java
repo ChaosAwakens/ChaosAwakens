@@ -101,6 +101,14 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.URANIUM_BLOCK.get());
 		dropSelf(CABlocks.URANIUM_ORE.get());
 		dropSelf(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
+		
+		dropSelf(CABlocks.APPLE_LOG.get());
+		dropSelf(CABlocks.CHERRY_LOG.get());
+		dropSelf(CABlocks.PEACH_LOG.get());
+		add(CABlocks.PEACH_LEAVES.get(), (plant) -> createShearsOnlyDrop(CABlocks.PEACH_LEAVES.get()));
+		dropSelf(CABlocks.PEACH_PLANKS.get());
+		dropSelf(CABlocks.STRIPPED_PEACH_LOG.get());
+		dropSelf(CABlocks.APPLE_LOG.get());
 	}
 
 	protected static LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {

@@ -9,8 +9,9 @@ buildscript {
     }
 }
 
-apply plugin: "eclipse"
 apply plugin: "net.minecraftforge.gradle"
+apply plugin: "eclipse"
+apply plugin: 'maven-publish'
 
 group = 'io.github'
 version = "${project.minecraft}-${project.modVersion}"
@@ -110,5 +111,18 @@ jar {
                 "Implementation-Version"  : project.modVersion,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
     }
 }
