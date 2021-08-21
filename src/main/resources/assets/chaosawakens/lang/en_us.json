@@ -37,17 +37,13 @@
 	"advancements.chaosawakens.an_apple_cow_a_day.description": "Keeps the tree farming away!",
 	"advancements.chaosawakens.shiny_cows.title": "Shiny Cows!",
 	"advancements.chaosawakens.shiny_cows.description": "Breed 2 Golden Apple Cows.",
-	"advancements.chaosawakens.deez_nuts.title": "Deez Nuts",
-	"advancements.chaosawakens.deez_nuts.description": "Funni",
 
 	"dungeon.chaosawakens.jer.ent_dungeon": "Ent Tree",
 	"dungeon.chaosawakens.jer.wasp_dungeon": "Wasp Dungeon",
 
 	"container.crystal_crafting_table": "Crystal Crafting Table",
 
-	"entity.minecraft.villager.chaosawakens.dimensional_trader": "Oddities Purveyor",
-    "enchantment.chaosawakens.killer": "Killer",
-    "enchantment.chaosawakens.curse_of_withering": "Curse Of Withering",
+	"entity.minecraft.villager.chaosawakens.oddities_purveyor": "Oddities Purveyor",
 
 	"entity.chaosawakens.acacia_ent": "Acacia Ent",
 	"entity.chaosawakens.birch_ent": "Birch Ent",

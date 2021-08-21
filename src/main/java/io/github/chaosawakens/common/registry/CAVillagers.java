@@ -21,12 +21,12 @@ public class CAVillagers {
 
 	public static final RegistryObject<PointOfInterestType> BLAST_BUILDING = POI_TYPES.register("blast_building", () -> new PointOfInterestType("blast_building", PointOfInterestType.getBlockStates(CABlocks.CRYSTAL_FURNACE.get()), 1, 2));
 
-	public static final RegistryObject<VillagerProfession> DIMENSIONAL_TRADER = PROFESSIONS.register("dimensional_trader", () -> new VillagerProfession("dimensional_trader", BLAST_BUILDING.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_ARMORER));
+	public static final RegistryObject<VillagerProfession> ODDITIES_PURVEYOR = PROFESSIONS.register("oddities_purveyor", () -> new VillagerProfession("oddities_purveyor", BLAST_BUILDING.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_ARMORER));
 
 	public static void registerVillagerTypes() {
 		VillagerTrades.TRADES.isEmpty();
 
-		GiveHeroGiftsTask.gifts.put(DIMENSIONAL_TRADER.get(), new ResourceLocation(ChaosAwakens.MODID, "gameplay/hero_of_the_village/dimensional_trader_gift"));
+		GiveHeroGiftsTask.gifts.put(ODDITIES_PURVEYOR.get(), new ResourceLocation(ChaosAwakens.MODID, "gameplay/hero_of_the_village/oddities_purveyor_gift"));
 	}
 
 	private static VillagerType createType(String type) {

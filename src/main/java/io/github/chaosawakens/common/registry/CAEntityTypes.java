@@ -130,7 +130,7 @@ public class CAEntityTypes {
 
 	// Termite
 	public static final RegistryObject<EntityType<AggressiveAntEntity>> TERMITE = ENTITY_TYPES.register("termite",
-			() -> EntityType.Builder.of((IFactory<AggressiveAntEntity>)(type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.CRYSTAL_DIMENSION_LEGACY),
+			() -> EntityType.Builder.of((IFactory<AggressiveAntEntity>)(type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.CRYSTALWORLD),
 					EntityClassification.CREATURE)
 					.sized(0.5f, 0.25f) // Hitbox Size ()
 					.build(new ResourceLocation(ChaosAwakens.MODID, "termite").toString()));

@@ -15,7 +15,7 @@ import java.util.function.BiConsumer;
 public class CAGiftLootTable  extends GiftLootTables {
 	@Override
 	public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
-		consumer.accept(CALootTables.GAMEPLAY_HERO_OF_THE_VILLAGE_DIMENSIONAL_TRADER_GIFT,
+		consumer.accept(CALootTables.GAMEPLAY_HERO_OF_THE_VILLAGE_ODDITIES_PURVEYOR_GIFT,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
