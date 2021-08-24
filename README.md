@@ -11,7 +11,7 @@ All downloads are now located [in this page](https://chaosawakens.github.io/down
 
 ## FAQ
 ### Q: Will you make a *Fabric* version?
-**A:** We are not going it ourselves, but you are free to contribute to the Fabric repository.
+**A:** It is unlikely we'll be doing it ourselves, but you are free to contribute to the Fabric repository.
 
 ### Q: Will this mod be ported to version x.x.x?
 **A:** We are likely **only** going to backport to version 1.12.2, and we have no plans to do it for 1.7.10. As 1.16.5 is our primary focus, we won't focus a lot on 1.12.2 yet.
