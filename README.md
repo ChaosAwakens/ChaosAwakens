@@ -11,7 +11,7 @@ All downloads are now located [in this page](https://chaosawakens.github.io/down
 
 ## FAQ
 ### Q: Will this mod be ported to version x.x.x or *Fabric*?
-**A:** We are only going to focus for *Forge* 1.16.5 for the time being, **thus there are currently no plans for backports aside for 1.12.2, forward ports to version 1.17.1, or Fabric/Quilt releases**, nor do we want anyone else to port the mod without asking either.
+**A:** We are only going to focus for *Forge* 1.16.5 for the time being, **thus there are currently no plans for backports aside for 1.12.2, forward ports to version 1.17.1, or Fabric/Quilt releases**. However, if you want to port it yourself, feel free to fork the project and pull request your work afterwards.
 
 There will be **absolutely no** port for *Forge* 1.17.1, as *GeckoLib* won't actively support it either as stated in the screenshot below:
 
