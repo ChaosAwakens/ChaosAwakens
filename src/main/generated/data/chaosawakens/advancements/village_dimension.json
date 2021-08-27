@@ -5,10 +5,10 @@
       "item": "minecraft:oak_log"
     },
     "title": {
-      "translate": "advancements.chaosawakens.village_dimension.title"
+      "translate": "advancements.chaosawakens.village_mania.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.village_dimension.description"
+      "translate": "advancements.chaosawakens.village_mania.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -17,7 +17,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "village_dimension": {
+    "village_mania": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
         "to": "chaosawakens:village_mania"
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "village_dimension"
+      "village_mania"
     ]
   ]
 }

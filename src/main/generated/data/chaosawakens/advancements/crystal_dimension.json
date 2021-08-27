@@ -5,10 +5,10 @@
       "item": "chaosawakens:crystal_grass_block"
     },
     "title": {
-      "translate": "advancements.chaosawakens.crystal_dimension.title"
+      "translate": "advancements.chaosawakens.crystalworld.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.crystal_dimension.description"
+      "translate": "advancements.chaosawakens.crystalworld.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -17,7 +17,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "crystal_dimension": {
+    "crystalworld": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
         "to": "chaosawakens:crystalworld"
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "crystal_dimension"
+      "crystalworld"
     ]
   ]
 }
