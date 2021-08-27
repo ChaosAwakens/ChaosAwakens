@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.worldgen;
 
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.function.Function;
-
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
@@ -19,6 +15,10 @@ import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * Class with method(s) that subscribe to the BiomeLoadingEvent

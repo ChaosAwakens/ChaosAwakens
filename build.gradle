@@ -77,9 +77,6 @@ dependencies {
     implementation fg.deobf("curse.maven:worldedit-225608:${project.worldedit}")
 
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
-
-    compile fg.deobf("slimeknights.mantle:Mantle:1.16.5-${project.mantle}")
-    compile fg.deobf("slimeknights.tconstruct:TConstruct:1.16.5-${project.tconstruct}")
 }
 
 repositories {

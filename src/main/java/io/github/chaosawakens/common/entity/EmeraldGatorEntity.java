@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -29,9 +30,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-
-import io.github.chaosawakens.common.registry.CASoundEvents;
-
 import java.util.UUID;
 
 public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAnimatable {

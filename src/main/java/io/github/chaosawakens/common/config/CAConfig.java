@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.*;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class CAConfig {
@@ -135,7 +135,7 @@ public class CAConfig {
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Log messages");
-			this.terraforgedCheckMsg = builder.define("Terraforged check message active", true);
+			terraforgedCheckMsg = builder.define("Terraforged check message active", true);
 			builder.pop();
 			builder.push("Attack Damage");
 			builder.push("Ultimate Weapons/Tools");

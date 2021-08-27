@@ -2,15 +2,13 @@ package io.github.chaosawakens.common;
 
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.event.ClickEvent;
-import net.minecraftforge.common.ForgeHooks;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
 public class UpdateHandler {
-    private static String currentVersion = ChaosAwakens.VERSION;
+    private static final String currentVersion = ChaosAwakens.VERSION;
 
     private static String newestVersion;
 

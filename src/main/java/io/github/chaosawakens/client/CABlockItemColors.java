@@ -1,7 +1,5 @@
 package io.github.chaosawakens.client;
 
-import java.util.function.Function;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -14,6 +12,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus =  Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class CABlockItemColors {

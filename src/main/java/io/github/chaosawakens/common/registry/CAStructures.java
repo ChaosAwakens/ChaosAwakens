@@ -1,11 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.worldgen.structures.SurfaceDungeonStructure;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -16,6 +12,9 @@ import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CAStructures {
 

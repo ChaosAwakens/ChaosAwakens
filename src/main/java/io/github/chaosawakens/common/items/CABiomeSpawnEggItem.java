@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemGroup;
@@ -14,6 +10,9 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.biome.Biome;
+
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class CABiomeSpawnEggItem extends CASpawnEggItem {
 	private Supplier<? extends EntityType<?>> mutableGetter;

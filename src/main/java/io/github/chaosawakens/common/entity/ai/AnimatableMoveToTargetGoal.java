@@ -1,11 +1,11 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import java.util.EnumSet;
-
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.EntityPredicates;
+
+import java.util.EnumSet;
 
 /**
  * Move a given entity towards another targeted entity

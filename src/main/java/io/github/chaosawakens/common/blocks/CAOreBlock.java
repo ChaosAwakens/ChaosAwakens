@@ -1,15 +1,14 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.Random;
-
-import java.util.function.Function;
-
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorldReader;
+
+import java.util.Random;
+import java.util.function.Function;
 
 public class CAOreBlock extends Block {
 

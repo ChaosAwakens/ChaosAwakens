@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
+import io.github.chaosawakens.common.blocks.tileentities.CrystalFurnaceTileEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
@@ -16,8 +17,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
-
-import io.github.chaosawakens.common.blocks.tileentities.CrystalFurnaceTileEntity;
 
 public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
     public CrystalFurnaceBlock(AbstractBlock.Properties properties) {

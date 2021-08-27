@@ -1,9 +1,5 @@
 package io.github.chaosawakens.api;
 
-import java.util.function.Function;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.PortalInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -15,6 +11,9 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.ITeleporter;
+
+import javax.annotation.Nullable;
+import java.util.function.Function;
 
 /**
  * @author invalid2

@@ -1,21 +1,6 @@
 package io.github.chaosawakens.common.integration;
 
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CADimensions;
-import io.github.chaosawakens.common.registry.CAItems;
-import jeresources.api.distributions.DistributionSquare;
-import jeresources.api.distributions.DistributionTriangular;
-import jeresources.api.drop.LootDrop;
-import jeresources.api.restrictions.DimensionRestriction;
-import jeresources.api.restrictions.Restriction;
 import jeresources.compatibility.JERAPI;
-import jeresources.entry.WorldGenEntry;
-import jeresources.registry.WorldGenRegistry;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 public class CAJER {

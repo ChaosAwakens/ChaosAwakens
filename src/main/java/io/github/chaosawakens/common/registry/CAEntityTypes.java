@@ -1,17 +1,9 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.*;
-import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
-import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
-import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
-import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
-import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
-import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
+import io.github.chaosawakens.common.entity.projectile.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
@@ -25,6 +17,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CAEntityTypes {
 

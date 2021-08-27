@@ -1,12 +1,12 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import java.util.EnumSet;
-
 import io.github.chaosawakens.api.IGrabber;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+
+import java.util.EnumSet;
 
 /**
  * @author invalid2

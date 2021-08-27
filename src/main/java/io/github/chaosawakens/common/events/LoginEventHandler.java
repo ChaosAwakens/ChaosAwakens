@@ -25,7 +25,7 @@ public class LoginEventHandler {
 
     @OnlyIn(Dist.CLIENT)
     public void sendChatMessage(String text, PlayerEntity player) {
-        TranslationTextComponent component2 = new TranslationTextComponent(I18n.get(text, new Object[0]));
+        TranslationTextComponent component2 = new TranslationTextComponent(I18n.get(text));
         player.sendMessage(component2, player.getUUID());
     }
 }
