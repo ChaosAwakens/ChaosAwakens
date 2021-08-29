@@ -43,7 +43,7 @@ _If you still want the original mod with no changes, please instead play the ori
 ## Credits/Staff Team
 **Project Lead:** WeirdNerd, thewoundedknight
 
-**Artists/Modellers:** VDA Spoop, Blackout, LuisRandomness, Absolute Kun, Meamer Teamer, Phobos, Sipilus, TheLoneCyberman, TheTrone, jjwiggs, killerking, TechnoCreeper, Spooder, Chromatic Aeternus, Renato, BS Guy, crydigo, Pear, DinoDave, RetDwist, Franz Drameh, AlexanderTheNotSoGreat
+**Artists/Modellers:** VDA Spoop, Blackout, LuisRandomness, Absolute Kun, Meamer Teamer, Phobos, TheLoneCyberman, TheTrone, jjwiggs, killerking, TechnoCreeper, Spooder, Chromatic Aeternus, ReVG08, BS Guy, crydigo, Pear, DinoDave, RetDwist, Franz Drameh
 
 **Sound Designers:** mattster, WeirdNerd
 
@@ -51,4 +51,4 @@ _If you still want the original mod with no changes, please instead play the ori
 
 **Builders:** Blackout, crydigo, thewoundedknight, TheLoneCyberman, Lymen
 
-**Former Members:** Asbestosstar, Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123
+**Former Members:** Asbestosstar, Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123, AlexanderTheNotSoGreat, Sipilus
