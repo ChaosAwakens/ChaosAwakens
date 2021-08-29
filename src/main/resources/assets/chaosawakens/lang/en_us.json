@@ -184,6 +184,10 @@
 	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
 
 	"block.chaosawakens.duplication_log": "Duplication Tree Log",
+	"block.chaosawakens.duplication_leaves": "Duplication Tree Leaves",
+	"block.chaosawakens.stripped_duplication_log": "Stripped Duplication Tree Logs",
+	"block.chaosawakens.dead_duplication_log": "Dead Duplication Tree Log",
+	"block.chaosawakens.duplication_planks": "Duplication Planks",
 
 	"item.chaosawakens.salt": "Salt",
 	"block.chaosawakens.salt_ore": "Salt Ore",
@@ -496,11 +500,16 @@
 	"block.chaosawakens.strawberry_plant": "Strawberry Bush",
 	
 	"block.chaosawakens.apple_log": "Apple Log",
+	"block.chaosawakens.apple_planks": "Apple Planks",
 	"block.chaosawakens.cherry_log": "Cherry Log",
+	"block.chaosawakens.cherry_leaves": "Cherry Leaves",
+	"block.chaosawakens.cherry_planks": "Cherry Planks",
 	"block.chaosawakens.peach_log": "Peach Log",
 	"block.chaosawakens.peach_leaves": "Peach Leaves",
 	"block.chaosawakens.peach_planks": "Peach Planks",
 	"block.chaosawakens.stripped_peach_log": "Stripped Peach Log",
+	"block.chaosawakens.stripped_apple_log": "Stripped Apple Log",
+	"block.chaosawakens.stripped_cherry_log": "Stripped Cherry Log",
 	
 	"item.chaosawakens.dead_stink_bug": "Dead Stink Bug",
 

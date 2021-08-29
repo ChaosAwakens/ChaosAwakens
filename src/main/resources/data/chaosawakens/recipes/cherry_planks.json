@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X"
+  ],
+  "key": {
+    "X": {
+      "tag": "chaosawakens:cherry_wood"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:cherry_planks",
+    "count": 4
+  }
+}
