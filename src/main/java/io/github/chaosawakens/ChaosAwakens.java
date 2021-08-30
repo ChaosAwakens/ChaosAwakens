@@ -15,6 +15,7 @@ import io.github.chaosawakens.data.CABlockModelProvider;
 import io.github.chaosawakens.data.CABlockStateProvider;
 import io.github.chaosawakens.data.CAItemModelGenerator;
 import io.github.chaosawakens.data.CALootTableProvider;
+import io.github.chaosawakens.data.CARecipeProvider;
 import io.github.chaosawakens.data.CATagProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
@@ -115,6 +116,7 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
 			dataGenerator.addProvider(new CATagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
+			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
 		}
 	}
 
