@@ -34,10 +34,10 @@ public class CATagProvider extends BlockTagsProvider{
      
      @Override
     protected void addTags() {
-       	this.tag(CATags.PEACH_WOOD).addTag(CATags.CA_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
-    	this.tag(CATags.CHERRY_WOOD).addTag(CATags.CA_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
-    	this.tag(CATags.DUPLICATOR_WOOD).addTag(CATags.CA_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
-    	this.tag(CATags.APPLE_WOOD).addTag(CATags.CA_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
+       	this.tag(CATags.PEACH_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
+    	this.tag(CATags.CHERRY_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
+    	this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
+    	this.tag(CATags.APPLE_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
     	this.tag(CATags.CA_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get(), CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get(), CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
     }
      
