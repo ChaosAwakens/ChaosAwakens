@@ -25,6 +25,7 @@ public class CATags {
 	public static final ITag.INamedTag<Block> CHERRY_WOOD = BlockTags.bind(ChaosAwakens.MODID+":cherry_wood");
 	public static final ITag.INamedTag<Block> DUPLICATOR_WOOD = BlockTags.bind(ChaosAwakens.MODID+":duplicator_wood");
 	public static final ITag.INamedTag<Block> APPLE_WOOD = BlockTags.bind(ChaosAwakens.MODID+":apple_wood");
+	public static final ITag.INamedTag<Block> CA_WOOD = BlockTags.bind(ChaosAwakens.MODID+":ca_wood");
 	
 	//Item tags
 	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID+":custom_tooltips");

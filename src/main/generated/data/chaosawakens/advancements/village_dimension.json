@@ -5,10 +5,10 @@
       "item": "minecraft:oak_log"
     },
     "title": {
-      "translate": "advancements.chaosawakens.village_mania.title"
+      "translate": "advancements.chaosawakens.village_dimension.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.village_mania.description"
+      "translate": "advancements.chaosawakens.village_dimension.description"
     },
     "frame": "task",
     "show_toast": true,

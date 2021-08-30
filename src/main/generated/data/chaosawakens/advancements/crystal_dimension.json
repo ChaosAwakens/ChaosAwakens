@@ -5,10 +5,10 @@
       "item": "chaosawakens:crystal_grass_block"
     },
     "title": {
-      "translate": "advancements.chaosawakens.crystalworld.title"
+      "translate": "advancements.chaosawakens.crystal_dimension.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.crystalworld.description"
+      "translate": "advancements.chaosawakens.crystal_dimension.description"
     },
     "frame": "task",
     "show_toast": true,

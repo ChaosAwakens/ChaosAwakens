@@ -5,10 +5,10 @@
       "item": "chaosawakens:uranium_ore"
     },
     "title": {
-      "translate": "advancements.chaosawakens.mining_paradise.title"
+      "translate": "advancements.chaosawakens.mining_dimension.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.mining_paradise.description"
+      "translate": "advancements.chaosawakens.mining_dimension.description"
     },
     "frame": "task",
     "show_toast": true,

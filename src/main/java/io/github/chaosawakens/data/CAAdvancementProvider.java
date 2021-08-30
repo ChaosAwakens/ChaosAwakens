@@ -107,11 +107,11 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				InventoryChangeTrigger.Instance.hasItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get())).save(t, id("all_armor"));
 
 
-		Advancement crystalDimension = registerAdvancement("crystalworld", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root).addCriterion("crystalworld", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTALWORLD)).save(t, id("crystal_dimension"));
+		Advancement crystalDimension = registerAdvancement("crystal_dimension", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root).addCriterion("crystalworld", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTALWORLD)).save(t, id("crystal_dimension"));
 
-		Advancement miningDimension = registerAdvancement("mining_paradise", FrameType.TASK, CABlocks.URANIUM_ORE.get()).parent(root).addCriterion("mining_paradise", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_PARADISE)).save(t, id("mining_dimension"));
+		Advancement miningDimension = registerAdvancement("mining_dimension", FrameType.TASK, CABlocks.URANIUM_ORE.get()).parent(root).addCriterion("mining_paradise", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_PARADISE)).save(t, id("mining_dimension"));
 
-		Advancement villageDimension = registerAdvancement("village_mania", FrameType.TASK, Blocks.OAK_LOG).parent(root).addCriterion("village_mania", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.VILLAGE_MANIA)).save(t, id("village_dimension"));
+		Advancement villageDimension = registerAdvancement("village_dimension", FrameType.TASK, Blocks.OAK_LOG).parent(root).addCriterion("village_mania", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.VILLAGE_MANIA)).save(t, id("village_dimension"));
 
 		Advancement roboSlayer = registerAdvancement("robo_slayer", FrameType.TASK, CAItems.RAY_GUN.get()).parent(root).addCriterion("robo_sniper",
 
