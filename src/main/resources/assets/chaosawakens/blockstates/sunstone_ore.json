@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/sunstone_ore"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/sunstone_ore"
+    }
+  }
 }

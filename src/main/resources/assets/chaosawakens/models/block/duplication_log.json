@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cube_all",
-	"textures": {
-		"all": "chaosawakens:block/duplication_log"
-	}
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/duplication_log"
+  }
 }

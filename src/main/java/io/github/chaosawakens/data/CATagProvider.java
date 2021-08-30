@@ -1,6 +1,5 @@
 package io.github.chaosawakens.data;
 
-import java.nio.file.Path;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATags;
@@ -9,71 +8,72 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.nio.file.Path;
+
 /**
  * Yea I do understand that Jsons are easy to make, however
  * it's about time we focus on the real stuff, this provider
  * makes it easier for us to focus on the heavy code
- * @author Meme Man
  *
+ * @author Meme Man
  */
 
-public class CATagProvider extends BlockTagsProvider{
+public class CATagProvider extends BlockTagsProvider {
 
-	public CATagProvider(DataGenerator gen, ExistingFileHelper existingFileHelper)
-	{
-		super(gen, ChaosAwakens.MODID, existingFileHelper);
-	}
+    public CATagProvider(DataGenerator gen, ExistingFileHelper existingFileHelper) {
+        super(gen, ChaosAwakens.MODID, existingFileHelper);
+    }
 
-	protected Path getPath(ResourceLocation resourceLocation) {
-		return this.generator.getOutputFolder().resolve("data/" + resourceLocation.getNamespace() + "/tags/items/" + resourceLocation.getPath() + ".json");
-	}
+    protected Path getPath(ResourceLocation resourceLocation) {
+        return this.generator.getOutputFolder().resolve("data/" + resourceLocation.getNamespace() + "/tags/items/" + resourceLocation.getPath() + ".json");
+    }
 
-	public String getName() {
-		return "Chaos Awakens Item-Block Tags";
-	}
+    public String getName() {
+        return "Chaos Awakens Item-Block Tags";
+    }
 
-	@Override
-	protected void addTags() {
-		this.tag(CATags.APPLE_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
-		this.tag(CATags.CHERRY_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
-		this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
-		this.tag(CATags.PEACH_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
-		this.tag(CATags.CA_WOOD).addTags(CATags.APPLE_WOOD, CATags.CHERRY_WOOD, CATags.DUPLICATOR_WOOD, CATags.PEACH_WOOD);
-	}
+    @Override
+    protected void addTags() {
+        this.tag(CATags.APPLE_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
+        this.tag(CATags.CHERRY_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
+        this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
+        this.tag(CATags.PEACH_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
+        this.tag(CATags.CA_WOOD).addTags(CATags.APPLE_WOOD, CATags.CHERRY_WOOD, CATags.DUPLICATOR_WOOD, CATags.PEACH_WOOD);
+    }
 
-	//TODO make the static class and the main class function as one instead of having to make them separate
-	public static class CATagProviderForBlocks extends BlockTagsProvider {
+    //TODO make the static class and the main class function as one instead of having to make them separate
+    public static class CATagProviderForBlocks extends BlockTagsProvider {
 
-		/**
-		 * Static class for the main tag provider to make a separate package
-		 * for the block tags to work properly in crafting recipes and such
-		 * @author Meme Man
-		 * @param gen
-		 * @param existingFileHelper
-		 */
+        /**
+         * Static class for the main tag provider to make a separate package
+         * for the block tags to work properly in crafting recipes and such
+         *
+         * @param gen
+         * @param existingFileHelper
+         * @author Meme Man
+         */
 
-		public CATagProviderForBlocks(DataGenerator gen, ExistingFileHelper existingFileHelper)
-		{
-			super(gen, ChaosAwakens.MODID, existingFileHelper);
-		}
+        public CATagProviderForBlocks(DataGenerator gen, ExistingFileHelper existingFileHelper) {
+            super(gen, ChaosAwakens.MODID, existingFileHelper);
+        }
 
-		protected Path getPath(ResourceLocation resourceLocation) {
-			return this.generator.getOutputFolder().resolve("data/" + resourceLocation.getNamespace() + "/tags/blocks/" + resourceLocation.getPath() + ".json");
-		}
+        protected Path getPath(ResourceLocation resourceLocation) {
+            return this.generator.getOutputFolder().resolve("data/" + resourceLocation.getNamespace() + "/tags/blocks/" + resourceLocation.getPath() + ".json");
+        }
 
-		public String getName() {
-			return "Chaos Awakens Block Tags";
-		}
+        public String getName() {
+            return "Chaos Awakens Block Tags";
+        }
 
-		@Override
-		protected void addTags() {
-			this.tag(CATags.APPLE_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
-			this.tag(CATags.CHERRY_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
-			this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
-			this.tag(CATags.PEACH_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
-			this.tag(CATags.CA_WOOD).addTags(CATags.APPLE_WOOD, CATags.CHERRY_WOOD, CATags.DUPLICATOR_WOOD, CATags.PEACH_WOOD);
-		}
+        @Override
+        protected void addTags() {
+            this.tag(CATags.APPLE_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
+            this.tag(CATags.CHERRY_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
+            this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
+            this.tag(CATags.PEACH_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
+            this.tag(CATags.CA_WOOD).addTags(CATags.APPLE_WOOD, CATags.CHERRY_WOOD, CATags.DUPLICATOR_WOOD, CATags.PEACH_WOOD);
+        }
 
-	}
+    }
 
 }

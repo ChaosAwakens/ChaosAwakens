@@ -27,76 +27,76 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
-	private final AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
-	private final ConfigValue<Boolean> tpConfig;
-	private final RegistryKey<World> targetDimension;
+    private final ConfigValue<Boolean> tpConfig;
+    private final RegistryKey<World> targetDimension;
 
-	public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
-		super(type, worldIn);
-		this.noCulling = true;
-		this.tpConfig = tpConfig;
-		this.targetDimension = targetDimension;
-	}
+    public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
+        super(type, worldIn);
+        this.noCulling = true;
+        this.tpConfig = tpConfig;
+        this.targetDimension = targetDimension;
+    }
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
-			return PlayState.CONTINUE;
-		}
-		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
-			return PlayState.CONTINUE;
-		}
-		return PlayState.CONTINUE;
-	}
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 2)
+                .add(Attributes.ATTACK_SPEED, 1)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.ATTACK_DAMAGE, 1)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
+                .add(Attributes.FOLLOW_RANGE, 8);
+    }
 
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0F, false));
-		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
-		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AntEntity.class, false));
-		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(AggressiveAntEntity.class));
-	}
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        if (event.isMoving()) {
+            event.getController()
+                    .setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
+            return PlayState.CONTINUE;
+        }
+        if (!event.isMoving()) {
+            event.getController()
+                    .setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.CONTINUE;
+    }
 
-	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 2)
-				.add(Attributes.ATTACK_SPEED, 1)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D)
-				.add(Attributes.ATTACK_DAMAGE, 1)
-				.add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-				.add(Attributes.FOLLOW_RANGE, 8);
-	}
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0F, false));
+        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
+        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AntEntity.class, false));
+        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers(AggressiveAntEntity.class));
+    }
 
-	@Override
-	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
-		ItemStack itemstack = playerIn.getItemInHand(hand);
+    @Override
+    public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+        ItemStack itemstack = playerIn.getItemInHand(hand);
 
-		if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
-			MinecraftServer minecraftServer = ((ServerWorld)this.level).getServer();
-			ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
-			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-			if (targetWorld != null)
-				serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
-		}
+        if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
+            MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
+            ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+            if (targetWorld != null)
+                serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+        }
 
-		return super.mobInteract(playerIn, hand);
-	}
+        return super.mobInteract(playerIn, hand);
+    }
 
-	@Override
-	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
-	}
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
+    }
 
-	@Override
-	public AnimationFactory getFactory() {
-		return this.factory;
-	}
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
 }

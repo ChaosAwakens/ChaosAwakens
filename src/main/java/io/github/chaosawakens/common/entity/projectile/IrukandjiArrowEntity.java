@@ -13,60 +13,61 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class IrukandjiArrowEntity extends AbstractArrowEntity {
 
-	private int duration = 200;
-	private double damage = 20.0D;
+    private int duration = 200;
+    private double damage = 20.0D;
 
-	public IrukandjiArrowEntity(EntityType<? extends IrukandjiArrowEntity> type, World worldIn) {
-		super(type, worldIn);
-	}
+    public IrukandjiArrowEntity(EntityType<? extends IrukandjiArrowEntity> type, World worldIn) {
+        super(type, worldIn);
+    }
 
-	public IrukandjiArrowEntity(World worldIn, double x, double y, double z) {
-		super(CAEntityTypes.IRUKANDJI_ARROW.get(), x, y, z, worldIn);
-	}
+    public IrukandjiArrowEntity(World worldIn, double x, double y, double z) {
+        super(CAEntityTypes.IRUKANDJI_ARROW.get(), x, y, z, worldIn);
+    }
 
-	public IrukandjiArrowEntity(World worldIn, LivingEntity shooter) {
-		super(CAEntityTypes.IRUKANDJI_ARROW.get(), shooter, worldIn);
-	}
+    public IrukandjiArrowEntity(World worldIn, LivingEntity shooter) {
+        super(CAEntityTypes.IRUKANDJI_ARROW.get(), shooter, worldIn);
+    }
 
-	@Override
-	protected ItemStack getPickupItem() {
-		return new ItemStack(CAItems.IRUKANDJI_ARROW.get());
-	}
+    @Override
+    protected ItemStack getPickupItem() {
+        return new ItemStack(CAItems.IRUKANDJI_ARROW.get());
+    }
 
-	@Override
-	public void readAdditionalSaveData(CompoundNBT compound) {
-		super.readAdditionalSaveData(compound);
-		if (compound.contains("Duration")) {
-			this.duration = compound.getInt("Duration");
-		}
-	}
+    @Override
+    public void readAdditionalSaveData(CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
+        if (compound.contains("Duration")) {
+            this.duration = compound.getInt("Duration");
+        }
+    }
 
-	@Override
-	public void tick() {
-		super.tick();
-		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) {
-			this.level.broadcastEntityEvent(this, (byte) 0);
-		}
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) {
+            this.level.broadcastEntityEvent(this, (byte) 0);
+        }
 
-	}
+    }
 
-	@Override
-	public void addAdditionalSaveData(CompoundNBT compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("Duration", this.duration);
-	}
+    @Override
+    public void addAdditionalSaveData(CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("Duration", this.duration);
+    }
 
-	@Override
-	public IPacket<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
+    @Override
+    public IPacket<?> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
 
-	@Override
-	public void setBaseDamage(double damageIn) {
-		this.damage = damageIn;
-	}
-	@Override
-	public double getBaseDamage() {
-		return this.damage;
-	}
+    @Override
+    public double getBaseDamage() {
+        return this.damage;
+    }
+
+    @Override
+    public void setBaseDamage(double damageIn) {
+        this.damage = damageIn;
+    }
 }

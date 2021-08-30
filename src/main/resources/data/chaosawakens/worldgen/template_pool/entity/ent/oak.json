@@ -1,15 +1,15 @@
 {
-	"name": "chaosawakens:entity/ent/oak",
-	"fallback": "minecraft:empty",
-	"elements": [
-		{
-			"weight":1,
-			"element": {
-				"element_type": "minecraft:single_pool_element",
-				"location": "chaosawakens:entity/ent/oak",
-				"processors": "minecraft:empty",
-				"projection": "rigid"
-			}
-		}
-	]
+  "name": "chaosawakens:entity/ent/oak",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "chaosawakens:entity/ent/oak",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      }
+    }
+  ]
 }

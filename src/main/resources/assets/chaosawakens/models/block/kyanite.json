@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cube_all",
-	"textures": {
-		"all": "chaosawakens:block/kyanite"
-	}
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/kyanite"
+  }
 }

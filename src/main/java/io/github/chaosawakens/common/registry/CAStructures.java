@@ -18,52 +18,52 @@ import java.util.Map;
 
 public class CAStructures {
 
-	public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ChaosAwakens.MODID);
+    public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ChaosAwakens.MODID);
 
-	public static final RegistryObject<Structure<NoFeatureConfig>> ACACIA_ENT_TREE = STRUCTURES.register("acacia_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/acacia")));
-	public static final RegistryObject<Structure<NoFeatureConfig>> BIRCH_ENT_TREE = STRUCTURES.register("birch_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/birch")));
-	public static final RegistryObject<Structure<NoFeatureConfig>> CRIMSON_ENT_TREE = STRUCTURES.register("crimson_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/crimson")));
-	public static final RegistryObject<Structure<NoFeatureConfig>> DARK_OAK_ENT_TREE = STRUCTURES.register("dark_oak_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/dark_oak")));
-	public static final RegistryObject<Structure<NoFeatureConfig>> JUNGLE_ENT_TREE = STRUCTURES.register("jungle_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/jungle")));
-	public static final RegistryObject<Structure<NoFeatureConfig>> OAK_ENT_TREE = STRUCTURES.register("oak_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/oak")));
-	public static final RegistryObject<Structure<NoFeatureConfig>> SPRUCE_ENT_TREE = STRUCTURES.register("spruce_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/spruce")));
-	public static final RegistryObject<Structure<NoFeatureConfig>> WARPED_ENT_TREE = STRUCTURES.register("warped_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/warped")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> ACACIA_ENT_TREE = STRUCTURES.register("acacia_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/acacia")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> BIRCH_ENT_TREE = STRUCTURES.register("birch_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/birch")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> CRIMSON_ENT_TREE = STRUCTURES.register("crimson_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/crimson")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> DARK_OAK_ENT_TREE = STRUCTURES.register("dark_oak_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/dark_oak")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> JUNGLE_ENT_TREE = STRUCTURES.register("jungle_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/jungle")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> OAK_ENT_TREE = STRUCTURES.register("oak_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/oak")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> SPRUCE_ENT_TREE = STRUCTURES.register("spruce_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/spruce")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> WARPED_ENT_TREE = STRUCTURES.register("warped_ent_tree", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "dungeon/ent_tree/warped")));
 
-	public static final RegistryObject<Structure<NoFeatureConfig>> WASP_DUNGEON = STRUCTURES.register("wasp_dungeon", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "wasp_dungeon/start_pool")));
+    public static final RegistryObject<Structure<NoFeatureConfig>> WASP_DUNGEON = STRUCTURES.register("wasp_dungeon", () -> (new SurfaceDungeonStructure(NoFeatureConfig.CODEC, "wasp_dungeon/start_pool")));
 
-	public static void setupStructures() {
-		setupMapSpacingAndLand(ACACIA_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(BIRCH_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(CRIMSON_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(DARK_OAK_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(JUNGLE_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(OAK_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(SPRUCE_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(WARPED_ENT_TREE.get(), new StructureSeparationSettings(27 , 25, 32034987), true);
-		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21 , 19, 159332311), true);
-	}
+    public static void setupStructures() {
+        setupMapSpacingAndLand(ACACIA_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(BIRCH_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(CRIMSON_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(DARK_OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(JUNGLE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(SPRUCE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(WARPED_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+        setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21, 19, 159332311), true);
+    }
 
-	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {
+    public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {
 
-		Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
+        Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 
-		if (transformSurroundingLand) {
-			Structure.NOISE_AFFECTING_FEATURES = ImmutableList.<Structure<?>>builder().addAll(Structure.NOISE_AFFECTING_FEATURES).add(structure).build();
-		}
+        if (transformSurroundingLand) {
+            Structure.NOISE_AFFECTING_FEATURES = ImmutableList.<Structure<?>>builder().addAll(Structure.NOISE_AFFECTING_FEATURES).add(structure).build();
+        }
 
-		DimensionStructuresSettings.DEFAULTS = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
-				.putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build();
+        DimensionStructuresSettings.DEFAULTS = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
+                .putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build();
 
-		WorldGenRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
-			Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().structureSettings().structureConfig;
+        WorldGenRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
+            Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().structureSettings().structureConfig;
 
-			if (structureMap instanceof ImmutableMap) {
-				Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
-				tempMap.put(structure, structureSeparationSettings);
-				settings.getValue().structureSettings().structureConfig = tempMap;
-			} else {
-				structureMap.put(structure, structureSeparationSettings);
-			}
-		});
-	}
+            if (structureMap instanceof ImmutableMap) {
+                Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
+                tempMap.put(structure, structureSeparationSettings);
+                settings.getValue().structureSettings().structureConfig = tempMap;
+            } else {
+                structureMap.put(structure, structureSeparationSettings);
+            }
+        });
+    }
 }

@@ -35,101 +35,99 @@ import java.util.Locale;
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
 
-	public static final String MODID = "chaosawakens";
-	public static final String MODNAME = "Chaos Awakens";
-	public static final String VERSION = "0.9-preview4";
+    public static final String MODID = "chaosawakens";
+    public static final String MODNAME = "Chaos Awakens";
+    public static final String VERSION = "0.9-preview4";
+    public static final Logger LOGGER = LogManager.getLogger();
+    public static ChaosAwakens INSTANCE;
 
-	public static ChaosAwakens INSTANCE;
+    public ChaosAwakens() {
+        INSTANCE = this;
+        GeckoLibMod.DISABLE_IN_DEV = true;
+        GeckoLib.initialize();
 
-	public static final Logger LOGGER = LogManager.getLogger();
+        LOGGER.debug(MODNAME + " Version is:" + VERSION);
 
-	public ChaosAwakens() {
-		INSTANCE = this;
-		GeckoLibMod.DISABLE_IN_DEV = true;
-		GeckoLib.initialize();
+        CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 
-		LOGGER.debug(MODNAME + " Version is:" + VERSION);
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
+        //Register to the mod event bus
+        eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
+        eventBus.addListener(this::gatherData);
 
-		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
+            MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
+        }
 
-		//Register to the mod event bus
-		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
-		eventBus.addListener(this::gatherData);
+        CABiomes.BIOMES.register(eventBus);
+        CABlocks.ITEM_BLOCKS.register(eventBus);
+        CABlocks.BLOCKS.register(eventBus);
+        CAEntityTypes.ENTITY_TYPES.register(eventBus);
+        CAItems.ITEMS.register(eventBus);
+        CATileEntities.TILE_ENTITIES.register(eventBus);
+        CAStructures.STRUCTURES.register(eventBus);
+        CAFeatures.FEATURES.register(eventBus);
+        CASoundEvents.SOUND_EVENTS.register(eventBus);
+        CAVillagers.POI_TYPES.register(eventBus);
+        CAVillagers.PROFESSIONS.register(eventBus);
+        eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 
-		if(FMLEnvironment.dist == Dist.CLIENT) {
-			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
-			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
-		}
+        if (ModList.get().isLoaded("projecte")) {
+            CAEMCValues.init();
+        }
 
-		CABiomes.BIOMES.register(eventBus);
-		CABlocks.ITEM_BLOCKS.register(eventBus);
-		CABlocks.BLOCKS.register(eventBus);
-		CAEntityTypes.ENTITY_TYPES.register(eventBus);
-		CAItems.ITEMS.register(eventBus);
-		CATileEntities.TILE_ENTITIES.register(eventBus);
-		CAStructures.STRUCTURES.register(eventBus);
-		CAFeatures.FEATURES.register(eventBus);
-		CASoundEvents.SOUND_EVENTS.register(eventBus);
-		CAVillagers.POI_TYPES.register(eventBus);
-		CAVillagers.PROFESSIONS.register(eventBus);
-		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
+        if (ModList.get().isLoaded("jeresources")) {
+            CAJER.init();
+        }
 
-		if (ModList.get().isLoaded("projecte")) {
-			CAEMCValues.init();
-		}
+        //Register to the forge event bus
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
+        MinecraftForge.EVENT_BUS.register(new MiscEventHandler());
+        MinecraftForge.EVENT_BUS.register(new LoginEventHandler());
+        if (CAConfig.COMMON.showUpdateMessage.get())
+            UpdateHandler.init();
+        MinecraftForge.EVENT_BUS.register(new GiantEventHandler());
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
+        MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
+        MinecraftForge.EVENT_BUS.register(this);
 
-		if (ModList.get().isLoaded("jeresources")) {
-			CAJER.init();
-		}
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
+    }
 
-		//Register to the forge event bus
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.register(new MiscEventHandler());
-		MinecraftForge.EVENT_BUS.register(new LoginEventHandler());
-		if (CAConfig.COMMON.showUpdateMessage.get())
-			UpdateHandler.init();
-		MinecraftForge.EVENT_BUS.register(new GiantEventHandler());
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
-		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
-		MinecraftForge.EVENT_BUS.register(this);
+    public static ResourceLocation prefix(String name) {
+        return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
+    }
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
-	}
+    public static <D> void debug(String domain, D message) {
+        LOGGER.debug("[" + domain + "]: " + (message == null ? "null" : message.toString()));
+    }
 
-	private void gatherData(final GatherDataEvent event) {
-		DataGenerator dataGenerator = event.getGenerator();
-		final ExistingFileHelper existing = event.getExistingFileHelper();
+    public static <I> void info(String domain, I message) {
+        LOGGER.info("[" + domain + "]: " + (message == null ? "null" : message.toString()));
+    }
 
-		if (event.includeServer()) {
-			dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator));
-			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
-			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
-			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
-			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
-			dataGenerator.addProvider(new CATagProvider(dataGenerator, existing));
-			dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
-		}
-	}
+    public static <W> void warn(String domain, W message) {
+        LOGGER.warn("[" + domain + "]: " + (message == null ? "null" : message.toString()));
+    }
 
-	public static ResourceLocation prefix(String name) {
-		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
-	}
+    public static <E> void error(String domain, E message) {
+        LOGGER.error("[" + domain + "]: " + (message == null ? "null" : message.toString()));
+    }
 
-	public static <D> void debug(String domain, D message) {
-		LOGGER.debug("[" + domain + "]: " + (message == null ? "null" : message.toString()));
-	}
+    private void gatherData(final GatherDataEvent event) {
+        DataGenerator dataGenerator = event.getGenerator();
+        final ExistingFileHelper existing = event.getExistingFileHelper();
 
-	public static <I> void info(String domain, I message) {
-		LOGGER.info("[" + domain + "]: " + (message == null ? "null" : message.toString()));
-	}
-
-	public static <W> void warn(String domain, W message) {
-		LOGGER.warn("[" + domain + "]: " + (message == null ? "null" : message.toString()));
-	}
-
-	public static <E> void error(String domain, E message) {
-		LOGGER.error("[" + domain + "]: " + (message == null ? "null" : message.toString()));
-	}
+        if (event.includeServer()) {
+            dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator));
+            dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
+            dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
+            dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
+            dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
+            dataGenerator.addProvider(new CATagProvider(dataGenerator, existing));
+            dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
+        }
+    }
 }

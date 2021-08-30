@@ -16,6 +16,22 @@ public class TradeUtil {
     public static final int EXPERT = 4;
     public static final int MASTER = 5;
 
+    public static void addVillagerTrades(VillagerTradesEvent event, int level, VillagerTrades.ITrade... trades) {
+        for (VillagerTrades.ITrade trade : trades) event.getTrades().get(level).add(trade);
+    }
+
+    public static void addVillagerTrades(VillagerTradesEvent event, VillagerProfession profession, int level, VillagerTrades.ITrade... trades) {
+        if (event.getType() == profession) addVillagerTrades(event, level, trades);
+    }
+
+    public static void addWandererTrades(WandererTradesEvent event, VillagerTrades.ITrade... trades) {
+        for (VillagerTrades.ITrade trade : trades) event.getGenericTrades().add(trade);
+    }
+
+    public static void addRareWandererTrades(WandererTradesEvent event, VillagerTrades.ITrade... trades) {
+        for (VillagerTrades.ITrade trade : trades) event.getRareTrades().add(trade);
+    }
+
     public static class CATrade extends BasicTrade {
         public CATrade(ItemStack input, ItemStack input2, ItemStack output, int maxTrades, int xp, float priceMult) {
             super(input, input2, output, maxTrades, xp, priceMult);
@@ -44,21 +60,5 @@ public class TradeUtil {
         public CATrade(int emeraldCount, Item output, int outputCount, int maxTrades, int xp) {
             this(emeraldCount, output, outputCount, maxTrades, xp, 0.15F);
         }
-    }
-
-    public static void addVillagerTrades(VillagerTradesEvent event, int level, VillagerTrades.ITrade... trades) {
-        for (VillagerTrades.ITrade trade : trades) event.getTrades().get(level).add(trade);
-    }
-
-    public static void addVillagerTrades(VillagerTradesEvent event, VillagerProfession profession, int level, VillagerTrades.ITrade... trades) {
-        if (event.getType() == profession) addVillagerTrades(event, level, trades);
-    }
-
-    public static void addWandererTrades(WandererTradesEvent event, VillagerTrades.ITrade... trades) {
-        for (VillagerTrades.ITrade trade : trades) event.getGenericTrades().add(trade);
-    }
-
-    public static void addRareWandererTrades(WandererTradesEvent event, VillagerTrades.ITrade... trades) {
-        for (VillagerTrades.ITrade trade : trades) event.getRareTrades().add(trade);
     }
 }

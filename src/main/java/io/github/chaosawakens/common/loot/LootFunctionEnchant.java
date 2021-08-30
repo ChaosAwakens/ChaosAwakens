@@ -29,6 +29,10 @@ public class LootFunctionEnchant extends LootFunction {
         this.enchantments = enchantments;
     }
 
+    public static LootFunctionEnchant.Builder builder() {
+        return new LootFunctionEnchant.Builder();
+    }
+
     @Override
     public LootFunctionType getType() {
         return CATreasure.ENCHANT;
@@ -44,10 +48,6 @@ public class LootFunctionEnchant extends LootFunction {
             }
         }
         return stack;
-    }
-
-    public static LootFunctionEnchant.Builder builder() {
-        return new LootFunctionEnchant.Builder();
     }
 
     public static class Builder extends LootFunction.Builder<LootFunctionEnchant.Builder> {

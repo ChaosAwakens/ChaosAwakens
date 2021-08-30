@@ -1,127 +1,544 @@
 {
-	"format_version": "1.12.0",
-	"minecraft:geometry": [
-		{
-			"description": {
-				"identifier": "geometry.attack_squid",
-				"texture_width": 64,
-				"texture_height": 64,
-				"visible_bounds_width": 3,
-				"visible_bounds_height": 2.5,
-				"visible_bounds_offset": [0, 0.75, 0]
-			},
-			"bones": [
-				{
-					"name": "attacking_squid",
-					"pivot": [0, 0, 0]
-				},
-				{
-					"name": "body",
-					"parent": "attacking_squid",
-					"pivot": [0, 0, 0],
-					"cubes": [
-						{"origin": [-4, 1, -4], "size": [8, 10, 8], "uv": [0, 0]},
-						{"origin": [-2.5, 11, -3], "size": [5, 8, 6], "uv": [0, 18]},
-						{"origin": [2.5, 11, -2], "size": [1, 6, 4], "uv": [18, 28]},
-						{"origin": [-3.5, 11, -2], "size": [1, 6, 4], "uv": [22, 18]},
-						{"origin": [-1, 11, -4], "size": [2, 2, 1], "uv": [0, 18]},
-						{"origin": [-1, 11, 3], "size": [2, 1, 1], "uv": [16, 18]},
-						{"origin": [-1, 18.5, -2], "size": [2, 3, 4], "uv": [24, 0]}
-					]
-				},
-				{
-					"name": "righttentacle",
-					"parent": "attacking_squid",
-					"pivot": [-1, 1, -2],
-					"rotation": [85, 0, 0],
-					"cubes": [
-						{"origin": [-2.5, -3, -4], "size": [2, 4, 2], "pivot": [-1, 1, -2], "rotation": [-122.5, 0, 0], "uv": [0, 40]},
-						{"origin": [-2.501, -2.5, -6.7], "size": [2, 5, 2], "pivot": [-1, 1, -2], "rotation": [-37.5, 0, 0], "uv": [26, 36]}
-					]
-				},
-				{
-					"name": "lefttentacle",
-					"parent": "attacking_squid",
-					"pivot": [2, 1, -2],
-					"rotation": [85, 0, 0],
-					"cubes": [
-						{"origin": [0.5, -3, -4], "size": [2, 4, 2], "pivot": [2, 1, -2], "rotation": [-122.5, 0, 0], "uv": [14, 38]},
-						{"origin": [0.501, -2.5, -6.7], "size": [2, 5, 2], "pivot": [2, 1, -2], "rotation": [-37.5, 0, 0], "uv": [36, 0]}
-					]
-				},
-				{
-					"name": "frontleftarm",
-					"parent": "attacking_squid",
-					"pivot": [3, 2, -1],
-					"rotation": [0, 0, -27.5],
-					"cubes": [
-						{"origin": [2, -4, -2], "size": [2, 6, 2], "uv": [36, 23]}
-					]
-				},
-				{
-					"name": "backleftarm",
-					"parent": "attacking_squid",
-					"pivot": [3, 2, 2],
-					"rotation": [0, 0, -12.5],
-					"cubes": [
-						{"origin": [2, -4, 1], "size": [2, 6, 2], "uv": [34, 34]}
-					]
-				},
-				{
-					"name": "backrightarm",
-					"parent": "attacking_squid",
-					"pivot": [-3, 2, 2],
-					"rotation": [0, 0, 12.5],
-					"cubes": [
-						{"origin": [-4, -4, 1], "size": [2, 6, 2], "uv": [32, 15]}
-					]
-				},
-				{
-					"name": "frontrightarm",
-					"parent": "attacking_squid",
-					"pivot": [-3, 2, -1],
-					"rotation": [0, 0, 27.5],
-					"cubes": [
-						{"origin": [-4, -4, -2], "size": [2, 6, 2], "uv": [8, 32]}
-					]
-				},
-				{
-					"name": "backarm1",
-					"parent": "attacking_squid",
-					"pivot": [-3, 2, 3],
-					"rotation": [20, 0, 0],
-					"cubes": [
-						{"origin": [-4.001, -4, 2], "size": [2, 6, 2], "uv": [32, 7]}
-					]
-				},
-				{
-					"name": "backarm2",
-					"parent": "attacking_squid",
-					"pivot": [2, 2, 3],
-					"rotation": [20, 0, 0],
-					"cubes": [
-						{"origin": [2.001, -4, 2], "size": [2, 6, 2], "uv": [0, 32]}
-					]
-				},
-				{
-					"name": "backarm3",
-					"parent": "attacking_squid",
-					"pivot": [-1, 2, 3],
-					"rotation": [45, 0, 0],
-					"cubes": [
-						{"origin": [-2.5, -4, 2], "size": [2, 6, 2], "uv": [28, 28]}
-					]
-				},
-				{
-					"name": "backarm4",
-					"parent": "attacking_squid",
-					"pivot": [2, 2, 3],
-					"rotation": [45, 0, 0],
-					"cubes": [
-						{"origin": [0.5, -4, 2], "size": [2, 6, 2], "uv": [0, 0]}
-					]
-				}
-			]
-		}
-	]
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.attack_squid",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 2.5,
+        "visible_bounds_offset": [
+          0,
+          0.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "attacking_squid",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "body",
+          "parent": "attacking_squid",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                1,
+                -4
+              ],
+              "size": [
+                8,
+                10,
+                8
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -2.5,
+                11,
+                -3
+              ],
+              "size": [
+                5,
+                8,
+                6
+              ],
+              "uv": [
+                0,
+                18
+              ]
+            },
+            {
+              "origin": [
+                2.5,
+                11,
+                -2
+              ],
+              "size": [
+                1,
+                6,
+                4
+              ],
+              "uv": [
+                18,
+                28
+              ]
+            },
+            {
+              "origin": [
+                -3.5,
+                11,
+                -2
+              ],
+              "size": [
+                1,
+                6,
+                4
+              ],
+              "uv": [
+                22,
+                18
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                11,
+                -4
+              ],
+              "size": [
+                2,
+                2,
+                1
+              ],
+              "uv": [
+                0,
+                18
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                11,
+                3
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                16,
+                18
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                18.5,
+                -2
+              ],
+              "size": [
+                2,
+                3,
+                4
+              ],
+              "uv": [
+                24,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "righttentacle",
+          "parent": "attacking_squid",
+          "pivot": [
+            -1,
+            1,
+            -2
+          ],
+          "rotation": [
+            85,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                -3,
+                -4
+              ],
+              "size": [
+                2,
+                4,
+                2
+              ],
+              "pivot": [
+                -1,
+                1,
+                -2
+              ],
+              "rotation": [
+                -122.5,
+                0,
+                0
+              ],
+              "uv": [
+                0,
+                40
+              ]
+            },
+            {
+              "origin": [
+                -2.501,
+                -2.5,
+                -6.7
+              ],
+              "size": [
+                2,
+                5,
+                2
+              ],
+              "pivot": [
+                -1,
+                1,
+                -2
+              ],
+              "rotation": [
+                -37.5,
+                0,
+                0
+              ],
+              "uv": [
+                26,
+                36
+              ]
+            }
+          ]
+        },
+        {
+          "name": "lefttentacle",
+          "parent": "attacking_squid",
+          "pivot": [
+            2,
+            1,
+            -2
+          ],
+          "rotation": [
+            85,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0.5,
+                -3,
+                -4
+              ],
+              "size": [
+                2,
+                4,
+                2
+              ],
+              "pivot": [
+                2,
+                1,
+                -2
+              ],
+              "rotation": [
+                -122.5,
+                0,
+                0
+              ],
+              "uv": [
+                14,
+                38
+              ]
+            },
+            {
+              "origin": [
+                0.501,
+                -2.5,
+                -6.7
+              ],
+              "size": [
+                2,
+                5,
+                2
+              ],
+              "pivot": [
+                2,
+                1,
+                -2
+              ],
+              "rotation": [
+                -37.5,
+                0,
+                0
+              ],
+              "uv": [
+                36,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "frontleftarm",
+          "parent": "attacking_squid",
+          "pivot": [
+            3,
+            2,
+            -1
+          ],
+          "rotation": [
+            0,
+            0,
+            -27.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                2,
+                -4,
+                -2
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                36,
+                23
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backleftarm",
+          "parent": "attacking_squid",
+          "pivot": [
+            3,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -12.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                2,
+                -4,
+                1
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                34,
+                34
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backrightarm",
+          "parent": "attacking_squid",
+          "pivot": [
+            -3,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            12.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                -4,
+                1
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                32,
+                15
+              ]
+            }
+          ]
+        },
+        {
+          "name": "frontrightarm",
+          "parent": "attacking_squid",
+          "pivot": [
+            -3,
+            2,
+            -1
+          ],
+          "rotation": [
+            0,
+            0,
+            27.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                -4,
+                -2
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                8,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backarm1",
+          "parent": "attacking_squid",
+          "pivot": [
+            -3,
+            2,
+            3
+          ],
+          "rotation": [
+            20,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4.001,
+                -4,
+                2
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                32,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backarm2",
+          "parent": "attacking_squid",
+          "pivot": [
+            2,
+            2,
+            3
+          ],
+          "rotation": [
+            20,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                2.001,
+                -4,
+                2
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                0,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backarm3",
+          "parent": "attacking_squid",
+          "pivot": [
+            -1,
+            2,
+            3
+          ],
+          "rotation": [
+            45,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                -4,
+                2
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                28,
+                28
+              ]
+            }
+          ]
+        },
+        {
+          "name": "backarm4",
+          "parent": "attacking_squid",
+          "pivot": [
+            2,
+            2,
+            3
+          ],
+          "rotation": [
+            45,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0.5,
+                -4,
+                2
+              ],
+              "size": [
+                2,
+                6,
+                2
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

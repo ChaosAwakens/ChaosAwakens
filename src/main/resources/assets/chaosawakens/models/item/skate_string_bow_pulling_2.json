@@ -1,6 +1,6 @@
 {
-    "parent": "item/bow",
-    "textures": {
-        "layer0": "chaosawakens:item/skate_string_bow_pulling_2"
-    }
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "chaosawakens:item/skate_string_bow_pulling_2"
+  }
 }

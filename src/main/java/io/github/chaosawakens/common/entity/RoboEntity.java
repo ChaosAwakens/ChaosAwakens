@@ -16,30 +16,30 @@ import net.minecraft.world.World;
 
 abstract public class RoboEntity extends AnimatableMonsterEntity {
 
-	public RoboEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
-		super(type, worldIn);
-	}
+    public RoboEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+        super(type, worldIn);
+    }
 
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 32.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 32.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 32.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, AbstractVillagerEntity.class, 32.0F));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, true));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
-	}
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 32.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 32.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 32.0F));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, AbstractVillagerEntity.class, 32.0F));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
+    }
 
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return CASoundEvents.ROBO_HURT.get();
-	}
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return CASoundEvents.ROBO_HURT.get();
+    }
 
-	@Override
-	protected SoundEvent getDeathSound() {
-		return CASoundEvents.ROBO_DEATH.get();
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return CASoundEvents.ROBO_DEATH.get();
+    }
 }

@@ -10,15 +10,16 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * For Feature <b>NOT</b> ConfiguredFeature
+ *
  * @author invalid2
  */
 public class CAFeatures {
 
-	/**
-	 * For Feature <b>NOT</b> ConfiguredFeature
-	 */
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, ChaosAwakens.MODID);
+    /**
+     * For Feature <b>NOT</b> ConfiguredFeature
+     */
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, ChaosAwakens.MODID);
 
-	public static final RegistryObject<GeodeFeature> GEODE =  FEATURES.register("geode", () -> new GeodeFeature(GeodeFeatureConfig.CODEC));
+    public static final RegistryObject<GeodeFeature> GEODE = FEATURES.register("geode", () -> new GeodeFeature(GeodeFeatureConfig.CODEC));
 
 }

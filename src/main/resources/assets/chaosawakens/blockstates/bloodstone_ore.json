@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/bloodstone_ore"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/bloodstone_ore"
+    }
+  }
 }

@@ -1,100 +1,100 @@
 {
-	"type": "minecraft:block",
-	"pools": [
-		{
-			"rolls": 1,
-			"entries": [
-				{
-					"type": "minecraft:alternatives",
-					"children": [
-						{
-							"type": "minecraft:item",
-							"conditions": [
-								{
-									"condition": "minecraft:match_tool",
-									"predicate": {
-										"enchantments": [
-											{
-												"enchantment": "minecraft:silk_touch",
-												"levels": {
-													"min": 1
-												}
-											}
-										]
-									}
-								}
-							],
-							"name": "minecraft:stone"
-						},
-						{
-							"type": "minecraft:item",
-							"conditions": [
-								{
-									"condition": "minecraft:survives_explosion"
-								}
-							],
-							"name": "minecraft:cobblestone"
-						}
-					]
-				}
-			]
-		},
-		{
-			"rolls": 1,
-			"entries": [
-				{
-					"type": "minecraft:item",
-					"weight": 3,
-					"name": "minecraft:lapis_lazuli"
-				},
-				{
-					"type": "minecraft:item",
-					"weight": 3,
-					"name": "minecraft:diamond"
-				},
-				{
-					"type": "minecraft:item",
-					"weight": 3,
-					"name": "minecraft:emerald"
-				},
-				{
-					"type": "minecraft:item",
-					"weight": 2,
-					"name": "chaosawakens:amethyst"
-				},
-				{
-					"type": "minecraft:item",
-					"weight": 2,
-					"name": "chaosawakens:ruby"
-				},
-				{
-					"type": "minecraft:item",
-					"weight": 2,
-					"name": "chaosawakens:tigers_eye"
-				},
-				{
-					"type": "minecraft:item",
-					"weight": 1,
-					"name": "chaosawakens:titanium_nugget"
-				},
-				{
-					"type": "minecraft:item",
-					"weight": 1,
-					"name": "chaosawakens:uranium_nugget"
-				}
-			],
-			"conditions": [
-				{
-					"condition": "minecraft:random_chance",
-					"chance": 0.01
-				},
-				{
-					"condition": "minecraft:match_tool",
-					"predicate": {
-						"item": "chaosawakens:ultimate_pickaxe"
-					}
-				}
-			]
-		}
-	]
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "minecraft:stone"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:survives_explosion"
+                }
+              ],
+              "name": "minecraft:cobblestone"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "minecraft:lapis_lazuli"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "minecraft:diamond"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "minecraft:emerald"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "chaosawakens:amethyst"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "chaosawakens:ruby"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "chaosawakens:tigers_eye"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "chaosawakens:titanium_nugget"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "chaosawakens:uranium_nugget"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.01
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "chaosawakens:ultimate_pickaxe"
+          }
+        }
+      ]
+    }
+  ]
 }

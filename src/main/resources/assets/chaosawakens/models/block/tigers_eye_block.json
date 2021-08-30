@@ -1,7 +1,7 @@
 {
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "chaosawakens:block/tigers_eye_block",
-		"particle": "chaosawakens:block/tigers_eye_block"
-	}
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/tigers_eye_block",
+    "particle": "chaosawakens:block/tigers_eye_block"
+  }
 }

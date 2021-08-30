@@ -1,9 +1,9 @@
 {
-	"parent": "minecraft:block/cube_bottom_top",
-	"textures": {
-		"top": "minecraft:block/bee_nest_top",
-		"bottom": "minecraft:block/bee_nest_bottom",
-		"side": "minecraft:block/bee_nest_side",
-		"particle": "minecraft:block/bee_nest_side"
-	}
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "minecraft:block/bee_nest_top",
+    "bottom": "minecraft:block/bee_nest_bottom",
+    "side": "minecraft:block/bee_nest_side",
+    "particle": "minecraft:block/bee_nest_side"
+  }
 }

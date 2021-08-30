@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/aluminum_ore"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/aluminum_ore"
+    }
+  }
 }

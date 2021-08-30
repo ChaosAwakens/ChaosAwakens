@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cube_all",
-	"textures": {
-		"all": "chaosawakens:block/tin_ore"
-	}
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/tin_ore"
+  }
 }

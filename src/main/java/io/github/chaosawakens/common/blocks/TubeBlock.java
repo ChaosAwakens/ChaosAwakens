@@ -50,7 +50,7 @@ public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContaine
 
     public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
         if (entityIn instanceof LivingEntity && !entityIn.isShiftKeyDown() && entityIn.getBbHeight() > 1) {
-            ((LivingEntity)entityIn).addEffect(new EffectInstance(Effects.POISON, 100, 1));
+            ((LivingEntity) entityIn).addEffect(new EffectInstance(Effects.POISON, 100, 1));
             entityIn.makeStuckInBlock(state, new Vector3d(0.95F, 1D, 0.95F));
             if (worldIn.getRandom().nextInt(20) == 0) {
                 worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BONE_BLOCK_STEP, SoundCategory.AMBIENT, 1, 1, true);
@@ -65,6 +65,7 @@ public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContaine
     public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
         return false;
     }
+
     public FluidState getFluidState(BlockState state) {
         return Fluids.WATER.getSource(false);
     }

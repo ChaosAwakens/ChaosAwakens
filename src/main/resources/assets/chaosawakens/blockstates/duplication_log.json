@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/duplication_log"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/duplication_log"
+    }
+  }
 }

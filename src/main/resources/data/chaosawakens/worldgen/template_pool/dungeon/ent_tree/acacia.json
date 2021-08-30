@@ -1,15 +1,15 @@
 {
-	"name": "chaosawakens:dungeon/ent_tree/acacia",
-	"fallback": "minecraft:empty",
-	"elements": [
-		{
-			"weight": 2,
-			"element": {
-				"element_type": "minecraft:single_pool_element",
-				"location": "chaosawakens:dungeon/ent_tree/acacia",
-				"processors": "minecraft:empty",
-				"projection": "rigid"
-			}
-		}
-	]
+  "name": "chaosawakens:dungeon/ent_tree/acacia",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "chaosawakens:dungeon/ent_tree/acacia",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      }
+    }
+  ]
 }

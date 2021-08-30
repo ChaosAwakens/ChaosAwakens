@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cross",
-	"textures": {
-		"cross": "chaosawakens:block/corn_plant_stage_1"
-	}
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "chaosawakens:block/corn_plant_stage_1"
+  }
 }

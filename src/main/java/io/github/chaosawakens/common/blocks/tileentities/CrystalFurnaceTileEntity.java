@@ -22,18 +22,6 @@ public class CrystalFurnaceTileEntity extends AbstractFurnaceTileEntity {
         super(CATileEntities.CRYSTAL_FURNACE.get(), IRecipeType.SMELTING);
     }
 
-    protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container."+ ChaosAwakens.MODID +".crystal_furnace");
-    }
-
-    protected int getBurnDuration(ItemStack fuel) {
-        return super.getBurnDuration(fuel) / 2;
-    }
-
-    protected Container createMenu(int id, PlayerInventory player) {
-        return new FurnaceContainer(id, player, this, this.dataAccess);
-    }
-
     public static Map<Item, Integer> getBurnTimes() {
         Map<Item, Integer> map = Maps.newLinkedHashMap();
         addItemBurnTime(map, CABlocks.CRYSTAL_ENERGY.get(), 1600);
@@ -43,5 +31,17 @@ public class CrystalFurnaceTileEntity extends AbstractFurnaceTileEntity {
     private static void addItemBurnTime(Map<Item, Integer> map, IItemProvider itemProvider, int burnTimeIn) {
         Item item = itemProvider.asItem();
         map.put(item, burnTimeIn);
+    }
+
+    protected ITextComponent getDefaultName() {
+        return new TranslationTextComponent("container." + ChaosAwakens.MODID + ".crystal_furnace");
+    }
+
+    protected int getBurnDuration(ItemStack fuel) {
+        return super.getBurnDuration(fuel) / 2;
+    }
+
+    protected Container createMenu(int id, PlayerInventory player) {
+        return new FurnaceContainer(id, player, this, this.dataAccess);
     }
 }

@@ -20,13 +20,13 @@ public class SkateBowItem extends BowItem {
     }
 
     private ItemStack findAmmo(ItemStack shootable, PlayerEntity playerEntity) {
-        Predicate<ItemStack> predicate = ((ShootableItem)shootable.getItem()).getSupportedHeldProjectiles();
+        Predicate<ItemStack> predicate = ((ShootableItem) shootable.getItem()).getSupportedHeldProjectiles();
         ItemStack itemstack = ShootableItem.getHeldProjectile(playerEntity, predicate);
         if (!itemstack.isEmpty()) {
             return itemstack;
         } else {
-            predicate = ((ShootableItem)shootable.getItem()).getAllSupportedProjectiles();
-            for(int i = 0; i < playerEntity.inventory.getContainerSize(); ++i) {
+            predicate = ((ShootableItem) shootable.getItem()).getAllSupportedProjectiles();
+            for (int i = 0; i < playerEntity.inventory.getContainerSize(); ++i) {
                 ItemStack itemstack1 = playerEntity.inventory.getItem(i);
                 if (predicate.test(itemstack1)) {
                     return itemstack1;
@@ -39,9 +39,9 @@ public class SkateBowItem extends BowItem {
     @Override
     public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity)entityLiving;
+            PlayerEntity playerentity = (PlayerEntity) entityLiving;
             boolean flag = playerentity.abilities.instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
-            ItemStack itemstack = findAmmo(stack,playerentity);
+            ItemStack itemstack = findAmmo(stack, playerentity);
 
             int i = this.getUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, !itemstack.isEmpty() || flag);
@@ -53,10 +53,10 @@ public class SkateBowItem extends BowItem {
                 }
 
                 float f = getPowerForTime(i);
-                if (!((double)f < 0.1D)) {
-                    boolean flag1 = playerentity.abilities.instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
+                if (!((double) f < 0.1D)) {
+                    boolean flag1 = playerentity.abilities.instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem) itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
                     if (!worldIn.isClientSide) {
-                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : CAItems.IRUKANDJI_ARROW.get());
+                        ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : CAItems.IRUKANDJI_ARROW.get());
                         AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
                         abstractarrowentity = customArrow(abstractarrowentity);
                         abstractarrowentity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, f * 3.0F, 1.0F);
@@ -67,7 +67,7 @@ public class SkateBowItem extends BowItem {
 
                         int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
                         if (j > 0) {
-                            abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + (double)j * 0.5D + 0.5D);
+                            abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + (double) j * 0.5D + 0.5D);
                         }
 
                         int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);

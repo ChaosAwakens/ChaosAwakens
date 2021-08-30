@@ -16,89 +16,93 @@ import java.util.Random;
 
 public class BuddingBlock extends Block {
 
-	private static final IntegerProperty MAX_GENERATABLE = BlockStateProperties.AGE_25;
-	private final CrystalClusterBlock budBlock;
+    private static final IntegerProperty MAX_GENERATABLE = BlockStateProperties.AGE_25;
+    private final CrystalClusterBlock budBlock;
 
-	public BuddingBlock(Properties builder, CrystalClusterBlock budBlock) {
-		super(builder);
-		this.registerDefaultState(this.stateDefinition.any().setValue(MAX_GENERATABLE, new Random().nextInt(8)+17));
-		this.budBlock = budBlock;
-	}
+    public BuddingBlock(Properties builder, CrystalClusterBlock budBlock) {
+        super(builder);
+        this.registerDefaultState(this.stateDefinition.any().setValue(MAX_GENERATABLE, new Random().nextInt(8) + 17));
+        this.budBlock = budBlock;
+    }
 
-	//TODO Maximum number off clusters generated ever
-	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(MAX_GENERATABLE);
-	}
+    //TODO Maximum number off clusters generated ever
+    @Override
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(MAX_GENERATABLE);
+    }
 
-	@Override
-	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		//ChaosAwakens.LOGGER.debug(state);
-		//See if we should grow
-		random.nextInt(1);
-		if(state.getValue(MAX_GENERATABLE) == 0)return;
+    @Override
+    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        //ChaosAwakens.LOGGER.debug(state);
+        //See if we should grow
+        random.nextInt(1);
+        if (state.getValue(MAX_GENERATABLE) == 0) return;
 
-		//Check which spots are available/valid
-		List<BlockStatePos> valids = this.checkValidPositions(worldIn, pos);
+        //Check which spots are available/valid
+        List<BlockStatePos> valids = this.checkValidPositions(worldIn, pos);
 
-		//if there are none available, return
-		if(valids.size() == 0)return;
+        //if there are none available, return
+        if (valids.size() == 0) return;
 
-		//Loop 1 to 3 times between them and pick random ones
-		int numLoops = random.nextInt(3)+1;
-		numLoops = Math.min(numLoops, valids.size());
+        //Loop 1 to 3 times between them and pick random ones
+        int numLoops = random.nextInt(3) + 1;
+        numLoops = Math.min(numLoops, valids.size());
 
-		for(int i = 0; i < numLoops; i++) {
-			BlockStatePos stateAndPos = valids.get(numLoops-1);
-			worldIn.setBlock(stateAndPos.getPos(), stateAndPos.getState(), 2);
-		}
+        for (int i = 0; i < numLoops; i++) {
+            BlockStatePos stateAndPos = valids.get(numLoops - 1);
+            worldIn.setBlock(stateAndPos.getPos(), stateAndPos.getState(), 2);
+        }
 
-		//Update the maximum creatable property
-		if(random.nextInt(2) == 0) {
-			worldIn.setBlockAndUpdate(pos, state.setValue(MAX_GENERATABLE, state.getValue(MAX_GENERATABLE)-1));
-		}
+        //Update the maximum creatable property
+        if (random.nextInt(2) == 0) {
+            worldIn.setBlockAndUpdate(pos, state.setValue(MAX_GENERATABLE, state.getValue(MAX_GENERATABLE) - 1));
+        }
 
-	}
+    }
 
-	private List<BlockStatePos> checkValidPositions(ServerWorld worldIn, BlockPos pos) {
-		List<BlockStatePos> validStatePos = new ArrayList<>();
+    private List<BlockStatePos> checkValidPositions(ServerWorld worldIn, BlockPos pos) {
+        List<BlockStatePos> validStatePos = new ArrayList<>();
 
-		//Loop through all possible directions
-		for(Direction direction : Direction.values()) {
-			BlockPos budTargetPos = pos;
-			budTargetPos = budTargetPos.offset(direction.getNormal());
+        //Loop through all possible directions
+        for (Direction direction : Direction.values()) {
+            BlockPos budTargetPos = pos;
+            budTargetPos = budTargetPos.offset(direction.getNormal());
 
-			BlockState budState =  budBlock.defaultBlockState();
-			boolean newBudBlock = true;
-			if(worldIn.getBlockState(budTargetPos).getBlock() instanceof CrystalClusterBlock) {
-				budState =  worldIn.getBlockState(budTargetPos);
-				newBudBlock = false;
-			}
+            BlockState budState = budBlock.defaultBlockState();
+            boolean newBudBlock = true;
+            if (worldIn.getBlockState(budTargetPos).getBlock() instanceof CrystalClusterBlock) {
+                budState = worldIn.getBlockState(budTargetPos);
+                newBudBlock = false;
+            }
 
-			if(Objects.equals(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName(), budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
-				validStatePos.add(new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction)
-						.setValue(BlockStateProperties.AGE_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3 ? budState.getValue(BlockStateProperties.AGE_3) + 1 : budState.getValue(BlockStateProperties.AGE_3))));
-		}
+            if (Objects.equals(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName(), budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
+                validStatePos.add(new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction)
+                        .setValue(BlockStateProperties.AGE_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3 ? budState.getValue(BlockStateProperties.AGE_3) + 1 : budState.getValue(BlockStateProperties.AGE_3))));
+        }
 
-		return validStatePos;
-	}
+        return validStatePos;
+    }
 
-	/**
-	 * DTO so that both BlockState and BlockPos are returned
-	 * @author invalid2
-	 *
-	 */
-	static class BlockStatePos {
-		private final BlockPos pos;
-		private final BlockState state;
+    /**
+     * DTO so that both BlockState and BlockPos are returned
+     *
+     * @author invalid2
+     */
+    static class BlockStatePos {
+        private final BlockPos pos;
+        private final BlockState state;
 
-		public BlockStatePos(BlockPos pos, BlockState state) {
-			this.pos = pos;
-			this.state = state;
-		}
+        public BlockStatePos(BlockPos pos, BlockState state) {
+            this.pos = pos;
+            this.state = state;
+        }
 
-		public BlockPos getPos() { return pos; }
+        public BlockPos getPos() {
+            return pos;
+        }
 
-		public BlockState getState() { return state; }
-	}
+        public BlockState getState() {
+            return state;
+        }
+    }
 }

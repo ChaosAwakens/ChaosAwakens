@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/ent_boss_spawner"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/ent_boss_spawner"
+    }
+  }
 }

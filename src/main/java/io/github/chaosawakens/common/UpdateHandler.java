@@ -9,12 +9,9 @@ import java.util.Scanner;
 
 public class UpdateHandler {
     private static final String currentVersion = ChaosAwakens.VERSION;
-
-    private static String newestVersion;
-
     public static String updateStatus = "NULL";
-
     public static boolean show = false;
+    private static String newestVersion;
 
     public static void init() {
         getNewestVersion();

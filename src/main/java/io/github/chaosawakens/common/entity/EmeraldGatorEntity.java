@@ -36,17 +36,26 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
 
     private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(EmeraldGatorEntity.class, DataSerializers.INT);
     private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
-    private UUID persistentAngerTarget;
-
     private final AnimationFactory factory = new AnimationFactory(this);
+    private UUID persistentAngerTarget;
 
     public EmeraldGatorEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
     }
 
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 18)
+                .add(Attributes.ATTACK_DAMAGE, 3)
+                .add(Attributes.ATTACK_KNOCKBACK, 1)
+                .add(Attributes.ATTACK_SPEED, 1)
+                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.FOLLOW_RANGE, 8);
+    }
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if(event.isMoving()){
+        if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.walking_animation", true));
             return PlayState.CONTINUE;
         }
@@ -71,16 +80,6 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
         this.targetSelector.addGoal(8, new ResetAngerGoal<>(this, true));
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 18)
-                .add(Attributes.ATTACK_DAMAGE, 3)
-                .add(Attributes.ATTACK_KNOCKBACK, 1)
-                .add(Attributes.ATTACK_SPEED, 1)
-                .add(Attributes.MOVEMENT_SPEED, 0.35D)
-                .add(Attributes.FOLLOW_RANGE, 8);
-    }
-
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ANGER_TIME, 0);
@@ -94,8 +93,8 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
     public void readAdditionalSaveData(CompoundNBT compound) {
         super.readAdditionalSaveData(compound);
 
-        if(!level.isClientSide)
-            this.readPersistentAngerSaveData((ServerWorld)this.level, compound);
+        if (!level.isClientSide)
+            this.readPersistentAngerSaveData((ServerWorld) this.level, compound);
     }
 
     public boolean hurt(DamageSource source, float amount) {
@@ -112,7 +111,7 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
     }
 
     public boolean doHurtTarget(Entity entityIn) {
-        boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+        boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) ((int) this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
         if (flag) {
             this.doEnchantDamageEffects(this, entityIn);
         }

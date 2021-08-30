@@ -1,7 +1,7 @@
 {
-	"parent": "minecraft:block/stem_fruit",
-	"textures": {
-		"stem": "chaosawakens:block/golden_melon_stem",
-		"upperstem": "chaosawakens:block/attached_golden_melon_stem"
-	}
+  "parent": "minecraft:block/stem_fruit",
+  "textures": {
+    "stem": "chaosawakens:block/golden_melon_stem",
+    "upperstem": "chaosawakens:block/attached_golden_melon_stem"
+  }
 }

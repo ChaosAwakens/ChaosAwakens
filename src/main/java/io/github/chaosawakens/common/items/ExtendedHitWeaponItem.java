@@ -17,33 +17,32 @@ import java.util.UUID;
 
 public class ExtendedHitWeaponItem extends EnchantedSwordItem implements IVanishable, IAnimatable {
 
-	public AnimationFactory factory = new AnimationFactory(this);
-	private final Multimap<Attribute, AttributeModifier> attributeModifiers;
-	protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
+    protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
+    private final Multimap<Attribute, AttributeModifier> attributeModifiers;
+    public AnimationFactory factory = new AnimationFactory(this);
 
-	public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, float attackKnockbackIn, Properties builderIn, EnchantmentData[] enchants) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn, enchants);
-		float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
-		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", attackKnockbackIn, AttributeModifier.Operation.ADDITION));
-		this.attributeModifiers = builder.build();
-	}
+    public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, float attackKnockbackIn, Properties builderIn, EnchantmentData[] enchants) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn, enchants);
+        float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", attackKnockbackIn, AttributeModifier.Operation.ADDITION));
+        this.attributeModifiers = builder.build();
+    }
 
-	@Override
-	public void registerControllers(AnimationData data) {
-		// insert controllers here
-	}
+    @Override
+    public void registerControllers(AnimationData data) {
+        // insert controllers here
+    }
 
-	@Override
-	public AnimationFactory getFactory()
-	{
-		return this.factory;
-	}
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
 
-	@Override
-	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
-		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
-	}
+    @Override
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
+        return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
+    }
 }

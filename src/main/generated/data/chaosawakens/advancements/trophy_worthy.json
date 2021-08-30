@@ -16,9 +16,6 @@
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
-  "rewards": {
-    "experience": 100
-  },
   "criteria": {
     "platinum_block": {
       "trigger": "minecraft:inventory_changed",

@@ -39,6 +39,27 @@ public class UraniumOreBlock extends CAOreBlock {
         this.registerDefaultState(this.defaultBlockState().setValue(GLOW_STRENGTH, 0));
     }
 
+    private static void interact(BlockState state, World world, BlockPos position) {
+        spawnParticles(world, position);
+        if (!state.getValue(LIT) || state.getValue(GLOW_STRENGTH) < 5) {
+            world.setBlock(position, state.setValue(LIT, true).setValue(GLOW_STRENGTH, 5), 3);
+        }
+    }
+
+    private static void spawnParticles(World world, BlockPos position) {
+        Random random = world.random;
+        for (Direction direction : Direction.values()) {
+            BlockPos blockpos = position.relative(direction);
+            if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
+                Direction.Axis direction$axis = direction.getAxis();
+                double d1 = direction$axis == Direction.Axis.X ? 0.5D + 0.5625D * (double) direction.getStepX() : (double) random.nextFloat();
+                double d2 = direction$axis == Direction.Axis.Y ? 0.5D + 0.5625D * (double) direction.getStepY() : (double) random.nextFloat();
+                double d3 = direction$axis == Direction.Axis.Z ? 0.5D + 0.5625D * (double) direction.getStepZ() : (double) random.nextFloat();
+                world.addParticle(dustParticles, (double) position.getX() + d1, (double) position.getY() + d2, (double) position.getZ() + d3, 0.0D, 0.0D, 0.0D);
+            }
+        }
+    }
+
     @Override
     public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         /**
@@ -48,8 +69,8 @@ public class UraniumOreBlock extends CAOreBlock {
          * Netherite, Ruby: 33% chance of exploding
          * Ultimate: 25% chance of exploding
          */
-        int pickaxeStrength = player.getMainHandItem().getHarvestLevel(ToolType.PICKAXE,player,state);
-        if (!player.isCreative() && !worldIn.isClientSide && worldIn.random.nextInt( pickaxeStrength >= 3 ? pickaxeStrength - 1 : 1) <= 0)
+        int pickaxeStrength = player.getMainHandItem().getHarvestLevel(ToolType.PICKAXE, player, state);
+        if (!player.isCreative() && !worldIn.isClientSide && worldIn.random.nextInt(pickaxeStrength >= 3 ? pickaxeStrength - 1 : 1) <= 0)
             worldIn.explode(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 2.5F, Explosion.Mode.DESTROY);
         super.playerWillDestroy(worldIn, pos, state, player);
     }
@@ -79,26 +100,6 @@ public class UraniumOreBlock extends CAOreBlock {
         return itemstack.getItem() instanceof BlockItem && (new BlockItemUseContext(player, hand, itemstack, result)).canPlace() ? ActionResultType.PASS : ActionResultType.SUCCESS;
     }
 
-    private static void interact(BlockState state, World world, BlockPos position) {
-        spawnParticles(world, position);
-        if (!state.getValue(LIT) || state.getValue(GLOW_STRENGTH) < 5) {
-            world.setBlock(position, state.setValue(LIT, true).setValue(GLOW_STRENGTH, 5), 3);
-        }
-    }
-    private static void spawnParticles(World world, BlockPos position) {
-        Random random = world.random;
-        for (Direction direction : Direction.values()) {
-            BlockPos blockpos = position.relative(direction);
-            if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
-                Direction.Axis direction$axis = direction.getAxis();
-                double d1 = direction$axis == Direction.Axis.X ? 0.5D + 0.5625D * (double)direction.getStepX() : (double)random.nextFloat();
-                double d2 = direction$axis == Direction.Axis.Y ? 0.5D + 0.5625D * (double)direction.getStepY() : (double)random.nextFloat();
-                double d3 = direction$axis == Direction.Axis.Z ? 0.5D + 0.5625D * (double)direction.getStepZ() : (double)random.nextFloat();
-                world.addParticle(dustParticles, (double)position.getX() + d1, (double)position.getY() + d2, (double)position.getZ() + d3, 0.0D, 0.0D, 0.0D);
-            }
-        }
-    }
-
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> blockStateBuilder) {
         blockStateBuilder.add(LIT);
         blockStateBuilder.add(GLOW_STRENGTH);
@@ -107,7 +108,7 @@ public class UraniumOreBlock extends CAOreBlock {
     @Override
     public void randomTick(BlockState state, ServerWorld server, BlockPos blockPos, Random random) {
         if (state.getValue(GLOW_STRENGTH) > 0 && !server.isClientSide) {
-            server.setBlock(blockPos, state.setValue(GLOW_STRENGTH, state.getValue(GLOW_STRENGTH) - 1),3);
+            server.setBlock(blockPos, state.setValue(GLOW_STRENGTH, state.getValue(GLOW_STRENGTH) - 1), 3);
             if (state.getValue(GLOW_STRENGTH) <= 0 && state.getValue(LIT))
                 server.setBlock(blockPos, state.setValue(LIT, false), 3);
         }

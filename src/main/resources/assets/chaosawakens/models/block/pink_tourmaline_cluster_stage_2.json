@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cross",
-	"textures": {
-		"cross": "chaosawakens:block/pink_tourmaline_cluster_stage_2"
-	}
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "chaosawakens:block/pink_tourmaline_cluster_stage_2"
+  }
 }

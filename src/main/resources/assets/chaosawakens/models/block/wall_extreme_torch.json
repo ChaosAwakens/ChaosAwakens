@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/template_torch_wall",
-	"textures": {
-		"torch": "chaosawakens:block/extreme_torch"
-	}
+  "parent": "minecraft:block/template_torch_wall",
+  "textures": {
+    "torch": "chaosawakens:block/extreme_torch"
+  }
 }

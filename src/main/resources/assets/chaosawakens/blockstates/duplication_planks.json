@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/duplication_planks"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/duplication_planks"
+    }
+  }
 }

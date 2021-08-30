@@ -14,29 +14,29 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class BossSpawnerBlock extends Block {
-	private final Supplier<? extends EntityType<? extends LivingEntity>> boss;
+    private final Supplier<? extends EntityType<? extends LivingEntity>> boss;
 
-	public BossSpawnerBlock(Supplier<? extends EntityType<? extends LivingEntity>> boss, Properties builder) {
-		super(builder);
-		this.boss = boss;
-	}
+    public BossSpawnerBlock(Supplier<? extends EntityType<? extends LivingEntity>> boss, Properties builder) {
+        super(builder);
+        this.boss = boss;
+    }
 
-	@Override
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		super.tick(state, worldIn, pos, random);
-		LivingEntity entity = boss.get().create(worldIn);
-		assert entity != null;
-		entity.setPos(pos.getX(), pos.getY(), pos.getZ());
-		worldIn.addFreshEntity(entity);
-		worldIn.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-	}
+    @Override
+    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        super.tick(state, worldIn, pos, random);
+        LivingEntity entity = boss.get().create(worldIn);
+        assert entity != null;
+        entity.setPos(pos.getX(), pos.getY(), pos.getZ());
+        worldIn.addFreshEntity(entity);
+        worldIn.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+    }
 
-	@Override
-	public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
-		LivingEntity entity = boss.get().create(worldIn);
-		assert entity != null;
-		entity.setPos(pos.getX(), pos.getY(), pos.getZ());
-		worldIn.addFreshEntity(entity);
-		worldIn.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-	}
+    @Override
+    public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
+        LivingEntity entity = boss.get().create(worldIn);
+        assert entity != null;
+        entity.setPos(pos.getX(), pos.getY(), pos.getZ());
+        worldIn.addFreshEntity(entity);
+        worldIn.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+    }
 }

@@ -18,8 +18,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CALootTableProvider extends LootTableProvider {
-    public CALootTableProvider(DataGenerator dataGeneratorIn)
-    {
+    public CALootTableProvider(DataGenerator dataGeneratorIn) {
         super(dataGeneratorIn);
     }
 

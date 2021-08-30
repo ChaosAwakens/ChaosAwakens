@@ -17,20 +17,21 @@ import net.minecraft.world.IWorld;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class TopTubeBlock extends AbstractTopPlantBlock implements ILiquidContainer
-{
+public class TopTubeBlock extends AbstractTopPlantBlock implements ILiquidContainer {
     public static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+
+    public TopTubeBlock(AbstractBlock.Properties properties) {
+        super(properties, Direction.UP, SHAPE, false, 0.1D);
+    }
 
     protected boolean canGrowInto(BlockState state) {
         return state.is(Blocks.WATER);
-    }
-    public TopTubeBlock(AbstractBlock.Properties properties) {
-        super(properties, Direction.UP, SHAPE, false, 0.1D);
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
+
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.isFaceSturdy(worldIn, pos, Direction.UP) && !state.is(Blocks.MAGMA_BLOCK);
     }

@@ -8,19 +8,20 @@ import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 
 /**
  * Class with method(s) that subscribe to the ItemCraftedEvent
+ *
  * @author invalid2
  */
 public class CraftingEventSubscriber {
 
-	public static void onItemCraftedEvent(final ItemCraftedEvent event) {
+    public static void onItemCraftedEvent(final ItemCraftedEvent event) {
 
-		ChaosAwakens.debug("CRAFTING", event.getCrafting());
+        ChaosAwakens.debug("CRAFTING", event.getCrafting());
 
-		Item enchantedItem = event.getCrafting().getItem();
-		if(event.getCrafting().getItem() instanceof IAutoEnchantable) {
-			for(EnchantmentData enchant : ((IAutoEnchantable) enchantedItem).enchantments()) {
-				event.getCrafting().enchant( enchant.enchantment, enchant.level);
-			}
-		}
-	}
+        Item enchantedItem = event.getCrafting().getItem();
+        if (event.getCrafting().getItem() instanceof IAutoEnchantable) {
+            for (EnchantmentData enchant : ((IAutoEnchantable) enchantedItem).enchantments()) {
+                event.getCrafting().enchant(enchant.enchantment, enchant.level);
+            }
+        }
+    }
 }
