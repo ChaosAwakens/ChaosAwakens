@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.events;
 
 import io.github.chaosawakens.common.config.CAConfig;
+
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -25,7 +26,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
 import java.util.Objects;
 
 public class MiscEventHandler {

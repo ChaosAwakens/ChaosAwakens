@@ -7,6 +7,7 @@ import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.CABiomes;
+import io.github.chaosawakens.common.registry.CAStrippedLogBlocks;
 import io.github.chaosawakens.common.registry.CAStructures;
 import io.github.chaosawakens.common.registry.CAVillagers;
 import io.github.chaosawakens.common.worldgen.ConfiguredStructures;
@@ -57,6 +58,7 @@ public class CommonSetupEvent {
 			CAStructures.setupStructures();
 			ConfiguredStructures.registerConfiguredStructures();
 			CAVillagers.registerVillagerTypes();
+			CAStrippedLogBlocks.initveryfunni();
 
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));

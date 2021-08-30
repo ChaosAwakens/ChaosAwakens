@@ -108,6 +108,8 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
 			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
 			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
+			dataGenerator.addProvider(new CATagProvider(dataGenerator, existing));
+			dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
 		}
 	}
 

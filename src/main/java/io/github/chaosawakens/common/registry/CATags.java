@@ -21,6 +21,11 @@ public class CATags {
 	public static final ITag.INamedTag<Block> MINERS_DREAM_UNSAFE = BlockTags.bind(ChaosAwakens.MODID+":miners_dream_unsafe");
 	public static final ITag.INamedTag<Block> MINERS_DREAM_TORCH_SAFE = BlockTags.bind(ChaosAwakens.MODID+":miners_dream_torch_safe");
 	public static final ITag.INamedTag<Block> AIR_BLOCKS = BlockTags.bind("air");
+	public static final ITag.INamedTag<Block> PEACH_WOOD = BlockTags.bind(ChaosAwakens.MODID+":peach_wood");
+	public static final ITag.INamedTag<Block> CHERRY_WOOD = BlockTags.bind(ChaosAwakens.MODID+":cherry_wood");
+	public static final ITag.INamedTag<Block> DUPLICATOR_WOOD = BlockTags.bind(ChaosAwakens.MODID+":duplicator_wood");
+	public static final ITag.INamedTag<Block> APPLE_WOOD = BlockTags.bind(ChaosAwakens.MODID+":apple_wood");
+	public static final ITag.INamedTag<Block> CA_WOOD = BlockTags.bind(ChaosAwakens.MODID+":ca_wood");
 	
 	//Item tags
 	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID+":custom_tooltips");

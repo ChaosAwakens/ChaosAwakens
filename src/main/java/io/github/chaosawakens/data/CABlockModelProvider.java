@@ -30,13 +30,27 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumn("apple_log", newRL(cA, "apple_log"), newRL(cA, "apple_log_top"));
 		this.cubeColumnHorizontal("apple_log", newRL(cA, "apple_log"), newRL(cA, "apple_log_top"));
 		this.cubeColumn("cherry_log", newRL(cA, "cherry_log"), newRL(cA, "cherry_log_top"));
-		this.cubeColumnHorizontal("cherry_log", newRL(cA, "cherry_log"), newRL(cA, "cherry_log_top"));
+		this.cubeColumnHorizontal("cherry_log", newRL(cA, "cherry_log"), newRL(cA, "cherry_log_top"));		
+		this.cubeColumn("duplication_log", newRL(cA, "duplication_log"), newRL(cA, "duplication_log_top"));
+		this.cubeColumnHorizontal("duplication_log", newRL(cA, "duplication_log"), newRL(cA, "duplication_log_top"));
 		this.cubeColumn("peach_log", newRL(cA, "peach_log"), newRL(cA, "peach_log_top"));
 		this.cubeColumnHorizontal("peach_log", newRL(cA, "peach_log"), newRL(cA, "peach_log_top"));
 		this.cubeColumn("stripped_peach_log", newRL(cA, "stripped_peach_log"), newRL(cA, "stripped_peach_log_top"));
+		this.cubeColumnHorizontal("stripped_peach_log", newRL(cA, "stripped_peach_log"), newRL(cA, "stripped_peach_log_top"));	
+		this.cubeColumn("stripped_duplication_log", newRL(cA, "stripped_duplication_log"), newRL(cA, "stripped_duplication_log_top"));
+		this.cubeColumnHorizontal("stripped_duplication_log", newRL(cA, "stripped_duplication_log"), newRL(cA, "stripped_duplication_log_top"));
+		this.cubeColumn("dead_duplication_log", newRL(cA, "dead_duplication_log"), newRL(cA, "dead_duplication_log_top"));
+		this.cubeColumnHorizontal("dead_duplication_log", newRL(cA, "dead_duplication_log"), newRL(cA, "dead_duplication_log_top"));
+		this.cubeColumn("stripped_apple_log", newRL(cA, "stripped_apple_log"), newRL(cA, "stripped_apple_log_top"));
+		this.cubeColumnHorizontal("stripped_apple_log", newRL(cA, "stripped_apple_log"), newRL(cA, "stripped_apple_log_top"));
+		this.cubeColumn("stripped_cherry_log", newRL(cA, "stripped_cherry_log"), newRL(cA, "stripped_cherry_log_top"));
+		this.cubeColumnHorizontal("stripped_cherry_log", newRL(cA, "stripped_cherry_log"), newRL(cA, "stripped_cherry_log_top"));
 		this.cubeAll("peach_planks", newRL(cA, "peach_planks"));
-		this.cubeColumnHorizontal("stripped_peach_log", newRL(cA, "stripped_peach_log"), newRL(cA, "stripped_peach_log_top"));
-		
+		this.cubeAll("duplication_leaves", newRL(cA, "duplication_leaves"));
+		this.cubeAll("apple_planks", newRL(cA, "apple_planks"));
+		this.cubeAll("cherry_planks", newRL(cA, "cherry_planks"));
+		this.cubeAll("cherry_leaves", newRL(cA, "cherry_leaves"));
+		this.cubeAll("duplication_planks", newRL(cA, "duplication_planks"));
 	}
 	
 	private ResourceLocation newRL(String ns, String p) {

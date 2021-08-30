@@ -49,8 +49,12 @@ public class CABlockLootTables extends BlockLootTables {
 		dropOther(CABlocks.MOULDY_SLAB.get(), Items.AIR);
 		dropOther(CABlocks.MOULDY_FENCE.get(), Items.AIR);
 		dropOther(CABlocks.PEACH_LEAVES.get(), Items.AIR);
+		dropOther(CABlocks.CHERRY_LEAVES.get(), Items.AIR);
+		dropOther(CABlocks.DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get());
+		dropOther(CABlocks.DUPLICATION_LEAVES.get(), Items.AIR);
 
 		dropSelf(CABlocks.APPLE_LOG.get());
+		dropSelf(CABlocks.APPLE_PLANKS.get());
 		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		dropSelf(CABlocks.ALUMINUM_BLOCK.get());
 		dropSelf(CABlocks.AMETHYST_BLOCK.get());
@@ -59,6 +63,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CATS_EYE_BLOCK.get());
 		dropSelf(CABlocks.CATS_EYE_CLUSTER.get());
 		dropSelf(CABlocks.CHERRY_LOG.get());
+		dropSelf(CABlocks.CHERRY_PLANKS.get());
 		dropSelf(CABlocks.COPPER_BLOCK.get());
 		dropSelf(CABlocks.COPPER_ORE.get());
 		dropSelf(CABlocks.CRYSTAL_CRAFTING_TABLE.get());
@@ -68,6 +73,8 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CRYSTAL_TERMITE_NEST.get());
 		dropSelf(CABlocks.CRYSTAL_WOOD.get());
 		dropSelf(CABlocks.CRYSTAL_WOOD_PLANKS.get());
+		dropSelf(CABlocks.DEAD_DUPLICATION_LOG.get());
+		dropSelf(CABlocks.DUPLICATION_PLANKS.get());
 		dropSelf(CABlocks.ENDER_EYE_BLOCK.get());
 		dropSelf(CABlocks.ENDER_PEARL_BLOCK.get());
 		dropSelf(CABlocks.FOSSILISED_EMERALD_GATOR.get());
@@ -95,6 +102,9 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.RUBY_BLOCK.get());
 		dropSelf(CABlocks.SILVER_BLOCK.get());
 		dropSelf(CABlocks.SILVER_ORE.get());
+		dropSelf(CABlocks.STRIPPED_APPLE_LOG.get());
+		dropSelf(CABlocks.STRIPPED_CHERRY_LOG.get());
+		dropSelf(CABlocks.STRIPPED_DUPLICATION_LOG.get());
 		dropSelf(CABlocks.STRIPPED_PEACH_LOG.get());
 		dropSelf(CABlocks.SUNSTONE_BLOCK.get());
 		dropSelf(CABlocks.TERMITE_NEST.get());
@@ -112,6 +122,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_LOG.get());
 		dropSelf(CABlocks.PEACH_LOG.get());
 		add(CABlocks.PEACH_LEAVES.get(), (plant) -> createShearsOnlyDrop(CABlocks.PEACH_LEAVES.get()));
+		add(CABlocks.CHERRY_LEAVES.get(), (plant) -> createShearsOnlyDrop(CABlocks.CHERRY_LEAVES.get()));	
 		dropSelf(CABlocks.PEACH_PLANKS.get());
 		dropSelf(CABlocks.STRIPPED_PEACH_LOG.get());
 		dropSelf(CABlocks.APPLE_LOG.get());
