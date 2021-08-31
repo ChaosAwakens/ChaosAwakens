@@ -38,7 +38,7 @@ public class CATagProvider extends BlockTagsProvider {
         this.tag(CATags.CHERRY_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
         this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
         this.tag(CATags.PEACH_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
-        this.tag(CATags.CA_WOOD).addTags(CATags.APPLE_WOOD, CATags.CHERRY_WOOD, CATags.DUPLICATOR_WOOD, CATags.PEACH_WOOD);
+        this.tag(CATags.CA_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get(), CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get(), CABlocks.DUPLICATION_LOG.get(), CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
     }
 
     //TODO make the static class and the main class function as one instead of having to make them separate
@@ -71,7 +71,8 @@ public class CATagProvider extends BlockTagsProvider {
             this.tag(CATags.CHERRY_WOOD).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
             this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
             this.tag(CATags.PEACH_WOOD).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
-            this.tag(CATags.CA_WOOD).addTags(CATags.APPLE_WOOD, CATags.CHERRY_WOOD, CATags.DUPLICATOR_WOOD, CATags.PEACH_WOOD);
+            this.tag(CATags.CA_WOOD).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get(), CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get(), CABlocks.DUPLICATION_LOG.get(), CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
+
         }
 
     }

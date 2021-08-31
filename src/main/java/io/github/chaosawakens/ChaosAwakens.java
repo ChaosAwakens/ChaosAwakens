@@ -131,4 +131,4 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
 		}
 	}
-}
+} 

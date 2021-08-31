@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
-    "#chaosawakens:apple_wood",
-    "#chaosawakens:cherry_wood",
-    "#chaosawakens:duplicator_wood",
-    "#chaosawakens:peach_wood"
+    "chaosawakens:apple_log",
+    "chaosawakens:stripped_apple_log",
+    "chaosawakens:cherry_log",
+    "chaosawakens:stripped_cherry_log",
+    "chaosawakens:duplication_log",
+    "chaosawakens:peach_log",
+    "chaosawakens:stripped_peach_log"
   ]
 }
