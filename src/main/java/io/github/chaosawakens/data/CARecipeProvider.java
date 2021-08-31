@@ -41,11 +41,11 @@ public class CARecipeProvider extends RecipeProvider{
 	    public void run(DirectoryCache cache) throws IOException {
 	    	 Path path = this.generator.getOutputFolder();
 	         Set<ResourceLocation> set = Sets.newHashSet();
-	         buildShapelessRecipes((p_200410_3_) -> {
-	            if (!set.add(p_200410_3_.getId())) {
-	               throw new IllegalStateException("Duplicate recipe " + p_200410_3_.getId());
+	         buildShapelessRecipes((builder) -> {
+	            if (!set.add(builder.getId())) {
+	               throw new IllegalStateException("Duplicate recipe " + builder.getId());
 	            } else {
-	               saveRecipe(cache, p_200410_3_.serializeRecipe(), path.resolve("data/" + p_200410_3_.getId().getNamespace() + "/recipes/" + p_200410_3_.getId().getPath() + ".json"));
+	               saveRecipe(cache, builder.serializeRecipe(), path.resolve("data/" + builder.getId().getNamespace() + "/recipes/" + builder.getId().getPath() + ".json"));
 	            }
 	         });
 	    }
