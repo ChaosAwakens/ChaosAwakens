@@ -37,5 +37,6 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.cubeAll(CABlocks.PEACH_PLANKS.get());
         this.cubeAll(CABlocks.PEACH_LEAVES.get());
         this.logBlock(CABlocks.STRIPPED_PEACH_LOG.get());
+        this.blockTexture(CABlocks.PEACH_SAPLING.get());
     }
 }

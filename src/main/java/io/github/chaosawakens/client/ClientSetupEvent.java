@@ -70,6 +70,7 @@ public class ClientSetupEvent {
 
         RenderTypeLookup.setRenderLayer(CABlocks.CORN_PLANT.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(CABlocks.STRAWBERRY_PLANT.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.PEACH_SAPLING.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(CABlocks.TOMATO_PLANT.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(CABlocks.GOLDEN_MELON_STEM.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(CABlocks.ATTACHED_GOLDEN_MELON_STEM.get(), RenderType.cutoutMipped());
