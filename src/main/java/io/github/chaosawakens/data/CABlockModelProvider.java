@@ -9,7 +9,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**
  * @author invalid2
- *
  */
 public class CABlockModelProvider extends BlockModelProvider {
 	
@@ -43,10 +42,12 @@ public class CABlockModelProvider extends BlockModelProvider {
 		return new ResourceLocation(ns, BLOCK_FOLDER+"/"+p);
 	}
 	
+	@Override
 	public BlockModelBuilder cubeAll(String name, ResourceLocation texture) {
 		return singleTexture(name, mcLoc(BLOCK_FOLDER), "all", texture);
 	}
 	
+	@Override
 	public BlockModelBuilder cubeColumn(String name, ResourceLocation side, ResourceLocation end) {
 		ChaosAwakens.debug("DATAGEN", side.getPath());
 		return withExistingParent(name, BLOCK_FOLDER)
@@ -54,6 +55,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 			.texture("end", end);
 	}
 	
+	@Override
 	public BlockModelBuilder cubeColumnHorizontal(String name, ResourceLocation side, ResourceLocation end) {
 		return withExistingParent(name, BLOCK_FOLDER)
 				.texture("side", side)

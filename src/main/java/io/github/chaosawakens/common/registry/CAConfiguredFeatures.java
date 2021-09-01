@@ -130,7 +130,7 @@ public class CAConfiguredFeatures {
 		protected static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().defaultBlockState();
 		protected static final BlockState CLUSTER_PINK_TOURMALINE = CABlocks.PINK_TOURMALINE_CLUSTER.get().defaultBlockState();
 		protected static final BlockState CLUSTER_CATS_EYE = CABlocks.CATS_EYE_CLUSTER.get().defaultBlockState();
-		protected static final BlockState CORN_GROWN = CABlocks.CORN_PLANT.get().defaultBlockState();
+		protected static final BlockState CORN_GROWN = CABlocks.CORN_BODY_BLOCK.get().defaultBlockState();
 		protected static final BlockState TOMATO_GROWN = CABlocks.TOMATO_PLANT.get().defaultBlockState();
 		protected static final BlockState BROWN_ANT_NEST = CABlocks.BROWN_ANT_NEST.get().defaultBlockState();
 		protected static final BlockState RAINBOW_ANT_NEST = CABlocks.RAINBOW_ANT_NEST.get().defaultBlockState();

@@ -38,8 +38,14 @@ public class CABlockLootTables extends BlockLootTables {
 
 		//Plants
 		add(CABlocks.TUBE_WORM.get(), (plant) -> createShearsOnlyDrop(CABlocks.TUBE_WORM.get()));
-		add(CABlocks.CORN_PLANT.get(), (plant) -> createCropDrops(plant, CAItems.CORN.get(), CAItems.CORN_SEEDS.get(),
-				BlockStateProperty.hasBlockStateProperties(plant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.AGE_3, 3))));
+		add(CABlocks.CORN_TOP_BLOCK.get(), (plant) -> randomDropping(CAItems.CORN_SEEDS.get(), 1, 3));
+		add(CABlocks.CORN_BODY_BLOCK.get(), (plant) ->
+			LootTable.lootTable()
+				.withPool(applyExplosionCondition(CAItems.CORN.get(), 
+					LootPool.lootPool().setRolls(RandomValueRange.between(1, 3)))
+						.add(ItemLootEntry.lootTableItem(CAItems.CORN.get())).add(ItemLootEntry.lootTableItem(CAItems.CORN_SEEDS.get()))
+				)
+		);
 		add(CABlocks.TOMATO_PLANT.get(), (plant) -> createCropDrops(plant, CAItems.TOMATO.get(), CAItems.TOMATO_SEEDS.get(),
 				BlockStateProperty.hasBlockStateProperties(plant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.AGE_3, 3))));
 		add(CABlocks.STRAWBERRY_PLANT.get(), (plant) -> createCropDrops(plant, CAItems.STRAWBERRY.get(), CAItems.STRAWBERRY_SEEDS.get(),

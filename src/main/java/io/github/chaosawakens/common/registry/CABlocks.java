@@ -5,26 +5,7 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.AntInfestedOre;
-import io.github.chaosawakens.common.blocks.AntNestBlock;
-import io.github.chaosawakens.common.blocks.BossSpawnerBlock;
-import io.github.chaosawakens.common.blocks.BuddingBlock;
-import io.github.chaosawakens.common.blocks.CAOreBlock;
-import io.github.chaosawakens.common.blocks.CropPlantBlock;
-import io.github.chaosawakens.common.blocks.CrystalClusterBlock;
-import io.github.chaosawakens.common.blocks.CrystalCraftingTableBlock;
-import io.github.chaosawakens.common.blocks.CrystalEnergyBlock;
-import io.github.chaosawakens.common.blocks.CrystalFurnaceBlock;
-import io.github.chaosawakens.common.blocks.EnchantedGoldenCakeBlock;
-import io.github.chaosawakens.common.blocks.GateBlock;
-import io.github.chaosawakens.common.blocks.GoldenCakeBlock;
-import io.github.chaosawakens.common.blocks.GoldenMelonBlock;
-import io.github.chaosawakens.common.blocks.RandomTeleportBlock;
-import io.github.chaosawakens.common.blocks.StrawberryBushBlock;
-import io.github.chaosawakens.common.blocks.TopTubeBlock;
-import io.github.chaosawakens.common.blocks.TubeBlock;
-import io.github.chaosawakens.common.blocks.UraniumOreBlock;
-import io.github.chaosawakens.common.items.EnchantedBlockItem;
+import io.github.chaosawakens.common.blocks.*;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.IPositionPredicate;
 import net.minecraft.block.AttachedStemBlock;
@@ -47,6 +28,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -76,7 +58,8 @@ public class CABlocks {
 	// PLANTS
 	public static final RegistryObject<TopTubeBlock> TUBE_WORM = registerBlock("tube_worm",() -> new TopTubeBlock(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.BONE_BLOCK).noCollission().instabreak()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<TubeBlock> TUBE_WORM_PLANT = registerBlock("tube_worm_plant",() -> new TubeBlock(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.BONE_BLOCK).noCollission().instabreak().lootFrom(CABlocks.TUBE_WORM)), null, false);
-	public static final RegistryObject<CropPlantBlock> CORN_PLANT = registerBlock("corn_plant", () -> new CropPlantBlock(CAItems.CORN_SEEDS, Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks()), CAItemGroups.foodItemGroup, false);
+	public static final RegistryObject<CornTopBlock> CORN_TOP_BLOCK = registerBlock("corn_top_block", () -> new CornTopBlock(Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks(), Direction.UP, Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D), 4), CAItemGroups.foodItemGroup, false);
+	public static final RegistryObject<CornBodyBlock> CORN_BODY_BLOCK = registerBlock("corn_body_block", () -> new CornBodyBlock(Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks(), Direction.UP, Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D)), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<CropPlantBlock> TOMATO_PLANT = registerBlock("tomato_plant", () -> new CropPlantBlock(CAItems.TOMATO_SEEDS, Block.Properties.copy(Blocks.SUGAR_CANE).randomTicks()), CAItemGroups.foodItemGroup, false);
 	public static final RegistryObject<StrawberryBushBlock> STRAWBERRY_PLANT = registerBlock("strawberry_plant", () -> new StrawberryBushBlock(CAItems.STRAWBERRY_SEEDS, CAItems.STRAWBERRY, Block.Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks()), CAItemGroups.foodItemGroup, false);
 	

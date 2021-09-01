@@ -28,6 +28,6 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.cubeAll(CABlocks.PEACH_PLANKS.get());
 		this.logBlock(CABlocks.STRIPPED_PEACH_LOG.get());
 		
+		this.cubeAll(CABlocks.CORN_BODY_BLOCK.get());
 	}
-	
 }
