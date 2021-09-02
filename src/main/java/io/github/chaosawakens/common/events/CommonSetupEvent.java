@@ -58,7 +58,7 @@ public class CommonSetupEvent {
             CAStructures.setupStructures();
             ConfiguredStructures.registerConfiguredStructures();
             CAVillagers.registerVillagerTypes();
-            CAStrippedLogBlocks.initveryfunni();
+            CAStrippedLogBlocks.registerStrippedLogs();
 
             CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
             configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
