@@ -8,6 +8,7 @@ license="All Rights Reserved. Code from before v0.9 is licensed GNU LGPL v2.1."
 modId="chaosawakens"
 version="${file.jarVersion}"
 displayName="Chaos Awakens"
+authors="Chaos Team"
 description='''Relive the old OreSpawn mod in newer Minecraft versions!'''
 itemIcon="chaosawakens:ultimate_pickaxe"
 configBackground="chaosawakens:textures/gui/advancement_bg.png"
