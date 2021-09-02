@@ -74,7 +74,7 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		int age = state.getValue(GROWTH);
 		int height = state.getValue(AGE);
-		if (height < 25 && ForgeHooks.onCropsGrowPre(worldIn, pos.relative(this.growthDirection), worldIn.getBlockState(pos.relative(this.growthDirection)), rand.nextDouble() < this.growPerTickProbability)) {
+		if (height < this.getMaxHeight() && ForgeHooks.onCropsGrowPre(worldIn, pos.relative(this.growthDirection), worldIn.getBlockState(pos.relative(this.growthDirection)), rand.nextDouble() < this.growPerTickProbability)) {
 			BlockPos targetPos = pos.relative(this.growthDirection);
 			if(age < 3) {
 					worldIn.setBlockAndUpdate(pos, state.setValue(GROWTH, age+1));
@@ -93,7 +93,6 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		BlockPos targetPos = pos;
 		int j = rand.nextInt(8)+1;
-		
 		
 		worldIn.setBlockAndUpdate(pos, this.getBodyBlock().defaultBlockState());
 		targetPos = targetPos.relative(this.growthDirection);
@@ -137,6 +136,8 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 	protected int getBlocksToGrowWhenBonemealed(Random p_230332_1_) {
 		return 0;
 	}
+	
+	abstract protected int getMaxHeight();
 	
 	@Override
 	abstract protected Block getBodyBlock();

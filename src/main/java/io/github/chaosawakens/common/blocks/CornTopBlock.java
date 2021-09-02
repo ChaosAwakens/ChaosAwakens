@@ -34,4 +34,9 @@ public class CornTopBlock extends CropTopPlantBlock {
 	protected Block getBodyBlock() {
 		return CABlocks.CORN_BODY_BLOCK.get();
 	}
+
+	@Override
+	protected int getMaxHeight() {
+		return 18;
+	}
 }

@@ -109,7 +109,7 @@ public class CAItems {
     
 	public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds", () -> new BlockNamedItem( CABlocks.STRAWBERRY_PLANT.get(), new Item.Properties().tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> CHERRY_SEEDS = ITEMS.register("cherry_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.foodItemGroup)));
-	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockNamedItem(CABlocks.TOMATO_PLANT.get(), new Item.Properties().tab(CAItemGroups.foodItemGroup)));
+	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockNamedItem(CABlocks.TOMATO_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> APPLE_SEEDS = ITEMS.register("apple_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> PEACH_SEED = ITEMS.register("peach_seed", () -> new Item(new Item.Properties().tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds", () -> new BlockNamedItem(CABlocks.CORN_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.foodItemGroup)));
