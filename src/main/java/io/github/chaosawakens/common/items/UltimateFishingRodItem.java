@@ -27,8 +27,8 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
         if (this.allowdedIn(group)) {
             ItemStack stack = new ItemStack(this);
             if (CAConfig.COMMON.enableAutoEnchanting.get())
-                for(EnchantmentData enchant : enchantments) {
-                    stack.enchant( enchant.enchantment, enchant.level);
+                for (EnchantmentData enchant : enchantments) {
+                    stack.enchant(enchant.enchantment, enchant.level);
                 }
             items.add(stack);
         }

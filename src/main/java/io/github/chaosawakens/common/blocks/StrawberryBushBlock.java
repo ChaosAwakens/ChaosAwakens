@@ -20,45 +20,45 @@ import java.util.function.Supplier;
 
 /**
  * @author invalid2
- *
  */
 public class StrawberryBushBlock extends SweetBerryBushBlock {
 
-	private final Supplier<? extends Item> seedItem;
-	private final Supplier<? extends Item> foodItem;
+    private final Supplier<? extends Item> seedItem;
+    private final Supplier<? extends Item> foodItem;
 
-	/**
-	 * @param properties
-	 */
-	public StrawberryBushBlock(Supplier<? extends Item> seedItem, Supplier<? extends Item> foodItem, Properties properties) {
-		super(properties);
+    /**
+     * @param properties
+     */
+    public StrawberryBushBlock(Supplier<? extends Item> seedItem, Supplier<? extends Item> foodItem, Properties properties) {
+        super(properties);
 
-		this.seedItem = seedItem;
-		this.foodItem = foodItem;
-	}
+        this.seedItem = seedItem;
+        this.foodItem = foodItem;
+    }
 
-	@Override
-	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
-		return new ItemStack(seedItem.get());
-	}
+    @Override
+    public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
+        return new ItemStack(seedItem.get());
+    }
 
-	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		int age = state.getValue(AGE);
-		boolean flag = age == 3;
-		if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
-			return ActionResultType.PASS;
-		} else if (age > 1) {
-			int j = 1 + worldIn.random.nextInt(2);
-			popResource(worldIn, pos, new ItemStack(this.foodItem.get(), j + (flag ? 1 : 0)));
-			worldIn.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
-			worldIn.setBlock(pos, state.setValue(AGE, 1), 2);
+    @Override
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        int age = state.getValue(AGE);
+        boolean flag = age == 3;
+        if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
+            return ActionResultType.PASS;
+        } else if (age > 1) {
+            int j = 1 + worldIn.random.nextInt(2);
+            popResource(worldIn, pos, new ItemStack(this.foodItem.get(), j + (flag ? 1 : 0)));
+            worldIn.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
+            worldIn.setBlock(pos, state.setValue(AGE, 1), 2);
 
-			return ActionResultType.sidedSuccess(worldIn.isClientSide);
-		}
-		return super.use(state, worldIn, pos, player, handIn, hit);
-	}
+            return ActionResultType.sidedSuccess(worldIn.isClientSide);
+        }
+        return super.use(state, worldIn, pos, player, handIn, hit);
+    }
 
-	@Override
-	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {}
+    @Override
+    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+    }
 }

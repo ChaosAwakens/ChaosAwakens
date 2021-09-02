@@ -1,7 +1,7 @@
 {
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "chaosawakens:block/fossilised_ent",
-		"particle": "chaosawakens:block/fossilised_ent"
-	}
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/fossilised_ent",
+    "particle": "chaosawakens:block/fossilised_ent"
+  }
 }

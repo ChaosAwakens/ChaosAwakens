@@ -7,11 +7,11 @@ import net.minecraft.item.ItemStack;
 
 public class EnchantedBlockItem extends BlockItem {
 
-	public EnchantedBlockItem(Block blockIn, Item.Properties builder) {
-		super(blockIn, builder);
-	}
+    public EnchantedBlockItem(Block blockIn, Item.Properties builder) {
+        super(blockIn, builder);
+    }
 
-	public boolean isFoil(ItemStack stack) {
-		return true;
-	}
+    public boolean isFoil(ItemStack stack) {
+        return true;
+    }
 }

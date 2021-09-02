@@ -11,32 +11,32 @@ import net.minecraft.util.NonNullList;
 
 public class EnchantedPickaxeItem extends PickaxeItem implements IAutoEnchantable {
 
-	private final EnchantmentData[] enchantments;
+    private final EnchantmentData[] enchantments;
 
-	public EnchantedPickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn);
-		this.enchantments = enchantments;
-	}
+    public EnchantedPickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn);
+        this.enchantments = enchantments;
+    }
 
-	@Override
-	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-		if (this.allowdedIn(group)) {
-			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for(EnchantmentData enchant : enchantments) {
-					stack.enchant( enchant.enchantment, enchant.level);
-				}
-			items.add(stack);
-		}
-	}
+    @Override
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(group)) {
+            ItemStack stack = new ItemStack(this);
+            if (CAConfig.COMMON.enableAutoEnchanting.get())
+                for (EnchantmentData enchant : enchantments) {
+                    stack.enchant(enchant.enchantment, enchant.level);
+                }
+            items.add(stack);
+        }
+    }
 
-	@Override
-	public boolean isFoil(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
-	}
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
+    }
 
-	@Override
-	public EnchantmentData[] enchantments() {
-		return this.enchantments;
-	}
+    @Override
+    public EnchantmentData[] enchantments() {
+        return this.enchantments;
+    }
 }

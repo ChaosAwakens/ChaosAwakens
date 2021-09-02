@@ -21,17 +21,7 @@ public class CAEMCValues implements IEMCMapper<NormalizedSimpleStack, Long> {
 
     private static final Map<NormalizedSimpleStack, Long> customEmcValues = new HashMap<>();
 
-    @Override
-    public String getName() {
-        return "ChaosAwakensMapper";
-    }
-
-    @Override
-    public String getDescription() {
-        return "Adds EMC Values to Chaos Awakens Items.";
-    }
-
-    public static void init(){
+    public static void init() {
         registerCustomEMC(NSSItem.createItem(CABlocks.BROWN_ANT_NEST.getId()), 3);
         registerCustomEMC(NSSItem.createItem(CABlocks.RAINBOW_ANT_NEST.getId()), 3);
         registerCustomEMC(NSSItem.createItem(CABlocks.RED_ANT_NEST.getId()), 3);
@@ -61,6 +51,16 @@ public class CAEMCValues implements IEMCMapper<NormalizedSimpleStack, Long> {
 
     public static void unregisterNSS(@Nonnull NormalizedSimpleStack stack) {
         customEmcValues.remove(stack);
+    }
+
+    @Override
+    public String getName() {
+        return "ChaosAwakensMapper";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Adds EMC Values to Chaos Awakens Items.";
     }
 
     @Override

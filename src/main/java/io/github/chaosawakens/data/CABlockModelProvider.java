@@ -12,8 +12,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  */
 public class CABlockModelProvider extends BlockModelProvider {
 	
-	private final String cA = "chaosawakens";
-	
 	/**
 	 * @param generator
 	 * @param modid
@@ -26,39 +24,53 @@ public class CABlockModelProvider extends BlockModelProvider {
 	@Override
 	protected void registerModels() {
 		// TODO Automate the data generators
-		this.cubeColumn("apple_log", newRL(cA, "apple_log"), newRL(cA, "apple_log_top"));
-		this.cubeColumnHorizontal("apple_log", newRL(cA, "apple_log"), newRL(cA, "apple_log_top"));
-		this.cubeColumn("cherry_log", newRL(cA, "cherry_log"), newRL(cA, "cherry_log_top"));
-		this.cubeColumnHorizontal("cherry_log", newRL(cA, "cherry_log"), newRL(cA, "cherry_log_top"));
-		this.cubeColumn("peach_log", newRL(cA, "peach_log"), newRL(cA, "peach_log_top"));
-		this.cubeColumnHorizontal("peach_log", newRL(cA, "peach_log"), newRL(cA, "peach_log_top"));
-		this.cubeColumn("stripped_peach_log", newRL(cA, "stripped_peach_log"), newRL(cA, "stripped_peach_log_top"));
-		this.cubeAll("peach_planks", newRL(cA, "peach_planks"));
-		this.cubeColumnHorizontal("stripped_peach_log", newRL(cA, "stripped_peach_log"), newRL(cA, "stripped_peach_log_top"));
-		
+		this.cubeColumn("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
+		this.cubeColumnHorizontal("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
+		this.cubeColumn("stripped_apple_log", chaosRL("stripped_apple_log"), chaosRL("stripped_apple_log_top"));
+		this.cubeColumnHorizontal("stripped_apple_log", chaosRL("stripped_apple_log"), chaosRL("stripped_apple_log_top"));
+		this.cubeColumn("cherry_log", chaosRL("cherry_log"), chaosRL("cherry_log_top"));
+		this.cubeColumnHorizontal("cherry_log", chaosRL("cherry_log"), chaosRL("cherry_log_top"));
+		this.cubeColumn("stripped_cherry_log", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log_top"));
+		this.cubeColumnHorizontal("stripped_cherry_log", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log_top"));
+		this.cubeColumn("duplication_log", chaosRL("duplication_log"), chaosRL("duplication_log_top"));
+		this.cubeColumnHorizontal("duplication_log", chaosRL("duplication_log"), chaosRL("duplication_log_top"));
+		this.cubeColumn("stripped_duplication_log", chaosRL("stripped_duplication_log"), chaosRL("stripped_duplication_log_top"));
+		this.cubeColumnHorizontal("stripped_duplication_log", chaosRL("stripped_duplication_log"), chaosRL("stripped_duplication_log_top"));
+		this.cubeColumn("dead_duplication_log", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log_top"));
+		this.cubeColumnHorizontal("dead_duplication_log", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log_top"));
+		this.cubeColumn("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
+		this.cubeColumnHorizontal("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
+		this.cubeColumn("stripped_peach_log", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log_top"));
+		this.cubeColumnHorizontal("stripped_peach_log", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log_top"));
+		this.cubeAll("apple_planks", chaosRL("apple_planks"));
+//		this.cubeAll("apple_leaves", chaosRL("apple_leaves"));
+		this.cubeAll("cherry_planks", chaosRL("cherry_planks"));
+		this.cubeAll("cherry_leaves", chaosRL("cherry_leaves"));
+		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
+		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
+		this.cubeAll("peach_planks", chaosRL("peach_planks"));
+		this.cubeAll("peach_leaves", chaosRL("peach_leaves"));
+		this.cross("peach_sapling", chaosRL("peach_sapling"));
 	}
 	
-	private ResourceLocation newRL(String ns, String p) {
-		return new ResourceLocation(ns, BLOCK_FOLDER+"/"+p);
+	private ResourceLocation chaosRL(String texture) {
+		return new ResourceLocation(ChaosAwakens.MODID, BLOCK_FOLDER + "/" + texture);
 	}
 	
-	@Override
+	private ResourceLocation otherRL(String modid, String texture) {
+		return new ResourceLocation(modid, BLOCK_FOLDER + "/" + texture);
+	}
+	
 	public BlockModelBuilder cubeAll(String name, ResourceLocation texture) {
 		return singleTexture(name, mcLoc(BLOCK_FOLDER), "all", texture);
 	}
 	
-	@Override
 	public BlockModelBuilder cubeColumn(String name, ResourceLocation side, ResourceLocation end) {
 		ChaosAwakens.debug("DATAGEN", side.getPath());
-		return withExistingParent(name, BLOCK_FOLDER)
-			.texture("side", side)
-			.texture("end", end);
+		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("end", end);
 	}
 	
-	@Override
 	public BlockModelBuilder cubeColumnHorizontal(String name, ResourceLocation side, ResourceLocation end) {
-		return withExistingParent(name, BLOCK_FOLDER)
-				.texture("side", side)
-				.texture("end", end);
+		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("end", end);
 	}
 }

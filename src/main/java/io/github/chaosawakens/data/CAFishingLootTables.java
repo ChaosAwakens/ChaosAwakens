@@ -1,5 +1,7 @@
 package io.github.chaosawakens.data;
 
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.data.loot.FishingLootTables;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
@@ -7,9 +9,6 @@ import net.minecraft.loot.LootTable.Builder;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.function.BiConsumer;
-
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CALootTables;
 
 public class CAFishingLootTables extends FishingLootTables {
 

@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/fence_post",
-	"textures": {
-		"texture": "chaosawakens:block/mouldy_wood"
-	}
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "chaosawakens:block/mouldy_wood"
+  }
 }

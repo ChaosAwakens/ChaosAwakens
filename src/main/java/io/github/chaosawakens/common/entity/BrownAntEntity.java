@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.entity.AgeableEntity;
@@ -30,6 +28,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
 public class BrownAntEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
@@ -39,8 +39,15 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
         this.noCulling = true;
     }
 
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 1)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.FOLLOW_RANGE, 8);
+    }
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if(event.isMoving()){
+        if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
             return PlayState.CONTINUE;
         }
@@ -58,13 +65,6 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
         this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 1)
-                .add(Attributes.MOVEMENT_SPEED, 0.15D)
-                .add(Attributes.FOLLOW_RANGE, 8);
-    }
-
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
@@ -76,7 +76,7 @@ public class BrownAntEntity extends AnimalEntity implements IAnimatable {
 
         if (CAConfig.COMMON.enableBrownAntTeleport.get()) {
             if (this.level instanceof ServerWorld && itemstack.getItem() == Items.AIR) {
-                playerIn.displayClientMessage(this.inaccessibleMessage,true);
+                playerIn.displayClientMessage(this.inaccessibleMessage, true);
                 return ActionResultType.FAIL;
             }
         }

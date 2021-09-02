@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class UltimateBobberRender extends FishRenderer {
-    private static final ResourceLocation BOBBER = new ResourceLocation(ChaosAwakens.MODID,"textures/entity/ultimate_fishing_hook.png");
+    private static final ResourceLocation BOBBER = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ultimate_fishing_hook.png");
 
     public UltimateBobberRender(EntityRendererManager manager) {
         super(manager);

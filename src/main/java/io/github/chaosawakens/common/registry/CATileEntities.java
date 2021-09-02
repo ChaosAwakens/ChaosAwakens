@@ -9,8 +9,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class CATileEntities {
 
-	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ChaosAwakens.MODID);
+    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ChaosAwakens.MODID);
 
-	public static final RegistryObject<TileEntityType<CrystalFurnaceTileEntity>> CRYSTAL_FURNACE = TILE_ENTITIES.register("crystal_furnace",
-			() -> TileEntityType.Builder.of(CrystalFurnaceTileEntity::new, CABlocks.CRYSTAL_FURNACE.get()).build(null));
+    public static final RegistryObject<TileEntityType<CrystalFurnaceTileEntity>> CRYSTAL_FURNACE = TILE_ENTITIES.register("crystal_furnace",
+            () -> TileEntityType.Builder.of(CrystalFurnaceTileEntity::new, CABlocks.CRYSTAL_FURNACE.get()).build(null));
 }

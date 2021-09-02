@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -21,57 +19,59 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
 /**
  * @author invalid2
  */
 public class StinkBugEntity extends AnimalEntity implements IAnimatable {
-	private final AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
-	/**
-	 * @param type
-	 * @param worldIn
-	 */
-	public StinkBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
-		super(type, worldIn);
-	}
+    /**
+     * @param type
+     * @param worldIn
+     */
+    public StinkBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+        super(type, worldIn);
+    }
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walk", true));
-			return PlayState.CONTINUE;
-		}
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 8)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.FOLLOW_RANGE, 8);
+    }
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.stand", true));
-		return PlayState.CONTINUE;
-	}
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        if (event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walk", true));
+            return PlayState.CONTINUE;
+        }
 
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
-		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0));
-	}
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.stand", true));
+        return PlayState.CONTINUE;
+    }
 
-	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 8)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D)
-				.add(Attributes.FOLLOW_RANGE, 8);
-	}
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
+        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0));
+    }
 
-	@Override
-	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "stinkbugcontroller", 0, this::predicate));
-	}
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "stinkbugcontroller", 0, this::predicate));
+    }
 
-	@Override
-	public AnimationFactory getFactory() {
-		return this.factory;
-	}
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
 
-	@Nullable
-	@Override
-	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-		return null;
-	}
+    @Nullable
+    @Override
+    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+        return null;
+    }
 }

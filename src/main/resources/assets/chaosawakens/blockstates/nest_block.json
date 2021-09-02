@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/nest_block"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/nest_block"
+    }
+  }
 }

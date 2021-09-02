@@ -1,13 +1,13 @@
 {
-	"variants": {
-		"type=bottom": {
-			"model": "chaosawakens:block/mouldy_slab"
-		},
-		"type=double": {
-			"model": "chaosawakens:block/mouldy_planks"
-		},
-		"type=top": {
-			"model": "chaosawakens:block/mouldy_slab_top"
-		}
-	}
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/mouldy_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/mouldy_planks"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/mouldy_slab_top"
+    }
+  }
 }

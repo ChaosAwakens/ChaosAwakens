@@ -1,187 +1,1191 @@
 {
-	"format_version": "1.12.0",
-	"minecraft:geometry": [
-		{
-			"description": {
-				"identifier": "geometry.scorpion",
-				"texture_width": 64,
-				"texture_height": 32,
-				"visible_bounds_width": 3,
-				"visible_bounds_height": 3,
-				"visible_bounds_offset": [0, 0.5, 0]
-			},
-			"bones": [
-				{
-					"name": "scropion",
-					"pivot": [0, 0, 0]
-				},
-				{
-					"name": "body",
-					"parent": "scropion",
-					"pivot": [0, 3, 0],
-					"cubes": [
-						{"origin": [-3, 1.5, -4], "size": [6, 3, 7], "uv": [0, 0]},
-						{"origin": [-2, 3.8, -3.2], "size": [4, 1, 6], "uv": [0, 10]}
-					]
-				},
-				{
-					"name": "head",
-					"parent": "body",
-					"pivot": [0, 3, -5],
-					"cubes": [
-						{"origin": [-2.5, 2, -9], "size": [5, 2, 5], "uv": [15, 12]},
-						{"origin": [-1.5, 2.5, -10], "size": [1, 1, 1], "uv": [1, 1]},
-						{"origin": [0.5, 2.5, -10], "size": [1, 1, 1], "uv": [1, 1]}
-					]
-				},
-				{
-					"name": "rightarm",
-					"parent": "head",
-					"pivot": [-2, 3, -8],
-					"rotation": [0, 0, -180],
-					"cubes": [
-						{"origin": [-2, 3, -10], "size": [1, 1, 3], "pivot": [-2, 3, -8], "rotation": [0, -45, 0], "uv": [26, 6]},
-						{"origin": [-1, 2.5, -10.5], "size": [2, 2, 2], "uv": [10, 25]},
-						{"origin": [0.5, 3, -11], "size": [1, 1, 2], "pivot": [-2, 3, -8], "rotation": [0, 10, 0], "uv": [0, 0]},
-						{"origin": [-1.5, 3, -10.26795], "size": [1, 1, 2], "pivot": [-2, 3, -10], "rotation": [0, 40, 0], "uv": [0, 0]}
-					]
-				},
-				{
-					"name": "leftarm",
-					"parent": "head",
-					"pivot": [2, 2, -8],
-					"cubes": [
-						{"origin": [2, 2, -10], "size": [1, 1, 3], "pivot": [2, 2, -8], "rotation": [0, -45, 0], "uv": [26, 6]},
-						{"origin": [3, 1.5, -10.5], "size": [2, 2, 2], "uv": [10, 25]},
-						{"origin": [4.5, 2, -11], "size": [1, 1, 2], "pivot": [2, 2, -8], "rotation": [0, 10, 0], "uv": [0, 0]},
-						{"origin": [2.5, 2, -10.26795], "size": [1, 1, 2], "pivot": [2, 2, -10], "rotation": [0, 40, 0], "uv": [0, 0]}
-					]
-				},
-				{
-					"name": "tail",
-					"parent": "scropion",
-					"pivot": [0, 3, 3]
-				},
-				{
-					"name": "tail1",
-					"parent": "tail",
-					"pivot": [0, 3, 2],
-					"cubes": [
-						{"origin": [-2, 1.63751, 2.14326], "size": [4, 3, 5], "pivot": [0, 3, 2], "rotation": [17.5, 0, 0], "uv": [0, 17]}
-					]
-				},
-				{
-					"name": "tail2",
-					"parent": "tail1",
-					"pivot": [0, 4, 6],
-					"cubes": [
-						{"origin": [-1.5, 3.84829, 4.35104], "size": [3, 5, 2], "pivot": [0, 4, 6], "rotation": [-70, 0, 0], "uv": [0, 25]}
-					]
-				},
-				{
-					"name": "tail3",
-					"parent": "tail2",
-					"pivot": [0, 6, 10],
-					"cubes": [
-						{"origin": [-1, 7, 8], "size": [2, 8, 2], "pivot": [0, 7, 10], "rotation": [40, 0, 0], "uv": [18, 19]}
-					]
-				},
-				{
-					"name": "tail4",
-					"parent": "tail3",
-					"pivot": [0, 11, 4],
-					"cubes": [
-						{"origin": [-1.5, 10.50095, 1.95638], "size": [3, 3, 3], "pivot": [0, 12, 4], "rotation": [2.5, 0, 0], "uv": [19, 0]},
-						{"origin": [-0.5, 10.1, 1.74975], "size": [1, 2, 1], "pivot": [0, 12, 2], "rotation": [-57.5, 0, 0], "uv": [0, 10]}
-					]
-				},
-				{
-					"name": "rightleg1",
-					"parent": "scropion",
-					"pivot": [-2, 4, -4],
-					"rotation": [0, -20, 0],
-					"cubes": [
-						{"origin": [-4, 3, -5], "size": [2, 1, 2], "pivot": [-2, 3, -5], "rotation": [0, 0, 20], "uv": [26, 22]},
-						{"origin": [-5.75, 4, -4.5], "size": [4, 1, 1], "pivot": [-2, 3, -5], "rotation": [0, 0, -62.5], "uv": [24, 10]},
-						{"origin": [-6.4, 0, -4.501], "size": [2, 1, 1], "uv": [0, 5]}
-					]
-				},
-				{
-					"name": "rightleg2",
-					"parent": "scropion",
-					"pivot": [-3, 4, -2],
-					"cubes": [
-						{"origin": [-5, 3, -3], "size": [2, 1, 2], "pivot": [-3, 3, -3], "rotation": [0, 0, 20], "uv": [26, 22]},
-						{"origin": [-6.75, 4, -2.5], "size": [4, 1, 1], "pivot": [-3, 3, -3], "rotation": [0, 0, -62.5], "uv": [24, 10]},
-						{"origin": [-7.4, 0, -2.501], "size": [2, 1, 1], "uv": [0, 5]}
-					]
-				},
-				{
-					"name": "rightleg3",
-					"parent": "scropion",
-					"pivot": [-3, 4, 1],
-					"cubes": [
-						{"origin": [-5, 3, 0], "size": [2, 1, 2], "pivot": [-3, 3, 0], "rotation": [0, 0, 20], "uv": [26, 22]},
-						{"origin": [-6.75, 4, 0.5], "size": [4, 1, 1], "pivot": [-3, 3, 0], "rotation": [0, 0, -62.5], "uv": [24, 10]},
-						{"origin": [-7.4, 0, 0.499], "size": [2, 1, 1], "uv": [0, 5]}
-					]
-				},
-				{
-					"name": "rightleg4",
-					"parent": "scropion",
-					"pivot": [-2, 4, 3],
-					"rotation": [0, 35, 0],
-					"cubes": [
-						{"origin": [-4, 3, 2], "size": [2, 1, 2], "pivot": [-2, 3, 2], "rotation": [0, 0, 20], "uv": [26, 22]},
-						{"origin": [-5.75, 4, 2.5], "size": [4, 1, 1], "pivot": [-2, 3, 2], "rotation": [0, 0, -62.5], "uv": [24, 10]},
-						{"origin": [-6.4, 0, 2.499], "size": [2, 1, 1], "uv": [0, 5]}
-					]
-				},
-				{
-					"name": "leftleg1",
-					"parent": "scropion",
-					"pivot": [2, 4, -4],
-					"rotation": [0, -160, 0],
-					"cubes": [
-						{"origin": [0, 3, -5], "size": [2, 1, 2], "pivot": [2, 3, -5], "rotation": [0, 0, 20], "uv": [26, 19]},
-						{"origin": [-1.75, 4, -4.5], "size": [4, 1, 1], "pivot": [2, 3, -5], "rotation": [0, 0, -62.5], "uv": [14, 10]},
-						{"origin": [-2.4, 0, -4.501], "size": [2, 1, 1], "uv": [0, 3]}
-					]
-				},
-				{
-					"name": "leftleg2",
-					"parent": "scropion",
-					"pivot": [3, 4, -2],
-					"rotation": [0, 180, 0],
-					"cubes": [
-						{"origin": [1, 3, -3], "size": [2, 1, 2], "pivot": [3, 3, -3], "rotation": [0, 0, 20], "uv": [26, 19]},
-						{"origin": [-0.75, 4, -2.5], "size": [4, 1, 1], "pivot": [3, 3, -3], "rotation": [0, 0, -62.5], "uv": [14, 10]},
-						{"origin": [-1.4, 0, -2.501], "size": [2, 1, 1], "uv": [0, 3]}
-					]
-				},
-				{
-					"name": "leftleg3",
-					"parent": "scropion",
-					"pivot": [3, 4, 1],
-					"rotation": [0, 180, 0],
-					"cubes": [
-						{"origin": [1, 3, 0], "size": [2, 1, 2], "pivot": [3, 3, 0], "rotation": [0, 0, 20], "uv": [26, 19]},
-						{"origin": [-0.75, 4, 0.5], "size": [4, 1, 1], "pivot": [3, 3, 0], "rotation": [0, 0, -62.5], "uv": [14, 10]},
-						{"origin": [-1.4, 0, 0.499], "size": [2, 1, 1], "uv": [0, 3]}
-					]
-				},
-				{
-					"name": "leftleg4",
-					"parent": "scropion",
-					"pivot": [2, 4, 3],
-					"rotation": [0, 145, 0],
-					"cubes": [
-						{"origin": [0, 3, 2], "size": [2, 1, 2], "pivot": [2, 3, 2], "rotation": [0, 0, 20], "uv": [26, 19]},
-						{"origin": [-1.75, 4, 2.5], "size": [4, 1, 1], "pivot": [2, 3, 2], "rotation": [0, 0, -62.5], "uv": [14, 10]},
-						{"origin": [-2.4, 0, 2.499], "size": [2, 1, 1], "uv": [0, 3]}
-					]
-				}
-			]
-		}
-	]
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.scorpion",
+        "texture_width": 64,
+        "texture_height": 32,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3,
+        "visible_bounds_offset": [
+          0,
+          0.5,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "scropion",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "body",
+          "parent": "scropion",
+          "pivot": [
+            0,
+            3,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                1.5,
+                -4
+              ],
+              "size": [
+                6,
+                3,
+                7
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -2,
+                3.8,
+                -3.2
+              ],
+              "size": [
+                4,
+                1,
+                6
+              ],
+              "uv": [
+                0,
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "name": "head",
+          "parent": "body",
+          "pivot": [
+            0,
+            3,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                2,
+                -9
+              ],
+              "size": [
+                5,
+                2,
+                5
+              ],
+              "uv": [
+                15,
+                12
+              ]
+            },
+            {
+              "origin": [
+                -1.5,
+                2.5,
+                -10
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": [
+                1,
+                1
+              ]
+            },
+            {
+              "origin": [
+                0.5,
+                2.5,
+                -10
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": [
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "name": "rightarm",
+          "parent": "head",
+          "pivot": [
+            -2,
+            3,
+            -8
+          ],
+          "rotation": [
+            0,
+            0,
+            -180
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                3,
+                -10
+              ],
+              "size": [
+                1,
+                1,
+                3
+              ],
+              "pivot": [
+                -2,
+                3,
+                -8
+              ],
+              "rotation": [
+                0,
+                -45,
+                0
+              ],
+              "uv": [
+                26,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                2.5,
+                -10.5
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                10,
+                25
+              ]
+            },
+            {
+              "origin": [
+                0.5,
+                3,
+                -11
+              ],
+              "size": [
+                1,
+                1,
+                2
+              ],
+              "pivot": [
+                -2,
+                3,
+                -8
+              ],
+              "rotation": [
+                0,
+                10,
+                0
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -1.5,
+                3,
+                -10.26795
+              ],
+              "size": [
+                1,
+                1,
+                2
+              ],
+              "pivot": [
+                -2,
+                3,
+                -10
+              ],
+              "rotation": [
+                0,
+                40,
+                0
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leftarm",
+          "parent": "head",
+          "pivot": [
+            2,
+            2,
+            -8
+          ],
+          "cubes": [
+            {
+              "origin": [
+                2,
+                2,
+                -10
+              ],
+              "size": [
+                1,
+                1,
+                3
+              ],
+              "pivot": [
+                2,
+                2,
+                -8
+              ],
+              "rotation": [
+                0,
+                -45,
+                0
+              ],
+              "uv": [
+                26,
+                6
+              ]
+            },
+            {
+              "origin": [
+                3,
+                1.5,
+                -10.5
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                10,
+                25
+              ]
+            },
+            {
+              "origin": [
+                4.5,
+                2,
+                -11
+              ],
+              "size": [
+                1,
+                1,
+                2
+              ],
+              "pivot": [
+                2,
+                2,
+                -8
+              ],
+              "rotation": [
+                0,
+                10,
+                0
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                2.5,
+                2,
+                -10.26795
+              ],
+              "size": [
+                1,
+                1,
+                2
+              ],
+              "pivot": [
+                2,
+                2,
+                -10
+              ],
+              "rotation": [
+                0,
+                40,
+                0
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tail",
+          "parent": "scropion",
+          "pivot": [
+            0,
+            3,
+            3
+          ]
+        },
+        {
+          "name": "tail1",
+          "parent": "tail",
+          "pivot": [
+            0,
+            3,
+            2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                1.63751,
+                2.14326
+              ],
+              "size": [
+                4,
+                3,
+                5
+              ],
+              "pivot": [
+                0,
+                3,
+                2
+              ],
+              "rotation": [
+                17.5,
+                0,
+                0
+              ],
+              "uv": [
+                0,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tail2",
+          "parent": "tail1",
+          "pivot": [
+            0,
+            4,
+            6
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                3.84829,
+                4.35104
+              ],
+              "size": [
+                3,
+                5,
+                2
+              ],
+              "pivot": [
+                0,
+                4,
+                6
+              ],
+              "rotation": [
+                -70,
+                0,
+                0
+              ],
+              "uv": [
+                0,
+                25
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tail3",
+          "parent": "tail2",
+          "pivot": [
+            0,
+            6,
+            10
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                7,
+                8
+              ],
+              "size": [
+                2,
+                8,
+                2
+              ],
+              "pivot": [
+                0,
+                7,
+                10
+              ],
+              "rotation": [
+                40,
+                0,
+                0
+              ],
+              "uv": [
+                18,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tail4",
+          "parent": "tail3",
+          "pivot": [
+            0,
+            11,
+            4
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                10.50095,
+                1.95638
+              ],
+              "size": [
+                3,
+                3,
+                3
+              ],
+              "pivot": [
+                0,
+                12,
+                4
+              ],
+              "rotation": [
+                2.5,
+                0,
+                0
+              ],
+              "uv": [
+                19,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -0.5,
+                10.1,
+                1.74975
+              ],
+              "size": [
+                1,
+                2,
+                1
+              ],
+              "pivot": [
+                0,
+                12,
+                2
+              ],
+              "rotation": [
+                -57.5,
+                0,
+                0
+              ],
+              "uv": [
+                0,
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "name": "rightleg1",
+          "parent": "scropion",
+          "pivot": [
+            -2,
+            4,
+            -4
+          ],
+          "rotation": [
+            0,
+            -20,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                3,
+                -5
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                -2,
+                3,
+                -5
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                22
+              ]
+            },
+            {
+              "origin": [
+                -5.75,
+                4,
+                -4.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                -2,
+                3,
+                -5
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                24,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -6.4,
+                0,
+                -4.501
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "rightleg2",
+          "parent": "scropion",
+          "pivot": [
+            -3,
+            4,
+            -2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                3,
+                -3
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                -3,
+                3,
+                -3
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                22
+              ]
+            },
+            {
+              "origin": [
+                -6.75,
+                4,
+                -2.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                -3,
+                3,
+                -3
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                24,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -7.4,
+                0,
+                -2.501
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "rightleg3",
+          "parent": "scropion",
+          "pivot": [
+            -3,
+            4,
+            1
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                3,
+                0
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                -3,
+                3,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                22
+              ]
+            },
+            {
+              "origin": [
+                -6.75,
+                4,
+                0.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                -3,
+                3,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                24,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -7.4,
+                0,
+                0.499
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "rightleg4",
+          "parent": "scropion",
+          "pivot": [
+            -2,
+            4,
+            3
+          ],
+          "rotation": [
+            0,
+            35,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                3,
+                2
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                -2,
+                3,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                22
+              ]
+            },
+            {
+              "origin": [
+                -5.75,
+                4,
+                2.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                -2,
+                3,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                24,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -6.4,
+                0,
+                2.499
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leftleg1",
+          "parent": "scropion",
+          "pivot": [
+            2,
+            4,
+            -4
+          ],
+          "rotation": [
+            0,
+            -160,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0,
+                3,
+                -5
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                2,
+                3,
+                -5
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                19
+              ]
+            },
+            {
+              "origin": [
+                -1.75,
+                4,
+                -4.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                2,
+                3,
+                -5
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                14,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -2.4,
+                0,
+                -4.501
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leftleg2",
+          "parent": "scropion",
+          "pivot": [
+            3,
+            4,
+            -2
+          ],
+          "rotation": [
+            0,
+            180,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1,
+                3,
+                -3
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                3,
+                3,
+                -3
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                19
+              ]
+            },
+            {
+              "origin": [
+                -0.75,
+                4,
+                -2.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                3,
+                3,
+                -3
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                14,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -1.4,
+                0,
+                -2.501
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leftleg3",
+          "parent": "scropion",
+          "pivot": [
+            3,
+            4,
+            1
+          ],
+          "rotation": [
+            0,
+            180,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1,
+                3,
+                0
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                3,
+                3,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                19
+              ]
+            },
+            {
+              "origin": [
+                -0.75,
+                4,
+                0.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                3,
+                3,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                14,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -1.4,
+                0,
+                0.499
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leftleg4",
+          "parent": "scropion",
+          "pivot": [
+            2,
+            4,
+            3
+          ],
+          "rotation": [
+            0,
+            145,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0,
+                3,
+                2
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "pivot": [
+                2,
+                3,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                20
+              ],
+              "uv": [
+                26,
+                19
+              ]
+            },
+            {
+              "origin": [
+                -1.75,
+                4,
+                2.5
+              ],
+              "size": [
+                4,
+                1,
+                1
+              ],
+              "pivot": [
+                2,
+                3,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                -62.5
+              ],
+              "uv": [
+                14,
+                10
+              ]
+            },
+            {
+              "origin": [
+                -2.4,
+                0,
+                2.499
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

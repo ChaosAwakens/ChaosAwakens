@@ -11,14 +11,14 @@ import net.minecraft.world.World;
 
 public class PeacockBootsItem extends ArmorItem {
 
-	public PeacockBootsItem(IArmorMaterial materialIn, Properties builderIn) {
-		super(materialIn, EquipmentSlotType.FEET, builderIn);
-	}
+    public PeacockBootsItem(IArmorMaterial materialIn, Properties builderIn) {
+        super(materialIn, EquipmentSlotType.FEET, builderIn);
+    }
 
-	@Override
-	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-		super.onArmorTick(stack, world, player);
-		if (!player.isOnGround())
-			player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 60, 0, false, false));
-	}
+    @Override
+    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+        super.onArmorTick(stack, world, player);
+        if (!player.isOnGround())
+            player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 60, 0, false, false));
+    }
 }

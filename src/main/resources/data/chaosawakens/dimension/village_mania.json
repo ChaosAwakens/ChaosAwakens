@@ -1,80 +1,92 @@
 {
-	"type": "chaosawakens:village_mania",
-	"generator": {
-		"type": "minecraft:noise",
-		"seed": 0,
-		"biome_source": {
-			"type": "minecraft:multi_noise",
-			"seed": 0,
-			"biomes": [
-				{
-					"parameters": {
-						"altitude": 0,
-						"temperature": -0.2,
-						"humidity": 0.3,
-						"weirdness": -0.5,
-						"offset": 0
-					},
-					"biome": "chaosawakens:village_plains"
-				},
-				{
-					"parameters": {
-						"altitude": -0.15,
-						"temperature": -0.15,
-						"humidity": 0.3,
-						"weirdness": 0.3,
-						"offset": 0
-					},
-					"biome": "chaosawakens:village_savanna"
-				},
-				{
-					"parameters": {
-						"altitude": 0.15,
-						"temperature": 0.15,
-						"humidity": -0.3,
-						"weirdness": 0.3,
-						"offset": 0
-					},
-					"biome": "chaosawakens:village_taiga"
-				},
-				{
-					"parameters": {
-						"altitude": 0.3,
-						"temperature": 0.25,
-						"humidity": -0.15,
-						"weirdness": 0.3,
-						"offset": 0
-					},
-					"biome": "chaosawakens:village_snowy"
-				},
-				{
-					"parameters": {
-						"altitude": -0.3,
-						"temperature": -0.25,
-						"humidity": 0.15,
-						"weirdness": 0.3,
-						"offset": 0
-					},
-					"biome": "chaosawakens:village_desert"
-				}
-			],
-			"temperature_noise": {
-				"firstOctave": -7,
-				"amplitudes": [ 1.0, 1.0]
-			},
-			"humidity_noise": {
-				"firstOctave": -7,
-				"amplitudes": [ 1.0, 1.0]
-			},
-			"altitude_noise": {
-				"firstOctave": -7,
-				"amplitudes": [ 1.0, 1.0]
-			},
-			"weirdness_noise": {
-				"firstOctave": -7,
-				"amplitudes": [1.0, 1.0]
-			}
-		},
-		"settings": "chaosawakens:village_mania"
-	}
+  "type": "chaosawakens:village_mania",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "seed": 0,
+      "biomes": [
+        {
+          "parameters": {
+            "altitude": 0,
+            "temperature": -0.2,
+            "humidity": 0.3,
+            "weirdness": -0.5,
+            "offset": 0
+          },
+          "biome": "chaosawakens:village_plains"
+        },
+        {
+          "parameters": {
+            "altitude": -0.15,
+            "temperature": -0.15,
+            "humidity": 0.3,
+            "weirdness": 0.3,
+            "offset": 0
+          },
+          "biome": "chaosawakens:village_savanna"
+        },
+        {
+          "parameters": {
+            "altitude": 0.15,
+            "temperature": 0.15,
+            "humidity": -0.3,
+            "weirdness": 0.3,
+            "offset": 0
+          },
+          "biome": "chaosawakens:village_taiga"
+        },
+        {
+          "parameters": {
+            "altitude": 0.3,
+            "temperature": 0.25,
+            "humidity": -0.15,
+            "weirdness": 0.3,
+            "offset": 0
+          },
+          "biome": "chaosawakens:village_snowy"
+        },
+        {
+          "parameters": {
+            "altitude": -0.3,
+            "temperature": -0.25,
+            "humidity": 0.15,
+            "weirdness": 0.3,
+            "offset": 0
+          },
+          "biome": "chaosawakens:village_desert"
+        }
+      ],
+      "temperature_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      },
+      "humidity_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      },
+      "altitude_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      },
+      "weirdness_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "settings": "chaosawakens:village_mania"
+  }
 }

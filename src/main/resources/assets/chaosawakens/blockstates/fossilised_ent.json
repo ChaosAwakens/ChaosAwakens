@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/fossilised_ent"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/fossilised_ent"
+    }
+  }
 }

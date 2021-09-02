@@ -1,7 +1,7 @@
 {
-	"variants": {
-		"": {
-			"model": "chaosawakens:block/mouldy_planks"
-		}
-	}
+  "variants": {
+    "": {
+      "model": "chaosawakens:block/mouldy_planks"
+    }
+  }
 }

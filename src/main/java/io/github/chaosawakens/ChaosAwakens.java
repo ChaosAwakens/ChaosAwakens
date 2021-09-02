@@ -4,17 +4,13 @@ import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
 import io.github.chaosawakens.common.UpdateHandler;
-import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
-import io.github.chaosawakens.data.CAAdvancementProvider;
-import io.github.chaosawakens.data.CABlockModelProvider;
-import io.github.chaosawakens.data.CABlockStateProvider;
-import io.github.chaosawakens.data.CAItemModelGenerator;
-import io.github.chaosawakens.data.CALootTableProvider;
+import io.github.chaosawakens.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,10 +38,8 @@ public class ChaosAwakens {
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
 	public static final String VERSION = "0.9-preview4";
-
-	public static ChaosAwakens INSTANCE;
-
 	public static final Logger LOGGER = LogManager.getLogger();
+	public static ChaosAwakens INSTANCE;
 
 	public ChaosAwakens() {
 		INSTANCE = this;
@@ -62,7 +56,7 @@ public class ChaosAwakens {
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
 
-		if(FMLEnvironment.dist == Dist.CLIENT) {
+		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 		}
@@ -70,7 +64,6 @@ public class ChaosAwakens {
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
-		CAEnchantments.ENCHANTMENTS.register(eventBus);
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAItems.ITEMS.register(eventBus);
 		CATileEntities.TILE_ENTITIES.register(eventBus);
@@ -103,19 +96,6 @@ public class ChaosAwakens {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
 
-	private void gatherData(final GatherDataEvent event) {
-		DataGenerator dataGenerator = event.getGenerator();
-		final ExistingFileHelper existing = event.getExistingFileHelper();
-
-		if (event.includeServer()) {
-			dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator));
-			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
-			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
-			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
-			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
-		}
-	}
-
 	public static ResourceLocation prefix(String name) {
 		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
 	}
@@ -135,4 +115,20 @@ public class ChaosAwakens {
 	public static <E> void error(String domain, E message) {
 		LOGGER.error("[" + domain + "]: " + (message == null ? "null" : message.toString()));
 	}
-}
+
+	private void gatherData(final GatherDataEvent event) {
+		DataGenerator dataGenerator = event.getGenerator();
+		final ExistingFileHelper existing = event.getExistingFileHelper();
+
+		if (event.includeServer()) {
+			dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator));
+			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
+			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
+			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
+			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
+			dataGenerator.addProvider(new CATagProvider(dataGenerator, existing));
+			dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
+			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
+		}
+	}
+} 

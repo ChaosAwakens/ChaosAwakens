@@ -4,11 +4,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 
 /**
  * @author invalid2
- * @author RaveTr
  */
 public class ServerSetupEvent {
 
-	public void onFMLServerSetupEvent(FMLDedicatedServerSetupEvent event) {
-		System.out.println("Starting server");
-	}
+    public void onFMLServerSetupEvent(FMLDedicatedServerSetupEvent event) {
+        //Nothing here at the moment | A Server Starting Message is not needed...
+    }
 }

@@ -1,15 +1,15 @@
 {
-	"name": "chaosawakens:dungeon/ent_tree/crimson",
-	"fallback": "minecraft:empty",
-	"elements": [
-		{
-			"weight": 2,
-			"element": {
-				"element_type": "minecraft:single_pool_element",
-				"location": "chaosawakens:dungeon/ent_tree/crimson",
-				"processors": "minecraft:empty",
-				"projection": "rigid"
-			}
-		}
-	]
+  "name": "chaosawakens:dungeon/ent_tree/crimson",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "chaosawakens:dungeon/ent_tree/crimson",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      }
+    }
+  ]
 }

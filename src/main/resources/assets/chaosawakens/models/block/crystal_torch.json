@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/template_torch",
-	"textures": {
-		"torch": "chaosawakens:block/crystal_torch"
-	}
+  "parent": "minecraft:block/template_torch",
+  "textures": {
+    "torch": "chaosawakens:block/crystal_torch"
+  }
 }

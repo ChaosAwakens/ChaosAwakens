@@ -19,8 +19,6 @@ import net.minecraft.world.IWorld;
 import java.util.Set;
 
 public class CATreasure {
-    private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
-
     // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/acacia_ent_dungeon"}} 1
     public static final CATreasure acacia_ent_dungeon = new CATreasure("acacia_ent_dungeon");
     // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/birch_ent_dungeon"}} 1
@@ -39,7 +37,7 @@ public class CATreasure {
     public static final CATreasure warped_ent_dungeon = new CATreasure("warped_ent_dungeon");
     // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon"}} 1
     public static final CATreasure wasp_dungeon = new CATreasure("wasp_dungeon");
-
+    private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
     public static LootFunctionType ENCHANT;
 
     public final ResourceLocation lootTable;
@@ -50,20 +48,6 @@ public class CATreasure {
 
     public static void init() {
         ENCHANT = registerFunction("enchant", new LootFunctionType(new LootFunctionEnchant.Serializer()));
-    }
-
-    public void generateChest(IWorld world, BlockPos pos, Direction dir, boolean trapped) {
-        world.setBlock(pos, (trapped ? Blocks.TRAPPED_CHEST : Blocks.CHEST).defaultBlockState().setValue(ChestBlock.FACING, dir), 2);
-        TileEntity te = world.getBlockEntity(pos);
-        if (te instanceof ChestTileEntity) {
-            ((ChestTileEntity) te).setLootTable(lootTable, ((ISeedReader)world).getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
-        }
-    }
-
-    public void generateChestContents(ISeedReader world, BlockPos pos) {
-        TileEntity te = world.getBlockEntity(pos);
-        if (te instanceof ChestTileEntity)
-            ((ChestTileEntity) te).setLootTable(lootTable, world.getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
     }
 
     private static LootFunctionType registerFunction(String name, LootFunctionType function) {
@@ -84,5 +68,19 @@ public class CATreasure {
         } else {
             throw new IllegalArgumentException(id + " is already a registered built-in loot table");
         }
+    }
+
+    public void generateChest(IWorld world, BlockPos pos, Direction dir, boolean trapped) {
+        world.setBlock(pos, (trapped ? Blocks.TRAPPED_CHEST : Blocks.CHEST).defaultBlockState().setValue(ChestBlock.FACING, dir), 2);
+        TileEntity te = world.getBlockEntity(pos);
+        if (te instanceof ChestTileEntity) {
+            ((ChestTileEntity) te).setLootTable(lootTable, ((ISeedReader) world).getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
+        }
+    }
+
+    public void generateChestContents(ISeedReader world, BlockPos pos) {
+        TileEntity te = world.getBlockEntity(pos);
+        if (te instanceof ChestTileEntity)
+            ((ChestTileEntity) te).setLootTable(lootTable, world.getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
     }
 }

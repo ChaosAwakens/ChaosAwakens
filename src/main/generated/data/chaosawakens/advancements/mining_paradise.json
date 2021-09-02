@@ -5,10 +5,10 @@
       "item": "chaosawakens:uranium_ore"
     },
     "title": {
-      "translate": "advancements.chaosawakens.mining_dimension.title"
+      "translate": "advancements.chaosawakens.mining_paradise.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.mining_dimension.description"
+      "translate": "advancements.chaosawakens.mining_paradise.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -17,7 +17,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "mining_dimension": {
+    "mining_paradise": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
         "to": "chaosawakens:mining_paradise"
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "mining_dimension"
+      "mining_paradise"
     ]
   ]
 }

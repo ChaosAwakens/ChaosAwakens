@@ -317,8 +317,8 @@ public class CAChestLootTables implements Consumer<BiConsumer<ResourceLocation, 
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(2))
                                 //common loot
-                                .add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET).apply(SetCount.setCount(RandomValueRange.between(7,16))).setWeight(100))
-                                .add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET).apply(SetCount.setCount(RandomValueRange.between(7,16))).setWeight(100))
+                                .add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET).apply(SetCount.setCount(RandomValueRange.between(7, 16))).setWeight(100))
+                                .add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET).apply(SetCount.setCount(RandomValueRange.between(7, 16))).setWeight(100))
                                 .add(ItemLootEntry.lootTableItem(Items.GOLD_INGOT).apply(SetCount.setCount(RandomValueRange.between(1, 3))).setWeight(20)))
                         .withPool(LootPool.lootPool()
                                 .setRolls(RandomValueRange.between(0, 1))

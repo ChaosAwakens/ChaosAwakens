@@ -2,13 +2,13 @@
   "parent": "chaosawakens:root",
   "display": {
     "icon": {
-      "item": "chaosawakens:crystal_grass_block"
+      "item": "minecraft:oak_log"
     },
     "title": {
-      "translate": "advancements.chaosawakens.crystal_dimension.title"
+      "translate": "advancements.chaosawakens.village_mania.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.crystal_dimension.description"
+      "translate": "advancements.chaosawakens.village_mania.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -17,16 +17,16 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "crystal_dimension": {
+    "village_mania": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "chaosawakens:crystalworld"
+        "to": "chaosawakens:village_mania"
       }
     }
   },
   "requirements": [
     [
-      "crystal_dimension"
+      "village_mania"
     ]
   ]
 }

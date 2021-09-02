@@ -10,13 +10,10 @@ All downloads are now located [in this page](https://chaosawakens.github.io/down
 **1.16.5 (Forge):** [Forge v36.1.1 and up](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html), [GeckoLib v3.0 and up](https://www.curseforge.com/minecraft/mc-mods/geckolib/files/all?filter-game-version=1738749986%3a70886), [AttributeFix v10.0.1 and above](https://www.curseforge.com/minecraft/mc-mods/attributefix/files/all?filter-game-version=1738749986%3a70886)
 
 ## FAQ
-### Q: Will you make a *Fabric* version?
-**A:** We are not going it ourselves, but you are free to contribute to the Fabric repository.
+### Q: Will this mod be ported to version x.x.x or *Fabric*?
+**A:** We are only going to focus for *Forge* 1.16.5 for the time being, **thus there are currently no plans for backports aside for 1.12.2, forward ports to version 1.17.1, or Fabric/Quilt releases**. However, if you want to port it yourself, feel free to fork the project and pull request your work afterwards.
 
-### Q: Will this mod be ported to version x.x.x?
-**A:** We are likely **only** going to backport to version 1.12.2, and we have no plans to do it for 1.7.10. As 1.16.5 is our primary focus, we won't focus a lot on 1.12.2 yet.
-
-For forward ports: We don't have any plans to make one for *Forge* 1.17.x, as *GeckoLib* won't actively support it either as stated in the screenshot below:
+There will be **absolutely no** port for *Forge* 1.17.1, as *GeckoLib* won't actively support it either as stated in the screenshot below:
 
 ![](https://cdn.discordapp.com/attachments/816631663278686228/868465813135441940/unknown.png)
 
@@ -46,7 +43,7 @@ _If you still want the original mod with no changes, please instead play the ori
 ## Credits/Staff Team
 **Project Lead:** WeirdNerd, thewoundedknight
 
-**Artists/Modellers:** VDA Spoop, Blackout, LuisRandomness, Absolute Kun, Meamer Teamer, Phobos, Sipilus, TheLoneCyberman, TheTrone, jjwiggs, killerking, TechnoCreeper, Spooder, Chromatic Aeternus, Renato, BS Guy, crydigo, Pear, DinoDave, RetDwist, Franz Drameh, AlexanderTheNotSoGreat
+**Artists/Modellers:** VDA Spoop, Blackout, LuisRandomness, Absolute Kun, Meamer Teamer, Phobos, TheLoneCyberman, TheTrone, jjwiggs, killerking, TechnoCreeper, Spooder, Chromatic Aeternus, ReVG08, BS Guy, crydigo, Pear, DinoDave, RetDwist, Franz Drameh
 
 **Sound Designers:** mattster, WeirdNerd
 
@@ -54,4 +51,4 @@ _If you still want the original mod with no changes, please instead play the ori
 
 **Builders:** Blackout, crydigo, thewoundedknight, TheLoneCyberman, Lymen
 
-**Former Members:** Asbestosstar, Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123
+**Former Members:** Asbestosstar, Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123, AlexanderTheNotSoGreat, Sipilus

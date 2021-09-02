@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/cube_all",
-	"textures": {
-		"all": "chaosawakens:block/silver_ore"
-	}
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/silver_ore"
+  }
 }

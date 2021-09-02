@@ -32,8 +32,15 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
         this.noCulling = true;
     }
 
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 6)
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.FOLLOW_RANGE, 8);
+    }
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if(event.isMoving()){
+        if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.beaver.walking_animation", true));
             return PlayState.CONTINUE;
         }
@@ -73,13 +80,6 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
         this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_JUNGLE_WOOD, this, 1.0D, 16));
         this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_DARK_OAK_WOOD, this, 1.0D, 16));
         this.goalSelector.addGoal(7, new BreakBlockGoal(Blocks.STRIPPED_ACACIA_WOOD, this, 1.0D, 16));
-    }
-
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 6)
-                .add(Attributes.MOVEMENT_SPEED, 0.15D)
-                .add(Attributes.FOLLOW_RANGE, 8);
     }
 
     @Override

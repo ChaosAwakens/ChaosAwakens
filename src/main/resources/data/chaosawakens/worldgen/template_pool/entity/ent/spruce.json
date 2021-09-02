@@ -1,15 +1,15 @@
 {
-	"name":"chaosawakens:entity/ent/spruce",
-	"fallback":"minecraft:empty",
-	"elements": [
-		{
-			"weight":1,
-			"element": {
-				"element_type":"minecraft:single_pool_element",
-				"location":"chaosawakens:entity/ent/spruce",
-				"projection":"rigid",
-				"processors":"minecraft:empty"
-			}
-		}
-	]
+  "name": "chaosawakens:entity/ent/spruce",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "chaosawakens:entity/ent/spruce",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
 }
