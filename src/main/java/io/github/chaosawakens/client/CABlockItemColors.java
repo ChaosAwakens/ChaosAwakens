@@ -23,12 +23,13 @@ public class CABlockItemColors {
         event.getBlockColors().register(GRASS_BLOCK_COLOR,
                 CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get());
         event.getBlockColors().register(LEAVES_BLOCK_COLOR,
-                CABlocks.PEACH_LEAVES.get());
+                CABlocks.PEACH_LEAVES.get(), CABlocks.APPLE_LEAVES.get());
     }
 
     @SubscribeEvent
     public static void registerItemColors(ColorHandlerEvent.Item event) {
         event.getItemColors().register((stack, color) -> event.getBlockColors().getColor(((BlockItem) stack.getItem()).getBlock().defaultBlockState(), null, null, color),
-                CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get(), CABlocks.PEACH_LEAVES.get());
+                CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get(),
+                CABlocks.PEACH_LEAVES.get(), CABlocks.APPLE_LEAVES.get());
     }
 }

@@ -1,7 +1,10 @@
 {
-  "variants": {
-    "": {
-      "model": "chaosawakens:block/cherry_leaves"
-    }
-  }
+	"variants": {
+		"ripe=false": {
+			"model": "chaosawakens:block/cherry_leaves"
+		},
+		"ripe=true": {
+			"model": "chaosawakens:block/cherry_leaves_ripe"
+		}
+	}
 }

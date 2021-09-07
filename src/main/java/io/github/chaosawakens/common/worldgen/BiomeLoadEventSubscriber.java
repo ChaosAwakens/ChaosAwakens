@@ -143,7 +143,7 @@ public class BiomeLoadEventSubscriber {
             }
 
             if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS)) {
-                gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
+                
             }
 
             if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER)) {
@@ -152,6 +152,7 @@ public class BiomeLoadEventSubscriber {
             }
 
             if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
+            	gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
                 gen.getStructures().add(() -> ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
             }
 

@@ -43,7 +43,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumn("stripped_peach_log", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log_top"));
 		this.cubeColumnHorizontal("stripped_peach_log", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log_top"));
 		this.cubeAll("apple_planks", chaosRL("apple_planks"));
-//		this.cubeAll("apple_leaves", chaosRL("apple_leaves"));
+		this.cubeAll("apple_leaves", chaosRL("apple_leaves"));
+		this.cubeAll("apple_leaves_ripe", chaosRL("apple_leaves_ripe"));
 		this.cubeAll("cherry_planks", chaosRL("cherry_planks"));
 		this.cubeAll("cherry_leaves", chaosRL("cherry_leaves"));
 		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
@@ -57,19 +58,18 @@ public class CABlockModelProvider extends BlockModelProvider {
 		return new ResourceLocation(ChaosAwakens.MODID, BLOCK_FOLDER + "/" + texture);
 	}
 	
-	private ResourceLocation otherRL(String modid, String texture) {
-		return new ResourceLocation(modid, BLOCK_FOLDER + "/" + texture);
-	}
-	
+	@Override
 	public BlockModelBuilder cubeAll(String name, ResourceLocation texture) {
 		return singleTexture(name, mcLoc(BLOCK_FOLDER), "all", texture);
 	}
 	
+	@Override
 	public BlockModelBuilder cubeColumn(String name, ResourceLocation side, ResourceLocation end) {
 		ChaosAwakens.debug("DATAGEN", side.getPath());
 		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("end", end);
 	}
 	
+	@Override
 	public BlockModelBuilder cubeColumnHorizontal(String name, ResourceLocation side, ResourceLocation end) {
 		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("end", end);
 	}
