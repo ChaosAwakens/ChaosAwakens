@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "chaosawakens:block/mouldy_wood",
-    "top": "chaosawakens:block/mouldy_wood",
-    "side": "chaosawakens:block/mouldy_wood"
-  }
-}

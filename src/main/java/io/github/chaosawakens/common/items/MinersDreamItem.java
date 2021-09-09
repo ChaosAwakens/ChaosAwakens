@@ -78,10 +78,10 @@ public class MinersDreamItem extends Item {
         if (i != 0 && i % 8 == 0) {
             if (k == -HOLE_WIDTH || k == HOLE_WIDTH) {
                 if (j == HOLE_HEIGHT - 1) {
-                    worldIn.setBlockAndUpdate(pos, CABlocks.MOULDY_PLANKS.get().defaultBlockState());
+                    worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_PLANKS.get().defaultBlockState());
                     return;
                 }
-                worldIn.setBlockAndUpdate(pos, CABlocks.MOULDY_FENCE.get().defaultBlockState());
+                worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_FENCE.get().defaultBlockState());
                 return;
             }
 
@@ -90,7 +90,7 @@ public class MinersDreamItem extends Item {
                     worldIn.setBlockAndUpdate(pos, Blocks.GLOWSTONE.defaultBlockState());
                     return;
                 }
-                worldIn.setBlockAndUpdate(pos, CABlocks.MOULDY_SLAB.get().defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
+                worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_SLAB.get().defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
                 return;
             }
         }

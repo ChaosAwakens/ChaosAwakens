@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "chaosawakens:block/mouldy_wood"
+    "all": "chaosawakens:block/moldy_wood"
   }
 }

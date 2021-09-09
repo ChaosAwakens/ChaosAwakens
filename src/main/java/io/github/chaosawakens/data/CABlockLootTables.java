@@ -49,9 +49,9 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.TOMATO_BODY_BLOCK.get(), (plant) -> cropBodyBlock(CAItems.TOMATO.get(), CAItems.TOMATO_SEEDS.get()));
 		add(CABlocks.STRAWBERRY_PLANT.get(), (plant) -> createCropDrops(plant, CAItems.STRAWBERRY.get(), CAItems.STRAWBERRY_SEEDS.get(), BlockStateProperty.hasBlockStateProperties(plant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.AGE_3, 3))));
 		
-		dropOther(CABlocks.MOULDY_PLANKS.get(), Items.AIR);
-		dropOther(CABlocks.MOULDY_SLAB.get(), Items.AIR);
-		dropOther(CABlocks.MOULDY_FENCE.get(), Items.AIR);
+		dropOther(CABlocks.MOLDY_PLANKS.get(), Items.AIR);
+		dropOther(CABlocks.MOLDY_SLAB.get(), Items.AIR);
+		dropOther(CABlocks.MOLDY_FENCE.get(), Items.AIR);
 		dropOther(CABlocks.APPLE_LEAVES.get(), Items.AIR);
 		dropOther(CABlocks.PEACH_LEAVES.get(), Items.AIR);
 		dropOther(CABlocks.CHERRY_LEAVES.get(), Items.AIR);

@@ -1,5 +1,5 @@
 # Chaos Awakens
-Chaos Awakens is a remaster of both the old Minecraft/[DangerZone](http://dangerzonegame.net/) mod [OreSpawn](https://www.dangerzonegame.net/dz-21-mods.html) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
+Chaos Awakens is a remaster of both the very iconic mod [OreSpawn](https://www.orespawn.com/download.html) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
 
 ## Download
 Due to recent drama and various mass reports by unknown sources, the mod was taken down from [*CurseForge*](https://www.curseforge.com/minecraft/mc-mods) and cannot be re-uploaded from this point forward. Please do **not** harass **anyone** in the *CurseForge* moderation team or **any** competitor mod developer for what you think they did. They are humans and we are too, and we all make mistakes.
@@ -30,7 +30,7 @@ Unlike the original creator's belief, this has nothing to do with the Minecraft 
 
 Going through development of the mod, we may change things here and there, sometimes in a smaller scale, other times in a large scale. __We won't be porting *OreSpawn* 1:1 for copyright reasons.__
 
-_If you still want the original mod with no changes, please instead play the original *OreSpawn* mod, via either [*DangerZone*/*DZVR*](https://www.dangerzonegame.net/dz-21-mods.html) or the [old 1.5-1.7 versions](https://dangerzone-archive.weebly.com/orespawn.html). *The 1.12 builds, however, are severely unstable, do NOT use them!*_
+_If you still want the original mod with no changes, please instead play the original *OreSpawn* mod, via either [*DangerZone VR*](https://store.steampowered.com/app/1622330/DangerZone_VR/), or if you want to just play it for free, [*DangerZone* or the older versions for Minecraft V1.5-1.7](https://www.orespawn.com/download.html).
 
 ### Q: Why do the assets look so different from *OreSpawn*'s? Why can't you guys just re-use the assets or change them to more alike?
 **A:** Here are a few reasons why:
@@ -43,12 +43,12 @@ _If you still want the original mod with no changes, please instead play the ori
 ## Credits/Staff Team
 **Project Lead:** WeirdNerd, thewoundedknight
 
-**Artists/Modellers:** VDA Spoop, Blackout, LuisRandomness, Absolute Kun, Meamer Teamer, Phobos, TheLoneCyberman, TheTrone, jjwiggs, killerking, TechnoCreeper, Spooder, Chromatic Aeternus, ReVG08, BS Guy, crydigo, Pear, DinoDave, RetDwist, Franz Drameh
+**Artists/Modellers:** VDA Spoop, Blackout, Absolute Kun, Meamer Teamer, Phobos, TheLoneCyberman, TheTrone, jjwiggs, killerking, TechnoCreeper, Spooder, Chromatic Aeternus, ReVG08, BS Guy, crydigo, Pear, DinoDave, RetDwist, Franz Drameh
 
 **Sound Designers:** mattster, WeirdNerd
 
-**Coders:** Meme Man, WeirdNerd, Blackout, LuisRandomness, HugoMage, Reda
+**Coders:** Meme Man, WeirdNerd, Blackout, HugoMage, Reda
 
 **Builders:** Blackout, crydigo, thewoundedknight, TheLoneCyberman, Lymen
 
-**Former Members:** Asbestosstar, Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123, AlexanderTheNotSoGreat, Sipilus
+**Former Members:** Asbestosstar, Crosby, RandomUser, ElectricKhan, FBG_Bolushi, Mglucas0123, AlexanderTheNotSoGreat, Sipilus, LuisRandomness

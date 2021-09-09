@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/fence_inventory",
   "textures": {
-    "texture": "chaosawakens:block/mouldy_wood"
+    "texture": "chaosawakens:block/moldy_wood"
   }
 }
