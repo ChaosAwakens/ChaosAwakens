@@ -5,7 +5,29 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.*;
+import io.github.chaosawakens.common.blocks.AntInfestedOre;
+import io.github.chaosawakens.common.blocks.AntNestBlock;
+import io.github.chaosawakens.common.blocks.BossSpawnerBlock;
+import io.github.chaosawakens.common.blocks.BuddingBlock;
+import io.github.chaosawakens.common.blocks.CAOreBlock;
+import io.github.chaosawakens.common.blocks.CornBodyBlock;
+import io.github.chaosawakens.common.blocks.CornTopBlock;
+import io.github.chaosawakens.common.blocks.CrystalClusterBlock;
+import io.github.chaosawakens.common.blocks.CrystalCraftingTableBlock;
+import io.github.chaosawakens.common.blocks.CrystalEnergyBlock;
+import io.github.chaosawakens.common.blocks.CrystalFurnaceBlock;
+import io.github.chaosawakens.common.blocks.EnchantedGoldenCakeBlock;
+import io.github.chaosawakens.common.blocks.FruitableLeavesBlock;
+import io.github.chaosawakens.common.blocks.GateBlock;
+import io.github.chaosawakens.common.blocks.GoldenCakeBlock;
+import io.github.chaosawakens.common.blocks.GoldenMelonBlock;
+import io.github.chaosawakens.common.blocks.RandomTeleportBlock;
+import io.github.chaosawakens.common.blocks.StrawberryBushBlock;
+import io.github.chaosawakens.common.blocks.TomatoBodyBlock;
+import io.github.chaosawakens.common.blocks.TomatoTopBlock;
+import io.github.chaosawakens.common.blocks.TopTubeBlock;
+import io.github.chaosawakens.common.blocks.TubeBlock;
+import io.github.chaosawakens.common.blocks.UraniumOreBlock;
 import io.github.chaosawakens.common.items.EnchantedBlockItem;
 import io.github.chaosawakens.common.trees.PeachTree;
 import net.minecraft.block.AbstractBlock;
@@ -15,6 +37,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SlabBlock;
@@ -72,7 +95,7 @@ public class CABlocks {
 	public static final RegistryObject<FruitableLeavesBlock> PEACH_LEAVES = registerBlock("peach_leaves", () -> new FruitableLeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES), CAItems.PEACH, 1, 3), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> PEACH_PLANKS = registerBlock("peach_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> DUPLICATION_LOG = registerBlock("duplication_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)), CAItemGroups.blocksItemGroup);
-	public static final RegistryObject<CALeavesBlock> DUPLICATION_LEAVES = registerBlock("duplication_leaves", () -> new CALeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<LeavesBlock> DUPLICATION_LEAVES = registerBlock("duplication_leaves", () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> DUPLICATION_PLANKS = registerBlock("duplication_planks", () -> new Block(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> STRIPPED_PEACH_LOG = registerBlock("stripped_peach_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> STRIPPED_DUPLICATION_LOG = registerBlock("stripped_duplication_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)), CAItemGroups.blocksItemGroup);
@@ -80,10 +103,12 @@ public class CABlocks {
 	public static final RegistryObject<RotatedPillarBlock> STRIPPED_APPLE_LOG = registerBlock("stripped_apple_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RotatedPillarBlock> DEAD_DUPLICATION_LOG = registerBlock("dead_duplication_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<SaplingBlock> PEACH_SAPLING = registerBlock("peach_sapling", () -> new SaplingBlock(new PeachTree(), AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS)), CAItemGroups.foodItemGroup);
+	
 	// DUNGEON BLOCKS
 	public static final RegistryObject<Block> NEST_BLOCK = registerBlock("nest_block", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_YELLOW).strength(0.3F).sound(SoundType.WOOD)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<GateBlock> GATE_BLOCK = registerBlock("gate_block", () -> new GateBlock(Block.Properties.copy(Blocks.OAK_PLANKS).strength(-1.0F, 3600000.0F)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<RandomTeleportBlock> RANDOM_TELEPORT_BLOCK = registerBlock("random_teleport_block", () -> new RandomTeleportBlock(Block.Properties.copy(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
+	
 	// MINERAL ORES
 	public static final RegistryObject<CAOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new CAOreBlock(AbstractBlock.Properties.of(Material.STONE).strength(4.5F, 3.25F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).withExpDrop(3, 7), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> RUBY_ORE = registerBlock("ruby_ore", () -> new CAOreBlock(AbstractBlock.Properties.of(Material.STONE).strength(6.5F, 3.25F).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).withExpDrop(4, 9), CAItemGroups.blocksItemGroup);
@@ -102,9 +127,11 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> PLATINUM_ORE = registerBlock("platinum_ore", () -> new CAOreBlock(Block.Properties.copy(Blocks.DIAMOND_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> SUNSTONE_ORE = registerBlock("sunstone_ore", () -> new CAOreBlock(Block.Properties.copy(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel((state) -> 8)).withExpDrop(3, 6), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> BLOODSTONE_ORE = registerBlock("bloodstone_ore", () -> new CAOreBlock(Block.Properties.copy(Blocks.EMERALD_ORE).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).withExpDrop(2, 5), CAItemGroups.blocksItemGroup);
+	
 	// INFESTED ORES
 	public static final RegistryObject<AntInfestedOre> RED_ANT_INFESTED_ORE = registerBlock("red_ant_infested_ore", () -> new AntInfestedOre(CAEntityTypes.RED_ANT, Block.Properties.copy(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<AntInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new AntInfestedOre(CAEntityTypes.TERMITE, Block.Properties.copy(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
+	
 	// MOB ORES
 	public static final RegistryObject<CAOreBlock> FOSSILISED_ENT = registerBlock("fossilised_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
@@ -114,6 +141,7 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> FOSSILISED_SCORPION = registerBlock("fossilised_scorpion", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_WASP = registerBlock("fossilised_wasp", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_PIRAPORU = registerBlock("fossilised_piraporu", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	
 	// MINERAL BLOCKS
 	public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block", () -> new Block(Block.Properties.copy(Blocks.EMERALD_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> RUBY_BLOCK = registerBlock("ruby_block", () -> new Block(Block.Properties.copy(Blocks.ANCIENT_DEBRIS).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), CAItemGroups.blocksItemGroup);
@@ -127,9 +155,11 @@ public class CABlocks {
 	public static final RegistryObject<Block> PLATINUM_BLOCK = registerBlock("platinum_block", () -> new Block(Block.Properties.copy(Blocks.DIAMOND_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> SUNSTONE_BLOCK = registerBlock("sunstone_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL).lightLevel((state) -> 15)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> BLOODSTONE_BLOCK = registerBlock("bloodstone_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), CAItemGroups.blocksItemGroup);
+	
 	// MOB DROP BLOCKS
 	public static final RegistryObject<Block> ENDER_PEARL_BLOCK = registerBlock("ender_pearl_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.SHROOMLIGHT)), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<Block> ENDER_EYE_BLOCK = registerBlock("ender_eye_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.SHROOMLIGHT)), CAItemGroups.blocksItemGroup);
+	
 	// ANT NESTS
 	public static final RegistryObject<AntNestBlock> BROWN_ANT_NEST = registerBlock("brown_ant_nest", () -> new AntNestBlock(CAEntityTypes.BROWN_ANT, Block.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<AntNestBlock> RAINBOW_ANT_NEST = registerBlock("rainbow_ant_nest", () -> new AntNestBlock(CAEntityTypes.RAINBOW_ANT, Block.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()), CAItemGroups.blocksItemGroup);

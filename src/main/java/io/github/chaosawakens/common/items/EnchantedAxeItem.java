@@ -19,6 +19,7 @@ public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;
 	
+	//TODO Improve this
 	static {
 		Map<Block, Block> temp = (new ImmutableMap.Builder<Block, Block>()).putAll(AxeItem.STRIPABLES)
 				.put(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get())

@@ -1,7 +1,6 @@
-package io.github.chaosawakens.common.worldgen;
+package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -9,7 +8,7 @@ import net.minecraft.world.gen.FlatGenerationSettings;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class ConfiguredStructures {
+public class CAConfiguredStructures {
 
     public static StructureFeature<?, ?> CONFIGURED_ACACIA_ENT_TREE = CAStructures.ACACIA_ENT_TREE.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_BIRCH_ENT_TREE = CAStructures.BIRCH_ENT_TREE.get().configured(IFeatureConfig.NONE);

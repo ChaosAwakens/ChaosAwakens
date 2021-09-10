@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.worldgen;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
+import io.github.chaosawakens.common.registry.CAConfiguredStructures;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.RegistryKey;
@@ -39,36 +40,36 @@ public class BiomeLoadEventSubscriber {
         final String location = biome.location().toString();
 
         if (location.contains("birch")) {
-            func.apply(ConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);
+            func.apply(CAConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);
             return;
         }
         if (location.contains("dark")) {
-            func.apply(ConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);
+            func.apply(CAConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);
             return;
         }
         if (location.contains("crimson")) {
-            func.apply(ConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);
+            func.apply(CAConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);
             return;
         }
         if (location.contains("warped")) {
-            func.apply(ConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);
+            func.apply(CAConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);
             return;
         }
 
         switch (event.getCategory()) {
             case JUNGLE:
-                func.apply(ConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);
+                func.apply(CAConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);
                 break;
             case SAVANNA:
-                func.apply(ConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
+                func.apply(CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
                 break;
             case TAIGA:
             case EXTREME_HILLS:
-                func.apply(ConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
+                func.apply(CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
                 break;
             case FOREST:
             case PLAINS:
-                func.apply(ConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+                func.apply(CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
                 break;
             default:
                 break;
@@ -153,7 +154,7 @@ public class BiomeLoadEventSubscriber {
 
             if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
             	gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
-                gen.getStructures().add(() -> ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+                gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
             }
 
             if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
@@ -182,9 +183,9 @@ public class BiomeLoadEventSubscriber {
 
             switch (event.getCategory()) {
                 case FOREST:
-                    builder.addStructureStart(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+                    builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
                 case SWAMP:
-                    builder.addStructureStart(ConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+                    builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
                 default:
                     break;
             }
