@@ -52,11 +52,11 @@ public class CAEntityTypes {
                     .build(new ResourceLocation(ChaosAwakens.MODID, "dark_oak_ent").toString()));
     public static final RegistryObject<EntityType<EntEntity>> CRIMSON_ENT = ENTITY_TYPES.register("crimson_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.CRIMSON), EntityClassification.MONSTER)
-                    .sized(2.5f, 3.125f) // Hitbox Size ()
+            		.fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "crimson_ent").toString()));
     public static final RegistryObject<EntityType<EntEntity>> WARPED_ENT = ENTITY_TYPES.register("warped_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.WARPED), EntityClassification.MONSTER)
-                    .sized(2.5f, 3.125f) // Hitbox Size ()
+            		.fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "warped_ent").toString()));
     // Hercules Beetle
     public static final RegistryObject<EntityType<HerculesBeetleEntity>> HERCULES_BEETLE = ENTITY_TYPES.register("hercules_beetle",
