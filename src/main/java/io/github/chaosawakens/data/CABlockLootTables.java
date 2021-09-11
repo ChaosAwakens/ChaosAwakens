@@ -58,6 +58,8 @@ public class CABlockLootTables extends BlockLootTables {
 		dropOther(CABlocks.DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get());
 		dropOther(CABlocks.DUPLICATION_LEAVES.get(), Items.AIR);
 		
+		dropSelf(CABlocks.APPLE_SAPLING.get());
+		dropSelf(CABlocks.CHERRY_SAPLING.get());
 		dropSelf(CABlocks.PEACH_SAPLING.get());
 		dropSelf(CABlocks.APPLE_LOG.get());
 		dropSelf(CABlocks.APPLE_PLANKS.get());

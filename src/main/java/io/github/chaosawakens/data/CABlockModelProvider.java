@@ -45,13 +45,17 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("apple_planks", chaosRL("apple_planks"));
 		this.cubeAll("apple_leaves", chaosRL("apple_leaves"));
 		this.cubeAll("apple_leaves_ripe", chaosRL("apple_leaves_ripe"));
+		this.cross("apple_sapling", chaosRL("apple_sapling"));
 		this.cubeAll("cherry_planks", chaosRL("cherry_planks"));
 		this.cubeAll("cherry_leaves", chaosRL("cherry_leaves"));
-		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
-		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
+		this.cubeAll("cherry_leaves_ripe", chaosRL("cherry_leaves_ripe"));
+		this.cross("cherry_sapling", chaosRL("cherry_sapling"));
 		this.cubeAll("peach_planks", chaosRL("peach_planks"));
 		this.cubeAll("peach_leaves", chaosRL("peach_leaves"));
+		this.cubeAll("peach_leaves_ripe", chaosRL("peach_leaves_ripe"));
 		this.cross("peach_sapling", chaosRL("peach_sapling"));
+		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
+		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
 	}
 	
 	private ResourceLocation chaosRL(String texture) {
@@ -60,7 +64,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 	
 	@Override
 	public BlockModelBuilder cubeAll(String name, ResourceLocation texture) {
-		return singleTexture(name, mcLoc(BLOCK_FOLDER), "all", texture);
+		return singleTexture(name, mcLoc(BLOCK_FOLDER + "/cube_all"), "all", texture);
 	}
 	
 	@Override

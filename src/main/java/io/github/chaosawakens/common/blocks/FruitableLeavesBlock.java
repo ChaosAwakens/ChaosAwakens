@@ -44,7 +44,6 @@ public class FruitableLeavesBlock extends LeavesBlock {
 	
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
-		ChaosAwakens.debug("LEAVES", "super: "+super.isRandomlyTicking(state)+" ripe: "+!state.getValue(RIPE));
 		return super.isRandomlyTicking(state) || !state.getValue(RIPE);
 	}
 	
@@ -57,7 +56,7 @@ public class FruitableLeavesBlock extends LeavesBlock {
 	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
 		if(state.getValue(RIPE)) {
 			worldIn.setBlockAndUpdate(pos, state.setValue(RIPE, false));
-			Block.popResource(worldIn, pos, new ItemStack(fruit.get(), this.RANDOM.nextInt(maxFruit-minFruit)+minFruit));
+			Block.popResource(worldIn, pos, new ItemStack(fruit.get(), this.RANDOM.nextInt(maxFruit-minFruit == 0 ? 1 : maxFruit-minFruit)+minFruit));
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;

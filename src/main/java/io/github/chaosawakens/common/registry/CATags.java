@@ -20,7 +20,7 @@ public class CATags {
 	public static final ITag.INamedTag<Block> MINERS_DREAM_MINEABLE = BlockTags.bind(ChaosAwakens.MODID + ":miners_dream_mineable");
 	
 	public static final ITag.INamedTag<Block> AIR_BLOCKS = BlockTags.bind("air");
-	public static final ITag.INamedTag<Block> DUPLICATOR_WOOD = BlockTags.bind(ChaosAwakens.MODID + ":duplicator_wood");
+	public static final ITag.INamedTag<Block> DUPLICATOR_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":duplicator_logs");
 	
 	// Item tags
 	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID + ":custom_tooltips");

@@ -153,6 +153,8 @@ public class BiomeLoadEventSubscriber {
 			}
 			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
 				gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
@@ -160,12 +162,20 @@ public class BiomeLoadEventSubscriber {
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addMiningDimOres(gen);
+
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 			}
 			
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_DIMENSION)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addVillageDimOres(gen);
+
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 			}
 			

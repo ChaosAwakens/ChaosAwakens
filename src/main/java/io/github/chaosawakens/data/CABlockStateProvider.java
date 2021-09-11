@@ -26,7 +26,6 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.logBlock(CABlocks.STRIPPED_APPLE_LOG.get());
         this.logBlock(CABlocks.CHERRY_LOG.get());
         this.cubeAll(CABlocks.CHERRY_PLANKS.get());
-        this.cubeAll(CABlocks.CHERRY_LEAVES.get());
         this.logBlock(CABlocks.STRIPPED_CHERRY_LOG.get());
         this.logBlock(CABlocks.DUPLICATION_LOG.get());
         this.logBlock(CABlocks.DEAD_DUPLICATION_LOG.get());
@@ -35,7 +34,6 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.logBlock(CABlocks.STRIPPED_DUPLICATION_LOG.get());
         this.logBlock(CABlocks.PEACH_LOG.get());
         this.cubeAll(CABlocks.PEACH_PLANKS.get());
-        this.cubeAll(CABlocks.PEACH_LEAVES.get());
         this.logBlock(CABlocks.STRIPPED_PEACH_LOG.get());
         this.blockTexture(CABlocks.PEACH_SAPLING.get());
     }

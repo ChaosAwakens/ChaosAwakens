@@ -1,7 +1,10 @@
 {
-  "variants": {
-    "": {
-      "model": "chaosawakens:block/peach_leaves"
-    }
-  }
+	"variants": {
+		"ripe=false": {
+			"model": "chaosawakens:block/peach_leaves"
+		},
+		"ripe=true": {
+			"model": "chaosawakens:block/peach_leaves_ripe"
+		}
+	}
 }

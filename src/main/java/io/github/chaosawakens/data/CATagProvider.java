@@ -36,7 +36,7 @@ public class CATagProvider extends BlockTagsProvider {
 	
 	@Override
 	protected void addTags() {
-		this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
+		//this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
 		
 	}
 	
@@ -67,9 +67,9 @@ public class CATagProvider extends BlockTagsProvider {
 		
 		@Override
 		protected void addTags() {
-			this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
-			this.tag(BlockTags.LOGS).addTags(CATags.DUPLICATOR_WOOD);
-			this.tag(BlockTags.LEAVES).add(CABlocks.CHERRY_LEAVES.get(), CABlocks.DUPLICATION_LEAVES.get(), CABlocks.PEACH_LEAVES.get());
+			//this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
+			//this.tag(BlockTags.LOGS).addTags(CATags.DUPLICATOR_WOOD);
+			//this.tag(BlockTags.LEAVES).add(CABlocks.CHERRY_LEAVES.get(), CABlocks.DUPLICATION_LEAVES.get(), CABlocks.PEACH_LEAVES.get());
 		}
 	}
 }
