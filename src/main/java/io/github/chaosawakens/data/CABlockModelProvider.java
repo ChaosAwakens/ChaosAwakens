@@ -56,6 +56,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("peach_sapling", chaosRL("peach_sapling"));
 		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
 		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
+		
+		this.cubeAll("mining_lamp", chaosRL("mining_lamp"));
 	}
 	
 	private ResourceLocation chaosRL(String texture) {

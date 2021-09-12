@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:overworld",
+  "type": "chaosawakens:no_dragons_land",
   "generator": {
     "type": "minecraft:flat",
     "seed": 0,

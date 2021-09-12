@@ -87,7 +87,7 @@ public class MinersDreamItem extends Item {
 
             if (j == HOLE_HEIGHT - 1) {
                 if (k == 0) {
-                    worldIn.setBlockAndUpdate(pos, Blocks.GLOWSTONE.defaultBlockState());
+                    worldIn.setBlockAndUpdate(pos, CABlocks.MINING_LAMP.get().defaultBlockState());
                     return;
                 }
                 worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_SLAB.get().defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));

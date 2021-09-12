@@ -52,6 +52,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropOther(CABlocks.MOLDY_PLANKS.get(), Items.AIR);
 		dropOther(CABlocks.MOLDY_SLAB.get(), Items.AIR);
 		dropOther(CABlocks.MOLDY_FENCE.get(), Items.AIR);
+		dropOther(CABlocks.MINING_LAMP.get(), Items.AIR);
 		dropOther(CABlocks.APPLE_LEAVES.get(), Items.AIR);
 		dropOther(CABlocks.PEACH_LEAVES.get(), Items.AIR);
 		dropOther(CABlocks.CHERRY_LEAVES.get(), Items.AIR);
