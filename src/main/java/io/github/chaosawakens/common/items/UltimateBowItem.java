@@ -57,9 +57,9 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 
                 int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
                 if (!CAConfig.COMMON.enableAutoEnchanting.get()) {
-                    arrowEntity.setBaseDamage(arrowEntity.getBaseDamage() + (double) powerLevel * 0.5D + 2D);
+                    arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get() + (double) powerLevel * CAConfig.COMMON.ultimateBowArrowDamageMultiplier.get() + 2D);
                 } else {
-                    arrowEntity.setBaseDamage(arrowEntity.getBaseDamage() + 3D);
+                    arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get() + 3D);
                 }
 
                 int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
