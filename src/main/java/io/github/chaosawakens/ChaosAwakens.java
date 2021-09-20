@@ -37,7 +37,7 @@ public class ChaosAwakens {
 
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
-	public static final String VERSION = "0.9.0.1";
+	public static final String VERSION = "0.9.0.2";
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static ChaosAwakens INSTANCE;
 
