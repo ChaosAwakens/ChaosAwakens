@@ -38,7 +38,7 @@ public class BiomeLoadEventSubscriber {
 		RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 		
 		final String location = biome.location().toString();
-		
+
 		if (location.contains("birch")) {
 			func.apply(CAConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);
 			return;
@@ -61,14 +61,27 @@ public class BiomeLoadEventSubscriber {
 				func.apply(CAConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);
 				break;
 			case SAVANNA:
+				if (location.contains("village_"))
+					return;
 				func.apply(CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
 				break;
 			case TAIGA:
 			case EXTREME_HILLS:
+				if (location.contains("village_"))
+					return;
 				func.apply(CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
 				break;
 			case FOREST:
 			case PLAINS:
+				// Doing this in one if statement didn't work and would only make it now spawn in biomes named "village_" so I extended it to 4 if statements.
+				if (location.contains("village_"))
+					return;
+				if (location.contains("stalagmite_valley"))
+					return;
+				if (location.contains("mining_biome"))
+					return;
+				if (location.contains("crystal_"))
+					return;
 				func.apply(CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
 				break;
 			default:
