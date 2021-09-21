@@ -48,15 +48,14 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (this.dead) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", true));
-            return PlayState.CONTINUE;
-        }
+//        if (this.dead) {
+//            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", true));
+//            return PlayState.CONTINUE;
+//        }
 
         if (this.getAttacking()) {
             if (this.getGrabbing(this)) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.ram_attack_animation", true));
-                //ChaosAwakens.debug("ANIMATION", event.getController().getCurrentAnimation().animationLength);
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walk_attack_animation", true));
                 return PlayState.CONTINUE;
             }
 

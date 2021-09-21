@@ -155,10 +155,7 @@ public class CABlocks {
 	public static final RegistryObject<AntNestBlock> RED_ANT_NEST = registerBlock("red_ant_nest", () -> new AntNestBlock(CAEntityTypes.RED_ANT, Block.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<AntNestBlock> UNSTABLE_ANT_NEST = registerBlock("unstable_ant_nest", () -> new AntNestBlock(CAEntityTypes.UNSTABLE_ANT, Block.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<AntNestBlock> TERMITE_NEST = registerBlock("termite_nest", () -> new AntNestBlock(CAEntityTypes.TERMITE, Block.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()), CAItemGroups.blocksItemGroup);
-	
-	// BOSS SPAWNERS
-	public static final RegistryObject<BossSpawnerBlock> ENT_BOSS_SPAWNER = registerBlock("ent_boss_spawner", () -> new BossSpawnerBlock(CAEntityTypes.OAK_ENT, Block.Properties.copy(Blocks.SPAWNER).strength(-1.0F).noOcclusion().noDrops().sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2).randomTicks()), CAItemGroups.blocksItemGroup);
-	
+
 	// TORCHES
 	public static final RegistryObject<TorchBlock> CRYSTAL_TORCH = registerBlock("crystal_torch", () -> new TorchBlock(AbstractBlock.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel((state) -> 14).sound(SoundType.WOOD), ParticleTypes.FLAME), null, false);
 	public static final RegistryObject<WallTorchBlock> WALL_CRYSTAL_TORCH = registerBlock("wall_crystal_torch", () -> new WallTorchBlock(AbstractBlock.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel((state) -> 14).sound(SoundType.WOOD).lootFrom(CABlocks.CRYSTAL_TORCH), ParticleTypes.FLAME), null, false);

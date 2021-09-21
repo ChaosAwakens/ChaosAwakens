@@ -87,7 +87,6 @@
   },
   "features": [
     [
-      "minecraft:ore_dirt",
       "minecraft:ore_gravel",
       "minecraft:ore_granite",
       "minecraft:ore_diorite",
@@ -104,9 +103,6 @@
       "minecraft:disk_gravel"
     ],
     [
-      "minecraft:patch_grass_normal",
-      "minecraft:plain_vegetation",
-      "minecraft:flower_plain_decorated",
       "minecraft:spring_water",
       "minecraft:spring_lava"
     ]

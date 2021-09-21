@@ -13,12 +13,7 @@
     "water_fog_color": 329011
   },
   "surface_builder": "minecraft:grass",
-  "carvers": {
-    "air": [
-      "minecraft:cave",
-      "minecraft:canyon"
-    ]
-  },
+  "carvers": {},
   "features": [
     [
       "minecraft:ore_dirt",

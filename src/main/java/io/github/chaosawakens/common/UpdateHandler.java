@@ -29,7 +29,7 @@ public class UpdateHandler {
 
     private static void getNewestVersion() {
         try {
-            URL url = new URL("https://chaosawakens.github.io/versions/versionchecker.txt");
+            URL url = new URL("https://chaosawakens.github.io/resources/versions/versionchecker.txt");
             Scanner s = new Scanner(url.openStream());
             if (s.hasNext())
                 newestVersion = s.next();
