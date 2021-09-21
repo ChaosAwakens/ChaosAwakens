@@ -1,0 +1,124 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.Golden_Carrot_Pig",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.25,
+				"visible_bounds_offset": [0, 0.875, 0]
+			},
+			"bones": [
+				{
+					"name": "body",
+					"pivot": [0, 13, 2],
+					"cubes": [
+						{"origin": [-5, 6, -7], "size": [10, 8, 15], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 12, -6],
+					"cubes": [
+						{"origin": [-4, 8, -14], "size": [8, 8, 8], "uv": [0, 23]},
+						{"origin": [-2, 9, -15], "size": [4, 3, 1], "uv": [0, 0]}
+					],
+					"locators": {
+						"lead": [0, 14, -6]
+					}
+				},
+				{
+					"name": "SingleCarrot2",
+					"parent": "head",
+					"pivot": [-7, 6, -8],
+					"rotation": [-180, -35, 180],
+					"cubes": [
+						{"origin": [-18.57381, 16, -10.33256], "size": [3, 5, 0], "uv": [6, 4]}
+					]
+				},
+				{
+					"name": "SingleCarrot2P2",
+					"parent": "head",
+					"pivot": [-11, 6, -6],
+					"rotation": [0, -55, 0],
+					"cubes": [
+						{"origin": [-9.66744, 16, -20.57381], "size": [3, 5, 0], "uv": [0, 4]}
+					]
+				},
+				{
+					"name": "leg0",
+					"parent": "body",
+					"pivot": [-3, 6, 7],
+					"cubes": [
+						{"origin": [-5, 0, 5], "size": [4, 6, 4], "uv": [40, 43]}
+					]
+				},
+				{
+					"name": "leg1",
+					"parent": "body",
+					"pivot": [3, 6, 7],
+					"mirror": true,
+					"cubes": [
+						{"origin": [1, 0, 5], "size": [4, 6, 4], "uv": [16, 43], "mirror": false}
+					]
+				},
+				{
+					"name": "leg2",
+					"parent": "body",
+					"pivot": [-3, 6, -5],
+					"cubes": [
+						{"origin": [-5, 0, -7], "size": [4, 6, 4], "uv": [0, 39]}
+					]
+				},
+				{
+					"name": "leg3",
+					"parent": "body",
+					"pivot": [8, 6, 3],
+					"mirror": true,
+					"cubes": [
+						{"origin": [1, 0, -7], "size": [4, 6, 4], "uv": [28, 37], "mirror": false}
+					]
+				},
+				{
+					"name": "SingleCarrot1P2",
+					"parent": "body",
+					"pivot": [0, 6, 3],
+					"rotation": [0, -42.5, 0],
+					"cubes": [
+						{"origin": [-8.68639, 14, 0.37795], "size": [3, 5, 0], "uv": [6, 9]}
+					]
+				},
+				{
+					"name": "BigCarrot1",
+					"parent": "body",
+					"pivot": [2, 6, 3],
+					"rotation": [0, -42.5, 0],
+					"cubes": [
+						{"origin": [-3, 14, 4], "size": [10, 7, 0], "uv": [32, 30]}
+					]
+				},
+				{
+					"name": "BigCarrot2",
+					"parent": "body",
+					"pivot": [0, 6, 3],
+					"rotation": [0, 52.5, 0],
+					"cubes": [
+						{"origin": [-5, 14, 4], "size": [10, 7, 0], "uv": [24, 23]}
+					]
+				},
+				{
+					"name": "SingleCarrot1",
+					"parent": "body",
+					"pivot": [5, 6, -3],
+					"rotation": [-180, -47.5, 180],
+					"cubes": [
+						{"origin": [8.37795, 14, 3.68639], "size": [3, 5, 0], "uv": [0, 9]}
+					]
+				}
+			]
+		}
+	]
+}

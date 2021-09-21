@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -18,6 +14,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * @author invalid2

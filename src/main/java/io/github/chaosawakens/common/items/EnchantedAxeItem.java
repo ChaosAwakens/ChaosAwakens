@@ -1,9 +1,6 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
-
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -14,6 +11,8 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+
+import java.util.Map;
 
 public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 	

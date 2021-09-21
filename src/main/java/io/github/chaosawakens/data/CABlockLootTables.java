@@ -94,6 +94,10 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_SCORPION.get());
 		dropSelf(CABlocks.FOSSILISED_WASP.get());
 		dropSelf(CABlocks.FOSSILISED_PIRAPORU.get());
+		dropSelf(CABlocks.FOSSILISED_APPLE_COW.get());
+		dropSelf(CABlocks.FOSSILISED_GOLDEN_APPLE_COW.get());
+		dropSelf(CABlocks.FOSSILISED_CARROT_PIG.get());
+		dropSelf(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
 		dropSelf(CABlocks.GATE_BLOCK.get());
 		dropSelf(CABlocks.RANDOM_TELEPORT_BLOCK.get());
 		dropSelf(CABlocks.GREEN_CRYSTAL_LEAVES.get());

@@ -6,11 +6,7 @@ import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.network.PacketHandler;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CAConfiguredStructures;
-import io.github.chaosawakens.common.registry.CAStrippedLogBlocks;
-import io.github.chaosawakens.common.registry.CAStructures;
-import io.github.chaosawakens.common.registry.CAVillagers;
+import io.github.chaosawakens.common.registry.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -57,6 +53,8 @@ public class CommonSetupEvent {
         event.enqueueWork(() -> {
             CAStructures.setupStructures();
             CAConfiguredStructures.registerConfiguredStructures();
+            ChaosAwakens.debug("SB", "0");
+            CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
             CAVillagers.registerVillagerTypes();
             CAStrippedLogBlocks.registerStrippedLogs();
 
