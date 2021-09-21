@@ -4,7 +4,7 @@ Chaos Awakens is a remaster of both the very iconic mod [OreSpawn](https://www.o
 ## Download
 Due to recent drama and various mass reports by unknown sources, the mod was taken down from [*CurseForge*](https://www.curseforge.com/minecraft/mc-mods) and cannot be re-uploaded from this point forward. Please do **not** harass **anyone** in the *CurseForge* moderation team or **any** competitor mod developer for what you think they did. They are humans and we are too, and we all make mistakes.
 
-All downloads are now located [in this page](https://chaosawakens.github.io/downloads.html) for now. Later builds will come up in the [Releases](https://github.com/Chaos-Awakens-Mod-Team/ChaosAwakens/releases/) page.
+All downloads are now located [in this page](https://chaosawakens.github.io/?#downloadsDiv) for now. Later builds will come up in the [Releases](https://github.com/Chaos-Awakens-Mod-Team/ChaosAwakens/releases/) page.
 
 ### Required Dependencies
 **1.16.5 (Forge):** [Forge v36.1.1 and up](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html), [GeckoLib v3.0 and up](https://www.curseforge.com/minecraft/mc-mods/geckolib/files/all?filter-game-version=1738749986%3a70886), [AttributeFix v10.0.1 and above](https://www.curseforge.com/minecraft/mc-mods/attributefix/files/all?filter-game-version=1738749986%3a70886)
