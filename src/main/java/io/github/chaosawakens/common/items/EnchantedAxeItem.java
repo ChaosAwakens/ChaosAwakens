@@ -23,9 +23,10 @@ public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 		Map<Block, Block> temp = (new ImmutableMap.Builder<Block, Block>()).putAll(AxeItem.STRIPABLES)
 				.put(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get())
 				.put(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get())
+				.put(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get())
 				.put(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get())
-				.put(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get()).build();
-				
+				.put(CABlocks.SKYWOOD_LOG.get(), CABlocks.STRIPPED_SKYWOOD_LOG.get()).build();
+
 		AxeItem.STRIPABLES = temp;
 	}
 	

@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "chaosawakens:block/fossilised_apple_cow",
-    "particle": "chaosawakens:block/fossilised_apple_cow"
-  }
-}

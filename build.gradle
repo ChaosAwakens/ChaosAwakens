@@ -77,6 +77,8 @@ dependencies {
     implementation fg.deobf("curse.maven:worldedit-225608:${project.worldedit}")
 
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
+
+    implementation fg.deobf("curse.maven:world-stripper-250603:${project.worldstripper}")
 }
 
 repositories {

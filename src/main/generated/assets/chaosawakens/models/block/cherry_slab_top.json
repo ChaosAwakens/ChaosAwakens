@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "chaosawakens:block/cherry_planks",
+    "bottom": "chaosawakens:block/cherry_planks",
+    "top": "chaosawakens:block/cherry_planks"
+  }
+}

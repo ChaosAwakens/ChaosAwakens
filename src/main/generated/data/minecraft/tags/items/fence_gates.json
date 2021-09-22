@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:apple_fence_gate",
+    "chaosawakens:cherry_fence_gate",
+    "chaosawakens:peach_fence_gate",
+    "chaosawakens:duplication_fence_gate",
+    "chaosawakens:skywood_fence_gate"
+  ]
+}
