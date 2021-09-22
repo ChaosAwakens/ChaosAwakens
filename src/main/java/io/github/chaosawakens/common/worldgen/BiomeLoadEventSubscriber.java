@@ -100,6 +100,10 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 30, 2, 5));
 		};
 		
+		private static final Consumer<MobSpawnInfoBuilder> OCEAN_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WHALE.get(), 100, 1, 3));
+		};
+		
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 10, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
@@ -125,6 +129,9 @@ public class BiomeLoadEventSubscriber {
 				case FOREST:
 					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
 						FOREST_MOBS.accept(spawnInfoBuilder);
+				case OCEAN:
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
+						OCEAN_MOBS.accept(spawnInfoBuilder);
 				case THEEND:
 				case NETHER:
 					break;

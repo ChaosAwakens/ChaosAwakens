@@ -101,6 +101,8 @@ public class CAConfig {
 		
 		public final ConfigValue<Boolean> enableAutoEnchanting;
 		
+		public final ConfigValue<Boolean> enableDupeTree;
+		
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
 		public final ConfigValue<Boolean> enableRainbowAntTeleport;
 		public final ConfigValue<Boolean> enableRedAntTeleport;
@@ -313,6 +315,9 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Tooltips");
 			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
+			builder.pop();
+			builder.push("Duplication Tree");
+			enableDupeTree = builder.comment("Enables the duplication effects of the duplication tree").define("Enable Duplication Tree", true);
 			builder.pop();
 		}
 	}

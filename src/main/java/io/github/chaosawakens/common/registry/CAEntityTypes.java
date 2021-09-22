@@ -63,6 +63,12 @@ public class CAEntityTypes {
             () -> EntityType.Builder.of(HerculesBeetleEntity::new, EntityClassification.MONSTER)
                     .sized(4.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "hercules_beetle").toString()));
+    // Whale
+    public static final RegistryObject<EntityType<WhaleEntity>> WHALE = ENTITY_TYPES.register("whale",
+    		() -> EntityType.Builder.of(WhaleEntity::new, EntityClassification.WATER_CREATURE)
+    		.sized(4.7F, 3.5F) // HitBox Size ()
+    		.clientTrackingRange(10)
+    		.build(new ResourceLocation(ChaosAwakens.MODID, "whale").toString()));
     // Apple Cows
     public static final RegistryObject<EntityType<AppleCowEntity>> APPLE_COW = ENTITY_TYPES.register("apple_cow",
             () -> EntityType.Builder.of(AppleCowEntity::new, EntityClassification.CREATURE)
