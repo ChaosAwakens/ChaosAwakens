@@ -173,9 +173,9 @@ public class BiomeLoadEventSubscriber {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addDesertOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
 				if (CAConfig.COMMON.enableOreGen.get())
-					addOceanOres(gen);
+					addRiverOceanOres(gen);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) {
 				if (CAConfig.COMMON.enableOreGen.get())
@@ -311,7 +311,7 @@ public class BiomeLoadEventSubscriber {
 			}
 		}
 
-		private static void addOceanOres(BiomeGenerationSettingsBuilder gen) {
+		private static void addRiverOceanOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableFossilGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_COD);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_DROWNED);
