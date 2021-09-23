@@ -101,7 +101,7 @@ public class BiomeLoadEventSubscriber {
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> OCEAN_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WHALE.get(), 100, 1, 3));
+			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WHALE.get(), 1, 1, 1));
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
