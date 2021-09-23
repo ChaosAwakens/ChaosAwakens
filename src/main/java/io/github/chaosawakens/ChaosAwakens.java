@@ -13,7 +13,6 @@ import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;

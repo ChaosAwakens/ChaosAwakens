@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -37,7 +38,7 @@ public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10)
-                .add(Attributes.MOVEMENT_SPEED, 0.2F)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.FOLLOW_RANGE, 10);
     }
 
@@ -56,12 +57,18 @@ public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, Ingredient.of(Items.CARROT_ON_A_STICK), false));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(Items.CARROT_ON_A_STICK), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+    }
+
+    public boolean isFood(ItemStack stack) {
+        return FOOD_ITEMS.test(stack);
     }
 
     @Override
@@ -90,37 +97,22 @@ public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
     }
 
     @Override
-    public CarrotPigEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return null;
-    }
-
-    @Override
-    protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-        return sizeIn.height * 0.95F;
-    }
-
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "carrtotpigcontroller", 0, this::predicate));
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
-
-    public ActionResultType mobInteract(PlayerEntity playerEntity, Hand hand) {
-        ItemStack itemstack = playerEntity.getItemInHand(hand);
+    public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+        ItemStack itemstack = playerIn.getItemInHand(hand);
         if (itemstack.getItem() == Items.SHEARS && this.readyForShearing()) {
             this.shear(SoundCategory.PLAYERS);
             if (!this.level.isClientSide) {
-                itemstack.hurtAndBreak(1, playerEntity, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
+                itemstack.hurtAndBreak(1, playerIn, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
             }
-
             return ActionResultType.sidedSuccess(this.level.isClientSide);
         } else {
-            return super.mobInteract(playerEntity, hand);
+            return super.mobInteract(playerIn, hand);
         }
+    }
+
+    @Override
+    public CarrotPigEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+        return CAEntityTypes.CARROT_PIG.get().create(world);
     }
 
     public void shear(SoundCategory soundCategory) {
@@ -154,4 +146,15 @@ public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
     public boolean readyForShearing() {
         return this.isAlive() && !this.isBaby();
     }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "carrtotpigcontroller", 0, this::predicate));
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
+
 }

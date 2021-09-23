@@ -95,7 +95,7 @@ public class GoldenAppleCowEntity extends AnimalEntity {
             assert goldenCarrotPigEntity != null;
             goldenCarrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
             goldenCarrotPigEntity.setNoAi(this.isNoAi());
-            goldenCarrotPigEntity.setBaby(false);
+            goldenCarrotPigEntity.setBaby(this.isBaby());
             if (this.hasCustomName()) {
                 goldenCarrotPigEntity.setCustomName(this.getCustomName());
                 goldenCarrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());

@@ -35,9 +35,9 @@ public class CATagProvider extends BlockTagsProvider {
 	
 	@Override
 	protected void addTags() {
-		//this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
+		this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.SKYWOOD_PLANKS.get(), CABlocks.MOLDY_PLANKS.get());
 		this.tag(BlockTags.FENCE_GATES).add(CABlocks.APPLE_FENCE_GATE.get(), CABlocks.CHERRY_FENCE_GATE.get(), CABlocks.PEACH_FENCE_GATE.get(), CABlocks.DUPLICATION_FENCE_GATE.get(), CABlocks.SKYWOOD_FENCE_GATE.get());
-		this.tag(BlockTags.WOODEN_FENCES).add(CABlocks.APPLE_FENCE.get(), CABlocks.CHERRY_FENCE.get(), CABlocks.PEACH_FENCE.get(), CABlocks.DUPLICATION_FENCE.get(), CABlocks.SKYWOOD_FENCE.get());
+		this.tag(BlockTags.WOODEN_FENCES).add(CABlocks.APPLE_FENCE.get(), CABlocks.CHERRY_FENCE.get(), CABlocks.PEACH_FENCE.get(), CABlocks.DUPLICATION_FENCE.get(), CABlocks.SKYWOOD_FENCE.get(), CABlocks.MOLDY_FENCE.get());
 	}
 	
 	// TODO make the static class and the main class function as one instead of
@@ -67,11 +67,9 @@ public class CATagProvider extends BlockTagsProvider {
 		
 		@Override
 		protected void addTags() {
-			//this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
-			//this.tag(BlockTags.LOGS).addTags(CATags.DUPLICATOR_WOOD);
-			//this.tag(BlockTags.LEAVES).add(CABlocks.CHERRY_LEAVES.get(), CABlocks.DUPLICATION_LEAVES.get(), CABlocks.PEACH_LEAVES.get());
+			this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.SKYWOOD_PLANKS.get(), CABlocks.MOLDY_PLANKS.get());
 			this.tag(BlockTags.FENCE_GATES).add(CABlocks.APPLE_FENCE_GATE.get(), CABlocks.CHERRY_FENCE_GATE.get(), CABlocks.PEACH_FENCE_GATE.get(), CABlocks.DUPLICATION_FENCE_GATE.get(), CABlocks.SKYWOOD_FENCE_GATE.get());
-			this.tag(BlockTags.WOODEN_FENCES).add(CABlocks.APPLE_FENCE.get(), CABlocks.CHERRY_FENCE.get(), CABlocks.PEACH_FENCE.get(), CABlocks.DUPLICATION_FENCE.get(), CABlocks.SKYWOOD_FENCE.get());
+			this.tag(BlockTags.WOODEN_FENCES).add(CABlocks.APPLE_FENCE.get(), CABlocks.CHERRY_FENCE.get(), CABlocks.PEACH_FENCE.get(), CABlocks.DUPLICATION_FENCE.get(), CABlocks.SKYWOOD_FENCE.get(), CABlocks.MOLDY_FENCE.get());
 		}
 	}
 }

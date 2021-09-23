@@ -730,6 +730,8 @@ cd9c32e3b8472e03102a24a7bcb0c91598e42e06 data/chaosawakens/loot_tables/gameplay/
 1843eb523f7f4b94f620b336daece153928569f3 data/minecraft/loot_tables/entities/illusioner.json
 4fc04a2f9432692a719895520ceb6d1b01d81417 data/minecraft/loot_tables/gameplay/fishing.json
 4447144abb4f4692412ae5dee45ea3bbccb8d73e data/minecraft/tags/blocks/fence_gates.json
-86c64095a62ce17fea0669985930ac3a18a61d31 data/minecraft/tags/blocks/wooden_fences.json
+5b3b506552e9cadd395737b4196c5655113dd25e data/minecraft/tags/blocks/planks.json
+8ebf9292090edfd26833f4ee73e84305551ff7f6 data/minecraft/tags/blocks/wooden_fences.json
 4447144abb4f4692412ae5dee45ea3bbccb8d73e data/minecraft/tags/items/fence_gates.json
-86c64095a62ce17fea0669985930ac3a18a61d31 data/minecraft/tags/items/wooden_fences.json
+5b3b506552e9cadd395737b4196c5655113dd25e data/minecraft/tags/items/planks.json
+8ebf9292090edfd26833f4ee73e84305551ff7f6 data/minecraft/tags/items/wooden_fences.json

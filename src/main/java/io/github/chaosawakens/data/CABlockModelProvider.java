@@ -45,6 +45,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_drowned", chaosRL("fossilised_drowned"));
 		this.cubeAll("fossilised_fox", chaosRL("fossilised_fox"));
 		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
+//		this.cubeBottomTop("fossilised_husk", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
 		this.cubeAll("fossilised_pig", chaosRL("fossilised_pig"));
 		this.cubeAll("fossilised_pufferfish", chaosRL("fossilised_pufferfish"));
 		this.cubeAll("fossilised_rabbit", chaosRL("fossilised_rabbit"));
@@ -52,7 +53,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_sheep", chaosRL("fossilised_sheep"));
 		this.cubeAll("fossilised_slime", chaosRL("fossilised_slime"));
 		this.cubeAll("fossilised_spider", chaosRL("fossilised_spider"));
-		this.cubeBottomTop("fossilised_zombie", chaosRL("fossilised_zombie"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
+		this.cubeAll("fossilised_zombie", chaosRL("fossilised_zombie"));
 
 		this.cubeAll("ruby_ore", chaosRL("ruby_ore"));
 		this.cubeAll("netherrack_ruby_ore", chaosRL("netherrack_ruby_ore"));

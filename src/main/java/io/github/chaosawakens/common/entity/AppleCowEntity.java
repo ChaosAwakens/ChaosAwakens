@@ -95,7 +95,7 @@ public class AppleCowEntity extends AnimalEntity {
             assert carrotPigEntity != null;
             carrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
             carrotPigEntity.setNoAi(this.isNoAi());
-            carrotPigEntity.setBaby(false);
+            carrotPigEntity.setBaby(this.isBaby());
             if (this.hasCustomName()) {
                 carrotPigEntity.setCustomName(this.getCustomName());
                 carrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());

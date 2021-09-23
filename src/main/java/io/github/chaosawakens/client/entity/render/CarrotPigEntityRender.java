@@ -8,6 +8,7 @@ import io.github.chaosawakens.common.entity.CarrotPigEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.layers.SaddleLayer;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;

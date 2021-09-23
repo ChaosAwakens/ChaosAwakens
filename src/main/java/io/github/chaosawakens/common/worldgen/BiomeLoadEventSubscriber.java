@@ -149,6 +149,7 @@ public class BiomeLoadEventSubscriber {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();
 			
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
+			final String location = biome.location().toString();
 
 			BiomeLoadEventSubscriber.setEntDungeon((struct) -> gen.getStructures().add(() -> struct), event);
 			
@@ -165,6 +166,10 @@ public class BiomeLoadEventSubscriber {
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addForestOres(gen);
+			}
+			if (location.contains("taiga")) {
+				if (CAConfig.COMMON.enableOreGen.get())
+					addTaigaOres(gen);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.HOT) &&
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.DRY) &&
@@ -220,7 +225,7 @@ public class BiomeLoadEventSubscriber {
 		public static void addStructureSpawns(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder builder = event.getGeneration();
 			
-			BiomeLoadEventSubscriber.setEntDungeon((struct) -> builder.addStructureStart(struct), event);
+			BiomeLoadEventSubscriber.setEntDungeon(builder::addStructureStart, event);
 			
 			switch (event.getCategory()) {
 				case FOREST:
@@ -259,7 +264,6 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_CAVE_SPIDER);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_CHICKEN);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_COW);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_FOX);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_PIG);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_RABBIT);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_SHEEP);
@@ -301,6 +305,12 @@ public class BiomeLoadEventSubscriber {
 		private static void addForestOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableTrollOreGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_WASP);
+			}
+		}
+
+		private static void addTaigaOres(BiomeGenerationSettingsBuilder gen) {
+			if (CAConfig.COMMON.enableTrollOreGen.get()) {
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_FOX);
 			}
 		}
 
