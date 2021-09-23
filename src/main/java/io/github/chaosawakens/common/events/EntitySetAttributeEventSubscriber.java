@@ -39,5 +39,6 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.WHALE.get(), WaspEntity.setCustomAttributes().build());
     }
 }
