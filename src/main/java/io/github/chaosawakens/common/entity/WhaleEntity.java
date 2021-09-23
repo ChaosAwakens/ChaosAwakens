@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.goals.AnimalAISwimBottom;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureAttribute;
@@ -9,6 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.DolphinLookController;
@@ -27,12 +27,16 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -42,7 +46,15 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
 
+/**
+ * (Insert unfunny "I took too long to code your mom into Minecraft" joke here)
+ * 
+ * @author Meme Man
+ *
+ */
 public class WhaleEntity extends WaterMobEntity implements IAnimatable{
 	private final AnimationFactory factory = new AnimationFactory(this);
 	 protected MovementController.Action operation = MovementController.Action.WAIT;
@@ -62,7 +74,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 80)
-                .add(Attributes.MOVEMENT_SPEED, 1.2D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
                 .add(Attributes.FOLLOW_RANGE, 18);
 }
@@ -101,10 +113,11 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
         @Override
         public void tick() {
             if (this.whale.isEyeInFluid(FluidTags.WATER)) {
-                this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, 0.05D, 0.0D));
+                this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
             }     
 
-            if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
+           /*
+              if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
                 double d0 = this.wantedX - this.whale.getX();
                 double d1 = this.wantedY - this.whale.getY();
                 double d2 = this.wantedZ - this.whale.getZ();
@@ -114,15 +127,52 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
                 this.whale.yRot = this.rotlerp(this.whale.yRot, f, 90.0F);
                 this.whale.yBodyRot = this.whale.yRot;
                 float f1 = (float) (this.speedModifier * Objects.requireNonNull(this.whale.getAttribute(Attributes.MOVEMENT_SPEED)).getValue());
-                this.whale.setSpeed(MathHelper.lerp(0.9F, this.whale.getSpeed(), f1));
+                this.whale.setSpeed(MathHelper.lerp(0.6F, this.whale.getSpeed(), f1));
                 this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, (double)this.whale.getSpeed() * d1 * 0.3D, 0.0D));
                 whale.setSwimming(true);
             } else {
             	this.whale.setSpeed(0.0F);
             	whale.setSwimming(false);
             }
+            */
+            
+            if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
+                double d0 = this.wantedX - this.whale.getX();
+                double d1 = this.wantedY - this.whale.getY();
+                double d2 = this.wantedZ - this.whale.getZ();
+                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+                if (d3 < (double)2.5000003E-7F) {
+                   this.mob.setZza(0.0F);
+                } else {
+                   float f = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
+                   this.whale.yRot = this.rotlerp(this.whale.yRot, f, 10.0F);
+                   this.whale.yBodyRot = this.whale.yRot;
+                   this.whale.yHeadRot = this.whale.yRot;
+                   float f1 = (float)(this.speedModifier * this.whale.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                   if (this.whale.isInWater()) {
+                      this.whale.setSpeed(f1 * 0.02F);
+                      float f2 = -((float)(MathHelper.atan2(d1, (double)MathHelper.sqrt(d0 * d0 + d2 * d2)) * (double)(180F / (float)Math.PI)));
+                      f2 = MathHelper.clamp(MathHelper.wrapDegrees(f2), -85.0F, 85.0F);
+                      this.whale.xRot = this.rotlerp(this.whale.xRot, f2, 5.0F);
+                      float f3 = MathHelper.cos(this.whale.xRot * ((float)Math.PI / 180F));
+                      float f4 = MathHelper.sin(this.whale.xRot * ((float)Math.PI / 180F));
+                      this.whale.zza = f3 * f1;
+                      this.whale.yya = -f4 * f1;
+                   } else {
+                      this.whale.setSpeed(f1 * 0.1F);
+                   }
+
+                }
+             } else {
+                this.whale.setSpeed(0.0F);
+                this.whale.setXxa(0.0F);
+                this.whale.setYya(0.0F);
+                this.whale.setZza(0.0F);
+             }
+          }
+
         }
-    }
+    
 
     static class SwimGoal extends RandomSwimmingGoal {
         public final WhaleEntity whale;
@@ -150,9 +200,18 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
         }
     }
     
+    public static boolean checkWhaleSpawnRules(EntityType<WhaleEntity> whale, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
+           Optional<RegistryKey<Biome>> optional = world.getBiomeName(pos);
+           return (Objects.equals(optional, Optional.of(Biomes.OCEAN)) || !Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
+        } else {
+           return false;
+        }
+     }
+    
     @Override
     protected void registerGoals() {
-      this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 6.0D, 5));
+      this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 2.0D, 5));
       this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
       //this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
       //this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.COD), false));
@@ -258,7 +317,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
     }
     
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-        return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
+        return this.isBaby() ? sizeIn.height * 0.95F : 1.3F; //Just, don't even ask
     }
 	
 }
