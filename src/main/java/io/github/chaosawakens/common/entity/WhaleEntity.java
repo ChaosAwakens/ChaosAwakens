@@ -325,6 +325,11 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
 	}
 	
 	@Override
+	public int getMaxAirSupply() {
+		return 900000;
+	}
+	
+	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.DOLPHIN_AMBIENT_WATER;
 	}
