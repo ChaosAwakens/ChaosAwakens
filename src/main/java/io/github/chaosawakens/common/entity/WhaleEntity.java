@@ -1,10 +1,12 @@
 package io.github.chaosawakens.common.entity;
 
 import net.minecraft.block.BlockState;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
@@ -37,6 +39,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -62,6 +65,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
 	   protected double wantedY;
 	   protected double wantedZ;
 	   protected double speedModifier;
+	   int sunb;
 	
 	public WhaleEntity(EntityType<? extends WaterMobEntity> type, World worldIn) {
         super(type, worldIn);
@@ -257,8 +261,29 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
             this.yRot = this.random.nextFloat() * 360.0F;
             this.onGround = false;
             this.hasImpulse = true;
+            
+            if(!this.isInWaterRainOrBubble()) {
+            this.sunb = 1000;
+    		--this.sunb;
+    		int getSunBurnProtection = this.getSunburnProtection(sunb);
+                if (getSunBurnProtection <= 0 && level.isDay() && !level.isClientSide()) {
+                    this.hurt(DamageSource.DRY_OUT, random.nextInt(2) == 0 ? 1F : 0F);
+                }
+             else {
+            	 ++this.sunb;
+                this.getSunburnProtection(sunb + 9000);
+             }
          }
       }
+  }
+    
+    @Override
+    public void killed(ServerWorld p_241847_1_, LivingEntity p_241847_2_) {
+    	super.killed(p_241847_1_, p_241847_2_);
+    	if(this.dead) {
+    		
+    	}
+    }
     
     
     @Override
@@ -304,17 +329,17 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
 		return SoundEvents.DOLPHIN_AMBIENT_WATER;
 	}
 	
-	protected void updateAir(int p_209207_1_) {
-        if (this.isAlive() && !this.isInWaterOrBubble()) {
-            this.setAirSupply(p_209207_1_ - 1);
-            if (this.getAirSupply() == -20) {
-                this.setAirSupply(0);
-                this.hurt(DamageSource.DRY_OUT, random.nextInt(2) == 0 ? 1F : 0F);
-            }
-        } else {
-            this.setAirSupply(1000);
-        }
-    }
+	public int getSunburnProtection(int sunBurnProtection) {
+		return this.getSunburnProtection(sunBurnProtection);
+	}
+    
+	@Override
+	protected void tickDeath() {
+		super.tickDeath();
+		if(this.dead) {
+			
+		}
+	}
     
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return this.isBaby() ? sizeIn.height * 0.95F : 1.3F; //Just, don't even ask
