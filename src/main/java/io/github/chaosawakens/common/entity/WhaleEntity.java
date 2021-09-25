@@ -6,7 +6,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
@@ -39,7 +38,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -53,8 +51,7 @@ import java.util.Optional;
 import java.util.Random;
 
 /**
- * (Insert unfunny "I took too long to code your mom into Minecraft" joke here)
- * 
+ *
  * @author Meme Man
  *
  */
@@ -66,7 +63,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
 	   protected double wantedZ;
 	   protected double speedModifier;
 	   int sunb;
-	
+
 	public WhaleEntity(EntityType<? extends WaterMobEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
@@ -74,7 +71,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
         this.moveControl = new MoveHelperController(this);
         this.lookControl = new DolphinLookController(this, 10);
     }
-	
+
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 80)
@@ -82,7 +79,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
                 .add(Attributes.FOLLOW_RANGE, 18);
 }
-    
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.swimming", true));
@@ -100,12 +97,12 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
         }
         return PlayState.CONTINUE;
     }
-    
+
     @Override
     protected PathNavigator createNavigation(World worldIn) {
         return new SwimmerPathNavigator(this, worldIn);
     }
-  
+
     static class MoveHelperController extends MovementController {
         private final WhaleEntity whale;
 
@@ -118,7 +115,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
         public void tick() {
             if (this.whale.isEyeInFluid(FluidTags.WATER)) {
                 this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
-            }     
+            }
 
            /*
               if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
@@ -139,7 +136,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
             	whale.setSwimming(false);
             }
             */
-            
+
             if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
                 double d0 = this.wantedX - this.whale.getX();
                 double d1 = this.wantedY - this.whale.getY();
@@ -176,7 +173,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
           }
 
         }
-    
+
 
     static class SwimGoal extends RandomSwimmingGoal {
         public final WhaleEntity whale;
@@ -190,7 +187,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
             return super.canUse();
         }
     }
-    
+
     public void travel(Vector3d vector, World world) {
         if (this.isEffectiveAi() && this.isInWater()) {
             this.moveRelative(this.getSpeed(), vector);
@@ -203,7 +200,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
             super.travel(vector);
         }
     }
-    
+
     public static boolean checkWhaleSpawnRules(EntityType<WhaleEntity> whale, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
         if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
            Optional<RegistryKey<Biome>> optional = world.getBiomeName(pos);
@@ -212,7 +209,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
            return false;
         }
      }
-    
+
     @Override
     protected void registerGoals() {
       this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 2.0D, 5));
@@ -226,11 +223,11 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
       this.goalSelector.addGoal(4, new PanicGoal(this, 2.0D));
       //this.goalSelector.addGoal(3, new AnimalAISwimBottom(this, 1.0D, 7));
     }
-    
+
     public boolean canStandOnFluid(Fluid water, BlockPos pos) {
     	return !this.level.getBlockState(pos.below()).is(Blocks.AIR);
     }
-    
+
     private boolean clearanceAcquired() {
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
         for (int l1 = 0; l1 < 10; ++l1) {
@@ -242,17 +239,17 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
 
         return true;
     }
-    
+
     @Override
     public boolean isPushedByFluid() {
     	return false;
     }
-    
+
     @Override
     public boolean canBreatheUnderwater() {
     	return true;
     }
-    
+
     @Override
     public void tick() {
     	super.tick();
@@ -261,7 +258,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
             this.yRot = this.random.nextFloat() * 360.0F;
             this.onGround = false;
             this.hasImpulse = true;
-            
+
             if(!this.isInWaterRainOrBubble()) {
             this.sunb = 1000;
     		--this.sunb;
@@ -276,21 +273,12 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
          }
       }
   }
-    
-    @Override
-    public void killed(ServerWorld p_241847_1_, LivingEntity p_241847_2_) {
-    	super.killed(p_241847_1_, p_241847_2_);
-    	if(this.dead) {
-    		
-    	}
-    }
-    
-    
+
     @Override
     public boolean canBeLeashed(PlayerEntity player) {
     	return false;
     }
-    
+
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "whalecontroller", 0, this::predicate));
@@ -300,54 +288,46 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable{
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
-	
+
 	public CreatureAttribute getMobType() {
 		return CreatureAttribute.WATER;
 	}
-	
+
 	public float getSoundVolume() {
 		return 16.0F;
 	}
-	
+
 	@Override
 	protected SoundEvent getSwimSound() {
 		return SoundEvents.FISH_SWIM;
 	}
-	
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.DOLPHIN_HURT;
 	}
-	
+
 	@Override
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.DOLPHIN_DEATH;
 	}
-	
+
 	@Override
 	public int getMaxAirSupply() {
 		return 900000;
 	}
-	
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.DOLPHIN_AMBIENT_WATER;
 	}
-	
+
 	public int getSunburnProtection(int sunBurnProtection) {
 		return this.getSunburnProtection(sunBurnProtection);
 	}
-    
-	@Override
-	protected void tickDeath() {
-		super.tickDeath();
-		if(this.dead) {
-			
-		}
-	}
-    
+
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return this.isBaby() ? sizeIn.height * 0.95F : 1.3F; //Just, don't even ask
     }
-	
+
 }
