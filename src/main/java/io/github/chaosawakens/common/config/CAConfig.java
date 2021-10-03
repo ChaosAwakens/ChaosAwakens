@@ -135,6 +135,8 @@ public class CAConfig {
 		public final ConfigValue<Integer> queenAxeDamage;
 		
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
+
+		public final ConfigValue<Boolean> holidayTextures;
 		
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
 		public final ConfigValue<Boolean> mobHeadDrops;
@@ -303,6 +305,9 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Breeding");
 			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);
+			builder.pop();
+			builder.push("Textures");
+			holidayTextures = builder.comment("Will holiday special textures be obtainable?").define("Obtainable Holiday Textures", true);
 			builder.pop();
 			builder.push("Drops");
 			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the first death?").define("Ender Dragon Egg Respawn", true);

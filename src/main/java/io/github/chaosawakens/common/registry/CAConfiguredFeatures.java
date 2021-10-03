@@ -44,7 +44,7 @@ public class CAConfiguredFeatures {
 	// ORES
 	
 	// GENERIC
-	public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.configured(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), CABlocks.RUBY_ORE.get().defaultBlockState(), 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(3));
+	public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.configured(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(3));
 	public static final ConfiguredFeature<?, ?> ORE_AMETHYST = register("ore_amethyst", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.AMETHYST_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(18, 16))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> ORE_URANIUM = register("ore_uranium", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.URANIUM_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(1, 12))).squared().count(3));
 	public static final ConfiguredFeature<?, ?> ORE_TITANIUM = register("ore_titanium", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TITANIUM_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(1, 12))).squared().count(3));
@@ -75,7 +75,7 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> NETHER_ORE_RUBY_NO_SURFACE = register("nether_ore_ruby_surfaceless", Feature.NO_SURFACE_ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, States.NETHER_RUBY_ORE, 1)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(24, 72, 128))).squared().count(4));
 	
 	// MINING PARADISE
-	public static final ConfiguredFeature<?, ?> MINING_ORE_RUBY_LAVA = register("mining_ore_ruby", Feature.ORE.configured(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), CABlocks.RUBY_ORE.get().defaultBlockState(), 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(4));
+	public static final ConfiguredFeature<?, ?> MINING_ORE_RUBY_LAVA = register("mining_ore_ruby", Feature.ORE.configured(new OreFeatureConfig(new BlockMatchRuleTest(Blocks.LAVA), States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_AMETHYST = register("mining_ore_amethyst", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.AMETHYST_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(40, 16))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_URANIUM = register("mining_ore_uranium", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.URANIUM_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(1, 18))).squared().count(3));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_TITANIUM = register("mining_ore_titanium", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TITANIUM_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(1, 18))).squared().count(3));
@@ -166,55 +166,55 @@ public class CAConfiguredFeatures {
 	}
 	
 	public static final class States {
-		protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.defaultBlockState();
-		protected static final BlockState APPLE_LOG = CABlocks.APPLE_LOG.get().defaultBlockState();
-		protected static final BlockState CHERRY_LOG = CABlocks.CHERRY_LOG.get().defaultBlockState();
-		protected static final BlockState PEACH_LOG = CABlocks.PEACH_LOG.get().defaultBlockState();
-		protected static final BlockState DUPLICATION_LOG = CABlocks.DUPLICATION_LOG.get().defaultBlockState();
-		protected static final BlockState DEAD_DUPLICATION_LOG = CABlocks.DEAD_DUPLICATION_LOG.get().defaultBlockState();
-		protected static final BlockState DUPLICATION_LEAVES = CABlocks.DUPLICATION_LEAVES.get().defaultBlockState();
-		protected static final BlockState APPLE_LEAVES = CABlocks.APPLE_LEAVES.get().defaultBlockState();
-		protected static final BlockState CHERRY_LEAVES = CABlocks.CHERRY_LEAVES.get().defaultBlockState();
-		protected static final BlockState PEACH_LEAVES = CABlocks.PEACH_LEAVES.get().defaultBlockState();
-		protected static final BlockState STONE = Blocks.STONE.defaultBlockState();
-		protected static final BlockState RUBY_ORE = CABlocks.RUBY_ORE.get().defaultBlockState();
-		protected static final BlockState NETHER_RUBY_ORE = CABlocks.NETHER_RUBY_ORE.get().defaultBlockState();
-		protected static final BlockState AMETHYST_ORE = CABlocks.AMETHYST_ORE.get().defaultBlockState();
-		protected static final BlockState URANIUM_ORE = CABlocks.URANIUM_ORE.get().defaultBlockState();
-		protected static final BlockState TITANIUM_ORE = CABlocks.TITANIUM_ORE.get().defaultBlockState();
-		protected static final BlockState TIGERS_EYE_ORE = CABlocks.TIGERS_EYE_ORE.get().defaultBlockState();
-		protected static final BlockState ALUMINIUM_ORE = CABlocks.ALUMINUM_ORE.get().defaultBlockState();
-		protected static final BlockState COPPER_ORE = CABlocks.COPPER_ORE.get().defaultBlockState();
-		protected static final BlockState TIN_ORE = CABlocks.TIN_ORE.get().defaultBlockState();
-		protected static final BlockState SILVER_ORE = CABlocks.SILVER_ORE.get().defaultBlockState();
-		protected static final BlockState PLATINUM_ORE = CABlocks.PLATINUM_ORE.get().defaultBlockState();
-		protected static final BlockState SUNSTONE_ORE = CABlocks.SUNSTONE_ORE.get().defaultBlockState();
-		protected static final BlockState BLOODSTONE_ORE = CABlocks.BLOODSTONE_ORE.get().defaultBlockState();
-		protected static final BlockState SALT_ORE = CABlocks.SALT_ORE.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_ENT = CABlocks.FOSSILISED_ENT.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_HERCULES_BEETLE = CABlocks.FOSSILISED_HERCULES_BEETLE.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_RUBY_BUG = CABlocks.FOSSILISED_RUBY_BUG.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_EMERALD_GATOR = CABlocks.FOSSILISED_EMERALD_GATOR.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_WTF = CABlocks.FOSSILISED_WTF.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_SCORPION = CABlocks.FOSSILISED_SCORPION.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_WASP = CABlocks.FOSSILISED_WASP.get().defaultBlockState();
-		protected static final BlockState FOSSILISED_PIRAPORU = CABlocks.FOSSILISED_PIRAPORU.get().defaultBlockState();
-		protected static final BlockState RED_ANT_INFESTED_ORE = CABlocks.RED_ANT_INFESTED_ORE.get().defaultBlockState();
-		protected static final BlockState TERMITE_INFESTED_ORE = CABlocks.TERMITE_INFESTED_ORE.get().defaultBlockState();
-		protected static final BlockState CRYSTAL_ENERGY = CABlocks.CRYSTAL_ENERGY.get().defaultBlockState();
-		protected static final BlockState PINK_TOURMALINE = CABlocks.BUDDING_PINK_TOURMALINE.get().defaultBlockState();
-		protected static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().defaultBlockState();
-		protected static final BlockState CLUSTER_PINK_TOURMALINE = CABlocks.PINK_TOURMALINE_CLUSTER.get().defaultBlockState();
-		protected static final BlockState CLUSTER_CATS_EYE = CABlocks.CATS_EYE_CLUSTER.get().defaultBlockState();
-		protected static final BlockState CORN = CABlocks.CORN_BODY_BLOCK.get().defaultBlockState();
-		protected static final BlockState TOMATO = CABlocks.TOMATO_BODY_BLOCK.get().defaultBlockState();
-		protected static final BlockState BROWN_ANT_NEST = CABlocks.BROWN_ANT_NEST.get().defaultBlockState();
-		protected static final BlockState RAINBOW_ANT_NEST = CABlocks.RAINBOW_ANT_NEST.get().defaultBlockState();
-		protected static final BlockState RED_ANT_NEST = CABlocks.RED_ANT_NEST.get().defaultBlockState();
-		protected static final BlockState UNSTABLE_ANT_NEST = CABlocks.UNSTABLE_ANT_NEST.get().defaultBlockState();
-		protected static final BlockState TERMITE_NEST = CABlocks.TERMITE_NEST.get().defaultBlockState();
-		protected static final BlockState CRYSTAL_GRASS_BLOCK = CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState();
-		protected static final BlockState CRYSTAL_TERMITE_NEST = CABlocks.CRYSTAL_TERMITE_NEST.get().defaultBlockState();
+		private static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.defaultBlockState();
+		private static final BlockState APPLE_LOG = CABlocks.APPLE_LOG.get().defaultBlockState();
+		private static final BlockState CHERRY_LOG = CABlocks.CHERRY_LOG.get().defaultBlockState();
+		private static final BlockState PEACH_LOG = CABlocks.PEACH_LOG.get().defaultBlockState();
+		private static final BlockState DUPLICATION_LOG = CABlocks.DUPLICATION_LOG.get().defaultBlockState();
+		private static final BlockState DEAD_DUPLICATION_LOG = CABlocks.DEAD_DUPLICATION_LOG.get().defaultBlockState();
+		private static final BlockState DUPLICATION_LEAVES = CABlocks.DUPLICATION_LEAVES.get().defaultBlockState();
+		private static final BlockState APPLE_LEAVES = CABlocks.APPLE_LEAVES.get().defaultBlockState();
+		private static final BlockState CHERRY_LEAVES = CABlocks.CHERRY_LEAVES.get().defaultBlockState();
+		private static final BlockState PEACH_LEAVES = CABlocks.PEACH_LEAVES.get().defaultBlockState();
+		private static final BlockState STONE = Blocks.STONE.defaultBlockState();
+		private static final BlockState RUBY_ORE = CABlocks.RUBY_ORE.get().defaultBlockState();
+		private static final BlockState NETHER_RUBY_ORE = CABlocks.NETHER_RUBY_ORE.get().defaultBlockState();
+		private static final BlockState AMETHYST_ORE = CABlocks.AMETHYST_ORE.get().defaultBlockState();
+		private static final BlockState URANIUM_ORE = CABlocks.URANIUM_ORE.get().defaultBlockState();
+		private static final BlockState TITANIUM_ORE = CABlocks.TITANIUM_ORE.get().defaultBlockState();
+		private static final BlockState TIGERS_EYE_ORE = CABlocks.TIGERS_EYE_ORE.get().defaultBlockState();
+		private static final BlockState ALUMINIUM_ORE = CABlocks.ALUMINUM_ORE.get().defaultBlockState();
+		private static final BlockState COPPER_ORE = CABlocks.COPPER_ORE.get().defaultBlockState();
+		private static final BlockState TIN_ORE = CABlocks.TIN_ORE.get().defaultBlockState();
+		private static final BlockState SILVER_ORE = CABlocks.SILVER_ORE.get().defaultBlockState();
+		private static final BlockState PLATINUM_ORE = CABlocks.PLATINUM_ORE.get().defaultBlockState();
+		private static final BlockState SUNSTONE_ORE = CABlocks.SUNSTONE_ORE.get().defaultBlockState();
+		private static final BlockState BLOODSTONE_ORE = CABlocks.BLOODSTONE_ORE.get().defaultBlockState();
+		private static final BlockState SALT_ORE = CABlocks.SALT_ORE.get().defaultBlockState();
+		private static final BlockState FOSSILISED_ENT = CABlocks.FOSSILISED_ENT.get().defaultBlockState();
+		private static final BlockState FOSSILISED_HERCULES_BEETLE = CABlocks.FOSSILISED_HERCULES_BEETLE.get().defaultBlockState();
+		private static final BlockState FOSSILISED_RUBY_BUG = CABlocks.FOSSILISED_RUBY_BUG.get().defaultBlockState();
+		private static final BlockState FOSSILISED_EMERALD_GATOR = CABlocks.FOSSILISED_EMERALD_GATOR.get().defaultBlockState();
+		private static final BlockState FOSSILISED_WTF = CABlocks.FOSSILISED_WTF.get().defaultBlockState();
+		private static final BlockState FOSSILISED_SCORPION = CABlocks.FOSSILISED_SCORPION.get().defaultBlockState();
+		private static final BlockState FOSSILISED_WASP = CABlocks.FOSSILISED_WASP.get().defaultBlockState();
+		private static final BlockState FOSSILISED_PIRAPORU = CABlocks.FOSSILISED_PIRAPORU.get().defaultBlockState();
+		private static final BlockState RED_ANT_INFESTED_ORE = CABlocks.RED_ANT_INFESTED_ORE.get().defaultBlockState();
+		private static final BlockState TERMITE_INFESTED_ORE = CABlocks.TERMITE_INFESTED_ORE.get().defaultBlockState();
+		private static final BlockState CRYSTAL_ENERGY = CABlocks.CRYSTAL_ENERGY.get().defaultBlockState();
+		private static final BlockState PINK_TOURMALINE = CABlocks.BUDDING_PINK_TOURMALINE.get().defaultBlockState();
+		private static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().defaultBlockState();
+		private static final BlockState CLUSTER_PINK_TOURMALINE = CABlocks.PINK_TOURMALINE_CLUSTER.get().defaultBlockState();
+		private static final BlockState CLUSTER_CATS_EYE = CABlocks.CATS_EYE_CLUSTER.get().defaultBlockState();
+		private static final BlockState CORN = CABlocks.CORN_BODY_BLOCK.get().defaultBlockState();
+		private static final BlockState TOMATO = CABlocks.TOMATO_BODY_BLOCK.get().defaultBlockState();
+		private static final BlockState BROWN_ANT_NEST = CABlocks.BROWN_ANT_NEST.get().defaultBlockState();
+		private static final BlockState RAINBOW_ANT_NEST = CABlocks.RAINBOW_ANT_NEST.get().defaultBlockState();
+		private static final BlockState RED_ANT_NEST = CABlocks.RED_ANT_NEST.get().defaultBlockState();
+		private static final BlockState UNSTABLE_ANT_NEST = CABlocks.UNSTABLE_ANT_NEST.get().defaultBlockState();
+		private static final BlockState TERMITE_NEST = CABlocks.TERMITE_NEST.get().defaultBlockState();
+		private static final BlockState CRYSTAL_GRASS_BLOCK = CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState();
+		private static final BlockState CRYSTAL_TERMITE_NEST = CABlocks.CRYSTAL_TERMITE_NEST.get().defaultBlockState();
 	}
 	
 	public static final class Placements {

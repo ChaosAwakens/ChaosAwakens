@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.client.entity.render.util.EntityTextureEnum;
+import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -11,12 +13,24 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+
 public class AppleCowEntity extends AnimalEntity {
+    private static final DataParameter<Integer> TEXTURE_TYPE = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
+
 
     public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -80,12 +94,72 @@ public class AppleCowEntity extends AnimalEntity {
     }
 
     @Override
-    public AppleCowEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return CAEntityTypes.APPLE_COW.get().create(world);
+    protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
+        return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-        return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
+    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity ageable) {
+        AppleCowEntity entity = CAEntityTypes.APPLE_COW.get().create(world);
+
+        if (this.isHalloweenObtained()) {
+            assert entity != null;
+            entity.setTextureType(EntityTextureEnum.HALLOWEEN.getId());
+        } else {
+            assert entity != null;
+            entity.setTextureType(((AppleCowEntity) ageable).getTextureType());
+        }
+
+        return entity;
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(TEXTURE_TYPE, 0);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("TextureType", this.getTextureType());
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
+        this.setTextureType(compound.getInt("TextureType"));
+    }
+
+    public void setTextureData(EntityTextureEnum entityTextureEnum) {
+        this.setTextureType(entityTextureEnum.getId());
+    }
+
+    public boolean isHalloweenObtained() {
+        LocalDate localdate = LocalDate.now();
+        int month = localdate.get(ChronoField.MONTH_OF_YEAR);
+
+        return (month == 10 && this.random.nextFloat() < 0.05F && CAConfig.COMMON.holidayTextures.get());
+    }
+
+    @Nullable
+    @Override
+    public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        spawnDataIn = super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
+        if (this.isHalloweenObtained()) {
+            this.setTextureType(EntityTextureEnum.HALLOWEEN.getId());
+        } else {
+            this.setTextureType(EntityTextureEnum.DEFAULT.getId());
+        }
+
+        return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
+    }
+
+    private void setTextureType(int id) {
+        this.entityData.set(TEXTURE_TYPE, id);
+    }
+
+    public int getTextureType() {
+        return this.entityData.get(TEXTURE_TYPE);
     }
 }

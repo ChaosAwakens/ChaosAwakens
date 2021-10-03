@@ -36,12 +36,16 @@ public class CATagProvider extends BlockTagsProvider {
 	
 	@Override
 	protected void addTags() {
-		//this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
-		
+		this.tag(CATags.APPLE_LOGS).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
+		this.tag(CATags.CHERRY_LOGS).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
+		this.tag(CATags.PEACH_LOGS).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
+		this.tag(CATags.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get());
+		this.tag(BlockTags.LOGS).addTags(CATags.DUPLICATION_LOGS);
+		this.tag(BlockTags.LOGS_THAT_BURN).addTags(CATags.APPLE_LOGS, CATags.CHERRY_LOGS, CATags.PEACH_LOGS);
+		this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.MOLDY_PLANKS.get());
 	}
 	
-	// TODO make the static class and the main class function as one instead of
-	// having to make them separate
+	// TODO make the static class and the main class function as one instead of having to make them separate
 	public static class CATagProviderForBlocks extends BlockTagsProvider {
 		
 		/**
@@ -67,9 +71,13 @@ public class CATagProvider extends BlockTagsProvider {
 		
 		@Override
 		protected void addTags() {
-			//this.tag(CATags.DUPLICATOR_WOOD).add(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
-			//this.tag(BlockTags.LOGS).addTags(CATags.DUPLICATOR_WOOD);
-			//this.tag(BlockTags.LEAVES).add(CABlocks.CHERRY_LEAVES.get(), CABlocks.DUPLICATION_LEAVES.get(), CABlocks.PEACH_LEAVES.get());
+			this.tag(CATags.APPLE_LOGS).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
+			this.tag(CATags.CHERRY_LOGS).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get());
+			this.tag(CATags.PEACH_LOGS).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get());
+			this.tag(CATags.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get());
+			this.tag(BlockTags.LOGS).addTags(CATags.DUPLICATION_LOGS);
+			this.tag(BlockTags.LOGS_THAT_BURN).addTags(CATags.APPLE_LOGS, CATags.CHERRY_LOGS, CATags.PEACH_LOGS);
+			this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.MOLDY_PLANKS.get());
 		}
 	}
 }

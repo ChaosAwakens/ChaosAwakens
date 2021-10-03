@@ -1,6 +1,7 @@
 package io.github.chaosawakens.client.entity.render;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.client.entity.render.util.EntityTextureEnum;
 import io.github.chaosawakens.common.entity.AppleCowEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -9,9 +10,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Locale;
+
 @OnlyIn(Dist.CLIENT)
 public class AppleCowRender extends MobRenderer<AppleCowEntity, CowModel<AppleCowEntity>> {
-    private static final ResourceLocation APPLE_COW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow.png");
 
     public AppleCowRender(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new CowModel<>(), 0.7F);
@@ -19,6 +21,7 @@ public class AppleCowRender extends MobRenderer<AppleCowEntity, CowModel<AppleCo
 
     @Override
     public ResourceLocation getTextureLocation(AppleCowEntity entity) {
-        return APPLE_COW_TEXTURE;
+        EntityTextureEnum coatType = EntityTextureEnum.byId(entity.getTextureType());
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow/" + coatType.name().toLowerCase(Locale.ROOT) + ".png");
     }
 }
