@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.dupetree;
 
+import java.util.Random;
+
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.Block;
@@ -9,10 +11,11 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-
-import java.util.Random;
+import net.minecraft.world.server.ServerWorld;
 
 public class DuplicationTree extends Tree{
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;

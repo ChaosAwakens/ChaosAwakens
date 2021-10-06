@@ -1,7 +1,7 @@
 {
   "format_version": "1.8.0",
   "animations": {
-    "animation.whale.swimming": {
+    "swimming": {
       "loop": true,
       "animation_length": 2,
       "bones": {
@@ -77,7 +77,7 @@
         }
       }
     },
-    "animation.whale.death": {
+    "death": {
       "loop": true,
       "animation_length": 2,
       "bones": {

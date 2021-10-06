@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = "https://files.minecraftforge.net/maven" }
+        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -13,7 +14,7 @@ apply plugin: "eclipse"
 apply plugin: 'maven-publish'
 
 group = 'io.github'
-version = "${project.minecraftVersion}-${project.modVersion}"
+version = "${project.minecraft}-${project.modVersion}"
 archivesBaseName = project.modId
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
@@ -63,7 +64,7 @@ sourceSets {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
+    minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
 
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.16.5:${project.geckolib}")
 
@@ -76,8 +77,6 @@ dependencies {
     implementation fg.deobf("curse.maven:worldedit-225608:${project.worldedit}")
 
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
-
-    implementation fg.deobf("curse.maven:world-stripper-250603:${project.worldstripper}")
 }
 
 repositories {

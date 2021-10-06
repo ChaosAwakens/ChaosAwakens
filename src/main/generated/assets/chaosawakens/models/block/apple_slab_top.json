@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "side": "chaosawakens:block/apple_planks",
-    "bottom": "chaosawakens:block/apple_planks",
-    "top": "chaosawakens:block/apple_planks"
-  }
-}

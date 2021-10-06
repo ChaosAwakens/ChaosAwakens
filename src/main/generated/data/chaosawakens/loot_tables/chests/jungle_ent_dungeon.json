@@ -207,7 +207,7 @@
               }
             }
           ],
-          "name": "minecraft:bamboo"
+          "name": "minecraft:vine"
         },
         {
           "type": "minecraft:item",
@@ -222,7 +222,7 @@
               }
             }
           ],
-          "name": "minecraft:bamboo"
+          "name": "minecraft:vine"
         },
         {
           "type": "minecraft:item",

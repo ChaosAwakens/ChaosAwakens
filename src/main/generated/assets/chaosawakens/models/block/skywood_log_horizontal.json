@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "side": "chaosawakens:block/skywood_log",
-    "end": "chaosawakens:block/skywood_log_top"
-  }
-}

@@ -1,6 +1,9 @@
 package io.github.chaosawakens.common.items;
 
+import java.util.Map;
+
 import com.google.common.collect.ImmutableMap;
+
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -12,8 +15,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import java.util.Map;
-
 public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 	
 	private final EnchantmentData[] enchantments;
@@ -23,10 +24,9 @@ public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 		Map<Block, Block> temp = (new ImmutableMap.Builder<Block, Block>()).putAll(AxeItem.STRIPABLES)
 				.put(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get())
 				.put(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get())
-				.put(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get())
 				.put(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get())
-				.put(CABlocks.SKYWOOD_LOG.get(), CABlocks.STRIPPED_SKYWOOD_LOG.get()).build();
-
+				.put(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get()).build();
+				
 		AxeItem.STRIPABLES = temp;
 	}
 	
