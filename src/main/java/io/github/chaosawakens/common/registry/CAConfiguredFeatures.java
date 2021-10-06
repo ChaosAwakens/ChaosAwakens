@@ -218,8 +218,6 @@ public class CAConfiguredFeatures {
 	}
 
 	public static final class States {
-		private static final BlockState BLACKSTONE = Blocks.BLACKSTONE.defaultBlockState();
-
 		private static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.defaultBlockState();
 		private static final BlockState APPLE_LOG = CABlocks.APPLE_LOG.get().defaultBlockState();
 		private static final BlockState CHERRY_LOG = CABlocks.CHERRY_LOG.get().defaultBlockState();

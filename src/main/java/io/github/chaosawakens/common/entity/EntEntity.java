@@ -21,12 +21,10 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private final Types entType;
 
     public EntEntity(EntityType<? extends AnimatableMonsterEntity> type, World worldIn, Types entType) {
         super(type, worldIn);
         this.noCulling = true;
-        this.entType = entType;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

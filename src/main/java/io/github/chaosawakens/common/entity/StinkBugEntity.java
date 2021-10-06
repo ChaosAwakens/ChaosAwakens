@@ -2,13 +2,18 @@ package io.github.chaosawakens.common.entity;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.GuardianEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -73,5 +78,15 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
     @Override
     public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
         return null;
+    }
+
+    public boolean hurt(DamageSource damageSource, float p_70097_2_) {
+        if (!damageSource.isMagic() && damageSource.getDirectEntity() instanceof LivingEntity) {
+            LivingEntity livingentity = (LivingEntity)damageSource.getDirectEntity();
+            if (!damageSource.isExplosion()) {
+                livingentity.addEffect(new EffectInstance(new EffectInstance(Effects.CONFUSION, 200, 0)));
+            }
+        }
+        return super.hurt(damageSource, p_70097_2_);
     }
 }

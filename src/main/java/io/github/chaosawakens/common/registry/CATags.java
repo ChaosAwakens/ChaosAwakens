@@ -16,12 +16,12 @@ public class CATags {
 	
 	// Block tags
 	public static final ITag.INamedTag<Block> BASE_STONE_CRYSTAL = BlockTags.bind(ChaosAwakens.MODID + ":base_stone_crystal");
-	
 	public static final ITag.INamedTag<Block> MINERS_DREAM_MINEABLE = BlockTags.bind(ChaosAwakens.MODID + ":miners_dream_mineable");
-	
-	public static final ITag.INamedTag<Block> AIR_BLOCKS = BlockTags.bind("air");
-	public static final ITag.INamedTag<Block> DUPLICATOR_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":duplicator_logs");
-	
+	public static final ITag.INamedTag<Block> APPLE_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":apple_logs");
+	public static final ITag.INamedTag<Block> CHERRY_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":cherry_logs");
+	public static final ITag.INamedTag<Block> PEACH_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":peach_logs");
+	public static final ITag.INamedTag<Block> DUPLICATION_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":duplication_logs");
+
 	// Item tags
 	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID + ":custom_tooltips");
 	
