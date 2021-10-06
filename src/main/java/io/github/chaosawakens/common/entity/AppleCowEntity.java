@@ -8,6 +8,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -30,7 +31,6 @@ import java.time.temporal.ChronoField;
 
 public class AppleCowEntity extends AnimalEntity {
     private static final DataParameter<Integer> TEXTURE_TYPE = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
-
 
     public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -161,5 +161,26 @@ public class AppleCowEntity extends AnimalEntity {
 
     public int getTextureType() {
         return this.entityData.get(TEXTURE_TYPE);
+    }
+
+    public void thunderHit(ServerWorld serverWorld, LightningBoltEntity lightningBoltEntity) {
+        if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.CARROT_PIG.get(), (timer) -> {})) {
+            CarrotPigEntity carrotPigEntity = CAEntityTypes.CARROT_PIG.get().create(serverWorld);
+            assert carrotPigEntity != null;
+            carrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
+            carrotPigEntity.setNoAi(this.isNoAi());
+            carrotPigEntity.setBaby(this.isBaby());
+            if (this.hasCustomName()) {
+                carrotPigEntity.setCustomName(this.getCustomName());
+                carrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());
+            }
+
+            carrotPigEntity.setPersistenceRequired();
+            net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, carrotPigEntity);
+            serverWorld.addFreshEntity(carrotPigEntity);
+            this.remove();
+        } else {
+            super.thunderHit(serverWorld, lightningBoltEntity);
+        }
     }
 }

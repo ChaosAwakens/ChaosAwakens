@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.events;
 
 import io.github.chaosawakens.common.config.CAConfig;
+
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -47,6 +48,18 @@ public class MiscEventHandler {
                 }
             }
         }
+      //  LivingEntity whale = (LivingEntity) event.getEntity();
+      //  if(whale instanceof WhaleEntity) {
+        	//if(whale.getHealth() <= 0 && !whale.level.isClientSide()) {
+        	//	++whale.deathTime;
+        	//	if(whale.level.random.nextDouble() <= 0.8D && whale.deathTime >= 100) {
+        	   //     whale.level.explode(whale, whale.getX(), whale.getY(), whale.getZ(), 20F, Explosion.Mode.DESTROY);
+        	   //     ((WhaleEntity) whale).spawnLingeringCloud();
+        	   //     whale.remove();
+        	//	}
+        	//}
+        	
+        //}
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

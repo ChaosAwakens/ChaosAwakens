@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/netherrack_ruby_ore"
+  }
+}

@@ -6,6 +6,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class GoldenAppleCowEntity extends AnimalEntity {
-
     public GoldenAppleCowEntity(EntityType<? extends GoldenAppleCowEntity> type, World worldIn) {
         super(type, worldIn);
     }
@@ -87,5 +87,26 @@ public class GoldenAppleCowEntity extends AnimalEntity {
 
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
+    }
+
+    public void thunderHit(ServerWorld serverWorld, LightningBoltEntity lightningBoltEntity) {
+        if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.GOLDEN_CARROT_PIG.get(), (timer) -> {})) {
+            GoldenCarrotPigEntity goldenCarrotPigEntity = CAEntityTypes.GOLDEN_CARROT_PIG.get().create(serverWorld);
+            assert goldenCarrotPigEntity != null;
+            goldenCarrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
+            goldenCarrotPigEntity.setNoAi(this.isNoAi());
+            goldenCarrotPigEntity.setBaby(this.isBaby());
+            if (this.hasCustomName()) {
+                goldenCarrotPigEntity.setCustomName(this.getCustomName());
+                goldenCarrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());
+            }
+
+            goldenCarrotPigEntity.setPersistenceRequired();
+            net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, goldenCarrotPigEntity);
+            serverWorld.addFreshEntity(goldenCarrotPigEntity);
+            this.remove();
+        } else {
+            super.thunderHit(serverWorld, lightningBoltEntity);
+        }
     }
 }

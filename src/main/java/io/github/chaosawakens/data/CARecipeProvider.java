@@ -1,14 +1,5 @@
 package io.github.chaosawakens.data;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.Consumer;
-
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,6 +13,14 @@ import net.minecraft.item.crafting.CookingRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * This class is to make recipes that have tags, and mostly shapeless/smelting recipes. It does work for more diverse recipes. More diverse recipes however
