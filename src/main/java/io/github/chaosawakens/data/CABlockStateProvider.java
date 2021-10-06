@@ -43,10 +43,12 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_COW.get());
         this.simpleBlock(CABlocks.FOSSILISED_CREEPER.get());
         this.simpleBlock(CABlocks.FOSSILISED_DOLPHIN.get());
+        this.simpleBlock(CABlocks.FOSSILISED_DONKEY.get());
         this.simpleBlock(CABlocks.FOSSILISED_DROWNED.get());
         this.simpleBlock(CABlocks.FOSSILISED_EVOKER.get());
         this.simpleBlock(CABlocks.FOSSILISED_FOX.get());
         this.simpleBlock(CABlocks.FOSSILISED_GIANT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_GUARDIAN.get());
         this.simpleBlock(CABlocks.FOSSILISED_HUSK.get());
         this.simpleBlock(CABlocks.FOSSILISED_ILLUSIONER.get());
         this.simpleBlock(CABlocks.FOSSILISED_IRON_GOLEM.get());
@@ -55,21 +57,48 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_OCELOT.get());
         this.simpleBlock(CABlocks.FOSSILISED_PANDA.get());
         this.simpleBlock(CABlocks.FOSSILISED_PIG.get());
+        this.simpleBlock(CABlocks.FOSSILISED_PHANTOM.get());
         this.simpleBlock(CABlocks.FOSSILISED_PILLAGER.get());
+        this.simpleBlock(CABlocks.FOSSILISED_POLAR_BEAR.get());
         this.simpleBlock(CABlocks.FOSSILISED_PUFFERFISH.get());
         this.simpleBlock(CABlocks.FOSSILISED_RABBIT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_RAVAGER.get());
         this.simpleBlock(CABlocks.FOSSILISED_SALMON.get());
         this.simpleBlock(CABlocks.FOSSILISED_SHEEP.get());
         this.simpleBlock(CABlocks.FOSSILISED_SKELETON.get());
+        this.simpleBlock(CABlocks.FOSSILISED_SKELETON_HORSE.get());
         this.simpleBlock(CABlocks.FOSSILISED_SLIME.get());
         this.simpleBlock(CABlocks.FOSSILISED_SNOW_GOLEM.get());
         this.simpleBlock(CABlocks.FOSSILISED_SPIDER.get());
+        this.simpleBlock(CABlocks.FOSSILISED_SQUID.get());
         this.simpleBlock(CABlocks.FOSSILISED_STRAY.get());
         this.simpleBlock(CABlocks.FOSSILISED_TROPICAL_FISH.get());
         this.simpleBlock(CABlocks.FOSSILISED_TURTLE.get());
+        this.simpleBlock(CABlocks.FOSSILISED_VILLAGER.get());
         this.simpleBlock(CABlocks.FOSSILISED_VINDICATOR.get());
+        this.simpleBlock(CABlocks.FOSSILISED_WANDERING_TRADER.get());
         this.simpleBlock(CABlocks.FOSSILISED_WOLF.get());
         this.simpleBlock(CABlocks.FOSSILISED_ZOMBIE.get());
+        this.simpleBlock(CABlocks.FOSSILISED_ZOMBIE_HORSE.get());
+
+        this.simpleBlock(CABlocks.FOSSILISED_CRIMSON_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_WARPED_ENT.get());
+
+        this.simpleBlock(CABlocks.FOSSILISED_BLAZE.get());
+        this.simpleBlock(CABlocks.FOSSILISED_GHAST.get());
+        this.simpleBlock(CABlocks.FOSSILISED_HOGLIN.get());
+        this.simpleBlock(CABlocks.FOSSILISED_ENDERMAN_NETHERRACK.get());
+        this.simpleBlock(CABlocks.FOSSILISED_MAGMA_CUBE_NETHERRACK.get());
+        this.simpleBlock(CABlocks.FOSSILISED_MAGMA_CUBE_BLACKSTONE.get());
+        this.simpleBlock(CABlocks.FOSSILISED_PIGLIN.get());
+        this.simpleBlock(CABlocks.FOSSILISED_SKELETON_SOUL_SOIL.get());
+        this.simpleBlock(CABlocks.FOSSILISED_STRIDER.get());
+        this.simpleBlock(CABlocks.FOSSILISED_WITHER_SKELETON.get());
+        this.simpleBlock(CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.get());
+
+        this.simpleBlock(CABlocks.FOSSILISED_ENDERMAN_END_STONE.get());
+        this.simpleBlock(CABlocks.FOSSILISED_ENDERMITE.get());
+        this.simpleBlock(CABlocks.FOSSILISED_SHULKER.get());
 
         this.simpleBlock(CABlocks.RUBY_ORE.get());
         this.simpleBlock(CABlocks.NETHERRACK_RUBY_ORE.get());

@@ -44,12 +44,13 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_cow", chaosRL("fossilised_cow"));
 		this.cubeAll("fossilised_creeper", chaosRL("fossilised_creeper"));
 		this.cubeAll("fossilised_dolphin", chaosRL("fossilised_dolphin"));
+		this.cubeAll("fossilised_donkey", chaosRL("fossilised_donkey"));
 		this.cubeAll("fossilised_drowned", chaosRL("fossilised_drowned"));
 		this.cubeAll("fossilised_evoker", chaosRL("fossilised_evoker"));
 		this.cubeAll("fossilised_fox", chaosRL("fossilised_fox"));
 		this.cubeAll("fossilised_giant", chaosRL("fossilised_giant"));
-		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
-//		this.cubeBottomTop("fossilised_husk", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
+		this.cubeAll("fossilised_guardian", chaosRL("fossilised_guardian"));
+		this.cubeBottomTop("fossilised_husk", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
 		this.cubeAll("fossilised_illusioner", chaosRL("fossilised_illusioner"));
 		this.cubeAll("fossilised_iron_golem", chaosRL("fossilised_iron_golem"));
 		this.cubeAll("fossilised_llama", chaosRL("fossilised_llama"));
@@ -57,21 +58,48 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_ocelot", chaosRL("fossilised_ocelot"));
 		this.cubeAll("fossilised_panda", chaosRL("fossilised_panda"));
 		this.cubeAll("fossilised_pig", chaosRL("fossilised_pig"));
+		this.cubeAll("fossilised_phantom", chaosRL("fossilised_phantom"));
 		this.cubeAll("fossilised_pillager", chaosRL("fossilised_pillager"));
+		this.cubeAll("fossilised_polar_bear", chaosRL("fossilised_polar_bear"));
 		this.cubeAll("fossilised_pufferfish", chaosRL("fossilised_pufferfish"));
 		this.cubeAll("fossilised_rabbit", chaosRL("fossilised_rabbit"));
+		this.cubeAll("fossilised_ravager", chaosRL("fossilised_ravager"));
 		this.cubeAll("fossilised_salmon", chaosRL("fossilised_salmon"));
 		this.cubeAll("fossilised_sheep", chaosRL("fossilised_sheep"));
 		this.cubeAll("fossilised_skeleton", chaosRL("fossilised_skeleton"));
+		this.cubeAll("fossilised_skeleton_horse", chaosRL("fossilised_skeleton_horse"));
 		this.cubeAll("fossilised_slime", chaosRL("fossilised_slime"));
 		this.cubeAll("fossilised_snow_golem", chaosRL("fossilised_snow_golem"));
 		this.cubeAll("fossilised_spider", chaosRL("fossilised_spider"));
+		this.cubeAll("fossilised_squid", chaosRL("fossilised_squid"));
 		this.cubeAll("fossilised_stray", chaosRL("fossilised_stray"));
 		this.cubeAll("fossilised_tropical_fish", chaosRL("fossilised_tropical_fish"));
 		this.cubeAll("fossilised_turtle", chaosRL("fossilised_turtle"));
+		this.cubeAll("fossilised_villager", chaosRL("fossilised_villager"));
 		this.cubeAll("fossilised_vindicator", chaosRL("fossilised_vindicator"));
+		this.cubeAll("fossilised_wandering_trader", chaosRL("fossilised_wandering_trader"));
 		this.cubeAll("fossilised_wolf", chaosRL("fossilised_wolf"));
 		this.cubeAll("fossilised_zombie", chaosRL("fossilised_zombie"));
+		this.cubeAll("fossilised_zombie_horse", chaosRL("fossilised_zombie_horse"));
+
+		this.cubeAll("fossilised_crimson_ent", chaosRL("fossilised_crimson_ent"));
+		this.cubeAll("fossilised_warped_ent", chaosRL("fossilised_warped_ent"));
+
+		this.cubeAll("fossilised_blaze", chaosRL("fossilised_blaze"));
+		this.cubeAll("fossilised_ghast", chaosRL("fossilised_ghast"));
+		this.cubeAll("fossilised_hoglin", chaosRL("fossilised_hoglin"));
+		this.cubeAll("fossilised_enderman_netherrack", chaosRL("fossilised_enderman_netherrack"));
+		this.cubeAll("fossilised_magma_cube_netherrack", chaosRL("fossilised_magma_cube_netherrack"));
+		this.cubeAll("fossilised_magma_cube_blackstone", chaosRL("fossilised_magma_cube_blackstone"));
+		this.cubeAll("fossilised_piglin", chaosRL("fossilised_piglin"));
+		this.cubeAll("fossilised_skeleton_soul_soil", chaosRL("fossilised_skeleton_soul_soil"));
+		this.cubeAll("fossilised_strider", chaosRL("fossilised_strider"));
+		this.cubeAll("fossilised_wither_skeleton", chaosRL("fossilised_wither_skeleton"));
+		this.cubeAll("fossilised_zombified_piglin", chaosRL("fossilised_zombified_piglin"));
+
+		this.cubeAll("fossilised_enderman_end_stone", chaosRL("fossilised_enderman_end_stone"));
+		this.cubeAll("fossilised_endermite", chaosRL("fossilised_endermite"));
+		this.cubeAll("fossilised_shulker", chaosRL("fossilised_shulker"));
 
 		this.cubeAll("ruby_ore", chaosRL("ruby_ore"));
 		this.cubeAll("netherrack_ruby_ore", chaosRL("netherrack_ruby_ore"));
@@ -189,10 +217,15 @@ public class CABlockModelProvider extends BlockModelProvider {
 	private ResourceLocation mcRL(String texture) {
 		return new ResourceLocation("minecraft", BLOCK_FOLDER + "/" + texture);
 	}
-	
+
 	@Override
 	public BlockModelBuilder cubeAll(String name, ResourceLocation texture) {
 		return singleTexture(name, mcLoc(BLOCK_FOLDER + "/cube_all"), "all", texture);
+	}
+
+	@Override
+	public BlockModelBuilder cubeBottomTop(String name, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("bottom", bottom).texture("top", top);
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;

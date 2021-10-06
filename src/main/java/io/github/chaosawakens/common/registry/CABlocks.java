@@ -20,11 +20,9 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nullable;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
-import java.util.stream.Stream;
 
 public class CABlocks {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
@@ -133,6 +131,7 @@ public class CABlocks {
 	public static final RegistryObject<AntInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new AntInfestedOre(CAEntityTypes.TERMITE, Block.Properties.copy(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
 
 	// FOSSILISED MOBS
+	// Overworld (CA)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_ENT = registerBlock("fossilised_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_RUBY_BUG = registerBlock("fossilised_ruby_bug", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
@@ -146,6 +145,7 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> FOSSILISED_CARROT_PIG = registerBlock("fossilised_carrot_pig", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_GOLDEN_CARROT_PIG = registerBlock("fossilised_golden_carrot_pig", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 
+	// Overworld (Vanilla)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_BEE = registerBlock("fossilised_bee", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_CAVE_SPIDER = registerBlock("fossilised_cave_spider", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_CHICKEN = registerBlock("fossilised_chicken", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
@@ -153,10 +153,12 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> FOSSILISED_COW = registerBlock("fossilised_cow", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_CREEPER = registerBlock("fossilised_creeper", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_DOLPHIN = registerBlock("fossilised_dolphin", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_DONKEY = registerBlock("fossilised_donkey", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_DROWNED = registerBlock("fossilised_drowned", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_EVOKER = registerBlock("fossilised_evoker", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_FOX = registerBlock("fossilised_fox", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_GIANT = registerBlock("fossilised_giant", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_GUARDIAN = registerBlock("fossilised_guardian", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_HUSK = registerBlock("fossilised_husk", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_ILLUSIONER = registerBlock("fossilised_illusioner", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_IRON_GOLEM = registerBlock("fossilised_iron_golem", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
@@ -165,21 +167,53 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> FOSSILISED_OCELOT = registerBlock("fossilised_ocelot", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_PANDA = registerBlock("fossilised_panda", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_PIG = registerBlock("fossilised_pig", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_PHANTOM = registerBlock("fossilised_phantom", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_PILLAGER = registerBlock("fossilised_pillager", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_POLAR_BEAR = registerBlock("fossilised_polar_bear", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_PUFFERFISH = registerBlock("fossilised_pufferfish", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_RABBIT = registerBlock("fossilised_rabbit", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_RAVAGER = registerBlock("fossilised_ravager", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_SALMON = registerBlock("fossilised_salmon", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_SHEEP = registerBlock("fossilised_sheep", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_SKELETON = registerBlock("fossilised_skeleton", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_SKELETON_HORSE = registerBlock("fossilised_skeleton_horse", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_SLIME = registerBlock("fossilised_slime", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_SNOW_GOLEM = registerBlock("fossilised_snow_golem", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_SPIDER = registerBlock("fossilised_spider", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_SQUID = registerBlock("fossilised_squid", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_STRAY = registerBlock("fossilised_stray", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_TROPICAL_FISH = registerBlock("fossilised_tropical_fish", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAFallingOreBlock> FOSSILISED_TURTLE = registerBlock("fossilised_turtle", () -> new CAFallingOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_VILLAGER = registerBlock("fossilised_villager", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_VINDICATOR = registerBlock("fossilised_vindicator", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_WANDERING_TRADER = registerBlock("fossilised_wandering_trader", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_WOLF = registerBlock("fossilised_wolf", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_ZOMBIE = registerBlock("fossilised_zombie", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_ZOMBIE_HORSE = registerBlock("fossilised_zombie_horse", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+
+	// Nether (CA)
+	public static final RegistryObject<CAOreBlock> FOSSILISED_CRIMSON_ENT = registerBlock("fossilised_crimson_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_WARPED_ENT = registerBlock("fossilised_warped_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+
+	// Nether (Vanilla)
+	public static final RegistryObject<CAOreBlock> FOSSILISED_BLAZE = registerBlock("fossilised_blaze", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_GHAST = registerBlock("fossilised_ghast", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_HOGLIN = registerBlock("fossilised_hoglin", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_ENDERMAN_NETHERRACK = registerBlock("fossilised_enderman_netherrack", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_MAGMA_CUBE_NETHERRACK = registerBlock("fossilised_magma_cube_netherrack", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_MAGMA_CUBE_BLACKSTONE = registerBlock("fossilised_magma_cube_blackstone", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_PIGLIN = registerBlock("fossilised_piglin", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_SKELETON_SOUL_SOIL = registerBlock("fossilised_skeleton_soul_soil", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_STRIDER = registerBlock("fossilised_strider", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_WITHER_SKELETON = registerBlock("fossilised_wither_skeleton", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_ZOMBIFIED_PIGLIN = registerBlock("fossilised_zombified_piglin", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+
+	// End (CA)
+
+	// End (Vanilla)
+	public static final RegistryObject<CAOreBlock> FOSSILISED_ENDERMAN_END_STONE = registerBlock("fossilised_enderman_end_stone", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_ENDERMITE = registerBlock("fossilised_endermite", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_SHULKER = registerBlock("fossilised_shulker", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 
 	// MINERAL BLOCKS
 	public static final RegistryObject<Block> AMETHYST_BLOCK = registerBlock("amethyst_block", () -> new Block(Block.Properties.copy(Blocks.EMERALD_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), CAItemGroups.blocksItemGroup);

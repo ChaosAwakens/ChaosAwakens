@@ -71,6 +71,7 @@ dependencies {
 
     implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
+
     implementation fg.deobf("curse.maven:attributefix-280510:${project.attributefix}")
 
     implementation fg.deobf("curse.maven:worldedit-225608:${project.worldedit}")

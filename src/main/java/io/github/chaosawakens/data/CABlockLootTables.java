@@ -104,10 +104,12 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_COW.get());
 		dropSelf(CABlocks.FOSSILISED_CREEPER.get());
 		dropSelf(CABlocks.FOSSILISED_DOLPHIN.get());
+		dropSelf(CABlocks.FOSSILISED_DONKEY.get());
 		dropSelf(CABlocks.FOSSILISED_DROWNED.get());
 		dropSelf(CABlocks.FOSSILISED_EVOKER.get());
 		dropSelf(CABlocks.FOSSILISED_FOX.get());
 		dropSelf(CABlocks.FOSSILISED_GIANT.get());
+		dropSelf(CABlocks.FOSSILISED_GUARDIAN.get());
 		dropSelf(CABlocks.FOSSILISED_HUSK.get());
 		dropSelf(CABlocks.FOSSILISED_ILLUSIONER.get());
 		dropSelf(CABlocks.FOSSILISED_IRON_GOLEM.get());
@@ -116,21 +118,48 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_OCELOT.get());
 		dropSelf(CABlocks.FOSSILISED_PANDA.get());
 		dropSelf(CABlocks.FOSSILISED_PIG.get());
+		dropSelf(CABlocks.FOSSILISED_PHANTOM.get());
 		dropSelf(CABlocks.FOSSILISED_PILLAGER.get());
+		dropSelf(CABlocks.FOSSILISED_POLAR_BEAR.get());
 		dropSelf(CABlocks.FOSSILISED_PUFFERFISH.get());
 		dropSelf(CABlocks.FOSSILISED_RABBIT.get());
+		dropSelf(CABlocks.FOSSILISED_RAVAGER.get());
 		dropSelf(CABlocks.FOSSILISED_SALMON.get());
 		dropSelf(CABlocks.FOSSILISED_SHEEP.get());
 		dropSelf(CABlocks.FOSSILISED_SKELETON.get());
+		dropSelf(CABlocks.FOSSILISED_SKELETON_HORSE.get());
 		dropSelf(CABlocks.FOSSILISED_SLIME.get());
 		dropSelf(CABlocks.FOSSILISED_SNOW_GOLEM.get());
 		dropSelf(CABlocks.FOSSILISED_SPIDER.get());
+		dropSelf(CABlocks.FOSSILISED_SQUID.get());
 		dropSelf(CABlocks.FOSSILISED_STRAY.get());
 		dropSelf(CABlocks.FOSSILISED_TROPICAL_FISH.get());
 		dropSelf(CABlocks.FOSSILISED_TURTLE.get());
+		dropSelf(CABlocks.FOSSILISED_VILLAGER.get());
 		dropSelf(CABlocks.FOSSILISED_VINDICATOR.get());
+		dropSelf(CABlocks.FOSSILISED_WANDERING_TRADER.get());
 		dropSelf(CABlocks.FOSSILISED_WOLF.get());
 		dropSelf(CABlocks.FOSSILISED_ZOMBIE.get());
+		dropSelf(CABlocks.FOSSILISED_ZOMBIE_HORSE.get());
+
+		dropSelf(CABlocks.FOSSILISED_CRIMSON_ENT.get());
+		dropSelf(CABlocks.FOSSILISED_WARPED_ENT.get());
+
+		dropSelf(CABlocks.FOSSILISED_BLAZE.get());
+		dropSelf(CABlocks.FOSSILISED_GHAST.get());
+		dropSelf(CABlocks.FOSSILISED_HOGLIN.get());
+		dropSelf(CABlocks.FOSSILISED_ENDERMAN_NETHERRACK.get());
+		dropSelf(CABlocks.FOSSILISED_MAGMA_CUBE_NETHERRACK.get());
+		dropSelf(CABlocks.FOSSILISED_MAGMA_CUBE_BLACKSTONE.get());
+		dropSelf(CABlocks.FOSSILISED_PIGLIN.get());
+		dropSelf(CABlocks.FOSSILISED_SKELETON_SOUL_SOIL.get());
+		dropSelf(CABlocks.FOSSILISED_STRIDER.get());
+		dropSelf(CABlocks.FOSSILISED_WITHER_SKELETON.get());
+		dropSelf(CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.get());
+
+		dropSelf(CABlocks.FOSSILISED_ENDERMAN_END_STONE.get());
+		dropSelf(CABlocks.FOSSILISED_ENDERMITE.get());
+		dropSelf(CABlocks.FOSSILISED_SHULKER.get());
 
 		dropSelf(CABlocks.GATE_BLOCK.get());
 		dropSelf(CABlocks.RANDOM_TELEPORT_BLOCK.get());
