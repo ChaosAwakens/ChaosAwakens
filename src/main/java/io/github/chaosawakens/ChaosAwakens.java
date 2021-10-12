@@ -60,7 +60,8 @@ public class ChaosAwakens {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 		}
-
+		
+		//Register the deferred registers
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
@@ -73,25 +74,26 @@ public class ChaosAwakens {
 		CAVillagers.POI_TYPES.register(eventBus);
 		CAVillagers.PROFESSIONS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
-
-		if (ModList.get().isLoaded("projecte")) {
-			CAEMCValues.init();
-		}
-
-		if (ModList.get().isLoaded("jeresources")) {
-			CAJER.init();
-		}
-
+		
+		ModList modList = ModList.get();
+		if (modList.isLoaded("projecte"))CAEMCValues.init();
+		if (modList.isLoaded("jeresources"))CAJER.init();
+		
 		//Register to the forge event bus
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
-		MinecraftForge.EVENT_BUS.register(new MiscEventHandler());
-		MinecraftForge.EVENT_BUS.register(new LoginEventHandler());
+		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
+		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
+		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
+		forgeBus.addListener(MiscEventHandler::onEntityJoin);
+		forgeBus.addListener(LoginEventHandler::onPlayerLogin);
+		forgeBus.addListener(GiantEventHandler::onEntityJoin);
+		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);
+		forgeBus.addListener(EventPriority.LOWEST, MiscEventHandler::onMobDrops);
+		forgeBus.register(this);
+		
+		//Check for updates
 		if (CAConfig.COMMON.showUpdateMessage.get())
 			UpdateHandler.init();
-		MinecraftForge.EVENT_BUS.register(new GiantEventHandler());
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
-		MinecraftForge.EVENT_BUS.addListener(CraftingEventSubscriber::onItemCraftedEvent);
-		MinecraftForge.EVENT_BUS.register(this);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}

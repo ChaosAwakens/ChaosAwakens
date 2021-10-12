@@ -1,7 +1,8 @@
 package io.github.chaosawakens.common.events;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import java.util.Objects;
 
+import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -24,115 +25,94 @@ import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.util.Objects;
 
 public class MiscEventHandler {
-
-    @SubscribeEvent
-    public void LivingDeathEvent(LivingDeathEvent event) {
-        if (CAConfig.COMMON.enableDragonEggRespawns.get()) {
-            if (event.getEntityLiving() == null)
-                return;
-            MinecraftServer server = event.getEntity().getServer();
-            if (server == null)
-                return;
-            if (event.getEntity().getCommandSenderWorld().equals(server.getLevel(World.END))) {
-                if (event.getEntity() instanceof EnderDragonEntity) {
-                    EnderDragonEntity dragon = (EnderDragonEntity) event.getEntity();
-                    if (dragon.getDragonFight() != null && dragon.getDragonFight().hasPreviouslyKilledDragon()) {
-                        event.getEntity().getCommandSenderWorld().setBlockAndUpdate(event.getEntity().getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
-                    }
-                }
-            }
-        }
-      //  LivingEntity whale = (LivingEntity) event.getEntity();
-      //  if(whale instanceof WhaleEntity) {
-        	//if(whale.getHealth() <= 0 && !whale.level.isClientSide()) {
-        	//	++whale.deathTime;
-        	//	if(whale.level.random.nextDouble() <= 0.8D && whale.deathTime >= 100) {
-        	   //     whale.level.explode(whale, whale.getX(), whale.getY(), whale.getZ(), 20F, Explosion.Mode.DESTROY);
-        	   //     ((WhaleEntity) whale).spawnLingeringCloud();
-        	   //     whale.remove();
-        	//	}
-        	//}
-        	
-        //}
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onMobDrops(LivingDropsEvent event) {
-        ItemStack stack;
-        ItemEntity drop;
-
-        // ENDER DRAGON
-        if (event.getEntityLiving() instanceof EnderDragonEntity) {
-            EnderDragonEntity dragon = (EnderDragonEntity) event.getEntityLiving();
-
-            // Drop #1: Ender Dragon Scales
-            int amount = 8 + (int) (Math.random() * 6) + (int) (Math.random() * event.getLootingLevel() * 4);
-            if (Objects.requireNonNull(dragon.getDragonFight()).hasPreviouslyKilledDragon())
-                amount /= 2; // Amount is halved with repeat kills.
-            stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
-            drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
-            event.getDrops().add(drop);
-
-            // Drop #2: Ender Dragon Head
-            double chance = 0.1D + event.getLootingLevel() * 0.1D;
-            if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
-                stack = new ItemStack(Items.DRAGON_HEAD, 1);
-                drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
-                event.getDrops().add(drop);
-            }
-        }
-        // ZOMBIE
-        if (event.getEntityLiving() instanceof ZombieEntity) {
-            // Drop #1: Zombie Head
-            double chance = 0.1D + event.getLootingLevel() * 0.1D;
-            if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
-                stack = new ItemStack(Items.ZOMBIE_HEAD, 1);
-                drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
-                event.getDrops().add(drop);
-            }
-        }
-        // SKELETON
-        if (event.getEntityLiving() instanceof SkeletonEntity) {
-            // Drop #1: Skeleton Skull
-            double chance = 0.1D + event.getLootingLevel() * 0.1D;
-            if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
-                stack = new ItemStack(Items.SKELETON_SKULL, 1);
-                drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
-                event.getDrops().add(drop);
-            }
-        }
-        // CREEPER
-        if (event.getEntityLiving() instanceof CreeperEntity) {
-            // Drop #1: Creeper Head
-            double chance = 0.1D + event.getLootingLevel() * 0.1D;
-            if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
-                stack = new ItemStack(Items.CREEPER_HEAD, 1);
-                drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
-                event.getDrops().add(drop);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void onEntityJoin(EntityJoinWorldEvent event) {
-        // Make villagers afraid of our entities
-        if (event.getEntity() instanceof VillagerEntity) {
-            VillagerEntity villager = (VillagerEntity) event.getEntity();
-            villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
-            villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
-            villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, GiantEntity.class, 32.0F, 0.5D, 0.5D));
-        }
-        if (event.getEntity() instanceof WanderingTraderEntity) {
-            WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) event.getEntity();
-            wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
-            wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
-            wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, GiantEntity.class, 32.0F, 0.5D, 0.5D));
-        }
-    }
+	
+	public static void livingDeathEvent(LivingDeathEvent event) {
+		if (CAConfig.COMMON.enableDragonEggRespawns.get()) {
+			if (event.getEntityLiving() == null)return;
+			MinecraftServer server = event.getEntity().getServer();
+			if (server == null)return;
+			if (event.getEntity().getCommandSenderWorld().equals(server.getLevel(World.END))) {
+				if (event.getEntity() instanceof EnderDragonEntity) {
+					EnderDragonEntity dragon = (EnderDragonEntity) event.getEntity();
+					if (dragon.getDragonFight() != null && dragon.getDragonFight().hasPreviouslyKilledDragon()) {
+						event.getEntity().getCommandSenderWorld().setBlockAndUpdate(event.getEntity().getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
+					}
+				}
+			}
+		}
+	}
+	
+	public static void onMobDrops(LivingDropsEvent event) {
+		ItemStack stack;
+		ItemEntity drop;
+		
+		// ENDER DRAGON
+		if (event.getEntityLiving() instanceof EnderDragonEntity) {
+			EnderDragonEntity dragon = (EnderDragonEntity) event.getEntityLiving();
+			
+			// Drop #1: Ender Dragon Scales
+			int amount = 8 + (int) (Math.random() * 6) + (int) (Math.random() * event.getLootingLevel() * 4);
+			if (Objects.requireNonNull(dragon.getDragonFight()).hasPreviouslyKilledDragon())
+				amount /= 2; // Amount is halved with repeat kills.
+			stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
+			drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
+			event.getDrops().add(drop);
+			
+			// Drop #2: Ender Dragon Head
+			double chance = 0.1D + event.getLootingLevel() * 0.1D;
+			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
+				stack = new ItemStack(Items.DRAGON_HEAD, 1);
+				drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
+				event.getDrops().add(drop);
+			}
+		}
+		// ZOMBIE
+		if (event.getEntityLiving() instanceof ZombieEntity) {
+			// Drop #1: Zombie Head
+			double chance = 0.1D + event.getLootingLevel() * 0.1D;
+			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
+				stack = new ItemStack(Items.ZOMBIE_HEAD, 1);
+				drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
+				event.getDrops().add(drop);
+			}
+		}
+		// SKELETON
+		if (event.getEntityLiving() instanceof SkeletonEntity) {
+			// Drop #1: Skeleton Skull
+			double chance = 0.1D + event.getLootingLevel() * 0.1D;
+			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
+				stack = new ItemStack(Items.SKELETON_SKULL, 1);
+				drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
+				event.getDrops().add(drop);
+			}
+		}
+		// CREEPER
+		if (event.getEntityLiving() instanceof CreeperEntity) {
+			// Drop #1: Creeper Head
+			double chance = 0.1D + event.getLootingLevel() * 0.1D;
+			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
+				stack = new ItemStack(Items.CREEPER_HEAD, 1);
+				drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
+				event.getDrops().add(drop);
+			}
+		}
+	}
+	
+	public static void onEntityJoin(EntityJoinWorldEvent event) {
+		// Make villagers afraid of our entities
+		if (event.getEntity() instanceof VillagerEntity) {
+			VillagerEntity villager = (VillagerEntity) event.getEntity();
+			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
+			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
+			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, GiantEntity.class, 32.0F, 0.5D, 0.5D));
+		}
+		if (event.getEntity() instanceof WanderingTraderEntity) {
+			WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) event.getEntity();
+			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
+			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
+			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, GiantEntity.class, 32.0F, 0.5D, 0.5D));
+		}
+	}
 }
