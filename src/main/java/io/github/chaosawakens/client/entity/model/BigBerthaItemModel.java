@@ -13,7 +13,7 @@ public class BigBerthaItemModel extends AnimatedGeoModel<ExtendedHitWeaponItem> 
 
     @Override
     public ResourceLocation getTextureLocation(ExtendedHitWeaponItem object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/weapon/big_bertha.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/item/big_bertha_model.png");
     }
 
     @Override
