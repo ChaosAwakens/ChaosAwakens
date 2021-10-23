@@ -1,8 +1,8 @@
 modLoader="javafml"
 loaderVersion="[36,)"
-issueTrackerURL="https://github.com/Chaos-Awakens-Mod-Team/ChaosAwakens/issues"
-displayURL="https://chaosawakens.github.io/downloads.html"
-license="All Rights Reserved. Code from before v0.9 is licensed GNU LGPL v2.1."
+issueTrackerURL="https://github.com/ChaosAwakens/ChaosAwakens/issues"
+displayURL="https://chaosawakens.github.io/?#downloadsDiv"
+license="All Rights Reserved. Code created before v0.9.0.0 is licensed GNU LGPL v2.1."
 
 [[mods]]
 modId="chaosawakens"
@@ -10,7 +10,7 @@ version="${file.jarVersion}"
 displayName="Chaos Awakens"
 authors="Chaos Team"
 description='''Relive the old OreSpawn mod in newer Minecraft versions!'''
-itemIcon="chaosawakens:ultimate_pickaxe"
+itemIcon="chaosawakens:ultimate_sword"
 configBackground="chaosawakens:textures/gui/advancement_bg.png"
 
 [[dependencies.chaosawakens]]
