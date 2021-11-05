@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
@@ -26,6 +27,7 @@ abstract public class RoboEntity extends AnimatableMonsterEntity {
         this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 32.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 32.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AbstractVillagerEntity.class, 32.0F));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
