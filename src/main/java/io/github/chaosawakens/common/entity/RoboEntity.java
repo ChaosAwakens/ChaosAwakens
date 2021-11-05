@@ -27,12 +27,12 @@ abstract public class RoboEntity extends AnimatableMonsterEntity {
         this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 32.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 32.0F));
         this.goalSelector.addGoal(3, new LookAtGoal(this, AbstractVillagerEntity.class, 32.0F));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
     }
 
     @Override
