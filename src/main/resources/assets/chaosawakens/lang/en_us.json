@@ -41,8 +41,9 @@
 	"dungeon.chaosawakens.jer.ent_dungeon": "Ent Tree",
 	"dungeon.chaosawakens.jer.wasp_dungeon": "Wasp Dungeon",
 
-	"container.crystal_crafting_table": "Crystal Crafting Table",
+	"container.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
+	"container.chaosawakens.defossilizer": "Crystal Furnace",
 
 	"entity.minecraft.villager.chaosawakens.oddities_purveyor": "Oddities Purveyor",
 
@@ -368,6 +369,9 @@
 	"item.chaosawakens.cats_eye_leggings": "Cat's Eye Leggings",
 	"item.chaosawakens.cats_eye_boots": "Cat's Eye Boots",
 
+	"block.chaosawakens.defossilizer": "Defossilizer",
+	"item.chaosawakens.aluminum_power_chip": "Aluminum Power Chip",
+
 	"block.chaosawakens.fossilised_ent": "Fossilised Ent",
 	"block.chaosawakens.fossilised_hercules_beetle": "Fossilised Hercules Beetle",
 	"block.chaosawakens.fossilised_ruby_bug": "Fossilised Ruby Bug",
@@ -635,7 +639,7 @@
 	"tooltip.chaosawakens.ruby": "Bright red gem of a fire of a burning desire",
 	"tooltip.chaosawakens.amethyst": "Purple gem with interesting light manipulation properties.",
 	"tooltip.chaosawakens.uranium_ingot": "Green metallic bar, it irradiates an strange energy...",
-	"tooltip.chaosawakens.titanium_ingot": "Rare metal of unparalled hardness.",
+	"tooltip.chaosawakens.titanium_ingot": "Rare metal of unparalleled hardness.",
 	"tooltip.chaosawakens.tigers_eye": "Is it... moving?",
 	"tooltip.chaosawakens.sunstone": "Legends say it is the remains of fallen suns from ancient times.",
 	"tooltip.chaosawakens.bloodstone": "The bloody red is very unsettling",

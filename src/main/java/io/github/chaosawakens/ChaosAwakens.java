@@ -14,6 +14,7 @@ import io.github.chaosawakens.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -60,14 +61,16 @@ public class ChaosAwakens {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 		}
-		
+
 		//Register the deferred registers
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
+		CAContainerTypes.CONTAINERS.register(eventBus);
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAItems.ITEMS.register(eventBus);
 		CATileEntities.TILE_ENTITIES.register(eventBus);
+		CARecipes.RECIPE_SERIALIZERS.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
 		CAFeatures.FEATURES.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
@@ -130,6 +133,7 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
 			dataGenerator.addProvider(new CATagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
+			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, new CATagProvider.CATagProviderForBlocks(dataGenerator, existing), existing));
 			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
 		}
 	}

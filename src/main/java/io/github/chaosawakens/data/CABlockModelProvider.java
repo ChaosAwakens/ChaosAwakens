@@ -208,6 +208,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.fenceSide("skywood_slab", chaosRL("skywood_planks"));
 
 		this.cubeAll("mining_lamp", chaosRL("mining_lamp"));
+
+		this.orientableWithBottom("defossilizer", mcRL("iron_block"), chaosRL("defossilizer_front"), mcRL("iron_block"), chaosRL("defossilizer_top"));
 	}
 
 	private ResourceLocation chaosRL(String texture) {
@@ -230,7 +232,6 @@ public class CABlockModelProvider extends BlockModelProvider {
 	
 	@Override
 	public BlockModelBuilder cubeColumn(String name, ResourceLocation side, ResourceLocation end) {
-		ChaosAwakens.debug("DATAGEN", side.getPath());
 		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("end", end);
 	}
 	

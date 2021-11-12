@@ -2,16 +2,14 @@ package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.*;
+import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock;
 import io.github.chaosawakens.common.blocks.trees.FancyableTree;
 import io.github.chaosawakens.common.items.EnchantedBlockItem;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.IPositionPredicate;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -131,6 +129,7 @@ public class CABlocks {
 	public static final RegistryObject<AntInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new AntInfestedOre(CAEntityTypes.TERMITE, Block.Properties.copy(Blocks.INFESTED_STONE).noDrops().harvestLevel(1)), CAItemGroups.blocksItemGroup);
 
 	// FOSSILISED MOBS
+	public static final RegistryObject<DefossilizerBlock> DEFOSSILIZER = registerBlock("defossilizer", () -> new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.METAL)), CAItemGroups.blocksItemGroup);
 	// Overworld (CA)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_ENT = registerBlock("fossilised_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_HERCULES_BEETLE = registerBlock("fossilised_hercules_beetle", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()).withFossilExp(), CAItemGroups.blocksItemGroup);

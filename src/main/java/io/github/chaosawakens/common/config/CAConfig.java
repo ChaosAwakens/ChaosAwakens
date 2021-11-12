@@ -5,16 +5,16 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class CAConfig {
-	
+
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
-	
+
 	static {
 		final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();
 		COMMON = commonSpecPair.getLeft();
 	}
-	
+
 	public static class Common {
 		public final ConfigValue<Integer> ultimateSwordDamage;
 		public final ConfigValue<Integer> ultimateAxeDamage;
@@ -91,32 +91,32 @@ public class CAConfig {
 		public final ConfigValue<Integer> mantisClawDamage;
 		public final ConfigValue<Integer> bigHammerDamage;
 		public final ConfigValue<Integer> prismaticReaperDamage;
-		
+
 		public final ConfigValue<Integer> thunderStaffExplosionSize;
 		public final ConfigValue<Integer> thunderStaffExplosionType;
 		public final ConfigValue<Boolean> thunderStaffExplosionFire;
 		public final ConfigValue<Integer> rayGunExplosionSize;
 		public final ConfigValue<Integer> rayGunExplosionType;
 		public final ConfigValue<Boolean> rayGunExplosionFire;
-		
+
 		public final ConfigValue<Boolean> enableAutoEnchanting;
-		
+
 		public final ConfigValue<Boolean> enableDupeTree;
-		
+
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
 		public final ConfigValue<Boolean> enableRainbowAntTeleport;
 		public final ConfigValue<Boolean> enableRedAntTeleport;
 		public final ConfigValue<Boolean> enableUnstableAntTeleport;
 		public final ConfigValue<Boolean> enableTermiteTeleport;
 		public final ConfigValue<Boolean> enableButterflyTeleport;
-		
+
 		public final ConfigValue<Boolean> enableOreGen;
 		public final ConfigValue<Boolean> enableFossilGen;
 		public final ConfigValue<Boolean> enableTrollOreGen;
 		public final ConfigValue<Boolean> enableDzMineralOreGen;
 		public final ConfigValue<Boolean> spawnDzOresInOverworld;
 		public final ConfigValue<Boolean> enableNestGen;
-		
+
 		public final ConfigValue<Boolean> enableOreRubyGen;
 		public final ConfigValue<Boolean> enableOreTigersEyeGen;
 		public final ConfigValue<Boolean> enableOreAmethystGen;
@@ -131,28 +131,29 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOreSunstoneGen;
 		public final ConfigValue<Boolean> enableOreBloodstoneGen;
 		public final ConfigValue<Integer> battleAxeDamage;
-		
+
 		public final ConfigValue<Integer> berthaDamage;
-		
+
 		public final ConfigValue<Integer> queenAxeDamage;
-		
+
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
 
 		public final ConfigValue<Boolean> holidayTextures;
-		
+
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
-		public final ConfigValue<Boolean> mobHeadDrops;
-		
+		public final ConfigValue<Boolean> enderDragonHeadDrop;
+
 		public final ConfigValue<Boolean> terraforgedCheckMsg;
-		
+
 		public final ConfigValue<Boolean> showUpdateMessage;
 		public final ConfigValue<Boolean> enableTooltips;
-		
+
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Log messages");
 			terraforgedCheckMsg = builder.define("Terraforged check message active", true);
 			builder.pop();
 			builder.push("Attack Damage");
+			builder.comment(" Set damages are of the Sword \n Axe is +2 damage, Shovel is -1 damage and Pickaxe is -2 damage \n Hoes are always 1 damage");
 			builder.push("Ultimate Weapons/Tools");
 			ultimateSwordDamage = builder.define("Damage of the Ultimate Sword", 40);
 			ultimateAxeDamage = builder.define("Damage of the Ultimate Axe", 42);
@@ -313,7 +314,7 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Drops");
 			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the first death?").define("Ender Dragon Egg Respawn", true);
-			mobHeadDrops = builder.comment("Will mobs with Mob Heads drop their item?").define("Mob Head Drops", true);
+			enderDragonHeadDrop = builder.comment("Will the Ender Dragon drop her head?").define("Ender Dragon Head Drop", true);
 			builder.pop();
 			builder.push("Update Checker");
 			showUpdateMessage = builder.comment("Send messages when there is a new update?").define("Show Update Messages", true);

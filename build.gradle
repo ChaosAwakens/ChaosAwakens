@@ -16,10 +16,10 @@ group = 'io.github'
 version = "${project.minecraftVersion}-${project.modVersion}"
 archivesBaseName = project.modId
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+java.toolchain.languageVersion = JavaLanguageVersion.of 8
 
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: "official", version: "${project.minecraftVersion}"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 

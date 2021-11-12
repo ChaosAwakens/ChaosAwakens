@@ -81,6 +81,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CRYSTAL_TERMITE_NEST.get());
 		dropSelf(CABlocks.CRYSTAL_WOOD.get());
 		dropSelf(CABlocks.CRYSTAL_WOOD_PLANKS.get());
+		dropSelf(CABlocks.DEFOSSILIZER.get());
 		dropSelf(CABlocks.ENDER_EYE_BLOCK.get());
 		dropSelf(CABlocks.ENDER_PEARL_BLOCK.get());
 

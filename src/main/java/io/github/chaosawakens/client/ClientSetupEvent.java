@@ -4,6 +4,7 @@ import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.common.entity.EntEntity;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
 import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAContainerTypes;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.client.renderer.RenderType;
@@ -141,5 +142,7 @@ public class ClientSetupEvent {
                 return (flag || flag1) && p_239422_2_ instanceof PlayerEntity && ((PlayerEntity) p_239422_2_).fishing != null ? 1.0F : 0.0F;
             }
         });
+
+        CAContainerTypes.registerScreens(event);
     }
 }

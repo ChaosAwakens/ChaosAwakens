@@ -180,6 +180,7 @@ public class CAItems {
     public static final RegistryObject<Item> DEAD_STINK_BUG = ITEMS.register("dead_stink_bug", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
 
     // MISC
+    public static final RegistryObject<Item> ALUMINUM_POWER_CHIP = ITEMS.register("aluminum_power_chip", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> CRYSTAL_WOOD_SHARD = ITEMS.register("crystal_wood_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
@@ -293,15 +294,15 @@ public class CAItems {
     public static final RegistryObject<HoeItem> PLATINUM_HOE = ITEMS.register("platinum_hoe", () -> new HoeItem(CAItemTier.TOOL_PLATINUM, CAConfig.COMMON.platinumHoeDamage.get() - 7, 0.0F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup)));
 
     // Misc. Weapons
-    public static final RegistryObject<SwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_NIGHTMARE, CAConfig.COMMON.nightmareSwordDamage.get() - 28, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
+    public static final RegistryObject<SwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_NIGHTMARE, CAConfig.COMMON.nightmareSwordDamage.get() - 27, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
             new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 1), new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 1)}));
-    public static final RegistryObject<SwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.experienceSwordDamage.get() - 8, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
+    public static final RegistryObject<SwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.experienceSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
             new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 2), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.MENDING, 1)}));
-    public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new PoisonSwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.poisonSwordDamage.get() - 8, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
+    public static final RegistryObject<SwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new PoisonSwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.poisonSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
             new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 1)}));
     public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.ratSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup)));
     public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.fairySwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> MANTIS_CLAW = ITEMS.register("mantis_claw", () -> new MantisClawItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.mantisClawDamage.get() - 12, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<SwordItem> MANTIS_CLAW = ITEMS.register("mantis_claw", () -> new MantisClawItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.mantisClawDamage.get() - 7, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
     public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new BigHammerItem(CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.bigHammerDamage.get() - 12, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.prismaticReaperDamage.get() - 37, -1.9F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
             new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 4), new EnchantmentData(Enchantments.SWEEPING_EDGE, 4)}));

@@ -62,39 +62,9 @@ public class MiscEventHandler {
 			
 			// Drop #2: Ender Dragon Head
 			double chance = 0.1D + event.getLootingLevel() * 0.1D;
-			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
+			if (Math.random() < chance && CAConfig.COMMON.enderDragonHeadDrop.get()) {
 				stack = new ItemStack(Items.DRAGON_HEAD, 1);
 				drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
-				event.getDrops().add(drop);
-			}
-		}
-		// ZOMBIE
-		if (event.getEntityLiving() instanceof ZombieEntity) {
-			// Drop #1: Zombie Head
-			double chance = 0.1D + event.getLootingLevel() * 0.1D;
-			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
-				stack = new ItemStack(Items.ZOMBIE_HEAD, 1);
-				drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
-				event.getDrops().add(drop);
-			}
-		}
-		// SKELETON
-		if (event.getEntityLiving() instanceof SkeletonEntity) {
-			// Drop #1: Skeleton Skull
-			double chance = 0.1D + event.getLootingLevel() * 0.1D;
-			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
-				stack = new ItemStack(Items.SKELETON_SKULL, 1);
-				drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
-				event.getDrops().add(drop);
-			}
-		}
-		// CREEPER
-		if (event.getEntityLiving() instanceof CreeperEntity) {
-			// Drop #1: Creeper Head
-			double chance = 0.1D + event.getLootingLevel() * 0.1D;
-			if (Math.random() < chance && CAConfig.COMMON.mobHeadDrops.get()) {
-				stack = new ItemStack(Items.CREEPER_HEAD, 1);
-				drop = new ItemEntity(event.getEntityLiving().level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack);
 				event.getDrops().add(drop);
 			}
 		}
