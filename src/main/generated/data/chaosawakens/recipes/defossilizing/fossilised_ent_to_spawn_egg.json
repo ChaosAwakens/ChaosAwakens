@@ -9,7 +9,7 @@
   "power_chip_ingredient": {
     "item": "chaosawakens:aluminum_power_chip"
   },
-  "result": "chaosawakens:ent_spawn_egg",
+  "result": "chaosawakens:oak_ent_spawn_egg",
   "experience": 1,
   "defossilizing_time": 20
 }

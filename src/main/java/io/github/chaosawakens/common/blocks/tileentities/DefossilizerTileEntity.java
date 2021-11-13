@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -123,7 +122,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
         }
 
         if (progress >= WORK_TIME) {
-            finishWork(recipe, current, output);
+            finishWork(current, output);
         }
     }
 
@@ -131,7 +130,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
         progress = 0;
     }
 
-    private void finishWork(DefossilizingRecipe recipe, ItemStack current, ItemStack output) {
+    private void finishWork(ItemStack current, ItemStack output) {
         if (!current.isEmpty()) {
             current.grow(output.getCount());
         } else {

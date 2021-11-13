@@ -1,10 +1,9 @@
 package io.github.chaosawakens.common.crafting.recipe;
 
 import com.google.gson.JsonObject;
-import io.github.chaosawakens.common.blocks.CAOreBlock;
 import io.github.chaosawakens.common.registry.CARecipes;
+import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
@@ -21,8 +20,8 @@ public class DefossilizingRecipe extends AbstractDefossilizingRecipe {
         super(CARecipes.DEFOSSILIZING_RECIPE_TYPE, CARecipes.DEFOSSILIZING_SERIALIZER.get(), recipeId, ingredient1, ingredient2, ingredient3, result, experience, defossilizingTime);
     }
 
-    public DefossilizingRecipe(ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, int experience, int defossilizingTime) {
-        super(CARecipes.DEFOSSILIZING_RECIPE_TYPE, CARecipes.DEFOSSILIZING_SERIALIZER.get(), recipeId, ingredient1, ingredient2, ingredient3, result, experience, defossilizingTime);
+    public ItemStack getResult() {
+        return result;
     }
 
     @Override
@@ -40,11 +39,10 @@ public class DefossilizingRecipe extends AbstractDefossilizingRecipe {
             Ingredient fossilIngredient = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "fossil_ingredient"));
             Ingredient bucketIngredient = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "bucket_ingredient"));
             Ingredient powerChipIngredient = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "power_chip_ingredient"));
-            int count = JSONUtils.getAsInt(json, "count", 1);
             ResourceLocation itemId = new ResourceLocation(JSONUtils.getAsString(json, "result"));
             float experience = JSONUtils.getAsFloat(json, "experience", 0);
             int defossilizingTime = JSONUtils.getAsInt(json, "defossilizing_time", 10);
-            ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(itemId), count);
+            ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(itemId));
             return new DefossilizingRecipe(recipeId, fossilIngredient, bucketIngredient, powerChipIngredient, result, experience, defossilizingTime);
         }
 

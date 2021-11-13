@@ -4,12 +4,12 @@
     "item": "chaosawakens:fossilised_warped_ent"
   },
   "bucket_ingredient": {
-    "item": "minecraft:water_bucket"
+    "item": "minecraft:lava_bucket"
   },
   "power_chip_ingredient": {
     "item": "chaosawakens:aluminum_power_chip"
   },
-  "result": "chaosawakens:ent_spawn_egg",
+  "result": "chaosawakens:warped_ent_spawn_egg",
   "experience": 1,
   "defossilizing_time": 20
 }

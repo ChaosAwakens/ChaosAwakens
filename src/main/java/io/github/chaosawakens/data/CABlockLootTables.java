@@ -98,6 +98,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_CARROT_PIG.get());
 		dropSelf(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
 
+		dropSelf(CABlocks.FOSSILISED_BAT.get());
 		dropSelf(CABlocks.FOSSILISED_BEE.get());
 		dropSelf(CABlocks.FOSSILISED_CAVE_SPIDER.get());
 		dropSelf(CABlocks.FOSSILISED_CHICKEN.get());
@@ -107,6 +108,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_DOLPHIN.get());
 		dropSelf(CABlocks.FOSSILISED_DONKEY.get());
 		dropSelf(CABlocks.FOSSILISED_DROWNED.get());
+		dropSelf(CABlocks.FOSSILISED_ENDERMAN.get());
 		dropSelf(CABlocks.FOSSILISED_EVOKER.get());
 		dropSelf(CABlocks.FOSSILISED_FOX.get());
 		dropSelf(CABlocks.FOSSILISED_GIANT.get());
@@ -139,6 +141,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_VILLAGER.get());
 		dropSelf(CABlocks.FOSSILISED_VINDICATOR.get());
 		dropSelf(CABlocks.FOSSILISED_WANDERING_TRADER.get());
+		dropSelf(CABlocks.FOSSILISED_WITCH.get());
 		dropSelf(CABlocks.FOSSILISED_WOLF.get());
 		dropSelf(CABlocks.FOSSILISED_ZOMBIE.get());
 		dropSelf(CABlocks.FOSSILISED_ZOMBIE_HORSE.get());

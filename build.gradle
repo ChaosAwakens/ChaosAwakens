@@ -69,6 +69,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:projecte-226410:${project.projecte}")
 
+    implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}:api")
     implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
 
@@ -95,6 +96,7 @@ repositories {
         url = "https://www.cursemaven.com"
     }
     maven {
+        name = "GeckoLib"
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
 }

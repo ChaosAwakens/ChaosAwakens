@@ -4,7 +4,7 @@
     "item": "chaosawakens:fossilised_blaze"
   },
   "bucket_ingredient": {
-    "item": "minecraft:water_bucket"
+    "item": "minecraft:lava_bucket"
   },
   "power_chip_ingredient": {
     "item": "chaosawakens:aluminum_power_chip"

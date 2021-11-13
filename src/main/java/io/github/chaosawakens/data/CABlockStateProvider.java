@@ -36,6 +36,7 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_CARROT_PIG.get());
         this.simpleBlock(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
 
+        this.simpleBlock(CABlocks.FOSSILISED_BAT.get());
         this.simpleBlock(CABlocks.FOSSILISED_BEE.get());
         this.simpleBlock(CABlocks.FOSSILISED_CAVE_SPIDER.get());
         this.simpleBlock(CABlocks.FOSSILISED_CHICKEN.get());
@@ -45,6 +46,7 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_DOLPHIN.get());
         this.simpleBlock(CABlocks.FOSSILISED_DONKEY.get());
         this.simpleBlock(CABlocks.FOSSILISED_DROWNED.get());
+        this.simpleBlock(CABlocks.FOSSILISED_ENDERMAN.get());
         this.simpleBlock(CABlocks.FOSSILISED_EVOKER.get());
         this.simpleBlock(CABlocks.FOSSILISED_FOX.get());
         this.simpleBlock(CABlocks.FOSSILISED_GIANT.get());
@@ -78,6 +80,7 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_VINDICATOR.get());
         this.simpleBlock(CABlocks.FOSSILISED_WANDERING_TRADER.get());
         this.simpleBlock(CABlocks.FOSSILISED_WOLF.get());
+        this.simpleBlock(CABlocks.FOSSILISED_WITCH.get());
         this.simpleBlock(CABlocks.FOSSILISED_ZOMBIE.get());
         this.simpleBlock(CABlocks.FOSSILISED_ZOMBIE_HORSE.get());
 

@@ -12,13 +12,15 @@ import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.*;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -41,6 +43,7 @@ public class ChaosAwakens {
 	public static final String VERSION = "0.9.1.0";
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static ChaosAwakens INSTANCE;
+	public CAJER cajer;
 
 	public ChaosAwakens() {
 		INSTANCE = this;
@@ -80,7 +83,7 @@ public class ChaosAwakens {
 		
 		ModList modList = ModList.get();
 		if (modList.isLoaded("projecte"))CAEMCValues.init();
-		if (modList.isLoaded("jeresources"))CAJER.init();
+		if (modList.isLoaded("jeresources")) CAJER.init();
 		
 		//Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;

@@ -1,7 +1,6 @@
 package io.github.chaosawakens.data;
 
 import com.google.gson.JsonObject;
-import io.github.chaosawakens.common.registry.CARecipes;
 import io.github.chaosawakens.common.util.NameUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -11,7 +10,6 @@ import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
@@ -60,25 +58,6 @@ public class FossilRecipeBuilder {
      */
     protected void serializeExtra(JsonObject json) {
         this.extraData.forEach(consumer -> consumer.accept(json));
-    }
-
-    /**
-     * Allows extra data to be quickly appended for simple serializers. For more complex
-     * serializers, consider extending this class and overriding {@link #serializeExtra(JsonObject)}
-     * instead.
-     *
-     * @param extraDataIn Changes to make to the recipe JSON (called after base JSON is generated)
-     * @return The recipe builder
-     */
-    public FossilRecipeBuilder addExtraData(Consumer<JsonObject> extraDataIn) {
-        this.extraData.add(extraDataIn);
-        return this;
-    }
-
-    public FossilRecipeBuilder addCriterion(String name, ICriterionInstance criterion) {
-        this.advancementBuilder.addCriterion(name, criterion);
-        this.hasAdvancementCriterion = true;
-        return this;
     }
 
     public FossilRecipeBuilder setGroup(String group) {

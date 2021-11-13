@@ -43,7 +43,8 @@
 
 	"container.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
-	"container.chaosawakens.defossilizer": "Crystal Furnace",
+	"container.chaosawakens.defossilizer": "Defossilizer",
+	"container.chaosawakens.jei.defossilizer": "Defossilizer",
 
 	"entity.minecraft.villager.chaosawakens.oddities_purveyor": "Oddities Purveyor",
 
@@ -81,7 +82,14 @@
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
 	"entity.chaosawakens.explosive_ball": "Explosive Charge",
 
-	"item.chaosawakens.ent_spawn_egg": "Ent Spawn Egg",
+	"item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
+	"item.chaosawakens.birch_ent_spawn_egg": "Birch Ent Spawn Egg",
+	"item.chaosawakens.crimson_ent_spawn_egg": "Crimson Ent Spawn Egg",
+	"item.chaosawakens.dark_oak_ent_spawn_egg": "Dark Oak Ent Spawn Egg",
+	"item.chaosawakens.jungle_ent_spawn_egg": "Jungle Ent Spawn Egg",
+	"item.chaosawakens.oak_ent_spawn_egg": "Oak Ent Spawn Egg",
+	"item.chaosawakens.spruce_ent_spawn_egg": "Spruce Ent Spawn Egg",
+	"item.chaosawakens.warped_ent_spawn_egg": "Warped Ent Spawn Egg",
 	"item.chaosawakens.brown_ant_spawn_egg": "Brown Ant Spawn Egg",
 	"item.chaosawakens.rainbow_ant_spawn_egg": "Rainbow Ant Spawn Egg",
 	"item.chaosawakens.red_ant_spawn_egg": "Red Ant Spawn Egg",
@@ -370,6 +378,7 @@
 	"item.chaosawakens.cats_eye_boots": "Cat's Eye Boots",
 
 	"block.chaosawakens.defossilizer": "Defossilizer",
+	"block.chaosawakens.defossilizer.jei_desc": "Used to turn Fossilized Mobs into Spawn Eggs.",
 	"item.chaosawakens.aluminum_power_chip": "Aluminum Power Chip",
 
 	"block.chaosawakens.fossilised_ent": "Fossilised Ent",
@@ -647,5 +656,12 @@
 	"tooltip.chaosawakens.fossilised_scorpion": "It is inert... it seems it's creature isn't available yet.",
 	"tooltip.chaosawakens.fossilised_piraporu": "It is inert... it seems it's creature isn't available yet.",
 	"tooltip.chaosawakens.hercules_beetle_spawn_egg": "Hercules beetle is a W.I.P",
-	"tooltip.chaosawakens.ent_spawn_egg": "Ent is a W.I.P"
+	"tooltip.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent is a W.I.P",
+	"tooltip.chaosawakens.birch_ent_spawn_egg": "Birch Ent is a W.I.P",
+	"tooltip.chaosawakens.crimson_ent_spawn_egg": "Crimson Ent is a W.I.P",
+	"tooltip.chaosawakens.dark_oak_ent_spawn_egg": "Dark Oak Ent is a W.I.P",
+	"tooltip.chaosawakens.jungle_ent_spawn_egg": "Jungle Ent is a W.I.P",
+	"tooltip.chaosawakens.oak_ent_spawn_egg": "Oak Ent is a W.I.P",
+	"tooltip.chaosawakens.spruce_ent_spawn_egg": "Spruce Ent is a W.I.P",
+	"tooltip.chaosawakens.warped_ent_spawn_egg": "Warped Ent is a W.I.P"
 }
