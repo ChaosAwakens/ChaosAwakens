@@ -664,4 +664,16 @@
 	"tooltip.chaosawakens.oak_ent_spawn_egg": "Oak Ent is a W.I.P",
 	"tooltip.chaosawakens.spruce_ent_spawn_egg": "Spruce Ent is a W.I.P",
 	"tooltip.chaosawakens.warped_ent_spawn_egg": "Warped Ent is a W.I.P"
+	
+	"subtitles.entity.emerald_gator.attack": "Emerald Gator bites",
+	"subtitles.entity.emerald_gator.death": "Emerald Gator dies",
+	"subtitles.entity.emerald_gator.hurt": "Emerald Gator hurts",
+	"subtitles.entity.emerald_gator.walk": "Emerald Gator walks",
+	"subtitles.entity.hercules_beetle.attack": "Hercules Beetle bites",
+	"subtitles.entity.hercules_beetle.death": "Hercules Beetle dies",
+	"subtitles.entity.hercules_beetle.hurt": "Hercules Beetle screeches",
+	"subtitles.entity.hercules_beetle.walk": "Hercules Beetle walks",
+	"subtitles.entity.robo.death": "Robot dies",
+	"subtitles.entity.robo.hurt": "Robot hurts",
+	"subtitles.entity.robo.shoot": "Robot shoots"
 }
