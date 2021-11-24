@@ -1,5 +1,5 @@
 # Chaos Awakens
-Chaos Awakens is a remaster of both the very iconic mod [OreSpawn](https://www.orespawn.com/download.html) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
+Chaos Awakens is a remaster of both the very iconic mod [OreSpawn](https://www.orespawn.com/download/) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
 
 ## Download
 Due to recent drama and various mass reports by unknown sources, the mod was taken down from [*CurseForge*](https://www.curseforge.com/minecraft/mc-mods) and cannot be re-uploaded from this point forward. Please do **not** harass **anyone** in the *CurseForge* moderation team or **any** competitor mod developer for what you think they did. They are humans and we are too, and we all make mistakes.
@@ -36,6 +36,8 @@ _If you still want the original mod with no changes, please instead play the ori
 **A:** Here are a few reasons why:
 - Most *OreSpawn* textures look pretty outdated, are just lazy, or simply don't fit with Minecraft's art style;
 - The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www.youtube.com/channel/UC_Tsf31uosncmWCICYO52Dw), had commented on our former CurseForge page to not use the assets that were created for his mod, as seen in the image below. We will **not** be using anything from the mod that he owns (textures, models, etc.) unless a specific modeller of the mod gives us permission to use theirs.
+
+- in case you want the original texture pack [click here](https://www.curseforge.com/minecraft/texture-packs/orespawn) texture pack made by jtrent238
 
 ![](https://cdn.discordapp.com/attachments/836006424781914154/846513645580189706/unknown.png)
 - Even if we were granted rights to use the assets, they wouldn't fit with the existing assets, and having both would bring more issues than fix things.
