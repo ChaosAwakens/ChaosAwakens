@@ -37,7 +37,7 @@ _If you still want the original mod with no changes, please instead play the ori
 - Most *OreSpawn* textures look pretty outdated, are just lazy, or simply don't fit with Minecraft's art style;
 - The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www.youtube.com/channel/UC_Tsf31uosncmWCICYO52Dw), had commented on our former CurseForge page to not use the assets that were created for his mod, as seen in the image below. We will **not** be using anything from the mod that he owns (textures, models, etc.) unless a specific modeller of the mod gives us permission to use theirs.
 
-- in case you want the original texture pack [click here](https://www.curseforge.com/minecraft/texture-packs/orespawn) texture pack made by jtrent238
+- in case you want the original textures [click here](https://www.curseforge.com/minecraft/texture-packs/orespawn) texture pack made by jtrent238
 
 ![](https://cdn.discordapp.com/attachments/836006424781914154/846513645580189706/unknown.png)
 - Even if we were granted rights to use the assets, they wouldn't fit with the existing assets, and having both would bring more issues than fix things.
