@@ -42,8 +42,6 @@ _If you still want the original mod with no changes, please instead play the ori
 ![](https://cdn.discordapp.com/attachments/836006424781914154/846513645580189706/unknown.png)
 - Even if we were granted rights to use the assets, they wouldn't fit with the existing assets, and having both would bring more issues than fix things.
 
-- still in case you want the original textures [click here](https://www.curseforge.com/minecraft/texture-packs/orespawn) texture pack made by jtrent238
-
 ## Credits/Staff Team
 **Project Lead:** WeirdNerd, thewoundedknight
 
