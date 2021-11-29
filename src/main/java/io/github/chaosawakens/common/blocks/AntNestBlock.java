@@ -34,8 +34,7 @@ public class AntNestBlock extends Block {
         List<AggressiveAntEntity> nearbyAggressiveAntEntityList = worldIn.getEntitiesOfClass(AggressiveAntEntity.class, (new AxisAlignedBB(pos)).inflate(12.0D, 8.0D, 12.0D));
 
         if (nearbyPlayerExists.isEmpty()) return;
-        if (nearbyAntEntityList.size() > 10) return;
-        if (nearbyAggressiveAntEntityList.size() > 10) return;
+        if (nearbyAntEntityList.size() + nearbyAggressiveAntEntityList.size() > 10) return;
 
         final BlockPos abovePos = pos.above();
         final int amountToSpawn = MathHelper.nextInt(random, 0, 3);
