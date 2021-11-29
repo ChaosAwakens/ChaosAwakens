@@ -411,10 +411,10 @@
   "item.chaosawakens.zoo_cage_medium": "Средняя клетка",
   "item.chaosawakens.zoo_cage_large": "Большая клетка",
   "item.chaosawakens.zoo_cage_extra_large": "Очень большая клетка",
-  "block.chaosawakens.corn_plant": "Corn Plant",
-  "block.chaosawakens.tomato_plant": "Tomato Plant",
-  "block.chaosawakens.lettuce_plant": "Lettuce Plant",
-  "block.chaosawakens.strawberry_plant": "Strawberry Bush",
+  "block.chaosawakens.corn_plant": "Кукурузный завод",
+  "block.chaosawakens.tomato_plant": "Томатный завод",
+  "block.chaosawakens.lettuce_plant": "Салат-латук",
+  "block.chaosawakens.strawberry_plant": "Клубничный куст",
   "misc.chaosawakens.empty_inventory": "Сперва опустошите ваш инвентарь!",
   "misc.chaosawakens.inaccessible_dimension": "Похоже, это измерение еще не добавлено."
 }
