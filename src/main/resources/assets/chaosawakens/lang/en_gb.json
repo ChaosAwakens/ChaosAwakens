@@ -46,6 +46,8 @@
   "container.chaosawakens.defossilizer": "Defossilizer",
   "container.chaosawakens.jei.defossilizer": "Defossilizer",
 
+  "stat.chaosawakens.interact_with_defossilizer": "Interactions With Defossilizer",
+
   "entity.minecraft.villager.chaosawakens.oddities_purveyor": "Oddities Purveyor",
 
   "entity.chaosawakens.acacia_ent": "Acacia Ent",
@@ -113,6 +115,7 @@
   "item.chaosawakens.snow_golem_spawn_egg": "Snow Golem Spawn Egg",
   "item.chaosawakens.illusioner_spawn_egg": "Illusioner Spawn Egg",
   "item.chaosawakens.giant_spawn_egg": "Giant Spawn Egg",
+  "item.chaosawakens.whale_spawn_egg": "Whale Spawn Egg",
   "item.chaosawakens.wither_spawn_egg": "Wither Spawn Egg",
   "item.chaosawakens.ender_dragon_spawn_egg": "Ender Dragon Spawn Egg",
 
@@ -546,6 +549,7 @@
   "item.chaosawakens.rat_sword": "Rat Sword",
   "item.chaosawakens.fairy_sword": "Fairy Sword",
   "item.chaosawakens.big_hammer": "Big Hammer",
+  "item.chaosawakens.attitude_adjuster": "Attitude Adjuster",
   "item.chaosawakens.ray_gun": "A Freakin' Ray Gun!",
   "item.chaosawakens.prismatic_reaper": "Prismatic Reaper",
   "item.chaosawakens.thunder_staff": "Thunder Staff",
