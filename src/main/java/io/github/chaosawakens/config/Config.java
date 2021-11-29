@@ -367,4 +367,8 @@ public class Config implements ConfigData {
         public float hoeDamage = 1.0f;
         public float hoeAttackSpeed = 0;
     }
+    public static class RoyalGuardiaSword {
+        public float swordDamage = 750f
+        public float swordAttackSpeed = -2.4f;
+    }
 }
