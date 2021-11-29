@@ -24,6 +24,4 @@ public class CATags {
 
 	// Item tags
 	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID + ":custom_tooltips");
-	public static final ITag.INamedTag<Item> BUCKETS = ItemTags.bind(ChaosAwakens.MODID + ":buckets");
-
 }

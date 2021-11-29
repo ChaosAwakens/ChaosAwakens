@@ -114,7 +114,7 @@ public class CATagProvider extends BlockTagsProvider {
 
 		@Override
 		protected void addTags() {
-			this.tag(CATags.BUCKETS).add(Items.WATER_BUCKET, Items.MILK_BUCKET, Items.LAVA_BUCKET);
+//			this.tag(CATags.BUCKETS).add(Items.WATER_BUCKET, Items.MILK_BUCKET, Items.LAVA_BUCKET);
 		}
 	}
 }
