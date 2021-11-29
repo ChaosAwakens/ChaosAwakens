@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.client.entity.render.BattleAxeItemRender;
 import io.github.chaosawakens.client.entity.render.BigBerthaItemRender;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.enums.CAArmorMaterial;
@@ -152,6 +153,7 @@ public class CAItems {
     public static final RegistryObject<Item> URANIUM_INGOT = ITEMS.register("uranium_ingot", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> URANIUM_NUGGET = ITEMS.register("uranium_nugget", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> ALUMINUM_INGOT = ITEMS.register("aluminum_ingot", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
+    public static final RegistryObject<Item> ALUMINUM_NUGGET = ITEMS.register("aluminum_nugget", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> COPPER_LUMP = ITEMS.register("copper_lump", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> TIN_LUMP = ITEMS.register("tin_lump", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> SILVER_LUMP = ITEMS.register("silver_lump", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
@@ -180,7 +182,7 @@ public class CAItems {
     public static final RegistryObject<Item> DEAD_STINK_BUG = ITEMS.register("dead_stink_bug", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
 
     // MISC
-    public static final RegistryObject<Item> ALUMINUM_POWER_CHIP = ITEMS.register("aluminum_power_chip", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
+    public static final RegistryObject<PowerChipItem> ALUMINUM_POWER_CHIP = ITEMS.register("aluminum_power_chip", () -> new PowerChipItem(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> CRYSTAL_WOOD_SHARD = ITEMS.register("crystal_wood_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
     public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().tab(CAItemGroups.itemsItemGroup)));
@@ -302,14 +304,15 @@ public class CAItems {
             new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 1)}));
     public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.ratSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup)));
     public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.fairySwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> MANTIS_CLAW = ITEMS.register("mantis_claw", () -> new MantisClawItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.mantisClawDamage.get() - 7, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
-    public static final RegistryObject<SwordItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new BigHammerItem(CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.bigHammerDamage.get() - 12, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<MantisClawItem> MANTIS_CLAW = ITEMS.register("mantis_claw", () -> new MantisClawItem(CAItemTier.WEAPON_GENERIC, CAConfig.COMMON.mantisClawDamage.get() - 7, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<BigHammerItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new BigHammerItem(CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.bigHammerDamage.get() - 12, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.attitudeAdjusterDamage.get() - 12, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.prismaticReaperDamage.get() - 37, -1.9F, new Item.Properties().tab(CAItemGroups.equipmentItemGroup),
             new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 4), new EnchantmentData(Enchantments.SWEEPING_EDGE, 4)}));
     public static final RegistryObject<SkateBowItem> SKATE_STRING_BOW = ITEMS.register("skate_string_bow", () -> new SkateBowItem(new Item.Properties().tab(CAItemGroups.equipmentItemGroup).stacksTo(1).durability(384)));
     public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(CAItemTier.WEAPON_RAY_GUN, new Item.Properties().tab(CAItemGroups.equipmentItemGroup).stacksTo(1).durability(50)));
 
-    public static final RegistryObject<AxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedAxeItem(CAItemTier.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup),
+    public static final RegistryObject<ExtendedHitWeaponItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new ExtendedHitWeaponItem(CAItemTier.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup).setISTER(() -> BattleAxeItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
     public static final RegistryObject<AxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedAxeItem(CAItemTier.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenAxeDamage.get() - 664, -2.8F, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.equipmentItemGroup),
             new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 5), new EnchantmentData(Enchantments.SMITE, 5), new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 5), new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 2), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
@@ -450,6 +453,12 @@ public class CAItems {
     public static final RegistryObject<ArmorItem> QUEEN_SCALE_LEGGINGS = ITEMS.register("queen_scale_leggings", () -> new ArmorItem(CAArmorMaterial.QUEEN_SCALE, EquipmentSlotType.LEGS, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.equipmentItemGroup)));
     public static final RegistryObject<ArmorItem> QUEEN_SCALE_BOOTS = ITEMS.register("queen_scale_boots", () -> new PeacockBootsItem(CAArmorMaterial.QUEEN_SCALE, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.equipmentItemGroup)));
 
+    // Mobzilla Scale
+    public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_HELMET = ITEMS.register("mobzilla_scale_helmet", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.HEAD, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_CHESTPLATE = ITEMS.register("mobzilla_scale_chestplate", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.CHEST, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_LEGGINGS = ITEMS.register("mobzilla_scale_leggings", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.LEGS, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.equipmentItemGroup)));
+    public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_BOOTS = ITEMS.register("mobzilla_scale_boots", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.FEET, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.equipmentItemGroup)));
+
     // SPAWN EGGS
     public static final RegistryObject<CASpawnEggItem> ACACIA_ENT_SPAWN_EGG = ITEMS.register("acacia_ent_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.ACACIA_ENT, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
     public static final RegistryObject<CASpawnEggItem> BIRCH_ENT_SPAWN_EGG = ITEMS.register("birch_ent_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.BIRCH_ENT, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
@@ -478,6 +487,7 @@ public class CAItems {
     public static final RegistryObject<CASpawnEggItem> CARROT_PIG_SPAWN_EGG = ITEMS.register("carrot_pig_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.CARROT_PIG, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
     public static final RegistryObject<CASpawnEggItem> GOLDEN_CARROT_PIG_SPAWN_EGG = ITEMS.register("golden_carrot_pig_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.GOLDEN_CARROT_PIG, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
     public static final RegistryObject<CASpawnEggItem> WASP_SPAWN_EGG = ITEMS.register("wasp_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.WASP, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
+    public static final RegistryObject<CASpawnEggItem> WHALE_SPAWN_EGG = ITEMS.register("whale_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.WHALE, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
 
     public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
     public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));

@@ -1,76 +1,19 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "chaosawakens:item/battle_axe"
+  "parent": "builtin/entity",
+  "gui_light": "front",
+  "loader": "forge:separate-perspective",
+  "base": {
+    "parent": "chaosawakens:item/battle_axe_in_hand"
   },
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [
-        0,
-        -90,
-        55
-      ],
-      "translation": [
-        0,
-        16,
-        0
-      ],
-      "scale": [
-        2.25,
-        2.25,
-        2.25
-      ]
+  "perspectives": {
+    "gui": {
+      "parent": "chaosawakens:item/battle_axe_gui"
     },
-    "thirdperson_lefthand": {
-      "rotation": [
-        0,
-        90,
-        -55
-      ],
-      "translation": [
-        0,
-        16,
-        0
-      ],
-      "scale": [
-        2.25,
-        2.25,
-        2.25
-      ]
+    "fixed": {
+      "parent": "chaosawakens:item/battle_axe_gui"
     },
-    "firstperson_righthand": {
-      "rotation": [
-        0,
-        -90,
-        25
-      ],
-      "translation": [
-        2,
-        10,
-        2
-      ],
-      "scale": [
-        2.25,
-        2.25,
-        2.25
-      ]
-    },
-    "firstperson_lefthand": {
-      "rotation": [
-        0,
-        90,
-        -25
-      ],
-      "translation": [
-        2,
-        10,
-        2
-      ],
-      "scale": [
-        2.25,
-        2.25,
-        2.25
-      ]
+    "ground": {
+      "parent": "chaosawakens:item/battle_axe_gui"
     }
   }
 }

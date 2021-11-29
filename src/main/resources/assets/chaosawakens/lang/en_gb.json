@@ -41,8 +41,10 @@
   "dungeon.chaosawakens.jer.ent_dungeon": "Ent Dungeon",
   "dungeon.chaosawakens.jer.wasp_dungeon": "Wasp Dungeon",
 
-  "container.crystal_crafting_table": "Crystal Crafting Table",
+  "container.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
   "container.chaosawakens.crystal_furnace": "Crystal Furnace",
+  "container.chaosawakens.defossilizer": "Defossilizer",
+  "container.chaosawakens.jei.defossilizer": "Defossilizer",
 
   "entity.minecraft.villager.chaosawakens.oddities_purveyor": "Oddities Purveyor",
 
@@ -80,7 +82,14 @@
   "entity.chaosawakens.thunder_ball": "Thunder Charge",
   "entity.chaosawakens.explosive_ball": "Explosive Charge",
 
-  "item.chaosawakens.ent_spawn_egg": "Ent Spawn Egg",
+  "item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
+  "item.chaosawakens.birch_ent_spawn_egg": "Birch Ent Spawn Egg",
+  "item.chaosawakens.crimson_ent_spawn_egg": "Crimson Ent Spawn Egg",
+  "item.chaosawakens.dark_oak_ent_spawn_egg": "Dark Oak Ent Spawn Egg",
+  "item.chaosawakens.jungle_ent_spawn_egg": "Jungle Ent Spawn Egg",
+  "item.chaosawakens.oak_ent_spawn_egg": "Oak Ent Spawn Egg",
+  "item.chaosawakens.spruce_ent_spawn_egg": "Spruce Ent Spawn Egg",
+  "item.chaosawakens.warped_ent_spawn_egg": "Warped Ent Spawn Egg",
   "item.chaosawakens.brown_ant_spawn_egg": "Brown Ant Spawn Egg",
   "item.chaosawakens.rainbow_ant_spawn_egg": "Rainbow Ant Spawn Egg",
   "item.chaosawakens.red_ant_spawn_egg": "Red Ant Spawn Egg",
@@ -192,6 +201,7 @@
   "block.chaosawakens.salt_ore": "Salt Ore",
 
   "item.chaosawakens.aluminum_ingot": "Aluminium Ingot",
+  "item.chaosawakens.aluminum_nugget": "Aluminium Nugget",
   "block.chaosawakens.aluminum_ore": "Aluminium Ore",
   "block.chaosawakens.aluminum_block": "Block of Aluminium",
 
@@ -369,9 +379,15 @@
   "item.chaosawakens.cats_eye_boots": "Cat's Eye Boots",
 
   "block.chaosawakens.defossilizer": "Defossilizer",
+  "block.chaosawakens.defossilizer.jei_desc": "Used to turn Fossilized Mobs into Spawn Eggs.",
   "item.chaosawakens.aluminum_power_chip": "Aluminium Power Chip",
 
-  "block.chaosawakens.fossilised_ent": "Fossilised Ent",
+  "block.chaosawakens.fossilised_acacia_ent": "Fossilised Acacia Ent",
+  "block.chaosawakens.fossilised_birch_ent": "Fossilised Birch Ent",
+  "block.chaosawakens.fossilised_dark_oak_ent": "Fossilised Dark Oak Ent",
+  "block.chaosawakens.fossilised_jungle_ent": "Fossilised Jungle Ent",
+  "block.chaosawakens.fossilised_oak_ent": "Fossilised Oak Ent",
+  "block.chaosawakens.fossilised_spruce_ent": "Fossilised Spruce Ent",
   "block.chaosawakens.fossilised_hercules_beetle": "Fossilised Hercules Beetle",
   "block.chaosawakens.fossilised_ruby_bug": "Fossilised Ruby Bug",
   "block.chaosawakens.fossilised_emerald_gator": "Fossilised Emerald Gator",
@@ -393,6 +409,7 @@
   "block.chaosawakens.fossilised_dolphin": "Fossilised Dolphin",
   "block.chaosawakens.fossilised_donkey": "Fossilised Donkey",
   "block.chaosawakens.fossilised_drowned": "Fossilised Drowned",
+  "block.chaosawakens.fossilised_enderman": "Fossilised Enderman",
   "block.chaosawakens.fossilised_evoker": "Fossilised Evoker",
   "block.chaosawakens.fossilised_fox": "Fossilised Fox",
   "block.chaosawakens.fossilised_giant": "Fossilised Giant",
@@ -425,6 +442,7 @@
   "block.chaosawakens.fossilised_villager": "Fossilised Villager",
   "block.chaosawakens.fossilised_vindicator": "Fossilised Vindicator",
   "block.chaosawakens.fossilised_wandering_trader": "Fossilised Wandering Trader",
+  "block.chaosawakens.fossilised_witch": "Fossilised Witch",
   "block.chaosawakens.fossilised_wolf": "Fossilised Wolf",
   "block.chaosawakens.fossilised_zombie": "Fossilised Zombie",
   "block.chaosawakens.fossilised_zombie_horse": "Fossilised Zombie Horse",
@@ -500,6 +518,11 @@
   "item.chaosawakens.peacock_feather_chestplate": "Peacock Feather Chestplate",
   "item.chaosawakens.peacock_feather_leggings": "Peacock Feather Leggings",
   "item.chaosawakens.peacock_feather_boots": "Peacock Feather Boots",
+
+  "item.chaosawakens.mobzilla_scale_helmet": "Mobzilla Scale Helmet",
+  "item.chaosawakens.mobzilla_scale_chestplate": "Mobzilla Scale Chestplate",
+  "item.chaosawakens.mobzilla_scale_leggings": "Mobzilla Scale Leggings",
+  "item.chaosawakens.mobzilla_scale_boots": "Mobzilla Scale Boots",
 
   "item.chaosawakens.royal_guardian_helmet": "Royal Guardian Helmet",
   "item.chaosawakens.royal_guardian_chestplate": "Royal Guardian Chestplate",
@@ -646,5 +669,24 @@
   "tooltip.chaosawakens.fossilised_scorpion": "It is inert... it seems it's creature isn't available yet.",
   "tooltip.chaosawakens.fossilised_piraporu": "It is inert... it seems it's creature isn't available yet.",
   "tooltip.chaosawakens.hercules_beetle_spawn_egg": "Hercules beetle is a W.I.P",
-  "tooltip.chaosawakens.ent_spawn_egg": "Ent is a W.I.P"
+  "tooltip.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent is a W.I.P",
+  "tooltip.chaosawakens.birch_ent_spawn_egg": "Birch Ent is a W.I.P",
+  "tooltip.chaosawakens.crimson_ent_spawn_egg": "Crimson Ent is a W.I.P",
+  "tooltip.chaosawakens.dark_oak_ent_spawn_egg": "Dark Oak Ent is a W.I.P",
+  "tooltip.chaosawakens.jungle_ent_spawn_egg": "Jungle Ent is a W.I.P",
+  "tooltip.chaosawakens.oak_ent_spawn_egg": "Oak Ent is a W.I.P",
+  "tooltip.chaosawakens.spruce_ent_spawn_egg": "Spruce Ent is a W.I.P",
+  "tooltip.chaosawakens.warped_ent_spawn_egg": "Warped Ent is a W.I.P",
+
+  "subtitles.chaosawakens.entity.emerald_gator.attack": "Emerald Gator bites",
+  "subtitles.chaosawakens.entity.emerald_gator.death": "Emerald Gator dies",
+  "subtitles.chaosawakens.entity.emerald_gator.hurt": "Emerald Gator hurts",
+  "subtitles.chaosawakens.entity.emerald_gator.walk": "Emerald Gator walks",
+  "subtitles.chaosawakens.entity.hercules_beetle.attack": "Hercules Beetle bites",
+  "subtitles.chaosawakens.entity.hercules_beetle.death": "Hercules Beetle dies",
+  "subtitles.chaosawakens.entity.hercules_beetle.hurt": "Hercules Beetle screeches",
+  "subtitles.chaosawakens.entity.hercules_beetle.walk": "Hercules Beetle walks",
+  "subtitles.chaosawakens.entity.robo.death": "Robot dies",
+  "subtitles.chaosawakens.entity.robo.hurt": "Robot hurts",
+  "subtitles.chaosawakens.entity.robo.shoot": "Robot shoots"
 }

@@ -51,7 +51,6 @@ public class GateBlock extends Block {
                 world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
                 world.getBlockTicks().scheduleTick(pos, this, 15);
             }
-            world.playSound(null, pos, SoundType.ANVIL.getPlaceSound(), SoundCategory.BLOCKS, 0.3F, 0.6F);
         } else {
             if (state.getValue(ACTIVE)) {
                 if (state.hasProperty(VANISHED)) {
@@ -60,8 +59,6 @@ public class GateBlock extends Block {
                 } else {
                     world.removeBlock(pos, false);
                 }
-
-                world.playSound(null, pos, SoundType.ANVIL.getPlaceSound(), SoundCategory.BLOCKS, 0.3F, 0.5F);
 
                 for (Direction e : Direction.values()) {
                     activate(world, pos.relative(e));
@@ -109,14 +106,6 @@ public class GateBlock extends Block {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.getValue(ACTIVE)) {
-            this.sparkle(world, pos);
-        }
-    }
-
-    @Override
     @Deprecated
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!isVanished(state) && !state.getValue(ACTIVE)) {
@@ -124,45 +113,6 @@ public class GateBlock extends Block {
             return ActionResultType.SUCCESS;
         }
         return ActionResultType.PASS;
-    }
-
-    public void sparkle(World worldIn, BlockPos pos) {
-        Random random = worldIn.random;
-        double d0 = 0.0625D;
-
-        for (int i = 0; i < 6; ++i) {
-            double d1 = ((float) pos.getX() + random.nextFloat());
-            double d2 = ((float) pos.getY() + random.nextFloat());
-            double d3 = ((float) pos.getZ() + random.nextFloat());
-
-            if (i == 0 && !worldIn.getBlockState(pos.above()).isSolidRender(worldIn, pos)) {
-                d2 = (double) pos.getY() + d0 + 1.25D;
-            }
-
-            if (i == 1 && !worldIn.getBlockState(pos.below()).isSolidRender(worldIn, pos)) {
-                d2 = (double) pos.getY() - d0;
-            }
-
-            if (i == 2 && !worldIn.getBlockState(pos.south()).isSolidRender(worldIn, pos)) {
-                d3 = (double) pos.getZ() + d0 + 1.25D;
-            }
-
-            if (i == 3 && !worldIn.getBlockState(pos.north()).isSolidRender(worldIn, pos)) {
-                d3 = (double) pos.getZ() - d0;
-            }
-
-            if (i == 4 && !worldIn.getBlockState(pos.east()).isSolidRender(worldIn, pos)) {
-                d1 = (double) pos.getX() + d0 + 1.25D;
-            }
-
-            if (i == 5 && !worldIn.getBlockState(pos.west()).isSolidRender(worldIn, pos)) {
-                d1 = (double) pos.getX() - d0;
-            }
-
-            if (d1 < (double) pos.getX() || d1 > (double) (pos.getX() + 1.25F) || d2 < 0.25D || d2 > (pos.getY() + 1.25D) || d3 < (double) pos.getZ() || d3 > (pos.getZ() + 1.25D)) {
-                worldIn.addParticle(new BlockParticleData(ParticleTypes.FALLING_DUST, defaultBlockState()), d1, d2, d3, 0.0D, 0.0D, 0.0D);
-            }
-        }
     }
 
     @Override

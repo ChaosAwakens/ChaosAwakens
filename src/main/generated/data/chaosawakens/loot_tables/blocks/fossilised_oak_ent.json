@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:fossilised_ent"
+          "name": "chaosawakens:fossilised_oak_ent"
         }
       ],
       "conditions": [

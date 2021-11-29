@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
+import io.github.chaosawakens.common.items.PowerChipItem;
 import io.github.chaosawakens.common.registry.CAContainerTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CARecipes;
@@ -12,7 +13,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IIntArray;
@@ -24,6 +25,10 @@ public class DefossilizerContainer extends Container {
     private IIntArray fields;
     protected final World level;
     private final IRecipeType<? extends AbstractDefossilizingRecipe> recipeType;
+    private final Slot fossilSlot;
+    private final Slot bucketSlot;
+    private final Slot powerchipSlot;
+    private final Slot resultSlot;
 
     public DefossilizerContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
         this(CARecipes.DEFOSSILIZING_RECIPE_TYPE, id, playerInventory, new DefossilizerTileEntity(), new IntArray(buffer.readByte()));
@@ -36,20 +41,16 @@ public class DefossilizerContainer extends Container {
         this.inventory = inventory;
         this.fields = fields;
 
-        this.addSlot(new Slot(this.inventory, 0, 56, 17));
-        this.addSlot(new Slot(this.inventory, 1, 45, 53) {
+        this.fossilSlot = this.addSlot(new Slot(this.inventory, 0, 56, 17));
+        this.bucketSlot = this.addSlot(new Slot(this.inventory, 1, 47, 53) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return !stack.getItem().getTags().contains(CATags.BUCKETS);
-            }
+            public boolean mayPlace(ItemStack stack) { return stack.getItem() instanceof BucketItem; }
         });
-        this.addSlot(new Slot(this.inventory, 2, 63, 53) {
+        this.powerchipSlot = this.addSlot(new Slot(this.inventory, 2, 65, 53) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return !stack.getItem().equals(CAItems.ALUMINUM_POWER_CHIP);
-            }
+            public boolean mayPlace(ItemStack stack) { return stack.getItem() instanceof PowerChipItem; }
         });
-        this.addSlot(new Slot(this.inventory, 3, 100, 50) {
+        this.resultSlot = this.addSlot(new Slot(this.inventory, 3, 116, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
@@ -57,21 +58,15 @@ public class DefossilizerContainer extends Container {
         });
 
         // Player backpack
-        for (int y = 0; y < 3; ++y) {
-            for (int x = 0; x < 9; ++x) {
-                int index = 9 + x + y * 9;
-                int posX = 8 + x * 18;
-                int posY = 84 + y * 18;
-                this.addSlot(new Slot(playerInventory, index, posX, posY));
+        for(int i = 0; i < 3; ++i) {
+            for(int j = 0; j < 9; ++j) {
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
         // Player hotbar
-        for (int x = 0; x < 9; ++x) {
-            int index = x;
-            int posX = 8 + x * 18;
-            int posY = 142;
-            this.addSlot(new Slot(playerInventory, index, posX, posY));
+        for(int k = 0; k < 9; ++k) {
+            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
 
         this.addDataSlots(fields);
@@ -92,83 +87,54 @@ public class DefossilizerContainer extends Container {
 
     @Override
     public ItemStack quickMoveStack(PlayerEntity player, int index) {
-        ItemStack itemStack = ItemStack.EMPTY;
+        ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
-            ItemStack itemStack1 = slot.getItem();
-            itemStack = itemStack1.copy();
-
-            final int inventorySize = 4;
-            final int playerInventoryEnd = inventorySize + 27;
-            final int playerHotbarEnd = playerInventoryEnd + 9;
-
-            if (index == 3) {
-                if (!this.moveItemStackTo(itemStack1, inventorySize, playerHotbarEnd, true)) {
+            ItemStack itemstack1 = slot.getItem();
+            itemstack = itemstack1.copy();
+            if (index == this.resultSlot.index) {
+                if (!this.moveItemStackTo(itemstack1, 4, 40, true)) {
                     return ItemStack.EMPTY;
                 }
-                slot.onQuickCraft(itemStack1, itemStack);
-            } else if (index != 0 && index != 1 && index != 2) {
-                if (this.canDefossilize(itemStack1)) {
-                    if (!this.moveItemStackTo(itemStack1, 0, 1, false)) {
+
+                slot.onQuickCraft(itemstack1, itemstack);
+            } else if (index != this.bucketSlot.index && index != this.fossilSlot.index && index != this.powerchipSlot.index) {
+                if (!(itemstack1.getItem() instanceof BucketItem) && !(itemstack1.getItem() instanceof PowerChipItem) ) {
+                    if (!this.moveItemStackTo(itemstack1, this.fossilSlot.index, this.fossilSlot.index + 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (this.isPowerChip(itemStack1)) {
-                    if (!this.moveItemStackTo(itemStack1, 1, 2, false)) {
+                } else if (itemstack1.getItem() instanceof BucketItem) {
+                    if (!this.moveItemStackTo(itemstack1, this.bucketSlot.index, this.bucketSlot.index + 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (this.isBucket(itemStack1)) {
-                    if (!this.moveItemStackTo(itemStack1, 1, 2, false)) {
+                } else if (itemstack1.getItem() instanceof PowerChipItem) {
+                    if (!this.moveItemStackTo(itemstack1, this.powerchipSlot.index, this.powerchipSlot.index + 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index >= 4 && index < 30) {
-                    if (!this.moveItemStackTo(itemStack1, 30, 39, false)) {
+                } else if (index >= 4 && index < 31) {
+                    if (!this.moveItemStackTo(itemstack1, 31, 40, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index >= 30 && index < 39 && !this.moveItemStackTo(itemStack1, 3, 30, false)) {
+                } else if (index >= 31 && index < 40 && !this.moveItemStackTo(itemstack1, 4, 31, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemStack1, 3, 39, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 4, 40, false)) {
                 return ItemStack.EMPTY;
             }
 
-            if (itemStack1.isEmpty()) {
+            if (itemstack1.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
 
-            if (itemStack1.getCount() == itemStack.getCount()) {
+            if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(player, itemStack1);
+            slot.onTake(player, itemstack1);
         }
 
-        return itemStack;
-    }
-
-    protected boolean canDefossilize(ItemStack stack) {
-        ChaosAwakens.LOGGER.debug("Chaos Awakens canDefossilize: ERROR!");
-        return this.level.getRecipeManager().getRecipeFor((IRecipeType)this.recipeType, new Inventory(stack), this.level).isPresent();
-    }
-
-    protected boolean isBucket(ItemStack stack) {
-        ChaosAwakens.LOGGER.debug("Chaos Awakens isBucket: ERROR!");
-        if (slots.isEmpty() && stack.getTag().equals(CATags.BUCKETS)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected boolean isPowerChip(ItemStack stack) {
-        ChaosAwakens.LOGGER.debug("Chaos Awakens isPowerChip: ERROR!");
-        if (slots.isEmpty() && stack.equals(CAItems.ALUMINUM_POWER_CHIP)) {
-            return true;
-        } else if (!slots.isEmpty() && slots.get(2).getItem().equals(CAItems.ALUMINUM_POWER_CHIP) && stack.equals(CAItems.ALUMINUM_POWER_CHIP)) {
-            return true;
-        } else {
-            return false;
-        }
+        return itemstack;
     }
 }

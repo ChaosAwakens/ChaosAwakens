@@ -90,6 +90,8 @@ public class CAConfig {
 		public final ConfigValue<Integer> fairySwordDamage;
 		public final ConfigValue<Integer> mantisClawDamage;
 		public final ConfigValue<Integer> bigHammerDamage;
+		public final ConfigValue<Integer> attitudeAdjusterDamage;
+		public final ConfigValue<Integer> attitudeAdjusterExplosionSize;
 		public final ConfigValue<Integer> prismaticReaperDamage;
 
 		public final ConfigValue<Integer> thunderStaffExplosionSize;
@@ -255,6 +257,8 @@ public class CAConfig {
 			fairySwordDamage = builder.define("Damage of the Fairy Sword", 10);
 			mantisClawDamage = builder.define("Damage of the Mantis Claw", 10);
 			bigHammerDamage = builder.define("Damage of the Big Hammer", 15);
+			attitudeAdjusterDamage = builder.define("Damage of the Attitude Adjuster", 65);
+			attitudeAdjusterExplosionSize = builder.define("Attitude Adjuster explosion size", 4);
 			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 29);
 			battleAxeDamage = builder.define("Damage of the Battle Axe", 50);
 			queenAxeDamage = builder.define("Damage of the Queen Scale Battle Axe", 666);

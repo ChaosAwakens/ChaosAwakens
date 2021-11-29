@@ -169,7 +169,7 @@ public class CAEntityLootTables extends EntityLootTables {
                                         .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
                                         .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
                                         .when(KilledByPlayer.killedByPlayer()))
-                                .add(ItemLootEntry.lootTableItem(Items.VINE)
+                                .add(ItemLootEntry.lootTableItem(Items.COCOA_BEANS)
                                         .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
                                         .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
                                         .when(KilledByPlayer.killedByPlayer())))

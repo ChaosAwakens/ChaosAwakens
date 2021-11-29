@@ -117,6 +117,18 @@
         "maxCount": 4
       },
       {
+        "type": "chaosawakens:carrot_pig",
+        "weight": 8,
+        "minCount": 3,
+        "maxCount": 3
+      },
+      {
+        "type": "chaosawakens:golden_carrot_pig",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 2
+      },
+      {
         "type": "minecraft:chicken",
         "weight": 10,
         "minCount": 4,

@@ -1,66 +1,66 @@
 {
   "entity.robo.shoot": {
-    "subtitle": "subtitles.entity.robo.shoot",
+    "subtitle": "subtitles.chaosawakens.entity.robo.shoot",
     "sounds": [
       "chaosawakens:entity/robo/shoot"
     ]
   },
   "entity.robo.hurt": {
-    "subtitle": "subtitles.entity.robo.hurt",
+    "subtitle": "subtitles.chaosawakens.entity.robo.hurt",
     "sounds": [
       "chaosawakens:entity/robo/hurt"
     ]
   },
   "entity.robo.death": {
-    "subtitle": "subtitles.entity.robo.death",
+    "subtitle": "subtitles.chaosawakens.entity.robo.death",
     "sounds": [
       "chaosawakens:entity/robo/death"
     ]
   },
   "entity.emerald_gator.walk": {
-    "subtitle": "subtitles.entity.emerald_gator.walk",
+    "subtitle": "subtitles.chaosawakens.entity.emerald_gator.walk",
     "sounds": [
       "chaosawakens:entity/emerald_gator/walk"
     ]
   },
   "entity.emerald_gator.attack": {
-    "subtitle": "subtitles.entity.emerald_gator.attack",
+    "subtitle": "subtitles.chaosawakens.entity.emerald_gator.attack",
     "sounds": [
       "chaosawakens:entity/emerald_gator/attack"
     ]
   },
   "entity.emerald_gator.hurt": {
-    "subtitle": "subtitles.entity.emerald_gator.hurt",
+    "subtitle": "subtitles.chaosawakens.entity.emerald_gator.hurt",
     "sounds": [
       "chaosawakens:entity/emerald_gator/hurt"
     ]
   },
   "entity.emerald_gator.death": {
-    "subtitle": "subtitles.entity.emerald_gator.death",
+    "subtitle": "subtitles.chaosawakens.entity.emerald_gator.death",
     "sounds": [
       "chaosawakens:entity/emerald_gator/death"
     ]
   },
   "entity.hercules_beetle.walk": {
-    "subtitle": "subtitles.entity.hercules_beetle.walk",
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.walk",
     "sounds": [
       "chaosawakens:entity/hercules_beetle/walk"
     ]
   },
   "entity.hercules_beetle.attack": {
-    "subtitle": "subtitles.entity.hercules_beetle.attack",
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.attack",
     "sounds": [
       "chaosawakens:entity/hercules_beetle/attack"
     ]
   },
   "entity.hercules_beetle.hurt": {
-    "subtitle": "subtitles.entity.hercules_beetle.hurt",
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.hurt",
     "sounds": [
       "chaosawakens:entity/hercules_beetle/hurt"
     ]
   },
   "entity.hercules_beetle.death": {
-    "subtitle": "subtitles.entity.hercules_beetle.death",
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death",
     "sounds": [
       "chaosawakens:entity/hercules_beetle/death1",
       "chaosawakens:entity/hercules_beetle/death2"

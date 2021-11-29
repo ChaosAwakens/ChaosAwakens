@@ -23,7 +23,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        this.simpleBlock(CABlocks.FOSSILISED_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_ACACIA_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_BIRCH_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_DARK_OAK_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_JUNGLE_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_OAK_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_SPRUCE_ENT.get());
         this.simpleBlock(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
         this.simpleBlock(CABlocks.FOSSILISED_RUBY_BUG.get());
         this.simpleBlock(CABlocks.FOSSILISED_EMERALD_GATOR.get());

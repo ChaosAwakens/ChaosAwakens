@@ -24,12 +24,14 @@ public class CAVillagerTrades {
 
                 new CATrade(1, CAItems.TIGERS_EYE.get().asItem(), 1, 5, 1),
                 new CATrade(3, CAItems.AMETHYST.get().asItem(), 1, 5, 1),
-                new CATrade(5, CAItems.RUBY.get().asItem(), 1, 5, 1)
+                new CATrade(5, CAItems.RUBY.get().asItem(), 1, 5, 1),
+
+                new CATrade(2, CAItems.TRIFFID_GOO.get().asItem(), 1, 5, 1)
         );
 
         TradeUtil.addRareWandererTrades(event,
-                new CATrade(12, CAItems.TITANIUM_NUGGET.get(), 1, 3, 5),
-                new CATrade(12, CAItems.URANIUM_NUGGET.get(), 1, 3, 5)
+                new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 1, 3, 5),
+                new CATrade(15, CAItems.URANIUM_NUGGET.get(), 1, 3, 5)
         );
     }
 
@@ -72,30 +74,30 @@ public class CAVillagerTrades {
         );
     }
 
-    @SubscribeEvent
-    public static void onOPTradesEvent(VillagerTradesEvent event) {
-        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.NOVICE,
-                new CATrade(CAItems.TIN_LUMP.get(), 3, 4, 3, 3),
-                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 3, 1, 6)
-        );
-        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.APPRENTICE,
-                new CATrade(1, Items.FLOWER_POT, 1, 10, 10),
-                new CATrade(6, Blocks.COAL_BLOCK.asItem(), 2, 5, 10),
-                new CATrade(13, Blocks.IRON_BLOCK.asItem(), 1, 3, 15)
-        );
-        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.JOURNEYMAN,
-                new CATrade(CAItems.TIN_LUMP.get(), 3, 4, 3, 19),
-                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 1, 1, 21)
-        );
-        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.EXPERT,
-                new CATrade(CAItems.TIN_LUMP.get(), 3, 4, 3, 28),
-                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 5, 1, 30)
-        );
-        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.MASTER,
-                new CATrade(CAItems.COPPER_LUMP.get(), 4, CAItems.TIN_LUMP.get(), 2, 3, 40),
-                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 7, 1, 46)
-        );
-    }
+//    @SubscribeEvent
+//    public static void onOPTradesEvent(VillagerTradesEvent event) {
+//        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.NOVICE,
+//                new CATrade(CAItems.TIN_LUMP.get(), 3, 4, 3, 3),
+//                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 3, 1, 6)
+//        );
+//        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.APPRENTICE,
+//                new CATrade(1, Items.FLOWER_POT, 1, 10, 10),
+//                new CATrade(6, Blocks.COAL_BLOCK.asItem(), 2, 5, 10),
+//                new CATrade(13, Blocks.IRON_BLOCK.asItem(), 1, 3, 15)
+//        );
+//        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.JOURNEYMAN,
+//                new CATrade(CAItems.TIN_LUMP.get(), 3, 4, 3, 19),
+//                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 1, 1, 21)
+//        );
+//        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.EXPERT,
+//                new CATrade(CAItems.TIN_LUMP.get(), 3, 4, 3, 28),
+//                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 5, 1, 30)
+//        );
+//        TradeUtil.addVillagerTrades(event, CAVillagers.ODDITIES_PURVEYOR.get(), TradeUtil.MASTER,
+//                new CATrade(CAItems.COPPER_LUMP.get(), 4, CAItems.TIN_LUMP.get(), 2, 3, 40),
+//                new CATrade(CAItems.PLATINUM_LUMP.get(), 1, 7, 1, 46)
+//        );
+//    }
 
     private static boolean notOnBlacklist(Item item, String[] items) {
         for (String name : items) {

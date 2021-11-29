@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -30,6 +31,10 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import javax.annotation.Nullable;
 
 public class DefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity {
+    private static final int[] SLOTS_FOR_UP = new int[]{0};
+    private static final int[] SLOTS_FOR_DOWN = new int[]{3};
+    private static final int[] SLOTS_FOR_SIDES = new int[]{1, 2};
+
     static final int WORK_TIME = 2 * 20;
 
     private NonNullList<ItemStack> items;
@@ -145,7 +150,11 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
     @Override
     public int[] getSlotsForFace(Direction direction) {
-        return new int[]{0, 1, 2, 3};
+        if (direction == Direction.DOWN) {
+            return SLOTS_FOR_DOWN;
+        } else {
+            return direction == Direction.UP ? SLOTS_FOR_UP : SLOTS_FOR_SIDES;
+        }
     }
 
     @Override
@@ -155,7 +164,11 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
     @Override
     public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-        return index == 1;
+        if (direction == Direction.DOWN && index == 1) {
+            Item item = stack.getItem();
+            return item == Items.WATER_BUCKET || item == Items.BUCKET;
+        }
+        return true;
     }
 
     @Override

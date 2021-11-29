@@ -44,10 +44,35 @@ public class CARecipeProvider extends RecipeProvider {
 	// Overworld (CA)
 	private void buildDefossilizingRecipes(Consumer<IFinishedRecipe> consumer) {
 		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
-				Ingredient.of(CABlocks.FOSSILISED_ENT.get()),
+				Ingredient.of(CABlocks.FOSSILISED_ACACIA_ENT.get()),
 				Ingredient.of(Items.WATER_BUCKET),
 				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-				CAItems.OAK_ENT_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+				CAItems.ACACIA_ENT_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ACACIA_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+				Ingredient.of(CABlocks.FOSSILISED_BIRCH_ENT.get()),
+				Ingredient.of(Items.WATER_BUCKET),
+				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+				CAItems.BIRCH_ENT_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_BIRCH_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+				Ingredient.of(CABlocks.FOSSILISED_DARK_OAK_ENT.get()),
+				Ingredient.of(Items.WATER_BUCKET),
+				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+				CAItems.DARK_OAK_ENT_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_DARK_OAK_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+				Ingredient.of(CABlocks.FOSSILISED_JUNGLE_ENT.get()),
+				Ingredient.of(Items.WATER_BUCKET),
+				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+				CAItems.JUNGLE_ENT_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_JUNGLE_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+				Ingredient.of(CABlocks.FOSSILISED_OAK_ENT.get()),
+				Ingredient.of(Items.WATER_BUCKET),
+				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+				CAItems.OAK_ENT_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_OAK_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+				Ingredient.of(CABlocks.FOSSILISED_SPRUCE_ENT.get()),
+				Ingredient.of(Items.WATER_BUCKET),
+				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+				CAItems.SPRUCE_ENT_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SPRUCE_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 				Ingredient.of(CABlocks.FOSSILISED_HERCULES_BEETLE.get()),
 				Ingredient.of(Items.WATER_BUCKET),

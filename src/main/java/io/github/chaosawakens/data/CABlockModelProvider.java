@@ -24,7 +24,12 @@ public class CABlockModelProvider extends BlockModelProvider {
 	@Override
 	protected void registerModels() {
 		// TODO Automate the data generators
-		this.cubeAll("fossilised_ent", chaosRL("fossilised_ent"));
+		this.cubeAll("fossilised_acacia_ent", chaosRL("fossilised_acacia_ent"));
+		this.cubeAll("fossilised_birch_ent", chaosRL("fossilised_birch_ent"));
+		this.cubeAll("fossilised_dark_oak_ent", chaosRL("fossilised_dark_oak_ent"));
+		this.cubeAll("fossilised_jungle_ent", chaosRL("fossilised_jungle_ent"));
+		this.cubeAll("fossilised_oak_ent", chaosRL("fossilised_oak_ent"));
+		this.cubeAll("fossilised_spruce_ent", chaosRL("fossilised_spruce_ent"));
 		this.cubeAll("fossilised_hercules_beetle", chaosRL("fossilised_hercules_beetle"));
 		this.cubeAll("fossilised_ruby_bug", chaosRL("fossilised_ruby_bug"));
 		this.cubeAll("fossilised_emerald_gator", chaosRL("fossilised_emerald_gator"));

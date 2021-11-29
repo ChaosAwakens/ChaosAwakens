@@ -1,7 +1,7 @@
 {
   "type": "chaosawakens:defossilizing",
   "fossil_ingredient": {
-    "item": "chaosawakens:fossilised_ent"
+    "item": "chaosawakens:fossilised_oak_ent"
   },
   "bucket_ingredient": {
     "item": "minecraft:water_bucket"

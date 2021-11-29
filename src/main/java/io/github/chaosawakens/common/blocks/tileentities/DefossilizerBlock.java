@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerTileEntity;
+import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -11,6 +12,7 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -49,6 +51,7 @@ public class DefossilizerBlock extends Block {
             return ActionResultType.SUCCESS;
         }
         this.interactWith(world, pos, player);
+        player.awardStat(CAStats.INTERACT_WITH_DEFOSSILIZER);
         return ActionResultType.CONSUME;
     }
 
