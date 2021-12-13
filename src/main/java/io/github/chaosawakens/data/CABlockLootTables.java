@@ -3,18 +3,22 @@ package io.github.chaosawakens.data;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
+import net.minecraft.advancements.criterion.EnchantmentPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.loot.conditions.ILootCondition;
+import net.minecraft.loot.conditions.MatchTool;
+import net.minecraft.loot.conditions.TableBonus;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.fml.RegistryObject;
@@ -26,6 +30,11 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class CABlockLootTables extends BlockLootTables {
+	private static final ILootCondition.IBuilder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
+	private static final ILootCondition.IBuilder HAS_NO_SILK_TOUCH = HAS_SILK_TOUCH.invert();
+	private static final ILootCondition.IBuilder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
+	private static final ILootCondition.IBuilder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
+	private static final ILootCondition.IBuilder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
 	
 	@Override
 	protected void addTables() {
@@ -59,11 +68,12 @@ public class CABlockLootTables extends BlockLootTables {
 		dropOther(CABlocks.MOLDY_SLAB.get(), Items.AIR);
 		dropOther(CABlocks.MOLDY_FENCE.get(), Items.AIR);
 		dropOther(CABlocks.MINING_LAMP.get(), Items.AIR);
-		dropOther(CABlocks.APPLE_LEAVES.get(), Items.AIR);
-		dropOther(CABlocks.CHERRY_LEAVES.get(), Items.AIR);
-		dropOther(CABlocks.DUPLICATION_LEAVES.get(), Items.AIR);
-		dropOther(CABlocks.PEACH_LEAVES.get(), Items.AIR);
 		dropOther(CABlocks.DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get());
+
+		add(CABlocks.APPLE_LEAVES.get(), createCALeavesDrops(CABlocks.APPLE_LEAVES.get(), CABlocks.APPLE_SAPLING.get(), Items.APPLE, 0.05F, 0.0625F, 0.083333336F, 0.1F));
+		add(CABlocks.CHERRY_LEAVES.get(), createCALeavesDrops(CABlocks.CHERRY_LEAVES.get(), CABlocks.CHERRY_SAPLING.get(), CAItems.CHERRIES.get(), 0.05F, 0.0625F, 0.083333336F, 0.1F));
+		add(CABlocks.DUPLICATION_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.DUPLICATION_LEAVES.get()));
+		add(CABlocks.PEACH_LEAVES.get(), createCALeavesDrops(CABlocks.PEACH_LEAVES.get(), CABlocks.PEACH_SAPLING.get(), CAItems.PEACH.get(), 0.05F, 0.0625F, 0.083333336F, 0.1F));
 
 		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		dropSelf(CABlocks.ALUMINUM_BLOCK.get());
@@ -211,8 +221,6 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.DEAD_DUPLICATION_LOG.get());
 		dropSelf(CABlocks.PEACH_LOG.get());
 		dropSelf(CABlocks.SKYWOOD_LOG.get());
-		add(CABlocks.PEACH_LEAVES.get(), (plant) -> createShearsOnlyDrop(CABlocks.PEACH_LEAVES.get()));
-		add(CABlocks.CHERRY_LEAVES.get(), (plant) -> createShearsOnlyDrop(CABlocks.CHERRY_LEAVES.get()));
 		dropSelf(CABlocks.APPLE_PLANKS.get());
 		dropSelf(CABlocks.CHERRY_PLANKS.get());
 		dropSelf(CABlocks.DUPLICATION_PLANKS.get());
@@ -254,6 +262,14 @@ public class CABlockLootTables extends BlockLootTables {
 				LootPool.lootPool().setRolls(RandomValueRange.between(1, 3)))
 					.add(ItemLootEntry.lootTableItem(fruit))
 					.add(ItemLootEntry.lootTableItem(seed)));
+	}
+
+	protected static LootTable.Builder createCALeavesDrops(Block p_218526_0_, Block p_218526_1_, Item p_218526_2_, float... p_218526_3_) {
+		return createLeavesDrops(p_218526_0_, p_218526_1_, p_218526_3_)
+				.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1))
+						.when(HAS_NO_SHEARS_OR_SILK_TOUCH)
+						.add(applyExplosionCondition(p_218526_0_, ItemLootEntry.lootTableItem(p_218526_2_))
+								.when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F))));
 	}
 
 	private LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {

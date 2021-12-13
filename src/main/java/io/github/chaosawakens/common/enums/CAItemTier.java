@@ -40,6 +40,8 @@ public enum CAItemTier implements IItemTier {
 
     WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 
+    WEAPON_SLAYER_CHAINSAW(4, 250, 15, 40, 0, () -> Ingredient.of(Items.REDSTONE_BLOCK)),
+
     WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.of(CAItems.QUEEN_SCALE.get())),
 
     WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.of(Blocks.REDSTONE_BLOCK)),

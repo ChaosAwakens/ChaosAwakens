@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -21,14 +22,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.UUID;
 
-public class ExtendedHitWeaponItem extends EnchantedSwordItem implements IVanishable, IAnimatable {
+public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAnimatable {
 
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchants) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn, enchants);
+    public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn);
         float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));

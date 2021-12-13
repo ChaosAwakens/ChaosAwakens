@@ -42,7 +42,6 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walking_animation", true));
             return PlayState.CONTINUE;
         }
-
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.idle_animation", true));
         return PlayState.CONTINUE;
     }

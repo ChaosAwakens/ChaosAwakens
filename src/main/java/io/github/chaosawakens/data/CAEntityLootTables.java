@@ -455,6 +455,39 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .add(ItemLootEntry.lootTableItem(CAItems.CRYSTAL_APPLE.get())
                                         .apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
                                         .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.CARROT_PIG.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(Items.PORKCHOP)
+                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+                                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
+                                        .when(KilledByPlayer.killedByPlayer())))
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(Items.CARROT)
+                                        .apply(SetCount.setCount(RandomValueRange.between(2.0F, 4.0F)))
+                                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.GOLDEN_CARROT_PIG.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(Items.PORKCHOP)
+                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+                                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
+                                        .when(KilledByPlayer.killedByPlayer())))
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(Items.CARROT)
+                                        .apply(SetCount.setCount(RandomValueRange.between(2.0F, 4.0F)))
+                                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
+                                        .when(KilledByPlayer.killedByPlayer())))
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(Items.GOLDEN_CARROT)
+                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
         add(CAEntityTypes.BEAVER.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
@@ -590,6 +623,13 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET)
                                         .apply(SetCount.setCount(RandomValueRange.between(12.0F, 24.0F)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.ROCK_FISH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(CAItems.ROCK_FISH.get())
+                                        .apply(SetCount.setCount(ConstantRange.exactly(1)))
                                         .when(KilledByPlayer.killedByPlayer()))));
         add(EntityType.ILLUSIONER,
                 LootTable.lootTable()

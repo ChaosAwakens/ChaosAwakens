@@ -90,9 +90,15 @@ public class CAConfig {
 		public final ConfigValue<Integer> fairySwordDamage;
 		public final ConfigValue<Integer> mantisClawDamage;
 		public final ConfigValue<Integer> bigHammerDamage;
-		public final ConfigValue<Integer> attitudeAdjusterDamage;
-		public final ConfigValue<Integer> attitudeAdjusterExplosionSize;
 		public final ConfigValue<Integer> prismaticReaperDamage;
+
+		public final ConfigValue<Integer> attitudeAdjusterDamage;
+		public final ConfigValue<Integer> berthaDamage;
+		public final ConfigValue<Integer> battleAxeDamage;
+		public final ConfigValue<Integer> queenAxeDamage;
+		public final ConfigValue<Integer> slayerChainsawDamage;
+
+		public final ConfigValue<Integer> attitudeAdjusterExplosionSize;
 
 		public final ConfigValue<Integer> thunderStaffExplosionSize;
 		public final ConfigValue<Integer> thunderStaffExplosionType;
@@ -132,11 +138,6 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOrePlatinumGen;
 		public final ConfigValue<Boolean> enableOreSunstoneGen;
 		public final ConfigValue<Boolean> enableOreBloodstoneGen;
-		public final ConfigValue<Integer> battleAxeDamage;
-
-		public final ConfigValue<Integer> berthaDamage;
-
-		public final ConfigValue<Integer> queenAxeDamage;
 
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
 
@@ -257,12 +258,15 @@ public class CAConfig {
 			fairySwordDamage = builder.define("Damage of the Fairy Sword", 10);
 			mantisClawDamage = builder.define("Damage of the Mantis Claw", 10);
 			bigHammerDamage = builder.define("Damage of the Big Hammer", 15);
-			attitudeAdjusterDamage = builder.define("Damage of the Attitude Adjuster", 65);
-			attitudeAdjusterExplosionSize = builder.define("Attitude Adjuster explosion size", 4);
 			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 29);
+			builder.pop();
+			builder.push("Big Weapons/Tools");
+			attitudeAdjusterDamage = builder.define("Damage of the Attitude Adjuster", 65);
+			berthaDamage = builder.define("Damage of the Big Bertha", 500);
 			battleAxeDamage = builder.define("Damage of the Battle Axe", 50);
 			queenAxeDamage = builder.define("Damage of the Queen Scale Battle Axe", 666);
-			berthaDamage = builder.define("Damage of the Big Bertha", 500);
+			slayerChainsawDamage = builder.define("Damage of the Slayer Chainsaw", 40);
+			attitudeAdjusterExplosionSize = builder.define("Attitude Adjuster explosion size", 4);
 			builder.pop();
 			builder.pop();
 			builder.push("Functionality");

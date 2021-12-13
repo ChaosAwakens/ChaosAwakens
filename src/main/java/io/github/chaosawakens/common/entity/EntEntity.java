@@ -85,11 +85,11 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
     @Override
     public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag)
     {
-        // Only allow the ENT to wander when spawned outside the theatre
+        // Only allow the ENT to wander when spawned outside the tree
         if (worldIn instanceof ServerWorld)
         {
             BlockPos pos = this.getOnPos();
-            StructureManager strucManager = ((ServerWorld) worldIn.getLevel()).structureFeatureManager();
+            StructureManager strucManager = worldIn.getLevel().structureFeatureManager();
 
             boolean inDungeon = strucManager.getStructureAt(pos, false, CAStructures.ACACIA_ENT_TREE.get()).isValid() ||
                     strucManager.getStructureAt(pos, false, CAStructures.BIRCH_ENT_TREE.get()).isValid() ||

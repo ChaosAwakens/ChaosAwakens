@@ -1,0 +1,19 @@
+{
+  "parent": "builtin/entity",
+  "gui_light": "front",
+  "loader": "forge:separate-perspective",
+  "base": {
+    "parent": "chaosawakens:item/attitude_adjuster_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "chaosawakens:item/attitude_adjuster_gui"
+    },
+    "fixed": {
+      "parent": "chaosawakens:item/attitude_adjuster_gui"
+    },
+    "ground": {
+      "parent": "chaosawakens:item/attitude_adjuster_gui"
+    }
+  }
+}
