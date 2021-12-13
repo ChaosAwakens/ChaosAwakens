@@ -95,7 +95,6 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.ENDER_EYE_BLOCK.get());
 		dropSelf(CABlocks.ENDER_PEARL_BLOCK.get());
 
-		dropSelf(CABlocks.FOSSILISED_EMERALD_GATOR.get());
 		dropSelf(CABlocks.FOSSILISED_ACACIA_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_BIRCH_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_DARK_OAK_ENT.get());
@@ -104,6 +103,12 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_SPRUCE_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
 		dropSelf(CABlocks.FOSSILISED_RUBY_BUG.get());
+		dropSelf(CABlocks.FOSSILISED_EMERALD_GATOR.get());
+		dropSelf(CABlocks.FOSSILISED_GREEN_FISH.get());
+		dropSelf(CABlocks.FOSSILISED_ROCK_FISH.get());
+		dropSelf(CABlocks.FOSSILISED_SPARK_FISH.get());
+		dropSelf(CABlocks.FOSSILISED_WOOD_FISH.get());
+		dropSelf(CABlocks.FOSSILISED_WHALE.get());
 		dropSelf(CABlocks.FOSSILISED_WTF.get());
 		dropSelf(CABlocks.FOSSILISED_SCORPION.get());
 		dropSelf(CABlocks.FOSSILISED_WASP.get());
@@ -129,6 +134,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_GIANT.get());
 		dropSelf(CABlocks.FOSSILISED_GUARDIAN.get());
 		dropSelf(CABlocks.FOSSILISED_HUSK.get());
+		dropSelf(CABlocks.FOSSILISED_HUSK_STONE.get());
 		dropSelf(CABlocks.FOSSILISED_ILLUSIONER.get());
 		dropSelf(CABlocks.FOSSILISED_IRON_GOLEM.get());
 		dropSelf(CABlocks.FOSSILISED_LLAMA.get());

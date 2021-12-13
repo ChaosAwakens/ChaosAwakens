@@ -32,6 +32,11 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
         this.simpleBlock(CABlocks.FOSSILISED_RUBY_BUG.get());
         this.simpleBlock(CABlocks.FOSSILISED_EMERALD_GATOR.get());
+        this.simpleBlock(CABlocks.FOSSILISED_GREEN_FISH.get());
+        this.simpleBlock(CABlocks.FOSSILISED_ROCK_FISH.get());
+        this.simpleBlock(CABlocks.FOSSILISED_SPARK_FISH.get());
+        this.simpleBlock(CABlocks.FOSSILISED_WOOD_FISH.get());
+        this.simpleBlock(CABlocks.FOSSILISED_WHALE.get());
         this.simpleBlock(CABlocks.FOSSILISED_WTF.get());
         this.simpleBlock(CABlocks.FOSSILISED_SCORPION.get());
         this.simpleBlock(CABlocks.FOSSILISED_WASP.get());
@@ -56,7 +61,7 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_FOX.get());
         this.simpleBlock(CABlocks.FOSSILISED_GIANT.get());
         this.simpleBlock(CABlocks.FOSSILISED_GUARDIAN.get());
-        this.simpleBlock(CABlocks.FOSSILISED_HUSK.get());
+        this.simpleBlock(CABlocks.FOSSILISED_HUSK_STONE.get());
         this.simpleBlock(CABlocks.FOSSILISED_ILLUSIONER.get());
         this.simpleBlock(CABlocks.FOSSILISED_IRON_GOLEM.get());
         this.simpleBlock(CABlocks.FOSSILISED_LLAMA.get());

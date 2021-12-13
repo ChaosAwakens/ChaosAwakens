@@ -74,15 +74,12 @@ public class DefossilizerContainer extends Container {
 
     public  int getProgressArrowScale() {
         int progress = fields.get(0);
-        if (progress > 0) {
-            return progress * 24 / DefossilizerTileEntity.WORK_TIME;
-        }
-        return 0;
+        return progress != 0 ? progress * 24 / DefossilizerTileEntity.WORK_TIME : 0;
     }
 
     @Override
     public boolean stillValid(PlayerEntity player) {
-        return this.inventory.stillValid(player);
+        return inventory.stillValid(player);
     }
 
     @Override

@@ -97,7 +97,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
         if (this.level == null || getItem(0).isEmpty() || getItem(1).isEmpty() || getItem(2).isEmpty()) {
             return null;
         }
-        return this.level.getRecipeManager().getRecipeFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE, this, this.level).orElse(null);
+        return level.getRecipeManager().getRecipeFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE, this, level).orElse(null);
     }
 
     private ItemStack getWorkOutput(@Nullable DefossilizingRecipe recipe) {
@@ -116,7 +116,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
         if (!current.isEmpty()) {
             int newCount = current.getCount() + output.getCount();
 
-            if (!ItemStack.matches(current, output) || newCount > output.getMaxStackSize()) {
+            if (!ItemStack.matches(current, output) || newCount > 64) {
                 stopWork();
                 return;
             }
@@ -126,8 +126,8 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
             ++progress;
         }
 
-        if (progress >= WORK_TIME) {
-            finishWork(current, output);
+        if (progress >= WORK_TIME && !level.isClientSide) {
+            finishWork(recipe, current);
         }
     }
 
@@ -135,7 +135,8 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
         progress = 0;
     }
 
-    private void finishWork(ItemStack current, ItemStack output) {
+    private void finishWork(DefossilizingRecipe recipe, ItemStack current) {
+        ItemStack output = getWorkOutput(recipe);
         if (!current.isEmpty()) {
             current.grow(output.getCount());
         } else {

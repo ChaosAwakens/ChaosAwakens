@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=south": {
       "model": "chaosawakens:block/defossilizer"
+    },
+    "facing=west": {
+      "model": "chaosawakens:block/defossilizer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "chaosawakens:block/defossilizer",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "chaosawakens:block/defossilizer",
+      "y": 270
     }
   }
 }

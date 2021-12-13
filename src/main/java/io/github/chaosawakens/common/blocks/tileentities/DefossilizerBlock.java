@@ -73,7 +73,7 @@ public class DefossilizerBlock extends Block {
     public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if (tileEntity instanceof IInventory) {
+            if (tileEntity instanceof DefossilizerTileEntity) {
                 InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
                 world.updateNeighbourForOutputSignal(pos, this);
             }
@@ -92,7 +92,7 @@ public class DefossilizerBlock extends Block {
     }
 
     @Override
-    protected void createBlockStateDefinition (StateContainer.Builder < Block, BlockState > builder){
+    protected void createBlockStateDefinition (StateContainer.Builder<Block, BlockState> builder){
         builder.add(FACING);
     }
 }
