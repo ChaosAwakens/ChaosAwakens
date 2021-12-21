@@ -40,6 +40,8 @@ _If you still want the original mod with no changes, please instead play the ori
 - Even if we were granted rights to use the assets, they wouldn't fit with the existing assets, and having both would bring more issues than fix things.
 
 ## Credits/Staff Team
+**Author:** invalid2
+
 **Project Lead:** WeirdNerd
 
 **Texturers:** Absolute Kun, BS Guy, ChromaticAeternus, DracoTyoshi, Franz Drameh, Memer Teamer, Pear, Phobos, Renato, Santispik3, Technocreeper, TheLoneCyberman, thesleepingdevil, VDA Spoop, Xahaan, 𝒯𝟦☯𝓃𝑒™
