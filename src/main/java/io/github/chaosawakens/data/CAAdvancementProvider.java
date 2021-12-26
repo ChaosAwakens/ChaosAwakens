@@ -68,8 +68,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
     public void register(Consumer<Advancement> t) {
 
 
-        Advancement root = registerAdvancement("root", FrameType.TASK, CAItems.RUBY.get()).addCriterion("root",
-                PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("root"));
+        Advancement root = Advancement.Builder.advancement().display(CAItems.RUBY.get(), new TranslationTextComponent("advancements.chaosawakens.root.title"),
+                new TranslationTextComponent("advancements.chaosawakens.root.description"), BACKGROUND_TEXTURE, FrameType.TASK, false, false, false).save(t, id("root"));;
 
         // ARMOR
         // Cat's Eye Armor

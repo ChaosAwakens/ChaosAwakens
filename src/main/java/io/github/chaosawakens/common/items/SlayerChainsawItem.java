@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.items;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.enchantment.IVanishable;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -51,6 +52,7 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "slayerchainsawcontroller", 0, this::predicate));
     }
+
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if (!world.isClientSide) {

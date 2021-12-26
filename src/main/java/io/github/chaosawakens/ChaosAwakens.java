@@ -61,6 +61,8 @@ public class ChaosAwakens {
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 		}
 
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
+
 		//Register the deferred registers
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);
@@ -97,8 +99,6 @@ public class ChaosAwakens {
 		//Check for updates
 		if (CAConfig.COMMON.showUpdateMessage.get())
 			UpdateHandler.init();
-
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 	}
 
 	public static ResourceLocation prefix(String name) {

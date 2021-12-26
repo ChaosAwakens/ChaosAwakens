@@ -7,7 +7,7 @@
     "stronghold": {
       "distance": 32,
       "spread": 3,
-      "count": 128
+      "count": 0
     },
     "structures": {
       "minecraft:buried_treasure": {
