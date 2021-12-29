@@ -77,7 +77,7 @@ public class CAItems {
     public static final Food FOOD_ENCHANTED_GOLDEN_CANDYCANE = new Food.Builder().nutrition(6).saturationMod(0.3F).alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 300, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 300, 0), 1.0F).effect(() -> new EffectInstance(Effects.DIG_SPEED, 600, 1), 1.0F).effect(() -> new EffectInstance(Effects.JUMP, 900, 1), 1.0F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 900, 1), 1.0F).build();
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
-
+    
     // ORESPAWN FOODS
     public static final RegistryObject<Item> CORNDOG = ITEMS.register("corndog", () -> new Item(new Item.Properties().food(CAItems.FOOD_RAW_CORNDOG).tab(CAItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> COOKED_CORNDOG = ITEMS.register("cooked_corndog", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_CORNDOG).tab(CAItemGroups.foodItemGroup)));
@@ -103,9 +103,9 @@ public class CAItems {
     public static final RegistryObject<Item> BLT_SANDWICH = ITEMS.register("blt_sandwich", () -> new Item(new Item.Properties().food(CAItems.FOOD_BLT_SANDWICH).tab(CAItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> SEAFOOD_PATTY = ITEMS.register("seafood_patty", () -> new Item(new Item.Properties().food(CAItems.FOOD_SEAFOOD_PATTY).tab(CAItemGroups.foodItemGroup)));
 
-    public static final RegistryObject<Item> GREEN_FISH = ITEMS.register("green_fish", () -> new Item(new Item.Properties().food(Foods.COD).tab(CAItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> GREEN_FISH = ITEMS. register("green_fish", () -> new Item(new Item.Properties().food(Foods.COD).tab(CAItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> ROCK_FISH = ITEMS.register("rock_fish", () -> new Item(new Item.Properties().food(Foods.COD).tab(CAItemGroups.foodItemGroup)));
-    public static final RegistryObject<Item> WOOD_FISH = ITEMS.register("wood_fish", () -> new Item(new Item.Properties().food(Foods.COD).tab(CAItemGroups.foodItemGroup)));
+    public static final RegistryObject<Item> WOOD_FISH = ITEMS.register("wood_fish", () -> new Item(new Item.Properties().tab(CAItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> SPARK_FISH = ITEMS.register("spark_fish", () -> new Item(new Item.Properties().food(CAItems.FOOD_SPARK_FISH).fireResistant().tab(CAItemGroups.foodItemGroup)));
     public static final RegistryObject<Item> LAVA_EEL = ITEMS.register("lava_eel", () -> new Item(new Item.Properties().food(CAItems.FOOD_LAVA_EEL).fireResistant().tab(CAItemGroups.foodItemGroup)));
 
@@ -119,7 +119,11 @@ public class CAItems {
 	public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds", () -> new BlockNamedItem(CABlocks.CORN_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.foodItemGroup)));
 	public static final RegistryObject<Item> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.foodItemGroup)));
-
+	
+	//Fish Buckets
+	public static final RegistryObject<FishBucketItem> WOOD_FISH_BUCKET = ITEMS.register("wood_fish_bucket", () -> new FishBucketItem(CAEntityTypes.WOOD_FISH, () -> Fluids.WATER, (new Item.Properties().stacksTo(1).tab(CAItemGroups.eggsItemGroup))));
+    public static final RegistryObject<FishBucketItem> ROCK_FISH_BUCKET = ITEMS.register("rock_fish_bucket", () -> new FishBucketItem(CAEntityTypes.ROCK_FISH, () -> Fluids.WATER, new Item.Properties().tab(CAItemGroups.eggsItemGroup).stacksTo(1)));
+	
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(CAItemGroups.foodItemGroup)));
 
     // SHINY FOOD
@@ -195,7 +199,7 @@ public class CAItems {
     public static final RegistryObject<WallOrFloorItem> CRYSTAL_TORCH = ITEMS.register("crystal_torch", () -> new WallOrFloorItem(CABlocks.CRYSTAL_TORCH.get(), CABlocks.WALL_CRYSTAL_TORCH.get(), new Item.Properties().tab(CAItemGroups.blocksItemGroup)));
     public static final RegistryObject<WallOrFloorItem> SUNSTONE_TORCH = ITEMS.register("sunstone_torch", () -> new WallOrFloorItem(CABlocks.SUNSTONE_TORCH.get(), CABlocks.WALL_SUNSTONE_TORCH.get(), new Item.Properties().tab(CAItemGroups.blocksItemGroup)));
     public static final RegistryObject<WallOrFloorItem> EXTREME_TORCH = ITEMS.register("extreme_torch", () -> new WallOrFloorItem(CABlocks.EXTREME_TORCH.get(), CABlocks.WALL_EXTREME_TORCH.get(), new Item.Properties().tab(CAItemGroups.blocksItemGroup)));
-
+    
     // TOOLS
     // Ultimate
     public static final RegistryObject<SwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateSwordDamage.get() - 37, -2.4F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.equipmentItemGroup),
@@ -489,8 +493,6 @@ public class CAItems {
     public static final RegistryObject<CASpawnEggItem> WHALE_SPAWN_EGG = ITEMS.register("whale_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.WHALE, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
 
     public static final RegistryObject<CASpawnEggItem> ROCK_FISH_SPAWN_EGG = ITEMS.register("rock_fish_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.ROCK_FISH, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
-    public static final RegistryObject<FishBucketItem> ROCK_FISH_BUCKET = ITEMS.register("rock_fish_bucket", () -> new FishBucketItem(CAEntityTypes.ROCK_FISH, () -> Fluids.WATER, new Item.Properties().tab(CAItemGroups.eggsItemGroup).stacksTo(1)));
-
     public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
     public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
     public static final RegistryObject<SpawnEggItem> ILLUSIONER_SPAWN_EGG = ITEMS.register("illusioner_spawn_egg", () -> new SpawnEggItem(EntityType.ILLUSIONER, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.eggsItemGroup)));
@@ -506,7 +508,7 @@ public class CAItems {
     public static final RegistryObject<Item> ZOO_CAGE_LARGE = ITEMS.register("zoo_cage_large", () -> new StructureItem(new Item.Properties().tab(CAItemGroups.itemsItemGroup).stacksTo(16), "cage_l"));
     public static final RegistryObject<Item> ZOO_CAGE_EXTRA_LARGE = ITEMS.register("zoo_cage_extra_large", () -> new StructureItem(new Item.Properties().tab(CAItemGroups.itemsItemGroup).stacksTo(16), "cage_xl"));
     public static final RegistryObject<Item> MINERS_DREAM = ITEMS.register("miners_dream", () -> new MinersDreamItem(new Item.Properties().tab(CAItemGroups.itemsItemGroup).stacksTo(16)));
-
+    
     // DEV ITEMS FOR DATAPACK CREATORS
     public static final RegistryObject<DevItem> DEV_ITEM1 = ITEMS.register("dev_item1", () -> new DevItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DevItem> DEV_ITEM16 = ITEMS.register("dev_item16", () -> new DevItem(new Item.Properties().stacksTo(16)));

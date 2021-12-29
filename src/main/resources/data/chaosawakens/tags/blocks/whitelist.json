@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:logs",
+    "#chaosawakens:apple_logs",
+    "#chaosawakens:cherry_logs",
+    "#chaosawakens:duplication_logs",
+    "#chaosawakens:peach_logs"
+  ]
+}

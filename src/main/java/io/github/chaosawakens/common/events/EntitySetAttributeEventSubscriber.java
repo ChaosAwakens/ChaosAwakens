@@ -41,5 +41,7 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WHALE.get(), WhaleEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROCK_FISH.get(), RockFishEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.WOOD_FISH.get(), WoodFishEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.LAVA_EEL.get(), LavaEelEntity.setCustomAttributes().build());
     }
 }

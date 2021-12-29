@@ -102,12 +102,17 @@ public class BiomeLoadEventSubscriber {
 		
 		private static final Consumer<MobSpawnInfoBuilder> OCEAN_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WHALE.get(), 1, 1, 1));
-			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.ROCK_FISH.get(), 1, 1, 3));
+			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.ROCK_FISH.get(), 14, 3, 5));
+			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WOOD_FISH.get(), 20, 5, 8));
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 10, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
+		};
+		
+		private static final Consumer<MobSpawnInfoBuilder>NETHER_OR_HOT_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LAVA_EEL.get(), 10, 1, 2));
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> PLAINS_MOBS = (builder) -> {
@@ -137,6 +142,8 @@ public class BiomeLoadEventSubscriber {
 						OCEAN_MOBS.accept(spawnInfoBuilder);
 				case THEEND:
 				case NETHER:
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.HOT) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER))
+						NETHER_OR_HOT_MOBS.accept(spawnInfoBuilder);
 					break;
 				default:
 					if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))

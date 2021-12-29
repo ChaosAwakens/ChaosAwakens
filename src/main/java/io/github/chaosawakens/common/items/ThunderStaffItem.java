@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;

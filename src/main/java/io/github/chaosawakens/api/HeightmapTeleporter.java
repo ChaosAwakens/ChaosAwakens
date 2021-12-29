@@ -1,6 +1,7 @@
 package io.github.chaosawakens.api;
 
 import net.minecraft.block.PortalInfo;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
