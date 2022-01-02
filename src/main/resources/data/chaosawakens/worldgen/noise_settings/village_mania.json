@@ -7,7 +7,7 @@
     "stronghold": {
       "distance": 32,
       "spread": 3,
-      "count": 128
+      "count": 0
     },
     "structures": {
       "minecraft:buried_treasure": {
@@ -21,8 +21,8 @@
         "salt": 34222645
       },
       "minecraft:mansion": {
-        "spacing": 80,
-        "separation": 20,
+        "spacing": 48,
+        "separation": 16,
         "salt": 10387319
       },
       "minecraft:nether_fossil": {
@@ -61,8 +61,8 @@
         "salt": 10387313
       },
       "minecraft:pillager_outpost": {
-        "spacing": 32,
-        "separation": 8,
+        "spacing": 20,
+        "separation": 6,
         "salt": 165745296
       },
       "minecraft:ocean_ruin": {
@@ -76,8 +76,8 @@
         "salt": 0
       },
       "minecraft:village": {
-        "spacing": 32,
-        "separation": 8,
+        "spacing": 12,
+        "separation": 6,
         "salt": 10387312
       },
       "minecraft:shipwreck": {

@@ -67,10 +67,10 @@ public enum CAArmorMaterial implements IArmorMaterial {
 			() -> Ingredient.of(CAItems.PLATINUM_LUMP.get())),
 
 	MOBZILLA_SCALE("mobzilla_scale", 40, new int[] { 7, 11, 13, 7 }, 74, SoundEvents.ARMOR_EQUIP_DIAMOND, 6f, 0.2f,
-			() -> Ingredient.of(CAItems.DEV_ITEM1.get())),
+			() -> Ingredient.EMPTY),
 	
 	ROYAL_GUARDIAN("royal_guardian", 72, new int[] { 8, 12, 14, 8 }, 84, SoundEvents.ARMOR_EQUIP_DIAMOND, 7.5f, 0.4f,
-			() -> Ingredient.of(CAItems.DEV_ITEM1.get())),
+			() -> Ingredient.EMPTY),
 	
 	QUEEN_SCALE("queen_scale", 68, new int[] { 9, 14, 16, 9 }, 96, SoundEvents.ARMOR_EQUIP_DIAMOND, 8f, 0.3f,
 			() -> Ingredient.of(CAItems.QUEEN_SCALE.get()));

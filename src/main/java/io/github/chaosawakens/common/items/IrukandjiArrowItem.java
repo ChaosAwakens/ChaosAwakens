@@ -15,7 +15,6 @@ public class IrukandjiArrowItem extends ArrowItem {
     @Override
     public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
         IrukandjiArrowEntity arrow = new IrukandjiArrowEntity(worldIn, shooter);
-        arrow.setBaseDamage(100D);
         return arrow;
     }
 }

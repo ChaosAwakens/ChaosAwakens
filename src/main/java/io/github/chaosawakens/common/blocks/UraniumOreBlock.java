@@ -60,21 +60,6 @@ public class UraniumOreBlock extends CAOreBlock {
         }
     }
 
-    @Override
-    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        /**
-         * If the player breaks this ore, it has a chance of exploding which is less likely to occur with better pickaxes.
-         * Anything below Diamond: certain explosion
-         * Diamond, Emerald, Amethyst and Tiger's Eye: 50% of exploding
-         * Netherite, Ruby: 33% chance of exploding
-         * Ultimate: 25% chance of exploding
-         */
-        int pickaxeStrength = player.getMainHandItem().getHarvestLevel(ToolType.PICKAXE, player, state);
-        if (!player.isCreative() && !worldIn.isClientSide && worldIn.random.nextInt(pickaxeStrength >= 3 ? pickaxeStrength - 1 : 1) <= 0)
-            worldIn.explode(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 2.5F, Explosion.Mode.DESTROY);
-        super.playerWillDestroy(worldIn, pos, state, player);
-    }
-
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos blockPos, Random random) {
         if (state.getValue(LIT) && state.getValue(GLOW_STRENGTH) > 0)

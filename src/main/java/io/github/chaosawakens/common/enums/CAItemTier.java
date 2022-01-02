@@ -46,9 +46,9 @@ public enum CAItemTier implements IItemTier {
 
     WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.of(Blocks.REDSTONE_BLOCK)),
 
-    WEAPON_GENERIC(2, 1024, 6, 6, 8, null),
+    WEAPON_GENERIC(2, 1024, 6, 6, 8, () -> Ingredient.EMPTY),
 
-    WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, null),
+    WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, () -> Ingredient.EMPTY),
 
     WEAPON_BERTHA(5, 6000, 16, 496, 72, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
 
