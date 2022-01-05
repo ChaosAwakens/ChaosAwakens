@@ -1,3 +1,4 @@
+
 {
   "type": "minecraft:fishing",
   "pools": [
@@ -23,6 +24,31 @@
         {
           "type": "minecraft:item",
           "name": "chaosawakens:tigers_eye"
+        },
+        {
+          "type":"minecraft:item",
+          "name":"minecraft:waterlilly",
+          "weight": "1"
+        },
+        {
+          "type": "minecraft:item",
+          "name":"minecraft:name_tag",
+          "weight": "1"
+        },
+        {
+          "type": "minecraft:item",
+          "name":"minecraft:saddle",
+          "weight": "1"
+        }, 
+        {
+          "type":"minecraft:item",
+          "name": "minecraft:bow",
+          "weight": "1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fishing_rod",
+          "weight": 1
         }
       ]
     }
