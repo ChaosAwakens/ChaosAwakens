@@ -14,10 +14,10 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class IrukandjiArrowEntity extends AbstractArrowEntity {
 
     private int duration = 200;
-    private double damage = 20.0D;
 
     public IrukandjiArrowEntity(EntityType<? extends IrukandjiArrowEntity> type, World worldIn) {
         super(type, worldIn);
+        this.setBaseDamage(100D);
     }
 
     public IrukandjiArrowEntity(World worldIn, double x, double y, double z) {
@@ -61,13 +61,4 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    @Override
-    public double getBaseDamage() {
-        return this.damage;
-    }
-
-    @Override
-    public void setBaseDamage(double damageIn) {
-        this.damage = damageIn;
-    }
 }

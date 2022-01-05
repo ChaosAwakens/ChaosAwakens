@@ -166,8 +166,8 @@ public class CAConfig {
 			ultimatePickaxeDamage = builder.define("Damage of the Ultimate Pickaxe", 38);
 			ultimateShovelDamage = builder.define("Damage of the Ultimate Shovel", 39);
 			ultimateHoeDamage = builder.define("Damage of the Ultimate Hoe", 1);
-			ultimateBowArrowBaseDamage = builder.define("Base Damage of the Ultimate Bow Arrow", 2.0);
-			ultimateBowArrowDamageMultiplier = builder.define("Damage Multiplier of the Ultimate Bow's Punch Enchantment", 0.5);
+			ultimateBowArrowBaseDamage = builder.comment("How much damage the Ultimate bow will add up to the base arrow damage").define("Additional Damage of the Ultimate Bow Arrows", 5D);
+			ultimateBowArrowDamageMultiplier = builder.define("Damage Multiplier of the Ultimate Bow's Power Enchantment", 0.5);
 			builder.pop();
 			builder.push("Emerald Weapons/Tools");
 			emeraldSwordDamage = builder.define("Damage of the Emerald Sword", 10);
