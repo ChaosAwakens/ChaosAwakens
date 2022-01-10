@@ -1,18 +1,18 @@
 package io.github.chaosawakens.common.items;
 
+import net.minecraft.entity.player.PlayerEntity;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.enchantment.IVanishable;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
@@ -44,13 +44,16 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
     }
 
     private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {
-        // Not setting an animation here as that's handled below
+     /*   if(event.getLimbSwing() >= 0.0F) {
+        	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", false));
+            return PlayState.CONTINUE;
+        }*/
         return PlayState.CONTINUE;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "slayerchainsawcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<SlayerChainsawItem>(this, "slayerchainsawcontroller", 0, this::predicate));
     }
 
     @Override
@@ -71,7 +74,7 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
         if (state == ANIM) {
             // Always use GeckoLibUtil to get AnimationControllers when you don't have
             // access to an AnimationEvent
-            final AnimationController controller = GeckoLibUtil.getControllerForID(this.factory, id, CONTROLLER_NAME);
+            final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id, CONTROLLER_NAME);
 
             if (controller.getAnimationState() == AnimationState.Stopped) {
                 final ClientPlayerEntity player = Minecraft.getInstance().player;

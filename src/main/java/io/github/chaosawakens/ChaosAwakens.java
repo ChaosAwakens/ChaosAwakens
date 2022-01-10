@@ -1,6 +1,7 @@
 package io.github.chaosawakens;
 
 import io.github.chaosawakens.api.CAReflectionHelper;
+
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
 import io.github.chaosawakens.common.UpdateHandler;
@@ -40,12 +41,12 @@ public class ChaosAwakens {
 	public static final String VERSION = "0.9.1.0-preview1";
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static ChaosAwakens INSTANCE;
-
+	
 	public ChaosAwakens() {
 		INSTANCE = this;
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
-
+				
 		LOGGER.debug(MODNAME + " Version is:" + VERSION);
 
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
@@ -90,6 +91,8 @@ public class ChaosAwakens {
 		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
 		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
 		forgeBus.addListener(MiscEventHandler::onEntityJoin);
+	//	forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
+	//	forgeBus.addListener(EventPriority.HIGH,ChainsawEventSubscriber::onBreakSpeed);
 		forgeBus.addListener(LoginEventHandler::onPlayerLogin);
 		forgeBus.addListener(GiantEventHandler::onEntityJoin);
 		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);

@@ -2,7 +2,7 @@
 Chaos Awakens is a remaster of both the very iconic mod [OreSpawn](https://www.orespawn.com/download/) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
 
 ## Download
-All downloads are now located at our website that is located [here](https://chaosawakens.github.io/?#downloadsDiv). The source code for our website is located [here].(https://github.com/ChaosAwakens/chaosawakens.github.io)
+All downloads are now located at our website that is located [here](https://chaosawakens.github.io/?#downloadsDiv). The source code for our website is located [here](https://github.com/ChaosAwakens/chaosawakens.github.io)
 
 Due to drama and various mass reports by unknown sources, the mod was taken down from [*CurseForge*](https://www.curseforge.com/minecraft/mc-mods) and cannot be re-uploaded from this point forward. Please do **not** harass **anyone** in the *CurseForge* moderation team or **any** competitor mod developer for what you think they did. They are humans and we are too, and we all make mistakes.
 

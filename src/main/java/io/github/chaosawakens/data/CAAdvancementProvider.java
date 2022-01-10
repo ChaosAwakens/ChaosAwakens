@@ -125,10 +125,10 @@ public class CAAdvancementProvider extends AdvancementProvider {
         Advancement trophyWorthy = registerAdvancement("trophy_worthy", FrameType.CHALLENGE, CABlocks.PLATINUM_BLOCK.get()).parent(root).addCriterion("platinum_block",
                 InventoryChangeTrigger.Instance.hasItems(CABlocks.PLATINUM_BLOCK.get(), CABlocks.URANIUM_BLOCK.get(), CABlocks.TITANIUM_BLOCK.get())).save(t, id("trophy_worthy"));
 
-        Advancement anAppleCowADay = registerAdvancement("an_apple_cow_a_day", FrameType.TASK, CAItems.APPLE_COW_SPAWN_EGG.get()).parent(root).addCriterion("apple_cow",
+        Advancement anAppleCowADay = registerAdvancement("an_apple_cow_a_day", FrameType.TASK, CAItems.APPLE_COW_SPAWN_EGGS.get()).parent(root).addCriterion("apple_cow",
                 BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.ANY)).save(t, id("an_apple_cow_a_day"));
 
-        Advancement shinyCows = registerAdvancement("shiny_cows", FrameType.TASK, CAItems.GOLDEN_APPLE_COW_SPAWN_EGG.get()).parent(anAppleCowADay).addCriterion("golden_apple_cow",
+        Advancement shinyCows = registerAdvancement("shiny_cows", FrameType.TASK, CAItems.GOLDEN_APPLE_COW_SPAWN_EGGS.get()).parent(anAppleCowADay).addCriterion("golden_apple_cow",
                 BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.ANY)).save(t, id("shiny_cows"));
 
         Advancement entDestroyer = registerAdvancement("ent_destroyer", FrameType.TASK, Blocks.OAK_LEAVES).parent(root).addCriterion("acacia_ent",

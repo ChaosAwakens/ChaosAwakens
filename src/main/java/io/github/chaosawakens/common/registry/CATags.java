@@ -24,4 +24,11 @@ public class CATags {
 
 	// Item tags
 	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID + ":custom_tooltips");
+	
+	public static final ITag<Block> whitelist = getBlockTagWrapper("whitelist");
+    public static final ITag<Block> blacklist = getBlockTagWrapper("blacklist");
+
+    public static ITag<Block> getBlockTagWrapper(String path) {
+        return BlockTags.bind(ChaosAwakens.MODID + ":" + path);
+    }
 }

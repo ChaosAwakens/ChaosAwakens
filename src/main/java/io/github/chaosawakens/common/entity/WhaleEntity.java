@@ -223,10 +223,10 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 
     @Override
     public boolean checkSpawnRules(IWorld p_213380_1_, SpawnReason p_213380_2_) {
-        return super.checkSpawnRules(p_213380_1_, p_213380_2_);
+        return super.checkSpawnRules(p_213380_1_, p_213380_2_) && WhaleEntity.checkWhaleSpawnRules(level, blockPosition());
     }
 
-    public static boolean checkWhaleSpawnRules(EntityType<WhaleEntity> whale, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+    public static boolean checkWhaleSpawnRules(IWorld world, BlockPos pos) {
         if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
             Optional<RegistryKey<Biome>> optional = world.getBiomeName(pos);
             return (Objects.equals(optional, Optional.of(Biomes.OCEAN)) || !Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);

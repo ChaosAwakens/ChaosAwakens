@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.registry.CAItems;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -9,7 +10,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.passive.fish.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigator;
@@ -66,7 +66,7 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.MOVEMENT_SPEED, 1.2D)
                 .add(Attributes.ATTACK_SPEED, 0.25D)
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0)

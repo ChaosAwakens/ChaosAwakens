@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
+
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
 import net.minecraft.enchantment.EnchantmentData;
