@@ -36,14 +36,6 @@
   ],
   "starts": [],
   "spawners": {
-    "monster": [
-      {
-        "type": "minecraft:enderman",
-        "weight": 3,
-        "minCount": 1,
-        "maxCount": 3
-      }
-    ],
     "creature": [
       {
         "type": "chaosawakens:crystal_apple_cow",

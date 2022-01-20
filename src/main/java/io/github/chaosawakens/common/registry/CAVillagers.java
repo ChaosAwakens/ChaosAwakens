@@ -1,17 +1,12 @@
 package io.github.chaosawakens.common.registry;
 
-import com.google.common.collect.ImmutableSet;
 import io.github.chaosawakens.ChaosAwakens;
-import net.minecraft.entity.ai.brain.task.GiveHeroGiftsTask;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.entity.villager.VillagerType;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

@@ -1,7 +1,8 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAItems;
-
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -51,16 +52,7 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new LookAtGoal(this, CodEntity.class, 4.0f));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, PufferfishEntity.class, 4.0f));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, SalmonEntity.class, 4.0f));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, TropicalFishEntity.class, 4.0f));
-        this.goalSelector.addGoal(2, new RockFishEntity.AttackGoal(this, 1.0D, false));
         this.goalSelector.addGoal(4, new RockFishEntity.SwimGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, CodEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PufferfishEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SalmonEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TropicalFishEntity.class, true));
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -131,31 +123,6 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
             return (Objects.equals(optional, Optional.of(Biomes.OCEAN)) || Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
         } else {
             return false;
-        }
-    }
-
-    public boolean okTarget(@Nullable LivingEntity livingEntity) {
-        if (livingEntity != null) {
-            return !this.level.isDay() || livingEntity.isInWater();
-        } else {
-            return false;
-        }
-    }
-
-    static class AttackGoal extends MeleeAttackGoal {
-        private final RockFishEntity rockfish;
-
-        public AttackGoal(RockFishEntity mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
-            super(mob, speedModifier, followingTargetEvenIfNotSeen);
-            this.rockfish = mob;
-        }
-
-        public boolean canUse() {
-            return super.canUse() && this.rockfish.okTarget(this.rockfish.getTarget());
-        }
-
-        public boolean canContinueToUse() {
-            return super.canContinueToUse() && this.rockfish.okTarget(this.rockfish.getTarget());
         }
     }
     

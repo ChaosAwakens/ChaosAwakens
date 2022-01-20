@@ -347,14 +347,14 @@ public class CAEntityLootTables extends EntityLootTables {
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
-                                        .when(RandomChance.randomChance(0.3F))
+                                        .when(RandomChance.randomChance(0.1F))
                                         .when(KilledByPlayer.killedByPlayer()))));
         add(CAEntityTypes.EMERALD_GATOR.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(Items.EMERALD)
-                                        .when(RandomChance.randomChance(0.3F))
+                                        .when(RandomChance.randomChance(0.4F))
                                         .when(KilledByPlayer.killedByPlayer()))));
         add(CAEntityTypes.APPLE_COW.get(),
                 LootTable.lootTable()
@@ -629,6 +629,20 @@ public class CAEntityLootTables extends EntityLootTables {
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(CAItems.ROCK_FISH.get())
+                                        .apply(SetCount.setCount(ConstantRange.exactly(1)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.WOOD_FISH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(CAItems.WOOD_FISH.get())
+                                        .apply(SetCount.setCount(ConstantRange.exactly(1)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.LAVA_EEL.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(CAItems.LAVA_EEL.get())
                                         .apply(SetCount.setCount(ConstantRange.exactly(1)))
                                         .when(KilledByPlayer.killedByPlayer()))));
         add(EntityType.ILLUSIONER,

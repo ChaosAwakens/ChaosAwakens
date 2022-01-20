@@ -1,8 +1,10 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -19,7 +21,9 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

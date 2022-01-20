@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.items;
 
+import io.github.chaosawakens.common.enums.CAItemTier;
 import net.minecraft.entity.player.PlayerEntity;
 
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,6 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.server.ServerWorld;
@@ -32,7 +32,7 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
     private static final int ANIM = 0;
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
+    public SlayerChainsawItem(CAItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
         GeckoLibNetwork.registerSyncable(this);
     }

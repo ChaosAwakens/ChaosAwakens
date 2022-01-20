@@ -8,7 +8,6 @@ import net.minecraft.item.*;
 import net.minecraft.util.NonNullList;
 
 public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
-
     private final EnchantmentData[] enchantments;
 
     public EnchantedArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, EnchantmentData[] enchantments) {
@@ -37,5 +36,4 @@ public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
     public EnchantmentData[] enchantments() {
         return this.enchantments;
     }
-
 }

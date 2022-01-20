@@ -1,9 +1,7 @@
 package io.github.chaosawakens.common.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 public class CAConfig {
@@ -18,7 +16,6 @@ public class CAConfig {
 	}
 
 	public static class Common {
-		
 		public final ConfigValue<Integer> ultimateSwordDamage;
 		public final ConfigValue<Integer> ultimateAxeDamage;
 		public final ConfigValue<Integer> ultimatePickaxeDamage;

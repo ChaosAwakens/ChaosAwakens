@@ -27,10 +27,6 @@ public interface IGrabber {
 
     Vector3d getGrabOffset();
 
-    default Vector3d getGrabExtraMotion() {
-        return null;
-    }
-
     default boolean getGrabbing(LivingEntity entity) {
         return entity.getEntityData().get(GRABBING);
     }

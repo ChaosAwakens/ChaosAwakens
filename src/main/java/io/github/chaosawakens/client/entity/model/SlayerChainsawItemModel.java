@@ -1,7 +1,6 @@
 package io.github.chaosawakens.client.entity.model;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.items.AttitudeAdjusterItem;
 import io.github.chaosawakens.common.items.SlayerChainsawItem;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
