@@ -10,11 +10,24 @@
       "translate": "advancements.chaosawakens.root.description"
     },
     "frame": "task",
-    "show_toast": false,
-    "announce_to_chat": false,
+    "show_toast": true,
+    "announce_to_chat": true,
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
-  "criteria": {},
-  "requirements": []
+  "criteria": {
+    "root": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "dimension": "minecraft:overworld"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "root"
+    ]
+  ]
 }

@@ -2,6 +2,7 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -115,6 +116,9 @@ public class CATagProvider extends BlockTagsProvider {
 		@Override
 		protected void addTags() {
 //			this.tag(CATags.BUCKETS).add(Items.WATER_BUCKET, Items.MILK_BUCKET, Items.LAVA_BUCKET);
+			this.tag(CATags.ULTIMATE_GEAR_CRAFTING_MATERIAL_TITANIUM).add(CAItems.TITANIUM_INGOT.get());
+			this.tag(CATags.ULTIMATE_GEAR_CRAFTING_MATERIAL_PLATINUM).add(CAItems.PLATINUM_LUMP.get());
+			this.tag(CATags.ULTIMATE_GEAR_CRAFTING_MATERIAL_URANIUM).add(CAItems.URANIUM_INGOT.get());
 		}
 	}
 }

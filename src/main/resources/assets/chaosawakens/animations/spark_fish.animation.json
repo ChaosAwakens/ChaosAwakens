@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"movement.swim": {
+		"animation.spark_fish.swim": {
 			"loop": true,
 			"animation_length": 1.8,
 			"anim_time_update": "0",

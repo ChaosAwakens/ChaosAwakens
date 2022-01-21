@@ -644,7 +644,31 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(Items.ROTTEN_FLESH)
                                         .apply(SetCount.setCount(RandomValueRange.between(14.0F, 31.0F))))));
-
+        add(CAEntityTypes.WHALE.get(),
+                LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET)
+                                .apply(SetCount.setCount(RandomValueRange.between(1.0F, 7.0F)))
+                                .when(KilledByPlayer.killedByPlayer()))
+                        .add(ItemLootEntry.lootTableItem(Items.DIAMOND)
+                                .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
+                                .when(KilledByPlayer.killedByPlayer())))
+                .withPool(LootPool.lootPool()
+                		.setRolls(ConstantRange.exactly(1))
+                		.add(ItemLootEntry.lootTableItem(CAItems.AMETHYST.get()))
+                		         .apply(SetCount.setCount(RandomValueRange.between(0.0F, 1.0F)))
+                		         .when(KilledByPlayer.killedByPlayer())
+                        .add(ItemLootEntry.lootTableItem(CAItems.SALT.get()))
+                                 .apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(Items.IRON_NUGGET)
+                                .apply(SetCount.setCount(RandomValueRange.between(1.0F, 9.0F)))
+                                .when(KilledByPlayer.killedByPlayer()))
+                        .add(ItemLootEntry.lootTableItem(Items.EMERALD)
+                                .apply(SetCount.setCount(RandomValueRange.between(0.0F, 2.0F)))
+                                .when(KilledByPlayer.killedByPlayer()))));
     }
 
     @Override

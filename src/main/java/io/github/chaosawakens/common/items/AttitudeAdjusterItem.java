@@ -16,8 +16,8 @@ public class AttitudeAdjusterItem extends ExtendedHitWeaponItem implements IVani
 
     private static final float EXPLOSION_POWER = CAConfig.COMMON.attitudeAdjusterExplosionSize.get();
 
-    public AttitudeAdjusterItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
+    public AttitudeAdjusterItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
+        super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
     }
 
     @Override

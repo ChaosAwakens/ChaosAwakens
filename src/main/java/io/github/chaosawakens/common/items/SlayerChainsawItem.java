@@ -32,8 +32,8 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
     private static final int ANIM = 0;
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
+    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
+        super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
         GeckoLibNetwork.registerSyncable(this);
     }
 
@@ -44,17 +44,14 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
     }
 
     private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {
-     /*   if(event.getLimbSwing() >= 0.0F) {
+        if(event.getLimbSwing() >= 0.0F) {
         	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", false));
             return PlayState.CONTINUE;
-        }*/
+        }
         return PlayState.CONTINUE;
     }
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<SlayerChainsawItem>(this, "slayerchainsawcontroller", 0, this::predicate));
-    }
+
 
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
@@ -88,7 +85,12 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
             }
         }
     }
-
+    
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<SlayerChainsawItem>(this, "slayerchainsawcontroller", 0, this::predicate));
+    }
+    
     @Override
     public AnimationFactory getFactory() {
         return this.factory;

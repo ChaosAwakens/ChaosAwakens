@@ -2,7 +2,9 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStructures;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.MobEntity;
@@ -14,6 +16,8 @@ import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
@@ -32,10 +36,12 @@ import javax.annotation.Nullable;
 
 public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private final Types entType;
 
     public EntEntity(EntityType<? extends AnimatableMonsterEntity> type, World worldIn, Types entType) {
         super(type, worldIn);
         this.noCulling = true;
+        this.entType = entType;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -57,6 +63,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
         }
         if (this.getAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
+            animationSpeed = 0.6F;
             return PlayState.CONTINUE;
         }
         if (event.isMoving()) {
@@ -137,5 +144,70 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
         public String getNameString() {
             return this.name;
         }
+    }
+    
+    public EntEntity.Types getEntType() {
+    	return entType;
+    }
+    
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+    	if(this.getEntType() == Types.ACACIA) {
+    		return CASoundEvents.ACACIA_ENT_HURT.get();
+    	} else if (this.getEntType() != Types.BIRCH) {
+    		return CASoundEvents.BIRCH_ENT_HURT.get();
+    	} else if (this.getEntType() == Types.CRIMSON) {
+    		return CASoundEvents.CRIMSON_ENT_HURT.get();
+    	} else if (this.getEntType() == Types.DARK_OAK) {
+    		return CASoundEvents.DARK_OAK_ENT_HURT.get();
+    	} else if (this.getEntType() == Types.JUNGLE) {
+    		return CASoundEvents.JUNGLE_ENT_HURT.get();
+    	} else if (this.getEntType() == Types.OAK) {
+    		return CASoundEvents.OAK_ENT_HURT.get();
+    	} else if (this.getEntType() == Types.SPRUCE) {
+    		return CASoundEvents.SPRUCE_ENT_HURT.get();
+    	} else if (this.getEntType() == Types.WARPED) {
+    		return CASoundEvents.WARPED_ENT_HURT.get();
+    	}
+    	return CASoundEvents.ENT_HURT.get();
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+    	if(this.getEntType() == Types.ACACIA) {
+    		return CASoundEvents.ACACIA_ENT_DEATH.get();
+    	} else if (this.getEntType() != Types.BIRCH) {
+    		return CASoundEvents.BIRCH_ENT_DEATH.get();
+    	} else if (this.getEntType() == Types.CRIMSON) {
+    		return CASoundEvents.CRIMSON_ENT_DEATH.get();
+    	} else if (this.getEntType() == Types.DARK_OAK) {
+    		return CASoundEvents.DARK_OAK_ENT_DEATH.get();
+    	} else if (this.getEntType() == Types.JUNGLE) {
+    		return CASoundEvents.JUNGLE_ENT_DEATH.get();
+    	} else if (this.getEntType() == Types.OAK) {
+    		return CASoundEvents.OAK_ENT_DEATH.get();
+    	} else if (this.getEntType() == Types.SPRUCE) {
+    		return CASoundEvents.SPRUCE_ENT_DEATH.get();
+    	} else if (this.getEntType() == Types.WARPED) {
+    		return CASoundEvents.WARPED_ENT_DEATH.get();
+    	}
+    	return CASoundEvents.ENT_HURT.get();
+    }
+    
+    @Override
+    protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
+    	if (!p_180429_2_.getMaterial().isLiquid()) { 
+    		this.playSound(CASoundEvents.ENT_WALK.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
+    	}
+    }
+    
+    @Override
+    protected float getVoicePitch() {
+    	return 0.4F;
+    }
+    
+    @Override
+    protected float getSoundVolume() {
+    	return 4.0F;
     }
 }

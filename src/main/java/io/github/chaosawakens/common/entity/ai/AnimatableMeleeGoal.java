@@ -78,6 +78,10 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
         this.hasHit = false;
         this.animationProgress = 0;
     }
+    
+    public void animateAttack(LivingEntity target) {
+    	
+    }
 
     @Override
     public void tick() {
@@ -87,6 +91,12 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
             //ChaosAwakens.debug("GOAL", this.animationProgress+" "+this.animationLength+" "+this.tickDelta+" "+this.animationProgress/this.animationLength);
             if (this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
                 this.entity.lookAt(target, 30.0F, 30.0F);
+                if (this.entity.distanceTo(target) >= 12.0F) {
+                	this.entity.getTarget().moveTo(target.blockPosition(), 3.0F, 10.0F);
+                //	this.entity.swing(Hand.MAIN_HAND);
+                //	this.entity.doHurtTarget(target);
+                //	this.hasHit = true;
+                }
                 this.entity.swing(Hand.MAIN_HAND);
                 this.entity.doHurtTarget(target);
                 this.hasHit = true;

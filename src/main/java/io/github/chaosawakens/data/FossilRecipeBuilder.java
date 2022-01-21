@@ -1,10 +1,10 @@
 package io.github.chaosawakens.data;
 
 import com.google.gson.JsonObject;
+
 import io.github.chaosawakens.common.util.NameUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.ICriterionInstance;
 import net.minecraft.advancements.IRequirementsStrategy;
 import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;

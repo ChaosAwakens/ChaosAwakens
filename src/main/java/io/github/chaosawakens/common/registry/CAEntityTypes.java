@@ -1,16 +1,20 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.entity.projectile.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityType.IFactory;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +24,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CAEntityTypes {
 
@@ -69,25 +74,36 @@ public class CAEntityTypes {
     //Fish
     public static final RegistryObject<EntityType<WoodFishEntity>> WOOD_FISH = ENTITY_TYPES.register("wood_fish",
     		() -> EntityType.Builder.of(WoodFishEntity::new, EntityClassification.WATER_CREATURE)
-    		.sized(1.0F, 1.0F)
+    		.sized(0.4F, 0.15F)
     		.clientTrackingRange(10)
     		.build(new ResourceLocation(ChaosAwakens.MODID, "wood_fish").toString()));
     public static final RegistryObject<EntityType<RockFishEntity>> ROCK_FISH = ENTITY_TYPES.register("rock_fish",
             () -> EntityType.Builder.of(RockFishEntity::new, EntityClassification.WATER_CREATURE)
                     .sized(0.2f, 0.2f) // Hitbox Size ()
-                    .build(new ResourceLocation(ChaosAwakens.MODID, "rock_fish").toString()));
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "spark_fish").toString()));
+    public static final RegistryObject<EntityType<SparkFishEntity>> SPARK_FISH = ENTITY_TYPES.register("spark_fish", 
+    		() -> EntityType.Builder.of(SparkFishEntity::new, EntityClassification.WATER_CREATURE)
+    		.sized(0.4f, 0.15f)
+    		.build(new ResourceLocation(ChaosAwakens.MODID, "spark_fish").toString()));
     
     //Lava Eel
     public static final RegistryObject<EntityType<LavaEelEntity>> LAVA_EEL = ENTITY_TYPES.register("lava_eel",
             () -> EntityType.Builder.of(LavaEelEntity::new, EntityClassification.WATER_CREATURE)
-                    .sized(0.4f, 0.2f) // Hitbox Size ()
+                    .sized(0.3f, 0.2f) // Hitbox Size ()
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "lava_eel").toString()));
+    
+    //Bird
+    public static final RegistryObject<EntityType<BirdEntity>> BIRD = ENTITY_TYPES.register("bird",
+            () -> EntityType.Builder.of(BirdEntity::new, EntityClassification.CREATURE)
+                    .sized(0.4f, 0.3f) // Hitbox Size ()
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "bird").toString()));
     
     // Whale
     public static final RegistryObject<EntityType<WhaleEntity>> WHALE = ENTITY_TYPES.register("whale",
     		() -> EntityType.Builder.of(WhaleEntity::new, EntityClassification.WATER_CREATURE)
-    		.sized(5.7F, 3.5F) // HitBox Size ()
+    		.sized(6.9F, 3.5F) // HitBox Size ()
     		.clientTrackingRange(10)
     		.build(new ResourceLocation(ChaosAwakens.MODID, "whale").toString()));
     
@@ -169,7 +185,7 @@ public class CAEntityTypes {
     // Ruby Bug
     public static final RegistryObject<EntityType<RubyBugEntity>> RUBY_BUG = ENTITY_TYPES.register("ruby_bug",
             () -> EntityType.Builder.of(RubyBugEntity::new, EntityClassification.CREATURE)
-                    .sized(1.25f, 1.25f) // Hitbox Size ()
+                    .sized(0.6f, 0.6f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "ruby_bug").toString()));
     
     // Stink Bug
@@ -219,10 +235,31 @@ public class CAEntityTypes {
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(20)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "explosive_ball").toString()));
     public static final RegistryObject<EntityType<UltimateFishingBobberEntity>> ULTIMATE_FISHING_BOBBER = ENTITY_TYPES.register("ultimate_fishing_bobber",
-            () -> EntityType.Builder.<UltimateFishingBobberEntity>createNothing(EntityClassification.MISC).noSave().noSummon()
+            () -> EntityType.Builder.<UltimateFishingBobberEntity>createNothing(EntityClassification.MISC).noSave().noSummon().setShouldReceiveVelocityUpdates(true)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(5)
+                    .setCustomClientFactory(UltimateFishingBobberEntity::new)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_fishing_bobber").toString()));
+  /*  public static final EntityType<UltimateFishingBobberEntity> ULTIMATE_FISHING_BOBBER = register("ultimate_fishing_bobber", 
+    		EntityType.Builder.<UltimateFishingBobberEntity>createNothing(EntityClassification.MISC)
+    		.noSave()
+    		.noSummon()
+    		.sized(0.25F, 0.25F)
+    		.clientTrackingRange(4)
+    		.updateInterval(5));*/
+
     private static final List<EntityType<?>> ALL = new ArrayList<>();
+    
+  /*  @SubscribeEvent
+    public static UltimateFishingBobberEntity clientBobber(World e) {
+    	 if (e.isClientSide()) {
+    	        return new UltimateFishingBobberEntity(e);
+    	      } else {
+    	        return new UltimateFishingBobberEntity(
+    	            new FakePlayer((ServerWorld) e, new GameProfile(UUID.randomUUID(), "")), e, 0,
+    	            0);
+    	      }
+       
+   }*/
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> evt) {

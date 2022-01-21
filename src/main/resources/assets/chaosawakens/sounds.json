@@ -17,6 +17,7 @@
       "chaosawakens:entity/robo/death"
     ]
   },
+  
   "entity.emerald_gator.walk": {
     "subtitle": "subtitles.chaosawakens.entity.emerald_gator.walk",
     "sounds": [
@@ -41,6 +42,7 @@
       "chaosawakens:entity/emerald_gator/death"
     ]
   },
+  
   "entity.hercules_beetle.walk": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.walk",
     "sounds": [
@@ -64,6 +66,223 @@
     "sounds": [
       "chaosawakens:entity/hercules_beetle/death1",
       "chaosawakens:entity/hercules_beetle/death2"
+    ]
+  },
+  
+  "entity.acacia_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.acacia_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.birch_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.birch_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.crimson_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.crimson_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.dark_oak_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.dark_oak_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.jungle_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.jungle_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.oak_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.oak_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.spruce_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.spruce_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.warped_ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.warped_ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.acacia_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.acacia_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.birch_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.birch_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.crimson_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.crimson_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.dark_oak_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.dark_oak_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.jungle_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.jungle_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.oak_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.oak_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.spruce_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.spruce_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.warped_ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.warped_ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.acacia_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.acacia_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.birch_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.birch_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.crimson_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.crimson_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.dark_oak_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.dark_oak_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.jungle_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.jungle_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.oak_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.oak_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.spruce_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.spruce_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.warped_ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.warped_ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.acacia_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.acacia_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.birch_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.birch_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.crimson_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.crimson_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.dark_oak_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.dark_oak_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.jungle_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.jungle_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.oak_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.oak_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.spruce_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.spruce_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.warped_ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.warped_ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
+    ]
+  },
+  "entity.ent.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.walk",
+    "sounds": [
+      "chaosawakens:entity/ent/walk"
+    ]
+  },
+  "entity.ent.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.hurt",
+    "sounds": [
+      "chaosawakens:entity/ent/hurt"
+    ]
+  },
+  "entity.ent.death": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.death",
+    "sounds": [
+      "chaosawakens:entity/ent/death"
+    ]
+  },
+  "entity.ent.attack": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.attack",
+    "sounds": [
+      "chaosawakens:entity/ent/attack"
     ]
   }
 }

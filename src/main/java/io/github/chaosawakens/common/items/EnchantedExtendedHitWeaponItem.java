@@ -20,8 +20,8 @@ public class EnchantedExtendedHitWeaponItem extends ExtendedHitWeaponItem implem
 
     private final EnchantmentData[] enchantments;
 
-    public EnchantedExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
+    public EnchantedExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn, EnchantmentData[] enchantments) {
+        super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
         this.enchantments = enchantments;
     }
 

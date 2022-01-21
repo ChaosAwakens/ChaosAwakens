@@ -1,13 +1,20 @@
 package io.github.chaosawakens.common.events;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.mojang.serialization.Codec;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.items.ExtendedHitWeaponItem;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -23,6 +30,9 @@ import net.minecraft.world.raid.Raid;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper.UnableToFindMethodException;
@@ -50,7 +60,7 @@ public class CommonSetupEvent {
     public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {
         PacketHandler.init();
         Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
-
+        
         event.enqueueWork(() -> {
             CAStructures.setupStructures();
             CAConfiguredStructures.registerConfiguredStructures();
@@ -73,6 +83,28 @@ public class CommonSetupEvent {
         BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_DIMENSION);
         BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
         BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
+    }
+    
+    public static void registerReachModifiers(final PlayerEvent e) {
+    	double reachDistance = 0.0D;
+    	ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+    	builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(ExtendedHitWeaponItem.REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
+    	ItemStack bigBertha = new ItemStack(CAItems.BIG_BERTHA.get());
+    	ItemStack attitudeAdjuster = new ItemStack(CAItems.ATTITUDE_ADJUSTER.get());
+    	ItemStack prismaticReaper = new ItemStack(CAItems.PRISMATIC_REAPER.get());
+    	PlayerEntity p = (PlayerEntity) e.getPlayer();
+    	
+    	if(p.getItemInHand(Hand.MAIN_HAND) == bigBertha) {
+    		reachDistance = 25.0D;
+    	}
+    	
+    	if(p.getItemInHand(Hand.MAIN_HAND) == attitudeAdjuster) {
+    		reachDistance = 15.0D;
+    	}
+    	
+    	if(p.getItemInHand(Hand.MAIN_HAND) == prismaticReaper) {
+    		reachDistance = 13.0D;
+    	}
     }
 
     public static void addDimensionalSpacing(final WorldEvent.Load event) {

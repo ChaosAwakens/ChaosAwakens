@@ -2,6 +2,7 @@ package io.github.chaosawakens;
 
 import io.github.chaosawakens.api.CAReflectionHelper;
 
+
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
 import io.github.chaosawakens.common.UpdateHandler;
@@ -15,6 +16,7 @@ import io.github.chaosawakens.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -66,6 +68,7 @@ public class ChaosAwakens {
 
 		//Register the deferred registers
 		CABiomes.BIOMES.register(eventBus);
+	//	ForgeMod.ATTRIBUTES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
 		CAContainerTypes.CONTAINERS.register(eventBus);
@@ -89,8 +92,10 @@ public class ChaosAwakens {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
+	//	forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::registerReachModifiers);
 		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
 		forgeBus.addListener(MiscEventHandler::onEntityJoin);
+	//	forgeBus.addListener(MiscEventHandler::onPlayerReach);
 	//	forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
 	//	forgeBus.addListener(EventPriority.HIGH,ChainsawEventSubscriber::onBreakSpeed);
 		forgeBus.addListener(LoginEventHandler::onPlayerLogin);

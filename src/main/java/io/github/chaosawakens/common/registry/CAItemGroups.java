@@ -42,7 +42,7 @@ public class CAItemGroups {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGGS.get());
+            return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGG.get());
         }
     };
 }

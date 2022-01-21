@@ -1,9 +1,12 @@
 package io.github.chaosawakens.common.items;
 
+import java.awt.Dimension;
+
 import io.github.chaosawakens.api.IAutoEnchantable;
 
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
+import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +15,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 
 public class UltimateFishingRodItem extends FishingRodItem implements IAutoEnchantable {
@@ -49,7 +53,10 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
             worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.FISHING_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
             if (!worldIn.isClientSide) {
                 int k = EnchantmentHelper.getFishingSpeedBonus(itemstack);
-                int j = EnchantmentHelper.getFishingLuckBonus(itemstack);
+                int j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 50;
+                if(worldIn.dimension() == CADimensions.MINING_PARADISE) {
+                  j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 40;
+                }
                 worldIn.addFreshEntity(new UltimateFishingBobberEntity(playerIn, worldIn, j, k));
             }
 

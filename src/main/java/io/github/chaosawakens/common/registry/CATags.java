@@ -21,6 +21,9 @@ public class CATags {
 	public static final ITag.INamedTag<Block> CHERRY_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":cherry_logs");
 	public static final ITag.INamedTag<Block> PEACH_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":peach_logs");
 	public static final ITag.INamedTag<Block> DUPLICATION_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":duplication_logs");
+	public static final ITag.INamedTag<Item> ULTIMATE_GEAR_CRAFTING_MATERIAL_TITANIUM = ItemTags.bind(ChaosAwakens.MODID + ":ultimate_gear_crafting_material_titanium");
+	public static final ITag.INamedTag<Item> ULTIMATE_GEAR_CRAFTING_MATERIAL_URANIUM = ItemTags.bind(ChaosAwakens.MODID + ":ultimate_gear_crafting_material_uranium");
+	public static final ITag.INamedTag<Item> ULTIMATE_GEAR_CRAFTING_MATERIAL_PLATINUM = ItemTags.bind(ChaosAwakens.MODID + ":ultimate_gear_crafting_material_platinum");
 
 	// Item tags
 	public static final ITag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID + ":custom_tooltips");

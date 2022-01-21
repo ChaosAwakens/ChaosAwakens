@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.api.IGrabber;
+import io.github.chaosawakens.common.entity.ai.AnimatableGrabGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
@@ -88,6 +89,9 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
+   //     if (this.distanceTo(this.getTarget()) >= 20.0D) {
+        //	this.targetSelector.addGoal(4, new AnimatableGrabGoal<HerculesBeetleEntity>(h, 8));
+   //     }
     }
 
     @Override
