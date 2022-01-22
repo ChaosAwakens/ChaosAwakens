@@ -17,7 +17,7 @@ public class FrogEntityModel extends AnimatedGeoModel<FrogEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(FrogEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/green.png");
     }
 
     @Override

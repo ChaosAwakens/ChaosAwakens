@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.integration;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.entity.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.FrogEntity;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.entity.Entity;
@@ -65,6 +66,21 @@ public class TheOneProbePlugin {
                                 return;
                             case 99:
                                 iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Black (" + type + ")"));
+                        }
+                    }
+
+                    if (entity instanceof DimetrodonEntity) {
+                        int type = ((DimetrodonEntity) entity).getDimetrodonType();
+                        switch(type) {
+                            case 0:
+                            default:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Green (" + type + ")"));
+                                return;
+                            case 1:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Orange (" + type + ")"));
+                                return;
+                            case 2:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Purple (" + type + ")"));
                         }
                     }
                 }

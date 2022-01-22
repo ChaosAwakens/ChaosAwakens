@@ -473,6 +473,7 @@ public class CAItems {
     public static final RegistryObject<CASpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.TERMITE, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<CASpawnEggItem> FROG_SPAWN_EGG = ITEMS.register("frog_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.FROG, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<CASpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.HERCULES_BEETLE, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+    public static final RegistryObject<CASpawnEggItem> DIMETRODON_SPAWN_EGG = ITEMS.register("dimetrodon_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.DIMETRODON, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<CASpawnEggItem> EMERALD_GATOR_SPAWN_EGG = ITEMS.register("emerald_gator_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.EMERALD_GATOR, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<CASpawnEggItem> RUBY_BUG_SPAWN_EGG = ITEMS.register("ruby_bug_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.RUBY_BUG, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<CASpawnEggItem> STINK_BUG_SPAWN_EGG = ITEMS.register("stink_bug_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.STINK_BUG, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));

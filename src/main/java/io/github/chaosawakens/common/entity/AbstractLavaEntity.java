@@ -136,9 +136,6 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 
 	@Override
 	public boolean hurt(DamageSource source, float power) {
-		if (this.isInWaterOrRain()) {
-			this.hurt(source, power);
-		}
 		return super.hurt(source, power);
 	}
 
@@ -195,9 +192,6 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 
 	protected SoundEvent getSwimSound() {
 		return SoundEvents.FISH_SWIM;
-	}
-
-	protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
 	}
 
 	static class MoveHelperController extends MovementController {
