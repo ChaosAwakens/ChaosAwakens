@@ -20,7 +20,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -58,6 +57,7 @@ public class CommonSetupEvent {
     private static Method codecMethod;
 
     public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {
+        CAEntityTypes.registerSpawnPlacementTypes();
         PacketHandler.init();
         Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
         

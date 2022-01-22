@@ -48,6 +48,8 @@
 
 	"stat.chaosawakens.interact_with_defossilizer": "Interactions with Defossilizer",
 
+	"entity.chaosawakens.top.frog_type": "Frog Type:",
+
 	"entity.minecraft.villager.chaosawakens.oddities_purveyor": "Oddities Purveyor",
 
 	"entity.chaosawakens.acacia_ent": "Acacia Ent",
@@ -63,6 +65,7 @@
 	"entity.chaosawakens.rainbow_ant": "Rainbow Ant",
 	"entity.chaosawakens.unstable_ant": "Unstable Ant",
 	"entity.chaosawakens.termite": "Termite",
+	"entity.chaosawakens.frog": "Frog",
 	"entity.chaosawakens.hercules_beetle": "Hercules Beetle",
 	"entity.chaosawakens.emerald_gator": "Emerald Gator",
 	"entity.chaosawakens.ruby_bug": "Ruby Bug",
@@ -81,6 +84,8 @@
 	"entity.chaosawakens.whale": "Whale",
 	"entity.chaosawakens.rock_fish": "Rock Fish",
 	"entity.chaosawakens.spark_fish": "Spark Fish",
+	"entity.chaosawakens.wood_fish": "Wood Fish",
+	"entity.chaosawakens.lava_eel": "Lava Eel",
 	"entity.chaosawakens.ultimate_arrow": "Ultimate Arrow",
 	"entity.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
@@ -99,6 +104,7 @@
 	"item.chaosawakens.red_ant_spawn_egg": "Red Ant Spawn Egg",
 	"item.chaosawakens.unstable_ant_spawn_egg": "Unstable Ant Spawn Egg",
 	"item.chaosawakens.termite_spawn_egg": "Termite Spawn Egg",
+	"item.chaosawakens.frog_spawn_egg": "Frog Spawn Egg",
 	"item.chaosawakens.hercules_beetle_spawn_egg": "Hercules Beetle Spawn Egg",
 	"item.chaosawakens.emerald_gator_spawn_egg": "Emerald Gator Spawn Egg",
 	"item.chaosawakens.ruby_bug_spawn_egg": "Ruby Bug Spawn Egg",
@@ -115,6 +121,8 @@
 	"item.chaosawakens.wasp_spawn_egg": "Wasp Spawn Egg",
 	"item.chaosawakens.whale_spawn_egg": "Whale Spawn Egg",
 	"item.chaosawakens.rock_fish_spawn_egg": "Rock Fish Spawn Egg",
+	"item.chaosawakens.wood_fish_spawn_egg": "Wood Fish Spawn Egg",
+	"item.chaosawakens.lava_eel_spawn_egg": "Lava Eel Spawn Egg",
 	"item.chaosawakens.iron_golem_spawn_egg": "Iron Golem Spawn Egg",
 	"item.chaosawakens.snow_golem_spawn_egg": "Snow Golem Spawn Egg",
 	"item.chaosawakens.illusioner_spawn_egg": "Illusioner Spawn Egg",
@@ -125,7 +133,7 @@
 	"item.chaosawakens.rock_fish_bucket": "Rock Fish Bucket",
 	"item.chaosawakens.wood_fish_bucket": "Wood Fish Bucket",
 	"item.chaosawakens.spark_fish_bucket": "Spark Fish Bucket",
-
+	"item.chaosawakens.lava_eel_bucket": "Lava Eel Bucket",
 	"biome.chaosawakens.mining_biome": "Mining Fields",
 	"biome.chaosawakens.stalagmite_valley": "Stalagmite Valley",
 	"biome.chaosawakens.village_plains": "Village Plains",
@@ -431,6 +439,7 @@
 	"block.chaosawakens.fossilised_giant": "Fossilised Giant",
 	"block.chaosawakens.fossilised_guardian": "Fossilised Guardian",
 	"block.chaosawakens.fossilised_husk": "Fossilised Husk",
+	"block.chaosawakens.fossilised_husk_stone": "Fossilised Husk (Stone)",
 	"block.chaosawakens.fossilised_illusioner": "Fossilised Illusioner",
 	"block.chaosawakens.fossilised_iron_golem": "Fossilised Iron Golem",
 	"block.chaosawakens.fossilised_llama": "Fossilised Llama",
@@ -659,7 +668,6 @@
 	"block.chaosawakens.skywood_slab": "Skywood Slab",
 	"block.chaosawakens.skywood_fence": "Skywood Fence",
 	"block.chaosawakens.skywood_fence_gate": "Skywood Fence Gate",
-
 	"item.chaosawakens.dead_stink_bug": "Dead Stink Bug",
 	"item.chaosawakens.triffid_goo": "Triffid Goo",
 	"item.chaosawakens.moth_scale": "Moth Scale",
@@ -687,6 +695,8 @@
 	"tooltip.chaosawakens.fossilised_wtf": "It is inert... it seems it's creature isn't available yet.",
 	"tooltip.chaosawakens.fossilised_scorpion": "It is inert... it seems it's creature isn't available yet.",
 	"tooltip.chaosawakens.fossilised_piraporu": "It is inert... it seems it's creature isn't available yet.",
+	"tooltip.chaosawakens.fossilised_green_fish": "It is inert... it seems it's creature isn't available yet.",
+	"tooltip.chaosawakens.fossilised_spark_fish": "It is inert... it seems it's creature isn't available yet.",
 	"tooltip.chaosawakens.hercules_beetle_spawn_egg": "Hercules beetle is a W.I.P",
 	"tooltip.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent is a W.I.P",
 	"tooltip.chaosawakens.birch_ent_spawn_egg": "Birch Ent is a W.I.P",

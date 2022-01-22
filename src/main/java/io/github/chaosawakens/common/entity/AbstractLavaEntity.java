@@ -41,8 +41,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public abstract class AbstractLavaEntity extends LavaMobEntity{
-
+public abstract class AbstractLavaEntity extends LavaMobEntity {
 	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.defineId(AbstractLavaEntity.class, DataSerializers.BOOLEAN);
 
 	public AbstractLavaEntity(EntityType<? extends AbstractLavaEntity> entityType, World world) {
@@ -138,8 +137,9 @@ public abstract class AbstractLavaEntity extends LavaMobEntity{
 
 	@Override
 	public boolean hurt(DamageSource source, float power) {
-		if (this.isInWaterOrRain()) {
-			this.hurt(source, power);
+		if (this.isInWater()) {
+			power = 1.0F;
+			this.hurt(DamageSource.DROWN, power);
 		}
 		return super.hurt(source, power);
 	}
@@ -148,7 +148,7 @@ public abstract class AbstractLavaEntity extends LavaMobEntity{
 	public void baseTick() {
 		if (!this.isInLava() && this.onGround && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F,
-					(this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
+			(this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
 			this.onGround = false;
 			this.jumping = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());

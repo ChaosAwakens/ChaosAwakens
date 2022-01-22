@@ -37,6 +37,7 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
         GeckoLibNetwork.registerSyncable(this);
     }
 
+
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));

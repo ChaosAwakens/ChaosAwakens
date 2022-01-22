@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.items;
 
+import java.util.UUID;
+
+
 import com.google.common.collect.ImmutableMultimap;
 
 import com.google.common.collect.Multimap;
@@ -21,8 +24,6 @@ import net.minecraftforge.common.ForgeMod;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.util.UUID;
 
 public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAnimatable {
 

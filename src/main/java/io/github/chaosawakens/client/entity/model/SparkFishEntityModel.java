@@ -14,7 +14,7 @@ public class SparkFishEntityModel extends AnimatedGeoModel<SparkFishEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(SparkFishEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/spark_fish.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/spark_fish.png");
     }
 
     @Override

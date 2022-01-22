@@ -25,6 +25,7 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.RAINBOW_ANT.get(), AntEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.UNSTABLE_ANT.get(), AntEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.TERMITE.get(), AggressiveAntEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.FROG.get(), FrogEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().build());

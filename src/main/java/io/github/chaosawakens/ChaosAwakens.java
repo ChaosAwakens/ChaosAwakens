@@ -10,6 +10,7 @@ import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.integration.CAJER;
+import io.github.chaosawakens.common.integration.TheOneProbePlugin;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.*;
@@ -26,6 +27,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
@@ -37,18 +39,15 @@ import java.util.Locale;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
-
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
-	public static final String VERSION = "0.9.1.0-preview1";
+	public static final String VERSION = "0.9.1.0-preview2";
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static ChaosAwakens INSTANCE;
-	
+
 	public ChaosAwakens() {
-		INSTANCE = this;
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
-				
+
 		LOGGER.debug(MODNAME + " Version is:" + VERSION);
 
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
@@ -58,13 +57,14 @@ public class ChaosAwakens {
 		//Register to the mod event bus
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
+		eventBus.addListener(this::onInterModEnqueueEvent);
+
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 		}
-
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 
 		//Register the deferred registers
 		CABiomes.BIOMES.register(eventBus);
@@ -83,11 +83,11 @@ public class ChaosAwakens {
 		CAVillagers.POI_TYPES.register(eventBus);
 		CAVillagers.PROFESSIONS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
-		
+
 		ModList modList = ModList.get();
-		if (modList.isLoaded("projecte"))CAEMCValues.init();
+		if (modList.isLoaded("projecte")) CAEMCValues.init();
 		if (modList.isLoaded("jeresources")) CAJER.init();
-		
+
 		//Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
@@ -98,12 +98,14 @@ public class ChaosAwakens {
 	//	forgeBus.addListener(MiscEventHandler::onPlayerReach);
 	//	forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
 	//	forgeBus.addListener(EventPriority.HIGH,ChainsawEventSubscriber::onBreakSpeed);
+		//forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
+		//forgeBus.addListener(EventPriority.HIGH,ChainsawEventSubscriber::onBreakSpeed);
 		forgeBus.addListener(LoginEventHandler::onPlayerLogin);
 		forgeBus.addListener(GiantEventHandler::onEntityJoin);
 		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);
 		forgeBus.addListener(EventPriority.LOWEST, MiscEventHandler::onMobDrops);
 		forgeBus.register(this);
-		
+
 		//Check for updates
 		if (CAConfig.COMMON.showUpdateMessage.get())
 			UpdateHandler.init();
@@ -144,5 +146,9 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, new CATagProvider.CATagProviderForBlocks(dataGenerator, existing), existing));
 			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
 		}
+	}
+
+	private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {
+		if (ModList.get().isLoaded("theoneprobe")) TheOneProbePlugin.register();
 	}
 } 

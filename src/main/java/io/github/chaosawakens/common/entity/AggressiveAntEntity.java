@@ -1,6 +1,8 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.HeightmapTeleporter;
+import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -15,6 +17,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
@@ -28,6 +32,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private final ITextComponent emptyInventoryMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
 
     private final ConfigValue<Boolean> tpConfig;
     private final RegistryKey<World> targetDimension;
@@ -80,11 +85,24 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
         ItemStack itemstack = playerIn.getItemInHand(hand);
 
         if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
-            MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
-            ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
-            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-            if (targetWorld != null)
-                serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+            if (playerIn.level.dimension() != CADimensions.CRYSTALWORLD && targetDimension == CADimensions.CRYSTALWORLD) {
+                if (playerIn.inventory.isEmpty()) {
+                    MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
+                    ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+                    ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+                    if (targetWorld != null)
+                        serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+                } else {
+                    playerIn.displayClientMessage(this.emptyInventoryMessage, true);
+                    return ActionResultType.PASS;
+                }
+            } else {
+                MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
+                ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+                if (targetWorld != null)
+                    serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+            }
         }
 
         return super.mobInteract(playerIn, hand);

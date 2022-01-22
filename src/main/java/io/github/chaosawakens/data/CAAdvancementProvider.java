@@ -66,10 +66,10 @@ public class CAAdvancementProvider extends AdvancementProvider {
     }
 
     public void register(Consumer<Advancement> t) {
+        Advancement root = registerAdvancement("root", FrameType.TASK, CAItems.RUBY.get()).addCriterion("root",
+                PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("root"));
 
-
-    	Advancement root = registerAdvancement("root", FrameType.TASK, CAItems.RUBY.get()).addCriterion("root",
-				PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("root"));        // ARMOR
+        // ARMOR
         // Cat's Eye Armor
         Advancement catsEyeArmor = registerAdvancement("cats_eye_armor", FrameType.TASK, CAItems.CATS_EYE_CHESTPLATE.get()).parent(root).addCriterion("cats_eye_helmet",
                 InventoryChangeTrigger.Instance.hasItems(CAItems.CATS_EYE_HELMET.get(), CAItems.CATS_EYE_CHESTPLATE.get(), CAItems.CATS_EYE_LEGGINGS.get(), CAItems.CATS_EYE_BOOTS.get())).save(t, id("cats_eye_armor"));

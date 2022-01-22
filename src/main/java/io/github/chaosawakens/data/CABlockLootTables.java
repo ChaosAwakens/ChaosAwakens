@@ -7,7 +7,6 @@ import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
-import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.BlockLootTables;
@@ -21,7 +20,6 @@ import net.minecraft.loot.conditions.MatchTool;
 import net.minecraft.loot.conditions.TableBonus;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.IItemProvider;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -169,6 +167,7 @@ public class CABlockLootTables extends BlockLootTables {
 
 		dropSelf(CABlocks.FOSSILISED_CRIMSON_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_WARPED_ENT.get());
+		dropSelf(CABlocks.FOSSILISED_LAVA_EEL.get());
 
 		dropSelf(CABlocks.FOSSILISED_BLAZE.get());
 		dropSelf(CABlocks.FOSSILISED_GHAST.get());

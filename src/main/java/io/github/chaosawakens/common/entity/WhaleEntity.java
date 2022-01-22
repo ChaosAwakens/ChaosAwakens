@@ -2,8 +2,6 @@ package io.github.chaosawakens.common.entity;
 
 import net.minecraft.block.BlockState;
 
-
-
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntitySize;
@@ -53,11 +51,12 @@ import java.util.Optional;
 import java.util.Random;
 
 /**
- * (Insert unfunny "I took too long to code your mom into Minecraft" joke here)
+ *
  *
  * @author Meme Man
  *
  */
+
 public class WhaleEntity extends WaterMobEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     protected MovementController.Action operation = MovementController.Action.WAIT;
@@ -120,26 +119,6 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
                 this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
             }
 
-           /*
-              if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
-                double d0 = this.wantedX - this.whale.getX();
-                double d1 = this.wantedY - this.whale.getY();
-                double d2 = this.wantedZ - this.whale.getZ();
-                double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-                d1 = d1 / d3;
-                float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-                this.whale.yRot = this.rotlerp(this.whale.yRot, f, 90.0F);
-                this.whale.yBodyRot = this.whale.yRot;
-                float f1 = (float) (this.speedModifier * Objects.requireNonNull(this.whale.getAttribute(Attributes.MOVEMENT_SPEED)).getValue());
-                this.whale.setSpeed(MathHelper.lerp(0.6F, this.whale.getSpeed(), f1));
-                this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, (double)this.whale.getSpeed() * d1 * 0.3D, 0.0D));
-                whale.setSwimming(true);
-            } else {
-            	this.whale.setSpeed(0.0F);
-            	whale.setSwimming(false);
-            }
-            */
-
             if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
                 double d0 = this.wantedX - this.whale.getX();
                 double d1 = this.wantedY - this.whale.getY();
@@ -155,7 +134,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
                     float f1 = (float)(this.speedModifier * this.whale.getAttributeValue(Attributes.MOVEMENT_SPEED));
                     if (this.whale.isInWater()) {
                         this.whale.setSpeed(f1 * 0.02F);
-                        float f2 = -((float)(MathHelper.atan2(d1, (double)MathHelper.sqrt(d0 * d0 + d2 * d2)) * (double)(180F / (float)Math.PI)));
+                        float f2 = -((float)(MathHelper.atan2(d1, MathHelper.sqrt(d0 * d0 + d2 * d2)) * (double)(180F / (float)Math.PI)));
                         f2 = MathHelper.clamp(MathHelper.wrapDegrees(f2), -85.0F, 85.0F);
                         this.whale.xRot = this.rotlerp(this.whale.xRot, f2, 5.0F);
                         float f3 = MathHelper.cos(this.whale.xRot * ((float)Math.PI / 180F));
@@ -177,24 +156,6 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 
     }
 
-    /*   public void spawnLingeringCloud() {
-           Collection<EffectInstance> collection = this.getActiveEffects();
-           if (!collection.isEmpty()) {
-              AreaEffectCloudEntity areaeffectcloudentity = new AreaEffectCloudEntity(this.level, this.getX(), this.getY(), this.getZ());
-              areaeffectcloudentity.setRadius(4.5F);
-              areaeffectcloudentity.setRadiusOnUse(-0.5F);
-              areaeffectcloudentity.setWaitTime(10);
-              areaeffectcloudentity.setDuration(areaeffectcloudentity.getDuration() / 2);
-              areaeffectcloudentity.setRadiusPerTick(-areaeffectcloudentity.getRadius() / (float)areaeffectcloudentity.getDuration());
-
-              for(EffectInstance effectinstance : collection) {
-                 areaeffectcloudentity.addEffect(new EffectInstance(effectinstance));
-              }
-
-              this.level.addFreshEntity(areaeffectcloudentity);
-           }
-        }
-     */
     static class SwimGoal extends RandomSwimmingGoal {
         public final WhaleEntity whale;
 
@@ -239,14 +200,10 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
     protected void registerGoals() {
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 2.0D, 5));
         this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        //this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        //this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.COD), false));
-        //this.goalSelector.addGoal(4, new FollowParentGoal(this, 2.25D));
         this.goalSelector.addGoal(8, new FollowBoatGoal(this));
         this.goalSelector.addGoal(4, new FindWaterGoal(this));
         this.goalSelector.addGoal(4, new BreatheAirGoal(this));
         this.goalSelector.addGoal(4, new PanicGoal(this, 2.0D));
-        //this.goalSelector.addGoal(3, new AnimalAISwimBottom(this, 1.0D, 7));
     }
 
     public boolean canStandOnFluid(Fluid water, BlockPos pos) {

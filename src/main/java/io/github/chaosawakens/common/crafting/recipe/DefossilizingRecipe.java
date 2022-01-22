@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.crafting.recipe;
 
 import com.google.gson.JsonObject;
 import io.github.chaosawakens.common.registry.CARecipes;
-import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;

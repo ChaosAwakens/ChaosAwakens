@@ -33,7 +33,7 @@ public class BiomeLoadEventSubscriber {
 		StructureHandler.addStructureSpawns(event);
 		MobSpawnHandler.addMobSpawns(event);
 	}
-	
+
 	public static void setEntDungeon(Function<StructureFeature<?, ?>, ?> func, BiomeLoadingEvent event) {
 		RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 
@@ -91,14 +91,19 @@ public class BiomeLoadEventSubscriber {
 	
 	private static class MobSpawnHandler {
 		
-		// Mobs that appear on any biome, but only on the overworld
+//		// Mobs that appear in any biome, but only in the overworld
 //		private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> {
 //		};
+
 		private static final Consumer<MobSpawnInfoBuilder> SWAMP_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 20, 3, 6));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 15, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 30, 2, 5));
 		//	builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 3, 2));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 5, 2, 5));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 5, 2, 5));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.FROG.get(), 15, 2, 6));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 7, 1, 4));
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> OCEAN_MOBS = (builder) -> {
@@ -116,6 +121,8 @@ public class BiomeLoadEventSubscriber {
 		
 		private static final Consumer<MobSpawnInfoBuilder>NETHER_OR_HOT_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LAVA_EEL.get(), 10, 1, 2));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 11, 1, 2));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 15, 3, 5));
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> PLAINS_MOBS = (builder) -> {
@@ -126,10 +133,19 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.GOLDEN_CARROT_PIG.get(), 5, 2, 2));
 	//		builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 3, 2));
 		};
+
+		private static final Consumer<MobSpawnInfoBuilder> NETHER_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LAVA_EEL.get(), 10, 1, 2));
+		};
+
+		private static final Consumer<MobSpawnInfoBuilder> BASALT_DELTA_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.FROG.get(), 15, 1, 3));
+		};
 		
 		public static void addMobSpawns(BiomeLoadingEvent event) {
 			MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
+			final String location = biome.location().toString();
 			
 			switch (event.getCategory()) {
 				case SWAMP:
@@ -147,7 +163,9 @@ public class BiomeLoadEventSubscriber {
 				case THEEND:
 				case NETHER:
 					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.HOT) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER))
-						NETHER_OR_HOT_MOBS.accept(spawnInfoBuilder);
+						NETHER_MOBS.accept(spawnInfoBuilder);
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && location.contains("basalt"))
+						BASALT_DELTA_MOBS.accept(spawnInfoBuilder);
 					break;
 				default:
 					if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER))
@@ -158,7 +176,6 @@ public class BiomeLoadEventSubscriber {
 	}
 	
 	private static class StructureHandler {
-		
 		public static void addfeatures(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();
 			
@@ -285,6 +302,8 @@ public class BiomeLoadEventSubscriber {
 				case FOREST:
 					builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 				case SWAMP:
+					builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+				case SAVANNA:
 					builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 				default:
 					break;
@@ -495,6 +514,7 @@ public class BiomeLoadEventSubscriber {
 			if (CAConfig.COMMON.enableFossilGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.NETHER_FOSSILISED_CRIMSON_ENT);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.NETHER_FOSSILISED_WARPED_ENT);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.NETHER_FOSSILISED_LAVA_EEL);
 
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.NETHER_FOSSILISED_BLAZE);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.NETHER_FOSSILISED_GHAST);

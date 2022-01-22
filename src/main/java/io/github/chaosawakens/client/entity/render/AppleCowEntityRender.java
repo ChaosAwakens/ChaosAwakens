@@ -13,9 +13,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Locale;
 
 @OnlyIn(Dist.CLIENT)
-public class AppleCowRender extends MobRenderer<AppleCowEntity, CowModel<AppleCowEntity>> {
+public class AppleCowEntityRender extends MobRenderer<AppleCowEntity, CowModel<AppleCowEntity>> {
 
-    public AppleCowRender(EntityRendererManager renderManagerIn) {
+    public AppleCowEntityRender(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new CowModel<>(), 0.7F);
     }
 

@@ -36,8 +36,8 @@ public class FruitableLeavesBlock extends LeavesBlock {
 		this.minFruit = minFruit;
 		this.maxFruit = maxFruit;
 		this.registerDefaultState(this.stateDefinition.any()
-				.setValue(DISTANCE, Integer.valueOf(7))
-				.setValue(PERSISTENT, Boolean.valueOf(false))
+				.setValue(DISTANCE, 7)
+				.setValue(PERSISTENT, false)
 				.setValue(RIPE, false));
 	}
 	

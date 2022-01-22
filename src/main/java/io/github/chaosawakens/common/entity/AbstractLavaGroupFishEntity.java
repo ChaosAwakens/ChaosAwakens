@@ -11,11 +11,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.BlastFurnaceTileEntity;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
-public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity{
+public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	private AbstractLavaGroupFishEntity leader;
 	private int schoolSize = 1;
 	

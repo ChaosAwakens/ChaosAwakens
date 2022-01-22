@@ -6,7 +6,7 @@ import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
-public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
+public class AnimatableMultiAttackGoal extends AnimatableGoal{
 	protected AnimatableMonsterEntity attacker;
 	protected LivingEntity target;
 	protected AnimatableMeleeGoal attack1;
@@ -21,9 +21,10 @@ public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
 	 * @param attack2 farther range attack
 	 * @param attack3 extra attack for the entity, van be null
 	 */
-	public AnimatableMultiAttackGoal(AnimatableMonsterEntity attacker, @Nullable AnimatableMeleeGoal attack1, @Nullable Goal attack2, @Nullable Goal attack3) {
+	public AnimatableMultiAttackGoal(AnimatableMonsterEntity attacker, LivingEntity target, @Nullable AnimatableMeleeGoal attack1, @Nullable Goal attack2, @Nullable Goal attack3) {
 		this.attacker = attacker;
-		this.target = attacker.getTarget();
+		target = attacker.getTarget();
+		this.target = target;
 		this.attack1 = attack1;
 		this.attack2 = attack2;
 		this.attack3 = attack3;
@@ -36,6 +37,8 @@ public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
 		boolean canContinueToUseMeleeAttack = attack1.canContinueToUse();
 		boolean canContinueToUseRangeAttack = attack2.canContinueToUse();
 		boolean canContinueToUseExtraAttack = attack2.canContinueToUse();
+//		this.target = attacker.getTarget();
+		double distanceToTarget = attacker.distanceToSqr(target.getX(), target.getY(), target.getZ());
 		
 	//	List<Goal> attacks = new ArrayList(); 
 		
@@ -82,7 +85,12 @@ public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
 			}
 		}
 		if (canUseAllAttacksAtOnce()) {
-			double distanceToTarget = attacker.distanceToSqr(target.getX(), target.getY(), target.getZ());
+			attack1.stop();
+			attack2.stop();
+			attack3.stop();
+			attacker.targetSelector.removeGoal(attack1);
+			attacker.targetSelector.removeGoal(attack2);
+			attacker.targetSelector.removeGoal(attack3);
 			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
 				attack1.start();
 				if (canContinueToUseMeleeAttack) {
@@ -90,7 +98,7 @@ public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
 				}
 				attack2.stop();
 				attack3.stop();
-			} else if (distanceToTarget >= getAttackReachSq(attacker, target)) {
+			} else if (distanceToTarget >= getAttackReachSq(attacker, target) && !attacker.isPathFinding() && target != null) {
 				attack2.start();
 				if (canContinueToUseRangeAttack) {
 					attack2.tick();
@@ -114,7 +122,9 @@ public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
 			}
 		}
 		if (canContinueToUseAllAttacksAtOnce()) {
-			double distanceToTarget = attacker.distanceToSqr(target.getX(), target.getY(), target.getZ());
+			attack1.stop();
+			attack2.stop();
+			attack3.stop();
 			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
 				attack1.start();
 				if (canContinueToUseMeleeAttack) {
@@ -146,8 +156,59 @@ public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
 			}
 		}
 		if (attack1 == null) {
-			
+			if (distanceToTarget >= getAttackReachSq(attacker, target)) {
+				attack2.start();
+				if (canContinueToUseRangeAttack) {
+					attack2.tick();
+				}
+				attack3.stop();
+			} else if (distanceToTarget >= getAttackReachSq(attacker, target) && !canContinueToUseRangeAttack || !canUseRangeAttack) {
+				attack3.start();
+				if (canContinueToUseExtraAttack) {
+					attack3.tick();
+				}
+				attack2.stop();
+			}
 		}
+		if (attack2 == null) {
+			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
+				attack1.start();
+				if (canContinueToUseMeleeAttack) {
+					attack1.tick();
+				}
+				attack3.stop();
+			} else if (distanceToTarget <= getAttackReachSq(attacker, target) && !canContinueToUseMeleeAttack || !canUseMeleeAttack) {
+				attack3.start();
+				if (canContinueToUseExtraAttack) {
+					attack3.tick();
+				}
+				attack1.stop();
+			}
+		}
+		if (attack3 == null) {
+			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
+				attack1.start();
+				if (canContinueToUseMeleeAttack) {
+					attack1.tick();
+				}
+				attack2.stop();
+			} else if (distanceToTarget >= getAttackReachSq(attacker, target)) {
+				attack2.start();
+				if (canContinueToUseRangeAttack) {
+					attack2.tick();
+				}
+				attack1.stop();
+			}
+		}
+		if (attack1 == null && attack2 == null && attack3 == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	public void setAttacksDown() {
+		attack1.stop();
+		attack2.stop();
+		attack3.stop();
 	}
 	
 	//Taken from the AnimatableGoal class because I was too lazy to call for it from the class
@@ -179,6 +240,17 @@ public abstract class AnimatableMultiAttackGoal extends AnimatableGoal{
 	@Override
 	public boolean canContinueToUse() {
 		return target != null && this.canUse();
+	}
+	
+	@Override
+	public void start() {
+		setAttacksUp();
+	}
+	
+	@Override
+	public void stop() {
+		this.target = null;
+		setAttacksDown();
 	}
 	
 	@Override
