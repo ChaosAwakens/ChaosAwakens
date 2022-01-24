@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.RoboWarriorEntityModel;
+import io.github.chaosawakens.client.entity.render.layers.RoboWarriorGlowLayer;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -17,6 +18,7 @@ public class RoboWarriorEntityRender extends GeoEntityRenderer<RoboWarriorEntity
     public RoboWarriorEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RoboWarriorEntityModel());
         this.shadowRadius = 0.4F;
+        this.addLayer(new RoboWarriorGlowLayer(this));
     }
 
     @Override
@@ -26,7 +28,7 @@ public class RoboWarriorEntityRender extends GeoEntityRenderer<RoboWarriorEntity
 
     @Override
     public ResourceLocation getTextureLocation(RoboWarriorEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robo_warrior.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_warrior.png");
     }
 
     @Override
