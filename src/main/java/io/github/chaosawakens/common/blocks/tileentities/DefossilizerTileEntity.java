@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -31,10 +30,6 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import javax.annotation.Nullable;
 
 public class DefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity {
-    private static final int[] SLOTS_FOR_UP = new int[]{0};
-    private static final int[] SLOTS_FOR_DOWN = new int[]{3};
-    private static final int[] SLOTS_FOR_SIDES = new int[]{1, 2};
-
     static final int WORK_TIME = 2 * 20;
 
     private NonNullList<ItemStack> items;
@@ -116,7 +111,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
         if (!current.isEmpty()) {
             int newCount = current.getCount() + output.getCount();
 
-            if (!ItemStack.matches(current, output) || newCount > 64) {
+            if (!ItemStack.isSame(current, output) || newCount > output.getMaxStackSize()) {
                 stopWork();
                 return;
             }
@@ -151,25 +146,17 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
     @Override
     public int[] getSlotsForFace(Direction direction) {
-        if (direction == Direction.DOWN) {
-            return SLOTS_FOR_DOWN;
-        } else {
-            return direction == Direction.UP ? SLOTS_FOR_UP : SLOTS_FOR_SIDES;
-        }
+        return null;
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
-        return this.canPlaceItem(index, stack);
+        return false;
     }
 
     @Override
     public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-        if (direction == Direction.DOWN && index == 1) {
-            Item item = stack.getItem();
-            return item == Items.WATER_BUCKET || item == Items.BUCKET;
-        }
-        return true;
+        return false;
     }
 
     @Override
@@ -179,8 +166,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
     @Override
     protected Container createMenu(int id, PlayerInventory playerInventory) {
-        return new DefossilizerContainer(CARecipes.DEFOSSILIZING_RECIPE_TYPE, id, playerInventory, this, this.fields);
-//        return null;
+        return new DefossilizerContainer(id, playerInventory, this, this.fields);
     }
 
     @Override
@@ -260,21 +246,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
     @Nullable
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (!this.remove && side != null && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            if (side == Direction.UP) {
-                return this.handlers[0].cast();
-            } else if (side == Direction.WEST) {
-                return this.handlers[1].cast();
-            } else if (side == Direction.EAST) {
-                return this.handlers[2].cast();
-            } else if (side == Direction.DOWN) {
-                return this.handlers[3].cast();
-            } else {
-                return this.handlers[4].cast();
-            }
-        } else {
-            return super.getCapability(cap, side);
-        }
+        return super.getCapability(cap, side);
     }
 
     @Override

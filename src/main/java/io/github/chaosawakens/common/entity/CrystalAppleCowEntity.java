@@ -1,7 +1,9 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -13,8 +15,11 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
 
 public class CrystalAppleCowEntity extends AnimalEntity {
 
@@ -59,6 +64,10 @@ public class CrystalAppleCowEntity extends AnimalEntity {
 
     protected float getSoundVolume() {
         return 0.4F;
+    }
+
+    public static boolean checkCrystalAppleCowSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos blockPos, Random random) {
+        return world.getBlockState(blockPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get()) && world.getRawBrightness(blockPos, 0) > 8;
     }
 
     public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {

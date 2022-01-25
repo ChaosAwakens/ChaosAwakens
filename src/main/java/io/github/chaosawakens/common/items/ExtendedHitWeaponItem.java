@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -14,17 +13,12 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.UUID;
-
 public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAnimatable {
 
-    protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
     public AnimationFactory factory = new AnimationFactory(this);
 

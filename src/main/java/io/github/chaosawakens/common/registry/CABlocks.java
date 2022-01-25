@@ -208,6 +208,7 @@ public class CABlocks {
 	// Nether (CA)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_CRIMSON_ENT = registerBlock("fossilised_crimson_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<CAOreBlock> FOSSILISED_WARPED_ENT = registerBlock("fossilised_warped_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<CAOreBlock> FOSSILISED_LAVA_EEL = registerBlock("fossilised_lava_eel", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 
 	// Nether (Vanilla)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_BLAZE = registerBlock("fossilised_blaze", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);

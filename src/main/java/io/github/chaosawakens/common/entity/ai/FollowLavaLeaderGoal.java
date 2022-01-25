@@ -2,64 +2,61 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.List;
 
-import com.google.common.base.Predicate;
-
 import io.github.chaosawakens.common.entity.AbstractLavaGroupFishEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
-public class FollowLavaLeaderGoal extends Goal{
-	private final AbstractLavaGroupFishEntity fishTaskOwner;
-	private int pathNavTimer;
-	private int nextBeginningTick;
+public class FollowLavaLeaderGoal extends Goal {
+	private final AbstractLavaGroupFishEntity mob;
+	private int timeToRecalcPath;
+	private int nextStartTick;
 	
-	public FollowLavaLeaderGoal(AbstractLavaGroupFishEntity leaderTaskOwner) {
-		this.fishTaskOwner = leaderTaskOwner;
-		this.nextBeginningTick = this.nextTickBeginning(leaderTaskOwner);
-	}
-	
-	@Override
-	public boolean canUse() {
-		if (this.fishTaskOwner.isSchoolLeader()) {
-			return false;
-		}
-		else if (this.fishTaskOwner.hasSchoolLeader()) {
-			return true;
-		} else if (this.nextBeginningTick > 0) {
-			--this.nextBeginningTick;
-			return false;
-		} else {
-			this.nextBeginningTick = this.nextTickBeginning(fishTaskOwner);
-			Predicate<AbstractLavaGroupFishEntity> p = (f) -> f.canSchoolIncreaseInSize() || !f.hasSchoolLeader();
-			List<AbstractLavaGroupFishEntity> l = fishTaskOwner.level.getEntitiesOfClass(fishTaskOwner.getClass(), fishTaskOwner.getBoundingBox().expandTowards(8.0D, 8.0D, 8.0D), p);
-			AbstractLavaGroupFishEntity absgrpfish = l.stream()
-					.filter(AbstractLavaGroupFishEntity::canSchoolIncreaseInSize).findAny().orElse(fishTaskOwner);
-			absgrpfish.addWithLimitAndFilter(l.stream().filter((ftl) -> !ftl.hasSchoolLeader()));
-			return fishTaskOwner.hasSchoolLeader();
-		}
-	}
-	
-	@Override
-	public void tick() {
-		super.tick();
-	}
-	
-	protected int nextTickBeginning(AbstractLavaGroupFishEntity fish) {
-		return 300 - 100 + fish.getRandom().nextInt(400 - 200) % 20;
-	}
-	
-	@Override
-	public void start() {
-		this.pathNavTimer = 0;
-	}
-	
-	@Override
-	public boolean canContinueToUse() {
-		return this.fishTaskOwner.hasSchoolLeader() && this.fishTaskOwner.withinRangeOfSchoolLeader();
-	}
-	
-	@Override
-	public void stop() {
-		this.fishTaskOwner.leaveSchool();
+	public FollowLavaLeaderGoal(AbstractLavaGroupFishEntity entity) {
+		this.mob = entity;
+		this.nextStartTick = this.nextStartTick(entity);
 	}
 
+	protected int nextStartTick(AbstractLavaGroupFishEntity leaderTaskOwner) {
+		return 200 + leaderTaskOwner.getRandom().nextInt(200) % 20;
+	}
+
+	public boolean canUse() {
+		if (this.mob.hasFollowers()) {
+			return false;
+		} else if (this.mob.isFollower()) {
+			return true;
+		} else if (this.nextStartTick > 0) {
+			--this.nextStartTick;
+			return false;
+		} else {
+			this.nextStartTick = this.nextStartTick(this.mob);
+			java.util.function.Predicate<AbstractLavaGroupFishEntity> predicate = (p_212824_0_) -> {
+				return p_212824_0_.canBeFollowed() || !p_212824_0_.isFollower();
+			};
+			List<AbstractLavaGroupFishEntity> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
+			AbstractLavaGroupFishEntity abstractLavaGroupFishEntity = list.stream().filter(AbstractLavaGroupFishEntity::canBeFollowed).findAny().orElse(this.mob);
+			abstractLavaGroupFishEntity.addFollowers(list.stream().filter((p_212823_0_) -> {
+				return !p_212823_0_.isFollower();
+			}));
+			return this.mob.isFollower();
+		}
+	}
+
+	public boolean canContinueToUse() {
+		return this.mob.isFollower() && this.mob.inRangeOfLeader();
+	}
+
+	public void start() {
+		this.timeToRecalcPath = 0;
+	}
+
+	public void stop() {
+		this.mob.stopFollowing();
+	}
+
+	public void tick() {
+		if (--this.timeToRecalcPath <= 0) {
+			this.timeToRecalcPath = 10;
+			this.mob.pathToLeader();
+		}
+	}
 }

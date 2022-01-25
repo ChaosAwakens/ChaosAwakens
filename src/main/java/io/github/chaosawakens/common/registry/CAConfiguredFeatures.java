@@ -124,6 +124,7 @@ public class CAConfiguredFeatures {
 
 	public static final ConfiguredFeature<?, ?> NETHER_FOSSILISED_CRIMSON_ENT = register("nether_ore_fossilised_crimson_ent", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, States.FOSSILISED_CRIMSON_ENT, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 64))).squared().count(6));
 	public static final ConfiguredFeature<?, ?> NETHER_FOSSILISED_WARPED_ENT = register("nether_ore_fossilised_warped_ent", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, States.FOSSILISED_WARPED_ENT, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 64))).squared().count(6));
+	public static final ConfiguredFeature<?, ?> NETHER_FOSSILISED_LAVA_EEL = register("nether_ore_fossilised_lava_eel", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, States.FOSSILISED_LAVA_EEL, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 64))).squared().count(6));
 
 	public static final ConfiguredFeature<?, ?> NETHER_FOSSILISED_BLAZE = register("nether_ore_fossilised_blaze", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, States.FOSSILISED_BLAZE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 64))).squared().count(6));
 	public static final ConfiguredFeature<?, ?> NETHER_FOSSILISED_GHAST = register("nether_ore_fossilised_ghast", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, States.FOSSILISED_GHAST, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 64))).squared().count(6));
@@ -371,6 +372,7 @@ public class CAConfiguredFeatures {
 
 		private static final BlockState FOSSILISED_CRIMSON_ENT = CABlocks.FOSSILISED_CRIMSON_ENT.get().defaultBlockState();
 		private static final BlockState FOSSILISED_WARPED_ENT = CABlocks.FOSSILISED_WARPED_ENT.get().defaultBlockState();
+		private static final BlockState FOSSILISED_LAVA_EEL = CABlocks.FOSSILISED_LAVA_EEL.get().defaultBlockState();
 
 		private static final BlockState FOSSILISED_BLAZE = CABlocks.FOSSILISED_BLAZE.get().defaultBlockState();
 		private static final BlockState FOSSILISED_GHAST = CABlocks.FOSSILISED_GHAST.get().defaultBlockState();

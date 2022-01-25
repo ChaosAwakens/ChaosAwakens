@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 
-public class MiningAlrgorithm {
+public class MiningAlgorithm {
 	 private final List<BlockPos> blocksToBreak = new ArrayList<>();
 	    private final BlockPos startingBlock;
 	    private final List<BlockPos> alreadyChecked = new ArrayList<>();
@@ -29,7 +29,7 @@ public class MiningAlrgorithm {
 	    private final BlockPos playerPos;
 	    private final List<ItemStack> itemsToDrop = new ArrayList<>();
 
-	    public MiningAlrgorithm(BlockPos start, World worldIn, PlayerEntity playerIn) {
+	    public MiningAlgorithm(BlockPos start, World worldIn, PlayerEntity playerIn) {
 	        world = worldIn;
 	        player = (ServerPlayerEntity)playerIn;
 	        playerPos = new BlockPos(player.getX(), player.getY(), player.getZ());

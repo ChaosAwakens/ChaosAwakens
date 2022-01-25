@@ -14,7 +14,7 @@ public class RoboSniperEntityModel extends AnimatedGeoModel<RoboSniperEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(RoboSniperEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robo_sniper.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_sniper.png");
     }
 
     @Override

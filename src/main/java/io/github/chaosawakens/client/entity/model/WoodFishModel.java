@@ -10,12 +10,12 @@ public class WoodFishModel extends AnimatedGeoModel<WoodFishEntity> {
 
     @Override
     public ResourceLocation getModelLocation(WoodFishEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "geo/fish/wood_fish.geo.json");
+        return new ResourceLocation(ChaosAwakens.MODID, "geo/wood_fish.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(WoodFishEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/wood_fish.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/wood_fish.png");
     }
 
     @Override

@@ -1,20 +1,13 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.items.PowerChipItem;
 import io.github.chaosawakens.common.registry.CAContainerTypes;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CARecipes;
-import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.*;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
@@ -24,19 +17,17 @@ public class DefossilizerContainer extends Container {
     private final IInventory inventory;
     private IIntArray fields;
     protected final World level;
-    private final IRecipeType<? extends AbstractDefossilizingRecipe> recipeType;
     private final Slot fossilSlot;
     private final Slot bucketSlot;
     private final Slot powerchipSlot;
     private final Slot resultSlot;
 
     public DefossilizerContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
-        this(CARecipes.DEFOSSILIZING_RECIPE_TYPE, id, playerInventory, new DefossilizerTileEntity(), new IntArray(buffer.readByte()));
+        this(id, playerInventory, new DefossilizerTileEntity(), new IntArray(buffer.readByte()));
     }
 
-    public DefossilizerContainer(IRecipeType<? extends AbstractDefossilizingRecipe> recipeType, int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
+    public DefossilizerContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
         super(CAContainerTypes.DEFOSSILIZER.get(), id);
-        this.recipeType = recipeType;
         this.level = playerInventory.player.level;
         this.inventory = inventory;
         this.fields = fields;

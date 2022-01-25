@@ -1,12 +1,6 @@
 package io.github.chaosawakens.data;
 
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.data.loot.GiftLootTables;
-import net.minecraft.item.Items;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.ResourceLocation;
 

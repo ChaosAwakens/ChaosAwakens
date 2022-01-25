@@ -1,15 +1,21 @@
 package io.github.chaosawakens.common.entity;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -48,6 +54,7 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));

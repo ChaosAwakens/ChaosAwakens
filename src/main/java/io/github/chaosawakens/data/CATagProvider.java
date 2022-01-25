@@ -6,11 +6,8 @@ import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
-import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.nio.file.Path;

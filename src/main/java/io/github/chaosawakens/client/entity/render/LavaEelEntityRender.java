@@ -28,7 +28,7 @@ public class LavaEelEntityRender extends GeoEntityRenderer<LavaEelEntity>{
 
     @Override
     public ResourceLocation getTextureLocation(LavaEelEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/lava_eel.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/lava_eel.png");
     }
 
     @Override

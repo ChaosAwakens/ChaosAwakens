@@ -96,6 +96,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 
         this.simpleBlock(CABlocks.FOSSILISED_CRIMSON_ENT.get());
         this.simpleBlock(CABlocks.FOSSILISED_WARPED_ENT.get());
+        this.simpleBlock(CABlocks.FOSSILISED_LAVA_EEL.get());
 
         this.simpleBlock(CABlocks.FOSSILISED_BLAZE.get());
         this.simpleBlock(CABlocks.FOSSILISED_GHAST.get());

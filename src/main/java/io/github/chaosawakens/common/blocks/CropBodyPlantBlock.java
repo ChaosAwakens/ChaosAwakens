@@ -1,6 +1,3 @@
-/**
- * 
- */
 package io.github.chaosawakens.common.blocks;
 
 import net.minecraft.block.*;
@@ -52,10 +49,9 @@ public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		
 		//ChaosAwakens.debug("CORN-BODY", block+" "+downPos+" "+(block == this.getHeadBlock())+" "+(block == this.getBodyBlock())+" "+downState.is(Blocks.FARMLAND)+" "+state.isFaceSturdy(reader, pos, this.growthDirection));
 		return block == this.getHeadBlock() || block == this.getBodyBlock()
-			|| downState.is(Blocks.GRASS_BLOCK) || downState.is(Blocks.DIRT) || downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL) || downState.is(Blocks.FARMLAND);
+				|| downState.is(Blocks.GRASS_BLOCK) || downState.is(Blocks.DIRT) || downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL) || downState.is(Blocks.FARMLAND);
 	}
 	
 	@Override
 	protected abstract AbstractTopPlantBlock getHeadBlock();
-	
 }

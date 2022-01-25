@@ -8,6 +8,8 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityType.IFactory;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.ResourceLocation;
@@ -24,13 +26,13 @@ import java.util.List;
 public class CAEntityTypes {
 
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ChaosAwakens.MODID);
-   
+
     // Ents
     public static final RegistryObject<EntityType<EntEntity>> OAK_ENT = ENTITY_TYPES.register("oak_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.OAK), EntityClassification.MONSTER)
                     .sized(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "oak_ent").toString()));
-    
+
     // ENTITY TYPES
     public static final RegistryObject<EntityType<EntEntity>> ACACIA_ENT = ENTITY_TYPES.register("acacia_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.ACACIA), EntityClassification.MONSTER)
@@ -54,13 +56,13 @@ public class CAEntityTypes {
                     .build(new ResourceLocation(ChaosAwakens.MODID, "dark_oak_ent").toString()));
     public static final RegistryObject<EntityType<EntEntity>> CRIMSON_ENT = ENTITY_TYPES.register("crimson_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.CRIMSON), EntityClassification.MONSTER)
-            		.fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
+                    .fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "crimson_ent").toString()));
     public static final RegistryObject<EntityType<EntEntity>> WARPED_ENT = ENTITY_TYPES.register("warped_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.WARPED), EntityClassification.MONSTER)
-            		.fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
+                    .fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "warped_ent").toString()));
-    
+
     // Hercules Beetle
     public static final RegistryObject<EntityType<HerculesBeetleEntity>> HERCULES_BEETLE = ENTITY_TYPES.register("hercules_beetle",
             () -> EntityType.Builder.of(HerculesBeetleEntity::new, EntityClassification.MONSTER)
@@ -68,48 +70,53 @@ public class CAEntityTypes {
                     .build(new ResourceLocation(ChaosAwakens.MODID, "hercules_beetle").toString()));
     //Fish
     public static final RegistryObject<EntityType<WoodFishEntity>> WOOD_FISH = ENTITY_TYPES.register("wood_fish",
-    		() -> EntityType.Builder.of(WoodFishEntity::new, EntityClassification.WATER_CREATURE)
-    		.sized(1.0F, 1.0F)
-    		.clientTrackingRange(10)
-    		.build(new ResourceLocation(ChaosAwakens.MODID, "wood_fish").toString()));
+            () -> EntityType.Builder.of(WoodFishEntity::new, EntityClassification.WATER_CREATURE)
+                    .sized(1.0F, 1.0F)
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "wood_fish").toString()));
     public static final RegistryObject<EntityType<RockFishEntity>> ROCK_FISH = ENTITY_TYPES.register("rock_fish",
             () -> EntityType.Builder.of(RockFishEntity::new, EntityClassification.WATER_CREATURE)
                     .sized(0.2f, 0.2f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "rock_fish").toString()));
-    
+
     //Lava Eel
     public static final RegistryObject<EntityType<LavaEelEntity>> LAVA_EEL = ENTITY_TYPES.register("lava_eel",
             () -> EntityType.Builder.of(LavaEelEntity::new, EntityClassification.WATER_CREATURE)
-                    .sized(0.4f, 0.2f) // Hitbox Size ()
+                    .fireImmune().sized(0.4f, 0.2f) // Hitbox Size ()
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "lava_eel").toString()));
-    
+
     // Whale
     public static final RegistryObject<EntityType<WhaleEntity>> WHALE = ENTITY_TYPES.register("whale",
-    		() -> EntityType.Builder.of(WhaleEntity::new, EntityClassification.WATER_CREATURE)
-    		.sized(5.7F, 3.5F) // HitBox Size ()
-    		.clientTrackingRange(10)
-    		.build(new ResourceLocation(ChaosAwakens.MODID, "whale").toString()));
-    
+            () -> EntityType.Builder.of(WhaleEntity::new, EntityClassification.WATER_CREATURE)
+                    .sized(5.7F, 3.5F) // HitBox Size ()
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "whale").toString()));
+    // Frog
+    public static final RegistryObject<EntityType<FrogEntity>> FROG = ENTITY_TYPES.register("frog",
+            () -> EntityType.Builder.of(FrogEntity::new, EntityClassification.CREATURE)
+                    .sized(0.6F, 0.6F) // HitBox Size ()
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "frog").toString()));
     // Apple Cows
     public static final RegistryObject<EntityType<AppleCowEntity>> APPLE_COW = ENTITY_TYPES.register("apple_cow",
             () -> EntityType.Builder.of(AppleCowEntity::new, EntityClassification.CREATURE)
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "apple_cow").toString()));
-    
+
     public static final RegistryObject<EntityType<GoldenAppleCowEntity>> GOLDEN_APPLE_COW = ENTITY_TYPES.register("golden_apple_cow",
             () -> EntityType.Builder.of(GoldenAppleCowEntity::new, EntityClassification.CREATURE)
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "golden_apple_cow").toString()));
-    
+
     public static final RegistryObject<EntityType<EnchantedGoldenAppleCowEntity>> ENCHANTED_GOLDEN_APPLE_COW = ENTITY_TYPES.register("enchanted_golden_apple_cow",
             () -> EntityType.Builder.of(EnchantedGoldenAppleCowEntity::new, EntityClassification.CREATURE)
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_apple_cow").toString()));
-    
+
     public static final RegistryObject<EntityType<CrystalAppleCowEntity>> CRYSTAL_APPLE_COW = ENTITY_TYPES.register("crystal_apple_cow",
             () -> EntityType.Builder.of(CrystalAppleCowEntity::new, EntityClassification.CREATURE)
                     .sized(0.9F, 1.4F)
@@ -126,7 +133,7 @@ public class CAEntityTypes {
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "golden_carrot_pig").toString()));
-    
+
     // Ants
     public static final RegistryObject<EntityType<AntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",
             () -> EntityType.Builder.of((IFactory<AntEntity>) (type, world) -> new AntEntity(type, world, CAConfig.COMMON.enableBrownAntTeleport, null), EntityClassification.CREATURE)
@@ -146,57 +153,63 @@ public class CAEntityTypes {
             () -> EntityType.Builder.of((IFactory<AntEntity>) (type, world) -> new AntEntity(type, world, CAConfig.COMMON.enableUnstableAntTeleport, null), EntityClassification.CREATURE)
                     .sized(0.25f, 0.25f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "unstable_ant").toString()));
-    
+
     // Termite
     public static final RegistryObject<EntityType<AggressiveAntEntity>> TERMITE = ENTITY_TYPES.register("termite",
             () -> EntityType.Builder.of((IFactory<AggressiveAntEntity>) (type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.CRYSTALWORLD),
                             EntityClassification.CREATURE)
                     .sized(0.5f, 0.25f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "termite").toString()));
-    
+
     // Beaver
     public static final RegistryObject<EntityType<BeaverEntity>> BEAVER = ENTITY_TYPES.register("beaver",
             () -> EntityType.Builder.of(BeaverEntity::new, EntityClassification.CREATURE)
                     .sized(0.75f, 0.7f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "beaver").toString()));
-    
+
+    // Dimetrodon
+    public static final RegistryObject<EntityType<DimetrodonEntity>> DIMETRODON = ENTITY_TYPES.register("dimetrodon",
+            () -> EntityType.Builder.of(DimetrodonEntity::new, EntityClassification.CREATURE)
+                    .sized(1.5f, 1.0f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "dimetrodon").toString()));
+
     // Emerald Gator
     public static final RegistryObject<EntityType<EmeraldGatorEntity>> EMERALD_GATOR = ENTITY_TYPES.register("emerald_gator",
             () -> EntityType.Builder.of(EmeraldGatorEntity::new, EntityClassification.CREATURE)
                     .sized(1.5f, 1.0f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "emerald_gator").toString()));
-    
+
     // Ruby Bug
     public static final RegistryObject<EntityType<RubyBugEntity>> RUBY_BUG = ENTITY_TYPES.register("ruby_bug",
             () -> EntityType.Builder.of(RubyBugEntity::new, EntityClassification.CREATURE)
-                    .sized(1.25f, 1.25f) // Hitbox Size ()
+                    .fireImmune().sized(1.25f, 1.25f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "ruby_bug").toString()));
-    
+
     // Stink Bug
     public static final RegistryObject<EntityType<StinkBugEntity>> STINK_BUG = ENTITY_TYPES.register("stink_bug",
             () -> EntityType.Builder.of(StinkBugEntity::new, EntityClassification.CREATURE)
                     .sized(0.5f, 0.5f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "stink_bug").toString()));
-    
+
     // Robo Sniper
     public static final RegistryObject<EntityType<RoboSniperEntity>> ROBO_SNIPER = ENTITY_TYPES.register("robo_sniper",
             () -> EntityType.Builder.of(RoboSniperEntity::new, EntityClassification.MONSTER)
                     .sized(1.0f, 1.5f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper").toString()));
-    
+
     // Robo Warrior
     public static final RegistryObject<EntityType<RoboWarriorEntity>> ROBO_WARRIOR = ENTITY_TYPES.register("robo_warrior",
             () -> EntityType.Builder.of(RoboWarriorEntity::new, EntityClassification.MONSTER)
                     .sized(2.0f, 4.0f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "robo_warrior").toString()));
-    
+
     // Wasp
     public static final RegistryObject<EntityType<WaspEntity>> WASP = ENTITY_TYPES.register("wasp",
             () -> EntityType.Builder.of(WaspEntity::new, EntityClassification.MONSTER)
                     .sized(1.5f, 2.0f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "wasp").toString()));
 
-    
+
     // Projectiles
     public static final RegistryObject<EntityType<RoboLaserEntity>> ROBO_LASER = ENTITY_TYPES.register("robo_laser",
             () -> EntityType.Builder.<RoboLaserEntity>of(RoboLaserEntity::new, EntityClassification.MISC)
@@ -227,23 +240,32 @@ public class CAEntityTypes {
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> evt) {
         evt.getRegistry().registerAll(ALL.toArray(new EntityType<?>[0]));
+    }
 
-        EntitySpawnPlacementRegistry.register(ACACIA_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(BIRCH_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(CRIMSON_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(DARK_OAK_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(JUNGLE_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(OAK_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(SPRUCE_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(WARPED_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(RUBY_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(GOLDEN_APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(ENCHANTED_GOLDEN_APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(CARROT_PIG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(GOLDEN_CARROT_PIG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
-        EntitySpawnPlacementRegistry.register(STINK_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkMobSpawnRules);
+    public static void registerSpawnPlacementTypes() {
+        EntitySpawnPlacementRegistry.register(ACACIA_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(BIRCH_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(CRIMSON_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(DARK_OAK_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(JUNGLE_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(OAK_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(SPRUCE_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(WARPED_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(FROG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
+        EntitySpawnPlacementRegistry.register(LAVA_EEL.get(), EntitySpawnPlacementRegistry.PlacementType.IN_LAVA, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AbstractLavaEntity::checkLavaMobSpawnRules);
+        EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(RUBY_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(EMERALD_GATOR.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(GOLDEN_APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(ENCHANTED_GOLDEN_APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(CRYSTAL_APPLE_COW.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CrystalAppleCowEntity::checkCrystalAppleCowSpawnRules);
+        EntitySpawnPlacementRegistry.register(CARROT_PIG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(GOLDEN_CARROT_PIG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(BEAVER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        EntitySpawnPlacementRegistry.register(STINK_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
         EntitySpawnPlacementRegistry.register(ROCK_FISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, RockFishEntity::checkRockFishSpawnRules);
+        EntitySpawnPlacementRegistry.register(ROBO_SNIPER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+        EntitySpawnPlacementRegistry.register(ROBO_WARRIOR.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
     }
 }

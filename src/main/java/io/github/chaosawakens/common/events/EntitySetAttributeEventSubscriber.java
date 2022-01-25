@@ -25,6 +25,7 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.RAINBOW_ANT.get(), AntEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.UNSTABLE_ANT.get(), AntEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.TERMITE.get(), AggressiveAntEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.FROG.get(), FrogEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().build());
@@ -33,6 +34,7 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.CARROT_PIG.get(), CarrotPigEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.GOLDEN_CARROT_PIG.get(), GoldenCarrotPigEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.DIMETRODON.get(), DimetrodonEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.STINK_BUG.get(), StinkBugEntity.setCustomAttributes().build());
