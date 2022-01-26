@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class CAEntityTypes {
-
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ChaosAwakens.MODID);
 
     // Ents
@@ -152,6 +151,11 @@ public class CAEntityTypes {
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "golden_carrot_pig").toString()));
+    public static final RegistryObject<EntityType<EnchantedGoldenCarrotPigEntity>> ENCHANTED_GOLDEN_CARROT_PIG = ENTITY_TYPES.register("enchanted_golden_carrot_pig",
+            () -> EntityType.Builder.of(EnchantedGoldenCarrotPigEntity::new, EntityClassification.CREATURE)
+                    .sized(0.9F, 1.4F)
+                    .clientTrackingRange(10)// Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_carrot_pig").toString()));
 
     // Ants
     public static final RegistryObject<EntityType<AntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",

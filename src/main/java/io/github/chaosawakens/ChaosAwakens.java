@@ -85,10 +85,6 @@ public class ChaosAwakens {
 		CALootModifiers.LOOT_MODIFIERS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 
-	/*	ModList modList = ModList.get();
-		if (modList.isLoaded("projecte")) CAEMCValues.init();
-		if (modList.isLoaded("jeresources")) CAJER.init();*/
-
 		//Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);

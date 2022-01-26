@@ -33,8 +33,7 @@ public class AntNestBlock extends Block {
         List<AntEntity> nearbyAntEntityList = worldIn.getEntitiesOfClass(AntEntity.class, (new AxisAlignedBB(pos)).inflate(12.0D, 8.0D, 12.0D));
         List<AggressiveAntEntity> nearbyAggressiveAntEntityList = worldIn.getEntitiesOfClass(AggressiveAntEntity.class, (new AxisAlignedBB(pos)).inflate(12.0D, 8.0D, 12.0D));
 
-  //      if (nearbyPlayerExists.isEmpty()) return;
-  //      if (nearbyAntEntityList.size() + nearbyAggressiveAntEntityList.size() > 10) return;
+        if (nearbyPlayerExists.isEmpty()) return;
 
         final BlockPos abovePos = pos.above();
         final int amountToSpawn = MathHelper.nextInt(random, 0, 3);
@@ -44,10 +43,8 @@ public class AntNestBlock extends Block {
                 assert entity != null;
                 entity.setPos(pos.getX() + Math.random(), pos.getY() + 1, pos.getZ() + Math.random());
                 worldIn.addFreshEntity(entity);
-                
-                if(nearbyAggressiveAntEntityList.size() + nearbyAntEntityList.size() >= 11) {
-                	assert entity == null;
-                }
+
+                assert nearbyAggressiveAntEntityList.size() + nearbyAntEntityList.size() < 11 || entity == null;
             }
         }
     }

@@ -68,10 +68,6 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	private static final DataParameter<Integer> COLOR_TEXTURE = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
     private float flap;
     private float flapSpeed;
-    @SuppressWarnings("unused")
-	private float oFlapSpeed;
-    @SuppressWarnings("unused")
-	private float oFlap;
     private float flapping = 1.0F;
 
 	public BirdEntity(EntityType<? extends ParrotEntity> p_i50251_1_, World p_i50251_2_) {
@@ -145,7 +141,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	}
 	
 	@Override
-	protected SoundEvent getHurtSound(DamageSource dmgsrc) {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.PARROT_HURT;
 	}
 	
@@ -209,8 +205,8 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
     }
     
     private void calculateFlapping() {
-        this.oFlap = this.flap;
-        this.oFlapSpeed = this.flapSpeed;
+        float oFlap = this.flap;
+        float oFlapSpeed = this.flapSpeed;
         this.flapSpeed = (float)((double)this.flapSpeed + (double)(!this.onGround && !this.isPassenger() ? 4 : -1) * 0.3D);
         this.flapSpeed = MathHelper.clamp(this.flapSpeed, 0.0F, 1.0F);
         if (!this.onGround && this.flapping < 1.0F) {
@@ -269,7 +265,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
     @Override
     @OnlyIn(Dist.CLIENT)
     public Vector3d getLeashOffset() {
-       return new Vector3d(0.0D, (double)(0.5F * this.getEyeHeight()), (double)(this.getBbWidth() * 0.4F));
+       return new Vector3d(0.0D, (0.5F * this.getEyeHeight()), (this.getBbWidth() * 0.4F));
     }
     
     @Override
@@ -306,7 +302,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	
 	protected int setBirdType(IServerWorld world) {
         Biome biome = world.getBiome(this.blockPosition());
-        int i = this.random.nextInt(4);
+        int i = this.random.nextInt(5);
         if (biome.getBiomeCategory() == Biome.Category.BEACH) {
             i = 40;
         }
@@ -348,5 +344,4 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
 }

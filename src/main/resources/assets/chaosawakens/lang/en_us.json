@@ -79,6 +79,7 @@
 	"entity.chaosawakens.crystal_apple_cow": "Crystal Apple Cow",
 	"entity.chaosawakens.carrot_pig": "Carrot Pig",
 	"entity.chaosawakens.golden_carrot_pig": "Golden Carrot Pig",
+	"entity.chaosawakens.enchanted_golden_carrot_pig": "Enchanted Golden Carrot Pig",
 	"entity.chaosawakens.wasp": "Wasp",
 	"entity.chaosawakens.whale": "Whale",
 	"entity.chaosawakens.rock_fish": "Rock Fish",
@@ -119,6 +120,7 @@
 	"item.chaosawakens.crystal_apple_cow_spawn_egg": "Crystal Apple Cow Spawn Egg",
 	"item.chaosawakens.carrot_pig_spawn_egg": "Carrot Pig Spawn Egg",
 	"item.chaosawakens.golden_carrot_pig_spawn_egg": "Golden Carrot Pig Spawn Egg",
+	"item.chaosawakens.enchanted_golden_carrot_pig_spawn_egg": "Enchanted Golden Carrot Pig Spawn Egg",
 	"item.chaosawakens.wasp_spawn_egg": "Wasp Spawn Egg",
 	"item.chaosawakens.whale_spawn_egg": "Whale Spawn Egg",
 	"item.chaosawakens.rock_fish_spawn_egg": "Rock Fish Spawn Egg",
@@ -475,6 +477,7 @@
 
 	"block.chaosawakens.fossilised_crimson_ent": "Fossilised Crimson Ent",
 	"block.chaosawakens.fossilised_warped_ent": "Fossilised Warped Ent",
+	"block.chaosawakens.fossilised_lava_eel": "Fossilised Lava Eel",
 
 	"block.chaosawakens.fossilised_blaze": "Fossilised Blaze",
 	"block.chaosawakens.fossilised_ghast": "Fossilised Ghast",

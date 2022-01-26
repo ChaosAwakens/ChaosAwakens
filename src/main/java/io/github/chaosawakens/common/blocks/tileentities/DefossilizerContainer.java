@@ -14,7 +14,7 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
 
-public class DefossilizerContainer extends Container{
+public class DefossilizerContainer extends Container {
     private final IInventory inventory;
     private IIntArray fields;
     protected final World level;

@@ -413,7 +413,7 @@ public class CAConfiguredFeatures {
 	}
 
 	public static final class RuleTests {
-		public static final RuleTest BASE_STONE_CRYSTAL = new TagMatchRuleTest(CATags.BASE_STONE_CRYSTAL);
+		public static final RuleTest BASE_STONE_CRYSTAL = new TagMatchRuleTest(CATags.Blocks.BASE_STONE_CRYSTAL);
 		public static final RuleTest BASE_OCEAN_FLOOR = new BlockMatchRuleTest(Blocks.GRAVEL);
 		public static final RuleTest BASE_DESERT = new BlockMatchRuleTest(Blocks.SANDSTONE);
 		public static final RuleTest BASE_BLACKSTONE = new BlockMatchRuleTest(Blocks.BLACKSTONE);

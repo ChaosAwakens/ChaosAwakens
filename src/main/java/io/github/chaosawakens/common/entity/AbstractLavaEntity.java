@@ -136,15 +136,6 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float power) {
-		if (this.isInWater()) {
-			power = 1.0F;
-			this.hurt(DamageSource.DROWN, power);
-		}
-		return super.hurt(source, power);
-	}
-
-	@Override
 	public void baseTick() {
 		if (!this.isInLava() && this.onGround && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F,

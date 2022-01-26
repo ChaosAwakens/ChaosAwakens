@@ -11,12 +11,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  * @author invalid2
  */
 public class CABlockModelProvider extends BlockModelProvider {
-	
-	/**
-	 * @param generator
-	 * @param modid
-	 * @param existingFileHelper
-	 */
 	public CABlockModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {
 		super(generator, modid, existingFileHelper);
 	}
@@ -97,6 +91,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 		this.cubeAll("fossilised_crimson_ent", chaosRL("fossilised_crimson_ent"));
 		this.cubeAll("fossilised_warped_ent", chaosRL("fossilised_warped_ent"));
+		this.cubeAll("fossilised_lava_eel", chaosRL("fossilised_lava_eel"));
 
 		this.cubeAll("fossilised_blaze", chaosRL("fossilised_blaze"));
 		this.cubeAll("fossilised_ghast", chaosRL("fossilised_ghast"));

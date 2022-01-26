@@ -137,7 +137,7 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	}
 
 	protected ItemStack getBucketItemStack() {
-		return new ItemStack(CAItems.LAVA_EEL.get());
+		return new ItemStack(CAItems.LAVA_EEL_BUCKET.get());
 	}
 
 	@Override

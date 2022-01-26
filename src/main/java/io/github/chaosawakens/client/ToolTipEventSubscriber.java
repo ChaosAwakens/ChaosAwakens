@@ -16,7 +16,7 @@ public class ToolTipEventSubscriber {
 		if(event.getPlayer() == null)return;
 		if(CAConfig.COMMON.enableTooltips.get()) {
 			final Item item = event.getItemStack().getItem();
-			if (item.is(CATags.CUSTOM_TOOLTIPS)) {
+			if (item.is(CATags.Items.CUSTOM_TOOLTIPS)) {
 				if (Screen.hasShiftDown() || Screen.hasControlDown())
 					event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getRegistryName().toString().replaceAll("chaosawakens:", "")).withStyle(TextFormatting.AQUA));
 				else

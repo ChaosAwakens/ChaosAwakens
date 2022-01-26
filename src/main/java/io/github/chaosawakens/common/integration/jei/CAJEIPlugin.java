@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.integration.jei;
 
 import java.util.Objects;
 
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerContainer;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerScreen;

@@ -139,7 +139,7 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOreSunstoneGen;
 		public final ConfigValue<Boolean> enableOreBloodstoneGen;
 
-		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
+		public final ConfigValue<Boolean> enableEnchantedAnimalBreeding;
 
 		public final ConfigValue<Boolean> holidayTextures;
 
@@ -315,7 +315,7 @@ public class CAConfig {
 			enableButterflyTeleport = builder.comment("Will the Butterfly teleport you to its Dimension?").define("Butterfly Teleport", true);
 			builder.pop();
 			builder.push("Breeding");
-			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);
+			enableEnchantedAnimalBreeding = builder.comment("Will Enchanted Animals be Breedable?").define("Enchanted Animal Breeding", false);
 			builder.pop();
 			builder.push("Textures");
 			holidayTextures = builder.comment("Will holiday special textures be obtainable?").define("Obtainable Holiday Textures", true);

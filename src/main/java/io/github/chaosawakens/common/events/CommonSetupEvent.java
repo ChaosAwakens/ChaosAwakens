@@ -67,7 +67,6 @@ public class CommonSetupEvent {
         event.enqueueWork(() -> {
             CAStructures.setupStructures();
             CAConfiguredStructures.registerConfiguredStructures();
-            ChaosAwakens.debug("SB", "0");
             CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
             CAVillagers.registerVillagerTypes();
             CAStrippedLogBlocks.registerStrippedLogs();
@@ -101,15 +100,15 @@ public class CommonSetupEvent {
     	ItemStack prismaticReaper = new ItemStack(CAItems.PRISMATIC_REAPER.get());
     	PlayerEntity p = (PlayerEntity) e.getPlayer();
     	
-    	if(p.getItemInHand(Hand.MAIN_HAND) == bigBertha) {
+    	if(p.getItemInHand(Hand.MAIN_HAND).equals(bigBertha)) {
     		reachDistance = 25.0D;
     	}
     	
-    	if(p.getItemInHand(Hand.MAIN_HAND) == attitudeAdjuster) {
+    	if(p.getItemInHand(Hand.MAIN_HAND).equals(attitudeAdjuster)) {
     		reachDistance = 15.0D;
     	}
     	
-    	if(p.getItemInHand(Hand.MAIN_HAND) == prismaticReaper) {
+    	if(p.getItemInHand(Hand.MAIN_HAND).equals(prismaticReaper)) {
     		reachDistance = 13.0D;
     	}
     }

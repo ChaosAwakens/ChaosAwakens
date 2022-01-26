@@ -11,12 +11,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  * @author invalid2
  */
 public class CABlockStateProvider extends BlockStateProvider {
-
-    /**
-     * @param gen
-     * @param modid
-     * @param exFileHelper
-     */
     public CABlockStateProvider(DataGenerator gen, String modid, ExistingFileHelper exFileHelper) {
         super(gen, modid, exFileHelper);
     }

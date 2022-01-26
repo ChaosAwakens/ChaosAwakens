@@ -14,10 +14,11 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class BirdEntityRender extends GeoEntityRenderer<BirdEntity> {
-    private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/black_bird.png");
-    private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/brown_bird.png");
-    private static final ResourceLocation TEXTURE_BLUE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/blue_bird.png");
-    private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/red_bird.png");
+    private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/black.png");
+    private static final ResourceLocation TEXTURE_BLUE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/blue.png");
+    private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/brown.png");
+    private static final ResourceLocation TEXTURE_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/green.png");
+    private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/red.png");
 
     public BirdEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new BirdEntityModel());
@@ -40,10 +41,10 @@ public class BirdEntityRender extends GeoEntityRenderer<BirdEntity> {
          case 2:
              return TEXTURE_BLUE_LOCATION;
          case 3:
+             return TEXTURE_GREEN_LOCATION;
+         case 4:
              return TEXTURE_RED_LOCATION;
-         case 40:
-        	 return TEXTURE_BLACK_LOCATION;
-    	 }
+         }
     }
     
 

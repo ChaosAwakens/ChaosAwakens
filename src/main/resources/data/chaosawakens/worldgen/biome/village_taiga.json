@@ -135,6 +135,12 @@
         "maxCount": 2
       },
       {
+        "type": "chaosawakens:enchanted_golden_carrot_pig",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
         "type": "minecraft:chicken",
         "weight": 10,
         "minCount": 4,

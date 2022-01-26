@@ -71,7 +71,6 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
     }*/
 	
 	public static class UltimateAutoSmeltingModifier extends LootModifier{
-
 		public UltimateAutoSmeltingModifier(ILootCondition[] conditionsIn) {
 			super(conditionsIn);
 		}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "chaosawakens:skywood_logs"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:skywood_planks",
+    "count": 4
+  }
+}

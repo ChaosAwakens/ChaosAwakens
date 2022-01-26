@@ -4,10 +4,14 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CARecipes;
+import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.data.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.CookingRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.function.Consumer;
@@ -24,11 +28,34 @@ public class CARecipeProvider extends RecipeProvider {
 
 	@Override
 	protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
-		//insert recipes here (all types)
+		woodenPlanks(consumer, CABlocks.APPLE_PLANKS.get(), CATags.Items.APPLE_LOGS);
+		woodenSlab(consumer, CABlocks.APPLE_SLAB.get(), CABlocks.APPLE_PLANKS.get());
+		woodenStairs(consumer, CABlocks.APPLE_STAIRS.get(), CABlocks.APPLE_PLANKS.get());
+		woodenFence(consumer, CABlocks.APPLE_FENCE.get(), CABlocks.APPLE_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.APPLE_FENCE_GATE.get(), CABlocks.APPLE_PLANKS.get());
+		woodenPlanks(consumer, CABlocks.CHERRY_PLANKS.get(), CATags.Items.CHERRY_LOGS);
+		woodenSlab(consumer, CABlocks.CHERRY_SLAB.get(), CABlocks.CHERRY_PLANKS.get());
+		woodenStairs(consumer, CABlocks.CHERRY_STAIRS.get(), CABlocks.CHERRY_PLANKS.get());
+		woodenFence(consumer, CABlocks.CHERRY_FENCE.get(), CABlocks.CHERRY_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.CHERRY_FENCE_GATE.get(), CABlocks.CHERRY_PLANKS.get());
+		woodenPlanks(consumer, CABlocks.DUPLICATION_PLANKS.get(), CATags.Items.DUPLICATION_LOGS);
+		woodenSlab(consumer, CABlocks.DUPLICATION_SLAB.get(), CABlocks.DUPLICATION_PLANKS.get());
+		woodenStairs(consumer, CABlocks.DUPLICATION_STAIRS.get(), CABlocks.DUPLICATION_PLANKS.get());
+		woodenFence(consumer, CABlocks.DUPLICATION_FENCE.get(), CABlocks.DUPLICATION_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.DUPLICATION_FENCE_GATE.get(), CABlocks.DUPLICATION_PLANKS.get());
+		woodenPlanks(consumer, CABlocks.PEACH_PLANKS.get(), CATags.Items.PEACH_LOGS);
+		woodenSlab(consumer, CABlocks.PEACH_SLAB.get(), CABlocks.PEACH_PLANKS.get());
+		woodenStairs(consumer, CABlocks.PEACH_STAIRS.get(), CABlocks.PEACH_PLANKS.get());
+		woodenFence(consumer, CABlocks.PEACH_FENCE.get(), CABlocks.PEACH_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.PEACH_FENCE_GATE.get(), CABlocks.PEACH_PLANKS.get());
+		woodenPlanks(consumer, CABlocks.SKYWOOD_PLANKS.get(), CATags.Items.SKYWOOD_LOGS);
+		woodenSlab(consumer, CABlocks.SKYWOOD_SLAB.get(), CABlocks.SKYWOOD_PLANKS.get());
+		woodenStairs(consumer, CABlocks.SKYWOOD_STAIRS.get(), CABlocks.SKYWOOD_PLANKS.get());
+		woodenFence(consumer, CABlocks.SKYWOOD_FENCE.get(), CABlocks.SKYWOOD_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.SKYWOOD_FENCE_GATE.get(), CABlocks.SKYWOOD_PLANKS.get());
+
 		buildDefossilizingRecipes(consumer);
 	}
-
-	//Insert custom recipe methods here
 
 	protected static void buildCookingRecipes(Consumer<IFinishedRecipe> consumer, String condition, CookingRecipeSerializer<?> recipe, int exp) {
 		//insert cooking recipes here
@@ -92,11 +119,11 @@ public class CARecipeProvider extends RecipeProvider {
 				Ingredient.of(Items.WATER_BUCKET),
 				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 				CAItems.ROCK_FISH_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ROCK_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
-//		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
-//				Ingredient.of(CABlocks.FOSSILISED_SPARK_FISH.get()),
-//				Ingredient.of(Items.WATER_BUCKET),
-//				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-//				CAItems.SPARK_FISH_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SPARK_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+				Ingredient.of(CABlocks.FOSSILISED_SPARK_FISH.get()),
+				Ingredient.of(Items.WATER_BUCKET),
+				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+				CAItems.SPARK_FISH_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SPARK_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 				Ingredient.of(CABlocks.FOSSILISED_WOOD_FISH.get()),
 				Ingredient.of(Items.WATER_BUCKET),
@@ -117,6 +144,11 @@ public class CARecipeProvider extends RecipeProvider {
 				Ingredient.of(Items.WATER_BUCKET),
 				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 				CAItems.WASP_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WASP.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+				Ingredient.of(CABlocks.FOSSILISED_WHALE.get()),
+				Ingredient.of(Items.WATER_BUCKET),
+				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+				CAItems.WHALE_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WHALE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 //		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 //				Ingredient.of(CABlocks.FOSSILISED_PIRAPORU.get()),
 //				Ingredient.of(Items.WATER_BUCKET),
@@ -401,6 +433,7 @@ public class CARecipeProvider extends RecipeProvider {
 				Ingredient.of(Items.LAVA_BUCKET),
 				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 				CAItems.LAVA_EEL_SPAWN_EGG.get(), 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_LAVA_EEL.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+
 		// Nether (Vanilla)
 		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 				Ingredient.of(CABlocks.FOSSILISED_BLAZE.get()),
@@ -476,5 +509,25 @@ public class CARecipeProvider extends RecipeProvider {
 				Ingredient.of(Items.WATER_BUCKET),
 				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 				Items.SHULKER_SPAWN_EGG, 1, 20).build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SHULKER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+	}
+
+	private static void woodenPlanks(Consumer<IFinishedRecipe> consumer, IItemProvider pPlanks, ITag<Item> pLog) {
+		ShapelessRecipeBuilder.shapeless(pPlanks, 4).requires(pLog).group("planks").unlockedBy("has_log", has(pLog)).save(consumer);
+	}
+
+	private static void woodenSlab(Consumer<IFinishedRecipe> consumer, IItemProvider pSlab, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pSlab, 6).define('#', pMaterial).pattern("###").group("wooden_slab").unlockedBy("has_planks", has(pMaterial)).save(consumer);
+	}
+
+	private static void woodenStairs(Consumer<IFinishedRecipe> consumer, IItemProvider pStairs, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pStairs, 4).define('#', pMaterial).pattern("#  ").pattern("## ").pattern("###").group("wooden_stairs").unlockedBy("has_planks", has(pMaterial)).save(consumer);
+	}
+
+	private static void woodenFence(Consumer<IFinishedRecipe> consumer, IItemProvider pFence, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pFence, 3).define('#', Items.STICK).define('W', pMaterial).pattern("W#W").pattern("W#W").group("wooden_fence").unlockedBy("has_planks", has(pMaterial)).save(consumer);
+	}
+
+	private static void woodenFenceGate(Consumer<IFinishedRecipe> consumer, IItemProvider pFenceGate, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pFenceGate).define('#', Items.STICK).define('W', pMaterial).pattern("#W#").pattern("#W#").group("wooden_fence_gate").unlockedBy("has_planks", has(pMaterial)).save(consumer);
 	}
 }
