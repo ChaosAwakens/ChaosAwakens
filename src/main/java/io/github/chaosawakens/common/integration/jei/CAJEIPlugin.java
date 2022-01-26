@@ -35,7 +35,7 @@ public class CAJEIPlugin implements IModPlugin {
     }
     
     public static ResourceLocation getDefossilizerId() {
-		return DeffosilizerRecipeCategory.ID;
+		return DefossilizerRecipeCategory.ID;
 	}
     
     @Override
@@ -49,25 +49,25 @@ public class CAJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registry) {
-    	registry.addRecipeTransferHandler(DefossilizerContainer.class, DeffosilizerRecipeCategory.ID, 0, 3, 4, INV_SIZE);
+    	registry.addRecipeTransferHandler(DefossilizerContainer.class, DefossilizerRecipeCategory.ID, 0, 3, 4, INV_SIZE);
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
     	@SuppressWarnings("resource")
 		ClientWorld world = Objects.requireNonNull(Minecraft.getInstance().level);
-        registry.addRecipes(world.getRecipeManager().getAllRecipesFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE), DeffosilizerRecipeCategory.ID);
+        registry.addRecipes(world.getRecipeManager().getAllRecipesFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE), DefossilizerRecipeCategory.ID);
         addDescription(registry, new ItemStack(CABlocks.DEFOSSILIZER.get()));
     }
     
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-    	registration.addRecipeClickArea(DefossilizerScreen.class, 79, 35, 20, 20, DeffosilizerRecipeCategory.ID);
+    	registration.addRecipeClickArea(DefossilizerScreen.class, 79, 35, 20, 20, DefossilizerRecipeCategory.ID);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER.get()), DeffosilizerRecipeCategory.ID);
+        registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER.get()), DefossilizerRecipeCategory.ID);
         registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_CRAFTING_TABLE.get()), VanillaRecipeCategoryUid.CRAFTING);
         registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_FURNACE.get()), VanillaRecipeCategoryUid.FUEL);
         registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_FURNACE.get()), VanillaRecipeCategoryUid.FURNACE);
@@ -76,7 +76,7 @@ public class CAJEIPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
     	IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
-    	registration.addRecipeCategories(new DeffosilizerRecipeCategory(guiHelper));
+    	registration.addRecipeCategories(new DefossilizerRecipeCategory(guiHelper));
     }
 
     @Override

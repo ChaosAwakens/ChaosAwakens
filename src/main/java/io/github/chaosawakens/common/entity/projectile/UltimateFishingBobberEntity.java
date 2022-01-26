@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Collections;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import javax.annotation.Nonnull;
@@ -47,6 +48,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -58,13 +60,18 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Dimension;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData{
 	    private final Random syncronizedRandom = new Random();
@@ -666,7 +673,7 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 	        PlayerEntity playerentity = this.getPlayerOwner();
 	        if (!this.level.isClientSide && playerentity != null) {
 	            int i = 0;
-	            net.minecraftforge.event.entity.player.ItemFishedEvent event = null;
+	            net.minecraftforge.event.entity.player.ItemFishedEvent e = null;
 	            if (this.hookedIn != null) {
 	                this.bringInHookedEntity();
 	                CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)playerentity, p_146034_1_, this, Collections.emptyList());
@@ -681,11 +688,15 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 	               
 	                if(state.getMaterial() == Material.LAVA) {
 	                	World w = playerentity.level;
-	                	if(World.RESOURCE_KEY_CODEC == Dimension.NETHER) {
+	        //			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
+	        //			final String location = biome.location().toString();
+	                	if(BiomeDictionary.hasType(Biomes.NETHER_WASTES, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.CRIMSON_FOREST, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.WARPED_FOREST, BiomeDictionary.Type.NETHER)) {
 	                	//	loottable = this.level.getServer().getLootTables().get(CALootTables.FISHING_NETHER_FISH);
 	                		table = CALootTables.FISHING_NETHER_FISH;
-	                	} else {
+	                	} else if (!BiomeDictionary.hasType(Biomes.NETHER_WASTES, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.CRIMSON_FOREST, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.WARPED_FOREST, BiomeDictionary.Type.NETHER)){
 	                	//	loottable = this.level.getServer().getLootTables().get(CALootTables.FISHING_LAVA_FISH);
+	                		table = CALootTables.FISHING_LAVA_FISH;
+	                	} else {
 	                		table = CALootTables.FISHING_LAVA_FISH;
 	                	}
 	                
@@ -696,12 +707,12 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 	            
 	                LootTable loottable = this.level.getServer().getLootTables().get(table);
 	                List<ItemStack> list = loottable.getRandomItems(lootcontext$builder.create(LootParameterSets.FISHING));
-	                event = new net.minecraftforge.event.entity.player.ItemFishedEvent(list, this.onGround ? 2 : 1, this);
+	                e = new net.minecraftforge.event.entity.player.ItemFishedEvent(list, this.onGround ? 2 : 1, this);
 	        
-	                net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
-	                if (event.isCanceled()) {
+	                net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(e);
+	                if (e.isCanceled()) {
 	                    this.remove();
-	                    return event.getRodDamage();
+	                    return e.getRodDamage();
 	                }
 	                
 	                CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)playerentity, p_146034_1_, this, list);
@@ -728,7 +739,7 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 	            }
 
 	            this.remove();
-	            return event == null ? i : event.getRodDamage();
+	            return e == null ? i : e.getRodDamage();
 	        } else {
 	            return 0;
 	        }

@@ -18,12 +18,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 
-public class DeffosilizerRecipeCategory implements IRecipeCategory<DefossilizingRecipe> {
+public class DefossilizerRecipeCategory implements IRecipeCategory<DefossilizingRecipe> {
 	  static final ResourceLocation ID = new ResourceLocation(CARecipes.DEFOSSILIZING_RECIPE_TYPE.toString());
 	  private IDrawable bg;
 	  private IDrawable icon;
 	
-	public DeffosilizerRecipeCategory(IGuiHelper helper) {
+	public DefossilizerRecipeCategory(IGuiHelper helper) {
 		bg = helper.drawableBuilder(new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80).setTextureSize(170, 80).build();
 		icon = helper.createDrawableIngredient(new ItemStack(CABlocks.DEFOSSILIZER.get()));
 	}
