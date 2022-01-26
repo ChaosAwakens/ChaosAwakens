@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.BlastFurnaceTileEntity;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -45,10 +44,9 @@ public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 		return this.leader != null && this.leader.isAlive();
 	}
 
-	public AbstractLavaGroupFishEntity startFollowing(AbstractLavaGroupFishEntity leader) {
+	public void startFollowing(AbstractLavaGroupFishEntity leader) {
 		this.leader = leader;
 		leader.addFollower();
-		return leader;
 	}
 
 	public void stopFollowing() {
@@ -93,11 +91,7 @@ public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	}
 
 	public void addFollowers(Stream<AbstractLavaGroupFishEntity> entity) {
-		entity.limit((long)(this.getMaxSchoolSize() - this.schoolSize)).filter((entity1) -> {
-			return entity1 != this;
-		}).forEach((entity2) -> {
-			entity2.startFollowing(this);
-		});
+		entity.limit((this.getMaxSchoolSize() - this.schoolSize)).filter((entity1) -> entity1 != this).forEach((entity2) -> entity2.startFollowing(this));
 	}
 
 	@Nullable

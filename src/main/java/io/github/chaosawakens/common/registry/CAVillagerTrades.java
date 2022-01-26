@@ -5,6 +5,7 @@ import io.github.chaosawakens.common.util.TradeUtil;
 import io.github.chaosawakens.common.util.TradeUtil.CATrade;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,7 +30,8 @@ public class CAVillagerTrades {
 
         TradeUtil.addRareWandererTrades(event,
                 new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 1, 3, 5),
-                new CATrade(15, CAItems.URANIUM_NUGGET.get(), 1, 3, 5)
+                new CATrade(15, CAItems.URANIUM_NUGGET.get(), 1, 3, 5),
+                new CATrade(8, Items.NAME_TAG, 1, 3, 5)
         );
     }
 

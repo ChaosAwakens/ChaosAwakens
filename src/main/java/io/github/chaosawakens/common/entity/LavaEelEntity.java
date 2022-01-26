@@ -98,11 +98,6 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 		return PlayState.CONTINUE;
 	}
 
-//	@Override
-//	public boolean checkSpawnRules(IWorld world, SpawnReason spawnReason) {
-//		return super.checkSpawnRules(world, spawnReason) && checkLavaMobSpawnRules(world, blockPosition());
-//	}
-
 	@Override
 	public int getMaxSchoolSize() {
 		return 4;

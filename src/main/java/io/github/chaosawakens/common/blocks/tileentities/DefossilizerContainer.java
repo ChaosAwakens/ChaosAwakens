@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
 import io.github.chaosawakens.common.items.PowerChipItem;
+
 import io.github.chaosawakens.common.registry.CAContainerTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -13,7 +14,7 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
 
-public class DefossilizerContainer extends Container {
+public class DefossilizerContainer extends Container{
     private final IInventory inventory;
     private IIntArray fields;
     protected final World level;
@@ -25,7 +26,7 @@ public class DefossilizerContainer extends Container {
     public DefossilizerContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
         this(id, playerInventory, new DefossilizerTileEntity(), new IntArray(buffer.readByte()));
     }
-
+    
     public DefossilizerContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
         super(CAContainerTypes.DEFOSSILIZER.get(), id);
         this.level = playerInventory.player.level;
@@ -125,4 +126,5 @@ public class DefossilizerContainer extends Container {
 
         return itemstack;
     }
+    
 }

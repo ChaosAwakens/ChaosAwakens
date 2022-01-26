@@ -48,8 +48,6 @@
 
 	"stat.chaosawakens.interact_with_defossilizer": "Interactions with Defossilizer",
 
-	"entity.chaosawakens.top.frog_type": "Frog Type:",
-
 	"entity.minecraft.villager.chaosawakens.oddities_purveyor": "Oddities Purveyor",
 
 	"entity.chaosawakens.acacia_ent": "Acacia Ent",
@@ -67,6 +65,7 @@
 	"entity.chaosawakens.termite": "Termite",
 	"entity.chaosawakens.frog": "Frog",
 	"entity.chaosawakens.hercules_beetle": "Hercules Beetle",
+	"entity.chaosawakens.dimetrodon": "Dimetrodon",
 	"entity.chaosawakens.emerald_gator": "Emerald Gator",
 	"entity.chaosawakens.ruby_bug": "Ruby Bug",
 	"entity.chaosawakens.stink_bug": "Stink Bug",
@@ -90,6 +89,7 @@
 	"entity.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
 	"entity.chaosawakens.explosive_ball": "Explosive Charge",
+	"entity.chaosawakens.bird": "Bird",
 
 	"item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
 	"item.chaosawakens.birch_ent_spawn_egg": "Birch Ent Spawn Egg",
@@ -106,6 +106,7 @@
 	"item.chaosawakens.termite_spawn_egg": "Termite Spawn Egg",
 	"item.chaosawakens.frog_spawn_egg": "Frog Spawn Egg",
 	"item.chaosawakens.hercules_beetle_spawn_egg": "Hercules Beetle Spawn Egg",
+	"item.chaosawakens.dimetrodon_spawn_egg": "Dimetrodon Spawn Egg",
 	"item.chaosawakens.emerald_gator_spawn_egg": "Emerald Gator Spawn Egg",
 	"item.chaosawakens.ruby_bug_spawn_egg": "Ruby Bug Spawn Egg",
 	"item.chaosawakens.stink_bug_spawn_egg": "Stink Bug Spawn Egg",
@@ -682,7 +683,7 @@
 	"item.chaosawakens.platinum_coin": "Platinum Coin",
 
 	"misc.chaosawakens.empty_inventory": "Empty your inventory first!",
-	"misc.chaosawakens.inaccessible_dimension": "This part of the anthill seems to be blocked off...",
+	"misc.chaosawakens.inaccessible_dimension": "This part of the anthill seems to be blocked off... (This Dimension has not been implemented yet!)",
 
 	"tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info.",
 	"tooltip.chaosawakens.ruby": "Bright red gem of a fire of a burning desire",

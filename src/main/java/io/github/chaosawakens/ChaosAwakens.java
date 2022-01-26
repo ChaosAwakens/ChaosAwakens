@@ -82,11 +82,12 @@ public class ChaosAwakens {
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
 		CAVillagers.POI_TYPES.register(eventBus);
 		CAVillagers.PROFESSIONS.register(eventBus);
+		CALootModifiers.LOOT_MODIFIERS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 
-		ModList modList = ModList.get();
+	/*	ModList modList = ModList.get();
 		if (modList.isLoaded("projecte")) CAEMCValues.init();
-		if (modList.isLoaded("jeresources")) CAJER.init();
+		if (modList.isLoaded("jeresources")) CAJER.init();*/
 
 		//Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -145,6 +146,7 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, new CATagProvider.CATagProviderForBlocks(dataGenerator, existing), existing));
 			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
+			dataGenerator.addProvider(new CALootModifierProvider(dataGenerator, MODID));
 		}
 	}
 

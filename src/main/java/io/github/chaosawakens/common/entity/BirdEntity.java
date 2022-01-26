@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -22,8 +20,11 @@ import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.FollowMobGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SitGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.passive.ParrotEntity;
@@ -50,6 +51,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -63,7 +65,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnimal{
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final DataParameter<Integer> COLOR_TEXTURE = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
+	private static final DataParameter<Integer> COLOR_TEXTURE = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
     private float flap;
     private float flapSpeed;
     @SuppressWarnings("unused")
@@ -85,11 +87,23 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 5)
-                .add(Attributes.MOVEMENT_SPEED, 0.5F)
-                .add(Attributes.FLYING_SPEED, 0.6F)
+                .add(Attributes.MOVEMENT_SPEED, 0.6F)
+                .add(Attributes.FLYING_SPEED, 0.8F)
                 .add(Attributes.LUCK, 1.0F)
                 .add(Attributes.FOLLOW_RANGE, 12);
     }
+    
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(2, new SitGoal(this));
+		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 1.0F));
+		this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0D));
+	    this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
+		this.goalSelector.addGoal(3, new FollowMobGoal(this, 2.0D, 4.0F, 8.0F));
+	}
 	
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (this.dead) {
@@ -136,6 +150,12 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	}
 	
 	@Override
+	protected float playFlySound(float p_191954_1_) {
+		this.playSound(SoundEvents.PARROT_FLY, 0.15F, 1.0F);
+		return p_191954_1_ + this.flapSpeed / 2.0F;
+	}
+	
+	@Override
 	public boolean canMate(AnimalEntity e) {
 		return false;
 	}
@@ -146,7 +166,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	}
 	
     public int getColorTextureType() {
-        return this.entityData.get(COLOR_TEXTURE);
+    	 return MathHelper.clamp(this.entityData.get(COLOR_TEXTURE), 0, 40);
     }
     
     private void setColorTextureType(int id) {
@@ -159,16 +179,14 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
         this.entityData.define(COLOR_TEXTURE, 0);
     }
     
-    @Override
-    public void addAdditionalSaveData(CompoundNBT compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("TextureColorType", this.getColorTextureType());
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
+        nbt.putInt("BirdType", this.getColorTextureType());
     }
 
-    @Override
-    public void readAdditionalSaveData(CompoundNBT compound) {
-        super.readAdditionalSaveData(compound);
-        this.setColorTextureType(compound.getInt("TextureColorType"));
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
+        this.setColorTextureType(nbt.getInt("BirdType"));
     }
 
     public void setTextureData(EntityTextureEnum entityTextureEnum) {
@@ -275,36 +293,35 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
     }
 	
 	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-	    this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new FollowMobGoal(this, 2.0D, 4.0F, 8.0F));
-	}
-	
-	@Override
 	public ILivingEntityData finalizeSpawn(IServerWorld w, DifficultyInstance dif, SpawnReason reason, ILivingEntityData sData, CompoundNBT nbt) {
-		//this.setColorTextureType(random.nextInt(3));
-		//	 sData = super.finalizeSpawn(w, dif, reason, sData, nbt);
-		/* if (random.nextInt() == 1) {
-			 this.setColorTextureType(BirdTypes.RED.getId());
-		 }
-		 if (random.nextInt() == 2) {
-			 this.setColorTextureType(BirdTypes.BROWN.getId());
-		 }
-		 if (random.nextInt() == 3) {
-			this.setColorTextureType(BirdTypes.BLACK.getId()); 
-		 }
-		 if (random.nextInt() == 4) {
-			 this.setColorTextureType(BirdTypes.BLUE.getId());
-		 } else {
-			 this.setColorTextureType(BirdTypes.BLACK.getId());
-		 }*/
-		 return super.finalizeSpawn(w, dif, reason, sData, nbt);
+        int i = this.setBirdType(w);
+        if (sData instanceof BirdEntity.BirdData) {
+            i = ((BirdData)sData).birdType;
+        } else {
+            sData = new BirdEntity.BirdData(i);
+        }
+        this.setColorTextureType(i);
+        return super.finalizeSpawn(w, dif, reason, sData, nbt);
 	}
 	
-	 public enum BirdTypes {
+	protected int setBirdType(IServerWorld world) {
+        Biome biome = world.getBiome(this.blockPosition());
+        int i = this.random.nextInt(4);
+        if (biome.getBiomeCategory() == Biome.Category.BEACH) {
+            i = 40;
+        }
+        return i;
+	}
+	
+    static class BirdData extends AgeableEntity.AgeableData {
+        public final int birdType;
+        private BirdData(int birdType) {
+            super(true);
+            this.birdType = birdType;
+        }
+    }
+	
+/*	 public enum BirdTypes {
 	        RED(1), BROWN(2), BLACK(3), BLUE(4);
 		 
 		 private static final BirdTypes[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(BirdTypes::getId)).toArray(BirdTypes[]::new);
@@ -325,7 +342,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 		        }
 		        return VALUES[id];
 		    }
-	    }
+	    }*/
 	 
 	@Override
 	public AnimationFactory getFactory() {

@@ -6,6 +6,8 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.integration.CAEMCValues;
+import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.items.ExtendedHitWeaponItem;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
@@ -33,6 +35,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper.UnableToFindMethodException;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -72,6 +75,10 @@ public class CommonSetupEvent {
             CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
             configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
         });
+        
+		ModList modList = ModList.get();
+		if (modList.isLoaded("projecte")) CAEMCValues.init();
+		if (modList.isLoaded("jeresources")) CAJER.init();
 
         // TODO Make it so we don't have to add stuff here manually
         BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);

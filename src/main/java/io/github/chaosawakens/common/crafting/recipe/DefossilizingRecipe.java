@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.crafting.recipe;
 
 import com.google.gson.JsonObject;
+
 import io.github.chaosawakens.common.registry.CARecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -21,6 +22,10 @@ public class DefossilizingRecipe extends AbstractDefossilizingRecipe {
 
     public ItemStack getResult() {
         return result;
+    }
+    
+    public ItemStack getResultItemStack() {
+    	return this.result;
     }
 
     @Override

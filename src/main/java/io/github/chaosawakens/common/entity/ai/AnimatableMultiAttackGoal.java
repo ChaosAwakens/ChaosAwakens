@@ -5,6 +5,9 @@ import javax.annotation.Nullable;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 
 public class AnimatableMultiAttackGoal extends AnimatableGoal{
 	protected AnimatableMonsterEntity attacker;
@@ -12,7 +15,9 @@ public class AnimatableMultiAttackGoal extends AnimatableGoal{
 	protected AnimatableMeleeGoal attack1;
 	protected Goal attack2;
 	protected Goal attack3;
-	
+	protected static final DataParameter<Boolean> IS_ATTACKING = EntityDataManager.defineId(LivingEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Integer> ATTACK_ANIM_TIME = EntityDataManager.defineId(LivingEntity.class, DataSerializers.INT);
+
 	/**
 	 * 3 attacks, nullable if needed, attack 1 being the melee attack, attack 2 is a bit more of a ranged attack (if the range between the 
 	 * target and the entity is greater than the melee range of the entity AND the target is far away while the creature cannot move), and 

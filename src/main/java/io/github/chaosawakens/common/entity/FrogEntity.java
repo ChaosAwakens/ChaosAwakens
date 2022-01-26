@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.registry.CABiomes;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -15,13 +13,10 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -32,7 +27,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class FrogEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -147,18 +141,6 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 
     public boolean causeFallDamage(float p_225503_1_, float p_225503_2_) {
         return false;
-    }
-
-    public static boolean checkSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos blockPos, Random random) {
-        if (world.getBiome(blockPos).equals(Biomes.BASALT_DELTAS)) {
-            return checkNetherFrogSpawnRules(entityType, world, spawnReason, blockPos, random);
-        } else {
-            return checkAnimalSpawnRules(entityType, world, spawnReason, blockPos, random);
-        }
-    }
-
-    public static boolean checkNetherFrogSpawnRules(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos blockPos, Random random) {
-        return world.getDifficulty() != Difficulty.PEACEFUL && world.getBlockState(blockPos.below()).getBlock() != Blocks.NETHER_WART_BLOCK;
     }
 
     @Override

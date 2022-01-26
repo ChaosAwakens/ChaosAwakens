@@ -24,7 +24,7 @@ public class CrystalFurnaceTileEntity extends AbstractFurnaceTileEntity {
 
     public static Map<Item, Integer> getBurnTimes() {
         Map<Item, Integer> map = Maps.newLinkedHashMap();
-        addItemBurnTime(map, CABlocks.CRYSTAL_ENERGY.get(), 1600);
+        addItemBurnTime(map, CABlocks.CRYSTAL_ENERGY.get(), 2200);
         return map;
     }
 
@@ -38,7 +38,7 @@ public class CrystalFurnaceTileEntity extends AbstractFurnaceTileEntity {
     }
 
     protected int getBurnDuration(ItemStack fuel) {
-        return super.getBurnDuration(fuel) / 2;
+        return super.getBurnDuration(fuel) / 2 - 5;
     }
 
     protected Container createMenu(int id, PlayerInventory player) {

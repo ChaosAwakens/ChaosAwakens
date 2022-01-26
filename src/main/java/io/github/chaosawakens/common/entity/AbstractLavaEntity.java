@@ -199,9 +199,6 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 		return SoundEvents.FISH_SWIM;
 	}
 
-	protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
-	}
-
 	static class MoveHelperController extends MovementController {
 		private final AbstractLavaEntity fish;
 

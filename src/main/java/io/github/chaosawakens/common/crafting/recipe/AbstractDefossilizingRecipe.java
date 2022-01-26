@@ -17,6 +17,7 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
     protected final ItemStack result;
     protected final float experience;
     protected final int defossilizingTime;
+    private NonNullList<Ingredient> ingredients = NonNullList.create();
 
     public AbstractDefossilizingRecipe(IRecipeType<?> type, IRecipeSerializer<?> serializer, ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience, int defossilizingTime) {
         this.type = type;
@@ -28,6 +29,9 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
         this.result = result;
         this.experience = experience;
         this.defossilizingTime = defossilizingTime;
+    	this.ingredients.add(ingredient1);
+    	this.ingredients.add(ingredient2);
+    	this.ingredients.add(ingredient3);
     }
 
     public boolean matches(IInventory inv, World world) {
@@ -41,13 +45,14 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
     public boolean canCraftInDimensions(int p_194133_1_, int p_194133_2_) {
         return true;
     }
+    
+    public ItemStack[] placeIng(int slotToPlace) {
+        Ingredient ing = ingredients.get(slotToPlace);
+        return ing.getItems();
+    }
 
     public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> nonnulllist = NonNullList.create();
-        nonnulllist.add(this.ingredient1);
-        nonnulllist.add(this.ingredient2);
-        nonnulllist.add(this.ingredient3);
-        return nonnulllist;
+        return ingredients;
     }
 
     public float getExperience() {

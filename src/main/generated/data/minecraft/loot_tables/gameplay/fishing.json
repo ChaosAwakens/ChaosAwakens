@@ -39,18 +39,6 @@
           "weight": 10,
           "quality": -2,
           "name": "chaosawakens:gameplay/fishing/ca_junk"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 15,
-          "quality": 2,
-          "name": "minecraft:gameplay/fishing"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 50,
-          "quality": 2,
-          "name": "chaosawakens:gameplay/fishing/ca_lava"
         }
       ]
     }

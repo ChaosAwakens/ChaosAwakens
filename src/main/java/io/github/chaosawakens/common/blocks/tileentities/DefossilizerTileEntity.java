@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
+import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CARecipes;
 import io.github.chaosawakens.common.registry.CATileEntities;
 import net.minecraft.block.BlockState;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,16 +23,18 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 import javax.annotation.Nullable;
 
-public class DefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity {
+public class DefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
     static final int WORK_TIME = 2 * 20;
+    private static final int[] SLOTS_FOR_UP = new int[]{0};
+    private static final int[] SLOTS_FOR_DOWN = new int[]{3};
+    private static final int[] SLOTS_FOR_SIDES = new int[]{1, 2};
 
     private NonNullList<ItemStack> items;
     private final LazyOptional<? extends IItemHandler>[] handlers;
@@ -68,7 +72,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
         this.handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
         this.items = NonNullList.withSize(4, ItemStack.EMPTY);
     }
-
+    
     void encodeExtraData(PacketBuffer buffer) {
         buffer.writeByte(fields.getCount());
     }
@@ -146,17 +150,29 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
     @Override
     public int[] getSlotsForFace(Direction direction) {
-        return null;
+        if (direction == Direction.DOWN) {
+            return SLOTS_FOR_DOWN;
+        } else {
+            return direction == Direction.UP ? SLOTS_FOR_UP : SLOTS_FOR_SIDES;
+        }
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
-        return false;
-    }
+            return false;
+     }
+    
 
     @Override
     public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-        return false;
+        if (index == 0) {
+            return stack.getItem() == Items.BUCKET && stack.getItem() == Items.LAVA_BUCKET && stack.getItem() == Items.WATER_BUCKET;
+         } else if (index == 1) {
+        	 return stack.getItem() == CAItems.ALUMINUM_POWER_CHIP.get();
+         } else if (index == 2) {
+        	 return stack.getItem() instanceof BlockItem;
+         }
+            return false;
     }
 
     @Override
@@ -245,8 +261,16 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
     @Nullable
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        return super.getCapability(cap, side);
+    public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
+       if (!this.remove && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+          if (facing == Direction.UP)
+             return handlers[0].cast();
+          else if (facing == Direction.DOWN)
+             return handlers[1].cast();
+          else
+             return handlers[2].cast();
+       }
+       return super.getCapability(capability, facing);
     }
 
     @Override
@@ -257,4 +281,36 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
             handler.invalidate();
         }
     }
+
+	@Override
+	public int getSlots() {
+		return 0;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slot) {
+		return null;
+	}
+
+	@Override
+	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+		return null;
+	}
+
+	@Override
+	public ItemStack extractItem(int slot, int amount, boolean simulate) {
+		return null;
+	}
+
+	@Override
+	public int getSlotLimit(int slot) {
+		return slot;
+	}
+
+	@Override
+	public boolean isItemValid(int slot, ItemStack stack) {
+		return false;
+	}
+	
+	
 }
