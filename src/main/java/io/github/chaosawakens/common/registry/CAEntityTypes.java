@@ -32,12 +32,6 @@ public class CAEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ChaosAwakens.MODID);
 
     // Ents
-    public static final RegistryObject<EntityType<EntEntity>> OAK_ENT = ENTITY_TYPES.register("oak_ent",
-            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.OAK), EntityClassification.MONSTER)
-                    .sized(2.5f, 3.125f) // Hitbox Size ()
-                    .build(new ResourceLocation(ChaosAwakens.MODID, "oak_ent").toString()));
-
-    // ENTITY TYPES
     public static final RegistryObject<EntityType<EntEntity>> ACACIA_ENT = ENTITY_TYPES.register("acacia_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.ACACIA), EntityClassification.MONSTER)
                     .sized(2.5f, 3.125f) // Hitbox Size ()
@@ -46,22 +40,26 @@ public class CAEntityTypes {
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.BIRCH), EntityClassification.MONSTER)
                     .sized(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "birch_ent").toString()));
-    public static final RegistryObject<EntityType<EntEntity>> JUNGLE_ENT = ENTITY_TYPES.register("jungle_ent",
-            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.JUNGLE), EntityClassification.MONSTER)
-                    .sized(2.5f, 3.125f) // Hitbox Size ()
-                    .build(new ResourceLocation(ChaosAwakens.MODID, "jungle_ent").toString()));
-    public static final RegistryObject<EntityType<EntEntity>> SPRUCE_ENT = ENTITY_TYPES.register("spruce_ent",
-            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.SPRUCE), EntityClassification.MONSTER)
-                    .sized(2.5f, 3.125f) // Hitbox Size ()
-                    .build(new ResourceLocation(ChaosAwakens.MODID, "spruce_ent").toString()));
-    public static final RegistryObject<EntityType<EntEntity>> DARK_OAK_ENT = ENTITY_TYPES.register("dark_oak_ent",
-            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.DARK_OAK), EntityClassification.MONSTER)
-                    .sized(2.5f, 3.125f) // Hitbox Size ()
-                    .build(new ResourceLocation(ChaosAwakens.MODID, "dark_oak_ent").toString()));
     public static final RegistryObject<EntityType<EntEntity>> CRIMSON_ENT = ENTITY_TYPES.register("crimson_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.CRIMSON), EntityClassification.MONSTER)
                     .fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "crimson_ent").toString()));
+    public static final RegistryObject<EntityType<EntEntity>> DARK_OAK_ENT = ENTITY_TYPES.register("dark_oak_ent",
+            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.DARK_OAK), EntityClassification.MONSTER)
+                    .sized(2.5f, 3.125f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "dark_oak_ent").toString()));
+    public static final RegistryObject<EntityType<EntEntity>> JUNGLE_ENT = ENTITY_TYPES.register("jungle_ent",
+            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.JUNGLE), EntityClassification.MONSTER)
+                    .sized(2.5f, 3.125f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "jungle_ent").toString()));
+    public static final RegistryObject<EntityType<EntEntity>> OAK_ENT = ENTITY_TYPES.register("oak_ent",
+            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.OAK), EntityClassification.MONSTER)
+                    .sized(2.5f, 3.125f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "oak_ent").toString()));
+    public static final RegistryObject<EntityType<EntEntity>> SPRUCE_ENT = ENTITY_TYPES.register("spruce_ent",
+            () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.SPRUCE), EntityClassification.MONSTER)
+                    .sized(2.5f, 3.125f) // Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "spruce_ent").toString()));
     public static final RegistryObject<EntityType<EntEntity>> WARPED_ENT = ENTITY_TYPES.register("warped_ent",
             () -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.WARPED), EntityClassification.MONSTER)
                     .fireImmune().sized(2.5f, 3.125f) // Hitbox Size ()
@@ -72,21 +70,22 @@ public class CAEntityTypes {
             () -> EntityType.Builder.of(HerculesBeetleEntity::new, EntityClassification.MONSTER)
                     .sized(4.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "hercules_beetle").toString()));
+
     //Fish
     public static final RegistryObject<EntityType<WoodFishEntity>> WOOD_FISH = ENTITY_TYPES.register("wood_fish",
-    		() -> EntityType.Builder.of(WoodFishEntity::new, EntityClassification.WATER_CREATURE)
-    		.sized(0.4F, 0.15F)
-    		.clientTrackingRange(10)
-    		.build(new ResourceLocation(ChaosAwakens.MODID, "wood_fish").toString()));
+            () -> EntityType.Builder.of(WoodFishEntity::new, EntityClassification.WATER_CREATURE)
+                    .sized(0.4F, 0.15F)
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "wood_fish").toString()));
     public static final RegistryObject<EntityType<RockFishEntity>> ROCK_FISH = ENTITY_TYPES.register("rock_fish",
             () -> EntityType.Builder.of(RockFishEntity::new, EntityClassification.WATER_CREATURE)
                     .sized(0.2f, 0.2f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "rock_fish").toString()));
-    public static final RegistryObject<EntityType<SparkFishEntity>> SPARK_FISH = ENTITY_TYPES.register("spark_fish", 
-    		() -> EntityType.Builder.of(SparkFishEntity::new, EntityClassification.WATER_CREATURE)
-    		.sized(0.4f, 0.15f)
-    		.build(new ResourceLocation(ChaosAwakens.MODID, "spark_fish").toString()));
-   
+    public static final RegistryObject<EntityType<SparkFishEntity>> SPARK_FISH = ENTITY_TYPES.register("spark_fish",
+            () -> EntityType.Builder.of(SparkFishEntity::new, EntityClassification.WATER_CREATURE)
+                    .sized(0.4f, 0.15f)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "spark_fish").toString()));
+
     //Lava Eel
     public static final RegistryObject<EntityType<LavaEelEntity>> LAVA_EEL = ENTITY_TYPES.register("lava_eel",
             () -> EntityType.Builder.of(LavaEelEntity::new, EntityClassification.WATER_CREATURE)
@@ -101,14 +100,14 @@ public class CAEntityTypes {
                     .sized(0.4f, 0.3f) // Hitbox Size ()
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "bird").toString()));
-    
+
     // Whale
     public static final RegistryObject<EntityType<WhaleEntity>> WHALE = ENTITY_TYPES.register("whale",
-    		() -> EntityType.Builder.of(WhaleEntity::new, EntityClassification.WATER_CREATURE)
-    		.sized(6.9F, 3.5F) // HitBox Size ()
-    		.clientTrackingRange(10)
-    		.build(new ResourceLocation(ChaosAwakens.MODID, "whale").toString()));
-    
+            () -> EntityType.Builder.of(WhaleEntity::new, EntityClassification.WATER_CREATURE)
+                    .sized(6.9F, 3.5F) // HitBox Size ()
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "whale").toString()));
+
     // Frog
     public static final RegistryObject<EntityType<FrogEntity>> FROG = ENTITY_TYPES.register("frog",
             () -> EntityType.Builder.of(FrogEntity::new, EntityClassification.CREATURE)
@@ -122,24 +121,22 @@ public class CAEntityTypes {
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "apple_cow").toString()));
-
     public static final RegistryObject<EntityType<GoldenAppleCowEntity>> GOLDEN_APPLE_COW = ENTITY_TYPES.register("golden_apple_cow",
             () -> EntityType.Builder.of(GoldenAppleCowEntity::new, EntityClassification.CREATURE)
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "golden_apple_cow").toString()));
-
     public static final RegistryObject<EntityType<EnchantedGoldenAppleCowEntity>> ENCHANTED_GOLDEN_APPLE_COW = ENTITY_TYPES.register("enchanted_golden_apple_cow",
             () -> EntityType.Builder.of(EnchantedGoldenAppleCowEntity::new, EntityClassification.CREATURE)
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_apple_cow").toString()));
-
     public static final RegistryObject<EntityType<CrystalAppleCowEntity>> CRYSTAL_APPLE_COW = ENTITY_TYPES.register("crystal_apple_cow",
             () -> EntityType.Builder.of(CrystalAppleCowEntity::new, EntityClassification.CREATURE)
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "crystal_apple_cow").toString()));
+
     // Carrot Pigs
     public static final RegistryObject<EntityType<CarrotPigEntity>> CARROT_PIG = ENTITY_TYPES.register("carrot_pig",
             () -> EntityType.Builder.of(CarrotPigEntity::new, EntityClassification.CREATURE)
@@ -215,13 +212,11 @@ public class CAEntityTypes {
                     .sized(0.5f, 0.5f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "stink_bug").toString()));
 
-    // Robo Sniper
+    // Robos
     public static final RegistryObject<EntityType<RoboSniperEntity>> ROBO_SNIPER = ENTITY_TYPES.register("robo_sniper",
             () -> EntityType.Builder.of(RoboSniperEntity::new, EntityClassification.MONSTER)
                     .sized(1.0f, 1.5f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "robo_sniper").toString()));
-
-    // Robo Warrior
     public static final RegistryObject<EntityType<RoboWarriorEntity>> ROBO_WARRIOR = ENTITY_TYPES.register("robo_warrior",
             () -> EntityType.Builder.of(RoboWarriorEntity::new, EntityClassification.MONSTER)
                     .sized(2.0f, 4.0f) // Hitbox Size ()
@@ -239,6 +234,10 @@ public class CAEntityTypes {
             () -> EntityType.Builder.<RoboLaserEntity>of(RoboLaserEntity::new, EntityClassification.MISC)
                     .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "robo_laser").toString()));
+    public static final RegistryObject<EntityType<RoboExplosionLaserEntity>> ROBO_EXPLOSION_LASER = ENTITY_TYPES.register("robo_explosion_laser",
+            () -> EntityType.Builder.<RoboExplosionLaserEntity>of(RoboExplosionLaserEntity::new, EntityClassification.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "robo_explosion_laser").toString()));
     public static final RegistryObject<EntityType<UltimateArrowEntity>> ULTIMATE_ARROW = ENTITY_TYPES.register("ultimate_arrow",
             () -> EntityType.Builder.<UltimateArrowEntity>of(UltimateArrowEntity::new, EntityClassification.MISC)
                     .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
@@ -260,7 +259,7 @@ public class CAEntityTypes {
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(5)
                     .setCustomClientFactory(UltimateFishingBobberEntity::new)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_fishing_bobber").toString()));
-  /*  public static final EntityType<UltimateFishingBobberEntity> ULTIMATE_FISHING_BOBBER = register("ultimate_fishing_bobber", 
+  /*  public static final EntityType<UltimateFishingBobberEntity> ULTIMATE_FISHING_BOBBER = register("ultimate_fishing_bobber",
     		EntityType.Builder.<UltimateFishingBobberEntity>createNothing(EntityClassification.MISC)
     		.noSave()
     		.noSummon()
@@ -269,7 +268,7 @@ public class CAEntityTypes {
     		.updateInterval(5));*/
 
     private static final List<EntityType<?>> ALL = new ArrayList<>();
-    
+
   /*  @SubscribeEvent
     public static UltimateFishingBobberEntity clientBobber(World e) {
     	 if (e.isClientSide()) {
@@ -279,7 +278,7 @@ public class CAEntityTypes {
     	            new FakePlayer((ServerWorld) e, new GameProfile(UUID.randomUUID(), "")), e, 0,
     	            0);
     	      }
-       
+
    }*/
 
     @SubscribeEvent

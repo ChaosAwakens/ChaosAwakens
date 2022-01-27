@@ -39,7 +39,7 @@ public class EnchantedExtendedHitWeaponItem extends ExtendedHitWeaponItem implem
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
+        return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
     }
 
     @Override

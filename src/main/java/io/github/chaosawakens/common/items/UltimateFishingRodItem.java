@@ -1,9 +1,6 @@
 package io.github.chaosawakens.common.items;
 
-import java.awt.Dimension;
-
 import io.github.chaosawakens.api.IAutoEnchantable;
-
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
 import io.github.chaosawakens.common.registry.CADimensions;
@@ -15,7 +12,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 
 public class UltimateFishingRodItem extends FishingRodItem implements IAutoEnchantable {
@@ -73,7 +69,6 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
+        return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
     }
-
 }

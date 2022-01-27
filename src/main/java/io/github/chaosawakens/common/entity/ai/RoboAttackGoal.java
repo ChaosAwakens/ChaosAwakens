@@ -1,8 +1,11 @@
 package io.github.chaosawakens.common.entity.ai;
 
 import io.github.chaosawakens.common.entity.RoboEntity;
+import io.github.chaosawakens.common.entity.RoboWarriorEntity;
+import io.github.chaosawakens.common.entity.projectile.RoboExplosionLaserEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.vector.Vector3d;
@@ -55,14 +58,26 @@ public class RoboAttackGoal extends Goal {
                 if (!this.projectileOwner.isSilent()) {
                     world.levelEvent(null, 1016, this.projectileOwner.blockPosition(), 0);
                 }
+                Entity entity = this.projectileOwner.getEntity();
+                Entity entity1 = this.projectileOwner.getTarget();
+                if (entity instanceof RoboWarriorEntity && !(entity1 instanceof RoboEntity)) {
+                    RoboExplosionLaserEntity roboExplosionLaserEntity = new RoboExplosionLaserEntity(world, this.projectileOwner, directionNormal.x() / 5, directionNormal.y() / 5, directionNormal.z() / 5);
+                    roboExplosionLaserEntity.setPos(this.projectileOwner.getX(), this.projectileOwner.getY(ownerHeightYScale), this.projectileOwner.getZ());
+                    roboExplosionLaserEntity.setDamage(damage);
 
-                RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.x() / 5, directionNormal.y() / 5, directionNormal.z() / 5);
-                roboLaserEntity.setPos(this.projectileOwner.getX(), this.projectileOwner.getY(ownerHeightYScale), this.projectileOwner.getZ());
-                roboLaserEntity.setDamage(damage);
+                    this.projectileOwner.level.playSound(null, this.projectileOwner.getX(), this.projectileOwner.getY(), this.projectileOwner.getZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
 
-                this.projectileOwner.level.playSound(null, this.projectileOwner.getX(), this.projectileOwner.getY(), this.projectileOwner.getZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
+                    world.addFreshEntity(roboExplosionLaserEntity);
+                } else {
+                    RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.x() / 5, directionNormal.y() / 5, directionNormal.z() / 5);
+                    roboLaserEntity.setPos(this.projectileOwner.getX(), this.projectileOwner.getY(ownerHeightYScale), this.projectileOwner.getZ());
 
-                world.addFreshEntity(roboLaserEntity);
+                    roboLaserEntity.setDamage(damage);
+
+                    this.projectileOwner.level.playSound(null, this.projectileOwner.getX(), this.projectileOwner.getY(), this.projectileOwner.getZ(), CASoundEvents.ROBO_SHOOT.get(), this.projectileOwner.getSoundSource(), 1.0F, 1.0F + 1 * 0.2F);
+
+                    world.addFreshEntity(roboLaserEntity);
+                }
 
                 this.attackTimer = -fireRateBase * 4;
             }

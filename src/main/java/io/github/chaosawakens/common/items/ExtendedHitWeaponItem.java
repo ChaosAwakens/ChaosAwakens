@@ -1,12 +1,7 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.UUID;
-
-
 import com.google.common.collect.ImmutableMultimap;
-
 import com.google.common.collect.Multimap;
-
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.Entity;
@@ -25,8 +20,9 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAnimatable {
+import java.util.UUID;
 
+public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAnimatable {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
     public static final UUID REACH_MODIFIER = UUID.fromString("2F05D864-7945-11EC-90D6-0242AC120003");
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
@@ -70,10 +66,10 @@ public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAn
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
     	ItemStack a = new ItemStack(CAItems.ATTITUDE_ADJUSTER.get());
     	ItemStack b = new ItemStack(CAItems.BIG_BERTHA.get());
-    	if (entity.getItemInHand(Hand.MAIN_HAND) == b) {
+    	if (entity.getItemInHand(Hand.MAIN_HAND).equals(b)) {
     	//	this.getAttributeForgeModModifiers(equipmentSlot);
     		entity.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(12.0D);
-    	} else if (entity.getItemInHand(Hand.MAIN_HAND) == a) {
+    	} else if (entity.getItemInHand(Hand.MAIN_HAND).equals(a)) {
     		entity.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(7.0D);
     	}
     	return false;

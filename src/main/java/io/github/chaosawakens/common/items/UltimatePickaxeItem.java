@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
 import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -42,11 +43,11 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
 	public float getXpRepairRatio(ItemStack stack) {
 		return 20.0F;
 	}
-	
+
 	/*@Override
 	public boolean mineBlock(ItemStack stack, World w, BlockState state, BlockPos pos, LivingEntity e) {
 		PlayerEntity p = (PlayerEntity) e;
-		
+
 		if (state != null) {
             if (!w.isClientSide && p != null) {
                 p.getItemInHand(Hand.MAIN_HAND).hurtAndBreak(1, p, (player) -> player.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
@@ -69,21 +70,21 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
 		}
 		return ActionResultType.SUCCESS != null;
     }*/
-	
+
 	public static class UltimateAutoSmeltingModifier extends LootModifier{
 		public UltimateAutoSmeltingModifier(ILootCondition[] conditionsIn) {
 			super(conditionsIn);
 		}
 		
-		protected final ItemStack getSmeltedOutput(LootContext c, ItemStack s) {
-			if (c.getLevel() != null) {
-		        return c.getLevel().getRecipeManager().getRecipeFor(IRecipeType.SMELTING, new Inventory(s), c.getLevel())
+		protected final ItemStack getSmeltedOutput(LootContext context, ItemStack stack) {
+			if (context.getLevel() != null) {
+		        return context.getLevel().getRecipeManager().getRecipeFor(IRecipeType.SMELTING, new Inventory(stack), context.getLevel())
                     .map(FurnaceRecipe::getResultItem)
                     .filter(itemStack -> !itemStack.isEmpty())
-                    .map(itemStack -> copyStackWithSize(itemStack, s.getCount() * itemStack.getCount() + random.nextInt(8) - random.nextInt(3)))
-                    .orElse(s);
+                    .map(itemStack -> copyStackWithSize(itemStack, stack.getCount() * itemStack.getCount() + random.nextInt(8) - random.nextInt(3)))
+                    .orElse(stack);
 			} else
-				return s;
+				return stack;
 		}
 		
 	    @Nonnull

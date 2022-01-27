@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.projectile;
 
+import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.AbstractBlock;
@@ -15,6 +16,7 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -22,22 +24,22 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
-public class RoboLaserEntity extends DamagingProjectileEntity {
+public class RoboExplosionLaserEntity extends DamagingProjectileEntity {
     private float damage;
 
-    public RoboLaserEntity(EntityType<RoboLaserEntity> entityType, World worldIn) {
+    public RoboExplosionLaserEntity(EntityType<RoboExplosionLaserEntity> entityType, World worldIn) {
         super(entityType, worldIn);
     }
 
-    public RoboLaserEntity(World worldIn, RoboEntity p_i47273_2_) {
-        this(CAEntityTypes.ROBO_LASER.get(), worldIn);
+    public RoboExplosionLaserEntity(World worldIn, RoboEntity p_i47273_2_) {
+        this(CAEntityTypes.ROBO_EXPLOSION_LASER.get(), worldIn);
         super.setOwner(p_i47273_2_);
         this.setPos(p_i47273_2_.getX() - (double) (p_i47273_2_.getBbWidth() + 1.0F) * 0.5D * (double) MathHelper.sin(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)), p_i47273_2_.getEyeY() - (double) 0.1F, p_i47273_2_.getZ() + (double) (p_i47273_2_.getBbWidth() + 1.0F) * 0.5D * (double) MathHelper.cos(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)));
     }
 
     @OnlyIn(Dist.CLIENT)
-    public RoboLaserEntity(World worldIn, double x, double y, double z, double p_i47274_8_, double p_i47274_10_, double p_i47274_12_) {
-        this(CAEntityTypes.ROBO_LASER.get(), worldIn);
+    public RoboExplosionLaserEntity(World worldIn, double x, double y, double z, double p_i47274_8_, double p_i47274_10_, double p_i47274_12_) {
+        this(CAEntityTypes.ROBO_EXPLOSION_LASER.get(), worldIn);
         this.setPos(x, y, z);
 
         for (int i = 0; i < 7; ++i) {
@@ -47,7 +49,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
         this.setDeltaMovement(p_i47274_8_, p_i47274_10_, p_i47274_12_);
     }
 
-    public RoboLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
+    public RoboExplosionLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
         super(CAEntityTypes.ROBO_LASER.get(), shooter, accelX, accelY, accelZ, worldIn);
     }
 
@@ -72,12 +74,36 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
         }
     }
 
+    protected void onHit(RayTraceResult result) {
+        super.onHit(result);
+        if (!this.level.isClientSide) {
+            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+            if (!(this.getEntity() instanceof RoboEntity) && flag) {
+                if (random.nextInt(6) >= 3) {
+                    float EXPLOSION_POWER = CAConfig.COMMON.rayGunExplosionSize.get();
+                    boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
+                    switch (CAConfig.COMMON.rayGunExplosionType.get()) {
+                        case 0:
+                            this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+                            break;
+                        case 1:
+                            this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+                            break;
+                        case 2:
+                            this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+                            break;
+                    }
+                }
+            }
+            this.remove();
+        }
+    }
+
     @Override
     protected void onHitEntity(EntityRayTraceResult result) {
-        super.onHitEntity(result);
         Entity entity = this.getOwner();
-        if (entity instanceof RoboEntity)
-            result.getEntity().hurt(DamageSource.indirectMobAttack(this, (RoboEntity) entity).setProjectile(), damage);
+        if (entity instanceof RoboEntity) result.getEntity().hurt(DamageSource.indirectMobAttack(this, (RoboEntity) entity).setProjectile(), damage);
+        super.onHitEntity(result);
     }
 
     @Override

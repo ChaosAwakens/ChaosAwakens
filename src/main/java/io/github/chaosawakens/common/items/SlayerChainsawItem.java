@@ -1,8 +1,12 @@
 package io.github.chaosawakens.common.items;
 
+import io.github.chaosawakens.common.entity.EntEntity;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraft.client.Minecraft;
@@ -30,18 +34,26 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanishable, IAnimatable, ISyncable {
     private static final String CONTROLLER_NAME = "popupController";
     private static final int ANIM = 0;
+    public static float attackDamage;
     public AnimationFactory factory = new AnimationFactory(this);
 
     public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
+        attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         GeckoLibNetwork.registerSyncable(this);
     }
 
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (target.getEntity().getType() == CAEntityTypes.ACACIA_ENT.get() || target.getEntity().getType() == CAEntityTypes.BIRCH_ENT.get() ||
+                target.getEntity().getType() == CAEntityTypes.CRIMSON_ENT.get() || target.getEntity().getType() == CAEntityTypes.DARK_OAK_ENT.get() ||
+                target.getEntity().getType() == CAEntityTypes.JUNGLE_ENT.get() || target.getEntity().getType() == CAEntityTypes.OAK_ENT.get() ||
+                target.getEntity().getType() == CAEntityTypes.SPRUCE_ENT.get() || target.getEntity().getType() == CAEntityTypes.WARPED_ENT.get() && !target.level.isClientSide) {
+            target.hurt(DamageSource.GENERIC, (attackDamage * 2));
+        }
         stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
-        return true;
+        return super.hurtEnemy(stack, target, attacker);
     }
 
     private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {
@@ -89,7 +101,7 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
     
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<SlayerChainsawItem>(this, "slayerchainsawcontroller", 0, this::predicate));
+        data.addAnimationController(new AnimationController(this, "slayerchainsawcontroller", 0, this::predicate));
     }
     
     @Override
