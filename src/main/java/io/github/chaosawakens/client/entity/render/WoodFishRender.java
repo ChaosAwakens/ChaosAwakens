@@ -27,7 +27,7 @@ public class WoodFishRender extends GeoEntityRenderer<WoodFishEntity>{
 
     @Override
     public ResourceLocation getTextureLocation(WoodFishEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/wood_fish.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/wood_fish.png");
     }
 
     @Override

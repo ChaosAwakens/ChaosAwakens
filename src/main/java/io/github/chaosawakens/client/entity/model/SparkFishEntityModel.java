@@ -9,12 +9,12 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class SparkFishEntityModel extends AnimatedGeoModel<SparkFishEntity> {
     @Override
     public ResourceLocation getModelLocation(SparkFishEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "geo/fish/spark_fish.geo.json");
+        return new ResourceLocation(ChaosAwakens.MODID, "geo/spark_fish.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(SparkFishEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/spark_fish.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/spark_fish.png");
     }
 
     @Override

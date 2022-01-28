@@ -9,12 +9,12 @@ public class BirdEntityModel extends AnimatedGeoModel<BirdEntity>{
 
     @Override
     public ResourceLocation getModelLocation(BirdEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "geo/bird/bird.geo.json");
+        return new ResourceLocation(ChaosAwakens.MODID, "geo/bird.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(BirdEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/blue.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/black.png");
     }
 
     @Override

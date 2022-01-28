@@ -10,12 +10,12 @@ public class LavaEelEntityModel extends AnimatedGeoModel<LavaEelEntity> {
 
     @Override
     public ResourceLocation getModelLocation(LavaEelEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "geo/fish/lava_eel.geo.json");
+        return new ResourceLocation(ChaosAwakens.MODID, "geo/lava_eel.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(LavaEelEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/lava_eel.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/lava_eel.png");
     }
 
     @Override

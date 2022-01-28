@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.text.ITextComponent;
@@ -93,6 +94,20 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
             }
         }
         return super.mobInteract(playerIn, hand);
+    }
+
+    protected void handleAirSupply() {
+        if (this.isAlive()) {
+            if (this.isInWaterRainOrBubble() || this.isInLava()) {
+                this.setAirSupply(0);
+                this.hurt(DamageSource.DROWN, Integer.MAX_VALUE);
+            }
+        }
+    }
+
+    public void baseTick() {
+        super.baseTick();
+        this.handleAirSupply();
     }
 
     @Override

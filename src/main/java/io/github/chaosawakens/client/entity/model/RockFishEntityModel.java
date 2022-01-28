@@ -10,12 +10,12 @@ public class RockFishEntityModel extends AnimatedGeoModel<RockFishEntity> {
 
     @Override
     public ResourceLocation getModelLocation(RockFishEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "geo/fish/rock_fish.geo.json");
+        return new ResourceLocation(ChaosAwakens.MODID, "geo/rock_fish.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(RockFishEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/rock_fish.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/rock_fish.png");
     }
 
     @Override

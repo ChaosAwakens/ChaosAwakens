@@ -27,7 +27,7 @@ public class SparkFishEntityRender extends GeoEntityRenderer<SparkFishEntity>{
 
     @Override
     public ResourceLocation getTextureLocation(SparkFishEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/fish/spark_fish.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/spark_fish.png");
     }
 
     @Override

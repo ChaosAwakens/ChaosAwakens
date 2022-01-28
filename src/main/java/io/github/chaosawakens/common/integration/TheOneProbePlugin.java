@@ -43,14 +43,18 @@ public class TheOneProbePlugin {
                     	case 0:
                     		default:
                     			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Black (" + type + ")"));
+                                return;
                     		case 1:
                     			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Brown (" + type + ")"));
+                                return;
                     		case 2:
                     			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Blue (" + type + ")"));
+                                return;
                     		case 3:
+                    			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Green (" + type + ")"));
+                                return;
+                    		case 4:
                     			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Red (" + type + ")"));
-                    		case 40:
-                    			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Black (" + type + ")"));
                     	}
                     }
 

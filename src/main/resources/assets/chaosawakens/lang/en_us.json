@@ -69,6 +69,7 @@
 	"entity.chaosawakens.emerald_gator": "Emerald Gator",
 	"entity.chaosawakens.ruby_bug": "Ruby Bug",
 	"entity.chaosawakens.stink_bug": "Stink Bug",
+	"entity.chaosawakens.bird": "Bird",
 	"entity.chaosawakens.robo_sniper": "Robo Sniper",
 	"entity.chaosawakens.robo_warrior": "Robo Warrior",
 	"entity.chaosawakens.robo_laser": "Robo Laser",
@@ -90,7 +91,6 @@
 	"entity.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
 	"entity.chaosawakens.explosive_ball": "Explosive Charge",
-	"entity.chaosawakens.bird": "Bird",
 
 	"item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
 	"item.chaosawakens.birch_ent_spawn_egg": "Birch Ent Spawn Egg",
