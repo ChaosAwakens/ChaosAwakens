@@ -16,12 +16,12 @@ group = 'io.github'
 version = "${project.minecraftVersion}-${project.modVersion}"
 archivesBaseName = project.modId
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+java.toolchain.languageVersion = JavaLanguageVersion.of 8
 
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: "official", version: "${project.minecraftVersion}"
 
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
 
     runs {
         client {
@@ -69,6 +69,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:projecte-226410:${project.projecte}")
 
+    implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}:api")
     implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
 
@@ -76,7 +77,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:worldedit-225608:${project.worldedit}")
 
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
+    implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
 
     implementation fg.deobf("curse.maven:world-stripper-250603:${project.worldstripper}")
 }
@@ -95,6 +96,7 @@ repositories {
         url = "https://www.cursemaven.com"
     }
     maven {
+        name = "GeckoLib"
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
 }

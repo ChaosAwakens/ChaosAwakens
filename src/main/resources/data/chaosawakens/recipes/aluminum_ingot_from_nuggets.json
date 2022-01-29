@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "aluminum_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:aluminum_nugget"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:aluminum_ingot"
+  }
+}

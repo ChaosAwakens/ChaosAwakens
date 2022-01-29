@@ -26,7 +26,7 @@ public enum CAItemTier implements IItemTier {
 
     TOOL_CATS_EYE(3, 1600, 8, 8, 20, () -> Ingredient.of(CAItems.CATS_EYE_INGOT.get())),
 
-    TOOL_ULTIMATE(5, 3000, 15, 36, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
+    TOOL_ULTIMATE(5, 3000, 25, 36, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 
     TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.of(CAItems.NIGHTMARE_SCALE.get())),
 
@@ -40,13 +40,15 @@ public enum CAItemTier implements IItemTier {
 
     WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 
+    WEAPON_SLAYER_CHAINSAW(4, 250, 15, 40, 0, () -> Ingredient.of(Items.REDSTONE_BLOCK)),
+
     WEAPON_QUEEN_BATTLEAXE(3, 10000, 15, 663, 96, () -> Ingredient.of(CAItems.QUEEN_SCALE.get())),
 
     WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.of(Blocks.REDSTONE_BLOCK)),
 
-    WEAPON_GENERIC(2, 1024, 6, 6, 8, null),
+    WEAPON_GENERIC(2, 1024, 6, 6, 8, () -> Ingredient.EMPTY),
 
-    WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, null),
+    WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, () -> Ingredient.EMPTY),
 
     WEAPON_BERTHA(5, 6000, 16, 496, 72, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
 

@@ -52,7 +52,7 @@ public class MinersDreamItem extends Item {
                     int widthDelta = i * facing.getZ() + k * facing.getX();
                     BlockPos targetPos = breakPos.offset(lengthDelta, -targetY + j, widthDelta);
                     BlockState targetState = worldIn.getBlockState(targetPos);
-                    if (targetState.is(CATags.MINERS_DREAM_MINEABLE)) {
+                    if (targetState.is(CATags.Blocks.MINERS_DREAM_MINEABLE)) {
                         this.placeWoodPillars(worldIn, targetPos, i, j, k);
                     }
                 }

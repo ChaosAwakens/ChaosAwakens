@@ -22,14 +22,6 @@ public class CAFallingOreBlock extends FallingBlock {
         return this;
     }
 
-    /**
-     * Builder for default exp for fossils(0-2)
-     */
-    public CAFallingOreBlock withFossilExp() {
-        this.expFormula = (rand) -> MathHelper.nextInt(rand, 0, 2);
-        return this;
-    }
-
     @Override
     public int getExpDrop(BlockState state, IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
         return silktouch == 0 ? this.expFormula.apply(RANDOM) : 0;

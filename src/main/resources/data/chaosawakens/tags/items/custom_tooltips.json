@@ -11,7 +11,16 @@
     "chaosawakens:fossilised_wtf",
     "chaosawakens:fossilised_scorpion",
     "chaosawakens:fossilised_piraporu",
+    "chaosawakens:fossilised_green_fish",
+    "chaosawakens:fossilised_spark_fish",
     "chaosawakens:hercules_beetle_spawn_egg",
-    "chaosawakens:ent_spawn_egg"
+    "chaosawakens:acacia_ent_spawn_egg",
+    "chaosawakens:birch_ent_spawn_egg",
+    "chaosawakens:crimson_ent_spawn_egg",
+    "chaosawakens:dark_oak_ent_spawn_egg",
+    "chaosawakens:jungle_ent_spawn_egg",
+    "chaosawakens:oak_ent_spawn_egg",
+    "chaosawakens:spruce_ent_spawn_egg",
+    "chaosawakens:warped_ent_spawn_egg"
   ]
 }

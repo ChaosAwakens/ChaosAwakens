@@ -66,8 +66,6 @@ public class CAAdvancementProvider extends AdvancementProvider {
     }
 
     public void register(Consumer<Advancement> t) {
-
-
         Advancement root = registerAdvancement("root", FrameType.TASK, CAItems.RUBY.get()).addCriterion("root",
                 PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"))))).save(t, id("root"));
 

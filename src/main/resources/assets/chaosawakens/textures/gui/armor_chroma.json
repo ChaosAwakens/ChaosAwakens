@@ -1,0 +1,23 @@
+{
+    "materials": {
+        "emerald": 0,
+		"amethyst": 1,
+		"ruby": 2,
+		"ultimate": 3,
+		"peacock_feather": 4,
+		"pink_tourmaline": 5,
+		"cats_eye": 6,
+		"lapis": 7,
+		"lava_eel": 8,
+		"moth_scale": 9,
+		"mobzilla_scale": 10,
+		"royal_guardian": 11,
+		"queen_scale": 12,
+		"experience": 13,
+		"tigers_eye": 14,
+		"copper": 15,
+		"tin": 16,
+		"silver": 17,
+		"platinum": 18
+    }
+}

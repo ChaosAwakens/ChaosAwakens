@@ -1,13 +1,17 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CASoundEvents;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -16,8 +20,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.RangedInteger;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.TickRangeConverter;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -32,14 +39,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAnimatable {
-
+public class EmeraldGatorEntity extends AnimatableAnimalEntity implements IAngerable, IAnimatable {
     private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(EmeraldGatorEntity.class, DataSerializers.INT);
     private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
     private final AnimationFactory factory = new AnimationFactory(this);
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
     private UUID persistentAngerTarget;
 
-    public EmeraldGatorEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+    public EmeraldGatorEntity(EntityType<? extends AnimatableAnimalEntity> type, World worldIn) {
         super(type, worldIn);
         this.noCulling = true;
     }
@@ -50,7 +57,7 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
                 .add(Attributes.ATTACK_DAMAGE, 3)
                 .add(Attributes.ATTACK_KNOCKBACK, 1)
                 .add(Attributes.ATTACK_SPEED, 1)
-                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 8);
     }
 
@@ -59,10 +66,15 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.walking_animation", true));
             return PlayState.CONTINUE;
         }
-        if (!event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.idle_animation", true));
+        if (this.getAttacking()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.bite_animation", true));
             return PlayState.CONTINUE;
         }
+        if(this.isSwimming()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.swim_animation", true));
+            return PlayState.CONTINUE;
+        }
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.idle_animation", true));
         return PlayState.CONTINUE;
     }
 
@@ -70,6 +82,10 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new RandomWalkingGoal(this, 1.0));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0, true));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomWalkingGoal(this, 1.0));
@@ -78,6 +94,10 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(8, new ResetAngerGoal<>(this, true));
+    }
+
+    public boolean isFood(ItemStack stack) {
+        return FOOD_ITEMS.test(stack);
     }
 
     protected void defineSynchedData() {
@@ -164,10 +184,9 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
         return this.factory;
     }
 
-    @Nullable
     @Override
-    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return null;
+    public EmeraldGatorEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+        return CAEntityTypes.EMERALD_GATOR.get().create(world);
     }
 
     @Override
@@ -179,4 +198,5 @@ public class EmeraldGatorEntity extends AnimalEntity implements IAngerable, IAni
     protected SoundEvent getDeathSound() {
         return CASoundEvents.EMERALD_GATOR_DEATH.get();
     }
+
 }

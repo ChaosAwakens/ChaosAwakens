@@ -69,6 +69,6 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
         if (target == null) return;
 
         this.entity.getLookControl().setLookAt(target, 30F, 30F);
-        this.entity.getNavigation().moveTo(target, this.speedMultiplier);
+        start();
     }
 }

@@ -31,12 +31,11 @@ public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable 
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
+        return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
     }
 
     @Override
     public EnchantmentData[] enchantments() {
         return this.enchantments;
     }
-
 }

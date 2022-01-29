@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:apple_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:apple_slab",
+    "count": 6
+  }
+}

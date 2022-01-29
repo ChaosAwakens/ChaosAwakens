@@ -11,12 +11,13 @@ displayName="Chaos Awakens"
 authors="Chaos Team"
 description='''Relive the old OreSpawn mod in newer Minecraft versions!'''
 itemIcon="chaosawakens:ultimate_sword"
+logoFile="logo.png"
 configBackground="chaosawakens:textures/gui/advancement_bg.png"
 
 [[dependencies.chaosawakens]]
 modId="forge"
 mandatory=true
-versionRange="[36,)"
+versionRange="[36.2.20,)"
 ordering="NONE"
 side="BOTH"
 

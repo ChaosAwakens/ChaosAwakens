@@ -23,7 +23,7 @@ import net.minecraft.world.World;
  */
 public class CrystalCraftingTableBlock extends Block {
 
-    private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent("container.crystal_crafting_table");
+    private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent("container.chaosawakens.crystal_crafting_table");
 
     public CrystalCraftingTableBlock(Properties properties) {
         super(properties);

@@ -1,0 +1,11 @@
+{
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "item": "chaosawakens:ultimate_pickaxe"
+      }
+    }
+  ],
+  "type": "chaosawakens:ultimate_pickaxe_smelting"
+}

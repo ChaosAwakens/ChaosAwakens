@@ -78,12 +78,11 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
         Entity entity = this.getOwner();
         if (entity instanceof RoboEntity)
             result.getEntity().hurt(DamageSource.indirectMobAttack(this, (RoboEntity) entity).setProjectile(), damage);
-
     }
 
     @Override
     protected boolean shouldBurn() {
-        return true; //TODO Make it not fiery
+        return false; //TODO Make it not fiery
     }
 
     @Nonnull

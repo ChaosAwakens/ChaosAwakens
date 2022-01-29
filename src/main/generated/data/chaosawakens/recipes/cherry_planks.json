@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "chaosawakens:cherry_logs"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:cherry_planks",
+    "count": 4
+  }
+}

@@ -5,16 +5,16 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class CAConfig {
-	
+
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
-	
+
 	static {
 		final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();
 		COMMON = commonSpecPair.getLeft();
 	}
-	
+
 	public static class Common {
 		public final ConfigValue<Integer> ultimateSwordDamage;
 		public final ConfigValue<Integer> ultimateAxeDamage;
@@ -91,32 +91,40 @@ public class CAConfig {
 		public final ConfigValue<Integer> mantisClawDamage;
 		public final ConfigValue<Integer> bigHammerDamage;
 		public final ConfigValue<Integer> prismaticReaperDamage;
-		
+
+		public final ConfigValue<Integer> attitudeAdjusterDamage;
+		public final ConfigValue<Integer> berthaDamage;
+		public final ConfigValue<Integer> battleAxeDamage;
+		public final ConfigValue<Integer> queenAxeDamage;
+		public final ConfigValue<Integer> slayerChainsawDamage;
+
+		public final ConfigValue<Integer> attitudeAdjusterExplosionSize;
+
 		public final ConfigValue<Integer> thunderStaffExplosionSize;
 		public final ConfigValue<Integer> thunderStaffExplosionType;
 		public final ConfigValue<Boolean> thunderStaffExplosionFire;
 		public final ConfigValue<Integer> rayGunExplosionSize;
 		public final ConfigValue<Integer> rayGunExplosionType;
 		public final ConfigValue<Boolean> rayGunExplosionFire;
-		
+
 		public final ConfigValue<Boolean> enableAutoEnchanting;
-		
+
 		public final ConfigValue<Boolean> enableDupeTree;
-		
+
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
 		public final ConfigValue<Boolean> enableRainbowAntTeleport;
 		public final ConfigValue<Boolean> enableRedAntTeleport;
 		public final ConfigValue<Boolean> enableUnstableAntTeleport;
 		public final ConfigValue<Boolean> enableTermiteTeleport;
 		public final ConfigValue<Boolean> enableButterflyTeleport;
-		
+
 		public final ConfigValue<Boolean> enableOreGen;
 		public final ConfigValue<Boolean> enableFossilGen;
 		public final ConfigValue<Boolean> enableTrollOreGen;
 		public final ConfigValue<Boolean> enableDzMineralOreGen;
 		public final ConfigValue<Boolean> spawnDzOresInOverworld;
 		public final ConfigValue<Boolean> enableNestGen;
-		
+
 		public final ConfigValue<Boolean> enableOreRubyGen;
 		public final ConfigValue<Boolean> enableOreTigersEyeGen;
 		public final ConfigValue<Boolean> enableOreAmethystGen;
@@ -130,37 +138,33 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableOrePlatinumGen;
 		public final ConfigValue<Boolean> enableOreSunstoneGen;
 		public final ConfigValue<Boolean> enableOreBloodstoneGen;
-		public final ConfigValue<Integer> battleAxeDamage;
-		
-		public final ConfigValue<Integer> berthaDamage;
-		
-		public final ConfigValue<Integer> queenAxeDamage;
-		
-		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
+
+		public final ConfigValue<Boolean> enableEnchantedAnimalBreeding;
 
 		public final ConfigValue<Boolean> holidayTextures;
-		
+
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
-		public final ConfigValue<Boolean> mobHeadDrops;
-		
+		public final ConfigValue<Boolean> enderDragonHeadDrop;
+
 		public final ConfigValue<Boolean> terraforgedCheckMsg;
-		
+
 		public final ConfigValue<Boolean> showUpdateMessage;
 		public final ConfigValue<Boolean> enableTooltips;
-		
+
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Log messages");
 			terraforgedCheckMsg = builder.define("Terraforged check message active", true);
 			builder.pop();
 			builder.push("Attack Damage");
+			builder.comment(" Set damages are of the Sword \n Axe is +2 damage, Shovel is -1 damage and Pickaxe is -2 damage \n Hoes are always 1 damage");
 			builder.push("Ultimate Weapons/Tools");
 			ultimateSwordDamage = builder.define("Damage of the Ultimate Sword", 40);
 			ultimateAxeDamage = builder.define("Damage of the Ultimate Axe", 42);
 			ultimatePickaxeDamage = builder.define("Damage of the Ultimate Pickaxe", 38);
 			ultimateShovelDamage = builder.define("Damage of the Ultimate Shovel", 39);
 			ultimateHoeDamage = builder.define("Damage of the Ultimate Hoe", 1);
-			ultimateBowArrowBaseDamage = builder.define("Base Damage of the Ultimate Bow Arrow", 2.0);
-			ultimateBowArrowDamageMultiplier = builder.define("Damage Multiplier of the Ultimate Bow's Punch Enchantment", 0.5);
+			ultimateBowArrowBaseDamage = builder.comment("How much damage the Ultimate bow will add up to the base arrow damage").define("Additional Damage of the Ultimate Bow Arrows", 5D);
+			ultimateBowArrowDamageMultiplier = builder.define("Damage Multiplier of the Ultimate Bow's Power Enchantment", 0.5);
 			builder.pop();
 			builder.push("Emerald Weapons/Tools");
 			emeraldSwordDamage = builder.define("Damage of the Emerald Sword", 10);
@@ -255,9 +259,14 @@ public class CAConfig {
 			mantisClawDamage = builder.define("Damage of the Mantis Claw", 10);
 			bigHammerDamage = builder.define("Damage of the Big Hammer", 15);
 			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 29);
+			builder.pop();
+			builder.push("Big Weapons/Tools");
+			attitudeAdjusterDamage = builder.define("Damage of the Attitude Adjuster", 65);
+			berthaDamage = builder.define("Damage of the Big Bertha", 500);
 			battleAxeDamage = builder.define("Damage of the Battle Axe", 50);
 			queenAxeDamage = builder.define("Damage of the Queen Scale Battle Axe", 666);
-			berthaDamage = builder.define("Damage of the Big Bertha", 500);
+			slayerChainsawDamage = builder.define("Damage of the Slayer Chainsaw", 40);
+			attitudeAdjusterExplosionSize = builder.define("Attitude Adjuster explosion size", 4);
 			builder.pop();
 			builder.pop();
 			builder.push("Functionality");
@@ -306,14 +315,14 @@ public class CAConfig {
 			enableButterflyTeleport = builder.comment("Will the Butterfly teleport you to its Dimension?").define("Butterfly Teleport", true);
 			builder.pop();
 			builder.push("Breeding");
-			enableEnchantedGoldenAppleCowBreeding = builder.comment("Will the Enchanted Golden Apple Cow be Breedable?").define("Enchanted Golden Apple Cow Breedable", false);
+			enableEnchantedAnimalBreeding = builder.comment("Will Enchanted Animals be Breedable?").define("Enchanted Animal Breeding", false);
 			builder.pop();
 			builder.push("Textures");
 			holidayTextures = builder.comment("Will holiday special textures be obtainable?").define("Obtainable Holiday Textures", true);
 			builder.pop();
 			builder.push("Drops");
 			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the first death?").define("Ender Dragon Egg Respawn", true);
-			mobHeadDrops = builder.comment("Will mobs with Mob Heads drop their item?").define("Mob Head Drops", true);
+			enderDragonHeadDrop = builder.comment("Will the Ender Dragon drop her head?").define("Ender Dragon Head Drop", true);
 			builder.pop();
 			builder.push("Update Checker");
 			showUpdateMessage = builder.comment("Send messages when there is a new update?").define("Show Update Messages", true);

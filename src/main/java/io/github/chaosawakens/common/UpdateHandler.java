@@ -19,7 +19,7 @@ public class UpdateHandler {
 			if (!newestVersion.equalsIgnoreCase(currentVersion))
 				if (!newestVersion.equalsIgnoreCase(currentVersion)) {
 					show = true;
-					updateStatus = TextFormatting.WHITE + "Version " + TextFormatting.GOLD + newestVersion + TextFormatting.WHITE + " of " + TextFormatting.GOLD + TextFormatting.BOLD + ChaosAwakens.MODNAME + TextFormatting.WHITE + " is now available from " + TextFormatting.GOLD + "https://chaosawakens.github.io/downloads.html";
+					updateStatus = TextFormatting.WHITE + "Version " + TextFormatting.GOLD + newestVersion + TextFormatting.WHITE + " of " + TextFormatting.GOLD + TextFormatting.BOLD + ChaosAwakens.MODNAME + TextFormatting.WHITE + " is now available from " + TextFormatting.GOLD + "https://chaosawakens.github.io/?#downloadsDiv";
 				}
 		} else {
 			show = false;

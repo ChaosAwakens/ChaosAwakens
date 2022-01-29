@@ -102,7 +102,7 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
+        return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
     }
 
     @Override

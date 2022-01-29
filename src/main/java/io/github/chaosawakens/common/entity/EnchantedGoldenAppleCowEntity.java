@@ -7,6 +7,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -25,6 +26,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IChargeableMob.class)
 public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChargeableMob {
@@ -45,7 +47,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        if (CAConfig.COMMON.enableEnchantedGoldenAppleCowBreeding.get()) {
+        if (CAConfig.COMMON.enableEnchantedAnimalBreeding.get()) {
             this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
             this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
             this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -58,12 +60,12 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
     @Nullable
     @Override
     public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return CAConfig.COMMON.enableEnchantedGoldenAppleCowBreeding.get() ? CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(world) : null;
+        return CAConfig.COMMON.enableEnchantedAnimalBreeding.get() ? CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(world) : null;
     }
 
     @Override
     public boolean canFallInLove() {
-        return CAConfig.COMMON.enableEnchantedGoldenAppleCowBreeding.get();
+        return CAConfig.COMMON.enableEnchantedAnimalBreeding.get();
     }
 
     @Override
@@ -76,7 +78,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
     public void addAdditionalSaveData(CompoundNBT compound) {
         super.addAdditionalSaveData(compound);
         if (this.entityData.get(ENCHANTED)) {
-            compound.putBoolean("enchanted", true);
+            compound.putBoolean("Enchanted", true);
         }
     }
 
@@ -86,7 +88,13 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
     @Override
     public void readAdditionalSaveData(CompoundNBT compound) {
         super.readAdditionalSaveData(compound);
-        this.entityData.set(ENCHANTED, compound.getBoolean("enchanted"));
+        this.entityData.set(ENCHANTED, compound.getBoolean("Enchanted"));
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        this.entityData.set(ENCHANTED, true);
     }
 
     @Override
@@ -142,5 +150,26 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IChar
     @Override
     public boolean isPowered() {
         return this.entityData.get(ENCHANTED);
+    }
+
+    public void thunderHit(ServerWorld serverWorld, LightningBoltEntity lightningBoltEntity) {
+        if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), (timer) -> {})) {
+            EnchantedGoldenCarrotPigEntity enchantedGoldenCarrotPigEntity = CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get().create(serverWorld);
+            assert enchantedGoldenCarrotPigEntity != null;
+            enchantedGoldenCarrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
+            enchantedGoldenCarrotPigEntity.setNoAi(this.isNoAi());
+            enchantedGoldenCarrotPigEntity.setBaby(this.isBaby());
+            if (this.hasCustomName()) {
+                enchantedGoldenCarrotPigEntity.setCustomName(this.getCustomName());
+                enchantedGoldenCarrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());
+            }
+
+            enchantedGoldenCarrotPigEntity.setPersistenceRequired();
+            net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, enchantedGoldenCarrotPigEntity);
+            serverWorld.addFreshEntity(enchantedGoldenCarrotPigEntity);
+            this.remove();
+        } else {
+            super.thunderHit(serverWorld, lightningBoltEntity);
+        }
     }
 }

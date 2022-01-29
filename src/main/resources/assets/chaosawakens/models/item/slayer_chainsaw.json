@@ -1,0 +1,19 @@
+{
+  "parent": "builtin/entity",
+  "gui_light": "front",
+  "loader": "forge:separate-perspective",
+  "base": {
+    "parent": "chaosawakens:item/slayer_chainsaw_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "chaosawakens:item/slayer_chainsaw_gui"
+    },
+    "fixed": {
+      "parent": "chaosawakens:item/slayer_chainsaw_gui"
+    },
+    "ground": {
+      "parent": "chaosawakens:item/slayer_chainsaw_gui"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "chaosawakens:duplication_logs"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:duplication_planks",
+    "count": 4
+  }
+}

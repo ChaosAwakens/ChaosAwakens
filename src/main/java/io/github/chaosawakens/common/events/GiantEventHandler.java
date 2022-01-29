@@ -4,11 +4,7 @@ import java.util.Objects;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
@@ -33,6 +29,7 @@ public class GiantEventHandler {
 		
 		giant.goalSelector.addGoal(2, new MeleeAttackGoal(giant, 1.0F, false));
 		giant.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(giant, 1.0F));
+		giant.targetSelector.addGoal(2, new HurtByTargetGoal(giant));
 		giant.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(giant, PlayerEntity.class, true));
 		giant.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(giant, AbstractVillagerEntity.class, false));
 		giant.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(giant, IronGolemEntity.class, true));

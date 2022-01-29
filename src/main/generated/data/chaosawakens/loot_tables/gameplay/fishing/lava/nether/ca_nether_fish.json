@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "chaosawakens:ruby"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "chaosawakens:lava_eel_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chaosawakens:uranium_nugget"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 25,
+          "name": "minecraft:gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "name": "chaosawakens:gold_coin"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 55,
+          "name": "chaosawakens:lava_eel"
+        }
+      ]
+    }
+  ]
+}

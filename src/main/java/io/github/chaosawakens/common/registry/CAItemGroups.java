@@ -6,40 +6,35 @@ import net.minecraft.item.ItemStack;
 public class CAItemGroups {
 
     // ITEM GROUPS
-    public static ItemGroup blocksItemGroup = new ItemGroup("chaosawakens_blocks_item_group") {
-
+    public static final ItemGroup BLOCKS = new ItemGroup("chaosawakens.blocks") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(CABlocks.TITANIUM_BLOCK.get());
         }
     };
 
-    public static ItemGroup itemsItemGroup = new ItemGroup("chaosawakens_items_item_group") {
-
+    public static final ItemGroup ITEMS = new ItemGroup("chaosawakens.items") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(CAItems.URANIUM_INGOT.get());
         }
     };
 
-    public static ItemGroup foodItemGroup = new ItemGroup("chaosawakens_food_item_group") {
-
+    public static final ItemGroup FOOD = new ItemGroup("chaosawakens.food") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(CAItems.CORN.get());
         }
     };
 
-    public static ItemGroup equipmentItemGroup = new ItemGroup("chaosawakens_equipment_item_group") {
-
+    public static final ItemGroup EQUIPMENT = new ItemGroup("chaosawakens.equipment") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(CAItems.ULTIMATE_AXE.get());
         }
     };
 
-    public static ItemGroup eggsItemGroup = new ItemGroup("chaosawakens_eggs_item_group") {
-
+    public static final ItemGroup SPAWN_EGGS = new ItemGroup("chaosawakens.spawn_eggs") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGG.get());

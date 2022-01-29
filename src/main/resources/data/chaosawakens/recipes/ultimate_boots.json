@@ -6,10 +6,10 @@
   ],
   "key": {
     "T": {
-      "tag": "forge:ingots/titanium"
+      "item": "chaosawakens:titanium_ingot"
     },
     "U": {
-      "tag": "forge:ingots/uranium"
+      "item": "chaosawakens:uranium_ingot"
     }
   },
   "result": {

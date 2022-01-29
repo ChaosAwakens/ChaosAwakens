@@ -1,8 +1,10 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.api.IGrabber;
+import io.github.chaosawakens.common.entity.ai.AnimatableGrabGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.entity.ai.AnimatableMultiAttackGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -11,6 +13,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -88,6 +91,10 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
+    //    this.targetSelector.addGoal(4, new AnimatableMultiAttackGoal(this, new ZombieEntity(level), new AnimatableMeleeGoal(this, 30.4, 0.75, 0.85), new LookAtGoal(this, PlayerEntity.class, 24.0F), new RandomWalkingGoal(this, 1.6)));
+   //     if (this.distanceTo(this.getTarget()) >= 20.0D) {
+        //	this.targetSelector.addGoal(4, new AnimatableGrabGoal<HerculesBeetleEntity>(h, 8));
+   //     }
     }
 
     @Override

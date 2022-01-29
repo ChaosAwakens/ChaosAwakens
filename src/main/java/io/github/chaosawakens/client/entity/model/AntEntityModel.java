@@ -9,7 +9,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class AntEntityModel extends AnimatedGeoModel<AntEntity> {
-
     private final String textureName;
 
     public AntEntityModel(String textureName) {

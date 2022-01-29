@@ -1,0 +1,102 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.lava_eel.swim": {
+			"loop": true,
+			"animation_length": 1.76,
+			"anim_time_update": "0",
+			"blend_weight": "1",
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * 20", 0]
+					}
+				},
+				"lower_jaw": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 800) * 5 +3", 0, 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 800) * 10", 0]
+					}
+				},
+				"tail_segment2": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 800) * 5", 0]
+					}
+				},
+				"tail_segment3": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * -17", 0]
+					}
+				},
+				"tail_segment4": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 800) * -20", 0]
+					}
+				},
+				"tail_segment1": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * -20", 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * -5", 0]
+					}
+				}
+			}
+		},
+		"animation.lava_eel.flop": {
+			"loop": true,
+			"animation_length": 1.76,
+			"anim_time_update": "0",
+			"blend_weight": "1",
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * -20", "math.sin(query.anim_time * 800) * 7 +90"]
+					}
+				},
+				"lower_jaw": {
+					"rotation": {
+						"vector": ["math.cos(query.anim_time * 800) * 5 +3", 0, 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 800) * -10", 0]
+					}
+				},
+				"tail_segment2": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 800) * -5", 0]
+					}
+				},
+				"tail_segment3": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * 17", 0]
+					}
+				},
+				"tail_segment4": {
+					"rotation": {
+						"vector": [0, "math.cos(query.anim_time * 800) * 10", 0]
+					}
+				},
+				"tail_segment1": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * 20", 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time * 800) * 5", 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
