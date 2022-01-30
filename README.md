@@ -37,14 +37,14 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 ## Credits/Staff Team
 **Project Lead:** WeirdNerd
 
-**Texturers:** Absolute Kun, BS Guy, ChromaticAeternus, DracoTyoshi, Franz Drameh, Memer Teamer, Pear, Phobos, Renato, Santispik3, Technocreeper, TheLoneCyberman, thesleepingdevil, VDA Spoop, Xahaan, 𝒯𝟦☯𝓃𝑒™
+**Texturers:** Absolute Kun, BS Guy, ChromaticAeternus, DracoTyoshi, Franz Drameh, LuisRandomness, Memer Teamer, Pear, Phobos, Renato, Santispik3, SnakeMaster, Technocreeper, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
 
-**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Phobos, Renato, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
+**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Phobos, Renato, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
 
 **Sound Designers:** mattster, WeirdNerd
 
-**Coders:** Blackout, HugoMage, Meme Man, WeirdNerd
+**Coders:** Aqu, Blackout, LuisRandomness, Meme Man, WeirdNerd
 
-**Builders:** Blackout, Meme Man, TheLoneCyberman, thesleepingdevil
+**Builders:** Blackout, Meme Man, TheLoneCyberman
 
-**Former Members:** AlexanderTheNotSoGreat, Asbestosstar, Crosby, crydigo, ElectricKhan, FBG_Bolushi, LuisRandomness, Lymen, RandomUser, Sipilus
+**Former Members:** AlexanderTheNotSoGreat, Asbestosstar, Crosby, crydigo, ElectricKhan, FBG_Bolushi, HugoMage, Lymen, RandomUser, Sipilus, thesleepingdevil, Xahaan
