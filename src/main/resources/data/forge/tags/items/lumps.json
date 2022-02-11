@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#forge:lumps/copper",
-    "#forge:lumps/platinum",
-    "#forge:lumps/silver",
-    "#forge:lumps/tin"
-  ]
-}

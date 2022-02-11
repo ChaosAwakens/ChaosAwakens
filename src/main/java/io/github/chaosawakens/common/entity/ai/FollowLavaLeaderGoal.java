@@ -1,10 +1,9 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import java.util.List;
-
-
 import io.github.chaosawakens.common.entity.AbstractLavaGroupFishEntity;
 import net.minecraft.entity.ai.goal.Goal;
+
+import java.util.List;
 
 public class FollowLavaLeaderGoal extends Goal {
 	private final AbstractLavaGroupFishEntity mob;

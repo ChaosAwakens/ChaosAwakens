@@ -1,0 +1,11 @@
+{
+  "values": {
+    "before": {
+      "chaosawakens:sunstone": 3072,
+      "chaosawakens:bloodstone": 3072,
+      "chaosawakens:tigers_eye": 24576,
+      "chaosawakens:amethyst": 32768,
+      "chaosawakens:ruby": 131072
+    }
+  }
+}

@@ -18,7 +18,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "platinum_helmet": {
+    "platinum_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -40,7 +40,7 @@
   },
   "requirements": [
     [
-      "platinum_helmet"
+      "platinum_armor"
     ]
   ]
 }

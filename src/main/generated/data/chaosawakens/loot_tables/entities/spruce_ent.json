@@ -28,7 +28,7 @@
               }
             }
           ],
-          "name": "minecraft:oak_log"
+          "name": "minecraft:spruce_log"
         }
       ]
     },
@@ -159,6 +159,29 @@
             }
           ],
           "name": "minecraft:fern"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 8.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
+            }
+          ],
+          "name": "minecraft:mossy_cobblestone"
         }
       ]
     },

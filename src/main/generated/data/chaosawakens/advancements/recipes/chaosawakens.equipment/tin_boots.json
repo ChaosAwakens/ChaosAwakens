@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:tin_boots"
+    ]
+  },
+  "criteria": {
+    "has_tin_lump": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:tin_lump"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:tin_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tin_lump",
+      "has_the_recipe"
+    ]
+  ]
+}

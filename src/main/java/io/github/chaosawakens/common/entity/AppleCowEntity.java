@@ -1,11 +1,8 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.client.entity.render.util.EntityTextureEnum;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -22,22 +19,29 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.server.ServerWorld;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
-public class AppleCowEntity extends AnimalEntity {
-    private static final DataParameter<Integer> TEXTURE_TYPE = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
+public class AppleCowEntity extends AnimalEntity implements IAnimatable {
+    private final AnimationFactory factory = new AnimationFactory(this);
+    private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
 
     public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
         super(type, worldIn);
+        this.noCulling = true;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -45,6 +49,18 @@ public class AppleCowEntity extends AnimalEntity {
                 .add(Attributes.MAX_HEALTH, 10)
                 .add(Attributes.MOVEMENT_SPEED, 0.2F)
                 .add(Attributes.FOLLOW_RANGE, 10);
+    }
+
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        if (event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
+            return PlayState.CONTINUE;
+        }
+        if (!event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.CONTINUE;
     }
 
     @Override
@@ -84,6 +100,30 @@ public class AppleCowEntity extends AnimalEntity {
         return 0.4F;
     }
 
+    public int getAppleCowType() {
+        return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 1);
+    }
+
+    private void setAppleCowType(int id) {
+        this.entityData.set(DATA_TYPE_ID, id);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_TYPE_ID, 0);
+    }
+
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
+        nbt.putInt("AppleCowType", this.getAppleCowType());
+    }
+
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
+        this.setAppleCowType(nbt.getInt("AppleCowType"));
+    }
+
     @Override
     public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
         ItemStack itemstack = playerIn.getItemInHand(hand);
@@ -108,35 +148,13 @@ public class AppleCowEntity extends AnimalEntity {
 
         if (this.isHalloweenObtained()) {
             assert entity != null;
-            entity.setTextureType(EntityTextureEnum.HALLOWEEN.getId());
+            entity.setAppleCowType(1);
         } else {
             assert entity != null;
-            entity.setTextureType(((AppleCowEntity) ageable).getTextureType());
+            entity.setAppleCowType(((AppleCowEntity) ageable).getAppleCowType());
         }
 
         return entity;
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(TEXTURE_TYPE, 0);
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundNBT compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("TextureType", this.getTextureType());
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundNBT compound) {
-        super.readAdditionalSaveData(compound);
-        this.setTextureType(compound.getInt("TextureType"));
-    }
-
-    public void setTextureData(EntityTextureEnum entityTextureEnum) {
-        this.setTextureType(entityTextureEnum.getId());
     }
 
     public boolean isHalloweenObtained() {
@@ -146,45 +164,66 @@ public class AppleCowEntity extends AnimalEntity {
         return (month == 10 && this.random.nextFloat() < 0.05F && CAConfig.COMMON.holidayTextures.get());
     }
 
-    @Nullable
     @Override
-    public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        spawnDataIn = super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
-        if (this.isHalloweenObtained()) {
-            this.setTextureType(EntityTextureEnum.HALLOWEEN.getId());
+    public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, ILivingEntityData entityData, CompoundNBT compoundNBT) {
+        int i = this.setAppleCowType();
+        if (entityData instanceof AppleCowEntity.AppleCowData) {
+            i = ((AppleCowData)entityData).appleCowType;
         } else {
-            this.setTextureType(EntityTextureEnum.DEFAULT.getId());
+            entityData = new AppleCowEntity.AppleCowData(i);
         }
-
-        return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
+        this.setAppleCowType(i);
+        return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, compoundNBT);
     }
 
-    private void setTextureType(int id) {
-        this.entityData.set(TEXTURE_TYPE, id);
-    }
-
-    public int getTextureType() {
-        return this.entityData.get(TEXTURE_TYPE);
+    protected int setAppleCowType() {
+        int i = 0;
+        if (this.isHalloweenObtained()) {
+            i = 1;
+        }
+        return i;
     }
 
     public void thunderHit(ServerWorld serverWorld, LightningBoltEntity lightningBoltEntity) {
-        if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.CARROT_PIG.get(), (timer) -> {})) {
-            CarrotPigEntity carrotPigEntity = CAEntityTypes.CARROT_PIG.get().create(serverWorld);
-            assert carrotPigEntity != null;
-            carrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
-            carrotPigEntity.setNoAi(this.isNoAi());
-            carrotPigEntity.setBaby(this.isBaby());
-            if (this.hasCustomName()) {
-                carrotPigEntity.setCustomName(this.getCustomName());
-                carrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());
-            }
+        if (this.getAppleCowType() != 1) {
+            if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.CARROT_PIG.get(), (timer) -> {})) {
+                CarrotPigEntity carrotPigEntity = CAEntityTypes.CARROT_PIG.get().create(serverWorld);
+                assert carrotPigEntity != null;
+                carrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
+                carrotPigEntity.setNoAi(this.isNoAi());
+                carrotPigEntity.setBaby(this.isBaby());
+                if (this.hasCustomName()) {
+                    carrotPigEntity.setCustomName(this.getCustomName());
+                    carrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());
+                }
 
-            carrotPigEntity.setPersistenceRequired();
-            net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, carrotPigEntity);
-            serverWorld.addFreshEntity(carrotPigEntity);
-            this.remove();
+                carrotPigEntity.setPersistenceRequired();
+                net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, carrotPigEntity);
+                serverWorld.addFreshEntity(carrotPigEntity);
+                this.remove();
+            } else {
+                super.thunderHit(serverWorld, lightningBoltEntity);
+            }
         } else {
             super.thunderHit(serverWorld, lightningBoltEntity);
+        }
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "applecowcontroller", 0, this::predicate));
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
+
+    static class AppleCowData extends AgeableEntity.AgeableData {
+        public final int appleCowType;
+        private AppleCowData(int appleCowType) {
+            super(true);
+            this.appleCowType = appleCowType;
         }
     }
 }

@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.goals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -18,6 +15,9 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiningAlgorithm {
 	 private final List<BlockPos> blocksToBreak = new ArrayList<>();

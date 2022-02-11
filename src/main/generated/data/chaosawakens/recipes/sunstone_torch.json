@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "$"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:sunstone"
+    },
+    "$": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:sunstone_torch",
+    "count": 2
+  }
+}

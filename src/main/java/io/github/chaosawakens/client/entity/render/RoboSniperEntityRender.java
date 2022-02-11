@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.RoboSniperEntityModel;
 import io.github.chaosawakens.client.entity.render.layers.RoboSniperGlowLayer;
-import io.github.chaosawakens.client.entity.render.layers.RoboWarriorGlowLayer;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;

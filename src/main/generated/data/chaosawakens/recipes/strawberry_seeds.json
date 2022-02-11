@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:strawberry"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:strawberry_seeds",
+    "count": 2
+  }
+}

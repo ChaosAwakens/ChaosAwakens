@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:seafood_patty"
+    ]
+  },
+  "criteria": {
+    "has_lettuce": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:lettuce"
+          }
+        ]
+      }
+    },
+    "has_tomato": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:tomato"
+          }
+        ]
+      }
+    },
+    "has_cooked_crab_meat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cooked_crab_meat"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:seafood_patty"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lettuce",
+      "has_tomato",
+      "has_cooked_crab_meat",
+      "has_the_recipe"
+    ]
+  ]
+}

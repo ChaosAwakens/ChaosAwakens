@@ -1,13 +1,13 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+
+import javax.annotation.Nullable;
 
 public class AnimatableMultiAttackGoal extends AnimatableGoal{
 	protected AnimatableMonsterEntity attacker;

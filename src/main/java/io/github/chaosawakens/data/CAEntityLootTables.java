@@ -2,6 +2,7 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
@@ -141,6 +142,10 @@ public class CAEntityLootTables extends EntityLootTables {
                                         .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
                                         .when(KilledByPlayer.killedByPlayer())))
                         .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(Items.CORNFLOWER)
+                                        .when(KilledByPlayer.killedByPlayer())))
+                        .withPool(LootPool.lootPool()
                                 .setRolls(RandomValueRange.between(1, 2))
                                 .add(ItemLootEntry.lootTableItem(Items.DIAMOND)
                                         .when(RandomChance.randomChance(0.85F))
@@ -198,12 +203,6 @@ public class CAEntityLootTables extends EntityLootTables {
                                         .when(KilledByPlayer.killedByPlayer())))
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(1))
-                                .add(ItemLootEntry.lootTableItem(Items.VINE)
-                                        .apply(SetCount.setCount(RandomValueRange.between(0.0F, 2.0F)))
-                                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
-                                        .when(KilledByPlayer.killedByPlayer())))
-                        .withPool(LootPool.lootPool()
-                                .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(Items.RED_MUSHROOM)
                                         .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
                                         .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
@@ -221,7 +220,7 @@ public class CAEntityLootTables extends EntityLootTables {
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(1))
-                                .add(ItemLootEntry.lootTableItem(Items.OAK_LOG)
+                                .add(ItemLootEntry.lootTableItem(Items.SPRUCE_LOG)
                                         .apply(SetCount.setCount(RandomValueRange.between(18.0F, 24.0F)))
                                         .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 3.0F)))
                                         .when(KilledByPlayer.killedByPlayer())))
@@ -249,6 +248,10 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(Items.FERN)
                                         .apply(SetCount.setCount(RandomValueRange.between(0.0F, 4.0F)))
+                                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
+                                        .when(KilledByPlayer.killedByPlayer()))
+                                .add(ItemLootEntry.lootTableItem(Blocks.MOSSY_COBBLESTONE)
+                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 8.0F)))
                                         .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
                                         .when(KilledByPlayer.killedByPlayer())))
                         .withPool(LootPool.lootPool()
@@ -647,11 +650,25 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET)
                                         .apply(SetCount.setCount(RandomValueRange.between(12.0F, 24.0F)))
                                         .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.GREEN_FISH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(CAItems.GREEN_FISH.get())
+                                        .apply(SetCount.setCount(ConstantRange.exactly(1)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
         add(CAEntityTypes.ROCK_FISH.get(),
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(1))
                                 .add(ItemLootEntry.lootTableItem(CAItems.ROCK_FISH.get())
+                                        .apply(SetCount.setCount(ConstantRange.exactly(1)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.SPARK_FISH.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(CAItems.SPARK_FISH.get())
                                         .apply(SetCount.setCount(ConstantRange.exactly(1)))
                                         .when(KilledByPlayer.killedByPlayer()))));
         add(CAEntityTypes.WOOD_FISH.get(),

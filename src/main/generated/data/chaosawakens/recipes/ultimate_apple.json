@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TIU",
+    "IAI",
+    "UIT"
+  ],
+  "key": {
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    },
+    "I": {
+      "tag": "chaosawakens:ultimate_gear_handles"
+    },
+    "A": {
+      "item": "minecraft:enchanted_golden_apple"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ultimate_apple"
+  }
+}

@@ -109,8 +109,7 @@ public class CAConfig {
 
 		public final ConfigValue<Boolean> enableAutoEnchanting;
 
-		public final ConfigValue<Boolean> enableDupeTree;
-
+		public final ConfigValue<Boolean> crystalWorldRequiresEmptyInventory;
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
 		public final ConfigValue<Boolean> enableRainbowAntTeleport;
 		public final ConfigValue<Boolean> enableRedAntTeleport;
@@ -307,6 +306,7 @@ public class CAConfig {
 			enableAutoEnchanting = builder.comment("If disabled, auto-enchanted items will be able to be enchanted manually.").define("Auto-enchant specific tools and weapons", true);
 			builder.pop();
 			builder.push("Dimensions");
+			crystalWorldRequiresEmptyInventory = builder.comment("Disable the requirement of needing an empty inventory to enter the Crystal World (Termite Dimension)?").define("Crystal World Requires Empty Inventory", true);
 			enableBrownAntTeleport = builder.comment("Will the Brown Ant teleport you to its Dimension?").define("Brown Ant Teleport", true);
 			enableRainbowAntTeleport = builder.comment("Will the Rainbow Ant teleport you to its Dimension?").define("Rainbow Ant Teleport", true);
 			enableRedAntTeleport = builder.comment("Will the Red Ant teleport you to its Dimension?").define("Red Ant Teleport", true);
@@ -329,9 +329,6 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Tooltips");
 			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
-			builder.pop();
-			builder.push("Duplication Tree");
-			enableDupeTree = builder.comment("Enables the duplication effects of the duplication tree").define("Enable Duplication Tree", true);
 			builder.pop();
 		}
 	}

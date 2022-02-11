@@ -1,18 +1,21 @@
 buildscript {
     repositories {
-        maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url = "https://maven.minecraftforge.net/" }
+        maven { url = "https://repo.spongepowered.org/maven" }
         mavenCentral()
     }
     dependencies {
-        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "4.+", changing: true
+        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+", changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 
 apply plugin: "net.minecraftforge.gradle"
+apply plugin: "org.spongepowered.mixin"
 apply plugin: "eclipse"
-apply plugin: 'maven-publish'
+apply plugin: "maven-publish"
 
-group = 'io.github'
+group = "io.github"
 version = "${project.minecraftVersion}-${project.modVersion}"
 archivesBaseName = project.modId
 
@@ -26,6 +29,9 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+            arg "-mixin.config=chaosawakens.mixins.json"
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             property 'forge.logging.markers', 'SCAN'
             property 'forge.logging.console.level', 'debug'
             mods {
@@ -36,6 +42,9 @@ minecraft {
         }
         server {
             workingDirectory project.file('run')
+            arg "-mixin.config=chaosawakens.mixins.json"
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             property 'forge.logging.markers', 'SCAN'
             property 'forge.logging.console.level', 'debug'
             mods {
@@ -46,6 +55,9 @@ minecraft {
         }
         data {
             workingDirectory project.file('run')
+            arg "-mixin.config=chaosawakens.mixins.json"
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             args '--mod', 'chaosawakens', '--all', '--output', file('src/main/generated/'), '--existing', file('src/main/resources/')
@@ -61,6 +73,9 @@ minecraft {
 sourceSets {
     main.resources.srcDirs += 'src/main/generated'
 }
+mixin {
+    add sourceSets.main, "chaosawakens.refmap.json"
+}
 
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
@@ -72,6 +87,10 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}:api")
     implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
+    implementation fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:${project.jer}")
+
+    implementation fg.deobf("curse.maven:configured-457570:${project.configured}")
+    implementation fg.deobf("curse.maven:catalogue-459701:${project.catalogue}")
 
     implementation fg.deobf("curse.maven:attributefix-280510:${project.attributefix}")
 
@@ -110,7 +129,8 @@ jar {
                 "Implementation-Title"    : project.modName,
                 "Implementation-Vendor"   : "Chaos Awakens Team",
                 "Implementation-Version"  : project.modVersion,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs": "chaosawakens.mixins.json"
         ])
     }
 }

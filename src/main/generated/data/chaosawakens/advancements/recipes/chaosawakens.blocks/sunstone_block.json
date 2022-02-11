@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:sunstone_block"
+    ]
+  },
+  "criteria": {
+    "has_sunstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:sunstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:sunstone_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sunstone",
+      "has_the_recipe"
+    ]
+  ]
+}

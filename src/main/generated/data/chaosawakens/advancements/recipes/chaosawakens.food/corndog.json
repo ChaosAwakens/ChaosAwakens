@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:corndog"
+    ]
+  },
+  "criteria": {
+    "has_corn": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:corn"
+          }
+        ]
+      }
+    },
+    "has_porkchop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:porkchop"
+          }
+        ]
+      }
+    },
+    "has_chicken": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chicken"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:corndog"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_corn",
+      "has_porkchop",
+      "has_chicken",
+      "has_the_recipe"
+    ]
+  ]
+}

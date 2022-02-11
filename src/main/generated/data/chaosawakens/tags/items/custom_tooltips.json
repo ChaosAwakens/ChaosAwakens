@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:ruby",
+    "chaosawakens:amethyst",
+    "chaosawakens:uranium_ingot",
+    "chaosawakens:titanium_ingot",
+    "chaosawakens:tigers_eye",
+    "chaosawakens:sunstone",
+    "chaosawakens:bloodstone",
+    "chaosawakens:hercules_beetle_spawn_egg",
+    "chaosawakens:acacia_ent_spawn_egg",
+    "chaosawakens:birch_ent_spawn_egg",
+    "chaosawakens:crimson_ent_spawn_egg",
+    "chaosawakens:dark_oak_ent_spawn_egg",
+    "chaosawakens:jungle_ent_spawn_egg",
+    "chaosawakens:oak_ent_spawn_egg",
+    "chaosawakens:spruce_ent_spawn_egg",
+    "chaosawakens:warped_ent_spawn_egg",
+    "chaosawakens:fossilised_wtf",
+    "chaosawakens:fossilised_scorpion",
+    "chaosawakens:fossilised_piraporu"
+  ]
+}

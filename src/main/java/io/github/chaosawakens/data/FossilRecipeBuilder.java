@@ -1,7 +1,6 @@
 package io.github.chaosawakens.data;
 
 import com.google.gson.JsonObject;
-
 import io.github.chaosawakens.common.util.NameUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -78,7 +77,7 @@ public class FossilRecipeBuilder {
                     .rewards(AdvancementRewards.Builder.recipe(id))
                     .requirements(IRequirementsStrategy.OR);
         }
-        ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + id.getPath());
+        ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/defossilizing/" + id.getPath());
         consumer.accept(new FossilRecipeBuilder.Result(id, this, advancementId));
     }
 

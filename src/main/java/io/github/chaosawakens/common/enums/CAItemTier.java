@@ -18,7 +18,7 @@ public enum CAItemTier implements IItemTier {
 
     TOOL_TIGERS_EYE(3, 1600, 10, 8, 20, () -> Ingredient.of(CAItems.TIGERS_EYE.get())),
 
-    TOOL_CRYSTAL_WOOD(0, 300, 2, 1, 6, () -> Ingredient.of(CABlocks.CRYSTAL_WOOD.get())),
+    TOOL_CRYSTAL_WOOD(0, 300, 2, 1, 6, () -> Ingredient.of(CABlocks.CRYSTAL_PLANKS.get())),
 
     TOOL_KYANITE(1, 800, 3, 2, 6, () -> Ingredient.of(CABlocks.KYANITE.get())),
 

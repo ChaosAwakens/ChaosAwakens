@@ -16,40 +16,50 @@ public class CAVillagerTrades {
     @SubscribeEvent
     public static void onWandererTradesEvent(WandererTradesEvent event) {
         TradeUtil.addWandererTrades(event,
-                new CATrade(3, CAItems.GOLDEN_MELON_SEEDS.get().asItem(), 4, 2, 1),
-                new CATrade(1, CAItems.GOLDEN_BREAD.get().asItem(), 2, 4, 1),
-                new CATrade(2, CAItems.GOLDEN_CANDYCANE.get().asItem(), 3, 3, 1),
-                new CATrade(1, CAItems.GOLDEN_POTATO.get().asItem(), 4, 2, 1),
+                new CATrade(1, CABlocks.CYAN_ROSE.get().asItem(), 12),
+                new CATrade(1, CABlocks.RED_ROSE.get().asItem(), 12),
+                new CATrade(1, CABlocks.PAEONIA.get().asItem(), 12),
 
-                new CATrade(1, CAItems.TIGERS_EYE.get().asItem(), 1, 5, 1),
-                new CATrade(3, CAItems.AMETHYST.get().asItem(), 1, 5, 1),
-                new CATrade(5, CAItems.RUBY.get().asItem(), 1, 5, 1),
+                new CATrade(3, CABlocks.TUBE_WORM.get().asItem(), 12),
 
-                new CATrade(2, CAItems.TRIFFID_GOO.get().asItem(), 1, 5, 1)
+                new CATrade(4, CAItems.TRIFFID_GOO.get().asItem(), 5),
+
+                new CATrade(5, CABlocks.APPLE_SAPLING.get().asItem(), 8),
+                new CATrade(5, CABlocks.CHERRY_SAPLING.get().asItem(), 8),
+                new CATrade(5, CABlocks.PEACH_SAPLING.get().asItem(), 8),
+
+                new CATrade(5, Items.NAME_TAG, 5)
         );
 
         TradeUtil.addRareWandererTrades(event,
-                new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 1, 3, 5),
-                new CATrade(15, CAItems.URANIUM_NUGGET.get(), 1, 3, 5),
-                new CATrade(8, Items.NAME_TAG, 1, 3, 5)
+                new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 3),
+                new CATrade(15, CAItems.URANIUM_NUGGET.get(), 3)
         );
     }
 
     @SubscribeEvent
     public static void onVillagerTradesEvent(VillagerTradesEvent event) {
         TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.NOVICE,
-                new CATrade(1, CAItems.CHERRIES.get(), 6, 16, 5),
-                new CATrade(1, CAItems.CORN.get(), 5, 12, 5),
-                new CATrade(1, CAItems.TOMATO.get(), 5, 12, 5),
-                new CATrade(1, CAItems.LETTUCE.get(), 6, 12, 5)
+                new CATrade(2, CAItems.CHERRIES.get(), 6, 16, 2),
+                new CATrade(2, CAItems.LETTUCE.get(), 6, 12, 2),
+                new CATrade(1, CAItems.CORN.get(), 5, 12, 3),
+                new CATrade(1, CAItems.TOMATO.get(), 5, 12, 3)
         );
         TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.APPRENTICE,
                 new CATrade(1, CAItems.PEACH.get(), 6, 16, 5),
-                new CATrade(1, CAItems.RADISH.get(), 5, 12, 5),
-                new CATrade(1, CAItems.STRAWBERRY.get(), 6, 12, 5)
+                new CATrade(2, CAItems.STRAWBERRY.get(), 6, 12, 5),
+                new CATrade(1, CAItems.RADISH.get(), 5, 12, 8)
         );
         TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.JOURNEYMAN,
-                new CATrade(1, CAItems.RADISH_STEW.get(), 5, 12, 5)
+                new CATrade(1, CAItems.RADISH_STEW.get(), 1, 12, 15)
+        );
+        TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.EXPERT,
+                new CATrade(1, CAItems.GOLDEN_MELON_SLICE.get().asItem(), 4, 12, 15),
+                new CATrade(1, CAItems.GOLDEN_POTATO.get().asItem(), 4, 12, 15)
+        );
+        TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.MASTER,
+                new CATrade(CAItems.GOLDEN_MELON_SLICE.get().asItem(), 6, 1, 12, 30),
+                new CATrade(CAItems.GOLDEN_POTATO.get().asItem(), 6, 1, 12, 30)
         );
 
         TradeUtil.addVillagerTrades(event, VillagerProfession.BUTCHER, TradeUtil.NOVICE,
@@ -66,11 +76,21 @@ public class CAVillagerTrades {
         );
         TradeUtil.addVillagerTrades(event, VillagerProfession.BUTCHER, TradeUtil.EXPERT,
                 new CATrade(CAItems.PEACOCK_LEG.get(), 12, 1, 16, 20),
-                new CATrade(1, CAItems.COOKED_PEACOCK_LEG.get(), 5, 16, 10)
+                new CATrade(1, CAItems.COOKED_PEACOCK_LEG.get(), 5, 16, 20)
         );
 
         TradeUtil.addVillagerTrades(event, VillagerProfession.FLETCHER, TradeUtil.MASTER,
-                new CATrade(1, CAItems.PEACOCK_FEATHER.get(), 4, 2, 3)
+                new CATrade(3, CAItems.PEACOCK_FEATHER.get(), 4, 12, 30)
+        );
+
+        TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
+                new CATrade(5, CAItems.GREEN_FISH.get(), 1, 16, 30),
+                new CATrade(5, CAItems.ROCK_FISH.get(), 1, 16, 30),
+                new CATrade(5, CAItems.SPARK_FISH.get(), 1, 16, 30),
+                new CATrade(5, CAItems.WOOD_FISH.get(), 1, 16, 30)
+        );
+        TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.MASTER,
+                new CATrade(3, CAItems.LAVA_EEL.get(), 1, 12, 30)
         );
     }
 

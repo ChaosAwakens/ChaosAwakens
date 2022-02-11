@@ -1,0 +1,47 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "chaosawakens:copper_lump"
+          ]
+        },
+        "criteria": {
+          "has_tin_lump": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "item": "projecte:philosophers_stone"
+                },
+                {
+                  "item": "chaosawakens:tin_lump"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "chaosawakens:copper_lump"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_tin_lump",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

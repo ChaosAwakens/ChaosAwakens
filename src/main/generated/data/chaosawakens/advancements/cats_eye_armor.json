@@ -18,7 +18,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "cats_eye_helmet": {
+    "cats_eye_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -40,7 +40,7 @@
   },
   "requirements": [
     [
-      "cats_eye_helmet"
+      "cats_eye_armor"
     ]
   ]
 }

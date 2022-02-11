@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "chaosawakens:lettuce"
+    },
+    {
+      "item": "chaosawakens:tomato"
+    },
+    {
+      "item": "chaosawakens:radish"
+    },
+    {
+      "tag": "forge:crops/carrot"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:garden_salad"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:aluminum_ore",
+    "chaosawakens:amethyst_ore",
+    "chaosawakens:ruby_ore",
+    "chaosawakens:tigers_eye_ore",
+    "chaosawakens:titanium_ore",
+    "chaosawakens:uranium_ore",
+    "chaosawakens:salt_ore",
+    "chaosawakens:copper_ore",
+    "chaosawakens:tin_ore",
+    "chaosawakens:silver_ore",
+    "chaosawakens:platinum_ore",
+    "chaosawakens:sunstone_ore",
+    "chaosawakens:bloodstone_ore"
+  ]
+}

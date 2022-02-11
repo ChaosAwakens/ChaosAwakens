@@ -18,7 +18,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "experience_helmet": {
+    "experience_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -40,7 +40,7 @@
   },
   "requirements": [
     [
-      "experience_helmet"
+      "experience_armor"
     ]
   ]
 }

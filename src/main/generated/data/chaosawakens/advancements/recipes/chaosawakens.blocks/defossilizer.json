@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:defossilizer"
+    ]
+  },
+  "criteria": {
+    "has_OptionalNamedTag[forge:ingots/iron]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/iron"
+          }
+        ]
+      }
+    },
+    "has_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:bucket"
+          }
+        ]
+      }
+    },
+    "has_Block{minecraft:smooth_stone}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:smooth_stone"
+          }
+        ]
+      }
+    },
+    "has_Block{minecraft:smooth_stone_slab}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:smooth_stone_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:defossilizer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_OptionalNamedTag[forge:ingots/iron]",
+      "has_bucket",
+      "has_Block{minecraft:smooth_stone}",
+      "has_Block{minecraft:smooth_stone_slab}",
+      "has_the_recipe"
+    ]
+  ]
+}

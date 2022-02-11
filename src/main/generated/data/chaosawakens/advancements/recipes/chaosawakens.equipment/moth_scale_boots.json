@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:moth_scale_boots"
+    ]
+  },
+  "criteria": {
+    "has_moth_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:moth_scale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:moth_scale_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_moth_scale",
+      "has_the_recipe"
+    ]
+  ]
+}

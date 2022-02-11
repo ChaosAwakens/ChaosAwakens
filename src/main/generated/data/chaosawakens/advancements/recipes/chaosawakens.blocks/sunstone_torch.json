@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:sunstone_torch"
+    ]
+  },
+  "criteria": {
+    "has_sunstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:sunstone"
+          }
+        ]
+      }
+    },
+    "has_OptionalNamedTag[forge:rods/wooden]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:rods/wooden"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:sunstone_torch"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sunstone",
+      "has_OptionalNamedTag[forge:rods/wooden]",
+      "has_the_recipe"
+    ]
+  ]
+}

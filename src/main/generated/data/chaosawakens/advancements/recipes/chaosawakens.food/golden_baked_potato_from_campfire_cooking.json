@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:golden_baked_potato_from_campfire_cooking"
+    ]
+  },
+  "criteria": {
+    "has_golden_potato": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:golden_potato"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:golden_baked_potato_from_campfire_cooking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_golden_potato",
+      "has_the_recipe"
+    ]
+  ]
+}

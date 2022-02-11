@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/leaves",
-  "textures": {
-    "all": "chaosawakens:block/peach_leaves"
-  }
-}

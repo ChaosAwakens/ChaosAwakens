@@ -49,43 +49,28 @@ public class CAItems {
     public static final Food FOOD_PEACH = new Food.Builder().nutrition(4).saturationMod(0.55F).build();
     public static final Food FOOD_PEACOCK_LEG = new Food.Builder().nutrition(6).saturationMod(0.7F).build();
     public static final Food FOOD_COOKED_PEACOCK_LEG = new Food.Builder().nutrition(12).saturationMod(1.4F).build();
-    public static final Food FOOD_CRYSTAL_APPLE = new Food.Builder().nutrition(5).saturationMod(0.85F).effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 3000, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 3000, 0), 1.0F).build();
+    public static final Food FOOD_CRYSTAL_APPLE = new Food.Builder().nutrition(5).saturationMod(0.85F).alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 3000, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 3000, 0), 1.0F).build();
 
     // SHINY FOOD
-    public static final Food FOOD_CANDYCANE = new Food.Builder().nutrition(2).saturationMod(0.15F).alwaysEat().build();
-    public static final Food FOOD_GOLDEN_BREAD = new Food.Builder().nutrition(8).saturationMod(0.8F).alwaysEat().build();
-    public static final Food FOOD_GOLDEN_CHICKEN = new Food.Builder().nutrition(6).saturationMod(0.45F).meat().alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 600, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_TROPICAL_FISH = new Food.Builder().nutrition(4).saturationMod(0.2F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 2400, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_COD = new Food.Builder().nutrition(5).saturationMod(0.3F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 200, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_PORKCHOP = new Food.Builder().nutrition(8).saturationMod(1.1F).meat().alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 600, 0), 1.0F).build();
+    public static final Food FOOD_CANDYCANE = new Food.Builder().nutrition(2).saturationMod(0.15F).alwaysEat().effect(() -> new EffectInstance(Effects.DIG_SPEED, 400, 1), 1.0F).build();
     public static final Food FOOD_GOLDEN_MELON_SLICE = new Food.Builder().nutrition(8).saturationMod(0.45F).alwaysEat().build();
-    public static final Food FOOD_GOLDEN_MUSHROOM_STEW = new Food.Builder().nutrition(6).saturationMod(0.25F).alwaysEat().effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 700, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_STEAK = new Food.Builder().nutrition(8).saturationMod(1.1F).meat().alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 400, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_COOKIE = new Food.Builder().nutrition(2).saturationMod(0.15F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 100, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_BEETROOT = new Food.Builder().nutrition(8).saturationMod(0.45F).alwaysEat().build();
     public static final Food FOOD_GOLDEN_POTATO = new Food.Builder().nutrition(6).saturationMod(0.65F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 400, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_PUMPKIN_PIE = new Food.Builder().nutrition(8).saturationMod(9).alwaysEat().effect(() -> new EffectInstance(Effects.NIGHT_VISION, 600, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_FLESH = new Food.Builder().nutrition(4).saturationMod(0.3F).alwaysEat().effect(() -> new EffectInstance(Effects.SATURATION, 40, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_PUFFERFISH = new Food.Builder().nutrition(4).saturationMod(0.3F).alwaysEat().effect(() -> new EffectInstance(Effects.POISON, 100, 0), 1.0F).effect(() -> new EffectInstance(Effects.NIGHT_VISION, 1800, 0), 1.0F).effect(() -> new EffectInstance(Effects.WATER_BREATHING, 3600, 0), 1.0F).build();
-    public static final Food FOOD_GOLDEN_SALMON = new Food.Builder().nutrition(8).saturationMod(0.85F).alwaysEat().effect(() -> new EffectInstance(Effects.JUMP, 1800, 0), 1.0F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 1800, 1), 1.0F).build();
-    public static final Food FOOD_GOLDEN_CANDYCANE = new Food.Builder().nutrition(4).saturationMod(0.25F).alwaysEat().effect(() -> new EffectInstance(Effects.DIG_SPEED, 300, 0), 1.0F).effect(() -> new EffectInstance(Effects.JUMP, 600, 0), 1.0F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 600, 0), 1.0F).build();
-    public static final Food FOOD_ULTIMATE_APPLE = new Food.Builder().nutrition(10).saturationMod(1.5F).alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 3900, 2), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 4800, 3), 1.0F).effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 5400, 2), 1.0F).effect(() -> new EffectInstance(Effects.DAMAGE_RESISTANCE, 7200, 0), 1.0F).effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 7200, 0), 1.0F).build();
+    public static final Food FOOD_GOLDEN_BAKED_POTATO = new Food.Builder().nutrition(6).saturationMod(0.65F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 400, 0), 1.0F).build();
+    public static final Food FOOD_ULTIMATE_APPLE = new Food.Builder().nutrition(10).saturationMod(1.5F).alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 3900, 2), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 4800, 3), 1.0F).effect(() -> new EffectInstance(Effects.ABSORPTION, 2400, 3), 1.0F).effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 5400, 2), 1.0F).effect(() -> new EffectInstance(Effects.DAMAGE_RESISTANCE, 7200, 0), 1.0F).effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 7200, 0), 1.0F).build();
     public static final Food FOOD_ENCHANTED_GOLDEN_CARROT = new Food.Builder().nutrition(8).saturationMod(0.85F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 600, 2), 1.0F).effect(() -> new EffectInstance(Effects.NIGHT_VISION, 1200, 0), 1.0F).effect(() -> new EffectInstance(Effects.ABSORPTION, 1200, 0), 1.0F).build();
-    public static final Food FOOD_ENCHANTED_GOLDEN_STEAK = new Food.Builder().nutrition(10).saturationMod(1.2F).alwaysEat().effect(() -> new EffectInstance(Effects.ABSORPTION, 900, 0), 1.0F).effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 1800, 1), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 1800, 0), 1.0F).build();
-    public static final Food FOOD_ENCHANTED_GOLDEN_COD = new Food.Builder().nutrition(8).saturationMod(0.85F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 600, 2), 1.0F).effect(() -> new EffectInstance(Effects.WATER_BREATHING, 900, 0), 1.0F).build();
-    public static final Food FOOD_ENCHANTED_GOLDEN_COOKIE = new Food.Builder().nutrition(4).saturationMod(0.85F).alwaysEat().effect(() -> new EffectInstance(Effects.REGENERATION, 600, 1), 1.0F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 1000, 1), 1.0F).build();
-    public static final Food FOOD_ENCHANTED_GOLDEN_CANDYCANE = new Food.Builder().nutrition(6).saturationMod(0.3F).alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 300, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 300, 0), 1.0F).effect(() -> new EffectInstance(Effects.DIG_SPEED, 600, 1), 1.0F).effect(() -> new EffectInstance(Effects.JUMP, 900, 1), 1.0F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 900, 1), 1.0F).build();
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
-    
+
     // ORESPAWN FOODS
-    public static final RegistryObject<Item> CORNDOG = ITEMS.register("corndog", () -> new Item(new Item.Properties().food(CAItems.FOOD_RAW_CORNDOG).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> COOKED_CORNDOG = ITEMS.register("cooked_corndog", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_CORNDOG).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> BACON = ITEMS.register("bacon", () -> new Item(new Item.Properties().food(CAItems.FOOD_RAW_BACON).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> COOKED_BACON = ITEMS.register("cooked_bacon", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_BACON).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> PEACOCK_LEG = ITEMS.register("peacock_leg", () -> new Item(new Item.Properties().food(CAItems.FOOD_PEACOCK_LEG).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> COOKED_PEACOCK_LEG = ITEMS.register("cooked_peacock_leg", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_PEACOCK_LEG).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> CORNDOG = ITEMS.register("corndog", () -> new Item(new Item.Properties().food(CAItems.FOOD_RAW_CORNDOG).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> COOKED_CORNDOG = ITEMS.register("cooked_corndog", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_CORNDOG).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> CRAB_MEAT = ITEMS.register("crab_meat", () -> new Item(new Item.Properties().food(CAItems.FOOD_CRAB_MEAT).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> COOKED_CRAB_MEAT = ITEMS.register("cooked_crab_meat", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_CRAB_MEAT).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> PEACOCK_LEG = ITEMS.register("peacock_leg", () -> new Item(new Item.Properties().food(CAItems.FOOD_PEACOCK_LEG).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> COOKED_PEACOCK_LEG = ITEMS.register("cooked_peacock_leg", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_PEACOCK_LEG).tab(CAItemGroups.FOOD)));
 
     public static final RegistryObject<Item> CORN = ITEMS.register("corn", () -> new Item(new Item.Properties().food(CAItems.FOOD_CORN).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato", () -> new Item(new Item.Properties().food(CAItems.FOOD_TOMATO).tab(CAItemGroups.FOOD)));
@@ -102,48 +87,31 @@ public class CAItems {
     public static final RegistryObject<Item> BLT_SANDWICH = ITEMS.register("blt_sandwich", () -> new Item(new Item.Properties().food(CAItems.FOOD_BLT_SANDWICH).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> SEAFOOD_PATTY = ITEMS.register("seafood_patty", () -> new Item(new Item.Properties().food(CAItems.FOOD_SEAFOOD_PATTY).tab(CAItemGroups.FOOD)));
 
-
-    public static final RegistryObject<Item> GREEN_FISH = ITEMS. register("green_fish", () -> new Item(new Item.Properties().food(Foods.COD).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> ROCK_FISH = ITEMS.register("rock_fish", () -> new Item(new Item.Properties().food(Foods.COD).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> GREEN_FISH = ITEMS.register("green_fish", () -> new Item(new Item.Properties().food(Foods.COOKED_COD).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> ROCK_FISH = ITEMS.register("rock_fish", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> WOOD_FISH = ITEMS.register("wood_fish", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> SPARK_FISH = ITEMS.register("spark_fish", () -> new Item(new Item.Properties().food(CAItems.FOOD_SPARK_FISH).fireResistant().tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> LAVA_EEL = ITEMS.register("lava_eel", () -> new Item(new Item.Properties().food(CAItems.FOOD_LAVA_EEL).fireResistant().tab(CAItemGroups.FOOD)));
 
     public static final RegistryObject<Item> BUTTER = ITEMS.register("butter", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
-    
 
-	public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds", () -> new BlockNamedItem(CABlocks.STRAWBERRY_PLANT.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
-	public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockNamedItem(CABlocks.TOMATO_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
-	public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds", () -> new BlockNamedItem(CABlocks.CORN_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
-	public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
-	public static final RegistryObject<Item> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
+
+    public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds", () -> new BlockNamedItem(CABlocks.STRAWBERRY_BUSH.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockNamedItem(CABlocks.TOMATO_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds", () -> new BlockNamedItem(CABlocks.CORN_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
 
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
 
     // SHINY FOOD
-    public static final RegistryObject<Item> GOLDEN_MELON_SEEDS = ITEMS.register("golden_melon_seeds", () -> new BlockNamedItem(CABlocks.GOLDEN_MELON_STEM.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> CANDYCANE = ITEMS.register("candycane", () -> new Item(new Item.Properties().rarity(Rarity.COMMON).food(CAItems.FOOD_CANDYCANE).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_BREAD = ITEMS.register("golden_bread", () -> new Item(new Item.Properties().rarity(Rarity.COMMON).food(CAItems.FOOD_GOLDEN_BREAD).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_CHICKEN = ITEMS.register("golden_chicken", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_CHICKEN).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_TROPICAL_FISH = ITEMS.register("golden_tropical_fish", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_TROPICAL_FISH).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_COD = ITEMS.register("golden_cod", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_COD).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_PORKCHOP = ITEMS.register("golden_porkchop", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_PORKCHOP).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_MELON_SLICE = ITEMS.register("golden_melon_slice", () -> new Item(new Item.Properties().rarity(Rarity.COMMON).food(CAItems.FOOD_GOLDEN_MELON_SLICE).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_MUSHROOM_STEW = ITEMS.register("golden_mushroom_stew", () -> new SoupItem(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_MUSHROOM_STEW).stacksTo(1).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_STEAK = ITEMS.register("golden_steak", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_STEAK).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_COOKIE = ITEMS.register("golden_cookie", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_COOKIE).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> CANDYCANE = ITEMS.register("candycane", () -> new Item(new Item.Properties().food(CAItems.FOOD_CANDYCANE).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> GOLDEN_MELON_SLICE = ITEMS.register("golden_melon_slice", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_MELON_SLICE).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> GOLDEN_BEETROOT = ITEMS.register("golden_beetroot", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_BEETROOT).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> GOLDEN_POTATO = ITEMS.register("golden_potato", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_POTATO).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_PUMPKIN_PIE = ITEMS.register("golden_pumpkin_pie", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_PUMPKIN_PIE).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_FLESH = ITEMS.register("golden_flesh", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_FLESH).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_PUFFERFISH = ITEMS.register("golden_pufferfish", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_PUFFERFISH).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_SALMON = ITEMS.register("golden_salmon", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_SALMON).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> GOLDEN_CANDYCANE = ITEMS.register("golden_candycane", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_CANDYCANE).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> GOLDEN_BAKED_POTATO = ITEMS.register("golden_baked_potato", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_BAKED_POTATO).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> ULTIMATE_APPLE = ITEMS.register("ultimate_apple", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ULTIMATE_APPLE).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> ENCHANTED_GOLDEN_CARROT = ITEMS.register("enchanted_golden_carrot", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_CARROT).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> ENCHANTED_GOLDEN_STEAK = ITEMS.register("enchanted_golden_steak", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_STEAK).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> ENCHANTED_GOLDEN_COOKIE = ITEMS.register("enchanted_golden_cookie", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_COOKIE).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> ENCHANTED_GOLDEN_COD = ITEMS.register("enchanted_golden_cod", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_COD).tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<Item> ENCHANTED_GOLDEN_CANDYCANE = ITEMS.register("enchanted_golden_candycane", () -> new EnchantedItem(new Item.Properties().rarity(Rarity.EPIC).food(CAItems.FOOD_ENCHANTED_GOLDEN_CANDYCANE).tab(CAItemGroups.FOOD)));
 
     // MINERALS
     public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
@@ -186,7 +154,7 @@ public class CAItems {
 
     // MISC
     public static final RegistryObject<PowerChipItem> ALUMINUM_POWER_CHIP = ITEMS.register("aluminum_power_chip", () -> new PowerChipItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
-    public static final RegistryObject<Item> CRYSTAL_WOOD_SHARD = ITEMS.register("crystal_wood_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
+    public static final RegistryObject<Item> CRYSTAL_SHARD = ITEMS.register("crystal_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
     public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
     public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
     public static final RegistryObject<IrukandjiArrowItem> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new IrukandjiArrowItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
@@ -213,10 +181,10 @@ public class CAItems {
 
     // Emerald
     public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-    public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new ShovelItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldShovelDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+    public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new EnchantedShovelItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldShovelDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
     public static final RegistryObject<PickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldPickaxeDamage.get() - 7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
-    public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new AxeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldAxeDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-    public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new HoeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldHoeDamage.get() - 7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+    public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new EnchantedAxeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldAxeDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
+    public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new EnchantedHoeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldHoeDamage.get() - 7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
 
     // Ruby
     public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(CAItemTier.TOOL_RUBY, CAConfig.COMMON.rubySwordDamage.get() - 17, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
@@ -490,8 +458,8 @@ public class CAItems {
     public static final RegistryObject<CASpawnEggItem> WASP_SPAWN_EGG = ITEMS.register("wasp_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.WASP, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<CASpawnEggItem> WHALE_SPAWN_EGG = ITEMS.register("whale_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.WHALE, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 
-//    public static final RegistryObject<CASpawnEggItem> GREEN_FISH_SPAWN_EGG = ITEMS.register("green_fish_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.GREEN_FISH, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
-//    public static final RegistryObject<FishBucketItem> GREEN_FISH_BUCKET = ITEMS.register("green_fish_bucket", () -> new FishBucketItem(CAEntityTypes.GREEN_FISH, () -> Fluids.WATER, (new Item.Properties().stacksTo(1).tab(CAItemGroups.SPAWN_EGGS))));
+    public static final RegistryObject<CASpawnEggItem> GREEN_FISH_SPAWN_EGG = ITEMS.register("green_fish_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.GREEN_FISH, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+    public static final RegistryObject<FishBucketItem> GREEN_FISH_BUCKET = ITEMS.register("green_fish_bucket", () -> new FishBucketItem(CAEntityTypes.GREEN_FISH, () -> Fluids.WATER, (new Item.Properties().stacksTo(1).tab(CAItemGroups.SPAWN_EGGS))));
     public static final RegistryObject<CASpawnEggItem> ROCK_FISH_SPAWN_EGG = ITEMS.register("rock_fish_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.ROCK_FISH, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<FishBucketItem> ROCK_FISH_BUCKET = ITEMS.register("rock_fish_bucket", () -> new FishBucketItem(CAEntityTypes.ROCK_FISH, () -> Fluids.WATER, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS).stacksTo(1)));
     public static final RegistryObject<CASpawnEggItem> SPARK_FISH_SPAWN_EGG = ITEMS.register("spark_fish_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.SPARK_FISH, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
@@ -500,7 +468,7 @@ public class CAItems {
     public static final RegistryObject<FishBucketItem> WOOD_FISH_BUCKET = ITEMS.register("wood_fish_bucket", () -> new FishBucketItem(CAEntityTypes.WOOD_FISH, () -> Fluids.WATER, (new Item.Properties().stacksTo(1).tab(CAItemGroups.SPAWN_EGGS))));
     public static final RegistryObject<CASpawnEggItem> LAVA_EEL_SPAWN_EGG = ITEMS.register("lava_eel_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.LAVA_EEL, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<FishBucketItem> LAVA_EEL_BUCKET = ITEMS.register("lava_eel_bucket", () -> new FishBucketItem(CAEntityTypes.LAVA_EEL, () -> Fluids.LAVA, (new Item.Properties().stacksTo(1).tab(CAItemGroups.SPAWN_EGGS))));
-    
+
     public static final RegistryObject<SpawnEggItem> IRON_GOLEM_SPAWN_EGG = ITEMS.register("iron_golem_spawn_egg", () -> new SpawnEggItem(EntityType.IRON_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<SpawnEggItem> SNOW_GOLEM_SPAWN_EGG = ITEMS.register("snow_golem_spawn_egg", () -> new SpawnEggItem(EntityType.SNOW_GOLEM, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
     public static final RegistryObject<SpawnEggItem> ILLUSIONER_SPAWN_EGG = ITEMS.register("illusioner_spawn_egg", () -> new SpawnEggItem(EntityType.ILLUSIONER, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
@@ -516,11 +484,10 @@ public class CAItems {
     public static final RegistryObject<Item> ZOO_CAGE_LARGE = ITEMS.register("zoo_cage_large", () -> new StructureItem(new Item.Properties().tab(CAItemGroups.ITEMS).stacksTo(16), "cage_l"));
     public static final RegistryObject<Item> ZOO_CAGE_EXTRA_LARGE = ITEMS.register("zoo_cage_extra_large", () -> new StructureItem(new Item.Properties().tab(CAItemGroups.ITEMS).stacksTo(16), "cage_xl"));
     public static final RegistryObject<Item> MINERS_DREAM = ITEMS.register("miners_dream", () -> new MinersDreamItem(new Item.Properties().tab(CAItemGroups.ITEMS).stacksTo(16)));
-    
+
     // DEV ITEMS FOR DATAPACK CREATORS
     public static final RegistryObject<DevItem> DEV_ITEM1 = ITEMS.register("dev_item1", () -> new DevItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<DevItem> DEV_ITEM16 = ITEMS.register("dev_item16", () -> new DevItem(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<DevItem> DEV_ITEM64 = ITEMS.register("dev_item64", () -> new DevItem(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<DevItem> DEV_ITEM_DAMAGE = ITEMS.register("dev_item_damage", () -> new DevItem(new Item.Properties().durability(50)));
-
 }

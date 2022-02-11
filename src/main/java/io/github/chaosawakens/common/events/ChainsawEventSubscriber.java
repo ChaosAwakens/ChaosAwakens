@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.events;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Block;
@@ -21,6 +17,9 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //Tried registering it in main class :/
 @EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Bus.FORGE)

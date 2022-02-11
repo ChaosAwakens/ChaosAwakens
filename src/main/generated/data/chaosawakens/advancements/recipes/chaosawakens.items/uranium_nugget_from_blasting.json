@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:uranium_nugget_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_Block{chaosawakens:uranium_ore}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:uranium_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:uranium_nugget_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_Block{chaosawakens:uranium_ore}",
+      "has_the_recipe"
+    ]
+  ]
+}

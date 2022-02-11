@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.events;
 
-import java.util.Objects;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
@@ -12,6 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+
+import java.util.Objects;
 
 @EventBusSubscriber
 public class GiantEventHandler {

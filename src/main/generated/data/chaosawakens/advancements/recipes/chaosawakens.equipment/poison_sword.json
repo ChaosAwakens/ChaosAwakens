@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:poison_sword"
+    ]
+  },
+  "criteria": {
+    "has_dead_stink_bug": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:dead_stink_bug"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:poison_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dead_stink_bug",
+      "has_the_recipe"
+    ]
+  ]
+}

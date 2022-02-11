@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:platinum_lump",
+    {
+      "id": "#forge:ingots/platinum",
+      "required": false
+    }
+  ]
+}

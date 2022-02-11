@@ -30,8 +30,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
-
 public class EnchantedGoldenCarrotPigEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CARROT, Items.POTATO, Items.BEETROOT);
@@ -64,12 +62,10 @@ public class EnchantedGoldenCarrotPigEntity extends AnimalEntity implements IAni
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
-        if (CAConfig.COMMON.enableEnchantedAnimalBreeding.get()) {
-            this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-            this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(Items.CARROT_ON_A_STICK), false));
-            this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
-            this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        }
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(Items.CARROT_ON_A_STICK), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
@@ -111,13 +107,8 @@ public class EnchantedGoldenCarrotPigEntity extends AnimalEntity implements IAni
     }
 
     @Override
-    public EnchantedGoldenCarrotPigEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return CAConfig.COMMON.enableEnchantedAnimalBreeding.get() ? CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get().create(world) : null;
-    }
-
-    @Override
-    public boolean canFallInLove() {
-        return CAConfig.COMMON.enableEnchantedAnimalBreeding.get();
+    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+        return CAConfig.COMMON.enableEnchantedAnimalBreeding.get() ? CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get().create(world) : CAEntityTypes.GOLDEN_CARROT_PIG.get().create(world);
     }
 
     @Override

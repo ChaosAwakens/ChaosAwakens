@@ -1,0 +1,12 @@
+{
+  "values": {
+    "before": {
+      "chaosawakens:crystal_grass_block": 2,
+      "chaosawakens:kyanite": 2,
+      "chaosawakens:crystal_log": 64,
+      "#chaosawakens:crystal_leaves": 2,
+      "#chaosawakens:crystal_sapling": 64,
+      "chaosawakens:crystal_energy": 3072
+    }
+  }
+}

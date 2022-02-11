@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:thunder_staff"
+    ]
+  },
+  "criteria": {
+    "has_OptionalNamedTag[forge:gems/diamond]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gems/diamond"
+          }
+        ]
+      }
+    },
+    "has_ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ruby"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:thunder_staff"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_OptionalNamedTag[forge:gems/diamond]",
+      "has_ruby",
+      "has_the_recipe"
+    ]
+  ]
+}

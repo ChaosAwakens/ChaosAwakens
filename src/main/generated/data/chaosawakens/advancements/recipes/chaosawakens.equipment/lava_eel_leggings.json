@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:lava_eel_leggings"
+    ]
+  },
+  "criteria": {
+    "has_lava_eel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:lava_eel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:lava_eel_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lava_eel",
+      "has_the_recipe"
+    ]
+  ]
+}

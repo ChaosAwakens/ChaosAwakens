@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:kyanite_axe"
+    ]
+  },
+  "criteria": {
+    "has_Block{chaosawakens:kyanite}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:kyanite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:kyanite_axe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_Block{chaosawakens:kyanite}",
+      "has_the_recipe"
+    ]
+  ]
+}

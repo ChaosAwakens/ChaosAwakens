@@ -60,5 +60,9 @@ public class TradeUtil {
         public CATrade(int emeraldCount, Item output, int outputCount, int maxTrades, int xp) {
             this(emeraldCount, output, outputCount, maxTrades, xp, 0.15F);
         }
+
+        public CATrade(int emeraldCount, Item output, int maxTrades) {
+            this(emeraldCount, output, 1, maxTrades, 0, 0);
+        }
     }
 }

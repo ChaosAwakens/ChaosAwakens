@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "chaosawakens:tin_ore"
+  },
+  "result": "chaosawakens:tin_lump",
+  "experience": 0.1,
+  "cookingtime": 100
+}

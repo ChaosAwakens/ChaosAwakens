@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:sunstone_torch"
+    },
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "tag": "forge:dusts/redstone"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:extreme_torch",
+    "count": 2
+  }
+}

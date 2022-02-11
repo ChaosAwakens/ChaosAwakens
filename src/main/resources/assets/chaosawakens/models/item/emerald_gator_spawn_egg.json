@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "chaosawakens:item/spawn_eggs/emerald_gator"
-  }
-}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:big_bertha_blade"
+    },
+    {
+      "item": "chaosawakens:big_bertha_guard"
+    },
+    {
+      "item": "chaosawakens:big_bertha_handle"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:big_bertha"
+  }
+}

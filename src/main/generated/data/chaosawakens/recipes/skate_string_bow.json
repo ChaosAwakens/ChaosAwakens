@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CS",
+    "C S",
+    " CS"
+  ],
+  "key": {
+    "C": {
+      "item": "chaosawakens:crystal_shard"
+    },
+    "S": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:skate_string_bow"
+  }
+}

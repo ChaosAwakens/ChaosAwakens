@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ruby_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_Block{chaosawakens:ruby_ore}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ruby_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ruby_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_Block{chaosawakens:ruby_ore}",
+      "has_the_recipe"
+    ]
+  ]
+}

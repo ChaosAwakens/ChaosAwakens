@@ -1,0 +1,10 @@
+{
+  "values": {
+    "before": {
+      "chaosawakens:salt": 16,
+      "#chaosawakens:seeds": 32,
+      "#chaosawakens:plants": 96,
+      "chaosawakens:crystal_apple": 33024
+    }
+  }
+}

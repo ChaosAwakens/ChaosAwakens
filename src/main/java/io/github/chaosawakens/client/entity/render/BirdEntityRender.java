@@ -2,7 +2,6 @@ package io.github.chaosawakens.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.BirdEntityModel;
 import io.github.chaosawakens.common.entity.BirdEntity;
@@ -32,7 +31,7 @@ public class BirdEntityRender extends GeoEntityRenderer<BirdEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(BirdEntity entity) {
-    	 switch(entity.getColorTextureType()) {
+    	 switch(entity.getBirdType()) {
          case 0:
          default:
              return TEXTURE_BLACK_LOCATION;

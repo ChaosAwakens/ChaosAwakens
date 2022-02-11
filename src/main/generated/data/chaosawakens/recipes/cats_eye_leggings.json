@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:cats_eye_ingot"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:cats_eye_leggings"
+  }
+}

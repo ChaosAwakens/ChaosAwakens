@@ -1,15 +1,11 @@
 package io.github.chaosawakens;
 
 import io.github.chaosawakens.api.CAReflectionHelper;
-
-
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
 import io.github.chaosawakens.common.UpdateHandler;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.events.*;
-import io.github.chaosawakens.common.integration.CAEMCValues;
-import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.integration.TheOneProbePlugin;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
@@ -17,7 +13,6 @@ import io.github.chaosawakens.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -41,14 +36,14 @@ import java.util.Locale;
 public class ChaosAwakens {
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
-	public static final String VERSION = "0.9.1.0-preview2";
+	public static final String VERSION = "0.9.1.0-preview3";
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	public ChaosAwakens() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
 
-		LOGGER.debug(MODNAME + " Version is:" + VERSION);
+		LOGGER.debug(MODNAME + " Version is: " + VERSION);
 
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 
@@ -91,6 +86,7 @@ public class ChaosAwakens {
 		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
 	//	forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::registerReachModifiers);
 		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
+		forgeBus.addListener(MiscEventHandler::onRegisterCommandEvent);
 		forgeBus.addListener(MiscEventHandler::onEntityJoin);
 	//	forgeBus.addListener(MiscEventHandler::onPlayerReach);
 	//	forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
@@ -138,11 +134,11 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
 			dataGenerator.addProvider(new CAItemModelGenerator(dataGenerator, existing));
 			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
-			dataGenerator.addProvider(new CATagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CATagProviderForBlocks(dataGenerator, existing));
-			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, new CATagProvider.CATagProviderForBlocks(dataGenerator, existing), existing));
+			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
 			dataGenerator.addProvider(new CALootModifierProvider(dataGenerator, MODID));
+			dataGenerator.addProvider(new CACustomConversionProvider(dataGenerator));
 		}
 	}
 

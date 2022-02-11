@@ -40,12 +40,13 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.STINK_BUG.get(), StinkBugEntity.setCustomAttributes().build());
-        event.put(CAEntityTypes.SPARK_FISH.get(), SparkFishEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WHALE.get(), WhaleEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.GREEN_FISH.get(), GreenFishEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROCK_FISH.get(), RockFishEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.SPARK_FISH.get(), SparkFishEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WOOD_FISH.get(), WoodFishEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.LAVA_EEL.get(), LavaEelEntity.setCustomAttributes().build());
     }

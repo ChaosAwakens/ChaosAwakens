@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:tigers_eye_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_tigers_eye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:tigers_eye"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:tigers_eye_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tigers_eye",
+      "has_the_recipe"
+    ]
+  ]
+}

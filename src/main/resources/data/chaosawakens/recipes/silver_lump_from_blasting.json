@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "chaosawakens:silver_ore"
-  },
-  "result": "chaosawakens:silver_lump",
-  "experience": 1.0,
-  "cookingtime": 100
-}

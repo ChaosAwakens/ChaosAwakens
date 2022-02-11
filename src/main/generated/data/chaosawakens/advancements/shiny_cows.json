@@ -39,11 +39,35 @@
           }
         ]
       }
+    },
+    "enchanted_golden_apple_cow": {
+      "trigger": "minecraft:bred_animals",
+      "conditions": {
+        "parent": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:enchanted_golden_apple_cow"
+            },
+            "entity": "this"
+          }
+        ],
+        "partner": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:enchanted_golden_apple_cow"
+            },
+            "entity": "this"
+          }
+        ]
+      }
     }
   },
   "requirements": [
     [
-      "golden_apple_cow"
+      "golden_apple_cow",
+      "enchanted_golden_apple_cow"
     ]
   ]
 }

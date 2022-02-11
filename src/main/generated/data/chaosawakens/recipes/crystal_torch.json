@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "$"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:crystal_energy"
+    },
+    "$": {
+      "item": "chaosawakens:crystal_shard"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:crystal_torch",
+    "count": 4
+  }
+}

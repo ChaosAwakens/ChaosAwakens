@@ -226,7 +226,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -237,11 +237,11 @@
               }
             }
           ],
-          "name": "minecraft:vine"
+          "name": "minecraft:red_mushroom"
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -252,7 +252,7 @@
               }
             }
           ],
-          "name": "minecraft:vine"
+          "name": "minecraft:brown_mushroom"
         },
         {
           "type": "minecraft:item",

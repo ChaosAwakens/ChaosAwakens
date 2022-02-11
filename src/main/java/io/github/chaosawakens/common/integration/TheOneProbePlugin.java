@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.integration;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.entity.AppleCowEntity;
 import io.github.chaosawakens.common.entity.BirdEntity;
 import io.github.chaosawakens.common.entity.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.FrogEntity;
@@ -8,7 +9,6 @@ import mcjty.theoneprobe.api.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
 
@@ -36,26 +36,38 @@ public class TheOneProbePlugin {
                     if ("Froakie".equalsIgnoreCase(s)) {
                         iProbeInfo.text(CompoundText.createLabelInfo("Special Frog Species: ", "Blue"));
                     }
-                    
+
+                    if (entity instanceof AppleCowEntity) {
+                        int type = ((AppleCowEntity) entity).getAppleCowType();
+                        switch(type) {
+                            case 0:
+                            default:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Apple Cow Species: ", "Apple Cow (" + type + ")"));
+                                return;
+                            case 1:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Apple Cow Species: ", "Halloween (" + type + ")"));
+                        }
+                    }
+
                     if (entity instanceof BirdEntity) {
-                    	int type = ((BirdEntity) entity).getColorTextureType();
-                    	switch(type) {
-                    	case 0:
-                    		default:
-                    			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Black (" + type + ")"));
+                        int type = ((BirdEntity) entity).getBirdType();
+                        switch(type) {
+                            case 0:
+                            default:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Black (" + type + ")"));
                                 return;
-                    		case 1:
-                    			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Brown (" + type + ")"));
+                            case 1:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Brown (" + type + ")"));
                                 return;
-                    		case 2:
-                    			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Blue (" + type + ")"));
+                            case 2:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Blue (" + type + ")"));
                                 return;
-                    		case 3:
-                    			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Green (" + type + ")"));
+                            case 3:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Green (" + type + ")"));
                                 return;
-                    		case 4:
-                    			iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Red (" + type + ")"));
-                    	}
+                            case 4:
+                                iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Red (" + type + ")"));
+                        }
                     }
 
                     if (entity instanceof FrogEntity) {

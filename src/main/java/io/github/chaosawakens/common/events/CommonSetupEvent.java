@@ -1,22 +1,14 @@
 package io.github.chaosawakens.common.events;
 
-import com.google.common.collect.ImmutableMultimap;
 import com.mojang.serialization.Codec;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.integration.CAEMCValues;
 import io.github.chaosawakens.common.integration.CAJER;
-import io.github.chaosawakens.common.items.ExtendedHitWeaponItem;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -31,9 +23,6 @@ import net.minecraft.world.raid.Raid;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -47,11 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author invalid2
- */
 public class CommonSetupEvent {
-
     /**
      * List for configured features, so they get registered at the correct time
      */
@@ -63,20 +48,20 @@ public class CommonSetupEvent {
         CAEntityTypes.registerSpawnPlacementTypes();
         PacketHandler.init();
         Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
-        
+
         event.enqueueWork(() -> {
+            CAVanillaCompat.setup();
             CAStructures.setupStructures();
             CAConfiguredStructures.registerConfiguredStructures();
             CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
             CAVillagers.registerVillagerTypes();
-            CAStrippedLogBlocks.registerStrippedLogs();
+            CABlocks.flowerPots();
 
             CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
             configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
         });
         
 		ModList modList = ModList.get();
-		if (modList.isLoaded("projecte")) CAEMCValues.init();
 		if (modList.isLoaded("jeresources")) CAJER.init();
 
         // TODO Make it so we don't have to add stuff here manually
@@ -91,27 +76,27 @@ public class CommonSetupEvent {
         BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
     }
     
-    public static void registerReachModifiers(final PlayerEvent e) {
-    	double reachDistance = 0.0D;
-    	ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-    	builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(ExtendedHitWeaponItem.REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
-    	ItemStack bigBertha = new ItemStack(CAItems.BIG_BERTHA.get());
-    	ItemStack attitudeAdjuster = new ItemStack(CAItems.ATTITUDE_ADJUSTER.get());
-    	ItemStack prismaticReaper = new ItemStack(CAItems.PRISMATIC_REAPER.get());
-    	PlayerEntity p = (PlayerEntity) e.getPlayer();
-    	
-    	if(p.getItemInHand(Hand.MAIN_HAND).equals(bigBertha)) {
-    		reachDistance = 25.0D;
-    	}
-    	
-    	if(p.getItemInHand(Hand.MAIN_HAND).equals(attitudeAdjuster)) {
-    		reachDistance = 15.0D;
-    	}
-    	
-    	if(p.getItemInHand(Hand.MAIN_HAND).equals(prismaticReaper)) {
-    		reachDistance = 13.0D;
-    	}
-    }
+//    public static void registerReachModifiers(final PlayerEvent event) {
+//    	double reachDistance = 0.0D;
+//    	ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+//    	builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(ExtendedHitWeaponItem.REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
+//    	ItemStack bigBertha = new ItemStack(CAItems.BIG_BERTHA.get());
+//    	ItemStack attitudeAdjuster = new ItemStack(CAItems.ATTITUDE_ADJUSTER.get());
+//    	ItemStack prismaticReaper = new ItemStack(CAItems.PRISMATIC_REAPER.get());
+//    	PlayerEntity player =  event.getPlayer();
+//
+//    	if(player.getItemInHand(Hand.MAIN_HAND).equals(bigBertha)) {
+//    		reachDistance = 25.0D;
+//    	}
+//
+//    	if(player.getItemInHand(Hand.MAIN_HAND).equals(attitudeAdjuster)) {
+//    		reachDistance = 15.0D;
+//    	}
+//
+//    	if(player.getItemInHand(Hand.MAIN_HAND).equals(prismaticReaper)) {
+//    		reachDistance = 13.0D;
+//    	}
+//    }
 
     public static void addDimensionalSpacing(final WorldEvent.Load event) {
         if (!(event.getWorld() instanceof ServerWorld)) return;
@@ -123,8 +108,8 @@ public class CommonSetupEvent {
             if (codecMethod == null)
                 codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
             // TODO Fix this
-            ResourceLocation cgRL = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
-            if (cgRL != null && cgRL.getNamespace().equals("terraforged")) return;
+            ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
+            if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged")) return;
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             ChaosAwakens.warn("WORLDGEN", e);
             e.printStackTrace();

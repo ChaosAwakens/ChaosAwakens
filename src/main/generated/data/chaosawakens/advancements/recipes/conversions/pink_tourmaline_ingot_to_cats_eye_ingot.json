@@ -1,0 +1,47 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "chaosawakens:cats_eye_ingot"
+          ]
+        },
+        "criteria": {
+          "has_pink_tourmaline_ingot": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "item": "projecte:philosophers_stone"
+                },
+                {
+                  "item": "chaosawakens:pink_tourmaline_ingot"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "chaosawakens:cats_eye_ingot"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_pink_tourmaline_ingot",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

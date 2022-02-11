@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "#S",
+    " S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "item": "chaosawakens:tigers_eye"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:tigers_eye_axe"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:nightmare_sword"
+    ]
+  },
+  "criteria": {
+    "has_nightmare_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:nightmare_scale"
+          }
+        ]
+      }
+    },
+    "has_titanium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:titanium_ingot"
+          }
+        ]
+      }
+    },
+    "has_OptionalNamedTag[forge:dusts/redstone]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/redstone"
+          }
+        ]
+      }
+    },
+    "has_OptionalNamedTag[forge:gems/diamond]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gems/diamond"
+          }
+        ]
+      }
+    },
+    "has_NamedTag[chaosawakens:ultimate_gear_handles]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "chaosawakens:ultimate_gear_handles"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:nightmare_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nightmare_scale",
+      "has_titanium_ingot",
+      "has_OptionalNamedTag[forge:dusts/redstone]",
+      "has_OptionalNamedTag[forge:gems/diamond]",
+      "has_NamedTag[chaosawakens:ultimate_gear_handles]",
+      "has_the_recipe"
+    ]
+  ]
+}

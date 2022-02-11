@@ -1,8 +1,6 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.common.registry.CAItems;
-
-
 import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.data.loot.FishingLootTables;
 import net.minecraft.item.Items;

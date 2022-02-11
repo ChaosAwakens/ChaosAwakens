@@ -1,0 +1,12 @@
+{
+  "values": {
+    "before": {
+      "chaosawakens:brown_ant_nest": 3,
+      "chaosawakens:rainbow_ant_nest": 3,
+      "chaosawakens:red_ant_nest": 3,
+      "chaosawakens:unstable_ant_nest": 3,
+      "chaosawakens:termite_nest": 3,
+      "chaosawakens:crystal_termite_nest": 3
+    }
+  }
+}

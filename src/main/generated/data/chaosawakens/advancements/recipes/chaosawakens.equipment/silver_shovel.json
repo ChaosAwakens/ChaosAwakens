@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:silver_shovel"
+    ]
+  },
+  "criteria": {
+    "has_silver_lump": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:silver_lump"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:silver_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_silver_lump",
+      "has_the_recipe"
+    ]
+  ]
+}

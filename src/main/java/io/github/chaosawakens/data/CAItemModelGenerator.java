@@ -38,6 +38,7 @@ public class CAItemModelGenerator extends ItemModelProvider {
     private void generate(final Collection<RegistryObject<Item>> items) {
         final ModelFile parentGenerated = getExistingFile(mcLoc("item/generated"));
         final ExistingModelFile parentHandheld = getExistingFile(mcLoc("item/handheld"));
+        final ExistingModelFile parentTemplateSpawnEgg = getExistingFile(mcLoc("item/template_spawn_egg"));
 
         for (RegistryObject<Item> item : items) {
             String name = item.getId().getPath();
@@ -49,12 +50,16 @@ public class CAItemModelGenerator extends ItemModelProvider {
              *  Skip elements that have no texture at assets/chaosawakens/textures/item
              *  or already have an existing model at assets/chaosawakens/models/item
              */
-            if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
-                continue;
 
             ChaosAwakens.LOGGER.info(item.getId());
 
-            getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
+            if (item.getId().getPath().contains("_spawn_egg")) {
+                getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/spawn_eggs/" + name.replaceAll("_spawn_egg", ""));
+            } else {
+                if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))
+                    continue;
+                getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
+            }
         }
     }
 
@@ -73,7 +78,6 @@ public class CAItemModelGenerator extends ItemModelProvider {
             ChaosAwakens.LOGGER.info(item.getId());
 
             withExistingParent(name, new ResourceLocation(ChaosAwakens.MODID, "block/" + name));
-
         }
     }
 }

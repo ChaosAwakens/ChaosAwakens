@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "chaosawakens:radish"
+    },
+    {
+      "item": "chaosawakens:radish"
+    },
+    {
+      "item": "chaosawakens:radish"
+    },
+    {
+      "item": "chaosawakens:radish"
+    },
+    {
+      "item": "chaosawakens:radish"
+    },
+    {
+      "item": "chaosawakens:radish"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:radish_stew"
+  }
+}

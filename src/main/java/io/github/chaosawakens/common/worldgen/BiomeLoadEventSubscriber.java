@@ -10,6 +10,7 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
@@ -21,11 +22,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/**
- * Class with method(s) that subscribe to the BiomeLoadingEvent
- *
- * @author invalid2
- */
 public class BiomeLoadEventSubscriber {
 	
 	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
@@ -108,6 +104,7 @@ public class BiomeLoadEventSubscriber {
 		
 		private static final Consumer<MobSpawnInfoBuilder> OCEAN_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WHALE.get(), 1, 1, 1));
+			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.GREEN_FISH.get(), 10, 3, 5));
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.ROCK_FISH.get(), 14, 3, 5));
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WOOD_FISH.get(), 20, 5, 8));
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.SPARK_FISH.get(), 15, 4, 6));
@@ -119,7 +116,7 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 2, 4));
 		};
 		
-		private static final Consumer<MobSpawnInfoBuilder>NETHER_OR_HOT_MOBS = (builder) -> {
+		private static final Consumer<MobSpawnInfoBuilder> NETHER_OR_HOT_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LAVA_EEL.get(), 10, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 11, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 15, 3, 5));
@@ -179,73 +176,80 @@ public class BiomeLoadEventSubscriber {
 	private static class StructureHandler {
 		public static void addfeatures(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();
-			
+
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 			final String location = biome.location().toString();
 
 			BiomeLoadEventSubscriber.setEntDungeon((struct) -> gen.getStructures().add(() -> struct), event);
-			
+
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addOverworldOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addMountainBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addPlainsBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_BUSH);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_SPARSE);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_DECORATED);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addForestBiomeOres(gen);
+				gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && location.contains("birch")) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addBirchBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  location.contains("taiga")) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && location.contains("taiga")) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addTaigaBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  location.contains("dark")) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && location.contains("dark")) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addDarkForestBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addJungleBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addSavannaBiomeOres(gen);
+				gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addSwampBiomeOres(gen);
+				gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addSnowyBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.HOT) &&
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.HOT) &&
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.DRY) &&
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.SANDY) &&
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addDesertBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) ||
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) ||
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY) ||
 					location.contains("taiga") || location.contains("desert") ||
 					BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addVillageBiomeOres(gen);
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) &&  BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addRiverOceanBiomeOres(gen);
 			}
@@ -263,21 +267,26 @@ public class BiomeLoadEventSubscriber {
 					addEndOres(gen);
 				}
 			}
-			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
+			if ((BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) && (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)))) {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
-				gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
-				if (CAConfig.COMMON.enableOreGen.get())
+				if (CAConfig.COMMON.enableOreGen.get()) {
 					addMiningDimOres(gen);
+					if (location.equals("stalagmite_valley")) {
+						addStalagmiteValleyOres(gen);
+					}
+				}
 
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
 			}
+
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_DIMENSION)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addVillageDimOres(gen);
@@ -286,6 +295,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
 			}
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CRYSTAL_PLAINS);
@@ -298,17 +308,6 @@ public class BiomeLoadEventSubscriber {
 			BiomeGenerationSettingsBuilder builder = event.getGeneration();
 			
 			BiomeLoadEventSubscriber.setEntDungeon(builder::addStructureStart, event);
-			
-			switch (event.getCategory()) {
-				case FOREST:
-					builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
-				case SWAMP:
-					builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
-				case SAVANNA:
-					builder.addStructureStart(CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
-				default:
-					break;
-			}
 		}
 		
 		private static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {
@@ -332,6 +331,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_GOLDEN_APPLE_COW);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_CARROT_PIG);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_GOLDEN_CARROT_PIG);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_BIRD);
 
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_BAT);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_BEE);
@@ -451,6 +451,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_RUBY_BUG);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_SLIME);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_WASP);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_FROG);
 			}
 		}
 
@@ -538,7 +539,6 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.END_FOSSILISED_SHULKER);
 			}
 		}
-
 		private static void addMiningDimOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableOreRubyGen.get())
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_RUBY_LAVA);
@@ -581,6 +581,8 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_GOLDEN_APPLE_COW);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_CARROT_PIG);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_GOLDEN_CARROT_PIG);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_BIRD);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_FROG);
 
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_BAT);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_BEE);
@@ -624,6 +626,10 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RED_ANT_NEST);
 			}
 		}
+
+		private static void addStalagmiteValleyOres(BiomeGenerationSettingsBuilder gen) {
+			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_DIMETRODON);
+		}
 		
 		private static void addVillageDimOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableNestGen.get()) {
@@ -636,6 +642,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_ORE_ENERGY);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_PINK_TOURMALINE);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_FOSSILISED_CRYSTAL_APPLE_COW);
 			}
 			if (CAConfig.COMMON.enableNestGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_TERMITE_NEST);

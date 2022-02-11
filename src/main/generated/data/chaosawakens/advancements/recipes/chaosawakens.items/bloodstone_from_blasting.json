@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:bloodstone_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_Block{chaosawakens:bloodstone_ore}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:bloodstone_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:bloodstone_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_Block{chaosawakens:bloodstone_ore}",
+      "has_the_recipe"
+    ]
+  ]
+}

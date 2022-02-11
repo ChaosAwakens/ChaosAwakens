@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:battle_axe"
+    ]
+  },
+  "criteria": {
+    "has_ultimate_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ultimate_sword"
+          }
+        ]
+      }
+    },
+    "has_ultimate_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ultimate_axe"
+          }
+        ]
+      }
+    },
+    "has_triffid_goo": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:triffid_goo"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:battle_axe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ultimate_sword",
+      "has_ultimate_axe",
+      "has_triffid_goo",
+      "has_the_recipe"
+    ]
+  ]
+}

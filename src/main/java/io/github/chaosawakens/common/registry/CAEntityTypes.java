@@ -1,22 +1,17 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.entity.projectile.*;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityType.IFactory;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,7 +21,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CAEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ChaosAwakens.MODID);
@@ -72,25 +66,31 @@ public class CAEntityTypes {
                     .build(new ResourceLocation(ChaosAwakens.MODID, "hercules_beetle").toString()));
 
     //Fish
-    public static final RegistryObject<EntityType<WoodFishEntity>> WOOD_FISH = ENTITY_TYPES.register("wood_fish",
-            () -> EntityType.Builder.of(WoodFishEntity::new, EntityClassification.WATER_CREATURE)
-                    .sized(0.4F, 0.15F)
+    public static final RegistryObject<EntityType<GreenFishEntity>> GREEN_FISH = ENTITY_TYPES.register("green_fish",
+            () -> EntityType.Builder.of(GreenFishEntity::new, EntityClassification.WATER_CREATURE)
+                    .sized(0.4f, 0.4f) // Hitbox Size ()
                     .clientTrackingRange(10)
-                    .build(new ResourceLocation(ChaosAwakens.MODID, "wood_fish").toString()));
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "green_fish").toString()));
     public static final RegistryObject<EntityType<RockFishEntity>> ROCK_FISH = ENTITY_TYPES.register("rock_fish",
             () -> EntityType.Builder.of(RockFishEntity::new, EntityClassification.WATER_CREATURE)
-                    .sized(0.2f, 0.2f) // Hitbox Size ()
+                    .sized(0.75f, 0.6f) // Hitbox Size ()
+                    .clientTrackingRange(10)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "rock_fish").toString()));
     public static final RegistryObject<EntityType<SparkFishEntity>> SPARK_FISH = ENTITY_TYPES.register("spark_fish",
             () -> EntityType.Builder.of(SparkFishEntity::new, EntityClassification.WATER_CREATURE)
-                    .sized(0.4f, 0.15f)
+                    .sized(0.4f, 0.15f) // Hitbox Size ()
+                    .clientTrackingRange(10)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "spark_fish").toString()));
+    public static final RegistryObject<EntityType<WoodFishEntity>> WOOD_FISH = ENTITY_TYPES.register("wood_fish",
+            () -> EntityType.Builder.of(WoodFishEntity::new, EntityClassification.WATER_CREATURE)
+                    .sized(0.6F, 0.4F) // Hitbox Size ()
+                    .clientTrackingRange(10)
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "wood_fish").toString()));
 
     //Lava Eel
     public static final RegistryObject<EntityType<LavaEelEntity>> LAVA_EEL = ENTITY_TYPES.register("lava_eel",
             () -> EntityType.Builder.of(LavaEelEntity::new, EntityClassification.WATER_CREATURE)
-                    .sized(0.3f, 0.2f) // Hitbox Size ()
-                    .fireImmune().sized(0.4f, 0.2f) // Hitbox Size ()
+                    .fireImmune().sized(0.3f, 0.2f) // Hitbox Size ()
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "lava_eel").toString()));
 
@@ -202,8 +202,7 @@ public class CAEntityTypes {
     // Ruby Bug
     public static final RegistryObject<EntityType<RubyBugEntity>> RUBY_BUG = ENTITY_TYPES.register("ruby_bug",
             () -> EntityType.Builder.of(RubyBugEntity::new, EntityClassification.CREATURE)
-                    .sized(0.6f, 0.6f) // Hitbox Size ()
-                    .fireImmune().sized(1.25f, 1.25f) // Hitbox Size ()
+                    .fireImmune().sized(0.6f, 0.5f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "ruby_bug").toString()));
 
     // Stink Bug

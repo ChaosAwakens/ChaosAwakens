@@ -18,7 +18,7 @@ public class CALootModifierProvider extends GlobalLootModifierProvider{
 	
 	@Override
 	public String getName() {
-		return ChaosAwakens.MODNAME + "Loot Modifiers";
+		return ChaosAwakens.MODNAME + " Loot Modifiers";
 	}
 
 	@Override

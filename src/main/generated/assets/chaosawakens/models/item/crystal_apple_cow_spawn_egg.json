@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chaosawakens:item/spawn_eggs/crystal_apple_cow"
+  }
+}

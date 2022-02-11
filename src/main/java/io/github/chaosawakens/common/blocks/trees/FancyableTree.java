@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class FancyableTree extends Tree {
-	
 	private final Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree;
 	private final Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> treeBee;
 	private final Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> fancyTree;
@@ -29,5 +28,4 @@ public class FancyableTree extends Tree {
 		else
 			return grow ? tree.get() : treeBee.get();
 	}
-
 }

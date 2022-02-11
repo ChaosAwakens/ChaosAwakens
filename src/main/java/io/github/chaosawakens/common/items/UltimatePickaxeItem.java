@@ -1,14 +1,8 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import com.google.gson.JsonObject;
-
 import io.github.chaosawakens.api.IAutoEnchantable;
 import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -20,6 +14,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEnchantable{
 //	private static final InventoryFake FAKE_INVENTORY = new InventoryFake();

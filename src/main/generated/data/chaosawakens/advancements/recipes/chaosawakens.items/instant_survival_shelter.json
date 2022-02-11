@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:instant_survival_shelter"
+    ]
+  },
+  "criteria": {
+    "has_OptionalNamedTag[forge:storage_blocks/redstone]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/redstone"
+          }
+        ]
+      }
+    },
+    "has_OptionalNamedTag[forge:rods/wooden]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:rods/wooden"
+          }
+        ]
+      }
+    },
+    "has_OptionalNamedTag[forge:cobblestone]": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:cobblestone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:instant_survival_shelter"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_OptionalNamedTag[forge:storage_blocks/redstone]",
+      "has_OptionalNamedTag[forge:rods/wooden]",
+      "has_OptionalNamedTag[forge:cobblestone]",
+      "has_the_recipe"
+    ]
+  ]
+}

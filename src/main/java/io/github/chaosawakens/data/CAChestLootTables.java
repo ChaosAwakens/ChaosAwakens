@@ -216,8 +216,8 @@ public class CAChestLootTables implements Consumer<BiConsumer<ResourceLocation, 
                         .withPool(LootPool.lootPool()
                                 .setRolls(ConstantRange.exactly(2))
                                 //common loot
-                                .add(ItemLootEntry.lootTableItem(Items.VINE).apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
-                                .add(ItemLootEntry.lootTableItem(Items.VINE).apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
+                                .add(ItemLootEntry.lootTableItem(Items.RED_MUSHROOM).apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(50))
+                                .add(ItemLootEntry.lootTableItem(Items.BROWN_MUSHROOM).apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(50))
                                 .add(ItemLootEntry.lootTableItem(Items.OAK_SAPLING).apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(50))
                                 .add(ItemLootEntry.lootTableItem(Items.OAK_SAPLING).apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(50)))
                         .withPool(LootPool.lootPool()

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cooked_crab_meat_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_crab_meat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:crab_meat"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cooked_crab_meat_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crab_meat",
+      "has_the_recipe"
+    ]
+  ]
+}

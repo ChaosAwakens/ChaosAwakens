@@ -25,6 +25,7 @@ public class AttitudeAdjusterItem extends ExtendedHitWeaponItem implements IVani
         if (!target.level.isClientSide) {
             target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, false, Explosion.Mode.DESTROY);
         }
+
         stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
         return true;
     }

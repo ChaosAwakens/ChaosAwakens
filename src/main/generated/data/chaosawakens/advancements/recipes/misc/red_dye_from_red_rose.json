@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:red_dye_from_red_rose"
+    ]
+  },
+  "criteria": {
+    "has_Block{chaosawakens:red_rose}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:red_rose"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:red_dye_from_red_rose"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_Block{chaosawakens:red_rose}",
+      "has_the_recipe"
+    ]
+  ]
+}

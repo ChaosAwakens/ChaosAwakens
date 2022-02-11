@@ -24,8 +24,22 @@ public class CAJER {
     }
 
     private static void registerDungeonLoot() {
-        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon", "dungeon.chaosawakens.jer.ent_dungeon");
-        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon", new ResourceLocation("chaosawakens:chests/ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/acacia_ent_dungeon", "dungeon.chaosawakens.jer.acacia_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/acacia_ent_dungeon", new ResourceLocation("chaosawakens:chests/acacia_ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/birch_ent_dungeon", "dungeon.chaosawakens.jer.birch_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/birch_ent_dungeon", new ResourceLocation("chaosawakens:chests/birch_ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/crimson_ent_dungeon", "dungeon.chaosawakens.jer.crimson_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/crimson_ent_dungeon", new ResourceLocation("chaosawakens:chests/crimson_ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/dark_oak_ent_dungeon", "dungeon.chaosawakens.jer.dark_oak_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/dark_oak_ent_dungeon", new ResourceLocation("chaosawakens:chests/dark_oak_ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/jungle_ent_dungeon", "dungeon.chaosawakens.jer.jungle_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/jungle_ent_dungeon", new ResourceLocation("chaosawakens:chests/jungle_ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/oak_ent_dungeon", "dungeon.chaosawakens.jer.oak_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/oak_ent_dungeon", new ResourceLocation("chaosawakens:chests/oak_ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/spruce_ent_dungeon", "dungeon.chaosawakens.jer.spruce_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/spruce_ent_dungeon", new ResourceLocation("chaosawakens:chests/spruce_ent_dungeon"));
+        JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/warped_ent_dungeon", "dungeon.chaosawakens.jer.warped_ent_dungeon");
+        JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/warped_ent_dungeon", new ResourceLocation("chaosawakens:chests/warped_ent_dungeon"));
         JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/wasp_dungeon", "dungeon.chaosawakens.jer.wasp_dungeon");
         JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/wasp_dungeon", new ResourceLocation("chaosawakens:chests/wasp_dungeon"));
     }

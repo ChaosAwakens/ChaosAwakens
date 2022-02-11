@@ -1,32 +1,28 @@
 package io.github.chaosawakens.client.entity.render.layers;
 
-import io.github.chaosawakens.client.entity.model.AppleCowModel;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.EnergyLayer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
+import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 @OnlyIn(Dist.CLIENT)
-public class CowGlintLayer extends EnergyLayer<EnchantedGoldenAppleCowEntity, AppleCowModel<EnchantedGoldenAppleCowEntity>> {
-    private static final ResourceLocation GLINT_TEXTURE = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-    private final AppleCowModel<EnchantedGoldenAppleCowEntity> cowModel = new AppleCowModel<>();
+public class CowGlintLayer extends GeoLayerRenderer<EnchantedGoldenAppleCowEntity> {
+    private static final ResourceLocation MODEL = new ResourceLocation(ChaosAwakens.MODID, "geo/apple_cow.geo.json");
 
-    public CowGlintLayer(IEntityRenderer<EnchantedGoldenAppleCowEntity, AppleCowModel<EnchantedGoldenAppleCowEntity>> p_i50947_1_) {
-        super(p_i50947_1_);
+    public CowGlintLayer(IGeoRenderer<EnchantedGoldenAppleCowEntity> entityRendererIn) {
+        super(entityRendererIn);
     }
 
-    protected float xOffset(float p_225634_1_) {
-        return p_225634_1_ * 0.01F;
-    }
-
-    protected ResourceLocation getTextureLocation() {
-        return GLINT_TEXTURE;
-    }
-
-    protected EntityModel<EnchantedGoldenAppleCowEntity> model() {
-        return this.cowModel;
+    @Override
+    public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, EnchantedGoldenAppleCowEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        RenderType renderType =  RenderType.entityGlint();
+        this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, renderType, matrixStackIn, bufferIn, bufferIn.getBuffer(renderType), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
     }
 }

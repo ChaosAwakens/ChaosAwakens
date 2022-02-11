@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/stem_growth3",
-  "textures": {
-    "stem": "chaosawakens:block/golden_melon_stem"
-  }
-}

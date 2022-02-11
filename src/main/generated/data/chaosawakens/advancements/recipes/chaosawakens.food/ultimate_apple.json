@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ultimate_apple"
+    ]
+  },
+  "criteria": {
+    "has_enchanted_golden_apple": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:enchanted_golden_apple"
+          }
+        ]
+      }
+    },
+    "has_titanium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:titanium_ingot"
+          }
+        ]
+      }
+    },
+    "has_uranium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:uranium_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ultimate_apple"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_enchanted_golden_apple",
+      "has_titanium_ingot",
+      "has_uranium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

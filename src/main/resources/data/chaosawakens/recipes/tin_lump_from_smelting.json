@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "chaosawakens:tin_ore"
-  },
-  "result": "chaosawakens:tin_lump",
-  "experience": 1.0,
-  "cookingtime": 200
-}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cats_eye_ingot"
+    ]
+  },
+  "criteria": {
+    "has_Block{chaosawakens:cats_eye_block}": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cats_eye_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cats_eye_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_Block{chaosawakens:cats_eye_block}",
+      "has_the_recipe"
+    ]
+  ]
+}

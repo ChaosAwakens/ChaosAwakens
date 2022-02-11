@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "projecte:philosophers_stone"
+          },
+          {
+            "item": "chaosawakens:pink_tourmaline_ingot"
+          },
+          {
+            "item": "chaosawakens:pink_tourmaline_ingot"
+          },
+          {
+            "item": "chaosawakens:pink_tourmaline_ingot"
+          },
+          {
+            "item": "chaosawakens:pink_tourmaline_ingot"
+          }
+        ],
+        "result": {
+          "item": "chaosawakens:cats_eye_ingot"
+        }
+      }
+    }
+  ]
+}

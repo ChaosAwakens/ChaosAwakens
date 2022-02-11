@@ -3,23 +3,11 @@ package io.github.chaosawakens.common.entity;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -29,16 +17,10 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -55,10 +37,10 @@ import java.util.Random;
 public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 
-	public WoodFishEntity(EntityType<? extends AbstractGroupFishEntity> woodFish, World world) {
-		super(woodFish, world);
+	public WoodFishEntity(EntityType<? extends AbstractGroupFishEntity> type, World world) {
+		super(type, world);
 		this.noCulling = true;
-		this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
+		this.setPathfindingMalus(PathNodeType.WATER, 1.0F);
 		this.moveControl = new WoodFishEntity.MoveHelperController(this);
 	}
 
@@ -130,10 +112,6 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 			super.travel(vector);
 		}
 
-	}
-
-	public CreatureAttribute getMobType() {
-		return CreatureAttribute.WATER;
 	}
 
 	public float getSoundVolume() {
@@ -251,14 +229,6 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		}
 	}
 
-	@Override
-	protected void saveToBucketTag(ItemStack stack) {
-		if (this.hasCustomName()) {
-			stack.setHoverName(this.getCustomName());
-		}
-
-	}
-
 	static class GoToWaterGoal extends Goal {
 		private final CreatureEntity mob;
 		private double wantedX;
@@ -314,20 +284,6 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 			return null;
 		}
-	}
-
-	public static boolean checkFishSpawnRules(EntityType<? extends AbstractFishEntity> woodFish, IWorld world, SpawnReason reason, BlockPos pos, Random rand) {
-		return world.getBlockState(pos).is(Blocks.WATER) && world.getBlockState(pos.above()).is(Blocks.WATER);
-	}
-
-	@Override
-	public int getMaxSchoolSize() {
-		return 6;
-	}
-
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 8;
 	}
 
 	@Override

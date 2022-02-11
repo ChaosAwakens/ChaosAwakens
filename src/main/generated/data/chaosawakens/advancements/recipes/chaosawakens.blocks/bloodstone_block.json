@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:bloodstone_block"
+    ]
+  },
+  "criteria": {
+    "has_bloodstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:bloodstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:bloodstone_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bloodstone",
+      "has_the_recipe"
+    ]
+  ]
+}

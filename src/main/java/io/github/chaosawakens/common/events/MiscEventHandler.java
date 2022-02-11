@@ -1,12 +1,13 @@
 package io.github.chaosawakens.common.events;
 
-import java.util.Objects;
-
+import com.mojang.brigadier.CommandDispatcher;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
+import io.github.chaosawakens.common.registry.CACommand;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
+import net.minecraft.command.CommandSource;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -19,11 +20,20 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.Objects;
 
 public class MiscEventHandler {
+	@SubscribeEvent
+	public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
+		CommandDispatcher<CommandSource> commandDispatcher = event.getDispatcher();
+		CACommand.register(commandDispatcher);
+	}
 	
 	public static void livingDeathEvent(LivingDeathEvent event) {
 		if (CAConfig.COMMON.enableDragonEggRespawns.get()) {

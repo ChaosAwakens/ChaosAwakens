@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:zoo_cage_medium"
+    ]
+  },
+  "criteria": {
+    "has_zoo_cage_small": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:zoo_cage_small"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:zoo_cage_medium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_zoo_cage_small",
+      "has_the_recipe"
+    ]
+  ]
+}

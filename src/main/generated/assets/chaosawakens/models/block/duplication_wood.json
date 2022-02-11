@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chaosawakens:block/duplication_log",
+    "end": "chaosawakens:block/duplication_log"
+  }
+}

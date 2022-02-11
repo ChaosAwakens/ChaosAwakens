@@ -1,17 +1,14 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CAItems;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.passive.fish.*;
+import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
@@ -35,7 +32,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
@@ -115,6 +111,15 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    @Override
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround && this.verticalCollision) {
+            this.onGround = false;
+            this.hasImpulse = true;
+        }
+        super.aiStep();
     }
 
     public static boolean checkRockFishSpawnRules(EntityType<RockFishEntity> rockfish, IWorld world, SpawnReason reason, BlockPos pos, Random random) {

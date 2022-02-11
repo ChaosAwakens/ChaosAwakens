@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:irukandji_arrow"
+    ]
+  },
+  "criteria": {
+    "has_crystal_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:crystal_shard"
+          }
+        ]
+      }
+    },
+    "has_dead_irukandji": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:dead_irukandji"
+          }
+        ]
+      }
+    },
+    "has_peacock_feather": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:peacock_feather"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:irukandji_arrow"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal_shard",
+      "has_dead_irukandji",
+      "has_peacock_feather",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ultimate_bow"
+    ]
+  },
+  "criteria": {
+    "has_titanium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:titanium_ingot"
+          }
+        ]
+      }
+    },
+    "has_uranium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:uranium_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ultimate_bow"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_titanium_ingot",
+      "has_uranium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}
