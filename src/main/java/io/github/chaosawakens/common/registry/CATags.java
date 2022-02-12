@@ -13,7 +13,6 @@ import net.minecraft.tags.ItemTags;
  * @author invalid2
  */
 public class CATags {
-
 	public static class Blocks {
 		public static final ITag.INamedTag<Block> BASE_STONE_CRYSTAL = BlockTags.bind(ChaosAwakens.MODID + ":base_stone_crystal");
 		public static final ITag.INamedTag<Block> BASE_STONE_MINING = BlockTags.bind(ChaosAwakens.MODID + ":base_stone_mining");

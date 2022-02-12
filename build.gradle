@@ -73,12 +73,15 @@ minecraft {
 sourceSets {
     main.resources.srcDirs += 'src/main/generated'
 }
+
 mixin {
-    add sourceSets.main, "chaosawakens.refmap.json"
+    add sourceSets.main, 'chaosawakens.refmap.json'
+    config 'chaosawakens.mixins.json'
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.16.5:${project.geckolib}")
 

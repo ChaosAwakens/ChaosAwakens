@@ -8,8 +8,8 @@
   "client": [
     "MainMenuMixin"
   ],
+  "refmap": "chaosawakens.refmap.json",
   "injectors": {
     "defaultRequire": 1
-  },
-  "refmap": "chaosawakens.refmap.json"
+  }
 }
