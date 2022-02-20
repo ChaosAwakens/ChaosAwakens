@@ -333,7 +333,7 @@ public class CAConfig {
 			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
 			builder.pop();
 			builder.push("Spawners");
-			spawnEggsSpawnersSurvival = builder.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n" + "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n" + "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.").define("Spawn Eggs on Spawners in Survival?", 1);
+			spawnEggsSpawnersSurvival = builder.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n" + "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n" + "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.").defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 2);
 			builder.pop();
 		}
 	}

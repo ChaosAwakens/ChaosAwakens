@@ -640,6 +640,7 @@
   "block.chaosawakens.tomato_plant": "Tomato Plant",
   "block.chaosawakens.lettuce_plant": "Lettuce Plant",
   "block.chaosawakens.strawberry_plant": "Strawberry Bush",
+  "block.chaosawakens.radishes": "Radishes",
 
   "block.chaosawakens.apple_sapling": "Apple Sapling",
   "block.chaosawakens.apple_log": "Apple Log",
@@ -743,7 +744,7 @@
   "item.chaosawakens.platinum_coin": "Platinum Coin",
 
   "misc.chaosawakens.empty_inventory": "Empty your inventory first!",
-  "misc.chaosawakens.inaccessible_dimension": "This part of the anthill seems to be blocked off... (This Dimension has not been implemented yet!)",
+  "misc.chaosawakens.inaccessible_dimension": "This part of the anthill seems blocked off... (This Dimension has not been implemented yet!)",
 
   "tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info.",
   "tooltip.chaosawakens.ruby": "Bright red gem of a fire of a burning desire",
