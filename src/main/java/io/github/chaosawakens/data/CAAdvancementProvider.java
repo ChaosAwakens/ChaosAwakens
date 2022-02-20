@@ -22,6 +22,7 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.crafting.ConditionalAdvancement;
 import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;
@@ -124,7 +125,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.RUBY_BUG.get()))).addCriterion("stink_bug",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.STINK_BUG.get()))).save(t, id("bug_squasher"));
 
-        Advancement goFish = registerAdvancement("go_fish", FrameType.TASK, CAItems.ROCK_FISH.get()).parent(root).addCriterion("rock_fish",
+        Advancement goFish = registerAdvancement("go_fish", FrameType.TASK, CAItems.ROCK_FISH.get()).parent(root).addCriterion("green_fish",
+                KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.GREEN_FISH.get()))).addCriterion("rock_fish",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROCK_FISH.get()))).addCriterion("spark_fish",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.SPARK_FISH.get()))).addCriterion("wood_fish",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.WOOD_FISH.get()))).save(t, id("go_fish"));

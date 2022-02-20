@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_OptionalNamedTag[forge:ingots/iron]": {
+    "has_forge:ingots/iron": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -26,7 +26,7 @@
         ]
       }
     },
-    "has_Block{minecraft:smooth_stone}": {
+    "has_smooth_stone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -36,7 +36,7 @@
         ]
       }
     },
-    "has_Block{minecraft:smooth_stone_slab}": {
+    "has_smooth_stone_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -55,10 +55,10 @@
   },
   "requirements": [
     [
-      "has_OptionalNamedTag[forge:ingots/iron]",
+      "has_forge:ingots/iron",
       "has_bucket",
-      "has_Block{minecraft:smooth_stone}",
-      "has_Block{minecraft:smooth_stone_slab}",
+      "has_smooth_stone",
+      "has_smooth_stone_slab",
       "has_the_recipe"
     ]
   ]

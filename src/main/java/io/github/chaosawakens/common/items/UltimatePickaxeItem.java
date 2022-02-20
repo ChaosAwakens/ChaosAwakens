@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEnchantable{
-//	private static final InventoryFake FAKE_INVENTORY = new InventoryFake();
-//	private final ILootCondition[] c;
 
 	public UltimatePickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn, enchantments);
@@ -41,33 +39,6 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
 	public float getXpRepairRatio(ItemStack stack) {
 		return 20.0F;
 	}
-
-	/*@Override
-	public boolean mineBlock(ItemStack stack, World w, BlockState state, BlockPos pos, LivingEntity e) {
-		PlayerEntity p = (PlayerEntity) e;
-
-		if (state != null) {
-            if (!w.isClientSide && p != null) {
-                p.getItemInHand(Hand.MAIN_HAND).hurtAndBreak(1, p, (player) -> player.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
-            }
-            for (int x = -1; x < 2; x++) {
-                for (int y = -1; y < 2; y++) {
-                    for (int z = -1; z < 2; z++) {
-                        BlockPos targetPos = new BlockPos(p.getX() + x, p.getY() + y, p.getZ() + z);
-                        if (w.isEmptyBlock(targetPos.above())) {
-                            state = w.getBlockState(targetPos).getToolModifiedState(w, targetPos, p, p.getItemInHand(Hand.MAIN_HAND), ToolType.PICKAXE);
-                            if (state != null) {
-                                if (!w.isClientSide) {
-                                    w.setBlock(targetPos, state, 11);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-		}
-		return ActionResultType.SUCCESS != null;
-    }*/
 
 	public static class UltimateAutoSmeltingModifier extends LootModifier{
 		public UltimateAutoSmeltingModifier(ILootCondition[] conditionsIn) {

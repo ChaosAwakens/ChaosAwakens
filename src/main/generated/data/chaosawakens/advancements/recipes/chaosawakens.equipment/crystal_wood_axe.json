@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_Block{chaosawakens:crystal_wood}": {
+    "has_crystal_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:crystal_wood"
+            "item": "chaosawakens:crystal_planks"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_Block{chaosawakens:crystal_wood}",
+      "has_crystal_planks",
       "has_the_recipe"
     ]
   ]

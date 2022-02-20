@@ -90,7 +90,7 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}:api")
     implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
-    implementation fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:${project.jer}")
+    implementation fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:${project.jeed}")
 
     implementation fg.deobf("curse.maven:configured-457570:${project.configured}")
     implementation fg.deobf("curse.maven:catalogue-459701:${project.catalogue}")

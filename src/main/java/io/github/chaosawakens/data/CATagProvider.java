@@ -47,6 +47,7 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(CATags.Blocks.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DUPLICATION_WOOD.get(), CABlocks.DEAD_DUPLICATION_WOOD.get());
 			this.tag(CATags.Blocks.PEACH_LOGS).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get(), CABlocks.PEACH_WOOD.get(), CABlocks.STRIPPED_PEACH_WOOD.get());
 			this.tag(CATags.Blocks.SKYWOOD_LOGS).add(CABlocks.SKYWOOD_LOG.get(), CABlocks.STRIPPED_SKYWOOD_LOG.get(), CABlocks.SKYWOOD_WOOD.get(), CABlocks.STRIPPED_SKYWOOD_WOOD.get());
+			this.tag(CATags.Blocks.CRYSTAL_LOGS).add(CABlocks.CRYSTAL_LOG.get(), CABlocks.CRYSTAL_WOOD.get());
 			this.tag(CATags.Blocks.CRYSTAL_LEAVES).add(CABlocks.RED_CRYSTAL_LEAVES.get(), CABlocks.GREEN_CRYSTAL_LEAVES.get(), CABlocks.YELLOW_CRYSTAL_LEAVES.get());
 			this.tag(CATags.Blocks.CRYSTAL_SAPLING).add(CABlocks.RED_CRYSTAL_SAPLING.get(), CABlocks.GREEN_CRYSTAL_SAPLING.get(), CABlocks.YELLOW_CRYSTAL_SAPLING.get());
 			this.tag(CATags.Blocks.RUBY_ORES).add(CABlocks.RUBY_ORE.get(), CABlocks.NETHERRACK_RUBY_ORE.get(), CABlocks.BLACKSTONE_RUBY_ORE.get());
@@ -60,14 +61,20 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(CATags.Blocks.BLACKLIST).add(Blocks.BEDROCK.getBlock());
 
 			this.tag(BlockTags.LOGS).addTags(CATags.Blocks.DUPLICATION_LOGS);
-			this.tag(BlockTags.LOGS_THAT_BURN).addTags(CATags.Blocks.APPLE_LOGS, CATags.Blocks.CHERRY_LOGS, CATags.Blocks.PEACH_LOGS, CATags.Blocks.SKYWOOD_LOGS);
-			this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.SKYWOOD_PLANKS.get(), CABlocks.MOLDY_PLANKS.get());
+			this.tag(BlockTags.LOGS_THAT_BURN).addTags(CATags.Blocks.APPLE_LOGS, CATags.Blocks.CHERRY_LOGS, CATags.Blocks.PEACH_LOGS, CATags.Blocks.SKYWOOD_LOGS, CATags.Blocks.CRYSTAL_LOGS);
+			this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.SKYWOOD_PLANKS.get(), CABlocks.MOLDY_PLANKS.get(), CABlocks.CRYSTAL_PLANKS.get());
 			this.tag(BlockTags.LEAVES).add(CABlocks.APPLE_LEAVES.get(), CABlocks.CHERRY_LEAVES.get(), CABlocks.PEACH_LEAVES.get(), CABlocks.SKYWOOD_LEAVES.get());
+			this.tag(BlockTags.SAPLINGS).add(CABlocks.APPLE_SAPLING.get(), CABlocks.CHERRY_SAPLING.get(), CABlocks.PEACH_SAPLING.get());
+			this.tag(BlockTags.WOODEN_SLABS).add(CABlocks.APPLE_SLAB.get(), CABlocks.CHERRY_SLAB.get(), CABlocks.PEACH_SLAB.get(), CABlocks.DUPLICATION_SLAB.get(), CABlocks.SKYWOOD_SLAB.get(), CABlocks.MOLDY_SLAB.get(), CABlocks.CRYSTAL_SLAB.get());
+			this.tag(BlockTags.WOODEN_STAIRS).add(CABlocks.APPLE_STAIRS.get(), CABlocks.CHERRY_STAIRS.get(), CABlocks.PEACH_STAIRS.get(), CABlocks.DUPLICATION_STAIRS.get(), CABlocks.SKYWOOD_STAIRS.get(), CABlocks.CRYSTAL_STAIRS.get());
 			this.tag(BlockTags.FENCE_GATES).add(CABlocks.APPLE_FENCE_GATE.get(), CABlocks.CHERRY_FENCE_GATE.get(), CABlocks.PEACH_FENCE_GATE.get(), CABlocks.DUPLICATION_FENCE_GATE.get(), CABlocks.SKYWOOD_FENCE_GATE.get(), CABlocks.CRYSTAL_FENCE_GATE.get());
 			this.tag(BlockTags.WOODEN_FENCES).add(CABlocks.APPLE_FENCE.get(), CABlocks.CHERRY_FENCE.get(), CABlocks.PEACH_FENCE.get(), CABlocks.DUPLICATION_FENCE.get(), CABlocks.SKYWOOD_FENCE.get(), CABlocks.MOLDY_FENCE.get(), CABlocks.CRYSTAL_FENCE.get());
+			this.tag(BlockTags.WOODEN_BUTTONS).add(CABlocks.APPLE_BUTTON.get(), CABlocks.CHERRY_BUTTON.get(), CABlocks.PEACH_BUTTON.get(), CABlocks.DUPLICATION_BUTTON.get(), CABlocks.SKYWOOD_BUTTON.get(), CABlocks.CRYSTAL_BUTTON.get());
+			this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(CABlocks.APPLE_PRESSURE_PLATE.get(), CABlocks.CHERRY_PRESSURE_PLATE.get(), CABlocks.PEACH_PRESSURE_PLATE.get(), CABlocks.DUPLICATION_PRESSURE_PLATE.get(), CABlocks.SKYWOOD_PRESSURE_PLATE.get(), CABlocks.CRYSTAL_PRESSURE_PLATE.get());
 			this.tag(BlockTags.SMALL_FLOWERS).add(CABlocks.CYAN_ROSE.get(), CABlocks.RED_ROSE.get(), CABlocks.PAEONIA.get());
 			this.tag(BlockTags.FLOWER_POTS).add(CABlocks.POTTED_CYAN_ROSE.get(), CABlocks.POTTED_RED_ROSE.get(), CABlocks.POTTED_PAEONIA.get());
 			this.tag(BlockTags.BEACON_BASE_BLOCKS).add(CABlocks.AMETHYST_BLOCK.get(), CABlocks.RUBY_BLOCK.get(), CABlocks.TIGERS_EYE_BLOCK.get(), CABlocks.TITANIUM_BLOCK.get(), CABlocks.URANIUM_BLOCK.get(), CABlocks.ALUMINUM_BLOCK.get(), CABlocks.COPPER_BLOCK.get(), CABlocks.TIN_BLOCK.get(), CABlocks.SILVER_BLOCK.get(), CABlocks.PLATINUM_BLOCK.get(), CABlocks.PINK_TOURMALINE_BLOCK.get(), CABlocks.CATS_EYE_BLOCK.get(), CABlocks.SUNSTONE_BLOCK.get(), CABlocks.BLOODSTONE_BLOCK.get(), CABlocks.AMETHYST_BLOCK.get());
+			this.tag(BlockTags.CROPS).add(CABlocks.RADISHES.get());
 
 			this.tag(Tags.Blocks.DIRT).add(CABlocks.CRYSTAL_GRASS_BLOCK.get());
 			this.tag(Tags.Blocks.STONE).add(CABlocks.KYANITE.get());
@@ -103,6 +110,7 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(CATags.Items.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get().asItem(), CABlocks.STRIPPED_DUPLICATION_LOG.get().asItem(), CABlocks.DEAD_DUPLICATION_LOG.get().asItem(), CABlocks.DUPLICATION_WOOD.get().asItem(), CABlocks.STRIPPED_DUPLICATION_WOOD.get().asItem(), CABlocks.DEAD_DUPLICATION_WOOD.get().asItem());
 			this.tag(CATags.Items.PEACH_LOGS).add(CABlocks.PEACH_LOG.get().asItem(), CABlocks.STRIPPED_PEACH_LOG.get().asItem(), CABlocks.PEACH_WOOD.get().asItem(), CABlocks.STRIPPED_PEACH_WOOD.get().asItem());
 			this.tag(CATags.Items.SKYWOOD_LOGS).add(CABlocks.SKYWOOD_LOG.get().asItem(), CABlocks.STRIPPED_SKYWOOD_LOG.get().asItem(), CABlocks.SKYWOOD_WOOD.get().asItem(), CABlocks.STRIPPED_SKYWOOD_WOOD.get().asItem());
+			this.tag(CATags.Items.CRYSTAL_LOGS).add(CABlocks.CRYSTAL_LOG.get().asItem(), CABlocks.CRYSTAL_WOOD.get().asItem());
 			this.tag(CATags.Items.CRYSTAL_LEAVES).add(CABlocks.RED_CRYSTAL_LEAVES.get().asItem(), CABlocks.GREEN_CRYSTAL_LEAVES.get().asItem(), CABlocks.YELLOW_CRYSTAL_LEAVES.get().asItem());
 			this.tag(CATags.Items.CRYSTAL_SAPLING).add(CABlocks.RED_CRYSTAL_SAPLING.get().asItem(), CABlocks.GREEN_CRYSTAL_SAPLING.get().asItem(), CABlocks.YELLOW_CRYSTAL_SAPLING.get().asItem());
 			this.tag(CATags.Items.PLANTS).add(CAItems.STRAWBERRY.get(), CAItems.CHERRIES.get(), CAItems.TOMATO.get(), CAItems.PEACH.get(), CAItems.CORN.get(), CAItems.LETTUCE.get(), CAItems.RADISH.get());
@@ -116,11 +124,15 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(CATags.Items.RUBY_ORES).add(CABlocks.RUBY_ORE.get().asItem(), CABlocks.NETHERRACK_RUBY_ORE.get().asItem(), CABlocks.BLACKSTONE_RUBY_ORE.get().asItem());
 
 			this.tag(ItemTags.LOGS).addTags(CATags.Items.DUPLICATION_LOGS);
-			this.tag(ItemTags.LOGS_THAT_BURN).addTags(CATags.Items.APPLE_LOGS, CATags.Items.CHERRY_LOGS, CATags.Items.PEACH_LOGS, CATags.Items.SKYWOOD_LOGS);
-			this.tag(ItemTags.PLANKS).add(CABlocks.APPLE_PLANKS.get().asItem(), CABlocks.CHERRY_PLANKS.get().asItem(), CABlocks.PEACH_PLANKS.get().asItem(), CABlocks.DUPLICATION_PLANKS.get().asItem(), CABlocks.SKYWOOD_PLANKS.get().asItem(), CABlocks.MOLDY_PLANKS.get().asItem());
+			this.tag(ItemTags.LOGS_THAT_BURN).addTags(CATags.Items.APPLE_LOGS, CATags.Items.CHERRY_LOGS, CATags.Items.PEACH_LOGS, CATags.Items.SKYWOOD_LOGS, CATags.Items.CRYSTAL_LOGS);
+			this.tag(ItemTags.PLANKS).add(CABlocks.APPLE_PLANKS.get().asItem(), CABlocks.CHERRY_PLANKS.get().asItem(), CABlocks.PEACH_PLANKS.get().asItem(), CABlocks.DUPLICATION_PLANKS.get().asItem(), CABlocks.SKYWOOD_PLANKS.get().asItem(), CABlocks.MOLDY_PLANKS.get().asItem(), CABlocks.CRYSTAL_PLANKS.get().asItem());
 			this.tag(ItemTags.LEAVES).add(CABlocks.APPLE_LEAVES.get().asItem(), CABlocks.CHERRY_LEAVES.get().asItem(), CABlocks.PEACH_LEAVES.get().asItem(), CABlocks.SKYWOOD_LEAVES.get().asItem());
 			this.tag(ItemTags.SAPLINGS).add(CABlocks.APPLE_SAPLING.get().asItem(), CABlocks.CHERRY_SAPLING.get().asItem(), CABlocks.PEACH_SAPLING.get().asItem());
+			this.tag(ItemTags.WOODEN_SLABS).add(CABlocks.APPLE_SLAB.get().asItem(), CABlocks.CHERRY_SLAB.get().asItem(), CABlocks.PEACH_SLAB.get().asItem(), CABlocks.DUPLICATION_SLAB.get().asItem(), CABlocks.SKYWOOD_SLAB.get().asItem(), CABlocks.MOLDY_SLAB.get().asItem(), CABlocks.CRYSTAL_SLAB.get().asItem());
+			this.tag(ItemTags.WOODEN_STAIRS).add(CABlocks.APPLE_STAIRS.get().asItem(), CABlocks.CHERRY_STAIRS.get().asItem(), CABlocks.PEACH_STAIRS.get().asItem(), CABlocks.DUPLICATION_STAIRS.get().asItem(), CABlocks.SKYWOOD_STAIRS.get().asItem(), CABlocks.CRYSTAL_STAIRS.get().asItem());
 			this.tag(ItemTags.WOODEN_FENCES).add(CABlocks.APPLE_FENCE.get().asItem(), CABlocks.CHERRY_FENCE.get().asItem(), CABlocks.PEACH_FENCE.get().asItem(), CABlocks.DUPLICATION_FENCE.get().asItem(), CABlocks.SKYWOOD_FENCE.get().asItem(), CABlocks.MOLDY_FENCE.get().asItem(), CABlocks.CRYSTAL_FENCE.get().asItem());
+			this.tag(ItemTags.WOODEN_BUTTONS).add(CABlocks.APPLE_BUTTON.get().asItem(), CABlocks.CHERRY_BUTTON.get().asItem(), CABlocks.PEACH_BUTTON.get().asItem(), CABlocks.DUPLICATION_BUTTON.get().asItem(), CABlocks.SKYWOOD_BUTTON.get().asItem(), CABlocks.CRYSTAL_BUTTON.get().asItem());
+			this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(CABlocks.APPLE_PRESSURE_PLATE.get().asItem(), CABlocks.CHERRY_PRESSURE_PLATE.get().asItem(), CABlocks.PEACH_PRESSURE_PLATE.get().asItem(), CABlocks.DUPLICATION_PRESSURE_PLATE.get().asItem(), CABlocks.SKYWOOD_PRESSURE_PLATE.get().asItem(), CABlocks.CRYSTAL_PRESSURE_PLATE.get().asItem());
 			this.tag(ItemTags.SMALL_FLOWERS).add(CABlocks.CYAN_ROSE.get().asItem(), CABlocks.RED_ROSE.get().asItem(), CABlocks.PAEONIA.get().asItem());
 			this.tag(ItemTags.ARROWS).add(CAItems.IRUKANDJI_ARROW.get());
 			this.tag(ItemTags.BEACON_PAYMENT_ITEMS).addTags(CATags.Items.GEMSTONES, CATags.Items.INGOTS, CATags.Items.MINERAL_LUMPS);

@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_Block{chaosawakens:aluminum_ore}": {
+    "has_aluminum_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_Block{chaosawakens:aluminum_ore}",
+      "has_aluminum_ore",
       "has_the_recipe"
     ]
   ]

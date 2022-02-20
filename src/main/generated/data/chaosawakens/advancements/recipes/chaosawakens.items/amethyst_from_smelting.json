@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_Block{chaosawakens:amethyst_ore}": {
+    "has_amethyst_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_Block{chaosawakens:amethyst_ore}",
+      "has_amethyst_ore",
       "has_the_recipe"
     ]
   ]

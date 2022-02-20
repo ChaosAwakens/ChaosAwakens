@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_Block{chaosawakens:tigers_eye_ore}": {
+    "has_tigers_eye_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_Block{chaosawakens:tigers_eye_ore}",
+      "has_tigers_eye_ore",
       "has_the_recipe"
     ]
   ]

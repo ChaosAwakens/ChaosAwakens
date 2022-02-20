@@ -25,6 +25,7 @@ public class CATags {
 		public static final ITag.INamedTag<Block> DUPLICATION_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":duplication_logs");
 		public static final ITag.INamedTag<Block> PEACH_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":peach_logs");
 		public static final ITag.INamedTag<Block> SKYWOOD_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":skywood_logs");
+		public static final ITag.INamedTag<Block> CRYSTAL_LOGS = BlockTags.bind(ChaosAwakens.MODID + ":crystal_logs");
 		public static final ITag.INamedTag<Block> CRYSTAL_LEAVES = BlockTags.bind(ChaosAwakens.MODID + ":crystal_leaves");
 		public static final ITag.INamedTag<Block> CRYSTAL_SAPLING = BlockTags.bind(ChaosAwakens.MODID + ":crystal_sapling");
 		public static final ITag.INamedTag<Block> RUBY_ORES = BlockTags.bind(ChaosAwakens.MODID + ":ruby_ores");
@@ -39,6 +40,7 @@ public class CATags {
 		public static final ITag.INamedTag<Item> DUPLICATION_LOGS = ItemTags.bind(ChaosAwakens.MODID + ":duplication_logs");
 		public static final ITag.INamedTag<Item> PEACH_LOGS = ItemTags.bind(ChaosAwakens.MODID + ":peach_logs");
 		public static final ITag.INamedTag<Item> SKYWOOD_LOGS = ItemTags.bind(ChaosAwakens.MODID + ":skywood_logs");
+		public static final ITag.INamedTag<Item> CRYSTAL_LOGS = ItemTags.bind(ChaosAwakens.MODID + ":crystal_logs");
 		public static final ITag.INamedTag<Item> CRYSTAL_LEAVES = ItemTags.bind(ChaosAwakens.MODID + ":crystal_leaves");
 		public static final ITag.INamedTag<Item> CRYSTAL_SAPLING = ItemTags.bind(ChaosAwakens.MODID + ":crystal_sapling");
 		public static final ITag.INamedTag<Item> ULTIMATE_GEAR_HANDLES = ItemTags.bind(ChaosAwakens.MODID + ":ultimate_gear_handles");
