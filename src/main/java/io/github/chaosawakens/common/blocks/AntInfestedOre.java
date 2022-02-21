@@ -8,11 +8,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.server.ServerWorld;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class AntInfestedOre extends OreBlock {

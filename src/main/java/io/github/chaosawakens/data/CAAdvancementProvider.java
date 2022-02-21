@@ -22,7 +22,6 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.crafting.ConditionalAdvancement;
 import org.apache.commons.lang3.Validate;
 
 import java.io.IOException;

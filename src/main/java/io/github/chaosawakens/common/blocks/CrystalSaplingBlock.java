@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.trees.Tree;
 import net.minecraft.pathfinding.PathType;
