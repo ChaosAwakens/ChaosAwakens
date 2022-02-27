@@ -81,10 +81,10 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 	protected static BlockPos getGround(ChunkGenerator chunkGen, IBlockReader column, int chunkX, int chunkZ) {
 		BlockPos.Mutable mutable = new BlockPos.Mutable((chunkX << 4) + 7, 124, (chunkZ << 4) + 7);
 		BlockState currState;
-		while( mutable.getY() > chunkGen.getSeaLevel()) {
+		while (mutable.getY() > chunkGen.getSeaLevel()) {
 			currState = column.getBlockState(mutable);
 			
-			if(!currState.canOcclude()) {
+			if (!currState.canOcclude()) {
 				mutable.move(Direction.DOWN);
 				continue;
 			} else if (column.getBlockState(mutable.offset(0, 3, 0)).getMaterial() == Material.AIR && currState.canOcclude()) {

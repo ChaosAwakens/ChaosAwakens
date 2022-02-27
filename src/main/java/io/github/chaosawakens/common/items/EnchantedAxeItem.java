@@ -3,11 +3,13 @@ package io.github.chaosawakens.common.items;
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 
 public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 	
@@ -46,6 +48,14 @@ public class EnchantedAxeItem extends AxeItem implements IAutoEnchantable {
 				}
 			items.add(stack);
 		}
+	}
+
+	@Override
+	public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+		if (CAConfig.COMMON.enableAutoEnchanting.get())
+			for (EnchantmentData enchant : enchantments) {
+				stack.enchant(enchant.enchantment, enchant.level);
+			}
 	}
 
 	@Override

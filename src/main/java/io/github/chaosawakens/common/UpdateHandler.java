@@ -2,13 +2,14 @@ package io.github.chaosawakens.common;
 
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.util.text.TextFormatting;
+import org.apache.maven.artifact.versioning.ArtifactVersion;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
 public class UpdateHandler {
-	private static final String currentVersion = ChaosAwakens.VERSION;
+	private static final ArtifactVersion currentVersion = ChaosAwakens.VERSION;
 	public static String updateStatus = "NULL";
 	public static boolean show = false;
 	private static String newestVersion;
@@ -16,8 +17,8 @@ public class UpdateHandler {
 	public static void init() {
 		getNewestVersion();
 		if (newestVersion != null) {
-			if (!newestVersion.equalsIgnoreCase(currentVersion))
-				if (!newestVersion.equalsIgnoreCase(currentVersion)) {
+			if (!newestVersion.equalsIgnoreCase(currentVersion.toString()))
+				if (!newestVersion.equalsIgnoreCase(currentVersion.toString())) {
 					show = true;
 					updateStatus = TextFormatting.WHITE + "Version " + TextFormatting.GOLD + newestVersion + TextFormatting.WHITE + " of " + TextFormatting.GOLD + TextFormatting.BOLD + ChaosAwakens.MODNAME + TextFormatting.WHITE + " is now available from " + TextFormatting.GOLD + "https://chaosawakens.github.io/?#downloadsDiv";
 				}

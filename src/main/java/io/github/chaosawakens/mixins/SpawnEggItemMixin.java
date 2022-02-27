@@ -29,7 +29,6 @@ import java.util.Objects;
 
 @Mixin(SpawnEggItem.class)
 public abstract class SpawnEggItemMixin {
-
     @Shadow
     public abstract EntityType<?> getType(@Nullable CompoundNBT compoundNBT);
 

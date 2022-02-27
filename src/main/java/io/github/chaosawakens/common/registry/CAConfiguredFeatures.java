@@ -28,7 +28,6 @@ import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 import java.util.OptionalInt;
 
 public class CAConfiguredFeatures {
-
 	// ORES
 	// GENERIC
 	public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_LAVA, States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(3));

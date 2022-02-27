@@ -17,6 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -25,25 +26,37 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.forgespi.language.IModInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.maven.artifact.versioning.ArtifactVersion;
 import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.Locale;
+import java.util.Optional;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {
 	public static final String MODID = "chaosawakens";
 	public static final String MODNAME = "Chaos Awakens";
-	public static final String VERSION = "0.9.1.0-preview3";
+	public static ArtifactVersion VERSION = null;
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	public ChaosAwakens() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
 
+		Optional<? extends ModContainer> opt = ModList.get().getModContainerById(MODID);
+		if (opt.isPresent()) {
+			IModInfo modInfo = opt.get().getModInfo();
+			VERSION = modInfo.getVersion();
+		} else {
+			LOGGER.warn("Cannot get version from mod info");
+		}
+
 		LOGGER.debug(MODNAME + " Version is: " + VERSION);
+		LOGGER.debug("Mod ID for " + MODNAME + " is: " + MODID);
 
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 
@@ -85,15 +98,13 @@ public class ChaosAwakens {
 		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
 		forgeBus.addListener(EventPriority.NORMAL, CAVanillaCompat::registerFurnaceFuel);
-	//	forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::registerReachModifiers);
+//		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::registerReachModifiers);
 		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
 		forgeBus.addListener(MiscEventHandler::onRegisterCommandEvent);
 		forgeBus.addListener(MiscEventHandler::onEntityJoin);
-	//	forgeBus.addListener(MiscEventHandler::onPlayerReach);
-	//	forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
-	//	forgeBus.addListener(EventPriority.HIGH,ChainsawEventSubscriber::onBreakSpeed);
-		//forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
-		//forgeBus.addListener(EventPriority.HIGH,ChainsawEventSubscriber::onBreakSpeed);
+//		forgeBus.addListener(MiscEventHandler::onPlayerReach);
+//		forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBlockBreak);
+//		forgeBus.addListener(EventPriority.HIGH, ChainsawEventSubscriber::onBreakSpeed);
 		forgeBus.addListener(LoginEventHandler::onPlayerLogin);
 		forgeBus.addListener(GiantEventHandler::onEntityJoin);
 		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);

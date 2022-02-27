@@ -3,9 +3,11 @@ package io.github.chaosawakens.common.items;
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 
 public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
     private final EnchantmentData[] enchantments;
@@ -25,6 +27,14 @@ public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
                 }
             items.add(stack);
         }
+    }
+
+    @Override
+    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        if (CAConfig.COMMON.enableAutoEnchanting.get())
+            for (EnchantmentData enchant : enchantments) {
+                stack.enchant(enchant.enchantment, enchant.level);
+            }
     }
 
     @Override

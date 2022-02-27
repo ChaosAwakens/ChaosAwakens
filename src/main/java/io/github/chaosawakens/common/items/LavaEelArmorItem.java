@@ -44,6 +44,14 @@ public class LavaEelArmorItem extends EnchantedArmorItem implements IAutoEnchant
     }
 
     @Override
+    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        if (CAConfig.COMMON.enableAutoEnchanting.get())
+            for (EnchantmentData enchant : enchantments) {
+                stack.enchant(enchant.enchantment, enchant.level);
+            }
+    }
+
+    @Override
     public boolean isFoil(ItemStack stack) {
         return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
     }

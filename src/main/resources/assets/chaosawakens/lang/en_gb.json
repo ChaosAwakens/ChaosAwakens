@@ -606,10 +606,8 @@
   "block.chaosawakens.unstable_ant_nest": "Unstable Ant Nest",
   "block.chaosawakens.termite_nest": "Termite Nest",
   "block.chaosawakens.crystal_termite_nest": "Crystal Termite Nest",
-  "item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
-  "item.chaosawakens.termite_infested_ore": "Termite Infested Ore",
-  "block.chaosawakens.red_ant_infested_ore": "Diamond Ore",
-  "block.chaosawakens.termite_infested_ore": "Emerald Ore",
+  "block.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
+  "block.chaosawakens.termite_infested_ore": "Termite Infested Ore",
 
   "block.chaosawakens.moldy_planks": "Moldy Wood Planks",
   "block.chaosawakens.moldy_slab": "Moldy Wood Slab",
