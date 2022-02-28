@@ -13,7 +13,7 @@ Due to drama and various mass reports by unknown sources, the mod was taken down
 
 ## FAQ
 ### Q: Will this mod be ported to version x.x.x or other mod loaders?
-**A:** We are only going to focus on *Forge* 1.16.5 and 1.18.1 (hopefully) as of now, **thus there will be no plans for backports or Fabric/Quilt releases**. However, if you want to port everything from the mod yourself or with a group of people, feel free to fork the project. You may not redistribute any version of the mod on other websites but if you request it we may put your version on [our website](https://chaosawakens.github.io/?#downloadsDiv).
+**A:** We are only going to focus on *Forge* 1.16.5 and 1.18.2 (hopefully) as of now, **thus there will be no plans for backports or Fabric/Quilt releases**. However, if you want to port everything from the mod yourself or with a group of people, feel free to fork the project. You may not redistribute any version of the mod on other websites but if you request it we may put your version on [our website](https://chaosawakens.github.io/?#downloadsDiv).
 
 ### Q: Who started/made this?
 **A:** This was started as an idea from the admins of the [*formerly named DangerZone modding Discord*](https://discord.gg/hs6FJEDtMd), about a small while after the offical *OreSpawn* update was cancelled due to social media drama. This became to grow in its own path, and hopefully it keeps doing so.
