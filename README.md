@@ -35,16 +35,18 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 **Therefore, not only we're not going to use the OreSpawn assets, we're also not going to provide, promote or endorse any resource pack that attempts to port them.**
 
 ## Credits/Staff Team
-**Project Lead:** WeirdNerd
+**Project Lead:** Funky Monk, WeirdNerd
 
-**Texturers:** Absolute Kun, BS Guy, ChromaticAeternus, DracoTyoshi, Franz Drameh, LuisRandomness, Memer Teamer, Pear, Phobos, Renato, Santispik3, SnakeMaster, Technocreeper, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
+**Animators:** Absolute Kun, Aqu, SnakeMaster
 
-**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Phobos, Renato, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
+**Builders:** Blackout, Funky Monk, Meme Man, TheLoneCyberman
+
+**Coders:** Blackout, Enderman_of_D00M, LuisRandomness, Meme Man, WeirdNerd
+
+**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Renato, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
 
 **Sound Designers:** mattster, WeirdNerd
 
-**Coders:** Aqu, Blackout, LuisRandomness, Meme Man, WeirdNerd
+**Texturers:** Absolute Kun, BS Guy, ChromaticAeternus, DracoTyoshi, LuisRandomness, Memer Teamer, Renato, Santispik3, SnakeMaster, Technocreeper, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
 
-**Builders:** Blackout, Meme Man, TheLoneCyberman
-
-**Former Members:** AlexanderTheNotSoGreat, Asbestosstar, Crosby, crydigo, ElectricKhan, FBG_Bolushi, HugoMage, Lymen, RandomUser, Sipilus, thesleepingdevil, Xahaan
+**Former Members:** AlexanderTheNotSoGreat, Crosby, crydigo, HugoMage, Lymen, Sipilus, thesleepingdevil
