@@ -14,7 +14,6 @@ Due to drama and various mass reports by unknown sources, the mod was taken down
 ## FAQ
 ### Q: Will this mod be ported to version x.x.x or other mod loaders?
 **A:** We are only going to focus on *Forge* 1.16.5 and 1.18.2 (hopefully) as of now, **thus there will be no plans for backports or Fabric/Quilt releases**. However, if you want to port everything from the mod yourself or with a group of people, feel free to fork the project. You may not redistribute any version of the mod on other websites but if you request it we may put your version on [our website](https://chaosawakens.github.io/?#downloadsDiv).
-
 ### Q: Who started/made this?
 **A:** This was started as an idea from the admins of the [*formerly named DangerZone modding Discord*](https://discord.gg/hs6FJEDtMd), about a small while after the offical *OreSpawn* update was cancelled due to social media drama. This became to grow in its own path, and hopefully it keeps doing so.
 
@@ -25,7 +24,7 @@ Unlike the original creator's belief, this has nothing to do with the Minecraft 
 
 Going through development of the mod, we may change things here and there, sometimes in a smaller scale, other times in a large scale. __We won't be porting the original *OreSpawn* for copyright reasons.__
 
-__If you want the original mod with no changes, please instead play the actual *OreSpawn* mod, via either [*DangerZone/DangerZone VR*](https://www.orespawn.com/download/), or [*the older versions for Minecraft V1.5-1.7*](https://dangerzone-archive.weebly.com/orespawn.html).__
+__If you want the original mod with no changes, please instead play the actual *OreSpawn* mod, via either [*DangerZone/DangerZone VR*](https://www.orespawn.com/download/), or [*the older versions for Minecraft V1.5-1.7*](https://web.archive.org/web/20220310224913/https://dangerzone-archive.weebly.com/orespawn.html).__
 
 ### Q: Why do the assets look so different from *OreSpawn*? If not, will there be a way to get them?
 The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www.youtube.com/channel/UC_Tsf31uosncmWCICYO52Dw), has commented on our former CurseForge page to not use the assets that were created for his mod, as seen in the image below.
