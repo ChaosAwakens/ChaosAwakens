@@ -35,6 +35,9 @@ public class FoodComponents {
     public static final FoodComponent SHINY_MELON_SLICE;
     public static final FoodComponent SHINY_MUSHROOM_STEW;
     public static final FoodComponent SHINY_STEAK;
+    public static final FoodComponent CANDY_CANE;
+    public static final FoodComponent CRYSTAL_APPLE;
+    public static final FoodComponent BUTTER;
 
     private static FoodComponent.Builder build(int hunger, float saturation) { return build(hunger, saturation, false); }
     private static FoodComponent.Builder build(int hunger, float saturation, boolean meat) { return build(hunger, saturation, meat, false); }
@@ -48,6 +51,9 @@ public class FoodComponents {
     }
 
     static {
+        CRYSTAL_APPLE = build(14, 1.0f, true, false, true).statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 150, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 150, 0), 1.0f).build(); // add
+        BUTTER = build(1, 1.0f).build(); // add
+        CANDY_CANE = build(2, 0.15f, false, false, true).statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 400, 1), 1.0f).build();
         RAW_CORNDOG = build(4, 0.6f).build();
         COOKED_CORNDOG = build(14, 1.5f).build();
         RAW_BACON = build(8, 1.5f, true).build();

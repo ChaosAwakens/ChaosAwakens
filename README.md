@@ -1,6 +1,10 @@
 # Chaos Awakens
 Chaos Awakens is a remaster of both the old Minecraft/[DangerZone](http://dangerzonegame.net/) mod [OreSpawn](https://www.dangerzonegame.net/dz-21-mods.html) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
 
+
+⚠️ This  brantch is unmaintained by the devs as of now go to the main forge brantch
+
+
 ## Download
 Due to recent drama and various mass reports by unknown sources, the mod was taken down from CurseForge until further notice. Please do **not** harass **anyone** in the CurseForge moderation team or **any** competitor mod developer for what you think they did. They are humans and we are too, and we all make mistakes.
 

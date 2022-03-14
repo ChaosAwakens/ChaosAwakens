@@ -137,6 +137,9 @@ public class Items implements ModInitializer {
     public static final Item GOLDEN_APPLE_COW_EGG;
     public static final Item IRON_GOLEM_EGG;
     public static final Item SNOW_GOLEM_EGG;
+    public static final Item CANDY_CANE;
+    public static final Item CRYSTAL_APPLE;
+    public static final Item BUTTER;
 
     public static ArmorItem register(String identifier, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot) {
         return Registry.register(Registry.ITEM, new Identifier(ChaosAwakens.modID, identifier), new ArmorItem(armorMaterial, equipmentSlot, new FabricItemSettings().group(ItemGroup.COMBAT)));
@@ -176,6 +179,10 @@ public class Items implements ModInitializer {
     }
 
     static {
+        BUTTER = register("butter");
+        WATER_DRAGON_SCALE = register("waterdragonscale");
+        CRYSTAL_APPLE = registerFood("crystal_app", FoodComponents.CRYSTAL_APPLE);
+        CANDY_CANE = registerFood("candy_cane", FoodComponents.CANDY_CANE);
         RAW_CORNDOG = registerFood("corndog", FoodComponents.RAW_CORNDOG);
         COOKED_CORNDOG = registerFood("cooked_corndog", FoodComponents.COOKED_CORNDOG);
         RAW_BACON = registerFood("bacon", FoodComponents.RAW_BACON);

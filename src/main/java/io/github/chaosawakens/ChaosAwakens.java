@@ -19,6 +19,8 @@ public class ChaosAwakens implements ModInitializer, ClientModInitializer {
         public static final String modID = "chaosawakens";
         public static Config config;
 
+       // public static final Item CANDY_CANE = new FabricItem(new Item.Settings().group(ItemGroup.MISC).food(new FoodComponent.Builder().saturationModifier(2f).snack().alwaysEdible()));
+
         public static final Logger LOGGER = LogManager.getLogger();
 
         @Environment(EnvType.CLIENT)
@@ -29,6 +31,7 @@ public class ChaosAwakens implements ModInitializer, ClientModInitializer {
 
         @Override
         public void onInitialize() {
+                
                 GeckoLibMod.DISABLE_IN_DEV = true;
                 GeckoLib.initialize();
                 AutoConfig.register(Config.class, JanksonConfigSerializer::new);
