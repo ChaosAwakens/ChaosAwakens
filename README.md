@@ -13,7 +13,8 @@ Due to drama and various mass reports by unknown sources, the mod was taken down
 
 ## FAQ
 ### Q: Will this mod be ported to version x.x.x or other mod loaders?
-**A:** We are only going to focus on *Forge* 1.16.5 and 1.18.2 (hopefully) as of now, **thus there will be no plans for backports or Fabric/Quilt releases**. However, if you want to port everything from the mod yourself or with a group of people, feel free to fork the project. You may not redistribute any version of the mod on other websites but if you request it we may put your version on [our website](https://chaosawakens.github.io/?#downloadsDiv).
+**A:** We are only going to focus on *Forge* 1.16.5 and 1.18.2 (hopefully) as of now, **thus there will be no plans for backports or Fabric/Quilt releases**. However, if you want to port everything from the mod yourself or with a group of people, feel free to fork the project. You may not redistribute any version of the mod on other websites but if you request it by contacting/private messaging one of the owners or devs on [our discord sever](https://discord.gg/TmVqnT5Zmj)  we may put your version on [our website](https://chaosawakens.github.io/?#downloadsDiv).
+
 ### Q: Who started/made this?
 **A:** This was started as an idea from the admins of the [*formerly named DangerZone modding Discord*](https://discord.gg/hs6FJEDtMd), about a small while after the offical *OreSpawn* update was cancelled due to social media drama. This became to grow in its own path, and hopefully it keeps doing so.
 
@@ -26,7 +27,7 @@ Going through development of the mod, we may change things here and there, somet
 
 __If you want the original mod with no changes, please instead play the actual *OreSpawn* mod, via either [*DangerZone/DangerZone VR*](https://www.orespawn.com/download/), or [*the older versions for Minecraft V1.5-1.7*](https://web.archive.org/web/20220310224913/https://dangerzone-archive.weebly.com/orespawn.html).__
 
-### Q: Why do the assets look so different from *OreSpawn*? If not, will there be a way to get them?
+### Q: Why do the assets look so different from the original *OreSpawn* mod? If not, will there be a way to get them?
 The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www.youtube.com/channel/UC_Tsf31uosncmWCICYO52Dw), has commented on our former CurseForge page to not use the assets that were created for his mod, as seen in the image below.
 
 ![](https://cdn.discordapp.com/attachments/836006424781914154/846513645580189706/unknown.png)
@@ -49,3 +50,5 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 **Texturers:** Absolute Kun, BS Guy, ChromaticAeternus, DracoTyoshi, LuisRandomness, Memer Teamer, Renato, Santispik3, SnakeMaster, Technocreeper, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
 
 **Former Members:** AlexanderTheNotSoGreat, Crosby, crydigo, HugoMage, Lymen, Sipilus, thesleepingdevil
+
+if it weren't for these people it would not be possible to get the mod as far as it is ❤️devs
