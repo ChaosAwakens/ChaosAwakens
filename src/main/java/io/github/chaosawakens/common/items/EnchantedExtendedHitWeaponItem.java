@@ -1,16 +1,22 @@
 package io.github.chaosawakens.common.items;
 
+import com.google.common.collect.ImmutableMultimap;
+
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.fml.RegistryObject;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -22,6 +28,10 @@ public class EnchantedExtendedHitWeaponItem extends ExtendedHitWeaponItem implem
 
     public EnchantedExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn, EnchantmentData[] enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
+        ImmutableMultimap.Builder<RegistryObject<Attribute>, AttributeModifier> builder = ImmutableMultimap.builder();
+//		if (ForgeMod.REACH_DISTANCE.isPresent()) {
+        	builder.put(ForgeMod.REACH_DISTANCE, new AttributeModifier(REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
+ //       } 
         this.enchantments = enchantments;
     }
 

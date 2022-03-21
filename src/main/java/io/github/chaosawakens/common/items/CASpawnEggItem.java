@@ -14,7 +14,8 @@ public class CASpawnEggItem extends SpawnEggItem {
     protected final Supplier<? extends EntityType<?>> typeGetter;
     private final boolean isEnchanted;
 
-    public CASpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties, boolean isEnchanted) {
+    @SuppressWarnings("deprecation")
+	public CASpawnEggItem(Supplier<? extends EntityType<?>> typeIn, Properties properties, boolean isEnchanted) {
         super(null, 0xFFFFFFF, 0xFFFFFFF, properties);
         this.typeGetter = typeIn;
         this.isEnchanted = isEnchanted;

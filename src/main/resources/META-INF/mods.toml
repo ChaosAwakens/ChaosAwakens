@@ -9,8 +9,9 @@ modId="chaosawakens"
 version="${file.jarVersion}"
 displayName="Chaos Awakens"
 authors="Chaos Team"
-description='''Relive the old Orespawn from 1.7.10 in newer Minecraft versions!'''
+description='''Relive the old OreSpawn mod in newer Minecraft versions!'''
 itemIcon="chaosawakens:ultimate_sword"
+logoFile="logo.png"
 configBackground="chaosawakens:textures/gui/advancement_bg.png"
 
 [[dependencies.chaosawakens]]

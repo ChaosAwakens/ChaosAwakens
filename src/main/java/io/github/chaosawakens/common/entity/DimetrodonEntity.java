@@ -98,8 +98,8 @@ public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerab
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
-        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0, true));
+        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.6F));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.5, true));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomWalkingGoal(this, 1.0));
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));

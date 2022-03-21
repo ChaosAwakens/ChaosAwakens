@@ -1,7 +1,9 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.*;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
@@ -280,6 +282,14 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("cyan_rose", chaosRL("cyan_rose"));
 		this.cross("red_rose", chaosRL("red_rose"));
 		this.cross("paeonia", chaosRL("paeonia"));
+		this.cross("blue_crystal_fan", chaosRL("blue_crystal_fan"));
+		this.cross("green_crystal_fan", chaosRL("green_crystal_fan"));
+		this.cross("red_crystal_fan", chaosRL("red_crystal_fan"));
+		this.cross("yellow_crystal_fan", chaosRL("red_crystal_fan"));
+		this.cross("blue_crystal_flower", chaosRL("blue_crystal_flower"));
+		this.cross("green_crystal_flower", chaosRL("green_crystal_flower"));
+		this.cross("red_crystal_flower", chaosRL("red_crystal_flower"));
+		this.cross("yellow_crystal_flower", chaosRL("yellow_crystal_flower"));
 
 		this.gateBlock("acacia_gate_block", chaosRL("gate_block_acacia"), chaosRL("gate_block_top"));
 		this.gateBlock("birch_gate_block", chaosRL("gate_block_birch"), chaosRL("gate_block_top"));

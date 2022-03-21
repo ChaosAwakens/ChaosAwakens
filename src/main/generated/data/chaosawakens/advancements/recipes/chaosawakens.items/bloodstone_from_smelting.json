@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_bloodstone_ore": {
+    "has_Block{chaosawakens:bloodstone_ore}": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_bloodstone_ore",
+      "has_Block{chaosawakens:bloodstone_ore}",
       "has_the_recipe"
     ]
   ]

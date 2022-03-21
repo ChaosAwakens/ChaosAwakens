@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_cyan_rose": {
+    "has_Block{chaosawakens:cyan_rose}": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_cyan_rose",
+      "has_Block{chaosawakens:cyan_rose}",
       "has_the_recipe"
     ]
   ]

@@ -28,6 +28,7 @@ import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 import java.util.OptionalInt;
 
 public class CAConfiguredFeatures {
+
 	// ORES
 	// GENERIC
 	public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_LAVA, States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(3));
@@ -223,7 +224,10 @@ public class CAConfiguredFeatures {
 
 	// FLOWERS
 	public static final ConfiguredFeature<?, ?> CHAOS_FLOWER_DEFAULT = register("chaos_flower_default", Feature.FLOWER.configured(Configs.CHAOS_FLOWER_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
-
+	
+	//GRASS
+	public static final ConfiguredFeature<?, ?> CRYSTAL_GRASS = register("crystal_grass", Feature.RANDOM_PATCH.configured(Configs.CRYSTAL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(6));
+	
 	// CROPS
 	public static final ConfiguredFeature<?, ?> PATCH_STRAWBERRY_BUSH = register("patch_strawberry_bush", Feature.RANDOM_PATCH.configured(Configs.STRAWBERRY_BUSH_CONFIG));
 	public static final ConfiguredFeature<?, ?> PATCH_STRAWBERRY_SPARSE = register("patch_strawberry_sparse", PATCH_STRAWBERRY_BUSH.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
@@ -279,7 +283,7 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> UNSTABLE_ANT_NEST = register("nest_unstable_ant", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.GRASS_BLOCK, States.UNSTABLE_ANT_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))));
 	public static final ConfiguredFeature<?, ?> TERMITE_NEST = register("nest_termite", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.GRASS_BLOCK, States.TERMITE_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))));
 
-	public static final ConfiguredFeature<?, ?> CRYSTAL_TERMITE_NEST = register("nest_crystal_termite", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.CRYSTAL_GRASS_BLOCK, States.CRYSTAL_TERMITE_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))).count(6));
+	public static final ConfiguredFeature<?, ?> CRYSTAL_TERMITE_NEST = register("nest_crystal_termite", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.CRYSTAL_GRASS_BLOCK, States.CRYSTAL_TERMITE_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))));
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		CommonSetupEvent.configFeatures.add(new FeatureWrapper(key, configuredFeature));
@@ -288,6 +292,8 @@ public class CAConfiguredFeatures {
 
 	public static final class States {
 		private static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.defaultBlockState();
+		private static final BlockState CRYSTAL_GRASS = CABlocks.CRYSTAL_GRASS.get().defaultBlockState();
+		private static final BlockState TALL_CRYSTAL_GRASS = CABlocks.TALL_CRYSTAL_GRASS.get().defaultBlockState();
 		private static final BlockState APPLE_LOG = CABlocks.APPLE_LOG.get().defaultBlockState();
 		private static final BlockState CHERRY_LOG = CABlocks.CHERRY_LOG.get().defaultBlockState();
 		private static final BlockState PEACH_LOG = CABlocks.PEACH_LOG.get().defaultBlockState();
@@ -440,10 +446,11 @@ public class CAConfiguredFeatures {
 		private static final BlockState CRYSTAL_GRASS_BLOCK = CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState();
 		private static final BlockState CRYSTAL_TERMITE_NEST = CABlocks.CRYSTAL_TERMITE_NEST.get().defaultBlockState();
 	}
-
+//the w
 	public static final class Configs {
 		public static final BlockClusterFeatureConfig CHAOS_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.CYAN_ROSE, 2).add(States.RED_ROSE, 2).add(States.PAEONIA, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig STRAWBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.STRAWBERRY_BUSH), SimpleBlockPlacer.INSTANCE)).tries(64).whitelist(ImmutableSet.of(States.GRASS_BLOCK.getBlock())).noProjection().build();
+		public static final BlockClusterFeatureConfig CRYSTAL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.CRYSTAL_GRASS, 8).add(States.TALL_CRYSTAL_GRASS, 4), SimpleBlockPlacer.INSTANCE)).tries(128).whitelist(ImmutableSet.of(States.CRYSTAL_GRASS_BLOCK.getBlock())).noProjection().build();
 	}
 
 	public static final class Placements {

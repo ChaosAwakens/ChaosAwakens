@@ -37,6 +37,7 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), EnchantedGoldenCarrotPigEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.DIMETRODON.get(), DimetrodonEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.GAZELLE.get(), GazelleEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.STINK_BUG.get(), StinkBugEntity.setCustomAttributes().build());

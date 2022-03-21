@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:acacia_gate_block"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

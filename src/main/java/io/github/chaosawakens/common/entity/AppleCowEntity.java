@@ -37,7 +37,7 @@ import java.time.temporal.ChronoField;
 
 public class AppleCowEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
+    private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
 
     public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
         super(type, worldIn);

@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_crystal_energy": {
+    "has_Block{chaosawakens:crystal_energy}": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -35,7 +35,7 @@
   },
   "requirements": [
     [
-      "has_crystal_energy",
+      "has_Block{chaosawakens:crystal_energy}",
       "has_crystal_shard",
       "has_the_recipe"
     ]

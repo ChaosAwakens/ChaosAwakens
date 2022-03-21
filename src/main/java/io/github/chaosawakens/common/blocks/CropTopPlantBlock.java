@@ -93,7 +93,7 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 		worldIn.setBlockAndUpdate(pos, this.getBodyBlock().defaultBlockState());
 		targetPos = targetPos.relative(this.growthDirection);
 		worldIn.setBlockAndUpdate(targetPos, state.setValue(GROWTH, 0).setValue(AGE, state.getValue(AGE)+1));
-		if (j > this.getMaxHeight()) {
+		if (j == this.getMaxHeight()) {
 			worldIn.setBlockAndUpdate(targetPos, state.setValue(GROWTH, 0).setValue(AGE, state.getValue(AGE)+0));
 		}
 	}

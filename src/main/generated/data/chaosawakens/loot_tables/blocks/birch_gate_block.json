@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:birch_gate_block"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

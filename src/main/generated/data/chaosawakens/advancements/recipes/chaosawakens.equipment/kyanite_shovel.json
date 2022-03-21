@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_kyanite": {
+    "has_Block{chaosawakens:kyanite}": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_kyanite",
+      "has_Block{chaosawakens:kyanite}",
       "has_the_recipe"
     ]
   ]

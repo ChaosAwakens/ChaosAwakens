@@ -36,14 +36,6 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
     }
 
     @Override
-    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-        if (CAConfig.COMMON.enableAutoEnchanting.get())
-            for (EnchantmentData enchant : enchantments) {
-                stack.enchant(enchant.enchantment, enchant.level);
-            }
-    }
-
-    @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getItemInHand(handIn);
         if (playerIn.fishing != null) {

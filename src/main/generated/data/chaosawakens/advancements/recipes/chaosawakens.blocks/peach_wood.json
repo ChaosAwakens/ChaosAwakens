@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_peach_log": {
+    "has_Block{chaosawakens:peach_log}": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_peach_log",
+      "has_Block{chaosawakens:peach_log}",
       "has_the_recipe"
     ]
   ]

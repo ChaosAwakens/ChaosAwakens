@@ -114,6 +114,13 @@ public class CAEntityTypes {
                     .sized(0.6F, 0.6F) // HitBox Size ()
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "frog").toString()));
+    
+    //Gazelle
+    public static final RegistryObject<EntityType<GazelleEntity>> GAZELLE = ENTITY_TYPES.register("gazelle", 
+    		() -> EntityType.Builder.of(GazelleEntity::new, EntityClassification.CREATURE)
+    		.sized(0.6F, 1.3F)
+    		.clientTrackingRange(10)
+    		.build(new ResourceLocation(ChaosAwakens.MODID, "gazelle").toString()));
 
     // Apple Cows
     public static final RegistryObject<EntityType<AppleCowEntity>> APPLE_COW = ENTITY_TYPES.register("apple_cow",
@@ -140,17 +147,17 @@ public class CAEntityTypes {
     // Carrot Pigs
     public static final RegistryObject<EntityType<CarrotPigEntity>> CARROT_PIG = ENTITY_TYPES.register("carrot_pig",
             () -> EntityType.Builder.of(CarrotPigEntity::new, EntityClassification.CREATURE)
-                    .sized(0.9F, 0.9F)
+                    .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "carrot_pig").toString()));
     public static final RegistryObject<EntityType<GoldenCarrotPigEntity>> GOLDEN_CARROT_PIG = ENTITY_TYPES.register("golden_carrot_pig",
             () -> EntityType.Builder.of(GoldenCarrotPigEntity::new, EntityClassification.CREATURE)
-                    .sized(0.9F, 0.9F)
+                    .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "golden_carrot_pig").toString()));
     public static final RegistryObject<EntityType<EnchantedGoldenCarrotPigEntity>> ENCHANTED_GOLDEN_CARROT_PIG = ENTITY_TYPES.register("enchanted_golden_carrot_pig",
             () -> EntityType.Builder.of(EnchantedGoldenCarrotPigEntity::new, EntityClassification.CREATURE)
-                    .sized(0.9F, 0.9F)
+                    .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_carrot_pig").toString()));
 

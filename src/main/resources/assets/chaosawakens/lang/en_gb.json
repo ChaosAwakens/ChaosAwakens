@@ -606,8 +606,10 @@
   "block.chaosawakens.unstable_ant_nest": "Unstable Ant Nest",
   "block.chaosawakens.termite_nest": "Termite Nest",
   "block.chaosawakens.crystal_termite_nest": "Crystal Termite Nest",
-  "block.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
-  "block.chaosawakens.termite_infested_ore": "Termite Infested Ore",
+  "item.chaosawakens.red_ant_infested_ore": "Red Ant Infested Ore",
+  "item.chaosawakens.termite_infested_ore": "Termite Infested Ore",
+  "block.chaosawakens.red_ant_infested_ore": "Diamond Ore",
+  "block.chaosawakens.termite_infested_ore": "Emerald Ore",
 
   "block.chaosawakens.moldy_planks": "Moldy Wood Planks",
   "block.chaosawakens.moldy_slab": "Moldy Wood Slab",
@@ -638,7 +640,6 @@
   "block.chaosawakens.tomato_plant": "Tomato Plant",
   "block.chaosawakens.lettuce_plant": "Lettuce Plant",
   "block.chaosawakens.strawberry_plant": "Strawberry Bush",
-  "block.chaosawakens.radishes": "Radishes",
 
   "block.chaosawakens.apple_sapling": "Apple Sapling",
   "block.chaosawakens.apple_log": "Apple Log",
@@ -742,7 +743,7 @@
   "item.chaosawakens.platinum_coin": "Platinum Coin",
 
   "misc.chaosawakens.empty_inventory": "Empty your inventory first!",
-  "misc.chaosawakens.inaccessible_dimension": "This part of the anthill seems blocked off... (This Dimension has not been implemented yet!)",
+  "misc.chaosawakens.inaccessible_dimension": "This part of the anthill seems to be blocked off... (This Dimension has not been implemented yet!)",
 
   "tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info.",
   "tooltip.chaosawakens.ruby": "Bright red gem of a fire of a burning desire",

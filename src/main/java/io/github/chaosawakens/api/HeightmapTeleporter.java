@@ -32,14 +32,14 @@ public class HeightmapTeleporter implements ITeleporter {
 
 		// Load target chunk
 		targetWorld.getChunk(new BlockPos(newPosVector));
-		entity.forcedLoading = true;
+		
 		// Get a valid Y pos for the targeted block
 		BlockPos targetPos;
 		int tries = 0;
 		do {
 			targetPos = new BlockPos(newPosVector.x(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) newPosVector.x(), (int) newPosVector.z()), newPosVector.z());
 			tries++;
-		} while (targetPos.getY() <= 0 && tries < 30);
+		} while (targetPos.getY() <= 0 && tries < 30 && !entity.inChunk);
 
 		return new PortalInfo(new Vector3d(newPosVector.x(), targetPos.getY(), newPosVector.z()), new Vector3d(0, 0, 0), entity.yRot, entity.xRot);
 	}
@@ -56,6 +56,6 @@ public class HeightmapTeleporter implements ITeleporter {
 	
 	@Override
 	public Entity placeEntity(Entity entity, ServerWorld currentWorld, ServerWorld destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
-		return ITeleporter.super.placeEntity(entity, currentWorld, destWorld, yaw, repositionEntity);
+		return repositionEntity.apply(true);
 	}
 }

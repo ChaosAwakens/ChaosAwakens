@@ -34,7 +34,7 @@ public class MiscEventHandler {
 		CommandDispatcher<CommandSource> commandDispatcher = event.getDispatcher();
 		CACommand.register(commandDispatcher);
 	}
-
+	
 	public static void livingDeathEvent(LivingDeathEvent event) {
 		if (CAConfig.COMMON.enableDragonEggRespawns.get()) {
 			if (event.getEntityLiving() == null)return;
@@ -50,15 +50,15 @@ public class MiscEventHandler {
 			}
 		}
 	}
-
+	
 	public static void onMobDrops(LivingDropsEvent event) {
 		ItemStack stack;
 		ItemEntity drop;
-
+		
 		// ENDER DRAGON
 		if (event.getEntityLiving() instanceof EnderDragonEntity) {
 			EnderDragonEntity dragon = (EnderDragonEntity) event.getEntityLiving();
-
+			
 			// Drop #1: Ender Dragon Scales
 			int amount = 8 + (int) (Math.random() * 6) + (int) (Math.random() * event.getLootingLevel() * 4);
 			if (Objects.requireNonNull(dragon.getDragonFight()).hasPreviouslyKilledDragon())
@@ -66,7 +66,7 @@ public class MiscEventHandler {
 			stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
 			drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
 			event.getDrops().add(drop);
-
+			
 			// Drop #2: Ender Dragon Head
 			double chance = 0.1D + event.getLootingLevel() * 0.1D;
 			if (Math.random() < chance && CAConfig.COMMON.enderDragonHeadDrop.get()) {
@@ -76,7 +76,7 @@ public class MiscEventHandler {
 			}
 		}
 	}
-
+	
 	public static void onEntityJoin(EntityJoinWorldEvent event) {
 		// Make villagers afraid of our entities
 		if (event.getEntity() instanceof VillagerEntity) {

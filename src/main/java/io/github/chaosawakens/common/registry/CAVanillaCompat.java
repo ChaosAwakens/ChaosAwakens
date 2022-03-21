@@ -6,10 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.FireBlock;
 import net.minecraft.item.AxeItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
-import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class CAVanillaCompat {
     public static void setup() {
@@ -64,16 +61,6 @@ public class CAVanillaCompat {
         registerFlammable(CABlocks.SKYWOOD_STAIRS.get(), 5, 20);
         registerFlammable(CABlocks.SKYWOOD_FENCE.get(), 5, 20);
         registerFlammable(CABlocks.SKYWOOD_FENCE_GATE.get(), 5, 20);
-        registerFlammable(CABlocks.RED_CRYSTAL_LEAVES.get(), 30, 60);
-        registerFlammable(CABlocks.GREEN_CRYSTAL_LEAVES.get(), 30, 60);
-        registerFlammable(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), 30, 60);
-        registerFlammable(CABlocks.CRYSTAL_LOG.get(), 5, 5);
-        registerFlammable(CABlocks.CRYSTAL_WOOD.get(), 5, 5);
-        registerFlammable(CABlocks.CRYSTAL_PLANKS.get(), 5, 20);
-        registerFlammable(CABlocks.CRYSTAL_SLAB.get(), 5, 20);
-        registerFlammable(CABlocks.CRYSTAL_STAIRS.get(), 5, 20);
-        registerFlammable(CABlocks.CRYSTAL_FENCE.get(), 5, 20);
-        registerFlammable(CABlocks.CRYSTAL_FENCE_GATE.get(), 5, 20);
         registerFlammable(CABlocks.CYAN_ROSE.get(), 60, 100);
         registerFlammable(CABlocks.RED_ROSE.get(), 60, 100);
         registerFlammable(CABlocks.PAEONIA.get(), 60, 100);
@@ -104,13 +91,6 @@ public class CAVanillaCompat {
         registerCompostable(0.3F, CABlocks.PEACH_SAPLING.get());
         registerCompostable(0.3F, CABlocks.PEACH_LEAVES.get());
         registerCompostable(0.3F, CABlocks.SKYWOOD_LEAVES.get());
-        registerCompostable(0.3F, CABlocks.RED_CRYSTAL_SAPLING.get());
-        registerCompostable(0.3F, CABlocks.RED_CRYSTAL_LEAVES.get());
-        registerCompostable(0.3F, CABlocks.GREEN_CRYSTAL_SAPLING.get());
-        registerCompostable(0.3F, CABlocks.GREEN_CRYSTAL_LEAVES.get());
-        registerCompostable(0.3F, CABlocks.YELLOW_CRYSTAL_SAPLING.get());
-        registerCompostable(0.3F, CABlocks.YELLOW_CRYSTAL_LEAVES.get());
-        registerCompostable(0.3F, CABlocks.SKYWOOD_LEAVES.get());
         registerCompostable(0.5F, CABlocks.TUBE_WORM.get());
         registerCompostable(0.65F, CABlocks.CYAN_ROSE.get());
         registerCompostable(0.65F, CABlocks.RED_ROSE.get());
@@ -129,27 +109,5 @@ public class CAVanillaCompat {
     public static void registerFlammable(Block blockIn, int encouragement, int flammability) {
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
         fireblock.setFlammable(blockIn, encouragement, flammability);
-    }
-
-    @SubscribeEvent
-    public static void registerFurnaceFuel(FurnaceFuelBurnTimeEvent event) {
-        ItemStack fuel = event.getItemStack();
-        if (fuel.getItem() == CABlocks.CRYSTAL_ENERGY.get().asItem()) {
-            event.setBurnTime(3200);
-        } else if (fuel.getItem() == CABlocks.CRYSTAL_CRAFTING_TABLE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.MOLDY_FENCE.get().asItem() || fuel.getItem() == CABlocks.PEACH_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.SKYWOOD_FENCE.get().asItem() || fuel.getItem() == CABlocks.CRYSTAL_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.APPLE_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.CHERRY_FENCE_GATE.get().asItem() ||
-                fuel.getItem() == CABlocks.DUPLICATION_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.PEACH_FENCE_GATE.get().asItem() ||
-                fuel.getItem() == CABlocks.SKYWOOD_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.CRYSTAL_FENCE_GATE.get().asItem()) {
-            event.setBurnTime(300);
-        } else if (fuel.getItem() == CAItems.CRYSTAL_WOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_SWORD.get() ||
-                fuel.getItem() == CAItems.CRYSTAL_WOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_AXE.get() ||
-                fuel.getItem() == CAItems.CRYSTAL_WOOD_PICKAXE.get()) {
-            event.setBurnTime(200);
-        } else if (fuel.getItem() == CAItems.CRYSTAL_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
-            event.setBurnTime(100);
-        }
     }
 }

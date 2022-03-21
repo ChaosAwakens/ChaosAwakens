@@ -11,10 +11,12 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
@@ -61,8 +63,9 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 12.0D)
+                .add(Attributes.MAX_HEALTH, 6)
                 .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.JUMP_STRENGTH, 2.0D)
                 .add(Attributes.FOLLOW_RANGE, 8.0D);
     }
 
@@ -151,6 +154,24 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
         data.addAnimationController(new AnimationController<>(this, "frogcontroller", 0, this::predicate));
     }
 
+    @Override
+    protected void jumpFromGround() {
+        float f = this.getJumpPower() + 1.0F;
+        if (this.hasEffect(Effects.JUMP)) {
+           f += 0.1F * (float)(this.getEffect(Effects.JUMP).getAmplifier() + 1);
+        }
+
+        Vector3d vector3d = this.getDeltaMovement();
+        this.setDeltaMovement(vector3d.x, (double)f, vector3d.z);
+        if (this.isSprinting()) {
+           float f1 = this.yRot * ((float)Math.PI / 180F);
+           this.setDeltaMovement(this.getDeltaMovement().add((double)(-MathHelper.sin(f1) * 0.2F), 0.0D, (double)(MathHelper.cos(f1) * 0.2F)));
+        }
+
+        this.hasImpulse = true;
+        net.minecraftforge.common.ForgeHooks.onLivingJump(this);
+    }
+    
     @Override
     public AnimationFactory getFactory() {
         return this.factory;

@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.ai;
 
+import io.github.chaosawakens.common.entity.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -21,6 +22,10 @@ public abstract class AnimatableGoal extends Goal {
     private boolean isFirsLoop = true;
 
     protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
+        return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
+    }
+    
+    protected static double getAttackReachSq(AnimatableAnimalEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
     }
 

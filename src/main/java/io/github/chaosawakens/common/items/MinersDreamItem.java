@@ -52,7 +52,7 @@ public class MinersDreamItem extends Item {
                     int widthDelta = i * facing.getZ() + k * facing.getX();
                     BlockPos targetPos = breakPos.offset(lengthDelta, -targetY + j, widthDelta);
                     BlockState targetState = worldIn.getBlockState(targetPos);
-                    if (targetState.is(CATags.Blocks.MINERS_DREAM_MINEABLE)) {
+                    if (targetState.is(CATags.Blocks.MINERS_DREAM_MINEABLE) || targetState.getBlock().getRegistryName().toString().contains("marble") || targetState.getBlock().getRegistryName().toString().contains("limestone") || targetState.getBlock().getRegistryName().toString().contains("deepslate")) {
                         this.placeWoodPillars(worldIn, targetPos, i, j, k);
                     }
                 }

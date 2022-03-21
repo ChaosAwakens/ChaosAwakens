@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
+import io.github.chaosawakens.api.IUtilityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
@@ -11,12 +12,13 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CrystalBlock extends Block {
+public class CrystalBlock extends Block implements IUtilityHelper{
     public CrystalBlock(Properties properties) {
         super(properties);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @SuppressWarnings("deprecation")
+	@OnlyIn(Dist.CLIENT)
     @Override
     public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {
         return state1.getBlock() instanceof CrystalBlock || super.skipRendering(state, state1, direction);

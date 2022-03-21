@@ -41,9 +41,13 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+
+import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
+
 import java.util.Random;
 
-public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnimal{
+public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnimal, IUtilityHelper{
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
     private float flap;
@@ -75,7 +79,12 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new SitGoal(this));
 		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 1.0F));
-		this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0D));
+		if (this.isOnGround()) {
+			this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0D));
+		}
+//		if (isInAir(this)) {
+		this.goalSelector.addGoal(4, new RandomFlyingGoal(this, 2.0D, 1, true));
+//		}
 	    this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new FollowMobGoal(this, 2.0D, 4.0F, 8.0F));
@@ -179,7 +188,8 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	    return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && w.getRawBrightness(pos, 0) > 8;
     }
     
-    private void calculateFlapping() {
+    @SuppressWarnings("unused")
+	private void calculateFlapping() {
         float oFlap = this.flap;
         float oFlapSpeed = this.flapSpeed;
         this.flapSpeed = (float)((double)this.flapSpeed + (double)(!this.onGround && !this.isPassenger() ? 4 : -1) * 0.3D);

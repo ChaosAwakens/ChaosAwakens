@@ -1,5 +1,6 @@
 package io.github.chaosawakens.server;
 
+import io.github.chaosawakens.ChaosAwakens;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 
 /**
@@ -8,6 +9,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 public class ServerSetupEvent {
 
     public void onFMLServerSetupEvent(FMLDedicatedServerSetupEvent event) {
-        //Nothing here at the moment | A Server Starting Message is not needed...
+    	ChaosAwakens.LOGGER.info("Inducing chaos upon the world...");
     }
 }

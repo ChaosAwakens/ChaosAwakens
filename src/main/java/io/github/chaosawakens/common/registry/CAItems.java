@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.client.entity.render.AttitudeAdjusterItemRender;
 import io.github.chaosawakens.client.entity.render.BattleAxeItemRender;
 import io.github.chaosawakens.client.entity.render.BigBerthaItemRender;
@@ -12,6 +13,7 @@ import io.github.chaosawakens.common.items.*;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
@@ -95,11 +97,12 @@ public class CAItems {
 
     public static final RegistryObject<Item> BUTTER = ITEMS.register("butter", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
 
+
     public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds", () -> new BlockNamedItem(CABlocks.STRAWBERRY_BUSH.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new BlockNamedItem(CABlocks.TOMATO_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds", () -> new BlockNamedItem(CABlocks.CORN_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
-    public static final RegistryObject<BlockNamedItem> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new BlockNamedItem(CABlocks.RADISHES.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
 
     public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
 
@@ -150,7 +153,37 @@ public class CAItems {
     public static final RegistryObject<Item> GOLD_COIN = ITEMS.register("gold_coin", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
     public static final RegistryObject<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).tab(CAItemGroups.ITEMS)));
     public static final RegistryObject<Item> DEAD_STINK_BUG = ITEMS.register("dead_stink_bug", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
-
+    
+    //CRITTER CAGES
+    public static final RegistryObject<CritterCageItem> CRITTER_CAGE = ITEMS.register("critter_cage", () -> new CritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
+    public static final RegistryObject<FilledCritterCageItem> PIG_CRITTER_CAGE = ITEMS.register("pig_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.PIG));
+    public static final RegistryObject<FilledCritterCageItem> CREEPER_CRITTER_CAGE = ITEMS.register("creeper_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.CREEPER));
+  //  public static final RegistryObject<FilledCritterCageItem> APPLE_COW_CRITTER_CAGE = ITEMS.register("apple_cow_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), CAEntityTypes.APPLE_COW.get()));
+ //   public static final RegistryObject<FilledCritterCageItem> BIRD_CRITTER_CAGE = ITEMS.register("bird_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), CAEntityTypes.BIRD.get()));
+ //   public static final RegistryObject<FilledCritterCageItem> CARROT_PIG_CRITTER_CAGE = ITEMS.register("carrot_pig_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), CAEntityTypes.CARROT_PIG.get()));
+    public static final RegistryObject<FilledCritterCageItem> COW_CRITTER_CAGE = ITEMS.register("cow_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.COW));
+    public static final RegistryObject<FilledCritterCageItem> FOX_CRITTER_CAGE = ITEMS.register("fox_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.FOX));
+    public static final RegistryObject<FilledCritterCageItem> LLAMA_CRITTER_CAGE = ITEMS.register("llama_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.LLAMA));
+    public static final RegistryObject<FilledCritterCageItem> PANDA_CRITTER_CAGE = ITEMS.register("panda_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.PANDA));
+    public static final RegistryObject<FilledCritterCageItem> SHEEP_CRITTER_CAGE = ITEMS.register("sheep_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SHEEP));
+    public static final RegistryObject<FilledCritterCageItem> RABBIT_CRITTER_CAGE = ITEMS.register("rabbit_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.RABBIT));
+    public static final RegistryObject<FilledCritterCageItem> SKELETON_CRITTER_CAGE = ITEMS.register("skeleton_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SKELETON));
+    public static final RegistryObject<FilledCritterCageItem> SLIME_CRITTER_CAGE = ITEMS.register("slime_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SLIME));
+    public static final RegistryObject<FilledCritterCageItem> SPIDER_CRITTER_CAGE = ITEMS.register("spider_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SPIDER));
+    public static final RegistryObject<FilledCritterCageItem> STRAY_CRITTER_CAGE = ITEMS.register("stray_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.STRAY));
+    public static final RegistryObject<FilledCritterCageItem> WOLF_CRITTER_CAGE = ITEMS.register("wolf_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.WOLF));
+    public static final RegistryObject<FilledCritterCageItem> POLAR_BEAR_CRITTER_CAGE = ITEMS.register("polar_bear_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.POLAR_BEAR));
+    public static final RegistryObject<FilledCritterCageItem> DROWNED_CRITTER_CAGE = ITEMS.register("drowned_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.DROWNED));
+    public static final RegistryObject<FilledCritterCageItem> BEE_CRITTER_CAGE = ITEMS.register("bee_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.BEE));
+    public static final RegistryObject<FilledCritterCageItem> HUSK_CRITTER_CAGE = ITEMS.register("husk_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.HUSK));
+    public static final RegistryObject<FilledCritterCageItem> ZOMBIE_CRITTER_CAGE = ITEMS.register("zombie_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.ZOMBIE));
+    public static final RegistryObject<FilledCritterCageItem> ZOMBIE_VILLAGER_CRITTER_CAGE = ITEMS.register("zombie_villager_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.ZOMBIE_VILLAGER));
+    public static final RegistryObject<FilledCritterCageItem> CAVE_SPIDER_CRITTER_CAGE = ITEMS.register("cave_spider_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.CAVE_SPIDER));
+    public static final RegistryObject<FilledCritterCageItem> CAT_CRITTER_CAGE = ITEMS.register("cat_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.CAT));
+    public static final RegistryObject<FilledCritterCageItem> ENDERMAN_CRITTER_CAGE = ITEMS.register("enderman_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.ENDERMAN));
+    public static final RegistryObject<FilledCritterCageItem> MOOSHROOM_CRITTER_CAGE = ITEMS.register("mooshroom_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.MOOSHROOM));
+    public static final RegistryObject<FilledCritterCageItem> HORSE_CRITTER_CAGE = ITEMS.register("horse_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.HORSE));
+    
     // MISC
     public static final RegistryObject<PowerChipItem> ALUMINUM_POWER_CHIP = ITEMS.register("aluminum_power_chip", () -> new PowerChipItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
     public static final RegistryObject<Item> CRYSTAL_SHARD = ITEMS.register("crystal_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
@@ -163,15 +196,15 @@ public class CAItems {
 
     // TOOLS
     // Ultimate
-    public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateSwordDamage.get() - 37, -2.4F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+    public static final RegistryObject<SwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateSwordDamage.get() - 37, -2.4F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
             new EnchantmentData[]{new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 2), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
-    public static final RegistryObject<UltimateShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new UltimateShovelItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateShovelDamage.get() - 37, -3, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+    public static final RegistryObject<ShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new EnchantedShovelItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateShovelDamage.get() - 37, -3, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
             new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.UNBREAKING, 2)}));
     public static final RegistryObject<UltimatePickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new UltimatePickaxeItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimatePickaxeDamage.get() - 37, -2.8F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
             new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.BLOCK_FORTUNE, 5), new EnchantmentData(Enchantments.UNBREAKING, 2)}));
-    public static final RegistryObject<UltimateAxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new UltimateAxeItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateAxeDamage.get() - 37, -3, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+    public static final RegistryObject<AxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new EnchantedAxeItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateAxeDamage.get() - 37, -3, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
             new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.UNBREAKING, 2)}));
-    public static final RegistryObject<UltimateHoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new UltimateHoeItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateHoeDamage.get() - 37, 0.0F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+    public static final RegistryObject<HoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new UltimateHoeItem(CAItemTier.TOOL_ULTIMATE, CAConfig.COMMON.ultimateHoeDamage.get() - 37, 0.0F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
             new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.BLOCK_FORTUNE, 5), new EnchantmentData(Enchantments.UNBREAKING, 2)}));
     public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
             new EnchantmentData[]{new EnchantmentData(Enchantments.POWER_ARROWS, 5), new EnchantmentData(Enchantments.FLAMING_ARROWS, 1), new EnchantmentData(Enchantments.PUNCH_ARROWS, 2), new EnchantmentData(Enchantments.INFINITY_ARROWS, 1)}));
@@ -180,10 +213,10 @@ public class CAItems {
 
     // Emerald
     public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-    public static final RegistryObject<EnchantedShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new EnchantedShovelItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldShovelDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
-    public static final RegistryObject<EnchantedPickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldPickaxeDamage.get() - 7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
-    public static final RegistryObject<EnchantedAxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new EnchantedAxeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldAxeDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
-    public static final RegistryObject<EnchantedHoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new EnchantedHoeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldHoeDamage.get() - 7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
+    public static final RegistryObject<ShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new EnchantedShovelItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldShovelDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
+    public static final RegistryObject<PickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldPickaxeDamage.get() - 7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
+    public static final RegistryObject<AxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new EnchantedAxeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldAxeDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
+    public static final RegistryObject<HoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new EnchantedHoeItem(CAItemTier.TOOL_EMERALD, CAConfig.COMMON.emeraldHoeDamage.get() - 7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT), new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
 
     // Ruby
     public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(CAItemTier.TOOL_RUBY, CAConfig.COMMON.rubySwordDamage.get() - 17, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
@@ -489,4 +522,8 @@ public class CAItems {
     public static final RegistryObject<DevItem> DEV_ITEM16 = ITEMS.register("dev_item16", () -> new DevItem(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<DevItem> DEV_ITEM64 = ITEMS.register("dev_item64", () -> new DevItem(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<DevItem> DEV_ITEM_DAMAGE = ITEMS.register("dev_item_damage", () -> new DevItem(new Item.Properties().durability(50)));
+    
+    public static boolean exists(RegistryObject<?> r) {
+    	return ITEMS.getEntries().contains(r.get());
+    }
 }

@@ -1,11 +1,12 @@
 package io.github.chaosawakens.mixins;
 
-import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.block.BlockState;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.SpawnEggItem;
@@ -24,13 +25,27 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import io.github.chaosawakens.common.items.CASpawnEggItem;
+
 import javax.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Mixin(SpawnEggItem.class)
 public abstract class SpawnEggItemMixin {
-    @Shadow
-    public abstract EntityType<?> getType(@Nullable CompoundNBT compoundNBT);
+
+    @Shadow public abstract EntityType<?> getType(@Nullable CompoundNBT compoundNBT);
+    
+    private List<Item> BLACKLIST = new ArrayList<>();
+    
+    public List<Item> addItemToSpawneggBlacklist(Item itemToAdd) {
+    	if (!BLACKLIST.contains(itemToAdd) && itemToAdd instanceof SpawnEggItem && !(itemToAdd instanceof CASpawnEggItem)) {
+    		BLACKLIST.add(itemToAdd);
+    	}
+    	return BLACKLIST;
+    }
 
     @Inject(method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
     public void useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
@@ -43,14 +58,12 @@ public abstract class SpawnEggItemMixin {
             Direction direction = itemUseContext.getClickedFace();
             BlockState blockstate = world.getBlockState(blockpos);
             PlayerEntity player = itemUseContext.getPlayer();
+            addItemToSpawneggBlacklist(itemstack.getItem());
             if (blockstate.is(Blocks.SPAWNER)) {
-                if ((CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 0) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 1 && player.isCreative()) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && player.isCreative() && itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))) {
+                if (!BLACKLIST.contains(itemstack)) {
                     TileEntity tileentity = world.getBlockEntity(blockpos);
                     if (tileentity instanceof MobSpawnerTileEntity) {
-                        AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
+                        AbstractSpawner abstractspawner = ((MobSpawnerTileEntity)tileentity).getSpawner();
                         EntityType<?> entitytype1 = this.getType(itemstack.getTag());
                         abstractspawner.setEntityId(entitytype1);
                         tileentity.setChanged();

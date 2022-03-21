@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_cats_eye_cluster": {
+    "has_Block{chaosawakens:cats_eye_cluster}": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_cats_eye_cluster",
+      "has_Block{chaosawakens:cats_eye_cluster}",
       "has_the_recipe"
     ]
   ]

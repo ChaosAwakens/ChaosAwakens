@@ -40,6 +40,7 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
         GeckoLibNetwork.registerSyncable(this);
     }
 
+
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (target.getEntity().getType() == CAEntityTypes.ACACIA_ENT.get() || target.getEntity().getType() == CAEntityTypes.BIRCH_ENT.get() ||
@@ -59,6 +60,8 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
         }
         return PlayState.CONTINUE;
     }
+
+
 
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {

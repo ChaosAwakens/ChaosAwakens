@@ -71,7 +71,7 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 			BlockPos blockpos = new BlockPos(x, 0, z);
 			JigsawManager.addPieces(dynamicRegistryManager,
 				new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, path)), 10), AbstractVillagePiece::new,
-				chunkGenerator, templateManagerIn, netherFlag ? SurfaceDungeonStructure.getGround(chunkGenerator, chunkGenerator.getBaseColumn((chunkX << 4) + 7, (chunkZ << 4) + 7), chunkX, chunkZ) : blockpos,
+				chunkGenerator, templateManagerIn,netherFlag ? SurfaceDungeonStructure.getGround(chunkGenerator, chunkGenerator.getBaseColumn((chunkX << 4) + 7, (chunkZ << 4) + 7), chunkX, chunkZ) : blockpos,
 				pieces, random, false, !netherFlag);
 			
 			this.calculateBoundingBox();
@@ -81,10 +81,10 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 	protected static BlockPos getGround(ChunkGenerator chunkGen, IBlockReader column, int chunkX, int chunkZ) {
 		BlockPos.Mutable mutable = new BlockPos.Mutable((chunkX << 4) + 7, 124, (chunkZ << 4) + 7);
 		BlockState currState;
-		while (mutable.getY() > chunkGen.getSeaLevel()) {
+		while( mutable.getY() > chunkGen.getSeaLevel()) {
 			currState = column.getBlockState(mutable);
 			
-			if (!currState.canOcclude()) {
+			if(!currState.canOcclude()) {
 				mutable.move(Direction.DOWN);
 				continue;
 			} else if (column.getBlockState(mutable.offset(0, 3, 0)).getMaterial() == Material.AIR && currState.canOcclude()) {

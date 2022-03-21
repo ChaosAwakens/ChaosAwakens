@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.projectile;
 
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CALootTables;
@@ -374,6 +375,8 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		            if (this.random.nextFloat() < 0.25F && this.fireImmune()) {
 		                ++i;
 		            }
+		            
+		            //if ()
 
 		            if (this.random.nextFloat() < 0.5F && !this.level.canSeeSky(blockpos)) {
 		                ++i;

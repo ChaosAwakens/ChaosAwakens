@@ -219,7 +219,7 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 
 	@Override
 	protected ItemStack getBucketItemStack() {
-		return new ItemStack(CAItems.GREEN_FISH_BUCKET.get());
+		return new ItemStack(CAItems.SPARK_FISH_BUCKET.get());
 	}
 
 	@Override

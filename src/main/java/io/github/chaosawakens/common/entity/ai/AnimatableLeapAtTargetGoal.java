@@ -1,20 +1,48 @@
 package io.github.chaosawakens.common.entity.ai;
 
+import java.util.EnumSet;
+import java.util.function.BiFunction;
+
+import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.AnimatableAnimalEntity;
+import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LeapAtTargetGoal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
-public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal{
+public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal implements IUtilityHelper{
     protected AnimatableAnimalEntity entity;
     private LivingEntity target;
     float yf;
+    private final double animationLength;
+    private final BiFunction<Double, Double, Boolean> attackPredicate;
+    private boolean hasHit;
 
-	public AnimatableLeapAtTargetGoal(AnimatableAnimalEntity e, float f) {
+	public AnimatableLeapAtTargetGoal(AnimatableAnimalEntity e, float f, double animationLength, double attackBegin, double attackEnd) {
 		super(e, f);
 		entity = e;
 		yf = f;
+        this.animationLength = animationLength;
+        this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
+        this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
+	
+    private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableAnimalEntity attacker, LivingEntity target) {
+        if (target == null) return false;
+        if (target.isAlive() && !target.isSpectator()) {
+            if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
+                attacker.setAttacking(false);
+                return false;
+            }
+            double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
+            if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
+        }
+        attacker.setAttacking(false);
+        return false;
+    }
 	
 	@Override
 	   public boolean canUse() {
@@ -54,5 +82,9 @@ public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal{
 
 		      this.entity.setDeltaMovement(vector3d1.x, (double)this.yf, vector3d1.z);
 		   }
-
+	    
+	    @Override
+	    public double getDistanceBetween(BlockPos a, BlockPos b) {
+	    	return IUtilityHelper.super.getDistanceBetween(a, b);
+	    }
 }

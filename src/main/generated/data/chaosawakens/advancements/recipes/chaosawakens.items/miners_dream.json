@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_cactus": {
+    "has_Block{minecraft:cactus}": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -16,7 +16,7 @@
         ]
       }
     },
-    "has_forge:storage_blocks/redstone": {
+    "has_OptionalNamedTag[forge:storage_blocks/redstone]": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -45,8 +45,8 @@
   },
   "requirements": [
     [
-      "has_cactus",
-      "has_forge:storage_blocks/redstone",
+      "has_Block{minecraft:cactus}",
+      "has_OptionalNamedTag[forge:storage_blocks/redstone]",
       "has_gunpowder",
       "has_the_recipe"
     ]

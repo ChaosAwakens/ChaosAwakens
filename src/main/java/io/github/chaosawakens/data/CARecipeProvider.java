@@ -5,6 +5,7 @@ import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CARecipes;
 import io.github.chaosawakens.common.registry.CATags;
+import moze_intel.projecte.PECore;
 import moze_intel.projecte.gameObjs.registries.PEItems;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
@@ -23,6 +24,7 @@ import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class CARecipeProvider extends RecipeProvider {
 	public CARecipeProvider(DataGenerator gen) {
@@ -84,16 +86,16 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenButton(consumer, CABlocks.CRYSTAL_BUTTON.get(), CABlocks.CRYSTAL_PLANKS.get());
 		woodenWood(consumer, CABlocks.CRYSTAL_WOOD.get(), CABlocks.CRYSTAL_LOG.get());
 
-		ShapedRecipeBuilder.shaped(CABlocks.CRYSTAL_CRAFTING_TABLE.get()).define('#', CABlocks.CRYSTAL_PLANKS.get()).pattern("##").pattern("##").unlockedBy("has_" + CABlocks.CRYSTAL_PLANKS.get().asItem(), has(CABlocks.CRYSTAL_PLANKS.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CABlocks.CRYSTAL_FURNACE.get()).define('#', CABlocks.KYANITE.get()).pattern("###").pattern("# #").pattern("###").unlockedBy("has_" + CABlocks.KYANITE.get().asItem(), has(CABlocks.KYANITE.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_SHARD.get(), 4).define('#', CABlocks.CRYSTAL_PLANKS.get()).pattern("#").pattern("#").unlockedBy("has_" + CABlocks.CRYSTAL_PLANKS.get().asItem(), has(CABlocks.CRYSTAL_PLANKS.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CABlocks.CRYSTAL_CRAFTING_TABLE.get()).define('#', CABlocks.CRYSTAL_PLANKS.get()).pattern("##").pattern("##").unlockedBy("has_" + CABlocks.CRYSTAL_PLANKS.get(), has(CABlocks.CRYSTAL_PLANKS.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CABlocks.CRYSTAL_FURNACE.get()).define('#', CABlocks.KYANITE.get()).pattern("###").pattern("# #").pattern("###").unlockedBy("has_" + CABlocks.KYANITE.get(), has(CABlocks.KYANITE.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_SHARD.get(), 4).define('#', CABlocks.CRYSTAL_PLANKS.get()).pattern("#").pattern("#").unlockedBy("has_" + CABlocks.CRYSTAL_PLANKS.get(), has(CABlocks.CRYSTAL_PLANKS.get())).save(consumer);
 
-		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_TORCH.get(), 4).define('#', CABlocks.CRYSTAL_ENERGY.get()).define('$', CAItems.CRYSTAL_SHARD.get()).pattern("#").pattern("$").unlockedBy("has_" + CABlocks.CRYSTAL_ENERGY.get().asItem(), has(CABlocks.CRYSTAL_ENERGY.get())).unlockedBy("has_" + CAItems.CRYSTAL_SHARD.get().asItem(), has(CAItems.CRYSTAL_SHARD.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(Tags.Items.RODS_WOODEN).requires(ItemTags.COALS).requires(Tags.Items.DUSTS_REDSTONE).requires(CAItems.SUNSTONE.get()).unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).unlockedBy("has_" + ItemTags.COALS.getName(), has(ItemTags.COALS)).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + CAItems.SUNSTONE.get().asItem(), has(CAItems.SUNSTONE.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(Items.REDSTONE_TORCH).requires(ItemTags.COALS).requires(CAItems.SUNSTONE.get()).unlockedBy("has_" + Items.REDSTONE_TORCH.asItem(), has(Items.REDSTONE_TORCH)).unlockedBy("has_" + ItemTags.COALS.getName(), has(ItemTags.COALS)).unlockedBy("has_" + CAItems.SUNSTONE.get().asItem(), has(CAItems.SUNSTONE.get())).save(consumer, "chaosawakens:extreme_torch_from_redstone_torch");
-		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(CAItems.SUNSTONE_TORCH.get()).requires(ItemTags.COALS).requires(Tags.Items.DUSTS_REDSTONE).unlockedBy("has_" + CAItems.SUNSTONE_TORCH.get().asItem(), has(CAItems.SUNSTONE_TORCH.get())).unlockedBy("has_" + ItemTags.COALS.getName(), has(ItemTags.COALS)).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE)).save(consumer, "chaosawakens:extreme_torch_from_sunstone_torch");
-		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(Items.TORCH).requires(Tags.Items.DUSTS_REDSTONE).requires(CAItems.SUNSTONE.get()).unlockedBy("has_" + Items.TORCH.asItem(), has(Items.TORCH)).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + CAItems.SUNSTONE.get().asItem(), has(CAItems.SUNSTONE.get())).save(consumer, "chaosawakens:extreme_torch_from_torch");
-		ShapedRecipeBuilder.shaped(CAItems.SUNSTONE_TORCH.get(), 2).define('#', CAItems.SUNSTONE.get()).define('$', Tags.Items.RODS_WOODEN).pattern("#").pattern("$").unlockedBy("has_" + CAItems.SUNSTONE.get().asItem(), has(CAItems.SUNSTONE.get())).unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_TORCH.get(), 4).define('#', CABlocks.CRYSTAL_ENERGY.get()).define('$', CAItems.CRYSTAL_SHARD.get()).pattern("#").pattern("$").unlockedBy("has_" + CABlocks.CRYSTAL_ENERGY.get(), has(CABlocks.CRYSTAL_ENERGY.get())).unlockedBy("has_" + CAItems.CRYSTAL_SHARD.get(), has(CAItems.CRYSTAL_SHARD.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(Tags.Items.RODS_WOODEN).requires(ItemTags.COALS).requires(Tags.Items.DUSTS_REDSTONE).requires(CAItems.SUNSTONE.get()).unlockedBy("has_" + Tags.Items.RODS_WOODEN, has(Tags.Items.RODS_WOODEN)).unlockedBy("has_" + ItemTags.COALS, has(ItemTags.COALS)).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE, has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + CAItems.SUNSTONE.get(), has(CAItems.SUNSTONE.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(Items.REDSTONE_TORCH).requires(ItemTags.COALS).requires(CAItems.SUNSTONE.get()).unlockedBy("has_" + Items.REDSTONE_TORCH, has(Items.REDSTONE_TORCH)).unlockedBy("has_" + ItemTags.COALS, has(ItemTags.COALS)).unlockedBy("has_" + CAItems.SUNSTONE.get(), has(CAItems.SUNSTONE.get())).save(consumer, "chaosawakens:extreme_torch_from_redstone_torch");
+		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(CAItems.SUNSTONE_TORCH.get()).requires(ItemTags.COALS).requires(Tags.Items.DUSTS_REDSTONE).unlockedBy("has_" + CAItems.SUNSTONE_TORCH.get(), has(CAItems.SUNSTONE_TORCH.get())).unlockedBy("has_" + ItemTags.COALS, has(ItemTags.COALS)).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE, has(Tags.Items.DUSTS_REDSTONE)).save(consumer, "chaosawakens:extreme_torch_from_sunstone_torch");
+		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2).requires(Items.TORCH).requires(Tags.Items.DUSTS_REDSTONE).requires(CAItems.SUNSTONE.get()).unlockedBy("has_" + Items.TORCH, has(Items.TORCH)).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE, has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + CAItems.SUNSTONE.get(), has(CAItems.SUNSTONE.get())).save(consumer, "chaosawakens:extreme_torch_from_torch");
+		ShapedRecipeBuilder.shaped(CAItems.SUNSTONE_TORCH.get(), 2).define('#', CAItems.SUNSTONE.get()).define('$', Tags.Items.RODS_WOODEN).pattern("#").pattern("$").unlockedBy("has_" + CAItems.SUNSTONE.get(), has(CAItems.SUNSTONE.get())).unlockedBy("has_" + Tags.Items.RODS_WOODEN, has(Tags.Items.RODS_WOODEN)).save(consumer);
 
 		surroundItem(consumer, CAItems.POISON_SWORD.get(), CAItems.DEAD_STINK_BUG.get(), CAItems.EMERALD_SWORD.get());
 		surroundItem(consumer, CAItems.EXPERIENCE_SWORD.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_SWORD.get());
@@ -162,10 +164,10 @@ public class CARecipeProvider extends RecipeProvider {
 		armorChestplate(consumer, CAItems.QUEEN_SCALE_CHESTPLATE.get(), CAItems.QUEEN_SCALE.get());
 		armorLeggings(consumer, CAItems.QUEEN_SCALE_LEGGINGS.get(), CAItems.QUEEN_SCALE.get());
 		armorBoots(consumer, CAItems.QUEEN_SCALE_BOOTS.get(), CAItems.QUEEN_SCALE.get());
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_HELMET.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TIT").pattern("U U").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_CHESTPLATE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("I I").pattern("TTT").pattern("UUU").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_LEGGINGS.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("III").pattern("T T").pattern("U U").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_BOOTS.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).pattern("T T").pattern("U U").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_HELMET.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TIT").pattern("U U").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_CHESTPLATE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("I I").pattern("TTT").pattern("UUU").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_LEGGINGS.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("III").pattern("T T").pattern("U U").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_BOOTS.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).pattern("T T").pattern("U U").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
 
 		toolSword(consumer, CAItems.EMERALD_SWORD.get(), Items.EMERALD);
 		toolShovel(consumer, CAItems.EMERALD_SHOVEL.get(), Items.EMERALD);
@@ -187,26 +189,26 @@ public class CARecipeProvider extends RecipeProvider {
 		toolPickaxe(consumer, CAItems.TIGERS_EYE_PICKAXE.get(), CAItems.TIGERS_EYE.get());
 		toolAxe(consumer, CAItems.TIGERS_EYE_AXE.get(), CAItems.TIGERS_EYE.get());
 		toolHoe(consumer, CAItems.TIGERS_EYE_HOE.get(), CAItems.TIGERS_EYE.get());
-		toolSword(consumer, CAItems.CRYSTAL_WOOD_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolShovel(consumer, CAItems.CRYSTAL_WOOD_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolPickaxe(consumer, CAItems.CRYSTAL_WOOD_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolAxe(consumer, CAItems.CRYSTAL_WOOD_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolHoe(consumer, CAItems.CRYSTAL_WOOD_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolSword(consumer, CAItems.KYANITE_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
-		toolShovel(consumer, CAItems.KYANITE_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
-		toolPickaxe(consumer, CAItems.KYANITE_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
-		toolAxe(consumer, CAItems.KYANITE_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
-		toolHoe(consumer, CAItems.KYANITE_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
-		toolSword(consumer, CAItems.CATS_EYE_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.CATS_EYE_INGOT.get());
-		toolShovel(consumer, CAItems.CATS_EYE_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.CATS_EYE_INGOT.get());
-		toolPickaxe(consumer, CAItems.CATS_EYE_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.CATS_EYE_INGOT.get());
-		toolAxe(consumer, CAItems.CATS_EYE_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.CATS_EYE_INGOT.get());
-		toolHoe(consumer, CAItems.CATS_EYE_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.CATS_EYE_INGOT.get());
-		toolSword(consumer, CAItems.PINK_TOURMALINE_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.PINK_TOURMALINE_INGOT.get());
-		toolShovel(consumer, CAItems.PINK_TOURMALINE_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.PINK_TOURMALINE_INGOT.get());
-		toolPickaxe(consumer, CAItems.PINK_TOURMALINE_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.PINK_TOURMALINE_INGOT.get());
-		toolAxe(consumer, CAItems.PINK_TOURMALINE_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.PINK_TOURMALINE_INGOT.get());
-		toolHoe(consumer, CAItems.PINK_TOURMALINE_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CAItems.PINK_TOURMALINE_INGOT.get());
+		toolSword(consumer, CAItems.CRYSTAL_WOOD_SWORD.get(), CABlocks.CRYSTAL_WOOD.get());
+		toolShovel(consumer, CAItems.CRYSTAL_WOOD_SHOVEL.get(), CABlocks.CRYSTAL_WOOD.get());
+		toolPickaxe(consumer, CAItems.CRYSTAL_WOOD_PICKAXE.get(), CABlocks.CRYSTAL_WOOD.get());
+		toolAxe(consumer, CAItems.CRYSTAL_WOOD_AXE.get(), CABlocks.CRYSTAL_WOOD.get());
+		toolHoe(consumer, CAItems.CRYSTAL_WOOD_HOE.get(), CABlocks.CRYSTAL_WOOD.get());
+		toolSword(consumer, CAItems.KYANITE_SWORD.get(), CABlocks.KYANITE.get());
+		toolShovel(consumer, CAItems.KYANITE_SHOVEL.get(), CABlocks.KYANITE.get());
+		toolPickaxe(consumer, CAItems.KYANITE_PICKAXE.get(), CABlocks.KYANITE.get());
+		toolAxe(consumer, CAItems.KYANITE_AXE.get(), CABlocks.KYANITE.get());
+		toolHoe(consumer, CAItems.KYANITE_HOE.get(), CABlocks.KYANITE.get());
+		toolSword(consumer, CAItems.CATS_EYE_SWORD.get(), CAItems.CATS_EYE_INGOT.get());
+		toolShovel(consumer, CAItems.CATS_EYE_SHOVEL.get(), CAItems.CATS_EYE_INGOT.get());
+		toolPickaxe(consumer, CAItems.CATS_EYE_PICKAXE.get(), CAItems.CATS_EYE_INGOT.get());
+		toolAxe(consumer, CAItems.CATS_EYE_AXE.get(), CAItems.CATS_EYE_INGOT.get());
+		toolHoe(consumer, CAItems.CATS_EYE_HOE.get(), CAItems.CATS_EYE_INGOT.get());
+		toolSword(consumer, CAItems.PINK_TOURMALINE_SWORD.get(), CAItems.PINK_TOURMALINE_INGOT.get());
+		toolShovel(consumer, CAItems.PINK_TOURMALINE_SHOVEL.get(), CAItems.PINK_TOURMALINE_INGOT.get());
+		toolPickaxe(consumer, CAItems.PINK_TOURMALINE_PICKAXE.get(), CAItems.PINK_TOURMALINE_INGOT.get());
+		toolAxe(consumer, CAItems.PINK_TOURMALINE_AXE.get(), CAItems.PINK_TOURMALINE_INGOT.get());
+		toolHoe(consumer, CAItems.PINK_TOURMALINE_HOE.get(), CAItems.PINK_TOURMALINE_INGOT.get());
 		toolSword(consumer, CAItems.COPPER_SWORD.get(), CAItems.COPPER_LUMP.get());
 		toolShovel(consumer, CAItems.COPPER_SHOVEL.get(), CAItems.COPPER_LUMP.get());
 		toolPickaxe(consumer, CAItems.COPPER_PICKAXE.get(), CAItems.COPPER_LUMP.get());
@@ -227,26 +229,26 @@ public class CARecipeProvider extends RecipeProvider {
 		toolPickaxe(consumer, CAItems.PLATINUM_PICKAXE.get(), CAItems.PLATINUM_LUMP.get());
 		toolAxe(consumer, CAItems.PLATINUM_AXE.get(), CAItems.PLATINUM_LUMP.get());
 		toolHoe(consumer, CAItems.PLATINUM_HOE.get(), CAItems.PLATINUM_LUMP.get());
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_SWORD.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("T").pattern("U").pattern("I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_SHOVEL.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("U").pattern("T").pattern("I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_PICKAXE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TUT").pattern(" U ").pattern(" I ").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_AXE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TT").pattern("UI").pattern(" I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_HOE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TU").pattern(" I").pattern(" I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_FISHING_ROD.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).define('S', Tags.Items.STRING).pattern("  T").pattern(" US").pattern("I S").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_BOW.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).define('S', Tags.Items.STRING).pattern(" TS").pattern("I S").pattern(" US").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_SWORD.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("T").pattern("U").pattern("I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_SHOVEL.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("U").pattern("T").pattern("I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_PICKAXE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TUT").pattern(" U ").pattern(" I ").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_AXE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TT").pattern("UI").pattern(" I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_HOE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("TU").pattern(" I").pattern(" I").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_FISHING_ROD.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).define('S', Tags.Items.STRING).pattern("  T").pattern(" US").pattern("I S").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_BOW.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).define('S', Tags.Items.STRING).pattern(" TS").pattern("I S").pattern(" US").unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
 
-		ShapedRecipeBuilder.shaped(CAItems.SKATE_STRING_BOW.get()).define('C', CAItems.CRYSTAL_SHARD.get()).define('S', Tags.Items.STRING).pattern(" CS").pattern("C S").pattern(" CS").unlockedBy("has_" + CAItems.CRYSTAL_SHARD.get().asItem(), has(CAItems.CRYSTAL_SHARD.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.IRUKANDJI_ARROW.get(), 4).define('I', CAItems.CRYSTAL_SHARD.get()).define('#', CAItems.DEAD_IRUKANDJI.get()).define('P', CAItems.PEACOCK_FEATHER.get()).pattern("I").pattern("#").pattern("P").unlockedBy("has_" + CAItems.CRYSTAL_SHARD.get().asItem(), has(CAItems.CRYSTAL_SHARD.get())).unlockedBy("has_" + CAItems.DEAD_IRUKANDJI.get().asItem(), has(CAItems.DEAD_IRUKANDJI.get())).unlockedBy("has_" + CAItems.PEACOCK_FEATHER.get().asItem(), has(CAItems.PEACOCK_FEATHER.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.SKATE_STRING_BOW.get()).define('C', CAItems.CRYSTAL_SHARD.get()).define('S', Tags.Items.STRING).pattern(" CS").pattern("C S").pattern(" CS").unlockedBy("has_" + CAItems.CRYSTAL_SHARD.get(), has(CAItems.CRYSTAL_SHARD.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.IRUKANDJI_ARROW.get(), 4).define('I', CAItems.CRYSTAL_SHARD.get()).define('#', CAItems.DEAD_IRUKANDJI.get()).define('P', CAItems.PEACOCK_FEATHER.get()).pattern("I").pattern("#").pattern("P").unlockedBy("has_" + CAItems.CRYSTAL_SHARD.get(), has(CAItems.CRYSTAL_SHARD.get())).unlockedBy("has_" + CAItems.DEAD_IRUKANDJI.get(), has(CAItems.DEAD_IRUKANDJI.get())).unlockedBy("has_" + CAItems.PEACOCK_FEATHER.get(), has(CAItems.PEACOCK_FEATHER.get())).save(consumer);
 
-		ShapelessRecipeBuilder.shapeless(CAItems.ATTITUDE_ADJUSTER.get()).requires(CAItems.ULTIMATE_SWORD.get()).requires(CAItems.ULTIMATE_AXE.get()).requires(CAItems.BIG_HAMMER.get()).requires(CAItems.TRIFFID_GOO.get()).unlockedBy("has_" + CAItems.ULTIMATE_SWORD.get().asItem(), has(CAItems.ULTIMATE_SWORD.get())).unlockedBy("has_" + CAItems.ULTIMATE_AXE.get().asItem(), has(CAItems.ULTIMATE_AXE.get())).unlockedBy("has_" + CAItems.BIG_HAMMER.get().asItem(), has(CAItems.BIG_HAMMER.get())).unlockedBy("has_" + CAItems.TRIFFID_GOO.get().asItem(), has(CAItems.TRIFFID_GOO.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.BIG_BERTHA.get()).requires(CAItems.BIG_BERTHA_BLADE.get()).requires(CAItems.BIG_BERTHA_GUARD.get()).requires(CAItems.BIG_BERTHA_HANDLE.get()).unlockedBy("has_" + CAItems.BIG_BERTHA_BLADE.get().asItem(), has(CAItems.BIG_BERTHA_BLADE.get())).unlockedBy("has_" + CAItems.BIG_BERTHA_GUARD.get().asItem(), has(CAItems.BIG_BERTHA_GUARD.get())).unlockedBy("has_" + CAItems.BIG_BERTHA_HANDLE.get().asItem(), has(CAItems.BIG_BERTHA_HANDLE.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.BATTLE_AXE.get()).requires(CAItems.ULTIMATE_SWORD.get()).requires(CAItems.ULTIMATE_AXE.get()).requires(CAItems.TRIFFID_GOO.get()).unlockedBy("has_" + CAItems.ULTIMATE_SWORD.get().asItem(), has(CAItems.ULTIMATE_SWORD.get())).unlockedBy("has_" + CAItems.ULTIMATE_AXE.get().asItem(), has(CAItems.ULTIMATE_AXE.get())).unlockedBy("has_" + CAItems.TRIFFID_GOO.get().asItem(), has(CAItems.TRIFFID_GOO.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.QUEEN_SCALE_BATTLE_AXE.get()).define('B', CAItems.BATTLE_AXE.get()).define('P', CATags.Items.ULTIMATE_GEAR_HANDLES).define('S', CAItems.QUEEN_SCALE.get()).pattern("SBS").pattern("SPS").pattern(" P ").unlockedBy("has_" + CAItems.BATTLE_AXE.get().asItem(), has(CAItems.BATTLE_AXE.get())).unlockedBy("has_" + CAItems.QUEEN_SCALE.get().asItem(), has(CAItems.QUEEN_SCALE.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.NIGHTMARE_SWORD.get()).define('N', CAItems.NIGHTMARE_SCALE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('R', Tags.Items.DUSTS_REDSTONE).define('D', Tags.Items.GEMS_DIAMOND).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("NDN").pattern("RTR").pattern("NIN").unlockedBy("has_" + CAItems.NIGHTMARE_SCALE.get().asItem(), has(CAItems.NIGHTMARE_SCALE.get())).unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + Tags.Items.GEMS_DIAMOND.getName(), has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_" + CATags.Items.ULTIMATE_GEAR_HANDLES.getName(), has(CATags.Items.ULTIMATE_GEAR_HANDLES)).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.PRISMATIC_REAPER.get()).define('S', Tags.Items.RODS_WOODEN).define('A', CAItems.AMETHYST.get()).define('D', Tags.Items.GEMS_DIAMOND).define('E', Tags.Items.GEMS_EMERALD).define('R', CAItems.RUBY.get()).pattern("ADE").pattern("RS ").pattern("S  ").unlockedBy("has_" + CAItems.AMETHYST.get().asItem(), has(CAItems.AMETHYST.get())).unlockedBy("has_" + Tags.Items.GEMS_DIAMOND.getName(), has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_" + Tags.Items.GEMS_EMERALD.getName(), has(Tags.Items.GEMS_EMERALD)).unlockedBy("has_" + CAItems.RUBY.get().asItem(), has(CAItems.RUBY.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.THUNDER_STAFF.get()).define('D', Tags.Items.GEMS_DIAMOND).define('R', CAItems.RUBY.get()).pattern("DR ").pattern("RR ").pattern("  R").unlockedBy("has_" + Tags.Items.GEMS_DIAMOND.getName(), has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_" + CAItems.RUBY.get().asItem(), has(CAItems.RUBY.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.ATTITUDE_ADJUSTER.get()).requires(CAItems.ULTIMATE_SWORD.get()).requires(CAItems.ULTIMATE_AXE.get()).requires(CAItems.BIG_HAMMER.get()).requires(CAItems.TRIFFID_GOO.get()).unlockedBy("has_" + CAItems.ULTIMATE_SWORD.get(), has(CAItems.ULTIMATE_SWORD.get())).unlockedBy("has_" + CAItems.ULTIMATE_AXE.get(), has(CAItems.ULTIMATE_AXE.get())).unlockedBy("has_" + CAItems.BIG_HAMMER.get(), has(CAItems.BIG_HAMMER.get())).unlockedBy("has_" + CAItems.TRIFFID_GOO.get(), has(CAItems.TRIFFID_GOO.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.BIG_BERTHA.get()).requires(CAItems.BIG_BERTHA_BLADE.get()).requires(CAItems.BIG_BERTHA_GUARD.get()).requires(CAItems.BIG_BERTHA_HANDLE.get()).unlockedBy("has_" + CAItems.BIG_BERTHA_BLADE.get(), has(CAItems.BIG_BERTHA_BLADE.get())).unlockedBy("has_" + CAItems.BIG_BERTHA_GUARD.get(), has(CAItems.BIG_BERTHA_GUARD.get())).unlockedBy("has_" + CAItems.BIG_BERTHA_HANDLE.get(), has(CAItems.BIG_BERTHA_HANDLE.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.BATTLE_AXE.get()).requires(CAItems.ULTIMATE_SWORD.get()).requires(CAItems.ULTIMATE_AXE.get()).requires(CAItems.TRIFFID_GOO.get()).unlockedBy("has_" + CAItems.ULTIMATE_SWORD.get(), has(CAItems.ULTIMATE_SWORD.get())).unlockedBy("has_" + CAItems.ULTIMATE_AXE.get(), has(CAItems.ULTIMATE_AXE.get())).unlockedBy("has_" + CAItems.TRIFFID_GOO.get(), has(CAItems.TRIFFID_GOO.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.QUEEN_SCALE_BATTLE_AXE.get()).define('B', CAItems.BATTLE_AXE.get()).define('P', CATags.Items.ULTIMATE_GEAR_HANDLES).define('S', CAItems.QUEEN_SCALE.get()).pattern("SBS").pattern("SPS").pattern(" P ").unlockedBy("has_" + CAItems.BATTLE_AXE.get(), has(CAItems.BATTLE_AXE.get())).unlockedBy("has_" + CAItems.QUEEN_SCALE.get(), has(CAItems.QUEEN_SCALE.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.NIGHTMARE_SWORD.get()).define('N', CAItems.NIGHTMARE_SCALE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('R', Tags.Items.DUSTS_REDSTONE).define('D', Tags.Items.GEMS_DIAMOND).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).pattern("NDN").pattern("RTR").pattern("NIN").unlockedBy("has_" + CAItems.NIGHTMARE_SCALE.get(), has(CAItems.NIGHTMARE_SCALE.get())).unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE, has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + Tags.Items.GEMS_DIAMOND, has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_" + CATags.Items.ULTIMATE_GEAR_HANDLES, has(CATags.Items.ULTIMATE_GEAR_HANDLES)).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.PRISMATIC_REAPER.get()).define('S', Tags.Items.RODS_WOODEN).define('A', CAItems.AMETHYST.get()).define('D', Tags.Items.GEMS_DIAMOND).define('E', Tags.Items.GEMS_EMERALD).define('R', CAItems.RUBY.get()).pattern("ADE").pattern("RS ").pattern("S  ").unlockedBy("has_" + CAItems.AMETHYST.get(), has(CAItems.AMETHYST.get())).unlockedBy("has_" + Tags.Items.GEMS_DIAMOND, has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_" + Tags.Items.GEMS_EMERALD, has(Tags.Items.GEMS_EMERALD)).unlockedBy("has_" + CAItems.RUBY.get(), has(CAItems.RUBY.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.THUNDER_STAFF.get()).define('D', Tags.Items.GEMS_DIAMOND).define('R', CAItems.RUBY.get()).pattern("DR ").pattern("RR ").pattern("  R").unlockedBy("has_" + Tags.Items.GEMS_DIAMOND, has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_" + CAItems.RUBY.get(), has(CAItems.RUBY.get())).save(consumer);
 
-		ShapedRecipeBuilder.shaped(CAItems.MINERS_DREAM.get()).define('C', Blocks.CACTUS).define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE).define('G', Items.GUNPOWDER).pattern("CCC").pattern("RRR").pattern("GGG").unlockedBy("has_" + Blocks.CACTUS.asItem(), has(Blocks.CACTUS)).unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_REDSTONE.getName(), has(Tags.Items.STORAGE_BLOCKS_REDSTONE)).unlockedBy("has_" + Items.GUNPOWDER.asItem(), has(Items.GUNPOWDER)).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.MINERS_DREAM.get()).define('C', Blocks.CACTUS).define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE).define('G', Items.GUNPOWDER).pattern("CCC").pattern("RRR").pattern("GGG").unlockedBy("has_" + Blocks.CACTUS, has(Blocks.CACTUS)).unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_REDSTONE, has(Tags.Items.STORAGE_BLOCKS_REDSTONE)).unlockedBy("has_" + Items.GUNPOWDER, has(Items.GUNPOWDER)).save(consumer);
 
 		materialToBlock(consumer, CABlocks.ALUMINUM_BLOCK.get(), CAItems.ALUMINUM_INGOT.get());
 		blockToMaterial(consumer, CABlocks.ALUMINUM_BLOCK.get(), CAItems.ALUMINUM_INGOT.get());
@@ -293,9 +295,9 @@ public class CARecipeProvider extends RecipeProvider {
 		nuggetToIngot(consumer, CAItems.URANIUM_INGOT.get(), CAItems.URANIUM_NUGGET.get());
 		ingotToNugget(consumer, CAItems.URANIUM_INGOT.get(), CAItems.URANIUM_NUGGET.get());
 
-		ShapelessRecipeBuilder.shapeless(Items.CYAN_DYE).requires(CABlocks.CYAN_ROSE.get()).group("cyan_dye").unlockedBy("has_" + CABlocks.CYAN_ROSE.get().asItem(), has(CABlocks.CYAN_ROSE.get())).save(consumer, "chaosawakens:cyan_dye_from_cyan_rose");
-		ShapelessRecipeBuilder.shapeless(Items.RED_DYE).requires(CABlocks.RED_ROSE.get()).group("red_dye").unlockedBy("has_" + CABlocks.RED_ROSE.get().asItem(), has(CABlocks.RED_ROSE.get())).save(consumer, "chaosawakens:red_dye_from_red_rose");
-		ShapelessRecipeBuilder.shapeless(Items.PURPLE_DYE).requires(CABlocks.PAEONIA.get()).group("purple_dye").unlockedBy("has_" + CABlocks.PAEONIA.get().asItem(), has(CABlocks.PAEONIA.get())).save(consumer, "chaosawakens:purple_dye_from_paeonia");
+		ShapelessRecipeBuilder.shapeless(Items.CYAN_DYE).requires(CABlocks.CYAN_ROSE.get()).group("cyan_dye").unlockedBy("has_" + CABlocks.CYAN_ROSE.get(), has(CABlocks.CYAN_ROSE.get())).save(consumer, "chaosawakens:cyan_dye_from_cyan_rose");
+		ShapelessRecipeBuilder.shapeless(Items.RED_DYE).requires(CABlocks.RED_ROSE.get()).group("red_dye").unlockedBy("has_" + CABlocks.RED_ROSE.get(), has(CABlocks.RED_ROSE.get())).save(consumer, "chaosawakens:red_dye_from_red_rose");
+		ShapelessRecipeBuilder.shapeless(Items.PURPLE_DYE).requires(CABlocks.PAEONIA.get()).group("purple_dye").unlockedBy("has_" + CABlocks.PAEONIA.get(), has(CABlocks.PAEONIA.get())).save(consumer, "chaosawakens:purple_dye_from_paeonia");
 
 		surroundItem(consumer, CAItems.GOLDEN_MELON_SLICE.get(), Items.GOLD_INGOT, Items.MELON_SLICE);
 		surroundItem(consumer, CAItems.GOLDEN_BEETROOT.get(), Items.GOLD_INGOT, Items.BEETROOT);
@@ -304,22 +306,18 @@ public class CARecipeProvider extends RecipeProvider {
 		surroundItem(consumer, Items.ENCHANTED_GOLDEN_APPLE, Items.GOLD_BLOCK, Items.APPLE, new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_apple"));
 		surroundItem(consumer, CAItems.ENCHANTED_GOLDEN_CARROT.get(), Items.GOLD_BLOCK, Items.CARROT);
 
-		plantSeeds(consumer, CAItems.STRAWBERRY_SEEDS.get(), CAItems.STRAWBERRY.get());
-		plantSeeds(consumer, CAItems.RADISH_SEEDS.get(), CAItems.RADISH.get());
-		plantSeeds(consumer, CAItems.LETTUCE_SEEDS.get(), CAItems.LETTUCE.get());
-		plantSeeds(consumer, CAItems.CORN_SEEDS.get(), CAItems.CORN.get());
-		plantSeeds(consumer, CAItems.TOMATO_SEEDS.get(), CAItems.TOMATO.get());
+		ShapelessRecipeBuilder.shapeless(CAItems.STRAWBERRY_SEEDS.get(), 2).requires(CAItems.STRAWBERRY.get()).unlockedBy("has_" + CAItems.STRAWBERRY.get(), has(CAItems.STRAWBERRY.get())).save(consumer);
 
-		ShapelessRecipeBuilder.shapeless(CAItems.BACON.get(), 2).requires(Items.PORKCHOP).requires(CAItems.SALT.get()).unlockedBy("has_" + Items.PORKCHOP.asItem(), has(Items.PORKCHOP)).unlockedBy("has_" + CAItems.SALT.get().asItem(), has(CAItems.SALT.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.BLT_SANDWICH.get()).requires(Items.BREAD).requires(CAItems.LETTUCE.get()).requires(CAItems.TOMATO.get()).requires(CAItems.COOKED_BACON.get()).requires(CAItems.BUTTER.get()).unlockedBy("has_" + Items.BREAD.asItem(), has(Items.BREAD)).unlockedBy("has_" + CAItems.LETTUCE.get().asItem(), has(CAItems.LETTUCE.get())).unlockedBy("has_" + CAItems.TOMATO.get().asItem(), has(CAItems.TOMATO.get())).unlockedBy("has_" + CAItems.COOKED_BACON.get().asItem(), has(CAItems.COOKED_BACON.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.BUTTER.get(), 4).requires(Items.MILK_BUCKET, 2).unlockedBy("has_" + Items.MILK_BUCKET.asItem(), has(Items.MILK_BUCKET)).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.CHEESE.get(), 2).requires(Items.MILK_BUCKET, 4).unlockedBy("has_" + Items.MILK_BUCKET.asItem(), has(Items.MILK_BUCKET)).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.CORNDOG.get()).requires(CAItems.CORN.get()).requires(Tags.Items.RODS_WOODEN).requires(Items.PORKCHOP).requires(Items.CHICKEN).unlockedBy("has_" + CAItems.CORN.get().asItem(), has(CAItems.CORN.get())).unlockedBy("has_" + Items.PORKCHOP.asItem(), has(Items.PORKCHOP)).unlockedBy("has_" + Items.CHICKEN.asItem(), has(Items.CHICKEN)).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.GARDEN_SALAD.get()).requires(Items.BOWL).requires(CAItems.LETTUCE.get()).requires(CAItems.TOMATO.get()).requires(CAItems.RADISH.get()).requires(Tags.Items.CROPS_CARROT).unlockedBy("has_" + CAItems.LETTUCE.get().asItem(), has(CAItems.LETTUCE.get())).unlockedBy("has_" + CAItems.TOMATO.get().asItem(), has(CAItems.TOMATO.get())).unlockedBy("has_" + CAItems.RADISH.get().asItem(), has(CAItems.RADISH.get())).unlockedBy("has_" + Tags.Items.CROPS_CARROT.getName(), has(Tags.Items.CROPS_CARROT)).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.RADISH_STEW.get()).requires(Items.BOWL).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).unlockedBy("has_" + CAItems.RADISH.get().asItem(), has(CAItems.RADISH.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.SEAFOOD_PATTY.get()).requires(Items.BREAD).requires(CAItems.LETTUCE.get()).requires(CAItems.TOMATO.get()).requires(CAItems.COOKED_CRAB_MEAT.get()).unlockedBy("has_" + CAItems.LETTUCE.get().asItem(), has(CAItems.LETTUCE.get())).unlockedBy("has_" + CAItems.TOMATO.get().asItem(), has(CAItems.TOMATO.get())).unlockedBy("has_" + CAItems.COOKED_CRAB_MEAT.get().asItem(), has(CAItems.COOKED_CRAB_MEAT.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.BACON.get(), 2).requires(Items.PORKCHOP).requires(CAItems.SALT.get()).unlockedBy("has_" + Items.PORKCHOP, has(Items.PORKCHOP)).unlockedBy("has_" + CAItems.SALT.get(), has(CAItems.SALT.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.BLT_SANDWICH.get()).requires(Items.BREAD).requires(CAItems.LETTUCE.get()).requires(CAItems.TOMATO.get()).requires(CAItems.COOKED_BACON.get()).requires(CAItems.BUTTER.get()).unlockedBy("has_" + Items.BREAD, has(Items.BREAD)).unlockedBy("has_" + CAItems.LETTUCE.get(), has(CAItems.LETTUCE.get())).unlockedBy("has_" + CAItems.TOMATO.get(), has(CAItems.TOMATO.get())).unlockedBy("has_" + CAItems.COOKED_BACON.get(), has(CAItems.COOKED_BACON.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.BUTTER.get(), 4).requires(Items.MILK_BUCKET, 2).unlockedBy("has_" + Items.MILK_BUCKET, has(Items.MILK_BUCKET)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.CHEESE.get(), 2).requires(Items.MILK_BUCKET, 4).unlockedBy("has_" + Items.MILK_BUCKET, has(Items.MILK_BUCKET)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.CORNDOG.get()).requires(CAItems.CORN.get()).requires(Tags.Items.RODS_WOODEN).requires(Items.PORKCHOP).requires(Items.CHICKEN).unlockedBy("has_" + CAItems.CORN.get(), has(CAItems.CORN.get())).unlockedBy("has_" + Items.PORKCHOP, has(Items.PORKCHOP)).unlockedBy("has_" + Items.CHICKEN, has(Items.CHICKEN)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.GARDEN_SALAD.get()).requires(Items.BOWL).requires(CAItems.LETTUCE.get()).requires(CAItems.TOMATO.get()).requires(CAItems.RADISH.get()).requires(Tags.Items.CROPS_CARROT).unlockedBy("has_" + CAItems.LETTUCE.get(), has(CAItems.LETTUCE.get())).unlockedBy("has_" + CAItems.TOMATO.get(), has(CAItems.TOMATO.get())).unlockedBy("has_" + CAItems.RADISH.get(), has(CAItems.RADISH.get())).unlockedBy("has_" + Tags.Items.CROPS_CARROT, has(Tags.Items.CROPS_CARROT)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.RADISH_STEW.get()).requires(Items.BOWL).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).requires(CAItems.RADISH.get()).unlockedBy("has_" + CAItems.RADISH.get(), has(CAItems.RADISH.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.SEAFOOD_PATTY.get()).requires(Items.BREAD).requires(CAItems.LETTUCE.get()).requires(CAItems.TOMATO.get()).requires(CAItems.COOKED_CRAB_MEAT.get()).unlockedBy("has_" + CAItems.LETTUCE.get(), has(CAItems.LETTUCE.get())).unlockedBy("has_" + CAItems.TOMATO.get(), has(CAItems.TOMATO.get())).unlockedBy("has_" + CAItems.COOKED_CRAB_MEAT.get(), has(CAItems.COOKED_CRAB_MEAT.get())).save(consumer);
 
-		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_APPLE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).define('A', Items.ENCHANTED_GOLDEN_APPLE).pattern("TIU").pattern("IAI").pattern("UIT").unlockedBy("has_" + Items.ENCHANTED_GOLDEN_APPLE.asItem(), has(Items.ENCHANTED_GOLDEN_APPLE)).unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_APPLE.get()).define('T', CAItems.TITANIUM_INGOT.get()).define('U', CAItems.URANIUM_INGOT.get()).define('I', CATags.Items.ULTIMATE_GEAR_HANDLES).define('A', Items.ENCHANTED_GOLDEN_APPLE).pattern("TIU").pattern("IAI").pattern("UIT").unlockedBy("has_" + Items.ENCHANTED_GOLDEN_APPLE, has(Items.ENCHANTED_GOLDEN_APPLE)).unlockedBy("has_" + CAItems.TITANIUM_INGOT.get(), has(CAItems.TITANIUM_INGOT.get())).unlockedBy("has_" + CAItems.URANIUM_INGOT.get(), has(CAItems.URANIUM_INGOT.get())).save(consumer);
 
 		smelting(consumer, Items.SUGAR, CAItems.CANDYCANE.get(), 0.35F, 200);
 
@@ -371,15 +369,15 @@ public class CARecipeProvider extends RecipeProvider {
 		smelting(consumer, CABlocks.URANIUM_ORE.get(), CAItems.URANIUM_NUGGET.get(), 0.1F, 200);
 		blasting(consumer, CABlocks.URANIUM_ORE.get(), CAItems.URANIUM_NUGGET.get(), 0.1F, 100);
 
-		ShapelessRecipeBuilder.shapeless(CAItems.INSTANT_SURVIVAL_SHELTER.get()).requires(Tags.Items.STORAGE_BLOCKS_REDSTONE).requires(Tags.Items.RODS_WOODEN).requires(Tags.Items.COBBLESTONE).unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_REDSTONE.getName(), has(Tags.Items.STORAGE_BLOCKS_REDSTONE)).unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).unlockedBy("has_" + Tags.Items.COBBLESTONE.getName(), has(Tags.Items.COBBLESTONE)).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_EXTRA_SMALL.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).group("zoo_cage").unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_IRON.getName(), has(Tags.Items.STORAGE_BLOCKS_IRON)).unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_QUARTZ.getName(), has(Tags.Items.STORAGE_BLOCKS_QUARTZ)).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_SMALL.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_EXTRA_SMALL.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_EXTRA_SMALL.get().asItem(), has(CAItems.ZOO_CAGE_EXTRA_SMALL.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_MEDIUM.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_SMALL.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_SMALL.get().asItem(), has(CAItems.ZOO_CAGE_SMALL.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_LARGE.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_MEDIUM.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_MEDIUM.get().asItem(), has(CAItems.ZOO_CAGE_MEDIUM.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_EXTRA_LARGE.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_LARGE.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_LARGE.get().asItem(), has(CAItems.ZOO_CAGE_LARGE.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.INSTANT_SURVIVAL_SHELTER.get()).requires(Tags.Items.STORAGE_BLOCKS_REDSTONE).requires(Tags.Items.RODS_WOODEN).requires(Tags.Items.COBBLESTONE).unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_REDSTONE, has(Tags.Items.STORAGE_BLOCKS_REDSTONE)).unlockedBy("has_" + Tags.Items.RODS_WOODEN, has(Tags.Items.RODS_WOODEN)).unlockedBy("has_" + Tags.Items.COBBLESTONE, has(Tags.Items.COBBLESTONE)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_EXTRA_SMALL.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).group("zoo_cage").unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_IRON, has(Tags.Items.STORAGE_BLOCKS_IRON)).unlockedBy("has_" + Tags.Items.STORAGE_BLOCKS_QUARTZ, has(Tags.Items.STORAGE_BLOCKS_QUARTZ)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_SMALL.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_EXTRA_SMALL.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_EXTRA_SMALL.get(), has(CAItems.ZOO_CAGE_EXTRA_SMALL.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_MEDIUM.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_SMALL.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_SMALL.get(), has(CAItems.ZOO_CAGE_SMALL.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_LARGE.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_MEDIUM.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_MEDIUM.get(), has(CAItems.ZOO_CAGE_MEDIUM.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.ZOO_CAGE_EXTRA_LARGE.get()).requires(Tags.Items.STORAGE_BLOCKS_IRON).requires(Tags.Items.STORAGE_BLOCKS_QUARTZ).requires(Tags.Items.GLASS).requires(CAItems.ZOO_CAGE_LARGE.get()).group("zoo_cage").unlockedBy("has_" + CAItems.ZOO_CAGE_LARGE.get(), has(CAItems.ZOO_CAGE_LARGE.get())).save(consumer);
 
-		ShapedRecipeBuilder.shaped(CABlocks.DEFOSSILIZER.get()).define('I', Tags.Items.INGOTS_IRON).define('B', Items.BUCKET).define('S', Blocks.SMOOTH_STONE).define('L', Blocks.SMOOTH_STONE_SLAB).pattern("III").pattern("SBS").pattern("LLL").unlockedBy("has_" + Tags.Items.INGOTS_IRON.getName(), has(Tags.Items.INGOTS_IRON)).unlockedBy("has_" + Items.BUCKET.asItem(), has(Items.BUCKET)).unlockedBy("has_" + Blocks.SMOOTH_STONE.asItem(), has(Blocks.SMOOTH_STONE)).unlockedBy("has_" + Blocks.SMOOTH_STONE_SLAB.asItem(), has(Blocks.SMOOTH_STONE_SLAB)).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.ALUMINUM_POWER_CHIP.get()).define('R', Tags.Items.DUSTS_REDSTONE).define('A', CAItems.ALUMINUM_INGOT.get()).define('I', Tags.Items.INGOTS_IRON).pattern("ARA").pattern("RIR").pattern("ARA").unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + CAItems.ALUMINUM_INGOT.get().asItem(), has(CAItems.ALUMINUM_INGOT.get())).unlockedBy("has_" + Tags.Items.INGOTS_IRON.getName(), has(Tags.Items.INGOTS_IRON)).save(consumer);
+		ShapedRecipeBuilder.shaped(CABlocks.DEFOSSILIZER.get()).define('I', Tags.Items.INGOTS_IRON).define('B', Items.BUCKET).define('S', Blocks.SMOOTH_STONE).define('L', Blocks.SMOOTH_STONE_SLAB).pattern("III").pattern("SBS").pattern("LLL").unlockedBy("has_" + Tags.Items.INGOTS_IRON, has(Tags.Items.INGOTS_IRON)).unlockedBy("has_" + Items.BUCKET, has(Items.BUCKET)).unlockedBy("has_" + Blocks.SMOOTH_STONE, has(Blocks.SMOOTH_STONE)).unlockedBy("has_" + Blocks.SMOOTH_STONE_SLAB, has(Blocks.SMOOTH_STONE_SLAB)).save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ALUMINUM_POWER_CHIP.get()).define('R', Tags.Items.DUSTS_REDSTONE).define('A', CAItems.ALUMINUM_INGOT.get()).define('I', Tags.Items.INGOTS_IRON).pattern("ARA").pattern("RIR").pattern("ARA").unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE, has(Tags.Items.DUSTS_REDSTONE)).unlockedBy("has_" + CAItems.ALUMINUM_INGOT.get(), has(CAItems.ALUMINUM_INGOT.get())).unlockedBy("has_" + Tags.Items.INGOTS_IRON, has(Tags.Items.INGOTS_IRON)).save(consumer);
 		buildDefossilizingRecipes(consumer);
 
 		buildConversionRecipes(consumer);
@@ -905,107 +903,83 @@ public class CARecipeProvider extends RecipeProvider {
 	}
 
 	private static void woodenWood(Consumer<IFinishedRecipe> consumer, IItemProvider pWood, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pWood, 3).define('#', pMaterial).pattern("##").pattern("##").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pWood, 3).define('#', pMaterial).pattern("##").pattern("##").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void surroundItem(Consumer<IFinishedRecipe> consumer, IItemProvider pOutput, IItemProvider pSurroundMaterial, IItemProvider pItemMaterial) {
-		ShapedRecipeBuilder.shaped(pOutput).define('#', pSurroundMaterial).define('X', pItemMaterial).pattern("###").pattern("#X#").pattern("###").unlockedBy("has_" + pSurroundMaterial.asItem(), has(pSurroundMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pOutput).define('#', pSurroundMaterial).define('X', pItemMaterial).pattern("###").pattern("#X#").pattern("###").unlockedBy("has_" + pSurroundMaterial, has(pSurroundMaterial)).save(consumer);
 	}
 
 	private static void surroundItem(Consumer<IFinishedRecipe> consumer, IItemProvider pOutput, IItemProvider pSurroundMaterial, IItemProvider pItemMaterial, ResourceLocation name) {
-		ShapedRecipeBuilder.shaped(pOutput).define('#', pSurroundMaterial).define('X', pItemMaterial).pattern("###").pattern("#X#").pattern("###").unlockedBy("has_" + pSurroundMaterial.asItem(), has(pSurroundMaterial)).save(consumer, name);
-	}
-
-	private static void plantSeeds(Consumer<IFinishedRecipe> consumer, IItemProvider pSeeds, IItemProvider pPlant) {
-		ShapelessRecipeBuilder.shapeless(pSeeds, 2).requires(pPlant).unlockedBy("has_" + pPlant.asItem(), has(pPlant)).save(consumer);
+		ShapedRecipeBuilder.shaped(pOutput).define('#', pSurroundMaterial).define('X', pItemMaterial).pattern("###").pattern("#X#").pattern("###").unlockedBy("has_" + pSurroundMaterial, has(pSurroundMaterial)).save(consumer, name);
 	}
 
 	private static void armorHelmet(Consumer<IFinishedRecipe> consumer, IItemProvider pArmorHelmet, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pArmorHelmet).define('#', pMaterial).pattern("###").pattern("# #").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pArmorHelmet).define('#', pMaterial).pattern("###").pattern("# #").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void armorChestplate(Consumer<IFinishedRecipe> consumer, IItemProvider pArmorChestplate, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pArmorChestplate).define('#', pMaterial).pattern("# #").pattern("###").pattern("###").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pArmorChestplate).define('#', pMaterial).pattern("# #").pattern("###").pattern("###").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void armorLeggings(Consumer<IFinishedRecipe> consumer, IItemProvider pArmorLeggings, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pArmorLeggings).define('#', pMaterial).pattern("###").pattern("# #").pattern("# #").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pArmorLeggings).define('#', pMaterial).pattern("###").pattern("# #").pattern("# #").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void armorBoots(Consumer<IFinishedRecipe> consumer, IItemProvider pArmorBoots, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pArmorBoots).define('#', pMaterial).pattern("# #").pattern("# #").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pArmorBoots).define('#', pMaterial).pattern("# #").pattern("# #").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void toolSword(Consumer<IFinishedRecipe> consumer, IItemProvider pToolSword, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolSword).define('S', Items.STICK).define('#', pMaterial).pattern("#").pattern("#").pattern("S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
-	}
-
-	private static void toolSword(Consumer<IFinishedRecipe> consumer, IItemProvider pToolSword, IItemProvider pToolStick, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolSword).define('S', pToolStick).define('#', pMaterial).pattern("#").pattern("#").pattern("S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pToolSword).define('S', Items.STICK).define('#', pMaterial).pattern("#").pattern("#").pattern("S").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void toolShovel(Consumer<IFinishedRecipe> consumer, IItemProvider pToolShovel, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolShovel).define('S', Items.STICK).define('#', pMaterial).pattern("#").pattern("S").pattern("S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
-	}
-
-	private static void toolShovel(Consumer<IFinishedRecipe> consumer, IItemProvider pToolShovel, IItemProvider pToolStick, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolShovel).define('S', pToolStick).define('#', pMaterial).pattern("#").pattern("S").pattern("S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pToolShovel).define('S', Items.STICK).define('#', pMaterial).pattern("#").pattern("S").pattern("S").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void toolPickaxe(Consumer<IFinishedRecipe> consumer, IItemProvider pToolPickaxe, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolPickaxe).define('S', Items.STICK).define('#', pMaterial).pattern("###").pattern(" S ").pattern(" S ").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
-	}
-
-	private static void toolPickaxe(Consumer<IFinishedRecipe> consumer, IItemProvider pToolPickaxe, IItemProvider pToolStick, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolPickaxe).define('S', pToolStick).define('#', pMaterial).pattern("###").pattern(" S ").pattern(" S ").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pToolPickaxe).define('S', Items.STICK).define('#', pMaterial).pattern("###").pattern(" S ").pattern(" S ").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void toolAxe(Consumer<IFinishedRecipe> consumer, IItemProvider pToolAxe, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolAxe).define('S', Items.STICK).define('#', pMaterial).pattern("##").pattern("#S").pattern(" S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
-	}
-
-	private static void toolAxe(Consumer<IFinishedRecipe> consumer, IItemProvider pToolAxe, IItemProvider pToolStick, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolAxe).define('S', pToolStick).define('#', pMaterial).pattern("##").pattern("#S").pattern(" S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pToolAxe).define('S', Items.STICK).define('#', pMaterial).pattern("##").pattern("#S").pattern(" S").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void toolHoe(Consumer<IFinishedRecipe> consumer, IItemProvider pToolHoe, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolHoe).define('S', Items.STICK).define('#', pMaterial).pattern("##").pattern(" S").pattern(" S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
-	}
-
-	private static void toolHoe(Consumer<IFinishedRecipe> consumer, IItemProvider pToolHoe, IItemProvider pToolStick, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pToolHoe).define('S', pToolStick).define('#', pMaterial).pattern("##").pattern(" S").pattern(" S").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pToolHoe).define('S', Items.STICK).define('#', pMaterial).pattern("##").pattern(" S").pattern(" S").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void materialToBlock(Consumer<IFinishedRecipe> consumer, IItemProvider pBlock, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pBlock).define('#', pMaterial).pattern("###").pattern("###").pattern("###").unlockedBy("has_" + pMaterial.asItem(), has(pMaterial)).save(consumer);
+		ShapedRecipeBuilder.shaped(pBlock).define('#', pMaterial).pattern("###").pattern("###").pattern("###").unlockedBy("has_" + pMaterial, has(pMaterial)).save(consumer);
 	}
 
 	private static void blockToMaterial(Consumer<IFinishedRecipe> consumer, IItemProvider pBlock, IItemProvider pMaterial) {
-		ShapelessRecipeBuilder.shapeless(pMaterial, 9).requires(pBlock).unlockedBy("has_" + pBlock.asItem(), has(pBlock)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(pMaterial, 9).requires(pBlock).unlockedBy("has_" + pBlock, has(pBlock)).save(consumer);
 	}
 
 	private static void blockToMaterial(Consumer<IFinishedRecipe> consumer, IItemProvider pBlock, IItemProvider pMaterial, ResourceLocation name) {
-		ShapelessRecipeBuilder.shapeless(pMaterial, 9).requires(pBlock).unlockedBy("has_" + pBlock.asItem(), has(pBlock)).save(consumer, name);
+		ShapelessRecipeBuilder.shapeless(pMaterial, 9).requires(pBlock).unlockedBy("has_" + pBlock, has(pBlock)).save(consumer, name);
 	}
 
 	private static void nuggetToIngot(Consumer<IFinishedRecipe> consumer, IItemProvider pIngot, IItemProvider pNugget) {
-		ShapedRecipeBuilder.shaped(pIngot).define('#', pNugget).pattern("###").pattern("###").pattern("###").unlockedBy("has_" + pNugget.asItem(), has(pNugget)).save(consumer, "chaosawakens:" + pIngot + "_from_nuggets");
+		ShapedRecipeBuilder.shaped(pIngot).define('#', pNugget).pattern("###").pattern("###").pattern("###").unlockedBy("has_" + pNugget, has(pNugget)).save(consumer, "chaosawakens:" + pIngot + "_from_nuggets");
 	}
 
 	private static void ingotToNugget(Consumer<IFinishedRecipe> consumer, IItemProvider pIngot, IItemProvider pNugget) {
-		ShapelessRecipeBuilder.shapeless(pNugget, 9).requires(pIngot).unlockedBy("has_" + pIngot.asItem(), has(pIngot)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(pNugget, 9).requires(pIngot).unlockedBy("has_" + pIngot, has(pIngot)).save(consumer);
 	}
 
 	private static void smelting(Consumer<IFinishedRecipe> consumer, IItemProvider pInput, IItemProvider pOutput, Float experience, int cookingTime) {
-		CookingRecipeBuilder.smelting(Ingredient.of(pInput), pOutput, experience, cookingTime).unlockedBy("has_" + pInput.asItem(), has(pInput)).save(consumer, "chaosawakens:" + pOutput + "_from_smelting");
+		CookingRecipeBuilder.smelting(Ingredient.of(pInput), pOutput, experience, cookingTime).unlockedBy("has_" + pInput, has(pInput)).save(consumer, "chaosawakens:" + pOutput + "_from_smelting");
 	}
 
 	private static void blasting(Consumer<IFinishedRecipe> consumer, IItemProvider pInput, IItemProvider pOutput, Float experience, int cookingTime) {
-		CookingRecipeBuilder.blasting(Ingredient.of(pInput), pOutput, experience, cookingTime).unlockedBy("has_" + pInput.asItem(), has(pInput)).save(consumer, "chaosawakens:" + pOutput + "_from_blasting");
+		CookingRecipeBuilder.blasting(Ingredient.of(pInput), pOutput, experience, cookingTime).unlockedBy("has_" + pInput, has(pInput)).save(consumer, "chaosawakens:" + pOutput + "_from_blasting");
 	}
 
 	private static void cooking(Consumer<IFinishedRecipe> consumer, IItemProvider pInput, IItemProvider pOutput, int cookingTime, String CookingRecipeSerializerID, CookingRecipeSerializer<?> cookingRecipeSerializer) {
-		CookingRecipeBuilder.cooking(Ingredient.of(pInput), pOutput, 0.35F, cookingTime, cookingRecipeSerializer).unlockedBy("has_" + pInput.asItem(), has(pInput)).save(consumer, "chaosawakens:" + pOutput + "_from_" + CookingRecipeSerializerID);
+		CookingRecipeBuilder.cooking(Ingredient.of(pInput), pOutput, 0.35F, cookingTime, cookingRecipeSerializer).unlockedBy("has_" + pInput, has(pInput)).save(consumer, "chaosawakens:" + pOutput + "_from_" + CookingRecipeSerializerID);
 	}
 
 	private static void philoConversionRecipe(Consumer<IFinishedRecipe> consumer, IItemProvider a, int aAmount, IItemProvider b, int bAmount) {

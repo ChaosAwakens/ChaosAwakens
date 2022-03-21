@@ -40,7 +40,7 @@ public class ClientSetupEvent {
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.FROG.get(), FrogEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRender::new); 
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EXPLOSIVE_BALL.get(), RayGunProjectileRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_FISHING_BOBBER.get(), UltimateBobberRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.APPLE_COW.get(), AppleCowEntityRender::new);
@@ -65,9 +65,13 @@ public class ClientSetupEvent {
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SPARK_FISH.get(), SparkFishEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WOOD_FISH.get(), WoodFishRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LAVA_EEL.get(), LavaEelEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GAZELLE.get(), GazelleEntityRender::new);
 
         RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM_PLANT.get(), RenderType.cutoutMipped());
+        
+        RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_GRASS.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.TALL_CRYSTAL_GRASS.get(), RenderType.cutoutMipped());
 
         RenderTypeLookup.setRenderLayer(CABlocks.RED_ANT_NEST.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(CABlocks.BROWN_ANT_NEST.get(), RenderType.cutout());
@@ -83,10 +87,19 @@ public class ClientSetupEvent {
         RenderTypeLookup.setRenderLayer(CABlocks.APPLE_SAPLING.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_SAPLING.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(CABlocks.PEACH_SAPLING.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_SAPLING.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_SAPLING.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_SAPLING.get(), RenderType.cutout());
-
+        RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
+        
+        RenderTypeLookup.setRenderLayer(CABlocks.BLUE_CRYSTAL_FAN.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.BLUE_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_FAN.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_FAN.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_FAN.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
+        
         RenderTypeLookup.setRenderLayer(CABlocks.POTTED_CYAN_ROSE.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(CABlocks.POTTED_RED_ROSE.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PAEONIA.get(), RenderType.cutout());
@@ -106,8 +119,6 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.STRAWBERRY_BUSH.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.TOMATO_TOP_BLOCK.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.TOMATO_BODY_BLOCK.get(), RenderType.cutoutMipped());
-
-		RenderTypeLookup.setRenderLayer(CABlocks.RADISHES.get(), RenderType.cutout());
 
         RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_GRASS_BLOCK.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(CABlocks.KYANITE.get(), RenderType.cutoutMipped());

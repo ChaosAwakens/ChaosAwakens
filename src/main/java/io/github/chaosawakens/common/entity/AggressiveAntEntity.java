@@ -125,11 +125,6 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
     }
 
     @Override
-    protected boolean shouldDropExperience() {
-        return false;
-    }
-
-    @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
     }

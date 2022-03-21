@@ -724,6 +724,16 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .add(ItemLootEntry.lootTableItem(Items.EMERALD)
                                         .apply(SetCount.setCount(RandomValueRange.between(0.0F, 2.0F)))
                                         .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.GAZELLE.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(Items.LEATHER)
+                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
+                                        .when(KilledByPlayer.killedByPlayer()))
+                                .add(ItemLootEntry.lootTableItem(Items.DIAMOND)
+                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
     }
 
     @Override

@@ -20,7 +20,7 @@
     "grass_color": 353825,
     "foliage_color": 353825
   },
-  "surface_builder": "chaosawakens:crystal_grass",
+  "surface_builder": "chaosawakens:crystal_world",
   "carvers": {
     "air": [
       "minecraft:cave",

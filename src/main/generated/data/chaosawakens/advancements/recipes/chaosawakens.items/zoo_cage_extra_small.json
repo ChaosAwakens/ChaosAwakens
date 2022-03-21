@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_forge:storage_blocks/iron": {
+    "has_OptionalNamedTag[forge:storage_blocks/iron]": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -16,7 +16,7 @@
         ]
       }
     },
-    "has_forge:storage_blocks/quartz": {
+    "has_OptionalNamedTag[forge:storage_blocks/quartz]": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -35,8 +35,8 @@
   },
   "requirements": [
     [
-      "has_forge:storage_blocks/iron",
-      "has_forge:storage_blocks/quartz",
+      "has_OptionalNamedTag[forge:storage_blocks/iron]",
+      "has_OptionalNamedTag[forge:storage_blocks/quartz]",
       "has_the_recipe"
     ]
   ]

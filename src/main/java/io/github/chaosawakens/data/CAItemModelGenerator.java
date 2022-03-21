@@ -52,8 +52,11 @@ public class CAItemModelGenerator extends ItemModelProvider {
              */
 
             ChaosAwakens.LOGGER.info(item.getId());
-
-            if (item.getId().getPath().contains("_spawn_egg")) {
+            
+            if (item.getId().getPath().contains("critter_cage")) {
+            	getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/critter_cages/" + name.replaceAll("_critter_cage", ""));
+            }
+            else if (item.getId().getPath().contains("_spawn_egg")) {
                 getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/spawn_eggs/" + name.replaceAll("_spawn_egg", ""));
             } else {
                 if (!existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), TEXTURE) || existingFileHelper.exists(new ResourceLocation(ChaosAwakens.MODID, "item/" + name), MODEL))

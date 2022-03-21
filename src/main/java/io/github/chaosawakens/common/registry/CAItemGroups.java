@@ -4,6 +4,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 public class CAItemGroups {
+
+    // ITEM GROUPS
     public static final ItemGroup BLOCKS = new ItemGroup("chaosawakens.blocks") {
         @Override
         public ItemStack makeIcon() {
