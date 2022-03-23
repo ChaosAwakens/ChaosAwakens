@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
+import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,10 +21,13 @@ public class RandomTeleportBlock extends Block {
     public RandomTeleportBlock(Properties props) {
         super(props);
     }
+    
 
     public Random getRNG() {
         return this.RANDOM;
     }
+
+    int maxDistance =  CAConfig.COMMON.randomTeleportBlockMaxDistance.get();
 
     @Override
     public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
@@ -33,9 +37,9 @@ public class RandomTeleportBlock extends Block {
             double d2 = entityIn.getZ();
 
             for (int i = 0; i < 16; ++i) {
-                double d3 = entityIn.getX() + (getRNG().nextDouble() - 0.5D) * 16.0D;
+                double d3 = entityIn.getX() + (getRNG().nextDouble() - 0.5D) * maxDistance;
                 double d4 = MathHelper.clamp(entityIn.getY() + (double) (getRNG().nextInt(16) - 8), 0.0D, (worldIn.getHeight() - 1));
-                double d5 = entityIn.getZ() + (getRNG().nextDouble() - 0.5D) * 16.0D;
+                double d5 = entityIn.getZ() + (getRNG().nextDouble() - 0.5D) * maxDistance;
                 if (entityIn.isPassenger())
                     entityIn.stopRiding();
 

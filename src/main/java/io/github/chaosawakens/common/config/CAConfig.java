@@ -137,6 +137,8 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableEnchantedGoldenAppleCowBreeding;
 
 		public final ConfigValue<Boolean> holidayTextures;
+
+		public final ConfigValue<Integer> randomTeleportBlockMaxDistance; 
 		
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
 		public final ConfigValue<Boolean> mobHeadDrops;
@@ -259,6 +261,10 @@ public class CAConfig {
 			builder.pop();
 			builder.pop();
 			builder.push("Functionality");
+			builder.push("Misc");
+			randomTeleportBlockMaxDistance = builder.comment("Maximum distance from the player that the random teleport block can teleport the player to. Set to 0 to disable.")
+					.define("Random Teleport Block Max Distance", 16);
+			builder.pop();
 			builder.push("Thunder Staff");
 			thunderStaffExplosionSize = builder.define("Thunder Staff explosion size", 4);
 			thunderStaffExplosionType = builder.comment("0 = NONE - The Thunder Staff will not affect the terrain." + "\n" + "1 = BREAK - The Thunder Staff will drop some blocks that it breaks. (May not work due to lightning)" + "\n" + "2 = DESTROY - The Thunder Staff will destroy blocks and never drop them.").defineInRange("Thunder Staff explosion type", 2, 0, 2);
