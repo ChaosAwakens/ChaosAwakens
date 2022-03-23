@@ -284,5 +284,11 @@
     "sounds": [
       "chaosawakens:entity/ent/attack"
     ]
+  },
+  "entity.wasp.ambient": {
+    "subtitle": "subtitles.chaosawakens.entity.wasp.ambient",
+    "sounds": [
+      "chaosawakens:entity/wasp/ambient"
+    ]
   }
 }

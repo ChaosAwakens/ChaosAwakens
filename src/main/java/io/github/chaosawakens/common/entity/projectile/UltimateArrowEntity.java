@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class UltimateArrowEntity extends AbstractArrowEntity {
-
     private int duration = 200;
 
     public UltimateArrowEntity(EntityType<? extends UltimateArrowEntity> type, World worldIn) {

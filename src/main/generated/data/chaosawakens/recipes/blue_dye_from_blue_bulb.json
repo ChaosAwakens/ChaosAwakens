@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "purple_dye",
+  "ingredients": [
+    {
+      "item": "chaosawakens:blue_bulb"
+    }
+  ],
+  "result": {
+    "item": "minecraft:blue_dye"
+  }
+}

@@ -12,8 +12,13 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class CACustomConversionProvider extends CustomConversionProvider {
-    public CACustomConversionProvider(@Nonnull DataGenerator generator) {
+    public CACustomConversionProvider(DataGenerator generator) {
         super(generator);
+    }
+
+    @Override
+    public String getName() {
+        return ChaosAwakens.MODNAME + ": ProjectE Custom Conversions";
     }
 
     @Override

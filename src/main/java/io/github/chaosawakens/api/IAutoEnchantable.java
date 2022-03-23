@@ -1,5 +1,4 @@
 package io.github.chaosawakens.api;
-
 import net.minecraft.enchantment.EnchantmentData;
 
 /**
@@ -9,6 +8,5 @@ import net.minecraft.enchantment.EnchantmentData;
  */
 @FunctionalInterface
 public interface IAutoEnchantable {
-
     EnchantmentData[] enchantments();
 }

@@ -5,7 +5,6 @@ import io.github.chaosawakens.common.items.SlayerChainsawItem;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 public class SlayerChainsawItemRender extends GeoItemRenderer<SlayerChainsawItem> {
-
     public SlayerChainsawItemRender() {
         super(new SlayerChainsawItemModel());
     }

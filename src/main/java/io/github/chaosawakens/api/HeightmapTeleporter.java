@@ -15,11 +15,7 @@ import net.minecraftforge.common.util.ITeleporter;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-/**
- * @author invalid2
- */
 public class HeightmapTeleporter implements ITeleporter {
-
 	@Nullable
 	public PortalInfo getPortalInfo(Entity entity, ServerWorld targetWorld, Function<ServerWorld, PortalInfo> defaultPortalInfo) {
 		// ChaosAwakens.debug("TELEPORTER", entity+" "+targetWorld);

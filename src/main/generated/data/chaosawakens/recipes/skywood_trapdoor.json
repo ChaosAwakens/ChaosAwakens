@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:skywood_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:skywood_trapdoor"
+  }
+}

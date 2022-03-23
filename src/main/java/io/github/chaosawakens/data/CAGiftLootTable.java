@@ -1,12 +1,18 @@
 package io.github.chaosawakens.data;
 
+import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.data.loot.GiftLootTables;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import java.util.function.BiConsumer;
 
 public class CAGiftLootTable extends GiftLootTables {
+    public String getName() {
+        return ChaosAwakens.MODNAME + ": Gift Loot Tables";
+    }
+
     @Override
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 //        consumer.accept(CALootTables.ODDITIES_PURVEYOR_GIFT,

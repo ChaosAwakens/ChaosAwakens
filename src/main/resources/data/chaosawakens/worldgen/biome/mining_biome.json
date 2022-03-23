@@ -1,26 +1,53 @@
 {
-  "surface_builder": "minecraft:grass",
+  "player_spawn_friendly": true,
+  "precipitation": "none",
+  "temperature": 0.8,
+  "downfall": 0.0,
+  "category": "none",
   "depth": 3,
   "scale": 0.5,
-  "temperature": 0.2,
-  "downfall": 0.3,
-  "precipitation": "rain",
-  "category": "extreme_hills",
-  "player_spawn_friendly": true,
   "effects": {
-    "sky_color": 7907327,
-    "fog_color": 12638463,
-    "water_color": 4159204,
-    "water_fog_color": 329011,
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
-    }
+    },
+    "sky_color": 7907327,
+    "fog_color": 12638463,
+    "water_color": 4159204,
+    "water_fog_color": 329011
   },
-  "starts": [
+  "surface_builder": "chaosawakens:mining_biome",
+  "carvers": {
+    "air": [
+      "minecraft:canyon",
+      "minecraft:cave"
+    ]
+  },
+  "features": [
+    [
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite",
+      "minecraft:ore_diorite",
+      "minecraft:ore_andesite",
+      "minecraft:ore_coal",
+      "minecraft:ore_iron",
+      "minecraft:ore_gold",
+      "minecraft:ore_emerald",
+      "minecraft:ore_redstone",
+      "minecraft:ore_diamond",
+      "minecraft:ore_lapis",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
+    ]
   ],
+  "starts": [],
   "spawners": {
     "monster": [
       {
@@ -113,38 +140,5 @@
       }
     ]
   },
-  "spawn_costs": {
-  },
-  "carvers": {
-    "air": [
-      "minecraft:canyon",
-      "minecraft:cave"
-    ]
-  },
-  "features": [
-    [
-      "minecraft:ore_dirt",
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite",
-      "minecraft:ore_diorite",
-      "minecraft:ore_andesite",
-      "minecraft:ore_coal",
-      "minecraft:ore_iron",
-      "minecraft:ore_gold",
-      "minecraft:ore_emerald",
-      "minecraft:ore_redstone",
-      "minecraft:ore_diamond",
-      "minecraft:ore_lapis",
-      "minecraft:disk_sand",
-      "minecraft:disk_clay",
-      "minecraft:disk_gravel"
-    ],
-    [
-      "minecraft:patch_grass_normal",
-      "minecraft:plain_vegetation",
-      "minecraft:flower_plain_decorated",
-      "minecraft:spring_water",
-      "minecraft:spring_lava"
-    ]
-  ]
+  "spawn_costs": {}
 }

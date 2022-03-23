@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class UraniumOreBlock extends CAOreBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-    public static final IntegerProperty GLOW_STRENGTH = CABlockStateProperties.ORE_GLOW_STRENGTH;
+    public static final IntegerProperty GLOW_STRENGTH = CABlockStateProperties.URANIUM_GLOW_STRENGTH;
     private static final IParticleData dustParticles = new RedstoneParticleData(0.6F, 0.8F, 0.3F, 1.0F);
 
     public UraniumOreBlock(Properties properties) {

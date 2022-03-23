@@ -134,6 +134,6 @@
   "precipitation": "none",
   "temperature": 2,
   "downfall": 0,
-  "category": "desert",
+  "category": "none",
   "depth": 0.125
 }

@@ -1,0 +1,62 @@
+{
+  "type": "chaosawakens:crystal_world",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "seed": 0,
+      "biomes": [
+        {
+          "parameters": {
+            "altitude": 0.0,
+            "weirdness": 0.5,
+            "offset": 0.0,
+            "temperature": 1.0,
+            "humidity": 1.0
+          },
+          "biome": "chaosawakens:crystal_plains"
+        },
+        {
+          "parameters": {
+            "altitude": 0.2,
+            "weirdness": 0.6,
+            "offset": 0.0,
+            "temperature": 1.0,
+            "humidity": 1.0
+          },
+          "biome": "chaosawakens:crystal_hills"
+        }
+      ],
+      "temperature_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      },
+      "humidity_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      },
+      "altitude_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      },
+      "weirdness_noise": {
+        "firstOctave": -7,
+        "amplitudes": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "settings": "chaosawakens:crystal_world"
+  }
+}

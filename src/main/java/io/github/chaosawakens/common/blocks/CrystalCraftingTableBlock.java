@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.blocks;
 
 import io.github.chaosawakens.common.gui.container.CraftingTableContainer;
+import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,7 +35,7 @@ public class CrystalCraftingTableBlock extends Block {
             return ActionResultType.SUCCESS;
         } else {
             player.openMenu(state.getMenuProvider(worldIn, pos));
-            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+            player.awardStat(CAStats.INTERACT_WITH_CRYSTAL_CRAFTING_TABLE);
             return ActionResultType.CONSUME;
         }
     }

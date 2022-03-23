@@ -195,6 +195,6 @@
   "precipitation": "rain",
   "temperature": 0.25,
   "downfall": 0.8,
-  "category": "taiga",
+  "category": "none",
   "depth": 0.2
 }

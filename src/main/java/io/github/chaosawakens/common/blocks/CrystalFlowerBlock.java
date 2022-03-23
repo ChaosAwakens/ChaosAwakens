@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,15 +13,14 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CrystalFlowerBlock extends FlowerBlock{
-	 
+public class CrystalFlowerBlock extends FlowerBlock {
 	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
 	private final Effect sussyStewEffect;
 	private final int effectDuration;
-
 	 
 	public CrystalFlowerBlock(Effect effect, int duration, AbstractBlock.Properties prop) {
 		super(effect, duration, prop);
@@ -30,6 +30,17 @@ public class CrystalFlowerBlock extends FlowerBlock{
 		} else {  
 			this.effectDuration = duration * 20; 
 		}	 
+	}
+
+	protected boolean mayPlaceOn(BlockState state, IBlockReader world, BlockPos pos) {
+		return state.is(CABlocks.CRYSTAL_GRASS_BLOCK.get());
+	}
+
+	public boolean canSurvive(BlockState state, IWorldReader worldReader, BlockPos pos) {
+		BlockPos blockpos = pos.below();
+		if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+			return worldReader.getBlockState(blockpos).canSustainPlant(worldReader, blockpos, Direction.UP, this);
+		return this.mayPlaceOn(worldReader.getBlockState(blockpos), worldReader, blockpos);
 	}
 
 	@Override
@@ -53,7 +64,6 @@ public class CrystalFlowerBlock extends FlowerBlock{
 		return this.effectDuration;
 	}
 	
-    @SuppressWarnings("deprecation")
 	@OnlyIn(Dist.CLIENT)
     @Override
     public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {
@@ -73,5 +83,4 @@ public class CrystalFlowerBlock extends FlowerBlock{
     public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
         return true;
     }
-
 }

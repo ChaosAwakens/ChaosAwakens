@@ -136,7 +136,7 @@
   "precipitation": "snow",
   "temperature": 0,
   "downfall": 0.5,
-  "category": "icy",
+  "category": "none",
   "creature_spawn_probability": 0.07,
   "depth": 0.125
 }

@@ -16,7 +16,7 @@
         ]
       }
     },
-    "has_OptionalNamedTag[forge:gems/diamond]": {
+    "has_forge:gems/diamond": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -26,7 +26,7 @@
         ]
       }
     },
-    "has_OptionalNamedTag[forge:gems/emerald]": {
+    "has_forge:gems/emerald": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -56,8 +56,8 @@
   "requirements": [
     [
       "has_amethyst",
-      "has_OptionalNamedTag[forge:gems/diamond]",
-      "has_OptionalNamedTag[forge:gems/emerald]",
+      "has_forge:gems/diamond",
+      "has_forge:gems/emerald",
       "has_ruby",
       "has_the_recipe"
     ]

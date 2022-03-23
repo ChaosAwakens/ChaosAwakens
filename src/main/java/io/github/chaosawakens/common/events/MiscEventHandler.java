@@ -1,6 +1,8 @@
 package io.github.chaosawakens.common.events;
 
 import com.mojang.brigadier.CommandDispatcher;
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
@@ -8,14 +10,17 @@ import io.github.chaosawakens.common.registry.CACommand;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.command.CommandSource;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.monster.GiantEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.RandomValueRange;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
@@ -27,6 +32,8 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
 
 public class MiscEventHandler {
 	@SubscribeEvent
@@ -36,15 +43,22 @@ public class MiscEventHandler {
 	}
 	
 	public static void livingDeathEvent(LivingDeathEvent event) {
+		Entity entity = event.getEntity();
+		MinecraftServer server = entity.getServer();
+		Random random = new Random();
+		if (entity == null || server == null) return;
+		if (entity instanceof PlayerEntity) {
+			// Make myself (Blackout03_) drop Ink Sacs any time I die. Even if I have none on me.
+			if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
+				((PlayerEntity) entity).drop(new ItemStack(Items.INK_SAC, random.nextInt(3)), true, false);
+			}
+		}
 		if (CAConfig.COMMON.enableDragonEggRespawns.get()) {
-			if (event.getEntityLiving() == null)return;
-			MinecraftServer server = event.getEntity().getServer();
-			if (server == null)return;
-			if (event.getEntity().getCommandSenderWorld().equals(server.getLevel(World.END))) {
-				if (event.getEntity() instanceof EnderDragonEntity) {
-					EnderDragonEntity dragon = (EnderDragonEntity) event.getEntity();
+			if (entity.getCommandSenderWorld().equals(server.getLevel(World.END))) {
+				if (entity instanceof EnderDragonEntity) {
+					EnderDragonEntity dragon = (EnderDragonEntity) entity;
 					if (dragon.getDragonFight() != null && dragon.getDragonFight().hasPreviouslyKilledDragon()) {
-						event.getEntity().getCommandSenderWorld().setBlockAndUpdate(event.getEntity().getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
+						entity.getCommandSenderWorld().setBlockAndUpdate(entity.getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
 					}
 				}
 			}
@@ -78,15 +92,16 @@ public class MiscEventHandler {
 	}
 	
 	public static void onEntityJoin(EntityJoinWorldEvent event) {
+		Entity entity = event.getEntity();
 		// Make villagers afraid of our entities
-		if (event.getEntity() instanceof VillagerEntity) {
-			VillagerEntity villager = (VillagerEntity) event.getEntity();
+		if (entity instanceof VillagerEntity) {
+			VillagerEntity villager = (VillagerEntity) entity;
 			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
 			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
 			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, GiantEntity.class, 32.0F, 0.5D, 0.5D));
 		}
-		if (event.getEntity() instanceof WanderingTraderEntity) {
-			WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) event.getEntity();
+		if (entity instanceof WanderingTraderEntity) {
+			WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) entity;
 			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
 			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboWarriorEntity.class, 32.0F, 0.5D, 0.5D));
 			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, GiantEntity.class, 32.0F, 0.5D, 0.5D));

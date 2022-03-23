@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_OptionalNamedTag[forge:rods/wooden]": {
+    "has_forge:rods/wooden": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -16,7 +16,7 @@
         ]
       }
     },
-    "has_NamedTag[minecraft:coals]": {
+    "has_minecraft:coals": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -26,7 +26,7 @@
         ]
       }
     },
-    "has_OptionalNamedTag[forge:dusts/redstone]": {
+    "has_forge:dusts/redstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -55,9 +55,9 @@
   },
   "requirements": [
     [
-      "has_OptionalNamedTag[forge:rods/wooden]",
-      "has_NamedTag[minecraft:coals]",
-      "has_OptionalNamedTag[forge:dusts/redstone]",
+      "has_forge:rods/wooden",
+      "has_minecraft:coals",
+      "has_forge:dusts/redstone",
       "has_sunstone",
       "has_the_recipe"
     ]

@@ -24,6 +24,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
 import org.apache.commons.lang3.Validate;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
@@ -37,6 +38,11 @@ public class CAAdvancementProvider extends AdvancementProvider {
     public CAAdvancementProvider(DataGenerator generatorIn) {
         super(generatorIn);
         this.generator = generatorIn;
+    }
+
+    @Override
+    public String getName() {
+        return ChaosAwakens.MODNAME + ": Advancements";
     }
 
     private static Path getPath(Path pathIn, Advancement advancementIn) {
@@ -91,8 +97,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
                 InventoryChangeTrigger.Instance.hasItems(CAItems.COPPER_HELMET.get(), CAItems.COPPER_CHESTPLATE.get(), CAItems.COPPER_LEGGINGS.get(), CAItems.COPPER_BOOTS.get())).addCriterion("peacock_feather_armor",
                 InventoryChangeTrigger.Instance.hasItems(CAItems.PEACOCK_FEATHER_HELMET.get(), CAItems.PEACOCK_FEATHER_CHESTPLATE.get(), CAItems.PEACOCK_FEATHER_LEGGINGS.get(), CAItems.PEACOCK_FEATHER_BOOTS.get())).addCriterion("tin_armor",
                 InventoryChangeTrigger.Instance.hasItems(CAItems.TIN_HELMET.get(), CAItems.TIN_CHESTPLATE.get(), CAItems.TIN_LEGGINGS.get(), CAItems.TIN_BOOTS.get())).addCriterion("lava_eel_armor",
-                InventoryChangeTrigger.Instance.hasItems(CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())).addCriterion("moth_scale_armor",
-                InventoryChangeTrigger.Instance.hasItems(CAItems.MOTH_SCALE_HELMET.get(), CAItems.MOTH_SCALE_CHESTPLATE.get(), CAItems.MOTH_SCALE_LEGGINGS.get(), CAItems.MOTH_SCALE_BOOTS.get())).addCriterion("silver_armor",
+                InventoryChangeTrigger.Instance.hasItems(CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get()))/*/.addCriterion("moth_scale_armor",
+                InventoryChangeTrigger.Instance.hasItems(CAItems.MOTH_SCALE_HELMET.get(), CAItems.MOTH_SCALE_CHESTPLATE.get(), CAItems.MOTH_SCALE_LEGGINGS.get(), CAItems.MOTH_SCALE_BOOTS.get()))/*/.addCriterion("silver_armor",
                 InventoryChangeTrigger.Instance.hasItems(CAItems.SILVER_HELMET.get(), CAItems.SILVER_CHESTPLATE.get(), CAItems.SILVER_LEGGINGS.get(), CAItems.SILVER_BOOTS.get())).addCriterion("pink_tourmaline_armor",
                 InventoryChangeTrigger.Instance.hasItems(CAItems.PINK_TOURMALINE_HELMET.get(), CAItems.PINK_TOURMALINE_CHESTPLATE.get(), CAItems.PINK_TOURMALINE_LEGGINGS.get(), CAItems.PINK_TOURMALINE_BOOTS.get())).addCriterion("lapis_armor",
                 InventoryChangeTrigger.Instance.hasItems(CAItems.LAPIS_HELMET.get(), CAItems.LAPIS_CHESTPLATE.get(), CAItems.LAPIS_LEGGINGS.get(), CAItems.LAPIS_BOOTS.get())).addCriterion("emerald_armor",
@@ -106,8 +112,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
                 InventoryChangeTrigger.Instance.hasItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get())).save(t, id("all_armor"));
 
 
-        Advancement crystalworld = registerAdvancement("crystalworld", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root).addCriterion("crystalworld",
-                ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTALWORLD)).save(t, id("crystalworld"));
+        Advancement crystalWorld = registerAdvancement("crystal_world", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root).addCriterion("crystal_world",
+                ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTAL_WORLD)).save(t, id("crystal_world"));
 
         Advancement miningParadise = registerAdvancement("mining_paradise", FrameType.TASK, CABlocks.URANIUM_ORE.get()).parent(root).addCriterion("mining_paradise",
                 ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_PARADISE)).save(t, id("mining_paradise"));
@@ -124,7 +130,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.RUBY_BUG.get()))).addCriterion("stink_bug",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.STINK_BUG.get()))).save(t, id("bug_squasher"));
 
-        Advancement goFish = registerAdvancement("go_fish", FrameType.TASK, CAItems.ROCK_FISH.get()).parent(root).addCriterion("rock_fish",
+        Advancement goFish = registerAdvancement("go_fish", FrameType.TASK, CAItems.ROCK_FISH.get()).parent(root).addCriterion("green_fish",
+                KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.GREEN_FISH.get()))).addCriterion("rock_fish",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROCK_FISH.get()))).addCriterion("spark_fish",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.SPARK_FISH.get()))).addCriterion("wood_fish",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.WOOD_FISH.get()))).save(t, id("go_fish"));

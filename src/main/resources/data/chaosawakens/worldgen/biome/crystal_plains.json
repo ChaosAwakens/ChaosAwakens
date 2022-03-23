@@ -1,9 +1,9 @@
 {
   "player_spawn_friendly": true,
-  "precipitation": "rain",
-  "temperature": 0.7,
-  "downfall": 0.5,
-  "category": "plains",
+  "precipitation": "none",
+  "temperature": 0.8,
+  "downfall": 0.0,
+  "category": "none",
   "depth": 0.125,
   "scale": 0.05,
   "effects": {
@@ -39,6 +39,5 @@
       }
     ]
   },
-  "spawn_costs": {
-  }
+  "spawn_costs": {}
 }

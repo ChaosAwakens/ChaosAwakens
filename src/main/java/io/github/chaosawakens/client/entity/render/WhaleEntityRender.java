@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class WhaleEntityRender extends GeoEntityRenderer<WhaleEntity>{
-	
 	public WhaleEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new WhaleEntityModel());
         this.shadowRadius = 3.5F;

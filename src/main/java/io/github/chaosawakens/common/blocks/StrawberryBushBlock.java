@@ -22,7 +22,6 @@ import java.util.function.Supplier;
  * @author invalid2
  */
 public class StrawberryBushBlock extends SweetBerryBushBlock {
-
     private final Supplier<? extends Item> seedItem;
     private final Supplier<? extends Item> foodItem;
 

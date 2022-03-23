@@ -19,7 +19,6 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 
 public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
-
     private static final float EXPLOSION_POWER = CAConfig.COMMON.thunderStaffExplosionSize.get();
 
     public ThunderStaffProjectileEntity(EntityType<? extends AbstractFireballEntity> p_i50166_1_, World p_i50166_2_) {
@@ -40,7 +39,6 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
     protected void onHit(RayTraceResult result) {
         super.onHit(result);
         if (!this.level.isClientSide) {
-            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
             LightningBoltEntity lightning = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, level);
             lightning.moveTo(this.getX(), this.getY(), this.getZ(), 0, 0);
             this.level.addFreshEntity(lightning);

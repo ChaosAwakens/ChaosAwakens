@@ -5,7 +5,6 @@ import io.github.chaosawakens.common.items.AttitudeAdjusterItem;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 public class AttitudeAdjusterItemRender extends GeoItemRenderer<AttitudeAdjusterItem> {
-
     public AttitudeAdjusterItemRender() {
         super(new AttitudeAdjusterItemModel());
     }

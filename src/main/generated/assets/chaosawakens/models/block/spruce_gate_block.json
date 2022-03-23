@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "side": "chaosawakens:block/gate_block_spruce",
+    "side": "chaosawakens:block/spruce_gate_block",
     "bottom": "chaosawakens:block/gate_block_top",
     "top": "chaosawakens:block/gate_block_top"
   }

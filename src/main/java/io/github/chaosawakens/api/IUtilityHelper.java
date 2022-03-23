@@ -215,7 +215,7 @@ public interface IUtilityHelper {
 	 * @param blockToAdd block to add blacklist tag to
 	 */
 	default void addBlockToDuplicationsBlackList(Block blockToAdd) {
-		blockToAdd.getTags().add((ResourceLocation) CATags.getBlockTagWrapper("blacklist"));
+		blockToAdd.getTags().add((ResourceLocation) CATags.Blocks.tag("blacklist"));
 	}
 	
 	/**
@@ -223,7 +223,7 @@ public interface IUtilityHelper {
 	 * @param blockToAdd block to add whitelist tag to
 	 */
 	default void addBlockToDuplicationsWhiteList(Block blockToAdd) {
-		blockToAdd.getTags().add((ResourceLocation) CATags.getBlockTagWrapper("whitelist"));
+		blockToAdd.getTags().add((ResourceLocation) CATags.Blocks.tag("whitelist"));
 	}
 	
 	/**
@@ -258,25 +258,25 @@ public interface IUtilityHelper {
 	default boolean isMovingAtVelocity(float speed, LivingEntity entityToCheck) {
 		return entityToCheck.getSpeed() == speed;
 	}
-	
+
 	/**
 	 * Checks the uuid of an entity or player
-	 * @param entity entity to check uuid of
+	 * @param entityToCheck entity to check uuid of
 	 * @param uuidToCheck uuid of entity to check
 	 * @return true if entity's uuid is equal to uuidToCheck, else returns false
 	 */
-	default boolean isUserOrEntityUUIDEqualTo(Entity entity, UUID uuidToCheck) {
-		return entity.getUUID() == uuidToCheck;
+	static boolean isUserOrEntityUUIDEqualTo(Entity entityToCheck, UUID uuidToCheck) {
+		return entityToCheck.getUUID().equals(uuidToCheck);
 	}
-	
+
 	/**
 	 * Gets the name of an entity or player
-	 * @param name name of entity to check
+	 * @param nameToCheck name of entity to check
 	 * @param entityToCheck entity to check name of
 	 * @return true if entity name is equal to the name provided, else returns false
 	 */
-	default boolean isEntityNameEqualTo(String name, Entity entityToCheck) {
-		return entityToCheck.getName().toString() == name;
+	static boolean isEntityNameEqualTo(Entity entityToCheck, String nameToCheck) {
+		return entityToCheck.getName().getString().equals(nameToCheck);
 	}
 	
 	/**
@@ -624,7 +624,7 @@ public interface IUtilityHelper {
 	
 	/**
 	 * Adds Vanilla mobs to the Vanilla entities list, primarily used for differentiating between Vanilla mobs and other mob types from CA or other mods
-	 * @param CAMobToAdd Mob to add to the <code>VANILLA_ENTITIES</code>
+	 * @param VanillaMobToAdd Mob to add to the <code>VANILLA_ENTITIES</code>
 	 * @return the list <code>VANILLA_ENTITIES</code>
 	 */
 	default List<EntityType<? extends LivingEntity>> addVanillaEntityToVanillaEntityList(EntityType<? extends LivingEntity> VanillaMobToAdd) {

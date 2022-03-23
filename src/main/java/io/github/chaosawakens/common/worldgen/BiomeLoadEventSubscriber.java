@@ -10,7 +10,6 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
@@ -23,7 +22,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class BiomeLoadEventSubscriber {
-	
 	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
 		StructureHandler.addfeatures(event);
 		StructureHandler.addStructureSpawns(event);
@@ -57,27 +55,14 @@ public class BiomeLoadEventSubscriber {
 				func.apply(CAConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);
 				break;
 			case SAVANNA:
-				if (location.contains("village_"))
-					return;
 				func.apply(CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
 				break;
 			case TAIGA:
 			case EXTREME_HILLS:
-				if (location.contains("village_"))
-					return;
 				func.apply(CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
 				break;
 			case FOREST:
 			case PLAINS:
-				// Doing this in one if statement didn't work and would only make it now spawn in biomes named "village_" so I extended it to 4 if statements.
-				if (location.contains("village_"))
-					return;
-				if (location.contains("stalagmite_valley"))
-					return;
-				if (location.contains("mining_biome"))
-					return;
-				if (location.contains("crystal_"))
-					return;
 				func.apply(CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
 				break;
 			default:
@@ -183,17 +168,19 @@ public class BiomeLoadEventSubscriber {
 			BiomeLoadEventSubscriber.setEntDungeon((struct) -> gen.getStructures().add(() -> struct), event);
 
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addOverworldOres(gen);
+			}
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MUSHROOM)) {
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)) {
 				if (CAConfig.COMMON.enableOreGen.get())
 					addMountainBiomeOres(gen);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)) {
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
 				if (CAConfig.COMMON.enableOreGen.get())
 					addPlainsBiomeOres(gen);
 			}
@@ -272,36 +259,46 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
 			}
-			if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_DIMENSION)) {
+			if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_PARADISE)) {
 				if (CAConfig.COMMON.enableOreGen.get()) {
-					addMiningDimOres(gen);
-					if (location.equals("stalagmite_valley")) {
+					addMiningParadiseOres(gen);
+					if (BiomeDictionary.hasType(biome, CABiomes.Type.STALAGMITE_VALLEY)) {
 						addStalagmiteValleyOres(gen);
 					}
 				}
 
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_GRASS);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_TALL_DENSE_GRASS);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_THORNY_SUN);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
 			}
 
-			if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_DIMENSION)) {
+			if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_MANIA)) {
+				if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_PLAINS)) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
+				}
 				if (CAConfig.COMMON.enableOreGen.get())
-					addVillageDimOres(gen);
+					addVillageManiaOres(gen);
 
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
 			}
-			if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_DIMENSION)) {
+			if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_WORLD)) {
+				if (CAConfig.COMMON.enableOreGen.get())
+					addCrystalWorldOres(gen);
+
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CRYSTAL_PLAINS);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CRYSTAL_GRASS);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_CRYSTAL_GRASS);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_TALL_CRYSTAL_GRASS);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CRYSTAL_FLOWER_DEFAULT);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CRYSTAL_GROWTH_DEFAULT);
+			}
+			if (BiomeDictionary.hasType(biome, CABiomes.Type.DANGER_ISLES)) {
 				if (CAConfig.COMMON.enableOreGen.get())
-					addCrystalDimOres(gen);
+					addDangerIslesOres(gen);
 			}
 		}
 		
@@ -467,7 +464,7 @@ public class BiomeLoadEventSubscriber {
 		private static void addDesertBiomeOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableFossilGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_HUSK);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_HUSK_STONE);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_HUSK_SANDSTONE);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_SCORPION);
 			}
 		}
@@ -540,7 +537,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.END_FOSSILISED_SHULKER);
 			}
 		}
-		private static void addMiningDimOres(BiomeGenerationSettingsBuilder gen) {
+		private static void addMiningParadiseOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableOreRubyGen.get())
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_RUBY_LAVA);
 			if (CAConfig.COMMON.enableOreRubyGen.get())
@@ -624,7 +621,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_TERMITE_INFESTED);
 			}
 			if (CAConfig.COMMON.enableNestGen.get()) {
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RED_ANT_NEST);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.DENSE_RED_ANT_NEST);
 			}
 		}
 
@@ -632,13 +629,13 @@ public class BiomeLoadEventSubscriber {
 			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_DIMETRODON);
 		}
 		
-		private static void addVillageDimOres(BiomeGenerationSettingsBuilder gen) {
+		private static void addVillageManiaOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableNestGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.RAINBOW_ANT_NEST);
 			}
 		}
 		
-		private static void addCrystalDimOres(BiomeGenerationSettingsBuilder gen) {
+		private static void addCrystalWorldOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableOreGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.CRYSTAL_ORE_ENERGY);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_CATS_EYE);
@@ -650,15 +647,15 @@ public class BiomeLoadEventSubscriber {
 			}
 		}
 		
-//		private static void addDangerDimOres(BiomeGenerationSettingsBuilder gen) {
-//			if (CAConfig.COMMON.enableNestGen.get()) {
-//				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.UNSTABLE_ANT_NEST);
-//			}
-//		}
+		private static void addDangerIslesOres(BiomeGenerationSettingsBuilder gen) {
+			if (CAConfig.COMMON.enableNestGen.get()) {
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.UNSTABLE_ANT_NEST);
+			}
+		}
 		
-//		private static void addUtopiaDimOres(BiomeGenerationSettingsBuilder gen) {
+//		private static void addUtopiaKingdomOres(BiomeGenerationSettingsBuilder gen) {
 //			if (CAConfig.COMMON.enableNestGen.get()) {
-//				gen.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BROWN_ANT_NEST);
+//				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BROWN_ANT_NEST);
 //			}
 //		}
 	}

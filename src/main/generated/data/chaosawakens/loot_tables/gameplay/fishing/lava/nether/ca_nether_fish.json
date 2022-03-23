@@ -25,11 +25,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 30,
-          "name": "chaosawakens:gold_coin"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 55,
           "name": "chaosawakens:lava_eel"
         }

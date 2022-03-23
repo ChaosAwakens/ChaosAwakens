@@ -1,13 +1,17 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.*;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.block.Block;
+import net.minecraft.block.StandingSignBlock;
+import net.minecraft.block.WallSignBlock;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nonnull;
 
 public class CABlockModelProvider extends BlockModelProvider {
 	public CABlockModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {
@@ -15,9 +19,85 @@ public class CABlockModelProvider extends BlockModelProvider {
 	}
 
 	@Override
+	public String getName() {
+		return ChaosAwakens.MODNAME + ": Block Models";
+	}
+
+	private static ResourceLocation getResourceLocation(String path) {
+		return new ResourceLocation(ChaosAwakens.MODID, path);
+	}
+
+	private static ResourceLocation getBlockResourceLocation(String name) {
+		return getResourceLocation("block/" + name);
+	}
+
+	private static ResourceLocation getBlockResourceLocation(String name, @Nonnull String removeSuffix, String addSuffix) {
+		return getBlockResourceLocation(name.substring(0, name.length() - removeSuffix.length()) + addSuffix);
+	}
+
+	@Override
 	protected void registerModels() {
 		// TODO Automate the data generators
+		for (Block block : ForgeRegistries.BLOCKS) {
+			if (!ChaosAwakens.MODID.equals(block.getRegistryName().getNamespace())) continue;
+
+			String name = block.getRegistryName().getPath();
+			ChaosAwakens.LOGGER.debug(block.getRegistryName());
+
+			if (block instanceof StandingSignBlock || block instanceof WallSignBlock) {
+				if (block instanceof StandingSignBlock) {
+					getBuilder(name).texture("particle", getBlockResourceLocation(name, "_sign", "_planks"));
+				}
+			}
+		}
+
 		this.orientableWithBottom("defossilizer", mcRL("iron_block"), chaosRL("defossilizer_front"), mcRL("iron_block"), chaosRL("defossilizer_top"));
+
+		this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
+		this.cubeAll("dense_dirt", chaosRL("dense_dirt"));
+		this.cubeBottomTop("dense_red_ant_nest", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"));
+		this.plant("dense_grass", "dense_grass");
+		this.doublePlant("tall_dense_grass", "tall_dense_grass");
+		this.doublePlant("thorny_sun", "thorny_sun");
+		this.cross("blue_bulb", chaosRL("blue_bulb"));
+		this.cross("pink_bulb", chaosRL("pink_bulb"));
+		this.cross("purple_bulb", chaosRL("purple_bulb"));
+
+		this.cubeBottomTop("fossilised_husk_sandstone", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
+
+		this.cubeAll("aluminum_block", chaosRL("aluminum_block"));
+		this.cubeAll("aluminum_ore", chaosRL("aluminum_ore"));
+		this.cubeAll("amethyst_block", chaosRL("amethyst_block"));
+		this.cubeAll("amethyst_ore", chaosRL("amethyst_ore"));
+		this.cubeAll("bloodstone_block", chaosRL("bloodstone_block"));
+		this.cubeAll("bloodstone_ore", chaosRL("bloodstone_ore"));
+		this.cubeAll("copper_block", chaosRL("copper_block"));
+		this.cubeAll("copper_ore", chaosRL("copper_ore"));
+		this.cubeAll("platinum_block", chaosRL("platinum_block"));
+		this.cubeAll("platinum_ore", chaosRL("platinum_ore"));
+		this.cubeAll("ruby_block", chaosRL("ruby_block"));
+		this.cubeAll("ruby_ore", chaosRL("ruby_ore"));
+		this.cubeAll("netherrack_ruby_ore", chaosRL("netherrack_ruby_ore"));
+		this.cubeAll("blackstone_ruby_ore", chaosRL("blackstone_ruby_ore"));
+		this.cubeAll("silver_block", chaosRL("silver_block"));
+		this.cubeAll("silver_ore", chaosRL("silver_ore"));
+		this.cubeAll("sunstone_block", chaosRL("sunstone_block"));
+		this.cubeAll("sunstone_ore", chaosRL("sunstone_ore"));
+		this.cubeAll("tigers_eye_block", chaosRL("tigers_eye_block"));
+		this.cubeAll("tigers_eye_ore", chaosRL("tigers_eye_ore"));
+		this.cubeAll("tin_block", chaosRL("tin_block"));
+		this.cubeAll("tin_ore", chaosRL("tin_ore"));
+		this.cubeAll("titanium_block", chaosRL("titanium_block"));
+		this.cubeAll("titanium_ore", chaosRL("titanium_ore"));
+		this.cubeAll("uranium_block", chaosRL("uranium_block"));
+		this.cubeAll("uranium_ore", chaosRL("uranium_ore"));
+
+		this.cubeAll("salt_ore", chaosRL("salt_ore"));
+
+		this.cubeAll("budding_cats_eye", chaosRL("budding_cats_eye"));
+		this.cubeAll("cats_eye_block", chaosRL("cats_eye_block"));
+		this.cubeAll("budding_pink_tourmaline", chaosRL("budding_pink_tourmaline"));
+		this.cubeAll("pink_tourmaline_block", chaosRL("pink_tourmaline_block"));
 
 		this.cubeAll("fossilised_acacia_ent", chaosRL("fossilised_acacia_ent"));
 		this.cubeAll("fossilised_birch_ent", chaosRL("fossilised_birch_ent"));
@@ -61,7 +141,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_giant", chaosRL("fossilised_giant"));
 		this.cubeAll("fossilised_guardian", chaosRL("fossilised_guardian"));
 		this.cubeAll("fossilised_horse", chaosRL("fossilised_horse"));
-		this.cubeAll("fossilised_husk_stone", chaosRL("fossilised_husk_stone"));
+		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
+		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
 		this.cubeAll("fossilised_illusioner", chaosRL("fossilised_illusioner"));
 		this.cubeAll("fossilised_iron_golem", chaosRL("fossilised_iron_golem"));
 		this.cubeAll("fossilised_llama", chaosRL("fossilised_llama"));
@@ -116,10 +197,6 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 		this.cubeAll("crystalised_crystal_apple_cow", chaosRL("crystalised_crystal_apple_cow"));
 
-		this.cubeAll("ruby_ore", chaosRL("ruby_ore"));
-		this.cubeAll("netherrack_ruby_ore", chaosRL("netherrack_ruby_ore"));
-		this.cubeAll("blackstone_ruby_ore", chaosRL("blackstone_ruby_ore"));
-
 		this.cubeColumn("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
 		this.cubeColumnHorizontal("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
 		this.cubeColumn("apple_wood", chaosRL("apple_log"), chaosRL("apple_log"));
@@ -136,6 +213,14 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumnHorizontal("stripped_cherry_log", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log_top"));
 		this.cubeColumn("stripped_cherry_wood", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log"));
 		this.cubeColumnHorizontal("stripped_cherry_wood", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log"));
+		this.cubeColumn("ginkgo_log", chaosRL("ginkgo_log"), chaosRL("ginkgo_log_top"));
+		this.cubeColumnHorizontal("ginkgo_log", chaosRL("ginkgo_log"), chaosRL("ginkgo_log_top"));
+		this.cubeColumn("ginkgo_wood", chaosRL("ginkgo_log"), chaosRL("ginkgo_log"));
+		this.cubeColumnHorizontal("ginkgo_wood", chaosRL("ginkgo_log"), chaosRL("ginkgo_log"));
+		this.cubeColumn("stripped_ginkgo_log", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log_top"));
+		this.cubeColumnHorizontal("stripped_ginkgo_log", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log_top"));
+		this.cubeColumn("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log"));
+		this.cubeColumnHorizontal("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log"));
 		this.cubeColumn("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumnHorizontal("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumn("peach_wood", chaosRL("peach_log"), chaosRL("peach_log"));
@@ -170,24 +255,40 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumnHorizontal("crystal_wood", chaosRL("crystal_log"), chaosRL("crystal_log"));
 		this.cubeAll("apple_planks", chaosRL("apple_planks"));
 		this.cubeAll("apple_leaves", chaosRL("apple_leaves"));
+		this.leafCarpet("apple_leaf_carpet", chaosRL("apple_leaves"));
 		this.cubeAll("apple_leaves_ripe", chaosRL("apple_leaves_ripe"));
 		this.cross("apple_sapling", chaosRL("apple_sapling"));
 		this.cubeAll("cherry_planks", chaosRL("cherry_planks"));
 		this.cubeAll("cherry_leaves", chaosRL("cherry_leaves"));
+		this.leafCarpet("cherry_leaf_carpet", chaosRL("cherry_leaves"));
 		this.cubeAll("cherry_leaves_ripe", chaosRL("cherry_leaves_ripe"));
 		this.cross("cherry_sapling", chaosRL("cherry_sapling"));
+		this.cubeAll("ginkgo_planks", chaosRL("ginkgo_planks"));
+		this.cubeAll("ginkgo_leaves", chaosRL("ginkgo_leaves"));
+		this.leafCarpet("ginkgo_leaf_carpet", chaosRL("ginkgo_leaves"));
+		this.cross("ginkgo_sapling", chaosRL("ginkgo_sapling"));
 		this.cubeAll("peach_planks", chaosRL("peach_planks"));
 		this.cubeAll("peach_leaves", chaosRL("peach_leaves"));
+		this.leafCarpet("peach_leaf_carpet", chaosRL("peach_leaves"));
 		this.cubeAll("peach_leaves_ripe", chaosRL("peach_leaves_ripe"));
 		this.cross("peach_sapling", chaosRL("peach_sapling"));
 		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
 		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
+		this.leafCarpet("duplication_leaf_carpet", chaosRL("duplication_leaves"));
 		this.cubeAll("skywood_planks", chaosRL("skywood_planks"));
 		this.cubeAll("skywood_leaves", chaosRL("skywood_leaves"));
+		this.leafCarpet("skywood_leaf_carpet", chaosRL("skywood_leaves"));
 		this.cubeAll("crystal_planks", chaosRL("crystal_planks"));
 		this.cross("red_crystal_sapling", chaosRL("red_crystal_sapling"));
 		this.cross("green_crystal_sapling", chaosRL("green_crystal_sapling"));
 		this.cross("yellow_crystal_sapling", chaosRL("yellow_crystal_sapling"));
+
+		this.leafCarpet("oak_leaf_carpet", mcRL("oak_leaves"));
+		this.leafCarpet("spruce_leaf_carpet", mcRL("spruce_leaves"));
+		this.leafCarpet("birch_leaf_carpet", mcRL("birch_leaves"));
+		this.leafCarpet("jungle_leaf_carpet", mcRL("jungle_leaves"));
+		this.leafCarpet("acacia_leaf_carpet", mcRL("acacia_leaves"));
+		this.leafCarpet("dark_oak_leaf_carpet", mcRL("dark_oak_leaves"));
 
 		this.stairs("apple_stairs", chaosRL("apple_planks"), chaosRL("apple_planks"), chaosRL("apple_planks"));
 		this.stairsInner("apple_stairs", chaosRL("apple_planks"), chaosRL("apple_planks"), chaosRL("apple_planks"));
@@ -195,6 +296,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.stairs("cherry_stairs", chaosRL("cherry_planks"), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
 		this.stairsInner("cherry_stairs", chaosRL("cherry_planks"), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
 		this.stairsOuter("cherry_stairs", chaosRL("cherry_planks"), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
+		this.stairs("ginkgo_stairs", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
+		this.stairsInner("ginkgo_stairs", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
+		this.stairsOuter("ginkgo_stairs", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
 		this.stairs("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsInner("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsOuter("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
@@ -212,6 +316,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.slabTop("apple_slab", chaosRL("apple_planks"), chaosRL("apple_planks"), chaosRL("apple_planks"));
 		this.slab("cherry_slab", chaosRL("cherry_planks"), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
 		this.slabTop("cherry_slab", chaosRL("cherry_planks"), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
+		this.slab("ginkgo_slab", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
+		this.slabTop("ginkgo_slab", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
 		this.slab("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slabTop("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slab("duplication_slab", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
@@ -235,6 +341,13 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.fencePost("cherry_fence", chaosRL("cherry_planks"));
 		this.fenceInventory("cherry_fence", chaosRL("cherry_planks"));
 		this.fenceSide("cherry_fence", chaosRL("cherry_planks"));
+		this.fenceGate("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
+		this.fenceGateOpen("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
+		this.fenceGateWall("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
+		this.fenceGateWallOpen("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
+		this.fencePost("ginkgo_fence", chaosRL("ginkgo_planks"));
+		this.fenceInventory("ginkgo_fence", chaosRL("ginkgo_planks"));
+		this.fenceSide("ginkgo_fence", chaosRL("ginkgo_planks"));
 		this.fenceGate("peach_fence_gate", chaosRL("peach_planks"));
 		this.fenceGateOpen("peach_fence_gate", chaosRL("peach_planks"));
 		this.fenceGateWall("peach_fence_gate", chaosRL("peach_planks"));
@@ -268,6 +381,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.pressurePlateDown("apple_pressure_plate", chaosRL("apple_planks"));
 		this.pressurePlateUp("cherry_pressure_plate", chaosRL("cherry_planks"));
 		this.pressurePlateDown("cherry_pressure_plate", chaosRL("cherry_planks"));
+		this.pressurePlateUp("ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
+		this.pressurePlateDown("ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
 		this.pressurePlateUp("duplication_pressure_plate", chaosRL("duplication_planks"));
 		this.pressurePlateDown("duplication_pressure_plate", chaosRL("duplication_planks"));
 		this.pressurePlateUp("peach_pressure_plate", chaosRL("peach_planks"));
@@ -277,28 +392,51 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.pressurePlateUp("crystal_pressure_plate", chaosRL("crystal_planks"));
 		this.pressurePlateDown("crystal_pressure_plate", chaosRL("crystal_planks"));
 
+		this.cubeAll("moldy_planks", chaosRL("moldy_planks"));
+		this.slab("moldy_slab", chaosRL("moldy_planks"), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
+		this.slabTop("moldy_slab", chaosRL("moldy_planks"), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
+		this.fencePost("moldy_fence", chaosRL("moldy_planks"));
+		this.fenceInventory("moldy_fence", chaosRL("moldy_planks"));
+		this.fenceSide("moldy_fence", chaosRL("moldy_planks"));
 		this.cubeAll("mining_lamp", chaosRL("mining_lamp"));
 
 		this.cross("cyan_rose", chaosRL("cyan_rose"));
 		this.cross("red_rose", chaosRL("red_rose"));
 		this.cross("paeonia", chaosRL("paeonia"));
-		this.cross("blue_crystal_fan", chaosRL("blue_crystal_fan"));
-		this.cross("green_crystal_fan", chaosRL("green_crystal_fan"));
-		this.cross("red_crystal_fan", chaosRL("red_crystal_fan"));
-		this.cross("yellow_crystal_fan", chaosRL("red_crystal_fan"));
+		this.cross("blue_crystal_growth", chaosRL("blue_crystal_growth"));
+		this.cross("green_crystal_growth", chaosRL("green_crystal_growth"));
+		this.cross("red_crystal_growth", chaosRL("red_crystal_growth"));
+		this.cross("yellow_crystal_growth", chaosRL("yellow_crystal_growth"));
+		this.cross("orange_crystal_growth", chaosRL("orange_crystal_growth"));
+		this.cross("pink_crystal_growth", chaosRL("pink_crystal_growth"));
 		this.cross("blue_crystal_flower", chaosRL("blue_crystal_flower"));
 		this.cross("green_crystal_flower", chaosRL("green_crystal_flower"));
 		this.cross("red_crystal_flower", chaosRL("red_crystal_flower"));
 		this.cross("yellow_crystal_flower", chaosRL("yellow_crystal_flower"));
 
-		this.gateBlock("acacia_gate_block", chaosRL("gate_block_acacia"), chaosRL("gate_block_top"));
-		this.gateBlock("birch_gate_block", chaosRL("gate_block_birch"), chaosRL("gate_block_top"));
-		this.gateBlock("crimson_gate_block", chaosRL("gate_block_crimson"), chaosRL("gate_block_top"));
-		this.gateBlock("dark_oak_gate_block", chaosRL("gate_block_dark_oak"), chaosRL("gate_block_top"));
-		this.gateBlock("jungle_gate_block", chaosRL("gate_block_jungle"), chaosRL("gate_block_top"));
-		this.gateBlock("oak_gate_block", chaosRL("gate_block_oak"), chaosRL("gate_block_top"));
-		this.gateBlock("spruce_gate_block", chaosRL("gate_block_spruce"), chaosRL("gate_block_top"));
-		this.gateBlock("warped_gate_block", chaosRL("gate_block_warped"), chaosRL("gate_block_top"));
+		this.gateBlock("apple_gate_block", chaosRL("apple_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("cherry_gate_block", chaosRL("cherry_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("duplication_gate_block", chaosRL("duplication_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("ginkgo_gate_block", chaosRL("ginkgo_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("peach_gate_block", chaosRL("peach_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("skywood_gate_block", chaosRL("skywood_gate_block"), chaosRL("gate_block_top"));
+
+		this.gateBlock("acacia_gate_block", chaosRL("acacia_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("birch_gate_block", chaosRL("birch_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("crimson_gate_block", chaosRL("crimson_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("dark_oak_gate_block", chaosRL("dark_oak_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("jungle_gate_block", chaosRL("jungle_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("oak_gate_block", chaosRL("oak_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("spruce_gate_block", chaosRL("spruce_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("warped_gate_block", chaosRL("warped_gate_block"), chaosRL("gate_block_top"));
+		this.gateBlock("mushroom_gate_block", chaosRL("mushroom_gate_block"), chaosRL("gate_block_top"));
+
+		this.trapDoor("apple_trapdoor", chaosRL("apple_trapdoor"));
+		this.trapDoor("cherry_trapdoor", chaosRL("cherry_trapdoor"));
+		this.trapDoor("duplication_trapdoor", chaosRL("duplication_trapdoor"));
+		this.trapDoor("ginkgo_trapdoor", chaosRL("ginkgo_trapdoor"));
+		this.trapDoor("peach_trapdoor", chaosRL("peach_trapdoor"));
+		this.trapDoor("skywood_trapdoor", chaosRL("skywood_trapdoor"));
 	}
 
 	private ResourceLocation chaosRL(String texture) {
@@ -317,8 +455,27 @@ public class CABlockModelProvider extends BlockModelProvider {
 		singleTexture(name, mcRL("pressure_plate_down"), all);
 	}
 
+	public void trapDoor(String name, ResourceLocation texture) {
+		singleTexture(name + "_bottom", mcRL("template_orientable_trapdoor_bottom"), texture);
+		singleTexture(name + "_open", mcRL("template_orientable_trapdoor_open"), texture);
+		singleTexture(name + "_top", mcRL("template_orientable_trapdoor_top"), texture);
+	}
+
+	public void leafCarpet(String name, ResourceLocation texture) {
+		singleTexture(name, chaosRL("leaf_carpet"), "texture", texture);
+	}
+
 	public void gateBlock(String name, ResourceLocation side, ResourceLocation top) {
 		withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("top", top).texture("bottom", top);
+	}
+
+	public void plant(String name, String texture) {
+		cross(name, chaosRL(texture));
+	}
+
+	public void doublePlant(String name, String texture) {
+		cross(name + "_top", chaosRL(texture + "_top"));
+		cross(name + "_bottom", chaosRL(texture + "_bottom"));
 	}
 
 	@Override

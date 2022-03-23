@@ -11,7 +11,6 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class CAOreBlock extends Block {
-
     private Function<Random, Integer> expFormula = (rand) -> 0;
 
     public CAOreBlock(AbstractBlock.Properties properties) {

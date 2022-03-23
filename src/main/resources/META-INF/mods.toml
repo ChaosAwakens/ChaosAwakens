@@ -9,9 +9,9 @@ modId="chaosawakens"
 version="${file.jarVersion}"
 displayName="Chaos Awakens"
 authors="Chaos Team"
-description='''Relive the old OreSpawn mod in newer Minecraft versions!'''
-itemIcon="chaosawakens:ultimate_sword"
+description='''Relive the old Orespawn from 1.7.10 in newer Minecraft versions!'''
 logoFile="logo.png"
+itemIcon="chaosawakens:ultimate_pickaxe"
 configBackground="chaosawakens:textures/gui/advancement_bg.png"
 
 [[dependencies.chaosawakens]]
@@ -31,7 +31,7 @@ side="BOTH"
 [[dependencies.chaosawakens]]
 modId="geckolib3"
 mandatory=true
-versionRange="[3.0,)"
+versionRange="[3.0.65,)"
 ordering="NONE"
 side="BOTH"
 

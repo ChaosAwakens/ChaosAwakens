@@ -21,6 +21,8 @@ public class CAVillagers {
     public static void registerVillagerTypes() {
         VillagerTrades.TRADES.isEmpty();
 
+//        registerVillagerType(createType("cherry_blossom"), CABiomes.CHERRY_BLOSSOM.get();
+
 //        GiveHeroGiftsTask.gifts.put(ODDITIES_PURVEYOR.get(), new ResourceLocation(ChaosAwakens.MODID, "gameplay/hero_of_the_village/oddities_purveyor_gift"));
     }
 

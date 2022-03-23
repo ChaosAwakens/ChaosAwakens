@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "leaf_carpet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:duplication_leaves"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:duplication_leaf_carpet"
+  }
+}

@@ -39,8 +39,6 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
     protected void onHit(RayTraceResult result) {
         super.onHit(result);
         if (!this.level.isClientSide) {
-            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-
             boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
             switch (CAConfig.COMMON.rayGunExplosionType.get()) {
                 case 0:

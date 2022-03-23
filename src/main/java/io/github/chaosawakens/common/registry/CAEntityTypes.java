@@ -147,17 +147,17 @@ public class CAEntityTypes {
     // Carrot Pigs
     public static final RegistryObject<EntityType<CarrotPigEntity>> CARROT_PIG = ENTITY_TYPES.register("carrot_pig",
             () -> EntityType.Builder.of(CarrotPigEntity::new, EntityClassification.CREATURE)
-                    .sized(0.9F, 1.4F)
+                    .sized(0.9F, 0.9F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "carrot_pig").toString()));
     public static final RegistryObject<EntityType<GoldenCarrotPigEntity>> GOLDEN_CARROT_PIG = ENTITY_TYPES.register("golden_carrot_pig",
             () -> EntityType.Builder.of(GoldenCarrotPigEntity::new, EntityClassification.CREATURE)
-                    .sized(0.9F, 1.4F)
+                    .sized(0.9F, 0.9F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "golden_carrot_pig").toString()));
     public static final RegistryObject<EntityType<EnchantedGoldenCarrotPigEntity>> ENCHANTED_GOLDEN_CARROT_PIG = ENTITY_TYPES.register("enchanted_golden_carrot_pig",
             () -> EntityType.Builder.of(EnchantedGoldenCarrotPigEntity::new, EntityClassification.CREATURE)
-                    .sized(0.9F, 1.4F)
+                    .sized(0.9F, 0.9F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_carrot_pig").toString()));
 
@@ -183,7 +183,7 @@ public class CAEntityTypes {
 
     // Termite
     public static final RegistryObject<EntityType<AggressiveAntEntity>> TERMITE = ENTITY_TYPES.register("termite",
-            () -> EntityType.Builder.of((IFactory<AggressiveAntEntity>) (type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.CRYSTALWORLD),
+            () -> EntityType.Builder.of((IFactory<AggressiveAntEntity>) (type, world) -> new AggressiveAntEntity(type, world, CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.CRYSTAL_WORLD),
                             EntityClassification.CREATURE)
                     .sized(0.5f, 0.25f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "termite").toString()));
@@ -234,16 +234,11 @@ public class CAEntityTypes {
                     .sized(1.5f, 2.0f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "wasp").toString()));
 
-
     // Projectiles
     public static final RegistryObject<EntityType<RoboLaserEntity>> ROBO_LASER = ENTITY_TYPES.register("robo_laser",
             () -> EntityType.Builder.<RoboLaserEntity>of(RoboLaserEntity::new, EntityClassification.MISC)
                     .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
                     .build(new ResourceLocation(ChaosAwakens.MODID, "robo_laser").toString()));
-    public static final RegistryObject<EntityType<RoboExplosionLaserEntity>> ROBO_EXPLOSION_LASER = ENTITY_TYPES.register("robo_explosion_laser",
-            () -> EntityType.Builder.<RoboExplosionLaserEntity>of(RoboExplosionLaserEntity::new, EntityClassification.MISC)
-                    .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
-                    .build(new ResourceLocation(ChaosAwakens.MODID, "robo_explosion_laser").toString()));
     public static final RegistryObject<EntityType<UltimateArrowEntity>> ULTIMATE_ARROW = ENTITY_TYPES.register("ultimate_arrow",
             () -> EntityType.Builder.<UltimateArrowEntity>of(UltimateArrowEntity::new, EntityClassification.MISC)
                     .sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)

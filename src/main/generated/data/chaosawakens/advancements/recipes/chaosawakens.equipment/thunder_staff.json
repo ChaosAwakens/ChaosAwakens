@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_OptionalNamedTag[forge:gems/diamond]": {
+    "has_forge:gems/diamond": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -35,7 +35,7 @@
   },
   "requirements": [
     [
-      "has_OptionalNamedTag[forge:gems/diamond]",
+      "has_forge:gems/diamond",
       "has_ruby",
       "has_the_recipe"
     ]

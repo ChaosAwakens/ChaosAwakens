@@ -43,6 +43,14 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
     }
 
     @Override
+    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        if (CAConfig.COMMON.enableAutoEnchanting.get())
+            for (EnchantmentData enchant : enchantments) {
+                stack.enchant(enchant.enchantment, enchant.level);
+            }
+    }
+
+    @Override
     public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity) entityLiving;
@@ -70,7 +78,6 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
                 }
 
                 worldIn.addFreshEntity(arrowEntity);
-
                 worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
                 playerentity.awardStat(Stats.ITEM_USED.get(this));
             }

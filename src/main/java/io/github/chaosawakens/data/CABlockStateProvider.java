@@ -1,12 +1,15 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
 import io.github.chaosawakens.common.blocks.GateBlock;
+import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
 import io.github.chaosawakens.common.blocks.RotatedPillarCrystalBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
+import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -21,6 +24,13 @@ public class CABlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        this.cubeBottomTopBlock(CABlocks.DENSE_GRASS_BLOCK.get(), chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
+        this.simpleBlock(CABlocks.DENSE_DIRT.get());
+        this.cubeBottomTopBlock(CABlocks.DENSE_RED_ANT_NEST.get(), chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"));
+        this.cross(CABlocks.DENSE_GRASS.get());
+        this.doubleCross(CABlocks.TALL_DENSE_GRASS.get());
+        this.doubleCross(CABlocks.THORNY_SUN.get());
+
         this.simpleBlock(CABlocks.FOSSILISED_ACACIA_ENT.get());
         this.simpleBlock(CABlocks.FOSSILISED_BIRCH_ENT.get());
         this.simpleBlock(CABlocks.FOSSILISED_DARK_OAK_ENT.get());
@@ -63,7 +73,8 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_GIANT.get());
         this.simpleBlock(CABlocks.FOSSILISED_GUARDIAN.get());
         this.simpleBlock(CABlocks.FOSSILISED_HORSE.get());
-        this.simpleBlock(CABlocks.FOSSILISED_HUSK_STONE.get());
+        this.simpleBlock(CABlocks.FOSSILISED_HUSK.get());
+        this.cubeBottomTopBlock(CABlocks.FOSSILISED_HUSK_SANDSTONE.get(), chaosRL("fossilised_husk_sandstone"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
         this.simpleBlock(CABlocks.FOSSILISED_ILLUSIONER.get());
         this.simpleBlock(CABlocks.FOSSILISED_IRON_GOLEM.get());
         this.simpleBlock(CABlocks.FOSSILISED_LLAMA.get());
@@ -125,30 +136,42 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.logBlock(CABlocks.APPLE_LOG.get());
         this.woodBlock(CABlocks.APPLE_WOOD.get(), chaosRL("apple_log"));
         this.simpleBlock(CABlocks.APPLE_PLANKS.get());
+        this.leafCarpetBlock(CABlocks.APPLE_LEAF_CARPET.get(), chaosRL("apple_leaves"));
         this.logBlock(CABlocks.STRIPPED_APPLE_LOG.get());
         this.woodBlock(CABlocks.STRIPPED_APPLE_WOOD.get(), chaosRL("stripped_apple_log"));
         this.logBlock(CABlocks.CHERRY_LOG.get());
         this.woodBlock(CABlocks.CHERRY_WOOD.get(), chaosRL("cherry_log"));
         this.simpleBlock(CABlocks.CHERRY_PLANKS.get());
+        this.leafCarpetBlock(CABlocks.CHERRY_LEAF_CARPET.get(), chaosRL("cherry_leaves"));
         this.logBlock(CABlocks.STRIPPED_CHERRY_LOG.get());
         this.woodBlock(CABlocks.STRIPPED_CHERRY_WOOD.get(), chaosRL("stripped_cherry_log"));
-        this.logBlock(CABlocks.PEACH_LOG.get());
-        this.woodBlock(CABlocks.PEACH_WOOD.get(), chaosRL("peach_log"));
-        this.simpleBlock(CABlocks.PEACH_PLANKS.get());
-        this.logBlock(CABlocks.STRIPPED_PEACH_LOG.get());
-        this.woodBlock(CABlocks.STRIPPED_PEACH_WOOD.get(), chaosRL("stripped_peach_log"));
         this.logBlock(CABlocks.DUPLICATION_LOG.get());
         this.woodBlock(CABlocks.DUPLICATION_WOOD.get(), chaosRL("duplication_log"));
         this.logBlock(CABlocks.DEAD_DUPLICATION_LOG.get());
         this.woodBlock(CABlocks.DEAD_DUPLICATION_WOOD.get(), chaosRL("dead_duplication_log"));
         this.simpleBlock(CABlocks.DUPLICATION_PLANKS.get());
         this.simpleBlock(CABlocks.DUPLICATION_LEAVES.get());
+        this.leafCarpetBlock(CABlocks.DUPLICATION_LEAF_CARPET.get(), chaosRL("duplication_leaves"));
         this.logBlock(CABlocks.STRIPPED_DUPLICATION_LOG.get());
         this.woodBlock(CABlocks.STRIPPED_DUPLICATION_WOOD.get(), chaosRL("stripped_duplication_log"));
+        this.logBlock(CABlocks.GINKGO_LOG.get());
+        this.woodBlock(CABlocks.GINKGO_WOOD.get(), chaosRL("ginkgo_log"));
+        this.simpleBlock(CABlocks.GINKGO_PLANKS.get());
+        this.simpleBlock(CABlocks.GINKGO_LEAVES.get());
+        this.leafCarpetBlock(CABlocks.GINKGO_LEAF_CARPET.get(), chaosRL("ginkgo_leaves"));
+        this.logBlock(CABlocks.STRIPPED_GINKGO_LOG.get());
+        this.woodBlock(CABlocks.STRIPPED_GINKGO_WOOD.get(), chaosRL("stripped_ginkgo_log"));
+        this.logBlock(CABlocks.PEACH_LOG.get());
+        this.woodBlock(CABlocks.PEACH_WOOD.get(), chaosRL("peach_log"));
+        this.simpleBlock(CABlocks.PEACH_PLANKS.get());
+        this.leafCarpetBlock(CABlocks.PEACH_LEAF_CARPET.get(), chaosRL("peach_leaves"));
+        this.logBlock(CABlocks.STRIPPED_PEACH_LOG.get());
+        this.woodBlock(CABlocks.STRIPPED_PEACH_WOOD.get(), chaosRL("stripped_peach_log"));
         this.logBlock(CABlocks.SKYWOOD_LOG.get());
         this.woodBlock(CABlocks.SKYWOOD_WOOD.get(), chaosRL("skywood_log"));
         this.simpleBlock(CABlocks.SKYWOOD_PLANKS.get());
         this.simpleBlock(CABlocks.SKYWOOD_LEAVES.get());
+        this.leafCarpetBlock(CABlocks.SKYWOOD_LEAF_CARPET.get(), chaosRL("skywood_leaves"));
         this.logBlock(CABlocks.STRIPPED_SKYWOOD_LOG.get());
         this.woodBlock(CABlocks.STRIPPED_SKYWOOD_WOOD.get(), chaosRL("stripped_skywood_log"));
         this.crystalLogBlock(CABlocks.CRYSTAL_LOG.get());
@@ -156,49 +179,81 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.CRYSTAL_PLANKS.get());
         this.stairsBlock(CABlocks.APPLE_STAIRS.get(), chaosRL("apple_planks"));
         this.stairsBlock(CABlocks.CHERRY_STAIRS.get(), chaosRL("cherry_planks"));
-        this.stairsBlock(CABlocks.PEACH_STAIRS.get(), chaosRL("peach_planks"));
         this.stairsBlock(CABlocks.DUPLICATION_STAIRS.get(), chaosRL("duplication_planks"));
+        this.stairsBlock(CABlocks.GINKGO_STAIRS.get(), chaosRL("ginkgo_planks"));
+        this.stairsBlock(CABlocks.PEACH_STAIRS.get(), chaosRL("peach_planks"));
         this.stairsBlock(CABlocks.SKYWOOD_STAIRS.get(), chaosRL("skywood_planks"));
         this.stairsBlock(CABlocks.CRYSTAL_STAIRS.get(), chaosRL("crystal_planks"));
         this.slabBlock(CABlocks.APPLE_SLAB.get(), chaosRL("apple_planks"), chaosRL("apple_planks"));
         this.slabBlock(CABlocks.CHERRY_SLAB.get(), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
-        this.slabBlock(CABlocks.PEACH_SLAB.get(), chaosRL("peach_planks"), chaosRL("peach_planks"));
         this.slabBlock(CABlocks.DUPLICATION_SLAB.get(), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
+        this.slabBlock(CABlocks.GINKGO_SLAB.get(), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
+        this.slabBlock(CABlocks.PEACH_SLAB.get(), chaosRL("peach_planks"), chaosRL("peach_planks"));
         this.slabBlock(CABlocks.SKYWOOD_SLAB.get(), chaosRL("skywood_planks"), chaosRL("skywood_planks"));
         this.slabBlock(CABlocks.CRYSTAL_SLAB.get(), chaosRL("crystal_planks"), chaosRL("crystal_planks"));
         this.fenceBlock(CABlocks.APPLE_FENCE.get(), chaosRL("apple_planks"));
         this.fenceBlock(CABlocks.CHERRY_FENCE.get(), chaosRL("cherry_planks"));
-        this.fenceBlock(CABlocks.PEACH_FENCE.get(), chaosRL("peach_planks"));
         this.fenceBlock(CABlocks.DUPLICATION_FENCE.get(), chaosRL("duplication_planks"));
+        this.fenceBlock(CABlocks.GINKGO_FENCE.get(), chaosRL("ginkgo_planks"));
+        this.fenceBlock(CABlocks.PEACH_FENCE.get(), chaosRL("peach_planks"));
         this.fenceBlock(CABlocks.SKYWOOD_FENCE.get(), chaosRL("skywood_planks"));
         this.fenceBlock(CABlocks.CRYSTAL_FENCE.get(), chaosRL("crystal_planks"));
         this.fenceGateBlock(CABlocks.APPLE_FENCE_GATE.get(), chaosRL("apple_planks"));
         this.fenceGateBlock(CABlocks.CHERRY_FENCE_GATE.get(), chaosRL("cherry_planks"));
-        this.fenceGateBlock(CABlocks.PEACH_FENCE_GATE.get(), chaosRL("peach_planks"));
         this.fenceGateBlock(CABlocks.DUPLICATION_FENCE_GATE.get(), chaosRL("duplication_planks"));
+        this.fenceGateBlock(CABlocks.GINKGO_FENCE_GATE.get(), chaosRL("ginkgo_planks"));
+        this.fenceGateBlock(CABlocks.PEACH_FENCE_GATE.get(), chaosRL("peach_planks"));
         this.fenceGateBlock(CABlocks.SKYWOOD_FENCE_GATE.get(), chaosRL("skywood_planks"));
         this.fenceGateBlock(CABlocks.CRYSTAL_FENCE_GATE.get(), chaosRL("crystal_planks"));
         this.pressurePlateBlock(CABlocks.APPLE_PRESSURE_PLATE.get(), "apple_pressure_plate", chaosRL("apple_planks"));
         this.pressurePlateBlock(CABlocks.CHERRY_PRESSURE_PLATE.get(), "cherry_pressure_plate", chaosRL("cherry_planks"));
-        this.pressurePlateBlock(CABlocks.PEACH_PRESSURE_PLATE.get(), "peach_pressure_plate", chaosRL("peach_planks"));
         this.pressurePlateBlock(CABlocks.DUPLICATION_PRESSURE_PLATE.get(), "duplication_pressure_plate", chaosRL("duplication_planks"));
+        this.pressurePlateBlock(CABlocks.GINKGO_PRESSURE_PLATE.get(), "ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
+        this.pressurePlateBlock(CABlocks.PEACH_PRESSURE_PLATE.get(), "peach_pressure_plate", chaosRL("peach_planks"));
         this.pressurePlateBlock(CABlocks.SKYWOOD_PRESSURE_PLATE.get(), "skywood_pressure_plate", chaosRL("skywood_planks"));
         this.pressurePlateBlock(CABlocks.CRYSTAL_PRESSURE_PLATE.get(), "crystal_pressure_plate", chaosRL("crystal_planks"));
         this.buttonBlock(CABlocks.APPLE_BUTTON.get(), chaosRL("apple_planks"));
         this.buttonBlock(CABlocks.CHERRY_BUTTON.get(), chaosRL("cherry_planks"));
-        this.buttonBlock(CABlocks.PEACH_BUTTON.get(), chaosRL("peach_planks"));
         this.buttonBlock(CABlocks.DUPLICATION_BUTTON.get(), chaosRL("duplication_planks"));
+        this.buttonBlock(CABlocks.GINKGO_BUTTON.get(), chaosRL("ginkgo_planks"));
+        this.buttonBlock(CABlocks.PEACH_BUTTON.get(), chaosRL("peach_planks"));
         this.buttonBlock(CABlocks.SKYWOOD_BUTTON.get(), chaosRL("skywood_planks"));
         this.buttonBlock(CABlocks.CRYSTAL_BUTTON.get(), chaosRL("crystal_planks"));
+        this.trapdoorBlock(CABlocks.APPLE_TRAPDOOR.get());
+        this.trapdoorBlock(CABlocks.CHERRY_TRAPDOOR.get());
+        this.trapdoorBlock(CABlocks.DUPLICATION_TRAPDOOR.get());
+        this.trapdoorBlock(CABlocks.GINKGO_TRAPDOOR.get());
+        this.trapdoorBlock(CABlocks.PEACH_TRAPDOOR.get());
+        this.trapdoorBlock(CABlocks.SKYWOOD_TRAPDOOR.get());
 
-        this.cubeBottomTopBlock(CABlocks.ACACIA_GATE_BLOCK.get(), chaosRL("gate_block_acacia"), chaosRL("gate_block_top"));
-        this.cubeBottomTopBlock(CABlocks.BIRCH_GATE_BLOCK.get(), chaosRL("gate_block_birch"), chaosRL("gate_block_top"));
-        this.cubeBottomTopBlock(CABlocks.CRIMSON_GATE_BLOCK.get(), chaosRL("gate_block_crimson"), chaosRL("gate_block_top"));
-        this.cubeBottomTopBlock(CABlocks.DARK_OAK_GATE_BLOCK.get(), chaosRL("gate_block_dark_oak"), chaosRL("gate_block_top"));
-        this.cubeBottomTopBlock(CABlocks.JUNGLE_GATE_BLOCK.get(), chaosRL("gate_block_jungle"), chaosRL("gate_block_top"));
-        this.cubeBottomTopBlock(CABlocks.OAK_GATE_BLOCK.get(), chaosRL("gate_block_oak"), chaosRL("gate_block_top"));
-        this.cubeBottomTopBlock(CABlocks.SPRUCE_GATE_BLOCK.get(), chaosRL("gate_block_spruce"), chaosRL("gate_block_top"));
-        this.cubeBottomTopBlock(CABlocks.WARPED_GATE_BLOCK.get(), chaosRL("gate_block_warped"), chaosRL("gate_block_top"));
+        this.simpleBlock(CABlocks.MOLDY_PLANKS.get());
+        this.slabBlock(CABlocks.MOLDY_SLAB.get(), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
+        this.fenceBlock(CABlocks.MOLDY_FENCE.get(), chaosRL("moldy_planks"));
+
+        this.cubeBottomTopBlock(CABlocks.APPLE_GATE_BLOCK.get(), chaosRL("apple_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.CHERRY_GATE_BLOCK.get(), chaosRL("cherry_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.DUPLICATION_GATE_BLOCK.get(), chaosRL("duplication_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.GINKGO_GATE_BLOCK.get(), chaosRL("ginkgo_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.PEACH_GATE_BLOCK.get(), chaosRL("peach_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.SKYWOOD_GATE_BLOCK.get(), chaosRL("skywood_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.MUSHROOM_GATE_BLOCK.get(), chaosRL("mushroom_gate_block"), chaosRL("gate_block_top"));
+
+        this.cubeBottomTopBlock(CABlocks.ACACIA_GATE_BLOCK.get(), chaosRL("acacia_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.BIRCH_GATE_BLOCK.get(), chaosRL("birch_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.CRIMSON_GATE_BLOCK.get(), chaosRL("crimson_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.DARK_OAK_GATE_BLOCK.get(), chaosRL("dark_oak_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.JUNGLE_GATE_BLOCK.get(), chaosRL("jungle_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.OAK_GATE_BLOCK.get(), chaosRL("oak_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.SPRUCE_GATE_BLOCK.get(), chaosRL("spruce_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.WARPED_GATE_BLOCK.get(), chaosRL("warped_gate_block"), chaosRL("gate_block_top"));
+        this.cubeBottomTopBlock(CABlocks.MUSHROOM_GATE_BLOCK.get(), chaosRL("mushroom_gate_block"), chaosRL("gate_block_top"));
+
+        this.leafCarpetBlock(CABlocks.OAK_LEAF_CARPET.get(), mcRL("oak_leaves"));
+        this.leafCarpetBlock(CABlocks.SPRUCE_LEAF_CARPET.get(), mcRL("spruce_leaves"));
+        this.leafCarpetBlock(CABlocks.BIRCH_LEAF_CARPET.get(), mcRL("birch_leaves"));
+        this.leafCarpetBlock(CABlocks.JUNGLE_LEAF_CARPET.get(), mcRL("jungle_leaves"));
+        this.leafCarpetBlock(CABlocks.ACACIA_LEAF_CARPET.get(), mcRL("acacia_leaves"));
+        this.leafCarpetBlock(CABlocks.DARK_OAK_LEAF_CARPET.get(), mcRL("dark_oak_leaves"));
     }
 
     private String name(Block block) {
@@ -209,15 +264,39 @@ public class CABlockStateProvider extends BlockStateProvider {
         return new ResourceLocation(rl.getNamespace(), rl.getPath() + suffix);
     }
 
+    private static ResourceLocation getResourceLocation(String path) {
+        return new ResourceLocation(ChaosAwakens.MODID, path);
+    }
+
+    private static ResourceLocation getBlockResourceLocation(String name) {
+        return getResourceLocation("block/" + name);
+    }
+
+    public void cross(Block block) {
+        ModelFile cross = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath()));
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(cross).build());
+    }
+
+    public void doubleCross(DoubleDensePlantBlock block) {
+        ModelFile crossLower = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_bottom"));
+        ModelFile crossUpper = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_top"));
+
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(state.getValue(DoubleDensePlantBlock.HALF) == DoubleBlockHalf.LOWER ? crossLower : crossUpper).build());
+    }
+
     public void cubeBottomTopBlock(GateBlock block, ResourceLocation side, ResourceLocation top) {
         cubeBottomTopBlock(block, models().cubeBottomTop(name(block), side, top, top));
     }
 
-    public void cubeBottomTopBlock(GateBlock block, ModelFile model) {
+    public void cubeBottomTopBlock(Block block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        cubeBottomTopBlock(block, models().cubeBottomTop(name(block), side, top, bottom));
+    }
+
+    public void cubeBottomTopBlock(Block block, ModelFile model) {
         cubeBottomTopBlock(block, new ConfiguredModel(model));
     }
 
-    public void cubeBottomTopBlock(GateBlock block, ConfiguredModel... model) {
+    public void cubeBottomTopBlock(Block block, ConfiguredModel... model) {
         getVariantBuilder(block).partialState().addModels(model);
     }
 
@@ -267,6 +346,14 @@ public class CABlockStateProvider extends BlockStateProvider {
                 });
     }
 
+    public void trapdoorBlock(TrapDoorBlock block) {
+        String name = block.getRegistryName().getPath();
+        ModelFile bottom = models().getExistingFile(getBlockResourceLocation(name + "_bottom"));
+        ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));
+        ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
+        trapdoorBlock(block, bottom, top, open, true);
+    }
+
     public void buttonBlock(AbstractButtonBlock block, ResourceLocation textureName) {
         ModelFile unpressed = models().withExistingParent(block.getRegistryName().getPath(), "button").texture("texture", textureName);
         ModelFile pressed = models().withExistingParent(block.getRegistryName().getPath() + "_pressed", "button_pressed").texture("texture", textureName);
@@ -301,11 +388,50 @@ public class CABlockStateProvider extends BlockStateProvider {
                     case EAST: rotY = 90; break;
                 }
             }
+            inventory.assertExistence();
             ModelFile model0 = state.getValue(AbstractButtonBlock.POWERED) ? pressed : unpressed;
             boolean uvlock = state.getValue(HorizontalFaceBlock.FACE) == AttachFace.WALL;
 
+            return ConfiguredModel.builder().uvLock(uvlock).rotationX(rotX).rotationY(rotY).modelFile(model0).build();
+        });
+    }
+
+    public void leafCarpetBlock(LeafCarpetBlock block, ResourceLocation textureName) {
+        ModelFile carpet = models().withExistingParent(block.getRegistryName().getPath(), "chaosawakens:leaf_carpet").texture("texture", textureName);
+
+        getVariantBuilder(block).forAllStates(state -> {
+            int rotX = 0;
+            switch (state.getValue(HorizontalFaceBlock.FACE)) {
+                case CEILING:
+                    rotX = 180;
+                    break;
+                case FLOOR:
+                    rotX = 0;
+                    break;
+                case WALL:
+                    rotX = 90;
+                    break;
+            }
+            int rotY = 0;
+            if (state.getValue(HorizontalFaceBlock.FACE) == AttachFace.CEILING)  {
+                switch (state.getValue(HorizontalBlock.FACING)) {
+                    case NORTH: rotY = 180; break;
+                    case SOUTH: rotY = 0; break;
+                    case WEST: rotY = 90; break;
+                    case EAST: rotY = 270; break;
+                }
+            } else {
+                switch (state.getValue(HorizontalBlock.FACING)) {
+                    case NORTH: rotY = 0; break;
+                    case SOUTH: rotY = 180; break;
+                    case WEST: rotY = 270; break;
+                    case EAST: rotY = 90; break;
+                }
+            }
+            boolean uvlock = state.getValue(HorizontalFaceBlock.FACE) == AttachFace.WALL;
+
             return ConfiguredModel.builder()
-                    .uvLock(uvlock).rotationX(rotX).rotationY(rotY).modelFile(model0)
+                    .uvLock(uvlock).rotationX(rotX).rotationY(rotY).modelFile(carpet)
                     .build();
         });
     }

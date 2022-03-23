@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class LavaEelEntityRender extends GeoEntityRenderer<LavaEelEntity>{
-	
 	public LavaEelEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new LavaEelEntityModel());
         this.shadowRadius = 0.2F;

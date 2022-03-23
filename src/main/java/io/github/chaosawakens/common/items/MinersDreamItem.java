@@ -5,6 +5,7 @@ import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.particles.ParticleTypes;
@@ -39,7 +40,7 @@ public class MinersDreamItem extends Item {
         BlockPos breakPos = context.getClickedPos();
         int targetY = breakPos.getY() % 8;
         PlayerEntity playerIn = context.getPlayer();
-        ChaosAwakens.debug("AA", targetY);
+        ChaosAwakens.LOGGER.debug("[AA]: " + targetY);
         Vector3i facing = direction.getNormal();
 
         playerIn.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
@@ -51,8 +52,9 @@ public class MinersDreamItem extends Item {
                     int lengthDelta = i * facing.getX() + k * facing.getZ();
                     int widthDelta = i * facing.getZ() + k * facing.getX();
                     BlockPos targetPos = breakPos.offset(lengthDelta, -targetY + j, widthDelta);
-                    BlockState targetState = worldIn.getBlockState(targetPos);
-                    if (targetState.is(CATags.Blocks.MINERS_DREAM_MINEABLE) || targetState.getBlock().getRegistryName().toString().contains("marble") || targetState.getBlock().getRegistryName().toString().contains("limestone") || targetState.getBlock().getRegistryName().toString().contains("deepslate")) {
+                    BlockState targetBlockState = worldIn.getBlockState(targetPos);
+                    FluidState targetFluidState = worldIn.getFluidState(targetPos);
+                    if (targetBlockState.is(CATags.Blocks.MINERS_DREAM_MINEABLE) || targetFluidState.is(CATags.Fluids.MINERS_DREAM_MINEABLE) || targetBlockState.getBlock().getRegistryName().getNamespace().contains("extcaves") || targetBlockState.getBlock().getRegistryName().getNamespace().contains("subwild") || targetBlockState.getBlock().getRegistryName().getNamespace().contains("earthworks") || targetBlockState.getBlock().getRegistryName().toString().contains("marble") || targetBlockState.getBlock().getRegistryName().toString().contains("limestone") || targetBlockState.getBlock().getRegistryName().toString().contains("limecobble") || targetBlockState.getBlock().getRegistryName().toString().contains("deepslate") || targetBlockState.getBlock().getRegistryName().toString().contains("tuff") || targetBlockState.getBlock().getRegistryName().toString().contains("smooth_basalt") || targetBlockState.getBlock().getRegistryName().toString().contains("calcite") || targetBlockState.getBlock().getRegistryName().toString().contains("soul_stone") || targetBlockState.getBlock().getRegistryName().toString().contains("soulstone") || targetBlockState.getBlock().getRegistryName().toString().contains("rough_sandstone") || targetBlockState.getBlock().getRegistryName().toString().contains("sand_ripple") || targetBlockState.getBlock().getRegistryName().toString().contains("rocky_dirt")) {
                         this.placeWoodPillars(worldIn, targetPos, i, j, k);
                     }
                 }

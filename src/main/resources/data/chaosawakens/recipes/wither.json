@@ -1,0 +1,14 @@
+{
+  "type": "jeed:effect_provider",
+  "effect":{
+    "id": "minecraft:wither"
+  },
+  "providers": [
+    {
+      "item": "chaosawakens:poison_sword"
+    },
+    {
+      "item": "chaosawakens:wither_spawn_egg"
+    }
+  ]
+}

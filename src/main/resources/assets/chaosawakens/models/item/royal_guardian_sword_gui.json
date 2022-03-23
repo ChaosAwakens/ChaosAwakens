@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "gui_light": "front",
+  "textures": {
+    "layer0": "chaosawakens:item/royal_guardian_sword"
+  }
+}

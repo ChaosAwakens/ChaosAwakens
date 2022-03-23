@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class RubyBugEntityRender extends GeoEntityRenderer<RubyBugEntity> {
-
     public RubyBugEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RubyBugEntityModel());
         this.shadowRadius = 0.4F;

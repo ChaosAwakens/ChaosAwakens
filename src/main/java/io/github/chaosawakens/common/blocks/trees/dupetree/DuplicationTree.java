@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 import java.util.Random;
 
-public class DuplicationTree extends Tree implements IUtilityHelper{
+public class DuplicationTree extends Tree implements IUtilityHelper {
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;
 	public static final IntegerProperty IS_DEAD = BlockStateProperties.AGE_25;
 //	public static final BooleanProperty DUPLICATED = BooleanProperty.create("duplicated");

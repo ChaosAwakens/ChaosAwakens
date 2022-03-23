@@ -87,7 +87,7 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
         ItemStack itemstack = playerIn.getItemInHand(hand);
 
         if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
-            if (CAConfig.COMMON.crystalWorldRequiresEmptyInventory.get() && playerIn.level.dimension() != CADimensions.CRYSTALWORLD && targetDimension == CADimensions.CRYSTALWORLD) {
+            if (CAConfig.COMMON.crystalWorldRequiresEmptyInventory.get() && playerIn.level.dimension() != CADimensions.CRYSTAL_WORLD && targetDimension == CADimensions.CRYSTAL_WORLD) {
                 if (playerIn.inventory.isEmpty()) {
                     MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
                     ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
@@ -122,6 +122,11 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
     public void baseTick() {
         super.baseTick();
         this.handleAirSupply();
+    }
+
+    @Override
+    protected boolean shouldDropExperience() {
+        return false;
     }
 
     @Override

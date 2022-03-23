@@ -3,52 +3,77 @@ package io.github.chaosawakens.common.blocks;
 import java.util.Random;
 
 import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.DoublePlantBlock;
-import net.minecraft.block.TallGrassBlock;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.IGrowable;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.IPlantable;
 
-public class CrystalGrassBlock extends TallGrassBlock{
-	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
-
-	public CrystalGrassBlock(Properties p_i48388_1_) {
-		super(p_i48388_1_);
+public class CrystalGrassBlock extends CrystalBlock implements IGrowable {
+	public CrystalGrassBlock(Properties properties) {
+		super(properties);
 	}
-	
-	@Override
-    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
-        return SHAPE;
-    }
-	
-	@Override
-	public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_) {
-		super.animateTick(p_180655_1_, p_180655_2_, p_180655_3_, p_180655_4_);
+
+	public VoxelShape getVisualShape(BlockState p_230322_1_, IBlockReader p_230322_2_, BlockPos p_230322_3_, ISelectionContext p_230322_4_) {
+		return VoxelShapes.empty();
 	}
-	
-	@SuppressWarnings("deprecation")
-	@Override
-	 public boolean isValidBonemealTarget(IBlockReader p_176473_1_, BlockPos p_176473_2_, BlockState p_176473_3_, boolean p_176473_4_) {
-	      return p_176473_1_.getBlockState(p_176473_2_.above()).isAir();
-	   }
+
+	@OnlyIn(Dist.CLIENT)
+	public float getShadeBrightness(BlockState p_220080_1_, IBlockReader p_220080_2_, BlockPos p_220080_3_) {
+		return 1.0F;
+	}
+
+	public boolean propagatesSkylightDown(BlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_) {
+		return true;
+	}
+
+	public boolean isValidBonemealTarget(IBlockReader p_176473_1_, BlockPos p_176473_2_, BlockState p_176473_3_, boolean p_176473_4_) {
+		return p_176473_1_.getBlockState(p_176473_2_.above()).isAir();
+	}
+
+	public boolean isBonemealSuccess(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
+		return true;
+	}
+
+	public void performBonemeal(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {
+		BlockPos blockpos = p_225535_3_.above();
+		BlockState blockstate = CABlocks.CRYSTAL_GRASS.get().defaultBlockState();
+
+		label48:
+		for(int i = 0; i < 128; ++i) {
+			BlockPos blockpos1 = blockpos;
+
+			for(int j = 0; j < i / 16; ++j) {
+				blockpos1 = blockpos1.offset(p_225535_2_.nextInt(3) - 1, (p_225535_2_.nextInt(3) - 1) * p_225535_2_.nextInt(3) / 2, p_225535_2_.nextInt(3) - 1);
+				if (!p_225535_1_.getBlockState(blockpos1.below()).is(this) || p_225535_1_.getBlockState(blockpos1).isCollisionShapeFullBlock(p_225535_1_, blockpos1)) {
+					continue label48;
+				}
+			}
+
+			BlockState blockstate2 = p_225535_1_.getBlockState(blockpos1);
+			if (blockstate2.is(blockstate.getBlock()) && p_225535_2_.nextInt(10) == 0) {
+				((IGrowable)blockstate.getBlock()).performBonemeal(p_225535_1_, p_225535_2_, blockpos1, blockstate2);
+			}
+		}
+	}
 
 	@Override
-	   public boolean isBonemealSuccess(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
-	      return true;
-	   }
+	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
+		BlockState plant = plantable.getPlant(world, pos.relative(facing));
 
-	@Override
-	   public void performBonemeal(ServerWorld w, Random r, BlockPos pos, BlockState state) {
-		 DoublePlantBlock doubleplantblock = (DoublePlantBlock)(this == CABlocks.CRYSTAL_GRASS.get() ? CABlocks.TALL_CRYSTAL_GRASS.get() : CABlocks.TALL_CRYSTAL_GRASS.get());
-	      if (doubleplantblock.defaultBlockState().canSurvive(w, pos) && w.isEmptyBlock(pos.above()) && w.getBlockState(pos.below()).getBlock().is(CABlocks.CRYSTAL_GRASS_BLOCK.get())) {
-	         doubleplantblock.placeAt(w, pos, 2);
-	      }
-	   }
-	
-	
+		if (plant.getBlock() == Blocks.SUGAR_CANE && this == Blocks.SUGAR_CANE) return true;
+		if (plantable instanceof CrystalBushBlock && ((CrystalBushBlock) plantable).mayPlaceOn(state, world, pos)) return true;
+		if (plantable instanceof CrystalFlowerBlock && ((CrystalFlowerBlock) plantable).mayPlaceOn(state, world, pos)) return true;
+
+		return false;
+	}
 }

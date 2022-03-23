@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class HerculesBeetleEntityRender extends GeoEntityRenderer<HerculesBeetleEntity> {
-
     public HerculesBeetleEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new HerculesBeetleEntityModel());
         this.shadowRadius = 2.5F;

@@ -14,7 +14,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class RoboSniperEntityRender extends GeoEntityRenderer<RoboSniperEntity> {
-
     public RoboSniperEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RoboSniperEntityModel());
         this.shadowRadius = 0.4F;

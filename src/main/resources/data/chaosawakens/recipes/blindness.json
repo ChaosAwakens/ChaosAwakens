@@ -1,0 +1,11 @@
+{
+  "type": "jeed:effect_provider",
+  "effect":{
+    "id": "minecraft:blindness"
+  },
+  "providers": [
+    {
+      "item": "chaosawakens:illusioner_spawn_egg"
+    }
+  ]
+}

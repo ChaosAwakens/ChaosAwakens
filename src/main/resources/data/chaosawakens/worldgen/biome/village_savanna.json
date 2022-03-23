@@ -184,6 +184,6 @@
   "precipitation": "none",
   "temperature": 1.2,
   "downfall": 0,
-  "category": "savanna",
+  "category": "none",
   "depth": 0.125
 }

@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_Block{chaosawakens:crystal_log}": {
+    "has_crystal_log": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_Block{chaosawakens:crystal_log}",
+      "has_crystal_log",
       "has_the_recipe"
     ]
   ]
