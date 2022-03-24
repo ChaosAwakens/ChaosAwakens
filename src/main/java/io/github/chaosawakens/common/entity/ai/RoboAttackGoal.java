@@ -51,7 +51,7 @@ public class RoboAttackGoal extends Goal {
             this.projectileOwner.getLookControl().setLookAt(projectileOwner.getTarget(), 30.0F, 30.0F);
 
             this.attackTimer++;
-            if (this.attackTimer == fireRateBase * 2) {
+            if (this.attackTimer == fireRateBase * 2 && projectileOwner.getEntity().getLookAngle().equals(targetEntity.getPosition(1))) {
                 Vector3d lookVector = this.projectileOwner.getViewVector(1.0F);
                 Vector3d directionNormal = new Vector3d(targetEntity.getX() - (this.projectileOwner.getX() - lookVector.x()), targetEntity.getY(0.5) - (0.5 + this.projectileOwner.getY(0.5)), targetEntity.getZ() - (this.projectileOwner.getZ() - lookVector.z())).normalize();
 

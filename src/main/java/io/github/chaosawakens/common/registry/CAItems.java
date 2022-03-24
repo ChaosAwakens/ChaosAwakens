@@ -156,33 +156,6 @@ public class CAItems {
     
     //CRITTER CAGES
     public static final RegistryObject<CritterCageItem> CRITTER_CAGE = ITEMS.register("critter_cage", () -> new CritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
-    public static final RegistryObject<FilledCritterCageItem> PIG_CRITTER_CAGE = ITEMS.register("pig_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.PIG));
-    public static final RegistryObject<FilledCritterCageItem> CREEPER_CRITTER_CAGE = ITEMS.register("creeper_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.CREEPER));
-  //  public static final RegistryObject<FilledCritterCageItem> APPLE_COW_CRITTER_CAGE = ITEMS.register("apple_cow_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), CAEntityTypes.APPLE_COW.get()));
- //   public static final RegistryObject<FilledCritterCageItem> BIRD_CRITTER_CAGE = ITEMS.register("bird_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), CAEntityTypes.BIRD.get()));
- //   public static final RegistryObject<FilledCritterCageItem> CARROT_PIG_CRITTER_CAGE = ITEMS.register("carrot_pig_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), CAEntityTypes.CARROT_PIG.get()));
-    public static final RegistryObject<FilledCritterCageItem> COW_CRITTER_CAGE = ITEMS.register("cow_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.COW));
-    public static final RegistryObject<FilledCritterCageItem> FOX_CRITTER_CAGE = ITEMS.register("fox_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.FOX));
-    public static final RegistryObject<FilledCritterCageItem> LLAMA_CRITTER_CAGE = ITEMS.register("llama_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.LLAMA));
-    public static final RegistryObject<FilledCritterCageItem> PANDA_CRITTER_CAGE = ITEMS.register("panda_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.PANDA));
-    public static final RegistryObject<FilledCritterCageItem> SHEEP_CRITTER_CAGE = ITEMS.register("sheep_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SHEEP));
-    public static final RegistryObject<FilledCritterCageItem> RABBIT_CRITTER_CAGE = ITEMS.register("rabbit_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.RABBIT));
-    public static final RegistryObject<FilledCritterCageItem> SKELETON_CRITTER_CAGE = ITEMS.register("skeleton_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SKELETON));
-    public static final RegistryObject<FilledCritterCageItem> SLIME_CRITTER_CAGE = ITEMS.register("slime_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SLIME));
-    public static final RegistryObject<FilledCritterCageItem> SPIDER_CRITTER_CAGE = ITEMS.register("spider_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.SPIDER));
-    public static final RegistryObject<FilledCritterCageItem> STRAY_CRITTER_CAGE = ITEMS.register("stray_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.STRAY));
-    public static final RegistryObject<FilledCritterCageItem> WOLF_CRITTER_CAGE = ITEMS.register("wolf_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.WOLF));
-    public static final RegistryObject<FilledCritterCageItem> POLAR_BEAR_CRITTER_CAGE = ITEMS.register("polar_bear_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.POLAR_BEAR));
-    public static final RegistryObject<FilledCritterCageItem> DROWNED_CRITTER_CAGE = ITEMS.register("drowned_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.DROWNED));
-    public static final RegistryObject<FilledCritterCageItem> BEE_CRITTER_CAGE = ITEMS.register("bee_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.BEE));
-    public static final RegistryObject<FilledCritterCageItem> HUSK_CRITTER_CAGE = ITEMS.register("husk_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.HUSK));
-    public static final RegistryObject<FilledCritterCageItem> ZOMBIE_CRITTER_CAGE = ITEMS.register("zombie_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.ZOMBIE));
-    public static final RegistryObject<FilledCritterCageItem> ZOMBIE_VILLAGER_CRITTER_CAGE = ITEMS.register("zombie_villager_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.ZOMBIE_VILLAGER));
-    public static final RegistryObject<FilledCritterCageItem> CAVE_SPIDER_CRITTER_CAGE = ITEMS.register("cave_spider_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.CAVE_SPIDER));
-    public static final RegistryObject<FilledCritterCageItem> CAT_CRITTER_CAGE = ITEMS.register("cat_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.CAT));
-    public static final RegistryObject<FilledCritterCageItem> ENDERMAN_CRITTER_CAGE = ITEMS.register("enderman_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.ENDERMAN));
-    public static final RegistryObject<FilledCritterCageItem> MOOSHROOM_CRITTER_CAGE = ITEMS.register("mooshroom_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.MOOSHROOM));
-    public static final RegistryObject<FilledCritterCageItem> HORSE_CRITTER_CAGE = ITEMS.register("horse_critter_cage", () -> new FilledCritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS), EntityType.HORSE));
     
     // MISC
     public static final RegistryObject<PowerChipItem> ALUMINUM_POWER_CHIP = ITEMS.register("aluminum_power_chip", () -> new PowerChipItem(new Item.Properties().tab(CAItemGroups.ITEMS)));

@@ -49,7 +49,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GazelleEntity extends AnimatableAnimalEntity{
+public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable{
 	private AnimationFactory factory = new AnimationFactory(this);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);

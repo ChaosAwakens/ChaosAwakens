@@ -2,13 +2,16 @@ package io.github.chaosawakens.api;
 
 import java.util.ArrayList;
 
+
+
+
 import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.items.FilledCritterCageItem;
+import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -19,7 +22,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.IParticleData;
@@ -211,16 +214,16 @@ public interface IUtilityHelper {
 	}
 	
 	/**
-	 * Adds the block specified to the <code>Blacklist<code> tag
-	 * @param blockToAdd block to add blacklist tag to
+	 * Adds the block specified to the <code>Blacklist</code> tag
+	 * @param blockToAdd block to add <code>Blacklist</code> tag to
 	 */
 	default void addBlockToDuplicationsBlackList(Block blockToAdd) {
 		blockToAdd.getTags().add((ResourceLocation) CATags.getBlockTagWrapper("blacklist"));
 	}
 	
 	/**
-	 * Adds the block specified to the <code>Whitelist<code> tag
-	 * @param blockToAdd block to add whitelist tag to
+	 * Adds the block specified to the <code>Whitelist</code> tag
+	 * @param blockToAdd block to add <code>Whitelist</code> tag to
 	 */
 	default void addBlockToDuplicationsWhiteList(Block blockToAdd) {
 		blockToAdd.getTags().add((ResourceLocation) CATags.getBlockTagWrapper("whitelist"));
@@ -231,6 +234,26 @@ public interface IUtilityHelper {
 	 */
 	default void uh() {
 		uh();
+	}
+	
+	/**
+	 * Sets the item texture to something else in-game.
+	 * @param itemToSet item to replace texture of
+	 * @param pathWithTextures path containing textures
+	 * @param textureName name of texture file
+	 * @param pathName name of path, could simply be some characters in the name (e.g. <code>assets.chaosawakens.textures.item.critter_cage</code> can simply be <code>critter_cage</code>, or you could run the <code>getPath()</code> method off of a certain item in that folder/package you want to grab)
+	 */
+	default void setItemTexture(ItemStack itemToSet, ResourceLocation pathWithTextures, String textureName, String pathName) {
+		boolean hasTextures = pathWithTextures.getPath().contains(pathName);
+		if (hasTextures) {
+			ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), pathWithTextures, (stack, world, entity) -> {
+				stack = itemToSet;
+				String modid = entity.getType().getRegistryName().getNamespace();
+				String regName = entity.getType().getRegistryName().toString().replace(modid, "").replace(":", "");
+				boolean nameMatches = entity.getType().getRegistryName().toString().contains(regName);
+				return hasTextures && nameMatches ? 1.0F : 0.0F;
+			});
+		}
 	}
 	
 	///////////////////////////////
@@ -294,6 +317,10 @@ public interface IUtilityHelper {
 	 * @return true if entity is moving vertically, else returns false
 	 */
 	default boolean isMovingVertically(LivingEntity entity) {
+		return false;
+	}
+	
+	default boolean isBoss(LivingEntity entityToCheck) {
 		return false;
 	}
 	
@@ -664,29 +691,6 @@ public interface IUtilityHelper {
 	default CompoundNBT getNBTDataFromLivingEntity(LivingEntity entityToGetNBTDataFrom) {
 		CompoundNBT entityDataNBT = new CompoundNBT();
 		return entityDataNBT;
-	}
-	
-	/**
-	 * Gets matching critter cage of mob
-	 * @param entityToGet entity to get name of, will get the name excluding the modid (e.g. minecraft:pig will be read as pig)
-	 * @param oldCageStack empty critter cage
-	 * @param cageStack default critter cage (if mob doesn't have a texture for it by default)
-	 * @param texturedCageStack textured critter cage (for when the mob has its own texture)
-	 * @param loc texture location
-	 * @return matching critter cage stack
-	 */
-	default ItemStack getMatching(Entity entityToGet, ItemStack oldCageStack, ItemStack cageStack, ItemStack texturedCageStack, ResourceLocation loc) {
-		if (cageStack.getItem().getRegistryName().getPath().contains("critter_cage")) {
-			String entityRegName = entityToGet.getType().getRegistryName().toString();
-			String modid = loc.getNamespace();
-			String f = entityRegName.replace(modid + ":", "");
-			if (cageStack.getItem().getRegistryName().getPath().contains(f)) {
-				texturedCageStack = new ItemStack(new FilledCritterCageItem(new Item.Properties(), entityToGet.getType()));
-				return texturedCageStack;
-			}
-			return cageStack;
-		}
-		return oldCageStack;
 	}
 	
 }

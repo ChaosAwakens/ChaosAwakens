@@ -1,31 +1,164 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.ArrayList;
-
-
-
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CATags;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DeferredWorkQueue;
 
 public class CritterCageItem extends Item implements IUtilityHelper{
 	
-	protected static List<EntityType<?>> critterEntityBlacklist = new ArrayList<>();
+    public CritterCageItem(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public ActionResultType useOn(ItemUseContext context) {
+        PlayerEntity player = context.getPlayer();
+        BlockPos pos = context.getClickedPos();
+        Direction facing = context.getClickedFace();
+        World worldIn = context.getLevel();
+        ItemStack stack = context.getItemInHand();
+        if (!release(player, pos, facing, worldIn, stack)) return ActionResultType.FAIL;
+        return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+        if (!capture(stack, target)) return ActionResultType.FAIL;
+        playerIn.swing(hand);
+        if (playerIn.getMainHandItem().getCount() == 1) {
+            playerIn.setItemInHand(hand, stack);
+        } else {
+            playerIn.getMainHandItem().shrink(1);
+            playerIn.inventory.add(stack);
+            if (!playerIn.inventory.add(stack)) {
+            	playerIn.drop(stack, false);
+            }
+        }
+        return ActionResultType.SUCCESS;
+    }
+    
+    @SuppressWarnings({ "resource", "deprecation" })
+	public boolean capture(ItemStack stack, LivingEntity target) {
+        if (target.getCommandSenderWorld().isClientSide) return false;
+        if (target instanceof PlayerEntity || !target.isAlive()) return false;
+        if (containsEntity(stack)) return false;
+        if (isBlacklisted(target.getType())) return false;
+        
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putString("entity", EntityType.getKey(target.getType()).toString());
+        nbt.putString("entityName", target.getName().getString());
+        nbt.putDouble("entityMaxHealth", target.getAttribute(Attributes.MAX_HEALTH).getValue());
+        nbt.putBoolean("isBaby", target.isBaby());
+        
+		String modid = target.getType().getRegistryName().getNamespace();
+		String regName = target.getType().getRegistryName().toString().replace(modid, "").replace(":", "");
+        if (CAItems.CRITTER_CAGE.getId().getPath().contains("critter_cage")) {
+        	DeferredWorkQueue.runLater(() -> {
+        		setItemTexture(stack, new ResourceLocation("critter_cage"), regName, CAItems.CRITTER_CAGE.getId().getPath());    
+        	});    	
+        }
+        	
+        target.saveWithoutId(nbt);
+        stack.setTag(nbt);
+        
+        stack.setCount(1);
+        target.remove(true);
+        return true;
+    }
+    
+    @SuppressWarnings("resource")
+	public boolean release(PlayerEntity player, BlockPos pos, Direction facing, World worldIn, ItemStack stack) {
+        if (player.getCommandSenderWorld().isClientSide) return false;
+        if (!containsEntity(stack)) return false;
+        Entity entity = getEntityFromStack(stack, worldIn, true);
+        BlockPos blockPos = pos.relative(facing);
+        entity.absMoveTo(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, 0, 0);
+        stack.setTag(null);
+        worldIn.addFreshEntity(entity);
+        return true;
+    }
+    
+    public boolean isBlacklisted(EntityType<?> entity) {
+        return entity.is(CATags.EntityTypes.CRITTER_CAGE_BLACKLISTED);
+    }
+
+    public boolean containsEntity(ItemStack stack) {
+        return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity");
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+        if (containsEntity(stack)) {
+            tooltip.add(new StringTextComponent("Mob: " + getMobID(stack)));
+            tooltip.add(new StringTextComponent("Mob Name: " + getMobName(stack)));
+            tooltip.add(new StringTextComponent("Health: " + stack.getTag().getFloat("Health") + "/" + stack.getTag().getDouble("entityMaxHealth")));
+            tooltip.add(new StringTextComponent("Is Baby: " + stack.getTag().getBoolean("isBaby")));
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+	@Nullable
+    public Entity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
+        if (stack.hasTag()) {
+            EntityType type = EntityType.byString(stack.getTag().getString("entity")).orElse(null);
+            if (type != null) {
+                Entity entity = type.create(world);
+                if (withInfo) {
+                    entity.load(stack.getTag());
+                } else if (!type.canSummon()) {
+                    return null;
+                }
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    public String getMobID(ItemStack stack) {
+        return stack.getTag().getString("entity");
+    }
+
+    public String getMobName(ItemStack stack) {
+        return stack.getTag().getString("entityName");
+    }
+
+    @Nonnull
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public ITextComponent getName(ItemStack stack) {
+        if (!containsEntity(stack)) return new TranslationTextComponent("item.chaosawakens.critter_cage");
+        return new TranslationTextComponent("item.chaosawakens.critter_cage").append(" (" + getMobName(stack) + ")");
+    }
+	
+    //Keeping this for later, don't ask why. Just trust me.
+/*	protected static List<EntityType<?>> critterEntityBlacklist = new ArrayList<>();
 	//Type t;
 	Properties p;
 
@@ -221,7 +354,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
 		
 	}*/
 	
-	@Override
+/*	@Override
 	public CompoundNBT getNBTDataFromLivingEntity(LivingEntity entityToGetNBTDataFrom) {
 		CompoundNBT entityDataNBT = new CompoundNBT();
 		entityDataNBT.putString("entity", entityToGetNBTDataFrom.getType().getRegistryName().toString());
@@ -259,7 +392,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
 			}	
 		}
 		return entity.getType();
-	}
+	}*/
 	
 	/*@Override
 	public ActionResult<ItemStack> use(World w, PlayerEntity p, Hand h) {
@@ -387,7 +520,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
 
 	//	p.displayClientMessage(new TranslationTextComponent("crittercage.clientmessage.mobisnullorerror.message"), true);
 		return ActionResultType.FAIL;
-	}*/
+	}
 	
 	@Override
 	public ActionResultType interactLivingEntity(ItemStack s, PlayerEntity p, LivingEntity e, Hand h) {
@@ -406,6 +539,6 @@ public class CritterCageItem extends Item implements IUtilityHelper{
 	      createFilledCritterCageWithMob(s, newStack, nbt, type, p, h, e.level);
 	      e.remove();
 	      return ActionResultType.SUCCESS;
-	}
+	}*/
 	
 }

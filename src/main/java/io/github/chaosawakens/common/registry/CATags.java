@@ -2,8 +2,10 @@ package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 
@@ -52,6 +54,10 @@ public class CATags {
 		public static final ITag.INamedTag<Item> SEEDS = ItemTags.bind(ChaosAwakens.MODID + ":seeds");
 
 		public static final ITag.INamedTag<Item> CUSTOM_TOOLTIPS = ItemTags.bind(ChaosAwakens.MODID + ":custom_tooltips");
+	}
+	
+	public static class EntityTypes {
+		public static final ITag.INamedTag<EntityType<?>> CRITTER_CAGE_BLACKLISTED = EntityTypeTags.bind("critter_cage_blacklisted");
 	}
 
 	public static ITag<Block> getBlockTagWrapper(String path) {

@@ -58,8 +58,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walk_attack_animation", true));
                 return PlayState.CONTINUE;
             }
-
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", false));
             return PlayState.CONTINUE;
         }
 
