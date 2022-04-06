@@ -51,4 +51,4 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 
 **Former Members:** AlexanderTheNotSoGreat, Crosby, crydigo, HugoMage, Lymen, Sipilus, thesleepingdevil
 
-if it weren't for these people it would not be possible to get the mod as far as it is ❤️devs
+if it weren't for these people it would not be possible to get the mod as far as it is ❤️staff
