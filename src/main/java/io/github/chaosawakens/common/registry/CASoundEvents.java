@@ -62,5 +62,5 @@ public class CASoundEvents {
     public static final RegistryObject<SoundEvent> ENT_ATTACK = SOUND_EVENTS.register("entity.ent.attack", ()  -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.attack")));
     public static final RegistryObject<SoundEvent> ENT_HURT = SOUND_EVENTS.register("entity.ent.hurt", ()  -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.hurt")));
 
-
+    public static final RegistryObject<SoundEvent> WASP_AMBIENT = SOUND_EVENTS.register("entity.wasp.ambient", ()  -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.wasp.ambient")));
 }

@@ -1,0 +1,11 @@
+{
+  "type": "jeed:effect_provider",
+  "effect":{
+    "id": "minecraft:hunger"
+  },
+  "providers": [
+    {
+      "item": "chaosawakens:husk_critter_cage"
+    }
+  ]
+}

@@ -84,6 +84,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.16.5:${project.geckolib}")
+    implementation fg.deobf("curse.maven:reach-fix-556777:${project.reachfix}")
 
     implementation fg.deobf("curse.maven:projecte-226410:${project.projecte}")
 
@@ -108,10 +109,6 @@ repositories {
     maven {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
     }
     maven {
         name = "CurseForge"

@@ -95,7 +95,8 @@ public class CAConfig {
 		public final ConfigValue<Integer> attitudeAdjusterDamage;
 		public final ConfigValue<Integer> berthaDamage;
 		public final ConfigValue<Integer> battleAxeDamage;
-		public final ConfigValue<Integer> queenAxeDamage;
+		public final ConfigValue<Integer> queenBattleAxeDamage;
+		public final ConfigValue<Integer> royalGuardianSwordDamage;
 		public final ConfigValue<Integer> slayerChainsawDamage;
 
 		public final ConfigValue<Integer> attitudeAdjusterExplosionSize;
@@ -123,6 +124,9 @@ public class CAConfig {
 		public final ConfigValue<Boolean> enableDzMineralOreGen;
 		public final ConfigValue<Boolean> spawnDzOresInOverworld;
 		public final ConfigValue<Boolean> enableNestGen;
+		
+		public final ConfigValue<Boolean> enableMarbleGen;
+		public final ConfigValue<Boolean> enableLimestoneGen;
 
 		public final ConfigValue<Boolean> enableOreRubyGen;
 		public final ConfigValue<Boolean> enableOreTigersEyeGen;
@@ -147,6 +151,8 @@ public class CAConfig {
 
 		public final ConfigValue<Boolean> terraforgedCheckMsg;
 
+		public final ConfigValue<Integer> spawnEggsSpawnersSurvival;
+
 		public final ConfigValue<Boolean> showUpdateMessage;
 		public final ConfigValue<Boolean> enableTooltips;
 
@@ -155,7 +161,7 @@ public class CAConfig {
 			terraforgedCheckMsg = builder.define("Terraforged check message active", true);
 			builder.pop();
 			builder.push("Attack Damage");
-			builder.comment(" Set damages are of the Sword \n Axe is +2 damage, Shovel is -1 damage and Pickaxe is -2 damage \n Hoes are always 1 damage");
+//			builder.comment("Set damages are of the Sword \n Axe is +2 damage, Shovel is -1 damage and Pickaxe is -2 damage \n Hoes are always 1 damage");
 			builder.push("Ultimate Weapons/Tools");
 			ultimateSwordDamage = builder.define("Damage of the Ultimate Sword", 40);
 			ultimateAxeDamage = builder.define("Damage of the Ultimate Axe", 42);
@@ -263,7 +269,8 @@ public class CAConfig {
 			attitudeAdjusterDamage = builder.define("Damage of the Attitude Adjuster", 65);
 			berthaDamage = builder.define("Damage of the Big Bertha", 500);
 			battleAxeDamage = builder.define("Damage of the Battle Axe", 50);
-			queenAxeDamage = builder.define("Damage of the Queen Scale Battle Axe", 666);
+			queenBattleAxeDamage = builder.define("Damage of the Queen Scale Battle Axe", 666);
+			royalGuardianSwordDamage = builder.define("Damage of the Royal Guardian Sword", 750);
 			slayerChainsawDamage = builder.define("Damage of the Slayer Chainsaw", 40);
 			attitudeAdjusterExplosionSize = builder.define("Attitude Adjuster explosion size", 4);
 			builder.pop();
@@ -297,6 +304,8 @@ public class CAConfig {
 			enableOreAluminumGen = builder.define("Aluminum ore generation", true);
 			builder.pop();
 			enableFossilGen = builder.define("Enable fossilised spawn egg generation", true);
+			enableMarbleGen = builder.define("Enable marble generation in the mining dimension", true);
+			enableLimestoneGen = builder.define("Enable limestone generation in the mining dimension", true);
 			enableTrollOreGen = builder.define("Enable infested ore generation", true);
 			enableDzMineralOreGen = builder.define("Enable DZ ore generation", true);
 			spawnDzOresInOverworld = builder.comment("Will DZ ores spawn in the Overworld?").define("Overworld DZ Ores", false);
@@ -329,6 +338,9 @@ public class CAConfig {
 			builder.pop();
 			builder.push("Tooltips");
 			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
+			builder.pop();
+			builder.push("Spawners");
+			spawnEggsSpawnersSurvival = builder.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n" + "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n" + "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival." + "\n" + "3 = BLACKLIST - Use the BLACKLIST to block Specific Spawn Eggs.").defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 3);
 			builder.pop();
 		}
 	}

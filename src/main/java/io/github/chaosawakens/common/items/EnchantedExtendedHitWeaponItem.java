@@ -15,23 +15,18 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EnchantedExtendedHitWeaponItem extends ExtendedHitWeaponItem implements IAutoEnchantable, IVanishable, IAnimatable {
     public AnimationFactory factory = new AnimationFactory(this);
-
     private final EnchantmentData[] enchantments;
 
     public EnchantedExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn, EnchantmentData[] enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
-        ImmutableMultimap.Builder<RegistryObject<Attribute>, AttributeModifier> builder = ImmutableMultimap.builder();
-//		if (ForgeMod.REACH_DISTANCE.isPresent()) {
-        	builder.put(ForgeMod.REACH_DISTANCE, new AttributeModifier(REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
- //       } 
         this.enchantments = enchantments;
     }
 
@@ -45,6 +40,14 @@ public class EnchantedExtendedHitWeaponItem extends ExtendedHitWeaponItem implem
                 }
             items.add(stack);
         }
+    }
+
+    @Override
+    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        if (CAConfig.COMMON.enableAutoEnchanting.get())
+            for (EnchantmentData enchant : enchantments) {
+                stack.enchant(enchant.enchantment, enchant.level);
+            }
     }
 
     @Override

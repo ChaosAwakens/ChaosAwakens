@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class SparkFishEntityRender extends GeoEntityRenderer<SparkFishEntity>{
-	
 	public SparkFishEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new SparkFishEntityModel());
         this.shadowRadius = 0.3F;
@@ -38,5 +37,4 @@ public class SparkFishEntityRender extends GeoEntityRenderer<SparkFishEntity>{
     public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
-
 }

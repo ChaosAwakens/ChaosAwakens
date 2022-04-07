@@ -34,7 +34,6 @@ public class CAConfiguredStructures {
 
         Registry.register(registry, new ResourceLocation(ChaosAwakens.MODID, "configured_wasp_dungeon"), CONFIGURED_WASP_DUNGEON);
 
-
         FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.ACACIA_ENT_TREE.get(), CONFIGURED_ACACIA_ENT_TREE);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.BIRCH_ENT_TREE.get(), CONFIGURED_BIRCH_ENT_TREE);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.CRIMSON_ENT_TREE.get(), CONFIGURED_CRIMSON_ENT_TREE);

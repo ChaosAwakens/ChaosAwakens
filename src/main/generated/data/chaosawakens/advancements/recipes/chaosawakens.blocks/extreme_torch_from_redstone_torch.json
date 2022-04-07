@@ -16,7 +16,7 @@
         ]
       }
     },
-    "has_NamedTag[minecraft:coals]": {
+    "has_minecraft:coals": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -46,7 +46,7 @@
   "requirements": [
     [
       "has_redstone_torch",
-      "has_NamedTag[minecraft:coals]",
+      "has_minecraft:coals",
       "has_sunstone",
       "has_the_recipe"
     ]

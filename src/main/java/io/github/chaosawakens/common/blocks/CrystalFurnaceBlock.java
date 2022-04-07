@@ -1,12 +1,14 @@
 package io.github.chaosawakens.common.blocks;
 
 import io.github.chaosawakens.common.blocks.tileentities.CrystalFurnaceTileEntity;
+import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -32,6 +34,7 @@ public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
         TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof CrystalFurnaceTileEntity) {
             player.openMenu((INamedContainerProvider) tileentity);
+            player.awardStat(CAStats.INTERACT_WITH_CRYSTAL_FURNACE);
         }
     }
 

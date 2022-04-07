@@ -1,0 +1,20 @@
+{
+  "type": "jeed:effect_provider",
+  "effect":{
+    "id": "minecraft:poison"
+  },
+  "providers": [
+    {
+      "item": "chaosawakens:poison_sword"
+    },
+    {
+      "item": "chaosawakens:wasp_spawn_egg"
+    },
+    {
+      "item": "chaosawakens:bee_critter_cage"
+    },
+    {
+      "item": "chaosawakens:cave_spider_critter_cage"
+    }
+  ]
+}

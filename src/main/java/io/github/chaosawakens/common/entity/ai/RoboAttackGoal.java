@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity.ai;
 
 import io.github.chaosawakens.common.entity.RoboEntity;
 import io.github.chaosawakens.common.entity.RoboWarriorEntity;
-import io.github.chaosawakens.common.entity.projectile.RoboExplosionLaserEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.Entity;
@@ -51,17 +50,19 @@ public class RoboAttackGoal extends Goal {
             this.projectileOwner.getLookControl().setLookAt(projectileOwner.getTarget(), 30.0F, 30.0F);
 
             this.attackTimer++;
-            if (this.attackTimer == fireRateBase * 2 && projectileOwner.getEntity().getLookAngle().equals(targetEntity.getPosition(1))) {
+            if (this.attackTimer == fireRateBase * 2) {
                 Vector3d lookVector = this.projectileOwner.getViewVector(1.0F);
                 Vector3d directionNormal = new Vector3d(targetEntity.getX() - (this.projectileOwner.getX() - lookVector.x()), targetEntity.getY(0.5) - (0.5 + this.projectileOwner.getY(0.5)), targetEntity.getZ() - (this.projectileOwner.getZ() - lookVector.z())).normalize();
-
+                
+                this.projectileOwner.getLookControl().setLookAt(projectileOwner.getTarget(), 30.0F, 30.0F);
+                
                 if (!this.projectileOwner.isSilent()) {
                     world.levelEvent(null, 1016, this.projectileOwner.blockPosition(), 0);
                 }
                 Entity entity = this.projectileOwner.getEntity();
                 Entity entity1 = this.projectileOwner.getTarget();
                 if (entity instanceof RoboWarriorEntity && !(entity1 instanceof RoboEntity)) {
-                    RoboExplosionLaserEntity roboExplosionLaserEntity = new RoboExplosionLaserEntity(world, this.projectileOwner, directionNormal.x() / 5, directionNormal.y() / 5, directionNormal.z() / 5);
+                    RoboLaserEntity roboExplosionLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.x() / 5, directionNormal.y() / 5, directionNormal.z() / 5, true);
                     roboExplosionLaserEntity.setPos(this.projectileOwner.getX(), this.projectileOwner.getY(ownerHeightYScale), this.projectileOwner.getZ());
                     roboExplosionLaserEntity.setDamage(damage);
 
@@ -69,7 +70,7 @@ public class RoboAttackGoal extends Goal {
 
                     world.addFreshEntity(roboExplosionLaserEntity);
                 } else {
-                    RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.x() / 5, directionNormal.y() / 5, directionNormal.z() / 5);
+                    RoboLaserEntity roboLaserEntity = new RoboLaserEntity(world, this.projectileOwner, directionNormal.x() / 5, directionNormal.y() / 5, directionNormal.z() / 5, false);
                     roboLaserEntity.setPos(this.projectileOwner.getX(), this.projectileOwner.getY(ownerHeightYScale), this.projectileOwner.getZ());
 
                     roboLaserEntity.setDamage(damage);

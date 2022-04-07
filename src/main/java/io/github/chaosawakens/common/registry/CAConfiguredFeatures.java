@@ -2,16 +2,19 @@ package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.mojang.serialization.Codec;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.events.CommonSetupEvent;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
+import io.github.chaosawakens.common.worldgen.placement.DoubleCrystalPlantBlockPlacer;
+import io.github.chaosawakens.common.worldgen.placement.DoubleDensePlantBlockPlacer;
 import io.github.chaosawakens.common.worldgen.placement.OceanBedPlacement;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.blockplacer.ColumnBlockPlacer;
-import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
+import net.minecraft.world.gen.blockplacer.*;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
@@ -24,11 +27,11 @@ import net.minecraft.world.gen.placement.*;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.OptionalInt;
 
 public class CAConfiguredFeatures {
-
 	// ORES
 	// GENERIC
 	public static final ConfiguredFeature<?, ?> ORE_RUBY_LAVA = register("ore_ruby", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_LAVA, States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(3));
@@ -85,8 +88,8 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> FOSSILISED_FOX = register("ore_fossilised_fox", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_FOX, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_GUARDIAN = register("ore_fossilised_guardian", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_OCEAN_FLOOR, States.FOSSILISED_GUARDIAN, 3)).decorated(OceanBedPlacement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 32))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_HORSE = register("ore_fossilised_horse", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_HORSE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
-	public static final ConfiguredFeature<?, ?> FOSSILISED_HUSK = register("ore_fossilised_husk", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_DESERT, States.FOSSILISED_HUSK, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(72, 30))).squared().count(4));
-	public static final ConfiguredFeature<?, ?> FOSSILISED_HUSK_STONE = register("ore_fossilised_husk_stone", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_HUSK_STONE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
+	public static final ConfiguredFeature<?, ?> FOSSILISED_HUSK = register("ore_fossilised_husk", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_HUSK, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
+	public static final ConfiguredFeature<?, ?> FOSSILISED_HUSK_SANDSTONE = register("ore_fossilised_husk_sandstone", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_DESERT, States.FOSSILISED_HUSK_SANDSTONE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(72, 30))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_ILLUSIONER = register("ore_fossilised_illusioner", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_ILLUSIONER, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_IRON_GOLEM = register("ore_fossilised_iron_golem", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_IRON_GOLEM, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_LLAMA = register("ore_fossilised_llama", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_LLAMA, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
@@ -214,26 +217,34 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_WOLF = register("mining_ore_fossilised_wolf", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_WOLF, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_ZOMBIE = register("mining_ore_fossilised_zombie", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_ZOMBIE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_ZOMBIE_HORSE = register("mining_ore_fossilised_zombie_horse", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_ZOMBIE_HORSE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
-
-	// CRYSTALWORLD
+	
+	public static final ConfiguredFeature<?, ?> MINING_MARBLE_CAVE_PATCH = register("mining_marble_cave_patch", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.MARBLE, 40)).squared().range(128).count(6));
+	public static final ConfiguredFeature<?, ?> MINING_LIMESTONE_CAVE_PATCH = register("mining_limestone_cave_patch", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.LIMESTONE, 36)).squared().range(116).count(3));
+	
+	// CRYSTAL WORLD
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_ENERGY = register("crystal_ore_energy", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CRYSTAL_ENERGY, 5)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(16, 64, 80))).squared().count(5));
 	public static final ConfiguredFeature<?, ?> GEODE_PINK_TOURMALINE = register("geode_pink_tourmaline", CAFeatures.GEODE.get().configured(new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.PINK_TOURMALINE, States.CLUSTER_PINK_TOURMALINE, 28, 48, 40)));
 	public static final ConfiguredFeature<?, ?> GEODE_CATS_EYE = register("geode_cats_eye", CAFeatures.GEODE.get().configured(new GeodeFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CATS_EYE, States.CLUSTER_CATS_EYE, 5, 28, 15)));
 
 	public static final ConfiguredFeature<?, ?> CRYSTAL_FOSSILISED_CRYSTAL_APPLE_COW = register("crystal_ore_fossilised_crystal_apple_cow", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CRYSTALISED_CRYSTAL_APPLE_COW, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(37, 27))).squared().count(3));
 
-	// FLOWERS
+	// GRASS / FLOWERS
 	public static final ConfiguredFeature<?, ?> CHAOS_FLOWER_DEFAULT = register("chaos_flower_default", Feature.FLOWER.configured(Configs.CHAOS_FLOWER_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
-	
-	//GRASS
-	public static final ConfiguredFeature<?, ?> CRYSTAL_GRASS = register("crystal_grass", Feature.RANDOM_PATCH.configured(Configs.CRYSTAL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(6));
-	
+	public static final ConfiguredFeature<?, ?> PATCH_CRYSTAL_GRASS = register("patch_crystal_grass", Feature.RANDOM_PATCH.configured(Configs.CRYSTAL_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
+	public static final ConfiguredFeature<?, ?> PATCH_TALL_CRYSTAL_GRASS = register("patch_tall_crystal_grass", Feature.RANDOM_PATCH.configured(Configs.TALL_CRYSTAL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(7));
+	public static final ConfiguredFeature<?, ?> CRYSTAL_FLOWER_DEFAULT = register("crystal_flower_default", Feature.FLOWER.configured(Configs.CRYSTAL_FLOWER_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
+	public static final ConfiguredFeature<?, ?> CRYSTAL_GROWTH_DEFAULT = register("crystal_growth_default", Feature.FLOWER.configured(Configs.CRYSTAL_GROWTH_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
+	public static final ConfiguredFeature<?, ?> PATCH_DENSE_GRASS = register("patch_dense_grass", Feature.RANDOM_PATCH.configured(Configs.DENSE_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
+	public static final ConfiguredFeature<?, ?> PATCH_TALL_DENSE_GRASS = register("patch_tall_dense_grass", Feature.RANDOM_PATCH.configured(Configs.TALL_DENSE_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(7));
+	public static final ConfiguredFeature<?, ?> PATCH_THORNY_SUN = register("patch_thorny_sun", Feature.RANDOM_PATCH.configured(Configs.THORNY_SUN_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(7));
+	public static final ConfiguredFeature<?, ?> DENSE_BULB_DEFAULT = register("dense_bulb_default", Feature.FLOWER.configured(Configs.DENSE_BULB_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
+
 	// CROPS
 	public static final ConfiguredFeature<?, ?> PATCH_STRAWBERRY_BUSH = register("patch_strawberry_bush", Feature.RANDOM_PATCH.configured(Configs.STRAWBERRY_BUSH_CONFIG));
 	public static final ConfiguredFeature<?, ?> PATCH_STRAWBERRY_SPARSE = register("patch_strawberry_sparse", PATCH_STRAWBERRY_BUSH.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
 	public static final ConfiguredFeature<?, ?> PATCH_STRAWBERRY_DECORATED = register("patch_strawberry_decorated", PATCH_STRAWBERRY_BUSH.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(12));
-	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("patch_corn", Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN), new ColumnBlockPlacer(3, 8))).tries(12).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).xspread(8).yspread(0).zspread(8).noProjection().build()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
-	public static final ConfiguredFeature<?, ?> TOMATO_PATCH = register("patch_tomato", Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TOMATO), new ColumnBlockPlacer(2, 6))).tries(12).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).xspread(8).yspread(0).zspread(8).noProjection().build()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
+	public static final ConfiguredFeature<?, ?> CORN_PATCH = register("patch_corn", Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CORN), new ColumnBlockPlacer(3, 8))).tries(8).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).xspread(8).yspread(0).zspread(8).noProjection().build()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
+	public static final ConfiguredFeature<?, ?> TOMATO_PATCH = register("patch_tomato", Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TOMATO), new ColumnBlockPlacer(2, 6))).tries(8).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).xspread(8).yspread(0).zspread(8).noProjection().build()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE));
 
 	// TREES
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GREEN_CRYSTAL_TREE = register("green_crystal_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.CRYSTAL_LOG), new SimpleBlockStateProvider(States.GREEN_CRYSTAL_LEAVES), new BlobFoliagePlacer(FeatureSpread.fixed(2), FeatureSpread.fixed(0), 2), new StraightTrunkPlacer(3, 2, 0), new TwoLayerFeature(2, 0, 2)).ignoreVines().build()));
@@ -250,31 +261,20 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_CHERRY_TREE = register("fancy_cherry_tree", Feature.TREE.configured((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.CHERRY_LOG), new SimpleBlockStateProvider(States.CHERRY_LEAVES), new FancyFoliagePlacer(FeatureSpread.fixed(3), FeatureSpread.fixed(2), 4), new FancyTrunkPlacer(4, 3, 0), new TwoLayerFeature(2, 0, 2, OptionalInt.of(4)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_CHERRY_TREE_BEES_005 = register("fancy_cherry_tree_bees_005", Feature.TREE.configured(FANCY_CHERRY_TREE.config.withDecorators(ImmutableList.of(Placements.BEEHIVE_005))));
 
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> PEACH_TREE = register("peach_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PEACH_LOG), new SimpleBlockStateProvider(States.PEACH_LEAVES), new BlobFoliagePlacer(FeatureSpread.fixed(2), FeatureSpread.fixed(0), 2), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(2, 0, 2)).ignoreVines().build()));
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> PEACH_TREE_BEES_005 = register("peach_tree_bees_005", Feature.TREE.configured(PEACH_TREE.config.withDecorators(ImmutableList.of(Placements.BEEHIVE_005))));
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_PEACH_TREE = register("fancy_peach_tree", Feature.TREE.configured((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PEACH_LOG), new SimpleBlockStateProvider(States.PEACH_LEAVES), new FancyFoliagePlacer(FeatureSpread.fixed(3), FeatureSpread.fixed(2), 4), new FancyTrunkPlacer(4, 3, 0), new TwoLayerFeature(2, 0, 2, OptionalInt.of(4)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_PEACH_TREE_BEES_005 = register("fancy_peach_tree_bees_005", Feature.TREE.configured(FANCY_PEACH_TREE.config.withDecorators(ImmutableList.of(Placements.BEEHIVE_005))));
-
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> DUPLICATION_TREE = register("duplication_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.DUPLICATION_LOG), new SimpleBlockStateProvider(States.DUPLICATION_LEAVES), new BlobFoliagePlacer(FeatureSpread.fixed(1), FeatureSpread.fixed(0), 1), new StraightTrunkPlacer(1, 0, 0), new TwoLayerFeature(1, 0, 1)).ignoreVines().build()));
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> DEAD_DUPLICATION_TREE = register("dead_duplication_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.DEAD_DUPLICATION_LOG), new SimpleBlockStateProvider(States.DUPLICATION_LEAVES), new BlobFoliagePlacer(FeatureSpread.fixed(1), FeatureSpread.fixed(0), 1), new StraightTrunkPlacer(1, 0, 0), new TwoLayerFeature(1, 0, 1)).ignoreVines().build()));
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_DUPLICATION_TREE = register("fancy_duplication_tree", Feature.TREE.configured((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.DUPLICATION_LOG), new SimpleBlockStateProvider(States.DUPLICATION_LEAVES), new FancyFoliagePlacer(FeatureSpread.fixed(1), FeatureSpread.fixed(0), 1), new FancyTrunkPlacer(1, 0, 0), new TwoLayerFeature(0, 0, 0, OptionalInt.of(1)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_DEAD_DUPLICATION_TREE = register("fancy_dead_duplication_tree", Feature.TREE.configured((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.DEAD_DUPLICATION_LOG), new SimpleBlockStateProvider(States.DUPLICATION_LEAVES), new FancyFoliagePlacer(FeatureSpread.fixed(2), FeatureSpread.fixed(1), 2), new FancyTrunkPlacer(1, 0, 0), new TwoLayerFeature(0, 0, 0, OptionalInt.of(3)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
 
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> PEACH_TREE = register("peach_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PEACH_LOG), new SimpleBlockStateProvider(States.PEACH_LEAVES), new BlobFoliagePlacer(FeatureSpread.fixed(2), FeatureSpread.fixed(0), 2), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(2, 0, 2)).ignoreVines().build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> PEACH_TREE_BEES_005 = register("peach_tree_bees_005", Feature.TREE.configured(PEACH_TREE.config.withDecorators(ImmutableList.of(Placements.BEEHIVE_005))));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_PEACH_TREE = register("fancy_peach_tree", Feature.TREE.configured((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PEACH_LOG), new SimpleBlockStateProvider(States.PEACH_LEAVES), new FancyFoliagePlacer(FeatureSpread.fixed(3), FeatureSpread.fixed(2), 4), new FancyTrunkPlacer(4, 3, 0), new TwoLayerFeature(2, 0, 2, OptionalInt.of(4)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> FANCY_PEACH_TREE_BEES_005 = register("fancy_peach_tree_bees_005", Feature.TREE.configured(FANCY_PEACH_TREE.config.withDecorators(ImmutableList.of(Placements.BEEHIVE_005))));
+
 	public static final ConfiguredFeature<?, ?> TREES_CRYSTAL_PLAINS = register("trees_crystal_dimension", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(GREEN_CRYSTAL_TREE.weighted(0.4F), RED_CRYSTAL_TREE.weighted(0.3F), YELLOW_CRYSTAL_TREE.weighted(0.1F)), GREEN_CRYSTAL_TREE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.1F, 1))));
 	public static final ConfiguredFeature<?, ?> TREES_APPLE = register("trees_apple", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(APPLE_TREE.weighted(0.1F), APPLE_TREE_BEES_005.weighted(0.01F)), Feature.NO_OP.configured(new NoFeatureConfig()))).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.01F, 1))));
 	public static final ConfiguredFeature<?, ?> TREES_CHERRY = register("trees_cherry", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY_TREE.weighted(0.1F), CHERRY_TREE_BEES_005.weighted(0.01F)), Feature.NO_OP.configured(new NoFeatureConfig()))).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.01F, 1))));
 	public static final ConfiguredFeature<?, ?> TREES_PEACH = register("trees_peach", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(PEACH_TREE.weighted(0.1F), PEACH_TREE_BEES_005.weighted(0.01F)), Feature.NO_OP.configured(new NoFeatureConfig()))).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.01F, 1))));
-//	public static final ConfiguredFeature<?, ?> TREES_DUPLICATION =
-//			register("trees_duplication", Feature.RANDOM_SELECTOR.configured(new
-//					MultipleRandomFeatureConfig(ImmutableList.of(DUPLICATION_TREE.weighted(0.0001F)),
-//					DUPLICATION_TREE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1).decorated(Placement.COUNT_EXTRA.configured(new
-//					AtSurfaceWithExtraConfig(1, 0.000001F, 1))));
-//	public static final ConfiguredFeature<?, ?> TREES_DEAD_DUPLICATION =
-//			register("trees_dead_duplication", Feature.RANDOM_SELECTOR.configured(new
-//					MultipleRandomFeatureConfig(ImmutableList.of(DEAD_DUPLICATION_TREE.weighted(0.0001F)),
-//					DEAD_DUPLICATION_TREE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1).decorated(Placement.COUNT_EXTRA.configured(new
-//					AtSurfaceWithExtraConfig(1, 0.000001F, 1))));
-
 
 	// NESTS
 	public static final ConfiguredFeature<?, ?> BROWN_ANT_NEST = register("nest_brown_ant", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.GRASS_BLOCK, States.BROWN_ANT_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))));
@@ -283,7 +283,8 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> UNSTABLE_ANT_NEST = register("nest_unstable_ant", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.GRASS_BLOCK, States.UNSTABLE_ANT_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))));
 	public static final ConfiguredFeature<?, ?> TERMITE_NEST = register("nest_termite", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.GRASS_BLOCK, States.TERMITE_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))));
 
-	public static final ConfiguredFeature<?, ?> CRYSTAL_TERMITE_NEST = register("nest_crystal_termite", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.CRYSTAL_GRASS_BLOCK, States.CRYSTAL_TERMITE_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))));
+	public static final ConfiguredFeature<?, ?> CRYSTAL_TERMITE_NEST = register("nest_crystal_termite", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.CRYSTAL_GRASS_BLOCK, States.CRYSTAL_TERMITE_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(80, 50))).count(6));
+	public static final ConfiguredFeature<?, ?> DENSE_RED_ANT_NEST = register("nest_dense_red_ant", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.DENSE_GRASS_BLOCK, States.DENSE_RED_ANT_NEST)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(140, 40))).count(6));
 
 	private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
 		CommonSetupEvent.configFeatures.add(new FeatureWrapper(key, configuredFeature));
@@ -292,17 +293,26 @@ public class CAConfiguredFeatures {
 
 	public static final class States {
 		private static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.defaultBlockState();
+		private static final BlockState CRYSTAL_GRASS_BLOCK = CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState();
 		private static final BlockState CRYSTAL_GRASS = CABlocks.CRYSTAL_GRASS.get().defaultBlockState();
 		private static final BlockState TALL_CRYSTAL_GRASS = CABlocks.TALL_CRYSTAL_GRASS.get().defaultBlockState();
+		private static final BlockState DENSE_GRASS_BLOCK = CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState();
+		private static final BlockState DENSE_GRASS = CABlocks.DENSE_GRASS.get().defaultBlockState();
+		private static final BlockState TALL_DENSE_GRASS = CABlocks.TALL_DENSE_GRASS.get().defaultBlockState();
+		
+		private static final BlockState MARBLE = CABlocks.MARBLE.get().defaultBlockState();
+		private static final BlockState LIMESTONE = CABlocks.LIMESTONE.get().defaultBlockState();
+
 		private static final BlockState APPLE_LOG = CABlocks.APPLE_LOG.get().defaultBlockState();
 		private static final BlockState CHERRY_LOG = CABlocks.CHERRY_LOG.get().defaultBlockState();
-		private static final BlockState PEACH_LOG = CABlocks.PEACH_LOG.get().defaultBlockState();
 		private static final BlockState DUPLICATION_LOG = CABlocks.DUPLICATION_LOG.get().defaultBlockState();
 		private static final BlockState DEAD_DUPLICATION_LOG = CABlocks.DEAD_DUPLICATION_LOG.get().defaultBlockState();
-		private static final BlockState DUPLICATION_LEAVES = CABlocks.DUPLICATION_LEAVES.get().defaultBlockState();
+		private static final BlockState PEACH_LOG = CABlocks.PEACH_LOG.get().defaultBlockState();
 		private static final BlockState APPLE_LEAVES = CABlocks.APPLE_LEAVES.get().defaultBlockState();
 		private static final BlockState CHERRY_LEAVES = CABlocks.CHERRY_LEAVES.get().defaultBlockState();
+		private static final BlockState DUPLICATION_LEAVES = CABlocks.DUPLICATION_LEAVES.get().defaultBlockState();
 		private static final BlockState PEACH_LEAVES = CABlocks.PEACH_LEAVES.get().defaultBlockState();
+
 		private static final BlockState STONE = Blocks.STONE.defaultBlockState();
 		private static final BlockState RUBY_ORE = CABlocks.RUBY_ORE.get().defaultBlockState();
 		private static final BlockState NETHERRACK_RUBY_ORE = CABlocks.NETHERRACK_RUBY_ORE.get().defaultBlockState();
@@ -343,7 +353,6 @@ public class CAConfiguredFeatures {
 		private static final BlockState FOSSILISED_CARROT_PIG = CABlocks.FOSSILISED_CARROT_PIG.get().defaultBlockState();
 		private static final BlockState FOSSILISED_GOLDEN_CARROT_PIG = CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get().defaultBlockState();
 		private static final BlockState FOSSILISED_BIRD = CABlocks.FOSSILISED_BIRD.get().defaultBlockState();
-		private static final BlockState FOSSILISED_DIMETRODON = CABlocks.FOSSILISED_DIMETRODON.get().defaultBlockState();
 		private static final BlockState FOSSILISED_FROG = CABlocks.FOSSILISED_FROG.get().defaultBlockState();
 
 		private static final BlockState FOSSILISED_BAT = CABlocks.FOSSILISED_BAT.get().defaultBlockState();
@@ -363,7 +372,7 @@ public class CAConfiguredFeatures {
 		private static final BlockState FOSSILISED_GUARDIAN = CABlocks.FOSSILISED_GUARDIAN.get().defaultBlockState();
 		private static final BlockState FOSSILISED_HORSE = CABlocks.FOSSILISED_HORSE.get().defaultBlockState();
 		private static final BlockState FOSSILISED_HUSK = CABlocks.FOSSILISED_HUSK.get().defaultBlockState();
-		private static final BlockState FOSSILISED_HUSK_STONE = CABlocks.FOSSILISED_HUSK_STONE.get().defaultBlockState();
+		private static final BlockState FOSSILISED_HUSK_SANDSTONE = CABlocks.FOSSILISED_HUSK_SANDSTONE.get().defaultBlockState();
 		private static final BlockState FOSSILISED_ILLUSIONER = CABlocks.FOSSILISED_ILLUSIONER.get().defaultBlockState();
 		private static final BlockState FOSSILISED_IRON_GOLEM = CABlocks.FOSSILISED_IRON_GOLEM.get().defaultBlockState();
 		private static final BlockState FOSSILISED_LLAMA = CABlocks.FOSSILISED_LLAMA.get().defaultBlockState();
@@ -418,6 +427,8 @@ public class CAConfiguredFeatures {
 
 		private static final BlockState CRYSTALISED_CRYSTAL_APPLE_COW = CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get().defaultBlockState();
 
+		private static final BlockState FOSSILISED_DIMETRODON = CABlocks.FOSSILISED_DIMETRODON.get().defaultBlockState();
+
 		private static final BlockState RED_ANT_INFESTED_ORE = CABlocks.RED_ANT_INFESTED_ORE.get().defaultBlockState();
 		private static final BlockState TERMITE_INFESTED_ORE = CABlocks.TERMITE_INFESTED_ORE.get().defaultBlockState();
 		private static final BlockState CRYSTAL_ENERGY = CABlocks.CRYSTAL_ENERGY.get().defaultBlockState();
@@ -434,6 +445,22 @@ public class CAConfiguredFeatures {
 		private static final BlockState RED_ROSE = CABlocks.RED_ROSE.get().defaultBlockState();
 		private static final BlockState PAEONIA = CABlocks.PAEONIA.get().defaultBlockState();
 
+		private static final BlockState RED_CRYSTAL_FLOWER = CABlocks.RED_CRYSTAL_FLOWER.get().defaultBlockState();
+		private static final BlockState BLUE_CRYSTAL_FLOWER = CABlocks.BLUE_CRYSTAL_FLOWER.get().defaultBlockState();
+		private static final BlockState GREEN_CRYSTAL_FLOWER = CABlocks.GREEN_CRYSTAL_FLOWER.get().defaultBlockState();
+		private static final BlockState YELLOW_CRYSTAL_FLOWER = CABlocks.YELLOW_CRYSTAL_FLOWER.get().defaultBlockState();
+		private static final BlockState RED_CRYSTAL_GROWTH = CABlocks.RED_CRYSTAL_GROWTH.get().defaultBlockState();
+		private static final BlockState BLUE_CRYSTAL_GROWTH = CABlocks.BLUE_CRYSTAL_GROWTH.get().defaultBlockState();
+		private static final BlockState GREEN_CRYSTAL_GROWTH = CABlocks.GREEN_CRYSTAL_GROWTH.get().defaultBlockState();
+		private static final BlockState YELLOW_CRYSTAL_GROWTH = CABlocks.YELLOW_CRYSTAL_GROWTH.get().defaultBlockState();
+		private static final BlockState ORANGE_CRYSTAL_GROWTH = CABlocks.ORANGE_CRYSTAL_GROWTH.get().defaultBlockState();
+		private static final BlockState PINK_CRYSTAL_GROWTH = CABlocks.PINK_CRYSTAL_GROWTH.get().defaultBlockState();
+
+		private static final BlockState THORNY_SUN = CABlocks.THORNY_SUN.get().defaultBlockState();
+		private static final BlockState BLUE_BULB = CABlocks.BLUE_BULB.get().defaultBlockState();
+		private static final BlockState PINK_BULB = CABlocks.PINK_BULB.get().defaultBlockState();
+		private static final BlockState PURPLE_BULB = CABlocks.PURPLE_BULB.get().defaultBlockState();
+
 		private static final BlockState STRAWBERRY_BUSH = CABlocks.STRAWBERRY_BUSH.get().defaultBlockState().setValue(SweetBerryBushBlock.AGE, 3);
 		private static final BlockState CORN = CABlocks.CORN_BODY_BLOCK.get().defaultBlockState();
 		private static final BlockState TOMATO = CABlocks.TOMATO_BODY_BLOCK.get().defaultBlockState();
@@ -441,16 +468,23 @@ public class CAConfiguredFeatures {
 		private static final BlockState BROWN_ANT_NEST = CABlocks.BROWN_ANT_NEST.get().defaultBlockState();
 		private static final BlockState RAINBOW_ANT_NEST = CABlocks.RAINBOW_ANT_NEST.get().defaultBlockState();
 		private static final BlockState RED_ANT_NEST = CABlocks.RED_ANT_NEST.get().defaultBlockState();
+		private static final BlockState DENSE_RED_ANT_NEST = CABlocks.DENSE_RED_ANT_NEST.get().defaultBlockState();
 		private static final BlockState UNSTABLE_ANT_NEST = CABlocks.UNSTABLE_ANT_NEST.get().defaultBlockState();
 		private static final BlockState TERMITE_NEST = CABlocks.TERMITE_NEST.get().defaultBlockState();
-		private static final BlockState CRYSTAL_GRASS_BLOCK = CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState();
 		private static final BlockState CRYSTAL_TERMITE_NEST = CABlocks.CRYSTAL_TERMITE_NEST.get().defaultBlockState();
 	}
-//the w
+
 	public static final class Configs {
 		public static final BlockClusterFeatureConfig CHAOS_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.CYAN_ROSE, 2).add(States.RED_ROSE, 2).add(States.PAEONIA, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
+		public static final BlockClusterFeatureConfig DENSE_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.DENSE_GRASS), SimpleBlockPlacer.INSTANCE)).tries(32).build();
+		public static final BlockClusterFeatureConfig TALL_DENSE_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TALL_DENSE_GRASS), new DoubleDensePlantBlockPlacer())).tries(64).noProjection().build();
+		public static final BlockClusterFeatureConfig THORNY_SUN_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.THORNY_SUN), new DoubleDensePlantBlockPlacer())).tries(32).noProjection().build();
+		public static final BlockClusterFeatureConfig DENSE_BULB_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.BLUE_BULB, 2).add(States.PINK_BULB, 2).add(States.PURPLE_BULB, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig STRAWBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.STRAWBERRY_BUSH), SimpleBlockPlacer.INSTANCE)).tries(64).whitelist(ImmutableSet.of(States.GRASS_BLOCK.getBlock())).noProjection().build();
-		public static final BlockClusterFeatureConfig CRYSTAL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.CRYSTAL_GRASS, 8).add(States.TALL_CRYSTAL_GRASS, 4), SimpleBlockPlacer.INSTANCE)).tries(128).whitelist(ImmutableSet.of(States.CRYSTAL_GRASS_BLOCK.getBlock())).noProjection().build();
+		public static final BlockClusterFeatureConfig CRYSTAL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CRYSTAL_GRASS), SimpleBlockPlacer.INSTANCE)).tries(32).build();
+		public static final BlockClusterFeatureConfig TALL_CRYSTAL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TALL_CRYSTAL_GRASS), new DoubleCrystalPlantBlockPlacer())).tries(64).noProjection().build();
+		public static final BlockClusterFeatureConfig CRYSTAL_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.RED_CRYSTAL_FLOWER, 2).add(States.BLUE_CRYSTAL_FLOWER, 2).add(States.GREEN_CRYSTAL_FLOWER, 2).add(States.YELLOW_CRYSTAL_FLOWER, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
+		public static final BlockClusterFeatureConfig CRYSTAL_GROWTH_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.RED_CRYSTAL_GROWTH, 2).add(States.BLUE_CRYSTAL_GROWTH, 2).add(States.GREEN_CRYSTAL_GROWTH, 2).add(States.YELLOW_CRYSTAL_GROWTH, 2).add(States.ORANGE_CRYSTAL_GROWTH, 2).add(States.PINK_CRYSTAL_GROWTH, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 	}
 
 	public static final class Placements {

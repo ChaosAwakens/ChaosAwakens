@@ -5,13 +5,14 @@ import java.util.ArrayList;
 
 
 
+
 import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -218,7 +219,7 @@ public interface IUtilityHelper {
 	 * @param blockToAdd block to add <code>Blacklist</code> tag to
 	 */
 	default void addBlockToDuplicationsBlackList(Block blockToAdd) {
-		blockToAdd.getTags().add((ResourceLocation) CATags.getBlockTagWrapper("blacklist"));
+		blockToAdd.getTags().add((ResourceLocation) CATags.Blocks.tag("blacklist"));
 	}
 	
 	/**
@@ -226,7 +227,7 @@ public interface IUtilityHelper {
 	 * @param blockToAdd block to add <code>Whitelist</code> tag to
 	 */
 	default void addBlockToDuplicationsWhiteList(Block blockToAdd) {
-		blockToAdd.getTags().add((ResourceLocation) CATags.getBlockTagWrapper("whitelist"));
+		blockToAdd.getTags().add((ResourceLocation) CATags.Blocks.tag("whitelist"));
 	}
 	
 	/**
@@ -246,7 +247,7 @@ public interface IUtilityHelper {
 	default void setItemTexture(ItemStack itemToSet, ResourceLocation pathWithTextures, String textureName, String pathName) {
 		boolean hasTextures = pathWithTextures.getPath().contains(pathName);
 		if (hasTextures) {
-			ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), pathWithTextures, (stack, world, entity) -> {
+			ItemModelsProperties.register(itemToSet.getItem(), pathWithTextures, (stack, world, entity) -> {
 				stack = itemToSet;
 				String modid = entity.getType().getRegistryName().getNamespace();
 				String regName = entity.getType().getRegistryName().toString().replace(modid, "").replace(":", "");
@@ -266,7 +267,7 @@ public interface IUtilityHelper {
 	 * @return true if entity is moving, else returns false
 	 */
 	default boolean isMoving(LivingEntity entity) {
-		if (entity.moveDist > 0) {
+		if (entity.moveDist > 0 || entity.getSpeed() == 0) {
 			return true;
 		}
 		return false;
@@ -281,25 +282,25 @@ public interface IUtilityHelper {
 	default boolean isMovingAtVelocity(float speed, LivingEntity entityToCheck) {
 		return entityToCheck.getSpeed() == speed;
 	}
-	
+
 	/**
 	 * Checks the uuid of an entity or player
-	 * @param entity entity to check uuid of
+	 * @param entityToCheck entity to check uuid of
 	 * @param uuidToCheck uuid of entity to check
 	 * @return true if entity's uuid is equal to uuidToCheck, else returns false
 	 */
-	default boolean isUserOrEntityUUIDEqualTo(Entity entity, UUID uuidToCheck) {
-		return entity.getUUID() == uuidToCheck;
+	static boolean isUserOrEntityUUIDEqualTo(Entity entityToCheck, UUID uuidToCheck) {
+		return entityToCheck.getUUID().equals(uuidToCheck);
 	}
-	
+
 	/**
 	 * Gets the name of an entity or player
-	 * @param name name of entity to check
+	 * @param nameToCheck name of entity to check
 	 * @param entityToCheck entity to check name of
 	 * @return true if entity name is equal to the name provided, else returns false
 	 */
-	default boolean isEntityNameEqualTo(String name, Entity entityToCheck) {
-		return entityToCheck.getName().toString() == name;
+	static boolean isEntityNameEqualTo(Entity entityToCheck, String nameToCheck) {
+		return entityToCheck.getName().getString().equals(nameToCheck);
 	}
 	
 	/**
@@ -475,7 +476,7 @@ public interface IUtilityHelper {
 	 * @param b finishing blockpos
 	 * @return the distance between a and b
 	 */
-	default double getDistanceBetween(BlockPos a, BlockPos b) {
+	default double getDistanceBetween(@Nullable BlockPos a, @Nullable BlockPos b) {
 		int x = Math.abs(a.getX() - b.getX());
 		int y = Math.abs(a.getY() - b.getY());
 		int z = Math.abs(a.getZ() - b.getZ());
@@ -553,7 +554,7 @@ public interface IUtilityHelper {
 	 * @param entityB entity point b, finishing pos to check
 	 * @return the distance between the 2 entities
 	 */
-	default double getDistanceBetweenEntities(Entity entityA, Entity entityB) {
+	default double getDistanceBetweenEntities(@Nullable Entity entityA, @Nullable Entity entityB) {
 		double x = Math.abs(entityA.getX() - entityB.getX());
 		double y = Math.abs(entityA.getY() - entityB.getY());
 		double z = Math.abs(entityA.getZ() - entityB.getZ());
@@ -583,6 +584,39 @@ public interface IUtilityHelper {
 	 */
 	default double getRandomVerticalPos(double random, World world) {
 		return world.random.nextDouble() - 0.1D * random;
+	}
+	
+	/**
+	 * Get the square root of a number/double without the hassle of typing <code>Math.sqrt()</code>
+	 * @param numberToGetSquareRootOf number to find square root of
+	 * @return square root of the number entered 
+	 */
+	default double squareRoot(double numberToGetSquareRootOf) {
+		return Math.sqrt(numberToGetSquareRootOf);
+	}
+	
+	/**
+	 *  Get the number squared without having to do static methods
+	 * @param numberSquared number to get squared (number * number) --How could you not know this and code?
+	 * @return the number entered squared (number * number)
+	 */
+	default double squared(double numberSquared) {
+		return numberSquared * numberSquared;
+	}
+	
+	/**
+	 * I don't know how this could be used, I genuinely made this out of boredom - Meme Man
+	 * @param a variable a
+	 * @param b variable b
+	 * @param c variable c
+	 * @param isAddition whether or not the operation should be addition. If false, it'll be subtraction.
+	 * @return <code>(-b + sqrt of bsq - 4ac / 2a)</code> if <code>isAddition</code> is true, else <code>(-b - sqrt of bsq - 4ac / 2a)</code>
+	 */
+	default double quadraticFormula(double a, double b, double c, boolean isAddition) {
+		if (isAddition) {
+			return -b + squareRoot(squared(b)) - 4 * a * c / 2 * a;
+		}
+		return -b - squareRoot(squared(b)) - 4 * a * c / 2 * a;
 	}
 	
 	///////////////////////////////
@@ -651,7 +685,7 @@ public interface IUtilityHelper {
 	
 	/**
 	 * Adds Vanilla mobs to the Vanilla entities list, primarily used for differentiating between Vanilla mobs and other mob types from CA or other mods
-	 * @param CAMobToAdd Mob to add to the <code>VANILLA_ENTITIES</code>
+	 * @param VanillaMobToAdd Mob to add to the <code>VANILLA_ENTITIES</code>
 	 * @return the list <code>VANILLA_ENTITIES</code>
 	 */
 	default List<EntityType<? extends LivingEntity>> addVanillaEntityToVanillaEntityList(EntityType<? extends LivingEntity> VanillaMobToAdd) {

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:blue_dye_from_blue_bulb"
+    ]
+  },
+  "criteria": {
+    "has_blue_bulb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:blue_bulb"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:blue_dye_from_blue_bulb"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_bulb",
+      "has_the_recipe"
+    ]
+  ]
+}

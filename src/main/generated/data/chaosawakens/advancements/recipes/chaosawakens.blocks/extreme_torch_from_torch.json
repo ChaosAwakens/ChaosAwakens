@@ -16,7 +16,7 @@
         ]
       }
     },
-    "has_OptionalNamedTag[forge:dusts/redstone]": {
+    "has_forge:dusts/redstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -46,7 +46,7 @@
   "requirements": [
     [
       "has_torch",
-      "has_OptionalNamedTag[forge:dusts/redstone]",
+      "has_forge:dusts/redstone",
       "has_sunstone",
       "has_the_recipe"
     ]

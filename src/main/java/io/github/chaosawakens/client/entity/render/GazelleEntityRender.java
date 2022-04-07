@@ -16,7 +16,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
-@OnlyIn(Dist.CLIENT)
 public class GazelleEntityRender extends GeoEntityRenderer<GazelleEntity>{
     private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/black.png");
     private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/red.png");

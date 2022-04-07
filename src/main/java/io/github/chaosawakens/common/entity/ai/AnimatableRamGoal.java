@@ -61,6 +61,7 @@ public class AnimatableRamGoal extends AnimatableMovableGoal {
 
     @Override
     public void tick() {
+    	this.baseTick();
         LivingEntity target = this.entity.getTarget();
         if (target == null) return;
 

@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class RockFishEntityRender extends GeoEntityRenderer<RockFishEntity>{
-
 	public RockFishEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new RockFishEntityModel());
         this.shadowRadius = 0.5F;

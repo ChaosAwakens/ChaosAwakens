@@ -10,7 +10,7 @@
     "#forge:end_stones",
     "#forge:gravel",
     "#forge:sand",
-    "minecraft:water",
-    "minecraft:lava"
+    "#forge:dirt",
+    "minecraft:ice"
   ]
 }

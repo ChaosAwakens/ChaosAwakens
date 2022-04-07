@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.projectile;
 
+import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.AbstractBlock;
@@ -15,6 +16,7 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,6 +26,7 @@ import javax.annotation.Nonnull;
 
 public class RoboLaserEntity extends DamagingProjectileEntity {
     private float damage;
+    private boolean explosion;
 
     public RoboLaserEntity(EntityType<RoboLaserEntity> entityType, World worldIn) {
         super(entityType, worldIn);
@@ -47,8 +50,9 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
         this.setDeltaMovement(p_i47274_8_, p_i47274_10_, p_i47274_12_);
     }
 
-    public RoboLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
-        super(CAEntityTypes.ROBO_LASER.get(), shooter, accelX, accelY, accelZ, worldIn);
+    public RoboLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ, boolean explosion) {
+        super(CAEntityTypes.ROBO_LASER.get(), shooter, accelX + 3, accelY + 3, accelZ + 3, worldIn);
+        this.explosion = explosion;
     }
 
     @Override
@@ -72,17 +76,41 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
         }
     }
 
+    protected void onHit(RayTraceResult result) {
+        super.onHit(result);
+        if (!this.level.isClientSide && explosion) {
+            boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+            if (!(this.getEntity() instanceof RoboEntity) && flag) {
+                if (random.nextInt(6) >= 3) {
+                    float EXPLOSION_POWER = CAConfig.COMMON.rayGunExplosionSize.get();
+                    boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
+                    switch (CAConfig.COMMON.rayGunExplosionType.get()) {
+                        case 0:
+                            this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+                            break;
+                        case 1:
+                            this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+                            break;
+                        case 2:
+                            this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+                            break;
+                    }
+                }
+            }
+            this.remove();
+        }
+    }
+
     @Override
     protected void onHitEntity(EntityRayTraceResult result) {
-        super.onHitEntity(result);
         Entity entity = this.getOwner();
-        if (entity instanceof RoboEntity)
-            result.getEntity().hurt(DamageSource.indirectMobAttack(this, (RoboEntity) entity).setProjectile(), damage);
+        if (entity instanceof RoboEntity) result.getEntity().hurt(DamageSource.indirectMobAttack(this, (RoboEntity) entity).setProjectile(), damage);
+        super.onHitEntity(result);
     }
 
     @Override
     protected boolean shouldBurn() {
-        return false; //TODO Make it not fiery
+        return false;
     }
 
     @Nonnull
@@ -93,6 +121,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 
     @Override
     protected void defineSynchedData() {
+
     }
 
     public float getDamage() {
@@ -101,5 +130,10 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+    
+    @Override
+    protected float getBlockSpeedFactor() {
+    	return super.getBlockSpeedFactor();
     }
 }

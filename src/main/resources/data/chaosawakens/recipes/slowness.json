@@ -1,0 +1,11 @@
+{
+  "type": "jeed:effect_provider",
+  "effect":{
+    "id": "minecraft:slowness"
+  },
+  "providers": [
+    {
+      "item": "chaosawakens:stray_critter_cage"
+    }
+  ]
+}

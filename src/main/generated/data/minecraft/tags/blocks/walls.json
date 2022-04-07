@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:marble_wall",
+    "chaosawakens:chiseled_marble_wall",
+    "chaosawakens:cracked_marble_wall",
+    "chaosawakens:marble_brick_wall",
+    "chaosawakens:polished_marble_wall",
+    "chaosawakens:mossy_marble_wall",
+    "chaosawakens:limestone_wall",
+    "chaosawakens:chiseled_limestone_wall",
+    "chaosawakens:cracked_limestone_wall",
+    "chaosawakens:limestone_brick_wall",
+    "chaosawakens:polished_limestone_wall",
+    "chaosawakens:mossy_limestone_wall",
+    "chaosawakens:robo_wall_l",
+    "chaosawakens:robo_wall_x"
+  ]
+}

@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class EmeraldGatorEntityRender extends GeoEntityRenderer<EmeraldGatorEntity> {
-
     public EmeraldGatorEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new EmeraldGatorEntityModel());
         this.shadowRadius = 0.4F;
@@ -26,7 +25,7 @@ public class EmeraldGatorEntityRender extends GeoEntityRenderer<EmeraldGatorEnti
 
     @Override
     public ResourceLocation getTextureLocation(EmeraldGatorEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/emerald_gator.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gators/emerald_gator.png");
     }
 
     @Override

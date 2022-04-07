@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class StinkBugEntityRender extends GeoEntityRenderer<StinkBugEntity> {
-
     public StinkBugEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new StinkBugEntityModel());
         this.shadowRadius = 0.4F;

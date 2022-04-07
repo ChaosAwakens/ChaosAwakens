@@ -11,8 +11,8 @@ import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
 import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 public class RoboWarriorGlowLayer extends GeoLayerRenderer<RoboWarriorEntity> {
-    private static final ResourceLocation GLOW = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_warrior_glow.png");
-    private static final ResourceLocation MODEL = new ResourceLocation(ChaosAwakens.MODID, "geo/robo_warrior.geo.json");
+    public static final ResourceLocation GLOW = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_warrior_glow.png");
+    public static final ResourceLocation MODEL = new ResourceLocation(ChaosAwakens.MODID, "geo/robo_warrior.geo.json");
 
     public RoboWarriorGlowLayer(IGeoRenderer<RoboWarriorEntity> entityRendererIn) {
         super(entityRendererIn);

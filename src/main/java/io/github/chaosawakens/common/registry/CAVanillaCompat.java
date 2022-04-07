@@ -6,7 +6,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.FireBlock;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class CAVanillaCompat {
     public static void setup() {
@@ -61,6 +64,26 @@ public class CAVanillaCompat {
         registerFlammable(CABlocks.SKYWOOD_STAIRS.get(), 5, 20);
         registerFlammable(CABlocks.SKYWOOD_FENCE.get(), 5, 20);
         registerFlammable(CABlocks.SKYWOOD_FENCE_GATE.get(), 5, 20);
+        registerFlammable(CABlocks.GINKGO_LEAVES.get(), 30, 60);
+        registerFlammable(CABlocks.GINKGO_LOG.get(), 5, 5);
+        registerFlammable(CABlocks.GINKGO_WOOD.get(), 5, 5);
+        registerFlammable(CABlocks.STRIPPED_GINKGO_LOG.get(), 5, 5);
+        registerFlammable(CABlocks.STRIPPED_GINKGO_WOOD.get(), 5, 5);
+        registerFlammable(CABlocks.GINKGO_PLANKS.get(), 5, 20);
+        registerFlammable(CABlocks.GINKGO_SLAB.get(), 5, 20);
+        registerFlammable(CABlocks.GINKGO_STAIRS.get(), 5, 20);
+        registerFlammable(CABlocks.GINKGO_FENCE.get(), 5, 20);
+        registerFlammable(CABlocks.GINKGO_FENCE_GATE.get(), 5, 20);
+        registerFlammable(CABlocks.RED_CRYSTAL_LEAVES.get(), 30, 60);
+        registerFlammable(CABlocks.GREEN_CRYSTAL_LEAVES.get(), 30, 60);
+        registerFlammable(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), 30, 60);
+        registerFlammable(CABlocks.CRYSTAL_LOG.get(), 5, 5);
+        registerFlammable(CABlocks.CRYSTAL_WOOD.get(), 5, 5);
+        registerFlammable(CABlocks.CRYSTAL_PLANKS.get(), 5, 20);
+        registerFlammable(CABlocks.CRYSTAL_SLAB.get(), 5, 20);
+        registerFlammable(CABlocks.CRYSTAL_STAIRS.get(), 5, 20);
+        registerFlammable(CABlocks.CRYSTAL_FENCE.get(), 5, 20);
+        registerFlammable(CABlocks.CRYSTAL_FENCE_GATE.get(), 5, 20);
         registerFlammable(CABlocks.CYAN_ROSE.get(), 60, 100);
         registerFlammable(CABlocks.RED_ROSE.get(), 60, 100);
         registerFlammable(CABlocks.PAEONIA.get(), 60, 100);
@@ -69,6 +92,24 @@ public class CAVanillaCompat {
         registerFlammable(CABlocks.CORN_BODY_BLOCK.get(), 60, 100);
         registerFlammable(CABlocks.TOMATO_TOP_BLOCK.get(), 60, 100);
         registerFlammable(CABlocks.TOMATO_BODY_BLOCK.get(), 60, 100);
+        registerFlammable(CABlocks.DENSE_GRASS.get(), 50, 80);
+        registerFlammable(CABlocks.TALL_DENSE_GRASS.get(), 50, 80);
+        registerFlammable(CABlocks.THORNY_SUN.get(), 50, 80);
+        registerFlammable(CABlocks.BLUE_BULB.get(), 60, 100);
+        registerFlammable(CABlocks.PINK_BULB.get(), 60, 100);
+        registerFlammable(CABlocks.PURPLE_BULB.get(), 60, 100);
+        registerFlammable(CABlocks.CRYSTAL_GRASS.get(), 50, 80);
+        registerFlammable(CABlocks.TALL_CRYSTAL_GRASS.get(), 50, 80);
+        registerFlammable(CABlocks.RED_CRYSTAL_FLOWER.get(), 60, 100);
+        registerFlammable(CABlocks.BLUE_CRYSTAL_FLOWER.get(), 60, 100);
+        registerFlammable(CABlocks.GREEN_CRYSTAL_FLOWER.get(), 60, 100);
+        registerFlammable(CABlocks.YELLOW_CRYSTAL_FLOWER.get(), 60, 100);
+        registerFlammable(CABlocks.RED_CRYSTAL_GROWTH.get(), 60, 100);
+        registerFlammable(CABlocks.BLUE_CRYSTAL_GROWTH.get(), 60, 100);
+        registerFlammable(CABlocks.GREEN_CRYSTAL_GROWTH.get(), 60, 100);
+        registerFlammable(CABlocks.YELLOW_CRYSTAL_GROWTH.get(), 60, 100);
+        registerFlammable(CABlocks.ORANGE_CRYSTAL_GROWTH.get(), 60, 100);
+        registerFlammable(CABlocks.PINK_CRYSTAL_GROWTH.get(), 60, 100);
 
         //Log Stripping
         registerStrippable(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get());
@@ -81,20 +122,61 @@ public class CAVanillaCompat {
         registerStrippable(CABlocks.DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DUPLICATION_WOOD.get());
         registerStrippable(CABlocks.SKYWOOD_LOG.get(), CABlocks.STRIPPED_SKYWOOD_LOG.get());
         registerStrippable(CABlocks.SKYWOOD_WOOD.get(), CABlocks.STRIPPED_SKYWOOD_WOOD.get());
+        registerStrippable(CABlocks.GINKGO_LOG.get(), CABlocks.STRIPPED_GINKGO_LOG.get());
+        registerStrippable(CABlocks.GINKGO_WOOD.get(), CABlocks.STRIPPED_GINKGO_WOOD.get());
 
         //Compostable Blocks
         registerCompostable(0.3F, CABlocks.APPLE_SAPLING.get());
         registerCompostable(0.3F, CABlocks.APPLE_LEAVES.get());
+        registerCompostable(0.2F, CABlocks.APPLE_LEAF_CARPET.get());
         registerCompostable(0.3F, CABlocks.CHERRY_SAPLING.get());
         registerCompostable(0.3F, CABlocks.CHERRY_LEAVES.get());
+        registerCompostable(0.2F, CABlocks.CHERRY_LEAF_CARPET.get());
         registerCompostable(0.3F, CABlocks.DUPLICATION_LEAVES.get());
+        registerCompostable(0.2F, CABlocks.DUPLICATION_LEAF_CARPET.get());
         registerCompostable(0.3F, CABlocks.PEACH_SAPLING.get());
         registerCompostable(0.3F, CABlocks.PEACH_LEAVES.get());
+        registerCompostable(0.2F, CABlocks.PEACH_LEAF_CARPET.get());
+//        registerCompostable(0.3F, CABlocks.SKYWOOD_SAPLING.get());
         registerCompostable(0.3F, CABlocks.SKYWOOD_LEAVES.get());
+        registerCompostable(0.2F, CABlocks.SKYWOOD_LEAF_CARPET.get());
+//        registerCompostable(0.3F, CABlocks.GINKGO_SAPLING.get());
+        registerCompostable(0.3F, CABlocks.GINKGO_LEAVES.get());
+        registerCompostable(0.2F, CABlocks.GINKGO_LEAF_CARPET.get());
+        registerCompostable(0.3F, CABlocks.RED_CRYSTAL_SAPLING.get());
+        registerCompostable(0.3F, CABlocks.RED_CRYSTAL_LEAVES.get());
+        registerCompostable(0.3F, CABlocks.GREEN_CRYSTAL_SAPLING.get());
+        registerCompostable(0.3F, CABlocks.GREEN_CRYSTAL_LEAVES.get());
+        registerCompostable(0.3F, CABlocks.YELLOW_CRYSTAL_SAPLING.get());
+        registerCompostable(0.3F, CABlocks.YELLOW_CRYSTAL_LEAVES.get());
         registerCompostable(0.5F, CABlocks.TUBE_WORM.get());
         registerCompostable(0.65F, CABlocks.CYAN_ROSE.get());
         registerCompostable(0.65F, CABlocks.RED_ROSE.get());
         registerCompostable(0.65F, CABlocks.PAEONIA.get());
+        registerCompostable(0.2F, CABlocks.OAK_LEAF_CARPET.get());
+        registerCompostable(0.2F, CABlocks.SPRUCE_LEAF_CARPET.get());
+        registerCompostable(0.2F, CABlocks.BIRCH_LEAF_CARPET.get());
+        registerCompostable(0.2F, CABlocks.JUNGLE_LEAF_CARPET.get());
+        registerCompostable(0.2F, CABlocks.ACACIA_LEAF_CARPET.get());
+        registerCompostable(0.2F, CABlocks.DARK_OAK_LEAF_CARPET.get());
+        registerCompostable(0.45F, CABlocks.DENSE_GRASS.get());
+        registerCompostable(0.75F, CABlocks.TALL_DENSE_GRASS.get());
+        registerCompostable(0.75F, CABlocks.THORNY_SUN.get());
+        registerCompostable(0.65F, CABlocks.BLUE_BULB.get());
+        registerCompostable(0.65F, CABlocks.PINK_BULB.get());
+        registerCompostable(0.65F, CABlocks.PURPLE_BULB.get());
+        registerCompostable(0.3F, CABlocks.CRYSTAL_GRASS.get());
+        registerCompostable(0.5F, CABlocks.TALL_CRYSTAL_GRASS.get());
+        registerCompostable(0.65F, CABlocks.RED_CRYSTAL_FLOWER.get());
+        registerCompostable(0.65F, CABlocks.BLUE_CRYSTAL_FLOWER.get());
+        registerCompostable(0.65F, CABlocks.GREEN_CRYSTAL_FLOWER.get());
+        registerCompostable(0.65F, CABlocks.YELLOW_CRYSTAL_FLOWER.get());
+        registerCompostable(0.65F, CABlocks.RED_CRYSTAL_GROWTH.get());
+        registerCompostable(0.65F, CABlocks.BLUE_CRYSTAL_GROWTH.get());
+        registerCompostable(0.65F, CABlocks.GREEN_CRYSTAL_GROWTH.get());
+        registerCompostable(0.65F, CABlocks.YELLOW_CRYSTAL_GROWTH.get());
+        registerCompostable(0.65F, CABlocks.ORANGE_CRYSTAL_GROWTH.get());
+        registerCompostable(0.65F, CABlocks.PINK_CRYSTAL_GROWTH.get());
     }
 
     public static void registerStrippable(Block log, Block stripped_log) {
@@ -109,5 +191,28 @@ public class CAVanillaCompat {
     public static void registerFlammable(Block blockIn, int encouragement, int flammability) {
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
         fireblock.setFlammable(blockIn, encouragement, flammability);
+    }
+
+    @SubscribeEvent
+    public static void registerFurnaceFuel(FurnaceFuelBurnTimeEvent event) {
+        ItemStack fuel = event.getItemStack();
+        if (fuel.getItem() == CABlocks.CRYSTAL_ENERGY.get().asItem()) {
+            event.setBurnTime(3200);
+        } else if (fuel.getItem() == CABlocks.CRYSTAL_CRAFTING_TABLE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE.get().asItem() ||
+                fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem() ||
+                fuel.getItem() == CABlocks.MOLDY_FENCE.get().asItem() || fuel.getItem() == CABlocks.PEACH_FENCE.get().asItem() ||
+                fuel.getItem() == CABlocks.SKYWOOD_FENCE.get().asItem() || fuel.getItem() == CABlocks.GINKGO_FENCE.get().asItem() ||
+                fuel.getItem() == CABlocks.CRYSTAL_FENCE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE_GATE.get().asItem() ||
+                fuel.getItem() == CABlocks.CHERRY_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE_GATE.get().asItem() ||
+                fuel.getItem() == CABlocks.PEACH_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_FENCE_GATE.get().asItem() ||
+                fuel.getItem() == CABlocks.GINKGO_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.CRYSTAL_FENCE_GATE.get().asItem()) {
+            event.setBurnTime(300);
+        } else if (fuel.getItem() == CAItems.CRYSTAL_WOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_SWORD.get() ||
+                fuel.getItem() == CAItems.CRYSTAL_WOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_AXE.get() ||
+                fuel.getItem() == CAItems.CRYSTAL_WOOD_PICKAXE.get()) {
+            event.setBurnTime(200);
+        } else if (fuel.getItem() == CAItems.CRYSTAL_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
+            event.setBurnTime(100);
+        }
     }
 }

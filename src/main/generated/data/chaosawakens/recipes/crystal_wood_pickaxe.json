@@ -7,10 +7,10 @@
   ],
   "key": {
     "S": {
-      "item": "minecraft:stick"
+      "item": "chaosawakens:crystal_shard"
     },
     "#": {
-      "item": "chaosawakens:crystal_wood"
+      "item": "chaosawakens:crystal_planks"
     }
   },
   "result": {

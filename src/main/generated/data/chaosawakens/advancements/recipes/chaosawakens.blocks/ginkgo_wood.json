@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ginkgo_wood"
+    ]
+  },
+  "criteria": {
+    "has_ginkgo_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ginkgo_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ginkgo_wood"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ginkgo_log",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "chaosawakens:danger_isles",
+  "generator": {
+    "type": "minecraft:flat",
+    "seed": 0,
+    "settings": {
+      "biome": "chaosawakens:danger_isles",
+      "features": true,
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:dirt",
+          "height": 6
+        },
+        {
+          "block": "minecraft:grass_block",
+          "height": 1
+        }
+      ],
+      "structures": {
+        "structures": {}
+      }
+    }
+  }
+}

@@ -32,6 +32,7 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.CRYSTAL_GATOR.get(), LavaEelEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.CARROT_PIG.get(), CarrotPigEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.GOLDEN_CARROT_PIG.get(), GoldenCarrotPigEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), EnchantedGoldenCarrotPigEntity.setCustomAttributes().build());
@@ -42,6 +43,7 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.STINK_BUG.get(), StinkBugEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WHALE.get(), WhaleEntity.setCustomAttributes().build());

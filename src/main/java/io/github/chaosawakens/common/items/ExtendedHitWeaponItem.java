@@ -7,7 +7,6 @@ import com.google.common.collect.Multimap;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.enchantment.IVanishable;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -31,23 +30,22 @@ public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAn
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
     public static final UUID REACH_MODIFIER = UUID.fromString("2F05D864-7945-11EC-90D6-0242AC120003");
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
-//    private final Multimap<RegistryObject<Attribute>, AttributeModifier> attributeForgeModModifiers;
     public AnimationFactory factory = new AnimationFactory(this);
 
     public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
         float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-    //    ImmutableMultimap.Builder<RegistryObject<Attribute>, AttributeModifier> b = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",(double) attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double) attackSpeedIn, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
+
         ForgeMod.getInstance();
 		if (ForgeMod.REACH_DISTANCE.isPresent()) {
         	builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
         }  
+
         builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", knockBack, AttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
- //       this.attributeForgeModModifiers = b.build();
     }
 
     @Override
@@ -98,10 +96,4 @@ public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAn
 			player.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(newReachValue);
 		}
 	}
-    
-    
-
-//	public Multimap<RegistryObject<Attribute>, AttributeModifier> getAttributeForgeModModifiers(EquipmentSlotType equipmentSlot) {
-//		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeForgeModModifiers : this.getAttributeForgeModModifiers(equipmentSlot);
-//	}
 }

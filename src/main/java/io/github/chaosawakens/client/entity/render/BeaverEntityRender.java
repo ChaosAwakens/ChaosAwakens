@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class BeaverEntityRender extends GeoEntityRenderer<BeaverEntity> {
-
     public BeaverEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new BeaverEntityModel());
         this.shadowRadius = 0.4F;

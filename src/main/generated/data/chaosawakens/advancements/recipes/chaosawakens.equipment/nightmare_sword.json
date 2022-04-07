@@ -26,7 +26,7 @@
         ]
       }
     },
-    "has_OptionalNamedTag[forge:dusts/redstone]": {
+    "has_forge:dusts/redstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -36,7 +36,7 @@
         ]
       }
     },
-    "has_OptionalNamedTag[forge:gems/diamond]": {
+    "has_forge:gems/diamond": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -46,7 +46,7 @@
         ]
       }
     },
-    "has_NamedTag[chaosawakens:ultimate_gear_handles]": {
+    "has_chaosawakens:ultimate_gear_handles": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -67,9 +67,9 @@
     [
       "has_nightmare_scale",
       "has_titanium_ingot",
-      "has_OptionalNamedTag[forge:dusts/redstone]",
-      "has_OptionalNamedTag[forge:gems/diamond]",
-      "has_NamedTag[chaosawakens:ultimate_gear_handles]",
+      "has_forge:dusts/redstone",
+      "has_forge:gems/diamond",
+      "has_chaosawakens:ultimate_gear_handles",
       "has_the_recipe"
     ]
   ]

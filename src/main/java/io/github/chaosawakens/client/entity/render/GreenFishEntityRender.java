@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class GreenFishEntityRender extends GeoEntityRenderer<GreenFishEntity>{
-
 	public GreenFishEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new GreenFishEntityModel());
         this.shadowRadius = 0.3F;

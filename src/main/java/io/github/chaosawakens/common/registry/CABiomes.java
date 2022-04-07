@@ -23,9 +23,13 @@ public class CABiomes {
     public static RegistryObject<Biome> CRYSTAL_PLAINS = BIOMES.register("crystal_plains", BiomeMaker::theVoidBiome);
 
     public static final class Type {
-        public static final BiomeDictionary.Type MINING_DIMENSION = BiomeDictionary.Type.getType("MINING");
-        public static final BiomeDictionary.Type VILLAGE_DIMENSION = BiomeDictionary.Type.getType("VILLAGE");
-        public static final BiomeDictionary.Type DANGER_DIMENSION = BiomeDictionary.Type.getType("DANGER");
-        public static final BiomeDictionary.Type CRYSTAL_DIMENSION = BiomeDictionary.Type.getType("CRYSTAL");
+        public static final BiomeDictionary.Type MINING_PARADISE = BiomeDictionary.Type.getType("MINING_PARADISE");
+        public static final BiomeDictionary.Type STALAGMITE_VALLEY = BiomeDictionary.Type.getType("STALAGMITE_VALLEY");
+
+        public static final BiomeDictionary.Type VILLAGE_MANIA = BiomeDictionary.Type.getType("VILLAGE_MANIA");
+        public static final BiomeDictionary.Type VILLAGE_PLAINS = BiomeDictionary.Type.getType("VILLAGE_PLAINS");
+
+        public static final BiomeDictionary.Type DANGER_ISLES = BiomeDictionary.Type.getType("DANGER_ISLES");
+        public static final BiomeDictionary.Type CRYSTAL_WORLD = BiomeDictionary.Type.getType("CRYSTAL_WORLD");
     }
 }

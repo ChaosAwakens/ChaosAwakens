@@ -1,15 +1,16 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,8 +19,11 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -28,9 +32,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
+public class CarrotPigEntity extends PigEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CARROT, Items.POTATO, Items.BEETROOT);
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.POTATO, Items.BEETROOT);
 
     public CarrotPigEntity(EntityType<? extends CarrotPigEntity> type, World worldIn) {
         super(type, worldIn);
@@ -61,12 +65,28 @@ public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(Items.CARROT_ON_A_STICK), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.BEETROOT_ON_A_STICK.get()), false));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+    }
+    
+    @Override
+    public boolean canBeControlledByRider() {   
+    	Entity entity = this.getControllingPassenger();       
+    	if (!(entity instanceof PlayerEntity)) {       
+    		return false;       
+    	} else {       
+    		PlayerEntity playerentity = (PlayerEntity)entity;
+    		return playerentity.getMainHandItem().getItem() == CAItems.BEETROOT_ON_A_STICK.get() || playerentity.getOffhandItem().getItem() == CAItems.BEETROOT_ON_A_STICK.get();    
+    	}   
+    }
+    
+    @OnlyIn(Dist.CLIENT)
+    public Vector3d getLeashOffset() {
+       return new Vector3d(0.0D, (double)(0.6F * this.getEyeHeight()), (double)(this.getBbWidth() * 0.4F));
     }
 
     public boolean isFood(ItemStack stack) {
@@ -148,6 +168,11 @@ public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
     public boolean readyForShearing() {
         return this.isAlive() && !this.isBaby();
     }
+    
+    @Override
+    public boolean boost() {
+    	return super.boost();
+    }
 
     @Override
     public void registerControllers(AnimationData data) {
@@ -157,5 +182,10 @@ public class CarrotPigEntity extends AnimalEntity implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+    
+    @Override
+    public EntityType<?> getType() {
+    	return CAEntityTypes.CARROT_PIG.get();
     }
 }

@@ -49,6 +49,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
     public void start() {
         this.entity.setAggressive(true);
         this.entity.setMoving(true);
+        this.entity.lookAt(this.entity.getTarget(), 30.0F, 30.0F);
         this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
     }
 

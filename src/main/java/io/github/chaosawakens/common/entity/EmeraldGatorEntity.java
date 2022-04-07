@@ -19,8 +19,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.RangedInteger;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.TickRangeConverter;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -41,6 +46,7 @@ public class EmeraldGatorEntity extends AnimatableAnimalEntity implements IAnger
     private final AnimationFactory factory = new AnimationFactory(this);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
     private UUID persistentAngerTarget;
+  //  public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(FrogEntity.class, DataSerializers.INT);
 
     public EmeraldGatorEntity(EntityType<? extends AnimatableAnimalEntity> type, World worldIn) {
         super(type, worldIn);

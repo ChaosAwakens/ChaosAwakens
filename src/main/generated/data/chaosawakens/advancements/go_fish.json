@@ -17,6 +17,20 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
+    "green_fish": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:green_fish"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
     "rock_fish": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
@@ -61,6 +75,9 @@
     }
   },
   "requirements": [
+    [
+      "green_fish"
+    ],
     [
       "rock_fish"
     ],

@@ -8,8 +8,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.World;
 
 import java.util.function.Supplier;
 
@@ -22,7 +23,7 @@ public class AntInfestedOre extends OreBlock {
         this.ant = ant;
     }
 
-    private void spawnAnt(ServerWorld world, BlockPos pos) {
+    private void spawnAnt(World world, BlockPos pos) {
         MonsterEntity antEntity = (MonsterEntity) ant.get().create(world);
         assert antEntity != null;
         antEntity.moveTo((double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, 0.0F, 0.0F);
@@ -30,13 +31,21 @@ public class AntInfestedOre extends OreBlock {
         antEntity.spawnAnim();
     }
 
-    public void spawnAfterBreak(BlockState state, ServerWorld worldIn, BlockPos pos, ItemStack stack) {
-        super.spawnAfterBreak(state, worldIn, pos, stack);
-        if (!worldIn.isClientSide && worldIn.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
-            for (int index0 = 0; index0 < (25); index0++) {
-                this.spawnAnt(worldIn, pos);
+    @Override
+    public void onRemove(BlockState state, World world, BlockPos pos, BlockState state2, boolean p_196243_5_) {
+        ItemStack stack = this.getBlock().asItem().getDefaultInstance();
+        if (!world.isClientSide && world.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
+            for (int index0 = 0; index0 < 20; index0++) {
+            this.spawnAnt(world, pos);
             }
         }
+    }
 
+    public void wasExploded(World world, BlockPos pos, Explosion explosion) {
+        if (!world.isClientSide && world.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+            for (int index0 = 0; index0 < 20; index0++) {
+                this.spawnAnt(world, pos);
+            }
+        }
     }
 }

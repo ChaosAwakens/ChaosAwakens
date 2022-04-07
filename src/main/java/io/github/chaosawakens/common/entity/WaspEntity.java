@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -14,6 +15,7 @@ import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -36,6 +38,11 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
     public WaspEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.moveControl = new FlyingMovementController(this, 20, true);
+        this.setPathfindingMalus(PathNodeType.DANGER_FIRE, -1.0F);
+        this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
+        this.setPathfindingMalus(PathNodeType.WATER_BORDER, 16.0F);
+        this.setPathfindingMalus(PathNodeType.COCOA, -1.0F);
+        this.setPathfindingMalus(PathNodeType.FENCE, -1.0F);
         this.noCulling = true;
     }
 
@@ -116,7 +123,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
     }
 
     protected SoundEvent getAmbientSound() {
-        return null;
+        return CASoundEvents.WASP_AMBIENT.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
@@ -131,7 +138,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
      * Returns the volume for the sounds this mob makes.
      */
     protected float getSoundVolume() {
-        return 0.6F;
+        return 0.075F;
     }
 
 

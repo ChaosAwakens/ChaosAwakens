@@ -8,6 +8,7 @@ import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
+import net.minecraft.block.WoodType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -56,6 +57,12 @@ public class CommonSetupEvent {
             CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
             CAVillagers.registerVillagerTypes();
             CABlocks.flowerPots();
+            WoodType.register(CABlocks.APPLE);
+            WoodType.register(CABlocks.CHERRY);
+            WoodType.register(CABlocks.DUPLICATION);
+            WoodType.register(CABlocks.PEACH);
+            WoodType.register(CABlocks.SKYWOOD);
+            WoodType.register(CABlocks.GINKGO);
 
             CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
             configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
@@ -65,15 +72,15 @@ public class CommonSetupEvent {
 		if (modList.isLoaded("jeresources")) CAJER.init();
 
         // TODO Make it so we don't have to add stuff here manually
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SAVANNA.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_TAIGA.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SNOWY.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_DIMENSION);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_DIMENSION);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_PARADISE);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.STALAGMITE_VALLEY);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_PLAINS);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SAVANNA.getId()), CABiomes.Type.VILLAGE_MANIA);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_TAIGA.getId()), CABiomes.Type.VILLAGE_MANIA);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SNOWY.getId()), CABiomes.Type.VILLAGE_MANIA);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_MANIA);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_ISLES);
+        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_WORLD);
     }
     
 //    public static void registerReachModifiers(final PlayerEvent event) {
@@ -111,11 +118,11 @@ public class CommonSetupEvent {
             ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
             if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged")) return;
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            ChaosAwakens.warn("WORLDGEN", e);
+            ChaosAwakens.LOGGER.warn("[WORLDGEN]: " + e);
             e.printStackTrace();
         } catch (UnableToFindMethodException e) {
             if (CAConfig.COMMON.terraforgedCheckMsg.get())
-                ChaosAwakens.info("WORLDGEN", "Unable to check if " + serverWorld.dimension().location()
+                ChaosAwakens.LOGGER.info("[WORLDGEN]: Unable to check if " + serverWorld.dimension().location()
                         + " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
                         + " if you aren't using Terraforged please ignore this message");
         }

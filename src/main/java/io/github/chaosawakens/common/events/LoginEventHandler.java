@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
 public class LoginEventHandler {
-	
 	public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
 		PlayerEntity player = event.getPlayer();
 		if (UpdateHandler.show && CAConfig.COMMON.showUpdateMessage.get())

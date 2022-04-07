@@ -32,12 +32,7 @@ public class GateBlock extends Block {
     }
 
     @Override
-    @Deprecated
     public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.isClientSide) {
-            return;
-        }
-
         if (isVanished(state)) {
             if (state.getValue(ACTIVE)) {
                 world.setBlockAndUpdate(pos, state.setValue(VANISHED, false).setValue(ACTIVE, false));
@@ -82,7 +77,6 @@ public class GateBlock extends Block {
     }
 
     @Override
-    @Deprecated
     public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         if (world.isClientSide) {
             return;
@@ -100,7 +94,6 @@ public class GateBlock extends Block {
     }
 
     @Override
-    @Deprecated
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!isVanished(state) && !state.getValue(ACTIVE)) {
             activate(world, pos);

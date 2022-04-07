@@ -36,7 +36,7 @@
         ]
       }
     },
-    "has_OptionalNamedTag[forge:crops/carrot]": {
+    "has_forge:crops/carrot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -58,7 +58,7 @@
       "has_lettuce",
       "has_tomato",
       "has_radish",
-      "has_OptionalNamedTag[forge:crops/carrot]",
+      "has_forge:crops/carrot",
       "has_the_recipe"
     ]
   ]

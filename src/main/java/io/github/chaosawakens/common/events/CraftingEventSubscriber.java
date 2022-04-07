@@ -15,7 +15,7 @@ public class CraftingEventSubscriber {
 
     public static void onItemCraftedEvent(final ItemCraftedEvent event) {
 
-        ChaosAwakens.debug("CRAFTING", event.getCrafting());
+        ChaosAwakens.LOGGER.debug("[CRAFTING]: " + event.getCrafting());
 
         Item enchantedItem = event.getCrafting().getItem();
         if (event.getCrafting().getItem() instanceof IAutoEnchantable) {

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "chaosawakens:block/cracked_marble_slab_top"
+    },
+    "type=bottom": {
+      "model": "chaosawakens:block/cracked_marble_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/cracked_marble_bricks"
+    }
+  }
+}

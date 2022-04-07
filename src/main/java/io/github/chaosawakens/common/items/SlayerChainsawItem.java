@@ -1,6 +1,8 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CATags;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.enchantment.IVanishable;
@@ -10,11 +12,14 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -28,14 +33,18 @@ import software.bernie.geckolib3.network.GeckoLibNetwork;
 import software.bernie.geckolib3.network.ISyncable;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanishable, IAnimatable, ISyncable {
+public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishable, IAnimatable, ISyncable {
+    private static final int CHAINSAW_LENGTH = 12;
+    private static final int CHAINSAW_WIDTH = 12;
+    private static final int CHAINSAW_HEIGHT = 16;
+
     private static final String CONTROLLER_NAME = "popupController";
     private static final int ANIM = 0;
     public static float attackDamage;
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
+    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, int reachDistanceIn, int knockBackIn, Properties builderIn) {
+        super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
         attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         GeckoLibNetwork.registerSyncable(this);
     }
@@ -51,6 +60,24 @@ public class SlayerChainsawItem extends ExtendedHitWeaponItem implements IVanish
         }
         stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
         return super.hurtEnemy(stack, target, attacker);
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entity) {
+        if (state.is(BlockTags.LOGS)) {
+            for (int i = 0; i < CHAINSAW_LENGTH; i++) {
+                for (int j = 0; j < CHAINSAW_HEIGHT; j++) {
+                    for (int k = -CHAINSAW_WIDTH; k <= CHAINSAW_WIDTH; k++) {
+                        BlockPos targetPos = pos.offset(i - CHAINSAW_LENGTH / 2, j - CHAINSAW_HEIGHT / 2, k - CHAINSAW_WIDTH / 2);
+                        BlockState targetState = world.getBlockState(targetPos);
+                        if (targetState.is(BlockTags.LOGS)) {
+                            world.destroyBlock(targetPos, true);
+                        }
+                    }
+                }
+            }
+        }
+        return super.mineBlock(stack, world, state, pos, entity);
     }
 
     private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {

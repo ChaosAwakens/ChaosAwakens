@@ -136,7 +136,7 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
+        if (event.isMoving() || this.getSpeed() > 0) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.frog.jump_animation", true));
             return PlayState.CONTINUE;
         } else if (!event.isMoving()) {
@@ -156,7 +156,7 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     protected void jumpFromGround() {
-        float f = this.getJumpPower() + 1.0F;
+        float f = this.getJumpPower();
         if (this.hasEffect(Effects.JUMP)) {
            f += 0.1F * (float)(this.getEffect(Effects.JUMP).getAmplifier() + 1);
         }

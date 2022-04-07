@@ -1,14 +1,18 @@
 package io.github.chaosawakens.server;
 
 import io.github.chaosawakens.ChaosAwakens;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 
 /**
- * @author invalid2
+ * @author invalid2 (and Meme Man)
  */
 public class ServerSetupEvent {
 
     public void onFMLServerSetupEvent(FMLDedicatedServerSetupEvent event) {
     	ChaosAwakens.LOGGER.info("Inducing chaos upon the world...");
+    	if (ModList.get().isLoaded("theoneprobe")) {
+    		ChaosAwakens.LOGGER.info("Loading The One Probe plugin");
+    	}
     }
 }

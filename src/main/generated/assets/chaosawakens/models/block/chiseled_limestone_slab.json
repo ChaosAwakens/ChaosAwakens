@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "chaosawakens:block/chiseled_limestone_bricks",
+    "bottom": "chaosawakens:block/chiseled_limestone_bricks",
+    "top": "chaosawakens:block/chiseled_limestone_bricks"
+  }
+}

@@ -5,6 +5,7 @@ import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.MobEntity;
@@ -19,6 +20,9 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -76,17 +80,20 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
-        this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
-        this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, 0.7, 0.8));
+ //       this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
+ //       this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
+ //       this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
+  //      this.goalSelector.addGoal(3, new LookAtGoal(this, RoboEntity.class, 24.0F));
+        this.goalSelector.addGoal(4, new AnimatableMoveToTargetGoal(this, 1.6, 5));
+        this.goalSelector.addGoal(4, new AnimatableMeleeGoal(this, 48.3, 0.5, 0.6));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+//        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.6));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, RoboEntity.class, true));
     }
 
     @Override
@@ -108,13 +115,45 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
                     strucManager.getStructureAt(pos, false, CAStructures.WARPED_ENT_TREE.get()).isValid();
             if (!inDungeon || reason != SpawnReason.STRUCTURE)
             {
-                this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.6));
+                this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.6));
             }
         }
 
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
-
+    
+    @Override
+    public boolean doHurtTarget(Entity target) {
+    	if (!this.isAggressive()) return false;
+		if (!this.canSee(target)) return false;
+		
+		Vector3d attackerVector = new Vector3d(this.getX(), this.getEyeY(), this.getZ()); 
+		Vector3d targetVector = new Vector3d(target.getX(), target.getEyeY(), target.getZ()); 
+		
+		if (target.level != this.level || targetVector.distanceToSqr(attackerVector) > 128.0D * 128.0D) return false; 
+		
+		return this.level.clip(new RayTraceContext(attackerVector, targetVector, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS && super.doHurtTarget(target);
+    }
+    
+    @Override
+    public void tick() {
+    	super.tick();
+    	
+		if (this.getTarget() != null && this.canSee(this.getTarget()) && this.distanceToSqr(this.getTarget()) >= 12.0F) {
+			this.lookControl.setLookAt(this.getTarget(), 30.0F, 30.0F);
+			this.getTarget().moveTo(this.getTarget().blockPosition(), 3.0F, 10.0F);
+			if (this.navigation.isStuck()) {
+				this.navigation.recomputePath(this.getTarget().blockPosition());
+			}
+		}
+		
+		if (this.getTarget() != null && this.canSee(this.getTarget()) && this.distanceToSqr(this.getTarget()) <= 12.0F) {
+			this.lookControl.setLookAt(this.getTarget(), 30.0F, 30.0F);
+			if (this.navigation.isStuck()) {
+				this.navigation.recomputePath(this.getTarget().blockPosition());
+			}
+		}
+    }
 
     @Override
     public void registerControllers(AnimationData data) {

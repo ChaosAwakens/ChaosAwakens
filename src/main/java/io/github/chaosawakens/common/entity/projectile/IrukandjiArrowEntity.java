@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class IrukandjiArrowEntity extends AbstractArrowEntity {
-
     private int duration = 200;
 
     public IrukandjiArrowEntity(EntityType<? extends IrukandjiArrowEntity> type, World worldIn) {

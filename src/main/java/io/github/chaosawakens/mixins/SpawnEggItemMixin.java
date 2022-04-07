@@ -1,5 +1,6 @@
 package io.github.chaosawakens.mixins;
 
+import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.block.BlockState;
 
 import net.minecraft.block.Blocks;
@@ -35,17 +36,8 @@ import java.util.Objects;
 
 @Mixin(SpawnEggItem.class)
 public abstract class SpawnEggItemMixin {
-
-    @Shadow public abstract EntityType<?> getType(@Nullable CompoundNBT compoundNBT);
-    
-    private List<Item> BLACKLIST = new ArrayList<>();
-    
-    public List<Item> addItemToSpawneggBlacklist(Item itemToAdd) {
-    	if (!BLACKLIST.contains(itemToAdd) && itemToAdd instanceof SpawnEggItem && !(itemToAdd instanceof CASpawnEggItem)) {
-    		BLACKLIST.add(itemToAdd);
-    	}
-    	return BLACKLIST;
-    }
+    @Shadow
+    public abstract EntityType<?> getType(@Nullable CompoundNBT compoundNBT);
 
     @Inject(method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
     public void useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
@@ -58,12 +50,14 @@ public abstract class SpawnEggItemMixin {
             Direction direction = itemUseContext.getClickedFace();
             BlockState blockstate = world.getBlockState(blockpos);
             PlayerEntity player = itemUseContext.getPlayer();
-            addItemToSpawneggBlacklist(itemstack.getItem());
             if (blockstate.is(Blocks.SPAWNER)) {
-                if (!BLACKLIST.contains(itemstack)) {
+                if ((CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 0) ||
+                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 1 && player.isCreative()) ||
+                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && player.isCreative() && itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
+                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))) {
                     TileEntity tileentity = world.getBlockEntity(blockpos);
                     if (tileentity instanceof MobSpawnerTileEntity) {
-                        AbstractSpawner abstractspawner = ((MobSpawnerTileEntity)tileentity).getSpawner();
+                        AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
                         EntityType<?> entitytype1 = this.getType(itemstack.getTag());
                         abstractspawner.setEntityId(entitytype1);
                         tileentity.setChanged();

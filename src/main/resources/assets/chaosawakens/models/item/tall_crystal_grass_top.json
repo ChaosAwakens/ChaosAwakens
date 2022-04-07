@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/tinted_cross",
-  "textures": {
-    "cross": "chaosawakens:block/tall_crystal_grass_top"
-  }
-}

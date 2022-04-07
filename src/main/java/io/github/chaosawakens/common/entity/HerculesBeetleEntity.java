@@ -78,7 +78,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
         this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
         this.goalSelector.addGoal(3, new AnimatableMoveToTargetGoal(this, 1.75, 10));
 //		this.goalSelector.addGoal(4, new AnimatableGrabGoal<HerculesBeetleEntity>(this, 8));
-        this.goalSelector.addGoal(3, new AnimatableMeleeGoal(this, 30.4, 0.75, 0.85));
+        this.goalSelector.addGoal(3, new AnimatableMeleeGoal(this, 30.4, 0.45, 0.65));
 //		this.goalSelector.addGoal(3, new ThrowRiderAttackGoal(this, 0.125F, false));
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));

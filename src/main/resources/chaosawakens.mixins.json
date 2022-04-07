@@ -3,13 +3,13 @@
   "package": "io.github.chaosawakens.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "SpawnEggItemMixin"
+	"SpawnEggItemMixin"
   ],
   "client": [
-    "MainMenuMixin"
+	"MainMenuMixin"
   ],
   "refmap": "chaosawakens.refmap.json",
   "injectors": {
-    "defaultRequire": 1
+	"defaultRequire": 1
   }
 }

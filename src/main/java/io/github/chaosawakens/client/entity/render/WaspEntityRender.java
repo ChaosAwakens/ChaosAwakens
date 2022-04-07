@@ -13,7 +13,6 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class WaspEntityRender extends GeoEntityRenderer<WaspEntity> {
-
     public WaspEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new WaspEntityModel());
         this.shadowRadius = 0.75F;

@@ -2,11 +2,12 @@ package io.github.chaosawakens.common.items;
 
 import java.util.List;
 
+
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -29,7 +29,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DeferredWorkQueue;
 
 public class CritterCageItem extends Item implements IUtilityHelper{
 	
@@ -54,7 +53,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         playerIn.swing(hand);
         if (playerIn.getMainHandItem().getCount() == 1) {
             playerIn.setItemInHand(hand, stack);
-        } else {
+        } else if (playerIn.getMainHandItem().getCount() >= 2) {
             playerIn.getMainHandItem().shrink(1);
             playerIn.inventory.add(stack);
             if (!playerIn.inventory.add(stack)) {
@@ -64,7 +63,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         return ActionResultType.SUCCESS;
     }
     
-    @SuppressWarnings({ "resource", "deprecation" })
+    @SuppressWarnings({ "resource" })
 	public boolean capture(ItemStack stack, LivingEntity target) {
         if (target.getCommandSenderWorld().isClientSide) return false;
         if (target instanceof PlayerEntity || !target.isAlive()) return false;
@@ -77,13 +76,13 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         nbt.putDouble("entityMaxHealth", target.getAttribute(Attributes.MAX_HEALTH).getValue());
         nbt.putBoolean("isBaby", target.isBaby());
         
-		String modid = target.getType().getRegistryName().getNamespace();
-		String regName = target.getType().getRegistryName().toString().replace(modid, "").replace(":", "");
-        if (CAItems.CRITTER_CAGE.getId().getPath().contains("critter_cage")) {
-        	DeferredWorkQueue.runLater(() -> {
-        		setItemTexture(stack, new ResourceLocation("critter_cage"), regName, CAItems.CRITTER_CAGE.getId().getPath());    
-        	});    	
-        }
+//		String modid = target.getType().getRegistryName().getNamespace();
+//		String regName = target.getType().getRegistryName().toString().replace(modid, "").replace(":", "");
+//        if (CAItems.CRITTER_CAGE.getId().getPath().contains("critter_cage")) {
+ //       	DeferredWorkQueue.runLater(() -> {
+ //       		setItemTexture(stack, new ResourceLocation("items/critter_cage"), regName, CAItems.CRITTER_CAGE.getId().getPath());    
+ //       	});    	
+ //       }
         	
         target.saveWithoutId(nbt);
         stack.setTag(nbt);

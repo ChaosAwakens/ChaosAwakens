@@ -13,4 +13,10 @@ public class AnimatableGroundSlamGoal extends AnimatableGoal{
 		return false;
 	}
 
+	@Override
+	public boolean canContinueToUse() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
