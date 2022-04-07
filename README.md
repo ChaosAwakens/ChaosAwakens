@@ -37,9 +37,9 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 ## Credits/Staff Team
 **Project Lead:** Funky Monk, WeirdNerd
 
-**Animators:** Absolute Kun, Aqu, SnakeMaster
+**Animators:** Absolute Kun, Aqu, SnakeMaster, Pugman665544
 
-**Builders:** Blackout, Funky Monk, Meme Man, TheLoneCyberman
+**Builders:** Blackout, Funky Monk, Meme Man, Omarboi, Phwee, TheLoneCyberman, Unanimous 
 
 **Coders:** Blackout, Enderman_of_D00M, LuisRandomness, Meme Man, WeirdNerd
 
