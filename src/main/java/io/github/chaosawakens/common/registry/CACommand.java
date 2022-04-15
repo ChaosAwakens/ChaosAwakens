@@ -4,13 +4,30 @@ import com.mojang.brigadier.CommandDispatcher;
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
+import net.minecraft.command.arguments.EntityArgument;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.*;
 import net.minecraft.util.text.event.ClickEvent;
+import net.minecraft.world.World;
 
 public class CACommand {
     public static int register(CommandDispatcher<CommandSource> dispatcher) {
-        dispatcher.register(Commands.literal("chaosawakens").requires((commandSource) -> commandSource.hasPermission(1))
+
+ /*      	dispatcher.register(Commands.literal("dimension").requires((commandSource) -> commandSource.hasPermission(2))
+       			.then(Commands.argument("targets", EntityArgument.entities()))
+    			.then(Commands.literal("set")
+    					.executes((commandSource) -> {
+    						ServerPlayerEntity player = commandSource.getSource().getPlayerOrException();
+    					    RegistryKey<World> targetDimension;
+    					    
+    						
+    						
+    						return 0;
+    					})));*/
+    	
+    	dispatcher.register(Commands.literal("chaosawakens").requires((commandSource) -> commandSource.hasPermission(1))
                 .then(Commands.literal("website")
                         .executes((commandSource) -> {
                             ITextComponent itextcomponent = new StringTextComponent("https://chaosawakens.github.io").withStyle((style) ->

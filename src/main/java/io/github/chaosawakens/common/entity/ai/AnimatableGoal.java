@@ -17,6 +17,7 @@ public abstract class AnimatableGoal extends Goal {
 
     protected static final Random RANDOM = new Random();
     protected AnimatableMonsterEntity entity;
+    protected AnimatableAnimalEntity animalEntity;
     protected RoboPounderEntity roboPounder;
     protected long tickDelta;
     protected double animationProgress;
@@ -24,11 +25,11 @@ public abstract class AnimatableGoal extends Goal {
     private long lastGameTime;
     private boolean isFirsLoop = true;
 
-    protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
+    public static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
     }
     
-    protected static double getAttackReachSq(AnimatableAnimalEntity attacker, LivingEntity target) {
+    public static double getAttackReachSq(AnimatableAnimalEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
     }
     

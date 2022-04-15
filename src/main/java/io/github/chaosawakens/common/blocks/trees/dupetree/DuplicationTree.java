@@ -45,7 +45,7 @@ public class DuplicationTree extends Tree implements IUtilityHelper {
 		
 //		Queue.add(blockToDupe);
 		
-		if (!isDuplicatable(blockToDupe)) {
+		if (!IUtilityHelper.isDuplicatable(blockToDupe)) {
 			return;
 		}
 		

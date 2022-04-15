@@ -1,13 +1,16 @@
 package io.github.chaosawakens.data;
 
 import com.google.gson.JsonArray;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 
 //Finally, more complex json file generation (Brought to you by Meme Man)
 public class BiomeTypeBuilder {
+	@SuppressWarnings("unused")
 	private final ResourceLocation id;
 	private boolean playerSpawnFriendly;
 	private String precipitation;
@@ -30,10 +33,17 @@ public class BiomeTypeBuilder {
 	private Integer foliageColor;
 	private String surfaceBuilder;
 	private String carvers;
+	private String carver;
+	private String subCarver;
 	private String features;
+	private String feature;
 	private String starts;
+	private String start;
 	private String spawners;
 	private String creature;
+	private String monster;
+	private EntityType<?> subCreature;
+	private EntityType<?> subMonster;
 	private ResourceLocation type;
 	private Integer weight;
 	private Integer minCount;
@@ -173,13 +183,45 @@ public class BiomeTypeBuilder {
 		return this;
 	}
 	
+	public BiomeTypeBuilder carver(String carver) {
+		if (this.carvers == null && this.carver != null) {
+			throw new NullPointerException("Cannot register carver as carvers is null");
+		}
+		this.carver = carver;
+		return this;
+	}
+	
+	public BiomeTypeBuilder subCarver(String subCarver) {
+		if (this.carvers == null && this.subCarver != null) {
+			throw new NullPointerException("Cannot register subCarver as carvers is null");
+		}
+		this.subCarver = subCarver;
+		return this;
+	}
+	
 	public BiomeTypeBuilder features(String features) {
 		this.features = features;
 		return this;
 	}
 	
+	public BiomeTypeBuilder feature(String feature) {
+		if (this.features == null && this.feature != null) {
+			throw new NullPointerException("Cannot register feature as features is null");
+		}
+		this.feature = feature;
+		return this;
+	}
+	
 	public BiomeTypeBuilder starts(String starts) {
 		this.starts = starts;
+		return this;
+	}
+	
+	public BiomeTypeBuilder start(String start) {
+		if (this.starts == null && this.start != null) {
+			throw new NullPointerException("Cannot register start as starts is null");
+		}
+		this.start = start;
 		return this;
 	}
 	
@@ -193,6 +235,33 @@ public class BiomeTypeBuilder {
 			throw new NullPointerException("creature cannot be registered, as spawners is null");
 		} else {
 			this.creature = creature;
+			return this;
+		}
+	}
+	
+	public BiomeTypeBuilder monster(String monster) {
+		if (this.spawners == null && this.monster != null) {
+			throw new NullPointerException("monster cannot be registered, as spawners is null");
+		} else {
+			this.monster = monster;
+			return this;
+		}
+	}
+	
+	public BiomeTypeBuilder subCreature(EntityType<?> subCreature) {
+		if (this.spawners == null && this.subCreature != null) {
+			throw new NullPointerException("subCreature cannot be registered, as spawners is null");
+		} else {
+			this.subCreature = subCreature;
+			return this;
+		}
+	}
+	
+	public BiomeTypeBuilder subMonster(EntityType<?> subMonster) {
+		if (this.spawners == null && this.subMonster != null) {
+			throw new NullPointerException("subMonster cannot be registered, as spawners is null");
+		} else {
+			this.subMonster = subMonster;
 			return this;
 		}
 	}
@@ -240,26 +309,109 @@ public class BiomeTypeBuilder {
 	
 	JsonObject serialize() {
 		JsonObject json = new JsonObject();
-		JsonArray effectsArray = new JsonArray();
+		JsonElement effectsArray = new JsonObject();
 		
 		json.addProperty("player_spawn_friendly", playerSpawnFriendly);
 		json.addProperty("precipitation", precipitation);
 		json.addProperty("temperature", temperature);
+		json.addProperty("downfall", downfall);
 		json.addProperty("category", category);
 		json.addProperty("depth", depth);
 		json.addProperty("scale", scale);
 		
-		if (this.moodSound != null) {
-			JsonArray moodSoundArray = new JsonArray();
-			effectsArray.add(moodSoundArray);
+		if (this.moodSound != null && this.moodSound == "mood_sound") {
+			JsonElement moodSoundArray = new JsonArray();
 			
-			if (sound != null) moodSoundArray.add(sound.getPath());
-			if (tickDelay != null) moodSoundArray.add(tickDelay);
-			if (blockSearchExtent != null) moodSoundArray.add(blockSearchExtent);
-			if (offset != null) moodSoundArray.add(offset);
+			if (sound != null) moodSoundArray.getAsJsonObject().addProperty("sound", sound.getPath());
+			if (tickDelay != null) moodSoundArray.getAsJsonObject().addProperty("tick_delay", tickDelay);
+			if (blockSearchExtent != null) moodSoundArray.getAsJsonObject().addProperty("block_search_extent", blockSearchExtent);
+			if (offset != null) moodSoundArray.getAsJsonObject().addProperty("offset", offset);
+			
+			if (this.moodSound != null && this.moodSound != "mood_sound") {
+				throw new RuntimeException("moodSound property must be named 'mood_sound'");
+			}
+			
+			effectsArray.getAsJsonObject().add("mood_sound", moodSoundArray);
+		}
+		
+		if (skyColor != null) effectsArray.getAsJsonObject().addProperty("sky_color", skyColor);
+		if (fogColor != null) effectsArray.getAsJsonObject().addProperty("fog_color", fogColor);
+		if (waterColor != null) effectsArray.getAsJsonObject().addProperty("water_color", waterColor);
+		if (waterFogColor != null) effectsArray.getAsJsonObject().addProperty("water_fog_color", waterFogColor);
+		if (grassColor != null) effectsArray.getAsJsonObject().addProperty("grass_color", grassColor);
+		if (foliageColor != null) effectsArray.getAsJsonObject().addProperty("foliage_color", foliageColor);
+		
+		if (this.effects != null && this.effects != "effects") {
+			throw new RuntimeException("effects property must be named 'effects'");
 		}
 		
 		json.add("effects", effectsArray);
+		
+		json.addProperty("surface_builder", surfaceBuilder);
+		
+		if (carvers != null && carvers == "carvers") {
+			JsonElement carversArray = new JsonObject();
+			JsonElement carverArray = new JsonArray();
+			
+	//		for (carvers = "carvers"; carver != null; carversArray.getAsJsonArray().add(carver));
+			
+			if (carver != null) {
+				carversArray.getAsJsonObject().add(carver, carverArray);
+				if (subCarver != null) {
+					carverArray.getAsJsonArray().add(subCarver);
+				}
+			}
+			
+			json.add("carvers", carversArray);
+		}
+		
+		if (features != null && features == "features") {
+			JsonElement featuresArray = new JsonArray();
+			
+	//		for (features = "features", feature != null; carversArray.getAsJsonArray().add(carver))
+			
+			if (feature != null) {
+				featuresArray.getAsJsonArray().add(feature);
+			}
+			
+			json.add("features", featuresArray);
+		}
+		
+		if (starts != null && starts == "starts") {
+			JsonElement startsArray = new JsonArray();
+			
+			if (start != null) {
+				startsArray.getAsJsonArray().add(start);
+			}
+			
+			json.add("starts", startsArray);
+		}
+		
+		if (spawners != null && spawners == "spawners") {
+			JsonElement spawnersArray = new JsonObject();
+			JsonElement monstersArray = new JsonArray();
+			JsonElement creaturesArray = new JsonArray();
+			
+			if (monster != null) {
+				spawnersArray.getAsJsonObject().add("monster", monstersArray);
+			}
+			
+			if (creature != null) {
+				spawnersArray.getAsJsonObject().add("creature", creaturesArray);
+				if (subCreature != null) {
+					creaturesArray.getAsJsonArray().add(subCreature.getRegistryName().getPath());
+				}
+			}
+			
+			json.add("spawners", spawnersArray);
+		}
+		
+		if (spawnCosts != null && spawnCosts == "spawn_costs") {
+			JsonElement spawnCostsArray = new JsonObject();
+			
+			json.add("spawn_costs", spawnCostsArray);
+		}	
+		
 		return json;
 	}
 	

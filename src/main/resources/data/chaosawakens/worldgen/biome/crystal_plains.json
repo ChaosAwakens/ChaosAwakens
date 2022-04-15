@@ -30,13 +30,9 @@
   "features": [],
   "starts": [],
   "spawners": {
+  "monster": [
+    ],
     "creature": [
-      {
-        "type": "chaosawakens:crystal_apple_cow",
-        "weight": 6,
-        "minCount": 1,
-        "maxCount": 5
-      }
     ]
   },
   "spawn_costs": {}

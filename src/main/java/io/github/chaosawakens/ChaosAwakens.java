@@ -73,7 +73,7 @@ public class ChaosAwakens {
 
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
-//			eventBus.addListener(ClientSetupEvent::renderFog);
+//			eventBus.addListener(ClientSetupEvent::mouseEvent);
 //			eventBus.addListener(ClientSetupEvent::renderParticles);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 			eventBus.addListener(EventPriority.NORMAL, CABlockItemColors::registerBlockColors);
@@ -81,7 +81,6 @@ public class ChaosAwakens {
 		}
 
 		// Register the deferred registers
-		CAAttributes.ATTRIBUTES.register(eventBus);
 		CABiomes.BIOMES.register(eventBus);
 		CABlocks.ITEM_BLOCKS.register(eventBus);
 		CABlocks.BLOCKS.register(eventBus);
@@ -98,6 +97,7 @@ public class ChaosAwakens {
 		CAVillagers.PROFESSIONS.register(eventBus);
 		CALootModifiers.LOOT_MODIFIERS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
+		eventBus.addListener(EntityAttributeModificationEventSubscriber::onEntityAttributeModificationEvent);
 
 		//Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;

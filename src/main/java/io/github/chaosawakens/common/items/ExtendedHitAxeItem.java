@@ -26,21 +26,15 @@ import java.util.UUID;
 
 public class ExtendedHitAxeItem extends AxeItem implements IVanishable, IAnimatable, IUtilityHelper {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
-    public static final UUID REACH_MODIFIER = UUID.fromString("2F05D864-7945-11EC-90D6-0242AC120003");
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public ExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, int reachDistanceIn, int knockBackIn, Properties builderIn) {
+    public ExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
         float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
-
-        ForgeMod.getInstance();
-        if (ForgeMod.REACH_DISTANCE.isPresent()) {
-            builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(REACH_MODIFIER, "Weapon modifier", reachDistanceIn, AttributeModifier.Operation.ADDITION));
-        }
 
         builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", knockBackIn, AttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
@@ -85,7 +79,6 @@ public class ExtendedHitAxeItem extends AxeItem implements IVanishable, IAnimata
         return super.use(p_77659_1_, p_77659_2_, p_77659_3_);
     }
 
-    @Override
     public void setReach(PlayerEntity player, int newReachValue, ItemStack stack) {
         stack = new ItemStack(CAItems.BIG_BERTHA.get());
         newReachValue = 10;

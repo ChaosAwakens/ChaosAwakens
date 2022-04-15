@@ -78,7 +78,7 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 			 return PlayState.CONTINUE;  
 		 }  
 		 
-		 if (event.isMoving() && this.getSpeed() >= 0.25F) {
+		 if (this.isSprinting()) {
 			 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.running"));
 		 }
 		 
@@ -164,7 +164,7 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
         int i = this.getRandomGazelleType(world);
         if (entityData instanceof GazelleData) {
-            i = ((GazelleEntity)entityData).getGazelleType();
+            i = ((GazelleData)entityData).gazelletype;
         } else {
             entityData = new GazelleData(i);
         }

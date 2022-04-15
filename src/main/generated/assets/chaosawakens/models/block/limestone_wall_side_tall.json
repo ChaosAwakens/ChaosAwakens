@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side_tall",
   "textures": {
-    "wall": "chaosawakens:block/limestone_bricks"
+    "wall": "chaosawakens:block/limestone_block"
   }
 }

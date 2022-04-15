@@ -62,7 +62,7 @@ public class CAEntityTypes {
     // Hercules Beetle
     public static final RegistryObject<EntityType<HerculesBeetleEntity>> HERCULES_BEETLE = ENTITY_TYPES.register("hercules_beetle",
             () -> EntityType.Builder.of(HerculesBeetleEntity::new, EntityClassification.MONSTER)
-                    .sized(4.5f, 3.125f) // Hitbox Size ()
+                    .sized(3.5f, 3.125f) // Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "hercules_beetle").toString()));
 
     //Fish
@@ -160,7 +160,12 @@ public class CAEntityTypes {
                     .sized(0.9F, 0.9F)
                     .clientTrackingRange(10)// Hitbox Size ()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "enchanted_golden_carrot_pig").toString()));
-
+    public static final RegistryObject<EntityType<CrystalCarrotPigEntity>> CRYSTAL_CARROT_PIG = ENTITY_TYPES.register("crystal_carrot_pig",
+            () -> EntityType.Builder.of(CrystalCarrotPigEntity::new, EntityClassification.CREATURE)
+                    .sized(0.9F, 0.9F)
+                    .clientTrackingRange(10)// Hitbox Size ()
+                    .build(new ResourceLocation(ChaosAwakens.MODID, "crystal_carrot_pig").toString()));
+    
     // Ants
     public static final RegistryObject<EntityType<AntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",
             () -> EntityType.Builder.of((IFactory<AntEntity>) (type, world) -> new AntEntity(type, world, CAConfig.COMMON.enableBrownAntTeleport, null), EntityClassification.CREATURE)

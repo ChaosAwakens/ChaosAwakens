@@ -5,6 +5,7 @@ import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.common.ForgeMod;
 
 import java.util.EnumSet;
 
@@ -86,6 +87,10 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
         ((IGrabber) this.entity).setGrabbing(this.entity, false);
 
     }
+    
+    protected static double getGrabAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
+        return attacker.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
+    }
 
     private boolean checkIfValid(AnimatableGrabGoal<?> goal, AnimatableMonsterEntity attacker, LivingEntity target) {
         if (target == null) return false;
@@ -95,7 +100,7 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
                 return false;
             }
             double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-            if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
+            if (distance <= getGrabAttackReachSq(attacker, target)) return true;
         }
         attacker.setAttacking(false);
         return false;

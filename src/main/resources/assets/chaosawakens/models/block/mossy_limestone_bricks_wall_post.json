@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_wall_post",
-  "textures": {
-    "wall": "chaosawakens:block/mossy_limestone_bricks"
-  }
-}

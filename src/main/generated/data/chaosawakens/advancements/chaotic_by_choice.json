@@ -1,0 +1,36 @@
+{
+  "parent": "chaosawakens:root",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:defossilizer"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.chaotic_by_choice.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.chaotic_by_choice.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "chaotic_by_choice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:defossilizer"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "chaotic_by_choice"
+    ]
+  ]
+}

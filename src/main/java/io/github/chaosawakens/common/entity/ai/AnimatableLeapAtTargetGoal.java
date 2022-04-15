@@ -83,8 +83,7 @@ public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal implements IUti
 		      this.entity.setDeltaMovement(vector3d1.x, (double)this.yf, vector3d1.z);
 		   }
 	    
-	    @Override
 	    public double getDistanceBetween(BlockPos a, BlockPos b) {
-	    	return IUtilityHelper.super.getDistanceBetween(a, b);
+	    	return IUtilityHelper.getDistanceBetween(a, b);
 	    }
 }

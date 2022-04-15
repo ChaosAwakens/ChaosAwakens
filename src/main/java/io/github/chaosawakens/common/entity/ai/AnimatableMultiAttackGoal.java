@@ -217,7 +217,7 @@ public class AnimatableMultiAttackGoal extends AnimatableGoal{
 	}
 	
 	//Taken from the AnimatableGoal class because I was too lazy to call for it from the class
-    protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
+    public static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
     }
 	

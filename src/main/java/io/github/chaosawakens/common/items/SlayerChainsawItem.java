@@ -43,8 +43,8 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
     public static float attackDamage;
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, int reachDistanceIn, int knockBackIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
+    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn) {
+        super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
         attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         GeckoLibNetwork.registerSyncable(this);
     }

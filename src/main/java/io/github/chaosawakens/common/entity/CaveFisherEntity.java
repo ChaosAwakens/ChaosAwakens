@@ -33,14 +33,18 @@ public class CaveFisherEntity extends AnimatableCardinallyCapableMonsterEntity i
         if (!event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.idle_animation", true));
             return PlayState.CONTINUE;
-        } else if (event.isMoving()) {
+        }
+        if (event.isMoving()) {
         	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_animation", true));
             return PlayState.CONTINUE;
-        } else if (this.getMovingOnWall()) {
+        }
+        if (this.getMovingOnWall()) {
         	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.climb_animation", true));
-        } else if (this.getMovingOnCeiling()) {
+        }
+        if (this.getMovingOnCeiling()) {
         	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_upsidedown_animation", true));
-        } else if (this.getAttacking()) {
+        }
+        if (this.getAttacking()) {
         	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.attack_animation", false));
         } 
         return PlayState.CONTINUE;

@@ -1,6 +1,8 @@
 package io.github.chaosawakens.common.entity.projectile;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.items.UltimateFishingRodItem;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -9,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -52,7 +55,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {
+public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {	
+	
 	private final Random syncronizedRandom = new Random();
 	private int outOfLiquidTime;
 	private boolean biting;
@@ -137,6 +141,16 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		this.xRot = (float)(MathHelper.atan2(vector3d.y, MathHelper.sqrt(getHorizontalDistanceSqr(vector3d))) * (double)(180F / (float)Math.PI));
 		this.yRotO = this.yRot;
 		this.xRotO = this.xRot;
+	}
+	
+	@Override
+	public boolean isInLava() {
+		return super.isInLava();
+	}
+	
+	@Override
+	public boolean isInWater() {
+		return super.isInWater();
 	}
 
 	@Override
@@ -304,12 +318,11 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 
 	@Override
 	protected boolean canHitEntity(Entity e) {
-		//   return super.canHitEntity(e) || e.isAlive() && e instanceof ItemEntity /*|| e instanceof LavaEelEntity*/;
 		if (!e.isSpectator() && e.isAlive() && e.isPickable()) {
 			Entity entity = this.getOwner();
 			return entity == null || this.leftOwner() || !entity.isPassengerOfSameVehicle(e) || e.isAlive() && e instanceof ItemEntity;
 		} else {
-			return false;
+			return super.canHitEntity(e);
 		}
 	}
 
@@ -633,10 +646,8 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 
 				if (state.getMaterial() == Material.LAVA) {
 					if (BiomeDictionary.hasType(Biomes.NETHER_WASTES, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.CRIMSON_FOREST, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.WARPED_FOREST, BiomeDictionary.Type.NETHER)) {
-						table = CALootTables.FISHING_NETHER_FISH;
-					} else if (!BiomeDictionary.hasType(Biomes.NETHER_WASTES, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.CRIMSON_FOREST, BiomeDictionary.Type.NETHER) || BiomeDictionary.hasType(Biomes.WARPED_FOREST, BiomeDictionary.Type.NETHER)){
-						table = CALootTables.FISHING_LAVA_FISH;
-					} else {
+						table = CALootTables.FISHING_NETHER_FISH;}
+					else {
 						table = CALootTables.FISHING_LAVA_FISH;
 					}
 				} else {
@@ -665,6 +676,12 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 					playerentity.level.addFreshEntity(new ExperienceOrbEntity(playerentity.level, playerentity.getX(), playerentity.getY() + 0.5D, playerentity.getZ() + 0.5D, this.random.nextInt(6) + 1));
 					if (itemstack.getItem().is(ItemTags.FISHES)) {
 						playerentity.awardStat(Stats.FISH_CAUGHT, 1);
+					}
+					//Not completely foolproof
+					boolean immune = itementity.fireImmune();
+					if (itementity.isInLava() && itementity.isOnFire()) {
+						immune = true;
+						itementity.setRemainingFireTicks(0);
 					}
 				}
 

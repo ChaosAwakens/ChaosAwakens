@@ -38,7 +38,7 @@ import java.util.UUID;
 
 public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerable, IAnimatable {
     private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(DimetrodonEntity.class, DataSerializers.INT);
-    private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
+    private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 89);
     public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(DimetrodonEntity.class, DataSerializers.INT);
     private final AnimationFactory factory = new AnimationFactory(this);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);

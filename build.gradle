@@ -146,4 +146,8 @@ publishing {
             url "file:///${project.projectDir}/../ChaosMaven"
         }
     }
+
+    processResources {
+       duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
 }

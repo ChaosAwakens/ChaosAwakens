@@ -25,7 +25,7 @@ public class EmeraldGatorEntityRender extends GeoEntityRenderer<EmeraldGatorEnti
 
     @Override
     public ResourceLocation getTextureLocation(EmeraldGatorEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gators/emerald_gator.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/emerald_gator.png");
     }
 
     @Override

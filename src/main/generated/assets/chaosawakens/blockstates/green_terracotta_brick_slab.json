@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "chaosawakens:block/green_terracotta_brick_slab_top"
+    },
+    "type=bottom": {
+      "model": "chaosawakens:block/green_terracotta_brick_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/green_terracotta_bricks"
+    }
+  }
+}

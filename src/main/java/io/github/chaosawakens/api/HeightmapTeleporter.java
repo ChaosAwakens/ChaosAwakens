@@ -35,7 +35,12 @@ public class HeightmapTeleporter implements ITeleporter {
 		do {
 			targetPos = new BlockPos(newPosVector.x(), targetWorld.getHeight(Heightmap.Type.WORLD_SURFACE, (int) newPosVector.x(), (int) newPosVector.z()), newPosVector.z());
 			tries++;
-		} while (targetPos.getY() <= 0 && tries < 30 && !entity.inChunk);
+		} while (targetPos.getY() <= 0 && tries < 30 && !entity.level.isLoaded(targetPos));
+		
+		if (entity.getY() <= -1) {
+			assert entity.level.isLoaded(targetPos);
+			entity.setPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+		}
 
 		return new PortalInfo(new Vector3d(newPosVector.x(), targetPos.getY(), newPosVector.z()), new Vector3d(0, 0, 0), entity.yRot, entity.xRot);
 	}

@@ -7,6 +7,8 @@ import io.github.chaosawakens.common.registry.CARecipes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.drawable.IDrawableAnimated.StartDirection;
+import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
@@ -22,10 +24,12 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 	  static final ResourceLocation ID = new ResourceLocation(CARecipes.DEFOSSILIZING_RECIPE_TYPE.toString());
 	  private IDrawable bg;
 	  private IDrawable icon;
+//	  private IDrawable arrow;
 	
 	public DefossilizerRecipeCategory(IGuiHelper helper) {
 		bg = helper.drawableBuilder(new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80).setTextureSize(170, 80).build();
 		icon = helper.createDrawableIngredient(new ItemStack(CABlocks.DEFOSSILIZER.get()));
+//		arrow = helper.createAnimatedDrawable(null, 80, StartDirection.LEFT, false);
 	}
 
 	@Override

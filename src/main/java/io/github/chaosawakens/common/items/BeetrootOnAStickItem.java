@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.common.entity.CarrotPigEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IRideable;
 import net.minecraft.entity.passive.PigEntity;

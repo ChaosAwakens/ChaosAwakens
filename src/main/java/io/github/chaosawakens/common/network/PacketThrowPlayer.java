@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.network;
 
 import net.minecraft.client.Minecraft;
+
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 

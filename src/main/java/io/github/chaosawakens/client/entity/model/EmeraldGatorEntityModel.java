@@ -17,7 +17,7 @@ public class EmeraldGatorEntityModel extends AnimatedGeoModel<EmeraldGatorEntity
 
     @Override
     public ResourceLocation getTextureLocation(EmeraldGatorEntity object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gators/emerald_gator.png");
+        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/emerald_gator.png");
     }
 
     @Override

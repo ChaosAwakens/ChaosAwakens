@@ -184,10 +184,10 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
  //   	super.registerGoals();
   //  	this.targetSelector.addGoal(4, new AnimatableRoboPounderAttackGoal<>(this, PlayerEntity.class, 1));
   //  	this.targetSelector.addGoal(4, new AnimatableRoboPounderAttackGoal<>(this, AnimalEntity.class, 1));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 32.0F));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 32.0F));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, AbstractVillagerEntity.class, 32.0F));
-        this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 32.0F));
+ //       this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 32.0F));
+ //       this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 32.0F));
+  //      this.goalSelector.addGoal(3, new LookAtGoal(this, AbstractVillagerEntity.class, 32.0F));
+  //      this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 32.0F));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
    //     this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, 0.4, 0.5));
         this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.0, 5)); //1.5

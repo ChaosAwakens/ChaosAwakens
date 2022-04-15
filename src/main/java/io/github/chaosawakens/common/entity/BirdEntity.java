@@ -68,7 +68,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 5)
                 .add(Attributes.MOVEMENT_SPEED, 0.6F)
-                .add(Attributes.FLYING_SPEED, 0.8F)
+                .add(Attributes.FLYING_SPEED, 0.9F)
                 .add(Attributes.LUCK, 1.0F)
                 .add(Attributes.FOLLOW_RANGE, 12);
     }

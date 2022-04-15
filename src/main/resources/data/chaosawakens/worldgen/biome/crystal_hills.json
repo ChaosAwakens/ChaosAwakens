@@ -37,18 +37,6 @@
   "starts": [],
   "spawners": {
     "creature": [
-      {
-        "type": "chaosawakens:crystal_apple_cow",
-        "weight": 6,
-        "minCount": 1,
-        "maxCount": 5
-      },
-      {
-        "type": "chaosawakens:whale",
-        "weight": 4,
-        "minCount": 0,
-        "maxCount": 1
-      }
     ]
   },
   "spawn_costs": {}

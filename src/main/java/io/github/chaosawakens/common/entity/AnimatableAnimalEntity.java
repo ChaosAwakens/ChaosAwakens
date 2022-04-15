@@ -10,9 +10,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-/**
- * @author invalid2
- */
+
 public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAnimatable {
 
     protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableAnimalEntity.class, DataSerializers.BOOLEAN);

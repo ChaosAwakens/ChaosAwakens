@@ -33,7 +33,7 @@ public class AnimatableRoboPunchGoal extends AnimatableGoal {
         this.setFlags(EnumSet.of(Goal.Flag.LOOK));
     }
     
-    protected static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
+    public static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
         return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth() / 2;
     }
 

@@ -1,12 +1,15 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.api.IUtilityHelper;
+
+
 import io.github.chaosawakens.client.entity.render.*;
-
-
+import io.github.chaosawakens.common.entity.AppleCowEntity;
 import io.github.chaosawakens.common.entity.EntEntity;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
 import io.github.chaosawakens.common.registry.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -14,76 +17,76 @@ import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.event.TickEvent.WorldTickEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ClientSetupEvent implements IUtilityHelper{
     public static void register() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::onFMLClientSetupEvent);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::renderFog);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::renderFogColor);
-  //      FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::renderParticles);
     }
     
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public static void renderFogColor(EntityViewRenderEvent.FogColors event) {
-    	Entity entity = event.getRenderer().getMainCamera().getEntity();
-    	
-    	if (entity == null) return;
-    	if (entity.level == null) return;
-    	
-    	if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-    		float red = event.getRed();
-    		float green = event.getGreen();
-    		float blue = event.getBlue();
-    		
-    		final float[] fogColors = {red / 255F, green / 255F, blue / 255F};
-    		
-    		event.setRed(fogColors[0]);
-    		event.setGreen(fogColors[1]);
-    		event.setBlue(fogColors[2]);
-    	}
-    }
+    public static boolean def = false;
     
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public static void renderFog(EntityViewRenderEvent.FogDensity event) {
- //   	ClientPlayerEntity player = (ClientPlayerEntity) event.getRenderer().getMainCamera().getEntity();
-    	Entity entity = event.getRenderer().getMainCamera().getEntity();
-    	
-    	if (entity == null) return;
-    	if (entity.level == null) return;
-    	
-    	if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-    		event.setDensity(1.5F);
-    		event.setCanceled(true);
-    	} else {
-    		event.setCanceled(false);
-    	}
+    @EventBusSubscriber(bus = Bus.FORGE)
+    public static class ClientHelper{         
+        @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
+        @OnlyIn(Dist.CLIENT)
+        public static void renderFogColor(EntityViewRenderEvent.FogColors event) {
+        	Entity entity = event.getRenderer().getMainCamera().getEntity();
+        	
+        	if (entity == null) return;
+        	
+        	if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+        		float red = event.getRed();
+        		float green = event.getGreen();
+        		float blue = event.getBlue();
+        		
+        		final float[] fogColors = {red / 0, green / 0, blue / 0};
+        		
+        		event.setRed(fogColors[0]);
+        		event.setGreen(fogColors[1]);
+        		event.setBlue(fogColors[2]);
+        	}
+        }
+        
+        @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
+        @OnlyIn(Dist.CLIENT)
+        public static void renderFog(EntityViewRenderEvent.FogDensity event) {
+        	Entity entity = event.getRenderer().getMainCamera().getEntity();
+        	
+        	if (entity == null) return;
+        	
+        	if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+        		event.setDensity(0.05F);
+        		event.setCanceled(true);
+        	}
+        }
+        
+        @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
+        @OnlyIn(Dist.CLIENT)
+        @SuppressWarnings("resource")
+    	public static void renderParticles(WorldTickEvent event) {
+        	ClientPlayerEntity player = Minecraft.getInstance().player;
+        	
+        	if (player == null) return;
+        	
+        	if (player.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+        		IUtilityHelper.addParticles(player.level, ParticleTypes.WHITE_ASH, player.getX(), player.getEyeY(), player.getZ(), 50, player.getEyeY(), 50, 2);
+        	}
+        }
     }
-    
- /*   @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    @SuppressWarnings("resource")
-	public static void renderParticles(WorldTickEvent event) {
-    	ClientPlayerEntity player = Minecraft.getInstance().player;
-    	
-    	if (player == null) return;
-    	if (player.level == null) return;
-    	
-    	if (player.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-   // 		addParticless(player.level, ParticleTypes.CLOUD, player.getX(), player.getY(), player.getZ(), 3, 1, 2, 20);
-    		player.level.addParticle(ParticleTypes.ASH, true, player.getX(), player.getY(), player.getZ(), 3, 1, 2);
-    	}
-    }*/
     
     public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
         ClientRegistry.bindTileEntityRenderer(CATileEntities.CUSTOM_SIGN.get(), SignTileEntityRenderer::new);
@@ -122,6 +125,7 @@ public class ClientSetupEvent implements IUtilityHelper{
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_GATOR.get(), CrystalGatorRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_CARROT_PIG.get(), CrystalCarrotPigEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CARROT_PIG.get(), CarrotPigEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GOLDEN_CARROT_PIG.get(), GoldenCarrotPigEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), EnchantedGoldenCarrotPigEntityRender::new);
@@ -310,8 +314,227 @@ public class ClientSetupEvent implements IUtilityHelper{
                 return (flag || flag1) && p_239422_2_ instanceof PlayerEntity && ((PlayerEntity) p_239422_2_).fishing != null ? 1.0F : 0.0F;
             }
         });
-        
+//        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("filled_default"),
+  //              (stack, world, living) -> {
+  //              	return stack != null && stack.getTag().contains("entity") ? 1.0F : 0.0F;
+  //       });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("default"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	//Inefficiency at its finest
+                	ClientSetupEvent.def = false;
+                	return stack != null && stack.getTag().contains("entity") && ClientSetupEvent.def == false ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("apple_cow"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Apple Cow") && !stack.getItem().getName(stack).toString().contains("Golden") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("bee"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && !stack.getItem().getName(stack).toString().contains("Bee") && stack.getItem().getName(stack).toString().contains("Hercules") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("bird"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Bird") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("carrot_pig"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Carrot Pig") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("cat"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Cat") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("cave_spider"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Cave Spider") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("cow"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Cow") && !stack.getItem().getName(stack).toString().contains("Apple") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("creeper"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Creeper") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("donkey"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Donkey") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("drowned"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Drowned") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("enderman"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Enderman") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("fox"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Fox") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("horse"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Horse") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("husk"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Husk") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("llama"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Llama") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("mooshroom"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Mooshroom") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("ostrich"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Ostrich") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("panda"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Panda") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("pig"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Pig") && !stack.getItem().getName(stack).toString().contains("Carrot") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("piraporu"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Piraporu") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("polar_bear"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Polar Bear") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("rabbit"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Rabbit") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("sheep"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Sheep") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("skeleton"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Skeleton") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("slime"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Slime") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("spider"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Spider") && !stack.getItem().getName(stack).toString().contains("Cave")? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("stray"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Stray") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("wolf"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Wolf") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("zombie_villager"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Zombie Villager") ? 1.0F : 0.0F;
+         });
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("zombie"),
+                (stack, world, living) -> {
+                	if (stack.getTag() == null) return 0.0F;
+                	assert stack.getTag() != null;
+                	ClientSetupEvent.def = true;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Zombie") && !stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Villager") ? 1.0F : 0.0F;
+         });
         CAContainerTypes.registerScreens(event);
-    //    register();
     }
 }

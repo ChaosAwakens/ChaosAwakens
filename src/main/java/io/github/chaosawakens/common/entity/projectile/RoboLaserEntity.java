@@ -51,7 +51,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
     }
 
     public RoboLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ, boolean explosion) {
-        super(CAEntityTypes.ROBO_LASER.get(), shooter, accelX + 3, accelY + 3, accelZ + 3, worldIn);
+        super(CAEntityTypes.ROBO_LASER.get(), shooter, accelX, accelY, accelZ, worldIn);
         this.explosion = explosion;
     }
 

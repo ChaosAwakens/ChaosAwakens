@@ -1,18 +1,15 @@
 package io.github.chaosawakens.common.entity.ai;
 
+import java.util.EnumSet;
+import java.util.function.BiFunction;
+
+import io.github.chaosawakens.common.entity.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.controller.AnimationController.IAnimationPredicate;
-
-import java.util.EnumSet;
-import java.util.function.BiFunction;
-
-import javax.annotation.Nonnull;
 
 /**
  * Melee attack a given entity
@@ -36,7 +33,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	        this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	    }
 
-	    private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+		private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
 	        if (target == null) return false;
 	        if (target.isAlive() && !target.isSpectator()) {
 	            if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {

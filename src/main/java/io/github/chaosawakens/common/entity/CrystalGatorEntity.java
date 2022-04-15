@@ -4,6 +4,9 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.entity.ai.AnimatableGoal;
+import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
+import io.github.chaosawakens.common.entity.ai.AnimatablePassiveMeleeAttackGoal;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.AgeableEntity;
@@ -15,6 +18,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.BreedGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -59,23 +63,24 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CrystalGatorEntity extends EmeraldGatorEntity implements IAngerable, IAnimatable{
+public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAngerable, IAnimatable{
 	 private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
-	    private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
+	    private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 69);
 	    private final AnimationFactory factory = new AnimationFactory(this);
 	    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
 	    private UUID persistentAngerTarget;
-	    public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(FrogEntity.class, DataSerializers.INT);
+	    public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
 
 	    public CrystalGatorEntity(EntityType<? extends AnimatableAnimalEntity> type, World worldIn) {
 	        super(type, worldIn);
+	        this.moveControl = new MovementController(this);
 	        this.noCulling = true;
 	    }
 
 	    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 	        return MobEntity.createLivingAttributes()
 	                .add(Attributes.MAX_HEALTH, 16)
-	                .add(Attributes.ATTACK_DAMAGE, 5)
+	                .add(Attributes.ATTACK_DAMAGE, 7)
 	                .add(Attributes.ATTACK_KNOCKBACK, 1.5)
 	                .add(Attributes.ATTACK_SPEED, 1)
 	                .add(Attributes.MOVEMENT_SPEED, 0.2D)
@@ -88,10 +93,10 @@ public class CrystalGatorEntity extends EmeraldGatorEntity implements IAngerable
 	            return PlayState.CONTINUE;
 	        }
 	        if (this.getAttacking()) {
-	            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.bite_animation", true));
+	            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.bite_animation", false));
 	            return PlayState.CONTINUE;
 	        }
-	        if(this.isSwimming()) {
+	        if(this.isSwimming() || this.isInWater() && event.isMoving()) {
 	            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.swim_animation", true));
 	            return PlayState.CONTINUE;
 	        }
@@ -108,7 +113,7 @@ public class CrystalGatorEntity extends EmeraldGatorEntity implements IAngerable
 	        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
 	        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 	        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
-	        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0, true));
+	        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 0.25, false));
 	        this.goalSelector.addGoal(8, new WaterAvoidingRandomWalkingGoal(this, 1.0));
 	        this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 	        this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
@@ -218,13 +223,12 @@ public class CrystalGatorEntity extends EmeraldGatorEntity implements IAngerable
 	    }
 
 	    public void tick() {
-	    	CrystalGatorEntity.this.setTarget(null);
 	        super.tick();
 	    }
 
 	    @Override
 	    public void registerControllers(AnimationData data) {
-	        data.addAnimationController(new AnimationController<>(this, "emeraldgatorcontroller", 0, this::predicate));
+	        data.addAnimationController(new AnimationController<>(this, "crystalgatorcontroller", 0, this::predicate));
 	    }
 
 	    @Override
@@ -233,8 +237,8 @@ public class CrystalGatorEntity extends EmeraldGatorEntity implements IAngerable
 	    }
 
 	    @Override
-	    public EmeraldGatorEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-	        return CAEntityTypes.EMERALD_GATOR.get().create(world);
+	    public CrystalGatorEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+	        return CAEntityTypes.CRYSTAL_GATOR.get().create(world);
 	    }
 
 	    @Override

@@ -2,10 +2,6 @@ package io.github.chaosawakens.api;
 
 import java.util.ArrayList;
 
-
-
-
-
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +16,6 @@ import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.FogRenderer.FogType;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemModelsProperties;
@@ -41,8 +36,6 @@ public interface IUtilityHelper {
 	///////////////////////////////
 	
 	List<Block> Queue = new ArrayList<>();
-	List<EntityType<? extends LivingEntity>> CHAOS_AWAKENS_ENTITIES = new ArrayList<>();
-	List<EntityType<? extends LivingEntity>> VANILLA_ENTITIES = new ArrayList<>();
 	
 	///////////////////////////////
 	//         Functions         //
@@ -53,7 +46,7 @@ public interface IUtilityHelper {
 	 * @param player player to apply modified reach to
 	 * @param newReachValue the new reach value applied to the attribute the player has, it doesn't add to the original attribute value, but sets it to a new value
 	 */
-	default void setReach(PlayerEntity player, int newReachValue) {
+	static void setReach(PlayerEntity player, int newReachValue) {
 		 player.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(newReachValue);
 	}
 	
@@ -63,7 +56,7 @@ public interface IUtilityHelper {
 	 * @param newReachValue the new reach value applied to the attribute the player has, it doesn't add to the original attribute value, but sets it to a new value
 	 * @param stack the item/itemstack needed (to be held in the player's main hand) to activate the attribute modifier
 	 */
-	default void setReach(PlayerEntity player, int newReachValue, ItemStack stack) {
+	static void setReach(PlayerEntity player, int newReachValue, ItemStack stack) {
 		if (player.getItemInHand(Hand.MAIN_HAND) == stack) {
 			player.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(newReachValue);
 		}
@@ -73,7 +66,7 @@ public interface IUtilityHelper {
 	 * Get the reach distance of the player
 	 * @param player player to check reach distance attribute value of
 	 */
-	default void getPlayerReach(PlayerEntity player) {
+	static void getPlayerReach(PlayerEntity player) {
 	     player.getAttribute(ForgeMod.REACH_DISTANCE.get()).getBaseValue();
 	}
 	
@@ -82,7 +75,7 @@ public interface IUtilityHelper {
 	 * @param player player to apply modified swim speed to
 	 * @param newSwimSpeedValue the new swim speed value applied to the attribute the player has, it doesn't add to the original attribute value, but sets it to a new value
 	 */
-	default void setSwimSpeed(PlayerEntity player, int newSwimSpeedValue) {
+	static void setSwimSpeed(PlayerEntity player, int newSwimSpeedValue) {
 		player.getAttribute(ForgeMod.SWIM_SPEED.get()).setBaseValue(newSwimSpeedValue);
 	}
 	
@@ -92,7 +85,7 @@ public interface IUtilityHelper {
 	 * @param newSwimSpeedValue the new swim speed value applied to the attribute the player has, it doesn't add to the original attribute value, but sets it to a new value
 	 * @param stack the item/itemstack needed (to be held in the player's main hand) to activate the attribute modifier
 	 */
-	default void setSwimSpeed(PlayerEntity player, int newSwimSpeedValue, ItemStack stack) {
+	static void setSwimSpeed(PlayerEntity player, int newSwimSpeedValue, ItemStack stack) {
 		if (player.getItemInHand(Hand.MAIN_HAND) == stack) {
 			player.getAttribute(ForgeMod.SWIM_SPEED.get()).setBaseValue(newSwimSpeedValue);
 		}
@@ -102,7 +95,7 @@ public interface IUtilityHelper {
 	 * Get the swim speed of the player
 	 * @param player player to check swim speed attribute value of
 	 */
-	default void getPlayerSwimSpeed(PlayerEntity player) {
+	static void getPlayerSwimSpeed(PlayerEntity player) {
 	     player.getAttribute(ForgeMod.SWIM_SPEED.get()).getBaseValue();
 	}
 	
@@ -111,7 +104,7 @@ public interface IUtilityHelper {
 	 * @param player player to apply modified gravity to
 	 * @param newPlayerGravityValue the new gravity value appled to the attribute the player has, it doesn't add to the original value, but sets it to a new value
 	 */
-	default void setPlayerGravity(PlayerEntity player, int newPlayerGravityValue) {
+	static void setPlayerGravity(PlayerEntity player, int newPlayerGravityValue) {
 		player.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).setBaseValue(newPlayerGravityValue);
 	}
 	
@@ -121,7 +114,7 @@ public interface IUtilityHelper {
 	 * @param newPlayerGravityValue the new gravity value appled to the attribute the player has, it doesn't add to the original value, but sets it to a new value
 	 * @param stack the item/itemstack needed (to be held in the player's main hand) to activate the attribute modifier
 	 */
-	default void setPlayerGravity(PlayerEntity player, int newPlayerGravityValue, ItemStack stack) {
+	static void setPlayerGravity(PlayerEntity player, int newPlayerGravityValue, ItemStack stack) {
 		if (player.getItemInHand(Hand.MAIN_HAND) == stack) {
 			player.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).setBaseValue(newPlayerGravityValue);
 		}
@@ -131,7 +124,7 @@ public interface IUtilityHelper {
 	 * Get the gravity of the player
 	 * @param player player to check gravity attribute value of
 	 */
-	default void getPlayerGravity(PlayerEntity player) {
+	static void getPlayerGravity(PlayerEntity player) {
 	     player.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).getBaseValue();
 	}
 	
@@ -148,7 +141,7 @@ public interface IUtilityHelper {
 	 * @param amount amount of particles to add
 	 */
 	@SuppressWarnings("resource")
-	default void addParticles(World world, IParticleData particleData, double x, double y, double z, double randomXValue, double randomYValue, double randomZValue, int amount) {
+	static void addParticles(World world, IParticleData particleData, double x, double y, double z, double randomXValue, double randomYValue, double randomZValue, int amount) {
 		if (world.isClientSide) {
 		  for (int particleCount = 0; particleCount <= amount; particleCount++) {
 			  Minecraft.getInstance().particleEngine.createParticle(particleData, 
@@ -175,7 +168,7 @@ public interface IUtilityHelper {
 	 * @param zSize the z size of the bounding box
 	 * @param amountToSpawn amount of entities inside the entitiesToAdd list, that amount will be summoned 
 	 */
-	default void addLivingEntities(World world, List<LivingEntity> entitiesToAdd, @Nonnull BlockPos pos, double x, double y, double z, double xSize, double ySize, double zSize, int amountToSpawn) {
+	static void addLivingEntities(World world, List<LivingEntity> entitiesToAdd, @Nonnull BlockPos pos, double x, double y, double z, double xSize, double ySize, double zSize, int amountToSpawn) {
 		if (!world.isClientSide) {
 			amountToSpawn = entitiesToAdd.size();
 			entitiesToAdd = world.getEntitiesOfClass(LivingEntity.class, (new AxisAlignedBB(pos).inflate(xSize, ySize, zSize)));
@@ -188,12 +181,12 @@ public interface IUtilityHelper {
 	}
 	
 	/**
-	 * Summon a singular entity in a certain position (checks if the world isn't client side first by default)
+	 * Summon a singular entity in a certain position (checks if the world isn't client side first by static)
 	 * @param world world to summon entity in
 	 * @param entityToSummon entity to be summoned
 	 * @param pos position to summon entity in
 	 */
-	default void summonLivingEntity(World world, LivingEntity entityToSummon, BlockPos pos) {
+	static void summonLivingEntity(World world, LivingEntity entityToSummon, BlockPos pos) {
 		if (!world.isClientSide) {
 			world.addFreshEntity(entityToSummon);
 		}
@@ -208,7 +201,7 @@ public interface IUtilityHelper {
 	 * @param type fog type
 	 * @param info active render information
 	 */
-	default void addFog(World world, float density, boolean b, float pTicks, FogType type, ActiveRenderInfo info) {
+	static void addFog(World world, float density, boolean b, float pTicks, FogType type, ActiveRenderInfo info) {
 		if (world.isClientSide) {
 			FogRenderer.setupFog(info, type, density, false, pTicks);
 		}
@@ -218,7 +211,7 @@ public interface IUtilityHelper {
 	 * Adds the block specified to the <code>Blacklist</code> tag
 	 * @param blockToAdd block to add <code>Blacklist</code> tag to
 	 */
-	default void addBlockToDuplicationsBlackList(Block blockToAdd) {
+	static void addBlockToDuplicationsBlackList(Block blockToAdd) {
 		blockToAdd.getTags().add((ResourceLocation) CATags.Blocks.tag("blacklist"));
 	}
 	
@@ -226,14 +219,14 @@ public interface IUtilityHelper {
 	 * Adds the block specified to the <code>Whitelist</code> tag
 	 * @param blockToAdd block to add <code>Whitelist</code> tag to
 	 */
-	default void addBlockToDuplicationsWhiteList(Block blockToAdd) {
+	static void addBlockToDuplicationsWhiteList(Block blockToAdd) {
 		blockToAdd.getTags().add((ResourceLocation) CATags.Blocks.tag("whitelist"));
 	}
 	
 	/**
 	 * uh -WeirdNerd, circa 2022 A.D
 	 */
-	default void uh() {
+	static void uh() {
 		uh();
 	}
 	
@@ -244,7 +237,7 @@ public interface IUtilityHelper {
 	 * @param textureName name of texture file
 	 * @param pathName name of path, could simply be some characters in the name (e.g. <code>assets.chaosawakens.textures.item.critter_cage</code> can simply be <code>critter_cage</code>, or you could run the <code>getPath()</code> method off of a certain item in that folder/package you want to grab)
 	 */
-	default void setItemTexture(ItemStack itemToSet, ResourceLocation pathWithTextures, String textureName, String pathName) {
+	static void setItemTexture(ItemStack itemToSet, ResourceLocation pathWithTextures, String textureName, String pathName) {
 		boolean hasTextures = pathWithTextures.getPath().contains(pathName);
 		if (hasTextures) {
 			ItemModelsProperties.register(itemToSet.getItem(), pathWithTextures, (stack, world, entity) -> {
@@ -266,7 +259,7 @@ public interface IUtilityHelper {
 	 * @param entity entity to check
 	 * @return true if entity is moving, else returns false
 	 */
-	default boolean isMoving(LivingEntity entity) {
+	static boolean isMoving(LivingEntity entity) {
 		if (entity.moveDist > 0 || entity.getSpeed() == 0) {
 			return true;
 		}
@@ -279,7 +272,7 @@ public interface IUtilityHelper {
 	 * @param entityToCheck entity to check moving speed of
 	 * @return true if the speed of the entity is equal to the speed parameter, else returns false
 	 */
-	default boolean isMovingAtVelocity(float speed, LivingEntity entityToCheck) {
+	static boolean isMovingAtVelocity(float speed, LivingEntity entityToCheck) {
 		return entityToCheck.getSpeed() == speed;
 	}
 
@@ -308,7 +301,7 @@ public interface IUtilityHelper {
 	 * @param blockToCheck block to check for duplicatability (that's a word now)
 	 * @return true if the block to check is duplicatable, else returns false
 	 */
-	default boolean isDuplicatable(Block blockToCheck) {
+	static boolean isDuplicatable(Block blockToCheck) {
 		return blockToCheck.is(CATags.Blocks.WHITELIST) || !blockToCheck.is(CATags.Blocks.BLACKLIST) || !blockToCheck.is(CATags.Blocks.BLACKLIST) && !blockToCheck.is(CATags.Blocks.WHITELIST);
 	}
 	
@@ -317,11 +310,11 @@ public interface IUtilityHelper {
 	 * @param entity entity to check
 	 * @return true if entity is moving vertically, else returns false
 	 */
-	default boolean isMovingVertically(LivingEntity entity) {
+	static boolean isMovingVertically(LivingEntity entity) {
 		return false;
 	}
 	
-	default boolean isBoss(LivingEntity entityToCheck) {
+	static boolean isBoss(LivingEntity entityToCheck) {
 		return false;
 	}
 	
@@ -330,7 +323,7 @@ public interface IUtilityHelper {
 	 * @param entity entity to check for effects
 	 * @return true if any effects are present, else returns false
 	 */
-	default boolean hasActiveEffects(LivingEntity entity) {
+	static boolean hasActiveEffects(LivingEntity entity) {
 		return entity.getActiveEffects() != null;
 	}
 	
@@ -339,7 +332,7 @@ public interface IUtilityHelper {
 	 * @param entity entity to check for bounding box
 	 * @return true if entity has a bounding box, else returns false
 	 */
-	default boolean hasBoundingBox(LivingEntity entity) {
+	static boolean hasBoundingBox(LivingEntity entity) {
 		return entity.getBoundingBox() != null;
 	}
 	
@@ -348,23 +341,14 @@ public interface IUtilityHelper {
 	 * @param stackToCheck stack to check in inventory
 	 * @return true if the player has the specified item in their inventory, else returns false
 	 */
-	default boolean hasItemInInventory(PlayerEntity player, ItemStack stackToCheck) {	
+	static boolean hasItemInInventory(PlayerEntity player, ItemStack stackToCheck) {	
 		return player.inventory.items.contains(stackToCheck);
 	}
 	
 	//WIP
-/*	default boolean hasItemInInventoryByAmount(PlayerEntity player, ItemStack stackToCheck, int amount) {
+/*	static boolean hasItemInInventoryByAmount(PlayerEntity player, ItemStack stackToCheck, int amount) {
 		return NonNullList.withSize(amount, stackToCheck) != null;
 	}*/
-	
-	/**
-	 * Checks whether or not an entity is part of the <code>CHAOS_AWAKENS_ENTITIES</code> list
-	 * @param mobToCheck mob to check for availability in the CA Entity list
-	 * @return true if mob is present in the CA Entity list, else returns false
-	 */
-	default boolean isInCritterCageCAEntityList(EntityType<?> mobToCheck) {
-		return CHAOS_AWAKENS_ENTITIES.contains(mobToCheck);
-	}
 	
 	/**
 	 * Checks if an entity matches another entity stored inside the itemstack (which will most likely be a critter cage)
@@ -372,18 +356,9 @@ public interface IUtilityHelper {
 	 * @param cageStack itemstack to grab data from
 	 * @return true if entity name matches the one stored in the itemstack, else returns false
 	 */
-	default boolean matchesNameOfEntityStoredInItemStack(Entity entity, ItemStack cageStack) {
+	static boolean matchesNameOfEntityStoredInItemStack(Entity entity, ItemStack cageStack) {
 		boolean match = entity.getType().getRegistryName().toString().matches(cageStack.getTag().getString(entity.getType().getRegistryName().toString())) && entity != null && cageStack != null;
 		return match;
-	}
-	
-	/**
-	 * Checks whether or not an entity is part of the <code>VANILLA_ENTITIES</code> list
-	 * @param mobToCheck mob to check for availability in the Vanilla Entity list
-	 * @return true if mob is present in the Vanilla Entity list, else returns false
-	 */
-	default boolean isInCritterCageVanillaEntityList(EntityType<?> mobToCheck) {
-		return VANILLA_ENTITIES.contains(mobToCheck);
 	}
 	
 	/**
@@ -391,7 +366,7 @@ public interface IUtilityHelper {
 	 * @param blockToCheck block to check for queue validity 
 	 * @return true if the block is inside the <code>Queue</code> list, else returns false
 	 */
-	default boolean isInQueueForDuplication(Block blockToCheck) {
+	static boolean isInQueueForDuplication(Block blockToCheck) {
 		return Queue.contains(blockToCheck);
 	}
 	
@@ -400,7 +375,7 @@ public interface IUtilityHelper {
 	 * @param name resource location/registry to check
 	 * @return true if it's part of chaos awakens, else returns false
 	 */
-	default boolean isChaosAwakens(ResourceLocation name) {
+	static boolean isChaosAwakens(ResourceLocation name) {
 		return name.getNamespace().equalsIgnoreCase(ChaosAwakens.MODID);
 	}
 	
@@ -409,7 +384,7 @@ public interface IUtilityHelper {
 	 * @param stackToCheck stack to check for entities
 	 * @return true if the itemstack has an entity stored in it, else returns false
 	 */
-	default boolean stackHasMob(ItemStack stackToCheck) {
+	static boolean stackHasMob(ItemStack stackToCheck) {
 		return !(stackToCheck.isEmpty()) && stackToCheck.hasTag() && stackToCheck.getTag().contains("entity");
 	}
 	
@@ -419,7 +394,7 @@ public interface IUtilityHelper {
 	 * @param modid the modid for the stuff you wanna get, from the loc
 	 * @return true if stuff is from specified modid, else returns false
 	 */
-	default boolean isFromMod(ResourceLocation loc, String modid) {
+	static boolean isFromMod(ResourceLocation loc, String modid) {
 		return loc.getNamespace().equalsIgnoreCase(modid);
 	}
 	
@@ -428,7 +403,7 @@ public interface IUtilityHelper {
 	 * @param entity entity to check
 	 * @return true if entity is standing on air, else returns false
 	 */
-	default boolean isInAir(Entity entity) {
+	static boolean isInAir(Entity entity) {
 		return entity.blockPosition().below() == null;
 	}
 	
@@ -437,7 +412,7 @@ public interface IUtilityHelper {
 	 * @param entity entity to check
 	 * @return true if entity is completely surrounded by air from all sides/cardinal directions, else returns false
 	 */
-	default boolean isSurroundedByAir(Entity entity) {
+	static boolean isSurroundedByAir(Entity entity) {
 		return entity.blockPosition().below() == null && entity.blockPosition().above() == null && entity.blockPosition().east() == null && entity.blockPosition().west() == null && entity.blockPosition().north() == null && entity.blockPosition().south() == null;
 	}
 	
@@ -451,7 +426,7 @@ public interface IUtilityHelper {
 	 * @param b finishing blockpos
 	 * @return the distance between a and b
 	 */
-	default double getHorizontalDistanceBetween(BlockPos a, BlockPos b) {
+	static double getHorizontalDistanceBetween(BlockPos a, BlockPos b) {
 		int x = Math.abs(a.getX() - b.getX());
 		int z= Math.abs(a.getZ() - b.getZ());
 		
@@ -464,7 +439,7 @@ public interface IUtilityHelper {
 	 * @param b finishing blockpos
 	 * @return the distance between a and b
 	 */
-	default double getVerticalDistanceBetween(BlockPos a, BlockPos b) {
+	static double getVerticalDistanceBetween(BlockPos a, BlockPos b) {
 		int y = Math.abs(a.getY() - b.getY());
 		
 		return Math.sqrt(y * y);
@@ -476,7 +451,7 @@ public interface IUtilityHelper {
 	 * @param b finishing blockpos
 	 * @return the distance between a and b
 	 */
-	default double getDistanceBetween(@Nullable BlockPos a, @Nullable BlockPos b) {
+	static double getDistanceBetween(@Nullable BlockPos a, @Nullable BlockPos b) {
 		int x = Math.abs(a.getX() - b.getX());
 		int y = Math.abs(a.getY() - b.getY());
 		int z = Math.abs(a.getZ() - b.getZ());
@@ -490,7 +465,7 @@ public interface IUtilityHelper {
 	 * @param pos point b, where the destination pos is
 	 * @return the distance (on the x and z axis) between the entity and the destination pos
 	 */
-	default double getHorizontalDistanceBetweenEntityAndBlockPos(Entity entity, BlockPos pos) {
+	static double getHorizontalDistanceBetweenEntityAndBlockPos(Entity entity, BlockPos pos) {
 		int x = Math.abs((int) entity.getX() - pos.getX());
 		int z = Math.abs((int) entity.getZ() - pos.getZ());
 		
@@ -503,7 +478,7 @@ public interface IUtilityHelper {
 	 * @param pos point b, where the destination pos is
 	 * @return the distance (on the y axis) between the entity and the destination pos
 	 */
-	default double getVerticalDistanceBetweenEntityAndBlockPos(Entity entity, BlockPos pos) {
+	static double getVerticalDistanceBetweenEntityAndBlockPos(Entity entity, BlockPos pos) {
 		int y = Math.abs((int) entity.getY() - pos.getY());
 		
 		return Math.sqrt(y * y);
@@ -515,7 +490,7 @@ public interface IUtilityHelper {
 	 * @param pos point b, where the destination pos is
 	 * @return the distance between the entity and the destination pos
 	 */
-	default double getDistanceBetweenEntityAndBlockPos(Entity entity, BlockPos pos) {
+	static double getDistanceBetweenEntityAndBlockPos(Entity entity, BlockPos pos) {
 		int x = Math.abs((int) entity.getX() - pos.getX());
 		int y = Math.abs((int) entity.getY() - pos.getY());
 		int z = Math.abs((int) entity.getZ() - pos.getZ());
@@ -529,7 +504,7 @@ public interface IUtilityHelper {
 	 * @param entityB entity point b, finishing pos to check
 	 * @return the distance (on the x and z axis) between the 2 entities
 	 */
-	default double getHorizontalDistanceBetweenEntities(Entity entityA, Entity entityB) {
+	static double getHorizontalDistanceBetweenEntities(Entity entityA, Entity entityB) {
 		double x = Math.abs(entityA.getX() - entityB.getX());
 		double z = Math.abs(entityA.getZ() - entityB.getZ());
 		
@@ -542,7 +517,7 @@ public interface IUtilityHelper {
 	 * @param entityB entity point b, finishing pos to check
 	 * @return the distance (on the y axis) between the 2 entities
 	 */
-	default double getVerticalDistanceBetweenEntities(Entity entityA, Entity entityB) {
+	static double getVerticalDistanceBetweenEntities(Entity entityA, Entity entityB) {
 		double y = Math.abs(entityA.getY() - entityB.getY());
 		
 		return Math.sqrt(y * y);
@@ -554,7 +529,7 @@ public interface IUtilityHelper {
 	 * @param entityB entity point b, finishing pos to check
 	 * @return the distance between the 2 entities
 	 */
-	default double getDistanceBetweenEntities(@Nullable Entity entityA, @Nullable Entity entityB) {
+	static double getDistanceBetweenEntities(@Nullable Entity entityA, @Nullable Entity entityB) {
 		double x = Math.abs(entityA.getX() - entityB.getX());
 		double y = Math.abs(entityA.getY() - entityB.getY());
 		double z = Math.abs(entityA.getZ() - entityB.getZ());
@@ -570,7 +545,7 @@ public interface IUtilityHelper {
 	 * @param world world to get pos in
 	 * @return random position to execute an event in
 	 */
-	default double getRandomHorizontalPos(double random, World world) {
+	static double getRandomHorizontalPos(double random, World world) {
 		return (world.random.nextDouble() - 0.5D) * random;
 	}
 	
@@ -582,7 +557,7 @@ public interface IUtilityHelper {
 	 * @param world world to get pos in
 	 * @return random position to execute an event in
 	 */
-	default double getRandomVerticalPos(double random, World world) {
+	static double getRandomVerticalPos(double random, World world) {
 		return world.random.nextDouble() - 0.1D * random;
 	}
 	
@@ -591,16 +566,16 @@ public interface IUtilityHelper {
 	 * @param numberToGetSquareRootOf number to find square root of
 	 * @return square root of the number entered 
 	 */
-	default double squareRoot(double numberToGetSquareRootOf) {
+	static double squareRoot(double numberToGetSquareRootOf) {
 		return Math.sqrt(numberToGetSquareRootOf);
 	}
 	
 	/**
-	 *  Get the number squared without having to do static methods
+	 * Get the number squared 
 	 * @param numberSquared number to get squared (number * number) --How could you not know this and code?
 	 * @return the number entered squared (number * number)
 	 */
-	default double squared(double numberSquared) {
+	static double squared(double numberSquared) {
 		return numberSquared * numberSquared;
 	}
 	
@@ -612,7 +587,7 @@ public interface IUtilityHelper {
 	 * @param isAddition whether or not the operation should be addition. If false, it'll be subtraction.
 	 * @return <code>(-b + sqrt of bsq - 4ac / 2a)</code> if <code>isAddition</code> is true, else <code>(-b - sqrt of bsq - 4ac / 2a)</code>
 	 */
-	default double quadraticFormula(double a, double b, double c, boolean isAddition) {
+	static double quadraticFormula(double a, double b, double c, boolean isAddition) {
 		if (isAddition) {
 			return -b + squareRoot(squared(b)) - 4 * a * c / 2 * a;
 		}
@@ -627,7 +602,7 @@ public interface IUtilityHelper {
 	 * Sets the duplication tree duplicator cap
 	 * @return amount of blocks duplication tree can duplicate
 	 */
-	default int setDuplicationCap() {
+	static int setDuplicationCap() {
 		return 36;
 	}
 	
@@ -635,7 +610,7 @@ public interface IUtilityHelper {
 	 * Gets the cap specified in the method <code>setDuplicationCap()</code>
 	 * @return the duplication cap that was specified in <code>setDuplicationCap()</code>
 	 */
-	default int getDuplicationCap() {
+	static int getDuplicationCap() {
 		return setDuplicationCap();
 	}
 	
@@ -643,7 +618,7 @@ public interface IUtilityHelper {
 	 * Sets the duplication tree update rate/speed in duplicating blocks
 	 * @return amount of ticks duplication tree undergoes before duplicating another block
 	 */
-	default int setDuplicationSpeedAKATickRate() {
+	static int setDuplicationSpeedAKATickRate() {
 		return 2000;
 	}
 	
@@ -651,7 +626,7 @@ public interface IUtilityHelper {
 	 * Gets the duplication tree update rate/speed in duplicating blocks specified in <code>setDuplicationSpeedAKATickRate()</code>
 	 * @return amount of ticks duplication tree undergoes before duplicating another block specified in <code>setDuplicationSpeedAKATickRate()</code>
 	 */
-	default int getDuplicationSpeedAKATickRate() {
+	static int getDuplicationSpeedAKATickRate() {
 		return setDuplicationSpeedAKATickRate();
 	}
 	
@@ -664,35 +639,11 @@ public interface IUtilityHelper {
 	 * @param blockToAdd block to add to duplication queue
 	 * @return the list <code>Queue</code>
 	 */
-	default List<Block> addBlockToDuplicationQueue(Block blockToAdd) {
+	static List<Block> addBlockToDuplicationQueue(Block blockToAdd) {
 		if (!blockToAdd.is(CATags.Blocks.BLACKLIST) && blockToAdd != null && !(Queue.contains(blockToAdd))) {
 			Queue.add(blockToAdd);
 		}
 		return Queue;
-	}
-	
-	/**
-	 * Adds CA mobs to the CA entities list, primarily used for differentiating between CA mobs and other mob types from vanilla MC or other mods
-	 * @param CAMobToAdd Mob to add to the <code>CHAOS_AWAKENS_ENTITIES</code>
-	 * @return the list <code>CHAOS_AWAKENS_ENTITIES</code>
-	 */
-	default List<EntityType<? extends LivingEntity>> addChaosEntityToCAEntityList(EntityType<? extends LivingEntity> CAMobToAdd) {
-		if (!VANILLA_ENTITIES.contains(CAMobToAdd) && CAMobToAdd != null && !(CHAOS_AWAKENS_ENTITIES.contains(CAMobToAdd))) {
-			CHAOS_AWAKENS_ENTITIES.add(CAMobToAdd);
-		}
-		return CHAOS_AWAKENS_ENTITIES;
-	}
-	
-	/**
-	 * Adds Vanilla mobs to the Vanilla entities list, primarily used for differentiating between Vanilla mobs and other mob types from CA or other mods
-	 * @param VanillaMobToAdd Mob to add to the <code>VANILLA_ENTITIES</code>
-	 * @return the list <code>VANILLA_ENTITIES</code>
-	 */
-	default List<EntityType<? extends LivingEntity>> addVanillaEntityToVanillaEntityList(EntityType<? extends LivingEntity> VanillaMobToAdd) {
-		if (!CHAOS_AWAKENS_ENTITIES.contains(VanillaMobToAdd) && VanillaMobToAdd != null && !(VANILLA_ENTITIES.contains(VanillaMobToAdd))) {
-			VANILLA_ENTITIES.add(VanillaMobToAdd);
-		}
-		return VANILLA_ENTITIES;
 	}
 	
 	///////////////////////////////
@@ -704,7 +655,7 @@ public interface IUtilityHelper {
 	 * @param nbtToRead nbt to read data of
 	 * @return NBT data read
 	 */
-	default CompoundNBT readFromNBT(CompoundNBT nbtToRead) {
+	static CompoundNBT readFromNBT(CompoundNBT nbtToRead) {
 		return nbtToRead;
 	}
 	
@@ -712,7 +663,7 @@ public interface IUtilityHelper {
 	 * Writes NBT data to a (usually) JSON file 
 	 * @return Written NBT data
 	 */
-	default CompoundNBT writeToNBT() {
+	static CompoundNBT writeToNBT() {
 		final CompoundNBT NBT = new CompoundNBT();
 		return NBT;
 	}
@@ -722,7 +673,7 @@ public interface IUtilityHelper {
 	 * @param entityToGetNBTDataFrom entity to get NBT data from
 	 * @return the entity data/NBT
 	 */
-	default CompoundNBT getNBTDataFromLivingEntity(LivingEntity entityToGetNBTDataFrom) {
+	static CompoundNBT getNBTDataFromLivingEntity(LivingEntity entityToGetNBTDataFrom) {
 		CompoundNBT entityDataNBT = new CompoundNBT();
 		return entityDataNBT;
 	}

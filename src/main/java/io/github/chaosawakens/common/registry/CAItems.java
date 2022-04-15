@@ -6,6 +6,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.CarrotPigEntity;
+import io.github.chaosawakens.common.events.EntityAttributeModificationEventSubscriber;
 import io.github.chaosawakens.common.util.EnumUtils;
 import io.github.chaosawakens.common.items.*;
 import net.minecraft.enchantment.EnchantmentData;
@@ -52,8 +53,11 @@ public class CAItems {
     public static final Food FOOD_CRYSTAL_APPLE = new Food.Builder().nutrition(5).saturationMod(0.85F).alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 3000, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 3000, 0), 1.0F).build();
 
     //CA FOOD
-    public static final Food FOOD_RAW_VENISON = new Food.Builder().nutrition(9).saturationMod(0.7F).meat().build();
-    public static final Food FOOD_COOKED_VENISON = new Food.Builder().nutrition(15).saturationMod(1.6F).meat().build();
+    public static final Food FOOD_RAW_VENISON = new Food.Builder().nutrition(5).saturationMod(0.5F).meat().build();
+    public static final Food FOOD_COOKED_VENISON = new Food.Builder().nutrition(9).saturationMod(1.2F).meat().build();
+    public static final Food FOOD_CRYSTAL_BEETROOT = new Food.Builder().nutrition(1).saturationMod(0.15F).build();
+    public static final Food FOOD_CRYSTAL_CARROT = new Food.Builder().nutrition(3).saturationMod(0.35F).build();
+    public static final Food FOOD_CRYSTAL_POTATO = new Food.Builder().nutrition(2).saturationMod(0.30F).build();
     
     // SHINY FOOD
     public static final Food FOOD_CANDYCANE = new Food.Builder().nutrition(2).saturationMod(0.15F).alwaysEat().effect(() -> new EffectInstance(Effects.DIG_SPEED, 400, 1), 1.0F).build();
@@ -110,7 +114,10 @@ public class CAItems {
     //CA FOOD
     public static final RegistryObject<Item> VENISON = ITEMS.register("venison", () -> new Item(new Item.Properties().food(CAItems.FOOD_RAW_VENISON).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> COOKED_VENISON = ITEMS.register("cooked_venison", () -> new Item(new Item.Properties().food(CAItems.FOOD_COOKED_VENISON).tab(CAItemGroups.FOOD)));
-    
+    public static final RegistryObject<Item> CRYSTAL_CARROT = ITEMS.register("crystal_carrot", () -> new Item(new Item.Properties().food(CAItems.FOOD_CRYSTAL_CARROT).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> CRYSTAL_BEETROOT = ITEMS.register("crystal_beetroot", () -> new Item(new Item.Properties().food(CAItems.FOOD_CRYSTAL_BEETROOT).tab(CAItemGroups.FOOD)));
+    public static final RegistryObject<Item> CRYSTAL_POTATO = ITEMS.register("crystal_potato", () -> new Item(new Item.Properties().food(CAItems.FOOD_CRYSTAL_POTATO).tab(CAItemGroups.FOOD)));
+
     // SHINY FOOD
     public static final RegistryObject<Item> CANDYCANE = ITEMS.register("candycane", () -> new Item(new Item.Properties().food(CAItems.FOOD_CANDYCANE).tab(CAItemGroups.FOOD)));
     public static final RegistryObject<Item> GOLDEN_MELON_SLICE = ITEMS.register("golden_melon_slice", () -> new Item(new Item.Properties().rarity(Rarity.RARE).food(CAItems.FOOD_GOLDEN_MELON_SLICE).tab(CAItemGroups.FOOD)));
@@ -162,6 +169,7 @@ public class CAItems {
     
     //CARROT PIG
     public static final RegistryObject<BeetrootOnAStickItem> BEETROOT_ON_A_STICK = ITEMS.register("beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(120).tab(CAItemGroups.ITEMS), 3));
+    public static final RegistryObject<BeetrootOnAStickItem> CRYSTAL_BEETROOT_ON_A_STICK = ITEMS.register("crystal_beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(80).tab(CAItemGroups.ITEMS), 5));
     
     //CRITTER CAGES
     public static final RegistryObject<CritterCageItem> CRITTER_CAGE = ITEMS.register("critter_cage", () -> new CritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
@@ -306,16 +314,16 @@ public class CAItems {
     public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(EnumUtils.CAItemTier.WEAPON_RAY_GUN, new Item.Properties().tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(50)));
 
     // Big Weapons
-    public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(EnumUtils.CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.attitudeAdjusterDamage.get() - 12, -3F, 0, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRender::new)));
-    public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, 15F, 0, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRender::new),
+    public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(EnumUtils.CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.attitudeAdjusterDamage.get() - 12, -3F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(7.0D), 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRender::new)));
+    public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(9.0D), 0, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2), new EnchantmentData(Enchantments.KNOCKBACK, 2)}));
-    public static final RegistryObject<EnchantedExtendedHitAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3.35F, 0, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRender::new),
+    public static final RegistryObject<EnchantedExtendedHitAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3.35F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(8.0D), 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-    public static final RegistryObject<EnchantedExtendedHitAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenBattleAxeDamage.get() - 664, -3.25F, 0, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRender::new),
+    public static final RegistryObject<EnchantedExtendedHitAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenBattleAxeDamage.get() - 664, -3.25F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(8.0D), 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 5), new EnchantmentData(Enchantments.SMITE, 5), new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 5), new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
-    public static final RegistryObject<ExtendedHitWeaponItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, CAConfig.COMMON.royalGuardianSwordDamage.get() - 749, -3.25F, 0, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianItemRender::new),
+    public static final RegistryObject<ExtendedHitWeaponItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, CAConfig.COMMON.royalGuardianSwordDamage.get() - 749, -3.25F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(9.0D), 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-    public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(EnumUtils.CAItemTier.WEAPON_SLAYER_CHAINSAW, CAConfig.COMMON.slayerChainsawDamage.get() - 1, -3F, 0, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRender::new)));
+    public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(EnumUtils.CAItemTier.WEAPON_SLAYER_CHAINSAW, CAConfig.COMMON.slayerChainsawDamage.get() - 1, -3F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(6.0D), 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRender::new)));
 
     // Staffs
     public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().tab(CAItemGroups.EQUIPMENT).durability(50)));

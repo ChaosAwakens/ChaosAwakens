@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -13,6 +14,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.FlowersFeature;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -63,6 +66,26 @@ public class CrystalGrassBlock extends CrystalBlock implements IGrowable {
 			if (blockstate2.is(blockstate.getBlock()) && p_225535_2_.nextInt(10) == 0) {
 				((IGrowable)blockstate.getBlock()).performBonemeal(p_225535_1_, p_225535_2_, blockpos1, blockstate2);
 			}
+			
+	         if (blockstate2.isAir()) {
+	             BlockState blockstate1;
+	             if (p_225535_2_.nextInt(8) == 0) {
+	                List<ConfiguredFeature<?, ?>> list = p_225535_1_.getBiome(blockpos1).getGenerationSettings().getFlowerFeatures();
+	                if (list.isEmpty()) {
+	                   continue;
+	                }
+
+	                ConfiguredFeature<?, ?> configuredfeature = list.get(0);
+	                FlowersFeature flowersfeature = (FlowersFeature)configuredfeature.feature;
+	                blockstate1 = flowersfeature.getRandomFlower(p_225535_2_, blockpos1, configuredfeature.config());
+	             } else {
+	                blockstate1 = blockstate;
+	             }
+
+	             if (blockstate1.canSurvive(p_225535_1_, blockpos1)) {
+	                p_225535_1_.setBlock(blockpos1, blockstate1, 3);
+	             }
+	          }
 		}
 	}
 

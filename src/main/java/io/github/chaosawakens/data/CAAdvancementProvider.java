@@ -121,7 +121,8 @@ public class CAAdvancementProvider extends AdvancementProvider {
         Advancement villageMania = registerAdvancement("village_mania", FrameType.TASK, Blocks.OAK_LOG).parent(root).addCriterion("village_mania",
                 ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.VILLAGE_MANIA)).save(t, id("village_mania"));
 
-        Advancement roboSlayer = registerAdvancement("robo_slayer", FrameType.GOAL, CAItems.RAY_GUN.get()).parent(root).addCriterion("robo_sniper",
+        Advancement roboSlayer = registerAdvancement("robo_slayer", FrameType.GOAL, CAItems.RAY_GUN.get()).parent(root).addCriterion("robo_pounder", 
+        		KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_POUNDER.get()))).addCriterion("robo_sniper",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_SNIPER.get()))).addCriterion("robo_warrior",
                 KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_WARRIOR.get()))).save(t, id("robo_slayer"));
 
@@ -162,7 +163,10 @@ public class CAAdvancementProvider extends AdvancementProvider {
         Advancement shinyPigs = registerAdvancement("shiny_pigs", FrameType.TASK, CAItems.GOLDEN_CARROT_PIG_SPAWN_EGG.get()).parent(carrotVision).addCriterion("golden_carrot_pig",
                 BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.ANY)).addCriterion("enchanted_golden_carrot_pig",
                 BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.ANY)).requirements(IRequirementsStrategy.OR).save(t, id("shiny_pigs"));
-
+        
+        Advancement chaoticByChoice = registerAdvancement("chaotic_by_choice", FrameType.GOAL, CABlocks.DEFOSSILIZER.get()).parent(root).addCriterion("chaotic_by_choice",
+                InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER.get())).save(t, id("chaotic_by_choice"));
+        
         // SECRET
         // Big Bertha
         Advancement bigBertha = registerSecretAdvancement("big_bertha", FrameType.CHALLENGE, CAItems.BIG_BERTHA.get()).parent(root).addCriterion("big_bertha",

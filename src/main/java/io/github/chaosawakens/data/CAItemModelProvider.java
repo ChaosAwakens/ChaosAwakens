@@ -71,7 +71,6 @@ public class CAItemModelProvider extends ItemModelProvider {
                 if (!existingFileHelper.exists(getItemResourceLocation(name), TEXTURE) || existingFileHelper.exists(getItemResourceLocation(name), MODEL))
                     continue;
                 getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
-  //              getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && (item.get() instanceof BeetrootOnAStickItem) || (item.get() instanceof OnAStickItem) ? parentHandheldRod : getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name)).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
             }
         }
     }

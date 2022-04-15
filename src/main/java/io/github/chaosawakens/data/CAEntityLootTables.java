@@ -721,8 +721,15 @@ public class CAEntityLootTables extends EntityLootTables {
                                 .add(ItemLootEntry.lootTableItem(Items.LEATHER)
                                         .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
                                         .when(KilledByPlayer.killedByPlayer()))
-                                .add(ItemLootEntry.lootTableItem(Items.DIAMOND)
-                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
+                                .add(ItemLootEntry.lootTableItem(CAItems.VENISON.get())
+                                        .apply(SetCount.setCount(RandomValueRange.between(2.0F, 5.0F)))
+                                        .when(KilledByPlayer.killedByPlayer()))));
+        add(CAEntityTypes.CRYSTAL_CARROT_PIG.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantRange.exactly(1))
+                                .add(ItemLootEntry.lootTableItem(CAItems.CRYSTAL_CARROT.get())
+                                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
                                         .when(KilledByPlayer.killedByPlayer()))));
     }
 

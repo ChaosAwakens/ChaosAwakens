@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.events;
 
 import com.mojang.brigadier.CommandDispatcher;
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.entity.RoboPounderEntity;
@@ -21,7 +20,6 @@ import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.RandomValueRange;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
@@ -37,6 +35,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class MiscEventHandler {
+	
 	@SubscribeEvent
 	public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
 		CommandDispatcher<CommandSource> commandDispatcher = event.getDispatcher();

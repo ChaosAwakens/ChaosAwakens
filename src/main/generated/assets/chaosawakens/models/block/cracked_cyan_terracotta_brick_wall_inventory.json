@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "chaosawakens:block/cracked_cyan_terracotta_bricks"
+  }
+}

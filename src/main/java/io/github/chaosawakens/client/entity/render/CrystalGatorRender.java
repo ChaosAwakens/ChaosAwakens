@@ -14,10 +14,10 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class CrystalGatorRender extends GeoEntityRenderer<CrystalGatorEntity>{
-    private static final ResourceLocation TEXTURE_BLUE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/black.png");
+    private static final ResourceLocation TEXTURE_BLUE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/blue.png");
     private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/red.png");
     private static final ResourceLocation TEXTURE_YELLOW_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/yellow.png");
-    private static final ResourceLocation TEXTURE_ORANGE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/brown.png");
+    private static final ResourceLocation TEXTURE_ORANGE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/orange.png");
     private static final ResourceLocation TEXTURE_PINK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/pink.png");
     private static final ResourceLocation TEXTURE_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gator/green.png");
     

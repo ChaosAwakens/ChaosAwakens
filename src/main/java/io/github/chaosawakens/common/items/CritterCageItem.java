@@ -49,22 +49,34 @@ public class CritterCageItem extends Item implements IUtilityHelper{
 
     @Override
     public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
-        if (!capture(stack, target)) return ActionResultType.FAIL;
-        playerIn.swing(hand);
-        if (playerIn.getMainHandItem().getCount() == 1) {
-            playerIn.setItemInHand(hand, stack);
-        } else if (playerIn.getMainHandItem().getCount() >= 2) {
-            playerIn.getMainHandItem().shrink(1);
-            playerIn.inventory.add(stack);
-            if (!playerIn.inventory.add(stack)) {
-            	playerIn.drop(stack, false);
-            }
+    	stack = playerIn.getMainHandItem();
+        ItemStack stackFill = new ItemStack(this);
+        if (!capture(stackFill, playerIn, target)) return ActionResultType.FAIL;
+        
+        if (stack.getCount() == 1) {
+        	stack = stackFill;
+        	playerIn.setItemInHand(hand, stack);
         }
+        
+        if (stackFill == stack) {
+        	return ActionResultType.FAIL;
+        }
+   
+        if (!playerIn.isSpectator()) {
+          	stack.shrink(1);    
+        	playerIn.inventory.add(stackFill);    
+        }     
+        if (!playerIn.inventory.contains(stackFill)) {     
+        	playerIn.inventory.add(stackFill);     
+        }	
+        if (playerIn.inventory.getFreeSlot() == -1 || playerIn.inventory.add(stackFill) == false) {	
+        	playerIn.drop(stackFill, false);	
+        }     
         return ActionResultType.SUCCESS;
     }
     
-    @SuppressWarnings({ "resource" })
-	public boolean capture(ItemStack stack, LivingEntity target) {
+    @SuppressWarnings("resource")
+	public boolean capture(ItemStack stack, PlayerEntity player, LivingEntity target) {
         if (target.getCommandSenderWorld().isClientSide) return false;
         if (target instanceof PlayerEntity || !target.isAlive()) return false;
         if (containsEntity(stack)) return false;
@@ -76,14 +88,6 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         nbt.putDouble("entityMaxHealth", target.getAttribute(Attributes.MAX_HEALTH).getValue());
         nbt.putBoolean("isBaby", target.isBaby());
         
-//		String modid = target.getType().getRegistryName().getNamespace();
-//		String regName = target.getType().getRegistryName().toString().replace(modid, "").replace(":", "");
-//        if (CAItems.CRITTER_CAGE.getId().getPath().contains("critter_cage")) {
- //       	DeferredWorkQueue.runLater(() -> {
- //       		setItemTexture(stack, new ResourceLocation("items/critter_cage"), regName, CAItems.CRITTER_CAGE.getId().getPath());    
- //       	});    	
- //       }
-        	
         target.saveWithoutId(nbt);
         stack.setTag(nbt);
         
@@ -109,7 +113,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
     }
 
     public boolean containsEntity(ItemStack stack) {
-        return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity");
+        return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity") || !stack.isEmpty() && stack.hasTag() && stack.getItem().getName(stack).toString().contains("(");
     }
 
     @Override
@@ -155,7 +159,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         if (!containsEntity(stack)) return new TranslationTextComponent("item.chaosawakens.critter_cage");
         return new TranslationTextComponent("item.chaosawakens.critter_cage").append(" (" + getMobName(stack) + ")");
     }
-	
+    	
     //Keeping this for later, don't ask why. Just trust me.
 /*	protected static List<EntityType<?>> critterEntityBlacklist = new ArrayList<>();
 	//Type t;

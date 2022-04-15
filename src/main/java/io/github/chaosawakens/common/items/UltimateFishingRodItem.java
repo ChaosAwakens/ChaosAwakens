@@ -59,6 +59,7 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
                 int k = EnchantmentHelper.getFishingSpeedBonus(itemstack);
                 int j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 50;
                 if(worldIn.dimension() == CADimensions.MINING_PARADISE) {
+                  k = EnchantmentHelper.getFishingSpeedBonus(itemstack) + 20;
                   j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 40;
                 }
                 worldIn.addFreshEntity(new UltimateFishingBobberEntity(playerIn, worldIn, j, k));
