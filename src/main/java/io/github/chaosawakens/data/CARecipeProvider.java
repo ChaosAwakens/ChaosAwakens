@@ -475,6 +475,9 @@ public class CARecipeProvider extends RecipeProvider {
 		smelting(consumer, CAItems.PEACOCK_LEG.get(), CAItems.COOKED_PEACOCK_LEG.get(), 0.35F, 200);
 		cooking(consumer, CAItems.PEACOCK_LEG.get(), CAItems.COOKED_PEACOCK_LEG.get(), 100, "smoking", IRecipeSerializer.SMOKING_RECIPE);
 		cooking(consumer, CAItems.PEACOCK_LEG.get(), CAItems.COOKED_PEACOCK_LEG.get(), 600, "campfire_cooking", IRecipeSerializer.CAMPFIRE_COOKING_RECIPE);
+		smelting(consumer, CAItems.VENISON.get(), CAItems.COOKED_VENISON.get(), 0.35F, 200);
+		cooking(consumer, CAItems.VENISON.get(), CAItems.COOKED_VENISON.get(), 100, "smoking", IRecipeSerializer.SMOKING_RECIPE);
+		cooking(consumer, CAItems.VENISON.get(), CAItems.COOKED_VENISON.get(), 600, "campfire_cooking", IRecipeSerializer.CAMPFIRE_COOKING_RECIPE);
 
 		smelting(consumer, CABlocks.ALUMINUM_ORE.get(), CAItems.ALUMINUM_INGOT.get(), 0.1F, 200);
 		blasting(consumer, CABlocks.ALUMINUM_ORE.get(), CAItems.ALUMINUM_INGOT.get(), 0.1F, 100);

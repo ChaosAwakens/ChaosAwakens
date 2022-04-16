@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "chaosawakens:venison"
+  },
+  "result": "chaosawakens:cooked_venison",
+  "experience": 0.35,
+  "cookingtime": 100
+}

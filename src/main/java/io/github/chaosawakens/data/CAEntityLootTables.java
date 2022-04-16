@@ -793,10 +793,14 @@ public class CAEntityLootTables extends EntityLootTables {
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.LEATHER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
-										.when(KilledByPlayer.killedByPlayer()))
-								.add(ItemLootEntry.lootTableItem(Items.DIAMOND)
-										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
-										.when(KilledByPlayer.killedByPlayer()))));
+										.when(KilledByPlayer.killedByPlayer())))
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(CAItems.VENISON.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+										.apply(Smelt.smelted()
+												.when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
+										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F))))));
 	}
 
     @Override
