@@ -12,26 +12,26 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CrystalBlock extends Block {
-    public CrystalBlock(Properties properties) {
-        super(properties);
-    }
+	public CrystalBlock(Properties properties) {
+		super(properties);
+	}
 
 	@OnlyIn(Dist.CLIENT)
-    @Override
-    public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {
-        return state1.getBlock() instanceof CrystalBlock || super.skipRendering(state, state1, direction);
-    }
+	@Override
+	public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {
+		return state1.getBlock() instanceof CrystalBlock || super.skipRendering(state, state1, direction);
+	}
 
-    public VoxelShape getVisualShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
-        return VoxelShapes.empty();
-    }
+	public VoxelShape getVisualShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
+		return VoxelShapes.empty();
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public float getShadeBrightness(BlockState blockState, IBlockReader blockReader, BlockPos blockPos) {
-        return 1.0F;
-    }
+	@OnlyIn(Dist.CLIENT)
+	public float getShadeBrightness(BlockState blockState, IBlockReader blockReader, BlockPos blockPos) {
+		return 1.0F;
+	}
 
-    public boolean propagatesSkylightDown(BlockState blockState, IBlockReader blockReader, BlockPos blockPos) {
-        return true;
-    }
+	public boolean propagatesSkylightDown(BlockState blockState, IBlockReader blockReader, BlockPos blockPos) {
+		return true;
+	}
 }

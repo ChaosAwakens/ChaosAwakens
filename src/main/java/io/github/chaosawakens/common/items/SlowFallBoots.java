@@ -14,11 +14,11 @@ public class SlowFallBoots extends EnchantedArmorItem {
         super(materialIn, EquipmentSlotType.FEET, builderIn, enchantments);
     }
 
-    @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        super.onArmorTick(stack, world, player);
-        if (!player.isOnGround() && player.isShiftKeyDown()) {
-            player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 200, 0, true, false));
-        }
-    }
+	@Override
+	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+		super.onArmorTick(stack, world, player);
+		if (!player.isOnGround() && player.isCrouching()) {
+			player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 200, 0, true, false));
+		}
+	}
 }

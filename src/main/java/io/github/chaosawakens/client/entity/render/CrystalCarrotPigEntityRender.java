@@ -16,7 +16,7 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 public class CrystalCarrotPigEntityRender extends GeoEntityRenderer<CrystalCarrotPigEntity> {
     public CrystalCarrotPigEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new CrystalCarrotPigEntityModel());
-        this.shadowRadius = 0.2F;
+        this.shadowRadius = 0.7F;
     }
 
     @Override

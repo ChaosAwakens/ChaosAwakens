@@ -16,13 +16,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CAContainerTypes {
-    public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, ChaosAwakens.MODID);
+	public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, ChaosAwakens.MODID);
 
-    public static final RegistryObject<ContainerType<DefossilizerContainer>> DEFOSSILIZER = register("defossilizer", DefossilizerContainer::new);
+	public static final RegistryObject<ContainerType<DefossilizerContainer>> DEFOSSILIZER = register("defossilizer", DefossilizerContainer::new);
 
-    private static <T extends Container> RegistryObject<ContainerType<T>> register(String name, IContainerFactory<T> factory) {
-        return CONTAINERS.register(name, () -> IForgeContainerType.create(factory));
-    }
+	private static <T extends Container> RegistryObject<ContainerType<T>> register(String name, IContainerFactory<T> factory) {
+		return CONTAINERS.register(name, () -> IForgeContainerType.create(factory));
+	}
 
     @OnlyIn(Dist.CLIENT)
     public static void registerScreens(FMLClientSetupEvent event) {

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "chaosawakens:polished_limestone_block"
+  },
+  "result": "chaosawakens:limestone_brick_stairs",
+  "count": 1
+}

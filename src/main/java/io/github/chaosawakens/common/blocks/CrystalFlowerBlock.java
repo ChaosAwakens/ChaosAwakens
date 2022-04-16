@@ -19,17 +19,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CrystalFlowerBlock extends FlowerBlock {
 	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
-	private final Effect sussyStewEffect;
-	private final int effectDuration;
-	 
-	public CrystalFlowerBlock(Effect effect, int duration, AbstractBlock.Properties prop) {
-		super(effect, duration, prop);
-		this.sussyStewEffect = effect;
-		if (effect.isInstantenous()) { 
-			this.effectDuration = duration; 
-		} else {  
-			this.effectDuration = duration * 20; 
-		}	 
+
+	public CrystalFlowerBlock(Effect effect, int effectDuration, AbstractBlock.Properties properties) {
+		super(effect, effectDuration, properties);
 	}
 
 	protected boolean mayPlaceOn(BlockState state, IBlockReader world, BlockPos pos) {
@@ -52,16 +44,6 @@ public class CrystalFlowerBlock extends FlowerBlock {
 	@Override
 	public AbstractBlock.OffsetType getOffsetType() {
 		return AbstractBlock.OffsetType.XZ;
-	}
-
-	@Override
-	public Effect getSuspiciousStewEffect() {
-		return this.sussyStewEffect; 
-	}
-	
-	@Override
-	public int getEffectDuration() {
-		return this.effectDuration;
 	}
 	
 	@OnlyIn(Dist.CLIENT)

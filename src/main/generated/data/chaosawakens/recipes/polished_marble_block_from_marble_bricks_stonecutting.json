@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "chaosawakens:marble_bricks"
+  },
+  "result": "chaosawakens:polished_marble_block",
+  "count": 1
+}

@@ -41,23 +41,17 @@ public class CreeperRepellentBlock extends Block{
 	}
 	
 	public boolean repel() {
-		if (!isARepellableMob(mob)) {
-			return false;
-		}
-		
-		if (mob == null) {
-			return false;
-		}
-		
+		if (!isARepellableMob(mob)) return false;
+
+		if (mob == null) return false;
+
 		if (mob.position().distanceTo(blockPosition) >= 50.0D) {
-			Vector3d v = RandomPositionGenerator.getPosAvoid((CreatureEntity) this.mob, 16, 7, blockPosition);
-	         if (v == null) {
-	            return false;
-	         }
-	            this.path = this.pathNav.createPath(v.x, v.y, v.z, 0);
-	            this.pathNav.moveTo(this.path, 2.0D);
-	            return this.path != null;
+			Vector3d v = RandomPositionGenerator.getPosAvoid(this.mob, 16, 7, blockPosition);
+			if (v == null) return false;
+			this.path = this.pathNav.createPath(v.x, v.y, v.z, 0);
+			this.pathNav.moveTo(this.path, 2.0D);
+			return this.path != null;
 		}
-		return this.path != null && true;
+		return this.path != null;
 	}
 }

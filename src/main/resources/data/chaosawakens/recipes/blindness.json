@@ -1,11 +1,24 @@
 {
-  "type": "jeed:effect_provider",
-  "effect":{
-    "id": "minecraft:blindness"
-  },
-  "providers": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "chaosawakens:illusioner_spawn_egg"
+      "conditions": [
+        {
+          "modid": "jeed",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "jeed:effect_provider",
+        "effect": {
+          "id": "minecraft:blindness"
+        },
+        "providers": [
+          {
+            "item": "chaosawakens:illusioner_spawn_egg"
+          }
+        ]
+      }
     }
   ]
 }

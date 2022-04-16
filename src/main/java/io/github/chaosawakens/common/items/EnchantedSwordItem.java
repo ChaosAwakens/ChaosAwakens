@@ -14,10 +14,10 @@ import net.minecraft.world.World;
 public class EnchantedSwordItem extends SwordItem implements IAutoEnchantable {
     private final EnchantmentData[] enchantments;
 
-    public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
-        this.enchantments = enchantments;
-    }
+	public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
+		super(tier, attackDamageIn, attackSpeedIn, builderIn);
+		this.enchantments = enchantments;
+	}
 
     @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {

@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.mojang.serialization.Codec;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.events.CommonSetupEvent;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
@@ -12,7 +11,6 @@ import io.github.chaosawakens.common.worldgen.placement.OceanBedPlacement;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.blockplacer.*;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
@@ -27,7 +25,6 @@ import net.minecraft.world.gen.placement.*;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.OptionalInt;
 
@@ -41,11 +38,11 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> ORE_TIGERS_EYE = register("ore_tigers_eye", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TIGERS_EYE_ORE, 7)).decorated(Placement.RANGE_BIASED.configured(new TopSolidRangeConfig(1, 24, 48))).squared().count(5));
 	public static final ConfiguredFeature<?, ?> ORE_SALT = register("ore_salt", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SALT_ORE, 8)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(32, 64, 128))).squared().count(14));
 
-	public static final ConfiguredFeature<?, ?> ORE_COPPER = register("ore_copper", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.COPPER_ORE, 5)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(72, 32))).squared().count(20));
-	public static final ConfiguredFeature<?, ?> ORE_TIN = register("ore_tin", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TIN_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(56, 24))).squared().count(16));
-	public static final ConfiguredFeature<?, ?> ORE_SILVER = register("ore_silver", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SILVER_ORE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(32, 20))).squared().count(6));
+	public static final ConfiguredFeature<?, ?> ORE_COPPER = register("ore_copper", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.COPPER_ORE, 5)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(72, 32))).squared().count(6));
+	public static final ConfiguredFeature<?, ?> ORE_TIN = register("ore_tin", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TIN_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(56, 24))).squared().count(5));
+	public static final ConfiguredFeature<?, ?> ORE_SILVER = register("ore_silver", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SILVER_ORE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(32, 20))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> ORE_PLATINUM = register("ore_platinum", Feature.NO_SURFACE_ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.PLATINUM_ORE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(8, 16))).squared().count(3));
-	public static final ConfiguredFeature<?, ?> ORE_SUNSTONE = register("ore_sunstone", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SUNSTONE_ORE, 4)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(16, 64, 100))).squared().count(8));
+	public static final ConfiguredFeature<?, ?> ORE_SUNSTONE = register("ore_sunstone", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SUNSTONE_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 64))).squared().count(8));
 	public static final ConfiguredFeature<?, ?> ORE_BLOODSTONE = register("ore_bloodstone", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.BLOODSTONE_ORE, 5)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 64))).squared().count(8));
 
 	public static final ConfiguredFeature<?, ?> FOSSILISED_ACACIA_ENT = register("ore_fossilised_acacia_ent", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_ACACIA_ENT, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
@@ -99,7 +96,7 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> FOSSILISED_PIG = register("ore_fossilised_pig", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_PIG, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_PHANTOM = register("ore_fossilised_phantom", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_PHANTOM, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(92, 30))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_PILLAGER = register("ore_fossilised_pillager", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_PILLAGER, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
-	public static final ConfiguredFeature<?, ?> FOSSILISED_POLAR_BEAR = register("ore_fossilised_polar_bear", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_PACKED_ICE, States.FOSSILISED_POLAR_BEAR, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(70, 30))).squared().count(9));
+	public static final ConfiguredFeature<?, ?> FROZEN_POLAR_BEAR = register("ore_frozen_polar_bear", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_PACKED_ICE, States.FROZEN_POLAR_BEAR, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(70, 30))).squared().count(9));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_PUFFERFISH = register("ore_fossilised_pufferfish", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_OCEAN_FLOOR, States.FOSSILISED_PUFFERFISH, 3)).decorated(OceanBedPlacement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 32))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_RABBIT = register("ore_fossilised_rabbit", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_RABBIT, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_RAVAGER = register("ore_fossilised_ravager", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_RAVAGER, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
@@ -108,10 +105,10 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> FOSSILISED_SKELETON = register("ore_fossilised_skeleton", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_SKELETON, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_SKELETON_HORSE = register("ore_fossilised_skeleton_horse", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_SKELETON_HORSE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_SLIME = register("ore_fossilised_slime", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_SLIME, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
-	public static final ConfiguredFeature<?, ?> FOSSILISED_SNOW_GOLEM = register("ore_fossilised_snow_golem", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_PACKED_ICE, States.FOSSILISED_SNOW_GOLEM, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(70, 30))).squared().count(9));
+	public static final ConfiguredFeature<?, ?> FROZEN_SNOW_GOLEM = register("ore_frozen_snow_golem", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_PACKED_ICE, States.FROZEN_SNOW_GOLEM, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(70, 30))).squared().count(9));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_SPIDER = register("ore_fossilised_spider", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_SPIDER, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_SQUID = register("ore_fossilised_squid", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_OCEAN_FLOOR, States.FOSSILISED_SQUID, 3)).decorated(OceanBedPlacement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 32))).squared().count(4));
-	public static final ConfiguredFeature<?, ?> FOSSILISED_STRAY = register("ore_fossilised_stray", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_PACKED_ICE, States.FOSSILISED_STRAY, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(70, 30))).squared().count(9));
+	public static final ConfiguredFeature<?, ?> FROZEN_STRAY = register("ore_frozen_stray", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_PACKED_ICE, States.FROZEN_STRAY, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(70, 30))).squared().count(9));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_TROPICAL_FISH = register("ore_fossilised_tropical_fish", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_OCEAN_FLOOR, States.FOSSILISED_TROPICAL_FISH, 3)).decorated(OceanBedPlacement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 32))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_TURTLE = register("ore_fossilised_turtle", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_OCEAN_FLOOR, States.FOSSILISED_TURTLE, 3)).decorated(OceanBedPlacement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 32))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> FOSSILISED_VILLAGER = register("ore_fossilised_villager", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_VILLAGER, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 48))).squared().count(4));
@@ -156,19 +153,17 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> MINING_ORE_AMETHYST = register("mining_ore_amethyst", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.AMETHYST_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(40, 16))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_URANIUM = register("mining_ore_uranium", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.URANIUM_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(1, 18))).squared().count(3));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_TITANIUM = register("mining_ore_titanium", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TITANIUM_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(1, 18))).squared().count(3));
-	public static final ConfiguredFeature<?, ?> MINING_ORE_ALUMINUM = register("mining_ore_aluminum", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.ALUMINIUM_ORE, 5)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(8, 64, 80))).squared().count(8));
+	public static final ConfiguredFeature<?, ?> MINING_ORE_ALUMINUM = register("mining_ore_aluminum", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.ALUMINUM_ORE, 5)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(8, 64, 80))).squared().count(8));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_COPPER = register("mining_ore_copper", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.COPPER_ORE, 5)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(72, 38))).squared().count(6));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_TIN = register("mining_ore_tin", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TIN_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(56, 30))).squared().count(5));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_SILVER = register("mining_ore_silver", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SILVER_ORE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(32, 24))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_PLATINUM = register("mining_ore_platinum", Feature.NO_SURFACE_ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.PLATINUM_ORE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(8, 20))).squared().count(3));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_TIGERS_EYE = register("mining_ore_tigers_eye", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.TIGERS_EYE_ORE, 7)).decorated(Placement.RANGE_BIASED.configured(new TopSolidRangeConfig(1, 32, 60))).squared().count(5));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_SALT = register("mining_ore_salt", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SALT_ORE, 8)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(32, 64, 144))).squared().count(14));
-	public static final ConfiguredFeature<?, ?> MINING_ORE_SUNSTONE = register("mining_ore_sunstone", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SUNSTONE_ORE, 4)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(16, 64, 128))).squared().count(8));
+	public static final ConfiguredFeature<?, ?> MINING_ORE_SUNSTONE = register("mining_ore_sunstone", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.SUNSTONE_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 72))).squared().count(8));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_BLOODSTONE = register("mining_ore_bloodstone", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.BLOODSTONE_ORE, 5)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(64, 72))).squared().count(8));
-
 	public static final ConfiguredFeature<?, ?> MINING_RED_ANT_INFESTED = register("mining_ore_red_ant_infested", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.RED_ANT_INFESTED_ORE, 8)).range(16).squared());
 	public static final ConfiguredFeature<?, ?> MINING_TERMITE_INFESTED = register("mining_ore_termite_infested", Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(States.STONE, States.TERMITE_INFESTED_ORE)).decorated(Placement.EMERALD_ORE.configured(IPlacementConfig.NONE)));
-
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_HERCULES_BEETLE = register("mining_ore_fossilised_hercules_beetle", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_HERCULES_BEETLE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_RUBY_BUG = register("mining_ore_fossilised_ruby_bug", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_RUBY_BUG, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_EMERALD_GATOR = register("mining_ore_fossilised_emerald_gator", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_EMERALD_GATOR, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
@@ -217,7 +212,7 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_WOLF = register("mining_ore_fossilised_wolf", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_WOLF, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_ZOMBIE = register("mining_ore_fossilised_zombie", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_ZOMBIE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
 	public static final ConfiguredFeature<?, ?> MINING_FOSSILISED_ZOMBIE_HORSE = register("mining_ore_fossilised_zombie_horse", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.FOSSILISED_ZOMBIE_HORSE, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(48, 60))).squared().count(2));
-	
+
 	public static final ConfiguredFeature<?, ?> MINING_MARBLE_CAVE_PATCH = register("mining_marble_cave_patch", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.MARBLE, 40)).squared().range(128).count(6));
 	public static final ConfiguredFeature<?, ?> MINING_LIMESTONE_CAVE_PATCH = register("mining_limestone_cave_patch", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.LIMESTONE, 36)).squared().range(116).count(3));
 	
@@ -321,7 +316,7 @@ public class CAConfiguredFeatures {
 		private static final BlockState URANIUM_ORE = CABlocks.URANIUM_ORE.get().defaultBlockState();
 		private static final BlockState TITANIUM_ORE = CABlocks.TITANIUM_ORE.get().defaultBlockState();
 		private static final BlockState TIGERS_EYE_ORE = CABlocks.TIGERS_EYE_ORE.get().defaultBlockState();
-		private static final BlockState ALUMINIUM_ORE = CABlocks.ALUMINUM_ORE.get().defaultBlockState();
+		private static final BlockState ALUMINUM_ORE = CABlocks.ALUMINUM_ORE.get().defaultBlockState();
 		private static final BlockState COPPER_ORE = CABlocks.COPPER_ORE.get().defaultBlockState();
 		private static final BlockState TIN_ORE = CABlocks.TIN_ORE.get().defaultBlockState();
 		private static final BlockState SILVER_ORE = CABlocks.SILVER_ORE.get().defaultBlockState();
@@ -382,7 +377,7 @@ public class CAConfiguredFeatures {
 		private static final BlockState FOSSILISED_PIG = CABlocks.FOSSILISED_PIG.get().defaultBlockState();
 		private static final BlockState FOSSILISED_PHANTOM = CABlocks.FOSSILISED_PHANTOM.get().defaultBlockState();
 		private static final BlockState FOSSILISED_PILLAGER = CABlocks.FOSSILISED_PILLAGER.get().defaultBlockState();
-		private static final BlockState FOSSILISED_POLAR_BEAR = CABlocks.FOSSILISED_POLAR_BEAR.get().defaultBlockState();
+		private static final BlockState FROZEN_POLAR_BEAR = CABlocks.FROZEN_POLAR_BEAR.get().defaultBlockState();
 		private static final BlockState FOSSILISED_PUFFERFISH = CABlocks.FOSSILISED_PUFFERFISH.get().defaultBlockState();
 		private static final BlockState FOSSILISED_RABBIT = CABlocks.FOSSILISED_RABBIT.get().defaultBlockState();
 		private static final BlockState FOSSILISED_RAVAGER = CABlocks.FOSSILISED_RAVAGER.get().defaultBlockState();
@@ -391,10 +386,10 @@ public class CAConfiguredFeatures {
 		private static final BlockState FOSSILISED_SKELETON = CABlocks.FOSSILISED_SKELETON.get().defaultBlockState();
 		private static final BlockState FOSSILISED_SKELETON_HORSE = CABlocks.FOSSILISED_SKELETON_HORSE.get().defaultBlockState();
 		private static final BlockState FOSSILISED_SLIME = CABlocks.FOSSILISED_SLIME.get().defaultBlockState();
-		private static final BlockState FOSSILISED_SNOW_GOLEM = CABlocks.FOSSILISED_SNOW_GOLEM.get().defaultBlockState();
+		private static final BlockState FROZEN_SNOW_GOLEM = CABlocks.FROZEN_SNOW_GOLEM.get().defaultBlockState();
 		private static final BlockState FOSSILISED_SPIDER = CABlocks.FOSSILISED_SPIDER.get().defaultBlockState();
 		private static final BlockState FOSSILISED_SQUID = CABlocks.FOSSILISED_SQUID.get().defaultBlockState();
-		private static final BlockState FOSSILISED_STRAY = CABlocks.FOSSILISED_STRAY.get().defaultBlockState();
+		private static final BlockState FROZEN_STRAY = CABlocks.FROZEN_STRAY.get().defaultBlockState();
 		private static final BlockState FOSSILISED_TROPICAL_FISH = CABlocks.FOSSILISED_TROPICAL_FISH.get().defaultBlockState();
 		private static final BlockState FOSSILISED_TURTLE = CABlocks.FOSSILISED_TURTLE.get().defaultBlockState();
 		private static final BlockState FOSSILISED_VILLAGER = CABlocks.FOSSILISED_VILLAGER.get().defaultBlockState();

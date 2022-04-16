@@ -13,10 +13,10 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class CarrotPigEntityRender extends GeoEntityRenderer<CarrotPigEntity> {
-    public CarrotPigEntityRender(EntityRendererManager renderManager) {
-        super(renderManager, new CarrotPigModel());
-        this.shadowRadius = 0.2F;
-    }
+	public CarrotPigEntityRender(EntityRendererManager renderManager) {
+		super(renderManager, new CarrotPigModel());
+		this.shadowRadius = 0.7F;
+	}
 
     @Override
     public void renderEarly(CarrotPigEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {

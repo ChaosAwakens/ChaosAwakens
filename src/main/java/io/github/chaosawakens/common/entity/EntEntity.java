@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.block.BlockState;
@@ -80,16 +81,11 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
- //       this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
- //       this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
- //       this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
-  //      this.goalSelector.addGoal(3, new LookAtGoal(this, RoboEntity.class, 24.0F));
         this.goalSelector.addGoal(4, new AnimatableMoveToTargetGoal(this, 1.6, 5));
         this.goalSelector.addGoal(4, new AnimatableMeleeGoal(this, 48.3, 0.5, 0.6));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new SwimGoal(this));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-//        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.6));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SnowGolemEntity.class, true));
@@ -171,8 +167,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
     }
 
     public enum Types {
-        OAK("oak"), ACACIA("acacia"), DARK_OAK("dark_oak"), JUNGLE("jungle"), SPRUCE("spruce"), BIRCH("birch"),
-        CRIMSON("crimson"), WARPED("warped");
+        OAK("oak"), ACACIA("acacia"), DARK_OAK("dark_oak"), JUNGLE("jungle"), SPRUCE("spruce"), BIRCH("birch"), CRIMSON("crimson"), WARPED("warped");
 
         private final String name;
 

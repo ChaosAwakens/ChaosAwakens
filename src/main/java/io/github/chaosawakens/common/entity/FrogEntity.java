@@ -34,163 +34,163 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public class FrogEntity extends AnimalEntity implements IAnimatable {
-    private final AnimationFactory factory = new AnimationFactory(this);
-    public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(FrogEntity.class, DataSerializers.INT);
+	private final AnimationFactory factory = new AnimationFactory(this);
+	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(FrogEntity.class, DataSerializers.INT);
 
-    public FrogEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
-        super(type, worldIn);
-        this.noCulling = true;
-    }
+	public FrogEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+		super(type, worldIn);
+		this.noCulling = true;
+	}
 
-    public void addAdditionalSaveData(CompoundNBT nbt) {
-        super.addAdditionalSaveData(nbt);
-        nbt.putInt("FrogType", this.getFrogType());
-    }
+	public void addAdditionalSaveData(CompoundNBT nbt) {
+		super.addAdditionalSaveData(nbt);
+		nbt.putInt("FrogType", this.getFrogType());
+	}
 
-    public void readAdditionalSaveData(CompoundNBT nbt) {
-        super.readAdditionalSaveData(nbt);
-        this.setFrogType(nbt.getInt("FrogType"));
-    }
+	public void readAdditionalSaveData(CompoundNBT nbt) {
+		super.readAdditionalSaveData(nbt);
+		this.setFrogType(nbt.getInt("FrogType"));
+	}
 
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(3, new PanicGoal(this, 1.2D));
-        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.7D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-    }
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(3, new PanicGoal(this, 1.2D));
+		this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.7D));
+		this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+	}
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 6)
-                .add(Attributes.MOVEMENT_SPEED, 0.15D)
-                .add(Attributes.JUMP_STRENGTH, 2.0D)
-                .add(Attributes.FOLLOW_RANGE, 8.0D);
-    }
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 6)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.JUMP_STRENGTH, 2.0D)
+				.add(Attributes.FOLLOW_RANGE, 8.0D);
+	}
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_TYPE_ID, 0);
-    }
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(DATA_TYPE_ID, 0);
+	}
 
-    public int getFrogType() {
-        return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 99);
-    }
+	public int getFrogType() {
+		return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 99);
+	}
 
-    public void setFrogType(int type) {
-        if (type == 99) {
-            this.getAttribute(Attributes.ARMOR).setBaseValue(8.0D);
-            this.goalSelector.addGoal(4, new FrogEntity.EvilAttackGoal(this));
-            this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
-            this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        }
-        this.entityData.set(DATA_TYPE_ID, type);
-    }
+	public void setFrogType(int type) {
+		if (type == 99) {
+			this.getAttribute(Attributes.ARMOR).setBaseValue(8.0D);
+			this.goalSelector.addGoal(4, new FrogEntity.EvilAttackGoal(this));
+			this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setAlertOthers());
+			this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		}
+		this.entityData.set(DATA_TYPE_ID, type);
+	}
 
-    @Nullable
-    public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
-        int i = this.getRandomFrogType(world);
-        if (entityData instanceof FrogEntity.FrogData) {
-            i = ((FrogData)entityData).frogType;
-        } else {
-            entityData = new FrogEntity.FrogData(i);
-        }
-        this.setFrogType(i);
-        return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
-    }
+	@Nullable
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
+		int i = this.getRandomFrogType(world);
+		if (entityData instanceof FrogEntity.FrogData) {
+			i = ((FrogData) entityData).frogType;
+		} else {
+			entityData = new FrogEntity.FrogData(i);
+		}
+		this.setFrogType(i);
+		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
+	}
 
-    private int getRandomFrogType(IWorld world) {
-        Biome biome = world.getBiome(this.blockPosition());
-        int i = this.random.nextInt(8);
-        if (biome.getBiomeCategory() == Biome.Category.NETHER) {
-            i = 99;
-        }
-        return i;
-    }
+	private int getRandomFrogType(IWorld world) {
+		Biome biome = world.getBiome(this.blockPosition());
+		int i = this.random.nextInt(8);
+		if (biome.getBiomeCategory() == Biome.Category.NETHER) {
+			i = 99;
+		}
+		return i;
+	}
 
-    public boolean doHurtTarget(Entity entity) {
-        if (this.getFrogType() == 99) {
-            this.playSound(SoundEvents.RABBIT_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-            return entity.hurt(DamageSource.mobAttack(this), 8.0F);
-        } else {
-            return entity.hurt(DamageSource.mobAttack(this), 3.0F);
-        }
-    }
+	public boolean doHurtTarget(Entity entity) {
+		if (this.getFrogType() == 99) {
+			this.playSound(SoundEvents.RABBIT_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+			return entity.hurt(DamageSource.mobAttack(this), 8.0F);
+		} else {
+			return entity.hurt(DamageSource.mobAttack(this), 3.0F);
+		}
+	}
 
-    public boolean canStandOnFluid(Fluid fluid) {
-        if (this.getFrogType() == 99) {
-            return fluid.is(FluidTags.LAVA);
-        }
-        return false;
-    }
+	public boolean canStandOnFluid(Fluid fluid) {
+		if (this.getFrogType() == 99) {
+			return fluid.is(FluidTags.LAVA);
+		}
+		return false;
+	}
 
-    public boolean fireImmune() {
-        return this.getFrogType() == 99;
-    }
+	public boolean fireImmune() {
+		return this.getFrogType() == 99;
+	}
 
-    @Nullable
-    @Override
-    public FrogEntity getBreedOffspring(ServerWorld world, AgeableEntity ageable) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public FrogEntity getBreedOffspring(ServerWorld world, AgeableEntity ageable) {
+		return null;
+	}
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving() || this.getSpeed() > 0) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.frog.jump_animation", true));
-            return PlayState.CONTINUE;
-        } else if (!event.isMoving()) {
-            return PlayState.CONTINUE;
-        }
-        return PlayState.CONTINUE;
-    }
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.frog.jump_animation", true));
+			return PlayState.CONTINUE;
+		} else if (!event.isMoving()) {
+			return PlayState.CONTINUE;
+		}
+		return PlayState.CONTINUE;
+	}
 
-    public boolean causeFallDamage(float p_225503_1_, float p_225503_2_) {
-        return false;
-    }
+	public boolean causeFallDamage(float p_225503_1_, float p_225503_2_) {
+		return false;
+	}
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "frogcontroller", 0, this::predicate));
-    }
+	@Override
+	public void registerControllers(AnimationData data) {
+		data.addAnimationController(new AnimationController<>(this, "frogcontroller", 0, this::predicate));
+	}
 
-    @Override
-    protected void jumpFromGround() {
-        float f = this.getJumpPower();
-        if (this.hasEffect(Effects.JUMP)) {
-           f += 0.1F * (float)(this.getEffect(Effects.JUMP).getAmplifier() + 1);
-        }
+	@Override
+	protected void jumpFromGround() {
+		float f = this.getJumpPower();
+		if (this.hasEffect(Effects.JUMP)) f += 0.1F * (float)(this.getEffect(Effects.JUMP).getAmplifier() + 1);
 
-        Vector3d vector3d = this.getDeltaMovement();
-        this.setDeltaMovement(vector3d.x, (double)f, vector3d.z);
-        if (this.isSprinting()) {
-           float f1 = this.yRot * ((float)Math.PI / 180F);
-           this.setDeltaMovement(this.getDeltaMovement().add((double)(-MathHelper.sin(f1) * 0.2F), 0.0D, (double)(MathHelper.cos(f1) * 0.2F)));
-        }
+		Vector3d vector3d = this.getDeltaMovement();
+		this.setDeltaMovement(vector3d.x, f, vector3d.z);
+		if (this.isSprinting()) {
+			float f1 = this.yRot * ((float)Math.PI / 180F);
+			this.setDeltaMovement(this.getDeltaMovement().add((-MathHelper.sin(f1) * 0.2F), 0.0D, (MathHelper.cos(f1) * 0.2F)));
+		}
 
-        this.hasImpulse = true;
-        net.minecraftforge.common.ForgeHooks.onLivingJump(this);
-    }
-    
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
+		this.hasImpulse = true;
+		net.minecraftforge.common.ForgeHooks.onLivingJump(this);
+	}
 
-    static class FrogData extends AgeableEntity.AgeableData {
-        public final int frogType;
-        private FrogData(int frogType) {
-            super(true);
-            this.frogType = frogType;
-        }
-    }
+	@Override
+	public AnimationFactory getFactory() {
+		return this.factory;
+	}
 
-    static class EvilAttackGoal extends MeleeAttackGoal {
-        public EvilAttackGoal(FrogEntity entity) {
-            super(entity, 1.4D, true);
-        }
-        protected double getAttackReachSqr(LivingEntity livingEntity) {
-            return (4.0F + livingEntity.getBbWidth());
-        }
-    }
+	static class FrogData extends AgeableEntity.AgeableData {
+		public final int frogType;
+
+		private FrogData(int frogType) {
+			super(true);
+			this.frogType = frogType;
+		}
+	}
+
+	static class EvilAttackGoal extends MeleeAttackGoal {
+		public EvilAttackGoal(FrogEntity entity) {
+			super(entity, 1.4D, true);
+		}
+
+		protected double getAttackReachSqr(LivingEntity livingEntity) {
+			return (4.0F + livingEntity.getBbWidth());
+		}
+	}
 }

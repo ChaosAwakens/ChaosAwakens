@@ -17,32 +17,38 @@ import net.minecraft.world.IBlockReader;
 import java.util.function.Supplier;
 
 public class CACropsBlock extends CropsBlock {
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
-    private final Supplier<? extends Item> seedItem;
+	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)
+	};
 
-    public CACropsBlock(Supplier<? extends Item> seedItem, AbstractBlock.Properties properties) {
-        super(properties);
-        this.seedItem = seedItem;
-    }
+	private final Supplier<? extends Item> seedItem;
 
-    public IntegerProperty getAgeProperty() {
-        return AGE;
-    }
+	public CACropsBlock(Supplier<? extends Item> seedItem, AbstractBlock.Properties properties) {
+		super(properties);
+		this.seedItem = seedItem;
+	}
 
-    public int getMaxAge() {
-        return 3;
-    }
+	public IntegerProperty getAgeProperty() {
+		return AGE;
+	}
 
-    protected IItemProvider getBaseSeedId() {
-        return seedItem.get();
-    }
+	public int getMaxAge() {
+		return 3;
+	}
 
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(AGE);
-    }
+	protected IItemProvider getBaseSeedId() {
+		return seedItem.get();
+	}
 
-    public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext selectionContext) {
-        return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
-    }
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateBuilder) {
+		stateBuilder.add(AGE);
+	}
+
+	public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext selectionContext) {
+		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+	}
 }

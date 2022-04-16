@@ -1,16 +1,13 @@
 package io.github.chaosawakens.common.events;
 
 import io.github.chaosawakens.common.entity.*;
+import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.robo.RoboSniperEntity;
+import io.github.chaosawakens.common.entity.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
-/**
- * Class with method(s) that subscribe to the EntityAttributeCreationEvent
- *
- * @author invalid2
- */
 public class EntitySetAttributeEventSubscriber {
-
     public static void onEntityAttributeCreationEvent(final EntityAttributeCreationEvent event) {
         event.put(CAEntityTypes.OAK_ENT.get(), EntEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ACACIA_ENT.get(), EntEntity.setCustomAttributes().build());
@@ -43,8 +40,8 @@ public class EntitySetAttributeEventSubscriber {
         event.put(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.RUBY_BUG.get(), RubyBugEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.STINK_BUG.get(), StinkBugEntity.setCustomAttributes().build());
-        event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntity.setCustomAttributes().build());
+        event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
         event.put(CAEntityTypes.WHALE.get(), WhaleEntity.setCustomAttributes().build());

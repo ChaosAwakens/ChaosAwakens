@@ -16,22 +16,20 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class GoldenAppleCowEntityRender extends GeoEntityRenderer<GoldenAppleCowEntity> {
-    private static final ResourceLocation GOLDEN_APPLE_COW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow/golden_apple_cow.png");
-
     public GoldenAppleCowEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new GoldenAppleCowModel());
-        this.shadowRadius = 0.2F;
-    }
+		this.shadowRadius = 0.7F;
+	}
 
     @Override
     public void renderEarly(GoldenAppleCowEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 
-    @Override
-    public ResourceLocation getTextureLocation(GoldenAppleCowEntity entity) {
-        return GOLDEN_APPLE_COW_TEXTURE;
-    }
+	@Override
+	public ResourceLocation getTextureLocation(GoldenAppleCowEntity entity) {
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow/golden_apple_cow.png");
+	}
 
     @Override
     public RenderType getRenderType(GoldenAppleCowEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {

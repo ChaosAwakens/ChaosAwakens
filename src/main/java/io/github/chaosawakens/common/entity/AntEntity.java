@@ -36,98 +36,94 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public class AntEntity extends AnimalEntity implements IAnimatable {
-    private final AnimationFactory factory = new AnimationFactory(this);
-    private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
+	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
+	private final ConfigValue<Boolean> tpConfig;
+	private final RegistryKey<World> targetDimension;
 
-    private final ConfigValue<Boolean> tpConfig;
-    private final RegistryKey<World> targetDimension;
+	public AntEntity(EntityType<? extends AntEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
+		super(type, worldIn);
+		this.noCulling = true;
+		this.tpConfig = tpConfig;
+		this.targetDimension = targetDimension;
+	}
 
-    public AntEntity(EntityType<? extends AntEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
-        super(type, worldIn);
-        this.noCulling = true;
-        this.tpConfig = tpConfig;
-        this.targetDimension = targetDimension;
-    }
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 1)
+				.add(Attributes.MOVEMENT_SPEED, 0.15)
+				.add(Attributes.FOLLOW_RANGE, 8);
+	}
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 1)
-                .add(Attributes.MOVEMENT_SPEED, 0.15)
-                .add(Attributes.FOLLOW_RANGE, 8);
-    }
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
+			return PlayState.CONTINUE;
+		}
+		if (!event.isMoving()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
+			return PlayState.CONTINUE;
+		}
+		return PlayState.CONTINUE;
+	}
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
-            event.getController()
-                    .setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
-            return PlayState.CONTINUE;
-        }
-        if (!event.isMoving()) {
-            event.getController()
-                    .setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.CONTINUE;
-    }
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
+		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0));
+	}
 
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
-        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0));
-    }
+	@Override
+	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+		ItemStack itemstack = playerIn.getItemInHand(hand);
 
-    @Override
-    public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
-        ItemStack itemstack = playerIn.getItemInHand(hand);
+		if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
+			if (targetDimension == null) {
+				playerIn.displayClientMessage(this.inaccessibleMessage, true);
+				return ActionResultType.PASS;
+			} else {
+				MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
+				ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
+				if (targetWorld != null) serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+			}
+		}
+		return super.mobInteract(playerIn, hand);
+	}
 
-        if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
-            if (targetDimension == null) {
-                playerIn.displayClientMessage(this.inaccessibleMessage, true);
-                return ActionResultType.PASS;
-            } else {
-                MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
-                ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
-                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-                if (targetWorld != null)
-                    serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
-            }
-        }
-        return super.mobInteract(playerIn, hand);
-    }
+	protected void handleAirSupply() {
+		if (this.isAlive()) {
+			if (this.isInWaterRainOrBubble() || this.isInLava()) {
+				this.setAirSupply(0);
+				this.hurt(DamageSource.DROWN, Integer.MAX_VALUE);
+			}
+		}
+	}
 
-    protected void handleAirSupply() {
-        if (this.isAlive()) {
-            if (this.isInWaterRainOrBubble() || this.isInLava()) {
-                this.setAirSupply(0);
-                this.hurt(DamageSource.DROWN, Integer.MAX_VALUE);
-            }
-        }
-    }
+	public void baseTick() {
+		super.baseTick();
+		this.handleAirSupply();
+	}
 
-    public void baseTick() {
-        super.baseTick();
-        this.handleAirSupply();
-    }
+	@Override
+	protected boolean shouldDropExperience() {
+		return false;
+	}
 
-    @Override
-    protected boolean shouldDropExperience() {
-        return false;
-    }
+	@Override
+	public void registerControllers(AnimationData data) {
+		data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
+	}
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "antcontroller", 0, this::predicate));
-    }
+	@Override
+	public AnimationFactory getFactory() {
+		return this.factory;
+	}
 
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
-
-    @Nullable
-    @Override
-    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+		return null;
+	}
 }

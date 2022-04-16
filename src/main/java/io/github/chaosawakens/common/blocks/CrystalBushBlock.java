@@ -23,10 +23,8 @@ public class CrystalBushBlock extends Block implements IPlantable {
 		return !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, state1, world, pos, pos1);
 	}
 
-	public boolean canSurvive(BlockState state, IWorldReader worldReader, BlockPos pos) {
-		BlockPos blockpos = pos.below();
-		if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
-			return worldReader.getBlockState(blockpos).canSustainPlant(worldReader, blockpos, Direction.UP, this);
+	public boolean canSurvive(BlockState state, IWorldReader worldReader, BlockPos pos) {BlockPos blockpos = pos.below();
+		if (state.getBlock() == this) return worldReader.getBlockState(blockpos).canSustainPlant(worldReader, blockpos, Direction.UP, this);
 		return this.mayPlaceOn(worldReader.getBlockState(blockpos), worldReader, blockpos);
 	}
 

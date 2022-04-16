@@ -48,7 +48,6 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 			this.targetSelector.addGoal(3, new LavaEelEntity.AttackGoal(this, 2.0F, false));
 			this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		}
-		//this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 8.0D));
 		this.goalSelector.addGoal(4, new LavaEelEntity.SwimGoal(this));
 	}
 

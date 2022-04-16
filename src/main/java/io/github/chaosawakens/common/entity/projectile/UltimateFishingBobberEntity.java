@@ -55,8 +55,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {	
-	
+public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {
 	private final Random syncronizedRandom = new Random();
 	private int outOfLiquidTime;
 	private boolean biting;
@@ -142,12 +141,12 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		this.yRotO = this.yRot;
 		this.xRotO = this.xRot;
 	}
-	
+
 	@Override
 	public boolean isInLava() {
 		return super.isInLava();
 	}
-	
+
 	@Override
 	public boolean isInWater() {
 		return super.isInWater();

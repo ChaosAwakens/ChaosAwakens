@@ -5,8 +5,7 @@ import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.world.World;
 
-public class LavaSwimmingNavigator extends SwimmerPathNavigator{
-
+public class LavaSwimmingNavigator extends SwimmerPathNavigator {
 	public LavaSwimmingNavigator(MobEntity entity, World world) {
 		super(entity, world);
 	}
@@ -16,5 +15,4 @@ public class LavaSwimmingNavigator extends SwimmerPathNavigator{
 		this.nodeEvaluator = new LavaNodeSwimmingProcessor(false);
 		return new PathFinder(this.nodeEvaluator, i);
 	}
-
 }

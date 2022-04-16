@@ -22,9 +22,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * @author invalid2
- */
 public class CraftingTableContainer extends RecipeBookContainer<CraftingInventory> {
 
     private final CraftingInventory craftMatrix = new CraftingInventory(this, 3, 3);

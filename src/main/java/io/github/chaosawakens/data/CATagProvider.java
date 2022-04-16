@@ -7,7 +7,6 @@ import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.entity.EntityType;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
@@ -76,10 +75,7 @@ public class CATagProvider extends BlockTagsProvider {
             this.tag(BlockTags.WALL_SIGNS).add(CABlocks.APPLE_WALL_SIGN.get(), CABlocks.CHERRY_WALL_SIGN.get(), CABlocks.DUPLICATION_WALL_SIGN.get(), CABlocks.PEACH_WALL_SIGN.get(), CABlocks.SKYWOOD_WALL_SIGN.get(), CABlocks.GINKGO_WALL_SIGN.get());
             this.tag(BlockTags.WOODEN_TRAPDOORS).add(CABlocks.APPLE_TRAPDOOR.get(), CABlocks.CHERRY_TRAPDOOR.get(), CABlocks.DUPLICATION_TRAPDOOR.get(), CABlocks.GINKGO_TRAPDOOR.get(), CABlocks.PEACH_TRAPDOOR.get(), CABlocks.SKYWOOD_TRAPDOOR.get());
             this.tag(BlockTags.ENDERMAN_HOLDABLE).add(CABlocks.DENSE_GRASS_BLOCK.get(), CABlocks.DENSE_DIRT.get());
-            
             this.tag(BlockTags.BASE_STONE_OVERWORLD).add(CABlocks.MARBLE.get()).add(CABlocks.LIMESTONE.get());
-            
-            //MANDATORY!! Any custom walls must be tagged with the vanilla tag in order to prevent broken wall posts and other problems
             this.tag(BlockTags.WALLS).add(CABlocks.MARBLE_WALL.get()).add(CABlocks.CHISELED_MARBLE_WALL.get()).add(CABlocks.CRACKED_MARBLE_WALL.get()).add(CABlocks.MARBLE_BRICK_WALL.get()).add(CABlocks.POLISHED_MARBLE_WALL.get()).add(CABlocks.MOSSY_MARBLE_WALL.get()).add(CABlocks.LIMESTONE_WALL.get()).add(CABlocks.CHISELED_LIMESTONE_WALL.get()).add(CABlocks.CRACKED_LIMESTONE_WALL.get()).add(CABlocks.LIMESTONE_BRICK_WALL.get()).add(CABlocks.POLISHED_LIMESTONE_WALL.get()).add(CABlocks.MOSSY_LIMESTONE_WALL.get()).add(CABlocks.ROBO_WALL_I.get()).add(CABlocks.ROBO_WALL_X.get()).add(CABlocks.BLACK_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.BLUE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.BROWN_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CYAN_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.GRAY_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.GREEN_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.LIME_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.MAGENTA_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.ORANGE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.PINK_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.PURPLE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.RED_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.TERRACOTTA_BRICK_WALL.get()).add(CABlocks.WHITE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.YELLOW_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_RED_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get()).add(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get());;
             
             this.tag(Tags.Blocks.DIRT).add(CABlocks.CRYSTAL_GRASS_BLOCK.get(), CABlocks.DENSE_GRASS_BLOCK.get(), CABlocks.DENSE_DIRT.get());
@@ -154,7 +150,8 @@ public class CATagProvider extends BlockTagsProvider {
                     CAItems.ACACIA_ENT_SPAWN_EGG.get(), CAItems.BIRCH_ENT_SPAWN_EGG.get(), CAItems.CRIMSON_ENT_SPAWN_EGG.get(),
                     CAItems.DARK_OAK_ENT_SPAWN_EGG.get(), CAItems.JUNGLE_ENT_SPAWN_EGG.get(), CAItems.OAK_ENT_SPAWN_EGG.get(),
                     CAItems.SPRUCE_ENT_SPAWN_EGG.get(), CAItems.WARPED_ENT_SPAWN_EGG.get(),
-                    CABlocks.FOSSILISED_WTF.get().asItem(), CABlocks.FOSSILISED_SCORPION.get().asItem(), CABlocks.FOSSILISED_PIRAPORU.get().asItem());
+                    CABlocks.FOSSILISED_WTF.get().asItem(), CABlocks.FOSSILISED_SCORPION.get().asItem(), CABlocks.FOSSILISED_PIRAPORU.get().asItem(),
+                    CAItems.PEACOCK_FEATHER_BOOTS.get(), CAItems.ROYAL_GUARDIAN_BOOTS.get(), CAItems.QUEEN_SCALE_BOOTS.get());
         }
     }
 
@@ -175,26 +172,6 @@ public class CATagProvider extends BlockTagsProvider {
         @Override
         protected void addTags() {
             this.tag(CATags.EntityTypes.CRITTER_CAGE_BLACKLISTED).add(EntityType.ENDER_DRAGON, EntityType.WITHER);
-        }
-    }
-
-    public static class CAFluidTagProvider extends FluidTagsProvider {
-        public CAFluidTagProvider(DataGenerator gen, ExistingFileHelper existingFileHelper) {
-            super(gen, ChaosAwakens.MODID, existingFileHelper);
-        }
-
-        protected Path getPath(ResourceLocation resourceLocation) {
-            return this.generator.getOutputFolder().resolve("data/" + resourceLocation.getNamespace() + "/tags/fluids/" + resourceLocation.getPath() + ".json");
-        }
-
-        @Override
-        public String getName() {
-            return ChaosAwakens.MODNAME + ": Fluid Tags";
-        }
-
-        @Override
-        protected void addTags() {
-            this.tag(CATags.Fluids.MINERS_DREAM_MINEABLE).addTags(FluidTags.WATER, FluidTags.LAVA);
         }
     }
 }

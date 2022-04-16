@@ -17,11 +17,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-/**
- * This class nothing yet, thus
- *
- * @author invalid2
- */
 public class CrystalCraftingTableBlock extends Block {
 
     private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent("container.chaosawakens.crystal_crafting_table");
@@ -30,17 +25,17 @@ public class CrystalCraftingTableBlock extends Block {
         super(properties);
     }
 
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isClientSide) {
-            return ActionResultType.SUCCESS;
-        } else {
-            player.openMenu(state.getMenuProvider(worldIn, pos));
-            player.awardStat(CAStats.INTERACT_WITH_CRYSTAL_CRAFTING_TABLE);
-            return ActionResultType.CONSUME;
-        }
-    }
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isClientSide) {
+			return ActionResultType.SUCCESS;
+		} else {
+			player.openMenu(state.getMenuProvider(worldIn, pos));
+			player.awardStat(CAStats.INTERACT_WITH_CRYSTAL_CRAFTING_TABLE);
+			return ActionResultType.CONSUME;
+		}
+	}
 
-    public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
-        return new SimpleNamedContainerProvider((id, inventory, player) -> new CraftingTableContainer(id, inventory, IWorldPosCallable.create(worldIn, pos), this), CONTAINER_NAME);
-    }
+	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
+		return new SimpleNamedContainerProvider((id, inventory, player) -> new CraftingTableContainer(id, inventory, IWorldPosCallable.create(worldIn, pos), this), CONTAINER_NAME);
+	}
 }

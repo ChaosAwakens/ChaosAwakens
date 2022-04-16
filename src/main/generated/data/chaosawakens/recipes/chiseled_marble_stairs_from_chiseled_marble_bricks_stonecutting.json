@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "chaosawakens:chiseled_marble_bricks"
+  },
+  "result": "chaosawakens:chiseled_marble_stairs",
+  "count": 1
+}

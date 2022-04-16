@@ -53,16 +53,22 @@
   "spawners": {
     "monster": [
       {
-        "type": "chaosawakens:robo_warrior",
-        "weight": 85,
+        "type": "chaosawakens:robo_pounder",
+        "weight": 55,
         "minCount": 1,
-        "maxCount": 3
+        "maxCount": 2
       },
       {
         "type": "chaosawakens:robo_sniper",
         "weight": 75,
         "minCount": 1,
         "maxCount": 5
+      },
+      {
+        "type": "chaosawakens:robo_warrior",
+        "weight": 85,
+        "minCount": 1,
+        "maxCount": 3
       },
       {
         "type": "minecraft:spider",

@@ -13,7 +13,6 @@ import javax.annotation.Nullable;
  * WARNING: DO NOT USE YET AS IT CAUSES NULLPOINTEREXCEPTIONS
  * for now...
  * @author Meme Man
- *
  */
 public class AnimalAISwimBottom extends RandomSwimmingGoal {
 	

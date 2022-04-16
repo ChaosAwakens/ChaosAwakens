@@ -5,12 +5,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
 
-/**
- * @author invalid2
- */
 public abstract class AnimatableMovableGoal extends AnimatableGoal {
-
-    protected Path path;
+	protected Path path;
 
     @Override
     abstract public boolean canUse();

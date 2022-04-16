@@ -278,7 +278,11 @@ public class CAConfig {
 			builder.push("Functionality");
 			builder.push("Thunder Staff");
 			thunderStaffExplosionSize = builder.define("Thunder Staff explosion size", 4);
-			thunderStaffExplosionType = builder.comment("0 = NONE - The Thunder Staff will not affect the terrain." + "\n" + "1 = BREAK - The Thunder Staff will drop some blocks that it breaks. (May not work due to lightning)" + "\n" + "2 = DESTROY - The Thunder Staff will destroy blocks and never drop them.").defineInRange("Thunder Staff explosion type", 2, 0, 2);
+			thunderStaffExplosionType = builder
+					.comment("0 = NONE - The Thunder Staff will not affect the terrain." + "\n"
+							+ "1 = BREAK - The Thunder Staff will drop some blocks that it breaks. (May not work due to lightning)" + "\n"
+							+ "2 = DESTROY - The Thunder Staff will destroy blocks and never drop them.")
+					.defineInRange("Thunder Staff explosion type", 2, 0, 2);
 			thunderStaffExplosionFire = builder.define("Fire from Thunder Staff explosion", true);
 			builder.pop();
 			builder.push("Ray Gun");
@@ -308,39 +312,73 @@ public class CAConfig {
 			enableLimestoneGen = builder.define("Enable limestone generation in the mining dimension", true);
 			enableTrollOreGen = builder.define("Enable infested ore generation", true);
 			enableDzMineralOreGen = builder.define("Enable DZ ore generation", true);
-			spawnDzOresInOverworld = builder.comment("Will DZ ores spawn in the Overworld?").define("Overworld DZ Ores", false);
-			enableNestGen = builder.comment("Will Nests spawn in the Overworld or the Ant Dimensions?").define("Ant Nest generation", true);
+			spawnDzOresInOverworld = builder
+					.comment("Will DZ ores spawn in the Overworld?")
+					.define("Overworld DZ Ores", false);
+			enableNestGen = builder
+					.comment("Will Nests spawn in the Overworld or the Ant Dimensions?")
+					.define("Ant Nest generation", true);
 			builder.pop();
 			builder.push("Tools/Weapons");
 			enableAutoEnchanting = builder.comment("If disabled, auto-enchanted items will be able to be enchanted manually.").define("Auto-enchant specific tools and weapons", true);
 			builder.pop();
 			builder.push("Dimensions");
-			crystalWorldRequiresEmptyInventory = builder.comment("Disable the requirement of needing an empty inventory to enter the Crystal World (Termite Dimension)?").define("Crystal World Requires Empty Inventory", true);
-			enableBrownAntTeleport = builder.comment("Will the Brown Ant teleport you to its Dimension?").define("Brown Ant Teleport", true);
-			enableRainbowAntTeleport = builder.comment("Will the Rainbow Ant teleport you to its Dimension?").define("Rainbow Ant Teleport", true);
-			enableRedAntTeleport = builder.comment("Will the Red Ant teleport you to its Dimension?").define("Red Ant Teleport", true);
-			enableUnstableAntTeleport = builder.comment("Will the Unstable Ant teleport you to its Dimension?").define("Unstable Ant Teleport", true);
-			enableTermiteTeleport = builder.comment("Will the Termite teleport you to its Dimension?").define("Termite Teleport", true);
-			enableButterflyTeleport = builder.comment("Will the Butterfly teleport you to its Dimension?").define("Butterfly Teleport", true);
+			crystalWorldRequiresEmptyInventory = builder
+					.comment("Disable the requirement of needing an empty inventory to enter the Crystal World (Termite Dimension)?")
+					.define("Crystal World Requires Empty Inventory", true);
+			enableBrownAntTeleport = builder
+					.comment("Will the Brown Ant teleport you to its Dimension?")
+					.define("Brown Ant Teleport", true);
+			enableRainbowAntTeleport = builder
+					.comment("Will the Rainbow Ant teleport you to its Dimension?")
+					.define("Rainbow Ant Teleport", true);
+			enableRedAntTeleport = builder
+					.comment("Will the Red Ant teleport you to its Dimension?")
+					.define("Red Ant Teleport", true);
+			enableUnstableAntTeleport = builder
+					.comment("Will the Unstable Ant teleport you to its Dimension?")
+					.define("Unstable Ant Teleport", true);
+			enableTermiteTeleport = builder
+					.comment("Will the Termite teleport you to its Dimension?")
+					.define("Termite Teleport", true);
+			enableButterflyTeleport = builder
+					.comment("Will the Butterfly teleport you to its Dimension?")
+					.define("Butterfly Teleport", true);
 			builder.pop();
 			builder.push("Breeding");
-			enableEnchantedAnimalBreeding = builder.comment("Will Enchanted Animals be Breedable?").define("Enchanted Animal Breeding", false);
+			enableEnchantedAnimalBreeding = builder
+					.comment("Will Enchanted Animals be Breedable?")
+					.define("Enchanted Animal Breeding", false);
 			builder.pop();
 			builder.push("Textures");
-			holidayTextures = builder.comment("Will holiday special textures be obtainable?").define("Obtainable Holiday Textures", true);
+			holidayTextures = builder
+					.comment("Will holiday special textures be obtainable?")
+					.define("Obtainable Holiday Textures", true);
 			builder.pop();
 			builder.push("Drops");
-			enableDragonEggRespawns = builder.comment("Will the Ender Dragon Egg respawn after the first death?").define("Ender Dragon Egg Respawn", true);
-			enderDragonHeadDrop = builder.comment("Will the Ender Dragon drop her head?").define("Ender Dragon Head Drop", true);
+			enableDragonEggRespawns = builder
+					.comment("Will the Ender Dragon Egg respawn after the first death?")
+					.define("Ender Dragon Egg Respawn", true);
+			enderDragonHeadDrop = builder
+					.comment("Will the Ender Dragon drop her head?")
+					.define("Ender Dragon Head Drop", true);
 			builder.pop();
 			builder.push("Update Checker");
-			showUpdateMessage = builder.comment("Send messages when there is a new update?").define("Show Update Messages", true);
+			showUpdateMessage = builder
+					.comment("Send messages when there is a new update?")
+					.define("Show Update Messages", true);
 			builder.pop();
 			builder.push("Tooltips");
-			enableTooltips = builder.comment("Enable Tooltips for Items and Blocks!").define("Enable Tooltips", true);
+			enableTooltips = builder
+					.comment("Enable Tooltips for Items and Blocks!")
+					.define("Enable Tooltips", true);
 			builder.pop();
 			builder.push("Spawners");
-			spawnEggsSpawnersSurvival = builder.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n" + "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n" + "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival." + "\n" + "3 = BLACKLIST - Use the BLACKLIST to block Specific Spawn Eggs.").defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 3);
+			spawnEggsSpawnersSurvival = builder
+					.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n"
+							+ "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n"
+							+ "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.")
+					.defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 2);
 			builder.pop();
 		}
 	}

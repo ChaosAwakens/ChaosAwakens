@@ -31,7 +31,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CritterCageItem extends Item implements IUtilityHelper{
-	
     public CritterCageItem(Properties properties) {
         super(properties);
     }
@@ -69,13 +68,12 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         if (!playerIn.inventory.contains(stackFill)) {     
         	playerIn.inventory.add(stackFill);     
         }	
-        if (playerIn.inventory.getFreeSlot() == -1 || playerIn.inventory.add(stackFill) == false) {	
+        if (playerIn.inventory.getFreeSlot() == -1 || !playerIn.inventory.add(stackFill)) {
         	playerIn.drop(stackFill, false);	
         }     
         return ActionResultType.SUCCESS;
     }
     
-    @SuppressWarnings("resource")
 	public boolean capture(ItemStack stack, PlayerEntity player, LivingEntity target) {
         if (target.getCommandSenderWorld().isClientSide) return false;
         if (target instanceof PlayerEntity || !target.isAlive()) return false;
@@ -96,7 +94,6 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         return true;
     }
     
-    @SuppressWarnings("resource")
 	public boolean release(PlayerEntity player, BlockPos pos, Direction facing, World worldIn, ItemStack stack) {
         if (player.getCommandSenderWorld().isClientSide) return false;
         if (!containsEntity(stack)) return false;
@@ -126,7 +123,6 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         }
     }
 
-    @SuppressWarnings("rawtypes")
 	@Nullable
     public Entity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
         if (stack.hasTag()) {

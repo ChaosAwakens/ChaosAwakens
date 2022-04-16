@@ -15,7 +15,6 @@ import java.util.Objects;
 
 @EventBusSubscriber
 public class GiantEventHandler {
-	
 	public static void onEntityJoin(EntityJoinWorldEvent event) {
 		World world = event.getWorld();
 		Entity entity = event.getEntity();

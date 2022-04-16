@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
@@ -58,32 +59,31 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 		super(type, worldIn);
 		this.noCulling = true;
 	}
-	
-	
+
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		 return MobEntity.createLivingAttributes()
-				 .add(Attributes.MAX_HEALTH, 12)
-				 .add(Attributes.MOVEMENT_SPEED, 0.25D)
-				 .add(Attributes.FOLLOW_RANGE, 14);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 12)
+				.add(Attributes.MOVEMENT_SPEED, 0.25D)
+				.add(Attributes.FOLLOW_RANGE, 14);
 	}
 
-	 private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-		 if (event.isMoving()) { 
-			 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.walking", true));
-			 return PlayState.CONTINUE;
-		 }
-		 
-		 if (!event.isMoving()) {
-			 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.idle", true)); 
-			 return PlayState.CONTINUE;  
-		 }  
-		 
-		 if (this.isSprinting()) {
-			 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.running"));
-		 }
-		 
-		 return PlayState.CONTINUE;
-	 }
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.walking", true));
+			return PlayState.CONTINUE;
+		}
+
+		if (!event.isMoving()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.idle", true));
+			return PlayState.CONTINUE;
+		}
+
+		if (event.isMoving() && this.getSpeed() >= 0.25F) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.running"));
+		}
+
+		return PlayState.CONTINUE;
+	}
 
 	@Override
 	public void registerControllers(AnimationData data) {
@@ -95,11 +95,6 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 		return this.factory;
 	}
 
-/*	@Override
-	public AgeableEntity getBreedOffspring(ServerWorld s, AgeableEntity e) {
-		return CAEntityTypes.GAZELLE.get().create(s);
-	}*/
-	
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.2D));
