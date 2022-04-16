@@ -473,8 +473,6 @@ public class CABlockLootTables extends BlockLootTables {
 
 		dropSelf(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get());
 
-		dropSelf(CABlocks.NEST_BLOCK.get());
-
 		dropSelf(CABlocks.CYAN_ROSE.get());
 		dropSelf(CABlocks.RED_ROSE.get());
 		dropSelf(CABlocks.PAEONIA.get());

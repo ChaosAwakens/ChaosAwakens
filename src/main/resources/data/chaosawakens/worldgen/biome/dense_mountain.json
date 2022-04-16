@@ -18,7 +18,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "surface_builder": "chaosawakens:mining_biome",
+  "surface_builder": "chaosawakens:dense_mountain",
   "carvers": {
     "air": [
       "minecraft:canyon",

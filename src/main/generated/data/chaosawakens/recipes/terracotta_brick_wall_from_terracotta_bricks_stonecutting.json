@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "chaosawakens:terracotta_bricks"
+  },
+  "result": "chaosawakens:terracotta_brick_wall",
+  "count": 1
+}

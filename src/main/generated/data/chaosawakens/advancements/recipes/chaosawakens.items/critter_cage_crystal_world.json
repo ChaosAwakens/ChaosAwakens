@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:critter_cage_crystal_world"
+    ]
+  },
+  "criteria": {
+    "has_crystal_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:crystal_shard"
+          }
+        ]
+      }
+    },
+    "has_pink_tourmaline_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:pink_tourmaline_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:critter_cage_crystal_world"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal_shard",
+      "has_pink_tourmaline_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

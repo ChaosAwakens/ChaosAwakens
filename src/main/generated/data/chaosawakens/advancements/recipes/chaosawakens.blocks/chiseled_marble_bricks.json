@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:chiseled_marble_bricks"
+    ]
+  },
+  "criteria": {
+    "has_marble_bricks_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:marble_bricks_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:chiseled_marble_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_marble_bricks_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

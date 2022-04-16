@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cracked_pink_terracotta_brick_stairs_from_pink_terracotta_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_pink_terracotta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:pink_terracotta"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cracked_pink_terracotta_brick_stairs_from_pink_terracotta_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_terracotta",
+      "has_the_recipe"
+    ]
+  ]
+}
