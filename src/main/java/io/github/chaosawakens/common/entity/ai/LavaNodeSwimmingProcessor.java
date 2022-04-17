@@ -26,14 +26,8 @@ public class LavaNodeSwimmingProcessor extends SwimNodeProcessor{
 				for (int z = k; z < k + this.entityDepth; ++z) {
 					IForgeFluidState fstate = this.level.getFluidState(mutableBlockPos.move(x, y, z));
 					BlockState bstate = this.level.getBlockState(mutableBlockPos.move(x, y, z));
-					
-					if (fstate.getFluidState().isEmpty() && bstate.isAir(level, mutableBlockPos)) {
-						return PathNodeType.BREACH;
-					}
-					
-					if (!fstate.getFluidState().is(FluidTags.LAVA)) {
-						return PathNodeType.BLOCKED;
-					}
+					if (fstate.getFluidState().isEmpty() && bstate.isAir(level, mutableBlockPos)) return PathNodeType.BREACH;
+					if (!fstate.getFluidState().is(FluidTags.LAVA)) return PathNodeType.BLOCKED;
 				}
 			}
 		}
@@ -66,10 +60,7 @@ public class LavaNodeSwimmingProcessor extends SwimNodeProcessor{
 		
 		for (Direction d : Direction.values()) {
 			PathPoint p = this.getLavaNode(p2.x + d.getStepX(), p2.y + d.getStepY(), p2.z + d.getStepZ());
-			
-			if (p != null && !p.closed) {
-				p1[n++] = p;
-			}
+			if (p != null && !p.closed) p1[n++] = p;
 		}
 		return n;
 	}

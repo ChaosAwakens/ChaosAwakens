@@ -23,10 +23,24 @@
         "items": [
           {
             "item": "chaosawakens:platinum_block"
-          },
+          }
+        ]
+      }
+    },
+    "uranium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
           {
             "item": "chaosawakens:uranium_block"
-          },
+          }
+        ]
+      }
+    },
+    "titanium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
           {
             "item": "chaosawakens:titanium_block"
           }
@@ -37,6 +51,12 @@
   "requirements": [
     [
       "platinum_block"
+    ],
+    [
+      "uranium_block"
+    ],
+    [
+      "titanium_block"
     ]
   ]
 }

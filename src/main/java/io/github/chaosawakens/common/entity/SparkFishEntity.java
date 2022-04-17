@@ -45,7 +45,7 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 8.0D)
-				.add(Attributes.MOVEMENT_SPEED,1.3D)
+				.add(Attributes.MOVEMENT_SPEED, 1.3D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.25D)
 				.add(Attributes.FOLLOW_RANGE, 4.0D);
 	}
@@ -117,15 +117,13 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 				double d2 = this.wantedZ - this.fish.getZ();
 				if (d1 != 0.0D) {
 					double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double)this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
-
 				if (d0 != 0.0D || d2 != 0.0D) {
 					float f1 = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
 					this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
 					this.fish.yBodyRot = this.fish.yRot;
 				}
-
 			} else {
 				this.fish.setSpeed(0.0F);
 			}
@@ -209,7 +207,6 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 		} else {
 			super.travel(vector);
 		}
-
 	}
 
 	@Override

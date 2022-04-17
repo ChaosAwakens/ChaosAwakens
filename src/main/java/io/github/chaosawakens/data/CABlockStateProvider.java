@@ -285,7 +285,7 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_PIG.get());
         this.simpleBlock(CABlocks.FOSSILISED_PHANTOM.get());
         this.simpleBlock(CABlocks.FOSSILISED_PILLAGER.get());
-        this.simpleBlock(CABlocks.FOSSILISED_POLAR_BEAR.get());
+        this.simpleBlock(CABlocks.FROZEN_POLAR_BEAR.get());
         this.simpleBlock(CABlocks.FOSSILISED_PUFFERFISH.get());
         this.simpleBlock(CABlocks.FOSSILISED_RABBIT.get());
         this.simpleBlock(CABlocks.FOSSILISED_RAVAGER.get());
@@ -294,10 +294,10 @@ public class CABlockStateProvider extends BlockStateProvider {
         this.simpleBlock(CABlocks.FOSSILISED_SKELETON.get());
         this.simpleBlock(CABlocks.FOSSILISED_SKELETON_HORSE.get());
         this.simpleBlock(CABlocks.FOSSILISED_SLIME.get());
-        this.simpleBlock(CABlocks.FOSSILISED_SNOW_GOLEM.get());
+        this.simpleBlock(CABlocks.FROZEN_SNOW_GOLEM.get());
         this.simpleBlock(CABlocks.FOSSILISED_SPIDER.get());
         this.simpleBlock(CABlocks.FOSSILISED_SQUID.get());
-        this.simpleBlock(CABlocks.FOSSILISED_STRAY.get());
+        this.simpleBlock(CABlocks.FROZEN_STRAY.get());
         this.simpleBlock(CABlocks.FOSSILISED_TROPICAL_FISH.get());
         this.simpleBlock(CABlocks.FOSSILISED_TURTLE.get());
         this.simpleBlock(CABlocks.FOSSILISED_VILLAGER.get());

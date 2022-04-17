@@ -16,22 +16,21 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class CrystalAppleCowEntityRender extends GeoEntityRenderer<CrystalAppleCowEntity> {
-    private static final ResourceLocation CRYSTAL_APPLE_COW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow/crystal_apple_cow.png");
-
-    public CrystalAppleCowEntityRender(EntityRendererManager renderManager) {
-        super(renderManager, new CrystalAppleCowModel());
-        this.shadowRadius = 0.2F;
-    }
+	public CrystalAppleCowEntityRender(EntityRendererManager renderManager) {
+		super(renderManager, new CrystalAppleCowModel());
+		this.shadowRadius = 0.7F;
+	}
 
     @Override
     public void renderEarly(CrystalAppleCowEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
         super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 
-    @Override
-    public ResourceLocation getTextureLocation(CrystalAppleCowEntity entity) {
-        return CRYSTAL_APPLE_COW_TEXTURE;
-    }
+	@Override
+	public ResourceLocation getTextureLocation(CrystalAppleCowEntity entity) {
+		return new ResourceLocation(ChaosAwakens.MODID,
+				"textures/entity/apple_cow/crystal_apple_cow.png");
+	}
 
     @Override
     public RenderType getRenderType(CrystalAppleCowEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {

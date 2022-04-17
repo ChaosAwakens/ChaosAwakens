@@ -17,7 +17,6 @@ import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.*;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -38,7 +37,6 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.FMLPlayMessages;
@@ -56,7 +54,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {		
+public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {
 	private final Random syncronizedRandom = new Random();
 	private int outOfLiquidTime;
 	private boolean biting;
@@ -140,12 +138,12 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		this.yRotO = this.yRot;
 		this.xRotO = this.xRot;
 	}
-	
+
 	@Override
 	public boolean isInLava() {
 		return super.isInLava();
 	}
-	
+
 	@Override
 	public boolean isInWater() {
 		return super.isInWater();

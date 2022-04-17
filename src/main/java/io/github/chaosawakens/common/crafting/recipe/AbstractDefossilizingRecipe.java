@@ -22,24 +22,24 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
     protected final int defossilizingTime;
     private NonNullList<Ingredient> ingredients = NonNullList.create();
 
-    public AbstractDefossilizingRecipe(IRecipeType<?> type, IRecipeSerializer<?> serializer, ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience, int defossilizingTime) {
-        this.type = type;
-        this.serializer = serializer;
-        this.recipeId = recipeId;
-        this.ingredient1 = ingredient1;
-        this.ingredient2 = ingredient2;
-        this.ingredient3 = ingredient3;
-        this.result = result;
-        this.experience = experience;
-        this.defossilizingTime = defossilizingTime;
-    	this.ingredients.add(ingredient1);
-    	this.ingredients.add(ingredient2);
-    	this.ingredients.add(ingredient3);
-    }
+	public AbstractDefossilizingRecipe(IRecipeType<?> type, IRecipeSerializer<?> serializer, ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience, int defossilizingTime) {
+		this.type = type;
+		this.serializer = serializer;
+		this.recipeId = recipeId;
+		this.ingredient1 = ingredient1;
+		this.ingredient2 = ingredient2;
+		this.ingredient3 = ingredient3;
+		this.result = result;
+		this.experience = experience;
+		this.defossilizingTime = defossilizingTime;
+		this.ingredients.add(ingredient1);
+		this.ingredients.add(ingredient2);
+		this.ingredients.add(ingredient3);
+	}
 
-    public boolean matches(IInventory inv, World world) {
-        return this.ingredient1.test(inv.getItem(0)) && this.ingredient2.test(inv.getItem(1)) && this.ingredient3.test(inv.getItem(2));
-    }
+	public boolean matches(IInventory inv, World world) {
+		return this.ingredient1.test(inv.getItem(0)) && this.ingredient2.test(inv.getItem(1)) && this.ingredient3.test(inv.getItem(2));
+	}
 
     public ItemStack assemble(IInventory p_77572_1_) {
         return this.result.copy();

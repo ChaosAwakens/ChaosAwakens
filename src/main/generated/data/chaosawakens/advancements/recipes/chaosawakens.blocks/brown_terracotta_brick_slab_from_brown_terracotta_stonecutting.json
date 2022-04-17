@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:brown_terracotta_brick_slab_from_brown_terracotta_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_brown_terracotta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:brown_terracotta"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:brown_terracotta_brick_slab_from_brown_terracotta_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_brown_terracotta",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -25,39 +25,36 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
         super(p_i50166_1_, p_i50166_2_);
     }
 
-    public ThunderStaffProjectileEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
-        super(CAEntityTypes.THUNDER_BALL.get(), x, y, z, accelX, accelY, accelZ, worldIn);
-    }
+	public ThunderStaffProjectileEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
+		super(CAEntityTypes.THUNDER_BALL.get(), x, y, z, accelX, accelY, accelZ, worldIn);
+	}
 
-    public ThunderStaffProjectileEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
-        super(CAEntityTypes.THUNDER_BALL.get(), shooter, accelX, accelY, accelZ, worldIn);
-    }
+	public ThunderStaffProjectileEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ) {
+		super(CAEntityTypes.THUNDER_BALL.get(), shooter, accelX, accelY, accelZ, worldIn);
+	}
 
-    /**
-     * Called when this EntityFireball hits a block or entity.
-     */
-    protected void onHit(RayTraceResult result) {
-        super.onHit(result);
-        if (!this.level.isClientSide) {
-            LightningBoltEntity lightning = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, level);
-            lightning.moveTo(this.getX(), this.getY(), this.getZ(), 0, 0);
-            this.level.addFreshEntity(lightning);
+	protected void onHit(RayTraceResult result) {
+		super.onHit(result);
+		if (!this.level.isClientSide) {
+			LightningBoltEntity lightning = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, level);
+			lightning.moveTo(this.getX(), this.getY(), this.getZ(), 0, 0);
+			this.level.addFreshEntity(lightning);
 
-            boolean hasFire = CAConfig.COMMON.thunderStaffExplosionFire.get();
-            switch (CAConfig.COMMON.thunderStaffExplosionType.get()) {
-                case 0:
-                    this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
-                    break;
-                case 1:
-                    this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
-                    break;
-                case 2:
-                    this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
-                    break;
-            }
-            this.remove();
-        }
-    }
+			boolean hasFire = CAConfig.COMMON.thunderStaffExplosionFire.get();
+			switch (CAConfig.COMMON.thunderStaffExplosionType.get()) {
+			case 0:
+				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+				break;
+			case 1:
+				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+				break;
+			case 2:
+				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+				break;
+			}
+			this.remove();
+		}
+	}
 
     @OnlyIn(Dist.CLIENT)
     public ItemStack getItem() {

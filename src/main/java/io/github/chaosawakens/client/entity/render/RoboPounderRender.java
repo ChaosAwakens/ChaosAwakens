@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.RoboPounderModel;
 import io.github.chaosawakens.client.entity.render.layers.RoboPounderGlowLayer;
-import io.github.chaosawakens.common.entity.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

@@ -1,20 +1,19 @@
 package io.github.chaosawakens.common.integration;
 
+import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAItems;
 import jeresources.api.IWorldGenRegistry;
 import jeresources.api.distributions.DistributionSquare;
-import jeresources.api.distributions.DistributionTriangular;
 import jeresources.api.drop.LootDrop;
 import jeresources.api.drop.PlantDrop;
+import jeresources.api.restrictions.BiomeRestriction;
 import jeresources.api.restrictions.DimensionRestriction;
 import jeresources.api.restrictions.Restriction;
 import jeresources.compatibility.JERAPI;
 import jeresources.entry.PlantEntry;
-import jeresources.entry.WorldGenEntry;
 import jeresources.registry.PlantRegistry;
-import jeresources.registry.WorldGenRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -62,37 +61,160 @@ public class CAJER {
 
     private static void registerOres() {
         IWorldGenRegistry worldGenRegistry = JERAPI.getInstance().getWorldGenRegistry();
+		if (CAConfig.COMMON.enableOreGen.get()) {
+			if (CAConfig.COMMON.enableOreAluminumGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.ALUMINUM_ORE.get()),
+						new DistributionSquare(8, 5, 16, 144),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+			}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()), new DistributionTriangular(64, 64, 0.001F), true, new LootDrop(new ItemStack(CAItems.BLOODSTONE.get())));
-        worldGenRegistry.register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()), new DistributionTriangular(64, 72, 0.001F), new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true, new LootDrop(new ItemStack(CAItems.BLOODSTONE.get())));
+			if (CAConfig.COMMON.enableOreAmethystGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.AMETHYST_ORE.get()),
+						new DistributionSquare(4, 4, 2, 34), true,
+						new LootDrop(new ItemStack(CAItems.AMETHYST.get())));
+				worldGenRegistry.register(new ItemStack(CABlocks.AMETHYST_ORE.get()),
+						new DistributionSquare(4, 4, 24, 56),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+						new LootDrop(new ItemStack(CAItems.AMETHYST.get())));
+			}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.AMETHYST_ORE.get()), new DistributionTriangular(28, 24, 4), true, new LootDrop(new ItemStack(CAItems.AMETHYST.get())));
-        worldGenRegistry.register(new ItemStack(CABlocks.AMETHYST_ORE.get()), new DistributionSquare(8, 5, 22, 34), new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true, new LootDrop(new ItemStack(CAItems.AMETHYST.get())));
+			if (CAConfig.COMMON.enableOreRubyGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.RUBY_ORE.get()),
+						new DistributionSquare(3, 8, 6, 18), true,
+						new LootDrop(new ItemStack(CAItems.RUBY.get())));
+				worldGenRegistry.register(new ItemStack(CABlocks.NETHERRACK_RUBY_ORE.get()),
+						new DistributionSquare(5, 12, 0, 24),
+						Restriction.NETHER, true,
+						new LootDrop(new ItemStack(CAItems.RUBY.get())));
+				worldGenRegistry.register(new ItemStack(CABlocks.NETHERRACK_RUBY_ORE.get()),
+						new DistributionSquare(4, 3, 0, 128),
+						Restriction.NETHER, true,
+						new LootDrop(new ItemStack(CAItems.RUBY.get())));
+				worldGenRegistry.register(new ItemStack(CABlocks.BLACKSTONE_RUBY_ORE.get()),
+						new DistributionSquare(6, 4, 0, 128),
+						Restriction.NETHER, true,
+						new LootDrop(new ItemStack(CAItems.RUBY.get())));
+				worldGenRegistry.register(new ItemStack(CABlocks.RUBY_ORE.get()),
+						new DistributionSquare(4, 8, 6, 18),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+						new LootDrop(new ItemStack(CAItems.RUBY.get())));
+			}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.ALUMINUM_ORE.get()), new DistributionTriangular(28, 24, 8));
-        worldGenRegistry.register(new ItemStack(CABlocks.RUBY_ORE.get()), new DistributionTriangular(24, 24, 28));
-        worldGenRegistry.register(new ItemStack(CABlocks.TIGERS_EYE_ORE.get()), new DistributionTriangular(24, 24, 5));
+			if (CAConfig.COMMON.enableOreTigersEyeGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.TIGERS_EYE_ORE.get()),
+						new DistributionSquare(5, 7, 1, 25), true,
+						new LootDrop(new ItemStack(CAItems.TIGERS_EYE.get())));
+				worldGenRegistry.register(new ItemStack(CABlocks.TIGERS_EYE_ORE.get()),
+						new DistributionSquare(5, 7, 1, 29),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+						new LootDrop(new ItemStack(CAItems.TIGERS_EYE.get())));
+			}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.TITANIUM_ORE.get()), new DistributionTriangular(12, 12, 2));
-        worldGenRegistry.register(new ItemStack(CABlocks.URANIUM_ORE.get()), new DistributionTriangular(12, 12, 2));
+			if (CAConfig.COMMON.enableDzMineralOreGen.get()) {
+				if (CAConfig.COMMON.spawnDzOresInOverworld.get()) {
+					if (CAConfig.COMMON.enableOreCopperGen.get()) {
+						worldGenRegistry.register(new ItemStack(CABlocks.COPPER_ORE.get()),
+								new DistributionSquare(6, 5, 40, 104));
+					}
+					if (CAConfig.COMMON.enableOreTinGen.get()) {
+						worldGenRegistry.register(new ItemStack(CABlocks.TIN_ORE.get()),
+								new DistributionSquare(5, 4, 32, 80));
+					}
+					if (CAConfig.COMMON.enableOreSilverGen.get()) {
+						worldGenRegistry.register(new ItemStack(CABlocks.SILVER_ORE.get()),
+								new DistributionSquare(4, 3, 12, 52));
+					}
+					if (CAConfig.COMMON.enableOrePlatinumGen.get()) {
+						worldGenRegistry.register(new ItemStack(CABlocks.PLATINUM_ORE.get()),
+								new DistributionSquare(3, 3, 8, 24));
+					}
+					if (CAConfig.COMMON.enableOreSunstoneGen.get()) {
+						worldGenRegistry.register(new ItemStack(CABlocks.SUNSTONE_ORE.get()),
+								new DistributionSquare(8, 5, 1, 128), true,
+								new LootDrop(new ItemStack(CAItems.SUNSTONE.get())));
+					}
+					if (CAConfig.COMMON.enableOreBloodstoneGen.get()) {
+						worldGenRegistry.register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()),
+								new DistributionSquare(8, 5, 1, 128), true,
+								new LootDrop(new ItemStack(CAItems.BLOODSTONE.get())));
+					}
+				}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.COPPER_ORE.get()), new DistributionTriangular(24, 12, 6));
-        worldGenRegistry.register(new ItemStack(CABlocks.TIN_ORE.get()), new DistributionTriangular(24, 12, 5));
-        worldGenRegistry.register(new ItemStack(CABlocks.SILVER_ORE.get()), new DistributionTriangular(18, 12, 4));
-        worldGenRegistry.register(new ItemStack(CABlocks.PLATINUM_ORE.get()), new DistributionTriangular(12, 12, 3));
+				if (CAConfig.COMMON.enableOreCopperGen.get()) {
+					worldGenRegistry.register(new ItemStack(CABlocks.COPPER_ORE.get()),
+							new DistributionSquare(6, 5, 34, 110),
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+				}
+				if (CAConfig.COMMON.enableOreTinGen.get()) {
+					worldGenRegistry.register(new ItemStack(CABlocks.TIN_ORE.get()),
+							new DistributionSquare(5, 4, 26, 86),
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+				}
+				if (CAConfig.COMMON.enableOreSilverGen.get()) {
+					worldGenRegistry.register(new ItemStack(CABlocks.SILVER_ORE.get()),
+							new DistributionSquare(4, 3, 8, 56),
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+				}
+				if (CAConfig.COMMON.enableOrePlatinumGen.get()) {
+					worldGenRegistry.register(new ItemStack(CABlocks.PLATINUM_ORE.get()),
+							new DistributionSquare(3, 3, 12, 28),
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+				}
+				if (CAConfig.COMMON.enableOreSunstoneGen.get()) {
+					worldGenRegistry.register(new ItemStack(CABlocks.SUNSTONE_ORE.get()),
+							new DistributionSquare(8, 5, 8, 136),
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+							new LootDrop(new ItemStack(CAItems.SUNSTONE.get())));
+				}
+				if (CAConfig.COMMON.enableOreBloodstoneGen.get()) {
+					worldGenRegistry.register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()),
+							new DistributionSquare(8, 5, 8, 136),
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+							new LootDrop(new ItemStack(CAItems.BLOODSTONE.get())));
+				}
+			}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.SALT_ORE.get()), new DistributionTriangular(48, 48, 18));
+			if (CAConfig.COMMON.enableOreSaltGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.SALT_ORE.get()),
+						new DistributionSquare(14, 8, 32, 96), true,
+						new LootDrop(new ItemStack(CAItems.SALT.get(), 4)));
+				worldGenRegistry.register(new ItemStack(CABlocks.SALT_ORE.get()),
+						new DistributionSquare(14, 8, 32, 112),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+						new LootDrop(new ItemStack(CAItems.SALT.get(), 4)));
+			}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.FOSSILISED_ACACIA_ENT.get()), new DistributionTriangular(48, 48, 10));
-        worldGenRegistry.register(new ItemStack(CABlocks.FOSSILISED_HERCULES_BEETLE.get()), new DistributionTriangular(48, 48, 10));
-        worldGenRegistry.register(new ItemStack(CABlocks.FOSSILISED_RUBY_BUG.get()), new DistributionTriangular(48, 48, 10));
-        worldGenRegistry.register(new ItemStack(CABlocks.FOSSILISED_EMERALD_GATOR.get()), new DistributionTriangular(48, 48, 10));
+			if (CAConfig.COMMON.enableOreTitaniumGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.TITANIUM_ORE.get()),
+						new DistributionSquare(3, 4, 1, 12));
+				worldGenRegistry.register(new ItemStack(CABlocks.TITANIUM_ORE.get()),
+						new DistributionSquare(3, 4, 1, 18),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+			}
 
-        worldGenRegistry.register(new ItemStack(CABlocks.RED_ANT_INFESTED_ORE.get()), new DistributionTriangular(12, 12, 5));
-        worldGenRegistry.register(new ItemStack(CABlocks.TERMITE_INFESTED_ORE.get()), new DistributionTriangular(12, 12, 2));
-    }
+			if (CAConfig.COMMON.enableOreUraniumGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.URANIUM_ORE.get()),
+						new DistributionSquare(3, 4, 1, 12));
+				worldGenRegistry.register(new ItemStack(CABlocks.URANIUM_ORE.get()),
+						new DistributionSquare(3, 4, 1, 18),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+			}
 
-    public static void registerWorldGen(WorldGenEntry entry) {
-        WorldGenRegistry.getInstance().registerEntry(entry);
-    }
+			if (CAConfig.COMMON.enableTrollOreGen.get()) {
+				worldGenRegistry.register(new ItemStack(CABlocks.RED_ANT_INFESTED_ORE.get()),
+						new DistributionSquare(1, 7, 1, 16));
+				worldGenRegistry.register(new ItemStack(CABlocks.RED_ANT_INFESTED_ORE.get()),
+						new DistributionSquare(1, 7, 1, 16),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+				worldGenRegistry.register(new ItemStack(CABlocks.TERMITE_INFESTED_ORE.get()),
+						new DistributionSquare(6, 1, 4, 32),
+						new Restriction(BiomeRestriction.EXTREME_HILLS));
+				worldGenRegistry.register(new ItemStack(CABlocks.TERMITE_INFESTED_ORE.get()),
+						new DistributionSquare(6, 1, 4, 32),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
+			}
+
+			// Todo: All the fossils.
+		}
+	}
 }

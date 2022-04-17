@@ -38,9 +38,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CommonSetupEvent {
-    /**
-     * List for configured features, so they get registered at the correct time
-     */
     public static List<FeatureWrapper> configFeatures = new ArrayList<>();
 
     private static Method codecMethod;
@@ -71,77 +68,53 @@ public class CommonSetupEvent {
 		ModList modList = ModList.get();
 		if (modList.isLoaded("jeresources")) CAJER.init();
 
-        // TODO Make it so we don't have to add stuff here manually
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.MINING_BIOME.getId()), CABiomes.Type.MINING_PARADISE);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.STALAGMITE_VALLEY);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_PLAINS);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SAVANNA.getId()), CABiomes.Type.VILLAGE_MANIA);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_TAIGA.getId()), CABiomes.Type.VILLAGE_MANIA);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SNOWY.getId()), CABiomes.Type.VILLAGE_MANIA);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_MANIA);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_ISLES);
-        BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_WORLD);
-    }
-    
-//    public static void registerReachModifiers(final PlayerEvent event) {
-//    	double reachDistance = 0.0D;
-//    	ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-//    	builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(ExtendedHitWeaponItem.REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
-//    	ItemStack bigBertha = new ItemStack(CAItems.BIG_BERTHA.get());
-//    	ItemStack attitudeAdjuster = new ItemStack(CAItems.ATTITUDE_ADJUSTER.get());
-//    	ItemStack prismaticReaper = new ItemStack(CAItems.PRISMATIC_REAPER.get());
-//    	PlayerEntity player =  event.getPlayer();
-//
-//    	if(player.getItemInHand(Hand.MAIN_HAND).equals(bigBertha)) {
-//    		reachDistance = 25.0D;
-//    	}
-//
-//    	if(player.getItemInHand(Hand.MAIN_HAND).equals(attitudeAdjuster)) {
-//    		reachDistance = 15.0D;
-//    	}
-//
-//    	if(player.getItemInHand(Hand.MAIN_HAND).equals(prismaticReaper)) {
-//    		reachDistance = 13.0D;
-//    	}
-//    }
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_MOUNTAIN.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_MOUNTAIN);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.STALAGMITE_VALLEY);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_PLAINS);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SAVANNA.getId()), CABiomes.Type.VILLAGE_MANIA);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_TAIGA.getId()), CABiomes.Type.VILLAGE_MANIA);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SNOWY.getId()), CABiomes.Type.VILLAGE_MANIA);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_MANIA);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_ISLES);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_WORLD);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_HILLS.getId()), CABiomes.Type.CRYSTAL_WORLD);
+	}
 
-    public static void addDimensionalSpacing(final WorldEvent.Load event) {
-        if (!(event.getWorld() instanceof ServerWorld)) return;
+	public static void addDimensionalSpacing(final WorldEvent.Load event) {
+		if (!(event.getWorld() instanceof ServerWorld)) return;
 
-        ServerWorld serverWorld = (ServerWorld) event.getWorld();
-        ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
+		ServerWorld serverWorld = (ServerWorld) event.getWorld();
+		ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
 
-        try {
-            if (codecMethod == null)
-                codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
-            // TODO Fix this
-            ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
-            if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged")) return;
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            ChaosAwakens.LOGGER.warn("[WORLDGEN]: " + e);
-            e.printStackTrace();
-        } catch (UnableToFindMethodException e) {
-            if (CAConfig.COMMON.terraforgedCheckMsg.get())
-                ChaosAwakens.LOGGER.info("[WORLDGEN]: Unable to check if " + serverWorld.dimension().location()
-                        + " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
-                        + " if you aren't using Terraforged please ignore this message");
-        }
+		try {
+			if (codecMethod == null) codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
+			// TODO Fix this
+			ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
+			if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged")) return;
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			ChaosAwakens.LOGGER.warn("[WORLDGEN]: " + e);
+			e.printStackTrace();
+		} catch (UnableToFindMethodException e) {
+			if (CAConfig.COMMON.terraforgedCheckMsg.get())
+				ChaosAwakens.LOGGER.info("[WORLDGEN]: Unable to check if " + serverWorld.dimension().location()
+						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
+						+ " if you aren't using Terraforged please ignore this message");
+		}
 
-        if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD))
-            return;
+		if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD)) return;
 
-        Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
+		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
 
-        tempMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.ACACIA_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.BIRCH_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.CRIMSON_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.CRIMSON_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.DARK_OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.DARK_OAK_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.JUNGLE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.JUNGLE_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
-        tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
+		tempMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.ACACIA_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.BIRCH_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.CRIMSON_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.CRIMSON_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.DARK_OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.DARK_OAK_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.JUNGLE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.JUNGLE_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
 
-        chunkProvider.generator.getSettings().structureConfig = tempMap;
-    }
+		chunkProvider.generator.getSettings().structureConfig = tempMap;
+	}
 }

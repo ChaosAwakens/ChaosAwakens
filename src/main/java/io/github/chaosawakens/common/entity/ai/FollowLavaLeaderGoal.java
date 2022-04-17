@@ -29,14 +29,10 @@ public class FollowLavaLeaderGoal extends Goal {
 			return false;
 		} else {
 			this.nextStartTick = this.nextStartTick(this.mob);
-			java.util.function.Predicate<AbstractLavaGroupFishEntity> predicate = (p_212824_0_) -> {
-				return p_212824_0_.canBeFollowed() || !p_212824_0_.isFollower();
-			};
+			java.util.function.Predicate<AbstractLavaGroupFishEntity> predicate = (p_212824_0_) -> p_212824_0_.canBeFollowed() || !p_212824_0_.isFollower();
 			List<AbstractLavaGroupFishEntity> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
 			AbstractLavaGroupFishEntity abstractLavaGroupFishEntity = list.stream().filter(AbstractLavaGroupFishEntity::canBeFollowed).findAny().orElse(this.mob);
-			abstractLavaGroupFishEntity.addFollowers(list.stream().filter((p_212823_0_) -> {
-				return !p_212823_0_.isFollower();
-			}));
+			abstractLavaGroupFishEntity.addFollowers(list.stream().filter((p_212823_0_) -> !p_212823_0_.isFollower()));
 			return this.mob.isFollower();
 		}
 	}

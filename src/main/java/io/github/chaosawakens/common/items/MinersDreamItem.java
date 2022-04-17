@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
@@ -43,8 +44,8 @@ public class MinersDreamItem extends Item {
         ChaosAwakens.LOGGER.debug("[AA]: " + targetY);
         Vector3i facing = direction.getNormal();
 
-        playerIn.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
-        worldIn.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F, 0.25F, 0.25F);
+		playerIn.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
+		worldIn.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F, 0.25F, 0.25F);
 
         for (int i = 0; i < HOLE_LENGTH; i++) {
             for (int j = 0; j < HOLE_HEIGHT; j++) {
@@ -53,8 +54,22 @@ public class MinersDreamItem extends Item {
                     int widthDelta = i * facing.getZ() + k * facing.getX();
                     BlockPos targetPos = breakPos.offset(lengthDelta, -targetY + j, widthDelta);
                     BlockState targetBlockState = worldIn.getBlockState(targetPos);
-                    FluidState targetFluidState = worldIn.getFluidState(targetPos);
-                    if (targetBlockState.is(CATags.Blocks.MINERS_DREAM_MINEABLE) || targetFluidState.is(CATags.Fluids.MINERS_DREAM_MINEABLE) || targetBlockState.getBlock().getRegistryName().getNamespace().contains("extcaves") || targetBlockState.getBlock().getRegistryName().getNamespace().contains("subwild") || targetBlockState.getBlock().getRegistryName().getNamespace().contains("earthworks") || targetBlockState.getBlock().getRegistryName().toString().contains("marble") || targetBlockState.getBlock().getRegistryName().toString().contains("limestone") || targetBlockState.getBlock().getRegistryName().toString().contains("limecobble") || targetBlockState.getBlock().getRegistryName().toString().contains("deepslate") || targetBlockState.getBlock().getRegistryName().toString().contains("tuff") || targetBlockState.getBlock().getRegistryName().toString().contains("smooth_basalt") || targetBlockState.getBlock().getRegistryName().toString().contains("calcite") || targetBlockState.getBlock().getRegistryName().toString().contains("soul_stone") || targetBlockState.getBlock().getRegistryName().toString().contains("soulstone") || targetBlockState.getBlock().getRegistryName().toString().contains("rough_sandstone") || targetBlockState.getBlock().getRegistryName().toString().contains("sand_ripple") || targetBlockState.getBlock().getRegistryName().toString().contains("rocky_dirt")) {
+                    if (targetBlockState.is(CATags.Blocks.MINERS_DREAM_MINEABLE)
+		                    || targetBlockState.getBlock().getRegistryName().getNamespace().contains("extcaves")
+		                    || targetBlockState.getBlock().getRegistryName().getNamespace().contains("subwild")
+		                    || targetBlockState.getBlock().getRegistryName().getNamespace().contains("earthworks")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("marble")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("limestone")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("limecobble")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("deepslate")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("tuff")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("smooth_basalt")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("calcite")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("soul_stone")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("soulstone")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("rough_sandstone")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("sand_ripple")
+		                    || targetBlockState.getBlock().getRegistryName().toString().contains("rocky_dirt")) {
                         this.placeWoodPillars(worldIn, targetPos, i, j, k);
                     }
                 }
@@ -86,15 +101,15 @@ public class MinersDreamItem extends Item {
                 return;
             }
 
-            if (j == HOLE_HEIGHT - 1) {
-                if (k == 0) {
-                    worldIn.setBlockAndUpdate(pos, CABlocks.MINING_LAMP.get().defaultBlockState());
-                    return;
-                }
-                worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_SLAB.get().defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
-                return;
-            }
-        }
-        worldIn.removeBlock(pos, false);
-    }
+			if (j == HOLE_HEIGHT - 1) {
+				if (k == 0) {
+					worldIn.setBlockAndUpdate(pos, CABlocks.MINING_LAMP.get().defaultBlockState());
+					return;
+				}
+				worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_SLAB.get().defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
+				return;
+			}
+		}
+		worldIn.removeBlock(pos, false);
+	}
 }

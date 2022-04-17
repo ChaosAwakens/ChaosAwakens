@@ -1,21 +1,16 @@
 package io.github.chaosawakens.common.items;
 
-import com.google.common.collect.ImmutableMultimap;
-
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;

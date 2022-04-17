@@ -8,17 +8,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
-/**
- * @author invalid2
- */
 public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
-	
-	/**
-	 * @param properties
-	 * @param direction
-	 * @param shape
-	 * @param p_i241179_4_
-	 */
 	public CropBodyPlantBlock(Properties properties, Direction direction, VoxelShape shape, boolean p_i241179_4_) {
 		super(properties, direction, shape, p_i241179_4_);
 	}
@@ -46,10 +36,9 @@ public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		BlockPos downPos = pos.relative(this.growthDirection.getOpposite());
 		BlockState downState = reader.getBlockState(downPos);
 		Block block = downState.getBlock();
-		
-		//ChaosAwakens.debug("CORN-BODY", block+" "+downPos+" "+(block == this.getHeadBlock())+" "+(block == this.getBodyBlock())+" "+downState.is(Blocks.FARMLAND)+" "+state.isFaceSturdy(reader, pos, this.growthDirection));
-		return block == this.getHeadBlock() || block == this.getBodyBlock()
-				|| downState.is(Blocks.GRASS_BLOCK) || downState.is(Blocks.DIRT) || downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL) || downState.is(Blocks.FARMLAND);
+		return block == this.getHeadBlock() || block == this.getBodyBlock() || downState.is(Blocks.GRASS_BLOCK)
+				|| downState.is(Blocks.DIRT) || downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL)
+				|| downState.is(Blocks.FARMLAND);
 	}
 	
 	@Override

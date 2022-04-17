@@ -1,13 +1,14 @@
 modLoader="javafml"
 loaderVersion="[36,)"
 issueTrackerURL="https://github.com/ChaosAwakens/ChaosAwakens/issues"
-displayURL="https://chaosawakens.github.io/?#downloadsDiv"
 license="All Rights Reserved. Code created before v0.9.0.0 is licensed GNU LGPL v2.1."
 
 [[mods]]
 modId="chaosawakens"
 version="${file.jarVersion}"
 displayName="Chaos Awakens"
+updateJSONURL="https://raw.githubusercontent.com/ChaosAwakens/ChaosAwakens/1.16.5-forge/update.json"
+displayURL="https://chaosawakens.github.io/?#downloadsDiv"
 authors="Chaos Team"
 description='''Relive the old Orespawn from 1.7.10 in newer Minecraft versions!'''
 logoFile="logo.png"

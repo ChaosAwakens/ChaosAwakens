@@ -193,26 +193,34 @@ public class CAVanillaCompat {
         fireblock.setFlammable(blockIn, encouragement, flammability);
     }
 
-    @SubscribeEvent
-    public static void registerFurnaceFuel(FurnaceFuelBurnTimeEvent event) {
-        ItemStack fuel = event.getItemStack();
-        if (fuel.getItem() == CABlocks.CRYSTAL_ENERGY.get().asItem()) {
-            event.setBurnTime(3200);
-        } else if (fuel.getItem() == CABlocks.CRYSTAL_CRAFTING_TABLE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.MOLDY_FENCE.get().asItem() || fuel.getItem() == CABlocks.PEACH_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.SKYWOOD_FENCE.get().asItem() || fuel.getItem() == CABlocks.GINKGO_FENCE.get().asItem() ||
-                fuel.getItem() == CABlocks.CRYSTAL_FENCE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE_GATE.get().asItem() ||
-                fuel.getItem() == CABlocks.CHERRY_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE_GATE.get().asItem() ||
-                fuel.getItem() == CABlocks.PEACH_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_FENCE_GATE.get().asItem() ||
-                fuel.getItem() == CABlocks.GINKGO_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.CRYSTAL_FENCE_GATE.get().asItem()) {
-            event.setBurnTime(300);
-        } else if (fuel.getItem() == CAItems.CRYSTAL_WOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_SWORD.get() ||
-                fuel.getItem() == CAItems.CRYSTAL_WOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_AXE.get() ||
-                fuel.getItem() == CAItems.CRYSTAL_WOOD_PICKAXE.get()) {
-            event.setBurnTime(200);
-        } else if (fuel.getItem() == CAItems.CRYSTAL_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
-            event.setBurnTime(100);
-        }
-    }
+	@SubscribeEvent
+	public static void registerFurnaceFuel(FurnaceFuelBurnTimeEvent event) {
+		ItemStack fuel = event.getItemStack();
+		if (fuel.getItem() == CABlocks.CRYSTAL_ENERGY.get().asItem()) {
+			event.setBurnTime(3200);
+		} else if (fuel.getItem() == CABlocks.CRYSTAL_CRAFTING_TABLE.get().asItem()
+				|| fuel.getItem() == CABlocks.APPLE_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.MOLDY_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.PEACH_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.SKYWOOD_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.GINKGO_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.CRYSTAL_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.APPLE_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.CHERRY_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.DUPLICATION_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.PEACH_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.SKYWOOD_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.GINKGO_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.CRYSTAL_FENCE_GATE.get().asItem()) {
+			event.setBurnTime(300);
+		} else if (fuel.getItem() == CAItems.CRYSTAL_WOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_SWORD.get()
+				|| fuel.getItem() == CAItems.CRYSTAL_WOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_AXE.get()
+				|| fuel.getItem() == CAItems.CRYSTAL_WOOD_PICKAXE.get()) {
+			event.setBurnTime(200);
+		} else if (fuel.getItem() == CAItems.CRYSTAL_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
+			event.setBurnTime(100);
+		}
+	}
 }

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:light_gray_terracotta"
+  },
+  "result": "chaosawakens:light_gray_terracotta_bricks",
+  "count": 1
+}

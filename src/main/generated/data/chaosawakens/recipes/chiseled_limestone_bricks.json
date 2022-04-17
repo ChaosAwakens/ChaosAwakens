@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:limestone_bricks_slab"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:chiseled_limestone_bricks"
+  }
+}

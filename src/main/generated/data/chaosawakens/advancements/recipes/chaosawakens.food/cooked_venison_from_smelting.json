@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cooked_venison_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_venison": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:venison"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cooked_venison_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_venison",
+      "has_the_recipe"
+    ]
+  ]
+}

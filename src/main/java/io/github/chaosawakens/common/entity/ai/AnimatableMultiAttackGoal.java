@@ -42,52 +42,33 @@ public class AnimatableMultiAttackGoal extends AnimatableGoal{
 		boolean canContinueToUseMeleeAttack = attack1.canContinueToUse();
 		boolean canContinueToUseRangeAttack = attack2.canContinueToUse();
 		boolean canContinueToUseExtraAttack = attack2.canContinueToUse();
-//		this.target = attacker.getTarget();
 		double distanceToTarget = attacker.distanceToSqr(target.getX(), target.getY(), target.getZ());
-		
-	//	List<Goal> attacks = new ArrayList(); 
-		
-	//	attacks.add(attack1);
-	//	attacks.add(attack2);
-	//	attacks.add(attack3);
-		if (target == null) {
-			return;
-		}
-		if (attacker.level == null) {
-			return;
-		}
-		if (target.level == null) {
-			return;
-		}
+
+		if (target == null) return;
+		if (attacker.level == null) return;
+		if (target.level == null) return;
+
 		if (canUseMeleeAttack && !canUseRangeAttack && !canUseExtraAttack) {
 			if (canContinueToUseRangeAttack || canContinueToUseExtraAttack) {
 				attack2.stop();
 				attack3.stop();
 			}
-			if (targetIsNotNull()) {
-				attack1.start();
-			}
-			if (!canContinueToUseMeleeAttack) {
-				attack1.stop();
-			}
+			if (targetIsNotNull()) attack1.start();
+			if (!canContinueToUseMeleeAttack) attack1.stop();
 		} else if (!canUseMeleeAttack && canUseRangeAttack && !canUseExtraAttack) {
 			if (canContinueToUseMeleeAttack || canContinueToUseExtraAttack) {
 				attack1.stop();
 				attack3.stop();
 			}
 			attack2.start();
-			if (!canContinueToUseRangeAttack) {
-				attack2.stop();
-			}
+			if (!canContinueToUseRangeAttack) attack2.stop();
 		} else if (!canUseMeleeAttack && !canUseRangeAttack && canUseExtraAttack) {
 			if (canContinueToUseMeleeAttack || canContinueToUseRangeAttack) {
 				attack1.stop();
 				attack2.stop();
 			}
 			attack3.start();
-			if (!canContinueToUseExtraAttack) {
-				attack3.stop();
-			}
+			if (!canContinueToUseExtraAttack) attack3.stop();
 		}
 		if (canUseAllAttacksAtOnce()) {
 			attack1.stop();
@@ -98,30 +79,22 @@ public class AnimatableMultiAttackGoal extends AnimatableGoal{
 			attacker.targetSelector.removeGoal(attack3);
 			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
 				attack1.start();
-				if (canContinueToUseMeleeAttack) {
-					attack1.tick();
-				}
+				if (canContinueToUseMeleeAttack) attack1.tick();
 				attack2.stop();
 				attack3.stop();
 			} else if (distanceToTarget >= getAttackReachSq(attacker, target) && !attacker.isPathFinding() && target != null) {
 				attack2.start();
-				if (canContinueToUseRangeAttack) {
-					attack2.tick();
-				}
+				if (canContinueToUseRangeAttack) attack2.tick();
 				attack1.stop();
 				attack3.stop();
 			} else if (distanceToTarget <= getAttackReachSq(attacker, target) && !canContinueToUseMeleeAttack || !canUseMeleeAttack) {
 				attack3.start();
-				if (canContinueToUseExtraAttack) {
-					attack3.tick();
-				}
+				if (canContinueToUseExtraAttack) attack3.tick();
 				attack1.stop();
 				attack2.stop();
 			} else if (distanceToTarget >= getAttackReachSq(attacker, target) && !canContinueToUseRangeAttack || !canUseRangeAttack) {
 				attack3.start();
-				if (canContinueToUseExtraAttack) {
-					attack3.tick();
-				}
+				if (canContinueToUseExtraAttack) attack3.tick();
 				attack1.stop();
 				attack2.stop();
 			}
@@ -132,30 +105,22 @@ public class AnimatableMultiAttackGoal extends AnimatableGoal{
 			attack3.stop();
 			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
 				attack1.start();
-				if (canContinueToUseMeleeAttack) {
-					attack1.tick();
-				}
+				if (canContinueToUseMeleeAttack) attack1.tick();
 				attack2.stop();
 				attack3.stop();
 			} else if (distanceToTarget >= getAttackReachSq(attacker, target)) {
 				attack2.start();
-				if (canContinueToUseRangeAttack) {
-					attack2.tick();
-				}
+				if (canContinueToUseRangeAttack) attack2.tick();
 				attack1.stop();
 				attack3.stop();
 			} else if (distanceToTarget <= getAttackReachSq(attacker, target) && !canContinueToUseMeleeAttack || !canUseMeleeAttack) {
 				attack3.start();
-				if (canContinueToUseExtraAttack) {
-					attack3.tick();
-				}
+				if (canContinueToUseExtraAttack) attack3.tick();
 				attack1.stop();
 				attack2.stop();
 			} else if (distanceToTarget >= getAttackReachSq(attacker, target) && !canContinueToUseRangeAttack || !canUseRangeAttack) {
 				attack3.start();
-				if (canContinueToUseExtraAttack) {
-					attack3.tick();
-				}
+				if (canContinueToUseExtraAttack) attack3.tick();
 				attack1.stop();
 				attack2.stop();
 			}
@@ -163,51 +128,37 @@ public class AnimatableMultiAttackGoal extends AnimatableGoal{
 		if (attack1 == null) {
 			if (distanceToTarget >= getAttackReachSq(attacker, target)) {
 				attack2.start();
-				if (canContinueToUseRangeAttack) {
-					attack2.tick();
-				}
+				if (canContinueToUseRangeAttack) attack2.tick();
 				attack3.stop();
 			} else if (distanceToTarget >= getAttackReachSq(attacker, target) && !canContinueToUseRangeAttack || !canUseRangeAttack) {
 				attack3.start();
-				if (canContinueToUseExtraAttack) {
-					attack3.tick();
-				}
+				if (canContinueToUseExtraAttack) attack3.tick();
 				attack2.stop();
 			}
 		}
 		if (attack2 == null) {
 			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
 				attack1.start();
-				if (canContinueToUseMeleeAttack) {
-					attack1.tick();
-				}
+				if (canContinueToUseMeleeAttack) attack1.tick();
 				attack3.stop();
 			} else if (distanceToTarget <= getAttackReachSq(attacker, target) && !canContinueToUseMeleeAttack || !canUseMeleeAttack) {
 				attack3.start();
-				if (canContinueToUseExtraAttack) {
-					attack3.tick();
-				}
+				if (canContinueToUseExtraAttack) attack3.tick();
 				attack1.stop();
 			}
 		}
 		if (attack3 == null) {
 			if (distanceToTarget <= getAttackReachSq(attacker, target)) {
 				attack1.start();
-				if (canContinueToUseMeleeAttack) {
-					attack1.tick();
-				}
+				if (canContinueToUseMeleeAttack) attack1.tick();
 				attack2.stop();
 			} else if (distanceToTarget >= getAttackReachSq(attacker, target)) {
 				attack2.start();
-				if (canContinueToUseRangeAttack) {
-					attack2.tick();
-				}
+				if (canContinueToUseRangeAttack) attack2.tick();
 				attack1.stop();
 			}
 		}
-		if (attack1 == null && attack2 == null && attack3 == null) {
-			throw new IllegalArgumentException();
-		}
+		if (attack1 == null && attack2 == null && attack3 == null) throw new IllegalArgumentException();
 	}
 	
 	public void setAttacksDown() {
@@ -260,8 +211,6 @@ public class AnimatableMultiAttackGoal extends AnimatableGoal{
 	
 	@Override
 	public void tick() {
-		if (target != null) {
-			setAttacksUp();
-		}
+		if (target != null) setAttacksUp();
 	}
 }

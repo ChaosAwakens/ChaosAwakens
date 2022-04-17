@@ -1,0 +1,26 @@
+{
+	"homepage": "https://chaosawakens.github.io/",
+	"promos": {
+		"1.16.5-latest": "0.9.0.4",
+		"1.16.5-recommended": "0.9.0.3"
+	},
+	"1.16.5": {
+		"0.9.0.4": "Read the Changelog on our website",
+		"0.9.0.3": "Read the Changelog on our website",
+		"0.9.0.2": "Read the Changelog on our website",
+		"0.9.0.1": "Read the Changelog on our website",
+		"0.9.0.0": "Read the Changelog on our website",
+		"0.8d": "Read the Changelog on our website",
+		"0.8c": "Read the Changelog on our website",
+		"0.8b": "Read the Changelog on our website",
+		"0.8": "Read the Changelog on our website",
+		"0.7b": "Read the Changelog on our website",
+		"0.7": "Read the Changelog on our website",
+		"0.6": "Read the Changelog on our website",
+		"0.5": "Read the Changelog on our website",
+		"0.4": "Read the Changelog on our website",
+		"0.3": "Read the Changelog on our website",
+		"0.2": "Read the Changelog on our website",
+		"0.1": "Read the Changelog on our website"
+	}
+}

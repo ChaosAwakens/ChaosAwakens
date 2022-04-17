@@ -1,11 +1,24 @@
 {
-  "type": "jeed:effect_provider",
-  "effect":{
-    "id": "minecraft:hunger"
-  },
-  "providers": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "chaosawakens:husk_critter_cage"
+      "conditions": [
+        {
+          "modid": "jeed",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "jeed:effect_provider",
+        "effect":{
+          "id": "minecraft:hunger"
+        },
+        "providers": [
+          {
+            "item": "chaosawakens:husk_critter_cage"
+          }
+        ]
+      }
     }
   ]
 }

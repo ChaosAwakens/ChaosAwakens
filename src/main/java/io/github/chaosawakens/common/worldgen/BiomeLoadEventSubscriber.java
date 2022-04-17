@@ -100,13 +100,7 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 2, 4));
 		};
-		
-		private static final Consumer<MobSpawnInfoBuilder> NETHER_OR_HOT_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LAVA_EEL.get(), 10, 1, 2));
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 11, 1, 2));
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 15, 3, 5));
-		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> PLAINS_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.APPLE_COW.get(), 7, 4, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.GOLDEN_APPLE_COW.get(), 4, 3, 3));
@@ -121,7 +115,7 @@ public class BiomeLoadEventSubscriber {
 		private static final Consumer<MobSpawnInfoBuilder> CRYSTAL_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_APPLE_COW.get(), 7, 1, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_CARROT_PIG.get(), 4, 1, 3));
-	//		builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_GATOR.get(), 3, 1, 2));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_GATOR.get(), 5, 1, 4));
 		};
 
 		private static final Consumer<MobSpawnInfoBuilder> NETHER_MOBS = (builder) -> {
@@ -349,6 +343,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_CREEPER);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_DONKEY);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_ENDERMAN);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_HORSE);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_PHANTOM);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_PIG);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_RABBIT);
@@ -465,9 +460,9 @@ public class BiomeLoadEventSubscriber {
 
 		private static void addSnowyBiomeOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableFossilGen.get()) {
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_POLAR_BEAR);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_SNOW_GOLEM);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_STRAY);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FROZEN_POLAR_BEAR);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FROZEN_SNOW_GOLEM);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FROZEN_STRAY);
 			}
 		}
 
@@ -550,7 +545,6 @@ public class BiomeLoadEventSubscriber {
 		private static void addMiningParadiseOres(BiomeGenerationSettingsBuilder gen) {
 			if (CAConfig.COMMON.enableOreRubyGen.get())
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_RUBY_LAVA);
-			if (CAConfig.COMMON.enableOreRubyGen.get())
 			if (CAConfig.COMMON.enableOreAmethystGen.get())
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_ORE_AMETHYST);
 			if (CAConfig.COMMON.enableOreUraniumGen.get())

@@ -14,11 +14,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -50,12 +52,16 @@ public class CritterCageItem extends Item implements IUtilityHelper{
     @Override
     public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
     	stack = playerIn.getMainHandItem();
-        ItemStack stackFill = this.getDefaultInstance();
+        ItemStack stackFill = new ItemStack(this);
         if (!capture(stackFill, playerIn, target)) return ActionResultType.FAIL;
-    	playerIn.swing(hand);
         
         if (stack.getCount() == 1) {
-        	return ActionResultType.FAIL;
+        	stack = stackFill;
+        	playerIn.setItemInHand(hand, stack);
+        }
+        
+        if (stackFill == stack) {
+        	return ActionResultType.CONSUME;
         }
    
         if (!playerIn.isSpectator()) {
@@ -65,13 +71,13 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         if (!playerIn.inventory.contains(stackFill)) {     
         	playerIn.inventory.add(stackFill);     
         }	
-        if (playerIn.inventory.getFreeSlot() == -1 || playerIn.inventory.add(stackFill) == false) {	
+        if (playerIn.inventory.getFreeSlot() == -1 || !playerIn.inventory.add(stackFill)) {
         	playerIn.drop(stackFill, false);	
         }     
         return ActionResultType.SUCCESS;
     }
     
-    @SuppressWarnings("resource")
+	@SuppressWarnings("resource")
 	public boolean capture(ItemStack stack, PlayerEntity player, LivingEntity target) {
         if (target.getCommandSenderWorld().isClientSide) return false;
         if (target instanceof PlayerEntity || !target.isAlive()) return false;
@@ -83,7 +89,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         nbt.putString("entityName", target.getName().getString());
         nbt.putDouble("entityMaxHealth", target.getAttribute(Attributes.MAX_HEALTH).getValue());
         nbt.putBoolean("isBaby", target.isBaby());
-        
+                
         target.saveWithoutId(nbt);
         stack.setTag(nbt);
         
@@ -92,7 +98,6 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         return true;
     }
     
-    @SuppressWarnings("resource")
 	public boolean release(PlayerEntity player, BlockPos pos, Direction facing, World worldIn, ItemStack stack) {
         if (player.getCommandSenderWorld().isClientSide) return false;
         if (!containsEntity(stack)) return false;
@@ -122,7 +127,6 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         }
     }
 
-    @SuppressWarnings("rawtypes")
 	@Nullable
     public Entity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
         if (stack.hasTag()) {

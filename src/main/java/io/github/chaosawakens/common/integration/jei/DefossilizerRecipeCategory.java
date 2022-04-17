@@ -21,11 +21,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class DefossilizerRecipeCategory implements IRecipeCategory<DefossilizingRecipe> {
-	  static final ResourceLocation ID = new ResourceLocation(CARecipes.DEFOSSILIZING_RECIPE_TYPE.toString());
-	  private IDrawable bg;
-	  private IDrawable icon;
+	static final ResourceLocation ID = new ResourceLocation(CARecipes.DEFOSSILIZING_RECIPE_TYPE.toString());
+	private IDrawable bg;
+	private IDrawable icon;
 //	  private IDrawable arrow;
-	
+
 	public DefossilizerRecipeCategory(IGuiHelper helper) {
 		bg = helper.drawableBuilder(new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80).setTextureSize(170, 80).build();
 		icon = helper.createDrawableIngredient(new ItemStack(CABlocks.DEFOSSILIZER.get()));
@@ -61,7 +61,7 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 	public void setIngredients(DefossilizingRecipe recipe, IIngredients ingredients) {
 		List<List<ItemStack>> in = new ArrayList<>();
 		List<ItemStack> electricBoogaloo = new ArrayList<>();
-		
+
 		Collections.addAll(electricBoogaloo, recipe.placeIng(0));
 		in.add(electricBoogaloo);
 		electricBoogaloo = new ArrayList<>();
@@ -73,13 +73,13 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 		ingredients.setInputLists(VanillaTypes.ITEM, in);
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
 	}
-	
+
 /*	@Override
 	public void setIngredients(DefossilizingRecipe recipe, IIngredients ingredients) {
 		NonNullList<Ingredient> in = NonNullList.create();
-		
+
 		in.addAll(recipe.getIngredients());
-		
+
 		ingredients.setInputIngredients(in);
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
 	}*/
@@ -87,20 +87,20 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, DefossilizingRecipe recipe, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-		
+
 		guiItemStacks.init(0, true, 52, 13);
 		guiItemStacks.init(1, true, 43, 49);
 		guiItemStacks.init(2, true, 61, 49);
 		guiItemStacks.init(3, false, 112, 31);
 		guiItemStacks.set(3, recipe.getResult());
-		
-	    List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
-	    List<ItemStack> input = null;
-	    for (int i = 0; i <= 2; i++) {
-	      input = inputs.get(i);
-	      if (input != null && !input.isEmpty()) {
-	        guiItemStacks.set(i, input);
-	      }
-	    } 
+
+		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
+		List<ItemStack> input = null;
+		for (int i = 0; i <= 2; i++) {
+			input = inputs.get(i);
+			if (input != null && !input.isEmpty()) {
+				guiItemStacks.set(i, input);
+			}
+		}
 	}
 }

@@ -8,13 +8,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
-/**
- * @author invalid2
- */
 public class ToolTipEventSubscriber {
 	public static void onToolTipEvent(ItemTooltipEvent event) {
-		if(event.getPlayer() == null)return;
-		if(CAConfig.COMMON.enableTooltips.get()) {
+		if (event.getPlayer() == null) return;
+		if (CAConfig.COMMON.enableTooltips.get()) {
 			final Item item = event.getItemStack().getItem();
 			if (item.is(CATags.Items.CUSTOM_TOOLTIPS)) {
 				if (Screen.hasShiftDown() || Screen.hasControlDown())

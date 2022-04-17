@@ -4,7 +4,6 @@ import io.github.chaosawakens.api.IUtilityHelper;
 
 
 import io.github.chaosawakens.client.entity.render.*;
-import io.github.chaosawakens.common.entity.AppleCowEntity;
 import io.github.chaosawakens.common.entity.EntEntity;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
 import io.github.chaosawakens.common.registry.*;
@@ -22,82 +21,75 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.event.TickEvent.WorldTickEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-public class ClientSetupEvent implements IUtilityHelper{
-    public static void register() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::onFMLClientSetupEvent);
-    }
-    
-    public static boolean def = false;
-    
-    @EventBusSubscriber(bus = Bus.FORGE)
-    public static class ClientHelper{         
-        @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
-        @OnlyIn(Dist.CLIENT)
-        public static void renderFogColor(EntityViewRenderEvent.FogColors event) {
-        	Entity entity = event.getRenderer().getMainCamera().getEntity();
-        	
-        	if (entity == null) return;
-        	
-        	if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-    //    		float red = event.getRed();
-     //   		float green = event.getGreen();
-     //   		float blue = event.getBlue();
-        		
-        		final float[] fogColors = {1, 1, 1};
-        		
-        		event.setRed(fogColors[0]);
-        		event.setGreen(fogColors[1]);
-        		event.setBlue(fogColors[2]);
-        	}
-        }
-        
-        @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
-        @OnlyIn(Dist.CLIENT)
-        public static void renderFog(EntityViewRenderEvent.FogDensity event) {
-        	Entity entity = event.getRenderer().getMainCamera().getEntity();
-        	
-        	if (entity == null) return;
-        	
-        	if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-        		event.setDensity(0.05F);
-        		event.setCanceled(true);
-        	}
-        }
-        
-        @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
-        @OnlyIn(Dist.CLIENT)
-        @SuppressWarnings("resource")
-    	public static void renderParticles(WorldTickEvent event) {
-        	ClientPlayerEntity player = Minecraft.getInstance().player;
-        	
-        	if (player == null) return;
-        	
-        	if (player.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-        		IUtilityHelper.addParticles(player.level, ParticleTypes.WHITE_ASH, player.getX(), player.getEyeY(), player.getZ(), 50, -1, 50, 2);
-        	}
-        }
-    }
-    
-    public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
-        ClientRegistry.bindTileEntityRenderer(CATileEntities.CUSTOM_SIGN.get(), SignTileEntityRenderer::new);
-        event.enqueueWork(() -> {
-            Atlases.addWoodType(CABlocks.APPLE);
-            Atlases.addWoodType(CABlocks.CHERRY);
-            Atlases.addWoodType(CABlocks.DUPLICATION);
-            Atlases.addWoodType(CABlocks.PEACH);
-            Atlases.addWoodType(CABlocks.SKYWOOD);
-            Atlases.addWoodType(CABlocks.GINKGO);
-        });
+public class ClientSetupEvent implements IUtilityHelper {
+	public static void register() {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::onFMLClientSetupEvent);
+	}
+
+	public static boolean def = false;
+
+	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+	public static class ClientHelper {
+		@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
+		@OnlyIn(Dist.CLIENT)
+		public static void renderFogColor(EntityViewRenderEvent.FogColors event) {
+			Entity entity = event.getRenderer().getMainCamera().getEntity();
+
+			if (entity == null) return;
+
+			if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+				event.setRed(1);
+				event.setGreen(1);
+				event.setBlue(1);
+			}
+		}
+
+		@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
+		@OnlyIn(Dist.CLIENT)
+		public static void renderFog(EntityViewRenderEvent.FogDensity event) {
+			Entity entity = event.getRenderer().getMainCamera().getEntity();
+
+			if (entity == null) return;
+
+			if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+				event.setDensity(0.05F);
+				event.setCanceled(true);
+			}
+		}
+
+		@SuppressWarnings("resource")
+		@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
+		@OnlyIn(Dist.CLIENT)
+		public static void renderParticles(TickEvent.WorldTickEvent event) {
+			ClientPlayerEntity player = Minecraft.getInstance().player;
+
+			if (player == null) return;
+
+			if (player.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+				IUtilityHelper.addParticles(player.level, ParticleTypes.WHITE_ASH, player.getX(), player.getEyeY(), player.getZ(), 50, player.getEyeY(), 50, 2);
+			}
+		}
+	}
+
+	public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
+		ClientRegistry.bindTileEntityRenderer(CATileEntities.CUSTOM_SIGN.get(), SignTileEntityRenderer::new);
+		event.enqueueWork(() -> {
+			Atlases.addWoodType(CABlocks.APPLE);
+			Atlases.addWoodType(CABlocks.CHERRY);
+			Atlases.addWoodType(CABlocks.DUPLICATION);
+			Atlases.addWoodType(CABlocks.PEACH);
+			Atlases.addWoodType(CABlocks.SKYWOOD);
+			Atlases.addWoodType(CABlocks.GINKGO);
+		});
 
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRD.get(), BirdEntityRender::new);
@@ -130,12 +122,14 @@ public class ClientSetupEvent implements IUtilityHelper{
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GOLDEN_CARROT_PIG.get(), GoldenCarrotPigEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), EnchantedGoldenCarrotPigEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BEAVER.get(), BeaverEntityRender::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GAZELLE.get(), GazelleEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.DIMETRODON.get(), DimetrodonEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RUBY_BUG.get(), RubyBugEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.STINK_BUG.get(), StinkBugEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntityRender::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WASP.get(), WaspEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WHALE.get(), WhaleEntityRender::new);
@@ -144,8 +138,6 @@ public class ClientSetupEvent implements IUtilityHelper{
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SPARK_FISH.get(), SparkFishEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WOOD_FISH.get(), WoodFishRender::new);
         RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LAVA_EEL.get(), LavaEelEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GAZELLE.get(), GazelleEntityRender::new);
-        RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderRender::new);
 
         RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM_PLANT.get(), RenderType.cutoutMipped());
@@ -324,7 +316,7 @@ public class ClientSetupEvent implements IUtilityHelper{
                 	assert stack.getTag() != null;
                 	//Inefficiency at its finest
                 	ClientSetupEvent.def = false;
-                	return stack != null && stack.getTag().contains("entity") && ClientSetupEvent.def == false ? 1.0F : 0.0F;
+                	return stack != null && stack.getTag().contains("entity") && !ClientSetupEvent.def ? 1.0F : 0.0F;
          });
         ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("apple_cow"),
                 (stack, world, living) -> {

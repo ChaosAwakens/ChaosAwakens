@@ -26,36 +26,29 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-/**
- * @author invalid2
- */
 public class StinkBugEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    /**
-     * @param type
-     * @param worldIn
-     */
-    public StinkBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
-        super(type, worldIn);
-    }
+	public StinkBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+		super(type, worldIn);
+	}
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 8)
-                .add(Attributes.MOVEMENT_SPEED, 0.15D)
-                .add(Attributes.FOLLOW_RANGE, 8);
-    }
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 8)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.FOLLOW_RANGE, 8);
+	}
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walking_animation", true));
-            return PlayState.CONTINUE;
-        }
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walking_animation", true));
+			return PlayState.CONTINUE;
+		}
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.idle_animation", true));
-        return PlayState.CONTINUE;
-    }
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.idle_animation", true));
+		return PlayState.CONTINUE;
+	}
 
     @Override
     protected void registerGoals() {
@@ -81,13 +74,11 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
         return null;
     }
 
-    public boolean hurt(DamageSource damageSource, float p_70097_2_) {
-        if (!damageSource.isMagic() && damageSource.getDirectEntity() instanceof LivingEntity) {
-            LivingEntity livingentity = (LivingEntity)damageSource.getDirectEntity();
-            if (!damageSource.isExplosion()) {
-                livingentity.addEffect(new EffectInstance(new EffectInstance(Effects.CONFUSION, 200, 0)));
-            }
-        }
-        return super.hurt(damageSource, p_70097_2_);
-    }
+	public boolean hurt(DamageSource damageSource, float damage) {
+		if (!damageSource.isMagic() && damageSource.getDirectEntity() instanceof LivingEntity) {
+			LivingEntity livingentity = (LivingEntity) damageSource.getDirectEntity();
+			if (!damageSource.isExplosion()) livingentity.addEffect(new EffectInstance(new EffectInstance(Effects.CONFUSION, 200, 0)));
+		}
+		return super.hurt(damageSource, damage);
+	}
 }

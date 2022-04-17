@@ -37,13 +37,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- *
- *
- * @author Meme Man
- *
- */
-
 public class WhaleEntity extends WaterMobEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     protected MovementController.Action operation = MovementController.Action.WAIT;
@@ -308,5 +301,4 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return this.isBaby() ? sizeIn.height * 0.95F : 1.3F; //Just, don't even ask
     }
-
 }

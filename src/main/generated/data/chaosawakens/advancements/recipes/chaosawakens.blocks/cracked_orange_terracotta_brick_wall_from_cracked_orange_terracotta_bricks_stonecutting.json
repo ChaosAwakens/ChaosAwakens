@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cracked_orange_terracotta_brick_wall_from_cracked_orange_terracotta_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_cracked_orange_terracotta_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cracked_orange_terracotta_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cracked_orange_terracotta_brick_wall_from_cracked_orange_terracotta_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cracked_orange_terracotta_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

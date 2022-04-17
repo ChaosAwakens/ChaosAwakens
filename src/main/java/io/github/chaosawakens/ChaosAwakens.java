@@ -4,11 +4,9 @@ import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.CABlockItemColors;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
-import io.github.chaosawakens.common.UpdateHandler;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.integration.TheOneProbePlugin;
-import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.*;
@@ -106,15 +104,12 @@ public class ChaosAwakens {
 		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
 		forgeBus.addListener(MiscEventHandler::onRegisterCommandEvent);
 		forgeBus.addListener(MiscEventHandler::onEntityJoin);
+		forgeBus.addListener(MiscEventHandler::onPlayerLoggedIn);
+		forgeBus.addListener(GiantEventHandler::onEntityJoin);
 		forgeBus.addListener(EventPriority.NORMAL, CAVanillaCompat::registerFurnaceFuel);
-		forgeBus.addListener(LoginEventHandler::onPlayerLogin);
 		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);
 		forgeBus.addListener(EventPriority.LOWEST, MiscEventHandler::onMobDrops);
 		forgeBus.register(this);
-
-		//Check for updates
-		if (CAConfig.COMMON.showUpdateMessage.get())
-			UpdateHandler.init();
 	}
 
 	public static ResourceLocation prefix(String name) {
@@ -139,7 +134,7 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CATagProvider.CABlockTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAEntityTypeTagProvider(dataGenerator, existing));
-			dataGenerator.addProvider(new CATagProvider.CAFluidTagProvider(dataGenerator, existing));
+//			dataGenerator.addProvider(new CATagProvider.CAFluidTagProvider(dataGenerator, existing));
 		}
 	}
 

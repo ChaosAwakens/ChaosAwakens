@@ -14,6 +14,7 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class GoldenCarrotPigEntityRender extends GeoEntityRenderer<GoldenCarrotPigEntity> {
+
     public GoldenCarrotPigEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new GoldenCarrotPigModel());
         this.addLayer(new GoldenCarrotPigSaddleLayer(this));

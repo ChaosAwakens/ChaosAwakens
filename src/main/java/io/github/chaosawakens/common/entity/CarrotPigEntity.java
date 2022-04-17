@@ -86,7 +86,7 @@ public class CarrotPigEntity extends PigEntity implements IAnimatable {
     
     @OnlyIn(Dist.CLIENT)
     public Vector3d getLeashOffset() {
-       return new Vector3d(0.0D, (double)(0.6F * this.getEyeHeight()), (double)(this.getBbWidth() * 0.4F));
+       return new Vector3d(0.0D, (0.6F * this.getEyeHeight()), (this.getBbWidth() * 0.4F));
     }
 
     public boolean isFood(ItemStack stack) {

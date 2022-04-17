@@ -645,7 +645,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_pig", chaosRL("fossilised_pig"));
 		this.cubeAll("fossilised_phantom", chaosRL("fossilised_phantom"));
 		this.cubeAll("fossilised_pillager", chaosRL("fossilised_pillager"));
-		this.cubeAll("fossilised_polar_bear", chaosRL("fossilised_polar_bear"));
+		this.cubeAll("frozen_polar_bear", chaosRL("frozen_polar_bear"));
 		this.cubeAll("fossilised_pufferfish", chaosRL("fossilised_pufferfish"));
 		this.cubeAll("fossilised_rabbit", chaosRL("fossilised_rabbit"));
 		this.cubeAll("fossilised_ravager", chaosRL("fossilised_ravager"));
@@ -654,10 +654,10 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_skeleton", chaosRL("fossilised_skeleton"));
 		this.cubeAll("fossilised_skeleton_horse", chaosRL("fossilised_skeleton_horse"));
 		this.cubeAll("fossilised_slime", chaosRL("fossilised_slime"));
-		this.cubeAll("fossilised_snow_golem", chaosRL("fossilised_snow_golem"));
+		this.cubeAll("frozen_snow_golem", chaosRL("frozen_snow_golem"));
 		this.cubeAll("fossilised_spider", chaosRL("fossilised_spider"));
 		this.cubeAll("fossilised_squid", chaosRL("fossilised_squid"));
-		this.cubeAll("fossilised_stray", chaosRL("fossilised_stray"));
+		this.cubeAll("frozen_stray", chaosRL("frozen_stray"));
 		this.cubeAll("fossilised_tropical_fish", chaosRL("fossilised_tropical_fish"));
 		this.cubeAll("fossilised_turtle", chaosRL("fossilised_turtle"));
 		this.cubeAll("fossilised_villager", chaosRL("fossilised_villager"));

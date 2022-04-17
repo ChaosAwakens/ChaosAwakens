@@ -15,7 +15,7 @@
             "temperature": 0.6,
             "humidity": 1.2
           },
-          "biome": "chaosawakens:mining_biome"
+          "biome": "chaosawakens:dense_mountain"
         },
         {
           "parameters": {

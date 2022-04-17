@@ -70,12 +70,9 @@ public class CATags {
 	public static class EntityTypes {
 		public static final ITag.INamedTag<EntityType<?>> CRITTER_CAGE_BLACKLISTED = EntityTypeTags.bind("critter_cage_blacklisted");
 	}
-
 	public static class Fluids {
 		public static ITag.INamedTag<Fluid> tag(String name) {
 			return FluidTags.bind(ChaosAwakens.MODID + ":" + name);
 		}
-
-		public static final ITag.INamedTag<Fluid> MINERS_DREAM_MINEABLE = tag("miners_dream_mineable");
 	}
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:yellow_terracotta_brick_slab_from_yellow_terracotta_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_yellow_terracotta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:yellow_terracotta"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:yellow_terracotta_brick_slab_from_yellow_terracotta_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_yellow_terracotta",
+      "has_the_recipe"
+    ]
+  ]
+}

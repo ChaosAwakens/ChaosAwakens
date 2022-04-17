@@ -10,17 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-/**
- * @author invalid2
- */
 public class CornTopBlock extends CropTopPlantBlock {
-	
-	/**
-	 * @param properties
-	 * @param direction
-	 * @param shape
-	 * @param growPerTickProbability
-	 */
 	public CornTopBlock(Properties properties, Direction direction, VoxelShape shape, double growPerTickProbability) {
 		super(properties, direction, shape, growPerTickProbability);
 	}

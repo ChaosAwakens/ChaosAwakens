@@ -1,11 +1,24 @@
 {
-  "type": "jeed:effect_provider",
-  "effect":{
-    "id": "minecraft:slowness"
-  },
-  "providers": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "chaosawakens:stray_critter_cage"
+      "conditions": [
+        {
+          "modid": "jeed",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "jeed:effect_provider",
+        "effect":{
+          "id": "minecraft:slowness"
+        },
+        "providers": [
+          {
+            "item": "chaosawakens:stray_critter_cage"
+          }
+        ]
+      }
     }
   ]
 }

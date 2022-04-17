@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cracked_magenta_terracotta_brick_wall_from_magenta_terracotta_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_magenta_terracotta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:magenta_terracotta"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cracked_magenta_terracotta_brick_wall_from_magenta_terracotta_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magenta_terracotta",
+      "has_the_recipe"
+    ]
+  ]
+}

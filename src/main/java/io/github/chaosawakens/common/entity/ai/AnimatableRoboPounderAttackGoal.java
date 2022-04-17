@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
-import io.github.chaosawakens.common.entity.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;

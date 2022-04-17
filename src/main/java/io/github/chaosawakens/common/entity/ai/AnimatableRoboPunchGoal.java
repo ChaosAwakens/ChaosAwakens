@@ -6,7 +6,7 @@ import java.util.EnumSet;
 import java.util.function.BiFunction;
 
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
-import io.github.chaosawakens.common.entity.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,17 +1,30 @@
 {
-  "type": "jeed:effect_provider",
-  "effect":{
-    "id": "minecraft:slow_falling"
-  },
-  "providers": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "chaosawakens:peacock_feather_boots"
-    },
-    {
-      "item": "chaosawakens:royal_guardian_boots"
-    },
-    {
-      "item": "chaosawakens:queen_scale_boots"
+      "conditions": [
+        {
+          "modid": "jeed",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "jeed:effect_provider",
+        "effect":{
+          "id": "minecraft:slow_falling"
+        },
+        "providers": [
+          {
+            "item": "chaosawakens:peacock_feather_boots"
+          },
+          {
+            "item": "chaosawakens:royal_guardian_boots"
+          },
+          {
+            "item": "chaosawakens:queen_scale_boots"
+          }
+        ]
+      }
     }
   ]
 }

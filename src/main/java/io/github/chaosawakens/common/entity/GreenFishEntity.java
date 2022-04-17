@@ -37,15 +37,15 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 
 	public GreenFishEntity(EntityType<? extends AbstractFishEntity> type, World world) {
 		super(type, world);
-		this.noCulling = true;
-		this.setPathfindingMalus(PathNodeType.WATER, 1.0F);
 		this.moveControl = new GreenFishEntity.MoveHelperController(this);
+		this.setPathfindingMalus(PathNodeType.WATER, 1.0F);
+		this.noCulling = true;
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 8.0D)
-				.add(Attributes.MOVEMENT_SPEED,1.3D)
+				.add(Attributes.MOVEMENT_SPEED, 1.3D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.25D)
 				.add(Attributes.FOLLOW_RANGE, 4.0D);
 	}
@@ -117,7 +117,7 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 				double d2 = this.wantedZ - this.fish.getZ();
 				if (d1 != 0.0D) {
 					double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double)this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
 
 				if (d0 != 0.0D || d2 != 0.0D) {
@@ -246,5 +246,4 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 	protected float getStandingEyeHeight(Pose pose, EntitySize size) {
 		return this.isBaby() ? size.height * 0.45F : 0.6F;
 	}
-
 }

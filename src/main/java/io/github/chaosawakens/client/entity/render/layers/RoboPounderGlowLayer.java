@@ -3,7 +3,7 @@ package io.github.chaosawakens.client.entity.render.layers;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.entity.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -21,10 +21,9 @@ public class RoboPounderGlowLayer extends GeoLayerRenderer<RoboPounderEntity>{
 
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, RoboPounderEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {		
-		if (entityLivingBaseIn.isDeadOrDying()) {
+		if (!entityLivingBaseIn.isDeadOrDying()) {
 			RenderType renderType =  RenderType.eyes(GLOW);
             this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, renderType, matrixStackIn, bufferIn, bufferIn.getBuffer(renderType), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
 		}
 	}
-
 }

@@ -164,15 +164,13 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 				double d2 = this.wantedZ - this.fish.getZ();
 				if (d1 != 0.0D) {
 					double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double)this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
-
 				if (d0 != 0.0D || d2 != 0.0D) {
 					float f1 = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
 					this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
 					this.fish.yBodyRot = this.fish.yRot;
 				}
-
 			} else {
 				this.fish.setSpeed(0.0F);
 			}
@@ -230,24 +228,24 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 	}
 
 	static class GoToWaterGoal extends Goal {
-		private final CreatureEntity mob;
+		private final CreatureEntity entity;
 		private double wantedX;
 		private double wantedY;
 		private double wantedZ;
 		private final double speedModifier;
 		private final World level;
 
-		public GoToWaterGoal(CreatureEntity p_i48910_1_, double p_i48910_2_) {
-			this.mob = p_i48910_1_;
-			this.speedModifier = p_i48910_2_;
-			this.level = p_i48910_1_.level;
+		public GoToWaterGoal(CreatureEntity entity, double speedModifier) {
+			this.entity = entity;
+			this.speedModifier = speedModifier;
+			this.level = entity.level;
 			this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 		}
 
 		public boolean canUse() {
 			if (!this.level.isDay()) {
 				return false;
-			} else if (this.mob.isInWater()) {
+			} else if (this.entity.isInWater()) {
 				return false;
 			} else {
 				Vector3d vector3d = this.getWaterPos();
@@ -263,17 +261,17 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		}
 
 		public boolean canContinueToUse() {
-			return !this.mob.getNavigation().isDone();
+			return !this.entity.getNavigation().isDone();
 		}
 
 		public void start() {
-			this.mob.getNavigation().moveTo(this.wantedX, this.wantedY, this.wantedZ, this.speedModifier);
+			this.entity.getNavigation().moveTo(this.wantedX, this.wantedY, this.wantedZ, this.speedModifier);
 		}
 
 		@Nullable
 		private Vector3d getWaterPos() {
-			Random random = this.mob.getRandom();
-			BlockPos blockpos = this.mob.blockPosition();
+			Random random = this.entity.getRandom();
+			BlockPos blockpos = this.entity.blockPosition();
 
 			for(int i = 0; i < 10; ++i) {
 				BlockPos blockpos1 = blockpos.offset(random.nextInt(20) - 10, 2 - random.nextInt(8), random.nextInt(20) - 10);

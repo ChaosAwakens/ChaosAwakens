@@ -15,6 +15,7 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class CarrotPigEntityRender extends GeoEntityRenderer<CarrotPigEntity> {
+	
     public CarrotPigEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new CarrotPigModel());
         this.addLayer(new CarrotPigSaddleLayer(this));
