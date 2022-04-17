@@ -170,7 +170,8 @@ public class CAItems {
     //CARROT PIG
     public static final RegistryObject<BeetrootOnAStickItem> BEETROOT_ON_A_STICK = ITEMS.register("beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(120).tab(CAItemGroups.ITEMS), 3));
     public static final RegistryObject<BeetrootOnAStickItem> CRYSTAL_BEETROOT_ON_A_STICK = ITEMS.register("crystal_beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(80).tab(CAItemGroups.ITEMS), 5));
-    
+    public static final RegistryObject<BeetrootOnAStickItem> GOLDEN_BEETROOT_ON_A_STICK = ITEMS.register("golden_beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(150).tab(CAItemGroups.ITEMS), 8));
+
     //CRITTER CAGES
     public static final RegistryObject<CritterCageItem> CRITTER_CAGE = ITEMS.register("critter_cage", () -> new CritterCageItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
     

@@ -64,7 +64,12 @@ public class DefossilizerContainer extends Container {
         this.addDataSlots(fields);
     }
 
-    public  int getProgressArrowScale() {
+    public int getProgressArrowScale() {
+        int progress = fields.get(0);
+        return progress != 0 ? progress * 24 / DefossilizerTileEntity.WORK_TIME : 0;
+    }
+    
+    public int getLitScale() {
         int progress = fields.get(0);
         return progress != 0 ? progress * 24 / DefossilizerTileEntity.WORK_TIME : 0;
     }

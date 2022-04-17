@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.CrystalCarrotPigEntityModel;
+import io.github.chaosawakens.client.entity.render.layers.CrystalCarrotPigSaddleLayer;
 import io.github.chaosawakens.common.entity.CrystalCarrotPigEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -16,6 +17,7 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 public class CrystalCarrotPigEntityRender extends GeoEntityRenderer<CrystalCarrotPigEntity> {
     public CrystalCarrotPigEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new CrystalCarrotPigEntityModel());
+        this.addLayer(new CrystalCarrotPigSaddleLayer(this));
         this.shadowRadius = 0.2F;
     }
 

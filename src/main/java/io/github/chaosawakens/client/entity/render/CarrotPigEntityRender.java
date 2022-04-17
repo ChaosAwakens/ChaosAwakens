@@ -1,9 +1,11 @@
 package io.github.chaosawakens.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.CarrotPigModel;
+import io.github.chaosawakens.client.entity.render.layers.CarrotPigSaddleLayer;
 import io.github.chaosawakens.common.entity.CarrotPigEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -15,6 +17,7 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 public class CarrotPigEntityRender extends GeoEntityRenderer<CarrotPigEntity> {
     public CarrotPigEntityRender(EntityRendererManager renderManager) {
         super(renderManager, new CarrotPigModel());
+        this.addLayer(new CarrotPigSaddleLayer(this));
         this.shadowRadius = 0.2F;
     }
 

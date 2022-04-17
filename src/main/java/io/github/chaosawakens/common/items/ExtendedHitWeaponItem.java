@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.items;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 
 
@@ -26,29 +27,36 @@ import net.minecraftforge.common.util.Lazy;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.shadowed.fasterxml.jackson.databind.JavaType;
+import software.bernie.shadowed.fasterxml.jackson.databind.ext.Java7SupportImpl;
 
 import java.util.UUID;
+
+import javax.tools.JavaCompiler;
 
 public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAnimatable, IUtilityHelper {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
     protected static final UUID ATTACK_REACH_MODIFIER = UUID.fromString("532618EB-72B6-4C63-AFE5-F407227FDFB1");
     public AnimationFactory factory = new AnimationFactory(this);
-    private Multimap<Attribute, AttributeModifier> attributeModifiers;
+ //   private Multimap<Attribute, AttributeModifier> attributeModifiers;
     public final Lazy<Multimap<Attribute, AttributeModifier>> LAZY = Lazy.of(() ->  {      
+    	Multimap<Attribute, AttributeModifier> attributeModifiers = ArrayListMultimap.create();
     	return attributeModifiers;
     });
 
     public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
         float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
+        Multimap<Attribute, AttributeModifier> attributeModifierss = LAZY.get();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder(); 
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
         
-//        builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(ATTACK_REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
-        
+        if (ForgeMod.REACH_DISTANCE.isPresent()) {
+            builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(ATTACK_REACH_MODIFIER, "Weapon modifier", reachDistance, AttributeModifier.Operation.ADDITION));
+        }
         builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", knockBack, AttributeModifier.Operation.ADDITION));
-        attributeModifiers = builder.build();
+        attributeModifierss = builder.build();
     } 
 
     @Override

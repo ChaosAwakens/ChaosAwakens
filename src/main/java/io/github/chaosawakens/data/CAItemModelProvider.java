@@ -43,11 +43,78 @@ public class CAItemModelProvider extends ItemModelProvider {
     public String getName() {
         return ChaosAwakens.MODNAME + " Item models";
     }
+    
+    public ResourceLocation loc(String name) {
+        return new ResourceLocation(name);
+    }
 
     private void generate(final Collection<RegistryObject<Item>> items) {
         final ModelFile parentGenerated = getExistingFile(mcLoc("item/generated"));
         final ExistingModelFile parentHandheld = getExistingFile(mcLoc("item/handheld"));
         final ExistingModelFile parentHandheldRod = getExistingFile(mcLoc("item/handheld_rod"));
+        final ModelFile appleCow = getExistingFile(loc("chaosawakens:item/apple_cow_critter_cage"));
+        final ModelFile defaultt = getExistingFile(loc("chaosawakens:item/def_critter_cage"));
+        final ModelFile bee = getExistingFile(loc("chaosawakens:item/bee_critter_cage"));
+        final ModelFile bird = getExistingFile(loc("chaosawakens:item/bird_critter_cage"));
+        final ModelFile carrotPig = getExistingFile(loc("chaosawakens:item/carrot_pig_critter_cage"));
+        final ModelFile cat = getExistingFile(loc("chaosawakens:item/cat_critter_cage"));
+        final ModelFile caveSpider = getExistingFile(loc("chaosawakens:item/cave_spider_critter_cage"));
+        final ModelFile cow = getExistingFile(loc("chaosawakens:item/cow_critter_cage"));
+        final ModelFile creeper = getExistingFile(loc("chaosawakens:item/creeper_critter_cage"));
+        final ModelFile donkey = getExistingFile(loc("chaosawakens:item/donkey_critter_cage"));
+        final ModelFile drowned = getExistingFile(loc("chaosawakens:item/drowned_critter_cage"));
+        final ModelFile enderman = getExistingFile(loc("chaosawakens:item/enderman_critter_cage"));
+        final ModelFile fox = getExistingFile(loc("chaosawakens:item/fox_critter_cage"));
+        final ModelFile horse = getExistingFile(loc("chaosawakens:item/horse_critter_cage"));
+        final ModelFile husk = getExistingFile(loc("chaosawakens:item/husk_critter_cage"));
+        final ModelFile llama = getExistingFile(loc("chaosawakens:item/llama_critter_cage"));
+        final ModelFile mooshroom = getExistingFile(loc("chaosawakens:item/mooshroom_critter_cage"));
+        final ModelFile ostrich = getExistingFile(loc("chaosawakens:item/ostrich_critter_cage"));
+        final ModelFile panda = getExistingFile(loc("chaosawakens:item/panda_critter_cage"));
+        final ModelFile pig = getExistingFile(loc("chaosawakens:item/pig_critter_cage"));
+        final ModelFile piraporu = getExistingFile(loc("chaosawakens:item/piraporu_critter_cage"));
+        final ModelFile polarBear = getExistingFile(loc("chaosawakens:item/polar_bear_critter_cage"));
+        final ModelFile rabbit = getExistingFile(loc("chaosawakens:item/rabbit_critter_cage"));
+        final ModelFile sheep = getExistingFile(loc("chaosawakens:item/sheep_critter_cage"));
+        final ModelFile skeleton = getExistingFile(loc("chaosawakens:item/skeleton_critter_cage"));
+        final ModelFile slime = getExistingFile(loc("chaosawakens:item/slime_critter_cage"));
+        final ModelFile spider = getExistingFile(loc("chaosawakens:item/spider_critter_cage"));
+        final ModelFile stray = getExistingFile(loc("chaosawakens:item/stray_critter_cage"));
+        final ModelFile wolf = getExistingFile(loc("chaosawakens:item/wolf_critter_cage"));
+        final ModelFile zombieVillager = getExistingFile(loc("chaosawakens:item/zombie_villager_critter_cage"));
+        final ModelFile zombie = getExistingFile(loc("chaosawakens:item/zombie_critter_cage"));
+        
+        final ResourceLocation defaultRL = new ResourceLocation("def");
+        final ResourceLocation appleCowRL = new ResourceLocation("apple_cow");
+        final ResourceLocation beeRL = new ResourceLocation("bee");
+        final ResourceLocation birdRL = new ResourceLocation("bird");
+        final ResourceLocation carrotPigRL = new ResourceLocation("carrot_pig");
+        final ResourceLocation catRL = new ResourceLocation("cat");
+        final ResourceLocation caveSpiderRL = new ResourceLocation("cave_spider");
+        final ResourceLocation cowRL = new ResourceLocation("cow");
+        final ResourceLocation creeperRL = new ResourceLocation("creeper");
+        final ResourceLocation donkeyRL = new ResourceLocation("donkey");
+        final ResourceLocation drownedRL = new ResourceLocation("drowned");
+        final ResourceLocation endermanRL = new ResourceLocation("enderman");
+        final ResourceLocation foxRL = new ResourceLocation("fox");
+        final ResourceLocation horseRL = new ResourceLocation("horse");
+        final ResourceLocation huskRL = new ResourceLocation("husk");
+        final ResourceLocation llamaRL = new ResourceLocation("llama");
+        final ResourceLocation mooshroomRL = new ResourceLocation("mooshroom");
+        final ResourceLocation ostrichRL = new ResourceLocation("ostrich");
+        final ResourceLocation pandaRL = new ResourceLocation("panda");
+        final ResourceLocation pigRL = new ResourceLocation("pig");
+        final ResourceLocation piraporuRL = new ResourceLocation("piraporu");
+        final ResourceLocation polarBearRL = new ResourceLocation("polar_bear");
+        final ResourceLocation rabbitRL = new ResourceLocation("rabbit");
+        final ResourceLocation sheepRL = new ResourceLocation("sheep");
+        final ResourceLocation skeletonRL = new ResourceLocation("skeleton");
+        final ResourceLocation slimeRL = new ResourceLocation("slime");
+        final ResourceLocation spiderRL = new ResourceLocation("spider");
+        final ResourceLocation strayRL = new ResourceLocation("stray");
+        final ResourceLocation wolfRL = new ResourceLocation("wolf");
+        final ResourceLocation zombieVillagerRL = new ResourceLocation("zombie_villager");
+        final ResourceLocation zombieRL = new ResourceLocation("zombie");
 
         for (RegistryObject<Item> item : items) {
             String name = item.getId().getPath();
@@ -63,7 +130,7 @@ public class CAItemModelProvider extends ItemModelProvider {
              */
 
             if (item.getId().getPath().contains("critter_cage")) {
-            	getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/critter_cages/" + name.replaceAll("_critter_cage", ""));
+            	getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/critter_cages/" + name.replaceAll("_critter_cage", "")).override().predicate(appleCowRL, 1.0F).model(appleCow).end().override().predicate(defaultRL, 1.0F).model(defaultt).end().override().predicate(beeRL, 1.0F).model(bee).end().override().predicate(birdRL, 1.0F).model(bird).end().override().predicate(carrotPigRL, 1.0F).model(carrotPig).end().override().predicate(catRL, 1.0F).model(cat).end().override().predicate(caveSpiderRL, 1.0F).model(caveSpider).end().override().predicate(cowRL, 1.0F).model(cow).end().override().predicate(creeperRL, 1.0F).model(creeper).end().override().predicate(donkeyRL, 1.0F).model(donkey).end().override().predicate(drownedRL, 1.0F).model(drowned).end().override().predicate(endermanRL, 1.0F).model(enderman).end().override().predicate(foxRL, 1.0F).model(fox).end().override().predicate(horseRL, 1.0F).model(horse).end().override().predicate(huskRL, 1.0F).model(husk).end().override().predicate(llamaRL, 1.0F).model(llama).end().override().predicate(mooshroomRL, 1.0F).model(mooshroom).end().override().predicate(ostrichRL, 1.0F).model(ostrich).end().override().predicate(pandaRL, 1.0F).model(panda).end().override().predicate(pigRL, 1.0F).model(pig).end().override().predicate(piraporuRL, 1.0F).model(piraporu).end().override().predicate(polarBearRL, 1.0F).model(polarBear).end().override().predicate(rabbitRL, 1.0F).model(rabbit).end().override().predicate(sheepRL, 1.0F).model(sheep).end().override().predicate(skeletonRL, 1.0F).model(skeleton).end().override().predicate(slimeRL, 1.0F).model(slime).end().override().predicate(spiderRL, 1.0F).model(spider).end().override().predicate(strayRL, 1.0F).model(stray).end().override().predicate(wolfRL, 1.0F).model(wolf).end().override().predicate(zombieVillagerRL, 1.0F).model(zombieVillager).end().override().predicate(zombieRL, 1.0F).model(zombie).end();
             }
             else if (item.getId().getPath().contains("_spawn_egg")) {
                 getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/spawn_eggs/" + name.replaceAll("_spawn_egg", ""));

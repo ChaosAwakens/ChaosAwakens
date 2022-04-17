@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:beetroot_on_a_stick"
+    ]
+  },
+  "criteria": {
+    "has_beetroot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:beetroot"
+          }
+        ]
+      }
+    },
+    "has_forge:rods/wooden": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:rods/wooden"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:beetroot_on_a_stick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beetroot",
+      "has_forge:rods/wooden",
+      "has_the_recipe"
+    ]
+  ]
+}

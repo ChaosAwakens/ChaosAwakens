@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.model.EnchantedGoldenCarrotPigModel;
+import io.github.chaosawakens.client.entity.render.layers.EnchantedGoldenCarrotPigSaddleLayer;
 import io.github.chaosawakens.client.entity.render.layers.PigGlintLayer;
 import io.github.chaosawakens.common.entity.EnchantedGoldenCarrotPigEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -18,6 +19,7 @@ public class EnchantedGoldenCarrotPigEntityRender extends GeoEntityRenderer<Ench
         super(renderManager, new EnchantedGoldenCarrotPigModel());
         this.shadowRadius = 0.2F;
         this.addLayer(new PigGlintLayer(this));
+        this.addLayer(new EnchantedGoldenCarrotPigSaddleLayer(this));
     }
 
     @Override

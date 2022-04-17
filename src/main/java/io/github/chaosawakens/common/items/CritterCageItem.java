@@ -50,15 +50,11 @@ public class CritterCageItem extends Item implements IUtilityHelper{
     @Override
     public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
     	stack = playerIn.getMainHandItem();
-        ItemStack stackFill = new ItemStack(this);
+        ItemStack stackFill = this.getDefaultInstance();
         if (!capture(stackFill, playerIn, target)) return ActionResultType.FAIL;
+    	playerIn.swing(hand);
         
         if (stack.getCount() == 1) {
-        	stack = stackFill;
-        	playerIn.setItemInHand(hand, stack);
-        }
-        
-        if (stackFill == stack) {
         	return ActionResultType.FAIL;
         }
    
@@ -113,7 +109,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
     }
 
     public boolean containsEntity(ItemStack stack) {
-        return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity") || !stack.isEmpty() && stack.hasTag() && stack.getItem().getName(stack).toString().contains("(");
+        return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity");
     }
 
     @Override

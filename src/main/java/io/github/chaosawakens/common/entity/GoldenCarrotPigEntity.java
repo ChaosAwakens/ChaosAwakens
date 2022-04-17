@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -9,7 +10,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,9 +28,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GoldenCarrotPigEntity extends AnimalEntity implements IAnimatable {
+public class GoldenCarrotPigEntity extends PigEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CARROT, Items.POTATO, Items.BEETROOT);
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.GOLDEN_CARROT, CAItems.GOLDEN_POTATO.get(), CAItems.GOLDEN_BEETROOT.get());
 
     public GoldenCarrotPigEntity(EntityType<? extends GoldenCarrotPigEntity> type, World worldIn) {
         super(type, worldIn);
@@ -61,7 +61,7 @@ public class GoldenCarrotPigEntity extends AnimalEntity implements IAnimatable {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(Items.CARROT_ON_A_STICK), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.GOLDEN_BEETROOT_ON_A_STICK.get()), false));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));

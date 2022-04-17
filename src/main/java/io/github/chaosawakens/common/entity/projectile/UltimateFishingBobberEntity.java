@@ -1,17 +1,11 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.items.UltimateFishingRodItem;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -23,6 +17,7 @@ import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.*;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -43,6 +38,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.FMLPlayMessages;
@@ -50,13 +46,17 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CALootTables;
+
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {	
-	
+public class UltimateFishingBobberEntity extends FishingBobberEntity implements IEntityAdditionalSpawnData {		
 	private final Random syncronizedRandom = new Random();
 	private int outOfLiquidTime;
 	private boolean biting;
@@ -109,8 +109,6 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		this.outOfLiquidTime = buf.readInt();
 		this.biting = buf.readBoolean();
 	}
-
-
 
 	public UltimateFishingBobberEntity(World w, PlayerEntity p, int luck, int speed) {
 		super(p, w, luck, speed);
@@ -214,8 +212,8 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 			float f = 0.0F;
 			BlockPos blockpos = this.blockPosition();
 			FluidState fluidstate = this.level.getFluidState(blockpos);
-			if (fluidstate.is(FluidTags.LAVA) || fluidstate.is(FluidTags.WATER)) {
-				f = fluidstate.getHeight(this.level, blockpos);
+			if (fluidstate.is(FluidTags.LAVA)) {
+				f = fluidstate.getHeight(this.level, blockpos) * fluidstate.getHeight(this.level, blockpos);
 				this.fluid = fluidstate;
 			}
 

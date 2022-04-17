@@ -1,192 +1,192 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "chaosawakens:item/critter_cages/critter_cage"
   },
   "overrides": [
     {
       "predicate": {
-        "default": 1
-      },
-      "model": "chaosawakens:item/default_critter_cage"
-    },
-    {
-      "predicate": {
-        "apple_cow": 1
+        "minecraft:apple_cow": 1.0
       },
       "model": "chaosawakens:item/apple_cow_critter_cage"
     },
     {
       "predicate": {
-        "bee": 1
+        "minecraft:def": 1.0
+      },
+      "model": "chaosawakens:item/def_critter_cage"
+    },
+    {
+      "predicate": {
+        "minecraft:bee": 1.0
       },
       "model": "chaosawakens:item/bee_critter_cage"
     },
     {
       "predicate": {
-        "bird": 1
+        "minecraft:bird": 1.0
       },
       "model": "chaosawakens:item/bird_critter_cage"
     },
     {
       "predicate": {
-        "carrot_pig": 1
+        "minecraft:carrot_pig": 1.0
       },
       "model": "chaosawakens:item/carrot_pig_critter_cage"
     },
     {
       "predicate": {
-        "cat": 1
+        "minecraft:cat": 1.0
       },
       "model": "chaosawakens:item/cat_critter_cage"
     },
     {
       "predicate": {
-        "cave_spider": 1
+        "minecraft:cave_spider": 1.0
       },
       "model": "chaosawakens:item/cave_spider_critter_cage"
     },
     {
       "predicate": {
-        "cow": 1
+        "minecraft:cow": 1.0
       },
       "model": "chaosawakens:item/cow_critter_cage"
     },
     {
       "predicate": {
-        "creeper": 1
+        "minecraft:creeper": 1.0
       },
       "model": "chaosawakens:item/creeper_critter_cage"
     },
     {
       "predicate": {
-        "donkey": 1
+        "minecraft:donkey": 1.0
       },
       "model": "chaosawakens:item/donkey_critter_cage"
     },
     {
       "predicate": {
-        "drowned": 1
+        "minecraft:drowned": 1.0
       },
       "model": "chaosawakens:item/drowned_critter_cage"
     },
     {
       "predicate": {
-        "enderman": 1
+        "minecraft:enderman": 1.0
       },
       "model": "chaosawakens:item/enderman_critter_cage"
     },
     {
       "predicate": {
-        "fox": 1
+        "minecraft:fox": 1.0
       },
       "model": "chaosawakens:item/fox_critter_cage"
     },
     {
       "predicate": {
-        "horse": 1
+        "minecraft:horse": 1.0
       },
       "model": "chaosawakens:item/horse_critter_cage"
     },
     {
       "predicate": {
-        "husk": 1
+        "minecraft:husk": 1.0
       },
       "model": "chaosawakens:item/husk_critter_cage"
     },
     {
       "predicate": {
-        "llama": 1
+        "minecraft:llama": 1.0
       },
       "model": "chaosawakens:item/llama_critter_cage"
     },
     {
       "predicate": {
-        "mooshroom": 1
+        "minecraft:mooshroom": 1.0
       },
       "model": "chaosawakens:item/mooshroom_critter_cage"
     },
     {
       "predicate": {
-        "ostrich": 1
+        "minecraft:ostrich": 1.0
       },
       "model": "chaosawakens:item/ostrich_critter_cage"
     },
     {
       "predicate": {
-        "panda": 1
+        "minecraft:panda": 1.0
       },
       "model": "chaosawakens:item/panda_critter_cage"
     },
     {
       "predicate": {
-        "pig": 1
+        "minecraft:pig": 1.0
       },
       "model": "chaosawakens:item/pig_critter_cage"
     },
     {
       "predicate": {
-        "piraporu": 1
+        "minecraft:piraporu": 1.0
       },
       "model": "chaosawakens:item/piraporu_critter_cage"
     },
     {
       "predicate": {
-        "polar_bear": 1
+        "minecraft:polar_bear": 1.0
       },
       "model": "chaosawakens:item/polar_bear_critter_cage"
     },
     {
       "predicate": {
-        "rabbit": 1
+        "minecraft:rabbit": 1.0
       },
       "model": "chaosawakens:item/rabbit_critter_cage"
     },
     {
       "predicate": {
-        "sheep": 1
+        "minecraft:sheep": 1.0
       },
       "model": "chaosawakens:item/sheep_critter_cage"
     },
     {
       "predicate": {
-        "skeleton": 1
+        "minecraft:skeleton": 1.0
       },
       "model": "chaosawakens:item/skeleton_critter_cage"
     },
     {
       "predicate": {
-        "slime": 1
+        "minecraft:slime": 1.0
       },
       "model": "chaosawakens:item/slime_critter_cage"
     },
     {
       "predicate": {
-        "spider": 1
+        "minecraft:spider": 1.0
       },
       "model": "chaosawakens:item/spider_critter_cage"
     },
     {
       "predicate": {
-        "stray": 1
+        "minecraft:stray": 1.0
       },
       "model": "chaosawakens:item/stray_critter_cage"
     },
     {
       "predicate": {
-        "wolf": 1
+        "minecraft:wolf": 1.0
       },
       "model": "chaosawakens:item/wolf_critter_cage"
     },
     {
       "predicate": {
-        "zombie_villager": 1
+        "minecraft:zombie_villager": 1.0
       },
       "model": "chaosawakens:item/zombie_villager_critter_cage"
     },
     {
       "predicate": {
-        "zombie": 1
+        "minecraft:zombie": 1.0
       },
       "model": "chaosawakens:item/zombie_critter_cage"
     }

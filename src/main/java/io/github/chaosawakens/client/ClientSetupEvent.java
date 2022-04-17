@@ -49,11 +49,11 @@ public class ClientSetupEvent implements IUtilityHelper{
         	if (entity == null) return;
         	
         	if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-        		float red = event.getRed();
-        		float green = event.getGreen();
-        		float blue = event.getBlue();
+    //    		float red = event.getRed();
+     //   		float green = event.getGreen();
+     //   		float blue = event.getBlue();
         		
-        		final float[] fogColors = {red / 0, green / 0, blue / 0};
+        		final float[] fogColors = {1, 1, 1};
         		
         		event.setRed(fogColors[0]);
         		event.setGreen(fogColors[1]);
@@ -83,7 +83,7 @@ public class ClientSetupEvent implements IUtilityHelper{
         	if (player == null) return;
         	
         	if (player.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-        		IUtilityHelper.addParticles(player.level, ParticleTypes.WHITE_ASH, player.getX(), player.getEyeY(), player.getZ(), 50, player.getEyeY(), 50, 2);
+        		IUtilityHelper.addParticles(player.level, ParticleTypes.WHITE_ASH, player.getX(), player.getEyeY(), player.getZ(), 50, -1, 50, 2);
         	}
         }
     }
@@ -318,7 +318,7 @@ public class ClientSetupEvent implements IUtilityHelper{
   //              (stack, world, living) -> {
   //              	return stack != null && stack.getTag().contains("entity") ? 1.0F : 0.0F;
   //       });
-        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("default"),
+        ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("def"),
                 (stack, world, living) -> {
                 	if (stack.getTag() == null) return 0.0F;
                 	assert stack.getTag() != null;
@@ -352,7 +352,7 @@ public class ClientSetupEvent implements IUtilityHelper{
                 	if (stack.getTag() == null) return 0.0F;
                 	assert stack.getTag() != null;
                 	ClientSetupEvent.def = true;
-                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Carrot Pig") ? 1.0F : 0.0F;
+                	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Carrot Pig") && !stack.getItem().getName(stack).toString().contains("Golden") && !stack.getItem().getName(stack).toString().contains("Crystal")? 1.0F : 0.0F;
          });
         ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("cat"),
                 (stack, world, living) -> {
