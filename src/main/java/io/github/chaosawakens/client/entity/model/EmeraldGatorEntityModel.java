@@ -43,9 +43,9 @@ public class EmeraldGatorEntityModel extends AnimatedGeoModel<EmeraldGatorEntity
             root.setScaleZ(1.0f);
         }
         if (data.isChild) {
-            head.setScaleX(2f);
-            head.setScaleY(2f);
-            head.setScaleZ(2f);
+            head.setScaleX(1f);
+            head.setScaleY(1f);
+            head.setScaleZ(1f);
             head.setPivotY(7.75f);
         } else {
             head.setScaleX(1.0f);
