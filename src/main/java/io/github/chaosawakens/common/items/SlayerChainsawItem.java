@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CATags;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,8 +36,8 @@ import software.bernie.geckolib3.network.ISyncable;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishable, IAnimatable, ISyncable {
-    private static final int CHAINSAW_LENGTH = 12;
-    private static final int CHAINSAW_WIDTH = 12;
+    private static final int CHAINSAW_LENGTH = 2;
+    private static final int CHAINSAW_WIDTH = 2;
     private static final int CHAINSAW_HEIGHT = 16;
 
     private static final String CONTROLLER_NAME = "popupController";
@@ -70,8 +72,8 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
                     for (int k = -CHAINSAW_WIDTH; k <= CHAINSAW_WIDTH; k++) {
                         BlockPos targetPos = pos.offset(i - CHAINSAW_LENGTH / 2, j - CHAINSAW_HEIGHT / 2, k - CHAINSAW_WIDTH / 2);
                         BlockState targetState = world.getBlockState(targetPos);
-                        if (targetState.is(BlockTags.LOGS)) {
-                            world.destroyBlock(targetPos, true);
+                        if (targetState.is(BlockTags.LOGS)) {                             
+                        	world.destroyBlock(targetPos, true);
                         }
                     }
                 }
@@ -81,8 +83,10 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
     }
 
     private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {
-        if(event.getLimbSwing() >= 0.0F) {
-        	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", false));
+        if(event.getLimbSwing() > 0) {
+        	for (float swing = 0; event.getLimbSwing() > swing; swing++) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", true));
+        	}
             return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
@@ -110,15 +114,18 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
             // access to an AnimationEvent
             final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id, CONTROLLER_NAME);
 
-            if (controller.getAnimationState() == AnimationState.Stopped) {
-                final ClientPlayerEntity player = Minecraft.getInstance().player;
-                // If you don't do this, the popup animation will only play once because the
-                // animation will be cached.
-                controller.markNeedsReload();
-                // Set the animation to open the JackInTheBoxItem which will start playing music
-                // and
-                // eventually do the actual animation. Also sets it to not loop
-                controller.setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", false));
+            assert controller != null;
+            if (controller != null) {
+                if (controller.getAnimationState() == AnimationState.Stopped) {
+                    final ClientPlayerEntity player = Minecraft.getInstance().player;
+                    // If you don't do this, the popup animation will only play once because the
+                    // animation will be cached.
+                    controller.markNeedsReload();
+                    // Set the animation to open the JackInTheBoxItem which will start playing music
+                    // and
+                    // eventually do the actual animation. Also sets it to not loop
+                    controller.setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", false));
+                }
             }
         }
     }

@@ -250,6 +250,8 @@ public class CAEntityTypes {
     public static final RegistryObject<EntityType<UltimateFishingBobberEntity>> ULTIMATE_FISHING_BOBBER = ENTITY_TYPES.register("ultimate_fishing_bobber",
             () -> EntityType.Builder.<UltimateFishingBobberEntity>createNothing(EntityClassification.MISC).noSave().noSummon().setShouldReceiveVelocityUpdates(true)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(5)
+                    .setCustomClientFactory(UltimateFishingBobberEntity::new)
+                    .fireImmune()
                     .build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_fishing_bobber").toString()));
 
 	public static void registerSpawnPlacementTypes() {

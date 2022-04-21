@@ -56,21 +56,29 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         if (!capture(stackFill, playerIn, target)) return ActionResultType.FAIL;
         
         if (stack.getCount() == 1) {
-        	stack = stackFill;
-        	playerIn.setItemInHand(hand, stack);
+        	if (!containsEntity(stack)) {
+              	stack = stackFill;   
+            	playerIn.setItemInHand(hand, stack);   
+            	target.remove(true);
+        	}
         }
         
         if (stackFill == stack) {
-        	return ActionResultType.CONSUME;
+        	return ActionResultType.SUCCESS;
         }
+        
+ //       if (stack.getItem().getName(stack).toString().contains("(") || stackFill.getItem().getName(stackFill).toString().contains("(")) {
+  //      	return ActionResultType.FAIL;
+   //     }
    
-        if (!playerIn.isSpectator()) {
-          	stack.shrink(1);    
-        	playerIn.inventory.add(stackFill);    
-        }     
-        if (!playerIn.inventory.contains(stackFill)) {     
-        	playerIn.inventory.add(stackFill);     
-        }	
+        if (stack.getCount() > 1 || stackFill.getCount() > 1) {
+        	if (!containsEntity(stack) || !containsEntity(stackFill)) {
+              	stack.shrink(1);    
+              	playerIn.inventory.add(stackFill);
+            	target.remove(true);
+        	}
+        }
+        
         if (playerIn.inventory.getFreeSlot() == -1 || !playerIn.inventory.add(stackFill)) {
         	playerIn.drop(stackFill, false);	
         }     
@@ -94,7 +102,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         stack.setTag(nbt);
         
         stack.setCount(1);
-        target.remove(true);
+   //     target.remove(true);
         return true;
     }
     

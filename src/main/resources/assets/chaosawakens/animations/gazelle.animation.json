@@ -251,12 +251,20 @@
 						"vector": ["math.cos(query.anim_time * 400) * 1 -112.5", 0, 0]
 					},
 					"position": {
-						"vector": [0, 1, 0]
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"2.875": {
+							"vector": [0, 0, 0]
+						}
 					}
 				},
 				"MainHead": {
 					"rotation": {
-						"vector": ["math.sin(query.anim_time * 400) * -2 + 47.5", 0, 0]
+						"vector": ["42.5+math.sin(query.anim_time * 400) * -2 +NaN", 0, 0]
+					},
+					"position": {
+						"vector": [0, -1, 1]
 					}
 				},
 				"RightEar": {
@@ -344,12 +352,20 @@
 					"rotation": {
 						"vector": [10, 0, 0]
 					}
+				},
+				"Neck": {
+					"rotation": {
+						"vector": [2.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, 1, 0]
+					}
 				}
 			}
 		},
 		"animation.gazelle.running": {
 			"loop": true,
-			"animation_length": 3.5834,
+			"animation_length": 3.625,
 			"bones": {
 				"Head": {
 					"rotation": {
@@ -361,7 +377,10 @@
 				},
 				"MainHead": {
 					"rotation": {
-						"vector": [32.5, 0, 0]
+						"vector": [27.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 1]
 					}
 				},
 				"RightBackLeg": {

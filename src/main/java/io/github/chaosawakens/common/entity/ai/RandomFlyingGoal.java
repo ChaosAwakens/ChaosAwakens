@@ -79,7 +79,7 @@ public class RandomFlyingGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return !this.mob.getNavigation().isDone() && !this.mob.isVehicle();
+		return !this.mob.getNavigation().isDone() && !this.mob.isVehicle() && !this.mob.isOnGround();
 	}
 
 	@Override

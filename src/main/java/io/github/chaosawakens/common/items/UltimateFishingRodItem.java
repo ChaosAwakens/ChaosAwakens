@@ -56,7 +56,7 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
         } else {
             worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.FISHING_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
             if (!worldIn.isClientSide) {
-                int k = EnchantmentHelper.getFishingSpeedBonus(itemstack);
+                int k = EnchantmentHelper.getFishingSpeedBonus(itemstack) + 60;
                 int j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 50;
                 if(worldIn.dimension() == CADimensions.MINING_PARADISE) {
                   k = EnchantmentHelper.getFishingSpeedBonus(itemstack) + 20;

@@ -108,6 +108,8 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		this.biting = buf.readBoolean();
 	}
 
+
+
 	public UltimateFishingBobberEntity(World w, PlayerEntity p, int luck, int speed) {
 		super(p, w, luck, speed);
 		this.noCulling = true;
@@ -138,12 +140,12 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		this.yRotO = this.yRot;
 		this.xRotO = this.xRot;
 	}
-
+	
 	@Override
 	public boolean isInLava() {
 		return super.isInLava();
 	}
-
+	
 	@Override
 	public boolean isInWater() {
 		return super.isInWater();
@@ -674,11 +676,11 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 						playerentity.awardStat(Stats.FISH_CAUGHT, 1);
 					}
 					//Not completely foolproof
-					boolean immune = itementity.fireImmune();
-					if (itementity.isInLava() && itementity.isOnFire()) {
-						immune = true;
-						itementity.setRemainingFireTicks(0);
-					}
+			//		boolean immune = itementity.fireImmune();
+			//		if (itementity.isInLava() && itementity.isOnFire()) {
+			//			immune = true;
+			//			itementity.setRemainingFireTicks(0);
+				//	}
 				}
 
 				i = 1;

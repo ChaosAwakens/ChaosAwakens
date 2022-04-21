@@ -70,6 +70,7 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.walking", true));
+			event.getController().setAnimationSpeed(this.animationSpeed + 1.0D);
 			return PlayState.CONTINUE;
 		}
 
@@ -78,10 +79,12 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 			return PlayState.CONTINUE;
 		}
 
-		if (event.isMoving() && this.getSpeed() >= 0.25F) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.running"));
+		if (event.isMoving() && this.isSprinting() || this.getSpeed() >= 0.26D) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.running", true));
+			event.getController().setAnimationSpeed(this.animationSpeed + 2.0D);
+			return PlayState.CONTINUE;
 		}
-
+		
 		return PlayState.CONTINUE;
 	}
 

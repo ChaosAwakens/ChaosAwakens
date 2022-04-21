@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.passive.ParrotEntity;
@@ -44,6 +45,7 @@ import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
+import io.github.chaosawakens.common.entity.robo.RoboEntity;
 
 import java.util.Random;
 
@@ -68,7 +70,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 5)
 				.add(Attributes.MOVEMENT_SPEED, 0.6F)
-				.add(Attributes.FLYING_SPEED, 0.9F)
+				.add(Attributes.FLYING_SPEED, 1.3F)
 				.add(Attributes.LUCK, 1.0F)
 				.add(Attributes.FOLLOW_RANGE, 12);
 	}
@@ -76,13 +78,22 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, RoboEntity.class, 1.0F, 0.25D, 0.45D));
+		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, MonsterEntity.class, 1.0F, 0.25D, 0.45D));
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new SitGoal(this));
-		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 1.0F));
-		if (this.isOnGround()) {
-			this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0D));
-		}
-		this.goalSelector.addGoal(4, new RandomFlyingGoal(this, 2.0D, 1, true));
+		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 1.0F) {
+			@Override
+			public boolean canContinueToUse() {
+				return super.canContinueToUse();
+			}
+		});
+		this.goalSelector.addGoal(4, new RandomFlyingGoal(this, 2.0D, 1, true) {
+			@Override
+			public boolean canContinueToUse() {
+				return super.canContinueToUse();
+			}
+		});
 		this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new FollowMobGoal(this, 2.0D, 4.0F, 8.0F));

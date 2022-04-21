@@ -92,7 +92,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 			}
 		};
 		flyingpathnavigator.setCanOpenDoors(false);
-		flyingpathnavigator.setCanFloat(false);
+		flyingpathnavigator.setCanFloat(true);
 		flyingpathnavigator.setCanPassDoors(false);
 		return flyingpathnavigator;
 	}

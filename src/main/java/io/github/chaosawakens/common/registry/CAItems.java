@@ -1,11 +1,8 @@
 package io.github.chaosawakens.common.registry;
 
-import com.google.common.base.Supplier;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.entity.CarrotPigEntity;
 import io.github.chaosawakens.common.events.EntityAttributeModificationEventSubscriber;
 import io.github.chaosawakens.common.util.EnumUtils;
 import io.github.chaosawakens.common.items.*;
@@ -15,7 +12,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
-import net.minecraft.item.Item.Properties;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.text.TextFormatting;
@@ -311,16 +307,16 @@ public class CAItems {
     public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(EnumUtils.CAItemTier.WEAPON_RAY_GUN, new Item.Properties().tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(50)));
 
     // Big Weapons
-    public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(EnumUtils.CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.attitudeAdjusterDamage.get() - 12, -3F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(7.0D), 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRender::new)));
-    public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(9.0D), 0, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRender::new),
+    public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(EnumUtils.CAItemTier.WEAPON_BIG_HAMMER, CAConfig.COMMON.attitudeAdjusterDamage.get() - 12, -3F, 4.0D, 1, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRender::new)));
+    public static final RegistryObject<ExtendedHitWeaponItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_BERTHA, CAConfig.COMMON.berthaDamage.get() - 497, -3.2F, 4.5D, 0, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2), new EnchantmentData(Enchantments.KNOCKBACK, 2)}));
-    public static final RegistryObject<EnchantedExtendedHitAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3.35F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(8.0D), 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRender::new),
+    public static final RegistryObject<EnchantedExtendedHitAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_BATTLEAXE, CAConfig.COMMON.battleAxeDamage.get() - 48, -3.35F, 3.0D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-    public static final RegistryObject<EnchantedExtendedHitAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenBattleAxeDamage.get() - 664, -3.25F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(8.0D), 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRender::new),
+    public static final RegistryObject<EnchantedExtendedHitAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new EnchantedExtendedHitAxeItem(EnumUtils.CAItemTier.WEAPON_QUEEN_BATTLEAXE, CAConfig.COMMON.queenBattleAxeDamage.get() - 664, -3.25F, 3.0D, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 5), new EnchantmentData(Enchantments.SMITE, 5), new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 5), new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
-    public static final RegistryObject<ExtendedHitWeaponItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, CAConfig.COMMON.royalGuardianSwordDamage.get() - 749, -3.25F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(9.0D), 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianItemRender::new),
+    public static final RegistryObject<ExtendedHitWeaponItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, CAConfig.COMMON.royalGuardianSwordDamage.get() - 749, -3.25F, 4.5D, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianItemRender::new),
             new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-    public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(EnumUtils.CAItemTier.WEAPON_SLAYER_CHAINSAW, CAConfig.COMMON.slayerChainsawDamage.get() - 1, -3F, EntityAttributeModificationEventSubscriber.ReachRegisterHelper.setReachValue(6.0D), 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRender::new)));
+    public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(EnumUtils.CAItemTier.WEAPON_SLAYER_CHAINSAW, CAConfig.COMMON.slayerChainsawDamage.get() - 1, -3F, 1.0D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRender::new)));
 
     // Staffs
     public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().tab(CAItemGroups.EQUIPMENT).durability(50)));

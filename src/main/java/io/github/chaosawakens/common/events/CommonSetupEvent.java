@@ -46,6 +46,7 @@ public class CommonSetupEvent {
         CAEntityTypes.registerSpawnPlacementTypes();
         PacketHandler.init();
         Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
+		CAConfig.setConfigUp();
 
         event.enqueueWork(() -> {
             CAVanillaCompat.setup();

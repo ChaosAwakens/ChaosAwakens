@@ -68,7 +68,7 @@ public class ChaosAwakens {
 		eventBus.addListener(this::onInterModEnqueueEvent);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
-
+		
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 //			eventBus.addListener(ClientSetupEvent::mouseEvent);

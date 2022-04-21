@@ -193,7 +193,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
     @Override
     public boolean isEmpty() {
-        return getItem(0).isEmpty() && getItem(1).isEmpty() && getItem(2).isEmpty() && getItem(3).isEmpty();
+        return this.items.stream().allMatch(ItemStack::isEmpty);
     }
 
     @Override
@@ -285,7 +285,7 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
 	@Override
 	public int getSlots() {
-		return 0;
+		return 2;
 	}
 
 	@Override
@@ -310,6 +310,20 @@ public class DefossilizerTileEntity extends LockableTileEntity implements ISided
 
 	@Override
 	public boolean isItemValid(int slot, ItemStack stack) {
+		switch(slot) {
+		case 0:
+			if (this.getStackInSlot(0) != null && this.getStackInSlot(0) != this.getStackInSlot(slot)) return false;
+			return handlers[0].cast() != null ? true : false;
+		case 1:
+			if (this.getStackInSlot(1) != null && this.getStackInSlot(1) != this.getStackInSlot(slot)) return false;
+			return handlers[1].cast() != null ? true : false;
+		case 2:
+			if (this.getStackInSlot(2) != null && this.getStackInSlot(2) != this.getStackInSlot(slot)) return false;
+			return handlers[2].cast() != null ? true : false;
+		case 3:
+			if (this.getStackInSlot(3) != null && this.getStackInSlot(3) != this.getStackInSlot(slot)) return false;
+			return handlers[3].cast() != null ? true : false;
+		}
 		return false;
 	}
 }

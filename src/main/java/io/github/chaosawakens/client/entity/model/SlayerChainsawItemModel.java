@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class SlayerChainsawItemModel extends AnimatedGeoModel<SlayerChainsawItem> {
+
     @Override
     public ResourceLocation getModelLocation(SlayerChainsawItem object) {
         return new ResourceLocation(ChaosAwakens.MODID, "geo/slayer_chainsaw.geo.json");
