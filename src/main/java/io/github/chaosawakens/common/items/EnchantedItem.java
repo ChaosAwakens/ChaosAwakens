@@ -5,12 +5,12 @@ import net.minecraft.item.ItemStack;
 
 public class EnchantedItem extends Item {
 
-    public EnchantedItem(Item.Properties builderIn) {
-        super(builderIn);
-    }
+	public EnchantedItem(Item.Properties builderIn) {
+		super(builderIn);
+	}
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return true;
+	}
 }

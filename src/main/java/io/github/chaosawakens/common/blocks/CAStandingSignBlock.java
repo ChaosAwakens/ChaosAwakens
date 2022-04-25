@@ -9,18 +9,18 @@ import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nonnull;
 
-public class CAStandingSignBlock extends StandingSignBlock  {
-    public CAStandingSignBlock(Properties propertiesIn, WoodType woodTypeIn) {
-        super(propertiesIn, woodTypeIn);
-    }
+public class CAStandingSignBlock extends StandingSignBlock {
+	public CAStandingSignBlock(Properties propertiesIn, WoodType woodTypeIn) {
+		super(propertiesIn, woodTypeIn);
+	}
 
-    @Override
-    public boolean hasTileEntity(BlockState stateIn) {
-        return true;
-    }
+	@Override
+	public boolean hasTileEntity(BlockState stateIn) {
+		return true;
+	}
 
-    @Override
-    public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
-        return new CASignTileEntity();
-    }
+	@Override
+	public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
+		return new CASignTileEntity();
+	}
 }

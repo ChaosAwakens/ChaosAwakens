@@ -13,36 +13,43 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class EntEntityRender extends GeoEntityRenderer<EntEntity> {
-    private final EntEntity.Types entType;
+	private final EntEntity.Types entType;
 
-    public EntEntityRender(EntityRendererManager renderManager, EntEntity.Types entType) {
-        super(renderManager, new EntEntityModel(entType));
-        this.shadowRadius = 2.0F;
-        this.entType = entType;
-    }
+	public EntEntityRender(EntityRendererManager renderManager, EntEntity.Types entType) {
+		super(renderManager, new EntEntityModel(entType));
+		this.shadowRadius = 2.0F;
+		this.entType = entType;
+	}
 
-    @Override
-    public void renderEarly(EntEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
-    }
+	@Override
+	public void renderEarly(EntEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer,
+			IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue,
+			float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
+				red, green, blue, partialTicks);
+	}
 
-    @Override
-    public ResourceLocation getTextureLocation(EntEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent/" + this.entType.getNameString() + "_ent.png");
-    }
+	@Override
+	public ResourceLocation getTextureLocation(EntEntity entity) {
+		return new ResourceLocation(ChaosAwakens.MODID,
+				"textures/entity/ent/" + this.entType.getNameString() + "_ent.png");
+	}
 
-    @Override
-    public RenderType getRenderType(EntEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
-    }
+	@Override
+	public RenderType getRenderType(EntEntity animatable, float partialTicks, MatrixStack stack,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
+			ResourceLocation textureLocation) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
 
-    @Override
-    public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
+	@Override
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
+			int packedOverlayIn, float red, float green, float blue, float alpha) {
+		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
 
-    @Override
-    protected float getDeathMaxRotation(EntEntity entity) {
-        return 0.0F;
-    }
+	@Override
+	protected float getDeathMaxRotation(EntEntity entity) {
+		return 0.0F;
+	}
 }

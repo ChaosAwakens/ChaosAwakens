@@ -12,25 +12,27 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CrystalSkeletonEntity extends SkeletonEntity implements IAnimatable, IRangedAttackMob{
+public class CrystalSkeletonEntity extends SkeletonEntity implements IAnimatable, IRangedAttackMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
 
 	public CrystalSkeletonEntity(EntityType<? extends SkeletonEntity> entity, World world) {
 		super(entity, world);
 		this.noCulling = true;
 	}
-	
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
-            return PlayState.CONTINUE;
-        }
-        if (!event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.CONTINUE;
-    }
+
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
+			return PlayState.CONTINUE;
+		}
+		if (!event.isMoving()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
+			return PlayState.CONTINUE;
+		}
+		return PlayState.CONTINUE;
+	}
 
 	@Override
 	public void registerControllers(AnimationData data) {

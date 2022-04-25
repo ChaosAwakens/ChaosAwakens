@@ -27,7 +27,9 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 //	  private IDrawable arrow;
 
 	public DefossilizerRecipeCategory(IGuiHelper helper) {
-		bg = helper.drawableBuilder(new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80).setTextureSize(170, 80).build();
+		bg = helper.drawableBuilder(
+				new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80)
+				.setTextureSize(170, 80).build();
 		icon = helper.createDrawableIngredient(new ItemStack(CABlocks.DEFOSSILIZER.get()));
 //		arrow = helper.createAnimatedDrawable(null, 80, StartDirection.LEFT, false);
 	}
@@ -74,15 +76,15 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
 	}
 
-/*	@Override
-	public void setIngredients(DefossilizingRecipe recipe, IIngredients ingredients) {
-		NonNullList<Ingredient> in = NonNullList.create();
-
-		in.addAll(recipe.getIngredients());
-
-		ingredients.setInputIngredients(in);
-		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
-	}*/
+	/*
+	 * @Override public void setIngredients(DefossilizingRecipe recipe, IIngredients
+	 * ingredients) { NonNullList<Ingredient> in = NonNullList.create();
+	 * 
+	 * in.addAll(recipe.getIngredients());
+	 * 
+	 * ingredients.setInputIngredients(in); ingredients.setOutput(VanillaTypes.ITEM,
+	 * recipe.getResult()); }
+	 */
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, DefossilizingRecipe recipe, IIngredients ingredients) {

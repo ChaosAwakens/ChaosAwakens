@@ -37,9 +37,7 @@ public class CrystalAppleCowEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 10)
-				.add(Attributes.MOVEMENT_SPEED, 0.2D)
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 10).add(Attributes.MOVEMENT_SPEED, 0.2D)
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
@@ -89,15 +87,18 @@ public class CrystalAppleCowEntity extends AnimalEntity implements IAnimatable {
 		return 0.4F;
 	}
 
-	public static boolean checkCrystalAppleCowSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos blockPos, Random random) {
-		return world.getBlockState(blockPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get()) && world.getRawBrightness(blockPos, 0) > 8;
+	public static boolean checkCrystalAppleCowSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world,
+			SpawnReason spawnReason, BlockPos blockPos, Random random) {
+		return world.getBlockState(blockPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get())
+				&& world.getRawBrightness(blockPos, 0) > 8;
 	}
 
 	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
 		if (itemstack.getItem() == Items.BUCKET && !this.isBaby()) {
 			playerIn.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
+			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn,
+					Items.MILK_BUCKET.getDefaultInstance());
 			playerIn.setItemInHand(hand, itemstack1);
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
 		} else {

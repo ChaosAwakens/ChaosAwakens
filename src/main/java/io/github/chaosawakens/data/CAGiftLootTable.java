@@ -9,12 +9,12 @@ import javax.annotation.Nonnull;
 import java.util.function.BiConsumer;
 
 public class CAGiftLootTable extends GiftLootTables {
-    public String getName() {
-        return ChaosAwakens.MODNAME + ": Gift Loot Tables";
-    }
+	public String getName() {
+		return ChaosAwakens.MODNAME + ": Gift Loot Tables";
+	}
 
-    @Override
-    public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
+	@Override
+	public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 //        consumer.accept(CALootTables.ODDITIES_PURVEYOR_GIFT,
 //                LootTable.lootTable()
 //                        .withPool(LootPool.lootPool()
@@ -25,5 +25,5 @@ public class CAGiftLootTable extends GiftLootTables {
 //                                .add(ItemLootEntry.lootTableItem(CAItems.PINK_TOURMALINE_INGOT.get()))
 //                                .add(ItemLootEntry.lootTableItem(CAItems.CATS_EYE_INGOT.get()))
 //                                .add(ItemLootEntry.lootTableItem(CAItems.PLATINUM_LUMP.get()))));
-    }
+	}
 }

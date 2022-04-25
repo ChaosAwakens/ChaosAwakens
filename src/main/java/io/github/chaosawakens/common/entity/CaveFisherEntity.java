@@ -20,35 +20,37 @@ public class CaveFisherEntity extends AnimatableCardinallyCapableMonsterEntity i
 	public CaveFisherEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
-	
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 20)
-                .add(Attributes.MOVEMENT_SPEED, 1.2D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
-                .add(Attributes.FOLLOW_RANGE, 30);
-    }
-    
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (!event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.idle_animation", true));
-            return PlayState.CONTINUE;
-        }
-        if (event.isMoving()) {
-        	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_animation", true));
-            return PlayState.CONTINUE;
-        }
-        if (this.getMovingOnWall()) {
-        	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.climb_animation", true));
-        }
-        if (this.getMovingOnCeiling()) {
-        	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_upsidedown_animation", true));
-        }
-        if (this.getAttacking()) {
-        	event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.attack_animation", false));
-        } 
-        return PlayState.CONTINUE;
-    }
+
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 20).add(Attributes.MOVEMENT_SPEED, 1.2D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.4D).add(Attributes.FOLLOW_RANGE, 30);
+	}
+
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (!event.isMoving()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.idle_animation", true));
+			return PlayState.CONTINUE;
+		}
+		if (event.isMoving()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_animation", true));
+			return PlayState.CONTINUE;
+		}
+		if (this.getMovingOnWall()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.climb_animation", true));
+		}
+		if (this.getMovingOnCeiling()) {
+			event.getController().setAnimation(
+					new AnimationBuilder().addAnimation("animation.cave_fisher.walking_upsidedown_animation", true));
+		}
+		if (this.getAttacking()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.attack_animation", false));
+		}
+		return PlayState.CONTINUE;
+	}
 
 	@Override
 	public void registerControllers(AnimationData data) {

@@ -32,7 +32,8 @@ public class FossilRecipeBuilder {
 	private boolean hasAdvancementCriterion = false;
 	private String group = "";
 
-	protected FossilRecipeBuilder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, int experience, int defossilizingTime) {
+	protected FossilRecipeBuilder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2,
+			Ingredient ingredient3, IItemProvider result, int experience, int defossilizingTime) {
 		this.serializer = serializer;
 		this.ingredient1 = ingredient1;
 		this.ingredient2 = ingredient2;
@@ -42,12 +43,16 @@ public class FossilRecipeBuilder {
 		this.defossilizingTime = defossilizingTime;
 	}
 
-	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result) {
+	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1,
+			Ingredient ingredient2, Ingredient ingredient3, IItemProvider result) {
 		return builder(serializer, ingredient1, ingredient2, ingredient3, result, 1, 10);
 	}
 
-	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, int experience, int defossilizingTime) {
-		return new FossilRecipeBuilder(serializer, ingredient1, ingredient2, ingredient3, result, experience, defossilizingTime);
+	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1,
+			Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, int experience,
+			int defossilizingTime) {
+		return new FossilRecipeBuilder(serializer, ingredient1, ingredient2, ingredient3, result, experience,
+				defossilizingTime);
 	}
 
 	/**
@@ -73,10 +78,12 @@ public class FossilRecipeBuilder {
 	public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation id) {
 		if (this.hasAdvancementCriterion && !this.advancementBuilder.getCriteria().isEmpty()) {
 			this.advancementBuilder.parent(new ResourceLocation("recipes/root"))
-					.addCriterion("has_the_recipe", new RecipeUnlockedTrigger.Instance(EntityPredicate.AndPredicate.ANY, id))
+					.addCriterion("has_the_recipe",
+							new RecipeUnlockedTrigger.Instance(EntityPredicate.AndPredicate.ANY, id))
 					.rewards(AdvancementRewards.Builder.recipe(id)).requirements(IRequirementsStrategy.OR);
 		}
-		ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/defossilizing/" + id.getPath());
+		ResourceLocation advancementId = new ResourceLocation(id.getNamespace(),
+				"recipes/defossilizing/" + id.getPath());
 		consumer.accept(new FossilRecipeBuilder.Result(id, this, advancementId));
 	}
 

@@ -14,29 +14,35 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class RoboSniperEntityRender extends GeoEntityRenderer<RoboSniperEntity> {
-    public RoboSniperEntityRender(EntityRendererManager renderManager) {
-        super(renderManager, new RoboSniperEntityModel());
-        this.shadowRadius = 0.4F;
-        this.addLayer(new RoboSniperGlowLayer(this));
-    }
+	public RoboSniperEntityRender(EntityRendererManager renderManager) {
+		super(renderManager, new RoboSniperEntityModel());
+		this.shadowRadius = 0.4F;
+		this.addLayer(new RoboSniperGlowLayer(this));
+	}
 
-    @Override
-    public void renderEarly(RoboSniperEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
-    }
+	@Override
+	public void renderEarly(RoboSniperEntity animatable, MatrixStack stackIn, float ticks,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn,
+			float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
+				red, green, blue, partialTicks);
+	}
 
-    @Override
-    public ResourceLocation getTextureLocation(RoboSniperEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_sniper.png");
-    }
+	@Override
+	public ResourceLocation getTextureLocation(RoboSniperEntity entity) {
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_sniper.png");
+	}
 
-    @Override
-    public RenderType getRenderType(RoboSniperEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
-    }
+	@Override
+	public RenderType getRenderType(RoboSniperEntity animatable, float partialTicks, MatrixStack stack,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
+			ResourceLocation textureLocation) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
 
-    @Override
-    public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
+	@Override
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
+			int packedOverlayIn, float red, float green, float blue, float alpha) {
+		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
 }

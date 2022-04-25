@@ -10,9 +10,9 @@ import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
 public class SlowFallBoots extends EnchantedArmorItem {
-    public SlowFallBoots(IArmorMaterial materialIn, Properties builderIn, EnchantmentData[] enchantments) {
-        super(materialIn, EquipmentSlotType.FEET, builderIn, enchantments);
-    }
+	public SlowFallBoots(IArmorMaterial materialIn, Properties builderIn, EnchantmentData[] enchantments) {
+		super(materialIn, EquipmentSlotType.FEET, builderIn, enchantments);
+	}
 
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {

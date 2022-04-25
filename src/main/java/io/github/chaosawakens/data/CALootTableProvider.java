@@ -20,14 +20,14 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CALootTableProvider extends LootTableProvider {
-    public CALootTableProvider(DataGenerator dataGeneratorIn) {
-        super(dataGeneratorIn);
-    }
+	public CALootTableProvider(DataGenerator dataGeneratorIn) {
+		super(dataGeneratorIn);
+	}
 
-    @Override
-    public String getName() {
-        return ChaosAwakens.MODNAME + ": Loot Tables";
-    }
+	@Override
+	public String getName() {
+		return ChaosAwakens.MODNAME + ": Loot Tables";
+	}
 
 	@Override
 	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootParameterSet>> getTables() {
@@ -35,10 +35,10 @@ public class CALootTableProvider extends LootTableProvider {
 				Pair.of(CAEntityLootTables::new, LootParameterSets.ENTITY),
 				Pair.of(CAChestLootTables::new, LootParameterSets.CHEST),
 				Pair.of(CAFishingLootTables::new, LootParameterSets.FISHING)
-				/*Pair.of(CAGiftLootTable::new, LootParameterSets.GIFT)*/);
+		/* Pair.of(CAGiftLootTable::new, LootParameterSets.GIFT) */);
 	}
 
-    @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
-    }
+	@Override
+	protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
+	}
 }

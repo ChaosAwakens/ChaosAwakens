@@ -43,11 +43,8 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 8.0D)
-				.add(Attributes.MOVEMENT_SPEED, 1.3D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.25D)
-				.add(Attributes.FOLLOW_RANGE, 4.0D);
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 8.0D).add(Attributes.MOVEMENT_SPEED, 1.3D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.25D).add(Attributes.FOLLOW_RANGE, 4.0D);
 	}
 
 	@Override
@@ -69,7 +66,8 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.05D));
 		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 3.0F, 3.0F));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D, EntityPredicates.NO_SPECTATORS::test));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D,
+				EntityPredicates.NO_SPECTATORS::test));
 		this.goalSelector.addGoal(4, new SparkFishEntity.SwimGoal(this));
 	}
 
@@ -83,13 +81,13 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 			this.animationSpeed = 0.5F;
 			return PlayState.CONTINUE;
 		}
-		if(this.dead) {
+		if (this.dead) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.spark_fish.flop", true));
 		}
-		if(this.isSwimming()) {
+		if (this.isSwimming()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.spark_fish.swim", true));
 		}
-		if(this.isDeadOrDying()) {
+		if (this.isDeadOrDying()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.spark_fish.flop", true));
 			return PlayState.CONTINUE;
 		}
@@ -110,17 +108,18 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 			}
 
 			if (this.operation == MovementController.Action.MOVE_TO && !this.fish.getNavigation().isDone()) {
-				float f = (float)(this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
+				float f = (float) (this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
 				this.fish.setSpeed(MathHelper.lerp(0.125F, this.fish.getSpeed(), f));
 				double d0 = this.wantedX - this.fish.getX();
 				double d1 = this.wantedY - this.fish.getY();
 				double d2 = this.wantedZ - this.fish.getZ();
 				if (d1 != 0.0D) {
 					double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D,
+							(double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
 				if (d0 != 0.0D || d2 != 0.0D) {
-					float f1 = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
+					float f1 = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
 					this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
 					this.fish.yBodyRot = this.fish.yRot;
 				}
@@ -146,7 +145,8 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 	@Override
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F,
+					((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -169,7 +169,7 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 			ItemStack itemstack1 = this.getBucketItemStack();
 			this.saveToBucketTag(itemstack1);
 			if (!this.level.isClientSide) {
-				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity)player, itemstack1);
+				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemstack1);
 			}
 
 			if (itemstack.isEmpty()) {

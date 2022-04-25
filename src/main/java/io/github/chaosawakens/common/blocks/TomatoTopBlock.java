@@ -9,7 +9,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
  * @author invalid2
  */
 public class TomatoTopBlock extends CropTopPlantBlock {
-	
+
 	/**
 	 * @param properties
 	 * @param direction
@@ -19,15 +19,15 @@ public class TomatoTopBlock extends CropTopPlantBlock {
 	public TomatoTopBlock(Properties properties, Direction direction, VoxelShape shape, double growPerTickProbability) {
 		super(properties, direction, shape, growPerTickProbability);
 	}
-	
+
 	@Override
 	protected int getMaxHeight() {
 		return 10;
 	}
-	
+
 	@Override
 	protected Block getBodyBlock() {
 		return CABlocks.TOMATO_BODY_BLOCK.get();
 	}
-	
+
 }

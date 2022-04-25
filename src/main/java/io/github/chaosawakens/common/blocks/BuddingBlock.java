@@ -33,11 +33,13 @@ public class BuddingBlock extends Block {
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		random.nextInt(1);
-		if (state.getValue(MAX_GENERATABLE) == 0) return;
+		if (state.getValue(MAX_GENERATABLE) == 0)
+			return;
 
 		List<BlockStatePos> valids = this.checkValidPositions(worldIn, pos);
 
-		if (valids.size() == 0) return;
+		if (valids.size() == 0)
+			return;
 
 		int numLoops = random.nextInt(3) + 1;
 		numLoops = Math.min(numLoops, valids.size());
@@ -47,7 +49,8 @@ public class BuddingBlock extends Block {
 			worldIn.setBlock(stateAndPos.getPos(), stateAndPos.getState(), 2);
 		}
 
-		if (random.nextInt(2) == 0) worldIn.setBlockAndUpdate(pos, state.setValue(MAX_GENERATABLE, state.getValue(MAX_GENERATABLE) - 1));
+		if (random.nextInt(2) == 0)
+			worldIn.setBlockAndUpdate(pos, state.setValue(MAX_GENERATABLE, state.getValue(MAX_GENERATABLE) - 1));
 
 	}
 
@@ -65,10 +68,15 @@ public class BuddingBlock extends Block {
 				newBudBlock = false;
 			}
 
-			if (Objects.equals(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName(), budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
-				validStatePos.add(new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction).setValue(BlockStateProperties.AGE_3,
-						newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3
-								? budState.getValue(BlockStateProperties.AGE_3) + 1 : budState.getValue(BlockStateProperties.AGE_3))));
+			if (Objects.equals(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName(),
+					budBlock.getRegistryName())
+					|| !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
+				validStatePos.add(new BlockStatePos(budTargetPos,
+						budState.setValue(BlockStateProperties.FACING, direction).setValue(BlockStateProperties.AGE_3,
+								newBudBlock ? 0
+										: worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3
+												? budState.getValue(BlockStateProperties.AGE_3) + 1
+												: budState.getValue(BlockStateProperties.AGE_3))));
 		}
 
 		return validStatePos;

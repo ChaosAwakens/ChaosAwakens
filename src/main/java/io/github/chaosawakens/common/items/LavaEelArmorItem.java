@@ -16,40 +16,42 @@ import net.minecraft.world.Dimension;
 import net.minecraft.world.World;
 
 public class LavaEelArmorItem extends EnchantedArmorItem implements IAutoEnchantable {
-    private final EnchantmentData[] enchantments;
+	private final EnchantmentData[] enchantments;
 
-    public LavaEelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, EnchantmentData[] enchantments) {
-        super(materialIn, slot, builderIn, enchantments);
-        this.enchantments = enchantments;
-    }
+	public LavaEelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn,
+			EnchantmentData[] enchantments) {
+		super(materialIn, slot, builderIn, enchantments);
+		this.enchantments = enchantments;
+	}
 
-    @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        super.onArmorTick(stack, world, player);
-        if (player.level.dimension().location() == Dimension.NETHER.location() || player.isInLava() || player.isOnFire()) {
-            player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 100, 0, true, false));
-        }
-    }
+	@Override
+	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+		super.onArmorTick(stack, world, player);
+		if (player.level.dimension().location() == Dimension.NETHER.location() || player.isInLava()
+				|| player.isOnFire()) {
+			player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 100, 0, true, false));
+		}
+	}
 
-    @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(group)) {
-            ItemStack stack = new ItemStack(this);
-            if (CAConfig.COMMON.enableAutoEnchanting.get())
-                for (EnchantmentData enchant : enchantments) {
-                    stack.enchant(enchant.enchantment, enchant.level);
-                }
-            items.add(stack);
-        }
-    }
+	@Override
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+		if (this.allowdedIn(group)) {
+			ItemStack stack = new ItemStack(this);
+			if (CAConfig.COMMON.enableAutoEnchanting.get())
+				for (EnchantmentData enchant : enchantments) {
+					stack.enchant(enchant.enchantment, enchant.level);
+				}
+			items.add(stack);
+		}
+	}
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
-    }
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return CAConfig.COMMON.enableAutoEnchanting.get() || super.isFoil(stack);
+	}
 
-    @Override
-    public EnchantmentData[] enchantments() {
-        return this.enchantments;
-    }
+	@Override
+	public EnchantmentData[] enchantments() {
+		return this.enchantments;
+	}
 }

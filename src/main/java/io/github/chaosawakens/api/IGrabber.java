@@ -14,24 +14,25 @@ import net.minecraft.util.math.vector.Vector3d;
  * @author invalid2
  */
 public interface IGrabber {
-    DataParameter<Boolean> GRABBING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
+	DataParameter<Boolean> GRABBING = EntityDataManager.defineId(AnimatableMonsterEntity.class,
+			DataSerializers.BOOLEAN);
 
-    default void positionRider(Entity ridden, Entity entity, Entity.IMoveCallback callback) {
-        if (ridden.hasPassenger(entity)) {
+	default void positionRider(Entity ridden, Entity entity, Entity.IMoveCallback callback) {
+		if (ridden.hasPassenger(entity)) {
 
-            Vector3d offset = this.getGrabOffset().yRot((float) Math.toRadians(ridden.yRot));
-            double dY = ridden.getY() + offset.y();
-            callback.accept(entity, ridden.getX() - offset.x(), dY, ridden.getZ() + offset.z());
-        }
-    }
+			Vector3d offset = this.getGrabOffset().yRot((float) Math.toRadians(ridden.yRot));
+			double dY = ridden.getY() + offset.y();
+			callback.accept(entity, ridden.getX() - offset.x(), dY, ridden.getZ() + offset.z());
+		}
+	}
 
-    Vector3d getGrabOffset();
+	Vector3d getGrabOffset();
 
-    default boolean getGrabbing(LivingEntity entity) {
-        return entity.getEntityData().get(GRABBING);
-    }
+	default boolean getGrabbing(LivingEntity entity) {
+		return entity.getEntityData().get(GRABBING);
+	}
 
-    default void setGrabbing(LivingEntity entity, boolean grabbing) {
-        entity.getEntityData().set(GRABBING, grabbing);
-    }
+	default void setGrabbing(LivingEntity entity, boolean grabbing) {
+		entity.getEntityData().set(GRABBING, grabbing);
+	}
 }

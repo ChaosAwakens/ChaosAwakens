@@ -8,14 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class IrukandjiArrowItem extends ArrowItem {
-    public IrukandjiArrowItem(Properties builder) {
-        super(builder);
-    }
+	public IrukandjiArrowItem(Properties builder) {
+		super(builder);
+	}
 
-    @Override
-    public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
-        IrukandjiArrowEntity arrow;
-        arrow = new IrukandjiArrowEntity(worldIn, shooter);
-        return arrow;
-    }
+	@Override
+	public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
+		IrukandjiArrowEntity arrow;
+		arrow = new IrukandjiArrowEntity(worldIn, shooter);
+		return arrow;
+	}
 }

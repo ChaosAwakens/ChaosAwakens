@@ -12,18 +12,23 @@ import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
 import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 public class GoldenCarrotPigSaddleLayer extends GeoLayerRenderer<GoldenCarrotPigEntity> {
-    private static final ResourceLocation MODEL = new ResourceLocation(ChaosAwakens.MODID, "geo/carrot_pig.geo.json");
-    private static final ResourceLocation SADDLE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/pigs/pig_saddle.png");
+	private static final ResourceLocation MODEL = new ResourceLocation(ChaosAwakens.MODID, "geo/carrot_pig.geo.json");
+	private static final ResourceLocation SADDLE = new ResourceLocation(ChaosAwakens.MODID,
+			"textures/entity/pigs/pig_saddle.png");
 
-    public GoldenCarrotPigSaddleLayer(IGeoRenderer<GoldenCarrotPigEntity> entityRendererIn) {
-        super(entityRendererIn);
-    }
+	public GoldenCarrotPigSaddleLayer(IGeoRenderer<GoldenCarrotPigEntity> entityRendererIn) {
+		super(entityRendererIn);
+	}
 
-    @Override
-    public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, GoldenCarrotPigEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        RenderType renderType =  RenderType.armorCutoutNoCull(SADDLE);
-        if (entityLivingBaseIn.isSaddled()) {
-            this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, renderType, matrixStackIn, bufferIn, bufferIn.getBuffer(renderType), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
-        }
-    }
+	@Override
+	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn,
+			GoldenCarrotPigEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
+			float ageInTicks, float netHeadYaw, float headPitch) {
+		RenderType renderType = RenderType.armorCutoutNoCull(SADDLE);
+		if (entityLivingBaseIn.isSaddled()) {
+			this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks,
+					renderType, matrixStackIn, bufferIn, bufferIn.getBuffer(renderType), packedLightIn,
+					OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
+		}
+	}
 }

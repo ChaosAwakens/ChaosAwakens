@@ -22,11 +22,12 @@ import java.util.function.Supplier;
  * @author invalid2
  */
 public class FruitableLeavesBlock extends LeavesBlock {
-	
+
 	protected static final BooleanProperty RIPE = BooleanProperty.create("ripe");
 	private final Supplier<Item> fruit;
 	private final int minFruit;
 	private final int maxFruit;
+
 	/**
 	 * @param properties
 	 */
@@ -35,37 +36,37 @@ public class FruitableLeavesBlock extends LeavesBlock {
 		this.fruit = fruit;
 		this.minFruit = minFruit;
 		this.maxFruit = maxFruit;
-		this.registerDefaultState(this.stateDefinition.any()
-				.setValue(DISTANCE, 7)
-				.setValue(PERSISTENT, false)
-				.setValue(RIPE, false));
+		this.registerDefaultState(
+				this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, false).setValue(RIPE, false));
 	}
-	
+
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
 		return super.isRandomlyTicking(state) || !state.getValue(RIPE);
 	}
-	
+
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(RIPE);
 	}
-	
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-		if(state.getValue(RIPE)) {
+
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand,
+			BlockRayTraceResult result) {
+		if (state.getValue(RIPE)) {
 			worldIn.setBlockAndUpdate(pos, state.setValue(RIPE, false));
-			Block.popResource(worldIn, pos, new ItemStack(fruit.get(), this.RANDOM.nextInt(maxFruit-minFruit == 0 ? 1 : maxFruit-minFruit)+minFruit));
+			Block.popResource(worldIn, pos, new ItemStack(fruit.get(),
+					this.RANDOM.nextInt(maxFruit - minFruit == 0 ? 1 : maxFruit - minFruit) + minFruit));
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;
 	}
-	
+
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		if(!state.getValue(RIPE) && rand.nextInt(8) == 0)
+		if (!state.getValue(RIPE) && rand.nextInt(8) == 0)
 			worldIn.setBlockAndUpdate(pos, state.setValue(RIPE, true));
-		
+
 		super.randomTick(state, worldIn, pos, rand);
 	}
 }

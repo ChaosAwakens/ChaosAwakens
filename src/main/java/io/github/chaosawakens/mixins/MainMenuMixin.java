@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MainMenuScreen.class)
 public class MainMenuMixin extends Screen {
-    protected MainMenuMixin(ITextComponent iTextComponent) {
-        super(iTextComponent);
-    }
+	protected MainMenuMixin(ITextComponent iTextComponent) {
+		super(iTextComponent);
+	}
 
-    @Inject(at = @At("HEAD"), method = "init()V")
-    public void init(CallbackInfo info) {
-        ChaosAwakens.LOGGER.info("Hello from ChaosAwakens MainMenuMixin!");
-    }
+	@Inject(at = @At("HEAD"), method = "init()V")
+	public void init(CallbackInfo info) {
+		ChaosAwakens.LOGGER.info("Hello from ChaosAwakens MainMenuMixin!");
+	}
 }

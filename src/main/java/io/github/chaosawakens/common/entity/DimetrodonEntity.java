@@ -37,11 +37,14 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerable, IAnimatable {
-	private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(DimetrodonEntity.class, DataSerializers.INT);
+	private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(DimetrodonEntity.class,
+			DataSerializers.INT);
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
-	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(DimetrodonEntity.class, DataSerializers.INT);
+	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(DimetrodonEntity.class,
+			DataSerializers.INT);
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
+	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON,
+			Items.TROPICAL_FISH);
 	private UUID persistentAngerTarget;
 
 	public DimetrodonEntity(EntityType<? extends AnimatableAnimalEntity> type, World worldIn) {
@@ -59,33 +62,34 @@ public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerab
 		super.readAdditionalSaveData(nbt);
 		this.setDimetrodonType(nbt.getInt("DimetrodonType"));
 
-		if (!level.isClientSide) this.readPersistentAngerSaveData((ServerWorld) this.level, nbt);
+		if (!level.isClientSide)
+			this.readPersistentAngerSaveData((ServerWorld) this.level, nbt);
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 18)
-				.add(Attributes.ATTACK_DAMAGE, 3)
-				.add(Attributes.ATTACK_KNOCKBACK, 1)
-				.add(Attributes.ATTACK_SPEED, 1)
-				.add(Attributes.MOVEMENT_SPEED, 0.2D)
-				.add(Attributes.FOLLOW_RANGE, 8);
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 18).add(Attributes.ATTACK_DAMAGE, 3)
+				.add(Attributes.ATTACK_KNOCKBACK, 1).add(Attributes.ATTACK_SPEED, 1)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D).add(Attributes.FOLLOW_RANGE, 8);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.walking_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.bite_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.bite_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (this.isSwimming()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.swim_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.swim_animation", true));
 			return PlayState.CONTINUE;
 		}
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.idle_animation", true));
+		event.getController()
+				.setAnimation(new AnimationBuilder().addAnimation("animation.dimetrodon.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 
@@ -103,7 +107,8 @@ public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerab
 		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
 		this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
+		this.targetSelector.addGoal(4,
+				new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
 		this.targetSelector.addGoal(8, new ResetAngerGoal<>(this, true));
 	}
 
@@ -126,7 +131,8 @@ public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerab
 	}
 
 	@Nullable
-	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance,
+			SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
 		int i = this.random.nextInt(4);
 		if (entityData instanceof DimetrodonEntity.DimetrodonData) {
 			i = ((DimetrodonData) entityData).dimetrodonType;
@@ -142,14 +148,17 @@ public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerab
 			return false;
 		} else {
 			Entity entity = source.getEntity();
-			if (entity != null && !(entity instanceof PlayerEntity) && !(entity instanceof AbstractArrowEntity)) amount = (amount + 1.0F) / 2.0F;
+			if (entity != null && !(entity instanceof PlayerEntity) && !(entity instanceof AbstractArrowEntity))
+				amount = (amount + 1.0F) / 2.0F;
 			return super.hurt(source, amount);
 		}
 	}
 
 	public boolean doHurtTarget(Entity entityIn) {
-		boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) ((int) this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
-		if (flag) this.doEnchantDamageEffects(this, entityIn);
+		boolean flag = entityIn.hurt(DamageSource.mobAttack(this),
+				(float) ((int) this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+		if (flag)
+			this.doEnchantDamageEffects(this, entityIn);
 
 		return flag;
 	}

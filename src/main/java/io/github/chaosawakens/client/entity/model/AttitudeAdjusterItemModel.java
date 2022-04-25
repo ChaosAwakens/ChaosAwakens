@@ -7,18 +7,18 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class AttitudeAdjusterItemModel extends AnimatedGeoModel<AttitudeAdjusterItem> {
 
-    @Override
-    public ResourceLocation getModelLocation(AttitudeAdjusterItem object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "geo/attitude_adjuster.geo.json");
-    }
+	@Override
+	public ResourceLocation getModelLocation(AttitudeAdjusterItem object) {
+		return new ResourceLocation(ChaosAwakens.MODID, "geo/attitude_adjuster.geo.json");
+	}
 
-    @Override
-    public ResourceLocation getTextureLocation(AttitudeAdjusterItem object) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/item/attitude_adjuster_model.png");
-    }
+	@Override
+	public ResourceLocation getTextureLocation(AttitudeAdjusterItem object) {
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/item/attitude_adjuster_model.png");
+	}
 
-    @Override
-    public ResourceLocation getAnimationFileLocation(AttitudeAdjusterItem animatable) {
-        return new ResourceLocation(ChaosAwakens.MODID, "animations/dummy.animation.json");
-    }
+	@Override
+	public ResourceLocation getAnimationFileLocation(AttitudeAdjusterItem animatable) {
+		return new ResourceLocation(ChaosAwakens.MODID, "animations/dummy.animation.json");
+	}
 }

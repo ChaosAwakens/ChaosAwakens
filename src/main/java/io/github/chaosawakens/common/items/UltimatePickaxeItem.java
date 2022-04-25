@@ -24,8 +24,9 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEnchantable{
-	public UltimatePickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, EnchantmentData[] enchantments) {
+public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEnchantable {
+	public UltimatePickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn,
+			EnchantmentData[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn, enchantments);
 	}
 
@@ -51,11 +52,10 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
 
 		protected final ItemStack getSmeltedOutput(LootContext context, ItemStack stack) {
 			if (context.getLevel() != null) {
-				return context.getLevel().getRecipeManager().getRecipeFor(IRecipeType.SMELTING, new Inventory(stack), context.getLevel())
-						.map(FurnaceRecipe::getResultItem)
-						.filter(itemStack -> !itemStack.isEmpty())
-						.map(itemStack -> copyStackWithSize(itemStack, stack.getCount()))
-						.orElse(stack);
+				return context.getLevel().getRecipeManager()
+						.getRecipeFor(IRecipeType.SMELTING, new Inventory(stack), context.getLevel())
+						.map(FurnaceRecipe::getResultItem).filter(itemStack -> !itemStack.isEmpty())
+						.map(itemStack -> copyStackWithSize(itemStack, stack.getCount())).orElse(stack);
 			} else
 				return stack;
 		}
@@ -79,7 +79,8 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
 
 		public static class Serializer extends GlobalLootModifierSerializer<UltimateAutoSmeltingModifier> {
 			@Override
-			public UltimateAutoSmeltingModifier read(ResourceLocation name, JsonObject json, ILootCondition[] conditionsIn) {
+			public UltimateAutoSmeltingModifier read(ResourceLocation name, JsonObject json,
+					ILootCondition[] conditionsIn) {
 				return new UltimateAutoSmeltingModifier(conditionsIn);
 			}
 

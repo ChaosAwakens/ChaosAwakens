@@ -45,15 +45,18 @@ public class MiscEventHandler {
 		CommandDispatcher<CommandSource> commandDispatcher = event.getDispatcher();
 		CACommand.register(commandDispatcher);
 	}
-	
+
 	public static void livingDeathEvent(LivingDeathEvent event) {
 		Entity entity = event.getEntity();
 		MinecraftServer server = entity.getServer();
 		Random random = new Random();
-		if (entity == null || server == null) return;
+		if (entity == null || server == null)
+			return;
 		if (entity instanceof PlayerEntity) {
-			// Make myself (Blackout03_) drop Ink Sacs any time I die. Even if I have none on me.
-			if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
+			// Make myself (Blackout03_) drop Ink Sacs any time I die. Even if I have none
+			// on me.
+			if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity,
+					UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
 				((PlayerEntity) entity).drop(new ItemStack(Items.INK_SAC, random.nextInt(3)), true, false);
 			}
 		}
@@ -62,21 +65,25 @@ public class MiscEventHandler {
 				if (entity instanceof EnderDragonEntity) {
 					EnderDragonEntity dragon = (EnderDragonEntity) entity;
 					if (dragon.getDragonFight() != null && dragon.getDragonFight().hasPreviouslyKilledDragon()) {
-						entity.getCommandSenderWorld().setBlockAndUpdate(entity.getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
+						entity.getCommandSenderWorld()
+								.setBlockAndUpdate(
+										entity.getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING,
+												EndPodiumFeature.END_PODIUM_LOCATION),
+										Blocks.DRAGON_EGG.defaultBlockState());
 					}
 				}
 			}
 		}
 	}
-	
+
 	public static void onMobDrops(LivingDropsEvent event) {
 		ItemStack stack;
 		ItemEntity drop;
-		
+
 		// ENDER DRAGON
 		if (event.getEntityLiving() instanceof EnderDragonEntity) {
 			EnderDragonEntity dragon = (EnderDragonEntity) event.getEntityLiving();
-			
+
 			// Drop #1: Ender Dragon Scales
 			int amount = 8 + (int) (Math.random() * 6) + (int) (Math.random() * event.getLootingLevel() * 4);
 			if (Objects.requireNonNull(dragon.getDragonFight()).hasPreviouslyKilledDragon())
@@ -84,7 +91,7 @@ public class MiscEventHandler {
 			stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
 			drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
 			event.getDrops().add(drop);
-			
+
 			// Drop #2: Ender Dragon Head
 			double chance = 0.1D + event.getLootingLevel() * 0.1D;
 			if (Math.random() < chance && CAConfig.COMMON.enderDragonHeadDrop.get()) {
@@ -97,15 +104,25 @@ public class MiscEventHandler {
 
 	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		Entity entity = event.getEntity();
-		if (entity == null) return;
-		if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
-			entity.getServer().getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.GREEN)
-					.append(new StringTextComponent("Blackout03_").withStyle(TextFormatting.BOLD, TextFormatting.DARK_GREEN))
-					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.GREEN)), ChatType.SYSTEM, Util.NIL_UUID);
-		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("29aa413b-d714-46f1-a3f5-68b9c67a4923"))) { // UUID of Ninjaguy169
-			entity.getServer().getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.BLUE)
-					.append(new StringTextComponent("Ninjaguy169").withStyle(TextFormatting.BOLD, TextFormatting.DARK_BLUE))
-					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.BLUE)), ChatType.SYSTEM, Util.NIL_UUID);
+		if (entity == null)
+			return;
+		if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID
+																															// of
+																															// Blackout03_
+			entity.getServer().getPlayerList().broadcastMessage(
+					new StringTextComponent("The Developer, ").withStyle(TextFormatting.GREEN)
+							.append(new StringTextComponent("Blackout03_").withStyle(TextFormatting.BOLD,
+									TextFormatting.DARK_GREEN))
+							.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.GREEN)),
+					ChatType.SYSTEM, Util.NIL_UUID);
+		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity,
+				UUID.fromString("29aa413b-d714-46f1-a3f5-68b9c67a4923"))) { // UUID of Ninjaguy169
+			entity.getServer().getPlayerList().broadcastMessage(
+					new StringTextComponent("The Developer, ").withStyle(TextFormatting.BLUE)
+							.append(new StringTextComponent("Ninjaguy169").withStyle(TextFormatting.BOLD,
+									TextFormatting.DARK_BLUE))
+							.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.BLUE)),
+					ChatType.SYSTEM, Util.NIL_UUID);
 		}
 	}
 
@@ -114,19 +131,28 @@ public class MiscEventHandler {
 		// Make villagers afraid of our entities
 		if (entity instanceof VillagerEntity) {
 			VillagerEntity villager = (VillagerEntity) entity;
-			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboPounderEntity.class, 24.0F, 0.5D, 0.5D));
-			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
-			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboWarriorEntity.class, 24.0F, 0.5D, 0.5D));
-			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, RoboPounderEntity.class, 40.0F, 0.5D, 0.5D));
+			villager.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(villager, RoboPounderEntity.class, 24.0F, 0.5D, 0.5D));
+			villager.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(villager, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
+			villager.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(villager, RoboWarriorEntity.class, 24.0F, 0.5D, 0.5D));
+			villager.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(villager, RoboPounderEntity.class, 40.0F, 0.5D, 0.5D));
 			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, GiantEntity.class, 32.0F, 0.5D, 0.5D));
 		}
 		if (entity instanceof WanderingTraderEntity) {
 			WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) entity;
-			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboPounderEntity.class, 24.0F, 0.5D, 0.5D));
-			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
-			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboWarriorEntity.class, 24.0F, 0.5D, 0.5D));
-			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, RoboPounderEntity.class, 40.0F, 0.5D, 0.5D));
-			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, GiantEntity.class, 32.0F, 0.5D, 0.5D));
+			wanderingTrader.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(wanderingTrader, RoboPounderEntity.class, 24.0F, 0.5D, 0.5D));
+			wanderingTrader.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(wanderingTrader, RoboSniperEntity.class, 24.0F, 0.5D, 0.5D));
+			wanderingTrader.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(wanderingTrader, RoboWarriorEntity.class, 24.0F, 0.5D, 0.5D));
+			wanderingTrader.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(wanderingTrader, RoboPounderEntity.class, 40.0F, 0.5D, 0.5D));
+			wanderingTrader.goalSelector.addGoal(1,
+					new AvoidEntityGoal<>(wanderingTrader, GiantEntity.class, 32.0F, 0.5D, 0.5D));
 		}
 	}
 }

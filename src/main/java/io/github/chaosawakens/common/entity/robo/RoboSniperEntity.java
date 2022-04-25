@@ -27,27 +27,26 @@ public class RoboSniperEntity extends RoboRangedEntity implements IAnimatable, I
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 25)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
-				.add(Attributes.ATTACK_SPEED, 10)
-				.add(Attributes.ATTACK_DAMAGE, 25)
-				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 25).add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.2D).add(Attributes.ATTACK_SPEED, 10)
+				.add(Attributes.ATTACK_DAMAGE, 25).add(Attributes.ATTACK_KNOCKBACK, 3.5D)
 				.add(Attributes.FOLLOW_RANGE, 24);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
+			event.getController().setAnimation(
+					new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.walking_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.walking_animation", true));
 		}
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
+		event.getController()
+				.setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 

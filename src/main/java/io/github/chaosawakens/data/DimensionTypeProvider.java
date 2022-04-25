@@ -32,7 +32,8 @@ public abstract class DimensionTypeProvider implements IDataProvider {
 		while (var2.hasNext()) {
 			Map.Entry<ResourceLocation, DimensionTypeBuilder> entry = (Map.Entry) var2.next();
 			ResourceLocation dimensionType = entry.getKey();
-			Path path = generator.getOutputFolder().resolve("data/" + dimensionType.getNamespace() + "/dimension_type/" + dimensionType.getPath() + ".json");
+			Path path = generator.getOutputFolder().resolve(
+					"data/" + dimensionType.getNamespace() + "/dimension_type/" + dimensionType.getPath() + ".json");
 
 			try {
 				IDataProvider.save(GSON, cache, (entry.getValue()).serialize(), path);

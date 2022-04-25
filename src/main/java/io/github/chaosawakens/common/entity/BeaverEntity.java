@@ -21,27 +21,27 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public class BeaverEntity extends AnimalEntity implements IAnimatable {
-    private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 
-    public BeaverEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
-        super(type, worldIn);
-        this.noCulling = true;
-    }
+	public BeaverEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+		super(type, worldIn);
+		this.noCulling = true;
+	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 6)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 6).add(Attributes.MOVEMENT_SPEED, 0.15D)
 				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.beaver.walking_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.beaver.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.beaver.idle_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.beaver.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -55,19 +55,19 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "beavercontroller", 0, this::predicate));
-    }
+	@Override
+	public void registerControllers(AnimationData data) {
+		data.addAnimationController(new AnimationController<>(this, "beavercontroller", 0, this::predicate));
+	}
 
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
+	@Override
+	public AnimationFactory getFactory() {
+		return this.factory;
+	}
 
-    @Nullable
-    @Override
-    public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+		return null;
+	}
 }

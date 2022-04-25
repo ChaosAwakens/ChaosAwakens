@@ -9,7 +9,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
  * @author invalid2
  */
 public class TomatoBodyBlock extends CropBodyPlantBlock {
-	
+
 	/**
 	 * @param properties
 	 * @param direction
@@ -18,10 +18,10 @@ public class TomatoBodyBlock extends CropBodyPlantBlock {
 	public TomatoBodyBlock(Properties properties, Direction direction, VoxelShape shape) {
 		super(properties, direction, shape, false);
 	}
-	
+
 	@Override
 	protected AbstractTopPlantBlock getHeadBlock() {
 		return CABlocks.TOMATO_TOP_BLOCK.get();
 	}
-	
+
 }

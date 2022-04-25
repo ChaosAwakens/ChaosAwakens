@@ -28,19 +28,22 @@ public class EnumUtils {
 		TOOL_KYANITE(1, 800, 3, 2, 6, () -> Ingredient.of(CABlocks.KYANITE.get())),
 		TOOL_PINK_TOURMALINE(2, 1100, 7, 8, 6, () -> Ingredient.of(CAItems.PINK_TOURMALINE_INGOT.get())),
 		TOOL_CATS_EYE(3, 1600, 8, 8, 20, () -> Ingredient.of(CAItems.CATS_EYE_INGOT.get())),
-		TOOL_ULTIMATE(6, 3000, 25, 36, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
+		TOOL_ULTIMATE(6, 3000, 25, 36, 64,
+				() -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 		TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.of(CAItems.NIGHTMARE_SCALE.get())),
 		TOOL_COPPER(2, 150, 4, 2, 6, () -> Ingredient.of(CAItems.COPPER_LUMP.get())),
 		TOOL_TIN(2, 180, 5, 3, 8, () -> Ingredient.of(CAItems.TIN_LUMP.get())),
 		TOOL_SILVER(3, 450, 7, 4, 10, () -> Ingredient.of(CAItems.SILVER_LUMP.get())),
 		TOOL_PLATINUM(5, 1600, 8, 6, 12, () -> Ingredient.of(CAItems.PLATINUM_LUMP.get())),
-		WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
+		WEAPON_BATTLEAXE(5, 1200, 15, 47, 64,
+				() -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 		WEAPON_SLAYER_CHAINSAW(4, 250, 30, 40, 0, () -> Ingredient.of(Items.REDSTONE_BLOCK)),
 		WEAPON_QUEEN_BATTLEAXE(4, 10000, 15, 663, 96, () -> Ingredient.of(CAItems.QUEEN_SCALE.get())),
 		WEAPON_ROYAL_GUARDIAN_SWORD(4, 10000, 15, 748, 96, () -> Ingredient.EMPTY),
 		WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.of(Blocks.REDSTONE_BLOCK)),
 		WEAPON_GENERIC(2, 1024, 6, 6, 8, () -> Ingredient.EMPTY),
-		WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, () -> Ingredient.EMPTY), WEAPON_BERTHA(4, 6000, 16, 496, 72, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
+		WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, () -> Ingredient.EMPTY), WEAPON_BERTHA(4, 6000, 16, 496, 72,
+				() -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
 
 		private final int harvestLevel;
 		private final int maxUses;
@@ -49,7 +52,8 @@ public class EnumUtils {
 		private final int enchantability;
 		private final Supplier<Ingredient> repairMaterial;
 
-		CAItemTier(int harvestLevel, int maxUses, float efficiency, float damage, int enchantability, Supplier<Ingredient> repairMaterial) {
+		CAItemTier(int harvestLevel, int maxUses, float efficiency, float damage, int enchantability,
+				Supplier<Ingredient> repairMaterial) {
 			this.harvestLevel = harvestLevel;
 			this.maxUses = maxUses;
 			this.efficiency = efficiency;
@@ -86,7 +90,8 @@ public class EnumUtils {
 
 	public enum CAArmorMaterial implements IArmorMaterial {
 		// Name, Durability multiplier, Damage Reduction multiplier, Damage Reduction,
-		// Enchantability, Sound Events, Toughness, Knockback Resistance, Repair Material
+		// Enchantability, Sound Events, Toughness, Knockback Resistance, Repair
+		// Material
 		EMERALD("emerald", 35, new int[] { 3, 6, 8, 3 }, 24, SoundEvents.ARMOR_EQUIP_DIAMOND, 2f, 0f,
 				() -> Ingredient.of(Items.EMERALD)),
 		EXPERIENCE("experience", 39, new int[] { 4, 7, 9, 5 }, 32, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.5f, 0f,
@@ -119,10 +124,10 @@ public class EnumUtils {
 				() -> Ingredient.of(CAItems.SILVER_LUMP.get())),
 		PLATINUM("platinum", 35, new int[] { 3, 6, 8, 3 }, 12, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.5f, 0f,
 				() -> Ingredient.of(CAItems.PLATINUM_LUMP.get())),
-		MOBZILLA_SCALE("mobzilla_scale", 40, new int[] { 7, 11, 13, 7 }, 74, SoundEvents.ARMOR_EQUIP_NETHERITE, 6f, 0.2f,
-				() -> Ingredient.EMPTY),
-		ROYAL_GUARDIAN("royal_guardian", 72, new int[] { 8, 12, 14, 8 }, 84, SoundEvents.ARMOR_EQUIP_NETHERITE, 7.5f, 0.4f,
-				() -> Ingredient.EMPTY),
+		MOBZILLA_SCALE("mobzilla_scale", 40, new int[] { 7, 11, 13, 7 }, 74, SoundEvents.ARMOR_EQUIP_NETHERITE, 6f,
+				0.2f, () -> Ingredient.EMPTY),
+		ROYAL_GUARDIAN("royal_guardian", 72, new int[] { 8, 12, 14, 8 }, 84, SoundEvents.ARMOR_EQUIP_NETHERITE, 7.5f,
+				0.4f, () -> Ingredient.EMPTY),
 		QUEEN_SCALE("queen_scale", 68, new int[] { 9, 14, 16, 9 }, 96, SoundEvents.ARMOR_EQUIP_NETHERITE, 8f, 0.3f,
 				() -> Ingredient.of(CAItems.QUEEN_SCALE.get()));
 
@@ -136,7 +141,9 @@ public class EnumUtils {
 		private final float knockbackResistance;
 		private final Supplier<Ingredient> repairMaterial;
 
-		CAArmorMaterial(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn, float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
+		CAArmorMaterial(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn,
+				SoundEvent soundOnEquip, float toughnessIn, float knockbackResistanceIn,
+				Supplier<Ingredient> repairMaterialIn) {
 			this.name = ChaosAwakens.MODID + ":" + nameIn;
 			this.durability = durabilityIn;
 			this.damageReductionAmountArray = damageReductionAmountArrayIn;

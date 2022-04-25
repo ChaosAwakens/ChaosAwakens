@@ -7,9 +7,9 @@ import net.minecraft.tileentity.TileEntityType;
 import javax.annotation.Nonnull;
 
 public class CASignTileEntity extends SignTileEntity {
-    @Nonnull
-    @Override
-    public TileEntityType<CASignTileEntity> getType() {
-        return (TileEntityType<CASignTileEntity>) CATileEntities.CUSTOM_SIGN.get();
-    }
+	@Nonnull
+	@Override
+	public TileEntityType<CASignTileEntity> getType() {
+		return (TileEntityType<CASignTileEntity>) CATileEntities.CUSTOM_SIGN.get();
+	}
 }

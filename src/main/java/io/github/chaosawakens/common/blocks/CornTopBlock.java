@@ -14,12 +14,12 @@ public class CornTopBlock extends CropTopPlantBlock {
 	public CornTopBlock(Properties properties, Direction direction, VoxelShape shape, double growPerTickProbability) {
 		super(properties, direction, shape, growPerTickProbability);
 	}
-	
+
 	@Override
 	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(CAItems.CORN_SEEDS.get());
 	}
-	
+
 	@Override
 	protected Block getBodyBlock() {
 		return CABlocks.CORN_BODY_BLOCK.get();

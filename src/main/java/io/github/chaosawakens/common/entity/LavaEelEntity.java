@@ -34,7 +34,7 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 		super(entityType, world);
 		this.noCulling = true;
 	}
-	
+
 	@Override
 	public Entity getEntity() {
 		return this;
@@ -52,13 +52,9 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 6.0D)
-				.add(Attributes.MOVEMENT_SPEED, 1.0D)
-				.add(Attributes.ATTACK_SPEED, 0.3D)
-				.add(Attributes.ATTACK_DAMAGE, 2.0D)
-				.add(Attributes.ATTACK_KNOCKBACK, 1)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.35D)
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 6.0D).add(Attributes.MOVEMENT_SPEED, 1.0D)
+				.add(Attributes.ATTACK_SPEED, 0.3D).add(Attributes.ATTACK_DAMAGE, 2.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 1).add(Attributes.KNOCKBACK_RESISTANCE, 0.35D)
 				.add(Attributes.FOLLOW_RANGE, 10.0D);
 	}
 
@@ -76,17 +72,17 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.swim", true));
 			return PlayState.CONTINUE;
 		}
-		if(this.dead) {
+		if (this.dead) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.flop", true));
 		}
-		if(this.isSwimming()) {
+		if (this.isSwimming()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.swim", true));
 		}
-		if(this.isDeadOrDying()) {
+		if (this.isDeadOrDying()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.flop", true));
 			return PlayState.CONTINUE;
 		}
-		if(this.isInLava()) {
+		if (this.isInLava()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.swim", true));
 			return PlayState.CONTINUE;
 		}
@@ -109,9 +105,9 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	@Override
 	public boolean doHurtTarget(Entity livingEntity) {
 		LivingEntity target = this.getTarget();
-		LavaEelEntity attacker = (LavaEelEntity)livingEntity;
-		if(target.getLastHurtByMob() == attacker) {
-			if(target instanceof LivingEntity) {
+		LavaEelEntity attacker = (LavaEelEntity) livingEntity;
+		if (target.getLastHurtByMob() == attacker) {
+			if (target instanceof LivingEntity) {
 				float health = attacker.getHealth();
 				target.setSecondsOnFire((int) (health * 4));
 			}
@@ -119,12 +115,10 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 		return super.doHurtTarget(attacker);
 	}
 
-
 	@Override
 	public int getMaxSpawnClusterSize() {
 		return 6;
 	}
-
 
 	@Override
 	public AnimationFactory getFactory() {

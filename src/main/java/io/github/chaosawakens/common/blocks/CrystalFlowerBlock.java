@@ -30,7 +30,8 @@ public class CrystalFlowerBlock extends FlowerBlock {
 
 	public boolean canSurvive(BlockState state, IWorldReader worldReader, BlockPos pos) {
 		BlockPos blockpos = pos.below();
-		if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+		if (state.getBlock() == this) // Forge: This function is called during world gen and placement, before this
+										// block is set, so if we are not 'here' then assume it's the pre-check.
 			return worldReader.getBlockState(blockpos).canSustainPlant(worldReader, blockpos, Direction.UP, this);
 		return this.mayPlaceOn(worldReader.getBlockState(blockpos), worldReader, blockpos);
 	}
@@ -45,24 +46,24 @@ public class CrystalFlowerBlock extends FlowerBlock {
 	public AbstractBlock.OffsetType getOffsetType() {
 		return AbstractBlock.OffsetType.XZ;
 	}
-	
+
 	@OnlyIn(Dist.CLIENT)
-    @Override
-    public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {
-        return state1.getBlock() instanceof CrystalBlock || super.skipRendering(state, state1, direction);
-    }
-    
-    @Override
-    public VoxelShape getVisualShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
-        return VoxelShapes.empty();
-    }
+	@Override
+	public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {
+		return state1.getBlock() instanceof CrystalBlock || super.skipRendering(state, state1, direction);
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public float getShadeBrightness(BlockState state, IBlockReader reader, BlockPos pos) {
-        return 1.0F;
-    }
+	@Override
+	public VoxelShape getVisualShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
+		return VoxelShapes.empty();
+	}
 
-    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
-        return true;
-    }
+	@OnlyIn(Dist.CLIENT)
+	public float getShadeBrightness(BlockState state, IBlockReader reader, BlockPos pos) {
+		return 1.0F;
+	}
+
+	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+		return true;
+	}
 }

@@ -10,7 +10,7 @@ abstract public class RoboRangedEntity extends RoboEntity {
 	public RoboRangedEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
-	
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();

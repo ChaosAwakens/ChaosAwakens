@@ -12,7 +12,7 @@ import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 public class QueenScaleBattleAxeItemRender extends GeoItemRenderer<ExtendedHitAxeItem> {
-    public QueenScaleBattleAxeItemRender() {
-        super(new QueenScaleBattleAxeItemModel());
-    }
+	public QueenScaleBattleAxeItemRender() {
+		super(new QueenScaleBattleAxeItemModel());
+	}
 }

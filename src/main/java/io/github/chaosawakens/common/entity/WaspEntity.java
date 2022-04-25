@@ -47,13 +47,9 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 80)
-				.add(Attributes.ARMOR, 10)
-				.add(Attributes.FLYING_SPEED, 0.8F)
-				.add(Attributes.MOVEMENT_SPEED, 0.4F)
-				.add(Attributes.ATTACK_DAMAGE, 12)
-				.add(Attributes.FOLLOW_RANGE, 36);
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 80).add(Attributes.ARMOR, 10)
+				.add(Attributes.FLYING_SPEED, 0.8F).add(Attributes.MOVEMENT_SPEED, 0.4F)
+				.add(Attributes.ATTACK_DAMAGE, 12).add(Attributes.FOLLOW_RANGE, 36);
 	}
 
 	public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
@@ -98,7 +94,8 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	}
 
 	public boolean doHurtTarget(Entity entityIn) {
-		boolean flag = entityIn.hurt(DamageSource.sting(this), (float) ((int) this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+		boolean flag = entityIn.hurt(DamageSource.sting(this),
+				(float) ((int) this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
 		if (flag) {
 			this.doEnchantDamageEffects(this, entityIn);
 			if (entityIn instanceof LivingEntity) {

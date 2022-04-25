@@ -11,74 +11,81 @@ import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.server.ServerWorld;
 
 public class StructureItem extends Item {
-    String structureName;
+	String structureName;
 
-    public StructureItem(Properties builderIn, String structureName) {
-        super(builderIn);
-        this.structureName = structureName;
-    }
+	public StructureItem(Properties builderIn, String structureName) {
+		super(builderIn);
+		this.structureName = structureName;
+	}
 
-    @Override
-    public ActionResultType useOn(ItemUseContext context) {
-        World world = context.getLevel();
-        BlockPos pos = context.getClickedPos();
+	@Override
+	public ActionResultType useOn(ItemUseContext context) {
+		World world = context.getLevel();
+		BlockPos pos = context.getClickedPos();
 
-        if (world instanceof ServerWorld) {
-            Template template = ((ServerWorld) world).getStructureManager()
-                    .getOrCreate(new ResourceLocation("chaosawakens", structureName));
-            PlacementHelper targetPlacement = new PlacementHelper(pos, template.getSize(), context.getHorizontalDirection());
-            if (template != null) {
-                template.placeInWorldChunk((ServerWorld) world,
-                        targetPlacement.getPos(),
-                        new PlacementSettings().setRotation(targetPlacement.getRotation()).setMirror(Mirror.NONE).setChunkPos(null).setIgnoreEntities(false), (world).random);
-                context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
-                context.getItemInHand().shrink(1);
-            }
-        }
+		if (world instanceof ServerWorld) {
+			Template template = ((ServerWorld) world).getStructureManager()
+					.getOrCreate(new ResourceLocation("chaosawakens", structureName));
+			PlacementHelper targetPlacement = new PlacementHelper(pos, template.getSize(),
+					context.getHorizontalDirection());
+			if (template != null) {
+				template.placeInWorldChunk((ServerWorld) world, targetPlacement.getPos(),
+						new PlacementSettings().setRotation(targetPlacement.getRotation()).setMirror(Mirror.NONE)
+								.setChunkPos(null).setIgnoreEntities(false),
+						(world).random);
+				context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
+				context.getItemInHand().shrink(1);
+			}
+		}
 
-        return ActionResultType.SUCCESS;
-    }
+		return ActionResultType.SUCCESS;
+	}
 
-    /**
-     * Does the necessary value manipulation to figure out where to put the structure
-     *
-     * @author invalid2
-     */
-    static class PlacementHelper {
-        private final BlockPos pos;
-        private final Rotation rotation;
+	/**
+	 * Does the necessary value manipulation to figure out where to put the
+	 * structure
+	 *
+	 * @author invalid2
+	 */
+	static class PlacementHelper {
+		private final BlockPos pos;
+		private final Rotation rotation;
 
-        public PlacementHelper(BlockPos pos, BlockPos templateSize, Direction direction) {
-            super();
-            switch (direction) {
-                case NORTH:
-                    this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(), pos.getZ() + templateSize.getZ() / 2);
-                    this.rotation = Rotation.CLOCKWISE_180;
-                    break;
-                case SOUTH:
-                    this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(), pos.getZ() - templateSize.getZ() / 2);
-                    this.rotation = Rotation.CLOCKWISE_180.getRotated(Rotation.CLOCKWISE_180);
-                    break;
-                case WEST:
-                    this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(), pos.getZ() - templateSize.getZ() / 2);
-                    this.rotation = Rotation.CLOCKWISE_90;
-                    break;
-                case EAST:
-                    this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(), pos.getZ() + templateSize.getZ() / 2);
-                    this.rotation = Rotation.COUNTERCLOCKWISE_90;
-                    break;
-                default:
-                    this.pos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
-                    this.rotation = Rotation.NONE;
-            }
-        }
+		public PlacementHelper(BlockPos pos, BlockPos templateSize, Direction direction) {
+			super();
+			switch (direction) {
+			case NORTH:
+				this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(),
+						pos.getZ() + templateSize.getZ() / 2);
+				this.rotation = Rotation.CLOCKWISE_180;
+				break;
+			case SOUTH:
+				this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(),
+						pos.getZ() - templateSize.getZ() / 2);
+				this.rotation = Rotation.CLOCKWISE_180.getRotated(Rotation.CLOCKWISE_180);
+				break;
+			case WEST:
+				this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(),
+						pos.getZ() - templateSize.getZ() / 2);
+				this.rotation = Rotation.CLOCKWISE_90;
+				break;
+			case EAST:
+				this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(),
+						pos.getZ() + templateSize.getZ() / 2);
+				this.rotation = Rotation.COUNTERCLOCKWISE_90;
+				break;
+			default:
+				this.pos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+				this.rotation = Rotation.NONE;
+			}
+		}
 
-        public BlockPos getPos() {
-            return pos;
-        }
+		public BlockPos getPos() {
+			return pos;
+		}
 
-        public Rotation getRotation() {
-            return rotation;
-        }
-    }
+		public Rotation getRotation() {
+			return rotation;
+		}
+	}
 }

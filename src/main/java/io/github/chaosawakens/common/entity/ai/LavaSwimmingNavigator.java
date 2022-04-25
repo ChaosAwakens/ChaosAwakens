@@ -9,7 +9,7 @@ public class LavaSwimmingNavigator extends SwimmerPathNavigator {
 	public LavaSwimmingNavigator(MobEntity entity, World world) {
 		super(entity, world);
 	}
-	
+
 	@Override
 	protected PathFinder createPathFinder(int i) {
 		this.nodeEvaluator = new LavaNodeSwimmingProcessor(false);

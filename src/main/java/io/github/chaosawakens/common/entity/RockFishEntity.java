@@ -52,13 +52,9 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 12.0D)
-				.add(Attributes.MOVEMENT_SPEED, 1.2D)
-				.add(Attributes.ATTACK_SPEED, 0.25D)
-				.add(Attributes.ATTACK_DAMAGE, 1.0D)
-				.add(Attributes.ATTACK_KNOCKBACK, 0)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 12.0D).add(Attributes.MOVEMENT_SPEED, 1.2D)
+				.add(Attributes.ATTACK_SPEED, 0.25D).add(Attributes.ATTACK_DAMAGE, 1.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0).add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.add(Attributes.FOLLOW_RANGE, 4.0D);
 	}
 
@@ -84,15 +80,18 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (this.isSwimming()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -122,10 +121,13 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		super.aiStep();
 	}
 
-	public static boolean checkRockFishSpawnRules(EntityType<RockFishEntity> rockfish, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+	public static boolean checkRockFishSpawnRules(EntityType<RockFishEntity> rockfish, IWorld world, SpawnReason reason,
+			BlockPos pos, Random random) {
 		if (pos.getY() > 25 && pos.getY() < 35) {
 			Optional<RegistryKey<Biome>> optional = world.getBiomeName(pos);
-			return (Objects.equals(optional, Optional.of(Biomes.OCEAN)) || Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
+			return (Objects.equals(optional, Optional.of(Biomes.OCEAN))
+					|| Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN)))
+					&& world.getFluidState(pos).is(FluidTags.WATER);
 		} else {
 			return false;
 		}
@@ -152,7 +154,8 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 				double d2 = this.wantedZ - this.rockfish.getZ();
 				if (d1 != 0.0D) {
 					double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-					this.rockfish.setDeltaMovement(this.rockfish.getDeltaMovement().add(0.0D, (double) this.rockfish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+					this.rockfish.setDeltaMovement(this.rockfish.getDeltaMovement().add(0.0D,
+							(double) this.rockfish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
 				if (d0 != 0.0D || d2 != 0.0D) {
 					float f1 = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;

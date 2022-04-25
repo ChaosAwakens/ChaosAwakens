@@ -37,20 +37,20 @@ public class LavaMobEntity extends CreatureEntity {
 	protected int getExperienceReward(PlayerEntity playerEntity) {
 		return 1 + this.level.random.nextInt(3);
 	}
-	
+
 	protected void handleAirSupply(int air) {
-	    if (this.isAlive() && !this.isInLava()) {
-	        this.setAirSupply(air - 1);
-	        if (this.isInWater()) {
-	          this.setAirSupply(0);
-	          this.hurt(DamageSource.DROWN, Integer.MAX_VALUE);
-	        } else if (this.getAirSupply() == -20) {
-	          this.setAirSupply(0);
-	          this.hurt(DamageSource.DROWN, 2.0F);
-	        }
-	      } else {
-	        this.setAirSupply(300);
-	      }
+		if (this.isAlive() && !this.isInLava()) {
+			this.setAirSupply(air - 1);
+			if (this.isInWater()) {
+				this.setAirSupply(0);
+				this.hurt(DamageSource.DROWN, Integer.MAX_VALUE);
+			} else if (this.getAirSupply() == -20) {
+				this.setAirSupply(0);
+				this.hurt(DamageSource.DROWN, 2.0F);
+			}
+		} else {
+			this.setAirSupply(300);
+		}
 	}
 
 	public void baseTick() {

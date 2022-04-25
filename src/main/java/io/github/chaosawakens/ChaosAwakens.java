@@ -68,7 +68,7 @@ public class ChaosAwakens {
 		eventBus.addListener(this::onInterModEnqueueEvent);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
-		
+
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 //			eventBus.addListener(ClientSetupEvent::mouseEvent);
@@ -97,7 +97,7 @@ public class ChaosAwakens {
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 		eventBus.addListener(EntityAttributeModificationEventSubscriber::onEntityAttributeModificationEvent);
 
-		//Register to the forge event bus
+		// Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
@@ -139,6 +139,7 @@ public class ChaosAwakens {
 	}
 
 	private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {
-		if (ModList.get().isLoaded("theoneprobe")) TheOneProbePlugin.register();
+		if (ModList.get().isLoaded("theoneprobe"))
+			TheOneProbePlugin.register();
 	}
-} 
+}

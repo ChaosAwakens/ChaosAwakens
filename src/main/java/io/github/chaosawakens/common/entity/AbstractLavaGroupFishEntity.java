@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	private AbstractLavaGroupFishEntity leader;
 	private int schoolSize = 1;
-	
+
 	public AbstractLavaGroupFishEntity(EntityType<? extends AbstractLavaGroupFishEntity> entityType, World world) {
 		super(entityType, world);
 	}
@@ -51,11 +51,11 @@ public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 		this.leader.removeFollower();
 		this.leader = null;
 	}
-	
+
 	private void addFollower() {
 		++this.schoolSize;
 	}
-	
+
 	private void removeFollower() {
 		--this.schoolSize;
 	}
@@ -67,8 +67,10 @@ public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	public void tick() {
 		super.tick();
 		if (this.hasFollowers() && this.level.random.nextInt(300 - 100) == 1) {
-			List<AbstractLavaEntity> list = this.level.getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
-			if (list.size() <= 1) this.schoolSize = 1;
+			List<AbstractLavaEntity> list = this.level.getEntitiesOfClass(this.getClass(),
+					this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
+			if (list.size() <= 1)
+				this.schoolSize = 1;
 		}
 	}
 
@@ -81,15 +83,18 @@ public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	}
 
 	public void pathToLeader() {
-		if (this.isFollower()) this.getNavigation().moveTo(this.leader, 1.0D);
+		if (this.isFollower())
+			this.getNavigation().moveTo(this.leader, 1.0D);
 	}
 
 	public void addFollowers(Stream<AbstractLavaGroupFishEntity> entity) {
-		entity.limit((this.getMaxSchoolSize() - this.schoolSize)).filter((entity1) -> entity1 != this).forEach((entity2) -> entity2.startFollowing(this));
+		entity.limit((this.getMaxSchoolSize() - this.schoolSize)).filter((entity1) -> entity1 != this)
+				.forEach((entity2) -> entity2.startFollowing(this));
 	}
 
 	@Nullable
-	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag) {
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason,
+			@Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag) {
 		super.finalizeSpawn(world, difficulty, reason, spawnData, dataTag);
 		if (spawnData == null) {
 			spawnData = new AbstractLavaGroupFishEntity.GroupData(this);

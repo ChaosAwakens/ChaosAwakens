@@ -16,29 +16,35 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class RoboPounderRender extends GeoEntityRenderer<RoboPounderEntity> {
 
-    public RoboPounderRender(EntityRendererManager renderManager) {
+	public RoboPounderRender(EntityRendererManager renderManager) {
 		super(renderManager, new RoboPounderModel());
 		this.shadowRadius = 0.6F;
 		this.addLayer(new RoboPounderGlowLayer(this));
 	}
 
 	@Override
-    public void renderEarly(RoboPounderEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
-    }
+	public void renderEarly(RoboPounderEntity animatable, MatrixStack stackIn, float ticks,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn,
+			float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
+				red, green, blue, partialTicks);
+	}
 
-    @Override
-    public ResourceLocation getTextureLocation(RoboPounderEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_pounder.png");
-    }
+	@Override
+	public ResourceLocation getTextureLocation(RoboPounderEntity entity) {
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/robos/robo_pounder.png");
+	}
 
-    @Override
-    public RenderType getRenderType(RoboPounderEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
-    }
+	@Override
+	public RenderType getRenderType(RoboPounderEntity animatable, float partialTicks, MatrixStack stack,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
+			ResourceLocation textureLocation) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
 
-    @Override
-    public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
+	@Override
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
+			int packedOverlayIn, float red, float green, float blue, float alpha) {
+		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
 }

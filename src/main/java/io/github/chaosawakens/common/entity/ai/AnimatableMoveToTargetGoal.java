@@ -16,7 +16,9 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	 *
 	 * @param entity          AnimatableMonsterEntity instance
 	 * @param speedMultiplier Entity will move by base speed * this
-	 * @param checkRate       Check rate with formula: {@code if(RANDOM.nextInt(rate) == 0)}, so bigger = less often
+	 * @param checkRate       Check rate with formula:
+	 *                        {@code if(RANDOM.nextInt(rate) == 0)}, so bigger =
+	 *                        less often
 	 */
 	public AnimatableMoveToTargetGoal(AnimatableMonsterEntity entity, double speedMultiplier, int checkRate) {
 		this.entity = entity;
@@ -27,28 +29,31 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 
 	@Override
 	public boolean canUse() {
-		if (RANDOM.nextInt(this.checkRate) == 0) return false;
+		if (RANDOM.nextInt(this.checkRate) == 0)
+			return false;
 		return this.isExecutable(this, this.entity, this.entity.getTarget());
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (RANDOM.nextInt(this.checkRate) == 0) return true;
+		if (RANDOM.nextInt(this.checkRate) == 0)
+			return true;
 		return this.isExecutable(this, this.entity, this.entity.getTarget());
 	}
 
-    @Override
-    public void start() {
-        this.entity.setAggressive(true);
-        this.entity.setMoving(true);
-        this.entity.lookAt(this.entity.getTarget(), 30.0F, 30.0F);
-        this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
-    }
+	@Override
+	public void start() {
+		this.entity.setAggressive(true);
+		this.entity.setMoving(true);
+		this.entity.lookAt(this.entity.getTarget(), 30.0F, 30.0F);
+		this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
+	}
 
 	@Override
 	public void stop() {
 		LivingEntity target = this.entity.getTarget();
-		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.entity.setTarget(null);
+		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target))
+			this.entity.setTarget(null);
 		this.entity.setAggressive(false);
 		this.entity.setMoving(false);
 		this.entity.getNavigation().stop();
@@ -57,7 +62,8 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	@Override
 	public void tick() {
 		LivingEntity target = this.entity.getTarget();
-		if (target == null) return;
+		if (target == null)
+			return;
 		this.entity.getLookControl().setLookAt(target, 30F, 30F);
 		start();
 	}

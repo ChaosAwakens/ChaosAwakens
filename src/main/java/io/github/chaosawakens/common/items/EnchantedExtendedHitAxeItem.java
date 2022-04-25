@@ -15,58 +15,59 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem implements IAutoEnchantable, IVanishable, IAnimatable {
-    public AnimationFactory factory = new AnimationFactory(this);
-    private final EnchantmentData[] enchantments;
+public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem
+		implements IAutoEnchantable, IVanishable, IAnimatable {
+	public AnimationFactory factory = new AnimationFactory(this);
+	private final EnchantmentData[] enchantments;
 
-    public EnchantedExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistanceIn, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
-        super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
-        this.enchantments = enchantments;
-    }
+	public EnchantedExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistanceIn,
+			int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
+		super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
+		this.enchantments = enchantments;
+	}
 
-    @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(group)) {
-            ItemStack stack = new ItemStack(this);
-            if (CAConfig.COMMON.enableAutoEnchanting.get())
-                for (EnchantmentData enchant : enchantments) {
-                    stack.enchant(enchant.enchantment, enchant.level);
-                }
-            items.add(stack);
-        }
-    }
+	@Override
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+		if (this.allowdedIn(group)) {
+			ItemStack stack = new ItemStack(this);
+			if (CAConfig.COMMON.enableAutoEnchanting.get())
+				for (EnchantmentData enchant : enchantments) {
+					stack.enchant(enchant.enchantment, enchant.level);
+				}
+			items.add(stack);
+		}
+	}
 
-    @Override
-    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-        if (CAConfig.COMMON.enableAutoEnchanting.get())
-            for (EnchantmentData enchant : enchantments) {
-                stack.enchant(enchant.enchantment, enchant.level);
-            }
-    }
+	@Override
+	public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+		if (CAConfig.COMMON.enableAutoEnchanting.get())
+			for (EnchantmentData enchant : enchantments) {
+				stack.enchant(enchant.enchantment, enchant.level);
+			}
+	}
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
-    }
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
+	}
 
-    @Override
-    public EnchantmentData[] enchantments() {
-        return this.enchantments;
-    }
+	@Override
+	public EnchantmentData[] enchantments() {
+		return this.enchantments;
+	}
 
+	@Override
+	public void registerControllers(AnimationData data) {
+		// insert controllers here
+	}
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        // insert controllers here
-    }
+	@Override
+	public AnimationFactory getFactory() {
+		return this.factory;
+	}
 
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
-
-    @Override
-    public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-        return true;
-    }
+	@Override
+	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
+		return true;
+	}
 }

@@ -23,7 +23,8 @@ import java.util.Map;
 public class LootFunctionEnchant extends LootFunction {
 	private final Map<IRegistryDelegate<Enchantment>, Short> enchantments;
 
-	protected LootFunctionEnchant(ILootCondition[] conditions, Map<IRegistryDelegate<Enchantment>, Short> enchantments) {
+	protected LootFunctionEnchant(ILootCondition[] conditions,
+			Map<IRegistryDelegate<Enchantment>, Short> enchantments) {
 		super(conditions);
 		this.enchantments = enchantments;
 	}
@@ -82,7 +83,8 @@ public class LootFunctionEnchant extends LootFunction {
 		}
 
 		@Override
-		public LootFunctionEnchant deserialize(JsonObject object, JsonDeserializationContext ctx, ILootCondition[] conditions) {
+		public LootFunctionEnchant deserialize(JsonObject object, JsonDeserializationContext ctx,
+				ILootCondition[] conditions) {
 			Map<IRegistryDelegate<Enchantment>, Short> enchantments = new HashMap<>();
 
 			if (object.has("enchantments")) {
@@ -90,13 +92,16 @@ public class LootFunctionEnchant extends LootFunction {
 
 				for (Map.Entry<String, JsonElement> e : enchantObj.entrySet()) {
 					ResourceLocation id = new ResourceLocation(e.getKey());
-					if (!ForgeRegistries.ENCHANTMENTS.containsKey(id)) throw new JsonSyntaxException("Can't find enchantment " + e.getKey());
+					if (!ForgeRegistries.ENCHANTMENTS.containsKey(id))
+						throw new JsonSyntaxException("Can't find enchantment " + e.getKey());
 
 					Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(id);
 					short lvl = e.getValue().getAsShort();
 
 					for (IRegistryDelegate<Enchantment> other : enchantments.keySet()) {
-						if (!ench.isCompatibleWith(other.get())) throw new JsonParseException(String.format("Enchantments %s and %s conflict", ench.getRegistryName(), other.get().getRegistryName()));
+						if (!ench.isCompatibleWith(other.get()))
+							throw new JsonParseException(String.format("Enchantments %s and %s conflict",
+									ench.getRegistryName(), other.get().getRegistryName()));
 					}
 
 					enchantments.put(ench.delegate, lvl);

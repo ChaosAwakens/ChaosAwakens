@@ -20,12 +20,18 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 abstract public class RoboEntity extends AnimatableMonsterEntity {
-	protected static final DataParameter<Boolean> RAGE_MODE_ENABLED = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> RAGE_MODE_DISABLED = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> RAGE_RUNNING = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> RAGE_RUNNING_DISABLED = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> SIDE_SWEEPING = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> PUNCHING = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_MODE_ENABLED = EntityDataManager.defineId(RoboEntity.class,
+			DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_MODE_DISABLED = EntityDataManager.defineId(RoboEntity.class,
+			DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_RUNNING = EntityDataManager.defineId(RoboEntity.class,
+			DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_RUNNING_DISABLED = EntityDataManager.defineId(RoboEntity.class,
+			DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> SIDE_SWEEPING = EntityDataManager.defineId(RoboEntity.class,
+			DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> PUNCHING = EntityDataManager.defineId(RoboEntity.class,
+			DataSerializers.BOOLEAN);
 
 	public RoboEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -68,7 +74,6 @@ abstract public class RoboEntity extends AnimatableMonsterEntity {
 	public boolean getRageMode() {
 		return this.entityData.get(RAGE_MODE_ENABLED);
 	}
-
 
 	public void setRageMode(boolean rageMode) {
 		this.entityData.set(RAGE_MODE_ENABLED, rageMode);

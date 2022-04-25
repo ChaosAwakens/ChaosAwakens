@@ -35,13 +35,15 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundNBT compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Duration")) this.duration = compound.getInt("Duration");
+		if (compound.contains("Duration"))
+			this.duration = compound.getInt("Duration");
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) this.level.broadcastEntityEvent(this, (byte) 0);
+		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600)
+			this.level.broadcastEntityEvent(this, (byte) 0);
 
 	}
 

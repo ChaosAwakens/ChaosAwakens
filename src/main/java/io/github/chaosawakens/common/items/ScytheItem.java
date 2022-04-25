@@ -19,61 +19,65 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ScytheItem extends SwordItem implements IVanishable {
-    /**
-     * Modifiers applied when the item is in the mainhand of a user.
-     */
-    private final Multimap<Attribute, AttributeModifier> attributeModifiers;
+	/**
+	 * Modifiers applied when the item is in the mainhand of a user.
+	 */
+	private final Multimap<Attribute, AttributeModifier> attributeModifiers;
 
-    public ScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
-        float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
-        this.attributeModifiers = builder.build();
-    }
+	public ScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builderIn) {
+		super(tier, attackDamageIn, attackSpeedIn, builderIn);
+		float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
+		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
+				attackDamage, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
+				attackSpeedIn, AttributeModifier.Operation.ADDITION));
+		this.attributeModifiers = builder.build();
+	}
 
-    public boolean canAttackBlock(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        return !player.isCreative();
-    }
+	public boolean canAttackBlock(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+		return !player.isCreative();
+	}
 
-    /**
-     * Current implementations of this method in child classes do not use the entry
-     * argument beside ev. They just raise the damage on the stack.
-     */
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
-        return true;
-    }
+	/**
+	 * Current implementations of this method in child classes do not use the entry
+	 * argument beside ev. They just raise the damage on the stack.
+	 */
+	@Override
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+		return true;
+	}
 
-    /**
-     * Called when a Block is destroyed using this Item. Return true to trigger the
-     * "Use Item" statistic.
-     */
-    @Override
-    public boolean mineBlock(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-        if (state.getDestroySpeed(worldIn, pos) != 0.0F) {
-            stack.hurtAndBreak(2, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
-        }
+	/**
+	 * Called when a Block is destroyed using this Item. Return true to trigger the
+	 * "Use Item" statistic.
+	 */
+	@Override
+	public boolean mineBlock(ItemStack stack, World worldIn, BlockState state, BlockPos pos,
+			LivingEntity entityLiving) {
+		if (state.getDestroySpeed(worldIn, pos) != 0.0F) {
+			stack.hurtAndBreak(2, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Check whether this Item can harvest the given Block
-     */
-    @Override
-    public boolean isCorrectToolForDrops(BlockState blockIn) {
-        return blockIn.is(Blocks.COBWEB);
-    }
+	/**
+	 * Check whether this Item can harvest the given Block
+	 */
+	@Override
+	public boolean isCorrectToolForDrops(BlockState blockIn) {
+		return blockIn.is(Blocks.COBWEB);
+	}
 
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit
-     * damage.
-     */
-    @Override
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
-        return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
-    }
+	/**
+	 * Gets a map of item attribute modifiers, used by ItemSword to increase hit
+	 * damage.
+	 */
+	@Override
+	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
+		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers
+				: super.getDefaultAttributeModifiers(equipmentSlot);
+	}
 }

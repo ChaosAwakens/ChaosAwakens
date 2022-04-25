@@ -27,33 +27,32 @@ public class RoboWarriorEntity extends RoboRangedEntity implements IAnimatable, 
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 180)
-				.add(Attributes.ARMOR, 10)
-				.add(Attributes.MOVEMENT_SPEED, 0.105D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
-				.add(Attributes.ATTACK_SPEED, 7.5D)
-				.add(Attributes.ATTACK_DAMAGE, 50)
-				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
-				.add(Attributes.FOLLOW_RANGE, 32);
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 180).add(Attributes.ARMOR, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.105D).add(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
+				.add(Attributes.ATTACK_SPEED, 7.5D).add(Attributes.ATTACK_DAMAGE, 50)
+				.add(Attributes.ATTACK_KNOCKBACK, 3.5D).add(Attributes.FOLLOW_RANGE, 32);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
 		if (this.getAttacking()) {
 			if (event.isMoving()) {
-				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.walking_shooting_animation", true));
+				event.getController().setAnimation(
+						new AnimationBuilder().addAnimation("animation.robo_warrior.walking_shooting_animation", true));
 				return PlayState.CONTINUE;
 			}
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.shooting_animation", true));
+			event.getController().setAnimation(
+					new AnimationBuilder().addAnimation("animation.robo_warrior.shooting_animation", true));
 			return PlayState.CONTINUE;
 		}
 
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.walking_animation", true));
+			event.getController().setAnimation(
+					new AnimationBuilder().addAnimation("animation.robo_warrior.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.idle_animation", true));
+		event.getController()
+				.setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 

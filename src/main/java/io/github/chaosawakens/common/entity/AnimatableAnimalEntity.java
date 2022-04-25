@@ -12,41 +12,43 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAnimatable {
 
-    protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableAnimalEntity.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableAnimalEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableAnimalEntity.class,
+			DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableAnimalEntity.class,
+			DataSerializers.BOOLEAN);
 
-    protected boolean isAnimationFinished = false;
+	protected boolean isAnimationFinished = false;
 
-    public AnimatableAnimalEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
-        super(type, worldIn);
-    }
+	public AnimatableAnimalEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+		super(type, worldIn);
+	}
 
-    @Override
-    abstract public void registerControllers(AnimationData data);
+	@Override
+	abstract public void registerControllers(AnimationData data);
 
-    @Override
-    abstract public AnimationFactory getFactory();
+	@Override
+	abstract public AnimationFactory getFactory();
 
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(MOVING, false);
-        this.entityData.define(ATTACKING, false);
-    }
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(MOVING, false);
+		this.entityData.define(ATTACKING, false);
+	}
 
-    public boolean getMoving() {
-        return this.entityData.get(MOVING);
-    }
+	public boolean getMoving() {
+		return this.entityData.get(MOVING);
+	}
 
-    public void setMoving(boolean moving) {
-        this.entityData.set(MOVING, moving);
-    }
+	public void setMoving(boolean moving) {
+		this.entityData.set(MOVING, moving);
+	}
 
-    public boolean getAttacking() {
-        return this.entityData.get(ATTACKING);
-    }
+	public boolean getAttacking() {
+		return this.entityData.get(ATTACKING);
+	}
 
-    public void setAttacking(boolean attacking) {
-        this.entityData.set(ATTACKING, attacking);
-    }
+	public void setAttacking(boolean attacking) {
+		this.entityData.set(ATTACKING, attacking);
+	}
 }

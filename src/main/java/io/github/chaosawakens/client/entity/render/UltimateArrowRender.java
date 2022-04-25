@@ -9,15 +9,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class UltimateArrowRender extends ArrowRenderer<UltimateArrowEntity> {
-    public static final ResourceLocation ARROW_TEXTURE = new ResourceLocation("textures/entity/projectiles/arrow.png");
+	public static final ResourceLocation ARROW_TEXTURE = new ResourceLocation("textures/entity/projectiles/arrow.png");
 
-    public UltimateArrowRender(EntityRendererManager manager) {
-        super(manager);
-    }
+	public UltimateArrowRender(EntityRendererManager manager) {
+		super(manager);
+	}
 
-    public ResourceLocation getTextureLocation(UltimateArrowEntity entity) {
-        return ARROW_TEXTURE;
-    }
+	public ResourceLocation getTextureLocation(UltimateArrowEntity entity) {
+		return ARROW_TEXTURE;
+	}
 
 }
-

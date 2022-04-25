@@ -11,7 +11,6 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.*;
 
-
 public class CATags {
 	public static class Blocks {
 		public static ITag.INamedTag<Block> tag(String name) {
@@ -34,7 +33,7 @@ public class CATags {
 		public static final ITag.INamedTag<Block> CRYSTAL_LEAVES = tag("crystal_leaves");
 		public static final ITag.INamedTag<Block> CRYSTAL_SAPLING = tag("crystal_sapling");
 		public static final ITag.INamedTag<Block> RUBY_ORES = tag("ruby_ores");
-	//	public static final ITag.INamedTag<Block> CA_WALLS = tag("ca_walls");
+		// public static final ITag.INamedTag<Block> CA_WALLS = tag("ca_walls");
 
 		public static final ITag.INamedTag<Block> WHITELIST = tag("whitelist");
 		public static final ITag.INamedTag<Block> BLACKLIST = tag("blacklist");
@@ -66,10 +65,12 @@ public class CATags {
 
 		public static final ITag.INamedTag<Item> CUSTOM_TOOLTIPS = tag("custom_tooltips");
 	}
-	
+
 	public static class EntityTypes {
-		public static final ITag.INamedTag<EntityType<?>> CRITTER_CAGE_BLACKLISTED = EntityTypeTags.bind("critter_cage_blacklisted");
+		public static final ITag.INamedTag<EntityType<?>> CRITTER_CAGE_BLACKLISTED = EntityTypeTags
+				.bind("critter_cage_blacklisted");
 	}
+
 	public static class Fluids {
 		public static ITag.INamedTag<Fluid> tag(String name) {
 			return FluidTags.bind(ChaosAwakens.MODID + ":" + name);

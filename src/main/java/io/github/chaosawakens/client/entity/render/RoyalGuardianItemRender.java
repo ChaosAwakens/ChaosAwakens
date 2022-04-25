@@ -13,7 +13,7 @@ import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 public class RoyalGuardianItemRender extends GeoItemRenderer<ExtendedHitWeaponItem> {
-    public RoyalGuardianItemRender() {
-        super(new RoyalGuardianItemModel());
-    }
+	public RoyalGuardianItemRender() {
+		super(new RoyalGuardianItemModel());
+	}
 }

@@ -30,11 +30,15 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 	private final IRecipeType<? extends AbstractCookingRecipe> recipeType;
 	private final RecipeBookCategory recipeBookType;
 
-	protected AbstractCrystalFurnaceContainer(ContainerType<?> p_i241921_1_, IRecipeType<? extends AbstractCookingRecipe> p_i241921_2_, RecipeBookCategory p_i241921_3_, int p_i241921_4_, PlayerInventory p_i241921_5_) {
+	protected AbstractCrystalFurnaceContainer(ContainerType<?> p_i241921_1_,
+			IRecipeType<? extends AbstractCookingRecipe> p_i241921_2_, RecipeBookCategory p_i241921_3_,
+			int p_i241921_4_, PlayerInventory p_i241921_5_) {
 		this(p_i241921_1_, p_i241921_2_, p_i241921_3_, p_i241921_4_, p_i241921_5_, new Inventory(3), new IntArray(4));
 	}
 
-	protected AbstractCrystalFurnaceContainer(ContainerType<?> p_i241922_1_, IRecipeType<? extends AbstractCookingRecipe> p_i241922_2_, RecipeBookCategory p_i241922_3_, int p_i241922_4_, PlayerInventory p_i241922_5_, IInventory p_i241922_6_, IIntArray p_i241922_7_) {
+	protected AbstractCrystalFurnaceContainer(ContainerType<?> p_i241922_1_,
+			IRecipeType<? extends AbstractCookingRecipe> p_i241922_2_, RecipeBookCategory p_i241922_3_,
+			int p_i241922_4_, PlayerInventory p_i241922_5_, IInventory p_i241922_6_, IIntArray p_i241922_7_) {
 		super(p_i241922_1_, p_i241922_4_);
 		this.recipeType = p_i241922_2_;
 		this.recipeBookType = p_i241922_3_;
@@ -47,13 +51,13 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 		this.addSlot(new CrystalFurnaceFuelSlot(p_i241922_6_, 1, 56, 53));
 		this.addSlot(new FurnaceResultSlot(p_i241922_5_.player, p_i241922_6_, 2, 116, 35));
 
-		for(int i = 0; i < 3; ++i) {
-			for(int j = 0; j < 9; ++j) {
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 9; ++j) {
 				this.addSlot(new Slot(p_i241922_5_, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
-		for(int k = 0; k < 9; ++k) {
+		for (int k = 0; k < 9; ++k) {
 			this.addSlot(new Slot(p_i241922_5_, k, 8 + k * 18, 142));
 		}
 
@@ -62,7 +66,7 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 
 	public void fillCraftSlotsStackedContents(RecipeItemHelper p_201771_1_) {
 		if (this.container instanceof IRecipeHelperPopulator) {
-			((IRecipeHelperPopulator)this.container).fillStackedContents(p_201771_1_);
+			((IRecipeHelperPopulator) this.container).fillStackedContents(p_201771_1_);
 		}
 
 	}
@@ -72,7 +76,8 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 	}
 
 	public void handlePlacement(boolean p_217056_1_, IRecipe<?> p_217056_2_, ServerPlayerEntity p_217056_3_) {
-		(new ServerRecipePlacerFurnace<>(this)).recipeClicked(p_217056_3_, (IRecipe<IInventory>) p_217056_2_, p_217056_1_);
+		(new ServerRecipePlacerFurnace<>(this)).recipeClicked(p_217056_3_, (IRecipe<IInventory>) p_217056_2_,
+				p_217056_1_);
 	}
 
 	public boolean recipeMatches(IRecipe<? super IInventory> p_201769_1_) {
@@ -149,7 +154,8 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 	}
 
 	protected boolean canSmelt(ItemStack p_217057_1_) {
-		return this.level.getRecipeManager().getRecipeFor((IRecipeType)this.recipeType, new Inventory(p_217057_1_), this.level).isPresent();
+		return this.level.getRecipeManager()
+				.getRecipeFor((IRecipeType) this.recipeType, new Inventory(p_217057_1_), this.level).isPresent();
 	}
 
 	protected boolean isFuel(ItemStack p_217058_1_) {

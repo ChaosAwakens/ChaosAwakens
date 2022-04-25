@@ -11,18 +11,18 @@ import net.minecraft.world.gen.blockplacer.BlockPlacerType;
 import java.util.Random;
 
 public class DoubleCrystalPlantBlockPlacer extends BlockPlacer {
-    public static final Codec<DoubleCrystalPlantBlockPlacer> CODEC;
-    public static final DoubleCrystalPlantBlockPlacer INSTANCE = new DoubleCrystalPlantBlockPlacer();
+	public static final Codec<DoubleCrystalPlantBlockPlacer> CODEC;
+	public static final DoubleCrystalPlantBlockPlacer INSTANCE = new DoubleCrystalPlantBlockPlacer();
 
-    protected BlockPlacerType<?> type() {
-        return BlockPlacerType.DOUBLE_PLANT_PLACER;
-    }
+	protected BlockPlacerType<?> type() {
+		return BlockPlacerType.DOUBLE_PLANT_PLACER;
+	}
 
-    public void place(IWorld world, BlockPos pos, BlockState state, Random random) {
-        ((DoubleCrystalPlantBlock)state.getBlock()).placeAt(world, pos, 2);
-    }
+	public void place(IWorld world, BlockPos pos, BlockState state, Random random) {
+		((DoubleCrystalPlantBlock) state.getBlock()).placeAt(world, pos, 2);
+	}
 
-    static {
-        CODEC = Codec.unit(() -> INSTANCE);
-    }
+	static {
+		CODEC = Codec.unit(() -> INSTANCE);
+	}
 }

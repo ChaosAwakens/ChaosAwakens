@@ -31,53 +31,57 @@ import java.util.Objects;
 
 @Mixin(SpawnEggItem.class)
 public abstract class SpawnEggItemMixin {
-    @Shadow
-    public abstract EntityType<?> getType(@Nullable CompoundNBT compoundNBT);
+	@Shadow
+	public abstract EntityType<?> getType(@Nullable CompoundNBT compoundNBT);
 
-    @Inject(method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
-    public void useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
-        World world = itemUseContext.getLevel();
-        if (!(world instanceof ServerWorld)) {
-            cir.setReturnValue(ActionResultType.SUCCESS);
-        } else {
-            ItemStack itemstack = itemUseContext.getItemInHand();
-            BlockPos blockpos = itemUseContext.getClickedPos();
-            Direction direction = itemUseContext.getClickedFace();
-            BlockState blockstate = world.getBlockState(blockpos);
-            PlayerEntity player = itemUseContext.getPlayer();
-            if (blockstate.is(Blocks.SPAWNER)) {
-                if ((CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 0) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 1 && player.isCreative()) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && player.isCreative() && itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))) {
-                    TileEntity tileentity = world.getBlockEntity(blockpos);
-                    if (tileentity instanceof MobSpawnerTileEntity) {
-                        AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
-                        EntityType<?> entitytype1 = this.getType(itemstack.getTag());
-                        abstractspawner.setEntityId(entitytype1);
-                        tileentity.setChanged();
-                        world.sendBlockUpdated(blockpos, blockstate, blockstate, 3);
-                        itemstack.shrink(1);
-                        cir.setReturnValue(ActionResultType.CONSUME);
-                    }
-                }
-            }
+	@Inject(method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
+	public void useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
+		World world = itemUseContext.getLevel();
+		if (!(world instanceof ServerWorld)) {
+			cir.setReturnValue(ActionResultType.SUCCESS);
+		} else {
+			ItemStack itemstack = itemUseContext.getItemInHand();
+			BlockPos blockpos = itemUseContext.getClickedPos();
+			Direction direction = itemUseContext.getClickedFace();
+			BlockState blockstate = world.getBlockState(blockpos);
+			PlayerEntity player = itemUseContext.getPlayer();
+			if (blockstate.is(Blocks.SPAWNER)) {
+				if ((CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 0)
+						|| (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 1 && player.isCreative())
+						|| (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && player.isCreative()
+								&& itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))
+						|| (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2
+								&& !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))) {
+					TileEntity tileentity = world.getBlockEntity(blockpos);
+					if (tileentity instanceof MobSpawnerTileEntity) {
+						AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
+						EntityType<?> entitytype1 = this.getType(itemstack.getTag());
+						abstractspawner.setEntityId(entitytype1);
+						tileentity.setChanged();
+						world.sendBlockUpdated(blockpos, blockstate, blockstate, 3);
+						itemstack.shrink(1);
+						cir.setReturnValue(ActionResultType.CONSUME);
+					}
+				}
+			}
 
-            BlockPos blockpos1;
-            if (blockstate.getCollisionShape(world, blockpos).isEmpty()) {
-                blockpos1 = blockpos;
-            } else {
-                blockpos1 = blockpos.relative(direction);
-            }
+			BlockPos blockpos1;
+			if (blockstate.getCollisionShape(world, blockpos).isEmpty()) {
+				blockpos1 = blockpos;
+			} else {
+				blockpos1 = blockpos.relative(direction);
+			}
 
-            EntityType<?> entitytype = this.getType(itemstack.getTag());
-            if (!blockstate.is(Blocks.SPAWNER)) {
-                if (entitytype.spawn((ServerWorld) world, itemstack, itemUseContext.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG, true, !Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
-                    itemstack.shrink(1);
-                }
-            }
+			EntityType<?> entitytype = this.getType(itemstack.getTag());
+			if (!blockstate.is(Blocks.SPAWNER)) {
+				if (entitytype.spawn((ServerWorld) world, itemstack, itemUseContext.getPlayer(), blockpos1,
+						SpawnReason.SPAWN_EGG, true,
+						!Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
+					itemstack.shrink(1);
+				}
+			}
 
-            cir.setReturnValue(ActionResultType.CONSUME);
-        }
-    }
+			cir.setReturnValue(ActionResultType.CONSUME);
+		}
+	}
 }

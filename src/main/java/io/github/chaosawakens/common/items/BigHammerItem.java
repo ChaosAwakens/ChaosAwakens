@@ -8,16 +8,16 @@ import net.minecraft.item.SwordItem;
 
 public class BigHammerItem extends SwordItem {
 
-    public BigHammerItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
-    }
+	public BigHammerItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
+		super(tier, attackDamageIn, attackSpeedIn, builderIn);
+	}
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (!target.level.isClientSide) {
-            target.push(0.0D, Math.abs(target.level.random.nextFloat() * 1.5F), 0.0D);
-        }
-        stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
-        return true;
-    }
+	@Override
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		if (!target.level.isClientSide) {
+			target.push(0.0D, Math.abs(target.level.random.nextFloat() * 1.5F), 0.0D);
+		}
+		stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+		return true;
+	}
 }

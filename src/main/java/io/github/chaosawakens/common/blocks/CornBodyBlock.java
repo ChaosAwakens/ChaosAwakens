@@ -19,7 +19,7 @@ public class CornBodyBlock extends CropBodyPlantBlock {
 	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(CAItems.CORN_SEEDS.get());
 	}
-	
+
 	@Override
 	protected AbstractTopPlantBlock getHeadBlock() {
 		return CABlocks.CORN_TOP_BLOCK.get();

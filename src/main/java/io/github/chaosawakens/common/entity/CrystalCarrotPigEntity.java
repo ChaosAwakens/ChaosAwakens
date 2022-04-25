@@ -46,165 +46,172 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Random;
 
-public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatable{
-    private final AnimationFactory factory = new AnimationFactory(this);
-    private static final Ingredient FOOD_ITEMS = Ingredient.of(CAItems.CRYSTAL_POTATO.get(), CAItems.CRYSTAL_BEETROOT.get());
+public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatable {
+	private final AnimationFactory factory = new AnimationFactory(this);
+	private static final Ingredient FOOD_ITEMS = Ingredient.of(CAItems.CRYSTAL_POTATO.get(),
+			CAItems.CRYSTAL_BEETROOT.get());
 
-    public CrystalCarrotPigEntity(EntityType<? extends CrystalCarrotPigEntity> type, World worldIn) {
-        super(type, worldIn);
-        this.noCulling = true;
-    }
+	public CrystalCarrotPigEntity(EntityType<? extends CrystalCarrotPigEntity> type, World worldIn) {
+		super(type, worldIn);
+		this.noCulling = true;
+	}
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 8)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.FOLLOW_RANGE, 12);
-    }
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 8).add(Attributes.MOVEMENT_SPEED, 0.25D)
+				.add(Attributes.FOLLOW_RANGE, 12);
+	}
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
-            return PlayState.CONTINUE;
-        }
-        if (!event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.CONTINUE;
-    }
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
+			return PlayState.CONTINUE;
+		}
+		if (!event.isMoving()) {
+			event.getController()
+					.setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
+			return PlayState.CONTINUE;
+		}
+		return PlayState.CONTINUE;
+	}
 
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get()), false));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-    }
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(3,
+				new TemptGoal(this, 1.2D, Ingredient.of(CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get()), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
+		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
+		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+	}
 
-    public static boolean checkCrystalCarrotPigSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos blockPos, Random random) {
-        return world.getBlockState(blockPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get()) && world.getRawBrightness(blockPos, 0) > 8;
-    }
-    
-    @Override
-    public boolean canBeControlledByRider() {   
-    	Entity entity = this.getControllingPassenger();       
-    	if (!(entity instanceof PlayerEntity)) {       
-    		return false;       
-    	} else {       
-    		PlayerEntity playerentity = (PlayerEntity)entity;
-    		return playerentity.getMainHandItem().getItem() == CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get() || playerentity.getOffhandItem().getItem() == CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get();    
-    	}   
-    }
-    
-    @OnlyIn(Dist.CLIENT)
-    public Vector3d getLeashOffset() {
-       return new Vector3d(0.0D, (double)(0.6F * this.getEyeHeight()), (double)(this.getBbWidth() * 0.4F));
-    }
+	public static boolean checkCrystalCarrotPigSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world,
+			SpawnReason spawnReason, BlockPos blockPos, Random random) {
+		return world.getBlockState(blockPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get())
+				&& world.getRawBrightness(blockPos, 0) > 8;
+	}
 
-    public boolean isFood(ItemStack stack) {
-        return FOOD_ITEMS.test(stack);
-    }
+	@Override
+	public boolean canBeControlledByRider() {
+		Entity entity = this.getControllingPassenger();
+		if (!(entity instanceof PlayerEntity)) {
+			return false;
+		} else {
+			PlayerEntity playerentity = (PlayerEntity) entity;
+			return playerentity.getMainHandItem().getItem() == CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get()
+					|| playerentity.getOffhandItem().getItem() == CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get();
+		}
+	}
 
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.PIG_AMBIENT;
-    }
+	@OnlyIn(Dist.CLIENT)
+	public Vector3d getLeashOffset() {
+		return new Vector3d(0.0D, (double) (0.6F * this.getEyeHeight()), (double) (this.getBbWidth() * 0.4F));
+	}
 
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.PIG_HURT;
-    }
+	public boolean isFood(ItemStack stack) {
+		return FOOD_ITEMS.test(stack);
+	}
 
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.PIG_DEATH;
-    }
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.PIG_AMBIENT;
+	}
 
-    @Override
-    protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(SoundEvents.PIG_STEP, 0.15F, 1.0F);
-    }
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundEvents.PIG_HURT;
+	}
 
-    @Override
-    protected float getSoundVolume() {
-        return 0.4F;
-    }
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.PIG_DEATH;
+	}
 
-    @Override
-    public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
-        ItemStack itemstack = playerIn.getItemInHand(hand);
-        if (itemstack.getItem() == Items.SHEARS && this.readyForShearing()) {
-            this.shear(SoundCategory.PLAYERS);
-            if (!this.level.isClientSide) {
-                itemstack.hurtAndBreak(1, playerIn, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
-            }
-            return ActionResultType.sidedSuccess(this.level.isClientSide);
-        } else {
-            return super.mobInteract(playerIn, hand);
-        }
-    }
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+		this.playSound(SoundEvents.PIG_STEP, 0.15F, 1.0F);
+	}
 
-    @Override
-    public CarrotPigEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-        return CAEntityTypes.CRYSTAL_CARROT_PIG.get().create(world);
-    }
+	@Override
+	protected float getSoundVolume() {
+		return 0.4F;
+	}
 
-    public void shear(SoundCategory soundCategory) {
-        this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, soundCategory, 1.0F, 1.0F);
-        if (!this.level.isClientSide()) {
-            ((ServerWorld)this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
-            this.remove();
-            PigEntity pigEntity = EntityType.PIG.create(this.level);
-            assert pigEntity != null;
-            pigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
-            pigEntity.setHealth(this.getHealth());
-            pigEntity.yBodyRot = this.yBodyRot;
-            if (this.hasCustomName()) {
-                pigEntity.setCustomName(this.getCustomName());
-                pigEntity.setCustomNameVisible(this.isCustomNameVisible());
-            }
+	@Override
+	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
+		ItemStack itemstack = playerIn.getItemInHand(hand);
+		if (itemstack.getItem() == Items.SHEARS && this.readyForShearing()) {
+			this.shear(SoundCategory.PLAYERS);
+			if (!this.level.isClientSide) {
+				itemstack.hurtAndBreak(1, playerIn, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
+			}
+			return ActionResultType.sidedSuccess(this.level.isClientSide);
+		} else {
+			return super.mobInteract(playerIn, hand);
+		}
+	}
 
-            if (this.isPersistenceRequired()) {
-                pigEntity.setPersistenceRequired();
-            }
+	@Override
+	public CarrotPigEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
+		return CAEntityTypes.CRYSTAL_CARROT_PIG.get().create(world);
+	}
 
-            pigEntity.setInvulnerable(this.isInvulnerable());
-            this.level.addFreshEntity(pigEntity);
+	public void shear(SoundCategory soundCategory) {
+		this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, soundCategory, 1.0F, 1.0F);
+		if (!this.level.isClientSide()) {
+			((ServerWorld) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(),
+					1, 0.0D, 0.0D, 0.0D, 0.0D);
+			this.remove();
+			PigEntity pigEntity = EntityType.PIG.create(this.level);
+			assert pigEntity != null;
+			pigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
+			pigEntity.setHealth(this.getHealth());
+			pigEntity.yBodyRot = this.yBodyRot;
+			if (this.hasCustomName()) {
+				pigEntity.setCustomName(this.getCustomName());
+				pigEntity.setCustomNameVisible(this.isCustomNameVisible());
+			}
 
-            for(int i = 0; i < 4; ++i) {
-                this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(1.0D), this.getZ(), new ItemStack(CAItems.CRYSTAL_CARROT.get())));
-            }
-        }
-    }
+			if (this.isPersistenceRequired()) {
+				pigEntity.setPersistenceRequired();
+			}
 
-    public boolean readyForShearing() {
-        return this.isAlive() && !this.isBaby();
-    }
-    
-    @Override
-    public boolean boost() {
-    	return super.boost();
-    }
+			pigEntity.setInvulnerable(this.isInvulnerable());
+			this.level.addFreshEntity(pigEntity);
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "crystalcarrtotpigcontroller", 0, this::predicate));
-    }
+			for (int i = 0; i < 4; ++i) {
+				this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(1.0D), this.getZ(),
+						new ItemStack(CAItems.CRYSTAL_CARROT.get())));
+			}
+		}
+	}
 
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
-    
-    @Override
-    public EntityType<?> getType() {
-    	return CAEntityTypes.CRYSTAL_CARROT_PIG.get();
-    }
+	public boolean readyForShearing() {
+		return this.isAlive() && !this.isBaby();
+	}
+
+	@Override
+	public boolean boost() {
+		return super.boost();
+	}
+
+	@Override
+	public void registerControllers(AnimationData data) {
+		data.addAnimationController(new AnimationController<>(this, "crystalcarrtotpigcontroller", 0, this::predicate));
+	}
+
+	@Override
+	public AnimationFactory getFactory() {
+		return this.factory;
+	}
+
+	@Override
+	public EntityType<?> getType() {
+		return CAEntityTypes.CRYSTAL_CARROT_PIG.get();
+	}
 
 }

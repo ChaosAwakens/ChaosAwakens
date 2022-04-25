@@ -37,7 +37,8 @@ import java.time.temporal.ChronoField;
 
 public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
+	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class,
+			DataSerializers.INT);
 
 	public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -45,9 +46,7 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 10)
-				.add(Attributes.MOVEMENT_SPEED, 0.2F)
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 10).add(Attributes.MOVEMENT_SPEED, 0.2F)
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
@@ -131,7 +130,8 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
 		if (itemstack.getItem() == Items.BUCKET && !this.isBaby()) {
 			playerIn.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
+			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn,
+					Items.MILK_BUCKET.getDefaultInstance());
 			playerIn.setItemInHand(hand, itemstack1);
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
 		} else {
@@ -166,7 +166,8 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	@Override
-	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, ILivingEntityData entityData, CompoundNBT compoundNBT) {
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance,
+			SpawnReason spawnReason, ILivingEntityData entityData, CompoundNBT compoundNBT) {
 		int i = this.setAppleCowType();
 		if (entityData instanceof AppleCowEntity.AppleCowData) {
 			i = ((AppleCowData) entityData).appleCowType;
@@ -179,13 +180,16 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 
 	protected int setAppleCowType() {
 		int i = 0;
-		if (this.isHalloweenObtained()) i = 1;
+		if (this.isHalloweenObtained())
+			i = 1;
 		return i;
 	}
 
 	public void thunderHit(ServerWorld serverWorld, LightningBoltEntity lightningBoltEntity) {
 		if (this.getAppleCowType() != 1) {
-			if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.CARROT_PIG.get(), (timer) -> {})) {
+			if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.CARROT_PIG.get(),
+					(timer) -> {
+					})) {
 				CarrotPigEntity carrotPigEntity = CAEntityTypes.CARROT_PIG.get().create(serverWorld);
 				assert carrotPigEntity != null;
 				carrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);

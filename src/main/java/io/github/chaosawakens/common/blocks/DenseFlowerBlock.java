@@ -11,14 +11,14 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
 public class DenseFlowerBlock extends FlowerBlock {
-    protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
+	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
 
-    public DenseFlowerBlock(Effect effect, int effectDuration, AbstractBlock.Properties properties) {
-        super(effect, effectDuration, properties);
-    }
+	public DenseFlowerBlock(Effect effect, int effectDuration, AbstractBlock.Properties properties) {
+		super(effect, effectDuration, properties);
+	}
 
-    @Override
-    protected boolean mayPlaceOn(BlockState state, IBlockReader world, BlockPos pos) {
-        return state.is(CABlocks.DENSE_GRASS_BLOCK.get()) || state.is(CABlocks.DENSE_DIRT.get());
-    }
+	@Override
+	protected boolean mayPlaceOn(BlockState state, IBlockReader world, BlockPos pos) {
+		return state.is(CABlocks.DENSE_GRASS_BLOCK.get()) || state.is(CABlocks.DENSE_DIRT.get());
+	}
 }

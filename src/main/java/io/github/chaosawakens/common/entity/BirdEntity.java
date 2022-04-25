@@ -49,9 +49,10 @@ import io.github.chaosawakens.common.entity.robo.RoboEntity;
 
 import java.util.Random;
 
-public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnimal, IUtilityHelper{
+public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnimal, IUtilityHelper {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
+	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class,
+			DataSerializers.INT);
 	private float flap;
 	private float flapSpeed;
 	private float flapping = 1.0F;
@@ -67,12 +68,8 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 5)
-				.add(Attributes.MOVEMENT_SPEED, 0.6F)
-				.add(Attributes.FLYING_SPEED, 1.3F)
-				.add(Attributes.LUCK, 1.0F)
-				.add(Attributes.FOLLOW_RANGE, 12);
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 5).add(Attributes.MOVEMENT_SPEED, 0.6F)
+				.add(Attributes.FLYING_SPEED, 1.3F).add(Attributes.LUCK, 1.0F).add(Attributes.FOLLOW_RANGE, 12);
 	}
 
 	@Override
@@ -104,7 +101,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.idle", true));
 			return PlayState.CONTINUE;
 		}
-		if(this.onGround && !event.isMoving()) {
+		if (this.onGround && !event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.idle", true));
 		}
 		if (event.isMoving() && this.onGround) {
@@ -192,22 +189,25 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 		super.playStepSound(p_180429_1_, p_180429_2_);
 	}
 
-	public static boolean checkBirdSpawnRules(EntityType<BirdEntity> p, IWorld w, SpawnReason reason, BlockPos pos, Random random) {
+	public static boolean checkBirdSpawnRules(EntityType<BirdEntity> p, IWorld w, SpawnReason reason, BlockPos pos,
+			Random random) {
 		BlockState blockstate = w.getBlockState(pos.below());
-		return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && w.getRawBrightness(pos, 0) > 8;
+		return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS)
+				|| blockstate.is(Blocks.AIR)) && w.getRawBrightness(pos, 0) > 8;
 	}
 
 	@SuppressWarnings("unused")
 	private void calculateFlapping() {
 		float oFlap = this.flap;
 		float oFlapSpeed = this.flapSpeed;
-		this.flapSpeed = (float)((double)this.flapSpeed + (double)(!this.onGround && !this.isPassenger() ? 4 : -1) * 0.3D);
+		this.flapSpeed = (float) ((double) this.flapSpeed
+				+ (double) (!this.onGround && !this.isPassenger() ? 4 : -1) * 0.3D);
 		this.flapSpeed = MathHelper.clamp(this.flapSpeed, 0.0F, 1.0F);
 		if (!this.onGround && this.flapping < 1.0F) {
 			this.flapping = 1.0F;
 		}
 
-		this.flapping = (float)((double)this.flapping * 0.9D);
+		this.flapping = (float) ((double) this.flapping * 0.9D);
 		Vector3d vector3d = this.getDeltaMovement();
 		if (!this.onGround && vector3d.y < 0.0D) {
 			this.setDeltaMovement(vector3d.multiply(1.0D, 0.6D, 1.0D));
@@ -279,10 +279,11 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	}
 
 	@Override
-	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, ILivingEntityData entityData, CompoundNBT compoundNBT) {
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance,
+			SpawnReason spawnReason, ILivingEntityData entityData, CompoundNBT compoundNBT) {
 		int i = this.setBirdType(world);
 		if (entityData instanceof BirdEntity.BirdData) {
-			i = ((BirdData)entityData).birdType;
+			i = ((BirdData) entityData).birdType;
 		} else {
 			entityData = new BirdEntity.BirdData(i);
 		}
@@ -301,6 +302,7 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 
 	static class BirdData extends AgeableEntity.AgeableData {
 		public final int birdType;
+
 		private BirdData(int birdType) {
 			super(true);
 			this.birdType = birdType;

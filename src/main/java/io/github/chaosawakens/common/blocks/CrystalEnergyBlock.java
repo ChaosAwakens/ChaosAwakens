@@ -18,26 +18,28 @@ import java.util.Random;
 
 public class CrystalEnergyBlock extends CAOreBlock {
 
-	private static final List<IParticleData> particles = ImmutableList.of(ParticleTypes.FLAME.getType(), ParticleTypes.SMOKE.getType(), new RedstoneParticleData(0.3F, 0.4F, 0.2F, 0.8F));
+	private static final List<IParticleData> particles = ImmutableList.of(ParticleTypes.FLAME.getType(),
+			ParticleTypes.SMOKE.getType(), new RedstoneParticleData(0.3F, 0.4F, 0.2F, 0.8F));
 
-    public CrystalEnergyBlock(Properties properties) {
-        super(properties);
-    }
+	public CrystalEnergyBlock(Properties properties) {
+		super(properties);
+	}
 
 	@Override
 	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!player.isCreative() && !worldIn.isClientSide && worldIn.random.nextInt(3) == 0)
 			worldIn.explode(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1.5F,
-					worldIn.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)
-							? Explosion.Mode.DESTROY
+					worldIn.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) ? Explosion.Mode.DESTROY
 							: Explosion.Mode.NONE);
 		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (worldIn.random.nextInt(2) == 0) {
-            worldIn.addParticle(particles.get(worldIn.random.nextInt(particles.size())), pos.getX() + worldIn.random.nextDouble(), pos.getY() + worldIn.random.nextDouble(), pos.getZ() + worldIn.random.nextDouble(), 0.0D, 0.0D, 0.0D);
-        }
-    }
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		if (worldIn.random.nextInt(2) == 0) {
+			worldIn.addParticle(particles.get(worldIn.random.nextInt(particles.size())),
+					pos.getX() + worldIn.random.nextDouble(), pos.getY() + worldIn.random.nextDouble(),
+					pos.getZ() + worldIn.random.nextDouble(), 0.0D, 0.0D, 0.0D);
+		}
+	}
 }

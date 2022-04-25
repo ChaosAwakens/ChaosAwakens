@@ -33,7 +33,8 @@ public class AntInfestedOre extends OreBlock {
 	@Override
 	public void onRemove(BlockState state, World world, BlockPos pos, BlockState state2, boolean p_196243_5_) {
 		ItemStack stack = this.getBlock().asItem().getDefaultInstance();
-		if (!world.isClientSide && world.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
+		if (!world.isClientSide && world.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)
+				&& EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
 			for (int index0 = 0; index0 < 20; index0++) {
 				this.spawnAnt(world, pos);
 			}

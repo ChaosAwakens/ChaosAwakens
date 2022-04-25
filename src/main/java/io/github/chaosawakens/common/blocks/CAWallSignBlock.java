@@ -9,17 +9,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
 public class CAWallSignBlock extends WallSignBlock {
-    public CAWallSignBlock(AbstractBlock.Properties propertiesIn, WoodType woodTypeIn) {
-        super(propertiesIn, woodTypeIn);
-    }
+	public CAWallSignBlock(AbstractBlock.Properties propertiesIn, WoodType woodTypeIn) {
+		super(propertiesIn, woodTypeIn);
+	}
 
-    @Override
-    public boolean hasTileEntity(BlockState stateIn) {
-        return true;
-    }
+	@Override
+	public boolean hasTileEntity(BlockState stateIn) {
+		return true;
+	}
 
-    @Override
-    public TileEntity newBlockEntity(IBlockReader worldIn) {
-        return new CASignTileEntity();
-    }
+	@Override
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
+		return new CASignTileEntity();
+	}
 }

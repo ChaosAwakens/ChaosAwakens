@@ -12,8 +12,8 @@ import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 public class BattleAxeItemRender extends GeoItemRenderer<ExtendedHitAxeItem> {
-    public BattleAxeItemRender() {
-        super(new BattleAxeItemModel());
-    }
-    
+	public BattleAxeItemRender() {
+		super(new BattleAxeItemModel());
+	}
+
 }

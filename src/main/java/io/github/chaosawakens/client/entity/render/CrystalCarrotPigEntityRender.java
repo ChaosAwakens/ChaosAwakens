@@ -15,31 +15,37 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class CrystalCarrotPigEntityRender extends GeoEntityRenderer<CrystalCarrotPigEntity> {
-	
-    public CrystalCarrotPigEntityRender(EntityRendererManager renderManager) {
-        super(renderManager, new CrystalCarrotPigEntityModel());
-        this.addLayer(new CrystalCarrotPigSaddleLayer(this));
-        this.shadowRadius = 0.2F;
-    }
 
-    @Override
-    public void renderEarly(CrystalCarrotPigEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
-    }
+	public CrystalCarrotPigEntityRender(EntityRendererManager renderManager) {
+		super(renderManager, new CrystalCarrotPigEntityModel());
+		this.addLayer(new CrystalCarrotPigSaddleLayer(this));
+		this.shadowRadius = 0.2F;
+	}
 
-    @Override
-    public ResourceLocation getTextureLocation(CrystalCarrotPigEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/crystal/crystal_carrot_pig.png");
-    }
+	@Override
+	public void renderEarly(CrystalCarrotPigEntity animatable, MatrixStack stackIn, float ticks,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn,
+			float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
+				red, green, blue, partialTicks);
+	}
 
-    @Override
-    public RenderType getRenderType(CrystalCarrotPigEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
-    }
+	@Override
+	public ResourceLocation getTextureLocation(CrystalCarrotPigEntity entity) {
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/crystal/crystal_carrot_pig.png");
+	}
 
-    @Override
-    public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
+	@Override
+	public RenderType getRenderType(CrystalCarrotPigEntity animatable, float partialTicks, MatrixStack stack,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
+			ResourceLocation textureLocation) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
+
+	@Override
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
+			int packedOverlayIn, float red, float green, float blue, float alpha) {
+		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
 
 }

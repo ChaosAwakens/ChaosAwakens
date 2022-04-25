@@ -13,31 +13,37 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class AggressiveAntEntityRender extends GeoEntityRenderer<AggressiveAntEntity> {
-    private final String textureName;
+	private final String textureName;
 
-    public AggressiveAntEntityRender(EntityRendererManager renderManager, String textureName) {
-        super(renderManager, new AggressiveAntEntityModel(textureName));
-        this.textureName = textureName;
-        this.shadowRadius = 0.2F;
-    }
+	public AggressiveAntEntityRender(EntityRendererManager renderManager, String textureName) {
+		super(renderManager, new AggressiveAntEntityModel(textureName));
+		this.textureName = textureName;
+		this.shadowRadius = 0.2F;
+	}
 
-    @Override
-    public void renderEarly(AggressiveAntEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
-        super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
-    }
+	@Override
+	public void renderEarly(AggressiveAntEntity animatable, MatrixStack stackIn, float ticks,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn,
+			float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
+				red, green, blue, partialTicks);
+	}
 
-    @Override
-    public ResourceLocation getTextureLocation(AggressiveAntEntity entity) {
-        return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ant/" + textureName + ".png");
-    }
+	@Override
+	public ResourceLocation getTextureLocation(AggressiveAntEntity entity) {
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ant/" + textureName + ".png");
+	}
 
-    @Override
-    public RenderType getRenderType(AggressiveAntEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityTranslucent(getTextureLocation(animatable));
-    }
+	@Override
+	public RenderType getRenderType(AggressiveAntEntity animatable, float partialTicks, MatrixStack stack,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
+			ResourceLocation textureLocation) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
 
-    @Override
-    public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
+	@Override
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
+			int packedOverlayIn, float red, float green, float blue, float alpha) {
+		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
 }

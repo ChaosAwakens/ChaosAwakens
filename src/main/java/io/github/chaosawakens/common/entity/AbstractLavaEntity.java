@@ -30,7 +30,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public abstract class AbstractLavaEntity extends LavaMobEntity {
-	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.defineId(AbstractLavaEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.defineId(AbstractLavaEntity.class,
+			DataSerializers.BOOLEAN);
 
 	public AbstractLavaEntity(EntityType<? extends AbstractLavaEntity> entityType, World world) {
 		super(entityType, world);
@@ -42,15 +43,15 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 3.0D);
+		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 3.0D);
 	}
 
 	public boolean requiresCustomPersistence() {
 		return super.requiresCustomPersistence() || this.fromBucket();
 	}
 
-	public static boolean checkLavaMobSpawnRules(EntityType<? extends AbstractLavaEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+	public static boolean checkLavaMobSpawnRules(EntityType<? extends AbstractLavaEntity> entityType, IWorld world,
+			SpawnReason spawnReason, BlockPos pos, Random random) {
 		return world.getBlockState(pos).is(Blocks.LAVA) && world.getBlockState(pos.above()).is(Blocks.LAVA);
 	}
 
@@ -88,7 +89,8 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.NO_SPECTATORS::test));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6D, 1.4D,
+				EntityPredicates.NO_SPECTATORS::test));
 		this.goalSelector.addGoal(4, new AbstractLavaEntity.SwimGoal(this));
 	}
 
@@ -101,7 +103,8 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 			this.moveRelative(this.getSpeed(), vector);
 			this.move(MoverType.SELF, this.getDeltaMovement());
 			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-			if (this.getTarget() == null) this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+			if (this.getTarget() == null)
+				this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
 		} else {
 			super.travel(vector);
 		}
@@ -109,7 +112,8 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 
 	public void aiStep() {
 		if (!this.isInLava() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F,
+					((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -125,7 +129,8 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 	@Override
 	public void baseTick() {
 		if (!this.isInLava() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
+			this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F,
+					(this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
 			this.onGround = false;
 			this.jumping = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -140,7 +145,8 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 			itemstack.shrink(1);
 			ItemStack itemstack1 = this.getBucketItemStack();
 			this.saveToBucketTag(itemstack1);
-			if (!this.level.isClientSide) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemstack1);
+			if (!this.level.isClientSide)
+				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemstack1);
 			if (itemstack.isEmpty()) {
 				player.setItemInHand(hand, itemstack1);
 			} else if (!player.inventory.add(itemstack1)) {
@@ -154,7 +160,8 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 	}
 
 	protected void saveToBucketTag(ItemStack bucket) {
-		if (this.hasCustomName()) bucket.setHoverName(this.getCustomName());
+		if (this.hasCustomName())
+			bucket.setHoverName(this.getCustomName());
 	}
 
 	protected abstract ItemStack getBucketItemStack();
@@ -178,21 +185,23 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 		}
 
 		public void tick() {
-			if (this.fish.isEyeInFluid(FluidTags.LAVA)) this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
+			if (this.fish.isEyeInFluid(FluidTags.LAVA))
+				this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
 
 			if (this.operation == MovementController.Action.MOVE_TO && !this.fish.getNavigation().isDone()) {
-				float f = (float)(this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
+				float f = (float) (this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
 				this.fish.setSpeed(MathHelper.lerp(0.125F, this.fish.getSpeed(), f));
 				double d0 = this.wantedX - this.fish.getX();
 				double d1 = this.wantedY - this.fish.getY();
 				double d2 = this.wantedZ - this.fish.getZ();
 				if (d1 != 0.0D) {
 					double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D,
+							(double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
 
 				if (d0 != 0.0D || d2 != 0.0D) {
-					float f1 = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
+					float f1 = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
 					this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
 					this.fish.yBodyRot = this.fish.yRot;
 				}

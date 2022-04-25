@@ -12,7 +12,7 @@ import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
 public class AttitudeAdjusterItemRender extends GeoItemRenderer<AttitudeAdjusterItem> {
-    public AttitudeAdjusterItemRender() {
-        super(new AttitudeAdjusterItemModel());
-    }
+	public AttitudeAdjusterItemRender() {
+		super(new AttitudeAdjusterItemModel());
+	}
 }

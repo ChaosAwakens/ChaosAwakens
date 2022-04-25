@@ -44,14 +44,16 @@ public class CAJEIPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registry) {
-		registry.addRecipeTransferHandler(DefossilizerContainer.class, DefossilizerRecipeCategory.ID, 0, 3, 4, INV_SIZE);
+		registry.addRecipeTransferHandler(DefossilizerContainer.class, DefossilizerRecipeCategory.ID, 0, 3, 4,
+				INV_SIZE);
 	}
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registry) {
 		@SuppressWarnings("resource")
 		ClientWorld world = Objects.requireNonNull(Minecraft.getInstance().level);
-		registry.addRecipes(world.getRecipeManager().getAllRecipesFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE), DefossilizerRecipeCategory.ID);
+		registry.addRecipes(world.getRecipeManager().getAllRecipesFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE),
+				DefossilizerRecipeCategory.ID);
 		addDescription(registry, new ItemStack(CABlocks.DEFOSSILIZER.get()));
 	}
 
@@ -63,7 +65,8 @@ public class CAJEIPlugin implements IModPlugin {
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
 		registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER.get()), DefossilizerRecipeCategory.ID);
-		registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_CRAFTING_TABLE.get()), VanillaRecipeCategoryUid.CRAFTING);
+		registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_CRAFTING_TABLE.get()),
+				VanillaRecipeCategoryUid.CRAFTING);
 		registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_FURNACE.get()), VanillaRecipeCategoryUid.FUEL);
 		registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_FURNACE.get()), VanillaRecipeCategoryUid.FURNACE);
 	}
