@@ -50,27 +50,29 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 150).add(Attributes.ARMOR, 3)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D).add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-				.add(Attributes.ATTACK_SPEED, 10).add(Attributes.ATTACK_DAMAGE, 25)
-				.add(Attributes.ATTACK_KNOCKBACK, 3.5D).add(Attributes.FOLLOW_RANGE, 24);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 150)
+				.add(Attributes.ARMOR, 3)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+				.add(Attributes.ATTACK_SPEED, 10)
+				.add(Attributes.ATTACK_DAMAGE, 25)
+				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
+				.add(Attributes.FOLLOW_RANGE, 24);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.dead) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ent.death_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.death_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (this.getAttacking()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
 			animationSpeed = 0.6F;
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.idle_animation", true));
@@ -91,8 +93,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	}
 
 	@Override
-	public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason,
-			@Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+	public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		// Only allow the ENT to wander when spawned outside the tree
 		if (worldIn instanceof ServerWorld) {
 			BlockPos pos = this.getOnPos();
@@ -106,51 +107,37 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 					|| strucManager.getStructureAt(pos, false, CAStructures.OAK_ENT_TREE.get()).isValid()
 					|| strucManager.getStructureAt(pos, false, CAStructures.SPRUCE_ENT_TREE.get()).isValid()
 					|| strucManager.getStructureAt(pos, false, CAStructures.WARPED_ENT_TREE.get()).isValid();
-			if (!inDungeon || reason != SpawnReason.STRUCTURE) {
-				this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.6));
-			}
+			if (!inDungeon || reason != SpawnReason.STRUCTURE) this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.6));
 		}
-
 		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
 	@Override
 	public boolean doHurtTarget(Entity target) {
-		if (!this.isAggressive())
-			return false;
-		if (!this.canSee(target))
-			return false;
+		if (!this.isAggressive()) return false;
+		if (!this.canSee(target)) return false;
 
 		Vector3d attackerVector = new Vector3d(this.getX(), this.getEyeY(), this.getZ());
 		Vector3d targetVector = new Vector3d(target.getX(), target.getEyeY(), target.getZ());
 
-		if (target.level != this.level || targetVector.distanceToSqr(attackerVector) > 128.0D * 128.0D)
-			return false;
+		if (target.level != this.level || targetVector.distanceToSqr(attackerVector) > 128.0D * 128.0D) return false;
 
-		return this.level.clip(new RayTraceContext(attackerVector, targetVector, RayTraceContext.BlockMode.COLLIDER,
-				RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS
-				&& super.doHurtTarget(target);
+		return this.level.clip(new RayTraceContext(attackerVector, targetVector, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS && super.doHurtTarget(target);
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
 
-		if (this.getTarget() != null && this.canSee(this.getTarget())
-				&& this.distanceToSqr(this.getTarget()) >= 12.0F) {
+		if (this.getTarget() != null && this.canSee(this.getTarget()) && this.distanceToSqr(this.getTarget()) >= 12.0F) {
 			this.lookControl.setLookAt(this.getTarget(), 30.0F, 30.0F);
 			this.getTarget().moveTo(this.getTarget().blockPosition(), 3.0F, 10.0F);
-			if (this.navigation.isStuck()) {
-				this.navigation.recomputePath(this.getTarget().blockPosition());
-			}
+			if (this.navigation.isStuck()) this.navigation.recomputePath(this.getTarget().blockPosition());
 		}
 
-		if (this.getTarget() != null && this.canSee(this.getTarget())
-				&& this.distanceToSqr(this.getTarget()) <= 12.0F) {
+		if (this.getTarget() != null && this.canSee(this.getTarget()) && this.distanceToSqr(this.getTarget()) <= 12.0F) {
 			this.lookControl.setLookAt(this.getTarget(), 30.0F, 30.0F);
-			if (this.navigation.isStuck()) {
-				this.navigation.recomputePath(this.getTarget().blockPosition());
-			}
+			if (this.navigation.isStuck()) this.navigation.recomputePath(this.getTarget().blockPosition());
 		}
 	}
 
@@ -170,8 +157,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 	}
 
 	public enum Types {
-		OAK("oak"), ACACIA("acacia"), DARK_OAK("dark_oak"), JUNGLE("jungle"), SPRUCE("spruce"), BIRCH("birch"),
-		CRIMSON("crimson"), WARPED("warped");
+		OAK("oak"), ACACIA("acacia"), DARK_OAK("dark_oak"), JUNGLE("jungle"), SPRUCE("spruce"), BIRCH("birch"), CRIMSON("crimson"), WARPED("warped");
 
 		private final String name;
 
@@ -190,53 +176,33 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
-		if (this.getEntType() == Types.ACACIA) {
-			return CASoundEvents.ACACIA_ENT_HURT.get();
-		} else if (this.getEntType() != Types.BIRCH) {
-			return CASoundEvents.BIRCH_ENT_HURT.get();
-		} else if (this.getEntType() == Types.CRIMSON) {
-			return CASoundEvents.CRIMSON_ENT_HURT.get();
-		} else if (this.getEntType() == Types.DARK_OAK) {
-			return CASoundEvents.DARK_OAK_ENT_HURT.get();
-		} else if (this.getEntType() == Types.JUNGLE) {
-			return CASoundEvents.JUNGLE_ENT_HURT.get();
-		} else if (this.getEntType() == Types.OAK) {
-			return CASoundEvents.OAK_ENT_HURT.get();
-		} else if (this.getEntType() == Types.SPRUCE) {
-			return CASoundEvents.SPRUCE_ENT_HURT.get();
-		} else if (this.getEntType() == Types.WARPED) {
-			return CASoundEvents.WARPED_ENT_HURT.get();
-		}
+		if (this.getEntType() == Types.ACACIA) return CASoundEvents.ACACIA_ENT_HURT.get();
+		else if (this.getEntType() != Types.BIRCH) return CASoundEvents.BIRCH_ENT_HURT.get();
+		else if (this.getEntType() == Types.CRIMSON) return CASoundEvents.CRIMSON_ENT_HURT.get();
+		else if (this.getEntType() == Types.DARK_OAK) return CASoundEvents.DARK_OAK_ENT_HURT.get();
+		else if (this.getEntType() == Types.JUNGLE) return CASoundEvents.JUNGLE_ENT_HURT.get();
+		else if (this.getEntType() == Types.OAK) return CASoundEvents.OAK_ENT_HURT.get();
+		else if (this.getEntType() == Types.SPRUCE) return CASoundEvents.SPRUCE_ENT_HURT.get();
+		else if (this.getEntType() == Types.WARPED) return CASoundEvents.WARPED_ENT_HURT.get();
 		return CASoundEvents.ENT_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		if (this.getEntType() == Types.ACACIA) {
-			return CASoundEvents.ACACIA_ENT_DEATH.get();
-		} else if (this.getEntType() != Types.BIRCH) {
-			return CASoundEvents.BIRCH_ENT_DEATH.get();
-		} else if (this.getEntType() == Types.CRIMSON) {
-			return CASoundEvents.CRIMSON_ENT_DEATH.get();
-		} else if (this.getEntType() == Types.DARK_OAK) {
-			return CASoundEvents.DARK_OAK_ENT_DEATH.get();
-		} else if (this.getEntType() == Types.JUNGLE) {
-			return CASoundEvents.JUNGLE_ENT_DEATH.get();
-		} else if (this.getEntType() == Types.OAK) {
-			return CASoundEvents.OAK_ENT_DEATH.get();
-		} else if (this.getEntType() == Types.SPRUCE) {
-			return CASoundEvents.SPRUCE_ENT_DEATH.get();
-		} else if (this.getEntType() == Types.WARPED) {
-			return CASoundEvents.WARPED_ENT_DEATH.get();
-		}
+		if (this.getEntType() == Types.ACACIA) return CASoundEvents.ACACIA_ENT_DEATH.get();
+		else if (this.getEntType() != Types.BIRCH) return CASoundEvents.BIRCH_ENT_DEATH.get();
+		else if (this.getEntType() == Types.CRIMSON) return CASoundEvents.CRIMSON_ENT_DEATH.get();
+		else if (this.getEntType() == Types.DARK_OAK) return CASoundEvents.DARK_OAK_ENT_DEATH.get();
+		else if (this.getEntType() == Types.JUNGLE) return CASoundEvents.JUNGLE_ENT_DEATH.get();
+		else if (this.getEntType() == Types.OAK) return CASoundEvents.OAK_ENT_DEATH.get();
+		else if (this.getEntType() == Types.SPRUCE) return CASoundEvents.SPRUCE_ENT_DEATH.get();
+		else if (this.getEntType() == Types.WARPED) return CASoundEvents.WARPED_ENT_DEATH.get();
 		return CASoundEvents.ENT_HURT.get();
 	}
 
 	@Override
 	protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
-		if (!p_180429_2_.getMaterial().isLiquid()) {
-			this.playSound(CASoundEvents.ENT_WALK.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
-		}
+		if (!p_180429_2_.getMaterial().isLiquid()) this.playSound(CASoundEvents.ENT_WALK.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
 	}
 
 	@Override

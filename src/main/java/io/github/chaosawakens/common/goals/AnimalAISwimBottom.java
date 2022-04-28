@@ -29,27 +29,27 @@ public class AnimalAISwimBottom extends RandomSwimmingGoal {
 		Vector3d vec = RandomPositionGenerator.getPos(this.creature, 10, 7);
 
 		for (int var2 = 0; vec != null
-				&& !this.creature.level.getBlockState(new BlockPos(vec)).isPathfindable(this.creature.level,
-						new BlockPos(vec), PathType.WATER)
+				&& !this.creature.level.getBlockState(new BlockPos(vec)).isPathfindable(this.creature.level, new BlockPos(vec), PathType.WATER)
 				&& var2++ < 10; vec = RandomPositionGenerator.getPos(this.creature, 10, 7)) {
 		}
 		int yDrop = 1 + this.creature.getRandom().nextInt(3);
 		if (vec != null) {
 			BlockPos pos = new BlockPos(vec);
-			while (this.creature.level.getFluidState(pos).is(FluidTags.WATER) && this.creature.level.getBlockState(pos)
-					.isPathfindable(this.creature.level, new BlockPos(vec), PathType.WATER) && pos.getY() > 1) {
+			while (this.creature.level.getFluidState(pos).is(FluidTags.WATER)
+					&& this.creature.level.getBlockState(pos).isPathfindable(this.creature.level, new BlockPos(vec), PathType.WATER)
+					&& pos.getY() > 1) {
 				pos = pos.below();
 			}
 			pos = pos.above();
 			int yUp = 0;
-			while (this.creature.level.getFluidState(pos).is(FluidTags.WATER) && this.creature.level.getBlockState(pos)
-					.isPathfindable(this.creature.level, new BlockPos(vec), PathType.WATER) && yUp < yDrop) {
+			while (this.creature.level.getFluidState(pos).is(FluidTags.WATER)
+					&& this.creature.level.getBlockState(pos).isPathfindable(this.creature.level, new BlockPos(vec), PathType.WATER)
+					&& yUp < yDrop) {
 				pos = pos.above();
 				yUp++;
 			}
 			return Vector3d.atCenterOf(pos);
 		}
-
 		return vec;
 	}
 }

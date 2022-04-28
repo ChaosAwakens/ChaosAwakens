@@ -51,9 +51,7 @@ public class ChaosAwakens {
 		if (opt.isPresent()) {
 			IModInfo modInfo = opt.get().getModInfo();
 			VERSION = modInfo.getVersion();
-		} else {
-			LOGGER.warn("Cannot get version from mod info");
-		}
+		} else LOGGER.warn("Cannot get version from mod info");
 
 		LOGGER.debug(MODNAME + " Version is: " + VERSION);
 		LOGGER.debug("Mod ID for " + MODNAME + " is: " + MODID);
@@ -71,8 +69,6 @@ public class ChaosAwakens {
 
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
-//			eventBus.addListener(ClientSetupEvent::mouseEvent);
-//			eventBus.addListener(ClientSetupEvent::renderParticles);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 			eventBus.addListener(EventPriority.NORMAL, CABlockItemColors::registerBlockColors);
 			eventBus.addListener(EventPriority.NORMAL, CABlockItemColors::registerItemColors);
@@ -95,7 +91,6 @@ public class ChaosAwakens {
 		CAVillagers.PROFESSIONS.register(eventBus);
 		CALootModifiers.LOOT_MODIFIERS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
-		eventBus.addListener(EntityAttributeModificationEventSubscriber::onEntityAttributeModificationEvent);
 
 		// Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -139,14 +134,9 @@ public class ChaosAwakens {
 	}
 
 	private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {
-		if (ModList.get().isLoaded("theoneprobe"))
-			TheOneProbePlugin.register();
+		if (ModList.get().isLoaded("theoneprobe")) TheOneProbePlugin.register();
 	}
-	
-	/*
-	 * Those methods below are to make using the LOGGER a little more convenient
-	 */
-	
+
 	/**
 	 * For those quick info checks to see if things are working, should be removed in releases or
 	 * when you are done!
@@ -157,7 +147,7 @@ public class ChaosAwakens {
 	public static <D> void debug(String domain, D message) {
 		LOGGER.debug("[" + domain + "]: " + message != null ? message.toString() : message);
 	}
-	
+
 	/**
 	 * For general info, can be left in releases
 	 * @param <I> Type of the message
@@ -167,7 +157,7 @@ public class ChaosAwakens {
 	public static <I> void info(String domain, I message) {
 		LOGGER.info("[" + domain + "]: " + message != null ? message.toString() : message);
 	}
-	
+
 	/**
 	 * For errors, warnings(duh), runtime problems and the like
 	 * @param <W> Type of the message

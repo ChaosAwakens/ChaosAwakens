@@ -23,17 +23,13 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 
 	@Override
 	public boolean canUse() {
-		if (RANDOM.nextInt(10) == 0)
-			return false;
-
+		if (RANDOM.nextInt(10) == 0) return false;
 		return this.checkIfValid(this, this.entity, this.entity.getTarget());
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (RANDOM.nextInt(10) == 0)
-			return true;
-
+		if (RANDOM.nextInt(10) == 0) return true;
 		return this.checkIfValid(this, this.entity, this.entity.getTarget());
 	}
 
@@ -48,11 +44,8 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 	public void tick() {
 		this.baseTick();
 		LivingEntity target = this.entity.getTarget();
-		if (target == null || this.hasGrabbed)
-			return;
-
+		if (target == null || this.hasGrabbed) return;
 		this.grabTarget(target);
-
 		target.rideTick();
 	}
 
@@ -81,7 +74,6 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 		this.isGrabbing = false;
 		this.entity.setAttacking(false);
 		((IGrabber) this.entity).setGrabbing(this.entity, false);
-
 	}
 
 	protected static double getGrabAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
@@ -89,16 +81,14 @@ public class AnimatableGrabGoal<G extends AnimatableMonsterEntity & IGrabber> ex
 	}
 
 	private boolean checkIfValid(AnimatableGrabGoal<?> goal, AnimatableMonsterEntity attacker, LivingEntity target) {
-		if (target == null)
-			return false;
+		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 				attacker.setAttacking(false);
 				return false;
 			}
 			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-			if (distance <= getGrabAttackReachSq(attacker, target))
-				return true;
+			if (distance <= getGrabAttackReachSq(attacker, target)) return true;
 		}
 		attacker.setAttacking(false);
 		return false;

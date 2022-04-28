@@ -18,17 +18,14 @@ public class EnchantedGoldenCarrotPigEntityRender extends GeoEntityRenderer<Ench
 
 	public EnchantedGoldenCarrotPigEntityRender(EntityRendererManager renderManager) {
 		super(renderManager, new EnchantedGoldenCarrotPigModel());
-		this.shadowRadius = 0.2F;
+		this.shadowRadius = 0.7F;
 		this.addLayer(new PigGlintLayer(this));
 		this.addLayer(new EnchantedGoldenCarrotPigSaddleLayer(this));
 	}
 
 	@Override
-	public void renderEarly(EnchantedGoldenCarrotPigEntity animatable, MatrixStack stackIn, float ticks,
-			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn,
-			float red, float green, float blue, float partialTicks) {
-		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
-				red, green, blue, partialTicks);
+	public void renderEarly(EnchantedGoldenCarrotPigEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
 	}
 
 	@Override
@@ -37,15 +34,12 @@ public class EnchantedGoldenCarrotPigEntityRender extends GeoEntityRenderer<Ench
 	}
 
 	@Override
-	public RenderType getRenderType(EnchantedGoldenCarrotPigEntity animatable, float partialTicks, MatrixStack stack,
-			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
-			ResourceLocation textureLocation) {
+	public RenderType getRenderType(EnchantedGoldenCarrotPigEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
 		return RenderType.entityTranslucent(getTextureLocation(animatable));
 	}
 
 	@Override
-	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
-			int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 }

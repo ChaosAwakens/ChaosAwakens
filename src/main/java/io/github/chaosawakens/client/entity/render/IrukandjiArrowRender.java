@@ -10,8 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class IrukandjiArrowRender extends ArrowRenderer<IrukandjiArrowEntity> {
-	public static final ResourceLocation IRUKANDJI_ARROW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/projectiles/irukandji_arrow.png");
+	public static final ResourceLocation IRUKANDJI_ARROW_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/projectiles/irukandji_arrow.png");
 
 	public IrukandjiArrowRender(EntityRendererManager manager) {
 		super(manager);
@@ -20,5 +19,5 @@ public class IrukandjiArrowRender extends ArrowRenderer<IrukandjiArrowEntity> {
 	public ResourceLocation getTextureLocation(IrukandjiArrowEntity entity) {
 		return IRUKANDJI_ARROW_TEXTURE;
 	}
-
 }
+

@@ -34,19 +34,19 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 8).add(Attributes.MOVEMENT_SPEED, 0.15D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 8)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
 				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 
-		event.getController()
-				.setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 
@@ -77,8 +77,7 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	public boolean hurt(DamageSource damageSource, float damage) {
 		if (!damageSource.isMagic() && damageSource.getDirectEntity() instanceof LivingEntity) {
 			LivingEntity livingentity = (LivingEntity) damageSource.getDirectEntity();
-			if (!damageSource.isExplosion())
-				livingentity.addEffect(new EffectInstance(new EffectInstance(Effects.CONFUSION, 200, 0)));
+			if (!damageSource.isExplosion()) livingentity.addEffect(new EffectInstance(new EffectInstance(Effects.CONFUSION, 200, 0)));
 		}
 		return super.hurt(damageSource, damage);
 	}

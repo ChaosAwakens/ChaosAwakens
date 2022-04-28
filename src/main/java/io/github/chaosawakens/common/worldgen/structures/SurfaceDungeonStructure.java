@@ -46,13 +46,10 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 	}
 
 	@Override
-	protected boolean isFeatureChunk(ChunkGenerator chunkGen, BiomeProvider biomeSource, long seed,
-			SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos,
-			NoFeatureConfig featureConfig) {
+	protected boolean isFeatureChunk(ChunkGenerator chunkGen, BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig) {
 		BlockPos centerOfChunk = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
 
-		int landHeight = chunkGen.getBaseHeight(centerOfChunk.getX(), centerOfChunk.getZ(),
-				Heightmap.Type.WORLD_SURFACE);
+		int landHeight = chunkGen.getBaseHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE);
 
 		IBlockReader column = chunkGen.getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ());
 		BlockState topBlock = column.getBlockState(centerOfChunk.above(landHeight));
@@ -62,27 +59,19 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 
 	public class Start extends StructureStart<NoFeatureConfig> {
 
-		public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ,
-				MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {
+		public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {
 			super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
 		}
 
 		@Override
-		public void generatePieces(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator,
-				TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn, NoFeatureConfig config) {
+		public void generatePieces(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn, NoFeatureConfig config) {
 			int x = (chunkX << 4) + 7;
 			int z = (chunkZ << 4) + 7;
 			boolean netherFlag = biomeIn.getBiomeCategory() == Category.NETHER;
 			BlockPos blockpos = new BlockPos(x, 0, z);
 			JigsawManager.addPieces(dynamicRegistryManager,
-					new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
-							.get(new ResourceLocation(ChaosAwakens.MODID, path)), 10),
-					AbstractVillagePiece::new, chunkGenerator, templateManagerIn,
-					netherFlag
-							? SurfaceDungeonStructure.getGround(chunkGenerator,
-									chunkGenerator.getBaseColumn((chunkX << 4) + 7, (chunkZ << 4) + 7), chunkX, chunkZ)
-							: blockpos,
-					pieces, random, false, !netherFlag);
+					new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, path)), 10),
+					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, netherFlag ? SurfaceDungeonStructure.getGround(chunkGenerator, chunkGenerator.getBaseColumn((chunkX << 4) + 7, (chunkZ << 4) + 7), chunkX, chunkZ) : blockpos, pieces, random, false, !netherFlag);
 
 			this.calculateBoundingBox();
 		}
@@ -97,10 +86,7 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 			if (!currState.canOcclude()) {
 				mutable.move(Direction.DOWN);
 				continue;
-			} else if (column.getBlockState(mutable.offset(0, 3, 0)).getMaterial() == Material.AIR
-					&& currState.canOcclude()) {
-				break;
-			}
+			} else if (column.getBlockState(mutable.offset(0, 3, 0)).getMaterial() == Material.AIR && currState.canOcclude()) break;
 			mutable.move(Direction.DOWN);
 		}
 		return mutable;

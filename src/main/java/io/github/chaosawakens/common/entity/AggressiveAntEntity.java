@@ -34,13 +34,11 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ITextComponent emptyInventoryMessage = new TranslationTextComponent(
-			"misc." + ChaosAwakens.MODID + ".empty_inventory");
+	private final ITextComponent emptyInventoryMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
 	private final ConfigValue<Boolean> tpConfig;
 	private final RegistryKey<World> targetDimension;
 
-	public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, ConfigValue<Boolean> tpConfig,
-			RegistryKey<World> targetDimension) {
+	public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
 		this.noCulling = true;
 		this.tpConfig = tpConfig;
@@ -48,20 +46,22 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 2).add(Attributes.ATTACK_SPEED, 1)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D).add(Attributes.ATTACK_DAMAGE, 1)
-				.add(Attributes.ATTACK_KNOCKBACK, 0.5D).add(Attributes.FOLLOW_RANGE, 8);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 2)
+				.add(Attributes.ATTACK_SPEED, 1)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.ATTACK_DAMAGE, 1)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.5D)
+				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -89,22 +89,18 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 					&& targetDimension == CADimensions.CRYSTAL_WORLD) {
 				if (playerIn.inventory.isEmpty() || playerIn.isCreative()) {
 					MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
-					ServerWorld targetWorld = minecraftServer.getLevel(
-							this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+					ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
 					ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-					if (targetWorld != null)
-						serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+					if (targetWorld != null) serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 				} else {
 					playerIn.displayClientMessage(this.emptyInventoryMessage, true);
 					return ActionResultType.PASS;
 				}
 			} else {
 				MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
-				ServerWorld targetWorld = minecraftServer.getLevel(
-						this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+				ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-				if (targetWorld != null)
-					serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+				if (targetWorld != null) serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 			}
 		}
 		return super.mobInteract(playerIn, hand);

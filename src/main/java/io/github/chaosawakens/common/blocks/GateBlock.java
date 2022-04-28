@@ -73,20 +73,15 @@ public class GateBlock extends Block {
 
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx) {
-		return isVanished(state) ? VoxelShapes.empty()
-				: this.hasCollision ? state.getShape(world, pos) : VoxelShapes.empty();
+		return isVanished(state) ? VoxelShapes.empty() : this.hasCollision ? state.getShape(world, pos) : VoxelShapes.empty();
 	}
 
 	@Override
 	public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos,
 			boolean isMoving) {
-		if (world.isClientSide) {
-			return;
-		}
+		if (world.isClientSide) return;
 
-		if (!isVanished(state) && !state.getValue(ACTIVE) && world.hasNeighborSignal(pos)) {
-			activate(world, pos);
-		}
+		if (!isVanished(state) && !state.getValue(ACTIVE) && world.hasNeighborSignal(pos)) activate(world, pos);
 	}
 
 	@Override
@@ -96,8 +91,7 @@ public class GateBlock extends Block {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn,
-			BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (!isVanished(state) && !state.getValue(ACTIVE)) {
 			activate(world, pos);
 			return ActionResultType.SUCCESS;

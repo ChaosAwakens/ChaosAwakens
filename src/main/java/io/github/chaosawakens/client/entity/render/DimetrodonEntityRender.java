@@ -13,14 +13,10 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class DimetrodonEntityRender extends GeoEntityRenderer<DimetrodonEntity> {
-	private static final ResourceLocation TEXTURE_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/dimetrodon/green.png");
-	private static final ResourceLocation TEXTURE_ORANGE_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/dimetrodon/orange.png");
-	private static final ResourceLocation TEXTURE_PURPLE_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/dimetrodon/purple.png");
-	private static final ResourceLocation TEXTURE_THROWBACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/dimetrodon/throwback.png");
+	private static final ResourceLocation TEXTURE_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/dimetrodon/green.png");
+	private static final ResourceLocation TEXTURE_ORANGE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/dimetrodon/orange.png");
+	private static final ResourceLocation TEXTURE_PURPLE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/dimetrodon/purple.png");
+	private static final ResourceLocation TEXTURE_THROWBACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/dimetrodon/throwback.png");
 
 	public DimetrodonEntityRender(EntityRendererManager renderManager) {
 		super(renderManager, new DimetrodonEntityModel());
@@ -28,11 +24,8 @@ public class DimetrodonEntityRender extends GeoEntityRenderer<DimetrodonEntity> 
 	}
 
 	@Override
-	public void renderEarly(DimetrodonEntity animatable, MatrixStack stackIn, float ticks,
-			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn,
-			float red, float green, float blue, float partialTicks) {
-		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
-				red, green, blue, partialTicks);
+	public void renderEarly(DimetrodonEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
 	}
 
 	@Override
@@ -51,15 +44,12 @@ public class DimetrodonEntityRender extends GeoEntityRenderer<DimetrodonEntity> 
 	}
 
 	@Override
-	public RenderType getRenderType(DimetrodonEntity animatable, float partialTicks, MatrixStack stack,
-			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
-			ResourceLocation textureLocation) {
+	public RenderType getRenderType(DimetrodonEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
 		return RenderType.entityTranslucent(getTextureLocation(animatable));
 	}
 
 	@Override
-	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
-			int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 }

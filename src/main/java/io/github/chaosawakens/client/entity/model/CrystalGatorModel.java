@@ -26,8 +26,7 @@ public class CrystalGatorModel extends AnimatedGeoModel<CrystalGatorEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(CrystalGatorEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(CrystalGatorEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);

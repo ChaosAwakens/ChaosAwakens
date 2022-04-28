@@ -1,10 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
 import net.minecraft.block.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.util.Direction;
@@ -13,8 +9,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class LeafCarpetBlock extends HorizontalFaceBlock {
 	protected static final VoxelShape CEILING_AABB = Block.box(0.0D, 16.0D, 0.0D, 16.0D, 15.0D, 16.0D);
@@ -26,12 +20,10 @@ public class LeafCarpetBlock extends HorizontalFaceBlock {
 
 	public LeafCarpetBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(
-				this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL));
 	}
 
-	public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos,
-			ISelectionContext selectionContext) {
+	public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
 		Direction direction = blockState.getValue(FACING);
 		switch (blockState.getValue(FACE)) {
 		case FLOOR:
@@ -54,10 +46,8 @@ public class LeafCarpetBlock extends HorizontalFaceBlock {
 		}
 	}
 
-	public BlockState updateShape(BlockState blockState, Direction p_196271_2_, BlockState p_196271_3_,
-			IWorld p_196271_4_, BlockPos p_196271_5_, BlockPos p_196271_6_) {
-		return !blockState.canSurvive(p_196271_4_, p_196271_5_) ? Blocks.AIR.defaultBlockState()
-				: super.updateShape(blockState, p_196271_2_, p_196271_3_, p_196271_4_, p_196271_5_, p_196271_6_);
+	public BlockState updateShape(BlockState blockState, Direction p_196271_2_, BlockState p_196271_3_, IWorld p_196271_4_, BlockPos p_196271_5_, BlockPos p_196271_6_) {
+		return !blockState.canSurvive(p_196271_4_, p_196271_5_) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, p_196271_2_, p_196271_3_, p_196271_4_, p_196271_5_, p_196271_6_);
 	}
 
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> p_206840_1_) {

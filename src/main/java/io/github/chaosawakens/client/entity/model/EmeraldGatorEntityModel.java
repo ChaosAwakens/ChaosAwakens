@@ -26,8 +26,7 @@ public class EmeraldGatorEntityModel extends AnimatedGeoModel<EmeraldGatorEntity
 	}
 
 	@Override
-	public void setLivingAnimations(EmeraldGatorEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(EmeraldGatorEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);

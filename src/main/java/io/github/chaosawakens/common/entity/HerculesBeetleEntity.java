@@ -1,16 +1,17 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IGrabber;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.RavagerEntity;
+import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,33 +37,34 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 250).add(Attributes.ARMOR, 20)
-				.add(Attributes.MOVEMENT_SPEED, 0.25D).add(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
-				.add(Attributes.ATTACK_SPEED, 10).add(Attributes.ATTACK_DAMAGE, 30)
-				.add(Attributes.ATTACK_KNOCKBACK, 9.5D).add(Attributes.FOLLOW_RANGE, 25);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 250)
+				.add(Attributes.ARMOR, 20)
+				.add(Attributes.MOVEMENT_SPEED, 0.25D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
+				.add(Attributes.ATTACK_SPEED, 10)
+				.add(Attributes.ATTACK_DAMAGE, 30)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.0D)
+				.add(Attributes.FOLLOW_RANGE, 25);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.getAttacking()) {
 			if (this.getGrabbing(this)) {
-				event.getController().setAnimation(
-						new AnimationBuilder().addAnimation("animation.hercules_beetle.walk_attack_animation", true));
+				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walk_attack_animation", true));
 				return PlayState.CONTINUE;
 			}
 
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation", true));
 			return PlayState.CONTINUE;
 		}
 
 		if (this.getMoving()) {
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 
-		event.getController()
-				.setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 
@@ -72,7 +74,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 24.0F));
 		this.goalSelector.addGoal(3, new AnimatableMoveToTargetGoal(this, 1.75, 8));
-		this.goalSelector.addGoal(3, new AnimatableMeleeGoal(this, 30.4, 0.20, 0.30));
+		this.goalSelector.addGoal(3, new HerculesBeetleAttackGoal(this, 30.4, 0.20, 0.30));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));
@@ -125,5 +127,18 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
+	}
+
+	class HerculesBeetleAttackGoal extends AnimatableMeleeGoal {
+		public HerculesBeetleAttackGoal(HerculesBeetleEntity entity, double animationLength, double attackBegin, double attackEnd) {
+			super(entity, animationLength, attackBegin, attackEnd);
+		}
+
+		@Override
+		public void tick() {
+			LivingEntity livingentity = this.entity.getTarget();
+			livingentity.push(0.0D, random.nextInt(5), 0.0D);
+			super.tick();
+		}
 	}
 }

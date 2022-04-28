@@ -9,7 +9,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class GazelleEntityModel extends AnimatedGeoModel<GazelleEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(GazelleEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/gazelle.geo.json");
@@ -26,8 +25,7 @@ public class GazelleEntityModel extends AnimatedGeoModel<GazelleEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(GazelleEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(GazelleEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);
@@ -57,5 +55,4 @@ public class GazelleEntityModel extends AnimatedGeoModel<GazelleEntity> {
 		head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
 		head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
 	}
-
 }

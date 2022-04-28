@@ -35,8 +35,7 @@ import javax.annotation.Nullable;
 
 public class FrogEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(FrogEntity.class,
-			DataSerializers.INT);
+	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(FrogEntity.class, DataSerializers.INT);
 
 	public FrogEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -63,8 +62,11 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 6).add(Attributes.MOVEMENT_SPEED, 0.15D)
-				.add(Attributes.JUMP_STRENGTH, 2.0D).add(Attributes.FOLLOW_RANGE, 8.0D);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 6)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.JUMP_STRENGTH, 2.0D)
+				.add(Attributes.FOLLOW_RANGE, 8.0D);
 	}
 
 	protected void defineSynchedData() {
@@ -87,14 +89,10 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	@Nullable
-	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance,
-			SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
 		int i = this.getRandomFrogType(world);
-		if (entityData instanceof FrogEntity.FrogData) {
-			i = ((FrogData) entityData).frogType;
-		} else {
-			entityData = new FrogEntity.FrogData(i);
-		}
+		if (entityData instanceof FrogEntity.FrogData) i = ((FrogData) entityData).frogType;
+		else entityData = new FrogEntity.FrogData(i);
 		this.setFrogType(i);
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
 	}
@@ -102,26 +100,19 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 	private int getRandomFrogType(IWorld world) {
 		Biome biome = world.getBiome(this.blockPosition());
 		int i = this.random.nextInt(8);
-		if (biome.getBiomeCategory() == Biome.Category.NETHER) {
-			i = 99;
-		}
+		if (biome.getBiomeCategory() == Biome.Category.NETHER) i = 99;
 		return i;
 	}
 
 	public boolean doHurtTarget(Entity entity) {
 		if (this.getFrogType() == 99) {
-			this.playSound(SoundEvents.RABBIT_ATTACK, 1.0F,
-					(this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+			this.playSound(SoundEvents.RABBIT_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			return entity.hurt(DamageSource.mobAttack(this), 8.0F);
-		} else {
-			return entity.hurt(DamageSource.mobAttack(this), 3.0F);
-		}
+		} else return entity.hurt(DamageSource.mobAttack(this), 3.0F);
 	}
 
 	public boolean canStandOnFluid(Fluid fluid) {
-		if (this.getFrogType() == 99) {
-			return fluid.is(FluidTags.LAVA);
-		}
+		if (this.getFrogType() == 99) return fluid.is(FluidTags.LAVA);
 		return false;
 	}
 
@@ -137,12 +128,9 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.frog.jump_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.frog.jump_animation", true));
 			return PlayState.CONTINUE;
-		} else if (!event.isMoving()) {
-			return PlayState.CONTINUE;
-		}
+		} else if (!event.isMoving()) return PlayState.CONTINUE;
 		return PlayState.CONTINUE;
 	}
 
@@ -158,15 +146,13 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 	@Override
 	protected void jumpFromGround() {
 		float f = this.getJumpPower();
-		if (this.hasEffect(Effects.JUMP))
-			f += 0.1F * (float) (this.getEffect(Effects.JUMP).getAmplifier() + 1);
+		if (this.hasEffect(Effects.JUMP)) f += 0.1F * (float) (this.getEffect(Effects.JUMP).getAmplifier() + 1);
 
 		Vector3d vector3d = this.getDeltaMovement();
 		this.setDeltaMovement(vector3d.x, f, vector3d.z);
 		if (this.isSprinting()) {
 			float f1 = this.yRot * ((float) Math.PI / 180F);
-			this.setDeltaMovement(
-					this.getDeltaMovement().add((-MathHelper.sin(f1) * 0.2F), 0.0D, (MathHelper.cos(f1) * 0.2F)));
+			this.setDeltaMovement(this.getDeltaMovement().add((-MathHelper.sin(f1) * 0.2F), 0.0D, (MathHelper.cos(f1) * 0.2F)));
 		}
 
 		this.hasImpulse = true;

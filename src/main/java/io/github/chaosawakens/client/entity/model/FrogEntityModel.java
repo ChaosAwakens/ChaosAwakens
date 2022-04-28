@@ -9,7 +9,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class FrogEntityModel extends AnimatedGeoModel<FrogEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(FrogEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/frog.geo.json");
@@ -26,8 +25,7 @@ public class FrogEntityModel extends AnimatedGeoModel<FrogEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(FrogEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(FrogEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 		EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
 		IBone head = this.getAnimationProcessor().getBone("head");

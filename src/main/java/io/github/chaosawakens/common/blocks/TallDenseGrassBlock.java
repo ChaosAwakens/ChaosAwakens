@@ -35,9 +35,7 @@ public class TallDenseGrassBlock extends DenseBushBlock implements IGrowable, IF
 		DoubleDensePlantBlock doubleDensePlantBlock = (DoubleDensePlantBlock) (this == CABlocks.DENSE_GRASS.get()
 				? CABlocks.TALL_DENSE_GRASS.get()
 				: CABlocks.DENSE_GRASS.get());
-		if (doubleDensePlantBlock.defaultBlockState().canSurvive(world, pos) && world.isEmptyBlock(pos.above())) {
-			doubleDensePlantBlock.placeAt(world, pos, 2);
-		}
+		if (doubleDensePlantBlock.defaultBlockState().canSurvive(world, pos) && world.isEmptyBlock(pos.above())) doubleDensePlantBlock.placeAt(world, pos, 2);
 	}
 
 	public AbstractBlock.OffsetType getOffsetType() {

@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> {
-	public static final ResourceLocation TEXTURE = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/gui/container/defossilizer.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/defossilizer.png");
 
 	public DefossilizerScreen(DefossilizerContainer container, PlayerInventory playerInventory, ITextComponent title) {
 		super(container, playerInventory, title);
@@ -25,8 +24,7 @@ public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> {
 
 	@Override
 	protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-		if (minecraft == null)
-			return;
+		if (minecraft == null) return;
 
 		RenderSystem.clearColor(1, 1, 1, 1);
 		minecraft.getTextureManager().bind(TEXTURE);

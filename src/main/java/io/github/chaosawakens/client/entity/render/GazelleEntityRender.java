@@ -17,16 +17,11 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class GazelleEntityRender extends GeoEntityRenderer<GazelleEntity> {
-	private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/gazelle/black.png");
-	private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/gazelle/red.png");
-	private static final ResourceLocation TEXTURE_DARK_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/gazelle/dark_red.png");
-	private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/gazelle/brown.png");
-	private static final ResourceLocation TEXTURE_BEIJ_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/gazelle/beij.png");
+	private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/black.png");
+	private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/red.png");
+	private static final ResourceLocation TEXTURE_DARK_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/dark_red.png");
+	private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/brown.png");
+	private static final ResourceLocation TEXTURE_BEIJ_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/beij.png");
 
 	public GazelleEntityRender(EntityRendererManager renderManager) {
 		super(renderManager, new GazelleEntityModel());
@@ -34,11 +29,8 @@ public class GazelleEntityRender extends GeoEntityRenderer<GazelleEntity> {
 	}
 
 	@Override
-	public void renderEarly(GazelleEntity animatable, MatrixStack stackIn, float ticks,
-			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn,
-			float red, float green, float blue, float partialTicks) {
-		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
-				red, green, blue, partialTicks);
+	public void renderEarly(GazelleEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
 	}
 
 	@Override
@@ -59,15 +51,12 @@ public class GazelleEntityRender extends GeoEntityRenderer<GazelleEntity> {
 	}
 
 	@Override
-	public RenderType getRenderType(GazelleEntity animatable, float partialTicks, MatrixStack stack,
-			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
-			ResourceLocation textureLocation) {
+	public RenderType getRenderType(GazelleEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
 		return RenderType.entityTranslucent(getTextureLocation(animatable));
 	}
 
 	@Override
-	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
-			int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 

@@ -2,7 +2,6 @@ package io.github.chaosawakens.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
@@ -10,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,13 +25,11 @@ public abstract class DimensionTypeProvider implements IDataProvider {
 	public final void run(DirectoryCache cache) {
 		this.dimensionType.clear();
 		this.addDimensionTypes();
-		Iterator var2 = this.dimensionType.entrySet().iterator();
 
-		while (var2.hasNext()) {
-			Map.Entry<ResourceLocation, DimensionTypeBuilder> entry = (Map.Entry) var2.next();
+		for (Map.Entry<ResourceLocation, DimensionTypeBuilder> resourceLocationDimensionTypeBuilderEntry : this.dimensionType.entrySet()) {
+			Map.Entry<ResourceLocation, DimensionTypeBuilder> entry = (Map.Entry) resourceLocationDimensionTypeBuilderEntry;
 			ResourceLocation dimensionType = entry.getKey();
-			Path path = generator.getOutputFolder().resolve(
-					"data/" + dimensionType.getNamespace() + "/dimension_type/" + dimensionType.getPath() + ".json");
+			Path path = generator.getOutputFolder().resolve("data/" + dimensionType.getNamespace() + "/dimension_type/" + dimensionType.getPath() + ".json");
 
 			try {
 				IDataProvider.save(GSON, cache, (entry.getValue()).serialize(), path);
@@ -46,9 +42,8 @@ public abstract class DimensionTypeProvider implements IDataProvider {
 	protected abstract void addDimensionTypes();
 
 	protected DimensionTypeBuilder createDimensionType(ResourceLocation id) {
-		if (this.dimensionType.containsValue(id)) {
-			throw new RuntimeException("Dimension type '" + id + "' has already been registered.");
-		} else {
+		if (this.dimensionType.containsValue(id)) throw new RuntimeException("Dimension type '" + id + "' has already been registered.");
+		else {
 			DimensionTypeBuilder dimensionType = new DimensionTypeBuilder(id);
 			this.dimensionType.put(id, dimensionType);
 			return dimensionType;

@@ -11,11 +11,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatable {
-	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class,
-			DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableMonsterEntity.class,
-			DataSerializers.BOOLEAN);
-
+	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
 	protected boolean isAnimationFinished = false;
 
 	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {

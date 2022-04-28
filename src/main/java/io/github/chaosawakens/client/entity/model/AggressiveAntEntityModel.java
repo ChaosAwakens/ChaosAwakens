@@ -9,7 +9,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class AggressiveAntEntityModel extends AnimatedGeoModel<AggressiveAntEntity> {
-
 	private final String textureName;
 
 	public AggressiveAntEntityModel(String textureName) {
@@ -32,8 +31,7 @@ public class AggressiveAntEntityModel extends AnimatedGeoModel<AggressiveAntEnti
 	}
 
 	@Override
-	public void setLivingAnimations(AggressiveAntEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(AggressiveAntEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		IBone head = this.getAnimationProcessor().getBone("head");

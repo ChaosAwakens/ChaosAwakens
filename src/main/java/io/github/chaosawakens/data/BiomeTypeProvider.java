@@ -24,7 +24,6 @@ public abstract class BiomeTypeProvider implements IDataProvider {
 		this.generator = generator;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public final void run(DirectoryCache cache) {
 		this.biomeType.clear();
@@ -32,11 +31,9 @@ public abstract class BiomeTypeProvider implements IDataProvider {
 		Iterator<?> var2 = this.biomeType.entrySet().iterator();
 
 		while (var2.hasNext()) {
-			Map.Entry<ResourceLocation, BiomeTypeBuilder> entry = (Entry<ResourceLocation, BiomeTypeBuilder>) var2
-					.next();
+			Map.Entry<ResourceLocation, BiomeTypeBuilder> entry = (Entry<ResourceLocation, BiomeTypeBuilder>) var2.next();
 			ResourceLocation biomeType = entry.getKey();
-			Path path = generator.getOutputFolder()
-					.resolve("data/" + biomeType.getNamespace() + "/biome/" + biomeType.getPath() + ".json");
+			Path path = generator.getOutputFolder().resolve("data/" + biomeType.getNamespace() + "/biome/" + biomeType.getPath() + ".json");
 
 			try {
 				IDataProvider.save(GSON, cache, (entry.getValue()).serialize(), path);
@@ -48,11 +45,9 @@ public abstract class BiomeTypeProvider implements IDataProvider {
 
 	protected abstract void addBiomeTypes();
 
-	@SuppressWarnings("unlikely-arg-type")
 	protected BiomeTypeBuilder createBiomeType(ResourceLocation id) {
-		if (this.biomeType.containsValue(id)) {
-			throw new RuntimeException("Biome type '" + id + "' has already been registered.");
-		} else {
+		if (this.biomeType.containsValue(id)) throw new RuntimeException("Biome type '" + id + "' has already been registered.");
+		else {
 			BiomeTypeBuilder biomeType = new BiomeTypeBuilder(id);
 			this.biomeType.put(id, biomeType);
 			return biomeType;
@@ -63,5 +58,4 @@ public abstract class BiomeTypeProvider implements IDataProvider {
 	public String getName() {
 		return "Biome Type";
 	}
-
 }

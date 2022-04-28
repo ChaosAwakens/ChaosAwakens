@@ -32,11 +32,10 @@ public class TallCrystalGrassBlock extends CrystalBushBlock implements IGrowable
 	}
 
 	public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		DoubleCrystalPlantBlock doubleCrystalPlantBlock = (DoubleCrystalPlantBlock) (this == CABlocks.CRYSTAL_GRASS
-				.get() ? CABlocks.TALL_CRYSTAL_GRASS.get() : CABlocks.CRYSTAL_GRASS.get());
-		if (doubleCrystalPlantBlock.defaultBlockState().canSurvive(world, pos) && world.isEmptyBlock(pos.above())) {
-			doubleCrystalPlantBlock.placeAt(world, pos, 2);
-		}
+		DoubleCrystalPlantBlock doubleCrystalPlantBlock = (DoubleCrystalPlantBlock) (this == CABlocks.CRYSTAL_GRASS.get()
+				? CABlocks.TALL_CRYSTAL_GRASS.get()
+				: CABlocks.CRYSTAL_GRASS.get());
+		if (doubleCrystalPlantBlock.defaultBlockState().canSurvive(world, pos) && world.isEmptyBlock(pos.above())) doubleCrystalPlantBlock.placeAt(world, pos, 2);
 	}
 
 	public AbstractBlock.OffsetType getOffsetType() {

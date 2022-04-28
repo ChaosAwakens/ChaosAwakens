@@ -16,56 +16,27 @@
   "carvers": {},
   "features": [
     [
-      "minecraft:ore_dirt",
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite",
-      "minecraft:ore_diorite",
-      "minecraft:ore_andesite",
-      "minecraft:ore_coal",
-      "minecraft:ore_iron",
-      "minecraft:ore_gold",
-      "minecraft:ore_redstone",
-      "minecraft:ore_diamond",
-      "minecraft:ore_lapis",
-      "minecraft:disk_sand",
-      "minecraft:disk_clay",
-      "minecraft:disk_gravel"
-    ],
-    [
       "minecraft:spruce_snowy",
       "minecraft:flower_default",
       "minecraft:patch_grass_badlands",
-      "minecraft:patch_pumpkin"
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal",
+      "minecraft:patch_sugar_cane",
+      "minecraft:patch_pumpkin",
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
     ],
     [
       "minecraft:freeze_top_layer"
     ]
   ],
   "starts": [
+    "minecraft:mansion",
     "minecraft:village_snowy",
-    "minecraft:igloo",
-    "minecraft:pillager_outpost"
+    "minecraft:igloo"
   ],
   "spawners": {
     "monster": [
-      {
-        "type": "chaosawakens:robo_pounder",
-        "weight": 55,
-        "minCount": 1,
-        "maxCount": 2
-      },
-      {
-        "type": "chaosawakens:robo_sniper",
-        "weight": 75,
-        "minCount": 1,
-        "maxCount": 5
-      },
-      {
-        "type": "chaosawakens:robo_warrior",
-        "weight": 85,
-        "minCount": 1,
-        "maxCount": 3
-      },
       {
         "type": "minecraft:spider",
         "weight": 100,

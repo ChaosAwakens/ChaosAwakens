@@ -41,13 +41,9 @@ public class RandomFlyingGoal extends Goal {
 			return false;
 		} else {
 			if (!this.forceTrigger) {
-				if (this.checkNoActionTime && this.mob.getNoActionTime() >= 10) {
-					return false;
-				}
+				if (this.checkNoActionTime && this.mob.getNoActionTime() >= 10) return false;
 
-				if (this.mob.getRandom().nextInt(this.interval) != 0) {
-					return false;
-				}
+				if (this.mob.getRandom().nextInt(this.interval) != 0) return false;
 			}
 
 			Vector3d vector3d = this.getAirPosition();
@@ -69,8 +65,7 @@ public class RandomFlyingGoal extends Goal {
 	@Nullable
 	protected Vector3d getAirPosition() {
 		int randomReference = this.mob.level.random.nextInt(100);
-		return randomReference <= 6 ? RandomPositionGenerator.getAirPos(this.mob, 10, 2, 1, null, 0.0D)
-				: RandomPositionGenerator.getAirPos(this.mob, 10, 1, 1, null, 0.0D);
+		return randomReference <= 6 ? RandomPositionGenerator.getAirPos(this.mob, 10, 2, 1, null, 0.0D) : RandomPositionGenerator.getAirPos(this.mob, 10, 1, 1, null, 0.0D);
 	}
 
 //	@Nullable

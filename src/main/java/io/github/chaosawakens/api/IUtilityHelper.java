@@ -172,13 +172,10 @@ public interface IUtilityHelper {
 	 * @param amount       amount of particles to add
 	 */
 	@SuppressWarnings("resource")
-	static void addParticles(World world, IParticleData particleData, double x, double y, double z, double randomXValue,
-			double randomYValue, double randomZValue, int amount) {
+	static void addParticles(World world, IParticleData particleData, double x, double y, double z, double randomXValue, double randomYValue, double randomZValue, int amount) {
 		if (world.isClientSide) {
 			for (int particleCount = 0; particleCount <= amount; particleCount++) {
-				Minecraft.getInstance().particleEngine.createParticle(particleData,
-						x + getRandomHorizontalPos(randomXValue, world), y + getRandomVerticalPos(randomYValue, world),
-						z + getRandomHorizontalPos(randomZValue, world), 0.0D, 0.0D, 0.0D);
+				Minecraft.getInstance().particleEngine.createParticle(particleData, x + getRandomHorizontalPos(randomXValue, world), y + getRandomVerticalPos(randomYValue, world), z + getRandomHorizontalPos(randomZValue, world), 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
@@ -199,12 +196,10 @@ public interface IUtilityHelper {
 	 * @param amountToSpawn amount of entities inside the entitiesToAdd list, that
 	 *                      amount will be summoned
 	 */
-	static void addLivingEntities(World world, List<LivingEntity> entitiesToAdd, @Nonnull BlockPos pos, double x,
-			double y, double z, double xSize, double ySize, double zSize, int amountToSpawn) {
+	static void addLivingEntities(World world, List<LivingEntity> entitiesToAdd, @Nonnull BlockPos pos, double x, double y, double z, double xSize, double ySize, double zSize, int amountToSpawn) {
 		if (!world.isClientSide) {
 			amountToSpawn = entitiesToAdd.size();
-			entitiesToAdd = world.getEntitiesOfClass(LivingEntity.class,
-					(new AxisAlignedBB(pos).inflate(xSize, ySize, zSize)));
+			entitiesToAdd = world.getEntitiesOfClass(LivingEntity.class, (new AxisAlignedBB(pos).inflate(xSize, ySize, zSize)));
 			for (int entityCount = 0; entityCount <= amountToSpawn; entityCount++) {
 				if (pos != null) {
 					world.addFreshEntity((Entity) entitiesToAdd);
@@ -263,13 +258,6 @@ public interface IUtilityHelper {
 	}
 
 	/**
-	 * uh -WeirdNerd, circa 2022 A.D
-	 */
-	static void uh() {
-		uh();
-	}
-
-	/**
 	 * Sets the item texture to something else in-game.
 	 * 
 	 * @param itemToSet        item to replace texture of
@@ -282,8 +270,7 @@ public interface IUtilityHelper {
 	 *                         run the <code>getPath()</code> method off of a
 	 *                         certain item in that folder/package you want to grab)
 	 */
-	static void setItemTexture(ItemStack itemToSet, ResourceLocation pathWithTextures, String textureName,
-			String pathName) {
+	static void setItemTexture(ItemStack itemToSet, ResourceLocation pathWithTextures, String textureName, String pathName) {
 		boolean hasTextures = pathWithTextures.getPath().contains(pathName);
 		if (hasTextures) {
 			ItemModelsProperties.register(itemToSet.getItem(), pathWithTextures, (stack, world, entity) -> {
@@ -307,10 +294,7 @@ public interface IUtilityHelper {
 	 * @return true if entity is moving, else returns false
 	 */
 	static boolean isMoving(LivingEntity entity) {
-		if (entity.moveDist > 0 || entity.getSpeed() == 0) {
-			return true;
-		}
-		return false;
+		return entity.moveDist > 0 || entity.getSpeed() == 0;
 	}
 
 	/**
@@ -354,8 +338,7 @@ public interface IUtilityHelper {
 	 * @return true if the block to check is duplicatable, else returns false
 	 */
 	static boolean isDuplicatable(Block blockToCheck) {
-		return blockToCheck.is(CATags.Blocks.WHITELIST) || !blockToCheck.is(CATags.Blocks.BLACKLIST)
-				|| !blockToCheck.is(CATags.Blocks.BLACKLIST) && !blockToCheck.is(CATags.Blocks.WHITELIST);
+		return blockToCheck.is(CATags.Blocks.WHITELIST) || !blockToCheck.is(CATags.Blocks.BLACKLIST) || !blockToCheck.is(CATags.Blocks.BLACKLIST) && !blockToCheck.is(CATags.Blocks.WHITELIST);
 	}
 
 	/**
@@ -420,10 +403,7 @@ public interface IUtilityHelper {
 	 *         returns false
 	 */
 	static boolean matchesNameOfEntityStoredInItemStack(Entity entity, ItemStack cageStack) {
-		boolean match = entity.getType().getRegistryName().toString()
-				.matches(cageStack.getTag().getString(entity.getType().getRegistryName().toString())) && entity != null
-				&& cageStack != null;
-		return match;
+		return entity.getType().getRegistryName().toString().matches(cageStack.getTag().getString(entity.getType().getRegistryName().toString())) && entity != null && cageStack != null;
 	}
 
 	/**
@@ -488,9 +468,7 @@ public interface IUtilityHelper {
 	 *         sides/cardinal directions, else returns false
 	 */
 	static boolean isSurroundedByAir(Entity entity) {
-		return entity.blockPosition().below() == null && entity.blockPosition().above() == null
-				&& entity.blockPosition().east() == null && entity.blockPosition().west() == null
-				&& entity.blockPosition().north() == null && entity.blockPosition().south() == null;
+		return entity.blockPosition().below() == null && entity.blockPosition().above() == null && entity.blockPosition().east() == null && entity.blockPosition().west() == null && entity.blockPosition().north() == null && entity.blockPosition().south() == null;
 	}
 
 	///////////////////////////////
@@ -776,8 +754,7 @@ public interface IUtilityHelper {
 	 * @return Written NBT data
 	 */
 	static CompoundNBT writeToNBT() {
-		final CompoundNBT NBT = new CompoundNBT();
-		return NBT;
+		return new CompoundNBT();
 	}
 
 	/**
@@ -787,8 +764,7 @@ public interface IUtilityHelper {
 	 * @return the entity data/NBT
 	 */
 	static CompoundNBT getNBTDataFromLivingEntity(LivingEntity entityToGetNBTDataFrom) {
-		CompoundNBT entityDataNBT = new CompoundNBT();
-		return entityDataNBT;
+		return new CompoundNBT();
 	}
 
 }

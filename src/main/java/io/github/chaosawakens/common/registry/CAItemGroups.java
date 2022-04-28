@@ -38,4 +38,11 @@ public class CAItemGroups {
 			return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGG.get());
 		}
 	};
+
+	public static final ItemGroup FOSSILS = new ItemGroup("chaosawakens.fossils") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(CABlocks.DEFOSSILIZER.get());
+		}
+	};
 }

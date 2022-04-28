@@ -10,6 +10,6 @@ public class CASignTileEntity extends SignTileEntity {
 	@Nonnull
 	@Override
 	public TileEntityType<CASignTileEntity> getType() {
-		return (TileEntityType<CASignTileEntity>) CATileEntities.CUSTOM_SIGN.get();
+		return CATileEntities.CUSTOM_SIGN.get();
 	}
 }

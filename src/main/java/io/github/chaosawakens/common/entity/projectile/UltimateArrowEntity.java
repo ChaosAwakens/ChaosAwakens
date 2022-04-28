@@ -33,8 +33,7 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 	@Override
 	protected void onHitEntity(EntityRayTraceResult result) {
 		Entity entity = result.getEntity();
-		if (entity instanceof PlayerEntity || (entity instanceof TameableEntity && ((TameableEntity) entity).isTame()
-				&& ((TameableEntity) entity).getOwner() == this.getOwner())) {
+		if (entity instanceof PlayerEntity || (entity instanceof TameableEntity && ((TameableEntity) entity).isTame() && ((TameableEntity) entity).getOwner() == this.getOwner())) {
 			((LivingEntity) entity).heal(5.0F);
 			remove();
 			return;
@@ -50,15 +49,13 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundNBT compound) {
 		super.readAdditionalSaveData(compound);
-		if (compound.contains("Duration"))
-			this.duration = compound.getInt("Duration");
+		if (compound.contains("Duration")) this.duration = compound.getInt("Duration");
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600)
-			this.level.broadcastEntityEvent(this, (byte) 0);
+		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) this.level.broadcastEntityEvent(this, (byte) 0);
 	}
 
 	@Override

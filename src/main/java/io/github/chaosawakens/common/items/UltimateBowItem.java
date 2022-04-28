@@ -22,7 +22,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import java.util.function.Predicate;
 
 public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchantable {
-
 	private final EnchantmentData[] enchantments;
 
 	public UltimateBowItem(Properties builderIn, EnchantmentData[] enchantments) {
@@ -34,20 +33,14 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for (EnchantmentData enchant : enchantments) {
-					stack.enchant(enchant.enchantment, enchant.level);
-				}
+			if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 			items.add(stack);
 		}
 	}
 
 	@Override
 	public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		if (CAConfig.COMMON.enableAutoEnchanting.get())
-			for (EnchantmentData enchant : enchantments) {
-				stack.enchant(enchant.enchantment, enchant.level);
-			}
+		if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 	}
 
 	@Override
@@ -55,36 +48,24 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity) entityLiving;
 
-			if (ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, this.getUseDuration(stack) - timeLeft,
-					true) < 0)
-				return;
+			if (ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, this.getUseDuration(stack) - timeLeft, true) < 0) return;
 			if (!worldIn.isClientSide) {
 				AbstractArrowEntity arrowEntity = new UltimateArrowEntity(worldIn, entityLiving);
 				arrowEntity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, 3.0F, 0F);
 				arrowEntity.setCritArrow(true);
-				arrowEntity.setSecondsOnFire(
-						EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0 ? 250 : 75);
+				arrowEntity.setSecondsOnFire(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0 ? 250 : 75);
 
 				int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
-				if (!CAConfig.COMMON.enableAutoEnchanting.get()) {
-					arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get()
-							+ (double) powerLevel * CAConfig.COMMON.ultimateBowArrowDamageMultiplier.get() + 2D);
-				} else {
-					arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get() + 3D);
-				}
+				if (!CAConfig.COMMON.enableAutoEnchanting.get()) arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get() + (double) powerLevel * CAConfig.COMMON.ultimateBowArrowDamageMultiplier.get() + 2D);
+				else arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get() + 3D);
 
 				int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
 				arrowEntity.setKnockback(!CAConfig.COMMON.enableAutoEnchanting.get() ? k + 1 : 1);
 
-				if (!playerentity.isCreative()) {
-					stack.hurtAndBreak(1, entityLiving,
-							(entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
-				}
+				if (!playerentity.isCreative()) stack.hurtAndBreak(1, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 
 				worldIn.addFreshEntity(arrowEntity);
-				worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(),
-						SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F,
-						1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+				worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
 				playerentity.awardStat(Stats.ITEM_USED.get(this));
 			}
 		}

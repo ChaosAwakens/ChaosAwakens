@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class CAFallingOreBlock extends FallingBlock {
-
 	private Function<Random, Integer> expFormula = (rand) -> 0;
 
 	public CAFallingOreBlock(Properties properties) {

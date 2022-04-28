@@ -19,11 +19,11 @@ public class MantisClawItem extends SwordItem {
 		int damageMultiplier = attacker.getHealth() >= attacker.getMaxHealth() ? 2 : 1;
 		if (target != null && !target.level.isClientSide) {
 			attacker.heal(1F);
-			target.hurt(attacker instanceof PlayerEntity ? DamageSource.playerAttack((PlayerEntity) attacker)
+			target.hurt(attacker instanceof PlayerEntity
+					? DamageSource.playerAttack((PlayerEntity) attacker)
 					: DamageSource.mobAttack(attacker), 1F);
 		}
-		stack.hurtAndBreak(damageMultiplier, attacker,
-				(entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+		stack.hurtAndBreak(damageMultiplier, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 }

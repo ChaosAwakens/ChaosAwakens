@@ -22,8 +22,7 @@ public class CrystalBlock extends Block {
 		return state1.getBlock() instanceof CrystalBlock || super.skipRendering(state, state1, direction);
 	}
 
-	public VoxelShape getVisualShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos,
-			ISelectionContext selectionContext) {
+	public VoxelShape getVisualShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
 		return VoxelShapes.empty();
 	}
 

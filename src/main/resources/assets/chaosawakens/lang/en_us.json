@@ -1,9 +1,10 @@
 {
-	"itemGroup.chaosawakens.blocks": "Chaos Awakens Blocks",
-	"itemGroup.chaosawakens.items": "Chaos Awakens Items",
-	"itemGroup.chaosawakens.food": "Chaos Awakens Food",
-	"itemGroup.chaosawakens.equipment": "Chaos Awakens Equipment",
-	"itemGroup.chaosawakens.spawn_eggs": "Chaos Awakens Spawn Eggs",
+	"itemGroup.chaosawakens.blocks": "Chaos Awakens: Blocks",
+	"itemGroup.chaosawakens.items": "Chaos Awakens: Items",
+	"itemGroup.chaosawakens.food": "Chaos Awakens: Food",
+	"itemGroup.chaosawakens.equipment": "Chaos Awakens: Equipment",
+	"itemGroup.chaosawakens.spawn_eggs": "Chaos Awakens: Spawn Eggs",
+	"itemGroup.chaosawakens.fossils": "Chaos Awakens: Fossilsed Mobs",
 
 	"advancements.chaosawakens.root.title": "Chaos Awakens",
 	"advancements.chaosawakens.root.description": "Thank you for playing! :)",

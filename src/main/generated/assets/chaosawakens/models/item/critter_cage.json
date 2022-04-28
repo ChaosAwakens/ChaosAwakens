@@ -6,15 +6,15 @@
   "overrides": [
     {
       "predicate": {
-        "minecraft:apple_cow": 1.0
+        "minecraft:default": 1.0
       },
-      "model": "chaosawakens:item/apple_cow_critter_cage"
+      "model": "chaosawakens:item/default_critter_cage"
     },
     {
       "predicate": {
-        "minecraft:def": 1.0
+        "minecraft:apple_cow": 1.0
       },
-      "model": "chaosawakens:item/def_critter_cage"
+      "model": "chaosawakens:item/apple_cow_critter_cage"
     },
     {
       "predicate": {

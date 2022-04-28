@@ -9,7 +9,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class BeaverEntityModel extends AnimatedGeoModel<BeaverEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(BeaverEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/beaver.geo.json");
@@ -26,8 +25,7 @@ public class BeaverEntityModel extends AnimatedGeoModel<BeaverEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(BeaverEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(BeaverEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		IBone head = this.getAnimationProcessor().getBone("head");

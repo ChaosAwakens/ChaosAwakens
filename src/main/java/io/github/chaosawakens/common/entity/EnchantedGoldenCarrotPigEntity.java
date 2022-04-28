@@ -32,8 +32,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.GOLDEN_CARROT, CAItems.GOLDEN_POTATO.get(),
-			CAItems.GOLDEN_BEETROOT.get());
+	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.GOLDEN_CARROT, CAItems.GOLDEN_POTATO.get(), CAItems.GOLDEN_BEETROOT.get());
 
 	public EnchantedGoldenCarrotPigEntity(EntityType<? extends EnchantedGoldenCarrotPigEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -41,19 +40,19 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 10).add(Attributes.MOVEMENT_SPEED, 0.25D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -64,8 +63,7 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3,
-				new TemptGoal(this, 1.2D, Ingredient.of(CAItems.GOLDEN_BEETROOT_ON_A_STICK.get()), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.GOLDEN_BEETROOT_ON_A_STICK.get()), false));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
@@ -110,17 +108,13 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 	}
 
 	public void aiStep() {
-		if (this.level.isClientSide) {
-			this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, this.getRandomX(0.5D), this.getY(0.85D),
-					this.getRandomZ(0.5D), -1000, -1000, -1000);
-		}
+		if (this.level.isClientSide) this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, this.getRandomX(0.5D), this.getY(0.85D), this.getRandomZ(0.5D), -1000, -1000, -1000);
 		super.aiStep();
 	}
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(
-				new AnimationController<>(this, "enchantedgoldencarrtotpigcontroller", 0, this::predicate));
+		data.addAnimationController(new AnimationController<>(this, "enchantedgoldencarrtotpigcontroller", 0, this::predicate));
 	}
 
 	@Override
@@ -132,21 +126,15 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 		ItemStack itemstack = playerEntity.getItemInHand(hand);
 		if (itemstack.getItem() == Items.SHEARS && this.readyForShearing()) {
 			this.shear(SoundCategory.PLAYERS);
-			if (!this.level.isClientSide) {
-				itemstack.hurtAndBreak(1, playerEntity, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
-			}
-
+			if (!this.level.isClientSide) itemstack.hurtAndBreak(1, playerEntity, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
-		} else {
-			return super.mobInteract(playerEntity, hand);
-		}
+		} else return super.mobInteract(playerEntity, hand);
 	}
 
 	public void shear(SoundCategory soundCategory) {
 		this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, soundCategory, 1.0F, 1.0F);
 		if (!this.level.isClientSide()) {
-			((ServerWorld) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(),
-					1, 0.0D, 0.0D, 0.0D, 0.0D);
+			((ServerWorld) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 			this.remove();
 			PigEntity pigEntity = EntityType.PIG.create(this.level);
 			assert pigEntity != null;
@@ -158,15 +146,12 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 				pigEntity.setCustomNameVisible(this.isCustomNameVisible());
 			}
 
-			if (this.isPersistenceRequired()) {
-				pigEntity.setPersistenceRequired();
-			}
+			if (this.isPersistenceRequired()) pigEntity.setPersistenceRequired();
 
 			pigEntity.setInvulnerable(this.isInvulnerable());
 			this.level.addFreshEntity(pigEntity);
 
-			this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(1.0D), this.getZ(),
-					new ItemStack(CAItems.ENCHANTED_GOLDEN_CARROT.get())));
+			this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(1.0D), this.getZ(), new ItemStack(CAItems.ENCHANTED_GOLDEN_CARROT.get())));
 		}
 	}
 

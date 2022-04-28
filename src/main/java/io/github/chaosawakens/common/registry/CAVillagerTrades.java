@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
+import com.samebutdifferent.morevillagers.MoreVillagers;
+import com.samebutdifferent.morevillagers.init.VillagerInit;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.util.TradeUtil;
 import io.github.chaosawakens.common.util.TradeUtil.CATrade;
@@ -15,7 +17,8 @@ import net.minecraftforge.fml.common.Mod;
 public class CAVillagerTrades {
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
-		TradeUtil.addWandererTrades(event, new CATrade(1, CABlocks.CYAN_ROSE.get().asItem(), 12),
+		TradeUtil.addWandererTrades(event,
+				new CATrade(1, CABlocks.CYAN_ROSE.get().asItem(), 12),
 				new CATrade(1, CABlocks.RED_ROSE.get().asItem(), 12),
 				new CATrade(1, CABlocks.PAEONIA.get().asItem(), 12),
 
@@ -29,17 +32,21 @@ public class CAVillagerTrades {
 
 				new CATrade(5, Items.NAME_TAG, 5));
 
-		TradeUtil.addRareWandererTrades(event, new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 3),
+		TradeUtil.addRareWandererTrades(event,
+				new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 3),
 				new CATrade(15, CAItems.URANIUM_NUGGET.get(), 3));
 	}
 
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.NOVICE,
-				new CATrade(2, CAItems.CHERRIES.get(), 6, 16, 2), new CATrade(2, CAItems.LETTUCE.get(), 6, 12, 2),
-				new CATrade(1, CAItems.CORN.get(), 5, 12, 3), new CATrade(1, CAItems.TOMATO.get(), 5, 12, 3));
+				new CATrade(2, CAItems.CHERRIES.get(), 6, 16, 2),
+				new CATrade(2, CAItems.LETTUCE.get(), 6, 12, 2),
+				new CATrade(1, CAItems.CORN.get(), 5, 12, 3),
+				new CATrade(1, CAItems.TOMATO.get(), 5, 12, 3));
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.APPRENTICE,
-				new CATrade(1, CAItems.PEACH.get(), 6, 16, 5), new CATrade(2, CAItems.STRAWBERRY.get(), 6, 12, 5),
+				new CATrade(1, CAItems.PEACH.get(), 6, 16, 5),
+				new CATrade(2, CAItems.STRAWBERRY.get(), 6, 12, 5),
 				new CATrade(1, CAItems.RADISH.get(), 5, 12, 8));
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.JOURNEYMAN,
 				new CATrade(1, CAItems.RADISH_STEW.get(), 1, 12, 15));
@@ -51,7 +58,8 @@ public class CAVillagerTrades {
 				new CATrade(CAItems.GOLDEN_POTATO.get().asItem(), 6, 1, 12, 30));
 
 		TradeUtil.addVillagerTrades(event, VillagerProfession.BUTCHER, TradeUtil.NOVICE,
-				new CATrade(CAItems.BACON.get(), 18, 1, 16, 2), new CATrade(CAItems.CORNDOG.get(), 18, 1, 16, 2));
+				new CATrade(CAItems.BACON.get(), 18, 1, 16, 2),
+				new CATrade(CAItems.CORNDOG.get(), 18, 1, 16, 2));
 		TradeUtil.addVillagerTrades(event, VillagerProfession.BUTCHER, TradeUtil.APPRENTICE,
 				new CATrade(1, CAItems.COOKED_BACON.get(), 6, 16, 5),
 				new CATrade(1, CAItems.COOKED_CORNDOG.get(), 6, 16, 5));
@@ -66,7 +74,8 @@ public class CAVillagerTrades {
 				new CATrade(3, CAItems.PEACOCK_FEATHER.get(), 4, 12, 30));
 
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
-				new CATrade(5, CAItems.GREEN_FISH.get(), 1, 16, 30), new CATrade(5, CAItems.ROCK_FISH.get(), 1, 16, 30),
+				new CATrade(5, CAItems.GREEN_FISH.get(), 1, 16, 30),
+				new CATrade(5, CAItems.ROCK_FISH.get(), 1, 16, 30),
 				new CATrade(5, CAItems.SPARK_FISH.get(), 1, 16, 30),
 				new CATrade(5, CAItems.WOOD_FISH.get(), 1, 16, 30));
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.MASTER,
@@ -99,22 +108,13 @@ public class CAVillagerTrades {
 //    }
 
 	private static boolean notOnBlacklist(Item item, String[] items) {
-		for (String name : items) {
-			if (item.getRegistryName().toString().contains(name))
-				return false;
-		}
+		for (String name : items) if (item.getRegistryName().toString().contains(name)) return false;
 		return true;
 	}
 
 	private static boolean notOnBlacklist(Item item, String[] items, String[] items2) {
-		for (String name : items) {
-			if (item.getRegistryName().toString().contains(name))
-				return false;
-		}
-		for (String name : items2) {
-			if (item.getRegistryName().toString().contains(name))
-				return false;
-		}
+		for (String name : items) if (item.getRegistryName().toString().contains(name)) return false;
+		for (String name : items2) if (item.getRegistryName().toString().contains(name)) return false;
 		return true;
 	}
 }

@@ -27,15 +27,13 @@ public class EntitySetAttributeEventSubscriber {
 		event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().build());
-		event.put(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(),
-				EnchantedGoldenAppleCowEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.CRYSTAL_GATOR.get(), CrystalGatorEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.CRYSTAL_CARROT_PIG.get(), CrystalCarrotPigEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.CARROT_PIG.get(), CarrotPigEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.GOLDEN_CARROT_PIG.get(), GoldenCarrotPigEntity.setCustomAttributes().build());
-		event.put(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(),
-				EnchantedGoldenCarrotPigEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), EnchantedGoldenCarrotPigEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.BEAVER.get(), BeaverEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.DIMETRODON.get(), DimetrodonEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.GAZELLE.get(), GazelleEntity.setCustomAttributes().build());

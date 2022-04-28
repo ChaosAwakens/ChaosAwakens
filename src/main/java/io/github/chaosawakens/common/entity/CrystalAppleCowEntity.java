@@ -7,6 +7,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -37,19 +38,19 @@ public class CrystalAppleCowEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 10).add(Attributes.MOVEMENT_SPEED, 0.2D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D)
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -87,23 +88,18 @@ public class CrystalAppleCowEntity extends AnimalEntity implements IAnimatable {
 		return 0.4F;
 	}
 
-	public static boolean checkCrystalAppleCowSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world,
-			SpawnReason spawnReason, BlockPos blockPos, Random random) {
-		return world.getBlockState(blockPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get())
-				&& world.getRawBrightness(blockPos, 0) > 8;
+	public static boolean checkCrystalAppleCowSpawnRules(EntityType<? extends AnimalEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos blockPos, Random random) {
+		return world.getBlockState(blockPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get()) && world.getRawBrightness(blockPos, 0) > 8;
 	}
 
 	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
 		if (itemstack.getItem() == Items.BUCKET && !this.isBaby()) {
 			playerIn.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn,
-					Items.MILK_BUCKET.getDefaultInstance());
+			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
 			playerIn.setItemInHand(hand, itemstack1);
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
-		} else {
-			return super.mobInteract(playerIn, hand);
-		}
+		} else return super.mobInteract(playerIn, hand);
 	}
 
 	public CrystalAppleCowEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
@@ -112,6 +108,25 @@ public class CrystalAppleCowEntity extends AnimalEntity implements IAnimatable {
 
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
+	}
+
+	public void thunderHit(ServerWorld serverWorld, LightningBoltEntity lightningBoltEntity) {
+		if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.CRYSTAL_CARROT_PIG.get(), (timer) -> {})) {
+			CrystalCarrotPigEntity crystalCarrotPigEntity = CAEntityTypes.CRYSTAL_CARROT_PIG.get().create(serverWorld);
+			assert crystalCarrotPigEntity != null;
+			crystalCarrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
+			crystalCarrotPigEntity.setNoAi(this.isNoAi());
+			crystalCarrotPigEntity.setBaby(this.isBaby());
+			if (this.hasCustomName()) {
+				crystalCarrotPigEntity.setCustomName(this.getCustomName());
+				crystalCarrotPigEntity.setCustomNameVisible(this.isCustomNameVisible());
+			}
+
+			crystalCarrotPigEntity.setPersistenceRequired();
+			net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, crystalCarrotPigEntity);
+			serverWorld.addFreshEntity(crystalCarrotPigEntity);
+			this.remove();
+		} else super.thunderHit(serverWorld, lightningBoltEntity);
 	}
 
 	@Override

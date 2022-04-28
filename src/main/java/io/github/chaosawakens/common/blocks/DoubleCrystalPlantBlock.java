@@ -31,15 +31,15 @@ public class DoubleCrystalPlantBlock extends CrystalBushBlock {
 		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER));
 	}
 
-	public BlockState updateShape(BlockState state, Direction direction, BlockState state1, IWorld world, BlockPos pos,
-			BlockPos pos1) {
+	public BlockState updateShape(BlockState state, Direction direction, BlockState state1, IWorld world, BlockPos pos, BlockPos pos1) {
 		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
 		if (direction.getAxis() != Direction.Axis.Y
 				|| doubleblockhalf == DoubleBlockHalf.LOWER != (direction == Direction.UP)
-				|| state1.is(this) && state1.getValue(HALF) != doubleblockhalf) {
-			return doubleblockhalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN
-					&& !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState()
-							: super.updateShape(state, direction, state1, world, pos, pos1);
+				|| state1.is(this)
+				&& state1.getValue(HALF) != doubleblockhalf) {
+			return doubleblockhalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(world, pos)
+					? Blocks.AIR.defaultBlockState()
+					: super.updateShape(state, direction, state1, world, pos, pos1);
 		} else {
 			return Blocks.AIR.defaultBlockState();
 		}
@@ -48,9 +48,7 @@ public class DoubleCrystalPlantBlock extends CrystalBushBlock {
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockPos blockpos = context.getClickedPos();
-		return blockpos.getY() < 255 && context.getLevel().getBlockState(blockpos.above()).canBeReplaced(context)
-				? super.getStateForPlacement(context)
-				: null;
+		return blockpos.getY() < 255 && context.getLevel().getBlockState(blockpos.above()).canBeReplaced(context) ? super.getStateForPlacement(context) : null;
 	}
 
 	public void setPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
@@ -62,10 +60,7 @@ public class DoubleCrystalPlantBlock extends CrystalBushBlock {
 			return super.canSurvive(state, worldReader, pos);
 		} else {
 			BlockState blockstate = worldReader.getBlockState(pos.below());
-			if (state.getBlock() != this)
-				return super.canSurvive(state, worldReader, pos); // Forge: This function is called during world gen and
-																	// placement, before this block is set, so if we are
-																	// not 'here' then assume it's the pre-check.
+			if (state.getBlock() != this) return super.canSurvive(state, worldReader, pos);
 			return blockstate.is(this) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
 		}
 	}
@@ -83,17 +78,14 @@ public class DoubleCrystalPlantBlock extends CrystalBushBlock {
 				dropResources(state, world, pos, null, player, player.getMainHandItem());
 			}
 		}
-
 		super.playerWillDestroy(world, pos, state, player);
 	}
 
-	public void playerDestroy(World world, PlayerEntity player, BlockPos pos, BlockState state,
-			@Nullable TileEntity tileEntity, ItemStack stack) {
+	public void playerDestroy(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity tileEntity, ItemStack stack) {
 		super.playerDestroy(world, player, pos, Blocks.AIR.defaultBlockState(), tileEntity, stack);
 	}
 
-	protected static void preventCreativeDropFromBottomPart(World world, BlockPos pos, BlockState state,
-			PlayerEntity player) {
+	protected static void preventCreativeDropFromBottomPart(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
 		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
 			BlockPos blockpos = pos.below();
@@ -103,7 +95,6 @@ public class DoubleCrystalPlantBlock extends CrystalBushBlock {
 				world.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
 			}
 		}
-
 	}
 
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> state) {
@@ -116,7 +107,6 @@ public class DoubleCrystalPlantBlock extends CrystalBushBlock {
 
 	@OnlyIn(Dist.CLIENT)
 	public long getSeed(BlockState state, BlockPos pos) {
-		return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(),
-				pos.getZ());
+		return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 }

@@ -43,9 +43,7 @@ public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
 			double d0 = (double) pos.getX() + 0.5D;
 			double d1 = pos.getY();
 			double d2 = (double) pos.getZ() + 0.5D;
-			if (rand.nextDouble() < 0.1D)
-				worldIn.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F,
-						false);
+			if (rand.nextDouble() < 0.1D) worldIn.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 
 			worldIn.addParticle(ParticleTypes.FLAME, d0, d1 + 1.1D, d2, 0.0D, 0.0D, 0.0D);
 		}

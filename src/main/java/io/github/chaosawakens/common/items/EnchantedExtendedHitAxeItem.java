@@ -15,14 +15,12 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem
-		implements IAutoEnchantable, IVanishable, IAnimatable {
+public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem implements IAutoEnchantable, IVanishable, IAnimatable {
 	public AnimationFactory factory = new AnimationFactory(this);
 	private final EnchantmentData[] enchantments;
 
-	public EnchantedExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistanceIn,
-			int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
+	public EnchantedExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
+		super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
 		this.enchantments = enchantments;
 	}
 
@@ -30,20 +28,14 @@ public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for (EnchantmentData enchant : enchantments) {
-					stack.enchant(enchant.enchantment, enchant.level);
-				}
+			if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 			items.add(stack);
 		}
 	}
 
 	@Override
 	public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		if (CAConfig.COMMON.enableAutoEnchanting.get())
-			for (EnchantmentData enchant : enchantments) {
-				stack.enchant(enchant.enchantment, enchant.level);
-			}
+		if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 	}
 
 	@Override

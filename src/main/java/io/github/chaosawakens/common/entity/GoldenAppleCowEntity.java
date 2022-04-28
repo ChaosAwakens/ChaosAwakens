@@ -34,19 +34,19 @@ public class GoldenAppleCowEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 10).add(Attributes.MOVEMENT_SPEED, 0.2D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D)
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -85,10 +85,7 @@ public class GoldenAppleCowEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public void aiStep() {
-		if (this.level.isClientSide) {
-			this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, this.getRandomX(0.5D), this.getY(0.85D),
-					this.getRandomZ(0.5D), -1000, -1000, -1000);
-		}
+		if (this.level.isClientSide) this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, this.getRandomX(0.5D), this.getY(0.85D), this.getRandomZ(0.5D), -1000, -1000, -1000);
 		super.aiStep();
 	}
 
@@ -96,13 +93,10 @@ public class GoldenAppleCowEntity extends AnimalEntity implements IAnimatable {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
 		if (itemstack.getItem() == Items.BUCKET && !this.isBaby()) {
 			playerIn.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn,
-					Items.MILK_BUCKET.getDefaultInstance());
+			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
 			playerIn.setItemInHand(hand, itemstack1);
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
-		} else {
-			return super.mobInteract(playerIn, hand);
-		}
+		} else return super.mobInteract(playerIn, hand);
 	}
 
 	public GoldenAppleCowEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
@@ -114,9 +108,7 @@ public class GoldenAppleCowEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public void thunderHit(ServerWorld serverWorld, LightningBoltEntity lightningBoltEntity) {
-		if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.GOLDEN_CARROT_PIG.get(),
-				(timer) -> {
-				})) {
+		if (net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, CAEntityTypes.GOLDEN_CARROT_PIG.get(), (timer) -> {})) {
 			GoldenCarrotPigEntity goldenCarrotPigEntity = CAEntityTypes.GOLDEN_CARROT_PIG.get().create(serverWorld);
 			assert goldenCarrotPigEntity != null;
 			goldenCarrotPigEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
@@ -131,9 +123,7 @@ public class GoldenAppleCowEntity extends AnimalEntity implements IAnimatable {
 			net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, goldenCarrotPigEntity);
 			serverWorld.addFreshEntity(goldenCarrotPigEntity);
 			this.remove();
-		} else {
-			super.thunderHit(serverWorld, lightningBoltEntity);
-		}
+		} else super.thunderHit(serverWorld, lightningBoltEntity);
 	}
 
 	@Override

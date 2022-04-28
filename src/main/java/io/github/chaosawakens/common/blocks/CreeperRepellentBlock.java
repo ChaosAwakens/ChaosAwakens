@@ -49,8 +49,7 @@ public class CreeperRepellentBlock extends Block {
 
 		if (mob.position().distanceTo(blockPosition) >= 50.0D) {
 			Vector3d v = RandomPositionGenerator.getPosAvoid(this.mob, 16, 7, blockPosition);
-			if (v == null)
-				return false;
+			if (v == null) return false;
 			this.path = this.pathNav.createPath(v.x, v.y, v.z, 0);
 			this.pathNav.moveTo(this.path, 2.0D);
 			return this.path != null;

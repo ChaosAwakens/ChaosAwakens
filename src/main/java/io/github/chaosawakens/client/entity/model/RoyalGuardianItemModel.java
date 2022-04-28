@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RoyalGuardianItemModel extends AnimatedGeoModel<ExtendedHitWeaponItem> {
-
 	@Override
 	public ResourceLocation getModelLocation(ExtendedHitWeaponItem object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/royal_guardian_sword.geo.json");

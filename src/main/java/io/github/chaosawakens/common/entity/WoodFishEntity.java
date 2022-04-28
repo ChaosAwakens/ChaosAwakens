@@ -50,8 +50,11 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 8).add(Attributes.MOVEMENT_SPEED, 0.7D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D).add(Attributes.FOLLOW_RANGE, 20);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 8)
+				.add(Attributes.MOVEMENT_SPEED, 0.7D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
+				.add(Attributes.FOLLOW_RANGE, 20);
 	}
 
 	@Override
@@ -86,8 +89,7 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.05D));
 		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 3.0F, 3.0F));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D,
-				EntityPredicates.NO_SPECTATORS::test));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D, EntityPredicates.NO_SPECTATORS::test));
 		this.goalSelector.addGoal(4, new WoodFishEntity.SwimGoal(this));
 		this.goalSelector.addGoal(4, new WoodFishEntity.GoToWaterGoal(this, 30.0D));
 	}
@@ -103,12 +105,8 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 			this.moveRelative(0.01F, vector);
 			this.move(MoverType.SELF, this.getDeltaMovement());
 			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-			if (this.getTarget() == null) {
-				this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-			}
-		} else {
-			super.travel(vector);
-		}
+			if (this.getTarget() == null) this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+		} else super.travel(vector);
 
 	}
 
@@ -150,9 +148,7 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		}
 
 		public void tick() {
-			if (this.fish.isEyeInFluid(FluidTags.WATER)) {
-				this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
-			}
+			if (this.fish.isEyeInFluid(FluidTags.WATER)) this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
 
 			if (this.operation == MovementController.Action.MOVE_TO && !this.fish.getNavigation().isDone()) {
 				float f = (float) (this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
@@ -162,17 +158,14 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 				double d2 = this.wantedZ - this.fish.getZ();
 				if (d1 != 0.0D) {
 					double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D,
-							(double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
 				if (d0 != 0.0D || d2 != 0.0D) {
 					float f1 = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
 					this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
 					this.fish.yBodyRot = this.fish.yRot;
 				}
-			} else {
-				this.fish.setSpeed(0.0F);
-			}
+			} else this.fish.setSpeed(0.0F);
 		}
 	}
 
@@ -192,13 +185,11 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 	@Override
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F,
-					((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
-
 		super.aiStep();
 	}
 
@@ -210,21 +201,14 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 			itemstack.shrink(1);
 			ItemStack itemstack1 = this.getBucketItemStack();
 			this.saveToBucketTag(itemstack1);
-			if (!this.level.isClientSide) {
-				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemstack1);
-			}
+			if (!this.level.isClientSide) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemstack1);
 
-			if (itemstack.isEmpty()) {
-				player.setItemInHand(hand, itemstack1);
-			} else if (!player.inventory.add(itemstack1)) {
-				player.drop(itemstack1, false);
-			}
+			if (itemstack.isEmpty()) player.setItemInHand(hand, itemstack1);
+			else if (!player.inventory.add(itemstack1)) player.drop(itemstack1, false);
 
 			this.remove();
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
-		} else {
-			return super.mobInteract(player, hand);
-		}
+		} else return super.mobInteract(player, hand);
 	}
 
 	static class GoToWaterGoal extends Goal {
@@ -243,15 +227,12 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		}
 
 		public boolean canUse() {
-			if (!this.level.isDay()) {
-				return false;
-			} else if (this.entity.isInWater()) {
-				return false;
-			} else {
+			if (!this.level.isDay()) return false;
+			else if (this.entity.isInWater()) return false;
+			else {
 				Vector3d vector3d = this.getWaterPos();
-				if (vector3d == null) {
-					return false;
-				} else {
+				if (vector3d == null) return false;
+				else {
 					this.wantedX = vector3d.x;
 					this.wantedY = vector3d.y;
 					this.wantedZ = vector3d.z;
@@ -272,15 +253,10 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		private Vector3d getWaterPos() {
 			Random random = this.entity.getRandom();
 			BlockPos blockpos = this.entity.blockPosition();
-
 			for (int i = 0; i < 10; ++i) {
-				BlockPos blockpos1 = blockpos.offset(random.nextInt(20) - 10, 2 - random.nextInt(8),
-						random.nextInt(20) - 10);
-				if (this.level.getBlockState(blockpos1).is(Blocks.WATER)) {
-					return Vector3d.atBottomCenterOf(blockpos1);
-				}
+				BlockPos blockpos1 = blockpos.offset(random.nextInt(20) - 10, 2 - random.nextInt(8), random.nextInt(20) - 10);
+				if (this.level.getBlockState(blockpos1).is(Blocks.WATER)) return Vector3d.atBottomCenterOf(blockpos1);
 			}
-
 			return null;
 		}
 	}

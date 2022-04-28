@@ -33,7 +33,6 @@ public class CATags {
 		public static final ITag.INamedTag<Block> CRYSTAL_LEAVES = tag("crystal_leaves");
 		public static final ITag.INamedTag<Block> CRYSTAL_SAPLING = tag("crystal_sapling");
 		public static final ITag.INamedTag<Block> RUBY_ORES = tag("ruby_ores");
-		// public static final ITag.INamedTag<Block> CA_WALLS = tag("ca_walls");
 
 		public static final ITag.INamedTag<Block> WHITELIST = tag("whitelist");
 		public static final ITag.INamedTag<Block> BLACKLIST = tag("blacklist");
@@ -67,8 +66,11 @@ public class CATags {
 	}
 
 	public static class EntityTypes {
-		public static final ITag.INamedTag<EntityType<?>> CRITTER_CAGE_BLACKLISTED = EntityTypeTags
-				.bind("critter_cage_blacklisted");
+		public static ITag.INamedTag<EntityType<?>> tag(String name) {
+			return EntityTypeTags.bind(ChaosAwakens.MODID + ":" + name);
+		}
+
+		public static final ITag.INamedTag<EntityType<?>> CRITTER_CAGE_BLACKLISTED = tag("critter_cage_blacklisted");
 	}
 
 	public static class Fluids {

@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class BattleAxeItemModel extends AnimatedGeoModel<ExtendedHitAxeItem> {
-
 	@Override
 	public ResourceLocation getModelLocation(ExtendedHitAxeItem object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/battle_axe.geo.json");

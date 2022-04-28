@@ -17,8 +17,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
 //Tone
-public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends AnimatableMeleeGoal
-		implements IUtilityHelper {
+public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends AnimatableMeleeGoal implements IUtilityHelper {
 	protected RoboPounderEntity roboPounder;
 	protected Class<LE> targetType;
 	protected LivingEntity target;
@@ -27,13 +26,11 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 	protected EntityPredicate targetConditions;
 	boolean isAlreadyAttacking;
 
-	public AnimatableRoboPounderAttackGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin,
-			double attackEnd) {
+	public AnimatableRoboPounderAttackGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
 		super(entity, animationLength, attackBegin, attackEnd);
 	}
 
-	public AnimatableRoboPounderAttackGoal(RoboPounderEntity roboPounder, Class<LE> target,
-			float checkForTargetInterval, double animationLength, double attackBegin, double attackEnd) {
+	public AnimatableRoboPounderAttackGoal(RoboPounderEntity roboPounder, Class<LE> target, float checkForTargetInterval, double animationLength, double attackBegin, double attackEnd) {
 		super(roboPounder, animationLength, attackBegin, attackEnd);
 		this.roboPounder = roboPounder;
 		this.targetType = target;
@@ -41,9 +38,7 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 		this.setFlags(EnumSet.of(Flag.TARGET));
 	}
 
-	public AnimatableRoboPounderAttackGoal(RoboPounderEntity roboPounder, Class<LE> target,
-			float checkForTargetInterval, @Nullable Predicate<LivingEntity> predicate, double animationLength,
-			double attackBegin, double attackEnd) {
+	public AnimatableRoboPounderAttackGoal(RoboPounderEntity roboPounder, Class<LE> target, float checkForTargetInterval, @Nullable Predicate<LivingEntity> predicate, double animationLength, double attackBegin, double attackEnd) {
 		super(roboPounder, animationLength, attackBegin, attackEnd);
 		this.roboPounder = roboPounder;
 		this.targetType = target;
@@ -61,18 +56,15 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 	}
 
 	public boolean canPunch() {
-		return roboPounder.getSideSweep() == false && roboPounder.getRageRunning() == false
-				&& roboPounder.getRageMode() == false && canHit();
+		return !roboPounder.getSideSweep() && !roboPounder.getRageRunning() && !roboPounder.getRageMode() && canHit();
 	}
 
 	public boolean canSideSweep() {
-		return roboPounder.getPunching() == false && roboPounder.getRageRunning() == false
-				&& roboPounder.getRageMode() == false && canHit();
+		return !roboPounder.getPunching() && !roboPounder.getRageRunning() && !roboPounder.getRageMode() && canHit();
 	}
 
 	public boolean canRageRun() {
-		return roboPounder.getPunching() == false && roboPounder.getSideSweep() == false && enableRageMode()
-				&& canHit();
+		return !roboPounder.getPunching() && !roboPounder.getSideSweep() && enableRageMode() && canHit();
 	}
 
 	public boolean isAnimationFinished() {
@@ -80,7 +72,7 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 	}
 
 	public boolean canHit() {
-		return isAnimationFinished() == true;
+		return isAnimationFinished();
 	}
 
 	public boolean enableRageMode() {
@@ -102,12 +94,9 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 	}
 
 	public boolean isValidForUse() {
-		if (target == null)
-			return false;
-		if (roboPounder == null)
-			return false;
-		if (checkInterval <= 1)
-			return false;
+		if (target == null) return false;
+		if (roboPounder == null) return false;
+		if (checkInterval <= 1) return false;
 
 		if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 			roboPounder.setAttacking(false);
@@ -118,8 +107,7 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 			return false;
 		}
 
-		if (target.isSpectator())
-			return false;
+		if (target.isSpectator()) return false;
 
 		double distance = this.roboPounder.distanceToSqr(target.getX(), target.getY(), target.getZ());
 		if (distance <= AnimatableGoal.getAttackReachSq(roboPounder, target)) {
@@ -173,8 +161,7 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 	public boolean isValidForPunch() {
 		double distance = this.roboPounder.distanceToSqr(target.getX(), target.getY(), target.getZ());
 
-		if (distance <= AnimatableGoal.getAttackReachSq(roboPounder, target) && canPunch() && !canSideSweep()
-				&& !canRageRun()) {
+		if (distance <= AnimatableGoal.getAttackReachSq(roboPounder, target) && canPunch() && !canSideSweep() && !canRageRun()) {
 			roboPounder.setAggressive(true);
 			roboPounder.setPunching(true);
 			roboPounder.setRageMode(false);
@@ -189,8 +176,7 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 	public boolean isValidForSideSweep() {
 		double distance = this.roboPounder.distanceToSqr(target.getX(), target.getY(), target.getZ());
 
-		if (distance <= getSideSweepAttackReachSq(roboPounder, target) && canSideSweep() && !canPunch()
-				&& !canRageRun()) {
+		if (distance <= getSideSweepAttackReachSq(roboPounder, target) && canSideSweep() && !canPunch() && !canRageRun()) {
 			roboPounder.setAggressive(true);
 			roboPounder.setSideSweeping(true);
 			roboPounder.setPunching(false);
@@ -209,9 +195,7 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 
 	@Override
 	public boolean canContinueToUse() {
-		if (Math.random() <= 0.1)
-			return false;
-
+		if (Math.random() <= 0.1) return false;
 		return isValidForUse();
 	}
 
@@ -251,18 +235,14 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 					roboPounder.setPunching(true);
 					roboPounder.lookAt(target, 30.0F, 30.0F);
 					double distance = this.roboPounder.distanceToSqr(target.getX(), target.getY(), target.getZ());
-					if (distance >= AnimatableGoal.getAttackReachSq(roboPounder, target)) {
-						roboPounder.moveTo(target.blockPosition(), 1.0F, 1.0F);
-					}
+					if (distance >= AnimatableGoal.getAttackReachSq(roboPounder, target)) roboPounder.moveTo(target.blockPosition(), 1.0F, 1.0F);
 				}
 
 				if (Math.random() >= 20 && isValidForSideSweep()) {
 					roboPounder.setSideSweeping(true);
 					roboPounder.lookAt(target, 30.0F, 30.0F);
 					double distance = this.roboPounder.distanceToSqr(target.getX(), target.getY(), target.getZ());
-					if (distance >= getSideSweepAttackReachSq(roboPounder, target)) {
-						roboPounder.moveTo(target.blockPosition(), 1.0F, 1.0F);
-					}
+					if (distance >= getSideSweepAttackReachSq(roboPounder, target)) roboPounder.moveTo(target.blockPosition(), 1.0F, 1.0F);
 				}
 			}
 		}
@@ -388,12 +368,9 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 
 	protected void findTarget() {
 		if (this.targetType != PlayerEntity.class && this.targetType != ServerPlayerEntity.class) {
-			this.target = this.roboPounder.level.getNearestLoadedEntity(this.targetType, this.targetConditions,
-					this.roboPounder, this.roboPounder.getX(), this.roboPounder.getEyeY(), this.roboPounder.getZ(),
-					this.getTargetSearchArea(this.getFollowRange()));
+			this.target = this.roboPounder.level.getNearestLoadedEntity(this.targetType, this.targetConditions, this.roboPounder, this.roboPounder.getX(), this.roboPounder.getEyeY(), this.roboPounder.getZ(), this.getTargetSearchArea(this.getFollowRange()));
 		} else {
-			this.target = this.roboPounder.level.getNearestPlayer(this.targetConditions, this.roboPounder,
-					this.roboPounder.getX(), this.roboPounder.getEyeY(), this.roboPounder.getZ());
+			this.target = this.roboPounder.level.getNearestPlayer(this.targetConditions, this.roboPounder, this.roboPounder.getX(), this.roboPounder.getEyeY(), this.roboPounder.getZ());
 		}
 	}
 
@@ -404,5 +381,4 @@ public class AnimatableRoboPounderAttackGoal<LE extends LivingEntity> extends An
 	protected double getFollowRange() {
 		return this.roboPounder.getAttributeValue(Attributes.FOLLOW_RANGE);
 	}
-
 }

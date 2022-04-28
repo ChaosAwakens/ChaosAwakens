@@ -23,8 +23,7 @@ import java.util.Map;
 public class LootFunctionEnchant extends LootFunction {
 	private final Map<IRegistryDelegate<Enchantment>, Short> enchantments;
 
-	protected LootFunctionEnchant(ILootCondition[] conditions,
-			Map<IRegistryDelegate<Enchantment>, Short> enchantments) {
+	protected LootFunctionEnchant(ILootCondition[] conditions, Map<IRegistryDelegate<Enchantment>, Short> enchantments) {
 		super(conditions);
 		this.enchantments = enchantments;
 	}
@@ -41,11 +40,8 @@ public class LootFunctionEnchant extends LootFunction {
 	@Override
 	public ItemStack run(ItemStack stack, LootContext context) {
 		for (Map.Entry<IRegistryDelegate<Enchantment>, Short> e : enchantments.entrySet()) {
-			if (stack.getItem() == Items.ENCHANTED_BOOK) {
-				EnchantedBookItem.addEnchantment(stack, new EnchantmentData(e.getKey().get(), e.getValue()));
-			} else {
-				stack.enchant(e.getKey().get(), e.getValue());
-			}
+			if (stack.getItem() == Items.ENCHANTED_BOOK) EnchantedBookItem.addEnchantment(stack, new EnchantmentData(e.getKey().get(), e.getValue()));
+			else stack.enchant(e.getKey().get(), e.getValue());
 		}
 		return stack;
 	}
@@ -68,23 +64,19 @@ public class LootFunctionEnchant extends LootFunction {
 	}
 
 	public static class Serializer extends LootFunction.Serializer<LootFunctionEnchant> {
-
 		@Override
 		public void serialize(JsonObject object, LootFunctionEnchant function, JsonSerializationContext ctx) {
 			if (!function.enchantments.isEmpty()) {
 				JsonObject obj = new JsonObject();
 
-				for (Map.Entry<IRegistryDelegate<Enchantment>, Short> e : function.enchantments.entrySet()) {
-					obj.addProperty(e.getKey().get().getRegistryName().toString(), e.getValue());
-				}
+				for (Map.Entry<IRegistryDelegate<Enchantment>, Short> e : function.enchantments.entrySet()) obj.addProperty(e.getKey().get().getRegistryName().toString(), e.getValue());
 
 				object.add("enchantments", obj);
 			}
 		}
 
 		@Override
-		public LootFunctionEnchant deserialize(JsonObject object, JsonDeserializationContext ctx,
-				ILootCondition[] conditions) {
+		public LootFunctionEnchant deserialize(JsonObject object, JsonDeserializationContext ctx, ILootCondition[] conditions) {
 			Map<IRegistryDelegate<Enchantment>, Short> enchantments = new HashMap<>();
 
 			if (object.has("enchantments")) {
@@ -92,16 +84,13 @@ public class LootFunctionEnchant extends LootFunction {
 
 				for (Map.Entry<String, JsonElement> e : enchantObj.entrySet()) {
 					ResourceLocation id = new ResourceLocation(e.getKey());
-					if (!ForgeRegistries.ENCHANTMENTS.containsKey(id))
-						throw new JsonSyntaxException("Can't find enchantment " + e.getKey());
+					if (!ForgeRegistries.ENCHANTMENTS.containsKey(id)) throw new JsonSyntaxException("Can't find enchantment " + e.getKey());
 
 					Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(id);
 					short lvl = e.getValue().getAsShort();
 
 					for (IRegistryDelegate<Enchantment> other : enchantments.keySet()) {
-						if (!ench.isCompatibleWith(other.get()))
-							throw new JsonParseException(String.format("Enchantments %s and %s conflict",
-									ench.getRegistryName(), other.get().getRegistryName()));
+						if (!ench.isCompatibleWith(other.get())) throw new JsonParseException(String.format("Enchantments %s and %s conflict", ench.getRegistryName(), other.get().getRegistryName()));
 					}
 
 					enchantments.put(ench.delegate, lvl);

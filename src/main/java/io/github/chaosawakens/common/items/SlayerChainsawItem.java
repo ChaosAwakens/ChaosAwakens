@@ -1,8 +1,6 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CATags;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -16,12 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -45,8 +41,7 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 	public static float attackDamage;
 	public AnimationFactory factory = new AnimationFactory(this);
 
-	public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance,
-			int knockBackIn, Properties builderIn) {
+	public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn) {
 		super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
 		attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
 		GeckoLibNetwork.registerSyncable(this);
@@ -54,14 +49,11 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		if (target.getEntity().getType() == CAEntityTypes.ACACIA_ENT.get()
-				|| target.getEntity().getType() == CAEntityTypes.BIRCH_ENT.get()
-				|| target.getEntity().getType() == CAEntityTypes.CRIMSON_ENT.get()
-				|| target.getEntity().getType() == CAEntityTypes.DARK_OAK_ENT.get()
-				|| target.getEntity().getType() == CAEntityTypes.JUNGLE_ENT.get()
-				|| target.getEntity().getType() == CAEntityTypes.OAK_ENT.get()
-				|| target.getEntity().getType() == CAEntityTypes.SPRUCE_ENT.get()
-				|| target.getEntity().getType() == CAEntityTypes.WARPED_ENT.get() && !target.level.isClientSide) {
+		if (target.getEntity().getType() == CAEntityTypes.ACACIA_ENT.get() || target.getEntity().getType() == CAEntityTypes.BIRCH_ENT.get()
+				|| target.getEntity().getType() == CAEntityTypes.CRIMSON_ENT.get() || target.getEntity().getType() == CAEntityTypes.DARK_OAK_ENT.get()
+				|| target.getEntity().getType() == CAEntityTypes.JUNGLE_ENT.get() || target.getEntity().getType() == CAEntityTypes.OAK_ENT.get()
+				|| target.getEntity().getType() == CAEntityTypes.SPRUCE_ENT.get() || target.getEntity().getType() == CAEntityTypes.WARPED_ENT.get()
+				&& !target.level.isClientSide) {
 			target.hurt(DamageSource.GENERIC, (attackDamage * 2));
 		}
 		stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
@@ -74,12 +66,9 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 			for (int i = 0; i < CHAINSAW_LENGTH; i++) {
 				for (int j = 0; j < CHAINSAW_HEIGHT; j++) {
 					for (int k = -CHAINSAW_WIDTH; k <= CHAINSAW_WIDTH; k++) {
-						BlockPos targetPos = pos.offset(i - CHAINSAW_LENGTH / 2, j - CHAINSAW_HEIGHT / 2,
-								k - CHAINSAW_WIDTH / 2);
+						BlockPos targetPos = pos.offset(i - CHAINSAW_LENGTH / 2, j - CHAINSAW_HEIGHT / 2, k - CHAINSAW_WIDTH / 2);
 						BlockState targetState = world.getBlockState(targetPos);
-						if (targetState.is(BlockTags.LOGS)) {
-							world.destroyBlock(targetPos, true);
-						}
+						if (targetState.is(BlockTags.LOGS)) world.destroyBlock(targetPos, true);
 					}
 				}
 			}
@@ -88,10 +77,9 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 	}
 
 	private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {
-		if (event.getLimbSwing() > 0) {
+		if(event.getLimbSwing() > 0) {
 			for (float swing = 0; event.getLimbSwing() > swing; swing++) {
-				event.getController().setAnimation(
-						new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", true));
+				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", true));
 			}
 			return PlayState.CONTINUE;
 		}
@@ -116,9 +104,7 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 		if (state == ANIM) {
 			// Always use GeckoLibUtil to get AnimationControllers when you don't have
 			// access to an AnimationEvent
-			final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id,
-					CONTROLLER_NAME);
-
+			final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id, CONTROLLER_NAME);
 			assert controller != null;
 			if (controller != null) {
 				if (controller.getAnimationState() == AnimationState.Stopped) {
@@ -129,8 +115,7 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 					// Set the animation to open the JackInTheBoxItem which will start playing music
 					// and
 					// eventually do the actual animation. Also sets it to not loop
-					controller.setAnimation(
-							new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", false));
+					controller.setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", false));
 				}
 			}
 		}
@@ -144,10 +129,5 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
-	}
-
-	@Override
-	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-		return true;
 	}
 }

@@ -48,9 +48,7 @@ public class LavaMobEntity extends CreatureEntity {
 				this.setAirSupply(0);
 				this.hurt(DamageSource.DROWN, 2.0F);
 			}
-		} else {
-			this.setAirSupply(300);
-		}
+		} else this.setAirSupply(300);
 	}
 
 	public void baseTick() {

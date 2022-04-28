@@ -15,19 +15,9 @@ public class StalagmiteValleySurfaceBuilder extends SurfaceBuilder<SurfaceBuilde
 		super(codec);
 	}
 
-	public void apply(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise,
-			BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-		if (noise < -3.0D) {
-			SurfaceBuilder.DEFAULT.apply(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid,
-					seaLevel, seed, CASurfaceBuilders.Configs.GRAVEL);
-		}
-		if (noise > -3.0D && noise < 3.0D) {
-			SurfaceBuilder.DEFAULT.apply(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid,
-					seaLevel, seed, CASurfaceBuilders.Configs.STONE);
-		}
-		if (noise > 3.0D) {
-			SurfaceBuilder.DEFAULT.apply(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid,
-					seaLevel, seed, CASurfaceBuilders.Configs.ANDESITE);
-		}
+	public void apply(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
+		if (noise < -3.0D) SurfaceBuilder.DEFAULT.apply(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, CASurfaceBuilders.Configs.GRAVEL);
+		if (noise > -3.0D && noise < 3.0D) SurfaceBuilder.DEFAULT.apply(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, CASurfaceBuilders.Configs.STONE);
+		if (noise > 3.0D) SurfaceBuilder.DEFAULT.apply(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, CASurfaceBuilders.Configs.ANDESITE);
 	}
 }

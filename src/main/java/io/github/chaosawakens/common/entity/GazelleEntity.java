@@ -53,8 +53,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable {
 	private AnimationFactory factory = new AnimationFactory(this);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
-	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class,
-			DataSerializers.INT);
+	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 
 	public GazelleEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -62,7 +61,9 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 12).add(Attributes.MOVEMENT_SPEED, 0.25D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 12)
+				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.FOLLOW_RANGE, 14);
 	}
 
@@ -159,20 +160,15 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	}
 
 	@Nullable
-	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance,
-			SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
 		int i = this.getRandomGazelleType(world);
-		if (entityData instanceof GazelleData) {
-			i = ((GazelleData) entityData).gazelletype;
-		} else {
-			entityData = new GazelleData(i);
-		}
+		if (entityData instanceof GazelleData) i = ((GazelleData) entityData).gazelletype;
+		else entityData = new GazelleData(i);
 		this.setGazelleType(i);
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
 	}
 
 	private int getRandomGazelleType(IWorld world) {
-		@SuppressWarnings("unused")
 		Biome biome = world.getBiome(this.blockPosition());
 		int i = this.random.nextInt(5);
 		return i;
@@ -187,5 +183,4 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	public float getStandingEyeHeight(Pose pose, EntitySize size) {
 		return this.isBaby() ? size.height * 0.75F : 1.1F;
 	}
-
 }

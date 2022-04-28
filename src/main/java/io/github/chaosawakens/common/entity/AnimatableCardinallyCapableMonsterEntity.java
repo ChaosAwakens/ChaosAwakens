@@ -10,10 +10,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public abstract class AnimatableCardinallyCapableMonsterEntity extends AnimatableMonsterEntity {
-	protected static final DataParameter<Boolean> MOVING_ON_WALL = EntityDataManager
-			.defineId(AnimatableCardinallyCapableMonsterEntity.class, DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> MOVING_ON_CEILING = EntityDataManager
-			.defineId(AnimatableCardinallyCapableMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> MOVING_ON_WALL = EntityDataManager.defineId(AnimatableCardinallyCapableMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> MOVING_ON_CEILING = EntityDataManager.defineId(AnimatableCardinallyCapableMonsterEntity.class, DataSerializers.BOOLEAN);
 
 	public AnimatableCardinallyCapableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -51,5 +49,4 @@ public abstract class AnimatableCardinallyCapableMonsterEntity extends Animatabl
 	public float getRotationY() {
 		return this.yBodyRot - this.yBodyRotO;
 	}
-
 }

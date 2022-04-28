@@ -17,24 +17,19 @@ public class TradeUtil {
 	public static final int MASTER = 5;
 
 	public static void addVillagerTrades(VillagerTradesEvent event, int level, VillagerTrades.ITrade... trades) {
-		for (VillagerTrades.ITrade trade : trades)
-			event.getTrades().get(level).add(trade);
+		for (VillagerTrades.ITrade trade : trades) event.getTrades().get(level).add(trade);
 	}
 
-	public static void addVillagerTrades(VillagerTradesEvent event, VillagerProfession profession, int level,
-			VillagerTrades.ITrade... trades) {
-		if (event.getType() == profession)
-			addVillagerTrades(event, level, trades);
+	public static void addVillagerTrades(VillagerTradesEvent event, VillagerProfession profession, int level, VillagerTrades.ITrade... trades) {
+		if (event.getType() == profession) addVillagerTrades(event, level, trades);
 	}
 
 	public static void addWandererTrades(WandererTradesEvent event, VillagerTrades.ITrade... trades) {
-		for (VillagerTrades.ITrade trade : trades)
-			event.getGenericTrades().add(trade);
+		for (VillagerTrades.ITrade trade : trades) event.getGenericTrades().add(trade);
 	}
 
 	public static void addRareWandererTrades(WandererTradesEvent event, VillagerTrades.ITrade... trades) {
-		for (VillagerTrades.ITrade trade : trades)
-			event.getRareTrades().add(trade);
+		for (VillagerTrades.ITrade trade : trades) event.getRareTrades().add(trade);
 	}
 
 	public static class CATrade extends BasicTrade {
@@ -42,10 +37,8 @@ public class TradeUtil {
 			super(input, input2, output, maxTrades, xp, priceMult);
 		}
 
-		public CATrade(Item input, int inputCount, Item output, int outputCount, int maxTrades, int xp,
-				float priceMult) {
-			this(new ItemStack(input, inputCount), ItemStack.EMPTY, new ItemStack(output, outputCount), maxTrades, xp,
-					priceMult);
+		public CATrade(Item input, int inputCount, Item output, int outputCount, int maxTrades, int xp, float priceMult) {
+			this(new ItemStack(input, inputCount), ItemStack.EMPTY, new ItemStack(output, outputCount), maxTrades, xp, priceMult);
 		}
 
 		public CATrade(Item input, int inputCount, Item output, int outputCount, int maxTrades, int xp) {
@@ -53,8 +46,7 @@ public class TradeUtil {
 		}
 
 		public CATrade(Item input, int inputCount, int emeraldCount, int maxTrades, int xp, float priceMult) {
-			this(new ItemStack(input, inputCount), ItemStack.EMPTY, new ItemStack(Items.EMERALD, emeraldCount),
-					maxTrades, xp, priceMult);
+			this(new ItemStack(input, inputCount), ItemStack.EMPTY, new ItemStack(Items.EMERALD, emeraldCount), maxTrades, xp, priceMult);
 		}
 
 		public CATrade(Item input, int inputCount, int emeraldCount, int maxTrades, int xp) {
@@ -62,8 +54,7 @@ public class TradeUtil {
 		}
 
 		public CATrade(int emeraldCount, Item output, int outputCount, int maxTrades, int xp, float priceMult) {
-			this(new ItemStack(Items.EMERALD, emeraldCount), ItemStack.EMPTY, new ItemStack(output, outputCount),
-					maxTrades, xp, priceMult);
+			this(new ItemStack(Items.EMERALD, emeraldCount), ItemStack.EMPTY, new ItemStack(output, outputCount), maxTrades, xp, priceMult);
 		}
 
 		public CATrade(int emeraldCount, Item output, int outputCount, int maxTrades, int xp) {

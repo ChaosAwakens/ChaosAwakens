@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class BirdEntityModel extends AnimatedGeoModel<BirdEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(BirdEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/bird.geo.json");
@@ -39,5 +38,4 @@ public class BirdEntityModel extends AnimatedGeoModel<BirdEntity> {
 	 * head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
 	 * head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F)); }
 	 */
-
 }

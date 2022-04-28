@@ -42,22 +42,18 @@ public class RoboWarriorEntity extends RoboRangedEntity implements IAnimatable, 
 
 		if (this.getAttacking()) {
 			if (event.isMoving()) {
-				event.getController().setAnimation(
-						new AnimationBuilder().addAnimation("animation.robo_warrior.walking_shooting_animation", true));
+				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.walking_shooting_animation", true));
 				return PlayState.CONTINUE;
 			}
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.robo_warrior.shooting_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.shooting_animation", true));
 			return PlayState.CONTINUE;
 		}
 
 		if (event.isMoving()) {
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.robo_warrior.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
-		event.getController()
-				.setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_warrior.idle_animation", true));
 		return PlayState.CONTINUE;
 	}
 

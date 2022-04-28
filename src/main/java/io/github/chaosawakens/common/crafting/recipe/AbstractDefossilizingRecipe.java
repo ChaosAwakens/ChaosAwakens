@@ -22,9 +22,7 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 	protected final int defossilizingTime;
 	private NonNullList<Ingredient> ingredients = NonNullList.create();
 
-	public AbstractDefossilizingRecipe(IRecipeType<?> type, IRecipeSerializer<?> serializer, ResourceLocation recipeId,
-			Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience,
-			int defossilizingTime) {
+	public AbstractDefossilizingRecipe(IRecipeType<?> type, IRecipeSerializer<?> serializer, ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience, int defossilizingTime) {
 		this.type = type;
 		this.serializer = serializer;
 		this.recipeId = recipeId;
@@ -40,8 +38,7 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 	}
 
 	public boolean matches(IInventory inv, World world) {
-		return this.ingredient1.test(inv.getItem(0)) && this.ingredient2.test(inv.getItem(1))
-				&& this.ingredient3.test(inv.getItem(2));
+		return this.ingredient1.test(inv.getItem(0)) && this.ingredient2.test(inv.getItem(1)) && this.ingredient3.test(inv.getItem(2));
 	}
 
 	public ItemStack assemble(IInventory p_77572_1_) {

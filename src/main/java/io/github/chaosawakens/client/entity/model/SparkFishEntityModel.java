@@ -23,8 +23,7 @@ public class SparkFishEntityModel extends AnimatedGeoModel<SparkFishEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(SparkFishEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(SparkFishEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 	}
 }

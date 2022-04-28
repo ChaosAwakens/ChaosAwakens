@@ -19,18 +19,13 @@ public class AnimatableRoboPunchGoal extends AnimatableGoal {
 	private boolean hasHit;
 	public static float punchingTicks;
 
-	/**
-	 * @param entity          Attacking entity
-	 * @param animationLength
-	 */
 	public AnimatableRoboPunchGoal(AnimatableMonsterEntity entity, RoboPounderEntity robo, double animationLength,
 			double attackBegin, double attackEnd) {
 		this.entity = entity;
 		this.roboPounder = robo;
 		this.animationLength = animationLength;
 		// AnimatableRoboPunchGoal.punchingTicks = (float) (attackEnd - attackBegin);
-		this.attackPredicate = (progress, length) -> attackBegin < progress / (length)
-				&& progress / (length) < attackEnd;
+		this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
@@ -38,20 +33,16 @@ public class AnimatableRoboPunchGoal extends AnimatableGoal {
 		return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth() / 2;
 	}
 
-	private static boolean checkIfValid(AnimatableRoboPunchGoal animatableRoboPunchGoal, RoboPounderEntity attacker,
-			LivingEntity target) {
-		if (target == null)
-			return false;
+	private static boolean checkIfValid(AnimatableRoboPunchGoal animatableRoboPunchGoal, RoboPounderEntity attacker, LivingEntity target) {
+		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 				attacker.setAttacking(false);
 				return false;
 			}
-			double distance = animatableRoboPunchGoal.roboPounder.distanceToSqr(target.getX(), target.getY(),
-					target.getZ());
+			double distance = animatableRoboPunchGoal.roboPounder.distanceToSqr(target.getX(), target.getY(), target.getZ());
 			// if (punchingTicks == 0) return false;
-			if (distance <= getAttackReachSq(attacker, target))
-				return true;
+			if (distance <= getAttackReachSq(attacker, target)) return true;
 		}
 		attacker.setAttacking(false);
 //        attacker.setPunching(false);
@@ -78,17 +69,13 @@ public class AnimatableRoboPunchGoal extends AnimatableGoal {
 
 	@Override
 	public boolean canUse() {
-		if (Math.random() <= 0.1)
-			return false;
-
+		if (Math.random() <= 0.1) return false;
 		return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget());
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (Math.random() <= 0.1)
-			return true;
-
+		if (Math.random() <= 0.1) return true;
 		return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget());
 	}
 

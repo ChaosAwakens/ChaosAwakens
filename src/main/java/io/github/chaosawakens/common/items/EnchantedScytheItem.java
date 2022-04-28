@@ -10,33 +10,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
-public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable {
+public class EnchantedScytheItem extends ScytheItem implements IReachWeapon, IAutoEnchantable {
 	private final EnchantmentData[] enchantments;
+	double reachDistance;
 
-	public EnchantedScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn,
-			EnchantmentData[] enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn);
+	public EnchantedScytheItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, Properties builderIn, EnchantmentData[] enchantments) {
+		super(tier, attackDamageIn, attackSpeedIn, reachDistance, builderIn);
 		this.enchantments = enchantments;
+		this.reachDistance = reachDistance;
 	}
 
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for (EnchantmentData enchant : enchantments) {
-					stack.enchant(enchant.enchantment, enchant.level);
-				}
+			if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 			items.add(stack);
 		}
 	}
 
 	@Override
 	public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		if (CAConfig.COMMON.enableAutoEnchanting.get())
-			for (EnchantmentData enchant : enchantments) {
-				stack.enchant(enchant.enchantment, enchant.level);
-			}
+		if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 	}
 
 	@Override
@@ -47,5 +42,10 @@ public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable 
 	@Override
 	public EnchantmentData[] enchantments() {
 		return this.enchantments;
+	}
+
+	@Override
+	public double getReachDistance() {
+		return this.reachDistance;
 	}
 }

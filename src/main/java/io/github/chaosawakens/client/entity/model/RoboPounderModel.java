@@ -9,7 +9,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class RoboPounderModel extends AnimatedGeoModel<RoboPounderEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(RoboPounderEntity entity) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/robo_pounder.geo.json");
@@ -25,10 +24,8 @@ public class RoboPounderModel extends AnimatedGeoModel<RoboPounderEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/robo_pounder.animation.json");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void setLivingAnimations(RoboPounderEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(RoboPounderEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		IBone head = this.getAnimationProcessor().getBone("Head");
@@ -36,5 +33,4 @@ public class RoboPounderModel extends AnimatedGeoModel<RoboPounderEntity> {
 		head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
 		head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
 	}
-
 }

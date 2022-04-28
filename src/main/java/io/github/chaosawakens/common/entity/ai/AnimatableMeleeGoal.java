@@ -16,27 +16,22 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	protected final BiFunction<Double, Double, Boolean> attackPredicate;
 	private boolean hasHit;
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin,
-			double attackEnd) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
 		this.entity = entity;
 		this.animationLength = animationLength;
-		this.attackPredicate = (progress, length) -> attackBegin < progress / (length)
-				&& progress / (length) < attackEnd;
+		this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
-	private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableMonsterEntity attacker,
-			LivingEntity target) {
-		if (target == null)
-			return false;
+	private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 				attacker.setAttacking(false);
 				return false;
 			}
 			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-			if (distance <= AnimatableGoal.getAttackReachSq(attacker, target))
-				return true;
+			if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
 		}
 		attacker.setAttacking(false);
 		return false;
@@ -44,17 +39,13 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 
 	@Override
 	public boolean canUse() {
-		if (Math.random() <= 0.1)
-			return false;
-
+		if (Math.random() <= 0.1) return false;
 		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (Math.random() <= 0.1)
-			return true;
-
+		if (Math.random() <= 0.1) return true;
 		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
 	}
 
@@ -68,9 +59,7 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 	@Override
 	public void stop() {
 		LivingEntity target = this.entity.getTarget();
-		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-			this.entity.setTarget(null);
-		}
+		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.entity.setTarget(null);
 		this.entity.setAttacking(false);
 		this.entity.setAggressive(false);
 		this.hasHit = false;

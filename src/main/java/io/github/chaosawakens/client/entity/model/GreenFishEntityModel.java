@@ -23,8 +23,7 @@ public class GreenFishEntityModel extends AnimatedGeoModel<GreenFishEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(GreenFishEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(GreenFishEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 	}
 }

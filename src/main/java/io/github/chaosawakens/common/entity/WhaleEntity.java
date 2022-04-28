@@ -55,8 +55,11 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 80).add(Attributes.MOVEMENT_SPEED, 0.5D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 0.3D).add(Attributes.FOLLOW_RANGE, 18);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 80)
+				.add(Attributes.MOVEMENT_SPEED, 0.5D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
+				.add(Attributes.FOLLOW_RANGE, 18);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -92,18 +95,15 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 
 		@Override
 		public void tick() {
-			if (this.whale.isEyeInFluid(FluidTags.WATER)) {
-				this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
-			}
+			if (this.whale.isEyeInFluid(FluidTags.WATER)) this.whale.setDeltaMovement(this.whale.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
 
 			if (this.operation == MovementController.Action.MOVE_TO && !this.whale.getNavigation().isDone()) {
 				double d0 = this.wantedX - this.whale.getX();
 				double d1 = this.wantedY - this.whale.getY();
 				double d2 = this.wantedZ - this.whale.getZ();
 				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-				if (d3 < (double) 2.5000003E-7F) {
-					this.mob.setZza(0.0F);
-				} else {
+				if (d3 < (double) 2.5000003E-7F) this.mob.setZza(0.0F);
+				else {
 					float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
 					this.whale.yRot = this.rotlerp(this.whale.yRot, f, 10.0F);
 					this.whale.yBodyRot = this.whale.yRot;
@@ -111,17 +111,14 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 					float f1 = (float) (this.speedModifier * this.whale.getAttributeValue(Attributes.MOVEMENT_SPEED));
 					if (this.whale.isInWater()) {
 						this.whale.setSpeed(f1 * 0.02F);
-						float f2 = -((float) (MathHelper.atan2(d1, MathHelper.sqrt(d0 * d0 + d2 * d2))
-								* (double) (180F / (float) Math.PI)));
+						float f2 = -((float) (MathHelper.atan2(d1, MathHelper.sqrt(d0 * d0 + d2 * d2)) * (double) (180F / (float) Math.PI)));
 						f2 = MathHelper.clamp(MathHelper.wrapDegrees(f2), -85.0F, 85.0F);
 						this.whale.xRot = this.rotlerp(this.whale.xRot, f2, 5.0F);
 						float f3 = MathHelper.cos(this.whale.xRot * ((float) Math.PI / 180F));
 						float f4 = MathHelper.sin(this.whale.xRot * ((float) Math.PI / 180F));
 						this.whale.zza = f3 * f1;
 						this.whale.yya = -f4 * f1;
-					} else {
-						this.whale.setSpeed(f1 * 0.1F);
-					}
+					} else this.whale.setSpeed(f1 * 0.1F);
 
 				}
 			} else {
@@ -152,29 +149,20 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 			this.moveRelative(this.getSpeed(), vector);
 			this.move(MoverType.SELF, this.getDeltaMovement());
 			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-			if (this.getTarget() == null) {
-				this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-			}
-		} else {
-			super.travel(vector);
-		}
+			if (this.getTarget() == null) this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+		} else super.travel(vector);
 	}
 
 	@Override
 	public boolean checkSpawnRules(IWorld p_213380_1_, SpawnReason p_213380_2_) {
-		return super.checkSpawnRules(p_213380_1_, p_213380_2_)
-				&& WhaleEntity.checkWhaleSpawnRules(level, blockPosition());
+		return super.checkSpawnRules(p_213380_1_, p_213380_2_) && WhaleEntity.checkWhaleSpawnRules(level, blockPosition());
 	}
 
 	public static boolean checkWhaleSpawnRules(IWorld world, BlockPos pos) {
 		if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
 			Optional<RegistryKey<Biome>> optional = world.getBiomeName(pos);
-			return (Objects.equals(optional, Optional.of(Biomes.OCEAN))
-					|| !Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN)))
-					&& world.getFluidState(pos).is(FluidTags.WATER);
-		} else {
-			return false;
-		}
+			return (Objects.equals(optional, Optional.of(Biomes.OCEAN)) || !Objects.equals(optional, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
+		} else return false;
 	}
 
 	@Override
@@ -194,11 +182,8 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 	private boolean clearanceAcquired() {
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 		for (int l1 = 0; l1 < 10; ++l1) {
-			BlockState blockstate = level
-					.getBlockState(blockpos$mutable.set(this.getX(), this.getY() + l1, this.getZ()));
-			if (!blockstate.getFluidState().is(FluidTags.WATER)) {
-				return false;
-			}
+			BlockState blockstate = level.getBlockState(blockpos$mutable.set(this.getX(), this.getY() + l1, this.getZ()));
+			if (!blockstate.getFluidState().is(FluidTags.WATER)) return false;
 		}
 
 		return true;
@@ -225,8 +210,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 		super.tick();
 
 		if (this.onGround) {
-			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D,
-					((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F)));
 			this.yRot = this.random.nextFloat() * 360.0F;
 			this.onGround = false;
 			this.hasImpulse = true;
@@ -237,9 +221,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 					if (this.sunburn >= 100) { // Time/2, so it'd take 50 seconds for this to take effect
 						this.hurt(DamageSource.DRY_OUT, random.nextInt(2) == 0 ? 1F : 0F);
 					}
-				} else {
-					this.sunburn = 0;
-				}
+				} else this.sunburn = 0;
 			}
 		}
 	}

@@ -13,8 +13,7 @@ public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		super(properties, direction, shape, p_i241179_4_);
 	}
 
-	public BlockState updateShape(BlockState state, Direction direction, BlockState state2, IWorld worldIn,
-			BlockPos pos, BlockPos pos2) {
+	public BlockState updateShape(BlockState state, Direction direction, BlockState state2, IWorld worldIn, BlockPos pos, BlockPos pos2) {
 		if (direction == this.growthDirection.getOpposite() && !state.canSurvive(worldIn, pos)) {
 			worldIn.getBlockTicks().scheduleTick(pos, this, 1);
 		}
@@ -22,12 +21,10 @@ public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		CropTopPlantBlock topBlock = (CropTopPlantBlock) this.getHeadBlock();
 		if (direction == this.growthDirection) {
 			Block block = state2.getBlock();
-			if (block != this && block != topBlock)
-				return topBlock.getUpdateShapeState(worldIn);
+			if (block != this && block != topBlock) return topBlock.getUpdateShapeState(worldIn);
 		}
 
-		if (this.scheduleFluidTicks)
-			worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+		if (this.scheduleFluidTicks) worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 
 		return super.updateShape(state, direction, state2, worldIn, pos, pos2);
 	}
@@ -37,8 +34,9 @@ public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		BlockPos downPos = pos.relative(this.growthDirection.getOpposite());
 		BlockState downState = reader.getBlockState(downPos);
 		Block block = downState.getBlock();
-		return block == this.getHeadBlock() || block == this.getBodyBlock() || downState.is(Blocks.GRASS_BLOCK)
-				|| downState.is(Blocks.DIRT) || downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL)
+		return block == this.getHeadBlock() || block == this.getBodyBlock()
+				|| downState.is(Blocks.GRASS_BLOCK) || downState.is(Blocks.DIRT)
+				|| downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL)
 				|| downState.is(Blocks.FARMLAND);
 	}
 

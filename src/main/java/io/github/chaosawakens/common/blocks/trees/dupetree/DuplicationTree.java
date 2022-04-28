@@ -24,8 +24,7 @@ public class DuplicationTree extends Tree implements IUtilityHelper {
 	@Override
 	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random rand, boolean grow) {
 		if (rand.nextInt(10) == 0) {
-			return grow ? CAConfiguredFeatures.FANCY_DUPLICATION_TREE
-					: CAConfiguredFeatures.FANCY_DEAD_DUPLICATION_TREE;
+			return grow ? CAConfiguredFeatures.FANCY_DUPLICATION_TREE : CAConfiguredFeatures.FANCY_DEAD_DUPLICATION_TREE;
 		} else {
 			return grow ? CAConfiguredFeatures.DUPLICATION_TREE : CAConfiguredFeatures.DEAD_DUPLICATION_TREE;
 		}
@@ -44,13 +43,9 @@ public class DuplicationTree extends Tree implements IUtilityHelper {
 
 //		Queue.add(blockToDupe);
 
-		if (!IUtilityHelper.isDuplicatable(blockToDupe)) {
-			return;
-		}
+		if (!IUtilityHelper.isDuplicatable(blockToDupe)) return;
 
-		if (w == null) {
-			return;
-		}
+		if (w == null) return;
 
 		Block BTD = w.getBlockState(pos).getBlock();
 		blockToDupe = BTD;
@@ -59,5 +54,4 @@ public class DuplicationTree extends Tree implements IUtilityHelper {
 	public static IntegerProperty getDistance() {
 		return DISTANCE;
 	}
-
 }

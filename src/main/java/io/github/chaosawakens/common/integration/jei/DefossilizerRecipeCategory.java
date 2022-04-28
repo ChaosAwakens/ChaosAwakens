@@ -24,12 +24,10 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 	static final ResourceLocation ID = new ResourceLocation(CARecipes.DEFOSSILIZING_RECIPE_TYPE.toString());
 	private IDrawable bg;
 	private IDrawable icon;
-//	  private IDrawable arrow;
+//	private IDrawable arrow;
 
 	public DefossilizerRecipeCategory(IGuiHelper helper) {
-		bg = helper.drawableBuilder(
-				new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80)
-				.setTextureSize(170, 80).build();
+		bg = helper.drawableBuilder(new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80).setTextureSize(170, 80).build();
 		icon = helper.createDrawableIngredient(new ItemStack(CABlocks.DEFOSSILIZER.get()));
 //		arrow = helper.createAnimatedDrawable(null, 80, StartDirection.LEFT, false);
 	}
@@ -76,15 +74,14 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
 	}
 
-	/*
-	 * @Override public void setIngredients(DefossilizingRecipe recipe, IIngredients
-	 * ingredients) { NonNullList<Ingredient> in = NonNullList.create();
-	 * 
-	 * in.addAll(recipe.getIngredients());
-	 * 
-	 * ingredients.setInputIngredients(in); ingredients.setOutput(VanillaTypes.ITEM,
-	 * recipe.getResult()); }
-	 */
+//	@Override
+//	public void setIngredients(DefossilizingRecipe recipe, IIngredients ingredients) {
+//		NonNullList<Ingredient> in = NonNullList.create();
+//		in.addAll(recipe.getIngredients());
+//		ingredients.setInputIngredients(in);
+//		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
+//	}
+
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, DefossilizingRecipe recipe, IIngredients ingredients) {
@@ -100,9 +97,7 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 		List<ItemStack> input = null;
 		for (int i = 0; i <= 2; i++) {
 			input = inputs.get(i);
-			if (input != null && !input.isEmpty()) {
-				guiItemStacks.set(i, input);
-			}
+			if (input != null && !input.isEmpty()) guiItemStacks.set(i, input);
 		}
 	}
 }

@@ -36,15 +36,13 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 		this(CAEntityTypes.ROBO_LASER.get(), worldIn);
 		super.setOwner(p_i47273_2_);
 		this.setPos(
-				p_i47273_2_.getX() - (double) (p_i47273_2_.getBbWidth() + 1.0F) * 0.5D
-						* (double) MathHelper.sin(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)),
-				p_i47273_2_.getEyeY() - (double) 0.1F, p_i47273_2_.getZ() + (double) (p_i47273_2_.getBbWidth() + 1.0F)
-						* 0.5D * (double) MathHelper.cos(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)));
+				p_i47273_2_.getX() - (double) (p_i47273_2_.getBbWidth() + 1.0F) * 0.5D * (double) MathHelper.sin(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)),
+				p_i47273_2_.getEyeY() - (double) 0.1F,
+				p_i47273_2_.getZ() + (double) (p_i47273_2_.getBbWidth() + 1.0F) * 0.5D * (double) MathHelper.cos(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)));
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public RoboLaserEntity(World worldIn, double x, double y, double z, double p_i47274_8_, double p_i47274_10_,
-			double p_i47274_12_) {
+	public RoboLaserEntity(World worldIn, double x, double y, double z, double p_i47274_8_, double p_i47274_10_, double p_i47274_12_) {
 		this(CAEntityTypes.ROBO_LASER.get(), worldIn);
 		this.setPos(x, y, z);
 		for (int i = 0; i < 7; ++i) {
@@ -54,8 +52,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 		this.setDeltaMovement(p_i47274_8_, p_i47274_10_, p_i47274_12_);
 	}
 
-	public RoboLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ,
-			boolean explosion) {
+	public RoboLaserEntity(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ, boolean explosion) {
 		super(CAEntityTypes.ROBO_LASER.get(), shooter, accelX, accelY, accelZ, worldIn);
 		this.explosion = explosion;
 	}
@@ -65,9 +62,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 		super.tick();
 		Vector3d vector3d = this.getDeltaMovement();
 		RayTraceResult raytraceresult = ProjectileHelper.getHitResult(this, this::canHitEntity);
-		if (raytraceresult.getType() != RayTraceResult.Type.MISS
-				&& !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult))
-			this.onHit(raytraceresult);
+		if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) this.onHit(raytraceresult);
 		this.setSecondsOnFire(0);
 		double d0 = this.getX() + vector3d.x;
 		double d1 = this.getY() + vector3d.y;
@@ -91,16 +86,13 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 					boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
 					switch (CAConfig.COMMON.rayGunExplosionType.get()) {
 					case 0:
-						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire,
-								Explosion.Mode.NONE);
+						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
 						break;
 					case 1:
-						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire,
-								Explosion.Mode.BREAK);
+						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
 						break;
 					case 2:
-						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire,
-								Explosion.Mode.DESTROY);
+						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
 						break;
 					}
 				}
@@ -112,8 +104,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 	@Override
 	protected void onHitEntity(EntityRayTraceResult result) {
 		Entity entity = this.getOwner();
-		if (entity instanceof RoboEntity)
-			result.getEntity().hurt(DamageSource.indirectMobAttack(this, (RoboEntity) entity).setProjectile(), damage);
+		if (entity instanceof RoboEntity) result.getEntity().hurt(DamageSource.indirectMobAttack(this, (RoboEntity) entity).setProjectile(), damage);
 		super.onHitEntity(result);
 	}
 

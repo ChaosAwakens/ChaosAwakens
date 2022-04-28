@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.robo;
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
@@ -17,21 +18,21 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.IServerWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 abstract public class RoboEntity extends AnimatableMonsterEntity {
-	protected static final DataParameter<Boolean> RAGE_MODE_ENABLED = EntityDataManager.defineId(RoboEntity.class,
-			DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> RAGE_MODE_DISABLED = EntityDataManager.defineId(RoboEntity.class,
-			DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> RAGE_RUNNING = EntityDataManager.defineId(RoboEntity.class,
-			DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> RAGE_RUNNING_DISABLED = EntityDataManager.defineId(RoboEntity.class,
-			DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> SIDE_SWEEPING = EntityDataManager.defineId(RoboEntity.class,
-			DataSerializers.BOOLEAN);
-	protected static final DataParameter<Boolean> PUNCHING = EntityDataManager.defineId(RoboEntity.class,
-			DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_MODE_ENABLED = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_MODE_DISABLED = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_RUNNING = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> RAGE_RUNNING_DISABLED = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> SIDE_SWEEPING = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> PUNCHING = EntityDataManager.defineId(RoboEntity.class, DataSerializers.BOOLEAN);
 
 	public RoboEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -69,6 +70,10 @@ abstract public class RoboEntity extends AnimatableMonsterEntity {
 		this.entityData.define(RAGE_RUNNING, false);
 		this.entityData.define(SIDE_SWEEPING, false);
 		this.entityData.define(PUNCHING, false);
+	}
+
+	public static boolean checkRoboSpawnRules(EntityType<? extends RoboEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random) {
+		return world.canSeeSky(pos) && checkMonsterSpawnRules(entityType, world, reason, pos, random);
 	}
 
 	public boolean getRageMode() {

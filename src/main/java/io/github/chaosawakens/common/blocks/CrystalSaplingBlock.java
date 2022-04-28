@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.trees.Tree;
 import net.minecraft.pathfinding.PathType;
@@ -34,27 +33,20 @@ public class CrystalSaplingBlock extends Block implements IGrowable, IPlantable 
 	public boolean canSurvive(BlockState state, IWorldReader worldReader, BlockPos pos) {
 		BlockPos blockpos = pos.below();
 		BlockState blockstate = worldReader.getBlockState(blockpos);
-		if (blockstate.getBlock() instanceof CrystalBlock && blockstate.isRandomlyTicking()) {
-			return true;
-		}
-		return false;
+		return blockstate.getBlock() instanceof CrystalBlock && blockstate.isRandomlyTicking();
 	}
 
-	public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos pos,
-			ISelectionContext selectionContext) {
+	public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos pos, ISelectionContext selectionContext) {
 		return SHAPE;
 	}
 
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world,
-			BlockPos currentPos, BlockPos facingPos) {
-		return !state.canSurvive(world, currentPos) ? Blocks.AIR.defaultBlockState()
-				: super.updateShape(state, facing, facingState, world, currentPos, facingPos);
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		return !state.canSurvive(world, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, world, currentPos, facingPos);
 	}
 
 	public void randomTick(BlockState blockState, ServerWorld serverWorld, BlockPos pos, Random random) {
 		if (serverWorld.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0) {
-			if (!serverWorld.isAreaLoaded(pos, 1))
-				return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+			if (!serverWorld.isAreaLoaded(pos, 1)) return;
 			this.advanceTree(serverWorld, pos, blockState, random);
 		}
 	}
@@ -63,14 +55,12 @@ public class CrystalSaplingBlock extends Block implements IGrowable, IPlantable 
 		if (blockState.getValue(STAGE) == 0) {
 			serverWorld.setBlock(pos, blockState.cycle(STAGE), 4);
 		} else {
-			if (!net.minecraftforge.event.ForgeEventFactory.saplingGrowTree(serverWorld, random, pos))
-				return;
+			if (!net.minecraftforge.event.ForgeEventFactory.saplingGrowTree(serverWorld, random, pos)) return;
 			this.treeGrower.growTree(serverWorld, serverWorld.getChunkSource().getGenerator(), pos, blockState, random);
 		}
 	}
 
-	public boolean isValidBonemealTarget(IBlockReader blockReader, BlockPos pos, BlockState blockState,
-			boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader blockReader, BlockPos pos, BlockState blockState, boolean isClient) {
 		return true;
 	}
 
@@ -97,8 +87,7 @@ public class CrystalSaplingBlock extends Block implements IGrowable, IPlantable 
 	@Override
 	public BlockState getPlant(IBlockReader world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
-		if (state.getBlock() != this)
-			return defaultBlockState();
+		if (state.getBlock() != this) return defaultBlockState();
 		return state;
 	}
 }

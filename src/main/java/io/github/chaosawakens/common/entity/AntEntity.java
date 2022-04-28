@@ -37,13 +37,11 @@ import javax.annotation.Nullable;
 
 public class AntEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ITextComponent inaccessibleMessage = new TranslationTextComponent(
-			"misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
+	private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
 	private final ConfigValue<Boolean> tpConfig;
 	private final RegistryKey<World> targetDimension;
 
-	public AntEntity(EntityType<? extends AntEntity> type, World worldIn, ConfigValue<Boolean> tpConfig,
-			RegistryKey<World> targetDimension) {
+	public AntEntity(EntityType<? extends AntEntity> type, World worldIn, ConfigValue<Boolean> tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
 		this.noCulling = true;
 		this.tpConfig = tpConfig;
@@ -51,19 +49,19 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 1).add(Attributes.MOVEMENT_SPEED, 0.15)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 1)
+				.add(Attributes.MOVEMENT_SPEED, 0.15)
 				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ant.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -86,11 +84,9 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
 				return ActionResultType.PASS;
 			} else {
 				MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
-				ServerWorld targetWorld = minecraftServer.getLevel(
-						this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
+				ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-				if (targetWorld != null)
-					serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
+				if (targetWorld != null) serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
 			}
 		}
 		return super.mobInteract(playerIn, hand);

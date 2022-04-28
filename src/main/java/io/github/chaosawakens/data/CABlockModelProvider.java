@@ -31,8 +31,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		return getResourceLocation("block/" + name);
 	}
 
-	private static ResourceLocation getBlockResourceLocation(String name, @Nonnull String removeSuffix,
-			String addSuffix) {
+	private static ResourceLocation getBlockResourceLocation(String name, @Nonnull String removeSuffix, String addSuffix) {
 		return getBlockResourceLocation(name.substring(0, name.length() - removeSuffix.length()) + addSuffix);
 	}
 
@@ -40,27 +39,21 @@ public class CABlockModelProvider extends BlockModelProvider {
 	protected void registerModels() {
 		// TODO Automate the data generators
 		for (Block block : ForgeRegistries.BLOCKS) {
-			if (!ChaosAwakens.MODID.equals(block.getRegistryName().getNamespace()))
-				continue;
+			if (!ChaosAwakens.MODID.equals(block.getRegistryName().getNamespace())) continue;
 
 			String name = block.getRegistryName().getPath();
 			ChaosAwakens.LOGGER.debug(block.getRegistryName());
 
 			if (block instanceof StandingSignBlock || block instanceof WallSignBlock) {
-				if (block instanceof StandingSignBlock) {
-					getBuilder(name).texture("particle", getBlockResourceLocation(name, "_sign", "_planks"));
-				}
+				if (block instanceof StandingSignBlock) getBuilder(name).texture("particle", getBlockResourceLocation(name, "_sign", "_planks"));
 			}
 		}
 
-		this.orientableWithBottom("defossilizer", mcRL("iron_block"), chaosRL("defossilizer_front"), mcRL("iron_block"),
-				chaosRL("defossilizer_top"));
+		this.orientableWithBottom("defossilizer", mcRL("iron_block"), chaosRL("defossilizer_front"), mcRL("iron_block"), chaosRL("defossilizer_top"));
 
-		this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"),
-				chaosRL("dense_grass_block_top"));
+		this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
 		this.cubeAll("dense_dirt", chaosRL("dense_dirt"));
-		this.cubeBottomTop("dense_red_ant_nest", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"),
-				chaosRL("dense_red_ant_nest"));
+		this.cubeBottomTop("dense_red_ant_nest", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"));
 		this.plant("dense_grass", "dense_grass");
 		this.doublePlant("tall_dense_grass", "tall_dense_grass");
 		this.doublePlant("thorny_sun", "thorny_sun");
@@ -68,8 +61,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("pink_bulb", chaosRL("pink_bulb"));
 		this.cross("purple_bulb", chaosRL("purple_bulb"));
 
-		this.cubeBottomTop("fossilised_husk_sandstone", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"),
-				mcRL("sandstone_top"));
+		this.cubeBottomTop("fossilised_husk_sandstone", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
 
 		this.cubeAll("aluminum_block", chaosRL("aluminum_block"));
 		this.cubeAll("aluminum_ore", chaosRL("aluminum_ore"));
@@ -116,57 +108,33 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.slab("marble_slab", chaosRL("marble_block"), chaosRL("marble_block"), chaosRL("marble_block"));
 		this.slabTop("marble_slab", chaosRL("marble_block"), chaosRL("marble_block"), chaosRL("marble_block"));
 		this.slab("marble_bricks_slab", chaosRL("marble_bricks"), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
-		this.slabTop("marble_bricks_slab", chaosRL("marble_bricks"), chaosRL("marble_bricks"),
-				chaosRL("marble_bricks"));
-		this.slab("chiseled_marble_slab", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"),
-				chaosRL("chiseled_marble_bricks"));
-		this.slabTop("chiseled_marble_slab", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"),
-				chaosRL("chiseled_marble_bricks"));
-		this.slab("cracked_marble_slab", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"),
-				chaosRL("cracked_marble_bricks"));
-		this.slabTop("cracked_marble_slab", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"),
-				chaosRL("cracked_marble_bricks"));
-		this.slab("mossy_marble_slab", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"),
-				chaosRL("mossy_marble_bricks"));
-		this.slabTop("mossy_marble_slab", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"),
-				chaosRL("mossy_marble_bricks"));
-		this.slab("polished_marble_slab", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"),
-				chaosRL("polished_marble_block"));
-		this.slabTop("polished_marble_slab", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"),
-				chaosRL("polished_marble_block"));
+		this.slabTop("marble_bricks_slab", chaosRL("marble_bricks"), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
+		this.slab("chiseled_marble_slab", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"));
+		this.slabTop("chiseled_marble_slab", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"));
+		this.slab("cracked_marble_slab", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"));
+		this.slabTop("cracked_marble_slab", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"));
+		this.slab("mossy_marble_slab", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"));
+		this.slabTop("mossy_marble_slab", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"));
+		this.slab("polished_marble_slab", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"), chaosRL("polished_marble_block"));
+		this.slabTop("polished_marble_slab", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"), chaosRL("polished_marble_block"));
 		this.stairs("marble_stairs", chaosRL("marble_block"), chaosRL("marble_block"), chaosRL("marble_block"));
 		this.stairsInner("marble_stairs", chaosRL("marble_block"), chaosRL("marble_block"), chaosRL("marble_block"));
 		this.stairsOuter("marble_stairs", chaosRL("marble_block"), chaosRL("marble_block"), chaosRL("marble_block"));
-		this.stairs("marble_brick_stairs", chaosRL("marble_bricks"), chaosRL("marble_bricks"),
-				chaosRL("marble_bricks"));
-		this.stairsInner("marble_brick_stairs", chaosRL("marble_bricks"), chaosRL("marble_bricks"),
-				chaosRL("marble_bricks"));
-		this.stairsOuter("marble_brick_stairs", chaosRL("marble_bricks"), chaosRL("marble_bricks"),
-				chaosRL("marble_bricks"));
-		this.stairs("chiseled_marble_stairs", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"),
-				chaosRL("chiseled_marble_bricks"));
-		this.stairsInner("chiseled_marble_stairs", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"),
-				chaosRL("chiseled_marble_bricks"));
-		this.stairsOuter("chiseled_marble_stairs", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"),
-				chaosRL("chiseled_marble_bricks"));
-		this.stairs("cracked_marble_stairs", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"),
-				chaosRL("cracked_marble_bricks"));
-		this.stairsInner("cracked_marble_stairs", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"),
-				chaosRL("cracked_marble_bricks"));
-		this.stairsOuter("cracked_marble_stairs", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"),
-				chaosRL("cracked_marble_bricks"));
-		this.stairs("mossy_marble_stairs", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"),
-				chaosRL("mossy_marble_bricks"));
-		this.stairsInner("mossy_marble_stairs", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"),
-				chaosRL("mossy_marble_bricks"));
-		this.stairsOuter("mossy_marble_stairs", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"),
-				chaosRL("mossy_marble_bricks"));
-		this.stairs("polished_marble_stairs", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"),
-				chaosRL("polished_marble_block"));
-		this.stairsInner("polished_marble_stairs", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"),
-				chaosRL("polished_marble_block"));
-		this.stairsOuter("polished_marble_stairs", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"),
-				chaosRL("polished_marble_block"));
+		this.stairs("marble_brick_stairs", chaosRL("marble_bricks"), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
+		this.stairsInner("marble_brick_stairs", chaosRL("marble_bricks"), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
+		this.stairsOuter("marble_brick_stairs", chaosRL("marble_bricks"), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
+		this.stairs("chiseled_marble_stairs", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"));
+		this.stairsInner("chiseled_marble_stairs", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"));
+		this.stairsOuter("chiseled_marble_stairs", chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"));
+		this.stairs("cracked_marble_stairs", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"));
+		this.stairsInner("cracked_marble_stairs", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"));
+		this.stairsOuter("cracked_marble_stairs", chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"));
+		this.stairs("mossy_marble_stairs", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"));
+		this.stairsInner("mossy_marble_stairs", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"));
+		this.stairsOuter("mossy_marble_stairs", chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"));
+		this.stairs("polished_marble_stairs", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"), chaosRL("polished_marble_block"));
+		this.stairsInner("polished_marble_stairs", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"), chaosRL("polished_marble_block"));
+		this.stairsOuter("polished_marble_stairs", chaosRL("polished_marble_block"), chaosRL("polished_marble_block"), chaosRL("polished_marble_block"));
 		this.wallPost("marble_wall", chaosRL("marble_block"));
 		this.wallInventory("marble_wall_inventory", chaosRL("marble_block"));
 		this.wallSide("marble_wall", chaosRL("marble_block"));
@@ -201,64 +169,35 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumn("limestone_pillar", chaosRL("limestone_pillar"), chaosRL("limestone_pillar_top"));
 		this.cubeColumnHorizontal("limestone_pillar", chaosRL("limestone_pillar"), chaosRL("limestone_pillar_top"));
 		this.slab("limestone_slab", chaosRL("limestone_block"), chaosRL("limestone_block"), chaosRL("limestone_block"));
-		this.slabTop("limestone_slab", chaosRL("limestone_block"), chaosRL("limestone_block"),
-				chaosRL("limestone_block"));
-		this.slab("limestone_bricks_slab", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"),
-				chaosRL("limestone_bricks"));
-		this.slabTop("limestone_bricks_slab", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"),
-				chaosRL("limestone_bricks"));
-		this.slab("chiseled_limestone_slab", chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"),
-				chaosRL("chiseled_limestone_bricks"));
-		this.slabTop("chiseled_limestone_slab", chaosRL("chiseled_limestone_bricks"),
-				chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
-		this.slab("cracked_limestone_slab", chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"),
-				chaosRL("cracked_limestone_bricks"));
-		this.slabTop("cracked_limestone_slab", chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"),
-				chaosRL("cracked_limestone_bricks"));
-		this.slab("mossy_limestone_slab", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"),
-				chaosRL("mossy_limestone_bricks"));
-		this.slabTop("mossy_limestone_slab", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"),
-				chaosRL("mossy_limestone_bricks"));
-		this.slab("polished_limestone_slab", chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"),
-				chaosRL("polished_limestone_block"));
-		this.slabTop("polished_limestone_slab", chaosRL("polished_limestone_block"),
-				chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
-		this.stairs("limestone_stairs", chaosRL("limestone_block"), chaosRL("limestone_block"),
-				chaosRL("limestone_block"));
-		this.stairsInner("limestone_stairs", chaosRL("limestone_block"), chaosRL("limestone_block"),
-				chaosRL("limestone_block"));
-		this.stairsOuter("limestone_stairs", chaosRL("limestone_block"), chaosRL("limestone_block"),
-				chaosRL("limestone_block"));
-		this.stairs("limestone_brick_stairs", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"),
-				chaosRL("limestone_bricks"));
-		this.stairsInner("limestone_brick_stairs", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"),
-				chaosRL("limestone_bricks"));
-		this.stairsOuter("limestone_brick_stairs", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"),
-				chaosRL("limestone_bricks"));
-		this.stairs("chiseled_limestone_stairs", chaosRL("chiseled_limestone_bricks"),
-				chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
-		this.stairsInner("chiseled_limestone_stairs", chaosRL("chiseled_limestone_bricks"),
-				chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
-		this.stairsOuter("chiseled_limestone_stairs", chaosRL("chiseled_limestone_bricks"),
-				chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
-		this.stairs("cracked_limestone_stairs", chaosRL("cracked_limestone_bricks"),
-				chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
-		this.stairsInner("cracked_limestone_stairs", chaosRL("cracked_limestone_bricks"),
-				chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
-		this.stairsOuter("cracked_limestone_stairs", chaosRL("cracked_limestone_bricks"),
-				chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
-		this.stairs("mossy_limestone_stairs", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"),
-				chaosRL("mossy_limestone_bricks"));
-		this.stairsInner("mossy_limestone_stairs", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"),
-				chaosRL("mossy_limestone_bricks"));
-		this.stairsOuter("mossy_limestone_stairs", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"),
-				chaosRL("mossy_limestone_bricks"));
-		this.stairs("polished_limestone_stairs", chaosRL("polished_limestone_block"),
-				chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
-		this.stairsInner("polished_limestone_stairs", chaosRL("polished_limestone_block"),
-				chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
-		this.stairsOuter("polished_limestone_stairs", chaosRL("polished_limestone_block"),
-				chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
+		this.slabTop("limestone_slab", chaosRL("limestone_block"), chaosRL("limestone_block"), chaosRL("limestone_block"));
+		this.slab("limestone_bricks_slab", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"), chaosRL("limestone_bricks"));
+		this.slabTop("limestone_bricks_slab", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"), chaosRL("limestone_bricks"));
+		this.slab("chiseled_limestone_slab", chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
+		this.slabTop("chiseled_limestone_slab", chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
+		this.slab("cracked_limestone_slab", chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
+		this.slabTop("cracked_limestone_slab", chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
+		this.slab("mossy_limestone_slab", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"));
+		this.slabTop("mossy_limestone_slab", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"));
+		this.slab("polished_limestone_slab", chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
+		this.slabTop("polished_limestone_slab", chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
+		this.stairs("limestone_stairs", chaosRL("limestone_block"), chaosRL("limestone_block"), chaosRL("limestone_block"));
+		this.stairsInner("limestone_stairs", chaosRL("limestone_block"), chaosRL("limestone_block"), chaosRL("limestone_block"));
+		this.stairsOuter("limestone_stairs", chaosRL("limestone_block"), chaosRL("limestone_block"), chaosRL("limestone_block"));
+		this.stairs("limestone_brick_stairs", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"), chaosRL("limestone_bricks"));
+		this.stairsInner("limestone_brick_stairs", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"), chaosRL("limestone_bricks"));
+		this.stairsOuter("limestone_brick_stairs", chaosRL("limestone_bricks"), chaosRL("limestone_bricks"), chaosRL("limestone_bricks"));
+		this.stairs("chiseled_limestone_stairs", chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
+		this.stairsInner("chiseled_limestone_stairs", chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
+		this.stairsOuter("chiseled_limestone_stairs", chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
+		this.stairs("cracked_limestone_stairs", chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
+		this.stairsInner("cracked_limestone_stairs", chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
+		this.stairsOuter("cracked_limestone_stairs", chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
+		this.stairs("mossy_limestone_stairs", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"));
+		this.stairsInner("mossy_limestone_stairs", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"));
+		this.stairsOuter("mossy_limestone_stairs", chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"));
+		this.stairs("polished_limestone_stairs", chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
+		this.stairsInner("polished_limestone_stairs", chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
+		this.stairsOuter("polished_limestone_stairs", chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
 		this.wallPost("limestone_wall", chaosRL("limestone_block"));
 		this.wallInventory("limestone_wall_inventory", chaosRL("limestone_block"));
 		this.wallSide("limestone_wall", chaosRL("limestone_block"));
@@ -297,10 +236,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.stairsInner("robo_stairs_l", chaosRL("robo_block_l"), chaosRL("robo_block_l"), chaosRL("robo_block_l"));
 		this.stairsOuter("robo_stairs_l", chaosRL("robo_block_l"), chaosRL("robo_block_l"), chaosRL("robo_block_l"));
 		this.stairs("robo_stairs_x", chaosRL("robo_block_x"), chaosRL("robo_block_top"), chaosRL("robo_block_top"));
-		this.stairsInner("robo_stairs_x", chaosRL("robo_block_x"), chaosRL("robo_block_top"),
-				chaosRL("robo_block_top"));
-		this.stairsOuter("robo_stairs_x", chaosRL("robo_block_x"), chaosRL("robo_block_top"),
-				chaosRL("robo_block_top"));
+		this.stairsInner("robo_stairs_x", chaosRL("robo_block_x"), chaosRL("robo_block_top"), chaosRL("robo_block_top"));
+		this.stairsOuter("robo_stairs_x", chaosRL("robo_block_x"), chaosRL("robo_block_top"), chaosRL("robo_block_top"));
 		this.wallPost("robo_wall_l", chaosRL("robo_block_l"));
 		this.wallInventory("robo_wall_l_inventory", chaosRL("robo_block_l"));
 		this.wallSide("robo_wall_l", chaosRL("robo_block_l"));
@@ -328,176 +265,91 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("terracotta_bricks", chaosRL("terracotta_bricks"));
 		this.cubeAll("white_terracotta_bricks", chaosRL("white_terracotta_bricks"));
 		this.cubeAll("yellow_terracotta_bricks", chaosRL("yellow_terracotta_bricks"));
-		this.slab("black_terracotta_brick_slab", chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"),
-				chaosRL("black_terracotta_bricks"));
-		this.slabTop("black_terracotta_brick_slab", chaosRL("black_terracotta_bricks"),
-				chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
-		this.slab("blue_terracotta_brick_slab", chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"),
-				chaosRL("blue_terracotta_bricks"));
-		this.slabTop("blue_terracotta_brick_slab", chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"),
-				chaosRL("blue_terracotta_bricks"));
-		this.slab("brown_terracotta_brick_slab", chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"),
-				chaosRL("brown_terracotta_bricks"));
-		this.slabTop("brown_terracotta_brick_slab", chaosRL("brown_terracotta_bricks"),
-				chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
-		this.slab("cyan_terracotta_brick_slab", chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"),
-				chaosRL("cyan_terracotta_bricks"));
-		this.slabTop("cyan_terracotta_brick_slab", chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"),
-				chaosRL("cyan_terracotta_bricks"));
-		this.slab("gray_terracotta_brick_slab", chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"),
-				chaosRL("gray_terracotta_bricks"));
-		this.slabTop("gray_terracotta_brick_slab", chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"),
-				chaosRL("gray_terracotta_bricks"));
-		this.slab("green_terracotta_brick_slab", chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"),
-				chaosRL("green_terracotta_bricks"));
-		this.slabTop("green_terracotta_brick_slab", chaosRL("green_terracotta_bricks"),
-				chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
-		this.slab("light_blue_terracotta_brick_slab", chaosRL("light_blue_terracotta_bricks"),
-				chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
-		this.slabTop("light_blue_terracotta_brick_slab", chaosRL("light_blue_terracotta_bricks"),
-				chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
-		this.slab("light_gray_terracotta_brick_slab", chaosRL("light_gray_terracotta_bricks"),
-				chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
-		this.slabTop("light_gray_terracotta_brick_slab", chaosRL("light_gray_terracotta_bricks"),
-				chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
-		this.slab("lime_terracotta_brick_slab", chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"),
-				chaosRL("lime_terracotta_bricks"));
-		this.slabTop("lime_terracotta_brick_slab", chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"),
-				chaosRL("lime_terracotta_bricks"));
-		this.slab("magenta_terracotta_brick_slab", chaosRL("magenta_terracotta_bricks"),
-				chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
-		this.slabTop("magenta_terracotta_brick_slab", chaosRL("magenta_terracotta_bricks"),
-				chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
-		this.slab("orange_terracotta_brick_slab", chaosRL("orange_terracotta_bricks"),
-				chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
-		this.slabTop("orange_terracotta_brick_slab", chaosRL("orange_terracotta_bricks"),
-				chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
-		this.slab("pink_terracotta_brick_slab", chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"),
-				chaosRL("pink_terracotta_bricks"));
-		this.slabTop("pink_terracotta_brick_slab", chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"),
-				chaosRL("pink_terracotta_bricks"));
-		this.slab("purple_terracotta_brick_slab", chaosRL("purple_terracotta_bricks"),
-				chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
-		this.slabTop("purple_terracotta_brick_slab", chaosRL("purple_terracotta_bricks"),
-				chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
-		this.slab("red_terracotta_brick_slab", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"),
-				chaosRL("red_terracotta_bricks"));
-		this.slabTop("red_terracotta_brick_slab", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"),
-				chaosRL("red_terracotta_bricks"));
-		this.slab("terracotta_brick_slab", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"),
-				chaosRL("terracotta_bricks"));
-		this.slabTop("terracotta_brick_slab", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"),
-				chaosRL("terracotta_bricks"));
-		this.slab("white_terracotta_brick_slab", chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"),
-				chaosRL("white_terracotta_bricks"));
-		this.slabTop("white_terracotta_brick_slab", chaosRL("white_terracotta_bricks"),
-				chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
-		this.slab("yellow_terracotta_brick_slab", chaosRL("yellow_terracotta_bricks"),
-				chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
-		this.slabTop("yellow_terracotta_brick_slab", chaosRL("yellow_terracotta_bricks"),
-				chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
-		this.stairs("black_terracotta_brick_stairs", chaosRL("black_terracotta_bricks"),
-				chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
-		this.stairsInner("black_terracotta_brick_stairs", chaosRL("black_terracotta_bricks"),
-				chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
-		this.stairsOuter("black_terracotta_brick_stairs", chaosRL("black_terracotta_bricks"),
-				chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
-		this.stairs("blue_terracotta_brick_stairs", chaosRL("blue_terracotta_bricks"),
-				chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
-		this.stairsInner("blue_terracotta_brick_stairs", chaosRL("blue_terracotta_bricks"),
-				chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
-		this.stairsOuter("blue_terracotta_brick_stairs", chaosRL("blue_terracotta_bricks"),
-				chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
-		this.stairs("brown_terracotta_brick_stairs", chaosRL("brown_terracotta_bricks"),
-				chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
-		this.stairsInner("brown_terracotta_brick_stairs", chaosRL("brown_terracotta_bricks"),
-				chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
-		this.stairsOuter("brown_terracotta_brick_stairs", chaosRL("brown_terracotta_bricks"),
-				chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
-		this.stairs("cyan_terracotta_brick_stairs", chaosRL("cyan_terracotta_bricks"),
-				chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
-		this.stairsInner("cyan_terracotta_brick_stairs", chaosRL("cyan_terracotta_bricks"),
-				chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
-		this.stairsOuter("cyan_terracotta_brick_stairs", chaosRL("cyan_terracotta_bricks"),
-				chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
-		this.stairs("gray_terracotta_brick_stairs", chaosRL("gray_terracotta_bricks"),
-				chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
-		this.stairsInner("gray_terracotta_brick_stairs", chaosRL("gray_terracotta_bricks"),
-				chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
-		this.stairsOuter("gray_terracotta_brick_stairs", chaosRL("gray_terracotta_bricks"),
-				chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
-		this.stairs("green_terracotta_brick_stairs", chaosRL("green_terracotta_bricks"),
-				chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
-		this.stairsInner("green_terracotta_brick_stairs", chaosRL("green_terracotta_bricks"),
-				chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
-		this.stairsOuter("green_terracotta_brick_stairs", chaosRL("green_terracotta_bricks"),
-				chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
-		this.stairs("light_blue_terracotta_brick_stairs", chaosRL("light_blue_terracotta_bricks"),
-				chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
-		this.stairsInner("light_blue_terracotta_brick_stairs", chaosRL("light_blue_terracotta_bricks"),
-				chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
-		this.stairsOuter("light_blue_terracotta_brick_stairs", chaosRL("light_blue_terracotta_bricks"),
-				chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
-		this.stairs("light_gray_terracotta_brick_stairs", chaosRL("light_gray_terracotta_bricks"),
-				chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
-		this.stairsInner("light_gray_terracotta_brick_stairs", chaosRL("light_gray_terracotta_bricks"),
-				chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
-		this.stairsOuter("light_gray_terracotta_brick_stairs", chaosRL("light_gray_terracotta_bricks"),
-				chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
-		this.stairs("lime_terracotta_brick_stairs", chaosRL("lime_terracotta_bricks"),
-				chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
-		this.stairsInner("lime_terracotta_brick_stairs", chaosRL("lime_terracotta_bricks"),
-				chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
-		this.stairsOuter("lime_terracotta_brick_stairs", chaosRL("lime_terracotta_bricks"),
-				chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
-		this.stairs("magenta_terracotta_brick_stairs", chaosRL("magenta_terracotta_bricks"),
-				chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
-		this.stairsInner("magenta_terracotta_brick_stairs", chaosRL("magenta_terracotta_bricks"),
-				chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
-		this.stairsOuter("magenta_terracotta_brick_stairs", chaosRL("magenta_terracotta_bricks"),
-				chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
-		this.stairs("orange_terracotta_brick_stairs", chaosRL("orange_terracotta_bricks"),
-				chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
-		this.stairsInner("orange_terracotta_brick_stairs", chaosRL("orange_terracotta_bricks"),
-				chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
-		this.stairsOuter("orange_terracotta_brick_stairs", chaosRL("orange_terracotta_bricks"),
-				chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
-		this.stairs("pink_terracotta_brick_stairs", chaosRL("pink_terracotta_bricks"),
-				chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
-		this.stairsInner("pink_terracotta_brick_stairs", chaosRL("pink_terracotta_bricks"),
-				chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
-		this.stairsOuter("pink_terracotta_brick_stairs", chaosRL("pink_terracotta_bricks"),
-				chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
-		this.stairs("purple_terracotta_brick_stairs", chaosRL("purple_terracotta_bricks"),
-				chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
-		this.stairsInner("purple_terracotta_brick_stairs", chaosRL("purple_terracotta_bricks"),
-				chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
-		this.stairsOuter("purple_terracotta_brick_stairs", chaosRL("purple_terracotta_bricks"),
-				chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
-		this.stairs("red_terracotta_brick_stairs", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"),
-				chaosRL("red_terracotta_bricks"));
-		this.stairsInner("red_terracotta_brick_stairs", chaosRL("red_terracotta_bricks"),
-				chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
-		this.stairsOuter("red_terracotta_brick_stairs", chaosRL("red_terracotta_bricks"),
-				chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
-		this.stairs("terracotta_brick_stairs", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"),
-				chaosRL("terracotta_bricks"));
-		this.stairsInner("terracotta_brick_stairs", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"),
-				chaosRL("terracotta_bricks"));
-		this.stairsOuter("terracotta_brick_stairs", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"),
-				chaosRL("terracotta_bricks"));
-		this.stairs("white_terracotta_brick_stairs", chaosRL("white_terracotta_bricks"),
-				chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
-		this.stairsInner("white_terracotta_brick_stairs", chaosRL("white_terracotta_bricks"),
-				chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
-		this.stairsOuter("white_terracotta_brick_stairs", chaosRL("white_terracotta_bricks"),
-				chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
-		this.stairs("yellow_terracotta_brick_stairs", chaosRL("yellow_terracotta_bricks"),
-				chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
-		this.stairsInner("yellow_terracotta_brick_stairs", chaosRL("yellow_terracotta_bricks"),
-				chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
-		this.stairsOuter("yellow_terracotta_brick_stairs", chaosRL("yellow_terracotta_bricks"),
-				chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
+		this.slab("black_terracotta_brick_slab", chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
+		this.slabTop("black_terracotta_brick_slab", chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
+		this.slab("blue_terracotta_brick_slab", chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
+		this.slabTop("blue_terracotta_brick_slab", chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
+		this.slab("brown_terracotta_brick_slab", chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
+		this.slabTop("brown_terracotta_brick_slab", chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
+		this.slab("cyan_terracotta_brick_slab", chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
+		this.slabTop("cyan_terracotta_brick_slab", chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
+		this.slab("gray_terracotta_brick_slab", chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
+		this.slabTop("gray_terracotta_brick_slab", chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
+		this.slab("green_terracotta_brick_slab", chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
+		this.slabTop("green_terracotta_brick_slab", chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
+		this.slab("light_blue_terracotta_brick_slab", chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
+		this.slabTop("light_blue_terracotta_brick_slab", chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
+		this.slab("light_gray_terracotta_brick_slab", chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
+		this.slabTop("light_gray_terracotta_brick_slab", chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
+		this.slab("lime_terracotta_brick_slab", chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
+		this.slabTop("lime_terracotta_brick_slab", chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
+		this.slab("magenta_terracotta_brick_slab", chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
+		this.slabTop("magenta_terracotta_brick_slab", chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
+		this.slab("orange_terracotta_brick_slab", chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
+		this.slabTop("orange_terracotta_brick_slab", chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
+		this.slab("pink_terracotta_brick_slab", chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
+		this.slabTop("pink_terracotta_brick_slab", chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
+		this.slab("purple_terracotta_brick_slab", chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
+		this.slabTop("purple_terracotta_brick_slab", chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
+		this.slab("red_terracotta_brick_slab", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
+		this.slabTop("red_terracotta_brick_slab", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
+		this.slab("terracotta_brick_slab", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"));
+		this.slabTop("terracotta_brick_slab", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"));
+		this.slab("white_terracotta_brick_slab", chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
+		this.slabTop("white_terracotta_brick_slab", chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
+		this.slab("yellow_terracotta_brick_slab", chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
+		this.slabTop("yellow_terracotta_brick_slab", chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
+		this.stairs("black_terracotta_brick_stairs", chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
+		this.stairsInner("black_terracotta_brick_stairs", chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
+		this.stairsOuter("black_terracotta_brick_stairs", chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
+		this.stairs("blue_terracotta_brick_stairs", chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
+		this.stairsInner("blue_terracotta_brick_stairs", chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
+		this.stairsOuter("blue_terracotta_brick_stairs", chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
+		this.stairs("brown_terracotta_brick_stairs", chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
+		this.stairsInner("brown_terracotta_brick_stairs", chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
+		this.stairsOuter("brown_terracotta_brick_stairs", chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
+		this.stairs("cyan_terracotta_brick_stairs", chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
+		this.stairsInner("cyan_terracotta_brick_stairs", chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
+		this.stairsOuter("cyan_terracotta_brick_stairs", chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
+		this.stairs("gray_terracotta_brick_stairs", chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
+		this.stairsInner("gray_terracotta_brick_stairs", chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
+		this.stairsOuter("gray_terracotta_brick_stairs", chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
+		this.stairs("green_terracotta_brick_stairs", chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
+		this.stairsInner("green_terracotta_brick_stairs", chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
+		this.stairsOuter("green_terracotta_brick_stairs", chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
+		this.stairs("light_blue_terracotta_brick_stairs", chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
+		this.stairsInner("light_blue_terracotta_brick_stairs", chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
+		this.stairsOuter("light_blue_terracotta_brick_stairs", chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
+		this.stairs("light_gray_terracotta_brick_stairs", chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
+		this.stairsInner("light_gray_terracotta_brick_stairs", chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
+		this.stairsOuter("light_gray_terracotta_brick_stairs", chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
+		this.stairs("lime_terracotta_brick_stairs", chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
+		this.stairsInner("lime_terracotta_brick_stairs", chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
+		this.stairsOuter("lime_terracotta_brick_stairs", chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
+		this.stairs("magenta_terracotta_brick_stairs", chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
+		this.stairsInner("magenta_terracotta_brick_stairs", chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
+		this.stairsOuter("magenta_terracotta_brick_stairs", chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
+		this.stairs("orange_terracotta_brick_stairs", chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
+		this.stairsInner("orange_terracotta_brick_stairs", chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
+		this.stairsOuter("orange_terracotta_brick_stairs", chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
+		this.stairs("pink_terracotta_brick_stairs", chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
+		this.stairsInner("pink_terracotta_brick_stairs", chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
+		this.stairsOuter("pink_terracotta_brick_stairs", chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
+		this.stairs("purple_terracotta_brick_stairs", chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
+		this.stairsInner("purple_terracotta_brick_stairs", chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
+		this.stairsOuter("purple_terracotta_brick_stairs", chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
+		this.stairs("red_terracotta_brick_stairs", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
+		this.stairsInner("red_terracotta_brick_stairs", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
+		this.stairsOuter("red_terracotta_brick_stairs", chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
+		this.stairs("terracotta_brick_stairs", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"));
+		this.stairsInner("terracotta_brick_stairs", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"));
+		this.stairsOuter("terracotta_brick_stairs", chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"));
+		this.stairs("white_terracotta_brick_stairs", chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
+		this.stairsInner("white_terracotta_brick_stairs", chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
+		this.stairsOuter("white_terracotta_brick_stairs", chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
+		this.stairs("yellow_terracotta_brick_stairs", chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
+		this.stairsInner("yellow_terracotta_brick_stairs", chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
+		this.stairsOuter("yellow_terracotta_brick_stairs", chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
 		this.wallPost("black_terracotta_brick_wall", chaosRL("black_terracotta_bricks"));
 		this.wallInventory("black_terracotta_brick_wall_inventory", chaosRL("black_terracotta_bricks"));
 		this.wallSide("black_terracotta_brick_wall", chaosRL("black_terracotta_bricks"));
@@ -584,176 +436,91 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("cracked_terracotta_bricks", chaosRL("cracked_terracotta_bricks"));
 		this.cubeAll("cracked_white_terracotta_bricks", chaosRL("cracked_white_terracotta_bricks"));
 		this.cubeAll("cracked_yellow_terracotta_bricks", chaosRL("cracked_yellow_terracotta_bricks"));
-		this.slab("cracked_black_terracotta_brick_slab", chaosRL("cracked_black_terracotta_bricks"),
-				chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
-		this.slabTop("cracked_black_terracotta_brick_slab", chaosRL("cracked_black_terracotta_bricks"),
-				chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
-		this.slab("cracked_blue_terracotta_brick_slab", chaosRL("cracked_blue_terracotta_bricks"),
-				chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
-		this.slabTop("cracked_blue_terracotta_brick_slab", chaosRL("cracked_blue_terracotta_bricks"),
-				chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
-		this.slab("cracked_brown_terracotta_brick_slab", chaosRL("cracked_brown_terracotta_bricks"),
-				chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
-		this.slabTop("cracked_brown_terracotta_brick_slab", chaosRL("cracked_brown_terracotta_bricks"),
-				chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
-		this.slab("cracked_cyan_terracotta_brick_slab", chaosRL("cracked_cyan_terracotta_bricks"),
-				chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
-		this.slabTop("cracked_cyan_terracotta_brick_slab", chaosRL("cracked_cyan_terracotta_bricks"),
-				chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
-		this.slab("cracked_gray_terracotta_brick_slab", chaosRL("cracked_gray_terracotta_bricks"),
-				chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
-		this.slabTop("cracked_gray_terracotta_brick_slab", chaosRL("cracked_gray_terracotta_bricks"),
-				chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
-		this.slab("cracked_green_terracotta_brick_slab", chaosRL("cracked_green_terracotta_bricks"),
-				chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
-		this.slabTop("cracked_green_terracotta_brick_slab", chaosRL("cracked_green_terracotta_bricks"),
-				chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
-		this.slab("cracked_light_blue_terracotta_brick_slab", chaosRL("cracked_light_blue_terracotta_bricks"),
-				chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.slabTop("cracked_light_blue_terracotta_brick_slab", chaosRL("cracked_light_blue_terracotta_bricks"),
-				chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.slab("cracked_light_gray_terracotta_brick_slab", chaosRL("cracked_light_gray_terracotta_bricks"),
-				chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.slabTop("cracked_light_gray_terracotta_brick_slab", chaosRL("cracked_light_gray_terracotta_bricks"),
-				chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.slab("cracked_lime_terracotta_brick_slab", chaosRL("cracked_lime_terracotta_bricks"),
-				chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
-		this.slabTop("cracked_lime_terracotta_brick_slab", chaosRL("cracked_lime_terracotta_bricks"),
-				chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
-		this.slab("cracked_magenta_terracotta_brick_slab", chaosRL("cracked_magenta_terracotta_bricks"),
-				chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
-		this.slabTop("cracked_magenta_terracotta_brick_slab", chaosRL("cracked_magenta_terracotta_bricks"),
-				chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
-		this.slab("cracked_orange_terracotta_brick_slab", chaosRL("cracked_orange_terracotta_bricks"),
-				chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
-		this.slabTop("cracked_orange_terracotta_brick_slab", chaosRL("cracked_orange_terracotta_bricks"),
-				chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
-		this.slab("cracked_pink_terracotta_brick_slab", chaosRL("cracked_pink_terracotta_bricks"),
-				chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
-		this.slabTop("cracked_pink_terracotta_brick_slab", chaosRL("cracked_pink_terracotta_bricks"),
-				chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
-		this.slab("cracked_purple_terracotta_brick_slab", chaosRL("cracked_purple_terracotta_bricks"),
-				chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
-		this.slabTop("cracked_purple_terracotta_brick_slab", chaosRL("cracked_purple_terracotta_bricks"),
-				chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
-		this.slab("cracked_red_terracotta_brick_slab", chaosRL("cracked_red_terracotta_bricks"),
-				chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
-		this.slabTop("cracked_red_terracotta_brick_slab", chaosRL("cracked_red_terracotta_bricks"),
-				chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
-		this.slab("cracked_terracotta_brick_slab", chaosRL("cracked_terracotta_bricks"),
-				chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
-		this.slabTop("cracked_terracotta_brick_slab", chaosRL("cracked_terracotta_bricks"),
-				chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
-		this.slab("cracked_white_terracotta_brick_slab", chaosRL("cracked_white_terracotta_bricks"),
-				chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
-		this.slabTop("cracked_white_terracotta_brick_slab", chaosRL("cracked_white_terracotta_bricks"),
-				chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
-		this.slab("cracked_yellow_terracotta_brick_slab", chaosRL("cracked_yellow_terracotta_bricks"),
-				chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
-		this.slabTop("cracked_yellow_terracotta_brick_slab", chaosRL("cracked_yellow_terracotta_bricks"),
-				chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
-		this.stairs("cracked_black_terracotta_brick_stairs", chaosRL("cracked_black_terracotta_bricks"),
-				chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
-		this.stairsInner("cracked_black_terracotta_brick_stairs", chaosRL("cracked_black_terracotta_bricks"),
-				chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
-		this.stairsOuter("cracked_black_terracotta_brick_stairs", chaosRL("cracked_black_terracotta_bricks"),
-				chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
-		this.stairs("cracked_blue_terracotta_brick_stairs", chaosRL("cracked_blue_terracotta_bricks"),
-				chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
-		this.stairsInner("cracked_blue_terracotta_brick_stairs", chaosRL("cracked_blue_terracotta_bricks"),
-				chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
-		this.stairsOuter("cracked_blue_terracotta_brick_stairs", chaosRL("cracked_blue_terracotta_bricks"),
-				chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
-		this.stairs("cracked_brown_terracotta_brick_stairs", chaosRL("cracked_brown_terracotta_bricks"),
-				chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
-		this.stairsInner("cracked_brown_terracotta_brick_stairs", chaosRL("cracked_brown_terracotta_bricks"),
-				chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
-		this.stairsOuter("cracked_brown_terracotta_brick_stairs", chaosRL("cracked_brown_terracotta_bricks"),
-				chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
-		this.stairs("cracked_cyan_terracotta_brick_stairs", chaosRL("cracked_cyan_terracotta_bricks"),
-				chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
-		this.stairsInner("cracked_cyan_terracotta_brick_stairs", chaosRL("cracked_cyan_terracotta_bricks"),
-				chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
-		this.stairsOuter("cracked_cyan_terracotta_brick_stairs", chaosRL("cracked_cyan_terracotta_bricks"),
-				chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
-		this.stairs("cracked_gray_terracotta_brick_stairs", chaosRL("cracked_gray_terracotta_bricks"),
-				chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
-		this.stairsInner("cracked_gray_terracotta_brick_stairs", chaosRL("cracked_gray_terracotta_bricks"),
-				chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
-		this.stairsOuter("cracked_gray_terracotta_brick_stairs", chaosRL("cracked_gray_terracotta_bricks"),
-				chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
-		this.stairs("cracked_green_terracotta_brick_stairs", chaosRL("cracked_green_terracotta_bricks"),
-				chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
-		this.stairsInner("cracked_green_terracotta_brick_stairs", chaosRL("cracked_green_terracotta_bricks"),
-				chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
-		this.stairsOuter("cracked_green_terracotta_brick_stairs", chaosRL("cracked_green_terracotta_bricks"),
-				chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
-		this.stairs("cracked_light_blue_terracotta_brick_stairs", chaosRL("cracked_light_blue_terracotta_bricks"),
-				chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.stairsInner("cracked_light_blue_terracotta_brick_stairs", chaosRL("cracked_light_blue_terracotta_bricks"),
-				chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.stairsOuter("cracked_light_blue_terracotta_brick_stairs", chaosRL("cracked_light_blue_terracotta_bricks"),
-				chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.stairs("cracked_light_gray_terracotta_brick_stairs", chaosRL("cracked_light_gray_terracotta_bricks"),
-				chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.stairsInner("cracked_light_gray_terracotta_brick_stairs", chaosRL("cracked_light_gray_terracotta_bricks"),
-				chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.stairsOuter("cracked_light_gray_terracotta_brick_stairs", chaosRL("cracked_light_gray_terracotta_bricks"),
-				chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.stairs("cracked_lime_terracotta_brick_stairs", chaosRL("cracked_lime_terracotta_bricks"),
-				chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
-		this.stairsInner("cracked_lime_terracotta_brick_stairs", chaosRL("cracked_lime_terracotta_bricks"),
-				chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
-		this.stairsOuter("cracked_lime_terracotta_brick_stairs", chaosRL("cracked_lime_terracotta_bricks"),
-				chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
-		this.stairs("cracked_magenta_terracotta_brick_stairs", chaosRL("cracked_magenta_terracotta_bricks"),
-				chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
-		this.stairsInner("cracked_magenta_terracotta_brick_stairs", chaosRL("cracked_magenta_terracotta_bricks"),
-				chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
-		this.stairsOuter("cracked_magenta_terracotta_brick_stairs", chaosRL("cracked_magenta_terracotta_bricks"),
-				chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
-		this.stairs("cracked_orange_terracotta_brick_stairs", chaosRL("cracked_orange_terracotta_bricks"),
-				chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
-		this.stairsInner("cracked_orange_terracotta_brick_stairs", chaosRL("cracked_orange_terracotta_bricks"),
-				chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
-		this.stairsOuter("cracked_orange_terracotta_brick_stairs", chaosRL("cracked_orange_terracotta_bricks"),
-				chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
-		this.stairs("cracked_pink_terracotta_brick_stairs", chaosRL("cracked_pink_terracotta_bricks"),
-				chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
-		this.stairsInner("cracked_pink_terracotta_brick_stairs", chaosRL("cracked_pink_terracotta_bricks"),
-				chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
-		this.stairsOuter("cracked_pink_terracotta_brick_stairs", chaosRL("cracked_pink_terracotta_bricks"),
-				chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
-		this.stairs("cracked_purple_terracotta_brick_stairs", chaosRL("cracked_purple_terracotta_bricks"),
-				chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
-		this.stairsInner("cracked_purple_terracotta_brick_stairs", chaosRL("cracked_purple_terracotta_bricks"),
-				chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
-		this.stairsOuter("cracked_purple_terracotta_brick_stairs", chaosRL("cracked_purple_terracotta_bricks"),
-				chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
-		this.stairs("cracked_red_terracotta_brick_stairs", chaosRL("cracked_red_terracotta_bricks"),
-				chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
-		this.stairsInner("cracked_red_terracotta_brick_stairs", chaosRL("cracked_red_terracotta_bricks"),
-				chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
-		this.stairsOuter("cracked_red_terracotta_brick_stairs", chaosRL("cracked_red_terracotta_bricks"),
-				chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
-		this.stairs("cracked_terracotta_brick_stairs", chaosRL("cracked_terracotta_bricks"),
-				chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
-		this.stairsInner("cracked_terracotta_brick_stairs", chaosRL("cracked_terracotta_bricks"),
-				chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
-		this.stairsOuter("cracked_terracotta_brick_stairs", chaosRL("cracked_terracotta_bricks"),
-				chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
-		this.stairs("cracked_white_terracotta_brick_stairs", chaosRL("cracked_white_terracotta_bricks"),
-				chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
-		this.stairsInner("cracked_white_terracotta_brick_stairs", chaosRL("cracked_white_terracotta_bricks"),
-				chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
-		this.stairsOuter("cracked_white_terracotta_brick_stairs", chaosRL("cracked_white_terracotta_bricks"),
-				chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
-		this.stairs("cracked_yellow_terracotta_brick_stairs", chaosRL("cracked_yellow_terracotta_bricks"),
-				chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
-		this.stairsInner("cracked_yellow_terracotta_brick_stairs", chaosRL("cracked_yellow_terracotta_bricks"),
-				chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
-		this.stairsOuter("cracked_yellow_terracotta_brick_stairs", chaosRL("cracked_yellow_terracotta_bricks"),
-				chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
+		this.slab("cracked_black_terracotta_brick_slab", chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
+		this.slabTop("cracked_black_terracotta_brick_slab", chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
+		this.slab("cracked_blue_terracotta_brick_slab", chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
+		this.slabTop("cracked_blue_terracotta_brick_slab", chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
+		this.slab("cracked_brown_terracotta_brick_slab", chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
+		this.slabTop("cracked_brown_terracotta_brick_slab", chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
+		this.slab("cracked_cyan_terracotta_brick_slab", chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
+		this.slabTop("cracked_cyan_terracotta_brick_slab", chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
+		this.slab("cracked_gray_terracotta_brick_slab", chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
+		this.slabTop("cracked_gray_terracotta_brick_slab", chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
+		this.slab("cracked_green_terracotta_brick_slab", chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
+		this.slabTop("cracked_green_terracotta_brick_slab", chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
+		this.slab("cracked_light_blue_terracotta_brick_slab", chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.slabTop("cracked_light_blue_terracotta_brick_slab", chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.slab("cracked_light_gray_terracotta_brick_slab", chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.slabTop("cracked_light_gray_terracotta_brick_slab", chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.slab("cracked_lime_terracotta_brick_slab", chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
+		this.slabTop("cracked_lime_terracotta_brick_slab", chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
+		this.slab("cracked_magenta_terracotta_brick_slab", chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.slabTop("cracked_magenta_terracotta_brick_slab", chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.slab("cracked_orange_terracotta_brick_slab", chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
+		this.slabTop("cracked_orange_terracotta_brick_slab", chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
+		this.slab("cracked_pink_terracotta_brick_slab", chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
+		this.slabTop("cracked_pink_terracotta_brick_slab", chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
+		this.slab("cracked_purple_terracotta_brick_slab", chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
+		this.slabTop("cracked_purple_terracotta_brick_slab", chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
+		this.slab("cracked_red_terracotta_brick_slab", chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
+		this.slabTop("cracked_red_terracotta_brick_slab", chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
+		this.slab("cracked_terracotta_brick_slab", chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
+		this.slabTop("cracked_terracotta_brick_slab", chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
+		this.slab("cracked_white_terracotta_brick_slab", chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
+		this.slabTop("cracked_white_terracotta_brick_slab", chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
+		this.slab("cracked_yellow_terracotta_brick_slab", chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
+		this.slabTop("cracked_yellow_terracotta_brick_slab", chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
+		this.stairs("cracked_black_terracotta_brick_stairs", chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
+		this.stairsInner("cracked_black_terracotta_brick_stairs", chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
+		this.stairsOuter("cracked_black_terracotta_brick_stairs", chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
+		this.stairs("cracked_blue_terracotta_brick_stairs", chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
+		this.stairsInner("cracked_blue_terracotta_brick_stairs", chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
+		this.stairsOuter("cracked_blue_terracotta_brick_stairs", chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
+		this.stairs("cracked_brown_terracotta_brick_stairs", chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
+		this.stairsInner("cracked_brown_terracotta_brick_stairs", chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
+		this.stairsOuter("cracked_brown_terracotta_brick_stairs", chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
+		this.stairs("cracked_cyan_terracotta_brick_stairs", chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
+		this.stairsInner("cracked_cyan_terracotta_brick_stairs", chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
+		this.stairsOuter("cracked_cyan_terracotta_brick_stairs", chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
+		this.stairs("cracked_gray_terracotta_brick_stairs", chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
+		this.stairsInner("cracked_gray_terracotta_brick_stairs", chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
+		this.stairsOuter("cracked_gray_terracotta_brick_stairs", chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
+		this.stairs("cracked_green_terracotta_brick_stairs", chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
+		this.stairsInner("cracked_green_terracotta_brick_stairs", chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
+		this.stairsOuter("cracked_green_terracotta_brick_stairs", chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
+		this.stairs("cracked_light_blue_terracotta_brick_stairs", chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.stairsInner("cracked_light_blue_terracotta_brick_stairs", chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.stairsOuter("cracked_light_blue_terracotta_brick_stairs", chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.stairs("cracked_light_gray_terracotta_brick_stairs", chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.stairsInner("cracked_light_gray_terracotta_brick_stairs", chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.stairsOuter("cracked_light_gray_terracotta_brick_stairs", chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.stairs("cracked_lime_terracotta_brick_stairs", chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
+		this.stairsInner("cracked_lime_terracotta_brick_stairs", chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
+		this.stairsOuter("cracked_lime_terracotta_brick_stairs", chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
+		this.stairs("cracked_magenta_terracotta_brick_stairs", chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.stairsInner("cracked_magenta_terracotta_brick_stairs", chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.stairsOuter("cracked_magenta_terracotta_brick_stairs", chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.stairs("cracked_orange_terracotta_brick_stairs", chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
+		this.stairsInner("cracked_orange_terracotta_brick_stairs", chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
+		this.stairsOuter("cracked_orange_terracotta_brick_stairs", chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
+		this.stairs("cracked_pink_terracotta_brick_stairs", chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
+		this.stairsInner("cracked_pink_terracotta_brick_stairs", chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
+		this.stairsOuter("cracked_pink_terracotta_brick_stairs", chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
+		this.stairs("cracked_purple_terracotta_brick_stairs", chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
+		this.stairsInner("cracked_purple_terracotta_brick_stairs", chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
+		this.stairsOuter("cracked_purple_terracotta_brick_stairs", chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
+		this.stairs("cracked_red_terracotta_brick_stairs", chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
+		this.stairsInner("cracked_red_terracotta_brick_stairs", chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
+		this.stairsOuter("cracked_red_terracotta_brick_stairs", chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
+		this.stairs("cracked_terracotta_brick_stairs", chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
+		this.stairsInner("cracked_terracotta_brick_stairs", chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
+		this.stairsOuter("cracked_terracotta_brick_stairs", chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
+		this.stairs("cracked_white_terracotta_brick_stairs", chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
+		this.stairsInner("cracked_white_terracotta_brick_stairs", chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
+		this.stairsOuter("cracked_white_terracotta_brick_stairs", chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
+		this.stairs("cracked_yellow_terracotta_brick_stairs", chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
+		this.stairsInner("cracked_yellow_terracotta_brick_stairs", chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
+		this.stairsOuter("cracked_yellow_terracotta_brick_stairs", chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
 		this.wallPost("cracked_black_terracotta_brick_wall", chaosRL("cracked_black_terracotta_bricks"));
 		this.wallInventory("cracked_black_terracotta_brick_wall_inventory", chaosRL("cracked_black_terracotta_bricks"));
 		this.wallSide("cracked_black_terracotta_brick_wall", chaosRL("cracked_black_terracotta_bricks"));
@@ -779,13 +546,11 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.wallSide("cracked_green_terracotta_brick_wall", chaosRL("cracked_green_terracotta_bricks"));
 		this.wallSideTall("cracked_green_terracotta_brick_wall", chaosRL("cracked_green_terracotta_bricks"));
 		this.wallPost("cracked_light_blue_terracotta_brick_wall", chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.wallInventory("cracked_light_blue_terracotta_brick_wall_inventory",
-				chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.wallInventory("cracked_light_blue_terracotta_brick_wall_inventory", chaosRL("cracked_light_blue_terracotta_bricks"));
 		this.wallSide("cracked_light_blue_terracotta_brick_wall", chaosRL("cracked_light_blue_terracotta_bricks"));
 		this.wallSideTall("cracked_light_blue_terracotta_brick_wall", chaosRL("cracked_light_blue_terracotta_bricks"));
 		this.wallPost("cracked_light_gray_terracotta_brick_wall", chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.wallInventory("cracked_light_gray_terracotta_brick_wall_inventory",
-				chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.wallInventory("cracked_light_gray_terracotta_brick_wall_inventory", chaosRL("cracked_light_gray_terracotta_bricks"));
 		this.wallSide("cracked_light_gray_terracotta_brick_wall", chaosRL("cracked_light_gray_terracotta_bricks"));
 		this.wallSideTall("cracked_light_gray_terracotta_brick_wall", chaosRL("cracked_light_gray_terracotta_bricks"));
 		this.wallPost("cracked_lime_terracotta_brick_wall", chaosRL("cracked_lime_terracotta_bricks"));
@@ -793,13 +558,11 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.wallSide("cracked_lime_terracotta_brick_wall", chaosRL("cracked_lime_terracotta_bricks"));
 		this.wallSideTall("cracked_lime_terracotta_brick_wall", chaosRL("cracked_lime_terracotta_bricks"));
 		this.wallPost("cracked_magenta_terracotta_brick_wall", chaosRL("cracked_magenta_terracotta_bricks"));
-		this.wallInventory("cracked_magenta_terracotta_brick_wall_inventory",
-				chaosRL("cracked_magenta_terracotta_bricks"));
+		this.wallInventory("cracked_magenta_terracotta_brick_wall_inventory", chaosRL("cracked_magenta_terracotta_bricks"));
 		this.wallSide("cracked_magenta_terracotta_brick_wall", chaosRL("cracked_magenta_terracotta_bricks"));
 		this.wallSideTall("cracked_magenta_terracotta_brick_wall", chaosRL("cracked_magenta_terracotta_bricks"));
 		this.wallPost("cracked_orange_terracotta_brick_wall", chaosRL("cracked_orange_terracotta_bricks"));
-		this.wallInventory("cracked_orange_terracotta_brick_wall_inventory",
-				chaosRL("cracked_orange_terracotta_bricks"));
+		this.wallInventory("cracked_orange_terracotta_brick_wall_inventory", chaosRL("cracked_orange_terracotta_bricks"));
 		this.wallSide("cracked_orange_terracotta_brick_wall", chaosRL("cracked_orange_terracotta_bricks"));
 		this.wallSideTall("cracked_orange_terracotta_brick_wall", chaosRL("cracked_orange_terracotta_bricks"));
 		this.wallPost("cracked_pink_terracotta_brick_wall", chaosRL("cracked_pink_terracotta_bricks"));
@@ -807,8 +570,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.wallSide("cracked_pink_terracotta_brick_wall", chaosRL("cracked_pink_terracotta_bricks"));
 		this.wallSideTall("cracked_pink_terracotta_brick_wall", chaosRL("cracked_pink_terracotta_bricks"));
 		this.wallPost("cracked_purple_terracotta_brick_wall", chaosRL("cracked_purple_terracotta_bricks"));
-		this.wallInventory("cracked_purple_terracotta_brick_wall_inventory",
-				chaosRL("cracked_purple_terracotta_bricks"));
+		this.wallInventory("cracked_purple_terracotta_brick_wall_inventory", chaosRL("cracked_purple_terracotta_bricks"));
 		this.wallSide("cracked_purple_terracotta_brick_wall", chaosRL("cracked_purple_terracotta_bricks"));
 		this.wallSideTall("cracked_purple_terracotta_brick_wall", chaosRL("cracked_purple_terracotta_bricks"));
 		this.wallPost("cracked_red_terracotta_brick_wall", chaosRL("cracked_red_terracotta_bricks"));
@@ -824,8 +586,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.wallSide("cracked_white_terracotta_brick_wall", chaosRL("cracked_white_terracotta_bricks"));
 		this.wallSideTall("cracked_white_terracotta_brick_wall", chaosRL("cracked_white_terracotta_bricks"));
 		this.wallPost("cracked_yellow_terracotta_brick_wall", chaosRL("cracked_yellow_terracotta_bricks"));
-		this.wallInventory("cracked_yellow_terracotta_brick_wall_inventory",
-				chaosRL("cracked_yellow_terracotta_bricks"));
+		this.wallInventory("cracked_yellow_terracotta_brick_wall_inventory", chaosRL("cracked_yellow_terracotta_bricks"));
 		this.wallSide("cracked_yellow_terracotta_brick_wall", chaosRL("cracked_yellow_terracotta_bricks"));
 		this.wallSideTall("cracked_yellow_terracotta_brick_wall", chaosRL("cracked_yellow_terracotta_bricks"));
 
@@ -871,7 +632,6 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_giant", chaosRL("fossilised_giant"));
 		this.cubeAll("fossilised_guardian", chaosRL("fossilised_guardian"));
 		this.cubeAll("fossilised_horse", chaosRL("fossilised_horse"));
-		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
 		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
 		this.cubeAll("fossilised_illusioner", chaosRL("fossilised_illusioner"));
 		this.cubeAll("fossilised_iron_golem", chaosRL("fossilised_iron_golem"));
@@ -932,8 +692,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumn("apple_wood", chaosRL("apple_log"), chaosRL("apple_log"));
 		this.cubeColumnHorizontal("apple_wood", chaosRL("apple_log"), chaosRL("apple_log"));
 		this.cubeColumn("stripped_apple_log", chaosRL("stripped_apple_log"), chaosRL("stripped_apple_log_top"));
-		this.cubeColumnHorizontal("stripped_apple_log", chaosRL("stripped_apple_log"),
-				chaosRL("stripped_apple_log_top"));
+		this.cubeColumnHorizontal("stripped_apple_log", chaosRL("stripped_apple_log"), chaosRL("stripped_apple_log_top"));
 		this.cubeColumn("stripped_apple_wood", chaosRL("stripped_apple_log"), chaosRL("stripped_apple_log"));
 		this.cubeColumnHorizontal("stripped_apple_wood", chaosRL("stripped_apple_log"), chaosRL("stripped_apple_log"));
 		this.cubeColumn("cherry_log", chaosRL("cherry_log"), chaosRL("cherry_log_top"));
@@ -941,58 +700,45 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumn("cherry_wood", chaosRL("cherry_log"), chaosRL("cherry_log"));
 		this.cubeColumnHorizontal("cherry_wood", chaosRL("cherry_log"), chaosRL("cherry_log"));
 		this.cubeColumn("stripped_cherry_log", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log_top"));
-		this.cubeColumnHorizontal("stripped_cherry_log", chaosRL("stripped_cherry_log"),
-				chaosRL("stripped_cherry_log_top"));
+		this.cubeColumnHorizontal("stripped_cherry_log", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log_top"));
 		this.cubeColumn("stripped_cherry_wood", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log"));
-		this.cubeColumnHorizontal("stripped_cherry_wood", chaosRL("stripped_cherry_log"),
-				chaosRL("stripped_cherry_log"));
+		this.cubeColumnHorizontal("stripped_cherry_wood", chaosRL("stripped_cherry_log"), chaosRL("stripped_cherry_log"));
 		this.cubeColumn("ginkgo_log", chaosRL("ginkgo_log"), chaosRL("ginkgo_log_top"));
 		this.cubeColumnHorizontal("ginkgo_log", chaosRL("ginkgo_log"), chaosRL("ginkgo_log_top"));
 		this.cubeColumn("ginkgo_wood", chaosRL("ginkgo_log"), chaosRL("ginkgo_log"));
 		this.cubeColumnHorizontal("ginkgo_wood", chaosRL("ginkgo_log"), chaosRL("ginkgo_log"));
 		this.cubeColumn("stripped_ginkgo_log", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log_top"));
-		this.cubeColumnHorizontal("stripped_ginkgo_log", chaosRL("stripped_ginkgo_log"),
-				chaosRL("stripped_ginkgo_log_top"));
+		this.cubeColumnHorizontal("stripped_ginkgo_log", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log_top"));
 		this.cubeColumn("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log"));
-		this.cubeColumnHorizontal("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"),
-				chaosRL("stripped_ginkgo_log"));
+		this.cubeColumnHorizontal("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log"));
 		this.cubeColumn("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumnHorizontal("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumn("peach_wood", chaosRL("peach_log"), chaosRL("peach_log"));
 		this.cubeColumnHorizontal("peach_wood", chaosRL("peach_log"), chaosRL("peach_log"));
 		this.cubeColumn("stripped_peach_log", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log_top"));
-		this.cubeColumnHorizontal("stripped_peach_log", chaosRL("stripped_peach_log"),
-				chaosRL("stripped_peach_log_top"));
+		this.cubeColumnHorizontal("stripped_peach_log", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log_top"));
 		this.cubeColumn("stripped_peach_wood", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log"));
 		this.cubeColumnHorizontal("stripped_peach_wood", chaosRL("stripped_peach_log"), chaosRL("stripped_peach_log"));
 		this.cubeColumn("duplication_log", chaosRL("duplication_log"), chaosRL("duplication_log_top"));
 		this.cubeColumnHorizontal("duplication_log", chaosRL("duplication_log"), chaosRL("duplication_log_top"));
 		this.cubeColumn("duplication_wood", chaosRL("duplication_log"), chaosRL("duplication_log"));
 		this.cubeColumnHorizontal("duplication_wood", chaosRL("duplication_log"), chaosRL("duplication_log"));
-		this.cubeColumn("stripped_duplication_log", chaosRL("stripped_duplication_log"),
-				chaosRL("stripped_duplication_log_top"));
-		this.cubeColumnHorizontal("stripped_duplication_log", chaosRL("stripped_duplication_log"),
-				chaosRL("stripped_duplication_log_top"));
-		this.cubeColumn("stripped_duplication_wood", chaosRL("stripped_duplication_log"),
-				chaosRL("stripped_duplication_log"));
-		this.cubeColumnHorizontal("stripped_duplication_wood", chaosRL("stripped_duplication_log"),
-				chaosRL("stripped_duplication_log"));
+		this.cubeColumn("stripped_duplication_log", chaosRL("stripped_duplication_log"), chaosRL("stripped_duplication_log_top"));
+		this.cubeColumnHorizontal("stripped_duplication_log", chaosRL("stripped_duplication_log"), chaosRL("stripped_duplication_log_top"));
+		this.cubeColumn("stripped_duplication_wood", chaosRL("stripped_duplication_log"), chaosRL("stripped_duplication_log"));
+		this.cubeColumnHorizontal("stripped_duplication_wood", chaosRL("stripped_duplication_log"), chaosRL("stripped_duplication_log"));
 		this.cubeColumn("dead_duplication_log", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log_top"));
-		this.cubeColumnHorizontal("dead_duplication_log", chaosRL("dead_duplication_log"),
-				chaosRL("dead_duplication_log_top"));
+		this.cubeColumnHorizontal("dead_duplication_log", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log_top"));
 		this.cubeColumn("dead_duplication_wood", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log"));
-		this.cubeColumnHorizontal("dead_duplication_wood", chaosRL("dead_duplication_log"),
-				chaosRL("dead_duplication_log"));
+		this.cubeColumnHorizontal("dead_duplication_wood", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log"));
 		this.cubeColumn("skywood_log", chaosRL("skywood_log"), chaosRL("skywood_log_top"));
 		this.cubeColumnHorizontal("skywood_log", chaosRL("skywood_log"), chaosRL("skywood_log_top"));
 		this.cubeColumn("skywood_wood", chaosRL("skywood_log"), chaosRL("skywood_log"));
 		this.cubeColumnHorizontal("skywood_wood", chaosRL("skywood_log"), chaosRL("skywood_log"));
 		this.cubeColumn("stripped_skywood_log", chaosRL("stripped_skywood_log"), chaosRL("stripped_skywood_log_top"));
-		this.cubeColumnHorizontal("stripped_skywood_log", chaosRL("stripped_skywood_log"),
-				chaosRL("stripped_skywood_log_top"));
+		this.cubeColumnHorizontal("stripped_skywood_log", chaosRL("stripped_skywood_log"), chaosRL("stripped_skywood_log_top"));
 		this.cubeColumn("stripped_skywood_wood", chaosRL("stripped_skywood_log"), chaosRL("stripped_skywood_log"));
-		this.cubeColumnHorizontal("stripped_skywood_wood", chaosRL("stripped_skywood_log"),
-				chaosRL("stripped_skywood_log"));
+		this.cubeColumnHorizontal("stripped_skywood_wood", chaosRL("stripped_skywood_log"), chaosRL("stripped_skywood_log"));
 		this.cubeColumn("crystal_log", chaosRL("crystal_log"), chaosRL("crystal_log_top"));
 		this.cubeColumnHorizontal("crystal_log", chaosRL("crystal_log"), chaosRL("crystal_log_top"));
 		this.cubeColumn("crystal_wood", chaosRL("crystal_log"), chaosRL("crystal_log"));
@@ -1046,22 +792,15 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.stairs("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsInner("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsOuter("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
-		this.stairs("duplication_stairs", chaosRL("duplication_planks"), chaosRL("duplication_planks"),
-				chaosRL("duplication_planks"));
-		this.stairsInner("duplication_stairs", chaosRL("duplication_planks"), chaosRL("duplication_planks"),
-				chaosRL("duplication_planks"));
-		this.stairsOuter("duplication_stairs", chaosRL("duplication_planks"), chaosRL("duplication_planks"),
-				chaosRL("duplication_planks"));
+		this.stairs("duplication_stairs", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
+		this.stairsInner("duplication_stairs", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
+		this.stairsOuter("duplication_stairs", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
 		this.stairs("skywood_stairs", chaosRL("skywood_planks"), chaosRL("skywood_planks"), chaosRL("skywood_planks"));
-		this.stairsInner("skywood_stairs", chaosRL("skywood_planks"), chaosRL("skywood_planks"),
-				chaosRL("skywood_planks"));
-		this.stairsOuter("skywood_stairs", chaosRL("skywood_planks"), chaosRL("skywood_planks"),
-				chaosRL("skywood_planks"));
+		this.stairsInner("skywood_stairs", chaosRL("skywood_planks"), chaosRL("skywood_planks"), chaosRL("skywood_planks"));
+		this.stairsOuter("skywood_stairs", chaosRL("skywood_planks"), chaosRL("skywood_planks"), chaosRL("skywood_planks"));
 		this.stairs("crystal_stairs", chaosRL("crystal_planks"), chaosRL("crystal_planks"), chaosRL("crystal_planks"));
-		this.stairsInner("crystal_stairs", chaosRL("crystal_planks"), chaosRL("crystal_planks"),
-				chaosRL("crystal_planks"));
-		this.stairsOuter("crystal_stairs", chaosRL("crystal_planks"), chaosRL("crystal_planks"),
-				chaosRL("crystal_planks"));
+		this.stairsInner("crystal_stairs", chaosRL("crystal_planks"), chaosRL("crystal_planks"), chaosRL("crystal_planks"));
+		this.stairsOuter("crystal_stairs", chaosRL("crystal_planks"), chaosRL("crystal_planks"), chaosRL("crystal_planks"));
 
 		this.slab("apple_slab", chaosRL("apple_planks"), chaosRL("apple_planks"), chaosRL("apple_planks"));
 		this.slabTop("apple_slab", chaosRL("apple_planks"), chaosRL("apple_planks"), chaosRL("apple_planks"));
@@ -1071,10 +810,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.slabTop("ginkgo_slab", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
 		this.slab("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slabTop("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
-		this.slab("duplication_slab", chaosRL("duplication_planks"), chaosRL("duplication_planks"),
-				chaosRL("duplication_planks"));
-		this.slabTop("duplication_slab", chaosRL("duplication_planks"), chaosRL("duplication_planks"),
-				chaosRL("duplication_planks"));
+		this.slab("duplication_slab", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
+		this.slabTop("duplication_slab", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
 		this.slab("skywood_slab", chaosRL("skywood_planks"), chaosRL("skywood_planks"), chaosRL("skywood_planks"));
 		this.slabTop("skywood_slab", chaosRL("skywood_planks"), chaosRL("skywood_planks"), chaosRL("skywood_planks"));
 		this.slab("crystal_slab", chaosRL("crystal_planks"), chaosRL("crystal_planks"), chaosRL("crystal_planks"));

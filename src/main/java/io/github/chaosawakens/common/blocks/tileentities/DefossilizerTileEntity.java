@@ -23,7 +23,6 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
@@ -31,8 +30,7 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 import javax.annotation.Nullable;
 
-public class DefossilizerTileEntity extends LockableTileEntity
-		implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
+public class DefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
 	static final int WORK_TIME = 2 * 20;
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
@@ -47,19 +45,19 @@ public class DefossilizerTileEntity extends LockableTileEntity
 		@Override
 		public int get(int index) {
 			switch (index) {
-			case 0:
-				return progress;
-			default:
-				return 0;
+				case 0:
+					return progress;
+				default:
+					return 0;
 			}
 		}
 
 		@Override
 		public void set(int index, int value) {
 			switch (index) {
-			case 0:
-				progress = value;
-				break;
+				case 0:
+					progress = value;
+					break;
 			}
 		}
 
@@ -81,9 +79,7 @@ public class DefossilizerTileEntity extends LockableTileEntity
 
 	@Override
 	public void tick() {
-		if (this.level == null || this.level.isClientSide) {
-			return;
-		}
+		if (this.level == null || this.level.isClientSide) return;
 
 		DefossilizingRecipe recipe = getRecipe();
 		if (recipe != null) {
@@ -95,16 +91,12 @@ public class DefossilizerTileEntity extends LockableTileEntity
 
 	@Nullable
 	public DefossilizingRecipe getRecipe() {
-		if (this.level == null || getItem(0).isEmpty() || getItem(1).isEmpty() || getItem(2).isEmpty()) {
-			return null;
-		}
+		if (this.level == null || getItem(0).isEmpty() || getItem(1).isEmpty() || getItem(2).isEmpty()) return null;
 		return level.getRecipeManager().getRecipeFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE, this, level).orElse(null);
 	}
 
 	private ItemStack getWorkOutput(@Nullable DefossilizingRecipe recipe) {
-		if (recipe != null) {
-			return recipe.assemble(this);
-		}
+		if (recipe != null) return recipe.assemble(this);
 		return ItemStack.EMPTY;
 	}
 
@@ -123,13 +115,9 @@ public class DefossilizerTileEntity extends LockableTileEntity
 			}
 		}
 
-		if (progress < WORK_TIME) {
-			++progress;
-		}
+		if (progress < WORK_TIME) ++progress;
 
-		if (progress >= WORK_TIME && !level.isClientSide) {
-			finishWork(recipe, current);
-		}
+		if (progress >= WORK_TIME && !level.isClientSide) finishWork(recipe, current);
 	}
 
 	private void stopWork() {
@@ -167,8 +155,7 @@ public class DefossilizerTileEntity extends LockableTileEntity
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
 		if (index == 0) {
-			return stack.getItem() == Items.BUCKET && stack.getItem() == Items.LAVA_BUCKET
-					&& stack.getItem() == Items.WATER_BUCKET;
+			return stack.getItem() == Items.BUCKET && stack.getItem() == Items.LAVA_BUCKET && stack.getItem() == Items.WATER_BUCKET;
 		} else if (index == 1) {
 			return stack.getItem() == CAItems.ALUMINUM_POWER_CHIP.get();
 		} else if (index == 2) {
@@ -219,9 +206,7 @@ public class DefossilizerTileEntity extends LockableTileEntity
 
 	@Override
 	public boolean stillValid(PlayerEntity player) {
-		return this.level != null && this.level.getBlockEntity(this.worldPosition) == this
-				&& player.distanceToSqr(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5,
-						this.worldPosition.getZ()) <= 64;
+		return this.level != null && this.level.getBlockEntity(this.worldPosition) == this && player.distanceToSqr(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ()) <= 64;
 	}
 
 	@Override
@@ -263,10 +248,8 @@ public class DefossilizerTileEntity extends LockableTileEntity
 
 	@Nullable
 	@Override
-	public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(
-			net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
-		if (!this.remove && facing != null
-				&& capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+	public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
+		if (!this.remove && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == Direction.UP)
 				return handlers[0].cast();
 			else if (facing == Direction.DOWN)
@@ -314,22 +297,18 @@ public class DefossilizerTileEntity extends LockableTileEntity
 	@Override
 	public boolean isItemValid(int slot, ItemStack stack) {
 		switch (slot) {
-		case 0:
-			if (this.getStackInSlot(0) != null && this.getStackInSlot(0) != this.getStackInSlot(slot))
-				return false;
-			return handlers[0].cast() != null ? true : false;
-		case 1:
-			if (this.getStackInSlot(1) != null && this.getStackInSlot(1) != this.getStackInSlot(slot))
-				return false;
-			return handlers[1].cast() != null ? true : false;
-		case 2:
-			if (this.getStackInSlot(2) != null && this.getStackInSlot(2) != this.getStackInSlot(slot))
-				return false;
-			return handlers[2].cast() != null ? true : false;
-		case 3:
-			if (this.getStackInSlot(3) != null && this.getStackInSlot(3) != this.getStackInSlot(slot))
-				return false;
-			return handlers[3].cast() != null ? true : false;
+			case 0:
+				if (this.getStackInSlot(0) != null && this.getStackInSlot(0) != this.getStackInSlot(slot)) return false;
+				return handlers[0].cast() != null;
+			case 1:
+				if (this.getStackInSlot(1) != null && this.getStackInSlot(1) != this.getStackInSlot(slot)) return false;
+				return handlers[1].cast() != null;
+			case 2:
+				if (this.getStackInSlot(2) != null && this.getStackInSlot(2) != this.getStackInSlot(slot)) return false;
+				return handlers[2].cast() != null;
+			case 3:
+				if (this.getStackInSlot(3) != null && this.getStackInSlot(3) != this.getStackInSlot(slot)) return false;
+				return handlers[3].cast() != null;
 		}
 		return false;
 	}

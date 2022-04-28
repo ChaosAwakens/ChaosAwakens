@@ -1,10 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.client.util.ITooltipFlag;
@@ -12,13 +7,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -30,8 +23,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CritterCageItem extends Item implements IUtilityHelper {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
+public class CritterCageItem extends Item implements IUtilityHelper {
 	public CritterCageItem(Properties properties) {
 		super(properties);
 	}
@@ -43,18 +39,15 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 		Direction facing = context.getClickedFace();
 		World worldIn = context.getLevel();
 		ItemStack stack = context.getItemInHand();
-		if (!release(player, pos, facing, worldIn, stack))
-			return ActionResultType.FAIL;
+		if (!release(player, pos, facing, worldIn, stack)) return ActionResultType.FAIL;
 		return ActionResultType.SUCCESS;
 	}
 
 	@Override
-	public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target,
-			Hand hand) {
+	public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 		stack = playerIn.getMainHandItem();
 		ItemStack stackFill = new ItemStack(this);
-		if (!capture(stackFill, playerIn, target))
-			return ActionResultType.FAIL;
+		if (!capture(stackFill, playerIn, target)) return ActionResultType.FAIL;
 
 		if (stack.getCount() == 1) {
 			if (!containsEntity(stack)) {
@@ -64,14 +57,7 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 			}
 		}
 
-		if (stackFill == stack) {
-			return ActionResultType.SUCCESS;
-		}
-
-		// if (stack.getItem().getName(stack).toString().contains("(") ||
-		// stackFill.getItem().getName(stackFill).toString().contains("(")) {
-		// return ActionResultType.FAIL;
-		// }
+		if (stackFill == stack) return ActionResultType.SUCCESS;
 
 		if (stack.getCount() > 1 || stackFill.getCount() > 1) {
 			if (!containsEntity(stack) || !containsEntity(stackFill)) {
@@ -81,42 +67,33 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 			}
 		}
 
-		if (playerIn.inventory.getFreeSlot() == -1 || !playerIn.inventory.add(stackFill)) {
-			playerIn.drop(stackFill, false);
-		}
+		if (playerIn.inventory.getFreeSlot() == -1 || !playerIn.inventory.add(stackFill)) playerIn.drop(stackFill, false);
 		return ActionResultType.SUCCESS;
 	}
 
-	@SuppressWarnings("resource")
 	public boolean capture(ItemStack stack, PlayerEntity player, LivingEntity target) {
-		if (target.getCommandSenderWorld().isClientSide)
-			return false;
-		if (target instanceof PlayerEntity || !target.isAlive())
-			return false;
-		if (containsEntity(stack))
-			return false;
-		if (isBlacklisted(target.getType()))
-			return false;
+		if (target.getCommandSenderWorld().isClientSide) return false;
+		if (target instanceof PlayerEntity || !target.isAlive()) return false;
+		if (containsEntity(stack)) return false;
+		if (isBlacklisted(target.getType())) return false;
 
 		CompoundNBT nbt = new CompoundNBT();
 		nbt.putString("entity", EntityType.getKey(target.getType()).toString());
 		nbt.putString("entityName", target.getName().getString());
 		nbt.putDouble("entityMaxHealth", target.getAttribute(Attributes.MAX_HEALTH).getValue());
 		nbt.putBoolean("isBaby", target.isBaby());
+		nbt.putBoolean("enchanted", target.getType().toString().contains("enchanted"));
 
 		target.saveWithoutId(nbt);
 		stack.setTag(nbt);
 
 		stack.setCount(1);
-		// target.remove(true);
 		return true;
 	}
 
 	public boolean release(PlayerEntity player, BlockPos pos, Direction facing, World worldIn, ItemStack stack) {
-		if (player.getCommandSenderWorld().isClientSide)
-			return false;
-		if (!containsEntity(stack))
-			return false;
+		if (player.getCommandSenderWorld().isClientSide) return false;
+		if (!containsEntity(stack)) return false;
 		Entity entity = getEntityFromStack(stack, worldIn, true);
 		BlockPos blockPos = pos.relative(facing);
 		entity.absMoveTo(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, 0, 0);
@@ -138,8 +115,7 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 		if (containsEntity(stack)) {
 			tooltip.add(new StringTextComponent("Mob: " + getMobID(stack)));
 			tooltip.add(new StringTextComponent("Mob Name: " + getMobName(stack)));
-			tooltip.add(new StringTextComponent("Health: " + stack.getTag().getFloat("Health") + "/"
-					+ stack.getTag().getDouble("entityMaxHealth")));
+			tooltip.add(new StringTextComponent("Health: " + stack.getTag().getFloat("Health") + "/" + stack.getTag().getDouble("entityMaxHealth")));
 			tooltip.add(new StringTextComponent("Is Baby: " + stack.getTag().getBoolean("isBaby")));
 		}
 	}
@@ -150,15 +126,18 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 			EntityType type = EntityType.byString(stack.getTag().getString("entity")).orElse(null);
 			if (type != null) {
 				Entity entity = type.create(world);
-				if (withInfo) {
-					entity.load(stack.getTag());
-				} else if (!type.canSummon()) {
-					return null;
-				}
+				if (withInfo) entity.load(stack.getTag());
+				else if (!type.canSummon()) return null;
 				return entity;
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		if (stack.hasTag() && stack.getTag().contains("enchanted")) return stack.getTag().getBoolean("enchanted");
+		return false;
 	}
 
 	public String getMobID(ItemStack stack) {
@@ -173,8 +152,7 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public ITextComponent getName(ItemStack stack) {
-		if (!containsEntity(stack))
-			return new TranslationTextComponent("item.chaosawakens.critter_cage");
+		if (!containsEntity(stack)) return new TranslationTextComponent("item.chaosawakens.critter_cage");
 		return new TranslationTextComponent("item.chaosawakens.critter_cage").append(" (" + getMobName(stack) + ")");
 	}
 
@@ -522,5 +500,4 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 	 * createFilledCritterCageWithMob(s, newStack, nbt, type, p, h, e.level);
 	 * e.remove(); return ActionResultType.SUCCESS; }
 	 */
-
 }

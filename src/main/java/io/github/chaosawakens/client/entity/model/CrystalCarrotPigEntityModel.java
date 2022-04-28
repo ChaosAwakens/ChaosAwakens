@@ -25,8 +25,7 @@ public class CrystalCarrotPigEntityModel extends AnimatedGeoModel<CrystalCarrotP
 	}
 
 	@Override
-	public void setLivingAnimations(CrystalCarrotPigEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(CrystalCarrotPigEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);

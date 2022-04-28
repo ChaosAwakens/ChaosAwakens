@@ -14,12 +14,10 @@ import net.minecraft.util.math.vector.Vector3d;
  * @author invalid2
  */
 public interface IGrabber {
-	DataParameter<Boolean> GRABBING = EntityDataManager.defineId(AnimatableMonsterEntity.class,
-			DataSerializers.BOOLEAN);
+	DataParameter<Boolean> GRABBING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
 
 	default void positionRider(Entity ridden, Entity entity, Entity.IMoveCallback callback) {
 		if (ridden.hasPassenger(entity)) {
-
 			Vector3d offset = this.getGrabOffset().yRot((float) Math.toRadians(ridden.yRot));
 			double dY = ridden.getY() + offset.y();
 			callback.accept(entity, ridden.getX() - offset.x(), dY, ridden.getZ() + offset.z());

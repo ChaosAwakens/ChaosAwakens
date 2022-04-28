@@ -25,8 +25,7 @@ public class GoldenCarrotPigModel extends AnimatedGeoModel<GoldenCarrotPigEntity
 	}
 
 	@Override
-	public void setLivingAnimations(GoldenCarrotPigEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(GoldenCarrotPigEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);

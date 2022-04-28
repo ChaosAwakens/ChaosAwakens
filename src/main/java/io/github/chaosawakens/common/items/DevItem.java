@@ -9,7 +9,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class DevItem extends Item {
-
 	public DevItem(Properties builderIn) {
 		super(builderIn);
 	}

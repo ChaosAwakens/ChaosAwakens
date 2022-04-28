@@ -13,10 +13,7 @@ public class FancyableTree extends Tree {
 	private final Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> fancyTree;
 	private final Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> fancyTreeBee;
 
-	public FancyableTree(Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree,
-			Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> treeBee,
-			Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> fancyTree,
-			Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> fancyTreeBee) {
+	public FancyableTree(Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree, Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> treeBee, Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> fancyTree, Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> fancyTreeBee) {
 		this.tree = tree;
 		this.treeBee = treeBee;
 		this.fancyTree = fancyTree;
@@ -25,9 +22,7 @@ public class FancyableTree extends Tree {
 
 	@Override
 	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random rand, boolean grow) {
-		if (rand.nextInt(10) == 0)
-			return grow ? fancyTree.get() : fancyTreeBee.get();
-		else
-			return grow ? tree.get() : treeBee.get();
+		if (rand.nextInt(10) == 0) return grow ? fancyTree.get() : fancyTreeBee.get();
+		else return grow ? tree.get() : treeBee.get();
 	}
 }

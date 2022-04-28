@@ -18,5 +18,4 @@ public class UltimateArrowRender extends ArrowRenderer<UltimateArrowEntity> {
 	public ResourceLocation getTextureLocation(UltimateArrowEntity entity) {
 		return ARROW_TEXTURE;
 	}
-
 }

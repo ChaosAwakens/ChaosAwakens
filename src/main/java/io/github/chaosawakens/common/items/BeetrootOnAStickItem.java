@@ -24,16 +24,12 @@ public class BeetrootOnAStickItem extends Item {
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
-		if (world.isClientSide) {
-			return ActionResult.pass(itemstack);
-		} else {
+		if (!world.isClientSide) {
 			Entity entity = player.getVehicle();
-			if (player.isPassenger() && entity instanceof IRideable && entity instanceof PigEntity) {
+			if (player.isPassenger() && entity instanceof PigEntity) {
 				IRideable irideable = (IRideable) entity;
 				if (irideable.boost()) {
-					itemstack.hurtAndBreak(this.consumeItemDamage, player, (level) -> {
-						level.broadcastBreakEvent(hand);
-					});
+					itemstack.hurtAndBreak(this.consumeItemDamage, player, (level) -> level.broadcastBreakEvent(hand));
 					if (itemstack.isEmpty()) {
 						ItemStack itemstack1 = new ItemStack(Items.FISHING_ROD);
 						itemstack1.setTag(itemstack.getTag());
@@ -45,8 +41,7 @@ public class BeetrootOnAStickItem extends Item {
 			}
 
 			player.awardStat(Stats.ITEM_USED.get(this));
-			return ActionResult.pass(itemstack);
 		}
+		return ActionResult.pass(itemstack);
 	}
-
 }

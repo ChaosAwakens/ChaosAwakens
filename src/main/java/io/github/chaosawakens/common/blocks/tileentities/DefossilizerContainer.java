@@ -96,8 +96,7 @@ public class DefossilizerContainer extends Container {
 				}
 
 				slot.onQuickCraft(itemstack1, itemstack);
-			} else if (index != this.bucketSlot.index && index != this.fossilSlot.index
-					&& index != this.powerchipSlot.index) {
+			} else if (index != this.bucketSlot.index && index != this.fossilSlot.index && index != this.powerchipSlot.index) {
 				if (!(itemstack1.getItem() instanceof BucketItem) && !(itemstack1.getItem() instanceof PowerChipItem)) {
 					if (!this.moveItemStackTo(itemstack1, this.fossilSlot.index, this.fossilSlot.index + 1, false)) {
 						return ItemStack.EMPTY;
@@ -107,8 +106,7 @@ public class DefossilizerContainer extends Container {
 						return ItemStack.EMPTY;
 					}
 				} else if (itemstack1.getItem() instanceof PowerChipItem) {
-					if (!this.moveItemStackTo(itemstack1, this.powerchipSlot.index, this.powerchipSlot.index + 1,
-							false)) {
+					if (!this.moveItemStackTo(itemstack1, this.powerchipSlot.index, this.powerchipSlot.index + 1, false)) {
 						return ItemStack.EMPTY;
 					}
 				} else if (index >= 4 && index < 31) {
@@ -137,5 +135,4 @@ public class DefossilizerContainer extends Container {
 
 		return itemstack;
 	}
-
 }

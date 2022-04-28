@@ -9,12 +9,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CARecipes {
-	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
-			.create(ForgeRegistries.RECIPE_SERIALIZERS, ChaosAwakens.MODID);
+	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ChaosAwakens.MODID);
 
-	public static final IRecipeType<DefossilizingRecipe> DEFOSSILIZING_RECIPE_TYPE = IRecipeType
-			.register(ChaosAwakens.MODID + "defossilizing");
+	public static final IRecipeType<DefossilizingRecipe> DEFOSSILIZING_RECIPE_TYPE = IRecipeType.register(ChaosAwakens.MODID + "defossilizing");
 
-	public static final RegistryObject<IRecipeSerializer<?>> DEFOSSILIZING_SERIALIZER = RECIPE_SERIALIZERS
-			.register("defossilizing", DefossilizingRecipe.Serializer::new);
+	public static final RegistryObject<IRecipeSerializer<?>> DEFOSSILIZING_SERIALIZER = RECIPE_SERIALIZERS.register("defossilizing", DefossilizingRecipe.Serializer::new);
 }

@@ -16,33 +16,22 @@ public class AnimatablePassiveMeleeAttackGoal extends AnimatableGoal {
 	protected final BiFunction<Double, Double, Boolean> attackPredicate;
 	private boolean hasHit;
 
-	/**
-	 * @param entity          Attacking entity
-	 * @param animationLength
-	 */
-
-	public AnimatablePassiveMeleeAttackGoal(AnimatableAnimalEntity entity, double animationLength, double attackBegin,
-			double attackEnd) {
+	public AnimatablePassiveMeleeAttackGoal(AnimatableAnimalEntity entity, double animationLength, double attackBegin, double attackEnd) {
 		this.animalEntity = entity;
 		this.animationLength = animationLength;
-		this.attackPredicate = (progress, length) -> attackBegin < progress / (length)
-				&& progress / (length) < attackEnd;
+		this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
-	private static boolean checkIfValid(AnimatablePassiveMeleeAttackGoal animatablePassiveMeleeAttackGoal,
-			AnimatableAnimalEntity animalEntity, LivingEntity target) {
-		if (target == null)
-			return false;
+	private static boolean checkIfValid(AnimatablePassiveMeleeAttackGoal animatablePassiveMeleeAttackGoal, AnimatableAnimalEntity animalEntity, LivingEntity target) {
+		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 				animalEntity.setAttacking(false);
 				return false;
 			}
-			double distance = animatablePassiveMeleeAttackGoal.animalEntity.distanceToSqr(target.getX(), target.getY(),
-					target.getZ());
-			if (distance <= AnimatableGoal.getAttackReachSq(animalEntity, target))
-				return true;
+			double distance = animatablePassiveMeleeAttackGoal.animalEntity.distanceToSqr(target.getX(), target.getY(), target.getZ());
+			if (distance <= AnimatableGoal.getAttackReachSq(animalEntity, target)) return true;
 		}
 		animalEntity.setAttacking(false);
 		return false;
@@ -50,17 +39,13 @@ public class AnimatablePassiveMeleeAttackGoal extends AnimatableGoal {
 
 	@Override
 	public boolean canUse() {
-		if (Math.random() <= 0.1)
-			return false;
-
+		if (Math.random() <= 0.1) return false;
 		return AnimatablePassiveMeleeAttackGoal.checkIfValid(this, animalEntity, this.animalEntity.getTarget());
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (Math.random() <= 0.1)
-			return true;
-
+		if (Math.random() <= 0.1) return true;
 		return AnimatablePassiveMeleeAttackGoal.checkIfValid(this, animalEntity, this.animalEntity.getTarget());
 	}
 
@@ -74,9 +59,7 @@ public class AnimatablePassiveMeleeAttackGoal extends AnimatableGoal {
 	@Override
 	public void stop() {
 		LivingEntity target = this.animalEntity.getTarget();
-		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-			this.animalEntity.setTarget(null);
-		}
+		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.animalEntity.setTarget(null);
 		this.animalEntity.setAttacking(false);
 		this.animalEntity.setAggressive(false);
 		this.hasHit = false;
@@ -114,5 +97,4 @@ public class AnimatablePassiveMeleeAttackGoal extends AnimatableGoal {
 			}
 		}
 	}
-
 }

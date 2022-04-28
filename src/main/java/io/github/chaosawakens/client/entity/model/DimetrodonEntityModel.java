@@ -26,8 +26,7 @@ public class DimetrodonEntityModel extends AnimatedGeoModel<DimetrodonEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(DimetrodonEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(DimetrodonEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);

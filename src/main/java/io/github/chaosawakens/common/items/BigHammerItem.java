@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.items;
 
+import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;

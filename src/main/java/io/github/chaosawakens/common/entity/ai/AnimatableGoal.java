@@ -36,8 +36,7 @@ public abstract class AnimatableGoal extends Goal {
 	}
 
 	public void baseTick() {
-		if (this.entity == null)
-			return;
+		if (this.entity == null) return;
 		if (this.isFirsLoop) {
 			this.isFirsLoop = false;
 			this.animationProgress += 1;
@@ -50,8 +49,7 @@ public abstract class AnimatableGoal extends Goal {
 	}
 
 	public void baseRoboTick() {
-		if (this.roboPounder == null)
-			return;
+		if (this.roboPounder == null) return;
 		if (this.isFirsLoop) {
 			this.isFirsLoop = false;
 			this.animationProgress += 1;

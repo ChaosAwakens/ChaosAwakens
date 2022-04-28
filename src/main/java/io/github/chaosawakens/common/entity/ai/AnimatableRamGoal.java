@@ -22,17 +22,13 @@ public class AnimatableRamGoal extends AnimatableMovableGoal {
 
 	@Override
 	public boolean canUse() {
-		if (RANDOM.nextInt(this.checkRate) == 0)
-			return false;
-
+		if (RANDOM.nextInt(this.checkRate) == 0) return false;
 		return this.isExecutable(this, this.entity, this.entity.getTarget());
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (RANDOM.nextInt(this.checkRate) == 0)
-			return true;
-
+		if (RANDOM.nextInt(this.checkRate) == 0) return true;
 		return this.isExecutable(this, this.entity, this.entity.getTarget());
 	}
 
@@ -46,8 +42,7 @@ public class AnimatableRamGoal extends AnimatableMovableGoal {
 	@Override
 	public void stop() {
 		LivingEntity target = this.entity.getTarget();
-		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target))
-			this.entity.setTarget(null);
+		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.entity.setTarget(null);
 		this.entity.setAggressive(false);
 		this.entity.setMoving(false);
 		this.entity.getNavigation().stop();
@@ -56,24 +51,20 @@ public class AnimatableRamGoal extends AnimatableMovableGoal {
 	@Override
 	public void tick() {
 		LivingEntity target = this.entity.getTarget();
-		if (target == null)
-			return;
+		if (target == null) return;
 
 		this.entity.lookAt(target, 30, 30);
 	}
 
 	@Override
 	protected boolean isExecutable(AnimatableMovableGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
-		if (target == null)
-			return false;
+		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
-			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative())
-				return false;
+			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;
 
 			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
 
-			return attacker.getSensing().canSee(target)
-					&& distance >= AnimatableGoal.getAttackReachSq(attacker, target);
+			return attacker.getSensing().canSee(target) && distance >= AnimatableGoal.getAttackReachSq(attacker, target);
 		}
 		return false;
 	}

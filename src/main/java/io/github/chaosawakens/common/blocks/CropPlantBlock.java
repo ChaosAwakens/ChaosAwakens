@@ -46,8 +46,7 @@ public class CropPlantBlock extends BushBlock implements IGrowable {
 
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (!worldIn.isAreaLoaded(pos, 1))
-			return;
+		if (!worldIn.isAreaLoaded(pos, 1)) return;
 		if (worldIn.getRawBrightness(pos, 0) >= 9) {
 			int i = state.getValue(AGE);
 			if (i < this.getMaxAge()) {
@@ -55,28 +54,24 @@ public class CropPlantBlock extends BushBlock implements IGrowable {
 					worldIn.setBlock(pos, state.setValue(AGE, i + 1), 2);
 					ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 				}
-			} else if (worldIn.getBlockState(pos.above()).isAir(worldIn, pos.above()))
-				worldIn.setBlockAndUpdate(pos.above(), state.setValue(AGE, 0));
+			} else if (worldIn.getBlockState(pos.above()).isAir(worldIn, pos.above())) worldIn.setBlockAndUpdate(pos.above(), state.setValue(AGE, 0));
 		}
 		this.isAboveAir = worldIn.getBlockState(pos.above()).isAir(worldIn, pos.above());
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn,
-			BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 	}
 
 	@Override
 	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.FARMLAND)
-				|| (state.is(this) && state.getValue(AGE) == 3);
+		return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.FARMLAND) || (state.is(this) && state.getValue(AGE) == 3);
 	}
 
 	@Override
 	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos))
-				&& super.canSurvive(state, worldIn, pos);
+		return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.canSurvive(state, worldIn, pos);
 	}
 
 	@Override
@@ -90,8 +85,7 @@ public class CropPlantBlock extends BushBlock implements IGrowable {
 
 	@Override
 	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if (state.getValue(AGE) < this.getMaxAge())
-			worldIn.setBlock(pos, state.setValue(AGE, state.getValue(AGE) + 1), 2);
+		if (state.getValue(AGE) < this.getMaxAge()) worldIn.setBlock(pos, state.setValue(AGE, state.getValue(AGE) + 1), 2);
 	}
 
 	public CropPlantBlock withMaxAge(int maxAge) {

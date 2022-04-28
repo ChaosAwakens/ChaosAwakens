@@ -26,8 +26,7 @@ public class GeodeFeatureConfig implements IFeatureConfig {
 	public final int upperBound;
 	public final int frequency;
 
-	public GeodeFeatureConfig(RuleTest target, BlockState budState, BlockState clusterState, int lowerBound,
-			int upperBound, int frequency) {
+	public GeodeFeatureConfig(RuleTest target, BlockState budState, BlockState clusterState, int lowerBound, int upperBound, int frequency) {
 		super();
 		this.target = target;
 		this.budState = budState;

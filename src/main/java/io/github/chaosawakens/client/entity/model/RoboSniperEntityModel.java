@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RoboSniperEntityModel extends AnimatedGeoModel<RoboSniperEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(RoboSniperEntity entity) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/robo_sniper.geo.json");

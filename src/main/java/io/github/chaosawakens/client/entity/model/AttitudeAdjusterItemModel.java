@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class AttitudeAdjusterItemModel extends AnimatedGeoModel<AttitudeAdjusterItem> {
-
 	@Override
 	public ResourceLocation getModelLocation(AttitudeAdjusterItem object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/attitude_adjuster.geo.json");

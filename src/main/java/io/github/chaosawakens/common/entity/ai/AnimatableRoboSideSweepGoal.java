@@ -11,28 +11,20 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
 
 public class AnimatableRoboSideSweepGoal extends AnimatableGoal {
-
 	protected final BiFunction<Double, Double, Boolean> attackPredicate;
 	protected boolean hasHit;
 	protected RoboPounderEntity roboPounder;
 
-	/**
-	 * @param entity          Attacking entity
-	 * @param animationLength
-	 */
-	public AnimatableRoboSideSweepGoal(RoboPounderEntity roboPounder, double animationLength, double attackBegin,
-			double attackEnd) {
+	public AnimatableRoboSideSweepGoal(RoboPounderEntity roboPounder, double animationLength, double attackBegin, double attackEnd) {
 		this.roboPounder = roboPounder;
 		// this.entity = this.roboPounder;
 		this.animationLength = animationLength;
-		this.attackPredicate = (progress, length) -> attackBegin < progress / (length)
-				&& progress / (length) < attackEnd;
+		this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
 	private boolean isDoingAnythingThatIsNotSideSweeping() {
-		return roboPounder.getRageMode() || roboPounder.getSideSweep()
-				|| roboPounder.getRageRunning() && this.animationProgress != 0;
+		return roboPounder.getRageMode() || roboPounder.getSideSweep() || roboPounder.getRageRunning() && this.animationProgress != 0;
 	}
 
 	protected static double getSideSweepAttackReachSq(RoboPounderEntity attacker, LivingEntity target) {
@@ -43,12 +35,9 @@ public class AnimatableRoboSideSweepGoal extends AnimatableGoal {
 		return RANDOM.nextDouble() <= 0.3;
 	}
 
-	protected static boolean checkIfValid(AnimatableRoboSideSweepGoal animatableRoboSideSweepGoal,
-			RoboPounderEntity attacker, LivingEntity target) {
-		if (target == null)
-			return false;
-		if (!canSideSweep())
-			return false;
+	protected static boolean checkIfValid(AnimatableRoboSideSweepGoal animatableRoboSideSweepGoal, RoboPounderEntity attacker, LivingEntity target) {
+		if (target == null) return false;
+		if (!canSideSweep()) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 				attacker.setAttacking(false);
@@ -56,8 +45,7 @@ public class AnimatableRoboSideSweepGoal extends AnimatableGoal {
 			}
 			double distance = animatableRoboSideSweepGoal.roboPounder.distanceToSqr(target.getX(), target.getY(),
 					target.getZ());
-			if (distance <= getSideSweepAttackReachSq(attacker, target))
-				return true;
+			if (distance <= getSideSweepAttackReachSq(attacker, target)) return true;
 		}
 		attacker.setAttacking(false);
 		attacker.setSideSweeping(false);
@@ -66,25 +54,19 @@ public class AnimatableRoboSideSweepGoal extends AnimatableGoal {
 
 	@Override
 	public boolean canUse() {
-		if (Math.random() <= 0.1)
-			return false;
+		if (Math.random() <= 0.1) return false;
 		// if (isGoalInProgress()) return false;
-		if (isDoingAnythingThatIsNotSideSweeping())
-			return false;
+		if (isDoingAnythingThatIsNotSideSweeping()) return false;
 
-		return AnimatableRoboSideSweepGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget())
-				&& canSideSweep() && roboPounder.getTarget().getHealth() <= 10.0F;
+		return AnimatableRoboSideSweepGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget()) && canSideSweep() && roboPounder.getTarget().getHealth() <= 10.0F;
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (Math.random() <= 0.1)
-			return true;
-		if (isDoingAnythingThatIsNotSideSweeping())
-			return false;
+		if (Math.random() <= 0.1) return true;
+		if (isDoingAnythingThatIsNotSideSweeping()) return false;
 
-		return AnimatableRoboSideSweepGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget())
-				&& canSideSweep();
+		return AnimatableRoboSideSweepGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget()) && canSideSweep();
 	}
 
 	@Override
@@ -92,16 +74,13 @@ public class AnimatableRoboSideSweepGoal extends AnimatableGoal {
 		this.roboPounder.setAttacking(true);
 		this.roboPounder.setAggressive(true);
 		this.roboPounder.setSideSweeping(true);
-		;
 		this.animationProgress = 0;
 	}
 
 	@Override
 	public void stop() {
 		LivingEntity target = this.roboPounder.getTarget();
-		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-			this.entity.setTarget(null);
-		}
+		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.entity.setTarget(null);
 		this.roboPounder.setAttacking(false);
 		this.roboPounder.setAggressive(false);
 		this.roboPounder.setSideSweeping(false);
@@ -116,8 +95,7 @@ public class AnimatableRoboSideSweepGoal extends AnimatableGoal {
 	public void tick() {
 		this.baseTick();
 		LivingEntity target = this.roboPounder.getTarget();
-		if (this.entity == null)
-			return;
+		if (this.entity == null) return;
 		// AnimatableMonsterEntity e = this.entity;
 		// e = roboPounder;
 		if (target != null) {
@@ -141,9 +119,7 @@ public class AnimatableRoboSideSweepGoal extends AnimatableGoal {
 				this.hasHit = false;
 			}
 
-			if (!canSideSweep() || !canUse()) {
-				stop();
-			}
+			if (!canSideSweep() || !canUse()) stop();
 		}
 	}
 }

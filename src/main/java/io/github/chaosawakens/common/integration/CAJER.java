@@ -25,50 +25,41 @@ public class CAJER {
 	}
 
 	private static void registerDungeonLoot() {
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/acacia_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.acacia_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/acacia_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/acacia_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/birch_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.birch_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/birch_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/birch_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/crimson_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.crimson_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/crimson_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/crimson_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/dark_oak_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.dark_oak_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/dark_oak_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/dark_oak_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/jungle_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.jungle_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/jungle_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/jungle_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/jungle_trap",
-				"dungeon.chaosawakens.jer.ent_dungeon.jungle_trap");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/jungle_trap",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/jungle_trap"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/oak_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.oak_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/oak_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/oak_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/spruce_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.spruce_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/spruce_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/spruce_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/warped_loot",
-				"dungeon.chaosawakens.jer.ent_dungeon.warped_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/warped_loot",
-				new ResourceLocation("chaosawakens:chests/ent_dungeon/warped_loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/wasp_dungeon/loot",
-				"dungeon.chaosawakens.jer.wasp_dungeon.loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/wasp_dungeon/loot",
-				new ResourceLocation("chaosawakens:chests/wasp_dungeon/loot"));
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/village/cherry_house",
-				"dungeon.chaosawakens.jer.village_cherry_house");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/village/cherry_house",
-				new ResourceLocation("chaosawakens:chests/village/cherry_house"));
+		// ENT DUNGEONS
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/acacia_loot", "dungeon.chaosawakens.jer.ent_dungeon.acacia_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/acacia_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/acacia_loot"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/birch_loot", "dungeon.chaosawakens.jer.ent_dungeon.birch_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/birch_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/birch_loot"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/crimson_loot", "dungeon.chaosawakens.jer.ent_dungeon.crimson_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/crimson_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/crimson_loot"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/dark_oak_loot", "dungeon.chaosawakens.jer.ent_dungeon.dark_oak_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/dark_oak_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/dark_oak_loot"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/jungle_loot", "dungeon.chaosawakens.jer.ent_dungeon.jungle_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/jungle_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/jungle_loot"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/jungle_trap", "dungeon.chaosawakens.jer.ent_dungeon.jungle_trap");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/jungle_trap", new ResourceLocation("chaosawakens:chests/ent_dungeon/jungle_trap"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/oak_loot", "dungeon.chaosawakens.jer.ent_dungeon.oak_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/oak_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/oak_loot"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/spruce_loot", "dungeon.chaosawakens.jer.ent_dungeon.spruce_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/spruce_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/spruce_loot"));
+
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/warped_loot", "dungeon.chaosawakens.jer.ent_dungeon.warped_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/warped_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/warped_loot"));
+
+		// WASP DUNGEON
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/wasp_dungeon/loot", "dungeon.chaosawakens.jer.wasp_dungeon.loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/wasp_dungeon/loot", new ResourceLocation("chaosawakens:chests/wasp_dungeon/loot"));
+
+		// VILLAGE
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/village/cherry_house", "dungeon.chaosawakens.jer.village_cherry_house");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/village/cherry_house", new ResourceLocation("chaosawakens:chests/village/cherry_house"));
 	}
 
 	private static void registerPlants() {
@@ -92,27 +83,40 @@ public class CAJER {
 
 			if (CAConfig.COMMON.enableOreAmethystGen.get()) {
 				worldGenRegistry.register(new ItemStack(CABlocks.AMETHYST_ORE.get()),
-						new DistributionSquare(4, 4, 2, 34), true, new LootDrop(new ItemStack(CAItems.AMETHYST.get())));
+						new DistributionSquare(4, 4, 2, 34),
+						true,
+						new LootDrop(new ItemStack(CAItems.AMETHYST.get())));
 				worldGenRegistry.register(new ItemStack(CABlocks.AMETHYST_ORE.get()),
 						new DistributionSquare(4, 4, 24, 56),
-						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)),
+						true,
 						new LootDrop(new ItemStack(CAItems.AMETHYST.get())));
 			}
 
 			if (CAConfig.COMMON.enableOreRubyGen.get()) {
-				worldGenRegistry.register(new ItemStack(CABlocks.RUBY_ORE.get()), new DistributionSquare(3, 8, 6, 18),
-						true, new LootDrop(new ItemStack(CAItems.RUBY.get())));
-				worldGenRegistry.register(new ItemStack(CABlocks.NETHERRACK_RUBY_ORE.get()),
-						new DistributionSquare(5, 12, 0, 24), Restriction.NETHER, true,
+				worldGenRegistry.register(new ItemStack(CABlocks.RUBY_ORE.get()),
+						new DistributionSquare(3, 8, 6, 18),
+						true,
 						new LootDrop(new ItemStack(CAItems.RUBY.get())));
 				worldGenRegistry.register(new ItemStack(CABlocks.NETHERRACK_RUBY_ORE.get()),
-						new DistributionSquare(4, 3, 0, 128), Restriction.NETHER, true,
+						new DistributionSquare(5, 12, 0, 24),
+						Restriction.NETHER,
+						true,
+						new LootDrop(new ItemStack(CAItems.RUBY.get())));
+				worldGenRegistry.register(new ItemStack(CABlocks.NETHERRACK_RUBY_ORE.get()),
+						new DistributionSquare(4, 3, 0, 128),
+						Restriction.NETHER,
+						true,
 						new LootDrop(new ItemStack(CAItems.RUBY.get())));
 				worldGenRegistry.register(new ItemStack(CABlocks.BLACKSTONE_RUBY_ORE.get()),
-						new DistributionSquare(6, 4, 0, 128), Restriction.NETHER, true,
+						new DistributionSquare(6, 4, 0, 128),
+						Restriction.NETHER,
+						true,
 						new LootDrop(new ItemStack(CAItems.RUBY.get())));
-				worldGenRegistry.register(new ItemStack(CABlocks.RUBY_ORE.get()), new DistributionSquare(4, 8, 6, 18),
-						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+				worldGenRegistry.register(new ItemStack(CABlocks.RUBY_ORE.get()),
+						new DistributionSquare(4, 8, 6, 18),
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)),
+						true,
 						new LootDrop(new ItemStack(CAItems.RUBY.get())));
 			}
 
@@ -179,23 +183,28 @@ public class CAJER {
 				if (CAConfig.COMMON.enableOreSunstoneGen.get()) {
 					worldGenRegistry.register(new ItemStack(CABlocks.SUNSTONE_ORE.get()),
 							new DistributionSquare(8, 5, 8, 136),
-							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)),
+							true,
 							new LootDrop(new ItemStack(CAItems.SUNSTONE.get())));
 				}
 				if (CAConfig.COMMON.enableOreBloodstoneGen.get()) {
 					worldGenRegistry.register(new ItemStack(CABlocks.BLOODSTONE_ORE.get()),
 							new DistributionSquare(8, 5, 8, 136),
-							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)),
+							true,
 							new LootDrop(new ItemStack(CAItems.BLOODSTONE.get())));
 				}
 			}
 
 			if (CAConfig.COMMON.enableOreSaltGen.get()) {
-				worldGenRegistry.register(new ItemStack(CABlocks.SALT_ORE.get()), new DistributionSquare(14, 8, 32, 96),
-						true, new LootDrop(new ItemStack(CAItems.SALT.get(), 4)));
+				worldGenRegistry.register(new ItemStack(CABlocks.SALT_ORE.get()),
+						new DistributionSquare(14, 8, 32, 96),
+						true,
+						new LootDrop(new ItemStack(CAItems.SALT.get(), 4)));
 				worldGenRegistry.register(new ItemStack(CABlocks.SALT_ORE.get()),
 						new DistributionSquare(14, 8, 32, 112),
-						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)), true,
+						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)),
+						true,
 						new LootDrop(new ItemStack(CAItems.SALT.get(), 4)));
 			}
 
@@ -222,7 +231,8 @@ public class CAJER {
 						new DistributionSquare(1, 7, 1, 16),
 						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));
 				worldGenRegistry.register(new ItemStack(CABlocks.TERMITE_INFESTED_ORE.get()),
-						new DistributionSquare(6, 1, 4, 32), new Restriction(BiomeRestriction.EXTREME_HILLS));
+						new DistributionSquare(6, 1, 4, 32),
+						new Restriction(BiomeRestriction.EXTREME_HILLS));
 				worldGenRegistry.register(new ItemStack(CABlocks.TERMITE_INFESTED_ORE.get()),
 						new DistributionSquare(6, 1, 4, 32),
 						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)));

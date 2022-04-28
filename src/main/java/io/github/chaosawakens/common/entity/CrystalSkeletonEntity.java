@@ -22,13 +22,11 @@ public class CrystalSkeletonEntity extends SkeletonEntity implements IAnimatable
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -43,5 +41,4 @@ public class CrystalSkeletonEntity extends SkeletonEntity implements IAnimatable
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
 }

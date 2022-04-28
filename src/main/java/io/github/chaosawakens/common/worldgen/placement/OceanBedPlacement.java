@@ -16,20 +16,16 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class OceanBedPlacement extends Placement<NoPlacementConfig> {
-
 	public OceanBedPlacement() {
 		super(NoPlacementConfig.CODEC);
 	}
 
 	@Override
-	public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, NoPlacementConfig config,
-			BlockPos pos) {
+	public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, NoPlacementConfig config, BlockPos pos) {
 		int x = rand.nextInt(16) + pos.getX();
 		int z = rand.nextInt(16) + pos.getZ();
 		int y = helper.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
-		if (y <= 0) {
-			return Stream.of();
-		}
+		if (y <= 0) return Stream.of();
 
 		BlockPos floor = new BlockPos(x, y - 4, z);
 
@@ -44,9 +40,7 @@ public class OceanBedPlacement extends Placement<NoPlacementConfig> {
 				break;
 			}
 		}
-		if (foundWater && BlockTags.SAND.contains(helper.getBlockState(floor).getBlock())) {
-			return Stream.of(floor);
-		}
+		if (foundWater && BlockTags.SAND.contains(helper.getBlockState(floor).getBlock())) return Stream.of(floor);
 		return Stream.of();
 	}
 }

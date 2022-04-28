@@ -22,18 +22,7 @@
   },
   "surface_builder": "chaosawakens:crystal_world",
   "carvers": {},
-  "features": [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    []
-  ],
+  "features": [],
   "starts": [],
   "spawners": {
     "creature": [

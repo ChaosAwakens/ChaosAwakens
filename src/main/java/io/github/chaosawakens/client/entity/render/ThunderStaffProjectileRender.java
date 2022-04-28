@@ -18,5 +18,4 @@ public class ThunderStaffProjectileRender extends EntityRenderer<ThunderStaffPro
 	public ResourceLocation getTextureLocation(ThunderStaffProjectileEntity entity) {
 		return ARROW_TEXTURE;
 	}
-
 }

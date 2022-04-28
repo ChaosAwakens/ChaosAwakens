@@ -42,19 +42,19 @@ public class CarrotPigEntity extends PigEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 10).add(Attributes.MOVEMENT_SPEED, 0.25D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -65,8 +65,7 @@ public class CarrotPigEntity extends PigEntity implements IAnimatable {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3,
-				new TemptGoal(this, 1.2D, Ingredient.of(CAItems.BEETROOT_ON_A_STICK.get()), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.BEETROOT_ON_A_STICK.get()), false));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
@@ -77,12 +76,10 @@ public class CarrotPigEntity extends PigEntity implements IAnimatable {
 	@Override
 	public boolean canBeControlledByRider() {
 		Entity entity = this.getControllingPassenger();
-		if (!(entity instanceof PlayerEntity)) {
-			return false;
-		} else {
+		if (!(entity instanceof PlayerEntity)) return false;
+		else {
 			PlayerEntity playerentity = (PlayerEntity) entity;
-			return playerentity.getMainHandItem().getItem() == CAItems.BEETROOT_ON_A_STICK.get()
-					|| playerentity.getOffhandItem().getItem() == CAItems.BEETROOT_ON_A_STICK.get();
+			return playerentity.getMainHandItem().getItem() == CAItems.BEETROOT_ON_A_STICK.get() || playerentity.getOffhandItem().getItem() == CAItems.BEETROOT_ON_A_STICK.get();
 		}
 	}
 
@@ -125,13 +122,9 @@ public class CarrotPigEntity extends PigEntity implements IAnimatable {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
 		if (itemstack.getItem() == Items.SHEARS && this.readyForShearing()) {
 			this.shear(SoundCategory.PLAYERS);
-			if (!this.level.isClientSide) {
-				itemstack.hurtAndBreak(1, playerIn, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
-			}
+			if (!this.level.isClientSide) itemstack.hurtAndBreak(1, playerIn, (p_213442_1_) -> p_213442_1_.broadcastBreakEvent(hand));
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
-		} else {
-			return super.mobInteract(playerIn, hand);
-		}
+		} else return super.mobInteract(playerIn, hand);
 	}
 
 	@Override
@@ -142,8 +135,7 @@ public class CarrotPigEntity extends PigEntity implements IAnimatable {
 	public void shear(SoundCategory soundCategory) {
 		this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, soundCategory, 1.0F, 1.0F);
 		if (!this.level.isClientSide()) {
-			((ServerWorld) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(),
-					1, 0.0D, 0.0D, 0.0D, 0.0D);
+			((ServerWorld) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 			this.remove();
 			PigEntity pigEntity = EntityType.PIG.create(this.level);
 			assert pigEntity != null;
@@ -155,16 +147,13 @@ public class CarrotPigEntity extends PigEntity implements IAnimatable {
 				pigEntity.setCustomNameVisible(this.isCustomNameVisible());
 			}
 
-			if (this.isPersistenceRequired()) {
-				pigEntity.setPersistenceRequired();
-			}
+			if (this.isPersistenceRequired()) pigEntity.setPersistenceRequired();
 
 			pigEntity.setInvulnerable(this.isInvulnerable());
 			this.level.addFreshEntity(pigEntity);
 
 			for (int i = 0; i < 4; ++i) {
-				this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(1.0D), this.getZ(),
-						new ItemStack(Items.CARROT)));
+				this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(1.0D), this.getZ(), new ItemStack(Items.CARROT)));
 			}
 		}
 	}

@@ -24,8 +24,7 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
 		super(p_i50166_1_, p_i50166_2_);
 	}
 
-	public RayGunProjectileEntity(World worldIn, double x, double y, double z, double accelX, double accelY,
-			double accelZ) {
+	public RayGunProjectileEntity(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
 		super(CAEntityTypes.EXPLOSIVE_BALL.get(), x, y, z, accelX, accelY, accelZ, worldIn);
 	}
 
@@ -38,18 +37,15 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
 		if (!this.level.isClientSide) {
 			boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
 			switch (CAConfig.COMMON.rayGunExplosionType.get()) {
-			case 0:
-				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire,
-						Explosion.Mode.NONE);
-				break;
-			case 1:
-				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire,
-						Explosion.Mode.BREAK);
-				break;
-			case 2:
-				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire,
-						Explosion.Mode.DESTROY);
-				break;
+				case 0:
+					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+					break;
+				case 1:
+					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+					break;
+				case 2:
+					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+					break;
 			}
 			this.remove();
 		}

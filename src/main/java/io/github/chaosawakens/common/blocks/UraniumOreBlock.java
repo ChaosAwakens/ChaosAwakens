@@ -39,9 +39,7 @@ public class UraniumOreBlock extends CAOreBlock {
 
 	private static void interact(BlockState state, World world, BlockPos position) {
 		spawnParticles(world, position);
-		if (!state.getValue(LIT) || state.getValue(GLOW_STRENGTH) < 5) {
-			world.setBlock(position, state.setValue(LIT, true).setValue(GLOW_STRENGTH, 5), 3);
-		}
+		if (!state.getValue(LIT) || state.getValue(GLOW_STRENGTH) < 5) world.setBlock(position, state.setValue(LIT, true).setValue(GLOW_STRENGTH, 5), 3);
 	}
 
 	private static void spawnParticles(World world, BlockPos position) {
@@ -50,22 +48,23 @@ public class UraniumOreBlock extends CAOreBlock {
 			BlockPos blockpos = position.relative(direction);
 			if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
 				Direction.Axis direction$axis = direction.getAxis();
-				double d1 = direction$axis == Direction.Axis.X ? 0.5D + 0.5625D * (double) direction.getStepX()
+				double d1 = direction$axis == Direction.Axis.X
+						? 0.5D + 0.5625D * (double) direction.getStepX()
 						: (double) random.nextFloat();
-				double d2 = direction$axis == Direction.Axis.Y ? 0.5D + 0.5625D * (double) direction.getStepY()
+				double d2 = direction$axis == Direction.Axis.Y
+						? 0.5D + 0.5625D * (double) direction.getStepY()
 						: (double) random.nextFloat();
-				double d3 = direction$axis == Direction.Axis.Z ? 0.5D + 0.5625D * (double) direction.getStepZ()
+				double d3 = direction$axis == Direction.Axis.Z
+						? 0.5D + 0.5625D * (double) direction.getStepZ()
 						: (double) random.nextFloat();
-				world.addParticle(dustParticles, (double) position.getX() + d1, (double) position.getY() + d2,
-						(double) position.getZ() + d3, 0.0D, 0.0D, 0.0D);
+				world.addParticle(dustParticles, (double) position.getX() + d1, (double) position.getY() + d2, (double) position.getZ() + d3, 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, World world, BlockPos blockPos, Random random) {
-		if (state.getValue(LIT) && state.getValue(GLOW_STRENGTH) > 0)
-			spawnParticles(world, blockPos);
+		if (state.getValue(LIT) && state.getValue(GLOW_STRENGTH) > 0) spawnParticles(world, blockPos);
 		super.animateTick(state, world, blockPos, random);
 	}
 
@@ -85,9 +84,7 @@ public class UraniumOreBlock extends CAOreBlock {
 		} else
 			interact(state, world, position);
 		ItemStack itemstack = player.getItemInHand(hand);
-		return itemstack.getItem() instanceof BlockItem
-				&& (new BlockItemUseContext(player, hand, itemstack, result)).canPlace() ? ActionResultType.PASS
-						: ActionResultType.SUCCESS;
+		return itemstack.getItem() instanceof BlockItem && (new BlockItemUseContext(player, hand, itemstack, result)).canPlace() ? ActionResultType.PASS : ActionResultType.SUCCESS;
 	}
 
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> blockStateBuilder) {
@@ -99,8 +96,7 @@ public class UraniumOreBlock extends CAOreBlock {
 	public void randomTick(BlockState state, ServerWorld server, BlockPos blockPos, Random random) {
 		if (state.getValue(GLOW_STRENGTH) > 0 && !server.isClientSide) {
 			server.setBlock(blockPos, state.setValue(GLOW_STRENGTH, state.getValue(GLOW_STRENGTH) - 1), 3);
-			if (state.getValue(GLOW_STRENGTH) <= 0 && state.getValue(LIT))
-				server.setBlock(blockPos, state.setValue(LIT, false), 3);
+			if (state.getValue(GLOW_STRENGTH) <= 0 && state.getValue(LIT)) server.setBlock(blockPos, state.setValue(LIT, false), 3);
 		}
 		super.randomTick(state, server, blockPos, random);
 	}

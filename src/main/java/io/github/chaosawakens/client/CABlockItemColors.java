@@ -9,16 +9,10 @@ import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 
 public class CABlockItemColors {
-	public static final IBlockColor GRASS_BLOCK_COLOR = (state, reader, pos, color) -> reader != null && pos != null
-			? BiomeColors.getAverageGrassColor(reader, pos)
-			: GrassColors.get(0.5D, 1.0D);
-	public static final IBlockColor FOLIAGE_BLOCK_COLOR = (state, reader, pos, color) -> reader != null && pos != null
-			? BiomeColors.getAverageFoliageColor(reader, pos)
-			: FoliageColors.getDefaultColor();
-	public static final IBlockColor SPRUCE_FOLIAGE_BLOCK_COLOR = (state, reader, pos, color) -> FoliageColors
-			.getEvergreenColor();
-	public static final IBlockColor BIRCH_FOLIAGE_BLOCK_COLOR = (state, reader, pos, color) -> FoliageColors
-			.getBirchColor();
+	public static final IBlockColor GRASS_BLOCK_COLOR = (state, reader, pos, color) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5D, 1.0D);
+	public static final IBlockColor FOLIAGE_BLOCK_COLOR = (state, reader, pos, color) -> reader != null && pos != null ? BiomeColors.getAverageFoliageColor(reader, pos) : FoliageColors.getDefaultColor();
+	public static final IBlockColor SPRUCE_FOLIAGE_BLOCK_COLOR = (state, reader, pos, color) -> FoliageColors.getEvergreenColor();
+	public static final IBlockColor BIRCH_FOLIAGE_BLOCK_COLOR = (state, reader, pos, color) -> FoliageColors.getBirchColor();
 
 	public static void registerBlockColors(ColorHandlerEvent.Block event) {
 		event.getBlockColors().register(GRASS_BLOCK_COLOR, CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(),
@@ -32,8 +26,7 @@ public class CABlockItemColors {
 
 	public static void registerItemColors(ColorHandlerEvent.Item event) {
 		event.getItemColors().register(
-				(stack, color) -> event.getBlockColors()
-						.getColor(((BlockItem) stack.getItem()).getBlock().defaultBlockState(), null, null, color),
+				(stack, color) -> event.getBlockColors().getColor(((BlockItem) stack.getItem()).getBlock().defaultBlockState(), null, null, color),
 				CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(),
 				CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get(), CABlocks.OAK_LEAF_CARPET.get(),
 				CABlocks.SPRUCE_LEAF_CARPET.get(), CABlocks.BIRCH_LEAF_CARPET.get(), CABlocks.JUNGLE_LEAF_CARPET.get(),

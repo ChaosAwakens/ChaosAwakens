@@ -17,13 +17,10 @@ import net.minecraftforge.common.ForgeHooks;
 import java.util.Random;
 
 public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements IGrowable {
-
 	public static final IntegerProperty GROWTH = IntegerProperty.create("growth", 0, 3);
-
 	private final double growPerTickProbability;
 
-	public CropTopPlantBlock(Properties properties, Direction direction, VoxelShape shape,
-			double growPerTickProbability) {
+	public CropTopPlantBlock(Properties properties, Direction direction, VoxelShape shape, double growPerTickProbability) {
 		super(properties, direction, shape, false, growPerTickProbability);
 		this.growPerTickProbability = growPerTickProbability;
 		this.registerDefaultState(this.stateDefinition.any().setValue(GROWTH, 0).setValue(AGE, 0));
@@ -44,26 +41,19 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction direction, BlockState state2, IWorld worldIn,
-			BlockPos pos, BlockPos pos2) {
-		if (direction == this.growthDirection.getOpposite() && !state.canSurvive(worldIn, pos))
-			worldIn.getBlockTicks().scheduleTick(pos, this, 1);
-
+	public BlockState updateShape(BlockState state, Direction direction, BlockState state2, IWorld worldIn, BlockPos pos, BlockPos pos2) {
+		if (direction == this.growthDirection.getOpposite() && !state.canSurvive(worldIn, pos)) worldIn.getBlockTicks().scheduleTick(pos, this, 1);
 		if (direction != this.growthDirection || !state2.is(this) && !state2.is(this.getBodyBlock())) {
-			if (this.scheduleFluidTicks)
-				worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			if (this.scheduleFluidTicks) worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			return state;
-		} else
-			return this.getBodyBlock().defaultBlockState();
+		} else return this.getBodyBlock().defaultBlockState();
 	}
 
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		int age = state.getValue(GROWTH);
 		int height = state.getValue(AGE);
-		if (height < this.getMaxHeight() && ForgeHooks.onCropsGrowPre(worldIn, pos.relative(this.growthDirection),
-				worldIn.getBlockState(pos.relative(this.growthDirection)),
-				rand.nextDouble() < this.growPerTickProbability)) {
+		if (height < this.getMaxHeight() && ForgeHooks.onCropsGrowPre(worldIn, pos.relative(this.growthDirection), worldIn.getBlockState(pos.relative(this.growthDirection)), rand.nextDouble() < this.growPerTickProbability)) {
 			BlockPos targetPos = pos.relative(this.growthDirection);
 			if (age < 3) {
 				worldIn.setBlockAndUpdate(pos, state.setValue(GROWTH, age + 1));
@@ -71,8 +61,7 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 			} else {
 				if (this.canGrowInto(worldIn.getBlockState(targetPos))) {
 					worldIn.setBlockAndUpdate(pos, this.getBodyBlock().defaultBlockState());
-					worldIn.setBlockAndUpdate(targetPos,
-							state.setValue(AGE, state.getValue(AGE) + 1).setValue(GROWTH, 0));
+					worldIn.setBlockAndUpdate(targetPos, state.setValue(AGE, state.getValue(AGE) + 1).setValue(GROWTH, 0));
 					ForgeHooks.onCropsGrowPost(worldIn, targetPos, worldIn.getBlockState(targetPos));
 				}
 			}
@@ -87,8 +76,7 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 		worldIn.setBlockAndUpdate(pos, this.getBodyBlock().defaultBlockState());
 		targetPos = targetPos.relative(this.growthDirection);
 		worldIn.setBlockAndUpdate(targetPos, state.setValue(GROWTH, 0).setValue(AGE, state.getValue(AGE) + 1));
-		if (j == this.getMaxHeight())
-			worldIn.setBlockAndUpdate(targetPos, state.setValue(GROWTH, 0).setValue(AGE, state.getValue(AGE)));
+		if (j == this.getMaxHeight()) worldIn.setBlockAndUpdate(targetPos, state.setValue(GROWTH, 0).setValue(AGE, state.getValue(AGE)));
 	}
 
 	@Override

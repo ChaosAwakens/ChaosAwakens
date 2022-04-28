@@ -9,7 +9,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class WaspEntityModel extends AnimatedGeoModel<WaspEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(WaspEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/wasp.geo.json");
@@ -26,8 +25,7 @@ public class WaspEntityModel extends AnimatedGeoModel<WaspEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(WaspEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(WaspEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		IBone head = this.getAnimationProcessor().getBone("Head");

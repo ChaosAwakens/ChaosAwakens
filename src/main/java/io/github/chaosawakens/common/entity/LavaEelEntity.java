@@ -52,9 +52,13 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 6.0D).add(Attributes.MOVEMENT_SPEED, 1.0D)
-				.add(Attributes.ATTACK_SPEED, 0.3D).add(Attributes.ATTACK_DAMAGE, 2.0D)
-				.add(Attributes.ATTACK_KNOCKBACK, 1).add(Attributes.KNOCKBACK_RESISTANCE, 0.35D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 6.0D)
+				.add(Attributes.MOVEMENT_SPEED, 1.0D)
+				.add(Attributes.ATTACK_SPEED, 0.3D)
+				.add(Attributes.ATTACK_DAMAGE, 2.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 1)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.35D)
 				.add(Attributes.FOLLOW_RANGE, 10.0D);
 	}
 
@@ -95,11 +99,8 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	}
 
 	public boolean okTarget(@Nullable LivingEntity livingEntity) {
-		if (livingEntity != null) {
-			return !this.level.isDay() || livingEntity.isInLava();
-		} else {
-			return false;
-		}
+		if (livingEntity != null) return !this.level.isDay() || livingEntity.isInLava();
+		else return false;
 	}
 
 	@Override

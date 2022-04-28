@@ -14,26 +14,16 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class FrogEntityRender extends GeoEntityRenderer<FrogEntity> {
-	private static final ResourceLocation TEXTURE_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/green.png");
-	private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/brown.png");
-	private static final ResourceLocation TEXTURE_PINK_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/pink.png");
-	private static final ResourceLocation TEXTURE_DARK_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/dark_green.png");
-	private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/red.png");
-	private static final ResourceLocation TEXTURE_ORANGE_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/orange.png");
-	private static final ResourceLocation TEXTURE_PALE_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/pale.png");
-	private static final ResourceLocation TEXTURE_YELLOW_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/yellow.png");
-	private static final ResourceLocation TEXTURE_FROAKIE_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/froakie.png");
-	private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/frog/black.png");
+	private static final ResourceLocation TEXTURE_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/green.png");
+	private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/brown.png");
+	private static final ResourceLocation TEXTURE_PINK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/pink.png");
+	private static final ResourceLocation TEXTURE_DARK_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/dark_green.png");
+	private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/red.png");
+	private static final ResourceLocation TEXTURE_ORANGE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/orange.png");
+	private static final ResourceLocation TEXTURE_PALE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/pale.png");
+	private static final ResourceLocation TEXTURE_YELLOW_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/yellow.png");
+	private static final ResourceLocation TEXTURE_FROAKIE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/froakie.png");
+	private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/frog/black.png");
 
 	public FrogEntityRender(EntityRendererManager renderManager) {
 		super(renderManager, new FrogEntityModel());
@@ -41,11 +31,8 @@ public class FrogEntityRender extends GeoEntityRenderer<FrogEntity> {
 	}
 
 	@Override
-	public void renderEarly(FrogEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer,
-			IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue,
-			float partialTicks) {
-		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn,
-				red, green, blue, partialTicks);
+	public void renderEarly(FrogEntity animatable, MatrixStack stackIn, float ticks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float partialTicks) {
+		super.renderEarly(animatable, stackIn, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
 	}
 
 	@Override
@@ -79,15 +66,12 @@ public class FrogEntityRender extends GeoEntityRenderer<FrogEntity> {
 	}
 
 	@Override
-	public RenderType getRenderType(FrogEntity animatable, float partialTicks, MatrixStack stack,
-			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
-			ResourceLocation textureLocation) {
+	public RenderType getRenderType(FrogEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
 		return RenderType.entityTranslucent(getTextureLocation(animatable));
 	}
 
 	@Override
-	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn,
-			int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 }

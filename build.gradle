@@ -86,7 +86,6 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.16.5:${project.geckolib}")
-    implementation fg.deobf("curse.maven:reach-fix-556777:${project.reachfix}")
 
     implementation fg.deobf("curse.maven:projecte-226410:${project.projecte}")
 
@@ -105,6 +104,8 @@ dependencies {
     implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
 
     implementation fg.deobf("curse.maven:world-stripper-250603:${project.worldstripper}")
+
+    implementation fg.deobf("curse.maven:more-villagers-484954:${project.morevillagers}")
 }
 
 repositories {

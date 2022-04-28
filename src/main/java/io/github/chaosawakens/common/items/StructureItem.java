@@ -24,20 +24,14 @@ public class StructureItem extends Item {
 		BlockPos pos = context.getClickedPos();
 
 		if (world instanceof ServerWorld) {
-			Template template = ((ServerWorld) world).getStructureManager()
-					.getOrCreate(new ResourceLocation("chaosawakens", structureName));
-			PlacementHelper targetPlacement = new PlacementHelper(pos, template.getSize(),
-					context.getHorizontalDirection());
+			Template template = ((ServerWorld) world).getStructureManager().getOrCreate(new ResourceLocation("chaosawakens", structureName));
+			PlacementHelper targetPlacement = new PlacementHelper(pos, template.getSize(), context.getHorizontalDirection());
 			if (template != null) {
-				template.placeInWorldChunk((ServerWorld) world, targetPlacement.getPos(),
-						new PlacementSettings().setRotation(targetPlacement.getRotation()).setMirror(Mirror.NONE)
-								.setChunkPos(null).setIgnoreEntities(false),
-						(world).random);
+				template.placeInWorldChunk((ServerWorld) world, targetPlacement.getPos(), new PlacementSettings().setRotation(targetPlacement.getRotation()).setMirror(Mirror.NONE).setChunkPos(null).setIgnoreEntities(false), (world).random);
 				context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
 				context.getItemInHand().shrink(1);
 			}
 		}
-
 		return ActionResultType.SUCCESS;
 	}
 
@@ -55,23 +49,19 @@ public class StructureItem extends Item {
 			super();
 			switch (direction) {
 			case NORTH:
-				this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(),
-						pos.getZ() + templateSize.getZ() / 2);
+				this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(), pos.getZ() + templateSize.getZ() / 2);
 				this.rotation = Rotation.CLOCKWISE_180;
 				break;
 			case SOUTH:
-				this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(),
-						pos.getZ() - templateSize.getZ() / 2);
+				this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(), pos.getZ() - templateSize.getZ() / 2);
 				this.rotation = Rotation.CLOCKWISE_180.getRotated(Rotation.CLOCKWISE_180);
 				break;
 			case WEST:
-				this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(),
-						pos.getZ() - templateSize.getZ() / 2);
+				this.pos = new BlockPos(pos.getX() + templateSize.getX() / 2, pos.getY(), pos.getZ() - templateSize.getZ() / 2);
 				this.rotation = Rotation.CLOCKWISE_90;
 				break;
 			case EAST:
-				this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(),
-						pos.getZ() + templateSize.getZ() / 2);
+				this.pos = new BlockPos(pos.getX() - templateSize.getX() / 2, pos.getY(), pos.getZ() + templateSize.getZ() / 2);
 				this.rotation = Rotation.COUNTERCLOCKWISE_90;
 				break;
 			default:

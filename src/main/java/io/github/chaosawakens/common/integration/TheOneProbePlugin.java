@@ -22,9 +22,6 @@ import net.minecraftforge.fml.InterModComms;
 import java.util.function.Function;
 
 public class TheOneProbePlugin {
-	private TheOneProbePlugin() {
-	}
-
 	public static void register() {
 		InterModComms.sendTo("theoneprobe", "getTheOneProbe", GetTheOneProbe::new);
 	}
@@ -32,24 +29,33 @@ public class TheOneProbePlugin {
 	public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
 		@Override
 		public Void apply(ITheOneProbe iTheOneProbe) {
-			iTheOneProbe.registerBlockDisplayOverride(
-					(probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData) -> {
-						if (blockState.getBlock() instanceof AntInfestedOre) {
-							if (blockState.is(CABlocks.RED_ANT_INFESTED_ORE.get())) {
-								ItemStack stack = new ItemStack(Items.DIAMOND_ORE);
-								iProbeInfo.horizontal().item(stack).vertical().itemLabel(stack)
-										.text(CompoundText.create().style(TextStyleClass.MODNAME)
-												.text(Tools.getModName(stack.getItem())));
-							} else if (blockState.is(CABlocks.TERMITE_INFESTED_ORE.get())) {
-								ItemStack stack = new ItemStack(Items.EMERALD_ORE);
-								iProbeInfo.horizontal().item(stack).vertical().itemLabel(stack)
-										.text(CompoundText.create().style(TextStyleClass.MODNAME)
-												.text(Tools.getModName(stack.getItem())));
-							}
-							return true;
-						}
-						return false;
-					});
+			iTheOneProbe.registerBlockDisplayOverride((probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData) -> {
+				if (blockState.getBlock() instanceof AntInfestedOre) {
+					if (blockState.is(CABlocks.RED_ANT_INFESTED_ORE.get())) {
+						ItemStack stack = new ItemStack(Items.DIAMOND_ORE);
+						iProbeInfo
+								.horizontal()
+								.item(stack)
+								.vertical()
+								.itemLabel(stack)
+								.text(CompoundText.create()
+										.style(TextStyleClass.MODNAME)
+										.text(Tools.getModName(stack.getItem())));
+					} else if (blockState.is(CABlocks.TERMITE_INFESTED_ORE.get())) {
+						ItemStack stack = new ItemStack(Items.EMERALD_ORE);
+						iProbeInfo
+								.horizontal()
+								.item(stack)
+								.vertical()
+								.itemLabel(stack)
+								.text(CompoundText.create()
+										.style(TextStyleClass.MODNAME)
+										.text(Tools.getModName(stack.getItem())));
+					}
+					return true;
+				}
+				return false;
+			});
 
 			iTheOneProbe.registerEntityProvider(new IProbeInfoEntityProvider() {
 				@Override
@@ -58,24 +64,18 @@ public class TheOneProbePlugin {
 				}
 
 				@Override
-				public void addProbeEntityInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity,
-						World world, Entity entity, IProbeHitEntityData iProbeHitEntityData) {
+				public void addProbeEntityInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, Entity entity, IProbeHitEntityData iProbeHitEntityData) {
 					String s = TextFormatting.stripFormatting(entity.getName().getString());
-					if ("Froakie".equalsIgnoreCase(s)) {
-						iProbeInfo.text(CompoundText.createLabelInfo("Special Frog Species: ", "Blue"));
-					}
-
+					if ("Froakie".equalsIgnoreCase(s)) iProbeInfo.text(CompoundText.createLabelInfo("Special Frog Species: ", "Blue"));
 					if (entity instanceof AppleCowEntity) {
 						int type = ((AppleCowEntity) entity).getAppleCowType();
 						switch (type) {
 						case 0:
 						default:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Apple Cow Species: ", "Apple Cow (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Apple Cow Species: ", "Apple Cow (" + type + ")"));
 							return;
 						case 1:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Apple Cow Species: ", "Halloween (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Apple Cow Species: ", "Halloween (" + type + ")"));
 						}
 					}
 
@@ -114,8 +114,7 @@ public class TheOneProbePlugin {
 							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Pink (" + type + ")"));
 							return;
 						case 3:
-							iProbeInfo
-									.text(CompoundText.createLabelInfo("Frog Species: ", "Dark Green (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Dark Green (" + type + ")"));
 							return;
 						case 4:
 							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Red (" + type + ")"));
@@ -145,15 +144,13 @@ public class TheOneProbePlugin {
 							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Red (" + type + ")"));
 							return;
 						case 2:
-							iProbeInfo
-									.text(CompoundText.createLabelInfo("Gazelle Species: ", "Dark Red (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Dark Red (" + type + ")"));
 							return;
 						case 3:
 							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Black (" + type + ")"));
 							return;
 						case 4:
-							iProbeInfo
-									.text(CompoundText.createLabelInfo("Gazelle Species: ", "Furless (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Furless (" + type + ")"));
 						}
 					}
 
@@ -162,28 +159,22 @@ public class TheOneProbePlugin {
 						switch (type) {
 						case 0:
 						default:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Crystal Gator Species: ", "Blue (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Crystal Gator Species: ", "Blue (" + type + ")"));
 							return;
 						case 1:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Crystal Gator Species: ", "Red (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Crystal Gator Species: ", "Red (" + type + ")"));
 							return;
 						case 2:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Crystal Gator Species: ", "Yellow (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Crystal Gator Species: ", "Yellow (" + type + ")"));
 							return;
 						case 3:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Crystal Gator Species: ", "Orange (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Crystal Gator Species: ", "Orange (" + type + ")"));
 							return;
 						case 4:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Crystal Gator Species: ", "Pink (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Crystal Gator Species: ", "Pink (" + type + ")"));
 							return;
 						case 5:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Crystal Gator Species: ", "Green (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Crystal Gator Species: ", "Green (" + type + ")"));
 						}
 					}
 
@@ -192,20 +183,16 @@ public class TheOneProbePlugin {
 						switch (type) {
 						case 0:
 						default:
-							iProbeInfo
-									.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Green (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Green (" + type + ")"));
 							return;
 						case 1:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Dimetrodon Species: ", "Orange (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Orange (" + type + ")"));
 							return;
 						case 2:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Dimetrodon Species: ", "Purple (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Purple (" + type + ")"));
 							return;
 						case 3:
-							iProbeInfo.text(
-									CompoundText.createLabelInfo("Dimetrodon Species: ", "Throwback (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Throwback (" + type + ")"));
 						}
 					}
 				}

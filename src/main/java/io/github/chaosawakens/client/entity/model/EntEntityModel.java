@@ -10,7 +10,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class EntEntityModel extends AnimatedGeoModel<EntEntity> {
-
 	private final EntEntity.Types entType;
 
 	public EntEntityModel(Types entType) {
@@ -25,8 +24,7 @@ public class EntEntityModel extends AnimatedGeoModel<EntEntity> {
 
 	@Override
 	public ResourceLocation getTextureLocation(EntEntity object) {
-		return new ResourceLocation(ChaosAwakens.MODID,
-				"textures/entity/ent/" + this.entType.getNameString() + "_ent.png");
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/ent/" + this.entType.getNameString() + "_ent.png");
 	}
 
 	@Override
@@ -35,8 +33,7 @@ public class EntEntityModel extends AnimatedGeoModel<EntEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(EntEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(EntEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		IBone head = this.getAnimationProcessor().getBone("Head");

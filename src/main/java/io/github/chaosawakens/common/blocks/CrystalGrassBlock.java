@@ -26,8 +26,7 @@ public class CrystalGrassBlock extends CrystalBlock implements IGrowable {
 		super(properties);
 	}
 
-	public VoxelShape getVisualShape(BlockState p_230322_1_, IBlockReader p_230322_2_, BlockPos p_230322_3_,
-			ISelectionContext p_230322_4_) {
+	public VoxelShape getVisualShape(BlockState p_230322_1_, IBlockReader p_230322_2_, BlockPos p_230322_3_, ISelectionContext p_230322_4_) {
 		return VoxelShapes.empty();
 	}
 
@@ -40,18 +39,15 @@ public class CrystalGrassBlock extends CrystalBlock implements IGrowable {
 		return true;
 	}
 
-	public boolean isValidBonemealTarget(IBlockReader p_176473_1_, BlockPos p_176473_2_, BlockState p_176473_3_,
-			boolean p_176473_4_) {
+	public boolean isValidBonemealTarget(IBlockReader p_176473_1_, BlockPos p_176473_2_, BlockState p_176473_3_, boolean p_176473_4_) {
 		return p_176473_1_.getBlockState(p_176473_2_.above()).isAir();
 	}
 
-	public boolean isBonemealSuccess(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_,
-			BlockState p_180670_4_) {
+	public boolean isBonemealSuccess(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
 		return true;
 	}
 
-	public void performBonemeal(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_,
-			BlockState p_225535_4_) {
+	public void performBonemeal(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {
 		BlockPos blockpos = p_225535_3_.above();
 		BlockState blockstate = CABlocks.CRYSTAL_GRASS.get().defaultBlockState();
 
@@ -59,10 +55,8 @@ public class CrystalGrassBlock extends CrystalBlock implements IGrowable {
 			BlockPos blockpos1 = blockpos;
 
 			for (int j = 0; j < i / 16; ++j) {
-				blockpos1 = blockpos1.offset(p_225535_2_.nextInt(3) - 1,
-						(p_225535_2_.nextInt(3) - 1) * p_225535_2_.nextInt(3) / 2, p_225535_2_.nextInt(3) - 1);
-				if (!p_225535_1_.getBlockState(blockpos1.below()).is(this)
-						|| p_225535_1_.getBlockState(blockpos1).isCollisionShapeFullBlock(p_225535_1_, blockpos1)) {
+				blockpos1 = blockpos1.offset(p_225535_2_.nextInt(3) - 1, (p_225535_2_.nextInt(3) - 1) * p_225535_2_.nextInt(3) / 2, p_225535_2_.nextInt(3) - 1);
+				if (!p_225535_1_.getBlockState(blockpos1.below()).is(this) || p_225535_1_.getBlockState(blockpos1).isCollisionShapeFullBlock(p_225535_1_, blockpos1)) {
 					continue label48;
 				}
 			}
@@ -75,8 +69,7 @@ public class CrystalGrassBlock extends CrystalBlock implements IGrowable {
 			if (blockstate2.isAir()) {
 				BlockState blockstate1;
 				if (p_225535_2_.nextInt(8) == 0) {
-					List<ConfiguredFeature<?, ?>> list = p_225535_1_.getBiome(blockpos1).getGenerationSettings()
-							.getFlowerFeatures();
+					List<ConfiguredFeature<?, ?>> list = p_225535_1_.getBiome(blockpos1).getGenerationSettings().getFlowerFeatures();
 					if (list.isEmpty()) {
 						continue;
 					}
@@ -96,8 +89,7 @@ public class CrystalGrassBlock extends CrystalBlock implements IGrowable {
 	}
 
 	@Override
-	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing,
-			IPlantable plantable) {
+	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
 		BlockState plant = plantable.getPlant(world, pos.relative(facing));
 
 		if (plant.getBlock() == Blocks.SUGAR_CANE && this == Blocks.SUGAR_CANE)

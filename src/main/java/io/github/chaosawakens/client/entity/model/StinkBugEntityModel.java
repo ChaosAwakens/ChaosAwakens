@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class StinkBugEntityModel extends AnimatedGeoModel<StinkBugEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(StinkBugEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/stink_bug.geo.json");

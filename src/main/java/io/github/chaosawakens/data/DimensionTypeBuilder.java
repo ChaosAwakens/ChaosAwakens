@@ -26,72 +26,64 @@ public class DimensionTypeBuilder {
 	}
 
 	public DimensionTypeBuilder ultrawarm(boolean ultrawarm) {
-		if (this.ultrawarm) {
-			throw new RuntimeException("ultrawarm has already been set, remove unnecessary call.");
-		} else {
+		if (this.ultrawarm) throw new RuntimeException("ultrawarm has already been set, remove unnecessary call.");
+		else {
 			this.ultrawarm = ultrawarm;
 			return this;
 		}
 	}
 
 	public DimensionTypeBuilder natural(boolean natural) {
-		if (this.natural) {
-			throw new RuntimeException("natural has already been set, remove unnecessary call.");
-		} else {
+		if (this.natural) throw new RuntimeException("natural has already been set, remove unnecessary call.");
+		else {
 			this.natural = natural;
 			return this;
 		}
 	}
 
 	public DimensionTypeBuilder piglinSafe(boolean piglinSafe) {
-		if (this.piglinSafe) {
-			throw new RuntimeException("piglinSafe has already been set, remove unnecessary call.");
-		} else {
+		if (this.piglinSafe) throw new RuntimeException("piglinSafe has already been set, remove unnecessary call.");
+		else {
 			this.piglinSafe = piglinSafe;
 			return this;
 		}
 	}
 
 	public DimensionTypeBuilder respawnAnchorWorks(boolean respawnAnchorWorks) {
-		if (this.respawnAnchorWorks) {
-			throw new RuntimeException("respawnAnchorWorks has already been set, remove unnecessary call.");
-		} else {
+		if (this.respawnAnchorWorks) throw new RuntimeException("respawnAnchorWorks has already been set, remove unnecessary call.");
+		else {
 			this.respawnAnchorWorks = respawnAnchorWorks;
 			return this;
 		}
 	}
 
 	public DimensionTypeBuilder bedWorks(boolean bedWorks) {
-		if (this.bedWorks) {
-			throw new RuntimeException("bedWorks has already been set, remove unnecessary call.");
-		} else {
+		if (this.bedWorks) throw new RuntimeException("bedWorks has already been set, remove unnecessary call.");
+		else {
 			this.bedWorks = bedWorks;
 			return this;
 		}
 	}
 
 	public DimensionTypeBuilder hasRaids(boolean hasRaids) {
-		if (this.hasRaids) {
-			throw new RuntimeException("hasRaids has already been set, remove unnecessary call.");
-		} else {
+		if (this.hasRaids) throw new RuntimeException("hasRaids has already been set, remove unnecessary call.");
+		else {
 			this.hasRaids = hasRaids;
 			return this;
 		}
 	}
 
 	public DimensionTypeBuilder hasSkylight(boolean hasSkylight) {
-		if (this.hasSkylight) {
-			throw new RuntimeException("hasSkylight has already been set, remove unnecessary call.");
-		} else {
+		if (this.hasSkylight) throw new RuntimeException("hasSkylight has already been set, remove unnecessary call.");
+		else {
 			this.hasSkylight = hasSkylight;
 			return this;
 		}
 	}
 
 	public DimensionTypeBuilder hasCeiling(boolean hasCeiling) {
-		if (this.hasCeiling) {
-			throw new RuntimeException("hasCeiling has already been set, remove unnecessary call.");
-		} else {
+		if (this.hasCeiling) throw new RuntimeException("hasCeiling has already been set, remove unnecessary call.");
+		else {
 			this.hasCeiling = hasCeiling;
 			return this;
 		}
@@ -140,8 +132,7 @@ public class DimensionTypeBuilder {
 		json.addProperty("has_ceiling", this.hasCeiling);
 		json.addProperty("coordinate_scale", this.coordinateScale);
 		json.addProperty("ambient_light", this.ambientLight);
-		if (this.fixedTime != null)
-			json.addProperty("fixed_time", this.fixedTime);
+		if (this.fixedTime != null) json.addProperty("fixed_time", this.fixedTime);
 		json.addProperty("logical_height", this.logicalHeight);
 		json.addProperty("effects", this.effects);
 		json.addProperty("infiniburn", this.infiniburn);
@@ -158,8 +149,7 @@ public class DimensionTypeBuilder {
 		ChaosAwakens.LOGGER.debug("Has Ceiling: " + this.hasCeiling);
 		ChaosAwakens.LOGGER.debug("Coordinate Scale: " + this.coordinateScale);
 		ChaosAwakens.LOGGER.debug("Ambient Light: " + this.ambientLight);
-		if (this.fixedTime != null)
-			ChaosAwakens.LOGGER.debug("Fixed Time: " + this.fixedTime);
+		if (this.fixedTime != null) ChaosAwakens.LOGGER.debug("Fixed Time: " + this.fixedTime);
 		ChaosAwakens.LOGGER.debug("Logical Height: " + this.logicalHeight);
 		ChaosAwakens.LOGGER.debug("Effects: " + this.effects);
 		ChaosAwakens.LOGGER.debug("Infiniburn: " + this.infiniburn);

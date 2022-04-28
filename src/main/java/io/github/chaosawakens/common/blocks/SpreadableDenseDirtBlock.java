@@ -22,8 +22,7 @@ public class SpreadableDenseDirtBlock extends Block {
 		if (blockstate.getFluidState().getAmount() == 8) {
 			return false;
 		} else {
-			int i = LightEngine.getLightBlockInto(worldReader, state, pos, blockstate, blockpos, Direction.UP,
-					blockstate.getLightBlock(worldReader, blockpos));
+			int i = LightEngine.getLightBlockInto(worldReader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(worldReader, blockpos));
 			return i < worldReader.getMaxLightLevel();
 		}
 	}
@@ -35,9 +34,7 @@ public class SpreadableDenseDirtBlock extends Block {
 
 	public void randomTick(BlockState state, ServerWorld serverWorld, BlockPos pos, Random random) {
 		if (!canBeGrass(state, serverWorld, pos)) {
-			if (!serverWorld.isAreaLoaded(pos, 3))
-				return; // Forge: prevent loading unloaded chunks when checking neighbor's light and
-						// spreading
+			if (!serverWorld.isAreaLoaded(pos, 3)) return;
 			serverWorld.setBlockAndUpdate(pos, CABlocks.DENSE_DIRT.get().defaultBlockState());
 		} else {
 			if (serverWorld.getMaxLocalRawBrightness(pos.above()) >= 9) {
@@ -45,13 +42,11 @@ public class SpreadableDenseDirtBlock extends Block {
 
 				for (int i = 0; i < 4; ++i) {
 					BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-					if (serverWorld.getBlockState(blockpos).is(CABlocks.DENSE_DIRT.get())
-							&& canPropagate(blockstate, serverWorld, blockpos)) {
+					if (serverWorld.getBlockState(blockpos).is(CABlocks.DENSE_DIRT.get()) && canPropagate(blockstate, serverWorld, blockpos)) {
 						serverWorld.setBlockAndUpdate(blockpos, blockstate);
 					}
 				}
 			}
-
 		}
 	}
 }

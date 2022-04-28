@@ -43,11 +43,8 @@ public class DefossilizerBlock extends Block {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-			BlockRayTraceResult rayTrace) {
-		if (world.isClientSide) {
-			return ActionResultType.SUCCESS;
-		}
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) {
+		if (world.isClientSide) return ActionResultType.SUCCESS;
 		this.interactWith(world, pos, player);
 		player.awardStat(CAStats.INTERACT_WITH_DEFOSSILIZER);
 		return ActionResultType.CONSUME;

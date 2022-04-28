@@ -23,7 +23,8 @@ public class CALootModifierProvider extends GlobalLootModifierProvider {
 	@Override
 	protected void start() {
 		add("ultimate_pickaxe_smelting", CALootModifiers.ULTIMATE_PICKAXE_SMELTING.get(),
-				new UltimatePickaxeItem.UltimateAutoSmeltingModifier(new ILootCondition[] { MatchTool
-						.toolMatches(ItemPredicate.Builder.item().of(CAItems.ULTIMATE_PICKAXE.get())).build() }));
+				new UltimatePickaxeItem.UltimateAutoSmeltingModifier(new ILootCondition[] {
+						MatchTool.toolMatches(ItemPredicate.Builder.item().of(CAItems.ULTIMATE_PICKAXE.get())).build()
+				}));
 	}
 }

@@ -10,7 +10,6 @@ import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-@OnlyIn(Dist.CLIENT)
 public class GoldenAppleCowModel extends AnimatedGeoModel<GoldenAppleCowEntity> {
 	@Override
 	public ResourceLocation getModelLocation(GoldenAppleCowEntity object) {
@@ -28,8 +27,7 @@ public class GoldenAppleCowModel extends AnimatedGeoModel<GoldenAppleCowEntity> 
 	}
 
 	@Override
-	public void setLivingAnimations(GoldenAppleCowEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(GoldenAppleCowEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);

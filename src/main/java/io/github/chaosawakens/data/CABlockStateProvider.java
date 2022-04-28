@@ -24,11 +24,9 @@ public class CABlockStateProvider extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		this.cubeBottomTopBlock(CABlocks.DENSE_GRASS_BLOCK.get(), chaosRL("dense_grass_block_side"),
-				chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
+		this.cubeBottomTopBlock(CABlocks.DENSE_GRASS_BLOCK.get(), chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
 		this.simpleBlock(CABlocks.DENSE_DIRT.get());
-		this.cubeBottomTopBlock(CABlocks.DENSE_RED_ANT_NEST.get(), chaosRL("dense_grass_block_side"),
-				chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"));
+		this.cubeBottomTopBlock(CABlocks.DENSE_RED_ANT_NEST.get(), chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"));
 		this.cross(CABlocks.DENSE_GRASS.get());
 		this.doubleCross(CABlocks.TALL_DENSE_GRASS.get());
 		this.doubleCross(CABlocks.THORNY_SUN.get());
@@ -42,14 +40,10 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.logBlock(CABlocks.MARBLE_PILLAR.get());
 		this.slabBlock(CABlocks.MARBLE_SLAB.get(), chaosRL("marble_block"), chaosRL("marble_block"));
 		this.slabBlock(CABlocks.MARBLE_BRICKS_SLAB.get(), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
-		this.slabBlock(CABlocks.CHISELED_MARBLE_SLAB.get(), chaosRL("chiseled_marble_bricks"),
-				chaosRL("chiseled_marble_bricks"));
-		this.slabBlock(CABlocks.CRACKED_MARBLE_SLAB.get(), chaosRL("cracked_marble_bricks"),
-				chaosRL("cracked_marble_bricks"));
-		this.slabBlock(CABlocks.MOSSY_MARBLE_SLAB.get(), chaosRL("mossy_marble_bricks"),
-				chaosRL("mossy_marble_bricks"));
-		this.slabBlock(CABlocks.POLISHED_MARBLE_SLAB.get(), chaosRL("polished_marble_block"),
-				chaosRL("polished_marble_block"));
+		this.slabBlock(CABlocks.CHISELED_MARBLE_SLAB.get(), chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"));
+		this.slabBlock(CABlocks.CRACKED_MARBLE_SLAB.get(), chaosRL("cracked_marble_bricks"), chaosRL("cracked_marble_bricks"));
+		this.slabBlock(CABlocks.MOSSY_MARBLE_SLAB.get(), chaosRL("mossy_marble_bricks"), chaosRL("mossy_marble_bricks"));
+		this.slabBlock(CABlocks.POLISHED_MARBLE_SLAB.get(), chaosRL("polished_marble_block"), chaosRL("polished_marble_block"));
 		this.stairsBlock(CABlocks.MARBLE_STAIRS.get(), chaosRL("marble_block"));
 		this.stairsBlock(CABlocks.MARBLE_BRICK_STAIRS.get(), chaosRL("marble_bricks"));
 		this.stairsBlock(CABlocks.CHISELED_MARBLE_STAIRS.get(), chaosRL("chiseled_marble_bricks"));
@@ -72,14 +66,10 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.logBlock(CABlocks.LIMESTONE_PILLAR.get());
 		this.slabBlock(CABlocks.LIMESTONE_SLAB.get(), chaosRL("limestone_block"), chaosRL("limestone_block"));
 		this.slabBlock(CABlocks.LIMESTONE_BRICKS_SLAB.get(), chaosRL("limestone_bricks"), chaosRL("limestone_bricks"));
-		this.slabBlock(CABlocks.CHISELED_LIMESTONE_SLAB.get(), chaosRL("chiseled_limestone_bricks"),
-				chaosRL("chiseled_limestone_bricks"));
-		this.slabBlock(CABlocks.CRACKED_LIMESTONE_SLAB.get(), chaosRL("cracked_limestone_bricks"),
-				chaosRL("cracked_limestone_bricks"));
-		this.slabBlock(CABlocks.MOSSY_LIMESTONE_SLAB.get(), chaosRL("mossy_limestone_bricks"),
-				chaosRL("mossy_limestone_bricks"));
-		this.slabBlock(CABlocks.POLISHED_LIMESTONE_SLAB.get(), chaosRL("polished_limestone_block"),
-				chaosRL("polished_limestone_block"));
+		this.slabBlock(CABlocks.CHISELED_LIMESTONE_SLAB.get(), chaosRL("chiseled_limestone_bricks"), chaosRL("chiseled_limestone_bricks"));
+		this.slabBlock(CABlocks.CRACKED_LIMESTONE_SLAB.get(), chaosRL("cracked_limestone_bricks"), chaosRL("cracked_limestone_bricks"));
+		this.slabBlock(CABlocks.MOSSY_LIMESTONE_SLAB.get(), chaosRL("mossy_limestone_bricks"), chaosRL("mossy_limestone_bricks"));
+		this.slabBlock(CABlocks.POLISHED_LIMESTONE_SLAB.get(), chaosRL("polished_limestone_block"), chaosRL("polished_limestone_block"));
 		this.stairsBlock(CABlocks.LIMESTONE_STAIRS.get(), chaosRL("limestone_block"));
 		this.stairsBlock(CABlocks.LIMESTONE_BRICK_STAIRS.get(), chaosRL("limestone_bricks"));
 		this.stairsBlock(CABlocks.CHISELED_LIMESTONE_STAIRS.get(), chaosRL("chiseled_limestone_bricks"));
@@ -88,12 +78,10 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.stairsBlock(CABlocks.POLISHED_LIMESTONE_STAIRS.get(), chaosRL("polished_limestone_block"));
 		this.wallBlock(CABlocks.LIMESTONE_WALL.get(), "limestone", chaosRL("limestone_block"));
 		this.wallBlock(CABlocks.LIMESTONE_BRICK_WALL.get(), "limestone_brick", chaosRL("limestone_bricks"));
-		this.wallBlock(CABlocks.CHISELED_LIMESTONE_WALL.get(), "chiseled_limestone",
-				chaosRL("chiseled_limestone_bricks"));
+		this.wallBlock(CABlocks.CHISELED_LIMESTONE_WALL.get(), "chiseled_limestone", chaosRL("chiseled_limestone_bricks"));
 		this.wallBlock(CABlocks.CRACKED_LIMESTONE_WALL.get(), "cracked_limestone", chaosRL("cracked_limestone_bricks"));
 		this.wallBlock(CABlocks.MOSSY_LIMESTONE_WALL.get(), "mossy_limestone", chaosRL("mossy_limestone_bricks"));
-		this.wallBlock(CABlocks.POLISHED_LIMESTONE_WALL.get(), "polished_limestone",
-				chaosRL("polished_limestone_block"));
+		this.wallBlock(CABlocks.POLISHED_LIMESTONE_WALL.get(), "polished_limestone", chaosRL("polished_limestone_block"));
 
 		this.simpleBlock(CABlocks.ROBO_BLOCK_I.get());
 		this.logBlock(CABlocks.ROBO_BLOCK_V.get());
@@ -123,40 +111,23 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.TERRACOTTA_BRICKS.get());
 		this.simpleBlock(CABlocks.WHITE_TERRACOTTA_BRICKS.get());
 		this.simpleBlock(CABlocks.YELLOW_TERRACOTTA_BRICKS.get());
-		this.slabBlock(CABlocks.BLACK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("black_terracotta_bricks"),
-				chaosRL("black_terracotta_bricks"));
-		this.slabBlock(CABlocks.BLUE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("blue_terracotta_bricks"),
-				chaosRL("blue_terracotta_bricks"));
-		this.slabBlock(CABlocks.BROWN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("brown_terracotta_bricks"),
-				chaosRL("brown_terracotta_bricks"));
-		this.slabBlock(CABlocks.CYAN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cyan_terracotta_bricks"),
-				chaosRL("cyan_terracotta_bricks"));
-		this.slabBlock(CABlocks.GRAY_TERRACOTTA_BRICK_SLAB.get(), chaosRL("gray_terracotta_bricks"),
-				chaosRL("gray_terracotta_bricks"));
-		this.slabBlock(CABlocks.GREEN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("green_terracotta_bricks"),
-				chaosRL("green_terracotta_bricks"));
-		this.slabBlock(CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("light_blue_terracotta_bricks"),
-				chaosRL("light_blue_terracotta_bricks"));
-		this.slabBlock(CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), chaosRL("light_gray_terracotta_bricks"),
-				chaosRL("light_gray_terracotta_bricks"));
-		this.slabBlock(CABlocks.LIME_TERRACOTTA_BRICK_SLAB.get(), chaosRL("lime_terracotta_bricks"),
-				chaosRL("lime_terracotta_bricks"));
-		this.slabBlock(CABlocks.MAGENTA_TERRACOTTA_BRICK_SLAB.get(), chaosRL("magenta_terracotta_bricks"),
-				chaosRL("magenta_terracotta_bricks"));
-		this.slabBlock(CABlocks.ORANGE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("orange_terracotta_bricks"),
-				chaosRL("orange_terracotta_bricks"));
-		this.slabBlock(CABlocks.PINK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("pink_terracotta_bricks"),
-				chaosRL("pink_terracotta_bricks"));
-		this.slabBlock(CABlocks.PURPLE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("purple_terracotta_bricks"),
-				chaosRL("purple_terracotta_bricks"));
-		this.slabBlock(CABlocks.RED_TERRACOTTA_BRICK_SLAB.get(), chaosRL("red_terracotta_bricks"),
-				chaosRL("red_terracotta_bricks"));
-		this.slabBlock(CABlocks.TERRACOTTA_BRICK_SLAB.get(), chaosRL("terracotta_bricks"),
-				chaosRL("terracotta_bricks"));
-		this.slabBlock(CABlocks.WHITE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("white_terracotta_bricks"),
-				chaosRL("white_terracotta_bricks"));
-		this.slabBlock(CABlocks.YELLOW_TERRACOTTA_BRICK_SLAB.get(), chaosRL("yellow_terracotta_bricks"),
-				chaosRL("yellow_terracotta_bricks"));
+		this.slabBlock(CABlocks.BLACK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("black_terracotta_bricks"), chaosRL("black_terracotta_bricks"));
+		this.slabBlock(CABlocks.BLUE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("blue_terracotta_bricks"), chaosRL("blue_terracotta_bricks"));
+		this.slabBlock(CABlocks.BROWN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("brown_terracotta_bricks"), chaosRL("brown_terracotta_bricks"));
+		this.slabBlock(CABlocks.CYAN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cyan_terracotta_bricks"), chaosRL("cyan_terracotta_bricks"));
+		this.slabBlock(CABlocks.GRAY_TERRACOTTA_BRICK_SLAB.get(), chaosRL("gray_terracotta_bricks"), chaosRL("gray_terracotta_bricks"));
+		this.slabBlock(CABlocks.GREEN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("green_terracotta_bricks"), chaosRL("green_terracotta_bricks"));
+		this.slabBlock(CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("light_blue_terracotta_bricks"), chaosRL("light_blue_terracotta_bricks"));
+		this.slabBlock(CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), chaosRL("light_gray_terracotta_bricks"), chaosRL("light_gray_terracotta_bricks"));
+		this.slabBlock(CABlocks.LIME_TERRACOTTA_BRICK_SLAB.get(), chaosRL("lime_terracotta_bricks"), chaosRL("lime_terracotta_bricks"));
+		this.slabBlock(CABlocks.MAGENTA_TERRACOTTA_BRICK_SLAB.get(), chaosRL("magenta_terracotta_bricks"), chaosRL("magenta_terracotta_bricks"));
+		this.slabBlock(CABlocks.ORANGE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("orange_terracotta_bricks"), chaosRL("orange_terracotta_bricks"));
+		this.slabBlock(CABlocks.PINK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("pink_terracotta_bricks"), chaosRL("pink_terracotta_bricks"));
+		this.slabBlock(CABlocks.PURPLE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("purple_terracotta_bricks"), chaosRL("purple_terracotta_bricks"));
+		this.slabBlock(CABlocks.RED_TERRACOTTA_BRICK_SLAB.get(), chaosRL("red_terracotta_bricks"), chaosRL("red_terracotta_bricks"));
+		this.slabBlock(CABlocks.TERRACOTTA_BRICK_SLAB.get(), chaosRL("terracotta_bricks"), chaosRL("terracotta_bricks"));
+		this.slabBlock(CABlocks.WHITE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("white_terracotta_bricks"), chaosRL("white_terracotta_bricks"));
+		this.slabBlock(CABlocks.YELLOW_TERRACOTTA_BRICK_SLAB.get(), chaosRL("yellow_terracotta_bricks"), chaosRL("yellow_terracotta_bricks"));
 		this.stairsBlock(CABlocks.BLACK_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("black_terracotta_bricks"));
 		this.stairsBlock(CABlocks.BLUE_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("blue_terracotta_bricks"));
 		this.stairsBlock(CABlocks.BROWN_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("brown_terracotta_bricks"));
@@ -209,95 +180,57 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.CRACKED_TERRACOTTA_BRICKS.get());
 		this.simpleBlock(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get());
 		this.simpleBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get());
-		this.slabBlock(CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_black_terracotta_bricks"),
-				chaosRL("cracked_black_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_blue_terracotta_bricks"),
-				chaosRL("cracked_blue_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_brown_terracotta_bricks"),
-				chaosRL("cracked_brown_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_cyan_terracotta_bricks"),
-				chaosRL("cracked_cyan_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_gray_terracotta_bricks"),
-				chaosRL("cracked_gray_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_green_terracotta_bricks"),
-				chaosRL("cracked_green_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(),
-				chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(),
-				chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_lime_terracotta_bricks"),
-				chaosRL("cracked_lime_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_SLAB.get(),
-				chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_orange_terracotta_bricks"),
-				chaosRL("cracked_orange_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_pink_terracotta_bricks"),
-				chaosRL("cracked_pink_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_purple_terracotta_bricks"),
-				chaosRL("cracked_purple_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_RED_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_red_terracotta_bricks"),
-				chaosRL("cracked_red_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_terracotta_bricks"),
-				chaosRL("cracked_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_white_terracotta_bricks"),
-				chaosRL("cracked_white_terracotta_bricks"));
-		this.slabBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_yellow_terracotta_bricks"),
-				chaosRL("cracked_yellow_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_black_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_blue_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_brown_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_cyan_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_gray_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_green_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_light_gray_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_lime_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_magenta_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_orange_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_pink_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_purple_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_black_terracotta_bricks"), chaosRL("cracked_black_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_blue_terracotta_bricks"), chaosRL("cracked_blue_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_brown_terracotta_bricks"), chaosRL("cracked_brown_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_cyan_terracotta_bricks"), chaosRL("cracked_cyan_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_gray_terracotta_bricks"), chaosRL("cracked_gray_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_green_terracotta_bricks"), chaosRL("cracked_green_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_light_blue_terracotta_bricks"), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_light_gray_terracotta_bricks"), chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_lime_terracotta_bricks"), chaosRL("cracked_lime_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_magenta_terracotta_bricks"), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_orange_terracotta_bricks"), chaosRL("cracked_orange_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_pink_terracotta_bricks"), chaosRL("cracked_pink_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_purple_terracotta_bricks"), chaosRL("cracked_purple_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_RED_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_red_terracotta_bricks"), chaosRL("cracked_red_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_terracotta_bricks"), chaosRL("cracked_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_white_terracotta_bricks"), chaosRL("cracked_white_terracotta_bricks"));
+		this.slabBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_SLAB.get(), chaosRL("cracked_yellow_terracotta_bricks"), chaosRL("cracked_yellow_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_black_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_blue_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_brown_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_cyan_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_gray_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_green_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_lime_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_orange_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_pink_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_purple_terracotta_bricks"));
 		this.stairsBlock(CABlocks.CRACKED_RED_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_red_terracotta_bricks"));
 		this.stairsBlock(CABlocks.CRACKED_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_white_terracotta_bricks"));
-		this.stairsBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_STAIRS.get(),
-				chaosRL("cracked_yellow_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_white_terracotta_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_STAIRS.get(), chaosRL("cracked_yellow_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_black_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_blue_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_brown_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_cyan_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_gray_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_green_terracotta_bricks"));
-		this.wallBlock(CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(),
-				chaosRL("cracked_light_blue_terracotta_bricks"));
-		this.wallBlock(CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(),
-				chaosRL("cracked_light_gray_terracotta_bricks"));
+		this.wallBlock(CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_light_blue_terracotta_bricks"));
+		this.wallBlock(CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_light_gray_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_lime_terracotta_bricks"));
-		this.wallBlock(CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get(),
-				chaosRL("cracked_magenta_terracotta_bricks"));
-		this.wallBlock(CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get(),
-				chaosRL("cracked_orange_terracotta_bricks"));
+		this.wallBlock(CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_magenta_terracotta_bricks"));
+		this.wallBlock(CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_orange_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_pink_terracotta_bricks"));
-		this.wallBlock(CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get(),
-				chaosRL("cracked_purple_terracotta_bricks"));
+		this.wallBlock(CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_purple_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_RED_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_red_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_white_terracotta_bricks"));
-		this.wallBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get(),
-				chaosRL("cracked_yellow_terracotta_bricks"));
+		this.wallBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_yellow_terracotta_bricks"));
 
 		this.simpleBlock(CABlocks.FOSSILISED_ACACIA_ENT.get());
 		this.simpleBlock(CABlocks.FOSSILISED_BIRCH_ENT.get());
@@ -342,8 +275,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.FOSSILISED_GUARDIAN.get());
 		this.simpleBlock(CABlocks.FOSSILISED_HORSE.get());
 		this.simpleBlock(CABlocks.FOSSILISED_HUSK.get());
-		this.cubeBottomTopBlock(CABlocks.FOSSILISED_HUSK_SANDSTONE.get(), chaosRL("fossilised_husk_sandstone"),
-				mcRL("sandstone_bottom"), mcRL("sandstone_top"));
+		this.cubeBottomTopBlock(CABlocks.FOSSILISED_HUSK_SANDSTONE.get(), chaosRL("fossilised_husk_sandstone"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
 		this.simpleBlock(CABlocks.FOSSILISED_ILLUSIONER.get());
 		this.simpleBlock(CABlocks.FOSSILISED_IRON_GOLEM.get());
 		this.simpleBlock(CABlocks.FOSSILISED_LLAMA.get());
@@ -475,17 +407,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.fenceGateBlock(CABlocks.SKYWOOD_FENCE_GATE.get(), chaosRL("skywood_planks"));
 		this.fenceGateBlock(CABlocks.CRYSTAL_FENCE_GATE.get(), chaosRL("crystal_planks"));
 		this.pressurePlateBlock(CABlocks.APPLE_PRESSURE_PLATE.get(), "apple_pressure_plate", chaosRL("apple_planks"));
-		this.pressurePlateBlock(CABlocks.CHERRY_PRESSURE_PLATE.get(), "cherry_pressure_plate",
-				chaosRL("cherry_planks"));
-		this.pressurePlateBlock(CABlocks.DUPLICATION_PRESSURE_PLATE.get(), "duplication_pressure_plate",
-				chaosRL("duplication_planks"));
-		this.pressurePlateBlock(CABlocks.GINKGO_PRESSURE_PLATE.get(), "ginkgo_pressure_plate",
-				chaosRL("ginkgo_planks"));
+		this.pressurePlateBlock(CABlocks.CHERRY_PRESSURE_PLATE.get(), "cherry_pressure_plate", chaosRL("cherry_planks"));
+		this.pressurePlateBlock(CABlocks.DUPLICATION_PRESSURE_PLATE.get(), "duplication_pressure_plate", chaosRL("duplication_planks"));
+		this.pressurePlateBlock(CABlocks.GINKGO_PRESSURE_PLATE.get(), "ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
 		this.pressurePlateBlock(CABlocks.PEACH_PRESSURE_PLATE.get(), "peach_pressure_plate", chaosRL("peach_planks"));
-		this.pressurePlateBlock(CABlocks.SKYWOOD_PRESSURE_PLATE.get(), "skywood_pressure_plate",
-				chaosRL("skywood_planks"));
-		this.pressurePlateBlock(CABlocks.CRYSTAL_PRESSURE_PLATE.get(), "crystal_pressure_plate",
-				chaosRL("crystal_planks"));
+		this.pressurePlateBlock(CABlocks.SKYWOOD_PRESSURE_PLATE.get(), "skywood_pressure_plate", chaosRL("skywood_planks"));
+		this.pressurePlateBlock(CABlocks.CRYSTAL_PRESSURE_PLATE.get(), "crystal_pressure_plate", chaosRL("crystal_planks"));
 		this.buttonBlock(CABlocks.APPLE_BUTTON.get(), chaosRL("apple_planks"));
 		this.buttonBlock(CABlocks.CHERRY_BUTTON.get(), chaosRL("cherry_planks"));
 		this.buttonBlock(CABlocks.DUPLICATION_BUTTON.get(), chaosRL("duplication_planks"));
@@ -504,38 +431,23 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.slabBlock(CABlocks.MOLDY_SLAB.get(), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
 		this.fenceBlock(CABlocks.MOLDY_FENCE.get(), chaosRL("moldy_planks"));
 
-		this.cubeBottomTopBlock(CABlocks.APPLE_GATE_BLOCK.get(), chaosRL("apple_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.CHERRY_GATE_BLOCK.get(), chaosRL("cherry_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.DUPLICATION_GATE_BLOCK.get(), chaosRL("duplication_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.GINKGO_GATE_BLOCK.get(), chaosRL("ginkgo_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.PEACH_GATE_BLOCK.get(), chaosRL("peach_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.SKYWOOD_GATE_BLOCK.get(), chaosRL("skywood_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.MUSHROOM_GATE_BLOCK.get(), chaosRL("mushroom_gate_block"),
-				chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.APPLE_GATE_BLOCK.get(), chaosRL("apple_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.CHERRY_GATE_BLOCK.get(), chaosRL("cherry_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.DUPLICATION_GATE_BLOCK.get(), chaosRL("duplication_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.GINKGO_GATE_BLOCK.get(), chaosRL("ginkgo_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.PEACH_GATE_BLOCK.get(), chaosRL("peach_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.SKYWOOD_GATE_BLOCK.get(), chaosRL("skywood_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.MUSHROOM_GATE_BLOCK.get(), chaosRL("mushroom_gate_block"), chaosRL("gate_block_top"));
 
-		this.cubeBottomTopBlock(CABlocks.ACACIA_GATE_BLOCK.get(), chaosRL("acacia_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.BIRCH_GATE_BLOCK.get(), chaosRL("birch_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.CRIMSON_GATE_BLOCK.get(), chaosRL("crimson_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.DARK_OAK_GATE_BLOCK.get(), chaosRL("dark_oak_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.JUNGLE_GATE_BLOCK.get(), chaosRL("jungle_gate_block"),
-				chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.ACACIA_GATE_BLOCK.get(), chaosRL("acacia_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.BIRCH_GATE_BLOCK.get(), chaosRL("birch_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.CRIMSON_GATE_BLOCK.get(), chaosRL("crimson_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.DARK_OAK_GATE_BLOCK.get(), chaosRL("dark_oak_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.JUNGLE_GATE_BLOCK.get(), chaosRL("jungle_gate_block"), chaosRL("gate_block_top"));
 		this.cubeBottomTopBlock(CABlocks.OAK_GATE_BLOCK.get(), chaosRL("oak_gate_block"), chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.SPRUCE_GATE_BLOCK.get(), chaosRL("spruce_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.WARPED_GATE_BLOCK.get(), chaosRL("warped_gate_block"),
-				chaosRL("gate_block_top"));
-		this.cubeBottomTopBlock(CABlocks.MUSHROOM_GATE_BLOCK.get(), chaosRL("mushroom_gate_block"),
-				chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.SPRUCE_GATE_BLOCK.get(), chaosRL("spruce_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.WARPED_GATE_BLOCK.get(), chaosRL("warped_gate_block"), chaosRL("gate_block_top"));
+		this.cubeBottomTopBlock(CABlocks.MUSHROOM_GATE_BLOCK.get(), chaosRL("mushroom_gate_block"), chaosRL("gate_block_top"));
 
 		this.leafCarpetBlock(CABlocks.OAK_LEAF_CARPET.get(), mcRL("oak_leaves"));
 		this.leafCarpetBlock(CABlocks.SPRUCE_LEAF_CARPET.get(), mcRL("spruce_leaves"));
@@ -567,14 +479,11 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	public void doubleCross(DoubleDensePlantBlock block) {
-		ModelFile crossLower = models()
-				.getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_bottom"));
-		ModelFile crossUpper = models()
-				.getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_top"));
+		ModelFile crossLower = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_bottom"));
+		ModelFile crossUpper = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_top"));
 
 		getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
-				.modelFile(
-						state.getValue(DoubleDensePlantBlock.HALF) == DoubleBlockHalf.LOWER ? crossLower : crossUpper)
+				.modelFile(state.getValue(DoubleDensePlantBlock.HALF) == DoubleBlockHalf.LOWER ? crossLower : crossUpper)
 				.build());
 	}
 
@@ -599,16 +508,14 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	public void crystalAxisBlock(RotatedPillarCrystalBlock block, ResourceLocation side, ResourceLocation end) {
-		crystalAxisBlock(block, models().cubeColumn(name(block), side, end),
-				models().cubeColumnHorizontal(name(block) + "_horizontal", side, end));
+		crystalAxisBlock(block, models().cubeColumn(name(block), side, end), models().cubeColumnHorizontal(name(block) + "_horizontal", side, end));
 	}
 
 	public void crystalAxisBlock(RotatedPillarCrystalBlock block, ModelFile vertical, ModelFile horizontal) {
-		getVariantBuilder(block).partialState().with(RotatedPillarCrystalBlock.AXIS, Direction.Axis.Y).modelForState()
-				.modelFile(vertical).addModel().partialState().with(RotatedPillarCrystalBlock.AXIS, Direction.Axis.Z)
-				.modelForState().modelFile(horizontal).rotationX(90).addModel().partialState()
-				.with(RotatedPillarCrystalBlock.AXIS, Direction.Axis.X).modelForState().modelFile(horizontal)
-				.rotationX(90).rotationY(90).addModel();
+		getVariantBuilder(block)
+				.partialState().with(RotatedPillarCrystalBlock.AXIS, Direction.Axis.Y).modelForState().modelFile(vertical).addModel()
+				.partialState().with(RotatedPillarCrystalBlock.AXIS, Direction.Axis.Z).modelForState().modelFile(horizontal).rotationX(90).addModel()
+				.partialState().with(RotatedPillarCrystalBlock.AXIS, Direction.Axis.X).modelForState().modelFile(horizontal).rotationX(90).rotationY(90).addModel();
 	}
 
 	public void crystalWoodBlock(RotatedPillarCrystalBlock block, ResourceLocation texture) {
@@ -624,10 +531,8 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	private void pressurePlateBlockInternal(PressurePlateBlock block, String baseName, ResourceLocation all) {
-		ModelFile pressurePlateUp = models().withExistingParent(baseName, mcRL("pressure_plate_up")).texture("texture",
-				all);
-		ModelFile pressurePlateDown = models().withExistingParent(baseName + "_down", mcRL("pressure_plate_down"))
-				.texture("texture", all);
+		ModelFile pressurePlateUp = models().withExistingParent(baseName, mcRL("pressure_plate_up")).texture("texture", all);
+		ModelFile pressurePlateDown = models().withExistingParent(baseName + "_down", mcRL("pressure_plate_down")).texture("texture", all);
 		pressurePlateBlock(block, pressurePlateUp, pressurePlateDown);
 	}
 
@@ -647,14 +552,9 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	public void buttonBlock(AbstractButtonBlock block, ResourceLocation textureName) {
-		ModelFile unpressed = models().withExistingParent(block.getRegistryName().getPath(), "button")
-				.texture("texture", textureName);
-		ModelFile pressed = models()
-				.withExistingParent(block.getRegistryName().getPath() + "_pressed", "button_pressed")
-				.texture("texture", textureName);
-		ModelFile inventory = models()
-				.withExistingParent(block.getRegistryName().getPath() + "_inventory", "button_inventory")
-				.texture("texture", textureName);
+		ModelFile unpressed = models().withExistingParent(block.getRegistryName().getPath(), "button").texture("texture", textureName);
+		ModelFile pressed = models().withExistingParent(block.getRegistryName().getPath() + "_pressed", "button_pressed").texture("texture", textureName);
+		ModelFile inventory = models().withExistingParent(block.getRegistryName().getPath() + "_inventory", "button_inventory").texture("texture", textureName);
 
 		getVariantBuilder(block).forAllStates(state -> {
 			int rotX = 0;
@@ -710,8 +610,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	public void leafCarpetBlock(LeafCarpetBlock block, ResourceLocation textureName) {
-		ModelFile carpet = models().withExistingParent(block.getRegistryName().getPath(), "chaosawakens:leaf_carpet")
-				.texture("texture", textureName);
+		ModelFile carpet = models().withExistingParent(block.getRegistryName().getPath(), "chaosawakens:leaf_carpet").texture("texture", textureName);
 
 		getVariantBuilder(block).forAllStates(state -> {
 			int rotX = 0;

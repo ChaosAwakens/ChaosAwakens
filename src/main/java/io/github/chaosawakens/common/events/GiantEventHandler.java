@@ -19,8 +19,7 @@ public class GiantEventHandler {
 		World world = event.getWorld();
 		Entity entity = event.getEntity();
 
-		if (world.isClientSide || !(entity instanceof GiantEntity))
-			return;
+		if (world.isClientSide || !(entity instanceof GiantEntity)) return;
 
 		GiantEntity giant = (GiantEntity) entity;
 

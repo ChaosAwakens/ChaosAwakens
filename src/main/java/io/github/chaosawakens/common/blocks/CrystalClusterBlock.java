@@ -55,8 +55,7 @@ public class CrystalClusterBlock extends DirectionalBlock {
 
 	public CrystalClusterBlock(Properties builder) {
 		super(builder);
-		this.registerDefaultState(
-				this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(AGE, new Random().nextInt(4)));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(AGE, new Random().nextInt(4)));
 	}
 
 	@Override
@@ -78,8 +77,7 @@ public class CrystalClusterBlock extends DirectionalBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		Direction direction = context.getClickedFace();
-		BlockState blockstate = context.getLevel()
-				.getBlockState(context.getClickedPos().relative(direction.getOpposite()));
+		BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
 		return blockstate.is(this) && blockstate.getValue(FACING) == direction
 				? this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(AGE, 3)
 				: this.defaultBlockState().setValue(FACING, direction).setValue(AGE, 3);

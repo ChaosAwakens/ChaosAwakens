@@ -20,29 +20,24 @@ public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal implements IUti
 	private final BiFunction<Double, Double, Boolean> attackPredicate;
 	private boolean hasHit;
 
-	public AnimatableLeapAtTargetGoal(AnimatableAnimalEntity e, float f, double animationLength, double attackBegin,
-			double attackEnd) {
-		super(e, f);
-		entity = e;
+	public AnimatableLeapAtTargetGoal(AnimatableAnimalEntity entity, float f, double animationLength, double attackBegin, double attackEnd) {
+		super(entity, f);
+		this.entity = entity;
 		yf = f;
 		this.animationLength = animationLength;
-		this.attackPredicate = (progress, length) -> attackBegin < progress / (length)
-				&& progress / (length) < attackEnd;
+		this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
-	private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableAnimalEntity attacker,
-			LivingEntity target) {
-		if (target == null)
-			return false;
+	private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableAnimalEntity attacker, LivingEntity target) {
+		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 				attacker.setAttacking(false);
 				return false;
 			}
 			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-			if (distance <= AnimatableGoal.getAttackReachSq(attacker, target))
-				return true;
+			if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
 		}
 		attacker.setAttacking(false);
 		return false;
@@ -79,10 +74,8 @@ public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal implements IUti
 	@Override
 	public void start() {
 		Vector3d vector3d = this.entity.getDeltaMovement();
-		Vector3d vector3d1 = new Vector3d(this.target.getX() - this.entity.getX(), 0.0D,
-				this.target.getZ() - this.entity.getZ());
-		if (vector3d1.lengthSqr() > 1.0E-7D)
-			vector3d1 = vector3d1.normalize().scale(0.4D).add(vector3d.scale(0.2D));
+		Vector3d vector3d1 = new Vector3d(this.target.getX() - this.entity.getX(), 0.0D, this.target.getZ() - this.entity.getZ());
+		if (vector3d1.lengthSqr() > 1.0E-7D) vector3d1 = vector3d1.normalize().scale(0.4D).add(vector3d.scale(0.2D));
 
 		this.entity.setDeltaMovement(vector3d1.x, (double) this.yf, vector3d1.z);
 	}

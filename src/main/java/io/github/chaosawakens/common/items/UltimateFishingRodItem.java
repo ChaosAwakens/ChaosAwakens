@@ -15,7 +15,6 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class UltimateFishingRodItem extends FishingRodItem implements IAutoEnchantable {
-
 	private final EnchantmentData[] enchantments;
 
 	public UltimateFishingRodItem(Properties builder, EnchantmentData[] enchantments) {
@@ -27,20 +26,14 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for (EnchantmentData enchant : enchantments) {
-					stack.enchant(enchant.enchantment, enchant.level);
-				}
+			if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 			items.add(stack);
 		}
 	}
 
 	@Override
 	public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		if (CAConfig.COMMON.enableAutoEnchanting.get())
-			for (EnchantmentData enchant : enchantments) {
-				stack.enchant(enchant.enchantment, enchant.level);
-			}
+		if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 	}
 
 	@Override
@@ -52,12 +45,9 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 				itemstack.hurtAndBreak(i, playerIn, (player) -> player.broadcastBreakEvent(handIn));
 			}
 
-			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(),
-					SoundEvents.FISHING_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F,
-					0.4F / (random.nextFloat() * 0.4F + 0.8F));
+			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 		} else {
-			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.FISHING_BOBBER_THROW,
-					SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.FISHING_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 			if (!worldIn.isClientSide) {
 				int k = EnchantmentHelper.getFishingSpeedBonus(itemstack) + 60;
 				int j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 50;

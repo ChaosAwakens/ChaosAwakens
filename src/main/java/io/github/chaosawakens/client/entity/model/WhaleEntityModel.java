@@ -7,7 +7,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class WhaleEntityModel extends AnimatedGeoModel<WhaleEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(WhaleEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/whale.geo.json");
@@ -24,8 +23,7 @@ public class WhaleEntityModel extends AnimatedGeoModel<WhaleEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(WhaleEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(WhaleEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 	}
 }

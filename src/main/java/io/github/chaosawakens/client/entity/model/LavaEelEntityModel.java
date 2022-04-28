@@ -7,7 +7,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class LavaEelEntityModel extends AnimatedGeoModel<LavaEelEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(LavaEelEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/lava_eel.geo.json");
@@ -24,9 +23,7 @@ public class LavaEelEntityModel extends AnimatedGeoModel<LavaEelEntity> {
 	}
 
 	@Override
-	public void setLivingAnimations(LavaEelEntity entity, Integer uniqueID,
-			@SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+	public void setLivingAnimations(LavaEelEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 	}
-
 }

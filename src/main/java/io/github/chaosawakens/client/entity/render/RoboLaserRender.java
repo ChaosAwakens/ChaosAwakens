@@ -9,8 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RoboLaserRender extends LaserRenderer {
-	public static final ResourceLocation LASER_TEXTURE = new ResourceLocation(ChaosAwakens.MODID,
-			"textures/entity/projectiles/laser.png");
+	public static final ResourceLocation LASER_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/projectiles/laser.png");
 
 	public RoboLaserRender(EntityRendererManager manager) {
 		super(manager);

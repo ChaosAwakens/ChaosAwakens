@@ -34,30 +34,23 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 		this(id, playerInventory, IWorldPosCallable.NULL, craftingTable);
 	}
 
-	public CraftingTableContainer(int id, PlayerInventory playerInventory, IWorldPosCallable p_i50090_3_,
-			Block craftingTable) {
+	public CraftingTableContainer(int id, PlayerInventory playerInventory, IWorldPosCallable p_i50090_3_, Block craftingTable) {
 		super(ContainerType.CRAFTING, id);
 		this.worldPosCallable = p_i50090_3_;
 		this.player = playerInventory.player;
 		this.craftingTable = craftingTable;
 		this.addSlot(new CraftingResultSlot(playerInventory.player, this.craftMatrix, this.craftResult, 0, 124, 35));
 
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 3; ++j) {
+		for (int i = 0; i < 3; ++i)
+			for (int j = 0; j < 3; ++j)
 				this.addSlot(new Slot(this.craftMatrix, j + i * 3, 30 + j * 18, 17 + i * 18));
-			}
-		}
 
-		for (int k = 0; k < 3; ++k) {
-			for (int i1 = 0; i1 < 9; ++i1) {
+		for (int k = 0; k < 3; ++k)
+			for (int i1 = 0; i1 < 9; ++i1)
 				this.addSlot(new Slot(playerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18));
-			}
-		}
 
-		for (int l = 0; l < 9; ++l) {
+		for (int l = 0; l < 9; ++l)
 			this.addSlot(new Slot(playerInventory, l, 8 + l * 18, 142));
-		}
-
 	}
 
 	protected static void updateCraftingResult(int id, World world, PlayerEntity player, CraftingInventory inventory,
@@ -65,13 +58,10 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 		if (!world.isClientSide) {
 			ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
 			ItemStack itemstack = ItemStack.EMPTY;
-			Optional<ICraftingRecipe> optional = Objects.requireNonNull(world.getServer()).getRecipeManager()
-					.getRecipeFor(IRecipeType.CRAFTING, inventory, world);
+			Optional<ICraftingRecipe> optional = Objects.requireNonNull(world.getServer()).getRecipeManager().getRecipeFor(IRecipeType.CRAFTING, inventory, world);
 			if (optional.isPresent()) {
 				ICraftingRecipe icraftingrecipe = optional.get();
-				if (inventoryResult.setRecipeUsed(world, serverplayerentity, icraftingrecipe)) {
-					itemstack = icraftingrecipe.assemble(inventory);
-				}
+				if (inventoryResult.setRecipeUsed(world, serverplayerentity, icraftingrecipe)) itemstack = icraftingrecipe.assemble(inventory);
 			}
 
 			inventoryResult.setItem(0, itemstack);
@@ -83,8 +73,7 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 	 * Callback for when the crafting matrix is changed.
 	 */
 	public void slotsChanged(IInventory inventoryIn) {
-		this.worldPosCallable.execute((p_217069_1_, p_217069_2_) -> updateCraftingResult(this.containerId, p_217069_1_,
-				this.player, this.craftMatrix, this.craftResult));
+		this.worldPosCallable.execute((p_217069_1_, p_217069_2_) -> updateCraftingResult(this.containerId, p_217069_1_, this.player, this.craftMatrix, this.craftResult));
 	}
 
 	public void fillCraftSlotsStackedContents(RecipeItemHelper itemHelperIn) {
@@ -105,8 +94,7 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 	 */
 	public void removed(PlayerEntity playerIn) {
 		super.removed(playerIn);
-		this.worldPosCallable
-				.execute((p_217068_2_, p_217068_3_) -> this.clearContainer(playerIn, p_217068_2_, this.craftMatrix));
+		this.worldPosCallable.execute((p_217068_2_, p_217068_3_) -> this.clearContainer(playerIn, p_217068_2_, this.craftMatrix));
 	}
 
 	/**
@@ -127,43 +115,24 @@ public class CraftingTableContainer extends RecipeBookContainer<CraftingInventor
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 			if (index == 0) {
-				this.worldPosCallable.execute((p_217067_2_, p_217067_3_) -> itemstack1.getItem().onCraftedBy(itemstack1,
-						p_217067_2_, playerIn));
-				if (!this.moveItemStackTo(itemstack1, 10, 46, true)) {
-					return ItemStack.EMPTY;
-				}
-
+				this.worldPosCallable.execute((p_217067_2_, p_217067_3_) -> itemstack1.getItem().onCraftedBy(itemstack1, p_217067_2_, playerIn));
+				if (!this.moveItemStackTo(itemstack1, 10, 46, true)) return ItemStack.EMPTY;
 				slot.onQuickCraft(itemstack1, itemstack);
 			} else if (index >= 10 && index < 46) {
 				if (!this.moveItemStackTo(itemstack1, 1, 10, false)) {
-					if (index < 37) {
-						if (!this.moveItemStackTo(itemstack1, 37, 46, false)) {
-							return ItemStack.EMPTY;
-						}
-					} else if (!this.moveItemStackTo(itemstack1, 10, 37, false)) {
-						return ItemStack.EMPTY;
-					}
+					if (index < 37) if (!this.moveItemStackTo(itemstack1, 37, 46, false)) return ItemStack.EMPTY;
+					else if (!this.moveItemStackTo(itemstack1, 10, 37, false)) return ItemStack.EMPTY;
 				}
-			} else if (!this.moveItemStackTo(itemstack1, 10, 46, false)) {
-				return ItemStack.EMPTY;
-			}
+			} else if (!this.moveItemStackTo(itemstack1, 10, 46, false)) return ItemStack.EMPTY;
 
-			if (itemstack1.isEmpty()) {
-				slot.set(ItemStack.EMPTY);
-			} else {
-				slot.setChanged();
-			}
+			if (itemstack1.isEmpty()) slot.set(ItemStack.EMPTY);
+			else slot.setChanged();
 
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
+			if (itemstack1.getCount() == itemstack.getCount()) return ItemStack.EMPTY;
 
 			ItemStack itemstack2 = slot.onTake(playerIn, itemstack1);
-			if (index == 0) {
-				playerIn.drop(itemstack2, false);
-			}
+			if (index == 0) playerIn.drop(itemstack2, false);
 		}
-
 		return itemstack;
 	}
 

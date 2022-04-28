@@ -7,19 +7,16 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.NonNullList;
 import net.minecraft.world.Dimension;
 import net.minecraft.world.World;
 
 public class LavaEelArmorItem extends EnchantedArmorItem implements IAutoEnchantable {
 	private final EnchantmentData[] enchantments;
 
-	public LavaEelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn,
-			EnchantmentData[] enchantments) {
+	public LavaEelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, EnchantmentData[] enchantments) {
 		super(materialIn, slot, builderIn, enchantments);
 		this.enchantments = enchantments;
 	}
@@ -27,21 +24,8 @@ public class LavaEelArmorItem extends EnchantedArmorItem implements IAutoEnchant
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		super.onArmorTick(stack, world, player);
-		if (player.level.dimension().location() == Dimension.NETHER.location() || player.isInLava()
-				|| player.isOnFire()) {
+		if (player.level.dimension().location() == Dimension.NETHER.location() || player.isInLava() || player.isOnFire()) {
 			player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 100, 0, true, false));
-		}
-	}
-
-	@Override
-	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-		if (this.allowdedIn(group)) {
-			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get())
-				for (EnchantmentData enchant : enchantments) {
-					stack.enchant(enchant.enchantment, enchant.level);
-				}
-			items.add(stack);
 		}
 	}
 

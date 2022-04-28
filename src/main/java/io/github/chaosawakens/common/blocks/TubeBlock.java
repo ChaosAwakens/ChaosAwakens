@@ -36,17 +36,12 @@ public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContaine
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
-		return fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8 ? super.getStateForPlacement(context)
-				: null;
+		return fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8 ? super.getStateForPlacement(context) : null;
 	}
 
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn,
-			BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState blockstate = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-		if (!blockstate.isAir()) {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
-		}
-
+		if (!blockstate.isAir()) worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		return blockstate;
 	}
 
@@ -54,10 +49,7 @@ public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContaine
 		if (entityIn instanceof LivingEntity && !entityIn.isShiftKeyDown() && entityIn.getBbHeight() > 1) {
 			((LivingEntity) entityIn).addEffect(new EffectInstance(Effects.POISON, 100, 1));
 			entityIn.makeStuckInBlock(state, new Vector3d(0.95F, 1D, 0.95F));
-			if (worldIn.getRandom().nextInt(20) == 0) {
-				worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BONE_BLOCK_STEP,
-						SoundCategory.AMBIENT, 1, 1, true);
-			}
+			if (worldIn.getRandom().nextInt(20) == 0) worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BONE_BLOCK_STEP, SoundCategory.AMBIENT, 1, 1, true);
 		}
 	}
 

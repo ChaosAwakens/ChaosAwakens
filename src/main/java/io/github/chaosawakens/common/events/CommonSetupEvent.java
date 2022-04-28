@@ -39,7 +39,6 @@ import java.util.Map;
 
 public class CommonSetupEvent {
 	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
-
 	private static Method codecMethod;
 
 	public static void onFMLCommonSetupEvent(final FMLCommonSetupEvent event) {
@@ -68,46 +67,31 @@ public class CommonSetupEvent {
 		});
 
 		ModList modList = ModList.get();
-		if (modList.isLoaded("jeresources"))
-			CAJER.init();
+		if (modList.isLoaded("jeresources")) CAJER.init();
 
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_MOUNTAIN.getId()),
-				CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_MOUNTAIN);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()),
-				CABiomes.Type.MINING_PARADISE, CABiomes.Type.STALAGMITE_VALLEY);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()),
-				CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_PLAINS);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SAVANNA.getId()),
-				CABiomes.Type.VILLAGE_MANIA);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_TAIGA.getId()),
-				CABiomes.Type.VILLAGE_MANIA);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SNOWY.getId()),
-				CABiomes.Type.VILLAGE_MANIA);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()),
-				CABiomes.Type.VILLAGE_MANIA);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()),
-				CABiomes.Type.DANGER_ISLES);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()),
-				CABiomes.Type.CRYSTAL_WORLD);
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_HILLS.getId()),
-				CABiomes.Type.CRYSTAL_WORLD);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_MOUNTAIN.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_MOUNTAIN);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.STALAGMITE_VALLEY);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_PLAINS);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SAVANNA.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_SAVANNA);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_TAIGA.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_TAIGA);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_SNOWY.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_SNOWY);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_DESERT.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_DESERT);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DANGER_ISLANDS.getId()), CABiomes.Type.DANGER_ISLES);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_WORLD);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_HILLS.getId()), CABiomes.Type.CRYSTAL_WORLD);
 	}
 
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
-		if (!(event.getWorld() instanceof ServerWorld))
-			return;
+		if (!(event.getWorld() instanceof ServerWorld)) return;
 
 		ServerWorld serverWorld = (ServerWorld) event.getWorld();
 		ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
 
 		try {
-			if (codecMethod == null)
-				codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
+			if (codecMethod == null) codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
 			// TODO Fix this
-			ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR
-					.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
-			if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged"))
-				return;
+			ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
+			if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged")) return;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			ChaosAwakens.LOGGER.warn("[WORLDGEN]: " + e);
 			e.printStackTrace();
@@ -118,9 +102,7 @@ public class CommonSetupEvent {
 						+ " if you aren't using Terraforged please ignore this message");
 		}
 
-		if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator
-				&& serverWorld.dimension().equals(World.OVERWORLD))
-			return;
+		if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD)) return;
 
 		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(
 				chunkProvider.generator.getSettings().structureConfig());

@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class RubyBugEntityModel extends AnimatedGeoModel<RubyBugEntity> {
-
 	@Override
 	public ResourceLocation getModelLocation(RubyBugEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/ruby_bug.geo.json");

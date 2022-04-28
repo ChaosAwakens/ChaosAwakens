@@ -29,19 +29,19 @@ public class BeaverEntity extends AnimalEntity implements IAnimatable {
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 6).add(Attributes.MOVEMENT_SPEED, 0.15D)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 6)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
 				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.beaver.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.beaver.walking_animation", true));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.beaver.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.beaver.idle_animation", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;

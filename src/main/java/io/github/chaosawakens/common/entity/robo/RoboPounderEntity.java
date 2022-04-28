@@ -70,9 +70,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtilityHelper {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	@SuppressWarnings("unused")
 	private float punchingTicks;
-	@SuppressWarnings("unused")
 	private float sideSweepingTicks;
 //	private float samePosTicks;
 //	private Vector3d stuckPos = Vector3d.ZERO;
@@ -88,117 +86,102 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 300).add(Attributes.ARMOR, 30)
-				.add(Attributes.ARMOR_TOUGHNESS, 20).add(Attributes.MOVEMENT_SPEED, 0.2D)
-				.add(Attributes.KNOCKBACK_RESISTANCE, 3).add(Attributes.ATTACK_DAMAGE, 20)
-				.add(Attributes.ATTACK_KNOCKBACK, 15).add(Attributes.ATTACK_SPEED, 2)
-//                .add(ForgeMod.REACH_DISTANCE.get(), 1)
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 300)
+				.add(Attributes.ARMOR, 30)
+				.add(Attributes.ARMOR_TOUGHNESS, 20)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 3)
+				.add(Attributes.ATTACK_DAMAGE, 20)
+				.add(Attributes.ATTACK_KNOCKBACK, 15)
+				.add(Attributes.ATTACK_SPEED, 2)
+//				.add(ForgeMod.REACH_DISTANCE.get(), 1)
 				.add(Attributes.FOLLOW_RANGE, 45);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.dead) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.death", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.death", true));
 			return PlayState.STOP;
 		}
 		if (this.getAttacking() && this.getPunching()) {
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.robo_pounder.swing_arm_attack", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.swing_arm_attack", false));
 			this.animationSpeed = this.animationSpeed + 2.0F;
 			return PlayState.CONTINUE;
 		}
 		if (this.getAttacking() && this.getSideSweep()) {
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.robo_pounder.second_swing_arm_attack", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.second_swing_arm_attack", false));
 			this.animationSpeed = this.animationSpeed + 2.0F;
 			return PlayState.CONTINUE;
 		}
 		if (this.getRageMode()) {
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_enable", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_enable", false));
 			return PlayState.CONTINUE;
 		}
 		if (AnimatableRageRunGoal.deactivated()) {
-			event.getController().setAnimation(
-					new AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_disable", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_disable", false));
 			return PlayState.CONTINUE;
 		}
 		if (this.getRageRunning()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.rage_run", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.rage_run", true));
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving()) {
-			event.getController()
-					.setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.walk", true));
-			// event.getController().setAnimationSpeed(event.getController().getAnimationSpeed()
-			// + 1.0D);
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.walk", true));
+//			event.getController().setAnimationSpeed(event.getController().getAnimationSpeed() + 1.0D);
 			return PlayState.CONTINUE;
 		}
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.idle", true));
 		return PlayState.CONTINUE;
 	}
 
-	/*
-	 * private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
-	 * { if (event.isMoving()) { event.getController().setAnimation(new
-	 * AnimationBuilder().addAnimation("animation.robo_pounder.walk", true)); return
-	 * PlayState.CONTINUE; } if (!event.isMoving()) {
-	 * event.getController().setAnimation(new
-	 * AnimationBuilder().addAnimation("animation.robo_pounder.idle", true)); return
-	 * PlayState.CONTINUE; } if (this.isDeadOrDying()) {
-	 * event.getController().setAnimation(new
-	 * AnimationBuilder().addAnimation("animation.robo_pounder.death", true));
-	 * return PlayState.CONTINUE; } if (this.getAttacking() &&
-	 * getDistanceBetweenEntities(this, this.getTarget()) <= 4.0D) {
-	 * event.getController().setAnimation(new AnimationBuilder().addAnimation(
-	 * "animation.robo_pounder.second_swing_arm_attack", false)); return
-	 * PlayState.CONTINUE; } if (this.getAttacking() && this.getTarget().getHealth()
-	 * <= 5.0F && getDistanceBetweenEntities(this, this.getTarget()) <= 2.0D) {
-	 * event.getController().setAnimation(new
-	 * AnimationBuilder().addAnimation("animation.robo_pounder.swing_arm_attack",
-	 * false)); return PlayState.CONTINUE; } // if (this.getAttacking() &&
-	 * getDistanceBetweenEntities(this, this.getTarget()) <= 10.0D &&
-	 * this.getRageMode()) { // event.getController().setAnimation(new
-	 * AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_enable",
-	 * false)); // this.isAnimationFinished = true; // if (this.isAnimationFinished
-	 * && this.getRageRunning()) { // event.getController().setAnimation(new
-	 * AnimationBuilder().addAnimation("animation.robo_pounder.rage_run", true)); //
-	 * return PlayState.CONTINUE; // } // return PlayState.CONTINUE; // } // if
-	 * (this.getRageMode() == false &&
-	 * event.getController().getCurrentAnimation().animationName ==
-	 * "animation.robo_pounder.rage_run" && this.isAnimationFinished &&
-	 * this.getTarget() == null || !this.isAggressive()) { //
-	 * event.getController().setAnimation(new
-	 * AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_disable",
-	 * false)); // return PlayState.CONTINUE; // } return PlayState.CONTINUE; }
-	 */
+//	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+//		if (event.isMoving()) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.walk", true));
+//			return PlayState.CONTINUE;
+//		}
+//		if (!event.isMoving()) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.idle", true)); return
+//					PlayState.CONTINUE;
+//		} if (this.isDeadOrDying()) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.death", true));
+//			return PlayState.CONTINUE;
+//		} if (this.getAttacking() && getDistanceBetweenEntities(this, this.getTarget()) <= 4.0D) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.second_swing_arm_attack", false));
+//			return PlayState.CONTINUE;
+//		} if (this.getAttacking() && this.getTarget().getHealth() <= 5.0F && getDistanceBetweenEntities(this, this.getTarget()) <= 2.0D) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.swing_arm_attack", false));
+//			return PlayState.CONTINUE;
+//		} if (this.getAttacking() && getDistanceBetweenEntities(this, this.getTarget()) <= 10.0D &&	this.getRageMode()) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_enable", false));
+//			this.isAnimationFinished = true;
+//			if (this.isAnimationFinished && this.getRageRunning()) {
+//				event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.rage_run", true));
+//				return PlayState.CONTINUE;
+//			} return PlayState.CONTINUE;
+//		} if (this.getRageMode() == false && event.getController().getCurrentAnimation().animationName == "animation.robo_pounder.rage_run" && this.isAnimationFinished && this.getTarget() == null || !this.isAggressive()) {
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_pounder.rage_mode_disable", false));
+//			return PlayState.CONTINUE;
+//		} return PlayState.CONTINUE;
+//	}
+
 
 	@Override
 	protected void registerGoals() {
-		// super.registerGoals();
-		// this.targetSelector.addGoal(4, new AnimatableRoboPounderAttackGoal<>(this,
-		// PlayerEntity.class, 1));
-		// this.targetSelector.addGoal(4, new AnimatableRoboPounderAttackGoal<>(this,
-		// AnimalEntity.class, 1));
-		// this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class,
-		// 32.0F));
-		// this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class,
-		// 32.0F));
-		// this.goalSelector.addGoal(3, new LookAtGoal(this,
-		// AbstractVillagerEntity.class, 32.0F));
-		// this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class,
-		// 32.0F));
+//		super.registerGoals();
+//		this.targetSelector.addGoal(4, new AnimatableRoboPounderAttackGoal<>(this, PlayerEntity.class, 1));
+//		this.targetSelector.addGoal(4, new AnimatableRoboPounderAttackGoal<>(this, AnimalEntity.class, 1));
+//		this.goalSelector.addGoal(3, new LookAtGoal(this, IronGolemEntity.class, 32.0F));
+//		this.goalSelector.addGoal(3, new LookAtGoal(this, SnowGolemEntity.class, 32.0F));
+//		this.goalSelector.addGoal(3, new LookAtGoal(this, AbstractVillagerEntity.class, 32.0F));
+//		this.goalSelector.addGoal(3, new LookAtGoal(this, AnimalEntity.class, 32.0F));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-		// this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, 0.4, 0.5));
+//		this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, 0.4, 0.5));
 		this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.0, 5)); // 1.5
 		this.targetSelector.addGoal(2, new AnimatableRoboPunchGoal(this, this, 48.3, 0.4, 0.5));
-		// this.goalSelector.addGoal(4, new RoboPounderEntity.AttackGoal());
-		// this.targetSelector.addGoal(2, new AnimatableRoboSideSweepGoal(this, 48.3,
-		// 0.38, 0.5));
-		// this.targetSelector.addGoal(3, new AnimatableRageRunGoal<>(this,
-		// PlayerEntity.class, 100, 48.3, 0.35, 0.5));
+//		this.goalSelector.addGoal(4, new RoboPounderEntity.AttackGoal());
+//		this.targetSelector.addGoal(2, new AnimatableRoboSideSweepGoal(this, 48.3, 0.38, 0.5));
+//		this.targetSelector.addGoal(3, new AnimatableRageRunGoal<>(this, PlayerEntity.class, 100, 48.3, 0.35, 0.5));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
@@ -212,26 +195,21 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 
 	@OnlyIn(Dist.CLIENT)
 	protected void sinkInWater() {
-		this.setDeltaMovement(this.getDeltaMovement().add(0.0D,
-				(double) -0.04F * this.getAttribute(net.minecraftforge.common.ForgeMod.SWIM_SPEED.get()).getValue(),
-				0.0D));
+		this.setDeltaMovement(this.getDeltaMovement().add(0.0D, (double) -0.04F * this.getAttribute(net.minecraftforge.common.ForgeMod.SWIM_SPEED.get()).getValue(), 0.0D));
 	}
 
 	@Override
 	protected void jumpFromGround() {
 		float f = this.getJumpPower();
 
-		if (this.hasEffect(Effects.JUMP)) {
-			f += 0.1F * (float) (this.getEffect(Effects.JUMP).getAmplifier() + 1);
-		}
+		if (this.hasEffect(Effects.JUMP)) f += 0.1F * (float) (this.getEffect(Effects.JUMP).getAmplifier() + 1);
 
 		Vector3d vector3d = this.getDeltaMovement();
-		this.setDeltaMovement(vector3d.x, (double) f, vector3d.z);
+		this.setDeltaMovement(vector3d.x, f, vector3d.z);
 
 		if (this.isSprinting()) {
 			float f1 = this.yRot * ((float) Math.PI / 180F);
-			this.setDeltaMovement(this.getDeltaMovement().add((double) (-MathHelper.sin(f1) * 0.2F), 0.0D,
-					(double) (MathHelper.cos(f1) * 0.2F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(-MathHelper.sin(f1) * 0.2F, 0.0D, (MathHelper.cos(f1) * 0.2F)));
 		}
 
 		this.hasImpulse = true;
@@ -242,22 +220,23 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 	public void aiStep() {
 		super.aiStep();
 
-		if (!this.isAlive())
-			return;
+		if (!this.isAlive()) return;
 
 		boolean flag = false;
 		AxisAlignedBB axisalignedbb = this.getBoundingBox().inflate(0.2D);
 
 		// When the pounder is crushing things in its way
 		if (this.horizontalCollision && ForgeEventFactory.getMobGriefingEvent(level, this)) {
-			for (BlockPos blockpos : BlockPos.betweenClosed(MathHelper.floor(axisalignedbb.minX),
-					MathHelper.floor(axisalignedbb.minY), MathHelper.floor(axisalignedbb.minZ),
-					MathHelper.floor(axisalignedbb.maxX), MathHelper.floor(axisalignedbb.maxY),
+			for (BlockPos blockpos : BlockPos.betweenClosed(
+					MathHelper.floor(axisalignedbb.minX),
+					MathHelper.floor(axisalignedbb.minY),
+					MathHelper.floor(axisalignedbb.minZ),
+					MathHelper.floor(axisalignedbb.maxX),
+					MathHelper.floor(axisalignedbb.maxY),
 					MathHelper.floor(axisalignedbb.maxZ))) {
 				BlockState blockstate = this.level.getBlockState(blockpos);
 				Block block = blockstate.getBlock();
-				// TODO pack all these up into a tag for the robo pounder to, well, you know,
-				// pound
+				// TODO pack all these up into a tag for the robo pounder to, well, you know, pound
 				if (block instanceof LeavesBlock || block.getBlock() == Blocks.TERRACOTTA
 						|| block.getBlock() == Blocks.MOSSY_COBBLESTONE || block.getBlock() == Blocks.CHISELED_SANDSTONE
 						|| block.getBlock().is(BlockTags.CARPETS) || block.getBlock() == Blocks.LECTERN
@@ -294,21 +273,23 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 				}
 			}
 
-			if (flag == false && this.onGround) {
+			if (!flag && this.onGround) {
 				this.jumpFromGround();
 			}
 		}
 
 		// When the pounder lands on something from above
 		if (this.verticalCollision && ForgeEventFactory.getMobGriefingEvent(level, this)) {
-			for (BlockPos blockpos : BlockPos.betweenClosed(MathHelper.floor(axisalignedbb.minX),
-					MathHelper.floor(axisalignedbb.minY), MathHelper.floor(axisalignedbb.minZ),
-					MathHelper.floor(axisalignedbb.maxX), MathHelper.floor(axisalignedbb.maxY),
+			for (BlockPos blockpos : BlockPos.betweenClosed(
+					MathHelper.floor(axisalignedbb.minX),
+					MathHelper.floor(axisalignedbb.minY),
+					MathHelper.floor(axisalignedbb.minZ),
+					MathHelper.floor(axisalignedbb.maxX),
+					MathHelper.floor(axisalignedbb.maxY),
 					MathHelper.floor(axisalignedbb.maxZ))) {
 				BlockState blockstate = this.level.getBlockState(blockpos);
 				Block block = blockstate.getBlock();
-				// TODO pack all these up into a tag for the robo pounder to, well, you know,
-				// pound
+				// TODO pack all these up into a tag for the robo pounder to, well, you know, pound
 				if (block instanceof LeavesBlock || block.getBlock() == Blocks.HAY_BLOCK
 						|| block.getBlock().is(BlockTags.TRAPDOORS) || block.getBlock().is(BlockTags.FENCES)
 						|| block.getBlock().is(BlockTags.FENCE_GATES) || block.getBlock().is(BlockTags.DOORS)
@@ -327,15 +308,20 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 	}
 
 	// Another failed attempt
-	/*
-	 * @SuppressWarnings("unused") protected void doStuckDetection(Vector3d d) {
-	 * boolean stuck = this.navigation.isStuck();
-	 * 
-	 * if (this.stuckTick - this.lastStuckTickCheck > 100) { if
-	 * (d.distanceToSqr(this.stuckPos) < 2.25D) { stuck = true;
-	 * this.navigation.recomputePath(); } else { stuck = false; }
-	 * this.lastStuckTickCheck = this.stuckTick; this.stuckPos = d; } }
-	 */
+//	protected void doStuckDetection(Vector3d d) {
+//		boolean stuck = this.navigation.isStuck();
+//		if (this.stuckTick - this.lastStuckTickCheck > 100) {
+//			if (d.distanceToSqr(this.stuckPos) < 2.25D) {
+//				stuck = true;
+//				this.navigation.recomputePath();
+//			} else {
+//				stuck = false;
+//			}
+//			this.lastStuckTickCheck = this.stuckTick;
+//			this.stuckPos = d;
+//		}
+//	}
+
 
 	@Override
 	public void registerControllers(AnimationData data) {
@@ -347,34 +333,30 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 		return super.calculateFallDamage(f1, f2) / 2;
 	}
 
-	/*
-	 * @Override protected boolean isImmobile() { return super.isImmobile() ||
-	 * this.navigation.isStuck() || this.distanceToSqr(this.position()) <= 2.25D; }
-	 */
+
+//	@Override
+//	protected boolean isImmobile() {
+//		return super.isImmobile() || this.navigation.isStuck() || this.distanceToSqr(this.position()) <= 2.25D;
+//	}
+
 
 	@Override
 	public void tick() {
 		super.tick();
 //		this.setPunching(false);
-		// this.punchingTicks = AnimatableRoboPunchGoal.punchingTicks;
+//		this.punchingTicks = AnimatableRoboPunchGoal.punchingTicks;
 
-		if (this.getTarget() != null && this.canSee(this.getTarget())
-				&& this.distanceToSqr(this.getTarget()) >= 12.0F) {
+		if (this.getTarget() != null && this.canSee(this.getTarget()) && this.distanceToSqr(this.getTarget()) >= 12.0F) {
 //			if (!canHitTarget(this.getTarget())) return;
 			this.lookControl.setLookAt(this.getTarget(), 30.0F, 30.0F);
 			this.getTarget().moveTo(this.getTarget().blockPosition(), 3.0F, 10.0F);
-			if (this.navigation.isStuck()) {
-				this.navigation.recomputePath(this.getTarget().blockPosition());
-			}
+			if (this.navigation.isStuck()) this.navigation.recomputePath(this.getTarget().blockPosition());
 		}
 
-		if (this.getTarget() != null && this.canSee(this.getTarget())
-				&& this.distanceToSqr(this.getTarget()) <= 12.0F) {
+		if (this.getTarget() != null && this.canSee(this.getTarget()) && this.distanceToSqr(this.getTarget()) <= 12.0F) {
 			this.lookControl.setLookAt(this.getTarget(), 30.0F, 30.0F);
 //			if (!canHitTarget(this.getTarget())) return;
-			if (this.navigation.isStuck()) {
-				this.navigation.recomputePath(this.getTarget().blockPosition());
-			}
+			if (this.navigation.isStuck()) this.navigation.recomputePath(this.getTarget().blockPosition());
 		}
 
 		/*
@@ -412,25 +394,20 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 	 */
 
 	public boolean canHitTarget(Entity target) {
-		if (!this.isAggressive())
-			return false;
-		if (!this.canSee(target))
-			return false;
+		if (!this.isAggressive()) return false;
+		if (!this.canSee(target)) return false;
 
 		Vector3d attackerVector = new Vector3d(this.getX(), this.getEyeY(), this.getZ());
 		Vector3d targetVector = new Vector3d(target.getX(), target.getEyeY(), target.getZ());
 
-		if (target.level != this.level || targetVector.distanceToSqr(attackerVector) > 128.0D * 128.0D)
-			return false;
+		if (target.level != this.level || targetVector.distanceToSqr(attackerVector) > 128.0D * 128.0D) return false;
 
-		return this.level.clip(new RayTraceContext(attackerVector, targetVector, RayTraceContext.BlockMode.COLLIDER,
-				RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
+		return this.level.clip(new RayTraceContext(attackerVector, targetVector, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
 	}
 
 	@Override
 	public boolean canSee(Entity target) {
-		if (target != null && this.distanceTo(target) <= getFollowRange())
-			return true;
+		if (target != null && this.distanceTo(target) <= getFollowRange()) return true;
 		return super.canSee(target);
 	}
 
@@ -478,11 +455,8 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 		}
 
 		@Override
-		protected PathNodeType evaluateBlockPathType(IBlockReader reader, boolean door, boolean canPass, BlockPos pos,
-				PathNodeType type) {
-			return type == PathNodeType.BLOCKED ? PathNodeType.OPEN
-					: super.evaluateBlockPathType(reader, door, canPass, pos, type);
+		protected PathNodeType evaluateBlockPathType(IBlockReader reader, boolean door, boolean canPass, BlockPos pos, PathNodeType type) {
+			return type == PathNodeType.BLOCKED ? PathNodeType.OPEN : super.evaluateBlockPathType(reader, door, canPass, pos, type);
 		}
 	}
-
 }
