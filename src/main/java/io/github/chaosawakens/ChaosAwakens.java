@@ -142,4 +142,39 @@ public class ChaosAwakens {
 		if (ModList.get().isLoaded("theoneprobe"))
 			TheOneProbePlugin.register();
 	}
+	
+	/*
+	 * Those methods below are to make using the LOGGER a little more convenient
+	 */
+	
+	/**
+	 * For those quick info checks to see if things are working, should be removed in releases or
+	 * when you are done!
+	 * @param <D> Type of the message
+	 * @param domain Rather abstract, but basically where this is from
+	 * @param message What you want to be printed (duh)
+	 */
+	public static <D> void debug(String domain, D message) {
+		LOGGER.debug("[" + domain + "]: " + message != null ? message.toString() : message);
+	}
+	
+	/**
+	 * For general info, can be left in releases
+	 * @param <I> Type of the message
+	 * @param domain Rather abstract, but basically where this is from
+	 * @param message What you want to be printed (duh)
+	 */
+	public static <I> void info(String domain, I message) {
+		LOGGER.info("[" + domain + "]: " + message != null ? message.toString() : message);
+	}
+	
+	/**
+	 * For errors, warnings(duh), runtime problems and the like
+	 * @param <W> Type of the message
+	 * @param domain Rather abstract, but basically where this is from
+	 * @param message What you want to be printed (duh)
+	 */
+	public static <W> void warn(String domain, W message) {
+		LOGGER.warn("[" + domain + "]: " + message != null ? message.toString() : message);
+	}
 }

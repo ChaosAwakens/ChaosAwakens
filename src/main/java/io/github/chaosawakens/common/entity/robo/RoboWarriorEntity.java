@@ -27,10 +27,15 @@ public class RoboWarriorEntity extends RoboRangedEntity implements IAnimatable, 
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 180).add(Attributes.ARMOR, 10)
-				.add(Attributes.MOVEMENT_SPEED, 0.105D).add(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
-				.add(Attributes.ATTACK_SPEED, 7.5D).add(Attributes.ATTACK_DAMAGE, 50)
-				.add(Attributes.ATTACK_KNOCKBACK, 3.5D).add(Attributes.FOLLOW_RANGE, 32);
+		return MobEntity.createLivingAttributes()
+				.add(Attributes.MAX_HEALTH, 180)
+				.add(Attributes.ARMOR, 10)
+				.add(Attributes.MOVEMENT_SPEED, 0.105D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 0.4D)
+				.add(Attributes.ATTACK_SPEED, 7.5D)
+				.add(Attributes.ATTACK_DAMAGE, 50)
+				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
+				.add(Attributes.FOLLOW_RANGE, 32);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
