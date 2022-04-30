@@ -96,7 +96,6 @@ public class MiscEventHandler {
 		}
 	}
 
-
 	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		Entity entity = event.getEntity();
 		if (entity == null) return;

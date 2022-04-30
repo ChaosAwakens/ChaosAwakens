@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
-public class EnchantedScytheItem extends ScytheItem implements IReachWeapon, IAutoEnchantable {
+public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable {
 	private final EnchantmentData[] enchantments;
 	double reachDistance;
 
@@ -42,10 +42,5 @@ public class EnchantedScytheItem extends ScytheItem implements IReachWeapon, IAu
 	@Override
 	public EnchantmentData[] enchantments() {
 		return this.enchantments;
-	}
-
-	@Override
-	public double getReachDistance() {
-		return this.reachDistance;
 	}
 }

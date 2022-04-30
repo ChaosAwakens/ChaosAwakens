@@ -39,18 +39,11 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 			LightningBoltEntity lightning = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, level);
 			lightning.moveTo(this.getX(), this.getY(), this.getZ(), 0, 0);
 			this.level.addFreshEntity(lightning);
-
 			boolean hasFire = CAConfig.COMMON.thunderStaffExplosionFire.get();
 			switch (CAConfig.COMMON.thunderStaffExplosionType.get()) {
-			case 0:
-				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
-				break;
-			case 1:
-				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
-				break;
-			case 2:
-				this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
-				break;
+				case 0: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+				case 1: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+				case 2: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
 			}
 			this.remove();
 		}

@@ -12,9 +12,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AttitudeAdjusterItem extends ExtendedHitWeaponItem implements IVanishable, IAnimatable {
-    public AnimationFactory factory = new AnimationFactory(this);
-
     private static final float EXPLOSION_POWER = CAConfig.COMMON.attitudeAdjusterExplosionSize.get();
+    public AnimationFactory factory = new AnimationFactory(this);
 
     public AttitudeAdjusterItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
@@ -22,7 +21,14 @@ public class AttitudeAdjusterItem extends ExtendedHitWeaponItem implements IVani
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (!target.level.isClientSide) target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, false, Explosion.Mode.DESTROY);
+        if (!target.level.isClientSide) {
+            boolean hasFire = CAConfig.COMMON.attitudeAdjusterExplosionFire.get();
+            switch (CAConfig.COMMON.attitudeAdjusterExplosionType.get()) {
+                case 0: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+                case 1: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+                case 2: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+            }
+        }
         stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
         return true;
     }

@@ -37,15 +37,9 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
 		if (!this.level.isClientSide) {
 			boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
 			switch (CAConfig.COMMON.rayGunExplosionType.get()) {
-				case 0:
-					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
-					break;
-				case 1:
-					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
-					break;
-				case 2:
-					this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
-					break;
+				case 0: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+				case 1: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+				case 2: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
 			}
 			this.remove();
 		}
