@@ -148,6 +148,16 @@ public class CAConfig {
 
 		public final ConfigValue<Boolean> enableEnchantedAnimalBreeding;
 
+		public final ConfigValue<Boolean> generateAcaciaEntTree;
+		public final ConfigValue<Boolean> generateBirchEntTree;
+		public final ConfigValue<Boolean> generateCrimsonEntTree;
+		public final ConfigValue<Boolean> generateDarkOakEntTree;
+		public final ConfigValue<Boolean> generateJungleEntTree;
+		public final ConfigValue<Boolean> generateOakEntTree;
+		public final ConfigValue<Boolean> generateSpruceEntTree;
+		public final ConfigValue<Boolean> generateWarpedEntTree;
+		public final ConfigValue<Boolean> generateWaspNest;
+
 		public final ConfigValue<Boolean> holidayTextures;
 
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
@@ -281,6 +291,8 @@ public class CAConfig {
 			builder.pop();
 			builder.pop();
 			builder.push("Functionality");
+			builder.push("Tools/Weapons");
+			builder.push("Explosions");
 			builder.push("Attitude Adjuster");
 			attitudeAdjusterExplosionSize = builder.define("Attitude Adjuster explosion size", 4);
 			attitudeAdjusterExplosionType = builder
@@ -307,6 +319,47 @@ public class CAConfig {
 							+ "2 = DESTROY - The Thunder Staff will destroy blocks and never drop them.")
 					.defineInRange("Thunder Staff explosion type", 2, 0, 2);
 			thunderStaffExplosionFire = builder.define("Fire from Thunder Staff explosion", true);
+			builder.pop();
+			builder.pop();
+			enableAutoEnchanting = builder
+					.comment("If disabled, auto-enchanted items will be able to be enchanted manually.")
+					.define("Auto-enchant specific tools and weapons", true);
+			builder.pop();
+			builder.push("Breeding");
+			enableEnchantedAnimalBreeding = builder
+					.comment("Will Enchanted Animals be Breedable?")
+					.define("Enchanted Animal Breeding", false);
+			builder.pop();
+			builder.push("Textures");
+			holidayTextures = builder
+					.comment("Will holiday special textures be obtainable?")
+					.define("Obtainable Holiday Textures", true);
+			builder.pop();
+			builder.push("Ender Dragon");
+			enableDragonEggRespawns = builder
+					.comment("Will the Ender Dragon Egg respawn after the first death?")
+					.define("Ender Dragon Egg Respawn", true);
+			enderDragonHeadDrop = builder
+					.comment("Will the Ender Dragon drop her head?")
+					.define("Ender Dragon Head Drop", true);
+			builder.pop();
+			builder.push("Update Checker");
+			showUpdateMessage = builder
+					.comment("Send messages when there is a new update?")
+					.define("Show Update Messages", true);
+			builder.pop();
+			builder.push("Tooltips");
+			enableTooltips = builder
+					.comment("Enable Tooltips for Items and Blocks!")
+					.define("Enable Tooltips", true);
+			builder.pop();
+			builder.push("Spawners");
+			spawnEggsSpawnersSurvival = builder
+					.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n"
+							+ "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n"
+							+ "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.")
+					.defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 2);
+			builder.pop();
 			builder.pop();
 			builder.push("World Generation");
 			enableOreGen = builder.define("Enable ore generation", true);
@@ -336,11 +389,35 @@ public class CAConfig {
 			enableNestGen = builder
 					.comment("Will Nests spawn in the Overworld or the Ant Dimensions?")
 					.define("Ant Nest generation", true);
+			builder.push("Structures");
+			generateAcaciaEntTree = builder
+					.comment("Will Acacia Ent Trees be generated?")
+					.define("Generate Acacia Ent Trees", true);
+			generateBirchEntTree = builder
+					.comment("Will Birch Ent Trees be generated?")
+					.define("Generate Birch Ent Trees", true);
+			generateCrimsonEntTree = builder
+					.comment("Will Crimson Ent Trees be generated?")
+					.define("Generate Crimson Ent Trees", true);
+			generateDarkOakEntTree = builder
+					.comment("Will Dark Oak Ent Trees be generated?")
+					.define("Generate Dark Oak Ent Trees", true);
+			generateJungleEntTree = builder
+					.comment("Will Jungle Ent Trees be generated?")
+					.define("Generate Jungle Ent Trees", true);
+			generateOakEntTree = builder
+					.comment("Will Oak Ent Trees be generated?")
+					.define("Generate Oak Ent Trees", true);
+			generateSpruceEntTree = builder
+					.comment("Will Spruce Ent Trees be generated?")
+					.define("Generate Spruce Ent Trees", true);
+			generateWarpedEntTree = builder
+					.comment("Will Warped Ent Trees be generated?")
+					.define("Generate Warped Ent Trees", true);
+			generateWaspNest = builder
+					.comment("Will Wasp Nests be generated?")
+					.define("Generate Wasp Nests", true);
 			builder.pop();
-			builder.push("Tools/Weapons");
-			enableAutoEnchanting = builder
-					.comment("If disabled, auto-enchanted items will be able to be enchanted manually.")
-					.define("Auto-enchant specific tools and weapons", true);
 			builder.pop();
 			builder.push("Dimensions");
 			crystalWorldRequiresEmptyInventory = builder
@@ -364,41 +441,6 @@ public class CAConfig {
 			enableButterflyTeleport = builder
 					.comment("Will the Butterfly teleport you to its Dimension?")
 					.define("Butterfly Teleport", true);
-			builder.pop();
-			builder.push("Breeding");
-			enableEnchantedAnimalBreeding = builder
-					.comment("Will Enchanted Animals be Breedable?")
-					.define("Enchanted Animal Breeding", false);
-			builder.pop();
-			builder.push("Textures");
-			holidayTextures = builder
-					.comment("Will holiday special textures be obtainable?")
-					.define("Obtainable Holiday Textures", true);
-			builder.pop();
-			builder.push("Drops");
-			enableDragonEggRespawns = builder
-					.comment("Will the Ender Dragon Egg respawn after the first death?")
-					.define("Ender Dragon Egg Respawn", true);
-			enderDragonHeadDrop = builder
-					.comment("Will the Ender Dragon drop her head?")
-					.define("Ender Dragon Head Drop", true);
-			builder.pop();
-			builder.push("Update Checker");
-			showUpdateMessage = builder
-					.comment("Send messages when there is a new update?")
-					.define("Show Update Messages", true);
-			builder.pop();
-			builder.push("Tooltips");
-			enableTooltips = builder
-					.comment("Enable Tooltips for Items and Blocks!")
-					.define("Enable Tooltips", true);
-			builder.pop();
-			builder.push("Spawners");
-			spawnEggsSpawnersSurvival = builder
-					.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n"
-							+ "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n"
-							+ "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.")
-					.defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 2);
 			builder.pop();
 		}
 	}
