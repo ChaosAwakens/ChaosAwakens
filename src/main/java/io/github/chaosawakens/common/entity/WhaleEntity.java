@@ -84,6 +84,15 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
     protected PathNavigator createNavigation(World worldIn) {
         return new SwimmerPathNavigator(this, worldIn);
     }
+    
+	@Override
+	public void aiStep() {
+		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+			this.onGround = false;
+			this.hasImpulse = true;
+		}
+		super.aiStep();
+	}
 
     static class MoveHelperController extends MovementController {
         private final WhaleEntity whale;

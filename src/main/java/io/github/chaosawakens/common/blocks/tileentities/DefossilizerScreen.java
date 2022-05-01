@@ -3,12 +3,14 @@ package io.github.chaosawakens.common.blocks.tileentities;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.chaosawakens.ChaosAwakens;
+import mezz.jei.api.gui.handlers.IGuiProperties;
+import mezz.jei.api.gui.handlers.IScreenHandler;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> {
+public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> implements IScreenHandler<DefossilizerScreen>{
     public static final ResourceLocation TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/defossilizer.png");
 
     public DefossilizerScreen(DefossilizerContainer container, PlayerInventory playerInventory, ITextComponent title) {
@@ -40,4 +42,9 @@ public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> {
    //     blit(matrixStack, posX + 49, posY + 40, 69, 25, menu.getLitScale() + 1, 16);
  //       hLine(matrixStack, posX + 69, posY + 40, 144, 30);
     }
+
+	@Override
+	public IGuiProperties apply(DefossilizerScreen guiScreen) {
+		return null;
+	}
 }

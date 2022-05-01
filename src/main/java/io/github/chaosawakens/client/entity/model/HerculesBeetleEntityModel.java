@@ -21,4 +21,9 @@ public class HerculesBeetleEntityModel extends AnimatedGeoModel<HerculesBeetleEn
     public ResourceLocation getAnimationFileLocation(HerculesBeetleEntity object) {
         return new ResourceLocation(ChaosAwakens.MODID, "animations/hercules_beetle.animation.json");
     }
+    
+    @Override
+    public void setLivingAnimations(HerculesBeetleEntity entity, Integer uniqueID) {
+    	super.setLivingAnimations(entity, uniqueID);
+    }
 }

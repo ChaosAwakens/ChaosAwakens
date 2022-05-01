@@ -42,10 +42,12 @@ public class ChaosAwakens {
 	public static final String MODNAME = "Chaos Awakens";
 	public static ArtifactVersion VERSION = null;
 	public static final Logger LOGGER = LogManager.getLogger();
+	public static ChaosAwakens INSTANCE;
 
 	public ChaosAwakens() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
+		INSTANCE = this;
 
 		Optional<? extends ModContainer> opt = ModList.get().getModContainerById(MODID);
 		if (opt.isPresent()) {
@@ -95,8 +97,7 @@ public class ChaosAwakens {
 		CAVillagers.PROFESSIONS.register(eventBus);
 		CALootModifiers.LOOT_MODIFIERS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
-		eventBus.addListener(EntityAttributeModificationEventSubscriber::onEntityAttributeModificationEvent);
-
+		
 		//Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
@@ -134,11 +135,16 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CATagProvider.CABlockTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAEntityTypeTagProvider(dataGenerator, existing));
+	//		dataGenerator.addProvider(new CABiomeTypeProvider(dataGenerator));
 //			dataGenerator.addProvider(new CATagProvider.CAFluidTagProvider(dataGenerator, existing));
 		}
 	}
 
 	private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {
 		if (ModList.get().isLoaded("theoneprobe")) TheOneProbePlugin.register();
+	}
+	
+	public static ChaosAwakens getInstance() {
+		return INSTANCE;
 	}
 } 

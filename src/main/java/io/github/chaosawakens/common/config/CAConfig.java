@@ -1,15 +1,9 @@
 package io.github.chaosawakens.common.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.fml.loading.FMLPaths;
-
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.electronwill.nightconfig.core.io.WritingMode;
-
-import io.github.chaosawakens.ChaosAwakens;
 
 public class CAConfig {
 
@@ -390,13 +384,4 @@ public class CAConfig {
 		}
 	}
 	
-	public static void setConfigUp() {
-		final CommentedFileConfig configData = CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve(ChaosAwakens.MODID + ".toml"))	
-				.sync()		
-				.autosave()		
-				.writingMode(WritingMode.REPLACE)					
-				.build();		
-		configData.load();		
-		COMMON_SPEC.setConfig(configData);
-	}
 }

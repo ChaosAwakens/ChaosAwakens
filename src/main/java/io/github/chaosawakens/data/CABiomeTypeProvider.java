@@ -6,9 +6,9 @@ import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.SoundEvents;
 
-public class CABiomeTypeProider extends BiomeTypeProvider{
+public class CABiomeTypeProvider extends BiomeTypeProvider{
 
-	public CABiomeTypeProider(DataGenerator generator) {
+	public CABiomeTypeProvider(DataGenerator generator) {
 		super(generator);
 	}
 	
@@ -19,7 +19,7 @@ public class CABiomeTypeProider extends BiomeTypeProvider{
 
 	@Override
 	protected void addBiomeTypes() {
-/*		createBiomeType(CABiomes.CRYSTAL_PLAINS.getId())
+		createBiomeType(CABiomes.CRYSTAL_PLAINS.getId())
 		.playerSpawnFriendly(true)
 		.precipitation("none")
 		.temperature(0.8)
@@ -48,6 +48,7 @@ public class CABiomeTypeProider extends BiomeTypeProvider{
 		.starts("starts")
 		.spawners("spawners")
 		.creature("creature")
-		.spawnCosts("spawn_costs");	*/
+		.subCreature(CAEntityTypes.CRYSTAL_APPLE_COW.get())
+		.spawnCosts("spawn_costs");	
 	}
 }

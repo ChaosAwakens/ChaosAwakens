@@ -9,6 +9,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.gui.handlers.IScreenHandler;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
@@ -58,6 +59,7 @@ public class CAJEIPlugin implements IModPlugin {
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
 		registration.addRecipeClickArea(DefossilizerScreen.class, 79, 35, 20, 20, DefossilizerRecipeCategory.ID);
+//		registration.addGuiScreenHandler(DefossilizerScreen.class, IScreenHandler<(DefossilizerScreen.class>);
 	}
 
 	@Override

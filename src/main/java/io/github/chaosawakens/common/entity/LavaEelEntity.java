@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.entity.ai.LavaMoveHelper;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -33,6 +34,7 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	public LavaEelEntity(EntityType<? extends LavaEelEntity> entityType, World world) {
 		super(entityType, world);
 		this.noCulling = true;
+		this.moveControl = new LavaMoveHelper(this);
 	}
 	
 	@Override

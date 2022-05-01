@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -14,13 +15,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -56,12 +55,16 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         if (!capture(stackFill, playerIn, target)) return ActionResultType.FAIL;
         
         if (stack.getCount() == 1) {
-        	if (!containsEntity(stack)) {
+        	if (!containsEntity(stack) || stack.isEmpty()) {
               	stack = stackFill;   
             	playerIn.setItemInHand(hand, stack);   
             	target.remove(true);
         	}
         }
+        
+  //      if (stack.isEmpty()) {
+  //      	playerIn.inventory.add(stackFill);
+  //      }
         
         if (stackFill == stack) {
         	return ActionResultType.SUCCESS;
@@ -106,6 +109,7 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         return true;
     }
     
+	@SuppressWarnings("resource")
 	public boolean release(PlayerEntity player, BlockPos pos, Direction facing, World worldIn, ItemStack stack) {
         if (player.getCommandSenderWorld().isClientSide) return false;
         if (!containsEntity(stack)) return false;
@@ -135,12 +139,13 @@ public class CritterCageItem extends Item implements IUtilityHelper{
         }
     }
 
+	@SuppressWarnings("rawtypes")
 	@Nullable
-    public Entity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
+    public LivingEntity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
         if (stack.hasTag()) {
             EntityType type = EntityType.byString(stack.getTag().getString("entity")).orElse(null);
             if (type != null) {
-                Entity entity = type.create(world);
+            	LivingEntity entity = (LivingEntity) type.create(world);
                 if (withInfo) {
                     entity.load(stack.getTag());
                 } else if (!type.canSummon()) {

@@ -1,13 +1,14 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
+
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.util.EnumUtils;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -20,7 +21,7 @@ public class EnchantedExtendedHitWeaponItem extends ExtendedHitWeaponItem implem
     public AnimationFactory factory = new AnimationFactory(this);
     private final EnchantmentData[] enchantments;
 
-    public EnchantedExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn, EnchantmentData[] enchantments) {
+    public EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn, EnchantmentData[] enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
         this.enchantments = enchantments;
     }

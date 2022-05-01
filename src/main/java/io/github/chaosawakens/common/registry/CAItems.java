@@ -1,9 +1,9 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.common.config.CAConfig;
-import io.github.chaosawakens.common.events.EntityAttributeModificationEventSubscriber;
 import io.github.chaosawakens.common.util.EnumUtils;
 import io.github.chaosawakens.common.items.*;
 import net.minecraft.enchantment.EnchantmentData;

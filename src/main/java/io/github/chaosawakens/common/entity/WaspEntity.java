@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -78,6 +79,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 		this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
 		this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, 0.7, 0.8));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomFlyingGoal(this, 1.6));
+		this.goalSelector.addGoal(4, new RandomFlyingGoal(this, 2.0D, 1, true));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(7, new SwimGoal(this));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
