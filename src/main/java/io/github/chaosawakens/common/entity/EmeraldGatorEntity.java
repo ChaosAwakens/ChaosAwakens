@@ -36,12 +36,10 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class EmeraldGatorEntity extends AnimatableAnimalEntity implements IAngerable, IAnimatable {
-	private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(EmeraldGatorEntity.class,
-			DataSerializers.INT);
+	private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(EmeraldGatorEntity.class, DataSerializers.INT);
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 39);
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON,
-			Items.TROPICAL_FISH);
+	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
 	private UUID persistentAngerTarget;
 
 	public EmeraldGatorEntity(EntityType<? extends AnimatableAnimalEntity> type, World worldIn) {

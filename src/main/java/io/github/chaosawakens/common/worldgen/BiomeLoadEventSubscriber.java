@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 
 public class BiomeLoadEventSubscriber {
 	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
-		StructureHandler.addfeatures(event);
+		StructureHandler.addFeatures(event);
 		MobSpawnHandler.addMobSpawns(event);
 	}
 
@@ -124,7 +124,7 @@ public class BiomeLoadEventSubscriber {
 	}
 
 	private static class StructureHandler {
-		public static void addfeatures(BiomeLoadingEvent event) {
+		public static void addFeatures(BiomeLoadingEvent event) {
 			BiomeGenerationSettingsBuilder gen = event.getGeneration();
 
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
