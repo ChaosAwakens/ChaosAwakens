@@ -41,7 +41,7 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 
 **Builders:** Blackout, Funky Monk, Meme Man, TheLoneCyberman
 
-**Coders:** Blackout, Enderman_of_D00M, LuisRandomness, Meme Man, WeirdNerd
+**Coders:** Blackout, LuisRandomness, Meme Man, WeirdNerd
 
 **Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Renato, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
 
