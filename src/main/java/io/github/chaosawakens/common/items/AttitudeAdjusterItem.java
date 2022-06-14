@@ -1,10 +1,10 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.util.EnumUtils;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.Explosion;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -15,7 +15,7 @@ public class AttitudeAdjusterItem extends ExtendedHitWeaponItem implements IVani
     private static final float EXPLOSION_POWER = CAConfig.COMMON.attitudeAdjusterExplosionSize.get();
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public AttitudeAdjusterItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
+    public AttitudeAdjusterItem(EnumUtils.CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
     }
 

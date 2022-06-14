@@ -1,5 +1,13 @@
 package io.github.chaosawakens.common.items;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.client.util.ITooltipFlag;
@@ -27,6 +35,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+<<<<<<< HEAD
 public class CritterCageItem extends Item implements IUtilityHelper {
 	public CritterCageItem(Properties properties) {
 		super(properties);
@@ -91,6 +100,84 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 		return true;
 	}
 
+=======
+    @Override
+    public ActionResultType useOn(ItemUseContext context) {
+        PlayerEntity player = context.getPlayer();
+        BlockPos pos = context.getClickedPos();
+        Direction facing = context.getClickedFace();
+        World worldIn = context.getLevel();
+        ItemStack stack = context.getItemInHand();
+        if (!release(player, pos, facing, worldIn, stack)) return ActionResultType.FAIL;
+        return ActionResultType.SUCCESS;
+    }
+    
+    @SuppressWarnings("unused")
+	@Override
+    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+    	stack = playerIn.getMainHandItem();
+        ItemStack stackFill = new ItemStack(this);
+        //Note: Nesting apparently works better in this case than guard clause -Meme Man
+        if (capture(stackFill, playerIn, target)) {
+            if (stack.getCount() == 1) {
+            	if (!containsEntity(stack) || stack.isEmpty()) {
+                  	stack = stackFill;   
+                	playerIn.setItemInHand(hand, stack);   
+                	target.remove(true);
+                	return ActionResultType.SUCCESS;
+            	}
+            	playerIn.setItemInHand(hand, stack);
+            	return ActionResultType.FAIL;
+            }
+            
+            if (stackFill == stack) {
+            	return ActionResultType.SUCCESS;
+            }
+       
+            if (stack.getCount() > 1 || stackFill.getCount() > 1) {
+            	if (!containsEntity(stack) || !containsEntity(stackFill)) {
+                  	stack.shrink(1);    
+                  	playerIn.inventory.add(stackFill);
+                  	if (playerIn.inventory.getFreeSlot() <= 0) {
+                  		//PlayerEntity.drop(itemstack, includename) doesn't work for some reason
+                  		//This still doesn't work btw
+                  		playerIn.drop(stackFill, true, true);
+                  	}
+                	target.remove(true);
+                	return ActionResultType.SUCCESS;
+            	}
+            	boolean add = playerIn.inventory.add(stackFill);
+            	add = false;
+            	return ActionResultType.FAIL;
+            } 
+        	return ActionResultType.SUCCESS;
+        }
+        return ActionResultType.FAIL;
+    }
+    
+	@SuppressWarnings("resource")
+	public boolean capture(ItemStack stack, PlayerEntity player, LivingEntity target) {
+        if (target.getCommandSenderWorld().isClientSide) return false;
+        if (target instanceof PlayerEntity || !target.isAlive()) return false;
+        if (containsEntity(stack)) return false;
+        if (isBlacklisted(target.getType())) return false;
+        
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putString("entity", EntityType.getKey(target.getType()).toString());
+        nbt.putString("entityName", target.getName().getString());
+        nbt.putDouble("entityMaxHealth", target.getAttribute(Attributes.MAX_HEALTH).getValue());
+        nbt.putBoolean("isBaby", target.isBaby());
+        nbt.putString("entityRegName", target.getType().getRegistryName().toString());
+                
+        target.saveWithoutId(nbt);
+        stack.setTag(nbt);
+        
+        stack.setCount(1);
+        return true;
+    }
+    
+	@SuppressWarnings("resource")
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 	public boolean release(PlayerEntity player, BlockPos pos, Direction facing, World worldIn, ItemStack stack) {
 		if (player.getCommandSenderWorld().isClientSide) return false;
 		if (!containsEntity(stack)) return false;
@@ -102,9 +189,16 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 		return true;
 	}
 
+<<<<<<< HEAD
 	public boolean isBlacklisted(EntityType<?> entity) {
 		return entity.is(CATags.EntityTypes.CRITTER_CAGE_BLACKLISTED);
 	}
+=======
+    public boolean containsEntity(ItemStack stack) {
+    	if (stack == null) return false;
+        return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity");
+    }
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 
 	public boolean containsEntity(ItemStack stack) {
 		return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity");
@@ -120,7 +214,9 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Nullable
+<<<<<<< HEAD
 	public Entity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
 		if (stack.hasTag()) {
 			EntityType type = EntityType.byString(stack.getTag().getString("entity")).orElse(null);
@@ -500,4 +596,37 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 	 * createFilledCritterCageWithMob(s, newStack, nbt, type, p, h, e.level);
 	 * e.remove(); return ActionResultType.SUCCESS; }
 	 */
+=======
+    public LivingEntity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
+        if (stack.hasTag()) {
+            EntityType type = EntityType.byString(stack.getTag().getString("entity")).orElse(null);
+            if (type != null) {
+            	LivingEntity entity = (LivingEntity) type.create(world);
+                if (withInfo) {
+                    entity.load(stack.getTag());
+                } else if (!type.canSummon()) {
+                    return null;
+                }
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    public String getMobID(ItemStack stack) {
+        return stack.getTag().getString("entity");
+    }
+
+    public String getMobName(ItemStack stack) {
+        return stack.getTag().getBoolean("isBaby") ? "Baby " +  stack.getTag().getString("entityName"): stack.getTag().getString("entityName");
+    }
+
+    @Nonnull
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public ITextComponent getName(ItemStack stack) {
+        if (!containsEntity(stack)) return new TranslationTextComponent("item.chaosawakens.critter_cage");
+        return new TranslationTextComponent("item.chaosawakens.critter_cage").append(" (" + getMobName(stack) + ")");
+    }
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 }

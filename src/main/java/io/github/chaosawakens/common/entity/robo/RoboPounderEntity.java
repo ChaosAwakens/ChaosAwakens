@@ -223,6 +223,7 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 		if (!this.isAlive()) return;
 
 		boolean flag = false;
+<<<<<<< HEAD
 		AxisAlignedBB axisalignedbb = this.getBoundingBox().inflate(0.2D);
 
 		// When the pounder is crushing things in its way
@@ -305,6 +306,38 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 			}
 		}
 
+=======
+        AxisAlignedBB axisalignedbb = this.getBoundingBox().inflate(0.2D);
+        
+        //When the pounder is crushing things in its way
+        if (this.horizontalCollision && ForgeEventFactory.getMobGriefingEvent(level, this)) {
+            for(BlockPos blockpos : BlockPos.betweenClosed(MathHelper.floor(axisalignedbb.minX), MathHelper.floor(axisalignedbb.minY), MathHelper.floor(axisalignedbb.minZ), MathHelper.floor(axisalignedbb.maxX), MathHelper.floor(axisalignedbb.maxY), MathHelper.floor(axisalignedbb.maxZ))) {
+                BlockState blockstate = this.level.getBlockState(blockpos);
+                Block block = blockstate.getBlock();
+                //TODO pack all these up into a tag for the robo pounder to, well, you know, pound
+                if (block instanceof LeavesBlock || block.getBlock() == Blocks.TERRACOTTA || block.getBlock() == BlockTags.BEDS ||block.getBlock() == Blocks.MOSSY_COBBLESTONE || block.getBlock() == Blocks.CHISELED_SANDSTONE || block.getBlock().is(BlockTags.CARPETS) || block.getBlock() == Blocks.LECTERN || block.getBlock() instanceof MelonBlock || block.getBlock() instanceof PumpkinBlock || block.getBlock() instanceof BambooBlock || block.getBlock() == Blocks.CRAFTING_TABLE || block.getBlock() == Blocks.FURNACE || block.getBlock() == Blocks.COMPOSTER || block.getBlock() == Blocks.BLAST_FURNACE || block.getBlock() == Blocks.CHEST || block.getBlock() == Blocks.TRAPPED_CHEST || block.getBlock() == Blocks.SMITHING_TABLE || block.getBlock() == Blocks.FLETCHING_TABLE || block.getBlock() == Blocks.BOOKSHELF || block.getBlock() instanceof TorchBlock || block.getBlock() == Blocks.GLASS_PANE || block.getBlock() == Blocks.SMOKER || block instanceof StainedGlassPaneBlock || block.getBlock().is(BlockTags.DOORS) || block.getBlock().is(BlockTags.TRAPDOORS) || block.getBlock().is(BlockTags.WOODEN_TRAPDOORS) || block instanceof GlassBlock || block.getBlock().is(BlockTags.BASE_STONE_OVERWORLD) || block.getBlock().is(BlockTags.BASE_STONE_NETHER) || block.getBlock() == Blocks.HAY_BLOCK || block.getBlock() == Blocks.SMOOTH_SANDSTONE_SLAB || block.getBlock() == Blocks.SMOOTH_SANDSTONE_STAIRS || block.getBlock() == Blocks.COBBLESTONE || block.getBlock() == Blocks.SNOW || block.getBlock() == Blocks.SNOW_BLOCK ||block.getBlock().is(BlockTags.TALL_FLOWERS) || block.getBlock() == Blocks.SMOOTH_SANDSTONE || block.getBlock() == Blocks.SMOOTH_SANDSTONE_SLAB || block.getBlock() == Blocks.SMOOTH_SANDSTONE_STAIRS || block.getBlock() == Blocks.CHISELED_SANDSTONE || block.getBlock().is(BlockTags.BASE_STONE_OVERWORLD) && block.getBlock() != Blocks.STONE || block.getBlock() == Blocks.SANDSTONE || block.getBlock().is(BlockTags.FENCE_GATES) || block.getBlock().is(BlockTags.SIGNS) || block.getBlock() == Blocks.SANDSTONE_SLAB || block.getBlock() == Blocks.SANDSTONE_STAIRS || block.getBlock() == Blocks.SANDSTONE_WALL || block.getBlock().is(BlockTags.STAIRS) || block.getBlock().is(BlockTags.WOODEN_STAIRS)|| block.getBlock() == Blocks.GRASS || block  instanceof DoublePlantBlock || block instanceof AbstractPlantBlock || block instanceof FlowerBlock || block.getBlock().is(BlockTags.LOGS) || block.getBlock().is(BlockTags.PLANKS) || block instanceof SlabBlock || block instanceof StairsBlock || block instanceof FenceBlock || block instanceof WallBlock) {
+                   flag = this.level.destroyBlock(blockpos, true, this) || flag;
+                }
+             }
+            
+            if (flag == false && this.onGround) {
+                this.jumpFromGround();
+             }
+        }
+        
+        //When the pounder lands on something from above
+        if (this.verticalCollision && ForgeEventFactory.getMobGriefingEvent(level, this)) {
+            for(BlockPos blockpos : BlockPos.betweenClosed(MathHelper.floor(axisalignedbb.minX), MathHelper.floor(axisalignedbb.minY), MathHelper.floor(axisalignedbb.minZ), MathHelper.floor(axisalignedbb.maxX), MathHelper.floor(axisalignedbb.maxY), MathHelper.floor(axisalignedbb.maxZ))) {
+                BlockState blockstate = this.level.getBlockState(blockpos);
+                Block block = blockstate.getBlock();
+                //TODO pack all these up into a tag for the robo pounder to, well, you know, pound
+                if (block instanceof LeavesBlock || block.getBlock() == Blocks.HAY_BLOCK || block.getBlock().is(BlockTags.TRAPDOORS) || block.getBlock().is(BlockTags.FENCES) || block.getBlock().is(BlockTags.FENCE_GATES) || block.getBlock().is(BlockTags.DOORS) || block.getBlock().is(BlockTags.WALLS) || block.getBlock().is(BlockTags.WOODEN_TRAPDOORS) || block.getBlock() instanceof MelonBlock || block.getBlock() instanceof PumpkinBlock || block.getBlock() instanceof BambooBlock || block.getBlock() == Blocks.SNOW || block.getBlock() == Blocks.SNOW_BLOCK ||block.getBlock().is(BlockTags.TALL_FLOWERS) || block.getBlock() == Blocks.GRASS || block  instanceof DoublePlantBlock || block.getBlock() instanceof TorchBlock || block.getBlock() == Blocks.GLASS_PANE || block instanceof AbstractPlantBlock || block instanceof FlowerBlock) {
+                   flag = this.level.destroyBlock(blockpos, true, this) || flag;
+                }
+             }
+        }
+        
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 	}
 
 	// Another failed attempt

@@ -4,6 +4,7 @@ import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.CABlockItemColors;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
+import io.github.chaosawakens.client.config.CAClientConfig;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.integration.TheOneProbePlugin;
@@ -42,10 +43,12 @@ public class ChaosAwakens {
 	public static final String MODNAME = "Chaos Awakens";
 	public static ArtifactVersion VERSION = null;
 	public static final Logger LOGGER = LogManager.getLogger();
+	public static ChaosAwakens INSTANCE;
 
 	public ChaosAwakens() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
+		INSTANCE = this;
 
 		Optional<? extends ModContainer> opt = ModList.get().getModContainerById(MODID);
 		if (opt.isPresent()) {
@@ -59,14 +62,15 @@ public class ChaosAwakens {
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CAClientConfig.CLIENT_SPEC);
 
 		// Register to the mod event bus
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
 		eventBus.addListener(this::onInterModEnqueueEvent);
-
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
-
+		
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
@@ -129,6 +133,7 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CATagProvider.CABlockTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAEntityTypeTagProvider(dataGenerator, existing));
+//			dataGenerator.addProvider(new CABiomeTypeProvider(dataGenerator));
 //			dataGenerator.addProvider(new CATagProvider.CAFluidTagProvider(dataGenerator, existing));
 		}
 	}
@@ -166,5 +171,10 @@ public class ChaosAwakens {
 	 */
 	public static <W> void warn(String domain, W message) {
 		LOGGER.warn("[" + domain + "]: " + message != null ? message.toString() : message);
+	}
+}
+	
+	public static ChaosAwakens getInstance() {
+		return INSTANCE;
 	}
 }

@@ -4,9 +4,11 @@ import java.util.EnumSet;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.entity.BirdEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class RandomFlyingGoal extends Goal {
@@ -27,11 +29,11 @@ public class RandomFlyingGoal extends Goal {
 		this(p_i45887_1_, p_i45887_2_, p_i45887_4_, true);
 	}
 
-	public RandomFlyingGoal(CreatureEntity p_i231550_1_, double p_i231550_2_, int p_i231550_4_, boolean p_i231550_5_) {
+	public RandomFlyingGoal(CreatureEntity p_i231550_1_, double speedModifier, int interval, boolean checkNoActionTime) {
 		this.mob = p_i231550_1_;
-		this.speedModifier = p_i231550_2_;
-		this.interval = p_i231550_4_;
-		this.checkNoActionTime = p_i231550_5_;
+		this.speedModifier = speedModifier;
+		this.interval = interval;
+		this.checkNoActionTime = checkNoActionTime;
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
@@ -47,9 +49,9 @@ public class RandomFlyingGoal extends Goal {
 			}
 
 			Vector3d vector3d = this.getAirPosition();
-//			if (this.mob.getY() >= 80.0D)  {
-//				vector3d = this.getLandPosition();
-//			}
+			if (this.mob.getTarget() != null)  {
+				vector3d = this.getLandPosition();
+			}
 			if (vector3d == null) {
 				return false;
 			} else {
@@ -68,10 +70,10 @@ public class RandomFlyingGoal extends Goal {
 		return randomReference <= 6 ? RandomPositionGenerator.getAirPos(this.mob, 10, 2, 1, null, 0.0D) : RandomPositionGenerator.getAirPos(this.mob, 10, 1, 1, null, 0.0D);
 	}
 
-//	@Nullable
-//	protected Vector3d getLandPosition() {
-//		return RandomPositionGenerator.getLandPos(this.mob, 10, 1);
-//	}
+	@Nullable
+	protected Vector3d getLandPosition() {
+		return RandomPositionGenerator.getLandPos(this.mob, 10, 1);
+	}
 
 	@Override
 	public boolean canContinueToUse() {
@@ -95,5 +97,22 @@ public class RandomFlyingGoal extends Goal {
 
 	public void setInterval(int p_179479_1_) {
 		this.interval = p_179479_1_;
+	}
+	
+	public boolean aboveWater(CreatureEntity bird) {
+		BlockPos birdPos = bird.blockPosition();
+		do {
+			birdPos = birdPos.below();
+		} while (birdPos.getY() > 2 && bird.level.isEmptyBlock(birdPos));
+		return !bird.level.getFluidState(birdPos).isEmpty();
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public BlockPos getPosBelowSolid(BlockPos pos) {
+		BlockPos targetPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+		do {
+			targetPos = targetPos.below();
+		} while (targetPos.getY() < 2 && !mob.level.getBlockState(targetPos).isAir());
+		return targetPos;
 	}
 }

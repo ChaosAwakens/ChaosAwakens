@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.entity.ai.LavaMoveHelper;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -12,6 +13,7 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -33,6 +35,11 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	public LavaEelEntity(EntityType<? extends LavaEelEntity> entityType, World world) {
 		super(entityType, world);
 		this.noCulling = true;
+		this.moveControl = new LavaMoveHelper(this);
+		this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
+		this.setPathfindingMalus(PathNodeType.LAVA, 16.0F);
+		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 16.0F);
+		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 16.0F);
 	}
 
 	@Override
@@ -54,7 +61,7 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 6.0D)
-				.add(Attributes.MOVEMENT_SPEED, 1.0D)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D)
 				.add(Attributes.ATTACK_SPEED, 0.3D)
 				.add(Attributes.ATTACK_DAMAGE, 2.0D)
 				.add(Attributes.ATTACK_KNOCKBACK, 1)

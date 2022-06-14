@@ -4,15 +4,21 @@ import com.mojang.serialization.Codec;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;
+import io.github.chaosawakens.api.ModifiableRegistryEntry;
+import io.github.chaosawakens.client.config.CAClientConfig;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
 import net.minecraft.block.WoodType;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.SimpleRegistry.Entry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -26,18 +32,25 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper.UnableToFindMethodException;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.config.ModConfig.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CommonSetupEvent {
+<<<<<<< HEAD
 	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
 	private static Method codecMethod;
 
@@ -66,6 +79,38 @@ public class CommonSetupEvent {
 					wrapper.getIdentifier(), wrapper.getFeatureType()));
 		});
 
+=======
+    public static List<FeatureWrapper> configFeatures = new ArrayList<>();
+//    private static List<Entry> regEntries;
+    
+ //   private String[] configValues;
+
+    private static Method codecMethod;
+
+    public static void onFMLCommonSetupEvent(FMLCommonSetupEvent event) {
+        CAEntityTypes.registerSpawnPlacementTypes();
+        PacketHandler.init();
+        Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
+
+        event.enqueueWork(() -> {
+            CAVanillaCompat.setup();
+            CAStructures.setupStructures();
+            CAConfiguredStructures.registerConfiguredStructures();
+            CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
+            CAVillagers.registerVillagerTypes();
+            CABlocks.flowerPots();
+            WoodType.register(CABlocks.APPLE);
+            WoodType.register(CABlocks.CHERRY);
+            WoodType.register(CABlocks.DUPLICATION);
+            WoodType.register(CABlocks.PEACH);
+            WoodType.register(CABlocks.SKYWOOD);
+            WoodType.register(CABlocks.GINKGO);
+            
+            CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
+            configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
+        });
+        
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 		ModList modList = ModList.get();
 		if (modList.isLoaded("jeresources")) CAJER.init();
 
@@ -80,6 +125,9 @@ public class CommonSetupEvent {
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_WORLD);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_HILLS.getId()), CABiomes.Type.CRYSTAL_WORLD);
 	}
+    
+    public static void configStatasSync() {
+    }
 
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (!(event.getWorld() instanceof ServerWorld)) return;

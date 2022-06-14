@@ -86,7 +86,7 @@ public class RoboAttackGoal extends Goal {
 		this.projectileOwner.setAttacking(this.attackTimer > 10);
 	}
 	
-	public static class RoboSniperAttackkGoal extends Goal {
+	public static class RoboSniperAttackGoal extends Goal {
 		private final RoboRangedEntity projectileOwner;
 		private final int fireRateBase;
 		private final float damage;

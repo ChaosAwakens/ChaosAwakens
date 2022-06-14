@@ -14,6 +14,7 @@ public class BigHammerItem extends SwordItem {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if (!target.level.isClientSide) {
@@ -22,4 +23,14 @@ public class BigHammerItem extends SwordItem {
 		stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
+=======
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (!target.level.isClientSide) {
+            target.push(0.0D, Math.abs(target.level.random.nextFloat() * 1.8F), 0.0D);
+        }
+        stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+        return true;
+    }
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 }

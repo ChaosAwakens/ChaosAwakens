@@ -1,5 +1,16 @@
 package io.github.chaosawakens.common.config;
 
+<<<<<<< HEAD
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
+import io.github.chaosawakens.ChaosAwakens;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import net.minecraftforge.fml.loading.FMLPaths;
+import org.apache.commons.lang3.tuple.Pair;
+
+public class CAConfig {
+=======
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -7,16 +18,21 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraftforge.common.ForgeConfigSpec;
+
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.RegistryObject;
+
 import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
+
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.util.EnumUtils.CAGearEnumList;
 
 public class CAConfig {
 	public static List<Item> gearList;
 
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
 
@@ -455,6 +471,163 @@ public class CAConfig {
 					.comment("Will the Butterfly teleport you to its Dimension?")
 					.define("Butterfly Teleport", true);
 			builder.pop();
+<<<<<<< HEAD
 		}
 	}
+
+	public static void setConfigUp() {
+		final CommentedFileConfig configData = CommentedFileConfig
+				.builder(FMLPaths.CONFIGDIR.get()
+						.resolve(ChaosAwakens.MODID + ".toml"))
+				.sync()
+				.autosave()
+				.writingMode(WritingMode.REPLACE)
+				.build();
+		configData.load();
+		COMMON_SPEC.setConfig(configData);
+	}
+=======
+			builder.push("Breeding");
+			enableEnchantedAnimalBreeding = builder
+					.comment("Will Enchanted Animals be Breedable?")
+					.define("Enchanted Animal Breeding", false);
+			builder.pop();
+			builder.push("Textures");
+			holidayTextures = builder
+					.comment("Will holiday special textures be obtainable?")
+					.define("Obtainable Holiday Textures", true);
+			builder.pop();
+			builder.push("Drops");
+			enableDragonEggRespawns = builder
+					.comment("Will the Ender Dragon Egg respawn after the first death?")
+					.define("Ender Dragon Egg Respawn", true);
+			enderDragonHeadDrop = builder
+					.comment("Will the Ender Dragon drop her head?")
+					.define("Ender Dragon Head Drop", true);
+			builder.pop();
+			builder.push("Update Checker");
+			showUpdateMessage = builder
+					.comment("Send messages when there is a new update?")
+					.define("Show Update Messages", true);
+			builder.pop();
+			builder.push("Spawners");
+			spawnEggsSpawnersSurvival = builder
+					.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n"
+							+ "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n"
+							+ "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.")
+					.defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 2);
+			builder.pop();
+		}
+	}
+	
+/*	public int get(ConfigValue<?> v, String matName) {
+		String valueName = v.toString();
+		for (RegistryObject<Item> i : CAItems.ITEMS.getEntries()) {
+			if (i.isPresent()) {			
+				if (i.get() instanceof SwordItem) {						
+					SwordItem sword = (SwordItem) i.get();	
+					matName.equals(sword.getRegistryName().toString());
+					if (!matName.equals(sword.getRegistryName().toString())) return 0;
+					String swordRegName = matName.replaceAll("chaosawakens:", "").replaceAll("_", "").split("sword")[0];					
+					String vName = valueName.split("Sword")[0].toLowerCase();	
+					for (int size = 0; size < vName.length(); size++) {
+						if (size >= 0) {
+							if (swordRegName.equals(vName)) {		
+								int damage = Integer.parseInt(v.get().toString());			
+								float dmg = sword.getDamage();			
+								dmg = (float) damage;	
+								return (int) dmg;
+							}	
+						}
+					}	
+				}
+				
+				if (i.get() instanceof AxeItem) {						
+					AxeItem axe = (AxeItem) i.get();	
+					matName.equals(axe.getRegistryName().toString());
+					if (!matName.equals(axe.getRegistryName().toString())) return 0;
+					String axeRegName = matName.replaceAll("chaosawakens:", "").replaceAll("_", "").split("axe")[0];					
+					String vName = valueName.split("Axe")[0].toLowerCase();		
+					for (int size = 0; size < vName.length(); size++) {
+						if (size >= 0) {
+							if (axeRegName.equals(vName)) {		
+								int damage = Integer.parseInt(v.get().toString());			
+								float dmg = axe.getAttackDamage();			
+								dmg = (float) damage;
+								return (int) dmg;
+							}	
+						}
+					}	
+				}
+				
+				if (i.get() instanceof PickaxeItem) {						
+					PickaxeItem pickaxe = (PickaxeItem) i.get();	
+					matName.equals(pickaxe.getRegistryName().toString());
+					if (!matName.equals(pickaxe.getRegistryName().toString())) return 0;
+					String pickaxeRegName = matName.replaceAll("chaosawakens:", "").replaceAll("_", "").split("pickaxe")[0];					
+					String vName = valueName.split("Pickaxe")[0].toLowerCase();		
+					for (int size = 0; size < vName.length(); size++) {
+						if (size >= 0) {
+							if (pickaxeRegName.equals(vName)) {		
+								int damage = Integer.parseInt(v.get().toString());			
+								float dmg = pickaxe.getAttackDamage();			
+								dmg = (float) damage;
+								return (int) dmg;
+							}	
+						}
+					}	
+				}
+				
+				if (i.get() instanceof ShovelItem) {						
+					ShovelItem shovel = (ShovelItem) i.get();
+					matName.equals(shovel.getRegistryName().toString());
+					if (!matName.equals(shovel.getRegistryName().toString())) return 0;
+					String shovelRegName = matName.replaceAll("chaosawakens:", "").replaceAll("_", "").split("shovel")[0];					
+					String vName = valueName.split("Shovel")[0].toLowerCase();
+					for (int size = 0; size < vName.length(); size++) {
+						if (size >= 0) {
+							if (shovelRegName.equals(vName)) {		
+								int damage = Integer.parseInt(v.get().toString());			
+								float dmg = shovel.getAttackDamage();			
+								dmg = (float) damage;	
+								return (int) dmg;
+							}					
+						}	
+					}	
+				}
+				
+				if (i.get() instanceof HoeItem) {						
+					HoeItem hoe = (HoeItem) i.get();	
+					matName.equals(hoe.getRegistryName().toString());
+					if (!matName.equals(hoe.getRegistryName().toString())) return 0;
+					String hoeRegName = matName.replaceAll("chaosawakens:", "").replaceAll("_", "").split("hoe")[0];					
+					String vName = valueName.split("Hoe")[0].toLowerCase();	
+					for (int size = 0; size < vName.length(); size++) {
+						if (size >= 0) {						
+							if (hoeRegName.equals(vName)) {		
+								int damage = Integer.parseInt(v.get().toString());			
+								float dmg = hoe.getAttackDamage();			
+								dmg = (float) damage;	
+								return (int) dmg;
+							}	
+						}
+					}	
+				}
+			}
+		}	
+		return matName.equals(v.toString().replaceAll("Damage", "").toLowerCase()) ? (int) v.get() : 0;	
+	};
+	
+	public int syncDamageConfig() {
+		switch (CAGearEnumList.getEnum()) {		
+		default:
+			return 0;
+		case AMETHYST_SWORD:
+			float dmg = CAItems.AMETHYST_SWORD.get().getDamage();
+			dmg = (float) this.get(CAConfig.COMMON.amethystSwordDamage, "chaosawakens:amethyst_sword");
+			return (int) dmg;
+		}
+	}*/
+	
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 }

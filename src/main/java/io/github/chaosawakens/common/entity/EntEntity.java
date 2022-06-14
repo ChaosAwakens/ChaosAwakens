@@ -123,12 +123,22 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
 		if (target.level != this.level || targetVector.distanceToSqr(attackerVector) > 128.0D * 128.0D) return false;
 
 		return this.level.clip(new RayTraceContext(attackerVector, targetVector, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS && super.doHurtTarget(target);
-	}
 
-	@Override
-	public void tick() {
-		super.tick();
-
+    }
+    
+    @Override
+    public void aiStep() {
+    	super.aiStep();
+    	
+    	if (this.isOnGround() && this.horizontalCollision) {
+    	    this.jumpFromGround();
+    	}
+    }
+    
+    @Override
+    public void tick() {
+    	super.tick();
+    	
 		if (this.getTarget() != null && this.canSee(this.getTarget()) && this.distanceToSqr(this.getTarget()) >= 12.0F) {
 			this.lookControl.setLookAt(this.getTarget(), 30.0F, 30.0F);
 			this.getTarget().moveTo(this.getTarget().blockPosition(), 3.0F, 10.0F);

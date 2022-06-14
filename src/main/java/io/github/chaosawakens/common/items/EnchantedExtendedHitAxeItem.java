@@ -2,11 +2,11 @@ package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.util.EnumUtils.CAItemTier;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -19,10 +19,17 @@ public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem implements I
 	public AnimationFactory factory = new AnimationFactory(this);
 	private final EnchantmentData[] enchantments;
 
+<<<<<<< HEAD
 	public EnchantedExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
 		super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
 		this.enchantments = enchantments;
 	}
+=======
+    public EnchantedExtendedHitAxeItem(CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistanceIn, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
+        super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
+        this.enchantments = enchantments;
+    }
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {

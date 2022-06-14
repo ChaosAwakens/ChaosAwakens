@@ -535,4 +535,5 @@ public class ClientSetupEvent implements IUtilityHelper {
 		 });
 		CAContainerTypes.registerScreens(event);
 	}
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 }

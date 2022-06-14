@@ -2,8 +2,11 @@ package io.github.chaosawakens.common.entity;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.api.IMobPanic;
+import io.github.chaosawakens.common.entity.ai.HerdPanicGoal;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -15,6 +18,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.EatGrassGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
@@ -50,10 +54,13 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable {
+public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable, IMobPanic {
 	private AnimationFactory factory = new AnimationFactory(this);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
+	public static final DataParameter<Boolean> IS_RUNNING = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.BOOLEAN);
+	private boolean sprinting;
+	private EatGrassGoal eatGrassGoal;
 
 	public GazelleEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -63,14 +70,13 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 12)
-				.add(Attributes.MOVEMENT_SPEED, 0.25D)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D)
 				.add(Attributes.FOLLOW_RANGE, 14);
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.walking", true));
-			event.getController().setAnimationSpeed(this.animationSpeed + 1.0D);
 			return PlayState.CONTINUE;
 		}
 
@@ -79,12 +85,15 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 			return PlayState.CONTINUE;
 		}
 
-		if (event.isMoving() && this.isSprinting() || this.getSpeed() >= 0.26D) {
+		if (event.isMoving() && this.isSprinting() || this.getSpeed() >= 0.21D) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.running", true));
-			event.getController().setAnimationSpeed(this.animationSpeed + 2.0D);
 			return PlayState.CONTINUE;
 		}
-
+		
+		if (this.isEatingGrass()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.grazing", false));
+			return PlayState.CONTINUE;
+		}
 		return PlayState.CONTINUE;
 	}
 
@@ -97,14 +106,21 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
+	
+	private boolean isEatingGrass() {
+		return eatGrassGoal.getEatAnimationTick() > 0;
+	}
 
 	@Override
 	protected void registerGoals() {
+	//	this.goalSelector.addGoal(1, new HerdPanicGoal(this, 1.2D, 15));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.2D));
+		this.goalSelector.addGoal(2, new EatGrassGoal(this));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.0D));
 		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 1.0F));
+		this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 1));
 		this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, RoboEntity.class, 10, 0.0D, 2.0D));
 		this.goalSelector.addGoal(8, new WaterAvoidingRandomWalkingGoal(this, 1.0));
@@ -112,33 +128,64 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 		this.goalSelector.addGoal(3, new TemptGoal(this, 0.2D, false, FOOD_ITEMS));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 	}
+	
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
+        nbt.putInt("GazelleType", this.getGazelleType());
+        nbt.putBoolean("GazelleRunning", this.getRunning());
+    }
 
-	public void addAdditionalSaveData(CompoundNBT nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("GazelleType", this.getGazelleType());
-	}
-
-	public void readAdditionalSaveData(CompoundNBT nbt) {
-		super.readAdditionalSaveData(nbt);
-		this.setGazelleType(nbt.getInt("GazelleType"));
-	}
-
-	public boolean isFood(ItemStack stack) {
-		return FOOD_ITEMS.test(stack);
-	}
-
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(DATA_TYPE_ID, 0);
-	}
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
+        this.setGazelleType(nbt.getInt("GazelleType"));
+        this.setRunning(nbt.getBoolean("GazelleRunning"));
+    }
+	
+    public boolean isFood(ItemStack stack) {
+        return FOOD_ITEMS.test(stack);
+    }
+    
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_TYPE_ID, 0);
+        this.entityData.define(IS_RUNNING, false);
+    }
+    
+    protected boolean getRunning() {
+    	return this.entityData.get(IS_RUNNING);
+    }
+    
+    protected void setRunning(boolean condition) {
+    	this.entityData.set(IS_RUNNING, condition);
+    }
 
 	public int getGazelleType() {
 		return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 5);
 	}
 
-	public void setGazelleType(int type) {
-		this.entityData.set(DATA_TYPE_ID, type);
-	}
+    public void setGazelleType(int type) {
+        this.entityData.set(DATA_TYPE_ID, type);
+    }
+    
+    @Override
+    public void tick() {
+    	super.tick();
+    	
+    	if (this.level.isClientSide) return;
+    	
+    	this.setRunning(this.getLastHurtByMob() != null && this.getLastHurtByMobTimestamp() <= 500);
+    	if (getRunning() && !this.sprinting) {
+    		this.sprinting = true;
+    		this.setSprinting(true);
+    		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4);
+    	}
+    	
+    	if (!getRunning() && this.sprinting) {
+    		this.sprinting = false;
+    		this.setSprinting(false);
+    		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.25);
+    	}
+    }
 
 	@Override
 	public GazelleEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
@@ -170,17 +217,31 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 
 	private int getRandomGazelleType(IWorld world) {
 		Biome biome = world.getBiome(this.blockPosition());
-		int i = this.random.nextInt(5);
-		return i;
-	}
+        int i = this.random.nextInt(5);
+        return i;
+    }
+    
+    @OnlyIn(Dist.CLIENT)
+    public Vector3d getLeashOffset() {
+        return new Vector3d(0.0D, 0.6F * this.getEyeHeight(), this.getBbWidth() * 0.4F);
+    }
+    
+    @Override
+    public float getStandingEyeHeight(Pose pose, EntitySize size) {
+    	return this.isBaby() ? size.height * 0.75F : 1.1F;
+    }
 
-	@OnlyIn(Dist.CLIENT)
-	public Vector3d getLeashOffset() {
-		return new Vector3d(0.0D, 0.6F * this.getEyeHeight(), this.getBbWidth() * 0.4F);
+	@Override
+	public boolean canAnimalPanic() {
+		return true;
 	}
 
 	@Override
-	public float getStandingEyeHeight(Pose pose, EntitySize size) {
-		return this.isBaby() ? size.height * 0.75F : 1.1F;
+	public boolean canMonsterPanic() {
+		return false;
+	}
+
+	@Override
+	public void panic() {		
 	}
 }

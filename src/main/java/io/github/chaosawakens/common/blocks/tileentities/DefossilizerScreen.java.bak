@@ -10,8 +10,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> implements IScreenHandler<DefossilizerScreen>{
+<<<<<<< HEAD
+public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> {
 	public static final ResourceLocation TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/defossilizer.png");
+=======
+public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> implements IScreenHandler<DefossilizerScreen>{
+    public static final ResourceLocation TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/defossilizer.png");
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 
 	public DefossilizerScreen(DefossilizerContainer container, PlayerInventory playerInventory, ITextComponent title) {
 		super(container, playerInventory, title);
@@ -35,16 +40,25 @@ public class DefossilizerScreen extends ContainerScreen<DefossilizerContainer> i
 		int posY = (this.height - this.imageHeight) / 2;
 		blit(matrixStack, posX, posY, 0, 0, this.imageWidth, this.imageHeight);
 
+<<<<<<< HEAD
 		// Progress arrow
 		blit(matrixStack, posX + 79, posY + 35, 176, 14, menu.getProgressArrowScale() + 1, 16);
 
 		// Lit thing
 		// blit(matrixStack, posX + 49, posY + 40, 69, 25, menu.getLitScale() + 1, 16);
 		// hLine(matrixStack, posX + 69, posY + 40, 144, 30);
+=======
+        // Progress arrow
+        blit(matrixStack, posX + 79, posY + 35, 176, 14, menu.getProgressArrowScale() + 1, 16);
+        
+        //Lit thing
+   //     blit(matrixStack, posX + 49, posY + 40, 69, 25, menu.getLitScale() + 1, 16);
+ //       hLine(matrixStack, posX + 69, posY + 40, 144, 30);
     }
 
 	@Override
 	public IGuiProperties apply(DefossilizerScreen guiScreen) {
 		return null;
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 	}
 }

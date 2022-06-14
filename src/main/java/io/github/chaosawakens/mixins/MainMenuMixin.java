@@ -15,8 +15,15 @@ public class MainMenuMixin extends Screen {
 		super(iTextComponent);
 	}
 
+<<<<<<< HEAD
 	@Inject(at = @At("HEAD"), method = "init()V")
 	public void init(CallbackInfo info) {
 		ChaosAwakens.LOGGER.info("Hello from ChaosAwakens MainMenuMixin!");
 	}
+=======
+    @Inject(at = @At("HEAD"), method = "init()V")
+    public void init(CallbackInfo info) {
+        ChaosAwakens.LOGGER.info("HEHEHEHA");
+    }
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 }

@@ -13,9 +13,9 @@ public class LavaMobEntity extends CreatureEntity {
 	public LavaMobEntity(EntityType<? extends LavaMobEntity> entityType, World world) {
 		super(entityType, world);
 		this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
-		this.setPathfindingMalus(PathNodeType.LAVA, 1.0F);
-		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 0.0F);
-		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 0.0F);
+		this.setPathfindingMalus(PathNodeType.LAVA, 16.0F);
+		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 16.0F);
+		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 16.0F);
 	}
 
 	public boolean canBreatheUnderwater() {

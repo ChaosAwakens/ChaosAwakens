@@ -12,6 +12,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+<<<<<<< HEAD
 public class BeetrootOnAStickItem extends Item {
 
 	private final int consumeItemDamage;
@@ -41,6 +42,14 @@ public class BeetrootOnAStickItem extends Item {
 			}
 
 			player.awardStat(Stats.ITEM_USED.get(this));
+=======
+public class BeetrootOnAStickItem extends Item{
+	   private final int consumeItemDamage;
+	   
+		public BeetrootOnAStickItem(Properties prop, int duraDmg) {
+			super(prop);
+			this.consumeItemDamage = duraDmg;
+>>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 		}
 		return ActionResult.pass(itemstack);
 	}
