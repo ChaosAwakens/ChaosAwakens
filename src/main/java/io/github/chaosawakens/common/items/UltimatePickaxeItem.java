@@ -31,7 +31,7 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
 
 	@Override
 	public int getEntityLifespan(ItemStack itemStack, World world) {
-		return -1;
+		return 69420;
 	}
 
 	@Override
@@ -68,6 +68,7 @@ public class UltimatePickaxeItem extends EnchantedPickaxeItem implements IAutoEn
 			copy.setCount(size);
 			return copy;
 		}
+		
 
 		@Nonnull
 		@Override

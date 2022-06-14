@@ -1,8 +1,8 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CATags;
-import net.minecraft.block.Block;
+
+import io.github.chaosawakens.common.util.EnumUtils.CAItemTier;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -10,18 +10,15 @@ import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -45,7 +42,7 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
     public static float attackDamage;
     public AnimationFactory factory = new AnimationFactory(this);
 
-    public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn) {
+    public SlayerChainsawItem(CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
         attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         GeckoLibNetwork.registerSyncable(this);

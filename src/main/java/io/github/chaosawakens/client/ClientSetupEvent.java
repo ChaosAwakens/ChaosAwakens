@@ -1,8 +1,7 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-
-
+import io.github.chaosawakens.client.config.CAClientConfig;
 import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.common.entity.EntEntity;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
@@ -60,9 +59,11 @@ public class ClientSetupEvent implements IUtilityHelper {
 
 			if (entity == null) return;
 
-			if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-				event.setDensity(0.05F);
-				event.setCanceled(true);
+			if (CAClientConfig.CLIENT.enableCrystalDimensionFog.get()) {
+				if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+					event.setDensity(CAClientConfig.CLIENT.crystalDimensionFogDensity.get());
+					event.setCanceled(true);
+				}
 			}
 		}
 
@@ -74,8 +75,10 @@ public class ClientSetupEvent implements IUtilityHelper {
 
 			if (player == null) return;
 
-			if (player.level.dimension() == CADimensions.CRYSTAL_WORLD) {
-				IUtilityHelper.addParticles(player.level, ParticleTypes.WHITE_ASH, player.getX(), player.getEyeY(), player.getZ(), 50, player.getEyeY(), 50, 2);
+			if (CAClientConfig.CLIENT.enableCrystalDimensionParticles.get()) {
+				if (player.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+					IUtilityHelper.addParticles(player.level, ParticleTypes.WHITE_ASH, player.getX(), player.getEyeY(), player.getZ(), 50, 0.03, 50, CAClientConfig.CLIENT.crystalDimensionParticleDensity.get());
+				}
 			}
 		}
 	}
@@ -342,6 +345,7 @@ public class ClientSetupEvent implements IUtilityHelper {
         ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("carrot_pig"),
                 (stack, world, living) -> {
                 	if (stack.getTag() == null) return 0.0F;
+                	if (living instanceof PlayerEntity) return 0.0F;
                 	assert stack.getTag() != null;
                 	ClientSetupEvent.def = true;
                 	return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Carrot Pig") && !stack.getItem().getName(stack).toString().contains("Golden") && !stack.getItem().getName(stack).toString().contains("Crystal")? 1.0F : 0.0F;

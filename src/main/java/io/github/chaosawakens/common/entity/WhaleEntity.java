@@ -89,7 +89,11 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
 			this.onGround = false;
-			this.hasImpulse = true;
+			this.hasImpulse = false;
+		}
+		
+		if (this.isInWater()) {
+			this.hasImpulse = false;
 		}
 		super.aiStep();
 	}

@@ -17,6 +17,6 @@ public class MainMenuMixin extends Screen {
 
     @Inject(at = @At("HEAD"), method = "init()V")
     public void init(CallbackInfo info) {
-        ChaosAwakens.LOGGER.info("Hello from ChaosAwakens MainMenuMixin!");
+        ChaosAwakens.LOGGER.info("HEHEHEHA");
     }
 }

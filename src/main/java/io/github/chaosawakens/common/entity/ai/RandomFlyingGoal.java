@@ -4,9 +4,11 @@ import java.util.EnumSet;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.entity.BirdEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class RandomFlyingGoal extends Goal {
@@ -99,5 +101,22 @@ public class RandomFlyingGoal extends Goal {
 
 	public void setInterval(int p_179479_1_) {
 		this.interval = p_179479_1_;
+	}
+	
+	public boolean aboveWater(CreatureEntity bird) {
+		BlockPos birdPos = bird.blockPosition();
+		do {
+			birdPos = birdPos.below();
+		} while (birdPos.getY() > 2 && bird.level.isEmptyBlock(birdPos));
+		return !bird.level.getFluidState(birdPos).isEmpty();
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public BlockPos getPosBelowSolid(BlockPos pos) {
+		BlockPos targetPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+		do {
+			targetPos = targetPos.below();
+		} while (targetPos.getY() < 2 && !mob.level.getBlockState(targetPos).isAir());
+		return targetPos;
 	}
 }

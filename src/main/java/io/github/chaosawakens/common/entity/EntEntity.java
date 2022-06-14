@@ -132,6 +132,15 @@ public class EntEntity extends AnimatableMonsterEntity implements IAnimatable {
     }
     
     @Override
+    public void aiStep() {
+    	super.aiStep();
+    	
+    	if (this.isOnGround() && this.horizontalCollision) {
+    	    this.jumpFromGround();
+    	}
+    }
+    
+    @Override
     public void tick() {
     	super.tick();
     	

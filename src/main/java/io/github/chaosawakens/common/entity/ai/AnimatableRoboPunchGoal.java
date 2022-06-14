@@ -69,14 +69,14 @@ public class AnimatableRoboPunchGoal extends AnimatableGoal {
     public boolean canUse() {
         if (Math.random() <= 0.1) return false;
 
-        return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget());
+        return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget()) && !this.roboPounder.getNavigation().isDone();
     }
 
     @Override
     public boolean canContinueToUse() {
         if (Math.random() <= 0.1) return true;
 
-        return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget());
+        return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget()) && !this.roboPounder.getNavigation().isDone();
     }
 
     @Override

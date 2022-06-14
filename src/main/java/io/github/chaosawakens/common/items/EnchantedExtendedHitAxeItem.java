@@ -2,11 +2,11 @@ package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.util.EnumUtils.CAItemTier;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -19,7 +19,7 @@ public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem implements I
     public AnimationFactory factory = new AnimationFactory(this);
     private final EnchantmentData[] enchantments;
 
-    public EnchantedExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistanceIn, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
+    public EnchantedExtendedHitAxeItem(CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistanceIn, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
         this.enchantments = enchantments;
     }

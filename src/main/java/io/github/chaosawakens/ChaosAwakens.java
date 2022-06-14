@@ -4,6 +4,7 @@ import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.client.CABlockItemColors;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
+import io.github.chaosawakens.client.config.CAClientConfig;
 import io.github.chaosawakens.common.config.CAConfig;
 import io.github.chaosawakens.common.events.*;
 import io.github.chaosawakens.common.integration.TheOneProbePlugin;
@@ -63,18 +64,17 @@ public class ChaosAwakens {
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CAClientConfig.CLIENT_SPEC);
 
 		// Register to the mod event bus
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
 		eventBus.addListener(this::onInterModEnqueueEvent);
-
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
 		
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
-//			eventBus.addListener(ClientSetupEvent::mouseEvent);
-//			eventBus.addListener(ClientSetupEvent::renderParticles);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 			eventBus.addListener(EventPriority.NORMAL, CABlockItemColors::registerBlockColors);
 			eventBus.addListener(EventPriority.NORMAL, CABlockItemColors::registerItemColors);

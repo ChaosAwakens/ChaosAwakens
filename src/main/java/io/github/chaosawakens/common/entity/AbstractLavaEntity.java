@@ -4,6 +4,7 @@ import io.github.chaosawakens.common.entity.ai.LavaSwimmingNavigator;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -19,6 +20,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -28,6 +30,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import java.util.Random;
+
+import javax.annotation.Nullable;
 
 public abstract class AbstractLavaEntity extends LavaMobEntity {
 	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.defineId(AbstractLavaEntity.class, DataSerializers.BOOLEAN);
@@ -212,6 +216,14 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 
 		public boolean canUse() {
 			return this.fish.canRandomSwim() && super.canUse();
+		}
+			 
+		@Nullable		 
+		protected Vector3d getPosition() {		  
+			Vector3d vector3d = RandomPositionGenerator.getPos(this.mob, 10, 7);		  
+			for(int i = 0; vector3d != null && !this.mob.level.getBlockState(new BlockPos(vector3d)).isPathfindable(this.mob.level, new BlockPos(vector3d), PathType.WATER) && i++ < 10; vector3d = RandomPositionGenerator.getPos(this.mob, 10, 7)) {		  
+			}		  
+			return vector3d;	 
 		}
 	}
 }

@@ -13,8 +13,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class BeetrootOnAStickItem extends Item{
-	
-
 	   private final int consumeItemDamage;
 	   
 		public BeetrootOnAStickItem(Properties prop, int duraDmg) {

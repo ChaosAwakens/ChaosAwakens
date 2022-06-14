@@ -1,16 +1,19 @@
 package io.github.chaosawakens.common.entity;
 
 import net.minecraft.block.BlockState;
+
+
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
-import net.minecraft.entity.passive.ParrotEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -18,6 +21,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tags.BlockTags;
@@ -44,26 +48,39 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.common.entity.ai.AnimatableGroundPathNavigator;
+import io.github.chaosawakens.common.entity.ai.BirdWalkGoal;
+import io.github.chaosawakens.common.entity.ai.FlightMovementController;
 import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 
+import java.util.Optional;
 import java.util.Random;
 
-public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnimal, IUtilityHelper{
+public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAnimal, IUtilityHelper{
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
+	private static final DataParameter<Boolean> PERCHED = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> FLYING = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Optional<BlockPos>> POS = EntityDataManager.defineId(BirdEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
 	private float flap;
 	private float flapSpeed;
 	private float flapping = 1.0F;
+	public float sitTicks;
+	private boolean flying;
+	public float flyTicks;
+	private float sitCd;
+	private boolean navigatingLand;
+	public float sitCD;
 
-	public BirdEntity(EntityType<? extends ParrotEntity> p_i50251_1_, World p_i50251_2_) {
+	public BirdEntity(EntityType<? extends TameableEntity> p_i50251_1_, World p_i50251_2_) {
 		super(p_i50251_1_, p_i50251_2_);
 		this.moveControl = new FlyingMovementController(this, 10, true);
 		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, -1.0F);
 		this.setPathfindingMalus(PathNodeType.LAVA, -1.0F);
 		this.setPathfindingMalus(PathNodeType.DAMAGE_CACTUS, -1.0F);
 		this.setPathfindingMalus(PathNodeType.DANGER_OTHER, -1.0F);
-		this.setPathfindingMalus(PathNodeType.WALKABLE, 1.0F);
+		this.setPathfindingMalus(PathNodeType.WATER_BORDER, 16.0F);
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -77,26 +94,58 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(2, new SitGoal(this));
+		this.goalSelector.addGoal(3, new RandomFlyingGoal(this, 1.4F) {
+/*			BirdEntity bird;
+			
+			@Override
+			public boolean canUse() {
+				if (bird == null) return false;
+				return !this.bird.getNavigation().isDone() && super.canUse();
+			}
+			
+			@Override
+			public boolean canContinueToUse() {
+				if (bird == null) return false;
+				return super.canContinueToUse() && this.aboveWater(bird);
+			}*/
+		});
+		this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 1.0F) {
+	/*		BirdEntity bird;
+			
+			@Override
+			public boolean canUse() {
+				if (bird == null) return false;
+				return !this.bird.getNavigation().isDone() && !bird.aboveWater(bird) && bird.getPosBelowSolid(bird.blockPosition()) != null && super.canUse();
+			}
+			
+			@Override
+			public boolean canContinueToUse() {
+				if (bird == null) return false;
+				return !this.bird.getNavigation().isDone() && !bird.aboveWater(bird) && bird.getPosBelowSolid(bird.blockPosition()) != null && super.canContinueToUse();
+			}*/
+		});
 		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, RoboEntity.class, 1.0F, 0.25D, 0.45D));
 		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, MonsterEntity.class, 1.0F, 0.25D, 0.45D));
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(2, new SitGoal(this));
-		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 1.0F) {
-			@Override
-			public boolean canContinueToUse() {
-				return super.canContinueToUse();
-			}
-		});
-		this.goalSelector.addGoal(4, new RandomFlyingGoal(this, 2.0D, 1, true) {
-			@Override
-			public boolean canContinueToUse() {
-				return super.canContinueToUse();
-			}
-		});
-		this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new FollowMobGoal(this, 2.0D, 4.0F, 8.0F));
+	}
+	
+	public boolean aboveWater(CreatureEntity bird) {
+		BlockPos birdPos = bird.blockPosition();
+		do {
+			birdPos = birdPos.below();
+		} while (birdPos.getY() > 2 && bird.level.isEmptyBlock(birdPos));
+		return !bird.level.getFluidState(birdPos).isEmpty();
+	}
+	
+	@SuppressWarnings({ "deprecation" })
+	public BlockPos getPosBelowSolid(BlockPos pos) {
+		BlockPos targetPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+		do {
+			targetPos = targetPos.below();
+		} while (targetPos.getY() < 2 && !this.level.getBlockState(targetPos).isAir());
+		return targetPos;
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -111,13 +160,21 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.walk", true));
 			return PlayState.CONTINUE;
 		}
-		if (this.isFlying()) {
+		if (this.isFlying() || !this.isOnGround()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.fly", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
 	}
-
+	
+	public boolean isFlying() {
+		return this.entityData.get(FLYING);
+	}
+	
+	public void setFlying(boolean flying) {
+		this.entityData.set(FLYING, flying);
+	}
+	
 	@Override
 	protected PathNavigator createNavigation(World w) {
 		FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, w);
@@ -136,6 +193,26 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	public boolean isFood(ItemStack stack) {
 		return false;
 	}
+	
+	private BlockPos getSittingPos() {
+		return this.entityData.get(POS).orElse(null);
+	}
+	
+	private void setSittingPos(BlockPos sitPos) {
+		this.entityData.set(POS, Optional.ofNullable(sitPos));
+	}
+	
+	private void handleNav(boolean onGround) {
+		if (onGround) {
+			this.moveControl = new MovementController(this);
+			this.navigation = new GroundPathNavigator(this, level);
+			navigatingLand = true;
+		} else {
+			this.moveControl = new FlightMovementController(this, 0.8F, true);
+			this.navigation = new AnimatableGroundPathNavigator(this, level);
+			navigatingLand = false;
+		}
+	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
@@ -147,6 +224,71 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 		this.playSound(SoundEvents.PARROT_FLY, 0.15F, 1.0F);
 		return p_191954_1_ + this.flapSpeed / 2.0F;
 	}
+	
+    private static BlockPos belowPos(Entity entity) {
+        return new BlockPos(entity.getX(), entity.getBoundingBox().maxY + 1.51F, entity.getZ());
+    }
+	
+	@Override
+	public void tick() {
+		super.tick();
+	/*	if (this.isFlying() && flyTicks < 10) flyTicks += 1;
+		if (this.isFlying() && flyTicks > 10) flyTicks -= 1;
+		if (this.getSitting() && sitTicks < 10) sitTicks += 1;
+		if (this.getSitting() && sitTicks > 10) sitTicks -= 1;
+		
+		if (!level.isClientSide) {
+			if (!this.isOnGround() && this.sitCD > 0) this.setFlying(true);
+			if (this.isFlying()) handleNav(false);
+			if (!this.isFlying()) handleNav(true);
+			
+			if (this.isFlying()) {
+				flyTicks++;
+				this.setNoGravity(true);
+				if (this.getSitting() || this.isPassenger()) {
+					this.setFlying(false);
+				} else {
+					flyTicks = 0;
+					this.setNoGravity(false);
+				}
+			}	
+			
+			if (this.sitCD > 0) sitCD--;
+			
+			if (sitCD == 0) {
+				sitCD = 100;
+				BlockState b = this.getFeetBlockState();
+				if (b.getBlock() == Blocks.HAY_BLOCK && b != null) {
+					this.setSittingPos(belowPos(this));
+				}
+			}
+			
+			if (sitCD == 0 && this.getSittingPos() != null) {
+				sitCD = 101;
+				BlockState b = level.getBlockState(getSittingPos());
+				if (b.getBlock() != Blocks.HAY_BLOCK) {
+					this.setSittingPos(null);
+					this.setSitting(true);
+				}
+			}
+		}*/
+	}
+	
+	@Override
+	public void handleEntityEvent(byte b) {
+		super.handleEntityEvent(b);
+	}
+	
+	@Override
+	public void travel(Vector3d vector) {
+		if (this.getSitting()) {
+			if (this.navigation.getPath() != null) {
+				this.navigation.recomputePath();
+			}
+			vector = Vector3d.ZERO;
+		}
+		super.travel(vector);
+	}
 
 	@Override
 	public boolean canMate(AnimalEntity e) {
@@ -156,6 +298,14 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	@Override
 	protected float getSoundVolume() {
 		return 0.2F;
+	}
+	
+	public boolean getSitting() {
+		return this.entityData.get(PERCHED);
+	}
+	
+	public void setSitting(boolean sitting) {
+		this.entityData.set(PERCHED, sitting);
 	}
 
 	public int getBirdType() {
@@ -170,16 +320,31 @@ public class BirdEntity extends ParrotEntity implements IAnimatable, IFlyingAnim
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(DATA_TYPE_ID, 0);
+		this.entityData.define(PERCHED, false);
+		this.entityData.define(FLYING, false);
+		this.entityData.define(POS, Optional.empty());
 	}
 
 	public void addAdditionalSaveData(CompoundNBT nbt) {
 		super.addAdditionalSaveData(nbt);
 		nbt.putInt("BirdType", this.getBirdType());
+		nbt.putBoolean("Flying", this.isFlying());
+		nbt.putBoolean("Perched", this.getSitting());
+		if (this.getSittingPos() != null) {
+			nbt.putInt("SitPosX", this.getSittingPos().getX());
+			nbt.putInt("SitPosY", this.getSittingPos().getY());
+			nbt.putInt("SitPosZ", this.getSittingPos().getZ());
+		}
 	}
 
 	public void readAdditionalSaveData(CompoundNBT nbt) {
 		super.readAdditionalSaveData(nbt);
 		this.setBirdType(nbt.getInt("BirdType"));
+		this.setFlying(nbt.getBoolean("Flying"));
+		this.setSitting(nbt.getBoolean("Perched"));
+        if (nbt.contains("SitPosX") && nbt.contains("SitPosY") && nbt.contains("SitPosZ")) {
+            this.setSittingPos(new BlockPos(nbt.getInt("SitPosX"), nbt.getInt("SitPosY"), nbt.getInt("SitPosZ")));
+        }
 	}
 
 	@Override
