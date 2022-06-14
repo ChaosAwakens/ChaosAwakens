@@ -13,14 +13,12 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
 
 public class AnimatableRoboPunchGoal extends AnimatableGoal {
-
 	protected final double animationLength;
 	protected final BiFunction<Double, Double, Boolean> attackPredicate;
 	private boolean hasHit;
 	public static float punchingTicks;
 
-	public AnimatableRoboPunchGoal(AnimatableMonsterEntity entity, RoboPounderEntity robo, double animationLength,
-			double attackBegin, double attackEnd) {
+	public AnimatableRoboPunchGoal(AnimatableMonsterEntity entity, RoboPounderEntity robo, double animationLength, double attackBegin, double attackEnd) {
 		this.entity = entity;
 		this.roboPounder = robo;
 		this.animationLength = animationLength;
@@ -63,18 +61,23 @@ public class AnimatableRoboPunchGoal extends AnimatableGoal {
 
 	@Override
 	public boolean canUse() {
+		if (Math.random() <= 0.1) return false;
         return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget()) && !this.roboPounder.getNavigation().isDone();
     }
 
 	@Override
 	public boolean canContinueToUse() {
 		if (Math.random() <= 0.1) return true;
-		return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget());
+		return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget()) && !this.roboPounder.getNavigation().isDone();
 	}
 
 	@Override
 	public void start() {
-        return AnimatableRoboPunchGoal.checkIfValid(this, roboPounder, this.roboPounder.getTarget()) && !this.roboPounder.getNavigation().isDone();
+		this.roboPounder.setAttacking(true);
+		this.roboPounder.setAggressive(true);
+		this.roboPounder.setPunching(true);
+		this.animationProgress = 0;
+		AnimatableRoboPunchGoal.punchingTicks = 0;
     }
 
 	@Override

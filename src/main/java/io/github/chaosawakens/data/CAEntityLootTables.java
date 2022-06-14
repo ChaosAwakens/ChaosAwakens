@@ -16,6 +16,7 @@ import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.Smelt;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class CAEntityLootTables extends EntityLootTables {
 	private final Set<EntityType<?>> knownEntities = new HashSet<>();
 
 	@Override
+	@ParametersAreNonnullByDefault
 	public void add(EntityType<?> entity, LootTable.Builder builder) {
 		super.add(entity, builder);
 		knownEntities.add(entity);
@@ -807,6 +809,12 @@ public class CAEntityLootTables extends EntityLootTables {
 										.apply(Smelt.smelted()
 												.when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F))))));
+		add(CAEntityTypes.FROG.get(),
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(Items.SLIME_BALL)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F))))));
 	}
 
 	@Override

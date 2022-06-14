@@ -104,7 +104,6 @@ public class ChaosAwakens {
 		forgeBus.addListener(MiscEventHandler::onRegisterCommandEvent);
 		forgeBus.addListener(MiscEventHandler::onEntityJoin);
 		forgeBus.addListener(MiscEventHandler::onPlayerLoggedIn);
-		forgeBus.addListener(GiantEventHandler::onEntityJoin);
 		forgeBus.addListener(EventPriority.NORMAL, CAVanillaCompat::registerFurnaceFuel);
 		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);
 		forgeBus.addListener(EventPriority.LOWEST, MiscEventHandler::onMobDrops);
@@ -171,10 +170,5 @@ public class ChaosAwakens {
 	 */
 	public static <W> void warn(String domain, W message) {
 		LOGGER.warn("[" + domain + "]: " + message != null ? message.toString() : message);
-	}
-}
-	
-	public static ChaosAwakens getInstance() {
-		return INSTANCE;
 	}
 }

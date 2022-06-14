@@ -32,7 +32,14 @@ side="BOTH"
 [[dependencies.chaosawakens]]
 modId="geckolib3"
 mandatory=true
-versionRange="[3.0.65,)"
+versionRange="[3.0.77,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.chaosawakens]]
+modId="attributefix"
+mandatory=true
+versionRange="[10.1.4,)"
 ordering="NONE"
 side="BOTH"
 

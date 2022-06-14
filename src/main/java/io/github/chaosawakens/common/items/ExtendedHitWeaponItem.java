@@ -1,10 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import com.google.common.collect.ImmutableMultimap;
-<<<<<<< HEAD
-=======
 import com.google.common.collect.ImmutableMultimap.Builder;
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 import com.google.common.collect.Multimap;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.util.EnumUtils;
@@ -19,8 +16,6 @@ import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-<<<<<<< HEAD
-=======
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,7 +23,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -36,20 +30,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.UUID;
 
 public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAnimatable, IUtilityHelper {
-<<<<<<< HEAD
-	public static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("C59EC38E-DC43-11EB-BA80-0242AC130004");
-	public AnimationFactory factory = new AnimationFactory(this);
-	private final Multimap<Attribute, AttributeModifier> attributeModifiersDefault;
-
-	public ExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn);
-		float attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
-		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", knockBack, AttributeModifier.Operation.ADDITION));
-		attributeModifiersDefault = builder.build();
-=======
 	public static final UUID REACH_MODIFIER = UUID.fromString("1C0F03EC-EEB6-414A-8AC6-2A0913844821"); //1C0F03EC-EEB6-414A-8AC6-2A0913844821
 	public static final UUID KB_MODIFIER = UUID.fromString("031FCABC-A15C-45C1-B799-5068DB1EAA98");
 	public static int damage;
@@ -59,8 +39,8 @@ public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAn
 	public static Lazy<? extends Multimap<Attribute, AttributeModifier>> LAZY = Lazy.of(() -> {
 		Multimap<Attribute, AttributeModifier> map;
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)ExtendedHitWeaponItem.damage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)attackSpeed, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", ExtendedHitWeaponItem.damage, AttributeModifier.Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeed, AttributeModifier.Operation.ADDITION));
 		if (ForgeMod.REACH_DISTANCE.isPresent()) {
 			builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(REACH_MODIFIER, "Weapon modifier", ExtendedHitWeaponItem.reach, AttributeModifier.Operation.ADDITION));
 		}
@@ -110,37 +90,15 @@ public class ExtendedHitWeaponItem extends SwordItem implements IVanishable, IAn
 			}
 		}
 		return super.onEntitySwing(stack, entity);
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 	}
 
 	@Override
 	public void registerControllers(AnimationData data) {
-<<<<<<< HEAD
 		// insert controllers here
-=======
-		
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 	}
 
 	@Override
 	public AnimationFactory getFactory() {
-<<<<<<< HEAD
-		return this.factory;
-	}
-
-	@Override
-	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-		return true;
-	}
-
-	@Override
-	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType slot) {
-		return slot == EquipmentSlotType.MAINHAND ? attributeModifiersDefault : super.getDefaultAttributeModifiers(slot);
-	}
-}
-=======
 		return null;
 	}
-
 }
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc

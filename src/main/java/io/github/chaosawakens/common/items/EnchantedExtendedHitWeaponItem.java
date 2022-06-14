@@ -20,17 +20,10 @@ public class EnchantedExtendedHitWeaponItem extends ExtendedHitWeaponItem implem
 	public AnimationFactory factory = new AnimationFactory(this);
 	private final EnchantmentData[] enchantments;
 
-<<<<<<< HEAD
-	public EnchantedExtendedHitWeaponItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn, EnchantmentData[] enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
-		this.enchantments = enchantments;
-	}
-=======
     public EnchantedExtendedHitWeaponItem(EnumUtils.CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, double knockBack, Properties builderIn, EnchantmentData[] enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBack, builderIn);
         this.enchantments = enchantments;
     }
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {

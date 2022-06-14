@@ -18,6 +18,8 @@ import net.minecraft.util.text.event.HoverEvent;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Objects;
+
 public class CACommand {
 	private static final SimpleCommandExceptionType LOCATE_ERROR_FAILED = new SimpleCommandExceptionType(new TranslationTextComponent("commands.locate.failed"));
 
@@ -75,7 +77,7 @@ public class CACommand {
 
 		LiteralArgumentBuilder<CommandSource> chaosawakenslocate = Commands.literal("chaosawakens");
 		for (Structure<?> structureFeature : ForgeRegistries.STRUCTURE_FEATURES) {
-			if (structureFeature.getRegistryName().toString().contains("chaosawakens:")) {
+			if (Objects.requireNonNull(structureFeature.getRegistryName()).toString().contains("chaosawakens:")) {
 				String name = structureFeature.getRegistryName().toString().replace("chaosawakens:", "");
 				chaosawakenslocate = chaosawakenslocate.then(Commands.literal("locate").requires((p_198533_0_) -> p_198533_0_.hasPermission(2)).then(Commands.literal(name).executes(ctx -> locate(ctx.getSource(), structureFeature))));
 			}
@@ -135,7 +137,7 @@ public class CACommand {
 
 		LiteralArgumentBuilder<CommandSource> calocate = Commands.literal("ca");
 		for (Structure<?> structureFeature : ForgeRegistries.STRUCTURE_FEATURES) {
-			if (structureFeature.getRegistryName().toString().contains("chaosawakens:")) {
+			if (Objects.requireNonNull(structureFeature.getRegistryName()).toString().contains("chaosawakens:")) {
 				String name = structureFeature.getRegistryName().toString().replace("chaosawakens:", "");
 				calocate = calocate.then(Commands.literal("locate").requires((p_198533_0_) -> p_198533_0_.hasPermission(2)).then(Commands.literal(name).executes(ctx -> locate(ctx.getSource(), structureFeature))));
 			}

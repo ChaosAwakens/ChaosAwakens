@@ -1,22 +1,12 @@
 package io.github.chaosawakens.common.config;
 
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SwordItem;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.fml.RegistryObject;
 import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.util.EnumUtils.CAGearEnumList;
 
 public class CAConfig {
-	public static List<Item> gearList;
-
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
 
@@ -24,12 +14,6 @@ public class CAConfig {
 		final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();
 		COMMON = commonSpecPair.getLeft();
-	//	CAGearEnumList.getEnum().forEach();
-	}
-	
-	public static void listInit() {
-		//gearList.add(CAGearEnumList.getEnum().getItemRepresentation());
-		//CAGearEnumList.getEnum().forEach();
 	}
 
 	public static class Common {
@@ -360,11 +344,6 @@ public class CAConfig {
 			showUpdateMessage = builder
 					.comment("Send messages when there is a new update?")
 					.define("Show Update Messages", true);
-			builder.pop();
-			builder.push("Tooltips");
-			enableTooltips = builder
-					.comment("Enable Tooltips for Items and Blocks!")
-					.define("Enable Tooltips", true);
 			builder.pop();
 			builder.push("Spawners");
 			spawnEggsSpawnersSurvival = builder

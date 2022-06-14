@@ -6,9 +6,6 @@
 		"RabbitEntityMixin",
 		"SpawnEggItemMixin"
 	],
-	"client": [
-		"MainMenuMixin"
-	],
 	"refmap": "chaosawakens.refmap.json",
 	"injectors": {
 		"defaultRequire": 1

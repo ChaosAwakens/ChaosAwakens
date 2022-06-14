@@ -1,11 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-<<<<<<< HEAD
-=======
-
 import io.github.chaosawakens.common.util.EnumUtils.CAItemTier;
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -45,19 +41,11 @@ public class SlayerChainsawItem extends ExtendedHitAxeItem implements IVanishabl
 	public static float attackDamage;
 	public AnimationFactory factory = new AnimationFactory(this);
 
-<<<<<<< HEAD
-	public SlayerChainsawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn) {
-		super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
-		attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
-		GeckoLibNetwork.registerSyncable(this);
-	}
-=======
     public SlayerChainsawItem(CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
         attackDamage = (float) attackDamageIn + tier.getAttackDamageBonus();
         GeckoLibNetwork.registerSyncable(this);
     }
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {

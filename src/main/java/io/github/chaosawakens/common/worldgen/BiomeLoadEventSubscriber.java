@@ -26,10 +26,8 @@ public class BiomeLoadEventSubscriber {
 	}
 
 	private static class MobSpawnHandler {
-
-//		// Mobs that appear in any biome, but only in the overworld
-//		private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> {
-//		};
+		// Mobs that appear in any biome, but only in the overworld
+//		private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> { };
 
 		private static final Consumer<MobSpawnInfoBuilder> SWAMP_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 20, 3, 6));

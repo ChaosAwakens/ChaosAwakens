@@ -19,17 +19,10 @@ public class EnchantedExtendedHitAxeItem extends ExtendedHitAxeItem implements I
 	public AnimationFactory factory = new AnimationFactory(this);
 	private final EnchantmentData[] enchantments;
 
-<<<<<<< HEAD
-	public EnchantedExtendedHitAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistance, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, reachDistance, knockBackIn, builderIn);
-		this.enchantments = enchantments;
-	}
-=======
     public EnchantedExtendedHitAxeItem(CAItemTier tier, int attackDamageIn, float attackSpeedIn, double reachDistanceIn, int knockBackIn, Properties builderIn, EnchantmentData[] enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, reachDistanceIn, knockBackIn, builderIn);
         this.enchantments = enchantments;
     }
->>>>>>> 07fb30b8cfd30fed51b85aaa25508814dff5a0fc
 
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
