@@ -310,7 +310,7 @@ public class ClientSetupEvent implements IUtilityHelper {
   //			  (stack, world, living) -> {
   //			  	return stack != null && stack.getTag().contains("entity") ? 1.0F : 0.0F;
   //	   });
-		ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("def"),
+		ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("default"),
 				(stack, world, living) -> {
 					if (stack.getTag() == null) return 0.0F;
 					assert stack.getTag() != null;
