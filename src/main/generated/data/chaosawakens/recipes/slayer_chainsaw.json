@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:redstone_block"
+    },
+    "X": {
+      "item": "chaosawakens:ultimate_axe"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:slayer_chainsaw"
+  }
+}

@@ -96,7 +96,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 		AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
 		EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR, reachSqr);
 
-		if (result == null) return false;
+		if (result == null || !(result.getEntity() instanceof LivingEntity)) return false;
 
 		LivingEntity target = (LivingEntity) result.getEntity();
 

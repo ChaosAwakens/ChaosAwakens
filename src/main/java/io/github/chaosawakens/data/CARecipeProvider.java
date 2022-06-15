@@ -206,6 +206,7 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).save(consumer);
 
 		surroundItem(consumer, CAItems.POISON_SWORD.get(), CAItems.DEAD_STINK_BUG.get(), CAItems.EMERALD_SWORD.get());
+		surroundItem(consumer, CAItems.SLAYER_CHAINSAW.get(), Blocks.REDSTONE_BLOCK, CAItems.ULTIMATE_AXE.get());
 		surroundItem(consumer, CAItems.EXPERIENCE_SWORD.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_SWORD.get());
 		surroundItem(consumer, CAItems.EXPERIENCE_HELMET.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_HELMET.get());
 		surroundItem(consumer, CAItems.EXPERIENCE_CHESTPLATE.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_CHESTPLATE.get());
