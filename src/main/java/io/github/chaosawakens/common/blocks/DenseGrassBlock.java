@@ -29,7 +29,7 @@ public class DenseGrassBlock extends SpreadableDenseDirtBlock implements IGrowab
 		return true;
 	}
 
-	public void performBonemeal(ServerWorld serverWorld, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		BlockPos blockpos = pos.above();
 		BlockState blockstate = CABlocks.DENSE_GRASS.get().defaultBlockState();
 
@@ -37,26 +37,24 @@ public class DenseGrassBlock extends SpreadableDenseDirtBlock implements IGrowab
 			BlockPos blockpos1 = blockpos;
 			for (int j = 0; j < i / 16; ++j) {
 				blockpos1 = blockpos1.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-				if (!serverWorld.getBlockState(blockpos1.below()).is(this) || serverWorld.getBlockState(blockpos1).isCollisionShapeFullBlock(serverWorld, blockpos1)) continue label48;
+				if (!world.getBlockState(blockpos1.below()).is(this) || world.getBlockState(blockpos1).isCollisionShapeFullBlock(world, blockpos1)) continue label48;
 			}
 
-			BlockState blockstate2 = serverWorld.getBlockState(blockpos1);
-			if (blockstate2.is(blockstate.getBlock()) && random.nextInt(10) == 0) ((IGrowable) blockstate.getBlock()).performBonemeal(serverWorld, random, blockpos1, blockstate2);
+			BlockState blockstate2 = world.getBlockState(blockpos1);
+			if (blockstate2.is(blockstate.getBlock()) && random.nextInt(10) == 0) ((IGrowable) blockstate.getBlock()).performBonemeal(world, random, blockpos1, blockstate2);
 
 			if (blockstate2.isAir()) {
 				BlockState blockstate1;
 				if (random.nextInt(8) == 0) {
-					List<ConfiguredFeature<?, ?>> list = serverWorld.getBiome(blockpos1).getGenerationSettings().getFlowerFeatures();
+					List<ConfiguredFeature<?, ?>> list = world.getBiome(blockpos1).getGenerationSettings().getFlowerFeatures();
 					if (list.isEmpty()) continue;
 
 					ConfiguredFeature<?, ?> configuredfeature = list.get(0);
 					FlowersFeature flowersfeature = (FlowersFeature) configuredfeature.feature;
 					blockstate1 = flowersfeature.getRandomFlower(random, blockpos1, configuredfeature.config());
-				} else {
-					blockstate1 = blockstate;
-				}
+				} else blockstate1 = blockstate;
 
-				if (blockstate1.canSurvive(serverWorld, blockpos1)) serverWorld.setBlock(blockpos1, blockstate1, 3);
+				if (blockstate1.canSurvive(world, blockpos1)) world.setBlock(blockpos1, blockstate1, 3);
 			}
 		}
 	}

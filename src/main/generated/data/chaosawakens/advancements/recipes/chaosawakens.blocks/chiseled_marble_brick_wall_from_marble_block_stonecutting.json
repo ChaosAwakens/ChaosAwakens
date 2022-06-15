@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:chiseled_marble_brick_wall_from_marble_block_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_marble_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:marble_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:chiseled_marble_brick_wall_from_marble_block_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_marble_block",
+      "has_the_recipe"
+    ]
+  ]
+}

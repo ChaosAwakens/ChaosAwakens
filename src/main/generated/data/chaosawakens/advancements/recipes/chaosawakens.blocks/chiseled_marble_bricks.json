@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_marble_bricks_slab": {
+    "has_marble_brick_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:marble_bricks_slab"
+            "item": "chaosawakens:marble_brick_slab"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_marble_bricks_slab",
+      "has_marble_brick_slab",
       "has_the_recipe"
     ]
   ]

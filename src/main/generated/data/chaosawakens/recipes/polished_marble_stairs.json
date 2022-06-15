@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:polished_marble_block"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:polished_marble_stairs",
+    "count": 4
+  }
+}

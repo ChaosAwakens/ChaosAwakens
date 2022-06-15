@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.events;
 import com.mojang.brigadier.CommandDispatcher;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.robo.RoboWarriorEntity;
@@ -62,7 +62,7 @@ public class MiscEventHandler {
 				((PlayerEntity) entity).drop(new ItemStack(Items.INK_SAC, random.nextInt(3)), true, false);
 			}
 		}
-		if (CAConfig.COMMON.enableDragonEggRespawns.get()) {
+		if (CACommonConfig.COMMON.enableDragonEggRespawns.get()) {
 			if (entity.getCommandSenderWorld().equals(server.getLevel(World.END))) {
 				if (entity instanceof EnderDragonEntity) {
 					EnderDragonEntity dragon = (EnderDragonEntity) entity;
@@ -91,7 +91,7 @@ public class MiscEventHandler {
 
 			// Drop #2: Ender Dragon Head
 			double chance = 0.1D + event.getLootingLevel() * 0.1D;
-			if (Math.random() < chance && CAConfig.COMMON.enderDragonHeadDrop.get()) {
+			if (Math.random() < chance && CACommonConfig.COMMON.enderDragonHeadDrop.get()) {
 				stack = new ItemStack(Items.DRAGON_HEAD, 1);
 				drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
 				event.getDrops().add(drop);
@@ -102,7 +102,7 @@ public class MiscEventHandler {
 	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		Entity entity = event.getEntity();
 		if (entity == null) return;
-		if (CAConfig.COMMON.showUpdateMessage.get() && VersionChecker.getResult(ModList.get().getModContainerById(ChaosAwakens.MODID).get().getModInfo()).status == VersionChecker.Status.OUTDATED) {
+		if (CACommonConfig.COMMON.showUpdateMessage.get() && VersionChecker.getResult(ModList.get().getModContainerById(ChaosAwakens.MODID).get().getModInfo()).status == VersionChecker.Status.OUTDATED) {
 			entity.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)
 					.append(new StringTextComponent(ChaosAwakens.MODNAME).withStyle(TextFormatting.BOLD, TextFormatting.GOLD))
 					.append(new StringTextComponent(" is now available from: ").withStyle(TextFormatting.WHITE))

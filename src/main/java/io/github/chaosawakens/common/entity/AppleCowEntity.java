@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -157,7 +157,7 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 	public boolean isHalloweenObtained() {
 		LocalDate localdate = LocalDate.now();
 		int month = localdate.get(ChronoField.MONTH_OF_YEAR);
-		return (month == 10 && this.random.nextFloat() < 0.05F && CAConfig.COMMON.holidayTextures.get());
+		return (month == 10 && this.random.nextFloat() < 0.05F && CACommonConfig.COMMON.holidayTextures.get());
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public abstract class RabbitEntityMixin extends AnimalEntity {
 	}
 
 	@Inject(method = "getRandomRabbitType", at = @At("HEAD"), cancellable = true)
-	public void getRandomRabbitType(IWorld world, CallbackInfoReturnable<Integer> cir) {
+	public void chaosawakens$getRandomRabbitType(IWorld world, CallbackInfoReturnable<Integer> cir) {
 		RegistryKey<Biome> biomeRegistryKey = world.getBiomeName(this.blockPosition()).get();
 		int i = this.random.nextInt(100);
 		if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.VILLAGE_SNOWY)) {

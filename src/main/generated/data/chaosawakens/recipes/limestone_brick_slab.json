@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:limestone_bricks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:limestone_brick_slab",
+    "count": 6
+  }
+}

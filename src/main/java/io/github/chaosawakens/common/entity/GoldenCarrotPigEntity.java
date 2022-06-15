@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.client.config.CAClientConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.BlockState;

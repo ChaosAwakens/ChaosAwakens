@@ -179,6 +179,10 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				.addCriterion("titanium_block", InventoryChangeTrigger.Instance.hasItems(CABlocks.TITANIUM_BLOCK.get()))
 				.save(t, id("trophy_worthy"));
 
+		Advancement stopBeingSalty = registerAdvancement("stop_being_salty", FrameType.TASK, CABlocks.SALT_BLOCK.get()).parent(root)
+				.addCriterion("salt_block", InventoryChangeTrigger.Instance.hasItems(CABlocks.SALT_BLOCK.get()))
+				.save(t, id("stop_being_salty"));
+
 		Advancement anAppleCowADay = registerAdvancement("an_apple_cow_a_day", FrameType.TASK, CAItems.APPLE_COW_SPAWN_EGG.get()).parent(root)
 				.addCriterion("apple_cow", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.ANY))
 				.save(t, id("an_apple_cow_a_day"));
@@ -197,8 +201,9 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				.addCriterion("enchanted_golden_carrot_pig", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.ANY))
 				.requirements(IRequirementsStrategy.OR).save(t, id("shiny_pigs"));
 
-		Advancement chaoticByChoice = registerAdvancement("chaotic_by_choice", FrameType.GOAL, CABlocks.DEFOSSILIZER.get()).parent(root)
-				.addCriterion("chaotic_by_choice", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER.get()))
+		Advancement chaoticByChoice = registerAdvancement("chaotic_by_choice", FrameType.GOAL, CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()).parent(root).requirements(IRequirementsStrategy.OR)
+				.addCriterion("copper_defossilizer", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()))
+				.addCriterion("iron_defossilizer", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()))
 				.save(t, id("chaotic_by_choice"));
 	}
 

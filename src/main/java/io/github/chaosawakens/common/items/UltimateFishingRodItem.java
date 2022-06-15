@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.enchantment.EnchantmentData;
@@ -26,7 +26,7 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
+			if (CACommonConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 			items.add(stack);
 		}
 	}
@@ -66,6 +66,6 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 
 	@Override
 	public boolean isFoil(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
+		return CACommonConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
 	}
 }

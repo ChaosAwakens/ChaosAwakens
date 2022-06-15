@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:light_blue_terracotta"
-  },
-  "result": "chaosawakens:cracked_light_blue_terracotta_brick_stairs",
-  "count": 1
-}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:salt_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:salt",
+    "count": 9
+  }
+}

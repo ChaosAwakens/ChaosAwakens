@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 
 public class RayGunProjectileEntity extends AbstractFireballEntity {
-	private static final float EXPLOSION_POWER = CAConfig.COMMON.rayGunExplosionSize.get();
+	private static final float EXPLOSION_POWER = CACommonConfig.COMMON.rayGunExplosionSize.get();
 
 	public RayGunProjectileEntity(EntityType<? extends AbstractFireballEntity> p_i50166_1_, World p_i50166_2_) {
 		super(p_i50166_1_, p_i50166_2_);
@@ -35,8 +35,8 @@ public class RayGunProjectileEntity extends AbstractFireballEntity {
 	protected void onHit(RayTraceResult result) {
 		super.onHit(result);
 		if (!this.level.isClientSide) {
-			boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
-			switch (CAConfig.COMMON.rayGunExplosionType.get()) {
+			boolean hasFire = CACommonConfig.COMMON.rayGunExplosionFire.get();
+			switch (CACommonConfig.COMMON.rayGunExplosionType.get()) {
 				case 0: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
 				case 1: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
 				case 2: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);

@@ -43,8 +43,8 @@ public class CACustomConversionProvider extends CustomConversionProvider {
 				.before(CAItems.ALUMINUM_INGOT.get(), 6_144)
 				.before(CAItems.PLATINUM_LUMP.get(), 12_288)
 				.before(CAItems.CATS_EYE_INGOT.get(), 12_288)
-				.before(CAItems.URANIUM_INGOT.get(), 524_288)
-				.before(CAItems.TITANIUM_INGOT.get(), 524_288);
+				.before(CAItems.URANIUM_NUGGET.get(), 524_288)
+				.before(CAItems.TITANIUM_NUGGET.get(), 524_288);
 		createConversionBuilder(new ResourceLocation(ChaosAwakens.MODID, "animals"))
 				.before(CATags.Items.FISH, 96)
 				.before(CAItems.LAVA_EEL.get(), 128)
@@ -58,18 +58,27 @@ public class CACustomConversionProvider extends CustomConversionProvider {
 				.conversion(CAItems.WOOD_FISH_BUCKET.get()).ingredient(Items.WATER_BUCKET).ingredient(CAItems.WOOD_FISH.get()).end()
 				.conversion(CAItems.LAVA_EEL_BUCKET.get()).ingredient(Items.LAVA_BUCKET).ingredient(CAItems.LAVA_EEL.get()).end();
 		createConversionBuilder(new ResourceLocation(ChaosAwakens.MODID, "ant_nests"))
-				.before(CABlocks.BROWN_ANT_NEST.get(), 3)
-				.before(CABlocks.RAINBOW_ANT_NEST.get(), 3)
-				.before(CABlocks.RED_ANT_NEST.get(), 3)
-				.before(CABlocks.UNSTABLE_ANT_NEST.get(), 3)
-				.before(CABlocks.TERMITE_NEST.get(), 3)
-				.before(CABlocks.CRYSTAL_TERMITE_NEST.get(), 3);
+				.before(CABlocks.BROWN_ANT_NEST.get(), 2)
+				.before(CABlocks.RAINBOW_ANT_NEST.get(), 2)
+				.before(CABlocks.RED_ANT_NEST.get(), 2)
+				.before(CABlocks.UNSTABLE_ANT_NEST.get(), 2)
+				.before(CABlocks.TERMITE_NEST.get(), 2)
+				.before(CABlocks.CRYSTAL_TERMITE_NEST.get(), 3)
+				.before(CABlocks.DENSE_DIRT.get(), 5);
 		createConversionBuilder(new ResourceLocation(ChaosAwakens.MODID, "crystal"))
 				.before(CABlocks.CRYSTAL_GRASS_BLOCK.get(), 2)
 				.before(CABlocks.KYANITE.get(), 2)
+				.before(CABlocks.CRYSTAL_GRASS.get(), 2)
+				.before(CABlocks.TALL_CRYSTAL_GRASS.get(), 2)
 				.before(CABlocks.CRYSTAL_LOG.get(), 64)
 				.before(CATags.Items.CRYSTAL_LEAVES, 2)
 				.before(CATags.Items.CRYSTAL_SAPLING, 64)
 				.before(CABlocks.CRYSTAL_ENERGY.get().asItem(), 3_072);
+		createConversionBuilder(new ResourceLocation(ChaosAwakens.MODID, "dense"))
+				.before(CABlocks.DENSE_GRASS_BLOCK.get(), 4)
+				.before(CABlocks.DENSE_DIRT.get(), 4)
+				.before(CABlocks.DENSE_GRASS.get(), 4)
+				.before(CABlocks.TALL_DENSE_GRASS.get(), 4)
+				.before(CABlocks.THORNY_SUN.get(), 32);
 	}
 }

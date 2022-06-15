@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -39,7 +41,13 @@ public class DefossilizerBlock extends Block {
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new DefossilizerTileEntity();
+		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get())) {
+			return new DefossilizerCopperTileEntity();
+		}
+		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get())) {
+			return new DefossilizerIronTileEntity();
+		}
+		return null;
 	}
 
 	@Override
@@ -52,8 +60,13 @@ public class DefossilizerBlock extends Block {
 
 	private void interactWith(World world, BlockPos pos, PlayerEntity player) {
 		TileEntity tileEntity = world.getBlockEntity(pos);
-		if (tileEntity instanceof DefossilizerTileEntity && player instanceof ServerPlayerEntity) {
-			DefossilizerTileEntity te = (DefossilizerTileEntity) tileEntity;
+		if (!(player instanceof ServerPlayerEntity)) return;
+		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
+			DefossilizerCopperTileEntity te = (DefossilizerCopperTileEntity) tileEntity;
+			NetworkHooks.openGui((ServerPlayerEntity) player, te, te::encodeExtraData);
+		}
+		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
+			DefossilizerIronTileEntity te = (DefossilizerIronTileEntity) tileEntity;
 			NetworkHooks.openGui((ServerPlayerEntity) player, te, te::encodeExtraData);
 		}
 	}
@@ -68,7 +81,11 @@ public class DefossilizerBlock extends Block {
 	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			TileEntity tileEntity = world.getBlockEntity(pos);
-			if (tileEntity instanceof DefossilizerTileEntity) {
+			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
+				InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
+				world.updateNeighbourForOutputSignal(pos, this);
+			}
+			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
 				InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
 				world.updateNeighbourForOutputSignal(pos, this);
 			}

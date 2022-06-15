@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:polished_marble_wall"
+    ]
+  },
+  "criteria": {
+    "has_polished_marble_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:polished_marble_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:polished_marble_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_marble_block",
+      "has_the_recipe"
+    ]
+  ]
+}

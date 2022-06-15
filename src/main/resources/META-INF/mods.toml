@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="[36,)"
 issueTrackerURL="https://github.com/ChaosAwakens/ChaosAwakens/issues"
-license="All Rights Reserved. Code created before v0.9.0.0 is licensed GNU LGPL v2.1."
+license="All Rights Reserved."
 
 [[mods]]
 modId="chaosawakens"

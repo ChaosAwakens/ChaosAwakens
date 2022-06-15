@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.network.PacketHandler;
 import io.github.chaosawakens.common.registry.*;
@@ -100,7 +100,7 @@ public class CommonSetupEvent {
 			ChaosAwakens.LOGGER.warn("[WORLDGEN]: " + e);
 			e.printStackTrace();
 		} catch (UnableToFindMethodException e) {
-			if (CAConfig.COMMON.terraforgedCheckMsg.get())
+			if (CACommonConfig.COMMON.terraforgedCheckMsg.get())
 				ChaosAwakens.LOGGER.info("[WORLDGEN]: Unable to check if " + serverWorld.dimension().location()
 						+ " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible,"
 						+ " if you aren't using Terraforged please ignore this message");

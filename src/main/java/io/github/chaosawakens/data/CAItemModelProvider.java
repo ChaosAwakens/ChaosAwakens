@@ -80,7 +80,7 @@ public class CAItemModelProvider extends ItemModelProvider {
         final ModelFile wolf = getExistingFile(loc("chaosawakens:item/wolf_critter_cage"));
         final ModelFile zombieVillager = getExistingFile(loc("chaosawakens:item/zombie_villager_critter_cage"));
         final ModelFile zombie = getExistingFile(loc("chaosawakens:item/zombie_critter_cage"));
-        
+
         final ResourceLocation defaultRL = new ResourceLocation("default");
         final ResourceLocation appleCowRL = new ResourceLocation("apple_cow");
         final ResourceLocation beeRL = new ResourceLocation("bee");
@@ -125,13 +125,10 @@ public class CAItemModelProvider extends ItemModelProvider {
 			 * already have an existing model at assets/chaosawakens/models/item
 			 */
 
-            if (item.getId().getPath().contains("critter_cage")) {
-            	getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/critter_cages/" + name.replaceAll("_critter_cage", "")).override().predicate(defaultRL, 1.0F).model(defaultCritterCage).end().override().predicate(appleCowRL, 1.0F).model(appleCow).end().override().predicate(beeRL, 1.0F).model(bee).end().override().predicate(birdRL, 1.0F).model(bird).end().override().predicate(carrotPigRL, 1.0F).model(carrotPig).end().override().predicate(catRL, 1.0F).model(cat).end().override().predicate(caveSpiderRL, 1.0F).model(caveSpider).end().override().predicate(cowRL, 1.0F).model(cow).end().override().predicate(creeperRL, 1.0F).model(creeper).end().override().predicate(donkeyRL, 1.0F).model(donkey).end().override().predicate(drownedRL, 1.0F).model(drowned).end().override().predicate(endermanRL, 1.0F).model(enderman).end().override().predicate(foxRL, 1.0F).model(fox).end().override().predicate(horseRL, 1.0F).model(horse).end().override().predicate(huskRL, 1.0F).model(husk).end().override().predicate(llamaRL, 1.0F).model(llama).end().override().predicate(mooshroomRL, 1.0F).model(mooshroom).end().override().predicate(ostrichRL, 1.0F).model(ostrich).end().override().predicate(pandaRL, 1.0F).model(panda).end().override().predicate(pigRL, 1.0F).model(pig).end().override().predicate(piraporuRL, 1.0F).model(piraporu).end().override().predicate(polarBearRL, 1.0F).model(polarBear).end().override().predicate(rabbitRL, 1.0F).model(rabbit).end().override().predicate(sheepRL, 1.0F).model(sheep).end().override().predicate(skeletonRL, 1.0F).model(skeleton).end().override().predicate(slimeRL, 1.0F).model(slime).end().override().predicate(spiderRL, 1.0F).model(spider).end().override().predicate(strayRL, 1.0F).model(stray).end().override().predicate(wolfRL, 1.0F).model(wolf).end().override().predicate(zombieVillagerRL, 1.0F).model(zombieVillager).end().override().predicate(zombieRL, 1.0F).model(zombie).end();
-            } else if (item.getId().getPath().contains("_spawn_egg")) {
-                getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/spawn_eggs/" + name.replaceAll("_spawn_egg", ""));
-            } else {
-                if (!existingFileHelper.exists(getItemResourceLocation(name), TEXTURE) || existingFileHelper.exists(getItemResourceLocation(name), MODEL))
-                    continue;
+            if (item.getId().getPath().contains("critter_cage")) getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/critter_cages/" + name.replaceAll("_critter_cage", "")).override().predicate(defaultRL, 1.0F).model(defaultCritterCage).end().override().predicate(appleCowRL, 1.0F).model(appleCow).end().override().predicate(beeRL, 1.0F).model(bee).end().override().predicate(birdRL, 1.0F).model(bird).end().override().predicate(carrotPigRL, 1.0F).model(carrotPig).end().override().predicate(catRL, 1.0F).model(cat).end().override().predicate(caveSpiderRL, 1.0F).model(caveSpider).end().override().predicate(cowRL, 1.0F).model(cow).end().override().predicate(creeperRL, 1.0F).model(creeper).end().override().predicate(donkeyRL, 1.0F).model(donkey).end().override().predicate(drownedRL, 1.0F).model(drowned).end().override().predicate(endermanRL, 1.0F).model(enderman).end().override().predicate(foxRL, 1.0F).model(fox).end().override().predicate(horseRL, 1.0F).model(horse).end().override().predicate(huskRL, 1.0F).model(husk).end().override().predicate(llamaRL, 1.0F).model(llama).end().override().predicate(mooshroomRL, 1.0F).model(mooshroom).end().override().predicate(ostrichRL, 1.0F).model(ostrich).end().override().predicate(pandaRL, 1.0F).model(panda).end().override().predicate(pigRL, 1.0F).model(pig).end().override().predicate(piraporuRL, 1.0F).model(piraporu).end().override().predicate(polarBearRL, 1.0F).model(polarBear).end().override().predicate(rabbitRL, 1.0F).model(rabbit).end().override().predicate(sheepRL, 1.0F).model(sheep).end().override().predicate(skeletonRL, 1.0F).model(skeleton).end().override().predicate(slimeRL, 1.0F).model(slime).end().override().predicate(spiderRL, 1.0F).model(spider).end().override().predicate(strayRL, 1.0F).model(stray).end().override().predicate(wolfRL, 1.0F).model(wolf).end().override().predicate(zombieVillagerRL, 1.0F).model(zombieVillager).end().override().predicate(zombieRL, 1.0F).model(zombie).end();
+			else if (item.getId().getPath().contains("_spawn_egg")) getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/spawn_eggs/" + name.replaceAll("_spawn_egg", ""));
+			else {
+                if (!existingFileHelper.exists(getItemResourceLocation(name), TEXTURE) || existingFileHelper.exists(getItemResourceLocation(name), MODEL)) continue;
                 getBuilder(item.getId().getPath()).parent(item.get().getMaxDamage(ItemStack.EMPTY) > 0 && !(item.get() instanceof ArmorItem) ? parentHandheld : parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/" + name);
             }
         }
@@ -151,20 +148,13 @@ public class CAItemModelProvider extends ItemModelProvider {
 			 * assets/chaosawakens/models/item
 			 */
 
-			if (item.getId().getPath().contains("_wall")) {
-				withExistingParent(name, getBlockResourceLocation(name + "_inventory"));
-			} else if (item.getId().getPath().contains("_trapdoor")) {
-				withExistingParent(name, getBlockResourceLocation(name + "_bottom"));
-			} else if ((block instanceof CrystalBushBlock || block instanceof DenseBushBlock)
-					&& (item.getId().getPath().contains("_grass") || item.getId().getPath().contains("_sun"))) {
-				if (item.getId().getPath().contains("tall_") || item.getId().getPath().contains("thorny_")) {
-					singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name + "_top"));
-				} else {
-					singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name));
-				}
+			if (item.getId().getPath().contains("_wall")) withExistingParent(name, getBlockResourceLocation(name + "_inventory"));
+			else if (item.getId().getPath().contains("_trapdoor")) withExistingParent(name, getBlockResourceLocation(name + "_bottom"));
+			else if ((block instanceof CrystalBushBlock || block instanceof DenseBushBlock) && (item.getId().getPath().contains("_grass") || item.getId().getPath().contains("_sun"))) {
+				if (item.getId().getPath().contains("tall_") || item.getId().getPath().contains("thorny_")) singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name + "_top"));
+				else singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name));
 			} else {
-				if (!existingFileHelper.exists(getBlockResourceLocation(name), MODEL) || existingFileHelper.exists(getItemResourceLocation(name), MODEL))
-					continue;
+				if (!existingFileHelper.exists(getBlockResourceLocation(name), MODEL) || existingFileHelper.exists(getItemResourceLocation(name), MODEL)) continue;
 				withExistingParent(name, getBlockResourceLocation(name));
 			}
 		}

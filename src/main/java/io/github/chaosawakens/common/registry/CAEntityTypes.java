@@ -2,7 +2,7 @@ package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.*;
 import io.github.chaosawakens.common.entity.projectile.*;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
@@ -151,28 +151,28 @@ public class CAEntityTypes {
 	// Ants
 	public static final RegistryObject<EntityType<AntEntity>> BROWN_ANT = ENTITY_TYPES.register("brown_ant",
 			() -> EntityType.Builder.of((IFactory<AntEntity>) (type, world) -> new AntEntity(type, world,
-							CAConfig.COMMON.enableBrownAntTeleport, null), EntityClassification.CREATURE)
+							CACommonConfig.COMMON.enableBrownAntTeleport, null), EntityClassification.CREATURE)
 					.sized(0.25f, 0.25f)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "brown_ant").toString()));
 	public static final RegistryObject<EntityType<AntEntity>> RAINBOW_ANT = ENTITY_TYPES.register("rainbow_ant",
 			() -> EntityType.Builder.of((IFactory<AntEntity>) (type, world) -> new AntEntity(type, world,
-							CAConfig.COMMON.enableRainbowAntTeleport, CADimensions.VILLAGE_MANIA), EntityClassification.CREATURE)
+							CACommonConfig.COMMON.enableRainbowAntTeleport, CADimensions.VILLAGE_MANIA), EntityClassification.CREATURE)
 					.sized(0.25f, 0.25f)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "rainbow_ant").toString()));
 	public static final RegistryObject<EntityType<AggressiveAntEntity>> RED_ANT = ENTITY_TYPES.register("red_ant",
 			() -> EntityType.Builder.of((IFactory<AggressiveAntEntity>) (type, world) -> new AggressiveAntEntity(type, world,
-							CAConfig.COMMON.enableRedAntTeleport, CADimensions.MINING_PARADISE), EntityClassification.MONSTER)
+							CACommonConfig.COMMON.enableRedAntTeleport, CADimensions.MINING_PARADISE), EntityClassification.MONSTER)
 					.sized(0.25f, 0.25f)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "red_ant").toString()));
 	public static final RegistryObject<EntityType<AntEntity>> UNSTABLE_ANT = ENTITY_TYPES.register("unstable_ant",
 			() -> EntityType.Builder.of((IFactory<AntEntity>) (type, world) -> new AntEntity(type, world,
-							CAConfig.COMMON.enableUnstableAntTeleport, null), EntityClassification.CREATURE)
+							CACommonConfig.COMMON.enableUnstableAntTeleport, null), EntityClassification.CREATURE)
 					.sized(0.25f, 0.25f)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "unstable_ant").toString()));
 	// Termite
 	public static final RegistryObject<EntityType<AggressiveAntEntity>> TERMITE = ENTITY_TYPES.register("termite",
 			() -> EntityType.Builder.of((IFactory<AggressiveAntEntity>) (type, world) -> new AggressiveAntEntity(type, world,
-							CAConfig.COMMON.enableTermiteTeleport, CADimensions.CRYSTAL_WORLD), EntityClassification.CREATURE)
+							CACommonConfig.COMMON.enableTermiteTeleport, CADimensions.CRYSTAL_WORLD), EntityClassification.CREATURE)
 					.sized(0.5f, 0.25f)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "termite").toString()));
 

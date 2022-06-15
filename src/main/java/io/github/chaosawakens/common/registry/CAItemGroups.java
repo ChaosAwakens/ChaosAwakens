@@ -1,9 +1,15 @@
 package io.github.chaosawakens.common.registry;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.registry.Registry;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class CAItemGroups {
+	static Random random = new Random();
+
 	public static final ItemGroup BLOCKS = new ItemGroup("chaosawakens.blocks") {
 		@Override
 		public ItemStack makeIcon() {
@@ -42,7 +48,7 @@ public class CAItemGroups {
 	public static final ItemGroup FOSSILS = new ItemGroup("chaosawakens.fossils") {
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(CABlocks.DEFOSSILIZER.get());
+			return new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(random.nextInt(2))).get());
 		}
 	};
 }

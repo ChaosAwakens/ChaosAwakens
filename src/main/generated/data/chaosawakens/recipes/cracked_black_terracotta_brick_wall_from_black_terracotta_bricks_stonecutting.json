@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "chaosawakens:black_terracotta_bricks"
-  },
-  "result": "chaosawakens:cracked_black_terracotta_brick_wall",
-  "count": 1
-}

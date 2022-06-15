@@ -6,7 +6,7 @@ import java.util.UUID;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 
 import com.google.common.collect.ImmutableMultimap.Builder;
 
@@ -63,7 +63,7 @@ public abstract class CAToolItem extends ToolItem{
 	      return this.attackDamageBaseline;
 	   }
 	   
-	   public abstract CAConfig getConfig();
+	   public abstract CACommonConfig getConfig();
 	   
 		@Override
 		public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {

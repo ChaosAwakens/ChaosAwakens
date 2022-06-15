@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "chaosawakens:block/copper_defossilizer"
+    },
+    "facing=west": {
+      "model": "chaosawakens:block/copper_defossilizer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "chaosawakens:block/copper_defossilizer",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "chaosawakens:block/copper_defossilizer",
+      "y": 270
+    }
+  }
+}

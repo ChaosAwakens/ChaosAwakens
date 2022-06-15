@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gray_terracotta"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:gray_terracotta_bricks",
+    "count": 3
+  }
+}

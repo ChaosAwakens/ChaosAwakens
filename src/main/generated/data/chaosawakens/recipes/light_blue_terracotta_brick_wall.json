@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:light_blue_terracotta_bricks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:light_blue_terracotta_brick_wall",
+    "count": 6
+  }
+}

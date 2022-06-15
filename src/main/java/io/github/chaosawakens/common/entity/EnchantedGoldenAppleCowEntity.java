@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -69,7 +69,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimalEntity implements IAnim
 	@Nullable
 	@Override
 	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-		return CAConfig.COMMON.enableEnchantedAnimalBreeding.get()
+		return CACommonConfig.COMMON.enableEnchantedAnimalBreeding.get()
 				? CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(world)
 				: CAEntityTypes.GOLDEN_APPLE_COW.get().create(world);
 	}

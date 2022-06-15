@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:green_terracotta_bricks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:green_terracotta_brick_stairs",
+    "count": 4
+  }
+}

@@ -19,10 +19,11 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 	protected final Ingredient ingredient3;
 	protected final ItemStack result;
 	protected final float experience;
-	protected final int defossilizingTime;
+	protected static int defossilizingTime;
+	protected final String defossilizerType;
 	private NonNullList<Ingredient> ingredients = NonNullList.create();
 
-	public AbstractDefossilizingRecipe(IRecipeType<?> type, IRecipeSerializer<?> serializer, ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience, int defossilizingTime) {
+	public AbstractDefossilizingRecipe(IRecipeType<?> type, IRecipeSerializer<?> serializer, ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience, int defossilizingTime, String defossilizerType) {
 		this.type = type;
 		this.serializer = serializer;
 		this.recipeId = recipeId;
@@ -31,7 +32,8 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 		this.ingredient3 = ingredient3;
 		this.result = result;
 		this.experience = experience;
-		this.defossilizingTime = defossilizingTime;
+		AbstractDefossilizingRecipe.defossilizingTime = defossilizingTime;
+		this.defossilizerType = defossilizerType;
 		this.ingredients.add(ingredient1);
 		this.ingredients.add(ingredient2);
 		this.ingredients.add(ingredient3);
@@ -66,8 +68,12 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 		return this.result;
 	}
 
-	public int getCookingTime() {
-		return this.defossilizingTime;
+	public static int getDefossilizingTime() {
+		return defossilizingTime;
+	}
+
+	public String getDefossilizerType() {
+		return this.defossilizerType;
 	}
 
 	public ResourceLocation getId() {

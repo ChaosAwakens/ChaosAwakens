@@ -592,7 +592,6 @@ public class CAEntityLootTables extends EntityLootTables {
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.HOPPER)
-										.apply(SetCount.setCount(ConstantRange.exactly(1)))
 										.when(KilledByPlayer.killedByPlayer()))
 								.add(ItemLootEntry.lootTableItem(Items.OBSERVER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
@@ -644,7 +643,6 @@ public class CAEntityLootTables extends EntityLootTables {
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.HOPPER)
-										.apply(SetCount.setCount(ConstantRange.exactly(1)))
 										.when(KilledByPlayer.killedByPlayer()))
 								.add(ItemLootEntry.lootTableItem(Items.OBSERVER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
@@ -700,7 +698,6 @@ public class CAEntityLootTables extends EntityLootTables {
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.HOPPER)
-										.apply(SetCount.setCount(ConstantRange.exactly(1)))
 										.when(KilledByPlayer.killedByPlayer()))
 								.add(ItemLootEntry.lootTableItem(Items.OBSERVER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
@@ -717,8 +714,7 @@ public class CAEntityLootTables extends EntityLootTables {
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(CAItems.DEAD_STINK_BUG.get())
-										.apply(SetCount.setCount(ConstantRange.exactly(1))))));
+								.add(ItemLootEntry.lootTableItem(CAItems.DEAD_STINK_BUG.get()))));
 		add(CAEntityTypes.WASP.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
@@ -730,38 +726,37 @@ public class CAEntityLootTables extends EntityLootTables {
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(CAItems.GREEN_FISH.get())
-										.apply(SetCount.setCount(ConstantRange.exactly(1))))));
+								.add(ItemLootEntry.lootTableItem(CAItems.GREEN_FISH.get()))));
 		add(CAEntityTypes.ROCK_FISH.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(CAItems.ROCK_FISH.get())
-										.apply(SetCount.setCount(ConstantRange.exactly(1))))));
+								.add(ItemLootEntry.lootTableItem(CAItems.ROCK_FISH.get()))));
 		add(CAEntityTypes.SPARK_FISH.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(CAItems.SPARK_FISH.get())
-										.apply(SetCount.setCount(ConstantRange.exactly(1))))));
+								.add(ItemLootEntry.lootTableItem(CAItems.SPARK_FISH.get()))));
 		add(CAEntityTypes.WOOD_FISH.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(CAItems.WOOD_FISH.get())
-										.apply(SetCount.setCount(ConstantRange.exactly(1))))));
+								.add(ItemLootEntry.lootTableItem(CAItems.WOOD_FISH.get()))));
 		add(CAEntityTypes.LAVA_EEL.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(CAItems.LAVA_EEL.get())
-										.apply(SetCount.setCount(ConstantRange.exactly(1))))));
+								.add(ItemLootEntry.lootTableItem(CAItems.LAVA_EEL.get()))));
 		add(EntityType.ILLUSIONER,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.EMERALD)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+										.when(KilledByPlayer.killedByPlayer())))
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(Items.TOTEM_OF_UNDYING)
 										.when(KilledByPlayer.killedByPlayer()))));
 		add(EntityType.GIANT,
 				LootTable.lootTable()
@@ -801,6 +796,7 @@ public class CAEntityLootTables extends EntityLootTables {
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.LEATHER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
+										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F)))
 										.when(KilledByPlayer.killedByPlayer())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
@@ -814,7 +810,17 @@ public class CAEntityLootTables extends EntityLootTables {
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.SLIME_BALL)
-										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F))))));
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
+										.when(KilledByPlayer.killedByPlayer()))));
+		add(CAEntityTypes.BIRD.get(),
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(Items.FEATHER)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
+										.when(KilledByPlayer.killedByPlayer()))));
 	}
 
 	@Override

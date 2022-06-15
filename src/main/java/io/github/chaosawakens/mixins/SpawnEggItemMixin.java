@@ -1,6 +1,6 @@
 package io.github.chaosawakens.mixins;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import net.minecraft.block.BlockState;
 
 import net.minecraft.block.Blocks;
@@ -33,7 +33,7 @@ public abstract class SpawnEggItemMixin {
     public abstract EntityType<?> getType(CompoundNBT compoundNBT);
 
     @Inject(method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
-    public void useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
+    public void chaosawakens$useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
         World world = itemUseContext.getLevel();
         if (!(world instanceof ServerWorld)) {
             cir.setReturnValue(ActionResultType.SUCCESS);
@@ -44,10 +44,10 @@ public abstract class SpawnEggItemMixin {
             BlockState blockstate = world.getBlockState(blockpos);
             PlayerEntity player = itemUseContext.getPlayer();
             if (blockstate.is(Blocks.SPAWNER)) {
-                if ((CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 0) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 1 && player.isCreative()) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && player.isCreative() && itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
-                        (CAConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))) {
+                if ((CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == 0) ||
+                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == 1 && player.isCreative()) ||
+                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && player.isCreative() && itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
+                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == 2 && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))) {
                     TileEntity tileentity = world.getBlockEntity(blockpos);
                     if (tileentity instanceof MobSpawnerTileEntity) {
                         AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();

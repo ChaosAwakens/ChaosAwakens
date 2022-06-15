@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 
 public class CABlockLootTables extends BlockLootTables {
 	private static final ILootCondition.IBuilder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
-	private static final ILootCondition.IBuilder HAS_NO_SILK_TOUCH = HAS_SILK_TOUCH.invert();
 	private static final ILootCondition.IBuilder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
 	private static final ILootCondition.IBuilder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
 	private static final ILootCondition.IBuilder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
@@ -41,21 +40,28 @@ public class CABlockLootTables extends BlockLootTables {
 	@Override
 	protected void addTables() {
 		// Ores
-		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		add(CABlocks.AMETHYST_ORE.get(), (ore) -> createOreDrop(ore, CAItems.AMETHYST.get()));
 		add(CABlocks.BLOODSTONE_ORE.get(), (ore) -> createOreDrop(ore, CAItems.BLOODSTONE.get()));
-		dropSelf(CABlocks.CATS_EYE_CLUSTER.get());
-		dropSelf(CABlocks.COPPER_ORE.get());
-		dropSelf(CABlocks.PINK_TOURMALINE_CLUSTER.get());
-		dropSelf(CABlocks.PLATINUM_ORE.get());
 		add(CABlocks.RUBY_ORE.get(), (ore) -> createOreDrop(ore, CAItems.RUBY.get()));
 		add(CABlocks.NETHERRACK_RUBY_ORE.get(), (ore) -> createOreDrop(ore, CAItems.RUBY.get()));
 		add(CABlocks.BLACKSTONE_RUBY_ORE.get(), (ore) -> createOreDrop(ore, CAItems.RUBY.get()));
-		add(CABlocks.SALT_ORE.get(), (ore) -> randomDropping(CAItems.SALT.get(), 4, 8));
-		dropSelf(CABlocks.SILVER_ORE.get());
 		add(CABlocks.SUNSTONE_ORE.get(), (ore) -> createOreDrop(ore, CAItems.SUNSTONE.get()));
 		add(CABlocks.TIGERS_EYE_ORE.get(), (ore) -> createOreDrop(ore, CAItems.TIGERS_EYE.get()));
-		dropSelf(CABlocks.TIN_ORE.get());
+
+		add(CABlocks.SALT_ORE.get(), (ore) -> randomDropping(CAItems.SALT.get(), 4, 8));
+
+		add(CABlocks.COPPER_ORE.get(), (ore) -> createSilkTouchDispatchTable(ore, applyExplosionDecay(ore,
+				ItemLootEntry.lootTableItem(CAItems.COPPER_LUMP.get())
+						.apply(SetCount.setCount(RandomValueRange.between(2.0F, 5.0F)))
+						.apply(ApplyBonus.addOreBonusCount(Enchantments.BLOCK_FORTUNE)))));
+		add(CABlocks.PLATINUM_ORE.get(), (ore) -> createOreDropNoFortune(ore, CAItems.PLATINUM_LUMP.get()));
+		add(CABlocks.SILVER_ORE.get(), (ore) -> createOreDrop(ore, CAItems.SILVER_LUMP.get()));
+		add(CABlocks.TIN_ORE.get(), (ore) -> createOreDrop(ore, CAItems.TIN_LUMP.get()));
+
+		dropSelf(CABlocks.CATS_EYE_CLUSTER.get());
+		dropSelf(CABlocks.PINK_TOURMALINE_CLUSTER.get());
+
+		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		dropSelf(CABlocks.TITANIUM_ORE.get());
 		dropSelf(CABlocks.URANIUM_ORE.get());
 
@@ -68,6 +74,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.PINK_TOURMALINE_BLOCK.get());
 		dropSelf(CABlocks.PLATINUM_BLOCK.get());
 		dropSelf(CABlocks.RUBY_BLOCK.get());
+		dropSelf(CABlocks.SALT_BLOCK.get());
 		dropSelf(CABlocks.SILVER_BLOCK.get());
 		dropSelf(CABlocks.SUNSTONE_BLOCK.get());
 		dropSelf(CABlocks.TIGERS_EYE_BLOCK.get());
@@ -82,23 +89,22 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.CORN_BODY_BLOCK.get(), (plant) -> cropBodyBlock(CAItems.CORN.get(), CAItems.CORN_SEEDS.get()));
 		add(CABlocks.TOMATO_TOP_BLOCK.get(), (plant) -> randomDropping(CAItems.TOMATO_SEEDS.get(), 1, 3));
 		add(CABlocks.TOMATO_BODY_BLOCK.get(), (plant) -> cropBodyBlock(CAItems.TOMATO.get(), CAItems.TOMATO_SEEDS.get()));
-		add(CABlocks.STRAWBERRY_BUSH.get(),
-				(plant) -> applyExplosionDecay(plant,
-						LootTable.lootTable()
-								.withPool(LootPool.lootPool()
-										.when(BlockStateProperty.hasBlockStateProperties(CABlocks.STRAWBERRY_BUSH.get())
-												.setProperties(StatePropertiesPredicate.Builder.properties()
-														.hasProperty(SweetBerryBushBlock.AGE, 3)))
-										.add(ItemLootEntry.lootTableItem(CAItems.STRAWBERRY.get()))
-										.apply(SetCount.setCount(RandomValueRange.between(2.0F, 3.0F)))
-										.apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))
-								.withPool(LootPool.lootPool()
-										.when(BlockStateProperty.hasBlockStateProperties(CABlocks.STRAWBERRY_BUSH.get())
-												.setProperties(StatePropertiesPredicate.Builder.properties()
-														.hasProperty(SweetBerryBushBlock.AGE, 2)))
-										.add(ItemLootEntry.lootTableItem(CAItems.STRAWBERRY.get()))
-										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
-										.apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))));
+		add(CABlocks.STRAWBERRY_BUSH.get(), (plant) -> applyExplosionDecay(plant,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.when(BlockStateProperty.hasBlockStateProperties(CABlocks.STRAWBERRY_BUSH.get())
+										.setProperties(StatePropertiesPredicate.Builder.properties()
+												.hasProperty(SweetBerryBushBlock.AGE, 3)))
+								.add(ItemLootEntry.lootTableItem(CAItems.STRAWBERRY.get()))
+								.apply(SetCount.setCount(RandomValueRange.between(2.0F, 3.0F)))
+								.apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))
+						.withPool(LootPool.lootPool()
+								.when(BlockStateProperty.hasBlockStateProperties(CABlocks.STRAWBERRY_BUSH.get())
+										.setProperties(StatePropertiesPredicate.Builder.properties()
+												.hasProperty(SweetBerryBushBlock.AGE, 2)))
+								.add(ItemLootEntry.lootTableItem(CAItems.STRAWBERRY.get()))
+								.apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))
+								.apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))));
 		ILootCondition.IBuilder radish = BlockStateProperty.hasBlockStateProperties(CABlocks.RADISH.get())
 				.setProperties(StatePropertiesPredicate.Builder.properties()
 						.hasProperty(CACropsBlock.AGE, 3));
@@ -162,22 +168,22 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.POLISHED_LIMESTONE.get());
 		dropSelf(CABlocks.LIMESTONE_PILLAR.get());
 		dropSelf(CABlocks.LIMESTONE_SLAB.get());
-		dropSelf(CABlocks.LIMESTONE_BRICKS_SLAB.get());
-		dropSelf(CABlocks.CHISELED_LIMESTONE_SLAB.get());
-		dropSelf(CABlocks.CRACKED_LIMESTONE_SLAB.get());
-		dropSelf(CABlocks.MOSSY_LIMESTONE_SLAB.get());
+		dropSelf(CABlocks.LIMESTONE_BRICK_SLAB.get());
+		dropSelf(CABlocks.CHISELED_LIMESTONE_BRICK_SLAB.get());
+		dropSelf(CABlocks.CRACKED_LIMESTONE_BRICK_SLAB.get());
+		dropSelf(CABlocks.MOSSY_LIMESTONE_BRICK_SLAB.get());
 		dropSelf(CABlocks.POLISHED_LIMESTONE_SLAB.get());
 		dropSelf(CABlocks.LIMESTONE_STAIRS.get());
 		dropSelf(CABlocks.LIMESTONE_BRICK_STAIRS.get());
-		dropSelf(CABlocks.CHISELED_LIMESTONE_STAIRS.get());
-		dropSelf(CABlocks.CRACKED_LIMESTONE_STAIRS.get());
-		dropSelf(CABlocks.MOSSY_LIMESTONE_STAIRS.get());
+		dropSelf(CABlocks.CHISELED_LIMESTONE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.CRACKED_LIMESTONE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.MOSSY_LIMESTONE_BRICK_STAIRS.get());
 		dropSelf(CABlocks.POLISHED_LIMESTONE_STAIRS.get());
 		dropSelf(CABlocks.LIMESTONE_WALL.get());
 		dropSelf(CABlocks.LIMESTONE_BRICK_WALL.get());
-		dropSelf(CABlocks.CHISELED_LIMESTONE_WALL.get());
-		dropSelf(CABlocks.CRACKED_LIMESTONE_WALL.get());
-		dropSelf(CABlocks.MOSSY_LIMESTONE_WALL.get());
+		dropSelf(CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get());
+		dropSelf(CABlocks.CRACKED_LIMESTONE_BRICK_WALL.get());
+		dropSelf(CABlocks.MOSSY_LIMESTONE_BRICK_WALL.get());
 		dropSelf(CABlocks.POLISHED_LIMESTONE_WALL.get());
 
 		// Marble
@@ -189,22 +195,22 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.POLISHED_MARBLE.get());
 		dropSelf(CABlocks.MARBLE_PILLAR.get());
 		dropSelf(CABlocks.MARBLE_SLAB.get());
-		dropSelf(CABlocks.MARBLE_BRICKS_SLAB.get());
-		dropSelf(CABlocks.CHISELED_MARBLE_SLAB.get());
-		dropSelf(CABlocks.CRACKED_MARBLE_SLAB.get());
-		dropSelf(CABlocks.MOSSY_MARBLE_SLAB.get());
+		dropSelf(CABlocks.MARBLE_BRICK_SLAB.get());
+		dropSelf(CABlocks.CHISELED_MARBLE_BRICK_SLAB.get());
+		dropSelf(CABlocks.CRACKED_MARBLE_BRICK_SLAB.get());
+		dropSelf(CABlocks.MOSSY_MARBLE_BRICK_SLAB.get());
 		dropSelf(CABlocks.POLISHED_MARBLE_SLAB.get());
 		dropSelf(CABlocks.MARBLE_STAIRS.get());
 		dropSelf(CABlocks.MARBLE_BRICK_STAIRS.get());
-		dropSelf(CABlocks.CHISELED_MARBLE_STAIRS.get());
-		dropSelf(CABlocks.CRACKED_MARBLE_STAIRS.get());
-		dropSelf(CABlocks.MOSSY_MARBLE_STAIRS.get());
+		dropSelf(CABlocks.CHISELED_MARBLE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.CRACKED_MARBLE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.MOSSY_MARBLE_BRICK_STAIRS.get());
 		dropSelf(CABlocks.POLISHED_MARBLE_STAIRS.get());
 		dropSelf(CABlocks.MARBLE_WALL.get());
 		dropSelf(CABlocks.MARBLE_BRICK_WALL.get());
-		dropSelf(CABlocks.CHISELED_MARBLE_WALL.get());
-		dropSelf(CABlocks.CRACKED_MARBLE_WALL.get());
-		dropSelf(CABlocks.MOSSY_MARBLE_WALL.get());
+		dropSelf(CABlocks.CHISELED_MARBLE_BRICK_WALL.get());
+		dropSelf(CABlocks.CRACKED_MARBLE_BRICK_WALL.get());
+		dropSelf(CABlocks.MOSSY_MARBLE_BRICK_WALL.get());
 		dropSelf(CABlocks.POLISHED_MARBLE_WALL.get());
 
 		// Crystal Blocks
@@ -398,7 +404,8 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get());
 		dropSelf(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get());
 
-		dropSelf(CABlocks.DEFOSSILIZER.get());
+		dropSelf(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get());
+		dropSelf(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get());
 		// Fossilised Mobs
 		dropSelf(CABlocks.FOSSILISED_ACACIA_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_BIRCH_ENT.get());
@@ -654,13 +661,16 @@ public class CABlockLootTables extends BlockLootTables {
 						.add(ItemLootEntry.lootTableItem(fruit)).add(ItemLootEntry.lootTableItem(seed)));
 	}
 
-	protected static LootTable.Builder createCALeavesDrops(Block p_218526_0_, Block p_218526_1_, Item p_218526_2_,
-	                                                       float... p_218526_3_) {
+	protected static LootTable.Builder createCALeavesDrops(Block p_218526_0_, Block p_218526_1_, Item p_218526_2_, float... p_218526_3_) {
 		return createLeavesDrops(p_218526_0_, p_218526_1_, p_218526_3_)
 				.withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).when(HAS_NO_SHEARS_OR_SILK_TOUCH)
 						.add(applyExplosionCondition(p_218526_0_, ItemLootEntry.lootTableItem(p_218526_2_))
 								.when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.005F, 0.0055555557F,
 										0.00625F, 0.008333334F, 0.025F))));
+	}
+
+	protected static LootTable.Builder createOreDropNoFortune(Block block, Item item) {
+		return createSilkTouchDispatchTable(block, applyExplosionDecay(block, ItemLootEntry.lootTableItem(item)));
 	}
 
 	private LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {

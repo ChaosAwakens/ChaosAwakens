@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.AbstractBlock;
@@ -82,9 +82,9 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 			boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
 			if (!(this.getEntity() instanceof RoboEntity) && flag) {
 				if (random.nextInt(6) >= 3) {
-					float EXPLOSION_POWER = CAConfig.COMMON.rayGunExplosionSize.get();
-					boolean hasFire = CAConfig.COMMON.rayGunExplosionFire.get();
-					switch (CAConfig.COMMON.rayGunExplosionType.get()) {
+					float EXPLOSION_POWER = CACommonConfig.COMMON.roboWarriorExplosionSize.get();
+					boolean hasFire = CACommonConfig.COMMON.roboWarriorExplosionFire.get();
+					switch (CACommonConfig.COMMON.roboWarriorExplosionType.get()) {
 					case 0:
 						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
 						break;

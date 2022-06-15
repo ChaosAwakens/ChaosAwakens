@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -102,7 +102,7 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 
 	@Override
 	public PigEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-		return CAConfig.COMMON.enableEnchantedAnimalBreeding.get()
+		return CACommonConfig.COMMON.enableEnchantedAnimalBreeding.get()
 				? CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get().create(world)
 				: CAEntityTypes.GOLDEN_CARROT_PIG.get().create(world);
 	}

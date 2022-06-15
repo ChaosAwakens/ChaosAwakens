@@ -20,6 +20,7 @@
     }
   },
   "starts": [
+    "minecraft:mineshaft"
   ],
   "spawners": {
     "monster": [

@@ -2,7 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.HeightmapTeleporter;
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -84,7 +84,7 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 		ItemStack itemstack = playerIn.getItemInHand(hand);
 
 		if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
-			if (CAConfig.COMMON.crystalWorldRequiresEmptyInventory.get()
+			if (CACommonConfig.COMMON.crystalWorldRequiresEmptyInventory.get()
 					&& playerIn.level.dimension() != CADimensions.CRYSTAL_WORLD
 					&& targetDimension == CADimensions.CRYSTAL_WORLD) {
 				if (playerIn.inventory.isEmpty() || playerIn.isCreative()) {

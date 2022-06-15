@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -33,7 +33,7 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CAConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
+			if (CACommonConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 			items.add(stack);
 		}
 	}
@@ -51,11 +51,11 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 				arrowEntity.setSecondsOnFire(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0 ? 250 : 75);
 
 				int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
-				if (!CAConfig.COMMON.enableAutoEnchanting.get()) arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get() + (double) powerLevel * CAConfig.COMMON.ultimateBowArrowDamageMultiplier.get() + 2D);
-				else arrowEntity.setBaseDamage(CAConfig.COMMON.ultimateBowArrowBaseDamage.get() + 3D);
+				if (!CACommonConfig.COMMON.enableAutoEnchanting.get()) arrowEntity.setBaseDamage(CACommonConfig.COMMON.ultimateBowArrowBaseDamage.get() + (double) powerLevel * CACommonConfig.COMMON.ultimateBowArrowDamageMultiplier.get() + 2D);
+				else arrowEntity.setBaseDamage(CACommonConfig.COMMON.ultimateBowArrowBaseDamage.get() + 3D);
 
 				int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
-				arrowEntity.setKnockback(!CAConfig.COMMON.enableAutoEnchanting.get() ? k + 1 : 1);
+				arrowEntity.setKnockback(!CACommonConfig.COMMON.enableAutoEnchanting.get() ? k + 1 : 1);
 
 				if (!playerentity.isCreative()) stack.hurtAndBreak(1, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 
@@ -91,7 +91,7 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 
 	@Override
 	public boolean isFoil(ItemStack stack) {
-		return CAConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
+		return CACommonConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
 	}
 
 	@Override

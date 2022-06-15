@@ -27,13 +27,8 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ClientSetupEvent implements IUtilityHelper {
-	public static void register() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetupEvent::onFMLClientSetupEvent);
-	}
-
 	public static boolean def = false;
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)

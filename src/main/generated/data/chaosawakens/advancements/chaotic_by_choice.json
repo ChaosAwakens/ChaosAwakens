@@ -2,7 +2,7 @@
   "parent": "chaosawakens:root",
   "display": {
     "icon": {
-      "item": "chaosawakens:defossilizer"
+      "item": "chaosawakens:iron_defossilizer"
     },
     "title": {
       "translate": "advancements.chaosawakens.chaotic_by_choice.title"
@@ -17,12 +17,22 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "chaotic_by_choice": {
+    "copper_defossilizer": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:defossilizer"
+            "item": "chaosawakens:copper_defossilizer"
+          }
+        ]
+      }
+    },
+    "iron_defossilizer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:iron_defossilizer"
           }
         ]
       }
@@ -30,7 +40,8 @@
   },
   "requirements": [
     [
-      "chaotic_by_choice"
+      "copper_defossilizer",
+      "iron_defossilizer"
     ]
   ]
 }

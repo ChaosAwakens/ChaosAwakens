@@ -28,11 +28,12 @@ public class FossilRecipeBuilder {
 	private final Item result;
 	private final int experience;
 	private final int defossilizingTime;
+	private final String defossilizerType;
 	private final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();
 	private boolean hasAdvancementCriterion = false;
 	private String group = "";
 
-	protected FossilRecipeBuilder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, int experience, int defossilizingTime) {
+	protected FossilRecipeBuilder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, int experience, int defossilizingTime, String defossilizerType) {
 		this.serializer = serializer;
 		this.ingredient1 = ingredient1;
 		this.ingredient2 = ingredient2;
@@ -40,14 +41,15 @@ public class FossilRecipeBuilder {
 		this.result = result.asItem();
 		this.experience = experience;
 		this.defossilizingTime = defossilizingTime;
+		this.defossilizerType = defossilizerType;
 	}
 
-	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result) {
-		return builder(serializer, ingredient1, ingredient2, ingredient3, result, 1, 10);
+	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, String defossilizerType) {
+		return builder(serializer, ingredient1, ingredient2, ingredient3, result, 1, 10, defossilizerType);
 	}
 
-	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, int experience, int defossilizingTime) {
-		return new FossilRecipeBuilder(serializer, ingredient1, ingredient2, ingredient3, result, experience, defossilizingTime);
+	public static FossilRecipeBuilder builder(IRecipeSerializer<?> serializer, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, IItemProvider result, int experience, int defossilizingTime, String defossilizerType) {
+		return new FossilRecipeBuilder(serializer, ingredient1, ingredient2, ingredient3, result, experience, defossilizingTime, defossilizerType);
 	}
 
 	/**
@@ -101,6 +103,7 @@ public class FossilRecipeBuilder {
 			json.addProperty("result", NameUtils.from(builder.result).toString());
 			json.addProperty("experience", builder.experience);
 			json.addProperty("defossilizing_time", builder.defossilizingTime);
+			json.addProperty("defossilizer_type", builder.defossilizerType);
 
 			builder.serializeExtra(json);
 		}

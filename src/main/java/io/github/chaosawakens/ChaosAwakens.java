@@ -5,8 +5,9 @@ import io.github.chaosawakens.client.CABlockItemColors;
 import io.github.chaosawakens.client.ClientSetupEvent;
 import io.github.chaosawakens.client.ToolTipEventSubscriber;
 import io.github.chaosawakens.client.config.CAClientConfig;
-import io.github.chaosawakens.common.config.CAConfig;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.events.*;
+import io.github.chaosawakens.common.integration.CAJadePlugin;
 import io.github.chaosawakens.common.integration.TheOneProbePlugin;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
@@ -63,7 +64,7 @@ public class ChaosAwakens {
 
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CAConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CACommonConfig.COMMON_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CAClientConfig.CLIENT_SPEC);
 
 		// Register to the mod event bus
@@ -139,6 +140,7 @@ public class ChaosAwakens {
 
 	private void onInterModEnqueueEvent(final InterModEnqueueEvent event) {
 		if (ModList.get().isLoaded("theoneprobe")) TheOneProbePlugin.register();
+		if (ModList.get().isLoaded("jade")) new CAJadePlugin();
 	}
 
 	/**

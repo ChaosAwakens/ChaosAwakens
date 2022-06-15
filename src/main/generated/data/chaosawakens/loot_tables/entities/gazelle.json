@@ -19,6 +19,10 @@
                 "max": 4.0,
                 "type": "minecraft:uniform"
               }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
             }
           ],
           "name": "minecraft:leather"

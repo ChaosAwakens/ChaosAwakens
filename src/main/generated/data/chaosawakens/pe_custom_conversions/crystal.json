@@ -3,6 +3,8 @@
     "before": {
       "chaosawakens:crystal_grass_block": 2,
       "chaosawakens:kyanite": 2,
+      "chaosawakens:crystal_grass": 2,
+      "chaosawakens:tall_crystal_grass": 2,
       "chaosawakens:crystal_log": 64,
       "#chaosawakens:crystal_leaves": 2,
       "#chaosawakens:crystal_sapling": 64,

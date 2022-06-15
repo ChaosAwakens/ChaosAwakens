@@ -19,9 +19,8 @@ public class SpreadableDenseDirtBlock extends Block {
 	private static boolean canBeGrass(BlockState state, IWorldReader worldReader, BlockPos pos) {
 		BlockPos blockpos = pos.above();
 		BlockState blockstate = worldReader.getBlockState(blockpos);
-		if (blockstate.getFluidState().getAmount() == 8) {
-			return false;
-		} else {
+		if (blockstate.getFluidState().getAmount() == 8) return false;
+		else {
 			int i = LightEngine.getLightBlockInto(worldReader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(worldReader, blockpos));
 			return i < worldReader.getMaxLightLevel();
 		}
@@ -42,9 +41,7 @@ public class SpreadableDenseDirtBlock extends Block {
 
 				for (int i = 0; i < 4; ++i) {
 					BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-					if (serverWorld.getBlockState(blockpos).is(CABlocks.DENSE_DIRT.get()) && canPropagate(blockstate, serverWorld, blockpos)) {
-						serverWorld.setBlockAndUpdate(blockpos, blockstate);
-					}
+					if (serverWorld.getBlockState(blockpos).is(CABlocks.DENSE_DIRT.get()) && canPropagate(blockstate, serverWorld, blockpos)) serverWorld.setBlockAndUpdate(blockpos, blockstate);
 				}
 			}
 		}

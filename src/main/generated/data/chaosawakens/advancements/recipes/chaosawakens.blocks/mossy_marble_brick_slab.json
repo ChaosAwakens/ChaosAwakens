@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:mossy_marble_brick_slab"
+    ]
+  },
+  "criteria": {
+    "has_mossy_marble_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:mossy_marble_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:mossy_marble_brick_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mossy_marble_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

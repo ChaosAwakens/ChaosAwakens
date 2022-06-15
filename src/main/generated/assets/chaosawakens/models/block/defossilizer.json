@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/orientable_with_bottom",
-  "textures": {
-    "side": "minecraft:block/iron_block",
-    "front": "chaosawakens:block/defossilizer_front",
-    "bottom": "minecraft:block/iron_block",
-    "top": "chaosawakens:block/defossilizer_top"
-  }
-}

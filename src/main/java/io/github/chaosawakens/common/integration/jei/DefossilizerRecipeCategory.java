@@ -7,8 +7,6 @@ import io.github.chaosawakens.common.registry.CARecipes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableAnimated.StartDirection;
-import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
@@ -16,19 +14,18 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class DefossilizerRecipeCategory implements IRecipeCategory<DefossilizingRecipe> {
 	static final ResourceLocation ID = new ResourceLocation(CARecipes.DEFOSSILIZING_RECIPE_TYPE.toString());
 	private IDrawable bg;
 	private IDrawable icon;
 //	private IDrawable arrow;
+	public DefossilizingRecipe recipe;
 
 	public DefossilizerRecipeCategory(IGuiHelper helper) {
 		bg = helper.drawableBuilder(new ResourceLocation(ChaosAwakens.MODID, "textures/gui/container/jei/defossilizer.png"), 0, 0, 170, 80).setTextureSize(170, 80).build();
-		icon = helper.createDrawableIngredient(new ItemStack(CABlocks.DEFOSSILIZER.get()));
+		icon = helper.createDrawableIngredient(new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()));
 //		arrow = helper.createAnimatedDrawable(null, 80, StartDirection.LEFT, false);
 	}
 
@@ -74,15 +71,6 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
 	}
 
-//	@Override
-//	public void setIngredients(DefossilizingRecipe recipe, IIngredients ingredients) {
-//		NonNullList<Ingredient> in = NonNullList.create();
-//		in.addAll(recipe.getIngredients());
-//		ingredients.setInputIngredients(in);
-//		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
-//	}
-
-
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, DefossilizingRecipe recipe, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
@@ -91,6 +79,7 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 		guiItemStacks.init(1, true, 43, 49);
 		guiItemStacks.init(2, true, 61, 49);
 		guiItemStacks.init(3, false, 112, 31);
+		guiItemStacks.init(4, false, 10, 31);
 		guiItemStacks.set(3, recipe.getResult());
 
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
@@ -98,6 +87,12 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 		for (int i = 0; i <= 2; i++) {
 			input = inputs.get(i);
 			if (input != null && !input.isEmpty()) guiItemStacks.set(i, input);
+		}
+		if (Objects.equals(recipe.getDefossilizerType(), "copper")) {
+			guiItemStacks.set(4, Arrays.asList(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get().asItem().getDefaultInstance(),
+					CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get().asItem().getDefaultInstance()));
+		} else if (Objects.equals(recipe.getDefossilizerType(), "iron")) {
+			guiItemStacks.set(4, CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get().asItem().getDefaultInstance());
 		}
 	}
 }

@@ -165,8 +165,7 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 	public void readAdditionalSaveData(CompoundNBT compound) {
 		super.readAdditionalSaveData(compound);
 
-		if (!level.isClientSide)
-			this.readPersistentAngerSaveData((ServerWorld) this.level, compound);
+		if (!level.isClientSide) this.readPersistentAngerSaveData((ServerWorld) this.level, compound);
 	}
 
 	public boolean hurt(DamageSource source, float amount) {
@@ -174,7 +173,6 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 		else {
 			Entity entity = source.getEntity();
 			if (entity != null && !(entity instanceof PlayerEntity) && !(entity instanceof AbstractArrowEntity)) amount = (amount + 1.0F) / 2.0F;
-
 			return super.hurt(source, amount);
 		}
 	}
@@ -182,7 +180,6 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 	public boolean doHurtTarget(Entity entityIn) {
 		boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) ((int) this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
 		if (flag) this.doEnchantDamageEffects(this, entityIn);
-
 		return flag;
 	}
 

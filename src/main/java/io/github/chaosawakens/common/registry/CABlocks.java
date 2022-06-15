@@ -18,6 +18,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -25,10 +26,15 @@ import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
 
 public class CABlocks {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ChaosAwakens.MODID);
@@ -165,57 +171,57 @@ public class CABlocks {
 
 	// MARBLE
 	public static final RegistryObject<Block> MARBLE = registerBlock("marble_block", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> MARBLE_BRICKS = registerBlock("marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> CRACKED_MARBLE_BRICKS = registerBlock("cracked_marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> MOSSY_MARBLE_BRICKS = registerBlock("mossy_marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> POLISHED_MARBLE = registerBlock("polished_marble_block", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR = registerBlock("marble_pillar", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> MARBLE_SLAB = registerBlock("marble_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> MARBLE_BRICKS_SLAB = registerBlock("marble_bricks_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> CHISELED_MARBLE_SLAB = registerBlock("chiseled_marble_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> CRACKED_MARBLE_SLAB = registerBlock("cracked_marble_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> MOSSY_MARBLE_SLAB = registerBlock("mossy_marble_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> POLISHED_MARBLE_SLAB = registerBlock("polished_marble_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.POLISHED_MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<StairsBlock> MARBLE_STAIRS = registerBlock("marble_stairs", () -> new StairsBlock(MARBLE.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> MARBLE_BRICK_STAIRS = registerBlock("marble_brick_stairs", () -> new StairsBlock(MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> CRACKED_MARBLE_STAIRS = registerBlock("cracked_marble_stairs", () -> new StairsBlock(CRACKED_MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CRACKED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> CHISELED_MARBLE_STAIRS = registerBlock("chiseled_marble_stairs", () -> new StairsBlock(CHISELED_MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CHISELED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> MOSSY_MARBLE_STAIRS = registerBlock("mossy_marble_stairs", () -> new StairsBlock(MOSSY_MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.MOSSY_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> POLISHED_MARBLE_STAIRS = registerBlock("polished_marble_stairs", () -> new StairsBlock(POLISHED_MARBLE.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.POLISHED_MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> MARBLE_WALL = registerBlock("marble_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> MARBLE_BRICKS = registerBlock("marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> MARBLE_BRICK_SLAB = registerBlock("marble_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> MARBLE_BRICK_STAIRS = registerBlock("marble_brick_stairs", () -> new StairsBlock(MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> MARBLE_BRICK_WALL = registerBlock("marble_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<WallBlock> CHISELED_MARBLE_WALL = registerBlock("chiseled_marble_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<WallBlock> CRACKED_MARBLE_WALL = registerBlock("cracked_marble_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<WallBlock> MOSSY_MARBLE_WALL = registerBlock("mossy_marble_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> CHISELED_MARBLE_BRICKS = registerBlock("chiseled_marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> CHISELED_MARBLE_BRICK_SLAB = registerBlock("chiseled_marble_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> CHISELED_MARBLE_BRICK_STAIRS = registerBlock("chiseled_marble_brick_stairs", () -> new StairsBlock(CHISELED_MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CHISELED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WallBlock> CHISELED_MARBLE_BRICK_WALL = registerBlock("chiseled_marble_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> CRACKED_MARBLE_BRICKS = registerBlock("cracked_marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> CRACKED_MARBLE_BRICK_SLAB = registerBlock("cracked_marble_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> CRACKED_MARBLE_BRICK_STAIRS = registerBlock("cracked_marble_brick_stairs", () -> new StairsBlock(CRACKED_MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CRACKED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WallBlock> CRACKED_MARBLE_BRICK_WALL = registerBlock("cracked_marble_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> MOSSY_MARBLE_BRICKS = registerBlock("mossy_marble_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> MOSSY_MARBLE_BRICK_SLAB = registerBlock("mossy_marble_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> MOSSY_MARBLE_BRICK_STAIRS = registerBlock("mossy_marble_brick_stairs", () -> new StairsBlock(MOSSY_MARBLE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.MOSSY_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WallBlock> MOSSY_MARBLE_BRICK_WALL = registerBlock("mossy_marble_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> POLISHED_MARBLE = registerBlock("polished_marble_block", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> POLISHED_MARBLE_SLAB = registerBlock("polished_marble_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.POLISHED_MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> POLISHED_MARBLE_STAIRS = registerBlock("polished_marble_stairs", () -> new StairsBlock(POLISHED_MARBLE.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.POLISHED_MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> POLISHED_MARBLE_WALL = registerBlock("polished_marble_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.POLISHED_MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR = registerBlock("marble_pillar", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 
 	// LIMESTONE
 	public static final RegistryObject<Block> LIMESTONE = registerBlock("limestone_block", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> LIMESTONE_BRICKS = registerBlock("limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> CHISELED_LIMESTONE_BRICKS = registerBlock("chiseled_limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> CRACKED_LIMESTONE_BRICKS = registerBlock("cracked_limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> MOSSY_LIMESTONE_BRICKS = registerBlock("mossy_limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<Block> POLISHED_LIMESTONE = registerBlock("polished_limestone_block", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<RotatedPillarBlock> LIMESTONE_PILLAR = registerBlock("limestone_pillar", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> LIMESTONE_SLAB = registerBlock("limestone_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> LIMESTONE_BRICKS_SLAB = registerBlock("limestone_bricks_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> CHISELED_LIMESTONE_SLAB = registerBlock("chiseled_limestone_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> CRACKED_LIMESTONE_SLAB = registerBlock("cracked_limestone_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> MOSSY_LIMESTONE_SLAB = registerBlock("mossy_limestone_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_MARBLE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<SlabBlock> POLISHED_LIMESTONE_SLAB = registerBlock("polished_limestone_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.POLISHED_LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<StairsBlock> LIMESTONE_STAIRS = registerBlock("limestone_stairs", () -> new StairsBlock(LIMESTONE.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> LIMESTONE_BRICK_STAIRS = registerBlock("limestone_brick_stairs", () -> new StairsBlock(LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> CRACKED_LIMESTONE_STAIRS = registerBlock("cracked_limestone_stairs", () -> new StairsBlock(CRACKED_LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CRACKED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> CHISELED_LIMESTONE_STAIRS = registerBlock("chiseled_limestone_stairs", () -> new StairsBlock(CHISELED_LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CHISELED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> MOSSY_LIMESTONE_STAIRS = registerBlock("mossy_limestone_stairs", () -> new StairsBlock(MOSSY_LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.MOSSY_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<StairsBlock> POLISHED_LIMESTONE_STAIRS = registerBlock("polished_limestone_stairs", () -> new StairsBlock(POLISHED_LIMESTONE.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.POLISHED_LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> LIMESTONE_WALL = registerBlock("limestone_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> LIMESTONE_BRICKS = registerBlock("limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> LIMESTONE_BRICK_SLAB = registerBlock("limestone_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> LIMESTONE_BRICK_STAIRS = registerBlock("limestone_brick_stairs", () -> new StairsBlock(LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> LIMESTONE_BRICK_WALL = registerBlock("limestone_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<WallBlock> CHISELED_LIMESTONE_WALL = registerBlock("chiseled_limestone_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<WallBlock> CRACKED_LIMESTONE_WALL = registerBlock("cracked_limestone_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	public static final RegistryObject<WallBlock> MOSSY_LIMESTONE_WALL = registerBlock("mossy_limestone_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> CHISELED_LIMESTONE_BRICKS = registerBlock("chiseled_limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> CHISELED_LIMESTONE_BRICK_SLAB = registerBlock("chiseled_limestone_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> CHISELED_LIMESTONE_BRICK_STAIRS = registerBlock("chiseled_limestone_brick_stairs", () -> new StairsBlock(CHISELED_LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CHISELED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WallBlock> CHISELED_LIMESTONE_BRICK_WALL = registerBlock("chiseled_limestone_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CHISELED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> CRACKED_LIMESTONE_BRICKS = registerBlock("cracked_limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> CRACKED_LIMESTONE_BRICK_SLAB = registerBlock("cracked_limestone_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> CRACKED_LIMESTONE_BRICK_STAIRS = registerBlock("cracked_limestone_brick_stairs", () -> new StairsBlock(CRACKED_LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.CRACKED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WallBlock> CRACKED_LIMESTONE_BRICK_WALL = registerBlock("cracked_limestone_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.CRACKED_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> MOSSY_LIMESTONE_BRICKS = registerBlock("mossy_limestone_bricks", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> MOSSY_LIMESTONE_BRICK_SLAB = registerBlock("mossy_limestone_brick_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> MOSSY_LIMESTONE_BRICK_STAIRS = registerBlock("mossy_limestone_brick_stairs", () -> new StairsBlock(MOSSY_LIMESTONE_BRICKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.MOSSY_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WallBlock> MOSSY_LIMESTONE_BRICK_WALL = registerBlock("mossy_limestone_brick_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.MOSSY_LIMESTONE_BRICKS.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> POLISHED_LIMESTONE = registerBlock("polished_limestone_block", () -> new Block(Block.Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> POLISHED_LIMESTONE_SLAB = registerBlock("polished_limestone_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.POLISHED_LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> POLISHED_LIMESTONE_STAIRS = registerBlock("polished_limestone_stairs", () -> new StairsBlock(POLISHED_LIMESTONE.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.POLISHED_LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> POLISHED_LIMESTONE_WALL = registerBlock("polished_limestone_wall", () -> new WallBlock(AbstractBlock.Properties.copy(CABlocks.POLISHED_LIMESTONE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> LIMESTONE_PILLAR = registerBlock("limestone_pillar", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 
 	// ROBO BLOCKS
 	public static final RegistryObject<Block> ROBO_BLOCK_I = registerBlock("robo_block_l", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
@@ -426,7 +432,7 @@ public class CABlocks {
 	public static final RegistryObject<AntInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new AntInfestedOre(CAEntityTypes.TERMITE, Block.Properties.copy(Blocks.INFESTED_STONE).noDrops().requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.BLOCKS);
 
 	// FOSSILISED MOBS
-	public static final RegistryObject<DefossilizerBlock> DEFOSSILIZER = registerBlock("defossilizer", () -> new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.METAL)), CAItemGroups.FOSSILS);
+	public static final Map<DefossilizerType, RegistryObject<DefossilizerBlock>> DEFOSSILIZER_BLOCKS = Arrays.stream(DefossilizerType.values()).map(type -> Pair.of(type, registerBlock(type.getSerializedName() + "_defossilizer", () -> new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.FOSSILS))).collect(Collectors.toMap(Pair::getKey, Pair::getValue));
 
 	// Overworld (CA)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_ACACIA_ENT = registerBlock("fossilised_acacia_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
@@ -543,6 +549,7 @@ public class CABlocks {
 	public static final RegistryObject<Block> TITANIUM_BLOCK = registerBlock("titanium_block", () -> new Block(Block.Properties.copy(Blocks.NETHERITE_BLOCK).harvestLevel(5).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> URANIUM_BLOCK = registerBlock("uranium_block", () -> new Block(Block.Properties.copy(Blocks.NETHERITE_BLOCK).harvestLevel(5).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> ALUMINUM_BLOCK = registerBlock("aluminum_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SaltBlock> SALT_BLOCK = registerBlock("salt_block", () -> new SaltBlock(Block.Properties.copy(Blocks.SAND).harvestLevel(1).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops().sound(SoundType.SAND).speedFactor(0.8F)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> COPPER_BLOCK = registerBlock("copper_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> SILVER_BLOCK = registerBlock("silver_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)), CAItemGroups.BLOCKS);
@@ -576,7 +583,7 @@ public class CABlocks {
 	public static final RegistryObject<Block> MINING_LAMP = registerBlock("mining_lamp", () -> new Block(Block.Properties.of(Material.BUILDABLE_GLASS).lightLevel((state) -> 15).strength(0.3F).sound(SoundType.GLASS)), CAItemGroups.BLOCKS);
 
 	// CRYSTAL WORLD DIMENSION
-	public static final RegistryObject<CrystalGrassBlock> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new CrystalGrassBlock(Block.Properties.copy(Blocks.GRASS_BLOCK).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops().isRedstoneConductor(isFalse).noOcclusion()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<CrystalGrassBlock> CRYSTAL_GRASS_BLOCK = registerBlock("crystal_grass_block", () -> new CrystalGrassBlock(Block.Properties.of(Material.GRASS).randomTicks().strength(0.6F).sound(SoundType.GRASS).harvestTool(ToolType.SHOVEL).requiresCorrectToolForDrops().isRedstoneConductor(isFalse).noOcclusion()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<CrystalAntNestBlock> CRYSTAL_TERMITE_NEST = registerBlock("crystal_termite_nest", () -> new CrystalAntNestBlock(CAEntityTypes.TERMITE, Block.Properties.copy(CABlocks.CRYSTAL_GRASS_BLOCK.get()).harvestTool(ToolType.SHOVEL).randomTicks().isRedstoneConductor(isFalse).noOcclusion()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<CrystalBlock> KYANITE = registerBlock("kyanite", () -> new CrystalBlock(Block.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().isRedstoneConductor(isFalse).noOcclusion()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarCrystalBlock> CRYSTAL_LOG = registerBlock("crystal_log", () -> new RotatedPillarCrystalBlock(Block.Properties.copy(Blocks.OAK_LOG).isRedstoneConductor(isFalse).noOcclusion()), CAItemGroups.BLOCKS);
@@ -747,5 +754,48 @@ public class CABlocks {
 
 	public static boolean always(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, EntityType<?> entityType) {
 		return true;
+	}
+
+	public enum DefossilizerType implements IStringSerializable {
+		COPPER(0, "copper"),
+		IRON(1, "iron");
+
+		private static final DefossilizerType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DefossilizerType::getId)).toArray(DefossilizerType[]::new);
+
+		private final int id;
+		private final String name;
+
+		DefossilizerType(int idIn, String name) {
+			this.id = idIn;
+			this.name = name;
+		}
+
+		public int getId() {
+			return this.id;
+		}
+
+		public static DefossilizerType byId(int id) {
+			if(id < 0 || id >= VALUES.length) id = 0;
+			return VALUES[id];
+		}
+
+		public static String getDefossilizerTypeByID(int id) {
+			for(DefossilizerType defossilizerType : values()) {
+				if(defossilizerType.getId() == id) return defossilizerType.getSerializedName();
+			}
+			return null;
+		}
+
+		public static boolean getBooleanDefossilizerTypeByID(int id) {
+			for(DefossilizerType defossilizerType : values()) {
+				if(defossilizerType.getId() == id) return true;
+			}
+			return false;
+		}
+
+		@Override
+		public String getSerializedName() {
+			return this.name;
+		}
 	}
 }

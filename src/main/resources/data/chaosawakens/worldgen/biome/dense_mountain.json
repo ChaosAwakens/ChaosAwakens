@@ -47,7 +47,9 @@
       "minecraft:spring_lava"
     ]
   ],
-  "starts": [],
+  "starts": [
+    "minecraft:mineshaft"
+  ],
   "spawners": {
     "monster": [
       {

@@ -180,7 +180,7 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.SUNSTONE.get().asItem(), has(CAItems.SUNSTONE.get()))
 				.unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).save(consumer);
 
-		ShapedRecipeBuilder.shaped(CAItems.BEETROOT_ON_A_STICK.get(), 1)
+		ShapedRecipeBuilder.shaped(CAItems.BEETROOT_ON_A_STICK.get())
 				.define('S', Tags.Items.RODS_WOODEN)
 				.define('B', Items.BEETROOT)
 				.pattern("  S")
@@ -188,7 +188,7 @@ public class CARecipeProvider extends RecipeProvider {
 				.pattern("S  ")
 				.unlockedBy("has_" + Items.BEETROOT, has(Items.BEETROOT))
 				.unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get(), 1)
+		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_BEETROOT_ON_A_STICK.get())
 				.define('S', Tags.Items.RODS_WOODEN)
 				.define('B', CAItems.CRYSTAL_BEETROOT.get())
 				.pattern("  S")
@@ -196,7 +196,7 @@ public class CARecipeProvider extends RecipeProvider {
 				.pattern("S  ")
 				.unlockedBy("has_" + CAItems.CRYSTAL_BEETROOT.get().asItem(), has(CAItems.CRYSTAL_BEETROOT.get()))
 				.unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.GOLDEN_BEETROOT_ON_A_STICK.get(), 1)
+		ShapedRecipeBuilder.shaped(CAItems.GOLDEN_BEETROOT_ON_A_STICK.get())
 				.define('S', Tags.Items.RODS_WOODEN)
 				.define('B', CAItems.GOLDEN_BEETROOT.get())
 				.pattern("  S")
@@ -212,462 +212,480 @@ public class CARecipeProvider extends RecipeProvider {
 		surroundItem(consumer, CAItems.EXPERIENCE_LEGGINGS.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_LEGGINGS.get());
 		surroundItem(consumer, CAItems.EXPERIENCE_BOOTS.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_BOOTS.get());
 
-		ShapedRecipeBuilder.shaped(CABlocks.CHISELED_MARBLE_BRICKS.get())
-				.define('#', CABlocks.MARBLE_BRICKS_SLAB.get())
-				.pattern("#")
-				.pattern("#")
-				.unlockedBy("has_" + CABlocks.MARBLE_BRICKS_SLAB.get().asItem(), has(CABlocks.MARBLE_BRICKS_SLAB.get()))
+		slab(consumer, CABlocks.MARBLE_SLAB.get(), CABlocks.MARBLE.get());
+		stairs(consumer, CABlocks.MARBLE_STAIRS.get(), CABlocks.MARBLE.get());
+		wall(consumer, CABlocks.MARBLE_WALL.get(), CABlocks.MARBLE.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_STAIRS.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_STAIRS.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_WALL.get());
+		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_PILLAR.get());
+
+		bricks(consumer, CABlocks.MARBLE_BRICKS.get(),  CABlocks.POLISHED_MARBLE.get());
+		slab(consumer, CABlocks.MARBLE_BRICK_SLAB.get(), CABlocks.MARBLE_BRICKS.get());
+		stairs(consumer, CABlocks.MARBLE_BRICK_STAIRS.get(), CABlocks.MARBLE_BRICKS.get());
+		wall(consumer, CABlocks.MARBLE_BRICK_WALL.get(), CABlocks.MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICK_WALL.get());
+
+		ShapelessRecipeBuilder.shapeless(CABlocks.MOSSY_MARBLE_BRICKS.get())
+				.requires(CABlocks.MARBLE_BRICKS.get())
+				.requires(Items.VINE)
+				.unlockedBy("has_" + CABlocks.MARBLE_BRICKS.get().asItem(), has(CABlocks.MARBLE_BRICKS.get()))
+				.unlockedBy("has_" + Items.VINE.asItem(), has(Items.VINE))
 				.save(consumer);
+		slab(consumer, CABlocks.MOSSY_MARBLE_BRICK_SLAB.get(), CABlocks.MOSSY_MARBLE_BRICKS.get());
+		stairs(consumer, CABlocks.MOSSY_MARBLE_BRICK_STAIRS.get(), CABlocks.MOSSY_MARBLE_BRICKS.get());
+		wall(consumer, CABlocks.MOSSY_MARBLE_BRICK_WALL.get(), CABlocks.MOSSY_MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.MOSSY_MARBLE_BRICKS.get(), CABlocks.MOSSY_MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MOSSY_MARBLE_BRICKS.get(), CABlocks.MOSSY_MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.MOSSY_MARBLE_BRICKS.get(), CABlocks.MOSSY_MARBLE_BRICK_WALL.get());
+
+		ShapedRecipeBuilder.shaped(CABlocks.CHISELED_MARBLE_BRICKS.get())
+				.define('#', CABlocks.MARBLE_BRICK_SLAB.get())
+				.pattern("#")
+				.pattern("#")
+				.unlockedBy("has_" + CABlocks.MARBLE_BRICK_SLAB.get().asItem(), has(CABlocks.MARBLE_BRICK_SLAB.get()))
+				.save(consumer);
+		slab(consumer, CABlocks.CHISELED_MARBLE_BRICK_SLAB.get(), CABlocks.CHISELED_MARBLE_BRICKS.get());
+		stairs(consumer, CABlocks.CHISELED_MARBLE_BRICK_STAIRS.get(), CABlocks.CHISELED_MARBLE_BRICKS.get());
+		wall(consumer, CABlocks.CHISELED_MARBLE_BRICK_WALL.get(), CABlocks.CHISELED_MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICK_WALL.get());
+
+		bricks(consumer, CABlocks.POLISHED_MARBLE.get(),  CABlocks.MARBLE.get());
+		slab(consumer, CABlocks.POLISHED_MARBLE_SLAB.get(), CABlocks.POLISHED_MARBLE.get());
+		stairs(consumer, CABlocks.POLISHED_MARBLE_STAIRS.get(), CABlocks.POLISHED_MARBLE.get());
+		wall(consumer, CABlocks.POLISHED_MARBLE_WALL.get(), CABlocks.POLISHED_MARBLE.get());
 		ShapedRecipeBuilder.shaped(CABlocks.MARBLE_PILLAR.get())
 				.define('#', CABlocks.POLISHED_MARBLE.get())
 				.pattern("#")
 				.pattern("#")
 				.unlockedBy("has_" + CABlocks.POLISHED_MARBLE.get().asItem(), has(CABlocks.POLISHED_MARBLE.get()))
 				.save(consumer);
-		ShapelessRecipeBuilder.shapeless(CABlocks.MOSSY_MARBLE_BRICKS.get())
-				.requires(CABlocks.MARBLE_BRICKS.get())
-				.requires(Items.VINE)
-				.unlockedBy("has_" + CABlocks.MARBLE_BRICKS.get().asItem(), has(CABlocks.MARBLE_BRICKS.get()))
-				.unlockedBy("has_" + Items.VINE.asItem(), has(Items.VINE)).save(consumer);
-
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.CHISELED_MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.MOSSY_MARBLE_BRICKS.get(), CABlocks.MOSSY_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MOSSY_MARBLE_BRICKS.get(), CABlocks.MOSSY_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MOSSY_MARBLE_BRICKS.get(), CABlocks.MOSSY_MARBLE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.MARBLE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.CHISELED_MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_MARBLE_BRICKS.get(), CABlocks.POLISHED_MARBLE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_SLAB.get(), 2);
 		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.POLISHED_MARBLE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.POLISHED_MARBLE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.POLISHED_MARBLE_STAIRS.get(), 1);
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.POLISHED_MARBLE_STAIRS.get());
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.POLISHED_MARBLE_WALL.get());
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.MARBLE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICKS.get());
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.POLISHED_MARBLE.get(), CABlocks.CHISELED_MARBLE_BRICK_WALL.get());
+
+		smelting(consumer, CABlocks.MARBLE_BRICKS.get(), CABlocks.CRACKED_MARBLE_BRICKS.get(), 0.1F, 200);
+		slab(consumer, CABlocks.CRACKED_MARBLE_BRICK_SLAB.get(), CABlocks.CRACKED_MARBLE_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_MARBLE_BRICK_STAIRS.get(), CABlocks.CRACKED_MARBLE_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_MARBLE_BRICK_WALL.get(), CABlocks.CRACKED_MARBLE_BRICKS.get());
+
+		slab(consumer, CABlocks.LIMESTONE_SLAB.get(), CABlocks.LIMESTONE.get());
+		stairs(consumer, CABlocks.LIMESTONE_STAIRS.get(), CABlocks.LIMESTONE.get());
+		wall(consumer, CABlocks.LIMESTONE_WALL.get(), CABlocks.LIMESTONE.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_WALL.get());
+		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_PILLAR.get());
+
+		bricks(consumer, CABlocks.LIMESTONE_BRICKS.get(),  CABlocks.POLISHED_LIMESTONE.get());
+		slab(consumer, CABlocks.LIMESTONE_BRICK_SLAB.get(), CABlocks.LIMESTONE_BRICKS.get());
+		stairs(consumer, CABlocks.LIMESTONE_BRICK_STAIRS.get(), CABlocks.LIMESTONE_BRICKS.get());
+		wall(consumer, CABlocks.LIMESTONE_BRICK_WALL.get(), CABlocks.LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get());
+
+		ShapelessRecipeBuilder.shapeless(CABlocks.MOSSY_LIMESTONE_BRICKS.get())
+				.requires(CABlocks.LIMESTONE_BRICKS.get())
+				.requires(Items.VINE)
+				.unlockedBy("has_" + CABlocks.LIMESTONE_BRICKS.get().asItem(), has(CABlocks.LIMESTONE_BRICKS.get()))
+				.unlockedBy("has_" + Items.VINE.asItem(), has(Items.VINE))
+				.save(consumer);
+		slab(consumer, CABlocks.MOSSY_LIMESTONE_BRICK_SLAB.get(), CABlocks.MOSSY_LIMESTONE_BRICKS.get());
+		stairs(consumer, CABlocks.MOSSY_LIMESTONE_BRICK_STAIRS.get(), CABlocks.MOSSY_LIMESTONE_BRICKS.get());
+		wall(consumer, CABlocks.MOSSY_LIMESTONE_BRICK_WALL.get(), CABlocks.MOSSY_LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.MOSSY_LIMESTONE_BRICKS.get(), CABlocks.MOSSY_LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.MOSSY_LIMESTONE_BRICKS.get(), CABlocks.MOSSY_LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.MOSSY_LIMESTONE_BRICKS.get(), CABlocks.MOSSY_LIMESTONE_BRICK_WALL.get());
 
 		ShapedRecipeBuilder.shaped(CABlocks.CHISELED_LIMESTONE_BRICKS.get())
-				.define('#', CABlocks.LIMESTONE_BRICKS_SLAB.get())
+				.define('#', CABlocks.LIMESTONE_BRICK_SLAB.get())
 				.pattern("#")
 				.pattern("#")
-				.unlockedBy("has_" + CABlocks.LIMESTONE_BRICKS_SLAB.get().asItem(), has(CABlocks.LIMESTONE_BRICKS_SLAB.get()))
+				.unlockedBy("has_" + CABlocks.LIMESTONE_BRICK_SLAB.get().asItem(), has(CABlocks.LIMESTONE_BRICK_SLAB.get()))
 				.save(consumer);
+		slab(consumer, CABlocks.CHISELED_LIMESTONE_BRICK_SLAB.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get());
+		stairs(consumer, CABlocks.CHISELED_LIMESTONE_BRICK_STAIRS.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get());
+		wall(consumer, CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get());
+
+		bricks(consumer, CABlocks.POLISHED_LIMESTONE.get(),  CABlocks.LIMESTONE.get());
+		slab(consumer, CABlocks.POLISHED_LIMESTONE_SLAB.get(), CABlocks.POLISHED_LIMESTONE.get());
+		stairs(consumer, CABlocks.POLISHED_LIMESTONE_STAIRS.get(), CABlocks.POLISHED_LIMESTONE.get());
+		wall(consumer, CABlocks.POLISHED_LIMESTONE_WALL.get(), CABlocks.POLISHED_LIMESTONE.get());
 		ShapedRecipeBuilder.shaped(CABlocks.LIMESTONE_PILLAR.get())
 				.define('#', CABlocks.POLISHED_LIMESTONE.get())
 				.pattern("#")
 				.pattern("#")
 				.unlockedBy("has_" + CABlocks.POLISHED_LIMESTONE.get().asItem(), has(CABlocks.POLISHED_LIMESTONE.get()))
 				.save(consumer);
-		ShapelessRecipeBuilder.shapeless(CABlocks.MOSSY_LIMESTONE_BRICKS.get())
-				.requires(CABlocks.LIMESTONE_BRICKS.get())
-				.requires(Items.VINE)
-				.unlockedBy("has_" + CABlocks.LIMESTONE_BRICKS.get().asItem(), has(CABlocks.LIMESTONE_BRICKS.get()))
-				.unlockedBy("has_" + Items.VINE.asItem(), has(Items.VINE)).save(consumer);
-
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.MOSSY_LIMESTONE_BRICKS.get(), CABlocks.MOSSY_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MOSSY_LIMESTONE_BRICKS.get(), CABlocks.MOSSY_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MOSSY_LIMESTONE_BRICKS.get(), CABlocks.MOSSY_LIMESTONE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.LIMESTONE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.CHISELED_LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CHISELED_LIMESTONE_BRICKS.get(), CABlocks.POLISHED_LIMESTONE_STAIRS.get(), 1);
-
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICKS_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_SLAB.get(), 2);
 		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_STAIRS.get(), 1);
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_STAIRS.get());
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.POLISHED_LIMESTONE_WALL.get());
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.LIMESTONE_BRICK_WALL.get());
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICKS.get());
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICK_SLAB.get(), 2);
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.POLISHED_LIMESTONE.get(), CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get());
 
-		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.TERRACOTTA_BRICKS.get(), 1);
+		smelting(consumer, CABlocks.LIMESTONE_BRICKS.get(), CABlocks.CRACKED_LIMESTONE_BRICKS.get(), 0.1F, 200);
+		slab(consumer, CABlocks.CRACKED_LIMESTONE_BRICK_SLAB.get(), CABlocks.CRACKED_LIMESTONE_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_LIMESTONE_BRICK_STAIRS.get(), CABlocks.CRACKED_LIMESTONE_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_LIMESTONE_BRICK_WALL.get(), CABlocks.CRACKED_LIMESTONE_BRICKS.get());
+
+		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.CRACKED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.CRACKED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.TERRACOTTA, CABlocks.TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.TERRACOTTA_BRICKS.get(),  Blocks.TERRACOTTA);
 		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.TERRACOTTA_BRICK_SLAB.get(), CABlocks.TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.TERRACOTTA_BRICK_STAIRS.get(), CABlocks.TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.TERRACOTTA_BRICK_WALL.get(), CABlocks.TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.WHITE_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.WHITE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.WHITE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.WHITE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.WHITE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.WHITE_TERRACOTTA, CABlocks.WHITE_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(),  Blocks.WHITE_TERRACOTTA);
 		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.WHITE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.WHITE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.WHITE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.WHITE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.WHITE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.WHITE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.WHITE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.WHITE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.WHITE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.WHITE_TERRACOTTA_BRICK_WALL.get(), CABlocks.WHITE_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_WHITE_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.ORANGE_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.ORANGE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.ORANGE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.ORANGE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.ORANGE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.ORANGE_TERRACOTTA, CABlocks.ORANGE_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(),  Blocks.ORANGE_TERRACOTTA);
 		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.ORANGE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.ORANGE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.ORANGE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.ORANGE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.ORANGE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.ORANGE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.ORANGE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.ORANGE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.ORANGE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.ORANGE_TERRACOTTA_BRICK_WALL.get(), CABlocks.ORANGE_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_ORANGE_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.MAGENTA_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.MAGENTA_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.MAGENTA_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.MAGENTA_TERRACOTTA, CABlocks.MAGENTA_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(),  Blocks.MAGENTA_TERRACOTTA);
 		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.MAGENTA_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.MAGENTA_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.MAGENTA_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.MAGENTA_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICK_SLAB.get(), CABlocks.MAGENTA_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.MAGENTA_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICK_WALL.get(), CABlocks.MAGENTA_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_MAGENTA_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(),  Blocks.LIGHT_BLUE_TERRACOTTA);
 		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_LIGHT_BLUE_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.YELLOW_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.YELLOW_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.YELLOW_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.YELLOW_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.YELLOW_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.YELLOW_TERRACOTTA, CABlocks.YELLOW_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(),  Blocks.YELLOW_TERRACOTTA);
 		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.YELLOW_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.YELLOW_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.YELLOW_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.YELLOW_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.YELLOW_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.YELLOW_TERRACOTTA_BRICK_SLAB.get(), CABlocks.YELLOW_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.YELLOW_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.YELLOW_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.YELLOW_TERRACOTTA_BRICK_WALL.get(), CABlocks.YELLOW_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.LIME_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.LIME_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.LIME_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.LIME_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.LIME_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.LIME_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.LIME_TERRACOTTA, CABlocks.LIME_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(),  Blocks.LIME_TERRACOTTA);
 		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.LIME_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.LIME_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.LIME_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.LIME_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.LIME_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.LIME_TERRACOTTA_BRICK_SLAB.get(), CABlocks.LIME_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.LIME_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.LIME_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.LIME_TERRACOTTA_BRICK_WALL.get(), CABlocks.LIME_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.PINK_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_LIME_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_LIME_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.PINK_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.PINK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.PINK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.PINK_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.PINK_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.PINK_TERRACOTTA, CABlocks.PINK_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(),  Blocks.PINK_TERRACOTTA);
 		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.PINK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.PINK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.PINK_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.PINK_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.PINK_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.PINK_TERRACOTTA_BRICK_SLAB.get(), CABlocks.PINK_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.PINK_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.PINK_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.PINK_TERRACOTTA_BRICK_WALL.get(), CABlocks.PINK_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_PINK_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_PINK_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.GRAY_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.GRAY_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.GRAY_TERRACOTTA, CABlocks.GRAY_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(),  Blocks.GRAY_TERRACOTTA);
 		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.GRAY_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.GRAY_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.GRAY_TERRACOTTA_BRICK_SLAB.get(), CABlocks.GRAY_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.GRAY_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.GRAY_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.GRAY_TERRACOTTA_BRICK_WALL.get(), CABlocks.GRAY_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_GRAY_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_GRAY_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(),  Blocks.LIGHT_GRAY_TERRACOTTA);
 		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_LIGHT_GRAY_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CYAN_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CYAN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CYAN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CYAN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CYAN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.CYAN_TERRACOTTA, CABlocks.CYAN_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(),  Blocks.CYAN_TERRACOTTA);
 		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CYAN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CYAN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CYAN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CYAN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CYAN_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CYAN_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CYAN_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CYAN_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CYAN_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CYAN_TERRACOTTA_BRICK_WALL.get(), CABlocks.CYAN_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_CYAN_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_CYAN_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.PURPLE_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.PURPLE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.PURPLE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.PURPLE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.PURPLE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.PURPLE_TERRACOTTA, CABlocks.PURPLE_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(),  Blocks.PURPLE_TERRACOTTA);
 		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.PURPLE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.PURPLE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.PURPLE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.PURPLE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.PURPLE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.PURPLE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.PURPLE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.PURPLE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.PURPLE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.PURPLE_TERRACOTTA_BRICK_WALL.get(), CABlocks.PURPLE_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_PURPLE_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.BLUE_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.BLUE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.BLUE_TERRACOTTA, CABlocks.BLUE_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(),  Blocks.BLUE_TERRACOTTA);
 		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.BLUE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.BLUE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.BLUE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.BLUE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.BLUE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.BLUE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.BLUE_TERRACOTTA_BRICK_WALL.get(), CABlocks.BLUE_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_BLUE_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_BLUE_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.BROWN_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.BROWN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.BROWN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.BROWN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.BROWN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.BROWN_TERRACOTTA, CABlocks.BROWN_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(),  Blocks.BROWN_TERRACOTTA);
 		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.BROWN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.BROWN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.BROWN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.BROWN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.BROWN_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.BROWN_TERRACOTTA_BRICK_SLAB.get(), CABlocks.BROWN_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.BROWN_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.BROWN_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.BROWN_TERRACOTTA_BRICK_WALL.get(), CABlocks.BROWN_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_BROWN_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_BROWN_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.GREEN_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.GREEN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.GREEN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.GREEN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.GREEN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.GREEN_TERRACOTTA, CABlocks.GREEN_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(),  Blocks.GREEN_TERRACOTTA);
 		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.GREEN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.GREEN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.GREEN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.GREEN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.GREEN_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.GREEN_TERRACOTTA_BRICK_SLAB.get(), CABlocks.GREEN_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.GREEN_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.GREEN_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.GREEN_TERRACOTTA_BRICK_WALL.get(), CABlocks.GREEN_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.RED_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_GREEN_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_GREEN_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.RED_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.RED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.RED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.RED_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.CRACKED_RED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.CRACKED_RED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.CRACKED_RED_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.RED_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.RED_TERRACOTTA, CABlocks.RED_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(),  Blocks.RED_TERRACOTTA);
 		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.RED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.RED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.RED_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.RED_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.RED_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.RED_TERRACOTTA_BRICK_SLAB.get(), CABlocks.RED_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.RED_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.RED_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.RED_TERRACOTTA_BRICK_WALL.get(), CABlocks.RED_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_RED_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_RED_TERRACOTTA_BRICKS.get());
+		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.BLACK_TERRACOTTA_BRICKS.get());
 		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.BLACK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.BLACK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.BLACK_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.BLACK_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, Blocks.BLACK_TERRACOTTA, CABlocks.BLACK_TERRACOTTA_BRICK_WALL.get());
+		bricks(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(),  Blocks.BLACK_TERRACOTTA);
 		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.BLACK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.BLACK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.BLACK_TERRACOTTA_BRICK_WALL.get(), 1);
-		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), 1);
-		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.BLACK_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.BLACK_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.BLACK_TERRACOTTA_BRICK_SLAB.get(), CABlocks.BLACK_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.BLACK_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.BLACK_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.BLACK_TERRACOTTA_BRICK_WALL.get(), CABlocks.BLACK_TERRACOTTA_BRICKS.get());
+		smelting(consumer, CABlocks.BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), 0.1F, 200);
 		stonecutting(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_SLAB.get(), 2);
-		stonecutting(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get(), 1);
-		stonecutting(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get(), 1);
+		stonecutting(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get());
+		stonecutting(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get());
+		slab(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get());
+		stairs(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get());
+		wall(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get());
 
 		ShapedRecipeBuilder.shaped(CAItems.CRITTER_CAGE.get(), 2)
 				.define('#', Items.STICK)
@@ -1038,6 +1056,8 @@ public class CARecipeProvider extends RecipeProvider {
 		blockToMaterial(consumer, CABlocks.PLATINUM_BLOCK.get(), CAItems.PLATINUM_LUMP.get());
 		materialToBlock(consumer, CABlocks.RUBY_BLOCK.get(), CAItems.RUBY.get());
 		blockToMaterial(consumer, CABlocks.RUBY_BLOCK.get(), CAItems.RUBY.get());
+		materialToBlock(consumer, CABlocks.SALT_BLOCK.get(), CAItems.SALT.get());
+		blockToMaterial(consumer, CABlocks.SALT_BLOCK.get(), CAItems.SALT.get());
 		materialToBlock(consumer, CABlocks.SILVER_BLOCK.get(), CAItems.SILVER_LUMP.get());
 		blockToMaterial(consumer, CABlocks.SILVER_BLOCK.get(), CAItems.SILVER_LUMP.get());
 		materialToBlock(consumer, CABlocks.SUNSTONE_BLOCK.get(), CAItems.SUNSTONE.get());
@@ -1287,7 +1307,20 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.ZOO_CAGE_LARGE.get().asItem(), has(CAItems.ZOO_CAGE_LARGE.get()))
 				.save(consumer);
 
-		ShapedRecipeBuilder.shaped(CABlocks.DEFOSSILIZER.get())
+		ShapedRecipeBuilder.shaped(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get())
+				.define('I', ItemTags.bind("forge:ingots/copper"))
+				.define('B', Items.BUCKET)
+				.define('S', Blocks.SMOOTH_RED_SANDSTONE)
+				.define('L', Blocks.SMOOTH_RED_SANDSTONE_SLAB)
+				.pattern("III")
+				.pattern("SBS")
+				.pattern("LLL")
+				.unlockedBy("has_" + ItemTags.bind("forge:ingots/copper").getName(), has(ItemTags.bind("forge:ingots/copper")))
+				.unlockedBy("has_" + Items.BUCKET.asItem(), has(Items.BUCKET))
+				.unlockedBy("has_" + Blocks.SMOOTH_RED_SANDSTONE.asItem(), has(Blocks.SMOOTH_RED_SANDSTONE))
+				.unlockedBy("has_" + Blocks.SMOOTH_RED_SANDSTONE_SLAB.asItem(), has(Blocks.SMOOTH_RED_SANDSTONE_SLAB))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get())
 				.define('I', Tags.Items.INGOTS_IRON)
 				.define('B', Items.BUCKET)
 				.define('S', Blocks.SMOOTH_STONE)
@@ -1323,173 +1356,166 @@ public class CARecipeProvider extends RecipeProvider {
 						Ingredient.of(CABlocks.FOSSILISED_ACACIA_ENT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.ACACIA_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.ACACIA_ENT_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ACACIA_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_BIRCH_ENT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.BIRCH_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.BIRCH_ENT_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_BIRCH_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_DARK_OAK_ENT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.DARK_OAK_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.DARK_OAK_ENT_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_DARK_OAK_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_JUNGLE_ENT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.JUNGLE_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.JUNGLE_ENT_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_JUNGLE_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_OAK_ENT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.OAK_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.OAK_ENT_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_OAK_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SPRUCE_ENT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.SPRUCE_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.SPRUCE_ENT_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SPRUCE_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_HERCULES_BEETLE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.HERCULES_BEETLE_SPAWN_EGG.get(), 1, 20)
+						CAItems.HERCULES_BEETLE_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_HERCULES_BEETLE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_RUBY_BUG.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.RUBY_BUG_SPAWN_EGG.get(), 1, 20)
+						CAItems.RUBY_BUG_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_RUBY_BUG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_EMERALD_GATOR.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.EMERALD_GATOR_SPAWN_EGG.get(), 1, 20)
+						CAItems.EMERALD_GATOR_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_EMERALD_GATOR.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_GREEN_FISH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.GREEN_FISH_SPAWN_EGG.get(), 1, 20)
+						CAItems.GREEN_FISH_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_GREEN_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ROCK_FISH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.ROCK_FISH_SPAWN_EGG.get(), 1, 20)
+						CAItems.ROCK_FISH_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ROCK_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SPARK_FISH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.SPARK_FISH_SPAWN_EGG.get(), 1, 20)
+						CAItems.SPARK_FISH_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SPARK_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WOOD_FISH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.WOOD_FISH_SPAWN_EGG.get(), 1, 20)
+						CAItems.WOOD_FISH_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WOOD_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 //		FossilRecipeBuilder
 //				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 //						Ingredient.of(CABlocks.FOSSILISED_WTF.get()),
 //						Ingredient.of(Items.WATER_BUCKET),
 //						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-//						CAItems.WTF_SPAWN_EGG.get(), 1, 20)
+//						CAItems.WTF_SPAWN_EGG.get(), 1, 20, "copper")
 //				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WTF.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 //		FossilRecipeBuilder
 //				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 //						Ingredient.of(CABlocks.FOSSILISED_SCORPION.get()),
 //						Ingredient.of(Items.WATER_BUCKET),
 //						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-//						CAItems.SCORPION_SPAWN_EGG.get(), 1, 20)
+//						CAItems.SCORPION_SPAWN_EGG.get(), 1, 20, "copper")
 //				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SCORPION.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WASP.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.WASP_SPAWN_EGG.get(), 1, 20)
+						CAItems.WASP_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WASP.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WHALE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.WHALE_SPAWN_EGG.get(), 1, 20)
+						CAItems.WHALE_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WHALE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 //		FossilRecipeBuilder
 //				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 //						Ingredient.of(CABlocks.FOSSILISED_PIRAPORU.get()),
 //						Ingredient.of(Items.WATER_BUCKET),
 //						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-//						CAItems.PIRAPORU_SPAWN_EGG.get(), 1, 20)
+//						CAItems.PIRAPORU_SPAWN_EGG.get(), 1, 20, "copper")
 //				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_PIRAPORU.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_APPLE_COW.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.APPLE_COW_SPAWN_EGG.get(), 1, 20)
+						CAItems.APPLE_COW_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_APPLE_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_GOLDEN_APPLE_COW.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.GOLDEN_APPLE_COW_SPAWN_EGG.get(), 1, 20)
+						CAItems.GOLDEN_APPLE_COW_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_GOLDEN_APPLE_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_CARROT_PIG.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.CARROT_PIG_SPAWN_EGG.get(), 1, 20)
+						CAItems.CARROT_PIG_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_CARROT_PIG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.GOLDEN_CARROT_PIG_SPAWN_EGG.get(), 1, 20)
+						CAItems.GOLDEN_CARROT_PIG_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_BIRD.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.BIRD_SPAWN_EGG.get(), 1, 20)
+						CAItems.BIRD_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_BIRD.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
-		FossilRecipeBuilder
-				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
-						Ingredient.of(CABlocks.FOSSILISED_DIMETRODON.get()),
-						Ingredient.of(Items.WATER_BUCKET),
-						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.DIMETRODON_SPAWN_EGG.get(), 1, 20)
-				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_DIMETRODON.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_FROG.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.FROG_SPAWN_EGG.get(), 1, 20)
+						CAItems.FROG_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_FROG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 
 		// Overworld (Vanilla)
@@ -1498,343 +1524,343 @@ public class CARecipeProvider extends RecipeProvider {
 						Ingredient.of(CABlocks.FOSSILISED_BAT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.BAT_SPAWN_EGG, 1, 20)
+						Items.BAT_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_BAT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_BEE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.BEE_SPAWN_EGG, 1, 20)
+						Items.BEE_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_BEE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_CAVE_SPIDER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.CAVE_SPIDER_SPAWN_EGG, 1, 20)
+						Items.CAVE_SPIDER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_CAVE_SPIDER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_CHICKEN.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.CHICKEN_SPAWN_EGG, 1, 20)
+						Items.CHICKEN_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_CHICKEN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_COD.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.COD_SPAWN_EGG, 1, 20)
+						Items.COD_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_COD.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_COW.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.COW_SPAWN_EGG, 1, 20)
+						Items.COW_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_CREEPER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.CREEPER_SPAWN_EGG, 1, 20)
+						Items.CREEPER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_CREEPER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_DOLPHIN.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.DOLPHIN_SPAWN_EGG, 1, 20)
+						Items.DOLPHIN_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_DOLPHIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_DONKEY.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.DONKEY_SPAWN_EGG, 1, 20)
+						Items.DONKEY_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_DONKEY.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_DROWNED.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.DROWNED_SPAWN_EGG, 1, 20)
+						Items.DROWNED_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_DROWNED.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ENDERMAN.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.ENDERMAN_SPAWN_EGG, 1, 20)
+						Items.ENDERMAN_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ENDERMAN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_EVOKER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.EVOKER_SPAWN_EGG, 1, 20)
+						Items.EVOKER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_EVOKER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_FOX.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.FOX_SPAWN_EGG, 1, 20)
+						Items.FOX_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_FOX.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_GIANT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.GIANT_SPAWN_EGG.get(), 1, 20)
+						CAItems.GIANT_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_GIANT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_GUARDIAN.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.GUARDIAN_SPAWN_EGG, 1, 20)
+						Items.GUARDIAN_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_GUARDIAN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_HORSE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.HORSE_SPAWN_EGG, 1, 20)
+						Items.HORSE_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_HORSE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_HUSK.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.HUSK_SPAWN_EGG, 1, 20)
+						Items.HUSK_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_HUSK.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_HUSK_SANDSTONE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.HUSK_SPAWN_EGG, 1, 20)
+						Items.HUSK_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_HUSK_SANDSTONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ILLUSIONER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.ILLUSIONER_SPAWN_EGG.get(), 1, 20)
+						CAItems.ILLUSIONER_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ILLUSIONER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_IRON_GOLEM.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.IRON_GOLEM_SPAWN_EGG.get(), 1, 20)
+						CAItems.IRON_GOLEM_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_IRON_GOLEM.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_LLAMA.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.LLAMA_SPAWN_EGG, 1, 20)
+						Items.LLAMA_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_LLAMA.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_MOOSHROOM.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.MOOSHROOM_SPAWN_EGG, 1, 20)
+						Items.MOOSHROOM_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_MOOSHROOM.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_OCELOT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.OCELOT_SPAWN_EGG, 1, 20)
+						Items.OCELOT_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_OCELOT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_PANDA.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.PANDA_SPAWN_EGG, 1, 20)
+						Items.PANDA_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_PANDA.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_PIG.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.PIG_SPAWN_EGG, 1, 20)
+						Items.PIG_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_PIG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_PHANTOM.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.PHANTOM_SPAWN_EGG, 1, 20)
+						Items.PHANTOM_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_PHANTOM.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_PILLAGER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.PILLAGER_SPAWN_EGG, 1, 20)
+						Items.PILLAGER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_PILLAGER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FROZEN_POLAR_BEAR.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.POLAR_BEAR_SPAWN_EGG, 1, 20)
+						Items.POLAR_BEAR_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FROZEN_POLAR_BEAR.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_PUFFERFISH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.PUFFERFISH_SPAWN_EGG, 1, 20)
+						Items.PUFFERFISH_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_PUFFERFISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_RABBIT.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.RABBIT_SPAWN_EGG, 1, 20)
+						Items.RABBIT_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_RABBIT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_RAVAGER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.RAVAGER_SPAWN_EGG, 1, 20)
+						Items.RAVAGER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_RAVAGER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SALMON.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SALMON_SPAWN_EGG, 1, 20)
+						Items.SALMON_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SALMON.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SHEEP.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SHEEP_SPAWN_EGG, 1, 20)
+						Items.SHEEP_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SHEEP.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SKELETON.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SKELETON_SPAWN_EGG, 1, 20)
+						Items.SKELETON_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SKELETON.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SKELETON_HORSE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SKELETON_HORSE_SPAWN_EGG, 1, 20)
+						Items.SKELETON_HORSE_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SKELETON_HORSE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SLIME.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SLIME_SPAWN_EGG, 1, 20)
+						Items.SLIME_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SLIME.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FROZEN_SNOW_GOLEM.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.SNOW_GOLEM_SPAWN_EGG.get(), 1, 20)
+						CAItems.SNOW_GOLEM_SPAWN_EGG.get(), 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FROZEN_SNOW_GOLEM.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SPIDER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SPIDER_SPAWN_EGG, 1, 20)
+						Items.SPIDER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SPIDER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SQUID.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SQUID_SPAWN_EGG, 1, 20)
+						Items.SQUID_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SQUID.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FROZEN_STRAY.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.STRAY_SPAWN_EGG, 1, 20)
+						Items.STRAY_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FROZEN_STRAY.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_TROPICAL_FISH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.TROPICAL_FISH_SPAWN_EGG, 1, 20)
+						Items.TROPICAL_FISH_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_TROPICAL_FISH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_TURTLE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.TURTLE_SPAWN_EGG, 1, 20)
+						Items.TURTLE_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_TURTLE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_VILLAGER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.VILLAGER_SPAWN_EGG, 1, 20)
+						Items.VILLAGER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_VILLAGER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_VINDICATOR.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.VINDICATOR_SPAWN_EGG, 1, 20)
+						Items.VINDICATOR_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_VINDICATOR.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WANDERING_TRADER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.WANDERING_TRADER_SPAWN_EGG, 1, 20)
+						Items.WANDERING_TRADER_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WANDERING_TRADER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WITCH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.WITCH_SPAWN_EGG, 1, 20)
+						Items.WITCH_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WITCH.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WOLF.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.WOLF_SPAWN_EGG, 1, 20)
+						Items.WOLF_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WOLF.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ZOMBIE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.ZOMBIE_SPAWN_EGG, 1, 20)
+						Items.ZOMBIE_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ZOMBIE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ZOMBIE_HORSE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.ZOMBIE_HORSE_SPAWN_EGG, 1, 20)
+						Items.ZOMBIE_HORSE_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ZOMBIE_HORSE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 
 		// Nether (CA)
@@ -1843,21 +1869,21 @@ public class CARecipeProvider extends RecipeProvider {
 						Ingredient.of(CABlocks.FOSSILISED_CRIMSON_ENT.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.CRIMSON_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.CRIMSON_ENT_SPAWN_EGG.get(), 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_CRIMSON_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WARPED_ENT.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.WARPED_ENT_SPAWN_EGG.get(), 1, 20)
+						CAItems.WARPED_ENT_SPAWN_EGG.get(), 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WARPED_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_LAVA_EEL.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.LAVA_EEL_SPAWN_EGG.get(), 1, 20)
+						CAItems.LAVA_EEL_SPAWN_EGG.get(), 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_LAVA_EEL.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 
 		// Nether (Vanilla)
@@ -1866,77 +1892,77 @@ public class CARecipeProvider extends RecipeProvider {
 						Ingredient.of(CABlocks.FOSSILISED_BLAZE.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.BLAZE_SPAWN_EGG, 1, 20)
+						Items.BLAZE_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_BLAZE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_GHAST.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.GHAST_SPAWN_EGG, 1, 20)
+						Items.GHAST_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_GHAST.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_HOGLIN.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.HOGLIN_SPAWN_EGG, 1, 20)
+						Items.HOGLIN_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_HOGLIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ENDERMAN_NETHERRACK.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.ENDERMAN_SPAWN_EGG, 1, 20)
+						Items.ENDERMAN_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ENDERMAN_NETHERRACK.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_MAGMA_CUBE_NETHERRACK.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.MAGMA_CUBE_SPAWN_EGG, 1, 20)
+						Items.MAGMA_CUBE_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_MAGMA_CUBE_NETHERRACK.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_MAGMA_CUBE_BLACKSTONE.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.MAGMA_CUBE_SPAWN_EGG, 1, 20)
+						Items.MAGMA_CUBE_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_MAGMA_CUBE_BLACKSTONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_PIGLIN.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.PIGLIN_SPAWN_EGG, 1, 20)
+						Items.PIGLIN_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_PIGLIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SKELETON_SOUL_SOIL.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SKELETON_SPAWN_EGG, 1, 20)
+						Items.SKELETON_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SKELETON_SOUL_SOIL.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_STRIDER.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.STRIDER_SPAWN_EGG, 1, 20)
+						Items.STRIDER_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_STRIDER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_WITHER_SKELETON.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.WITHER_SKELETON_SPAWN_EGG, 1, 20)
+						Items.WITHER_SKELETON_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_WITHER_SKELETON.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.get()),
 						Ingredient.of(Items.LAVA_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.ZOMBIFIED_PIGLIN_SPAWN_EGG, 1, 20)
+						Items.ZOMBIFIED_PIGLIN_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 
 		// End (CA)
@@ -1947,22 +1973,31 @@ public class CARecipeProvider extends RecipeProvider {
 						Ingredient.of(CABlocks.FOSSILISED_ENDERMAN_END_STONE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.ENDERMAN_SPAWN_EGG, 1, 20)
+						Items.ENDERMAN_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ENDERMAN_END_STONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ENDERMITE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.ENDERMITE_SPAWN_EGG, 1, 20)
+						Items.ENDERMITE_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ENDERMITE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SHULKER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.SHULKER_SPAWN_EGG, 1, 20)
+						Items.SHULKER_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SHULKER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+
+		// Mining Paradise (CA)
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_DIMETRODON.get()),
+						Ingredient.of(Items.WATER_BUCKET),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						CAItems.DIMETRODON_SPAWN_EGG.get(), 1, 20, "copper")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_DIMETRODON.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 
 		// Crystalworld (CA)
 		FossilRecipeBuilder
@@ -1970,7 +2005,7 @@ public class CARecipeProvider extends RecipeProvider {
 						Ingredient.of(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.CRYSTAL_APPLE_COW_SPAWN_EGG.get(), 1, 20)
+						CAItems.CRYSTAL_APPLE_COW_SPAWN_EGG.get(), 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 	}
 
@@ -2085,6 +2120,42 @@ public class CARecipeProvider extends RecipeProvider {
 				.pattern("##")
 				.group("leaf_carpet")
 				.unlockedBy("has_planks", has(pMaterial))
+				.save(consumer);
+	}
+
+	private static void slab(Consumer<IFinishedRecipe> consumer, IItemProvider pSlab, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pSlab, 6)
+				.define('#', pMaterial)
+				.pattern("###")
+				.unlockedBy("has_" + pMaterial.asItem(), has(pMaterial))
+				.save(consumer);
+	}
+
+	private static void stairs(Consumer<IFinishedRecipe> consumer, IItemProvider pStairs, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pStairs, 4)
+				.define('#', pMaterial)
+				.pattern("#  ")
+				.pattern("## ")
+				.pattern("###")
+				.unlockedBy("has_" + pMaterial.asItem(), has(pMaterial))
+				.save(consumer);
+	}
+
+	private static void wall(Consumer<IFinishedRecipe> consumer, IItemProvider pWall, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pWall, 6)
+				.define('#', pMaterial)
+				.pattern("###")
+				.pattern("###")
+				.unlockedBy("has_" + pMaterial.asItem(), has(pMaterial))
+				.save(consumer);
+	}
+
+	private static void bricks(Consumer<IFinishedRecipe> consumer, IItemProvider pBricks, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pBricks, 3)
+				.define('#', pMaterial)
+				.pattern("##")
+				.pattern("##")
+				.unlockedBy("has_" + pMaterial.asItem(), has(pMaterial))
 				.save(consumer);
 	}
 
@@ -2299,6 +2370,12 @@ public class CARecipeProvider extends RecipeProvider {
 				.save(consumer);
 	}
 
+	private static void stonecutting(Consumer<IFinishedRecipe> consumer, IItemProvider pInput, IItemProvider pOutput) {
+		SingleItemRecipeBuilder.stonecutting(Ingredient.of(pInput), pOutput)
+				.unlocks("has_" + pInput.asItem(), InventoryChangeTrigger.Instance.hasItems(pInput))
+				.save(consumer, new ResourceLocation(ChaosAwakens.MODID, pOutput.asItem() + "_from_" + pInput.asItem() + "_stonecutting"));
+	}
+
 	private static void stonecutting(Consumer<IFinishedRecipe> consumer, IItemProvider pInput, IItemProvider pOutput, int count) {
 		SingleItemRecipeBuilder.stonecutting(Ingredient.of(pInput), pOutput, count)
 				.unlocks("has_" + pInput.asItem(), InventoryChangeTrigger.Instance.hasItems(pInput))
@@ -2308,7 +2385,7 @@ public class CARecipeProvider extends RecipeProvider {
 	private static void smelting(Consumer<IFinishedRecipe> consumer, IItemProvider pInput, IItemProvider pOutput, Float experience, int cookingTime) {
 		CookingRecipeBuilder.smelting(Ingredient.of(pInput), pOutput, experience, cookingTime)
 				.unlockedBy("has_" + pInput, has(pInput))
-				.save(consumer, "chaosawakens:" + pOutput + "_from_smelting");
+				.save(consumer, "chaosawakens:" + pOutput.asItem() + "_from_smelting");
 	}
 
 	private static void blasting(Consumer<IFinishedRecipe> consumer, IItemProvider pInput, IItemProvider pOutput, Float experience, int cookingTime) {

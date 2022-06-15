@@ -77,6 +77,9 @@ sourceSets {
 mixin {
     add sourceSets.main, 'chaosawakens.refmap.json'
     config 'chaosawakens.mixins.json'
+
+    debug.verbose = true
+    debug.export = true
 }
 
 dependencies {
@@ -100,6 +103,7 @@ dependencies {
     implementation fg.deobf("curse.maven:worldedit-225608:${project.worldedit}")
 
     implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
+    implementation fg.deobf("curse.maven:jade-324717:${project.jade}")
 
     implementation fg.deobf("curse.maven:world-stripper-250603:${project.worldstripper}")
 

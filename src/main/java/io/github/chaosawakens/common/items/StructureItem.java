@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.items;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.stats.Stats;
@@ -22,13 +23,14 @@ public class StructureItem extends Item {
 	public ActionResultType useOn(ItemUseContext context) {
 		World world = context.getLevel();
 		BlockPos pos = context.getClickedPos();
+		PlayerEntity player = context.getPlayer();
 
 		if (world instanceof ServerWorld) {
 			Template template = ((ServerWorld) world).getStructureManager().getOrCreate(new ResourceLocation("chaosawakens", structureName));
 			PlacementHelper targetPlacement = new PlacementHelper(pos, template.getSize(), context.getHorizontalDirection());
 			if (template != null) {
 				template.placeInWorldChunk((ServerWorld) world, targetPlacement.getPos(), new PlacementSettings().setRotation(targetPlacement.getRotation()).setMirror(Mirror.NONE).setChunkPos(null).setIgnoreEntities(false), (world).random);
-				context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
+				player.awardStat(Stats.ITEM_USED.get(this));
 				context.getItemInHand().shrink(1);
 			}
 		}

@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_limestone_bricks_slab": {
+    "has_limestone_brick_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:limestone_bricks_slab"
+            "item": "chaosawakens:limestone_brick_slab"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_limestone_bricks_slab",
+      "has_limestone_brick_slab",
       "has_the_recipe"
     ]
   ]

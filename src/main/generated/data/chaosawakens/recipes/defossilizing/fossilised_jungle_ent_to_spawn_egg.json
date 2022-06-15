@@ -11,5 +11,6 @@
   },
   "result": "chaosawakens:jungle_ent_spawn_egg",
   "experience": 1,
-  "defossilizing_time": 20
+  "defossilizing_time": 20,
+  "defossilizer_type": "copper"
 }

@@ -1,8 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
-import com.samebutdifferent.morevillagers.MoreVillagers;
-import com.samebutdifferent.morevillagers.init.VillagerInit;
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.util.TradeUtil;
 import io.github.chaosawakens.common.util.TradeUtil.CATrade;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
@@ -24,17 +23,23 @@ public class CAVillagerTrades {
 
 				new CATrade(3, CABlocks.TUBE_WORM.get().asItem(), 12),
 
-				new CATrade(4, CAItems.TRIFFID_GOO.get().asItem(), 5),
-
 				new CATrade(5, CABlocks.APPLE_SAPLING.get().asItem(), 8),
 				new CATrade(5, CABlocks.CHERRY_SAPLING.get().asItem(), 8),
 				new CATrade(5, CABlocks.PEACH_SAPLING.get().asItem(), 8),
 
 				new CATrade(5, Items.NAME_TAG, 5));
 
-		TradeUtil.addRareWandererTrades(event,
-				new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 3),
-				new CATrade(15, CAItems.URANIUM_NUGGET.get(), 3));
+
+		if (CACommonConfig.COMMON.wanderingTraderSellsTriffidGoo.get()) {
+			TradeUtil.addWandererTrades(event,
+					new CATrade(4, CAItems.TRIFFID_GOO.get().asItem(), 5));
+		}
+
+		if (CACommonConfig.COMMON.wanderingTraderSellsUraniumAndTitanium.get()) {
+			TradeUtil.addRareWandererTrades(event,
+					new CATrade(15, CAItems.TITANIUM_NUGGET.get(), 3),
+					new CATrade(15, CAItems.URANIUM_NUGGET.get(), 3));
+		}
 	}
 
 	@SubscribeEvent

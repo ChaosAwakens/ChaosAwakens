@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.util;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.items.UltimateHoeItem;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
@@ -19,8 +18,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.EnumSet;
 import java.util.Optional;
 import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
 
 public class EnumUtils {
 	public enum CAItemTier implements IItemTier {
@@ -41,12 +38,13 @@ public class EnumUtils {
 		TOOL_SILVER(3, 450, 7, 4, 10, () -> Ingredient.of(CAItems.SILVER_LUMP.get())),
 		TOOL_PLATINUM(5, 1600, 8, 6, 12, () -> Ingredient.of(CAItems.PLATINUM_LUMP.get())),
 		WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
-		WEAPON_SLAYER_CHAINSAW(4, 250, 30, 40, 0, () -> Ingredient.of(Items.REDSTONE_BLOCK)),
+		WEAPON_SLAYER_CHAINSAW(4, 250, 30, 0, 0, () -> Ingredient.of(Items.REDSTONE_BLOCK)),
 		WEAPON_QUEEN_BATTLEAXE(4, 10000, 15, 663, 96, () -> Ingredient.of(CAItems.QUEEN_SCALE.get())),
 		WEAPON_ROYAL_GUARDIAN_SWORD(4, 10000, 15, 748, 96, () -> Ingredient.EMPTY),
 		WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.of(Blocks.REDSTONE_BLOCK)),
 		WEAPON_GENERIC(2, 1024, 6, 6, 8, () -> Ingredient.EMPTY),
 		WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, () -> Ingredient.EMPTY),
+		WEAPON_ATTITUDE_ADJUSTER(2, 4500, 6, 11, 9, () -> Ingredient.EMPTY),
 		WEAPON_BERTHA(4, 6000, 16, 496, 72, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
 
 		private final int harvestLevel;
@@ -177,7 +175,7 @@ public class EnumUtils {
 		}
 	}
 	
-	//TODO: efficiency
+	// TODO: Efficiency
 	public enum CAGearEnumList {
 		AMETHYST_SWORD(CAItems.AMETHYST_SWORD.get().getRegistryName().toString(), CAItems.AMETHYST_SWORD.get()),
 		AMETHYST_PICKAXE(CAItems.AMETHYST_PICKAXE.get().getRegistryName().toString(), CAItems.AMETHYST_PICKAXE.get()),

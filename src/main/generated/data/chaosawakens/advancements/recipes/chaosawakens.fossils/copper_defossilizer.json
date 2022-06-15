@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:copper_defossilizer"
+    ]
+  },
+  "criteria": {
+    "has_forge:ingots/copper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/copper"
+          }
+        ]
+      }
+    },
+    "has_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:bucket"
+          }
+        ]
+      }
+    },
+    "has_smooth_red_sandstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:smooth_red_sandstone"
+          }
+        ]
+      }
+    },
+    "has_smooth_red_sandstone_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:smooth_red_sandstone_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:copper_defossilizer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_forge:ingots/copper",
+      "has_bucket",
+      "has_smooth_red_sandstone",
+      "has_smooth_red_sandstone_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "chaosawakens:lime_terracotta_bricks"
+  },
+  "result": "chaosawakens:cracked_lime_terracotta_bricks",
+  "experience": 0.1,
+  "cookingtime": 200
+}
