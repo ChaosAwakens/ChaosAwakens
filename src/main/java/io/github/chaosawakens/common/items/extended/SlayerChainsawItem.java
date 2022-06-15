@@ -88,13 +88,14 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
 		double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
 		double reachSqr = reach * reach;
+		World world = entity.level;
 
 		Vector3d viewVec = entity.getViewVector(1.0F);
 		Vector3d eyeVec = entity.getEyePosition(1.0F);
 		Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
 
 		AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
-		EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR, reachSqr);
+		EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 
 		if (result == null || !(result.getEntity() instanceof LivingEntity)) return false;
 
