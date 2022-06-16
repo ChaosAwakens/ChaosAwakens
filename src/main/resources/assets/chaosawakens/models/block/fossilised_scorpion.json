@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "chaosawakens:block/fossilised_scorpion",
-    "particle": "chaosawakens:block/fossilised_scorpion"
-  }
-}
