@@ -21,6 +21,7 @@ public class DenseGrassBlock extends SpreadableDenseDirtBlock implements IGrowab
 		super(properties);
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean isValidBonemealTarget(IBlockReader blockReader, BlockPos pos, BlockState state, boolean p_176473_4_) {
 		return blockReader.getBlockState(pos.above()).isAir();
 	}
@@ -29,6 +30,7 @@ public class DenseGrassBlock extends SpreadableDenseDirtBlock implements IGrowab
 		return true;
 	}
 
+	@SuppressWarnings({ "deprecation", "unchecked", "rawtypes" })
 	public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		BlockPos blockpos = pos.above();
 		BlockState blockstate = CABlocks.DENSE_GRASS.get().defaultBlockState();

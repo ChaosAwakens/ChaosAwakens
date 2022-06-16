@@ -24,6 +24,7 @@ public class GazelleEntityModel extends AnimatedGeoModel<GazelleEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/gazelle.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(GazelleEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

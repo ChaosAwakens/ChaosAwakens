@@ -62,10 +62,12 @@ public class CATreasure {
 		return Registry.register(Registry.LOOT_FUNCTION_TYPE, ChaosAwakens.prefix(name), function); // ILootFunction registry
 	}
 
+	@SuppressWarnings("unused")
 	private static LootConditionType registerCondition(String name, LootConditionType condition) {
 		return Registry.register(Registry.LOOT_CONDITION_TYPE, ChaosAwakens.prefix(name), condition); // ILootCondition registry
 	}
 
+	@SuppressWarnings("unused")
 	private static ResourceLocation register(String id) {
 		return register(ChaosAwakens.prefix(id));
 	}

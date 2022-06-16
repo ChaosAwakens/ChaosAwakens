@@ -19,6 +19,7 @@ public class LavaNodeSwimmingProcessor extends SwimNodeProcessor {
 		super(false);
 	}
 
+	@SuppressWarnings("deprecation")
 	private PathNodeType notRestrictedOrIsFree(int i, int j, int k) {
 		BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable();
 		for (int x = i; x < i + this.entityWidth; ++x) {
@@ -40,6 +41,7 @@ public class LavaNodeSwimmingProcessor extends SwimNodeProcessor {
 		return p != PathNodeType.LAVA ? null : this.getGoal(i, j, k);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Nonnull
 	@Override
 	public PathNodeType getBlockPathType(IBlockReader baccess, int x, int y, int z) {

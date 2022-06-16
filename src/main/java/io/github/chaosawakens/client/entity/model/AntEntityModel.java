@@ -30,6 +30,7 @@ public class AntEntityModel extends AnimatedGeoModel<AntEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/ant.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(AntEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

@@ -92,6 +92,7 @@ public class UraniumOreBlock extends CAOreBlock {
 		blockStateBuilder.add(GLOW_STRENGTH);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void randomTick(BlockState state, ServerWorld server, BlockPos blockPos, Random random) {
 		if (state.getValue(GLOW_STRENGTH) > 0 && !server.isClientSide) {

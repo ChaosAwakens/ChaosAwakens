@@ -7,7 +7,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
-import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -20,7 +19,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tags.BlockTags;
@@ -47,7 +45,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.entity.ai.FlightMovementController;
 import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 
@@ -60,14 +57,12 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	private static final DataParameter<Boolean> PERCHED = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> FLYING = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Optional<BlockPos>> POS = EntityDataManager.defineId(BirdEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
+	@SuppressWarnings("unused")
 	private float flap;
 	private float flapSpeed;
 	private float flapping = 1.0F;
 	public float sitTicks;
-	private boolean flying;
 	public float flyTicks;
-	private float sitCd;
-	private boolean navigatingLand;
 	public float sitCD;
 
 	public BirdEntity(EntityType<? extends TameableEntity> p_i50251_1_, World p_i50251_2_) {
@@ -182,7 +177,8 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		return p_191954_1_ + this.flapSpeed / 2.0F;
 	}
 	
-    private static BlockPos belowPos(Entity entity) {
+    @SuppressWarnings("unused")
+	private static BlockPos belowPos(Entity entity) {
         return new BlockPos(entity.getX(), entity.getBoundingBox().maxY + 1.51F, entity.getZ());
     }
 	
@@ -280,8 +276,6 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	}
 
 	private void calculateFlapping() {
-		float oFlap = this.flap;
-		float oFlapSpeed = this.flapSpeed;
 		this.flapSpeed = (float) ((double) this.flapSpeed + (double) (!this.onGround && !this.isPassenger() ? 4 : -1) * 0.3D);
 		this.flapSpeed = MathHelper.clamp(this.flapSpeed, 0.0F, 1.0F);
 		if (!this.onGround && this.flapping < 1.0F) this.flapping = 1.0F;

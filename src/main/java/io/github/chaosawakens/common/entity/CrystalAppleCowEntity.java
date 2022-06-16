@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.registry.CABlocks;
+
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -14,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -27,7 +27,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.List;
 import java.util.Random;
 
 public class CrystalAppleCowEntity extends AnimalEntity implements IAnimatable {

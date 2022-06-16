@@ -35,6 +35,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 	private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 	private final DataGenerator generator;
 
+	@SuppressWarnings("deprecation")
 	public CAAdvancementProvider(DataGenerator generatorIn) {
 		super(generatorIn);
 		this.generator = generatorIn;
@@ -81,6 +82,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		this.register(consumer);
 	}
 
+	@SuppressWarnings("unused")
 	public void register(Consumer<Advancement> t) {
 		Advancement root = registerAdvancement("root", FrameType.TASK, CAItems.RUBY.get())
 				.addCriterion("root", PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld")))))

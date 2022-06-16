@@ -189,6 +189,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController(this, "slayerchainsawcontroller", 0, this::predicate));

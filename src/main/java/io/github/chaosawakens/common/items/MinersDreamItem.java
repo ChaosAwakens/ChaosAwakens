@@ -1,12 +1,11 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.particles.ParticleTypes;

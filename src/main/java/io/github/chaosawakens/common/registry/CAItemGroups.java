@@ -1,10 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
 import net.minecraft.item.*;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.registry.Registry;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class CAItemGroups {

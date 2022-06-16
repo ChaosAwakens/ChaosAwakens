@@ -24,6 +24,7 @@ public class WaspEntityModel extends AnimatedGeoModel<WaspEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/wasp.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(WaspEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

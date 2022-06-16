@@ -39,8 +39,6 @@ import java.util.Map;
 
 public class CommonSetupEvent {
     public static List<FeatureWrapper> configFeatures = new ArrayList<>();
-//	private static List<Entry> regEntries;
-//    private String[] configValues;
 
     private static Method codecMethod;
 
@@ -85,6 +83,7 @@ public class CommonSetupEvent {
     public static void configStatesSync() {
     }
 
+	@SuppressWarnings("unchecked")
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (!(event.getWorld() instanceof ServerWorld)) return;
 

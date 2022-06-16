@@ -20,6 +20,7 @@ public class OceanBedPlacement extends Placement<NoPlacementConfig> {
 		super(NoPlacementConfig.CODEC);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, NoPlacementConfig config, BlockPos pos) {
 		int x = rand.nextInt(16) + pos.getX();

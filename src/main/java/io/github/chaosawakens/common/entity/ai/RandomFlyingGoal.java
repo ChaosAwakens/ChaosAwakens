@@ -2,9 +2,9 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
 
+
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.common.entity.BirdEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.goal.Goal;

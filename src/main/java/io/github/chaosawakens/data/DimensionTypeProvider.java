@@ -14,6 +14,7 @@ import java.util.Map;
 
 public abstract class DimensionTypeProvider implements IDataProvider {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private final Map<ResourceLocation, DimensionTypeBuilder> dimensionType = new LinkedHashMap();
 	public final DataGenerator generator;
 
@@ -21,6 +22,7 @@ public abstract class DimensionTypeProvider implements IDataProvider {
 		this.generator = generator;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public final void run(DirectoryCache cache) {
 		this.dimensionType.clear();
@@ -41,6 +43,7 @@ public abstract class DimensionTypeProvider implements IDataProvider {
 
 	protected abstract void addDimensionTypes();
 
+	@SuppressWarnings("unlikely-arg-type")
 	protected DimensionTypeBuilder createDimensionType(ResourceLocation id) {
 		if (this.dimensionType.containsValue(id)) throw new RuntimeException("Dimension type '" + id + "' has already been registered.");
 		else {

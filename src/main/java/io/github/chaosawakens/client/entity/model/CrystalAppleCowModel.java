@@ -1,10 +1,9 @@
 package io.github.chaosawakens.client.entity.model;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.common.entity.CrystalAppleCowEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
@@ -26,6 +25,7 @@ public class CrystalAppleCowModel extends AnimatedGeoModel<CrystalAppleCowEntity
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/apple_cow.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(CrystalAppleCowEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

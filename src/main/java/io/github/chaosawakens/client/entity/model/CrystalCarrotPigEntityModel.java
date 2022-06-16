@@ -24,6 +24,7 @@ public class CrystalCarrotPigEntityModel extends AnimatedGeoModel<CrystalCarrotP
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/carrot_pig.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(CrystalCarrotPigEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

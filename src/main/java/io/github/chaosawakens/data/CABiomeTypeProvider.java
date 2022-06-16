@@ -1,10 +1,8 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
+
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.SoundEvents;
 
 public class CABiomeTypeProvider extends BiomeTypeProvider {
 

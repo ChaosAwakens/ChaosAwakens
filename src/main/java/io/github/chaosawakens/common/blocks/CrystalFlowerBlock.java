@@ -32,6 +32,7 @@ public class CrystalFlowerBlock extends FlowerBlock {
 		return AbstractBlock.OffsetType.XZ;
 	}
 
+	@SuppressWarnings("deprecation")
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {

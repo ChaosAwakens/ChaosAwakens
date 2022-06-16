@@ -44,6 +44,7 @@ public class CropPlantBlock extends BushBlock implements IGrowable {
 		return state.getValue(AGE) < this.getMaxAge() || this.isAboveAir;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isAreaLoaded(pos, 1)) return;

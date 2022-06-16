@@ -19,6 +19,7 @@ public class CrystalGrassBlock extends SpreadableCrystalDirtBlock implements IGr
 		super(properties);
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean isValidBonemealTarget(IBlockReader blockReader, BlockPos pos, BlockState state, boolean p_176473_4_) {
 		return blockReader.getBlockState(pos.above()).isAir();
 	}
@@ -27,6 +28,7 @@ public class CrystalGrassBlock extends SpreadableCrystalDirtBlock implements IGr
 		return true;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes", "deprecation" })
 	public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		BlockPos blockpos = pos.above();
 		BlockState blockstate = CABlocks.CRYSTAL_GRASS.get().defaultBlockState();

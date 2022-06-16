@@ -24,6 +24,7 @@ public class BeaverEntityModel extends AnimatedGeoModel<BeaverEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/beaver.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(BeaverEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

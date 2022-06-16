@@ -57,6 +57,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 		this.explosion = explosion;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {
 		super.tick();

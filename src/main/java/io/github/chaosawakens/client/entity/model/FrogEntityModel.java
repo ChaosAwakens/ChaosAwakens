@@ -24,6 +24,7 @@ public class FrogEntityModel extends AnimatedGeoModel<FrogEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/frog.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(FrogEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

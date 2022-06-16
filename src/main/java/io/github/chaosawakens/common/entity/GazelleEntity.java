@@ -2,10 +2,8 @@ package io.github.chaosawakens.common.entity;
 
 import javax.annotation.Nullable;
 
-
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -214,6 +212,7 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
 	}
 
+	@SuppressWarnings("unused")
 	private int getRandomGazelleType(IWorld world) {
 		Biome biome = world.getBiome(this.blockPosition());
         int i = this.random.nextInt(5);

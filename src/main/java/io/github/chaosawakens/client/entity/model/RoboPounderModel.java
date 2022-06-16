@@ -24,6 +24,7 @@ public class RoboPounderModel extends AnimatedGeoModel<RoboPounderEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/robo_pounder.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(RoboPounderEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

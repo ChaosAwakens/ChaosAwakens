@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.integration.jei;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerIronContainer;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerIronScreen;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -9,7 +10,6 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.handlers.IScreenHandler;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
@@ -30,6 +30,7 @@ public class CAJEIPlugin implements IModPlugin {
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
 	}
 
+	@SuppressWarnings("deprecation")
 	private void addDescription(IRecipeRegistration registry, String langEntry, ItemStack... itemStack) {
 		registry.addIngredientInfo(Arrays.asList(itemStack), VanillaTypes.ITEM, langEntry);
 	}
@@ -39,6 +40,7 @@ public class CAJEIPlugin implements IModPlugin {
 		registry.addRecipeTransferHandler(DefossilizerIronContainer.class, DefossilizerRecipeCategory.ID, 0, 3, 4, INV_SIZE);
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public void registerRecipes(IRecipeRegistration registry) {
 		ClientWorld world = Objects.requireNonNull(Minecraft.getInstance().level);

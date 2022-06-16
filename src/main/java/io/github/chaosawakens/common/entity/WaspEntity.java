@@ -57,6 +57,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 				.add(Attributes.FOLLOW_RANGE, 36);
 	}
 
+	@SuppressWarnings("deprecation")
 	public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
 		return worldIn.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
@@ -89,6 +90,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 
 	protected PathNavigator createNavigation(World worldIn) {
 		FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, worldIn) {
+			@SuppressWarnings("deprecation")
 			public boolean isStableDestination(BlockPos pos) {
 				return !this.level.getBlockState(pos.below()).isAir();
 			}

@@ -25,6 +25,7 @@ public class EmeraldGatorEntityModel extends AnimatedGeoModel<EmeraldGatorEntity
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/emerald_gator.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(EmeraldGatorEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

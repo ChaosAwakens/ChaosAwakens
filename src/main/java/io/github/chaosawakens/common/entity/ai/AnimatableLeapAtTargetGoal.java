@@ -16,8 +16,11 @@ public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal implements IUti
 	protected AnimatableAnimalEntity entity;
 	private LivingEntity target;
 	float yf;
+	@SuppressWarnings("unused")
 	private final double animationLength;
+	@SuppressWarnings("unused")
 	private final BiFunction<Double, Double, Boolean> attackPredicate;
+	@SuppressWarnings("unused")
 	private boolean hasHit;
 
 	public AnimatableLeapAtTargetGoal(AnimatableAnimalEntity entity, float f, double animationLength, double attackBegin, double attackEnd) {
@@ -29,6 +32,7 @@ public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal implements IUti
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
+	@SuppressWarnings("unused")
 	private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableAnimalEntity attacker, LivingEntity target) {
 		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {

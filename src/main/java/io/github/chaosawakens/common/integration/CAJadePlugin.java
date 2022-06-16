@@ -37,6 +37,7 @@ public class CAJadePlugin implements IWailaPlugin {
 				return ItemStack.EMPTY;
 			}
 
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public void appendHead(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
 				try {
@@ -64,6 +65,7 @@ public class CAJadePlugin implements IWailaPlugin {
 				}
 			}
 
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public void appendTail(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
 				if (!config.get(JadePlugin.HIDE_MOD_NAME)) {

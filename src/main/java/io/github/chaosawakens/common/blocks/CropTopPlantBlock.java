@@ -108,6 +108,7 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	protected boolean canGrowInto(BlockState state) {
 		return state.isAir();
 	}

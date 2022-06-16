@@ -71,6 +71,7 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 		this.container.clearContent();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void handlePlacement(boolean p_217056_1_, IRecipe<?> p_217056_2_, ServerPlayerEntity p_217056_3_) {
 		(new ServerRecipePlacerFurnace<>(this)).recipeClicked(p_217056_3_, (IRecipe<IInventory>) p_217056_2_, p_217056_1_);
 	}
@@ -147,6 +148,7 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 		return itemstack;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected boolean canSmelt(ItemStack p_217057_1_) {
 		return this.level.getRecipeManager().getRecipeFor((IRecipeType) this.recipeType, new Inventory(p_217057_1_), this.level).isPresent();
 	}

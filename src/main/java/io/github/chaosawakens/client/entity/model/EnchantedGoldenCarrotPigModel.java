@@ -24,6 +24,7 @@ public class EnchantedGoldenCarrotPigModel extends AnimatedGeoModel<EnchantedGol
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/carrot_pig.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(EnchantedGoldenCarrotPigEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

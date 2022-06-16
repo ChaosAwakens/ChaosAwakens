@@ -137,6 +137,7 @@ public class CritterCageItem extends Item implements IUtilityHelper {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public LivingEntity getEntityFromStack(ItemStack stack, World world, boolean withInfo) {
 		if (stack.hasTag()) {
 			EntityType type = EntityType.byString(stack.getTag().getString("entity")).orElse(null);

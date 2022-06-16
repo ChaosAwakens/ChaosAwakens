@@ -1,6 +1,7 @@
 package io.github.chaosawakens.data;
 
 import com.google.common.collect.ImmutableList;
+
 import com.mojang.datafixers.util.Pair;
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.data.DataGenerator;
@@ -12,7 +13,6 @@ import net.minecraft.loot.LootTable.Builder;
 import net.minecraft.loot.ValidationTracker;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;

@@ -70,8 +70,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtilityHelper {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private float punchingTicks;
-	private float sideSweepingTicks;
+//	private float punchingTicks;
+//	private float sideSweepingTicks;
 //	private float samePosTicks;
 //	private Vector3d stuckPos = Vector3d.ZERO;
 
@@ -80,9 +80,6 @@ public class RoboPounderEntity extends RoboEntity implements IAnimatable, IUtili
 		this.noCulling = true;
 		this.moveControl = new MovementController(this);
 		this.maxUpStep = 1.0F;
-		this.punchingTicks = 0;
-		this.sideSweepingTicks = 0;
-//		this.samePosTicks = 0;
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

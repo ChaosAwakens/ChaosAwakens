@@ -553,6 +553,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		trapdoorBlock(block, bottom, top, open, true);
 	}
 
+	@SuppressWarnings("incomplete-switch")
 	public void buttonBlock(AbstractButtonBlock block, ResourceLocation textureName) {
 		ModelFile unpressed = models().withExistingParent(block.getRegistryName().getPath(), "button").texture("texture", textureName);
 		ModelFile pressed = models().withExistingParent(block.getRegistryName().getPath() + "_pressed", "button_pressed").texture("texture", textureName);
@@ -611,6 +612,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		});
 	}
 
+	@SuppressWarnings("incomplete-switch")
 	public void leafCarpetBlock(LeafCarpetBlock block, ResourceLocation textureName) {
 		ModelFile carpet = models().withExistingParent(block.getRegistryName().getPath(), "chaosawakens:leaf_carpet").texture("texture", textureName);
 
