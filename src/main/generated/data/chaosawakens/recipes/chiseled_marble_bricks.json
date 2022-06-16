@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:marble_brick_slab"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:chiseled_marble_bricks"
+  }
+}

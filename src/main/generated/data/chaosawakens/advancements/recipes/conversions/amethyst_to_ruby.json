@@ -1,0 +1,47 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "chaosawakens:ruby"
+          ]
+        },
+        "criteria": {
+          "has_amethyst": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "item": "projecte:philosophers_stone"
+                },
+                {
+                  "item": "chaosawakens:amethyst"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "chaosawakens:ruby"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_amethyst",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "jeed",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "jeed:effect_provider",
+        "effect":{
+          "id": "minecraft:nausea"
+        },
+        "providers": [
+          {
+            "item": "chaosawakens:poison_sword"
+          },
+          {
+            "item": "chaosawakens:stink_bug_spawn_egg"
+          }
+        ]
+      }
+    }
+  ]
+}

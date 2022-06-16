@@ -22,6 +22,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "chaosawakens:aluminum_ingot"
+        },
+        {
+          "type": "minecraft:item",
           "name": "chaosawakens:tigers_eye"
         }
       ]

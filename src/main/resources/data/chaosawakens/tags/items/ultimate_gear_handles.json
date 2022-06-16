@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#forge:lumps/platinum"
-  ],
-  "optional": [
-    "#forge:ingots/platinum"
-  ]
-}

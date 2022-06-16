@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "jeed",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "jeed:effect_provider",
+        "effect":{
+          "id": "minecraft:fire_resistance"
+        },
+        "providers": [
+          {
+            "item": "chaosawakens:lava_eel_helmet"
+          },
+          {
+            "item": "chaosawakens:lava_eel_chestplate"
+          },
+          {
+            "item": "chaosawakens:lava_eel_leggings"
+          },
+          {
+            "item": "chaosawakens:lava_eel_boots"
+          }
+        ]
+      }
+    }
+  ]
+}

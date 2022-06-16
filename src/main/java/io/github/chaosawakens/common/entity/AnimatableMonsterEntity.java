@@ -10,50 +10,41 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-/**
- * @author invalid2
- */
 public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatable {
+	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
+	protected boolean isAnimationFinished = false;
 
-    protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
+	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+		super(type, worldIn);
+	}
 
-    protected boolean isAnimationFinished = false;
+	@Override
+	abstract public void registerControllers(AnimationData data);
 
-    /**
-     * @param type
-     * @param worldIn
-     */
-    public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
-        super(type, worldIn);
-    }
+	@Override
+	abstract public AnimationFactory getFactory();
 
-    @Override
-    abstract public void registerControllers(AnimationData data);
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(MOVING, false);
+		this.entityData.define(ATTACKING, false);
+	}
 
-    @Override
-    abstract public AnimationFactory getFactory();
+	public boolean getMoving() {
+		return this.entityData.get(MOVING);
+	}
 
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(MOVING, false);
-        this.entityData.define(ATTACKING, false);
-    }
+	public void setMoving(boolean moving) {
+		this.entityData.set(MOVING, moving);
+	}
 
-    public boolean getMoving() {
-        return this.entityData.get(MOVING);
-    }
+	public boolean getAttacking() {
+		return this.entityData.get(ATTACKING);
+	}
 
-    public void setMoving(boolean moving) {
-        this.entityData.set(MOVING, moving);
-    }
-
-    public boolean getAttacking() {
-        return this.entityData.get(ATTACKING);
-    }
-
-    public void setAttacking(boolean attacking) {
-        this.entityData.set(ATTACKING, attacking);
-    }
+	public void setAttacking(boolean attacking) {
+		this.entityData.set(ATTACKING, attacking);
+	}
 }

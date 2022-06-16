@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "chaosawakens:titanium_ore"
+  },
+  "result": "chaosawakens:titanium_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "chaosawakens:crystal_shard"
+    },
+    "#": {
+      "item": "chaosawakens:crystal_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:crystal_wood_shovel"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:garden_salad"
+    ]
+  },
+  "criteria": {
+    "has_lettuce": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:lettuce"
+          }
+        ]
+      }
+    },
+    "has_tomato": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:tomato"
+          }
+        ]
+      }
+    },
+    "has_radish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:radish"
+          }
+        ]
+      }
+    },
+    "has_forge:crops/carrot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crops/carrot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:garden_salad"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lettuce",
+      "has_tomato",
+      "has_radish",
+      "has_forge:crops/carrot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:pink_dye_from_pink_bulb"
+    ]
+  },
+  "criteria": {
+    "has_pink_bulb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:pink_bulb"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:pink_dye_from_pink_bulb"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_bulb",
+      "has_the_recipe"
+    ]
+  ]
+}

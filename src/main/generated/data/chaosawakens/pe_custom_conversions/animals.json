@@ -1,0 +1,49 @@
+{
+  "values": {
+    "before": {
+      "#chaosawakens:fish": 96,
+      "chaosawakens:lava_eel": 128,
+      "chaosawakens:peacock_leg": 128,
+      "chaosawakens:crab_meat": 128,
+      "chaosawakens:peacock_feather": 144,
+      "chaosawakens:dead_stink_bug": 192
+    },
+    "conversion": [
+      {
+        "output": "chaosawakens:green_fish_bucket",
+        "ingredients": [
+          "minecraft:water_bucket",
+          "chaosawakens:green_fish"
+        ]
+      },
+      {
+        "output": "chaosawakens:rock_fish_bucket",
+        "ingredients": [
+          "minecraft:water_bucket",
+          "chaosawakens:rock_fish"
+        ]
+      },
+      {
+        "output": "chaosawakens:spark_fish_bucket",
+        "ingredients": [
+          "minecraft:water_bucket",
+          "chaosawakens:spark_fish"
+        ]
+      },
+      {
+        "output": "chaosawakens:wood_fish_bucket",
+        "ingredients": [
+          "minecraft:water_bucket",
+          "chaosawakens:wood_fish"
+        ]
+      },
+      {
+        "output": "chaosawakens:lava_eel_bucket",
+        "ingredients": [
+          "minecraft:lava_bucket",
+          "chaosawakens:lava_eel"
+        ]
+      }
+    ]
+  }
+}

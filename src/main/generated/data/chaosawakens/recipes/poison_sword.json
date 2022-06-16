@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:dead_stink_bug"
+    },
+    "X": {
+      "item": "chaosawakens:emerald_sword"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:poison_sword"
+  }
+}

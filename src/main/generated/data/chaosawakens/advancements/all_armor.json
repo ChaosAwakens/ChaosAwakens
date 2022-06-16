@@ -18,7 +18,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "copper_helmet": {
+    "copper_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -37,7 +37,7 @@
         ]
       }
     },
-    "peacock_feather_helmet": {
+    "peacock_feather_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -56,7 +56,7 @@
         ]
       }
     },
-    "tin_helmet": {
+    "tin_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -75,7 +75,7 @@
         ]
       }
     },
-    "lava_eel_helmet": {
+    "lava_eel_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -94,26 +94,7 @@
         ]
       }
     },
-    "moth_scale_helmet": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "chaosawakens:moth_scale_helmet"
-          },
-          {
-            "item": "chaosawakens:moth_scale_chestplate"
-          },
-          {
-            "item": "chaosawakens:moth_scale_leggings"
-          },
-          {
-            "item": "chaosawakens:moth_scale_boots"
-          }
-        ]
-      }
-    },
-    "silver_helmet": {
+    "silver_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -132,7 +113,7 @@
         ]
       }
     },
-    "pink_tourmaline_helmet": {
+    "pink_tourmaline_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -151,7 +132,7 @@
         ]
       }
     },
-    "lapis_helmet": {
+    "lapis_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -170,7 +151,7 @@
         ]
       }
     },
-    "emerald_helmet": {
+    "emerald_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -189,7 +170,7 @@
         ]
       }
     },
-    "amethyst_helmet": {
+    "amethyst_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -208,7 +189,7 @@
         ]
       }
     },
-    "cats_eye_helmet": {
+    "cats_eye_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -227,7 +208,7 @@
         ]
       }
     },
-    "tigers_eye_helmet": {
+    "tigers_eye_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -246,7 +227,7 @@
         ]
       }
     },
-    "platinum_helmet": {
+    "platinum_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -265,7 +246,7 @@
         ]
       }
     },
-    "experience_helmet": {
+    "experience_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -284,7 +265,7 @@
         ]
       }
     },
-    "ruby_helmet": {
+    "ruby_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -303,7 +284,7 @@
         ]
       }
     },
-    "ultimate_helmet": {
+    "ultimate_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -325,52 +306,49 @@
   },
   "requirements": [
     [
-      "copper_helmet"
+      "copper_armor"
     ],
     [
-      "peacock_feather_helmet"
+      "peacock_feather_armor"
     ],
     [
-      "tin_helmet"
+      "tin_armor"
     ],
     [
-      "lava_eel_helmet"
+      "lava_eel_armor"
     ],
     [
-      "moth_scale_helmet"
+      "silver_armor"
     ],
     [
-      "silver_helmet"
+      "pink_tourmaline_armor"
     ],
     [
-      "pink_tourmaline_helmet"
+      "lapis_armor"
     ],
     [
-      "lapis_helmet"
+      "emerald_armor"
     ],
     [
-      "emerald_helmet"
+      "amethyst_armor"
     ],
     [
-      "amethyst_helmet"
+      "cats_eye_armor"
     ],
     [
-      "cats_eye_helmet"
+      "tigers_eye_armor"
     ],
     [
-      "tigers_eye_helmet"
+      "platinum_armor"
     ],
     [
-      "platinum_helmet"
+      "experience_armor"
     ],
     [
-      "experience_helmet"
+      "ruby_armor"
     ],
     [
-      "ruby_helmet"
-    ],
-    [
-      "ultimate_helmet"
+      "ultimate_armor"
     ]
   ]
 }

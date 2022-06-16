@@ -16,50 +16,27 @@
   "carvers": {},
   "features": [
     [
-      "minecraft:ore_dirt",
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite",
-      "minecraft:ore_diorite",
-      "minecraft:ore_andesite",
-      "minecraft:ore_coal",
-      "minecraft:ore_iron",
-      "minecraft:ore_gold",
-      "minecraft:ore_redstone",
-      "minecraft:ore_diamond",
-      "minecraft:ore_lapis",
-      "minecraft:disk_sand",
-      "minecraft:disk_clay",
-      "minecraft:disk_gravel"
-    ],
-    [
       "minecraft:patch_large_fern",
       "minecraft:taiga_vegetation",
       "minecraft:flower_default",
       "minecraft:patch_grass_taiga_2",
       "minecraft:brown_mushroom_taiga",
       "minecraft:red_mushroom_taiga",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal",
+      "minecraft:patch_sugar_cane",
       "minecraft:patch_pumpkin",
+      "minecraft:spring_water",
+      "minecraft:spring_lava",
       "minecraft:patch_berry_sparse"
     ]
   ],
   "starts": [
-    "minecraft:village_taiga",
-    "minecraft:pillager_outpost"
+    "minecraft:mansion",
+    "minecraft:village_taiga"
   ],
   "spawners": {
     "monster": [
-      {
-        "type": "chaosawakens:robo_warrior",
-        "weight": 85,
-        "minCount": 1,
-        "maxCount": 3
-      },
-      {
-        "type": "chaosawakens:robo_sniper",
-        "weight": 75,
-        "minCount": 1,
-        "maxCount": 5
-      },
       {
         "type": "minecraft:spider",
         "weight": 100,
@@ -123,6 +100,24 @@
         "maxCount": 4
       },
       {
+        "type": "chaosawakens:carrot_pig",
+        "weight": 8,
+        "minCount": 3,
+        "maxCount": 3
+      },
+      {
+        "type": "chaosawakens:golden_carrot_pig",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 2
+      },
+      {
+        "type": "chaosawakens:enchanted_golden_carrot_pig",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
         "type": "minecraft:chicken",
         "weight": 10,
         "minCount": 4,
@@ -177,6 +172,6 @@
   "precipitation": "rain",
   "temperature": 0.25,
   "downfall": 0.8,
-  "category": "taiga",
+  "category": "none",
   "depth": 0.2
 }

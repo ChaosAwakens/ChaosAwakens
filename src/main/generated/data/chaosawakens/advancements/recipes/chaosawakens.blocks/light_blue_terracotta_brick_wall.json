@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:light_blue_terracotta_brick_wall"
+    ]
+  },
+  "criteria": {
+    "has_light_blue_terracotta_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:light_blue_terracotta_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:light_blue_terracotta_brick_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_light_blue_terracotta_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

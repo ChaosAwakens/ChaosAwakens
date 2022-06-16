@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "chaosawakens:peacock_leg"
-  },
-  "result": "chaosawakens:cooked_peacock_leg",
-  "experience": 1.0,
-  "cookingtime": 200
-}

@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "projecte:philosophers_stone"
+          },
+          {
+            "item": "chaosawakens:ruby"
+          }
+        ],
+        "result": {
+          "item": "chaosawakens:amethyst",
+          "count": 4
+        }
+      }
+    }
+  ]
+}

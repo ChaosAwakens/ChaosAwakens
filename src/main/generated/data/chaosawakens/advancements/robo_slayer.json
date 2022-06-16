@@ -11,13 +11,27 @@
     "description": {
       "translate": "advancements.chaosawakens.robo_slayer.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
+    "robo_pounder": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:robo_pounder"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
     "robo_sniper": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
@@ -48,6 +62,9 @@
     }
   },
   "requirements": [
+    [
+      "robo_pounder"
+    ],
     [
       "robo_sniper"
     ],

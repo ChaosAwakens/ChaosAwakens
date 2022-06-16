@@ -6,12 +6,21 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
           "functions": [
+            {
+              "function": "minecraft:furnace_smelt",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "flags": {
+                      "is_on_fire": true
+                    }
+                  },
+                  "entity": "this"
+                }
+              ]
+            },
             {
               "function": "minecraft:set_count",
               "count": {
@@ -34,11 +43,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -62,11 +66,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
           "functions": [
             {
               "function": "minecraft:set_count",

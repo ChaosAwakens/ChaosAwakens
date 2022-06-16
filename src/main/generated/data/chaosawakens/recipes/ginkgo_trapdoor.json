@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:ginkgo_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ginkgo_trapdoor"
+  }
+}

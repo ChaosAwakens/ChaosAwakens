@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "SBS",
+    "LLL"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/copper"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "S": {
+      "item": "minecraft:smooth_red_sandstone"
+    },
+    "L": {
+      "item": "minecraft:smooth_red_sandstone_slab"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:copper_defossilizer"
+  }
+}

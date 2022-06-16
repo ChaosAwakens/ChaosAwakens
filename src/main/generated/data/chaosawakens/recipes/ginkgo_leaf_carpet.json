@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "leaf_carpet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:ginkgo_leaves"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ginkgo_leaf_carpet"
+  }
+}

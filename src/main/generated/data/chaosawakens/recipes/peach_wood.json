@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:peach_log"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:peach_wood",
+    "count": 3
+  }
+}

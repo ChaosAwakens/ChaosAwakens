@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:zoo_cage_extra_small"
+    ]
+  },
+  "criteria": {
+    "has_forge:storage_blocks/iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/iron"
+          }
+        ]
+      }
+    },
+    "has_forge:storage_blocks/quartz": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/quartz"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:zoo_cage_extra_small"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_forge:storage_blocks/iron",
+      "has_forge:storage_blocks/quartz",
+      "has_the_recipe"
+    ]
+  ]
+}

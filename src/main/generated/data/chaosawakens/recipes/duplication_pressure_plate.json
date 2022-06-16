@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_pressure_plate",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:duplication_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:duplication_pressure_plate"
+  }
+}

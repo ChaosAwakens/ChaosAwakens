@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cyan_dye_from_cyan_rose"
+    ]
+  },
+  "criteria": {
+    "has_cyan_rose": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cyan_rose"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cyan_dye_from_cyan_rose"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cyan_rose",
+      "has_the_recipe"
+    ]
+  ]
+}

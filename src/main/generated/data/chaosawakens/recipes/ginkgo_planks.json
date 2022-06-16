@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "chaosawakens:ginkgo_logs"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:ginkgo_planks",
+    "count": 4
+  }
+}

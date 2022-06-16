@@ -1,48 +1,54 @@
 package io.github.chaosawakens.common.registry;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.registry.Registry;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class CAItemGroups {
+	static Random random = new Random();
 
-    // ITEM GROUPS
-    public static ItemGroup blocksItemGroup = new ItemGroup("chaosawakens_blocks_item_group") {
+	public static final ItemGroup BLOCKS = new ItemGroup("chaosawakens.blocks") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(CABlocks.TITANIUM_BLOCK.get());
+		}
+	};
 
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(CABlocks.TITANIUM_BLOCK.get());
-        }
-    };
+	public static final ItemGroup ITEMS = new ItemGroup("chaosawakens.items") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(CAItems.URANIUM_INGOT.get());
+		}
+	};
 
-    public static ItemGroup itemsItemGroup = new ItemGroup("chaosawakens_items_item_group") {
+	public static final ItemGroup FOOD = new ItemGroup("chaosawakens.food") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(CAItems.CORN.get());
+		}
+	};
 
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(CAItems.URANIUM_INGOT.get());
-        }
-    };
+	public static final ItemGroup EQUIPMENT = new ItemGroup("chaosawakens.equipment") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(CAItems.ULTIMATE_AXE.get());
+		}
+	};
 
-    public static ItemGroup foodItemGroup = new ItemGroup("chaosawakens_food_item_group") {
+	public static final ItemGroup SPAWN_EGGS = new ItemGroup("chaosawakens.spawn_eggs") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGG.get());
+		}
+	};
 
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(CAItems.CORN.get());
-        }
-    };
-
-    public static ItemGroup equipmentItemGroup = new ItemGroup("chaosawakens_equipment_item_group") {
-
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(CAItems.ULTIMATE_AXE.get());
-        }
-    };
-
-    public static ItemGroup eggsItemGroup = new ItemGroup("chaosawakens_eggs_item_group") {
-
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(CAItems.RAINBOW_ANT_SPAWN_EGG.get());
-        }
-    };
+	public static final ItemGroup FOSSILS = new ItemGroup("chaosawakens.fossils") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(random.nextInt(2))).get());
+		}
+	};
 }

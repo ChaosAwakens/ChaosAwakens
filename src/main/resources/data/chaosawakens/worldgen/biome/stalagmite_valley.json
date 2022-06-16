@@ -2,10 +2,10 @@
   "surface_builder": "chaosawakens:valley_stone",
   "depth": 0,
   "scale": 0.12,
-  "temperature": 0.2,
-  "downfall": 0.15,
-  "precipitation": "rain",
-  "category": "plains",
+  "temperature": 0.8,
+  "downfall": 0.0,
+  "precipitation": "none",
+  "category": "none",
   "player_spawn_friendly": true,
   "effects": {
     "sky_color": 7907327,
@@ -20,6 +20,7 @@
     }
   },
   "starts": [
+    "minecraft:mineshaft"
   ],
   "spawners": {
     "monster": [
@@ -67,6 +68,12 @@
       }
     ],
     "creature": [
+      {
+        "type": "chaosawakens:dimetrodon",
+        "weight": 8,
+        "minCount": 3,
+        "maxCount": 3
+      }
     ],
     "ambient": [
       {

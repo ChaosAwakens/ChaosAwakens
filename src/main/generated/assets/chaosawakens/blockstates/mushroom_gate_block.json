@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "chaosawakens:block/mushroom_gate_block"
+      },
+      {
+        "model": "chaosawakens:block/mushroom_gate_block"
+      }
+    ]
+  }
+}

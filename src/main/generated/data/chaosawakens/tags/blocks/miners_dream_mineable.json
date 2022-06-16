@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:base_stone_nether",
+    "#chaosawakens:base_stone_crystal",
+    "#forge:stone",
+    "#forge:netherrack",
+    "#forge:sandstone",
+    "#forge:end_stones",
+    "#forge:gravel",
+    "#forge:sand",
+    "#forge:dirt",
+    "minecraft:ice"
+  ]
+}

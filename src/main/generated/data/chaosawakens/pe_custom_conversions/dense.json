@@ -1,0 +1,11 @@
+{
+  "values": {
+    "before": {
+      "chaosawakens:dense_grass_block": 4,
+      "chaosawakens:dense_dirt": 4,
+      "chaosawakens:dense_grass": 4,
+      "chaosawakens:tall_dense_grass": 4,
+      "chaosawakens:thorny_sun": 32
+    }
+  }
+}

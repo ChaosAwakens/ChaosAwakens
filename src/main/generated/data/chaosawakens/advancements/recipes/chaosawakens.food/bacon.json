@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:bacon"
+    ]
+  },
+  "criteria": {
+    "has_porkchop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:porkchop"
+          }
+        ]
+      }
+    },
+    "has_salt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:salt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:bacon"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_porkchop",
+      "has_salt",
+      "has_the_recipe"
+    ]
+  ]
+}

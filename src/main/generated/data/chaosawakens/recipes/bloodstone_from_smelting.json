@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "chaosawakens:bloodstone_ore"
+  },
+  "result": "chaosawakens:bloodstone",
+  "experience": 0.1,
+  "cookingtime": 200
+}

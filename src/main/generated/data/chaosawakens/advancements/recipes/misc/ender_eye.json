@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ender_eye"
+    ]
+  },
+  "criteria": {
+    "has_ender_eye_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ender_eye_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ender_eye"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ender_eye_block",
+      "has_the_recipe"
+    ]
+  ]
+}

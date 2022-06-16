@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "chaosawakens:crystal_shard"
+    },
+    "#": {
+      "item": "chaosawakens:cats_eye_ingot"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:cats_eye_sword"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:kyanite_sword"
+    ]
+  },
+  "criteria": {
+    "has_kyanite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:kyanite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:kyanite_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_kyanite",
+      "has_the_recipe"
+    ]
+  ]
+}

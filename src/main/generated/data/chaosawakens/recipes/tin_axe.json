@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "#S",
+    " S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "item": "chaosawakens:tin_lump"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:tin_axe"
+  }
+}

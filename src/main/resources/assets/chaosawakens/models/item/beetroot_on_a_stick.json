@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "chaosawakens:item/beetroot_on_a_stick"
+  }
+}

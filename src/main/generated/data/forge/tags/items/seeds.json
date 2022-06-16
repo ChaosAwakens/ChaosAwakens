@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:corn_seeds",
+    "chaosawakens:lettuce_seeds",
+    "chaosawakens:radish_seeds",
+    "chaosawakens:strawberry_seeds",
+    "chaosawakens:tomato_seeds"
+  ]
+}

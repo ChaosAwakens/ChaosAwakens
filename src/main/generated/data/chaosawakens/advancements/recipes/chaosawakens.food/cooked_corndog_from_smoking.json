@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cooked_corndog_from_smoking"
+    ]
+  },
+  "criteria": {
+    "has_corndog": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:corndog"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cooked_corndog_from_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_corndog",
+      "has_the_recipe"
+    ]
+  ]
+}

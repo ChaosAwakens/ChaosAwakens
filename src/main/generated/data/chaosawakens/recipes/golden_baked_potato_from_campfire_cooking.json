@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "chaosawakens:golden_potato"
+  },
+  "result": "chaosawakens:golden_baked_potato",
+  "experience": 0.35,
+  "cookingtime": 600
+}

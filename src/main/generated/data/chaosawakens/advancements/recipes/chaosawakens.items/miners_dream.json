@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:miners_dream"
+    ]
+  },
+  "criteria": {
+    "has_cactus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:cactus"
+          }
+        ]
+      }
+    },
+    "has_forge:storage_blocks/redstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/redstone"
+          }
+        ]
+      }
+    },
+    "has_gunpowder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:gunpowder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:miners_dream"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cactus",
+      "has_forge:storage_blocks/redstone",
+      "has_gunpowder",
+      "has_the_recipe"
+    ]
+  ]
+}

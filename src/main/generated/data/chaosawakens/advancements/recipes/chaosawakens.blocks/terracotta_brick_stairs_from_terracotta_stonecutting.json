@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:terracotta_brick_stairs_from_terracotta_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_terracotta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:terracotta"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:terracotta_brick_stairs_from_terracotta_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_terracotta",
+      "has_the_recipe"
+    ]
+  ]
+}

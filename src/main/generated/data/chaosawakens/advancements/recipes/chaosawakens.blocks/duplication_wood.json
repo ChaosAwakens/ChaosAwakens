@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:duplication_wood"
+    ]
+  },
+  "criteria": {
+    "has_duplication_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:duplication_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:duplication_wood"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_duplication_log",
+      "has_the_recipe"
+    ]
+  ]
+}

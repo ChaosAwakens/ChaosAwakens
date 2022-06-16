@@ -1,0 +1,47 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "chaosawakens:bloodstone"
+          ]
+        },
+        "criteria": {
+          "has_sunstone": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "item": "projecte:philosophers_stone"
+                },
+                {
+                  "item": "chaosawakens:sunstone"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "chaosawakens:bloodstone"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_sunstone",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

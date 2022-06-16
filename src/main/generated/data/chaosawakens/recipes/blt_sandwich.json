@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bread"
+    },
+    {
+      "item": "chaosawakens:lettuce"
+    },
+    {
+      "item": "chaosawakens:tomato"
+    },
+    {
+      "item": "chaosawakens:cooked_bacon"
+    },
+    {
+      "item": "chaosawakens:butter"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:blt_sandwich"
+  }
+}

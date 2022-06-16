@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:copper_sword"
+    ]
+  },
+  "criteria": {
+    "has_copper_lump": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:copper_lump"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:copper_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_lump",
+      "has_the_recipe"
+    ]
+  ]
+}

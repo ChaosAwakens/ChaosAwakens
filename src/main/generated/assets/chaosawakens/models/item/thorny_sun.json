@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chaosawakens:block/thorny_sun_top"
+  }
+}

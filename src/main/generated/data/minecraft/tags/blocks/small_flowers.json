@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:cyan_rose",
+    "chaosawakens:red_rose",
+    "chaosawakens:paeonia",
+    "chaosawakens:blue_bulb",
+    "chaosawakens:pink_bulb",
+    "chaosawakens:purple_bulb",
+    "chaosawakens:red_crystal_flower",
+    "chaosawakens:green_crystal_flower",
+    "chaosawakens:yellow_crystal_flower",
+    "chaosawakens:blue_crystal_flower",
+    "chaosawakens:red_crystal_growth",
+    "chaosawakens:blue_crystal_growth",
+    "chaosawakens:green_crystal_growth",
+    "chaosawakens:yellow_crystal_growth",
+    "chaosawakens:orange_crystal_growth",
+    "chaosawakens:pink_crystal_growth"
+  ]
+}

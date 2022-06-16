@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:queen_scale_battle_axe"
+    ]
+  },
+  "criteria": {
+    "has_battle_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:battle_axe"
+          }
+        ]
+      }
+    },
+    "has_queen_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:queen_scale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:queen_scale_battle_axe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_battle_axe",
+      "has_queen_scale",
+      "has_the_recipe"
+    ]
+  ]
+}

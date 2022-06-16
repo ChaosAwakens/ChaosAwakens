@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chaosawakens:block/ginkgo_log",
+    "end": "chaosawakens:block/ginkgo_log_top"
+  }
+}

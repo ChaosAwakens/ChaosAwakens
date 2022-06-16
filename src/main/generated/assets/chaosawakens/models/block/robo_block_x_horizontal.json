@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "side": "chaosawakens:block/robo_block_x",
+    "end": "chaosawakens:block/robo_block_x_top"
+  }
+}

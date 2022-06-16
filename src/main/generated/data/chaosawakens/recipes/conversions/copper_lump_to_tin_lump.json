@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "projecte:philosophers_stone"
+          },
+          {
+            "item": "chaosawakens:copper_lump"
+          },
+          {
+            "item": "chaosawakens:copper_lump"
+          }
+        ],
+        "result": {
+          "item": "chaosawakens:tin_lump"
+        }
+      }
+    }
+  ]
+}

@@ -16,54 +16,30 @@
   "carvers": {},
   "features": [
     [
-      "minecraft:fossil",
-      "minecraft:monster_room"
+      "minecraft:fossil"
     ],
     [
       "minecraft:desert_well"
     ],
     [
-      "minecraft:ore_dirt",
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite",
-      "minecraft:ore_diorite",
-      "minecraft:ore_andesite",
-      "minecraft:ore_coal",
-      "minecraft:ore_iron",
-      "minecraft:ore_gold",
-      "minecraft:ore_redstone",
-      "minecraft:ore_diamond",
-      "minecraft:ore_lapis",
-      "minecraft:disk_sand",
-      "minecraft:disk_clay",
-      "minecraft:disk_gravel"
-    ],
-    [
       "minecraft:flower_default",
       "minecraft:patch_grass_badlands",
       "minecraft:patch_dead_bush_2",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal",
+      "minecraft:patch_sugar_cane_desert",
       "minecraft:patch_pumpkin",
-      "minecraft:patch_cactus_desert"
+      "minecraft:patch_cactus_desert",
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
     ]
   ],
   "starts": [
-    "minecraft:village_desert",
-    "minecraft:pillager_outpost"
+    "minecraft:mansion",
+    "minecraft:village_desert"
   ],
   "spawners": {
     "monster": [
-      {
-        "type": "chaosawakens:robo_warrior",
-        "weight": 85,
-        "minCount": 1,
-        "maxCount": 3
-      },
-      {
-        "type": "chaosawakens:robo_sniper",
-        "weight": 75,
-        "minCount": 1,
-        "maxCount": 5
-      },
       {
         "type": "minecraft:spider",
         "weight": 100,
@@ -134,6 +110,6 @@
   "precipitation": "none",
   "temperature": 2,
   "downfall": 0,
-  "category": "desert",
+  "category": "none",
   "depth": 0.125
 }

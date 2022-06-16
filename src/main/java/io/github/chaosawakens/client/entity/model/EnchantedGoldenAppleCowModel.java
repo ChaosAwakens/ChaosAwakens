@@ -1,43 +1,59 @@
 package io.github.chaosawakens.client.entity.model;
 
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.processor.IBone;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-@OnlyIn(Dist.CLIENT)
-public class EnchantedGoldenAppleCowModel<T extends Entity> extends CAQuadrupedModel<T> {
-    public EnchantedGoldenAppleCowModel() {
-        super(12, 0.0F, false, 10.0F, 4.0F, 2.0F, 2.0F, 24);
+public class EnchantedGoldenAppleCowModel extends AnimatedGeoModel<EnchantedGoldenAppleCowEntity> {
+	@Override
+	public ResourceLocation getModelLocation(EnchantedGoldenAppleCowEntity object) {
+		return new ResourceLocation(ChaosAwakens.MODID, "geo/apple_cow.geo.json");
+	}
 
-        this.headModel = new ModelRenderer(this, 0, 0);
-        this.headModel.addBox(-4.0F, -4.0F, -6.0F, 8.0F, 8.0F, 6.0F, 0.0F);
-        this.headModel.setPos(0.0F, 4.0F, -8.0F);
-        this.headModel.texOffs(22, 0).addBox(-5.0F, -5.0F, -4.0F, 1.0F, 3.0F, 1.0F, 0.0F);
-        this.headModel.texOffs(22, 0).addBox(4.0F, -5.0F, -4.0F, 1.0F, 3.0F, 1.0F, 0.0F);
+	@Override
+	public ResourceLocation getTextureLocation(EnchantedGoldenAppleCowEntity object) {
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/apple_cow/golden_apple_cow.png");
+	}
 
-        this.modelGlint = new ModelRenderer(this, 32, 0);
-        this.modelGlint.addBox(-4.0F, -4.0F, -6.0F, 8.0F, 8.0F, 6.0F, 0.0F);
-        this.modelGlint.setPos(0.0F, 4.0F, -8.0F);
-        this.modelGlint.texOffs(22, 0).addBox(-5.0F, -5.0F, -4.0F, 1.0F, 3.0F, 1.0F, 0.0F);
-        this.modelGlint.texOffs(22, 0).addBox(4.0F, -5.0F, -4.0F, 1.0F, 3.0F, 1.0F, 0.0F);
+	@Override
+	public ResourceLocation getAnimationFileLocation(EnchantedGoldenAppleCowEntity object) {
+		return new ResourceLocation(ChaosAwakens.MODID, "animations/apple_cow.animation.json");
+	}
 
-        this.body = new ModelRenderer(this, 18, 4);
-        this.body.addBox(-6.0F, -10.0F, -7.0F, 12.0F, 18.0F, 10.0F, 0.0F);
-        this.body.setPos(0.0F, 5.0F, 2.0F);
-        this.body.texOffs(52, 0).addBox(-2.0F, 2.0F, -8.0F, 4.0F, 6.0F, 1.0F);
+	@Override
+	public void setLivingAnimations(EnchantedGoldenAppleCowEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
+		super.setLivingAnimations(entity, uniqueID, customPredicate);
 
-        --this.legBackRight.x;
-        ++this.legBackLeft.x;
-        this.legBackRight.z += 0.0F;
-        this.legBackLeft.z += 0.0F;
-        --this.legFrontRight.x;
-        ++this.legFrontLeft.x;
-        --this.legFrontRight.z;
-        --this.legFrontLeft.z;
-    }
-
-    public ModelRenderer getHead() {
-        return this.headModel;
-    }
+		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);
+		IBone root = this.getAnimationProcessor().getBone("root");
+		IBone head = this.getAnimationProcessor().getBone("head");
+		if (data.isChild) {
+			root.setScaleX(0.5f);
+			root.setScaleY(0.5f);
+			root.setScaleZ(0.5f);
+			root.setPivotY(-0.5f);
+		} else {
+			root.setScaleX(1.0f);
+			root.setScaleY(1.0f);
+			root.setScaleZ(1.0f);
+		}
+		if (data.isChild) {
+			head.setScaleX(2f);
+			head.setScaleY(2f);
+			head.setScaleZ(2f);
+		} else {
+			head.setScaleX(1.0f);
+			head.setScaleY(1.0f);
+			head.setScaleZ(1.0f);
+		}
+		EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
+		head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
+		head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
+	}
 }

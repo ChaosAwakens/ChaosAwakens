@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:purple_dye_from_paeonia"
+    ]
+  },
+  "criteria": {
+    "has_paeonia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:paeonia"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:purple_dye_from_paeonia"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_paeonia",
+      "has_the_recipe"
+    ]
+  ]
+}

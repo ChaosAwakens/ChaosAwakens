@@ -9,15 +9,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ThunderStaffProjectileRender extends EntityRenderer<ThunderStaffProjectileEntity> {
-    public static final ResourceLocation ARROW_TEXTURE = new ResourceLocation("textures/entity/projectiles/arrow.png");
+	public static final ResourceLocation ARROW_TEXTURE = new ResourceLocation("textures/entity/projectiles/arrow.png");
 
-    public ThunderStaffProjectileRender(EntityRendererManager manager) {
-        super(manager);
-    }
+	public ThunderStaffProjectileRender(EntityRendererManager manager) {
+		super(manager);
+	}
 
-    public ResourceLocation getTextureLocation(ThunderStaffProjectileEntity entity) {
-        return ARROW_TEXTURE;
-    }
-
+	public ResourceLocation getTextureLocation(ThunderStaffProjectileEntity entity) {
+		return ARROW_TEXTURE;
+	}
 }
-

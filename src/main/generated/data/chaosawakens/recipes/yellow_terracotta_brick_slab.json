@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:yellow_terracotta_bricks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:yellow_terracotta_brick_slab",
+    "count": 6
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "projecte",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "projecte:philosophers_stone"
+          },
+          {
+            "item": "chaosawakens:silver_lump"
+          },
+          {
+            "item": "chaosawakens:silver_lump"
+          }
+        ],
+        "result": {
+          "item": "chaosawakens:platinum_lump",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:terracotta_brick_wall_from_terracotta_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_terracotta_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:terracotta_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:terracotta_brick_wall_from_terracotta_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_terracotta_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

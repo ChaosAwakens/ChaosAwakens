@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:purple_dye_from_purple_bulb"
+    ]
+  },
+  "criteria": {
+    "has_purple_bulb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:purple_bulb"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:purple_dye_from_purple_bulb"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_purple_bulb",
+      "has_the_recipe"
+    ]
+  ]
+}

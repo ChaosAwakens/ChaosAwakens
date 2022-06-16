@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cats_eye_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_cats_eye_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cats_eye_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cats_eye_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cats_eye_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

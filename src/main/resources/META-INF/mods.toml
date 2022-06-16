@@ -1,22 +1,24 @@
 modLoader="javafml"
 loaderVersion="[36,)"
-issueTrackerURL="https://github.com/Chaos-Awakens-Mod-Team/ChaosAwakens/issues"
-displayURL="https://chaosawakens.github.io/downloads.html"
-license="All Rights Reserved. Code from before v0.9 is licensed GNU LGPL v2.1."
+issueTrackerURL="https://github.com/ChaosAwakens/ChaosAwakens/issues"
+license="All Rights Reserved."
 
 [[mods]]
 modId="chaosawakens"
 version="${file.jarVersion}"
 displayName="Chaos Awakens"
+updateJSONURL="https://raw.githubusercontent.com/ChaosAwakens/ChaosAwakens/1.16.5-forge/update.json"
+displayURL="https://chaosawakens.github.io/#downloadsDiv"
 authors="Chaos Team"
-description='''Relive the old OreSpawn mod in newer Minecraft versions!'''
+description='''Relive the old Orespawn from 1.7.10 in newer Minecraft versions!'''
+logoFile="logo.png"
 itemIcon="chaosawakens:ultimate_pickaxe"
 configBackground="chaosawakens:textures/gui/advancement_bg.png"
 
 [[dependencies.chaosawakens]]
 modId="forge"
 mandatory=true
-versionRange="[36,)"
+versionRange="[36.2.20,)"
 ordering="NONE"
 side="BOTH"
 
@@ -30,7 +32,14 @@ side="BOTH"
 [[dependencies.chaosawakens]]
 modId="geckolib3"
 mandatory=true
-versionRange="[3.0,)"
+versionRange="[3.0.77,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.chaosawakens]]
+modId="attributefix"
+mandatory=true
+versionRange="[10.1.4,)"
 ordering="NONE"
 side="BOTH"
 

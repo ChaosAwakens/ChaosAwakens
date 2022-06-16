@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:extreme_torch_from_redstone_torch"
+    ]
+  },
+  "criteria": {
+    "has_redstone_torch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:redstone_torch"
+          }
+        ]
+      }
+    },
+    "has_minecraft:coals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:coals"
+          }
+        ]
+      }
+    },
+    "has_sunstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:sunstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:extreme_torch_from_redstone_torch"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_redstone_torch",
+      "has_minecraft:coals",
+      "has_sunstone",
+      "has_the_recipe"
+    ]
+  ]
+}

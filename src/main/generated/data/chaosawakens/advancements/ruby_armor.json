@@ -18,7 +18,7 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
-    "ruby_helmet": {
+    "ruby_armor": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -40,7 +40,7 @@
   },
   "requirements": [
     [
-      "ruby_helmet"
+      "ruby_armor"
     ]
   ]
 }

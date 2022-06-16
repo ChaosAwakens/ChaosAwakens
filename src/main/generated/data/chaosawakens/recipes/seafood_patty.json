@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bread"
+    },
+    {
+      "item": "chaosawakens:lettuce"
+    },
+    {
+      "item": "chaosawakens:tomato"
+    },
+    {
+      "item": "chaosawakens:cooked_crab_meat"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:seafood_patty"
+  }
+}

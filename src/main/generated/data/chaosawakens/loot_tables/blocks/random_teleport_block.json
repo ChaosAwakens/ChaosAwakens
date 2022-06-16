@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:random_teleport_block"
+          "name": "minecraft:air"
         }
       ],
       "conditions": [

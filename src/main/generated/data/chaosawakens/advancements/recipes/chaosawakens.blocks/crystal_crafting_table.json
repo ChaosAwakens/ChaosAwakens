@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:crystal_crafting_table"
+    ]
+  },
+  "criteria": {
+    "has_crystal_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:crystal_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:crystal_crafting_table"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gold_block"
+    },
+    "X": {
+      "item": "minecraft:carrot"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:enchanted_golden_carrot"
+  }
+}

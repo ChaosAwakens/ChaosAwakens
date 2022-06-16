@@ -10,16 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-/**
- * @author invalid2
- */
 public class CornBodyBlock extends CropBodyPlantBlock {
-	
-	/**
-	 * @param properties
-	 * @param direction
-	 * @param shape
-	 */
 	public CornBodyBlock(Properties properties, Direction direction, VoxelShape shape) {
 		super(properties, direction, shape, false);
 	}
@@ -28,10 +19,9 @@ public class CornBodyBlock extends CropBodyPlantBlock {
 	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(CAItems.CORN_SEEDS.get());
 	}
-	
+
 	@Override
 	protected AbstractTopPlantBlock getHeadBlock() {
 		return CABlocks.CORN_TOP_BLOCK.get();
 	}
-	
 }

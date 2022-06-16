@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancements.chaosawakens.ent_destroyer.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,

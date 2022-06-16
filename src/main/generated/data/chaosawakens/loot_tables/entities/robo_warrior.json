@@ -211,12 +211,6 @@
               "condition": "minecraft:killed_by_player"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 1
-            }
-          ],
           "name": "minecraft:hopper"
         },
         {

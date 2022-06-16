@@ -9,15 +9,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RayGunProjectileRender extends EntityRenderer<RayGunProjectileEntity> {
-    public static final ResourceLocation ARROW_TEXTURE = new ResourceLocation("textures/entity/projectiles/arrow.png");
+	public static final ResourceLocation ARROW_TEXTURE = new ResourceLocation("textures/entity/projectiles/arrow.png");
 
-    public RayGunProjectileRender(EntityRendererManager manager) {
-        super(manager);
-    }
+	public RayGunProjectileRender(EntityRendererManager manager) {
+		super(manager);
+	}
 
-    public ResourceLocation getTextureLocation(RayGunProjectileEntity entity) {
-        return ARROW_TEXTURE;
-    }
+	public ResourceLocation getTextureLocation(RayGunProjectileEntity entity) {
+		return ARROW_TEXTURE;
+	}
 
 }
-

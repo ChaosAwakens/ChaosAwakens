@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:peach_wood"
+    ]
+  },
+  "criteria": {
+    "has_peach_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:peach_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:peach_wood"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_peach_log",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:lime_terracotta_brick_slab"
+    ]
+  },
+  "criteria": {
+    "has_lime_terracotta_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:lime_terracotta_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:lime_terracotta_brick_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lime_terracotta_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

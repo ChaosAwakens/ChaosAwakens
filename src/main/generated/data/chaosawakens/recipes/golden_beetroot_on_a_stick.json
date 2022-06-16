@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    " SB",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "B": {
+      "item": "chaosawakens:golden_beetroot"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:golden_beetroot_on_a_stick"
+  }
+}

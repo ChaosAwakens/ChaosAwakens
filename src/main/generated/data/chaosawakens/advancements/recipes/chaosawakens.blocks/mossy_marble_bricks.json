@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:mossy_marble_bricks"
+    ]
+  },
+  "criteria": {
+    "has_marble_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:marble_bricks"
+          }
+        ]
+      }
+    },
+    "has_vine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:vine"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:mossy_marble_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_marble_bricks",
+      "has_vine",
+      "has_the_recipe"
+    ]
+  ]
+}
