@@ -45,8 +45,8 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.UUID;
 
 public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimatable, ISyncable {
-	private static final int CHAINSAW_LENGTH = 12;
-	private static final int CHAINSAW_WIDTH = 12;
+	private static final int CHAINSAW_LENGTH = 6;
+	private static final int CHAINSAW_WIDTH = 6;
 	private static final int CHAINSAW_HEIGHT = 48;
 	private static final String CONTROLLER_NAME = "popupController";
 	private static final int ANIM = 0;
