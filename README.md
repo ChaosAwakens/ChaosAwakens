@@ -35,11 +35,13 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 **Therefore, not only we're not going to use the OreSpawn assets, we're also not going to provide, promote or endorse any resource pack that attempts to port them.**
 
 ## Credits/Staff Team
-**Project Lead:** Funky Monk, WeirdNerd
+**Project Leads:** Funky Monk, WeirdNerd
+
+**Organizers:** Phwee, VDA Spoop
 
 **Animators:** Absolute Kun, Aqu, SnakeMaster, Pugman665544
 
-**Builders:** Blackout, Funky Monk, Meme Man, TheLoneCyberman, Unanimous, omarboi
+**Builders:** Blackout, Funky Monk, Meme Man, TheLoneCyberman, Unanimous, Phwee, omarboi
 
 **Coders:** Blackout, LuisRandomness, Meme Man, WeirdNerd
 
