@@ -12,6 +12,7 @@ import io.github.chaosawakens.common.integration.TheOneProbePlugin;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.*;
+import io.github.chaosawakens.server.ServerSetupEvent;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -71,6 +72,7 @@ public class ChaosAwakens {
 		eventBus.addListener(CommonSetupEvent::onFMLCommonSetupEvent);
 		eventBus.addListener(this::gatherData);
 		eventBus.addListener(this::onInterModEnqueueEvent);
+		eventBus.addListener(ServerSetupEvent::onFMLServerSetupEvent);
 		
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
@@ -133,8 +135,6 @@ public class ChaosAwakens {
 			dataGenerator.addProvider(new CATagProvider.CABlockTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CATagProvider.CAEntityTypeTagProvider(dataGenerator, existing));
-//			dataGenerator.addProvider(new CABiomeTypeProvider(dataGenerator));
-//			dataGenerator.addProvider(new CATagProvider.CAFluidTagProvider(dataGenerator, existing));
 		}
 	}
 
