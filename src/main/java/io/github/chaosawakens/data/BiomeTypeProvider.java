@@ -24,6 +24,7 @@ public abstract class BiomeTypeProvider implements IDataProvider {
 		this.generator = generator;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public final void run(DirectoryCache cache) {
 		this.biomeType.clear();
@@ -45,6 +46,7 @@ public abstract class BiomeTypeProvider implements IDataProvider {
 
 	protected abstract void addBiomeTypes();
 
+	@SuppressWarnings("unlikely-arg-type")
 	protected BiomeTypeBuilder createBiomeType(ResourceLocation id) {
 		if (this.biomeType.containsValue(id)) throw new RuntimeException("Biome type '" + id + "' has already been registered.");
 		else {

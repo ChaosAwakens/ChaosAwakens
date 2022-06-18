@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 
 public class BiomeTypeBuilder {
+	@SuppressWarnings("unused")
 	private final ResourceLocation id;
 	private boolean playerSpawnFriendly;
 	private String precipitation;

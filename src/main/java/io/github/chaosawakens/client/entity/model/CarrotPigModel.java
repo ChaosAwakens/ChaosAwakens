@@ -24,6 +24,7 @@ public class CarrotPigModel extends AnimatedGeoModel<CarrotPigEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/carrot_pig.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(CarrotPigEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

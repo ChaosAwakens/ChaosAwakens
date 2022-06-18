@@ -16,6 +16,7 @@ public class CrystalBlock extends Block {
 		super(properties);
 	}
 
+	@SuppressWarnings("deprecation")
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public boolean skipRendering(BlockState state, BlockState state1, Direction direction) {

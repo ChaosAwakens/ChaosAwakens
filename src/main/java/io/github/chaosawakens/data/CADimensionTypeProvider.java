@@ -1,11 +1,9 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.common.registry.CADimensions;
-import io.github.chaosawakens.common.registry.CAItems;
-import net.minecraft.advancements.Criterion;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.ResourceLocation;
 
 public class CADimensionTypeProvider extends DimensionTypeProvider {
 	public CADimensionTypeProvider(DataGenerator generator) {

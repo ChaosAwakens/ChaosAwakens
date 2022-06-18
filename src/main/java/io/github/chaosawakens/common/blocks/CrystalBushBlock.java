@@ -19,6 +19,7 @@ public class CrystalBushBlock extends Block implements IPlantable {
 		return state.is(CABlocks.CRYSTAL_GRASS_BLOCK.get());
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlockState updateShape(BlockState state, Direction direction, BlockState state1, IWorld world, BlockPos pos, BlockPos pos1) {
 		return !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, state1, world, pos, pos1);
 	}
@@ -33,6 +34,7 @@ public class CrystalBushBlock extends Block implements IPlantable {
 		return state.getFluidState().isEmpty();
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType pathType) {
 		return pathType == PathType.AIR && !this.hasCollision || super.isPathfindable(state, world, pos, pathType);
 	}

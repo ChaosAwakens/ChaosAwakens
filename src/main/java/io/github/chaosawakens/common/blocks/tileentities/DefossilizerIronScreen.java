@@ -1,10 +1,9 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.chaosawakens.ChaosAwakens;
-import mezz.jei.api.gui.handlers.IGuiProperties;
-import mezz.jei.api.gui.handlers.IScreenHandler;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;

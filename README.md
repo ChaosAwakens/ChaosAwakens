@@ -7,9 +7,16 @@ All downloads are now located at our website that is located [here](https://chao
 Due to drama and various mass reports by unknown sources, the mod was taken down from [*CurseForge*](https://www.curseforge.com/minecraft/mc-mods) and cannot be re-uploaded from this point forward. Please do **not** harass **anyone** in the *CurseForge* moderation team or **any** competitor mod developer for what you think they did. They are humans and we are too, and we all make mistakes.
 
 ### Required Dependencies
-**1.16.5 (Forge):** [Forge v36.1.1 and up](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html), [GeckoLib v3.0 and up](https://www.curseforge.com/minecraft/mc-mods/geckolib/files/all?filter-game-version=1738749986%3a70886)
+**1.16.5 (Forge):** [Forge v36.1.1 and up](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html), [GeckoLib v3.0 and up](https://www.curseforge.com/minecraft/mc-mods/geckolib/files/all?filter-game-version=1738749986%3a70886) and [AttributeFix v10.1.4 and above](https://www.curseforge.com/minecraft/mc-mods/attributefix/files/all?filter-game-version=1738749986%3a70886)
 ### Recommended Dependencies
-[AttributeFix v10.0.1 and above](https://www.curseforge.com/minecraft/mc-mods/attributefix/files/all?filter-game-version=1738749986%3a70886)
+**1.16.5 (Forge):** [Just Enough Items, any recent version.](https://www.curseforge.com/minecraft/mc-mods/jei/files/all?filter-game-version=2020709689%3A8203), [Just Enough Resources, requires JEI, any recent version.](https://www.curseforge.com/minecraft/mc-mods/just-enough-resources-jer/files/all?filter-game-version=2020709689%3A8203) [Stable version of JER recommended.)
+
+### Mods w/ Chaos Awakens Integration
+**1.16.5 (Forge):**  [Jade🔍](https://www.curseforge.com/minecraft/mc-mods/jade/files/all), [Just Enough Effect Descriptions](https://www.curseforge.com/minecraft/mc-mods/just-enough-effect-descriptions-jeed/files/all), [ProjectE](https://www.curseforge.com/minecraft/mc-mods/projecte/files/all), [The One Probe (TOP)](https://www.curseforge.com/minecraft/mc-mods/the-one-probe/files/all)
+
+### Official Addons for Chaos Awakens
+
+**1.16.5 (Forge):** [Pure Chaos (by Blackout, Renato, and 𝒯𝟦☯𝓃𝑒™)](https://revstudios.cf/mods/pure-chaos/) [Chaos Additions (By Blackout and 𝒯𝟦☯𝓃𝑒™)](https://blackout03.github.io/mods/chaos-additions.html) [Spartan Awakens (By Aqu and 𝒯𝟦☯𝓃𝑒™, requires Spartan Weaponry too)](https://modrinth.com/mod/spartanawakens)
 
 ## FAQ
 ### Q: Will this mod be ported to version x.x.x or other mod loaders?
@@ -35,18 +42,20 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 **Therefore, not only we're not going to use the OreSpawn assets, we're also not going to provide, promote or endorse any resource pack that attempts to port them.**
 
 ## Credits/Staff Team
-**Project Lead:** Funky Monk, WeirdNerd
+**Project Leads:** Funky Monk, WeirdNerd
 
-**Animators:** Absolute Kun, Aqu, SnakeMaster
+**Organizers:** Phwee, VDA Spoop
 
-**Builders:** Blackout, Funky Monk, Meme Man, TheLoneCyberman
+**Animators:** Absolute Kun, Aqu, Pugman665544, SnakeMaster
+
+**Builders:** Blackout, Funky Monk, Meme Man, omarboi, Phwee, TheLoneCyberman, Unanimous
 
 **Coders:** Blackout, LuisRandomness, Meme Man, WeirdNerd
 
-**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Renato, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
+**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Pugman665544, Renato, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
 
-**Sound Designers:** mattster, WeirdNerd
+**Sound Designers:** WeirdNerd
 
-**Texturers:** Absolute Kun, BS Guy, ChromaticAeternus, DracoTyoshi, LuisRandomness, Memer Teamer, Renato, Santispik3, SnakeMaster, Technocreeper, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
+**Texturers:** Absolute Kun, ChromaticAeternus, LuisRandomness, Memer Teamer, Renato, Santispik3, SnakeMaster, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
 
-**Former Members:** AlexanderTheNotSoGreat, Crosby, crydigo, HugoMage, Lymen, Sipilus, thesleepingdevil
+**Former Members:** AlexanderTheNotSoGreat, BS Guy, Crosby, crydigo, HugoMage, Lymen, mattster, Sipilus, Technocreeper, thesleepingdevil

@@ -15,12 +15,14 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+@SuppressWarnings("rawtypes")
 @OnlyIn(Dist.CLIENT)
 public abstract class LaserRenderer extends EntityRenderer {
 	public LaserRenderer(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void render(Entity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
 		matrixStackIn.pushPose();
 		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.yRotO, entityIn.yRot) - 90.0F));

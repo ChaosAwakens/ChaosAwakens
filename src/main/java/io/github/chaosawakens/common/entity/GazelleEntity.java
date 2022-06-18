@@ -2,11 +2,8 @@ package io.github.chaosawakens.common.entity;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.api.IMobPanic;
-import io.github.chaosawakens.common.entity.ai.HerdPanicGoal;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -54,7 +51,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable, IMobPanic {
+public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable {
 	private AnimationFactory factory = new AnimationFactory(this);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
@@ -215,6 +212,7 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
 	}
 
+	@SuppressWarnings("unused")
 	private int getRandomGazelleType(IWorld world) {
 		Biome biome = world.getBiome(this.blockPosition());
         int i = this.random.nextInt(5);
@@ -230,18 +228,4 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
     public float getStandingEyeHeight(Pose pose, EntitySize size) {
     	return this.isBaby() ? size.height * 0.75F : 1.1F;
     }
-
-	@Override
-	public boolean canAnimalPanic() {
-		return true;
-	}
-
-	@Override
-	public boolean canMonsterPanic() {
-		return false;
-	}
-
-	@Override
-	public void panic() {		
-	}
 }

@@ -1,13 +1,13 @@
 package io.github.chaosawakens.common.util;
 
 import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
@@ -15,8 +15,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.EnumSet;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class EnumUtils {
@@ -172,199 +170,6 @@ public class EnumUtils {
 		@Override
 		public Ingredient getRepairIngredient() {
 			return this.repairMaterial.get();
-		}
-	}
-	
-	// TODO: Efficiency
-	public enum CAGearEnumList {
-		AMETHYST_SWORD(CAItems.AMETHYST_SWORD.get().getRegistryName().toString(), CAItems.AMETHYST_SWORD.get()),
-		AMETHYST_PICKAXE(CAItems.AMETHYST_PICKAXE.get().getRegistryName().toString(), CAItems.AMETHYST_PICKAXE.get()),
-		AMETHYST_AXE(CAItems.AMETHYST_AXE.get().getRegistryName().toString(), CAItems.AMETHYST_AXE.get()),
-		AMETHYST_SHOVEL(CAItems.AMETHYST_SHOVEL.get().getRegistryName().toString(), CAItems.AMETHYST_SHOVEL.get()),
-		AMETHYST_HOE(CAItems.AMETHYST_HOE.get().getRegistryName().toString(), CAItems.AMETHYST_HOE.get()),
-		ATTITUDE_ADJUSTER(CAItems.ATTITUDE_ADJUSTER.get().getRegistryName().toString(), CAItems.ATTITUDE_ADJUSTER.get()),
-		BATTLE_AXE(CAItems.BATTLE_AXE.get().getRegistryName().toString(), CAItems.BATTLE_AXE.get()),
-		BIG_BERTHA(CAItems.BIG_BERTHA.get().getRegistryName().toString(), CAItems.BIG_BERTHA.get()),
-		BIG_HAMMER(CAItems.BIG_HAMMER.get().getRegistryName().toString(), CAItems.BIG_HAMMER.get()),
-		CATS_EYE_SWORD(CAItems.CATS_EYE_SWORD.get().getRegistryName().toString(), CAItems.CATS_EYE_SWORD.get()),
-		CATS_EYE_PICKAXE(CAItems.CATS_EYE_PICKAXE.get().getRegistryName().toString(), CAItems.CATS_EYE_PICKAXE.get()),
-		CATS_EYE_AXE(CAItems.CATS_EYE_AXE.get().getRegistryName().toString(), CAItems.CATS_EYE_AXE.get()),
-		CATS_EYE_SHOVEL(CAItems.CATS_EYE_SHOVEL.get().getRegistryName().toString(), CAItems.CATS_EYE_SHOVEL.get()),
-		CATS_EYE_HOE(CAItems.CATS_EYE_HOE.get().getRegistryName().toString(), CAItems.CATS_EYE_HOE.get()),
-		COPPER_SWORD(CAItems.COPPER_SWORD.get().getRegistryName().toString(), CAItems.COPPER_SWORD.get()),
-		COPPER_PICKAXE(CAItems.COPPER_PICKAXE.get().getRegistryName().toString(), CAItems.COPPER_PICKAXE.get()),
-		COPPER_AXE(CAItems.COPPER_AXE.get().getRegistryName().toString(), CAItems.COPPER_AXE.get()),
-		COPPER_SHOVEL(CAItems.COPPER_SHOVEL.get().getRegistryName().toString(), CAItems.COPPER_SHOVEL.get()),
-		COPPER_HOE(CAItems.COPPER_HOE.get().getRegistryName().toString(), CAItems.COPPER_HOE.get()),
-		CRYSTAL_WOOD_SWORD(CAItems.CRYSTAL_WOOD_SWORD.get().getRegistryName().toString(), CAItems.CRYSTAL_WOOD_SWORD.get()),
-		CRYSTAL_WOOD_PICKAXE(CAItems.CRYSTAL_WOOD_PICKAXE.get().getRegistryName().toString(), CAItems.CRYSTAL_WOOD_PICKAXE.get()),
-		CRYSTAL_WOOD_AXE(CAItems.CRYSTAL_WOOD_AXE.get().getRegistryName().toString(), CAItems.CRYSTAL_WOOD_AXE.get()),
-		CRYSTAL_WOOD_SHOVEL(CAItems.CRYSTAL_WOOD_SHOVEL.get().getRegistryName().toString(), CAItems.CRYSTAL_WOOD_SHOVEL.get()),
-		CRYSTAL_WOOD_HOE(CAItems.CRYSTAL_WOOD_HOE.get().getRegistryName().toString(), CAItems.CRYSTAL_WOOD_HOE.get()),
-		EMERALD_SWORD(CAItems.EMERALD_SWORD.get().getRegistryName().toString(), CAItems.EMERALD_SWORD.get()),
-		EMERALD_PICKAXE(CAItems.EMERALD_PICKAXE.get().getRegistryName().toString(), CAItems.EMERALD_PICKAXE.get()),
-		EMERALD_AXE(CAItems.EMERALD_AXE.get().getRegistryName().toString(), CAItems.EMERALD_AXE.get()),
-		EMERALD_SHOVEL(CAItems.EMERALD_SHOVEL.get().getRegistryName().toString(), CAItems.EMERALD_SHOVEL.get()),
-		EMERALD_HOE(CAItems.EMERALD_HOE.get().getRegistryName().toString(), CAItems.EMERALD_HOE.get()),
-		EXPERIENCE_SWORD(CAItems.EXPERIENCE_SWORD.get().getRegistryName().toString(), CAItems.EXPERIENCE_SWORD.get()),
-		FAIRY_SWORD(CAItems.FAIRY_SWORD.get().getRegistryName().toString(), CAItems.FAIRY_SWORD.get()),
-		KYANITE_SWORD(CAItems.KYANITE_SWORD.get().getRegistryName().toString(), CAItems.KYANITE_SWORD.get()),
-		KYANITE_PICKAXE(CAItems.KYANITE_PICKAXE.get().getRegistryName().toString(), CAItems.KYANITE_PICKAXE.get()),
-		KYANITE_AXE(CAItems.KYANITE_AXE.get().getRegistryName().toString(), CAItems.KYANITE_AXE.get()),
-		KYANITE_SHOVEL(CAItems.KYANITE_SHOVEL.get().getRegistryName().toString(), CAItems.KYANITE_SHOVEL.get()),
-		KYANITE_HOE(CAItems.KYANITE_HOE.get().getRegistryName().toString(), CAItems.KYANITE_HOE.get()),
-		MANTIS_CLAW(CAItems.MANTIS_CLAW.get().getRegistryName().toString(), CAItems.MANTIS_CLAW.get()),
-		NIGHTMARE_SWORD(CAItems.NIGHTMARE_SWORD.get().getRegistryName().toString(), CAItems.NIGHTMARE_SWORD.get()),
-		PINK_TOURMALINE_SWORD(CAItems.PINK_TOURMALINE_SWORD.get().getRegistryName().toString(), CAItems.PINK_TOURMALINE_SWORD.get()),
-		PINK_TOURMALINE_PICKAXE(CAItems.PINK_TOURMALINE_PICKAXE.get().getRegistryName().toString(), CAItems.PINK_TOURMALINE_PICKAXE.get()),
-		PINK_TOURMALINE_AXE(CAItems.PINK_TOURMALINE_AXE.get().getRegistryName().toString(), CAItems.PINK_TOURMALINE_AXE.get()),
-		PINK_TOURMALINE_SHOVEL(CAItems.PINK_TOURMALINE_SHOVEL.get().getRegistryName().toString(), CAItems.PINK_TOURMALINE_SHOVEL.get()),
-		PINK_TOURMALINE_HOE(CAItems.PINK_TOURMALINE_HOE.get().getRegistryName().toString(), CAItems.PINK_TOURMALINE_HOE.get()),
-		PLATINUM_SWORD(CAItems.PLATINUM_SWORD.get().getRegistryName().toString(), CAItems.PLATINUM_SWORD.get()),
-		PLATINUM_PICKAXE(CAItems.PLATINUM_PICKAXE.get().getRegistryName().toString(), CAItems.PLATINUM_PICKAXE.get()),
-		PLATINUM_AXE(CAItems.PLATINUM_AXE.get().getRegistryName().toString(), CAItems.PLATINUM_AXE.get()),
-		PLATINUM_SHOVEL(CAItems.PLATINUM_SHOVEL.get().getRegistryName().toString(), CAItems.PLATINUM_SHOVEL.get()),
-		PLATINUM_HOE(CAItems.PLATINUM_HOE.get().getRegistryName().toString(), CAItems.PLATINUM_HOE.get()),
-		POISON_SWORD(CAItems.POISON_SWORD.get().getRegistryName().toString(), CAItems.POISON_SWORD.get()),
-		PRISMATIC_REAPER(CAItems.PRISMATIC_REAPER.get().getRegistryName().toString(), CAItems.PRISMATIC_REAPER.get()),
-		QUEEN_SCALE_BATTLE_AXE(CAItems.QUEEN_SCALE_BATTLE_AXE.get().getRegistryName().toString(), CAItems.QUEEN_SCALE_BATTLE_AXE.get()),
-		RAT_SWORD(CAItems.RAT_SWORD.get().getRegistryName().toString(), CAItems.RAT_SWORD.get()),
-		ROYAL_GUARDIAN_SWORD(CAItems.ROYAL_GUARDIAN_SWORD.get().getRegistryName().toString(), CAItems.ROYAL_GUARDIAN_SWORD.get()),
-		RUBY_SWORD(CAItems.RUBY_SWORD.get().getRegistryName().toString(), CAItems.RUBY_SWORD.get()),
-		RUBY_PICKAXE(CAItems.RUBY_PICKAXE.get().getRegistryName().toString(), CAItems.RUBY_PICKAXE.get()),
-		RUBY_AXE(CAItems.RUBY_AXE.get().getRegistryName().toString(), CAItems.RUBY_AXE.get()),
-		RUBY_SHOVEL(CAItems.RUBY_SHOVEL.get().getRegistryName().toString(), CAItems.RUBY_SHOVEL.get()),
-		RUBY_HOE(CAItems.RUBY_HOE.get().getRegistryName().toString(), CAItems.RUBY_HOE.get()),
-		SILVER_SWORD(CAItems.SILVER_SWORD.get().getRegistryName().toString(), CAItems.SILVER_SWORD.get()),
-		SILVER_PICKAXE(CAItems.SILVER_PICKAXE.get().getRegistryName().toString(), CAItems.SILVER_PICKAXE.get()),
-		SILVER_AXE(CAItems.SILVER_AXE.get().getRegistryName().toString(), CAItems.SILVER_AXE.get()),
-		SILVER_SHOVEL(CAItems.SILVER_SHOVEL.get().getRegistryName().toString(), CAItems.SILVER_SHOVEL.get()),
-		SILVER_HOE(CAItems.SILVER_HOE.get().getRegistryName().toString(), CAItems.SILVER_HOE.get()),
-		SLAYER_CHAINSAW(CAItems.SLAYER_CHAINSAW.get().getRegistryName().toString(), CAItems.SLAYER_CHAINSAW.get()),
-		TIGERS_EYE_SWORD(CAItems.TIGERS_EYE_SWORD.get().getRegistryName().toString(), CAItems.TIGERS_EYE_SWORD.get()),
-		TIGERS_EYE_PICKAXE(CAItems.TIGERS_EYE_PICKAXE.get().getRegistryName().toString(), CAItems.TIGERS_EYE_PICKAXE.get()),
-		TIGERS_EYE_AXE(CAItems.TIGERS_EYE_AXE.get().getRegistryName().toString(), CAItems.TIGERS_EYE_AXE.get()),
-		TIGERS_EYE_SHOVEL(CAItems.TIGERS_EYE_SHOVEL.get().getRegistryName().toString(), CAItems.TIGERS_EYE_SHOVEL.get()),
-		TIGERS_EYE_HOE(CAItems.TIGERS_EYE_HOE.get().getRegistryName().toString(), CAItems.TIGERS_EYE_HOE.get()),
-		TIN_SWORD(CAItems.TIN_SWORD.get().getRegistryName().toString(), CAItems.TIN_SWORD.get()),
-		TIN_PICKAXE(CAItems.TIN_PICKAXE.get().getRegistryName().toString(), CAItems.TIN_PICKAXE.get()),
-		TIN_AXE(CAItems.TIN_AXE.get().getRegistryName().toString(), CAItems.TIN_AXE.get()),
-		TIN_SHOVEL(CAItems.TIN_SHOVEL.get().getRegistryName().toString(), CAItems.TIN_SHOVEL.get()),
-		TIN_HOE(CAItems.TIN_HOE.get().getRegistryName().toString(), CAItems.TIN_HOE.get()),
-		ULTIMATE_SWORD(CAItems.ULTIMATE_SWORD.get().getRegistryName().toString(), CAItems.ULTIMATE_SWORD.get()),
-		ULTIMATE_PICKAXE(CAItems.ULTIMATE_PICKAXE.get().getRegistryName().toString(), CAItems.ULTIMATE_PICKAXE.get()),
-		ULTIMATE_AXE(CAItems.ULTIMATE_AXE.get().getRegistryName().toString(), CAItems.ULTIMATE_AXE.get()),
-		ULTIMATE_SHOVEL(CAItems.ULTIMATE_SHOVEL.get().getRegistryName().toString(), CAItems.ULTIMATE_SHOVEL.get()),
-		ULTIMATE_HOE(CAItems.ULTIMATE_HOE.get().getRegistryName().toString(), CAItems.ULTIMATE_HOE.get());
-		
-		CAGearEnumList(String itemName, Item rep) {
-			this.repName = itemName;
-			this.representation = rep;
-		}
-
-		private final String repName;
-		private final Item representation;
-		private static CAGearEnumList gearList;
-		
-		public static CAGearEnumList getEnum() {
-			return gearList;
-		}
-		
-		public void forEach() {
-			getAllEntries().forEach((entry) -> {
-				entry.getItemRepresentation();
-			});
-		}
-		
-		public EnumSet<CAGearEnumList> getAllEntries() {
-			EnumSet<CAGearEnumList> set = EnumSet.of(AMETHYST_SWORD,
-					 AMETHYST_PICKAXE,
-					 AMETHYST_AXE,
-					 AMETHYST_SHOVEL,
-					 AMETHYST_HOE,
-					 ATTITUDE_ADJUSTER,
-					 BATTLE_AXE,
-					 BIG_BERTHA,
-					 BIG_HAMMER,
-					 CATS_EYE_SWORD,
-					 CATS_EYE_PICKAXE,
-					 CATS_EYE_AXE,
-					 CATS_EYE_SHOVEL,
-					 CATS_EYE_HOE,
-					 COPPER_SWORD,
-					 COPPER_PICKAXE,
-					 COPPER_AXE,
-					 COPPER_SHOVEL,
-					 COPPER_HOE,
-					 CRYSTAL_WOOD_SWORD,
-					 CRYSTAL_WOOD_PICKAXE,
-					 CRYSTAL_WOOD_AXE,
-				     CRYSTAL_WOOD_SHOVEL,
-					 CRYSTAL_WOOD_HOE,
-					 EMERALD_SWORD,
-					 EMERALD_PICKAXE,
-				     EMERALD_AXE,
-					 EMERALD_SHOVEL,
-					 EMERALD_HOE,
-					 EXPERIENCE_SWORD,
-				     FAIRY_SWORD,
-					 KYANITE_SWORD,
-				     KYANITE_PICKAXE,
-					 KYANITE_AXE,
-					 KYANITE_SHOVEL,
-					 KYANITE_HOE,
-					 MANTIS_CLAW,
-					 NIGHTMARE_SWORD,
-					 PINK_TOURMALINE_SWORD,
-					 PINK_TOURMALINE_PICKAXE,
-					 PINK_TOURMALINE_AXE,
-				     PINK_TOURMALINE_SHOVEL,
-					 PINK_TOURMALINE_HOE,
-				     PLATINUM_SWORD,
-					 PLATINUM_PICKAXE,
-					 PLATINUM_AXE,
-					 PLATINUM_SHOVEL,
-					 PLATINUM_HOE,
-					 POISON_SWORD,
-					 PRISMATIC_REAPER,
-					 QUEEN_SCALE_BATTLE_AXE,
-				     RAT_SWORD,
-					 ROYAL_GUARDIAN_SWORD,
-					 RUBY_SWORD,
-					 RUBY_PICKAXE,
-					 RUBY_AXE,
-					 RUBY_SHOVEL,
-					 RUBY_HOE,
-					 SILVER_SWORD,
-					 SILVER_PICKAXE,
-			         SILVER_AXE,
-				     SILVER_SHOVEL,
-					 SILVER_HOE,
-					 SLAYER_CHAINSAW,
-					 TIGERS_EYE_SWORD,
-					 TIGERS_EYE_PICKAXE,
-					 TIGERS_EYE_AXE,
-				     TIGERS_EYE_SHOVEL,
-					 TIGERS_EYE_HOE,
-					 TIN_SWORD,
-					 TIN_PICKAXE,
-					 TIN_AXE,
-					 TIN_SHOVEL,
-					 TIN_HOE,
-					 ULTIMATE_SWORD,
-					 ULTIMATE_PICKAXE,
-					 ULTIMATE_AXE,
-					 ULTIMATE_SHOVEL,
-					 ULTIMATE_HOE);
-			return Optional.of(set).orElse(null);
-		}
-		
-		public final String getItemRegistryName() {
-			return repName;
-		}
-		
-		public final Item getItemRepresentation() {
-			return representation;
 		}
 	}
 }

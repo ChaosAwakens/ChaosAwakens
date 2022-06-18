@@ -40,6 +40,7 @@ public class CrystalSaplingBlock extends Block implements IGrowable, IPlantable 
 		return SHAPE;
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
 		return !state.canSurvive(world, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, world, currentPos, facingPos);
 	}
@@ -80,6 +81,7 @@ public class CrystalSaplingBlock extends Block implements IGrowable, IPlantable 
 		return state.getFluidState().isEmpty();
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean isPathfindable(BlockState state, IBlockReader blockReader, BlockPos pos, PathType type) {
 		return type == PathType.AIR && !this.hasCollision || super.isPathfindable(state, blockReader, pos, type);
 	}

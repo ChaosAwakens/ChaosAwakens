@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.robo;
 
 import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
+
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -19,9 +20,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.IServerWorld;
-import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
 import java.util.Random;

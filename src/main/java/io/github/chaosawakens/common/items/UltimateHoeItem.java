@@ -19,6 +19,7 @@ public class UltimateHoeItem extends EnchantedHoeItem {
 		super(tier, attackDamageIn, attackSpeedIn, builderIn, enchantments);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
 		World world = context.getLevel();

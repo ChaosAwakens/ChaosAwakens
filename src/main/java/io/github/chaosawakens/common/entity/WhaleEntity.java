@@ -171,6 +171,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 		return super.checkSpawnRules(p_213380_1_, p_213380_2_) && WhaleEntity.checkWhaleSpawnRules(level, blockPosition());
 	}
 
+	@SuppressWarnings("deprecation")
 	public static boolean checkWhaleSpawnRules(IWorld world, BlockPos pos) {
 		if (pos.getY() > 45 && pos.getY() < world.getSeaLevel()) {
 			Optional<RegistryKey<Biome>> optional = world.getBiomeName(pos);
@@ -192,6 +193,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatable {
 		return !this.level.getBlockState(pos.below()).is(Blocks.AIR);
 	}
 
+	@SuppressWarnings("unused")
 	private boolean clearanceAcquired() {
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 		for (int l1 = 0; l1 < 10; ++l1) {

@@ -145,6 +145,7 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
 	}
 
+	@SuppressWarnings("unused")
 	private int getRandomGatorType(IWorld world) {
 		Biome biome = world.getBiome(this.blockPosition());
 		int i = this.random.nextInt(6);

@@ -24,6 +24,7 @@ public class AntNestBlock extends Block {
 		this.ant = ant;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (worldIn.isClientSide || worldIn.isRainingAt(pos.above())) return;

@@ -26,6 +26,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("unused")
 public class DefossilizerBlock extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
@@ -77,6 +78,7 @@ public class DefossilizerBlock extends Block {
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
@@ -98,6 +100,7 @@ public class DefossilizerBlock extends Block {
 		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));

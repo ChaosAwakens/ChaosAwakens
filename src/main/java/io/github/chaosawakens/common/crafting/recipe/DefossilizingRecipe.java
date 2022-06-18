@@ -61,6 +61,7 @@ public class DefossilizingRecipe extends AbstractDefossilizingRecipe {
 			return new DefossilizingRecipe(recipeId, fossilIngredient, bucketIngredient, powerChipIngredient, result, experience, defossilizingTime, defossilizerType);
 		}
 
+		@SuppressWarnings("static-access")
 		@Override
 		public void toNetwork(PacketBuffer buffer, DefossilizingRecipe recipe) {
 			recipe.ingredient1.toNetwork(buffer);

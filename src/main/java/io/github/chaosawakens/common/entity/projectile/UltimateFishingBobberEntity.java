@@ -74,6 +74,7 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 	private final int luck;
 	private final int lureSpeed;
 
+	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
 	public UltimateFishingBobberEntity(World worldIn) {
 		super(worldIn, Minecraft.getInstance().player, 0, 0, 0);
@@ -269,6 +270,7 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean shouldStopFishing(PlayerEntity p_234600_1_) {
 		ItemStack itemstack = p_234600_1_.getMainHandItem();
 		ItemStack itemstack1 = p_234600_1_.getOffhandItem();
@@ -495,6 +497,7 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 				.orElse(UltimateFishingBobberEntity.LavaType.INVALID);
 	}
 
+	@SuppressWarnings("deprecation")
 	private UltimateFishingBobberEntity.WaterType getOpenWaterTypeForBlock(BlockPos p_234604_1_) {
 		BlockState blockstate = this.level.getBlockState(p_234604_1_);
 		if (!blockstate.isAir() && !blockstate.is(Blocks.LILY_PAD)) {
@@ -505,6 +508,7 @@ public class UltimateFishingBobberEntity extends FishingBobberEntity implements 
 		} else return UltimateFishingBobberEntity.WaterType.ABOVE_WATER;
 	}
 
+	@SuppressWarnings("deprecation")
 	private UltimateFishingBobberEntity.LavaType getOpenLavaTypeForBlock(BlockPos p_234604_1_) {
 		BlockState blockstate = this.level.getBlockState(p_234604_1_);
 		if (!blockstate.isAir() && !blockstate.is(Blocks.LILY_PAD)) {

@@ -25,6 +25,7 @@ public class DimetrodonEntityModel extends AnimatedGeoModel<DimetrodonEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/dimetrodon.animation.json");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setLivingAnimations(DimetrodonEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

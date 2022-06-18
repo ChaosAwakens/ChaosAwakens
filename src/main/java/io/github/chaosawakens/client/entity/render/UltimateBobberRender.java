@@ -34,6 +34,7 @@ public class UltimateBobberRender extends EntityRenderer<UltimateFishingBobberEn
 		super(manager);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void render(@Nonnull UltimateFishingBobberEntity p_225623_1_, float p_225623_2_, float p_225623_3_, MatrixStack p_225623_4_, IRenderTypeBuffer p_225623_5_, int p_225623_6_) {
 		PlayerEntity playerentity = p_225623_1_.getPlayerOwner();

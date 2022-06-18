@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.blocks;
 
 import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.Block;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;

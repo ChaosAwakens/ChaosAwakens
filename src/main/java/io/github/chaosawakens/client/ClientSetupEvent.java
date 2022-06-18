@@ -64,6 +64,7 @@ public class ClientSetupEvent implements IUtilityHelper {
 			}
 		}
 
+		@SuppressWarnings("resource")
 		@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
 		@OnlyIn(Dist.CLIENT)
 		public static void renderParticles(TickEvent.WorldTickEvent event) {

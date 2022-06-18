@@ -1,12 +1,12 @@
 package io.github.chaosawakens.common.entity;
 
 import net.minecraft.block.BlockState;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
-import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -19,7 +19,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tags.BlockTags;
@@ -46,9 +45,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.entity.ai.AnimatableGroundPathNavigator;
-import io.github.chaosawakens.common.entity.ai.BirdWalkGoal;
-import io.github.chaosawakens.common.entity.ai.FlightMovementController;
 import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 
@@ -61,14 +57,12 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	private static final DataParameter<Boolean> PERCHED = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> FLYING = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Optional<BlockPos>> POS = EntityDataManager.defineId(BirdEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
+	@SuppressWarnings("unused")
 	private float flap;
 	private float flapSpeed;
 	private float flapping = 1.0F;
 	public float sitTicks;
-	private boolean flying;
 	public float flyTicks;
-	private float sitCd;
-	private boolean navigatingLand;
 	public float sitCD;
 
 	public BirdEntity(EntityType<? extends TameableEntity> p_i50251_1_, World p_i50251_2_) {
@@ -95,36 +89,8 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new SitGoal(this));
-		this.goalSelector.addGoal(3, new RandomFlyingGoal(this, 1.4F) {
-/*			BirdEntity bird;
-			
-			@Override
-			public boolean canUse() {
-				if (bird == null) return false;
-				return !this.bird.getNavigation().isDone() && super.canUse();
-			}
-			
-			@Override
-			public boolean canContinueToUse() {
-				if (bird == null) return false;
-				return super.canContinueToUse() && this.aboveWater(bird);
-			}*/
-		});
-		this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 1.0F) {
-	/*		BirdEntity bird;
-			
-			@Override
-			public boolean canUse() {
-				if (bird == null) return false;
-				return !this.bird.getNavigation().isDone() && !bird.aboveWater(bird) && bird.getPosBelowSolid(bird.blockPosition()) != null && super.canUse();
-			}
-			
-			@Override
-			public boolean canContinueToUse() {
-				if (bird == null) return false;
-				return !this.bird.getNavigation().isDone() && !bird.aboveWater(bird) && bird.getPosBelowSolid(bird.blockPosition()) != null && super.canContinueToUse();
-			}*/
-		});
+		this.goalSelector.addGoal(3, new RandomFlyingGoal(this, 1.4F));
+		this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 1.0F));
 		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, RoboEntity.class, 1.0F, 0.25D, 0.45D));
 		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, MonsterEntity.class, 1.0F, 0.25D, 0.45D));
 	}
@@ -199,18 +165,6 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	private void setSittingPos(BlockPos sitPos) {
 		this.entityData.set(POS, Optional.ofNullable(sitPos));
 	}
-	
-	private void handleNav(boolean onGround) {
-		if (onGround) {
-			this.moveControl = new MovementController(this);
-			this.navigation = new GroundPathNavigator(this, level);
-			navigatingLand = true;
-		} else {
-			this.moveControl = new FlightMovementController(this, 0.8F, true);
-			this.navigation = new AnimatableGroundPathNavigator(this, level);
-			navigatingLand = false;
-		}
-	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
@@ -223,53 +177,14 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		return p_191954_1_ + this.flapSpeed / 2.0F;
 	}
 	
-    private static BlockPos belowPos(Entity entity) {
+    @SuppressWarnings("unused")
+	private static BlockPos belowPos(Entity entity) {
         return new BlockPos(entity.getX(), entity.getBoundingBox().maxY + 1.51F, entity.getZ());
     }
 	
 	@Override
 	public void tick() {
 		super.tick();
-	/*	if (this.isFlying() && flyTicks < 10) flyTicks += 1;
-		if (this.isFlying() && flyTicks > 10) flyTicks -= 1;
-		if (this.getSitting() && sitTicks < 10) sitTicks += 1;
-		if (this.getSitting() && sitTicks > 10) sitTicks -= 1;
-		
-		if (!level.isClientSide) {
-			if (!this.isOnGround() && this.sitCD > 0) this.setFlying(true);
-			if (this.isFlying()) handleNav(false);
-			if (!this.isFlying()) handleNav(true);
-			
-			if (this.isFlying()) {
-				flyTicks++;
-				this.setNoGravity(true);
-				if (this.getSitting() || this.isPassenger()) {
-					this.setFlying(false);
-				} else {
-					flyTicks = 0;
-					this.setNoGravity(false);
-				}
-			}	
-			
-			if (this.sitCD > 0) sitCD--;
-			
-			if (sitCD == 0) {
-				sitCD = 100;
-				BlockState b = this.getFeetBlockState();
-				if (b.getBlock() == Blocks.HAY_BLOCK && b != null) {
-					this.setSittingPos(belowPos(this));
-				}
-			}
-			
-			if (sitCD == 0 && this.getSittingPos() != null) {
-				sitCD = 101;
-				BlockState b = level.getBlockState(getSittingPos());
-				if (b.getBlock() != Blocks.HAY_BLOCK) {
-					this.setSittingPos(null);
-					this.setSitting(true);
-				}
-			}
-		}*/
 	}
 	
 	@Override
@@ -361,8 +276,6 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	}
 
 	private void calculateFlapping() {
-		float oFlap = this.flap;
-		float oFlapSpeed = this.flapSpeed;
 		this.flapSpeed = (float) ((double) this.flapSpeed + (double) (!this.onGround && !this.isPassenger() ? 4 : -1) * 0.3D);
 		this.flapSpeed = MathHelper.clamp(this.flapSpeed, 0.0F, 1.0F);
 		if (!this.onGround && this.flapping < 1.0F) this.flapping = 1.0F;
