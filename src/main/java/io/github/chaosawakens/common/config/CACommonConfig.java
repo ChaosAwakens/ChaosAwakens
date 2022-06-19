@@ -374,7 +374,7 @@ public class CACommonConfig {
 			enableOreBloodstoneGen = builder.define("Bloodstone ore generation", true);
 			enableOreAluminumGen = builder.define("Aluminum ore generation", true);
 			builder.pop();
-			enableFossilGen = builder.define("Enable fossilised spawn egg generation", true);
+			enableFossilGen = builder.define("Enable fossil generation", true);
 			enableMarbleGen = builder.define("Enable marble generation in the mining dimension", true);
 			enableLimestoneGen = builder.define("Enable limestone generation in the mining dimension", true);
 			enableTrollOreGen = builder.define("Enable infested ore generation", true);
@@ -446,6 +446,7 @@ public class CACommonConfig {
 			wanderingTraderSellsUraniumAndTitanium = builder
 					.comment("Can the Wandering Trader sell Uranium and Titanium?")
 					.define("Uranium and Titanium from Wandering Trader?", false);
+			builder.pop();
 			builder.push("Robo Warrior");
 			roboWarriorExplosionSize = builder.define("Robo Warrior explosion size", 6);
 			roboWarriorExplosionType = builder

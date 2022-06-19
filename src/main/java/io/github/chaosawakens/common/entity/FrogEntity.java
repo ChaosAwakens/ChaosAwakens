@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -14,6 +15,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
@@ -102,6 +104,14 @@ public class FrogEntity extends AnimalEntity implements IAnimatable {
 		int i = this.random.nextInt(8);
 		if (biome.getBiomeCategory() == Biome.Category.NETHER) i = 99;
 		return i;
+	}
+
+	@Override
+	protected ResourceLocation getDefaultLootTable() {
+		if (this.getFrogType() == 99) {
+			return CALootTables.FROG_NETHER;
+		}
+		return CALootTables.FROG_OVERWORLD;
 	}
 
 	public boolean doHurtTarget(Entity entity) {
