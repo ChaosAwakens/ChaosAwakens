@@ -46,16 +46,16 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 
 **Organizers:** Phwee, VDA Spoop
 
-**Animators:** Absolute Kun, Aqu, Pugman665544, SnakeMaster
+**Animators:** Absolute Kun, Aqu, Pugman665544, Skarrier, SnakeMaster
 
-**Builders:** Blackout, Funky Monk, Meme Man, omarboi, Phwee, TheLoneCyberman, Unanimous
+**Builders:** Blackout, Funky Monk, Meme Man, omarboi, Phwee, Skarrier, TheLoneCyberman, Unanimous
 
 **Coders:** Blackout, LuisRandomness, Meme Man, WeirdNerd
 
-**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Pugman665544, Renato, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
+**Modellers:** Absolute Kun, ChromaticAeternus, DinoDave, Memer Teamer, Pugman665544, Renato, Skarrier, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
 
-**Sound Designers:** WeirdNerd
+**Sound Designers:** Skarrier, WeirdNerd
 
-**Texturers:** Absolute Kun, ChromaticAeternus, LuisRandomness, Memer Teamer, Renato, Santispik3, SnakeMaster, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
+**Texturers:** Absolute Kun, ChromaticAeternus, LuisRandomness, Memer Teamer, Renato, Santispik3, Skarrier, SnakeMaster, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
 
 **Former Members:** AlexanderTheNotSoGreat, BS Guy, Crosby, crydigo, HugoMage, Lymen, mattster, Sipilus, Technocreeper, thesleepingdevil
