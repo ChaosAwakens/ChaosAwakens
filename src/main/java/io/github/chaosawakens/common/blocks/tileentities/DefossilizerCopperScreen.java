@@ -32,12 +32,13 @@ public class DefossilizerCopperScreen extends ContainerScreen<DefossilizerCopper
 		int posX = (this.width - this.imageWidth) / 2;
 		int posY = (this.height - this.imageHeight) / 2;
 		blit(matrixStack, posX, posY, 0, 0, this.imageWidth, this.imageHeight);
+		int fuel = menu.getLitScale();
+		
+		//Note: Method blit(matrixstack, posX(default=1)(x position of where the progress will be drawn), posY(default=0)(y position of where the progress will be drawn), x(position of full icon), y(position of full icon), xSize, ySize);
 
 		// Progress arrow
 		blit(matrixStack, posX + 79, posY + 35, 176, 14, menu.getProgressArrowScale() + 1, 16);
-
-		// Lit thing
-		// blit(matrixStack, posX + 49, posY + 40, 69, 25, menu.getLitScale() + 1, 16);
-		// hLine(matrixStack, posX + 69, posY + 40, 144, 30);
-	}
+		//Fuel bar
+		blit(matrixStack, posX + 56, posY + 36, 176, 0, 14, 14 - fuel);
+	} //                                    36 49
 }

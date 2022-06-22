@@ -39,7 +39,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.VersionChecker;
-
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;

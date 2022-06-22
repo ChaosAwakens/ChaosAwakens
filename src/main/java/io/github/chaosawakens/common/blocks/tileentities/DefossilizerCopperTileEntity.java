@@ -232,6 +232,12 @@ public class DefossilizerCopperTileEntity extends LockableTileEntity implements 
 		tags.putInt("Progress", this.progress);
 		return tags;
 	}
+	
+	@Override
+	protected void invalidateCaps() {
+		super.invalidateCaps();
+		for (LazyOptional<? extends IItemHandler> handler : this.handlers) handler.invalidate();
+	}
 
 	@Nullable
 	@Override

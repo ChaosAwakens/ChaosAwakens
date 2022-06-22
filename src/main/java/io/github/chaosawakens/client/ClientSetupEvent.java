@@ -1,6 +1,7 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.api.IUtilityHelper;
+
 import io.github.chaosawakens.client.config.CAClientConfig;
 import io.github.chaosawakens.client.entity.render.*;
 import io.github.chaosawakens.common.entity.EntEntity;
@@ -20,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -79,6 +81,10 @@ public class ClientSetupEvent implements IUtilityHelper {
 				}
 			}
 		}
+	}
+	
+	public void renderElytra(RenderPlayerEvent e) {
+		
 	}
 
 	public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
@@ -307,10 +313,6 @@ public class ClientSetupEvent implements IUtilityHelper {
 				return (flag || flag1) && p_239422_2_ instanceof PlayerEntity && ((PlayerEntity) p_239422_2_).fishing != null ? 1.0F : 0.0F;
 			}
 		});
-//		ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("filled_default"),
-  //			  (stack, world, living) -> {
-  //			  	return stack != null && stack.getTag().contains("entity") ? 1.0F : 0.0F;
-  //	   });
 		ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("default"),
 				(stack, world, living) -> {
 					if (stack.getTag() == null) return 0.0F;

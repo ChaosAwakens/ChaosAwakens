@@ -32,13 +32,13 @@ import net.minecraftforge.common.ForgeMod;
 public interface IUtilityHelper {
 
 	///////////////////////////////
-	// Variables //
+	//         Variables         //
 	///////////////////////////////
 
 	List<Block> Queue = new ArrayList<>();
 
 	///////////////////////////////
-	// Functions //
+	//         Functions         //
 	///////////////////////////////
 
 	/**
@@ -284,7 +284,7 @@ public interface IUtilityHelper {
 	}
 
 	///////////////////////////////
-	// Booleans //
+	//          Booleans         //
 	///////////////////////////////
 
 	/**
@@ -472,7 +472,7 @@ public interface IUtilityHelper {
 	}
 
 	///////////////////////////////
-	// Doubles //
+	//          Doubles          //
 	///////////////////////////////
 
 	/**
@@ -673,7 +673,7 @@ public interface IUtilityHelper {
 	}
 
 	///////////////////////////////
-	// Ints //
+	//            Ints           //
 	///////////////////////////////
 
 	/**
@@ -715,9 +715,27 @@ public interface IUtilityHelper {
 	static int getDuplicationSpeedAKATickRate() {
 		return setDuplicationSpeedAKATickRate();
 	}
+	
+	/**
+	 * Converts 1 experience orb to its equivalent durability value.
+	 * @param xp xp orb
+	 * @return xp orb to durability (xp * 2)
+	 */
+	static int convertXPToDurability(int xp) {
+		return xp * 2;
+	}
+	
+	/**
+	 * Converts durability to its equivalent xp value.
+	 * @param durability durability
+	 * @return durability to xp orb (durability / 2)
+	 */
+	static int convertDurabilityToXP(int durability) {
+		return durability / 2;
+	}
 
 	///////////////////////////////
-	// Lists //
+	//           Lists           //
 	///////////////////////////////
 
 	/**
@@ -734,7 +752,7 @@ public interface IUtilityHelper {
 	}
 
 	///////////////////////////////
-	// Other Method Types //
+	//     Other Method Types    //
 	///////////////////////////////
 
 	/**

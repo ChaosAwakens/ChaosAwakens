@@ -4,6 +4,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import org.apache.commons.lang3.tuple.Pair;
 
+import io.github.chaosawakens.common.util.EnumUtils;
+
 public class CACommonConfig {
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
@@ -109,6 +111,8 @@ public class CACommonConfig {
 		public final ConfigValue<Boolean> thunderStaffExplosionFire;
 
 		public final ConfigValue<Boolean> enableAutoEnchanting;
+		
+		public final ConfigValue<EnumUtils.ElytraDamageType> enderDragonScaleArmorElytraDamageType; 
 
 		public final ConfigValue<Boolean> crystalWorldRequiresEmptyInventory;
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
@@ -292,6 +296,13 @@ public class CACommonConfig {
 			builder.pop();
 			builder.pop();
 			builder.push("Functionality");
+			builder.push("Armor");
+			builder.push("Ender Dragon Scale Armor");
+			builder.comment("How the elytra on the Ender Dragon Scale Armor will get damaged," + "\n"
+			               + "where ARMOR means per hit, and ELYTRA means that it'll get damage every tick or so as you fly (basically the same as a normal elytra)");
+			enderDragonScaleArmorElytraDamageType = builder.define("Ender Dragon Scale Armor elytra damage type", EnumUtils.ElytraDamageType.ARMOR);
+			builder.pop();
+			builder.pop();
 			builder.push("Tools/Weapons");
 			builder.push("Explosions");
 			builder.push("Attitude Adjuster");

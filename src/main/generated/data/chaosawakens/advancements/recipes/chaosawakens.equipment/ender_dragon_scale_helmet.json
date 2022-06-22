@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ender_dragon_scale_helmet"
+    ]
+  },
+  "criteria": {
+    "has_ender_dragon_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ender_dragon_scale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ender_dragon_scale_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ender_dragon_scale",
+      "has_the_recipe"
+    ]
+  ]
+}

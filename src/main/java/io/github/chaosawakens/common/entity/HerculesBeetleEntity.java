@@ -40,7 +40,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
 				.add(Attributes.ATTACK_SPEED, 10)
-				.add(Attributes.ATTACK_DAMAGE, 30)
+				.add(Attributes.ATTACK_DAMAGE, 25)
 				.add(Attributes.ATTACK_KNOCKBACK, 0.0D)
 				.add(Attributes.FOLLOW_RANGE, 25);
 	}

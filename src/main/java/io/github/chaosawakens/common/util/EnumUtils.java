@@ -100,6 +100,7 @@ public class EnumUtils {
 		ULTIMATE("ultimate", 48, new int[] { 6, 10, 12, 6 }, 64, SoundEvents.ARMOR_EQUIP_NETHERITE, 4.5f, 0.125f, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 		LAVA_EEL("lava_eel", 33, new int[] { 2, 5, 7, 2 }, 9, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(CAItems.LAVA_EEL.get())),
 		MOTH_SCALE("moth_scale", 35, new int[] { 2, 5, 7, 2 }, 16, SoundEvents.ARMOR_EQUIP_GENERIC, 1.75f, 0.05f, () -> Ingredient.of(CAItems.MOTH_SCALE.get())),
+		ENDER_DRAGON_SCALE("ender_dragon_scale", 40, new int[] {4, 7, 9, 4}, 50, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0f, 0.1f, () -> Ingredient.of(CAItems.ENDER_DRAGON_SCALE.get())),
 		PEACOCK_FEATHER("peacock_feather", 8, new int[] { 2, 4, 5, 2 }, 8, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(CAItems.PEACOCK_FEATHER.get())),
 		PINK_TOURMALINE("pink_tourmaline", 24, new int[] { 2, 5, 7, 3 }, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 1.25f, 0f, () -> Ingredient.of(CAItems.PINK_TOURMALINE_INGOT.get())),
 		CATS_EYE("cats_eye", 36, new int[] { 4, 7, 8, 4 }, 20, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> Ingredient.of(CAItems.CATS_EYE_INGOT.get())),
@@ -171,5 +172,10 @@ public class EnumUtils {
 		public Ingredient getRepairIngredient() {
 			return this.repairMaterial.get();
 		}
+	}
+	
+	public enum ElytraDamageType {
+		ARMOR,
+		ELYTRA
 	}
 }

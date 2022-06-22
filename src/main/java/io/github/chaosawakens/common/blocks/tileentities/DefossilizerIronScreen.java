@@ -36,9 +36,6 @@ public class DefossilizerIronScreen extends ContainerScreen<DefossilizerIronCont
 
 		// Progress arrow
 		blit(matrixStack, posX + 79, posY + 35, 176, 14, menu.getProgressArrowScale() + 1, 16);
-
-		// Lit thing
-		// blit(matrixStack, posX + 49, posY + 40, 69, 25, menu.getLitScale() + 1, 16);
-		// hLine(matrixStack, posX + 69, posY + 40, 144, 30);
+		
     }
 }

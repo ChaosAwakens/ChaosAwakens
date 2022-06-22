@@ -15,7 +15,7 @@ public class BigHammerItem extends SwordItem {
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if (!target.level.isClientSide) {
-			target.push(0.0D, Math.abs((1.0D - target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE)) * 1.25F), 0.0D);
+			target.push(0.0D, Math.abs((1.0D - target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE)) * 3.25F), 0.0D);
 		}
 		stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;

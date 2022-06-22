@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.events;
 
 import com.mojang.serialization.Codec;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.FeatureWrapper;

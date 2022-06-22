@@ -687,6 +687,61 @@ public class CARecipeProvider extends RecipeProvider {
 		slab(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_SLAB.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get());
 		stairs(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_STAIRS.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get());
 		wall(consumer, CABlocks.CRACKED_BLACK_TERRACOTTA_BRICK_WALL.get(), CABlocks.CRACKED_BLACK_TERRACOTTA_BRICKS.get());
+		
+		ShapedRecipeBuilder.shaped(CAItems.APPLE_SIGN.get(), 3)
+		        .define('P', CABlocks.APPLE_PLANKS.get())
+		        .define('S', Items.STICK)
+		        .pattern("PPP")
+		        .pattern("PPP")
+		        .pattern(" S ")
+		        .unlockedBy("has_" + CABlocks.APPLE_PLANKS.get().asItem(), has(CABlocks.APPLE_PLANKS.get()))
+		        .unlockedBy("has_" + Items.STICK.asItem(), has(Items.STICK))
+		        .save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.CHERRY_SIGN.get(), 3)
+                .define('P', CABlocks.CHERRY_PLANKS.get())
+                .define('S', Items.STICK)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern(" S ")
+                .unlockedBy("has_" + CABlocks.CHERRY_PLANKS.get().asItem(), has(CABlocks.CHERRY_PLANKS.get()))
+                .unlockedBy("has_" + Items.STICK.asItem(), has(Items.STICK))
+                .save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.DUPLICATION_SIGN.get(), 3)
+                .define('P', CABlocks.DUPLICATION_PLANKS.get())
+                .define('S', Items.STICK)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern(" S ")
+                .unlockedBy("has_" + CABlocks.DUPLICATION_PLANKS.get().asItem(), has(CABlocks.DUPLICATION_PLANKS.get()))
+                .unlockedBy("has_" + Items.STICK.asItem(), has(Items.STICK))
+                .save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.GINKGO_SIGN.get(), 3)
+                .define('P', CABlocks.GINKGO_PLANKS.get())
+                .define('S', Items.STICK)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern(" S ")
+                .unlockedBy("has_" + CABlocks.GINKGO_PLANKS.get().asItem(), has(CABlocks.GINKGO_PLANKS.get()))
+                .unlockedBy("has_" + Items.STICK.asItem(), has(Items.STICK))
+                .save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.PEACH_SIGN.get(), 3)
+                .define('P', CABlocks.PEACH_PLANKS.get())
+                .define('S', Items.STICK)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern(" S ")
+                .unlockedBy("has_" + CABlocks.PEACH_PLANKS.get().asItem(), has(CABlocks.PEACH_PLANKS.get()))
+                .unlockedBy("has_" + Items.STICK.asItem(), has(Items.STICK))
+                .save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.SKYWOOD_SIGN.get(), 3)
+               .define('P', CABlocks.SKYWOOD_PLANKS.get())
+               .define('S', Items.STICK)
+               .pattern("PPP")
+               .pattern("PPP")
+               .pattern(" S ")
+               .unlockedBy("has_" + CABlocks.SKYWOOD_PLANKS.get().asItem(), has(CABlocks.SKYWOOD_PLANKS.get()))
+               .unlockedBy("has_" + Items.STICK.asItem(), has(Items.STICK))
+               .save(consumer);
 
 		ShapedRecipeBuilder.shaped(CAItems.CRITTER_CAGE.get(), 2)
 				.define('#', Items.STICK)
@@ -767,6 +822,10 @@ public class CARecipeProvider extends RecipeProvider {
 		armorChestplate(consumer, CAItems.QUEEN_SCALE_CHESTPLATE.get(), CAItems.QUEEN_SCALE.get());
 		armorLeggings(consumer, CAItems.QUEEN_SCALE_LEGGINGS.get(), CAItems.QUEEN_SCALE.get());
 		armorBoots(consumer, CAItems.QUEEN_SCALE_BOOTS.get(), CAItems.QUEEN_SCALE.get());
+		armorHelmet(consumer, CAItems.ENDER_DRAGON_SCALE_HELMET.get(), CAItems.ENDER_DRAGON_SCALE.get());
+		armorChestplate(consumer, CAItems.ENDER_DRAGON_SCALE_CHESTPLATE.get(), CAItems.ENDER_DRAGON_SCALE.get());
+		armorLeggings(consumer, CAItems.ENDER_DRAGON_SCALE_LEGGINGS.get(), CAItems.ENDER_DRAGON_SCALE.get());
+		armorBoots(consumer, CAItems.ENDER_DRAGON_SCALE_BOOTS.get(), CAItems.ENDER_DRAGON_SCALE.get());
 		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_HELMET.get())
 				.define('T', CAItems.TITANIUM_INGOT.get())
 				.define('U', CAItems.URANIUM_INGOT.get())

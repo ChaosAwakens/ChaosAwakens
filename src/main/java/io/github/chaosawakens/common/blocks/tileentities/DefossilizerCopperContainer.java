@@ -75,7 +75,10 @@ public class DefossilizerCopperContainer extends Container {
 
 	public int getLitScale() {
 		int progress = fields.get(0);
-		return progress != 0 ? progress * 24 / DefossilizerCopperTileEntity.WORK_TIME : 0;
+		if (progress == 0) {
+			progress = 200;
+		}
+		return progress * 17 / DefossilizerCopperTileEntity.WORK_TIME;
 	}
 
 	@Override

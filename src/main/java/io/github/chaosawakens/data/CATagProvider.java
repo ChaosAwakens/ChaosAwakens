@@ -57,7 +57,7 @@ public class CATagProvider extends BlockTagsProvider {
 
 			this.tag(BlockTags.LOGS).addTags(CATags.Blocks.DUPLICATION_LOGS);
 			this.tag(BlockTags.LOGS_THAT_BURN).addTags(CATags.Blocks.APPLE_LOGS, CATags.Blocks.CHERRY_LOGS, CATags.Blocks.PEACH_LOGS, CATags.Blocks.SKYWOOD_LOGS, CATags.Blocks.GINKGO_LOGS, CATags.Blocks.CRYSTAL_LOGS);
-			this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.SKYWOOD_PLANKS.get(), CABlocks.GINKGO_PLANKS.get(), CABlocks.MOLDY_PLANKS.get(), CABlocks.CRYSTAL_PLANKS.get());
+			this.tag(BlockTags.PLANKS).add(CABlocks.APPLE_PLANKS.get(), CABlocks.CHERRY_PLANKS.get(), CABlocks.PEACH_PLANKS.get(), CABlocks.DUPLICATION_PLANKS.get(), CABlocks.SKYWOOD_PLANKS.get(), CABlocks.GINKGO_PLANKS.get(), CABlocks.MOLDY_PLANKS.get());
 			this.tag(BlockTags.LEAVES).add(CABlocks.APPLE_LEAVES.get(), CABlocks.CHERRY_LEAVES.get(), CABlocks.PEACH_LEAVES.get(), CABlocks.SKYWOOD_LEAVES.get(), CABlocks.GINKGO_LEAVES.get());
 			this.tag(BlockTags.SAPLINGS).add(CABlocks.APPLE_SAPLING.get(), CABlocks.CHERRY_SAPLING.get(), CABlocks.PEACH_SAPLING.get());
 			this.tag(BlockTags.WOODEN_SLABS).add(CABlocks.APPLE_SLAB.get(), CABlocks.CHERRY_SLAB.get(), CABlocks.PEACH_SLAB.get(), CABlocks.DUPLICATION_SLAB.get(), CABlocks.SKYWOOD_SLAB.get(), CABlocks.GINKGO_SLAB.get(), CABlocks.MOLDY_SLAB.get(), CABlocks.CRYSTAL_SLAB.get());
@@ -121,7 +121,7 @@ public class CATagProvider extends BlockTagsProvider {
 
 			this.tag(ItemTags.LOGS).addTags(CATags.Items.DUPLICATION_LOGS);
 			this.tag(ItemTags.LOGS_THAT_BURN).addTags(CATags.Items.APPLE_LOGS, CATags.Items.CHERRY_LOGS, CATags.Items.PEACH_LOGS, CATags.Items.SKYWOOD_LOGS, CATags.Items.GINKGO_LOGS, CATags.Items.CRYSTAL_LOGS);
-			this.tag(ItemTags.PLANKS).add(CABlocks.APPLE_PLANKS.get().asItem(), CABlocks.CHERRY_PLANKS.get().asItem(), CABlocks.PEACH_PLANKS.get().asItem(), CABlocks.DUPLICATION_PLANKS.get().asItem(), CABlocks.SKYWOOD_PLANKS.get().asItem(), CABlocks.GINKGO_PLANKS.get().asItem(), CABlocks.MOLDY_PLANKS.get().asItem(), CABlocks.CRYSTAL_PLANKS.get().asItem());
+			this.tag(ItemTags.PLANKS).add(CABlocks.APPLE_PLANKS.get().asItem(), CABlocks.CHERRY_PLANKS.get().asItem(), CABlocks.PEACH_PLANKS.get().asItem(), CABlocks.DUPLICATION_PLANKS.get().asItem(), CABlocks.SKYWOOD_PLANKS.get().asItem(), CABlocks.GINKGO_PLANKS.get().asItem(), CABlocks.MOLDY_PLANKS.get().asItem());
 			this.tag(ItemTags.LEAVES).add(CABlocks.APPLE_LEAVES.get().asItem(), CABlocks.CHERRY_LEAVES.get().asItem(), CABlocks.PEACH_LEAVES.get().asItem(), CABlocks.SKYWOOD_LEAVES.get().asItem(), CABlocks.GINKGO_LEAVES.get().asItem());
 			this.tag(ItemTags.SAPLINGS).add(CABlocks.APPLE_SAPLING.get().asItem(), CABlocks.CHERRY_SAPLING.get().asItem(), CABlocks.PEACH_SAPLING.get().asItem());
 			this.tag(ItemTags.WOODEN_SLABS).add(CABlocks.APPLE_SLAB.get().asItem(), CABlocks.CHERRY_SLAB.get().asItem(), CABlocks.PEACH_SLAB.get().asItem(), CABlocks.DUPLICATION_SLAB.get().asItem(), CABlocks.SKYWOOD_SLAB.get().asItem(), CABlocks.GINKGO_SLAB.get().asItem(), CABlocks.MOLDY_SLAB.get().asItem(), CABlocks.CRYSTAL_SLAB.get().asItem());
