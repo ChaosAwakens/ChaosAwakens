@@ -3,6 +3,7 @@ package io.github.chaosawakens.data;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
@@ -805,11 +806,19 @@ public class CAEntityLootTables extends EntityLootTables {
 										.apply(Smelt.smelted()
 												.when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F))))));
-		add(CAEntityTypes.FROG.get(),
+		add(CALootTables.FROG_OVERWORLD,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.SLIME_BALL)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
+										.when(KilledByPlayer.killedByPlayer()))));
+		add(CALootTables.FROG_NETHER,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(Items.MAGMA_CREAM)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
 										.when(KilledByPlayer.killedByPlayer()))));

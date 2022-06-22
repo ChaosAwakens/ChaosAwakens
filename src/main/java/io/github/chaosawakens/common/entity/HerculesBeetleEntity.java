@@ -90,11 +90,16 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IAn
 	public AnimationFactory getFactory() {
 		return this.factory;
 	}
-	
+
+	@Override
+	public boolean causeFallDamage(float p_225503_1_, float p_225503_2_) {
+		return false;
+	}
+
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		
+
 		if (this.horizontalCollision && this.isOnGround()) {
 			this.jumpFromGround();
 		}

@@ -137,10 +137,16 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CHAOS_FLOWER_DEFAULT);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
-					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)) {
-				if (CACommonConfig.COMMON.enableOreGen.get())
-					addMountainBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateSpruceEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
+					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)
+					&& !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)
+					&& !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA)
+					&& !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) {
+				if (!location.contains("birch") && !location.contains("dark")) {
+					if (CACommonConfig.COMMON.enableOreGen.get())
+						addMountainBiomeOres(gen);
+					if (CACommonConfig.COMMON.generateSpruceEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
+				}
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.PLAINS)
@@ -149,54 +155,73 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addPlainsBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateOakEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+				if (CACommonConfig.COMMON.generateOakEntTree.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)) {
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_BUSH);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_SPARSE);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_DECORATED);
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addForestBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateWaspNest.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
-				if (CACommonConfig.COMMON.generateOakEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+				if (CACommonConfig.COMMON.generateWaspNest.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+			}
+			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
+					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST)
+					&& !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)
+					&& !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)) {
+				if (!location.contains("birch") && !location.contains("dark") && !location.contains("jungle") && !location.contains("taiga")) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_BUSH);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_SPARSE);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_DECORATED);
+					if (CACommonConfig.COMMON.enableOreGen.get())
+						addOakForestBiomeOres(gen);
+					if (CACommonConfig.COMMON.generateOakEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+				}
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& location.contains("birch")) {
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addBirchBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateBirchEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);
+				if (CACommonConfig.COMMON.generateBirchEntTree.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_BIRCH_ENT_TREE);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& location.contains("taiga")) {
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addTaigaBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateSpruceEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
+				if (CACommonConfig.COMMON.generateSpruceEntTree.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& location.contains("dark")) {
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addDarkForestBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateDarkOakEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);
+				if (CACommonConfig.COMMON.generateDarkOakEntTree.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) {
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addJungleBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateJungleEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);
+				if (CACommonConfig.COMMON.generateJungleEntTree.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_JUNGLE_ENT_TREE);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA)) {
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addSavannaBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateWaspNest.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
-				if (CACommonConfig.COMMON.generateAcaciaEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
+				if (CACommonConfig.COMMON.generateWaspNest.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+				if (CACommonConfig.COMMON.generateAcaciaEntTree.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) {
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addSwampBiomeOres(gen);
-				if (CACommonConfig.COMMON.generateWaspNest.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+				if (CACommonConfig.COMMON.generateWaspNest.get())
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)
 					&& BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) {
@@ -236,12 +261,14 @@ public class BiomeLoadEventSubscriber {
 				if (location.contains("crimson")) {
 					if (CACommonConfig.COMMON.enableOreGen.get())
 						addCrimsonNetherOres(gen);
-					if (CACommonConfig.COMMON.generateCrimsonEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);
+					if (CACommonConfig.COMMON.generateCrimsonEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_CRIMSON_ENT_TREE);
 				}
 				if (location.contains("warped")) {
 					if (CACommonConfig.COMMON.enableOreGen.get())
 						addWarpedNetherOres(gen);
-					if (CACommonConfig.COMMON.generateWarpedEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);
+					if (CACommonConfig.COMMON.generateWarpedEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WARPED_ENT_TREE);
 				}
 			}
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.END)) {
@@ -386,9 +413,14 @@ public class BiomeLoadEventSubscriber {
 
 		private static void addForestBiomeOres(BiomeGenerationSettingsBuilder gen) {
 			if (CACommonConfig.COMMON.enableFossilGen.get()) {
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_WASP);
+			}
+		}
+
+		private static void addOakForestBiomeOres(BiomeGenerationSettingsBuilder gen) {
+			if (CACommonConfig.COMMON.enableFossilGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_OAK_ENT);
 
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_WASP);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_WOLF);
 			}
 		}
