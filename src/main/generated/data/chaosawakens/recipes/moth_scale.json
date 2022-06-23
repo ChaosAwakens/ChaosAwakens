@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:moth_scale_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:moth_scale",
+    "count": 9
+  }
+}

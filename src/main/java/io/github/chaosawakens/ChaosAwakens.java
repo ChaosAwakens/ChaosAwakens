@@ -14,6 +14,8 @@ import io.github.chaosawakens.common.worldgen.BiomeLoadEventSubscriber;
 import io.github.chaosawakens.data.*;
 import io.github.chaosawakens.server.ServerSetupEvent;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -46,6 +48,8 @@ public class ChaosAwakens {
 	public static ArtifactVersion VERSION = null;
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static ChaosAwakens INSTANCE;
+	public boolean DISABLE_IN_DEV = false;
+	public static ItemGroup DEVELOPMENT;
 
 	public ChaosAwakens() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
@@ -111,6 +115,15 @@ public class ChaosAwakens {
 		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);
 		forgeBus.addListener(EventPriority.LOWEST, MiscEventHandler::onMobDrops);
 		forgeBus.register(this);
+
+		if (!FMLEnvironment.production && !DISABLE_IN_DEV) {
+			DEVELOPMENT = new ItemGroup("chaosawakens.development") {
+				@Override
+				public ItemStack makeIcon() {
+					return new ItemStack(CAItems.DEV_ITEM1.get());
+				}
+			};
+		}
 	}
 
 	public static ResourceLocation prefix(String name) {

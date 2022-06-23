@@ -15,6 +15,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.nio.file.Path;
 
+@SuppressWarnings("ALL")
 public class CATagProvider extends BlockTagsProvider {
 	public CATagProvider(DataGenerator gen, ExistingFileHelper existingFileHelper) {
 		super(gen, ChaosAwakens.MODID, existingFileHelper);
@@ -118,6 +119,7 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(CATags.Items.INGOTS).add(CAItems.ALUMINUM_INGOT.get(), CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get(), CAItems.CATS_EYE_INGOT.get(), CAItems.PINK_TOURMALINE_INGOT.get());
 			this.tag(CATags.Items.MINERAL_LUMPS).add(CAItems.COPPER_LUMP.get(), CAItems.PLATINUM_LUMP.get(), CAItems.SILVER_LUMP.get(), CAItems.TIN_LUMP.get());
 			this.tag(CATags.Items.RUBY_ORES).add(CABlocks.RUBY_ORE.get().asItem(), CABlocks.NETHERRACK_RUBY_ORE.get().asItem(), CABlocks.BLACKSTONE_RUBY_ORE.get().asItem());
+			this.tag(CATags.Items.LEAF_CARPETS).add(CABlocks.ACACIA_LEAF_CARPET.get().asItem(), CABlocks.BIRCH_LEAF_CARPET.get().asItem(), CABlocks.DARK_OAK_LEAF_CARPET.get().asItem(), CABlocks.JUNGLE_LEAF_CARPET.get().asItem(), CABlocks.OAK_LEAF_CARPET.get().asItem(), CABlocks.SPRUCE_LEAF_CARPET.get().asItem(), CABlocks.APPLE_LEAF_CARPET.get().asItem(), CABlocks.CHERRY_LEAF_CARPET.get().asItem(), CABlocks.DUPLICATION_LEAF_CARPET.get().asItem(), CABlocks.GINKGO_LEAF_CARPET.get().asItem(), CABlocks.PEACH_LEAF_CARPET.get().asItem(), CABlocks.SKYWOOD_LEAF_CARPET.get().asItem());
 
 			this.tag(ItemTags.LOGS).addTags(CATags.Items.DUPLICATION_LOGS);
 			this.tag(ItemTags.LOGS_THAT_BURN).addTags(CATags.Items.APPLE_LOGS, CATags.Items.CHERRY_LOGS, CATags.Items.PEACH_LOGS, CATags.Items.SKYWOOD_LOGS, CATags.Items.GINKGO_LOGS, CATags.Items.CRYSTAL_LOGS);
@@ -143,12 +145,6 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(Tags.Items.SEEDS).add(CAItems.CORN_SEEDS.get(), CAItems.LETTUCE_SEEDS.get(), CAItems.RADISH_SEEDS.get(), CAItems.STRAWBERRY_SEEDS.get(), CAItems.TOMATO_SEEDS.get());
 
 			this.tag(ItemTags.bind("forge:ingots/copper")).add(CAItems.COPPER_LUMP.get());
-
-			this.tag(CATags.Items.CUSTOM_TOOLTIPS).add(CAItems.RUBY.get(), CAItems.AMETHYST.get(),
-					CAItems.URANIUM_INGOT.get(), CAItems.TITANIUM_INGOT.get(), CAItems.TIGERS_EYE.get(),
-					CAItems.SUNSTONE.get(), CAItems.BLOODSTONE.get(),
-					CABlocks.FOSSILISED_WTF.get().asItem(), CABlocks.FOSSILISED_SCORPION.get().asItem(), CABlocks.FOSSILISED_PIRAPORU.get().asItem(),
-					CAItems.PEACOCK_FEATHER_BOOTS.get(), CAItems.ROYAL_GUARDIAN_BOOTS.get(), CAItems.QUEEN_SCALE_BOOTS.get());
 		}
 	}
 

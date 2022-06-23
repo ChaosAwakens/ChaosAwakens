@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:mobzilla_scale"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:mobzilla_scale_chestplate"
+  }
+}

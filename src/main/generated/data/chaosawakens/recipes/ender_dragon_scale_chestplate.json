@@ -1,13 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "# #",
-    "###",
-    "###"
+    "S S",
+    "SES",
+    "SSS"
   ],
   "key": {
-    "#": {
+    "S": {
       "item": "chaosawakens:ender_dragon_scale"
+    },
+    "E": {
+      "item": "minecraft:elytra"
     }
   },
   "result": {

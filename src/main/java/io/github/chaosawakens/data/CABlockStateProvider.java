@@ -1,10 +1,7 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
-import io.github.chaosawakens.common.blocks.GateBlock;
-import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
-import io.github.chaosawakens.common.blocks.RotatedPillarCrystalBlock;
+import io.github.chaosawakens.common.blocks.*;
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
@@ -16,6 +13,8 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
+import java.util.Objects;
 
 public class CABlockStateProvider extends BlockStateProvider {
 	public CABlockStateProvider(DataGenerator gen, String modid, ExistingFileHelper exFileHelper) {
@@ -330,6 +329,14 @@ public class CABlockStateProvider extends BlockStateProvider {
 
 		this.simpleBlock(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get());
 
+		this.simpleBlock(CABlocks.MOTH_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.MOBZILLA_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.QUEEN_SCALE_BLOCK.get());
+
 		this.simpleBlock(CABlocks.RUBY_ORE.get());
 		this.simpleBlock(CABlocks.NETHERRACK_RUBY_ORE.get());
 		this.simpleBlock(CABlocks.BLACKSTONE_RUBY_ORE.get());
@@ -460,7 +467,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	private String name(Block block) {
-		return block.getRegistryName().getPath();
+		return Objects.requireNonNull(block.getRegistryName()).getPath();
 	}
 
 	private ResourceLocation extend(ResourceLocation rl, String suffix) {
@@ -476,12 +483,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	public void cross(Block block) {
-		ModelFile cross = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath()));
+		ModelFile cross = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath()));
 		getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(cross).build());
 	}
 
 	public void doubleCross(DoubleDensePlantBlock block) {
-		ModelFile crossLower = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_bottom"));
+		ModelFile crossLower = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath() + "_bottom"));
 		ModelFile crossUpper = models().getExistingFile(getBlockResourceLocation(block.getRegistryName().getPath() + "_top"));
 
 		getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
@@ -546,62 +553,55 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	public void trapdoorBlock(TrapDoorBlock block) {
-		String name = block.getRegistryName().getPath();
+		String name = Objects.requireNonNull(block.getRegistryName()).getPath();
 		ModelFile bottom = models().getExistingFile(getBlockResourceLocation(name + "_bottom"));
 		ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));
 		ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
 		trapdoorBlock(block, bottom, top, open, true);
 	}
 
-	@SuppressWarnings("incomplete-switch")
 	public void buttonBlock(AbstractButtonBlock block, ResourceLocation textureName) {
-		ModelFile unpressed = models().withExistingParent(block.getRegistryName().getPath(), "button").texture("texture", textureName);
+		ModelFile unpressed = models().withExistingParent(Objects.requireNonNull(block.getRegistryName()).getPath(), "button").texture("texture", textureName);
 		ModelFile pressed = models().withExistingParent(block.getRegistryName().getPath() + "_pressed", "button_pressed").texture("texture", textureName);
 		ModelFile inventory = models().withExistingParent(block.getRegistryName().getPath() + "_inventory", "button_inventory").texture("texture", textureName);
 
 		getVariantBuilder(block).forAllStates(state -> {
 			int rotX = 0;
 			switch (state.getValue(HorizontalFaceBlock.FACE)) {
-			case CEILING:
-				rotX = 180;
-				break;
-			case FLOOR:
-				rotX = 0;
-				break;
-			case WALL:
-				rotX = 90;
-				break;
+				case CEILING:
+					rotX = 180;
+					break;
+				case FLOOR:
+					break;
+				case WALL:
+					rotX = 90;
 			}
 			int rotY = 0;
 			if (state.getValue(HorizontalFaceBlock.FACE) == AttachFace.CEILING) {
 				switch (state.getValue(HorizontalBlock.FACING)) {
-				case NORTH:
-					rotY = 180;
-					break;
-				case SOUTH:
-					rotY = 0;
-					break;
-				case WEST:
-					rotY = 90;
-					break;
-				case EAST:
-					rotY = 270;
-					break;
+					case NORTH:
+						rotY = 180;
+						break;
+					case SOUTH:
+						break;
+					case WEST:
+						rotY = 90;
+						break;
+					case EAST:
+						rotY = 270;
 				}
 			} else {
 				switch (state.getValue(HorizontalBlock.FACING)) {
-				case NORTH:
-					rotY = 0;
-					break;
-				case SOUTH:
-					rotY = 180;
-					break;
-				case WEST:
-					rotY = 270;
-					break;
-				case EAST:
-					rotY = 90;
-					break;
+					case NORTH:
+						break;
+					case SOUTH:
+						rotY = 180;
+						break;
+					case WEST:
+						rotY = 270;
+						break;
+					case EAST:
+						rotY = 90;
 				}
 			}
 			inventory.assertExistence();
@@ -612,59 +612,64 @@ public class CABlockStateProvider extends BlockStateProvider {
 		});
 	}
 
-	@SuppressWarnings("incomplete-switch")
 	public void leafCarpetBlock(LeafCarpetBlock block, ResourceLocation textureName) {
-		ModelFile carpet = models().withExistingParent(block.getRegistryName().getPath(), "chaosawakens:leaf_carpet").texture("texture", textureName);
+		ModelFile carpet = models().withExistingParent(Objects.requireNonNull(block.getRegistryName()).getPath(), ChaosAwakens.MODID + ":leaf_carpet").texture("texture", textureName);
 
-		getVariantBuilder(block).forAllStates(state -> {
-			int rotX = 0;
-			switch (state.getValue(HorizontalFaceBlock.FACE)) {
-			case CEILING:
-				rotX = 180;
-				break;
-			case FLOOR:
-				rotX = 0;
-				break;
-			case WALL:
-				rotX = 90;
-				break;
-			}
-			int rotY = 0;
-			if (state.getValue(HorizontalFaceBlock.FACE) == AttachFace.CEILING) {
-				switch (state.getValue(HorizontalBlock.FACING)) {
-				case NORTH:
-					rotY = 180;
-					break;
-				case SOUTH:
-					rotY = 0;
-					break;
-				case WEST:
-					rotY = 90;
-					break;
-				case EAST:
-					rotY = 270;
-					break;
-				}
-			} else {
-				switch (state.getValue(HorizontalBlock.FACING)) {
-				case NORTH:
-					rotY = 0;
-					break;
-				case SOUTH:
-					rotY = 180;
-					break;
-				case WEST:
-					rotY = 270;
-					break;
-				case EAST:
-					rotY = 90;
-					break;
-				}
-			}
-			boolean uvlock = state.getValue(HorizontalFaceBlock.FACE) == AttachFace.WALL;
-
-			return ConfiguredModel.builder().uvLock(uvlock).rotationX(rotX).rotationY(rotY).modelFile(carpet).build();
-		});
+		getMultipartBuilder(block)
+				.part().modelFile(carpet).addModel()
+					.condition(PipeBlock.NORTH, true).end()
+				.part().modelFile(carpet).addModel()
+					.condition(PipeBlock.DOWN, false)
+					.condition(PipeBlock.EAST, false)
+					.condition(PipeBlock.NORTH, false)
+					.condition(PipeBlock.SOUTH, false)
+					.condition(PipeBlock.UP, false)
+					.condition(PipeBlock.WEST, false).end()
+				.part().modelFile(carpet).uvLock(true).rotationY(90).addModel()
+					.condition(PipeBlock.EAST, true).end()
+				.part().modelFile(carpet).uvLock(true).rotationY(90).addModel()
+					.condition(PipeBlock.DOWN, false)
+					.condition(PipeBlock.EAST, false)
+					.condition(PipeBlock.NORTH, false)
+					.condition(PipeBlock.SOUTH, false)
+					.condition(PipeBlock.UP, false)
+					.condition(PipeBlock.WEST, false).end()
+				.part().modelFile(carpet).uvLock(true).rotationY(180).addModel()
+					.condition(PipeBlock.SOUTH, true).end()
+				.part().modelFile(carpet).uvLock(true).rotationY(180).addModel()
+					.condition(PipeBlock.DOWN, false)
+					.condition(PipeBlock.EAST, false)
+					.condition(PipeBlock.NORTH, false)
+					.condition(PipeBlock.SOUTH, false)
+					.condition(PipeBlock.UP, false)
+					.condition(PipeBlock.WEST, false).end()
+				.part().modelFile(carpet).uvLock(true).rotationY(270).addModel()
+					.condition(PipeBlock.WEST, true).end()
+				.part().modelFile(carpet).uvLock(true).rotationY(270).addModel()
+					.condition(PipeBlock.DOWN, false)
+					.condition(PipeBlock.EAST, false)
+					.condition(PipeBlock.NORTH, false)
+					.condition(PipeBlock.SOUTH, false)
+					.condition(PipeBlock.UP, false)
+					.condition(PipeBlock.WEST, false).end()
+				.part().modelFile(carpet).uvLock(true).rotationX(270).addModel()
+					.condition(PipeBlock.UP, true).end()
+				.part().modelFile(carpet).uvLock(true).rotationX(270).addModel()
+					.condition(PipeBlock.DOWN, false)
+					.condition(PipeBlock.EAST, false)
+					.condition(PipeBlock.NORTH, false)
+					.condition(PipeBlock.SOUTH, false)
+					.condition(PipeBlock.UP, false)
+					.condition(PipeBlock.WEST, false).end()
+				.part().modelFile(carpet).uvLock(true).rotationX(90).addModel()
+					.condition(PipeBlock.DOWN, true).end()
+				.part().modelFile(carpet).uvLock(true).rotationX(90).addModel()
+					.condition(PipeBlock.DOWN, false)
+					.condition(PipeBlock.EAST, false)
+					.condition(PipeBlock.NORTH, false)
+					.condition(PipeBlock.SOUTH, false)
+					.condition(PipeBlock.UP, false)
+					.condition(PipeBlock.WEST, false).end();
 	}
 
 	private ResourceLocation chaosRL(String texture) {

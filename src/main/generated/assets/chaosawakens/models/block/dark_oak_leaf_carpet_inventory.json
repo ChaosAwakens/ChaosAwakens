@@ -1,0 +1,6 @@
+{
+  "parent": "chaosawakens:block/leaf_carpet_inventory",
+  "textures": {
+    "texture": "minecraft:block/dark_oak_leaves"
+  }
+}

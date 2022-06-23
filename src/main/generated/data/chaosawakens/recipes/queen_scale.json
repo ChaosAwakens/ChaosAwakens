@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:queen_scale_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:queen_scale",
+    "count": 9
+  }
+}

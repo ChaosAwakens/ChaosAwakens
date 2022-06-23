@@ -26,7 +26,7 @@ public class CAClientConfig {
 		
 		public Client(ForgeConfigSpec.Builder builder) {
 			builder.push("ToolTips");
-			enableTooltips = builder.comment().define("Enable tooltips", true);
+			enableTooltips = builder.define("Enable tooltips", true);
 			toolTipColor = builder.comment("(ToolTip color applies to both default tooltip description text and when shift-clicking) \n"
 					+ "Colors include: \n"
 					+ "AQUA, BLACK, DARK_AQUA, DARK_BLUE, DARK_GRAY, DARK_GREEN, DARK_PURPLE, DARK_RED, \n"

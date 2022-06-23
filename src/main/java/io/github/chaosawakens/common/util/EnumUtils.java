@@ -38,12 +38,12 @@ public class EnumUtils {
 		WEAPON_BATTLEAXE(5, 1200, 15, 47, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 		WEAPON_SLAYER_CHAINSAW(4, 250, 30, 0, 0, () -> Ingredient.of(Items.REDSTONE_BLOCK)),
 		WEAPON_QUEEN_BATTLEAXE(4, 10000, 15, 663, 96, () -> Ingredient.of(CAItems.QUEEN_SCALE.get())),
-		WEAPON_ROYAL_GUARDIAN_SWORD(4, 10000, 15, 748, 96, () -> Ingredient.EMPTY),
+		WEAPON_ROYAL_GUARDIAN_SWORD(4, 10000, 15, 748, 96, () -> Ingredient.of(CAItems.ROYAL_GUARDIAN_SCALE.get())),
 		WEAPON_RAY_GUN(0, 50, 0, 0, 0, () -> Ingredient.of(Blocks.REDSTONE_BLOCK)),
 		WEAPON_GENERIC(2, 1024, 6, 6, 8, () -> Ingredient.EMPTY),
 		WEAPON_BIG_HAMMER(2, 2000, 6, 11, 9, () -> Ingredient.EMPTY),
 		WEAPON_ATTITUDE_ADJUSTER(2, 4500, 6, 11, 9, () -> Ingredient.EMPTY),
-		WEAPON_BERTHA(4, 6000, 16, 496, 72, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get()));
+		WEAPON_BERTHA(4, 6000, 16, 496, 72, () -> Ingredient.of(CAItems.MOBZILLA_SCALE.get()));
 
 		private final int harvestLevel;
 		private final int maxUses;
@@ -108,8 +108,8 @@ public class EnumUtils {
 		TIN("tin", 12, new int[] { 1, 4, 5, 2 }, 8, SoundEvents.ARMOR_EQUIP_DIAMOND, 0f, 0f, () -> Ingredient.of(CAItems.TIN_LUMP.get())),
 		SILVER("silver", 21, new int[] { 2, 4, 7, 3 }, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 1f, 0f, () -> Ingredient.of(CAItems.SILVER_LUMP.get())),
 		PLATINUM("platinum", 35, new int[] { 3, 6, 8, 3 }, 12, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> Ingredient.of(CAItems.PLATINUM_LUMP.get())),
-		MOBZILLA_SCALE("mobzilla_scale", 40, new int[] { 7, 11, 13, 7 }, 74, SoundEvents.ARMOR_EQUIP_NETHERITE, 6f, 0.2f, () -> Ingredient.EMPTY),
-		ROYAL_GUARDIAN("royal_guardian", 72, new int[] { 8, 12, 14, 8 }, 84, SoundEvents.ARMOR_EQUIP_NETHERITE, 7.5f, 0.4f, () -> Ingredient.EMPTY),
+		MOBZILLA_SCALE("mobzilla_scale", 40, new int[] { 7, 11, 13, 7 }, 74, SoundEvents.ARMOR_EQUIP_NETHERITE, 6f, 0.2f, () -> Ingredient.of(CAItems.MOBZILLA_SCALE.get())),
+		ROYAL_GUARDIAN("royal_guardian", 72, new int[] { 8, 12, 14, 8 }, 84, SoundEvents.ARMOR_EQUIP_NETHERITE, 7.5f, 0.4f, () -> Ingredient.of(CAItems.ROYAL_GUARDIAN_SCALE.get())),
 		QUEEN_SCALE("queen_scale", 68, new int[] { 9, 14, 16, 9 }, 96, SoundEvents.ARMOR_EQUIP_NETHERITE, 8f, 0.3f, () -> Ingredient.of(CAItems.QUEEN_SCALE.get()));
 
 		private final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };

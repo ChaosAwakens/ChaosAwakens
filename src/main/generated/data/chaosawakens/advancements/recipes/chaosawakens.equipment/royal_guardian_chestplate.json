@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:royal_guardian_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_royal_guardian_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:royal_guardian_scale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:royal_guardian_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_royal_guardian_scale",
+      "has_the_recipe"
+    ]
+  ]
+}

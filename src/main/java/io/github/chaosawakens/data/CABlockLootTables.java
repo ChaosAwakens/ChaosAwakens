@@ -2,6 +2,7 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CACropsBlock;
+import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
@@ -30,6 +31,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ALL")
 public class CABlockLootTables extends BlockLootTables {
 	private static final ILootCondition.IBuilder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
 	private static final ILootCondition.IBuilder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
@@ -124,20 +126,6 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.GINKGO_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.GINKGO_LEAVES.get()));
 		add(CABlocks.PEACH_LEAVES.get(), createCALeavesDrops(CABlocks.PEACH_LEAVES.get(), CABlocks.PEACH_SAPLING.get(), CAItems.PEACH.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.SKYWOOD_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.SKYWOOD_LEAVES.get()));
-
-		add(CABlocks.APPLE_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.APPLE_LEAF_CARPET.get()));
-		add(CABlocks.CHERRY_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.CHERRY_LEAF_CARPET.get()));
-		add(CABlocks.DUPLICATION_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.DUPLICATION_LEAF_CARPET.get()));
-		add(CABlocks.GINKGO_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.GINKGO_LEAF_CARPET.get()));
-		add(CABlocks.PEACH_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.PEACH_LEAF_CARPET.get()));
-		add(CABlocks.SKYWOOD_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.SKYWOOD_LEAF_CARPET.get()));
-
-		add(CABlocks.ACACIA_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.ACACIA_LEAF_CARPET.get()));
-		add(CABlocks.BIRCH_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.BIRCH_LEAF_CARPET.get()));
-		add(CABlocks.DARK_OAK_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.DARK_OAK_LEAF_CARPET.get()));
-		add(CABlocks.JUNGLE_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.JUNGLE_LEAF_CARPET.get()));
-		add(CABlocks.OAK_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.OAK_LEAF_CARPET.get()));
-		add(CABlocks.SPRUCE_LEAF_CARPET.get(), createShearsOnlyDrop(CABlocks.SPRUCE_LEAF_CARPET.get()));
 
 		// Ant/Termite Nests
 		dropSelf(CABlocks.BROWN_ANT_NEST.get());
@@ -252,6 +240,13 @@ public class CABlockLootTables extends BlockLootTables {
 
 		dropSelf(CABlocks.ENDER_EYE_BLOCK.get());
 		dropSelf(CABlocks.ENDER_PEARL_BLOCK.get());
+		dropSelf(CABlocks.MOTH_SCALE_BLOCK.get());
+		dropSelf(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
+		dropSelf(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
+		dropSelf(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
+		dropSelf(CABlocks.MOBZILLA_SCALE_BLOCK.get());
+		dropSelf(CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get());
+		dropSelf(CABlocks.QUEEN_SCALE_BLOCK.get());
 
 		dropSelf(CABlocks.ROBO_BLOCK_I.get());
 		dropSelf(CABlocks.ROBO_BLOCK_V.get());
@@ -649,9 +644,9 @@ public class CABlockLootTables extends BlockLootTables {
 
 	@Override
 	protected Iterable<Block> getKnownBlocks() {
-//		return CABlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
 		return ForgeRegistries.BLOCKS.getValues().stream()
-				.filter(b -> Objects.requireNonNull(b.getRegistryName()).getNamespace().equals(ChaosAwakens.MODID))
+				.filter(block -> Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(ChaosAwakens.MODID))
+				.filter(block -> !(block instanceof LeafCarpetBlock))
 				.collect(Collectors.toList());
 	}
 

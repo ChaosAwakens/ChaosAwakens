@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "#": {
+      "item": "chaosawakens:royal_guardian_scale"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:royal_guardian_sword"
+  }
+}

@@ -12,7 +12,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class CABlockModelProvider extends BlockModelProvider {
 	public CABlockModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {
 		super(generator, modid, existingFileHelper);
@@ -39,7 +41,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 	protected void registerModels() {
 		// TODO Automate the data generators
 		for (Block block : ForgeRegistries.BLOCKS) {
-			if (!ChaosAwakens.MODID.equals(block.getRegistryName().getNamespace())) continue;
+			if (!ChaosAwakens.MODID.equals(Objects.requireNonNull(block.getRegistryName()).getNamespace())) continue;
 
 			String name = block.getRegistryName().getPath();
 			ChaosAwakens.LOGGER.debug(block.getRegistryName());
@@ -61,8 +63,6 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("blue_bulb", chaosRL("blue_bulb"));
 		this.cross("pink_bulb", chaosRL("pink_bulb"));
 		this.cross("purple_bulb", chaosRL("purple_bulb"));
-
-		this.cubeBottomTop("fossilised_husk_sandstone", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
 
 		this.cubeAll("aluminum_block", chaosRL("aluminum_block"));
 		this.cubeAll("aluminum_ore", chaosRL("aluminum_ore"));
@@ -634,6 +634,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_guardian", chaosRL("fossilised_guardian"));
 		this.cubeAll("fossilised_horse", chaosRL("fossilised_horse"));
 		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
+		this.cubeBottomTop("fossilised_husk_sandstone", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
 		this.cubeAll("fossilised_illusioner", chaosRL("fossilised_illusioner"));
 		this.cubeAll("fossilised_iron_golem", chaosRL("fossilised_iron_golem"));
 		this.cubeAll("fossilised_llama", chaosRL("fossilised_llama"));
@@ -687,6 +688,14 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_shulker", chaosRL("fossilised_shulker"));
 
 		this.cubeAll("crystalised_crystal_apple_cow", chaosRL("crystalised_crystal_apple_cow"));
+
+		this.cubeAll("moth_scale_block", chaosRL("moth_scale_block"));
+		this.cubeAll("water_dragon_scale_block", chaosRL("water_dragon_scale_block"));
+		this.cubeAll("ender_dragon_scale_block", chaosRL("ender_dragon_scale_block"));
+		this.cubeAll("nightmare_scale_block", chaosRL("nightmare_scale_block"));
+		this.cubeAll("mobzilla_scale_block", chaosRL("mobzilla_scale_block"));
+		this.cubeAll("royal_guardian_scale_block", chaosRL("royal_guardian_scale_block"));
+		this.cubeAll("queen_scale_block", chaosRL("queen_scale_block"));
 
 		this.cubeColumn("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
 		this.cubeColumnHorizontal("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
@@ -747,39 +756,51 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("apple_planks", chaosRL("apple_planks"));
 		this.cubeAll("apple_leaves", chaosRL("apple_leaves"));
 		this.leafCarpet("apple_leaf_carpet", chaosRL("apple_leaves"));
+		this.leafCarpetInventory("apple_leaf_carpet_inventory", chaosRL("apple_leaves"));
 		this.cubeAll("apple_leaves_ripe", chaosRL("apple_leaves_ripe"));
 		this.cross("apple_sapling", chaosRL("apple_sapling"));
 		this.cubeAll("cherry_planks", chaosRL("cherry_planks"));
 		this.cubeAll("cherry_leaves", chaosRL("cherry_leaves"));
 		this.leafCarpet("cherry_leaf_carpet", chaosRL("cherry_leaves"));
+		this.leafCarpetInventory("cherry_leaf_carpet_inventory", chaosRL("cherry_leaves"));
 		this.cubeAll("cherry_leaves_ripe", chaosRL("cherry_leaves_ripe"));
 		this.cross("cherry_sapling", chaosRL("cherry_sapling"));
+		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
+		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
+		this.leafCarpet("duplication_leaf_carpet", chaosRL("duplication_leaves"));
+		this.leafCarpetInventory("duplication_leaf_carpet_inventory", chaosRL("duplication_leaves"));
 		this.cubeAll("ginkgo_planks", chaosRL("ginkgo_planks"));
 		this.cubeAll("ginkgo_leaves", chaosRL("ginkgo_leaves"));
 		this.leafCarpet("ginkgo_leaf_carpet", chaosRL("ginkgo_leaves"));
+		this.leafCarpetInventory("ginkgo_leaf_carpet_inventory", chaosRL("ginkgo_leaves"));
 		this.cross("ginkgo_sapling", chaosRL("ginkgo_sapling"));
 		this.cubeAll("peach_planks", chaosRL("peach_planks"));
 		this.cubeAll("peach_leaves", chaosRL("peach_leaves"));
 		this.leafCarpet("peach_leaf_carpet", chaosRL("peach_leaves"));
+		this.leafCarpetInventory("peach_leaf_carpet_inventory", chaosRL("peach_leaves"));
 		this.cubeAll("peach_leaves_ripe", chaosRL("peach_leaves_ripe"));
 		this.cross("peach_sapling", chaosRL("peach_sapling"));
-		this.cubeAll("duplication_planks", chaosRL("duplication_planks"));
-		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
-		this.leafCarpet("duplication_leaf_carpet", chaosRL("duplication_leaves"));
 		this.cubeAll("skywood_planks", chaosRL("skywood_planks"));
 		this.cubeAll("skywood_leaves", chaosRL("skywood_leaves"));
 		this.leafCarpet("skywood_leaf_carpet", chaosRL("skywood_leaves"));
+		this.leafCarpetInventory("skywood_leaf_carpet_inventory", chaosRL("skywood_leaves"));
 		this.cubeAll("crystal_planks", chaosRL("crystal_planks"));
 		this.cross("red_crystal_sapling", chaosRL("red_crystal_sapling"));
 		this.cross("green_crystal_sapling", chaosRL("green_crystal_sapling"));
 		this.cross("yellow_crystal_sapling", chaosRL("yellow_crystal_sapling"));
 
 		this.leafCarpet("oak_leaf_carpet", mcRL("oak_leaves"));
+		this.leafCarpetInventory("oak_leaf_carpet_inventory", mcRL("oak_leaves"));
 		this.leafCarpet("spruce_leaf_carpet", mcRL("spruce_leaves"));
+		this.leafCarpetInventory("spruce_leaf_carpet_inventory", mcRL("spruce_leaves"));
 		this.leafCarpet("birch_leaf_carpet", mcRL("birch_leaves"));
+		this.leafCarpetInventory("birch_leaf_carpet_inventory", mcRL("birch_leaves"));
 		this.leafCarpet("jungle_leaf_carpet", mcRL("jungle_leaves"));
+		this.leafCarpetInventory("jungle_leaf_carpet_inventory", mcRL("jungle_leaves"));
 		this.leafCarpet("acacia_leaf_carpet", mcRL("acacia_leaves"));
+		this.leafCarpetInventory("acacia_leaf_carpet_inventory", mcRL("acacia_leaves"));
 		this.leafCarpet("dark_oak_leaf_carpet", mcRL("dark_oak_leaves"));
+		this.leafCarpetInventory("dark_oak_leaf_carpet_inventory", mcRL("dark_oak_leaves"));
 
 		this.stairs("apple_stairs", chaosRL("apple_planks"), chaosRL("apple_planks"), chaosRL("apple_planks"));
 		this.stairsInner("apple_stairs", chaosRL("apple_planks"), chaosRL("apple_planks"), chaosRL("apple_planks"));
@@ -954,6 +975,10 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 	public void leafCarpet(String name, ResourceLocation texture) {
 		singleTexture(name, chaosRL("leaf_carpet"), "texture", texture);
+	}
+
+	public void leafCarpetInventory(String name, ResourceLocation texture) {
+		singleTexture(name, chaosRL("leaf_carpet_inventory"), "texture", texture);
 	}
 
 	public void gateBlock(String name, ResourceLocation side, ResourceLocation top) {

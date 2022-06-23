@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:mobzilla_scale_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:mobzilla_scale",
+    "count": 9
+  }
+}

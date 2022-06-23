@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:water_dragon_scale_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:water_dragon_scale",
+    "count": 9
+  }
+}

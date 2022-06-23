@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:nightmare_scale_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:nightmare_scale",
+    "count": 9
+  }
+}

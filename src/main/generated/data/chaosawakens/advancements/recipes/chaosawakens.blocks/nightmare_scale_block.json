@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:nightmare_scale_block"
+    ]
+  },
+  "criteria": {
+    "has_nightmare_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:nightmare_scale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:nightmare_scale_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nightmare_scale",
+      "has_the_recipe"
+    ]
+  ]
+}

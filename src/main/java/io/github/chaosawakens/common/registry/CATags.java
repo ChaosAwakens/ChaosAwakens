@@ -61,8 +61,7 @@ public class CATags {
 		public static final ITag.INamedTag<Item> PLANTS = tag("plants");
 		public static final ITag.INamedTag<Item> RUBY_ORES = tag("ruby_ores");
 		public static final ITag.INamedTag<Item> SEEDS = tag("seeds");
-
-		public static final ITag.INamedTag<Item> CUSTOM_TOOLTIPS = tag("custom_tooltips");
+		public static final ITag.INamedTag<Item> LEAF_CARPETS = tag("leaf_carpets");
 	}
 
 	public static class EntityTypes {
