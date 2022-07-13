@@ -42,7 +42,7 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 **Therefore, not only we're not going to use the OreSpawn assets, we're also not going to provide, promote or endorse any resource pack that attempts to port them.**
 
 ## Credits/Staff Team
-**Project Leads:** 𝒯𝟦☯𝓃𝑒™, WeirdNerd
+**Project Leads:** WeirdNerd, 𝒯𝟦☯𝓃𝑒™
 
 **Organizers:** Phwee, VDA Spoop
 
