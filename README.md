@@ -58,4 +58,4 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 
 **Texturers:** Absolute Kun, ChromaticAeternus, LuisRandomness, Memer Teamer, Renato, Santispik3, Skarrier, SnakeMaster, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
 
-**Former Members:** AlexanderTheNotSoGreat, BS Guy, Crosby, crydigo, HugoMage, Lymen, mattster, Sipilus, Technocreeper, thesleepingdevil
+**Former Members:** AlexanderTheNotSoGreat, BS Guy, Crosby, crydigo, Funky Monk, HugoMage, Lymen, mattster, Sipilus, Technocreeper, thesleepingdevil
