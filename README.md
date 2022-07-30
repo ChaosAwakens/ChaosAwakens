@@ -54,20 +54,12 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 **Therefore, not only we're not going to use the OreSpawn assets, we're also not going to provide, promote or endorse any resource pack that attempts to port them.**
 
 ## Credits/Staff Team
-**Project Leads:** Funky Monk, WeirdNerd, 𝒯𝟦☯𝓃𝑒™
-
-**Organizers:** Phwee, VDA Spoop
-
-**Animators:** Absolute Kun, Aqu, Pugman665544, Skarrier, SnakeMaster
-
-**Builders:** Blackout, Funky Monk, Meme Man, omarboi, Phwee, Skarrier, TheLoneCyberman, Unanimous
-
-**Coders:** Blackout, LuisRandomness, Meme Man, WeirdNerd
-
-**Modellers:** Absolute Kun, Memer Teamer, Pugman665544, Renato, Skarrier, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™
-
-**Sound Designers:** Skarrier, WeirdNerd
-
-**Texturers:** Absolute Kun, LuisRandomness, Memer Teamer, Renato, Santispik3, Skarrier, SnakeMaster, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™
-
+**Project Leads:** Funky Monk, WeirdNerd, 𝒯𝟦☯𝓃𝑒™ <br>
+**Organizers:** Phwee, VDA Spoop <br>
+**Animators:** Absolute Kun, Aqu, Pugman665544, Skarrier, SnakeMaster <br>
+**Builders:** Blackout, Funky Monk, Meme Man, omarboi, Phwee, Skarrier, TheLoneCyberman, Unanimous <br>
+**Coders:** Blackout, LuisRandomness, Meme Man, WeirdNerd <br>
+**Modellers:** Absolute Kun, Memer Teamer, Pugman665544, Renato, Skarrier, SnakeMaster, TheLoneCyberman, 𝒯𝟦☯𝓃𝑒™ <br>
+**Sound Designers:** Skarrier, WeirdNerd <br>
+**Texturers:** Absolute Kun, LuisRandomness, Memer Teamer, Renato, Santispik3, Skarrier, SnakeMaster, TheLoneCyberman, VDA Spoop, 𝒯𝟦☯𝓃𝑒™ <br>
 **Former Members:** AlexanderTheNotSoGreat, BS Guy, ChromaticAeternus, Crosby, crydigo, DinoDave, HugoMage, Lymen, mattster, Sipilus, Technocreeper, thesleepingdevil
