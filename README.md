@@ -2,7 +2,7 @@
 Chaos Awakens is a remaster of both the very iconic mod [OreSpawn](https://www.orespawn.com/download/) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
 
 ## Download
-All downloads are now located at our website that is located [here](https://chaosawakens.github.io/?#downloadsDiv). The source code for our website is located [here](https://github.com/ChaosAwakens/chaosawakens.github.io)
+All downloads are now located at our website that is located [here](https://chaosawakens.github.io/). The source code for our website is located [here](https://github.com/ChaosAwakens/chaosawakens.github.io)
 
 Due to drama and various mass reports by unknown sources, the mod was taken down from [*CurseForge*](https://www.curseforge.com/minecraft/mc-mods) and cannot be re-uploaded from this point forward. Please do **not** harass **anyone** in the *CurseForge* moderation team or **any** competitor mod developer for what you think they did. They are humans and we are too, and we all make mistakes.
 
@@ -32,10 +32,10 @@ Due to drama and various mass reports by unknown sources, the mod was taken down
 
 ## FAQ
 ### Q: Will this mod be ported to version x.x.x or other mod loaders?
-**A:** We are only going to focus on *Forge* 1.16.5 and 1.18.2 (hopefully) as of now, **thus there will be no plans for backports or Fabric/Quilt releases**. However, if you want to port everything from the mod yourself or with a group of people, feel free to fork the project. You may not redistribute any version of the mod on other websites but if you request it we may put your version on [our website](https://chaosawakens.github.io/?#downloadsDiv).
+**A:** We are only going to focus on *Forge* 1.16.5 and 1.18.2 (hopefully) as of now, **thus there will be no plans for backports or Fabric/Quilt releases**. However, if you want to port everything from the mod yourself or with a group of people, feel free to fork the project. You may not redistribute any version of the mod on other websites but if you request it we may put your version on [our website](https://chaosawakens.github.io/).
 
 ### Q: Who started/made this?
-**A:** This was started as an idea from the admins of the [*formerly named DangerZone modding Discord*](https://discord.gg/g27Yqa35EX), about a small while after the offical *OreSpawn* update was cancelled due to social media drama. This became to grow in its own path, and hopefully it keeps doing so.
+**A:** This was started as an idea from the admins of the [*formerly named DangerZone modding Discord*](https://discord.gg/9dFVHCWj9v), about a small while after the offical *OreSpawn* update was cancelled due to social media drama. This became to grow in its own path, and hopefully it keeps doing so.
 
 ### Q: Could you please add \<insert base *OreSpawn* element(s) here\>?! This isn't *OreSpawn* without it/them!
 **A:** We aren't porting everything from *OreSpawn* in its pure form, and so not only thought is needed to remake that content, it also means that some content will not make the cut.
