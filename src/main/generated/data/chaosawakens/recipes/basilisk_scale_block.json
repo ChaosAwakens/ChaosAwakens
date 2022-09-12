@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:basilisk_scale"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:basilisk_scale_block"
+  }
+}

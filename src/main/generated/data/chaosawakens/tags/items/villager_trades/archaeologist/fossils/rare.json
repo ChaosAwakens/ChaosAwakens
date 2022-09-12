@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:frozen_stray",
+    "chaosawakens:fossilised_husk",
+    "chaosawakens:fossilised_husk_sandstone",
+    "chaosawakens:fossilised_skeleton_horse",
+    "chaosawakens:fossilised_zombie_horse",
+    "chaosawakens:fossilised_acacia_ent",
+    "chaosawakens:fossilised_birch_ent",
+    "chaosawakens:fossilised_jungle_ent",
+    "chaosawakens:fossilised_oak_ent",
+    "chaosawakens:fossilised_dark_oak_ent",
+    "chaosawakens:fossilised_spruce_ent",
+    "chaosawakens:fossilised_wasp",
+    "chaosawakens:fossilised_iron_golem",
+    "chaosawakens:frozen_snow_golem",
+    "chaosawakens:frozen_polar_bear",
+    "chaosawakens:fossilised_panda",
+    "chaosawakens:fossilised_whale",
+    "chaosawakens:fossilised_ghast"
+  ]
+}

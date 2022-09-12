@@ -12,10 +12,7 @@ import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
-import net.minecraft.loot.functions.EnchantWithLevels;
-import net.minecraft.loot.functions.LootingEnchantBonus;
-import net.minecraft.loot.functions.SetCount;
-import net.minecraft.loot.functions.Smelt;
+import net.minecraft.loot.functions.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
@@ -359,7 +356,7 @@ public class CAEntityLootTables extends EntityLootTables {
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
-										.when(RandomChance.randomChance(0.1F))
+										.when(RandomChance.randomChance(0.2F))
 										.when(KilledByPlayer.killedByPlayer()))));
 		add(CAEntityTypes.EMERALD_GATOR.get(),
 				LootTable.lootTable()
@@ -722,6 +719,11 @@ public class CAEntityLootTables extends EntityLootTables {
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET)
 										.apply(SetCount.setCount(RandomValueRange.between(12.0F, 24.0F)))
+										.when(KilledByPlayer.killedByPlayer())))
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(CAItems.BUTTER_CANDY.get())
+										.apply(SetCount.setCount(RandomValueRange.between(0.0F, 12.0F)))
 										.when(KilledByPlayer.killedByPlayer()))));
 		add(CAEntityTypes.GREEN_FISH.get(),
 				LootTable.lootTable()
@@ -806,7 +808,7 @@ public class CAEntityLootTables extends EntityLootTables {
 										.apply(Smelt.smelted()
 												.when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(1.0F, 1.0F))))));
-		add(CALootTables.FROG_OVERWORLD,
+		add(CALootTables.TREE_FROG_OVERWORLD,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
@@ -814,7 +816,7 @@ public class CAEntityLootTables extends EntityLootTables {
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
 										.when(KilledByPlayer.killedByPlayer()))));
-		add(CALootTables.FROG_NETHER,
+		add(CALootTables.TREE_FROG_NETHER,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
@@ -822,13 +824,23 @@ public class CAEntityLootTables extends EntityLootTables {
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
 										.when(KilledByPlayer.killedByPlayer()))));
-		add(CAEntityTypes.BIRD.get(),
+		add(CALootTables.BIRD,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.FEATHER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
+										.when(KilledByPlayer.killedByPlayer()))));
+		add(CALootTables.BIRD_RUBY,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(TableLootEntry.lootTableReference(CALootTables.BIRD)))
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
+										.when(RandomChance.randomChance(0.2F))
 										.when(KilledByPlayer.killedByPlayer()))));
 	}
 

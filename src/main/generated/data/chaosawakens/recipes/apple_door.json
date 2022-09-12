@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:apple_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:apple_door"
+  }
+}

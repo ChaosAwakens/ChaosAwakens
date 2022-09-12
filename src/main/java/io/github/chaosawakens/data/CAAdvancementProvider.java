@@ -17,6 +17,8 @@ import net.minecraft.data.AdvancementProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -50,8 +52,12 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
 	}
 
-	private static String id(String s) {
-		return ChaosAwakens.MODID + ":" + s;
+	private static String advancementId(String s) {
+		return ChaosAwakens.MODID + ":root/" + s;
+	}
+
+	private static String slayAdvancementId(String name) {
+		return ChaosAwakens.MODID + ":slay/" + name;
 	}
 
 	@Override
@@ -83,32 +89,32 @@ public class CAAdvancementProvider extends AdvancementProvider {
 	}
 
 	@SuppressWarnings("unused")
-	public void register(Consumer<Advancement> t) {
+	public void register(Consumer<Advancement> consumer) {
 		Advancement root = registerAdvancement("root", FrameType.TASK, CAItems.RUBY.get())
 				.addCriterion("root", PositionTrigger.Instance.located(LocationPredicate.inDimension(RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld")))))
-				.save(t, id("root"));
+				.save(consumer, advancementId("root"));
 
 		// ARMOR
 		// Cat's Eye Armor
 		Advancement catsEyeArmor = registerAdvancement("cats_eye_armor", FrameType.TASK, CAItems.CATS_EYE_CHESTPLATE.get()).parent(root)
 				.addCriterion("cats_eye_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.CATS_EYE_HELMET.get(), CAItems.CATS_EYE_CHESTPLATE.get(), CAItems.CATS_EYE_LEGGINGS.get(), CAItems.CATS_EYE_BOOTS.get()))
-				.save(t, id("cats_eye_armor"));
+				.save(consumer, advancementId("cats_eye_armor"));
 		// Platinum Armor
 		Advancement platinumArmor = registerAdvancement("platinum_armor", FrameType.TASK, CAItems.PLATINUM_CHESTPLATE.get()).parent(catsEyeArmor)
 				.addCriterion("platinum_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.PLATINUM_HELMET.get(), CAItems.PLATINUM_CHESTPLATE.get(), CAItems.PLATINUM_LEGGINGS.get(), CAItems.PLATINUM_BOOTS.get()))
-				.save(t, id("platinum_armor"));
+				.save(consumer, advancementId("platinum_armor"));
 		// Experience Armor
 		Advancement experienceArmor = registerAdvancement("experience_armor", FrameType.TASK, CAItems.EXPERIENCE_CHESTPLATE.get()).parent(platinumArmor)
 				.addCriterion("experience_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get()))
-				.save(t, id("experience_armor"));
+				.save(consumer, advancementId("experience_armor"));
 		// Ruby Armor
 		Advancement rubyArmor = registerAdvancement("ruby_armor", FrameType.TASK, CAItems.RUBY_CHESTPLATE.get()).parent(experienceArmor)
 				.addCriterion("ruby_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.RUBY_HELMET.get(), CAItems.RUBY_CHESTPLATE.get(), CAItems.RUBY_LEGGINGS.get(), CAItems.RUBY_BOOTS.get()))
-				.save(t, id("ruby_armor"));
+				.save(consumer, advancementId("ruby_armor"));
 		// Ultimate Armor
 		Advancement ultimateArmor = registerAdvancement("ultimate_armor", FrameType.GOAL, CAItems.ULTIMATE_CHESTPLATE.get()).parent(root)
 				.addCriterion("ultimate_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get()))
-				.save(t, id("ultimate_armor"));
+				.save(consumer, advancementId("ultimate_armor"));
 		// ALL ARMOR
 		Advancement allArmor = registerAdvancement("all_armor", FrameType.CHALLENGE,
 				CAItems.TIGERS_EYE_CHESTPLATE.get())
@@ -129,40 +135,40 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				.addCriterion("experience_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get()))
 				.addCriterion("ruby_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.RUBY_HELMET.get(), CAItems.RUBY_CHESTPLATE.get(), CAItems.RUBY_LEGGINGS.get(), CAItems.RUBY_BOOTS.get()))
 				.addCriterion("ultimate_armor", InventoryChangeTrigger.Instance.hasItems(CAItems.ULTIMATE_HELMET.get(), CAItems.ULTIMATE_CHESTPLATE.get(), CAItems.ULTIMATE_LEGGINGS.get(), CAItems.ULTIMATE_BOOTS.get()))
-				.save(t, id("all_armor"));
+				.save(consumer, advancementId("all_armor"));
 
 		Advancement crystalWorld = registerAdvancement("crystal_world", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root)
 				.addCriterion("crystal_world", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTAL_WORLD))
-				.save(t, id("crystal_world"));
+				.save(consumer, advancementId("crystal_world"));
 
 		Advancement miningParadise = registerAdvancement("mining_paradise", FrameType.TASK, CABlocks.URANIUM_ORE.get())
 				.parent(root)
 				.addCriterion("mining_paradise", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.MINING_PARADISE))
-				.save(t, id("mining_paradise"));
+				.save(consumer, advancementId("mining_paradise"));
 
 		Advancement villageMania = registerAdvancement("village_mania", FrameType.TASK, Blocks.OAK_LOG).parent(root)
 				.addCriterion("village_mania", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.VILLAGE_MANIA))
-				.save(t, id("village_mania"));
+				.save(consumer, advancementId("village_mania"));
 
 		Advancement roboSlayer = registerAdvancement("robo_slayer", FrameType.GOAL, CAItems.RAY_GUN.get()).parent(root)
 				.addCriterion("robo_pounder", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_POUNDER.get())))
 				.addCriterion("robo_sniper", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_SNIPER.get())))
 				.addCriterion("robo_warrior", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_WARRIOR.get())))
-				.save(t, id("robo_slayer"));
+				.save(consumer, advancementId("robo_slayer"));
 
 		Advancement bugSquasher = registerAdvancement("bug_squasher", FrameType.TASK, CAItems.DEAD_STINK_BUG.get())
 				.parent(root)
 				.addCriterion("hercules_beetle", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.HERCULES_BEETLE.get())))
 				.addCriterion("ruby_bug", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.RUBY_BUG.get())))
 				.addCriterion("stink_bug", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.STINK_BUG.get())))
-				.save(t, id("bug_squasher"));
+				.save(consumer, advancementId("bug_squasher"));
 
 		Advancement goFish = registerAdvancement("go_fish", FrameType.TASK, CAItems.ROCK_FISH.get()).parent(root)
 				.addCriterion("green_fish", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.GREEN_FISH.get())))
 				.addCriterion("rock_fish", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROCK_FISH.get())))
 				.addCriterion("spark_fish", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.SPARK_FISH.get())))
 				.addCriterion("wood_fish", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.WOOD_FISH.get())))
-				.save(t, id("go_fish"));
+				.save(consumer, advancementId("go_fish"));
 
 		Advancement entDestroyer = registerAdvancement("ent_destroyer", FrameType.GOAL, Blocks.OAK_LEAVES).parent(root)
 				.addCriterion("acacia_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ACACIA_ENT.get())))
@@ -173,40 +179,64 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				.addCriterion("oak_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.OAK_ENT.get())))
 				.addCriterion("spruce_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.SPRUCE_ENT.get())))
 				.addCriterion("warped_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.WARPED_ENT.get())))
-				.save(t, id("ent_destroyer"));
+				.save(consumer, advancementId("ent_destroyer"));
 
 		Advancement trophyWorthy = registerAdvancement("trophy_worthy", FrameType.CHALLENGE, CABlocks.PLATINUM_BLOCK.get()).parent(root)
 				.addCriterion("platinum_block", InventoryChangeTrigger.Instance.hasItems(CABlocks.PLATINUM_BLOCK.get()))
 				.addCriterion("uranium_block", InventoryChangeTrigger.Instance.hasItems(CABlocks.URANIUM_BLOCK.get()))
 				.addCriterion("titanium_block", InventoryChangeTrigger.Instance.hasItems(CABlocks.TITANIUM_BLOCK.get()))
-				.save(t, id("trophy_worthy"));
+				.save(consumer, advancementId("trophy_worthy"));
 
 		Advancement stopBeingSalty = registerAdvancement("stop_being_salty", FrameType.TASK, CABlocks.SALT_BLOCK.get()).parent(root)
 				.addCriterion("salt_block", InventoryChangeTrigger.Instance.hasItems(CABlocks.SALT_BLOCK.get()))
-				.save(t, id("stop_being_salty"));
+				.save(consumer, advancementId("stop_being_salty"));
 
 		Advancement anAppleCowADay = registerAdvancement("an_apple_cow_a_day", FrameType.TASK, CAItems.APPLE_COW_SPAWN_EGG.get()).parent(root)
 				.addCriterion("apple_cow", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.APPLE_COW.get()).build(), EntityPredicate.ANY))
-				.save(t, id("an_apple_cow_a_day"));
+				.save(consumer, advancementId("an_apple_cow_a_day"));
 
 		Advancement shinyCows = registerAdvancement("shiny_cows", FrameType.TASK, CAItems.GOLDEN_APPLE_COW_SPAWN_EGG.get()).parent(anAppleCowADay)
 				.addCriterion("golden_apple_cow", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_APPLE_COW.get()).build(), EntityPredicate.ANY))
 				.addCriterion("enchanted_golden_apple_cow", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get()).build(), EntityPredicate.ANY))
-				.requirements(IRequirementsStrategy.OR).save(t, id("shiny_cows"));
+				.requirements(IRequirementsStrategy.OR).save(consumer, advancementId("shiny_cows"));
 
 		Advancement carrotVision = registerAdvancement("carrot_vision", FrameType.TASK, CAItems.CARROT_PIG_SPAWN_EGG.get()).parent(root)
 				.addCriterion("carrot_pig", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.CARROT_PIG.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.CARROT_PIG.get()).build(), EntityPredicate.ANY))
-				.save(t, id("carrot_vision"));
+				.save(consumer, advancementId("carrot_vision"));
 
 		Advancement shinyPigs = registerAdvancement("shiny_pigs", FrameType.TASK, CAItems.GOLDEN_CARROT_PIG_SPAWN_EGG.get()).parent(carrotVision)
 				.addCriterion("golden_carrot_pig", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.ANY))
 				.addCriterion("enchanted_golden_carrot_pig", BredAnimalsTrigger.Instance.bredAnimals(EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.Builder.entity().of(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get()).build(), EntityPredicate.ANY))
-				.requirements(IRequirementsStrategy.OR).save(t, id("shiny_pigs"));
+				.requirements(IRequirementsStrategy.OR).save(consumer, advancementId("shiny_pigs"));
 
 		Advancement chaoticByChoice = registerAdvancement("chaotic_by_choice", FrameType.GOAL, CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()).parent(root).requirements(IRequirementsStrategy.OR)
 				.addCriterion("copper_defossilizer", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()))
 				.addCriterion("iron_defossilizer", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()))
-				.save(t, id("chaotic_by_choice"));
+				.save(consumer, advancementId("chaotic_by_choice"));
+
+		registerSlayAdvancements(consumer);
+	}
+
+	public  void registerSlayAdvancements(Consumer<Advancement> consumer) {
+		Advancement.Builder slayRootBuilder = registerAdvancement("root", FrameType.CHALLENGE, CAItems.EMERALD_GATOR_SPAWN_EGG.get()).requirements(IRequirementsStrategy.AND);
+		CAEntityTypes.ENTITY_TYPES.getEntries().stream()
+				.filter(type -> !(type.getId().getPath().equals("thunder_ball") || type.getId().getPath().equals("ultimate_arrow") || type.getId().getPath().equals("ultimate_fishing_bobber") || type.getId().getPath().equals("robo_laser") || type.getId().getPath().equals("irukandji_arrow") || type.getId().getPath().equals("explosive_ball")))
+				.forEach(type -> slayRootBuilder.addCriterion("slay_" + type.get().getRegistryName(), KilledTrigger.Instance.playerKilledEntity(new EntityPredicate.Builder().of(type.get()))));
+		Advancement slayRoot = slayRootBuilder.save(consumer, advancementId("slay_root"));
+
+		CAEntityTypes.ENTITY_TYPES.getEntries().stream()
+				.filter(type -> !(type.getId().getPath().equals("thunder_ball") || type.getId().getPath().equals("ultimate_arrow") || type.getId().getPath().equals("ultimate_fishing_bobber") || type.getId().getPath().equals("robo_laser") || type.getId().getPath().equals("irukandji_arrow") || type.getId().getPath().equals("explosive_ball")))
+				.forEach(type -> {
+							Advancement.Builder.advancement()
+									.parent(slayRoot)
+									.display(new ItemStack(Items.EGG),
+											new TranslationTextComponent("advancements.chaosawakens.slay_" + type.getId().getPath() + ".title"),
+											new TranslationTextComponent("advancements.chaosawakens.slay_" + type.getId().getPath() + ".description"),
+											BACKGROUND_TEXTURE, FrameType.TASK, true, true, false)
+									.addCriterion("slay_" + type.getId().getPath(), KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(type.get())))
+									.save(consumer, slayAdvancementId(type.getId().getPath()));
+						}
+				);
 	}
 
 	private Advancement.Builder registerAdvancement(String name, FrameType type, IItemProvider... items) {

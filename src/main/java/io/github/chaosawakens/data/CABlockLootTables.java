@@ -2,7 +2,6 @@ package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CACropsBlock;
-import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
@@ -11,6 +10,7 @@ import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.data.loot.BlockLootTables;
@@ -127,6 +127,19 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.PEACH_LEAVES.get(), createCALeavesDrops(CABlocks.PEACH_LEAVES.get(), CABlocks.PEACH_SAPLING.get(), CAItems.PEACH.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.SKYWOOD_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.SKYWOOD_LEAVES.get()));
 
+		dropSelf(CABlocks.ACACIA_LEAF_CARPET.get());
+		dropSelf(CABlocks.BIRCH_LEAF_CARPET.get());
+		dropSelf(CABlocks.DARK_OAK_LEAF_CARPET.get());
+		dropSelf(CABlocks.JUNGLE_LEAF_CARPET.get());
+		dropSelf(CABlocks.OAK_LEAF_CARPET.get());
+		dropSelf(CABlocks.SPRUCE_LEAF_CARPET.get());
+		dropSelf(CABlocks.APPLE_LEAF_CARPET.get());
+		dropSelf(CABlocks.CHERRY_LEAF_CARPET.get());
+		dropSelf(CABlocks.DUPLICATION_LEAF_CARPET.get());
+		dropSelf(CABlocks.GINKGO_LEAF_CARPET.get());
+		dropSelf(CABlocks.PEACH_LEAF_CARPET.get());
+		dropSelf(CABlocks.SKYWOOD_LEAF_CARPET.get());
+
 		// Ant/Termite Nests
 		dropSelf(CABlocks.BROWN_ANT_NEST.get());
 		dropSelf(CABlocks.RAINBOW_ANT_NEST.get());
@@ -240,10 +253,12 @@ public class CABlockLootTables extends BlockLootTables {
 
 		dropSelf(CABlocks.ENDER_EYE_BLOCK.get());
 		dropSelf(CABlocks.ENDER_PEARL_BLOCK.get());
-		dropSelf(CABlocks.MOTH_SCALE_BLOCK.get());
-		dropSelf(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
+		dropSelf(CABlocks.BASILISK_SCALE_BLOCK.get());
+		dropSelf(CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get());
 		dropSelf(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
+		dropSelf(CABlocks.MOTH_SCALE_BLOCK.get());
 		dropSelf(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
+		dropSelf(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
 		dropSelf(CABlocks.MOBZILLA_SCALE_BLOCK.get());
 		dropSelf(CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get());
 		dropSelf(CABlocks.QUEEN_SCALE_BLOCK.get());
@@ -426,7 +441,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
 		dropSelf(CABlocks.FOSSILISED_BIRD.get());
 		dropSelf(CABlocks.FOSSILISED_DIMETRODON.get());
-		dropSelf(CABlocks.FOSSILISED_FROG.get());
+		dropSelf(CABlocks.FOSSILISED_TREE_FROG.get());
 
 		dropSelf(CABlocks.FOSSILISED_BAT.get());
 		dropSelf(CABlocks.FOSSILISED_BEE.get());
@@ -498,7 +513,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_ENDERMITE.get());
 		dropSelf(CABlocks.FOSSILISED_SHULKER.get());
 
-		dropSelf(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get());
+		dropSelf(CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.get());
 
 		dropSelf(CABlocks.CYAN_ROSE.get());
 		dropSelf(CABlocks.RED_ROSE.get());
@@ -594,6 +609,13 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.PEACH_TRAPDOOR.get());
 		dropSelf(CABlocks.SKYWOOD_TRAPDOOR.get());
 
+		add(CABlocks.APPLE_DOOR.get(), (block) -> createDoorDrop(CABlocks.APPLE_DOOR.get()));
+		add(CABlocks.CHERRY_DOOR.get(), (block) -> createDoorDrop(CABlocks.CHERRY_DOOR.get()));
+		add(CABlocks.DUPLICATION_DOOR.get(), (block) -> createDoorDrop(CABlocks.DUPLICATION_DOOR.get()));
+		add(CABlocks.GINKGO_DOOR.get(), (block) -> createDoorDrop(CABlocks.GINKGO_DOOR.get()));
+		add(CABlocks.PEACH_DOOR.get(), (block) -> createDoorDrop(CABlocks.PEACH_DOOR.get()));
+		add(CABlocks.SKYWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.SKYWOOD_DOOR.get()));
+
 		dropSelf(CABlocks.APPLE_GATE_BLOCK.get());
 		dropSelf(CABlocks.CHERRY_GATE_BLOCK.get());
 		dropSelf(CABlocks.DUPLICATION_GATE_BLOCK.get());
@@ -646,7 +668,6 @@ public class CABlockLootTables extends BlockLootTables {
 	protected Iterable<Block> getKnownBlocks() {
 		return ForgeRegistries.BLOCKS.getValues().stream()
 				.filter(block -> Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(ChaosAwakens.MODID))
-				.filter(block -> !(block instanceof LeafCarpetBlock))
 				.collect(Collectors.toList());
 	}
 
@@ -670,8 +691,19 @@ public class CABlockLootTables extends BlockLootTables {
 
 	private LootTable.Builder randomDropping(IItemProvider item, float random1, float random2) {
 		return LootTable.lootTable().withPool(
-				applyExplosionCondition(item, LootPool.lootPool().setRolls(RandomValueRange.between(random1, random2)))
+				applyExplosionCondition(item, LootPool.lootPool()
+						.setRolls(RandomValueRange.between(random1, random2)))
 						.add(ItemLootEntry.lootTableItem(item)));
+	}
+
+	private LootTable.Builder createDoorDrop(Block block) {
+		return LootTable.lootTable().withPool(
+				applyExplosionCondition(block, LootPool.lootPool()
+						.setRolls(ConstantRange.exactly(1))
+						.add(ItemLootEntry.lootTableItem(block)
+								.when(BlockStateProperty.hasBlockStateProperties(block)
+										.setProperties(StatePropertiesPredicate.Builder.properties()
+												.hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER))))));
 	}
 
 	public void dropAir(Block block) {

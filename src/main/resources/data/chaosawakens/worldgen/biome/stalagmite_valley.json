@@ -67,14 +67,6 @@
         "maxCount": 1
       }
     ],
-    "creature": [
-      {
-        "type": "chaosawakens:dimetrodon",
-        "weight": 8,
-        "minCount": 3,
-        "maxCount": 3
-      }
-    ],
     "ambient": [
       {
         "type": "minecraft:bat",

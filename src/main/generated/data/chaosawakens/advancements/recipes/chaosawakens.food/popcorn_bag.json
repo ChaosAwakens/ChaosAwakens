@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:popcorn_bag"
+    ]
+  },
+  "criteria": {
+    "has_empty_popcorn_bag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:empty_popcorn_bag"
+          }
+        ]
+      }
+    },
+    "has_popcorn": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:popcorn"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:popcorn_bag"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_empty_popcorn_bag",
+      "has_popcorn",
+      "has_the_recipe"
+    ]
+  ]
+}

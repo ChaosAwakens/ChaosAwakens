@@ -31,10 +31,23 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-		if (this.allowdedIn(group)) {
+		if (allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CACommonConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
+			if (CACommonConfig.COMMON.enableAutoEnchanting.get()) {
+				for (EnchantmentData enchant : enchantments) {
+					stack.enchant(enchant.enchantment, enchant.level);
+				}
+			}
 			items.add(stack);
+		}
+	}
+
+	@Override
+	public void onCraftedBy(ItemStack itemStack, World world, PlayerEntity playerEntity) {
+		if (CACommonConfig.COMMON.enableAutoEnchanting.get()) {
+			for (EnchantmentData enchant : enchantments) {
+				itemStack.enchant(enchant.enchantment, enchant.level);
+			}
 		}
 	}
 

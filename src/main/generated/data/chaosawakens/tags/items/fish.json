@@ -1,9 +1,14 @@
 {
   "replace": false,
   "values": [
+    "chaosawakens:blue_fish",
+    "chaosawakens:fire_fish",
+    "chaosawakens:gray_fish",
     "chaosawakens:green_fish",
+    "chaosawakens:pink_fish",
     "chaosawakens:rock_fish",
     "chaosawakens:spark_fish",
+    "chaosawakens:sun_fish",
     "chaosawakens:wood_fish"
   ]
 }

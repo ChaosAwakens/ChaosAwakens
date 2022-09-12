@@ -3,10 +3,10 @@
   "values": [
     "chaosawakens:apple_pressure_plate",
     "chaosawakens:cherry_pressure_plate",
-    "chaosawakens:peach_pressure_plate",
     "chaosawakens:duplication_pressure_plate",
-    "chaosawakens:skywood_pressure_plate",
     "chaosawakens:ginkgo_pressure_plate",
+    "chaosawakens:peach_pressure_plate",
+    "chaosawakens:skywood_pressure_plate",
     "chaosawakens:crystal_pressure_plate"
   ]
 }

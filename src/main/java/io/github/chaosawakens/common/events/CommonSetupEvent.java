@@ -39,32 +39,33 @@ import java.util.List;
 import java.util.Map;
 
 public class CommonSetupEvent {
-    public static List<FeatureWrapper> configFeatures = new ArrayList<>();
+	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
 
-    private static Method codecMethod;
+	private static Method codecMethod;
 
-    public static void onFMLCommonSetupEvent(FMLCommonSetupEvent event) {
-        CAEntityTypes.registerSpawnPlacementTypes();
-        PacketHandler.init();
-        Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
+	public static void onFMLCommonSetupEvent(FMLCommonSetupEvent event) {
+		CAEntityTypes.registerSpawnPlacementTypes();
+		PacketHandler.init();
+		CAEffects.registerBrewingRecipes(); // Unused Currently, Here for FUTURE use.
+		Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
 
-        event.enqueueWork(() -> {
-            CAVanillaCompat.setup();
-            CAStructures.setupStructures();
-            CAConfiguredStructures.registerConfiguredStructures();
-            CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
-            CAVillagers.registerVillagerTypes();
-            CABlocks.flowerPots();
-            WoodType.register(CABlocks.APPLE);
-            WoodType.register(CABlocks.CHERRY);
-            WoodType.register(CABlocks.DUPLICATION);
-            WoodType.register(CABlocks.PEACH);
-            WoodType.register(CABlocks.SKYWOOD);
-            WoodType.register(CABlocks.GINKGO);
-            
-            CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
-            configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
-        });
+		event.enqueueWork(() -> {
+			CAVanillaCompat.setup();
+			CAStructures.setupStructures();
+			CAConfiguredStructures.registerConfiguredStructures();
+			CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
+			CAVillagers.registerVillagerTypes();
+			CABlocks.flowerPots();
+			WoodType.register(CABlocks.APPLE);
+			WoodType.register(CABlocks.CHERRY);
+			WoodType.register(CABlocks.DUPLICATION);
+			WoodType.register(CABlocks.PEACH);
+			WoodType.register(CABlocks.SKYWOOD);
+			WoodType.register(CABlocks.GINKGO);
+
+			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
+			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
+		});
 
 		ModList modList = ModList.get();
 		if (modList.isLoaded("jeresources")) CAJER.init();
@@ -80,9 +81,6 @@ public class CommonSetupEvent {
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_WORLD);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_HILLS.getId()), CABiomes.Type.CRYSTAL_WORLD);
 	}
-    
-    public static void configStatesSync() {
-    }
 
 	@SuppressWarnings("unchecked")
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {

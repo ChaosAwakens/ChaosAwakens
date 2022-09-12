@@ -55,9 +55,6 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 12.0D)
 				.add(Attributes.MOVEMENT_SPEED, 1.2D)
-				.add(Attributes.ATTACK_SPEED, 0.25D)
-				.add(Attributes.ATTACK_DAMAGE, 1.0D)
-				.add(Attributes.ATTACK_KNOCKBACK, 0)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.add(Attributes.FOLLOW_RANGE, 4.0D);
 	}

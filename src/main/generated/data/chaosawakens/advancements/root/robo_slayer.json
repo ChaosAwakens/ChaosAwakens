@@ -1,0 +1,75 @@
+{
+  "parent": "chaosawakens:root/root",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:ray_gun",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.robo_slayer.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.robo_slayer.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "robo_pounder": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:robo_pounder"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "robo_sniper": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:robo_sniper"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "robo_warrior": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:robo_warrior"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "robo_pounder"
+    ],
+    [
+      "robo_sniper"
+    ],
+    [
+      "robo_warrior"
+    ]
+  ]
+}

@@ -2,13 +2,13 @@ package io.github.chaosawakens.common.entity.ai;
 
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.controller.MovementController;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.royawesome.jlibnoise.MathHelper;
 
 public class FlightMovementController extends MovementController{
 	protected MobEntity entity;
 	private float speedModifier;
-	private boolean needsHelpVerticalNav;
+	private final boolean needsHelpVerticalNav;
 
 	public FlightMovementController(MobEntity entity, float speedModifier, boolean needsHelpVerticalNav) {
 		super(entity);

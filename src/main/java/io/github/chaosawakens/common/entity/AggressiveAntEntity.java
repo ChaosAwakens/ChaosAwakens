@@ -107,11 +107,9 @@ public class AggressiveAntEntity extends MonsterEntity implements IAnimatable {
 	}
 
 	protected void handleAirSupply() {
-		if (this.isAlive()) {
-			if (this.isInWaterRainOrBubble() || this.isInLava()) {
+		if (this.isAlive() && (this.isInWaterRainOrBubble() || this.isInLava())) {
 				this.setAirSupply(0);
 				this.hurt(DamageSource.DROWN, Integer.MAX_VALUE);
-			}
 		}
 	}
 

@@ -30,13 +30,10 @@ public class BiomeLoadEventSubscriber {
 //		private static final Consumer<MobSpawnInfoBuilder> OVERWORLD_MOBS = (builder) -> { };
 
 		private static final Consumer<MobSpawnInfoBuilder> SWAMP_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 20, 3, 6));
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 15, 1, 2));
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 30, 2, 5));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 2, 3));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.RUBY_BUG.get(), 5, 2, 5));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 5, 2, 5));
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.FROG.get(), 25, 2, 6));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.TREE_FROG.get(), 25, 2, 6));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 7, 1, 4));
 		};
 
@@ -77,12 +74,20 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_SNIPER.get(), 60, 1, 3));
 		};
 
+		private static final Consumer<MobSpawnInfoBuilder> MINING_PARADISE_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 1, 4));
+		};
+
+		private static final Consumer<MobSpawnInfoBuilder> STALAGMITE_VALLEY_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.DIMETRODON.get(), 8, 3, 3));
+		};
+
 		private static final Consumer<MobSpawnInfoBuilder> NETHER_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LAVA_EEL.get(), 10, 1, 2));
 		};
 
-		private static final Consumer<MobSpawnInfoBuilder> BASALT_DELTA_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.FROG.get(), 25, 2, 6));
+		private static final Consumer<MobSpawnInfoBuilder> NETHER_FORESTS_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.TREE_FROG.get(), 25, 2, 6));
 		};
 
 		public static void addMobSpawns(BiomeLoadingEvent event) {
@@ -108,14 +113,19 @@ public class BiomeLoadEventSubscriber {
 				case NETHER:
 					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.HOT) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER))
 						NETHER_MOBS.accept(spawnInfoBuilder);
-					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && location.contains("basalt"))
-						BASALT_DELTA_MOBS.accept(spawnInfoBuilder);
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && (location.contains("crimson") || location.contains("warped")))
+						NETHER_FORESTS_MOBS.accept(spawnInfoBuilder);
 					break;
 				default:
 					if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_WORLD))
 						CRYSTAL_WORLD_MOBS.accept(spawnInfoBuilder);
 					if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_MANIA))
 						VILLAGE_MANIA_MOBS.accept(spawnInfoBuilder);
+					if (BiomeDictionary.hasType(biome, CABiomes.Type.MINING_PARADISE)) {
+						MINING_PARADISE_MOBS.accept(spawnInfoBuilder);
+						if (BiomeDictionary.hasType(biome, CABiomes.Type.STALAGMITE_VALLEY))
+							STALAGMITE_VALLEY_MOBS.accept(spawnInfoBuilder);
+					}
 //					if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) OVERWORLD_MOBS.accept(spawnInfoBuilder);
 			}
 		}

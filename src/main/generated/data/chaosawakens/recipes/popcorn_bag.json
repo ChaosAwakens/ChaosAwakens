@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:empty_popcorn_bag"
+    },
+    {
+      "item": "chaosawakens:popcorn"
+    },
+    {
+      "item": "chaosawakens:popcorn"
+    },
+    {
+      "item": "chaosawakens:popcorn"
+    },
+    {
+      "item": "chaosawakens:popcorn"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:popcorn_bag",
+    "count": 3
+  }
+}

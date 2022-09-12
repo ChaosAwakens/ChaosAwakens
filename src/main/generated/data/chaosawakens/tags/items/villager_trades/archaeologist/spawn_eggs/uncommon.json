@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:rabbit_spawn_egg",
+    "chaosawakens:tree_frog_spawn_egg",
+    "chaosawakens:apple_cow_spawn_egg",
+    "chaosawakens:carrot_pig_spawn_egg",
+    "minecraft:creeper_spawn_egg",
+    "minecraft:zombie_spawn_egg",
+    "minecraft:drowned_spawn_egg",
+    "minecraft:skeleton_spawn_egg",
+    "minecraft:fox_spawn_egg",
+    "minecraft:chicken_spawn_egg",
+    "minecraft:horse_spawn_egg",
+    "minecraft:witch_spawn_egg",
+    "minecraft:wolf_spawn_egg"
+  ]
+}

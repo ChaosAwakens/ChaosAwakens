@@ -85,6 +85,7 @@ public class CACommonConfig {
 		public final ConfigValue<Integer> pinkTourmShovelDamage;
 		public final ConfigValue<Integer> pinkTourmHoeDamage;
 		public final ConfigValue<Integer> nightmareSwordDamage;
+		public final ConfigValue<Integer> basiliskSwordDamage;
 		public final ConfigValue<Integer> experienceSwordDamage;
 		public final ConfigValue<Integer> poisonSwordDamage;
 		public final ConfigValue<Integer> ratSwordDamage;
@@ -171,7 +172,7 @@ public class CACommonConfig {
 
 		public final ConfigValue<Boolean> terraforgedCheckMsg;
 
-		public final ConfigValue<Integer> spawnEggsSpawnersSurvival;
+		public final ConfigValue<EnumUtils.SpawnEggSpawner> spawnEggsSpawnersSurvival;
 
 		public final ConfigValue<Boolean> showUpdateMessage;
 
@@ -278,6 +279,7 @@ public class CACommonConfig {
 			builder.pop();
 			builder.push("Misc Weapons/Tools");
 			nightmareSwordDamage = builder.define("Damage of the Nightmare Sword", 30);
+			basiliskSwordDamage = builder.define("Damage of the Basilisk Sword", 25);
 			experienceSwordDamage = builder.define("Damage of the Experience Sword", 10);
 			poisonSwordDamage = builder.define("Damage of the Poison Sword", 10);
 			ratSwordDamage = builder.define("Damage of the Rat Sword", 10);
@@ -362,10 +364,12 @@ public class CACommonConfig {
 			builder.pop();
 			builder.push("Spawners");
 			spawnEggsSpawnersSurvival = builder
-					.comment("0 = No Blocking - All Spawn Eggs can be used on a Spawner in Survival." + "\n"
-							+ "1 = Block All Spawn Eggs - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n"
-							+ "2 = Only Block Chaos Awakens - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.")
-					.defineInRange("Spawn Eggs on Spawners in Survival?", 1, 0, 2);
+					.comment("NO_SPAWN_EGGS = " + EnumUtils.SpawnEggSpawner.NO_SPAWN_EGGS.getDescription() + "\n"
+							+ "NO_CHAOS_AWAKENS = " + EnumUtils.SpawnEggSpawner.NO_CHAOS_AWAKENS.getDescription() + "\n"
+							+ "ALL_SPAWN_EGGS = " + EnumUtils.SpawnEggSpawner.ALL_SPAWN_EGGS.getDescription() + "\n"
+							+ "TAG_BLACKLIST = " + EnumUtils.SpawnEggSpawner.TAG_BLACKLIST.getDescription() + "\n"
+							+ "TAG_WHITELIST = " + EnumUtils.SpawnEggSpawner.TAG_WHITELIST.getDescription())
+					.defineEnum("Spawn Eggs on Spawners in Survival?", EnumUtils.SpawnEggSpawner.NO_SPAWN_EGGS);
 			builder.pop();
 			builder.pop();
 			builder.push("World Generation");

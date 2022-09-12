@@ -6,6 +6,7 @@ import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
+import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -17,8 +18,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import java.util.Objects;
 
 public class CABlockStateProvider extends BlockStateProvider {
-	public CABlockStateProvider(DataGenerator gen, String modid, ExistingFileHelper exFileHelper) {
-		super(gen, modid, exFileHelper);
+	public CABlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+		super(gen, ChaosAwakens.MODID, exFileHelper);
 	}
 
 	@Override
@@ -255,7 +256,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
 		this.simpleBlock(CABlocks.FOSSILISED_BIRD.get());
 		this.simpleBlock(CABlocks.FOSSILISED_DIMETRODON.get());
-		this.simpleBlock(CABlocks.FOSSILISED_FROG.get());
+		this.simpleBlock(CABlocks.FOSSILISED_TREE_FROG.get());
 
 		this.simpleBlock(CABlocks.FOSSILISED_BAT.get());
 		this.simpleBlock(CABlocks.FOSSILISED_BEE.get());
@@ -327,12 +328,14 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.FOSSILISED_ENDERMITE.get());
 		this.simpleBlock(CABlocks.FOSSILISED_SHULKER.get());
 
-		this.simpleBlock(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get());
+		this.simpleBlock(CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.get());
 
-		this.simpleBlock(CABlocks.MOTH_SCALE_BLOCK.get());
-		this.simpleBlock(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.BASILISK_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.MOTH_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.MOBZILLA_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.QUEEN_SCALE_BLOCK.get());
@@ -435,6 +438,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.trapdoorBlock(CABlocks.GINKGO_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.PEACH_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.SKYWOOD_TRAPDOOR.get());
+		this.doorBlock(CABlocks.APPLE_DOOR.get());
+		this.doorBlock(CABlocks.CHERRY_DOOR.get());
+		this.doorBlock(CABlocks.DUPLICATION_DOOR.get());
+		this.doorBlock(CABlocks.GINKGO_DOOR.get());
+		this.doorBlock(CABlocks.PEACH_DOOR.get());
+		this.doorBlock(CABlocks.SKYWOOD_DOOR.get());
 
 		this.simpleBlock(CABlocks.MOLDY_PLANKS.get());
 		this.slabBlock(CABlocks.MOLDY_SLAB.get(), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
@@ -558,6 +567,29 @@ public class CABlockStateProvider extends BlockStateProvider {
 		ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));
 		ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
 		trapdoorBlock(block, bottom, top, open, true);
+	}
+
+	public void doorBlock(DoorBlock block) {
+		ModelFile bottom = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath() + "_bottom"));
+		ModelFile bottomHinge = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath() + "_bottom_hinge"));
+		ModelFile top = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath() + "_top"));
+		ModelFile topHinge = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath() + "_top_hinge"));
+		getVariantBuilder(block).forAllStatesExcept(state -> {
+			int yRot = ((int) state.getValue(DoorBlock.FACING).toYRot()) + 90;
+			boolean rh = state.getValue(DoorBlock.HINGE) == DoorHingeSide.RIGHT;
+			boolean open = state.getValue(DoorBlock.OPEN);
+			boolean right = rh ^ open;
+			if (open) {
+				yRot += 90;
+			}
+			if (rh && open) {
+				yRot += 180;
+			}
+			yRot %= 360;
+			return ConfiguredModel.builder().modelFile(state.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER ? (right ? bottomHinge : bottom) : (right ? topHinge : top))
+					.rotationY(yRot)
+					.build();
+		}, DoorBlock.POWERED);
 	}
 
 	public void buttonBlock(AbstractButtonBlock block, ResourceLocation textureName) {

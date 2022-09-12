@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bee_spawn_egg",
+    "chaosawakens:bird_spawn_egg",
+    "minecraft:cow_spawn_egg",
+    "minecraft:donkey_spawn_egg",
+    "minecraft:dolphin_spawn_egg",
+    "minecraft:cod_spawn_egg",
+    "minecraft:salmon_spawn_egg",
+    "minecraft:pig_spawn_egg",
+    "minecraft:sheep_spawn_egg"
+  ]
+}

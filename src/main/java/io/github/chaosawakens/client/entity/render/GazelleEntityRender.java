@@ -16,10 +16,10 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class GazelleEntityRender extends GeoEntityRenderer<GazelleEntity> {
 	private static final ResourceLocation TEXTURE_BLACK_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/black.png");
+	private static final ResourceLocation TEXTURE_TAN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/tan.png");
 	private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/red.png");
-	private static final ResourceLocation TEXTURE_DARK_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/dark_red.png");
 	private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/brown.png");
-	private static final ResourceLocation TEXTURE_BEIJ_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/beij.png");
+	private static final ResourceLocation TEXTURE_BEIGE_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/gazelle/beige.png");
 
 	public GazelleEntityRender(EntityRendererManager renderManager) {
 		super(renderManager, new GazelleEntityModel());
@@ -38,13 +38,13 @@ public class GazelleEntityRender extends GeoEntityRenderer<GazelleEntity> {
 		default:
 			return TEXTURE_BROWN_LOCATION;
 		case 1:
-			return TEXTURE_RED_LOCATION;
+			return TEXTURE_TAN_LOCATION;
 		case 2:
-			return TEXTURE_DARK_RED_LOCATION;
+			return TEXTURE_RED_LOCATION;
 		case 3:
 			return TEXTURE_BLACK_LOCATION;
 		case 4:
-			return TEXTURE_BEIJ_LOCATION;
+			return TEXTURE_BEIGE_LOCATION;
 		}
 	}
 
@@ -57,5 +57,4 @@ public class GazelleEntityRender extends GeoEntityRenderer<GazelleEntity> {
 	public void renderRecursively(GeoBone bone, MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		super.renderRecursively(bone, matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
-
 }
