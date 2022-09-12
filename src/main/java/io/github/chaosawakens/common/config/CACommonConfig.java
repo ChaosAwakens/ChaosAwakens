@@ -286,7 +286,7 @@ public class CACommonConfig {
 			fairySwordDamage = builder.define("Damage of the Fairy Sword", 10);
 			mantisClawDamage = builder.define("Damage of the Mantis Claw", 10);
 			bigHammerDamage = builder.define("Damage of the Big Hammer", 15);
-			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 29);
+			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 17);
 			builder.pop();
 			builder.push("Big Weapons/Tools");
 			attitudeAdjusterDamage = builder.define("Damage of the Attitude Adjuster", 65);
