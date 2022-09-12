@@ -377,18 +377,8 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		RegistryKey<Biome> biomeRegistryKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(biome.getRegistryName()));
 		int i = this.random.nextInt(5);
 		int rubyChance = this.random.nextInt(10);
-		ChaosAwakens.LOGGER.info(i);
 		if (biome.getBiomeCategory() == Biome.Category.BEACH) i = 40;
-		ChaosAwakens.LOGGER.info("After Beach: " + i);
-		ChaosAwakens.LOGGER.info("Ruby Chance: " + rubyChance);
 		if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.DENSE_MOUNTAIN) && rubyChance == 5) i = 99;
-		ChaosAwakens.LOGGER.info("biomeRegistryKey: " + biomeRegistryKey);
-		ChaosAwakens.LOGGER.info("BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.DENSE_MOUNTAIN): " + BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.DENSE_MOUNTAIN));
-		ChaosAwakens.LOGGER.info("biome: " + biome);
-		ChaosAwakens.LOGGER.info("CABiomes.DENSE_MOUNTAIN.get(): " + CABiomes.DENSE_MOUNTAIN.get());
-		ChaosAwakens.LOGGER.info("biome.getRegistryName(): " + biome.getRegistryName());
-		ChaosAwakens.LOGGER.info("CABiomes.DENSE_MOUNTAIN.get().getRegistryName(): " + CABiomes.DENSE_MOUNTAIN.get().getRegistryName());
-		ChaosAwakens.LOGGER.info("After Dense Mountain: " + i);
 		return i;
 	}
 
