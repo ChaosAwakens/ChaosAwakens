@@ -6,8 +6,9 @@ import io.github.chaosawakens.common.entity.AppleCowEntity;
 import io.github.chaosawakens.common.entity.BirdEntity;
 import io.github.chaosawakens.common.entity.CrystalGatorEntity;
 import io.github.chaosawakens.common.entity.DimetrodonEntity;
-import io.github.chaosawakens.common.entity.FrogEntity;
 import io.github.chaosawakens.common.entity.GazelleEntity;
+import io.github.chaosawakens.common.entity.StinkBugEntity;
+import io.github.chaosawakens.common.entity.TreeFrogEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
 import mcjty.theoneprobe.Tools;
 import mcjty.theoneprobe.api.*;
@@ -100,36 +101,36 @@ public class TheOneProbePlugin {
 						}
 					}
 
-					if (entity instanceof FrogEntity) {
-						int type = ((FrogEntity) entity).getFrogType();
+					if (entity instanceof TreeFrogEntity) {
+						int type = ((TreeFrogEntity) entity).getTreeFrogType();
 						switch (type) {
 						case 0:
 						default:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Green (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Green (" + type + ")"));
 							return;
 						case 1:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Brown (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Brown (" + type + ")"));
 							return;
 						case 2:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Pink (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Pink (" + type + ")"));
 							return;
 						case 3:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Dark Green (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Dark Green (" + type + ")"));
 							return;
 						case 4:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Red (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Red (" + type + ")"));
 							return;
 						case 5:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Orange (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Orange (" + type + ")"));
 							return;
 						case 6:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Pale (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Pale (" + type + ")"));
 							return;
 						case 7:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Yellow (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Yellow (" + type + ")"));
 							return;
 						case 99:
-							iProbeInfo.text(CompoundText.createLabelInfo("Frog Species: ", "Black (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Black (" + type + ")"));
 						}
 					}
 
@@ -141,16 +142,16 @@ public class TheOneProbePlugin {
 							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Brown (" + type + ")"));
 							return;
 						case 1:
-							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Red (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Tan (" + type + ")"));
 							return;
 						case 2:
-							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Dark Red (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Red (" + type + ")"));
 							return;
 						case 3:
 							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Black (" + type + ")"));
 							return;
 						case 4:
-							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Furless (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Gazelle Species: ", "Beige (" + type + ")"));
 						}
 					}
 
@@ -181,18 +182,45 @@ public class TheOneProbePlugin {
 					if (entity instanceof DimetrodonEntity) {
 						int type = ((DimetrodonEntity) entity).getDimetrodonType();
 						switch (type) {
-						case 0:
-						default:
-							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Green (" + type + ")"));
-							return;
-						case 1:
-							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Orange (" + type + ")"));
-							return;
-						case 2:
-							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Purple (" + type + ")"));
-							return;
-						case 3:
-							iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Throwback (" + type + ")"));
+							case 0:
+							default:
+								iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Green (" + type + ")"));
+								return;
+							case 1:
+								iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Orange (" + type + ")"));
+								return;
+							case 2:
+								iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Purple (" + type + ")"));
+								return;
+							case 3:
+								iProbeInfo.text(CompoundText.createLabelInfo("Dimetrodon Species: ", "Throwback (" + type + ")"));
+						}
+					}
+
+					if (entity instanceof StinkBugEntity) {
+						int type = ((StinkBugEntity) entity).getStinkBugType();
+						switch (type) {
+							case 0:
+							default:
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Green (" + type + ")"));
+								return;
+							case 1:
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Blue (" + type + ")"));
+								return;
+							case 2:
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Brown (" + type + ")"));
+								return;
+							case 3:
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Cyan (" + type + ")"));
+								return;
+							case 4:
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Gray & Blue (" + type + ")"));
+								return;
+							case 5:
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Gray & Yellow (" + type + ")"));
+								return;
+							case 6:
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Throwback (" + type + ")"));
 						}
 					}
 				}

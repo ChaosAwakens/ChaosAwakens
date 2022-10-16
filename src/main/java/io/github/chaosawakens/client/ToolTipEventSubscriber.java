@@ -30,6 +30,21 @@ public class ToolTipEventSubscriber {
 						}
 					}
 				}
+			} else {
+				if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath())) {
+					if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath()).withStyle(CAClientConfig.CLIENT.toolTipColor.get()));
+					} else {
+						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens.default").withStyle(CAClientConfig.CLIENT.toolTipColor.get()));
+					}
+				}
+				for (int n = 2; n <= 15; n++) {
+					if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath() + "." + n)) {
+						if (Screen.hasShiftDown() || Screen.hasControlDown()) {
+							event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath() + "." + n).withStyle(CAClientConfig.CLIENT.toolTipColor.get()));
+						}
+					}
+				}
 			}
 		}
 	}

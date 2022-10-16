@@ -13,7 +13,6 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityType.IFactory;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.ResourceLocation;
@@ -101,10 +100,10 @@ public class CAEntityTypes {
 					.build(new ResourceLocation(ChaosAwakens.MODID, "whale").toString()));
 
 	// Frog
-	public static final RegistryObject<EntityType<FrogEntity>> FROG = ENTITY_TYPES.register("frog",
-			() -> EntityType.Builder.of(FrogEntity::new, EntityClassification.CREATURE)
+	public static final RegistryObject<EntityType<TreeFrogEntity>> TREE_FROG = ENTITY_TYPES.register("tree_frog",
+			() -> EntityType.Builder.of(TreeFrogEntity::new, EntityClassification.CREATURE)
 					.sized(0.6F, 0.6F).clientTrackingRange(10)
-					.build(new ResourceLocation(ChaosAwakens.MODID, "frog").toString()));
+					.build(new ResourceLocation(ChaosAwakens.MODID, "tree_frog").toString()));
 
 	// Gazelle
 	public static final RegistryObject<EntityType<GazelleEntity>> GAZELLE = ENTITY_TYPES.register("gazelle",
@@ -166,7 +165,7 @@ public class CAEntityTypes {
 					.build(new ResourceLocation(ChaosAwakens.MODID, "red_ant").toString()));
 	public static final RegistryObject<EntityType<AntEntity>> UNSTABLE_ANT = ENTITY_TYPES.register("unstable_ant",
 			() -> EntityType.Builder.of((IFactory<AntEntity>) (type, world) -> new AntEntity(type, world,
-							CACommonConfig.COMMON.enableUnstableAntTeleport, null), EntityClassification.CREATURE)
+							CACommonConfig.COMMON.enableUnstableAntTeleport, ChaosAwakens.DEVELOPMENT_ENVIRONMENT ? CADimensions.DANGER_ISLES : null), EntityClassification.CREATURE)
 					.sized(0.25f, 0.25f)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "unstable_ant").toString()));
 	// Termite
@@ -267,7 +266,7 @@ public class CAEntityTypes {
 		EntitySpawnPlacementRegistry.register(OAK_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(SPRUCE_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(WARPED_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
-		EntitySpawnPlacementRegistry.register(FROG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
+		EntitySpawnPlacementRegistry.register(TREE_FROG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, TreeFrogEntity::checkTreeFrogSpawnRules);
 		EntitySpawnPlacementRegistry.register(BIRD.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, BirdEntity::checkBirdSpawnRules);
 		EntitySpawnPlacementRegistry.register(LAVA_EEL.get(), EntitySpawnPlacementRegistry.PlacementType.IN_LAVA, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AbstractLavaEntity::checkLavaMobSpawnRules);
 		EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);

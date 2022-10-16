@@ -42,8 +42,8 @@ public class CATreasure {
 	public static final CATreasure ent_dungeon_red_mushroom_loot = new CATreasure("ent_dungeon/red_mushroom_loot");
 	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
 	public static final CATreasure wasp_dungeon_loot = new CATreasure("wasp_dungeon/loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/village/cherry_house"}} 1
-	public static final CATreasure village_cherry_house = new CATreasure("village/cherry_house");
+//	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/village/cherry_house"}} 1
+//	public static final CATreasure village_cherry_house = new CATreasure("village/cherry_house");
 
 	private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
 	public static LootFunctionType ENCHANT;

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:basilisk_scale_block"
+    ]
+  },
+  "criteria": {
+    "has_basilisk_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:basilisk_scale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:basilisk_scale_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_basilisk_scale",
+      "has_the_recipe"
+    ]
+  ]
+}

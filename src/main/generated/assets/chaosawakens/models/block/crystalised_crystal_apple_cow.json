@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "chaosawakens:block/crystalised_crystal_apple_cow"
-  }
-}

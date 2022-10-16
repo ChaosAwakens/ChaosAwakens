@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#chaosawakens:fossils/stone",
+    "#chaosawakens:fossils/gravel",
+    "#chaosawakens:fossils/sand",
+    "#chaosawakens:fossils/sandstone",
+    "#chaosawakens:fossils/ice",
+    "#chaosawakens:fossils/netherrack",
+    "#chaosawakens:fossils/blackstone",
+    "#chaosawakens:fossils/soul_soil",
+    "#chaosawakens:fossils/end_stone",
+    "#chaosawakens:fossils/kyanite"
+  ]
+}

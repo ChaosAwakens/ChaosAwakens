@@ -39,7 +39,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -51,8 +50,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.Objects;
+
 public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable {
-	private AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 	public static final DataParameter<Boolean> IS_RUNNING = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.BOOLEAN);
@@ -174,13 +175,13 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
     	if (getRunning() && !this.sprinting) {
     		this.sprinting = true;
     		this.setSprinting(true);
-    		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.4);
+    		Objects.requireNonNull(this.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.4);
     	}
     	
     	if (!getRunning() && this.sprinting) {
     		this.sprinting = false;
     		this.setSprinting(false);
-    		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.25);
+    		Objects.requireNonNull(this.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.25);
     	}
     }
 
@@ -195,28 +196,25 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	}
 
 	static class GazelleData extends AgeableEntity.AgeableData {
-		public final int gazelletype;
+		public final int gazelleType;
 
-		private GazelleData(int gazelletype) {
+		private GazelleData(int gazelleType) {
 			super(true);
-			this.gazelletype = gazelletype;
+			this.gazelleType = gazelleType;
 		}
 	}
 
 	@Nullable
 	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
 		int i = this.getRandomGazelleType(world);
-		if (entityData instanceof GazelleData) i = ((GazelleData) entityData).gazelletype;
+		if (entityData instanceof GazelleData) i = ((GazelleData) entityData).gazelleType;
 		else entityData = new GazelleData(i);
 		this.setGazelleType(i);
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
 	}
 
-	@SuppressWarnings("unused")
 	private int getRandomGazelleType(IWorld world) {
-		Biome biome = world.getBiome(this.blockPosition());
-        int i = this.random.nextInt(5);
-        return i;
+		return this.random.nextInt(5);
     }
     
     @OnlyIn(Dist.CLIENT)

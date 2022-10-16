@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:dimetrodon_spawn_egg",
+    "chaosawakens:crimson_ent_spawn_egg",
+    "chaosawakens:warped_ent_spawn_egg",
+    "chaosawakens:hercules_beetle_spawn_egg",
+    "chaosawakens:crystal_apple_cow_spawn_egg",
+    "chaosawakens:giant_spawn_egg",
+    "minecraft:enderman_spawn_egg",
+    "minecraft:evoker_spawn_egg",
+    "minecraft:cave_spider_spawn_egg",
+    "chaosawakens:illusioner_spawn_egg",
+    "minecraft:magma_cube_spawn_egg",
+    "minecraft:vindicator_spawn_egg",
+    "chaosawakens:lava_eel_spawn_egg",
+    "minecraft:mooshroom_spawn_egg",
+    "minecraft:phantom_spawn_egg",
+    "minecraft:blaze_spawn_egg",
+    "minecraft:wither_skeleton_spawn_egg"
+  ]
+}

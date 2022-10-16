@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BEB",
+    "GUG",
+    "BPB"
+  ],
+  "key": {
+    "B": {
+      "item": "chaosawakens:basilisk_scale"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    },
+    "G": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "E": {
+      "tag": "forge:gems/emerald"
+    },
+    "P": {
+      "tag": "chaosawakens:ultimate_gear_handles"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:basilisk_sword"
+  }
+}

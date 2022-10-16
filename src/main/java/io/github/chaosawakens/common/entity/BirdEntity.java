@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.registry.CABiomes;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.block.BlockState;
 
 import net.minecraft.block.Blocks;
@@ -34,6 +38,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -48,6 +54,7 @@ import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
@@ -57,7 +64,6 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	private static final DataParameter<Boolean> PERCHED = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> FLYING = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Optional<BlockPos>> POS = EntityDataManager.defineId(BirdEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
-	@SuppressWarnings("unused")
 	private float flap;
 	private float flapSpeed;
 	private float flapping = 1.0F;
@@ -222,7 +228,7 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	}
 
 	public int getBirdType() {
-		return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 40);
+		return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 99);
 	}
 
 	private void setBirdType(int id) {
@@ -272,7 +278,7 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 
 	public static boolean checkBirdSpawnRules(EntityType<BirdEntity> p, IWorld w, SpawnReason reason, BlockPos pos, Random random) {
 		BlockState blockstate = w.getBlockState(pos.below());
-		return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && w.getRawBrightness(pos, 0) > 8;
+		return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(CABlocks.DENSE_GRASS_BLOCK.get()) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && w.getRawBrightness(pos, 0) > 8;
 	}
 
 	private void calculateFlapping() {
@@ -358,10 +364,21 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, compoundNBT);
 	}
 
+	@Override
+	protected ResourceLocation getDefaultLootTable() {
+		if (this.getBirdType() == 99) {
+			return CALootTables.BIRD_RUBY;
+		}
+		return CALootTables.BIRD;
+	}
+
 	protected int setBirdType(IServerWorld world) {
 		Biome biome = world.getBiome(this.blockPosition());
+		RegistryKey<Biome> biomeRegistryKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(biome.getRegistryName()));
 		int i = this.random.nextInt(5);
+		int rubyChance = this.random.nextInt(10);
 		if (biome.getBiomeCategory() == Biome.Category.BEACH) i = 40;
+		if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.DENSE_MOUNTAIN) && rubyChance == 5) i = 99;
 		return i;
 	}
 

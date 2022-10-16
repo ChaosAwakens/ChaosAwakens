@@ -480,7 +480,7 @@
   "block.chaosawakens.copper_defossilizer": "Copper Defossilizer",
   "block.chaosawakens.iron_defossilizer": "Iron Defossilizer",
   "jei_desc.chaosawakens.defossilizer": "Used to turn Fossilized Mobs into Spawn Eggs.\n\nIt requires an Aluminum Power Chip as well as a specific liquid depending on the fossil.",
-  "jei_desc.chaosawakens.copper_defossilizer": "The Copper Defossilizer can only defossilize Stone and Gravel fossils..",
+  "jei_desc.chaosawakens.copper_defossilizer": "The Copper Defossilizer can only defossilize Stone and Gravel fossils.",
   "jei_desc.chaosawakens.iron_defossilizer": "The Iron Defossilizer can defossilize any fossils but takes 4 times longer than the Copper Defossilizer.",
   "item.chaosawakens.aluminum_power_chip": "Aluminum Power Chip",
 

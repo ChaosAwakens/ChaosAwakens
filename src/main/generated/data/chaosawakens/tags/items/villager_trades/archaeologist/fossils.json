@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#chaosawakens:villager_trades/archaeologist/fossils/common",
+    "#chaosawakens:villager_trades/archaeologist/fossils/uncommon",
+    "#chaosawakens:villager_trades/archaeologist/fossils/rare",
+    "#chaosawakens:villager_trades/archaeologist/fossils/epic"
+  ]
+}

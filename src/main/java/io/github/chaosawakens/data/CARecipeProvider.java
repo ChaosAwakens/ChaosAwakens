@@ -40,6 +40,7 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenSlab(consumer, CABlocks.APPLE_SLAB.get(), CABlocks.APPLE_PLANKS.get());
 		woodenStairs(consumer, CABlocks.APPLE_STAIRS.get(), CABlocks.APPLE_PLANKS.get());
 		woodenTrapdoor(consumer, CABlocks.APPLE_TRAPDOOR.get(), CABlocks.APPLE_PLANKS.get());
+		woodenDoor(consumer, CABlocks.APPLE_DOOR.get(), CABlocks.APPLE_PLANKS.get());
 		woodenFence(consumer, CABlocks.APPLE_FENCE.get(), CABlocks.APPLE_PLANKS.get());
 		woodenFenceGate(consumer, CABlocks.APPLE_FENCE_GATE.get(), CABlocks.APPLE_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.APPLE_PRESSURE_PLATE.get(), CABlocks.APPLE_PLANKS.get());
@@ -50,6 +51,7 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenSlab(consumer, CABlocks.CHERRY_SLAB.get(), CABlocks.CHERRY_PLANKS.get());
 		woodenStairs(consumer, CABlocks.CHERRY_STAIRS.get(), CABlocks.CHERRY_PLANKS.get());
 		woodenTrapdoor(consumer, CABlocks.CHERRY_TRAPDOOR.get(), CABlocks.CHERRY_PLANKS.get());
+		woodenDoor(consumer, CABlocks.CHERRY_DOOR.get(), CABlocks.CHERRY_PLANKS.get());
 		woodenFence(consumer, CABlocks.CHERRY_FENCE.get(), CABlocks.CHERRY_PLANKS.get());
 		woodenFenceGate(consumer, CABlocks.CHERRY_FENCE_GATE.get(), CABlocks.CHERRY_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.CHERRY_PRESSURE_PLATE.get(), CABlocks.CHERRY_PLANKS.get());
@@ -60,6 +62,7 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenSlab(consumer, CABlocks.DUPLICATION_SLAB.get(), CABlocks.DUPLICATION_PLANKS.get());
 		woodenStairs(consumer, CABlocks.DUPLICATION_STAIRS.get(), CABlocks.DUPLICATION_PLANKS.get());
 		woodenTrapdoor(consumer, CABlocks.DUPLICATION_TRAPDOOR.get(), CABlocks.DUPLICATION_PLANKS.get());
+		woodenDoor(consumer, CABlocks.DUPLICATION_DOOR.get(), CABlocks.DUPLICATION_PLANKS.get());
 		woodenFence(consumer, CABlocks.DUPLICATION_FENCE.get(), CABlocks.DUPLICATION_PLANKS.get());
 		woodenFenceGate(consumer, CABlocks.DUPLICATION_FENCE_GATE.get(), CABlocks.DUPLICATION_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.DUPLICATION_PRESSURE_PLATE.get(), CABlocks.DUPLICATION_PLANKS.get());
@@ -70,6 +73,7 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenSlab(consumer, CABlocks.GINKGO_SLAB.get(), CABlocks.GINKGO_PLANKS.get());
 		woodenStairs(consumer, CABlocks.GINKGO_STAIRS.get(), CABlocks.GINKGO_PLANKS.get());
 		woodenTrapdoor(consumer, CABlocks.GINKGO_TRAPDOOR.get(), CABlocks.GINKGO_PLANKS.get());
+		woodenDoor(consumer, CABlocks.GINKGO_DOOR.get(), CABlocks.GINKGO_PLANKS.get());
 		woodenFence(consumer, CABlocks.GINKGO_FENCE.get(), CABlocks.GINKGO_PLANKS.get());
 		woodenFenceGate(consumer, CABlocks.GINKGO_FENCE_GATE.get(), CABlocks.GINKGO_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.GINKGO_PRESSURE_PLATE.get(), CABlocks.GINKGO_PLANKS.get());
@@ -80,6 +84,7 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenSlab(consumer, CABlocks.PEACH_SLAB.get(), CABlocks.PEACH_PLANKS.get());
 		woodenStairs(consumer, CABlocks.PEACH_STAIRS.get(), CABlocks.PEACH_PLANKS.get());
 		woodenTrapdoor(consumer, CABlocks.PEACH_TRAPDOOR.get(), CABlocks.PEACH_PLANKS.get());
+		woodenDoor(consumer, CABlocks.PEACH_DOOR.get(), CABlocks.PEACH_PLANKS.get());
 		woodenFence(consumer, CABlocks.PEACH_FENCE.get(), CABlocks.PEACH_PLANKS.get());
 		woodenFenceGate(consumer, CABlocks.PEACH_FENCE_GATE.get(), CABlocks.PEACH_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.PEACH_PRESSURE_PLATE.get(), CABlocks.PEACH_PLANKS.get());
@@ -89,6 +94,7 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenSlab(consumer, CABlocks.SKYWOOD_SLAB.get(), CABlocks.SKYWOOD_PLANKS.get());
 		woodenStairs(consumer, CABlocks.SKYWOOD_STAIRS.get(), CABlocks.SKYWOOD_PLANKS.get());
 		woodenTrapdoor(consumer, CABlocks.SKYWOOD_TRAPDOOR.get(), CABlocks.SKYWOOD_PLANKS.get());
+		woodenDoor(consumer, CABlocks.SKYWOOD_DOOR.get(), CABlocks.SKYWOOD_PLANKS.get());
 		woodenFence(consumer, CABlocks.SKYWOOD_FENCE.get(), CABlocks.SKYWOOD_PLANKS.get());
 		woodenFenceGate(consumer, CABlocks.SKYWOOD_FENCE_GATE.get(), CABlocks.SKYWOOD_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.SKYWOOD_PRESSURE_PLATE.get(), CABlocks.SKYWOOD_PLANKS.get());
@@ -1022,14 +1028,29 @@ public class CARecipeProvider extends RecipeProvider {
 				.define('T', CAItems.TITANIUM_INGOT.get())
 				.define('R', Tags.Items.DUSTS_REDSTONE)
 				.define('D', Tags.Items.GEMS_DIAMOND)
-				.define('I', CATags.Items.ULTIMATE_GEAR_HANDLES)
+				.define('P', CATags.Items.ULTIMATE_GEAR_HANDLES)
 				.pattern("NDN")
 				.pattern("RTR")
-				.pattern("NIN")
+				.pattern("NPN")
 				.unlockedBy("has_" + CAItems.NIGHTMARE_SCALE.get().asItem(), has(CAItems.NIGHTMARE_SCALE.get()))
 				.unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get()))
 				.unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE))
 				.unlockedBy("has_" + Tags.Items.GEMS_DIAMOND.getName(), has(Tags.Items.GEMS_DIAMOND))
+				.unlockedBy("has_" + CATags.Items.ULTIMATE_GEAR_HANDLES.getName(), has(CATags.Items.ULTIMATE_GEAR_HANDLES))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.BASILISK_SWORD.get())
+				.define('B', CAItems.BASILISK_SCALE.get())
+				.define('U', CAItems.URANIUM_INGOT.get())
+				.define('G', Tags.Items.DUSTS_GLOWSTONE)
+				.define('E', Tags.Items.GEMS_EMERALD)
+				.define('P', CATags.Items.ULTIMATE_GEAR_HANDLES)
+				.pattern("BEB")
+				.pattern("GUG")
+				.pattern("BPB")
+				.unlockedBy("has_" + CAItems.BASILISK_SCALE.get().asItem(), has(CAItems.BASILISK_SCALE.get()))
+				.unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get()))
+				.unlockedBy("has_" + Tags.Items.DUSTS_GLOWSTONE.getName(), has(Tags.Items.DUSTS_GLOWSTONE))
+				.unlockedBy("has_" + Tags.Items.GEMS_EMERALD.getName(), has(Tags.Items.GEMS_EMERALD))
 				.unlockedBy("has_" + CATags.Items.ULTIMATE_GEAR_HANDLES.getName(), has(CATags.Items.ULTIMATE_GEAR_HANDLES))
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(CAItems.PRISMATIC_REAPER.get())
@@ -1103,14 +1124,18 @@ public class CARecipeProvider extends RecipeProvider {
 		blockToMaterial(consumer, CABlocks.ENDER_EYE_BLOCK.get(), Items.ENDER_EYE, new ResourceLocation(ChaosAwakens.MODID, "ender_eye"));
 		materialToBlock(consumer, CABlocks.ENDER_PEARL_BLOCK.get(), Items.ENDER_PEARL);
 		blockToMaterial(consumer, CABlocks.ENDER_PEARL_BLOCK.get(), Items.ENDER_PEARL, new ResourceLocation(ChaosAwakens.MODID, "ender_pearl"));
-		materialToBlock(consumer, CABlocks.MOTH_SCALE_BLOCK.get(), CAItems.MOTH_SCALE.get());
-		blockToMaterial(consumer, CABlocks.MOTH_SCALE_BLOCK.get(), CAItems.MOTH_SCALE.get());
-		materialToBlock(consumer, CABlocks.WATER_DRAGON_SCALE_BLOCK.get(), CAItems.WATER_DRAGON_SCALE.get());
-		blockToMaterial(consumer, CABlocks.WATER_DRAGON_SCALE_BLOCK.get(), CAItems.WATER_DRAGON_SCALE.get());
+		materialToBlock(consumer, CABlocks.BASILISK_SCALE_BLOCK.get(), CAItems.BASILISK_SCALE.get());
+		blockToMaterial(consumer, CABlocks.BASILISK_SCALE_BLOCK.get(), CAItems.BASILISK_SCALE.get());
+		materialToBlock(consumer, CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get(), CAItems.EMPEROR_SCORPION_SCALE.get());
+		blockToMaterial(consumer, CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get(), CAItems.EMPEROR_SCORPION_SCALE.get());
 		materialToBlock(consumer, CABlocks.ENDER_DRAGON_SCALE_BLOCK.get(), CAItems.ENDER_DRAGON_SCALE.get());
 		blockToMaterial(consumer, CABlocks.ENDER_DRAGON_SCALE_BLOCK.get(), CAItems.ENDER_DRAGON_SCALE.get());
+		materialToBlock(consumer, CABlocks.MOTH_SCALE_BLOCK.get(), CAItems.MOTH_SCALE.get());
+		blockToMaterial(consumer, CABlocks.MOTH_SCALE_BLOCK.get(), CAItems.MOTH_SCALE.get());
 		materialToBlock(consumer, CABlocks.NIGHTMARE_SCALE_BLOCK.get(), CAItems.NIGHTMARE_SCALE.get());
 		blockToMaterial(consumer, CABlocks.NIGHTMARE_SCALE_BLOCK.get(), CAItems.NIGHTMARE_SCALE.get());
+		materialToBlock(consumer, CABlocks.WATER_DRAGON_SCALE_BLOCK.get(), CAItems.WATER_DRAGON_SCALE.get());
+		blockToMaterial(consumer, CABlocks.WATER_DRAGON_SCALE_BLOCK.get(), CAItems.WATER_DRAGON_SCALE.get());
 		materialToBlock(consumer, CABlocks.MOBZILLA_SCALE_BLOCK.get(), CAItems.MOBZILLA_SCALE.get());
 		blockToMaterial(consumer, CABlocks.MOBZILLA_SCALE_BLOCK.get(), CAItems.MOBZILLA_SCALE.get());
 		materialToBlock(consumer, CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get(), CAItems.ROYAL_GUARDIAN_SCALE.get());
@@ -1216,7 +1241,8 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.LETTUCE.get().asItem(), has(CAItems.LETTUCE.get()))
 				.unlockedBy("has_" + CAItems.TOMATO.get().asItem(), has(CAItems.TOMATO.get()))
 				.unlockedBy("has_" + CAItems.RADISH.get().asItem(), has(CAItems.RADISH.get()))
-				.unlockedBy("has_" + Tags.Items.CROPS_CARROT.getName(), has(Tags.Items.CROPS_CARROT)).save(consumer);
+				.unlockedBy("has_" + Tags.Items.CROPS_CARROT.getName(), has(Tags.Items.CROPS_CARROT))
+				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(CAItems.RADISH_STEW.get())
 				.requires(Items.BOWL)
 				.requires(CAItems.RADISH.get())
@@ -1225,7 +1251,8 @@ public class CARecipeProvider extends RecipeProvider {
 				.requires(CAItems.RADISH.get())
 				.requires(CAItems.RADISH.get())
 				.requires(CAItems.RADISH.get())
-				.unlockedBy("has_" + CAItems.RADISH.get().asItem(), has(CAItems.RADISH.get())).save(consumer);
+				.unlockedBy("has_" + CAItems.RADISH.get().asItem(), has(CAItems.RADISH.get()))
+				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(CAItems.SEAFOOD_PATTY.get())
 				.requires(Items.BREAD)
 				.requires(CAItems.LETTUCE.get())
@@ -1249,6 +1276,54 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get()))
 				.save(consumer);
 
+		ShapelessRecipeBuilder.shapeless(CAItems.EMPTY_POPCORN_BAG.get(), 3)
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.RED_DYE)
+				.requires(Items.RED_DYE)
+				.requires(Items.RED_DYE)
+				.requires(Items.RED_DYE)
+				.unlockedBy("has_" + Items.PAPER.asItem(), has(Items.PAPER))
+				.unlockedBy("has_" + Items.RED_DYE.asItem(), has(Items.RED_DYE))
+				.save(consumer);
+		smelting(consumer, CAItems.CORN.get(), CAItems.POPCORN.get(), 0.35F, 200);
+		ShapelessRecipeBuilder.shapeless(CAItems.POPCORN_BAG.get(), 3)
+				.requires(CAItems.EMPTY_POPCORN_BAG.get())
+				.requires(CAItems.POPCORN.get())
+				.requires(CAItems.POPCORN.get())
+				.requires(CAItems.POPCORN.get())
+				.requires(CAItems.POPCORN.get())
+				.unlockedBy("has_" + CAItems.EMPTY_POPCORN_BAG.get().asItem(), has(CAItems.EMPTY_POPCORN_BAG.get()))
+				.unlockedBy("has_" + CAItems.POPCORN.get().asItem(), has(CAItems.POPCORN.get()))
+				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.SALTED_POPCORN_BAG.get(), 3)
+				.requires(CAItems.POPCORN_BAG.get())
+				.requires(CAItems.SALT.get())
+				.requires(CAItems.SALT.get())
+				.requires(CAItems.SALT.get())
+				.requires(CAItems.SALT.get())
+				.unlockedBy("has_" + CAItems.POPCORN_BAG.get().asItem(), has(CAItems.POPCORN_BAG.get()))
+				.unlockedBy("has_" + CAItems.SALT.get().asItem(), has(CAItems.SALT.get()))
+				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.BUTTERED_POPCORN_BAG.get(), 3)
+				.requires(CAItems.POPCORN_BAG.get())
+				.requires(CAItems.BUTTER.get())
+				.requires(CAItems.BUTTER.get())
+				.requires(CAItems.BUTTER.get())
+				.requires(CAItems.BUTTER.get())
+				.unlockedBy("has_" + CAItems.POPCORN_BAG.get().asItem(), has(CAItems.POPCORN_BAG.get()))
+				.unlockedBy("has_" + CAItems.BUTTER.get().asItem(), has(CAItems.BUTTER.get()))
+				.save(consumer);
+
+		ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
+				.requires(Items.SUGAR)
+				.requires(CAItems.BUTTER.get())
+				.unlockedBy("has_" + Items.SUGAR.asItem(), has(Items.SUGAR))
+				.unlockedBy("has_" + CAItems.BUTTER.get().asItem(), has(CAItems.BUTTER.get()))
+				.save(consumer);
 		smelting(consumer, Items.SUGAR, CAItems.CANDYCANE.get(), 0.35F, 200);
 
 		smelting(consumer, CAItems.GOLDEN_POTATO.get(), CAItems.GOLDEN_BAKED_POTATO.get(), 0.35F, 200);
@@ -1554,11 +1629,11 @@ public class CARecipeProvider extends RecipeProvider {
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_BIRD.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
-						Ingredient.of(CABlocks.FOSSILISED_FROG.get()),
+						Ingredient.of(CABlocks.FOSSILISED_TREE_FROG.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.FROG_SPAWN_EGG.get(), 1, 20, "copper")
-				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_FROG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+						CAItems.TREE_FROG_SPAWN_EGG.get(), 1, 20, "copper")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_TREE_FROG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 
 		// Overworld (Vanilla)
 		FossilRecipeBuilder
@@ -1685,7 +1760,7 @@ public class CARecipeProvider extends RecipeProvider {
 						Ingredient.of(CABlocks.FOSSILISED_HUSK_SANDSTONE.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						Items.HUSK_SPAWN_EGG, 1, 20, "iron")
+						Items.HUSK_SPAWN_EGG, 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_HUSK_SANDSTONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
@@ -2044,11 +2119,11 @@ public class CARecipeProvider extends RecipeProvider {
 		// Crystalworld (CA)
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
-						Ingredient.of(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get()),
+						Ingredient.of(CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 						CAItems.CRYSTAL_APPLE_COW_SPAWN_EGG.get(), 1, 20, "iron")
-				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 	}
 
 	private static void buildConversionRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -2143,6 +2218,17 @@ public class CARecipeProvider extends RecipeProvider {
 				.pattern("###")
 				.pattern("###")
 				.group("wooden_trapdoor")
+				.unlockedBy("has_planks", has(pMaterial))
+				.save(consumer);
+	}
+
+	private static void woodenDoor(Consumer<IFinishedRecipe> consumer, IItemProvider pDoor, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pDoor)
+				.define('#', pMaterial)
+				.pattern("##")
+				.pattern("##")
+				.pattern("##")
+				.group("wooden_door")
 				.unlockedBy("has_planks", has(pMaterial))
 				.save(consumer);
 	}

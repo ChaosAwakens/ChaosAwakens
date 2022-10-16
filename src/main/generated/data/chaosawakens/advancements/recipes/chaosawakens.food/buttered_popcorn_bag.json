@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:buttered_popcorn_bag"
+    ]
+  },
+  "criteria": {
+    "has_popcorn_bag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:popcorn_bag"
+          }
+        ]
+      }
+    },
+    "has_butter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:butter"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:buttered_popcorn_bag"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_popcorn_bag",
+      "has_butter",
+      "has_the_recipe"
+    ]
+  ]
+}

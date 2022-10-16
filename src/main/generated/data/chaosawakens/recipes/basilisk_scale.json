@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:basilisk_scale_block"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:basilisk_scale",
+    "count": 9
+  }
+}

@@ -31,6 +31,7 @@ public class EnumUtils {
 		TOOL_CATS_EYE(3, 1600, 8, 8, 20, () -> Ingredient.of(CAItems.CATS_EYE_INGOT.get())),
 		TOOL_ULTIMATE(6, 3000, 25, 36, 64, () -> Ingredient.of(CAItems.TITANIUM_INGOT.get(), CAItems.URANIUM_INGOT.get())),
 		TOOL_NIGHTMARE(3, 1800, 12, 26, 24, () -> Ingredient.of(CAItems.NIGHTMARE_SCALE.get())),
+		TOOL_BASILISK(3, 1800, 12, 26, 24, () -> Ingredient.of(CAItems.BASILISK_SCALE.get())),
 		TOOL_COPPER(2, 150, 4, 2, 6, () -> Ingredient.of(CAItems.COPPER_LUMP.get())),
 		TOOL_TIN(2, 180, 5, 3, 8, () -> Ingredient.of(CAItems.TIN_LUMP.get())),
 		TOOL_SILVER(3, 450, 7, 4, 10, () -> Ingredient.of(CAItems.SILVER_LUMP.get())),
@@ -177,5 +178,23 @@ public class EnumUtils {
 	public enum ElytraDamageType {
 		ARMOR,
 		ELYTRA
+	}
+
+	public enum SpawnEggSpawner {
+		NO_SPAWN_EGGS("All Spawn Eggs will be blocked from being used on a Spawner in Survival."),
+		NO_CHAOS_AWAKENS("Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival."),
+		ALL_SPAWN_EGGS("All Spawn Eggs can be used on a Spawner in Survival."),
+		TAG_BLACKLIST("Only Spawn Eggs that are inside the chaosawakens:spawner_spawn_eggs tag are Disabled in Survival."),
+		TAG_WHITELIST("Only Spawn Eggs that are inside the chaosawakens:spawner_spawn_eggs tag are Enabled in Survival.");
+
+		private final String description;
+
+		SpawnEggSpawner(String descriptionIn) {
+			this.description = descriptionIn;
+		}
+
+		public String getDescription() {
+			return this.description;
+		}
 	}
 }

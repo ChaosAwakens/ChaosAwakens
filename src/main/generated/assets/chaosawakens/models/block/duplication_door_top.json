@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "bottom": "chaosawakens:block/duplication_door_bottom",
+    "top": "chaosawakens:block/duplication_door_top"
+  }
+}

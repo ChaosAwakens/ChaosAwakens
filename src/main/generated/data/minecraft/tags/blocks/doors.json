@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:apple_door",
+    "chaosawakens:cherry_door",
+    "chaosawakens:duplication_door",
+    "chaosawakens:ginkgo_door",
+    "chaosawakens:peach_door",
+    "chaosawakens:skywood_door"
+  ]
+}

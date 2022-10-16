@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:popcorn_bag"
+    },
+    {
+      "item": "chaosawakens:salt"
+    },
+    {
+      "item": "chaosawakens:salt"
+    },
+    {
+      "item": "chaosawakens:salt"
+    },
+    {
+      "item": "chaosawakens:salt"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:salted_popcorn_bag",
+    "count": 3
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:basilisk_sword"
+    ]
+  },
+  "criteria": {
+    "has_basilisk_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:basilisk_scale"
+          }
+        ]
+      }
+    },
+    "has_uranium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:uranium_ingot"
+          }
+        ]
+      }
+    },
+    "has_forge:dusts/glowstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/glowstone"
+          }
+        ]
+      }
+    },
+    "has_forge:gems/emerald": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gems/emerald"
+          }
+        ]
+      }
+    },
+    "has_chaosawakens:ultimate_gear_handles": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "chaosawakens:ultimate_gear_handles"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:basilisk_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_basilisk_scale",
+      "has_uranium_ingot",
+      "has_forge:dusts/glowstone",
+      "has_forge:gems/emerald",
+      "has_chaosawakens:ultimate_gear_handles",
+      "has_the_recipe"
+    ]
+  ]
+}

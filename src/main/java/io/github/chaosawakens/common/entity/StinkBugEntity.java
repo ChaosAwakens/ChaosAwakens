@@ -2,8 +2,10 @@ package io.github.chaosawakens.common.entity;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
@@ -11,9 +13,17 @@ import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -28,6 +38,7 @@ import javax.annotation.Nullable;
 
 public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 
 	public StinkBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -58,6 +69,29 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0));
 	}
 
+	public void addAdditionalSaveData(CompoundNBT nbt) {
+		super.addAdditionalSaveData(nbt);
+		nbt.putInt("StinkBugType", this.getStinkBugType());
+	}
+
+	public void readAdditionalSaveData(CompoundNBT nbt) {
+		super.readAdditionalSaveData(nbt);
+		this.setStinkBugType(nbt.getInt("StinkBugType"));
+	}
+
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(DATA_TYPE_ID, 0);
+	}
+
+	public int getStinkBugType() {
+		return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 7);
+	}
+
+	public void setStinkBugType(int type) {
+		this.entityData.set(DATA_TYPE_ID, type);
+	}
+
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "stinkbugcontroller", 0, this::predicate));
@@ -80,5 +114,27 @@ public class StinkBugEntity extends AnimalEntity implements IAnimatable {
 			if (!damageSource.isExplosion()) livingentity.addEffect(new EffectInstance(new EffectInstance(Effects.CONFUSION, 200, 0)));
 		}
 		return super.hurt(damageSource, damage);
+	}
+
+	static class StinkBugData extends AgeableEntity.AgeableData {
+		public final int stinkBugType;
+
+		private StinkBugData(int stinkBugType) {
+			super(true);
+			this.stinkBugType = stinkBugType;
+		}
+	}
+
+	@Nullable
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
+		int i = this.getRandomStinkBugType(world);
+		if (entityData instanceof StinkBugEntity.StinkBugData) i = ((StinkBugData) entityData).stinkBugType;
+		else entityData = new StinkBugEntity.StinkBugData(i);
+		this.setStinkBugType(i);
+		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
+	}
+
+	private int getRandomStinkBugType(IWorld world) {
+		return this.random.nextInt(7);
 	}
 }

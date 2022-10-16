@@ -1,0 +1,46 @@
+{
+  "parent": "chaosawakens:root/platinum_armor",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:experience_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.experience_armor.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.experience_armor.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "experience_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:experience_helmet"
+          },
+          {
+            "item": "chaosawakens:experience_chestplate"
+          },
+          {
+            "item": "chaosawakens:experience_leggings"
+          },
+          {
+            "item": "chaosawakens:experience_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "experience_armor"
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "chaosawakens:corn"
+  },
+  "result": "chaosawakens:popcorn",
+  "experience": 0.35,
+  "cookingtime": 200
+}

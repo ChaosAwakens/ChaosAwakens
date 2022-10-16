@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_rh",
+  "textures": {
+    "bottom": "chaosawakens:block/skywood_door_bottom",
+    "top": "chaosawakens:block/skywood_door_top"
+  }
+}

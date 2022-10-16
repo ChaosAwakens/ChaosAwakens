@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "chaosawakens:kyanite"
+    "chaosawakens:kyanite",
+    "chaosawakens:marble_block",
+    "chaosawakens:limestone_block"
   ]
 }

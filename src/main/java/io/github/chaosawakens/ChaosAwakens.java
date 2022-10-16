@@ -48,8 +48,9 @@ public class ChaosAwakens {
 	public static ArtifactVersion VERSION = null;
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static ChaosAwakens INSTANCE;
-	public boolean DISABLE_IN_DEV = false;
+	public static boolean DISABLE_IN_DEV = false;
 	public static ItemGroup DEVELOPMENT;
+	public static boolean DEVELOPMENT_ENVIRONMENT = false;
 
 	public ChaosAwakens() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
@@ -60,10 +61,13 @@ public class ChaosAwakens {
 		if (opt.isPresent()) {
 			IModInfo modInfo = opt.get().getModInfo();
 			VERSION = modInfo.getVersion();
-		} else LOGGER.warn("Cannot get version from mod info");
+		} else {
+			LOGGER.warn("Cannot get version from mod info");
+		}
 
 		LOGGER.debug(MODNAME + " Version is: " + VERSION);
 		LOGGER.debug("Mod ID for " + MODNAME + " is: " + MODID);
+		DEVELOPMENT_ENVIRONMENT = !FMLEnvironment.production && !DISABLE_IN_DEV;
 
 		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
 
@@ -94,6 +98,7 @@ public class ChaosAwakens {
 		CAItems.ITEMS.register(eventBus);
 		CAEnchantments.ENCHANTS.register(eventBus);
 		CAEffects.EFFECTS.register(eventBus);
+		CAEffects.POTIONS.register(eventBus);
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		CARecipes.RECIPE_SERIALIZERS.register(eventBus);
 		CAStats.STAT_TYPES.register(eventBus);
@@ -102,23 +107,23 @@ public class ChaosAwakens {
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
 		CAVillagers.POI_TYPES.register(eventBus);
 		CAVillagers.PROFESSIONS.register(eventBus);
-		CALootModifiers.LOOT_MODIFIERS.register(eventBus);
+		CAGlobalLootModifiers.LOOT_MODIFIERS.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 
 		// Register to the forge event bus
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		forgeBus.addListener(EventPriority.HIGH, BiomeLoadEventSubscriber::onBiomeLoadingEvent);
 		forgeBus.addListener(EventPriority.NORMAL, CommonSetupEvent::addDimensionalSpacing);
-		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
 		forgeBus.addListener(MiscEventHandler::onRegisterCommandEvent);
-		forgeBus.addListener(MiscEventHandler::onEntityJoin);
+		forgeBus.addListener(MiscEventHandler::livingDeathEvent);
+		forgeBus.addListener(MiscEventHandler::onMobDrops);
 		forgeBus.addListener(MiscEventHandler::onPlayerLoggedIn);
+		forgeBus.addListener(MiscEventHandler::onEntityJoin);
+		forgeBus.addListener(MiscEventHandler::onSleepFinished);
 		forgeBus.addListener(EventPriority.NORMAL, CAVanillaCompat::registerFurnaceFuel);
-		forgeBus.addListener(CraftingEventSubscriber::onItemCraftedEvent);
-		forgeBus.addListener(EventPriority.LOWEST, MiscEventHandler::onMobDrops);
 		forgeBus.register(this);
 
-		if (!FMLEnvironment.production && !DISABLE_IN_DEV) {
+		if (DEVELOPMENT_ENVIRONMENT) {
 			DEVELOPMENT = new ItemGroup("chaosawakens.development") {
 				@Override
 				public ItemStack makeIcon() {
@@ -136,15 +141,15 @@ public class ChaosAwakens {
 		DataGenerator dataGenerator = event.getGenerator();
 		final ExistingFileHelper existing = event.getExistingFileHelper();
 		if (event.includeClient()) {
-			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, MODID, existing));
+			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, existing));
 			dataGenerator.addProvider(new CAItemModelProvider(dataGenerator, existing));
-			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, MODID, existing));
+			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, existing));
 		}
 		if (event.includeServer()) {
 			dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator));
 			dataGenerator.addProvider(new CACustomConversionProvider(dataGenerator));
 			dataGenerator.addProvider(new CADimensionTypeProvider(dataGenerator));
-			dataGenerator.addProvider(new CALootModifierProvider(dataGenerator, MODID));
+			dataGenerator.addProvider(new CAGlobalLootModifierProvider(dataGenerator));
 			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
 			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
 			dataGenerator.addProvider(new CATagProvider.CABlockTagProvider(dataGenerator, existing));

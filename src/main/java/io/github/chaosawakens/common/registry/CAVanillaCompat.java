@@ -7,6 +7,7 @@ import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.FireBlock;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -177,6 +178,18 @@ public class CAVanillaCompat {
 		registerCompostable(0.65F, CABlocks.YELLOW_CRYSTAL_GROWTH.get());
 		registerCompostable(0.65F, CABlocks.ORANGE_CRYSTAL_GROWTH.get());
 		registerCompostable(0.65F, CABlocks.PINK_CRYSTAL_GROWTH.get());
+		registerCompostable(0.3F, CAItems.CORN_SEEDS.get());
+		registerCompostable(0.3F, CAItems.TOMATO_SEEDS.get());
+		registerCompostable(0.3F, CAItems.LETTUCE_SEEDS.get());
+		registerCompostable(0.3F, CAItems.RADISH_SEEDS.get());
+		registerCompostable(0.3F, CAItems.STRAWBERRY_SEEDS.get());
+		registerCompostable(0.5F, CAItems.CORN.get());
+		registerCompostable(0.5F, CAItems.TOMATO.get());
+		registerCompostable(0.5F, CAItems.LETTUCE.get());
+		registerCompostable(0.5F, CAItems.RADISH.get());
+		registerCompostable(0.5F, CAItems.STRAWBERRY.get());
+		registerCompostable(0.65F, CAItems.CHERRIES.get());
+		registerCompostable(0.65F, CAItems.PEACH.get());
 	}
 
 	public static void registerStrippable(Block log, Block stripped_log) {

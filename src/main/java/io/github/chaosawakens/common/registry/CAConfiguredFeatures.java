@@ -21,11 +21,9 @@ import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
 import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.DarkOakFoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FancyFoliagePlacer;
 import net.minecraft.world.gen.placement.*;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
-import net.minecraft.world.gen.trunkplacer.DarkOakTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 
@@ -358,7 +356,7 @@ public class CAConfiguredFeatures {
 		private static final BlockState FOSSILISED_CARROT_PIG = CABlocks.FOSSILISED_CARROT_PIG.get().defaultBlockState();
 		private static final BlockState FOSSILISED_GOLDEN_CARROT_PIG = CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get().defaultBlockState();
 		private static final BlockState FOSSILISED_BIRD = CABlocks.FOSSILISED_BIRD.get().defaultBlockState();
-		private static final BlockState FOSSILISED_FROG = CABlocks.FOSSILISED_FROG.get().defaultBlockState();
+		private static final BlockState FOSSILISED_FROG = CABlocks.FOSSILISED_TREE_FROG.get().defaultBlockState();
 
 		private static final BlockState FOSSILISED_BAT = CABlocks.FOSSILISED_BAT.get().defaultBlockState();
 		private static final BlockState FOSSILISED_BEE = CABlocks.FOSSILISED_BEE.get().defaultBlockState();
@@ -430,7 +428,7 @@ public class CAConfiguredFeatures {
 		private static final BlockState FOSSILISED_ENDERMITE = CABlocks.FOSSILISED_ENDERMITE.get().defaultBlockState();
 		private static final BlockState FOSSILISED_SHULKER = CABlocks.FOSSILISED_SHULKER.get().defaultBlockState();
 
-		private static final BlockState CRYSTALISED_CRYSTAL_APPLE_COW = CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get().defaultBlockState();
+		private static final BlockState CRYSTALISED_CRYSTAL_APPLE_COW = CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.get().defaultBlockState();
 
 		private static final BlockState FOSSILISED_DIMETRODON = CABlocks.FOSSILISED_DIMETRODON.get().defaultBlockState();
 

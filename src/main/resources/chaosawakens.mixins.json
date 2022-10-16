@@ -3,6 +3,9 @@
 	"package": "io.github.chaosawakens.mixins",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"LivingEntityMixin",
+		"NoiseChunkGeneratorAccessor",
+		"NoiseChunkGeneratorMixin",
 		"RabbitEntityMixin",
 		"SpawnEggItemMixin"
 	],

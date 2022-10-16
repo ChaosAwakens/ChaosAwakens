@@ -3,10 +3,10 @@
   "values": [
     "chaosawakens:apple_stairs",
     "chaosawakens:cherry_stairs",
-    "chaosawakens:peach_stairs",
     "chaosawakens:duplication_stairs",
-    "chaosawakens:skywood_stairs",
     "chaosawakens:ginkgo_stairs",
+    "chaosawakens:peach_stairs",
+    "chaosawakens:skywood_stairs",
     "chaosawakens:crystal_stairs"
   ]
 }

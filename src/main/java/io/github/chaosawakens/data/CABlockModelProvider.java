@@ -1,8 +1,11 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.blocks.GateBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.StandingSignBlock;
+import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
@@ -16,8 +19,8 @@ import java.util.Objects;
 
 @SuppressWarnings("ALL")
 public class CABlockModelProvider extends BlockModelProvider {
-	public CABlockModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {
-		super(generator, modid, existingFileHelper);
+	public CABlockModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
+		super(generator, ChaosAwakens.MODID, existingFileHelper);
 	}
 
 	@Override
@@ -48,6 +51,15 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 			if (block instanceof StandingSignBlock || block instanceof WallSignBlock) {
 				if (block instanceof StandingSignBlock) getBuilder(name).texture("particle", getBlockResourceLocation(name, "_sign", "_planks"));
+			} else if (block instanceof DoorBlock) {
+				doorBottomLeft(name + "_bottom", chaosRL(name + "_bottom"), chaosRL(name + "_top"));
+				doorBottomRight(name + "_bottom_hinge", chaosRL(name + "_bottom"), chaosRL(name + "_top"));
+				doorTopLeft(name + "_top", chaosRL(name + "_bottom"), chaosRL(name + "_top"));
+				doorTopRight(name + "_top_hinge", chaosRL(name + "_bottom"), chaosRL(name + "_top"));
+			} else if (block instanceof TrapDoorBlock) {
+				this.trapDoor(name);
+			} else if (block instanceof GateBlock) {
+				this.gateBlock(name, chaosRL("gate_block_top"));
 			}
 		}
 
@@ -615,7 +627,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_golden_carrot_pig", chaosRL("fossilised_golden_carrot_pig"));
 		this.cubeAll("fossilised_bird", chaosRL("fossilised_bird"));
 		this.cubeAll("fossilised_dimetrodon", chaosRL("fossilised_dimetrodon"));
-		this.cubeAll("fossilised_frog", chaosRL("fossilised_frog"));
+		this.cubeAll("fossilised_tree_frog", chaosRL("fossilised_tree_frog"));
 
 		this.cubeAll("fossilised_bat", chaosRL("fossilised_bat"));
 		this.cubeAll("fossilised_bee", chaosRL("fossilised_bee"));
@@ -687,12 +699,14 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_endermite", chaosRL("fossilised_endermite"));
 		this.cubeAll("fossilised_shulker", chaosRL("fossilised_shulker"));
 
-		this.cubeAll("crystalised_crystal_apple_cow", chaosRL("crystalised_crystal_apple_cow"));
+		this.cubeAll("crystallised_crystal_apple_cow", chaosRL("crystallised_crystal_apple_cow"));
 
-		this.cubeAll("moth_scale_block", chaosRL("moth_scale_block"));
-		this.cubeAll("water_dragon_scale_block", chaosRL("water_dragon_scale_block"));
+		this.cubeAll("basilisk_scale_block", chaosRL("basilisk_scale_block"));
+		this.cubeAll("emperor_scorpion_scale_block", chaosRL("emperor_scorpion_scale_block"));
 		this.cubeAll("ender_dragon_scale_block", chaosRL("ender_dragon_scale_block"));
+		this.cubeAll("moth_scale_block", chaosRL("moth_scale_block"));
 		this.cubeAll("nightmare_scale_block", chaosRL("nightmare_scale_block"));
+		this.cubeAll("water_dragon_scale_block", chaosRL("water_dragon_scale_block"));
 		this.cubeAll("mobzilla_scale_block", chaosRL("mobzilla_scale_block"));
 		this.cubeAll("royal_guardian_scale_block", chaosRL("royal_guardian_scale_block"));
 		this.cubeAll("queen_scale_block", chaosRL("queen_scale_block"));
@@ -925,30 +939,6 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("green_crystal_flower", chaosRL("green_crystal_flower"));
 		this.cross("red_crystal_flower", chaosRL("red_crystal_flower"));
 		this.cross("yellow_crystal_flower", chaosRL("yellow_crystal_flower"));
-
-		this.gateBlock("apple_gate_block", chaosRL("apple_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("cherry_gate_block", chaosRL("cherry_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("duplication_gate_block", chaosRL("duplication_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("ginkgo_gate_block", chaosRL("ginkgo_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("peach_gate_block", chaosRL("peach_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("skywood_gate_block", chaosRL("skywood_gate_block"), chaosRL("gate_block_top"));
-
-		this.gateBlock("acacia_gate_block", chaosRL("acacia_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("birch_gate_block", chaosRL("birch_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("crimson_gate_block", chaosRL("crimson_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("dark_oak_gate_block", chaosRL("dark_oak_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("jungle_gate_block", chaosRL("jungle_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("oak_gate_block", chaosRL("oak_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("spruce_gate_block", chaosRL("spruce_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("warped_gate_block", chaosRL("warped_gate_block"), chaosRL("gate_block_top"));
-		this.gateBlock("mushroom_gate_block", chaosRL("mushroom_gate_block"), chaosRL("gate_block_top"));
-
-		this.trapDoor("apple_trapdoor", chaosRL("apple_trapdoor"));
-		this.trapDoor("cherry_trapdoor", chaosRL("cherry_trapdoor"));
-		this.trapDoor("duplication_trapdoor", chaosRL("duplication_trapdoor"));
-		this.trapDoor("ginkgo_trapdoor", chaosRL("ginkgo_trapdoor"));
-		this.trapDoor("peach_trapdoor", chaosRL("peach_trapdoor"));
-		this.trapDoor("skywood_trapdoor", chaosRL("skywood_trapdoor"));
 	}
 
 	private ResourceLocation chaosRL(String texture) {
@@ -967,10 +957,10 @@ public class CABlockModelProvider extends BlockModelProvider {
 		singleTexture(name, mcRL("pressure_plate_down"), all);
 	}
 
-	public void trapDoor(String name, ResourceLocation texture) {
-		singleTexture(name + "_bottom", mcRL("template_orientable_trapdoor_bottom"), texture);
-		singleTexture(name + "_open", mcRL("template_orientable_trapdoor_open"), texture);
-		singleTexture(name + "_top", mcRL("template_orientable_trapdoor_top"), texture);
+	public void trapDoor(String name) {
+		singleTexture(name + "_bottom", mcRL("template_orientable_trapdoor_bottom"), chaosRL(name));
+		singleTexture(name + "_open", mcRL("template_orientable_trapdoor_open"), chaosRL(name));
+		singleTexture(name + "_top", mcRL("template_orientable_trapdoor_top"), chaosRL(name));
 	}
 
 	public void leafCarpet(String name, ResourceLocation texture) {
@@ -981,8 +971,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		singleTexture(name, chaosRL("leaf_carpet_inventory"), "texture", texture);
 	}
 
-	public void gateBlock(String name, ResourceLocation side, ResourceLocation top) {
-		withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("top", top).texture("bottom", top);
+	public void gateBlock(String name, ResourceLocation top) {
+		withExistingParent(name, BLOCK_FOLDER).texture("side", chaosRL(name)).texture("top", top).texture("bottom", top);
 	}
 
 	public void plant(String name, String texture) {

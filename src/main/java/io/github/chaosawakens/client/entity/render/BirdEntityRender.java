@@ -18,6 +18,7 @@ public class BirdEntityRender extends GeoEntityRenderer<BirdEntity> {
 	private static final ResourceLocation TEXTURE_BROWN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/brown.png");
 	private static final ResourceLocation TEXTURE_GREEN_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/green.png");
 	private static final ResourceLocation TEXTURE_RED_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/red.png");
+	private static final ResourceLocation TEXTURE_RUBY_LOCATION = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/bird/ruby.png");
 
 	public BirdEntityRender(EntityRendererManager renderManager) {
 		super(renderManager, new BirdEntityModel());
@@ -43,6 +44,8 @@ public class BirdEntityRender extends GeoEntityRenderer<BirdEntity> {
 			return TEXTURE_GREEN_LOCATION;
 		case 4:
 			return TEXTURE_RED_LOCATION;
+		case 99:
+			return TEXTURE_RUBY_LOCATION;
 		}
 	}
 
