@@ -1087,6 +1087,10 @@
 	"item.chaosawakens.royal_guardian_scale": "Royal Guardian Scale",
 	"item.chaosawakens.queen_scale": "Queen Scale",
 
+	"enchantment.chaosawakens.ignition": "Ignition",
+
+	"effect.chaosawakens.burns": "Burns",
+
 	"misc.chaosawakens.empty_inventory": "This anthill requires an empty inventory!",
 	"misc.chaosawakens.inaccessible_dimension": "This anthill seems to have not been implemented yet!",
 

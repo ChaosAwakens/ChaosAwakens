@@ -92,6 +92,8 @@ public class ChaosAwakens {
 		CAContainerTypes.CONTAINERS.register(eventBus);
 		CAEntityTypes.ENTITY_TYPES.register(eventBus);
 		CAItems.ITEMS.register(eventBus);
+		CAEnchantments.ENCHANTS.register(eventBus);
+		CAEffects.EFFECTS.register(eventBus);
 		CATileEntities.TILE_ENTITIES.register(eventBus);
 		CARecipes.RECIPE_SERIALIZERS.register(eventBus);
 		CAStats.STAT_TYPES.register(eventBus);

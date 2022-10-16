@@ -289,6 +289,7 @@ public class BiomeLoadEventSubscriber {
 				}
 
 				addGeneralRockGeneration(gen);
+				
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_GRASS);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_TALL_DENSE_GRASS);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_THORNY_SUN);
@@ -667,6 +668,10 @@ public class BiomeLoadEventSubscriber {
 		}
 
 		private static void addStalagmiteValleyOres(BiomeGenerationSettingsBuilder gen) {
+			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_COMMON);
+			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_COMMON_SHORT);
+			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_SKYSCRAPER);
+			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_CONE);
 			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_DIMETRODON);
 		}
 

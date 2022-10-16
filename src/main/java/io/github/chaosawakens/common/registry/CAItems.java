@@ -216,7 +216,8 @@ public class CAItems {
 			new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 
 	// Emerald
-	public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new SwordItem(EnumUtils.CAItemTier.TOOL_EMERALD, CACommonConfig.COMMON.emeraldSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new EnchantedSwordItem(EnumUtils.CAItemTier.TOOL_EMERALD, CACommonConfig.COMMON.emeraldSwordDamage.get() - 7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+			new EnchantmentData[]{new EnchantmentData(Enchantments.MOB_LOOTING, 1)}));
 	public static final RegistryObject<EnchantedShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new EnchantedShovelItem(EnumUtils.CAItemTier.TOOL_EMERALD, CACommonConfig.COMMON.emeraldShovelDamage.get() - 7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
 	public static final RegistryObject<EnchantedPickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(EnumUtils.CAItemTier.TOOL_EMERALD, CACommonConfig.COMMON.emeraldPickaxeDamage.get() - 7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
@@ -227,7 +228,8 @@ public class CAItems {
 			new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
 
 	// Ruby
-	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubySwordDamage.get() - 17, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new EnchantedSwordItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubySwordDamage.get() - 17, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+			new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_ASPECT, 1)}));
 	public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyShovelDamage.get() - 17, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 	public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyPickaxeDamage.get() - 17, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 	public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyAxeDamage.get() - 17, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
