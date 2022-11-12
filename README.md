@@ -52,12 +52,12 @@ The creator of *OreSpawn*, [**Richard H. Clark (TheyCallMeDanger)**](https://www
 **Therefore,  we're not going to use the OreSpawn assets, and we're also not going to provide, promote, or endorse any resource pack that attempts to port them.**
 
 ## Credits/Staff Team
-**Our Project Leads:** Funky Monk, WeirdNerd,  and 𝒯𝟦☯𝓃𝑒™ <br>
-**Our Organizers:** Phwee,  and VDA Spoop  <br>
-**Our Animators:** Absolute Kun, Aqu, Pugman665544, Skarrier, and SnakeMaster <br>
-**Our Builders:** Blackout, Funky Monk, Meme Man, omarboi, Phwee, Skarrier, TheLoneCyberman, and Unanimous <br>
-**Our Coders:** Blackout, LuisRandomness, Meme Man, and WeirdNerd <br>
-**Our Modellers:** Absolute Kun, Memer Teamer, Pugman665544, Renato, Skarrier, SnakeMaster, TheLoneCyberman, and 𝒯𝟦☯𝓃𝑒™ <br>
-**Our Sound Designers:** Skarrier, and WeirdNerd <br>
-**Our Texturers:** Absolute Kun, LuisRandomness, Memer Teamer, Renato, Santispik3, Skarrier, SnakeMaster, TheLoneCyberman, and VDA Spoop, 𝒯𝟦☯𝓃𝑒™ <br>
-**Our Former Members:** AlexanderTheNotSoGreat, BS Guy, ChromaticAeternus, Crosby, crydigo, DinoDave, HugoMage, Lymen, mattster, Sipilus, Technocreeper, and thesleepingdevil
+**Our Project Leads are:** Funky Monk, WeirdNerd,  and 𝒯𝟦☯𝓃𝑒™ <br>
+**Our Organizers are :** Phwee,  and VDA Spoop  <br>
+**Our Animators are:** Absolute Kun, Aqu, Pugman665544, Skarrier, and SnakeMaster <br>
+**Our Builders are:** Blackout, Funky Monk, Meme Man, omarboi, Phwee, Skarrier, TheLoneCyberman, and Unanimous <br>
+**Our Coders are:** Blackout, LuisRandomness, Meme Man, and WeirdNerd <br>
+**Our Modellers are:** Absolute Kun, Memer Teamer, Pugman665544, Renato, Skarrier, SnakeMaster, TheLoneCyberman, and 𝒯𝟦☯𝓃𝑒™ <br>
+**Our Sound Designers are:** Skarrier, and WeirdNerd <br>
+**Our Texturers are:** Absolute Kun, LuisRandomness, Memer Teamer, Renato, Santispik3, Skarrier, SnakeMaster, TheLoneCyberman, and VDA Spoop, 𝒯𝟦☯𝓃𝑒™ <br>
+**Our Former Members are:** AlexanderTheNotSoGreat, BS Guy, ChromaticAeternus, Crosby, crydigo, DinoDave, HugoMage, Lymen, mattster, Sipilus, Technocreeper, and thesleepingdevil
