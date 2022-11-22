@@ -1,5 +1,13 @@
 package io.github.chaosawakens.common.events;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.ChaosAwakens;
@@ -8,9 +16,18 @@ import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.integration.CAJER;
 import io.github.chaosawakens.common.network.PacketHandler;
-import io.github.chaosawakens.common.registry.*;
+import io.github.chaosawakens.common.registry.CABiomes;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAConfiguredStructures;
+import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAStructures;
+import io.github.chaosawakens.common.registry.CASurfaceBuilders;
+import io.github.chaosawakens.common.registry.CAVanillaCompat;
+import io.github.chaosawakens.common.registry.CAVillagers;
 import net.minecraft.block.WoodType;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -30,13 +47,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper.UnableToFindMethodException;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class CommonSetupEvent {
 	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
@@ -55,6 +66,7 @@ public class CommonSetupEvent {
 			CAConfiguredStructures.registerConfiguredStructures();
 			CASurfaceBuilders.Configured.registerConfiguredSurfaceBuilders();
 			CAVillagers.registerVillagerTypes();
+	//		CAVillagers.registerVillagerStructures();
 			CABlocks.flowerPots();
 			WoodType.register(CABlocks.APPLE);
 			WoodType.register(CABlocks.CHERRY);
@@ -62,7 +74,7 @@ public class CommonSetupEvent {
 			WoodType.register(CABlocks.PEACH);
 			WoodType.register(CABlocks.SKYWOOD);
 			WoodType.register(CABlocks.GINKGO);
-
+			
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
 		});
@@ -81,6 +93,19 @@ public class CommonSetupEvent {
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_PLAINS.getId()), CABiomes.Type.CRYSTAL_WORLD);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.CRYSTAL_HILLS.getId()), CABiomes.Type.CRYSTAL_WORLD);
 	}
+	
+    public static void onFMLLoadCompleteEvent(FMLLoadCompleteEvent event) {
+    	modifyAttributeValues();
+    }
+    
+    //Took the main functionality of AttributeFix and clamped it into a singular method --Meme Man
+    public static void modifyAttributeValues() {
+    	 Map<RangedAttribute, ?> attributes = new HashMap<>();
+    	 for (final Entry<RangedAttribute, ?> e : attributes.entrySet()) {
+    		 final RangedAttribute a = e.getKey();
+    		 a.maxValue = Math.max(a.maxValue, 65536D);
+    	 }
+    }
 
 	@SuppressWarnings("unchecked")
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
@@ -127,6 +152,8 @@ public class CommonSetupEvent {
 				DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
 		tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(),
 				DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
+		tempMap.putIfAbsent(CAStructures.MINING_WASP_DUNGEON.get(),
+				DimensionStructuresSettings.DEFAULTS.get(CAStructures.MINING_WASP_DUNGEON.get()));
 
 		chunkProvider.generator.getSettings().structureConfig = tempMap;
 	}

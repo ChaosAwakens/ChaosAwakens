@@ -2,7 +2,7 @@
   "parent": "chaosawakens:root/root",
   "display": {
     "icon": {
-      "item": "minecraft:oak_log"
+      "item": "minecraft:emerald"
     },
     "title": {
       "translate": "advancements.chaosawakens.village_mania.title"

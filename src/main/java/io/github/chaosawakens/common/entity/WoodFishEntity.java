@@ -89,9 +89,10 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.05D));
 		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 3.0F, 3.0F));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D, EntityPredicates.NO_SPECTATORS::test));
-		this.goalSelector.addGoal(4, new WoodFishEntity.SwimGoal(this));
-		this.goalSelector.addGoal(4, new WoodFishEntity.GoToWaterGoal(this, 30.0D));
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D, EntityPredicates.NO_SPECTATORS::test));
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, RockFishEntity.class, 12.0F, 1.3D, 1.5D, EntityPredicates.NO_SPECTATORS::test));
+		this.goalSelector.addGoal(1, new WoodFishEntity.SwimGoal(this));
+		this.goalSelector.addGoal(2, new WoodFishEntity.GoToWaterGoal(this, 1.6D));
 	}
 
 	@Override
@@ -131,7 +132,7 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 	@Override
 	public int getMaxAirSupply() {
-		return 1000;
+		return 450;
 	}
 
 	@Override

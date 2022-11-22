@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:duplication_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:duplication_boat"
+  }
+}

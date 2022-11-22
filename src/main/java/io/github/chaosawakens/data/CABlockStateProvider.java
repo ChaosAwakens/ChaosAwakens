@@ -1,9 +1,22 @@
 package io.github.chaosawakens.data;
 
+import java.util.Objects;
+
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.*;
+import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
+import io.github.chaosawakens.common.blocks.GateBlock;
+import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
+import io.github.chaosawakens.common.blocks.PipeBlock;
+import io.github.chaosawakens.common.blocks.RotatedPillarCrystalBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractButtonBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.HorizontalFaceBlock;
+import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.DoorHingeSide;
@@ -15,11 +28,13 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-import java.util.Objects;
-
+@SuppressWarnings("all")
 public class CABlockStateProvider extends BlockStateProvider {
-	public CABlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-		super(gen, ChaosAwakens.MODID, exFileHelper);
+	ExistingFileHelper helper;
+	
+	public CABlockStateProvider(DataGenerator gen, String modid, ExistingFileHelper exFileHelper) {
+		super(gen, modid, exFileHelper);
+		helper = exFileHelper;
 	}
 
 	@Override
@@ -82,6 +97,32 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.wallBlock(CABlocks.CRACKED_LIMESTONE_BRICK_WALL.get(), "cracked_limestone", chaosRL("cracked_limestone_bricks"));
 		this.wallBlock(CABlocks.MOSSY_LIMESTONE_BRICK_WALL.get(), "mossy_limestone", chaosRL("mossy_limestone_bricks"));
 		this.wallBlock(CABlocks.POLISHED_LIMESTONE_WALL.get(), "polished_limestone", chaosRL("polished_limestone_block"));
+		
+		this.simpleBlock(CABlocks.RHINESTONE.get());
+		this.simpleBlock(CABlocks.RHINESTONE_BRICKS.get());
+		this.simpleBlock(CABlocks.CHISELED_RHINESTONE_BRICKS.get());
+		this.simpleBlock(CABlocks.CRACKED_RHINESTONE_BRICKS.get());
+		this.simpleBlock(CABlocks.MOSSY_RHINESTONE_BRICKS.get());
+		this.simpleBlock(CABlocks.POLISHED_RHINESTONE.get());
+		this.logBlock(CABlocks.RHINESTONE_PILLAR.get());
+		this.slabBlock(CABlocks.RHINESTONE_SLAB.get(), chaosRL("rhinestone_block"), chaosRL("rhinestone_block"));
+		this.slabBlock(CABlocks.RHINESTONE_BRICK_SLAB.get(), chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"));
+		this.slabBlock(CABlocks.CHISELED_RHINESTONE_BRICK_SLAB.get(), chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"));
+		this.slabBlock(CABlocks.CRACKED_RHINESTONE_BRICK_SLAB.get(), chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"));
+		this.slabBlock(CABlocks.MOSSY_RHINESTONE_BRICK_SLAB.get(), chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"));
+		this.slabBlock(CABlocks.POLISHED_RHINESTONE_SLAB.get(), chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"));
+		this.stairsBlock(CABlocks.RHINESTONE_STAIRS.get(), chaosRL("rhinestone_block"));
+		this.stairsBlock(CABlocks.RHINESTONE_BRICK_STAIRS.get(), chaosRL("rhinestone_bricks"));
+		this.stairsBlock(CABlocks.CHISELED_RHINESTONE_BRICK_STAIRS.get(), chaosRL("chiseled_rhinestone_bricks"));
+		this.stairsBlock(CABlocks.CRACKED_RHINESTONE_BRICK_STAIRS.get(), chaosRL("cracked_rhinestone_bricks"));
+		this.stairsBlock(CABlocks.MOSSY_RHINESTONE_BRICK_STAIRS.get(), chaosRL("mossy_rhinestone_bricks"));
+		this.stairsBlock(CABlocks.POLISHED_RHINESTONE_STAIRS.get(), chaosRL("polished_rhinestone_block"));
+		this.wallBlock(CABlocks.RHINESTONE_WALL.get(), "rhinestone", chaosRL("rhinestone_block"));
+		this.wallBlock(CABlocks.RHINESTONE_BRICK_WALL.get(), "rhinestone_brick", chaosRL("rhinestone_bricks"));
+		this.wallBlock(CABlocks.CHISELED_RHINESTONE_BRICK_WALL.get(), "chiseled_rhinestone", chaosRL("chiseled_rhinestone_bricks"));
+		this.wallBlock(CABlocks.CRACKED_RHINESTONE_BRICK_WALL.get(), "cracked_rhinestone", chaosRL("cracked_rhinestone_bricks"));
+		this.wallBlock(CABlocks.MOSSY_RHINESTONE_BRICK_WALL.get(), "mossy_rhinestone", chaosRL("mossy_rhinestone_bricks"));
+		this.wallBlock(CABlocks.POLISHED_RHINESTONE_WALL.get(), "polished_rhinestone", chaosRL("polished_rhinestone_block"));
 
 		this.simpleBlock(CABlocks.ROBO_BLOCK_I.get());
 		this.logBlock(CABlocks.ROBO_BLOCK_V.get());
@@ -93,7 +134,9 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.wallBlock(CABlocks.ROBO_WALL_I.get(), chaosRL("robo_block_l"));
 		this.wallBlock(CABlocks.ROBO_WALL_X.get(), chaosRL("robo_block_x"));
 		this.simpleBlock(CABlocks.ROBO_LAMP.get());
-
+		
+	//	this.horizontalBlock(CABlocks.ROCK.get(), new ModelFile.ExistingModelFile(chaosRL("rock"), helper));
+		
 		this.simpleBlock(CABlocks.BLACK_TERRACOTTA_BRICKS.get());
 		this.simpleBlock(CABlocks.BLUE_TERRACOTTA_BRICKS.get());
 		this.simpleBlock(CABlocks.BROWN_TERRACOTTA_BRICKS.get());
@@ -239,6 +282,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.FOSSILISED_OAK_ENT.get());
 		this.simpleBlock(CABlocks.FOSSILISED_SPRUCE_ENT.get());
 		this.simpleBlock(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
+		this.simpleBlock(CABlocks.FOSSILISED_BEAVER.get());
 		this.simpleBlock(CABlocks.FOSSILISED_RUBY_BUG.get());
 		this.simpleBlock(CABlocks.FOSSILISED_EMERALD_GATOR.get());
 		this.simpleBlock(CABlocks.FOSSILISED_GREEN_FISH.get());
@@ -254,6 +298,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.FOSSILISED_GOLDEN_APPLE_COW.get());
 		this.simpleBlock(CABlocks.FOSSILISED_CARROT_PIG.get());
 		this.simpleBlock(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
+		this.simpleBlock(CABlocks.FOSSILISED_LETTUCE_CHICKEN.get());
 		this.simpleBlock(CABlocks.FOSSILISED_BIRD.get());
 		this.simpleBlock(CABlocks.FOSSILISED_DIMETRODON.get());
 		this.simpleBlock(CABlocks.FOSSILISED_TREE_FROG.get());
@@ -328,17 +373,18 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.FOSSILISED_ENDERMITE.get());
 		this.simpleBlock(CABlocks.FOSSILISED_SHULKER.get());
 
-		this.simpleBlock(CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.get());
+		this.simpleBlock(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get());
+		this.simpleBlock(CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get());
 
-		this.simpleBlock(CABlocks.BASILISK_SCALE_BLOCK.get());
-		this.simpleBlock(CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get());
-		this.simpleBlock(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.MOTH_SCALE_BLOCK.get());
-		this.simpleBlock(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.MOBZILLA_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.QUEEN_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.BASILISK_SCALE_BLOCK.get());
+		this.simpleBlock(CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get());
 
 		this.simpleBlock(CABlocks.RUBY_ORE.get());
 		this.simpleBlock(CABlocks.NETHERRACK_RUBY_ORE.get());
@@ -568,7 +614,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
 		trapdoorBlock(block, bottom, top, open, true);
 	}
-
+	
 	public void doorBlock(DoorBlock block) {
 		ModelFile bottom = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath() + "_bottom"));
 		ModelFile bottomHinge = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(block.getRegistryName()).getPath() + "_bottom_hinge"));

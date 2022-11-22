@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.AgeableEntity;
@@ -39,6 +40,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -50,13 +52,12 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Objects;
-
-public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable {
-	private final AnimationFactory factory = new AnimationFactory(this);
+public class GazelleEntity extends AnimatableAnimalEntity {
+	private AnimationFactory factory = new AnimationFactory(this);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 	public static final DataParameter<Boolean> IS_RUNNING = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.BOOLEAN);
+	private final AnimationController<?> controller = new AnimationController<IAnimatable>(this, "gazellecontroller", animationInterval(), this::predicate);
 	private boolean sprinting;
 	private EatGrassGoal eatGrassGoal;
 
@@ -71,8 +72,13 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 				.add(Attributes.MOVEMENT_SPEED, 0.2D)
 				.add(Attributes.FOLLOW_RANGE, 14);
 	}
+	
+	@Override
+	public int animationInterval() {
+		return 2;
+	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.walking", true));
 			return PlayState.CONTINUE;
@@ -89,15 +95,20 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 		}
 		
 		if (this.isEatingGrass()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.grazing", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.gazelle.grazing", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
 	}
+	
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
+	}
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "gazellecontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -173,15 +184,13 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
     	
     	this.setRunning(this.getLastHurtByMob() != null && this.getLastHurtByMobTimestamp() <= 500);
     	if (getRunning() && !this.sprinting) {
-    		this.sprinting = true;
     		this.setSprinting(true);
-    		Objects.requireNonNull(this.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.4);
+    		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.3);
     	}
     	
     	if (!getRunning() && this.sprinting) {
-    		this.sprinting = false;
     		this.setSprinting(false);
-    		Objects.requireNonNull(this.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.25);
+    		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.25);
     	}
     }
 
@@ -196,25 +205,28 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
 	}
 
 	static class GazelleData extends AgeableEntity.AgeableData {
-		public final int gazelleType;
+		public final int gazelletype;
 
-		private GazelleData(int gazelleType) {
+		private GazelleData(int gazelletype) {
 			super(true);
-			this.gazelleType = gazelleType;
+			this.gazelletype = gazelletype;
 		}
 	}
 
 	@Nullable
 	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT nbt) {
 		int i = this.getRandomGazelleType(world);
-		if (entityData instanceof GazelleData) i = ((GazelleData) entityData).gazelleType;
+		if (entityData instanceof GazelleData) i = ((GazelleData) entityData).gazelletype;
 		else entityData = new GazelleData(i);
 		this.setGazelleType(i);
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, nbt);
 	}
 
+	@SuppressWarnings("unused")
 	private int getRandomGazelleType(IWorld world) {
-		return this.random.nextInt(5);
+		Biome biome = world.getBiome(this.blockPosition());
+        int i = this.random.nextInt(5);
+        return i;
     }
     
     @OnlyIn(Dist.CLIENT)
@@ -226,4 +238,9 @@ public class GazelleEntity extends AnimatableAnimalEntity implements IAnimatable
     public float getStandingEyeHeight(Pose pose, EntitySize size) {
     	return this.isBaby() ? size.height * 0.75F : 1.1F;
     }
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
 }

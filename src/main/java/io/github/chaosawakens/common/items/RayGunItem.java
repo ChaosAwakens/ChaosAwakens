@@ -29,11 +29,6 @@ public class RayGunItem extends Item {
 	}
 
 	@Override
-	public boolean isEnchantable(ItemStack itemStack) {
-		return false;
-	}
-
-	@Override
 	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack heldStack = playerIn.getItemInHand(handIn);
 

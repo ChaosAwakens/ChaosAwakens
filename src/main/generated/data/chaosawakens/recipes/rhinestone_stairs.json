@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:rhinestone_block"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:rhinestone_stairs",
+    "count": 4
+  }
+}

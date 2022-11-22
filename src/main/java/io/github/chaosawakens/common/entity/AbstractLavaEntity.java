@@ -1,14 +1,22 @@
 package io.github.chaosawakens.common.entity;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.entity.ai.LavaSwimmingNavigator;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.Pose;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,16 +30,15 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-
-import java.util.Random;
-
-import javax.annotation.Nullable;
 
 public abstract class AbstractLavaEntity extends LavaMobEntity {
 	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.defineId(AbstractLavaEntity.class, DataSerializers.BOOLEAN);
@@ -41,6 +48,7 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 		this.moveControl = new AbstractLavaEntity.MoveHelperController(this);
 	}
 
+	@Override
 	protected float getStandingEyeHeight(Pose pose, EntitySize entitySize) {
 		return entitySize.height * 0.65F;
 	}
@@ -58,10 +66,12 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 		return world.getBlockState(pos).is(Blocks.LAVA) && world.getBlockState(pos.above()).is(Blocks.LAVA);
 	}
 
+	@Override
 	public boolean removeWhenFarAway(double p_213397_1_) {
 		return !this.fromBucket() && !this.hasCustomName();
 	}
 
+	@Override
 	public int getMaxSpawnClusterSize() {
 		return 6;
 	}
@@ -79,27 +89,31 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 		this.entityData.set(FROM_BUCKET, fromBucket);
 	}
 
+	@Override
 	public void addAdditionalSaveData(CompoundNBT nbt) {
 		super.addAdditionalSaveData(nbt);
 		nbt.putBoolean("FromBucket", this.fromBucket());
 	}
 
+	@Override
 	public void readAdditionalSaveData(CompoundNBT nbt) {
 		super.readAdditionalSaveData(nbt);
 		this.setFromBucket(nbt.getBoolean("FromBucket"));
 	}
 
+	@Override
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.NO_SPECTATORS::test));
 		this.goalSelector.addGoal(4, new AbstractLavaEntity.SwimGoal(this));
 	}
 
+	@Override
 	protected PathNavigator createNavigation(World world) {
 		return new LavaSwimmingNavigator(this, world);
 	}
 
+	@Override
 	public void travel(Vector3d vector) {
 		if (this.isEffectiveAi() && this.isInLava()) {
 			this.moveRelative(this.getSpeed(), vector);
@@ -109,6 +123,7 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 		} else super.travel(vector);
 	}
 
+	@Override
 	public void aiStep() {
 		if (!this.isInLava() && this.onGround && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -135,6 +150,7 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 		super.baseTick();
 	}
 
+	@Override
 	protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (itemstack.getItem() == Items.LAVA_BUCKET && this.isAlive()) {
@@ -162,6 +178,7 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 
 	protected abstract SoundEvent getFlopSound();
 
+	@Override
 	protected SoundEvent getSwimSound() {
 		return SoundEvents.FISH_SWIM;
 	}
@@ -174,6 +191,7 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 			this.fish = fish;
 		}
 
+		@Override
 		public void tick() {
 			if (this.fish.isEyeInFluid(FluidTags.LAVA)) this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
 
@@ -205,11 +223,12 @@ public abstract class AbstractLavaEntity extends LavaMobEntity {
 			this.fish = fish;
 		}
 
+		@Override
 		public boolean canUse() {
 			return this.fish.canRandomSwim() && super.canUse();
 		}
 			 
-		@Nullable		 
+	    @Nullable		 
 		protected Vector3d getPosition() {		  
 			Vector3d vector3d = RandomPositionGenerator.getPos(this.mob, 10, 7);		  
 			for(int i = 0; vector3d != null && !this.mob.level.getBlockState(new BlockPos(vector3d)).isPathfindable(this.mob.level, new BlockPos(vector3d), PathType.WATER) && i++ < 10; vector3d = RandomPositionGenerator.getPos(this.mob, 10, 7)) {		  

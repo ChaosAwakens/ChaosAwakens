@@ -4,9 +4,10 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.GreenFishEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.core.processor.IBone;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 
-public class GreenFishEntityModel extends AnimatedGeoModel<GreenFishEntity> {
+public class GreenFishEntityModel extends AnimatedTickingGeoModel<GreenFishEntity> {
 	@Override
 	public ResourceLocation getModelLocation(GreenFishEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/green_fish.geo.json");
@@ -25,5 +26,11 @@ public class GreenFishEntityModel extends AnimatedGeoModel<GreenFishEntity> {
 	@Override
 	public void setLivingAnimations(GreenFishEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
+		
+		IBone root = this.getAnimationProcessor().getBone("root");
+		
+		if (!entity.isInWaterOrBubble()) {
+			root.setRotationZ(45);
+		}
 	}
 }

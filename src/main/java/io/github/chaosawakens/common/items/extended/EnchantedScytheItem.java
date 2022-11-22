@@ -1,13 +1,14 @@
 package io.github.chaosawakens.common.items.extended;
 
+import java.util.UUID;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.util.EnumUtils;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.util.InputMappings;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -20,18 +21,14 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
-
-import java.util.UUID;
 
 public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable, IUtilityHelper {
 	public static final UUID REACH_MODIFIER = UUID.fromString("080192A2-EC5F-11EC-8EA0-0242AC120002");
@@ -70,56 +67,45 @@ public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable,
 
 	@Override
 	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-		InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
-		if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
-			double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
-			double reachSqr = reach * reach;
-			World world = entity.level;
+ //   	InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
+ //       if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
+            double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
+            double reachSqr = reach * reach;
+            World world = entity.level;
 
-			Vector3d viewVec = entity.getViewVector(1.0F);
-			Vector3d eyeVec = entity.getEyePosition(1.0F);
-			Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
+            Vector3d viewVec = entity.getViewVector(1.0F);
+            Vector3d eyeVec = entity.getEyePosition(1.0F);
+            Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
 
-			AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
-			EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
+            AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
+            EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 
-			if (result == null || !(result.getEntity() instanceof LivingEntity)) return false;
+            if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
 
-			LivingEntity target = (LivingEntity) result.getEntity();
+            LivingEntity target = (LivingEntity) result.getEntity();
 
-			double distanceToTargetSqr = entity.distanceToSqr(target);
+            double distanceToTargetSqr = entity.distanceToSqr(target);
 
-			boolean resultBool = (result != null ? target : null) != null;
+            boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
 
-			if (resultBool) {
-				if (reachSqr >= distanceToTargetSqr) {
-					target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
-					this.hurtEnemy(stack, target, entity);
-				}
-			}
-		}
-		return super.onEntitySwing(stack, entity);
+            if (resultBool) {
+      //          if (entity instanceof PlayerEntity) {
+                    if (reachSqr >= distanceToTargetSqr) {
+                        target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
+                        this.hurtEnemy(stack, target, entity);
+                    }
+     //           }
+            }
+  //      }
+        return super.onEntitySwing(stack, entity);
 	}
 
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-		if (allowdedIn(group)) {
+		if (this.allowdedIn(group)) {
 			ItemStack stack = new ItemStack(this);
-			if (CACommonConfig.COMMON.enableAutoEnchanting.get()) {
-				for (EnchantmentData enchant : enchantments) {
-					stack.enchant(enchant.enchantment, enchant.level);
-				}
-			}
+			if (CACommonConfig.COMMON.enableAutoEnchanting.get()) for (EnchantmentData enchant : enchantments) stack.enchant(enchant.enchantment, enchant.level);
 			items.add(stack);
-		}
-	}
-
-	@Override
-	public void onCraftedBy(ItemStack itemStack, World world, PlayerEntity playerEntity) {
-		if (CACommonConfig.COMMON.enableAutoEnchanting.get()) {
-			for (EnchantmentData enchant : enchantments) {
-				itemStack.enchant(enchant.enchantment, enchant.level);
-			}
 		}
 	}
 

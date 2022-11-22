@@ -1,7 +1,9 @@
 package io.github.chaosawakens.common.registry;
 
+import java.util.Objects;
+
 import com.mojang.datafixers.util.Pair;
-import io.github.chaosawakens.ChaosAwakens;
+
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.util.TradeUtil;
 import io.github.chaosawakens.common.util.TradeUtil.CABasicTrade;
@@ -12,14 +14,10 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = ChaosAwakens.MODID)
 public class CAVillagerTrades {
-	@SubscribeEvent
+	
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
 		TradeUtil.addWandererTrades(event,
 				new CABasicTrade(1, CABlocks.CYAN_ROSE.get().asItem(), 12),
@@ -47,7 +45,6 @@ public class CAVillagerTrades {
 		}
 	}
 
-	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.NOVICE,
 				new CABasicTrade(2, CAItems.CHERRIES.get(), 6, 16, 2),
@@ -98,7 +95,6 @@ public class CAVillagerTrades {
 				new CABasicTrade(5, CAItems.SUN_FISH.get(), 1, 8, 30));
 	}
 
-	@SubscribeEvent
 	public static void onArchaeologistTradesEvent(VillagerTradesEvent event) {
 		TradeUtil.addVillagerTrades(event, CAVillagers.ARCHAEOLOGIST.get(), TradeUtil.NOVICE,
 				new CABasicTrade(1, Items.WATER_BUCKET, 1, 6, 2),
@@ -119,14 +115,14 @@ public class CAVillagerTrades {
 		TradeUtil.addVillagerTrades(event, CAVillagers.ARCHAEOLOGIST.get(), TradeUtil.EXPERT,
 				new CABasicTrade(1, CAItems.ALUMINUM_POWER_CHIP.get(), 6, 5, 20),
 				new CABasicTrade(Items.LAVA_BUCKET, 1, 2, 2, 20),
-				new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS), 2), 3, 20),
-				new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 20),
-				new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 30));
+				new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS), 2), 3, 20),
+				new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 20),
+				new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 30));
 		TradeUtil.addVillagerTrades(event, CAVillagers.ARCHAEOLOGIST.get(), TradeUtil.MASTER,
-				new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS), 3), 6, 30),
-				new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_EPIC), 1), 6, 30),
-				new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_RARE), 2), 7, 30),
-				new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_EPIC), 1), 3, 40));
+				new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS), 3), 6, 30),
+				new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_EPIC), 1), 6, 30),
+				new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_RARE), 2), 7, 30),
+				new CAIngredientTrade(4, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_EPIC), 1), 3, 40));
 	}
 
 	@SuppressWarnings("unused")

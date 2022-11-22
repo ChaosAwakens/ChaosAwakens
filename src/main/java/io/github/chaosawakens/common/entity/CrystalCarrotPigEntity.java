@@ -40,8 +40,9 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Random;
 
-public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatable{
+public class CrystalCarrotPigEntity extends CarrotPigEntity {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationController<?> controller = new AnimationController<>(this, "crystalcarrotpigcontroller", animationInterval(), this::predicate);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(CAItems.CRYSTAL_POTATO.get(), CAItems.CRYSTAL_BEETROOT.get());
 
     public CrystalCarrotPigEntity(EntityType<? extends CrystalCarrotPigEntity> type, World worldIn) {
@@ -56,7 +57,7 @@ public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatab
                 .add(Attributes.FOLLOW_RANGE, 12);
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+    public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
             return PlayState.CONTINUE;
@@ -145,7 +146,7 @@ public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatab
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "crystalcarrotpigcontroller", 0, this::predicate));
+        data.addAnimationController(controller);
     }
 
     @Override
@@ -156,5 +157,15 @@ public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatab
     @Override
     public EntityType<?> getType() {
     	return CAEntityTypes.CRYSTAL_CARROT_PIG.get();
+    }
+    
+    @Override
+    public int tickTimer() {
+    	return tickCount;
+    }
+    
+    @Override
+    public AnimationController<?> getController() {
+    	return controller;
     }
 }

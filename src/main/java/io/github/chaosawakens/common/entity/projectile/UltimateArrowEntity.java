@@ -71,6 +71,6 @@ public class UltimateArrowEntity extends AbstractArrowEntity {
 
 	@Override
 	public double getBaseDamage() {
-		return 10.0D;
+		return 15.0D;
 	}
 }

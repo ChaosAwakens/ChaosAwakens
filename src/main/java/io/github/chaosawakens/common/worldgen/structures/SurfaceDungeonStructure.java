@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.worldgen.structures;
 
 import com.mojang.serialization.Codec;
+
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -28,7 +29,9 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
-	private final String path;
+	protected final String path;
+	@SuppressWarnings("unused")
+	private int xo, yo, zo;
 
 	public SurfaceDungeonStructure(Codec<NoFeatureConfig> codec, String path) {
 		super(codec);
@@ -72,9 +75,18 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 			JigsawManager.addPieces(dynamicRegistryManager,
 					new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, path)), 10),
 					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, netherFlag ? SurfaceDungeonStructure.getGround(chunkGenerator, chunkGenerator.getBaseColumn((chunkX << 4) + 7, (chunkZ << 4) + 7), chunkX, chunkZ) : blockpos, pieces, random, false, !netherFlag);
-
+			
+	//		this.pieces.forEach(piece -> piece.move(xo, yo, zo));
 			this.calculateBoundingBox();
 		}
+	}
+	
+	public SurfaceDungeonStructure offsetPos(int xo, int yo, int zo) {
+		this.xo = xo;
+		this.yo = yo;
+		this.zo = zo;
+		
+		return this;
 	}
 
 	protected static BlockPos getGround(ChunkGenerator chunkGen, IBlockReader column, int chunkX, int chunkZ) {

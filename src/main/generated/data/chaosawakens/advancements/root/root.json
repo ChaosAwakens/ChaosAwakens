@@ -18,11 +18,7 @@
   "criteria": {
     "root": {
       "trigger": "minecraft:location",
-      "conditions": {
-        "location": {
-          "dimension": "minecraft:overworld"
-        }
-      }
+      "conditions": {}
     }
   },
   "requirements": [

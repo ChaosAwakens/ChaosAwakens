@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.entity;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
+
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -7,6 +11,8 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
 import net.minecraft.item.ItemStack;
@@ -32,10 +38,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
-
 public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 
@@ -48,13 +50,18 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(4, new RockFishEntity.SwimGoal(this));
+		this.goalSelector.addGoal(0, new RockFishEntity.SwimGoal(this));
+		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, WoodFishEntity.class, true));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5D, false));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 12.0D)
 				.add(Attributes.MOVEMENT_SPEED, 1.2D)
+				.add(Attributes.ATTACK_SPEED, 0.25D)
+				.add(Attributes.ATTACK_DAMAGE, 1.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.add(Attributes.FOLLOW_RANGE, 4.0D);
 	}

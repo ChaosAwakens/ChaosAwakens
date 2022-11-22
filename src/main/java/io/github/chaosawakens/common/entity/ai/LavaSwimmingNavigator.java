@@ -11,8 +11,8 @@ public class LavaSwimmingNavigator extends SwimmerPathNavigator {
 	}
 
 	@Override
-	protected PathFinder createPathFinder(int i) {
+	protected PathFinder createPathFinder(int maxNodes) {
 		this.nodeEvaluator = new LavaNodeSwimmingProcessor(false);
-		return new PathFinder(this.nodeEvaluator, i);
+		return new PathFinder(this.nodeEvaluator, maxNodes);
 	}
 }

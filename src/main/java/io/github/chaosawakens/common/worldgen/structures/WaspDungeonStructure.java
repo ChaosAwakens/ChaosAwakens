@@ -67,7 +67,7 @@ public class WaspDungeonStructure extends Structure<NoFeatureConfig> {
 					new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, "wasp_dungeon/start_pool")), 10),
 					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, blockpos, pieces, random, false, true);
 
-			this.pieces.forEach(piece -> piece.move(0, -5, 0));
+			this.pieces.forEach(piece -> piece.move(0, -6, 0));
 			this.calculateBoundingBox();
 		}
 	}

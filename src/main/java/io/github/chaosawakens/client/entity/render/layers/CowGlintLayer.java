@@ -1,8 +1,10 @@
 package io.github.chaosawakens.client.entity.render.layers;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.EnchantedGoldenAppleCowEntity;
+import io.github.chaosawakens.common.entity.UltimateAppleCowEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -24,5 +26,19 @@ public class CowGlintLayer extends GeoLayerRenderer<EnchantedGoldenAppleCowEntit
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, EnchantedGoldenAppleCowEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		RenderType renderType = RenderType.entityGlint();
 		this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, renderType, matrixStackIn, bufferIn, bufferIn.getBuffer(renderType), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
+	}
+	
+	public static class UltimateAppleCowGlintLayer extends GeoLayerRenderer<UltimateAppleCowEntity> {
+
+		public UltimateAppleCowGlintLayer(IGeoRenderer<UltimateAppleCowEntity> entityRendererIn) {
+			super(entityRendererIn);
+		}
+		
+		@Override
+		public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, UltimateAppleCowEntity entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+			RenderType renderType = RenderType.entityGlint();
+			this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, renderType, matrixStackIn, bufferIn, bufferIn.getBuffer(renderType), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
+		}
+		
 	}
 }

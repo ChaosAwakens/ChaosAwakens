@@ -1,9 +1,15 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.api.IAnimatableEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -20,11 +26,16 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -32,8 +43,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
+public class GreenFishEntity extends AbstractFishEntity implements IAnimatableEntity, IAnimationTickable {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "greenfishcontroller", animationInterval(), this::predicate);
 
 	public GreenFishEntity(EntityType<? extends AbstractFishEntity> type, World world) {
 		super(type, world);
@@ -52,7 +64,7 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 
 	@Override
 	public int getMaxAirSupply() {
-		return 1500;
+		return 300;
 	}
 
 	@Override
@@ -62,7 +74,7 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "greenfishcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -73,7 +85,7 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 		this.goalSelector.addGoal(4, new GreenFishEntity.SwimGoal(this));
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.green_fish.swim", true));
 			return PlayState.CONTINUE;
@@ -228,5 +240,20 @@ public class GreenFishEntity extends AbstractFishEntity implements IAnimatable {
 	@Override
 	protected float getStandingEyeHeight(Pose pose, EntitySize size) {
 		return this.isBaby() ? size.height * 0.45F : 0.6F;
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
+
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
+	}
+
+	@Override
+	public int animationInterval() {
+		return 4;
 	}
 }

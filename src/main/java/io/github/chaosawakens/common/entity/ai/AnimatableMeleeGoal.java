@@ -1,11 +1,12 @@
 package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
-
 import java.util.function.BiFunction;
 
-import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.brain.BrainUtil;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.EntityPredicates;
@@ -14,39 +15,49 @@ import net.minecraft.util.Hand;
 public class AnimatableMeleeGoal extends AnimatableGoal {
 	protected final double animationLength;
 	protected final BiFunction<Double, Double, Boolean> attackPredicate;
-	private boolean hasHit;
+	protected final BiFunction<Double, Double, Boolean> attackEndPredicate;
+	protected boolean hasHit;
+	public boolean shouldLoop;
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity entity, double animationLength, double attackBegin, double attackEnd) {
 		this.entity = entity;
 		this.animationLength = animationLength;
 		this.attackPredicate = (progress, length) -> attackBegin < progress / (length) && progress / (length) < attackEnd;
+		this.attackEndPredicate = (progress, length) -> ++progress <= animationLength;
 		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
-	private static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+	protected static boolean checkIfValid(AnimatableMeleeGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
 		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) {
 				attacker.setAttacking(false);
 				return false;
 			}
-			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-			if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
+//			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
+//			if (distance <= AnimatableGoal.getAttackReachSq(attacker, target)) return true;
 		}
-		attacker.setAttacking(false);
-		return false;
+//		attacker.setAttacking(false);
+		return true;
 	}
 
+	//TODO fix looping and anim sync
 	@Override
 	public boolean canUse() {
-		if (Math.random() <= 0.1) return false;
-		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+	//	if (Math.random() <= 0.1) return false;
+		LivingEntity target = this.entity.getTarget();
+		if (target == null) return false;
+		double distance = this.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
+		return AnimatableMeleeGoal.checkIfValid(this, entity, target) && distance <= AnimatableGoal.getAttackReachSq(this.entity, target) - 0.2D;
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		if (Math.random() <= 0.1) return true;
-		return AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget());
+	//	if (Math.random() <= 0.1) return true;
+		LivingEntity target = this.entity.getTarget();
+		if (target == null) return false;
+		double distance = this.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
+		return (AnimatableMeleeGoal.checkIfValid(this, entity, this.entity.getTarget())) && this.attackEndPredicate.apply(this.animationProgress, this.animationLength) /*&& distance <= AnimatableGoal.getAttackReachSq(this.entity, target)*/;
 	}
 
 	@Override
@@ -75,16 +86,13 @@ public class AnimatableMeleeGoal extends AnimatableGoal {
 		this.baseTick();
 		LivingEntity target = this.entity.getTarget();
 		if (target != null) {
-			// ChaosAwakens.debug("GOAL", this.animationProgress+" "+this.animationLength+"
-			// "+this.tickDelta+" "+this.animationProgress/this.animationLength);
+			 ChaosAwakens.debug("GOAL", this.animationProgress + "" + this.animationLength + "" + this.tickDelta + "" + this.animationProgress/this.animationLength);
+			
+			 BrainUtil.lookAtEntity(this.entity, target);
+			 
 			if (this.attackPredicate.apply(this.animationProgress, this.animationLength) && !this.hasHit) {
-				this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-				if (this.entity.distanceTo(target) >= 12.0F) {
-					this.entity.getTarget().moveTo(target.blockPosition(), 3.0F, 10.0F);
-					this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-					// this.entity.swing(Hand.MAIN_HAND);
-					// this.entity.doHurtTarget(target);
-					// this.hasHit = true;
+				if (this.entity.distanceTo(target) >= AnimatableGoal.getAttackReachSq(this.entity, target)) {
+					this.entity.getNavigation().moveTo(this.entity.getNavigation().getPath(), 1);
 				}
 				this.entity.swing(Hand.MAIN_HAND);
 				this.entity.doHurtTarget(target);

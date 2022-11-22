@@ -5,6 +5,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.data.DataGenerator;
 
 public class CABiomeTypeProvider extends BiomeTypeProvider {
+
 	public CABiomeTypeProvider(DataGenerator generator) {
 		super(generator);
 	}

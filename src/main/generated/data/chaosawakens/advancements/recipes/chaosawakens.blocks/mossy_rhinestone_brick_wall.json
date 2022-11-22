@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:mossy_rhinestone_brick_wall"
+    ]
+  },
+  "criteria": {
+    "has_mossy_rhinestone_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:mossy_rhinestone_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:mossy_rhinestone_brick_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mossy_rhinestone_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

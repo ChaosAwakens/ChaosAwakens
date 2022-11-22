@@ -5,10 +5,10 @@ import io.github.chaosawakens.common.entity.WaspEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class WaspEntityModel extends AnimatedGeoModel<WaspEntity> {
+public class WaspEntityModel extends AnimatedTickingGeoModel<WaspEntity> {
 	@Override
 	public ResourceLocation getModelLocation(WaspEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/wasp.geo.json");

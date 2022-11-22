@@ -1,0 +1,37 @@
+{
+  "parent": "chaosawakens:root/ultimate_excavator",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:ultimate_hoe",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.ultimate_farmer.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.ultimate_farmer.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "ultimate_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ultimate_hoe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ultimate_hoe"
+    ]
+  ]
+}

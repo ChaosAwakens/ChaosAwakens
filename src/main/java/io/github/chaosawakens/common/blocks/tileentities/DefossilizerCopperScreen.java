@@ -39,6 +39,6 @@ public class DefossilizerCopperScreen extends ContainerScreen<DefossilizerCopper
 		// Progress arrow
 		blit(matrixStack, posX + 79, posY + 35, 176, 14, menu.getProgressArrowScale() + 1, 16);
 		//Fuel bar
-		blit(matrixStack, posX + 56, posY + 36, 176, 0, 14, 14 - fuel);
-	} //                                    36 49
+//		blit(matrixStack, posX + 56, posY + 36, 176, 0, 14, 14 - fuel);
+	}
 }

@@ -1,5 +1,9 @@
 package io.github.chaosawakens.data;
 
+import java.util.Objects;
+
+import javax.annotation.Nonnull;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.GateBlock;
 import net.minecraft.block.Block;
@@ -14,13 +18,10 @@ import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nonnull;
-import java.util.Objects;
-
-@SuppressWarnings("ALL")
+@SuppressWarnings("all")
 public class CABlockModelProvider extends BlockModelProvider {
-	public CABlockModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, ChaosAwakens.MODID, existingFileHelper);
+	public CABlockModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {
+		super(generator, modid, existingFileHelper);
 	}
 
 	@Override
@@ -235,6 +236,69 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.wallInventory("polished_limestone_wall_inventory", chaosRL("polished_limestone_block"));
 		this.wallSide("polished_limestone_wall", chaosRL("polished_limestone_block"));
 		this.wallSideTall("polished_limestone_wall", chaosRL("polished_limestone_block"));
+		
+		this.cubeAll("rhinestone_block", chaosRL("rhinestone_block"));
+		this.cubeAll("rhinestone_bricks", chaosRL("rhinestone_bricks"));
+		this.cubeAll("chiseled_rhinestone_bricks", chaosRL("chiseled_rhinestone_bricks"));
+		this.cubeAll("cracked_rhinestone_bricks", chaosRL("cracked_rhinestone_bricks"));
+		this.cubeAll("mossy_rhinestone_bricks", chaosRL("mossy_rhinestone_bricks"));
+		this.cubeAll("polished_rhinestone_block", chaosRL("polished_rhinestone_block"));
+		this.cubeColumn("rhinestone_pillar", chaosRL("rhinestone_pillar"), chaosRL("rhinestone_pillar_top"));
+		this.cubeColumnHorizontal("rhinestone_pillar", chaosRL("rhinestone_pillar"), chaosRL("rhinestone_pillar_top"));
+		this.slab("rhinestone_slab", chaosRL("rhinestone_block"), chaosRL("rhinestone_block"), chaosRL("rhinestone_block"));
+		this.slabTop("rhinestone_slab", chaosRL("rhinestone_block"), chaosRL("rhinestone_block"), chaosRL("rhinestone_block"));
+		this.slab("rhinestone_brick_slab", chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"));
+		this.slabTop("rhinestone_brick_slab", chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"));
+		this.slab("chiseled_rhinestone_brick_slab", chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"));
+		this.slabTop("chiseled_rhinestone_brick_slab", chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"));
+		this.slab("cracked_rhinestone_brick_slab", chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"));
+		this.slabTop("cracked_rhinestone_brick_slab", chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"));
+		this.slab("mossy_rhinestone_brick_slab", chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"));
+		this.slabTop("mossy_rhinestone_brick_slab", chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"));
+		this.slab("polished_rhinestone_slab", chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"));
+		this.slabTop("polished_rhinestone_slab", chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"));
+		this.stairs("rhinestone_stairs", chaosRL("rhinestone_block"), chaosRL("rhinestone_block"), chaosRL("rhinestone_block"));
+		this.stairsInner("rhinestone_stairs", chaosRL("rhinestone_block"), chaosRL("rhinestone_block"), chaosRL("rhinestone_block"));
+		this.stairsOuter("rhinestone_stairs", chaosRL("rhinestone_block"), chaosRL("rhinestone_block"), chaosRL("rhinestone_block"));
+		this.stairs("rhinestone_brick_stairs", chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"));
+		this.stairsInner("rhinestone_brick_stairs", chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"));
+		this.stairsOuter("rhinestone_brick_stairs", chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"), chaosRL("rhinestone_bricks"));
+		this.stairs("chiseled_rhinestone_brick_stairs", chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"));
+		this.stairsInner("chiseled_rhinestone_brick_stairs", chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"));
+		this.stairsOuter("chiseled_rhinestone_brick_stairs", chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"), chaosRL("chiseled_rhinestone_bricks"));
+		this.stairs("cracked_rhinestone_brick_stairs", chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"));
+		this.stairsInner("cracked_rhinestone_brick_stairs", chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"));
+		this.stairsOuter("cracked_rhinestone_brick_stairs", chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"), chaosRL("cracked_rhinestone_bricks"));
+		this.stairs("mossy_rhinestone_brick_stairs", chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"));
+		this.stairsInner("mossy_rhinestone_brick_stairs", chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"));
+		this.stairsOuter("mossy_rhinestone_brick_stairs", chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"), chaosRL("mossy_rhinestone_bricks"));
+		this.stairs("polished_rhinestone_stairs", chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"));
+		this.stairsInner("polished_rhinestone_stairs", chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"));
+		this.stairsOuter("polished_rhinestone_stairs", chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"), chaosRL("polished_rhinestone_block"));
+		this.wallPost("rhinestone_wall", chaosRL("rhinestone_block"));
+		this.wallInventory("rhinestone_wall_inventory", chaosRL("rhinestone_block"));
+		this.wallSide("rhinestone_wall", chaosRL("rhinestone_block"));
+		this.wallSideTall("rhinestone_wall", chaosRL("rhinestone_block"));
+		this.wallPost("rhinestone_brick_wall", chaosRL("rhinestone_bricks"));
+		this.wallInventory("rhinestone_brick_wall_inventory", chaosRL("rhinestone_bricks"));
+		this.wallSide("rhinestone_brick_wall", chaosRL("rhinestone_bricks"));
+		this.wallSideTall("rhinestone_brick_wall", chaosRL("rhinestone_bricks"));
+		this.wallPost("chiseled_rhinestone_brick_wall", chaosRL("chiseled_rhinestone_bricks"));
+		this.wallInventory("chiseled_rhinestone_brick_wall_inventory", chaosRL("chiseled_rhinestone_bricks"));
+		this.wallSide("chiseled_rhinestone_brick_wall", chaosRL("chiseled_rhinestone_bricks"));
+		this.wallSideTall("chiseled_rhinestone_brick_wall", chaosRL("chiseled_rhinestone_bricks"));
+		this.wallPost("cracked_rhinestone_brick_wall", chaosRL("cracked_rhinestone_bricks"));
+		this.wallInventory("cracked_rhinestone_brick_wall_inventory", chaosRL("cracked_rhinestone_bricks"));
+		this.wallSide("cracked_rhinestone_brick_wall", chaosRL("cracked_rhinestone_bricks"));
+		this.wallSideTall("cracked_rhinestone_brick_wall", chaosRL("cracked_rhinestone_bricks"));
+		this.wallPost("mossy_rhinestone_brick_wall", chaosRL("mossy_rhinestone_bricks"));
+		this.wallInventory("mossy_rhinestone_brick_wall_inventory", chaosRL("mossy_rhinestone_bricks"));
+		this.wallSide("mossy_rhinestone_brick_wall", chaosRL("mossy_rhinestone_bricks"));
+		this.wallSideTall("mossy_rhinestone_brick_wall", chaosRL("mossy_rhinestone_bricks"));
+		this.wallPost("polished_rhinestone_wall", chaosRL("polished_rhinestone_block"));
+		this.wallInventory("polished_rhinestone_wall_inventory", chaosRL("polished_rhinestone_block"));
+		this.wallSide("polished_rhinestone_wall", chaosRL("polished_rhinestone_block"));
+		this.wallSideTall("polished_rhinestone_wall", chaosRL("polished_rhinestone_block"));
 
 		this.cubeAll("robo_block_l", chaosRL("robo_block_l"));
 		this.cubeColumn("robo_block_v", chaosRL("robo_block_v"), chaosRL("robo_block_top"));
@@ -610,6 +674,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_oak_ent", chaosRL("fossilised_oak_ent"));
 		this.cubeAll("fossilised_spruce_ent", chaosRL("fossilised_spruce_ent"));
 		this.cubeAll("fossilised_hercules_beetle", chaosRL("fossilised_hercules_beetle"));
+		this.cubeAll("fossilised_beaver", chaosRL("fossilised_beaver"));
 		this.cubeAll("fossilised_ruby_bug", chaosRL("fossilised_ruby_bug"));
 		this.cubeAll("fossilised_emerald_gator", chaosRL("fossilised_emerald_gator"));
 		this.cubeAll("fossilised_green_fish", chaosRL("fossilised_green_fish"));
@@ -625,6 +690,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_golden_apple_cow", chaosRL("fossilised_golden_apple_cow"));
 		this.cubeAll("fossilised_carrot_pig", chaosRL("fossilised_carrot_pig"));
 		this.cubeAll("fossilised_golden_carrot_pig", chaosRL("fossilised_golden_carrot_pig"));
+		this.cubeAll("fossilised_lettuce_chicken", chaosRL("fossilised_lettuce_chicken"));
 		this.cubeAll("fossilised_bird", chaosRL("fossilised_bird"));
 		this.cubeAll("fossilised_dimetrodon", chaosRL("fossilised_dimetrodon"));
 		this.cubeAll("fossilised_tree_frog", chaosRL("fossilised_tree_frog"));
@@ -699,17 +765,18 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("fossilised_endermite", chaosRL("fossilised_endermite"));
 		this.cubeAll("fossilised_shulker", chaosRL("fossilised_shulker"));
 
-		this.cubeAll("crystallised_crystal_apple_cow", chaosRL("crystallised_crystal_apple_cow"));
+		this.cubeAll("crystalised_crystal_apple_cow", chaosRL("crystalised_crystal_apple_cow"));
+		this.cubeAll("crystalised_crystal_carrot_pig", chaosRL("crystalised_crystal_carrot_pig"));
 
-		this.cubeAll("basilisk_scale_block", chaosRL("basilisk_scale_block"));
-		this.cubeAll("emperor_scorpion_scale_block", chaosRL("emperor_scorpion_scale_block"));
-		this.cubeAll("ender_dragon_scale_block", chaosRL("ender_dragon_scale_block"));
 		this.cubeAll("moth_scale_block", chaosRL("moth_scale_block"));
-		this.cubeAll("nightmare_scale_block", chaosRL("nightmare_scale_block"));
 		this.cubeAll("water_dragon_scale_block", chaosRL("water_dragon_scale_block"));
+		this.cubeAll("ender_dragon_scale_block", chaosRL("ender_dragon_scale_block"));
+		this.cubeAll("nightmare_scale_block", chaosRL("nightmare_scale_block"));
 		this.cubeAll("mobzilla_scale_block", chaosRL("mobzilla_scale_block"));
 		this.cubeAll("royal_guardian_scale_block", chaosRL("royal_guardian_scale_block"));
 		this.cubeAll("queen_scale_block", chaosRL("queen_scale_block"));
+		this.cubeAll("basilisk_scale_block", chaosRL("basilisk_scale_block"));
+		this.cubeAll("emperor_scorpion_scale_block", chaosRL("emperor_scorpion_scale_block"));
 
 		this.cubeColumn("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
 		this.cubeColumnHorizontal("apple_log", chaosRL("apple_log"), chaosRL("apple_log_top"));
@@ -802,6 +869,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("red_crystal_sapling", chaosRL("red_crystal_sapling"));
 		this.cross("green_crystal_sapling", chaosRL("green_crystal_sapling"));
 		this.cross("yellow_crystal_sapling", chaosRL("yellow_crystal_sapling"));
+		this.cross("pink_crystal_sapling", chaosRL("pink_crystal_sapling"));
+		this.cross("blue_crystal_sapling", chaosRL("blue_crystal_sapling"));
+		this.cross("orange_crystal_sapling", chaosRL("orange_crystal_sapling"));
 
 		this.leafCarpet("oak_leaf_carpet", mcRL("oak_leaves"));
 		this.leafCarpetInventory("oak_leaf_carpet_inventory", mcRL("oak_leaves"));
@@ -939,6 +1009,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("green_crystal_flower", chaosRL("green_crystal_flower"));
 		this.cross("red_crystal_flower", chaosRL("red_crystal_flower"));
 		this.cross("yellow_crystal_flower", chaosRL("yellow_crystal_flower"));
+		this.cross("pink_crystal_flower", chaosRL("pink_crystal_flower"));
+		this.cross("orange_crystal_flower", chaosRL("orange_crystal_flower"));
+		this.cross("crystal_rose", chaosRL("crystal_rose"));
 	}
 
 	private ResourceLocation chaosRL(String texture) {

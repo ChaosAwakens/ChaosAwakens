@@ -3,9 +3,9 @@ package io.github.chaosawakens.client.entity.model;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 
-public class HerculesBeetleEntityModel extends AnimatedGeoModel<HerculesBeetleEntity> {
+public class HerculesBeetleEntityModel extends AnimatedTickingGeoModel<HerculesBeetleEntity> {
 	@Override
 	public ResourceLocation getModelLocation(HerculesBeetleEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/hercules_beetle.geo.json");
@@ -13,7 +13,7 @@ public class HerculesBeetleEntityModel extends AnimatedGeoModel<HerculesBeetleEn
 
 	@Override
 	public ResourceLocation getTextureLocation(HerculesBeetleEntity object) {
-		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/hercules_beetle.png");
+		return new ResourceLocation(ChaosAwakens.MODID, "textures/entity/hercules_beetle/hercules_beetle.png");
 	}
 
 	@Override

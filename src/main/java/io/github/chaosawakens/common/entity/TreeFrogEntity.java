@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -36,8 +37,9 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Random;
 
-public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
+public class TreeFrogEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "treefrogcontroller", animationInterval(), this::predicate);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(TreeFrogEntity.class, DataSerializers.INT);
 
 	public TreeFrogEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
@@ -57,11 +59,11 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(3, new PanicGoal(this, 1.2D));
-		this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.7D));
-		this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 0.7D));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(2, new PanicGoal(this, 1.2D));
+		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -140,7 +142,7 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 		return null;
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tree_frog.jump_animation", true));
 			return PlayState.CONTINUE;
@@ -154,7 +156,7 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "treefrogcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -195,5 +197,20 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 		protected double getAttackReachSqr(LivingEntity livingEntity) {
 			return (4.0F + livingEntity.getBbWidth());
 		}
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
+
+	@Override
+	public int animationInterval() {
+		return 2;
+	}
+
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
 	}
 }

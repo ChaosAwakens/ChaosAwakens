@@ -46,6 +46,16 @@
         ]
       }
     },
+    "has_stick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:stick"
+          }
+        ]
+      }
+    },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
@@ -59,6 +69,7 @@
       "has_ultimate_axe",
       "has_big_hammer",
       "has_triffid_goo",
+      "has_stick",
       "has_the_recipe"
     ]
   ]

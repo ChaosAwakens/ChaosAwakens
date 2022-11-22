@@ -1,7 +1,7 @@
 {
   "format_version": "1.8.0",
   "animations": {
-    "swimming": {
+    "animation.attack_squid.swimming": {
       "loop": true,
       "bones": {
         "righttentacle": {
@@ -105,7 +105,7 @@
         }
       }
     },
-    "death": {
+    "animation.attack_squid.death": {
       "animation_length": 5.2,
       "bones": {
         "righttentacle": {
@@ -264,7 +264,7 @@
         }
       }
     },
-    "attacking": {
+    "animation.attack_squid.attack": {
       "loop": true,
       "animation_length": 1.56,
       "bones": {

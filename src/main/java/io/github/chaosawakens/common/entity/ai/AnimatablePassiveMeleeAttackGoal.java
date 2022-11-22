@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.entity.ai;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
-import io.github.chaosawakens.common.entity.AnimatableAnimalEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;

@@ -18,8 +18,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RoboWarriorEntity extends RoboRangedEntity implements IAnimatable, IRangedAttackMob {
+public class RoboWarriorEntity extends RoboRangedEntity implements IRangedAttackMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "robowarriorcontroller", animationInterval(), this::predicate);
 
 	public RoboWarriorEntity(EntityType<? extends RoboEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -35,10 +36,11 @@ public class RoboWarriorEntity extends RoboRangedEntity implements IAnimatable, 
 				.add(Attributes.ATTACK_SPEED, 7.5D)
 				.add(Attributes.ATTACK_DAMAGE, 50)
 				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
-				.add(Attributes.FOLLOW_RANGE, 32);
+				.add(Attributes.FOLLOW_RANGE, 40);
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	@Override
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
 		if (this.getAttacking()) {
 			if (event.isMoving()) {
@@ -60,14 +62,29 @@ public class RoboWarriorEntity extends RoboRangedEntity implements IAnimatable, 
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(2, new RoboAttackGoal(this, 13, 15.0F, 0.7F));
+		this.goalSelector.addGoal(2, new RoboAttackGoal(this, 13, 4.0F, 0.7F));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.6));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
+	}
+	
+	@Override
+	public int animationInterval() {
+		return 0;
 	}
 
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "robowarriorcontroller", 0, this::predicate));
+	}
+	
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
+	}
+	
+	@Override
+	public void manageAttack(LivingEntity target) {
+		
 	}
 
 	@Override
@@ -78,5 +95,10 @@ public class RoboWarriorEntity extends RoboRangedEntity implements IAnimatable, 
 	@Override
 	public void performRangedAttack(LivingEntity target, float distanceFactor) {
 		this.getTarget();
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
 	}
 }

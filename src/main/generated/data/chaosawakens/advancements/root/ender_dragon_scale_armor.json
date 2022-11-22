@@ -1,0 +1,46 @@
+{
+  "parent": "chaosawakens:root/peacock_armor",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:ender_dragon_scale_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.ender_dragon_scale_armor.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.ender_dragon_scale_armor.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "ender_dragon_scale_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ender_dragon_scale_helmet"
+          },
+          {
+            "item": "chaosawakens:ender_dragon_scale_chestplate"
+          },
+          {
+            "item": "chaosawakens:ender_dragon_scale_leggings"
+          },
+          {
+            "item": "chaosawakens:ender_dragon_scale_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ender_dragon_scale_armor"
+    ]
+  ]
+}

@@ -45,6 +45,11 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 	}
 
 	@Override
+	public boolean isFoil(ItemStack stack) {
+		return CACommonConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
+	}
+
+	@Override
 	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getItemInHand(handIn);
 		if (playerIn.fishing != null) {
@@ -75,10 +80,5 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 	@Override
 	public EnchantmentData[] enchantments() {
 		return this.enchantments;
-	}
-
-	@Override
-	public boolean isFoil(ItemStack stack) {
-		return CACommonConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
 	}
 }

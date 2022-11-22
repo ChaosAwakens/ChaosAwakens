@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/flower_pot_cross",
+  "textures": {
+    "plant": "chaosawakens:block/blue_crystal_sapling"
+  }
+}

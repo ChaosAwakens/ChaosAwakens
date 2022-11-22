@@ -1,19 +1,27 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " SH",
+    " GA",
+    "T  "
+  ],
+  "key": {
+    "S": {
       "item": "chaosawakens:ultimate_sword"
     },
-    {
+    "A": {
       "item": "chaosawakens:ultimate_axe"
     },
-    {
+    "H": {
       "item": "chaosawakens:big_hammer"
     },
-    {
+    "G": {
       "item": "chaosawakens:triffid_goo"
+    },
+    "T": {
+      "item": "minecraft:stick"
     }
-  ],
+  },
   "result": {
     "item": "chaosawakens:attitude_adjuster"
   }

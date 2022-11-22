@@ -52,7 +52,7 @@ public class SparkFishEntity extends AbstractFishEntity implements IAnimatable {
 
 	@Override
 	public int getMaxAirSupply() {
-		return 1500;
+		return 300;
 	}
 
 	@Override

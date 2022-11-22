@@ -1,16 +1,24 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "chaosawakens:ultimate_sword"
-    },
-    {
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " AG",
+    " RA",
+    "T  "
+  ],
+  "key": {
+    "A": {
       "item": "chaosawakens:ultimate_axe"
     },
-    {
+    "G": {
       "item": "chaosawakens:triffid_goo"
+    },
+    "R": {
+      "item": "chaosawakens:ruby"
+    },
+    "T": {
+      "item": "minecraft:stick"
     }
-  ],
+  },
   "result": {
     "item": "chaosawakens:battle_axe"
   }

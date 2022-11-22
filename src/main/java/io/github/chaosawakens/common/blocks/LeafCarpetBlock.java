@@ -13,7 +13,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("all")
 public class LeafCarpetBlock extends MultifaceBlock implements IWaterLoggable {
 	private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 

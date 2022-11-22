@@ -1,5 +1,5 @@
 {
-  "parent": "chaosawakens:root/root",
+  "parent": "chaosawakens:root/trophy_worthy",
   "display": {
     "icon": {
       "item": "chaosawakens:ultimate_chestplate",
@@ -11,7 +11,7 @@
     "description": {
       "translate": "advancements.chaosawakens.ultimate_armor.description"
     },
-    "frame": "goal",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,

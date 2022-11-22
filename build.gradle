@@ -137,7 +137,7 @@ jar {
 processResources {
 	exclude '**/.cache/'
 
-	duplicatesStrategy = DuplicatesStrategy.FAIL
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 publishing {

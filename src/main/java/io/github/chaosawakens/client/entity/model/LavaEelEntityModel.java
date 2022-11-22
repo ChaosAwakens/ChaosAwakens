@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.LavaEelEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class LavaEelEntityModel extends AnimatedGeoModel<LavaEelEntity> {
@@ -25,5 +26,11 @@ public class LavaEelEntityModel extends AnimatedGeoModel<LavaEelEntity> {
 	@Override
 	public void setLivingAnimations(LavaEelEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
+		
+		IBone root = this.getAnimationProcessor().getBone("root");
+		
+		if (!entity.isInLava()) {
+			root.setRotationZ(45);
+		}
 	}
 }

@@ -1,7 +1,7 @@
 {
   "name": "danger_isles",
-  "ultrawarm": true,
-  "natural": false,
+  "ultrawarm": false,
+  "natural": true,
   "piglin_safe": true,
   "respawn_anchor_works": false,
   "bed_works": false,
@@ -10,7 +10,6 @@
   "has_ceiling": false,
   "coordinate_scale": 1.0,
   "ambient_light": 0.0,
-  "fixed_time": 18000,
   "logical_height": 256,
   "effects": "minecraft:overworld",
   "infiniburn": "minecraft:infiniburn_overworld"

@@ -38,7 +38,7 @@ side="BOTH"
 
 [[dependencies.chaosawakens]]
 modId="patchouli"
-mandatory=true
+mandatory=false
 versionRange="[1.16.4-53,)"
 ordering="AFTER"
 side="BOTH"

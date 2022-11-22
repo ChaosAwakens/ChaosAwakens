@@ -1,17 +1,36 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CABlocks;
+import java.util.Optional;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import io.github.chaosawakens.api.IAnimatableEntity;
+import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
+import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.block.BlockState;
-
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.controller.MovementController;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SitGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
@@ -26,7 +45,13 @@ import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
@@ -38,9 +63,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -48,37 +72,33 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
-
-import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
-import io.github.chaosawakens.common.entity.robo.RoboEntity;
-
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
-
-public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAnimal, IUtilityHelper {
+public class BirdEntity extends TameableEntity implements IAnimatableEntity, IAnimationTickable, IFlyingAnimal, IUtilityHelper {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "birdcontroller", animationInterval(), this::predicate);
 	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
 	private static final DataParameter<Boolean> PERCHED = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> FLYING = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> FLAPPING = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> GLIDING = EntityDataManager.defineId(BirdEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Optional<BlockPos>> POS = EntityDataManager.defineId(BirdEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
+	@SuppressWarnings("unused")
 	private float flap;
 	private float flapSpeed;
 	private float flapping = 1.0F;
 	public float sitTicks;
 	public float flyTicks;
 	public float sitCD;
+	private int glideTimer;
+	private int flyTimer;
 
 	public BirdEntity(EntityType<? extends TameableEntity> p_i50251_1_, World p_i50251_2_) {
 		super(p_i50251_1_, p_i50251_2_);
-		this.moveControl = new FlyingMovementController(this, 10, true);
+		this.moveControl = new FlyingMovementController(this, 3, true);
 		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, -1.0F);
 		this.setPathfindingMalus(PathNodeType.LAVA, -1.0F);
 		this.setPathfindingMalus(PathNodeType.DAMAGE_CACTUS, -1.0F);
 		this.setPathfindingMalus(PathNodeType.DANGER_OTHER, -1.0F);
-		this.setPathfindingMalus(PathNodeType.WATER_BORDER, 16.0F);
+		this.setPathfindingMalus(PathNodeType.WATER_BORDER, 1.0F);
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -118,7 +138,7 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		return targetPos;
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.dead) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.idle", true));
 			return PlayState.CONTINUE;
@@ -241,6 +261,8 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		this.entityData.define(DATA_TYPE_ID, 0);
 		this.entityData.define(PERCHED, false);
 		this.entityData.define(FLYING, false);
+		this.entityData.define(FLAPPING, false);
+		this.entityData.define(GLIDING, false);
 		this.entityData.define(POS, Optional.empty());
 	}
 
@@ -267,8 +289,16 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	}
 
 	@Override
+	protected ResourceLocation getDefaultLootTable() {
+		if (this.getBirdType() == 99) {
+			return CALootTables.BIRD_RUBY;
+		}
+		return CALootTables.BIRD;
+	}
+	
+	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "birdcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -278,7 +308,7 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 
 	public static boolean checkBirdSpawnRules(EntityType<BirdEntity> p, IWorld w, SpawnReason reason, BlockPos pos, Random random) {
 		BlockState blockstate = w.getBlockState(pos.below());
-		return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(CABlocks.DENSE_GRASS_BLOCK.get()) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && w.getRawBrightness(pos, 0) > 8;
+		return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && w.getRawBrightness(pos, 0) > 8;
 	}
 
 	private void calculateFlapping() {
@@ -297,6 +327,8 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 	public void aiStep() {
 		super.aiStep();
 		this.calculateFlapping();
+		
+		
 	}
 
 	@Override
@@ -364,21 +396,10 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 		return super.finalizeSpawn(world, difficultyInstance, spawnReason, entityData, compoundNBT);
 	}
 
-	@Override
-	protected ResourceLocation getDefaultLootTable() {
-		if (this.getBirdType() == 99) {
-			return CALootTables.BIRD_RUBY;
-		}
-		return CALootTables.BIRD;
-	}
-
 	protected int setBirdType(IServerWorld world) {
 		Biome biome = world.getBiome(this.blockPosition());
-		RegistryKey<Biome> biomeRegistryKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(biome.getRegistryName()));
 		int i = this.random.nextInt(5);
-		int rubyChance = this.random.nextInt(10);
 		if (biome.getBiomeCategory() == Biome.Category.BEACH) i = 40;
-		if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.DENSE_MOUNTAIN) && rubyChance == 5) i = 99;
 		return i;
 	}
 
@@ -389,9 +410,60 @@ public class BirdEntity extends TameableEntity implements IAnimatable, IFlyingAn
 			this.birdType = birdType;
 		}
 	}
+	
+	static enum FlyingMovementType {
+		FLAPPING,
+		GLIDING,
+		DESCENDING
+	}
+	
+	static class BirdMovementController extends MovementController {
+		private final BirdEntity bird;
+		
+
+		public BirdMovementController(BirdEntity entity) {
+			super(entity);
+			this.bird = entity;
+		}
+		
+		
+		
+	}
+	
+	static class CircleRandomPosGoal extends Goal {
+		private final BirdEntity bird;
+		BlockPos posToCircle;
+		
+		public CircleRandomPosGoal(BirdEntity bird) {
+			this.bird = bird;
+		}
+
+		@Override
+		public boolean canUse() {
+			return bird.getRandom().nextInt(120) == 0 && bird.isFlying();
+		}
+		
+		
+		
+	}
 
 	@Override
 	public AnimationFactory getFactory() {
 		return factory;
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
+
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
+	}
+
+	@Override
+	public int animationInterval() {
+		return 10;
 	}
 }

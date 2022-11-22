@@ -61,11 +61,42 @@
       "chaosawakens:entity/hercules_beetle/hurt"
     ]
   },
+  "entity.hercules_beetle.swing": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.swing",
+    "sounds": [
+      "chaosawakens:entity/hercules_beetle/swing"
+    ]
+  },
+  "entity.hercules_beetle.flap": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.flap",
+    "sounds": [
+      "chaosawakens:entity/hercules_beetle/flap"
+    ]
+  },
   "entity.hercules_beetle.death": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death",
     "sounds": [
       "chaosawakens:entity/hercules_beetle/death1",
       "chaosawakens:entity/hercules_beetle/death2"
+    ]
+  },
+  
+  "entity.whale.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.whale.hurt",
+    "sounds": [
+      "chaosawakens:entity/whale/hurt"
+    ]
+  },
+  "entity.whale.ambient": {
+    "subtitle": "subtitles.chaosawakens.entity.whale.ambient",
+    "sounds": [
+      "chaosawakens:entity/whale/ambient"
+    ]
+  },
+  "entity.whale.death": {
+    "subtitle": "subtitles.chaosawakens.entity.whale.death",
+    "sounds": [
+      "chaosawakens:entity/whale/death"
     ]
   },
   

@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	private AbstractLavaGroupFishEntity leader;
-	private int schoolSize = 1;
+	private int schoolSize = 5;
 
 	public AbstractLavaGroupFishEntity(EntityType<? extends AbstractLavaGroupFishEntity> entityType, World world) {
 		super(entityType, world);
@@ -23,7 +23,7 @@ public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(5, new FollowLavaLeaderGoal(this));
+		this.goalSelector.addGoal(4, new FollowLavaLeaderGoal(this));
 	}
 
 	public int getMaxSpawnClusterSize() {

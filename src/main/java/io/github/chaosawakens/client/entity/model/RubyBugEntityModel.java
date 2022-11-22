@@ -3,9 +3,9 @@ package io.github.chaosawakens.client.entity.model;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.RubyBugEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 
-public class RubyBugEntityModel extends AnimatedGeoModel<RubyBugEntity> {
+public class RubyBugEntityModel extends AnimatedTickingGeoModel<RubyBugEntity> {
 	@Override
 	public ResourceLocation getModelLocation(RubyBugEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/ruby_bug.geo.json");

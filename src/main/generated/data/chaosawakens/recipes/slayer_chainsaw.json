@@ -1,16 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
-    "#X#",
-    "###"
+    "RRR",
+    "SAR",
+    "SSR"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:redstone_block"
-    },
-    "X": {
+    "A": {
       "item": "chaosawakens:ultimate_axe"
+    },
+    "R": {
+      "item": "chaosawakens:ruby"
+    },
+    "S": {
+      "item": "minecraft:redstone_block"
     }
   },
   "result": {

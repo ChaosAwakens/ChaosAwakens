@@ -1,0 +1,46 @@
+{
+  "parent": "chaosawakens:root/cats_eye_armor",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:emerald_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.emerald_armor.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.emerald_armor.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "emerald_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:emerald_helmet"
+          },
+          {
+            "item": "chaosawakens:emerald_chestplate"
+          },
+          {
+            "item": "chaosawakens:emerald_leggings"
+          },
+          {
+            "item": "chaosawakens:emerald_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "emerald_armor"
+    ]
+  ]
+}

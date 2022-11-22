@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cracked_rhinestone_brick_stairs"
+    ]
+  },
+  "criteria": {
+    "has_cracked_rhinestone_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cracked_rhinestone_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cracked_rhinestone_brick_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cracked_rhinestone_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

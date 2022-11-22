@@ -1,0 +1,46 @@
+{
+  "parent": "chaosawakens:root/tigers_eye_armor",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:amethyst_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.amethyst_armor.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.amethyst_armor.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "amethyst_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:amethyst_helmet"
+          },
+          {
+            "item": "chaosawakens:amethyst_chestplate"
+          },
+          {
+            "item": "chaosawakens:amethyst_leggings"
+          },
+          {
+            "item": "chaosawakens:amethyst_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "amethyst_armor"
+    ]
+  ]
+}

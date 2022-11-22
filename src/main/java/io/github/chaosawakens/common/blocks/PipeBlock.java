@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 import java.util.Map;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("all")
 public class PipeBlock extends Block {
 	private static final Direction[] DIRECTIONS = Direction.values();
 	public static final BooleanProperty NORTH = BlockStateProperties.NORTH;

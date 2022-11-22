@@ -1,14 +1,30 @@
 package io.github.chaosawakens.common.entity;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+
 import io.github.chaosawakens.common.config.CACommonConfig;
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,7 +33,12 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.DrinkHelper;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
@@ -32,12 +53,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-
-public class AppleCowEntity extends AnimalEntity implements IAnimatable {
+public class AppleCowEntity extends AnimatableAnimalEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
+	private final AnimationController<?> controller = new AnimationController<>(this, "applecowcontroller", animationInterval(), this::predicate);
 
 	public AppleCowEntity(EntityType<? extends AppleCowEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -51,7 +70,7 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
 			return PlayState.CONTINUE;
@@ -197,7 +216,7 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "applecowcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -212,5 +231,20 @@ public class AppleCowEntity extends AnimalEntity implements IAnimatable {
 			super(true);
 			this.appleCowType = appleCowType;
 		}
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
+
+	@Override
+	public int animationInterval() {
+		return 2;
+	}
+
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
 	}
 }

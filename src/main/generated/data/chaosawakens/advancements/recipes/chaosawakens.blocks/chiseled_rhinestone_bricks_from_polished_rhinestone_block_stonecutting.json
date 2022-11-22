@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:chiseled_rhinestone_bricks_from_polished_rhinestone_block_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_polished_rhinestone_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:polished_rhinestone_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:chiseled_rhinestone_bricks_from_polished_rhinestone_block_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_rhinestone_block",
+      "has_the_recipe"
+    ]
+  ]
+}

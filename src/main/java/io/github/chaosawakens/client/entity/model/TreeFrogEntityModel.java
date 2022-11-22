@@ -5,10 +5,10 @@ import io.github.chaosawakens.common.entity.TreeFrogEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class TreeFrogEntityModel extends AnimatedGeoModel<TreeFrogEntity> {
+public class TreeFrogEntityModel extends AnimatedTickingGeoModel<TreeFrogEntity> {
 	@Override
 	public ResourceLocation getModelLocation(TreeFrogEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/tree_frog.geo.json");
@@ -24,7 +24,7 @@ public class TreeFrogEntityModel extends AnimatedGeoModel<TreeFrogEntity> {
 		return new ResourceLocation(ChaosAwakens.MODID, "animations/tree_frog.animation.json");
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void setLivingAnimations(TreeFrogEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);

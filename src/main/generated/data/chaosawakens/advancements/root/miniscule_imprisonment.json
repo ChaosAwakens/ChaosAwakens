@@ -1,0 +1,34 @@
+{
+  "parent": "chaosawakens:root/root",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:critter_cage"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.miniscule_imprisonment.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.miniscule_imprisonment.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "used_critter_cage": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "item": {
+          "item": "chaosawakens:critter_cage"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "used_critter_cage"
+    ]
+  ]
+}

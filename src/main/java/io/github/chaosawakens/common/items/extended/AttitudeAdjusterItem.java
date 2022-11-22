@@ -1,13 +1,13 @@
 package io.github.chaosawakens.common.items.extended;
 
+import java.util.UUID;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.util.EnumUtils;
-import net.minecraft.client.GameSettings;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.util.InputMappings;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -17,24 +17,22 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.SwordItem;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.util.UUID;
 
 public class AttitudeAdjusterItem extends SwordItem implements IVanishable, IAnimatable, IUtilityHelper {
     public static final UUID REACH_MODIFIER = UUID.fromString("1C0F03EC-EEB6-414A-8AC6-2A0913844821");
@@ -73,8 +71,8 @@ public class AttitudeAdjusterItem extends SwordItem implements IVanishable, IAni
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
-        if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
+   // 	InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
+ //       if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
             double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
             double reachSqr = reach * reach;
             World world = entity.level;
@@ -86,21 +84,23 @@ public class AttitudeAdjusterItem extends SwordItem implements IVanishable, IAni
             AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
             EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 
-            if (result == null || !(result.getEntity() instanceof LivingEntity)) return false;
+            if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
 
             LivingEntity target = (LivingEntity) result.getEntity();
 
             double distanceToTargetSqr = entity.distanceToSqr(target);
 
-            boolean resultBool = (result != null ? target : null) != null;
+            boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
 
             if (resultBool) {
-                if (reachSqr >= distanceToTargetSqr) {
-                    target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
-                    this.hurtEnemy(stack, target, entity);
-                }
+      //          if (entity instanceof PlayerEntity) {
+                    if (reachSqr >= distanceToTargetSqr) {
+                        target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
+                        this.hurtEnemy(stack, target, entity);
+                    }
+      //          }
             }
-        }
+   //     }
         return super.onEntitySwing(stack, entity);
     }
 
@@ -109,9 +109,9 @@ public class AttitudeAdjusterItem extends SwordItem implements IVanishable, IAni
         if (!target.level.isClientSide) {
             boolean hasFire = CACommonConfig.COMMON.attitudeAdjusterExplosionFire.get();
             switch (CACommonConfig.COMMON.attitudeAdjusterExplosionType.get()) {
-                case 0: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
-                case 1: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
-                case 2: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+                case NONE: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+                case BREAK: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+                case DESTROY: target.level.explode(null, target.position().x, target.position().y, target.position().z, EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
             }
         }
         stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));

@@ -1,0 +1,36 @@
+{
+  "parent": "chaosawakens:root/chaotic_by_choice",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:fossilised_creeper"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.a_piece_of_history.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.a_piece_of_history.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "fossilised_mob": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "chaosawakens:fossils"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fossilised_mob"
+    ]
+  ]
+}

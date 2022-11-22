@@ -1,9 +1,12 @@
 package io.github.chaosawakens.common.integration;
 
+import java.util.function.Function;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.AntInfestedOre;
 import io.github.chaosawakens.common.entity.AppleCowEntity;
 import io.github.chaosawakens.common.entity.BirdEntity;
+import io.github.chaosawakens.common.entity.CABoatEntity;
 import io.github.chaosawakens.common.entity.CrystalGatorEntity;
 import io.github.chaosawakens.common.entity.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.GazelleEntity;
@@ -11,7 +14,13 @@ import io.github.chaosawakens.common.entity.StinkBugEntity;
 import io.github.chaosawakens.common.entity.TreeFrogEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
 import mcjty.theoneprobe.Tools;
-import mcjty.theoneprobe.api.*;
+import mcjty.theoneprobe.api.CompoundText;
+import mcjty.theoneprobe.api.IProbeHitEntityData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
+import mcjty.theoneprobe.api.ITheOneProbe;
+import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.TextStyleClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -19,8 +28,6 @@ import net.minecraft.item.Items;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
-
-import java.util.function.Function;
 
 public class TheOneProbePlugin {
 	public static void register() {
@@ -98,6 +105,30 @@ public class TheOneProbePlugin {
 							return;
 						case 4:
 							iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Red (" + type + ")"));
+						}
+					}
+					
+					if (entity instanceof CABoatEntity) {
+						String type = ((CABoatEntity) entity).getBoatWoodType();
+						switch (type) {
+						case "apple":
+						default:
+							iProbeInfo.text(CompoundText.createLabelInfo("Apple Boat", ""));
+							return;
+						case "cherry":
+							iProbeInfo.text(CompoundText.createLabelInfo("Cherry Boat", ""));
+							return;
+						case "duplication":
+							iProbeInfo.text(CompoundText.createLabelInfo("Duplicator Boat", ""));
+							return;
+						case "ginkgo":
+							iProbeInfo.text(CompoundText.createLabelInfo("Ginkgo Boat", ""));
+							return;
+						case "peach":
+							iProbeInfo.text(CompoundText.createLabelInfo("Peach Boat", ""));
+							return;
+						case "skywood":
+							iProbeInfo.text(CompoundText.createLabelInfo("Skywood Boat", ""));
 						}
 					}
 

@@ -22,8 +22,11 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-public class RubyBugEntity extends AnimalEntity implements IAnimatable {
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
+
+public class RubyBugEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "rubybugcontroller", animationInterval(), this::predicate);
 
 	public RubyBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -37,7 +40,7 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ruby_bug.walking_animation", true));
 			return PlayState.CONTINUE;
@@ -56,7 +59,7 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "rubybugcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -68,5 +71,20 @@ public class RubyBugEntity extends AnimalEntity implements IAnimatable {
 	@Override
 	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
 		return null;
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
+
+	@Override
+	public int animationInterval() {
+		return 4;
+	}
+
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
 	}
 }

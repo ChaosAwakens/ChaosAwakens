@@ -1,42 +1,96 @@
 package io.github.chaosawakens.client;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-
 import io.github.chaosawakens.client.config.CAClientConfig;
-import io.github.chaosawakens.client.entity.render.*;
+import io.github.chaosawakens.client.entity.render.AggressiveAntEntityRenderer;
+import io.github.chaosawakens.client.entity.render.AntEntityRenderer;
+import io.github.chaosawakens.client.entity.render.AppleCowEntityRenderer;
+import io.github.chaosawakens.client.entity.render.BeaverEntityRenderer;
+import io.github.chaosawakens.client.entity.render.BirdEntityRenderer;
+import io.github.chaosawakens.client.entity.render.CABoatRenderer;
+import io.github.chaosawakens.client.entity.render.CAEmptyRenderer;
+import io.github.chaosawakens.client.entity.render.CAFallingBlockRenderer;
+import io.github.chaosawakens.client.entity.render.CarrotPigEntityRenderer;
+import io.github.chaosawakens.client.entity.render.CrystalAppleCowEntityRenderer;
+import io.github.chaosawakens.client.entity.render.CrystalCarrotPigEntityRenderer;
+import io.github.chaosawakens.client.entity.render.CrystalGatorEntityRenderer;
+import io.github.chaosawakens.client.entity.render.DimetrodonEntityRenderer;
+import io.github.chaosawakens.client.entity.render.EmeraldGatorEntityRenderer;
+import io.github.chaosawakens.client.entity.render.EnchantedGoldenAppleCowEntityRenderer;
+import io.github.chaosawakens.client.entity.render.EnchantedGoldenCarrotPigEntityRenderer;
+import io.github.chaosawakens.client.entity.render.EntEntityRenderer;
+import io.github.chaosawakens.client.entity.render.GazelleEntityRenderer;
+import io.github.chaosawakens.client.entity.render.GoldenAppleCowEntityRenderer;
+import io.github.chaosawakens.client.entity.render.GoldenCarrotPigEntityRenderer;
+import io.github.chaosawakens.client.entity.render.GreenFishEntityRenderer;
+import io.github.chaosawakens.client.entity.render.HerculesBeetleEntityRenderer;
+import io.github.chaosawakens.client.entity.render.IrukandjiArrowProjectileRenderer;
+import io.github.chaosawakens.client.entity.render.LavaEelEntityRenderer;
+import io.github.chaosawakens.client.entity.render.LeafyChickenEntityRenderer;
+import io.github.chaosawakens.client.entity.render.RayGunProjectileRenderer;
+import io.github.chaosawakens.client.entity.render.RoboLaserProjectileRenderer;
+import io.github.chaosawakens.client.entity.render.RoboPounderEntityRenderer;
+import io.github.chaosawakens.client.entity.render.RoboSniperEntityRenderer;
+import io.github.chaosawakens.client.entity.render.RoboWarriorEntityRenderer;
+import io.github.chaosawakens.client.entity.render.RockFishEntityRenderer;
+import io.github.chaosawakens.client.entity.render.RubyBugEntityRenderer;
+import io.github.chaosawakens.client.entity.render.SparkFishEntityRenderer;
+import io.github.chaosawakens.client.entity.render.StinkBugEntityRenderer;
+import io.github.chaosawakens.client.entity.render.ThunderStaffProjectileRenderer;
+import io.github.chaosawakens.client.entity.render.TreeFrogEntityRenderer;
+import io.github.chaosawakens.client.entity.render.UltimateAppleCowEntityRenderer;
+import io.github.chaosawakens.client.entity.render.UltimateArrowProjectileRenderer;
+import io.github.chaosawakens.client.entity.render.UltimateBobberProjectileRenderer;
+import io.github.chaosawakens.client.entity.render.WaspEntityRenderer;
+import io.github.chaosawakens.client.entity.render.WhaleEntityRenderer;
+import io.github.chaosawakens.client.entity.render.WoodFishEntityRenderer;
+import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.EntEntity;
+import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.nonliving.CAScreenShakeEntity;
+import io.github.chaosawakens.common.items.EnderScaleArmorItem;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
-import io.github.chaosawakens.common.registry.*;
+import io.github.chaosawakens.common.particles.FartParticle.FartParticleProvider;
+import io.github.chaosawakens.common.particles.RoboSparkParticle.RoboSparkParticleProvider;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAContainerTypes;
+import io.github.chaosawakens.common.registry.CADimensions;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CAParticleTypes;
+import io.github.chaosawakens.common.registry.CATileEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.Effects;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.RenderBlockOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
-public class ClientSetupEvent implements IUtilityHelper {
+public class ClientSetupEvent {
 	public static boolean def = false;
 
-	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-	public static class ClientHelper {
-		@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
-		@OnlyIn(Dist.CLIENT)
+	public static class ClientEventsHelper {
 		public static void renderFogColor(EntityViewRenderEvent.FogColors event) {
 			Entity entity = event.getRenderer().getMainCamera().getEntity();
 
@@ -50,8 +104,6 @@ public class ClientSetupEvent implements IUtilityHelper {
 			}
 		}
 
-		@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
-		@OnlyIn(Dist.CLIENT)
 		public static void renderFog(EntityViewRenderEvent.FogDensity event) {
 			Entity entity = event.getRenderer().getMainCamera().getEntity();
 
@@ -64,11 +116,21 @@ public class ClientSetupEvent implements IUtilityHelper {
 					event.setCanceled(true);
 				}
 			}
+			
+			if (CACommonConfig.COMMON.enableLavaEelArmorSetBonus.get()) {
+				//Avoiding exceptions when casting PlayerEntity onto entity
+				if (entity instanceof PlayerEntity) {
+					if (IUtilityHelper.isFullArmorSet((PlayerEntity) entity, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
+						if (entity.isEyeInFluid(FluidTags.LAVA)) {
+							event.setDensity(CAClientConfig.CLIENT.lavaEelSetLavaFogDensity.get());
+							event.setCanceled(true);
+						}
+					}
+				}
+ 			}
 		}
 
 		@SuppressWarnings("resource")
-		@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
-		@OnlyIn(Dist.CLIENT)
 		public static void renderParticles(TickEvent.WorldTickEvent event) {
 			ClientPlayerEntity player = Minecraft.getInstance().player;
 
@@ -81,10 +143,108 @@ public class ClientSetupEvent implements IUtilityHelper {
 				}
 			}
 		}
-	}
-	
-	public void renderElytra(RenderPlayerEvent e) {
 		
+		public static void handleOverlay(RenderBlockOverlayEvent event) {
+			if (CACommonConfig.COMMON.enableLavaEelArmorSetBonus.get()) {
+				PlayerEntity player = event.getPlayer();
+				if (IUtilityHelper.isFullArmorSet(player, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
+					if (player.isEyeInFluid(FluidTags.LAVA) && player.hasEffect(Effects.FIRE_RESISTANCE) || player.isInLava() || player.isOnFire()) {
+						event.getMatrixStack().translate(0, CAClientConfig.CLIENT.lavaEelSetFireStackTranslation.get(), 0);
+					}
+				}
+			}
+		}
+		
+		public static void onClientLoadComplete(FMLLoadCompleteEvent event) {
+	        EntityRendererManager rendererManager = Minecraft.getInstance().getEntityRenderDispatcher();
+	        rendererManager.getSkinMap().values().forEach(renderer -> {
+	        	renderer.addLayer(new EnderScaleArmorItem.DragonElytraLayer<>(renderer));
+	        });
+		}
+		
+		@SuppressWarnings("resource")
+		public static void onParticleRegistrationEvent(ParticleFactoryRegisterEvent event) {
+			Minecraft.getInstance().particleEngine.register(CAParticleTypes.ROBO_SPARK.get(), RoboSparkParticleProvider::new);
+			Minecraft.getInstance().particleEngine.register(CAParticleTypes.FART.get(), FartParticleProvider::new);
+		}
+		
+		@SuppressWarnings("resource")
+		public static void onPreRenderHUD(RenderGameOverlayEvent.Pre event) {
+			ClientPlayerEntity player = Minecraft.getInstance().player;
+			
+			if (player != null) {
+				if (player.isPassenger()) {
+					if (player.getVehicle() instanceof HerculesBeetleEntity) {
+		                if (event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT) event.setCanceled(true);
+		                if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) Minecraft.getInstance().gui.setOverlayMessage(new TranslationTextComponent(""), false);
+					}
+				}
+			}
+		}
+		
+		public static void onPreRenderPlayer(RenderPlayerEvent.Pre event) {
+/*			MatrixStack stack = event.getMatrixStack();
+			PlayerEntity player = event.getPlayer();
+			
+			if (player.getVehicle() != null && player.getVehicle().isAlive()) {
+				if (player.getVehicle() instanceof HerculesBeetleEntity) {
+					stack.pushPose();
+					Vector3i facing = player.getVehicle().getDirection().getNormal();
+					stack.translate(4 * facing.getX(), 0.7F, 4 * facing.getZ());
+					stack.mulPose(Vector3f.XN.rotationDegrees(-90));
+					stack.mulPose(Vector3f.ZN.rotationDegrees(-90));
+					stack.popPose();
+				}
+			}*/
+		}
+		
+		public static void onRenderPlayerHand(RenderHandEvent event) {
+		}
+		
+		@SuppressWarnings("rawtypes")
+		public static void onPreRenderLiving(RenderLivingEvent.Pre event) {
+/*			MatrixStack stack = event.getMatrixStack();
+			LivingEntity owner = event.getEntity();
+			
+			if (owner.getVehicle() != null && owner.getVehicle().isAlive()) {
+				if (owner.getVehicle() instanceof HerculesBeetleEntity) {
+					stack.pushPose();
+					Vector3i facing = owner.getVehicle().getDirection().getNormal();
+					stack.translate(4 * facing.getX(), 0.7F, 4 * facing.getZ());
+					stack.mulPose(Vector3f.XN.rotationDegrees(-90));
+					stack.mulPose(Vector3f.ZN.rotationDegrees(-90));
+					stack.popPose();
+				}
+			}*/
+		}
+		
+		@SuppressWarnings("resource")
+		public static void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
+			PlayerEntity clientPlayer = Minecraft.getInstance().player;
+			// MM implementation
+			if (CAClientConfig.CLIENT.enableCameraShake.get()) {
+				float amp = 0F;
+				
+				for (CAScreenShakeEntity shaker : IUtilityHelper.getEntitiesAroundNoPredicate(clientPlayer, CAScreenShakeEntity.class, 20, 20, 20, 20)) {
+					if (shaker.distanceTo(clientPlayer) < shaker.getRadius()) amp += shaker.getAmp(clientPlayer, Minecraft.getInstance().getFrameTime());
+				}
+				
+				//Cap
+				if (amp > 1.0F) amp = 1.0F;
+				
+				//Note to self: Don't use .random, and don't EVER leave this inside a loop. Seriously. -- Meme Man
+                event.setPitch((float) (event.getPitch() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 3 + 2) * 25));
+                event.setYaw((float) (event.getYaw() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 5 + 1) * 25));
+                event.setRoll((float) (event.getRoll() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 4) * 25));
+			}
+		}
+		
+		@SuppressWarnings("rawtypes")
+		public static void onPostRenderLiving(RenderLivingEvent.Pre event) {
+		}
+		
+		public static void onPostRenderPlayer(RenderPlayerEvent.Post event) {
+		}
 	}
 
 	public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
@@ -98,53 +258,62 @@ public class ClientSetupEvent implements IUtilityHelper {
 			Atlases.addWoodType(CABlocks.GINKGO);
 		});
 
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRD.get(), BirdEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.OAK_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.OAK));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ACACIA_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.ACACIA));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRCH_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.BIRCH));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.JUNGLE_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.JUNGLE));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.DARK_OAK_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.DARK_OAK));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SPRUCE_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.SPRUCE));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRIMSON_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.CRIMSON));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WARPED_ENT.get(), (manager) -> new EntEntityRender(manager, EntEntity.Types.WARPED));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RED_ANT.get(), (manager) -> new AggressiveAntEntityRender(manager, CAEntityTypes.RED_ANT.getId().getPath()));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BROWN_ANT.get(), (manager) -> new AntEntityRender(manager, CAEntityTypes.BROWN_ANT.getId().getPath()));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RAINBOW_ANT.get(), (manager) -> new AntEntityRender(manager, CAEntityTypes.RAINBOW_ANT.getId().getPath()));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.UNSTABLE_ANT.get(), (manager) -> new AntEntityRender(manager, CAEntityTypes.UNSTABLE_ANT.getId().getPath()));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TERMITE.get(), (manager) -> new AggressiveAntEntityRender(manager, CAEntityTypes.TERMITE.getId().getPath()));
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TREE_FROG.get(), TreeFrogEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EXPLOSIVE_BALL.get(), RayGunProjectileRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_FISHING_BOBBER.get(), UltimateBobberRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.APPLE_COW.get(), AppleCowEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_GATOR.get(), CrystalGatorRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_CARROT_PIG.get(), CrystalCarrotPigEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CARROT_PIG.get(), CarrotPigEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GOLDEN_CARROT_PIG.get(), GoldenCarrotPigEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), EnchantedGoldenCarrotPigEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BEAVER.get(), BeaverEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GAZELLE.get(), GazelleEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.DIMETRODON.get(), DimetrodonEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RUBY_BUG.get(), RubyBugEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.STINK_BUG.get(), StinkBugEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WASP.get(), WaspEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WHALE.get(), WhaleEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GREEN_FISH.get(), GreenFishEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROCK_FISH.get(), RockFishEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SPARK_FISH.get(), SparkFishEntityRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WOOD_FISH.get(), WoodFishRender::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LAVA_EEL.get(), LavaEelEntityRender::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRD.get(), BirdEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.OAK_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.OAK));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ACACIA_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.ACACIA));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.APPLE_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.APPLE));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRCH_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.BIRCH));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CHERRY_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.CHERRY));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.JUNGLE_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.JUNGLE));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.DARK_OAK_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.DARK_OAK));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.PEACH_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.PEACH));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SKYWOOD_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.SKYWOOD));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SPRUCE_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.SPRUCE));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRIMSON_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.CRIMSON));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WARPED_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.WARPED));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RED_ANT.get(), (manager) -> new AggressiveAntEntityRenderer(manager, CAEntityTypes.RED_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BROWN_ANT.get(), (manager) -> new AntEntityRenderer(manager, CAEntityTypes.BROWN_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RAINBOW_ANT.get(), (manager) -> new AntEntityRenderer(manager, CAEntityTypes.RAINBOW_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.UNSTABLE_ANT.get(), (manager) -> new AntEntityRenderer(manager, CAEntityTypes.UNSTABLE_ANT.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TERMITE.get(), (manager) -> new AggressiveAntEntityRenderer(manager, CAEntityTypes.TERMITE.getId().getPath()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TREE_FROG.get(), TreeFrogEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EXPLOSIVE_BALL.get(), RayGunProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_FISHING_BOBBER.get(), UltimateBobberProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CA_BOAT.get(), CABoatRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.APPLE_COW.get(), AppleCowEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get(), EnchantedGoldenAppleCowEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_APPLE_COW.get(), CrystalAppleCowEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_APPLE_COW.get(), UltimateAppleCowEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_GATOR.get(), CrystalGatorEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRYSTAL_CARROT_PIG.get(), CrystalCarrotPigEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CARROT_PIG.get(), CarrotPigEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GOLDEN_CARROT_PIG.get(), GoldenCarrotPigEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), EnchantedGoldenCarrotPigEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BEAVER.get(), BeaverEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GAZELLE.get(), GazelleEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LEAFY_CHICKEN.get(), LeafyChickenEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.DIMETRODON.get(), DimetrodonEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EMERALD_GATOR.get(), EmeraldGatorEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RUBY_BUG.get(), RubyBugEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.STINK_BUG.get(), StinkBugEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WASP.get(), WaspEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WHALE.get(), WhaleEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GREEN_FISH.get(), GreenFishEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROCK_FISH.get(), RockFishEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SPARK_FISH.get(), SparkFishEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WOOD_FISH.get(), WoodFishEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LAVA_EEL.get(), LavaEelEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.FALLING_BLOCK.get(), CAFallingBlockRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SCREEN_SHAKE.get(), CAEmptyRenderer::new);
 
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM_PLANT.get(), RenderType.cutoutMipped());
@@ -176,13 +345,15 @@ public class ClientSetupEvent implements IUtilityHelper {
 		RenderTypeLookup.setRenderLayer(CABlocks.GINKGO_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_TRAPDOOR.get(), RenderType.cutout());
-
+		
 		RenderTypeLookup.setRenderLayer(CABlocks.APPLE_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.DUPLICATION_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.GINKGO_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_DOOR.get(), RenderType.cutout());
+		
+//		RenderTypeLookup.setRenderLayer(CABlocks.ROCK.get(), RenderType.cutout());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.APPLE_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_SAPLING.get(), RenderType.cutout());
@@ -190,6 +361,9 @@ public class ClientSetupEvent implements IUtilityHelper {
 		RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.PINK_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.BLUE_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.BLUE_CRYSTAL_GROWTH.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.BLUE_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
@@ -199,8 +373,12 @@ public class ClientSetupEvent implements IUtilityHelper {
 		RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_GROWTH.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_GROWTH.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_CRYSTAL_GROWTH.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.PINK_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_GROWTH.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_FLOWER.get(), RenderType.cutoutMipped());
+		
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_ROSE.get(), RenderType.cutoutMipped());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_CYAN_ROSE.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_RED_ROSE.get(), RenderType.cutout());
@@ -214,16 +392,22 @@ public class ClientSetupEvent implements IUtilityHelper {
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_RED_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_GREEN_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_YELLOW_CRYSTAL_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PINK_CRYSTAL_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BLUE_CRYSTAL_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_RED_CRYSTAL_FLOWER.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BLUE_CRYSTAL_FLOWER.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_GREEN_CRYSTAL_FLOWER.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_YELLOW_CRYSTAL_FLOWER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PINK_CRYSTAL_FLOWER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_ORANGE_CRYSTAL_FLOWER.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_RED_CRYSTAL_GROWTH.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BLUE_CRYSTAL_GROWTH.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_GREEN_CRYSTAL_GROWTH.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_YELLOW_CRYSTAL_GROWTH.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_ORANGE_CRYSTAL_GROWTH.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PINK_CRYSTAL_GROWTH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_CRYSTAL_ROSE.get(), RenderType.cutout());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.APPLE_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_LEAVES.get(), RenderType.cutoutMipped());
@@ -269,6 +453,9 @@ public class ClientSetupEvent implements IUtilityHelper {
 		RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.PINK_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.BLUE_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_CLUSTER.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_CLUSTER.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.BUDDING_PINK_TOURMALINE.get(), RenderType.cutoutMipped());
@@ -278,7 +465,8 @@ public class ClientSetupEvent implements IUtilityHelper {
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_FURNACE.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.cutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get(), RenderType.cutoutMipped());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_TORCH.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.WALL_CRYSTAL_TORCH.get(), RenderType.cutoutMipped());
@@ -295,8 +483,18 @@ public class ClientSetupEvent implements IUtilityHelper {
 						return living.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - living.getUseItemRemainingTicks()) / 8.0F;
 					}
 				});
+/*		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("pull"),
+				(stack, world, living) -> {
+					if (living == null) {
+						return 0.0F;
+					} else {
+						return living.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - living.getUseItemRemainingTicks()) / 8.0F;
+					}
+				});*/
 		ItemModelsProperties.register(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pulling"),
 				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);
+/*		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("pulling"),
+				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);*/
 		ItemModelsProperties.register(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
 					if (living == null) {
@@ -516,6 +714,13 @@ public class ClientSetupEvent implements IUtilityHelper {
 					assert stack.getTag() != null;
 					ClientSetupEvent.def = true;
 					return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Stray") ? 1.0F : 0.0F;
+		 });
+		ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("wasp"),
+				(stack, world, living) -> {
+					if (stack.getTag() == null) return 0.0F;
+					assert stack.getTag() != null;
+					ClientSetupEvent.def = true;
+					return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Wasp") ? 1.0F : 0.0F;
 		 });
 		ItemModelsProperties.register(CAItems.CRITTER_CAGE.get(), new ResourceLocation("wolf"),
 				(stack, world, living) -> {

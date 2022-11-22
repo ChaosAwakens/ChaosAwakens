@@ -18,8 +18,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RoboSniperEntity extends RoboRangedEntity implements IAnimatable, IRangedAttackMob {
+public class RoboSniperEntity extends RoboRangedEntity implements IRangedAttackMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "robosnipercontroller", animationInterval(), this::predicate);
 
 	public RoboSniperEntity(EntityType<? extends RoboEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -29,16 +30,16 @@ public class RoboSniperEntity extends RoboRangedEntity implements IAnimatable, I
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 25)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.MOVEMENT_SPEED, 0.28D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
 				.add(Attributes.ATTACK_SPEED, 10)
 				.add(Attributes.ATTACK_DAMAGE, 25)
 				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
-				.add(Attributes.FOLLOW_RANGE, 24);
+				.add(Attributes.FOLLOW_RANGE, 500);
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-
+	@Override
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.getAttacking()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
 			return PlayState.CONTINUE;
@@ -54,16 +55,31 @@ public class RoboSniperEntity extends RoboRangedEntity implements IAnimatable, I
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(3, new RoboAttackGoal(this, 11, 7.0F, 0.75F));
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.6));
-		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(0, new RoboAttackGoal(this, 11, 8.0F, 0.75F));
+		this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 1.6));
+		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
 	}
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "robosnipercontroller", 0, this::predicate));
+		data.addAnimationController(controller);
+	}
+	
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
+	}
+	
+	@Override
+	public void manageAttack(LivingEntity target) {
+		
 	}
 
+	@Override
+	public int animationInterval() {
+		return 0;
+	}
+	
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
@@ -72,5 +88,10 @@ public class RoboSniperEntity extends RoboRangedEntity implements IAnimatable, I
 	@Override
 	public void performRangedAttack(LivingEntity target, float distanceFactor) {
 		this.getTarget();
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
 	}
 }

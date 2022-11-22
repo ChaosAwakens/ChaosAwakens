@@ -1,7 +1,10 @@
 package io.github.chaosawakens.common.integration.jei;
 
-import io.github.chaosawakens.ChaosAwakens;
+import java.util.Arrays;
+import java.util.Objects;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.blocks.tileentities.DefossilizerCopperScreen;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerIronContainer;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerIronScreen;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -11,15 +14,16 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.registration.*;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
+import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IRecipeTransferRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 @JeiPlugin
 public class CAJEIPlugin implements IModPlugin {
@@ -57,6 +61,7 @@ public class CAJEIPlugin implements IModPlugin {
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
 		registration.addRecipeClickArea(DefossilizerIronScreen.class, 79, 35, 20, 20, DefossilizerRecipeCategory.ID);
+		registration.addRecipeClickArea(DefossilizerCopperScreen.class, 79, 35, 20, 20, DefossilizerRecipeCategory.ID);
 	}
 
 	@Override

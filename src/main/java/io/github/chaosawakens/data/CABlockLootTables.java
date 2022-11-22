@@ -1,7 +1,11 @@
 package io.github.chaosawakens.data;
 
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CACropsBlock;
+import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
@@ -17,7 +21,11 @@ import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.loot.*;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.conditions.BlockStateProperty;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.loot.conditions.MatchTool;
@@ -28,10 +36,7 @@ import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-@SuppressWarnings("ALL")
+@SuppressWarnings("all")
 public class CABlockLootTables extends BlockLootTables {
 	private static final ILootCondition.IBuilder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
 	private static final ILootCondition.IBuilder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
@@ -66,6 +71,15 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		dropSelf(CABlocks.TITANIUM_ORE.get());
 		dropSelf(CABlocks.URANIUM_ORE.get());
+		
+		add(CABlocks.APPLE_DOOR.get(), (block) -> createDoorDrop(CABlocks.APPLE_DOOR.get()));
+		add(CABlocks.CHERRY_DOOR.get(), (block) -> createDoorDrop(CABlocks.CHERRY_DOOR.get()));
+		add(CABlocks.DUPLICATION_DOOR.get(), (block) -> createDoorDrop(CABlocks.DUPLICATION_DOOR.get()));
+		add(CABlocks.GINKGO_DOOR.get(), (block) -> createDoorDrop(CABlocks.GINKGO_DOOR.get()));
+		add(CABlocks.PEACH_DOOR.get(), (block) -> createDoorDrop(CABlocks.PEACH_DOOR.get()));
+		add(CABlocks.SKYWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.SKYWOOD_DOOR.get()));
+		
+	//	dropSelf(CABlocks.ROCK.get());
 
 		// Ore Blocks
 		dropSelf(CABlocks.ALUMINUM_BLOCK.get());
@@ -126,19 +140,6 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.GINKGO_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.GINKGO_LEAVES.get()));
 		add(CABlocks.PEACH_LEAVES.get(), createCALeavesDrops(CABlocks.PEACH_LEAVES.get(), CABlocks.PEACH_SAPLING.get(), CAItems.PEACH.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.SKYWOOD_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.SKYWOOD_LEAVES.get()));
-
-		dropSelf(CABlocks.ACACIA_LEAF_CARPET.get());
-		dropSelf(CABlocks.BIRCH_LEAF_CARPET.get());
-		dropSelf(CABlocks.DARK_OAK_LEAF_CARPET.get());
-		dropSelf(CABlocks.JUNGLE_LEAF_CARPET.get());
-		dropSelf(CABlocks.OAK_LEAF_CARPET.get());
-		dropSelf(CABlocks.SPRUCE_LEAF_CARPET.get());
-		dropSelf(CABlocks.APPLE_LEAF_CARPET.get());
-		dropSelf(CABlocks.CHERRY_LEAF_CARPET.get());
-		dropSelf(CABlocks.DUPLICATION_LEAF_CARPET.get());
-		dropSelf(CABlocks.GINKGO_LEAF_CARPET.get());
-		dropSelf(CABlocks.PEACH_LEAF_CARPET.get());
-		dropSelf(CABlocks.SKYWOOD_LEAF_CARPET.get());
 
 		// Ant/Termite Nests
 		dropSelf(CABlocks.BROWN_ANT_NEST.get());
@@ -213,6 +214,33 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CRACKED_MARBLE_BRICK_WALL.get());
 		dropSelf(CABlocks.MOSSY_MARBLE_BRICK_WALL.get());
 		dropSelf(CABlocks.POLISHED_MARBLE_WALL.get());
+		
+		// Rhinestone
+		dropSelf(CABlocks.RHINESTONE.get());
+		dropSelf(CABlocks.RHINESTONE_BRICKS.get());
+		dropSelf(CABlocks.CHISELED_RHINESTONE_BRICKS.get());
+		dropSelf(CABlocks.CRACKED_RHINESTONE_BRICKS.get());
+		dropSelf(CABlocks.MOSSY_RHINESTONE_BRICKS.get());
+		dropSelf(CABlocks.POLISHED_RHINESTONE.get());
+		dropSelf(CABlocks.RHINESTONE_PILLAR.get());
+		dropSelf(CABlocks.RHINESTONE_SLAB.get());
+		dropSelf(CABlocks.RHINESTONE_BRICK_SLAB.get());
+		dropSelf(CABlocks.CHISELED_RHINESTONE_BRICK_SLAB.get());
+		dropSelf(CABlocks.CRACKED_RHINESTONE_BRICK_SLAB.get());
+		dropSelf(CABlocks.MOSSY_RHINESTONE_BRICK_SLAB.get());
+		dropSelf(CABlocks.POLISHED_RHINESTONE_SLAB.get());
+		dropSelf(CABlocks.RHINESTONE_STAIRS.get());
+		dropSelf(CABlocks.RHINESTONE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.CHISELED_RHINESTONE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.CRACKED_RHINESTONE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.MOSSY_RHINESTONE_BRICK_STAIRS.get());
+		dropSelf(CABlocks.POLISHED_RHINESTONE_STAIRS.get());
+		dropSelf(CABlocks.RHINESTONE_WALL.get());
+		dropSelf(CABlocks.RHINESTONE_BRICK_WALL.get());
+		dropSelf(CABlocks.CHISELED_RHINESTONE_BRICK_WALL.get());
+		dropSelf(CABlocks.CRACKED_RHINESTONE_BRICK_WALL.get());
+		dropSelf(CABlocks.MOSSY_RHINESTONE_BRICK_WALL.get());
+		dropSelf(CABlocks.POLISHED_RHINESTONE_WALL.get());
 
 		// Crystal Blocks
 		add(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (silk) -> createSilkTouchOnlyTable(CABlocks.KYANITE.get()));
@@ -230,21 +258,30 @@ public class CABlockLootTables extends BlockLootTables {
 
 		add(CABlocks.RED_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.RED_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.GREEN_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.GREEN_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-		add(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.YELLOW_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-
+		add(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.YELLOW_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));		
+		add(CABlocks.PINK_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.PINK_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));	
+		add(CABlocks.BLUE_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.BLUE_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));		
+		add(CABlocks.ORANGE_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.ORANGE_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));	
+		
 		dropSelf(CABlocks.RED_CRYSTAL_SAPLING.get());
 		dropSelf(CABlocks.GREEN_CRYSTAL_SAPLING.get());
 		dropSelf(CABlocks.YELLOW_CRYSTAL_SAPLING.get());
+		dropSelf(CABlocks.PINK_CRYSTAL_SAPLING.get());
+		dropSelf(CABlocks.BLUE_CRYSTAL_SAPLING.get());
+		dropSelf(CABlocks.ORANGE_CRYSTAL_SAPLING.get());
 		dropSelf(CABlocks.RED_CRYSTAL_FLOWER.get());
 		dropSelf(CABlocks.BLUE_CRYSTAL_FLOWER.get());
 		dropSelf(CABlocks.GREEN_CRYSTAL_FLOWER.get());
 		dropSelf(CABlocks.YELLOW_CRYSTAL_FLOWER.get());
+		dropSelf(CABlocks.PINK_CRYSTAL_FLOWER.get());
+		dropSelf(CABlocks.ORANGE_CRYSTAL_FLOWER.get());
 		dropSelf(CABlocks.RED_CRYSTAL_GROWTH.get());
 		dropSelf(CABlocks.BLUE_CRYSTAL_GROWTH.get());
 		dropSelf(CABlocks.GREEN_CRYSTAL_GROWTH.get());
 		dropSelf(CABlocks.YELLOW_CRYSTAL_GROWTH.get());
 		dropSelf(CABlocks.ORANGE_CRYSTAL_GROWTH.get());
 		dropSelf(CABlocks.PINK_CRYSTAL_GROWTH.get());
+		dropSelf(CABlocks.CRYSTAL_ROSE.get());
 
 		// Torches
 		add(CABlocks.CRYSTAL_TORCH.get(), (block) -> createSingleItemTable(CABlocks.CRYSTAL_TORCH.get()));
@@ -253,15 +290,15 @@ public class CABlockLootTables extends BlockLootTables {
 
 		dropSelf(CABlocks.ENDER_EYE_BLOCK.get());
 		dropSelf(CABlocks.ENDER_PEARL_BLOCK.get());
-		dropSelf(CABlocks.BASILISK_SCALE_BLOCK.get());
-		dropSelf(CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get());
-		dropSelf(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
 		dropSelf(CABlocks.MOTH_SCALE_BLOCK.get());
-		dropSelf(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
 		dropSelf(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
+		dropSelf(CABlocks.ENDER_DRAGON_SCALE_BLOCK.get());
+		dropSelf(CABlocks.NIGHTMARE_SCALE_BLOCK.get());
 		dropSelf(CABlocks.MOBZILLA_SCALE_BLOCK.get());
 		dropSelf(CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get());
 		dropSelf(CABlocks.QUEEN_SCALE_BLOCK.get());
+		dropSelf(CABlocks.BASILISK_SCALE_BLOCK.get());
+		dropSelf(CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get());
 
 		dropSelf(CABlocks.ROBO_BLOCK_I.get());
 		dropSelf(CABlocks.ROBO_BLOCK_V.get());
@@ -416,6 +453,7 @@ public class CABlockLootTables extends BlockLootTables {
 
 		dropSelf(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get());
 		dropSelf(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get());
+		
 		// Fossilised Mobs
 		dropSelf(CABlocks.FOSSILISED_ACACIA_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_BIRCH_ENT.get());
@@ -424,6 +462,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_OAK_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_SPRUCE_ENT.get());
 		dropSelf(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
+		dropSelf(CABlocks.FOSSILISED_BEAVER.get());
 		dropSelf(CABlocks.FOSSILISED_RUBY_BUG.get());
 		dropSelf(CABlocks.FOSSILISED_EMERALD_GATOR.get());
 		dropSelf(CABlocks.FOSSILISED_GREEN_FISH.get());
@@ -439,6 +478,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_GOLDEN_APPLE_COW.get());
 		dropSelf(CABlocks.FOSSILISED_CARROT_PIG.get());
 		dropSelf(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
+		dropSelf(CABlocks.FOSSILISED_LETTUCE_CHICKEN.get());
 		dropSelf(CABlocks.FOSSILISED_BIRD.get());
 		dropSelf(CABlocks.FOSSILISED_DIMETRODON.get());
 		dropSelf(CABlocks.FOSSILISED_TREE_FROG.get());
@@ -513,7 +553,8 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.FOSSILISED_ENDERMITE.get());
 		dropSelf(CABlocks.FOSSILISED_SHULKER.get());
 
-		dropSelf(CABlocks.CRYSTALLISED_CRYSTAL_APPLE_COW.get());
+		dropSelf(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get());
+		dropSelf(CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get());
 
 		dropSelf(CABlocks.CYAN_ROSE.get());
 		dropSelf(CABlocks.RED_ROSE.get());
@@ -609,13 +650,6 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.PEACH_TRAPDOOR.get());
 		dropSelf(CABlocks.SKYWOOD_TRAPDOOR.get());
 
-		add(CABlocks.APPLE_DOOR.get(), (block) -> createDoorDrop(CABlocks.APPLE_DOOR.get()));
-		add(CABlocks.CHERRY_DOOR.get(), (block) -> createDoorDrop(CABlocks.CHERRY_DOOR.get()));
-		add(CABlocks.DUPLICATION_DOOR.get(), (block) -> createDoorDrop(CABlocks.DUPLICATION_DOOR.get()));
-		add(CABlocks.GINKGO_DOOR.get(), (block) -> createDoorDrop(CABlocks.GINKGO_DOOR.get()));
-		add(CABlocks.PEACH_DOOR.get(), (block) -> createDoorDrop(CABlocks.PEACH_DOOR.get()));
-		add(CABlocks.SKYWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.SKYWOOD_DOOR.get()));
-
 		dropSelf(CABlocks.APPLE_GATE_BLOCK.get());
 		dropSelf(CABlocks.CHERRY_GATE_BLOCK.get());
 		dropSelf(CABlocks.DUPLICATION_GATE_BLOCK.get());
@@ -652,22 +686,29 @@ public class CABlockLootTables extends BlockLootTables {
 		dropPottedContents(CABlocks.POTTED_RED_CRYSTAL_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_GREEN_CRYSTAL_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_YELLOW_CRYSTAL_SAPLING.get());
+		dropPottedContents(CABlocks.POTTED_PINK_CRYSTAL_SAPLING.get());
+		dropPottedContents(CABlocks.POTTED_BLUE_CRYSTAL_SAPLING.get());
+		dropPottedContents(CABlocks.POTTED_ORANGE_CRYSTAL_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_RED_CRYSTAL_FLOWER.get());
 		dropPottedContents(CABlocks.POTTED_BLUE_CRYSTAL_FLOWER.get());
 		dropPottedContents(CABlocks.POTTED_GREEN_CRYSTAL_FLOWER.get());
 		dropPottedContents(CABlocks.POTTED_YELLOW_CRYSTAL_FLOWER.get());
+		dropPottedContents(CABlocks.POTTED_PINK_CRYSTAL_FLOWER.get());
+		dropPottedContents(CABlocks.POTTED_ORANGE_CRYSTAL_FLOWER.get());
 		dropPottedContents(CABlocks.POTTED_RED_CRYSTAL_GROWTH.get());
 		dropPottedContents(CABlocks.POTTED_BLUE_CRYSTAL_GROWTH.get());
 		dropPottedContents(CABlocks.POTTED_GREEN_CRYSTAL_GROWTH.get());
 		dropPottedContents(CABlocks.POTTED_YELLOW_CRYSTAL_GROWTH.get());
 		dropPottedContents(CABlocks.POTTED_ORANGE_CRYSTAL_GROWTH.get());
 		dropPottedContents(CABlocks.POTTED_PINK_CRYSTAL_GROWTH.get());
+		dropPottedContents(CABlocks.POTTED_CRYSTAL_ROSE.get());
 	}
 
 	@Override
 	protected Iterable<Block> getKnownBlocks() {
 		return ForgeRegistries.BLOCKS.getValues().stream()
 				.filter(block -> Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(ChaosAwakens.MODID))
+				.filter(block -> !(block instanceof LeafCarpetBlock))
 				.collect(Collectors.toList());
 	}
 

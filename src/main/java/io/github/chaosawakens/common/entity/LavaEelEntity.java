@@ -37,9 +37,9 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 		this.noCulling = true;
 		this.moveControl = new LavaMoveHelper(this);
 		this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
-		this.setPathfindingMalus(PathNodeType.LAVA, 16.0F);
-		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 16.0F);
-		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 16.0F);
+		this.setPathfindingMalus(PathNodeType.LAVA, 8.0F);
+		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 0.0F);
+		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 0.0F);
 	}
 
 	@Override
@@ -50,12 +50,12 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 3.0F, 3.0F));
+		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		if (this.level.getDifficulty() != Difficulty.PEACEFUL) {
-			this.targetSelector.addGoal(3, new LavaEelEntity.AttackGoal(this, 2.0F, false));
-			this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+			this.targetSelector.addGoal(1, new LavaEelEntity.AttackGoal(this, 2.0F, false));
+			this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		}
-		this.goalSelector.addGoal(4, new LavaEelEntity.SwimGoal(this));
+		this.goalSelector.addGoal(0, new LavaEelEntity.SwimGoal(this));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -85,9 +85,11 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 		}
 		if (this.dead) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.flop", true));
+			return PlayState.CONTINUE;
 		}
 		if (this.isSwimming()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.swim", true));
+			return PlayState.CONTINUE;
 		}
 		if (this.isDeadOrDying()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lava_eel.flop", true));

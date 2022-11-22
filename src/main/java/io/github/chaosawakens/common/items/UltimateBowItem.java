@@ -52,6 +52,11 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	}
 
 	@Override
+	public boolean isFoil(ItemStack stack) {
+		return CACommonConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
+	}
+
+	@Override
 	public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity) entityLiving;
@@ -100,11 +105,6 @@ public class UltimateBowItem extends BowItem implements IVanishable, IAutoEnchan
 	@Override
 	public int getDefaultProjectileRange() {
 		return 15;
-	}
-
-	@Override
-	public boolean isFoil(ItemStack stack) {
-		return CACommonConfig.COMMON.enableAutoEnchanting.get() && super.isFoil(stack) || super.isFoil(stack);
 	}
 
 	@Override
