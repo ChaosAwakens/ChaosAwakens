@@ -27,9 +27,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 @Mixin(VillagerEntity.class)
-public abstract class VillagerMixin extends AbstractVillagerEntity {
+public abstract class VillagerEntityMixin extends AbstractVillagerEntity {
 
-	public VillagerMixin(EntityType<? extends VillagerEntity> type, World world) {
+	public VillagerEntityMixin(EntityType<? extends VillagerEntity> type, World world) {
 		super(type, world);
 	}
 	

@@ -185,25 +185,25 @@ public class EnderScaleArmorItem extends EnchantedArmorItem {
 		
 		switch (damageType) {
 		default:
+			amount = chestPlate.getDamageValue();
 			elytra.setDamageValue(chestPlate.getDamageValue());
 			return amount;
 		case ELYTRA:
-			do {
-				entity.fallFlyTicks += 1;
-			} while (entity.isFallFlying());
+			amount = elytra.getDamageValue();
+			if (entity.isFallFlying()) entity.fallFlyTicks += 1;
 			if (entity.isFallFlying() && entity.getFallFlyingTicks() + 1 % 20 == 0) {
 				chestPlate.hurtAndBreak(amount, entity, e -> e.broadcastBreakEvent(EquipmentSlotType.CHEST));
 				elytra.hurtAndBreak(amount, entity, e -> e.broadcastBreakEvent(EquipmentSlotType.CHEST));
 			}
-			return elytra.getDamageValue();
+			return amount;
 		case ARMOR:
+			amount = chestPlate.getDamageValue();
 			if (chestPlate.isDamaged()) {
 				elytra.setDamageValue(chestPlate.getDamageValue());
 			}
-			break;
-		}	
+			return amount;
+		}
 	//	toggleElytra(chestPlate, elytra, true);
-		return amount;
 	}
 	
 	public static boolean canUse(ItemStack elytra, ItemStack chestPlate) {
@@ -233,14 +233,18 @@ public class EnderScaleArmorItem extends EnchantedArmorItem {
 	
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-		if (world.isClientSide) return;
-		if (player.getArmorSlots() != null) {
-			if (IUtilityHelper.isFullArmorSet(player, CAItems.ENDER_DRAGON_SCALE_HELMET.get(), CAItems.ENDER_DRAGON_SCALE_CHESTPLATE.get(), CAItems.ENDER_DRAGON_SCALE_LEGGINGS.get(), CAItems.ENDER_DRAGON_SCALE_BOOTS.get())) {
-				ItemStack elytra = getElytraOnArmor(stack);
-				toggleElytra(stack, elytra, true);
-			//	if (isValidForFlying(player)) {
-					player.startFallFlying();
-			//	}
+		if (!world.isClientSide) {
+			if (player.getArmorSlots() != null) {
+				if (IUtilityHelper.isFullArmorSet(player, CAItems.ENDER_DRAGON_SCALE_HELMET.get(), CAItems.ENDER_DRAGON_SCALE_CHESTPLATE.get(), CAItems.ENDER_DRAGON_SCALE_LEGGINGS.get(), CAItems.ENDER_DRAGON_SCALE_BOOTS.get())) {
+					ItemStack elytra = getElytraOnArmor(stack);
+					toggleElytra(stack, elytra, true);
+				//	if (isValidForFlying(player)) {
+			//		if (player.jumping) {
+						if (!player.isFallFlying()) player.startFallFlying();
+				//	}
+					if ((player.isOnGround() || player.isInLava() || player.isInWall() || player.isInWater()) && player.isFallFlying()) player.stopFallFlying();
+				//	}
+				}
 			}
 		}
 	}
@@ -295,7 +299,7 @@ public class EnderScaleArmorItem extends EnchantedArmorItem {
 		
 		@Override
 		public boolean shouldRender(ItemStack stack, P entity) {			
-			return IUtilityHelper.isFullArmorSet(entity, CAItems.ENDER_DRAGON_SCALE_HELMET.get(), CAItems.ENDER_DRAGON_SCALE_CHESTPLATE.get(), CAItems.ENDER_DRAGON_SCALE_LEGGINGS.get(), CAItems.ENDER_DRAGON_SCALE_BOOTS.get()) && EnderScaleArmorItem.isElytraToggled(stack);			
+			return entity instanceof LivingEntity ? IUtilityHelper.isFullArmorSet(entity, CAItems.ENDER_DRAGON_SCALE_HELMET.get(), CAItems.ENDER_DRAGON_SCALE_CHESTPLATE.get(), CAItems.ENDER_DRAGON_SCALE_LEGGINGS.get(), CAItems.ENDER_DRAGON_SCALE_BOOTS.get()) && EnderScaleArmorItem.isElytraToggled(stack) : false;			
 		}
 	}
 }

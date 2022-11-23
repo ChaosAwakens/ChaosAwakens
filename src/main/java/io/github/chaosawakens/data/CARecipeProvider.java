@@ -1390,7 +1390,7 @@ public class CARecipeProvider extends RecipeProvider {
 		.unlockedBy("has_" + Items.RED_DYE.asItem(), has(Items.RED_DYE))
 		.save(consumer);
 smelting(consumer, CAItems.CORN.get(), CAItems.POPCORN.get(), 0.35F, 200);
-ShapelessRecipeBuilder.shapeless(CAItems.POPCORN_BAG.get(), 3)
+ShapelessRecipeBuilder.shapeless(CAItems.POPCORN_BAG.get(), 1)
 		.requires(CAItems.EMPTY_POPCORN_BAG.get())
 		.requires(CAItems.POPCORN.get())
 		.requires(CAItems.POPCORN.get())
@@ -1399,7 +1399,7 @@ ShapelessRecipeBuilder.shapeless(CAItems.POPCORN_BAG.get(), 3)
 		.unlockedBy("has_" + CAItems.EMPTY_POPCORN_BAG.get().asItem(), has(CAItems.EMPTY_POPCORN_BAG.get()))
 		.unlockedBy("has_" + CAItems.POPCORN.get().asItem(), has(CAItems.POPCORN.get()))
 		.save(consumer);
-ShapelessRecipeBuilder.shapeless(CAItems.SALTED_POPCORN_BAG.get(), 3)
+ShapelessRecipeBuilder.shapeless(CAItems.SALTED_POPCORN_BAG.get(), 1)
 		.requires(CAItems.POPCORN_BAG.get())
 		.requires(CAItems.SALT.get())
 		.requires(CAItems.SALT.get())
@@ -1408,7 +1408,7 @@ ShapelessRecipeBuilder.shapeless(CAItems.SALTED_POPCORN_BAG.get(), 3)
 		.unlockedBy("has_" + CAItems.POPCORN_BAG.get().asItem(), has(CAItems.POPCORN_BAG.get()))
 		.unlockedBy("has_" + CAItems.SALT.get().asItem(), has(CAItems.SALT.get()))
 		.save(consumer);
-ShapelessRecipeBuilder.shapeless(CAItems.BUTTERED_POPCORN_BAG.get(), 3)
+ShapelessRecipeBuilder.shapeless(CAItems.BUTTERED_POPCORN_BAG.get(), 1)
 		.requires(CAItems.POPCORN_BAG.get())
 		.requires(CAItems.BUTTER.get())
 		.requires(CAItems.BUTTER.get())

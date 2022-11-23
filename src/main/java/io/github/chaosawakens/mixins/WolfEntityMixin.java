@@ -16,9 +16,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 @Mixin(WolfEntity.class)
-public abstract class WolfMixin extends TameableEntity {
+public abstract class WolfEntityMixin extends TameableEntity {
 	
-	protected WolfMixin(EntityType<? extends TameableEntity> type, World world) {
+	protected WolfEntityMixin(EntityType<? extends TameableEntity> type, World world) {
 		super(type, world);
 	}
 

@@ -38,11 +38,11 @@ import net.minecraft.world.World;
 
 //TODO Re-code this entire file, the code I wrote here is just a temporary substitute while other stuff gets worked on
 @Mixin(LivingEntity.class)
-public abstract class LivingMixin extends Entity {
+public abstract class LivingEntityMixin extends Entity {
 	private static final UUID SLOW_FALLING_ID = UUID.fromString("A5B6CF2A-2F7C-31EF-9022-7C3E7D5E6ABA");
 	private static final AttributeModifier SLOW_FALLING = new AttributeModifier(SLOW_FALLING_ID, "Slow falling acceleration reduction", -0.07, AttributeModifier.Operation.ADDITION); // Add -0.07 to 0.08 so we get the vanilla default of 0.01
 	
-	public LivingMixin(EntityType<?> type, World world) {
+	public LivingEntityMixin(EntityType<?> type, World world) {
 		super(type, world);
 	}
 	 

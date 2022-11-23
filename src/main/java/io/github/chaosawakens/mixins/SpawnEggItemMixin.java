@@ -1,6 +1,7 @@
 package io.github.chaosawakens.mixins;
 
 import io.github.chaosawakens.common.config.CACommonConfig;
+import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.EnumUtils.SurvivalSpawnerManipulationType;
 import net.minecraft.block.BlockState;
 
@@ -48,7 +49,9 @@ public abstract class SpawnEggItemMixin {
                 if ((CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.NO_BLOCKING) ||
                         (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_ALL && player.isCreative()) ||
                         (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_CHAOS_AWAKENS && player.isCreative() && itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
-                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_CHAOS_AWAKENS && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens"))) {
+                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_CHAOS_AWAKENS && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
+                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.TAG_BLACKLISTED && !itemstack.getItem().is(CATags.Items.SPAWNER_SPAWN_EGGS)) ||
+                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.TAG_WHITELISTED && itemstack.getItem().is(CATags.Items.SPAWNER_SPAWN_EGGS))) {
                     TileEntity tileentity = world.getBlockEntity(blockpos);
                     if (tileentity instanceof MobSpawnerTileEntity) {
                         AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();

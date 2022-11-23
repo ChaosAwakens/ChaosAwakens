@@ -67,37 +67,39 @@ public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable,
 
 	@Override
 	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
- //   	InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
- //       if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
-            double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
-            double reachSqr = reach * reach;
-            World world = entity.level;
+//    	InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
+//      if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
+          if (entity.getAttribute(ForgeMod.REACH_DISTANCE.get()) != null) {
+          	double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
+          	double reachSqr = reach * reach;
+              World world = entity.level;
 
-            Vector3d viewVec = entity.getViewVector(1.0F);
-            Vector3d eyeVec = entity.getEyePosition(1.0F);
-            Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
+              Vector3d viewVec = entity.getViewVector(1.0F);
+              Vector3d eyeVec = entity.getEyePosition(1.0F);
+              Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
 
-            AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
-            EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
+              AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
+              EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 
-            if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
+              if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
 
-            LivingEntity target = (LivingEntity) result.getEntity();
+              LivingEntity target = (LivingEntity) result.getEntity();
 
-            double distanceToTargetSqr = entity.distanceToSqr(target);
+              double distanceToTargetSqr = entity.distanceToSqr(target);
 
-            boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
+              boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
 
-            if (resultBool) {
-      //          if (entity instanceof PlayerEntity) {
-                    if (reachSqr >= distanceToTargetSqr) {
-                        target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
-                        this.hurtEnemy(stack, target, entity);
-                    }
-     //           }
-            }
-  //      }
-        return super.onEntitySwing(stack, entity);
+              if (resultBool) {
+//                  if (entity instanceof PlayerEntity) {
+                      if (reachSqr >= distanceToTargetSqr) {
+                          target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
+                          this.hurtEnemy(stack, target, entity);
+                      }
+   //               }
+              }
+//          }
+          }
+      return super.onEntitySwing(stack, entity);
 	}
 
 	@Override

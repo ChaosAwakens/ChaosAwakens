@@ -37,6 +37,7 @@ import io.github.chaosawakens.common.entity.WoodFishEntity;
 import io.github.chaosawakens.common.entity.nonliving.CAFallingBlockEntity;
 import io.github.chaosawakens.common.entity.nonliving.CAScreenShakeEntity;
 import io.github.chaosawakens.common.entity.projectile.AttackSquidProjectile;
+import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
 import io.github.chaosawakens.common.entity.projectile.ExplosiveFireworkEntity;
 import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
@@ -79,7 +80,7 @@ public class CAEntityTypes {
 	public static final RegistryObject<EntityType<EntEntity>> CHERRY_ENT = ENTITY_TYPES.register("cherry_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.CHERRY), EntityClassification.MONSTER)
 					.sized(2.5f, 3.125f)
-					.build(new ResourceLocation(ChaosAwakens.MODID, "birch_ent").toString()));
+					.build(new ResourceLocation(ChaosAwakens.MODID, "cherry_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> CRIMSON_ENT = ENTITY_TYPES.register("crimson_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.CRIMSON), EntityClassification.MONSTER)
 					.sized(2.5f, 3.125f).fireImmune()
@@ -99,11 +100,11 @@ public class CAEntityTypes {
 	public static final RegistryObject<EntityType<EntEntity>> PEACH_ENT = ENTITY_TYPES.register("peach_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.PEACH), EntityClassification.MONSTER)
 					.sized(2.5f, 3.125f)
-					.build(new ResourceLocation(ChaosAwakens.MODID, "birch_ent").toString()));
+					.build(new ResourceLocation(ChaosAwakens.MODID, "peach_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> SKYWOOD_ENT = ENTITY_TYPES.register("skywood_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.SKYWOOD), EntityClassification.MONSTER)
 					.sized(2.5f, 3.125f)
-					.build(new ResourceLocation(ChaosAwakens.MODID, "birch_ent").toString()));
+					.build(new ResourceLocation(ChaosAwakens.MODID, "skywood_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> SPRUCE_ENT = ENTITY_TYPES.register("spruce_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntEntity.Types.SPRUCE), EntityClassification.MONSTER)
 					.sized(2.5f, 3.125f)
@@ -115,9 +116,13 @@ public class CAEntityTypes {
 
 	// Hercules Beetle
 	public static final RegistryObject<EntityType<HerculesBeetleEntity>> HERCULES_BEETLE = ENTITY_TYPES.register("hercules_beetle",
-			() -> EntityType.Builder.of(HerculesBeetleEntity::new, EntityClassification.MONSTER)
+			() -> EntityType.Builder.of((IFactory<HerculesBeetleEntity>) (type, world) -> new HerculesBeetleEntity(type, world, HerculesBeetleEntity.Type.MODERN), EntityClassification.MONSTER)
 					.sized(4.5f, 1.925f)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "hercules_beetle").toString()));
+	public static final RegistryObject<EntityType<HerculesBeetleEntity>> THROWBACK_HERCULES_BEETLE = ENTITY_TYPES.register("throwback_hercules_beetle",
+			() -> EntityType.Builder.of((IFactory<HerculesBeetleEntity>) (type, world) -> new HerculesBeetleEntity(type, world, HerculesBeetleEntity.Type.THROWBACK), EntityClassification.MONSTER)
+					.sized(4.5f, 1.925f)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "throwback_hercules_beetle").toString()));
 
 	// Fish
 	public static final RegistryObject<EntityType<GreenFishEntity>> GREEN_FISH = ENTITY_TYPES.register("green_fish",
@@ -345,6 +350,10 @@ public class CAEntityTypes {
 	public static final RegistryObject<EntityType<CAScreenShakeEntity>> SCREEN_SHAKE = ENTITY_TYPES.register("screen_shake", 
 			() -> EntityType.Builder.<CAScreenShakeEntity>of(CAScreenShakeEntity::new, EntityClassification.MISC)
 			        .build(new ResourceLocation(ChaosAwakens.MODID, "screen_shake").toString()));
+	public static final RegistryObject<EntityType<CALeafyChickenEggEntity>> LEAFY_CHICKEN_EGG = ENTITY_TYPES.register("leafy_chicken_egg",
+			() -> EntityType.Builder.<CALeafyChickenEggEntity>of(CALeafyChickenEggEntity::new, EntityClassification.MISC)
+					.sized(0.25F, 0.25F).clientTrackingRange(10).updateInterval(20)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "leafy_chicken_egg").toString()));
 
 	public static void registerSpawnPlacementTypes() {
 		EntitySpawnPlacementRegistry.register(ACACIA_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
@@ -359,6 +368,7 @@ public class CAEntityTypes {
 		EntitySpawnPlacementRegistry.register(BIRD.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, BirdEntity::checkBirdSpawnRules);
 		EntitySpawnPlacementRegistry.register(LAVA_EEL.get(), EntitySpawnPlacementRegistry.PlacementType.IN_LAVA, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AbstractLavaEntity::checkLavaMobSpawnRules);
 		EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+		EntitySpawnPlacementRegistry.register(THROWBACK_HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(RUBY_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(EMERALD_GATOR.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(CRYSTAL_GATOR.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CrystalGatorEntity::checkCrystalGatorSpawnRules);

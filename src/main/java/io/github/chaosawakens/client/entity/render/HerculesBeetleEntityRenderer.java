@@ -17,7 +17,7 @@ public class HerculesBeetleEntityRenderer extends GeoEntityRenderer<HerculesBeet
 	private static final ResourceLocation MODERN_BEETLE_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/hercules_beetle/hercules_beetle.png");
 	private static final ResourceLocation THROWBACK_BEETLE_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/entity/hercules_beetle/hercules_beetle_throwback.png");
 	
-	public HerculesBeetleEntityRenderer(EntityRendererManager renderManager) {
+	public HerculesBeetleEntityRenderer(EntityRendererManager renderManager, HerculesBeetleEntity.Type type) {
 		super(renderManager, new HerculesBeetleEntityModel());
 		this.shadowRadius = 2.5F;
 	}
@@ -32,9 +32,9 @@ public class HerculesBeetleEntityRenderer extends GeoEntityRenderer<HerculesBeet
 		switch (entity.getBeetleType()) {
 		default:
 			return MODERN_BEETLE_TEXTURE;
-		case 1:
+		case MODERN:
 			return MODERN_BEETLE_TEXTURE;
-		case 2:
+		case THROWBACK:
 			return THROWBACK_BEETLE_TEXTURE;
 		}
 	}

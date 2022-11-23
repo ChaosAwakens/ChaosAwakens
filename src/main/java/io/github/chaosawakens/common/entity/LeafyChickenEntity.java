@@ -2,12 +2,10 @@ package io.github.chaosawakens.common.entity;
 
 import java.util.EnumSet;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IAnimatableEntity;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
@@ -33,7 +31,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SSpawnMobPacket;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -69,6 +66,10 @@ public class LeafyChickenEntity extends ChickenEntity implements IAnimatableEnti
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.idle", true));
 			return PlayState.CONTINUE;
 		}
+		if (!isOnGround()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.falling", true));
+			return PlayState.CONTINUE;
+		}
 		if (event.isMoving() && !getPanicking()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.walk", true));
 			return PlayState.CONTINUE;
@@ -79,10 +80,6 @@ public class LeafyChickenEntity extends ChickenEntity implements IAnimatableEnti
 		}
 		if (this.getSitting() && !getPanicking() && !event.isMoving() || this.getSitting() && !getPanicking() && event.isMoving()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.sit", true));
-			return PlayState.CONTINUE;
-		}
-		if (!isOnGround()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.falling", true));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -98,8 +95,7 @@ public class LeafyChickenEntity extends ChickenEntity implements IAnimatableEnti
 		super.aiStep();
 		if (!this.level.isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && this.eggTime <= 0) {	    
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);	    
-		//	this.spawnAtLocation(Items.EGG); // Lettuce Chicken Egg
-			this.spawnAtLocation(CAItems.LEAFY_CHICKEN_SPAWN_EGG.get());
+			this.spawnAtLocation(CAItems.LEAFY_CHICKEN_EGG.get());
 			this.eggTime = this.random.nextInt(6000) + 6000;   
 		}
 	}

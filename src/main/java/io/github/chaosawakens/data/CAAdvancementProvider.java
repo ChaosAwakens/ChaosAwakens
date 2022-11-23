@@ -225,7 +225,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				.addCriterion("stink_bug", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.STINK_BUG.get())))
 				.save(t, advancementId("bug_squasher"));
 		
-		Advancement minisculeImprisonment = registerAdvancement("miniscule_imprisonment", FrameType.TASK, CAItems.CRITTER_CAGE.get()).parent(root)
+		Advancement minusculeImprisonment = registerAdvancement("minuscule_imprisonment", FrameType.TASK, CAItems.CRITTER_CAGE.get()).parent(root)
 				.addCriterion("used_critter_cage", PlayerEntityInteractionTrigger.Instance.itemUsedOnEntity(EntityPredicate.AndPredicate.ANY, ItemPredicate.Builder.item().of(CAItems.CRITTER_CAGE.get()), EntityPredicate.AndPredicate.ANY))
 				.save(t, advancementId("miniscule_imprisonment"));
 

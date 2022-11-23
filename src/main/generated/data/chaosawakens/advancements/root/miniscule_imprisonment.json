@@ -5,10 +5,10 @@
       "item": "chaosawakens:critter_cage"
     },
     "title": {
-      "translate": "advancements.chaosawakens.miniscule_imprisonment.title"
+      "translate": "advancements.chaosawakens.minuscule_imprisonment.title"
     },
     "description": {
-      "translate": "advancements.chaosawakens.miniscule_imprisonment.description"
+      "translate": "advancements.chaosawakens.minuscule_imprisonment.description"
     },
     "frame": "task",
     "show_toast": true,

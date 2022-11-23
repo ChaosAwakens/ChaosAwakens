@@ -93,7 +93,7 @@ public class EnumUtils {
 		// Name, Durability multiplier, Damage Reduction multiplier, Damage Reduction,
 		// Enchantability, Sound Events, Toughness, Knockback Resistance, Repair
 		// Material
-		EMERALD("emerald", 35, new int[] { 2, 5, 7, 2 }, 24, SoundEvents.ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> Ingredient.of(Items.EMERALD)),
+		EMERALD("emerald", 35, new int[] { 2, 5, 6, 2 }, 24, SoundEvents.ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> Ingredient.of(Items.EMERALD)),
 		EXPERIENCE("experience", 59, new int[] { 4, 7, 9, 5 }, 32, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.5f, 0f, () -> Ingredient.of(Items.EMERALD)),
 		AMETHYST("amethyst", 56, new int[] { 3, 7, 8, 4 }, 18, SoundEvents.ARMOR_EQUIP_DIAMOND, 2f, 0f, () -> Ingredient.of(CAItems.AMETHYST.get())),
 		RUBY("ruby", 57, new int[] { 4, 8, 9, 4 }, 22, SoundEvents.ARMOR_EQUIP_DIAMOND, 3f, 0f, () -> Ingredient.of(CAItems.RUBY.get())),
@@ -186,8 +186,8 @@ public class EnumUtils {
 		NO_BLOCKING,
 		BLOCK_ALL,
 		BLOCK_CHAOS_AWAKENS,
-		BLACKLISTED,
-		WHITELISTED
+		TAG_BLACKLISTED,
+		TAG_WHITELISTED
 	}
 	
 	public enum ExplosionType {

@@ -513,7 +513,9 @@ public class CACommonConfig {
 			spawnEggsSpawnersSurvival = builder
 					.comment("NO_BLOCKING - All Spawn Eggs can be used on a Spawner in Survival." + "\n"
 							+ "BLOCK_ALL - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n"
-							+ "BLOCK_CHAOS_AWAKENS - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival.")
+							+ "BLOCK_CHAOS_AWAKENS - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival."
+							+ "TAG_BLACKLISTED - Only Spawn Eggs which aren't tagged with the 'SPAWNER_SPAWN_EGG' tag can be used on a Spawner in Survival."
+							+ "TAG_WHITELISTED - Only Spawn Eggs which are tagged with the 'SPAWNER_SPAWN_EGG' tag can be used on a Spawner in Survival.")
 					.define("Spawn Eggs on Spawners in Survival?", SurvivalSpawnerManipulationType.NO_BLOCKING);
 			builder.pop();
 			builder.pop();

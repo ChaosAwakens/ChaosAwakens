@@ -44,7 +44,6 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.DifficultyInstance;
@@ -62,12 +61,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 //TODO Re-format all this code, this is yet again lazy junior dev shit done by me cause time is tight -- Meme Man
 public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEntityAdditionalSpawnData, IGrabber {
+	private final Type type;
 	protected final Vector3d grabOffset = new Vector3d(0, 0.5, 2);
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "herculesbeetlecontroller", animationInterval(), this::predicate);
 //	private final AnimationController<?> deathController = new AnimationController<>(this, "herculesbeetledeathcontroller", animationInterval(), this::deathPredicate);
 	public static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BYTE);
-	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	public static final DataParameter<Boolean> MUNCHING = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	public static final DataParameter<Integer> DAMAGE_MUNCH = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	public static final DataParameter<Integer> DOCILE_TIME = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
@@ -78,11 +77,12 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 	public static final byte FLAP_ATTACK = 4;
 	public static final byte LAUNCH = 5;
 	
-	public HerculesBeetleEntity(EntityType<? extends AnimatableMonsterEntity> type, World worldIn) {
+	public HerculesBeetleEntity(EntityType<? extends AnimatableMonsterEntity> type, World worldIn, Type beetleType) {
 		super(type, worldIn);
 		this.noCulling = true;
 		this.maxUpStep = 1.9F;
 		this.moveControl = new CAGroundMovementController(this, 90);
+		this.type = beetleType;
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -127,14 +127,6 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 	
 	public void setMunching(boolean munching) {
 		this.entityData.set(MUNCHING, munching);
-	}
-	
-	public int getBeetleType() {
-		return MathHelper.clamp(this.entityData.get(DATA_TYPE_ID), 0, 2);
-	}
-	
-	public void setBeetleType(int id) {
-		this.entityData.set(DATA_TYPE_ID, id);
 	}
 
 	@Override
@@ -256,6 +248,8 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 				lookAt(getTarget(), 100, 100);
 				getLookControl().setLookAt(getTarget(), 30F, 30F);
 			}
+			
+			if (hasPassenger(getTarget()) && getAttackID() != GRAB_ATTACK && getAttackID() != MUNCH_ATTACK) ejectPassengers();
 		}
 		
 /*		if (getNavigation().getPath() != null && getTarget() == null) {
@@ -273,13 +267,13 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		if (this.horizontalCollision && this.isOnGround()) {
 		//	this.jumpFromGround();
 		}
+		
 	}
 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(ATTACK_ID, (byte) 0);
-		this.entityData.define(DATA_TYPE_ID, 0);
 		this.entityData.define(MUNCHING, false);
 		this.entityData.define(DAMAGE_MUNCH, 0);
 		this.entityData.define(DOCILE, true);
@@ -971,7 +965,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 
 		@Override
 		public boolean canUse() {
-			return (getAttackID() == (byte) 0 && level.random.nextInt((int)getHealth()) == 0 && getHealth() <= 125.0F) || getAttackID() == FLAP_ATTACK && !getDocile();
+			return (getAttackID() == (byte) 0 && getHealth() > 0 && level.random.nextInt((int)getHealth()) == 0 && getHealth() <= 125.0F) || getAttackID() == FLAP_ATTACK && !getDocile();
 		}
 
 		@Override
@@ -1078,22 +1072,11 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 	@Override
 	public void addAdditionalSaveData(CompoundNBT nbt) {
 		super.addAdditionalSaveData(nbt);
-		
-		nbt.putInt("HerculesBeetleType", getBeetleType());
 	}
 	
 	@Override
 	public void readAdditionalSaveData(CompoundNBT nbt) {
 		super.readAdditionalSaveData(nbt);
-		
-		setBeetleType(nbt.getInt("HerculesBeetleType"));
-	}
-	
-	@Override
-	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData data, CompoundNBT nbt) {
-		int i = this.random.nextInt(2);
-		this.setBeetleType(i);
-		return super.finalizeSpawn(world, difficulty, reason, data, nbt);
 	}
 
 	@Override
@@ -1111,5 +1094,28 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	
+	public enum Type {
+		THROWBACK("throwback"), MODERN("modern");
+
+		private final String name;
+
+		Type(String name) {
+			this.name = name;
+		}
+
+		public String getNameString() {
+			return this.name;
+		}
+	}
+	
+	public Type getBeetleType() {
+		return type;
+	}
+	
+	@Override
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData data, CompoundNBT nbt) {
+		
+		return super.finalizeSpawn(world, difficulty, reason, data, nbt);
+	}
 	
 }

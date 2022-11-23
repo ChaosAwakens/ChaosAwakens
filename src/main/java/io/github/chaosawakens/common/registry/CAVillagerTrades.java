@@ -124,7 +124,7 @@ public class CAVillagerTrades {
 				new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_RARE), 2), 7, 30),
 				new CAIngredientTrade(4, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_EPIC), 1), 3, 40));
 	}
-
+	
 	@SuppressWarnings("unused")
 	private static boolean notOnBlacklist(Item item, String[] items) {
 		for (String name : items) if (Objects.requireNonNull(item.getRegistryName()).toString().contains(name)) return false;

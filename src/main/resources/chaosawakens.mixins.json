@@ -5,11 +5,11 @@
 	"mixins": [
 		"RabbitEntityMixin",
 		"SpawnEggItemMixin",
-		"LivingMixin",
-		"VillagerMixin",
+		"LivingEntityMixin",
+		"VillagerEntityMixin",
 		"IForgeBlockMixin",
 		"PlayerAdvancementMixin",
-		"WolfMixin",
+		"WolfEntityMixin",
 		"NoiseChunkGeneratorAccessor",
 		"NoiseChunkGeneratorMixin",
 		"PlayerEntityMixin"
