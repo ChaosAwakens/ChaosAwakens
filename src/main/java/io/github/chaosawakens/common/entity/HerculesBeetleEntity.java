@@ -54,6 +54,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -132,60 +133,60 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 	@Override
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (getAttackID() == RAM_ATTACK && isAlive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_ram", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_ram", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			event.getController().setAnimationSpeed(1);
 			return PlayState.CONTINUE;
 		}
 		
 		if (getDocile()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.sleep", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.sleep", ILoopType.EDefaultLoopTypes.LOOP));
 			event.getController().setAnimationSpeed(1);
 			return PlayState.CONTINUE;
 		}
 		
 		if (getAttackID() == GRAB_ATTACK && isAlive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_grab", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_grab", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			event.getController().setAnimationSpeed(1);
 			return PlayState.CONTINUE;
 		}
 		
 		if (getAttackID() == LAUNCH && isAlive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_ram", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_ram", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			event.getController().setAnimationSpeed(1.5D);
 			return PlayState.CONTINUE;
 		}
 		
 		if (getAttackID() == MUNCH_ATTACK && isAlive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_munch", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_munch", ILoopType.EDefaultLoopTypes.LOOP));
 			event.getController().setAnimationSpeed(1.8D);
 			return PlayState.CONTINUE;
 		}
 		
 		if (getAttackID() == FLAP_ATTACK && isAlive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.awaken", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.awaken", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			event.getController().setAnimationSpeed(1);
 			return PlayState.CONTINUE;
 		}
 
 		if (event.isMoving() && (getAttackID() == (byte) 0)) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			event.getController().setAnimationSpeed(1.5D);
 			return PlayState.CONTINUE;
 		}
 		
 		if (this.isDeadOrDying() || this.getHealth() <= 0) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			event.getController().setAnimationSpeed(0.48D);
 			return PlayState.CONTINUE;
 		}
 		
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatable> PlayState deathPredicate(AnimationEvent<E> event) {		
 		if (this.isDeadOrDying() || this.getHealth() <= 0) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.death_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			event.getController().setAnimationSpeed(0.38D);
 			return PlayState.CONTINUE;
 		}
@@ -249,6 +250,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 				getLookControl().setLookAt(getTarget(), 30F, 30F);
 			}
 			
+			// Fix Hercules Beetle switching from munching to ramming, softlocking the target in place until it munches again or it dies
 			if (hasPassenger(getTarget()) && getAttackID() != GRAB_ATTACK && getAttackID() != MUNCH_ATTACK) ejectPassengers();
 		}
 		

@@ -32,6 +32,7 @@ import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -78,11 +79,11 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.stink_bug.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
 	}
 

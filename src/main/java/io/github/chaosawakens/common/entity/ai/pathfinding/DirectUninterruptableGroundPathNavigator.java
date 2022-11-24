@@ -15,5 +15,12 @@ public class DirectUninterruptableGroundPathNavigator extends GroundPathNavigato
 	protected boolean canMoveDirectly(Vector3d startVec, Vector3d targetVec, int x, int y, int z) {
 		return true;
 	}
-
+	
+	@Override
+	protected void followThePath() {
+		if (path != null) {
+			path.advance();
+		}
+		doStuckDetection(mob.position());
+	}
 }

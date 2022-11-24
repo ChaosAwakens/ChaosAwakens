@@ -121,7 +121,7 @@ public class ChaosAwakens {
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			eventBus.addListener(ClientSetupEvent::onFMLClientSetupEvent);
 			eventBus.addListener(ClientEventsHelper::onParticleRegistrationEvent);
-			eventBus.addListener(EventPriority.NORMAL, ClientSetupEvent.ClientEventsHelper::onClientLoadComplete);
+			eventBus.addListener(ClientEventsHelper::onClientLoadComplete);
 			MinecraftForge.EVENT_BUS.addListener(ToolTipEventSubscriber::onToolTipEvent);
 			MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ClientEventsHelper::onCameraSetup);
 	/*		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ClientEventsHelper::onPreRenderPlayer);

@@ -5,9 +5,11 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 
+//TODO update some stuff here -- Meme Man
 public interface IAnimatableEntity extends IAnimatable {
 	
 	/**
@@ -37,9 +39,9 @@ public interface IAnimatableEntity extends IAnimatable {
 	 * @param animationName Name of the animation specified in the blockbench file. Must match.
 	 * @param shouldLoop Whether or not the specified animation should loop.
 	 */
-	default void forceSetAnimation(String animationName, boolean shouldLoop) {
+	default void forceSetAnimation(String animationName, ILoopType.EDefaultLoopTypes type) {
 		getController().markNeedsReload();
-		getController().setAnimation(new AnimationBuilder().addAnimation(animationName, shouldLoop));
+		getController().setAnimation(new AnimationBuilder().addAnimation(animationName, type));
 	}
 	
 	/**
@@ -47,7 +49,7 @@ public interface IAnimatableEntity extends IAnimatable {
 	 * @param animationName Name of the animation specified in the blockbench file. Must match.
 	 */
 	default void forceSetAnimation(String animationName) {
-		forceSetAnimation(animationName, false);
+		forceSetAnimation(animationName, ILoopType.EDefaultLoopTypes.PLAY_ONCE);
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public interface IAnimatableEntity extends IAnimatable {
 	 * @param animationName Name of the animation specified in the blockbench file. Must match.
 	 */
 	default void forceSetLoopingAnimation(String animationName) {
-		forceSetAnimation(animationName, true);
+		forceSetAnimation(animationName, ILoopType.EDefaultLoopTypes.LOOP);
 	}
 	
 	default AnimationBuilder forceSetRepeatAnimationWithDelay(String animationName, double animationLength, int delay, int timesToRepeat) {
@@ -69,7 +71,7 @@ public interface IAnimatableEntity extends IAnimatable {
 			if (--delayR <= 0 && --animationLengthR <= 0) {
 				delayR = delay;
 				animationLengthR = animationLength;
-				builder.addAnimation(animationName, false);
+				builder.addAnimation(animationName, ILoopType.EDefaultLoopTypes.PLAY_ONCE);
 			}
 		}
 		

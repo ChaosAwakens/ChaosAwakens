@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -41,14 +42,14 @@ public class RoboSniperEntity extends RoboRangedEntity implements IRangedAttackM
 	@Override
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.attacking_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		}
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.robo_sniper.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
 	}
 

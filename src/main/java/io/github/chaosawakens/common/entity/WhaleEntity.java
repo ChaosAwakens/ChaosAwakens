@@ -55,6 +55,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -90,19 +91,19 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatableEntity, IA
 	@Override
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.swimming", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.swimming", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.idle", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.idle", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 //		if (this.dead || this.getHealth() <= 0) {
-//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.death", true));
+//			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.death", false));
 //			return PlayState.CONTINUE;
 //		}
 		if (this.isSwimming()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.swimming", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.whale.swimming", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;

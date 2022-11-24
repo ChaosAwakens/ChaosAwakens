@@ -67,6 +67,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -140,18 +141,18 @@ public class BirdEntity extends TameableEntity implements IAnimatableEntity, IAn
 
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.dead) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.idle", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.idle", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.onGround && !event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.idle", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.idle", ILoopType.EDefaultLoopTypes.LOOP));
 		}
 		if (event.isMoving() && this.onGround) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.walk", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.walk", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.isFlying() || !this.isOnGround()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.fly", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bird.fly", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;

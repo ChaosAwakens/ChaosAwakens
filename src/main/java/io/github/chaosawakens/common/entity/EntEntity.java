@@ -74,6 +74,7 @@ import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -113,7 +114,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditio
 	public <E extends IAnimatable> PlayState deathPredicate(AnimationEvent<E> event) {
 		if (this.isDeadOrDying() || (this.getAttacking() && this.isDeadOrDying()) || this.getHealth() <= 0) {
 			if (getAttackID() != (byte) 0) setAttackID((byte) 0);
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.death_animation", true));		
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.death_animation", ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME));		
 			event.getController().setAnimationSpeed(0.8D);
 			return PlayState.CONTINUE;
 		}
@@ -123,18 +124,18 @@ public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditio
 	@Override
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.getAttacking() && this.getAttackID() == PUNCH_ATTACK) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			return PlayState.CONTINUE;
 		}
 		if (this.getAttacking() && this.getAttackID() == SMASH_ATTACK) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.smash_attack", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.smash_attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
 	}
 	

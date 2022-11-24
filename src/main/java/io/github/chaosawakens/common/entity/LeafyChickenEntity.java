@@ -37,6 +37,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -63,23 +64,23 @@ public class LeafyChickenEntity extends ChickenEntity implements IAnimatableEnti
 	
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.idle", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.idle", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (!isOnGround()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.falling", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.falling", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving() && !getPanicking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.walk", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.walk", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving() && this.getPanicking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.run", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.run", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.getSitting() && !getPanicking() && !event.isMoving() || this.getSitting() && !getPanicking() && event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.sit", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.leafy_chicken.sit", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;

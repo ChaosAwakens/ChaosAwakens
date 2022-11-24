@@ -60,6 +60,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -97,11 +98,11 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 	
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.bite_animation", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.bite_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			return PlayState.CONTINUE;
 		}
 		if (this.isSwimming() || this.isInWater() && event.isMoving()) {

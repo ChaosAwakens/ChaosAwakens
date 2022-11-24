@@ -36,6 +36,7 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -76,11 +77,11 @@ public class WaspEntity extends AnimatableMonsterEntity implements IFlyingAnimal
 	@Override
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly_attack", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly_attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			return PlayState.CONTINUE;
 		}
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
 
 	}

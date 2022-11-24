@@ -48,6 +48,7 @@ import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -72,11 +73,11 @@ public class AppleCowEntity extends AnimatableAnimalEntity implements IAnimatabl
 
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.apple_cow.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;

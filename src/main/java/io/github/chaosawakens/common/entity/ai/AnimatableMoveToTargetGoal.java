@@ -93,7 +93,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	//		}
 			
 			//Fix entities mindlessly spinning due to next node index being out of bounds
-			//It never caused any exceptions, though? I dunno how that happened --Meme Man
+			//It never caused any exceptions (when logging previously), though? I dunno how that happened --Meme Man
 			if (this.entity.getNavigation().getPath() != null) {
 				if (this.entity.getNavigation().getPath().getNextNodeIndex() >= this.entity.getNavigation().getPath().getNodeCount() - 1) {
 					this.entity.getNavigation().stop();
