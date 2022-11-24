@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.entity.ai.LavaMoveHelper;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.entity.Entity;
@@ -27,11 +29,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nullable;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnimatable {
-	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
 	public LavaEelEntity(EntityType<? extends LavaEelEntity> entityType, World world) {
 		super(entityType, world);

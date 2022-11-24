@@ -60,9 +60,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class WhaleEntity extends WaterMobEntity implements IAnimatableEntity, IAnimationTickable {
-	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "whalecontroller", animationInterval(), this::predicate);
 	protected MovementController.Action operation = MovementController.Action.WAIT;
 	private static final DataParameter<Integer> AIR = EntityDataManager.defineId(WhaleEntity.class, DataSerializers.INT);

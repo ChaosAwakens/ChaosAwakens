@@ -18,9 +18,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class RoboWarriorEntity extends RoboRangedEntity implements IRangedAttackMob {
-	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "robowarriorcontroller", animationInterval(), this::predicate);
 
 	public RoboWarriorEntity(EntityType<? extends RoboEntity> type, World worldIn) {

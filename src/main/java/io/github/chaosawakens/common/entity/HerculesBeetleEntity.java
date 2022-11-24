@@ -59,12 +59,13 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 //TODO Re-format all this code, this is yet again lazy junior dev shit done by me cause time is tight -- Meme Man
 public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEntityAdditionalSpawnData, IGrabber {
 	private final Type type;
 	protected final Vector3d grabOffset = new Vector3d(0, 0.5, 2);
-	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "herculesbeetlecontroller", animationInterval(), this::predicate);
 //	private final AnimationController<?> deathController = new AnimationController<>(this, "herculesbeetledeathcontroller", animationInterval(), this::deathPredicate);
 	public static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BYTE);

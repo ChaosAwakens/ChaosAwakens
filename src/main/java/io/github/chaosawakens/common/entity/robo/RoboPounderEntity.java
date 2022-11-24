@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.ai.AnimatableGoal;
@@ -37,11 +36,9 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Items;
 import net.minecraft.item.TieredItem;
 import net.minecraft.network.IPacket;
@@ -65,7 +62,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -83,12 +79,13 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 //TODO Re-factor almost all the code here (and for a bunch of other entities/AI), because right now it's functional, but messy AF
 //Junior dev shit --Meme Man
 @SuppressWarnings("all")
 public class RoboPounderEntity extends RoboEntity implements IEntityAdditionalSpawnData {
-	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "robopoundercontroller", animationInterval(), this::predicate);
 	private final AnimationController<?> secondaryController = new AnimationController<>(this, "robopoundersecondcontroller", animationInterval(), this::secondaryPredicate);
 	public static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BYTE);

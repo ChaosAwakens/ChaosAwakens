@@ -79,9 +79,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditionalSpawnData {
-	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private final Types entType;
 	public static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(EntEntity.class, DataSerializers.BYTE);
 	public static final byte PUNCH_ATTACK = 1;
@@ -124,7 +125,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditio
 	@Override
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.getAttacking() && this.getAttackID() == PUNCH_ATTACK) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ent.attacking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.getAttacking() && this.getAttackID() == SMASH_ATTACK) {

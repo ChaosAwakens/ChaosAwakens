@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.entity;
 
+import javax.annotation.Nullable;
+
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -20,13 +23,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nullable;
-
-import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class RubyBugEntity extends AnimatableAnimalEntity {
-	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "rubybugcontroller", animationInterval(), this::predicate);
 
 	public RubyBugEntity(EntityType<? extends AnimalEntity> type, World worldIn) {

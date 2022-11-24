@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -38,9 +39,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatable {
-	private final AnimationFactory factory = new AnimationFactory(this);
+public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatable, IAnimationTickable {
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
 	public RockFishEntity(EntityType<? extends RockFishEntity> entityType, World world) {
 		super(entityType, world);
@@ -175,5 +177,10 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		public boolean canUse() {
 			return this.rockfish.canRandomSwim() && super.canUse();
 		}
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
 	}
 }

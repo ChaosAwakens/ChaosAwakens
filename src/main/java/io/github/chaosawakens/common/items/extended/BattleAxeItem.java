@@ -34,9 +34,10 @@ import net.minecraftforge.common.util.Lazy;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class BattleAxeItem extends AxeItem implements IAutoEnchantable, IVanishable, IAnimatable, IUtilityHelper {
-	public AnimationFactory factory = new AnimationFactory(this);
+public class BattleAxeItem extends AxeItem implements IAutoEnchantable, IVanishable, IAnimatable {
+	public AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	public static final UUID REACH_MODIFIER = UUID.fromString("4B3447EE-EC65-11EC-8EA0-0242AC120002");
 	public static final UUID KB_MODIFIER = UUID.fromString("516858D0-EC65-11EC-8EA0-0242AC120002");
 	public static int attackDamage;

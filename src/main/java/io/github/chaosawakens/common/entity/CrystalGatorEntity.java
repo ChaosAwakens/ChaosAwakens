@@ -65,12 +65,13 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAngerable {
 	private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 69);
-	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<?> controller = new AnimationController(this, "crystalgatorcontroller", animationInterval(), this::predicate);
+	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationController<?> controller = new AnimationController<IAnimatable>(this, "crystalgatorcontroller", animationInterval(), this::predicate);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
 	private UUID persistentAngerTarget;
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
@@ -106,10 +107,10 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 			return PlayState.CONTINUE;
 		}
 		if (this.isSwimming() || this.isInWater() && event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.swim_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.swim_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
 	}
 	

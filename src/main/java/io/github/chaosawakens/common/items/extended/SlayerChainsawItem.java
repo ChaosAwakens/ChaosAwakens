@@ -40,6 +40,7 @@ import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -73,7 +74,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 		map = builder.build();
 		return map;
 	});
-	public AnimationFactory factory = new AnimationFactory(this);
+	public AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public SlayerChainsawItem(CAItemTier tierIn, int attackDamageIn, float attackSpeedIn, double attackReachIn, int attackKnockbackIn, Properties builderIn) {
 	    super(tierIn, attackDamage, attackSpeedIn, builderIn);
@@ -166,7 +167,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 
 	private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {		
 		if (ACTIVATED) {				
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", true));				
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", ILoopType.EDefaultLoopTypes.LOOP));				
 			return PlayState.CONTINUE;
 		}
 		return PlayState.STOP;
@@ -213,7 +214,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 					// Set the animation to open the JackInTheBoxItem which will start playing music
 					// and
 					// eventually do the actual animation. Also sets it to loop
-					controller.setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", true));
+					controller.setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", ILoopType.EDefaultLoopTypes.LOOP));
 				}
 			}
 		}
