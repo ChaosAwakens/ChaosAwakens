@@ -1,7 +1,9 @@
 package io.github.chaosawakens.common.blocks;
 
 import io.github.chaosawakens.common.registry.CATags;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;

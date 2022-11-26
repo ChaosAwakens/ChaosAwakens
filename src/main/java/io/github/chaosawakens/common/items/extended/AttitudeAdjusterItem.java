@@ -31,7 +31,6 @@ import net.minecraftforge.common.util.Lazy;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class AttitudeAdjusterItem extends SwordItem implements IVanishable, IAnimatable, IUtilityHelper {
     public static final UUID REACH_MODIFIER = UUID.fromString("1C0F03EC-EEB6-414A-8AC6-2A0913844821");
@@ -53,7 +52,7 @@ public class AttitudeAdjusterItem extends SwordItem implements IVanishable, IAni
         return map;
     });
     private static final float EXPLOSION_POWER = CACommonConfig.COMMON.attitudeAdjusterExplosionSize.get();
-    public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    public AnimationFactory factory = new AnimationFactory(this);
 
     public AttitudeAdjusterItem(EnumUtils.CAItemTier tierIn, int attackDamageIn, float attackSpeedIn, double attackReachIn, double attackKnockbackIn, Properties builderIn) {
         super(tierIn, attackDamageIn, attackSpeedIn, builderIn);

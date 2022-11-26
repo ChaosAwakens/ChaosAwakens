@@ -52,10 +52,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class GazelleEntity extends AnimatableAnimalEntity {
-	private AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private AnimationFactory factory = new AnimationFactory(this);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 	public static final DataParameter<Boolean> IS_RUNNING = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.BOOLEAN);

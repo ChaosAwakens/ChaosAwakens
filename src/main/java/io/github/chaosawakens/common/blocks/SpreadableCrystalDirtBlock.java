@@ -1,7 +1,8 @@
 package io.github.chaosawakens.common.blocks;
 
-import io.github.chaosawakens.common.registry.CABlocks;
+import java.util.Random;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
@@ -9,8 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.lighting.LightEngine;
 import net.minecraft.world.server.ServerWorld;
-
-import java.util.Random;
 
 public class SpreadableCrystalDirtBlock extends CrystalBlock {
 	protected SpreadableCrystalDirtBlock(Properties properties) {

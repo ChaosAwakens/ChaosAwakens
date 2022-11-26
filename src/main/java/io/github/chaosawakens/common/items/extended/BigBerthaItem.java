@@ -6,7 +6,6 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
-import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.util.EnumUtils;
 import net.minecraft.enchantment.EnchantmentData;
@@ -34,10 +33,9 @@ import net.minecraftforge.common.util.Lazy;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class BigBerthaItem extends SwordItem implements IAutoEnchantable, IVanishable, IAnimatable {
-	public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	public AnimationFactory factory = new AnimationFactory(this);
 	public static final UUID REACH_MODIFIER = UUID.fromString("1C0F03EC-EEB6-414A-8AC6-2A0913844821");
 	public static final UUID KB_MODIFIER = UUID.fromString("031FCABC-A15C-45C1-B799-5068DB1EAA98");
 	public static int attackDamage;

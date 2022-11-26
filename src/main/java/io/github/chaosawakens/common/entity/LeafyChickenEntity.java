@@ -42,10 +42,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class LeafyChickenEntity extends ChickenEntity implements IAnimatableEntity, IAnimationTickable {
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "leafychickencontroller", animationInterval(), this::predicate);
 	private static final DataParameter<Boolean> PANIC = EntityDataManager.defineId(LeafyChickenEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(LeafyChickenEntity.class, DataSerializers.BOOLEAN);

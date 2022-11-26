@@ -1,18 +1,22 @@
 package io.github.chaosawakens.common.items;
 
+import java.util.function.Predicate;
+
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.ArrowItem;
+import net.minecraft.item.BowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.ShootableItem;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-
-import java.util.function.Predicate;
 
 public class SkateBowItem extends BowItem {
 	public SkateBowItem(Properties builder) {

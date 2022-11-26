@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
 import io.github.chaosawakens.common.util.EnumUtils;
-import io.github.chaosawakens.common.util.EnumUtils.ExplosionType;
 import io.github.chaosawakens.common.util.EnumUtils.AITargetingSystemType;
+import io.github.chaosawakens.common.util.EnumUtils.ExplosionType;
 import io.github.chaosawakens.common.util.EnumUtils.SurvivalSpawnerManipulationType;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;

@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.blocks;
 
+import java.util.function.Supplier;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -11,8 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-
-import java.util.function.Supplier;
 
 public class AntInfestedOre extends OreBlock {
 	private final Supplier<? extends EntityType<?>> ant;

@@ -18,6 +18,11 @@ public class CAGroundWaterNVPathNavigator extends CAStrictGroundPathNavigator im
 	}
 	
 	@Override
+	protected void followThePath() {
+		super.followThePath();
+	}
+	
+	@Override
 	protected boolean sweepThrough(Vector3d pathVec, Vector3d center, Vector3d max) {
         float ml = (float) pathVec.length();
         

@@ -1,9 +1,9 @@
 package io.github.chaosawakens.common.blocks.trees.dupetree;
 
+import java.util.Random;
+
 import io.github.chaosawakens.api.IUtilityHelper;
-
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.trees.Tree;
@@ -13,8 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-
-import java.util.Random;
 
 public class DuplicationTree extends Tree implements IUtilityHelper {
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;

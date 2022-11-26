@@ -1,6 +1,9 @@
 package io.github.chaosawakens.common.loot;
 
+import java.util.Set;
+
 import com.google.common.collect.Sets;
+
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
@@ -14,8 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
-
-import java.util.Set;
 
 public class CATreasure {
 	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_dungeon/acacia_loot"}} 1

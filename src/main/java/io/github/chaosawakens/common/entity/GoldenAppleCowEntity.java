@@ -41,10 +41,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class GoldenAppleCowEntity extends AnimatableAnimalEntity {
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "goldenapplecowcontroller", animationInterval(), this::predicate);
 
 	public GoldenAppleCowEntity(EntityType<? extends GoldenAppleCowEntity> type, World worldIn) {

@@ -29,10 +29,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnimatable {
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 
 	public LavaEelEntity(EntityType<? extends LavaEelEntity> entityType, World world) {
 		super(entityType, world);
@@ -117,7 +116,7 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 	@Override
 	public boolean doHurtTarget(Entity livingEntity) {
 		LivingEntity target = this.getTarget();
-		LavaEelEntity attacker = (LavaEelEntity) livingEntity;
+		LavaEelEntity attacker = this;
 		if (target.getLastHurtByMob() == attacker) {
 			if (target instanceof LivingEntity) {
 				float health = attacker.getHealth();

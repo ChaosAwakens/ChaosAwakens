@@ -1,7 +1,10 @@
 package io.github.chaosawakens.client.entity.render;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
 import net.minecraft.client.Minecraft;
@@ -22,8 +25,6 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
 public class UltimateBobberProjectileRenderer extends EntityRenderer<UltimateFishingBobberEntity> {

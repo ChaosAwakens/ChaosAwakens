@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.blocks;
 
+import java.util.function.Supplier;
+
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,8 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-
-import java.util.function.Supplier;
 
 public class CACropsBlock extends CropsBlock {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;

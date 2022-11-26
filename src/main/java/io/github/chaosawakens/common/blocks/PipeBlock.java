@@ -1,7 +1,10 @@
 package io.github.chaosawakens.common.blocks;
 
+import java.util.Map;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.BooleanProperty;
@@ -13,8 +16,6 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.ICollisionReader;
 import net.minecraft.world.World;
-
-import java.util.Map;
 
 @SuppressWarnings("all")
 public class PipeBlock extends Block {

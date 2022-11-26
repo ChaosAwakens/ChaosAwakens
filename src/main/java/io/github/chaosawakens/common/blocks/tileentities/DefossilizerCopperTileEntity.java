@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -28,8 +30,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
-
-import javax.annotation.Nullable;
 
 public class DefossilizerCopperTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
 	final static int WORK_TIME = AbstractDefossilizingRecipe.getDefossilizingTime();

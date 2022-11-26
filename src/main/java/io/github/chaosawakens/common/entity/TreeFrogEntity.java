@@ -54,10 +54,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class TreeFrogEntity extends AnimatableAnimalEntity {
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "treefrogcontroller", animationInterval(), this::predicate);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(TreeFrogEntity.class, DataSerializers.INT);
 

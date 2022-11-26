@@ -39,10 +39,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatable, IAnimationTickable {
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 
 	public RockFishEntity(EntityType<? extends RockFishEntity> entityType, World world) {
 		super(entityType, world);

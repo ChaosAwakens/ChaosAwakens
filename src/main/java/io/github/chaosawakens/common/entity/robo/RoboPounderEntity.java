@@ -79,13 +79,12 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 //TODO Re-factor almost all the code here (and for a bunch of other entities/AI), because right now it's functional, but messy AF
 //Junior dev shit --Meme Man
 @SuppressWarnings("all")
 public class RoboPounderEntity extends RoboEntity implements IEntityAdditionalSpawnData {
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "robopoundercontroller", animationInterval(), this::predicate);
 	private final AnimationController<?> secondaryController = new AnimationController<>(this, "robopoundersecondcontroller", animationInterval(), this::secondaryPredicate);
 	public static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BYTE);
@@ -423,6 +422,8 @@ public class RoboPounderEntity extends RoboEntity implements IEntityAdditionalSp
 				}
 			}
 		}
+		
+//		if (getTarget() == null) setAttackID((byte) 0);
 	}
 
 	@Override
@@ -1502,7 +1503,7 @@ public class RoboPounderEntity extends RoboEntity implements IEntityAdditionalSp
 				if (entity instanceof RoboPounderEntity) return false;
 			}*/
 			
-			if (horizontalCollision && !ForgeEventFactory.getMobGriefingEvent(level, entity)) return false;
+			if (horizontalCollision && !ForgeEventFactory.getMobGriefingEvent(level, entity)) setRageDamage(100);
 	//		if (getHorizontalDeltaMovement() <= 0.22235792875289917D && rageRunTime > 60) return false;
 			
 			if (getTarget() != null) {

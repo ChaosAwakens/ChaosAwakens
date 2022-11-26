@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity.nonliving;
 
 import java.util.Optional;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

@@ -1,5 +1,10 @@
 package io.github.chaosawakens.common.entity;
 
+import java.util.List;
+import java.util.stream.Stream;
+
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.entity.ai.FollowLavaLeaderGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -8,10 +13,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.stream.Stream;
 
 public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	private AbstractLavaGroupFishEntity leader;

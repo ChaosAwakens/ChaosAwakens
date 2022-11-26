@@ -1,7 +1,6 @@
 package io.github.chaosawakens.client.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import io.github.chaosawakens.ChaosAwakens;

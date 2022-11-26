@@ -683,6 +683,19 @@ public interface IUtilityHelper {
 	///////////////////////////////
 	//          Doubles          //
 	///////////////////////////////
+    
+    /**
+     * Gets the average double from the input array of numbers
+     * @param numbers array of numbers for which to calculate average
+     * @return average within the input array of numbers
+     */
+	static double getAverage(double... numbers) {
+		double result = 0D;
+		for (int i = 0; i < numbers.length; i++) {
+			result += numbers[i];
+		}
+		return result / numbers.length;
+	}
 
 	/**
 	 * Gets the distance between 2 positions on the x and z axis
@@ -758,7 +771,7 @@ public interface IUtilityHelper {
 	}
 	
 	/**
-	 * Returns an angle between 2 entities via the use of polar coordinates
+	 * Returns an angle between 2 entities via the use of polar coordinate conversion
 	 * @param first the first entity to get its angle
 	 * @param second the second entity to get its angle
 	 * @return the angle between both entities
@@ -916,6 +929,19 @@ public interface IUtilityHelper {
 		}	 
 	}
 	
+    /**
+     * Gets the average float from the input array of numbers
+     * @param numbers array of numbers for which to calculate average
+     * @return average within the input array of numbers
+     */
+	static float getAverage(float... numbers) {
+		float result = 0F;
+		for (int i = 0; i < numbers.length; i++) {
+			result += numbers[i];
+		}
+		return result / numbers.length;
+	}
+	
 
 	///////////////////////////////
 	//          Strings          //
@@ -926,6 +952,19 @@ public interface IUtilityHelper {
 	///////////////////////////////
 	//            Ints           //
 	///////////////////////////////
+	
+    /**
+     * Gets the average integer from the input array of numbers
+     * @param numbers array of numbers for which to calculate average
+     * @return average within the input array of numbers
+     */
+	static int getAverage(int... numbers) {
+		int result = 0;
+		for (int i = 0; i < numbers.length; i++) {
+			result += numbers[i];
+		}
+		return result / numbers.length;
+	}
 
 	/**
 	 * Sets the duplication tree duplicator cap

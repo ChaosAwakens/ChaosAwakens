@@ -1,11 +1,16 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.registry.CABlocks;
+import java.util.Random;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.BreedGoal;
@@ -38,12 +43,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
-
-import java.util.Random;
 
 public class CrystalCarrotPigEntity extends CarrotPigEntity {
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
     private final AnimationController<?> controller = new AnimationController<>(this, "crystalcarrotpigcontroller", animationInterval(), this::predicate);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(CAItems.CRYSTAL_POTATO.get(), CAItems.CRYSTAL_BEETROOT.get());
 

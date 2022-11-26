@@ -21,7 +21,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,7 +61,7 @@ public abstract class LivingEntityMixin extends Entity {
 	public void chaosawakens$aiStep(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if (EnderScaleArmorItem.isElytraToggled((entity.getItemBySlot(EquipmentSlotType.CHEST)))) {
-			entity.flyingSpeed = 0.012F;
+			entity.flyingSpeed += 0.012F;
 		}
 	}
 
@@ -70,8 +69,6 @@ public abstract class LivingEntityMixin extends Entity {
 	protected void chaosawakens$isImmobile(CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if (entity.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) {
-			entity.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0);
-			entity.setNoActionTime(entity.getEffect(CAEffects.PARALYSIS_EFFECT.get()).getDuration());
 			cir.setReturnValue(true);
 		}
 	}

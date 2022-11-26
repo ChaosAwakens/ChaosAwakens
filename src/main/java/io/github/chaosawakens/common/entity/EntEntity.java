@@ -79,10 +79,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditionalSpawnData {
-	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private final Types entType;
 	public static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(EntEntity.class, DataSerializers.BYTE);
 	public static final byte PUNCH_ATTACK = 1;
@@ -251,7 +250,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditio
     		}*/
   //  	}
     	
-    	
+  //  	if (getTarget() == null) setAttackID((byte) 0);
     }
     
     @Override

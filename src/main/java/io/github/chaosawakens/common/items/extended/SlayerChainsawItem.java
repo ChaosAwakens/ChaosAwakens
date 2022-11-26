@@ -74,7 +74,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 		map = builder.build();
 		return map;
 	});
-	public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	public AnimationFactory factory = new AnimationFactory(this);
 
     public SlayerChainsawItem(CAItemTier tierIn, int attackDamageIn, float attackSpeedIn, double attackReachIn, int attackKnockbackIn, Properties builderIn) {
 	    super(tierIn, attackDamage, attackSpeedIn, builderIn);

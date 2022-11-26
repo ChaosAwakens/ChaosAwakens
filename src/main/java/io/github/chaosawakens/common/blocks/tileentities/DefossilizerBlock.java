@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
-import io.github.chaosawakens.ChaosAwakens;
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.Block;
@@ -23,8 +24,6 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-
-import javax.annotation.Nullable;
 
 @SuppressWarnings("unused")
 public class DefossilizerBlock extends Block {

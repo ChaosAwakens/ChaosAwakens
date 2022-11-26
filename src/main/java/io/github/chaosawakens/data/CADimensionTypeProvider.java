@@ -1,7 +1,6 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
-
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.data.DataGenerator;
 

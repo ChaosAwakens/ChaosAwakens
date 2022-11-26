@@ -4,12 +4,10 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import io.github.chaosawakens.common.config.CACommonConfig;
-
-import com.google.common.collect.ImmutableMultimap.Builder;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

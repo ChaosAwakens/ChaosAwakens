@@ -33,10 +33,9 @@ import net.minecraftforge.common.util.Lazy;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class QueenScaleBattleAxeItem extends AxeItem implements IAutoEnchantable, IVanishable, IAnimatable {
-	public AnimationFactory factory = GeckoLibUtil.createFactory(this);
+	public AnimationFactory factory = new AnimationFactory(this);
 	public static final UUID REACH_MODIFIER = UUID.fromString("5F506B0E-EC65-11EC-8EA0-0242AC120002");
 	public static final UUID KB_MODIFIER = UUID.fromString("62AAC042-EC65-11EC-8EA0-0242AC120002");
 	public static int attackDamage;

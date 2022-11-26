@@ -1,6 +1,13 @@
 package io.github.chaosawakens.data;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Consumer;
+
+import javax.annotation.Nullable;
+
 import com.google.gson.JsonObject;
+
 import io.github.chaosawakens.common.util.NameUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -13,11 +20,6 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.function.Consumer;
 
 public class FossilRecipeBuilder {
 	private final IRecipeSerializer<?> serializer;

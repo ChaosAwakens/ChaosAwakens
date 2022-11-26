@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.blocks;
 
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
+
 import io.github.chaosawakens.common.entity.AggressiveAntEntity;
 import io.github.chaosawakens.common.entity.AntEntity;
 import net.minecraft.block.Block;
@@ -11,10 +15,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.server.ServerWorld;
-
-import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
 
 public class AntNestBlock extends Block {
 	private final Supplier<? extends EntityType<? extends CreatureEntity>> ant;

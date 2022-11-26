@@ -20,6 +20,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
@@ -120,6 +121,12 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
                 target.setDeltaMovement(-0.1 * Math.cos(angle), target.getDeltaMovement().y, -0.1 * Math.sin(angle));
             }
         }
+    }
+    
+    protected <P extends PathNavigator> void alternatePathNav(P to) {
+    	if (navigation.getClass() != to.getClass()) {
+    		navigation = to;
+    	}
     }
     
     protected boolean isStuck() {
