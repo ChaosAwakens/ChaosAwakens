@@ -236,19 +236,19 @@ public class DimetrodonEntity extends AnimatableAnimalEntity implements IAngerab
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (this.getAttacking()) {
-			if (this.getTarget() != null) {
+		if (this.getAttacking() && this.getTarget() != null) {
+		//	if (this.getTarget() != null) {
 				assert this.getTarget() != null;
 				this.lookAt(getTarget(), 100, 100);
 				this.getLookControl().setLookAt(getTarget(), 30F, 30F);
-				do {
+				if (this.isAngryAt(this.getTarget())) {
 					if (this.distanceTo(getTarget()) > AnimatableMeleeGoal.getAttackReachSq(this, getTarget())) this.getNavigation().moveTo(getNavigation().getPath(), 1);
-				} while (this.isAngryAt(this.getTarget()));
+				}
 				if (!this.isAngryAt(this.getTarget()) && !this.getTarget().isDeadOrDying()) {
 					this.setTarget(this.getTarget());
 					this.setRemainingPersistentAngerTime(1200);
 				}
-			}
+	//		}
 		}
 		
 	}

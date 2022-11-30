@@ -1,16 +1,19 @@
 buildscript {
 	repositories {
 		maven { url = "https://maven.minecraftforge.net/" }
+		maven { url = 'https://maven.parchmentmc.org' }
 		maven { url = "https://repo.spongepowered.org/maven" }
 		mavenCentral()
 	}
 	dependencies {
 		classpath(group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true)
+		classpath 'org.parchmentmc:librarian:1.+'
 		classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
 	}
 }
 
 apply plugin: "net.minecraftforge.gradle"
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: "org.spongepowered.mixin"
 apply plugin: "eclipse"
 apply plugin: "maven-publish"
@@ -22,7 +25,8 @@ archivesBaseName = project.modId
 java.toolchain.languageVersion = JavaLanguageVersion.of 8
 
 minecraft {
-	mappings channel: "official", version: "${project.minecraftVersion}"
+//	mappings channel: "official", version: "${project.minecraftVersion}"
+	mappings channel: 'parchment', version: "${project.parchmentMappingsVersion}"
 
 	accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
 

@@ -10,8 +10,10 @@ import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.ai.AnimatableGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.entity.ai.pathfinding.CAGeneralFlightController;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAGroundMovementController;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAGroundWaterNVPathNavigator;
+import io.github.chaosawakens.common.entity.ai.pathfinding.DirectUninterruptableGroundPathNavigator;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.nonliving.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
@@ -25,7 +27,6 @@ import net.minecraft.entity.Pose;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
@@ -43,7 +44,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
@@ -75,7 +75,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 	protected final Vector3d grabOffset = new Vector3d(0, 0.5, 2);
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "herculesbeetlecontroller", animationInterval(), this::predicate);
-//	private final AnimationController<?> deathController = new AnimationController<>(this, "herculesbeetledeathcontroller", animationInterval(), this::deathPredicate);
+	private final AnimationController<?> awakeningController = new AnimationController<>(this, "herculesbeetleawakeningcontroller", animationInterval(), this::awakeningPredicate);
 	public static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BYTE);
 	public static final DataParameter<Boolean> MUNCHING = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	public static final DataParameter<Integer> DAMAGE_MUNCH = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
@@ -156,6 +156,15 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 	public void setMunching(boolean munching) {
 		this.entityData.set(MUNCHING, munching);
 	}
+	
+	private <E extends IAnimatable> PlayState awakeningPredicate(AnimationEvent<E> event) {
+		if (getAttackID() == FLAP_ATTACK && isAlive()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.awaken", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
+			event.getController().setAnimationSpeed(1);
+			return PlayState.CONTINUE;
+		}
+		return PlayState.CONTINUE;
+	}
 
 	@Override
 	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -167,6 +176,12 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		
 		if (getDocile()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.sleep", ILoopType.EDefaultLoopTypes.LOOP));
+			event.getController().setAnimationSpeed(1);
+			return PlayState.CONTINUE;
+		}
+		
+		if (getAttackID() == FLAP_ATTACK && isAlive()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.awaken", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			event.getController().setAnimationSpeed(1);
 			return PlayState.CONTINUE;
 		}
@@ -186,12 +201,6 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		if (getAttackID() == MUNCH_ATTACK && isAlive()) {
 			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.attack_animation_munch", ILoopType.EDefaultLoopTypes.LOOP));
 			event.getController().setAnimationSpeed(1.8D);
-			return PlayState.CONTINUE;
-		}
-		
-		if (getAttackID() == FLAP_ATTACK && isAlive()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hercules_beetle.awaken", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
-			event.getController().setAnimationSpeed(1);
 			return PlayState.CONTINUE;
 		}
 		
@@ -268,20 +277,12 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(controller);
-//		data.addAnimationController(deathController);
+//		data.addAnimationController(awakeningController);
 	}
 	
 	private void handleNavAndMovementControllers(boolean flying) {
-		final FlyingMovementController controller = new FlyingMovementController(this, 20, true);
-        final FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, level) {
-            @SuppressWarnings({ "deprecation", "unused" })
-			public boolean canEntityStandOnPos(BlockPos pos) {
-                return !this.level.getBlockState(pos.below()).isAir();
-            }
-        };
-        flyingpathnavigator.setCanOpenDoors(false);
-        flyingpathnavigator.setCanFloat(false);
-        flyingpathnavigator.setCanPassDoors(false);
+		final CAGeneralFlightController controller = new CAGeneralFlightController(this, 1.1D, true, true, true);
+        final DirectUninterruptableGroundPathNavigator flyingpathnavigator = new DirectUninterruptableGroundPathNavigator(this, level);
         final CAGroundMovementController controllerG = new CAGroundMovementController(this, 90);
         final CAGroundWaterNVPathNavigator nvpathnav = new CAGroundWaterNVPathNavigator(this, level);
 		if (flying) {
@@ -1152,7 +1153,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		
 		private boolean doAreaCheck() {
 			AxisAlignedBB axisalignedbb = getBoundingBox().inflate(xSizeCheck, ySizeCheck, zSizeCheck);
-			for(BlockPos checkPos : BlockPos.betweenClosed(MathHelper.floor(axisalignedbb.minX), MathHelper.floor(axisalignedbb.minY + 7), MathHelper.floor(axisalignedbb.minZ), MathHelper.floor(axisalignedbb.maxX), MathHelper.floor(axisalignedbb.maxY), MathHelper.floor(axisalignedbb.maxZ))) {
+			for(BlockPos checkPos : BlockPos.betweenClosed(MathHelper.floor(axisalignedbb.minX), MathHelper.floor(axisalignedbb.minY + 2), MathHelper.floor(axisalignedbb.minZ), MathHelper.floor(axisalignedbb.maxX + 8), MathHelper.floor(axisalignedbb.maxY), MathHelper.floor(axisalignedbb.maxZ))) {
 				if (level.getBlockState(checkPos).isSolidRender(level, checkPos)) return false;
 			}
 			return true;
@@ -1212,7 +1213,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 						
 			if (launchPredicate.apply(animationProgress, launchAnimLength)) {
 	//			getNavigation().stop();			
-				setDeltaMovement(0, getDeltaMovement().y + 0.13, 0);
+				setDeltaMovement(0, getDeltaMovement().y + 0.08, 0);
 			}
 			
 			if (this.leapPredicate.apply(animationProgress, launchAnimLength)) {
@@ -1240,7 +1241,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		
 		public HerculesBeetleHoverAboveTargetGoal(HerculesBeetleEntity beetle) {
 			this.entity = beetle;
-			hoverAnimLength = IUtilityHelper.randomBetween(300, 600);
+			hoverAnimLength = IUtilityHelper.randomBetween(100, 200);
 			this.attackEndPredicate = (progress, length) -> ++progress >= hoverAnimLength;
 		}
 
@@ -1255,25 +1256,34 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		}
 		
 		private void ensurePathNotNull() {
-	//		Path path = getNavigation().getPath();
-	////		if (path == null) path = getNavigation().createPath(getTarget(), 0);
+			Path path = getNavigation().getPath();
+			if (getNavigation().isDone() && getTarget() != null) path = getNavigation().createPath(getTarget(), 1);
 	//		if (!path.canReach() || getNavigation().isStuck()) getNavigation().recomputePath();
-	//		getMoveControl().setWantedPosition(getTarget().getX(), getTarget().getY(), getTarget().getZ(), 1.5D);
-	//		getNavigation().moveTo(path, 1.5D);
+			getMoveControl().setWantedPosition(getTarget().getX(), getTarget().getY(), getTarget().getZ(), 1.5D);
+			getNavigation().moveTo(path, 1.5D);
+			lookAt(getTarget(), 100, 100);
 			
-	/*		ChaosAwakens.debug("CANREACH", "[Can Reach TargetPos]: " + path.canReach());
-			ChaosAwakens.debug("ISSTUCK", "[Is Stuck]: " + getNavigation().isStuck());
-			ChaosAwakens.debug("ISDONE", "[Is Done]: " + path.isDone());
-			
-			ChaosAwakens.debug("CURNODEPOS", "[Next Node Pos]: " + path.getNextNode().asBlockPos());
-			ChaosAwakens.debug("TARGETNODEPOS", "[Target Node Pos]: " + path.getEndNode().asBlockPos());*/
+			if (path != null) {
+				ChaosAwakens.debug("CANREACH", "[Can Reach TargetPos]: " + path.canReach());
+				ChaosAwakens.debug("ISSTUCK", "[Is Stuck]: " + getNavigation().isStuck());
+				ChaosAwakens.debug("ISDONE", "[Is Done]: " + path.isDone());
+				
+				ChaosAwakens.debug("CURNODEPOS", "[Next Node Pos]: " + path.getNextNode().asBlockPos());
+				ChaosAwakens.debug("TARGETNODEPOS", "[Target Node Pos]: " + path.getEndNode().asBlockPos());
+				ChaosAwakens.debug("CURTARGET", "[Current Target]: " + getTarget());
+			}
 		}
+		
+	//	@Nullable
+	//	private Vector3d getValidPos() {
+			
+	//	}
 		
 		@Override
 		public void start() {
 			setAttackID(HOVER_ATTACK);
 			setNoGravity(true);
-	//		handleNavAndMovementControllers(true);
+			handleNavAndMovementControllers(true);
 			shouldSwitchToRandomHovering = false;
 			shouldEnforcePathNullityCheck = true;
 			this.animationProgress = 0;
@@ -1283,7 +1293,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 		public void stop() {
 			setAttackID(DESCEND_ATTACK);
 			getNavigation().stop();
-		//	handleNavAndMovementControllers(false);
+			handleNavAndMovementControllers(false);
 			setNoGravity(false);
 			shouldSwitchToRandomHovering = false;
 			shouldEnforcePathNullityCheck = true;
@@ -1299,16 +1309,19 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity implements IEn
 			if (target == null) shouldSwitchToRandomHovering = true;			
 			if (target != null) {
 				if (!attackEndPredicate.apply(animationProgress, hoverAnimLength)) {
-					if (shouldEnforcePathNullityCheck) ensurePathNotNull();
+					ensurePathNotNull();
 					
-					if (IUtilityHelper.getVerticalDistanceBetweenEntities(entity, target) <= 8.0F) setDeltaMovement(getDeltaMovement().x, 0.09D, getDeltaMovement().z);
+					if (IUtilityHelper.getVerticalDistanceBetweenEntities(entity, target) <= 8.0F) setDeltaMovement(getDeltaMovement().x, MathHelper.clamp(target.getY() - getY(), -0.09D, 0.09D), getDeltaMovement().z);
 			//		double dx = target.getX() - getX();
 			//		double dz = target.getZ() - getZ();
 					
 			//		setDeltaMovement(getDeltaMovement().x, getDeltaMovement().y, getDeltaMovement().z);
 			//		setDeltaMovement(getDeltaMovement().x, 0, getDeltaMovement().z);
 					
-		//			lookAt(target, 100, 100);
+			//		getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 2.1D);
+			//		getNavigation().moveTo(getMoveControl().getWantedX(), getMoveControl().getWantedY(), getMoveControl().getWantedZ(), 1);
+					
+			//		lookAt(target, 100, 100);
 		//			getLookControl().setLookAt(target, 100, 100);
 					
 		/*			if (IUtilityHelper.getHorizontalDistanceBetweenEntities(entity, target) <= 1.5D) {

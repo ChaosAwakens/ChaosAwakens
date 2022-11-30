@@ -89,6 +89,7 @@ public class ChaosAwakens {
 	public ChaosAwakens() {
 		GeckoLibMod.DISABLE_IN_DEV = true;
 		GeckoLib.initialize();
+//		GeckoLibNetwork.initialize();
 		INSTANCE = this;
 
 		Optional<? extends ModContainer> opt = ModList.get().getModContainerById(MODID);
