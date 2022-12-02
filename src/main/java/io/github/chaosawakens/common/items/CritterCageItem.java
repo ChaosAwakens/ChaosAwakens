@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CritterCageItem extends Item implements IUtilityHelper {
+public class CritterCageItem extends Item {
 	public CritterCageItem(Properties properties) {
 		super(properties);
 	}

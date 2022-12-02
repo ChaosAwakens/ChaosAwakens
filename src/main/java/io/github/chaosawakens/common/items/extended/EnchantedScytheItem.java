@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
 
-public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable, IUtilityHelper {
+public class EnchantedScytheItem extends ScytheItem implements IAutoEnchantable {
 	public static final UUID REACH_MODIFIER = UUID.fromString("080192A2-EC5F-11EC-8EA0-0242AC120002");
 	public static final UUID KB_MODIFIER = UUID.fromString("0DE109C8-EC5F-11EC-8EA0-0242AC120002");
 	public static int attackDamage;

@@ -17,6 +17,7 @@ public class CAStats {
 	public static final ResourceLocation INTERACT_WITH_CRYSTAL_CRAFTING_TABLE = registerCustom("interact_with_crystal_crafting_table");
 	public static final ResourceLocation INTERACT_WITH_CRYSTAL_FURNACE = registerCustom("interact_with_crystal_furnace");
 	public static final ResourceLocation INTERACT_WITH_DEFOSSILIZER = registerCustom("interact_with_defossilizer");
+	public static final ResourceLocation INTERACT_WITH_ROBO_CRATE = registerCustom("interact_with_robo_crate");
 
 	private static ResourceLocation registerCustom(String key) {
 		ResourceLocation resourcelocation = new ResourceLocation(ChaosAwakens.MODID, key);

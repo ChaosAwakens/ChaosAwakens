@@ -73,7 +73,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class BirdEntity extends TameableEntity implements IAnimatableEntity, IAnimationTickable, IFlyingAnimal, IUtilityHelper {
+public class BirdEntity extends TameableEntity implements IAnimatableEntity, IAnimationTickable, IFlyingAnimal {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final AnimationController<?> controller = new AnimationController<>(this, "birdcontroller", animationInterval(), this::predicate);
 	private static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);

@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
+import io.github.chaosawakens.common.blocks.tileentities.RoboCrateBlock;
 import org.apache.commons.lang3.tuple.Pair;
 
 import io.github.chaosawakens.ChaosAwakens;
@@ -166,6 +167,8 @@ public class CABlocks {
 	public static final RegistryObject<StairsBlock> DUPLICATION_STAIRS = registerBlock("duplication_stairs", () -> new StairsBlock(DUPLICATION_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.DUPLICATION_PLANKS.get())), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> DEAD_DUPLICATION_LOG = registerBlock("dead_duplication_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> DEAD_DUPLICATION_WOOD = registerBlock("dead_duplication_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_WOOD)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_DEAD_DUPLICATION_LOG = registerBlock("stripped_dead_duplication_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> STRIPPED_DEAD_DUPLICATION_WOOD = registerBlock("stripped_dead_duplication_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<CAStandingSignBlock> DUPLICATION_SIGN = registerBlock("duplication_sign", () -> new CAStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).noCollission().strength(1.0F).sound(SoundType.WOOD), DUPLICATION), null, false);
 	public static final RegistryObject<CAWallSignBlock> DUPLICATION_WALL_SIGN = registerBlock("duplication_wall_sign", () -> new CAWallSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(DUPLICATION_SIGN.get()), DUPLICATION), null, false);
 	public static final RegistryObject<TrapDoorBlock> DUPLICATION_TRAPDOOR = registerBlock("duplication_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn(CABlocks::never)), CAItemGroups.BLOCKS);
@@ -208,7 +211,7 @@ public class CABlocks {
 	public static final RegistryObject<CAWallSignBlock> PEACH_WALL_SIGN = registerBlock("peach_wall_sign", () -> new CAWallSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_WHITE).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(PEACH_SIGN.get()), PEACH), null, false);
 	public static final RegistryObject<TrapDoorBlock> PEACH_TRAPDOOR = registerBlock("peach_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_WHITE).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn(CABlocks::never)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<DoorBlock> PEACH_DOOR = registerBlock("peach_door", () -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).strength(3.0F).sound(SoundType.WOOD).noOcclusion()), CAItemGroups.BLOCKS);
-	
+
 	public static final RegistryObject<Block> SKYWOOD_PLANKS = registerBlock("skywood_planks", () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_BLUE).strength(2.0F, 3.0F).sound(SoundType.WOOD)), CAItemGroups.BLOCKS);
 	//	public static final RegistryObject<SaplingBlock> SKYWOOD_SAPLING = registerBlock("skywood_sapling", () -> new SaplingBlock(new FancyableTree(() -> ), AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> SKYWOOD_LOG = registerBlock("skywood_log", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)), CAItemGroups.BLOCKS);
@@ -227,7 +230,10 @@ public class CABlocks {
 	public static final RegistryObject<CAWallSignBlock> SKYWOOD_WALL_SIGN = registerBlock("skywood_wall_sign", () -> new CAWallSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_BLUE).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(SKYWOOD_SIGN.get()), SKYWOOD), null, false);
 	public static final RegistryObject<TrapDoorBlock> SKYWOOD_TRAPDOOR = registerBlock("skywood_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_BLUE).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn(CABlocks::never)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<DoorBlock> SKYWOOD_DOOR = registerBlock("skywood_door", () -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).strength(3.0F).sound(SoundType.WOOD).noOcclusion()), CAItemGroups.BLOCKS);
-	
+
+	public static final RegistryObject<Block> SKY_MOSS_BLOCK = registerBlock("sky_moss_block", () -> new Block(Block.Properties.of(Material.PLANT, MaterialColor.COLOR_BLUE).strength(0.1F).sound(CASoundType.SKY_MOSS)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<LeafCarpetBlock> SKY_MOSS_CARPET = registerBlock("sky_moss_carpet", () -> new LeafCarpetBlock(Block.Properties.of(Material.PLANT, MaterialColor.COLOR_BLUE).strength(0.1F).sound(CASoundType.SKY_MOSS_CARPET).noOcclusion().noCollission().isValidSpawn(CABlocks::always).isSuffocating(CABlocks::never).isViewBlocking(CABlocks::never)), CAItemGroups.BLOCKS);
+
 	public static final RegistryObject<LeafCarpetBlock> OAK_LEAF_CARPET = registerBlock("oak_leaf_carpet", () -> new LeafCarpetBlock(Block.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().noCollission().isValidSpawn(CABlocks::always).isSuffocating(CABlocks::never).isViewBlocking(CABlocks::never)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeafCarpetBlock> SPRUCE_LEAF_CARPET = registerBlock("spruce_leaf_carpet", () -> new LeafCarpetBlock(Block.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().noCollission().isValidSpawn(CABlocks::always).isSuffocating(CABlocks::never).isViewBlocking(CABlocks::never)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeafCarpetBlock> BIRCH_LEAF_CARPET = registerBlock("birch_leaf_carpet", () -> new LeafCarpetBlock(Block.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().noCollission().isValidSpawn(CABlocks::always).isSuffocating(CABlocks::never).isViewBlocking(CABlocks::never)), CAItemGroups.BLOCKS);
@@ -327,6 +333,13 @@ public class CABlocks {
 	public static final RegistryObject<WallBlock> ROBO_WALL_I = registerBlock("robo_wall_l", () -> new WallBlock(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> ROBO_WALL_X = registerBlock("robo_wall_x", () -> new WallBlock(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> ROBO_LAMP = registerBlock("robo_lamp", () -> new Block(Block.Properties.of(Material.BUILDABLE_GLASS).lightLevel((state) -> 20).strength(30.0F, 100.0F).sound(SoundType.GLASS)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> ROBO_BRICKS = registerBlock("robo_bricks", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> ROBO_BRICK_SLAB = registerBlock("robo_brick_slab", () -> new SlabBlock(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> ROBO_BRICK_STAIRS = registerBlock("robo_brick_stairs", () -> new StairsBlock(Blocks.OBSIDIAN.defaultBlockState(), Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WallBlock> ROBO_BRICK_WALL = registerBlock("robo_brick_wall", () -> new WallBlock(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> COMPACT_ROBO_BLOCK = registerBlock("compact_robo_block", () -> new RotatedPillarBlock(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<GateBlock> ROBO_GATE_BLOCK = registerBlock("robo_gate_block", () -> new GateBlock(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RoboCrateBlock> ROBO_CRATE = registerBlock("robo_crate", () -> new RoboCrateBlock(Block.Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 
 	// TERRACOTTA BRICKS
 	public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICKS = registerBlock("black_terracotta_bricks", () -> new Block(Block.Properties.copy(Blocks.BLACK_TERRACOTTA).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
@@ -467,10 +480,10 @@ public class CABlocks {
 	public static final RegistryObject<WallBlock> CRACKED_TERRACOTTA_BRICK_WALL = registerBlock("cracked_terracotta_brick_wall", () -> new WallBlock(Block.Properties.copy(Blocks.TERRACOTTA).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> CRACKED_WHITE_TERRACOTTA_BRICK_WALL = registerBlock("cracked_white_terracotta_brick_wall", () -> new WallBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> CRACKED_YELLOW_TERRACOTTA_BRICK_WALL = registerBlock("cracked_yellow_terracotta_brick_wall", () -> new WallBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
-	
+
 	//ROCK
 	//public static final RegistryObject<RockBlock> ROCK = registerBlock("rock", () -> new RockBlock(Block.Properties.copy(Blocks.STONE).instabreak()), CAItemGroups.BLOCKS);
-	
+
 	// PLANTS
 	public static final RegistryObject<TopTubeBlock> TUBE_WORM = registerBlock("tube_worm", () -> new TopTubeBlock(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.BONE_BLOCK).noCollission().instabreak()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<TubeBlock> TUBE_WORM_PLANT = registerBlock("tube_worm_plant", () -> new TubeBlock(AbstractBlock.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.BONE_BLOCK).noCollission().instabreak().lootFrom(CABlocks.TUBE_WORM)), null, false);
@@ -481,8 +494,13 @@ public class CABlocks {
 	public static final RegistryObject<StrawberryBushBlock> STRAWBERRY_BUSH = registerBlock("strawberry_bush", () -> new StrawberryBushBlock(CAItems.STRAWBERRY_SEEDS, CAItems.STRAWBERRY, Block.Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks()), CAItemGroups.FOOD, false);
 	public static final RegistryObject<CACropsBlock> LETTUCE = registerBlock("lettuce", () -> new CACropsBlock(CAItems.LETTUCE_SEEDS, AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)), CAItemGroups.FOOD, false);
 	public static final RegistryObject<CACropsBlock> RADISH = registerBlock("radish", () -> new CACropsBlock(CAItems.RADISH_SEEDS, AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)), CAItemGroups.FOOD, false);
-	
-	
+
+	// FLOWER BLOCKS
+	public static final RegistryObject<RotatedPillarBlock> FLOWER_STEM = registerBlock("flower_stem", () -> new RotatedPillarBlock(Block.Properties.of(CAMaterial.FLOWER_BLOCK).harvestTool(ToolType.AXE).harvestTool(ToolType.HOE).strength(0.3F).sound(SoundType.GRASS).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> NAVY_BLUE_PETAL_BLOCK = registerBlock("navy_blue_petal_block", () -> new Block(Block.Properties.of(CAMaterial.FLOWER_BLOCK, MaterialColor.TERRACOTTA_BLUE).harvestTool(ToolType.AXE).harvestTool(ToolType.HOE).strength(0.2F).sound(SoundType.GRASS).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> BLOOD_RED_PETAL_BLOCK = registerBlock("blood_red_petal_block", () -> new Block(Block.Properties.of(CAMaterial.FLOWER_BLOCK, MaterialColor.TERRACOTTA_RED).harvestTool(ToolType.AXE).harvestTool(ToolType.HOE).strength(0.2F).sound(SoundType.GRASS).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> BRIGHT_PINK_PETAL_BLOCK = registerBlock("bright_pink_petal_block", () -> new Block(Block.Properties.of(CAMaterial.FLOWER_BLOCK, MaterialColor.TERRACOTTA_MAGENTA).harvestTool(ToolType.AXE).harvestTool(ToolType.HOE).strength(0.2F).sound(SoundType.GRASS).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+
 	// FLOWERS
 	public static final RegistryObject<FlowerBlock> CYAN_ROSE = registerBlock("cyan_rose", () -> new FlowerBlock(Effects.MOVEMENT_SPEED, 7, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<FlowerBlock> RED_ROSE = registerBlock("red_rose", () -> new FlowerBlock(Effects.MOVEMENT_SLOWDOWN, 14, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);

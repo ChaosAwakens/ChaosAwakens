@@ -5,6 +5,8 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.blocks.CAFallingOreBlock;
+import io.github.chaosawakens.common.blocks.CAOreBlock;
 import io.github.chaosawakens.common.blocks.GateBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
@@ -60,7 +62,15 @@ public class CABlockModelProvider extends BlockModelProvider {
 			} else if (block instanceof TrapDoorBlock) {
 				this.trapDoor(name);
 			} else if (block instanceof GateBlock) {
-				this.gateBlock(name, chaosRL("gate_block_top"));
+				this.gateBlock(name, name.contains("robo_") ? chaosRL("robo_gate_block_top") : chaosRL("gate_block_top"));
+			} else if (block instanceof CAOreBlock || block instanceof CAFallingOreBlock) {
+				if (name.contains("crystal_energy")) {
+					this.cross(name, chaosRL(name));
+				} else if (name.contains("sandstone")) {
+					this.cubeBottomTop(name, chaosRL(name), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
+				} else {
+					this.cubeAll(name, chaosRL(name));
+				}
 			}
 		}
 
@@ -78,33 +88,33 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("purple_bulb", chaosRL("purple_bulb"));
 
 		this.cubeAll("aluminum_block", chaosRL("aluminum_block"));
-		this.cubeAll("aluminum_ore", chaosRL("aluminum_ore"));
+//		this.cubeAll("aluminum_ore", chaosRL("aluminum_ore"));
 		this.cubeAll("amethyst_block", chaosRL("amethyst_block"));
-		this.cubeAll("amethyst_ore", chaosRL("amethyst_ore"));
+//		this.cubeAll("amethyst_ore", chaosRL("amethyst_ore"));
 		this.cubeAll("bloodstone_block", chaosRL("bloodstone_block"));
-		this.cubeAll("bloodstone_ore", chaosRL("bloodstone_ore"));
+//		this.cubeAll("bloodstone_ore", chaosRL("bloodstone_ore"));
 		this.cubeAll("copper_block", chaosRL("copper_block"));
-		this.cubeAll("copper_ore", chaosRL("copper_ore"));
+//		this.cubeAll("copper_ore", chaosRL("copper_ore"));
 		this.cubeAll("platinum_block", chaosRL("platinum_block"));
-		this.cubeAll("platinum_ore", chaosRL("platinum_ore"));
+//		this.cubeAll("platinum_ore", chaosRL("platinum_ore"));
 		this.cubeAll("ruby_block", chaosRL("ruby_block"));
-		this.cubeAll("ruby_ore", chaosRL("ruby_ore"));
-		this.cubeAll("netherrack_ruby_ore", chaosRL("netherrack_ruby_ore"));
-		this.cubeAll("blackstone_ruby_ore", chaosRL("blackstone_ruby_ore"));
+//		this.cubeAll("ruby_ore", chaosRL("ruby_ore"));
+//		this.cubeAll("netherrack_ruby_ore", chaosRL("netherrack_ruby_ore"));
+//		this.cubeAll("blackstone_ruby_ore", chaosRL("blackstone_ruby_ore"));
 		this.cubeAll("salt_block", chaosRL("salt_block"));
-		this.cubeAll("salt_ore", chaosRL("salt_ore"));
+//		this.cubeAll("salt_ore", chaosRL("salt_ore"));
 		this.cubeAll("silver_block", chaosRL("silver_block"));
-		this.cubeAll("silver_ore", chaosRL("silver_ore"));
+//		this.cubeAll("silver_ore", chaosRL("silver_ore"));
 		this.cubeAll("sunstone_block", chaosRL("sunstone_block"));
-		this.cubeAll("sunstone_ore", chaosRL("sunstone_ore"));
+//		this.cubeAll("sunstone_ore", chaosRL("sunstone_ore"));
 		this.cubeAll("tigers_eye_block", chaosRL("tigers_eye_block"));
-		this.cubeAll("tigers_eye_ore", chaosRL("tigers_eye_ore"));
+//		this.cubeAll("tigers_eye_ore", chaosRL("tigers_eye_ore"));
 		this.cubeAll("tin_block", chaosRL("tin_block"));
-		this.cubeAll("tin_ore", chaosRL("tin_ore"));
+//		this.cubeAll("tin_ore", chaosRL("tin_ore"));
 		this.cubeAll("titanium_block", chaosRL("titanium_block"));
-		this.cubeAll("titanium_ore", chaosRL("titanium_ore"));
+//		this.cubeAll("titanium_ore", chaosRL("titanium_ore"));
 		this.cubeAll("uranium_block", chaosRL("uranium_block"));
-		this.cubeAll("uranium_ore", chaosRL("uranium_ore"));
+//		this.cubeAll("uranium_ore", chaosRL("uranium_ore"));
 
 		this.cubeAll("budding_cats_eye", chaosRL("budding_cats_eye"));
 		this.cubeAll("cats_eye_block", chaosRL("cats_eye_block"));
@@ -324,6 +334,18 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.wallSide("robo_wall_x", chaosRL("robo_block_x"));
 		this.wallSideTall("robo_wall_x", chaosRL("robo_block_x"));
 		this.cubeAll("robo_lamp", chaosRL("robo_lamp"));
+		this.cubeAll("robo_bricks", chaosRL("robo_bricks"));
+		this.slab("robo_brick_slab", chaosRL("robo_bricks"), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
+		this.slabTop("robo_brick_slab", chaosRL("robo_bricks"), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
+		this.stairs("robo_brick_stairs", chaosRL("robo_bricks"), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
+		this.stairsInner("robo_brick_stairs", chaosRL("robo_bricks"), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
+		this.stairsOuter("robo_brick_stairs", chaosRL("robo_bricks"), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
+		this.wallPost("robo_brick_wall", chaosRL("robo_bricks"));
+		this.wallInventory("robo_brick_wall_inventory", chaosRL("robo_bricks"));
+		this.wallSide("robo_brick_wall", chaosRL("robo_bricks"));
+		this.wallSideTall("robo_brick_wall", chaosRL("robo_bricks"));
+		this.cubeColumn("compact_robo_block", chaosRL("compact_robo_block"), chaosRL("compact_robo_block_top"));
+		this.cubeColumnHorizontal("compact_robo_block", chaosRL("compact_robo_block"), chaosRL("compact_robo_block_top"));
 
 		this.cubeAll("black_terracotta_bricks", chaosRL("black_terracotta_bricks"));
 		this.cubeAll("blue_terracotta_bricks", chaosRL("blue_terracotta_bricks"));
@@ -667,106 +689,11 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.wallSide("cracked_yellow_terracotta_brick_wall", chaosRL("cracked_yellow_terracotta_bricks"));
 		this.wallSideTall("cracked_yellow_terracotta_brick_wall", chaosRL("cracked_yellow_terracotta_bricks"));
 
-		this.cubeAll("fossilised_acacia_ent", chaosRL("fossilised_acacia_ent"));
-		this.cubeAll("fossilised_birch_ent", chaosRL("fossilised_birch_ent"));
-		this.cubeAll("fossilised_dark_oak_ent", chaosRL("fossilised_dark_oak_ent"));
-		this.cubeAll("fossilised_jungle_ent", chaosRL("fossilised_jungle_ent"));
-		this.cubeAll("fossilised_oak_ent", chaosRL("fossilised_oak_ent"));
-		this.cubeAll("fossilised_spruce_ent", chaosRL("fossilised_spruce_ent"));
-		this.cubeAll("fossilised_hercules_beetle", chaosRL("fossilised_hercules_beetle"));
-		this.cubeAll("fossilised_beaver", chaosRL("fossilised_beaver"));
-		this.cubeAll("fossilised_ruby_bug", chaosRL("fossilised_ruby_bug"));
-		this.cubeAll("fossilised_emerald_gator", chaosRL("fossilised_emerald_gator"));
-		this.cubeAll("fossilised_green_fish", chaosRL("fossilised_green_fish"));
-		this.cubeAll("fossilised_rock_fish", chaosRL("fossilised_rock_fish"));
-		this.cubeAll("fossilised_spark_fish", chaosRL("fossilised_spark_fish"));
-		this.cubeAll("fossilised_wood_fish", chaosRL("fossilised_wood_fish"));
-		this.cubeAll("fossilised_whale", chaosRL("fossilised_whale"));
-		this.cubeAll("fossilised_wtf", chaosRL("fossilised_wtf"));
-		this.cubeAll("fossilised_scorpion", chaosRL("fossilised_scorpion"));
-		this.cubeAll("fossilised_wasp", chaosRL("fossilised_wasp"));
-		this.cubeAll("fossilised_piraporu", chaosRL("fossilised_piraporu"));
-		this.cubeAll("fossilised_apple_cow", chaosRL("fossilised_apple_cow"));
-		this.cubeAll("fossilised_golden_apple_cow", chaosRL("fossilised_golden_apple_cow"));
-		this.cubeAll("fossilised_carrot_pig", chaosRL("fossilised_carrot_pig"));
-		this.cubeAll("fossilised_golden_carrot_pig", chaosRL("fossilised_golden_carrot_pig"));
-		this.cubeAll("fossilised_lettuce_chicken", chaosRL("fossilised_lettuce_chicken"));
-		this.cubeAll("fossilised_bird", chaosRL("fossilised_bird"));
-		this.cubeAll("fossilised_dimetrodon", chaosRL("fossilised_dimetrodon"));
-		this.cubeAll("fossilised_tree_frog", chaosRL("fossilised_tree_frog"));
-
-		this.cubeAll("fossilised_bat", chaosRL("fossilised_bat"));
-		this.cubeAll("fossilised_bee", chaosRL("fossilised_bee"));
-		this.cubeAll("fossilised_cave_spider", chaosRL("fossilised_cave_spider"));
-		this.cubeAll("fossilised_chicken", chaosRL("fossilised_chicken"));
-		this.cubeAll("fossilised_cod", chaosRL("fossilised_cod"));
-		this.cubeAll("fossilised_cow", chaosRL("fossilised_cow"));
-		this.cubeAll("fossilised_creeper", chaosRL("fossilised_creeper"));
-		this.cubeAll("fossilised_dolphin", chaosRL("fossilised_dolphin"));
-		this.cubeAll("fossilised_donkey", chaosRL("fossilised_donkey"));
-		this.cubeAll("fossilised_drowned", chaosRL("fossilised_drowned"));
-		this.cubeAll("fossilised_enderman", chaosRL("fossilised_enderman"));
-		this.cubeAll("fossilised_evoker", chaosRL("fossilised_evoker"));
-		this.cubeAll("fossilised_fox", chaosRL("fossilised_fox"));
-		this.cubeAll("fossilised_giant", chaosRL("fossilised_giant"));
-		this.cubeAll("fossilised_guardian", chaosRL("fossilised_guardian"));
-		this.cubeAll("fossilised_horse", chaosRL("fossilised_horse"));
-		this.cubeAll("fossilised_husk", chaosRL("fossilised_husk"));
-		this.cubeBottomTop("fossilised_husk_sandstone", chaosRL("fossilised_husk"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
-		this.cubeAll("fossilised_illusioner", chaosRL("fossilised_illusioner"));
-		this.cubeAll("fossilised_iron_golem", chaosRL("fossilised_iron_golem"));
-		this.cubeAll("fossilised_llama", chaosRL("fossilised_llama"));
-		this.cubeAll("fossilised_mooshroom", chaosRL("fossilised_mooshroom"));
-		this.cubeAll("fossilised_ocelot", chaosRL("fossilised_ocelot"));
-		this.cubeAll("fossilised_panda", chaosRL("fossilised_panda"));
-		this.cubeAll("fossilised_pig", chaosRL("fossilised_pig"));
-		this.cubeAll("fossilised_phantom", chaosRL("fossilised_phantom"));
-		this.cubeAll("fossilised_pillager", chaosRL("fossilised_pillager"));
-		this.cubeAll("frozen_polar_bear", chaosRL("frozen_polar_bear"));
-		this.cubeAll("fossilised_pufferfish", chaosRL("fossilised_pufferfish"));
-		this.cubeAll("fossilised_rabbit", chaosRL("fossilised_rabbit"));
-		this.cubeAll("fossilised_ravager", chaosRL("fossilised_ravager"));
-		this.cubeAll("fossilised_salmon", chaosRL("fossilised_salmon"));
-		this.cubeAll("fossilised_sheep", chaosRL("fossilised_sheep"));
-		this.cubeAll("fossilised_skeleton", chaosRL("fossilised_skeleton"));
-		this.cubeAll("fossilised_skeleton_horse", chaosRL("fossilised_skeleton_horse"));
-		this.cubeAll("fossilised_slime", chaosRL("fossilised_slime"));
-		this.cubeAll("frozen_snow_golem", chaosRL("frozen_snow_golem"));
-		this.cubeAll("fossilised_spider", chaosRL("fossilised_spider"));
-		this.cubeAll("fossilised_squid", chaosRL("fossilised_squid"));
-		this.cubeAll("frozen_stray", chaosRL("frozen_stray"));
-		this.cubeAll("fossilised_tropical_fish", chaosRL("fossilised_tropical_fish"));
-		this.cubeAll("fossilised_turtle", chaosRL("fossilised_turtle"));
-		this.cubeAll("fossilised_villager", chaosRL("fossilised_villager"));
-		this.cubeAll("fossilised_vindicator", chaosRL("fossilised_vindicator"));
-		this.cubeAll("fossilised_wandering_trader", chaosRL("fossilised_wandering_trader"));
-		this.cubeAll("fossilised_witch", chaosRL("fossilised_witch"));
-		this.cubeAll("fossilised_wolf", chaosRL("fossilised_wolf"));
-		this.cubeAll("fossilised_zombie", chaosRL("fossilised_zombie"));
-		this.cubeAll("fossilised_zombie_horse", chaosRL("fossilised_zombie_horse"));
-
-		this.cubeAll("fossilised_crimson_ent", chaosRL("fossilised_crimson_ent"));
-		this.cubeAll("fossilised_warped_ent", chaosRL("fossilised_warped_ent"));
-		this.cubeAll("fossilised_lava_eel", chaosRL("fossilised_lava_eel"));
-
-		this.cubeAll("fossilised_blaze", chaosRL("fossilised_blaze"));
-		this.cubeAll("fossilised_ghast", chaosRL("fossilised_ghast"));
-		this.cubeAll("fossilised_hoglin", chaosRL("fossilised_hoglin"));
-		this.cubeAll("fossilised_enderman_netherrack", chaosRL("fossilised_enderman_netherrack"));
-		this.cubeAll("fossilised_magma_cube_netherrack", chaosRL("fossilised_magma_cube_netherrack"));
-		this.cubeAll("fossilised_magma_cube_blackstone", chaosRL("fossilised_magma_cube_blackstone"));
-		this.cubeAll("fossilised_piglin", chaosRL("fossilised_piglin"));
-		this.cubeAll("fossilised_skeleton_soul_soil", chaosRL("fossilised_skeleton_soul_soil"));
-		this.cubeAll("fossilised_strider", chaosRL("fossilised_strider"));
-		this.cubeAll("fossilised_wither_skeleton", chaosRL("fossilised_wither_skeleton"));
-		this.cubeAll("fossilised_zombified_piglin", chaosRL("fossilised_zombified_piglin"));
-
-		this.cubeAll("fossilised_enderman_end_stone", chaosRL("fossilised_enderman_end_stone"));
-		this.cubeAll("fossilised_endermite", chaosRL("fossilised_endermite"));
-		this.cubeAll("fossilised_shulker", chaosRL("fossilised_shulker"));
-
-		this.cubeAll("crystalised_crystal_apple_cow", chaosRL("crystalised_crystal_apple_cow"));
-		this.cubeAll("crystalised_crystal_carrot_pig", chaosRL("crystalised_crystal_carrot_pig"));
+		this.cubeColumn("flower_stem", chaosRL("flower_stem"), chaosRL("flower_stem_top"));
+		this.cubeColumnHorizontal("flower_stem", chaosRL("flower_stem"), chaosRL("flower_stem_top"));
+		this.cubeAll("navy_blue_petal_block", chaosRL("navy_blue_petal_block"));
+		this.cubeAll("blood_red_petal_block", chaosRL("blood_red_petal_block"));
+		this.cubeAll("bright_pink_petal_block", chaosRL("bright_pink_petal_block"));
 
 		this.cubeAll("moth_scale_block", chaosRL("moth_scale_block"));
 		this.cubeAll("water_dragon_scale_block", chaosRL("water_dragon_scale_block"));
@@ -822,6 +749,10 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumnHorizontal("dead_duplication_log", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log_top"));
 		this.cubeColumn("dead_duplication_wood", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log"));
 		this.cubeColumnHorizontal("dead_duplication_wood", chaosRL("dead_duplication_log"), chaosRL("dead_duplication_log"));
+		this.cubeColumn("stripped_dead_duplication_log", chaosRL("stripped_dead_duplication_log"), chaosRL("stripped_dead_duplication_log_top"));
+		this.cubeColumnHorizontal("stripped_dead_duplication_log", chaosRL("stripped_dead_duplication_log"), chaosRL("stripped_dead_duplication_log_top"));
+		this.cubeColumn("stripped_dead_duplication_wood", chaosRL("stripped_dead_duplication_log"), chaosRL("stripped_dead_duplication_log"));
+		this.cubeColumnHorizontal("stripped_dead_duplication_wood", chaosRL("stripped_dead_duplication_log"), chaosRL("stripped_dead_duplication_log"));
 		this.cubeColumn("skywood_log", chaosRL("skywood_log"), chaosRL("skywood_log_top"));
 		this.cubeColumnHorizontal("skywood_log", chaosRL("skywood_log"), chaosRL("skywood_log_top"));
 		this.cubeColumn("skywood_wood", chaosRL("skywood_log"), chaosRL("skywood_log"));
@@ -872,6 +803,10 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("pink_crystal_sapling", chaosRL("pink_crystal_sapling"));
 		this.cross("blue_crystal_sapling", chaosRL("blue_crystal_sapling"));
 		this.cross("orange_crystal_sapling", chaosRL("orange_crystal_sapling"));
+
+		this.cubeAll("sky_moss_block", chaosRL("sky_moss"));
+		this.leafCarpet("sky_moss_carpet", chaosRL("sky_moss"));
+		this.leafCarpetInventory("sky_moss_carpet_inventory", chaosRL("sky_moss"));
 
 		this.leafCarpet("oak_leaf_carpet", mcRL("oak_leaves"));
 		this.leafCarpetInventory("oak_leaf_carpet_inventory", mcRL("oak_leaves"));

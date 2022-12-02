@@ -131,6 +131,8 @@ public class CAVanillaCompat {
 		registerStrippable(CABlocks.PEACH_WOOD.get(), CABlocks.STRIPPED_PEACH_WOOD.get());
 		registerStrippable(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get());
 		registerStrippable(CABlocks.DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DUPLICATION_WOOD.get());
+		registerStrippable(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DEAD_DUPLICATION_LOG.get());
+		registerStrippable(CABlocks.DEAD_DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DEAD_DUPLICATION_WOOD.get());
 		registerStrippable(CABlocks.SKYWOOD_LOG.get(), CABlocks.STRIPPED_SKYWOOD_LOG.get());
 		registerStrippable(CABlocks.SKYWOOD_WOOD.get(), CABlocks.STRIPPED_SKYWOOD_WOOD.get());
 		registerStrippable(CABlocks.GINKGO_LOG.get(), CABlocks.STRIPPED_GINKGO_LOG.get());
@@ -151,6 +153,8 @@ public class CAVanillaCompat {
 //        registerCompostable(0.3F, CABlocks.SKYWOOD_SAPLING.get());
 		registerCompostable(0.3F, CABlocks.SKYWOOD_LEAVES.get());
 		registerCompostable(0.2F, CABlocks.SKYWOOD_LEAF_CARPET.get());
+		registerCompostable(0.3F, CABlocks.SKY_MOSS_CARPET.get());
+		registerCompostable(0.65F, CABlocks.SKY_MOSS_BLOCK.get());
 //        registerCompostable(0.3F, CABlocks.GINKGO_SAPLING.get());
 		registerCompostable(0.3F, CABlocks.GINKGO_LEAVES.get());
 		registerCompostable(0.2F, CABlocks.GINKGO_LEAF_CARPET.get());

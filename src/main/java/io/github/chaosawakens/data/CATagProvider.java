@@ -44,7 +44,7 @@ public class CATagProvider extends BlockTagsProvider {
 		protected void addTags() {
 			this.tag(CATags.Blocks.APPLE_LOGS).add(CABlocks.APPLE_LOG.get(), CABlocks.STRIPPED_APPLE_LOG.get(), CABlocks.APPLE_WOOD.get(), CABlocks.STRIPPED_APPLE_WOOD.get());
 			this.tag(CATags.Blocks.CHERRY_LOGS).add(CABlocks.CHERRY_LOG.get(), CABlocks.STRIPPED_CHERRY_LOG.get(), CABlocks.CHERRY_WOOD.get(), CABlocks.STRIPPED_CHERRY_WOOD.get());
-			this.tag(CATags.Blocks.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DUPLICATION_WOOD.get(), CABlocks.DEAD_DUPLICATION_WOOD.get());
+			this.tag(CATags.Blocks.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get(), CABlocks.STRIPPED_DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DEAD_DUPLICATION_LOG.get(), CABlocks.DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DUPLICATION_WOOD.get(), CABlocks.DEAD_DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DEAD_DUPLICATION_WOOD.get());
 			this.tag(CATags.Blocks.PEACH_LOGS).add(CABlocks.PEACH_LOG.get(), CABlocks.STRIPPED_PEACH_LOG.get(), CABlocks.PEACH_WOOD.get(), CABlocks.STRIPPED_PEACH_WOOD.get());
 			this.tag(CATags.Blocks.SKYWOOD_LOGS).add(CABlocks.SKYWOOD_LOG.get(), CABlocks.STRIPPED_SKYWOOD_LOG.get(), CABlocks.SKYWOOD_WOOD.get(), CABlocks.STRIPPED_SKYWOOD_WOOD.get());
 			this.tag(CATags.Blocks.GINKGO_LOGS).add(CABlocks.GINKGO_LOG.get(), CABlocks.STRIPPED_GINKGO_LOG.get(), CABlocks.GINKGO_WOOD.get(), CABlocks.STRIPPED_GINKGO_WOOD.get());
@@ -109,7 +109,7 @@ public class CATagProvider extends BlockTagsProvider {
 		protected void addTags() {
 			this.tag(CATags.Items.APPLE_LOGS).add(CABlocks.APPLE_LOG.get().asItem(), CABlocks.STRIPPED_APPLE_LOG.get().asItem(), CABlocks.APPLE_WOOD.get().asItem(), CABlocks.STRIPPED_APPLE_WOOD.get().asItem());
 			this.tag(CATags.Items.CHERRY_LOGS).add(CABlocks.CHERRY_LOG.get().asItem(), CABlocks.STRIPPED_CHERRY_LOG.get().asItem(), CABlocks.CHERRY_WOOD.get().asItem(), CABlocks.STRIPPED_CHERRY_WOOD.get().asItem());
-			this.tag(CATags.Items.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get().asItem(), CABlocks.STRIPPED_DUPLICATION_LOG.get().asItem(), CABlocks.DEAD_DUPLICATION_LOG.get().asItem(), CABlocks.DUPLICATION_WOOD.get().asItem(), CABlocks.STRIPPED_DUPLICATION_WOOD.get().asItem(), CABlocks.DEAD_DUPLICATION_WOOD.get().asItem());
+			this.tag(CATags.Items.DUPLICATION_LOGS).add(CABlocks.DUPLICATION_LOG.get().asItem(), CABlocks.STRIPPED_DUPLICATION_LOG.get().asItem(), CABlocks.DEAD_DUPLICATION_LOG.get().asItem(), CABlocks.STRIPPED_DEAD_DUPLICATION_LOG.get().asItem(), CABlocks.DUPLICATION_WOOD.get().asItem(), CABlocks.STRIPPED_DUPLICATION_WOOD.get().asItem(), CABlocks.DEAD_DUPLICATION_WOOD.get().asItem(), CABlocks.STRIPPED_DEAD_DUPLICATION_WOOD.get().asItem());
 			this.tag(CATags.Items.PEACH_LOGS).add(CABlocks.PEACH_LOG.get().asItem(), CABlocks.STRIPPED_PEACH_LOG.get().asItem(), CABlocks.PEACH_WOOD.get().asItem(), CABlocks.STRIPPED_PEACH_WOOD.get().asItem());
 			this.tag(CATags.Items.SKYWOOD_LOGS).add(CABlocks.SKYWOOD_LOG.get().asItem(), CABlocks.STRIPPED_SKYWOOD_LOG.get().asItem(), CABlocks.SKYWOOD_WOOD.get().asItem(), CABlocks.STRIPPED_SKYWOOD_WOOD.get().asItem());
 			this.tag(CATags.Items.GINKGO_LOGS).add(CABlocks.GINKGO_LOG.get().asItem(), CABlocks.STRIPPED_GINKGO_LOG.get().asItem(), CABlocks.GINKGO_WOOD.get().asItem(), CABlocks.STRIPPED_GINKGO_WOOD.get().asItem());

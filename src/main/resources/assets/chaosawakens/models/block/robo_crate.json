@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/cube_bottom_top",
+	"textures": {
+		"top": "chaosawakens:block/robo_crate_top",
+		"bottom": "chaosawakens:block/robo_crate",
+		"side": "chaosawakens:block/robo_crate"
+	}
+}

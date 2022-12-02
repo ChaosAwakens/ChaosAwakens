@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "side": "chaosawakens:block/robo_gate_block",
+    "top": "chaosawakens:block/robo_gate_block_top",
+    "bottom": "chaosawakens:block/robo_gate_block_top"
+  }
+}

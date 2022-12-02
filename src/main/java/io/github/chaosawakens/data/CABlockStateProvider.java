@@ -3,6 +3,8 @@ package io.github.chaosawakens.data;
 import java.util.Objects;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.blocks.CAFallingOreBlock;
+import io.github.chaosawakens.common.blocks.CAOreBlock;
 import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
 import io.github.chaosawakens.common.blocks.GateBlock;
 import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
@@ -27,6 +29,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings("all")
 public class CABlockStateProvider extends BlockStateProvider {
@@ -134,6 +137,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.wallBlock(CABlocks.ROBO_WALL_I.get(), chaosRL("robo_block_l"));
 		this.wallBlock(CABlocks.ROBO_WALL_X.get(), chaosRL("robo_block_x"));
 		this.simpleBlock(CABlocks.ROBO_LAMP.get());
+		this.simpleBlock(CABlocks.ROBO_BRICKS.get());
+		this.slabBlock(CABlocks.ROBO_BRICK_SLAB.get(), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
+		this.stairsBlock(CABlocks.ROBO_BRICK_STAIRS.get(), chaosRL("robo_bricks"));
+		this.wallBlock(CABlocks.ROBO_BRICK_WALL.get(), chaosRL("robo_bricks"));
+		this.logBlock(CABlocks.COMPACT_ROBO_BLOCK.get());
+		this.cubeBottomTopBlock(CABlocks.ROBO_GATE_BLOCK.get(), chaosRL("robo_gate_block"), chaosRL("robo_gate_block_top"));
 		
 	//	this.horizontalBlock(CABlocks.ROCK.get(), new ModelFile.ExistingModelFile(chaosRL("rock"), helper));
 		
@@ -275,106 +284,25 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.wallBlock(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_white_terracotta_bricks"));
 		this.wallBlock(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get(), chaosRL("cracked_yellow_terracotta_bricks"));
 
-		this.simpleBlock(CABlocks.FOSSILISED_ACACIA_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_BIRCH_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_DARK_OAK_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_JUNGLE_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_OAK_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SPRUCE_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_HERCULES_BEETLE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_BEAVER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_RUBY_BUG.get());
-		this.simpleBlock(CABlocks.FOSSILISED_EMERALD_GATOR.get());
-		this.simpleBlock(CABlocks.FOSSILISED_GREEN_FISH.get());
-		this.simpleBlock(CABlocks.FOSSILISED_ROCK_FISH.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SPARK_FISH.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WOOD_FISH.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WHALE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WTF.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SCORPION.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WASP.get());
-		this.simpleBlock(CABlocks.FOSSILISED_PIRAPORU.get());
-		this.simpleBlock(CABlocks.FOSSILISED_APPLE_COW.get());
-		this.simpleBlock(CABlocks.FOSSILISED_GOLDEN_APPLE_COW.get());
-		this.simpleBlock(CABlocks.FOSSILISED_CARROT_PIG.get());
-		this.simpleBlock(CABlocks.FOSSILISED_GOLDEN_CARROT_PIG.get());
-		this.simpleBlock(CABlocks.FOSSILISED_LETTUCE_CHICKEN.get());
-		this.simpleBlock(CABlocks.FOSSILISED_BIRD.get());
-		this.simpleBlock(CABlocks.FOSSILISED_DIMETRODON.get());
-		this.simpleBlock(CABlocks.FOSSILISED_TREE_FROG.get());
+		this.logBlock(CABlocks.FLOWER_STEM.get());
+		this.simpleBlock(CABlocks.NAVY_BLUE_PETAL_BLOCK.get());
+		this.simpleBlock(CABlocks.BLOOD_RED_PETAL_BLOCK.get());
+		this.simpleBlock(CABlocks.BRIGHT_PINK_PETAL_BLOCK.get());
 
-		this.simpleBlock(CABlocks.FOSSILISED_BAT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_BEE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_CAVE_SPIDER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_CHICKEN.get());
-		this.simpleBlock(CABlocks.FOSSILISED_COD.get());
-		this.simpleBlock(CABlocks.FOSSILISED_COW.get());
-		this.simpleBlock(CABlocks.FOSSILISED_CREEPER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_DOLPHIN.get());
-		this.simpleBlock(CABlocks.FOSSILISED_DONKEY.get());
-		this.simpleBlock(CABlocks.FOSSILISED_DROWNED.get());
-		this.simpleBlock(CABlocks.FOSSILISED_ENDERMAN.get());
-		this.simpleBlock(CABlocks.FOSSILISED_EVOKER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_FOX.get());
-		this.simpleBlock(CABlocks.FOSSILISED_GIANT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_GUARDIAN.get());
-		this.simpleBlock(CABlocks.FOSSILISED_HORSE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_HUSK.get());
-		this.cubeBottomTopBlock(CABlocks.FOSSILISED_HUSK_SANDSTONE.get(), chaosRL("fossilised_husk_sandstone"), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
-		this.simpleBlock(CABlocks.FOSSILISED_ILLUSIONER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_IRON_GOLEM.get());
-		this.simpleBlock(CABlocks.FOSSILISED_LLAMA.get());
-		this.simpleBlock(CABlocks.FOSSILISED_MOOSHROOM.get());
-		this.simpleBlock(CABlocks.FOSSILISED_OCELOT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_PANDA.get());
-		this.simpleBlock(CABlocks.FOSSILISED_PIG.get());
-		this.simpleBlock(CABlocks.FOSSILISED_PHANTOM.get());
-		this.simpleBlock(CABlocks.FOSSILISED_PILLAGER.get());
-		this.simpleBlock(CABlocks.FROZEN_POLAR_BEAR.get());
-		this.simpleBlock(CABlocks.FOSSILISED_PUFFERFISH.get());
-		this.simpleBlock(CABlocks.FOSSILISED_RABBIT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_RAVAGER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SALMON.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SHEEP.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SKELETON.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SKELETON_HORSE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SLIME.get());
-		this.simpleBlock(CABlocks.FROZEN_SNOW_GOLEM.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SPIDER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SQUID.get());
-		this.simpleBlock(CABlocks.FROZEN_STRAY.get());
-		this.simpleBlock(CABlocks.FOSSILISED_TROPICAL_FISH.get());
-		this.simpleBlock(CABlocks.FOSSILISED_TURTLE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_VILLAGER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_VINDICATOR.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WANDERING_TRADER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WOLF.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WITCH.get());
-		this.simpleBlock(CABlocks.FOSSILISED_ZOMBIE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_ZOMBIE_HORSE.get());
+		for (Block block : ForgeRegistries.BLOCKS) {
+			if (!ChaosAwakens.MODID.equals(Objects.requireNonNull(block.getRegistryName()).getNamespace())) continue;
 
-		this.simpleBlock(CABlocks.FOSSILISED_CRIMSON_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WARPED_ENT.get());
-		this.simpleBlock(CABlocks.FOSSILISED_LAVA_EEL.get());
+			String name = block.getRegistryName().getPath();
+			ChaosAwakens.LOGGER.debug(block.getRegistryName());
 
-		this.simpleBlock(CABlocks.FOSSILISED_BLAZE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_GHAST.get());
-		this.simpleBlock(CABlocks.FOSSILISED_HOGLIN.get());
-		this.simpleBlock(CABlocks.FOSSILISED_ENDERMAN_NETHERRACK.get());
-		this.simpleBlock(CABlocks.FOSSILISED_MAGMA_CUBE_NETHERRACK.get());
-		this.simpleBlock(CABlocks.FOSSILISED_MAGMA_CUBE_BLACKSTONE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_PIGLIN.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SKELETON_SOUL_SOIL.get());
-		this.simpleBlock(CABlocks.FOSSILISED_STRIDER.get());
-		this.simpleBlock(CABlocks.FOSSILISED_WITHER_SKELETON.get());
-		this.simpleBlock(CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.get());
-
-		this.simpleBlock(CABlocks.FOSSILISED_ENDERMAN_END_STONE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_ENDERMITE.get());
-		this.simpleBlock(CABlocks.FOSSILISED_SHULKER.get());
-
-		this.simpleBlock(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get());
-		this.simpleBlock(CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get());
+			if (block instanceof CAOreBlock || block instanceof CAFallingOreBlock) {
+				if (name.contains("sandstone")) {
+					this.cubeBottomTopBlock(block, chaosRL(name), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
+				} else {
+					this.simpleBlock(block);
+				}
+			}
+		}
 
 		this.simpleBlock(CABlocks.MOTH_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.WATER_DRAGON_SCALE_BLOCK.get());
@@ -386,11 +314,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.BASILISK_SCALE_BLOCK.get());
 		this.simpleBlock(CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get());
 
-		this.simpleBlock(CABlocks.RUBY_ORE.get());
-		this.simpleBlock(CABlocks.NETHERRACK_RUBY_ORE.get());
-		this.simpleBlock(CABlocks.BLACKSTONE_RUBY_ORE.get());
 		this.simpleBlock(CABlocks.SALT_BLOCK.get());
-		this.simpleBlock(CABlocks.SALT_ORE.get());
 
 		this.logBlock(CABlocks.APPLE_LOG.get());
 		this.woodBlock(CABlocks.APPLE_WOOD.get(), chaosRL("apple_log"));
@@ -408,6 +332,8 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.woodBlock(CABlocks.DUPLICATION_WOOD.get(), chaosRL("duplication_log"));
 		this.logBlock(CABlocks.DEAD_DUPLICATION_LOG.get());
 		this.woodBlock(CABlocks.DEAD_DUPLICATION_WOOD.get(), chaosRL("dead_duplication_log"));
+		this.logBlock(CABlocks.STRIPPED_DEAD_DUPLICATION_LOG.get());
+		this.woodBlock(CABlocks.STRIPPED_DEAD_DUPLICATION_WOOD.get(), chaosRL("stripped_dead_duplication_log"));
 		this.simpleBlock(CABlocks.DUPLICATION_PLANKS.get());
 		this.simpleBlock(CABlocks.DUPLICATION_LEAVES.get());
 		this.leafCarpetBlock(CABlocks.DUPLICATION_LEAF_CARPET.get(), chaosRL("duplication_leaves"));
@@ -490,6 +416,9 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.doorBlock(CABlocks.GINKGO_DOOR.get());
 		this.doorBlock(CABlocks.PEACH_DOOR.get());
 		this.doorBlock(CABlocks.SKYWOOD_DOOR.get());
+
+		this.simpleBlock(CABlocks.SKY_MOSS_BLOCK.get());
+		this.leafCarpetBlock(CABlocks.SKY_MOSS_CARPET.get(), mcRL("sky_moss"));
 
 		this.simpleBlock(CABlocks.MOLDY_PLANKS.get());
 		this.slabBlock(CABlocks.MOLDY_SLAB.get(), chaosRL("moldy_planks"), chaosRL("moldy_planks"));

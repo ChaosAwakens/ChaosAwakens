@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
 
-public class ScytheItem extends SwordItem implements IVanishable, IUtilityHelper {
+public class ScytheItem extends SwordItem implements IVanishable {
 	public static final UUID REACH_MODIFIER = UUID.fromString("467B83E8-53C8-4989-9684-A9CFF01E3626"); //467B83E8-53C8-4989-9684-A9CFF01E3626
 	public static final UUID KB_MODIFIER = UUID.fromString("125404C8-B689-40CE-861E-BF86069C844B");
 	public static int attackDamage;
