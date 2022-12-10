@@ -13,6 +13,7 @@ public class CABiomes {
 
 	public static RegistryObject<Biome> DENSE_MOUNTAIN = BIOMES.register("dense_mountain", BiomeMaker::theVoidBiome);
 	public static RegistryObject<Biome> STALAGMITE_VALLEY = BIOMES.register("stalagmite_valley", BiomeMaker::theVoidBiome);
+	public static RegistryObject<Biome> MESOZOIC_JUNGLE = BIOMES.register("mesozoic_jungle", BiomeMaker::theVoidBiome);
 	public static RegistryObject<Biome> VILLAGE_PLAINS = BIOMES.register("village_plains", BiomeMaker::theVoidBiome);
 	public static RegistryObject<Biome> VILLAGE_SAVANNA = BIOMES.register("village_savanna", BiomeMaker::theVoidBiome);
 	public static RegistryObject<Biome> VILLAGE_TAIGA = BIOMES.register("village_taiga", BiomeMaker::theVoidBiome);
@@ -26,6 +27,7 @@ public class CABiomes {
 		public static final BiomeDictionary.Type MINING_PARADISE = BiomeDictionary.Type.getType("MINING_PARADISE");
 		public static final BiomeDictionary.Type DENSE_MOUNTAIN = BiomeDictionary.Type.getType("DENSE_MOUNTAIN");
 		public static final BiomeDictionary.Type STALAGMITE_VALLEY = BiomeDictionary.Type.getType("STALAGMITE_VALLEY");
+		public static final BiomeDictionary.Type MESOZOIC_JUNGLE = BiomeDictionary.Type.getType("MESOZOIC_JUNGLE");
 
 		public static final BiomeDictionary.Type VILLAGE_MANIA = BiomeDictionary.Type.getType("VILLAGE_MANIA");
 		public static final BiomeDictionary.Type VILLAGE_PLAINS = BiomeDictionary.Type.getType("VILLAGE_PLAINS");

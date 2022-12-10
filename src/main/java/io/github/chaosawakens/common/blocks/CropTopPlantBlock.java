@@ -1,6 +1,12 @@
 package io.github.chaosawakens.common.blocks;
 
-import net.minecraft.block.*;
+import java.util.Random;
+
+import net.minecraft.block.AbstractTopPlantBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.IGrowable;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -13,16 +19,19 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.RegistryObject;
 
-import java.util.Random;
-
-public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements IGrowable {
+public class CropTopPlantBlock extends AbstractTopPlantBlock implements IGrowable {
 	public static final IntegerProperty GROWTH = IntegerProperty.create("growth", 0, 3);
 	private final double growPerTickProbability;
-
-	public CropTopPlantBlock(Properties properties, Direction direction, VoxelShape shape, double growPerTickProbability) {
+	private final int maxHeight;
+	private final RegistryObject<? extends Block> bodyBlock;
+	
+	public CropTopPlantBlock(Properties properties, Direction direction, VoxelShape shape, double growPerTickProbability, int maxHeight, RegistryObject<? extends Block> bodyBlock) {
 		super(properties, direction, shape, false, growPerTickProbability);
 		this.growPerTickProbability = growPerTickProbability;
+		this.maxHeight = maxHeight;
+		this.bodyBlock = bodyBlock;
 		this.registerDefaultState(this.stateDefinition.any().setValue(GROWTH, 0).setValue(AGE, 0));
 	}
 
@@ -118,8 +127,12 @@ public abstract class CropTopPlantBlock extends AbstractTopPlantBlock implements
 		return 0;
 	}
 
-	abstract protected int getMaxHeight();
+	protected int getMaxHeight() {
+		return this.maxHeight;
+	}
 
 	@Override
-	abstract protected Block getBodyBlock();
+	protected Block getBodyBlock() {
+		return this.bodyBlock.get();
+	}
 }

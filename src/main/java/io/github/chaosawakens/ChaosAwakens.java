@@ -108,6 +108,7 @@ public class ChaosAwakens {
 		CAVillagers.POI_TYPES.register(eventBus);
 		CAVillagers.PROFESSIONS.register(eventBus);
 		CAGlobalLootModifiers.LOOT_MODIFIERS.register(eventBus);
+		CAFoliagePlacerTypes.FOLIAGE_PLACER_TYPES.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 
 		// Register to the forge event bus

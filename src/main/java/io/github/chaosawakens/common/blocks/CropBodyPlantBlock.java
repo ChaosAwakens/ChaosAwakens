@@ -1,16 +1,24 @@
 package io.github.chaosawakens.common.blocks;
 
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBodyPlantBlock;
+import net.minecraft.block.AbstractTopPlantBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraftforge.fml.RegistryObject;
 
-public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
-	public CropBodyPlantBlock(Properties properties, Direction direction, VoxelShape shape, boolean p_i241179_4_) {
+public class CropBodyPlantBlock extends AbstractBodyPlantBlock {
+	private final RegistryObject<? extends AbstractTopPlantBlock> topBlock;
+	
+	public CropBodyPlantBlock(Properties properties, Direction direction, VoxelShape shape, boolean p_i241179_4_, RegistryObject<? extends AbstractTopPlantBlock> topBlock) {
 		super(properties, direction, shape, p_i241179_4_);
+		this.topBlock = topBlock;
 	}
 
 	public BlockState updateShape(BlockState state, Direction direction, BlockState state2, IWorld worldIn, BlockPos pos, BlockPos pos2) {
@@ -41,5 +49,7 @@ public abstract class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 	}
 
 	@Override
-	protected abstract AbstractTopPlantBlock getHeadBlock();
+	protected AbstractTopPlantBlock getHeadBlock() {
+		return this.topBlock.get();
+	}
 }

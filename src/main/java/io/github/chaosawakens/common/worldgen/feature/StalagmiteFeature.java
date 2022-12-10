@@ -28,11 +28,13 @@ public class StalagmiteFeature extends Feature<StalagmiteFeatureConfig> {
 		int radius = cfg.baseRadius + (rand.nextInt(variationFLoor*2 + 1) - variationFLoor);
 		if(radius == 0)radius++;
 		
-		pos = pos.below( pos.getY() - getLowestCorner(gen, pos, radius) + 1);
-		for(int j = 0; j < radius*radius*steepness; j++) {
+		float rrs = radius*radius*steepness;
+		
+		pos = pos.below(pos.getY() - getLowestCorner(gen, pos, radius) + 1);
+		for(int j = 0; j < rrs; j++) {
 			for(int i = -radius; i <= radius; i++) {
 				for(int k = -radius; k <= radius; k++) {
-					float pillarCeiling = (-i*i*steepness -k*k*steepness + radius*radius*steepness);
+					float pillarCeiling = (-i*i*steepness -k*k*steepness + rrs);
 					int smallerThanZeroFlag = i < 0 || k < 0 ? -1 : 0; 
 					if(pillarCeiling >= -1*smallerThanZeroFlag && pillarCeiling >= j)
 						reader.setBlock(pos.offset(i, j, k), cfg.block, 2);
