@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "chaosawakens:rhinestone_bricks"
+  },
+  "result": "chaosawakens:rhinestone_brick_slab",
+  "count": 2
+}

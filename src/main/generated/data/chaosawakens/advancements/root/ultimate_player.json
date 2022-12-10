@@ -1,0 +1,235 @@
+{
+  "parent": "chaosawakens:root/ultimate_meal",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:titanium_block"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.ultimate_player.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.ultimate_player.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "rewards": {
+    "experience": 180
+  },
+  "criteria": {
+    "road_to_ultimate": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/road_to_ultimate"
+        }
+      }
+    },
+    "trophy_worthy": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/trophy_worthy"
+        }
+      }
+    },
+    "ultimate_slayer": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_slayer"
+        }
+      }
+    },
+    "hate_to_break_it": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/hate_to_break_it"
+        }
+      }
+    },
+    "ultimate_miner": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_miner"
+        }
+      }
+    },
+    "mine_too_much": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/mine_too_much"
+        }
+      }
+    },
+    "ultimate_lumberjack": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_lumberjack"
+        }
+      }
+    },
+    "anti_lorax": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/anti_lorax"
+        }
+      }
+    },
+    "ultimate_digger": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_excavator"
+        }
+      }
+    },
+    "ground_breaking": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ground_breaking"
+        }
+      }
+    },
+    "ultimate_farmer": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_farmer"
+        }
+      }
+    },
+    "very_vegan": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/very_vegan"
+        }
+      }
+    },
+    "ultimate_archer": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_archer"
+        }
+      }
+    },
+    "apollo": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/apollo"
+        }
+      }
+    },
+    "ultimate_fisherman": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_fisherman"
+        }
+      }
+    },
+    "clean_the_sea": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/clean_the_sea"
+        }
+      }
+    },
+    "ultimate_armor": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_armor"
+        }
+      }
+    },
+    "broken_beyond": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/broken_beyond"
+        }
+      }
+    },
+    "ultimate_meal": {
+      "trigger": "chaosawakens:advancement_complete",
+      "conditions": {
+        "advancement_location": {
+          "advancement_id": "chaosawakens:root/ultimate_meal"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "road_to_ultimate"
+    ],
+    [
+      "trophy_worthy"
+    ],
+    [
+      "ultimate_slayer"
+    ],
+    [
+      "hate_to_break_it"
+    ],
+    [
+      "ultimate_miner"
+    ],
+    [
+      "mine_too_much"
+    ],
+    [
+      "ultimate_lumberjack"
+    ],
+    [
+      "anti_lorax"
+    ],
+    [
+      "ultimate_digger"
+    ],
+    [
+      "ground_breaking"
+    ],
+    [
+      "ultimate_farmer"
+    ],
+    [
+      "very_vegan"
+    ],
+    [
+      "ultimate_archer"
+    ],
+    [
+      "apollo"
+    ],
+    [
+      "ultimate_fisherman"
+    ],
+    [
+      "clean_the_sea"
+    ],
+    [
+      "ultimate_armor"
+    ],
+    [
+      "broken_beyond"
+    ],
+    [
+      "ultimate_meal"
+    ]
+  ]
+}

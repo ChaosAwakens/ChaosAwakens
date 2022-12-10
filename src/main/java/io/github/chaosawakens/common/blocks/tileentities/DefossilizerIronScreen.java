@@ -1,8 +1,8 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;

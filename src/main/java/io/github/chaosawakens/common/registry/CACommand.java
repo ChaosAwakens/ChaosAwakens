@@ -1,23 +1,28 @@
 package io.github.chaosawakens.common.registry;
 
-import com.mojang.brigadier.CommandDispatcher;
+import java.util.Objects;
 
+import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.*;
+import net.minecraft.util.text.ChatType;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextComponentUtils;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.util.text.event.HoverEvent;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Objects;
 
 public class CACommand {
 	private static final SimpleCommandExceptionType LOCATE_ERROR_FAILED = new SimpleCommandExceptionType(new TranslationTextComponent("commands.locate.failed"));
@@ -26,33 +31,66 @@ public class CACommand {
 		dispatcher.register(Commands.literal("chaosawakens")
 				.then(Commands.literal("website").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://chaosawakens.github.io")
-							.withStyle((style) -> style.withColor(TextFormatting.LIGHT_PURPLE).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaosawakens.github.io")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.LIGHT_PURPLE)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaosawakens.github.io")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
+					return 0;
+				})).then(Commands.literal("curseforge").executes((commandSource) -> {
+					ITextComponent itextcomponent = new StringTextComponent("https://www.curseforge.com/minecraft/mc-mods/chaos-awakens")
+							.withStyle((style) -> style
+									.withColor(TextFormatting.GOLD)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.curseforge.com/minecraft/mc-mods/chaos-awakenso")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
+					return 0;
+				})).then(Commands.literal("modrinth").executes((commandSource) -> {
+					ITextComponent itextcomponent = new StringTextComponent("https://modrinth.com/mod/chaos-awakens")
+							.withStyle((style) -> style
+									.withColor(TextFormatting.GREEN)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://modrinth.com/mod/chaos-awakens")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("discord").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://discord.com/invite/hnCKD4M87R")
-							.withStyle((style) -> style.withColor(TextFormatting.BLUE).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.com/invite/hnCKD4M87R")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.BLUE)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.com/invite/hnCKD4M87R")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("github").executes((commandSource) -> {
-					ITextComponent itextcomponent = new StringTextComponent("https://github.com/ChaosAwakens")
-							.withStyle((style) -> style.withColor(TextFormatting.DARK_PURPLE).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/ChaosAwakens/ChaosAwakens")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+					ITextComponent itextcomponent = new StringTextComponent("https://github.com/ChaosAwakens/ChaosAwakens")
+							.withStyle((style) -> style
+									.withColor(TextFormatting.DARK_PURPLE)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/ChaosAwakens/ChaosAwakens")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("wiki").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://chaos-awakens.fandom.com/wiki/Chaos_Awakens_Wiki")
-							.withStyle((style) -> style.withColor(TextFormatting.DARK_GRAY).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaos-awakens.fandom.com/wiki/Chaos_Awakens_Wiki")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.DARK_GRAY)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaos-awakens.fandom.com/wiki/Chaos_Awakens_Wiki")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("reddit").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://www.reddit.com/r/ChaosAwakens")
-							.withStyle((style) -> style.withColor(TextFormatting.RED).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.reddit.com/r/ChaosAwakens")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.RED)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.reddit.com/r/ChaosAwakens")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("version").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent(ChaosAwakens.MODNAME + " Version is: " + ChaosAwakens.VERSION)
-							.withStyle((style) -> style.withColor(TextFormatting.DARK_RED));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.DARK_RED));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})));
 
@@ -69,33 +107,66 @@ public class CACommand {
 		dispatcher.register(Commands.literal("ca")
 				.then(Commands.literal("website").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://chaosawakens.github.io")
-							.withStyle((style) -> style.withColor(TextFormatting.LIGHT_PURPLE).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaosawakens.github.io")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.LIGHT_PURPLE)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaosawakens.github.io")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
+					return 0;
+				})).then(Commands.literal("curseforge").executes((commandSource) -> {
+					ITextComponent itextcomponent = new StringTextComponent("https://www.curseforge.com/minecraft/mc-mods/chaos-awakens")
+							.withStyle((style) -> style
+									.withColor(TextFormatting.GOLD)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.curseforge.com/minecraft/mc-mods/chaos-awakenso")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
+					return 0;
+				})).then(Commands.literal("modrinth").executes((commandSource) -> {
+					ITextComponent itextcomponent = new StringTextComponent("https://modrinth.com/mod/chaos-awakens")
+							.withStyle((style) -> style
+									.withColor(TextFormatting.GREEN)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://modrinth.com/mod/chaos-awakens")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("discord").executes((commandSource) -> {
-					ITextComponent itextcomponent = new StringTextComponent("https://discord.com/invite/hnCKD4M87R")
-							.withStyle((style) -> style.withColor(TextFormatting.BLUE).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.com/invite/hnCKD4M87R")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+					ITextComponent itextcomponent = new StringTextComponent("https://discord.com/invite/TmVqnT5Zmj")
+							.withStyle((style) -> style
+									.withColor(TextFormatting.BLUE)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.com/invite/TmVqnT5Zmj")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("github").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://github.com/ChaosAwakens/ChaosAwakens")
-							.withStyle((style) -> style.withColor(TextFormatting.DARK_PURPLE).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/ChaosAwakens/ChaosAwakens")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.DARK_PURPLE)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/ChaosAwakens/ChaosAwakens")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("wiki").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://chaos-awakens.fandom.com/wiki/Chaos_Awakens_Wiki")
-							.withStyle((style) -> style.withColor(TextFormatting.DARK_GRAY).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaos-awakens.fandom.com/wiki/Chaos_Awakens_Wiki")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.DARK_GRAY)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaos-awakens.fandom.com/wiki/Chaos_Awakens_Wiki")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("reddit").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent("https://www.reddit.com/r/ChaosAwakens")
-							.withStyle((style) -> style.withColor(TextFormatting.RED).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.reddit.com/r/ChaosAwakens")));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.RED)
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.reddit.com/r/ChaosAwakens")));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})).then(Commands.literal("version").executes((commandSource) -> {
 					ITextComponent itextcomponent = new StringTextComponent(ChaosAwakens.MODNAME + " Version is: " + ChaosAwakens.VERSION)
-							.withStyle((style) -> style.withColor(TextFormatting.DARK_RED));
-					Objects.requireNonNull(commandSource.getSource().getEntity()).sendMessage(itextcomponent, Util.NIL_UUID);
+							.withStyle((style) -> style
+									.withColor(TextFormatting.DARK_RED));
+					commandSource.getSource().getServer().getPlayerList()
+							.broadcastMessage(itextcomponent, ChatType.SYSTEM, Util.NIL_UUID);
 					return 0;
 				})));
 

@@ -1,7 +1,15 @@
 package io.github.chaosawakens.common.blocks;
 
+import static io.github.chaosawakens.common.blocks.TopTubeBlock.SHAPE;
+
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractBodyPlantBlock;
+import net.minecraft.block.AbstractTopPlantBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ILiquidContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
@@ -19,10 +27,6 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-
-import static io.github.chaosawakens.common.blocks.TopTubeBlock.SHAPE;
 
 public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContainer {
 	public TubeBlock(AbstractBlock.Properties properties) {

@@ -1,0 +1,46 @@
+{
+  "parent": "chaosawakens:root/amethyst_armor",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:lava_eel_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.lava_eel_armor.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.lava_eel_armor.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "lava_eel_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:lava_eel_helmet"
+          },
+          {
+            "item": "chaosawakens:lava_eel_chestplate"
+          },
+          {
+            "item": "chaosawakens:lava_eel_leggings"
+          },
+          {
+            "item": "chaosawakens:lava_eel_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "lava_eel_armor"
+    ]
+  ]
+}

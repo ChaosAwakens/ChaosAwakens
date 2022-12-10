@@ -14,10 +14,12 @@ public class PoisonSwordItem extends EnchantedSwordItem {
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		target.addEffect(new EffectInstance(Effects.CONFUSION, (10 + target.getRandom().nextInt(10)) * 20, 0));
-		target.addEffect(new EffectInstance(Effects.POISON, (10 + target.getRandom().nextInt(10)) * 20, 0));
-		target.addEffect(new EffectInstance(Effects.WEAKNESS, (10 + target.getRandom().nextInt(10)) * 20, 0));
-		target.addEffect(new EffectInstance(Effects.WITHER, (10 + target.getRandom().nextInt(10)) * 20, 0));
+		if (target != null) {
+			target.addEffect(new EffectInstance(Effects.CONFUSION, (10 + target.getRandom().nextInt(10)) * 20, 0));
+			target.addEffect(new EffectInstance(Effects.POISON, (10 + target.getRandom().nextInt(10)) * 20, 0));
+			target.addEffect(new EffectInstance(Effects.WEAKNESS, (10 + target.getRandom().nextInt(10)) * 20, 0));
+			target.addEffect(new EffectInstance(Effects.WITHER, (10 + target.getRandom().nextInt(10)) * 20, 0));
+		}
 		return super.hurtEnemy(stack, target, attacker);
 	}
 }

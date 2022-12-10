@@ -5,10 +5,10 @@ import io.github.chaosawakens.common.entity.GazelleEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class GazelleEntityModel extends AnimatedGeoModel<GazelleEntity> {
+public class GazelleEntityModel extends AnimatedTickingGeoModel<GazelleEntity> {
 	@Override
 	public ResourceLocation getModelLocation(GazelleEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/gazelle.geo.json");

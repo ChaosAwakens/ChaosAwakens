@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "side": "chaosawakens:block/rhinestone_block",
+    "bottom": "chaosawakens:block/rhinestone_block",
+    "top": "chaosawakens:block/rhinestone_block"
+  }
+}

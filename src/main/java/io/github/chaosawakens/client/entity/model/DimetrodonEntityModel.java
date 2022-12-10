@@ -5,10 +5,10 @@ import io.github.chaosawakens.common.entity.DimetrodonEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class DimetrodonEntityModel extends AnimatedGeoModel<DimetrodonEntity> {
+public class DimetrodonEntityModel extends AnimatedTickingGeoModel<DimetrodonEntity> {
 
 	@Override
 	public ResourceLocation getModelLocation(DimetrodonEntity object) {
@@ -33,6 +33,7 @@ public class DimetrodonEntityModel extends AnimatedGeoModel<DimetrodonEntity> {
 		EntityModelData data = (EntityModelData) customPredicate.getExtraData().get(0);
 		IBone root = this.getAnimationProcessor().getBone("dimetrodon");
 		IBone head = this.getAnimationProcessor().getBone("head");
+				
 		if (data.isChild) {
 			root.setScaleX(0.5f);
 			root.setScaleY(0.5f);
@@ -44,9 +45,9 @@ public class DimetrodonEntityModel extends AnimatedGeoModel<DimetrodonEntity> {
 			root.setScaleZ(1.0f);
 		}
 		if (data.isChild) {
-			head.setScaleX(2f);
-			head.setScaleY(2f);
-			head.setScaleZ(2f);
+			head.setScaleX(1f);
+			head.setScaleY(1f);
+			head.setScaleZ(1f);
 			head.setPivotY(7.75f);
 		} else {
 			head.setScaleX(1.0f);

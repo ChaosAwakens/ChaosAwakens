@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/stairs",
+  "parent": "minecraft:block/outer_stairs",
   "textures": {
     "side": "chaosawakens:block/marble_block",
     "bottom": "chaosawakens:block/marble_block",

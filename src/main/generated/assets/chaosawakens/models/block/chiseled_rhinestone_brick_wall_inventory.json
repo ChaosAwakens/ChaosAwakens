@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "chaosawakens:block/chiseled_rhinestone_bricks"
+  }
+}

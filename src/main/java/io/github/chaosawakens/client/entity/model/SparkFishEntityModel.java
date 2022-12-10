@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.SparkFishEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class SparkFishEntityModel extends AnimatedGeoModel<SparkFishEntity> {
@@ -25,5 +26,11 @@ public class SparkFishEntityModel extends AnimatedGeoModel<SparkFishEntity> {
 	@Override
 	public void setLivingAnimations(SparkFishEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
+		
+		IBone root = this.getAnimationProcessor().getBone("root");
+		
+		if (!entity.isInWaterOrBubble()) {
+			root.setRotationZ(45);
+		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CASoundEvents;
@@ -48,7 +49,10 @@ import net.minecraft.util.TickRangeConverter;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.*;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -56,15 +60,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAngerable, IAnimatable {
+public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAngerable {
 	private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(20, 69);
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<IAnimatable>(this, "crystalgatorcontroller", animationInterval(), this::predicate);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
 	private UUID persistentAngerTarget;
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
@@ -85,21 +91,31 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 				.add(Attributes.FOLLOW_RANGE, 8);
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	@Override
+	public int animationInterval() {
+		return 1;
+	}
+	
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.bite_animation", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.bite_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			return PlayState.CONTINUE;
 		}
 		if (this.isSwimming() || this.isInWater() && event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.swim_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.swim_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.idle_animation", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.emerald_gator.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
+	}
+	
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
 	}
 
 	@Override
@@ -230,7 +246,10 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 
 	@Override
 	public CrystalGatorEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
-		return CAEntityTypes.CRYSTAL_GATOR.get().create(world);
+		CrystalGatorEntity e = (CrystalGatorEntity) mate;
+		CrystalGatorEntity e1 = CAEntityTypes.CRYSTAL_GATOR.get().create(world);
+		e1.setGatorType(e.getGatorType());
+		return e1;
 	}
 
 	@Override
@@ -250,5 +269,10 @@ public class CrystalGatorEntity extends AnimatableAnimalEntity implements IAnger
 			super(true);
 			this.gatorType = gatorType;
 		}
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
 	}
 }

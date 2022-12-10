@@ -1,6 +1,9 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.api.IAnimatableEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableCardinallyCapableMonsterEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -9,13 +12,15 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CaveFisherEntity extends AnimatableCardinallyCapableMonsterEntity implements IAnimatable {
+public class CaveFisherEntity extends AnimatableCardinallyCapableMonsterEntity implements IAnimatableEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "cavefishercontroller", animationInterval(), this::predicate);
 
 	public CaveFisherEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -29,34 +34,55 @@ public class CaveFisherEntity extends AnimatableCardinallyCapableMonsterEntity i
 				.add(Attributes.FOLLOW_RANGE, 30);
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	@Override
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.getMovingOnWall()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.climb_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.climb_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		}
 		if (this.getMovingOnCeiling()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_upsidedown_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.walking_upsidedown_animation", ILoopType.EDefaultLoopTypes.LOOP));
 		}
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.attack_animation", false));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.cave_fisher.attack_animation", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 		}
 		return PlayState.CONTINUE;
+	}
+	
+	@Override
+	public void manageAttack(LivingEntity target) {
+		
+	}
+	
+	@Override
+	public int animationInterval() {
+		return 0;
+	}
+	
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
 	}
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "cavefishercontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
 	public AnimationFactory getFactory() {
 		return factory;
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
 	}
 }

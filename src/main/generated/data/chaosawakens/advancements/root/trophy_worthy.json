@@ -1,5 +1,5 @@
 {
-  "parent": "chaosawakens:root/root",
+  "parent": "chaosawakens:root/road_to_ultimate",
   "display": {
     "icon": {
       "item": "chaosawakens:platinum_block"
@@ -15,6 +15,9 @@
     "announce_to_chat": true,
     "hidden": false,
     "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "rewards": {
+    "experience": 90
   },
   "criteria": {
     "platinum_block": {

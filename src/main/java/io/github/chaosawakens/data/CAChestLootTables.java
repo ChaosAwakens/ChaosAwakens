@@ -1,20 +1,23 @@
 package io.github.chaosawakens.data;
 
+import java.util.function.BiConsumer;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.loot.CATreasure;
-import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.data.loot.ChestLootTables;
 import net.minecraft.item.Items;
-import net.minecraft.loot.*;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.SetNBT;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
-
-import java.util.function.BiConsumer;
 
 public class CAChestLootTables extends ChestLootTables {
 	public String getName() {
@@ -706,31 +709,79 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.TIGERS_EYE.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 1)))
 										.when(RandomChance.randomChance(0.35F)).setWeight(50))));
-//		register.accept(CATreasure.village_cherry_house.lootTable,
-//				LootTable.lootTable()
-//						.withPool(LootPool.lootPool()
-//								// Common Loot
-//								.setRolls(RandomValueRange.between(3.0F, 8.0F))
-//								.add(ItemLootEntry.lootTableItem(CAItems.ALUMINUM_NUGGET.get()).setWeight(1)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))
-//								.add(ItemLootEntry.lootTableItem(CABlocks.CYAN_ROSE.get()).setWeight(2))
-//								.add(ItemLootEntry.lootTableItem(CABlocks.RED_ROSE.get()).setWeight(2))
-//								.add(ItemLootEntry.lootTableItem(CABlocks.PAEONIA.get()).setWeight(2))
-//								.add(ItemLootEntry.lootTableItem(CAItems.LETTUCE.get()).setWeight(10)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 7.0F))))
-//								.add(ItemLootEntry.lootTableItem(CAItems.STRAWBERRY.get()).setWeight(5)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 7.0F))))
-//								.add(ItemLootEntry.lootTableItem(CAItems.RADISH_SEEDS.get()).setWeight(5)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F))))
-//								.add(ItemLootEntry.lootTableItem(CAItems.RADISH.get()).setWeight(5)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))
-//								.add(ItemLootEntry.lootTableItem(CAItems.RADISH_STEW.get()).setWeight(1))
-//								.add(ItemLootEntry.lootTableItem(Items.EMERALD).setWeight(2)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F))))
-//								.add(ItemLootEntry.lootTableItem(CABlocks.CHERRY_SAPLING.get()).setWeight(5)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))
-//								.add(ItemLootEntry.lootTableItem(CAItems.CHERRY_SIGN.get()).setWeight(1))
-//								.add(ItemLootEntry.lootTableItem(CABlocks.CHERRY_LOG.get()).setWeight(10)
-//										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))));
+		register.accept(CATreasure.mining_wasp_dungeon_loot.lootTable,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								// Common Loot
+								.setRolls(ConstantRange.exactly(5))
+								.add(ItemLootEntry.lootTableItem(Items.HONEYCOMB)
+										.apply(SetCount.setCount(RandomValueRange.between(8, 14))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(Items.HONEYCOMB)
+										.apply(SetCount.setCount(RandomValueRange.between(8, 14))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(Items.HONEY_BOTTLE)
+										.apply(SetCount.setCount(RandomValueRange.between(3, 5))).setWeight(40))
+								.add(ItemLootEntry.lootTableItem(Items.GLASS_BOTTLE)
+										.apply(SetCount.setCount(RandomValueRange.between(3, 5))).setWeight(50))
+								.add(ItemLootEntry.lootTableItem(Items.GLASS_BOTTLE)
+										.apply(SetCount.setCount(RandomValueRange.between(3, 5))).setWeight(50)))
+						.withPool(LootPool.lootPool()
+								// Common Loot
+								.setRolls(ConstantRange.exactly(2))
+								.add(ItemLootEntry.lootTableItem(Items.HONEYCOMB_BLOCK)
+										.apply(SetCount.setCount(RandomValueRange.between(2, 6))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(Items.HONEYCOMB_BLOCK)
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(90))
+								.add(ItemLootEntry.lootTableItem(Items.HONEY_BLOCK)
+										.apply(SetCount.setCount(RandomValueRange.between(1, 4))).setWeight(35)))
+						.withPool(LootPool.lootPool()
+								// Common Loot
+								.setRolls(ConstantRange.exactly(2))
+								.add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET)
+										.apply(SetCount.setCount(RandomValueRange.between(7, 16))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET)
+										.apply(SetCount.setCount(RandomValueRange.between(7, 16))).setWeight(70))
+								.add(ItemLootEntry.lootTableItem(Items.GOLD_INGOT)
+										.apply(SetCount.setCount(RandomValueRange.between(1, 3))).setWeight(60)))
+						.withPool(LootPool.lootPool()
+								// Rare Loot
+								.setRolls(RandomValueRange.between(0, 1))
+								.add(ItemLootEntry.lootTableItem(Items.DIAMOND)
+										.apply(SetCount.setCount(RandomValueRange.between(0, 3)))
+										.when(RandomChance.randomChance(0.35F)).setWeight(110))
+								.add(ItemLootEntry.lootTableItem(Items.EMERALD)
+										.apply(SetCount.setCount(RandomValueRange.between(0, 3)))
+										.when(RandomChance.randomChance(0.35F)).setWeight(70))
+								.add(ItemLootEntry.lootTableItem(CAItems.AMETHYST.get())
+										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
+										.when(RandomChance.randomChance(0.35F)).setWeight(50))
+								.add(ItemLootEntry.lootTableItem(CAItems.TIGERS_EYE.get())
+										.apply(SetCount.setCount(RandomValueRange.between(0, 4)))
+										.when(RandomChance.randomChance(0.35F)).setWeight(50))));
+/*		register.accept(CATreasure.village_cherry_house.lootTable,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								// Common Loot
+								.setRolls(RandomValueRange.between(3.0F, 8.0F))
+								.add(ItemLootEntry.lootTableItem(CAItems.ALUMINUM_NUGGET.get()).setWeight(1)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))
+								.add(ItemLootEntry.lootTableItem(CABlocks.CYAN_ROSE.get()).setWeight(2))
+								.add(ItemLootEntry.lootTableItem(CABlocks.RED_ROSE.get()).setWeight(2))
+								.add(ItemLootEntry.lootTableItem(CABlocks.PAEONIA.get()).setWeight(2))
+								.add(ItemLootEntry.lootTableItem(CAItems.LETTUCE.get()).setWeight(10)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 7.0F))))
+								.add(ItemLootEntry.lootTableItem(CAItems.STRAWBERRY.get()).setWeight(5)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 7.0F))))
+								.add(ItemLootEntry.lootTableItem(CAItems.RADISH_SEEDS.get()).setWeight(5)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F))))
+								.add(ItemLootEntry.lootTableItem(CAItems.RADISH.get()).setWeight(5)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))
+								.add(ItemLootEntry.lootTableItem(CAItems.RADISH_STEW.get()).setWeight(1))
+								.add(ItemLootEntry.lootTableItem(Items.EMERALD).setWeight(2)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F))))
+								.add(ItemLootEntry.lootTableItem(CABlocks.CHERRY_SAPLING.get()).setWeight(5)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))
+								.add(ItemLootEntry.lootTableItem(CAItems.CHERRY_SIGN.get()).setWeight(1))
+								.add(ItemLootEntry.lootTableItem(CABlocks.CHERRY_LOG.get()).setWeight(10)
+										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 5.0F))))));*/
 	}
 }

@@ -1,11 +1,12 @@
 package io.github.chaosawakens.mixins;
 
-import net.minecraft.world.gen.DimensionSettings;
-import net.minecraft.world.gen.NoiseChunkGenerator;
+import java.util.function.Supplier;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import java.util.function.Supplier;
+import net.minecraft.world.gen.DimensionSettings;
+import net.minecraft.world.gen.NoiseChunkGenerator;
 
 @Mixin(NoiseChunkGenerator.class)
 public interface NoiseChunkGeneratorAccessor {

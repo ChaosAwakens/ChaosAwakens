@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.entity.ai;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.PathPoint;
@@ -9,9 +12,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.extensions.IForgeFluidState;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class LavaNodeSwimmingProcessor extends SwimNodeProcessor {
 

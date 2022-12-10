@@ -2,14 +2,22 @@ package io.github.chaosawakens.common.entity;
 
 import io.github.chaosawakens.common.entity.ai.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.RandomFlyingGoal;
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
@@ -28,20 +36,23 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, IFlyingAnimal {
+public class WaspEntity extends AnimatableMonsterEntity implements IFlyingAnimal {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "waspcontroller", animationInterval(), this::predicate);
 
 	public WaspEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.moveControl = new FlyingMovementController(this, 20, true);
+		this.moveControl = new FlyingMovementController(this, 90, true);
 		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, -1.0F);
 		this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
-		this.setPathfindingMalus(PathNodeType.WATER_BORDER, 16.0F);
+		this.setPathfindingMalus(PathNodeType.LAVA, -1.0F);
+		this.setPathfindingMalus(PathNodeType.WATER_BORDER, -1.0F);
 		this.setPathfindingMalus(PathNodeType.COCOA, -1.0F);
 		this.setPathfindingMalus(PathNodeType.FENCE, -1.0F);
 		this.noCulling = true;
@@ -59,40 +70,38 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 
 	@SuppressWarnings("deprecation")
 	public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
-		return worldIn.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+		if (worldIn.getFluidState(pos) != null) return -1.0F;
+		return worldIn.getBlockState(pos).isAir() ? 1.0F : 0.0F;
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	@Override
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (this.getAttacking()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly_attack", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly_attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
 			return PlayState.CONTINUE;
 		}
 
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly", true));
+		event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wasp.fly", ILoopType.EDefaultLoopTypes.LOOP));
 		return PlayState.CONTINUE;
 
 	}
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 24.0F));
-		this.goalSelector.addGoal(3, new LookAtGoal(this, BeeEntity.class, 24.0F));
-		this.goalSelector.addGoal(2, new AnimatableMoveToTargetGoal(this, 1.6, 8));
-		this.goalSelector.addGoal(2, new AnimatableMeleeGoal(this, 48.3, 0.7, 0.8));
-		this.goalSelector.addGoal(4, new WaterAvoidingRandomFlyingGoal(this, 1.6));
-		this.goalSelector.addGoal(4, new RandomFlyingGoal(this, 2.0D, 1, true));
-		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(7, new SwimGoal(this));
-		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, BeeEntity.class, true));
+		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.6, 8));
+		this.goalSelector.addGoal(0, new AnimatableMeleeGoal(this, 30.3, 0.3, 0.5));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, BeeEntity.class, true));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.6));
+		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(3, new SwimGoal(this));
 	}
 
 	protected PathNavigator createNavigation(World worldIn) {
 		FlyingPathNavigator flyingpathnavigator = new FlyingPathNavigator(this, worldIn) {
-			@SuppressWarnings("deprecation")
 			public boolean isStableDestination(BlockPos pos) {
-				return !this.level.getBlockState(pos.below()).isAir();
+				return this.level.getBlockState(pos.below()).getFluidState() == null;
 			}
 		};
 		flyingpathnavigator.setCanOpenDoors(false);
@@ -113,7 +122,22 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "waspcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
+	}
+	
+	@Override
+	public int animationInterval() {
+		return 0;
+	}
+	
+	@Override
+	public void manageAttack(LivingEntity target) {
+		
+	}
+	
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
 	}
 
 	protected SoundEvent getAmbientSound() {
@@ -140,7 +164,7 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	}
 
 	protected boolean makeFlySound() {
-		return true;
+		return level.random.nextInt(20) == 0;
 	}
 
 	public CreatureAttribute getMobType() {
@@ -150,5 +174,10 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
 	@Override
 	public AnimationFactory getFactory() {
 		return this.factory;
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
 	}
 }

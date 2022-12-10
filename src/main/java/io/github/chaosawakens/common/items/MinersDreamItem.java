@@ -1,11 +1,11 @@
 package io.github.chaosawakens.common.items;
 
 import io.github.chaosawakens.ChaosAwakens;
-
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.particles.ParticleTypes;
@@ -21,14 +21,14 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 
 public class MinersDreamItem extends Item {
-	private static final int HOLE_LENGTH = 36;
+	private static final int HOLE_LENGTH = 45;
 	private static final int HOLE_WIDTH = 4;
 	private static final int HOLE_HEIGHT = 8;
 
 	public MinersDreamItem(Properties builderIn) {
 		super(builderIn);
 	}
-
+	
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
 		Direction direction = context.getHorizontalDirection();
@@ -71,6 +71,10 @@ public class MinersDreamItem extends Item {
 							|| targetBlockState.getBlock().getRegistryName().toString().contains("soulstone")
 							|| targetBlockState.getBlock().getRegistryName().toString().contains("rough_sandstone")
 							|| targetBlockState.getBlock().getRegistryName().toString().contains("sand_ripple")
+							|| targetBlockState.getFluidState().getType().equals(Fluids.LAVA)
+							|| targetBlockState.getFluidState().getType().equals(Fluids.FLOWING_LAVA)
+							|| targetBlockState.getFluidState().getType().equals(Fluids.WATER)
+							|| targetBlockState.getFluidState().getType().equals(Fluids.FLOWING_WATER)
 							|| targetBlockState.getBlock().getRegistryName().toString().contains("rocky_dirt")) {
 						this.placeWoodPillars(worldIn, targetPos, i, j, k);
 					}
@@ -79,6 +83,7 @@ public class MinersDreamItem extends Item {
 		}
 		context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
 		context.getItemInHand().shrink(1);
+		context.getPlayer().getCooldowns().addCooldown(this, 20);
 
 		return ActionResultType.SUCCESS;
 	}

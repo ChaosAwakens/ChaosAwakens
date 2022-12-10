@@ -6,6 +6,14 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "chaosawakens:fire_fish"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chaosawakens:sun_fish"
+        },
+        {
+          "type": "minecraft:item",
           "name": "chaosawakens:lava_eel"
         }
       ]

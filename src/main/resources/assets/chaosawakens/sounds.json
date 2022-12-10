@@ -61,11 +61,42 @@
       "chaosawakens:entity/hercules_beetle/hurt"
     ]
   },
+  "entity.hercules_beetle.swing": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.swing",
+    "sounds": [
+      "chaosawakens:entity/hercules_beetle/swing"
+    ]
+  },
+  "entity.hercules_beetle.flap": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.flap",
+    "sounds": [
+      "chaosawakens:entity/hercules_beetle/flap"
+    ]
+  },
   "entity.hercules_beetle.death": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death",
     "sounds": [
       "chaosawakens:entity/hercules_beetle/death1",
       "chaosawakens:entity/hercules_beetle/death2"
+    ]
+  },
+  
+  "entity.whale.hurt": {
+    "subtitle": "subtitles.chaosawakens.entity.whale.hurt",
+    "sounds": [
+      "chaosawakens:entity/whale/hurt"
+    ]
+  },
+  "entity.whale.ambient": {
+    "subtitle": "subtitles.chaosawakens.entity.whale.ambient",
+    "sounds": [
+      "chaosawakens:entity/whale/ambient"
+    ]
+  },
+  "entity.whale.death": {
+    "subtitle": "subtitles.chaosawakens.entity.whale.death",
+    "sounds": [
+      "chaosawakens:entity/whale/death"
     ]
   },
   
@@ -290,5 +321,251 @@
     "sounds": [
       "chaosawakens:entity/wasp/ambient"
     ]
+  },
+  "block.sky_moss.break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/sky_moss/break1",
+        "volume": 0.95
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break2",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break3",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break4",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break5",
+        "volume": 0.93
+      }
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.break"
+  },
+  "block.sky_moss.fall": {
+    "sounds": [
+      "chaosawakens:block/sky_moss/step1",
+      "chaosawakens:block/sky_moss/step2",
+      "chaosawakens:block/sky_moss/step3",
+      "chaosawakens:block/sky_moss/step4",
+      "chaosawakens:block/sky_moss/step5",
+      "chaosawakens:block/sky_moss/step6"
+    ]
+  },
+  "block.sky_moss.hit": {
+    "sounds": [
+      "chaosawakens:block/sky_moss/step1",
+      "chaosawakens:block/sky_moss/step2",
+      "chaosawakens:block/sky_moss/step3",
+      "chaosawakens:block/sky_moss/step4",
+      "chaosawakens:block/sky_moss/step5",
+      "chaosawakens:block/sky_moss/step6"
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.hit"
+  },
+  "block.sky_moss.place": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/sky_moss/break1",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break2",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break3",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break4",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break5",
+        "volume": 0.93
+      }
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.place"
+  },
+  "block.sky_moss.step": {
+    "sounds": [
+      "chaosawakens:block/sky_moss/step1",
+      "chaosawakens:block/sky_moss/step2",
+      "chaosawakens:block/sky_moss/step3",
+      "chaosawakens:block/sky_moss/step4",
+      "chaosawakens:block/sky_moss/step5",
+      "chaosawakens:block/sky_moss/step6"
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.footsteps"
+  },
+  "block.sky_moss_carpet.break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/sky_moss/break1",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break2",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break3",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break4",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break5",
+        "pitch": 1.1,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.break"
+  },
+  "block.sky_moss_carpet.fall": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/sky_moss/step1",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step2",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step3",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step4",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step5",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step6",
+        "pitch": 1.1,
+        "volume": 0.9
+      }
+    ]
+  },
+  "block.sky_moss_carpet.hit": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/sky_moss/step1",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step2",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step3",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step4",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step5",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step6",
+        "pitch": 1.1,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.hit"
+  },
+  "block.sky_moss_carpet.place": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/sky_moss/break1",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break2",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break3",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break4",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/break5",
+        "pitch": 1.1,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.place"
+  },
+  "block.sky_moss_carpet.step": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/sky_moss/step1",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step2",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step3",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step4",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step5",
+        "pitch": 1.1,
+        "volume": 0.9
+      },
+      {
+        "name": "chaosawakens:block/sky_moss/step6",
+        "pitch": 1.1,
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.chaosawakens.block.generic.footsteps"
   }
 }

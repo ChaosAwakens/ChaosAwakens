@@ -1,6 +1,9 @@
 package io.github.chaosawakens.common.worldgen.feature;
 
+import java.util.Random;
+
 import com.mojang.serialization.Codec;
+
 import io.github.chaosawakens.common.blocks.CrystalClusterBlock;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -8,8 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-
-import java.util.Random;
 
 public class GeodeFeature extends Feature<GeodeFeatureConfig> {
 

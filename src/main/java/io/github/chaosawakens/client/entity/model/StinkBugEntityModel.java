@@ -3,9 +3,9 @@ package io.github.chaosawakens.client.entity.model;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.StinkBugEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 
-public class StinkBugEntityModel extends AnimatedGeoModel<StinkBugEntity> {
+public class StinkBugEntityModel extends AnimatedTickingGeoModel<StinkBugEntity> {
 	@Override
 	public ResourceLocation getModelLocation(StinkBugEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/stink_bug.geo.json");

@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity.projectile;
 
+import javax.annotation.Nonnull;
+
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -21,8 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
-
-import javax.annotation.Nonnull;
 
 public class RoboLaserEntity extends DamagingProjectileEntity {
 	private float damage;
@@ -85,14 +85,15 @@ public class RoboLaserEntity extends DamagingProjectileEntity {
 				if (random.nextInt(6) >= 3) {
 					float EXPLOSION_POWER = CACommonConfig.COMMON.roboWarriorExplosionSize.get();
 					boolean hasFire = CACommonConfig.COMMON.roboWarriorExplosionFire.get();
+					
 					switch (CACommonConfig.COMMON.roboWarriorExplosionType.get()) {
-					case 0:
+					case NONE:
 						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
 						break;
-					case 1:
+					case BREAK:
 						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
 						break;
-					case 2:
+					case DESTROY:
 						this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
 						break;
 					}

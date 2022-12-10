@@ -1,6 +1,13 @@
 package io.github.chaosawakens.common.blocks;
 
-import net.minecraft.block.*;
+import java.util.Random;
+import java.util.function.Supplier;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.BushBlock;
+import net.minecraft.block.IGrowable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
@@ -17,9 +24,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.PlantType;
-
-import java.util.Random;
-import java.util.function.Supplier;
 
 public class CropPlantBlock extends BushBlock implements IGrowable {
 	private static final IntegerProperty AGE = BlockStateProperties.AGE_3;

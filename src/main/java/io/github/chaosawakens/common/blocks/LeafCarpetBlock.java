@@ -1,7 +1,9 @@
 package io.github.chaosawakens.common.blocks;
 
 import io.github.chaosawakens.common.registry.CATags;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -13,7 +15,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("all")
 public class LeafCarpetBlock extends MultifaceBlock implements IWaterLoggable {
 	private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 

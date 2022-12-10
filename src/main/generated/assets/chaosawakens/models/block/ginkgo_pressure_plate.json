@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/pressure_plate_up",
+  "parent": "minecraft:block/pressure_plate_down",
   "textures": {
     "texture": "chaosawakens:block/ginkgo_planks"
   }

@@ -6,6 +6,26 @@
     ]
   },
   "criteria": {
+    "has_ultimate_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ultimate_axe"
+          }
+        ]
+      }
+    },
+    "has_ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ruby"
+          }
+        ]
+      }
+    },
     "has_redstone_block": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -25,6 +45,8 @@
   },
   "requirements": [
     [
+      "has_ultimate_axe",
+      "has_ruby",
       "has_redstone_block",
       "has_the_recipe"
     ]

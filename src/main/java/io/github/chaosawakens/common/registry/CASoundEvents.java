@@ -23,7 +23,9 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_ATTACK = SOUND_EVENTS.register("entity.hercules_beetle.attack", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.attack")));
 	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_HURT = SOUND_EVENTS.register("entity.hercules_beetle.hurt", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.hurt")));
 	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DEATH = SOUND_EVENTS.register("entity.hercules_beetle.death", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.death")));
-
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_SWING = SOUND_EVENTS.register("entity.hercules_beetle.swing", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.swing")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_FLAP = SOUND_EVENTS.register("entity.hercules_beetle.flap", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.hercules_beetle.flap")));
+	
 	public static final RegistryObject<SoundEvent> ACACIA_ENT_WALK = SOUND_EVENTS.register("entity.acacia_ent.walk", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.walk")));
 	public static final RegistryObject<SoundEvent> BIRCH_ENT_WALK = SOUND_EVENTS.register("entity.birch_ent.walk", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.walk")));
 	public static final RegistryObject<SoundEvent> CRIMSON_ENT_WALK = SOUND_EVENTS.register("entity.crimson_ent.walk", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.walk")));
@@ -60,6 +62,21 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> ENT_WALK = SOUND_EVENTS.register("entity.ent.walk", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.walk")));
 	public static final RegistryObject<SoundEvent> ENT_ATTACK = SOUND_EVENTS.register("entity.ent.attack", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.attack")));
 	public static final RegistryObject<SoundEvent> ENT_HURT = SOUND_EVENTS.register("entity.ent.hurt", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.ent.hurt")));
+	
+	public static final RegistryObject<SoundEvent> WHALE_AMBIENT = SOUND_EVENTS.register("entity.whale.ambient", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.whale.ambient")));
+	public static final RegistryObject<SoundEvent> WHALE_HURT = SOUND_EVENTS.register("entity.whale.hurt", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.whale.hurt")));
+	public static final RegistryObject<SoundEvent> WHALE_DEATH = SOUND_EVENTS.register("entity.whale.death", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.whale.death")));
 
 	public static final RegistryObject<SoundEvent> WASP_AMBIENT = SOUND_EVENTS.register("entity.wasp.ambient", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "entity.wasp.ambient")));
+
+	public static final RegistryObject<SoundEvent> SKY_MOSS_CARPET_BREAK = SOUND_EVENTS.register("block.sky_moss_carpet.break", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss_carpet.break")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_CARPET_FALL = SOUND_EVENTS.register("block.sky_moss_carpet.fall", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss_carpet.fall")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_CARPET_HIT = SOUND_EVENTS.register("block.sky_moss_carpet.hit", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss_carpet.hit")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_CARPET_PLACE = SOUND_EVENTS.register("block.sky_moss_carpet.place", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss_carpet.place")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_CARPET_STEP = SOUND_EVENTS.register("block.sky_moss_carpet.step", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss_carpet.step")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_BREAK = SOUND_EVENTS.register("block.sky_moss.break", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss.break")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_FALL = SOUND_EVENTS.register("block.sky_moss.fall", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss.fall")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_HIT = SOUND_EVENTS.register("block.sky_moss.hit", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss.hit")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_PLACE = SOUND_EVENTS.register("block.sky_moss.place", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss.place")));
+	public static final RegistryObject<SoundEvent> SKY_MOSS_STEP = SOUND_EVENTS.register("block.sky_moss.step", () -> new SoundEvent(new ResourceLocation(ChaosAwakens.MODID, "block.sky_moss.step")));
 }

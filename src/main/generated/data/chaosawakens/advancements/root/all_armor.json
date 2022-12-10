@@ -1,8 +1,8 @@
 {
-  "parent": "chaosawakens:root/ultimate_armor",
+  "parent": "chaosawakens:root/platinum_armor",
   "display": {
     "icon": {
-      "item": "chaosawakens:tigers_eye_chestplate",
+      "item": "chaosawakens:ender_dragon_scale_chestplate",
       "nbt": "{Damage:0}"
     },
     "title": {
@@ -302,6 +302,25 @@
           }
         ]
       }
+    },
+    "ender_dragon_scale_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ender_dragon_scale_helmet"
+          },
+          {
+            "item": "chaosawakens:ender_dragon_scale_chestplate"
+          },
+          {
+            "item": "chaosawakens:ender_dragon_scale_leggings"
+          },
+          {
+            "item": "chaosawakens:ender_dragon_scale_boots"
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -349,6 +368,9 @@
     ],
     [
       "ultimate_armor"
+    ],
+    [
+      "ender_dragon_scale_armor"
     ]
   ]
 }

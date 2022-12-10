@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/slab",
+  "parent": "minecraft:block/slab_top",
   "textures": {
     "side": "chaosawakens:block/cracked_lime_terracotta_bricks",
     "bottom": "chaosawakens:block/cracked_lime_terracotta_bricks",

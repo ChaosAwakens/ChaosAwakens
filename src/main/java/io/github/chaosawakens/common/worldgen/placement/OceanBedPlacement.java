@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.worldgen.placement;
 
+import java.util.Random;
+import java.util.stream.Stream;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
@@ -11,9 +14,6 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.WorldDecoratingHelper;
 import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
-
-import java.util.Random;
-import java.util.stream.Stream;
 
 public class OceanBedPlacement extends Placement<NoPlacementConfig> {
 	public OceanBedPlacement() {

@@ -1,11 +1,30 @@
 package io.github.chaosawakens.common.entity;
 
+import java.util.Objects;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.registry.CALootTables;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -20,24 +39,25 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.*;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
-import java.util.Objects;
-import java.util.Random;
-
-public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
+public class TreeFrogEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "treefrogcontroller", animationInterval(), this::predicate);
 	public static final DataParameter<Integer> DATA_TYPE_ID = EntityDataManager.defineId(TreeFrogEntity.class, DataSerializers.INT);
 
 	public TreeFrogEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
@@ -57,11 +77,11 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(3, new PanicGoal(this, 1.2D));
-		this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.7D));
-		this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 0.7D));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(2, new PanicGoal(this, 1.2D));
+		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -140,9 +160,9 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 		return null;
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tree_frog.jump_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tree_frog.jump_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		} else if (!event.isMoving()) return PlayState.CONTINUE;
 		return PlayState.CONTINUE;
@@ -154,7 +174,7 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "treefrogcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -195,5 +215,20 @@ public class TreeFrogEntity extends AnimalEntity implements IAnimatable {
 		protected double getAttackReachSqr(LivingEntity livingEntity) {
 			return (4.0F + livingEntity.getBbWidth());
 		}
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
+
+	@Override
+	public int animationInterval() {
+		return 2;
+	}
+
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
 	}
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "chaosawakens:block/rhinestone_slab_top"
+    },
+    "type=bottom": {
+      "model": "chaosawakens:block/rhinestone_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/rhinestone_block"
+    }
+  }
+}

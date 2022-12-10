@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.common.registry.CAItems;
-import net.minecraft.client.util.ITooltipFlag;
+import java.util.Objects;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
@@ -11,31 +11,24 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import vazkii.patchouli.api.PatchouliAPI;
 import vazkii.patchouli.common.base.PatchouliSounds;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Objects;
 
 public class MobestiaryItem extends Item {
 	public MobestiaryItem(Properties props) {
 		super(props);
 	}
 
-	public static boolean isOpen() {
-		return Registry.ITEM.getKey(CAItems.MOBESTIARY.get()).equals(PatchouliAPI.get().getOpenBookGui());
-	}
+//	public static boolean isOpen() {
+	//	return Registry.ITEM.getKey(CAItems.MOBESTIARY.get()).equals(PatchouliAPI.get().getOpenBookGui());
+//	}
 
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void appendHoverText(ItemStack itemStack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-		tooltip.add(getEdition().copy().withStyle(TextFormatting.GRAY));
-	}
+//	@Override
+//	@OnlyIn(Dist.CLIENT)
+//	public void appendHoverText(ItemStack itemStack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+//		tooltip.add(getEdition().copy().withStyle(TextFormatting.GRAY));
+//	}
 
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
@@ -49,9 +42,9 @@ public class MobestiaryItem extends Item {
 		return new ActionResult<>(ActionResultType.SUCCESS, stack);
 	}
 
-	public static ITextComponent getEdition() {
-		return PatchouliAPI.get().getSubtitle(Registry.ITEM.getKey(CAItems.MOBESTIARY.get()));
-	}
+//	public static ITextComponent getEdition() {
+//		return PatchouliAPI.get().getSubtitle(Registry.ITEM.getKey(CAItems.MOBESTIARY.get()));
+//	}
 
 	public static ITextComponent getTitle(ItemStack stack) {
 		ITextComponent title = stack.getDisplayName();

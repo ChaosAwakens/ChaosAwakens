@@ -1,5 +1,10 @@
 package io.github.chaosawakens.common.entity;
 
+import java.util.List;
+import java.util.stream.Stream;
+
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.entity.ai.FollowLavaLeaderGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -9,13 +14,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.stream.Stream;
-
 public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 	private AbstractLavaGroupFishEntity leader;
-	private int schoolSize = 1;
+	private int schoolSize = 5;
 
 	public AbstractLavaGroupFishEntity(EntityType<? extends AbstractLavaGroupFishEntity> entityType, World world) {
 		super(entityType, world);
@@ -23,7 +24,7 @@ public abstract class AbstractLavaGroupFishEntity extends AbstractLavaEntity {
 
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(5, new FollowLavaLeaderGoal(this));
+		this.goalSelector.addGoal(4, new FollowLavaLeaderGoal(this));
 	}
 
 	public int getMaxSpawnClusterSize() {

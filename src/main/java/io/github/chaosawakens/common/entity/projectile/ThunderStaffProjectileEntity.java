@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity.projectile;
 
+import javax.annotation.Nonnull;
+
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.EntityType;
@@ -15,8 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
-
-import javax.annotation.Nonnull;
 
 public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 	private static final float EXPLOSION_POWER = CACommonConfig.COMMON.thunderStaffExplosionSize.get();
@@ -41,9 +41,9 @@ public class ThunderStaffProjectileEntity extends AbstractFireballEntity {
 			this.level.addFreshEntity(lightning);
 			boolean hasFire = CACommonConfig.COMMON.thunderStaffExplosionFire.get();
 			switch (CACommonConfig.COMMON.thunderStaffExplosionType.get()) {
-				case 0: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
-				case 1: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
-				case 2: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
+				case NONE: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.NONE);
+				case BREAK: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.BREAK);
+				case DESTROY: this.level.explode(null, this.getX(), this.getY(), this.getZ(), EXPLOSION_POWER, hasFire, Explosion.Mode.DESTROY);
 			}
 			this.remove();
 		}

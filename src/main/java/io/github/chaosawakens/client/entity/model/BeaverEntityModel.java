@@ -5,10 +5,10 @@ import io.github.chaosawakens.common.entity.BeaverEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class BeaverEntityModel extends AnimatedGeoModel<BeaverEntity> {
+public class BeaverEntityModel extends AnimatedTickingGeoModel<BeaverEntity> {
 	@Override
 	public ResourceLocation getModelLocation(BeaverEntity object) {
 		return new ResourceLocation(ChaosAwakens.MODID, "geo/beaver.geo.json");

@@ -1,0 +1,56 @@
+{
+	"variants": {
+		"facing=down,open=false": {
+			"x": 180,
+			"model": "chaosawakens:block/robo_crate"
+		},
+		"facing=down,open=true": {
+			"x": 180,
+			"model": "chaosawakens:block/robo_crate_open"
+		},
+		"facing=east,open=false": {
+			"x": 90,
+			"y": 90,
+			"model": "chaosawakens:block/robo_crate"
+		},
+		"facing=east,open=true": {
+			"x": 90,
+			"y": 90,
+			"model": "chaosawakens:block/robo_crate_open"
+		},
+		"facing=north,open=false": {
+			"x": 90,
+			"model": "chaosawakens:block/robo_crate"
+		},
+		"facing=north,open=true": {
+			"x": 90,
+			"model": "chaosawakens:block/robo_crate_open"
+		},
+		"facing=south,open=false": {
+			"x": 90,
+			"y": 180,
+			"model": "chaosawakens:block/robo_crate"
+		},
+		"facing=south,open=true": {
+			"x": 90,
+			"y": 180,
+			"model": "chaosawakens:block/robo_crate_open"
+		},
+		"facing=up,open=false": {
+			"model": "chaosawakens:block/robo_crate"
+		},
+		"facing=up,open=true": {
+			"model": "chaosawakens:block/robo_crate_open"
+		},
+		"facing=west,open=false": {
+			"x": 90,
+			"y": 270,
+			"model": "chaosawakens:block/robo_crate"
+		},
+		"facing=west,open=true": {
+			"x": 90,
+			"y": 270,
+			"model": "chaosawakens:block/robo_crate_open"
+		}
+	}
+}

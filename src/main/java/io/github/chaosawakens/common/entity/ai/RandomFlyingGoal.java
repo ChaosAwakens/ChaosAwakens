@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
 
-
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.CreatureEntity;
@@ -67,7 +66,7 @@ public class RandomFlyingGoal extends Goal {
 	@Nullable
 	protected Vector3d getAirPosition() {
 		int randomReference = this.mob.level.random.nextInt(100);
-		return randomReference != 0 ? RandomPositionGenerator.getAirPos(this.mob, 10, 1, 1, null, 0.0D) : RandomPositionGenerator.getAirPos(this.mob, 10, 1, 1, null, 0.0D);
+		return randomReference == 0 ? RandomPositionGenerator.getAirPos(this.mob, 10, 1, 1, null, 0.0D) : RandomPositionGenerator.getAirPos(this.mob, 10, 1, 1, null, 0.0D);
 	}
 
 	@Nullable

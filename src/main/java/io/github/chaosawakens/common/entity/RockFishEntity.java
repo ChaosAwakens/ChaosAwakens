@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.entity;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
+
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -7,6 +11,8 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
 import net.minecraft.item.ItemStack;
@@ -25,18 +31,16 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
-
-public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatable {
+public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatable, IAnimationTickable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 
 	public RockFishEntity(EntityType<? extends RockFishEntity> entityType, World world) {
@@ -48,13 +52,18 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(4, new RockFishEntity.SwimGoal(this));
+		this.goalSelector.addGoal(0, new RockFishEntity.SwimGoal(this));
+		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, WoodFishEntity.class, true));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5D, false));
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 12.0D)
 				.add(Attributes.MOVEMENT_SPEED, 1.2D)
+				.add(Attributes.ATTACK_SPEED, 0.25D)
+				.add(Attributes.ATTACK_DAMAGE, 1.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.add(Attributes.FOLLOW_RANGE, 4.0D);
 	}
@@ -81,15 +90,15 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.isSwimming()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.rock_fish.swim_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -167,5 +176,10 @@ public class RockFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		public boolean canUse() {
 			return this.rockfish.canRandomSwim() && super.canUse();
 		}
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
 	}
 }

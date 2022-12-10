@@ -1,11 +1,16 @@
 package io.github.chaosawakens.common.entity;
 
-import io.github.chaosawakens.common.registry.CABlocks;
+import java.util.Random;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.BreedGoal;
@@ -33,15 +38,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Random;
-
-public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatable{
+public class CrystalCarrotPigEntity extends CarrotPigEntity {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationController<?> controller = new AnimationController<>(this, "crystalcarrotpigcontroller", animationInterval(), this::predicate);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(CAItems.CRYSTAL_POTATO.get(), CAItems.CRYSTAL_BEETROOT.get());
 
     public CrystalCarrotPigEntity(EntityType<? extends CrystalCarrotPigEntity> type, World worldIn) {
@@ -56,13 +61,13 @@ public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatab
                 .add(Attributes.FOLLOW_RANGE, 12);
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+    public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
             return PlayState.CONTINUE;
         }
         if (!event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
             return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
@@ -145,7 +150,7 @@ public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatab
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "crystalcarrotpigcontroller", 0, this::predicate));
+        data.addAnimationController(controller);
     }
 
     @Override
@@ -156,5 +161,15 @@ public class CrystalCarrotPigEntity extends CarrotPigEntity implements IAnimatab
     @Override
     public EntityType<?> getType() {
     	return CAEntityTypes.CRYSTAL_CARROT_PIG.get();
+    }
+    
+    @Override
+    public int tickTimer() {
+    	return tickCount;
+    }
+    
+    @Override
+    public AnimationController<?> getController() {
+    	return controller;
     }
 }

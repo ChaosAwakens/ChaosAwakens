@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "chaosawakens:royal_guardian_block"
+      "chaosawakens:royal_guardian_scale_block"
     ]
   },
   "criteria": {

@@ -4,7 +4,7 @@ import java.util.EnumSet;
 import java.util.function.BiFunction;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.entity.AnimatableAnimalEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LeapAtTargetGoal;
@@ -12,7 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
-public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal implements IUtilityHelper {
+public class AnimatableLeapAtTargetGoal extends LeapAtTargetGoal {
 	protected AnimatableAnimalEntity entity;
 	private LivingEntity target;
 	float yf;

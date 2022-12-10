@@ -3,10 +3,10 @@
   "values": [
     "chaosawakens:apple_button",
     "chaosawakens:cherry_button",
-    "chaosawakens:duplication_button",
-    "chaosawakens:ginkgo_button",
     "chaosawakens:peach_button",
+    "chaosawakens:duplication_button",
     "chaosawakens:skywood_button",
+    "chaosawakens:ginkgo_button",
     "chaosawakens:crystal_button"
   ]
 }

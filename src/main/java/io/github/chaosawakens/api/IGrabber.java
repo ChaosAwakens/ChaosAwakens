@@ -1,6 +1,6 @@
 package io.github.chaosawakens.api;
 
-import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.datasync.DataParameter;

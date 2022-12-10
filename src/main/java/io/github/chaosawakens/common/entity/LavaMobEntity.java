@@ -1,21 +1,22 @@
 package io.github.chaosawakens.common.entity;
 
 import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-public class LavaMobEntity extends CreatureEntity {
+public class LavaMobEntity extends WaterMobEntity {
+	
 	public LavaMobEntity(EntityType<? extends LavaMobEntity> entityType, World world) {
 		super(entityType, world);
 		this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
-		this.setPathfindingMalus(PathNodeType.LAVA, 16.0F);
-		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 16.0F);
-		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 16.0F);
+		this.setPathfindingMalus(PathNodeType.LAVA, 8.0F);
+		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 0.0F);
+		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 0.0F);
 	}
 
 	public boolean canBreatheUnderwater() {

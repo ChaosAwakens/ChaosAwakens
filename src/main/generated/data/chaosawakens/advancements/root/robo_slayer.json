@@ -1,5 +1,5 @@
 {
-  "parent": "chaosawakens:root/root",
+  "parent": "chaosawakens:root/village_mania",
   "display": {
     "icon": {
       "item": "chaosawakens:ray_gun",
@@ -11,7 +11,7 @@
     "description": {
       "translate": "advancements.chaosawakens.robo_slayer.description"
     },
-    "frame": "goal",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,

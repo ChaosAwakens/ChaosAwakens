@@ -1,11 +1,10 @@
 package io.github.chaosawakens.common.network;
 
-import net.minecraft.client.Minecraft;
+import java.util.function.Supplier;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
-
-import java.util.function.Supplier;
 
 public class PacketThrowPlayer {
 	private final float motionX;
@@ -31,8 +30,12 @@ public class PacketThrowPlayer {
 	}
 
 	public static class Handler {
-		public static boolean onMessage(PacketThrowPlayer message, Supplier<NetworkEvent.Context> ctx) {
-			ctx.get().enqueueWork(() -> Minecraft.getInstance().player.push(message.motionX, message.motionY, message.motionZ));
+		@SuppressWarnings("resource")
+		public static boolean onMessage(PacketThrowPlayer message, Supplier<NetworkEvent.Context> ctx) {			
+			ctx.get().enqueueWork(() ->{				
+				Minecraft.getInstance().player.push(message.motionX, message.motionY, message.motionZ);			
+			});		
+			ctx.get().setPacketHandled(true);
 			return true;
 		}
 	}

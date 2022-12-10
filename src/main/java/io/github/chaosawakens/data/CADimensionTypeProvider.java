@@ -1,7 +1,6 @@
 package io.github.chaosawakens.data;
 
 import io.github.chaosawakens.ChaosAwakens;
-
 import io.github.chaosawakens.common.registry.CADimensions;
 import net.minecraft.data.DataGenerator;
 
@@ -46,8 +45,8 @@ public class CADimensionTypeProvider extends DimensionTypeProvider {
 				.effects("minecraft:overworld")
 				.infiniburn("minecraft:infiniburn_overworld");
 		createDimensionType(CADimensions.DANGER_ISLES.location())
-				.ultrawarm(true)
-				.natural(false)
+				.ultrawarm(false)
+				.natural(true)
 				.piglinSafe(true)
 				.respawnAnchorWorks(false)
 				.bedWorks(false)
@@ -56,7 +55,6 @@ public class CADimensionTypeProvider extends DimensionTypeProvider {
 				.hasCeiling(false)
 				.coordinateScale(1)
 				.ambientLight(0)
-				.fixedTime(18000)
 				.logicalHeight(256)
 				.effects("minecraft:overworld")
 				.infiniburn("minecraft:infiniburn_overworld");

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "side": "chaosawakens:block/flower_stem",
+    "end": "chaosawakens:block/flower_stem_top"
+  }
+}

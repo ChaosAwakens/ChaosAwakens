@@ -48,6 +48,10 @@
     "chaosawakens:cracked_red_terracotta_brick_wall",
     "chaosawakens:cracked_terracotta_brick_wall",
     "chaosawakens:cracked_white_terracotta_brick_wall",
-    "chaosawakens:cracked_yellow_terracotta_brick_wall"
+    "chaosawakens:cracked_yellow_terracotta_brick_wall",
+    "chaosawakens:rhinestone_wall",
+    "chaosawakens:cracked_rhinestone_brick_wall",
+    "chaosawakens:mossy_rhinestone_brick_wall",
+    "chaosawakens:polished_rhinestone_wall"
   ]
 }

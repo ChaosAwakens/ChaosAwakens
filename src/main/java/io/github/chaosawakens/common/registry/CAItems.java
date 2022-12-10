@@ -1,20 +1,76 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-
-import io.github.chaosawakens.client.entity.render.*;
+import io.github.chaosawakens.client.entity.render.AttitudeAdjusterItemRenderer;
+import io.github.chaosawakens.client.entity.render.BattleAxeItemRenderer;
+import io.github.chaosawakens.client.entity.render.BigBerthaItemRenderer;
+import io.github.chaosawakens.client.entity.render.QueenScaleBattleAxeItemRenderer;
+import io.github.chaosawakens.client.entity.render.RoyalGuardianSwordItemRenderer;
+import io.github.chaosawakens.client.entity.render.SlayerChainsawItemRenderer;
 import io.github.chaosawakens.common.config.CACommonConfig;
-import io.github.chaosawakens.common.items.extended.*;
+import io.github.chaosawakens.common.items.BasiliskSwordItem;
+import io.github.chaosawakens.common.items.BeetrootOnAStickItem;
+import io.github.chaosawakens.common.items.BigHammerItem;
+import io.github.chaosawakens.common.items.CABoatItem;
+import io.github.chaosawakens.common.items.CABoatWoodTypes;
+import io.github.chaosawakens.common.items.CASpawnEggItem;
+import io.github.chaosawakens.common.items.CritterCageItem;
+import io.github.chaosawakens.common.items.DevItem;
+import io.github.chaosawakens.common.items.EnchantedArmorItem;
+import io.github.chaosawakens.common.items.EnchantedAxeItem;
+import io.github.chaosawakens.common.items.EnchantedHoeItem;
+import io.github.chaosawakens.common.items.EnchantedItem;
+import io.github.chaosawakens.common.items.EnchantedPickaxeItem;
+import io.github.chaosawakens.common.items.EnchantedShovelItem;
+import io.github.chaosawakens.common.items.EnchantedSwordItem;
+import io.github.chaosawakens.common.items.EnderScaleArmorItem;
+import io.github.chaosawakens.common.items.IrukandjiArrowItem;
+import io.github.chaosawakens.common.items.LavaEelArmorItem;
+import io.github.chaosawakens.common.items.LeafyChickenEggItem;
+import io.github.chaosawakens.common.items.MantisClawItem;
+import io.github.chaosawakens.common.items.MinersDreamItem;
+import io.github.chaosawakens.common.items.MobestiaryItem;
+import io.github.chaosawakens.common.items.PoisonSwordItem;
+import io.github.chaosawakens.common.items.PopcornItem;
+import io.github.chaosawakens.common.items.PowerChipItem;
+import io.github.chaosawakens.common.items.RayGunItem;
+import io.github.chaosawakens.common.items.SkateBowItem;
+import io.github.chaosawakens.common.items.SlowFallBoots;
+import io.github.chaosawakens.common.items.StructureItem;
+import io.github.chaosawakens.common.items.ThunderStaffItem;
+import io.github.chaosawakens.common.items.UltimateAxeItem;
+import io.github.chaosawakens.common.items.UltimateBowItem;
+import io.github.chaosawakens.common.items.UltimateFishingRodItem;
+import io.github.chaosawakens.common.items.UltimateHoeItem;
+import io.github.chaosawakens.common.items.UltimatePickaxeItem;
+import io.github.chaosawakens.common.items.UltimateShovelItem;
+import io.github.chaosawakens.common.items.extended.AttitudeAdjusterItem;
+import io.github.chaosawakens.common.items.extended.BattleAxeItem;
+import io.github.chaosawakens.common.items.extended.BigBerthaItem;
+import io.github.chaosawakens.common.items.extended.EnchantedScytheItem;
+import io.github.chaosawakens.common.items.extended.QueenScaleBattleAxeItem;
+import io.github.chaosawakens.common.items.extended.RoyalGuardianSwordItem;
+import io.github.chaosawakens.common.items.extended.SlayerChainsawItem;
 import io.github.chaosawakens.common.util.EnumUtils;
-import io.github.chaosawakens.common.items.*;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.BlockNamedItem;
+import net.minecraft.item.FishBucketItem;
+import net.minecraft.item.HoeItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.Rarity;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.SignItem;
+import net.minecraft.item.SoupItem;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -173,6 +229,17 @@ public class CAItems {
 	public static final RegistryObject<SignItem> PEACH_SIGN = ITEMS.register("peach_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.PEACH_SIGN.get(), CABlocks.PEACH_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> SKYWOOD_SIGN = ITEMS.register("skywood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.SKYWOOD_SIGN.get(), CABlocks.SKYWOOD_WALL_SIGN.get()));
 
+	//DOORS
+	
+	
+	//BOATS
+	public static final RegistryObject<CABoatItem> APPLE_BOAT = ITEMS.register("apple_boat", () -> new CABoatItem(CABoatWoodTypes.APPLE.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<CABoatItem> CHERRY_BOAT = ITEMS.register("cherry_boat", () -> new CABoatItem(CABoatWoodTypes.CHERRY.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<CABoatItem> DUPLICATOR_BOAT = ITEMS.register("duplication_boat", () -> new CABoatItem(CABoatWoodTypes.DUPLICATOR.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<CABoatItem> GINKGO_BOAT = ITEMS.register("ginkgo_boat", () -> new CABoatItem(CABoatWoodTypes.GINKGO.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<CABoatItem> PEACH_BOAT = ITEMS.register("peach_boat", () -> new CABoatItem(CABoatWoodTypes.PEACH.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<CABoatItem> SKYWOOD_BOAT = ITEMS.register("skywood_boat", () -> new CABoatItem(CABoatWoodTypes.SKYWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	
 	// TOOLS
 	// Ultimate
 	public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(EnumUtils.CAItemTier.TOOL_ULTIMATE, CACommonConfig.COMMON.ultimateSwordDamage.get() - 37, -2.4F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
@@ -203,12 +270,12 @@ public class CAItems {
 			new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
 
 	// Ruby
-	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new EnchantedSwordItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubySwordDamage.get() - 17, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new EnchantedSwordItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubySwordDamage.get() - 17, -2.4F, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_ASPECT, 1)}));
-	public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyShovelDamage.get() - 17, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyPickaxeDamage.get() - 17, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyAxeDamage.get() - 17, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyHoeDamage.get() - 17, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyShovelDamage.get() - 17, -3, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyPickaxeDamage.get() - 17, -2.8F, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyAxeDamage.get() - 17, -3, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(EnumUtils.CAItemTier.TOOL_RUBY, CACommonConfig.COMMON.rubyHoeDamage.get() - 17, 0.0F, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
 
 	// Amethyst
 	public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(EnumUtils.CAItemTier.TOOL_AMETHYST, CACommonConfig.COMMON.amethystSwordDamage.get() - 12, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
@@ -299,16 +366,16 @@ public class CAItems {
 	public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(EnumUtils.CAItemTier.WEAPON_RAY_GUN, new Item.Properties().tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(50)));
 
 	// Big Weapons
-	public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(EnumUtils.CAItemTier.WEAPON_ATTITUDE_ADJUSTER, CACommonConfig.COMMON.attitudeAdjusterDamage.get() - 12, -3F, 3.5D, 1, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRender::new)));
-	public static final RegistryObject<BigBerthaItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new BigBerthaItem(EnumUtils.CAItemTier.WEAPON_BERTHA, CACommonConfig.COMMON.berthaDamage.get() - 497, -3.2F, 5.0D, 0, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRender::new),
+	public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(EnumUtils.CAItemTier.WEAPON_ATTITUDE_ADJUSTER, CACommonConfig.COMMON.attitudeAdjusterDamage.get() - 12, -3F, 3.5D, 1, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRenderer::new)));
+	public static final RegistryObject<BigBerthaItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new BigBerthaItem(EnumUtils.CAItemTier.WEAPON_BERTHA, CACommonConfig.COMMON.berthaDamage.get() - 497, -3.2F, 5.0D, 0, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRenderer::new),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2), new EnchantmentData(Enchantments.KNOCKBACK, 2)}));
-	public static final RegistryObject<BattleAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new BattleAxeItem(EnumUtils.CAItemTier.WEAPON_BATTLEAXE, CACommonConfig.COMMON.battleAxeDamage.get() - 48, -3.35F, 3.0D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRender::new),
+	public static final RegistryObject<BattleAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new BattleAxeItem(EnumUtils.CAItemTier.WEAPON_BATTLEAXE, CACommonConfig.COMMON.battleAxeDamage.get() - 48, -3.35F, 3.0D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRenderer::new),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<QueenScaleBattleAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new QueenScaleBattleAxeItem(EnumUtils.CAItemTier.WEAPON_QUEEN_BATTLEAXE, CACommonConfig.COMMON.queenBattleAxeDamage.get() - 664, -3.25F, 4.0D, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRender::new),
+	public static final RegistryObject<QueenScaleBattleAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new QueenScaleBattleAxeItem(EnumUtils.CAItemTier.WEAPON_QUEEN_BATTLEAXE, CACommonConfig.COMMON.queenBattleAxeDamage.get() - 664, -3.25F, 4.0D, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRenderer::new),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 5), new EnchantmentData(Enchantments.SMITE, 5), new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 5), new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
-	public static final RegistryObject<RoyalGuardianSwordItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new RoyalGuardianSwordItem(EnumUtils.CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, CACommonConfig.COMMON.royalGuardianSwordDamage.get() - 749, -3.25F, 5.5D, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianSwordItemRender::new),
+	public static final RegistryObject<RoyalGuardianSwordItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new RoyalGuardianSwordItem(EnumUtils.CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, CACommonConfig.COMMON.royalGuardianSwordDamage.get() - 749, -3.25F, 5.5D, 0, new Item.Properties().rarity(RARITY_ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianSwordItemRenderer::new),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(EnumUtils.CAItemTier.WEAPON_SLAYER_CHAINSAW, CACommonConfig.COMMON.slayerChainsawDamage.get() - 1, -3F, 2.5D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRender::new)));
+	public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(EnumUtils.CAItemTier.WEAPON_SLAYER_CHAINSAW, CACommonConfig.COMMON.slayerChainsawDamage.get() - 1, -3F, 2.5D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRenderer::new)));
 
 	// Staffs
 	public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().tab(CAItemGroups.EQUIPMENT).durability(50)));
@@ -485,6 +552,8 @@ public class CAItems {
 	public static final RegistryObject<CASpawnEggItem> UNSTABLE_ANT_SPAWN_EGG = ITEMS.register("unstable_ant_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.UNSTABLE_ANT, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.TERMITE, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> TREE_FROG_SPAWN_EGG = ITEMS.register("tree_frog_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.TREE_FROG, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<CASpawnEggItem> LEAFY_CHICKEN_SPAWN_EGG = ITEMS.register("leafy_chicken_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.LEAFY_CHICKEN, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<LeafyChickenEggItem> LEAFY_CHICKEN_EGG = ITEMS.register("leafy_chicken_egg", () -> new LeafyChickenEggItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.HERCULES_BEETLE, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> DIMETRODON_SPAWN_EGG = ITEMS.register("dimetrodon_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.DIMETRODON, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> EMERALD_GATOR_SPAWN_EGG = ITEMS.register("emerald_gator_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.EMERALD_GATOR, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));

@@ -13,6 +13,8 @@ public class PacketHandler {
 		int id = 0;
 		CHANNEL.messageBuilder(PacketThrowPlayer.class, id++).encoder(PacketThrowPlayer::encode)
 				.decoder(PacketThrowPlayer::new).consumer(PacketThrowPlayer.Handler::onMessage).add();
+		CHANNEL.messageBuilder(PacketThrowFluidParticle.class, id++).encoder(PacketThrowFluidParticle::encode)
+		        .decoder(PacketThrowFluidParticle::new).consumer(PacketThrowFluidParticle::handle).add();
 	}
 
 	public static void sendPacketToServer(Object packet) {

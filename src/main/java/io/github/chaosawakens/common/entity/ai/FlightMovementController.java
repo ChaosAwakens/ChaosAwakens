@@ -5,10 +5,11 @@ import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
+
 public class FlightMovementController extends MovementController{
 	protected MobEntity entity;
 	private float speedModifier;
-	private final boolean needsHelpVerticalNav;
+	private boolean needsHelpVerticalNav;
 
 	public FlightMovementController(MobEntity entity, float speedModifier, boolean needsHelpVerticalNav) {
 		super(entity);

@@ -6,19 +6,19 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class ThunderStaffItem extends Item {
+
 	public ThunderStaffItem(Properties builderIn) {
 		super(builderIn);
-	}
-
-	@Override
-	public boolean isEnchantable(ItemStack itemStack) {
-		return false;
 	}
 
 	@Override

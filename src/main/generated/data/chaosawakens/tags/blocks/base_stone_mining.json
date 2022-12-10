@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:base_stone_overworld",
-    "chaosawakens:marble_block",
-    "chaosawakens:limestone_block"
+    "#minecraft:base_stone_overworld"
   ]
 }

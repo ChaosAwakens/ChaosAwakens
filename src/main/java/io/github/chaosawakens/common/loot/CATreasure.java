@@ -1,6 +1,9 @@
 package io.github.chaosawakens.common.loot;
 
+import java.util.Set;
+
 import com.google.common.collect.Sets;
+
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
@@ -14,8 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
-
-import java.util.Set;
 
 public class CATreasure {
 	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_dungeon/acacia_loot"}} 1
@@ -42,6 +43,8 @@ public class CATreasure {
 	public static final CATreasure ent_dungeon_red_mushroom_loot = new CATreasure("ent_dungeon/red_mushroom_loot");
 	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
 	public static final CATreasure wasp_dungeon_loot = new CATreasure("wasp_dungeon/loot");
+	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}} 1
+	public static final CATreasure mining_wasp_dungeon_loot = new CATreasure("mining_wasp_dungeon/loot");
 //	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/village/cherry_house"}} 1
 //	public static final CATreasure village_cherry_house = new CATreasure("village/cherry_house");
 

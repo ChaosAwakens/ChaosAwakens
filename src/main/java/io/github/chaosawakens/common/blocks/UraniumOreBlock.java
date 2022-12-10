@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.blocks;
 
+import java.util.Random;
+
 import io.github.chaosawakens.common.registry.CABlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -23,8 +25,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.Random;
 
 public class UraniumOreBlock extends CAOreBlock {
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;

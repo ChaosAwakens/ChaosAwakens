@@ -1,13 +1,12 @@
 package io.github.chaosawakens.common.items.extended;
 
+import java.util.UUID;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+
 import io.github.chaosawakens.api.IUtilityHelper;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.util.InputMappings;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -19,23 +18,18 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
 
-import java.util.UUID;
-
-public class ScytheItem extends SwordItem implements IVanishable, IUtilityHelper {
+public class ScytheItem extends SwordItem implements IVanishable {
 	public static final UUID REACH_MODIFIER = UUID.fromString("467B83E8-53C8-4989-9684-A9CFF01E3626"); //467B83E8-53C8-4989-9684-A9CFF01E3626
 	public static final UUID KB_MODIFIER = UUID.fromString("125404C8-B689-40CE-861E-BF86069C844B");
 	public static int attackDamage;
@@ -70,35 +64,39 @@ public class ScytheItem extends SwordItem implements IVanishable, IUtilityHelper
 
 	@Override
 	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-		InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
-		if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
-			double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
-			double reachSqr = reach * reach;
-			World world = entity.level;
+//    	InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
+//      if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
+          if (entity.getAttribute(ForgeMod.REACH_DISTANCE.get()) != null) {
+          	double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
+          	double reachSqr = reach * reach;
+              World world = entity.level;
 
-			Vector3d viewVec = entity.getViewVector(1.0F);
-			Vector3d eyeVec = entity.getEyePosition(1.0F);
-			Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
+              Vector3d viewVec = entity.getViewVector(1.0F);
+              Vector3d eyeVec = entity.getEyePosition(1.0F);
+              Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
 
-			AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
-			EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
+              AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
+              EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 
-			if (result == null || !(result.getEntity() instanceof LivingEntity)) return false;
+              if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
 
-			LivingEntity target = (LivingEntity) result.getEntity();
+              LivingEntity target = (LivingEntity) result.getEntity();
 
-			double distanceToTargetSqr = entity.distanceToSqr(target);
+              double distanceToTargetSqr = entity.distanceToSqr(target);
 
-			boolean resultBool = (result != null ? target : null) != null;
+              boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
 
-			if (resultBool) {
-				if (reachSqr >= distanceToTargetSqr) {
-					target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
-					this.hurtEnemy(stack, target, entity);
-				}
-			}
-		}
-		return super.onEntitySwing(stack, entity);
+              if (resultBool) {
+//                  if (entity instanceof PlayerEntity) {
+                      if (reachSqr >= distanceToTargetSqr) {
+                          target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
+                          this.hurtEnemy(stack, target, entity);
+                      }
+   //               }
+              }
+//          }
+          }
+      return super.onEntitySwing(stack, entity);
 	}
 
 	public boolean canAttackBlock(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
@@ -107,26 +105,14 @@ public class ScytheItem extends SwordItem implements IVanishable, IUtilityHelper
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.hurtAndBreak(1, attacker, (entity) -> {
-			entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
-		});
+		stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 
 	@Override
 	public boolean mineBlock(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-		if (state.getDestroySpeed(worldIn, pos) != 0.0F) {
-			stack.hurtAndBreak(2, entityLiving, (entity) -> {
-				entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
-			});
-		}
+		if (state.getDestroySpeed(worldIn, pos) != 0.0F) stack.hurtAndBreak(2, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
-	}
-
-	@Override
-	public float getDestroySpeed(ItemStack p_150893_1_, BlockState p_150893_2_) {
-		Material material = p_150893_2_.getMaterial();
-		return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.CORAL && !p_150893_2_.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
 	}
 
 	@Override

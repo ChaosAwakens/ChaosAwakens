@@ -7,10 +7,12 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+//TODO Automate all the remappings, probably by making a class that stores all the older information --Meme Man
+@EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Bus.FORGE)
 public class RemapHandler {
 	/**
 	 * Remap Fossilised Frog to Fossilised Tree Frog
@@ -23,11 +25,11 @@ public class RemapHandler {
 				ResourceLocation remap = new ResourceLocation(ChaosAwakens.MODID, newName);
 				mapping.remap(ForgeRegistries.BLOCKS.getValue(remap));
 			}
-			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID) && mapping.key.getPath().contains("crystalised_crystal_apple_cow")) {
+/*			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID) && mapping.key.getPath().contains("crystalised_crystal_apple_cow")) {
 				String newName = mapping.key.getPath().replace("crystalised_crystal_apple_cow", "crystallised_crystal_apple_cow");
 				ResourceLocation remap = new ResourceLocation(ChaosAwakens.MODID, newName);
 				mapping.remap(ForgeRegistries.BLOCKS.getValue(remap));
-			}
+			}*/
 		}
 	}
 

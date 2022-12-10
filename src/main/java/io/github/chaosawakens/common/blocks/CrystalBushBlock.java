@@ -1,7 +1,9 @@
 package io.github.chaosawakens.common.blocks;
 
 import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;

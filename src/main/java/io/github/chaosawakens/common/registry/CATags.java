@@ -7,9 +7,9 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.*;
 
 public class CATags {
 	public static class Blocks {
@@ -26,9 +26,9 @@ public class CATags {
 		public static final ITag.INamedTag<Block> APPLE_LOGS = tag("apple_logs");
 		public static final ITag.INamedTag<Block> CHERRY_LOGS = tag("cherry_logs");
 		public static final ITag.INamedTag<Block> DUPLICATION_LOGS = tag("duplication_logs");
-		public static final ITag.INamedTag<Block> GINKGO_LOGS = tag("ginkgo_logs");
 		public static final ITag.INamedTag<Block> PEACH_LOGS = tag("peach_logs");
 		public static final ITag.INamedTag<Block> SKYWOOD_LOGS = tag("skywood_logs");
+		public static final ITag.INamedTag<Block> GINKGO_LOGS = tag("ginkgo_logs");
 		public static final ITag.INamedTag<Block> CRYSTAL_LOGS = tag("crystal_logs");
 		public static final ITag.INamedTag<Block> CRYSTAL_LEAVES = tag("crystal_leaves");
 		public static final ITag.INamedTag<Block> CRYSTAL_SAPLING = tag("crystal_sapling");

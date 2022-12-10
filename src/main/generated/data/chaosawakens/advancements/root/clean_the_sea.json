@@ -1,0 +1,39 @@
+{
+  "parent": "chaosawakens:root/ultimate_fisherman",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:ultimate_fishing_rod",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.clean_the_sea.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.clean_the_sea.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "rewards": {
+    "experience": 60
+  },
+  "criteria": {
+    "broken_ultimate_fishing_rod": {
+      "trigger": "minecraft:item_durability_changed",
+      "conditions": {
+        "item": {
+          "item": "chaosawakens:ultimate_fishing_rod"
+        },
+        "durability": 0
+      }
+    }
+  },
+  "requirements": [
+    [
+      "broken_ultimate_fishing_rod"
+    ]
+  ]
+}

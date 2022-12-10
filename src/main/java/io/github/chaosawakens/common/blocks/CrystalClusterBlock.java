@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.blocks;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DirectionalBlock;
@@ -19,10 +23,6 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 public class CrystalClusterBlock extends DirectionalBlock {
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;

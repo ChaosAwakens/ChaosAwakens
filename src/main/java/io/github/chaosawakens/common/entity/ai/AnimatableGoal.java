@@ -1,39 +1,36 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import io.github.chaosawakens.common.entity.AnimatableAnimalEntity;
-import io.github.chaosawakens.common.entity.AnimatableMonsterEntity;
-import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
+import java.util.Random;
+
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-
-import java.util.Random;
 
 public abstract class AnimatableGoal extends Goal {
 	protected static final Random RANDOM = new Random();
 	protected AnimatableMonsterEntity entity;
 	protected AnimatableAnimalEntity animalEntity;
-	protected RoboPounderEntity roboPounder;
 	protected long tickDelta;
 	protected double animationProgress;
-	protected double animationLength;
-	private long lastGameTime;
-	private boolean isFirsLoop = true;
+	protected long lastGameTime;
+	protected boolean isFirsLoop = true;
 
 	public static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
-		return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
+		double atkRch = attacker.getBbWidth() * 1.75D + (attacker.getEyeHeight() / 3.6D * 0.25D);
+		double offset = attacker.getBbWidth() * 0.5D;
+		return (atkRch * atkRch) / 1.5;
 	}
 
 	public static double getAttackReachSq(AnimatableAnimalEntity attacker, LivingEntity target) {
-		return attacker.getBbWidth() * 2F * attacker.getBbWidth() * 2F + target.getBbWidth();
+		double atkRch = attacker.getBbWidth() * 1.75D + (attacker.getEyeHeight() / 3.6D * 0.25D);
+		double offset = attacker.getBbWidth() * 0.5D;
+		return atkRch * atkRch + offset * offset - 1.8D;
 	}
 
-	public boolean isGoalInProgress() {
-		return !isAnimationFinished() && canContinueToUse();
-	}
-
-	public boolean isAnimationFinished() {
-		return this.animationProgress >= this.animationLength;
-	}
+//	public boolean isGoalInProgress() {
+	//	return !isAnimationFinished() && canContinueToUse();
+	//}
 
 	public void baseTick() {
 		if (this.entity == null) return;
@@ -46,19 +43,6 @@ public abstract class AnimatableGoal extends Goal {
 		this.tickDelta = this.entity.level.getGameTime() - this.lastGameTime;
 		this.animationProgress += 1 + this.tickDelta / 100000.0;
 		this.lastGameTime = this.entity.level.getGameTime();
-	}
-
-	public void baseRoboTick() {
-		if (this.roboPounder == null) return;
-		if (this.isFirsLoop) {
-			this.isFirsLoop = false;
-			this.animationProgress += 1;
-			this.lastGameTime = this.roboPounder.level.getGameTime();
-			return;
-		}
-		this.tickDelta = this.roboPounder.level.getGameTime() - this.lastGameTime;
-		this.animationProgress += 1 + this.tickDelta / 100000.0;
-		this.lastGameTime = this.roboPounder.level.getGameTime();
 	}
 
 	@Override

@@ -3,11 +3,16 @@
 	"package": "io.github.chaosawakens.mixins",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"IForgeBlockMixin",
 		"LivingEntityMixin",
 		"NoiseChunkGeneratorAccessor",
 		"NoiseChunkGeneratorMixin",
+		"PlayerAdvancementMixin",
+		"PlayerEntityMixin",
 		"RabbitEntityMixin",
-		"SpawnEggItemMixin"
+		"SpawnEggItemMixin",
+		"VillagerEntityMixin",
+		"WolfEntityMixin"
 	],
 	"client": [
 		"RabbitEntityRendererMixin"

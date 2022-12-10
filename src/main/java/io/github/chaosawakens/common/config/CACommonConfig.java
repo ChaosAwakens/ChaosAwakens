@@ -1,19 +1,34 @@
 package io.github.chaosawakens.common.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import io.github.chaosawakens.common.util.EnumUtils;
+import io.github.chaosawakens.common.util.EnumUtils.AITargetingSystemType;
+import io.github.chaosawakens.common.util.EnumUtils.ExplosionType;
+import io.github.chaosawakens.common.util.EnumUtils.SurvivalSpawnerManipulationType;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
 public class CACommonConfig {
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
+	
+	public static List<Integer> LAPISMODLIST = new ArrayList<>();
 
 	static {
 		final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();
 		COMMON = commonSpecPair.getLeft();
+		defineLists();
+	}
+	
+	public static void defineLists() {
+		LAPISMODLIST.add(3);
+		LAPISMODLIST.add(8);
+		LAPISMODLIST.add(13);
 	}
 
 	public static class Common {
@@ -102,18 +117,29 @@ public class CACommonConfig {
 		public final ConfigValue<Integer> slayerChainsawDamage;
 
 		public final ConfigValue<Integer> attitudeAdjusterExplosionSize;
-		public final ConfigValue<Integer> attitudeAdjusterExplosionType;
+		public final ConfigValue<ExplosionType> attitudeAdjusterExplosionType;
 		public final ConfigValue<Boolean> attitudeAdjusterExplosionFire;
 		public final ConfigValue<Integer> rayGunExplosionSize;
-		public final ConfigValue<Integer> rayGunExplosionType;
+		public final ConfigValue<ExplosionType> rayGunExplosionType;
 		public final ConfigValue<Boolean> rayGunExplosionFire;
 		public final ConfigValue<Integer> thunderStaffExplosionSize;
-		public final ConfigValue<Integer> thunderStaffExplosionType;
+		public final ConfigValue<ExplosionType> thunderStaffExplosionType;
 		public final ConfigValue<Boolean> thunderStaffExplosionFire;
 
 		public final ConfigValue<Boolean> enableAutoEnchanting;
 		
-		public final ConfigValue<EnumUtils.ElytraDamageType> enderDragonScaleArmorElytraDamageType; 
+		public final ConfigValue<Integer> experienceSwordXPMultiplier;
+		public final ConfigValue<Boolean> enableExperienceSwordBonus;
+		
+		public final ConfigValue<EnumUtils.ElytraDamageType> enderDragonScaleArmorElytraDamageType;
+		
+		public final ConfigValue<Integer> experienceArmorSetRandomBonusXPSpawnTime;
+		public final ConfigValue<Integer> experienceArmorSetXPMultiplier;
+		
+		public final ConfigValue<Double> emeraldArmorDiscountMultiplier;
+		
+		public final ConfigValue<List<? extends Integer>> lapisArmorSetLevelRequirementReductionModifier;
+		public final ConfigValue<Integer> lapisArmorSetBookshelfPowerModifier;
 
 		public final ConfigValue<Boolean> crystalWorldRequiresEmptyInventory;
 		public final ConfigValue<Boolean> enableBrownAntTeleport;
@@ -126,7 +152,7 @@ public class CACommonConfig {
 		public final ConfigValue<Boolean> wanderingTraderSellsUraniumAndTitanium;
 		public final ConfigValue<Boolean> wanderingTraderSellsTriffidGoo;
 		public final ConfigValue<Integer> roboWarriorExplosionSize;
-		public final ConfigValue<Integer> roboWarriorExplosionType;
+		public final ConfigValue<ExplosionType> roboWarriorExplosionType;
 		public final ConfigValue<Boolean> roboWarriorExplosionFire;
 
 		public final ConfigValue<Boolean> enableOreGen;
@@ -138,6 +164,11 @@ public class CACommonConfig {
 
 		public final ConfigValue<Boolean> enableMarbleGen;
 		public final ConfigValue<Boolean> enableLimestoneGen;
+		public final ConfigValue<Boolean> enableRhinestoneGen;
+		
+		public final ConfigValue<Boolean> enableMarbleGenInOverworld;
+		public final ConfigValue<Boolean> enableLimestoneGenInOverworld;
+		public final ConfigValue<Boolean> enableRhinestoneGenInOverworld;
 
 		public final ConfigValue<Boolean> enableOreRubyGen;
 		public final ConfigValue<Boolean> enableOreTigersEyeGen;
@@ -152,6 +183,8 @@ public class CACommonConfig {
 		public final ConfigValue<Boolean> enableOrePlatinumGen;
 		public final ConfigValue<Boolean> enableOreSunstoneGen;
 		public final ConfigValue<Boolean> enableOreBloodstoneGen;
+		
+		public final ConfigValue<Boolean> enableStalagmiteOreGen;
 
 		public final ConfigValue<Boolean> enableEnchantedAnimalBreeding;
 
@@ -169,12 +202,22 @@ public class CACommonConfig {
 
 		public final ConfigValue<Boolean> enableDragonEggRespawns;
 		public final ConfigValue<Boolean> enderDragonHeadDrop;
+		
+		public final ConfigValue<Boolean> enableEnderScaleDragonArmorSetBonus;
+		public final ConfigValue<Boolean> enableExperienceArmorSetBonus;
+		public final ConfigValue<Boolean> enableEmeraldArmorSetBonus;
+		public final ConfigValue<Boolean> enableLavaEelArmorSetBonus;
+		public final ConfigValue<Boolean> enableLapisArmorSetBonus;
 
 		public final ConfigValue<Boolean> terraforgedCheckMsg;
 
-		public final ConfigValue<EnumUtils.SpawnEggSpawner> spawnEggsSpawnersSurvival;
+		public final ConfigValue<SurvivalSpawnerManipulationType> spawnEggsSpawnersSurvival;
 
 		public final ConfigValue<Boolean> showUpdateMessage;
+		
+		public final ConfigValue<AITargetingSystemType> roboPounderTargetingSystemType;
+		public final ConfigValue<AITargetingSystemType> entTargetingSystemType;
+		public final ConfigValue<AITargetingSystemType> herculesBeetleTargetingSystemType;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("Log messages");
@@ -194,10 +237,10 @@ public class CACommonConfig {
 			ultimateBowArrowDamageMultiplier = builder.define("Damage Multiplier of the Ultimate Bow's Power Enchantment", 0.5);
 			builder.pop();
 			builder.push("Emerald Weapons/Tools");
-			emeraldSwordDamage = builder.define("Damage of the Emerald Sword", 10);
-			emeraldAxeDamage = builder.define("Damage of the Emerald Axe", 12);
-			emeraldPickaxeDamage = builder.define("Damage of the Emerald Pickaxe", 8);
-			emeraldShovelDamage = builder.define("Damage of the Emerald Shovel", 9);
+			emeraldSwordDamage = builder.define("Damage of the Emerald Sword", 6);
+			emeraldAxeDamage = builder.define("Damage of the Emerald Axe", 9);
+			emeraldPickaxeDamage = builder.define("Damage of the Emerald Pickaxe", 4);
+			emeraldShovelDamage = builder.define("Damage of the Emerald Shovel", 5);
 			emeraldHoeDamage = builder.define("Damage of the Emerald Hoe", 1);
 			builder.pop();
 			builder.push("Ruby Weapons/Tools");
@@ -286,23 +329,119 @@ public class CACommonConfig {
 			fairySwordDamage = builder.define("Damage of the Fairy Sword", 10);
 			mantisClawDamage = builder.define("Damage of the Mantis Claw", 10);
 			bigHammerDamage = builder.define("Damage of the Big Hammer", 15);
-			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 17);
+			prismaticReaperDamage = builder.define("Damage of the Prismatic Reaper", 29);
 			builder.pop();
 			builder.push("Big Weapons/Tools");
 			attitudeAdjusterDamage = builder.define("Damage of the Attitude Adjuster", 65);
 			berthaDamage = builder.define("Damage of the Big Bertha", 500);
-			battleAxeDamage = builder.define("Damage of the Battle Axe", 50);
+			battleAxeDamage = builder.define("Damage of the Battle Axe", 84);
 			queenBattleAxeDamage = builder.define("Damage of the Queen Scale Battle Axe", 666);
 			royalGuardianSwordDamage = builder.define("Damage of the Royal Guardian Sword", 750);
-			slayerChainsawDamage = builder.define("Damage of the Slayer Chainsaw", 40);
+			slayerChainsawDamage = builder.define("Damage of the Slayer Chainsaw", 65);
 			builder.pop();
 			builder.pop();
 			builder.push("Functionality");
+			builder.push("AI");
+			builder.push("Ent");
+			builder.push("Targeting System");
+			entTargetingSystemType = builder.comment("Define how the Ent will act according to its targets, where:"
+					+ "\n" + "RADIUS_CLOSEST: The Ent will target the closest entity within its attack radius."
+					+ "\n" + "RADIUS_FARTHEST: The Ent will target the farthest entity within its attack radius."
+					+ "\n" + "DYNAMIC_WEAKEST: The Ent will target the weakest entity (measured by base stats and gear) within its attack radius."
+					+ "\n" + "DYNAMIC_STRONGEST: The Ent will target the strongest entity (measured by base stats and gear) within its attack radius."
+					+ "\n" + "FIXED: The Ent will follow its initial target until the entity is eliminated, no matter the circumstances."
+					+ "\n" + "HURT_BY: The Ent will automatically target another entity if said entity has hurt it in some way."
+					+ "\n" + "RANDOMIZED: The Ent will randomly switch targets whenever it feels like it."
+					+ "\n" + "RADIUS_CLOSEST_DYNAMIC_STRONGEST: The Ent will target the strongest entity that also happens to be the nearest to it."
+					+ "\n" + "RADIUS_CLOSEST_DYNAMIC_WEAKEST: The Ent will target the weakest entity that also happens to be the nearest to it."
+					+ "\n" + "RADIUS_FARTHEST_DYNAMIC_STRONGEST: The Ent will target the strongest entity that also happens to be the farthest from it."
+					+ "\n" + "RADIUS_FARTHEST_DYNAMIC_WEAKEST: The Ent will target the weakest entity that also happens to be the farthest from it."
+					+ "\n" + "RADIUS_CLOSEST_HURT_BY: The Ent will target the entity it is currently targeting, however, if it is hurt by an entity closer than its current target, it will switch targets to whoever hurt it (if they are close enough)."
+					+ "\n" + "RADIUS_FARTHEST_HURT_BY: The Ent will target the entity it is currently targeting, however, if it is hurt by an entity farther than its current target, it will switch targets to whoever hurt it (if they are far enough).")
+					.define("Ent targeting system", AITargetingSystemType.RADIUS_CLOSEST_HURT_BY);
+			builder.pop();
+			builder.pop();
+			builder.push("Hercules Beetle");
+			builder.push("Targeting System");
+			herculesBeetleTargetingSystemType = builder.comment("Define how the Hercules Beetle will act according to its targets, where:"
+					+ "\n" + "RADIUS_CLOSEST: The Hercules Beetle will target the closest entity within its attack radius."
+					+ "\n" + "RADIUS_FARTHEST: The Hercules Beetle will target the farthest entity within its attack radius."
+					+ "\n" + "DYNAMIC_WEAKEST: The Hercules Beetle will target the weakest entity (measured by base stats and gear) within its attack radius."
+					+ "\n" + "DYNAMIC_STRONGEST: The Hercules Beetle will target the strongest entity (measured by base stats and gear) within its attack radius."
+					+ "\n" + "FIXED: The Hercules Beetle will follow its initial target until the entity is eliminated, no matter the circumstances."
+					+ "\n" + "HURT_BY: The Hercules Beetle will automatically target another entity if said entity has hurt it in some way."
+					+ "\n" + "RANDOMIZED: The Hercules Beetle will randomly switch targets whenever it feels like it."
+					+ "\n" + "RADIUS_CLOSEST_DYNAMIC_STRONGEST: The Hercules Beetle will target the strongest entity that also happens to be the nearest to it."
+					+ "\n" + "RADIUS_CLOSEST_DYNAMIC_WEAKEST: The Hercules Beetle will target the weakest entity that also happens to be the nearest to it."
+					+ "\n" + "RADIUS_FARTHEST_DYNAMIC_STRONGEST: The Hercules Beetle will target the strongest entity that also happens to be the farthest from it."
+					+ "\n" + "RADIUS_FARTHEST_DYNAMIC_WEAKEST: The Hercules Beetle will target the weakest entity that also happens to be the farthest from it."
+					+ "\n" + "RADIUS_CLOSEST_HURT_BY: The Hercules Beetle will target the entity it is currently targeting, however, if it is hurt by an entity closer than its current target, it will switch targets to whoever hurt it (if they are close enough)."
+					+ "\n" + "RADIUS_FARTHEST_HURT_BY: The Hercules Beetle will target the entity it is currently targeting, however, if it is hurt by an entity farther than its current target, it will switch targets to whoever hurt it (if they are far enough).")
+					.define("Hercules Beetle targeting system", AITargetingSystemType.RADIUS_CLOSEST_HURT_BY);
+			builder.pop();
+			builder.pop();
+			builder.push("Robo Pounder");
+			builder.push("Targeting System");
+			roboPounderTargetingSystemType = builder.comment("Define how the Robo Pounder will act according to its targets, where:"
+					+ "\n" + "RADIUS_CLOSEST: The Robo Pounder will target the closest entity within its attack radius."
+					+ "\n" + "RADIUS_FARTHEST: The Robo Pounder will target the farthest entity within its attack radius."
+					+ "\n" + "DYNAMIC_WEAKEST: The Robo Pounder will target the weakest entity (measured by base stats and gear) within its attack radius."
+					+ "\n" + "DYNAMIC_STRONGEST: The Robo Pounder will target the strongest entity (measured by base stats and gear) within its attack radius."
+					+ "\n" + "FIXED: The Robo Pounder will follow its initial target until the entity is eliminated, no matter the circumstances."
+					+ "\n" + "HURT_BY: The Robo Pounder will automatically target another entity if said entity has hurt it in some way."
+					+ "\n" + "RANDOMIZED: The Robo Pounder will randomly switch targets whenever it feels like it."
+					+ "\n" + "RADIUS_CLOSEST_DYNAMIC_STRONGEST: The Robo Pounder will target the strongest entity that also happens to be the nearest to it."
+					+ "\n" + "RADIUS_CLOSEST_DYNAMIC_WEAKEST: The Robo Pounder will target the weakest entity that also happens to be the nearest to it."
+					+ "\n" + "RADIUS_FARTHEST_DYNAMIC_STRONGEST: The Robo Pounder will target the strongest entity that also happens to be the farthest from it."
+					+ "\n" + "RADIUS_FARTHEST_DYNAMIC_WEAKEST: The Robo Pounder will target the weakest entity that also happens to be the farthest from it."
+					+ "\n" + "RADIUS_CLOSEST_HURT_BY: The Robo Pounder will target the entity it is currently targeting, however, if it is hurt by an entity closer than its current target, it will switch targets to whoever hurt it (if they are close enough)."
+					+ "\n" + "RADIUS_FARTHEST_HURT_BY: The Robo Pounder will target the entity it is currently targeting, however, if it is hurt by an entity farther than its current target, it will switch targets to whoever hurt it (if they are far enough).")
+					.define("Robo Pounder targeting system", AITargetingSystemType.RADIUS_CLOSEST_HURT_BY);
+			builder.pop();
+			builder.pop();
+			builder.pop();
 			builder.push("Armor");
 			builder.push("Ender Dragon Scale Armor");
-			builder.comment("How the elytra on the Ender Dragon Scale Armor will get damaged," + "\n"
-			               + "where ARMOR means per hit, and ELYTRA means that it'll get damage every tick or so as you fly (basically the same as a normal elytra)");
-			enderDragonScaleArmorElytraDamageType = builder.define("Ender Dragon Scale Armor elytra damage type", EnumUtils.ElytraDamageType.ARMOR);
+			enderDragonScaleArmorElytraDamageType = builder
+					.comment("How the elytra on the Ender Dragon Scale Armor will get damaged," + "\n"
+		                    + "where ARMOR means per hit, and ELYTRA means that it'll get damage every 20 ticks or so as you fly (basically the same as a normal elytra). \n"
+				            + "This has yet to be functional in a future update")
+					.define("Ender Dragon Scale Armor elytra damage type", EnumUtils.ElytraDamageType.ELYTRA);
+			enableEnderScaleDragonArmorSetBonus = builder.define("Enable the Dragon Wings set bonus", true);
+			builder.pop();
+			builder.push("Emerald Armor");
+			enableEmeraldArmorSetBonus = builder.define("Enable the Emerald set bonus", true);
+			emeraldArmorDiscountMultiplier = builder
+					.comment("The multiplier by which villagers will discount their prices when a player is wearing a full emerald set. \n"
+							+ " This multiplier stacks per each player in the area. Formula: 1 = 12.5% Discount, 2 = 25% Discount, etc.")
+					.define("Emerald Armor Set Discount Multiplier", 4.0D);
+			builder.pop();
+			builder.push("Experience Armor");
+			enableExperienceArmorSetBonus = builder.define("Enable the Experience set bonus", true);
+			experienceArmorSetRandomBonusXPSpawnTime = builder
+					.comment("The number you input here will affect how frequently XP orbs randomly spawn on you, should you be wearing the full Experience Armor set. \n"
+					        + " The larger the number, the less frequent XP orbs will spawn on you.")
+					.define("The max amount of time (in ticks) between each XP orb spawn", 5500);
+			experienceArmorSetXPMultiplier = builder
+					.comment("The multiplier for XP dropped, either by killing mobs or by breaking blocks. This doesn't work on randomly spawning XP orbs from \n"
+							+ " the armor itself. Note that when killing a mob with the Experience Sword alongside the armor, the Experience Sword's multiplier \n"
+							+ " will be added onto the armor's multiplier.")
+					.define("Experience Armor Set XP Multiplier", 3);
+			builder.pop();
+			builder.push("Lapis Armor");
+			enableLapisArmorSetBonus = builder.define("Enable the Lapis set bonus", true);
+			lapisArmorSetLevelRequirementReductionModifier = builder
+					.comment("Modify/Substract from the enchantment level requirements for each enchantment row in the enchantment table. Note that if you attempt to expand or reduce \n"
+							+ " the size of the contents within the list, or define a number higher than the price listed in the enchantment table, the prices will automatically default to vanilla values. If you attempt \n"
+							+ " to define a NAN (not a number) value the game will crash. The first value is the modifier for the first row, the second value if the modifier for the \n"
+							+ "second row, and the third value is the modifier for the third row.")
+					.defineList("Lapis Set Enchantment Level Requirement Modifiers", LAPISMODLIST, cost -> cost instanceof Integer);
+			lapisArmorSetBookshelfPowerModifier = builder
+					.comment("The power of each bookshelf around the enchantment table when a player with the full Lapis Armor Set is present. This effect stacks with each present player.")
+					.define("Lapis Armor Set Bookshelf Power Moifier", 2);
+			builder.pop();
+			builder.push("Lava Eel Armor");
+			enableLavaEelArmorSetBonus = builder.define("Enable the Lava Eel set bonus", true);
 			builder.pop();
 			builder.pop();
 			builder.push("Tools/Weapons");
@@ -310,29 +449,35 @@ public class CACommonConfig {
 			builder.push("Attitude Adjuster");
 			attitudeAdjusterExplosionSize = builder.define("Attitude Adjuster explosion size", 4);
 			attitudeAdjusterExplosionType = builder
-					.comment("0 = NONE - The Attitude Adjuster will not affect the terrain." + "\n"
-							+ "1 = BREAK - The Attitude Adjuster will drop some blocks that it breaks." + "\n"
-							+ "2 = DESTROY - The Attitude Adjuster will destroy blocks and never drop them.")
-					.defineInRange("Attitude Adjuster explosion type", 2, 0, 2);
+					.comment("NONE - The Attitude Adjuster will not affect the terrain." + "\n"
+							+ "BREAK - The Attitude Adjuster will drop some blocks that it breaks." + "\n"
+							+ "DESTROY - The Attitude Adjuster will destroy blocks and never drop them.")
+					.define("Attitude Adjuster explosion type", ExplosionType.BREAK);
 			attitudeAdjusterExplosionFire = builder.define("Fire from Attitude Adjuster explosion", false);
 			builder.pop();
 			builder.push("Ray Gun");
 			rayGunExplosionSize = builder.define("Ray Gun explosion size", 6);
 			rayGunExplosionType = builder
-					.comment("0 = NONE - The Ray Gun will not affect the terrain." + "\n"
-							+ "1 = BREAK - The Ray Gun will drop some blocks that it breaks." + "\n"
-							+ "2 = DESTROY - The Ray Gun will destroy blocks and never drop them.")
-					.defineInRange("Ray Gun explosion type", 2, 0, 2);
+					.comment("NONE - The Ray Gun will not affect the terrain." + "\n"
+							+ "BREAK - The Ray Gun will drop some blocks that it breaks." + "\n"
+							+ "DESTROY - The Ray Gun will destroy blocks and never drop them.")
+					.define("Ray Gun explosion type", ExplosionType.BREAK);
 			rayGunExplosionFire = builder.define("Fire from Ray Gun explosion", false);
 			builder.pop();
 			builder.push("Thunder Staff");
 			thunderStaffExplosionSize = builder.define("Thunder Staff explosion size", 4);
 			thunderStaffExplosionType = builder
-					.comment("0 = NONE - The Thunder Staff will not affect the terrain." + "\n"
-							+ "1 = BREAK - The Thunder Staff will drop some blocks that it breaks. (May not work due to lightning)" + "\n"
-							+ "2 = DESTROY - The Thunder Staff will destroy blocks and never drop them.")
-					.defineInRange("Thunder Staff explosion type", 2, 0, 2);
+					.comment("NONE - The Thunder Staff will not affect the terrain." + "\n"
+							+ "BREAK - The Thunder Staff will drop some blocks that it breaks. (May not work due to lightning)" + "\n"
+							+ "DESTROY - The Thunder Staff will destroy blocks and never drop them.")
+					.define("Thunder Staff explosion type", ExplosionType.DESTROY);
 			thunderStaffExplosionFire = builder.define("Fire from Thunder Staff explosion", true);
+			builder.pop();
+			builder.pop();
+			builder.push("Swords");
+			builder.push("Experience Sword");
+			experienceSwordXPMultiplier = builder.define("Multiplier for XP dropped by killing mobs", 2);
+			enableExperienceSwordBonus = builder.define("Enable Experience Sword Weapon Bonus", true);
 			builder.pop();
 			builder.pop();
 			enableAutoEnchanting = builder
@@ -343,6 +488,8 @@ public class CACommonConfig {
 			enableEnchantedAnimalBreeding = builder
 					.comment("Will Enchanted Animals be Breedable?")
 					.define("Enchanted Animal Breeding", false);
+			builder.pop();
+			builder.push("Items");
 			builder.pop();
 			builder.push("Textures");
 			holidayTextures = builder
@@ -364,12 +511,12 @@ public class CACommonConfig {
 			builder.pop();
 			builder.push("Spawners");
 			spawnEggsSpawnersSurvival = builder
-					.comment("NO_SPAWN_EGGS = " + EnumUtils.SpawnEggSpawner.NO_SPAWN_EGGS.getDescription() + "\n"
-							+ "NO_CHAOS_AWAKENS = " + EnumUtils.SpawnEggSpawner.NO_CHAOS_AWAKENS.getDescription() + "\n"
-							+ "ALL_SPAWN_EGGS = " + EnumUtils.SpawnEggSpawner.ALL_SPAWN_EGGS.getDescription() + "\n"
-							+ "TAG_BLACKLIST = " + EnumUtils.SpawnEggSpawner.TAG_BLACKLIST.getDescription() + "\n"
-							+ "TAG_WHITELIST = " + EnumUtils.SpawnEggSpawner.TAG_WHITELIST.getDescription())
-					.defineEnum("Spawn Eggs on Spawners in Survival?", EnumUtils.SpawnEggSpawner.NO_SPAWN_EGGS);
+					.comment("NO_BLOCKING - All Spawn Eggs can be used on a Spawner in Survival." + "\n"
+							+ "BLOCK_ALL - All Spawn Eggs will be blocked from being used on a Spawner in Survival." + "\n"
+							+ "BLOCK_CHAOS_AWAKENS - Only Spawn Eggs from Chaos Awakens will be blocked from being used on a Spawner in Survival."
+							+ "TAG_BLACKLISTED - Only Spawn Eggs which aren't tagged with the 'SPAWNER_SPAWN_EGG' tag can be used on a Spawner in Survival."
+							+ "TAG_WHITELISTED - Only Spawn Eggs which are tagged with the 'SPAWNER_SPAWN_EGG' tag can be used on a Spawner in Survival.")
+					.define("Spawn Eggs on Spawners in Survival?", SurvivalSpawnerManipulationType.BLOCK_ALL);
 			builder.pop();
 			builder.pop();
 			builder.push("World Generation");
@@ -392,6 +539,10 @@ public class CACommonConfig {
 			enableFossilGen = builder.define("Enable fossil generation", true);
 			enableMarbleGen = builder.define("Enable marble generation in the mining dimension", true);
 			enableLimestoneGen = builder.define("Enable limestone generation in the mining dimension", true);
+			enableRhinestoneGen = builder.define("Enable rhinestone generation in the mining dimension", true);
+			enableMarbleGenInOverworld = builder.define("Enable marble generation in the overworld", false);
+			enableLimestoneGenInOverworld = builder.define("Enable limestone generation in the overworld", false);
+			enableRhinestoneGenInOverworld = builder.define("Enable rhinestone generation in the overworld", false);
 			enableTrollOreGen = builder.define("Enable infested ore generation", true);
 			enableDzMineralOreGen = builder.define("Enable DZ ore generation", true);
 			spawnDzOresInOverworld = builder
@@ -429,6 +580,18 @@ public class CACommonConfig {
 					.comment("Will Wasp Nests be generated?")
 					.define("Generate Wasp Nests", true);
 			builder.pop();
+			builder.push("Dimensioms");
+			builder.push("Mining Paradise");
+			builder.push("Biomes");
+			builder.push("Stalagmite Valley");
+			enableStalagmiteOreGen = builder
+					.comment("Enable/Disable ores generating on the stalagmites in Stalagmite Valley. Note that this may require a more powerful computer, \n"
+							+ "until further optimization is made.")
+					.define("Enable Stalamite Ore Gen", true);
+			builder.pop();
+			builder.pop();
+			builder.pop();
+			builder.pop();
 			builder.pop();
 			builder.push("Dimensions");
 			crystalWorldRequiresEmptyInventory = builder
@@ -465,10 +628,10 @@ public class CACommonConfig {
 			builder.push("Robo Warrior");
 			roboWarriorExplosionSize = builder.define("Robo Warrior explosion size", 6);
 			roboWarriorExplosionType = builder
-					.comment("0 = NONE - The Robo Warrior will not affect the terrain." + "\n"
-							+ "1 = BREAK - The Robo Warrior will drop some blocks that it breaks." + "\n"
-							+ "2 = DESTROY - The Robo Warrior will destroy blocks and never drop them.")
-					.defineInRange("Ray Gun explosion type", 2, 0, 2);
+					.comment("NONE - The Robo Warrior will not affect the terrain." + "\n"
+							+ "BREAK - The Robo Warrior will drop some blocks that it breaks." + "\n"
+							+ "DESTROY - The Robo Warrior will destroy blocks and never drop them.")
+					.define("Ray Gun explosion type", ExplosionType.BREAK);
 			roboWarriorExplosionFire = builder.define("Fire from Robo Warrior explosion", false);
 			builder.pop();
 			builder.pop();

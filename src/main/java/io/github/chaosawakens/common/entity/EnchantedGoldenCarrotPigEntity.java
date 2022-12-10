@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.entity;
 
+import io.github.chaosawakens.api.IAnimatableEntity;
 import io.github.chaosawakens.common.config.CACommonConfig;
-
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.BlockState;
@@ -10,7 +10,14 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,20 +25,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimatable {
+public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimatableEntity, IAnimationTickable {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<?> controller = new AnimationController<>(this, "enchantedgoldencarrtotpigcontroller", animationInterval(), this::predicate);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.GOLDEN_CARROT, CAItems.GOLDEN_POTATO.get(), CAItems.GOLDEN_BEETROOT.get());
 
 	public EnchantedGoldenCarrotPigEntity(EntityType<? extends EnchantedGoldenCarrotPigEntity> type, World worldIn) {
@@ -46,13 +61,13 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 				.add(Attributes.FOLLOW_RANGE, 10);
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	public <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.walking_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.carrot_pig.idle_animation", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -114,7 +129,7 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "enchantedgoldencarrtotpigcontroller", 0, this::predicate));
+		data.addAnimationController(controller);
 	}
 
 	@Override
@@ -157,5 +172,20 @@ public class EnchantedGoldenCarrotPigEntity extends PigEntity implements IAnimat
 
 	public boolean readyForShearing() {
 		return this.isAlive() && !this.isBaby();
+	}
+
+	@Override
+	public int tickTimer() {
+		return tickCount;
+	}
+
+	@Override
+	public AnimationController<?> getController() {
+		return controller;
+	}
+
+	@Override
+	public int animationInterval() {
+		return 4;
 	}
 }

@@ -35,7 +35,7 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 		//if (shouldHit(level, random)) {
 			if (attacker != null && attacker instanceof LivingEntity) {
 				//hit.hurt(DamageSource.MAGIC, 0);
-				((LivingEntity) attacker).addEffect( new EffectInstance(CAEffects.BURNS.get(), 60, level - 1));
+				((LivingEntity) attacker).addEffect( new EffectInstance(CAEffects.BURNS_EFFECT.get(), 60, level - 1));
 			}
 			//((PlayerEntity) attacked).totalExperience
 			if (entry != null)

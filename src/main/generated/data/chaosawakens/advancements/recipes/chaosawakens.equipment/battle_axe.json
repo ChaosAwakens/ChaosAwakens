@@ -6,16 +6,6 @@
     ]
   },
   "criteria": {
-    "has_ultimate_sword": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "chaosawakens:ultimate_sword"
-          }
-        ]
-      }
-    },
     "has_ultimate_axe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -36,6 +26,26 @@
         ]
       }
     },
+    "has_ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:ruby"
+          }
+        ]
+      }
+    },
+    "has_stick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:stick"
+          }
+        ]
+      }
+    },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
@@ -45,9 +55,10 @@
   },
   "requirements": [
     [
-      "has_ultimate_sword",
       "has_ultimate_axe",
       "has_triffid_goo",
+      "has_ruby",
+      "has_stick",
       "has_the_recipe"
     ]
   ]

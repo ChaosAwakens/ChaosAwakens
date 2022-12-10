@@ -1,0 +1,46 @@
+{
+  "parent": "chaosawakens:root/tin_armor",
+  "display": {
+    "icon": {
+      "item": "chaosawakens:silver_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.chaosawakens.silver_armor.title"
+    },
+    "description": {
+      "translate": "advancements.chaosawakens.silver_armor.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "chaosawakens:textures/gui/advancement_bg.png"
+  },
+  "criteria": {
+    "silver_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:silver_helmet"
+          },
+          {
+            "item": "chaosawakens:silver_chestplate"
+          },
+          {
+            "item": "chaosawakens:silver_leggings"
+          },
+          {
+            "item": "chaosawakens:silver_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "silver_armor"
+    ]
+  ]
+}

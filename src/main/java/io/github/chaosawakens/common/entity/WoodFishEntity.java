@@ -1,13 +1,27 @@
 package io.github.chaosawakens.common.entity;
 
+import java.util.EnumSet;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -17,7 +31,12 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
@@ -25,14 +44,11 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nullable;
-import java.util.EnumSet;
-import java.util.Random;
 
 public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -64,21 +80,21 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.swim", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.swim", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (!event.isMoving()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.swim", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.swim", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		if (this.dead) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.flop", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.flop", ILoopType.EDefaultLoopTypes.LOOP));
 		}
 		if (this.isSwimming()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.swim", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.swim", ILoopType.EDefaultLoopTypes.LOOP));
 		}
 		if (this.isDeadOrDying()) {
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.flop", true));
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wood_fish.flop", ILoopType.EDefaultLoopTypes.LOOP));
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
@@ -89,9 +105,10 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.05D));
 		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 3.0F, 3.0F));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D, EntityPredicates.NO_SPECTATORS::test));
-		this.goalSelector.addGoal(4, new WoodFishEntity.SwimGoal(this));
-		this.goalSelector.addGoal(4, new WoodFishEntity.GoToWaterGoal(this, 30.0D));
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, PlayerEntity.class, 4.0F, 0.8D, 0.7D, EntityPredicates.NO_SPECTATORS::test));
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, RockFishEntity.class, 12.0F, 1.3D, 1.5D, EntityPredicates.NO_SPECTATORS::test));
+		this.goalSelector.addGoal(1, new WoodFishEntity.SwimGoal(this));
+		this.goalSelector.addGoal(2, new WoodFishEntity.GoToWaterGoal(this, 1.6D));
 	}
 
 	@Override
@@ -131,7 +148,7 @@ public class WoodFishEntity extends AbstractGroupFishEntity implements IAnimatab
 
 	@Override
 	public int getMaxAirSupply() {
-		return 1000;
+		return 450;
 	}
 
 	@Override

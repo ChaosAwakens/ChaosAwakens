@@ -1,13 +1,23 @@
 package io.github.chaosawakens.common.integration;
 
+import java.util.List;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.AntInfestedOre;
 import io.github.chaosawakens.common.registry.CABlocks;
 import mcp.mobius.waila.Waila;
 import mcp.mobius.waila.addons.core.HUDHandlerBlocks;
-import mcp.mobius.waila.api.*;
+import mcp.mobius.waila.api.IComponentProvider;
+import mcp.mobius.waila.api.IDataAccessor;
+import mcp.mobius.waila.api.IPluginConfig;
+import mcp.mobius.waila.api.IRegistrar;
+import mcp.mobius.waila.api.ITaggableList;
+import mcp.mobius.waila.api.IWailaPlugin;
+import mcp.mobius.waila.api.TooltipPosition;
+import mcp.mobius.waila.api.WailaPlugin;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,8 +27,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.registries.ForgeRegistries;
 import snownee.jade.JadePlugin;
-
-import java.util.List;
 
 @WailaPlugin
 public class CAJadePlugin implements IWailaPlugin {

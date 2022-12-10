@@ -1,6 +1,12 @@
 package io.github.chaosawakens.common.events;
 
+import java.io.IOException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
+
 import com.mojang.brigadier.CommandDispatcher;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CACommonConfig;
@@ -9,12 +15,21 @@ import io.github.chaosawakens.common.entity.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CACommand;
 import io.github.chaosawakens.common.registry.CADimensions;
+import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.command.CommandSource;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
@@ -27,7 +42,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
-import net.minecraft.util.text.*;
+import net.minecraft.util.text.ChatType;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -36,20 +53,29 @@ import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.DerivedWorldInfo;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickEmpty;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
 import net.minecraftforge.event.world.SleepFinishedTimeEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.VersionChecker;
-import java.util.Objects;
-import java.util.Random;
-import java.util.UUID;
 
 public class MiscEventHandler {
-	@SubscribeEvent
 	public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
 		CommandDispatcher<CommandSource> commandDispatcher = event.getDispatcher();
 		CACommand.register(commandDispatcher);
@@ -77,7 +103,130 @@ public class MiscEventHandler {
 			}
 		}
 	}
-
+	
+	@SuppressWarnings("unused")
+	public static void onEnchant(EnchantmentLevelSetEvent event) {
+		World world = event.getWorld();
+		//I found that the best way to do this is to loop through each player
+		for (PlayerEntity player : world.players()) {
+			if (player == null) return;
+			if (IUtilityHelper.isFullArmorSet(player, CAItems.LAPIS_HELMET.get(), CAItems.LAPIS_CHESTPLATE.get(), CAItems.LAPIS_LEGGINGS.get(), CAItems.LAPIS_BOOTS.get())) {
+				ItemStack stack = event.getItem();
+				int row = event.getEnchantRow();
+				int power = event.getPower();
+				int cost = EnchantmentHelper.getEnchantmentCost(world.random, row, power, stack);
+				switch (row) {
+				default:
+					break;
+				case 1:
+					event.setLevel(event.getLevel() - (CACommonConfig.LAPISMODLIST.get(0) + 5));
+					if (event.getLevel() <= 0) {
+						event.setLevel(EnchantmentHelper.getEnchantmentCost(world.random, row, power, stack));
+					}
+					break;
+				case 2:
+					event.setLevel(event.getLevel() - (CACommonConfig.LAPISMODLIST.get(1) + 5));
+					if (event.getLevel() <= 0) {
+						event.setLevel(EnchantmentHelper.getEnchantmentCost(world.random, row, power, stack));
+					}
+					break;
+				case 3:
+					event.setLevel(event.getLevel() - (CACommonConfig.LAPISMODLIST.get(2) + 5));
+					if (event.getLevel() <= 0) {
+						event.setLevel(EnchantmentHelper.getEnchantmentCost(world.random, row, power, stack));
+					}
+					break;
+				}
+			}
+		}
+	}
+	
+	public static void onMobXPDrop(LivingExperienceDropEvent event) {
+		PlayerEntity player = event.getAttackingPlayer();
+		if (player == null) return;
+		int xpValue = event.getDroppedExperience();
+		
+		if (CACommonConfig.COMMON.enableExperienceArmorSetBonus.get()) {
+			if (IUtilityHelper.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
+				event.setDroppedExperience(xpValue * CACommonConfig.COMMON.experienceArmorSetXPMultiplier.get());
+			}
+			
+			if (IUtilityHelper.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get()) && player.getMainHandItem().getItem().equals(CAItems.EXPERIENCE_SWORD.get())) {
+				event.setDroppedExperience(xpValue * (CACommonConfig.COMMON.experienceArmorSetXPMultiplier.get() + CACommonConfig.COMMON.experienceSwordXPMultiplier.get()));
+			}
+		}
+		
+		if (CACommonConfig.COMMON.enableExperienceSwordBonus.get()) {
+			if (player.getMainHandItem().getItem().equals(CAItems.EXPERIENCE_SWORD.get())) {
+				event.setDroppedExperience(xpValue * CACommonConfig.COMMON.experienceSwordXPMultiplier.get());
+			}
+		}
+	}
+	
+	public static void onBlockBreakXP(BlockEvent.BreakEvent event) {
+		PlayerEntity player = event.getPlayer();
+		if (player == null) return;
+		int xpValue = event.getExpToDrop();
+		
+		if (CACommonConfig.COMMON.enableExperienceArmorSetBonus.get()) {
+			if (IUtilityHelper.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
+				event.setExpToDrop(xpValue * CACommonConfig.COMMON.experienceArmorSetXPMultiplier.get());
+			}
+		}
+		
+		if (player instanceof LivingEntity) {
+			if (event.isCancelable() && ((LivingEntity) player).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		}
+	}
+	
+	// Account for paralysis actually taking full effect
+	public static void onLivingJump(LivingJumpEvent event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onPlayerInteract(PlayerInteractEvent event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onLivingAttack(AttackEntityEvent event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onLivingUse(LivingEntityUseItemEvent event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onLivingBlockPlace(EntityPlaceEvent event) {
+		if (event.getEntity() instanceof LivingEntity) {
+			if (event.isCancelable() && ((LivingEntity) event.getEntity()) instanceof PlayerEntity && ((LivingEntity) event.getEntity()).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		}
+	}
+	
+	public static void onBucketFill(FillBucketEvent event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onPlayerItemPickup(ItemPickupEvent event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	// Client side events to prevent the player/entity from swinging their hand or interacting while paralyzed
+	public static void onPlayerLeftClickInteractEmpty(LeftClickEmpty event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onPlayerRightClickInteractEmpty(RightClickEmpty event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onPlayerLeftClickInteractBlock(LeftClickBlock event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	public static void onPlayerRightClickInteractBlock(RightClickBlock event) {
+		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
 	public static void onMobDrops(LivingDropsEvent event) {
 		ItemStack stack;
 		ItemEntity drop;
@@ -120,6 +269,14 @@ public class MiscEventHandler {
 			Objects.requireNonNull(entity.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.BLUE)
 					.append(new StringTextComponent("Ninjaguy169").withStyle(TextFormatting.BOLD, TextFormatting.DARK_BLUE))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.BLUE)), ChatType.SYSTEM, Util.NIL_UUID);
+		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("2668a475-2166-4539-9935-00f087818c4a"))) { // UUID of T40ne
+			Objects.requireNonNull(entity.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.GOLD)
+					.append(new StringTextComponent("T40ne").withStyle(TextFormatting.BOLD, TextFormatting.YELLOW))
+					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.GOLD)), ChatType.SYSTEM, Util.NIL_UUID);
+		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("8c89a0d3-3271-459d-a8c1-a9d34d53365b"))) { // UUID of FunkyMonk127
+			Objects.requireNonNull(entity.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.RED)
+					.append(new StringTextComponent("FunkyMonk127").withStyle(TextFormatting.BOLD, TextFormatting.DARK_RED))
+					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.RED)), ChatType.SYSTEM, Util.NIL_UUID);
 		}
 	}
 
@@ -165,10 +322,13 @@ public class MiscEventHandler {
 		IWorld world = event.getWorld();
 		if (world instanceof ServerWorld) {
 			if (world.getLevelData() instanceof DerivedWorldInfo) {
-				ServerWorld serverWorld = (ServerWorld) world;
-				DerivedWorldInfo derivedWorldInfo = (DerivedWorldInfo) world.getLevelData();
-				if (serverWorld.dimension() == CADimensions.CRYSTAL_WORLD || serverWorld.dimension() == CADimensions.MINING_PARADISE || serverWorld.dimension() == CADimensions.VILLAGE_MANIA) {
-					derivedWorldInfo.wrapped.setDayTime(event.getNewTime());
+				try (ServerWorld serverWorld = (ServerWorld) world) {
+					DerivedWorldInfo derivedWorldInfo = (DerivedWorldInfo) world.getLevelData();
+					if (serverWorld.dimension() == CADimensions.CRYSTAL_WORLD || serverWorld.dimension() == CADimensions.MINING_PARADISE || serverWorld.dimension() == CADimensions.VILLAGE_MANIA) {
+						derivedWorldInfo.wrapped.setDayTime(event.getNewTime());
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 		}
