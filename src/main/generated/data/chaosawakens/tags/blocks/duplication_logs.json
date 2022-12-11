@@ -4,8 +4,10 @@
     "chaosawakens:duplication_log",
     "chaosawakens:stripped_duplication_log",
     "chaosawakens:dead_duplication_log",
+    "chaosawakens:stripped_dead_duplication_log",
     "chaosawakens:duplication_wood",
     "chaosawakens:stripped_duplication_wood",
-    "chaosawakens:dead_duplication_wood"
+    "chaosawakens:dead_duplication_wood",
+    "chaosawakens:stripped_dead_duplication_wood"
   ]
 }

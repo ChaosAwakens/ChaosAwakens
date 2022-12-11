@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "cross": "chaosawakens:block/crystal_energy"
+    "all": "chaosawakens:block/crystal_energy"
   }
 }

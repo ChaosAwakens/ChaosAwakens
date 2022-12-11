@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/slab_top",
+  "parent": "minecraft:block/slab",
   "textures": {
     "side": "chaosawakens:block/moldy_planks",
     "bottom": "chaosawakens:block/moldy_planks",

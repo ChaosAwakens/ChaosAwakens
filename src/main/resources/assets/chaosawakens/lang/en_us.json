@@ -734,7 +734,12 @@
 	"block.chaosawakens.blue_bulb": "Blue Bulb",
 	"block.chaosawakens.pink_bulb": "Pink Bulb",
 	"block.chaosawakens.purple_bulb": "Purple Bulb",
-
+	
+	"block.chaosawakens.flower_stem": "Flower Stem",
+	"block.chaosawakens.navy_blue_petal_block": "Navy Blue Petal Block",
+	"block.chaosawakens.bright_pink_petal_block": "Bright Pink Petal Block",
+	"block.chaosawakens.blood_red_petal_block": "Blood Red Petal Block",
+	
 	"block.chaosawakens.crystal_grass_block": "Crystal Grass Block",
 	"block.chaosawakens.kyanite": "Kyanite",
 	"block.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
@@ -936,10 +941,12 @@
 
 	"block.chaosawakens.duplication_log": "Duplication Tree Log",
 	"block.chaosawakens.duplication_wood": "Duplication Wood",
-	"block.chaosawakens.stripped_duplication_log": "Stripped Duplication Tree Logs",
+	"block.chaosawakens.stripped_duplication_log": "Stripped Duplication Tree Log",
 	"block.chaosawakens.stripped_duplication_wood": "Stripped Duplication Wood",
 	"block.chaosawakens.dead_duplication_log": "Dead Duplication Tree Log",
 	"block.chaosawakens.dead_duplication_wood": "Dead Duplication Tree Wood",
+	"block.chaosawakens.stripped_dead_duplication_log": "Stripped Dead Duplication Tree Log",
+	"block.chaosawakens.stripped_dead_duplication_wood": "Stripped Dead Duplication Tree Wood",
 	"block.chaosawakens.duplication_leaves": "Duplication Leaves",
 	"block.chaosawakens.duplication_leaf_carpet": "Duplication Leaf Carpet",
 	"block.chaosawakens.duplication_planks": "Duplication Planks",
@@ -1006,6 +1013,8 @@
 	"block.chaosawakens.skywood_sign": "Skywood Sign",
 	"block.chaosawakens.skywood_trapdoor": "Skywood Trapdoor",
 	"block.chaosawakens.skywood_door": "Skywood Door",
+	"block.chaosawakens.sky_moss_block": "Sky Moss Block",
+	"block.chaosawakens.sky_moss_carpet": "Sky Moss Carpet",
 
 	"block.chaosawakens.marble_block": "Marble",
 	"block.chaosawakens.marble_slab": "Marble Slab",
@@ -1095,6 +1104,13 @@
 	"block.chaosawakens.robo_wall_l": "Robo Wall",
 	"block.chaosawakens.robo_wall_x": "Robo Wall",
 	"block.chaosawakens.robo_lamp": "Robo Lamp",
+	"block.chaosawakens.robo_bricks": "Robo Stairs",
+	"block.chaosawakens.robo_brick_slab": "Robo Brick Slab",
+	"block.chaosawakens.robo_brick_stairs": "Robo Brick Stairs",
+	"block.chaosawakens.robo_brick_wall": "Robo Brick Wall",
+	"block.chaosawakens.compact_robo_block": "Compact Robo Block",
+	"block.chaosawakens.robo_gate_block": "Robo Gate Block",
+	"block.chaosawakens.robo_crate": "Robo Crate",
 	
 	"block.chaosawakens.black_terracotta_bricks": "Black Terracotta Bricks",
 	"block.chaosawakens.blue_terracotta_bricks": "Blue Terracotta Bricks",
@@ -1280,11 +1296,7 @@
 	"item.chaosawakens.mobzilla_scale": "Mobzilla Scale",
 	"item.chaosawakens.royal_guardian_scale": "Royal Guardian Scale",
 	"item.chaosawakens.queen_scale": "Queen Scale",
-
-	"enchantment.chaosawakens.ignition": "Ignition",
-
-	"effect.chaosawakens.burns": "Burns",
-
+	
 	"misc.chaosawakens.empty_inventory": "This anthill requires an empty inventory!",
 	"misc.chaosawakens.inaccessible_dimension": "This anthill seems to have not been implemented yet!",
 	

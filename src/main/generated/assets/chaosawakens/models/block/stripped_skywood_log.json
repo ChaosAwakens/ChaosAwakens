@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "minecraft:block/cube_column",
   "textures": {
     "side": "chaosawakens:block/stripped_skywood_log",
     "end": "chaosawakens:block/stripped_skywood_log_top"

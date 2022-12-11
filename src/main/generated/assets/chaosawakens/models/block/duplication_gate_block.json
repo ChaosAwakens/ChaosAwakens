@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "side": "chaosawakens:block/duplication_gate_block",
-    "top": "chaosawakens:block/gate_block_top",
-    "bottom": "chaosawakens:block/gate_block_top"
+    "bottom": "chaosawakens:block/gate_block_top",
+    "top": "chaosawakens:block/gate_block_top"
   }
 }

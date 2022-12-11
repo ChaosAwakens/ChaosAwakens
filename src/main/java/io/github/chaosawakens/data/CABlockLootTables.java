@@ -322,6 +322,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.ROBO_BRICK_WALL.get());
 		dropSelf(CABlocks.COMPACT_ROBO_BLOCK.get());
 		dropSelf(CABlocks.ROBO_GATE_BLOCK.get());
+		dropSelf(CABlocks.ROBO_CRATE.get());
 
 		// Flower Blocks
 		dropSelf(CABlocks.FLOWER_STEM.get());
@@ -468,6 +469,15 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CRACKED_TERRACOTTA_BRICK_WALL.get());
 		dropSelf(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get());
 		dropSelf(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get());
+		
+		dropSelf(CABlocks.SKY_MOSS_BLOCK.get());
+/*		dropSelf(CABlocks.SKY_MOSS_CARPET.get());
+		dropSelf(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get());
+		dropSelf(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get());
+		dropSelf(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get());
+		dropSelf(CABlocks.CRACKED_WHITE_TERRACOTTA_BRICK_WALL.get());
+		dropSelf(CABlocks.CRACKED_YELLOW_TERRACOTTA_BRICK_WALL.get());
+*/
 
 		dropSelf(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get());
 		dropSelf(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get());

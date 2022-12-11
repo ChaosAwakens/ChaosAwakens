@@ -417,8 +417,8 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.doorBlock(CABlocks.PEACH_DOOR.get());
 		this.doorBlock(CABlocks.SKYWOOD_DOOR.get());
 
-		this.simpleBlock(CABlocks.SKY_MOSS_BLOCK.get());
-		this.leafCarpetBlock(CABlocks.SKY_MOSS_CARPET.get(), mcRL("sky_moss"));
+		this.simpleBlock(CABlocks.SKY_MOSS_BLOCK.get(), this.models().cubeAll(CABlocks.SKY_MOSS_BLOCK.getId().getPath(), chaosRL("sky_moss")));
+		this.leafCarpetBlock(CABlocks.SKY_MOSS_CARPET.get(), chaosRL("sky_moss"));
 
 		this.simpleBlock(CABlocks.MOLDY_PLANKS.get());
 		this.slabBlock(CABlocks.MOLDY_SLAB.get(), chaosRL("moldy_planks"), chaosRL("moldy_planks"));

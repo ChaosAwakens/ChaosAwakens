@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "minecraft:block/cube_column",
   "textures": {
     "side": "chaosawakens:block/limestone_pillar",
     "end": "chaosawakens:block/limestone_pillar_top"
