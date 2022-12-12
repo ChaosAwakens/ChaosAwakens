@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.base;
 import java.util.List;
 import java.util.UUID;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IAnimatableEntity;
 import io.github.chaosawakens.api.IUtilityHelper;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -29,7 +30,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -290,9 +293,11 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.tickDeath();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
-		return super.checkSpawnRules(world, reason);
+		return MonsterEntity.checkMonsterSpawnRules((EntityType<? extends MonsterEntity>) this.getType(),
+				(IServerWorld) world, reason, this.blockPosition(), this.random);
 	}
 	
 	@Override
