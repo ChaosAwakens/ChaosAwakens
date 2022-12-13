@@ -20,7 +20,8 @@ public class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		super(properties, direction, shape, p_i241179_4_);
 		this.topBlock = topBlock;
 	}
-
+	
+	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState state2, IWorld worldIn, BlockPos pos, BlockPos pos2) {
 		if (direction == this.growthDirection.getOpposite() && !state.canSurvive(worldIn, pos)) {
 			worldIn.getBlockTicks().scheduleTick(pos, this, 1);
