@@ -11,7 +11,7 @@ public class StalagmiteFeatureConfig implements IFeatureConfig {
 
 	public static final Codec<StalagmiteFeatureConfig> CODEC = RecordCodecBuilder.create(builder -> builder
 			.group(BlockState.CODEC.fieldOf("block").forGetter(config -> config.block),
-					Codec.intRange(1, 16).fieldOf("chance").forGetter(config -> config.chance),
+					Codec.intRange(1, 256).fieldOf("chance").forGetter(config -> config.chance),
 					Codec.intRange(1, 16).fieldOf("base-radius").forGetter(config -> config.baseRadius),
 					Codec.floatRange(0.1f, 10).fieldOf("base-steepness").forGetter(config -> config.baseSteepness),
 					Codec.floatRange(0, 10).fieldOf("variation").forGetter(config -> config.variation),

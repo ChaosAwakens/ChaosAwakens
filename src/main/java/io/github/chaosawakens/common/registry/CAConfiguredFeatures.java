@@ -16,6 +16,7 @@ import io.github.chaosawakens.common.worldgen.placement.DoubleCrystalPlantBlockP
 import io.github.chaosawakens.common.worldgen.placement.DoubleDensePlantBlockPlacer;
 import io.github.chaosawakens.common.worldgen.placement.OceanBedPlacement;
 import io.github.chaosawakens.common.worldgen.trunkplacer.CrystalTrunkPlacer;
+import io.github.chaosawakens.common.worldgen.trunkplacer.GiantGinkgoTrunkPlacer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
@@ -50,7 +51,6 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
-import net.minecraft.world.gen.trunkplacer.GiantTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 
 public class CAConfiguredFeatures {
@@ -176,12 +176,12 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> END_FOSSILISED_SHULKER = register("end_ore_fossilised_shulker", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_END_STONE, States.FOSSILISED_SHULKER, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(37, 27))).squared().count(8));
 
 	// MINING PARADISE
-	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON = register("stalagmite", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 4, 4, 1.8F, 2, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
-	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON_SHORT = register("stalagmite", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 5, 4, 1.25F, 2, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
-	public static final ConfiguredFeature<?, ?> STALAGMITE_SKYSCRAPER = register("stalagmite", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 32, 7, 2.25F, 0.5f, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
-	public static final ConfiguredFeature<?, ?> STALAGMITE_CONE = register("stalagmite", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 6, 7, 0.15F, 1, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON = register("stalagmite_common", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 4, 4, 1.8F, 2, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON_SHORT = register("stalagmite_common_short", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 5, 4, 1.25F, 2, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_SKYSCRAPER = register("stalagmite_skyscraper", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 32, 7, 2.25F, 0.5f, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_CONE = register("stalagmite_cone", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 6, 7, 0.15F, 1, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
 	
-	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON_LIMESTONE = register("stalagmite", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(CABlocks.LIMESTONE.get().defaultBlockState(), 256, 12, 1.35F, 0.5f, StalagmiteBlockGenType.ORE_RARE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON_LIMESTONE = register("stalagmite_common_limestone", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(CABlocks.LIMESTONE.get().defaultBlockState(), 256, 12, 1.35F, 0.5f, StalagmiteBlockGenType.ORE_RARE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
 	
 	
 	public static final ConfiguredFeature<?, ?> MINING_ORE_RUBY_LAVA = register("mining_ore_ruby", Feature.NO_SURFACE_ORE.configured(new OreFeatureConfig(RuleTests.BASE_LAVA, States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(4));
@@ -310,7 +310,7 @@ public class CAConfiguredFeatures {
 
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GINKGO_TREE = register("ginkgo_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.GINKGO_LOG), new SimpleBlockStateProvider(States.GINKGO_LEAVES), new FancyFoliagePlacer(FeatureSpread.of(1, 2), FeatureSpread.fixed(0), 4), new StraightTrunkPlacer(5, 3, 0), new TwoLayerFeature(2, 0, 2)).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
 	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GINKGO_TREE_FANCY = register("ginkgo_tree_fancy", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.GINKGO_LOG), new SimpleBlockStateProvider(States.GINKGO_LEAVES), new ElipticFoliagePlacer(FeatureSpread.of(2, 1), FeatureSpread.fixed(0), FeatureSpread.of(5, 2)), new StraightTrunkPlacer(7, 4, 0), new TwoLayerFeature(2, 0, 2)).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
-	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GINKGO_TREE_MEGA = register("ginkgo_tree_mega", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.GINKGO_LOG), new SimpleBlockStateProvider(States.GINKGO_LEAVES), new MegaPineFoliagePlacer(FeatureSpread.fixed(1), FeatureSpread.fixed(0), FeatureSpread.of(18, 6)), new GiantTrunkPlacer(20, 2, 4), new TwoLayerFeature(2, 0, 2)).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
+	public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> GINKGO_TREE_MEGA = register("ginkgo_tree_mega", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.GINKGO_LOG), new SimpleBlockStateProvider(States.GINKGO_LEAVES), new MegaPineFoliagePlacer(FeatureSpread.fixed(1), FeatureSpread.fixed(0), FeatureSpread.of(16, 6)), new GiantGinkgoTrunkPlacer(20, 2, 4), new TwoLayerFeature(2, 0, 2)).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
 	
 	public static final ConfiguredFeature<?, ?> TREES_CRYSTAL_PLAINS = register("trees_crystal_dimension", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(GREEN_CRYSTAL_TREE.weighted(0.4F), RED_CRYSTAL_TREE.weighted(0.3F), YELLOW_CRYSTAL_TREE.weighted(0.1F), PINK_CRYSTAL_TREE.weighted(0.045F), BLUE_CRYSTAL_TREE.weighted(0.2F), ORANGE_CRYSTAL_TREE.weighted(0.035F)), GREEN_CRYSTAL_TREE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.1F, 1))));
 	public static final ConfiguredFeature<?, ?> TREES_APPLE = register("trees_apple", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(APPLE_TREE.weighted(0.1F), APPLE_TREE_BEES_005.weighted(0.04F), FANCY_APPLE_TREE.weighted(0.09F), FANCY_APPLE_TREE_BEES_005.weighted(0.02F)), Feature.NO_OP.configured(new NoFeatureConfig()))).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.01F, 1))));
