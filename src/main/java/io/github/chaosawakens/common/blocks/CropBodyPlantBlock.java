@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks;
 
+import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.AbstractBodyPlantBlock;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
@@ -46,7 +47,7 @@ public class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		return block == this.getHeadBlock() || block == this.getBodyBlock()
 				|| downState.is(Blocks.GRASS_BLOCK) || downState.is(Blocks.DIRT)
 				|| downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL)
-				|| downState.is(Blocks.FARMLAND);
+				|| downState.is(CATags.Blocks.FARMABLE);
 	}
 
 	@Override

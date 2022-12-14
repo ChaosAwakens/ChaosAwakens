@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
-import io.github.chaosawakens.common.blocks.tileentities.RoboCrateBlock;
 import org.apache.commons.lang3.tuple.Pair;
 
 import io.github.chaosawakens.ChaosAwakens;
@@ -37,6 +36,7 @@ import io.github.chaosawakens.common.blocks.DoubleCrystalPlantBlock;
 import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
 import io.github.chaosawakens.common.blocks.FruitableLeavesBlock;
 import io.github.chaosawakens.common.blocks.GateBlock;
+import io.github.chaosawakens.common.blocks.GenericFarmlandBlock;
 import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
 import io.github.chaosawakens.common.blocks.RandomTeleportBlock;
 import io.github.chaosawakens.common.blocks.RotatedPillarCrystalBlock;
@@ -48,6 +48,7 @@ import io.github.chaosawakens.common.blocks.TopTubeBlock;
 import io.github.chaosawakens.common.blocks.TubeBlock;
 import io.github.chaosawakens.common.blocks.UraniumOreBlock;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock;
+import io.github.chaosawakens.common.blocks.tileentities.RoboCrateBlock;
 import io.github.chaosawakens.common.blocks.trees.CATree;
 import io.github.chaosawakens.common.blocks.trees.FancyableTree;
 import net.minecraft.block.AbstractBlock;
@@ -766,6 +767,7 @@ public class CABlocks {
 	// MINING PARADISE DIMENSION
 	public static final RegistryObject<DenseGrassBlock> DENSE_GRASS_BLOCK = registerBlock("dense_grass_block", () -> new DenseGrassBlock(AbstractBlock.Properties.of(Material.GRASS).randomTicks().harvestTool(ToolType.SHOVEL).strength(0.9F).sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> DENSE_DIRT = registerBlock("dense_dirt", () -> new Block(AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).harvestTool(ToolType.SHOVEL).strength(0.75F).sound(SoundType.GRAVEL)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<GenericFarmlandBlock> DENSE_FARMLAND = registerBlock("dense_farmland", () -> new GenericFarmlandBlock(AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).randomTicks().harvestTool(ToolType.SHOVEL).strength(0.75F).sound(SoundType.GRAVEL), CABlocks.DENSE_DIRT), CAItemGroups.BLOCKS);
 	public static final RegistryObject<AntNestBlock> DENSE_RED_ANT_NEST = registerBlock("dense_red_ant_nest", () -> new AntNestBlock(CAEntityTypes.RED_ANT, Block.Properties.copy(DENSE_GRASS_BLOCK.get()).harvestTool(ToolType.SHOVEL).randomTicks()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<TallDenseGrassBlock> DENSE_GRASS = registerBlock("dense_grass", () -> new TallDenseGrassBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<DoubleDensePlantBlock> TALL_DENSE_GRASS = registerBlock("tall_dense_grass", () -> new DoubleDensePlantBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).lightLevel((state) -> 8)), CAItemGroups.BLOCKS);

@@ -3,6 +3,8 @@
 	"package": "io.github.chaosawakens.mixins",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"AttachedStemBlockMixin",
+		"CropsBlockMixin",
 		"IForgeBlockMixin",
 		"LivingEntityMixin",
 		"NoiseChunkGeneratorAccessor",
@@ -11,6 +13,7 @@
 		"PlayerEntityMixin",
 		"RabbitEntityMixin",
 		"SpawnEggItemMixin",
+		"StemBlockMixin",
 		"VillagerEntityMixin",
 		"WolfEntityMixin"
 	],

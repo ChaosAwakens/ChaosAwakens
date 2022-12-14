@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.blocks;
 
 import java.util.Random;
 
+import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -94,7 +95,7 @@ public class CropTopPlantBlock extends AbstractTopPlantBlock implements IGrowabl
 		BlockState downState = worldIn.getBlockState(downPos);
 		Block block = downState.getBlock();
 
-		return block == this.getHeadBlock() || block == this.getBodyBlock() || downState.is(Blocks.FARMLAND);
+		return block == this.getHeadBlock() || block == this.getBodyBlock() || downState.is(CATags.Blocks.FARMABLE);
 	}
 
 	@Override

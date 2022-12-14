@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_farmland",
+  "textures": {
+    "dirt": "chaosawakens:block/dense_dirt",
+    "top": "chaosawakens:block/dense_farmland_moist"
+  }
+}

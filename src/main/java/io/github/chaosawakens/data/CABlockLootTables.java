@@ -156,6 +156,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.DENSE_GRASS_BLOCK.get(), (silk) -> createSilkTouchOnlyTable(CABlocks.DENSE_DIRT.get()));
 		dropSelf(CABlocks.DENSE_RED_ANT_NEST.get());
 		dropSelf(CABlocks.DENSE_DIRT.get());
+		add(CABlocks.DENSE_FARMLAND.get(), (silk) -> createSilkTouchOnlyTable(CABlocks.DENSE_DIRT.get()));
 		add(CABlocks.DENSE_GRASS.get(), (plant) -> createShearsOnlyDrop(CABlocks.DENSE_GRASS.get()));
 		add(CABlocks.TALL_DENSE_GRASS.get(), (plant) -> createShearsOnlyDrop(CABlocks.TALL_DENSE_GRASS.get()));
 		add(CABlocks.CRYSTAL_GRASS.get(), (plant) -> createShearsOnlyDrop(CABlocks.CRYSTAL_GRASS.get()));

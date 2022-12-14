@@ -79,6 +79,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 		this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
 		this.cubeAll("dense_dirt", chaosRL("dense_dirt"));
+		this.farmland("dense_farmland", chaosRL("dense_dirt"), chaosRL("dense_farmland"));
+		this.farmland("dense_farmland_moist", chaosRL("dense_dirt"), chaosRL("dense_farmland_moist"));
 		this.cubeBottomTop("dense_red_ant_nest", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"));
 		this.plant("dense_grass", "dense_grass");
 		this.doublePlant("tall_dense_grass", "tall_dense_grass");
@@ -990,6 +992,12 @@ public class CABlockModelProvider extends BlockModelProvider {
 	public void doublePlant(String name, String texture) {
 		cross(name + "_top", chaosRL(texture + "_top"));
 		cross(name + "_bottom", chaosRL(texture + "_bottom"));
+	}
+	
+	public BlockModelBuilder farmland(String name, ResourceLocation dirt, ResourceLocation top) {
+		return withExistingParent(name, BLOCK_FOLDER + "/template_farmland")
+				.texture("dirt", dirt)
+				.texture("top", top);
 	}
 
 	@Override

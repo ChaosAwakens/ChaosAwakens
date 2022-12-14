@@ -13,10 +13,13 @@ import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.robo.RoboWarriorEntity;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CACommand;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CATags;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.command.CommandSource;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -50,8 +53,12 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.DerivedWorldInfo;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.data.ForgeBlockTagsProvider;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -70,6 +77,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickEmpty;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.BlockToolInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
 import net.minecraftforge.event.world.SleepFinishedTimeEvent;
 import net.minecraftforge.fml.ModList;
@@ -333,4 +341,11 @@ public class MiscEventHandler {
 			}
 		}
 	}
+	
+	public static void onUseHoeOnDense(BlockToolInteractEvent event) {
+		if(event.getState().is(CATags.Blocks.DENSE_DIRT) && event.getToolType() == ToolType.HOE) {
+			event.setFinalState(CABlocks.DENSE_FARMLAND.get().defaultBlockState());
+		}
+	}
+
 }

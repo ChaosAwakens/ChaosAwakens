@@ -23,6 +23,10 @@ public class CATags {
 
 		public static final ITag.INamedTag<Block> MINERS_DREAM_MINEABLE = tag("miners_dream_mineable");
 
+		public static final ITag.INamedTag<Block> FARMABLE = tag("farmable");
+		
+		public static final ITag.INamedTag<Block> DENSE_DIRT = tag("dense_dirt");
+		
 		public static final ITag.INamedTag<Block> APPLE_LOGS = tag("apple_logs");
 		public static final ITag.INamedTag<Block> CHERRY_LOGS = tag("cherry_logs");
 		public static final ITag.INamedTag<Block> DUPLICATION_LOGS = tag("duplication_logs");

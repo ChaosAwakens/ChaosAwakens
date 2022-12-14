@@ -196,6 +196,7 @@ public class ChaosAwakens {
 		forgeBus.addListener(MiscEventHandler::onPlayerLoggedIn);
 		forgeBus.addListener(MiscEventHandler::onEntityJoin);
 		forgeBus.addListener(MiscEventHandler::onSleepFinished);
+		forgeBus.addListener(MiscEventHandler::onUseHoeOnDense);
 		forgeBus.addListener(EventPriority.NORMAL, CAVanillaCompat::registerFurnaceFuel);
 		forgeBus.register(this);
 
