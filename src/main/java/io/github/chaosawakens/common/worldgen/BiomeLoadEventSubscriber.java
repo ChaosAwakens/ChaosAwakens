@@ -313,13 +313,17 @@ public class BiomeLoadEventSubscriber {
 					//if (CACommonConfig.COMMON.generateWaspNest.get())					
 					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_MINING_WASP_DUNGEON);
 				}
-
+				
+				if (BiomeDictionary.hasType(biome, CABiomes.Type.MESOZOIC_JUNGLE)) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_GINKGO_MESO);
+				} else {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_GINKGO_HILLS);
+				}
 				addGeneralRockGeneration(gen);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_GRASS);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_TALL_DENSE_GRASS);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_THORNY_SUN);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_GINKGO);
 			}
 
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_MANIA)) {
