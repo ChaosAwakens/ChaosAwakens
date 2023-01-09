@@ -18,13 +18,13 @@ public class CAFoods {
 	public static final Food FOOD_COOKED_VENISON = new Food.Builder().nutrition(9).saturationMod(1.2F).meat().build();
 
 	// PLANTS
-	public static final Food FOOD_CHERRIES = new Food.Builder().nutrition(3).saturationMod(0.45F).build();
-	public static final Food FOOD_CORN = new Food.Builder().nutrition(2).saturationMod(0.2F).build();
+	public static final Food FOOD_CHERRIES = new Food.Builder().nutrition(2).saturationMod(0.45F).build();
+	public static final Food FOOD_CORN = new Food.Builder().nutrition(2).saturationMod(0.5F).build();
 	public static final Food FOOD_LETTUCE = new Food.Builder().nutrition(3).saturationMod(0.45F).build();
-	public static final Food FOOD_PEACH = new Food.Builder().nutrition(4).saturationMod(0.55F).build();
+	public static final Food FOOD_PEACH = new Food.Builder().nutrition(3).saturationMod(0.55F).build();
 	public static final Food FOOD_RADISH = new Food.Builder().nutrition(2).saturationMod(0.45F).build();
 	public static final Food FOOD_STRAWBERRY = new Food.Builder().nutrition(2).saturationMod(0.65F).build();
-	public static final Food FOOD_TOMATO = new Food.Builder().nutrition(4).saturationMod(0.55F).build();
+	public static final Food FOOD_TOMATO = new Food.Builder().nutrition(2).saturationMod(0.55F).build();
 
 	// CRYSTAL PLANTS
 	public static final Food FOOD_CRYSTAL_APPLE = new Food.Builder().nutrition(5).saturationMod(0.85F).alwaysEat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 3000, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 3000, 0), 1.0F).build();
