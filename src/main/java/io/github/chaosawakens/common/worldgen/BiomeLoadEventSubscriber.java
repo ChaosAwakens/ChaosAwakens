@@ -83,11 +83,16 @@ public class BiomeLoadEventSubscriber {
 		};
 		
 		private static final Consumer<MobSpawnInfoBuilder> STALAGMITE_VALLEY_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.AMBIENT, new MobSpawnInfo.Spawners(CAEntityTypes.DIMETRODON.get(), 1, 1, 3));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.DIMETRODON.get(), 1, 1, 3));
 			builder.addSpawn(EntityClassification.AMBIENT, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 1, 1, 4));
 		};
 		
-		private static final Consumer<MobSpawnInfoBuilder> DENSE_MOUNTAIN_MOBS = (builder) -> {
+		private static final Consumer<MobSpawnInfoBuilder> MESOZOIC_JUNGLE_MOBS = (builder) -> {
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.DIMETRODON.get(), 1, 1, 3));
+			builder.addSpawn(EntityClassification.AMBIENT, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 1, 1, 4));
+		};
+		
+		private static final Consumer<MobSpawnInfoBuilder> DENSE_MOUNTAINS_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.HERCULES_BEETLE.get(), 35, 1, 4));
 		};
 
@@ -132,8 +137,10 @@ public class BiomeLoadEventSubscriber {
 						VILLAGE_MANIA_MOBS.accept(spawnInfoBuilder);
 					if (BiomeDictionary.hasType(biome, CABiomes.Type.STALAGMITE_VALLEY))
 						STALAGMITE_VALLEY_MOBS.accept(spawnInfoBuilder);
-					if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_MOUNTAIN))
-						DENSE_MOUNTAIN_MOBS.accept(spawnInfoBuilder);
+					if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_MOUNTAINS))
+						DENSE_MOUNTAINS_MOBS.accept(spawnInfoBuilder);
+					if (BiomeDictionary.hasType(biome, CABiomes.Type.MESOZOIC_JUNGLE))
+						MESOZOIC_JUNGLE_MOBS.accept(spawnInfoBuilder);
 					if ((BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MODIFIED) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)))
 						MOUNTAIN_MOBS.accept(spawnInfoBuilder);
 //					if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) OVERWORLD_MOBS.accept(spawnInfoBuilder);
@@ -314,16 +321,36 @@ public class BiomeLoadEventSubscriber {
 					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_MINING_WASP_DUNGEON);
 				}
 				
-				if (BiomeDictionary.hasType(biome, CABiomes.Type.MESOZOIC_JUNGLE)) {
-					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_GINKGO_MESO);
-				} else {
-					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_GINKGO_HILLS);
+				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_GINKGO_FOREST)) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_GINKGO);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_FLOWER);
 				}
-				addGeneralRockGeneration(gen);
+				
+				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_PLAINS)) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_PLAINS);
+				}
+				
+				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_FOREST)) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_FOREST);
+				}
+				
+				if(BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_MOUNTAINS)) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_THORNY_SUN);
+					gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.MOUNTAINS_STALAGMITE);
+				}
+				
+				if (BiomeDictionary.hasType(biome, CABiomes.Type.MESOZOIC_JUNGLE)) {
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_MESOZOIC);
+					gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BLOB_TERRA_PRETA);
+					gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BLOB_LATOSOL);
+					gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BLOB_TAR);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_MESO_PLANTS);
+				}
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_GRASS);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_TALL_DENSE_GRASS);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_THORNY_SUN);
-				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
+				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_ALSTROEMERIAT);
+				addGeneralRockGeneration(gen);
 			}
 
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_MANIA)) {

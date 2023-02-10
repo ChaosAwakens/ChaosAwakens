@@ -14,6 +14,9 @@ import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.ModelTextures;
+import net.minecraft.data.ModelsResourceUtil;
+import net.minecraft.data.StockModelShapes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
@@ -76,18 +79,31 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 		this.orientable("copper_defossilizer", chaosRL("copper_block"), chaosRL("copper_defossilizer_front"), chaosRL("copper_defossilizer_top"));
 		this.orientable("iron_defossilizer", mcRL("iron_block"), chaosRL("iron_defossilizer_front"), chaosRL("iron_defossilizer_top"));
-
-		this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
+		
+		this.grassBlock("dense_grass_block", chaosRL("dense_dirt"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"), chaosRL("dense_grass_block_side"), chaosRL("dense_grass_block_side_overlay"));
+		//this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
 		this.cubeAll("dense_dirt", chaosRL("dense_dirt"));
 		this.farmland("dense_farmland", chaosRL("dense_dirt"), chaosRL("dense_farmland"));
 		this.farmland("dense_farmland_moist", chaosRL("dense_dirt"), chaosRL("dense_farmland_moist"));
-		this.cubeBottomTop("dense_red_ant_nest", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"));
-		this.plant("dense_grass", "dense_grass");
-		this.doublePlant("tall_dense_grass", "tall_dense_grass");
+		this.grassBlock("dense_red_ant_nest", chaosRL("dense_dirt"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"), chaosRL("dense_grass_block_side"), chaosRL("dense_grass_block_side_overlay"));
+		this.tintedCross("dense_grass", chaosRL("dense_grass"));
+		this.doubleTintedCross("tall_dense_grass", "tall_dense_grass");
 		this.doublePlant("thorny_sun", "thorny_sun");
+		this.cubeAll("terra_preta", chaosRL("terra_preta"));
+		this.farmland("terra_preta_farmland", chaosRL("terra_preta"), chaosRL("terra_preta_farmland"));
+		this.farmland("terra_preta_farmland_moist", chaosRL("terra_preta"), chaosRL("terra_preta_farmland_moist"));
+		this.cubeAll("tar", chaosRL("tar"));
+		this.cubeAll("latosol", chaosRL("latosol"));
+		this.doublePlant("alstroemeriat", "alstroemeriat");
+		this.cross("dense_orchid", chaosRL("dense_orchid"));
+		this.cross("small_bush", chaosRL("small_bush"));
+		this.cross("small_carnivorous_plant", chaosRL("small_carnivorous_plant"));
+		this.cross("big_carnivorous_plant", chaosRL("big_carnivorous_plant"));
 		this.cross("blue_bulb", chaosRL("blue_bulb"));
 		this.cross("pink_bulb", chaosRL("pink_bulb"));
 		this.cross("purple_bulb", chaosRL("purple_bulb"));
+		this.cross("mesozoic_vines", chaosRL("mesozoic_vines"));
+		this.cross("mesozoic_vines_plant", chaosRL("mesozoic_vines_plant"));
 
 		this.cubeAll("aluminum_block", chaosRL("aluminum_block"));
 //		this.cubeAll("aluminum_ore", chaosRL("aluminum_ore"));
@@ -731,6 +747,10 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumnHorizontal("stripped_ginkgo_log", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log_top"));
 		this.cubeColumn("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log"));
 		this.cubeColumnHorizontal("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log"));
+		this.cubeColumn("hirmeriella_log", chaosRL("hirmeriella_log"), chaosRL("hirmeriella_log_top"));
+		this.cubeColumnHorizontal("hirmeriella_log", chaosRL("hirmeriella_log"), chaosRL("hirmeriella_log_top"));
+		this.cubeColumn("densewood_log", chaosRL("densewood_log"), chaosRL("densewood_log_top"));
+		this.cubeColumnHorizontal("densewood_log", chaosRL("densewood_log"), chaosRL("densewood_log_top"));
 		this.cubeColumn("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumnHorizontal("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumn("peach_wood", chaosRL("peach_log"), chaosRL("peach_log"));
@@ -783,11 +803,20 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("duplication_leaves", chaosRL("duplication_leaves"));
 		this.leafCarpet("duplication_leaf_carpet", chaosRL("duplication_leaves"));
 		this.leafCarpetInventory("duplication_leaf_carpet_inventory", chaosRL("duplication_leaves"));
+		this.cross("ginkgo_sapling", chaosRL("ginkgo_sapling"));
 		this.cubeAll("ginkgo_planks", chaosRL("ginkgo_planks"));
 		this.cubeAll("ginkgo_leaves", chaosRL("ginkgo_leaves"));
 		this.leafCarpet("ginkgo_leaf_carpet", chaosRL("ginkgo_leaves"));
 		this.leafCarpetInventory("ginkgo_leaf_carpet_inventory", chaosRL("ginkgo_leaves"));
-		this.cross("ginkgo_sapling", chaosRL("ginkgo_sapling"));
+		this.cross("hirmeriella_sapling", chaosRL("hirmeriella_sapling"));
+		this.cubeAll("hirmeriella_planks", chaosRL("hirmeriella_planks"));
+		this.cubeAll("hirmeriella_leaves", chaosRL("hirmeriella_leaves"));
+		this.leafCarpet("hirmeriella_leaf_carpet", chaosRL("hirmeriella_leaves"));
+		this.leafCarpetInventory("hirmeriella_leaf_carpet_inventory", chaosRL("hirmeriella_leaves"));
+		this.cross("densewood_sapling", chaosRL("densewood_sapling"));
+		this.cubeAll("densewood_leaves", chaosRL("densewood_leaves"));
+		this.leafCarpet("densewood_leaf_carpet", chaosRL("densewood_leaves"));
+		this.leafCarpetInventory("densewood_leaf_carpet_inventory", chaosRL("densewood_leaves"));
 		this.cubeAll("peach_planks", chaosRL("peach_planks"));
 		this.cubeAll("peach_leaves", chaosRL("peach_leaves"));
 		this.leafCarpet("peach_leaf_carpet", chaosRL("peach_leaves"));
@@ -832,6 +861,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.stairs("ginkgo_stairs", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
 		this.stairsInner("ginkgo_stairs", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
 		this.stairsOuter("ginkgo_stairs", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
+		this.stairs("hirmeriella_stairs", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
+		this.stairsInner("hirmeriella_stairs", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
+		this.stairsOuter("hirmeriella_stairs", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
 		this.stairs("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsInner("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsOuter("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
@@ -851,6 +883,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.slabTop("cherry_slab", chaosRL("cherry_planks"), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
 		this.slab("ginkgo_slab", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
 		this.slabTop("ginkgo_slab", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
+		this.slab("hirmeriella_slab", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
+		this.slabTop("hirmeriella_slab", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
 		this.slab("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slabTop("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slab("duplication_slab", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
@@ -865,49 +899,56 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.fenceGateWall("apple_fence_gate", chaosRL("apple_planks"));
 		this.fenceGateWallOpen("apple_fence_gate", chaosRL("apple_planks"));
 		this.fencePost("apple_fence", chaosRL("apple_planks"));
-		this.fenceInventory("apple_fence", chaosRL("apple_planks"));
+		this.fenceInventory("apple_fence_inventory", chaosRL("apple_planks"));
 		this.fenceSide("apple_fence", chaosRL("apple_planks"));
 		this.fenceGate("cherry_fence_gate", chaosRL("cherry_planks"));
 		this.fenceGateOpen("cherry_fence_gate", chaosRL("cherry_planks"));
 		this.fenceGateWall("cherry_fence_gate", chaosRL("cherry_planks"));
 		this.fenceGateWallOpen("cherry_fence_gate", chaosRL("cherry_planks"));
 		this.fencePost("cherry_fence", chaosRL("cherry_planks"));
-		this.fenceInventory("cherry_fence", chaosRL("cherry_planks"));
+		this.fenceInventory("cherry_fence_inventory", chaosRL("cherry_planks"));
 		this.fenceSide("cherry_fence", chaosRL("cherry_planks"));
 		this.fenceGate("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
 		this.fenceGateOpen("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
 		this.fenceGateWall("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
 		this.fenceGateWallOpen("ginkgo_fence_gate", chaosRL("ginkgo_planks"));
 		this.fencePost("ginkgo_fence", chaosRL("ginkgo_planks"));
-		this.fenceInventory("ginkgo_fence", chaosRL("ginkgo_planks"));
+		this.fenceInventory("ginkgo_fence_inventory", chaosRL("ginkgo_planks"));
 		this.fenceSide("ginkgo_fence", chaosRL("ginkgo_planks"));
+		this.fenceGate("hirmeriella_fence_gate", chaosRL("hirmeriella_planks"));
+		this.fenceGateOpen("hirmeriella_fence_gate", chaosRL("hirmeriella_planks"));
+		this.fenceGateWall("hirmeriella_fence_gate", chaosRL("hirmeriella_planks"));
+		this.fenceGateWallOpen("hirmeriella_fence_gate", chaosRL("hirmeriella_planks"));
+		this.fencePost("hirmeriella_fence", chaosRL("hirmeriella_planks"));
+		this.fenceInventory("hirmeriella_fence_inventory", chaosRL("hirmeriella_planks"));
+		this.fenceSide("hirmeriella_fence", chaosRL("hirmeriella_planks"));
 		this.fenceGate("peach_fence_gate", chaosRL("peach_planks"));
 		this.fenceGateOpen("peach_fence_gate", chaosRL("peach_planks"));
 		this.fenceGateWall("peach_fence_gate", chaosRL("peach_planks"));
 		this.fenceGateWallOpen("peach_fence_gate", chaosRL("peach_planks"));
 		this.fencePost("peach_fence", chaosRL("peach_planks"));
-		this.fenceInventory("peach_fence", chaosRL("peach_planks"));
+		this.fenceInventory("peach_fence_inventory", chaosRL("peach_planks"));
 		this.fenceSide("peach_fence", chaosRL("peach_planks"));
 		this.fenceGate("duplication_fence_gate", chaosRL("duplication_planks"));
 		this.fenceGateOpen("duplication_fence_gate", chaosRL("duplication_planks"));
 		this.fenceGateWall("duplication_fence_gate", chaosRL("duplication_planks"));
 		this.fenceGateWallOpen("duplication_fence_gate", chaosRL("duplication_planks"));
 		this.fencePost("duplication_fence", chaosRL("duplication_planks"));
-		this.fenceInventory("duplication_fence", chaosRL("duplication_planks"));
+		this.fenceInventory("duplication_fence_inventory", chaosRL("duplication_planks"));
 		this.fenceSide("duplication_fence", chaosRL("duplication_planks"));
 		this.fenceGate("skywood_fence_gate", chaosRL("skywood_planks"));
 		this.fenceGateOpen("skywood_fence_gate", chaosRL("skywood_planks"));
 		this.fenceGateWall("skywood_fence_gate", chaosRL("skywood_planks"));
 		this.fenceGateWallOpen("skywood_fence_gate", chaosRL("skywood_planks"));
 		this.fencePost("skywood_fence", chaosRL("skywood_planks"));
-		this.fenceInventory("skywood_fence", chaosRL("skywood_planks"));
+		this.fenceInventory("skywood_fence_inventory", chaosRL("skywood_planks"));
 		this.fenceSide("skywood_fence", chaosRL("skywood_planks"));
 		this.fenceGate("crystal_fence_gate", chaosRL("crystal_planks"));
 		this.fenceGateOpen("crystal_fence_gate", chaosRL("crystal_planks"));
 		this.fenceGateWall("crystal_fence_gate", chaosRL("crystal_planks"));
 		this.fenceGateWallOpen("crystal_fence_gate", chaosRL("crystal_planks"));
 		this.fencePost("crystal_fence", chaosRL("crystal_planks"));
-		this.fenceInventory("crystal_fence", chaosRL("crystal_planks"));
+		this.fenceInventory("crystal_fence_inventory", chaosRL("crystal_planks"));
 		this.fenceSide("crystal_fence", chaosRL("crystal_planks"));
 
 		this.pressurePlateUp("apple_pressure_plate", chaosRL("apple_planks"));
@@ -916,6 +957,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.pressurePlateDown("cherry_pressure_plate", chaosRL("cherry_planks"));
 		this.pressurePlateUp("ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
 		this.pressurePlateDown("ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
+		this.pressurePlateUp("hirmeriella_pressure_plate", chaosRL("hirmeriella_planks"));
+		this.pressurePlateDown("hirmeriella_pressure_plate", chaosRL("hirmeriella_planks"));
 		this.pressurePlateUp("duplication_pressure_plate", chaosRL("duplication_planks"));
 		this.pressurePlateDown("duplication_pressure_plate", chaosRL("duplication_planks"));
 		this.pressurePlateUp("peach_pressure_plate", chaosRL("peach_planks"));
@@ -924,7 +967,16 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.pressurePlateDown("skywood_pressure_plate", chaosRL("skywood_planks"));
 		this.pressurePlateUp("crystal_pressure_plate", chaosRL("crystal_planks"));
 		this.pressurePlateDown("crystal_pressure_plate", chaosRL("crystal_planks"));
-
+		
+		this.buttonInventory("apple_button_inventory", chaosRL("apple_planks"));
+		this.buttonInventory("cherry_button_inventory", chaosRL("cherry_planks"));
+		this.buttonInventory("ginkgo_button_inventory", chaosRL("ginkgo_planks"));
+		this.buttonInventory("hirmeriella_button_inventory", chaosRL("hirmeriella_planks"));
+		this.buttonInventory("duplication_button_inventory", chaosRL("duplication_planks"));
+		this.buttonInventory("peach_button_inventory", chaosRL("peach_planks"));
+		this.buttonInventory("skywood_button_inventory", chaosRL("skywood_planks"));
+		this.buttonInventory("crystal_button_inventory", chaosRL("crystal_planks"));
+		
 		this.cubeAll("moldy_planks", chaosRL("moldy_planks"));
 		this.slab("moldy_slab", chaosRL("moldy_planks"), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
 		this.slabTop("moldy_slab", chaosRL("moldy_planks"), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
@@ -936,6 +988,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("cyan_rose", chaosRL("cyan_rose"));
 		this.cross("red_rose", chaosRL("red_rose"));
 		this.cross("paeonia", chaosRL("paeonia"));
+		this.cross("daisy", chaosRL("daisy"));
+		this.cross("swamp_milkweed", chaosRL("swamp_milkweed"));
+		this.cross("primrose", chaosRL("primrose"));
 		this.cross("blue_crystal_growth", chaosRL("blue_crystal_growth"));
 		this.cross("green_crystal_growth", chaosRL("green_crystal_growth"));
 		this.cross("red_crystal_growth", chaosRL("red_crystal_growth"));
@@ -949,6 +1004,17 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cross("pink_crystal_flower", chaosRL("pink_crystal_flower"));
 		this.cross("orange_crystal_flower", chaosRL("orange_crystal_flower"));
 		this.cross("crystal_rose", chaosRL("crystal_rose"));
+		
+		this.pottedCross("potted_ginkgo_sapling", chaosRL("ginkgo_sapling"));
+		this.pottedCross("potted_hirmeriella_sapling", chaosRL("hirmeriella_sapling"));
+		this.pottedCross("potted_densewood_sapling", chaosRL("densewood_sapling"));
+		this.pottedCross("potted_dense_orchid", chaosRL("dense_orchid"));
+		this.pottedCross("potted_swamp_milkweed", chaosRL("swamp_milkweed"));
+		this.pottedCross("potted_small_bush", chaosRL("small_bush"));
+		this.pottedCross("potted_small_carnivorous_plant", chaosRL("small_carnivorous_plant"));
+		this.pottedCross("potted_big_carnivorous_plant", chaosRL("big_carnivorous_plant"));
+		this.pottedCross("potted_primrose", chaosRL("primrose"));
+		this.pottedCross("potted_daisy", chaosRL("daisy"));
 	}
 
 	private ResourceLocation chaosRL(String texture) {
@@ -999,7 +1065,36 @@ public class CABlockModelProvider extends BlockModelProvider {
 				.texture("dirt", dirt)
 				.texture("top", top);
 	}
-
+	
+	public BlockModelBuilder grassBlock(String name, ResourceLocation particle, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation overlay) {
+		return withExistingParent(name, BLOCK_FOLDER + "/grass_block")
+				.texture("particle", particle)
+				.texture("bottom", bottom)
+				.texture("top", top)
+				.texture("side", side)
+				.texture("overlay", overlay);
+	}
+	
+	public BlockModelBuilder tintedCross(String name, ResourceLocation cross) {
+		return withExistingParent(name, BLOCK_FOLDER + "/tinted_cross")
+				.texture("cross", cross);
+	}
+	
+	public void doubleTintedCross(String name, String texture) {
+		tintedCross(name + "_top", chaosRL(texture + "_top"));
+		tintedCross(name + "_bottom", chaosRL(texture + "_bottom"));
+	}
+	
+	public BlockModelBuilder buttonInventory(String name, ResourceLocation texture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/button_inventory")
+				.texture("texture", texture);
+	}
+	
+	public BlockModelBuilder pottedCross(String name, ResourceLocation texture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/flower_pot_cross")
+				.texture("plant", texture);
+	}
+	
 	@Override
 	public BlockModelBuilder cubeColumn(String name, ResourceLocation side, ResourceLocation end) {
 		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("end", end);

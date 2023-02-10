@@ -16,7 +16,8 @@ public class CABlockItemColors {
 
 	public static void registerBlockColors(ColorHandlerEvent.Block event) {
 		event.getBlockColors().register(GRASS_BLOCK_COLOR, CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(),
-				CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get());
+				CABlocks.RAINBOW_ANT_NEST.get(), CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get(),
+				CABlocks.DENSE_GRASS.get(), CABlocks.DENSE_GRASS_BLOCK.get(), CABlocks.DENSE_RED_ANT_NEST.get(), CABlocks.TALL_DENSE_GRASS.get());
 		event.getBlockColors().register(FOLIAGE_BLOCK_COLOR, CABlocks.OAK_LEAF_CARPET.get(),
 				CABlocks.JUNGLE_LEAF_CARPET.get(), CABlocks.ACACIA_LEAF_CARPET.get(),
 				CABlocks.DARK_OAK_LEAF_CARPET.get());
@@ -30,6 +31,7 @@ public class CABlockItemColors {
 				CABlocks.RED_ANT_NEST.get(), CABlocks.BROWN_ANT_NEST.get(), CABlocks.RAINBOW_ANT_NEST.get(),
 				CABlocks.UNSTABLE_ANT_NEST.get(), CABlocks.TERMITE_NEST.get(), CABlocks.OAK_LEAF_CARPET.get(),
 				CABlocks.SPRUCE_LEAF_CARPET.get(), CABlocks.BIRCH_LEAF_CARPET.get(), CABlocks.JUNGLE_LEAF_CARPET.get(),
-				CABlocks.ACACIA_LEAF_CARPET.get(), CABlocks.DARK_OAK_LEAF_CARPET.get());
+				CABlocks.ACACIA_LEAF_CARPET.get(), CABlocks.DARK_OAK_LEAF_CARPET.get(),
+				CABlocks.DENSE_GRASS.get(), CABlocks.DENSE_GRASS_BLOCK.get(), CABlocks.DENSE_RED_ANT_NEST.get(), CABlocks.TALL_DENSE_GRASS.get());
 	}
 }

@@ -9,38 +9,56 @@
 			"seed": 0,
 			"altitude_noise": {
 				"firstOctave": -7,
-				"amplitudes": [
-					1,
-					1
-				]
+				"amplitudes": [1,1]
 			},
 			"temperature_noise": {
 				"firstOctave": -7,
-				"amplitudes": [
-					1,
-					1
-				]
+				"amplitudes": [1,1]
 			},
 			"humidity_noise": {
 				"firstOctave": -7,
-				"amplitudes": [
-					1,
-					1
-				]
+				"amplitudes": [1,1]
 			},
 			"weirdness_noise": {
 				"firstOctave": -7,
-				"amplitudes": [
-					1,
-					1
-				]
+				"amplitudes": [1,1]
 			},
 			"biomes": [
 				{
-					"biome": "chaosawakens:dense_mountain",
+					"biome": "chaosawakens:dense_plains",
 					"parameters": {
-						"altitude": 1,
+						"altitude": 0.55,
+						"temperature": 0.75,
+						"humidity": 0.9,
+						"weirdness": 0.4,
+						"offset": 0
+					}
+				},
+				{
+					"biome": "chaosawakens:dense_forest",
+					"parameters": {
+						"altitude": 0.65,
+						"temperature": 0.75,
+						"humidity": 0.8,
+						"weirdness": 0.4,
+						"offset": 0
+					}
+				},
+				{
+					"biome": "chaosawakens:dense_ginkgo_forest",
+					"parameters": {
+						"altitude": 0.65,
 						"temperature": 0.7,
+						"humidity": 0.9,
+						"weirdness": 0.3,
+						"offset": 0
+					}
+				},
+				{
+					"biome": "chaosawakens:dense_mountains",
+					"parameters": {
+						"altitude": 0.85,
+						"temperature": 0.5,
 						"humidity": 0.9,
 						"weirdness": 0.2,
 						"offset": 0
@@ -49,20 +67,20 @@
 				{
 					"biome": "chaosawakens:stalagmite_valley",
 					"parameters": {
-						"altitude": 0.2,
-						"temperature": 0.6,
-						"humidity": 1,
-						"weirdness": 1.2,
+						"altitude": 0.5,
+						"temperature": 0.4,
+						"humidity": 0.6,
+						"weirdness": 1.6,
 						"offset": 0
 					}
 				},
 				{
 					"biome": "chaosawakens:mesozoic_jungle",
 					"parameters": {
-						"altitude": 0.5,
-						"temperature": 0.8,
-						"humidity": 1.18,
-						"weirdness": 0.1,
+						"altitude": 0.85,
+						"temperature": 0.4,
+						"humidity": 0.9,
+						"weirdness": 0.5,
 						"offset": 0
 					}
 				}

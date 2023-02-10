@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/tinted_cross",
   "textures": {
     "cross": "chaosawakens:block/tall_dense_grass_bottom"
   }

@@ -86,6 +86,13 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenButton(consumer, CABlocks.GINKGO_BUTTON.get(), CABlocks.GINKGO_PLANKS.get());
 		woodenWood(consumer, CABlocks.GINKGO_WOOD.get(), CABlocks.GINKGO_LOG.get());
 		woodenSign(consumer, CAItems.GINKGO_SIGN.get(), CABlocks.GINKGO_PLANKS.get(), Items.STICK);
+		woodenPlanks(consumer, CABlocks.HIRMERIELLA_PLANKS.get(), CATags.Items.HIRMERIELLA_LOGS);
+		woodenSlab(consumer, CABlocks.HIRMERIELLA_SLAB.get(), CABlocks.HIRMERIELLA_PLANKS.get());
+		woodenStairs(consumer, CABlocks.HIRMERIELLA_STAIRS.get(), CABlocks.HIRMERIELLA_PLANKS.get());
+		woodenFence(consumer, CABlocks.HIRMERIELLA_FENCE.get(), CABlocks.HIRMERIELLA_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.HIRMERIELLA_FENCE_GATE.get(), CABlocks.HIRMERIELLA_PLANKS.get());
+		woodenPressurePlate(consumer, CABlocks.HIRMERIELLA_PRESSURE_PLATE.get(), CABlocks.HIRMERIELLA_PLANKS.get());
+		woodenButton(consumer, CABlocks.HIRMERIELLA_BUTTON.get(), CABlocks.HIRMERIELLA_PLANKS.get());
 		woodenPlanks(consumer, CABlocks.PEACH_PLANKS.get(), CATags.Items.PEACH_LOGS);
 		woodenSlab(consumer, CABlocks.PEACH_SLAB.get(), CABlocks.PEACH_PLANKS.get());
 		woodenStairs(consumer, CABlocks.PEACH_STAIRS.get(), CABlocks.PEACH_PLANKS.get());

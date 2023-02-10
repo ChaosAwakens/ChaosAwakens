@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "chaosawakens:block/hirmeriella_slab_top"
+    },
+    "type=bottom": {
+      "model": "chaosawakens:block/hirmeriella_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/hirmeriella_planks"
+    }
+  }
+}

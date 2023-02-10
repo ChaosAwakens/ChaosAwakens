@@ -258,6 +258,8 @@ public class ClientSetupEvent {
 			Atlases.addWoodType(CABlocks.PEACH);
 			Atlases.addWoodType(CABlocks.SKYWOOD);
 			Atlases.addWoodType(CABlocks.GINKGO);
+			Atlases.addWoodType(CABlocks.HIRMERIELLA);
+			Atlases.addWoodType(CABlocks.DENSEWOOD);
 		});
 
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), (manager) -> new HerculesBeetleEntityRenderer(manager, HerculesBeetleEntity.Type.MODERN));
@@ -332,9 +334,18 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.TERMITE_NEST.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_TERMITE_NEST.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(CABlocks.DENSE_GRASS.get(), RenderType.cutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.TALL_DENSE_GRASS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSE_GRASS.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSE_GRASS_BLOCK.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.TALL_DENSE_GRASS.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSE_RED_ANT_NEST.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.THORNY_SUN.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.ALSTROEMERIAT.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSE_ORCHID.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.SMALL_BUSH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.SMALL_CARNIVOROUS_PLANT.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.BIG_CARNIVOROUS_PLANT.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.MESOZOIC_VINES.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.MESOZOIC_VINES_PLANT.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.BLUE_BULB.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_BULB.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PURPLE_BULB.get(), RenderType.cutout());
@@ -342,6 +353,9 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.CYAN_ROSE.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.RED_ROSE.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PAEONIA.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.SWAMP_MILKWEED.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.DAISY.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.PRIMROSE.get(), RenderType.cutout());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.APPLE_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_TRAPDOOR.get(), RenderType.cutout());
@@ -362,6 +376,9 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.APPLE_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.GINKGO_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.HIRMERIELLA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_SAPLING.get(), RenderType.cutoutMipped());
@@ -389,16 +406,25 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PAEONIA.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BLUE_BULB.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PINK_BULB.get(), RenderType.cutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PURPLE_BULB.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_DENSE_ORCHID.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_SWAMP_MILKWEED.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_SMALL_BUSH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_SMALL_CARNIVOROUS_PLANT.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BIG_CARNIVOROUS_PLANT.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PRIMROSE.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_DAISY.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_APPLE_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_CHERRY_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PEACH_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_GINKGO_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_HIRMERIELLA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_DENSEWOOD_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_RED_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_GREEN_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_YELLOW_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PINK_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BLUE_CRYSTAL_SAPLING.get(), RenderType.cutout());
-		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_ORANGE_CRYSTAL_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_RED_CRYSTAL_FLOWER.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BLUE_CRYSTAL_FLOWER.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_GREEN_CRYSTAL_FLOWER.get(), RenderType.cutout());
@@ -417,6 +443,8 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.DUPLICATION_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.GINKGO_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.HIRMERIELLA_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_LEAVES.get(), RenderType.cutoutMipped());
 
@@ -424,6 +452,8 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_LEAF_CARPET.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.DUPLICATION_LEAF_CARPET.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.GINKGO_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.HIRMERIELLA_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_LEAF_CARPET.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_LEAF_CARPET.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_LEAF_CARPET.get(), RenderType.cutoutMipped());
 

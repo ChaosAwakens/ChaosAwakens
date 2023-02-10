@@ -82,6 +82,13 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.GINKGO_STAIRS.get(), 5, 20);
 		registerFlammable(CABlocks.GINKGO_FENCE.get(), 5, 20);
 		registerFlammable(CABlocks.GINKGO_FENCE_GATE.get(), 5, 20);
+		registerFlammable(CABlocks.HIRMERIELLA_LEAVES.get(), 30, 60);
+		registerFlammable(CABlocks.HIRMERIELLA_LOG.get(), 5, 5);
+		registerFlammable(CABlocks.HIRMERIELLA_PLANKS.get(), 5, 20);
+		registerFlammable(CABlocks.HIRMERIELLA_SLAB.get(), 5, 20);
+		registerFlammable(CABlocks.HIRMERIELLA_STAIRS.get(), 5, 20);
+		registerFlammable(CABlocks.HIRMERIELLA_FENCE.get(), 5, 20);
+		registerFlammable(CABlocks.HIRMERIELLA_FENCE_GATE.get(), 5, 20);
 		registerFlammable(CABlocks.RED_CRYSTAL_LEAVES.get(), 30, 60);
 		registerFlammable(CABlocks.GREEN_CRYSTAL_LEAVES.get(), 30, 60);
 		registerFlammable(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), 30, 60);
@@ -278,6 +285,8 @@ public class CAVanillaCompat {
 			event.setBurnTime(200);
 		} else if (fuel.getItem() == CAItems.CRYSTAL_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
 			event.setBurnTime(100);
+		} else if(fuel.getItem() == CABlocks.TAR.get().asItem() ) {
+			event.setBurnTime(10000);
 		}
 	}
 }

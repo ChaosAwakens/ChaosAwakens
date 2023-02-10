@@ -6,6 +6,7 @@
 		"AttachedStemBlockMixin",
 		"CropsBlockMixin",
 		"IForgeBlockMixin",
+		"LeavesBlockMixin",
 		"LivingEntityMixin",
 		"NoiseChunkGeneratorAccessor",
 		"NoiseChunkGeneratorMixin",

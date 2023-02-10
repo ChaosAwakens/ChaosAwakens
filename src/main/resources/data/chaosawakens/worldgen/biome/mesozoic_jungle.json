@@ -1,6 +1,6 @@
 {
-	"surface_builder": "chaosawakens:dense_mountain",
-	"depth": 0.8,
+	"surface_builder": "chaosawakens:dense_grass",
+	"depth": 1,
 	"scale": 0.05,
 	"temperature": 0.95,
 	"downfall": 0.9,
@@ -12,6 +12,7 @@
 		"fog_color": 12638463,
 		"water_color": 4159204,
 		"water_fog_color": 329011,
+		"grass_color": 12181904,
 		"mood_sound": {
 			"sound": "minecraft:ambient.cave",
 			"tick_delay": 6000,

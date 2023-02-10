@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:farmland",
-    "chaosawakens:dense_farmland"
+    "chaosawakens:dense_farmland",
+    "chaosawakens:terra_preta_farmland"
   ]
 }

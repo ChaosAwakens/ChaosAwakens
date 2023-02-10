@@ -17,22 +17,22 @@ import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
 
 /**
  */
-public class ElipticFoliagePlacer extends FoliagePlacer {
-	public static final Codec<ElipticFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
+public class SpheroidFoliagePlacer extends FoliagePlacer {
+	public static final Codec<SpheroidFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
 		return foliagePlacerParts(instance).and(FeatureSpread.codec(0, 16, 8)
-				.fieldOf("height").forGetter((eliptic) -> eliptic.height)).apply(instance, ElipticFoliagePlacer::new);
+				.fieldOf("height").forGetter((eliptic) -> eliptic.height)).apply(instance, SpheroidFoliagePlacer::new);
 	});
 	
 	private final FeatureSpread height;
 	
-	public ElipticFoliagePlacer(FeatureSpread radius, FeatureSpread offset, FeatureSpread height) {
+	public SpheroidFoliagePlacer(FeatureSpread radius, FeatureSpread offset, FeatureSpread height) {
 		super(radius, offset);
 		this.height = height;
 	}
 
 	@Override
 	protected FoliagePlacerType<?> type() {
-		return CAFoliagePlacerTypes.GINKGO_FOLIAGE_TYPE.get();
+		return CAFoliagePlacerTypes.SPHEROID_FOLIAGE_PLACER.get();
 	}
 	
 	@Override
@@ -40,9 +40,8 @@ public class ElipticFoliagePlacer extends FoliagePlacer {
 			BaseTreeFeatureConfig config, int maxFreeHeight, Foliage foliage, int foliageHeight, int radius,
 			Set<BlockPos> posSet, int offset, MutableBoundingBox bBox) {
 		int height = -this.foliageHeight(rand);
-		for(int i = 1; i > height; i--)
-			this.placeLeavesRow(reader, rand, config, foliage.foliagePos(), radius, posSet, i, foliage.doubleTrunk(), bBox);
-		offset++;
+		for(int i = 1 + offset; i > height; i--)
+			this.placeLeavesRow(reader, rand, config, foliage.foliagePos(), radius + foliage.radiusOffset(), posSet, i, foliage.doubleTrunk(), bBox);
 	}
 	
 	public int foliageHeight(Random rand) {
@@ -56,8 +55,13 @@ public class ElipticFoliagePlacer extends FoliagePlacer {
 
 	@Override
 	protected boolean shouldSkipLocation(Random rand, int x, int y, int z, int radius, boolean doubleTrunk) {
-		float height = this.foliageHeight(rand)-1, fRad = radius, a = x/fRad, b = z/fRad, c = (y+height)/height;
-		if(a*a + b*b + c*c <= 1)
+		int absX = Math.abs(x), absY = Math.abs(y), absZ = Math.abs(z);
+		float height = this.foliageHeight(rand)-1,
+				fRad = radius,
+				a = (absX - (doubleTrunk && x > 0 ? 0.5f : 0.0f))/fRad,
+				b = (absZ - (doubleTrunk && z > 0 ? 0.5f : 0.0f))/fRad,
+				c = (y+height)/height;
+		if(a*a + b*b + c*c <= 1 && absX*absX + absY*absY + absZ*absZ <= 36)
 			return false;
 		return true;
 	}

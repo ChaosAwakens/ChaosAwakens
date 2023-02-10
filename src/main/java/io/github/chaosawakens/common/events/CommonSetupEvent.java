@@ -74,6 +74,8 @@ public class CommonSetupEvent {
 			WoodType.register(CABlocks.PEACH);
 			WoodType.register(CABlocks.SKYWOOD);
 			WoodType.register(CABlocks.GINKGO);
+			WoodType.register(CABlocks.HIRMERIELLA);
+			WoodType.register(CABlocks.DENSEWOOD);
 			
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
@@ -82,7 +84,10 @@ public class CommonSetupEvent {
 		ModList modList = ModList.get();
 		if (modList.isLoaded("jeresources")) CAJER.init();
 
-		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_MOUNTAIN.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_MOUNTAIN);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_PLAINS.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_PLAINS);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_FOREST.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_FOREST);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_GINKGO_FOREST.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_GINKGO_FOREST);
+		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_MOUNTAINS.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_MOUNTAINS);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.STALAGMITE_VALLEY.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.STALAGMITE_VALLEY);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.MESOZOIC_JUNGLE.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.MESOZOIC_JUNGLE);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.VILLAGE_PLAINS.getId()), CABiomes.Type.VILLAGE_MANIA, CABiomes.Type.VILLAGE_PLAINS);
@@ -108,7 +113,6 @@ public class CommonSetupEvent {
     	 }
     }
 
-	@SuppressWarnings("unchecked")
 	public static void addDimensionalSpacing(final WorldEvent.Load event) {
 		if (!(event.getWorld() instanceof ServerWorld)) return;
 
@@ -117,7 +121,7 @@ public class CommonSetupEvent {
 
 		try {
 			if (codecMethod == null) codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
-			// TODO Fix this
+			@SuppressWarnings("unchecked")
 			ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
 			if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged")) return;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

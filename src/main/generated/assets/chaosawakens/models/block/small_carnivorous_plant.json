@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "chaosawakens:block/small_carnivorous_plant"
+  }
+}

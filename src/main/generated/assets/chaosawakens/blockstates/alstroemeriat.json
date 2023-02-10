@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "chaosawakens:block/alstroemeriat_top"
+    },
+    "half=lower": {
+      "model": "chaosawakens:block/alstroemeriat_bottom"
+    }
+  }
+}

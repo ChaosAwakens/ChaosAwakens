@@ -339,9 +339,11 @@ public class MiscEventHandler {
 	}
 	
 	public static void onUseHoeOnDense(BlockToolInteractEvent event) {
-		if(event.getState().is(CATags.Blocks.DENSE_DIRT) && event.getToolType() == ToolType.HOE) {
-			event.setFinalState(CABlocks.DENSE_FARMLAND.get().defaultBlockState());
-		}
+		if(event.getToolType() == ToolType.HOE)
+			if(event.getState().is(CATags.Blocks.DENSE_DIRT))
+				event.setFinalState(CABlocks.DENSE_FARMLAND.get().defaultBlockState());
+			else if(event.getState().is(CATags.Blocks.TERRA_PRETA))
+				event.setFinalState(CABlocks.TERRA_PRETA_FARMLAND.get().defaultBlockState());
 	}
 
 }

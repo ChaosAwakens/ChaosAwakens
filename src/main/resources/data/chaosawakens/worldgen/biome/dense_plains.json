@@ -1,11 +1,11 @@
 {
   "player_spawn_friendly": true,
   "precipitation": "none",
-  "temperature": 0.8,
+  "temperature": 0.7,
   "downfall": 0.0,
-  "category": "none",
+  "category": "plains",
   "depth": 3,
-  "scale": 0.5,
+  "scale": 0.05,
   "effects": {
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
@@ -16,9 +16,10 @@
     "sky_color": 7907327,
     "fog_color": 12638463,
     "water_color": 4159204,
-    "water_fog_color": 329011
+    "water_fog_color": 329011,
+    "grass_color": 13032913
   },
-  "surface_builder": "chaosawakens:dense_mountain",
+  "surface_builder": "chaosawakens:dense_grass",
   "carvers": {
     "air": [
       "minecraft:canyon",

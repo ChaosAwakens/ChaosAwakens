@@ -7,11 +7,18 @@ import javax.annotation.Nonnull;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CrystalBushBlock;
 import io.github.chaosawakens.common.blocks.DenseBushBlock;
+import io.github.chaosawakens.common.blocks.DoubleCrystalPlantBlock;
+import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
 import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
+import io.github.chaosawakens.common.blocks.MesozoicVinesTopBlock;
 import io.github.chaosawakens.common.items.MobestiaryItem;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
+import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.FenceBlock;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.block.SaplingBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -188,25 +195,26 @@ public class CAItemModelProvider extends ItemModelProvider {
 			 * assets/chaosawakens/models/block or already have an existing item model at
 			 * assets/chaosawakens/models/item
 			 */
-
+			
 			if (item.getId().getPath().contains("_wall")) {
 				withExistingParent(name, getBlockResourceLocation(name + "_inventory"));
 			} else if (item.getId().getPath().contains("_trapdoor")) {
 				withExistingParent(name, getBlockResourceLocation(name + "_bottom"));			
 			} else if (item.getId().getPath().contains("_door")) {
 				singleTextureLayer0(name, ITEM_GENERATED, getItemResourceLocation(name));
-			} else if ((block instanceof CrystalBushBlock || block instanceof DenseBushBlock) && (item.getId().getPath().contains("_grass") || item.getId().getPath().contains("_sun"))) {
-				if (item.getId().getPath().contains("tall_") || item.getId().getPath().contains("thorny_")) {
+			} else if(block instanceof SaplingBlock || block instanceof FlowerBlock) {
+				singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name));
+			} else if (block instanceof CrystalBushBlock || block instanceof DenseBushBlock || block instanceof MesozoicVinesTopBlock) {
+				if (block instanceof DoubleDensePlantBlock || block instanceof DoubleCrystalPlantBlock) {
 					singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name + "_top"));
 				} else {
 					singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name));
 				}
-			} else if (block instanceof LeafCarpetBlock) {
+			} else if (block instanceof LeafCarpetBlock || block instanceof FenceBlock || block instanceof AbstractButtonBlock) {
 				withExistingParent(name, getBlockResourceLocation(name + "_inventory"));
 			} else {
-				if (!existingFileHelper.exists(getBlockResourceLocation(name), MODEL) || existingFileHelper.exists(getItemResourceLocation(name), MODEL)) {
+				if (!existingFileHelper.exists(getBlockResourceLocation(name), MODEL) || existingFileHelper.exists(getItemResourceLocation(name), MODEL))
 					continue;
-				}
 				withExistingParent(name, getBlockResourceLocation(name));
 			}
 		}

@@ -1,0 +1,27 @@
+{
+	"name": "chaosawakens:centerpool",
+	"fallback": "minecraft:empty",
+	"elements":
+	[
+		{
+			"weight": 40,
+			"element":
+			{
+				"element_type": "minecraft:single_pool_element",
+				"location": "chaosawakens:corridor",
+				"processors": "minecraft:empty",
+				"projection": "rigid"
+			}
+		},
+		{
+			"weight": 100,
+			"element":
+			{
+				"element_type": "minecraft:single_pool_element",
+				"location": "chaosawakens:end",
+				"processors": "minecraft:empty",
+				"projection": "rigid"
+			}
+		}
+	]
+}

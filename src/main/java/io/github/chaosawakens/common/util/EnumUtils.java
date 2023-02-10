@@ -215,6 +215,7 @@ public class EnumUtils {
 		ORE_ALL,
 		ORE_RARE,
 		ORE_COMMON,
-		FOSSIL
+		FOSSIL,
+		NONE
 	}
 }

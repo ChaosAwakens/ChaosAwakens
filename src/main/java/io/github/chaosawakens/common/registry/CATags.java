@@ -26,6 +26,7 @@ public class CATags {
 		public static final ITag.INamedTag<Block> FARMABLE = tag("farmable");
 		
 		public static final ITag.INamedTag<Block> DENSE_DIRT = tag("dense_dirt");
+		public static final ITag.INamedTag<Block> TERRA_PRETA = tag("terra_preta");
 		
 		public static final ITag.INamedTag<Block> APPLE_LOGS = tag("apple_logs");
 		public static final ITag.INamedTag<Block> CHERRY_LOGS = tag("cherry_logs");
@@ -33,6 +34,8 @@ public class CATags {
 		public static final ITag.INamedTag<Block> PEACH_LOGS = tag("peach_logs");
 		public static final ITag.INamedTag<Block> SKYWOOD_LOGS = tag("skywood_logs");
 		public static final ITag.INamedTag<Block> GINKGO_LOGS = tag("ginkgo_logs");
+		public static final ITag.INamedTag<Block> HIRMERIELLA_LOGS = tag("hirmeriella_logs");
+		public static final ITag.INamedTag<Block> DENSEWOOD_LOGS = tag("densewood_logs");
 		public static final ITag.INamedTag<Block> CRYSTAL_LOGS = tag("crystal_logs");
 		public static final ITag.INamedTag<Block> CRYSTAL_LEAVES = tag("crystal_leaves");
 		public static final ITag.INamedTag<Block> CRYSTAL_SAPLING = tag("crystal_sapling");
@@ -53,6 +56,8 @@ public class CATags {
 		public static final ITag.INamedTag<Item> PEACH_LOGS = tag("peach_logs");
 		public static final ITag.INamedTag<Item> SKYWOOD_LOGS = tag("skywood_logs");
 		public static final ITag.INamedTag<Item> GINKGO_LOGS = tag("ginkgo_logs");
+		public static final ITag.INamedTag<Item> HIRMERIELLA_LOGS = tag("hirmeriella_logs");
+		public static final ITag.INamedTag<Item> DENSEWOOD_LOGS = tag("densewood_logs");
 		public static final ITag.INamedTag<Item> CRYSTAL_LOGS = tag("crystal_logs");
 		public static final ITag.INamedTag<Item> CRYSTAL_LEAVES = tag("crystal_leaves");
 		public static final ITag.INamedTag<Item> CRYSTAL_SAPLING = tag("crystal_sapling");

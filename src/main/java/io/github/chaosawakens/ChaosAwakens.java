@@ -37,6 +37,7 @@ import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStats;
 import io.github.chaosawakens.common.registry.CAStructures;
 import io.github.chaosawakens.common.registry.CATileEntities;
+import io.github.chaosawakens.common.registry.CATreeDecoratorTypes;
 import io.github.chaosawakens.common.registry.CAVanillaCompat;
 import io.github.chaosawakens.common.registry.CAVillagerTrades;
 import io.github.chaosawakens.common.registry.CAVillagers;
@@ -163,6 +164,7 @@ public class ChaosAwakens {
 		CAVillagers.PROFESSIONS.register(eventBus);
 		CALootModifiers.LOOT_MODIFIERS.register(eventBus);
 		CAFoliagePlacerTypes.FOLIAGE_PLACER_TYPES.register(eventBus);
+		CATreeDecoratorTypes.TREE_DECORATOR_TYPES.register(eventBus);
 		eventBus.addListener(EntitySetAttributeEventSubscriber::onEntityAttributeCreationEvent);
 
 		//TODO Armor set bonuses fix, merge extended items, merge other stuff
