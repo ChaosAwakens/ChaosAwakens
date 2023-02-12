@@ -406,6 +406,7 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PAEONIA.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_BLUE_BULB.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PINK_BULB.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_PURPLE_BULB.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_DENSE_ORCHID.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_SWAMP_MILKWEED.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.POTTED_SMALL_BUSH.get(), RenderType.cutout());

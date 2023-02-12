@@ -69,7 +69,7 @@ public class GenericFarmlandBlock extends FarmlandBlock {
 		return FarmlandWaterManager.hasBlockWaterTicket(pLevel, pPos);
 	}
 	
-	private boolean isUnderCrops(IBlockReader pLevel, BlockPos pPos) {
+	protected boolean isUnderCrops(IBlockReader pLevel, BlockPos pPos) {
 		BlockState plant = pLevel.getBlockState(pPos.above());
 		BlockState state = pLevel.getBlockState(pPos);
 		return plant.getBlock() instanceof IPlantable && state.canSustainPlant(pLevel, pPos, Direction.UP, (IPlantable)plant.getBlock());

@@ -102,6 +102,9 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.CYAN_ROSE.get(), 60, 100);
 		registerFlammable(CABlocks.RED_ROSE.get(), 60, 100);
 		registerFlammable(CABlocks.PAEONIA.get(), 60, 100);
+		registerFlammable(CABlocks.SWAMP_MILKWEED.get(), 60, 100);
+		registerFlammable(CABlocks.PRIMROSE.get(), 60, 100);
+		registerFlammable(CABlocks.DAISY.get(), 60, 100);
 		registerFlammable(CABlocks.STRAWBERRY_BUSH.get(), 60, 100);
 		registerFlammable(CABlocks.CORN_TOP_BLOCK.get(), 60, 100);
 		registerFlammable(CABlocks.CORN_BODY_BLOCK.get(), 60, 100);
@@ -113,6 +116,13 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.BLUE_BULB.get(), 60, 100);
 		registerFlammable(CABlocks.PINK_BULB.get(), 60, 100);
 		registerFlammable(CABlocks.PURPLE_BULB.get(), 60, 100);
+		registerFlammable(CABlocks.DENSE_ORCHID.get(), 60, 100);
+		registerFlammable(CABlocks.ALSTROEMERIAT.get(), 60, 100);
+		registerFlammable(CABlocks.SMALL_BUSH.get(), 50, 80);
+		registerFlammable(CABlocks.SMALL_CARNIVOROUS_PLANT.get(), 50, 80);
+		registerFlammable(CABlocks.BIG_CARNIVOROUS_PLANT.get(), 50, 80);
+		registerFlammable(CABlocks.MESOZOIC_VINES.get(), 50, 80);
+		registerFlammable(CABlocks.MESOZOIC_VINES_PLANT.get(), 50, 80);
 		registerFlammable(CABlocks.CRYSTAL_GRASS.get(), 50, 80);
 		registerFlammable(CABlocks.TALL_CRYSTAL_GRASS.get(), 50, 80);
 		registerFlammable(CABlocks.RED_CRYSTAL_FLOWER.get(), 60, 100);
@@ -162,9 +172,15 @@ public class CAVanillaCompat {
 		registerCompostable(0.2F, CABlocks.SKYWOOD_LEAF_CARPET.get());
 		registerCompostable(0.3F, CABlocks.SKY_MOSS_CARPET.get());
 		registerCompostable(0.65F, CABlocks.SKY_MOSS_BLOCK.get());
-//        registerCompostable(0.3F, CABlocks.GINKGO_SAPLING.get());
+		registerCompostable(0.3F, CABlocks.GINKGO_SAPLING.get());
 		registerCompostable(0.3F, CABlocks.GINKGO_LEAVES.get());
 		registerCompostable(0.2F, CABlocks.GINKGO_LEAF_CARPET.get());
+		registerCompostable(0.3F, CABlocks.HIRMERIELLA_SAPLING.get());
+		registerCompostable(0.3F, CABlocks.HIRMERIELLA_LEAVES.get());
+		registerCompostable(0.2F, CABlocks.HIRMERIELLA_LEAF_CARPET.get());
+		registerCompostable(0.3F, CABlocks.DENSEWOOD_SAPLING.get());
+		registerCompostable(0.3F, CABlocks.DENSEWOOD_LEAVES.get());
+		registerCompostable(0.2F, CABlocks.DENSEWOOD_LEAF_CARPET.get());
 		registerCompostable(0.3F, CABlocks.RED_CRYSTAL_SAPLING.get());
 		registerCompostable(0.3F, CABlocks.RED_CRYSTAL_LEAVES.get());
 		registerCompostable(0.3F, CABlocks.GREEN_CRYSTAL_SAPLING.get());
@@ -175,6 +191,9 @@ public class CAVanillaCompat {
 		registerCompostable(0.65F, CABlocks.CYAN_ROSE.get());
 		registerCompostable(0.65F, CABlocks.RED_ROSE.get());
 		registerCompostable(0.65F, CABlocks.PAEONIA.get());
+		registerCompostable(0.65F, CABlocks.SWAMP_MILKWEED.get());
+		registerCompostable(0.65F, CABlocks.PRIMROSE.get());
+		registerCompostable(0.65F, CABlocks.DAISY.get());
 		registerCompostable(0.2F, CABlocks.OAK_LEAF_CARPET.get());
 		registerCompostable(0.2F, CABlocks.SPRUCE_LEAF_CARPET.get());
 		registerCompostable(0.2F, CABlocks.BIRCH_LEAF_CARPET.get());
@@ -192,6 +211,12 @@ public class CAVanillaCompat {
 		registerCompostable(0.65F, CABlocks.BLUE_BULB.get());
 		registerCompostable(0.65F, CABlocks.PINK_BULB.get());
 		registerCompostable(0.65F, CABlocks.PURPLE_BULB.get());
+		registerCompostable(0.75F, CABlocks.ALSTROEMERIAT.get());
+		registerCompostable(0.6F, CABlocks.SMALL_BUSH.get());
+		registerCompostable(0.55F, CABlocks.SMALL_CARNIVOROUS_PLANT.get());
+		registerCompostable(0.55F, CABlocks.BIG_CARNIVOROUS_PLANT.get());
+		registerCompostable(0.45F, CABlocks.MESOZOIC_VINES.get());
+		registerCompostable(0.45F, CABlocks.MESOZOIC_VINES_PLANT.get());
 		registerCompostable(0.3F, CABlocks.CRYSTAL_GRASS.get());
 		registerCompostable(0.6F, CAItems.CORN.get());
 		registerCompostable(0.5F, CAItems.TOMATO.get());
@@ -262,10 +287,12 @@ public class CAVanillaCompat {
 				|| fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem()
 				|| fuel.getItem() == CABlocks.MOLDY_FENCE.get().asItem() || fuel.getItem() == CABlocks.PEACH_FENCE.get().asItem()
 				|| fuel.getItem() == CABlocks.SKYWOOD_FENCE.get().asItem() || fuel.getItem() == CABlocks.GINKGO_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.HIRMERIELLA_FENCE.get().asItem()
 				|| fuel.getItem() == CABlocks.CRYSTAL_FENCE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.CHERRY_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.PEACH_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_FENCE_GATE.get().asItem()
-				|| fuel.getItem() == CABlocks.GINKGO_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.CRYSTAL_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.GINKGO_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.HIRMERIELLA_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.CRYSTAL_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.APPLE_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.CHERRY_TRAPDOOR.get().asItem()
 				|| fuel.getItem() == CABlocks.DUPLICATION_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.GINKGO_TRAPDOOR.get().asItem()
 				|| fuel.getItem() == CABlocks.PEACH_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_TRAPDOOR.get().asItem()) {

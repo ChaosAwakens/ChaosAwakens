@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "chaosawakens:dense_grass_block",
-    "chaosawakens:dense_dirt"
+    "chaosawakens:dense_dirt",
+    "chaosawakens:latosol",
+    "chaosawakens:terra_preta"
   ]
 }

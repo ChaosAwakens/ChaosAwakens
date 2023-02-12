@@ -46,6 +46,7 @@ import io.github.chaosawakens.common.blocks.SaltBlock;
 import io.github.chaosawakens.common.blocks.StrawberryBushBlock;
 import io.github.chaosawakens.common.blocks.TallCrystalGrassBlock;
 import io.github.chaosawakens.common.blocks.TallDenseGrassBlock;
+import io.github.chaosawakens.common.blocks.TerraPretaFarmlandBlock;
 import io.github.chaosawakens.common.blocks.ThornySunBlock;
 import io.github.chaosawakens.common.blocks.TopTubeBlock;
 import io.github.chaosawakens.common.blocks.TubeBlock;
@@ -530,8 +531,8 @@ public class CABlocks {
 	public static final RegistryObject<FlowerBlock> RED_ROSE = registerBlock("red_rose", () -> new FlowerBlock(Effects.MOVEMENT_SLOWDOWN, 14, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<FlowerBlock> PAEONIA = registerBlock("paeonia", () -> new FlowerBlock(Effects.SLOW_FALLING, 10, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<FlowerBlock> SWAMP_MILKWEED = registerBlock("swamp_milkweed", () -> new FlowerBlock(Effects.MOVEMENT_SLOWDOWN, 14, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
-	public static final RegistryObject<FlowerBlock> PRIMROSE = registerBlock("primrose", () -> new FlowerBlock(Effects.MOVEMENT_SLOWDOWN, 14, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
-	public static final RegistryObject<FlowerBlock> DAISY = registerBlock("daisy", () -> new FlowerBlock(Effects.MOVEMENT_SLOWDOWN, 14, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<FlowerBlock> PRIMROSE = registerBlock("primrose", () -> new FlowerBlock(Effects.DIG_SPEED, 14, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<FlowerBlock> DAISY = registerBlock("daisy", () -> new FlowerBlock(Effects.JUMP, 14, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	
 	// DUNGEON BLOCKS
 	public static final RegistryObject<Block> NEST_BLOCK = registerBlock("nest_block", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_YELLOW).harvestTool(ToolType.AXE).strength(0.3F).sound(SoundType.WOOD)), CAItemGroups.BLOCKS);
@@ -805,7 +806,7 @@ public class CABlocks {
 	public static final RegistryObject<DenseFlowerBlock> PURPLE_BULB = registerBlock("purple_bulb", () -> new DenseFlowerBlock(Effects.HEALTH_BOOST, 30, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS).lightLevel((state) -> 4)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<DenseFlowerBlock> DENSE_ORCHID = registerBlock("dense_orchid", () -> new DenseFlowerBlock(Effects.DAMAGE_RESISTANCE, 30, AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS).lightLevel((state) -> 4)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> TERRA_PRETA = registerBlock("terra_preta", () -> new Block(AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).harvestTool(ToolType.SHOVEL).strength(0.75F).sound(SoundType.GRAVEL)), CAItemGroups.BLOCKS);
-	public static final RegistryObject<GenericFarmlandBlock> TERRA_PRETA_FARMLAND = registerBlock("terra_preta_farmland", () -> new GenericFarmlandBlock(AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).randomTicks().harvestTool(ToolType.SHOVEL).strength(0.75F).sound(SoundType.GRAVEL), CABlocks.TERRA_PRETA), CAItemGroups.BLOCKS);
+	public static final RegistryObject<TerraPretaFarmlandBlock> TERRA_PRETA_FARMLAND = registerBlock("terra_preta_farmland", () -> new TerraPretaFarmlandBlock(AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).randomTicks().harvestTool(ToolType.SHOVEL).strength(0.75F).sound(SoundType.GRAVEL), CABlocks.TERRA_PRETA), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> TAR = registerBlock("tar", () -> new Block(AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).harvestTool(ToolType.SHOVEL).strength(0.75F).sound(SoundType.HONEY_BLOCK)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> LATOSOL = registerBlock("latosol", () -> new Block(AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).harvestTool(ToolType.SHOVEL).strength(0.9F).sound(SoundType.GRAVEL)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<DoubleDensePlantBlock> ALSTROEMERIAT = registerBlock("alstroemeriat", () -> new DoubleDensePlantBlock(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
@@ -819,16 +820,16 @@ public class CABlocks {
 	public static final RegistryObject<FlowerPotBlock> POTTED_CYAN_ROSE = registerBlock("potted_cyan_rose", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CYAN_ROSE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_RED_ROSE = registerBlock("potted_red_rose", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, RED_ROSE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_PAEONIA = registerBlock("potted_paeonia", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PAEONIA, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-	public static final RegistryObject<FlowerPotBlock> POTTED_BLUE_BULB = registerBlock("potted_blue_bulb", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLUE_BULB, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-	public static final RegistryObject<FlowerPotBlock> POTTED_PINK_BULB = registerBlock("potted_pink_bulb", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PINK_BULB, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-	public static final RegistryObject<FlowerPotBlock> POTTED_PURPLE_BULB = registerBlock("potted_purple_bulb", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PURPLE_BULB, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-	public static final RegistryObject<FlowerPotBlock> POTTED_DENSE_ORCHID = registerBlock("potted_dense_orchid", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DENSE_ORCHID, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_SWAMP_MILKWEED = registerBlock("potted_swamp_milkweed", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SWAMP_MILKWEED, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
+	public static final RegistryObject<FlowerPotBlock> POTTED_PRIMROSE = registerBlock("potted_primrose", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PRIMROSE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
+	public static final RegistryObject<FlowerPotBlock> POTTED_DAISY = registerBlock("potted_daisy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DAISY, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
+	public static final RegistryObject<FlowerPotBlock> POTTED_BLUE_BULB = registerBlock("potted_blue_bulb", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLUE_BULB, AbstractBlock.Properties.copy(Blocks.FLOWER_POT).lightLevel((state) -> 4)), null, false);
+	public static final RegistryObject<FlowerPotBlock> POTTED_PINK_BULB = registerBlock("potted_pink_bulb", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PINK_BULB, AbstractBlock.Properties.copy(Blocks.FLOWER_POT).lightLevel((state) -> 4)), null, false);
+	public static final RegistryObject<FlowerPotBlock> POTTED_PURPLE_BULB = registerBlock("potted_purple_bulb", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PURPLE_BULB, AbstractBlock.Properties.copy(Blocks.FLOWER_POT).lightLevel((state) -> 4)), null, false);
+	public static final RegistryObject<FlowerPotBlock> POTTED_DENSE_ORCHID = registerBlock("potted_dense_orchid", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DENSE_ORCHID, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_SMALL_BUSH = registerBlock("potted_small_bush", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SMALL_BUSH, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_SMALL_CARNIVOROUS_PLANT = registerBlock("potted_small_carnivorous_plant", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SMALL_CARNIVOROUS_PLANT, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_BIG_CARNIVOROUS_PLANT = registerBlock("potted_big_carnivorous_plant", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BIG_CARNIVOROUS_PLANT, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-	public static final RegistryObject<FlowerPotBlock> POTTED_PRIMROSE = registerBlock("potted_primrose", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PRIMROSE, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
-	public static final RegistryObject<FlowerPotBlock> POTTED_DAISY = registerBlock("potted_daisy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DAISY, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_APPLE_SAPLING = registerBlock("potted_apple_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, APPLE_SAPLING, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_CHERRY_SAPLING = registerBlock("potted_cherry_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CHERRY_SAPLING, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
 	public static final RegistryObject<FlowerPotBlock> POTTED_PEACH_SAPLING = registerBlock("potted_peach_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PEACH_SAPLING, AbstractBlock.Properties.copy(Blocks.FLOWER_POT)), null, false);
@@ -970,6 +971,8 @@ public class CABlocks {
 		pot.addPlant(GREEN_CRYSTAL_SAPLING.getId(), POTTED_GREEN_CRYSTAL_SAPLING);
 		pot.addPlant(YELLOW_CRYSTAL_SAPLING.getId(), POTTED_YELLOW_CRYSTAL_SAPLING);
 		pot.addPlant(PINK_CRYSTAL_SAPLING.getId(), POTTED_PINK_CRYSTAL_SAPLING);
+		pot.addPlant(BLUE_CRYSTAL_SAPLING.getId(), POTTED_BLUE_CRYSTAL_SAPLING);
+		pot.addPlant(ORANGE_CRYSTAL_SAPLING.getId(), POTTED_ORANGE_CRYSTAL_SAPLING);
 		pot.addPlant(RED_CRYSTAL_FLOWER.getId(), POTTED_RED_CRYSTAL_FLOWER);
 		pot.addPlant(BLUE_CRYSTAL_FLOWER.getId(), POTTED_BLUE_CRYSTAL_FLOWER);
 		pot.addPlant(GREEN_CRYSTAL_FLOWER.getId(), POTTED_GREEN_CRYSTAL_FLOWER);
