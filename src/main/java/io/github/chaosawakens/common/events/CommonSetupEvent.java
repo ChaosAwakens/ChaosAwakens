@@ -12,6 +12,7 @@ import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.CAReflectionHelper;
+import io.github.chaosawakens.api.CarverWrapper;
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.integration.CAJER;
@@ -51,7 +52,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class CommonSetupEvent {
 	public static List<FeatureWrapper> configFeatures = new ArrayList<>();
-
+	public static List<CarverWrapper> configCarvers = new ArrayList<>();
+	
 	private static Method codecMethod;
 
 	public static void onFMLCommonSetupEvent(FMLCommonSetupEvent event) {
@@ -78,7 +80,9 @@ public class CommonSetupEvent {
 			WoodType.register(CABlocks.DENSEWOOD);
 			
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
+			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredCarvers");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
+			configCarvers.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_CARVER, wrapper.getIdentifier(), wrapper.getCarver()));
 		});
 
 		ModList modList = ModList.get();

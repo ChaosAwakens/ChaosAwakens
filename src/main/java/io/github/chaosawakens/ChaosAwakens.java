@@ -22,6 +22,7 @@ import io.github.chaosawakens.common.integration.TheOneProbePlugin;
 import io.github.chaosawakens.common.registry.CAAttributes;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CACarvers;
 import io.github.chaosawakens.common.registry.CAContainerTypes;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAEnchantments;
@@ -159,6 +160,7 @@ public class ChaosAwakens {
 		CAStats.STAT_TYPES.register(eventBus);
 		CAStructures.STRUCTURES.register(eventBus);
 		CAFeatures.FEATURES.register(eventBus);
+		CACarvers.CARVERS.register(eventBus);
 		CASoundEvents.SOUND_EVENTS.register(eventBus);
 		CAVillagers.POI_TYPES.register(eventBus);
 		CAVillagers.PROFESSIONS.register(eventBus);

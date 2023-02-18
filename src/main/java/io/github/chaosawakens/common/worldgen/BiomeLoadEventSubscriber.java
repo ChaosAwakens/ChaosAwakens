@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 
 import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CABiomes;
+import io.github.chaosawakens.common.registry.CAConfiguredCarvers;
 import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
 import io.github.chaosawakens.common.registry.CAConfiguredStructures;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -369,7 +370,8 @@ public class BiomeLoadEventSubscriber {
 			if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_WORLD)) {
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addCrystalWorldOres(gen);
-
+				gen.addCarver(GenerationStage.Carving.AIR, CAConfiguredCarvers.CRYSTAL_CAVE);
+				gen.addCarver(GenerationStage.Carving.AIR, CAConfiguredCarvers.CRYSTAL_CANYON);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CRYSTAL_PLAINS);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_CRYSTAL_GRASS);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_TALL_CRYSTAL_GRASS);
