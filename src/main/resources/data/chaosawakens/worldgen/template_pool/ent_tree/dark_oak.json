@@ -1,12 +1,12 @@
 {
-  "name": "chaosawakens:dungeon/ent_tree/warped",
+  "name": "chaosawakens:ent_tree/dark_oak",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "chaosawakens:dungeon/ent_tree/warped",
+        "location": "chaosawakens:ent_tree/dark_oak",
         "processors": "minecraft:empty",
         "projection": "rigid"
       }

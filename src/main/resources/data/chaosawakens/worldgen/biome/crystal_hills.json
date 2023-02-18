@@ -21,7 +21,12 @@
     "foliage_color": 353825
   },
   "surface_builder": "chaosawakens:crystal_world",
-  "carvers": {},
+  "carvers": {
+  	"air": [
+      "minecraft:canyon",
+      "minecraft:cave"
+    ]
+  },
   "features": [],
   "starts": [],
   "spawners": {

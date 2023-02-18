@@ -26,7 +26,7 @@ public class CAChestLootTables extends ChestLootTables {
 
 	@Override
 	public void accept(BiConsumer<ResourceLocation, LootTable.Builder> register) {
-		register.accept(CATreasure.ent_dungeon_acacia_loot.lootTable,
+		register.accept(CATreasure.ent_tree_acacia_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -83,7 +83,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_birch_loot.lootTable,
+		register.accept(CATreasure.ent_tree_birch_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -140,7 +140,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_crimson_loot.lootTable,
+		register.accept(CATreasure.ent_tree_crimson_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -201,7 +201,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_dark_oak_loot.lootTable,
+		register.accept(CATreasure.ent_tree_dark_oak_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -266,7 +266,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_jungle_loot.lootTable,
+		register.accept(CATreasure.ent_tree_jungle_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -331,7 +331,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_jungle_trap.lootTable,
+		register.accept(CATreasure.ent_tree_jungle_trap.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -348,7 +348,7 @@ public class CAChestLootTables extends ChestLootTables {
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 4.0F)))
 										.apply(SetNBT.setTag(Util.make(new CompoundNBT(),
 												(nbt) -> nbt.putString("Potion", "minecraft:strong_poison")))))));
-		register.accept(CATreasure.ent_dungeon_oak_loot.lootTable,
+		register.accept(CATreasure.ent_tree_oak_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -413,7 +413,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_spruce_loot.lootTable,
+		register.accept(CATreasure.ent_tree_spruce_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -478,7 +478,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_warped_loot.lootTable,
+		register.accept(CATreasure.ent_tree_warped_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -539,7 +539,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_brown_mushroom_loot.lootTable,
+		register.accept(CATreasure.ent_tree_brown_mushroom_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot
@@ -600,7 +600,7 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
 										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
-		register.accept(CATreasure.ent_dungeon_red_mushroom_loot.lootTable,
+		register.accept(CATreasure.ent_tree_red_mushroom_loot.lootTable,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								// Common Loot

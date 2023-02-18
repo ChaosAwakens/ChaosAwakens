@@ -44,7 +44,6 @@ public class CubicSkipFoliagePlacer extends FoliagePlacer {
 			Set<BlockPos> set, int offset, MutableBoundingBox bBox) {
 		int startY = foliageHeight - rand.nextInt(3) - 1, bWidth = this.radius.sample(rand), bHeight = this.offset.sample(rand), skip = 0;
 		for(int i = 0; i > -startY; i--) {
-			ChaosAwakens.LOGGER.debug("sk "+ skip +" bw "+ bWidth + " bh " + bHeight);
 			if(isSkipping) {
 				if(skip > 1) {
 					skip--;

@@ -28,19 +28,23 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
+public class SurfaceStructure extends Structure<NoFeatureConfig> {
 	protected final String path;
-	@SuppressWarnings("unused")
-	private int xo, yo, zo;
-
-	public SurfaceDungeonStructure(Codec<NoFeatureConfig> codec, String path) {
+	private final BlockPos offset;
+	
+	public SurfaceStructure(Codec<NoFeatureConfig> codec, String path, BlockPos offset) {
 		super(codec);
 		this.path = path;
+		this.offset = offset;
+	}
+	
+	public SurfaceStructure(Codec<NoFeatureConfig> codec, String path) {
+		this(codec, path, new BlockPos(0, 1, 0).immutable());
 	}
 
 	@Override
 	public IStartFactory<NoFeatureConfig> getStartFactory() {
-		return SurfaceDungeonStructure.Start::new;
+		return SurfaceStructure.Start::new;
 	}
 
 	@Override
@@ -74,19 +78,11 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 			BlockPos blockpos = new BlockPos(x, 0, z);
 			JigsawManager.addPieces(dynamicRegistryManager,
 					new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(ChaosAwakens.MODID, path)), 10),
-					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, netherFlag ? SurfaceDungeonStructure.getGround(chunkGenerator, chunkGenerator.getBaseColumn((chunkX << 4) + 7, (chunkZ << 4) + 7), chunkX, chunkZ) : blockpos, pieces, random, false, !netherFlag);
+					AbstractVillagePiece::new, chunkGenerator, templateManagerIn, netherFlag ? SurfaceStructure.getGround(chunkGenerator, chunkGenerator.getBaseColumn((chunkX << 4) + 7, (chunkZ << 4) + 7), chunkX, chunkZ) : blockpos, pieces, random, false, !netherFlag);
 			
-	//		this.pieces.forEach(piece -> piece.move(xo, yo, zo));
+			this.pieces.forEach(piece -> piece.move(offset.getX(), offset.getY(), offset.getZ()));
 			this.calculateBoundingBox();
 		}
-	}
-	
-	public SurfaceDungeonStructure offsetPos(int xo, int yo, int zo) {
-		this.xo = xo;
-		this.yo = yo;
-		this.zo = zo;
-		
-		return this;
 	}
 
 	protected static BlockPos getGround(ChunkGenerator chunkGen, IBlockReader column, int chunkX, int chunkZ) {
@@ -98,7 +94,9 @@ public class SurfaceDungeonStructure extends Structure<NoFeatureConfig> {
 			if (!currState.canOcclude()) {
 				mutable.move(Direction.DOWN);
 				continue;
-			} else if (column.getBlockState(mutable.offset(0, 3, 0)).getMaterial() == Material.AIR && currState.canOcclude()) break;
+			} else if (column.getBlockState(mutable.offset(0, 3, 0)).getMaterial() == Material.AIR && currState.canOcclude()) {
+				break;
+			}
 			mutable.move(Direction.DOWN);
 		}
 		return mutable;

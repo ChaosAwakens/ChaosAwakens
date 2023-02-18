@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.CAOreBlock;
+import io.github.chaosawakens.common.blocks.CrystalEnergyBlock;
 import io.github.chaosawakens.common.blocks.GateBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
@@ -14,9 +15,6 @@ import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ModelTextures;
-import net.minecraft.data.ModelsResourceUtil;
-import net.minecraft.data.StockModelShapes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
@@ -67,7 +65,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 			} else if (block instanceof GateBlock) {
 				this.gateBlock(name, name.contains("robo_") ? chaosRL("robo_gate_block_top") : chaosRL("gate_block_top"));
 			} else if (block instanceof CAOreBlock || block instanceof CAFallingOreBlock) {
-				if (name.contains("crystal_energy")) {
+				if(block instanceof CrystalEnergyBlock) {
 					this.cross(name, chaosRL(name));
 				} else if (name.contains("sandstone")) {
 					this.cubeBottomTop(name, chaosRL(name), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
@@ -138,7 +136,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("cats_eye_block", chaosRL("cats_eye_block"));
 		this.cubeAll("budding_pink_tourmaline", chaosRL("budding_pink_tourmaline"));
 		this.cubeAll("pink_tourmaline_block", chaosRL("pink_tourmaline_block"));
-
+		this.cross("crystal_energy", chaosRL("crystal_energy"));
+		
 		this.cubeAll("marble_block", chaosRL("marble_block"));
 		this.cubeAll("marble_bricks", chaosRL("marble_bricks"));
 		this.cubeAll("chiseled_marble_bricks", chaosRL("chiseled_marble_bricks"));

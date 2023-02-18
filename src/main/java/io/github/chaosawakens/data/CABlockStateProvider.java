@@ -314,7 +314,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 				if (name.contains("sandstone")) {
 					this.cubeBottomTopBlock(block, chaosRL(name), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
 				} else {
-					this.simpleBlock(block);
+					this.noVariant(block);
 				}
 			}
 		}
@@ -490,6 +490,8 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.noVariant(CABlocks.POTTED_GINKGO_SAPLING.get());
 		this.noVariant(CABlocks.POTTED_HIRMERIELLA_SAPLING.get());
 		this.noVariant(CABlocks.POTTED_DENSEWOOD_SAPLING.get());
+		
+		//this.noVariant(CABlocks.CRYSTAL_ENERGY.get());
 	}
 
 	private String name(Block block) {

@@ -1,12 +1,12 @@
 {
-  "name": "chaosawakens:dungeon/ent_tree/crimson",
+  "name": "chaosawakens:ent_tree/warped",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "chaosawakens:dungeon/ent_tree/crimson",
+        "location": "chaosawakens:ent_tree/warped",
         "processors": "minecraft:empty",
         "projection": "rigid"
       }
