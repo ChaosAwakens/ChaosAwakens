@@ -11,7 +11,7 @@ public class CrystalCaveWorldCarver extends CaveWorldCarver {
 
 	public CrystalCaveWorldCarver(Codec<ProbabilityConfig> codec, int height) {
 		super(codec, height);
-		this.replaceableBlocks = ImmutableSet.of(CABlocks.KYANITE.get(), CABlocks.BUDDING_CATS_EYE.get(), CABlocks.CATS_EYE_CLUSTER.get(), CABlocks.BUDDING_PINK_TOURMALINE.get(), CABlocks.PINK_TOURMALINE_CLUSTER.get());
+		this.replaceableBlocks = ImmutableSet.of(CABlocks.CRYSTAL_GRASS.get(), CABlocks.CRYSTAL_GRASS_BLOCK.get(), CABlocks.KYANITE.get(), CABlocks.BUDDING_CATS_EYE.get(), CABlocks.CATS_EYE_CLUSTER.get(), CABlocks.BUDDING_PINK_TOURMALINE.get(), CABlocks.PINK_TOURMALINE_CLUSTER.get());
 	}
 
 }

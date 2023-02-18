@@ -358,10 +358,16 @@ public class BiomeLoadEventSubscriber {
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_PLAINS)) {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
 				}
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addVillageManiaOres(gen);
-
+				
+				if(BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_SNOWY) || BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_TAIGA))
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
+				if(BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_SAVANNA))
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
+				
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
