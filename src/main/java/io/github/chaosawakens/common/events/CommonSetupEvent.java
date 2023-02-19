@@ -62,6 +62,7 @@ public class CommonSetupEvent {
 		CAEffects.registerBrewingRecipes(); // Unused Currently, Here for FUTURE use.
 		Raid.WaveMember.create("illusioner", EntityType.ILLUSIONER, new int[]{0, 0, 0, 0, 1, 1, 0, 2});
 
+		ModList modList = ModList.get();
 		event.enqueueWork(() -> {
 			CAVanillaCompat.setup();
 			CAStructures.setupStructures();
@@ -83,10 +84,10 @@ public class CommonSetupEvent {
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredCarvers");
 			configFeatures.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
 			configCarvers.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_CARVER, wrapper.getIdentifier(), wrapper.getCarver()));
+			
+			if(modList.isLoaded("jeresources")) CAJER.init();
 		});
 
-		ModList modList = ModList.get();
-		if (modList.isLoaded("jeresources")) CAJER.init();
 
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_PLAINS.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_PLAINS);
 		BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_FOREST.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_FOREST);

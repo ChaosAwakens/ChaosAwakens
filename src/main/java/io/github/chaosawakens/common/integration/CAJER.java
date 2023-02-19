@@ -26,32 +26,32 @@ public class CAJER {
 
 	private static void registerDungeonLoot() {
 		// ENT DUNGEONS
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/acacia_loot", "dungeon.chaosawakens.jer.ent_dungeon.acacia_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/acacia_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/acacia_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/acacia_loot", "dungeon.chaosawakens.jer.ent_tree.acacia_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/acacia_loot", new ResourceLocation("chaosawakens:chests/ent_tree/acacia_loot"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/birch_loot", "dungeon.chaosawakens.jer.ent_dungeon.birch_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/birch_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/birch_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/birch_loot", "dungeon.chaosawakens.jer.ent_tree.birch_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/birch_loot", new ResourceLocation("chaosawakens:chests/ent_tree/birch_loot"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/crimson_loot", "dungeon.chaosawakens.jer.ent_dungeon.crimson_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/crimson_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/crimson_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/crimson_loot", "dungeon.chaosawakens.jer.ent_tree.crimson_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/crimson_loot", new ResourceLocation("chaosawakens:chests/ent_tree/crimson_loot"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/dark_oak_loot", "dungeon.chaosawakens.jer.ent_dungeon.dark_oak_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/dark_oak_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/dark_oak_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/dark_oak_loot", "dungeon.chaosawakens.jer.ent_tree.dark_oak_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/dark_oak_loot", new ResourceLocation("chaosawakens:chests/ent_tree/dark_oak_loot"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/jungle_loot", "dungeon.chaosawakens.jer.ent_dungeon.jungle_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/jungle_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/jungle_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/jungle_loot", "dungeon.chaosawakens.jer.ent_tree.jungle_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/jungle_loot", new ResourceLocation("chaosawakens:chests/ent_tree/jungle_loot"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/jungle_trap", "dungeon.chaosawakens.jer.ent_dungeon.jungle_trap");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/jungle_trap", new ResourceLocation("chaosawakens:chests/ent_dungeon/jungle_trap"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/jungle_trap", "dungeon.chaosawakens.jer.ent_tree.jungle_trap");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/jungle_trap", new ResourceLocation("chaosawakens:chests/ent_tree/jungle_trap"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/oak_loot", "dungeon.chaosawakens.jer.ent_dungeon.oak_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/oak_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/oak_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/oak_loot", "dungeon.chaosawakens.jer.ent_tree.oak_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/oak_loot", new ResourceLocation("chaosawakens:chests/ent_tree/oak_loot"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/spruce_loot", "dungeon.chaosawakens.jer.ent_dungeon.spruce_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/spruce_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/spruce_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/spruce_loot", "dungeon.chaosawakens.jer.ent_tree.spruce_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/spruce_loot", new ResourceLocation("chaosawakens:chests/ent_tree/spruce_loot"));
 
-		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_dungeon/warped_loot", "dungeon.chaosawakens.jer.ent_dungeon.warped_loot");
-		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_dungeon/warped_loot", new ResourceLocation("chaosawakens:chests/ent_dungeon/warped_loot"));
+		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/ent_tree/warped_loot", "dungeon.chaosawakens.jer.ent_tree.warped_loot");
+		JERAPI.getInstance().getDungeonRegistry().registerChest("chaosawakens:chests/ent_tree/warped_loot", new ResourceLocation("chaosawakens:chests/ent_tree/warped_loot"));
 
 		// WASP DUNGEON
 		JERAPI.getInstance().getDungeonRegistry().registerCategory("chaosawakens:chests/wasp_dungeon/loot", "dungeon.chaosawakens.jer.wasp_dungeon.loot");
@@ -74,6 +74,11 @@ public class CAJER {
 
 	private static void registerOres() {
 		IWorldGenRegistry worldGenRegistry = JERAPI.getInstance().getWorldGenRegistry();
+		/*CommonSetupEvent.configFeatures.forEach((wrapper) -> {
+			String name = wrapper.getIdentifier();
+			if(name.contains("ore") && !name.contains("forest"))
+				ChaosAwakens.LOGGER.debug(wrapper.toString());
+		});*/
 		if (CACommonConfig.COMMON.enableOreGen.get()) {
 			if (CACommonConfig.COMMON.enableOreAluminumGen.get()) {
 				worldGenRegistry.register(new ItemStack(CABlocks.ALUMINUM_ORE.get()),
