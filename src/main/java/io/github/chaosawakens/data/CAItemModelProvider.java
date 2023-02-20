@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.CrystalBushBlock;
+import io.github.chaosawakens.common.blocks.CrystalEnergyBlock;
 import io.github.chaosawakens.common.blocks.DenseBushBlock;
 import io.github.chaosawakens.common.blocks.DoubleCrystalPlantBlock;
 import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
@@ -202,7 +203,7 @@ public class CAItemModelProvider extends ItemModelProvider {
 				withExistingParent(name, getBlockResourceLocation(name + "_bottom"));			
 			} else if (item.getId().getPath().contains("_door")) {
 				singleTextureLayer0(name, ITEM_GENERATED, getItemResourceLocation(name));
-			} else if(block instanceof SaplingBlock || block instanceof FlowerBlock) {
+			} else if(block instanceof SaplingBlock || block instanceof FlowerBlock || block instanceof CrystalEnergyBlock) {
 				singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name));
 			} else if (block instanceof CrystalBushBlock || block instanceof DenseBushBlock || block instanceof MesozoicVinesTopBlock) {
 				if (block instanceof DoubleDensePlantBlock || block instanceof DoubleCrystalPlantBlock) {

@@ -8,11 +8,11 @@
   ],
   "key": {
     "#": {
-      "item": "chaosawakens:peach_planks"
+      "item": "chaosawakens:hirmeriella_planks"
     }
   },
   "result": {
-    "item": "chaosawakens:peach_door",
+    "item": "chaosawakens:hirmeriella_door",
     "count": 3
   }
 }

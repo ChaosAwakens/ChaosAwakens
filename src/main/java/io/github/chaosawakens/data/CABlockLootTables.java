@@ -78,6 +78,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.CHERRY_DOOR.get(), (block) -> createDoorDrop(CABlocks.CHERRY_DOOR.get()));
 		add(CABlocks.DUPLICATION_DOOR.get(), (block) -> createDoorDrop(CABlocks.DUPLICATION_DOOR.get()));
 		add(CABlocks.GINKGO_DOOR.get(), (block) -> createDoorDrop(CABlocks.GINKGO_DOOR.get()));
+		add(CABlocks.HIRMERIELLA_DOOR.get(), (block) -> createDoorDrop(CABlocks.HIRMERIELLA_DOOR.get()));
 		add(CABlocks.PEACH_DOOR.get(), (block) -> createDoorDrop(CABlocks.PEACH_DOOR.get()));
 		add(CABlocks.SKYWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.SKYWOOD_DOOR.get()));
 		
@@ -617,6 +618,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_TRAPDOOR.get());
 		dropSelf(CABlocks.DUPLICATION_TRAPDOOR.get());
 		dropSelf(CABlocks.GINKGO_TRAPDOOR.get());
+		dropSelf(CABlocks.HIRMERIELLA_TRAPDOOR.get());
 		dropSelf(CABlocks.PEACH_TRAPDOOR.get());
 		dropSelf(CABlocks.SKYWOOD_TRAPDOOR.get());
 

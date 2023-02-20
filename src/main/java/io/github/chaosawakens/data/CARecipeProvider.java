@@ -89,6 +89,8 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenPlanks(consumer, CABlocks.HIRMERIELLA_PLANKS.get(), CATags.Items.HIRMERIELLA_LOGS);
 		woodenSlab(consumer, CABlocks.HIRMERIELLA_SLAB.get(), CABlocks.HIRMERIELLA_PLANKS.get());
 		woodenStairs(consumer, CABlocks.HIRMERIELLA_STAIRS.get(), CABlocks.HIRMERIELLA_PLANKS.get());
+		woodenTrapdoor(consumer, CABlocks.HIRMERIELLA_TRAPDOOR.get(), CABlocks.HIRMERIELLA_PLANKS.get());
+		woodenDoor(consumer, CABlocks.HIRMERIELLA_DOOR.get(), CABlocks.HIRMERIELLA_PLANKS.get());
 		woodenFence(consumer, CABlocks.HIRMERIELLA_FENCE.get(), CABlocks.HIRMERIELLA_PLANKS.get());
 		woodenFenceGate(consumer, CABlocks.HIRMERIELLA_FENCE_GATE.get(), CABlocks.HIRMERIELLA_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.HIRMERIELLA_PRESSURE_PLATE.get(), CABlocks.HIRMERIELLA_PLANKS.get());
@@ -2361,7 +2363,7 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 	}
 
 	private static void woodenTrapdoor(Consumer<IFinishedRecipe> consumer, IItemProvider pTrapdoor, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pTrapdoor)
+		ShapedRecipeBuilder.shaped(pTrapdoor, 2)
 				.define('#', pMaterial)
 				.pattern("###")
 				.pattern("###")
@@ -2371,7 +2373,7 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 	}
 	
 	private static void woodenDoor(Consumer<IFinishedRecipe> consumer, IItemProvider pDoor, IItemProvider pMaterial) {
-		ShapedRecipeBuilder.shaped(pDoor)
+		ShapedRecipeBuilder.shaped(pDoor, 3)
 				.define('#', pMaterial)
 				.pattern("##")
 				.pattern("##")

@@ -439,12 +439,14 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.trapdoorBlock(CABlocks.CHERRY_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.DUPLICATION_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.GINKGO_TRAPDOOR.get());
+		this.trapdoorBlock(CABlocks.HIRMERIELLA_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.PEACH_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.SKYWOOD_TRAPDOOR.get());
 		this.doorBlock(CABlocks.APPLE_DOOR.get());
 		this.doorBlock(CABlocks.CHERRY_DOOR.get());
 		this.doorBlock(CABlocks.DUPLICATION_DOOR.get());
 		this.doorBlock(CABlocks.GINKGO_DOOR.get());
+		this.doorBlock(CABlocks.HIRMERIELLA_DOOR.get());
 		this.doorBlock(CABlocks.PEACH_DOOR.get());
 		this.doorBlock(CABlocks.SKYWOOD_DOOR.get());
 

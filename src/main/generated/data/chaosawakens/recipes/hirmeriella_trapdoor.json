@@ -7,11 +7,11 @@
   ],
   "key": {
     "#": {
-      "item": "chaosawakens:duplication_planks"
+      "item": "chaosawakens:hirmeriella_planks"
     }
   },
   "result": {
-    "item": "chaosawakens:duplication_trapdoor",
+    "item": "chaosawakens:hirmeriella_trapdoor",
     "count": 2
   }
 }
