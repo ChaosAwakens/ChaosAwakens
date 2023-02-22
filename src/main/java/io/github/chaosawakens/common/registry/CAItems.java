@@ -30,6 +30,7 @@ import io.github.chaosawakens.common.items.LeafyChickenEggItem;
 import io.github.chaosawakens.common.items.MantisClawItem;
 import io.github.chaosawakens.common.items.MinersDreamItem;
 import io.github.chaosawakens.common.items.MobestiaryItem;
+import io.github.chaosawakens.common.items.PinkTourmalineBucketItem;
 import io.github.chaosawakens.common.items.PoisonSwordItem;
 import io.github.chaosawakens.common.items.PopcornItem;
 import io.github.chaosawakens.common.items.PowerChipItem;
@@ -60,6 +61,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockNamedItem;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.FishBucketItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -177,8 +179,10 @@ public class CAItems {
 	public static final RegistryObject<Item> PLATINUM_LUMP = ITEMS.register("platinum_lump", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> PINK_TOURMALINE_INGOT = ITEMS.register("pink_tourmaline_ingot", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> PINK_TOURMALINE_NUGGET = ITEMS.register("pink_tourmaline_nugget", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<Item> PINK_TOURMALINE_SHARD = ITEMS.register("pink_tourmaline_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> CATS_EYE_INGOT = ITEMS.register("cats_eye_ingot", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> CATS_EYE_NUGGET = ITEMS.register("cats_eye_nugget", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<Item> CATS_EYE_SHARD = ITEMS.register("cats_eye_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> SUNSTONE = ITEMS.register("sunstone", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 
@@ -220,17 +224,23 @@ public class CAItems {
 	public static final RegistryObject<WallOrFloorItem> CRYSTAL_TORCH = ITEMS.register("crystal_torch", () -> new WallOrFloorItem(CABlocks.CRYSTAL_TORCH.get(), CABlocks.WALL_CRYSTAL_TORCH.get(), new Item.Properties().tab(CAItemGroups.BLOCKS)));
 	public static final RegistryObject<WallOrFloorItem> SUNSTONE_TORCH = ITEMS.register("sunstone_torch", () -> new WallOrFloorItem(CABlocks.SUNSTONE_TORCH.get(), CABlocks.WALL_SUNSTONE_TORCH.get(), new Item.Properties().tab(CAItemGroups.BLOCKS)));
 	public static final RegistryObject<WallOrFloorItem> EXTREME_TORCH = ITEMS.register("extreme_torch", () -> new WallOrFloorItem(CABlocks.EXTREME_TORCH.get(), CABlocks.WALL_EXTREME_TORCH.get(), new Item.Properties().tab(CAItemGroups.BLOCKS)));
-
+	
+	// PINK TOURMALINE BUCKET
+	public static final RegistryObject<BucketItem> PINK_TOURMALINE_BUCKET = ITEMS.register("pink_tourmaline_bucket", () -> new PinkTourmalineBucketItem(() -> Fluids.EMPTY, new Item.Properties().stacksTo(16).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<BucketItem> LAVA_PINK_TOURMALINE_BUCKET = ITEMS.register("lava_pink_tourmaline_bucket", () -> new PinkTourmalineBucketItem(() -> Fluids.LAVA, new Item.Properties().stacksTo(1).craftRemainder(CAItems.PINK_TOURMALINE_BUCKET.get()).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<BucketItem> WATER_PINK_TOURMALINE_BUCKET = ITEMS.register("water_pink_tourmaline_bucket", () -> new PinkTourmalineBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1).craftRemainder(CAItems.PINK_TOURMALINE_BUCKET.get()).tab(CAItemGroups.ITEMS)));
+	
 	// SIGNS
 	public static final RegistryObject<SignItem> APPLE_SIGN = ITEMS.register("apple_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.APPLE_SIGN.get(), CABlocks.APPLE_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> CHERRY_SIGN = ITEMS.register("cherry_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.CHERRY_SIGN.get(), CABlocks.CHERRY_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> DUPLICATION_SIGN = ITEMS.register("duplication_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.DUPLICATION_SIGN.get(), CABlocks.DUPLICATION_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> GINKGO_SIGN = ITEMS.register("ginkgo_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.GINKGO_SIGN.get(), CABlocks.GINKGO_WALL_SIGN.get()));
+	public static final RegistryObject<SignItem> HIRMERIELLA_SIGN = ITEMS.register("hirmeriella_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.HIRMERIELLA_SIGN.get(), CABlocks.HIRMERIELLA_WALL_SIGN.get()));
+	public static final RegistryObject<SignItem> DENSEWOOD_SIGN = ITEMS.register("densewood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.DENSEWOOD_SIGN.get(), CABlocks.DENSEWOOD_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> PEACH_SIGN = ITEMS.register("peach_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.PEACH_SIGN.get(), CABlocks.PEACH_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> SKYWOOD_SIGN = ITEMS.register("skywood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.SKYWOOD_SIGN.get(), CABlocks.SKYWOOD_WALL_SIGN.get()));
 
 	//DOORS
-	
 	
 	//BOATS
 	public static final RegistryObject<CABoatItem> APPLE_BOAT = ITEMS.register("apple_boat", () -> new CABoatItem(CABoatWoodTypes.APPLE.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));

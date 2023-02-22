@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "side": "chaosawakens:block/densewood_planks",
+    "bottom": "chaosawakens:block/densewood_planks",
+    "top": "chaosawakens:block/densewood_planks"
+  }
+}

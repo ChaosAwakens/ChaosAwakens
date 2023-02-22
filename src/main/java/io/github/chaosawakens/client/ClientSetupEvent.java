@@ -320,7 +320,9 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.FALLING_BLOCK.get(), CAFallingBlockRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SCREEN_SHAKE.get(), CAEmptyRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LEAFY_CHICKEN_EGG.get(), (manager) -> new SpriteRenderer<CALeafyChickenEggEntity>(manager, Minecraft.getInstance().getItemRenderer()));
-
+		
+		RenderTypeLookup.setRenderLayer((CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.CRYSTAL)).get(), RenderType.cutout());
+		
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM_PLANT.get(), RenderType.cutoutMipped());
 
@@ -362,6 +364,7 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.DUPLICATION_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.GINKGO_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.HIRMERIELLA_TRAPDOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_TRAPDOOR.get(), RenderType.cutout());
 		
@@ -370,6 +373,7 @@ public class ClientSetupEvent {
 		RenderTypeLookup.setRenderLayer(CABlocks.DUPLICATION_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.GINKGO_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.HIRMERIELLA_DOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_DOOR.get(), RenderType.cutout());
 		

@@ -36,12 +36,23 @@
           }
         ]
       }
+    },
+    "crystal_defossilizer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:crystal_defossilizer"
+          }
+        ]
+      }
     }
   },
   "requirements": [
     [
       "copper_defossilizer",
-      "iron_defossilizer"
+      "iron_defossilizer",
+      "crystal_defossilizer"
     ]
   ]
 }

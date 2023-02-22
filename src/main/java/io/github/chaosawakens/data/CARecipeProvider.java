@@ -1481,12 +1481,12 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 		blasting(consumer, CABlocks.AMETHYST_ORE.get(), CAItems.AMETHYST.get(), 0.1F, 100);
 		smelting(consumer, CABlocks.BLOODSTONE_ORE.get(), CAItems.BLOODSTONE.get(), 0.1F, 200);
 		blasting(consumer, CABlocks.BLOODSTONE_ORE.get(), CAItems.BLOODSTONE.get(), 0.1F, 100);
-		smelting(consumer, CABlocks.CATS_EYE_CLUSTER.get(), CAItems.CATS_EYE_INGOT.get(), 0.1F, 200);
-		blasting(consumer, CABlocks.CATS_EYE_CLUSTER.get(), CAItems.CATS_EYE_INGOT.get(), 0.1F, 100);
+		smelting(consumer, CAItems.CATS_EYE_SHARD.get(), CAItems.CATS_EYE_NUGGET.get(), 0.1F, 200);
+		blasting(consumer, CAItems.CATS_EYE_SHARD.get(), CAItems.CATS_EYE_NUGGET.get(), 0.1F, 100);
 		smelting(consumer, CABlocks.COPPER_ORE.get(), CAItems.COPPER_LUMP.get(), 0.1F, 200);
 		blasting(consumer, CABlocks.COPPER_ORE.get(), CAItems.COPPER_LUMP.get(), 0.1F, 100);
-		smelting(consumer, CABlocks.PINK_TOURMALINE_CLUSTER.get(), CAItems.PINK_TOURMALINE_INGOT.get(), 0.1F, 200);
-		blasting(consumer, CABlocks.PINK_TOURMALINE_CLUSTER.get(), CAItems.PINK_TOURMALINE_INGOT.get(), 0.1F, 100);
+		smelting(consumer, CAItems.PINK_TOURMALINE_SHARD.get(), CAItems.PINK_TOURMALINE_NUGGET.get(), 0.1F, 200);
+		blasting(consumer, CAItems.PINK_TOURMALINE_SHARD.get(), CAItems.PINK_TOURMALINE_NUGGET.get(), 0.1F, 100);
 		smelting(consumer, CABlocks.PLATINUM_ORE.get(), CAItems.PLATINUM_LUMP.get(), 0.1F, 200);
 		blasting(consumer, CABlocks.PLATINUM_ORE.get(), CAItems.PLATINUM_LUMP.get(), 0.1F, 100);
 		smelting(consumer, CABlocks.RUBY_ORE.get(), CAItems.RUBY.get(), 0.1F, 200);
@@ -1578,6 +1578,19 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 				.unlockedBy("has_" + Items.BUCKET.asItem(), has(Items.BUCKET))
 				.unlockedBy("has_" + Blocks.SMOOTH_STONE.asItem(), has(Blocks.SMOOTH_STONE))
 				.unlockedBy("has_" + Blocks.SMOOTH_STONE_SLAB.asItem(), has(Blocks.SMOOTH_STONE_SLAB))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get())
+				.define('I', CAItems.PINK_TOURMALINE_INGOT.get())
+				.define('B', CAItems.PINK_TOURMALINE_BUCKET.get())
+				.define('S', CABlocks.KYANITE.get())
+				//.define('L', CABlocks.KYANITE.get())
+				.pattern("III")
+				.pattern("SBS")
+				.pattern("SSS")
+				.unlockedBy("has_" + CAItems.PINK_TOURMALINE_INGOT.getId().getPath(), has(CAItems.PINK_TOURMALINE_INGOT.get()))
+				.unlockedBy("has_" + CAItems.PINK_TOURMALINE_BUCKET.getId().getPath(), has(CAItems.PINK_TOURMALINE_BUCKET.get()))
+				.unlockedBy("has_" + CABlocks.KYANITE.get().asItem(), has(CABlocks.KYANITE.get()))
+				//.unlockedBy("has_" + Blocks.SMOOTH_STONE_SLAB.asItem(), has(Blocks.SMOOTH_STONE_SLAB))
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(CAItems.ALUMINUM_POWER_CHIP.get())
 				.define('R', Tags.Items.DUSTS_REDSTONE)
@@ -1777,7 +1790,7 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 						CAItems.TREE_FROG_SPAWN_EGG.get(), 1, 20, "copper")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_TREE_FROG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
-
+		
 		// Overworld (Vanilla)
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
@@ -1907,6 +1920,13 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_HUSK_SANDSTONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_HUSK_SANDSTONE.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.HUSK_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_HUSK_SANDSTONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_ILLUSIONER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
@@ -1977,6 +1997,13 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FROZEN_POLAR_BEAR.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FROZEN_POLAR_BEAR.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.POLAR_BEAR_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FROZEN_POLAR_BEAR.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_PUFFERFISH.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
@@ -2040,6 +2067,13 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FROZEN_SNOW_GOLEM.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FROZEN_SNOW_GOLEM.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						CAItems.SNOW_GOLEM_SPAWN_EGG.get(), 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FROZEN_SNOW_GOLEM.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_SPIDER.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
@@ -2059,6 +2093,13 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 						Items.STRAY_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FROZEN_STRAY.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FROZEN_STRAY.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.STRAY_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FROZEN_STRAY.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_TROPICAL_FISH.get()),
@@ -2145,7 +2186,28 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 						CAItems.LAVA_EEL_SPAWN_EGG.get(), 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_LAVA_EEL.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
-
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_CRIMSON_ENT.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						CAItems.CRIMSON_ENT_SPAWN_EGG.get(), 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_CRIMSON_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_WARPED_ENT.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						CAItems.WARPED_ENT_SPAWN_EGG.get(), 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_WARPED_ENT.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_LAVA_EEL.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						CAItems.LAVA_EEL_SPAWN_EGG.get(), 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_LAVA_EEL.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		
 		// Nether (Vanilla)
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
@@ -2224,7 +2286,84 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 						Items.ZOMBIFIED_PIGLIN_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
-
+		
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_BLAZE.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.BLAZE_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_BLAZE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_GHAST.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.GHAST_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_GHAST.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_HOGLIN.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.HOGLIN_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_HOGLIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_ENDERMAN_NETHERRACK.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.ENDERMAN_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_ENDERMAN_NETHERRACK.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_MAGMA_CUBE_NETHERRACK.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.MAGMA_CUBE_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_MAGMA_CUBE_NETHERRACK.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_MAGMA_CUBE_BLACKSTONE.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.MAGMA_CUBE_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_MAGMA_CUBE_BLACKSTONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_PIGLIN.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.PIGLIN_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_PIGLIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_SKELETON_SOUL_SOIL.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.SKELETON_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_SKELETON_SOUL_SOIL.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_STRIDER.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.STRIDER_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_STRIDER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_WITHER_SKELETON.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.WITHER_SKELETON_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_WITHER_SKELETON.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.get()),
+						Ingredient.of(CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.ZOMBIFIED_PIGLIN_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_ZOMBIFIED_PIGLIN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		// End (CA)
 
 		// End (Vanilla)
@@ -2249,6 +2388,27 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 						Items.SHULKER_SPAWN_EGG, 1, 20, "iron")
 				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.FOSSILISED_SHULKER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_ENDERMAN_END_STONE.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.ENDERMAN_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_ENDERMAN_END_STONE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_ENDERMITE.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.ENDERMITE_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_ENDERMITE.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+		FossilRecipeBuilder
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.FOSSILISED_SHULKER.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						Items.SHULKER_SPAWN_EGG, 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.FOSSILISED_SHULKER.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 
 		// Mining Paradise (CA)
 		FossilRecipeBuilder
@@ -2263,17 +2423,17 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 		FossilRecipeBuilder
 				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get()),
-						Ingredient.of(Items.WATER_BUCKET),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-						CAItems.CRYSTAL_APPLE_COW_SPAWN_EGG.get(), 1, 20, "iron")
-				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+						CAItems.CRYSTAL_APPLE_COW_SPAWN_EGG.get(), 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
-		.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
-				Ingredient.of(CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get()),
-				Ingredient.of(Items.WATER_BUCKET),
-				Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
-				CAItems.CRYSTAL_CARROT_PIG_SPAWN_EGG.get(), 1, 20, "iron")
-		.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/" + CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
+				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+						Ingredient.of(CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get()),
+						Ingredient.of(CAItems.WATER_PINK_TOURMALINE_BUCKET.get()),
+						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
+						CAItems.CRYSTAL_CARROT_PIG_SPAWN_EGG.get(), 1, 20, "crystal")
+				.build(consumer, new ResourceLocation(ChaosAwakens.MODID, "defossilizing/crystal_" + CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 	}
 
 	private static void buildConversionRecipes(Consumer<IFinishedRecipe> consumer) {

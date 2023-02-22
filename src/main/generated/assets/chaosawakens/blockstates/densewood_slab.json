@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "chaosawakens:block/densewood_slab_top"
+    },
+    "type=bottom": {
+      "model": "chaosawakens:block/densewood_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/densewood_planks"
+    }
+  }
+}

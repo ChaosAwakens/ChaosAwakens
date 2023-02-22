@@ -77,6 +77,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 		this.orientable("copper_defossilizer", chaosRL("copper_block"), chaosRL("copper_defossilizer_front"), chaosRL("copper_defossilizer_top"));
 		this.orientable("iron_defossilizer", mcRL("iron_block"), chaosRL("iron_defossilizer_front"), chaosRL("iron_defossilizer_top"));
+		this.orientable("crystal_defossilizer", chaosRL("crystal_defossilizer"), chaosRL("crystal_defossilizer_front"), chaosRL("crystal_defossilizer_top"));
 		
 		this.grassBlock("dense_grass_block", chaosRL("dense_dirt"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"), chaosRL("dense_grass_block_side"), chaosRL("dense_grass_block_side_overlay"));
 		//this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
@@ -748,8 +749,12 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeColumnHorizontal("stripped_ginkgo_wood", chaosRL("stripped_ginkgo_log"), chaosRL("stripped_ginkgo_log"));
 		this.cubeColumn("hirmeriella_log", chaosRL("hirmeriella_log"), chaosRL("hirmeriella_log_top"));
 		this.cubeColumnHorizontal("hirmeriella_log", chaosRL("hirmeriella_log"), chaosRL("hirmeriella_log_top"));
+		this.cubeColumn("hirmeriella_wood", chaosRL("hirmeriella_log"), chaosRL("hirmeriella_log"));
+		this.cubeColumnHorizontal("hirmeriella_wood", chaosRL("hirmeriella_log"), chaosRL("hirmeriella_log"));
 		this.cubeColumn("densewood_log", chaosRL("densewood_log"), chaosRL("densewood_log_top"));
 		this.cubeColumnHorizontal("densewood_log", chaosRL("densewood_log"), chaosRL("densewood_log_top"));
+		this.cubeColumn("densewood_wood", chaosRL("densewood_log"), chaosRL("densewood_log"));
+		this.cubeColumnHorizontal("densewood_wood", chaosRL("densewood_log"), chaosRL("densewood_log"));
 		this.cubeColumn("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumnHorizontal("peach_log", chaosRL("peach_log"), chaosRL("peach_log_top"));
 		this.cubeColumn("peach_wood", chaosRL("peach_log"), chaosRL("peach_log"));
@@ -813,6 +818,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.leafCarpet("hirmeriella_leaf_carpet", chaosRL("hirmeriella_leaves"));
 		this.leafCarpetInventory("hirmeriella_leaf_carpet_inventory", chaosRL("hirmeriella_leaves"));
 		this.cross("densewood_sapling", chaosRL("densewood_sapling"));
+		this.cubeAll("densewood_planks", chaosRL("densewood_planks"));
 		this.cubeAll("densewood_leaves", chaosRL("densewood_leaves"));
 		this.leafCarpet("densewood_leaf_carpet", chaosRL("densewood_leaves"));
 		this.leafCarpetInventory("densewood_leaf_carpet_inventory", chaosRL("densewood_leaves"));
@@ -863,6 +869,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.stairs("hirmeriella_stairs", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
 		this.stairsInner("hirmeriella_stairs", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
 		this.stairsOuter("hirmeriella_stairs", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
+		this.stairs("densewood_stairs", chaosRL("densewood_planks"), chaosRL("densewood_planks"), chaosRL("densewood_planks"));
+		this.stairsInner("densewood_stairs", chaosRL("densewood_planks"), chaosRL("densewood_planks"), chaosRL("densewood_planks"));
+		this.stairsOuter("densewood_stairs", chaosRL("densewood_planks"), chaosRL("densewood_planks"), chaosRL("densewood_planks"));
 		this.stairs("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsInner("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.stairsOuter("peach_stairs", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
@@ -884,6 +893,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.slabTop("ginkgo_slab", chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
 		this.slab("hirmeriella_slab", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
 		this.slabTop("hirmeriella_slab", chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
+		this.slab("densewood_slab", chaosRL("densewood_planks"), chaosRL("densewood_planks"), chaosRL("densewood_planks"));
+		this.slabTop("densewood_slab", chaosRL("densewood_planks"), chaosRL("densewood_planks"), chaosRL("densewood_planks"));
 		this.slab("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slabTop("peach_slab", chaosRL("peach_planks"), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slab("duplication_slab", chaosRL("duplication_planks"), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
@@ -921,6 +932,13 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.fencePost("hirmeriella_fence", chaosRL("hirmeriella_planks"));
 		this.fenceInventory("hirmeriella_fence_inventory", chaosRL("hirmeriella_planks"));
 		this.fenceSide("hirmeriella_fence", chaosRL("hirmeriella_planks"));
+		this.fenceGate("densewood_fence_gate", chaosRL("densewood_planks"));
+		this.fenceGateOpen("densewood_fence_gate", chaosRL("densewood_planks"));
+		this.fenceGateWall("densewood_fence_gate", chaosRL("densewood_planks"));
+		this.fenceGateWallOpen("densewood_fence_gate", chaosRL("densewood_planks"));
+		this.fencePost("densewood_fence", chaosRL("densewood_planks"));
+		this.fenceInventory("densewood_fence_inventory", chaosRL("densewood_planks"));
+		this.fenceSide("densewood_fence", chaosRL("densewood_planks"));
 		this.fenceGate("peach_fence_gate", chaosRL("peach_planks"));
 		this.fenceGateOpen("peach_fence_gate", chaosRL("peach_planks"));
 		this.fenceGateWall("peach_fence_gate", chaosRL("peach_planks"));
@@ -960,6 +978,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.pressurePlateDown("hirmeriella_pressure_plate", chaosRL("hirmeriella_planks"));
 		this.pressurePlateUp("duplication_pressure_plate", chaosRL("duplication_planks"));
 		this.pressurePlateDown("duplication_pressure_plate", chaosRL("duplication_planks"));
+		this.pressurePlateUp("densewood_pressure_plate", chaosRL("densewood_planks"));
+		this.pressurePlateDown("densewood_pressure_plate", chaosRL("densewood_planks"));
 		this.pressurePlateUp("peach_pressure_plate", chaosRL("peach_planks"));
 		this.pressurePlateDown("peach_pressure_plate", chaosRL("peach_planks"));
 		this.pressurePlateUp("skywood_pressure_plate", chaosRL("skywood_planks"));
@@ -971,6 +991,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.buttonInventory("cherry_button_inventory", chaosRL("cherry_planks"));
 		this.buttonInventory("ginkgo_button_inventory", chaosRL("ginkgo_planks"));
 		this.buttonInventory("hirmeriella_button_inventory", chaosRL("hirmeriella_planks"));
+		this.buttonInventory("densewood_button_inventory", chaosRL("densewood_planks"));
 		this.buttonInventory("duplication_button_inventory", chaosRL("duplication_planks"));
 		this.buttonInventory("peach_button_inventory", chaosRL("peach_planks"));
 		this.buttonInventory("skywood_button_inventory", chaosRL("skywood_planks"));

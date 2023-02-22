@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
-import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -11,6 +11,6 @@ public class CrystalFurnaceFuelSlot extends Slot {
 	}
 
 	public boolean mayPlace(ItemStack itemStack) {
-		return itemStack.getItem() == CABlocks.CRYSTAL_ENERGY.get().asItem();
+		return itemStack.getItem().is(CATags.Items.CRYSTAL_FURNACE_FUEL);
 	}
 }

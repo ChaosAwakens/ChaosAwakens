@@ -111,6 +111,7 @@ public class CATags {
 		public static final ITag.INamedTag<Item> ARCHAEOLOGIST_SPAWN_EGGS_RARE = tag("villager_trades/archaeologist/spawn_eggs/rare");
 		public static final ITag.INamedTag<Item> ARCHAEOLOGIST_SPAWN_EGGS_EPIC = tag("villager_trades/archaeologist/spawn_eggs/epic");
 		public static final ITag.INamedTag<Item> SPAWNER_SPAWN_EGGS = tag("spawner_spawn_eggs");
+		public static final ITag.INamedTag<Item> CRYSTAL_FURNACE_FUEL = tag("crystal_furnace_fuel");
 	}
 
 	public static class EntityTypes {

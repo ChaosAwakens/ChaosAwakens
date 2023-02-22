@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "chaosawakens:densewood_log"
+    "chaosawakens:densewood_log",
+    "chaosawakens:densewood_wood"
   ]
 }

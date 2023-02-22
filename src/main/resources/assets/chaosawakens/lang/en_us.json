@@ -586,6 +586,7 @@
 	"block.chaosawakens.bloodstone_ore": "Bloodstone Ore",
 	"block.chaosawakens.bloodstone_block": "Block of Bloodstone",
 
+	"item.chaosawakens.pink_tourmaline_shard": "Pink Tourmaline Shard",
 	"item.chaosawakens.pink_tourmaline_ingot": "Pink Tourmaline Ingot",
 	"item.chaosawakens.pink_tourmaline_nugget": "Pink Tourmaline Nugget",
 	"block.chaosawakens.pink_tourmaline_cluster": "Pink Tourmaline Cluster",
@@ -601,6 +602,7 @@
 	"item.chaosawakens.pink_tourmaline_leggings": "Pink Tourmaline Leggings",
 	"item.chaosawakens.pink_tourmaline_boots": "Pink Tourmaline Boots",
 
+	"item.chaosawakens.cats_eye_shard": "Cat's Eye Shard",
 	"item.chaosawakens.cats_eye_ingot": "Cat's Eye Ingot",
 	"item.chaosawakens.cats_eye_nugget": "Cat's Eye Nugget",
 	"block.chaosawakens.cats_eye_cluster": "Cat's Eye Cluster",
@@ -618,9 +620,11 @@
 
 	"block.chaosawakens.copper_defossilizer": "Copper Defossilizer",
 	"block.chaosawakens.iron_defossilizer": "Iron Defossilizer",
+	"block.chaosawakens.crystal_defossilizer": "Crystal Defossilizer",
 	"jei_desc.chaosawakens.defossilizer": "Used to turn Fossilized Mobs into Spawn Eggs.\n\nIt requires an Aluminum Power Chip as well as a specific liquid depending on the fossil.",
 	"jei_desc.chaosawakens.copper_defossilizer": "The Copper Defossilizer can only defossilize Stone and Gravel fossils..",
-	"jei_desc.chaosawakens.iron_defossilizer": "The Iron Defossilizer can defossilize any fossils but takes 4 times longer than the Copper Defossilizer.",
+	"jei_desc.chaosawakens.iron_defossilizer": "The Iron Defossilizer can defossilize any fossils (except the crystal ones), but takes 4 times longer than the Copper Defossilizer.",
+	"jei_desc.chaosawakens.crystal_defossilizer": "The Crystal Defossilizer can defossilize any non-stone fossils, taking as long as a Iron Defossilizer to do so.",
 	"item.chaosawakens.aluminum_power_chip": "Aluminum Power Chip",
 
 	"block.chaosawakens.fossilised_acacia_ent": "Fossilised Acacia Ent",
@@ -762,6 +766,9 @@
 	"block.chaosawakens.crystal_furnace": "Crystal Furnace",
 	"item.chaosawakens.peacock_feather": "Peacock Feather",
 	"item.chaosawakens.dead_irukandji": "Dead Irukandji",
+	"item.chaosawakens.pink_tourmaline_bucket": "Pink Tourmaline Bucket",
+	"item.chaosawakens.lava_pink_tourmaline_bucket": "Lava Pink Tourmaline Bucket",
+	"item.chaosawakens.water_pink_tourmaline_bucket": "Water Pink Tourmaline Bucket",
 
 	"item.chaosawakens.crystal_wood_sword": "Crystal Wood Sword",
 	"item.chaosawakens.crystal_wood_pickaxe": "Crystal Wood Pickaxe",
@@ -995,6 +1002,9 @@
 	
 	"block.chaosawakens.hirmeriella_sapling": "Hirmeriella Sapling",
 	"block.chaosawakens.hirmeriella_log": "Hirmeriella Log",
+	"block.chaosawakens.hirmeriella_wood": "Hirmeriella Wood",
+	"block.chaosawakens.stripped_hirmeriella_log": "Stripped Hirmeriella Log",
+	"block.chaosawakens.stripped_hirmeriella_wood": "Stripped Hirmeriella Wood",
 	"block.chaosawakens.hirmeriella_leaves": "Hirmeriella Leaves",
 	"block.chaosawakens.hirmeriella_leaf_carpet": "Hirmeriella Leaf Carpet",
 	"block.chaosawakens.hirmeriella_planks": "Hirmeriella Planks",
@@ -1009,8 +1019,21 @@
 	
 	"block.chaosawakens.densewood_sapling": "Densewood Sapling",
 	"block.chaosawakens.densewood_log": "Densewood Log",
+	"block.chaosawakens.densewood_wood": "Densewood Wood",
+	"block.chaosawakens.stripped_densewood_log": "Stripped Densewood Log",
+	"block.chaosawakens.stripped_densewood_wood": "Stripped Densewood Wood",
 	"block.chaosawakens.densewood_leaves": "Densewood Leaves",
 	"block.chaosawakens.densewood_leaf_carpet": "Densewood Leaf Carpet",
+	"block.chaosawakens.densewood_planks": "Densewood Planks",
+	"block.chaosawakens.densewood_stairs": "Densewood Stairs",
+	"block.chaosawakens.densewood_slab": "Densewood Slab",
+	"block.chaosawakens.densewood_fence": "Densewood Fence",
+	"block.chaosawakens.densewood_fence_gate": "Densewood Fence Gate",
+	"block.chaosawakens.densewood_pressure_plate": "Densewood Pressure Plate",
+	"block.chaosawakens.densewood_button": "Densewood Button",
+	"block.chaosawakens.densewood_sign": "Densewood Sign",
+	"block.chaosawakens.densewood_trapdoor": "Densewood Trapdoor",
+	"block.chaosawakens.densewood_door": "Densewood Door",
 	
 	"block.chaosawakens.peach_sapling": "Peach Sapling",
 	"block.chaosawakens.peach_log": "Peach Log",
@@ -1138,7 +1161,7 @@
 	"block.chaosawakens.robo_wall_l": "Robo Wall L",
 	"block.chaosawakens.robo_wall_x": "Robo Wall X",
 	"block.chaosawakens.robo_lamp": "Robo Lamp",
-	"block.chaosawakens.robo_bricks": "Robo Stairs",
+	"block.chaosawakens.robo_bricks": "Robo Bricks",
 	"block.chaosawakens.robo_brick_slab": "Robo Brick Slab",
 	"block.chaosawakens.robo_brick_stairs": "Robo Brick Stairs",
 	"block.chaosawakens.robo_brick_wall": "Robo Brick Wall",
@@ -1331,8 +1354,8 @@
 	"item.chaosawakens.royal_guardian_scale": "Royal Guardian Scale",
 	"item.chaosawakens.queen_scale": "Queen Scale",
 	
-	"misc.chaosawakens.empty_inventory": "This anthill requires an empty inventory!",
-	"misc.chaosawakens.inaccessible_dimension": "This anthill seems to have not been implemented yet!",
+	"misc.chaosawakens.empty_inventory": "Empty inventory required to acces Crystalworld!",
+	"misc.chaosawakens.inaccessible_dimension": "This dimension hasn't been added to the mod yet!",
 	
 	"death.attack.ignition": "%1$s was ignited trying to hurt %2$s",
 	"death.attack.ignition.item": "%1$s was ignited while attempting to hurt %2$s",

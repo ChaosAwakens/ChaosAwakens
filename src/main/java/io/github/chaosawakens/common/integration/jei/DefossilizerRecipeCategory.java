@@ -96,7 +96,10 @@ public class DefossilizerRecipeCategory implements IRecipeCategory<Defossilizing
 			guiItemStacks.set(4, Arrays.asList(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get().asItem().getDefaultInstance(),
 					CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get().asItem().getDefaultInstance()));
 		} else if (Objects.equals(recipe.getDefossilizerType(), "iron")) {
-			guiItemStacks.set(4, CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get().asItem().getDefaultInstance());
+			guiItemStacks.set(4, Arrays.asList(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get().asItem().getDefaultInstance(),
+					CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get().asItem().getDefaultInstance()));
+		} else if (Objects.equals(recipe.getDefossilizerType(), "crystal")) {
+			guiItemStacks.set(4, CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get().asItem().getDefaultInstance());
 		}
 	}
 }

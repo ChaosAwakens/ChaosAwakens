@@ -292,6 +292,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		Advancement chaoticByChoice = registerAdvancement("chaotic_by_choice", FrameType.TASK, CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()).parent(root)
 				.addCriterion("copper_defossilizer", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()))
 				.addCriterion("iron_defossilizer", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()))
+				.addCriterion("crystal_defossilizer", InventoryChangeTrigger.Instance.hasItems(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get()))
 				.requirements(IRequirementsStrategy.OR).save(t, advancementId("chaotic_by_choice"));
 		Advancement empoweringDefossilization = registerAdvancement("empowering_defossilization", FrameType.TASK, CAItems.ALUMINUM_POWER_CHIP.get()).parent(chaoticByChoice)
 				.addCriterion("copper_defossilizer", InventoryChangeTrigger.Instance.hasItems(CAItems.ALUMINUM_POWER_CHIP.get()))

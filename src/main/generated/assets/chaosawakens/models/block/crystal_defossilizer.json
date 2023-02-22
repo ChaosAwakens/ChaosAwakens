@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "side": "chaosawakens:block/crystal_defossilizer",
+    "front": "chaosawakens:block/crystal_defossilizer_front",
+    "top": "chaosawakens:block/crystal_defossilizer_top"
+  }
+}

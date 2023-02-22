@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cats_eye_nugget_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_cats_eye_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cats_eye_shard"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:cats_eye_nugget_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cats_eye_shard",
+      "has_the_recipe"
+    ]
+  ]
+}

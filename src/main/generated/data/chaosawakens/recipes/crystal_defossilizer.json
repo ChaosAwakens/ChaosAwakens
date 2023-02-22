@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "SBS",
+    "SSS"
+  ],
+  "key": {
+    "I": {
+      "item": "chaosawakens:pink_tourmaline_ingot"
+    },
+    "B": {
+      "item": "chaosawakens:pink_tourmaline_bucket"
+    },
+    "S": {
+      "item": "chaosawakens:kyanite"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:crystal_defossilizer"
+  }
+}

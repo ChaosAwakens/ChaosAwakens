@@ -199,11 +199,12 @@ public class CABlocks {
 	public static final RegistryObject<CAStandingSignBlock> GINKGO_SIGN = registerBlock("ginkgo_sign", () -> new CAStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD), GINKGO), null, false);
 	public static final RegistryObject<CAWallSignBlock> GINKGO_WALL_SIGN = registerBlock("ginkgo_wall_sign", () -> new CAWallSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(GINKGO_SIGN.get()), GINKGO), null, false);
 	public static final RegistryObject<TrapDoorBlock> GINKGO_TRAPDOOR = registerBlock("ginkgo_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn(CABlocks::never)), CAItemGroups.BLOCKS);
-	public static final RegistryObject<DoorBlock> GINKGO_DOOR = registerBlock("ginkgo_door", () -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).strength(3.0F).sound(SoundType.WOOD).noOcclusion()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<DoorBlock> GINKGO_DOOR = registerBlock("ginkgo_door", () -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).strength(3.0F).sound(SoundType.WOOD).noOcclusion()), CAItemGroups.BLOCKS);
 	
 	public static final RegistryObject<Block>  HIRMERIELLA_PLANKS = registerBlock("hirmeriella_planks", () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SaplingBlock> HIRMERIELLA_SAPLING = registerBlock("hirmeriella_sapling", () -> new SaplingBlock(new CAMultiBigTree(() -> CAConfiguredFeatures.HIRMERIELLA_TREE, () -> CAConfiguredFeatures.HIRMERIELLA_TREE_THIN), AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> HIRMERIELLA_LOG = registerBlock("hirmeriella_log", () -> new RotatedPillarBlock(Properties.copy(Blocks.OAK_LOG)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> HIRMERIELLA_WOOD = registerBlock("hirmeriella_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeavesBlock> HIRMERIELLA_LEAVES = registerBlock("hirmeriella_leaves", () -> new LeavesBlock(Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeafCarpetBlock> HIRMERIELLA_LEAF_CARPET = registerBlock("hirmeriella_leaf_carpet", () -> new LeafCarpetBlock(AbstractBlock.Properties.copy(HIRMERIELLA_LEAVES.get()).noCollission()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> HIRMERIELLA_SLAB = registerBlock("hirmeriella_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.HIRMERIELLA_PLANKS.get())), CAItemGroups.BLOCKS);
@@ -212,13 +213,27 @@ public class CABlocks {
 	public static final RegistryObject<FenceGateBlock> HIRMERIELLA_FENCE_GATE = registerBlock("hirmeriella_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(CABlocks.HIRMERIELLA_PLANKS.get())), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WoodButtonBlock> HIRMERIELLA_BUTTON = registerBlock("hirmeriella_button", () -> new WoodButtonBlock(AbstractBlock.Properties.copy(CABlocks.HIRMERIELLA_PLANKS.get())), CAItemGroups.BLOCKS);
 	public static final RegistryObject<StairsBlock> HIRMERIELLA_STAIRS = registerBlock("hirmeriella_stairs", () -> new StairsBlock(() -> HIRMERIELLA_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.HIRMERIELLA_PLANKS.get())), CAItemGroups.BLOCKS);
-	public static final RegistryObject<TrapDoorBlock> HIRMERIELLA_TRAPDOOR = registerBlock("hirmeriella_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_WHITE).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn(CABlocks::never)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<CAStandingSignBlock> HIRMERIELLA_SIGN = registerBlock("hirmeriella_sign", () -> new CAStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD), HIRMERIELLA), null, false);
+	public static final RegistryObject<CAWallSignBlock> HIRMERIELLA_WALL_SIGN = registerBlock("hirmeriella_wall_sign", () -> new CAWallSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(HIRMERIELLA_SIGN.get()), HIRMERIELLA), null, false);
+	public static final RegistryObject<TrapDoorBlock> HIRMERIELLA_TRAPDOOR = registerBlock("hirmeriella_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn(CABlocks::never)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<DoorBlock> HIRMERIELLA_DOOR = registerBlock("hirmeriella_door", () -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).strength(3.0F).sound(SoundType.WOOD).noOcclusion()), CAItemGroups.BLOCKS);
 	
+	public static final RegistryObject<Block>  DENSEWOOD_PLANKS = registerBlock("densewood_planks", () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SaplingBlock> DENSEWOOD_SAPLING = registerBlock("densewood_sapling", () -> new SaplingBlock(new CATree(() -> CAConfiguredFeatures.DENSEWOOD_TREE), AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> DENSEWOOD_LOG = registerBlock("densewood_log", () -> new RotatedPillarBlock(Properties.copy(Blocks.OAK_LOG)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> DENSEWOOD_WOOD = registerBlock("densewood_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeavesBlock> DENSEWOOD_LEAVES = registerBlock("densewood_leaves", () -> new LeavesBlock(Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeafCarpetBlock> DENSEWOOD_LEAF_CARPET = registerBlock("densewood_leaf_carpet", () -> new LeafCarpetBlock(AbstractBlock.Properties.copy(DENSEWOOD_LEAVES.get()).noCollission()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<SlabBlock> DENSEWOOD_SLAB = registerBlock("densewood_slab", () -> new SlabBlock(AbstractBlock.Properties.copy(CABlocks.DENSEWOOD_PLANKS.get())), CAItemGroups.BLOCKS);
+	public static final RegistryObject<PressurePlateBlock> DENSEWOOD_PRESSURE_PLATE = registerBlock("densewood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties.copy(CABlocks.DENSEWOOD_PLANKS.get())), CAItemGroups.BLOCKS);
+	public static final RegistryObject<FenceBlock> DENSEWOOD_FENCE = registerBlock("densewood_fence", () -> new FenceBlock(AbstractBlock.Properties.copy(CABlocks.DENSEWOOD_PLANKS.get())), CAItemGroups.BLOCKS);
+	public static final RegistryObject<FenceGateBlock> DENSEWOOD_FENCE_GATE = registerBlock("densewood_fence_gate", () -> new FenceGateBlock(AbstractBlock.Properties.copy(CABlocks.DENSEWOOD_PLANKS.get())), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WoodButtonBlock> DENSEWOOD_BUTTON = registerBlock("densewood_button", () -> new WoodButtonBlock(AbstractBlock.Properties.copy(CABlocks.DENSEWOOD_PLANKS.get())), CAItemGroups.BLOCKS);
+	public static final RegistryObject<StairsBlock> DENSEWOOD_STAIRS = registerBlock("densewood_stairs", () -> new StairsBlock(() -> DENSEWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(CABlocks.DENSEWOOD_PLANKS.get())), CAItemGroups.BLOCKS);
+	public static final RegistryObject<CAStandingSignBlock> DENSEWOOD_SIGN = registerBlock("densewood_sign", () -> new CAStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD), DENSEWOOD), null, false);
+	public static final RegistryObject<CAWallSignBlock> DENSEWOOD_WALL_SIGN = registerBlock("densewood_wall_sign", () -> new CAWallSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD).dropsLike(DENSEWOOD_SIGN.get()), DENSEWOOD), null, false);
+	public static final RegistryObject<TrapDoorBlock> DENSEWOOD_TRAPDOOR = registerBlock("densewood_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn(CABlocks::never)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<DoorBlock> DENSEWOOD_DOOR = registerBlock("densewood_door", () -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_ORANGE).strength(3.0F).sound(SoundType.WOOD).noOcclusion()), CAItemGroups.BLOCKS);
 	
 	public static final RegistryObject<Block> PEACH_PLANKS = registerBlock("peach_planks", () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_WHITE).strength(2.0F, 3.0F).sound(SoundType.WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SaplingBlock> PEACH_SAPLING = registerBlock("peach_sapling", () -> new SaplingBlock(new FancyableTree(() -> CAConfiguredFeatures.FANCY_PEACH_TREE, () -> CAConfiguredFeatures.FANCY_PEACH_TREE_BEES_005, () -> CAConfiguredFeatures.PEACH_TREE, () -> CAConfiguredFeatures.PEACH_TREE_BEES_005), AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS)), CAItemGroups.BLOCKS);
@@ -576,7 +591,10 @@ public class CABlocks {
 	public static final RegistryObject<AntInfestedOre> TERMITE_INFESTED_ORE = registerBlock("termite_infested_ore", () -> new AntInfestedOre(CAEntityTypes.TERMITE, Block.Properties.copy(Blocks.INFESTED_STONE).noDrops().requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.BLOCKS);
 
 	// FOSSILISED MOBS
-	public static final Map<DefossilizerType, RegistryObject<DefossilizerBlock>> DEFOSSILIZER_BLOCKS = Arrays.stream(DefossilizerType.values()).map(type -> Pair.of(type, registerBlock(type.getSerializedName() + "_defossilizer", () -> new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.FOSSILS))).collect(Collectors.toMap(Pair::getKey, Pair::getValue));
+	public static final Map<DefossilizerType, RegistryObject<DefossilizerBlock>> DEFOSSILIZER_BLOCKS = Arrays.stream(DefossilizerType.values()).map(type -> Pair.of(type, registerBlock(type.getSerializedName() + "_defossilizer", 
+			() -> type.name.equals("crystal") ? new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE).harvestLevel(2))
+					: new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.FOSSILS)))
+			.collect(Collectors.toMap(Pair::getKey, Pair::getValue));
 
 	// Overworld (CA)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_ACACIA_ENT = registerBlock("fossilised_acacia_ent", () -> new CAOreBlock(Block.Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
@@ -1004,7 +1022,8 @@ public class CABlocks {
 
 	public enum DefossilizerType implements IStringSerializable {
 		COPPER(0, "copper"),
-		IRON(1, "iron");
+		IRON(1, "iron"),
+		CRYSTAL(2, "crystal");
 
 		private static final DefossilizerType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DefossilizerType::getId)).toArray(DefossilizerType[]::new);
 

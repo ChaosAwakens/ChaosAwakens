@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.CASignTileEntity;
 import io.github.chaosawakens.common.blocks.tileentities.CrystalFurnaceTileEntity;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerCopperTileEntity;
+import io.github.chaosawakens.common.blocks.tileentities.DefossilizerCrystalTileEntity;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerIronTileEntity;
 import io.github.chaosawakens.common.blocks.tileentities.RoboCrateTileEntity;
 import net.minecraft.block.Blocks;
@@ -25,6 +26,9 @@ public class CATileEntities {
 	public static final RegistryObject<TileEntityType<DefossilizerIronTileEntity>> IRON_DEFOSSILIZER = TILE_ENTITIES.register("iron_defossilizer",
 			() -> TileEntityType.Builder.of(DefossilizerIronTileEntity::new,
 					CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()).build(null));
+	public static final RegistryObject<TileEntityType<DefossilizerCrystalTileEntity>> CRYSTAL_DEFOSSILIZER = TILE_ENTITIES.register("crystal_defossilizer",
+			() -> TileEntityType.Builder.of(DefossilizerCrystalTileEntity::new,
+					CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get()).build(null));
 	public static final RegistryObject<TileEntityType<RoboCrateTileEntity>> ROBO_CRATE = TILE_ENTITIES.register("robo_crate",
 			() -> TileEntityType.Builder.of(RoboCrateTileEntity::new,
 					CABlocks.ROBO_CRATE.get()).build(null));

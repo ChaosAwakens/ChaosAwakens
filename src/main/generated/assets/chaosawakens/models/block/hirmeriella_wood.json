@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chaosawakens:block/hirmeriella_log",
+    "end": "chaosawakens:block/hirmeriella_log"
+  }
+}

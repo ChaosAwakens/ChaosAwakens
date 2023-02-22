@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:crystal_defossilizer"
+    ]
+  },
+  "criteria": {
+    "has_pink_tourmaline_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:pink_tourmaline_ingot"
+          }
+        ]
+      }
+    },
+    "has_pink_tourmaline_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:pink_tourmaline_bucket"
+          }
+        ]
+      }
+    },
+    "has_kyanite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:kyanite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:crystal_defossilizer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_tourmaline_ingot",
+      "has_pink_tourmaline_bucket",
+      "has_kyanite",
+      "has_the_recipe"
+    ]
+  ]
+}
