@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chaosawakens:block/mesozoic_log",
+    "end": "chaosawakens:block/mesozoic_log"
+  }
+}

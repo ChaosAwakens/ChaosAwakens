@@ -81,7 +81,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.CHERRY_DOOR.get(), (block) -> createDoorDrop(CABlocks.CHERRY_DOOR.get()));
 		add(CABlocks.DUPLICATION_DOOR.get(), (block) -> createDoorDrop(CABlocks.DUPLICATION_DOOR.get()));
 		add(CABlocks.GINKGO_DOOR.get(), (block) -> createDoorDrop(CABlocks.GINKGO_DOOR.get()));
-		add(CABlocks.HIRMERIELLA_DOOR.get(), (block) -> createDoorDrop(CABlocks.HIRMERIELLA_DOOR.get()));
+		add(CABlocks.MESOZOIC_DOOR.get(), (block) -> createDoorDrop(CABlocks.MESOZOIC_DOOR.get()));
 		add(CABlocks.DENSEWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.DENSEWOOD_DOOR.get()));
 		add(CABlocks.PEACH_DOOR.get(), (block) -> createDoorDrop(CABlocks.PEACH_DOOR.get()));
 		add(CABlocks.SKYWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.SKYWOOD_DOOR.get()));
@@ -147,7 +147,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.CHERRY_LEAVES.get(), createFruitLeavesDrops(CABlocks.CHERRY_LEAVES.get(), CABlocks.CHERRY_SAPLING.get(), CAItems.CHERRIES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.DUPLICATION_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.DUPLICATION_LEAVES.get()));
 		add(CABlocks.GINKGO_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.GINKGO_LEAVES.get()));
-		add(CABlocks.HIRMERIELLA_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.HIRMERIELLA_LEAVES.get()));
+		add(CABlocks.MESOZOIC_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.MESOZOIC_LEAVES.get()));
 		add(CABlocks.DENSEWOOD_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.DENSEWOOD_LEAVES.get()));
 		add(CABlocks.PEACH_LEAVES.get(), createFruitLeavesDrops(CABlocks.PEACH_LEAVES.get(), CABlocks.PEACH_SAPLING.get(), CAItems.PEACH.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.SKYWOOD_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.SKYWOOD_LEAVES.get()));
@@ -526,7 +526,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_SAPLING.get());
 		dropSelf(CABlocks.PEACH_SAPLING.get());
 		dropSelf(CABlocks.GINKGO_SAPLING.get());
-		dropSelf(CABlocks.HIRMERIELLA_SAPLING.get());
+		dropSelf(CABlocks.MESOZOIC_SAPLING.get());
 		dropSelf(CABlocks.DENSEWOOD_SAPLING.get());
 		dropSelf(CABlocks.APPLE_LOG.get());
 		dropSelf(CABlocks.APPLE_WOOD.get());
@@ -538,10 +538,14 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.STRIPPED_DEAD_DUPLICATION_WOOD.get());
 		dropSelf(CABlocks.GINKGO_LOG.get());
 		dropSelf(CABlocks.GINKGO_WOOD.get());
-		dropSelf(CABlocks.HIRMERIELLA_LOG.get());
-		dropSelf(CABlocks.HIRMERIELLA_WOOD.get());
+		dropSelf(CABlocks.MESOZOIC_LOG.get());
+		dropSelf(CABlocks.MESOZOIC_WOOD.get());
+		dropSelf(CABlocks.STRIPPED_MESOZOIC_LOG.get());
+		dropSelf(CABlocks.STRIPPED_MESOZOIC_WOOD.get());
 		dropSelf(CABlocks.DENSEWOOD_LOG.get());
 		dropSelf(CABlocks.DENSEWOOD_WOOD.get());
+		dropSelf(CABlocks.STRIPPED_DENSEWOOD_LOG.get());
+		dropSelf(CABlocks.STRIPPED_DENSEWOOD_WOOD.get());
 		dropSelf(CABlocks.PEACH_LOG.get());
 		dropSelf(CABlocks.PEACH_WOOD.get());
 		dropSelf(CABlocks.SKYWOOD_LOG.get());
@@ -550,7 +554,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_PLANKS.get());
 		dropSelf(CABlocks.DUPLICATION_PLANKS.get());
 		dropSelf(CABlocks.GINKGO_PLANKS.get());
-		dropSelf(CABlocks.HIRMERIELLA_PLANKS.get());
+		dropSelf(CABlocks.MESOZOIC_PLANKS.get());
 		dropSelf(CABlocks.DENSEWOOD_PLANKS.get());
 		dropSelf(CABlocks.PEACH_PLANKS.get());
 		dropSelf(CABlocks.SKYWOOD_PLANKS.get());
@@ -570,7 +574,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_STAIRS.get());
 		dropSelf(CABlocks.PEACH_STAIRS.get());
 		dropSelf(CABlocks.GINKGO_STAIRS.get());
-		dropSelf(CABlocks.HIRMERIELLA_STAIRS.get());
+		dropSelf(CABlocks.MESOZOIC_STAIRS.get());
 		dropSelf(CABlocks.DENSEWOOD_STAIRS.get());
 		dropSelf(CABlocks.DUPLICATION_STAIRS.get());
 		dropSelf(CABlocks.SKYWOOD_STAIRS.get());
@@ -579,7 +583,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_SLAB.get());
 		dropSelf(CABlocks.DUPLICATION_SLAB.get());
 		dropSelf(CABlocks.GINKGO_SLAB.get());
-		dropSelf(CABlocks.HIRMERIELLA_SLAB.get());
+		dropSelf(CABlocks.MESOZOIC_SLAB.get());
 		dropSelf(CABlocks.DENSEWOOD_SLAB.get());
 		dropSelf(CABlocks.PEACH_SLAB.get());
 		dropSelf(CABlocks.SKYWOOD_SLAB.get());
@@ -588,7 +592,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_FENCE.get());
 		dropSelf(CABlocks.DUPLICATION_FENCE.get());
 		dropSelf(CABlocks.GINKGO_FENCE.get());
-		dropSelf(CABlocks.HIRMERIELLA_FENCE.get());
+		dropSelf(CABlocks.MESOZOIC_FENCE.get());
 		dropSelf(CABlocks.DENSEWOOD_FENCE.get());
 		dropSelf(CABlocks.PEACH_FENCE.get());
 		dropSelf(CABlocks.SKYWOOD_FENCE.get());
@@ -597,7 +601,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_FENCE_GATE.get());
 		dropSelf(CABlocks.DUPLICATION_FENCE_GATE.get());
 		dropSelf(CABlocks.GINKGO_FENCE_GATE.get());
-		dropSelf(CABlocks.HIRMERIELLA_FENCE_GATE.get());
+		dropSelf(CABlocks.MESOZOIC_FENCE_GATE.get());
 		dropSelf(CABlocks.DENSEWOOD_FENCE_GATE.get());
 		dropSelf(CABlocks.PEACH_FENCE_GATE.get());
 		dropSelf(CABlocks.SKYWOOD_FENCE_GATE.get());
@@ -606,7 +610,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_PRESSURE_PLATE.get());
 		dropSelf(CABlocks.DUPLICATION_PRESSURE_PLATE.get());
 		dropSelf(CABlocks.GINKGO_PRESSURE_PLATE.get());
-		dropSelf(CABlocks.HIRMERIELLA_PRESSURE_PLATE.get());
+		dropSelf(CABlocks.MESOZOIC_PRESSURE_PLATE.get());
 		dropSelf(CABlocks.DENSEWOOD_PRESSURE_PLATE.get());
 		dropSelf(CABlocks.PEACH_PRESSURE_PLATE.get());
 		dropSelf(CABlocks.SKYWOOD_PRESSURE_PLATE.get());
@@ -615,7 +619,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_BUTTON.get());
 		dropSelf(CABlocks.DUPLICATION_BUTTON.get());
 		dropSelf(CABlocks.GINKGO_BUTTON.get());
-		dropSelf(CABlocks.HIRMERIELLA_BUTTON.get());
+		dropSelf(CABlocks.MESOZOIC_BUTTON.get());
 		dropSelf(CABlocks.DENSEWOOD_BUTTON.get());
 		dropSelf(CABlocks.PEACH_BUTTON.get());
 		dropSelf(CABlocks.SKYWOOD_BUTTON.get());
@@ -625,7 +629,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_SIGN.get());
 		dropSelf(CABlocks.DUPLICATION_SIGN.get());
 		dropSelf(CABlocks.GINKGO_SIGN.get());
-		dropSelf(CABlocks.HIRMERIELLA_SIGN.get());
+		dropSelf(CABlocks.MESOZOIC_SIGN.get());
 		dropSelf(CABlocks.DENSEWOOD_SIGN.get());
 		dropSelf(CABlocks.PEACH_SIGN.get());
 		dropSelf(CABlocks.SKYWOOD_SIGN.get());
@@ -634,7 +638,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CHERRY_TRAPDOOR.get());
 		dropSelf(CABlocks.DUPLICATION_TRAPDOOR.get());
 		dropSelf(CABlocks.GINKGO_TRAPDOOR.get());
-		dropSelf(CABlocks.HIRMERIELLA_TRAPDOOR.get());
+		dropSelf(CABlocks.MESOZOIC_TRAPDOOR.get());
 		dropSelf(CABlocks.DENSEWOOD_TRAPDOOR.get());
 		dropSelf(CABlocks.PEACH_TRAPDOOR.get());
 		dropSelf(CABlocks.SKYWOOD_TRAPDOOR.get());
@@ -680,7 +684,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropPottedContents(CABlocks.POTTED_CHERRY_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_PEACH_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_GINKGO_SAPLING.get());
-		dropPottedContents(CABlocks.POTTED_HIRMERIELLA_SAPLING.get());
+		dropPottedContents(CABlocks.POTTED_MESOZOIC_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_DENSEWOOD_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_RED_CRYSTAL_SAPLING.get());
 		dropPottedContents(CABlocks.POTTED_GREEN_CRYSTAL_SAPLING.get());

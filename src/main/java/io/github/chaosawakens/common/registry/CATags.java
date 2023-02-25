@@ -34,7 +34,7 @@ public class CATags {
 		public static final ITag.INamedTag<Block> PEACH_LOGS = tag("peach_logs");
 		public static final ITag.INamedTag<Block> SKYWOOD_LOGS = tag("skywood_logs");
 		public static final ITag.INamedTag<Block> GINKGO_LOGS = tag("ginkgo_logs");
-		public static final ITag.INamedTag<Block> HIRMERIELLA_LOGS = tag("hirmeriella_logs");
+		public static final ITag.INamedTag<Block> MESOZOIC_LOGS = tag("mesozoic_logs");
 		public static final ITag.INamedTag<Block> DENSEWOOD_LOGS = tag("densewood_logs");
 		public static final ITag.INamedTag<Block> CRYSTAL_LOGS = tag("crystal_logs");
 		public static final ITag.INamedTag<Block> CRYSTAL_LEAVES = tag("crystal_leaves");
@@ -56,7 +56,7 @@ public class CATags {
 		public static final ITag.INamedTag<Item> PEACH_LOGS = tag("peach_logs");
 		public static final ITag.INamedTag<Item> SKYWOOD_LOGS = tag("skywood_logs");
 		public static final ITag.INamedTag<Item> GINKGO_LOGS = tag("ginkgo_logs");
-		public static final ITag.INamedTag<Item> HIRMERIELLA_LOGS = tag("hirmeriella_logs");
+		public static final ITag.INamedTag<Item> MESOZOIC_LOGS = tag("mesozoic_logs");
 		public static final ITag.INamedTag<Item> DENSEWOOD_LOGS = tag("densewood_logs");
 		public static final ITag.INamedTag<Item> CRYSTAL_LOGS = tag("crystal_logs");
 		public static final ITag.INamedTag<Item> CRYSTAL_LEAVES = tag("crystal_leaves");

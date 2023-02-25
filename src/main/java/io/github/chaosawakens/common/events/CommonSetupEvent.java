@@ -77,7 +77,7 @@ public class CommonSetupEvent {
 			WoodType.register(CABlocks.PEACH);
 			WoodType.register(CABlocks.SKYWOOD);
 			WoodType.register(CABlocks.GINKGO);
-			WoodType.register(CABlocks.HIRMERIELLA);
+			WoodType.register(CABlocks.MESOZOIC);
 			WoodType.register(CABlocks.DENSEWOOD);
 			
 			CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");

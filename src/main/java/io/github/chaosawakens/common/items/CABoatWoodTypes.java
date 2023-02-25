@@ -8,6 +8,8 @@ public class CABoatWoodTypes {
 	public static WoodType CHERRY = WoodType.create("cherry");
 	public static WoodType DUPLICATOR = WoodType.create("duplication");
 	public static WoodType GINKGO = WoodType.create("ginkgo");
+	public static WoodType MESOZOIC = WoodType.create("mesozoic");
+	public static WoodType DENSEWOOD = WoodType.create("densewood");
 	public static WoodType PEACH = WoodType.create("peach");
 	public static WoodType SKYWOOD = WoodType.create("skywood");
 	

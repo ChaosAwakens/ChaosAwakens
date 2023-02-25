@@ -42,7 +42,7 @@ public class MesozoicVinesTopBlock extends AbstractTopPlantBlock {
 			return false;
 		} else {
 			return block == this.getHeadBlock() || block == this.getBodyBlock()
-					|| block.is(CABlocks.HIRMERIELLA_LEAVES.get())
+					|| block.is(CABlocks.MESOZOIC_LEAVES.get())
 					|| blockstate.isFaceSturdy(pLevel, blockpos, this.growthDirection);
 		}
 	}

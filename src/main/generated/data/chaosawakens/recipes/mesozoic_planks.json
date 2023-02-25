@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "chaosawakens:mesozoic_logs"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:mesozoic_planks",
+    "count": 4
+  }
+}

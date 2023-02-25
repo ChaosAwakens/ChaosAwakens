@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 
 import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
 import io.github.chaosawakens.common.entity.projectile.IrukandjiArrowEntity;
+import io.github.chaosawakens.common.items.CABoatItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
@@ -82,17 +83,21 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.GINKGO_STAIRS.get(), 5, 20);
 		registerFlammable(CABlocks.GINKGO_FENCE.get(), 5, 20);
 		registerFlammable(CABlocks.GINKGO_FENCE_GATE.get(), 5, 20);
-		registerFlammable(CABlocks.HIRMERIELLA_LEAVES.get(), 30, 60);
-		registerFlammable(CABlocks.HIRMERIELLA_LOG.get(), 5, 5);
-		registerFlammable(CABlocks.HIRMERIELLA_WOOD.get(), 5, 5);
-		registerFlammable(CABlocks.HIRMERIELLA_PLANKS.get(), 5, 20);
-		registerFlammable(CABlocks.HIRMERIELLA_SLAB.get(), 5, 20);
-		registerFlammable(CABlocks.HIRMERIELLA_STAIRS.get(), 5, 20);
-		registerFlammable(CABlocks.HIRMERIELLA_FENCE.get(), 5, 20);
-		registerFlammable(CABlocks.HIRMERIELLA_FENCE_GATE.get(), 5, 20);
+		registerFlammable(CABlocks.MESOZOIC_LEAVES.get(), 30, 60);
+		registerFlammable(CABlocks.MESOZOIC_LOG.get(), 5, 5);
+		registerFlammable(CABlocks.MESOZOIC_WOOD.get(), 5, 5);
+		registerFlammable(CABlocks.STRIPPED_MESOZOIC_LOG.get(), 5, 5);
+		registerFlammable(CABlocks.STRIPPED_MESOZOIC_WOOD.get(), 5, 5);
+		registerFlammable(CABlocks.MESOZOIC_PLANKS.get(), 5, 20);
+		registerFlammable(CABlocks.MESOZOIC_SLAB.get(), 5, 20);
+		registerFlammable(CABlocks.MESOZOIC_STAIRS.get(), 5, 20);
+		registerFlammable(CABlocks.MESOZOIC_FENCE.get(), 5, 20);
+		registerFlammable(CABlocks.MESOZOIC_FENCE_GATE.get(), 5, 20);
 		registerFlammable(CABlocks.DENSEWOOD_LEAVES.get(), 30, 60);
 		registerFlammable(CABlocks.DENSEWOOD_LOG.get(), 5, 5);
 		registerFlammable(CABlocks.DENSEWOOD_WOOD.get(), 5, 5);
+		registerFlammable(CABlocks.STRIPPED_DENSEWOOD_LOG.get(), 5, 5);
+		registerFlammable(CABlocks.STRIPPED_DENSEWOOD_WOOD.get(), 5, 5);
 		registerFlammable(CABlocks.DENSEWOOD_PLANKS.get(), 5, 20);
 		registerFlammable(CABlocks.DENSEWOOD_SLAB.get(), 5, 20);
 		registerFlammable(CABlocks.DENSEWOOD_STAIRS.get(), 5, 20);
@@ -163,6 +168,10 @@ public class CAVanillaCompat {
 		registerStrippable(CABlocks.SKYWOOD_WOOD.get(), CABlocks.STRIPPED_SKYWOOD_WOOD.get());
 		registerStrippable(CABlocks.GINKGO_LOG.get(), CABlocks.STRIPPED_GINKGO_LOG.get());
 		registerStrippable(CABlocks.GINKGO_WOOD.get(), CABlocks.STRIPPED_GINKGO_WOOD.get());
+		registerStrippable(CABlocks.MESOZOIC_LOG.get(), CABlocks.STRIPPED_MESOZOIC_LOG.get());
+		registerStrippable(CABlocks.MESOZOIC_WOOD.get(), CABlocks.STRIPPED_MESOZOIC_WOOD.get());
+		registerStrippable(CABlocks.DENSEWOOD_LOG.get(), CABlocks.STRIPPED_DENSEWOOD_LOG.get());
+		registerStrippable(CABlocks.DENSEWOOD_WOOD.get(), CABlocks.STRIPPED_DENSEWOOD_WOOD.get());
 
 		// Compostable Blocks
 		registerCompostable(0.3F, CABlocks.APPLE_SAPLING.get());
@@ -184,9 +193,9 @@ public class CAVanillaCompat {
 		registerCompostable(0.3F, CABlocks.GINKGO_SAPLING.get());
 		registerCompostable(0.3F, CABlocks.GINKGO_LEAVES.get());
 		registerCompostable(0.2F, CABlocks.GINKGO_LEAF_CARPET.get());
-		registerCompostable(0.3F, CABlocks.HIRMERIELLA_SAPLING.get());
-		registerCompostable(0.3F, CABlocks.HIRMERIELLA_LEAVES.get());
-		registerCompostable(0.2F, CABlocks.HIRMERIELLA_LEAF_CARPET.get());
+		registerCompostable(0.3F, CABlocks.MESOZOIC_SAPLING.get());
+		registerCompostable(0.3F, CABlocks.MESOZOIC_LEAVES.get());
+		registerCompostable(0.2F, CABlocks.MESOZOIC_LEAF_CARPET.get());
 		registerCompostable(0.3F, CABlocks.DENSEWOOD_SAPLING.get());
 		registerCompostable(0.3F, CABlocks.DENSEWOOD_LEAVES.get());
 		registerCompostable(0.2F, CABlocks.DENSEWOOD_LEAF_CARPET.get());
@@ -298,21 +307,19 @@ public class CAVanillaCompat {
 				|| fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem()
 				|| fuel.getItem() == CABlocks.MOLDY_FENCE.get().asItem() || fuel.getItem() == CABlocks.PEACH_FENCE.get().asItem()
 				|| fuel.getItem() == CABlocks.SKYWOOD_FENCE.get().asItem() || fuel.getItem() == CABlocks.GINKGO_FENCE.get().asItem()
-				|| fuel.getItem() == CABlocks.HIRMERIELLA_FENCE.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_FENCE.get().asItem()
+				|| fuel.getItem() == CABlocks.MESOZOIC_FENCE.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_FENCE.get().asItem()
 				|| fuel.getItem() == CABlocks.CRYSTAL_FENCE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.CHERRY_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.PEACH_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_FENCE_GATE.get().asItem()
-				|| fuel.getItem() == CABlocks.GINKGO_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.HIRMERIELLA_FENCE_GATE.get().asItem()
+				|| fuel.getItem() == CABlocks.GINKGO_FENCE_GATE.get().asItem() || fuel.getItem() == CABlocks.MESOZOIC_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.DENSEWOOD_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.CRYSTAL_FENCE_GATE.get().asItem()
 				|| fuel.getItem() == CABlocks.APPLE_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.CHERRY_TRAPDOOR.get().asItem()
 				|| fuel.getItem() == CABlocks.DUPLICATION_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.GINKGO_TRAPDOOR.get().asItem()
-				|| fuel.getItem() == CABlocks.HIRMERIELLA_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_TRAPDOOR.get().asItem()
+				|| fuel.getItem() == CABlocks.MESOZOIC_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_TRAPDOOR.get().asItem()
 				|| fuel.getItem() == CABlocks.PEACH_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_TRAPDOOR.get().asItem()) {
 			event.setBurnTime(300);
-		} else if (fuel.getItem() == CAItems.APPLE_BOAT.get() || fuel.getItem() == CAItems.CHERRY_BOAT.get() || fuel.getItem() == CAItems.DUPLICATOR_BOAT.get()
-				|| fuel.getItem() == CAItems.GINKGO_BOAT.get() || fuel.getItem() == CAItems.PEACH_BOAT.get()
-				|| fuel.getItem() == CAItems.SKYWOOD_BOAT.get()) {
+		} else if (fuel.getItem() instanceof CABoatItem) {
 			event.setBurnTime(1200);
 		} else if (fuel.getItem() == CAItems.CRYSTAL_WOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_SWORD.get()
 				|| fuel.getItem() == CAItems.CRYSTAL_WOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_AXE.get()
@@ -321,7 +328,7 @@ public class CAVanillaCompat {
 				|| fuel.getItem() == CAItems.GINKGO_SIGN.get() || fuel.getItem() == CAItems.PEACH_SIGN.get() || fuel.getItem() == CAItems.SKYWOOD_SIGN.get()
 				|| fuel.getItem() == CABlocks.APPLE_DOOR.get().asItem() || fuel.getItem() == CABlocks.CHERRY_DOOR.get().asItem()
 				|| fuel.getItem() == CABlocks.DUPLICATION_DOOR.get().asItem() || fuel.getItem() == CABlocks.GINKGO_DOOR.get().asItem()
-				|| fuel.getItem() == CABlocks.HIRMERIELLA_DOOR.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_DOOR.get().asItem()
+				|| fuel.getItem() == CABlocks.MESOZOIC_DOOR.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_DOOR.get().asItem()
 				|| fuel.getItem() == CABlocks.PEACH_DOOR.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_DOOR.get().asItem()) {
 			event.setBurnTime(200);
 		} else if (fuel.getItem() == CAItems.CRYSTAL_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {

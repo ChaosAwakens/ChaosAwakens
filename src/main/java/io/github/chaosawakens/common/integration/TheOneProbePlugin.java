@@ -25,6 +25,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
@@ -109,27 +110,8 @@ public class TheOneProbePlugin {
 					}
 					
 					if (entity instanceof CABoatEntity) {
-						String type = ((CABoatEntity) entity).getBoatWoodType();
-						switch (type) {
-						case "apple":
-						default:
-							iProbeInfo.text(CompoundText.createLabelInfo("Apple Boat", ""));
-							return;
-						case "cherry":
-							iProbeInfo.text(CompoundText.createLabelInfo("Cherry Boat", ""));
-							return;
-						case "duplication":
-							iProbeInfo.text(CompoundText.createLabelInfo("Duplicator Boat", ""));
-							return;
-						case "ginkgo":
-							iProbeInfo.text(CompoundText.createLabelInfo("Ginkgo Boat", ""));
-							return;
-						case "peach":
-							iProbeInfo.text(CompoundText.createLabelInfo("Peach Boat", ""));
-							return;
-						case "skywood":
-							iProbeInfo.text(CompoundText.createLabelInfo("Skywood Boat", ""));
-						}
+						ITextComponent name = ((CABoatEntity) entity).getDropItem().getDescription();
+						iProbeInfo.text(name);
 					}
 
 					if (entity instanceof TreeFrogEntity) {

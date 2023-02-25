@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stage=0": {
+      "model": "chaosawakens:block/mesozoic_sapling"
+    },
+    "stage=1": {
+      "model": "chaosawakens:block/mesozoic_sapling"
+    }
+  }
+}

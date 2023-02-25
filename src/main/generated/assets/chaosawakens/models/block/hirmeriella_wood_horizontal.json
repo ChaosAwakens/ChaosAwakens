@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "side": "chaosawakens:block/hirmeriella_log",
-    "end": "chaosawakens:block/hirmeriella_log"
-  }
-}

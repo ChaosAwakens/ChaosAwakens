@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "chaosawakens:block/mesozoic_slab_top"
+    },
+    "type=bottom": {
+      "model": "chaosawakens:block/mesozoic_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/mesozoic_planks"
+    }
+  }
+}

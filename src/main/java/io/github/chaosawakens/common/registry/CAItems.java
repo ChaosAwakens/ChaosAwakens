@@ -236,7 +236,7 @@ public class CAItems {
 	public static final RegistryObject<SignItem> CHERRY_SIGN = ITEMS.register("cherry_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.CHERRY_SIGN.get(), CABlocks.CHERRY_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> DUPLICATION_SIGN = ITEMS.register("duplication_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.DUPLICATION_SIGN.get(), CABlocks.DUPLICATION_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> GINKGO_SIGN = ITEMS.register("ginkgo_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.GINKGO_SIGN.get(), CABlocks.GINKGO_WALL_SIGN.get()));
-	public static final RegistryObject<SignItem> HIRMERIELLA_SIGN = ITEMS.register("hirmeriella_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.HIRMERIELLA_SIGN.get(), CABlocks.HIRMERIELLA_WALL_SIGN.get()));
+	public static final RegistryObject<SignItem> MESOZOIC_SIGN = ITEMS.register("mesozoic_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.MESOZOIC_SIGN.get(), CABlocks.MESOZOIC_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> DENSEWOOD_SIGN = ITEMS.register("densewood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.DENSEWOOD_SIGN.get(), CABlocks.DENSEWOOD_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> PEACH_SIGN = ITEMS.register("peach_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.PEACH_SIGN.get(), CABlocks.PEACH_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> SKYWOOD_SIGN = ITEMS.register("skywood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.SKYWOOD_SIGN.get(), CABlocks.SKYWOOD_WALL_SIGN.get()));
@@ -248,6 +248,8 @@ public class CAItems {
 	public static final RegistryObject<CABoatItem> CHERRY_BOAT = ITEMS.register("cherry_boat", () -> new CABoatItem(CABoatWoodTypes.CHERRY.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> DUPLICATOR_BOAT = ITEMS.register("duplication_boat", () -> new CABoatItem(CABoatWoodTypes.DUPLICATOR.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> GINKGO_BOAT = ITEMS.register("ginkgo_boat", () -> new CABoatItem(CABoatWoodTypes.GINKGO.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<CABoatItem> MESOZOIC_BOAT = ITEMS.register("mesozoic_boat", () -> new CABoatItem(CABoatWoodTypes.MESOZOIC.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<CABoatItem> DENSEWOOD_BOAT = ITEMS.register("densewood_boat", () -> new CABoatItem(CABoatWoodTypes.DENSEWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> PEACH_BOAT = ITEMS.register("peach_boat", () -> new CABoatItem(CABoatWoodTypes.PEACH.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> SKYWOOD_BOAT = ITEMS.register("skywood_boat", () -> new CABoatItem(CABoatWoodTypes.SKYWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	

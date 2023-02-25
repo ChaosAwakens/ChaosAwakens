@@ -362,12 +362,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.leafCarpetBlock(CABlocks.GINKGO_LEAF_CARPET.get(), chaosRL("ginkgo_leaves"));
 		this.logBlock(CABlocks.STRIPPED_GINKGO_LOG.get());
 		this.woodBlock(CABlocks.STRIPPED_GINKGO_WOOD.get(), chaosRL("stripped_ginkgo_log"));
-		this.cross(CABlocks.HIRMERIELLA_SAPLING.get());
-		this.logBlock(CABlocks.HIRMERIELLA_LOG.get());
-		this.woodBlock(CABlocks.HIRMERIELLA_WOOD.get(), chaosRL("hirmeriella_log"));
-		this.simpleBlock(CABlocks.HIRMERIELLA_PLANKS.get());
-		this.simpleBlock(CABlocks.HIRMERIELLA_LEAVES.get());
-		this.leafCarpetBlock(CABlocks.HIRMERIELLA_LEAF_CARPET.get(), chaosRL("hirmeriella_leaves"));
+		this.cross(CABlocks.MESOZOIC_SAPLING.get());
+		this.logBlock(CABlocks.MESOZOIC_LOG.get());
+		this.woodBlock(CABlocks.MESOZOIC_WOOD.get(), chaosRL("mesozoic_log"));
+		this.simpleBlock(CABlocks.MESOZOIC_PLANKS.get());
+		this.simpleBlock(CABlocks.MESOZOIC_LEAVES.get());
+		this.leafCarpetBlock(CABlocks.MESOZOIC_LEAF_CARPET.get(), chaosRL("mesozoic_leaves"));
 		this.cross(CABlocks.DENSEWOOD_SAPLING.get());
 		this.logBlock(CABlocks.DENSEWOOD_LOG.get());
 		this.woodBlock(CABlocks.DENSEWOOD_WOOD.get(), chaosRL("densewood_log"));
@@ -394,7 +394,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.stairsBlock(CABlocks.CHERRY_STAIRS.get(), chaosRL("cherry_planks"));
 		this.stairsBlock(CABlocks.DUPLICATION_STAIRS.get(), chaosRL("duplication_planks"));
 		this.stairsBlock(CABlocks.GINKGO_STAIRS.get(), chaosRL("ginkgo_planks"));
-		this.stairsBlock(CABlocks.HIRMERIELLA_STAIRS.get(), chaosRL("hirmeriella_planks"));
+		this.stairsBlock(CABlocks.MESOZOIC_STAIRS.get(), chaosRL("mesozoic_planks"));
 		this.stairsBlock(CABlocks.DENSEWOOD_STAIRS.get(), chaosRL("densewood_planks"));
 		this.stairsBlock(CABlocks.PEACH_STAIRS.get(), chaosRL("peach_planks"));
 		this.stairsBlock(CABlocks.SKYWOOD_STAIRS.get(), chaosRL("skywood_planks"));
@@ -403,7 +403,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.slabBlock(CABlocks.CHERRY_SLAB.get(), chaosRL("cherry_planks"), chaosRL("cherry_planks"));
 		this.slabBlock(CABlocks.DUPLICATION_SLAB.get(), chaosRL("duplication_planks"), chaosRL("duplication_planks"));
 		this.slabBlock(CABlocks.GINKGO_SLAB.get(), chaosRL("ginkgo_planks"), chaosRL("ginkgo_planks"));
-		this.slabBlock(CABlocks.HIRMERIELLA_SLAB.get(), chaosRL("hirmeriella_planks"), chaosRL("hirmeriella_planks"));
+		this.slabBlock(CABlocks.MESOZOIC_SLAB.get(), chaosRL("mesozoic_planks"), chaosRL("mesozoic_planks"));
 		this.slabBlock(CABlocks.DENSEWOOD_SLAB.get(), chaosRL("densewood_planks"), chaosRL("densewood_planks"));
 		this.slabBlock(CABlocks.PEACH_SLAB.get(), chaosRL("peach_planks"), chaosRL("peach_planks"));
 		this.slabBlock(CABlocks.SKYWOOD_SLAB.get(), chaosRL("skywood_planks"), chaosRL("skywood_planks"));
@@ -412,7 +412,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.fenceBlock(CABlocks.CHERRY_FENCE.get(), chaosRL("cherry_planks"));
 		this.fenceBlock(CABlocks.DUPLICATION_FENCE.get(), chaosRL("duplication_planks"));
 		this.fenceBlock(CABlocks.GINKGO_FENCE.get(), chaosRL("ginkgo_planks"));
-		this.fenceBlock(CABlocks.HIRMERIELLA_FENCE.get(), chaosRL("hirmeriella_planks"));
+		this.fenceBlock(CABlocks.MESOZOIC_FENCE.get(), chaosRL("mesozoic_planks"));
 		this.fenceBlock(CABlocks.DENSEWOOD_FENCE.get(), chaosRL("densewood_planks"));
 		this.fenceBlock(CABlocks.PEACH_FENCE.get(), chaosRL("peach_planks"));
 		this.fenceBlock(CABlocks.SKYWOOD_FENCE.get(), chaosRL("skywood_planks"));
@@ -421,7 +421,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.fenceGateBlock(CABlocks.CHERRY_FENCE_GATE.get(), chaosRL("cherry_planks"));
 		this.fenceGateBlock(CABlocks.DUPLICATION_FENCE_GATE.get(), chaosRL("duplication_planks"));
 		this.fenceGateBlock(CABlocks.GINKGO_FENCE_GATE.get(), chaosRL("ginkgo_planks"));
-		this.fenceGateBlock(CABlocks.HIRMERIELLA_FENCE_GATE.get(), chaosRL("hirmeriella_planks"));
+		this.fenceGateBlock(CABlocks.MESOZOIC_FENCE_GATE.get(), chaosRL("mesozoic_planks"));
 		this.fenceGateBlock(CABlocks.DENSEWOOD_FENCE_GATE.get(), chaosRL("densewood_planks"));
 		this.fenceGateBlock(CABlocks.PEACH_FENCE_GATE.get(), chaosRL("peach_planks"));
 		this.fenceGateBlock(CABlocks.SKYWOOD_FENCE_GATE.get(), chaosRL("skywood_planks"));
@@ -430,7 +430,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.pressurePlateBlock(CABlocks.CHERRY_PRESSURE_PLATE.get(), "cherry_pressure_plate", chaosRL("cherry_planks"));
 		this.pressurePlateBlock(CABlocks.DUPLICATION_PRESSURE_PLATE.get(), "duplication_pressure_plate", chaosRL("duplication_planks"));
 		this.pressurePlateBlock(CABlocks.GINKGO_PRESSURE_PLATE.get(), "ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
-		this.pressurePlateBlock(CABlocks.HIRMERIELLA_PRESSURE_PLATE.get(), "hirmeriella_pressure_plate", chaosRL("hirmeriella_planks"));
+		this.pressurePlateBlock(CABlocks.MESOZOIC_PRESSURE_PLATE.get(), "mesozoic_pressure_plate", chaosRL("mesozoic_planks"));
 		this.pressurePlateBlock(CABlocks.DENSEWOOD_PRESSURE_PLATE.get(), "densewood_pressure_plate", chaosRL("densewood_planks"));
 		this.pressurePlateBlock(CABlocks.PEACH_PRESSURE_PLATE.get(), "peach_pressure_plate", chaosRL("peach_planks"));
 		this.pressurePlateBlock(CABlocks.SKYWOOD_PRESSURE_PLATE.get(), "skywood_pressure_plate", chaosRL("skywood_planks"));
@@ -439,7 +439,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.buttonBlock(CABlocks.CHERRY_BUTTON.get(), chaosRL("cherry_planks"));
 		this.buttonBlock(CABlocks.DUPLICATION_BUTTON.get(), chaosRL("duplication_planks"));
 		this.buttonBlock(CABlocks.GINKGO_BUTTON.get(), chaosRL("ginkgo_planks"));
-		this.buttonBlock(CABlocks.HIRMERIELLA_BUTTON.get(), chaosRL("hirmeriella_planks"));
+		this.buttonBlock(CABlocks.MESOZOIC_BUTTON.get(), chaosRL("mesozoic_planks"));
 		this.buttonBlock(CABlocks.DENSEWOOD_BUTTON.get(), chaosRL("densewood_planks"));
 		this.buttonBlock(CABlocks.PEACH_BUTTON.get(), chaosRL("peach_planks"));
 		this.buttonBlock(CABlocks.SKYWOOD_BUTTON.get(), chaosRL("skywood_planks"));
@@ -448,7 +448,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.trapdoorBlock(CABlocks.CHERRY_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.DUPLICATION_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.GINKGO_TRAPDOOR.get());
-		this.trapdoorBlock(CABlocks.HIRMERIELLA_TRAPDOOR.get());
+		this.trapdoorBlock(CABlocks.MESOZOIC_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.DENSEWOOD_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.PEACH_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.SKYWOOD_TRAPDOOR.get());
@@ -456,7 +456,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.doorBlock(CABlocks.CHERRY_DOOR.get());
 		this.doorBlock(CABlocks.DUPLICATION_DOOR.get());
 		this.doorBlock(CABlocks.GINKGO_DOOR.get());
-		this.doorBlock(CABlocks.HIRMERIELLA_DOOR.get());
+		this.doorBlock(CABlocks.MESOZOIC_DOOR.get());
 		this.doorBlock(CABlocks.DENSEWOOD_DOOR.get());
 		this.doorBlock(CABlocks.PEACH_DOOR.get());
 		this.doorBlock(CABlocks.SKYWOOD_DOOR.get());
@@ -501,10 +501,10 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.noVariant(CABlocks.POTTED_PRIMROSE.get());
 		this.noVariant(CABlocks.POTTED_DAISY.get());
 		this.noVariant(CABlocks.POTTED_GINKGO_SAPLING.get());
-		this.noVariant(CABlocks.POTTED_HIRMERIELLA_SAPLING.get());
+		this.noVariant(CABlocks.POTTED_MESOZOIC_SAPLING.get());
 		this.noVariant(CABlocks.POTTED_DENSEWOOD_SAPLING.get());
 		
-		this.sign(CABlocks.HIRMERIELLA_SIGN.get(), CABlocks.HIRMERIELLA_WALL_SIGN.get());
+		this.sign(CABlocks.MESOZOIC_SIGN.get(), CABlocks.MESOZOIC_WALL_SIGN.get());
 		this.sign(CABlocks.DENSEWOOD_SIGN.get(), CABlocks.DENSEWOOD_WALL_SIGN.get());
 	}
 

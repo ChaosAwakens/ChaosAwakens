@@ -80,6 +80,10 @@ public class CABoatEntity extends BoatEntity {
 			return CAItems.DUPLICATOR_BOAT.get();
 		case "ginkgo":
 			return CAItems.GINKGO_BOAT.get();
+		case "mesozoic":
+			return CAItems.MESOZOIC_BOAT.get();
+		case "densewood":
+			return CAItems.DENSEWOOD_BOAT.get();
 		case "peach":
 			return CAItems.PEACH_BOAT.get();
 		case "skywood":

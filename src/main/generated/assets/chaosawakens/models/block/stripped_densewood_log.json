@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "side": "chaosawakens:block/stripped_densewood_log",
+    "end": "chaosawakens:block/densewood_log_top"
+  }
+}

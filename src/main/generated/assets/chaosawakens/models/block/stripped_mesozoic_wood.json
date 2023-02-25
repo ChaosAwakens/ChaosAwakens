@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "side": "chaosawakens:block/stripped_mesozoic_log",
+    "end": "chaosawakens:block/stripped_mesozoic_log"
+  }
+}

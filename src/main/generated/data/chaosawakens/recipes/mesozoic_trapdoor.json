@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:mesozoic_planks"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:mesozoic_trapdoor",
+    "count": 2
+  }
+}
