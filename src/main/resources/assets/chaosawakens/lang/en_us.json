@@ -174,8 +174,8 @@
 	"item.minecraft.tipped_arrow.effect.burns": "Arrow of Burning",
 	"item.minecraft.tipped_arrow.effect.long_burns": "Arrow of Burning",
 	
-	"enchantment.chaosawakens.ignition": "Ignition",
-	"enchantment.chaosawakens.ignition.description": "When applied onto an armor piece, anything that attacks the user will be afflicted with the burns effect for a short period of time.",
+	"enchantment.chaosawakens.ignite": "Ignite",
+	"enchantment.chaosawakens.ignite.description": "When applied onto an armor piece, anything that attacks the user will be afflicted with the burns effect for a short period of time.",
 
 	"stat.chaosawakens.interact_with_crystal_crafting_table": "Interactions with Crystal Crafting Table",
 	"stat.chaosawakens.interact_with_crystal_furnace": "Interactions with Crystal Furnace",
@@ -247,6 +247,7 @@
 	"entity.minecraft.villager.archaeologist": "Archaeologist",
 	
 	"death.attack.burns": "%1$s burned up on the inside",
+    "death.attack.thorny_sun": "%1$s was prickled to deah by a Thorny Sun",
     
 	"item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
 	"item.chaosawakens.apple_ent_spawn_egg": "Apple Ent Spawn Egg",

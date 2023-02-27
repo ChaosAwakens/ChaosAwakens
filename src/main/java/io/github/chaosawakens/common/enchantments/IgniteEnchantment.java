@@ -14,9 +14,9 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 
-public class IgnitionEnchantment extends Enchantment {
+public class IgniteEnchantment extends Enchantment {
 
-	public IgnitionEnchantment(EquipmentSlotType[] slotType) {
+	public IgniteEnchantment(EquipmentSlotType[] slotType) {
 		super(Rarity.VERY_RARE, EnchantmentType.ARMOR, slotType);
 	}
 	
@@ -34,11 +34,10 @@ public class IgnitionEnchantment extends Enchantment {
 
 	public void doPostHurt(LivingEntity attacked, Entity attacker, int level) {
 		Random random = attacked.getRandom();
-
-		Entry<EquipmentSlotType, ItemStack> entry = EnchantmentHelper.getRandomItemWith(CAEnchantments.IGNITION.get(), attacked);
+		Entry<EquipmentSlotType, ItemStack> entry = EnchantmentHelper.getRandomItemWith(CAEnchantments.IGNITE.get(), attacked);
 		if (shouldHit(level, random)) {
 			if (attacker != null && attacker instanceof LivingEntity) {
-				((LivingEntity) attacker).addEffect(new EffectInstance(CAEffects.BURNS_EFFECT.get(), 60, level - 1));		
+				((LivingEntity) attacker).addEffect(new EffectInstance(CAEffects.BURNS_EFFECT.get(), 20+level*60, level - 1));		
 			}
 
 			if (entry != null)
@@ -50,7 +49,6 @@ public class IgnitionEnchantment extends Enchantment {
 		if (level <= 0) {
 			return false;
 		} else {
-			//return true;
 			return rand.nextFloat() < 0.15F * (float) level;
 		}
 	}

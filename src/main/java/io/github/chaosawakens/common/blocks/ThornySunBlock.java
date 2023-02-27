@@ -1,8 +1,8 @@
 package io.github.chaosawakens.common.blocks;
 
+import io.github.chaosawakens.common.registry.CADamageSources;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -14,6 +14,6 @@ public class ThornySunBlock extends DoubleDensePlantBlock {
 	
 	//TODO Change to custom source
 	public void entityInside(BlockState pState, World pLevel, BlockPos pPos, Entity pEntity) {
-		pEntity.hurt(DamageSource.CACTUS, 1.0f);
+		pEntity.hurt(CADamageSources.THORNY_SUN, 1.0f);
 	}
 }

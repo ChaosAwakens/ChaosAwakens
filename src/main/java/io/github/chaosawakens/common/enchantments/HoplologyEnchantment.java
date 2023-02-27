@@ -31,7 +31,7 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 	public void doPostHurt(LivingEntity attacked, Entity attacker, int level) {
 		Random random = attacked.getRandom();
 		
-		Entry<EquipmentSlotType, ItemStack> entry = EnchantmentHelper.getRandomItemWith(CAEnchantments.IGNITION.get(), attacked);
+		Entry<EquipmentSlotType, ItemStack> entry = EnchantmentHelper.getRandomItemWith(CAEnchantments.IGNITE.get(), attacked);
 		//if (shouldHit(level, random)) {
 			if (attacker != null && attacker instanceof LivingEntity) {
 				//hit.hurt(DamageSource.MAGIC, 0);
