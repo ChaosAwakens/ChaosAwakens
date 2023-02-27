@@ -391,10 +391,11 @@ public class BiomeLoadEventSubscriber {
 		}
 
 		private static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {
+			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_ALUMINUM);
 			if (CACommonConfig.COMMON.enableOreRubyGen.get())
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_RUBY_LAVA);
 			if (CACommonConfig.COMMON.enableOreAmethystGen.get())
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_AMETHYST);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.GEODE_AMETHYST);
 			if (CACommonConfig.COMMON.enableOreUraniumGen.get())
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_URANIUM);
 			if (CACommonConfig.COMMON.enableOreTitaniumGen.get())

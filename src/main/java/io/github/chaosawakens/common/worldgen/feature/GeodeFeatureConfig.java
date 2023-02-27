@@ -13,16 +13,22 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 public class GeodeFeatureConfig implements IFeatureConfig {
 	public static final Codec<GeodeFeatureConfig> CODEC = RecordCodecBuilder.create(
 			(builder) -> builder.group(
-					BlockState.CODEC.fieldOf("state").forGetter((config) -> config.state),
-					FeatureSpread.CODEC.fieldOf("diameter").forGetter((config) -> config.diameter))
+					BlockState.CODEC.fieldOf("budding").forGetter((config) -> config.budding),
+					BlockState.CODEC.fieldOf("base").forGetter((config) -> config.base),
+					FeatureSpread.CODEC.fieldOf("diameter").forGetter((config) -> config.diameter),
+					FeatureSpread.CODEC.fieldOf("budding_chance").forGetter((config) -> config.buddingChance))
 			.apply(builder, GeodeFeatureConfig::new));
 	
-	protected final BlockState state;
+	protected final BlockState budding;
+	protected final BlockState base;
 	protected final FeatureSpread diameter;
+	protected final FeatureSpread buddingChance;
 
-	public GeodeFeatureConfig( BlockState budState, FeatureSpread diameter) {
+	public GeodeFeatureConfig(BlockState budding, BlockState base, FeatureSpread diameter, FeatureSpread buddingChance) {
 		super();
-		this.state = budState;
+		this.budding = budding;
+		this.base = base;
 		this.diameter = diameter;
+		this.buddingChance = buddingChance;
 	}
 }

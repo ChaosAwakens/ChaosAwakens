@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 
+import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -18,17 +19,24 @@ public class GeodeFeature extends Feature<GeodeFeatureConfig> {
 
 	@Override
 	public boolean place(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, GeodeFeatureConfig config) {
-		int radius = config.diameter.sample(rand)/2;
-		int radiusSqrd = radius*radius;
+		int chance = config.buddingChance.sample(rand);
+		float radius = config.diameter.sample(rand)/2,
+				radiusSqrd = radius*radius,
+				borderSqrd = (radius+1)*(radius+1);
 		BlockPos.Mutable mutable = new BlockPos.Mutable(pos.getX(), pos.getY(), pos.getZ());
-		for(int i = -radius; i < radius; i++) {
-			for(int j = -radius; j < radius; j++) {
-				for(int k = -radius; k < radius; k++) {
-					int distance = Math.abs(i*i) + Math.abs(j*j) + Math.abs(k*k);
+		for(float i = -radius; i <= radius; i++) {
+			for(float j = -radius; j <= radius; j++) {
+				for(float k = -radius; k <= radius; k++) {
+					float distance = Math.abs(i*i) + Math.abs(j*j) + Math.abs(k*k);
+					ChaosAwakens.LOGGER.debug(mutable.offset(i, j, k)+" "+distance+" "+(distance < radiusSqrd)+" "+(distance <= radiusSqrd + 2));
 					if(distance < radiusSqrd)
-						reader.setBlock(mutable.offset(i, j, k), Blocks.CAVE_AIR.defaultBlockState(), distance);
-					else if(distance <= radiusSqrd + 1)
-						if(rand.nextInt(4) == 0)reader.setBlock(mutable.offset(i, j, k), config.state, 3);
+						reader.setBlock(mutable.offset(i, j, k), Blocks.CAVE_AIR.defaultBlockState(), 3);
+					else if(distance <= borderSqrd)
+						if(rand.nextInt(chance) == 0)
+							reader.setBlock(mutable.offset(i, j, k), config.budding, 3);
+						else
+							if(!reader.getBlockState(mutable.offset(i, j, k)).is(config.base.getBlock()))
+								reader.setBlock(mutable.offset(i, j, k), config.base, 3);
 				}
 			}
 		}
