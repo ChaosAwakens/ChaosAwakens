@@ -2,14 +2,18 @@ package io.github.chaosawakens.common.events;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.mojang.brigadier.CommandDispatcher;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.config.CACommonConfig;
+import io.github.chaosawakens.common.enchantments.HoplologyEnchantment;
 import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.robo.RoboWarriorEntity;
@@ -17,10 +21,12 @@ import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CACommand;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.registry.CAEnchantments;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.Blocks;
 import net.minecraft.command.CommandSource;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -40,8 +46,12 @@ import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.FurnaceRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.ChatType;
@@ -72,6 +82,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickEmpty;
+import net.minecraftforge.event.entity.player.PlayerXpEvent.LevelChange;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.BlockToolInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
@@ -94,6 +105,16 @@ public class MiscEventHandler {
 			// Make myself (Blackout03_) drop Ink Sacs any time I die. Even if I have none on me.
 			if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
 				((PlayerEntity) entity).drop(new ItemStack(Items.INK_SAC, random.nextInt(3)), true, false);
+			}
+			
+			//Update Hoplology protection bonus on player death
+			for(ItemStack armorStack : ((PlayerEntity) entity).getArmorSlots()) {
+				Map<Enchantment, Integer> enchantMap = EnchantmentHelper.getEnchantments(armorStack);
+				enchantMap.forEach((enchant, level) -> {
+					if(enchant instanceof HoplologyEnchantment) {
+						((HoplologyEnchantment) enchant).setProtection(0);
+					}
+				});
 			}
 		}
 		if (CACommonConfig.COMMON.enableDragonEggRespawns.get()) {
@@ -212,6 +233,14 @@ public class MiscEventHandler {
 	
 	public static void onPlayerItemPickup(ItemPickupEvent event) {
 		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		
+		Map<Enchantment, Integer> enchantMap = EnchantmentHelper.getEnchantments(event.getStack());
+		enchantMap.forEach((enchant, level) -> {
+			if(enchant instanceof HoplologyEnchantment) {
+				ChaosAwakens.LOGGER.debug(event.getPlayer().experienceLevel);
+				((HoplologyEnchantment) enchant).setProtection(event.getPlayer().experienceLevel/10);
+			}
+		});
 	}
 	
 	// Client side events to prevent the player/entity from swinging their hand or interacting while paralyzed
@@ -325,16 +354,9 @@ public class MiscEventHandler {
 	public static void onSleepFinished(SleepFinishedTimeEvent event) {
 		IWorld world = event.getWorld();
 		if (world instanceof ServerWorld) {
-			if (world.getLevelData() instanceof DerivedWorldInfo) {
-				try (ServerWorld serverWorld = (ServerWorld) world) {
-					DerivedWorldInfo derivedWorldInfo = (DerivedWorldInfo) world.getLevelData();
-					if (serverWorld.dimension() == CADimensions.CRYSTAL_WORLD || serverWorld.dimension() == CADimensions.MINING_PARADISE || serverWorld.dimension() == CADimensions.VILLAGE_MANIA) {
-						derivedWorldInfo.wrapped.setDayTime(event.getNewTime());
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			ServerWorld level = (ServerWorld) event.getWorld();
+			if(level.dimension().location().getNamespace().equals("chaosawakens"))
+				level.getServer().overworld().setDayTime(event.getNewTime());
 		}
 	}
 	
@@ -345,5 +367,16 @@ public class MiscEventHandler {
 			else if(event.getState().is(CATags.Blocks.TERRA_PRETA))
 				event.setFinalState(CABlocks.TERRA_PRETA_FARMLAND.get().defaultBlockState());
 	}
-
+	
+	public static void onHoplologyArmorUpdate(LevelChange event) {
+		PlayerEntity player = event.getPlayer();
+		for(ItemStack armorStack : player.getArmorSlots()) {
+			Map<Enchantment, Integer> enchantMap = EnchantmentHelper.getEnchantments(armorStack);
+			enchantMap.forEach((enchant, level) -> {
+				if(enchant instanceof HoplologyEnchantment) {
+					((HoplologyEnchantment) enchant).setProtection((player.experienceLevel+1)/10);
+				}
+			});
+		}
+	}
 }

@@ -1,45 +1,44 @@
 package io.github.chaosawakens.common.enchantments;
 
-import java.util.Map.Entry;
-import java.util.Random;
-
-import io.github.chaosawakens.common.registry.CAEffects;
-import io.github.chaosawakens.common.registry.CAEnchantments;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentType;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.ProtectionEnchantment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.DamageSource;
 
 /**
  * @author invalid2
  */
 public class HoplologyEnchantment extends ProtectionEnchantment {
 
-	/**
-	 * @param p_i46731_1_
-	 * @param p_i46731_2_
-	 * @param p_i46731_3_
-	 */
-	public HoplologyEnchantment(Rarity rarity, EquipmentSlotType[] slotType) {
-		super(rarity, ProtectionEnchantment.Type.ALL, slotType);
+	private int protection;
+	
+	public HoplologyEnchantment(EquipmentSlotType... slotType) {
+		super(Rarity.VERY_RARE, ProtectionEnchantment.Type.ALL, slotType);
 	}
 	
-	public void doPostHurt(LivingEntity attacked, Entity attacker, int level) {
-		Random random = attacked.getRandom();
-		
-		Entry<EquipmentSlotType, ItemStack> entry = EnchantmentHelper.getRandomItemWith(CAEnchantments.IGNITE.get(), attacked);
-		//if (shouldHit(level, random)) {
-			if (attacker != null && attacker instanceof LivingEntity) {
-				//hit.hurt(DamageSource.MAGIC, 0);
-				((LivingEntity) attacker).addEffect( new EffectInstance(CAEffects.BURNS_EFFECT.get(), 60, level - 1));
-			}
-			//((PlayerEntity) attacked).totalExperience
-			if (entry != null)
-				entry.getValue().hurtAndBreak(2, attacked, (entity) -> entity.broadcastBreakEvent(entry.getKey()) );
-		//}
+	@Override
+	public int getDamageProtection(int pLevel, DamageSource pSource) {
+		if(pSource.isBypassArmor() || pSource.isBypassInvul())
+			return 0;
+		else
+			return protection;
+	}
+	
+	@Override
+	public boolean checkCompatibility(Enchantment pEnch) {
+		return !(pEnch instanceof ProtectionEnchantment);
+	}
+	
+	@Override
+	public int getMaxLevel() {
+		return 1;
+	}
+	
+	public void changeProtection(int protection) {
+		this.protection += protection;
+	}
+	
+	public void setProtection(int protection) {
+		this.protection = protection;
 	}
 }

@@ -17,19 +17,7 @@ import net.minecraft.potion.EffectInstance;
 public class IgniteEnchantment extends Enchantment {
 
 	public IgniteEnchantment(EquipmentSlotType[] slotType) {
-		super(Rarity.VERY_RARE, EnchantmentType.ARMOR, slotType);
-	}
-	
-	public int getMinCost(int level) { 
-		return 10 + 20 * (level - 1); 	
-	}
-	
-	public int getMaxCost(int level) { 
-		return super.getMinCost(level) + 50; 	
-	}
-	
-	public int getMaxLevel() { 
-		return 3; 		
+		super(Rarity.RARE, EnchantmentType.ARMOR, slotType);
 	}
 
 	public void doPostHurt(LivingEntity attacked, Entity attacker, int level) {
@@ -39,12 +27,12 @@ public class IgniteEnchantment extends Enchantment {
 			if (attacker != null && attacker instanceof LivingEntity) {
 				((LivingEntity) attacker).addEffect(new EffectInstance(CAEffects.BURNS_EFFECT.get(), 20+level*60, level - 1));		
 			}
-
+			
 			if (entry != null)
 				entry.getValue().hurtAndBreak(2, attacked, (entity) -> entity.broadcastBreakEvent(entry.getKey()) );
 		}
 	}
-
+	
 	public static boolean shouldHit(int level, Random rand) {
 		if (level <= 0) {
 			return false;
@@ -53,4 +41,9 @@ public class IgniteEnchantment extends Enchantment {
 		}
 	}
 
+	@Override
+	public int getMaxLevel() { return 3; }
+	
+	@Override
+	public boolean isTreasureOnly() { return true; }
 }

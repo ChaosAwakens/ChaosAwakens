@@ -35,9 +35,6 @@ public class HeightmapTeleporter implements ITeleporter {
 		repositionEntity.apply(false);
 		BlockPos pos = entity.blockPosition();
 		entity.moveTo(pos.getX() + 0.5, destWorld.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ()), pos.getZ() + 0.5);
-		ChaosAwakens.LOGGER.debug("[PLACE]: status: " + destWorld.getChunk(entity.blockPosition()).getStatus()
-				+ " " + entity.blockPosition()
-				+ " " + destWorld.getHeightmapPos(Heightmap.Type.WORLD_SURFACE, entity.blockPosition()));
 		return entity;
 	}
 }

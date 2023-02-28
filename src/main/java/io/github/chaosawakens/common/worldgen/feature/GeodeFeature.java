@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -28,7 +27,6 @@ public class GeodeFeature extends Feature<GeodeFeatureConfig> {
 			for(float j = -radius; j <= radius; j++) {
 				for(float k = -radius; k <= radius; k++) {
 					float distance = Math.abs(i*i) + Math.abs(j*j) + Math.abs(k*k);
-					ChaosAwakens.LOGGER.debug(mutable.offset(i, j, k)+" "+distance+" "+(distance < radiusSqrd)+" "+(distance <= radiusSqrd + 2));
 					if(distance < radiusSqrd)
 						reader.setBlock(mutable.offset(i, j, k), Blocks.CAVE_AIR.defaultBlockState(), 3);
 					else if(distance <= borderSqrd)
