@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.items;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import io.github.chaosawakens.api.IAutoEnchantable;
 import io.github.chaosawakens.client.config.CAClientConfig;
@@ -22,9 +23,9 @@ import net.minecraft.world.Dimension;
 import net.minecraft.world.World;
 
 public class LavaEelArmorItem extends EnchantedArmorItem implements IAutoEnchantable {
-	private final EnchantmentData[] enchantments;
+	private final Supplier<EnchantmentData[]> enchantments;
 
-	public LavaEelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, EnchantmentData[] enchantments) {
+	public LavaEelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builderIn, Supplier<EnchantmentData[]> enchantments) {
 		super(materialIn, slot, builderIn, enchantments);
 		this.enchantments = enchantments;
 	}
@@ -62,6 +63,6 @@ public class LavaEelArmorItem extends EnchantedArmorItem implements IAutoEnchant
 
 	@Override
 	public EnchantmentData[] enchantments() {
-		return this.enchantments;
+		return this.enchantments.get();
 	}
 }

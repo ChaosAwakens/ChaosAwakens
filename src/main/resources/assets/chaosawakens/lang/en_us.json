@@ -176,6 +176,8 @@
 	
 	"enchantment.chaosawakens.ignite": "Ignite",
 	"enchantment.chaosawakens.ignite.description": "When applied onto an armor piece, anything that attacks the user will be afflicted with the burns effect for a short period of time.",
+	"enchantment.chaosawakens.hoplology": "Hoplology",
+	"enchantment.chaosawakens.hoplology.description": "Knowledge is power, get +1 protection bonus for every 10 experience levels",
 
 	"stat.chaosawakens.interact_with_crystal_crafting_table": "Interactions with Crystal Crafting Table",
 	"stat.chaosawakens.interact_with_crystal_furnace": "Interactions with Crystal Furnace",
