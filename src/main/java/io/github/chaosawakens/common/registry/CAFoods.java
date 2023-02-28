@@ -7,7 +7,7 @@ import net.minecraft.potion.Effects;
 public class CAFoods {
 	// MEATS
 	public static final Food FOOD_RAW_BACON = new Food.Builder().nutrition(5).saturationMod(1.5F).meat().build();
-	public static final Food FOOD_COOKED_BACON = new Food.Builder().nutrition(10).saturationMod(1.5F).meat().effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 2000, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 2000, 0), 1.0F).build();
+	public static final Food FOOD_COOKED_BACON = new Food.Builder().nutrition(10).saturationMod(1.5F).meat().build();
 	public static final Food FOOD_RAW_CORNDOG = new Food.Builder().nutrition(4).saturationMod(0.6F).build();
 	public static final Food FOOD_COOKED_CORNDOG = new Food.Builder().nutrition(8).saturationMod(1.5F).build();
 	public static final Food FOOD_CRAB_MEAT = new Food.Builder().nutrition(4).saturationMod(0.25F).meat().build();
