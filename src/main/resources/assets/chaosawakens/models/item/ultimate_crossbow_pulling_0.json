@@ -1,0 +1,6 @@
+{
+	"parent": "chaosawakens:item/ultimate_crossbow",
+	"textures": {
+		"layer0": "chaosawakens:item/ultimate_crossbow_pulling_0"
+	}
+}

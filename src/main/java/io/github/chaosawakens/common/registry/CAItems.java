@@ -29,7 +29,6 @@ import io.github.chaosawakens.common.items.LavaEelArmorItem;
 import io.github.chaosawakens.common.items.LeafyChickenEggItem;
 import io.github.chaosawakens.common.items.MantisClawItem;
 import io.github.chaosawakens.common.items.MinersDreamItem;
-import io.github.chaosawakens.common.items.MobestiaryItem;
 import io.github.chaosawakens.common.items.PinkTourmalineBucketItem;
 import io.github.chaosawakens.common.items.PoisonSwordItem;
 import io.github.chaosawakens.common.items.PopcornItem;
@@ -41,6 +40,7 @@ import io.github.chaosawakens.common.items.StructureItem;
 import io.github.chaosawakens.common.items.ThunderStaffItem;
 import io.github.chaosawakens.common.items.UltimateAxeItem;
 import io.github.chaosawakens.common.items.UltimateBowItem;
+import io.github.chaosawakens.common.items.UltimateCrossbowItem;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
 import io.github.chaosawakens.common.items.UltimateHoeItem;
 import io.github.chaosawakens.common.items.UltimatePickaxeItem;
@@ -83,9 +83,6 @@ public class CAItems {
 
 	// RARITIES
 	public static final Rarity RARITY_ROYALTY = Rarity.create(ChaosAwakens.MODID + ":royalty", TextFormatting.GOLD);
-
-	// MOBESTIARY
-	public static final RegistryObject<MobestiaryItem> MOBESTIARY = ITEMS.register("mobestiary", () -> new MobestiaryItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1).tab(CAItemGroups.EQUIPMENT)));
 
 	// MEATS
 	public static final RegistryObject<Item> BACON = ITEMS.register("bacon", () -> new Item(new Item.Properties().food(CAFoods.FOOD_RAW_BACON).tab(CAItemGroups.FOOD)));
@@ -207,6 +204,8 @@ public class CAItems {
 	public static final RegistryObject<Item> BIG_BERTHA_GUARD = ITEMS.register("big_bertha_guard", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> BIG_BERTHA_HANDLE = ITEMS.register("big_bertha_handle", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.ITEMS)));
 
+	public static final RegistryObject<LeafyChickenEggItem> LEAFY_CHICKEN_EGG = ITEMS.register("leafy_chicken_egg", () -> new LeafyChickenEggItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.ITEMS)));
+
 	// CARROT PIG
 	public static final RegistryObject<BeetrootOnAStickItem> BEETROOT_ON_A_STICK = ITEMS.register("beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(120).tab(CAItemGroups.ITEMS), 3));
 	public static final RegistryObject<BeetrootOnAStickItem> CRYSTAL_BEETROOT_ON_A_STICK = ITEMS.register("crystal_beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(80).tab(CAItemGroups.ITEMS), 5));
@@ -241,8 +240,6 @@ public class CAItems {
 	public static final RegistryObject<SignItem> PEACH_SIGN = ITEMS.register("peach_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.PEACH_SIGN.get(), CABlocks.PEACH_WALL_SIGN.get()));
 	public static final RegistryObject<SignItem> SKYWOOD_SIGN = ITEMS.register("skywood_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.SKYWOOD_SIGN.get(), CABlocks.SKYWOOD_WALL_SIGN.get()));
 
-	//DOORS
-	
 	//BOATS
 	public static final RegistryObject<CABoatItem> APPLE_BOAT = ITEMS.register("apple_boat", () -> new CABoatItem(CABoatWoodTypes.APPLE.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> CHERRY_BOAT = ITEMS.register("cherry_boat", () -> new CABoatItem(CABoatWoodTypes.CHERRY.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
@@ -252,7 +249,7 @@ public class CAItems {
 	public static final RegistryObject<CABoatItem> DENSEWOOD_BOAT = ITEMS.register("densewood_boat", () -> new CABoatItem(CABoatWoodTypes.DENSEWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> PEACH_BOAT = ITEMS.register("peach_boat", () -> new CABoatItem(CABoatWoodTypes.PEACH.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> SKYWOOD_BOAT = ITEMS.register("skywood_boat", () -> new CABoatItem(CABoatWoodTypes.SKYWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
-	
+
 	// TOOLS
 	// Ultimate
 	public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(EnumUtils.CAItemTier.TOOL_ULTIMATE, CACommonConfig.COMMON.ultimateSwordDamage.get() - 37, -2.4F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
@@ -267,6 +264,8 @@ public class CAItems {
 			new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.BLOCK_FORTUNE, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 	public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.POWER_ARROWS, 5), new EnchantmentData(Enchantments.FLAMING_ARROWS, 1), new EnchantmentData(Enchantments.PUNCH_ARROWS, 2), new EnchantmentData(Enchantments.INFINITY_ARROWS, 1)}));
+	public static final RegistryObject<UltimateCrossbowItem> ULTIMATE_CROSSBOW = ITEMS.register("ultimate_crossbow", () -> new UltimateCrossbowItem(new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
+			new EnchantmentData[]{new EnchantmentData(Enchantments.PIERCING, 4), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 	public static final RegistryObject<UltimateFishingRodItem> ULTIMATE_FISHING_ROD = ITEMS.register("ultimate_fishing_rod", () -> new UltimateFishingRodItem(new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
 			new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 
@@ -586,7 +585,6 @@ public class CAItems {
 	public static final RegistryObject<CASpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.TERMITE, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> TREE_FROG_SPAWN_EGG = ITEMS.register("tree_frog_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.TREE_FROG, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> LEAFY_CHICKEN_SPAWN_EGG = ITEMS.register("leafy_chicken_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.LEAFY_CHICKEN, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
-	public static final RegistryObject<LeafyChickenEggItem> LEAFY_CHICKEN_EGG = ITEMS.register("leafy_chicken_egg", () -> new LeafyChickenEggItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.HERCULES_BEETLE, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> DIMETRODON_SPAWN_EGG = ITEMS.register("dimetrodon_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.DIMETRODON, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> EMERALD_GATOR_SPAWN_EGG = ITEMS.register("emerald_gator_spawn_egg", () -> new CASpawnEggItem(CAEntityTypes.EMERALD_GATOR, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));

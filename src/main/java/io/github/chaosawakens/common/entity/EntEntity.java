@@ -565,7 +565,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditio
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+	protected SoundEvent getHurtSound(DamageSource damageSource) {
 		if (this.getEntType() == Types.ACACIA) return CASoundEvents.ACACIA_ENT_HURT.get();
 		else if (this.getEntType() != Types.BIRCH) return CASoundEvents.BIRCH_ENT_HURT.get();
 		else if (this.getEntType() == Types.CRIMSON) return CASoundEvents.CRIMSON_ENT_HURT.get();
@@ -591,11 +591,9 @@ public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditio
 	}
 
 	@Override
-	protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
-		if (!p_180429_2_.getMaterial().isLiquid()) this.playSound(CASoundEvents.ENT_WALK.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
+	protected void playStepSound(BlockPos blockPos, BlockState blockState) {
+		if (!blockState.getMaterial().isLiquid()) this.playSound(CASoundEvents.ENT_WALK.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
 	}
-	
-	
 
 	@Override
 	protected float getVoicePitch() {

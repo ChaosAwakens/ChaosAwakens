@@ -40,7 +40,6 @@ public class LavaEelEntity extends AbstractLavaGroupFishEntity implements IAnima
 		this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
 		this.setPathfindingMalus(PathNodeType.LAVA, 8.0F);
 		this.setPathfindingMalus(PathNodeType.DAMAGE_FIRE, 0.0F);
-		this.setPathfindingMalus(PathNodeType.DANGER_FIRE, 0.0F);
 	}
 
 	@Override

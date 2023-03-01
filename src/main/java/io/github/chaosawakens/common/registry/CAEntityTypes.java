@@ -44,6 +44,7 @@ import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
 import io.github.chaosawakens.common.entity.projectile.UltimateArrowEntity;
+import io.github.chaosawakens.common.entity.projectile.UltimateCrossbowArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.UltimateFishingBobberEntity;
 import io.github.chaosawakens.common.entity.robo.RoboEntity;
 import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
@@ -315,6 +316,10 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.<UltimateArrowEntity>of(UltimateArrowEntity::new, EntityClassification.MISC)
 					.sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_arrow").toString()));
+	public static final RegistryObject<EntityType<UltimateCrossbowArrowEntity>> ULTIMATE_CROSSBOW_ARROW = ENTITY_TYPES.register("ultimate_crossbow_arrow",
+			() -> EntityType.Builder.<UltimateCrossbowArrowEntity>of(UltimateCrossbowArrowEntity::new, EntityClassification.MISC)
+					.sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
+					.build(new ResourceLocation(ChaosAwakens.MODID, "ultimate_crossbow_arrow").toString()));
 	public static final RegistryObject<EntityType<IrukandjiArrowEntity>> IRUKANDJI_ARROW = ENTITY_TYPES.register("irukandji_arrow",
 			() -> EntityType.Builder.<IrukandjiArrowEntity>of(IrukandjiArrowEntity::new, EntityClassification.MISC)
 					.sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)

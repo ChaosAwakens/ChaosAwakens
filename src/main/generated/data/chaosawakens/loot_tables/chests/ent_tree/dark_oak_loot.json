@@ -226,6 +226,17 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "weight": 30,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ],
+          "name": "minecraft:cornflower"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 25,
           "functions": [
             {
@@ -289,7 +300,7 @@
     {
       "rolls": {
         "min": 0.0,
-        "max": 1.0,
+        "max": 2.0,
         "type": "minecraft:uniform"
       },
       "entries": [
@@ -298,10 +309,9 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.65
+              "chance": 0.85
             }
           ],
-          "weight": 110,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -319,10 +329,9 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.65
+              "chance": 0.85
             }
           ],
-          "weight": 70,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -340,31 +349,9 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.65
+              "chance": 0.35
             }
           ],
-          "weight": 50,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 0.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "chaosawakens:amethyst"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:random_chance",
-              "chance": 0.65
-            }
-          ],
-          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -382,10 +369,9 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.65
+              "chance": 0.35
             }
           ],
-          "weight": 25,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -396,7 +382,67 @@
               }
             }
           ],
-          "name": "chaosawakens:ruby"
+          "name": "chaosawakens:amethyst"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.75
+            }
+          ],
+          "weight": 25,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:diamond"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.85
+            }
+          ],
+          "weight": 25,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:gold_ingot"
         }
       ]
     }

@@ -4,4 +4,5 @@ import net.minecraft.state.IntegerProperty;
 
 public class CABlockStateProperties {
 	public static final IntegerProperty URANIUM_GLOW_STRENGTH = IntegerProperty.create("glow_strength", 0, 5);
+//	public static final BooleanProperty UNBREAKABLE = BooleanProperty.create("unbreakable");
 }
