@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TPT",
+    "UCU",
+    " U "
+  ],
+  "key": {
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    },
+    "P": {
+      "tag": "chaosawakens:ultimate_gear_handles"
+    },
+    "C": {
+      "item": "minecraft:crossbow"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ultimate_crossbow"
+  }
+}

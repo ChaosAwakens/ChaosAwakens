@@ -1076,6 +1076,17 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get()))
 				.unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get()))
 				.save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_CROSSBOW.get())
+				.define('T', CAItems.TITANIUM_INGOT.get())
+				.define('U', CAItems.URANIUM_INGOT.get())
+				.define('P', CATags.Items.ULTIMATE_GEAR_HANDLES)
+				.define('C', Items.CROSSBOW)
+				.pattern("TPT")
+				.pattern("UCU")
+				.pattern(" U ")
+				.unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get()))
+				.unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get()))
+				.save(consumer);
 
 		ShapedRecipeBuilder.shaped(CAItems.SKATE_STRING_BOW.get())
 				.define('C', CAItems.CRYSTAL_SHARD.get())
