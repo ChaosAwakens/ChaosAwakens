@@ -9,6 +9,7 @@ import io.github.chaosawakens.common.config.CACommonConfig;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
@@ -36,6 +37,11 @@ public class LavaEelArmorItem extends EnchantedArmorItem implements IAutoEnchant
 		if (player.level.dimension().location() == Dimension.NETHER.location() || player.isInLava() || player.isOnFire()) {
 			player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 100, 0, true, false));
 		}
+	}
+
+	@Override
+	public void inventoryTick(ItemStack pStack, World pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected) {
+		super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
 	}
 
 	@Override

@@ -235,6 +235,7 @@
 	"entity.chaosawakens.wood_fish": "Wood Fish",
 	"entity.chaosawakens.lava_eel": "Lava Eel",
 	"entity.chaosawakens.ultimate_arrow": "Ultimate Arrow",
+	"entity.chaosawakens.ultimate_crossbow_arrow": "Ultimate Crossbow Arrow",
 	"entity.chaosawakens.irukandji_arrow": "Irukandji Arrow",
 	"entity.chaosawakens.thunder_ball": "Thunder Charge",
 	"entity.chaosawakens.explosive_ball": "Explosive Charge",
@@ -251,7 +252,9 @@
 	"entity.minecraft.villager.archaeologist": "Archaeologist",
 	
 	"death.attack.burns": "%1$s burned up on the inside",
-    "death.attack.thorny_sun": "%1$s was prickled to deah by a Thorny Sun",
+    "death.attack.thorny_sun": "%1$s was prickled to death by a Thorny Sun",
+	"death.attack.ignition": "%1$s was ignited trying to hurt %2$s",
+	"death.attack.ignition.item": "%1$s was ignited while attempting to hurt %2$s",
     
 	"item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
 	"item.chaosawakens.apple_ent_spawn_egg": "Apple Ent Spawn Egg",
@@ -512,6 +515,7 @@
 
 	"item.chaosawakens.ultimate_sword": "The Ultimate Sword",
 	"item.chaosawakens.ultimate_bow": "The Ultimate Bow",
+	"item.chaosawakens.ultimate_crossbow": "The Ultimate Crossbow",
 	"item.chaosawakens.ultimate_fishing_rod": "The Ultimate Fishing Rod",
 	"item.chaosawakens.ultimate_pickaxe": "The Ultimate Pickaxe",
 	"item.chaosawakens.ultimate_shovel": "The Ultimate Shovel",
@@ -1365,9 +1369,6 @@
 	
 	"misc.chaosawakens.empty_inventory": "Empty inventory required to acces Crystalworld!",
 	"misc.chaosawakens.inaccessible_dimension": "This dimension hasn't been added to the mod yet!",
-	
-	"death.attack.ignition": "%1$s was ignited trying to hurt %2$s",
-	"death.attack.ignition.item": "%1$s was ignited while attempting to hurt %2$s",
 
 	"subtitles.chaosawakens.entity.emerald_gator.attack": "Emerald Gator bites",
 	"subtitles.chaosawakens.entity.emerald_gator.death": "Emerald Gator dies",

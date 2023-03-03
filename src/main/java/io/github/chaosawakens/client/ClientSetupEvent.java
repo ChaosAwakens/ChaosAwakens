@@ -40,6 +40,7 @@ import io.github.chaosawakens.client.entity.render.ThunderStaffProjectileRendere
 import io.github.chaosawakens.client.entity.render.TreeFrogEntityRenderer;
 import io.github.chaosawakens.client.entity.render.UltimateAppleCowEntityRenderer;
 import io.github.chaosawakens.client.entity.render.UltimateArrowProjectileRenderer;
+import io.github.chaosawakens.client.entity.render.UltimateCrossbowArrowProjectileRenderer;
 import io.github.chaosawakens.client.entity.render.UltimateBobberProjectileRenderer;
 import io.github.chaosawakens.client.entity.render.WaspEntityRenderer;
 import io.github.chaosawakens.client.entity.render.WhaleEntityRenderer;
@@ -50,6 +51,7 @@ import io.github.chaosawakens.common.entity.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.nonliving.CAScreenShakeEntity;
 import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
 import io.github.chaosawakens.common.items.EnderScaleArmorItem;
+import io.github.chaosawakens.common.items.UltimateCrossbowItem;
 import io.github.chaosawakens.common.items.UltimateFishingRodItem;
 import io.github.chaosawakens.common.particles.FartParticle.FartParticleProvider;
 import io.github.chaosawakens.common.particles.RoboSparkParticle.RoboSparkParticleProvider;
@@ -71,6 +73,7 @@ import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
@@ -285,6 +288,7 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TERMITE.get(), (manager) -> new AggressiveAntEntityRenderer(manager, CAEntityTypes.TERMITE.getId().getPath()));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TREE_FROG.get(), TreeFrogEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_CROSSBOW_ARROW.get(), UltimateCrossbowArrowProjectileRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowProjectileRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EXPLOSIVE_BALL.get(), RayGunProjectileRenderer::new);
@@ -525,18 +529,22 @@ public class ClientSetupEvent {
 						return living.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - living.getUseItemRemainingTicks()) / 8.0F;
 					}
 				});
-/*		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("pull"),
+		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
 					if (living == null) {
 						return 0.0F;
 					} else {
-						return living.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - living.getUseItemRemainingTicks()) / 8.0F;
+						return UltimateCrossbowItem.isCharged(stack) ? 0.0F : (float)(stack.getUseDuration() - living.getUseItemRemainingTicks()) / (float)UltimateCrossbowItem.getChargeDuration(stack);
 					}
-				});*/
+				});
 		ItemModelsProperties.register(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pulling"),
 				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);
-/*		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("pulling"),
-				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);*/
+		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("pulling"),
+				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack && !UltimateCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("charged"),
+				(stack, world, living) -> living != null && UltimateCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("firework"),
+				(stack, world, living) -> living != null && UltimateCrossbowItem.isCharged(stack) && UltimateCrossbowItem.containsChargedProjectile(stack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F);
 		ItemModelsProperties.register(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
 					if (living == null) {

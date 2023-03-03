@@ -184,7 +184,7 @@
     {
       "rolls": {
         "min": 0.0,
-        "max": 1.0,
+        "max": 2.0,
         "type": "minecraft:uniform"
       },
       "entries": [
@@ -193,16 +193,15 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.35
+              "chance": 0.85
             }
           ],
-          "weight": 110,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 0.0,
-                "max": 1.0,
+                "max": 2.0,
                 "type": "minecraft:uniform"
               }
             }
@@ -214,16 +213,15 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.35
+              "chance": 0.85
             }
           ],
-          "weight": 70,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 0.0,
-                "max": 1.0,
+                "max": 2.0,
                 "type": "minecraft:uniform"
               }
             }
@@ -238,18 +236,17 @@
               "chance": 0.35
             }
           ],
-          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 0.0,
-                "max": 1.0,
+                "max": 2.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "chaosawakens:amethyst"
+          "name": "chaosawakens:tigers_eye"
         },
         {
           "type": "minecraft:item",
@@ -259,18 +256,17 @@
               "chance": 0.35
             }
           ],
-          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 0.0,
-                "max": 1.0,
+                "max": 2.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "chaosawakens:tigers_eye"
+          "name": "chaosawakens:amethyst"
         }
       ]
     }

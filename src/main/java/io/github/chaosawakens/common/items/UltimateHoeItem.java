@@ -49,6 +49,4 @@ public class UltimateHoeItem extends EnchantedHoeItem {
 		}
 		return ActionResultType.PASS;
 	}
-	
-	
 }

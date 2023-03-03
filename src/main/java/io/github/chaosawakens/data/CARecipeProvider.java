@@ -1076,6 +1076,17 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get()))
 				.unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get()))
 				.save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_CROSSBOW.get())
+				.define('T', CAItems.TITANIUM_INGOT.get())
+				.define('U', CAItems.URANIUM_INGOT.get())
+				.define('P', CATags.Items.ULTIMATE_GEAR_HANDLES)
+				.define('C', Items.CROSSBOW)
+				.pattern("TPT")
+				.pattern("UCU")
+				.pattern(" U ")
+				.unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get()))
+				.unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get()))
+				.save(consumer);
 
 		ShapedRecipeBuilder.shaped(CAItems.SKATE_STRING_BOW.get())
 				.define('C', CAItems.CRYSTAL_SHARD.get())
@@ -1172,20 +1183,6 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE))
 				.unlockedBy("has_" + Tags.Items.GEMS_DIAMOND.getName(), has(Tags.Items.GEMS_DIAMOND))
 				.unlockedBy("has_" + CATags.Items.ULTIMATE_GEAR_HANDLES.getName(), has(CATags.Items.ULTIMATE_GEAR_HANDLES))
-				.save(consumer);
-		ShapedRecipeBuilder.shaped(CAItems.PRISMATIC_REAPER.get())
-				.define('S', Tags.Items.RODS_WOODEN)
-				.define('A', CAItems.AMETHYST.get())
-				.define('D', Tags.Items.GEMS_DIAMOND)
-				.define('E', Tags.Items.GEMS_EMERALD)
-				.define('R', CAItems.RUBY.get())
-				.pattern("ADE")
-				.pattern("RS ")
-				.pattern("S  ")
-				.unlockedBy("has_" + CAItems.AMETHYST.get().asItem(), has(CAItems.AMETHYST.get()))
-				.unlockedBy("has_" + Tags.Items.GEMS_DIAMOND.getName(), has(Tags.Items.GEMS_DIAMOND))
-				.unlockedBy("has_" + Tags.Items.GEMS_EMERALD.getName(), has(Tags.Items.GEMS_EMERALD))
-				.unlockedBy("has_" + CAItems.RUBY.get().asItem(), has(CAItems.RUBY.get()))
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(CAItems.BASILISK_SWORD.get())
 		        .define('B', CAItems.BASILISK_SCALE.get())

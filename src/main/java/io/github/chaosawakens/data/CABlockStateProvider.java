@@ -83,12 +83,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.stairsBlock(CABlocks.CRACKED_MARBLE_BRICK_STAIRS.get(), chaosRL("cracked_marble_bricks"));
 		this.stairsBlock(CABlocks.MOSSY_MARBLE_BRICK_STAIRS.get(), chaosRL("mossy_marble_bricks"));
 		this.stairsBlock(CABlocks.POLISHED_MARBLE_STAIRS.get(), chaosRL("polished_marble_block"));
-		this.wallBlock(CABlocks.MARBLE_WALL.get(), "marble", chaosRL("marble_block"));
-		this.wallBlock(CABlocks.MARBLE_BRICK_WALL.get(), "marble_brick", chaosRL("marble_bricks"));
-		this.wallBlock(CABlocks.CHISELED_MARBLE_BRICK_WALL.get(), "chiseled_marble", chaosRL("chiseled_marble_bricks"));
-		this.wallBlock(CABlocks.CRACKED_MARBLE_BRICK_WALL.get(), "cracked_marble", chaosRL("cracked_marble_bricks"));
-		this.wallBlock(CABlocks.MOSSY_MARBLE_BRICK_WALL.get(), "mossy_marble", chaosRL("mossy_marble_bricks"));
-		this.wallBlock(CABlocks.POLISHED_MARBLE_WALL.get(), "polished_marble", chaosRL("polished_marble_block"));
+		this.wallBlock(CABlocks.MARBLE_WALL.get(), chaosRL("marble_block"));
+		this.wallBlock(CABlocks.MARBLE_BRICK_WALL.get(), chaosRL("marble_bricks"));
+		this.wallBlock(CABlocks.CHISELED_MARBLE_BRICK_WALL.get(), chaosRL("chiseled_marble_bricks"));
+		this.wallBlock(CABlocks.CRACKED_MARBLE_BRICK_WALL.get(), chaosRL("cracked_marble_bricks"));
+		this.wallBlock(CABlocks.MOSSY_MARBLE_BRICK_WALL.get(), chaosRL("mossy_marble_bricks"));
+		this.wallBlock(CABlocks.POLISHED_MARBLE_WALL.get(), chaosRL("polished_marble_block"));
 
 		this.simpleBlock(CABlocks.LIMESTONE.get());
 		this.simpleBlock(CABlocks.LIMESTONE_BRICKS.get());
@@ -109,12 +109,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.stairsBlock(CABlocks.CRACKED_LIMESTONE_BRICK_STAIRS.get(), chaosRL("cracked_limestone_bricks"));
 		this.stairsBlock(CABlocks.MOSSY_LIMESTONE_BRICK_STAIRS.get(), chaosRL("mossy_limestone_bricks"));
 		this.stairsBlock(CABlocks.POLISHED_LIMESTONE_STAIRS.get(), chaosRL("polished_limestone_block"));
-		this.wallBlock(CABlocks.LIMESTONE_WALL.get(), "limestone", chaosRL("limestone_block"));
-		this.wallBlock(CABlocks.LIMESTONE_BRICK_WALL.get(), "limestone_brick", chaosRL("limestone_bricks"));
-		this.wallBlock(CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get(), "chiseled_limestone", chaosRL("chiseled_limestone_bricks"));
-		this.wallBlock(CABlocks.CRACKED_LIMESTONE_BRICK_WALL.get(), "cracked_limestone", chaosRL("cracked_limestone_bricks"));
-		this.wallBlock(CABlocks.MOSSY_LIMESTONE_BRICK_WALL.get(), "mossy_limestone", chaosRL("mossy_limestone_bricks"));
-		this.wallBlock(CABlocks.POLISHED_LIMESTONE_WALL.get(), "polished_limestone", chaosRL("polished_limestone_block"));
+		this.wallBlock(CABlocks.LIMESTONE_WALL.get(), chaosRL("limestone_block"));
+		this.wallBlock(CABlocks.LIMESTONE_BRICK_WALL.get(), chaosRL("limestone_bricks"));
+		this.wallBlock(CABlocks.CHISELED_LIMESTONE_BRICK_WALL.get(), chaosRL("chiseled_limestone_bricks"));
+		this.wallBlock(CABlocks.CRACKED_LIMESTONE_BRICK_WALL.get(), chaosRL("cracked_limestone_bricks"));
+		this.wallBlock(CABlocks.MOSSY_LIMESTONE_BRICK_WALL.get(), chaosRL("mossy_limestone_bricks"));
+		this.wallBlock(CABlocks.POLISHED_LIMESTONE_WALL.get(), chaosRL("polished_limestone_block"));
 		
 		this.simpleBlock(CABlocks.RHINESTONE.get());
 		this.simpleBlock(CABlocks.RHINESTONE_BRICKS.get());
@@ -135,12 +135,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.stairsBlock(CABlocks.CRACKED_RHINESTONE_BRICK_STAIRS.get(), chaosRL("cracked_rhinestone_bricks"));
 		this.stairsBlock(CABlocks.MOSSY_RHINESTONE_BRICK_STAIRS.get(), chaosRL("mossy_rhinestone_bricks"));
 		this.stairsBlock(CABlocks.POLISHED_RHINESTONE_STAIRS.get(), chaosRL("polished_rhinestone_block"));
-		this.wallBlock(CABlocks.RHINESTONE_WALL.get(), "rhinestone", chaosRL("rhinestone_block"));
-		this.wallBlock(CABlocks.RHINESTONE_BRICK_WALL.get(), "rhinestone_brick", chaosRL("rhinestone_bricks"));
-		this.wallBlock(CABlocks.CHISELED_RHINESTONE_BRICK_WALL.get(), "chiseled_rhinestone", chaosRL("chiseled_rhinestone_bricks"));
-		this.wallBlock(CABlocks.CRACKED_RHINESTONE_BRICK_WALL.get(), "cracked_rhinestone", chaosRL("cracked_rhinestone_bricks"));
-		this.wallBlock(CABlocks.MOSSY_RHINESTONE_BRICK_WALL.get(), "mossy_rhinestone", chaosRL("mossy_rhinestone_bricks"));
-		this.wallBlock(CABlocks.POLISHED_RHINESTONE_WALL.get(), "polished_rhinestone", chaosRL("polished_rhinestone_block"));
+		this.wallBlock(CABlocks.RHINESTONE_WALL.get(), chaosRL("rhinestone_block"));
+		this.wallBlock(CABlocks.RHINESTONE_BRICK_WALL.get(), chaosRL("rhinestone_bricks"));
+		this.wallBlock(CABlocks.CHISELED_RHINESTONE_BRICK_WALL.get(), chaosRL("chiseled_rhinestone_bricks"));
+		this.wallBlock(CABlocks.CRACKED_RHINESTONE_BRICK_WALL.get(), chaosRL("cracked_rhinestone_bricks"));
+		this.wallBlock(CABlocks.MOSSY_RHINESTONE_BRICK_WALL.get(), chaosRL("mossy_rhinestone_bricks"));
+		this.wallBlock(CABlocks.POLISHED_RHINESTONE_WALL.get(), chaosRL("polished_rhinestone_block"));
 
 		this.simpleBlock(CABlocks.ROBO_BLOCK_I.get());
 		this.logBlock(CABlocks.ROBO_BLOCK_V.get());
@@ -430,15 +430,15 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.fenceGateBlock(CABlocks.PEACH_FENCE_GATE.get(), chaosRL("peach_planks"));
 		this.fenceGateBlock(CABlocks.SKYWOOD_FENCE_GATE.get(), chaosRL("skywood_planks"));
 		this.fenceGateBlock(CABlocks.CRYSTAL_FENCE_GATE.get(), chaosRL("crystal_planks"));
-		this.pressurePlateBlock(CABlocks.APPLE_PRESSURE_PLATE.get(), "apple_pressure_plate", chaosRL("apple_planks"));
-		this.pressurePlateBlock(CABlocks.CHERRY_PRESSURE_PLATE.get(), "cherry_pressure_plate", chaosRL("cherry_planks"));
-		this.pressurePlateBlock(CABlocks.DUPLICATION_PRESSURE_PLATE.get(), "duplication_pressure_plate", chaosRL("duplication_planks"));
-		this.pressurePlateBlock(CABlocks.GINKGO_PRESSURE_PLATE.get(), "ginkgo_pressure_plate", chaosRL("ginkgo_planks"));
-		this.pressurePlateBlock(CABlocks.MESOZOIC_PRESSURE_PLATE.get(), "mesozoic_pressure_plate", chaosRL("mesozoic_planks"));
-		this.pressurePlateBlock(CABlocks.DENSEWOOD_PRESSURE_PLATE.get(), "densewood_pressure_plate", chaosRL("densewood_planks"));
-		this.pressurePlateBlock(CABlocks.PEACH_PRESSURE_PLATE.get(), "peach_pressure_plate", chaosRL("peach_planks"));
-		this.pressurePlateBlock(CABlocks.SKYWOOD_PRESSURE_PLATE.get(), "skywood_pressure_plate", chaosRL("skywood_planks"));
-		this.pressurePlateBlock(CABlocks.CRYSTAL_PRESSURE_PLATE.get(), "crystal_pressure_plate", chaosRL("crystal_planks"));
+		this.pressurePlateBlock(CABlocks.APPLE_PRESSURE_PLATE.get(), chaosRL("apple_planks"));
+		this.pressurePlateBlock(CABlocks.CHERRY_PRESSURE_PLATE.get(), chaosRL("cherry_planks"));
+		this.pressurePlateBlock(CABlocks.DUPLICATION_PRESSURE_PLATE.get(), chaosRL("duplication_planks"));
+		this.pressurePlateBlock(CABlocks.GINKGO_PRESSURE_PLATE.get(), chaosRL("ginkgo_planks"));
+		this.pressurePlateBlock(CABlocks.MESOZOIC_PRESSURE_PLATE.get(), chaosRL("mesozoic_planks"));
+		this.pressurePlateBlock(CABlocks.DENSEWOOD_PRESSURE_PLATE.get(), chaosRL("densewood_planks"));
+		this.pressurePlateBlock(CABlocks.PEACH_PRESSURE_PLATE.get(), chaosRL("peach_planks"));
+		this.pressurePlateBlock(CABlocks.SKYWOOD_PRESSURE_PLATE.get(), chaosRL("skywood_planks"));
+		this.pressurePlateBlock(CABlocks.CRYSTAL_PRESSURE_PLATE.get(), chaosRL("crystal_planks"));
 		this.buttonBlock(CABlocks.APPLE_BUTTON.get(), chaosRL("apple_planks"));
 		this.buttonBlock(CABlocks.CHERRY_BUTTON.get(), chaosRL("cherry_planks"));
 		this.buttonBlock(CABlocks.DUPLICATION_BUTTON.get(), chaosRL("duplication_planks"));
@@ -592,15 +592,16 @@ public class CABlockStateProvider extends BlockStateProvider {
 	public void woodBlock(RotatedPillarBlock block, ResourceLocation texture) {
 		axisBlock(block, texture, texture);
 	}
-	
+
 	public void farmland(GenericFarmlandBlock farm) {
 		ModelFile normal = models().getExistingFile(chaosRL(farm.getRegistryName().getPath()));
 		ModelFile moist = models().getExistingFile(chaosRL(farm.getRegistryName().getPath() + "_moist"));
 		getVariantBuilder(farm).forAllStatesExcept(state -> ConfiguredModel.builder()
 				.modelFile(state.getValue(GenericFarmlandBlock.MOISTURE) == 7 ? moist : normal).build());
 	}
-	public void pressurePlateBlock(PressurePlateBlock block, String name, ResourceLocation all) {
-		pressurePlateBlockInternal(block, name, all);
+
+	public void pressurePlateBlock(PressurePlateBlock block, ResourceLocation all) {
+		pressurePlateBlockInternal(block, name(block), all);
 	}
 
 	private void pressurePlateBlockInternal(PressurePlateBlock block, String baseName, ResourceLocation all) {

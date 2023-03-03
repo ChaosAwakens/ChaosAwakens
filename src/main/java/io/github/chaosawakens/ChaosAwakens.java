@@ -3,6 +3,9 @@ package io.github.chaosawakens;
 import java.util.Locale;
 import java.util.Optional;
 
+import net.minecraft.item.Items;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
@@ -210,6 +213,23 @@ public class ChaosAwakens {
 				@Override
 				public ItemStack makeIcon() {
 					return new ItemStack(CAItems.DEV_ITEM1.get());
+				}   /**
+				 * Fills {@code items} with all items that are in this group.
+				 */
+
+				@OnlyIn(Dist.CLIENT)
+				public void fillItemList(NonNullList<ItemStack> items) {
+					items.add(Items.SPAWNER.getDefaultInstance());
+					items.add(Items.COMMAND_BLOCK.getDefaultInstance());
+					items.add(Items.REPEATING_COMMAND_BLOCK.getDefaultInstance());
+					items.add(Items.CHAIN_COMMAND_BLOCK.getDefaultInstance());
+					items.add(Items.STRUCTURE_BLOCK.getDefaultInstance());
+					items.add(Items.STRUCTURE_VOID.getDefaultInstance());
+					items.add(Items.BARRIER.getDefaultInstance());
+					items.add(Items.JIGSAW.getDefaultInstance());
+					items.add(Items.DEBUG_STICK.getDefaultInstance());
+
+					super.fillItemList(items);
 				}
 			};
 		}

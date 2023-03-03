@@ -12,7 +12,6 @@ import io.github.chaosawakens.common.blocks.DoubleCrystalPlantBlock;
 import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
 import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
 import io.github.chaosawakens.common.blocks.MesozoicVinesTopBlock;
-import io.github.chaosawakens.common.items.MobestiaryItem;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.AbstractButtonBlock;
@@ -172,9 +171,7 @@ public class CAItemModelProvider extends ItemModelProvider {
 	            .override().predicate(zombieRL, 1.0F).model(zombie).end();
             } else if (item.getId().getPath().contains("_spawn_egg")) {
 				getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/spawn_eggs/" + name.replaceAll("_spawn_egg", ""));
-            } else if (item.get() instanceof MobestiaryItem) {
-				getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/book_" + name);
-			} else if (item.getId().getPath().contains("boat")) {
+            } else if (item.getId().getPath().contains("boat")) {
             	getBuilder(item.getId().getPath()).parent(parentGenerated).texture("layer0", ItemModelProvider.ITEM_FOLDER + "/boats/" + name.replaceAll("_boat", ""));
             } else {
                 if (!existingFileHelper.exists(getItemResourceLocation(name), TEXTURE) || existingFileHelper.exists(getItemResourceLocation(name), MODEL)) continue;

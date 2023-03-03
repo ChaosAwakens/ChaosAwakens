@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 
 public class IgniteEnchantment extends Enchantment {
-
 	public IgniteEnchantment(EquipmentSlotType[] slotType) {
 		super(Rarity.RARE, EnchantmentType.ARMOR, slotType);
 	}
@@ -42,8 +41,12 @@ public class IgniteEnchantment extends Enchantment {
 	}
 
 	@Override
-	public int getMaxLevel() { return 3; }
+	public int getMaxLevel() {
+		return 3;
+	}
 	
 	@Override
-	public boolean isTreasureOnly() { return true; }
+	public boolean isTreasureOnly() {
+		return true;
+	}
 }
