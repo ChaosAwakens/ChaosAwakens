@@ -39,7 +39,7 @@ public class SurfaceStructure extends Structure<NoFeatureConfig> {
 	}
 	
 	public SurfaceStructure(Codec<NoFeatureConfig> codec, String path) {
-		this(codec, path, new BlockPos(0, 1, 0).immutable());
+		this(codec, path, new BlockPos(0, 0, 0).immutable());
 	}
 
 	@Override

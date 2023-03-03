@@ -17,6 +17,7 @@ public class CAConfiguredStructures {
 	public static StructureFeature<?, ?> CONFIGURED_OAK_ENT_TREE = CAStructures.OAK_ENT_TREE.get().configured(IFeatureConfig.NONE);
 	public static StructureFeature<?, ?> CONFIGURED_SPRUCE_ENT_TREE = CAStructures.SPRUCE_ENT_TREE.get().configured(IFeatureConfig.NONE);
 	public static StructureFeature<?, ?> CONFIGURED_WARPED_ENT_TREE = CAStructures.WARPED_ENT_TREE.get().configured(IFeatureConfig.NONE);
+	public static StructureFeature<?, ?> CONFIGURED_GINKGO_ENT_TREE = CAStructures.GINKGO_ENT_TREE.get().configured(IFeatureConfig.NONE);
 	public static StructureFeature<?, ?> CONFIGURED_WASP_DUNGEON = CAStructures.WASP_DUNGEON.get().configured(IFeatureConfig.NONE);
 	public static StructureFeature<?, ?> CONFIGURED_MINING_WASP_DUNGEON = CAStructures.MINING_WASP_DUNGEON.get().configured(IFeatureConfig.NONE);
 
@@ -30,6 +31,7 @@ public class CAConfiguredStructures {
 		Registry.register(registry, new ResourceLocation(ChaosAwakens.MODID, "configured_oak_ent_tree"), CONFIGURED_OAK_ENT_TREE);
 		Registry.register(registry, new ResourceLocation(ChaosAwakens.MODID, "configured_spruce_ent_tree"), CONFIGURED_SPRUCE_ENT_TREE);
 		Registry.register(registry, new ResourceLocation(ChaosAwakens.MODID, "configured_warped_ent_tree"), CONFIGURED_WARPED_ENT_TREE);
+		Registry.register(registry, new ResourceLocation(ChaosAwakens.MODID, "configured_ginkgo_ent_tree"), CONFIGURED_GINKGO_ENT_TREE);
 
 		Registry.register(registry, new ResourceLocation(ChaosAwakens.MODID, "configured_wasp_dungeon"), CONFIGURED_WASP_DUNGEON);
 		Registry.register(registry, new ResourceLocation(ChaosAwakens.MODID, "configured_mining_wasp_dungeon"), CONFIGURED_MINING_WASP_DUNGEON);
@@ -42,6 +44,7 @@ public class CAConfiguredStructures {
 		FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.OAK_ENT_TREE.get(), CONFIGURED_OAK_ENT_TREE);
 		FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.SPRUCE_ENT_TREE.get(), CONFIGURED_SPRUCE_ENT_TREE);
 		FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.WARPED_ENT_TREE.get(), CONFIGURED_WARPED_ENT_TREE);
+		FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.GINKGO_ENT_TREE.get(), CONFIGURED_GINKGO_ENT_TREE);
 
 		FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.WASP_DUNGEON.get(), CONFIGURED_WASP_DUNGEON);
 		FlatGenerationSettings.STRUCTURE_FEATURES.put(CAStructures.MINING_WASP_DUNGEON.get(), CONFIGURED_MINING_WASP_DUNGEON);

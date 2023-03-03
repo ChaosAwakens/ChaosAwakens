@@ -240,7 +240,7 @@ public class CATagProvider extends BlockTagsProvider {
 
 		@Override
 		protected void addTags() {
-			this.tag(CATags.EntityTypes.CRITTER_CAGE_BLACKLISTED).add(EntityType.ENDER_DRAGON, EntityType.WITHER, CAEntityTypes.ACACIA_ENT.get(), CAEntityTypes.BIRCH_ENT.get(), CAEntityTypes.CRIMSON_ENT.get(), CAEntityTypes.DARK_OAK_ENT.get(), CAEntityTypes.JUNGLE_ENT.get(), CAEntityTypes.OAK_ENT.get(), CAEntityTypes.SPRUCE_ENT.get(), CAEntityTypes.WARPED_ENT.get(), CAEntityTypes.HERCULES_BEETLE.get(), CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), CAEntityTypes.ROBO_POUNDER.get(), CAEntityTypes.ROBO_WARRIOR.get());
+			this.tag(CATags.EntityTypes.CRITTER_CAGE_BLACKLISTED).add(EntityType.ENDER_DRAGON, EntityType.WITHER, CAEntityTypes.ACACIA_ENT.get(), CAEntityTypes.BIRCH_ENT.get(), CAEntityTypes.CRIMSON_ENT.get(), CAEntityTypes.DARK_OAK_ENT.get(), CAEntityTypes.JUNGLE_ENT.get(), CAEntityTypes.OAK_ENT.get(), CAEntityTypes.SPRUCE_ENT.get(), CAEntityTypes.WARPED_ENT.get(), CAEntityTypes.GINKGO_ENT.get(), CAEntityTypes.HERCULES_BEETLE.get(), CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), CAEntityTypes.ROBO_POUNDER.get(), CAEntityTypes.ROBO_WARRIOR.get());
 		}
 	}
 }

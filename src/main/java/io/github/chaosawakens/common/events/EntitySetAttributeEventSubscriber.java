@@ -50,6 +50,7 @@ public class EntitySetAttributeEventSubscriber {
 		event.put(CAEntityTypes.SPRUCE_ENT.get(), EntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.CRIMSON_ENT.get(), EntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.WARPED_ENT.get(), EntEntity.setCustomAttributes().build());
+		event.put(CAEntityTypes.GINKGO_ENT.get(), EntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.RED_ANT.get(), AggressiveAntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.BROWN_ANT.get(), AntEntity.setCustomAttributes().build());
 		event.put(CAEntityTypes.RAINBOW_ANT.get(), AntEntity.setCustomAttributes().build());

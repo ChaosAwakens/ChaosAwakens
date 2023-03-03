@@ -368,12 +368,16 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.simpleBlock(CABlocks.MESOZOIC_PLANKS.get());
 		this.simpleBlock(CABlocks.MESOZOIC_LEAVES.get());
 		this.leafCarpetBlock(CABlocks.MESOZOIC_LEAF_CARPET.get(), chaosRL("mesozoic_leaves"));
+		this.logBlock(CABlocks.STRIPPED_MESOZOIC_LOG.get());
+		this.woodBlock(CABlocks.STRIPPED_MESOZOIC_WOOD.get(), chaosRL("stripped_mesozoic_log"));
 		this.cross(CABlocks.DENSEWOOD_SAPLING.get());
 		this.logBlock(CABlocks.DENSEWOOD_LOG.get());
 		this.woodBlock(CABlocks.DENSEWOOD_WOOD.get(), chaosRL("densewood_log"));
 		this.simpleBlock(CABlocks.DENSEWOOD_PLANKS.get());
 		this.simpleBlock(CABlocks.DENSEWOOD_LEAVES.get());
 		this.leafCarpetBlock(CABlocks.DENSEWOOD_LEAF_CARPET.get(), chaosRL("densewood_leaves"));
+		this.logBlock(CABlocks.STRIPPED_DENSEWOOD_LOG.get());
+		this.woodBlock(CABlocks.STRIPPED_DENSEWOOD_WOOD.get(), chaosRL("stripped_densewood_log"));
 		this.logBlock(CABlocks.PEACH_LOG.get());
 		this.woodBlock(CABlocks.PEACH_WOOD.get(), chaosRL("peach_log"));
 		this.simpleBlock(CABlocks.PEACH_PLANKS.get());

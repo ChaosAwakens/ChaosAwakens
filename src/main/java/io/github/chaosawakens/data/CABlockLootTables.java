@@ -48,7 +48,8 @@ public class CABlockLootTables extends BlockLootTables {
 	private static final ILootCondition.IBuilder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
 	private static final ILootCondition.IBuilder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
 	private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[] { 0.05F, 0.0625F, 0.083333336F, 0.1F };
-
+	private static final float[] JUNGLE_LEAVES_SAPLING_CHANGES = new float[]{0.025F, 0.027777778F, 0.03125F, 0.041666668F, 0.1F};
+	
 	@Override
 	protected void addTables() {
 		// Ores
@@ -146,9 +147,9 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.APPLE_LEAVES.get(), createFruitLeavesDrops(CABlocks.APPLE_LEAVES.get(), CABlocks.APPLE_SAPLING.get(), Items.APPLE, NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.CHERRY_LEAVES.get(), createFruitLeavesDrops(CABlocks.CHERRY_LEAVES.get(), CABlocks.CHERRY_SAPLING.get(), CAItems.CHERRIES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.DUPLICATION_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.DUPLICATION_LEAVES.get()));
-		add(CABlocks.GINKGO_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.GINKGO_LEAVES.get()));
-		add(CABlocks.MESOZOIC_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.MESOZOIC_LEAVES.get()));
-		add(CABlocks.DENSEWOOD_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.DENSEWOOD_LEAVES.get()));
+		add(CABlocks.GINKGO_LEAVES.get(), createLeavesDrops(CABlocks.GINKGO_LEAVES.get(), CABlocks.GINKGO_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(CABlocks.MESOZOIC_LEAVES.get(), createLeavesDrops(CABlocks.MESOZOIC_LEAVES.get(), CABlocks.MESOZOIC_SAPLING.get(), JUNGLE_LEAVES_SAPLING_CHANGES));
+		add(CABlocks.DENSEWOOD_LEAVES.get(), createLeavesDrops(CABlocks.DENSEWOOD_LEAVES.get(), CABlocks.DENSEWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.PEACH_LEAVES.get(), createFruitLeavesDrops(CABlocks.PEACH_LEAVES.get(), CABlocks.PEACH_SAPLING.get(), CAItems.PEACH.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 		add(CABlocks.SKYWOOD_LEAVES.get(), createSilkTouchOnlyTable(CABlocks.SKYWOOD_LEAVES.get()));
 
@@ -160,10 +161,10 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.UNSTABLE_ANT_NEST.get());
 
 		// Dense Blocks
-		add(CABlocks.DENSE_GRASS_BLOCK.get(), (silk) -> createSilkTouchOnlyTable(CABlocks.DENSE_DIRT.get()));
+		add(CABlocks.DENSE_GRASS_BLOCK.get(), (block) -> createSingleItemTableWithSilkTouch(block, CABlocks.DENSE_DIRT.get()));
 		dropSelf(CABlocks.DENSE_RED_ANT_NEST.get());
 		dropSelf(CABlocks.DENSE_DIRT.get());
-		add(CABlocks.DENSE_FARMLAND.get(), (silk) -> createSilkTouchOnlyTable(CABlocks.DENSE_DIRT.get()));
+		add(CABlocks.DENSE_FARMLAND.get(), (block) -> createSingleItemTableWithSilkTouch(block, CABlocks.DENSE_DIRT.get()));
 		add(CABlocks.DENSE_GRASS.get(), (plant) -> createShearsOnlyDrop(CABlocks.DENSE_GRASS.get()));
 		add(CABlocks.TALL_DENSE_GRASS.get(), (plant) -> createShearsOnlyDrop(CABlocks.TALL_DENSE_GRASS.get()));
 		add(CABlocks.CRYSTAL_GRASS.get(), (plant) -> createShearsOnlyDrop(CABlocks.CRYSTAL_GRASS.get()));
@@ -174,7 +175,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.TERRA_PRETA.get());
 		dropSelf(CABlocks.SMALL_CARNIVOROUS_PLANT.get());
 		dropSelf(CABlocks.BIG_CARNIVOROUS_PLANT.get());
-		add(CABlocks.TERRA_PRETA_FARMLAND.get(), (silk) -> createSilkTouchOnlyTable(CABlocks.TERRA_PRETA.get()));
+		add(CABlocks.TERRA_PRETA_FARMLAND.get(), (block) -> createSingleItemTableWithSilkTouch(block, CABlocks.TERRA_PRETA.get()));
 		dropSelf(CABlocks.TAR.get());
 		dropSelf(CABlocks.LATOSOL.get());
 		dropSelf(CABlocks.DENSE_ORCHID.get());

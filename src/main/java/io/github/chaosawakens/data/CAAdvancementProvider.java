@@ -248,6 +248,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				.addCriterion("oak_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.OAK_ENT.get())))
 				.addCriterion("spruce_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.SPRUCE_ENT.get())))
 				.addCriterion("warped_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.WARPED_ENT.get())))
+				.addCriterion("ginkgo_ent", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.GINKGO_ENT.get())))
 				.save(t, advancementId("ent_destroyer"));
 
 		Advancement stopBeingSalty = registerAdvancement("stop_being_salty", FrameType.TASK, CABlocks.SALT_BLOCK.get()).parent(root)

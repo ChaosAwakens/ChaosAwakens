@@ -4,6 +4,7 @@ import java.util.function.BiConsumer;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.loot.CATreasure;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.data.loot.ChestLootTables;
 import net.minecraft.item.Items;
@@ -642,6 +643,75 @@ public class CAChestLootTables extends ChestLootTables {
 								.add(ItemLootEntry.lootTableItem(Items.RED_MUSHROOM)
 										.apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(50))
 								.add(ItemLootEntry.lootTableItem(Items.RED_MUSHROOM)
+										.apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(50)))
+						.withPool(LootPool.lootPool()
+								// Rare Loot
+								.setRolls(RandomValueRange.between(0, 1))
+								.add(ItemLootEntry.lootTableItem(Items.DIAMOND)
+										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
+										.when(RandomChance.randomChance(0.65F)).setWeight(110))
+								.add(ItemLootEntry.lootTableItem(Items.EMERALD)
+										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
+										.when(RandomChance.randomChance(0.65F)).setWeight(70))
+								.add(ItemLootEntry.lootTableItem(CAItems.AMETHYST.get())
+										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
+										.when(RandomChance.randomChance(0.65F)).setWeight(50))
+								.add(ItemLootEntry.lootTableItem(CAItems.TIGERS_EYE.get())
+										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
+										.when(RandomChance.randomChance(0.65F)).setWeight(50))
+								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
+										.apply(SetCount.setCount(RandomValueRange.between(0, 2)))
+										.when(RandomChance.randomChance(0.65F)).setWeight(25))));
+		register.accept(CATreasure.ent_tree_ginkgo_loot.lootTable,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								// Common Loot
+								.setRolls(ConstantRange.exactly(4))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(8, 14))).setWeight(70))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(8, 14))).setWeight(70))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(8, 14))).setWeight(70))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(8, 14))).setWeight(70))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(3, 5))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(3, 5))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(3, 5))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_PLANKS.get())
+										.apply(SetCount.setCount(RandomValueRange.between(3, 5))).setWeight(100)))
+						.withPool(LootPool.lootPool()
+								// Common Loot
+								.setRolls(ConstantRange.exactly(3))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_LEAVES.get())
+										.apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_LEAVES.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(50))
+								.add(ItemLootEntry.lootTableItem(CABlocks.DENSE_DIRT.get())
+										.apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(100))
+								.add(ItemLootEntry.lootTableItem(CABlocks.DENSE_DIRT.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(50)))
+						.withPool(LootPool.lootPool()
+								// Common Loot
+								.setRolls(ConstantRange.exactly(2))
+								.add(ItemLootEntry.lootTableItem(CABlocks.BLUE_BULB.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
+								.add(ItemLootEntry.lootTableItem(CABlocks.BLUE_BULB.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
+								.add(ItemLootEntry.lootTableItem(CABlocks.PINK_BULB.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
+								.add(ItemLootEntry.lootTableItem(CABlocks.PINK_BULB.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
+								.add(ItemLootEntry.lootTableItem(CABlocks.PURPLE_BULB.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
+								.add(ItemLootEntry.lootTableItem(CABlocks.PURPLE_BULB.get())
+										.apply(SetCount.setCount(RandomValueRange.between(1, 5))).setWeight(25))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_SAPLING.get())
+										.apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(50))
+								.add(ItemLootEntry.lootTableItem(CABlocks.GINKGO_SAPLING.get())
 										.apply(SetCount.setCount(RandomValueRange.between(3, 7))).setWeight(50)))
 						.withPool(LootPool.lootPool()
 								// Rare Loot

@@ -547,7 +547,7 @@ public class EntEntity extends AnimatableMonsterEntity implements IEntityAdditio
 	}
 
 	public enum Types {
-		OAK("oak"), APPLE("apple"), ACACIA("acacia"), DARK_OAK("dark_oak"), JUNGLE("jungle"), SPRUCE("spruce"), BIRCH("birch"), CRIMSON("crimson"), WARPED("warped"), PEACH("peach"), CHERRY("cherry"), SKYWOOD("skywood");
+		OAK("oak"), APPLE("apple"), ACACIA("acacia"), DARK_OAK("dark_oak"), JUNGLE("jungle"), SPRUCE("spruce"), BIRCH("birch"), CRIMSON("crimson"), WARPED("warped"), PEACH("peach"), CHERRY("cherry"), SKYWOOD("skywood"), GINKGO("ginkgo");
 
 		private final String name;
 

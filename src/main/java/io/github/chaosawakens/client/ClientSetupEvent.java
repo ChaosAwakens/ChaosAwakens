@@ -277,6 +277,7 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SPRUCE_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.SPRUCE));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.CRIMSON_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.CRIMSON));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WARPED_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.WARPED));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GINKGO_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntEntity.Types.GINKGO));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RED_ANT.get(), (manager) -> new AggressiveAntEntityRenderer(manager, CAEntityTypes.RED_ANT.getId().getPath()));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BROWN_ANT.get(), (manager) -> new AntEntityRenderer(manager, CAEntityTypes.BROWN_ANT.getId().getPath()));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.RAINBOW_ANT.get(), (manager) -> new AntEntityRenderer(manager, CAEntityTypes.RAINBOW_ANT.getId().getPath()));

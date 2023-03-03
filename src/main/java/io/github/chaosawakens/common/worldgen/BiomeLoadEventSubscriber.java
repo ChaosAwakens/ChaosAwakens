@@ -326,6 +326,7 @@ public class BiomeLoadEventSubscriber {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_GINKGO);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_FLOWER);
+					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_GINKGO_ENT_TREE);
 				}
 				
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_PLAINS)) {

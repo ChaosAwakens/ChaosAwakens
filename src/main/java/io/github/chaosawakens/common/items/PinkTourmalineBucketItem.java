@@ -109,6 +109,11 @@ public class PinkTourmalineBucketItem extends BucketItem {
 		}
 	}
 	
+	@Override
+	protected ItemStack getEmptySuccessItem(ItemStack pStack, PlayerEntity pPlayer) {
+		return !pPlayer.abilities.instabuild ? new ItemStack(CAItems.PINK_TOURMALINE_BUCKET.get()) : pStack;
+	}
+	
 	private boolean canBlockContainFluid(World worldIn, BlockPos posIn, BlockState blockstate) {
 		return blockstate.getBlock() instanceof ILiquidContainer && ((ILiquidContainer)blockstate.getBlock()).canPlaceLiquid(worldIn, posIn, blockstate, this.fluidSupplier.get());
 	}

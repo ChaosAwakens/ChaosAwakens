@@ -134,6 +134,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 					|| target.getEntity().getType() == CAEntityTypes.CRIMSON_ENT.get() || target.getEntity().getType() == CAEntityTypes.DARK_OAK_ENT.get()
 					|| target.getEntity().getType() == CAEntityTypes.JUNGLE_ENT.get() || target.getEntity().getType() == CAEntityTypes.OAK_ENT.get()
 					|| target.getEntity().getType() == CAEntityTypes.SPRUCE_ENT.get() || target.getEntity().getType() == CAEntityTypes.WARPED_ENT.get()
+					|| target.getEntity().getType() == CAEntityTypes.GINKGO_ENT.get()
 					&& !target.level.isClientSide) {
 				target.hurt(DamageSource.GENERIC, (attackDamage * 2));
 			}

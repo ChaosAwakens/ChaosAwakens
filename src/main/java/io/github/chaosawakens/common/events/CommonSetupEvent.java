@@ -160,6 +160,8 @@ public class CommonSetupEvent {
 				DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
 		tempMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(),
 				DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
+		tempMap.putIfAbsent(CAStructures.GINKGO_ENT_TREE.get(),
+				DimensionStructuresSettings.DEFAULTS.get(CAStructures.GINKGO_ENT_TREE.get()));
 		tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(),
 				DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
 		tempMap.putIfAbsent(CAStructures.MINING_WASP_DUNGEON.get(),
