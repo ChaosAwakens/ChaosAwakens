@@ -6,16 +6,16 @@ import net.minecraft.potion.Effects;
 
 public class CAFoods {
 	// MEATS
-	public static final Food FOOD_RAW_BACON = new Food.Builder().nutrition(5).saturationMod(1.5F).meat().build();
-	public static final Food FOOD_COOKED_BACON = new Food.Builder().nutrition(10).saturationMod(1.5F).meat().build();
-	public static final Food FOOD_RAW_CORNDOG = new Food.Builder().nutrition(4).saturationMod(0.6F).build();
-	public static final Food FOOD_COOKED_CORNDOG = new Food.Builder().nutrition(8).saturationMod(1.5F).build();
-	public static final Food FOOD_CRAB_MEAT = new Food.Builder().nutrition(4).saturationMod(0.25F).meat().build();
+	public static final Food FOOD_RAW_BACON = new Food.Builder().nutrition(3).saturationMod(0.33F).meat().build();
+	public static final Food FOOD_COOKED_BACON = new Food.Builder().nutrition(8).saturationMod(1F).meat().build();
+	public static final Food FOOD_RAW_CORNDOG = new Food.Builder().nutrition(4).saturationMod(0.25F).build();
+	public static final Food FOOD_COOKED_CORNDOG = new Food.Builder().nutrition(8).saturationMod(1F).build();
+	public static final Food FOOD_CRAB_MEAT = new Food.Builder().nutrition(3).saturationMod(0.25F).meat().build();
 	public static final Food FOOD_COOKED_CRAB_MEAT = new Food.Builder().nutrition(6).saturationMod(0.75F).meat().build();
-	public static final Food FOOD_PEACOCK_LEG = new Food.Builder().nutrition(4).saturationMod(0.7F).build();
-	public static final Food FOOD_COOKED_PEACOCK_LEG = new Food.Builder().nutrition(9).saturationMod(1.4F).build();
-	public static final Food FOOD_RAW_VENISON = new Food.Builder().nutrition(5).saturationMod(0.5F).meat().build();
-	public static final Food FOOD_COOKED_VENISON = new Food.Builder().nutrition(9).saturationMod(1.2F).meat().build();
+	public static final Food FOOD_PEACOCK_LEG = new Food.Builder().nutrition(2).saturationMod(0.5F).build();
+	public static final Food FOOD_COOKED_PEACOCK_LEG = new Food.Builder().nutrition(6).saturationMod(0.8F).build();
+	public static final Food FOOD_RAW_VENISON = new Food.Builder().nutrition(2).saturationMod(0.5F).meat().build();
+	public static final Food FOOD_COOKED_VENISON = new Food.Builder().nutrition(6).saturationMod(0.8F).meat().build();
 
 	// PLANTS
 	public static final Food FOOD_CHERRIES = new Food.Builder().nutrition(2).saturationMod(0.45F).build();
@@ -33,11 +33,11 @@ public class CAFoods {
 	public static final Food FOOD_CRYSTAL_POTATO = new Food.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(() -> new EffectInstance(Effects.SATURATION, 3000, 0), 1.0F).effect(() -> new EffectInstance(Effects.REGENERATION, 3000, 0), 1.0F).build();
 
 	// MANUFACTURED
-	public static final Food FOOD_BLT_SANDWICH = new Food.Builder().nutrition(9).saturationMod(0.95F).build();
+	public static final Food FOOD_BLT_SANDWICH = new Food.Builder().nutrition(9).saturationMod(1.1F).build();
 	public static final Food FOOD_CHEESE = new Food.Builder().nutrition(4).saturationMod(0.5F).build();
 	public static final Food FOOD_GARDEN_SALAD = new Food.Builder().nutrition(5).saturationMod(0.95F).build();
-	public static final Food FOOD_SEAFOOD_PATTY = new Food.Builder().nutrition(7).saturationMod(0.35F).build();
-	public static final Food FOOD_RADISH_STEW = new Food.Builder().nutrition(4).saturationMod(0.25F).build();
+	public static final Food FOOD_SEAFOOD_PATTY = new Food.Builder().nutrition(8).saturationMod(0.9F).build();
+	public static final Food FOOD_RADISH_STEW = new Food.Builder().nutrition(5).saturationMod(0.75F).build();
 
 	// POPCORN
 	public static final Food FOOD_POPCORN = new Food.Builder().nutrition(2).saturationMod(0.2F).build();
