@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:crystal_power_chip"
+    ]
+  },
+  "criteria": {
+    "has_crystal_energy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:crystal_energy"
+          }
+        ]
+      }
+    },
+    "has_pink_tourmaline_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:aluminum_ingot"
+          }
+        ]
+      }
+    },
+    "has_cats_eye_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:cats_eye_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:crystal_power_chip"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal_energy",
+      "has_pink_tourmaline_ingot",
+      "has_cats_eye_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

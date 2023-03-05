@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:tall_crystal_grass"
+          "name": "chaosawakens:small_bush"
         }
       ],
       "conditions": [

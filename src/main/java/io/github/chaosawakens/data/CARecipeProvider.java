@@ -131,8 +131,8 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenPlanks(consumer, CABlocks.CRYSTAL_PLANKS.get(), CABlocks.CRYSTAL_LOG.get());
 		woodenSlab(consumer, CABlocks.CRYSTAL_SLAB.get(), CABlocks.CRYSTAL_PLANKS.get());
 		woodenStairs(consumer, CABlocks.CRYSTAL_STAIRS.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenFence(consumer, CABlocks.CRYSTAL_FENCE.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenFenceGate(consumer, CABlocks.CRYSTAL_FENCE_GATE.get(), CABlocks.CRYSTAL_PLANKS.get());
+		woodenFence(consumer, CABlocks.CRYSTAL_FENCE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.CRYSTAL_FENCE_GATE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.CRYSTAL_PRESSURE_PLATE.get(), CABlocks.CRYSTAL_PLANKS.get());
 		woodenButton(consumer, CABlocks.CRYSTAL_BUTTON.get(), CABlocks.CRYSTAL_PLANKS.get());
 		woodenWood(consumer, CABlocks.CRYSTAL_WOOD.get(), CABlocks.CRYSTAL_LOG.get());
@@ -1403,53 +1403,53 @@ public class CARecipeProvider extends RecipeProvider {
 				.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(CAItems.EMPTY_POPCORN_BAG.get(), 3)
-		.requires(Items.PAPER)
-		.requires(Items.PAPER)
-		.requires(Items.PAPER)
-		.requires(Items.PAPER)
-		.requires(Items.PAPER)
-		.requires(Items.RED_DYE)
-		.requires(Items.RED_DYE)
-		.requires(Items.RED_DYE)
-		.requires(Items.RED_DYE)
-		.unlockedBy("has_" + Items.PAPER.asItem(), has(Items.PAPER))
-		.unlockedBy("has_" + Items.RED_DYE.asItem(), has(Items.RED_DYE))
-		.save(consumer);
-smelting(consumer, CAItems.CORN.get(), CAItems.POPCORN.get(), 0.35F, 200);
-ShapelessRecipeBuilder.shapeless(CAItems.POPCORN_BAG.get(), 1)
-		.requires(CAItems.EMPTY_POPCORN_BAG.get())
-		.requires(CAItems.POPCORN.get())
-		.requires(CAItems.POPCORN.get())
-		.requires(CAItems.POPCORN.get())
-		.requires(CAItems.POPCORN.get())
-		.unlockedBy("has_" + CAItems.EMPTY_POPCORN_BAG.get().asItem(), has(CAItems.EMPTY_POPCORN_BAG.get()))
-		.unlockedBy("has_" + CAItems.POPCORN.get().asItem(), has(CAItems.POPCORN.get()))
-		.save(consumer);
-ShapelessRecipeBuilder.shapeless(CAItems.SALTED_POPCORN_BAG.get(), 1)
-		.requires(CAItems.POPCORN_BAG.get())
-		.requires(CAItems.SALT.get())
-		.requires(CAItems.SALT.get())
-		.requires(CAItems.SALT.get())
-		.requires(CAItems.SALT.get())
-		.unlockedBy("has_" + CAItems.POPCORN_BAG.get().asItem(), has(CAItems.POPCORN_BAG.get()))
-		.unlockedBy("has_" + CAItems.SALT.get().asItem(), has(CAItems.SALT.get()))
-		.save(consumer);
-ShapelessRecipeBuilder.shapeless(CAItems.BUTTERED_POPCORN_BAG.get(), 1)
-		.requires(CAItems.POPCORN_BAG.get())
-		.requires(CAItems.BUTTER.get())
-		.requires(CAItems.BUTTER.get())
-		.requires(CAItems.BUTTER.get())
-		.requires(CAItems.BUTTER.get())
-		.unlockedBy("has_" + CAItems.POPCORN_BAG.get().asItem(), has(CAItems.POPCORN_BAG.get()))
-		.unlockedBy("has_" + CAItems.BUTTER.get().asItem(), has(CAItems.BUTTER.get()))
-		.save(consumer);
-
-ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
-		.requires(Items.SUGAR)
-		.requires(CAItems.BUTTER.get())
-		.unlockedBy("has_" + Items.SUGAR.asItem(), has(Items.SUGAR))
-		.unlockedBy("has_" + CAItems.BUTTER.get().asItem(), has(CAItems.BUTTER.get()))
-		.save(consumer);
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.PAPER)
+				.requires(Items.RED_DYE)
+				.requires(Items.RED_DYE)
+				.requires(Items.RED_DYE)
+				.requires(Items.RED_DYE)
+				.unlockedBy("has_" + Items.PAPER.asItem(), has(Items.PAPER))
+				.unlockedBy("has_" + Items.RED_DYE.asItem(), has(Items.RED_DYE))
+				.save(consumer);
+		smelting(consumer, CAItems.CORN.get(), CAItems.POPCORN.get(), 0.35F, 200);
+		ShapelessRecipeBuilder.shapeless(CAItems.POPCORN_BAG.get(), 1)
+				.requires(CAItems.EMPTY_POPCORN_BAG.get())
+				.requires(CAItems.POPCORN.get())
+				.requires(CAItems.POPCORN.get())
+				.requires(CAItems.POPCORN.get())
+				.requires(CAItems.POPCORN.get())
+				.unlockedBy("has_" + CAItems.EMPTY_POPCORN_BAG.get().asItem(), has(CAItems.EMPTY_POPCORN_BAG.get()))
+				.unlockedBy("has_" + CAItems.POPCORN.get().asItem(), has(CAItems.POPCORN.get()))
+				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.SALTED_POPCORN_BAG.get(), 1)
+				.requires(CAItems.POPCORN_BAG.get())
+				.requires(CAItems.SALT.get())
+				.requires(CAItems.SALT.get())
+				.requires(CAItems.SALT.get())
+				.requires(CAItems.SALT.get())
+				.unlockedBy("has_" + CAItems.POPCORN_BAG.get().asItem(), has(CAItems.POPCORN_BAG.get()))
+				.unlockedBy("has_" + CAItems.SALT.get().asItem(), has(CAItems.SALT.get()))
+				.save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.BUTTERED_POPCORN_BAG.get(), 1)
+				.requires(CAItems.POPCORN_BAG.get())
+				.requires(CAItems.BUTTER.get())
+				.requires(CAItems.BUTTER.get())
+				.requires(CAItems.BUTTER.get())
+				.requires(CAItems.BUTTER.get())
+				.unlockedBy("has_" + CAItems.POPCORN_BAG.get().asItem(), has(CAItems.POPCORN_BAG.get()))
+				.unlockedBy("has_" + CAItems.BUTTER.get().asItem(), has(CAItems.BUTTER.get()))
+				.save(consumer);
+		
+		ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
+				.requires(Items.SUGAR)
+				.requires(CAItems.BUTTER.get())
+				.unlockedBy("has_" + Items.SUGAR.asItem(), has(Items.SUGAR))
+				.unlockedBy("has_" + CAItems.BUTTER.get().asItem(), has(CAItems.BUTTER.get()))
+				.save(consumer);
 
 		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_APPLE.get())
 				.define('T', CAItems.TITANIUM_INGOT.get())
@@ -1613,6 +1613,17 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 				.unlockedBy("has_" + Tags.Items.DUSTS_REDSTONE.getName(), has(Tags.Items.DUSTS_REDSTONE))
 				.unlockedBy("has_" + CAItems.ALUMINUM_INGOT.get().asItem(), has(CAItems.ALUMINUM_INGOT.get()))
 				.unlockedBy("has_" + Tags.Items.INGOTS_IRON.getName(), has(Tags.Items.INGOTS_IRON))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_POWER_CHIP.get())
+				.define('R', CABlocks.CRYSTAL_ENERGY.get())
+				.define('A', CAItems.PINK_TOURMALINE_INGOT.get())
+				.define('I', CAItems.CATS_EYE_INGOT.get())
+				.pattern("ARA")
+				.pattern("RIR")
+				.pattern("ARA")
+				.unlockedBy("has_" + CABlocks.CRYSTAL_ENERGY.get().asItem(), has(CABlocks.CRYSTAL_ENERGY.get()))
+				.unlockedBy("has_" + CAItems.PINK_TOURMALINE_INGOT.get().asItem(), has(CAItems.ALUMINUM_INGOT.get()))
+				.unlockedBy("has_" + CAItems.CATS_EYE_INGOT.get().asItem(), has(CAItems.CATS_EYE_INGOT.get()))
 				.save(consumer);
 		buildDefossilizingRecipes(consumer);
 
@@ -2516,6 +2527,28 @@ ShapelessRecipeBuilder.shapeless(CAItems.BUTTER_CANDY.get(), 4)
 				.save(consumer);
 	}
 
+	private static void woodenFence(Consumer<IFinishedRecipe> consumer, IItemProvider pFence, IItemProvider pStick, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pFence, 3)
+				.define('#', pStick)
+				.define('W', pMaterial)
+				.pattern("W#W")
+				.pattern("W#W")
+				.group("wooden_fence")
+				.unlockedBy("has_planks", has(pMaterial))
+				.save(consumer);
+	}
+
+	private static void woodenFenceGate(Consumer<IFinishedRecipe> consumer, IItemProvider pFenceGate, IItemProvider pStick, IItemProvider pMaterial) {
+		ShapedRecipeBuilder.shaped(pFenceGate)
+				.define('#', pStick)
+				.define('W', pMaterial)
+				.pattern("#W#")
+				.pattern("#W#")
+				.group("wooden_fence_gate")
+				.unlockedBy("has_planks", has(pMaterial))
+				.save(consumer);
+	}
+	
 	private static void woodenPressurePlate(Consumer<IFinishedRecipe> consumer, IItemProvider pPressurePlate, IItemProvider pMaterial) {
 		ShapedRecipeBuilder.shaped(pPressurePlate)
 				.define('#', pMaterial)

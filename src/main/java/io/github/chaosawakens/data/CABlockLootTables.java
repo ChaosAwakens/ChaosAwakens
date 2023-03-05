@@ -171,7 +171,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.TALL_CRYSTAL_GRASS.get(), (plant) -> createShearsOnlyDrop(CABlocks.TALL_CRYSTAL_GRASS.get()));
 		add(CABlocks.THORNY_SUN.get(), (plant) -> createSinglePropConditionTable(plant, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 		add(CABlocks.ALSTROEMERIAT.get(), (plant) -> createSinglePropConditionTable(plant, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
-		add(CABlocks.SMALL_BUSH.get(), (plant) -> createShearsOnlyDrop(CABlocks.TALL_CRYSTAL_GRASS.get()));
+		add(CABlocks.SMALL_BUSH.get(), (plant) -> createShearsOnlyDrop(CABlocks.SMALL_BUSH.get()));
 		dropSelf(CABlocks.TERRA_PRETA.get());
 		dropSelf(CABlocks.SMALL_CARNIVOROUS_PLANT.get());
 		dropSelf(CABlocks.BIG_CARNIVOROUS_PLANT.get());
@@ -267,7 +267,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.POLISHED_RHINESTONE_WALL.get());
 
 		// Crystal Blocks
-		add(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (silk) -> createSilkTouchOnlyTable(CABlocks.KYANITE.get()));
+		add(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (block) -> createSingleItemTableWithSilkTouch(block, CABlocks.KYANITE.get()));
 		dropSelf(CABlocks.CRYSTAL_TERMITE_NEST.get());
 		dropSelf(CABlocks.CRYSTAL_LOG.get());
 		dropSelf(CABlocks.CRYSTAL_PLANKS.get());
@@ -280,12 +280,12 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CRYSTAL_ENERGY.get());
 		dropSelf(CABlocks.CRYSTAL_FURNACE.get());
 
-		add(CABlocks.RED_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.RED_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-		add(CABlocks.GREEN_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.GREEN_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-		add(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.YELLOW_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));		
-		add(CABlocks.PINK_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.PINK_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));	
-		add(CABlocks.BLUE_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.BLUE_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));		
-		add(CABlocks.ORANGE_CRYSTAL_LEAVES.get(), (leaves) -> createLeavesDrops(leaves, CABlocks.ORANGE_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));	
+		add(CABlocks.RED_CRYSTAL_LEAVES.get(), (leaves) -> createCrystalLeavesDrops(leaves, CABlocks.RED_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(CABlocks.GREEN_CRYSTAL_LEAVES.get(), (leaves) -> createCrystalLeavesDrops(leaves, CABlocks.GREEN_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+		add(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), (leaves) -> createCrystalLeavesDrops(leaves, CABlocks.YELLOW_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));		
+		add(CABlocks.PINK_CRYSTAL_LEAVES.get(), (leaves) -> createCrystalLeavesDrops(leaves, CABlocks.PINK_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));	
+		add(CABlocks.BLUE_CRYSTAL_LEAVES.get(), (leaves) -> createCrystalLeavesDrops(leaves, CABlocks.BLUE_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));		
+		add(CABlocks.ORANGE_CRYSTAL_LEAVES.get(), (leaves) -> createCrystalLeavesDrops(leaves, CABlocks.ORANGE_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));	
 		
 		dropSelf(CABlocks.RED_CRYSTAL_SAPLING.get());
 		dropSelf(CABlocks.GREEN_CRYSTAL_SAPLING.get());
@@ -753,6 +753,10 @@ public class CABlockLootTables extends BlockLootTables {
 		return LootTable.lootTable()
 				.withPool(applyExplosionCondition(fruit, LootPool.lootPool().setRolls(RandomValueRange.between(1, 3)))
 						.add(ItemLootEntry.lootTableItem(fruit)).add(ItemLootEntry.lootTableItem(seed)));
+	}
+	
+	protected static LootTable.Builder createCrystalLeavesDrops(Block pLeavesBlock, Block pSaplingBlock, float... pChances) {
+		return createSilkTouchOrShearsDispatchTable(pLeavesBlock, applyExplosionCondition(pLeavesBlock, ItemLootEntry.lootTableItem(pSaplingBlock)).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, pChances))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(pLeavesBlock, ItemLootEntry.lootTableItem(CAItems.CRYSTAL_SHARD.get()).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
 	}
 
 	protected static LootTable.Builder createFruitLeavesDrops(Block leaves, Block sapling, Item fruit, float... chances) {

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ARA",
+    "RIR",
+    "ARA"
+  ],
+  "key": {
+    "R": {
+      "item": "chaosawakens:crystal_energy"
+    },
+    "A": {
+      "item": "chaosawakens:pink_tourmaline_ingot"
+    },
+    "I": {
+      "item": "chaosawakens:cats_eye_ingot"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:crystal_power_chip"
+  }
+}
