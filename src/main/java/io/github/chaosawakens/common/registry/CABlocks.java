@@ -596,8 +596,7 @@ public class CABlocks {
 
 	// FOSSILISED MOBS
 	public static final Map<DefossilizerType, RegistryObject<DefossilizerBlock>> DEFOSSILIZER_BLOCKS = Arrays.stream(DefossilizerType.values()).map(type -> Pair.of(type, registerBlock(type.getSerializedName() + "_defossilizer", 
-			() -> type.name.equals("crystal") ? new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE).harvestLevel(2))
-					: new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.FOSSILS)))
+			() -> new DefossilizerBlock(Block.Properties.of(Material.METAL).strength(4, 20).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2)), CAItemGroups.FOSSILS)))
 			.collect(Collectors.toMap(Pair::getKey, Pair::getValue));
 
 	// Overworld (CA)

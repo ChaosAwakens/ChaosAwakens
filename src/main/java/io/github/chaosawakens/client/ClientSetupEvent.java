@@ -326,8 +326,6 @@ public class ClientSetupEvent {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SCREEN_SHAKE.get(), CAEmptyRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LEAFY_CHICKEN_EGG.get(), (manager) -> new SpriteRenderer<CALeafyChickenEggEntity>(manager, Minecraft.getInstance().getItemRenderer()));
 		
-		RenderTypeLookup.setRenderLayer((CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.CRYSTAL)).get(), RenderType.cutout());
-		
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM_PLANT.get(), RenderType.cutoutMipped());
 

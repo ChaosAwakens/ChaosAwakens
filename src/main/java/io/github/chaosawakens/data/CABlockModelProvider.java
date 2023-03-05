@@ -77,7 +77,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 		this.orientable("copper_defossilizer", chaosRL("copper_block"), chaosRL("copper_defossilizer_front"), chaosRL("copper_defossilizer_top"));
 		this.orientable("iron_defossilizer", mcRL("iron_block"), chaosRL("iron_defossilizer_front"), chaosRL("iron_defossilizer_top"));
-		this.orientable("crystal_defossilizer", chaosRL("crystal_defossilizer"), chaosRL("crystal_defossilizer_front"), chaosRL("crystal_defossilizer_top"));
+		this.orientable("crystal_defossilizer", chaosRL("pink_tourmaline_block"), chaosRL("crystal_defossilizer_front"), chaosRL("crystal_defossilizer_top"));
 		
 		this.grassBlock("dense_grass_block", chaosRL("dense_dirt"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"), chaosRL("dense_grass_block_side"), chaosRL("dense_grass_block_side_overlay"));
 		//this.cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
