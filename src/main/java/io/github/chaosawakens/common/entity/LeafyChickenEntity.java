@@ -94,7 +94,7 @@ public class LeafyChickenEntity extends ChickenEntity implements IAnimatableEnti
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (!this.level.isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && this.eggTime <= 0) {	    
+		if (!this.level.isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && this.eggTime <= 1) {	    
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);	    
 			this.spawnAtLocation(CAItems.LEAFY_CHICKEN_EGG.get());
 			this.eggTime = this.random.nextInt(6000) + 6000;   
