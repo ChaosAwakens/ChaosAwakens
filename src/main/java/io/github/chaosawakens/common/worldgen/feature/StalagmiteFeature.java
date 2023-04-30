@@ -29,7 +29,7 @@ public class StalagmiteFeature extends Feature<StalagmiteFeatureConfig> {
 				// Don't generate ores when ore generation is deactivated
 				if(!CACommonConfig.COMMON.enableStalagmiteOreGen.get())oreFlag = false;
 				
-				Mutable mutable = new Mutable(pos.getX(), getLowestCorner(gen, pos, radius) + 1, pos.getZ());
+				Mutable mutable = new Mutable(pos.getX(), getLowestCorner(gen, pos, radius), pos.getZ());
 				
 				//Micro-optimization: Cache this math operation since the result is constant
 				float rrs = radius * radius * steepness;
@@ -60,10 +60,10 @@ public class StalagmiteFeature extends Feature<StalagmiteFeatureConfig> {
 	}
 
 	private int getLowestCorner(ChunkGenerator gen, BlockPos pos, int radius) {
-		int pXpY = gen.getBaseHeight(pos.getX() + radius, pos.getZ() + radius, Heightmap.Type.WORLD_SURFACE);
-		int mXpY = gen.getBaseHeight(pos.getX() - radius, pos.getZ() + radius, Heightmap.Type.WORLD_SURFACE);
-		int pXmY = gen.getBaseHeight(pos.getX() + radius, pos.getZ() - radius, Heightmap.Type.WORLD_SURFACE);
-		int mXmY = gen.getBaseHeight(pos.getX() - radius, pos.getZ() - radius, Heightmap.Type.WORLD_SURFACE);
+		int pXpY = gen.getBaseHeight(pos.getX() + radius, pos.getZ() + radius, Heightmap.Type.OCEAN_FLOOR);
+		int mXpY = gen.getBaseHeight(pos.getX() - radius, pos.getZ() + radius, Heightmap.Type.OCEAN_FLOOR);
+		int pXmY = gen.getBaseHeight(pos.getX() + radius, pos.getZ() - radius, Heightmap.Type.OCEAN_FLOOR);
+		int mXmY = gen.getBaseHeight(pos.getX() - radius, pos.getZ() - radius, Heightmap.Type.OCEAN_FLOOR);
 		return Math.min(Math.min(Math.min(pXpY, mXpY), pXmY), mXmY);
 	}
 }
