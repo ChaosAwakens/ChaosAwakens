@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import com.google.common.collect.ImmutableList;
@@ -7,7 +8,6 @@ import com.google.common.collect.ImmutableSet;
 
 import io.github.chaosawakens.api.FeatureWrapper;
 import io.github.chaosawakens.common.events.CommonSetupEvent;
-import io.github.chaosawakens.common.util.EnumUtils.StalagmiteBlockGenType;
 import io.github.chaosawakens.common.worldgen.feature.CrystalBranchConfig;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
 import io.github.chaosawakens.common.worldgen.feature.StalagmiteFeatureConfig;
@@ -184,12 +184,27 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> END_FOSSILISED_SHULKER = register("end_ore_fossilised_shulker", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_END_STONE, States.FOSSILISED_SHULKER, 3)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(37, 27))).squared().count(8));
 
 	// MINING PARADISE
-	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON = register("stalagmite_common", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 4, 4, 1.8F, 2, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
-	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON_SHORT = register("stalagmite_common_short", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 5, 4, 1.25F, 2, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
-	public static final ConfiguredFeature<?, ?> STALAGMITE_SKYSCRAPER = register("stalagmite_skyscraper", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 32, 7, 2.25F, 0.5f, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
-	public static final ConfiguredFeature<?, ?> STALAGMITE_CONE = register("stalagmite_cone", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 6, 7, 0.15F, 1, StalagmiteBlockGenType.ORE_COMMON)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON = register("stalagmite_common", CAFeatures.STALAGMITE
+			.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 4, 1.8F, 2, 
+					Optional.of(CATags.Blocks.STALAGMITE_ORE_COMMON), 0.025f)).decorated(Features.Placements.HEIGHTMAP_SQUARE)
+			.chance(2));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON_SHORT = register("stalagmite_common_short", CAFeatures
+			.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 4, 1.25F, 2,
+					Optional.of(CATags.Blocks.STALAGMITE_ORE_COMMON), 0.025f)).decorated(Features.Placements.HEIGHTMAP_SQUARE)
+			.chance(2));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_SKYSCRAPER = register("stalagmite_skyscraper", CAFeatures.
+			STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 7, 2.25F, 0.5f,
+					Optional.of(CATags.Blocks.STALAGMITE_ORE_COMMON), 0.05f)).decorated(Features.Placements.HEIGHTMAP_SQUARE)
+			.chance(16));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_CONE = register("stalagmite_cone", CAFeatures.STALAGMITE.get()
+			.configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 7, 0.15F, 1,
+					Optional.of(CATags.Blocks.STALAGMITE_ORE_COMMON), 0.025f)).decorated(Features.Placements.HEIGHTMAP_SQUARE)
+			.chance(3));
 	
-	public static final ConfiguredFeature<?, ?> STALAGMITE_COMMON_LIMESTONE = register("stalagmite_common_limestone", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(CABlocks.LIMESTONE.get().defaultBlockState(), 256, 12, 1.35F, 0.5f, StalagmiteBlockGenType.ORE_RARE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+	public static final ConfiguredFeature<?, ?> STALAGMITE_LIMESTONE = register("stalagmite_limestone",
+			CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(CABlocks.LIMESTONE.get()
+					.defaultBlockState(), 12, 1.35F, 0.5f, Optional.of(CATags.Blocks.STALAGMITE_ORE_RARE), 0.05f))
+			.decorated(Features.Placements.HEIGHTMAP_SQUARE).chance(192));
 	
 	public static final ConfiguredFeature<?, ?> MINING_ORE_RUBY_LAVA = register("mining_ore_ruby", Feature.NO_SURFACE_ORE.configured(new OreFeatureConfig(RuleTests.BASE_LAVA, States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_AMETHYST = register("mining_ore_amethyst", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.AMETHYST_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(40, 16))).squared().count(4));
@@ -265,7 +280,10 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> BLOB_LATOSOL = register("blob_latosol", Feature.ORE.configured( new OreFeatureConfig(RuleTests.BASE_DIRT, States.LATOSOL, 24)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared());
 	public static final ConfiguredFeature<?, ?> BLOB_TAR = register("blob_tar", Feature.ORE.configured( new OreFeatureConfig(RuleTests.BASE_DIRT, States.TAR, 20)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared());
 	
-	public static final ConfiguredFeature<?, ?> MOUNTAINS_STALAGMITE = register("mountains_stalagmite", CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 20, 4, 0.35F, 1, StalagmiteBlockGenType.NONE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
+	public static final ConfiguredFeature<?, ?> MOUNTAINS_STALAGMITE = register("mountains_stalagmite", CAFeatures.
+			STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 4, 0.35F, 1, 
+					Optional.of(CATags.Blocks.STALAGMITE_ORE_RARE), 0.0f))
+			.decorated(Features.Placements.HEIGHTMAP_SQUARE).chance(6));
 	
 	// CRYSTAL WORLD
 	public static final ConfiguredFeature<?, ?> CRYSTAL_ORE_ENERGY = register("crystal_ore_energy", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_STONE_CRYSTAL, States.CRYSTAL_ENERGY, 16)).decorated(Placement.RANGE.configured(new TopSolidRangeConfig(16, 0, 80))).squared().count(3));

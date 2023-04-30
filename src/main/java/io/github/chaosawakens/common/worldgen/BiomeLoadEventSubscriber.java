@@ -770,7 +770,7 @@ public class BiomeLoadEventSubscriber {
 			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_SKYSCRAPER);
 			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_CONE);
 			
-			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_COMMON_LIMESTONE);
+			gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.STALAGMITE_LIMESTONE);
 		}
 
 		private static void addVillageManiaOres(BiomeGenerationSettingsBuilder gen) {

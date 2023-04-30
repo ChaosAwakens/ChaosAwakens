@@ -68,6 +68,16 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(CATags.Blocks.DENSE_DIRT).add(CABlocks.DENSE_GRASS_BLOCK.get(), CABlocks.DENSE_DIRT.get());
 			this.tag(CATags.Blocks.TERRA_PRETA).add(CABlocks.TERRA_PRETA.get());
 			
+			this.tag(CATags.Blocks.STALAGMITE_ORE_COMMON).add(Blocks.COAL_ORE, Blocks.IRON_ORE, Blocks.GOLD_ORE, 
+					Blocks.LAPIS_ORE, Blocks.EMERALD_ORE, Blocks.DIAMOND_ORE, CABlocks.ALUMINUM_ORE.get(),
+					CABlocks.TIGERS_EYE_ORE.get(), CABlocks.SALT_ORE.get(), CABlocks.COPPER_ORE.get(),
+					CABlocks.TIN_ORE.get(), CABlocks.SILVER_ORE.get(), CABlocks.SUNSTONE_ORE.get(),
+					CABlocks.RED_ANT_INFESTED_ORE.get(), CABlocks.TERMITE_INFESTED_ORE.get(),
+					CABlocks.BLOODSTONE_ORE.get());
+			this.tag(CATags.Blocks.STALAGMITE_ORE_RARE).addTag(CATags.Blocks.STALAGMITE_ORE_COMMON).add(
+					CABlocks.AMETHYST_ORE.get(), CABlocks.RUBY_ORE.get(), CABlocks.TIGERS_EYE_ORE.get(),
+					CABlocks.TITANIUM_ORE.get(), CABlocks.URANIUM_ORE.get(), CABlocks.PLATINUM_ORE.get());
+			
 			this.tag(BlockTags.LOGS).addTags(CATags.Blocks.DUPLICATION_LOGS);
 			this.tag(BlockTags.LOGS_THAT_BURN).addTags(CATags.Blocks.APPLE_LOGS, CATags.Blocks.CHERRY_LOGS, CATags.Blocks.GINKGO_LOGS, CATags.Blocks.MESOZOIC_LOGS, CATags.Blocks.DENSEWOOD_LOGS, CATags.Blocks.PEACH_LOGS, CATags.Blocks.SKYWOOD_LOGS, CATags.Blocks.CRYSTAL_LOGS);
 			this.tag(BlockTags.LEAVES).add(CABlocks.APPLE_LEAVES.get(), CABlocks.CHERRY_LEAVES.get(), CABlocks.GINKGO_LEAVES.get(), CABlocks.MESOZOIC_LEAVES.get(), CABlocks.DENSEWOOD_LEAVES.get(), CABlocks.PEACH_LEAVES.get(), CABlocks.SKYWOOD_LEAVES.get());

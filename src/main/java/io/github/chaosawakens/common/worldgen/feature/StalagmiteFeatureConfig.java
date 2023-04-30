@@ -1,37 +1,42 @@
 package io.github.chaosawakens.common.worldgen.feature;
 
+import java.util.Optional;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import io.github.chaosawakens.common.util.EnumUtils.StalagmiteBlockGenType;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.TagCollectionManager;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 
 public class StalagmiteFeatureConfig implements IFeatureConfig {
 
 	public static final Codec<StalagmiteFeatureConfig> CODEC = RecordCodecBuilder.create(builder -> builder
-			.group(BlockState.CODEC.fieldOf("block").forGetter(config -> config.block),
-					Codec.intRange(1, 256).fieldOf("chance").forGetter(config -> config.chance),
-					Codec.intRange(1, 16).fieldOf("base-radius").forGetter(config -> config.baseRadius),
-					Codec.floatRange(0.1f, 10).fieldOf("base-steepness").forGetter(config -> config.baseSteepness),
+			.group(BlockState.CODEC.fieldOf("state").forGetter(config -> config.state),
+					Codec.intRange(1, 16).fieldOf("base_radius").forGetter(config -> config.baseRadius),
+					Codec.floatRange(0.1f, 10).fieldOf("base_steepness").forGetter(config -> config.baseSteepness),
 					Codec.floatRange(0, 10).fieldOf("variation").forGetter(config -> config.variation),
-					Codec.unit(StalagmiteBlockGenType.ORE_ALL).fieldOf("type").forGetter(config -> config.type))			
-			.apply(builder, StalagmiteFeatureConfig::new));
+					ITag.codec(() -> TagCollectionManager.getInstance().getBlocks()).optionalFieldOf("ores_tag")
+						.forGetter(config -> config.oresTag),
+					Codec.floatRange(0, 1).fieldOf("ore_chance").forGetter(config -> config.oreChance)
+			).apply(builder, StalagmiteFeatureConfig::new));
 
-	public final BlockState block;
-	public final int chance;
+	public final BlockState state;
 	public final int baseRadius;
 	public final float baseSteepness;
 	public final float variation;	
-	public final StalagmiteBlockGenType type;
+	public final Optional<ITag<Block>> oresTag;
+	public final float oreChance;
 	
-	public StalagmiteFeatureConfig(BlockState block, int chance, int baseRadius, float baseSteepness, float variation, StalagmiteBlockGenType type) {
-		super();
-		this.block = block;
-		this.chance = chance;
+	public StalagmiteFeatureConfig(BlockState state, int baseRadius, float baseSteepness, float variation,
+			Optional<ITag<Block>> oresTag, float oreChance) {
+		this.state = state;
 		this.baseRadius = baseRadius;
 		this.baseSteepness = baseSteepness;
 		this.variation = variation;
-		this.type = type;
+		this.oresTag = oresTag;
+		this.oreChance = oreChance;
 	}
 }
