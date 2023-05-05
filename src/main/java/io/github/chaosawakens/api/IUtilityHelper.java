@@ -2,6 +2,7 @@ package io.github.chaosawakens.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -50,7 +51,16 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
+import top.theillusivec4.curios.api.type.util.ISlotHelper;
 
 /**
  * A mini API/Utility class full of general methods that can make your coding experience a little more bearable.
@@ -654,7 +664,7 @@ public interface IUtilityHelper {
 	static boolean checkBlockConnectionList(ServerWorld world, BlockPos pos, Block blockToCheck, Block blockToMatch, int distance, Direction directionToCheckIn) {
 		return checkBlockConnectionsAtACertainDistance(world, pos, blockToCheck, blockToMatch, distance, directionToCheckIn).contains(pos);
 	}
-	
+
 	/**
 	 * Checks if the player is wearing a full armor set, specified by the parameters below
 	 * 
@@ -678,6 +688,27 @@ public interface IUtilityHelper {
 		boolean checkFeet = feet.getItem().equals(boots);
 		
 		return checkHead && checkChest && checkLegs && checkFeet;
+	}
+
+	/**
+	 * Checks if the players curios slots are empty
+	 *
+	 * @param player player to check the curios slots of
+	 * @return true if curios slots are empty or curios is not installed, else returns false
+	 */
+	static boolean areCuriosSlotsEmpty(PlayerEntity player) {
+		if (ModList.get().isLoaded("curios")) {
+			LazyOptional<IItemHandlerModifiable> curiosHandler = CuriosApi.getCuriosHelper().getEquippedCurios(player);
+			if (curiosHandler.isPresent()) {
+				IItemHandlerModifiable handler = curiosHandler.orElseThrow(IllegalStateException::new);
+				for (int slot = 0; slot < handler.getSlots(); slot++) {
+					if (!handler.getStackInSlot(slot).isEmpty()) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	///////////////////////////////

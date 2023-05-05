@@ -196,7 +196,9 @@ public class CACommonConfig {
 		public final ConfigValue<Boolean> generateOakEntTree;
 		public final ConfigValue<Boolean> generateSpruceEntTree;
 		public final ConfigValue<Boolean> generateWarpedEntTree;
+		public final ConfigValue<Boolean> generateGinkgoEntTree;
 		public final ConfigValue<Boolean> generateWaspNest;
+		public final ConfigValue<Boolean> generateMiningWaspNest;
 
 		public final ConfigValue<Boolean> holidayTextures;
 
@@ -431,14 +433,14 @@ public class CACommonConfig {
 			builder.push("Lapis Armor");
 			enableLapisArmorSetBonus = builder.define("Enable the Lapis set bonus", true);
 			lapisArmorSetLevelRequirementReductionModifier = builder
-					.comment("Modify/Substract from the enchantment level requirements for each enchantment row in the enchantment table. Note that if you attempt to expand or reduce \n"
+					.comment("Modify/Subtract from the enchantment level requirements for each enchantment row in the enchantment table. Note that if you attempt to expand or reduce \n"
 							+ " the size of the contents within the list, or define a number higher than the price listed in the enchantment table, the prices will automatically default to vanilla values. If you attempt \n"
 							+ " to define a NAN (not a number) value the game will crash. The first value is the modifier for the first row, the second value if the modifier for the \n"
 							+ "second row, and the third value is the modifier for the third row.")
 					.defineList("Lapis Set Enchantment Level Requirement Modifiers", LAPISMODLIST, cost -> cost instanceof Integer);
 			lapisArmorSetBookshelfPowerModifier = builder
 					.comment("The power of each bookshelf around the enchantment table when a player with the full Lapis Armor Set is present. This effect stacks with each present player.")
-					.define("Lapis Armor Set Bookshelf Power Moifier", 2);
+					.define("Lapis Armor Set Bookshelf Power Modifier", 2);
 			builder.pop();
 			builder.push("Lava Eel Armor");
 			enableLavaEelArmorSetBonus = builder.define("Enable the Lava Eel set bonus", true);
@@ -576,18 +578,24 @@ public class CACommonConfig {
 			generateWarpedEntTree = builder
 					.comment("Will Warped Ent Trees be generated?")
 					.define("Generate Warped Ent Trees", true);
+			generateGinkgoEntTree = builder
+					.comment("Will Ginkgo Ent Trees be generated?")
+					.define("Generate Ginkgo Ent Trees", true);
 			generateWaspNest = builder
 					.comment("Will Wasp Nests be generated?")
 					.define("Generate Wasp Nests", true);
+			generateMiningWaspNest = builder
+					.comment("Will Mining Wasp Nests be generated?")
+					.define("Generate Mining Wasp Nests", true);
 			builder.pop();
-			builder.push("Dimensioms");
+			builder.push("Dimensions");
 			builder.push("Mining Paradise");
 			builder.push("Biomes");
 			builder.push("Stalagmite Valley");
 			enableStalagmiteOreGen = builder
 					.comment("Enable/Disable ores generating on the stalagmites in Stalagmite Valley. Note that this may require a more powerful computer, \n"
 							+ "until further optimization is made.")
-					.define("Enable Stalamite Ore Gen", true);
+					.define("Enable Stalagmite Ore Gen", true);
 			builder.pop();
 			builder.pop();
 			builder.pop();

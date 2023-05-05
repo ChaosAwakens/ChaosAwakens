@@ -121,6 +121,12 @@
         "maxCount": 4
       },
       {
+        "type": "chaosawakens:leafy_chicken",
+        "weight": 8,
+        "minCount": 3,
+        "maxCount": 3
+      },
+      {
         "type": "minecraft:cow",
         "weight": 8,
         "minCount": 4,

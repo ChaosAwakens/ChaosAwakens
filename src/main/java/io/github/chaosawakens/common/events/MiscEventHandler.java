@@ -1,12 +1,9 @@
 package io.github.chaosawakens.common.events;
 
-import java.io.IOException;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -20,9 +17,7 @@ import io.github.chaosawakens.common.entity.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CACommand;
-import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAEffects;
-import io.github.chaosawakens.common.registry.CAEnchantments;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.Blocks;
@@ -47,12 +42,8 @@ import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.FurnaceRecipe;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.ChatType;
@@ -64,7 +55,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.DerivedWorldInfo;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
@@ -200,9 +190,9 @@ public class MiscEventHandler {
 				event.setExpToDrop(xpValue * CACommonConfig.COMMON.experienceArmorSetXPMultiplier.get());
 			}
 		}
-		
-		if (player instanceof LivingEntity) {
-			if (event.isCancelable() && ((LivingEntity) player).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+
+		if (event.isCancelable() && player.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) {
+			event.setCanceled(true);
 		}
 	}
 	
@@ -289,6 +279,7 @@ public class MiscEventHandler {
 
 	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		Entity entity = event.getEntity();
+
 		if (entity == null) return;
 		if (CACommonConfig.COMMON.showUpdateMessage.get() && VersionChecker.getResult(ModList.get().getModContainerById(ChaosAwakens.MODID).get().getModInfo()).status == VersionChecker.Status.OUTDATED) {
 			entity.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)

@@ -92,10 +92,9 @@ dependencies {
 	implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.16.5:${project.geckolib}")
 
 	implementation fg.deobf("curse.maven:projecte-226410:${project.projecte}")
-	implementation fg.deobf("curse.maven:patchouli-306770:${project.patchouli}")
-	
+
 	//implementation fg.deobf("curse.maven:advanced-xray-256256:3205011")
-	
+
 	implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}:api")
 	implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
 	implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
@@ -108,12 +107,14 @@ dependencies {
 
 	implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
 	implementation fg.deobf("curse.maven:jade-324717:${project.jade}")
+
+	implementation fg.deobf("curse.maven:curios-309927:${project.curios}")
 }
 
 repositories {
 	maven {
-		name = "Progwml6 maven"
-		url = "https://dvs1.progwml6.com/files/maven/"
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
 	}
 	maven {
 		name = "CurseForge"

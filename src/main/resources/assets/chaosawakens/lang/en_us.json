@@ -152,12 +152,12 @@
 	"container.chaosawakens.robo_crate": "Robo Crate",
 	"container.chaosawakens.jei.copper_defossilizer": "Copper Defossilizer",
 	"container.chaosawakens.jei.iron_defossilizer": "Iron Defossilizer",
-	
+
 	"effect.chaosawakens.paralysis": "Paralysis",
 	"effect.chaosawakens.paralysis.description": "Paralyzes the afflicted target, completely immobilising them. (W.I.P)",
 	"effect.chaosawakens.burns": "Burns",
 	"effect.chaosawakens.burns.description": "Burns the target up from the inside, eating away at some flammable items (where applicable) in their inventory. (W.I.P)",
-	
+
 	"item.minecraft.potion.effect.paralysis": "Potion of Paralysis",
 	"item.minecraft.potion.effect.long_paralysis": "Potion of Paralysis",
 	"item.minecraft.potion.effect.burns": "Potion of Burning",
@@ -174,7 +174,7 @@
 	"item.minecraft.tipped_arrow.effect.long_paralysis": "Arrow of Paralysis",
 	"item.minecraft.tipped_arrow.effect.burns": "Arrow of Burning",
 	"item.minecraft.tipped_arrow.effect.long_burns": "Arrow of Burning",
-	
+
 	"enchantment.chaosawakens.ignite": "Ignite",
 	"enchantment.chaosawakens.ignite.description": "When applied onto an armor piece, anything that attacks the user will be afflicted with the burns effect for a short period of time.",
 	"enchantment.chaosawakens.hoplology": "Hoplology",
@@ -245,17 +245,17 @@
 	"entity.chaosawakens.leafy_chicken_egg": "Thrown Leafy Chicken Egg",
 	"entity.chaosawakens.screen_shake": "Screen Shake",
 	"entity.chaosawakens.falling_block": "Falling Block",
-	
+
 	"entity.chaosawakens.ca_boat": "Boat",
-	
+
 	"entity.minecraft.villager.chaosawakens.archaeologist": "Archaeologist",
 	"entity.minecraft.villager.archaeologist": "Archaeologist",
-	
+
 	"death.attack.burns": "%1$s burned up on the inside",
-    "death.attack.thorny_sun": "%1$s was prickled to death by a Thorny Sun",
+	"death.attack.thorny_sun": "%1$s was prickled to death by a Thorny Sun",
 	"death.attack.ignition": "%1$s was ignited trying to hurt %2$s",
 	"death.attack.ignition.item": "%1$s was ignited while attempting to hurt %2$s",
-    
+
 	"item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
 	"item.chaosawakens.apple_ent_spawn_egg": "Apple Ent Spawn Egg",
 	"item.chaosawakens.birch_ent_spawn_egg": "Birch Ent Spawn Egg",
@@ -414,19 +414,19 @@
 	"item.chaosawakens.enchanted_golden_carrot": "Enchanted Golden Carrot",
 	"item.chaosawakens.venison": "Raw Venison",
 	"item.chaosawakens.cooked_venison": "Cooked Venison",
-	
+
 	"item.chaosawakens.popcorn": "Popcorn",
 	"item.chaosawakens.empty_popcorn_bag": "Empty Popcorn Bag",
 	"item.chaosawakens.popcorn_bag": "Popcorn Bag",
 	"item.chaosawakens.salted_popcorn_bag": "Salted Popcorn Bag",
 	"item.chaosawakens.buttered_popcorn_bag": "Buttered Popcorn Bag",
-	
+
 	"item.chaosawakens.crystal_carrot": "Crystal Carrot",
 	"item.chaosawakens.crystal_beetroot": "Crystal Beetroot",
 	"item.chaosawakens.crystal_potato": "Crystal Potato",
 
-    "block.chaosawakens.rock": "Rock",
-    
+	"block.chaosawakens.rock": "Rock",
+
 	"block.chaosawakens.ender_eye_block": "Eye of Ender Block",
 	"block.chaosawakens.ender_pearl_block": "Ender Pearl Block",
 	"block.chaosawakens.moth_scale_block": "Moth Scale Block",
@@ -525,7 +525,7 @@
 	"item.chaosawakens.ultimate_chestplate": "The Ultimate Chestplate",
 	"item.chaosawakens.ultimate_leggings": "The Ultimate Leggings",
 	"item.chaosawakens.ultimate_boots": "The Ultimate Boots",
-	
+
 	"item.chaosawakens.ender_dragon_scale_helmet": "Ender Dragon Scale Helmet",
 	"item.chaosawakens.ender_dragon_scale_chestplate": "Ender Dragon Scale Chestplate",
 	"item.chaosawakens.ender_dragon_scale_leggings": "Ender Dragon Scale Leggings",
@@ -761,12 +761,12 @@
 	"block.chaosawakens.terra_preta_farmland": "Terra Preta Farmland",
 	"block.chaosawakens.tar": "Tar",
 	"block.chaosawakens.latosol": "Latosol",
-	
+
 	"block.chaosawakens.flower_stem": "Flower Stem",
 	"block.chaosawakens.navy_blue_petal_block": "Navy Blue Petal Block",
 	"block.chaosawakens.bright_pink_petal_block": "Bright Pink Petal Block",
 	"block.chaosawakens.blood_red_petal_block": "Blood Red Petal Block",
-	
+
 	"block.chaosawakens.crystal_grass_block": "Crystal Grass Block",
 	"block.chaosawakens.kyanite": "Kyanite",
 	"block.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
@@ -852,7 +852,7 @@
 
 	"item.chaosawakens.skate_string_bow": "Skate String Bow",
 	"item.chaosawakens.irukandji_arrow": "Irukandji Arrow",
-	
+
 	"item.chaosawakens.apple_boat": "Apple Boat",
 	"item.chaosawakens.cherry_boat": "Cherry Boat",
 	"item.chaosawakens.duplication_boat": "Duplicator Boat",
@@ -1012,7 +1012,7 @@
 	"block.chaosawakens.ginkgo_sign": "Ginkgo Sign",
 	"block.chaosawakens.ginkgo_trapdoor": "Ginkgo Trapdoor",
 	"block.chaosawakens.ginkgo_door": "Ginkgo Door",
-	
+
 	"block.chaosawakens.mesozoic_sapling": "Mesozoic Sapling",
 	"block.chaosawakens.mesozoic_log": "Mesozoic Log",
 	"block.chaosawakens.mesozoic_wood": "Mesozoic Wood",
@@ -1029,7 +1029,7 @@
 	"block.chaosawakens.mesozoic_button": "Mesozoic Button",
 	"block.chaosawakens.mesozoic_trapdoor": "Mesozoic Trapdoor",
 	"block.chaosawakens.mesozoic_door": "Mesozoic Door",
-	
+
 	"block.chaosawakens.densewood_sapling": "Densewood Sapling",
 	"block.chaosawakens.densewood_log": "Densewood Log",
 	"block.chaosawakens.densewood_wood": "Densewood Wood",
@@ -1047,7 +1047,7 @@
 	"block.chaosawakens.densewood_sign": "Densewood Sign",
 	"block.chaosawakens.densewood_trapdoor": "Densewood Trapdoor",
 	"block.chaosawakens.densewood_door": "Densewood Door",
-	
+
 	"block.chaosawakens.peach_sapling": "Peach Sapling",
 	"block.chaosawakens.peach_log": "Peach Log",
 	"block.chaosawakens.peach_wood": "Peach Wood",
@@ -1065,7 +1065,7 @@
 	"block.chaosawakens.peach_sign": "Peach Sign",
 	"block.chaosawakens.peach_trapdoor": "Peach Trapdoor",
 	"block.chaosawakens.peach_door": "Peach Door",
-	
+
 	"block.chaosawakens.skywood_sapling": "Skywood Sapling",
 	"block.chaosawakens.skywood_log": "Skywood Log",
 	"block.chaosawakens.skywood_wood": "Skywood Wood",
@@ -1137,7 +1137,7 @@
 	"block.chaosawakens.polished_limestone_stairs": "Polished Limestone Stairs",
 	"block.chaosawakens.polished_limestone_wall": "Polished Limestone Wall",
 	"block.chaosawakens.limestone_pillar": "Limestone Pillar",
-	
+
 	"block.chaosawakens.rhinestone_block": "Rhinestone",
 	"block.chaosawakens.rhinestone_slab": "Rhinestone Slab",
 	"block.chaosawakens.rhinestone_stairs": "Rhinestone Stairs",
@@ -1181,7 +1181,7 @@
 	"block.chaosawakens.compact_robo_block": "Compact Robo Block",
 	"block.chaosawakens.robo_gate_block": "Robo Gate Block",
 	"block.chaosawakens.robo_crate": "Robo Crate",
-	
+
 	"block.chaosawakens.black_terracotta_bricks": "Black Terracotta Bricks",
 	"block.chaosawakens.blue_terracotta_bricks": "Blue Terracotta Bricks",
 	"block.chaosawakens.brown_terracotta_bricks": "Brown Terracotta Bricks",
@@ -1250,7 +1250,7 @@
 	"block.chaosawakens.terracotta_brick_wall": "Terracotta Brick Wall",
 	"block.chaosawakens.white_terracotta_brick_wall": "White Terracotta Brick Wall",
 	"block.chaosawakens.yellow_terracotta_brick_wall": "Yellow Terracotta Brick Wall",
-	
+
 	"block.chaosawakens.cracked_black_terracotta_bricks": "Cracked Black Terracotta Bricks",
 	"block.chaosawakens.cracked_blue_terracotta_bricks": "Cracked Blue Terracotta Bricks",
 	"block.chaosawakens.cracked_brown_terracotta_bricks": "Cracked Brown Terracotta Bricks",
@@ -1366,8 +1366,8 @@
 	"item.chaosawakens.mobzilla_scale": "Mobzilla Scale",
 	"item.chaosawakens.royal_guardian_scale": "Royal Guardian Scale",
 	"item.chaosawakens.queen_scale": "Queen Scale",
-	
-	"misc.chaosawakens.empty_inventory": "Empty inventory required to acces Crystalworld!",
+
+	"misc.chaosawakens.empty_inventory": "Empty inventory required to access Crystalworld!",
 	"misc.chaosawakens.inaccessible_dimension": "This dimension hasn't been added to the mod yet!",
 
 	"subtitles.chaosawakens.entity.emerald_gator.attack": "Emerald Gator bites",
@@ -1423,7 +1423,7 @@
 	"subtitles.chaosawakens.entity.whale.ambient": "Whale whistles",
 	"subtitles.chaosawakens.entity.whale.hurt": "Whale hurts",
 	"subtitles.chaosawakens.entity.whale.death": "Whale dies",
-	
+
 	"tooltip.chaosawakens.default": "Hold SHIFT or CTRL for more info.",
 	"tooltip.chaosawakens.ruby": "Bright red gem of burning desire.",
 	"tooltip.chaosawakens.amethyst": "Purple gem with interesting light manipulation properties.",

@@ -217,7 +217,7 @@ public class CAEntityTypes {
 					.sized(0.9F, 0.9F).clientTrackingRange(10)
 					.build(new ResourceLocation(ChaosAwakens.MODID, "crystal_carrot_pig").toString()));
 	
-	//Leafy Chicken
+	// Lettuce Chicken
 	public static final RegistryObject<EntityType<LeafyChickenEntity>> LEAFY_CHICKEN = ENTITY_TYPES.register("leafy_chicken",
 			() -> EntityType.Builder.of(LeafyChickenEntity::new, EntityClassification.CREATURE)
 					.sized(0.4F, 0.7F).clientTrackingRange(10)

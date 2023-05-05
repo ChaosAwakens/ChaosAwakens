@@ -21,10 +21,12 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class BiomeLoadEventSubscriber {
+
 	public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
 		StructureHandler.addFeatures(event);
 		MobSpawnHandler.addMobSpawns(event);
 	}
+
 
 	private static class MobSpawnHandler {
 		// Mobs that appear in any biome, but only in the overworld
@@ -48,11 +50,11 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.WOOD_FISH.get(), 20, 5, 8));
 			builder.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.SPARK_FISH.get(), 15, 4, 6));
 		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> MOUNTAIN_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), 27, 1, 2));
 		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 10, 1, 2));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
@@ -82,17 +84,17 @@ public class BiomeLoadEventSubscriber {
 			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_WARRIOR.get(), 55, 1, 4));
 			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_SNIPER.get(), 60, 1, 3));
 		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> STALAGMITE_VALLEY_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.DIMETRODON.get(), 1, 1, 3));
 			builder.addSpawn(EntityClassification.AMBIENT, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 1, 1, 4));
 		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> MESOZOIC_JUNGLE_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.DIMETRODON.get(), 1, 1, 3));
 			builder.addSpawn(EntityClassification.AMBIENT, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 1, 1, 4));
 		};
-		
+
 		private static final Consumer<MobSpawnInfoBuilder> DENSE_MOUNTAINS_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.HERCULES_BEETLE.get(), 35, 1, 4));
 		};
@@ -110,6 +112,7 @@ public class BiomeLoadEventSubscriber {
 			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES,
 					Objects.requireNonNull(event.getName(), "Who registered null name biome, naming criticism!"));
 			final String location = biome.location().toString();
+
 
 			switch (event.getCategory()) {
 				case SWAMP:
@@ -318,15 +321,16 @@ public class BiomeLoadEventSubscriber {
 				
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.STALAGMITE_VALLEY)) {
 					addStalagmiteValleyFeatures(gen);
-					//if (CACommonConfig.COMMON.generateWaspNest.get())					
-					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_MINING_WASP_DUNGEON);
+					if (CACommonConfig.COMMON.generateMiningWaspNest.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_MINING_WASP_DUNGEON);
 				}
 				
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_GINKGO_FOREST)) {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_GINKGO);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_FLOWER);
-					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_GINKGO_ENT_TREE);
+					if (CACommonConfig.COMMON.generateGinkgoEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_GINKGO_ENT_TREE);
 				}
 				
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_PLAINS)) {
@@ -359,15 +363,18 @@ public class BiomeLoadEventSubscriber {
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_PLAINS)) {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.CORN_PATCH);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
-					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+					if (CACommonConfig.COMMON.generateOakEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
 				}
 				if (CACommonConfig.COMMON.enableOreGen.get())
 					addVillageManiaOres(gen);
 				
 				if(BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_SNOWY) || BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_TAIGA))
-					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
+					if (CACommonConfig.COMMON.generateSpruceEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_SPRUCE_ENT_TREE);
 				if(BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_SAVANNA))
-					gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
+					if (CACommonConfig.COMMON.generateAcaciaEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_ACACIA_ENT_TREE);
 				
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_APPLE);
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_CHERRY);
@@ -392,7 +399,8 @@ public class BiomeLoadEventSubscriber {
 		}
 
 		private static void addOverworldOres(BiomeGenerationSettingsBuilder gen) {
-			gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_ALUMINUM);
+			if (CACommonConfig.COMMON.enableOreAluminumGen.get())
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_ALUMINUM);
 			if (CACommonConfig.COMMON.enableOreRubyGen.get())
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.ORE_RUBY_LAVA);
 			if (CACommonConfig.COMMON.enableOreAmethystGen.get())
@@ -494,7 +502,6 @@ public class BiomeLoadEventSubscriber {
 		private static void addForestBiomeOres(BiomeGenerationSettingsBuilder gen) {
 			if (CACommonConfig.COMMON.enableFossilGen.get()) {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_WASP);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_LETTUCE_CHICKEN);
 			}
 		}
 
@@ -504,7 +511,6 @@ public class BiomeLoadEventSubscriber {
 
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_WOLF);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_BEAVER);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_LETTUCE_CHICKEN);
 			}
 		}
 
@@ -534,7 +540,6 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_VINDICATOR);
 				
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_BEAVER);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_LETTUCE_CHICKEN);
 			}
 		}
 
@@ -701,7 +706,7 @@ public class BiomeLoadEventSubscriber {
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_GOLDEN_APPLE_COW);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_CARROT_PIG);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_GOLDEN_CARROT_PIG);
-				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.FOSSILISED_LETTUCE_CHICKEN);
+				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_LETTUCE_CHICKEN);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_BIRD);
 				gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.MINING_FOSSILISED_FROG);
 

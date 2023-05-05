@@ -2,8 +2,7 @@ package io.github.chaosawakens.common.entity;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.HeightmapTeleporter;
+import io.github.chaosawakens.api.ITeleporterMob;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -14,16 +13,10 @@ import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
@@ -36,9 +29,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class AntEntity extends AnimalEntity implements IAnimatable {
+public class AntEntity extends AnimalEntity implements IAnimatable, ITeleporterMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ITextComponent inaccessibleMessage = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
 	private final ConfigValue<Boolean> tpConfig;
 	private final RegistryKey<World> targetDimension;
 
@@ -77,20 +69,7 @@ public class AntEntity extends AnimalEntity implements IAnimatable {
 
 	@Override
 	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
-		ItemStack itemstack = playerIn.getItemInHand(hand);
-
-		if (tpConfig.get() && !this.level.isClientSide && itemstack.getItem() == Items.AIR) {
-			if (targetDimension == null) {
-				playerIn.displayClientMessage(this.inaccessibleMessage, true);
-				return ActionResultType.PASS;
-			} else {
-				MinecraftServer minecraftServer = ((ServerWorld) this.level).getServer();
-				ServerWorld targetWorld = minecraftServer.getLevel(this.level.dimension() == this.targetDimension ? World.OVERWORLD : this.targetDimension);
-				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerIn;
-				if (targetWorld != null) serverPlayer.changeDimension(targetWorld, new HeightmapTeleporter());
-			}
-		}
-		return super.mobInteract(playerIn, hand);
+		return mobInteract(playerIn, hand, this.level, this.tpConfig, this.targetDimension);
 	}
 
 	protected void handleAirSupply() {
