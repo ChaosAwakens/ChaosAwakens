@@ -11,7 +11,7 @@ You can also download the mod on [CurseForge](https://www.curseforge.com/minecra
 **1.16.5 (Forge):**
 * [Forge v36.2.20 and above](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html)
 * [GeckoLib v3.0.77 and above](https://www.curseforge.com/minecraft/mc-mods/geckolib/files/all?filter-game-version=1738749986%3a70886)
-* [AttributeFix v10.1.4 and above](https://www.curseforge.com/minecraft/mc-mods/attributefix/files/all?filter-game-version=1738749986%3a70886)
+* [AttributeFix v10.1.4 and above (for versions 0.10 and below)](https://www.curseforge.com/minecraft/mc-mods/attributefix/files/all?filter-game-version=1738749986%3a70886)
 
 ### Recommended Dependencies
 **1.16.5 (Forge):**
