@@ -3,6 +3,8 @@ package io.github.chaosawakens.common.registry;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeature;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
+import io.github.chaosawakens.common.worldgen.feature.NBTTreeFeature;
+import io.github.chaosawakens.common.worldgen.feature.NBTTreeFeatureConfig;
 import io.github.chaosawakens.common.worldgen.feature.StalagmiteFeature;
 import io.github.chaosawakens.common.worldgen.feature.StalagmiteFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -15,4 +17,5 @@ public class CAFeatures {
 
 	public static final RegistryObject<GeodeFeature> GEODE = FEATURES.register("geode", () -> new GeodeFeature(GeodeFeatureConfig.CODEC));
 	public static final RegistryObject<StalagmiteFeature> STALAGMITE = FEATURES.register("stalagmite", () -> new StalagmiteFeature(StalagmiteFeatureConfig.CODEC));
+	public static final RegistryObject<NBTTreeFeature> NBT_TREE_FEATURE = FEATURES.register("nbt_tree_feature", () -> new NBTTreeFeature(NBTTreeFeatureConfig.CODEC));
 }
