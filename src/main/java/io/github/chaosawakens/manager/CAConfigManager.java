@@ -34,7 +34,7 @@ public class CAConfigManager {
 		MAIN_SERVER = serverSpecPair.getLeft();
 	}
 	
-	public static void registerConfigs() {
+	protected static void registerConfigs() {
 		registerClientConfig();
 		registerCommonConfig();
 		registerServerConfig();

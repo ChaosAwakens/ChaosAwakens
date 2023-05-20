@@ -16,7 +16,7 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 
 public class CAEventManager {
 
-	public static void registerEvents(IEventBus modBus, IEventBus forgeBus) {		
+	protected static void registerEvents(IEventBus modBus, IEventBus forgeBus) {		
 		registerClientEvents(modBus, forgeBus);
 		registerCommonEvents(modBus, forgeBus);
 		registerServerEvents(modBus, forgeBus);

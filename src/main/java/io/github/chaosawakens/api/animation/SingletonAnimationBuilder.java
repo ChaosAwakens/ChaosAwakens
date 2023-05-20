@@ -11,6 +11,7 @@ import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
+import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.resource.GeckoLibCache;
 import software.bernie.shadowed.eliotlash.mclib.math.Variable;
@@ -72,6 +73,10 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	public IAnimatableEntity getOwner() {
 		return owner;
+	}
+	
+	public EDefaultLoopTypes getLoopType() {
+		return (EDefaultLoopTypes) getAnimation().loop;
 	}
 
 	public boolean isPlaying(int id) {
@@ -139,11 +144,6 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	 */
 	public void playAnimation() {
 		playAnimation(false);
-	}
-	
-	public void tick() {
-		animBuilder.addAnimation(animName);
-		animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 	}
 	
 	public void stopAnimation() {

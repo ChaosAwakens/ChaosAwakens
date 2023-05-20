@@ -12,7 +12,7 @@ import snownee.jade.Jade;
 
 public class CAModIntegrationManager {
 
-	public static void registerIntegration(IEventBus modBus, IEventBus forgeBus) {
+	protected static void registerIntegration(IEventBus modBus, IEventBus forgeBus) {
 		if (checkModPresence(Jade.MODID)) CAJadePlugin.registerJadeCompat();
 		if (checkModPresence(TheOneProbe.MODID)) TheOneProbePlugin.register();
 //		if (checkModPresence(IronChests.MODID) || DatagenModLoader.isRunningDataGen()) CAIronChestsPlugin.register();
@@ -33,5 +33,4 @@ public class CAModIntegrationManager {
 	public static boolean checkModPresence(String modid) {
 		return ModList.get().isLoaded(modid);
 	}
-
 }

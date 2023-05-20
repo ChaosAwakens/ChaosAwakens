@@ -26,7 +26,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 
 public class CARegistryManager {
 
-	public static void registerRegistries(IEventBus modBus) {
+	protected static void registerRegistries(IEventBus modBus) {
 		CAAttributes.ATTRIBUTES.register(modBus);
 		CABiomes.BIOMES.register(modBus);
 		CABlocks.ITEM_BLOCKS.register(modBus);

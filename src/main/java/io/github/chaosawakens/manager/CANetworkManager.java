@@ -2,6 +2,7 @@ package io.github.chaosawakens.manager;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.network.ICAPacket;
+import io.github.chaosawakens.common.network.packets.c2s.AnimationC2SDataSyncPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
 import net.minecraft.client.Minecraft;
@@ -25,6 +26,11 @@ public class CANetworkManager {
 	}
 	
 	private static void registerCTSPackets(int id) {
+		CHANNEL.messageBuilder(AnimationC2SDataSyncPacket.class, id++)
+		.encoder(AnimationC2SDataSyncPacket::encode)
+		.decoder(AnimationC2SDataSyncPacket::decode)
+		.consumer(AnimationC2SDataSyncPacket::onRecieve)
+		.add();
 	}
 	
 	private static void registerSTCPackets(int id) {
