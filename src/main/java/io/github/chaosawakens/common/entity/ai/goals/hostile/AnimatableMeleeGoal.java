@@ -62,14 +62,14 @@ public class AnimatableMeleeGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive() && meleeAnim.get() != null && !meleeAnim.get().hasAnimationFinished(owner.getId()) && owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive() && !meleeAnim.get().hasAnimationFinished(owner.getId()) && owner.getTarget().isAlive();
 	}
 
 	@Override
 	public void start() {
-		owner.playAnimation(meleeAnim.get());
 		owner.setAttackID(attackId);
 		owner.getNavigation().stop();
+		owner.playAnimation(meleeAnim.get());
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class AnimatableMeleeGoal extends Goal {
 	public void tick() {
 		owner.getNavigation().stop();
 		LivingEntity target = owner.getTarget();
-		if(ObjectUtil.performNullityChecks(false, target))return;
+	//	if (!ObjectUtil.performNullityChecks(false, target)) return;
 		double reach = owner.getMeleeAttackReachSqr(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 

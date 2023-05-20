@@ -66,12 +66,8 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		return this;
 	}
 	
-	public SingletonAnimationBuilder setAnimationSpeed(double animSpeed) {
-		final double prevSpeed = targetController.getAnimationSpeed();
-	//	targetController.setAnimationSpeed(animSpeed);
-		targetController.setAnimationSpeed(prevSpeed);
-
-		return this;
+	public AnimationController<? extends IAnimatableEntity> getController() {
+		return targetController;
 	}
 
 	public IAnimatableEntity getOwner() {
@@ -88,7 +84,8 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 		if (isPlaying(id)) wasPlaying = true;
 
-		return wasPlaying ? getProgressTicks(id) >= getLengthTicks() || (targetController.getAnimationState() != AnimationState.Running || targetController.getAnimationState() == AnimationState.Stopped) : false;
+		// Sacrificing some accuracy
+		return wasPlaying ? getProgressTicks(id) >= getLengthTicks() - 2 || (targetController.getAnimationState() != AnimationState.Running || targetController.getAnimationState() == AnimationState.Stopped) : false;
 	}
 
 	@Nullable
@@ -106,9 +103,9 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		
 		double progress = 0;
 		
-		// Get progress using moland query, pretty ick :/
-		for (Map.Entry<String, Variable> molandVar : GeckoLibCache.getInstance().parser.variables.entrySet()) {
-			if (molandVar.getKey().equals("query.anim_time")) progress = molandVar.getValue().get();
+		// Get progress using molang query, pretty ick :/
+		for (Map.Entry<String, Variable> molangVar : GeckoLibCache.getInstance().parser.variables.entrySet()) {
+			if (molangVar.getKey().equals("query.anim_time")) progress = molangVar.getValue().get();
 		}
 		
 		return isPlaying(id) ? Math.ceil(progress * 20) : 0;
@@ -121,7 +118,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public double getLengthTicks() {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return 0;	
 
-		return getAnimation().animationLength;
+		return Math.floor(getAnimation().animationLength);
 	}
 
 	public double getLengthSeconds() {

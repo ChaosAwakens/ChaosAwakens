@@ -87,6 +87,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
+		if (isAttacking()) return PlayState.STOP;
 		if (shouldTaunt()) playAnimation(tauntAnim);
 		return PlayState.CONTINUE;
 	}
@@ -137,16 +138,17 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (tickCount % 10 == 0 && isAlive()) {
 			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
 			ChaosAwakens.debug("Anim", "[IS PLAYING IDLE ANIM]: " + isPlayingAnimation(idleAnim));
-/*			ChaosAwakens.debug("Anim", "[HAS IDLE FINISHED]: " + idleAnim.hasAnimationFinished());
-			ChaosAwakens.debug("Anim", "[HAS DEATH FINISHED]: " + deathAnim.hasAnimationFinished());
-			ChaosAwakens.debug("Anim", "[IDLE PROGRESS]: " + idleAnim.getProgressTicks());
-			ChaosAwakens.debug("Anim", "[WALK PROGRESS]: " + walkAnim.getProgressTicks());
-			ChaosAwakens.debug("Anim", "[IDLE LENGTH]: " + idleAnim.getLengthTicks());*/
+			ChaosAwakens.debug("Anim", "[HAS IDLE FINISHED]: " + idleAnim.hasAnimationFinished(getId()));
+			ChaosAwakens.debug("Anim", "[HAS DEATH FINISHED]: " + deathAnim.hasAnimationFinished(getId()));
+			ChaosAwakens.debug("Anim", "[IDLE PROGRESS]: " + idleAnim.getProgressTicks(getId()));
+			ChaosAwakens.debug("Anim", "[WALK PROGRESS]: " + walkAnim.getProgressTicks(getId()));
+			ChaosAwakens.debug("Anim", "[IDLE LENGTH]: " + idleAnim.getLengthTicks());
 			ChaosAwakens.debug("Anim", "[RPA TICKS]: " + rightPunchAnim.getProgressTicks(getId()));
 			ChaosAwakens.debug("Anim", "[LPA TICKS]: " + leftPunchAnim.getProgressTicks(getId()));
 			ChaosAwakens.debug("Anim", "[ATTACK ID]: " + getAttackID());
 			ChaosAwakens.debug("Anim", "[MAINCONT]: " + mainController.getAnimationState());
 			ChaosAwakens.debug("Anim", "[ATKCONT]: " + attackController.getAnimationState());
+			ChaosAwakens.debug("Anim", "[ATKID]: " + getAttackID());
 			ChaosAwakens.debug("Anim", "------------------------------------------------------------------------------");
 			
 			ChaosAwakens.debug("AnimCont", "--------------------------------------------------------------------------");

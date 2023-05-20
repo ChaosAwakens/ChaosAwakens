@@ -146,7 +146,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (((Entity) this).level.isClientSide) {
 			animation.playAnimation();
 		} else {
-			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, (EDefaultLoopTypes) animation.getAnimation().loop), (Entity) this);
+			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, (EDefaultLoopTypes) animation.getAnimation().loop, animation.getController().getName()), (Entity) this);
 		}
 	}
 

@@ -17,15 +17,17 @@ public class AnimationTriggerPacket implements ICAPacket {
 	private final int animatableOwnerID;
 	private final String animationName;
 	private final EDefaultLoopTypes loopType;
+	private final String controllerName;
 	
-	public AnimationTriggerPacket(int animatableOwnerID, String animationName, EDefaultLoopTypes loopType) {
+	public AnimationTriggerPacket(int animatableOwnerID, String animationName, EDefaultLoopTypes loopType, String controllerName) {
 		this.animatableOwnerID = animatableOwnerID;
 		this.animationName = animationName;
 		this.loopType = loopType;
+		this.controllerName = controllerName;
 	}
 	
 	public static AnimationTriggerPacket decode(PacketBuffer buf) {
-		return new AnimationTriggerPacket(buf.readInt(), buf.readUtf(), buf.readEnum(EDefaultLoopTypes.class));
+		return new AnimationTriggerPacket(buf.readInt(), buf.readUtf(), buf.readEnum(EDefaultLoopTypes.class), buf.readUtf());
 	}
 
 	@Override
@@ -33,6 +35,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 		buf.writeInt(animatableOwnerID);
 		buf.writeUtf(animationName);
 		buf.writeEnum(loopType);
+		buf.writeUtf(controllerName);
 	}
 
 	@SuppressWarnings("resource")
@@ -44,7 +47,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 			
 			if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity) {
 				IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
-				final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType);
+				final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
 				
 				targetAnimatable.playAnimation(targetAnim);
 			} //else ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
