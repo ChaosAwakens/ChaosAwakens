@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.network.packets.s2c;
 
 import java.util.function.Supplier;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.network.ICAPacket;
@@ -50,10 +51,9 @@ public class AnimationTriggerPacket implements ICAPacket {
 				final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
 				
 				targetAnimatable.playAnimation(targetAnim);
-			} //else ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
+			} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
 		});
 		
-	//	ChaosAwakens.debug("Anim", "AnimTrig Packet sent!");
 		ctx.get().setPacketHandled(true);
 	}
 

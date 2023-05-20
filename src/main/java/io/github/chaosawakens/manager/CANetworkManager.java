@@ -2,7 +2,7 @@ package io.github.chaosawakens.manager;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.network.ICAPacket;
-import io.github.chaosawakens.common.network.packets.c2s.AnimationC2SDataSyncPacket;
+import io.github.chaosawakens.common.network.packets.c2s.AnimationDataSyncPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 public class CANetworkManager {
 	private static final String PROTOCOL_VERSION = "1";
-	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(ChaosAwakens.prefix("channel"), () ->
+	private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(ChaosAwakens.prefix("channel"), () ->
 			      PROTOCOL_VERSION, 
 			      PROTOCOL_VERSION::equals,
 			      PROTOCOL_VERSION::equals);
@@ -26,10 +26,10 @@ public class CANetworkManager {
 	}
 	
 	private static void registerCTSPackets(int id) {
-		CHANNEL.messageBuilder(AnimationC2SDataSyncPacket.class, id++)
-		.encoder(AnimationC2SDataSyncPacket::encode)
-		.decoder(AnimationC2SDataSyncPacket::decode)
-		.consumer(AnimationC2SDataSyncPacket::onRecieve)
+		CHANNEL.messageBuilder(AnimationDataSyncPacket.class, id++)
+		.encoder(AnimationDataSyncPacket::encode)
+		.decoder(AnimationDataSyncPacket::decode)
+		.consumer(AnimationDataSyncPacket::onRecieve)
 		.add();
 	}
 	

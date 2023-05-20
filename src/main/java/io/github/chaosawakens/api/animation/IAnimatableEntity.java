@@ -10,6 +10,8 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.manager.CANetworkManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
+import net.minecraft.network.datasync.DataParameter;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimatableModel;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -107,11 +109,6 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim) {
-	/*	for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
-			if (controller.getCurrentAnimation() == null) continue;
-			if (controller.getCurrentAnimation().animationName == targetAnim.getAnimation().animationName) return true;
-		}*/
-
 		return targetAnim.isPlaying(((Entity) this).getId());
 	}
 
@@ -126,18 +123,27 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 		return false;
 	}
+	
+	default boolean isPlayingAnimationInController(AnimationController<? extends IAnimatableEntity> targetController) {
+		return targetController.getCurrentAnimation() != null;
+	}
+	
+	default boolean isPlayingAnimationInController(String targetControllerName) {
+		return getControllerByName(targetControllerName).getCurrentAnimation() != null;
+	}
 
 	/**
 	 * <b>GECKOLIB 4 IMPL</b>
 	 * <br> </br>
 	 * Plays an animation through the passed in animation's owner controller. Like the {@code triggerAnim} method in Geckolib 4, this can be
-	 * called on either the client or the server. This does so by sending a packet to all tracking entities if triggered on the server 
-	 * (NO PROGRESS SYNCING SHENANIGANS THIS TIME, I PROMISE!). Otherwise it'll just play an animation normally on the client.
+	 * called on either the client or the server. This does so by sending a packet to all tracking entities if triggered on the server. 
+	 * Otherwise it'll just play an animation normally on the client.
 	 * <br> </br>
 	 * No need to implement other means of triggering animations for now, so long as this exists.
 	 * <br> </br>
-	 * <b>IMPORTANT: </b> Just because you can trigger the animation from the server DOES NOT MEAN that animation data (tick, length, name, etc.) is available on the server too!
-	 * As always, animations are handled solely on the client (with the exception of triggering them on the server using this method).
+	 * <b>IMPORTANT: </b> Just because you can trigger the animation from the server DOES NOT MEAN that animation predicates are useless! You can still 
+	 * use them to return an {@link AnimationState}, which will be synced and handled accordingly on the server. You still have to use {@link DataParameter}s
+	 * for that, though. Animation predicates will <i>always</i> be client side.
 	 * @param animation The animation to play.
 	 */
 	default void playAnimation(SingletonAnimationBuilder animation) {
@@ -171,9 +177,6 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 	@Override
 	default int tickTimer() {
-	/*	if (isPlayingAnimation(null)) {
-			
-		}*/
 		return ((Entity) this).tickCount;
 	}
 

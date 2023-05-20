@@ -4,7 +4,9 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.network.packets.c2s.AnimationDataSyncPacket;
 import io.github.chaosawakens.common.util.ObjectUtil;
+import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.datasync.DataParameter;
 import software.bernie.geckolib3.core.AnimationState;
@@ -130,7 +132,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		return getLengthTicks() / 20;
 	}
 	
-	public void playAnimation(boolean forceAnim) {
+	protected void playAnimation(boolean forceAnim) {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return;
 		
 		if (targetController.getCurrentAnimation() != null && forceAnim) targetController.markNeedsReload();
@@ -142,8 +144,15 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	 * It is recommended that you use {@link IAnimatableEntity}'s implementation instead ({@link IAnimatableEntity#playAnimation(SingletonAnimationBuilder)}),
 	 * as it handles all the necessary checks should you need to trigger animations server-side. Otherwise, call this with caution (only client-side)!
 	 */
-	public void playAnimation() {
+	protected void playAnimation() {
 		playAnimation(false);
+	}
+	
+	public void tickAnim() {
+		if (isPlaying(((Entity) owner).getId())) {
+			// Sync data C2S
+			if (((Entity) owner).level.isClientSide) CANetworkManager.sendPacketToServer(new AnimationDataSyncPacket(((Entity) owner).getId(), targetController.getName(), animName, getLoopType(), getProgressTicks(((Entity) owner).getId()), getController().getAnimationState()));
+		}
 	}
 	
 	public void stopAnimation() {
