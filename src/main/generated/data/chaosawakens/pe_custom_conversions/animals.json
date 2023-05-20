@@ -36,13 +36,6 @@
           "minecraft:water_bucket",
           "chaosawakens:wood_fish"
         ]
-      },
-      {
-        "output": "chaosawakens:lava_eel_bucket",
-        "ingredients": [
-          "minecraft:lava_bucket",
-          "chaosawakens:lava_eel"
-        ]
       }
     ]
   }

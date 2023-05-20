@@ -70,7 +70,7 @@ public class DefossilizingRecipe extends AbstractDefossilizingRecipe {
 			recipe.ingredient3.toNetwork(buffer);
 			buffer.writeItem(recipe.result);
 			buffer.writeFloat(recipe.experience);
-			buffer.writeInt(recipe.defossilizingTime);
+			buffer.writeInt(recipe.DEFOSSILIZING_TIME);
 			buffer.writeUtf(recipe.defossilizerType);
 		}
 	}

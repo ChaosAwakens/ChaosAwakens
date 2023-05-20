@@ -10,11 +10,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CAEnchantments {
-	
 	public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, ChaosAwakens.MODID);
+	
 	private static final EquipmentSlotType[] ARMOR_SLOTS = new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET};
 	
-	public static final RegistryObject<Enchantment> IGNITE = ENCHANTMENTS.register("ignite", () -> new IgniteEnchantment(ARMOR_SLOTS));
-	public static final RegistryObject<Enchantment> HOPLOLOGY = ENCHANTMENTS.register("hoplology", () -> new HoplologyEnchantment(ARMOR_SLOTS));
+	// Enchantments
+	public static final RegistryObject<IgniteEnchantment> IGNITE = ENCHANTMENTS.register("ignite", () -> new IgniteEnchantment(ARMOR_SLOTS));
+	public static final RegistryObject<HoplologyEnchantment> HOPLOLOGY = ENCHANTMENTS.register("hoplology", () -> new HoplologyEnchantment(ARMOR_SLOTS));
 	
+	// Curses
 }

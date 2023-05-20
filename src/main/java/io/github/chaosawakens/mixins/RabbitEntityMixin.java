@@ -17,18 +17,17 @@ import net.minecraftforge.common.BiomeDictionary;
 
 @Mixin(RabbitEntity.class)
 public abstract class RabbitEntityMixin extends AnimalEntity {
+	
 	public RabbitEntityMixin(EntityType<? extends RabbitEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
 	@Inject(method = "getRandomRabbitType", at = @At("HEAD"), cancellable = true)
-	public void chaosawakens$getRandomRabbitType(IWorld world, CallbackInfoReturnable<Integer> cir) {
+	private void chaosawakens$getRandomRabbitType(IWorld world, CallbackInfoReturnable<Integer> cir) {
 		RegistryKey<Biome> biomeRegistryKey = world.getBiomeName(this.blockPosition()).get();
-		int i = this.random.nextInt(100);
-		if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.VILLAGE_SNOWY)) {
-			cir.setReturnValue(i < 80 ? 1 : 3);
-		} else if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.VILLAGE_DESERT)) {
-			cir.setReturnValue(4);
-		}
+		int chance = this.random.nextInt(100);
+		
+		if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.VILLAGE_SNOWY)) cir.setReturnValue(chance < 80 ? 1 : 3);
+		else if (BiomeDictionary.hasType(biomeRegistryKey, CABiomes.Type.VILLAGE_DESERT)) cir.setReturnValue(4);
 	}
 }

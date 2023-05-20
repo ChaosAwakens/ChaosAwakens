@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.entity.ai.pathfinding;
 
-import io.github.chaosawakens.api.IBlockBreakingMob;
 import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.api.entity.IBlockBreakingMob;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.math.MathHelper;

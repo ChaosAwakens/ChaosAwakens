@@ -6,9 +6,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CADimensions {
+@EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class CADimensions {	
 	public static final RegistryKey<World> CRYSTAL_WORLD = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID, "crystal_world"));
 	public static final RegistryKey<World> MINING_PARADISE = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID, "mining_paradise"));
 	public static final RegistryKey<World> VILLAGE_MANIA = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ChaosAwakens.MODID, "village_mania"));

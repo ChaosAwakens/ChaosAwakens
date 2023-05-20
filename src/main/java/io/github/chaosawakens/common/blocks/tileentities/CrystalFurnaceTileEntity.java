@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.blocks.tileentities.slots.CrystalFurnaceContainer;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATileEntities;
 import net.minecraft.entity.player.PlayerInventory;

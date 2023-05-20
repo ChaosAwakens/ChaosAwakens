@@ -7,7 +7,7 @@ import java.util.Set;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import io.github.chaosawakens.common.blocks.LeafCarpetBlock;
+import io.github.chaosawakens.common.blocks.multiface.LeafCarpetBlock;
 import io.github.chaosawakens.common.registry.CATreeDecoratorTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;

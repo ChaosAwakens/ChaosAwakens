@@ -7,6 +7,7 @@ import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
 public class CASignTileEntity extends SignTileEntity {
+	
 	@Nonnull
 	@Override
 	public TileEntityType<CASignTileEntity> getType() {

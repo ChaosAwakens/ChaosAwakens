@@ -18,12 +18,12 @@ import net.minecraft.world.World;
 @Mixin(WolfEntity.class)
 public abstract class WolfEntityMixin extends TameableEntity {
 	
-	protected WolfEntityMixin(EntityType<? extends TameableEntity> type, World world) {
+	public WolfEntityMixin(EntityType<? extends TameableEntity> type, World world) {
 		super(type, world);
 	}
 
 	@Inject(method = "Lnet/minecraft/entity/passive/WolfEntity;mobInteract(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
-	public void chaosawakens$mobInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResultType> cir) {
+	private void chaosawakens$mobInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResultType> cir) {
 		if (this.isTame()) {
 			if (player.getMainHandItem().getItem() == CAItems.CRITTER_CAGE.get()) {
 				CritterCageItem cage = (CritterCageItem) player.getMainHandItem().getItem();

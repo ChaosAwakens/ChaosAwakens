@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.tileentities.DefossilizerCopperScreen;
-import io.github.chaosawakens.common.blocks.tileentities.DefossilizerIronContainer;
-import io.github.chaosawakens.common.blocks.tileentities.DefossilizerIronScreen;
+import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
+import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerIronContainer;
+import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerCopperScreen;
+import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerIronScreen;
+import io.github.chaosawakens.common.integration.jei.recipecategories.DefossilizerRecipeCategory;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CARecipes;
 import mezz.jei.api.IModPlugin;
@@ -24,18 +26,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 @JeiPlugin
 public class CAJEIPlugin implements IModPlugin {
-	public static final ResourceLocation MOD = new ResourceLocation(ChaosAwakens.MODID, "jei");
+	public static final ResourceLocation MOD = ChaosAwakens.prefix("jei");
 	public static final int INV_SIZE = 4 * 9;
 
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
 	}
 
-	@SuppressWarnings("deprecation")
-	private void addDescription(IRecipeRegistration registry, String langEntry, ItemStack... itemStack) {
+	private void addDescription(IRecipeRegistration registry, ITextComponent langEntry, ItemStack... itemStack) {
 		registry.addIngredientInfo(Arrays.asList(itemStack), VanillaTypes.ITEM, langEntry);
 	}
 
@@ -49,16 +52,9 @@ public class CAJEIPlugin implements IModPlugin {
 	public void registerRecipes(IRecipeRegistration registry) {
 		ClientWorld world = Objects.requireNonNull(Minecraft.getInstance().level);
 		registry.addRecipes(world.getRecipeManager().getAllRecipesFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE), DefossilizerRecipeCategory.ID);
-		addDescription(registry, "jei_desc.chaosawakens.copper_defossilizer",
-				new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()));
-		addDescription(registry, "jei_desc.chaosawakens.iron_defossilizer",
-				new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()));
-		addDescription(registry, "jei_desc.chaosawakens.crystal_defossilizer",
-				new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get()));
-		addDescription(registry, "jei_desc.chaosawakens.defossilizer",
-				new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()),
-				new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()),
-				new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get()));
+		addDescription(registry, new TranslationTextComponent("jei_desc.chaosawakens.copper_defossilizer"), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()));
+		addDescription(registry, new TranslationTextComponent("jei_desc.chaosawakens.iron_defossilizer"), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()));
+		addDescription(registry, new TranslationTextComponent("jei_desc.chaosawakens.defossilizer"), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()));
 	}
 
 	@Override
@@ -69,9 +65,8 @@ public class CAJEIPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-		registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()), DefossilizerRecipeCategory.ID);
-		registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()), DefossilizerRecipeCategory.ID);
-		registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get()), DefossilizerRecipeCategory.ID);
+		registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()), DefossilizerRecipeCategory.ID);
+		registry.addRecipeCatalyst(new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()), DefossilizerRecipeCategory.ID);
 		registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_CRAFTING_TABLE.get()), VanillaRecipeCategoryUid.CRAFTING);
 		registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_FURNACE.get()), VanillaRecipeCategoryUid.FUEL);
 		registry.addRecipeCatalyst(new ItemStack(CABlocks.CRYSTAL_FURNACE.get()), VanillaRecipeCategoryUid.FURNACE);

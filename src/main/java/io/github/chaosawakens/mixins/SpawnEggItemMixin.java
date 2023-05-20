@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CATags;
-import io.github.chaosawakens.common.util.EnumUtils.SurvivalSpawnerManipulationType;
+import io.github.chaosawakens.common.util.EnumUtil.SurvivalSpawnerManipulationType;
+import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -31,53 +31,55 @@ import net.minecraft.world.spawner.AbstractSpawner;
 
 @Mixin(SpawnEggItem.class)
 public abstract class SpawnEggItemMixin {
-    @Shadow
-    public abstract EntityType<?> getType(CompoundNBT compoundNBT);
+	@Shadow
+	public abstract EntityType<?> getType(CompoundNBT compoundNBT);
 
-    @Inject(method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
-    public void chaosawakens$useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
-        World world = itemUseContext.getLevel();
-        if (!(world instanceof ServerWorld)) {
-            cir.setReturnValue(ActionResultType.SUCCESS);
-        } else {
-            ItemStack itemstack = itemUseContext.getItemInHand();
-            BlockPos blockpos = itemUseContext.getClickedPos();
-            Direction direction = itemUseContext.getClickedFace();
-            BlockState blockstate = world.getBlockState(blockpos);
-            PlayerEntity player = itemUseContext.getPlayer();
-            if (blockstate.is(Blocks.SPAWNER)) {
-                if ((CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.NO_BLOCKING) ||
-                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_ALL && player.isCreative()) ||
-                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_CHAOS_AWAKENS && player.isCreative() && itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
-                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_CHAOS_AWAKENS && !itemstack.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
-                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.TAG_BLACKLISTED && !itemstack.getItem().is(CATags.Items.SPAWNER_SPAWN_EGGS)) ||
-                        (CACommonConfig.COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.TAG_WHITELISTED && itemstack.getItem().is(CATags.Items.SPAWNER_SPAWN_EGGS))) {
-                    TileEntity tileentity = world.getBlockEntity(blockpos);
-                    if (tileentity instanceof MobSpawnerTileEntity) {
-                        AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
-                        EntityType<?> entitytype1 = getType(itemstack.getTag());
-                        abstractspawner.setEntityId(entitytype1);
-                        tileentity.setChanged();
-                        world.sendBlockUpdated(blockpos, blockstate, blockstate, 3);
-                        itemstack.shrink(1);
-                        cir.setReturnValue(ActionResultType.CONSUME);
-                    }
-                }
-            }
+	@Inject(method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
+	private void chaosawakens$useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> cir) {
+		World world = itemUseContext.getLevel();
 
-			BlockPos blockpos1;
-			if (blockstate.getCollisionShape(world, blockpos).isEmpty()) {
-				blockpos1 = blockpos;
-			} else {
-				blockpos1 = blockpos.relative(direction);
+		if (!(world instanceof ServerWorld)) cir.setReturnValue(ActionResultType.SUCCESS);       
+		else {
+			ItemStack stackInHand = itemUseContext.getItemInHand();
+			BlockPos clickedPos = itemUseContext.getClickedPos();
+			Direction clickedDir = itemUseContext.getClickedFace();
+			BlockState targetState = world.getBlockState(clickedPos);
+			PlayerEntity player = itemUseContext.getPlayer();
+
+			if (targetState.is(Blocks.SPAWNER)) {
+				if ((CAConfigManager.MAIN_COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.NO_BLOCKING) ||
+						(CAConfigManager.MAIN_COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_ALL && player.isCreative()) ||
+						(CAConfigManager.MAIN_COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_CHAOS_AWAKENS && player.isCreative() && stackInHand.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
+						(CAConfigManager.MAIN_COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.BLOCK_CHAOS_AWAKENS && !stackInHand.getItem().getRegistryName().getNamespace().equals("chaosawakens")) ||
+						(CAConfigManager.MAIN_COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.TAG_BLACKLISTED && !stackInHand.getItem().is(CATags.Items.SPAWNER_SPAWN_EGGS)) ||
+						(CAConfigManager.MAIN_COMMON.spawnEggsSpawnersSurvival.get() == SurvivalSpawnerManipulationType.TAG_WHITELISTED && stackInHand.getItem().is(CATags.Items.SPAWNER_SPAWN_EGGS))) {
+					TileEntity targetTileEntity = world.getBlockEntity(clickedPos);
+
+					if (targetTileEntity instanceof MobSpawnerTileEntity) {
+						AbstractSpawner mobSpawner = ((MobSpawnerTileEntity) targetTileEntity).getSpawner();
+						EntityType<?> spawnerEntityType = getType(stackInHand.getTag());
+						mobSpawner.setEntityId(spawnerEntityType);
+						targetTileEntity.setChanged();
+						world.sendBlockUpdated(clickedPos, targetState, targetState, 3);
+						stackInHand.shrink(1);
+						cir.setReturnValue(ActionResultType.CONSUME);
+					}
+				}
 			}
 
-            EntityType<?> entitytype = getType(itemstack.getTag());
-            if (!blockstate.is(Blocks.SPAWNER)) {
-                if (entitytype.spawn((ServerWorld) world, itemstack, itemUseContext.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG, true, !Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
-                    itemstack.shrink(1);
-                }
-            }
+			BlockPos relTargetPos;
+			if (targetState.getCollisionShape(world, clickedPos).isEmpty()) {
+				relTargetPos = clickedPos;
+			} else {
+				relTargetPos = clickedPos.relative(clickedDir);
+			}
+
+			EntityType<?> tagEntityType = getType(stackInHand.getTag());
+			if (!targetState.is(Blocks.SPAWNER)) {
+				if (tagEntityType.spawn((ServerWorld) world, stackInHand, itemUseContext.getPlayer(), relTargetPos, SpawnReason.SPAWN_EGG, true, !Objects.equals(clickedPos, relTargetPos) && clickedDir == Direction.UP) != null) {
+					stackInHand.shrink(1);
+				}
+			}
 
 			cir.setReturnValue(ActionResultType.CONSUME);
 		}

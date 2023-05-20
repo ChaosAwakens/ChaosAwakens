@@ -68,7 +68,7 @@ public interface IUtilityHelper {
 	
 	//https://en.wikipedia.org/wiki/Machine_epsilon
 	/**
-	 * The smallest possible number greater than 1.0F (0.0000001)
+	 * The smallest possible number greater than 1.0F (+0.0000001)
 	 */
 	final float EPSILON = 1.0E-8F;
 	

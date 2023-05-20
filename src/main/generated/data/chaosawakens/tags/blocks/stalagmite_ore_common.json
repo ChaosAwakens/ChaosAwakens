@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:coal_ore",
+    "minecraft:iron_ore",
+    "minecraft:gold_ore",
+    "minecraft:lapis_ore",
+    "minecraft:emerald_ore",
+    "minecraft:diamond_ore",
+    "chaosawakens:aluminum_ore",
+    "chaosawakens:tigers_eye_ore",
+    "chaosawakens:salt_ore",
+    "chaosawakens:copper_ore",
+    "chaosawakens:tin_ore",
+    "chaosawakens:silver_ore",
+    "chaosawakens:sunstone_ore",
+    "chaosawakens:red_ant_infested_ore",
+    "chaosawakens:termite_infested_ore",
+    "chaosawakens:bloodstone_ore"
+  ]
+}

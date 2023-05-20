@@ -5,7 +5,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
 public class CAFoods {
-	// MEATS
+	// MEAT
 	public static final Food FOOD_RAW_BACON = new Food.Builder().nutrition(3).saturationMod(0.33F).meat().build();
 	public static final Food FOOD_COOKED_BACON = new Food.Builder().nutrition(8).saturationMod(1F).meat().build();
 	public static final Food FOOD_RAW_CORNDOG = new Food.Builder().nutrition(4).saturationMod(0.25F).build();

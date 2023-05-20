@@ -15,20 +15,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 
 public class IgniteEnchantment extends Enchantment {
+	
 	public IgniteEnchantment(EquipmentSlotType[] slotType) {
 		super(Rarity.RARE, EnchantmentType.ARMOR, slotType);
 	}
 
 	public void doPostHurt(LivingEntity attacked, Entity attacker, int level) {
-		Random random = attacked.getRandom();
-		Entry<EquipmentSlotType, ItemStack> entry = EnchantmentHelper.getRandomItemWith(CAEnchantments.IGNITE.get(), attacked);
-		if (shouldHit(level, random)) {
+		Random rand = attacked.getRandom();
+		Entry<EquipmentSlotType, ItemStack> igniteEnchantedItem = EnchantmentHelper.getRandomItemWith(CAEnchantments.IGNITE.get(), attacked);
+		
+		if (shouldHit(level, rand)) {
 			if (attacker != null && attacker instanceof LivingEntity) {
 				((LivingEntity) attacker).addEffect(new EffectInstance(CAEffects.BURNS_EFFECT.get(), 20+level*60, level - 1));		
 			}
 			
-			if (entry != null)
-				entry.getValue().hurtAndBreak(2, attacked, (entity) -> entity.broadcastBreakEvent(entry.getKey()) );
+			if (igniteEnchantedItem != null)
+				igniteEnchantedItem.getValue().hurtAndBreak(2, attacked, (entity) -> entity.broadcastBreakEvent(igniteEnchantedItem.getKey()) );
 		}
 	}
 	

@@ -32,15 +32,14 @@ public class VinesBelowLeavesTreeDecorator extends TreeDecorator {
 	}
 
 	@Override
-	public void place(ISeedReader reader, Random rand, List<BlockPos> logs,
-			List<BlockPos> leaves, Set<BlockPos> set, MutableBoundingBox bB) {
-		leaves.stream().filter((pos) -> Feature.isAir(reader, pos.below()))
-				.forEach((pos) -> this.vineAttempt(reader, rand, pos));
+	public void place(ISeedReader reader, Random rand, List<BlockPos> logs, List<BlockPos> leaves, Set<BlockPos> set, MutableBoundingBox bB) {
+		leaves.stream().filter((pos) -> Feature.isAir(reader, pos.below())).forEach((pos) -> this.vineAttempt(reader, rand, pos));
 	}
 	
 	public void vineAttempt(ISeedReader reader, Random rand, BlockPos pos) {
 		int height = rand.nextInt(4) + 1;
 		BlockPos.Mutable mutable = new BlockPos.Mutable(pos.getX(), pos.getY(), pos.getZ());
+		
 		if(rand.nextInt(10) == 0) {
 			for(int i = 0; i < height; i++) {
 				BlockPos placePos = mutable.offset(0, -1 - i, 0);

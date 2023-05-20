@@ -30,10 +30,12 @@ public class TopTubeBlock extends AbstractTopPlantBlock implements ILiquidContai
 		super(properties, Direction.UP, SHAPE, false, 0.1D);
 	}
 
-	protected boolean canGrowInto(BlockState state) {
-		return state.is(Blocks.WATER);
+	@Override
+	protected boolean canGrowInto(BlockState targetState) {
+		return targetState.is(Blocks.WATER);
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
@@ -42,35 +44,42 @@ public class TopTubeBlock extends AbstractTopPlantBlock implements ILiquidContai
 		return state.isFaceSturdy(worldIn, pos, Direction.UP) && !state.is(Blocks.MAGMA_BLOCK);
 	}
 
+	@Override
 	protected Block getBodyBlock() {
 		return CABlocks.TUBE_WORM_PLANT.get();
 	}
 
 	@Nullable
+	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
-		return fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8 ? super.getStateForPlacement(context) : null;
+		FluidState targetFluidState = context.getLevel().getFluidState(context.getClickedPos());
+		return targetFluidState.is(FluidTags.WATER) && targetFluidState.getAmount() == 8 ? super.getStateForPlacement(context) : null;
 	}
 
 	@SuppressWarnings("deprecation")
+	@Override
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState blockstate = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		if (!blockstate.isAir()) worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		return blockstate;
 	}
 
+	@Override
 	protected int getBlocksToGrowWhenBonemealed(Random rand) {
 		return 1;
 	}
 
+	@Override
 	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return false;
 	}
 
+	@Override
 	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		return false;
 	}
 
+	@Override
 	public FluidState getFluidState(BlockState state) {
 		return Fluids.WATER.getSource(false);
 	}

@@ -3,8 +3,7 @@ package io.github.chaosawakens.common.entity.ai;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.chaosawakens.common.entity.LavaMobEntity;
-import io.github.chaosawakens.common.entity.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.AbstractPressurePlateBlock;
 import net.minecraft.block.AbstractRailBlock;
@@ -53,9 +52,7 @@ public class CAWalkNodeProcessor extends WalkNodeProcessor {
 			type = PathNodeType.WALKABLE;
 		}
 		
-		if (type == PathNodeType.LAVA && this.mob instanceof LavaMobEntity) {
-			type = PathNodeType.OPEN;
-		}
+
 		
 		if (type == PathNodeType.LEAVES && this.mob instanceof RoboPounderEntity || canBreakThroughLeaves) {
 			type = PathNodeType.WALKABLE;
@@ -69,9 +66,7 @@ public class CAWalkNodeProcessor extends WalkNodeProcessor {
 			type = PathNodeType.LAVA;
 		}
 		
-		if (type == PathNodeType.DAMAGE_FIRE && this.mob instanceof LavaMobEntity) {
-			type = PathNodeType.OPEN;
-		}
+
 		type = PathNodeType.WALKABLE;
 		return type;
 	}

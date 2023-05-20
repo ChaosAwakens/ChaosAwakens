@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.registry;
 
 import java.util.Random;
 
+import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -46,7 +47,7 @@ public class CAItemGroups {
 	public static final ItemGroup FOSSILS = new ItemGroup("chaosawakens.fossils") {
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(random.nextInt(2))).get());
+			return new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(random.nextInt(2))).get());
 		}
 	};
 }

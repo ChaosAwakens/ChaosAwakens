@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import io.github.chaosawakens.common.entity.LeafyChickenEntity;
+import io.github.chaosawakens.common.entity.creature.land.LettuceChickenEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.entity.EntityType;
@@ -23,11 +23,11 @@ public class CALeafyChickenEggEntity extends ProjectileItemEntity {
 	}
 	
 	public CALeafyChickenEggEntity(World world, LivingEntity owner) {		
-		super(CAEntityTypes.LEAFY_CHICKEN_EGG.get(), owner, world);	
+		super(CAEntityTypes.LETTUCE_CHICKEN_EGG.get(), owner, world);	
 	}
 	
 	public CALeafyChickenEggEntity(World world, double xo, double yo, double zo) {		  
-		super(CAEntityTypes.LEAFY_CHICKEN_EGG.get(), xo, yo, zo, world);		
+		super(CAEntityTypes.LETTUCE_CHICKEN_EGG.get(), xo, yo, zo, world);		
 	}
 	
 	@Override
@@ -60,7 +60,7 @@ public class CALeafyChickenEggEntity extends ProjectileItemEntity {
 					i = 4;		         
 				}
 				for(int j = 0; j < i; ++j) {									
-					LeafyChickenEntity leafyChicken = CAEntityTypes.LEAFY_CHICKEN.get().create(level);;					
+					LettuceChickenEntity leafyChicken = CAEntityTypes.LETTUCE_CHICKEN.get().create(level);;					
 					leafyChicken.setAge(-24000);		            						
 					leafyChicken.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, 0.0F);		            					
 					this.level.addFreshEntity(leafyChicken);	           

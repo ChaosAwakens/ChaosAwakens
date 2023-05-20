@@ -4,7 +4,6 @@ import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.PortalInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -33,8 +32,10 @@ public class HeightmapTeleporter implements ITeleporter {
 	@Override
 	public Entity placeEntity(Entity entity, ServerWorld currentWorld, ServerWorld destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
 		repositionEntity.apply(false);
-		BlockPos pos = entity.blockPosition();
-		entity.moveTo(pos.getX() + 0.5, destWorld.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ()), pos.getZ() + 0.5);
+		
+		BlockPos curPos = entity.blockPosition();
+		entity.moveTo(curPos.getX() + 0.5, destWorld.getHeight(Heightmap.Type.WORLD_SURFACE, curPos.getX(), curPos.getZ()), curPos.getZ() + 0.5);
+		
 		return entity;
 	}
 }

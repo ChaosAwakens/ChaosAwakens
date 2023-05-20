@@ -22,25 +22,28 @@ public class BeetrootOnAStickItem extends Item {
 
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		ItemStack itemstack = player.getItemInHand(hand);
+		ItemStack mainHandItem = player.getItemInHand(hand);
+		
 		if (!world.isClientSide) {
-			Entity entity = player.getVehicle();
-			if (player.isPassenger() && entity instanceof PigEntity) {
-				IRideable irideable = (IRideable) entity;
-				if (irideable.boost()) {
-					itemstack.hurtAndBreak(this.consumeItemDamage, player, (level) -> level.broadcastBreakEvent(hand));
-					if (itemstack.isEmpty()) {
-						ItemStack itemstack1 = new ItemStack(Items.FISHING_ROD);
-						itemstack1.setTag(itemstack.getTag());
-						return ActionResult.success(itemstack1);
+			Entity vehicleEntity = player.getVehicle();
+			
+			if (player.isPassenger() && vehicleEntity instanceof PigEntity) {
+				IRideable rideableVehicleEntity = (IRideable) vehicleEntity;
+				
+				if (rideableVehicleEntity.boost()) {
+					mainHandItem.hurtAndBreak(this.consumeItemDamage, player, (level) -> level.broadcastBreakEvent(hand));		
+					
+					if (mainHandItem.isEmpty()) {
+						ItemStack fishingRod = new ItemStack(Items.FISHING_ROD);
+						fishingRod.setTag(mainHandItem.getTag());
+						
+						return ActionResult.success(fishingRod);
 					}
-
-					return ActionResult.success(itemstack);
+					return ActionResult.success(mainHandItem);
 				}
 			}
-
 			player.awardStat(Stats.ITEM_USED.get(this));
 		}
-		return ActionResult.pass(itemstack);
+		return ActionResult.pass(mainHandItem);
 	}
 }

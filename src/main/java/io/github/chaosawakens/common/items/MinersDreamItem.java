@@ -28,16 +28,14 @@ public class MinersDreamItem extends Item {
 	public MinersDreamItem(Properties builderIn) {
 		super(builderIn);
 	}
-	
+
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
 		Direction direction = context.getHorizontalDirection();
 		World worldIn = context.getLevel();
 
-		if (worldIn.isClientSide)
-			return ActionResultType.FAIL;
-		if (direction == Direction.UP || direction == Direction.DOWN)
-			return ActionResultType.FAIL;
+		if (worldIn.isClientSide) return ActionResultType.FAIL;
+		if (direction == Direction.UP || direction == Direction.DOWN) return ActionResultType.FAIL;
 
 		BlockPos breakPos = context.getClickedPos();
 		int targetY = breakPos.getY() % 8;
@@ -56,6 +54,7 @@ public class MinersDreamItem extends Item {
 					int widthDelta = i * facing.getZ() + k * facing.getX();
 					BlockPos targetPos = breakPos.offset(lengthDelta, -targetY + j, widthDelta);
 					BlockState targetBlockState = worldIn.getBlockState(targetPos);
+
 					if (targetBlockState.is(CATags.Blocks.MINERS_DREAM_MINEABLE)
 							|| targetBlockState.getBlock().getRegistryName().getNamespace().contains("extcaves")
 							|| targetBlockState.getBlock().getRegistryName().getNamespace().contains("subwild")
@@ -81,6 +80,7 @@ public class MinersDreamItem extends Item {
 				}
 			}
 		}
+
 		context.getPlayer().awardStat(Stats.ITEM_USED.get(this));
 		context.getItemInHand().shrink(1);
 		context.getPlayer().getCooldowns().addCooldown(this, 20);
@@ -93,14 +93,14 @@ public class MinersDreamItem extends Item {
 	 *
 	 * @param worldIn The world this is being placed on
 	 * @param pos     The current BlockPos being checked
-	 * @param i       length increment from for loop
-	 * @param j       height increment from for loop
-	 * @param k       width increment from for loop
+	 * @param l       length increment from for loop
+	 * @param h       height increment from for loop
+	 * @param w       width increment from for loop
 	 */
-	private void placeWoodPillars(World worldIn, BlockPos pos, int i, int j, int k) {
-		if (i != 0 && i % 8 == 0) {
-			if (k == -HOLE_WIDTH || k == HOLE_WIDTH) {
-				if (j == HOLE_HEIGHT - 1) {
+	private void placeWoodPillars(World worldIn, BlockPos pos, int l, int h, int w) {
+		if (l != 0 && l % 8 == 0) {
+			if (w == -HOLE_WIDTH || w == HOLE_WIDTH) {
+				if (h == HOLE_HEIGHT - 1) {
 					worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_PLANKS.get().defaultBlockState());
 					return;
 				}
@@ -108,13 +108,12 @@ public class MinersDreamItem extends Item {
 				return;
 			}
 
-			if (j == HOLE_HEIGHT - 1) {
-				if (k == 0) {
+			if (h == HOLE_HEIGHT - 1) {
+				if (w == 0) {
 					worldIn.setBlockAndUpdate(pos, CABlocks.MINING_LAMP.get().defaultBlockState());
 					return;
 				}
-				worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_SLAB.get().defaultBlockState()
-						.setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
+				worldIn.setBlockAndUpdate(pos, CABlocks.MOLDY_SLAB.get().defaultBlockState().setValue(BlockStateProperties.SLAB_TYPE, SlabType.TOP));
 				return;
 			}
 		}

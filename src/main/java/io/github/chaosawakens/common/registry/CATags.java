@@ -40,6 +40,9 @@ public class CATags {
 		public static final ITag.INamedTag<Block> CRYSTAL_LEAVES = tag("crystal_leaves");
 		public static final ITag.INamedTag<Block> CRYSTAL_SAPLING = tag("crystal_sapling");
 		public static final ITag.INamedTag<Block> RUBY_ORES = tag("ruby_ores");
+		
+		public static final ITag.INamedTag<Block> STALAGMITE_ORE_COMMON = tag("stalagmite_ore_common");
+		public static final ITag.INamedTag<Block> STALAGMITE_ORE_RARE = tag("stalagmite_ore_rare");
 
 		public static final ITag.INamedTag<Block> WHITELIST = tag("whitelist");
 		public static final ITag.INamedTag<Block> BLACKLIST = tag("blacklist");

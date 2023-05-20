@@ -6,7 +6,6 @@ import java.util.Set;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAFoliagePlacerTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -17,14 +16,12 @@ import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
 
 public class CubicSkipFoliagePlacer extends FoliagePlacer {
-	
 	public static final Codec<CubicSkipFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
 		return instance.group(FeatureSpread.codec(0, 8, 8).fieldOf("width").forGetter((placer) -> placer.radius),
 				FeatureSpread.codec(0, 8, 8).fieldOf("height").forGetter((placer) -> placer.offset),
 				FeatureSpread.codec(0, 16, 8).fieldOf("skip").forGetter((eliptic) -> eliptic.skip))
 				.apply(instance, CubicSkipFoliagePlacer::new);
 	});
-	
 	protected final FeatureSpread skip;
 	private boolean isSkipping = false;
 	
@@ -43,6 +40,7 @@ public class CubicSkipFoliagePlacer extends FoliagePlacer {
 			BaseTreeFeatureConfig config, int maxFreeHeight, Foliage foliage, int foliageHeight, int radius,
 			Set<BlockPos> set, int offset, MutableBoundingBox bBox) {
 		int startY = foliageHeight - rand.nextInt(3) - 1, bWidth = this.radius.sample(rand), bHeight = this.offset.sample(rand), skip = 0;
+		
 		for(int i = 0; i > -startY; i--) {
 			if(isSkipping) {
 				if(skip > 1) {
@@ -72,5 +70,4 @@ public class CubicSkipFoliagePlacer extends FoliagePlacer {
 	protected boolean shouldSkipLocation(Random rand, int x, int y, int z, int radius, boolean doubleTrunk) {
 		return false;
 	}
-
 }

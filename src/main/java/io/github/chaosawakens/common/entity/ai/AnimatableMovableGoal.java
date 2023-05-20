@@ -18,7 +18,7 @@ public abstract class AnimatableMovableGoal extends AnimatableGoal {
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;
 			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-			goal.path = attacker.getNavigation().createPath(target, 0);
+			goal.path = attacker.getNavigation().createPath(target,2);
 			return attacker.getSensing().canSee(target) && distance >= AnimatableGoal.getAttackReachSq(attacker, target) && goal.path != null;
 		}
 		return false;

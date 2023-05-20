@@ -20,7 +20,6 @@ import net.minecraftforge.common.util.FakePlayer;
 
 @Mixin(PlayerAdvancements.class)
 public abstract class PlayerAdvancementMixin {
-	
     @Shadow
     private ServerPlayerEntity player;
     
@@ -29,14 +28,14 @@ public abstract class PlayerAdvancementMixin {
     private Map<Advancement, AdvancementProgress> advancements;
 	
     @Inject(at = @At("RETURN"), method = "Lnet/minecraft/advancements/PlayerAdvancements;award(Lnet/minecraft/advancements/Advancement;Ljava/lang/String;)Z")
-    private void award(Advancement adv, String s, CallbackInfoReturnable<Boolean> cir) {
+    private void award(Advancement adv, String criterionKey, CallbackInfoReturnable<Boolean> cir) {
     	if (!(player instanceof FakePlayer)) {
     		List<Advancement> completeAdv = new LinkedList<>();
+    		
     		for (Map.Entry<Advancement, AdvancementProgress> advancementProgressEntry : this.advancements.entrySet()) {
-                if (advancementProgressEntry.getValue().isDone()) {
-                	completeAdv.add(advancementProgressEntry.getKey());
-                }
+                if (advancementProgressEntry.getValue().isDone()) completeAdv.add(advancementProgressEntry.getKey());
     		}
+    		
     		completeAdv.stream().filter(advancmenet -> !advancmenet.getId().toString().contains("recipes")).forEach(this::trigger);
     	}
     }

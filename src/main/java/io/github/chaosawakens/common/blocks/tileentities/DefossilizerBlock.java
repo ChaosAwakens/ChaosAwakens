@@ -1,5 +1,8 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -17,6 +20,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +29,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-@SuppressWarnings("unused")
 public class DefossilizerBlock extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
@@ -41,14 +44,11 @@ public class DefossilizerBlock extends Block {
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get())) {
+		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get())) {
 			return new DefossilizerCopperTileEntity();
 		}
-		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get())) {
+		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get())) {
 			return new DefossilizerIronTileEntity();
-		}
-		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get())) {
-			return new DefossilizerCrystalTileEntity();
 		}
 		return null;
 	}
@@ -64,16 +64,12 @@ public class DefossilizerBlock extends Block {
 	private void interactWith(World world, BlockPos pos, PlayerEntity player) {
 		TileEntity tileEntity = world.getBlockEntity(pos);
 		if (!(player instanceof ServerPlayerEntity)) return;
-		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
+		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
 			DefossilizerCopperTileEntity te = (DefossilizerCopperTileEntity) tileEntity;
 			NetworkHooks.openGui((ServerPlayerEntity) player, te, te::encodeExtraData);
 		}
-		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
+		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
 			DefossilizerIronTileEntity te = (DefossilizerIronTileEntity) tileEntity;
-			NetworkHooks.openGui((ServerPlayerEntity) player, te, te::encodeExtraData);
-		}
-		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get()) && tileEntity instanceof DefossilizerCrystalTileEntity) {
-			DefossilizerCrystalTileEntity te = (DefossilizerCrystalTileEntity) tileEntity;
 			NetworkHooks.openGui((ServerPlayerEntity) player, te, te::encodeExtraData);
 		}
 	}
@@ -89,15 +85,11 @@ public class DefossilizerBlock extends Block {
 	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			TileEntity tileEntity = world.getBlockEntity(pos);
-			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
+			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
 				InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
 				world.updateNeighbourForOutputSignal(pos, this);
 			}
-			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
-				InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
-				world.updateNeighbourForOutputSignal(pos, this);
-			}
-			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(CABlocks.DefossilizerType.byId(CABlocks.DefossilizerType.CRYSTAL.getId())).get()) && tileEntity instanceof DefossilizerCrystalTileEntity) {
+			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
 				InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
 				world.updateNeighbourForOutputSignal(pos, this);
 			}
@@ -119,5 +111,48 @@ public class DefossilizerBlock extends Block {
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
+	}
+	
+	public enum DefossilizerType implements IStringSerializable {
+		COPPER(0, "copper"),
+		IRON(1, "iron"),
+		CRYSTAL(2, "crystal");
+
+		private static final DefossilizerType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DefossilizerType::getId)).toArray(DefossilizerType[]::new);
+		private final int id;
+		private final String name;
+
+		DefossilizerType(int idIn, String name) {
+			this.id = idIn;
+			this.name = name;
+		}
+
+		public int getId() {
+			return this.id;
+		}
+
+		public static DefossilizerType byId(int id) {
+			if(id < 0 || id >= VALUES.length) id = 0;
+			return VALUES[id];
+		}
+
+		public static String getDefossilizerTypeByID(int id) {
+			for(DefossilizerType defossilizerType : values()) {
+				if(defossilizerType.getId() == id) return defossilizerType.getSerializedName();
+			}
+			return null;
+		}
+
+		public static boolean getBooleanDefossilizerTypeByID(int id) {
+			for(DefossilizerType defossilizerType : values()) {
+				if(defossilizerType.getId() == id) return true;
+			}
+			return false;
+		}
+
+		@Override
+		public String getSerializedName() {
+			return this.name;
+		}
 	}
 }

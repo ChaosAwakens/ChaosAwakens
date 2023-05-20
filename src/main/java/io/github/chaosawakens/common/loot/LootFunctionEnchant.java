@@ -45,9 +45,9 @@ public class LootFunctionEnchant extends LootFunction {
 
 	@Override
 	public ItemStack run(ItemStack stack, LootContext context) {
-		for (Map.Entry<IRegistryDelegate<Enchantment>, Short> e : enchantments.entrySet()) {
-			if (stack.getItem() == Items.ENCHANTED_BOOK) EnchantedBookItem.addEnchantment(stack, new EnchantmentData(e.getKey().get(), e.getValue()));
-			else stack.enchant(e.getKey().get(), e.getValue());
+		for (Map.Entry<IRegistryDelegate<Enchantment>, Short> enchantmentEntry : enchantments.entrySet()) {
+			if (stack.getItem() == Items.ENCHANTED_BOOK) EnchantedBookItem.addEnchantment(stack, new EnchantmentData(enchantmentEntry.getKey().get(), enchantmentEntry.getValue()));
+			else stack.enchant(enchantmentEntry.getKey().get(), enchantmentEntry.getValue());
 		}
 		return stack;
 	}
@@ -59,8 +59,8 @@ public class LootFunctionEnchant extends LootFunction {
 			return this;
 		}
 
-		public LootFunctionEnchant.Builder apply(Enchantment p_216077_1_, Integer p_216077_2_) {
-			this.enchants.put(p_216077_1_.delegate, p_216077_2_.shortValue());
+		public LootFunctionEnchant.Builder apply(Enchantment targetEnchantment, Integer level) {
+			this.enchants.put(targetEnchantment.delegate, level.shortValue());
 			return this;
 		}
 
@@ -75,7 +75,7 @@ public class LootFunctionEnchant extends LootFunction {
 			if (!function.enchantments.isEmpty()) {
 				JsonObject obj = new JsonObject();
 
-				for (Map.Entry<IRegistryDelegate<Enchantment>, Short> e : function.enchantments.entrySet()) obj.addProperty(e.getKey().get().getRegistryName().toString(), e.getValue());
+				for (Map.Entry<IRegistryDelegate<Enchantment>, Short> enchantmentEntry : function.enchantments.entrySet()) obj.addProperty(enchantmentEntry.getKey().get().getRegistryName().toString(), enchantmentEntry.getValue());
 
 				object.add("enchantments", obj);
 			}
@@ -88,12 +88,12 @@ public class LootFunctionEnchant extends LootFunction {
 			if (object.has("enchantments")) {
 				JsonObject enchantObj = JSONUtils.getAsJsonObject(object, "enchantments");
 
-				for (Map.Entry<String, JsonElement> e : enchantObj.entrySet()) {
-					ResourceLocation id = new ResourceLocation(e.getKey());
-					if (!ForgeRegistries.ENCHANTMENTS.containsKey(id)) throw new JsonSyntaxException("Can't find enchantment " + e.getKey());
+				for (Map.Entry<String, JsonElement> enchantmentEntry : enchantObj.entrySet()) {
+					ResourceLocation enchantmentId = new ResourceLocation(enchantmentEntry.getKey());
+					if (!ForgeRegistries.ENCHANTMENTS.containsKey(enchantmentId)) throw new JsonSyntaxException("Can't find enchantment " + enchantmentEntry.getKey());
 
-					Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(id);
-					short lvl = e.getValue().getAsShort();
+					Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(enchantmentId);
+					short lvl = enchantmentEntry.getValue().getAsShort();
 
 					for (IRegistryDelegate<Enchantment> other : enchantments.keySet()) {
 						if (!ench.isCompatibleWith(other.get())) throw new JsonParseException(String.format("Enchantments %s and %s conflict", ench.getRegistryName(), other.get().getRegistryName()));

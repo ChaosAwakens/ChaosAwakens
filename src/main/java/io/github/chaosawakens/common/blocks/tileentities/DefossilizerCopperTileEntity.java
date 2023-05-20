@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerCopperContainer;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -32,16 +33,13 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class DefossilizerCopperTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
-	final static int WORK_TIME = AbstractDefossilizingRecipe.getDefossilizingTime();
+	public static final int WORK_TIME = AbstractDefossilizingRecipe.getDefossilizingTime();
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
 	private static final int[] SLOTS_FOR_SIDES = new int[] { 1, 2 };
-
 	private NonNullList<ItemStack> items;
 	private final LazyOptional<? extends IItemHandler>[] handlers;
-
 	private int progress = 0;
-
 	private final IIntArray fields = new IIntArray() {
 		@Override
 		public int get(int index) {

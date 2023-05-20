@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerIronContainer;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -26,22 +27,20 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class DefossilizerIronTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
-	final static int WORK_TIME = 4 * AbstractDefossilizingRecipe.getDefossilizingTime();
+	public static final int WORK_TIME = 4 * AbstractDefossilizingRecipe.getDefossilizingTime();
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
 	private static final int[] SLOTS_FOR_SIDES = new int[] { 1, 2 };
-
 	private NonNullList<ItemStack> items;
 	private final LazyOptional<? extends IItemHandler>[] handlers;
-
 	private int progress = 0;
-
 	private final IIntArray fields = new IIntArray() {
 		@Override
 		public int get(int index) {
@@ -72,7 +71,7 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 		this.items = NonNullList.withSize(4, ItemStack.EMPTY);
 	}
 
-	void encodeExtraData(PacketBuffer buffer) {
+	public void encodeExtraData(PacketBuffer buffer) {
 		buffer.writeByte(fields.getCount());
 	}
 
@@ -235,7 +234,7 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 
 	@Nullable
 	@Override
-	public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
+	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
 		if (!this.remove && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == Direction.UP) return handlers[0].cast();
 			else if (facing == Direction.DOWN) return handlers[1].cast();

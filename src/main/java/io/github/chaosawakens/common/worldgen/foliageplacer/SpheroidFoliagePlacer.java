@@ -23,7 +23,6 @@ public class SpheroidFoliagePlacer extends FoliagePlacer {
 				.and(FeatureSpread.codec(0, 16, 8).fieldOf("height").forGetter((eliptic) -> eliptic.height))
 				.apply(instance, SpheroidFoliagePlacer::new);
 	});
-	
 	private final FeatureSpread height;
 	private int sampledHeight;
 	private int sampledOffset;
@@ -65,14 +64,11 @@ public class SpheroidFoliagePlacer extends FoliagePlacer {
 	@Override
 	protected boolean shouldSkipLocation(Random rand, int x, int y, int z, int radius, boolean doubleTrunk) {
 		int absX = Math.abs(x), absZ = Math.abs(z);
-		double offset = this.offset(),
-				hMO = this.height() - offset,
-				fRad = radius,
+		double offset = this.offset(), hMO = this.height() - offset, fRad = radius,
 				a = (absX - (doubleTrunk && x > 0 ? 0.5 : 0.0))/fRad,
 				b = (absZ - (doubleTrunk && z > 0 ? 0.5 : 0.0))/fRad,
 				c = hMO+y >= 0 || offset == 0 ? (hMO+y)/hMO : (hMO+y)/(offset+1);
-		if(a*a + b*b + c*c <= 1)
-			return false;
+		if(a * a + b * b + c * c <= 1) return false;
 		return true;
 	}
 }

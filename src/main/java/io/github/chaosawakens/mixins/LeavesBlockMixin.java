@@ -20,7 +20,7 @@ import net.minecraft.world.server.ServerWorld;
 public abstract class LeavesBlockMixin {
 	
 	@Overwrite
-	public void randomTick(BlockState pState, ServerWorld pLevel, BlockPos pPos, Random pRandom) {
+	private void randomTick(BlockState pState, ServerWorld pLevel, BlockPos pPos, Random pRandom) {
 		if (!pState.getValue(LeavesBlock.PERSISTENT) && pState.getValue(LeavesBlock.DISTANCE) == 7) {
 			pLevel.setBlock(pPos, Blocks.DIRT.defaultBlockState(), 2);
 		}

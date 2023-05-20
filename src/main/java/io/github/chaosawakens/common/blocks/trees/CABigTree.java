@@ -10,7 +10,6 @@ import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 public class CABigTree extends BigTree {
-	
 	private Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree;
 	private Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> bigTree;
 	

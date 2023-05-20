@@ -1,22 +1,19 @@
 package io.github.chaosawakens.common.blocks.trees;
 
-import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import com.google.common.collect.Lists;
-
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.trees.BigTree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 public class CAMultiBigTree extends BigTree {
-	
-	List<Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>>> bigTrees;
+	private ObjectArrayList<Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>>> bigTrees;
 	
 	@SafeVarargs
 	public CAMultiBigTree(Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>>... bigTree) {
-		this.bigTrees = Lists.newArrayList(bigTree);
+		this.bigTrees = new ObjectArrayList<Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>>>(bigTree);
 	}
 
 	@Override
@@ -28,5 +25,4 @@ public class CAMultiBigTree extends BigTree {
 	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random pRandom, boolean pLargeHive) {
 		return null;
 	}
-
 }

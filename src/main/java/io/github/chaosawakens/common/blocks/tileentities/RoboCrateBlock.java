@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -30,18 +34,16 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-import javax.annotation.Nullable;
-import java.util.Random;
-
 public class RoboCrateBlock extends ContainerBlock {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
-	public RoboCrateBlock(AbstractBlock.Properties p_i49996_1_) {
-		super(p_i49996_1_);
+	public RoboCrateBlock(AbstractBlock.Properties properties) {
+		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, Boolean.FALSE));
 	}
 
+	@Override
 	public ActionResultType use(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockRayTraceResult pHit) {
 		if (pLevel.isClientSide) {
 			return ActionResultType.SUCCESS;
@@ -57,6 +59,8 @@ public class RoboCrateBlock extends ContainerBlock {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
 	public void onRemove(BlockState pState, World pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
 		if (!pState.is(pNewState.getBlock())) {
 			TileEntity tileentity = pLevel.getBlockEntity(pPos);
@@ -78,7 +82,8 @@ public class RoboCrateBlock extends ContainerBlock {
 	}
 
 	@Nullable
-	public TileEntity newBlockEntity(IBlockReader p_196283_1_) {
+	@Override
+	public TileEntity newBlockEntity(IBlockReader world) {
 		return new RoboCrateTileEntity();
 	}
 
@@ -108,14 +113,17 @@ public class RoboCrateBlock extends ContainerBlock {
 		return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlockState mirror(BlockState pState, Mirror pMirror) {
 		return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
 	}
 
+	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
 		pBuilder.add(FACING, OPEN);
 	}
 
+	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext pContext) {
 		return this.defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
 	}

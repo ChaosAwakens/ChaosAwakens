@@ -26,5 +26,4 @@ public class ExplosiveFireworkEntity extends FireworkRocketEntity {
 			this.level.explode(this, getX(), getY(), getZ(), 2.0F, Explosion.Mode.NONE);
 		}
 	}
-
 }

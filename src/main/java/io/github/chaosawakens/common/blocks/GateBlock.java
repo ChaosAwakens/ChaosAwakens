@@ -49,8 +49,8 @@ public class GateBlock extends Block {
 					world.removeBlock(pos, false);
 				}
 
-				for (Direction e : Direction.values()) {
-					activate(world, pos.relative(e));
+				for (Direction curDir : Direction.values()) {
+					activate(world, pos.relative(curDir));
 				}
 			}
 		}
@@ -77,10 +77,8 @@ public class GateBlock extends Block {
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos,
-			boolean isMoving) {
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		if (world.isClientSide) return;
-
 		if (!isVanished(state) && !state.getValue(ACTIVE) && world.hasNeighborSignal(pos)) activate(world, pos);
 	}
 
@@ -96,6 +94,7 @@ public class GateBlock extends Block {
 			activate(world, pos);
 			return ActionResultType.SUCCESS;
 		}
+
 		return ActionResultType.PASS;
 	}
 
@@ -104,11 +103,11 @@ public class GateBlock extends Block {
 		return !state.getValue(ACTIVE) ? 6000F : super.getExplosionResistance(state, world, pos, explosion);
 	}
 
-	private void activate(World world, BlockPos pos) {
-		BlockState state = world.getBlockState(pos);
-		if (state.getBlock() instanceof GateBlock && !isVanished(state) && !state.getValue(ACTIVE)) {
-			world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
-			world.getBlockTicks().scheduleTick(pos, state.getBlock(), 2 + world.random.nextInt(5));
+	private void activate(World world, BlockPos targetPos) {
+		BlockState targetState = world.getBlockState(targetPos);
+		if (targetState.getBlock() instanceof GateBlock && !isVanished(targetState) && !targetState.getValue(ACTIVE)) {
+			world.setBlockAndUpdate(targetPos, targetState.setValue(ACTIVE, true));
+			world.getBlockTicks().scheduleTick(targetPos, targetState.getBlock(), 2 + world.random.nextInt(5));
 		}
 	}
 }

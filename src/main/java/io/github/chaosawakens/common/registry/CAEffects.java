@@ -1,8 +1,8 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.effects.BurnsEffect;
-import io.github.chaosawakens.common.effects.ParalysisEffect;
+import io.github.chaosawakens.common.potion.effects.harmful.BurnsEffect;
+import io.github.chaosawakens.common.potion.effects.harmful.ParalysisEffect;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;

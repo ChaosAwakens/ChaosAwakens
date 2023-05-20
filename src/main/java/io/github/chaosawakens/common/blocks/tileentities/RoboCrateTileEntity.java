@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAParticleTypes;
 import io.github.chaosawakens.common.registry.CATileEntities;
@@ -13,6 +15,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.NonNullList;
@@ -24,7 +27,6 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 
 public class RoboCrateTileEntity extends LockableLootTileEntity {
 	private NonNullList<ItemStack> items = NonNullList.withSize(36, ItemStack.EMPTY);
@@ -34,6 +36,7 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 		super(CATileEntities.ROBO_CRATE.get());
 	}
 
+	@Override
 	public CompoundNBT save(CompoundNBT pCompound) {
 		super.save(pCompound);
 		if (!this.trySaveLootTable(pCompound)) {
@@ -43,11 +46,12 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 		return pCompound;
 	}
 
-	public void load(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-		super.load(p_230337_1_, p_230337_2_);
+	@Override
+	public void load(BlockState state, CompoundNBT nbt) {
+		super.load(state, nbt);
 		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		if (!this.tryLoadLootTable(p_230337_2_)) {
-			ItemStackHelper.loadAllItems(p_230337_2_, this.items);
+		if (!this.tryLoadLootTable(nbt)) {
+			ItemStackHelper.loadAllItems(nbt, this.items);
 		}
 
 	}
@@ -55,22 +59,27 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 	/**
 	 * Returns the number of slots in the inventory.
 	 */
+	@Override
 	public int getContainerSize() {
 		return 36;
 	}
 
+	@Override
 	protected NonNullList<ItemStack> getItems() {
 		return this.items;
 	}
 
+	@Override
 	protected void setItems(NonNullList<ItemStack> pItems) {
 		this.items = pItems;
 	}
 
+	@Override
 	protected ITextComponent getDefaultName() {
 		return new TranslationTextComponent("container.chaosawakens.robo_crate");
 	}
 
+	@Override
 	protected Container createMenu(int pId, PlayerInventory pPlayer) {
 		return fourRows(pId, pPlayer, this);
 	}
@@ -79,6 +88,7 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 		return new ChestContainer(ContainerType.GENERIC_9x4, pId, pPlayer, pBlockEntity, 4);
 	}
 
+	@Override
 	public void startOpen(PlayerEntity pPlayer) {
 		if (!pPlayer.isSpectator()) {
 			if (this.openCount < 0) {
@@ -91,6 +101,7 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 			if (!flag) {
 				this.playSound(blockstate, SoundEvents.BARREL_OPEN);
 				this.updateBlockState(blockstate, true);
+				tick();
 			}
 
 			this.scheduleRecheck();
@@ -101,12 +112,17 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 	public void tick() {
 		World world = this.getLevel();
 		BlockPos blockpos = this.worldPosition;
-		if (!(world instanceof ServerWorld)) {
-			double d3 = (double)blockpos.getX() + world.random.nextDouble();
-			double d4 = (double)blockpos.getY() + world.random.nextDouble();
-			double d5 = (double)blockpos.getZ() + world.random.nextDouble();
-			world.addParticle(CAParticleTypes.ROBO_SPARK.get(), d3, d4, d5, 0.0D, 0.0D, 0.0D);
+		if (world.isClientSide) {
+			double xo = (double)blockpos.getX() + world.random.nextDouble();
+			double yo = (double)blockpos.getY() + world.random.nextDouble();
+			double zo = (double)blockpos.getZ() + world.random.nextDouble();
+			world.addParticle(CAParticleTypes.ROBO_SPARK.get(), xo, yo, zo, level.random.nextBoolean() ? 0.01D : -0.01D, 0.02D, level.random.nextBoolean() ? 0.01D : -0.01D);
 		}
+	}
+	
+	@Nullable	
+	public SUpdateTileEntityPacket getUpdatePacket() {	 
+		return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());  
 	}
 
 	private void scheduleRecheck() {

@@ -8,7 +8,6 @@ import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 public class CATree extends Tree {
-
 	private Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree;
 
 	public CATree(Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree) {

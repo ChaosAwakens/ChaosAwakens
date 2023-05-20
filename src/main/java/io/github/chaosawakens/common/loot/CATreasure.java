@@ -19,40 +19,23 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 
 public class CATreasure {
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/acacia_loot"}} 1
-	public static final CATreasure ent_tree_acacia_loot = new CATreasure("ent_tree/acacia_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/birch_loot"}} 1
-	public static final CATreasure ent_tree_birch_loot = new CATreasure("ent_tree/birch_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/crimson_loot"}} 1
-	public static final CATreasure ent_tree_crimson_loot = new CATreasure("ent_tree/crimson_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/dark_oak_loot"}} 1
-	public static final CATreasure ent_tree_dark_oak_loot = new CATreasure("ent_tree/dark_oak_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/jungle_loot"}} 1
-	public static final CATreasure ent_tree_jungle_loot = new CATreasure("ent_tree/jungle_loot");
-	// /give @p dispenser{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/jungle_trap"}} 1
-	public static final CATreasure ent_tree_jungle_trap = new CATreasure("ent_tree/jungle_trap");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/oak_loot"}} 1
-	public static final CATreasure ent_tree_oak_loot = new CATreasure("ent_tree/oak_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/spruce_loot"}} 1
-	public static final CATreasure ent_tree_spruce_loot = new CATreasure("ent_tree/spruce_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/warped_loot"}} 1
-	public static final CATreasure ent_tree_warped_loot = new CATreasure("ent_tree/warped_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/brown_mushroom_loot"}} 1
-	public static final CATreasure ent_tree_brown_mushroom_loot = new CATreasure("ent_tree/brown_mushroom_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/red_mushroom_loot"}} 1
-	public static final CATreasure ent_tree_red_mushroom_loot = new CATreasure("ent_tree/red_mushroom_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/ginkgo_loot"}} 1
-	public static final CATreasure ent_tree_ginkgo_loot = new CATreasure("ent_tree/ginkgo_loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
-	public static final CATreasure wasp_dungeon_loot = new CATreasure("wasp_dungeon/loot");
-	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}} 1
-	public static final CATreasure mining_wasp_dungeon_loot = new CATreasure("mining_wasp_dungeon/loot");
-//	// /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/village/cherry_house"}} 1
-//	public static final CATreasure village_cherry_house = new CATreasure("village/cherry_house");
+	public static final CATreasure ENT_TREE_ACACIA_LOOT = new CATreasure("ent_tree/acacia_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/acacia_loot"}} 1
+	public static final CATreasure ENT_TREE_BIRCH_LOOT = new CATreasure("ent_tree/birch_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/birch_loot"}} 1
+	public static final CATreasure ENT_TREE_CRIMSON_LOOT = new CATreasure("ent_tree/crimson_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/crimson_loot"}} 1
+	public static final CATreasure ENT_TREE_DARK_OAK_LOOT = new CATreasure("ent_tree/dark_oak_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/dark_oak_loot"}} 1
+	public static final CATreasure ENT_TREE_JUNGLE_LOOT = new CATreasure("ent_tree/jungle_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/jungle_loot"}} 1
+	public static final CATreasure ENT_TREE_JUNGLE_TRAP = new CATreasure("ent_tree/jungle_trap"); // /give @p dispenser{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/jungle_trap"}} 1
+	public static final CATreasure ENT_TREE_OAK_LOOT = new CATreasure("ent_tree/oak_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/oak_loot"}} 1
+	public static final CATreasure ENT_TREE_SPRUCE_LOOT = new CATreasure("ent_tree/spruce_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/spruce_loot"}} 1
+	public static final CATreasure ENT_TREE_WARPED_LOOT = new CATreasure("ent_tree/warped_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/warped_loot"}} 1
+	public static final CATreasure ENT_TREE_BROWN_MUSHROOM_LOOT = new CATreasure("ent_tree/brown_mushroom_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/brown_mushroom_loot"}} 1
+	public static final CATreasure ENT_TREE_RED_MUSHROOM_LOOT = new CATreasure("ent_tree/red_mushroom_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/red_mushroom_loot"}} 1
+	public static final CATreasure ENT_TREE_GINKGO_LOOT = new CATreasure("ent_tree/ginkgo_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/ginkgo_loot"}} 1
+	public static final CATreasure WASP_DUNGEON_LOOT = new CATreasure("wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
+	public static final CATreasure MINING_WASP_DUNGEON_LOOT = new CATreasure("mining_wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}} 1
 
 	private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
 	public static LootFunctionType ENCHANT;
-
 	public final ResourceLocation lootTable;
 
 	private CATreasure(String path) {
@@ -84,12 +67,12 @@ public class CATreasure {
 
 	public void generateChest(IWorld world, BlockPos pos, Direction dir, boolean trapped) {
 		world.setBlock(pos, (trapped ? Blocks.TRAPPED_CHEST : Blocks.CHEST).defaultBlockState().setValue(ChestBlock.FACING, dir), 2);
-		TileEntity te = world.getBlockEntity(pos);
-		if (te instanceof ChestTileEntity) ((ChestTileEntity) te).setLootTable(lootTable, ((ISeedReader) world).getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
+		TileEntity targetTe = world.getBlockEntity(pos);
+		if (targetTe instanceof ChestTileEntity) ((ChestTileEntity) targetTe).setLootTable(lootTable, ((ISeedReader) world).getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
 	}
 
 	public void generateChestContents(ISeedReader world, BlockPos pos) {
-		TileEntity te = world.getBlockEntity(pos);
-		if (te instanceof ChestTileEntity) ((ChestTileEntity) te).setLootTable(lootTable, world.getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
+		TileEntity targetTe = world.getBlockEntity(pos);
+		if (targetTe instanceof ChestTileEntity) ((ChestTileEntity) targetTe).setLootTable(lootTable, world.getSeed() * pos.getX() + pos.getY() ^ pos.getZ());
 	}
 }

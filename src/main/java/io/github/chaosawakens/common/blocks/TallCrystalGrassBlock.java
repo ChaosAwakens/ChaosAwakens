@@ -2,6 +2,8 @@ package io.github.chaosawakens.common.blocks;
 
 import java.util.Random;
 
+import io.github.chaosawakens.common.blocks.crystal.CrystalBushBlock;
+import io.github.chaosawakens.common.blocks.crystal.DoubleCrystalPlantBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -22,25 +24,28 @@ public class TallCrystalGrassBlock extends CrystalBushBlock implements IGrowable
 		super(properties);
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
 
+	@Override
 	public boolean isValidBonemealTarget(IBlockReader world, BlockPos pos, BlockState state, boolean p_176473_4_) {
 		return true;
 	}
 
+	@Override
 	public boolean isBonemealSuccess(World world, Random random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
+	@Override
 	public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		DoubleCrystalPlantBlock doubleCrystalPlantBlock = (DoubleCrystalPlantBlock) (this == CABlocks.CRYSTAL_GRASS.get()
-				? CABlocks.TALL_CRYSTAL_GRASS.get()
-				: CABlocks.CRYSTAL_GRASS.get());
+		DoubleCrystalPlantBlock doubleCrystalPlantBlock = (DoubleCrystalPlantBlock) (this == CABlocks.CRYSTAL_GRASS.get() ? CABlocks.TALL_CRYSTAL_GRASS.get() : CABlocks.CRYSTAL_GRASS.get());
 		if (doubleCrystalPlantBlock.defaultBlockState().canSurvive(world, pos) && world.isEmptyBlock(pos.above())) doubleCrystalPlantBlock.placeAt(world, pos, 2);
 	}
 
+	@Override
 	public AbstractBlock.OffsetType getOffsetType() {
 		return AbstractBlock.OffsetType.XYZ;
 	}

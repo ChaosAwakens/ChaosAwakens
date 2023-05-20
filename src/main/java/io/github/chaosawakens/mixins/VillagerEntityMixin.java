@@ -7,15 +7,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.config.CACommonConfig;
-import io.github.chaosawakens.common.items.extended.AttitudeAdjusterItem;
-import io.github.chaosawakens.common.items.extended.BattleAxeItem;
-import io.github.chaosawakens.common.items.extended.BigBerthaItem;
-import io.github.chaosawakens.common.items.extended.QueenScaleBattleAxeItem;
-import io.github.chaosawakens.common.items.extended.RoyalGuardianSwordItem;
-import io.github.chaosawakens.common.items.extended.ScytheItem;
-import io.github.chaosawakens.common.items.extended.SlayerChainsawItem;
+import io.github.chaosawakens.common.items.weapons.extended.AttitudeAdjusterItem;
+import io.github.chaosawakens.common.items.weapons.extended.BattleAxeItem;
+import io.github.chaosawakens.common.items.weapons.extended.BigBerthaItem;
+import io.github.chaosawakens.common.items.weapons.extended.QueenScaleBattleAxeItem;
+import io.github.chaosawakens.common.items.weapons.extended.RoyalGuardianSwordItem;
+import io.github.chaosawakens.common.items.weapons.extended.ScytheItem;
+import io.github.chaosawakens.common.items.weapons.extended.SlayerChainsawItem;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
@@ -34,21 +34,21 @@ public abstract class VillagerEntityMixin extends AbstractVillagerEntity {
 	}
 	
 	@Inject(method = "Lnet/minecraft/entity/merchant/villager/VillagerEntity;updateSpecialPrices(Lnet/minecraft/entity/player/PlayerEntity;)V", at = @At("HEAD"), cancellable = true)
-	public void chaosawakens$updateSpecialPrices(PlayerEntity player, CallbackInfo info) {
+	private void chaosawakens$updateSpecialPrices(PlayerEntity player, CallbackInfo info) {
 		VillagerEntity villager = (VillagerEntity) (Object) this;		
 		//TODO make this armor also affect player rep once we get a better understanding of how the system works --Meme Man
 	//	int rep = villager.getPlayerReputation(player);
 		
-		if (CACommonConfig.COMMON.enableEmeraldArmorSetBonus.get()) {					
+		if (CAConfigManager.MAIN_COMMON.enableEmeraldArmorSetBonus.get()) {					
 			if (IUtilityHelper.isFullArmorSet(player, CAItems.EMERALD_HELMET.get(), CAItems.EMERALD_CHESTPLATE.get(), CAItems.EMERALD_LEGGINGS.get(), CAItems.EMERALD_BOOTS.get())) {			
 				for (MerchantOffer offer : villager.getOffers()) {			
 					//4 = ~50% Discount
-					double amp = 0.3D + 0.0625D * CACommonConfig.COMMON.emeraldArmorDiscountMultiplier.get();
-					if (CACommonConfig.COMMON.emeraldArmorDiscountMultiplier.get() > 8.0D || CACommonConfig.COMMON.emeraldArmorDiscountMultiplier.get() < 0.0D) {
-						CACommonConfig.COMMON.emeraldArmorDiscountMultiplier.set(4.0D);
-					}
+					double amp = 0.3D + 0.0625D * CAConfigManager.MAIN_COMMON.emeraldArmorDiscountMultiplier.get();
+					
+					if (CAConfigManager.MAIN_COMMON.emeraldArmorDiscountMultiplier.get() > 8.0D || CAConfigManager.MAIN_COMMON.emeraldArmorDiscountMultiplier.get() < 0.0D) CAConfigManager.MAIN_COMMON.emeraldArmorDiscountMultiplier.set(4.0D);
+					
 					int cost = (int) Math.floor(amp * (double) offer.getBaseCostA().getCount());
-					if (CACommonConfig.COMMON.emeraldArmorDiscountMultiplier.get() == 8.0D) offer.addToSpecialPriceDiff(-1);
+					if (CAConfigManager.MAIN_COMMON.emeraldArmorDiscountMultiplier.get() == 8.0D) offer.addToSpecialPriceDiff(-1);
 					offer.addToSpecialPriceDiff(-Math.max(cost, 1));	
 				}
 			}
@@ -56,7 +56,7 @@ public abstract class VillagerEntityMixin extends AbstractVillagerEntity {
 	}
 	
 	@Inject(method = "Lnet/minecraft/entity/merchant/villager/VillagerEntity;mobInteract(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
-	public void chaosawakens$mobInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResultType> cir) {
+	private void chaosawakens$mobInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResultType> cir) {
 		Item mainHandItem = player.getMainHandItem().getItem();
 		
 		//TODO Make a base class for all those items

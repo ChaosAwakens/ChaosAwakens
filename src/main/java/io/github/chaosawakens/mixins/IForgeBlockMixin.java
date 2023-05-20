@@ -4,8 +4,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.config.CACommonConfig;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,9 +22,10 @@ public interface IForgeBlockMixin {
 		if (!world.isClientSide()) {
 			ServerWorld server = (ServerWorld) world;
 			
+			//TODO Restrict to radius
 			for (PlayerEntity player : server.players()) {
 				if (IUtilityHelper.isFullArmorSet(player, CAItems.LAPIS_HELMET.get(), CAItems.LAPIS_CHESTPLATE.get(), CAItems.LAPIS_LEGGINGS.get(), CAItems.LAPIS_BOOTS.get())) {
-					return state.is(Blocks.BOOKSHELF) ? 1 * CACommonConfig.COMMON.lapisArmorSetBookshelfPowerModifier.get() : 0;
+					return state.is(Blocks.BOOKSHELF) ? 1 * CAConfigManager.MAIN_COMMON.lapisArmorSetBookshelfPowerModifier.get() : 0F;
 				}
 			}
 		}	

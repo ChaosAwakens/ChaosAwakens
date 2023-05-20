@@ -5,7 +5,6 @@ import static io.github.chaosawakens.common.blocks.TopTubeBlock.SHAPE;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBodyPlantBlock;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.BlockState;
@@ -29,27 +28,32 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContainer {
-	public TubeBlock(AbstractBlock.Properties properties) {
+
+	public TubeBlock(Properties properties) {
 		super(properties, Direction.UP, SHAPE, false);
 	}
 
+	@Override
 	protected AbstractTopPlantBlock getHeadBlock() {
 		return CABlocks.TUBE_WORM.get();
 	}
 
 	@Nullable
+	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
-		return fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8 ? super.getStateForPlacement(context) : null;
+		FluidState targetFluidState = context.getLevel().getFluidState(context.getClickedPos());
+		return targetFluidState.is(FluidTags.WATER) && targetFluidState.getAmount() == 8 ? super.getStateForPlacement(context) : null;
 	}
 
 	@SuppressWarnings("deprecation")
+	@Override
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		BlockState blockstate = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-		if (!blockstate.isAir()) worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
-		return blockstate;
+		BlockState targetState = super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		if (!targetState.isAir()) worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+		return targetState;
 	}
 
+	@Override
 	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity && !entityIn.isShiftKeyDown() && entityIn.getBbHeight() > 1) {
 			((LivingEntity) entityIn).addEffect(new EffectInstance(Effects.POISON, 100, 1));
@@ -58,14 +62,17 @@ public class TubeBlock extends AbstractBodyPlantBlock implements ILiquidContaine
 		}
 	}
 
+	@Override
 	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return false;
 	}
 
+	@Override
 	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		return false;
 	}
 
+	@Override
 	public FluidState getFluidState(BlockState state) {
 		return Fluids.WATER.getSource(false);
 	}

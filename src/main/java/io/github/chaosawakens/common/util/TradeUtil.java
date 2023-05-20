@@ -18,12 +18,16 @@ import net.minecraftforge.common.BasicTrade;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 
-public class TradeUtil {
+public final class TradeUtil {
 	public static final int NOVICE = 1;
 	public static final int APPRENTICE = 2;
 	public static final int JOURNEYMAN = 3;
 	public static final int EXPERT = 4;
 	public static final int MASTER = 5;
+	
+	private TradeUtil() {
+		throw new IllegalAccessError("Utility class");
+	}
 
 	public static void addVillagerTrades(VillagerTradesEvent event, int level, VillagerTrades.ITrade... trades) {
 		for (VillagerTrades.ITrade trade : trades) event.getTrades().get(level).add(trade);

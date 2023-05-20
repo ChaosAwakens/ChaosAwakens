@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockReader;
 public abstract class AttachedStemBlockMixin {
 	
 	@Inject(method = "Lnet/minecraft/block/AttachedStemBlock;mayPlaceOn(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/IBlockReader;Lnet/minecraft/util/math/BlockPos;)Z", at = @At("HEAD"), cancellable = true)
-	public void chaosawakens$mayPlaceOn(BlockState state, IBlockReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		if(state.is(CATags.Blocks.FARMABLE))cir.setReturnValue(true);
+	private void chaosawakens$mayPlaceOn(BlockState state, IBlockReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+		if(state.is(CATags.Blocks.FARMABLE)) cir.setReturnValue(true);
 	}
 }

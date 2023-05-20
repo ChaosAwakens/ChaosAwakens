@@ -9,7 +9,6 @@ import net.minecraft.util.DamageSource;
  * @author invalid2
  */
 public class HoplologyEnchantment extends ProtectionEnchantment {
-
 	private int protection;
 	
 	public HoplologyEnchantment(EquipmentSlotType... slotType) {
@@ -18,10 +17,8 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 	
 	@Override
 	public int getDamageProtection(int pLevel, DamageSource pSource) {
-		if(pSource.isBypassArmor() || pSource.isBypassInvul())
-			return 0;
-		else
-			return protection;
+		if(pSource.isBypassArmor() || pSource.isBypassInvul()) return 0;
+		else return protection;
 	}
 	
 	@Override
@@ -34,7 +31,7 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 		return 1;
 	}
 	
-	public void changeProtection(int protection) {
+	public void incrementProtection(int protection) {
 		this.protection += protection;
 	}
 	

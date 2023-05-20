@@ -11,10 +11,10 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.trunkplacer.AbstractTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ChaosAwakens.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CATrunkPlacerTypes {
-	
 	public static final TrunkPlacerType<CrystalTrunkPlacer> CRYSTAL_TRUNK_PLACER = register("crystal_trunk_placer", CrystalTrunkPlacer.CODEC);
 	public static final TrunkPlacerType<DirtlessGiantTrunkPlacer> DIRTLESS_GIANT_TRUNK_PLACER = register("giant_ginkgo_trunk_placer", DirtlessGiantTrunkPlacer.CODEC);
 	public static final TrunkPlacerType<GiantConiferTrunkPlacer> GIANT_CONIFER_TRUNK_PLACER = register("giant_conifer_trunk_placer", GiantConiferTrunkPlacer.CODEC);

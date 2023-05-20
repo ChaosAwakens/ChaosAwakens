@@ -16,6 +16,7 @@ import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 
 public class OceanBedPlacement extends Placement<NoPlacementConfig> {
+	
 	public OceanBedPlacement() {
 		super(NoPlacementConfig.CODEC);
 	}

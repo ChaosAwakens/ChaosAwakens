@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 
-import io.github.chaosawakens.common.blocks.DoubleDensePlantBlock;
+import io.github.chaosawakens.common.blocks.dense.DoubleDensePlantBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -15,10 +15,12 @@ public class DoubleDensePlantBlockPlacer extends BlockPlacer {
 	public static final Codec<DoubleDensePlantBlockPlacer> CODEC;
 	public static final DoubleDensePlantBlockPlacer INSTANCE = new DoubleDensePlantBlockPlacer();
 
+	@Override
 	protected BlockPlacerType<?> type() {
 		return BlockPlacerType.DOUBLE_PLANT_PLACER;
 	}
 
+	@Override
 	public void place(IWorld world, BlockPos pos, BlockState state, Random random) {
 		((DoubleDensePlantBlock) state.getBlock()).placeAt(world, pos, 2);
 	}

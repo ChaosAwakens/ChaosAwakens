@@ -123,3 +123,5 @@ run/
 !gradle-wrapper.jar
 
 .metadata/
+/.apt_generated/
+/.apt_generated_tests/

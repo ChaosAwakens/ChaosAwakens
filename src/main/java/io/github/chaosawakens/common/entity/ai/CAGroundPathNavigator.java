@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import io.github.chaosawakens.api.IBlockBreakingMob;
+import io.github.chaosawakens.api.entity.IBlockBreakingMob;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAPathFinder;
 import net.minecraft.block.Block;
 import net.minecraft.entity.MobEntity;

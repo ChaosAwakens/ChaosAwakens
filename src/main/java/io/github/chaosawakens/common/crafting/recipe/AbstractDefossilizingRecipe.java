@@ -19,7 +19,7 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 	protected final Ingredient ingredient3;
 	protected final ItemStack result;
 	protected final float experience;
-	protected static int defossilizingTime;
+	protected static int DEFOSSILIZING_TIME;
 	protected final String defossilizerType;
 	private NonNullList<Ingredient> ingredients = NonNullList.create();
 
@@ -32,7 +32,7 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 		this.ingredient3 = ingredient3;
 		this.result = result;
 		this.experience = experience;
-		AbstractDefossilizingRecipe.defossilizingTime = defossilizingTime;
+		AbstractDefossilizingRecipe.DEFOSSILIZING_TIME = defossilizingTime;
 		this.defossilizerType = defossilizerType;
 		this.ingredients.add(ingredient1);
 		this.ingredients.add(ingredient2);
@@ -69,7 +69,7 @@ public abstract class AbstractDefossilizingRecipe implements IRecipe<IInventory>
 	}
 
 	public static int getDefossilizingTime() {
-		return defossilizingTime;
+		return DEFOSSILIZING_TIME;
 	}
 
 	public String getDefossilizerType() {

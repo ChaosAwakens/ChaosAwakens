@@ -8,12 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class PopcornItem extends Item {
+	
 	public PopcornItem(Properties properties) {
 		super(properties);
 	}
 
-	public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity livingEntity) {
-		ItemStack itemstack = super.finishUsingItem(stack, world, livingEntity);
-		return livingEntity instanceof PlayerEntity && ((PlayerEntity)livingEntity).abilities.instabuild ? itemstack : new ItemStack(CAItems.EMPTY_POPCORN_BAG.get());
+	public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity user) {
+		ItemStack resultUseItem = super.finishUsingItem(stack, world, user);
+		return user instanceof PlayerEntity && ((PlayerEntity)user).abilities.instabuild ? resultUseItem : new ItemStack(CAItems.EMPTY_POPCORN_BAG.get());
 	}
 }

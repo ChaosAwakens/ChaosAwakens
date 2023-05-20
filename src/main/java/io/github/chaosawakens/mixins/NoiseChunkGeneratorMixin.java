@@ -30,9 +30,7 @@ public abstract class NoiseChunkGeneratorMixin extends ChunkGenerator {
 	private static long generationSeed = 0;
 
 	@Unique
-	private static long getGenerationSeed() {
-		return generationSeed;
-	}
+	private static long getGenerationSeed() { return generationSeed; }
 
 	public NoiseChunkGeneratorMixin(BiomeProvider biomeSource, BiomeProvider biomeSource2, DimensionStructuresSettings structureSettings, long l) {
 		super(biomeSource, biomeSource2, structureSettings, l);
@@ -56,10 +54,7 @@ public abstract class NoiseChunkGeneratorMixin extends ChunkGenerator {
 			argsOnly = true
 	)
 	private static long chaosawakens$init(long seed) {
-		if (seed == 0) {
-			return getGenerationSeed();
-		} else {
-			return generationSeed = seed;
-		}
+		if (seed == 0) return getGenerationSeed();
+		else return generationSeed = seed;
 	}
 }

@@ -25,7 +25,6 @@ public class DirtlessGiantTrunkPlacer extends AbstractTrunkPlacer {
 				.and(BlockState.CODEC.fieldOf("base").forGetter((placer) -> placer.base))
 				.apply(instance, DirtlessGiantTrunkPlacer::new);
 	});
-	
 	protected final BlockState base;
 	
 	public DirtlessGiantTrunkPlacer(int baseHeight, int heightRandA, int heightRandB, BlockState base) {
@@ -56,8 +55,8 @@ public class DirtlessGiantTrunkPlacer extends AbstractTrunkPlacer {
 		return ImmutableList.of(new FoliagePlacer.Foliage(pos.above(height), 0, true));
 	}
 	
-	protected static void placeLogIfFreeWithOffset(IWorldGenerationReader reader, Random rand, BlockPos.Mutable mutable, Set<BlockPos> set, MutableBoundingBox bb, BaseTreeFeatureConfig config, BlockPos pos, int x, int y, int z) {
-		mutable.setWithOffset(pos, x, y, z);
+	protected static void placeLogIfFreeWithOffset(IWorldGenerationReader reader, Random rand, BlockPos.Mutable mutable, Set<BlockPos> set, MutableBoundingBox bb, BaseTreeFeatureConfig config, BlockPos pos, int xOffset, int yOffset, int zOffset) {
+		mutable.setWithOffset(pos, xOffset, yOffset, zOffset);
 		placeLogIfFree(reader, rand, mutable, set, bb, config);
 	}
 	

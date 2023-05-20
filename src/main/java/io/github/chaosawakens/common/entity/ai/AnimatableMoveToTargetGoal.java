@@ -40,7 +40,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	@Override
 	public boolean canContinueToUse() {
 //		if (RANDOM.nextInt(this.checkRate) == 0) return true;
-		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) && !entity.getAttacking();
+		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) && !entity.isAttacking();
 	}
 	
 	@Override

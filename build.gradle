@@ -1,7 +1,7 @@
 buildscript {
 	repositories {
 		maven { url = "https://maven.minecraftforge.net/" }
-		maven { url = 'https://maven.parchmentmc.org' }
+		maven { url = "https://maven.parchmentmc.org" }
 		maven { url = "https://repo.spongepowered.org/maven" }
 		mavenCentral()
 	}
@@ -19,54 +19,66 @@ apply plugin: "eclipse"
 apply plugin: "maven-publish"
 
 group = "io.github"
-version = "${project.minecraftVersion}-${project.modVersion}"
+version = "${minecraft_version}-${mod_version}"
 archivesBaseName = project.modId
 
 java.toolchain.languageVersion = JavaLanguageVersion.of 8
 
 minecraft {
-//	mappings channel: "official", version: "${project.minecraftVersion}"
-	mappings channel: 'parchment', version: "${project.parchmentMappingsVersion}"
+	mappings channel: "${mappings_channel}", version: "${mappings_version}"
 
 	accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
 
 	runs {
 		client {
 			workingDirectory project.file('run')
-			arg "-mixin.config=chaosawakens.mixins.json"
+			
+			arg "-Dgeckolib.disable_examples=true"
+			
+		    arg "-mixin.config=${modId}.mixins.json"	    
 			property 'mixin.env.remapRefMap', 'true'
 			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+			
 			property 'forge.logging.markers', 'SCAN'
 			property 'forge.logging.console.level', 'debug'
+			
 			mods {
-				chaosawakens {
+				"${modId}" {
 					source sourceSets.main
 				}
 			}
 		}
+		
 		server {
 			workingDirectory project.file('run')
-			arg "-mixin.config=chaosawakens.mixins.json"
+			
+		    arg "-mixin.config=${modId}.mixins.json"
 			property 'mixin.env.remapRefMap', 'true'
 			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+			
 			property 'forge.logging.markers', 'SCAN'
 			property 'forge.logging.console.level', 'debug'
+			
 			mods {
-				chaosawakens {
+				"${modId}" {
 					source sourceSets.main
 				}
 			}
 		}
+		
 		data {
 			workingDirectory project.file('run')
-			arg "-mixin.config=chaosawakens.mixins.json"
+			
+		    arg "-mixin.config=${modId}.mixins.json"
 			property 'mixin.env.remapRefMap', 'true'
 			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+			
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
-			args '--mod', 'chaosawakens', '--all', '--output', file('src/main/generated/'), '--existing', file('src/main/resources/')
+			
+			args '--mod', "${modId}", '--all', '--output', file('src/main/generated/'), '--existing', file('src/main/resources/')
 			mods {
-				chaosawakens {
+				"${modId}" {
 					source sourceSets.main
 				}
 			}
@@ -74,53 +86,60 @@ minecraft {
 	}
 }
 
-sourceSets {
-	main.resources.srcDirs += 'src/main/generated'
-}
+sourceSets { main.resources.srcDirs += 'src/main/generated' }
 
 mixin {
-	add sourceSets.main, 'chaosawakens.refmap.json'
-	config 'chaosawakens.mixins.json'
+	add sourceSets.main, "${modId}.refmap.json"
+	config "${modId}.mixins.json"
 
 	debug.export = true
 }
 
 dependencies {
-	minecraft "net.minecraftforge:forge:${project.minecraftVersion}-${project.forgeVersion}"
-	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+	// Base
+	minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+	annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 
-	implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.16.5:${project.geckolib}")
+    // Libraries
+	implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
 
-	implementation fg.deobf("curse.maven:projecte-226410:${project.projecte}")
-	implementation fg.deobf("curse.maven:patchouli-306770:${project.patchouli}")
+    // Extras
+	implementation fg.deobf("curse.maven:projecte-226410:${projecte_version}")
+	implementation fg.deobf("curse.maven:patchouli-306770:${patchouli_version}")
+
+	implementation fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+	implementation fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+	implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${jer_version}")
+	implementation fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:${jeed_version}")
+
+	implementation fg.deobf("curse.maven:appleskin-248787:${appleskin_version}")
 	
-	//implementation fg.deobf("curse.maven:advanced-xray-256256:3205011")
+	implementation fg.deobf("curse.maven:the-one-probe-245211:${top_version}")
+	implementation fg.deobf("curse.maven:jade-324717:${jade_version}")
+
+	implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
+	implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
 	
-	implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}:api")
-	implementation fg.deobf("mezz.jei:jei-1.16.5:${project.jei}")
-	implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${project.jer}")
-	implementation fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:${project.jeed}")
-
-	implementation fg.deobf("curse.maven:appleskin-248787:${project.appleskin}")
-
-	implementation fg.deobf("curse.maven:configured-457570:${project.configured}")
-	implementation fg.deobf("curse.maven:catalogue-459701:${project.catalogue}")
-
-	implementation fg.deobf("curse.maven:the-one-probe-245211:${project.top}")
-	implementation fg.deobf("curse.maven:jade-324717:${project.jade}")
+	compileOnly fg.deobf("curse.maven:iron-chests-228756:${ironchests_version}")
+	compileOnly fg.deobf("curse.maven:iron-shulker-boxes-314911:${ironshulkerboxes_version}")
+	compileOnly fg.deobf("curse.maven:iron-furnaces-237664:${ironfurnaces_version}")
+	
+	compileOnly fg.deobf("curse.maven:curios-309927:${curios_version}")
+	
+	implementation fg.deobf("curse.maven:datafixerslayer-416519:${dfs_version}")
 }
 
 repositories {
 	maven {
-		name = "Progwml6 maven"
-		url = "https://dvs1.progwml6.com/files/maven/"
-	}
-	maven {
-		name = "CurseForge"
+		name = "CurseForge Maven"
 		url = "https://www.cursemaven.com"
 	}
 	maven {
-		name = "GeckoLib"
+		name = "Progwml6 Maven"
+		url = "https://dvs1.progwml6.com/files/maven/"
+	}
+	maven {
+		name = "GeckoLib Maven"
 		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
 	}
 }
@@ -128,14 +147,14 @@ repositories {
 jar {
 	manifest {
 		attributes([
-				"Specification-Title"     : project.modName,
+				"Specification-Title"     : project.mod_name,
 				"Specification-Vendor"    : "Chaos Awakens Team",
-				"Specification-Version"   : "1",
-				"Implementation-Title"    : project.modName,
+				"Specification-Version"   : project.mod_version,
+				"Implementation-Title"    : project.mod_name,
 				"Implementation-Vendor"   : "Chaos Awakens Team",
-				"Implementation-Version"  : project.modVersion,
+				"Implementation-Version"  : project.mod_version,
 				"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-				"MixinConfigs": "chaosawakens.mixins.json"
+				"MixinConfigs": "${modId}.mixins.json"
 		])
 	}
 }

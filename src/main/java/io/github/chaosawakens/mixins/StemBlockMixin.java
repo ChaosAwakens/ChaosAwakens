@@ -12,10 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
 @Mixin(StemBlock.class)
-abstract public class StemBlockMixin {
+public abstract class StemBlockMixin {
 
 	@Inject(method = "Lnet/minecraft/block/StemBlock;mayPlaceOn(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/IBlockReader;Lnet/minecraft/util/math/BlockPos;)Z", at = @At("HEAD"), cancellable = true)
-	public void chaosawakens$mayPlaceOn(BlockState state, IBlockReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		if(state.is(CATags.Blocks.FARMABLE))cir.setReturnValue(true);
+	private void chaosawakens$mayPlaceOn(BlockState state, IBlockReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+		if(state.is(CATags.Blocks.FARMABLE)) cir.setReturnValue(true);
 	}
 }
