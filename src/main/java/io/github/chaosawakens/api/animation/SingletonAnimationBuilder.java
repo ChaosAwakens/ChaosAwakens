@@ -78,7 +78,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	}
 	
 	public EDefaultLoopTypes getLoopType() {
-		return (EDefaultLoopTypes) getAnimation().loop;
+		return getAnimation().loop == EDefaultLoopTypes.LOOP ? EDefaultLoopTypes.LOOP : EDefaultLoopTypes.PLAY_ONCE;
 	}
 
 	public boolean isPlaying(int id) {
@@ -149,9 +149,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	}
 	
 	public void tickAnim() {
-		if (isPlaying(((Entity) owner).getId())) {
-			// Sync data C2S
-			if (((Entity) owner).level.isClientSide) CANetworkManager.sendPacketToServer(new AnimationDataSyncPacket(((Entity) owner).getId(), targetController.getName(), animName, getLoopType(), getProgressTicks(((Entity) owner).getId()), getController().getAnimationState()));
+		if (((Entity) owner).level.isClientSide) {
+			if (isPlaying(((Entity) owner).getId())) {
+				// Sync data C2S
+				CANetworkManager.sendPacketToServer(new AnimationDataSyncPacket(((Entity) owner).getId(), targetController.getName(), animName, getLoopType(), getProgressTicks(((Entity) owner).getId()), getController().getAnimationState()));
+			}
 		}
 	}
 	

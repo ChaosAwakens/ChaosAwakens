@@ -186,6 +186,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	@Override
 	public void tick() {
 		this.prevBodyRot = yBodyRot;
+		tickAnims();
 		super.tick();
 		
 		if (!level.isClientSide) setMoving(!isStuck());

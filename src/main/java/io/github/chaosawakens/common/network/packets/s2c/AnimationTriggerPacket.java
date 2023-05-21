@@ -28,15 +28,24 @@ public class AnimationTriggerPacket implements ICAPacket {
 	}
 	
 	public static AnimationTriggerPacket decode(PacketBuffer buf) {
-		return new AnimationTriggerPacket(buf.readInt(), buf.readUtf(), buf.readEnum(EDefaultLoopTypes.class), buf.readUtf());
+		return new AnimationTriggerPacket(buf.readInt(), buf.readUtf(), utfToLoopEnum(buf.readUtf()), buf.readUtf());
 	}
 
 	@Override
 	public void encode(PacketBuffer buf) {
 		buf.writeInt(animatableOwnerID);
 		buf.writeUtf(animationName);
-		buf.writeEnum(loopType);
+		buf.writeUtf(loopType.toString());
 		buf.writeUtf(controllerName);
+	}
+	
+	private static EDefaultLoopTypes utfToLoopEnum(String name) {
+		if(name.equals("LOOP"))
+			return EDefaultLoopTypes.LOOP;
+		else if(name.equals("HOLD_ON_LAST_FRAME"))
+			return EDefaultLoopTypes.HOLD_ON_LAST_FRAME;
+		else
+			return EDefaultLoopTypes.PLAY_ONCE;
 	}
 
 	@SuppressWarnings("resource")

@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.network.packets.c2s;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.network.ICAPacket;
@@ -40,7 +41,7 @@ public class AnimationDataSyncPacket implements ICAPacket {
 	}
 	
 	public static AnimationDataSyncPacket decode(PacketBuffer buf) {
-		return new AnimationDataSyncPacket(buf.readInt(), buf.readUtf(), buf.readUtf(), buf.readEnum(EDefaultLoopTypes.class), buf.readDouble(), buf.readEnum(AnimationState.class));
+		return new AnimationDataSyncPacket(buf.readInt(), buf.readUtf(), buf.readUtf(), utfToLoopEnum(buf.readUtf()), buf.readDouble(), utfToStateEnum(buf.readUtf()));
 	}
 
 	@Override
@@ -48,9 +49,27 @@ public class AnimationDataSyncPacket implements ICAPacket {
 		buf.writeInt(animatableOwnerID);
 		buf.writeUtf(controllerName);
 		buf.writeUtf(animName);
-		buf.writeEnum(loopType);
+		buf.writeUtf(loopType.toString());
 		buf.writeDouble(animProgress);
-		buf.writeEnum(animState);
+		buf.writeUtf(animState.toString());
+	}
+	
+	private static EDefaultLoopTypes utfToLoopEnum(String name) {
+		if(name.equals("LOOP"))
+			return EDefaultLoopTypes.LOOP;
+		else if(name.equals("HOLD_ON_LAST_FRAME"))
+			return EDefaultLoopTypes.HOLD_ON_LAST_FRAME;
+		else
+			return EDefaultLoopTypes.PLAY_ONCE;
+	}
+	
+	private static AnimationState utfToStateEnum(String name) {
+		if(name.equals("Stopped"))
+			return AnimationState.Stopped;
+		else if(name.equals("Transitioning"))
+			return AnimationState.Transitioning;
+		else
+			return AnimationState.Running;
 	}
 
 	@SuppressWarnings("unused")
@@ -63,8 +82,8 @@ public class AnimationDataSyncPacket implements ICAPacket {
 			if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity) {
 				IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
 				
-				if (targetAnimatable.isPlayingAnimationInController(controllerName)) {
-					final SingletonAnimationBuilder curAnim = new SingletonAnimationBuilder(targetAnimatable, animName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
+				if (targetAnimatable.isPlayingAnimationInController(animName, controllerName)) {
+					final SingletonAnimationBuilder curAnim = targetAnimatable.getCurrentAnimationAsSAB(controllerName);
 					
 					// Set/update anim progress
 					for (Map.Entry<String, Variable> molangVar : GeckoLibCache.getInstance().parser.variables.entrySet()) {
@@ -81,6 +100,7 @@ public class AnimationDataSyncPacket implements ICAPacket {
 			}
 		});
 		
+		ChaosAwakens.LOGGER.debug("RECIEVED ANIMDATASYNCC2S PACKET!");
 		ctx.get().setPacketHandled(true);
 	}
 }

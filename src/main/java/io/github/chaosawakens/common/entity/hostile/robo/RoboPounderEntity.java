@@ -134,6 +134,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	public void tick() {
 		super.tick();
 		
+		idleAnim.tickAnim();
+		walkAnim.tickAnim();
+		deathAnim.tickAnim();
+		leftPunchAnim.tickAnim();
+		rightPunchAnim.tickAnim();
+		
 		if (!level.isClientSide && !dead) handleTaunting();	
 		if (tickCount % 10 == 0 && isAlive()) {
 			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
