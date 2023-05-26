@@ -102,7 +102,7 @@ public class AnimatableAOEGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation) && !aoeAnim.hasAnimationFinished(owner.getId()) && owner.isAlive() && owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation) && !aoeAnim.hasAnimationFinished() && owner.isAlive() && owner.getTarget().isAlive();
 	}
 
 	@Override
@@ -122,17 +122,17 @@ public class AnimatableAOEGoal extends Goal {
 		List<LivingEntity> affectedTargets = EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange);
 
 		if (shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
-		else if (aoeAnim.getProgressTicks(owner.getId()) < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
+		else if (aoeAnim.getProgressTicks() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
 		if (!affectedTargets.isEmpty()) {
 			for (LivingEntity affectedTarget : affectedTargets) {
-				if (MathUtil.isBetween(aoeAnim.getProgressTicks(owner.getId()), actionPointTickStart, actionPointTickEnd)) {
+				if (MathUtil.isBetween(aoeAnim.getProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
 					if (MathUtil.getDistanceBetween(owner, affectedTarget) <= aoeRange) {
 						owner.doHurtTarget(affectedTarget);
 					}
 				}
 			}
 		}
-		if (aoeAnim.getProgressTicks(owner.getId()) >= actionPointTickStart && !shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
+		if (aoeAnim.getProgressTicks() >= actionPointTickStart && !shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
 	}
 
 }

@@ -120,7 +120,7 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {
 			playAnimation(getDeathAnim());
-			if (getDeathAnim().hasAnimationFinished(getId())) remove();
+			if (getDeathAnim().hasAnimationFinished()) remove();
 
 			for(int i = 0; i < 20; ++i) {
 				double xOffset = this.random.nextGaussian() * 0.02D;

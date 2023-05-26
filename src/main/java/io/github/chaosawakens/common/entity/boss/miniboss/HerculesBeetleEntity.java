@@ -207,7 +207,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 			EntityUtil.freezeEntityRotation(this);
 			setArmor(10);
 			
-			if (awakeningAnim.hasAnimationFinished(getId())) {
+			if (awakeningAnim.hasAnimationFinished()) {
 				setAwakening(false);
 				setOffensive(true);
 			}

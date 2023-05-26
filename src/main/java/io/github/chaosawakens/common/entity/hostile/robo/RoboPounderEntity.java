@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -38,6 +39,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this); //TODO Diff method of controller reg. + sync
 	private final ObjectArrayList<AnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<AnimationController<RoboPounderEntity>>(1);
+	private final ObjectArrayList<? extends IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>();
 	private static final DataParameter<Boolean> SHOULD_TAUNT = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BOOLEAN);
 	private final AnimationController<RoboPounderEntity> mainController = createMainMappedController("robopoundermaincontroller");
 	private final AnimationController<RoboPounderEntity> attackController = createMappedController("robopounderattackcontroller", this::attackPredicate);
@@ -134,23 +136,17 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	public void tick() {
 		super.tick();
 		
-		idleAnim.tickAnim();
-		walkAnim.tickAnim();
-		deathAnim.tickAnim();
-		leftPunchAnim.tickAnim();
-		rightPunchAnim.tickAnim();
-		
 		if (!level.isClientSide && !dead) handleTaunting();	
 		if (tickCount % 10 == 0 && isAlive()) {
 			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
 			ChaosAwakens.debug("Anim", "[IS PLAYING IDLE ANIM]: " + isPlayingAnimation(idleAnim));
-			ChaosAwakens.debug("Anim", "[HAS IDLE FINISHED]: " + idleAnim.hasAnimationFinished(getId()));
-			ChaosAwakens.debug("Anim", "[HAS DEATH FINISHED]: " + deathAnim.hasAnimationFinished(getId()));
-			ChaosAwakens.debug("Anim", "[IDLE PROGRESS]: " + idleAnim.getProgressTicks(getId()));
-			ChaosAwakens.debug("Anim", "[WALK PROGRESS]: " + walkAnim.getProgressTicks(getId()));
+			ChaosAwakens.debug("Anim", "[HAS IDLE FINISHED]: " + idleAnim.hasAnimationFinished());
+			ChaosAwakens.debug("Anim", "[HAS DEATH FINISHED]: " + deathAnim.hasAnimationFinished());
+			ChaosAwakens.debug("Anim", "[IDLE PROGRESS]: " + idleAnim.getProgressTicks());
+			ChaosAwakens.debug("Anim", "[WALK PROGRESS]: " + walkAnim.getProgressTicks());
 			ChaosAwakens.debug("Anim", "[IDLE LENGTH]: " + idleAnim.getLengthTicks());
-			ChaosAwakens.debug("Anim", "[RPA TICKS]: " + rightPunchAnim.getProgressTicks(getId()));
-			ChaosAwakens.debug("Anim", "[LPA TICKS]: " + leftPunchAnim.getProgressTicks(getId()));
+			ChaosAwakens.debug("Anim", "[RPA TICKS]: " + rightPunchAnim.getProgressTicks());
+			ChaosAwakens.debug("Anim", "[LPA TICKS]: " + leftPunchAnim.getProgressTicks());
 			ChaosAwakens.debug("Anim", "[ATTACK ID]: " + getAttackID());
 			ChaosAwakens.debug("Anim", "[MAINCONT]: " + mainController.getAnimationState());
 			ChaosAwakens.debug("Anim", "[ATKCONT]: " + attackController.getAnimationState());
@@ -217,5 +213,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<AnimationController<RoboPounderEntity>> getControllers() {
 		return roboPounderControllers;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() {
+		return (ObjectArrayList<E>) roboPounderAnimations;
 	}
 }

@@ -20,17 +20,18 @@ public class CANetworkManager {
 			      PROTOCOL_VERSION::equals);
 
 	public static void registerPackets() {
-		int id = 0;
-		registerCTSPackets(id);
-		registerSTCPackets(id);
+		int c2sId = 0;
+		int s2cId = 0;
+		registerCTSPackets(c2sId);
+		registerSTCPackets(s2cId);
 	}
 	
 	private static void registerCTSPackets(int id) {
 		CHANNEL.messageBuilder(AnimationDataSyncPacket.class, id++)
-		.encoder(AnimationDataSyncPacket::encode)
-		.decoder(AnimationDataSyncPacket::decode)
-		.consumer(AnimationDataSyncPacket::onRecieve)
-		.add();
+			.encoder(AnimationDataSyncPacket::encode)
+			.decoder(AnimationDataSyncPacket::decode)
+			.consumer(AnimationDataSyncPacket::onRecieve)
+			.add();
 	}
 	
 	private static void registerSTCPackets(int id) {

@@ -62,7 +62,7 @@ public class AnimatableMeleeGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive() && !meleeAnim.get().hasAnimationFinished(owner.getId()) && owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive() && !meleeAnim.get().hasAnimationFinished() && owner.getTarget().isAlive();
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class AnimatableMeleeGoal extends Goal {
 		double reach = owner.getMeleeAttackReachSqr(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
-		if (meleeAnim.get().getProgressTicks(owner.getId()) < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
+		if (meleeAnim.get().getProgressTicks() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			float targetAngle = (float) MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
 			float attackAngle = owner.yBodyRot % 360;
@@ -95,13 +95,12 @@ public class AnimatableMeleeGoal extends Goal {
 
 			float relativeHitAngle = targetAngle - attackAngle;
 
-			if (MathUtil.isBetween(meleeAnim.get().getProgressTicks(owner.getId()), actionPointTickStart, actionPointTickEnd)) {
+			if (MathUtil.isBetween(meleeAnim.get().getProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
 				if (owner.distanceToSqr(owner.getTarget()) <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) {
 					owner.doHurtTarget(potentialAffectedTarget);
 				}
 			}
 		}
-		if (meleeAnim.get().getProgressTicks(owner.getId()) >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
+		if (meleeAnim.get().getProgressTicks() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 	}
-
 }

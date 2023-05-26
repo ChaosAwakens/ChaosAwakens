@@ -129,7 +129,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		setAttackID((byte) 0);
 		if (getDeathAnim() != null) {
 			playAnimation(getDeathAnim());
-			if (getDeathAnim().hasAnimationFinished(getId())) {
+			if (getDeathAnim().hasAnimationFinished()) {
 				remove();
 				
 				for(int i = 0; i < 20; ++i) {

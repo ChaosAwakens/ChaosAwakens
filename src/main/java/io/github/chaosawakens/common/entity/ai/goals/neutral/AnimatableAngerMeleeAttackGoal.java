@@ -62,7 +62,7 @@ public class AnimatableAngerMeleeAttackGoal extends Goal {
 	@Override
 	public boolean canContinueToUse() {
 		if (!owner.isAngry()) owner.stopAnimation(meleeAnim);
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim, attackId) && owner.isAlive() && !meleeAnim.hasAnimationFinished(owner.getId()) && owner.isAngry() && owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim, attackId) && owner.isAlive() && !meleeAnim.hasAnimationFinished() && owner.isAngry() && owner.getTarget().isAlive();
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class AnimatableAngerMeleeAttackGoal extends Goal {
 		double reach = owner.getMeleeAttackReachSqr(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
-		if (meleeAnim.getProgressTicks(owner.getId()) < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
+		if (meleeAnim.getProgressTicks() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			float targetAngle = (float) MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
 			float attackAngle = owner.yBodyRot % 360;
@@ -93,12 +93,12 @@ public class AnimatableAngerMeleeAttackGoal extends Goal {
 
 			float relativeHitAngle = targetAngle - attackAngle;
 
-			if (MathUtil.isBetween(meleeAnim.getProgressTicks(owner.getId()), actionPointTickStart, actionPointTickEnd)) {
+			if (MathUtil.isBetween(meleeAnim.getProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
 				if (MathUtil.getDistanceBetween(owner, potentialAffectedTarget) <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) {
 					owner.doHurtTarget(potentialAffectedTarget);
 				}
 			}
 		}
-		if (meleeAnim.getProgressTicks(owner.getId()) >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
+		if (meleeAnim.getProgressTicks() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 	}
 }

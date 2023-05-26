@@ -9,6 +9,6 @@ import software.bernie.geckolib3.core.builder.AnimationBuilder;
  * that any rough transitions between chained animations will be handled by this builder. Animation transition behaviour will remain as-is, 
  * and Geckolib will still handle the animation transitioning itself.
  */
-public class ChainedAnimationBuilder implements IAnimationBuilder {
+public abstract class ChainedAnimationBuilder implements IAnimationBuilder {
 	
 }

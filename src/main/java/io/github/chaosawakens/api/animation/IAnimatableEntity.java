@@ -1,7 +1,5 @@
 package io.github.chaosawakens.api.animation;
 
-import java.lang.reflect.Field;
-import java.util.Queue;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
@@ -26,7 +24,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.util.AnimationUtils;
 
 public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
-	
+
 	/**
 	 * The main animation controller attached to the entity. Can be used to set animations outside of the <code>predicate(AnimationEvent<E> event)</code>
 	 * method.
@@ -35,7 +33,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	AnimationController<? extends IAnimatableEntity> getMainController();
 
 	/**
-	 * A forced interval between each animation.
+	 * A forced (tick) interval between each animation.
 	 * @return The delay between animations.
 	 */
 	int animationInterval();
@@ -48,8 +46,10 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * @return a PlayState for each set animation.
 	 */
 	<E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
-	
+
 	<E extends IAnimatableEntity> ObjectArrayList<AnimationController<? extends E>> getControllers();
+
+	default <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() { return null; }
 
 	@Override
 	default void registerControllers(AnimationData data) {
@@ -92,59 +92,40 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	default Animation getCurrentAnimation() {
 		return getMainController().getCurrentAnimation();
 	}
-	
+
 	@Nullable
 	default Animation getCurrentAnimation(AnimationController<? extends IAnimatableEntity> targetController) {
 		return targetController.getCurrentAnimation();
 	}
 	
 	@Nullable
-	default SingletonAnimationBuilder getCurrentAnimationAsSAB() {
-		Animation curAnim = getMainController().getCurrentAnimation();
-		final SingletonAnimationBuilder curAnimSAB = new SingletonAnimationBuilder(this, curAnim.animationName, curAnim.loop);
-		return curAnimSAB;
+	default IAnimationBuilder getCurrentAnimationAsCB(AnimationController<? extends IAnimatableEntity> targetController) {
+		Animation curAnim = targetController.getCurrentAnimation();
+		
+		for (IAnimationBuilder curAnimB : getAnimations()) {
+			if (curAnim.animationName == curAnimB.getAnimation().animationName) return curAnimB;
+		}
+		
+		return null;
 	}
-	
+
+	@Nullable
+	default IAnimationBuilder getCurrentAnimationAsCB(String targetControllerName) {
+		return getCurrentAnimationAsCB(getControllerByName(targetControllerName));
+	}
+
 	@Nullable
 	default SingletonAnimationBuilder getCurrentAnimationAsSAB(AnimationController<? extends IAnimatableEntity> targetController) {
-		Animation curAnim = targetController.getCurrentAnimation();
-		final SingletonAnimationBuilder curAnimSAB = new SingletonAnimationBuilder(this, curAnim.animationName, curAnim.loop).setController(targetController);
-		return curAnimSAB;
+		for (IAnimationBuilder curAnimB : getAnimations()) {
+			if (curAnimB instanceof SingletonAnimationBuilder) return (SingletonAnimationBuilder) getCurrentAnimationAsCB(targetController);
+		}
+		
+		return null;
 	}
-	
+
 	@Nullable
 	default SingletonAnimationBuilder getCurrentAnimationAsSAB(String targetControllerName) {
-		Animation curAnim = getControllerByName(targetControllerName).getCurrentAnimation();
-		final SingletonAnimationBuilder curAnimSAB = new SingletonAnimationBuilder(this, curAnim.animationName, curAnim.loop).setController(getControllerByName(targetControllerName));
-		return curAnimSAB;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Nullable
-	default ObjectArrayList<SingletonAnimationBuilder> getAnimationsAsBuilders(AnimationController<? extends IAnimatableEntity> targetController) {
-		ObjectArrayList<SingletonAnimationBuilder> abl = new ObjectArrayList<SingletonAnimationBuilder>();
-		
-		try {
-			Field animQueue = AnimationController.class.getDeclaredField("animationQueue");
-			animQueue.setAccessible(true);
-			Queue<Animation> actAnimQueue = (Queue<Animation>) animQueue.get(targetController);
-			
-			actAnimQueue.forEach((curAnim) -> {
-				if (curAnim != null) {
-					final SingletonAnimationBuilder curAnimAsBuilder = new SingletonAnimationBuilder(this, curAnim.animationName, curAnim.loop).setController(targetController);				
-					if (!abl.contains(curAnimAsBuilder)) abl.add(curAnimAsBuilder);
-				}
-			});
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return abl;
+		return getCurrentAnimationAsSAB(getControllerByName(targetControllerName));
 	}
 
 	default boolean isPlayingAnimation() {
@@ -164,7 +145,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim) {
-		return targetAnim.isPlaying(((Entity) this).getId());
+		return targetAnim.isPlaying();
 	}
 
 	default <E extends IAnimatableEntity> boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim, AnimationController<E> controllerToCheck) {
@@ -178,19 +159,19 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 		return false;
 	}
-	
+
 	default boolean isPlayingAnimationInController(AnimationController<? extends IAnimatableEntity> targetController) {
 		return targetController.getCurrentAnimation() != null;
 	}
-	
+
 	default boolean isPlayingAnimationInController(String targetControllerName) {
 		return isPlayingAnimationInController(getControllerByName(targetControllerName));
 	}
-	
+
 	default boolean isPlayingAnimationInController(String animName, AnimationController<? extends IAnimatableEntity> targetController) {
 		return targetController.getCurrentAnimation() != null && targetController.getCurrentAnimation().animationName == animName;
 	}
-	
+
 	default boolean isPlayingAnimationInController(String animName, String targetControllerName) {
 		return isPlayingAnimationInController(animName, getControllerByName(targetControllerName));
 	}
@@ -242,12 +223,10 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	default int tickTimer() {
 		return ((Entity) this).tickCount;
 	}
-	
+
 	default void tickAnims() {
-		for (AnimationController<? extends IAnimatableEntity> targetController : getControllers()) {
-			for (SingletonAnimationBuilder anim : getAnimationsAsBuilders(targetController)) {
-				anim.tickAnim();
-			}
+		for (IAnimationBuilder anim : getAnimations()) {
+			if (anim.isPlaying()) anim.tickAnim();
 		}
 	}
 

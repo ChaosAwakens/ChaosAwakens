@@ -3,7 +3,6 @@ package io.github.chaosawakens.common.network.packets.c2s;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.network.ICAPacket;
@@ -87,7 +86,7 @@ public class AnimationDataSyncPacket implements ICAPacket {
 					
 					// Set/update anim progress
 					for (Map.Entry<String, Variable> molangVar : GeckoLibCache.getInstance().parser.variables.entrySet()) {
-						if (molangVar.getKey().equals("query.anim_time")) molangVar.getValue().set(animProgress);
+						if (molangVar.getKey().equals("query.anim_time")) molangVar.getValue().set(animProgress + 1);
 					}
 					
 					// Set/update loop type
@@ -100,7 +99,7 @@ public class AnimationDataSyncPacket implements ICAPacket {
 			}
 		});
 		
-		ChaosAwakens.LOGGER.debug("RECIEVED ANIMDATASYNCC2S PACKET!");
+	//	ChaosAwakens.LOGGER.debug("RECIEVED ANIMDATASYNCC2S PACKET!");
 		ctx.get().setPacketHandled(true);
 	}
 }
