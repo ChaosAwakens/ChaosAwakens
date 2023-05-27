@@ -137,7 +137,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		super.tick();
 		
 		if (!level.isClientSide && !dead) handleTaunting();	
-		if (tickCount % 10 == 0 && isAlive()) {
+		if (!level.isClientSide && tickCount % 10 == 0 && isAlive()) {
 			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
 			ChaosAwakens.debug("Anim", "[IS PLAYING IDLE ANIM]: " + isPlayingAnimation(idleAnim));
 			ChaosAwakens.debug("Anim", "[HAS IDLE FINISHED]: " + idleAnim.hasAnimationFinished());
@@ -154,8 +154,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			ChaosAwakens.debug("Anim", "------------------------------------------------------------------------------");
 			
 			ChaosAwakens.debug("AnimCont", "--------------------------------------------------------------------------");
-			if (getMainController().getCurrentAnimation() != null) ChaosAwakens.debug("AnimCont", "[CUR MAIN ANIM]: " + getMainController().getCurrentAnimation().animationName);
-			if (getTarget() != null) ChaosAwakens.debug("AnimCont", "[HAS TARGET]: " + getTarget());
+			ChaosAwakens.debug("AnimCont", "[CUR MAIN ANIM]: " + ( getMainController().getCurrentAnimation() != null ? getMainController().getCurrentAnimation().animationName : "null"));
+			ChaosAwakens.debug("AnimCont", "[HAS TARGET]: " + (getTarget() != null ? getTarget() : "null"));
 			ChaosAwakens.debug("AnimCont", "[ALL CONTROLLERS: SIZE]: " + getControllers().size());
 			if (getTarget() != null) ChaosAwakens.debug("AnimCont", "[Can Attak]: " + getTarget() != null && isAlive() && !isAttacking() && getTarget().isAlive() && MathUtil.getDistanceBetween(this, getTarget()) <= getMeleeAttackReachSqr(getTarget()) + 5D);
 			ChaosAwakens.debug("AnimCont", "--------------------------------------------------------------------------");	
