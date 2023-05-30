@@ -34,7 +34,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder = new AnimationBuilder().addAnimation(animName);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
-		if (!this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
+		if (this.owner.getAnimations() != null && !this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, ILoopType loopType) {
@@ -45,7 +45,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder = new AnimationBuilder().addAnimation(animName, loopType);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
-		if (!this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
+		if (this.owner.getAnimations() != null && this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, int loopReps) {
@@ -55,7 +55,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder = new AnimationBuilder().addRepeatingAnimation(animName, loopReps);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
-		if (!this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
+		if (this.owner.getAnimations() != null && !this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder setController(AnimationController<? extends IAnimatableEntity> targetController) {
@@ -150,6 +150,8 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public void tickAnim() {
+		//TODO Either action points (object, possibly) or manual action point stuff
+		
 		// C2S (Sync data to server)
 		if (((Entity) owner).level.isClientSide) {
 			if (isPlaying()) {
@@ -163,18 +165,5 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 			}
 		}
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-/*		if (!ObjectUtil.performNullityChecks(false, this, obj)) return false;
-
-		SingletonAnimationBuilder other = (SingletonAnimationBuilder) obj;
-		
-		if (!ObjectUtil.performNullityChecks(false, this, other)) return false;
-
-		if (getAnimation() == other.getAnimation()) return true;
-		else if (getAnimation().animationName == other.getAnimation().animationName) return true;
-		else */return super.equals(obj);
 	}
 }

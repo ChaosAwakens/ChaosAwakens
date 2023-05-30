@@ -309,6 +309,7 @@ public class BiomeHandlers {
 				// Dense Plains
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_PLAINS)) {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_PLAINS);
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_THORNY_SUN);
 				}
 
 				// Dense Forest
