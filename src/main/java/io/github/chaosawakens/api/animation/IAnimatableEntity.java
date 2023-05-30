@@ -68,7 +68,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 		if (results.isEmpty()) return null;
 
-		return (AnimationController<? extends IAnimatableEntity>) results.get(0);
+		return results.get(0);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
