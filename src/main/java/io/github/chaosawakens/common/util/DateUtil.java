@@ -24,19 +24,18 @@ public class DateUtil {
 		return curMonth == 12;
 	}
 	
-	public static boolean applyHolidayTextures(Entity targetEntity, float chance, int holidayMonth) {
+	public static boolean canApplyHolidayTextures(Entity targetEntity, float chance, int holidayMonth) {
 		if (holidayMonth > 12) return false;
 		LocalDate curDate = LocalDate.now();
 		int curMonth = curDate.get(ChronoField.MONTH_OF_YEAR);
 		return targetEntity.level.random.nextFloat() < chance && curMonth == holidayMonth && CAConfigManager.MAIN_COMMON.holidayTextures.get(); 
 	}
 	
-	public static boolean applyHalloweenTextures(Entity targetEntity, float chance) {
-		return applyHolidayTextures(targetEntity, chance, 10);
+	public static boolean canApplyHalloweenTextures(Entity targetEntity, float chance) {
+		return canApplyHolidayTextures(targetEntity, chance, 10);
 	}
 	
-	public static boolean applyChristmasTextures(Entity targetEntity, float chance) {
-		return applyHolidayTextures(targetEntity, chance, 12);
+	public static boolean canApplyChristmasTextures(Entity targetEntity, float chance) {
+		return canApplyHolidayTextures(targetEntity, chance, 12);
 	}
-
 }

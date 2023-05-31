@@ -2,7 +2,6 @@ package io.github.chaosawakens.manager;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.network.ICAPacket;
-import io.github.chaosawakens.common.network.packets.c2s.AnimationDataSyncPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
 import net.minecraft.client.Minecraft;
@@ -26,11 +25,6 @@ public class CANetworkManager {
 	}
 	
 	private static int registerCTSPackets(int id) {
-		CHANNEL.messageBuilder(AnimationDataSyncPacket.class, id++)
-			.encoder(AnimationDataSyncPacket::encode)
-			.decoder(AnimationDataSyncPacket::decode)
-			.consumer(AnimationDataSyncPacket::onRecieve)
-			.add();
 		return id;
 	}
 	
@@ -48,16 +42,24 @@ public class CANetworkManager {
 		return id;
 	}
 
+	/**
+	 * Sends a packet from client to server.
+	 * @param packet Packet to send to the server.
+	 */
 	public static void sendPacketToServer(ICAPacket packet) {
 		CHANNEL.sendToServer(packet);
 	}
 	
+	/**
+	 * Sends a packet to all clients from the server.
+	 * @param packet Packet to send to client.
+	 */
 	public static void sendPacketToClient(ICAPacket packet) {
 		CHANNEL.sendTo(packet, Minecraft.getInstance().getConnection().getConnection(), NetworkDirection.PLAY_TO_CLIENT);
 	}
 	
 	/**
-	 * Send a tracking entity/player packet to all tracking clients from the server.
+	 * Sends a tracking entity/player packet to all tracking clients from the server.
 	 * @param packet Packet to send (S2C)
 	 * @param trackedEntity Tracked Entity
 	 */

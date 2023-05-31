@@ -14,7 +14,9 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.ITeleporter;
 
 public class HeightmapTeleporter implements ITeleporter {
+	
 	@Nullable
+	@Override
 	public PortalInfo getPortalInfo(Entity entity, ServerWorld targetWorld, Function<ServerWorld, PortalInfo> defaultPortalInfo) {
 		return new PortalInfo(entity.position(), Vector3d.ZERO, entity.yRot, entity.xRot);
 	}

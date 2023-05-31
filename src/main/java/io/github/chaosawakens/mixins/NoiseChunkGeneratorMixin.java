@@ -29,30 +29,23 @@ public abstract class NoiseChunkGeneratorMixin extends ChunkGenerator {
 	@Unique
 	private static long generationSeed = 0;
 
-	@Unique
-	private static long getGenerationSeed() { return generationSeed; }
-
 	public NoiseChunkGeneratorMixin(BiomeProvider biomeSource, BiomeProvider biomeSource2, DimensionStructuresSettings structureSettings, long l) {
 		super(biomeSource, biomeSource2, structureSettings, l);
 	}
 
+	@Unique
+	private static long getGenerationSeed() { return generationSeed; }
+
 	@Inject(method = "<clinit>", at = @At("RETURN"))
 	private static void chaosawakens$clinit(CallbackInfo ci) {
 		CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-				BiomeProvider.CODEC.fieldOf("biome_source")
-						.forGetter(ChunkGenerator::getBiomeSource),
-				Codec.LONG.fieldOf("seed").stable()
-						.forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor) (Object) noiseChunkGenerator).getSeed()),
-				DimensionSettings.CODEC.fieldOf("settings")
-						.forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor) (Object) noiseChunkGenerator).getSettings()))
-				.apply(instance, instance.stable(NoiseChunkGenerator::new)));
+				BiomeProvider.CODEC.fieldOf("biome_source").forGetter(ChunkGenerator::getBiomeSource),
+				Codec.LONG.fieldOf("seed").stable().forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor) (Object) noiseChunkGenerator).getSeed()),
+				DimensionSettings.CODEC.fieldOf("settings").forGetter((noiseChunkGenerator) -> ((NoiseChunkGeneratorAccessor) (Object) noiseChunkGenerator).getSettings())
+				).apply(instance, instance.stable(NoiseChunkGenerator::new)));
 	}
 
-	@ModifyVariable(
-			method = "<init>(Lnet/minecraft/world/biome/provider/BiomeProvider;Lnet/minecraft/world/biome/provider/BiomeProvider;JLjava/util/function/Supplier;)V",
-			at = @At("HEAD"),
-			argsOnly = true
-	)
+	@ModifyVariable(method = "<init>(Lnet/minecraft/world/biome/provider/BiomeProvider;Lnet/minecraft/world/biome/provider/BiomeProvider;JLjava/util/function/Supplier;)V", at = @At("HEAD"), argsOnly = true)
 	private static long chaosawakens$init(long seed) {
 		if (seed == 0) return getGenerationSeed();
 		else return generationSeed = seed;

@@ -7,6 +7,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.AnimationUtil;
@@ -89,7 +90,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isAttacking()) return PlayState.STOP;
 		if (shouldTaunt()) playAnimation(tauntAnim);
 		return PlayState.CONTINUE;
 	}
@@ -108,9 +108,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	protected void registerGoals() {
 		this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 14.2D, 17.3D, 50, 1));
-//		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(leftSwingAnim, rightSwingAnim, random), SWING_ATTACK_ID, 12D, 14D, 80, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3));		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, dashAttackAnim, DASH_ATTACK_ID, 9.6D, 13.5D, 10));
-//		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, AnimationUtil.pickAnimation(leftStompAnim, rightStompAnim, random), STOMP_ATTACK_ID, 10.4D, 14.7D, 8.0D, 5));
-//		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.6D, 17.5D, 12.0D, 8));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftSwingAnim, () -> rightSwingAnim, random), SWING_ATTACK_ID, 12D, 14D, 80, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 13.5D, 10));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, AnimationUtil.pickAnimation(() -> leftStompAnim, () -> rightStompAnim, random).get(), STOMP_ATTACK_ID, 10.4D, 14.7D, 8.0D, 5));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.6D, 17.5D, 12.0D, 8));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
@@ -136,7 +137,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	public void tick() {
 		super.tick();
 		
-		if (!level.isClientSide && !dead) handleTaunting();	
+		if (!level.isClientSide && !dead) handleTaunting();
 		if (!level.isClientSide && tickCount % 10 == 0 && isAlive()) {
 			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
 			ChaosAwakens.debug("Anim", "[IS PLAYING IDLE ANIM]: " + isPlayingAnimation(idleAnim));
@@ -179,7 +180,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	public void manageAttack(LivingEntity target) {
-		if (getAttackID() == PUNCH_ATTACK_ID) {
+		if (getAttackID() == PUNCH_ATTACK_ID || getAttackID() == DASH_ATTACK_ID) {
 			if (target.getOffhandItem().getItem().equals(Items.SHIELD) || target.getMainHandItem().getItem().equals(Items.SHIELD)) {
 				if (target instanceof PlayerEntity) {
 					PlayerEntity playerTarget = (PlayerEntity) target;

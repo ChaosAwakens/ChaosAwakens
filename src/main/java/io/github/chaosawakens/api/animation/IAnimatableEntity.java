@@ -149,6 +149,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default <E extends IAnimatableEntity> boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim, AnimationController<E> controllerToCheck) {
+		if (controllerToCheck.getCurrentAnimation() == null) return false;
 		return controllerToCheck.getCurrentAnimation().animationName == targetAnim.getAnimation().animationName;
 	}
 
@@ -225,8 +226,10 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default void tickAnims() {
-		for (IAnimationBuilder anim : getAnimations()) {
-			if (anim.isPlaying()) anim.tickAnim();
+		if (getAnimations() != null) {
+			for (IAnimationBuilder anim : getAnimations()) {
+				if (anim.isPlaying()) anim.tickAnim();
+			}
 		}
 	}
 

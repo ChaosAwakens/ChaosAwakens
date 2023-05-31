@@ -191,7 +191,7 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	
 	@Override
 	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficultyInstance, SpawnReason spawnReason, ILivingEntityData entityData, CompoundNBT compoundNBT) {
-		int appleCowType = DateUtil.applyHalloweenTextures(this, 0.05F) ? 1 : 0;
+		int appleCowType = DateUtil.canApplyHalloweenTextures(this, 0.05F) ? 1 : 0;
 		
 		if (entityData instanceof AppleCowData) appleCowType = ((AppleCowData) entityData).appleCowType;
 		else entityData = new AppleCowData(appleCowType);
@@ -210,7 +210,7 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 		AppleCowEntity offspring = CAEntityTypes.APPLE_COW.get().create(pServerLevel);
 		assert offspring != null;
 
-		if (DateUtil.applyHalloweenTextures(offspring, 0.05F)) offspring.setAppleCowType(1);
+		if (DateUtil.canApplyHalloweenTextures(offspring, 0.05F)) offspring.setAppleCowType(1);
 		else offspring.setAppleCowType(((AppleCowEntity) pMate).getAppleCowType());
 		return offspring;
 	}

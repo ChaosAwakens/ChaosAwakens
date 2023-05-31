@@ -122,6 +122,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		double dzSqr = dz * dz;
 		return dxSqr + dzSqr < 2.500000277905201E-7;
 	}
+	
+	public boolean shouldAllowDismount() {
+		return false;
+	}
 
 	@Override
 	protected void tickDeath() {

@@ -7,6 +7,7 @@ import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.AnimationUtil;
+import io.github.chaosawakens.common.util.EntityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -124,7 +125,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	public void manageAttack(LivingEntity target) {
 		if (getAttackID() == PUNCH_ATTACK_ID || getAttackID() == SMASH_ATTACK_ID) {
-			if (target.getOffhandItem().getItem().equals(Items.SHIELD) || target.getMainHandItem().getItem().equals(Items.SHIELD)) {
+			if (EntityUtil.isHoldingItem(target, Items.SHIELD)) {
 				if (target instanceof PlayerEntity) {
 					PlayerEntity playerTarget = (PlayerEntity) target;
 					playerTarget.disableShield(false);

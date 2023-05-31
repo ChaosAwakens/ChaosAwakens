@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -60,44 +60,44 @@ public class CAClientMiscEvents {
 	public static void onToolTipEvent(ItemTooltipEvent event) {
 		if (event.getPlayer() == null) return;
 		if (CAConfigManager.MAIN_CLIENT.enableTooltips.get()) {
-			final ItemStack stack = event.getItemStack();
-			final Item item = stack.getItem();
+			final ItemStack targetStack = event.getItemStack();
+			final Item targetEntity = targetStack.getItem();
 
 			if (CAConfigManager.MAIN_CLIENT.enableDamageTooltips.get()) {
-				if (item.getDefaultInstance().getMaxDamage() > 0) {
-					event.getToolTip().add(new StringTextComponent("Durability: ").withStyle(TextFormatting.DARK_GREEN).append(new StringTextComponent((stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage()).withStyle(TextFormatting.YELLOW)));
+				if (targetEntity.getDefaultInstance().getMaxDamage() > 0) {
+					event.getToolTip().add(new StringTextComponent("Durability: ").withStyle(TextFormatting.DARK_GREEN).append(new StringTextComponent((targetStack.getMaxDamage() - targetStack.getDamageValue()) + "/" + targetStack.getMaxDamage()).withStyle(TextFormatting.YELLOW)));
 				}
 			}
 
-			if (Objects.requireNonNull(item.getRegistryName()).getNamespace().equals(ChaosAwakens.MODID)) {
-				if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + item.getRegistryName().getPath())) {
+			if (Objects.requireNonNull(targetEntity.getRegistryName()).getNamespace().equals(ChaosAwakens.MODID)) {
+				if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + targetEntity.getRegistryName().getPath())) {
 					if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getRegistryName().getPath()).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
+						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + targetEntity.getRegistryName().getPath()).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
 					} else {
 						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens.default").withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
 					}
 				}
 
 				for (int n = 2; n <= 15; n++) {
-					if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + item.getRegistryName().getPath() + "." + n)) {
+					if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + targetEntity.getRegistryName().getPath() + "." + n)) {
 						if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-							event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getRegistryName().getPath() + "." + n).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
+							event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + targetEntity.getRegistryName().getPath() + "." + n).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
 						}
 					}
 				}
 			} else {
-				if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath())) {
+				if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + targetEntity.getRegistryName().getNamespace() + "." + targetEntity.getRegistryName().getPath())) {
 					if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath()).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
+						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + targetEntity.getRegistryName().getNamespace() + "." + targetEntity.getRegistryName().getPath()).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
 					} else {
 						event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens.default").withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
 					}
 				}
 
 				for (int n = 2; n <= 15; n++) {
-					if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath() + "." + n)) {
+					if (ClientLanguageMap.getInstance().has("tooltip." + ChaosAwakens.MODID + "." + targetEntity.getRegistryName().getNamespace() + "." + targetEntity.getRegistryName().getPath() + "." + n)) {
 						if (Screen.hasShiftDown() || Screen.hasControlDown()) {
-							event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + item.getRegistryName().getNamespace() + "." + item.getRegistryName().getPath() + "." + n).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
+							event.getToolTip().add(new TranslationTextComponent("tooltip.chaosawakens." + targetEntity.getRegistryName().getNamespace() + "." + targetEntity.getRegistryName().getPath() + "." + n).withStyle(CAConfigManager.MAIN_CLIENT.toolTipColor.get()));
 						}
 					}
 				}
@@ -107,11 +107,11 @@ public class CAClientMiscEvents {
 
 	@SubscribeEvent
 	public static void onRenderFogColorEvent(EntityViewRenderEvent.FogColors event) {
-		Entity entity = event.getRenderer().getMainCamera().getEntity();
+		Entity cameraEntity = event.getRenderer().getMainCamera().getEntity();
 
-		if (entity == null) return;
+		if (cameraEntity == null) return;
 
-		if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+		if (cameraEntity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
 			event.setRed(1);
 			event.setGreen(1);
 			event.setBlue(1);
@@ -120,22 +120,22 @@ public class CAClientMiscEvents {
 
 	@SubscribeEvent
 	public static void onRenderFogDensityEvent(EntityViewRenderEvent.FogDensity event) {
-		Entity entity = event.getRenderer().getMainCamera().getEntity();
+		Entity cameraEntity = event.getRenderer().getMainCamera().getEntity();
 
-		if (entity == null)
+		if (cameraEntity == null)
 			return;
 
 		if (CAConfigManager.MAIN_CLIENT.enableCrystalDimensionFog.get()) {
-			if (entity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
+			if (cameraEntity.level.dimension() == CADimensions.CRYSTAL_WORLD) {
 				event.setDensity(Float.valueOf(CAConfigManager.MAIN_CLIENT.crystalDimensionFogDensity.get().toString()));
 				event.setCanceled(true);
 			}
 		}
 
 		if (CAConfigManager.MAIN_COMMON.enableLavaEelArmorSetBonus.get()) {
-			if (entity instanceof PlayerEntity) {
-				if (IUtilityHelper.isFullArmorSet((PlayerEntity) entity, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
-					if (entity.isEyeInFluid(FluidTags.LAVA)) {
+			if (cameraEntity instanceof PlayerEntity) {
+				if (IUtilityHelper.isFullArmorSet((PlayerEntity) cameraEntity, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
+					if (cameraEntity.isEyeInFluid(FluidTags.LAVA)) {
 						event.setDensity(Float.valueOf(CAConfigManager.MAIN_CLIENT.lavaEelSetLavaFogDensity.get().toString()));
 						event.setCanceled(true);
 					}
@@ -173,11 +173,11 @@ public class CAClientMiscEvents {
 	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void onPreRenderHUDEvent(RenderGameOverlayEvent.Pre event) {
-		ClientPlayerEntity player = Minecraft.getInstance().player;
+		ClientPlayerEntity targetPlayer = Minecraft.getInstance().player;
 
-		if (player != null) {
-			if (player.isPassenger() && player.getVehicle() != null) {
-				if (player.getVehicle() instanceof HerculesBeetleEntity) {
+		if (targetPlayer != null) {
+			if (targetPlayer.isPassenger() && targetPlayer.getVehicle() != null) {
+				if (targetPlayer.getVehicle() instanceof AnimatableMonsterEntity && !((AnimatableMonsterEntity) targetPlayer.getVehicle()).shouldAllowDismount()) {
 					if (event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT) event.setCanceled(true);
 					if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) Minecraft.getInstance().gui.setOverlayMessage(new TranslationTextComponent(""), false);
 				}

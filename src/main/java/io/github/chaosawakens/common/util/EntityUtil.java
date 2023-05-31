@@ -232,5 +232,5 @@ public final class EntityUtil {
 	
 	public static void setEntityInFloatingMotion(Entity targetEntity, double yFloatingThreshold, float yFloatSpeed) {
 		setEntityInFloatingMotion(targetEntity, yFloatingThreshold, yFloatSpeed, false);
-	}
+	}	
 }

@@ -4,9 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.common.network.packets.c2s.AnimationDataSyncPacket;
 import io.github.chaosawakens.common.util.ObjectUtil;
-import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.entity.Entity;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.builder.Animation;
@@ -80,7 +78,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public boolean isPlaying() {
-		return ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController) && targetController.getAnimationState() == AnimationState.Running && owner.isPlayingAnimation(this, targetController);
+		return ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController) && progress < getLengthTicks() && owner.isPlayingAnimation(this, targetController);
 	}
 
 	@Override
@@ -90,7 +88,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		
 		if (isPlaying()) wasPlaying = true;
 		
-		return wasPlaying ? getProgressTicks() >= getLengthTicks() || targetController.getAnimationState() != AnimationState.Running : false;
+		return wasPlaying ? progress >= getLengthTicks() || targetController.getAnimationState() != AnimationState.Running : false;
 	}
 
 	@Override
@@ -112,11 +110,19 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public double getProgressTicks() {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return 0;
 
+		return isPlaying() ? progress : 0;
+	}
+	
+	public double getProgressTicksClient() {
+		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return 0;
+		
+		double clientProgress = 0;
+
 		for (Map.Entry<String, Variable> molangVar : GeckoLibCache.getInstance().parser.variables.entrySet()) {
-			if (molangVar.getKey().equals("query.anim_time")) progress = molangVar.getValue().get();	
+			if (molangVar.getKey().equals("query.anim_time")) clientProgress = molangVar.getValue().get();	
 		}
 
-		return isPlaying() ? Math.ceil(progress * 20) : 0;
+		return isPlaying() ? Math.ceil(clientProgress * 20) : 0;
 	}
 
 	@Override
@@ -151,18 +157,18 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public void tickAnim() {
 		//TODO Either action points (object, possibly) or manual action point stuff
+		//TODO I need to figure out what exactly I'm completely scrapping for total organization (WarHammer III)
 		
-		// C2S (Sync data to server)
 		if (((Entity) owner).level.isClientSide) {
 			if (isPlaying()) {
-				CANetworkManager.sendPacketToServer(new AnimationDataSyncPacket(((Entity) owner).getId(), targetController.getName(), animName, getLoopType(), getProgressTicks(), targetController.getAnimationState()));
+				
 			}
 		}
 
-		// S2C (Impose data on client, accounting for some edge cases such as server lag)
 		if (!((Entity) owner).level.isClientSide) {
 			if (isPlaying()) {
-
+				progress++;
+				if (hasAnimationFinished()) progress = 0;
 			}
 		}
 	}
