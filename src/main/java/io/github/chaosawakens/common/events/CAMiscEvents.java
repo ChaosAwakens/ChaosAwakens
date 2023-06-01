@@ -7,9 +7,11 @@ import java.util.UUID;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -45,6 +47,7 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.DerivedWorldInfo;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -62,6 +65,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickEmpty;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.BlockToolInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
 import net.minecraftforge.event.world.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -274,6 +278,15 @@ public class CAMiscEvents {
 		if (player instanceof LivingEntity) {
 			if (event.isCancelable() && ((LivingEntity) player).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 		}
+	}
+	
+	@SubscribeEvent
+	public static void onUseHoeOnDense(BlockToolInteractEvent event) {
+		if(event.getToolType() == ToolType.HOE)
+			if(event.getState().is(CATags.Blocks.DENSE_DIRT))
+				event.setFinalState(CABlocks.DENSE_FARMLAND.get().defaultBlockState());
+			else if(event.getState().is(CATags.Blocks.TERRA_PRETA))
+				event.setFinalState(CABlocks.TERRA_PRETA_FARMLAND.get().defaultBlockState());
 	}
 	
 	// Account for paralysis actually taking full effect
