@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.network.packets.s2c;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import io.github.chaosawakens.ChaosAwakens;
@@ -7,10 +8,11 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.network.ICAPacket;
 import io.github.chaosawakens.common.util.ObjectUtil;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 
@@ -48,22 +50,22 @@ public class AnimationTriggerPacket implements ICAPacket {
 			return EDefaultLoopTypes.PLAY_ONCE;
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public void onRecieve(Supplier<Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			World curWorld = Minecraft.getInstance().level;
-			Entity target = curWorld.getEntity(animatableOwnerID);
-			
-			if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity) {
-				IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
-				final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
+			Optional<World> clientWorldHolder = LogicalSidedProvider.CLIENTWORLD.get(ctx.get().getDirection().getReceptionSide());
+			clientWorldHolder.filter(ClientWorld.class::isInstance).ifPresent(curWorld -> {
+				Entity target = curWorld.getEntity(animatableOwnerID);
 				
-				targetAnimatable.playAnimation(targetAnim);
-			} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
+				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity) {
+					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
+					final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
+					
+					targetAnimatable.playAnimation(targetAnim);
+				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
+			});
 		});
 		
 		ctx.get().setPacketHandled(true);
 	}
-
 }

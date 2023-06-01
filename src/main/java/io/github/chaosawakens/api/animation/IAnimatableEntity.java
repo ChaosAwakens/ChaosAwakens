@@ -207,7 +207,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (((Entity) this).level.isClientSide) {
 			animation.stopAnimation();
 		} else {
-			CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getAnimation().animationName), (Entity) this);
+			CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getController().getName(), animation.getAnimation().animationName), (Entity) this);
 		}
 	}
 

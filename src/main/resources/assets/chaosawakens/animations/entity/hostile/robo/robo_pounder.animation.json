@@ -219,7 +219,7 @@
 				}
 			}
 		},
-		"Dash": {
+		"Dash Attack": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 3,
 			"bones": {
@@ -875,8 +875,7 @@
 				}
 			}
 		},
-		"RPunch": {
-			"loop": false,
+		"Right Heavy Attack": {
 			"animation_length": 1.75,
 			"bones": {
 				"Head": {
@@ -1339,8 +1338,7 @@
 				}
 			}
 		},
-		"LPunch": {
-			"loop": false,
+		"Left Heavy Attack": {
 			"animation_length": 1.75,
 			"bones": {
 				"Head": {
@@ -1803,8 +1801,7 @@
 				}
 			}
 		},
-		"RStomp": {
-			"loop": false,
+		"Right Leg Attack": {
 			"animation_length": 1.75,
 			"bones": {
 				"Head": {
@@ -2230,8 +2227,7 @@
 				}
 			}
 		},
-		"LStomp": {
-			"loop": false,
+		"Left Leg Attack": {
 			"animation_length": 1.75,
 			"bones": {
 				"Head": {
@@ -2660,8 +2656,7 @@
 				}
 			}
 		},
-		"RSweep": {
-			"loop": false,
+		"Right Swing Attack": {
 			"animation_length": 2,
 			"bones": {
 				"Head": {
@@ -3018,8 +3013,7 @@
 				}
 			}
 		},
-		"LSweep": {
-			"loop": false,
+		"Left Swing Attack": {
 			"animation_length": 2,
 			"bones": {
 				"Head": {
@@ -3376,8 +3370,7 @@
 				}
 			}
 		},
-		"HStomp": {
-			"loop": false,
+		"Heavy AoE Attack": {
 			"animation_length": 2,
 			"bones": {
 				"Head": {
@@ -3827,8 +3820,8 @@
 				}
 			}
 		},
-		"RageRunWindUp": {
-			"animation_length": 1.5,
+		"Rage Run 1": {
+			"animation_length": 3.5,
 			"bones": {
 				"Head": {
 					"rotation": {
@@ -4030,9 +4023,13 @@
 						"0.75": {
 							"vector": [0, 0, 0]
 						},
-						"1.5": {
-							"vector": [720, 0, 0],
-							"easing": "easeInQuart"
+						"1.9167": {
+							"vector": [1080, 0, 0],
+							"easing": "easeInQuad"
+						},
+						"3.5": {
+							"vector": [3240, 0, 0],
+							"easing": "linear"
 						}
 					}
 				},
@@ -4044,15 +4041,19 @@
 						"0.75": {
 							"vector": [0, 0, 0]
 						},
-						"1.5": {
-							"vector": [720, 0, 0],
-							"easing": "easeInQuart"
+						"1.9167": {
+							"vector": [1080, 0, 0],
+							"easing": "easeInQuad"
+						},
+						"3.5": {
+							"vector": [3240, 0, 0],
+							"easing": "linear"
 						}
 					}
 				}
 			}
 		},
-		"RageRun": {
+		"Rage Run 2": {
 			"loop": true,
 			"bones": {
 				"Head": {
@@ -4161,7 +4162,7 @@
 				}
 			}
 		},
-		"RageRunCooldown": {
+		"Cool Down 1": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 1.25,
 			"bones": {
@@ -4505,7 +4506,7 @@
 				}
 			}
 		},
-		"RageRunReboot": {
+		"Cool Down 2": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 1.16667,
 			"bones": {
@@ -4946,7 +4947,6 @@
 			}
 		},
 		"Death": {
-			"loop": false,
 			"animation_length": 3.5,
 			"bones": {
 				"Head": {
@@ -5033,21 +5033,15 @@
 				"UpperBody": {
 					"rotation": {
 						"0.0": {
-							"vector": [
-								"math.cos(query.life_time * 2000) * q.life_time * -4",
-								"math.sin(query.life_time * 2000) * q.life_time * -4",
-								"math.cos(query.life_time * 2000) * q.life_time * -4"
-							]
+							"vector": ["math.cos(query.anim_time * 2000) * -4", "math.sin(query.anim_time * 2000) * -4", "math.cos(query.anim_time * 2000) * -4"]
 						},
 						"1.4167": {
-							"vector": [
-								"math.cos(query.life_time * 3000) * q.life_time * -4",
-								"math.sin(query.life_time * 2000) * q.life_time * -4",
-								"math.cos(query.life_time * 1000) * q.life_time * -4"
-							]
+							"vector": ["math.cos(query.anim_time * 4000) * -4", "math.sin(query.anim_time * 2000) * -4", "math.cos(query.anim_time * 4000) * -4"]
 						},
 						"1.5": {
-							"vector": [0, 0, 0]
+							"vector": [0, 0, 0],
+							"easing": "easeInOutBack",
+							"easingArgs": [2]
 						},
 						"1.75": {
 							"vector": [10, 0, 0],
@@ -5314,8 +5308,7 @@
 				}
 			}
 		},
-		"Taunt": {
-			"loop": false,
+		"Taunt ": {
 			"animation_length": 2.25,
 			"bones": {
 				"Head": {

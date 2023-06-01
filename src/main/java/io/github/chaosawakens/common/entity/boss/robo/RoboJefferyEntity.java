@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.boss.robo;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
@@ -37,6 +38,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<AnimationController<RoboJefferyEntity>> roboJefferyControllers = new ObjectArrayList<AnimationController<RoboJefferyEntity>>(1);
 	private final ServerBossInfo info = (ServerBossInfo) new ServerBossInfo(getType().getDescription().copy().append(getDisplayName().copy().withStyle(TextFormatting.DARK_PURPLE).withStyle(TextFormatting.BOLD)), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS).setDarkenScreen(true).setCreateWorldFog(true);
 	private static final DataParameter<Boolean> HAS_CORE = EntityDataManager.defineId(RoboJefferyEntity.class, DataSerializers.BOOLEAN);
 	private final AnimationController<RoboJefferyEntity> mainController = createMainMappedController("robojefferymaincontroller");
@@ -63,7 +65,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				.add(Attributes.MAX_HEALTH, 600)
 				.add(Attributes.ARMOR, 80)
 				.add(Attributes.ARMOR_TOUGHNESS, 50)
-				.add(Attributes.MOVEMENT_SPEED, 0.28D)
+				.add(Attributes.MOVEMENT_SPEED, 0.23D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 720.0D)
 				.add(Attributes.ATTACK_DAMAGE, 45)
 				.add(Attributes.ATTACK_KNOCKBACK, 50)
@@ -91,8 +93,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
-		if (!isAttacking() && getHealth() > getMaxHealth() / 8) playAnimation(idleExtrasAnim);
-		if (getHealth() <= getMaxHealth() / 8) playAnimation(lowHealthAnim);
+		if (!isAttacking() && getHealth() > getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(idleExtrasAnim);
+		if (getHealth() <= getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(lowHealthAnim);
 		return PlayState.CONTINUE;
 	}
 	
@@ -102,6 +104,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	
 	@Override
 	protected void registerGoals() {
+		this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 16.6D, 20.1D, 55));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
@@ -152,6 +155,6 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	public ObjectArrayList<AnimationController<RoboJefferyEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<RoboJefferyEntity>>(1);
+		return roboJefferyControllers;
 	}
 }

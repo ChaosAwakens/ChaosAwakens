@@ -1,5 +1,7 @@
 package io.github.chaosawakens.manager;
 
+import java.util.Optional;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.network.ICAPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
@@ -20,26 +22,16 @@ public class CANetworkManager {
 
 	public static void registerPackets() {
 		int networkId = 0;
-		networkId = registerCTSPackets(networkId);
-		networkId = registerSTCPackets(networkId);
+		registerCTSPackets(networkId);
+		registerSTCPackets(networkId);
 	}
 	
-	private static int registerCTSPackets(int id) {
-		return id;
+	private static void registerCTSPackets(int id) {
 	}
 	
-	private static int registerSTCPackets(int id) {
-		CHANNEL.messageBuilder(AnimationTriggerPacket.class, id++)
-			.encoder(AnimationTriggerPacket::encode)
-			.decoder(AnimationTriggerPacket::decode)
-			.consumer(AnimationTriggerPacket::onRecieve)
-			.add();
-		CHANNEL.messageBuilder(AnimationStopPacket.class, id++)
-			.encoder(AnimationStopPacket::encode)
-			.decoder(AnimationStopPacket::decode)
-			.consumer(AnimationStopPacket::onRecieve)
-			.add();
-		return id;
+	private static void registerSTCPackets(int id) {
+		CHANNEL.registerMessage(id++, AnimationTriggerPacket.class, AnimationTriggerPacket::encode, AnimationTriggerPacket::decode, AnimationTriggerPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		CHANNEL.registerMessage(id++, AnimationStopPacket.class, AnimationStopPacket::encode, AnimationStopPacket::decode, AnimationStopPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 	}
 
 	/**

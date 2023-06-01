@@ -81,7 +81,7 @@ public class AnimatableMeleeGoal extends Goal {
 	public void tick() {
 		owner.getNavigation().stop();
 		LivingEntity target = owner.getTarget();
-	//	if (!ObjectUtil.performNullityChecks(false, target)) return;
+		if (!ObjectUtil.performNullityChecks(false, target)) return;
 		double reach = owner.getMeleeAttackReachSqr(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 

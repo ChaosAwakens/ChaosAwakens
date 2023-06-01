@@ -14,9 +14,11 @@ import io.github.chaosawakens.common.util.AnimationUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -38,7 +40,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboPounderEntity extends AnimatableMonsterEntity {
-	private final AnimationFactory factory = new AnimationFactory(this); //TODO Diff method of controller reg. + sync
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<AnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<AnimationController<RoboPounderEntity>>(1);
 	private final ObjectArrayList<? extends IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>();
 	private static final DataParameter<Boolean> SHOULD_TAUNT = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BOOLEAN);
@@ -48,14 +50,14 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder tauntAnim = new SingletonAnimationBuilder(this, "Taunt", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "RPunch", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "LPunch", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "RSweep", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "LSweep", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "RStomp", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "LStomp", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "HStomp", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "Right Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "Left Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SWING_ATTACK_ID = 2;
 	private static final byte DASH_ATTACK_ID = 3;
@@ -188,6 +190,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 				}
 			}
 		}
+	}
+	
+	@Override
+	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
+		return super.getStandingEyeHeight(pPose, pSize) + 0.58F;
 	}
 	
 	@Override

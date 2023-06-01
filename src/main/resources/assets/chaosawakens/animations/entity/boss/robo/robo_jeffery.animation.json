@@ -1185,7 +1185,7 @@
 				}
 			}
 		},
-		"Smash Attack": {
+		"Normal AOE Attack": {
 			"animation_length": 3,
 			"bones": {
 				"LowerBody": {
@@ -2542,7 +2542,7 @@
 		},
 		"Death": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 7,
+			"animation_length": 7.5,
 			"bones": {
 				"LowerBody": {
 					"position": {

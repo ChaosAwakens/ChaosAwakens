@@ -15,6 +15,24 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.resource.GeckoLibCache;
 import software.bernie.shadowed.eliotlash.mclib.math.Variable;
 
+/**
+ * {@code IAnimationBuilder} instance class. Allows for the instantiation of only 1 (immutable) animation by wrapping around an {@link AnimationBuilder} 
+ * instance and pruning its list down to the first animation (the one passed in here).
+ * <br> </br>
+ * This class holds both client and server side data for its animation. Standard things such as Geckolib's animation tick, the animation state, and 
+ * animation loop type are present <b>ONLY</b> present on the client. Other metadata unique to CA such as a server-side animation progress (tick) field, 
+ * animation length (Geckolib), and animation name are present on the server.
+ * <br> </br>
+ * It's advised that animation handling is done solely through {@link IAnimatableEntity} methods, as they handle any necessary siding (note that 
+ * this does not mean client data will be present on the server and vice versa). The server progress is effectively "detached" from the client tick 
+ * progress due to variation in client animation progress between clients and other factors. The server side progress should still pretty much 
+ * sync to the client progress, but there's no guarantee that both will communicate with each other as that in itself can and will cause 
+ * hard to debug logical errors. Can still be attributed to MC's goofiness, though :p
+ * <br> </br>
+ * Another thing to note is that this object <b>CANNOT</b> be statically instantiated, due to the fact that you need to pass an {@link IAnimatableEntity} instance in. 
+ * This means that it'll be instantiated every time an animation controller needs to play it, but not every <i>frame</i>. Still much better than handling 
+ * metadata and such per frame (potentially multiple times per-frame), though.
+ */
 public class SingletonAnimationBuilder implements IAnimationBuilder {
 	private final IAnimatableEntity owner;
 	@Nullable
@@ -88,7 +106,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		
 		if (isPlaying()) wasPlaying = true;
 		
-		return wasPlaying ? progress >= getLengthTicks() || targetController.getAnimationState() != AnimationState.Running : false;
+		return wasPlaying ? progress >= getLengthTicks() || targetController.getAnimationState() == AnimationState.Stopped || (progress >= getLengthTicks() && targetController.getAnimationState() == AnimationState.Running)  : false;
 	}
 
 	@Override
@@ -167,7 +185,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 		if (!((Entity) owner).level.isClientSide) {
 			if (isPlaying()) {
-				progress++;
+				progress++; // Value only handled during running animation, does not affect/get affected by transitioning
 				if (hasAnimationFinished()) progress = 0;
 			}
 		}

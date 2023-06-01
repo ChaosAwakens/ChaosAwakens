@@ -31,6 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<AnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<AnimationController<HerculesBeetleEntity>>(1);
 	private static final DataParameter<Boolean> IS_DOCILE = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> DOCILITY_DURATION = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	private static final DataParameter<Boolean> IS_AWAKENING = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
@@ -81,7 +82,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isDocile() && !isAttacking()) playAnimation(docileAnim);;
+		if (isDocile() && !isAttacking()) playAnimation(docileAnim);
 		if (isAwakening()) playAnimation(awakeningAnim);
 		return PlayState.CONTINUE;
 	}
@@ -303,7 +304,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	public ObjectArrayList<AnimationController<HerculesBeetleEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<HerculesBeetleEntity>>(1);
+		return herculesBeetleControllers;
 	}
 	
 	public enum HerculesBeetleType {
