@@ -29,7 +29,6 @@ public class ServerSetupEvent {
 			ChaosAwakens.LOGGER.fatal("There was an error loading Chaos Awakens, this may be due to file corruption or some other error. Please try restarting the server or reinstalling the mod.");
 			server.close();
 		}
-		
 	}
 	
 	public static void onFMLServerStartingEvent(FMLServerStartingEvent event) {

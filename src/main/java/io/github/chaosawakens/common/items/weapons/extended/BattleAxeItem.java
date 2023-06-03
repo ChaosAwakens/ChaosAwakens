@@ -104,7 +104,6 @@ public class BattleAxeItem extends EnchantedAxeItem implements IVanishable, IAni
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		// insert controllers here
 	}
 
 	@Override

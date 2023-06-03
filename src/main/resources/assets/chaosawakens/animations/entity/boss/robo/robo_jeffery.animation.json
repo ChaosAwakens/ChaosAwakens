@@ -2669,8 +2669,11 @@
 						"2.3333": {
 							"vector": [25, 0, 0]
 						},
-						"3.7083": {
-							"vector": [-15, "math.sin(query.life_time * 4000) * q.life_time * -4", 0]
+						"2.7917": {
+							"vector": [-15, "math.sin(query.anim_time * 1000) * -4", 0]
+						},
+						"3.625": {
+							"vector": [-15, "math.sin(query.anim_time * 4000) * -30", 0]
 						},
 						"3.75": {
 							"vector": [-15, 0, 0]

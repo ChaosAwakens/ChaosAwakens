@@ -33,8 +33,9 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	AnimationController<? extends IAnimatableEntity> getMainController();
 
 	/**
-	 * A forced (tick) interval between each animation.
-	 * @return The delay between animations.
+	 * A forced (tick) interval between each animation. Is used by default in controller creation methods in this interface, though there are overloaded methods 
+	 * that allow you to specify different animation intervals per-controller if needed.
+	 * @return The transitioning delay (in ticks) between animations.
 	 */
 	int animationInterval();
 
@@ -47,8 +48,22 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	<E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
 
+	/**
+	 * A list of controllers an {@link IAnimatableEntity} has. When creating a controller, you must use {@link IAnimatableEntity#createMainMappedController(String)} 
+	 * or {@link IAnimatableEntity#createMappedController(String, IAnimationPredicate)} <- if the controller you're creating isn't the main one. This list has 
+	 * a variety of use cases, such as automatic controller registration or handling controller-specific operations.
+	 * @param <E> An instance of {@link IAnimatableEntity}.
+	 * @return A list that an {@link IAnimatableEntity} stores {@link AnimationController}s in.
+	 */
 	<E extends IAnimatableEntity> ObjectArrayList<AnimationController<? extends E>> getControllers();
 
+	/**
+	 * A list of animations that an {@link IAnimatableEntity} caches for future use. This helps mitigate some optimization issues. Do keep in mind that 
+	 * any instance of {@code IAnimationBuilder} instantiated handles storing and removing itself from this list. Just have this return a final {@link ObjectArrayList} 
+	 * field of the correct type and the rest is automatically handled.
+	 * @param <E> An instance of {@link IAnimationBuilder}.
+	 * @return A list that an {@link IAnimatableEntity} stores animations in.
+	 */
 	default <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() { return null; }
 
 	@Override
@@ -58,6 +73,12 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		}
 	}
 
+	/**
+	 * Iterates through {@link IAnimatableEntity#getControllers()} in order to return a controller matching the {@code name} string passed in. If no such 
+	 * controller with the specified name exists, this returns null.
+	 * @param name The name of the controller to find/get.
+	 * @return An {@link AnimationController} with the specified name if it exists, else returns null.
+	 */
 	@Nullable
 	default AnimationController<? extends IAnimatableEntity> getControllerByName(String name) {
 		if (getControllers().isEmpty()) return null;
@@ -77,6 +98,13 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		getControllers().add(resultController);
 		return resultController;
 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	default <E extends IAnimatableEntity> AnimationController<E> createMainMappedController(String name, int animInterval) {
+		final AnimationController<E> resultController = new AnimationController(this, name, animInterval, this::mainPredicate);
+		getControllers().add(resultController);
+		return resultController;
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	default <E extends IAnimatableEntity> AnimationController<E> createMappedController(String name, IAnimationPredicate<? extends IAnimatableEntity> animationPredicate) {
@@ -84,15 +112,28 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		getControllers().add(resultController);
 		return resultController;
 	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	default <E extends IAnimatableEntity> AnimationController<E> createMappedController(String name, int animInterval, IAnimationPredicate<? extends IAnimatableEntity> animationPredicate) {
+		final AnimationController<E> resultController = new AnimationController(this, name, animInterval, animationPredicate);
+		getControllers().add(resultController);
+		return resultController;
+	}
 
 	/**
 	 * Gets the current animation that the entity is playing in its main controller. Can be null.
+	 * @return The main controller's currently playing animation if present, else returns null.
 	 */
 	@Nullable
 	default Animation getCurrentAnimation() {
 		return getMainController().getCurrentAnimation();
 	}
 
+	/**
+	 * Gets the current animation in a specified {@link AnimationController}. Can be null.
+	 * @param targetController Controller to check current animation from.
+	 * @return The specified controller's currently playing animation if present, else returns null.
+	 */
 	@Nullable
 	default Animation getCurrentAnimation(AnimationController<? extends IAnimatableEntity> targetController) {
 		return targetController.getCurrentAnimation();
@@ -234,7 +275,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	@SuppressWarnings("unchecked")
-	default <E extends Entity> IAnimatableModel<E> getModel() {
+	default <E extends Entity> IAnimatableModel<E> getModel() { //TODO Dedicated server crash fix
 		return (IAnimatableModel<E>) AnimationUtils.getGeoModelForEntity((E) this);
 	}
 }

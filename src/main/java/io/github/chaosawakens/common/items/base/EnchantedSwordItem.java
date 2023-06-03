@@ -3,24 +3,44 @@ package io.github.chaosawakens.common.items.base;
 import java.util.function.Supplier;
 
 import io.github.chaosawakens.api.item.IAutoEnchantable;
+import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
-public class EnchantedSwordItem extends SwordItem implements IAutoEnchantable {
+public class EnchantedSwordItem extends CASwordItem implements IAutoEnchantable {
 	private final Supplier<EnchantmentData[]> enchantments;
-
-	public EnchantedSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Supplier<EnchantmentData[]> enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn);
+	
+	public EnchantedSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, float pAttackSpeedModifier, double reach, double attackKnockback, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pAttackSpeedModifier, reach, attackKnockback, pProperties);
 		this.enchantments = enchantments;
 	}
-
+	
+	public EnchantedSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, float pAttackSpeedModifier, double reach, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pAttackSpeedModifier, reach, pProperties);
+		this.enchantments = enchantments;
+	}
+	
+	public EnchantedSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, float pAttackSpeedModifier, Double attackKnockback, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pAttackSpeedModifier, attackKnockback, pProperties);
+		this.enchantments = enchantments;
+	}
+	
+	public EnchantedSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, double reach, double attackKnockback, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, reach, attackKnockback, pProperties);
+		this.enchantments = enchantments;
+	}
+	
+	public EnchantedSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pProperties);
+		this.enchantments = enchantments;
+	}
+	
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (allowdedIn(group)) {

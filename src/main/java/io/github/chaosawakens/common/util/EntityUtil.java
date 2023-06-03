@@ -13,11 +13,20 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.ModList;
@@ -201,7 +210,7 @@ public final class EntityUtil {
 	}
 
 	/**
-	 * Checks if the players Curios slots are empty
+	 * Checks if the player's Curios slots are empty
 	 *
 	 * @param targetPlayer Player to check the Curios slots of
 	 * @return True if Curios slots are empty or Curios is not installed, else returns False
@@ -232,5 +241,55 @@ public final class EntityUtil {
 	
 	public static void setEntityInFloatingMotion(Entity targetEntity, double yFloatingThreshold, float yFloatSpeed) {
 		setEntityInFloatingMotion(targetEntity, yFloatingThreshold, yFloatSpeed, false);
-	}	
+	}
+	
+	/**
+	 * Applies modification an entity's reach attribute if the reach attribute's value isn't default. This should usually be called in an item's 
+	 * {@link Item#onEntitySwing(ItemStack, LivingEntity)} method.
+	 * @param owner Owner entity
+	 * @param heldStack The stack to apply the attribute mod to
+	 * @param attackDamage The held item's damage
+	 * @return True if the reach modifier can be applied and the target entity (or entities) can be hit, else returns False
+	 */
+	public static boolean applyReachModifierToEntity(LivingEntity owner, ItemStack heldStack, float attackDamage) {
+		if (owner.getAttribute(ForgeMod.REACH_DISTANCE.get()) != null) {
+			double reach = owner.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
+			double reachSqr = reach * reach;
+			World curWorld = owner.level;
+
+			Vector3d viewVec = owner.getViewVector(1.0F);
+			Vector3d eyeVec = owner.getEyePosition(1.0F);
+			Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
+
+			AxisAlignedBB bb = owner.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
+			EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(curWorld, owner, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
+
+			if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
+
+			LivingEntity target = (LivingEntity) result.getEntity();
+			double distanceToTargetSqr = owner.distanceToSqr(target);
+			boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
+
+			if (resultBool) {
+				if (reachSqr >= distanceToTargetSqr) {
+					target.hurt(DamageSource.mobAttack(owner), attackDamage);
+					heldStack.getItem().hurtEnemy(heldStack, target, owner);
+				}
+			}		
+		}
+		return true;
+	}
+	
+	/**
+	 * Disables a player's shields if the player is holding one.
+	 * @param shieldHolder Target player holding/using the shield
+	 * @param cooldown The cooldown (in ticks) before the shield becomes usable again
+	 */
+	public static void disableShield(PlayerEntity shieldHolder, int cooldown) {
+		if (shieldHolder != null && isHoldingItem(shieldHolder, Items.SHIELD)) {
+			shieldHolder.getCooldowns().addCooldown(shieldHolder.getUseItem().getItem(), cooldown);
+	        shieldHolder.stopUsingItem();
+	        shieldHolder.level.broadcastEntityEvent(shieldHolder, (byte) 30);
+		}
+	}
 }

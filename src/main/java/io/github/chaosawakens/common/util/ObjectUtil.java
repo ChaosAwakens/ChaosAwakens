@@ -16,7 +16,7 @@ public final class ObjectUtil {
 	 */
 	public static boolean performNullityChecks(boolean throwsException, Object... objects) {
 		for (Object obj : objects) {
-			if (throwsException) Objects.requireNonNull(obj, "An object parameter passed in is null.");
+			if (throwsException) Objects.requireNonNull(obj, "An object parameter passed in was null. Check stacktrace for more info.");
 			else {
 				if (obj == null) return false;
 			}

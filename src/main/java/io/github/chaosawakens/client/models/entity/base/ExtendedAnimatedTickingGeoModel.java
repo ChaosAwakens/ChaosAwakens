@@ -6,7 +6,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 
 public abstract class ExtendedAnimatedTickingGeoModel<E extends IAnimatableEntity> extends AnimatedTickingGeoModel<E> implements ICAGeoModel {
-	
 	protected abstract boolean shouldApplyHeadRot();
 	protected abstract boolean shouldApplyChildScaling();
 	

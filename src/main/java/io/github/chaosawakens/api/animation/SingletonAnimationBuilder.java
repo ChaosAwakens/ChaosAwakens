@@ -19,9 +19,9 @@ import software.bernie.shadowed.eliotlash.mclib.math.Variable;
  * {@code IAnimationBuilder} instance class. Allows for the instantiation of only 1 (immutable) animation by wrapping around an {@link AnimationBuilder} 
  * instance and pruning its list down to the first animation (the one passed in here).
  * <br> </br>
- * This class holds both client and server side data for its animation. Standard things such as Geckolib's animation tick, the animation state, and 
- * animation loop type are present <b>ONLY</b> present on the client. Other metadata unique to CA such as a server-side animation progress (tick) field, 
- * animation length (Geckolib), and animation name are present on the server.
+ * This class holds both client and server side data for its animation. Standard metadata such as Geckolib's animation tick, the animation state, and 
+ * animation loop type are <b>ONLY</b> present on the client. Other metadata unique to CA such as a server-side animation progress (tick) field, 
+ * animation length (Geckolib), and animation name are present on the server (sometimes on the client, depends on the data).
  * <br> </br>
  * It's advised that animation handling is done solely through {@link IAnimatableEntity} methods, as they handle any necessary siding (note that 
  * this does not mean client data will be present on the server and vice versa). The server progress is effectively "detached" from the client tick 
@@ -175,7 +175,9 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public void tickAnim() {
 		//TODO Either action points (object, possibly) or manual action point stuff
-		//TODO I need to figure out what exactly I'm completely scrapping for total organization (WarHammer III)
+		//TODO Server side progress
+		//TODO Override animations where necessary (e.g. death, etc.)
+		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		
 		if (((Entity) owner).level.isClientSide) {
 			if (isPlaying()) {
@@ -186,7 +188,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		if (!((Entity) owner).level.isClientSide) {
 			if (isPlaying()) {
 				progress++; // Value only handled during running animation, does not affect/get affected by transitioning
-				if (hasAnimationFinished()) progress = 0;
+				if (hasAnimationFinished() || !isPlaying()) progress = 0;
 			}
 		}
 	}

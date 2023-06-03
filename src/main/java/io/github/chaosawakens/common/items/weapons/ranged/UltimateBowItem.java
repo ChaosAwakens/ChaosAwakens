@@ -41,8 +41,8 @@ public class UltimateBowItem extends EnchantedBowItem implements IVanishable {
 				ultArrow.setSecondsOnFire(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0 ? 250 : 75);
 
 				int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
-				if (!CAConfigManager.MAIN_COMMON.enableAutoEnchanting.get()) ultArrow.setBaseDamage(CAConfigManager.MAIN_COMMON.ultimateBowArrowBaseDamage.get() + (double) powerLevel * CAConfigManager.MAIN_COMMON.ultimateBowArrowDamageMultiplier.get() + 2D);
-				else ultArrow.setBaseDamage(CAConfigManager.MAIN_COMMON.ultimateBowArrowBaseDamage.get() + 3D);
+				if (!CAConfigManager.MAIN_COMMON.enableAutoEnchanting.get()) ultArrow.setBaseDamage(CAConfigManager.MAIN_SERVER.ultimateBowArrowBaseDamage.get() + (double) powerLevel * CAConfigManager.MAIN_SERVER.ultimateBowArrowDamageMultiplier.get() + 2D);
+				else ultArrow.setBaseDamage(CAConfigManager.MAIN_SERVER.ultimateBowArrowBaseDamage.get() + 3D);
 
 				int punchLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
 				ultArrow.setKnockback(!CAConfigManager.MAIN_COMMON.enableAutoEnchanting.get() ? punchLevel + 1 : 1);

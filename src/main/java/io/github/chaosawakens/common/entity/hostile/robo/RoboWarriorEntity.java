@@ -29,13 +29,14 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 180)
+				.add(Attributes.MAX_HEALTH, 180) // 45 shield health, 10 shield armor, 3 shield armor toughness
 				.add(Attributes.ARMOR, 10)
+				.add(Attributes.ARMOR_TOUGHNESS, 3)
 				.add(Attributes.MOVEMENT_SPEED, 0.24D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 1.4D)
 				.add(Attributes.ATTACK_DAMAGE, 10)
-				.add(Attributes.ATTACK_KNOCKBACK, 4.5D)
-				.add(Attributes.FOLLOW_RANGE, 70);
+				.add(Attributes.ATTACK_KNOCKBACK, 2.5D)
+				.add(Attributes.FOLLOW_RANGE, 60);
 	}
 
 	@Override

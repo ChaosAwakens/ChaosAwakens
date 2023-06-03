@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.boss.robo;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
@@ -10,9 +11,11 @@ import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.AnimationUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -39,7 +42,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<AnimationController<RoboJefferyEntity>> roboJefferyControllers = new ObjectArrayList<AnimationController<RoboJefferyEntity>>(1);
-	private final ServerBossInfo info = (ServerBossInfo) new ServerBossInfo(getType().getDescription().copy().append(getDisplayName().copy().withStyle(TextFormatting.DARK_PURPLE).withStyle(TextFormatting.BOLD)), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS).setDarkenScreen(true).setCreateWorldFog(true);
+	private final ServerBossInfo bossInfo = (ServerBossInfo) new ServerBossInfo(getType().getDescription().copy().append(getDisplayName().copy().withStyle(TextFormatting.DARK_PURPLE).withStyle(TextFormatting.BOLD)), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS).setDarkenScreen(true).setCreateWorldFog(true);
 	private static final DataParameter<Boolean> HAS_CORE = EntityDataManager.defineId(RoboJefferyEntity.class, DataSerializers.BOOLEAN);
 	private final AnimationController<RoboJefferyEntity> mainController = createMainMappedController("robojefferymaincontroller");
 	private final AnimationController<RoboJefferyEntity> ambienceController = createMappedController("robojefferyambiencecontroller", this::ambiencePredicate);
@@ -74,7 +77,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	public ServerBossInfo getBossInfo() {
-		return info;
+		return bossInfo;
 	}
 
 	@Override
@@ -127,14 +130,19 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	public void manageAttack(LivingEntity target) {
-		if (getAttackID() == PUNCH_ATTACK_ID || getAttackID() == SMASH_ATTACK_ID) {
+		if (getAttackID() == SMASH_ATTACK_ID) {
 			if (EntityUtil.isHoldingItem(target, Items.SHIELD)) {
 				if (target instanceof PlayerEntity) {
 					PlayerEntity playerTarget = (PlayerEntity) target;
-					playerTarget.disableShield(false);
+					EntityUtil.disableShield(playerTarget, 200);
 				}
 			}
 		}
+	}
+	
+	@Override
+	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
+		return super.getStandingEyeHeight(pPose, pSize) + 0.34F;
 	}
 
 	@Override
@@ -156,5 +164,10 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	public ObjectArrayList<AnimationController<RoboJefferyEntity>> getControllers() {
 		return roboJefferyControllers;
+	}
+	
+	@Override
+	public <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() {
+		return super.getAnimations();
 	}
 }

@@ -4,16 +4,17 @@ import java.util.function.Supplier;
 
 import io.github.chaosawakens.common.items.base.EnchantedSwordItem;
 import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
 public class BasiliskSwordItem extends EnchantedSwordItem {
-	
-	public BasiliskSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Supplier<EnchantmentData[]> enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn, enchantments);
+
+	public BasiliskSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pProperties, enchantments);
 	}
 
 	@Override

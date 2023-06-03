@@ -13,8 +13,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public final class EnumUtil {
 	
@@ -67,22 +65,27 @@ public final class EnumUtil {
 			this.repairMaterial = repairMaterial;
 		}
 
+		@Override
 		public float getAttackDamageBonus() {
 			return this.attackDamage;
 		}
 
+		@Override
 		public float getSpeed() {
 			return this.efficiency;
 		}
 
+		@Override
 		public int getEnchantmentValue() {
 			return this.enchantability;
 		}
 
+		@Override
 		public int getLevel() {
 			return this.harvestLevel;
 		}
 
+		@Override
 		public int getUses() {
 			return this.maxUses;
 		}
@@ -90,6 +93,10 @@ public final class EnumUtil {
 		@Override
 		public Ingredient getRepairIngredient() {
 			return this.repairMaterial.get();
+		}
+		
+		public int getAttackDamageMod() {
+			return (int) (getAttackDamageBonus() - (getAttackDamageBonus() + 1)) - 2;
 		}
 	}
 
@@ -139,7 +146,7 @@ public final class EnumUtil {
 			this.repairMaterial = repairMaterialIn;
 		}
 
-		@OnlyIn(Dist.CLIENT)
+		@Override
 		public String getName() {
 			return this.name;
 		}

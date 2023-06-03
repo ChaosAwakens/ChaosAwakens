@@ -77,7 +77,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 				.add(Attributes.KNOCKBACK_RESISTANCE, 360.0D)
 				.add(Attributes.ATTACK_DAMAGE, 20)
 				.add(Attributes.ATTACK_KNOCKBACK, 20)
-				.add(Attributes.FOLLOW_RANGE, 69);
+				.add(Attributes.FOLLOW_RANGE, 60);
 	}
 
 	@Override
@@ -105,7 +105,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		return 2;
 	}
 	
-	//TODO Info packets for c2s comms
 	@Override
 	protected void registerGoals() {
 		this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
@@ -194,12 +193,22 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
-		return super.getStandingEyeHeight(pPose, pSize) + 0.58F;
+		return super.getStandingEyeHeight(pPose, pSize) + 0.6F;
+	}
+	
+	@Override
+	public boolean displayFireAnimation() {
+		return false;
 	}
 	
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
+	}
+	
+	@Override
+	public boolean isPushable() {
+		return false;
 	}
 
 	@Override

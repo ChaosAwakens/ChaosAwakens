@@ -31,6 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<AnimationController<EntEntity>> entControllers = new ObjectArrayList<AnimationController<EntEntity>>(1);
 	private final AnimationController<EntEntity> mainController = createMainMappedController("entmaincontroller");
 	private final AnimationController<EntEntity> attackController = createMappedController("entattackcontroller", this::attackPredicate);
 	private final AnimationController<EntEntity> deathController = createMappedController("entdeathcontroller", this::deathPredicate);
@@ -160,7 +161,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	public ObjectArrayList<AnimationController<EntEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<EntEntity>>(1);
+		return entControllers;
 	}
 	
 	public enum EntType {
