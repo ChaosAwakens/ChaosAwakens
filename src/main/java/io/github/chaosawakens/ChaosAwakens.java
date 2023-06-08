@@ -103,6 +103,6 @@ public class ChaosAwakens {
 	 * @param message What you want to be printed (duh)
 	 */
 	public static <D> void debug(String domain, D message) {
-		LOGGER.debug("[" + domain + "]: " + message != null ? message.toString() : message);
+		LOGGER.debug("[" + domain + "]: " + (message != null ? message.toString() : message));
 	}
 }

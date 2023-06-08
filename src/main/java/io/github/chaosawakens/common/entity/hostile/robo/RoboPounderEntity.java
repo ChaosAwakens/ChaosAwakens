@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.hostile.robo;
 import java.util.List;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.animation.AnimationControllerWrapper;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -41,23 +42,26 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<AnimationControllerWrapper<RoboPounderEntity>> roboPounderControllerWrappers = new ObjectArrayList<AnimationControllerWrapper<RoboPounderEntity>>(1);
 	private final ObjectArrayList<AnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<AnimationController<RoboPounderEntity>>(1);
 	private final ObjectArrayList<? extends IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>();
 	private static final DataParameter<Boolean> SHOULD_TAUNT = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BOOLEAN);
-	private final AnimationController<RoboPounderEntity> mainController = createMainMappedController("robopoundermaincontroller");
-	private final AnimationController<RoboPounderEntity> attackController = createMappedController("robopounderattackcontroller", this::attackPredicate);
+	private final AnimationControllerWrapper<RoboPounderEntity> mainController = new AnimationControllerWrapper<>(this,
+			createMainMappedController("robopoundermaincontroller"));
+	private final AnimationControllerWrapper<RoboPounderEntity> attackController = new AnimationControllerWrapper<>(this,
+			createMappedController("robopounderattackcontroller", this::attackPredicate));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder tauntAnim = new SingletonAnimationBuilder(this, "Taunt", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "Right Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "Left Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "Right Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "Left Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SWING_ATTACK_ID = 2;
 	private static final byte DASH_ATTACK_ID = 3;
@@ -87,7 +91,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return mainController;
+		return mainController.getController();
 	}
 
 	@Override
@@ -139,28 +143,23 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		super.tick();
 		
 		if (!level.isClientSide && !dead) handleTaunting();
-		if (!level.isClientSide && tickCount % 10 == 0 && isAlive()) {
+		if (level.isClientSide && tickCount % 10 == 0 && isAlive()) {
 			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
-			ChaosAwakens.debug("Anim", "[IS PLAYING IDLE ANIM]: " + isPlayingAnimation(idleAnim));
-			ChaosAwakens.debug("Anim", "[HAS IDLE FINISHED]: " + idleAnim.hasAnimationFinished());
-			ChaosAwakens.debug("Anim", "[HAS DEATH FINISHED]: " + deathAnim.hasAnimationFinished());
-			ChaosAwakens.debug("Anim", "[IDLE PROGRESS]: " + idleAnim.getProgressTicks());
-			ChaosAwakens.debug("Anim", "[WALK PROGRESS]: " + walkAnim.getProgressTicks());
-			ChaosAwakens.debug("Anim", "[IDLE LENGTH]: " + idleAnim.getLengthTicks());
-			ChaosAwakens.debug("Anim", "[RPA TICKS]: " + rightPunchAnim.getProgressTicks());
-			ChaosAwakens.debug("Anim", "[LPA TICKS]: " + leftPunchAnim.getProgressTicks());
-			ChaosAwakens.debug("Anim", "[ATTACK ID]: " + getAttackID());
-			ChaosAwakens.debug("Anim", "[MAINCONT]: " + mainController.getAnimationState());
-			ChaosAwakens.debug("Anim", "[ATKCONT]: " + attackController.getAnimationState());
-			ChaosAwakens.debug("Anim", "[ATKID]: " + getAttackID());
-			ChaosAwakens.debug("Anim", "------------------------------------------------------------------------------");
+			ChaosAwakens.debug("MAIN STATE", mainController.getAnimationState());
+			ChaosAwakens.debug("MAIN LEN", mainController.getCurrentAnimation().animationLength);
+			ChaosAwakens.debug("MAIN PROG", mainController.getAnimationProgressTicks());
+			ChaosAwakens.debug("ATK STATE", attackController.getAnimationState());
+			ChaosAwakens.debug("ATK LEN", attackController.getCurrentAnimation().animationLength);
+			ChaosAwakens.debug("ATK PROG", attackController.getAnimationProgressTicks());
+			ChaosAwakens.debug("ATK ID", getAttackID());
+			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------");
 			
-			ChaosAwakens.debug("AnimCont", "--------------------------------------------------------------------------");
-			ChaosAwakens.debug("AnimCont", "[CUR MAIN ANIM]: " + ( getMainController().getCurrentAnimation() != null ? getMainController().getCurrentAnimation().animationName : "null"));
-			ChaosAwakens.debug("AnimCont", "[HAS TARGET]: " + (getTarget() != null ? getTarget() : "null"));
-			ChaosAwakens.debug("AnimCont", "[ALL CONTROLLERS: SIZE]: " + getControllers().size());
-			if (getTarget() != null) ChaosAwakens.debug("AnimCont", "[Can Attak]: " + getTarget() != null && isAlive() && !isAttacking() && getTarget().isAlive() && MathUtil.getDistanceBetween(this, getTarget()) <= getMeleeAttackReachSqr(getTarget()) + 5D);
-			ChaosAwakens.debug("AnimCont", "--------------------------------------------------------------------------");	
+			ChaosAwakens.debug("Controller", "--------------------------------------------------------------");
+			ChaosAwakens.debug("MAIN ANIM", mainController.getCurrentAnimation().animationName);
+			ChaosAwakens.debug("TARGET", (getTarget() != null ? getTarget() : "null"));
+			ChaosAwakens.debug("CONTROLLERS SIZE", getControllers().size());
+//			if (getTarget() != null) ChaosAwakens.debug("AnimCont", "[Can Attak]: " + getTarget() != null && isAlive() && !isAttacking() && getTarget().isAlive() && MathUtil.getDistanceBetween(this, getTarget()) <= getMeleeAttackReachSqr(getTarget()) + 5D);
+			ChaosAwakens.debug("Controller", "--------------------------------------------------------------------------");
 		}
 	}
 	
@@ -230,6 +229,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<AnimationController<RoboPounderEntity>> getControllers() {
 		return roboPounderControllers;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public ObjectArrayList<AnimationControllerWrapper<RoboPounderEntity>> getControllerWrappers() {
+		return roboPounderControllerWrappers;
 	}
 	
 	@SuppressWarnings("unchecked")

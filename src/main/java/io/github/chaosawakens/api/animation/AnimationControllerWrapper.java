@@ -13,7 +13,7 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 /**
  * //TODO Name this something reasonable
  */
-public class SynchAnimationController<T extends IAnimatableEntity> {
+public class AnimationControllerWrapper<T extends IAnimatableEntity> {
 	
 	protected T animatable;
 	protected String name;
@@ -30,27 +30,30 @@ public class SynchAnimationController<T extends IAnimatableEntity> {
 	
 	protected MinecraftServer server;
 	
-	public SynchAnimationController(T animatable, AnimationController<T> controller) {
+	public AnimationControllerWrapper(T animatable, AnimationController<T> controller) {
 		this.animatable = animatable;
 		this.transitionLength = animatable.animationInterval();
 		this.controller = controller;
 		this.name = controller.getName();
 		this.server = ((Entity) animatable).getServer();
+		this.animatable.getControllerWrappers().add(this);
 	}
 	
 	void tick() {
-		double delta = Math.abs(server.getNextTickTime() - Util.getMillis()) / 50.0;
+		double delta = server == null ? 0 : Math.abs(server.getNextTickTime() - Util.getMillis()) / 50.0;
 		switch (animationState) {
 		case Transitioning:
+			this.controller.setAnimation(builder);
 			if(this.transitionProgress >= this.transitionLength) {
 				this.transitionProgress = 0;
 				this.animationState = ExpandedAnimationState.Running;
 			} else {
-				this.transitionProgress += delta;
 				this.controller.setAnimation(builder);
+				this.transitionProgress += delta;
 			}
 			break;
 		case Running:
+			this.controller.setAnimation(builder);
 			if(this.animationProgress >= this.animationLength) {
 				this.animationProgress = 0;
 				if(this.currentAnimation.loop == EDefaultLoopTypes.LOOP) {
@@ -60,7 +63,6 @@ public class SynchAnimationController<T extends IAnimatableEntity> {
 					this.animationState = ExpandedAnimationState.Finished;
 				}
 			} else {
-				this.controller.setAnimation(builder);
 				this.animationProgress += delta;
 			}
 			break;
@@ -71,14 +73,17 @@ public class SynchAnimationController<T extends IAnimatableEntity> {
 		}
 	}
 	
-	public void setAnimation(Animation animation, AnimationBuilder builder) {
-		this.animationProgress = 0;
-		this.animationLength = animation.animationLength;
-		this.transitionProgress = 0;
-		this.currentAnimation = animation;
-		this.animationState = ExpandedAnimationState.Transitioning;
-		this.controller.setAnimation(builder);
-		this.builder = builder;
+	public void playAnimation(IAnimationBuilder builder) {
+		if(!builder.getAnimation().animationName.equals(getCurrentAnimation().animationName)
+				|| animationState.equals(ExpandedAnimationState.Finished)) {
+			this.animationProgress = 0;
+			this.animationLength = builder.getAnimation().animationLength;
+			this.transitionProgress = 0;
+			this.animationState = ExpandedAnimationState.Transitioning;
+		}
+		this.currentAnimation = builder.getAnimation();
+		this.controller.setAnimation(builder.getBuilder());
+		this.builder = builder.getBuilder();
 	}
 	
 	public String getName() {
@@ -105,6 +110,7 @@ public class SynchAnimationController<T extends IAnimatableEntity> {
 		Animation noneAnimation = new Animation();
 		noneAnimation.animationName = "None";
 		noneAnimation.boneAnimations = new ArrayList<>();
+		noneAnimation.animationLength = 0.0;
 		return noneAnimation;
 	}
 }

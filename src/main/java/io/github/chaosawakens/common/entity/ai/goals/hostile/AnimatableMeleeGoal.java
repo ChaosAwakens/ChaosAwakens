@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.animation.ExpandedAnimationState;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -62,7 +64,9 @@ public class AnimatableMeleeGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive() && !meleeAnim.get().hasAnimationFinished() && owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive()
+				&& !owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationState().equals(ExpandedAnimationState.Finished)
+				&& owner.getTarget().isAlive();
 	}
 
 	@Override
@@ -92,10 +96,10 @@ public class AnimatableMeleeGoal extends Goal {
 
 			if (targetAngle < 0) targetAngle += 360;
 			if (attackAngle < 0) attackAngle += 360;
-
-			float relativeHitAngle = targetAngle - attackAngle;
-
-			if (MathUtil.isBetween(meleeAnim.get().getProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
+			
+			//TODO Recheck the math, looks ok though
+			float relativeHitAngle = targetAngle - attackAngle - 180;
+			if (MathUtil.isBetween(owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
 				if (owner.distanceToSqr(owner.getTarget()) <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) {
 					owner.doHurtTarget(potentialAffectedTarget);
 				}

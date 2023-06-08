@@ -56,7 +56,11 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * @return A list that an {@link IAnimatableEntity} stores {@link AnimationController}s in.
 	 */
 	<E extends IAnimatableEntity> ObjectArrayList<AnimationController<? extends E>> getControllers();
-
+	
+	default <E extends IAnimatableEntity> ObjectArrayList<AnimationControllerWrapper<? extends E>> getControllerWrappers() {
+		return null;
+	}
+	
 	/**
 	 * A list of animations that an {@link IAnimatableEntity} caches for future use. This helps mitigate some optimization issues. Do keep in mind that 
 	 * any instance of {@code IAnimationBuilder} instantiated handles storing and removing itself from this list. Just have this return a final {@link ObjectArrayList} 
@@ -84,6 +88,18 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (getControllers().isEmpty()) return null;
 
 		ObjectArrayList<AnimationController<? extends IAnimatableEntity>> results = getControllers().stream()
+				.filter((p) -> p.getName().equalsIgnoreCase(name))
+				.collect(Collectors.toCollection(ObjectArrayList::new));
+
+		if (results.isEmpty()) return null;
+
+		return results.get(0);
+	}
+	
+	default AnimationControllerWrapper<? extends IAnimatableEntity> getControllerWrapperByName(String name) {
+		if (getControllers().isEmpty()) return null;
+
+		ObjectArrayList<AnimationControllerWrapper<? extends IAnimatableEntity>> results = getControllerWrappers().stream()
 				.filter((p) -> p.getName().equalsIgnoreCase(name))
 				.collect(Collectors.toCollection(ObjectArrayList::new));
 
@@ -233,11 +249,11 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * @param animation The animation to play.
 	 */
 	default void playAnimation(SingletonAnimationBuilder animation) {
-		if (!ObjectUtil.performNullityChecks(false, animation)) return;
-
-		if (((Entity) this).level.isClientSide) {
-			animation.playAnimation();
-		} else {
+		if (!ObjectUtil.performNullityChecks(false, animation))
+			return;
+		this.getControllerWrapperByName(animation.getController().getName()).playAnimation(animation);
+		animation.playAnimation();
+		if (!((Entity) this).level.isClientSide()) {
 			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName()), (Entity) this);
 		}
 	}
@@ -268,9 +284,8 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 	default void tickAnims() {
 		if (getAnimations() != null) {
-			for (IAnimationBuilder anim : getAnimations()) {
-//				if (anim.isPlaying())
-					anim.tickAnim();
+			for (AnimationControllerWrapper<? extends IAnimatableEntity> wrapper : getControllerWrappers()) {
+				wrapper.tick();
 			}
 		}
 	}

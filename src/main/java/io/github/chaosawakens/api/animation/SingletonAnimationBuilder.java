@@ -189,10 +189,10 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		}
 
 		if (!((Entity) owner).level.isClientSide) {
-//			if (isPlaying()) {
+			if (isPlaying()) {
 				progress++; // Value only handled during running animation, does not affect/get affected by transitioning
 				if (hasAnimationFinished() || !isPlaying()) progress = 0;
-//			}
+			}
 		}
 	}
 }
