@@ -269,7 +269,8 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	default void tickAnims() {
 		if (getAnimations() != null) {
 			for (IAnimationBuilder anim : getAnimations()) {
-				if (anim.isPlaying()) anim.tickAnim();
+//				if (anim.isPlaying())
+					anim.tickAnim();
 			}
 		}
 	}

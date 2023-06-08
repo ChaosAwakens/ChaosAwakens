@@ -51,6 +51,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
 		if (this.owner.getAnimations() != null && !this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
+		owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, ILoopType loopType) {
@@ -62,6 +63,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
 		if (this.owner.getAnimations() != null && this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
+		owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, int loopReps) {
@@ -72,6 +74,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
 		if (this.owner.getAnimations() != null && !this.owner.getAnimations().contains(this)) this.owner.getAnimations().add(this);
+		owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder setController(AnimationController<? extends IAnimatableEntity> targetController) {
@@ -186,10 +189,10 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		}
 
 		if (!((Entity) owner).level.isClientSide) {
-			if (isPlaying()) {
+//			if (isPlaying()) {
 				progress++; // Value only handled during running animation, does not affect/get affected by transitioning
 				if (hasAnimationFinished() || !isPlaying()) progress = 0;
-			}
+//			}
 		}
 	}
 }
