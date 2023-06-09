@@ -21,16 +21,18 @@ public class AnimationTriggerPacket implements ICAPacket {
 	private final String animationName;
 	private final EDefaultLoopTypes loopType;
 	private final String controllerName;
+	private final boolean clearCache;
 	
-	public AnimationTriggerPacket(int animatableOwnerID, String animationName, EDefaultLoopTypes loopType, String controllerName) {
+	public AnimationTriggerPacket(int animatableOwnerID, String animationName, EDefaultLoopTypes loopType, String controllerName, boolean clearCache) {
 		this.animatableOwnerID = animatableOwnerID;
 		this.animationName = animationName;
 		this.loopType = loopType;
 		this.controllerName = controllerName;
+		this.clearCache = clearCache;
 	}
 	
 	public static AnimationTriggerPacket decode(PacketBuffer buf) {
-		return new AnimationTriggerPacket(buf.readInt(), buf.readUtf(), utfToLoopEnum(buf.readUtf()), buf.readUtf());
+		return new AnimationTriggerPacket(buf.readInt(), buf.readUtf(), utfToLoopEnum(buf.readUtf()), buf.readUtf(), buf.readBoolean());
 	}
 
 	@Override
@@ -39,6 +41,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 		buf.writeUtf(animationName);
 		buf.writeUtf(loopType.toString());
 		buf.writeUtf(controllerName);
+		buf.writeBoolean(clearCache);
 	}
 	
 	private static EDefaultLoopTypes utfToLoopEnum(String name) {
@@ -60,7 +63,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity && !"None".equals(animationName)) {
 					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
 					final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
-					targetAnimatable.getControllerWrapperByName(controllerName).playAnimation(targetAnim);
+					targetAnimatable.getControllerWrapperByName(controllerName).playAnimation(targetAnim, clearCache);
 					targetAnimatable.playAnimation(targetAnim);
 				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
 			});

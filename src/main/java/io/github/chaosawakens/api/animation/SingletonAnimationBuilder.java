@@ -156,7 +156,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public void playAnimation(boolean forceAnim) {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return;
 
-		if (targetController.getCurrentAnimation() != null && forceAnim) targetController.markNeedsReload();
+		if (targetController.getCurrentAnimation() != null && forceAnim) targetController.clearAnimationCache();
 		targetController.setAnimation(getBuilder());
 	}
 

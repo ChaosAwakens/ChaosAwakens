@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.api.animation.AnimationControllerWrapper;
+import io.github.chaosawakens.api.animation.ExpandedAnimationState;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
@@ -129,6 +132,13 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	@Override
 	protected void tickDeath() {
+		if (!level.isClientSide) {
+			AnimationControllerWrapper<? extends IAnimatableEntity> wrapper = getControllerWrapperByName(getDeathAnim()
+					.getController().getName());
+			if(wrapper.getAnimationState().equals(ExpandedAnimationState.Finished))
+				remove();
+		}
+		
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
 		if (getDeathAnim() != null) {

@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
 import software.bernie.geckolib3.core.builder.Animation;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
 
@@ -25,7 +24,6 @@ public class AnimationControllerWrapper<T extends IAnimatableEntity> {
 	protected double animationLength;
 	protected double animationProgress;
 	
-	private AnimationBuilder builder;
 	protected final AnimationController<T> controller;
 	
 	protected MinecraftServer server;
@@ -40,20 +38,17 @@ public class AnimationControllerWrapper<T extends IAnimatableEntity> {
 	}
 	
 	void tick() {
-		double delta = server == null ? 0 : Math.abs(server.getNextTickTime() - Util.getMillis()) / 50.0;
+		double delta = server == null ? controller.tickOffset / 50.0 : Math.abs(server.getNextTickTime() - Util.getMillis()) / 50.0;
 		switch (animationState) {
 		case Transitioning:
-			this.controller.setAnimation(builder);
 			if(this.transitionProgress >= this.transitionLength) {
 				this.transitionProgress = 0;
 				this.animationState = ExpandedAnimationState.Running;
 			} else {
-				this.controller.setAnimation(builder);
 				this.transitionProgress += delta;
 			}
 			break;
 		case Running:
-			this.controller.setAnimation(builder);
 			if(this.animationProgress >= this.animationLength) {
 				this.animationProgress = 0;
 				if(this.currentAnimation.loop == EDefaultLoopTypes.LOOP) {
@@ -73,9 +68,13 @@ public class AnimationControllerWrapper<T extends IAnimatableEntity> {
 		}
 	}
 	
-	public void playAnimation(IAnimationBuilder builder) {
+	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
 		if(!builder.getAnimation().animationName.equals(getCurrentAnimation().animationName)
 				|| animationState.equals(ExpandedAnimationState.Finished)) {
+			if(clearCache)
+				builder.playAnimation(true);
+			else
+				builder.playAnimation(false);
 			this.animationProgress = 0;
 			this.animationLength = builder.getAnimation().animationLength;
 			this.transitionProgress = 0;
@@ -83,7 +82,6 @@ public class AnimationControllerWrapper<T extends IAnimatableEntity> {
 		}
 		this.currentAnimation = builder.getAnimation();
 		this.controller.setAnimation(builder.getBuilder());
-		this.builder = builder.getBuilder();
 	}
 	
 	public String getName() {

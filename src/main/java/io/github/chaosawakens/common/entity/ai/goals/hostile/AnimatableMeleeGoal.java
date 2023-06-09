@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.ExpandedAnimationState;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -73,7 +72,7 @@ public class AnimatableMeleeGoal extends Goal {
 	public void start() {
 		owner.setAttackID(attackId);
 		owner.getNavigation().stop();
-		owner.playAnimation(meleeAnim.get());
+		owner.playAnimation(meleeAnim.get(), true);
 	}
 
 	@Override
@@ -89,7 +88,8 @@ public class AnimatableMeleeGoal extends Goal {
 		double reach = owner.getMeleeAttackReachSqr(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
-		if (meleeAnim.get().getProgressTicks() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
+		if (owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks() < actionPointTickStart)
+			owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			float targetAngle = (float) MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
 			float attackAngle = owner.yBodyRot % 360;
@@ -105,6 +105,7 @@ public class AnimatableMeleeGoal extends Goal {
 				}
 			}
 		}
-		if (meleeAnim.get().getProgressTicks() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
+		if (owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks() >= actionPointTickStart)
+			EntityUtil.freezeEntityRotation(owner);
 	}
 }

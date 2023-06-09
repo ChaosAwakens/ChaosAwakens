@@ -251,10 +251,22 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	default void playAnimation(SingletonAnimationBuilder animation) {
 		if (!ObjectUtil.performNullityChecks(false, animation))
 			return;
-		this.getControllerWrapperByName(animation.getController().getName()).playAnimation(animation);
-		animation.playAnimation();
+		this.getControllerWrapperByName(animation.getController().getName()).playAnimation(animation, false);
 		if (!((Entity) this).level.isClientSide()) {
-			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName()), (Entity) this);
+			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(),
+					animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName(),
+					false), (Entity) this);
+		}
+	}
+	
+	default void playAnimation(SingletonAnimationBuilder animation, boolean clearCache) {
+		if (!ObjectUtil.performNullityChecks(false, animation))
+			return;
+		this.getControllerWrapperByName(animation.getController().getName()).playAnimation(animation, clearCache);
+		if (!((Entity) this).level.isClientSide()) {
+			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(),
+					animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName(),
+					clearCache), (Entity) this);
 		}
 	}
 
@@ -264,7 +276,8 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (((Entity) this).level.isClientSide) {
 			animation.stopAnimation();
 		} else {
-			CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getController().getName(), animation.getAnimation().animationName), (Entity) this);
+			CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(),
+					animation.getController().getName(), animation.getAnimation().animationName), (Entity) this);
 		}
 	}
 

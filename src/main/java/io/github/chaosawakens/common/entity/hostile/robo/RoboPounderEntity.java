@@ -143,23 +143,23 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		super.tick();
 		
 		if (!level.isClientSide && !dead) handleTaunting();
-		if (level.isClientSide && tickCount % 10 == 0 && isAlive()) {
-			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
-			ChaosAwakens.debug("MAIN STATE", mainController.getAnimationState());
-			ChaosAwakens.debug("MAIN LEN", mainController.getCurrentAnimation().animationLength);
-			ChaosAwakens.debug("MAIN PROG", mainController.getAnimationProgressTicks());
-			ChaosAwakens.debug("ATK STATE", attackController.getAnimationState());
-			ChaosAwakens.debug("ATK LEN", attackController.getCurrentAnimation().animationLength);
-			ChaosAwakens.debug("ATK PROG", attackController.getAnimationProgressTicks());
-			ChaosAwakens.debug("ATK ID", getAttackID());
-			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------");
-			
-			ChaosAwakens.debug("Controller", "--------------------------------------------------------------");
-			ChaosAwakens.debug("MAIN ANIM", mainController.getCurrentAnimation().animationName);
-			ChaosAwakens.debug("TARGET", (getTarget() != null ? getTarget() : "null"));
-			ChaosAwakens.debug("CONTROLLERS SIZE", getControllers().size());
+		if (!level.isClientSide && tickCount % 10 == 0 && isAlive()) {
+//			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
+//			ChaosAwakens.debug("DEATH STATE", mainController.getAnimationState());
+//			ChaosAwakens.debug("DEATH ANIM", mainController.getCurrentAnimation().animationName);
+//			ChaosAwakens.debug("DEATH PROG", mainController.getAnimationProgressTicks());
+//			ChaosAwakens.debug("ATK STATE", attackController.getAnimationState());
+//			ChaosAwakens.debug("ATK ANIM", attackController.getCurrentAnimation().animationName);
+//			ChaosAwakens.debug("ATK PROG", attackController.getAnimationProgressTicks());
+//			ChaosAwakens.debug("ATK ID", getAttackID());
+//			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------");
+//			
+//			ChaosAwakens.debug("Controller", "--------------------------------------------------------------");
+//			ChaosAwakens.debug("MAIN ANIM", mainController.getCurrentAnimation().animationName);
+//			ChaosAwakens.debug("TARGET", (getTarget() != null ? getTarget() : "null"));
+//			ChaosAwakens.debug("CONTROLLERS SIZE", getControllers().size());
 //			if (getTarget() != null) ChaosAwakens.debug("AnimCont", "[Can Attak]: " + getTarget() != null && isAlive() && !isAttacking() && getTarget().isAlive() && MathUtil.getDistanceBetween(this, getTarget()) <= getMeleeAttackReachSqr(getTarget()) + 5D);
-			ChaosAwakens.debug("Controller", "--------------------------------------------------------------------------");
+//			ChaosAwakens.debug("Controller", "--------------------------------------------------------------------------");
 		}
 	}
 	
