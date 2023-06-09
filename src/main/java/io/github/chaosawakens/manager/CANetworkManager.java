@@ -38,7 +38,7 @@ public class CANetworkManager {
 	 * Sends a packet from client to server.
 	 * @param packet Packet to send to the server.
 	 */
-	public static void sendPacketToServer(ICAPacket packet) {
+	public static void sendPacketToServer(Object packet) {
 		CHANNEL.sendToServer(packet);
 	}
 	
@@ -46,7 +46,7 @@ public class CANetworkManager {
 	 * Sends a packet to all clients from the server.
 	 * @param packet Packet to send to client.
 	 */
-	public static void sendPacketToClient(ICAPacket packet) {
+	public static void sendPacketToClient(Object packet) {
 		CHANNEL.sendTo(packet, Minecraft.getInstance().getConnection().getConnection(), NetworkDirection.PLAY_TO_CLIENT);
 	}
 	
@@ -55,7 +55,7 @@ public class CANetworkManager {
 	 * @param packet Packet to send (S2C)
 	 * @param trackedEntity Tracked Entity
 	 */
-	public static void sendEntityTrackingPacket(ICAPacket packet, Entity trackedEntity) {
+	public static void sendEntityTrackingPacket(Object packet, Entity trackedEntity) {
 		CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> trackedEntity), packet);
 	}
 }

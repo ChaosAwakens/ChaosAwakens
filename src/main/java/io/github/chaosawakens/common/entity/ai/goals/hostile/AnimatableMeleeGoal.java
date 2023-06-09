@@ -63,9 +63,7 @@ public class AnimatableMeleeGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive()
-				&& !owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationState().equals(ExpandedAnimationState.Finished)
-				&& owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && owner.isAlive() && !owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).isAnimationFinished() && owner.getTarget().isAlive();
 	}
 
 	@Override
@@ -83,13 +81,15 @@ public class AnimatableMeleeGoal extends Goal {
 	@Override
 	public void tick() {
 		owner.getNavigation().stop();
+		owner.setDeltaMovement(0, owner.getDeltaMovement().y(), 0);
 		LivingEntity target = owner.getTarget();
+		
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
+		
 		double reach = owner.getMeleeAttackReachSqr(target);
-		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
+		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach + 1, reach + 1, reach + 1, reach + 1);
 
-		if (owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks() < actionPointTickStart)
-			owner.lookAt(Type.EYES, target.position());
+		if (owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			float targetAngle = (float) MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
 			float attackAngle = owner.yBodyRot % 360;
@@ -97,7 +97,6 @@ public class AnimatableMeleeGoal extends Goal {
 			if (targetAngle < 0) targetAngle += 360;
 			if (attackAngle < 0) attackAngle += 360;
 			
-			//TODO Recheck the math, looks ok though
 			float relativeHitAngle = targetAngle - attackAngle - 180;
 			if (MathUtil.isBetween(owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
 				if (owner.distanceToSqr(owner.getTarget()) <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) {
@@ -105,7 +104,6 @@ public class AnimatableMeleeGoal extends Goal {
 				}
 			}
 		}
-		if (owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks() >= actionPointTickStart)
-			EntityUtil.freezeEntityRotation(owner);
+		if (owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 	}
 }

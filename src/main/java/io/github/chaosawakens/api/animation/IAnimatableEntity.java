@@ -57,7 +57,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	<E extends IAnimatableEntity> ObjectArrayList<AnimationController<? extends E>> getControllers();
 	
-	default <E extends IAnimatableEntity> ObjectArrayList<AnimationControllerWrapper<? extends E>> getControllerWrappers() {
+	default <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers() {
 		return null;
 	}
 	
@@ -72,8 +72,8 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 	@Override
 	default void registerControllers(AnimationData data) {
-		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
-			if (controller != null) data.addAnimationController(controller);
+		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
+			if (controller != null) data.addAnimationController(controller.getController());
 		}
 	}
 
@@ -96,10 +96,10 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		return results.get(0);
 	}
 	
-	default AnimationControllerWrapper<? extends IAnimatableEntity> getControllerWrapperByName(String name) {
+	default WrappedAnimationController<? extends IAnimatableEntity> getControllerWrapperByName(String name) {
 		if (getControllers().isEmpty()) return null;
 
-		ObjectArrayList<AnimationControllerWrapper<? extends IAnimatableEntity>> results = getControllerWrappers().stream()
+		ObjectArrayList<WrappedAnimationController<? extends IAnimatableEntity>> results = getWrappedControllers().stream()
 				.filter((p) -> p.getName().equalsIgnoreCase(name))
 				.collect(Collectors.toCollection(ObjectArrayList::new));
 
@@ -176,7 +176,6 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		for (IAnimationBuilder curAnimB : getAnimations()) {
 			if (curAnimB instanceof SingletonAnimationBuilder) return (SingletonAnimationBuilder) getCurrentAnimationAsCB(targetController);
 		}
-		
 		return null;
 	}
 
@@ -189,7 +188,6 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
 			if (controller.getCurrentAnimation() != null) return true;
 		}
-
 		return false;
 	}
 
@@ -197,12 +195,18 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
 			if (controller.getCurrentAnimation().animationName == targetAnim.animationName) return true;
 		}
-
 		return false;
 	}
 
+	default boolean isPlayingAnimation(String targetAnimName) {
+		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
+			if (controller.getCurrentAnimation().animationName == targetAnimName) return true;
+		}
+		return false;
+	}
+	
 	default boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim) {
-		return targetAnim.isPlaying();
+		return getControllerWrapperByName(targetAnim.getController().getName()).isPlayingAnimation(targetAnim);
 	}
 
 	default <E extends IAnimatableEntity> boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim, AnimationController<E> controllerToCheck) {
@@ -210,20 +214,16 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		return controllerToCheck.getCurrentAnimation().animationName == targetAnim.getAnimation().animationName;
 	}
 
-	default boolean isPlayingAnimation(String targetAnimName) {
-		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
-			if (controller.getCurrentAnimation().animationName == targetAnimName) return true;
-		}
-
-		return false;
-	}
-
 	default boolean isPlayingAnimationInController(AnimationController<? extends IAnimatableEntity> targetController) {
+		return targetController.getCurrentAnimation() != null;
+	}
+	
+	default boolean isPlayingAnimationInController(WrappedAnimationController<? extends IAnimatableEntity> targetController) {
 		return targetController.getCurrentAnimation() != null;
 	}
 
 	default boolean isPlayingAnimationInController(String targetControllerName) {
-		return isPlayingAnimationInController(getControllerByName(targetControllerName));
+		return isPlayingAnimationInController(getControllerWrapperByName(targetControllerName));
 	}
 
 	default boolean isPlayingAnimationInController(String animName, AnimationController<? extends IAnimatableEntity> targetController) {
@@ -232,6 +232,14 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 	default boolean isPlayingAnimationInController(String animName, String targetControllerName) {
 		return isPlayingAnimationInController(animName, getControllerByName(targetControllerName));
+	}
+	
+	default boolean isPlayingAnimationInWrappedController(String animName, WrappedAnimationController<? extends IAnimatableEntity> targetController) {
+		return targetController.getCurrentAnimation() != null && targetController.getCurrentAnimation().animationName == animName;
+	}
+
+	default boolean isPlayingAnimationInWrappedController(String animName, String targetControllerName) {
+		return isPlayingAnimationInWrappedController(animName, getControllerWrapperByName(targetControllerName));
 	}
 
 	/**
@@ -249,24 +257,20 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * @param animation The animation to play.
 	 */
 	default void playAnimation(SingletonAnimationBuilder animation) {
-		if (!ObjectUtil.performNullityChecks(false, animation))
-			return;
-		this.getControllerWrapperByName(animation.getController().getName()).playAnimation(animation, false);
+		if (!ObjectUtil.performNullityChecks(false, animation)) return;
+		getControllerWrapperByName(animation.getController().getName()).playAnimation(animation, false);
+		
 		if (!((Entity) this).level.isClientSide()) {
-			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(),
-					animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName(),
-					false), (Entity) this);
+			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName(), false), (Entity) this);
 		}
 	}
 	
 	default void playAnimation(SingletonAnimationBuilder animation, boolean clearCache) {
-		if (!ObjectUtil.performNullityChecks(false, animation))
-			return;
-		this.getControllerWrapperByName(animation.getController().getName()).playAnimation(animation, clearCache);
+		if (!ObjectUtil.performNullityChecks(false, animation)) return;
+		getControllerWrapperByName(animation.getController().getName()).playAnimation(animation, clearCache);
+		
 		if (!((Entity) this).level.isClientSide()) {
-			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(),
-					animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName(),
-					clearCache), (Entity) this);
+			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, animation.getLoopType(), animation.getController().getName(), clearCache), (Entity) this);
 		}
 	}
 
@@ -276,8 +280,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (((Entity) this).level.isClientSide) {
 			animation.stopAnimation();
 		} else {
-			CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(),
-					animation.getController().getName(), animation.getAnimation().animationName), (Entity) this);
+			CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getController().getName(), animation.getAnimation().animationName), (Entity) this);
 		}
 	}
 
@@ -297,7 +300,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 	default void tickAnims() {
 		if (getAnimations() != null) {
-			for (AnimationControllerWrapper<? extends IAnimatableEntity> wrapper : getControllerWrappers()) {
+			for (WrappedAnimationController<? extends IAnimatableEntity> wrapper : getWrappedControllers()) {
 				wrapper.tick();
 			}
 		}

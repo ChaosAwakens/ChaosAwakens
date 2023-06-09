@@ -2,7 +2,7 @@
   "parent": "chaosawakens:root/crystal_world",
   "display": {
     "icon": {
-      "item": "chaosawakens:crystal_log"
+      "item": "chaosawakens:crystalwood_log"
     },
     "title": {
       "translate": "advancements.chaosawakens.clearly_wood.title"

@@ -109,7 +109,7 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenFenceGate(consumer, CABlocks.DENSEWOOD_FENCE_GATE.get(), CABlocks.DENSEWOOD_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.DENSEWOOD_PRESSURE_PLATE.get(), CABlocks.DENSEWOOD_PLANKS.get());
 		woodenButton(consumer, CABlocks.DENSEWOOD_BUTTON.get(), CABlocks.DENSEWOOD_PLANKS.get());
-		woodenWood(consumer, CABlocks.DENSEWOOD_WOOD.get(), CABlocks.DENSEWOOD_LOG.get());
+		woodenWood(consumer, CABlocks.DENSEWOOD.get(), CABlocks.DENSEWOOD_LOG.get());
 		woodenSign(consumer, CAItems.DENSEWOOD_SIGN.get(), CABlocks.DENSEWOOD_PLANKS.get(), Items.STICK);
 		woodenPlanks(consumer, CABlocks.PEACH_PLANKS.get(), CATags.Items.PEACH_LOGS);
 		woodenSlab(consumer, CABlocks.PEACH_SLAB.get(), CABlocks.PEACH_PLANKS.get());
@@ -130,16 +130,18 @@ public class CARecipeProvider extends RecipeProvider {
 		woodenFenceGate(consumer, CABlocks.SKYWOOD_FENCE_GATE.get(), CABlocks.SKYWOOD_PLANKS.get());
 		woodenPressurePlate(consumer, CABlocks.SKYWOOD_PRESSURE_PLATE.get(), CABlocks.SKYWOOD_PLANKS.get());
 		woodenButton(consumer, CABlocks.SKYWOOD_BUTTON.get(), CABlocks.SKYWOOD_PLANKS.get());
-		woodenWood(consumer, CABlocks.SKYWOOD_WOOD.get(), CABlocks.SKYWOOD_LOG.get());
+		woodenWood(consumer, CABlocks.SKYWOOD.get(), CABlocks.SKYWOOD_LOG.get());
 		woodenSign(consumer, CAItems.PEACH_SIGN.get(), CABlocks.PEACH_PLANKS.get(), Items.STICK);
-		woodenPlanks(consumer, CABlocks.CRYSTAL_PLANKS.get(), CABlocks.CRYSTAL_LOG.get());
-		woodenSlab(consumer, CABlocks.CRYSTAL_SLAB.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenStairs(consumer, CABlocks.CRYSTAL_STAIRS.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenFence(consumer, CABlocks.CRYSTAL_FENCE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenFenceGate(consumer, CABlocks.CRYSTAL_FENCE_GATE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenPressurePlate(consumer, CABlocks.CRYSTAL_PRESSURE_PLATE.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenButton(consumer, CABlocks.CRYSTAL_BUTTON.get(), CABlocks.CRYSTAL_PLANKS.get());
-		woodenWood(consumer, CABlocks.CRYSTAL_WOOD.get(), CABlocks.CRYSTAL_LOG.get());
+		woodenPlanks(consumer, CABlocks.CRYSTALWOOD_PLANKS.get(), CABlocks.CRYSTALWOOD_LOG.get());
+		woodenSlab(consumer, CABlocks.CRYSTALWOOD_SLAB.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenStairs(consumer, CABlocks.CRYSTALWOOD_STAIRS.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenTrapdoor(consumer, CABlocks.CRYSTALWOOD_TRAPDOOR.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenDoor(consumer, CABlocks.CRYSTALWOOD_DOOR.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenFence(consumer, CABlocks.CRYSTALWOOD_FENCE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenFenceGate(consumer, CABlocks.CRYSTALWOOD_FENCE_GATE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenPressurePlate(consumer, CABlocks.CRYSTAL_PRESSURE_PLATE.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenButton(consumer, CABlocks.CRYSTALWOOD_BUTTON.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		woodenWood(consumer, CABlocks.CRYSTALWOOD.get(), CABlocks.CRYSTALWOOD_LOG.get());
 		woodenSign(consumer, CAItems.SKYWOOD_SIGN.get(), CABlocks.SKYWOOD_PLANKS.get(), Items.STICK);
 
 		leafCarpet(consumer, CABlocks.APPLE_LEAF_CARPET.get(), CABlocks.APPLE_LEAVES.get());
@@ -156,10 +158,10 @@ public class CARecipeProvider extends RecipeProvider {
 		leafCarpet(consumer, CABlocks.DARK_OAK_LEAF_CARPET.get(), Blocks.DARK_OAK_LEAVES);
 
 		ShapedRecipeBuilder.shaped(CABlocks.CRYSTAL_CRAFTING_TABLE.get())
-				.define('#', CABlocks.CRYSTAL_PLANKS.get())
+				.define('#', CABlocks.CRYSTALWOOD_PLANKS.get())
 				.pattern("##")
 				.pattern("##")
-				.unlockedBy("has_" + CABlocks.CRYSTAL_PLANKS.get().asItem(), has(CABlocks.CRYSTAL_PLANKS.get()))
+				.unlockedBy("has_" + CABlocks.CRYSTALWOOD_PLANKS.get().asItem(), has(CABlocks.CRYSTALWOOD_PLANKS.get()))
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(CABlocks.CRYSTAL_FURNACE.get())
 				.define('#', CABlocks.KYANITE.get())
@@ -168,10 +170,10 @@ public class CARecipeProvider extends RecipeProvider {
 				.pattern("###")
 				.unlockedBy("has_" + CABlocks.KYANITE.get().asItem(), has(CABlocks.KYANITE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_SHARD.get(), 4)
-				.define('#', CABlocks.CRYSTAL_PLANKS.get())
+				.define('#', CABlocks.CRYSTALWOOD_PLANKS.get())
 				.pattern("#")
 				.pattern("#")
-				.unlockedBy("has_" + CABlocks.CRYSTAL_PLANKS.get().asItem(), has(CABlocks.CRYSTAL_PLANKS.get()))
+				.unlockedBy("has_" + CABlocks.CRYSTALWOOD_PLANKS.get().asItem(), has(CABlocks.CRYSTALWOOD_PLANKS.get()))
 				.save(consumer);
 
 		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_TORCH.get(), 4)
@@ -972,11 +974,11 @@ public class CARecipeProvider extends RecipeProvider {
 		toolPickaxe(consumer, CAItems.TIGERS_EYE_PICKAXE.get(), CAItems.TIGERS_EYE.get());
 		toolAxe(consumer, CAItems.TIGERS_EYE_AXE.get(), CAItems.TIGERS_EYE.get());
 		toolHoe(consumer, CAItems.TIGERS_EYE_HOE.get(), CAItems.TIGERS_EYE.get());
-		toolSword(consumer, CAItems.CRYSTAL_WOOD_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolShovel(consumer, CAItems.CRYSTAL_WOOD_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolPickaxe(consumer, CAItems.CRYSTAL_WOOD_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolAxe(consumer, CAItems.CRYSTAL_WOOD_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
-		toolHoe(consumer, CAItems.CRYSTAL_WOOD_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTAL_PLANKS.get());
+		toolSword(consumer, CAItems.CRYSTAL_WOOD_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolShovel(consumer, CAItems.CRYSTAL_WOOD_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolPickaxe(consumer, CAItems.CRYSTAL_WOOD_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolAxe(consumer, CAItems.CRYSTAL_WOOD_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolHoe(consumer, CAItems.CRYSTAL_WOOD_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
 		toolSword(consumer, CAItems.KYANITE_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
 		toolShovel(consumer, CAItems.KYANITE_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
 		toolPickaxe(consumer, CAItems.KYANITE_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
@@ -1233,6 +1235,7 @@ public class CARecipeProvider extends RecipeProvider {
 		boat(consumer, CAItems.DENSEWOOD_BOAT.get(), CABlocks.DENSEWOOD_PLANKS.get());
 		boat(consumer, CAItems.PEACH_BOAT.get(), CABlocks.PEACH_PLANKS.get());
 		boat(consumer, CAItems.SKYWOOD_BOAT.get(), CABlocks.SKYWOOD_PLANKS.get());
+		boat(consumer, CAItems.CRYSTALWOOD_BOAT.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
 
 		materialToBlock(consumer, CABlocks.ALUMINUM_BLOCK.get(), CAItems.ALUMINUM_INGOT.get());
 		blockToMaterial(consumer, CABlocks.ALUMINUM_BLOCK.get(), CAItems.ALUMINUM_INGOT.get());

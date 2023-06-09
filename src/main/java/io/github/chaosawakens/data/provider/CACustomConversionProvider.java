@@ -70,7 +70,7 @@ public class CACustomConversionProvider extends CustomConversionProvider {
 				.before(CABlocks.KYANITE.get(), 2)
 				.before(CABlocks.CRYSTAL_GRASS.get(), 2)
 				.before(CABlocks.TALL_CRYSTAL_GRASS.get(), 2)
-				.before(CABlocks.CRYSTAL_LOG.get(), 64)
+				.before(CABlocks.CRYSTALWOOD_LOG.get(), 64)
 				.before(CATags.Items.CRYSTAL_LEAVES, 2)
 				.before(CATags.Items.CRYSTAL_SAPLING, 64)
 				.before(CABlocks.CRYSTAL_ENERGY.get().asItem(), 3_072);

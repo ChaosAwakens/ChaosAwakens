@@ -85,6 +85,7 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.DENSEWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.DENSEWOOD_DOOR.get()));
 		add(CABlocks.PEACH_DOOR.get(), (block) -> createDoorDrop(CABlocks.PEACH_DOOR.get()));
 		add(CABlocks.SKYWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.SKYWOOD_DOOR.get()));
+		add(CABlocks.CRYSTALWOOD_DOOR.get(), (block) -> createDoorDrop(CABlocks.CRYSTALWOOD_DOOR.get()));
 		
 	//	dropSelf(CABlocks.ROCK.get());
 
@@ -268,9 +269,9 @@ public class CABlockLootTables extends BlockLootTables {
 		// Crystal Blocks
 		add(CABlocks.CRYSTAL_GRASS_BLOCK.get(), (block) -> createSingleItemTableWithSilkTouch(block, CABlocks.KYANITE.get()));
 		dropSelf(CABlocks.CRYSTAL_TERMITE_NEST.get());
-		dropSelf(CABlocks.CRYSTAL_LOG.get());
-		dropSelf(CABlocks.CRYSTAL_PLANKS.get());
-		dropSelf(CABlocks.CRYSTAL_WOOD.get());
+		dropSelf(CABlocks.CRYSTALWOOD_LOG.get());
+		dropSelf(CABlocks.CRYSTALWOOD_PLANKS.get());
+		dropSelf(CABlocks.CRYSTALWOOD.get());
 		dropSelf(CABlocks.KYANITE.get());
 		add(CABlocks.BUDDING_CATS_EYE.get(), (block) -> createSingleItemTable(CABlocks.KYANITE.get()));
 		add(CABlocks.BUDDING_PINK_TOURMALINE.get(), (block) -> createSingleItemTable(CABlocks.KYANITE.get()));
@@ -543,13 +544,13 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.STRIPPED_MESOZOIC_LOG.get());
 		dropSelf(CABlocks.STRIPPED_MESOZOIC_WOOD.get());
 		dropSelf(CABlocks.DENSEWOOD_LOG.get());
-		dropSelf(CABlocks.DENSEWOOD_WOOD.get());
+		dropSelf(CABlocks.DENSEWOOD.get());
 		dropSelf(CABlocks.STRIPPED_DENSEWOOD_LOG.get());
-		dropSelf(CABlocks.STRIPPED_DENSEWOOD_WOOD.get());
+		dropSelf(CABlocks.STRIPPED_DENSEWOOD.get());
 		dropSelf(CABlocks.PEACH_LOG.get());
 		dropSelf(CABlocks.PEACH_WOOD.get());
 		dropSelf(CABlocks.SKYWOOD_LOG.get());
-		dropSelf(CABlocks.SKYWOOD_WOOD.get());
+		dropSelf(CABlocks.SKYWOOD.get());
 		dropSelf(CABlocks.APPLE_PLANKS.get());
 		dropSelf(CABlocks.CHERRY_PLANKS.get());
 		dropSelf(CABlocks.DUPLICATION_PLANKS.get());
@@ -569,7 +570,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.STRIPPED_PEACH_LOG.get());
 		dropSelf(CABlocks.STRIPPED_PEACH_WOOD.get());
 		dropSelf(CABlocks.STRIPPED_SKYWOOD_LOG.get());
-		dropSelf(CABlocks.STRIPPED_SKYWOOD_WOOD.get());
+		dropSelf(CABlocks.STRIPPED_SKYWOOD.get());
 		dropSelf(CABlocks.APPLE_STAIRS.get());
 		dropSelf(CABlocks.CHERRY_STAIRS.get());
 		dropSelf(CABlocks.PEACH_STAIRS.get());
@@ -578,7 +579,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.DENSEWOOD_STAIRS.get());
 		dropSelf(CABlocks.DUPLICATION_STAIRS.get());
 		dropSelf(CABlocks.SKYWOOD_STAIRS.get());
-		dropSelf(CABlocks.CRYSTAL_STAIRS.get());
+		dropSelf(CABlocks.CRYSTALWOOD_STAIRS.get());
 		dropSelf(CABlocks.APPLE_SLAB.get());
 		dropSelf(CABlocks.CHERRY_SLAB.get());
 		dropSelf(CABlocks.DUPLICATION_SLAB.get());
@@ -587,7 +588,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.DENSEWOOD_SLAB.get());
 		dropSelf(CABlocks.PEACH_SLAB.get());
 		dropSelf(CABlocks.SKYWOOD_SLAB.get());
-		dropSelf(CABlocks.CRYSTAL_SLAB.get());
+		dropSelf(CABlocks.CRYSTALWOOD_SLAB.get());
 		dropSelf(CABlocks.APPLE_FENCE.get());
 		dropSelf(CABlocks.CHERRY_FENCE.get());
 		dropSelf(CABlocks.DUPLICATION_FENCE.get());
@@ -596,7 +597,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.DENSEWOOD_FENCE.get());
 		dropSelf(CABlocks.PEACH_FENCE.get());
 		dropSelf(CABlocks.SKYWOOD_FENCE.get());
-		dropSelf(CABlocks.CRYSTAL_FENCE.get());
+		dropSelf(CABlocks.CRYSTALWOOD_FENCE.get());
 		dropSelf(CABlocks.APPLE_FENCE_GATE.get());
 		dropSelf(CABlocks.CHERRY_FENCE_GATE.get());
 		dropSelf(CABlocks.DUPLICATION_FENCE_GATE.get());
@@ -605,7 +606,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.DENSEWOOD_FENCE_GATE.get());
 		dropSelf(CABlocks.PEACH_FENCE_GATE.get());
 		dropSelf(CABlocks.SKYWOOD_FENCE_GATE.get());
-		dropSelf(CABlocks.CRYSTAL_FENCE_GATE.get());
+		dropSelf(CABlocks.CRYSTALWOOD_FENCE_GATE.get());
 		dropSelf(CABlocks.APPLE_PRESSURE_PLATE.get());
 		dropSelf(CABlocks.CHERRY_PRESSURE_PLATE.get());
 		dropSelf(CABlocks.DUPLICATION_PRESSURE_PLATE.get());
@@ -623,7 +624,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.DENSEWOOD_BUTTON.get());
 		dropSelf(CABlocks.PEACH_BUTTON.get());
 		dropSelf(CABlocks.SKYWOOD_BUTTON.get());
-		dropSelf(CABlocks.CRYSTAL_BUTTON.get());
+		dropSelf(CABlocks.CRYSTALWOOD_BUTTON.get());
 
 		dropSelf(CABlocks.APPLE_SIGN.get());
 		dropSelf(CABlocks.CHERRY_SIGN.get());
@@ -642,6 +643,7 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.DENSEWOOD_TRAPDOOR.get());
 		dropSelf(CABlocks.PEACH_TRAPDOOR.get());
 		dropSelf(CABlocks.SKYWOOD_TRAPDOOR.get());
+		dropSelf(CABlocks.CRYSTALWOOD_TRAPDOOR.get());
 
 		dropSelf(CABlocks.APPLE_GATE_BLOCK.get());
 		dropSelf(CABlocks.CHERRY_GATE_BLOCK.get());

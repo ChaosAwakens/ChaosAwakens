@@ -45,18 +45,16 @@ public class AnimationTriggerPacket implements ICAPacket {
 	}
 	
 	private static EDefaultLoopTypes utfToLoopEnum(String name) {
-		if(name.equals("LOOP"))
-			return EDefaultLoopTypes.LOOP;
-		else if(name.equals("HOLD_ON_LAST_FRAME"))
-			return EDefaultLoopTypes.HOLD_ON_LAST_FRAME;
-		else
-			return EDefaultLoopTypes.PLAY_ONCE;
+		if (name.equals("LOOP")) return EDefaultLoopTypes.LOOP;
+		else if (name.equals("HOLD_ON_LAST_FRAME")) return EDefaultLoopTypes.HOLD_ON_LAST_FRAME;
+		else return EDefaultLoopTypes.PLAY_ONCE;
 	}
 
 	@Override
 	public void onRecieve(Supplier<Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			Optional<World> clientWorldHolder = LogicalSidedProvider.CLIENTWORLD.get(ctx.get().getDirection().getReceptionSide());
+			
 			clientWorldHolder.filter(ClientWorld.class::isInstance).ifPresent(curWorld -> {
 				Entity target = curWorld.getEntity(animatableOwnerID);
 				
@@ -64,7 +62,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
 					final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
 					targetAnimatable.getControllerWrapperByName(controllerName).playAnimation(targetAnim, clearCache);
-					targetAnimatable.playAnimation(targetAnim);
+					targetAnimatable.playAnimation(targetAnim, clearCache);
 				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
 			});
 		});

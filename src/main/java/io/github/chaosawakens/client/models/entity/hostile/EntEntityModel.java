@@ -3,7 +3,7 @@ package io.github.chaosawakens.client.models.entity.hostile;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.hostile.EntEntity;
-import io.github.chaosawakens.common.entity.hostile.EntEntity.EntType;
+import io.github.chaosawakens.common.util.EnumUtil.EntType;
 import net.minecraft.util.ResourceLocation;
 
 public class EntEntityModel extends ExtendedAnimatedTickingGeoModel<EntEntity> {

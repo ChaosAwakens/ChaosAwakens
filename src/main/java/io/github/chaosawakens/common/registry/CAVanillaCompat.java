@@ -131,13 +131,13 @@ public class CAVanillaCompat {
 		registerStrippable(CABlocks.DEAD_DUPLICATION_LOG.get(), CABlocks.STRIPPED_DEAD_DUPLICATION_LOG.get());
 		registerStrippable(CABlocks.DEAD_DUPLICATION_WOOD.get(), CABlocks.STRIPPED_DEAD_DUPLICATION_WOOD.get());
 		registerStrippable(CABlocks.SKYWOOD_LOG.get(), CABlocks.STRIPPED_SKYWOOD_LOG.get());
-		registerStrippable(CABlocks.SKYWOOD_WOOD.get(), CABlocks.STRIPPED_SKYWOOD_WOOD.get());
+		registerStrippable(CABlocks.SKYWOOD.get(), CABlocks.STRIPPED_SKYWOOD.get());
 		registerStrippable(CABlocks.GINKGO_LOG.get(), CABlocks.STRIPPED_GINKGO_LOG.get());
 		registerStrippable(CABlocks.GINKGO_WOOD.get(), CABlocks.STRIPPED_GINKGO_WOOD.get());
 		registerStrippable(CABlocks.MESOZOIC_LOG.get(), CABlocks.STRIPPED_MESOZOIC_LOG.get());
 		registerStrippable(CABlocks.MESOZOIC_WOOD.get(), CABlocks.STRIPPED_MESOZOIC_WOOD.get());
 		registerStrippable(CABlocks.DENSEWOOD_LOG.get(), CABlocks.STRIPPED_DENSEWOOD_LOG.get());
-		registerStrippable(CABlocks.DENSEWOOD_WOOD.get(), CABlocks.STRIPPED_DENSEWOOD_WOOD.get());
+		registerStrippable(CABlocks.DENSEWOOD.get(), CABlocks.STRIPPED_DENSEWOOD.get());
 	}
 	
 	private static void setFlammableBlocks() {
@@ -183,9 +183,9 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.PEACH_FENCE_GATE.get(), 5, 20);
 		registerFlammable(CABlocks.SKYWOOD_LEAVES.get(), 30, 60);
 		registerFlammable(CABlocks.SKYWOOD_LOG.get(), 5, 5);
-		registerFlammable(CABlocks.SKYWOOD_WOOD.get(), 5, 5);
+		registerFlammable(CABlocks.SKYWOOD.get(), 5, 5);
 		registerFlammable(CABlocks.STRIPPED_SKYWOOD_LOG.get(), 5, 5);
-		registerFlammable(CABlocks.STRIPPED_SKYWOOD_WOOD.get(), 5, 5);
+		registerFlammable(CABlocks.STRIPPED_SKYWOOD.get(), 5, 5);
 		registerFlammable(CABlocks.SKYWOOD_PLANKS.get(), 5, 20);
 		registerFlammable(CABlocks.SKYWOOD_SLAB.get(), 5, 20);
 		registerFlammable(CABlocks.SKYWOOD_STAIRS.get(), 5, 20);
@@ -213,9 +213,9 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.MESOZOIC_FENCE_GATE.get(), 5, 20);
 		registerFlammable(CABlocks.DENSEWOOD_LEAVES.get(), 30, 60);
 		registerFlammable(CABlocks.DENSEWOOD_LOG.get(), 5, 5);
-		registerFlammable(CABlocks.DENSEWOOD_WOOD.get(), 5, 5);
+		registerFlammable(CABlocks.DENSEWOOD.get(), 5, 5);
 		registerFlammable(CABlocks.STRIPPED_DENSEWOOD_LOG.get(), 5, 5);
-		registerFlammable(CABlocks.STRIPPED_DENSEWOOD_WOOD.get(), 5, 5);
+		registerFlammable(CABlocks.STRIPPED_DENSEWOOD.get(), 5, 5);
 		registerFlammable(CABlocks.DENSEWOOD_PLANKS.get(), 5, 20);
 		registerFlammable(CABlocks.DENSEWOOD_SLAB.get(), 5, 20);
 		registerFlammable(CABlocks.DENSEWOOD_STAIRS.get(), 5, 20);
@@ -224,13 +224,13 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.RED_CRYSTAL_LEAVES.get(), 30, 60);
 		registerFlammable(CABlocks.GREEN_CRYSTAL_LEAVES.get(), 30, 60);
 		registerFlammable(CABlocks.YELLOW_CRYSTAL_LEAVES.get(), 30, 60);
-		registerFlammable(CABlocks.CRYSTAL_LOG.get(), 5, 5);
-		registerFlammable(CABlocks.CRYSTAL_WOOD.get(), 5, 5);
-		registerFlammable(CABlocks.CRYSTAL_PLANKS.get(), 5, 20);
-		registerFlammable(CABlocks.CRYSTAL_SLAB.get(), 5, 20);
-		registerFlammable(CABlocks.CRYSTAL_STAIRS.get(), 5, 20);
-		registerFlammable(CABlocks.CRYSTAL_FENCE.get(), 5, 20);
-		registerFlammable(CABlocks.CRYSTAL_FENCE_GATE.get(), 5, 20);
+		registerFlammable(CABlocks.CRYSTALWOOD_LOG.get(), 5, 5);
+		registerFlammable(CABlocks.CRYSTALWOOD.get(), 5, 5);
+		registerFlammable(CABlocks.CRYSTALWOOD_PLANKS.get(), 5, 20);
+		registerFlammable(CABlocks.CRYSTALWOOD_SLAB.get(), 5, 20);
+		registerFlammable(CABlocks.CRYSTALWOOD_STAIRS.get(), 5, 20);
+		registerFlammable(CABlocks.CRYSTALWOOD_FENCE.get(), 5, 20);
+		registerFlammable(CABlocks.CRYSTALWOOD_FENCE_GATE.get(), 5, 20);
 		registerFlammable(CABlocks.CYAN_ROSE.get(), 60, 100);
 		registerFlammable(CABlocks.RED_ROSE.get(), 60, 100);
 		registerFlammable(CABlocks.PAEONIA.get(), 60, 100);

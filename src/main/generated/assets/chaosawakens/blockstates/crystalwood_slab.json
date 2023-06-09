@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "chaosawakens:block/crystalwood_slab_top"
+    },
+    "type=bottom": {
+      "model": "chaosawakens:block/crystalwood_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/crystalwood_planks"
+    }
+  }
+}

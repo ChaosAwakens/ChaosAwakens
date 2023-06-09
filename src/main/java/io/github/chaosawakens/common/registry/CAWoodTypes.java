@@ -3,17 +3,17 @@ package io.github.chaosawakens.common.registry;
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.renderer.Atlases;
-import net.minecraft.util.ResourceLocation;
 
 public class CAWoodTypes {
-	public static final WoodType APPLE = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "apple").toString());
-	public static final WoodType CHERRY = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "cherry").toString());
-	public static final WoodType DENSEWOOD = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "densewood").toString());
-	public static final WoodType DUPLICATION = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "duplication").toString());
-	public static final WoodType GINKGO = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "ginkgo").toString());
-	public static final WoodType MESOZOIC = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "mesozoic").toString());
-	public static final WoodType PEACH = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "peach").toString());
-	public static final WoodType SKYWOOD = WoodType.create(new ResourceLocation(ChaosAwakens.MODID, "skywood").toString());
+	public static final WoodType APPLE = WoodType.create(ChaosAwakens.prefix("apple").toString());
+	public static final WoodType CHERRY = WoodType.create(ChaosAwakens.prefix("cherry").toString());
+	public static final WoodType DENSEWOOD = WoodType.create(ChaosAwakens.prefix("densewood").toString());
+	public static final WoodType DUPLICATION = WoodType.create(ChaosAwakens.prefix("duplication").toString());
+	public static final WoodType GINKGO = WoodType.create(ChaosAwakens.prefix("ginkgo").toString());
+	public static final WoodType MESOZOIC = WoodType.create(ChaosAwakens.prefix("mesozoic").toString());
+	public static final WoodType PEACH = WoodType.create(ChaosAwakens.prefix("peach").toString());
+	public static final WoodType SKYWOOD = WoodType.create(ChaosAwakens.prefix("skywood").toString());
+	public static final WoodType CRYSTALWOOD = WoodType.create(ChaosAwakens.prefix("crystalwood").toString());
 	
 	public static void registerWoodtypes() {
 		WoodType.register(CAWoodTypes.APPLE);
@@ -24,6 +24,7 @@ public class CAWoodTypes {
 		WoodType.register(CAWoodTypes.MESOZOIC);
 		WoodType.register(CAWoodTypes.PEACH);
 		WoodType.register(CAWoodTypes.SKYWOOD);
+		WoodType.register(CAWoodTypes.CRYSTALWOOD);
 	}
 	
 	public static void registerWoodTypesAtlas() {
@@ -35,5 +36,6 @@ public class CAWoodTypes {
 		Atlases.addWoodType(CAWoodTypes.MESOZOIC);
 		Atlases.addWoodType(CAWoodTypes.PEACH);
 		Atlases.addWoodType(CAWoodTypes.SKYWOOD);
+		Atlases.addWoodType(CAWoodTypes.CRYSTALWOOD);
 	}
 }

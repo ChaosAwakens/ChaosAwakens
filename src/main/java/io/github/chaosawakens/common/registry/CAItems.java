@@ -244,7 +244,8 @@ public class CAItems {
 	public static final RegistryObject<CABoatItem> DENSEWOOD_BOAT = ITEMS.register("densewood_boat", () -> new CABoatItem(CAWoodTypes.DENSEWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> PEACH_BOAT = ITEMS.register("peach_boat", () -> new CABoatItem(CAWoodTypes.PEACH.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<CABoatItem> SKYWOOD_BOAT = ITEMS.register("skywood_boat", () -> new CABoatItem(CAWoodTypes.SKYWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
-
+	public static final RegistryObject<CABoatItem> CRYSTALWOOD_BOAT = ITEMS.register("crystalwood_boat", () -> new CABoatItem(CAWoodTypes.CRYSTALWOOD.name(), new Item.Properties().stacksTo(1).tab(CAItemGroups.ITEMS)));
+	
 	// TOOLS
 	// Ultimate
 	public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(EnumUtil.CAItemTier.TOOL_ULTIMATE, () -> CAConfigManager.MAIN_SERVER.ultimateSwordDamage, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),

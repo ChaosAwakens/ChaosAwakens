@@ -194,7 +194,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 		Advancement crystalWorld = registerAdvancement("crystal_world", FrameType.TASK, CABlocks.CRYSTAL_GRASS_BLOCK.get()).parent(root)
 				.addCriterion("crystal_world", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.CRYSTAL_WORLD))
 				.save(t, advancementId("crystal_world"));
-		Advancement clearlyWood = registerAdvancement("clearly_wood", FrameType.TASK, CABlocks.CRYSTAL_LOG.get()).parent(crystalWorld)
+		Advancement clearlyWood = registerAdvancement("clearly_wood", FrameType.TASK, CABlocks.CRYSTALWOOD_LOG.get()).parent(crystalWorld)
 				.addCriterion("crystal_wood", InventoryChangeTrigger.Instance.hasItems(ItemPredicate.Builder.item().of(CATags.Items.CRYSTAL_LOGS).build()))
 				.save(t, advancementId("clearly_wood"));
 

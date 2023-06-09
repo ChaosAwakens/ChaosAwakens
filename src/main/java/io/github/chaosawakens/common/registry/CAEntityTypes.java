@@ -27,7 +27,6 @@ import io.github.chaosawakens.common.entity.creature.water.fish.SparkFishEntity;
 import io.github.chaosawakens.common.entity.creature.water.fish.WoodFishEntity;
 import io.github.chaosawakens.common.entity.hostile.AggressiveAntEntity;
 import io.github.chaosawakens.common.entity.hostile.EntEntity;
-import io.github.chaosawakens.common.entity.hostile.EntEntity.EntType;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
@@ -44,6 +43,7 @@ import io.github.chaosawakens.common.entity.projectile.arrow.IrukandjiArrowEntit
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.bobber.UltimateFishingBobberEntity;
+import io.github.chaosawakens.common.util.EnumUtil.EntType;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;

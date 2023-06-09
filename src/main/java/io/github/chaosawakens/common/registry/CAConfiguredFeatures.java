@@ -537,7 +537,7 @@ public class CAConfiguredFeatures {
 		private static final BlockState CRYSTAL_ENERGY = CABlocks.CRYSTAL_ENERGY.get().defaultBlockState();
 		private static final BlockState PINK_TOURMALINE = CABlocks.BUDDING_PINK_TOURMALINE.get().defaultBlockState();
 		private static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().defaultBlockState();
-		private static final BlockState CRYSTAL_LOG = CABlocks.CRYSTAL_LOG.get().defaultBlockState();
+		private static final BlockState CRYSTAL_LOG = CABlocks.CRYSTALWOOD_LOG.get().defaultBlockState();
 		private static final BlockState GREEN_CRYSTAL_LEAVES = CABlocks.GREEN_CRYSTAL_LEAVES.get().defaultBlockState();
 		private static final BlockState RED_CRYSTAL_LEAVES = CABlocks.RED_CRYSTAL_LEAVES.get().defaultBlockState();
 		private static final BlockState YELLOW_CRYSTAL_LEAVES = CABlocks.YELLOW_CRYSTAL_LEAVES.get().defaultBlockState();

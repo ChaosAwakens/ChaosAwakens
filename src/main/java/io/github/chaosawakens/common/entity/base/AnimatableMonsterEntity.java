@@ -4,12 +4,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.api.animation.AnimationControllerWrapper;
-import io.github.chaosawakens.api.animation.ExpandedAnimationState;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -132,21 +130,16 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	@Override
 	protected void tickDeath() {
-		if (!level.isClientSide) {
-			AnimationControllerWrapper<? extends IAnimatableEntity> wrapper = getControllerWrapperByName(getDeathAnim()
-					.getController().getName());
-			if(wrapper.getAnimationState().equals(ExpandedAnimationState.Finished))
-				remove();
-		}
-		
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
 		if (getDeathAnim() != null) {
+			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getControllerWrapperByName(getDeathAnim().getController().getName());
+			
 			playAnimation(getDeathAnim());
-			if (getDeathAnim().hasAnimationFinished()) {
+			if (wrappedController.isAnimationFinished()) {
 				remove();
 				
-				for(int i = 0; i < 20; ++i) {
+				for (int i = 0; i < 20; ++i) {
 					double xOffset = this.random.nextGaussian() * 0.02D;
 					double yOffset = this.random.nextGaussian() * 0.02D;
 					double zOffset = this.random.nextGaussian() * 0.02D;
@@ -291,7 +284,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	public double getMeleeAttackReachSqr(LivingEntity target) {
 		if (target == null) return 0;
-		return this.getBbWidth() * 2.0F * this.getBbWidth() * 2.0F + target.getBbWidth();
+		return (this.getBbWidth() * 2.0F * this.getBbWidth() * 2.0F + target.getBbWidth()) / 1.5;
 	}
 	
 	protected boolean shouldPlayIdleAnim() {

@@ -28,7 +28,7 @@ public final class EnumUtil {
 		TOOL_AMETHYST(4, 2700, 9, 11, 18, () -> Ingredient.of(CAItems.AMETHYST.get())),
 		TOOL_RUBY(5, 3000, 10, 16, 22, () -> Ingredient.of(CAItems.RUBY.get())),
 		TOOL_TIGERS_EYE(4, 2400, 10, 8, 20, () -> Ingredient.of(CAItems.TIGERS_EYE.get())),
-		TOOL_CRYSTAL_WOOD(0, 300, 2, 1, 6, () -> Ingredient.of(CABlocks.CRYSTAL_PLANKS.get())),
+		TOOL_CRYSTAL_WOOD(0, 300, 2, 1, 6, () -> Ingredient.of(CABlocks.CRYSTALWOOD_PLANKS.get())),
 		TOOL_KYANITE(1, 800, 3, 2, 6, () -> Ingredient.of(CABlocks.KYANITE.get())),
 		TOOL_PINK_TOURMALINE(2, 1100, 7, 8, 6, () -> Ingredient.of(CAItems.PINK_TOURMALINE_INGOT.get())),
 		TOOL_CATS_EYE(3, 1600, 8, 8, 20, () -> Ingredient.of(CAItems.CATS_EYE_INGOT.get())),
@@ -187,7 +187,34 @@ public final class EnumUtil {
 		}
 	}
 	
-	//Config
+	// Entities
+	public enum EntType {
+		APPLE("apple"),
+		ACACIA("acacia"),
+		BIRCH("birch"),
+		CHERRY("cherry"),
+		CRIMSON("crimson"),
+		DARK_OAK("dark_oak"),
+		GINKGO("ginkgo"),
+		JUNGLE("jungle"),
+		OAK("oak"),
+		SKYWOOD("skywood"),
+		SPRUCE("spruce"),
+		PEACH("peach"),
+		WARPED("warped");
+
+		private final String name;
+
+		EntType(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return this.name;
+		}
+	}
+	
+	// Config
 	public enum ElytraDamageType {
 		ARMOR,
 		ELYTRA

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "side": "chaosawakens:block/crystal_log",
-    "end": "chaosawakens:block/crystal_log"
-  }
-}

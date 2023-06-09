@@ -1,11 +1,13 @@
 package io.github.chaosawakens.common.entity.hostile;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
+import io.github.chaosawakens.common.util.EnumUtil.EntType;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -164,29 +166,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 		return entControllers;
 	}
 	
-	public enum EntType {
-		APPLE("apple"),
-		ACACIA("acacia"),
-		BIRCH("birch"),
-		CHERRY("cherry"),
-		CRIMSON("crimson"),
-		DARK_OAK("dark_oak"),
-		GINKGO("ginkgo"),
-		JUNGLE("jungle"),
-		OAK("oak"),
-		SKYWOOD("skywood"),
-		SPRUCE("spruce"),
-		PEACH("peach"),
-		WARPED("warped");
-
-		private final String name;
-
-		EntType(String name) {
-			this.name = name;
-		}
-
-		public String getName() {
-			return this.name;
-		}
+	@Override
+	public <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() {
+		return super.getAnimations();
 	}
 }

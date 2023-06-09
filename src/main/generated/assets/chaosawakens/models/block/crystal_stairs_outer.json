@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "side": "chaosawakens:block/crystal_planks",
-    "bottom": "chaosawakens:block/crystal_planks",
-    "top": "chaosawakens:block/crystal_planks"
-  }
-}
