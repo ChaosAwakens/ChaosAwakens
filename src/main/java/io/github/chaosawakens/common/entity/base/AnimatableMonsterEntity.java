@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -133,17 +134,17 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
 		if (getDeathAnim() != null) {
-			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getControllerWrapperByName(getDeathAnim().getController().getName());
-			
+			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getControllerWrapperByName(getDeathAnim()
+					.getController().getName());
 			playAnimation(getDeathAnim());
 			if (wrappedController.isAnimationFinished()) {
-				remove();
-				
+				this.remove();
 				for (int i = 0; i < 20; ++i) {
 					double xOffset = this.random.nextGaussian() * 0.02D;
 					double yOffset = this.random.nextGaussian() * 0.02D;
 					double zOffset = this.random.nextGaussian() * 0.02D;
-					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset, yOffset, zOffset);
+					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset,
+							yOffset, zOffset);
 				}
 			}
 		} else {

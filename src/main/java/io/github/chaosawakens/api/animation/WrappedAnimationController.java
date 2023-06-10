@@ -31,7 +31,7 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	}
 	
 	public void tick() {
-		double delta = server == null ? controller.tickOffset / 50.0 : Math.abs(server.getNextTickTime() - Util.getMillis()) / 50.0;
+		double delta = server == null ? controller.tickOffset / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -63,7 +63,7 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	}
 	
 	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
-		if (!builder.getAnimation().animationName.equals(getCurrentAnimation().animationName) || isAnimationFinished()) {
+		if (!builder.getAnimation().animationName.equals(getCurrentAnimation().animationName) || clearCache) {
 			if (clearCache) builder.playAnimation(true);
 			else builder.playAnimation(false);
 			
@@ -81,15 +81,15 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	}
 	
 	public boolean isAnimationFinished() {
-		return animationState.equals(ExpandedAnimationState.FINISHED);
+		return this.animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return currentAnimation == null ? false : currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.RUNNING);
+		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.RUNNING);
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
-		return currentAnimation == null ? false : currentAnimation.animationName.equals(targetAnim.getAnimation().animationName) && animationState.equals(ExpandedAnimationState.RUNNING);
+		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName) && animationState.equals(ExpandedAnimationState.RUNNING);
 	}
 	
 	public ExpandedAnimationState getAnimationState() {
@@ -97,7 +97,7 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	}
 
 	public double getAnimationProgressTicks() {
-		return animationProgress + 3;
+		return animationProgress;
 	}
 	
 	public double getAnimationProgressSeconds() {

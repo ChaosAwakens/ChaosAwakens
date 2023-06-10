@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.ExpandedAnimationState;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -92,13 +93,16 @@ public class AnimatableMeleeGoal extends Goal {
 		if (owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			float targetAngle = (float) MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
-			float attackAngle = owner.yBodyRot % 360;
-
-			if (targetAngle < 0) targetAngle += 360;
-			if (attackAngle < 0) attackAngle += 360;
-			
-			float relativeHitAngle = targetAngle - attackAngle - 180;
+			float attackAngle = owner.yBodyRot + 180;
+			float relativeHitAngle = targetAngle - attackAngle;
 			if (MathUtil.isBetween(owner.getControllerWrapperByName(meleeAnim.get().getController().getName()).getAnimationProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
+				ChaosAwakens.debug("GOAL", "------------");
+				ChaosAwakens.debug("TARGET", potentialAffectedTarget);
+				ChaosAwakens.debug("TRGT ANGLE", targetAngle);
+				ChaosAwakens.debug("ATK ANGLE", attackAngle);
+				ChaosAwakens.debug("REL ATK ANGLE", relativeHitAngle);
+				ChaosAwakens.debug("RESTRICTION", MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange));
+				ChaosAwakens.debug("END", "------------");
 				if (owner.distanceToSqr(owner.getTarget()) <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) {
 					owner.doHurtTarget(potentialAffectedTarget);
 				}
