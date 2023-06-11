@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 
 public final class AnimationUtil {
 	
@@ -16,21 +16,21 @@ public final class AnimationUtil {
 	}
 
 	//TODO Prune
-	public static void consecutivelyPlayAnimations(IAnimatableEntity animatableOwner, AnimationController<? extends IAnimatableEntity> targetController, boolean shouldForce, SingletonAnimationBuilder... animations) {
+	public static void consecutivelyPlayAnimations(IAnimatableEntity animatableOwner, WrappedAnimationController<? extends IAnimatableEntity> targetWrapped, boolean shouldForce, SingletonAnimationBuilder... animations) {
 		if (animatableOwner != null) {
 			for (int i = 0; i < animations.length; i++) {
 				SingletonAnimationBuilder curAnim = animations[i];
 				SingletonAnimationBuilder nextAnim = animations[i + 1];
 				
-				curAnim.setController(targetController);
-				nextAnim.setController(targetController);
+				curAnim.setWrapped(targetWrapped);
+				nextAnim.setWrapped(targetWrapped);
 				
 				if (shouldForce) {
-					targetController.markNeedsReload();
-					targetController.setAnimation(curAnim.getBuilder());
+					targetWrapped.getWrappedController().markNeedsReload();
+					targetWrapped.getWrappedController().setAnimation(curAnim.getBuilder());
 				//	if (curAnim.hasAnimationFinished()) targetController.setAnimation(nextAnim.getBuilder());
 				} else {
-					targetController.setAnimation(curAnim.getBuilder());
+					targetWrapped.getWrappedController().setAnimation(curAnim.getBuilder());
 				//	if (curAnim.hasAnimationFinished()) targetController.setAnimation(nextAnim.getBuilder());
 				}
 			}
@@ -38,11 +38,11 @@ public final class AnimationUtil {
 	}
 
 	public static void consecutivelyPlayAnimations(IAnimatableEntity animatableOwner, boolean shouldForce, SingletonAnimationBuilder... animations) {
-		consecutivelyPlayAnimations(animatableOwner, animatableOwner.getMainController(), shouldForce, animations);
+		consecutivelyPlayAnimations(animatableOwner, animatableOwner.getMainWrappedController(), shouldForce, animations);
 	}
 
 	public static void consecutivelyPlayAnimations(IAnimatableEntity animatableOwner, SingletonAnimationBuilder... animations) {
-		consecutivelyPlayAnimations(animatableOwner, animatableOwner.getMainController(), true, animations);
+		consecutivelyPlayAnimations(animatableOwner, animatableOwner.getMainWrappedController(), true, animations);
 	}
 	
 	@Nonnull

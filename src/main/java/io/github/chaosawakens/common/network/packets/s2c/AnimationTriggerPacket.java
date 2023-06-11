@@ -60,10 +60,12 @@ public class AnimationTriggerPacket implements ICAPacket {
 				
 				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity && !"None".equals(animationName)) {
 					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
-					final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setController(targetAnimatable.getControllerByName(controllerName));
+					final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType)
+							.setWrapped(targetAnimatable.getControllerWrapperByName(controllerName));
 					targetAnimatable.getControllerWrapperByName(controllerName).playAnimation(targetAnim, clearCache);
 					targetAnimatable.playAnimation(targetAnim, clearCache);
-				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
+				} else if (target != null)
+					ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
 			});
 		});
 		

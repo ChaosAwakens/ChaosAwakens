@@ -119,7 +119,7 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	@Override
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {
-			playAnimation(getDeathAnim());
+			playAnimation(getDeathAnim(), false);
 			if (getDeathAnim().hasAnimationFinished()) remove();
 
 			for(int i = 0; i < 20; ++i) {
@@ -215,9 +215,9 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	}
 
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null) playAnimation(getIdleAnim());
+		if (getIdleAnim() != null) playAnimation(getIdleAnim(), false);
 		if (getSwimAnim() != null && isSwimming()) {
-			if (isInWater()) playAnimation(getSwimAnim());
+			if (isInWater()) playAnimation(getSwimAnim(), false);
 		}
 	}
 }

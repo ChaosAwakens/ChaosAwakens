@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -134,10 +133,9 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
 		if (getDeathAnim() != null) {
-			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getControllerWrapperByName(getDeathAnim()
-					.getController().getName());
-			playAnimation(getDeathAnim());
-			if (wrappedController.isAnimationFinished()) {
+			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getDeathAnim().getWrappedController();
+			playAnimation(getDeathAnim(), false);
+			if (wrappedController.isCurrentAnimationFinished()) {
 				this.remove();
 				for (int i = 0; i < 20; ++i) {
 					double xOffset = this.random.nextGaussian() * 0.02D;
@@ -293,7 +291,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(getIdleAnim());
-		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(getWalkAnim());
+		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
 	}
 }

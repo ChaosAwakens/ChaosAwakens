@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.boss.miniboss;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
@@ -39,17 +40,17 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private static final DataParameter<Boolean> IS_DEFENSIVE = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> UNDISTURBED_DURATION = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	private static final DataParameter<Float> DAMAGE_BUILDUP = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.FLOAT);
-	private final AnimationController<HerculesBeetleEntity> mainController = createMainMappedController("herculesbeetlemaincontroller");
-	private final AnimationController<HerculesBeetleEntity> attackController = createMappedController("herculesbeetleattackcontroller", this::attackPredicate);
-	private final AnimationController<HerculesBeetleEntity> deathController = createMappedController("herculesbeetledeathcontroller", this::deathPredicate);
+	private final WrappedAnimationController<HerculesBeetleEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("herculesbeetlemaincontroller"));
+	private final WrappedAnimationController<HerculesBeetleEntity> attackController = new WrappedAnimationController<>(this, createMappedController("herculesbeetleattackcontroller", this::attackPredicate));
+	private final WrappedAnimationController<HerculesBeetleEntity> deathController = new WrappedAnimationController<>(this, createMappedController("herculesbeetledeathcontroller", this::deathPredicate));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setController(deathController);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrapped(deathController);
 	private final SingletonAnimationBuilder docileAnim = new SingletonAnimationBuilder(this, "Docile", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder awakeningAnim = new SingletonAnimationBuilder(this, "Awaken", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder ramAnim = new SingletonAnimationBuilder(this, "Ram", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder grabAnim = new SingletonAnimationBuilder(this, "Grab", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder munchAnim = new SingletonAnimationBuilder(this, "Munch", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder ramAnim = new SingletonAnimationBuilder(this, "Ram", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder grabAnim = new SingletonAnimationBuilder(this, "Grab", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder munchAnim = new SingletonAnimationBuilder(this, "Munch", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
 	private static final byte RAM_ATTACK_ID = 1;
 	private static final byte MUNCH_ATTACK_ID = 2;
 	
@@ -77,13 +78,18 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isDocile() && !isAttacking()) playAnimation(docileAnim);
-		if (isAwakening()) playAnimation(awakeningAnim);
+		if (isDocile() && !isAttacking()) playAnimation(docileAnim, false);
+		if (isAwakening()) playAnimation(awakeningAnim, false);
 		return PlayState.CONTINUE;
 	}
 	

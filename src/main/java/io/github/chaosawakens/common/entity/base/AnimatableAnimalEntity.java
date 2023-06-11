@@ -77,7 +77,7 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	@Override
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {
-			playAnimation(getDeathAnim());
+			playAnimation(getDeathAnim(), false);
 			if (getDeathAnim().hasAnimationFinished()) remove();
 
 			for(int i = 0; i < 20; ++i) {
@@ -177,7 +177,7 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	}
 
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null) playAnimation(getIdleAnim());
-		if (getWalkAnim() != null && isMoving()) playAnimation(getWalkAnim());
+		if (getIdleAnim() != null) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving()) playAnimation(getWalkAnim(), false);
 	}
 }

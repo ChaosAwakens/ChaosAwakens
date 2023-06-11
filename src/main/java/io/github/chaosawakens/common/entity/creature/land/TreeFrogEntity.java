@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.AgeableEntity;
@@ -33,11 +34,11 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class TreeFrogEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(TreeFrogEntity.class, DataSerializers.INT);
-	private final AnimationController<TreeFrogEntity> mainController = createMainMappedController("treefrogmaincontroller");
-	private final AnimationController<TreeFrogEntity> ambienceController = createMainMappedController("treefrogambiencecontroller");
+	private final WrappedAnimationController<TreeFrogEntity> mainController = new WrappedAnimationController<TreeFrogEntity>(this, createMainMappedController("treefrogmaincontroller"));
+	private final WrappedAnimationController<TreeFrogEntity> ambienceController = new WrappedAnimationController<TreeFrogEntity>(this, createMainMappedController("treefrogambiencecontroller"));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder jumpAnim = new SingletonAnimationBuilder(this, "Jump", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder blinkAnim = new SingletonAnimationBuilder(this, "Blink", random.nextInt(3)).setController(ambienceController);
+	private final SingletonAnimationBuilder blinkAnim = new SingletonAnimationBuilder(this, "Blink", random.nextInt(3)).setWrapped(ambienceController);
 
 	public TreeFrogEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -58,6 +59,11 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public AnimationController<? extends IAnimatableEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -72,14 +78,12 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
-		if (!isMoving() && !isPlayingAnimation(blinkAnim, ambienceController)) playAnimation(blinkAnim);
+		if (!isMoving() && !isPlayingAnimation(blinkAnim, ambienceController)) playAnimation(blinkAnim, false);
 		return PlayState.CONTINUE;
 	}
 	
 	@Override
-	protected void registerGoals() {
-		
-	}
+	protected void registerGoals() {}
 	
 	@Override
 	protected void defineSynchedData() {

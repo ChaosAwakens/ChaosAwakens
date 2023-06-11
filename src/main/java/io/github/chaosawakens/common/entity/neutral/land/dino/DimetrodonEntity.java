@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.neutral.AnimatableAngerMeleeAttackGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableAngerableAnimalEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -53,12 +54,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(DimetrodonEntity.class, DataSerializers.INT);
-	private final AnimationController<DimetrodonEntity> mainController = createMainMappedController("dimetrodonmaincontroller");
-	private final AnimationController<DimetrodonEntity> attackController = createMappedController("dimetrodonattackcontroller", this::attackPredicate);
+	private final WrappedAnimationController<DimetrodonEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("dimetrodonmaincontroller"));
+	private final WrappedAnimationController<DimetrodonEntity> attackController = new WrappedAnimationController<>(this, createMappedController("dimetrodonattackcontroller", this::attackPredicate));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder biteAnim = new SingletonAnimationBuilder(this, "Bite Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder biteAnim = new SingletonAnimationBuilder(this, "Bite Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(60, 120);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH, CAItems.GREEN_FISH.get(), CAItems.SPARK_FISH.get());
 	private static final byte BITE_ATTACK_ID = 1;
@@ -84,6 +85,11 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 
 	@Override
 	public AnimationController<? extends IAnimatableEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -94,7 +100,7 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isInWater()) playAnimation(swimAnim);
+		if (isInWater()) playAnimation(swimAnim, false);
 		return PlayState.CONTINUE;
 	}
 	

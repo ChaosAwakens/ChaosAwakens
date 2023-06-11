@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.passive.water.whale.WhaleBreatheGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableWaterMobEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -31,7 +32,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class WhaleEntity extends AnimatableWaterMobEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<WhaleEntity> mainController = createMainMappedController("whalemaincontroller");
+	private final WrappedAnimationController<WhaleEntity> mainController = new WrappedAnimationController<WhaleEntity>(this, createMainMappedController("whalemaincontroller"));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
 	
@@ -54,6 +55,11 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 
 	@Override
 	public AnimationController<? extends IAnimatableEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 

@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.boss.robo;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -44,17 +45,17 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final ObjectArrayList<AnimationController<RoboJefferyEntity>> roboJefferyControllers = new ObjectArrayList<AnimationController<RoboJefferyEntity>>(1);
 	private final ServerBossInfo bossInfo = (ServerBossInfo) new ServerBossInfo(getType().getDescription().copy().append(getDisplayName().copy().withStyle(TextFormatting.DARK_PURPLE).withStyle(TextFormatting.BOLD)), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS).setDarkenScreen(true).setCreateWorldFog(true);
 	private static final DataParameter<Boolean> HAS_CORE = EntityDataManager.defineId(RoboJefferyEntity.class, DataSerializers.BOOLEAN);
-	private final AnimationController<RoboJefferyEntity> mainController = createMainMappedController("robojefferymaincontroller");
-	private final AnimationController<RoboJefferyEntity> ambienceController = createMappedController("robojefferyambiencecontroller", this::ambiencePredicate);
-	private final AnimationController<RoboJefferyEntity> attackController = createMappedController("robojefferyattackcontroller", this::attackPredicate);
+	private final WrappedAnimationController<RoboJefferyEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("robojefferymaincontroller"));
+	private final WrappedAnimationController<RoboJefferyEntity> ambienceController = new WrappedAnimationController<>(this, createMappedController("robojefferyambiencecontroller", this::ambiencePredicate));
+	private final WrappedAnimationController<RoboJefferyEntity> attackController = new WrappedAnimationController<>(this, createMappedController("robojefferyattackcontroller", this::attackPredicate));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setController(ambienceController);
-	private final SingletonAnimationBuilder lowHealthAnim = new SingletonAnimationBuilder(this, "Low Health", EDefaultLoopTypes.LOOP).setController(ambienceController);
+	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setWrapped(ambienceController);
+	private final SingletonAnimationBuilder lowHealthAnim = new SingletonAnimationBuilder(this, "Low Health", EDefaultLoopTypes.LOOP).setWrapped(ambienceController);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
 	public static final byte PUNCH_ATTACK_ID = 1;
 	public static final byte SMASH_ATTACK_ID = 2;
 	public static final byte LEAP_ATTACK_ID = 3;
@@ -87,6 +88,11 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -96,8 +102,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
-		if (!isAttacking() && getHealth() > getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(idleExtrasAnim);
-		if (getHealth() <= getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(lowHealthAnim);
+		if (!isAttacking() && getHealth() > getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(idleExtrasAnim, false);
+		if (getHealth() <= getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(lowHealthAnim, false);
 		return PlayState.CONTINUE;
 	}
 	

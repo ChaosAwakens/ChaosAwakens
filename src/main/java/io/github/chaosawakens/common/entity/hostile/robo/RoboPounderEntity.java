@@ -50,14 +50,14 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder tauntAnim = new SingletonAnimationBuilder(this, "Taunt", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
-	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
-	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "Right Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
-	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "Left Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
-	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
-	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
-	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
-	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setController(attackController.getController());
+	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "Right Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "Left Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SWING_ATTACK_ID = 2;
 	private static final byte DASH_ATTACK_ID = 3;
@@ -87,12 +87,17 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return mainController.getController();
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends AnimatableMonsterEntity> getMainWrappedController() {
+		return mainController;
 	}
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (shouldTaunt()) playAnimation(tauntAnim);
+		if (shouldTaunt()) playAnimation(tauntAnim, false);
 		return PlayState.CONTINUE;
 	}
 
@@ -139,24 +144,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		super.tick();
 
 		if (!level.isClientSide && !dead) handleTaunting();
-		if (!level.isClientSide && tickCount % 10 == 0 && isAlive()) {
-			//			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------------");
-			//			ChaosAwakens.debug("DEATH STATE", mainController.getAnimationState());
-			//			ChaosAwakens.debug("DEATH ANIM", mainController.getCurrentAnimation().animationName);
-			//			ChaosAwakens.debug("DEATH PROG", mainController.getAnimationProgressTicks());
-			//			ChaosAwakens.debug("ATK STATE", attackController.getAnimationState());
-			//			ChaosAwakens.debug("ATK ANIM", attackController.getCurrentAnimation().animationName);
-			//			ChaosAwakens.debug("ATK PROG", attackController.getAnimationProgressTicks());
-			//			ChaosAwakens.debug("ATK ID", getAttackID());
-			//			ChaosAwakens.debug("Anim", "--------------------------------------------------------------------");
-			//			
-			//			ChaosAwakens.debug("Controller", "--------------------------------------------------------------");
-			//			ChaosAwakens.debug("MAIN ANIM", mainController.getCurrentAnimation().animationName);
-			//			ChaosAwakens.debug("TARGET", (getTarget() != null ? getTarget() : "null"));
-			//			ChaosAwakens.debug("CONTROLLERS SIZE", getControllers().size());
-			//			if (getTarget() != null) ChaosAwakens.debug("AnimCont", "[Can Attak]: " + getTarget() != null && isAlive() && !isAttacking() && getTarget().isAlive() && MathUtil.getDistanceBetween(this, getTarget()) <= getMeleeAttackReachSqr(getTarget()) + 5D);
-			//			ChaosAwakens.debug("Controller", "--------------------------------------------------------------------------");
-		}
 	}
 
 	private void handleTaunting() {
@@ -165,8 +152,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 		if (getTarget() != null) {
 			for (LivingEntity potentialTarget : potentialTargets) {
-				if (getTarget() == potentialTarget && !confirmedTargets.contains(potentialTarget)) confirmedTargets.add(potentialTarget);
-				if (potentialTarget.isDeadOrDying() && confirmedTargets.contains(potentialTarget)) confirmedTargets.remove(potentialTarget);
+				if (getTarget() == potentialTarget && !confirmedTargets.contains(potentialTarget))
+					confirmedTargets.add(potentialTarget);
+				if (potentialTarget.isDeadOrDying() && confirmedTargets.contains(potentialTarget))
+					confirmedTargets.remove(potentialTarget);
 			}
 		}
 
@@ -179,7 +168,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (getAttackID() == PUNCH_ATTACK_ID || getAttackID() == DASH_ATTACK_ID) {
 			if (target instanceof PlayerEntity) {
 				PlayerEntity playerTarget = (PlayerEntity) target;
-				if (EntityUtil.isHoldingItem(playerTarget, Items.SHIELD)) EntityUtil.disableShield(playerTarget, 200);
+				if (EntityUtil.isHoldingItem(playerTarget, Items.SHIELD))
+					EntityUtil.disableShield(playerTarget, 200);
 			}
 		}
 	}

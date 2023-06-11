@@ -99,7 +99,7 @@ public abstract class AnimatableAngerableAnimalEntity extends AnimatableAnimalEn
 	
 	@Override
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isAttacking()) playAnimation(getIdleAnim());
-		if (getWalkAnim() != null && isMoving() && !isAttacking()) playAnimation(getWalkAnim());
+		if (getIdleAnim() != null && !isAttacking()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isAttacking()) playAnimation(getWalkAnim(), false);
 	}
 }

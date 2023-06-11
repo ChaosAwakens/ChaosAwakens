@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.ai.goals.hostile.air;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
@@ -43,6 +44,11 @@ public class WaspEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
+		return null;
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return null;
 	}
 

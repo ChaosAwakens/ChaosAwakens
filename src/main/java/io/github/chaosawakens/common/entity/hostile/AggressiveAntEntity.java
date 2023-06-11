@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.hostile;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.api.entity.ITeleporterMob;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.creature.land.AntEntity;
@@ -32,7 +33,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITeleporterMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<AggressiveAntEntity> mainController = createMainMappedController("aggressiveantmaincontroller");
+	private final WrappedAnimationController<AggressiveAntEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("aggressiveantmaincontroller"));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final BooleanValue tpConfig;
@@ -61,6 +62,11 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 

@@ -97,17 +97,25 @@ public class AnimatableAOEGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation) && EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange).size() >= amountThreshold && owner.isAlive() && owner.getTarget().isAlive() && owner.getAttackID() == (byte) 0 && actionPointTickStart <= aoeAnim.getLengthTicks() && actionPointTickEnd <= aoeAnim.getLengthTicks() && (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation)
+				&& EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange).size() >= amountThreshold
+				&& owner.isAlive() && owner.getTarget().isAlive() && owner.getAttackID() == (byte) 0
+				&& actionPointTickStart <= aoeAnim.getWrappedController().getAnimationLength()
+				&& actionPointTickEnd <= aoeAnim.getWrappedController().getAnimationLength()
+				&& (extraActivationConditions != null ?
+						extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation) && !aoeAnim.hasAnimationFinished() && owner.isAlive() && owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation)
+				&& !aoeAnim.getWrappedController().isAnimationFinished(aoeAnim) && owner.isAlive()
+				&& owner.getTarget().isAlive();
 	}
 
 	@Override
 	public void start() {
-		owner.playAnimation(aoeAnim);
+		owner.playAnimation(aoeAnim, false);
 		owner.setAttackID(attackId);
 		owner.getNavigation().stop();
 	}
@@ -121,18 +129,22 @@ public class AnimatableAOEGoal extends Goal {
 	public void tick() {
 		List<LivingEntity> affectedTargets = EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange);
 
-		if (shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
-		else if (aoeAnim.getProgressTicks() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
+		if (shouldFreezeRotation)
+			EntityUtil.freezeEntityRotation(owner);
+		else if (aoeAnim.getWrappedController().getAnimationProgress() < actionPointTickStart)
+			owner.lookAt(Type.EYES, owner.getTarget().position());
 		if (!affectedTargets.isEmpty()) {
 			for (LivingEntity affectedTarget : affectedTargets) {
-				if (MathUtil.isBetween(aoeAnim.getProgressTicks(), actionPointTickStart, actionPointTickEnd)) {
+				if (MathUtil.isBetween(aoeAnim.getWrappedController().getAnimationProgress(), actionPointTickStart,
+						actionPointTickEnd)) {
 					if (MathUtil.getDistanceBetween(owner, affectedTarget) <= aoeRange) {
 						owner.doHurtTarget(affectedTarget);
 					}
 				}
 			}
 		}
-		if (aoeAnim.getProgressTicks() >= actionPointTickStart && !shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
+		if (aoeAnim.getWrappedController().getAnimationProgress() >= actionPointTickStart && !shouldFreezeRotation)
+			EntityUtil.freezeEntityRotation(owner);
 	}
 
 }

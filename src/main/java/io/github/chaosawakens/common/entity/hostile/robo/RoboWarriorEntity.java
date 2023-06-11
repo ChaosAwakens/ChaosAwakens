@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.hostile.robo;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
@@ -19,7 +20,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<RoboWarriorEntity> mainController = createMainMappedController("robowarriormaincontroller");
+	private final WrappedAnimationController<RoboWarriorEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("robowarriormaincontroller"));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 
@@ -46,6 +47,11 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 

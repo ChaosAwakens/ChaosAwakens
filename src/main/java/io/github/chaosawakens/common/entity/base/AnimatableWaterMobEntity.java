@@ -77,7 +77,7 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	@Override
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {
-			playAnimation(getDeathAnim());
+			playAnimation(getDeathAnim(), false);
 			if (getDeathAnim().hasAnimationFinished()) remove();
 
 			for(int i = 0; i < 20; ++i) {
@@ -172,7 +172,7 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	}
 
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null) playAnimation(getIdleAnim());
-		if (getSwimAnim() != null && isSwimming()) playAnimation(getSwimAnim());
+		if (getIdleAnim() != null) playAnimation(getIdleAnim(), false);
+		if (getSwimAnim() != null && isSwimming()) playAnimation(getSwimAnim(), false);
 	}
 }

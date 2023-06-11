@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -49,7 +50,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<EnchantedGoldenAppleCowEntity> mainController = createMainMappedController("enchantedgoldenapplecowmaincontroller");
+	private final WrappedAnimationController<EnchantedGoldenAppleCowEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("enchantedgoldenapplecowmaincontroller"));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
@@ -72,6 +73,11 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public AnimationController<? extends IAnimatableEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 

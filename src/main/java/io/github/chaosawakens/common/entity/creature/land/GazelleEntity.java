@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.creature.land;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -48,7 +49,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class GazelleEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
-	private final AnimationController<GazelleEntity> mainController = createMainMappedController("gazellemaincontroller");
+	private final WrappedAnimationController<GazelleEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("gazellemaincontroller"));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
@@ -73,6 +74,11 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public AnimationController<? extends IAnimatableEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -98,7 +104,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 			@Override
 			public void start() {
 				super.start();
-				playAnimation(grazeAnim);
+				playAnimation(grazeAnim, false);
 			}
 		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));

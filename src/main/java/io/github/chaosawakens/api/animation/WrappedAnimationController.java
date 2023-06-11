@@ -31,7 +31,8 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	}
 	
 	public void tick() {
-		double delta = server == null ? controller.tickOffset / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+		double delta = server == null ? controller.tickOffset / 50.0 :
+			Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -80,39 +81,43 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 		return name;
 	}
 	
-	public boolean isAnimationFinished() {
+	public boolean isCurrentAnimationFinished() {
 		return this.animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
+	public boolean isAnimationFinished(String targetAnimName) {
+		return currentAnimation.animationName.equals(targetAnimName)
+				&& animationState.equals(ExpandedAnimationState.FINISHED);
+	}
+	
+	public boolean isAnimationFinished(IAnimationBuilder targetAnim) {
+		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName)
+				&& animationState.equals(ExpandedAnimationState.FINISHED);
+	}
+	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.RUNNING);
+		return currentAnimation.animationName.equals(targetAnimName)
+				&& animationState.equals(ExpandedAnimationState.RUNNING);
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
-		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName) && animationState.equals(ExpandedAnimationState.RUNNING);
+		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName)
+				&& animationState.equals(ExpandedAnimationState.RUNNING);
 	}
 	
 	public ExpandedAnimationState getAnimationState() {
 		return animationState;
 	}
 
-	public double getAnimationProgressTicks() {
+	public double getAnimationProgress() {
 		return animationProgress;
 	}
 	
-	public double getAnimationProgressSeconds() {
-		return animationProgress / 20;
-	}
-	
-	public double getAnimationLengthTicks() {
+	public double getAnimationLength() {
 		return animationLength;
 	}
 	
-	public double getAnimationLengthSeconds() {
-		return animationLength / 20;
-	}
-	
-	public AnimationController<T> getController() {
+	public AnimationController<T> getWrappedController() {
 		return controller;
 	}
 	

@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.hostile;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -34,14 +35,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class EntEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<AnimationController<EntEntity>> entControllers = new ObjectArrayList<AnimationController<EntEntity>>(1);
-	private final AnimationController<EntEntity> mainController = createMainMappedController("entmaincontroller");
-	private final AnimationController<EntEntity> attackController = createMappedController("entattackcontroller", this::attackPredicate);
-	private final AnimationController<EntEntity> deathController = createMappedController("entdeathcontroller", this::deathPredicate);
+	private final WrappedAnimationController<EntEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("entmaincontroller"));
+	private final WrappedAnimationController<EntEntity> attackController = new WrappedAnimationController<>(this, createMappedController("entattackcontroller", this::attackPredicate));
+	private final WrappedAnimationController<EntEntity> deathController = new WrappedAnimationController<>(this, createMappedController("entdeathcontroller", this::deathPredicate));
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setController(deathController);
-	private final SingletonAnimationBuilder punchAnim = new SingletonAnimationBuilder(this, "Punch", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
-	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash", EDefaultLoopTypes.PLAY_ONCE).setController(attackController);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrapped(deathController);
+	private final SingletonAnimationBuilder punchAnim = new SingletonAnimationBuilder(this, "Punch", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SMASH_ATTACK_ID = 2;
 	private final EntType entType;
@@ -69,6 +70,11 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
+		return mainController.getWrappedController();
+	}
+	
+	@Override
+	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
 		return mainController;
 	}
 

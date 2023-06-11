@@ -211,8 +211,8 @@ public abstract class AnimatableFlyingAnimalEntity extends AnimatableAnimalEntit
 	
 	@Override
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && isOnGround()) playAnimation(getIdleAnim());
-		if (getWalkAnim() != null && isOnGround()) playAnimation(getWalkAnim());
-		if (getFlyAnim() != null && !isOnGround()) playAnimation(getFlyAnim());
+		if (getIdleAnim() != null && isOnGround()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isOnGround()) playAnimation(getWalkAnim(), false);
+		if (getFlyAnim() != null && !isOnGround()) playAnimation(getFlyAnim(), false);
 	}
 }
