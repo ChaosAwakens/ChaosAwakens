@@ -1103,7 +1103,7 @@ public class CAEntityLootTables extends EntityLootTables {
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 		                        .add(ItemLootEntry.lootTableItem(Items.CHICKEN)
-				                        .apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
+				                        .apply(SetCount.setCount(RandomValueRange.between(0.0F, 1.0F)))
 				                        .apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
 				                        .apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 			                          	.when(KilledByPlayer.killedByPlayer()))));

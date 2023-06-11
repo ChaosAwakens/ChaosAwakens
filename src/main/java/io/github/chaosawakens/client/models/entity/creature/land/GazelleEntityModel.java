@@ -25,12 +25,12 @@ public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleE
 	@Override
 	public ResourceLocation getTextureLocation(GazelleEntity animatable) {
 		switch (animatable.getGazelleType()) {
-		default: return ChaosAwakens.prefix("textures/entity/gazelle/brown_gazelle.png");
-		case 1: return ChaosAwakens.prefix("textures/entity/gazelle/red_gazelle.png");
-		case 2: return ChaosAwakens.prefix("textures/entity/gazelle/dark_red_gazelle.png");
-		case 3: return ChaosAwakens.prefix("textures/entity/gazelle/tan_gazelle.png");
-		case 4: return ChaosAwakens.prefix("textures/entity/gazelle/beij_gazelle.png");
-		case 5: return ChaosAwakens.prefix("textures/entity/gazelle/black_gazelle.png");
+		default: return ChaosAwakens.prefix("textures/entity/creature/land/gazelle/brown_gazelle.png");
+		case 1: return ChaosAwakens.prefix("textures/entity/creature/land/gazelle/red_gazelle.png");
+		case 2: return ChaosAwakens.prefix("textures/entity/creature/land/gazelle/dark_red_gazelle.png");
+		case 3: return ChaosAwakens.prefix("textures/entity/creature/land/gazelle/tan_gazelle.png");
+		case 4: return ChaosAwakens.prefix("textures/entity/creature/land/gazelle/beij_gazelle.png");
+		case 5: return ChaosAwakens.prefix("textures/entity/creature/land/gazelle/black_gazelle.png");
 		}
 	}
 

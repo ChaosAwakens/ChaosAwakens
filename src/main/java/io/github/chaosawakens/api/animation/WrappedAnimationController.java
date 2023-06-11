@@ -80,7 +80,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isCurrentAnimationFinished() {
-		return this.animationState.equals(ExpandedAnimationState.FINISHED);
+		return animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
 	public boolean isAnimationFinished(String targetAnimName) {

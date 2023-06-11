@@ -14,7 +14,7 @@ public class StinkBugEntityModel extends ExtendedAnimatedTickingGeoModel<StinkBu
 
 	@Override
 	public ResourceLocation getModelLocation(StinkBugEntity animatable) {
-		return ChaosAwakens.prefix("geo/entity/land/stink_bug.geo.json");
+		return ChaosAwakens.prefix("geo/entity/creature/land/stink_bug.geo.json");
 	}
 
 	@Override

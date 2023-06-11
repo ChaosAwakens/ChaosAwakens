@@ -14,7 +14,7 @@ public class AntEntityModel extends ExtendedAnimatedTickingGeoModel<AntEntity> {
 
 	@Override
 	public ResourceLocation getAnimationFileLocation(AntEntity object) {
-		return ChaosAwakens.prefix("animations/entity/land/ant.animation.json");
+		return ChaosAwakens.prefix("animations/entity/creature/land/ant.animation.json");
 	}
 	
 	@Override

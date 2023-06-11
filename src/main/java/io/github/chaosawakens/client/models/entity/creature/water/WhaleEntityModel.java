@@ -14,7 +14,7 @@ public class WhaleEntityModel extends ExtendedAnimatedTickingGeoModel<WhaleEntit
 	
 	@Override
 	public ResourceLocation getModelLocation(WhaleEntity object) {
-		return ChaosAwakens.prefix("geo/entity/creature/water/whale.geo.json");
+		return ChaosAwakens.prefix("geo/entity/creature/creature/water/whale.geo.json");
 	}
 
 	@Override

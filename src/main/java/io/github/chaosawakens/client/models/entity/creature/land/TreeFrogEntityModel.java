@@ -9,12 +9,12 @@ public class TreeFrogEntityModel extends ExtendedAnimatedTickingGeoModel<TreeFro
 	
 	@Override
 	public ResourceLocation getAnimationFileLocation(TreeFrogEntity animatable) {
-		return ChaosAwakens.prefix("animations/tree_frog.animation.json");
+		return ChaosAwakens.prefix("animations/entity/creature/land/tree_frog.animation.json");
 	}
 	
 	@Override
 	public ResourceLocation getModelLocation(TreeFrogEntity animatable) {
-		return ChaosAwakens.prefix("geo/tree_frog.geo.json");
+		return ChaosAwakens.prefix("geo/entity/creature/land/tree_frog.geo.json");
 	}
 
 	@Override

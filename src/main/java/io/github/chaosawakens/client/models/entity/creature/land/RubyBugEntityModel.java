@@ -14,7 +14,7 @@ public class RubyBugEntityModel extends ExtendedAnimatedTickingGeoModel<RubyBugE
 
 	@Override
 	public ResourceLocation getModelLocation(RubyBugEntity object) {
-		return ChaosAwakens.prefix("geo/entity/land/ruby_bug.geo.json");
+		return ChaosAwakens.prefix("geo/entity/creature/land/ruby_bug.geo.json");
 	}
 
 	@Override
