@@ -66,8 +66,7 @@ public class AnimatableMeleeGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId)
-				&& owner.getTarget() != null && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
 				&& owner.distanceToSqr(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget()) + 1D
 				&&/* actionPointTickStart <= meleeAnim.getWrappedAnimLength()
 				&& actionPointTickEnd <= meleeAnim.getWrappedAnimLength()

@@ -36,13 +36,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<UltimateAppleCowEntity> mainController = new WrappedAnimationController<UltimateAppleCowEntity>(this, createMainMappedController("ultimateapplecowmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<UltimateAppleCowEntity>> ultimateAppleCowControllers = new ObjectArrayList<WrappedAnimationController<UltimateAppleCowEntity>>(1);
+	private final WrappedAnimationController<UltimateAppleCowEntity> mainController = createMainMappedController("ultimateapplecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 
@@ -61,14 +61,9 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<UltimateAppleCowEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -162,7 +157,7 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<UltimateAppleCowEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<UltimateAppleCowEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<UltimateAppleCowEntity>> getWrappedControllers() {
+		return ultimateAppleCowControllers;
 	}
 }

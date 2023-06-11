@@ -23,14 +23,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class BeaverEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<WrappedAnimationController<BeaverEntity>> beaverControllers = new ObjectArrayList<WrappedAnimationController<BeaverEntity>>(1);
 	private static final DataParameter<Boolean> CHIPPING = EntityDataManager.defineId(BeaverEntity.class, DataSerializers.BOOLEAN);
-	private final WrappedAnimationController<BeaverEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("beavermaincontroller"));
+	private final WrappedAnimationController<BeaverEntity> mainController = createMainMappedController("beavermaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder gnawAnim = new SingletonAnimationBuilder(this, "Gnaw", EDefaultLoopTypes.LOOP);
@@ -52,12 +52,7 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	}
 
 	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
-	
-	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<BeaverEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -102,17 +97,17 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public SingletonAnimationBuilder getIdleAnim() {
-		return null;
-	}
-
-	@Override
-	public SingletonAnimationBuilder getWalkAnim() {
 		return idleAnim;
 	}
 
 	@Override
-	public SingletonAnimationBuilder getDeathAnim() {
+	public SingletonAnimationBuilder getWalkAnim() {
 		return walkAnim;
+	}
+
+	@Override
+	public SingletonAnimationBuilder getDeathAnim() {
+		return null;
 	}
 
 	@Override
@@ -122,7 +117,7 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<BeaverEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<BeaverEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<BeaverEntity>> getWrappedControllers() {
+		return beaverControllers;
 	}
 }

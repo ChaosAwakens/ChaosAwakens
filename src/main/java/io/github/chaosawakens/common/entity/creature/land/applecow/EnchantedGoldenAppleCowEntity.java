@@ -44,13 +44,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<EnchantedGoldenAppleCowEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("enchantedgoldenapplecowmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>> enchantedGoldenAppleCowControllers = new ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>>(1);
+	private final WrappedAnimationController<EnchantedGoldenAppleCowEntity> mainController = createMainMappedController("enchantedgoldenapplecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
@@ -70,14 +70,9 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<EnchantedGoldenAppleCowEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -173,14 +168,12 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	@Nullable
 	@Override
 	public AgeableEntity getBreedOffspring(ServerWorld pServerLevel, AgeableEntity pMate) {
-		return CAConfigManager.MAIN_COMMON.enableEnchantedAnimalBreeding.get()
-				? pServerLevel.random.nextInt(1000) == 0 ? CAEntityTypes.ULTIMATE_APPLE_COW.get().create(pServerLevel)
-				: CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(pServerLevel) : CAEntityTypes.GOLDEN_APPLE_COW.get().create(pServerLevel);
+		return CAConfigManager.MAIN_COMMON.enableEnchantedAnimalBreeding.get() ? pServerLevel.random.nextInt(1000) == 0 ? CAEntityTypes.ULTIMATE_APPLE_COW.get().create(pServerLevel) : CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(pServerLevel) : CAEntityTypes.GOLDEN_APPLE_COW.get().create(pServerLevel);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<EnchantedGoldenAppleCowEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<EnchantedGoldenAppleCowEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>> getWrappedControllers() {
+		return enchantedGoldenAppleCowControllers;
 	}
 }

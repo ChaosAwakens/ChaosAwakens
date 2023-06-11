@@ -26,13 +26,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<AnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<AnimationController<HerculesBeetleEntity>>(1);
+	private final ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>>(1);
 	private static final DataParameter<Boolean> IS_DOCILE = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> DOCILITY_DURATION = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	private static final DataParameter<Boolean> IS_AWAKENING = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
@@ -40,17 +39,17 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private static final DataParameter<Boolean> IS_DEFENSIVE = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> UNDISTURBED_DURATION = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	private static final DataParameter<Float> DAMAGE_BUILDUP = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.FLOAT);
-	private final WrappedAnimationController<HerculesBeetleEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("herculesbeetlemaincontroller"));
-	private final WrappedAnimationController<HerculesBeetleEntity> attackController = new WrappedAnimationController<>(this, createMappedController("herculesbeetleattackcontroller", this::attackPredicate));
-	private final WrappedAnimationController<HerculesBeetleEntity> deathController = new WrappedAnimationController<>(this, createMappedController("herculesbeetledeathcontroller", this::deathPredicate));
+	private final WrappedAnimationController<HerculesBeetleEntity> mainController = createMainMappedController("herculesbeetlemaincontroller");
+	private final WrappedAnimationController<HerculesBeetleEntity> attackController = createMappedController("herculesbeetleattackcontroller", this::attackPredicate);
+	private final WrappedAnimationController<HerculesBeetleEntity> deathController = createMappedController("herculesbeetledeathcontroller", this::deathPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrapped(deathController);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(deathController);
 	private final SingletonAnimationBuilder docileAnim = new SingletonAnimationBuilder(this, "Docile", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder awakeningAnim = new SingletonAnimationBuilder(this, "Awaken", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder ramAnim = new SingletonAnimationBuilder(this, "Ram", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder grabAnim = new SingletonAnimationBuilder(this, "Grab", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder munchAnim = new SingletonAnimationBuilder(this, "Munch", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder ramAnim = new SingletonAnimationBuilder(this, "Ram", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder grabAnim = new SingletonAnimationBuilder(this, "Grab", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder munchAnim = new SingletonAnimationBuilder(this, "Munch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte RAM_ATTACK_ID = 1;
 	private static final byte MUNCH_ATTACK_ID = 2;
 	
@@ -75,14 +74,9 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<HerculesBeetleEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -309,7 +303,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<HerculesBeetleEntity>> getControllers() {
+	public ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> getWrappedControllers() {
 		return herculesBeetleControllers;
 	}
 	

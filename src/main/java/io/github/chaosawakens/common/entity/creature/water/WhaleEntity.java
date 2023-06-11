@@ -26,13 +26,13 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class WhaleEntity extends AnimatableWaterMobEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<WhaleEntity> mainController = new WrappedAnimationController<WhaleEntity>(this, createMainMappedController("whalemaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<WhaleEntity>> whaleControllers = new ObjectArrayList<WrappedAnimationController<WhaleEntity>>(1);
+	private final WrappedAnimationController<WhaleEntity> mainController = createMainMappedController("whalemaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
 	
@@ -52,14 +52,9 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<WhaleEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -81,6 +76,7 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 		this.goalSelector.addGoal(1, new FindWaterGoal(this));
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static boolean checkWhaleSpawnRules(IWorld world, BlockPos pos) {
 		if (pos.getY() > 25 && pos.getY() < world.getSeaLevel()) {
 			Optional<RegistryKey<Biome>> targetBiome = world.getBiomeName(pos);
@@ -115,7 +111,7 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<WhaleEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<WhaleEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<WhaleEntity>> getWrappedControllers() {
+		return whaleControllers;
 	}
 }

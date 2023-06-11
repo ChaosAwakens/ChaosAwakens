@@ -34,11 +34,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings("all")
 public class CABlockStateProvider extends BlockStateProvider {
-	ExistingFileHelper helper;
+	private final ExistingFileHelper helper;
 	
 	public CABlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
 		super(gen, ChaosAwakens.MODID, exFileHelper);
-		helper = exFileHelper;
+		this.helper = exFileHelper;
 	}
 
 	@Override
@@ -392,6 +392,12 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.crystalLogBlock(CABlocks.CRYSTALWOOD_LOG.get());
 		this.crystalWoodBlock(CABlocks.CRYSTALWOOD.get(), chaosRL("crystalwood_log"));
 		this.simpleBlock(CABlocks.CRYSTALWOOD_PLANKS.get());
+		this.simpleBlock(CABlocks.RED_CRYSTAL_LEAVES.get());
+		this.simpleBlock(CABlocks.GREEN_CRYSTAL_LEAVES.get());
+		this.simpleBlock(CABlocks.YELLOW_CRYSTAL_LEAVES.get());
+		this.simpleBlock(CABlocks.PINK_CRYSTAL_LEAVES.get());
+		this.simpleBlock(CABlocks.BLUE_CRYSTAL_LEAVES.get());
+		this.simpleBlock(CABlocks.ORANGE_CRYSTAL_LEAVES.get());
 		this.stairsBlock(CABlocks.APPLE_STAIRS.get(), chaosRL("apple_planks"));
 		this.stairsBlock(CABlocks.CHERRY_STAIRS.get(), chaosRL("cherry_planks"));
 		this.stairsBlock(CABlocks.DUPLICATION_STAIRS.get(), chaosRL("duplication_planks"));
@@ -454,6 +460,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.trapdoorBlock(CABlocks.DENSEWOOD_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.PEACH_TRAPDOOR.get());
 		this.trapdoorBlock(CABlocks.SKYWOOD_TRAPDOOR.get());
+		this.trapdoorBlock(CABlocks.CRYSTALWOOD_TRAPDOOR.get());
 		this.doorBlock(CABlocks.APPLE_DOOR.get());
 		this.doorBlock(CABlocks.CHERRY_DOOR.get());
 		this.doorBlock(CABlocks.DUPLICATION_DOOR.get());
@@ -462,6 +469,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.doorBlock(CABlocks.DENSEWOOD_DOOR.get());
 		this.doorBlock(CABlocks.PEACH_DOOR.get());
 		this.doorBlock(CABlocks.SKYWOOD_DOOR.get());
+		this.doorBlock(CABlocks.CRYSTALWOOD_DOOR.get());
 
 		this.simpleBlock(CABlocks.SKY_MOSS_BLOCK.get(), this.models().cubeAll(CABlocks.SKY_MOSS_BLOCK.getId().getPath(), chaosRL("sky_moss")));
 		this.leafCarpetBlock(CABlocks.SKY_MOSS_CARPET.get(), chaosRL("sky_moss"));
@@ -505,6 +513,8 @@ public class CABlockStateProvider extends BlockStateProvider {
 		this.noVariant(CABlocks.POTTED_GINKGO_SAPLING.get());
 		this.noVariant(CABlocks.POTTED_MESOZOIC_SAPLING.get());
 		this.noVariant(CABlocks.POTTED_DENSEWOOD_SAPLING.get());
+		this.noVariant(CABlocks.POTTED_APPLE_SAPLING.get());
+		this.noVariant(CABlocks.POTTED_CHERRY_SAPLING.get());
 		
 		this.sign(CABlocks.MESOZOIC_SIGN.get(), CABlocks.MESOZOIC_WALL_SIGN.get());
 		this.sign(CABlocks.DENSEWOOD_SIGN.get(), CABlocks.DENSEWOOD_WALL_SIGN.get());

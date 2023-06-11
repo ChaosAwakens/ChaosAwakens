@@ -13,14 +13,14 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<RoboSniperEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("robosnipermaincontroller"));
-
+	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(1);
+	private final WrappedAnimationController<RoboSniperEntity> mainController = createMainMappedController("robosnipermaincontroller");
+	
 	public RoboSniperEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
@@ -40,14 +40,9 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<RoboSniperEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -82,7 +77,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<RoboSniperEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<RoboSniperEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> getWrappedControllers() {
+		return roboSniperControllers;
 	}
 }

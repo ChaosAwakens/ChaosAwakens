@@ -974,11 +974,11 @@ public class CARecipeProvider extends RecipeProvider {
 		toolPickaxe(consumer, CAItems.TIGERS_EYE_PICKAXE.get(), CAItems.TIGERS_EYE.get());
 		toolAxe(consumer, CAItems.TIGERS_EYE_AXE.get(), CAItems.TIGERS_EYE.get());
 		toolHoe(consumer, CAItems.TIGERS_EYE_HOE.get(), CAItems.TIGERS_EYE.get());
-		toolSword(consumer, CAItems.CRYSTAL_WOOD_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
-		toolShovel(consumer, CAItems.CRYSTAL_WOOD_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
-		toolPickaxe(consumer, CAItems.CRYSTAL_WOOD_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
-		toolAxe(consumer, CAItems.CRYSTAL_WOOD_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
-		toolHoe(consumer, CAItems.CRYSTAL_WOOD_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolSword(consumer, CAItems.CRYSTALWOOD_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolShovel(consumer, CAItems.CRYSTALWOOD_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolPickaxe(consumer, CAItems.CRYSTALWOOD_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolAxe(consumer, CAItems.CRYSTALWOOD_AXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
+		toolHoe(consumer, CAItems.CRYSTALWOOD_HOE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.CRYSTALWOOD_PLANKS.get());
 		toolSword(consumer, CAItems.KYANITE_SWORD.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
 		toolShovel(consumer, CAItems.KYANITE_SHOVEL.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());
 		toolPickaxe(consumer, CAItems.KYANITE_PICKAXE.get(), CAItems.CRYSTAL_SHARD.get(), CABlocks.KYANITE.get());

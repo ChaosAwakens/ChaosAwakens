@@ -52,19 +52,19 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<WrappedAnimationController<CrystalGatorEntity>> crystalGatorControllers = new ObjectArrayList<WrappedAnimationController<CrystalGatorEntity>>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
-	private final WrappedAnimationController<CrystalGatorEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("crystalgatormaincontroller"));
-	private final WrappedAnimationController<CrystalGatorEntity> attackController = new WrappedAnimationController<>(this, createMappedController("crystalgatorattackcontroller", this::attackPredicate));
+	private final WrappedAnimationController<CrystalGatorEntity> mainController = createMainMappedController("crystalgatormaincontroller");
+	private final WrappedAnimationController<CrystalGatorEntity> attackController = createMappedController("crystalgatorattackcontroller", this::attackPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder biteAnim = new SingletonAnimationBuilder(this, "Bite Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder biteAnim = new SingletonAnimationBuilder(this, "Bite Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(40, 80);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
 	private static final byte BITE_ATTACK_ID = 1;
@@ -87,14 +87,9 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<CrystalGatorEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -214,8 +209,8 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<CrystalGatorEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<CrystalGatorEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<CrystalGatorEntity>> getWrappedControllers() {
+		return crystalGatorControllers;
 	}
 	
 	private class CrystalGatorData extends AgeableData {

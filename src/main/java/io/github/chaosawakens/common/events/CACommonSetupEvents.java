@@ -244,9 +244,9 @@ public class CACommonSetupEvents {
 			event.setBurnTime(300);
 		} else if (fuel.getItem() instanceof CABoatItem) {
 			event.setBurnTime(1200);
-		} else if (fuel.getItem() == CAItems.CRYSTAL_WOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_SWORD.get()
-				|| fuel.getItem() == CAItems.CRYSTAL_WOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTAL_WOOD_AXE.get()
-				|| fuel.getItem() == CAItems.CRYSTAL_WOOD_PICKAXE.get() || fuel.getItem() == CAItems.APPLE_SIGN.get() 
+		} else if (fuel.getItem() == CAItems.CRYSTALWOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTALWOOD_SWORD.get()
+				|| fuel.getItem() == CAItems.CRYSTALWOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTALWOOD_AXE.get()
+				|| fuel.getItem() == CAItems.CRYSTALWOOD_PICKAXE.get() || fuel.getItem() == CAItems.APPLE_SIGN.get() 
 				|| fuel.getItem() == CAItems.CHERRY_SIGN.get() || fuel.getItem() == CAItems.DUPLICATION_SIGN.get() 
 				|| fuel.getItem() == CAItems.GINKGO_SIGN.get() || fuel.getItem() == CAItems.PEACH_SIGN.get() || fuel.getItem() == CAItems.SKYWOOD_SIGN.get()
 				|| fuel.getItem() == CABlocks.APPLE_DOOR.get().asItem() || fuel.getItem() == CABlocks.CHERRY_DOOR.get().asItem()

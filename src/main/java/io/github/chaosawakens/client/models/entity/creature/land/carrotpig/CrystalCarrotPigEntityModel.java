@@ -14,7 +14,7 @@ public class CrystalCarrotPigEntityModel extends ExtendedAnimatedTickingGeoModel
 
 	@Override
 	public ResourceLocation getModelLocation(CrystalCarrotPigEntity object) {
-		return ChaosAwakens.prefix("geo/entity/land/carrot_pig.geo.json");
+		return ChaosAwakens.prefix("geo/entity/creature/land/carrot_pig.geo.json");
 	}
 
 	@Override

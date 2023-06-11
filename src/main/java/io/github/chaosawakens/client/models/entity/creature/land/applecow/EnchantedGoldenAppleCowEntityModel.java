@@ -14,7 +14,7 @@ public class EnchantedGoldenAppleCowEntityModel extends ExtendedAnimatedTickingG
 
 	@Override
 	public ResourceLocation getModelLocation(EnchantedGoldenAppleCowEntity object) {
-		return ChaosAwakens.prefix("geo/entity/land/apple_cow.geo.json");
+		return ChaosAwakens.prefix("geo/entity/creature/land/apple_cow.geo.json");
 	}
 
 	@Override

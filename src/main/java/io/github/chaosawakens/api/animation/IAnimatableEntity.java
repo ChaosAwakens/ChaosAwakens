@@ -26,16 +26,7 @@ import software.bernie.geckolib3.util.AnimationUtils;
 
 public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	
-	//TODO Update comments were necessary
-	
-	/**
-	 * The main animation controller attached to the entity. Can be used to set animations outside of the <code>predicate(AnimationEvent<E> event)</code>
-	 * method.
-	 * @return The animation controller attached to the entity, CANNOT BE NULL!
-	 */
-	AnimationController<? extends IAnimatableEntity> getMainController();
-	
-	WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController();
+	<E extends IAnimatableEntity> WrappedAnimationController<? extends E> getMainWrappedController();
 	
 	/**
 	 * A forced (tick) interval between each animation. Is used by default in controller creation methods in this interface, though there are overloaded methods 
@@ -52,28 +43,8 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * @return a PlayState for each set animation.
 	 */
 	<E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
-
-	/**
-	 * A list of controllers an {@link IAnimatableEntity} has. When creating a controller, you must use {@link IAnimatableEntity#createMainMappedController(String)} 
-	 * or {@link IAnimatableEntity#createMappedController(String, IAnimationPredicate)} <- if the controller you're creating isn't the main one. This list has 
-	 * a variety of use cases, such as automatic controller registration or handling controller-specific operations.
-	 * @param <E> An instance of {@link IAnimatableEntity}.
-	 * @return A list that an {@link IAnimatableEntity} stores {@link AnimationController}s in.
-	 */
-	<E extends IAnimatableEntity> ObjectArrayList<AnimationController<? extends E>> getControllers();
 	
-	default <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers() {
-		return null;
-	}
-	
-	/**
-	 * A list of animations that an {@link IAnimatableEntity} caches for future use. This helps mitigate some optimization issues. Do keep in mind that 
-	 * any instance of {@code IAnimationBuilder} instantiated handles storing and removing itself from this list. Just have this return a final {@link ObjectArrayList} 
-	 * field of the correct type and the rest is automatically handled.
-	 * @param <E> An instance of {@link IAnimationBuilder}.
-	 * @return A list that an {@link IAnimatableEntity} stores animations in.
-	 */
-	default <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() { return null; }
+	<E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
 
 	@Override
 	default void registerControllers(AnimationData data) {
@@ -90,19 +61,19 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	@Nullable
 	default AnimationController<? extends IAnimatableEntity> getControllerByName(String name) {
-		if (getControllers().isEmpty()) return null;
+		if (getWrappedControllers().isEmpty()) return null;
 
-		ObjectArrayList<AnimationController<? extends IAnimatableEntity>> results = getControllers().stream()
+		ObjectArrayList<WrappedAnimationController<? extends IAnimatableEntity>> results = getWrappedControllers().stream()
 				.filter((p) -> p.getName().equalsIgnoreCase(name))
 				.collect(Collectors.toCollection(ObjectArrayList::new));
 
 		if (results.isEmpty()) return null;
 
-		return results.get(0);
+		return results.get(0).getWrappedController();
 	}
 	
 	default WrappedAnimationController<? extends IAnimatableEntity> getControllerWrapperByName(String name) {
-		if (getControllers().isEmpty()) return null;
+		if (getWrappedControllers().isEmpty()) return null;
 
 		ObjectArrayList<WrappedAnimationController<? extends IAnimatableEntity>> results = getWrappedControllers().stream()
 				.filter((p) -> p.getName().equalsIgnoreCase(name))
@@ -114,36 +85,30 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	@SuppressWarnings("unchecked")
-	default <E extends IAnimatableEntity> AnimationController<E> createMainMappedController(String name) {
-		final AnimationController<E> resultController = new AnimationController<E>((E) this, name, animationInterval(),
-				this::mainPredicate);
-		getControllers().add(resultController);
+	default <E extends IAnimatableEntity> WrappedAnimationController<E> createMainMappedController(String name) {
+		final WrappedAnimationController<E> resultController = new WrappedAnimationController<E>((E) this, new AnimationController<E>((E) this, name, animationInterval(), this::mainPredicate));
+		getWrappedControllers().add(resultController);
 		return resultController;
 	}
 	
 	@SuppressWarnings("unchecked")
-	default <E extends IAnimatableEntity> AnimationController<E> createMainMappedController(String name, int animInterval) {
-		final AnimationController<E> resultController = new AnimationController<E>((E) this, name, animInterval,
-				this::mainPredicate);
-		getControllers().add(resultController);
+	default <E extends IAnimatableEntity> WrappedAnimationController<E> createMainMappedController(String name, int animTickInterval) {
+		final WrappedAnimationController<E> resultController = new WrappedAnimationController<E>((E) this, new AnimationController<E>((E) this, name, animTickInterval, this::mainPredicate));
+		getWrappedControllers().add(resultController);
 		return resultController;
 	}
 
 	@SuppressWarnings("unchecked")
-	default <E extends IAnimatableEntity> AnimationController<E> createMappedController(String name,
-			IAnimationPredicate<E> animationPredicate) {
-		final AnimationController<E> resultController = new AnimationController<E>((E) this, name, animationInterval(),
-				animationPredicate);
-		getControllers().add(resultController);
+	default <E extends IAnimatableEntity> WrappedAnimationController<E> createMappedController(String name, IAnimationPredicate<E> animationPredicate) {
+		final WrappedAnimationController<E> resultController = new WrappedAnimationController<E>((E) this, new AnimationController<E>((E) this, name, animationInterval(), animationPredicate));
+		getWrappedControllers().add(resultController);
 		return resultController;
 	}
 	
 	@SuppressWarnings("unchecked")
-	default <E extends IAnimatableEntity> AnimationController<E> createMappedController(String name, int animInterval,
-			IAnimationPredicate<E> animationPredicate) {
-		final AnimationController<E> resultController = new AnimationController<E>((E) this, name, animInterval,
-				animationPredicate);
-		getControllers().add(resultController);
+	default <E extends IAnimatableEntity> WrappedAnimationController<E> createMappedController(String name, int animTickInterval, IAnimationPredicate<E> animationPredicate) {
+		final WrappedAnimationController<E> resultController = new WrappedAnimationController<E>((E) this, new AnimationController<E>((E) this, name, animTickInterval, animationPredicate));
+		getWrappedControllers().add(resultController);
 		return resultController;
 	}
 
@@ -153,7 +118,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	@Nullable
 	default Animation getCurrentAnimation() {
-		return getMainController().getCurrentAnimation();
+		return getMainWrappedController().getCurrentAnimation();
 	}
 
 	/**
@@ -165,52 +130,23 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	default Animation getCurrentAnimation(AnimationController<? extends IAnimatableEntity> targetController) {
 		return targetController.getCurrentAnimation();
 	}
-	
-	@Nullable
-	default IAnimationBuilder getCurrentAnimationAsCB(AnimationController<? extends IAnimatableEntity> targetController) {
-		Animation curAnim = targetController.getCurrentAnimation();
-		
-		for (IAnimationBuilder curAnimB : getAnimations()) {
-			if (curAnim.animationName == curAnimB.getAnimation().animationName) return curAnimB;
-		}
-		
-		return null;
-	}
-
-	@Nullable
-	default IAnimationBuilder getCurrentAnimationAsCB(String targetControllerName) {
-		return getCurrentAnimationAsCB(getControllerByName(targetControllerName));
-	}
-
-	@Nullable
-	default SingletonAnimationBuilder getCurrentAnimationAsSAB(AnimationController<? extends IAnimatableEntity> targetController) {
-		for (IAnimationBuilder curAnimB : getAnimations()) {
-			if (curAnimB instanceof SingletonAnimationBuilder) return (SingletonAnimationBuilder) getCurrentAnimationAsCB(targetController);
-		}
-		return null;
-	}
-
-	@Nullable
-	default SingletonAnimationBuilder getCurrentAnimationAsSAB(String targetControllerName) {
-		return getCurrentAnimationAsSAB(getControllerByName(targetControllerName));
-	}
 
 	default boolean isPlayingAnimation() {
-		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
+		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
 			if (controller.getCurrentAnimation() != null) return true;
 		}
 		return false;
 	}
 
 	default boolean isPlayingAnimation(Animation targetAnim) {
-		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
+		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
 			if (controller.getCurrentAnimation().animationName == targetAnim.animationName) return true;
 		}
 		return false;
 	}
 
 	default boolean isPlayingAnimation(String targetAnimName) {
-		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
+		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
 			if (controller.getCurrentAnimation().animationName == targetAnimName) return true;
 		}
 		return false;
@@ -220,8 +156,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		return getControllerWrapperByName(targetAnim.getWrappedController().getName()).isPlayingAnimation(targetAnim);
 	}
 
-	default <E extends IAnimatableEntity> boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim,
-			WrappedAnimationController<E> controllerToCheck) {
+	default <E extends IAnimatableEntity> boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim, WrappedAnimationController<E> controllerToCheck) {
 		if (controllerToCheck.getCurrentAnimation() == null) return false;
 		return controllerToCheck.getCurrentAnimation().animationName == targetAnim.getAnimation().animationName;
 	}
@@ -238,20 +173,16 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		return isPlayingAnimationInController(getControllerWrapperByName(targetControllerName));
 	}
 
-	default boolean isPlayingAnimationInController(String animName,
-			AnimationController<? extends IAnimatableEntity> targetController) {
-		return targetController.getCurrentAnimation() != null
-				&& targetController.getCurrentAnimation().animationName == animName;
+	default boolean isPlayingAnimationInController(String animName, AnimationController<? extends IAnimatableEntity> targetController) {
+		return targetController.getCurrentAnimation() != null && targetController.getCurrentAnimation().animationName == animName;
 	}
 
 	default boolean isPlayingAnimationInController(String animName, String targetControllerName) {
 		return isPlayingAnimationInController(animName, getControllerByName(targetControllerName));
 	}
 	
-	default boolean isPlayingAnimationInWrappedController(String animName,
-			WrappedAnimationController<? extends IAnimatableEntity> targetController) {
-		return targetController.getCurrentAnimation() != null
-				&& targetController.getCurrentAnimation().animationName == animName;
+	default boolean isPlayingAnimationInWrappedController(String animName, WrappedAnimationController<? extends IAnimatableEntity> targetController) {
+		return targetController.getCurrentAnimation() != null && targetController.getCurrentAnimation().animationName == animName;
 	}
 
 	default boolean isPlayingAnimationInWrappedController(String animName, String targetControllerName) {
@@ -278,29 +209,23 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
 		animation.getWrappedController().playAnimation(animation, false);
 		
-		if (!((Entity) this).level.isClientSide())
-			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(),
-					animation.getAnimation().animationName, animation.getLoopType(),
-					animation.getWrappedController().getName(), clearCache), (Entity) this);
+		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, animation.getLoopType(), animation.getWrappedController().getName(), clearCache), (Entity) this);
 	}
 	
 	//TODO Finish implementing this
 	default void stopAnimation(SingletonAnimationBuilder animation) {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
-
 		animation.stopAnimation();
-		if (!((Entity) this).level.isClientSide())
-			CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(),
-					animation.getWrappedController().getName(), animation.getAnimation().animationName), (Entity) this);
 		
+		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getWrappedController().getName(), animation.getAnimation().animationName), (Entity) this);
 	}
 
 	/**
 	 * Clears the animation cache, which also clears every stored animation within the entity.
 	 */
 	default void resetAnimationStates() {
-		for (AnimationController<? extends IAnimatableEntity> controller : getControllers()) {
-			controller.clearAnimationCache();
+		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
+			controller.getWrappedController().clearAnimationCache();
 		}
 	}
 
@@ -310,8 +235,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default void tickAnims() {
-		for (WrappedAnimationController<? extends IAnimatableEntity> wrapper : getWrappedControllers())
-			wrapper.tick();
+		for (WrappedAnimationController<? extends IAnimatableEntity> wrapper : getWrappedControllers()) wrapper.tick();
 	}
 
 	@SuppressWarnings("unchecked")

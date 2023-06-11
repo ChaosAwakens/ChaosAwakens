@@ -18,13 +18,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RubyBugEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<RubyBugEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("rubybugmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<RubyBugEntity>> rubyBugControllers = new ObjectArrayList<WrappedAnimationController<RubyBugEntity>>(1);
+	private final WrappedAnimationController<RubyBugEntity> mainController = createMainMappedController("rubybugmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 
@@ -43,14 +43,9 @@ public class RubyBugEntity extends AnimatableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<RubyBugEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -93,7 +88,7 @@ public class RubyBugEntity extends AnimatableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<RubyBugEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<RubyBugEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<RubyBugEntity>> getWrappedControllers() {
+		return rubyBugControllers;
 	}
 }

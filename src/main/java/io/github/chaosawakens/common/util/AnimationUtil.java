@@ -22,8 +22,8 @@ public final class AnimationUtil {
 				SingletonAnimationBuilder curAnim = animations[i];
 				SingletonAnimationBuilder nextAnim = animations[i + 1];
 				
-				curAnim.setWrapped(targetWrapped);
-				nextAnim.setWrapped(targetWrapped);
+				curAnim.setWrappedController(targetWrapped);
+				nextAnim.setWrappedController(targetWrapped);
 				
 				if (shouldForce) {
 					targetWrapped.getWrappedController().markNeedsReload();

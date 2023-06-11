@@ -17,13 +17,13 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class WoodFishEntity extends AnimatableGroupFishEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<WoodFishEntity> mainController = new WrappedAnimationController<WoodFishEntity>(this, createMainMappedController("woodfishmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<WoodFishEntity>> woodFishControllers = new ObjectArrayList<WrappedAnimationController<WoodFishEntity>>(1);
+	private final WrappedAnimationController<WoodFishEntity> mainController = createMainMappedController("woodfishmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
 
@@ -43,14 +43,9 @@ public class WoodFishEntity extends AnimatableGroupFishEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<WoodFishEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -97,7 +92,7 @@ public class WoodFishEntity extends AnimatableGroupFishEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<WoodFishEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<WoodFishEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<WoodFishEntity>> getWrappedControllers() {
+		return woodFishControllers;
 	}
 }

@@ -12,6 +12,7 @@ import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNav
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -34,7 +35,6 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
@@ -52,7 +52,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	abstract public AnimationFactory getFactory();
 
 	@Override
-	abstract public AnimationController<? extends AnimatableMonsterEntity> getMainController();
+	abstract public WrappedAnimationController<? extends AnimatableMonsterEntity> getMainWrappedController();
+	
+	@Override
+	abstract public <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
 
 	@Override
 	abstract public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
@@ -135,14 +138,14 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		if (getDeathAnim() != null) {
 			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getDeathAnim().getWrappedController();
 			playAnimation(getDeathAnim(), false);
+			
 			if (wrappedController.isCurrentAnimationFinished()) {
 				this.remove();
 				for (int i = 0; i < 20; ++i) {
 					double xOffset = this.random.nextGaussian() * 0.02D;
 					double yOffset = this.random.nextGaussian() * 0.02D;
 					double zOffset = this.random.nextGaussian() * 0.02D;
-					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset,
-							yOffset, zOffset);
+					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset, yOffset, zOffset);
 				}
 			}
 		} else {

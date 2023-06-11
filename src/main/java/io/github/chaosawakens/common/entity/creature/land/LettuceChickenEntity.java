@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.entity.creature.land;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
-import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -19,16 +18,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<AnimationController<LettuceChickenEntity>> lettuceChickenControllers = new ObjectArrayList<AnimationController<LettuceChickenEntity>>(1);
-	private final ObjectArrayList<? extends IAnimationBuilder> lettuceChickenAnimations = new ObjectArrayList<IAnimationBuilder>();
+	private final ObjectArrayList<WrappedAnimationController<LettuceChickenEntity>> lettuceChickenControllers = new ObjectArrayList<WrappedAnimationController<LettuceChickenEntity>>(1);
 	private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(LettuceChickenEntity.class, DataSerializers.BOOLEAN);
-	private final WrappedAnimationController<LettuceChickenEntity> mainController = new WrappedAnimationController<LettuceChickenEntity>(this, createMainMappedController("lettucechickenmaincontroller"));
+	private final WrappedAnimationController<LettuceChickenEntity> mainController = createMainMappedController("lettucechickenmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder sitAnim = new SingletonAnimationBuilder(this, "Sit", EDefaultLoopTypes.LOOP);
@@ -48,14 +45,9 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<LettuceChickenEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -97,13 +89,7 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<LettuceChickenEntity>> getControllers() {
+	public ObjectArrayList<WrappedAnimationController<LettuceChickenEntity>> getWrappedControllers() {
 		return lettuceChickenControllers;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() {
-		return (ObjectArrayList<E>) lettuceChickenAnimations;
 	}
 }

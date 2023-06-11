@@ -45,7 +45,6 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder = new AnimationBuilder().addAnimation(animName);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
-		this.owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, ILoopType loopType) {
@@ -56,7 +55,6 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder = new AnimationBuilder().addAnimation(animName, loopType);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
-		this.owner.getAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, int loopReps) {
@@ -66,11 +64,10 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder = new AnimationBuilder().addRepeatingAnimation(animName, loopReps);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 		this.animState = targetController.getAnimationState();
-		this.owner.getAnimations().add(this);
 	}
 
-	public SingletonAnimationBuilder setWrapped(WrappedAnimationController<? extends IAnimatableEntity> wrapped) {
-		this.targetController = wrapped;
+	public SingletonAnimationBuilder setWrappedController(WrappedAnimationController<? extends IAnimatableEntity> targetWrappedController) {
+		this.targetController = targetWrappedController;
 		return this;
 	}
 
@@ -103,11 +100,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		
 		if (isPlaying()) wasPlaying = true;
 		
-		return wasPlaying ?
-//				progress >= getLengthTicks()
-				targetController.getAnimationState() == ExpandedAnimationState.FINISHED
-				|| ( this.getWrappedController().getAnimationProgress() >= getWrappedAnimLength()
-				&& targetController.getAnimationState() == ExpandedAnimationState.RUNNING) : false;
+		return wasPlaying ? targetController.isAnimationFinished(this) || (getWrappedController().getAnimationProgress() >= getWrappedAnimLength() && targetController.getAnimationState() == ExpandedAnimationState.RUNNING) : false;
 	}
 
 	@Override
@@ -151,11 +144,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public double getWrappedAnimProgress() {
-		return this.getWrappedController().getAnimationProgress();
+		return getWrappedController().getAnimationProgress();
 	}
 
 	@Override
 	public double getWrappedAnimLength() {
-		return this.getWrappedController().getAnimationLength();
+		return getWrappedController().getAnimationLength();
 	}
 }

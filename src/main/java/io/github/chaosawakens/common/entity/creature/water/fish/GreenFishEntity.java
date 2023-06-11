@@ -17,13 +17,13 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class GreenFishEntity extends AnimatableGroupFishEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<GreenFishEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("greenfishmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<GreenFishEntity>> greenFishController = new ObjectArrayList<WrappedAnimationController<GreenFishEntity>>(1);
+	private final WrappedAnimationController<GreenFishEntity> mainController = createMainMappedController("greenfishmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
 
@@ -42,14 +42,9 @@ public class GreenFishEntity extends AnimatableGroupFishEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<GreenFishEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -96,7 +91,7 @@ public class GreenFishEntity extends AnimatableGroupFishEntity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<GreenFishEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<GreenFishEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<GreenFishEntity>> getWrappedControllers() {
+		return greenFishController;
 	}
 }

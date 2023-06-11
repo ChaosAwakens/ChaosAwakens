@@ -4,8 +4,10 @@ import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.passive.water.RandomRoamSwimmingGoal;
 import io.github.chaosawakens.common.registry.CAEffects;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
@@ -25,7 +27,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
@@ -41,7 +42,10 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	public abstract AnimationFactory getFactory();
 
 	@Override
-	public abstract AnimationController<? extends IAnimatableEntity> getMainController();
+	abstract public WrappedAnimationController<? extends AnimatableFishEntity> getMainWrappedController();
+	
+	@Override
+	abstract public <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
 
 	@Override
 	public abstract int animationInterval();
@@ -215,7 +219,7 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	}
 
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null) playAnimation(getIdleAnim(), false);
+		if (getIdleAnim() != null && !isSwimming()) playAnimation(getIdleAnim(), false);
 		if (getSwimAnim() != null && isSwimming()) {
 			if (isInWater()) playAnimation(getSwimAnim(), false);
 		}

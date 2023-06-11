@@ -14,15 +14,16 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<RoboWarriorEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("robowarriormaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<RoboWarriorEntity>> roboWarriorControllers = new ObjectArrayList<WrappedAnimationController<RoboWarriorEntity>>(1);
+	private final WrappedAnimationController<RoboWarriorEntity> mainController = createMainMappedController("robowarriormaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.LOOP);
 
 	public RoboWarriorEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -44,14 +45,9 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<RoboWarriorEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -85,12 +81,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
-		return null;
+		return deathAnim;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<RoboWarriorEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<RoboWarriorEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<RoboWarriorEntity>> getWrappedControllers() {
+		return roboWarriorControllers;
 	}
 }

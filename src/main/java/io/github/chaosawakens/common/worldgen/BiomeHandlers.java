@@ -69,7 +69,7 @@ public class BiomeHandlers {
 		private static final Consumer<MobSpawnInfoBuilder> CRYSTAL_WORLD_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_APPLE_COW.get(), 7, 1, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_CARROT_PIG.get(), 4, 1, 3));
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_GATOR.get(), 5, 1, 4));
+		//	builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_GATOR.get(), 5, 1, 4));
 		};
 
 		// VILLAGE MANIA
@@ -105,40 +105,40 @@ public class BiomeHandlers {
 
 		public static void addMobSpawns(BiomeLoadingEvent event) {
 			MobSpawnInfoBuilder spawnInfoBuilder = event.getSpawns();
-			RegistryKey<Biome> biome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome (" + event.getName() +  "), naming criticism!"));
-			final String location = biome.location().toString();
-
+			RegistryKey<Biome> targetBiome = RegistryKey.create(ForgeRegistries.Keys.BIOMES, Objects.requireNonNull(event.getName(), "Who registered null name biome (" + event.getName() +  "), naming criticism!"));
+			final String location = targetBiome.location().toString();
+			
 			switch (event.getCategory()) {
 			case SWAMP:
-				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+				if (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.OVERWORLD))
 					SWAMP_MOBS.accept(spawnInfoBuilder);
 			case PLAINS:
-				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+				if (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.OVERWORLD))
 					PLAINS_MOBS.accept(spawnInfoBuilder);
 			case FOREST:
-				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD))
+				if (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.OVERWORLD))
 					FOREST_MOBS.accept(spawnInfoBuilder);
 			case OCEAN:
-				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN))
+				if (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.OCEAN))
 					OCEAN_MOBS.accept(spawnInfoBuilder);
 			case NETHER:
-				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.HOT) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER))
+				if (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.HOT) && BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.NETHER))
 					NETHER_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && location.contains("basalt"))
+				if (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.NETHER) && location.contains("basalt"))
 					BASALT_DELTA_MOBS.accept(spawnInfoBuilder);
 				break;
 			default:
-				if (BiomeDictionary.hasType(biome, CABiomes.Type.CRYSTAL_WORLD))
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.CRYSTAL_WORLD))
 					CRYSTAL_WORLD_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(biome, CABiomes.Type.VILLAGE_MANIA))
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.VILLAGE_MANIA))
 					VILLAGE_MANIA_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(biome, CABiomes.Type.STALAGMITE_VALLEY))
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.STALAGMITE_VALLEY))
 					STALAGMITE_VALLEY_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(biome, CABiomes.Type.DENSE_MOUNTAINS))
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.DENSE_MOUNTAINS))
 					DENSE_MOUNTAINS_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(biome, CABiomes.Type.MESOZOIC_JUNGLE))
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.MESOZOIC_JUNGLE))
 					MESOZOIC_JUNGLE_MOBS.accept(spawnInfoBuilder);
-				if ((BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MODIFIED) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)))
+				if ((BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MODIFIED) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SNOWY) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)))
 					MOUNTAIN_MOBS.accept(spawnInfoBuilder);
 			}
 		}

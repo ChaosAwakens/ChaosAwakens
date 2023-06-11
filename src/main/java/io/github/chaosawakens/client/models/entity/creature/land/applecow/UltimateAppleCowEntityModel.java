@@ -14,7 +14,7 @@ public class UltimateAppleCowEntityModel extends ExtendedAnimatedTickingGeoModel
 
 	@Override
 	public ResourceLocation getModelLocation(UltimateAppleCowEntity object) {
-		return ChaosAwakens.prefix("geo/entity/land/apple_cow.geo.json");
+		return ChaosAwakens.prefix("geo/entity/creature/land/apple_cow.geo.json");
 	}
 
 	@Override

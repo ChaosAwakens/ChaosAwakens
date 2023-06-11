@@ -3,7 +3,6 @@ package io.github.chaosawakens.manager;
 import java.util.Optional;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.network.ICAPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
 import net.minecraft.client.Minecraft;

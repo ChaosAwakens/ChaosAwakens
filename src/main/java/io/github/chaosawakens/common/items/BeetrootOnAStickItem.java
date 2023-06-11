@@ -1,8 +1,7 @@
 package io.github.chaosawakens.common.items;
 
+import io.github.chaosawakens.common.entity.base.AnimatableRideableAnimalEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.IRideable;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,17 +26,17 @@ public class BeetrootOnAStickItem extends Item {
 		if (!world.isClientSide) {
 			Entity vehicleEntity = player.getVehicle();
 			
-			if (player.isPassenger() && vehicleEntity instanceof PigEntity) {
-				IRideable rideableVehicleEntity = (IRideable) vehicleEntity;
+			if (player.isPassenger() && vehicleEntity instanceof AnimatableRideableAnimalEntity) {
+				AnimatableRideableAnimalEntity rideableVehicleEntity = (AnimatableRideableAnimalEntity) vehicleEntity;
 				
 				if (rideableVehicleEntity.boost()) {
-					mainHandItem.hurtAndBreak(this.consumeItemDamage, player, (level) -> level.broadcastBreakEvent(hand));		
+					mainHandItem.hurtAndBreak(consumeItemDamage, player, (level) -> level.broadcastBreakEvent(hand));		
 					
 					if (mainHandItem.isEmpty()) {
-						ItemStack fishingRod = new ItemStack(Items.FISHING_ROD);
-						fishingRod.setTag(mainHandItem.getTag());
+						ItemStack fishingRodStack = new ItemStack(Items.FISHING_ROD);
+						fishingRodStack.setTag(mainHandItem.getTag());
 						
-						return ActionResult.success(fishingRod);
+						return ActionResult.success(fishingRodStack);
 					}
 					return ActionResult.success(mainHandItem);
 				}

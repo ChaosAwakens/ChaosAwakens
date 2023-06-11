@@ -16,12 +16,14 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class WaspEntity extends AnimatableMonsterEntity {
-
+	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<WrappedAnimationController<WaspEntity>> waspControllers = new ObjectArrayList<WrappedAnimationController<WaspEntity>>(1);
+	private final WrappedAnimationController<WaspEntity> mainController = createMainMappedController("waspmaincontroller");
+	
 	public WaspEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.moveControl = new FlyingMovementController(this, 180, true); //TODO Custom move control
@@ -39,17 +41,12 @@ public class WaspEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public AnimationFactory getFactory() {
-		return null;
-	}
-
-	@Override
-	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return null;
+		return factory;
 	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
-		return null;
+	public WrappedAnimationController<WaspEntity> getMainWrappedController() {
+		return mainController;
 	}
 
 	@Override
@@ -88,7 +85,7 @@ public class WaspEntity extends AnimatableMonsterEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<WaspEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<WaspEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<WaspEntity>> getWrappedControllers() {
+		return waspControllers;
 	}
 }

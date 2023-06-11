@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "cross": "chaosawakens:block/orange_crystal_leaves"
+    "all": "chaosawakens:block/orange_crystal_leaves"
   }
 }

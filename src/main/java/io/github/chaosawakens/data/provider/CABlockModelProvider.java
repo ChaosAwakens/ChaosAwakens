@@ -843,6 +843,12 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.leafCarpet("skywood_leaf_carpet", chaosRL("skywood_leaves"));
 		this.leafCarpetInventory("skywood_leaf_carpet_inventory", chaosRL("skywood_leaves"));
 		this.cubeAll("crystalwood_planks", chaosRL("crystalwood_planks"));
+		this.cubeAll("red_crystal_leaves", chaosRL("red_crystal_leaves"));
+		this.cubeAll("green_crystal_leaves", chaosRL("green_crystal_leaves"));
+		this.cubeAll("yellow_crystal_leaves", chaosRL("yellow_crystal_leaves"));
+		this.cubeAll("pink_crystal_leaves", chaosRL("pink_crystal_leaves"));
+		this.cubeAll("blue_crystal_leaves", chaosRL("blue_crystal_leaves"));
+		this.cubeAll("orange_crystal_leaves", chaosRL("orange_crystal_leaves"));
 		this.cross("red_crystal_sapling", chaosRL("red_crystal_sapling"));
 		this.cross("green_crystal_sapling", chaosRL("green_crystal_sapling"));
 		this.cross("yellow_crystal_sapling", chaosRL("yellow_crystal_sapling"));
@@ -1045,6 +1051,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.pottedCross("potted_big_carnivorous_plant", chaosRL("big_carnivorous_plant"));
 		this.pottedCross("potted_primrose", chaosRL("primrose"));
 		this.pottedCross("potted_daisy", chaosRL("daisy"));
+		this.pottedCross("potted_apple_sapling", chaosRL("apple_sapling"));
+		this.pottedCross("potted_cherry_sapling", chaosRL("cherry_sapling"));
 	}
 
 	private ResourceLocation chaosRL(String texture) {

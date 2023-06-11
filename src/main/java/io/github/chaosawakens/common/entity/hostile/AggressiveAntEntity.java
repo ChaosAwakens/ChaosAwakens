@@ -27,13 +27,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITeleporterMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<AggressiveAntEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("aggressiveantmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<AggressiveAntEntity>> aggressiveAntControllers = new ObjectArrayList<WrappedAnimationController<AggressiveAntEntity>>(1);
+	private final WrappedAnimationController<AggressiveAntEntity> mainController = createMainMappedController("aggressiveantmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final BooleanValue tpConfig;
@@ -59,14 +59,9 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<AggressiveAntEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -131,8 +126,9 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 		return mobInteract(pPlayer, pHand, level, tpConfig, targetDimension);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<? extends IAnimatableEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<? extends IAnimatableEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<AggressiveAntEntity>> getWrappedControllers() {
+		return aggressiveAntControllers;
 	}
 }

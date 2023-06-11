@@ -50,7 +50,8 @@ import io.github.chaosawakens.common.items.weapons.ranged.SkateBowItem;
 import io.github.chaosawakens.common.items.weapons.ranged.ThunderStaffItem;
 import io.github.chaosawakens.common.items.weapons.ranged.UltimateBowItem;
 import io.github.chaosawakens.common.items.weapons.ranged.UltimateCrossbowItem;
-import io.github.chaosawakens.common.util.EnumUtil;
+import io.github.chaosawakens.common.util.EnumUtil.CAArmorMaterial;
+import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.Enchantments;
@@ -248,15 +249,15 @@ public class CAItems {
 	
 	// TOOLS
 	// Ultimate
-	public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(EnumUtil.CAItemTier.TOOL_ULTIMATE, () -> CAConfigManager.MAIN_SERVER.ultimateSwordDamage, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedSwordItem> ULTIMATE_SWORD = ITEMS.register("ultimate_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_ULTIMATE, () -> CAConfigManager.MAIN_SERVER.ultimateSwordDamage, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.KNOCKBACK, 2), new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
-	public static final RegistryObject<UltimateShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new UltimateShovelItem(EnumUtil.CAItemTier.TOOL_ULTIMATE, -37, -3, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<UltimateShovelItem> ULTIMATE_SHOVEL = ITEMS.register("ultimate_shovel", () -> new UltimateShovelItem(CAItemTier.TOOL_ULTIMATE, -37, -3, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<UltimatePickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new UltimatePickaxeItem(EnumUtil.CAItemTier.TOOL_ULTIMATE, -37, -2.8F, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<UltimatePickaxeItem> ULTIMATE_PICKAXE = ITEMS.register("ultimate_pickaxe", () -> new UltimatePickaxeItem(CAItemTier.TOOL_ULTIMATE, -37, -2.8F, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.BLOCK_FORTUNE, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<UltimateAxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new UltimateAxeItem(EnumUtil.CAItemTier.TOOL_ULTIMATE, -37, -3, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<UltimateAxeItem> ULTIMATE_AXE = ITEMS.register("ultimate_axe", () -> new UltimateAxeItem(CAItemTier.TOOL_ULTIMATE, -37, -3, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<UltimateHoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new UltimateHoeItem(EnumUtil.CAItemTier.TOOL_ULTIMATE, -37, 0.0F, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<UltimateHoeItem> ULTIMATE_HOE = ITEMS.register("ultimate_hoe", () -> new UltimateHoeItem(CAItemTier.TOOL_ULTIMATE, -37, 0.0F, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.BLOCK_EFFICIENCY, 5), new EnchantmentData(Enchantments.BLOCK_FORTUNE, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 	public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.POWER_ARROWS, 5), new EnchantmentData(Enchantments.FLAMING_ARROWS, 1), new EnchantmentData(Enchantments.PUNCH_ARROWS, 2), new EnchantmentData(Enchantments.INFINITY_ARROWS, 1)}));
@@ -266,301 +267,301 @@ public class CAItems {
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 
 	// Emerald
-	public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new EnchantedSwordItem(EnumUtil.CAItemTier.TOOL_EMERALD, () -> CAConfigManager.MAIN_SERVER.emeraldSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<SwordItem> EMERALD_SWORD = ITEMS.register("emerald_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_EMERALD, () -> CAConfigManager.MAIN_SERVER.emeraldSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.MOB_LOOTING, 1)}));
-	public static final RegistryObject<EnchantedShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new EnchantedShovelItem(EnumUtil.CAItemTier.TOOL_EMERALD, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedShovelItem> EMERALD_SHOVEL = ITEMS.register("emerald_shovel", () -> new EnchantedShovelItem(CAItemTier.TOOL_EMERALD, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
-	public static final RegistryObject<EnchantedPickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(EnumUtil.CAItemTier.TOOL_EMERALD, -7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedPickaxeItem> EMERALD_PICKAXE = ITEMS.register("emerald_pickaxe", () -> new EnchantedPickaxeItem(CAItemTier.TOOL_EMERALD, -7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
-	public static final RegistryObject<EnchantedAxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new EnchantedAxeItem(EnumUtil.CAItemTier.TOOL_EMERALD, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedAxeItem> EMERALD_AXE = ITEMS.register("emerald_axe", () -> new EnchantedAxeItem(CAItemTier.TOOL_EMERALD, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
-	public static final RegistryObject<EnchantedHoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new EnchantedHoeItem(EnumUtil.CAItemTier.TOOL_EMERALD, -7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedHoeItem> EMERALD_HOE = ITEMS.register("emerald_hoe", () -> new EnchantedHoeItem(CAItemTier.TOOL_EMERALD, -7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SILK_TOUCH, 1)}));
 
 	// Ruby
-	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new EnchantedSwordItem(EnumUtil.CAItemTier.TOOL_RUBY, () -> CAConfigManager.MAIN_SERVER.rubySwordDamage, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<SwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_RUBY, () -> CAConfigManager.MAIN_SERVER.rubySwordDamage, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_ASPECT, 1)}));
-	public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_RUBY, -17, -3, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_RUBY, -17, -2.8F, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_RUBY, -17, -3, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_RUBY, -17, 0.0F, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(CAItemTier.TOOL_RUBY, -17, -3, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_RUBY, -17, -2.8F, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(CAItemTier.TOOL_RUBY, -17, -3, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(CAItemTier.TOOL_RUBY, -17, 0.0F, new Item.Properties().fireResistant().tab(CAItemGroups.EQUIPMENT)));
 
 	// Amethyst
-	public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_AMETHYST, -12, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_AMETHYST, -12, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_AMETHYST, -12, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_AMETHYST, -12, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_AMETHYST, -12, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(CAItemTier.TOOL_AMETHYST, -12, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(CAItemTier.TOOL_AMETHYST, -12, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_AMETHYST, -12, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(CAItemTier.TOOL_AMETHYST, -12, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(CAItemTier.TOOL_AMETHYST, -12, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Tiger's Eye
-	public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_TIGERS_EYE, -9, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_TIGERS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_TIGERS_EYE, -9, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_TIGERS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_TIGERS_EYE, -9, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> TIGERS_EYE_SWORD = ITEMS.register("tigers_eye_sword", () -> new SwordItem(CAItemTier.TOOL_TIGERS_EYE, -9, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> TIGERS_EYE_SHOVEL = ITEMS.register("tigers_eye_shovel", () -> new ShovelItem(CAItemTier.TOOL_TIGERS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> TIGERS_EYE_PICKAXE = ITEMS.register("tigers_eye_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_TIGERS_EYE, -9, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> TIGERS_EYE_AXE = ITEMS.register("tigers_eye_axe", () -> new AxeItem(CAItemTier.TOOL_TIGERS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> TIGERS_EYE_HOE = ITEMS.register("tigers_eye_hoe", () -> new HoeItem(CAItemTier.TOOL_TIGERS_EYE, -9, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Crystal Wood
-	public static final RegistryObject<SwordItem> CRYSTAL_WOOD_SWORD = ITEMS.register("crystal_wood_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_CRYSTAL_WOOD, -2, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> CRYSTAL_WOOD_SHOVEL = ITEMS.register("crystal_wood_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_CRYSTAL_WOOD, -2, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> CRYSTAL_WOOD_PICKAXE = ITEMS.register("crystal_wood_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_CRYSTAL_WOOD, -2, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> CRYSTAL_WOOD_AXE = ITEMS.register("crystal_wood_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_CRYSTAL_WOOD, -2, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> CRYSTAL_WOOD_HOE = ITEMS.register("crystal_wood_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_CRYSTAL_WOOD, -2, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> CRYSTALWOOD_SWORD = ITEMS.register("crystalwood_sword", () -> new SwordItem(CAItemTier.TOOL_CRYSTAL_WOOD, -2, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> CRYSTALWOOD_SHOVEL = ITEMS.register("crystalwood_shovel", () -> new ShovelItem(CAItemTier.TOOL_CRYSTAL_WOOD, -2, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> CRYSTALWOOD_PICKAXE = ITEMS.register("crystalwood_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_CRYSTAL_WOOD, -2, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> CRYSTALWOOD_AXE = ITEMS.register("crystalwood_axe", () -> new AxeItem(CAItemTier.TOOL_CRYSTAL_WOOD, -2, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> CRYSTALWOOD_HOE = ITEMS.register("crystalwood_hoe", () -> new HoeItem(CAItemTier.TOOL_CRYSTAL_WOOD, -2, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Kyanite
-	public static final RegistryObject<SwordItem> KYANITE_SWORD = ITEMS.register("kyanite_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_KYANITE, -3, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> KYANITE_SHOVEL = ITEMS.register("kyanite_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_KYANITE, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> KYANITE_PICKAXE = ITEMS.register("kyanite_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_KYANITE, -3, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> KYANITE_AXE = ITEMS.register("kyanite_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_KYANITE, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> KYANITE_HOE = ITEMS.register("kyanite_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_KYANITE, -3, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> KYANITE_SWORD = ITEMS.register("kyanite_sword", () -> new SwordItem(CAItemTier.TOOL_KYANITE, -3, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> KYANITE_SHOVEL = ITEMS.register("kyanite_shovel", () -> new ShovelItem(CAItemTier.TOOL_KYANITE, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> KYANITE_PICKAXE = ITEMS.register("kyanite_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_KYANITE, -3, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> KYANITE_AXE = ITEMS.register("kyanite_axe", () -> new AxeItem(CAItemTier.TOOL_KYANITE, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> KYANITE_HOE = ITEMS.register("kyanite_hoe", () -> new HoeItem(CAItemTier.TOOL_KYANITE, -3, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Cat's Eye
-	public static final RegistryObject<SwordItem> CATS_EYE_SWORD = ITEMS.register("cats_eye_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_CATS_EYE, -9, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> CATS_EYE_SHOVEL = ITEMS.register("cats_eye_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_CATS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> CATS_EYE_PICKAXE = ITEMS.register("cats_eye_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_CATS_EYE, -9, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> CATS_EYE_AXE = ITEMS.register("cats_eye_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_CATS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> CATS_EYE_HOE = ITEMS.register("cats_eye_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_CATS_EYE, -9, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> CATS_EYE_SWORD = ITEMS.register("cats_eye_sword", () -> new SwordItem(CAItemTier.TOOL_CATS_EYE, -9, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> CATS_EYE_SHOVEL = ITEMS.register("cats_eye_shovel", () -> new ShovelItem(CAItemTier.TOOL_CATS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> CATS_EYE_PICKAXE = ITEMS.register("cats_eye_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_CATS_EYE, -9, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> CATS_EYE_AXE = ITEMS.register("cats_eye_axe", () -> new AxeItem(CAItemTier.TOOL_CATS_EYE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> CATS_EYE_HOE = ITEMS.register("cats_eye_hoe", () -> new HoeItem(CAItemTier.TOOL_CATS_EYE, -9, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Pink Tourmaline
-	public static final RegistryObject<SwordItem> PINK_TOURMALINE_SWORD = ITEMS.register("pink_tourmaline_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_PINK_TOURMALINE, -9, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> PINK_TOURMALINE_SHOVEL = ITEMS.register("pink_tourmaline_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_PINK_TOURMALINE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> PINK_TOURMALINE_PICKAXE = ITEMS.register("pink_tourmaline_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_PINK_TOURMALINE, -9, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> PINK_TOURMALINE_AXE = ITEMS.register("pink_tourmaline_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_PINK_TOURMALINE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> PINK_TOURMALINE_HOE = ITEMS.register("pink_tourmaline_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_PINK_TOURMALINE, -9, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> PINK_TOURMALINE_SWORD = ITEMS.register("pink_tourmaline_sword", () -> new SwordItem(CAItemTier.TOOL_PINK_TOURMALINE, -9, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> PINK_TOURMALINE_SHOVEL = ITEMS.register("pink_tourmaline_shovel", () -> new ShovelItem(CAItemTier.TOOL_PINK_TOURMALINE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> PINK_TOURMALINE_PICKAXE = ITEMS.register("pink_tourmaline_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_PINK_TOURMALINE, -9, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> PINK_TOURMALINE_AXE = ITEMS.register("pink_tourmaline_axe", () -> new AxeItem(CAItemTier.TOOL_PINK_TOURMALINE, -9, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> PINK_TOURMALINE_HOE = ITEMS.register("pink_tourmaline_hoe", () -> new HoeItem(CAItemTier.TOOL_PINK_TOURMALINE, -9, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Copper
-	public static final RegistryObject<SwordItem> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_COPPER, -3, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> COPPER_SHOVEL = ITEMS.register("copper_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_COPPER, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> COPPER_PICKAXE = ITEMS.register("copper_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_COPPER, -3, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> COPPER_AXE = ITEMS.register("copper_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_COPPER, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> COPPER_HOE = ITEMS.register("copper_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_COPPER, -3, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(CAItemTier.TOOL_COPPER, -3, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> COPPER_SHOVEL = ITEMS.register("copper_shovel", () -> new ShovelItem(CAItemTier.TOOL_COPPER, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> COPPER_PICKAXE = ITEMS.register("copper_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_COPPER, -3, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> COPPER_AXE = ITEMS.register("copper_axe", () -> new AxeItem(CAItemTier.TOOL_COPPER, -3, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> COPPER_HOE = ITEMS.register("copper_hoe", () -> new HoeItem(CAItemTier.TOOL_COPPER, -3, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Tin
-	public static final RegistryObject<SwordItem> TIN_SWORD = ITEMS.register("tin_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_TIN, -4, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> TIN_SHOVEL = ITEMS.register("tin_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_TIN, -4, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> TIN_PICKAXE = ITEMS.register("tin_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_TIN, -4, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> TIN_AXE = ITEMS.register("tin_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_TIN, -4, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> TIN_HOE = ITEMS.register("tin_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_TIN, -4, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> TIN_SWORD = ITEMS.register("tin_sword", () -> new SwordItem(CAItemTier.TOOL_TIN, -4, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> TIN_SHOVEL = ITEMS.register("tin_shovel", () -> new ShovelItem(CAItemTier.TOOL_TIN, -4, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> TIN_PICKAXE = ITEMS.register("tin_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_TIN, -4, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> TIN_AXE = ITEMS.register("tin_axe", () -> new AxeItem(CAItemTier.TOOL_TIN, -4, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> TIN_HOE = ITEMS.register("tin_hoe", () -> new HoeItem(CAItemTier.TOOL_TIN, -4, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Silver
-	public static final RegistryObject<SwordItem> SILVER_SWORD = ITEMS.register("silver_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_SILVER, -5, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> SILVER_SHOVEL = ITEMS.register("silver_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_SILVER, -5, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> SILVER_PICKAXE = ITEMS.register("silver_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_SILVER, -5, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> SILVER_AXE = ITEMS.register("silver_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_SILVER, -5, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> SILVER_HOE = ITEMS.register("silver_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_SILVER, -5, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> SILVER_SWORD = ITEMS.register("silver_sword", () -> new SwordItem(CAItemTier.TOOL_SILVER, -5, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> SILVER_SHOVEL = ITEMS.register("silver_shovel", () -> new ShovelItem(CAItemTier.TOOL_SILVER, -5, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> SILVER_PICKAXE = ITEMS.register("silver_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_SILVER, -5, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> SILVER_AXE = ITEMS.register("silver_axe", () -> new AxeItem(CAItemTier.TOOL_SILVER, -5, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> SILVER_HOE = ITEMS.register("silver_hoe", () -> new HoeItem(CAItemTier.TOOL_SILVER, -5, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Platinum
-	public static final RegistryObject<SwordItem> PLATINUM_SWORD = ITEMS.register("platinum_sword", () -> new SwordItem(EnumUtil.CAItemTier.TOOL_PLATINUM, -7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ShovelItem> PLATINUM_SHOVEL = ITEMS.register("platinum_shovel", () -> new ShovelItem(EnumUtil.CAItemTier.TOOL_PLATINUM, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<PickaxeItem> PLATINUM_PICKAXE = ITEMS.register("platinum_pickaxe", () -> new PickaxeItem(EnumUtil.CAItemTier.TOOL_PLATINUM, -7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<AxeItem> PLATINUM_AXE = ITEMS.register("platinum_axe", () -> new AxeItem(EnumUtil.CAItemTier.TOOL_PLATINUM, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<HoeItem> PLATINUM_HOE = ITEMS.register("platinum_hoe", () -> new HoeItem(EnumUtil.CAItemTier.TOOL_PLATINUM, -7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> PLATINUM_SWORD = ITEMS.register("platinum_sword", () -> new SwordItem(CAItemTier.TOOL_PLATINUM, -7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ShovelItem> PLATINUM_SHOVEL = ITEMS.register("platinum_shovel", () -> new ShovelItem(CAItemTier.TOOL_PLATINUM, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<PickaxeItem> PLATINUM_PICKAXE = ITEMS.register("platinum_pickaxe", () -> new PickaxeItem(CAItemTier.TOOL_PLATINUM, -7, -2.8F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<AxeItem> PLATINUM_AXE = ITEMS.register("platinum_axe", () -> new AxeItem(CAItemTier.TOOL_PLATINUM, -7, -3, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<HoeItem> PLATINUM_HOE = ITEMS.register("platinum_hoe", () -> new HoeItem(CAItemTier.TOOL_PLATINUM, -7, 0.0F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Misc. Weapons
-	public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(EnumUtil.CAItemTier.TOOL_NIGHTMARE, () -> CAConfigManager.MAIN_SERVER.nightmareSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedSwordItem> NIGHTMARE_SWORD = ITEMS.register("nightmare_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_NIGHTMARE, () -> CAConfigManager.MAIN_SERVER.nightmareSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 1), new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 1)}));
-	public static final RegistryObject<BasiliskSwordItem> BASILISK_SWORD = ITEMS.register("basilisk_sword", () -> new BasiliskSwordItem(EnumUtil.CAItemTier.TOOL_BASILISK, () -> CAConfigManager.MAIN_SERVER.basiliskSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<BasiliskSwordItem> BASILISK_SWORD = ITEMS.register("basilisk_sword", () -> new BasiliskSwordItem(CAItemTier.TOOL_BASILISK, () -> CAConfigManager.MAIN_SERVER.basiliskSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 2)}));
-	public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(EnumUtil.CAItemTier.TOOL_EMERALD, () -> CAConfigManager.MAIN_SERVER.emeraldSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedSwordItem> EXPERIENCE_SWORD = ITEMS.register("experience_sword", () -> new EnchantedSwordItem(CAItemTier.TOOL_EMERALD, () -> CAConfigManager.MAIN_SERVER.emeraldSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 2), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.MENDING, 1)}));
-	public static final RegistryObject<EnchantedSwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new PoisonSwordItem(EnumUtil.CAItemTier.TOOL_EMERALD, () -> CAConfigManager.MAIN_SERVER.poisonSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedSwordItem> POISON_SWORD = ITEMS.register("poison_sword", () -> new PoisonSwordItem(CAItemTier.TOOL_EMERALD, () -> CAConfigManager.MAIN_SERVER.poisonSwordDamage, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 1)}));
-	public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(EnumUtil.CAItemTier.WEAPON_GENERIC, -7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(EnumUtil.CAItemTier.WEAPON_GENERIC, -7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<MantisClawItem> MANTIS_CLAW = ITEMS.register("mantis_claw", () -> new MantisClawItem(EnumUtil.CAItemTier.WEAPON_GENERIC, -7, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<BigHammerItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new BigHammerItem(EnumUtil.CAItemTier.WEAPON_BIG_HAMMER, -12, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(EnumUtil.CAItemTier.TOOL_ULTIMATE, -37, -1.9F, 2.0D, 0, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<SwordItem> RAT_SWORD = ITEMS.register("rat_sword", () -> new SwordItem(CAItemTier.WEAPON_GENERIC, -7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SwordItem> FAIRY_SWORD = ITEMS.register("fairy_sword", () -> new SwordItem(CAItemTier.WEAPON_GENERIC, -7, -2.4F, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<MantisClawItem> MANTIS_CLAW = ITEMS.register("mantis_claw", () -> new MantisClawItem(CAItemTier.WEAPON_GENERIC, -7, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<BigHammerItem> BIG_HAMMER = ITEMS.register("big_hammer", () -> new BigHammerItem(CAItemTier.WEAPON_BIG_HAMMER, -12, -3F, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<EnchantedScytheItem> PRISMATIC_REAPER = ITEMS.register("prismatic_reaper", () -> new EnchantedScytheItem(CAItemTier.TOOL_ULTIMATE, -37, -1.9F, 2.0D, 0, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 4), new EnchantmentData(Enchantments.SWEEPING_EDGE, 4)}));
 	public static final RegistryObject<SkateBowItem> SKATE_STRING_BOW = ITEMS.register("skate_string_bow", () -> new SkateBowItem(new Item.Properties().tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(384)));
-	public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(EnumUtil.CAItemTier.WEAPON_RAY_GUN, new Item.Properties().tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(50)));
+	public static final RegistryObject<RayGunItem> RAY_GUN = ITEMS.register("ray_gun", () -> new RayGunItem(CAItemTier.WEAPON_RAY_GUN, new Item.Properties().tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(50)));
 
 	// Big Weapons
-	public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(EnumUtil.CAItemTier.WEAPON_ATTITUDE_ADJUSTER, () -> CAConfigManager.MAIN_SERVER.attitudeAdjusterDamage, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRenderer::new)));
-	public static final RegistryObject<BigBerthaItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new BigBerthaItem(EnumUtil.CAItemTier.WEAPON_BERTHA, () -> CAConfigManager.MAIN_SERVER.berthaDamage, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRenderer::new),
+	public static final RegistryObject<AttitudeAdjusterItem> ATTITUDE_ADJUSTER = ITEMS.register("attitude_adjuster", () -> new AttitudeAdjusterItem(CAItemTier.WEAPON_ATTITUDE_ADJUSTER, () -> CAConfigManager.MAIN_SERVER.attitudeAdjusterDamage, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> AttitudeAdjusterItemRenderer::new)));
+	public static final RegistryObject<BigBerthaItem> BIG_BERTHA = ITEMS.register("big_bertha", () -> new BigBerthaItem(CAItemTier.WEAPON_BERTHA, () -> CAConfigManager.MAIN_SERVER.berthaDamage, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BigBerthaItemRenderer::new),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2), new EnchantmentData(Enchantments.KNOCKBACK, 2)}));
-	public static final RegistryObject<BattleAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new BattleAxeItem(EnumUtil.CAItemTier.WEAPON_BATTLEAXE, -48, -3.35F, 3.0D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRenderer::new),
+	public static final RegistryObject<BattleAxeItem> BATTLE_AXE = ITEMS.register("battle_axe", () -> new BattleAxeItem(CAItemTier.WEAPON_BATTLEAXE, -48, -3.35F, 3.0D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> BattleAxeItemRenderer::new),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<QueenScaleBattleAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new QueenScaleBattleAxeItem(EnumUtil.CAItemTier.WEAPON_QUEEN_BATTLEAXE, -664, -3.25F, 4.0D, 0, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRenderer::new),
+	public static final RegistryObject<QueenScaleBattleAxeItem> QUEEN_SCALE_BATTLE_AXE = ITEMS.register("queen_scale_battle_axe", () -> new QueenScaleBattleAxeItem(CAItemTier.WEAPON_QUEEN_BATTLEAXE, -664, -3.25F, 4.0D, 0, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> QueenScaleBattleAxeItemRenderer::new),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.SHARPNESS, 5), new EnchantmentData(Enchantments.SMITE, 5), new EnchantmentData(Enchantments.BANE_OF_ARTHROPODS, 5), new EnchantmentData(Enchantments.KNOCKBACK, 3), new EnchantmentData(Enchantments.MOB_LOOTING, 3), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.FIRE_ASPECT, 2)}));
-	public static final RegistryObject<RoyalGuardianSwordItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new RoyalGuardianSwordItem(EnumUtil.CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, () -> CAConfigManager.MAIN_SERVER.royalGuardianSwordDamage, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianSwordItemRenderer::new),
+	public static final RegistryObject<RoyalGuardianSwordItem> ROYAL_GUARDIAN_SWORD = ITEMS.register("royal_guardian_sword", () -> new RoyalGuardianSwordItem(CAItemTier.WEAPON_ROYAL_GUARDIAN_SWORD, () -> CAConfigManager.MAIN_SERVER.royalGuardianSwordDamage, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setISTER(() -> RoyalGuardianSwordItemRenderer::new),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(EnumUtil.CAItemTier.WEAPON_SLAYER_CHAINSAW, -1, -3F, 2.5D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRenderer::new)));
+	public static final RegistryObject<SlayerChainsawItem> SLAYER_CHAINSAW = ITEMS.register("slayer_chainsaw", () -> new SlayerChainsawItem(CAItemTier.WEAPON_SLAYER_CHAINSAW, -1, -3F, 2.5D, 0, new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).setISTER(() -> SlayerChainsawItemRenderer::new)));
 
 	// Staffs
 	public static final RegistryObject<ThunderStaffItem> THUNDER_STAFF = ITEMS.register("thunder_staff", () -> new ThunderStaffItem(new Item.Properties().tab(CAItemGroups.EQUIPMENT).durability(50)));
 
 	// ARMOR
 	// Ultimate
-	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_HELMET = ITEMS.register("ultimate_helmet", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.ULTIMATE, EquipmentSlotType.HEAD, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_HELMET = ITEMS.register("ultimate_helmet", () -> new EnchantedArmorItem(CAArmorMaterial.ULTIMATE, EquipmentSlotType.HEAD, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 4), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.RESPIRATION, 3), new EnchantmentData(Enchantments.AQUA_AFFINITY, 1)}));
-	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_CHESTPLATE = ITEMS.register("ultimate_chestplate", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.ULTIMATE, EquipmentSlotType.CHEST, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_CHESTPLATE = ITEMS.register("ultimate_chestplate", () -> new EnchantedArmorItem(CAArmorMaterial.ULTIMATE, EquipmentSlotType.CHEST, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 4), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_LEGGINGS = ITEMS.register("ultimate_leggings", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.ULTIMATE, EquipmentSlotType.LEGS, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_LEGGINGS = ITEMS.register("ultimate_leggings", () -> new EnchantedArmorItem(CAArmorMaterial.ULTIMATE, EquipmentSlotType.LEGS, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_PROTECTION, 4), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_BOOTS = ITEMS.register("ultimate_boots", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.ULTIMATE, EquipmentSlotType.FEET, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> ULTIMATE_BOOTS = ITEMS.register("ultimate_boots", () -> new EnchantedArmorItem(CAArmorMaterial.ULTIMATE, EquipmentSlotType.FEET, new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.BLAST_PROTECTION, 4), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.FALL_PROTECTION, 4)}));
 
 	// Lava Eel
-	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_HELMET = ITEMS.register("lava_eel_helmet", () -> new LavaEelArmorItem(EnumUtil.CAArmorMaterial.LAVA_EEL, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
+	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_HELMET = ITEMS.register("lava_eel_helmet", () -> new LavaEelArmorItem(CAArmorMaterial.LAVA_EEL, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_PROTECTION, 5), new EnchantmentData(Enchantments.AQUA_AFFINITY, 1)}));
-	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_CHESTPLATE = ITEMS.register("lava_eel_chestplate", () -> new LavaEelArmorItem(EnumUtil.CAArmorMaterial.LAVA_EEL, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
+	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_CHESTPLATE = ITEMS.register("lava_eel_chestplate", () -> new LavaEelArmorItem(CAArmorMaterial.LAVA_EEL, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_PROTECTION, 5)}));
-	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_LEGGINGS = ITEMS.register("lava_eel_leggings", () -> new LavaEelArmorItem(EnumUtil.CAArmorMaterial.LAVA_EEL, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
+	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_LEGGINGS = ITEMS.register("lava_eel_leggings", () -> new LavaEelArmorItem(CAArmorMaterial.LAVA_EEL, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_PROTECTION, 5)}));
-	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_BOOTS = ITEMS.register("lava_eel_boots", () -> new LavaEelArmorItem(EnumUtil.CAArmorMaterial.LAVA_EEL, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
+	public static final RegistryObject<EnchantedArmorItem> LAVA_EEL_BOOTS = ITEMS.register("lava_eel_boots", () -> new LavaEelArmorItem(CAArmorMaterial.LAVA_EEL, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT).fireResistant(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.FIRE_PROTECTION, 5)}));
 
 	// Moth Scale
-	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_HELMET = ITEMS.register("moth_scale_helmet", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_HELMET = ITEMS.register("moth_scale_helmet", () -> new EnchantedArmorItem(CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 3), new EnchantmentData(Enchantments.FIRE_PROTECTION, 3), new EnchantmentData(Enchantments.BLAST_PROTECTION, 3)}));
-	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_CHESTPLATE = ITEMS.register("moth_scale_chestplate", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_CHESTPLATE = ITEMS.register("moth_scale_chestplate", () -> new EnchantedArmorItem(CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 3), new EnchantmentData(Enchantments.FIRE_PROTECTION, 3), new EnchantmentData(Enchantments.BLAST_PROTECTION, 3)}));
-	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_LEGGINGS = ITEMS.register("moth_scale_leggings", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_LEGGINGS = ITEMS.register("moth_scale_leggings", () -> new EnchantedArmorItem(CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 3), new EnchantmentData(Enchantments.FIRE_PROTECTION, 3), new EnchantmentData(Enchantments.BLAST_PROTECTION, 3)}));
-	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_BOOTS = ITEMS.register("moth_scale_boots", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> MOTH_SCALE_BOOTS = ITEMS.register("moth_scale_boots", () -> new EnchantedArmorItem(CAArmorMaterial.MOTH_SCALE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 3), new EnchantmentData(Enchantments.FIRE_PROTECTION, 3), new EnchantmentData(Enchantments.BLAST_PROTECTION, 3), new EnchantmentData(Enchantments.FALL_PROTECTION, 3)}));
 	
 	//Ender Dragon Scale
-	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_HELMET = ITEMS.register("ender_dragon_scale_helmet", () -> new EnderScaleArmorItem(EnumUtil.CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_HELMET = ITEMS.register("ender_dragon_scale_helmet", () -> new EnderScaleArmorItem(CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[] {new EnchantmentData(Enchantments.BLAST_PROTECTION, 4), new EnchantmentData(Enchantments.FIRE_PROTECTION, 4), new EnchantmentData(Enchantments.THORNS, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_CHESTPLATE = ITEMS.register("ender_dragon_scale_chestplate", () -> new EnderScaleArmorItem(EnumUtil.CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_CHESTPLATE = ITEMS.register("ender_dragon_scale_chestplate", () -> new EnderScaleArmorItem(CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[] {new EnchantmentData(Enchantments.BLAST_PROTECTION, 4), new EnchantmentData(Enchantments.FIRE_PROTECTION, 4), new EnchantmentData(Enchantments.THORNS, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_LEGGINGS = ITEMS.register("ender_dragon_scale_leggings", () -> new EnderScaleArmorItem(EnumUtil.CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_LEGGINGS = ITEMS.register("ender_dragon_scale_leggings", () -> new EnderScaleArmorItem(CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[] {new EnchantmentData(Enchantments.BLAST_PROTECTION, 4), new EnchantmentData(Enchantments.FIRE_PROTECTION, 4), new EnchantmentData(Enchantments.THORNS, 3), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
-	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_BOOTS = ITEMS.register("ender_dragon_scale_boots", () -> new EnderScaleArmorItem(EnumUtil.CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnderScaleArmorItem> ENDER_DRAGON_SCALE_BOOTS = ITEMS.register("ender_dragon_scale_boots", () -> new EnderScaleArmorItem(CAArmorMaterial.ENDER_DRAGON_SCALE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[] {new EnchantmentData(Enchantments.BLAST_PROTECTION, 4), new EnchantmentData(Enchantments.FIRE_PROTECTION, 4), new EnchantmentData(Enchantments.THORNS, 3), new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.FALL_PROTECTION, 4)}));
 	
 	// Emerald
-	public static final RegistryObject<ArmorItem> EMERALD_HELMET = ITEMS.register("emerald_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.EMERALD, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> EMERALD_CHESTPLATE = ITEMS.register("emerald_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.EMERALD, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> EMERALD_LEGGINGS = ITEMS.register("emerald_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.EMERALD, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> EMERALD_BOOTS = ITEMS.register("emerald_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.EMERALD, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> EMERALD_HELMET = ITEMS.register("emerald_helmet", () -> new ArmorItem(CAArmorMaterial.EMERALD, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> EMERALD_CHESTPLATE = ITEMS.register("emerald_chestplate", () -> new ArmorItem(CAArmorMaterial.EMERALD, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> EMERALD_LEGGINGS = ITEMS.register("emerald_leggings", () -> new ArmorItem(CAArmorMaterial.EMERALD, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> EMERALD_BOOTS = ITEMS.register("emerald_boots", () -> new ArmorItem(CAArmorMaterial.EMERALD, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Experience
 	public static final RegistryObject<EnchantedArmorItem> EXPERIENCE_HELMET = ITEMS.register("experience_helmet",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.EXPERIENCE, EquipmentSlotType.HEAD, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.EXPERIENCE, EquipmentSlotType.HEAD, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[]{new EnchantmentData(CAEnchantments.HOPLOLOGY.get(), 1)}));
 	public static final RegistryObject<EnchantedArmorItem> EXPERIENCE_CHESTPLATE = ITEMS.register("experience_chestplate",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.EXPERIENCE, EquipmentSlotType.CHEST, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.EXPERIENCE, EquipmentSlotType.CHEST, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[]{new EnchantmentData(CAEnchantments.HOPLOLOGY.get(), 1)}));
 	public static final RegistryObject<EnchantedArmorItem> EXPERIENCE_LEGGINGS = ITEMS.register("experience_leggings",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.EXPERIENCE, EquipmentSlotType.LEGS, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.EXPERIENCE, EquipmentSlotType.LEGS, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[]{new EnchantmentData(CAEnchantments.HOPLOLOGY.get(), 1)}));
 	public static final RegistryObject<EnchantedArmorItem> EXPERIENCE_BOOTS = ITEMS.register("experience_boots",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.EXPERIENCE, EquipmentSlotType.FEET, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.EXPERIENCE, EquipmentSlotType.FEET, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[]{new EnchantmentData(CAEnchantments.HOPLOLOGY.get(), 1)}));
 
 	// Ruby
 	public static final RegistryObject<EnchantedArmorItem> RUBY_HELMET = ITEMS.register("ruby_helmet",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.RUBY, EquipmentSlotType.HEAD, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.RUBY, EquipmentSlotType.HEAD, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[] {new EnchantmentData(CAEnchantments.IGNITE.get(), 1)}));
 	public static final RegistryObject<EnchantedArmorItem> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.RUBY, EquipmentSlotType.CHEST, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.RUBY, EquipmentSlotType.CHEST, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[] {new EnchantmentData(CAEnchantments.IGNITE.get(), 1)}));
 	public static final RegistryObject<EnchantedArmorItem> RUBY_LEGGINGS = ITEMS.register("ruby_leggings",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.RUBY, EquipmentSlotType.LEGS, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.RUBY, EquipmentSlotType.LEGS, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[] {new EnchantmentData(CAEnchantments.IGNITE.get(), 1)}));
 	public static final RegistryObject<EnchantedArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots",
-			() -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.RUBY, EquipmentSlotType.FEET, new Item.Properties()
+			() -> new EnchantedArmorItem(CAArmorMaterial.RUBY, EquipmentSlotType.FEET, new Item.Properties()
 					.tab(CAItemGroups.EQUIPMENT),
 					() -> new EnchantmentData[] {new EnchantmentData(CAEnchantments.IGNITE.get(), 1)}));
 
 	// Amethyst
-	public static final RegistryObject<ArmorItem> AMETHYST_HELMET = ITEMS.register("amethyst_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.AMETHYST, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> AMETHYST_CHESTPLATE = ITEMS.register("amethyst_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.AMETHYST, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> AMETHYST_LEGGINGS = ITEMS.register("amethyst_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.AMETHYST, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> AMETHYST_BOOTS = ITEMS.register("amethyst_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.AMETHYST, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> AMETHYST_HELMET = ITEMS.register("amethyst_helmet", () -> new ArmorItem(CAArmorMaterial.AMETHYST, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> AMETHYST_CHESTPLATE = ITEMS.register("amethyst_chestplate", () -> new ArmorItem(CAArmorMaterial.AMETHYST, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> AMETHYST_LEGGINGS = ITEMS.register("amethyst_leggings", () -> new ArmorItem(CAArmorMaterial.AMETHYST, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> AMETHYST_BOOTS = ITEMS.register("amethyst_boots", () -> new ArmorItem(CAArmorMaterial.AMETHYST, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Tiger's Eye
-	public static final RegistryObject<ArmorItem> TIGERS_EYE_HELMET = ITEMS.register("tigers_eye_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> TIGERS_EYE_CHESTPLATE = ITEMS.register("tigers_eye_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> TIGERS_EYE_LEGGINGS = ITEMS.register("tigers_eye_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> TIGERS_EYE_BOOTS = ITEMS.register("tigers_eye_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIGERS_EYE_HELMET = ITEMS.register("tigers_eye_helmet", () -> new ArmorItem(CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIGERS_EYE_CHESTPLATE = ITEMS.register("tigers_eye_chestplate", () -> new ArmorItem(CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIGERS_EYE_LEGGINGS = ITEMS.register("tigers_eye_leggings", () -> new ArmorItem(CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIGERS_EYE_BOOTS = ITEMS.register("tigers_eye_boots", () -> new ArmorItem(CAArmorMaterial.TIGERS_EYE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Lapis Lazuli
-	public static final RegistryObject<ArmorItem> LAPIS_HELMET = ITEMS.register("lapis_helmet", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.LAPIS, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<ArmorItem> LAPIS_HELMET = ITEMS.register("lapis_helmet", () -> new EnchantedArmorItem(CAArmorMaterial.LAPIS, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 2), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 1), new EnchantmentData(Enchantments.RESPIRATION, 1), new EnchantmentData(Enchantments.AQUA_AFFINITY, 1)}));
-	public static final RegistryObject<ArmorItem> LAPIS_CHESTPLATE = ITEMS.register("lapis_chestplate", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.LAPIS, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<ArmorItem> LAPIS_CHESTPLATE = ITEMS.register("lapis_chestplate", () -> new EnchantedArmorItem(CAArmorMaterial.LAPIS, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 2), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 1)}));
-	public static final RegistryObject<ArmorItem> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.LAPIS, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<ArmorItem> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new EnchantedArmorItem(CAArmorMaterial.LAPIS, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 2), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 1)}));
-	public static final RegistryObject<ArmorItem> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.LAPIS, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<ArmorItem> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new EnchantedArmorItem(CAArmorMaterial.LAPIS, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 2), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 1)}));
 
 	// Copper
-	public static final RegistryObject<ArmorItem> COPPER_HELMET = ITEMS.register("copper_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.COPPER, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.COPPER, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.COPPER, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.COPPER, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> COPPER_HELMET = ITEMS.register("copper_helmet", () -> new ArmorItem(CAArmorMaterial.COPPER, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(CAArmorMaterial.COPPER, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(CAArmorMaterial.COPPER, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(CAArmorMaterial.COPPER, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Tin
-	public static final RegistryObject<ArmorItem> TIN_HELMET = ITEMS.register("tin_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIN, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> TIN_CHESTPLATE = ITEMS.register("tin_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIN, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> TIN_LEGGINGS = ITEMS.register("tin_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIN, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> TIN_BOOTS = ITEMS.register("tin_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.TIN, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIN_HELMET = ITEMS.register("tin_helmet", () -> new ArmorItem(CAArmorMaterial.TIN, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIN_CHESTPLATE = ITEMS.register("tin_chestplate", () -> new ArmorItem(CAArmorMaterial.TIN, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIN_LEGGINGS = ITEMS.register("tin_leggings", () -> new ArmorItem(CAArmorMaterial.TIN, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> TIN_BOOTS = ITEMS.register("tin_boots", () -> new ArmorItem(CAArmorMaterial.TIN, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Silver
-	public static final RegistryObject<ArmorItem> SILVER_HELMET = ITEMS.register("silver_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.SILVER, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> SILVER_CHESTPLATE = ITEMS.register("silver_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.SILVER, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> SILVER_LEGGINGS = ITEMS.register("silver_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.SILVER, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> SILVER_BOOTS = ITEMS.register("silver_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.SILVER, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> SILVER_HELMET = ITEMS.register("silver_helmet", () -> new ArmorItem(CAArmorMaterial.SILVER, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> SILVER_CHESTPLATE = ITEMS.register("silver_chestplate", () -> new ArmorItem(CAArmorMaterial.SILVER, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> SILVER_LEGGINGS = ITEMS.register("silver_leggings", () -> new ArmorItem(CAArmorMaterial.SILVER, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> SILVER_BOOTS = ITEMS.register("silver_boots", () -> new ArmorItem(CAArmorMaterial.SILVER, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Platinum
-	public static final RegistryObject<ArmorItem> PLATINUM_HELMET = ITEMS.register("platinum_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PLATINUM, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PLATINUM_CHESTPLATE = ITEMS.register("platinum_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PLATINUM, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PLATINUM_LEGGINGS = ITEMS.register("platinum_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PLATINUM, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PLATINUM_BOOTS = ITEMS.register("platinum_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PLATINUM, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PLATINUM_HELMET = ITEMS.register("platinum_helmet", () -> new ArmorItem(CAArmorMaterial.PLATINUM, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PLATINUM_CHESTPLATE = ITEMS.register("platinum_chestplate", () -> new ArmorItem(CAArmorMaterial.PLATINUM, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PLATINUM_LEGGINGS = ITEMS.register("platinum_leggings", () -> new ArmorItem(CAArmorMaterial.PLATINUM, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PLATINUM_BOOTS = ITEMS.register("platinum_boots", () -> new ArmorItem(CAArmorMaterial.PLATINUM, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Peacock Feather
-	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_HELMET = ITEMS.register("peacock_feather_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PEACOCK_FEATHER, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_CHESTPLATE = ITEMS.register("peacock_feather_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PEACOCK_FEATHER, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_LEGGINGS = ITEMS.register("peacock_feather_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PEACOCK_FEATHER, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<SlowFallBoots> PEACOCK_FEATHER_BOOTS = ITEMS.register("peacock_feather_boots", () -> new SlowFallBoots(EnumUtil.CAArmorMaterial.PEACOCK_FEATHER, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_HELMET = ITEMS.register("peacock_feather_helmet", () -> new ArmorItem(CAArmorMaterial.PEACOCK_FEATHER, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_CHESTPLATE = ITEMS.register("peacock_feather_chestplate", () -> new ArmorItem(CAArmorMaterial.PEACOCK_FEATHER, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PEACOCK_FEATHER_LEGGINGS = ITEMS.register("peacock_feather_leggings", () -> new ArmorItem(CAArmorMaterial.PEACOCK_FEATHER, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<SlowFallBoots> PEACOCK_FEATHER_BOOTS = ITEMS.register("peacock_feather_boots", () -> new SlowFallBoots(CAArmorMaterial.PEACOCK_FEATHER, new Item.Properties().tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.FALL_PROTECTION, 4)}));
 
 	// Pink Tourmaline
-	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_HELMET = ITEMS.register("pink_tourmaline_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_CHESTPLATE = ITEMS.register("pink_tourmaline_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_LEGGINGS = ITEMS.register("pink_tourmaline_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_BOOTS = ITEMS.register("pink_tourmaline_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_HELMET = ITEMS.register("pink_tourmaline_helmet", () -> new ArmorItem(CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_CHESTPLATE = ITEMS.register("pink_tourmaline_chestplate", () -> new ArmorItem(CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_LEGGINGS = ITEMS.register("pink_tourmaline_leggings", () -> new ArmorItem(CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> PINK_TOURMALINE_BOOTS = ITEMS.register("pink_tourmaline_boots", () -> new ArmorItem(CAArmorMaterial.PINK_TOURMALINE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Cat's Eye
-	public static final RegistryObject<ArmorItem> CATS_EYE_HELMET = ITEMS.register("cats_eye_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.CATS_EYE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> CATS_EYE_CHESTPLATE = ITEMS.register("cats_eye_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.CATS_EYE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> CATS_EYE_LEGGINGS = ITEMS.register("cats_eye_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.CATS_EYE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> CATS_EYE_BOOTS = ITEMS.register("cats_eye_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.CATS_EYE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> CATS_EYE_HELMET = ITEMS.register("cats_eye_helmet", () -> new ArmorItem(CAArmorMaterial.CATS_EYE, EquipmentSlotType.HEAD, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> CATS_EYE_CHESTPLATE = ITEMS.register("cats_eye_chestplate", () -> new ArmorItem(CAArmorMaterial.CATS_EYE, EquipmentSlotType.CHEST, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> CATS_EYE_LEGGINGS = ITEMS.register("cats_eye_leggings", () -> new ArmorItem(CAArmorMaterial.CATS_EYE, EquipmentSlotType.LEGS, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> CATS_EYE_BOOTS = ITEMS.register("cats_eye_boots", () -> new ArmorItem(CAArmorMaterial.CATS_EYE, EquipmentSlotType.FEET, new Item.Properties().tab(CAItemGroups.EQUIPMENT)));
 
 	// Royal Guardian
-	public static final RegistryObject<EnchantedArmorItem> ROYAL_GUARDIAN_HELMET = ITEMS.register("royal_guardian_helmet", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.ROYAL_GUARDIAN, EquipmentSlotType.HEAD, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
+	public static final RegistryObject<EnchantedArmorItem> ROYAL_GUARDIAN_HELMET = ITEMS.register("royal_guardian_helmet", () -> new EnchantedArmorItem(CAArmorMaterial.ROYAL_GUARDIAN, EquipmentSlotType.HEAD, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5), new EnchantmentData(Enchantments.RESPIRATION, 3), new EnchantmentData(Enchantments.AQUA_AFFINITY, 1)}));
-	public static final RegistryObject<EnchantedArmorItem> ROYAL_GUARDIAN_CHESTPLATE = ITEMS.register("royal_guardian_chestplate", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.ROYAL_GUARDIAN, EquipmentSlotType.CHEST, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
+	public static final RegistryObject<EnchantedArmorItem> ROYAL_GUARDIAN_CHESTPLATE = ITEMS.register("royal_guardian_chestplate", () -> new EnchantedArmorItem(CAArmorMaterial.ROYAL_GUARDIAN, EquipmentSlotType.CHEST, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5)}));
-	public static final RegistryObject<EnchantedArmorItem> ROYAL_GUARDIAN_LEGGINGS = ITEMS.register("royal_guardian_leggings", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.ROYAL_GUARDIAN, EquipmentSlotType.LEGS, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
+	public static final RegistryObject<EnchantedArmorItem> ROYAL_GUARDIAN_LEGGINGS = ITEMS.register("royal_guardian_leggings", () -> new EnchantedArmorItem(CAArmorMaterial.ROYAL_GUARDIAN, EquipmentSlotType.LEGS, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5)}));
-	public static final RegistryObject<SlowFallBoots> ROYAL_GUARDIAN_BOOTS = ITEMS.register("royal_guardian_boots", () -> new SlowFallBoots(EnumUtil.CAArmorMaterial.ROYAL_GUARDIAN, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
+	public static final RegistryObject<SlowFallBoots> ROYAL_GUARDIAN_BOOTS = ITEMS.register("royal_guardian_boots", () -> new SlowFallBoots(CAArmorMaterial.ROYAL_GUARDIAN, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT).setNoRepair(),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5), new EnchantmentData(Enchantments.FALL_PROTECTION, 4)}));
 
 	// Queen Scale
-	public static final RegistryObject<EnchantedArmorItem> QUEEN_SCALE_HELMET = ITEMS.register("queen_scale_helmet", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.QUEEN_SCALE, EquipmentSlotType.HEAD, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> QUEEN_SCALE_HELMET = ITEMS.register("queen_scale_helmet", () -> new EnchantedArmorItem(CAArmorMaterial.QUEEN_SCALE, EquipmentSlotType.HEAD, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5), new EnchantmentData(Enchantments.RESPIRATION, 3), new EnchantmentData(Enchantments.AQUA_AFFINITY, 1)}));
-	public static final RegistryObject<EnchantedArmorItem> QUEEN_SCALE_CHESTPLATE = ITEMS.register("queen_scale_chestplate", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.QUEEN_SCALE, EquipmentSlotType.CHEST, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> QUEEN_SCALE_CHESTPLATE = ITEMS.register("queen_scale_chestplate", () -> new EnchantedArmorItem(CAArmorMaterial.QUEEN_SCALE, EquipmentSlotType.CHEST, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5)}));
-	public static final RegistryObject<EnchantedArmorItem> QUEEN_SCALE_LEGGINGS = ITEMS.register("queen_scale_leggings", () -> new EnchantedArmorItem(EnumUtil.CAArmorMaterial.QUEEN_SCALE, EquipmentSlotType.LEGS, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<EnchantedArmorItem> QUEEN_SCALE_LEGGINGS = ITEMS.register("queen_scale_leggings", () -> new EnchantedArmorItem(CAArmorMaterial.QUEEN_SCALE, EquipmentSlotType.LEGS, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5)}));
-	public static final RegistryObject<SlowFallBoots> QUEEN_SCALE_BOOTS = ITEMS.register("queen_scale_boots", () -> new SlowFallBoots(EnumUtil.CAArmorMaterial.QUEEN_SCALE, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
+	public static final RegistryObject<SlowFallBoots> QUEEN_SCALE_BOOTS = ITEMS.register("queen_scale_boots", () -> new SlowFallBoots(CAArmorMaterial.QUEEN_SCALE, new Item.Properties().rarity(CARarities.ROYALTY).tab(CAItemGroups.EQUIPMENT),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.ALL_DAMAGE_PROTECTION, 10), new EnchantmentData(Enchantments.FIRE_PROTECTION, 10), new EnchantmentData(Enchantments.BLAST_PROTECTION, 10), new EnchantmentData(Enchantments.PROJECTILE_PROTECTION, 10), new EnchantmentData(Enchantments.UNBREAKING, 5), new EnchantmentData(Enchantments.FALL_PROTECTION, 4)}));
 
 	// Mobzilla Scale
-	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_HELMET = ITEMS.register("mobzilla_scale_helmet", () -> new ArmorItem(EnumUtil.CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.HEAD, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_CHESTPLATE = ITEMS.register("mobzilla_scale_chestplate", () -> new ArmorItem(EnumUtil.CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.CHEST, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_LEGGINGS = ITEMS.register("mobzilla_scale_leggings", () -> new ArmorItem(EnumUtil.CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.LEGS, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
-	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_BOOTS = ITEMS.register("mobzilla_scale_boots", () -> new ArmorItem(EnumUtil.CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.FEET, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_HELMET = ITEMS.register("mobzilla_scale_helmet", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.HEAD, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_CHESTPLATE = ITEMS.register("mobzilla_scale_chestplate", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.CHEST, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_LEGGINGS = ITEMS.register("mobzilla_scale_leggings", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.LEGS, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
+	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_BOOTS = ITEMS.register("mobzilla_scale_boots", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.FEET, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
 
 	// Miners Dream
 	public static final RegistryObject<Item> MINERS_DREAM = ITEMS.register("miners_dream", () -> new MinersDreamItem(new Item.Properties().tab(CAItemGroups.ITEMS).stacksTo(16)));

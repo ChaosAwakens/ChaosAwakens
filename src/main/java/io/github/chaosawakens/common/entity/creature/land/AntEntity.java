@@ -24,13 +24,13 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<AntEntity> mainController = new WrappedAnimationController<AntEntity>(this, createMainMappedController("antmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<AntEntity>> antControllers = new ObjectArrayList<WrappedAnimationController<AntEntity>>(1);
+	private final WrappedAnimationController<AntEntity> mainController = createMainMappedController("antmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final BooleanValue tpConfig;
@@ -53,14 +53,9 @@ public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob 
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<AntEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -124,7 +119,7 @@ public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob 
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<AntEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<AntEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<AntEntity>> getWrappedControllers() {
+		return antControllers;
 	}
 }

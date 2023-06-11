@@ -15,13 +15,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class SparkFishEntity extends AnimatableGroupFishEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<SparkFishEntity> mainController = new WrappedAnimationController<SparkFishEntity>(this, createMainMappedController("sparkfishmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<SparkFishEntity>> sparkFishControllers = new ObjectArrayList<WrappedAnimationController<SparkFishEntity>>(1);
+	private final WrappedAnimationController<SparkFishEntity> mainController = createMainMappedController("sparkfishmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
 
@@ -40,14 +40,9 @@ public class SparkFishEntity extends AnimatableGroupFishEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<SparkFishEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -83,7 +78,7 @@ public class SparkFishEntity extends AnimatableGroupFishEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<SparkFishEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<SparkFishEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<SparkFishEntity>> getWrappedControllers() {
+		return sparkFishControllers;
 	}
 }

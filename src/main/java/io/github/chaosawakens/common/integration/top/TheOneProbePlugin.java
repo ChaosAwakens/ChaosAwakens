@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
 
 public class TheOneProbePlugin {
+	
 	public static void register() {
 		InterModComms.sendTo("theoneprobe", "getTheOneProbe", GetTheOneProbe::new);
 	}
@@ -39,25 +40,25 @@ public class TheOneProbePlugin {
 			iTheOneProbe.registerBlockDisplayOverride((probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData) -> {
 				if (blockState.getBlock() instanceof CAEntityTrapOreBlock) {
 					if (blockState.is(CABlocks.RED_ANT_INFESTED_ORE.get())) {
-						ItemStack stack = new ItemStack(Items.DIAMOND_ORE);
+						ItemStack diamondStack = new ItemStack(Items.DIAMOND_ORE);
 						iProbeInfo
 								.horizontal()
-								.item(stack)
+								.item(diamondStack)
 								.vertical()
-								.itemLabel(stack)
+								.itemLabel(diamondStack)
 								.text(CompoundText.create()
 										.style(TextStyleClass.MODNAME)
-										.text(Tools.getModName(stack.getItem())));
+										.text(Tools.getModName(diamondStack.getItem())));
 					} else if (blockState.is(CABlocks.TERMITE_INFESTED_ORE.get())) {
-						ItemStack stack = new ItemStack(Items.EMERALD_ORE);
+						ItemStack emeraldStack = new ItemStack(Items.EMERALD_ORE);
 						iProbeInfo
 								.horizontal()
-								.item(stack)
+								.item(emeraldStack)
 								.vertical()
-								.itemLabel(stack)
+								.itemLabel(emeraldStack)
 								.text(CompoundText.create()
 										.style(TextStyleClass.MODNAME)
-										.text(Tools.getModName(stack.getItem())));
+										.text(Tools.getModName(emeraldStack.getItem())));
 					}
 					return true;
 				}
@@ -67,13 +68,15 @@ public class TheOneProbePlugin {
 			iTheOneProbe.registerEntityProvider(new IProbeInfoEntityProvider() {
 				@Override
 				public String getID() {
-					return ChaosAwakens.MODID + ":default";
+					return ChaosAwakens.prefix("default").toString();
 				}
 
 				@Override
 				public void addProbeEntityInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, Entity entity, IProbeHitEntityData iProbeHitEntityData) {
-					String s = TextFormatting.stripFormatting(entity.getName().getString());
-					if ("Froakie".equalsIgnoreCase(s)) iProbeInfo.text(CompoundText.createLabelInfo("Special Frog Species: ", "Blue"));
+					String unformattedName = TextFormatting.stripFormatting(entity.getName().getString());
+					
+					if ("Froakie".equalsIgnoreCase(unformattedName)) iProbeInfo.text(CompoundText.createLabelInfo("Special Frog Species: ", "Blue"));
+					
 					if (entity instanceof AppleCowEntity) {
 						int type = ((AppleCowEntity) entity).getAppleCowType();
 						switch (type) {
@@ -109,26 +112,7 @@ public class TheOneProbePlugin {
 					
 					if (entity instanceof CABoatEntity) {
 						String type = ((CABoatEntity) entity).getBoatWoodType();
-						switch (type) {
-						case "apple":
-						default:
-							iProbeInfo.text(CompoundText.createLabelInfo("Apple Boat", ""));
-							return;
-						case "cherry":
-							iProbeInfo.text(CompoundText.createLabelInfo("Cherry Boat", ""));
-							return;
-						case "duplication":
-							iProbeInfo.text(CompoundText.createLabelInfo("Duplicator Boat", ""));
-							return;
-						case "ginkgo":
-							iProbeInfo.text(CompoundText.createLabelInfo("Ginkgo Boat", ""));
-							return;
-						case "peach":
-							iProbeInfo.text(CompoundText.createLabelInfo("Peach Boat", ""));
-							return;
-						case "skywood":
-							iProbeInfo.text(CompoundText.createLabelInfo("Skywood Boat", ""));
-						}
+						iProbeInfo.text(CompoundText.createLabelInfo(type.substring(type.indexOf(":") + 1).replaceFirst(type.substring(0), type.substring(0).toUpperCase()).concat(" Boat"), ""));
 					}
 
 					if (entity instanceof TreeFrogEntity) {

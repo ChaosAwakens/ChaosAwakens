@@ -41,13 +41,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class GoldenAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<GoldenAppleCowEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("goldenapplecowmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<GoldenAppleCowEntity>> goldenAppleCowControllers = new ObjectArrayList<WrappedAnimationController<GoldenAppleCowEntity>>(1);
+	private final WrappedAnimationController<GoldenAppleCowEntity> mainController = createMainMappedController("goldenapplecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
@@ -67,14 +67,9 @@ public class GoldenAppleCowEntity extends AnimatableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<GoldenAppleCowEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -175,7 +170,7 @@ public class GoldenAppleCowEntity extends AnimatableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<GoldenAppleCowEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<GoldenAppleCowEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<GoldenAppleCowEntity>> getWrappedControllers() {
+		return goldenAppleCowControllers;
 	}
 }

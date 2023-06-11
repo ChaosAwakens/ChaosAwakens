@@ -40,13 +40,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final WrappedAnimationController<CarrotPigEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("carrotpigmaincontroller"));
+	private final ObjectArrayList<WrappedAnimationController<CarrotPigEntity>> carrotPigControllers = new ObjectArrayList<WrappedAnimationController<CarrotPigEntity>>(1);
+	private final WrappedAnimationController<CarrotPigEntity> mainController = createMainMappedController("carrotpigmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.POTATO, Items.BEETROOT);
@@ -66,14 +66,9 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<CarrotPigEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -156,7 +151,7 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 		
 		if (handStack.getItem() == Items.SHEARS && canShear()) {
 			this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 1.0F);
-			((ServerWorld) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+			if (this.level instanceof ServerWorld) ((ServerWorld) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 			EntityUtil.convertEntity(this, EntityType.PIG, this.level);
 			
 			for (int i = 0; i < 4; ++i) this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(1.0D), this.getZ(), new ItemStack(Items.CARROT)));
@@ -182,7 +177,7 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<CarrotPigEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<CarrotPigEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<CarrotPigEntity>> getWrappedControllers() {
+		return carrotPigControllers;
 	}
 }

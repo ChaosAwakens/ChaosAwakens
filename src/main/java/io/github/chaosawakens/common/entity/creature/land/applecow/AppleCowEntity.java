@@ -50,14 +50,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<WrappedAnimationController<AppleCowEntity>> appleCowControllers = new ObjectArrayList<WrappedAnimationController<AppleCowEntity>>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
-	private final WrappedAnimationController<AppleCowEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("applecowmaincontroller"));
+	private final WrappedAnimationController<AppleCowEntity> mainController = createMainMappedController("applecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
@@ -77,14 +77,9 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<AppleCowEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -223,8 +218,8 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<AppleCowEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<AppleCowEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<AppleCowEntity>> getWrappedControllers() {
+		return appleCowControllers;
 	}
 	
 	private class AppleCowData extends AgeableData {

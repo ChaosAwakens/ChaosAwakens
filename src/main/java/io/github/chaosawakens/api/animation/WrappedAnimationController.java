@@ -9,8 +9,8 @@ import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
 
-public class WrappedAnimationController<T extends IAnimatableEntity> {
-	protected T animatable;
+public class WrappedAnimationController<E extends IAnimatableEntity> {
+	protected E animatable;
 	protected String name;
 	protected ExpandedAnimationState animationState = ExpandedAnimationState.FINISHED;	
 	protected Animation currentAnimation = none();
@@ -18,21 +18,19 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	protected double transitionProgress = 0;
 	protected double animationLength;
 	protected double animationProgress;	
-	protected final AnimationController<T> controller;
+	protected final AnimationController<E> controller;
 	protected MinecraftServer server;
 	
-	public WrappedAnimationController(T animatable, AnimationController<T> controller) {
+	public WrappedAnimationController(E animatable, AnimationController<E> controller) {
 		this.animatable = animatable;
 		this.transitionLength = animatable.animationInterval();
 		this.controller = controller;
 		this.name = controller.getName();
 		this.server = ((Entity) animatable).getServer();
-		this.animatable.getWrappedControllers().add(this);
 	}
 	
 	public void tick() {
-		double delta = server == null ? controller.tickOffset / 50.0 :
-			Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+		double delta = server == null ? controller.tickOffset / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -86,23 +84,19 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	}
 	
 	public boolean isAnimationFinished(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName)
-				&& animationState.equals(ExpandedAnimationState.FINISHED);
+		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
 	public boolean isAnimationFinished(IAnimationBuilder targetAnim) {
-		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName)
-				&& animationState.equals(ExpandedAnimationState.FINISHED);
+		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName) && animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName)
-				&& animationState.equals(ExpandedAnimationState.RUNNING);
+		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.RUNNING);
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
-		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName)
-				&& animationState.equals(ExpandedAnimationState.RUNNING);
+		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName) && animationState.equals(ExpandedAnimationState.RUNNING);
 	}
 	
 	public ExpandedAnimationState getAnimationState() {
@@ -110,14 +104,14 @@ public class WrappedAnimationController<T extends IAnimatableEntity> {
 	}
 
 	public double getAnimationProgress() {
-		return animationProgress;
+		return animationProgress + 3;
 	}
 	
 	public double getAnimationLength() {
 		return animationLength;
 	}
 	
-	public AnimationController<T> getWrappedController() {
+	public AnimationController<E> getWrappedController() {
 		return controller;
 	}
 	

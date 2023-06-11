@@ -42,14 +42,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class GazelleEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<WrappedAnimationController<GazelleEntity>> gazelleControllers = new ObjectArrayList<WrappedAnimationController<GazelleEntity>>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
-	private final WrappedAnimationController<GazelleEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("gazellemaincontroller"));
+	private final WrappedAnimationController<GazelleEntity> mainController = createMainMappedController("gazellemaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
@@ -73,12 +73,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	}
 
 	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
-	
-	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<GazelleEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -185,8 +180,8 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<GazelleEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<GazelleEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<GazelleEntity>> getWrappedControllers() {
+		return gazelleControllers;
 	}
 	
 	private class GazelleData extends AgeableData {

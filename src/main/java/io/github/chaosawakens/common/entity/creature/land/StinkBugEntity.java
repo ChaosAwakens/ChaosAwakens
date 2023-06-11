@@ -33,14 +33,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class StinkBugEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
+	private final ObjectArrayList<WrappedAnimationController<StinkBugEntity>> stinkBugControllers = new ObjectArrayList<WrappedAnimationController<StinkBugEntity>>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(StinkBugEntity.class, DataSerializers.INT);
-	private final WrappedAnimationController<StinkBugEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("stinkbugmaincontroller"));
+	private final WrappedAnimationController<StinkBugEntity> mainController = createMainMappedController("stinkbugmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 
@@ -59,14 +59,9 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 	public AnimationFactory getFactory() {
 		return factory;
 	}
-
-	@Override
-	public AnimationController<? extends IAnimatableEntity> getMainController() {
-		return mainController.getWrappedController();
-	}
 	
 	@Override
-	public WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController() {
+	public WrappedAnimationController<StinkBugEntity> getMainWrappedController() {
 		return mainController;
 	}
 
@@ -176,8 +171,8 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<StinkBugEntity>> getControllers() {
-		return new ObjectArrayList<AnimationController<StinkBugEntity>>(1);
+	public ObjectArrayList<WrappedAnimationController<StinkBugEntity>> getWrappedControllers() {
+		return stinkBugControllers;
 	}
 	
 	private class StinkBugData extends AgeableData {

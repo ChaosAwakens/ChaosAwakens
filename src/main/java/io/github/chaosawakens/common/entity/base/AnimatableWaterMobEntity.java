@@ -4,7 +4,9 @@ import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEffects;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -18,7 +20,6 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
@@ -35,7 +36,10 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	public abstract AnimationFactory getFactory();
 
 	@Override
-	public abstract AnimationController<? extends IAnimatableEntity> getMainController();
+	abstract public WrappedAnimationController<? extends AnimatableWaterMobEntity> getMainWrappedController();
+	
+	@Override
+	abstract public <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
 
 	@Override
 	public abstract int animationInterval();
@@ -172,7 +176,7 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	}
 
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null) playAnimation(getIdleAnim(), false);
+		if (getIdleAnim() != null && !isSwimming()) playAnimation(getIdleAnim(), false);
 		if (getSwimAnim() != null && isSwimming()) playAnimation(getSwimAnim(), false);
 	}
 }

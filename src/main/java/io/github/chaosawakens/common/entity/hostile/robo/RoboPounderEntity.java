@@ -2,10 +2,9 @@ package io.github.chaosawakens.common.entity.hostile.robo;
 
 import java.util.List;
 
-import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
-import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -34,30 +33,27 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> roboPounderControllerWrappers = new ObjectArrayList<WrappedAnimationController<RoboPounderEntity>>(1);
-	private final ObjectArrayList<AnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<AnimationController<RoboPounderEntity>>(1);
-	private final ObjectArrayList<? extends IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>();
+	private final ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<WrappedAnimationController<RoboPounderEntity>>(1);
 	private static final DataParameter<Boolean> SHOULD_TAUNT = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BOOLEAN);
-	private final WrappedAnimationController<RoboPounderEntity> mainController = new WrappedAnimationController<>(this, createMainMappedController("robopoundermaincontroller"));
-	private final WrappedAnimationController<RoboPounderEntity> attackController = new WrappedAnimationController<>(this, createMappedController("robopounderattackcontroller", this::attackPredicate));
+	private final WrappedAnimationController<RoboPounderEntity> mainController = createMainMappedController("robopoundermaincontroller");
+	private final WrappedAnimationController<RoboPounderEntity> attackController = createMappedController("robopounderattackcontroller", this::attackPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder tauntAnim = new SingletonAnimationBuilder(this, "Taunt", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "Right Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "Left Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
-	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setWrapped(attackController);
+	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Heavy Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rightSwingAnim = new SingletonAnimationBuilder(this, "Right Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder leftSwingAnim = new SingletonAnimationBuilder(this, "Left Swing Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder dashAttackAnim = new SingletonAnimationBuilder(this, "Dash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SWING_ATTACK_ID = 2;
 	private static final byte DASH_ATTACK_ID = 3;
@@ -83,11 +79,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public AnimationFactory getFactory() {
 		return factory;
-	}
-
-	@Override
-	public AnimationController<? extends AnimatableMonsterEntity> getMainController() {
-		return mainController.getWrappedController();
 	}
 	
 	@Override
@@ -211,19 +202,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ObjectArrayList<AnimationController<RoboPounderEntity>> getControllers() {
-		return roboPounderControllers;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
 	public ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> getWrappedControllers() {
-		return roboPounderControllerWrappers;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <E extends IAnimationBuilder> ObjectArrayList<E> getAnimations() {
-		return (ObjectArrayList<E>) roboPounderAnimations;
+		return roboPounderControllers;
 	}
 }
