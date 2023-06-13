@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 
 import io.github.chaosawakens.api.CAReflectionHelper;
-import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.manager.CAModManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -64,7 +63,7 @@ public class ChaosAwakens {
 			DEVELOPMENT = new ItemGroup("chaosawakens.development") {
 				@Override
 				public ItemStack makeIcon() {
-					return new ItemStack(CAItems.DEV_ITEM1.get());
+					return new ItemStack(Items.COMMAND_BLOCK);
 				}
 
 				/**

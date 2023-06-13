@@ -36,4 +36,9 @@ public class DimetrodonEntityModel extends ExtendedAnimatedTickingGeoModel<Dimet
 	protected boolean shouldApplyChildScaling() {
 		return true;
 	}
+	
+	@Override
+	protected boolean scaleHeadWithChild() {
+		return true;
+	}
 }

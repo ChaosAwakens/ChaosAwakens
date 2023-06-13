@@ -3,8 +3,8 @@ package io.github.chaosawakens.common.entity.ai;
 import java.util.EnumSet;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.vector.Vector3d;
@@ -24,7 +24,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	 *                        {@code if(RANDOM.nextInt(rate) == 0)}, so bigger =
 	 *                        less often
 	 */
-	public AnimatableMoveToTargetGoal(AnimatableMonsterEntity entity, double speedMultiplier, int checkRate) {
+	public AnimatableMoveToTargetGoal(MobEntity entity, double speedMultiplier, int checkRate) {
 		this.entity = entity;
 		this.speedMultiplier = speedMultiplier;
 		this.checkRate = checkRate;
@@ -40,14 +40,13 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	@Override
 	public boolean canContinueToUse() {
 //		if (RANDOM.nextInt(this.checkRate) == 0) return true;
-		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) && !entity.isAttacking();
+		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) &&entity.distanceTo(entity.getTarget()) > AnimatableGoal.getAttackReachSq(entity, entity.getTarget());
 	}
 	
 	@Override
 	public void start() {
 		pathCheckRate = 10;
 		this.entity.setAggressive(true);
-		this.entity.setMoving(true);
 		this.entity.lookAt(this.entity.getTarget(), 100, 100);
 		this.entity.getLookControl().setLookAt(this.entity.getTarget(), 30F, 30F);
 		this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
@@ -59,7 +58,6 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		LivingEntity target = this.entity.getTarget();
 		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.entity.setTarget(null);
 		this.entity.setAggressive(false);
-		this.entity.setMoving(false);
 		this.entity.getNavigation().stop();
 	}
 

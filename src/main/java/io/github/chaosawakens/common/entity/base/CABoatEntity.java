@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity.base;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CAWoodTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.BoatEntity;
@@ -68,30 +67,11 @@ public class CABoatEntity extends BoatEntity {
 	
 	@Override
 	public Item getDropItem() {
-		switch(getBoatWoodType()) {
-		default:
-			return CAItems.APPLE_BOAT.get();
-		case "apple":
-			return CAItems.APPLE_BOAT.get();
-		case "cherry":
-			return CAItems.CHERRY_BOAT.get();
-		case "duplication":
-			return CAItems.DUPLICATOR_BOAT.get();
-		case "ginkgo":
-			return CAItems.GINKGO_BOAT.get();
-		case "mesozoic":
-			return CAItems.MESOZOIC_BOAT.get();
-		case "densewood":
-			return CAItems.DENSEWOOD_BOAT.get();
-		case "peach":
-			return CAItems.PEACH_BOAT.get();
-		case "skywood":
-			return CAItems.SKYWOOD_BOAT.get();
-		}
+		return ForgeRegistries.ITEMS.getValue(ChaosAwakens.prefix(getBoatWoodType().substring(getBoatWoodType().indexOf(":") + 1) + "_boat"));
 	}
 	
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(ForgeRegistries.ITEMS.getValue(ChaosAwakens.prefix(getBoatWoodType() + "_boat")));
+        return new ItemStack(ForgeRegistries.ITEMS.getValue(ChaosAwakens.prefix(getBoatWoodType().substring(getBoatWoodType().indexOf(":") + 1) + "_boat")));
 	}
 }

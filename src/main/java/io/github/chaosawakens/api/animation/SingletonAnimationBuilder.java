@@ -88,9 +88,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public boolean isPlaying() {
-		return ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)
-				&& this.getWrappedController().getAnimationProgress() < getWrappedAnimLength()
-				&& owner.isPlayingAnimation(this, targetController);
+		return ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController) && getWrappedController().getAnimationProgress() < getWrappedAnimLength() && owner.isPlayingAnimation(this, targetController);
 	}
 
 	@Override
@@ -121,6 +119,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public void playAnimation(boolean forceAnim) {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return;
+		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 
 		if (forceAnim) targetController.getWrappedController().clearAnimationCache();
 		targetController.getWrappedController().setAnimation(getBuilder());

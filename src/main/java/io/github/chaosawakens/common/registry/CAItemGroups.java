@@ -7,7 +7,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 public class CAItemGroups {
-	static Random random = new Random();
+	private static Random random = new Random();
 
 	public static final ItemGroup BLOCKS = new ItemGroup("chaosawakens.blocks") {
 		@Override

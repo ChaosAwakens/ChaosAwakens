@@ -211,15 +211,14 @@ public class CAItemModelProvider extends ItemModelProvider {
 			} else if (block instanceof LeafCarpetBlock || block instanceof FenceBlock || block instanceof AbstractButtonBlock) {
 				withExistingParent(name, getBlockResourceLocation(name + "_inventory"));
 			} else {
-				if (!existingFileHelper.exists(getBlockResourceLocation(name), MODEL) || existingFileHelper.exists(getItemResourceLocation(name), MODEL))
-					continue;
+				if (!existingFileHelper.exists(getBlockResourceLocation(name), MODEL) || existingFileHelper.exists(getItemResourceLocation(name), MODEL)) continue;
 				withExistingParent(name, getBlockResourceLocation(name));
 			}
 		}
 	}
 
 	private static ResourceLocation getResourceLocation(String path) {
-		return new ResourceLocation(ChaosAwakens.MODID, path);
+		return ChaosAwakens.prefix(path);
 	}
 
 	private static ResourceLocation getBlockResourceLocation(String name) {

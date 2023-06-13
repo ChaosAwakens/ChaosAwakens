@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.neutral.AnimatableAngerMeleeAttackGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableAngerableAnimalEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -105,6 +106,7 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 	
 	@Override
 	protected void registerGoals() {
+		this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.4D, 3));
 		this.targetSelector.addGoal(0, new LeapAtTargetGoal(this, 0.4F));
 		this.targetSelector.addGoal(0, new AnimatableAngerMeleeAttackGoal(this, biteAnim, BITE_ATTACK_ID, 12, 14));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(DimetrodonEntity.class));

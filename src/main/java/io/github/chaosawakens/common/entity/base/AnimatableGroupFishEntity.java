@@ -84,7 +84,7 @@ public abstract class AnimatableGroupFishEntity extends AnimatableFishEntity {
 	public void tick() {
 		super.tick();
 
-		if (this.hasFollowers() && this.level.random.nextInt(probabilityToAddFollower) == 0) {
+		if (hasFollowers() && this.level.random.nextInt(probabilityToAddFollower) == 0 && animatableGroupLeader != null) {
 			List<AnimatableGroupFishEntity> curSchool = EntityUtil.getEntitiesAround(animatableGroupLeader, AnimatableGroupFishEntity.class, 8.0D, 8.0D, 8.0D, 8.0D);
 			if (curSchool.size() <= 1) this.schoolSize = 1;
 		}

@@ -9,12 +9,16 @@ public abstract class ExtendedAnimatedTickingGeoModel<E extends IAnimatableEntit
 	protected abstract boolean shouldApplyHeadRot();
 	protected abstract boolean shouldApplyChildScaling();
 	
+	protected boolean scaleHeadWithChild() {
+		return false;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void setLivingAnimations(E entity, Integer uniqueID, AnimationEvent customPredicate) {
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 		
 		if (shouldApplyHeadRot()) applyHeadRotations(getAnimationProcessor(), customPredicate);
-		if (shouldApplyChildScaling()) setBabyScaling(getAnimationProcessor(), customPredicate);
+		if (shouldApplyChildScaling()) setBabyScaling(getAnimationProcessor(), customPredicate, scaleHeadWithChild());
 	}
 }

@@ -1,8 +1,8 @@
 package io.github.chaosawakens.common.entity.ai;
 
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
-import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
 
@@ -13,7 +13,7 @@ public abstract class AnimatableMovableGoal extends AnimatableGoal {
 	@Override
 	abstract public boolean canUse();
 
-	protected boolean isExecutable(AnimatableMovableGoal goal, AnimatableMonsterEntity attacker, LivingEntity target) {
+	protected boolean isExecutable(AnimatableMovableGoal goal, MobEntity attacker, LivingEntity target) {
 		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;

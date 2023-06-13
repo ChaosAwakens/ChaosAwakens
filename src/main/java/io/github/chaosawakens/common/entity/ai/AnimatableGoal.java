@@ -3,20 +3,20 @@ package io.github.chaosawakens.common.entity.ai;
 import java.util.Random;
 
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
-import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 public abstract class AnimatableGoal extends Goal {
 	protected static final Random RANDOM = new Random();
-	protected AnimatableMonsterEntity entity;
+	protected MobEntity entity;
 	protected AnimatableAnimalEntity animalEntity;
 	protected long tickDelta;
 	protected double animationProgress;
 	protected long lastGameTime;
 	protected boolean isFirsLoop = true;
 
-	public static double getAttackReachSq(AnimatableMonsterEntity attacker, LivingEntity target) {
+	public static double getAttackReachSq(MobEntity attacker, LivingEntity target) {
 		double atkRch = attacker.getBbWidth() * 1.75D + (attacker.getEyeHeight() / 3.6D * 0.25D);
 		double offset = attacker.getBbWidth() * 0.5D;
 		return (atkRch * atkRch) / 1.5;

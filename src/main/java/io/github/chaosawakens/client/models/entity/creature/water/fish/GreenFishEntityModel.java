@@ -39,6 +39,6 @@ public class GreenFishEntityModel extends ExtendedAnimatedTickingGeoModel<GreenF
 		super.setLivingAnimations(entity, uniqueID, customPredicate);
 		
 		IBone root = this.getAnimationProcessor().getBone("root");	
-		if (!entity.isInWaterOrBubble()) root.setRotationZ(-90);
+		if (!entity.isInWaterOrBubble()) root.setRotationZ(-50);
 	}
 }

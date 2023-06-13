@@ -34,8 +34,8 @@ public class CATileEntities {
 
 	public static final RegistryObject<TileEntityType<CASignTileEntity>> CUSTOM_SIGN = TILE_ENTITIES.register("custom_sign",
 					() -> TileEntityType.Builder.of(CASignTileEntity::new, CABlocks.APPLE_WALL_SIGN.get(),
-							CABlocks.APPLE_SIGN.get(), CABlocks.CHERRY_WALL_SIGN.get(), CABlocks.CHERRY_SIGN.get(),
-							CABlocks.DUPLICATION_WALL_SIGN.get(), CABlocks.DUPLICATION_SIGN.get(), CABlocks.PEACH_WALL_SIGN.get(),
-									CABlocks.PEACH_SIGN.get(), CABlocks.SKYWOOD_WALL_SIGN.get(), CABlocks.SKYWOOD_SIGN.get(),
-									CABlocks.GINKGO_WALL_SIGN.get(), CABlocks.GINKGO_SIGN.get()).build(null));
+							CABlocks.APPLE_SIGN.get(), CABlocks.CHERRY_WALL_SIGN.get(), CABlocks.CHERRY_SIGN.get(), CABlocks.DENSEWOOD_WALL_SIGN.get(), CABlocks.DENSEWOOD_SIGN.get(),
+							CABlocks.DUPLICATION_WALL_SIGN.get(), CABlocks.DUPLICATION_SIGN.get(), CABlocks.MESOZOIC_WALL_SIGN.get(), CABlocks.MESOZOIC_SIGN.get(),
+							CABlocks.PEACH_WALL_SIGN.get(), CABlocks.PEACH_SIGN.get(), CABlocks.SKYWOOD_WALL_SIGN.get(), CABlocks.SKYWOOD_SIGN.get(),
+							CABlocks.GINKGO_WALL_SIGN.get(), CABlocks.GINKGO_SIGN.get()).build(null));
 }
