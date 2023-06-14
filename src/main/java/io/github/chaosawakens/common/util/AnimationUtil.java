@@ -12,7 +12,7 @@ import io.github.chaosawakens.api.animation.WrappedAnimationController;
 public final class AnimationUtil {
 	
 	private AnimationUtil() {
-		throw new IllegalAccessError("Utility Class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 
 	//TODO Prune

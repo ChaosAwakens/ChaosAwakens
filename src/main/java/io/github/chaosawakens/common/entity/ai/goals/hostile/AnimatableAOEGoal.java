@@ -102,15 +102,13 @@ public class AnimatableAOEGoal extends Goal {
 				&& owner.isAlive() && owner.getTarget().isAlive() && owner.getAttackID() == (byte) 0
 				&& actionPointTickStart <= aoeAnim.getWrappedController().getAnimationLength()
 				&& actionPointTickEnd <= aoeAnim.getWrappedController().getAnimationLength()
-				&& (extraActivationConditions != null ?
-						extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
+				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
 	public boolean canContinueToUse() {
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation)
-				&& !aoeAnim.getWrappedController().isAnimationFinished(aoeAnim) && owner.isAlive()
-				&& owner.getTarget().isAlive();
+				&& !aoeAnim.getWrappedController().isAnimationFinished(aoeAnim) && owner.isAlive();
 	}
 
 	@Override
@@ -129,17 +127,13 @@ public class AnimatableAOEGoal extends Goal {
 	public void tick() {
 		List<LivingEntity> affectedTargets = EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange);
 
-		if (shouldFreezeRotation)
-			EntityUtil.freezeEntityRotation(owner);
-		else if (aoeAnim.getWrappedController().getAnimationProgress() < actionPointTickStart)
-			owner.lookAt(Type.EYES, owner.getTarget().position());
+		if (shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
+		else if (aoeAnim.getWrappedController().getAnimationProgress() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
+		
 		if (!affectedTargets.isEmpty()) {
 			for (LivingEntity affectedTarget : affectedTargets) {
-				if (MathUtil.isBetween(aoeAnim.getWrappedController().getAnimationProgress(), actionPointTickStart,
-						actionPointTickEnd)) {
-					if (MathUtil.getDistanceBetween(owner, affectedTarget) <= aoeRange) {
-						owner.doHurtTarget(affectedTarget);
-					}
+				if (MathUtil.isBetween(aoeAnim.getWrappedController().getAnimationProgress(), actionPointTickStart, actionPointTickEnd)) {
+					if (MathUtil.getDistanceBetween(owner, affectedTarget) <= aoeRange) owner.doHurtTarget(affectedTarget);
 				}
 			}
 		}

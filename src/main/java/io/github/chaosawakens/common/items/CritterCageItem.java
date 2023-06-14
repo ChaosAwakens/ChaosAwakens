@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import io.github.chaosawakens.common.registry.CATags;
+import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -12,6 +13,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -52,7 +54,7 @@ public class CritterCageItem extends Item {
 		stack = playerIn.getMainHandItem();
 		ItemStack stackFill = getDefaultInstance();
 		//Note: Nesting apparently works better in this case than guard clause --Meme Man
-		if (canCaptureEntity(stackFill, playerIn, target)) {
+		if (shouldCaptureEntity(stackFill, playerIn, target)) {
 			if (stack.getCount() == 1) {
 				if (!containsEntity(stack) || stack.isEmpty()) {
 				  	stack = stackFill;   
@@ -88,7 +90,7 @@ public class CritterCageItem extends Item {
 	}
 	
 	@SuppressWarnings("resource")
-	public boolean canCaptureEntity(ItemStack stack, PlayerEntity player, LivingEntity target) {
+	public boolean shouldCaptureEntity(ItemStack stack, PlayerEntity player, LivingEntity target) {
 		if (target.getCommandSenderWorld().isClientSide) return false;
 		if (target instanceof PlayerEntity || !target.isAlive()) return false;
 		if (containsEntity(stack)) return false;
@@ -106,8 +108,10 @@ public class CritterCageItem extends Item {
 		
 		if (critterCageData.getBoolean("isVillager")) {
 			VillagerEntity targetVillager = (VillagerEntity) target;
-			critterCageData.putString("villagerProfession", targetVillager.getVillagerData().getProfession().toString());
-			critterCageData.putInt("villagerTradingLevel", targetVillager.getVillagerData().getLevel());
+			
+			critterCageData.putString("entityName", targetVillager.getName().getString() + " Villager");
+			critterCageData.putString("villagerProfession", targetVillager.getVillagerData().getProfession() != VillagerProfession.NONE ? ObjectUtil.capitalizeFirstLetter(targetVillager.getVillagerData().getProfession().toString()) : "None");
+			critterCageData.putInt("villagerTradingLevel", targetVillager.getVillagerData().getLevel());		
 		}
 		
 		if (critterCageData.getBoolean("isTameable")) {
@@ -117,7 +121,7 @@ public class CritterCageItem extends Item {
 			critterCageData.putString("owner", targetTameable.getOwner() instanceof PlayerEntity ? playerOwner.getScoreboardName() : "None");
 			if (targetTameable instanceof WolfEntity) {
 				WolfEntity targetWolf = (WolfEntity) targetTameable;
-				critterCageData.putString("collarColor", targetWolf.isTame() ? targetWolf.getCollarColor().toString() : "None");
+				critterCageData.putString("collarColor", targetWolf.isTame() ? ObjectUtil.capitalizeFirstLetter(targetWolf.getCollarColor().toString()) : "None");
 			}
 		}
 		
@@ -154,7 +158,6 @@ public class CritterCageItem extends Item {
 		return !stack.isEmpty() && stack.hasTag() && stack.getTag().contains("entity");
 	}
 	
-	@SuppressWarnings("unused")
 	@Override
 	public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
 		if (containsEntity(stack) && CAConfigManager.MAIN_CLIENT.enableCritterCageTooltips.get()) {
@@ -166,15 +169,11 @@ public class CritterCageItem extends Item {
 				LivingEntity target = getEntityFromStack(stack, world, true);
 				//Extra check
 				if (target instanceof VillagerEntity) {
-					if (stack.getTag().getString("villagerProfession") != null && !target.hasCustomName()) {
-						String name = getMobName(stack).replaceAll(getMobName(stack).substring(0, getMobName(stack).length()), "Villager");
-					}
 					if (CAConfigManager.MAIN_CLIENT.enableCritterCageVillagerProfessionToolTip.get()) tooltip.add(new StringTextComponent("Profession: " + stack.getTag().getString("villagerProfession")));
 					if (CAConfigManager.MAIN_CLIENT.enableCritterCageVillagerTradingLevelToolTip.get()) {
 						switch (stack.getTag().getInt("villagerTradingLevel")) {
-						//More checks because it looks neat (also it doesn't work if there aren't an absurd amount of checks so yeah) --Meme Man
-						default: if (stack.getTag().getString("villagerProfession") == "unemployed") tooltip.add(new StringTextComponent("Trading Level: None"));
-						case 1: if (stack.getTag().getInt("villagerTradingLevel") == 1) tooltip.add(new StringTextComponent("Trading Level: Novice"));
+						default: if (stack.getTag().getString("villagerProfession").equalsIgnoreCase("none")) tooltip.add(new StringTextComponent("Trading Level: None"));
+						case 1: if (stack.getTag().getInt("villagerTradingLevel") == 1 && !stack.getTag().getString("villagerProfession").equalsIgnoreCase("none")) tooltip.add(new StringTextComponent("Trading Level: Novice"));
 						case 2: if (stack.getTag().getInt("villagerTradingLevel") == 2) tooltip.add(new StringTextComponent("Trading Level: Apprentice"));
 						case 3: if (stack.getTag().getInt("villagerTradingLevel") == 3) tooltip.add(new StringTextComponent("Trading Level: Journeyman"));
 						case 4: if (stack.getTag().getInt("villagerTradingLevel") == 4) tooltip.add(new StringTextComponent("Trading Level: Expert"));

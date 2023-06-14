@@ -7,7 +7,7 @@ import net.minecraft.util.math.vector.Vector3d;
 public final class MathUtil {
 	
 	private MathUtil() {
-		throw new IllegalAccessError("Utility Class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 	
 	/**

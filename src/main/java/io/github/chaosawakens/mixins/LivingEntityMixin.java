@@ -4,27 +4,22 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.items.armor.EnderScaleArmorItem;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
-//TODO Re-code this entire file, the code I wrote here is just a temporary substitute while other stuff gets worked on
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity {
+public abstract class LivingEntityMixin {
 	
-	public LivingEntityMixin(EntityType<?> type, World world) {
-		super(type, world);
+	private LivingEntityMixin() {
+		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
 	}
 	
 	@ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setSharedFlag(IZ)V"), method = "updateFallFlying")
@@ -37,12 +32,6 @@ public abstract class LivingEntityMixin extends Entity {
 			return entity.getSharedFlag(7);
 		}
 		return entity.getSharedFlag(7);
-	}
-	
-	@Inject(method = "Lnet/minecraft/entity/LivingEntity;aiStep()V", at = @At("INVOKE"), cancellable = true)
-	public void chaosawakens$aiStep(CallbackInfo info) {
-		LivingEntity entity = (LivingEntity) (Object) this;
-		if (EnderScaleArmorItem.isElytraToggled((entity.getItemBySlot(EquipmentSlotType.CHEST)))) entity.flyingSpeed += 0.012F;
 	}
 
 	@Inject(method = "isImmobile", at = @At("HEAD"), cancellable = true)

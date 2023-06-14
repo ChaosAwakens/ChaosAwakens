@@ -11,6 +11,6 @@ public class CrystalFurnaceFuelSlot extends Slot {
 	}
 
 	public boolean mayPlace(ItemStack itemStack) {
-		return itemStack.getItem() == CABlocks.CRYSTAL_ENERGY.get().asItem();
+		return itemStack.getItem() == CABlocks.ENERGIZED_KYANITE.get().asItem();
 	}
 }

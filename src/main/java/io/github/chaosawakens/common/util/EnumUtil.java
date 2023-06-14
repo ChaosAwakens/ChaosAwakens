@@ -17,7 +17,7 @@ import net.minecraft.util.SoundEvents;
 public final class EnumUtil {
 	
 	private EnumUtil() {
-		throw new IllegalAccessError("Utility Class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 	
 	public enum CAItemTier implements IItemTier {

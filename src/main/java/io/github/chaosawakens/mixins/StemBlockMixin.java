@@ -13,9 +13,13 @@ import net.minecraft.world.IBlockReader;
 
 @Mixin(StemBlock.class)
 public abstract class StemBlockMixin {
+	
+	private StemBlockMixin() {
+		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
+	}
 
 	@Inject(method = "Lnet/minecraft/block/StemBlock;mayPlaceOn(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/IBlockReader;Lnet/minecraft/util/math/BlockPos;)Z", at = @At("HEAD"), cancellable = true)
 	private void chaosawakens$mayPlaceOn(BlockState state, IBlockReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		if(state.is(CATags.Blocks.FARMABLE)) cir.setReturnValue(true);
+		if (state.is(CATags.Blocks.FARMABLE)) cir.setReturnValue(true);
 	}
 }

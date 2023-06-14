@@ -159,8 +159,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (getAttackID() == PUNCH_ATTACK_ID || getAttackID() == DASH_ATTACK_ID) {
 			if (target instanceof PlayerEntity) {
 				PlayerEntity playerTarget = (PlayerEntity) target;
-				if (EntityUtil.isHoldingItem(playerTarget, Items.SHIELD))
-					EntityUtil.disableShield(playerTarget, 200);
+				if (EntityUtil.isHoldingItem(playerTarget, Items.SHIELD)) EntityUtil.disableShield(playerTarget, 200);
 			}
 		}
 	}

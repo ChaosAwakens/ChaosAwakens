@@ -24,8 +24,7 @@ public class AnimatableMeleeGoal extends Goal {
 	private final int probability;
 	private Predicate<AnimatableMonsterEntity> extraActivationConditions;
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim,
-			byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability) {
 		this.owner = owner;
 		this.meleeAnim = meleeAnim;
 		this.attackId = attackId;
@@ -35,31 +34,24 @@ public class AnimatableMeleeGoal extends Goal {
 		this.probability = probability;
 	}
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim,
-			byte attackId, double angleRange, double actionPointTickStart, double actionPointTickEnd) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double angleRange, double actionPointTickStart, double actionPointTickEnd) {
 		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1);
 	}
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim,
-			byte attackId, double actionPointTickStart, double actionPointTickEnd, int probability) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, int probability) {
 		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, probability);
 	}
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim,
-			byte attackId, double actionPointTickStart, double actionPointTickEnd) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd) {
 		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1);
 	}
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim,
-			byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange,
-			Predicate<AnimatableMonsterEntity> activationPredicate) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, Predicate<AnimatableMonsterEntity> activationPredicate) {
 		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1);
 		this.extraActivationConditions = activationPredicate;
 	}
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim,
-			byte attackId, double actionPointTickStart, double actionPointTickEnd,
-			Predicate<AnimatableMonsterEntity> activationPredicate) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, Predicate<AnimatableMonsterEntity> activationPredicate) {
 		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1);
 		this.extraActivationConditions = activationPredicate;
 	}
@@ -67,18 +59,13 @@ public class AnimatableMeleeGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceToSqr(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget()) + 1D
-				&&/* actionPointTickStart <= meleeAnim.getWrappedAnimLength()
-				&& actionPointTickEnd <= meleeAnim.getWrappedAnimLength()
-				&&*/ (extraActivationConditions != null ? extraActivationConditions.test(owner)
-						: owner.getRandom().nextInt(probability) == 0);
+				&& owner.distanceToSqr(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget()) * 2
+				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId)
-				&& owner.isAlive() && !meleeAnim.get().getWrappedController().isCurrentAnimationFinished()
-				&& owner.getTarget().isAlive();
+		return ObjectUtil.performNullityChecks(false, owner, meleeAnim.get(), attackId) && owner.isAlive() && !meleeAnim.get().getWrappedController().isCurrentAnimationFinished();
 	}
 
 	@Override
@@ -102,24 +89,26 @@ public class AnimatableMeleeGoal extends Goal {
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
 		
 		double reach = owner.getMeleeAttackReachSqr(target);
-		List<LivingEntity> potentialAffectedTargets = EntityUtil
-				.getAllEntitiesAround(owner, reach + 1, reach + 1, reach + 1, reach + 1);
+		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
 		if (meleeAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			double targetAngle = MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
 			double attackAngle = owner.yBodyRot + 180;
+			
+			if (targetAngle < 0) targetAngle += 360;
+			if (attackAngle < 0) attackAngle += 360;
+			
 			double relativeHitAngle = targetAngle - attackAngle;
+			float hitDistanceSqr = (float) (Math.sqrt((target.getZ() - owner.getZ()) * (target.getZ() - owner.getZ()) + (target.getX() - owner.getX()) * (target.getX() - owner.getX())) - owner.getBbWidth() / 2F);
+			
 			if (MathUtil.isBetween(meleeAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 				ChaosAwakens.debug("GOAL", "------------");
 				ChaosAwakens.debug("TARGET", potentialAffectedTarget);
 				ChaosAwakens.debug("REL ATK ANGLE", relativeHitAngle);
 				ChaosAwakens.debug("RESTRICTION", MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange));
 				ChaosAwakens.debug("END", "------------");
-				if (owner.distanceToSqr(owner.getTarget()) <= reach
-						&& MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) {
-					owner.doHurtTarget(potentialAffectedTarget);
-				}
+				if (hitDistanceSqr <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) owner.doHurtTarget(potentialAffectedTarget);
 			}
 		}
 		if (meleeAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);

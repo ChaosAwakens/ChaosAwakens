@@ -234,7 +234,7 @@ public class CATagProvider extends BlockTagsProvider {
 			this.tag(CATags.Items.SPAWNER_SPAWN_EGGS).add(CAItems.ENDER_DRAGON_SPAWN_EGG.get(), CAItems.WITHER_SPAWN_EGG.get(), CAItems.SNOW_GOLEM_SPAWN_EGG.get(), CAItems.IRON_GOLEM_SPAWN_EGG.get());
 			
 			this.tag(ItemTags.bind("forge:ingots/copper")).add(CAItems.COPPER_LUMP.get());
-			this.tag(CATags.Items.CRYSTAL_FURNACE_FUEL).add(CABlocks.CRYSTAL_ENERGY.get().asItem(), CAItems.LAVA_PINK_TOURMALINE_BUCKET.get());
+			this.tag(CATags.Items.CRYSTAL_FURNACE_FUEL).add(CAItems.CRYSTAL_ENERGY.get(), CAItems.LAVA_PINK_TOURMALINE_BUCKET.get());
 		}
 	}
 

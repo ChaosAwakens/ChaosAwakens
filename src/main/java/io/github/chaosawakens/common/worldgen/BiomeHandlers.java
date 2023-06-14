@@ -69,7 +69,7 @@ public class BiomeHandlers {
 		private static final Consumer<MobSpawnInfoBuilder> CRYSTAL_WORLD_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_APPLE_COW.get(), 7, 1, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_CARROT_PIG.get(), 4, 1, 3));
-		//	builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_GATOR.get(), 5, 1, 4));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.CRYSTAL_GATOR.get(), 5, 1, 4));
 		};
 
 		// VILLAGE MANIA
@@ -82,7 +82,7 @@ public class BiomeHandlers {
 		// MINER'S PARADISE
 		private static final Consumer<MobSpawnInfoBuilder> STALAGMITE_VALLEY_MOBS = (builder) -> {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.DIMETRODON.get(), 1, 1, 3));
-			builder.addSpawn(EntityClassification.AMBIENT, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 1, 1, 4));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.EMERALD_GATOR.get(), 1, 1, 4));
 		};
 
 		private static final Consumer<MobSpawnInfoBuilder> MESOZOIC_JUNGLE_MOBS = (builder) -> {

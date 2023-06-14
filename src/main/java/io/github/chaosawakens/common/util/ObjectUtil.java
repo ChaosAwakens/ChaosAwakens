@@ -1,11 +1,12 @@
 package io.github.chaosawakens.common.util;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public final class ObjectUtil {
 	
 	private ObjectUtil() {
-		throw new IllegalAccessError("Utility Class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 	
 	/**
@@ -22,6 +23,15 @@ public final class ObjectUtil {
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Capitalizes the very first character in a specified {@link String}
+	 * @param targetString String to capitalize the first letter of
+	 * @return The specified String with the first character in it capitalized
+	 */
+	public static String capitalizeFirstLetter(String targetString) {
+		return targetString.replaceAll(targetString.substring(0, 1), targetString.substring(0, 1).toUpperCase(Locale.ROOT));
 	}
 
 }

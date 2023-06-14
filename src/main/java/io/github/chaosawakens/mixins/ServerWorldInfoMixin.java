@@ -12,6 +12,10 @@ import net.minecraft.world.storage.ServerWorldInfo;
 @Mixin(ServerWorldInfo.class)
 public class ServerWorldInfoMixin {
 	
+	private ServerWorldInfoMixin() {
+		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
+	}
+	
 	//Disable experimental settings warning screen
 	@Inject(method = "Lnet/minecraft/world/storage/ServerWorldInfo;worldGenSettingsLifecycle()Lcom/mojang/serialization/Lifecycle;", at = @At("HEAD"), cancellable = true)
 	private void chaosawakens$worldGenSettingsLifecycle(CallbackInfoReturnable<Lifecycle> callback) {

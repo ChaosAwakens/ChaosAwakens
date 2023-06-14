@@ -13,6 +13,10 @@ import net.minecraft.world.IBlockReader;
 
 @Mixin(CropsBlock.class)
 public abstract class CropsBlockMixin {
+	
+	private CropsBlockMixin() {
+		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
+	}
 
 	@Inject(method = "Lnet/minecraft/block/CropsBlock;mayPlaceOn(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/IBlockReader;Lnet/minecraft/util/math/BlockPos;)Z", at = @At("HEAD"), cancellable = true)
 	private void chaosawakens$mayPlaceOn(BlockState state, IBlockReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {

@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_crystal_energy": {
+    "has_energized_kyanite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:crystal_energy"
+            "item": "chaosawakens:energized_kyanite"
           }
         ]
       }
@@ -45,7 +45,7 @@
   },
   "requirements": [
     [
-      "has_crystal_energy",
+      "has_energized_kyanite",
       "has_pink_tourmaline_ingot",
       "has_cats_eye_ingot",
       "has_the_recipe"

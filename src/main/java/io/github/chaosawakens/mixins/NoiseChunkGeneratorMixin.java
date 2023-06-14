@@ -17,10 +17,9 @@ import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.NoiseChunkGenerator;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 
 @Mixin(NoiseChunkGenerator.class)
-public abstract class NoiseChunkGeneratorMixin extends ChunkGenerator {
+public abstract class NoiseChunkGeneratorMixin {
 	@Shadow
 	@Final
 	@Mutable
@@ -29,8 +28,8 @@ public abstract class NoiseChunkGeneratorMixin extends ChunkGenerator {
 	@Unique
 	private static long generationSeed = 0;
 
-	public NoiseChunkGeneratorMixin(BiomeProvider biomeSource, BiomeProvider biomeSource2, DimensionStructuresSettings structureSettings, long l) {
-		super(biomeSource, biomeSource2, structureSettings, l);
+	private NoiseChunkGeneratorMixin() {
+		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
 	}
 
 	@Unique

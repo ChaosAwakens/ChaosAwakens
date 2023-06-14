@@ -21,6 +21,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -82,6 +83,11 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.COD_AMBIENT;
+	}
+	
+	@Override
+	protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+		return SoundEvents.COD_HURT;
 	}
 
 	@Override

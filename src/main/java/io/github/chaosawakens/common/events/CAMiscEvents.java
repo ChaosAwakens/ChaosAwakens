@@ -8,10 +8,10 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
+import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -64,8 +64,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickEmpty;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.BlockToolInteractEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
 import net.minecraftforge.event.world.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -76,28 +76,28 @@ public class CAMiscEvents {
 	
 	@SubscribeEvent
 	public static void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
-		Entity entity = event.getEntity();
-		if (entity == null) return;
+		Entity target = event.getEntity();
+		if (target == null) return;
 		if (CAConfigManager.MAIN_COMMON.showUpdateMessage.get() && VersionChecker.getResult(ModList.get().getModContainerById(ChaosAwakens.MODID).get().getModInfo()).status == VersionChecker.Status.OUTDATED) {
-			entity.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)
+			target.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)
 					.append(new StringTextComponent(ChaosAwakens.MODNAME).withStyle(TextFormatting.BOLD, TextFormatting.GOLD))
 					.append(new StringTextComponent(" is now available from: ").withStyle(TextFormatting.WHITE))
 					.append(new StringTextComponent("https://chaosawakens.github.io/#downloadsDiv").withStyle((style) -> style.withColor(TextFormatting.GOLD).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaosawakens.github.io/#downloadsDiv")))), Util.NIL_UUID);
 		}
-		if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
-			Objects.requireNonNull(entity.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.GREEN)
+		if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
+			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.GREEN)
 					.append(new StringTextComponent("Blackout03_").withStyle(TextFormatting.BOLD, TextFormatting.DARK_GREEN))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.GREEN)), ChatType.SYSTEM, Util.NIL_UUID);
-		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("29aa413b-d714-46f1-a3f5-68b9c67a4923"))) { // UUID of Ninjaguy169
-			Objects.requireNonNull(entity.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.BLUE)
+		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("29aa413b-d714-46f1-a3f5-68b9c67a4923"))) { // UUID of Ninjaguy169
+			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.BLUE)
 					.append(new StringTextComponent("Ninjaguy169").withStyle(TextFormatting.BOLD, TextFormatting.DARK_BLUE))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.BLUE)), ChatType.SYSTEM, Util.NIL_UUID);
-		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("2668a475-2166-4539-9935-00f087818c4a"))) { // UUID of T40ne
-			Objects.requireNonNull(entity.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.GOLD)
+		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("2668a475-2166-4539-9935-00f087818c4a"))) { // UUID of T40ne
+			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.GOLD)
 					.append(new StringTextComponent("T40ne").withStyle(TextFormatting.BOLD, TextFormatting.YELLOW))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.GOLD)), ChatType.SYSTEM, Util.NIL_UUID);
-		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("8c89a0d3-3271-459d-a8c1-a9d34d53365b"))) { // UUID of FunkyMonk127
-			Objects.requireNonNull(entity.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.RED)
+		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("8c89a0d3-3271-459d-a8c1-a9d34d53365b"))) { // UUID of FunkyMonk127
+			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.RED)
 					.append(new StringTextComponent("FunkyMonk127").withStyle(TextFormatting.BOLD, TextFormatting.DARK_RED))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.RED)), ChatType.SYSTEM, Util.NIL_UUID);
 		}
@@ -105,55 +105,57 @@ public class CAMiscEvents {
 	
 	@SubscribeEvent
 	public static void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
-		Entity entity = event.getEntity();
+		Entity target = event.getEntity();
 		// Make villagers afraid of our entities
-		if (entity instanceof VillagerEntity) {
-			VillagerEntity villager = (VillagerEntity) entity;
-			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, AnimatableMonsterEntity.class, 40.0F, 0.5D, 0.5D));
-			villager.goalSelector.addGoal(1, new AvoidEntityGoal<>(villager, GiantEntity.class, 32.0F, 0.5D, 0.5D));
+		if (target instanceof VillagerEntity) {
+			VillagerEntity villagerTarget = (VillagerEntity) target;
+			villagerTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(villagerTarget, AnimatableMonsterEntity.class, 40.0F, 0.5D, 0.5D));
+			villagerTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(villagerTarget, GiantEntity.class, 32.0F, 0.5D, 0.5D));
 		}
-		if (entity instanceof WanderingTraderEntity) {
-			WanderingTraderEntity wanderingTrader = (WanderingTraderEntity) entity;
-			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, AnimatableMonsterEntity.class, 40.0F, 0.5D, 0.5D));
-			wanderingTrader.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTrader, GiantEntity.class, 32.0F, 0.5D, 0.5D));
+		if (target instanceof WanderingTraderEntity) {
+			WanderingTraderEntity wanderingTraderTarget = (WanderingTraderEntity) target;
+			wanderingTraderTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTraderTarget, AnimatableMonsterEntity.class, 40.0F, 0.5D, 0.5D));
+			wanderingTraderTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTraderTarget, GiantEntity.class, 32.0F, 0.5D, 0.5D));
 		}
-		if (entity instanceof GiantEntity) {
-			GiantEntity giant = (GiantEntity) entity;
-			giant.goalSelector.addGoal(8, new LookAtGoal(giant, PlayerEntity.class, 24.0F));
-			giant.goalSelector.addGoal(8, new LookRandomlyGoal(giant));
+		if (target instanceof GiantEntity) {
+			GiantEntity giantTarget = (GiantEntity) target;
+			giantTarget.goalSelector.addGoal(8, new LookAtGoal(giantTarget, PlayerEntity.class, 24.0F));
+			giantTarget.goalSelector.addGoal(8, new LookRandomlyGoal(giantTarget));
 
-			giant.goalSelector.addGoal(2, new MeleeAttackGoal(giant, 1.0F, false));
-			giant.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(giant, 1.0F));
-			giant.targetSelector.addGoal(2, new HurtByTargetGoal(giant));
-			giant.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(giant, PlayerEntity.class, true));
-			giant.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(giant, AbstractVillagerEntity.class, false));
-			giant.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(giant, IronGolemEntity.class, true));
+			giantTarget.goalSelector.addGoal(2, new MeleeAttackGoal(giantTarget, 1.0F, false));
+			giantTarget.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(giantTarget, 1.0F));
+			giantTarget.targetSelector.addGoal(2, new HurtByTargetGoal(giantTarget));
+			giantTarget.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(giantTarget, PlayerEntity.class, true));
+			giantTarget.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(giantTarget, AbstractVillagerEntity.class, false));
+			giantTarget.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(giantTarget, IronGolemEntity.class, true));
 
-			Objects.requireNonNull(giant.getAttribute(Attributes.FOLLOW_RANGE)).setBaseValue(100); // FOLLOW_RANGE
-			Objects.requireNonNull(giant.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.15F); // MOVEMENT_SPEED
-			Objects.requireNonNull(giant.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(20.0D); // ATTACK_DAMAGE
-			Objects.requireNonNull(giant.getAttribute(Attributes.ARMOR)).setBaseValue(10.0D); // ARMOR
+			Objects.requireNonNull(giantTarget.getAttribute(Attributes.FOLLOW_RANGE)).setBaseValue(100); // FOLLOW_RANGE
+			Objects.requireNonNull(giantTarget.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.15F); // MOVEMENT_SPEED
+			Objects.requireNonNull(giantTarget.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(20.0D); // ATTACK_DAMAGE
+			Objects.requireNonNull(giantTarget.getAttribute(Attributes.ARMOR)).setBaseValue(10.0D); // ARMOR
 		}
 	}
 
 	@SubscribeEvent
 	public static void onLivingDeathEvent(LivingDeathEvent event) {
-		Entity entity = event.getEntity();
-		MinecraftServer server = entity.getServer();
+		Entity deadTarget = event.getEntity();
+		MinecraftServer curServer = deadTarget.getServer();
 		Random random = new Random();
-		if (server == null) return;
-		if (entity instanceof PlayerEntity) {
+		
+		if (curServer == null) return;
+		
+		if (deadTarget instanceof PlayerEntity) {
 			// Make myself (Blackout03_) drop Ink Sacs any time I die. Even if I have none on me.
-			if (IUtilityHelper.isUserOrEntityUUIDEqualTo(entity, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
-				((PlayerEntity) entity).drop(new ItemStack(Items.INK_SAC, random.nextInt(3)), true, false);
+			if (IUtilityHelper.isUserOrEntityUUIDEqualTo(deadTarget, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
+				((PlayerEntity) deadTarget).drop(new ItemStack(Items.INK_SAC, random.nextInt(3)), true, false);
 			}
 		}
 		if (CAConfigManager.MAIN_COMMON.enableDragonEggRespawns.get()) {
-			if (entity.getCommandSenderWorld().equals(server.getLevel(World.END))) {
-				if (entity instanceof EnderDragonEntity) {
-					EnderDragonEntity dragon = (EnderDragonEntity) entity;
-					if (dragon.getDragonFight() != null && dragon.getDragonFight().hasPreviouslyKilledDragon()) {
-						entity.getCommandSenderWorld().setBlockAndUpdate(entity.getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
+			if (deadTarget.getCommandSenderWorld().equals(curServer.getLevel(World.END))) {
+				if (deadTarget instanceof EnderDragonEntity) {
+					EnderDragonEntity deadDragonTarget = (EnderDragonEntity) deadTarget;
+					if (deadDragonTarget.getDragonFight() != null && deadDragonTarget.getDragonFight().hasPreviouslyKilledDragon()) {
+						deadTarget.getCommandSenderWorld().setBlockAndUpdate(deadTarget.getCommandSenderWorld().getHeightmapPos(Heightmap.Type.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
 					}
 				}
 			}
@@ -162,23 +164,26 @@ public class CAMiscEvents {
 	
 	@SubscribeEvent
 	public static void onMobXPDropEvent(LivingExperienceDropEvent event) {
-		PlayerEntity player = event.getAttackingPlayer();
-		if (player == null) return;
+		PlayerEntity attackingPlayer = event.getAttackingPlayer();
 		int xpValue = event.getDroppedExperience();
-
+		
+		if (attackingPlayer == null) return;
+		
 		if (CAConfigManager.MAIN_COMMON.enableExperienceArmorSetBonus.get()) {
-			if (IUtilityHelper.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
+			if (EntityUtil.isFullArmorSet(attackingPlayer, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
 				event.setDroppedExperience(xpValue * CAConfigManager.MAIN_COMMON.experienceArmorSetXPMultiplier.get());
-			}
-
-			if (IUtilityHelper.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get()) && player.getMainHandItem().getItem().equals(CAItems.EXPERIENCE_SWORD.get())) {
-				event.setDroppedExperience(xpValue * (CAConfigManager.MAIN_COMMON.experienceArmorSetXPMultiplier.get() + CAConfigManager.MAIN_COMMON.experienceSwordXPMultiplier.get()));
 			}
 		}
 
 		if (CAConfigManager.MAIN_COMMON.enableExperienceSwordBonus.get()) {
-			if (player.getMainHandItem().getItem().equals(CAItems.EXPERIENCE_SWORD.get())) {
+			if (attackingPlayer.getMainHandItem().getItem().equals(CAItems.EXPERIENCE_SWORD.get())) {
 				event.setDroppedExperience(xpValue * CAConfigManager.MAIN_COMMON.experienceSwordXPMultiplier.get());
+			}
+		}
+		
+		if (CAConfigManager.MAIN_COMMON.enableExperienceArmorSetBonus.get() && CAConfigManager.MAIN_COMMON.enableExperienceSwordBonus.get()) {
+			if (EntityUtil.isFullArmorSet(attackingPlayer, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get()) && attackingPlayer.getMainHandItem().getItem().equals(CAItems.EXPERIENCE_SWORD.get())) {
+				event.setDroppedExperience(xpValue * (CAConfigManager.MAIN_COMMON.experienceArmorSetXPMultiplier.get() + CAConfigManager.MAIN_COMMON.experienceSwordXPMultiplier.get()));
 			}
 		}
 	}
@@ -209,34 +214,31 @@ public class CAMiscEvents {
 		}
 	}
 	
-	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void onSleepFinishedTimeEvent(SleepFinishedTimeEvent event) {
-		IWorld world = event.getWorld();
-		if (world instanceof ServerWorld) {
-			if (world.getLevelData() instanceof DerivedWorldInfo) {
-				// DO NOT SURROUND WITH TRY/CATCH! Don't close the damn ServerWorld, goofy -- Meme Man
-				ServerWorld serverWorld = (ServerWorld) world;
-				DerivedWorldInfo derivedWorldInfo = (DerivedWorldInfo) world.getLevelData();
-				if (serverWorld.dimension() == CADimensions.CRYSTAL_WORLD || serverWorld.dimension() == CADimensions.MINING_PARADISE || serverWorld.dimension() == CADimensions.VILLAGE_MANIA) {
-					derivedWorldInfo.wrapped.setDayTime(event.getNewTime());
-				}
+		IWorld curWorld = event.getWorld();
+		
+		if (curWorld instanceof ServerWorld) {
+			if (curWorld.getLevelData() instanceof DerivedWorldInfo) {
+				ServerWorld serverWorld = (ServerWorld) curWorld;
+				DerivedWorldInfo derivedWorldInfo = (DerivedWorldInfo) curWorld.getLevelData();
+				
+				if (serverWorld.dimension().location().getNamespace().equals(ChaosAwakens.MODID)) derivedWorldInfo.wrapped.setDayTime(event.getNewTime());
 			}
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	@SubscribeEvent
 	public static void onEnchantLevelSetEvent(EnchantmentLevelSetEvent event) {
 		World world = event.getWorld();
 		//I found that the best way to do this is to loop through each player
 		for (PlayerEntity player : world.players()) {
 			if (player == null) return;
-			if (IUtilityHelper.isFullArmorSet(player, CAItems.LAPIS_HELMET.get(), CAItems.LAPIS_CHESTPLATE.get(), CAItems.LAPIS_LEGGINGS.get(), CAItems.LAPIS_BOOTS.get())) {
+			if (EntityUtil.isFullArmorSet(player, CAItems.LAPIS_HELMET.get(), CAItems.LAPIS_CHESTPLATE.get(), CAItems.LAPIS_LEGGINGS.get(), CAItems.LAPIS_BOOTS.get())) {
 				ItemStack stack = event.getItem();
 				int row = event.getEnchantRow();
 				int power = event.getPower();
-				int cost = EnchantmentHelper.getEnchantmentCost(world.random, row, power, stack);
+				event.getOriginalLevel();
 				switch (row) {
 				default:
 					break;
@@ -248,6 +250,7 @@ public class CAMiscEvents {
 					break;
 				case 2:
 					event.setLevel(event.getLevel() - 5);
+					
 					if (event.getLevel() <= 0) {
 						event.setLevel(EnchantmentHelper.getEnchantmentCost(world.random, row, power, stack));
 					}
@@ -264,29 +267,30 @@ public class CAMiscEvents {
 	}
 	
 	@SubscribeEvent
-	public static void onBlockBreakXPEvent(BlockEvent.BreakEvent event) {
-		PlayerEntity player = event.getPlayer();
-		if (player == null) return;
+	public static void onBlockBreakXPEvent(BreakEvent event) {
+		PlayerEntity curPlayer = event.getPlayer();
 		int xpValue = event.getExpToDrop();
+		
+		if (curPlayer == null) return;
 
 		if (CAConfigManager.MAIN_COMMON.enableExperienceArmorSetBonus.get()) {
-			if (IUtilityHelper.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
+			if (EntityUtil.isFullArmorSet(curPlayer, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
 				event.setExpToDrop(xpValue * CAConfigManager.MAIN_COMMON.experienceArmorSetXPMultiplier.get());
 			}
 		}
 
-		if (player instanceof LivingEntity) {
-			if (event.isCancelable() && ((LivingEntity) player).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (curPlayer instanceof LivingEntity) {
+			if (event.isCancelable() && ((LivingEntity) curPlayer).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 		}
 	}
 	
 	@SubscribeEvent
 	public static void onUseHoeOnDense(BlockToolInteractEvent event) {
-		if(event.getToolType() == ToolType.HOE)
-			if(event.getState().is(CATags.Blocks.DENSE_DIRT))
-				event.setFinalState(CABlocks.DENSE_FARMLAND.get().defaultBlockState());
-			else if(event.getState().is(CATags.Blocks.TERRA_PRETA))
-				event.setFinalState(CABlocks.TERRA_PRETA_FARMLAND.get().defaultBlockState());
+		//TODO Replace with base spreadabledirtblock class or something
+		if (event.getToolType().equals(ToolType.HOE)) {
+			if (event.getState().is(CATags.Blocks.DENSE_DIRT)) event.setFinalState(CABlocks.DENSE_FARMLAND.get().defaultBlockState());
+			else if (event.getState().is(CATags.Blocks.TERRA_PRETA)) event.setFinalState(CABlocks.TERRA_PRETA_FARMLAND.get().defaultBlockState());
+		}
 	}
 	
 	// Account for paralysis actually taking full effect

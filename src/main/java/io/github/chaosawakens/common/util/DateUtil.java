@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 public class DateUtil {
 	
 	private DateUtil() {
-		throw new IllegalAccessError("Utility Class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 	
 	public static boolean isHalloween() {

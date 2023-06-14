@@ -145,3 +145,10 @@ configBackground="chaosawakens:textures/gui/advancement_bg.png"
 	versionRange="[1.6.1,]"
 	ordering="AFTER"
 	side="CLIENT"
+
+[[dependencies.chaosawakens]]
+	modId="gamemenumodoption"
+	mandatory=false
+	versionRange="[1.8.2,]"
+	ordering="AFTER"
+	side="CLIENT"

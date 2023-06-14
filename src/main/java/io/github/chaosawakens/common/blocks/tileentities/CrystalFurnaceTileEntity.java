@@ -33,7 +33,7 @@ public class CrystalFurnaceTileEntity extends AbstractFurnaceTileEntity {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected int getBurnDuration(ItemStack stack) {
-		AbstractFurnaceTileEntity.getFuel().put(CABlocks.CRYSTAL_ENERGY.get().asItem(), 32000);
+		AbstractFurnaceTileEntity.getFuel().put(CABlocks.ENERGIZED_KYANITE.get().asItem(), 32000);
 		return super.getBurnDuration(stack);
 	}
 }

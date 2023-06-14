@@ -6,22 +6,22 @@
     ]
   },
   "criteria": {
-    "has_crystal_energy": {
+    "has_energized_kyanite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:crystal_energy"
+            "item": "chaosawakens:energized_kyanite"
           }
         ]
       }
     },
-    "has_crystal_shard": {
+    "has_crystalwood_shard": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:crystal_shard"
+            "item": "chaosawakens:crystalwood_shard"
           }
         ]
       }
@@ -35,8 +35,8 @@
   },
   "requirements": [
     [
-      "has_crystal_energy",
-      "has_crystal_shard",
+      "has_energized_kyanite",
+      "has_crystalwood_shard",
       "has_the_recipe"
     ]
   ]

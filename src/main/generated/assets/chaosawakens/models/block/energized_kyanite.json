@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "cross": "chaosawakens:block/energized_kyanite",
+    "all": "chaosawakens:block/energized_kyanite"
+  }
+}

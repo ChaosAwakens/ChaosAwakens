@@ -1,6 +1,7 @@
 {
   "pack": {
-    "description": "Chaos Awakens is a Spiritual Successor of Orespawn in Modern versions of Minecraft!",
-    "pack_format": 6
+    "description": "Chaos Awakens Resources",
+    "pack_format": 6,
+    "_comment": "Chaos Awakens is a Spiritual Successor of Orespawn in Modern versions of Minecraft! This is the official Chaos Awakens Resource Pack!"
   }
 }

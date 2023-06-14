@@ -364,6 +364,9 @@
 	"dimension.chaosawakens.mining_paradise": "Mining Paradise",
 	"dimension.chaosawakens.village_mania": "Village Mania",
 	"dimension.chaosawakens.danger_isles": "Danger Isles",
+	
+	"block.chaosawakens.corn_body_block": "Corn Plant",
+	"block.chaosawakens.tomato_body_block": "Tomato Plant",
 
 	"item.chaosawakens.corndog": "Raw Corndog",
 	"item.chaosawakens.cooked_corndog": "Cooked Corndog",
@@ -771,7 +774,8 @@
 	"block.chaosawakens.crystal_grass_block": "Crystal Grass Block",
 	"block.chaosawakens.kyanite": "Kyanite",
 	"block.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
-	"block.chaosawakens.crystal_energy": "Crystal Energy",
+	"block.chaosawakens.energized_kyanite": "Energized Kyanite",
+	"item.chaosawakens.crystal_energy": "Crystal Energy",
 	"item.chaosawakens.crystal_torch": "Crystal Torch",
 	"block.chaosawakens.crystal_torch": "Crystal Torch",
 	"block.chaosawakens.wall_crystal_torch": "Wall Crystal Torch",
@@ -1344,6 +1348,9 @@
 	"block.chaosawakens.crystalwood_fence_gate": "Crystalwood Fence Gate",
 	"block.chaosawakens.crystalwood_pressure_plate": "Crystalwood Pressure Plate",
 	"block.chaosawakens.crystalwood_button": "Crystalwood Button",
+	"block.chaosawakens.crystalwood_door": "Crystalwood Door",
+	"block.chaosawakens.crystalwood_trapdoor": "Crystalwood Trapdoor",
+	
 	"item.chaosawakens.crystalwood_shard": "Crystalwood Shard",
 
 	"block.chaosawakens.oak_leaf_carpet": "Oak Leaf Carpet",

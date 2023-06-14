@@ -73,7 +73,7 @@ public class CACustomConversionProvider extends CustomConversionProvider {
 				.before(CABlocks.CRYSTALWOOD_LOG.get(), 64)
 				.before(CATags.Items.CRYSTAL_LEAVES, 2)
 				.before(CATags.Items.CRYSTAL_SAPLING, 64)
-				.before(CABlocks.CRYSTAL_ENERGY.get().asItem(), 3_072);
+				.before(CABlocks.ENERGIZED_KYANITE.get().asItem(), 3_072);
 		createConversionBuilder(ChaosAwakens.prefix("dense"))
 				.before(CABlocks.DENSE_GRASS_BLOCK.get(), 4)
 				.before(CABlocks.DENSE_DIRT.get(), 4)

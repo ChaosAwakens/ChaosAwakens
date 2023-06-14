@@ -7,6 +7,7 @@
 		"CropsBlockMixin",
 		"IForgeBlockMixin",
 		"LivingEntityMixin",
+		"MobEntityMixin",
 		"NoiseChunkGeneratorAccessor",
 		"NoiseChunkGeneratorMixin",
 		"PlayerAdvancementMixin",
@@ -15,8 +16,7 @@
 		"SpawnEggItemMixin",
 		"StemBlockMixin",
 		"ServerWorldInfoMixin",
-		"VillagerEntityMixin",
-		"WolfEntityMixin"
+		"VillagerEntityMixin"
 	],
 	"client": [
 		"RabbitEntityRendererMixin"

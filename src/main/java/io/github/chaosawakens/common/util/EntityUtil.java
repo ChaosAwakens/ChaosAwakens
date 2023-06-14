@@ -36,7 +36,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 public final class EntityUtil {
 
 	private EntityUtil() {
-		throw new IllegalAccessError("Utility Class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 
 	/**

@@ -154,7 +154,7 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 	}
 
 	protected boolean isFuel(ItemStack stack) {
-		return stack.getItem().equals(CABlocks.CRYSTAL_ENERGY.get().asItem());
+		return stack.getItem().equals(CABlocks.ENERGIZED_KYANITE.get().asItem());
 	}
 
 	@OnlyIn(Dist.CLIENT)

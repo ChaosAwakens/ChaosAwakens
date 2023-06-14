@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_crystal_shard": {
+    "has_crystalwood_shard": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "chaosawakens:crystal_shard"
+            "item": "chaosawakens:crystalwood_shard"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_crystal_shard",
+      "has_crystalwood_shard",
       "has_the_recipe"
     ]
   ]

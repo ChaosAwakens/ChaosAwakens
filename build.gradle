@@ -120,6 +120,8 @@ dependencies {
 	implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
 	implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
 	
+	implementation fg.deobf("curse.maven:gamemenumodoption-353051:${gmmo_version}")
+	
 	compileOnly fg.deobf("curse.maven:iron-chests-228756:${ironchests_version}")
 	compileOnly fg.deobf("curse.maven:iron-shulker-boxes-314911:${ironshulkerboxes_version}")
 	compileOnly fg.deobf("curse.maven:iron-furnaces-237664:${ironfurnaces_version}")

@@ -534,7 +534,7 @@ public class CAConfiguredFeatures {
 
 		private static final BlockState RED_ANT_INFESTED_ORE = CABlocks.RED_ANT_INFESTED_ORE.get().defaultBlockState();
 		private static final BlockState TERMITE_INFESTED_ORE = CABlocks.TERMITE_INFESTED_ORE.get().defaultBlockState();
-		private static final BlockState CRYSTAL_ENERGY = CABlocks.CRYSTAL_ENERGY.get().defaultBlockState();
+		private static final BlockState CRYSTAL_ENERGY = CABlocks.ENERGIZED_KYANITE.get().defaultBlockState();
 		private static final BlockState PINK_TOURMALINE = CABlocks.BUDDING_PINK_TOURMALINE.get().defaultBlockState();
 		private static final BlockState CATS_EYE = CABlocks.BUDDING_CATS_EYE.get().defaultBlockState();
 		private static final BlockState CRYSTAL_LOG = CABlocks.CRYSTALWOOD_LOG.get().defaultBlockState();

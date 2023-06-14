@@ -19,8 +19,7 @@ public class CAParticleTypeProvider extends ParticleTypeProvider {
 			ParticleType<?> particleType = particleTypeReg.get();
 			String regName = particleType.getRegistryName().toString();
 			
-			createParticleType(regName.substring(regName.lastIndexOf(":") + 1))
-				.addParticleTypeName(regName.substring(regName.lastIndexOf(":") + 1));
+			createParticleType(regName.substring(regName.lastIndexOf(":") + 1)).addParticleTypeName(regName.substring(regName.lastIndexOf(":") + 1));
 		}
 	}
 	

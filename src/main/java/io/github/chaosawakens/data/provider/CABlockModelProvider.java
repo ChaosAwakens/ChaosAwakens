@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.GateBlock;
-import io.github.chaosawakens.common.blocks.crystal.CrystalEnergyBlock;
+import io.github.chaosawakens.common.blocks.crystal.EnergizedKyaniteBlock;
 import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import net.minecraft.block.Block;
@@ -65,7 +65,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 			} else if (block instanceof GateBlock) {
 				this.gateBlock(name, name.contains("robo_") ? chaosRL("robo_gate_block_top") : chaosRL("gate_block_top"));
 			} else if (block instanceof CAOreBlock || block instanceof CAFallingOreBlock) {
-				if(block instanceof CrystalEnergyBlock) {
+				if(block instanceof EnergizedKyaniteBlock) {
 					this.cross(name, chaosRL(name));
 				} else if (name.contains("sandstone")) {
 					this.cubeBottomTop(name, chaosRL(name), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
@@ -139,7 +139,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		this.cubeAll("cats_eye_block", chaosRL("cats_eye_block"));
 		this.cubeAll("budding_pink_tourmaline", chaosRL("budding_pink_tourmaline"));
 		this.cubeAll("pink_tourmaline_block", chaosRL("pink_tourmaline_block"));
-		this.cross("crystal_energy", chaosRL("crystal_energy"));
+		this.cubeAll("energized_kyanite", chaosRL("energized_kyanite"));
 		
 		this.cubeAll("marble_block", chaosRL("marble_block"));
 		this.cubeAll("marble_bricks", chaosRL("marble_bricks"));

@@ -6,25 +6,22 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
+public abstract class PlayerEntityMixin {
 	
-	public PlayerEntityMixin(EntityType<? extends LivingEntity> type, World world) {
-		super(type, world);
+	private PlayerEntityMixin() {
+		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
 	}
 
 	@Inject(method = "Lnet/minecraft/entity/player/PlayerEntity;wantsToStopRiding()Z", at = @At("INVOKE"), cancellable = true)
 	private void chaosawakens$wantsToStopRiding(CallbackInfoReturnable<Boolean> cir) {
-		PlayerEntity player = (PlayerEntity) (Object) this;
+		PlayerEntity targetPlayer = (PlayerEntity) (Object) this;
 		
-		if (player.getVehicle() != null) {
-			if (player.getVehicle() instanceof AnimatableMonsterEntity) {
-				if (!((AnimatableMonsterEntity) player.getVehicle()).shouldAllowDismount()) cir.setReturnValue(false);
+		if (targetPlayer.getVehicle() != null) {
+			if (targetPlayer.getVehicle() instanceof AnimatableMonsterEntity) {
+				if (!((AnimatableMonsterEntity) targetPlayer.getVehicle()).shouldAllowDismount()) cir.setReturnValue(false);
 			}
 		}
 	}

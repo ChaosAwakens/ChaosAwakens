@@ -60,8 +60,8 @@ public class AnimationTriggerPacket implements ICAPacket {
 				
 				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity && !"None".equals(animationName)) {
 					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
-					final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType)
-							.setWrappedController(targetAnimatable.getControllerWrapperByName(controllerName));
+					final SingletonAnimationBuilder targetAnim = new SingletonAnimationBuilder(targetAnimatable, animationName, loopType).setWrappedController(targetAnimatable.getControllerWrapperByName(controllerName));
+					
 					targetAnimatable.getControllerWrapperByName(controllerName).playAnimation(targetAnim, clearCache);
 					targetAnimatable.playAnimation(targetAnim, clearCache);
 				} else if (target != null)

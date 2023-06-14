@@ -199,6 +199,7 @@ public class CAClientSetupEvents {
 		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_TRAPDOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_TRAPDOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALWOOD_TRAPDOOR.get(), RenderType.cutout());
 		
 		RenderTypeLookup.setRenderLayer(CABlocks.APPLE_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_DOOR.get(), RenderType.cutout());
@@ -208,6 +209,7 @@ public class CAClientSetupEvents {
 		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_DOOR.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_DOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALWOOD_DOOR.get(), RenderType.cutout());
 		
 		RenderTypeLookup.setRenderLayer(CABlocks.APPLE_SAPLING.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.CHERRY_SAPLING.get(), RenderType.cutout());
@@ -331,7 +333,7 @@ public class CAClientSetupEvents {
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_CLUSTER.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.BUDDING_PINK_TOURMALINE.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.BUDDING_CATS_EYE.get(), RenderType.cutoutMipped());
-		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_ENERGY.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ENERGIZED_KYANITE.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_CRAFTING_TABLE.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_FURNACE.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.PINK_TOURMALINE_BLOCK.get(), RenderType.cutoutMipped());

@@ -31,5 +31,4 @@ public interface IForgeBlockMixin {
 		}	
 		return state.is(Blocks.BOOKSHELF) ? 1 : 0;
 	}
-
 }

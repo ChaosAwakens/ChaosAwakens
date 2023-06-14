@@ -15,7 +15,7 @@ public final class NameUtil {
 	private static final Pattern PATTERN = Pattern.compile("([a-z0-9._-]+:)?[a-z0-9/._-]+");
 
 	private NameUtil() {
-		throw new IllegalAccessError("Utility class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 
 	public static boolean isValid(CharSequence name) {

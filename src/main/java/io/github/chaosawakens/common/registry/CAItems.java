@@ -176,6 +176,7 @@ public class CAItems {
 	public static final RegistryObject<Item> CATS_EYE_INGOT = ITEMS.register("cats_eye_ingot", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> CATS_EYE_NUGGET = ITEMS.register("cats_eye_nugget", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> CATS_EYE_SHARD = ITEMS.register("cats_eye_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<Item> CRYSTAL_ENERGY = ITEMS.register("crystal_energy", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> SUNSTONE = ITEMS.register("sunstone", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 
@@ -213,7 +214,7 @@ public class CAItems {
 	// MISC
 	public static final RegistryObject<PowerChipItem> ALUMINUM_POWER_CHIP = ITEMS.register("aluminum_power_chip", () -> new PowerChipItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<PowerChipItem> CRYSTAL_POWER_CHIP = ITEMS.register("crystal_power_chip", () -> new PowerChipItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
-	public static final RegistryObject<Item> CRYSTAL_SHARD = ITEMS.register("crystal_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<Item> CRYSTALWOOD_SHARD = ITEMS.register("crystalwood_shard", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<IrukandjiArrowItem> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new IrukandjiArrowItem(new Item.Properties().tab(CAItemGroups.ITEMS)));

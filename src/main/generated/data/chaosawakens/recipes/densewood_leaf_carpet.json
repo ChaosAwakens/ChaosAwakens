@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "leaf_carpet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:densewood_leaves"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:densewood_leaf_carpet"
+  }
+}

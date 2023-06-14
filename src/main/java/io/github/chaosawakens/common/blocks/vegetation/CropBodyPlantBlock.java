@@ -40,10 +40,10 @@ public class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 			worldIn.getBlockTicks().scheduleTick(curPos, this, 1);
 		}
 
-		CropTopPlantBlock topBlock = (CropTopPlantBlock) this.getHeadBlock();
+		CropTopPlantBlock topBlock = (CropTopPlantBlock) getHeadBlock();
 		if (direction == this.growthDirection) {
-			Block block = facingState.getBlock();
-			if (block != this && block != topBlock) return topBlock.getUpdateShapeState(worldIn);
+			Block facingBlock = facingState.getBlock();
+			if (facingBlock != this && facingBlock != topBlock) return topBlock.getUpdateShapeState(worldIn);
 		}
 
 		if (this.scheduleFluidTicks) worldIn.getLiquidTicks().scheduleTick(curPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));

@@ -26,7 +26,7 @@ public final class TradeUtil {
 	public static final int MASTER = 5;
 	
 	private TradeUtil() {
-		throw new IllegalAccessError("Utility class");
+		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 
 	public static void addVillagerTrades(VillagerTradesEvent event, int level, VillagerTrades.ITrade... trades) {

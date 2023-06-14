@@ -25,6 +25,10 @@ public abstract class PlayerAdvancementMixin {
     @Shadow
     @Final
     private Map<Advancement, AdvancementProgress> advancements;
+    
+    private PlayerAdvancementMixin() {
+    	throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
+    }
 	
     @Inject(at = @At("RETURN"), method = "Lnet/minecraft/advancements/PlayerAdvancements;award(Lnet/minecraft/advancements/Advancement;Ljava/lang/String;)Z")
     private void award(Advancement adv, String criterionKey, CallbackInfoReturnable<Boolean> cir) {

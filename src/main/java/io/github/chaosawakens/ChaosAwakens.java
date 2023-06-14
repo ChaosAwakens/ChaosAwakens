@@ -57,7 +57,6 @@ public class ChaosAwakens {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		
 		CAModManager.registerAll(modBus, forgeBus);
-		forgeBus.register(this);
 		
 		if (DEVELOPMENT_ENVIRONMENT) {
 			DEVELOPMENT = new ItemGroup("chaosawakens.development") {

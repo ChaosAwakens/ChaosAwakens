@@ -6,10 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "chaosawakens:crystal_energy"
+      "item": "chaosawakens:energized_kyanite"
     },
     "$": {
-      "item": "chaosawakens:crystal_shard"
+      "item": "chaosawakens:crystalwood_shard"
     }
   },
   "result": {

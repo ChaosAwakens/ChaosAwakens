@@ -60,13 +60,13 @@ public class BuddingBlock extends Block {
 
 			BlockState budState = budBlock.defaultBlockState();
 			boolean newBudBlock = true;
+			
 			if (worldIn.getBlockState(budTargetPos).getBlock() instanceof CrystalClusterBlock) {
 				budState = worldIn.getBlockState(budTargetPos);
 				newBudBlock = false;
 			}
 
-			if (Objects.equals(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName(), budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction))
-				validStatePos.add(new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction).setValue(BlockStateProperties.AGE_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3 ? budState.getValue(BlockStateProperties.AGE_3) + 1 : budState.getValue(BlockStateProperties.AGE_3))));
+			if (Objects.equals(worldIn.getBlockState(budTargetPos).getBlock().getRegistryName(), budBlock.getRegistryName()) || !worldIn.getBlockState(budTargetPos).isFaceSturdy(worldIn, budTargetPos, direction)) validStatePos.add(new BlockStatePos(budTargetPos, budState.setValue(BlockStateProperties.FACING, direction).setValue(BlockStateProperties.AGE_3, newBudBlock ? 0 : worldIn.getBlockState(budTargetPos).getValue(BlockStateProperties.AGE_3) < 3 ? budState.getValue(BlockStateProperties.AGE_3) + 1 : budState.getValue(BlockStateProperties.AGE_3))));
 		}
 
 		return validStatePos;

@@ -224,7 +224,7 @@ public class CACommonSetupEvents {
 		ItemStack fuel = event.getItemStack();
 		if (fuel.getItem() == CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()) {
 			event.setBurnTime(20000);
-		} else if (fuel.getItem() == CABlocks.CRYSTAL_ENERGY.get().asItem()) {
+		} else if (fuel.getItem() == CAItems.CRYSTAL_ENERGY.get()) {
 			event.setBurnTime(3600);
 		} else if (fuel.getItem() == CABlocks.CRYSTAL_CRAFTING_TABLE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE.get().asItem()
 				|| fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem()
@@ -254,7 +254,7 @@ public class CACommonSetupEvents {
 				|| fuel.getItem() == CABlocks.MESOZOIC_DOOR.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_DOOR.get().asItem()
 				|| fuel.getItem() == CABlocks.PEACH_DOOR.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_DOOR.get().asItem()) {
 			event.setBurnTime(200);
-		} else if (fuel.getItem() == CAItems.CRYSTAL_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
+		} else if (fuel.getItem() == CAItems.CRYSTALWOOD_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
 			event.setBurnTime(100);
 		} else if(fuel.getItem() == CABlocks.TAR.get().asItem() ) {
 			event.setBurnTime(10000);
@@ -427,10 +427,18 @@ public class CACommonSetupEvents {
 	//@SubscribeEvent
 	public static void onRemapBlocksEvent(RegistryEvent.MissingMappings<Block> event) {
 		for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
-			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID) && mapping.key.getPath().contains("fossilised_frog")) {
-				String newName = mapping.key.getPath().replace("fossilised_frog", "fossilised_tree_frog");
-				ResourceLocation remap = new ResourceLocation(ChaosAwakens.MODID, newName);
-				mapping.remap(ForgeRegistries.BLOCKS.getValue(remap));
+			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID)) {
+				if (mapping.key.getPath().contains("fossilised_frog")) {
+					String newName = mapping.key.getPath().replace("fossilised_frog", "fossilised_tree_frog");
+					ResourceLocation remappedFrog = ChaosAwakens.prefix(newName);
+					mapping.remap(ForgeRegistries.BLOCKS.getValue(remappedFrog));
+				}
+				
+				if (mapping.key.getPath().contains("crystal_energy")) {
+					String newName = mapping.key.getPath().replace("crystal_energy", "energized_kyanite");
+					ResourceLocation remappCrystalEnergy = ChaosAwakens.prefix(newName);
+					mapping.remap(ForgeRegistries.BLOCKS.getValue(remappCrystalEnergy));
+				}
 			}
 		}
 	}
@@ -438,10 +446,12 @@ public class CACommonSetupEvents {
 	//@SubscribeEvent
 	public static void onRemapItemsEvent(RegistryEvent.MissingMappings<Item> event) {
 		for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
-			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID) && mapping.key.getPath().contains("frog_spawn_egg")) {
-				String newName = mapping.key.getPath().replace("frog_spawn_egg", "tree_frog_spawn_egg");
-				ResourceLocation remap = new ResourceLocation(ChaosAwakens.MODID, newName);
-				mapping.remap(ForgeRegistries.ITEMS.getValue(remap));
+			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID)) {
+				if (mapping.key.getPath().contains("frog_spawn_egg")) {
+					String newName = mapping.key.getPath().replace("frog_spawn_egg", "tree_frog_spawn_egg");
+					ResourceLocation remappedFrog = ChaosAwakens.prefix(newName);
+					mapping.remap(ForgeRegistries.ITEMS.getValue(remappedFrog));
+				}
 			}
 		}
 	}
@@ -449,10 +459,12 @@ public class CACommonSetupEvents {
 	//@SubscribeEvent
 	public static void onRemapEntitiesEvent(RegistryEvent.MissingMappings<EntityType<?>> event) {
 		for (RegistryEvent.MissingMappings.Mapping<EntityType<?>> mapping : event.getAllMappings()) {
-			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID) && mapping.key.getPath().contains("frog")) {
-				String newName = mapping.key.getPath().replace("frog", "tree_frog");
-				ResourceLocation remap = new ResourceLocation(ChaosAwakens.MODID, newName);
-				mapping.remap(ForgeRegistries.ENTITIES.getValue(remap));
+			if (mapping.key.getNamespace().equals(ChaosAwakens.MODID)) {
+				if (mapping.key.getPath().contains("frog")) {
+					String newName = mapping.key.getPath().replace("frog", "tree_frog");
+					ResourceLocation remappedFrog = ChaosAwakens.prefix(newName);
+					mapping.remap(ForgeRegistries.ENTITIES.getValue(remappedFrog));
+				}
 			}
 		}
 	}

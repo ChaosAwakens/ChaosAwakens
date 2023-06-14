@@ -273,11 +273,11 @@ public class CABlockLootTables extends BlockLootTables {
 		dropSelf(CABlocks.CRYSTALWOOD_PLANKS.get());
 		dropSelf(CABlocks.CRYSTALWOOD.get());
 		dropSelf(CABlocks.KYANITE.get());
+		add(CABlocks.ENERGIZED_KYANITE.get(), (block) -> createSingleItemTable(CAItems.CRYSTAL_ENERGY.get()));
 		add(CABlocks.BUDDING_CATS_EYE.get(), (block) -> createSingleItemTable(CABlocks.KYANITE.get()));
 		add(CABlocks.BUDDING_PINK_TOURMALINE.get(), (block) -> createSingleItemTable(CABlocks.KYANITE.get()));
 
 		dropSelf(CABlocks.CRYSTAL_CRAFTING_TABLE.get());
-		dropSelf(CABlocks.CRYSTAL_ENERGY.get());
 		dropSelf(CABlocks.CRYSTAL_FURNACE.get());
 
 		add(CABlocks.RED_CRYSTAL_LEAVES.get(), (leaves) -> createCrystalLeavesDrops(leaves, CABlocks.RED_CRYSTAL_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
@@ -757,7 +757,7 @@ public class CABlockLootTables extends BlockLootTables {
 	}
 	
 	protected static LootTable.Builder createCrystalLeavesDrops(Block pLeavesBlock, Block pSaplingBlock, float... pChances) {
-		return createSilkTouchOrShearsDispatchTable(pLeavesBlock, applyExplosionCondition(pLeavesBlock, ItemLootEntry.lootTableItem(pSaplingBlock)).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, pChances))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(pLeavesBlock, ItemLootEntry.lootTableItem(CAItems.CRYSTAL_SHARD.get()).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
+		return createSilkTouchOrShearsDispatchTable(pLeavesBlock, applyExplosionCondition(pLeavesBlock, ItemLootEntry.lootTableItem(pSaplingBlock)).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, pChances))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(pLeavesBlock, ItemLootEntry.lootTableItem(CAItems.CRYSTALWOOD_SHARD.get()).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
 	}
 
 	protected static LootTable.Builder createFruitLeavesDrops(Block leaves, Block sapling, Item fruit, float... chances) {
