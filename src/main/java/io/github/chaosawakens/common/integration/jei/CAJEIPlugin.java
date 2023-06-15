@@ -10,7 +10,7 @@ import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerCop
 import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerIronScreen;
 import io.github.chaosawakens.common.integration.jei.recipecategories.DefossilizerRecipeCategory;
 import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CARecipes;
+import io.github.chaosawakens.common.registry.CARecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
@@ -51,7 +51,7 @@ public class CAJEIPlugin implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration registry) {
 		ClientWorld world = Objects.requireNonNull(Minecraft.getInstance().level);
-		registry.addRecipes(world.getRecipeManager().getAllRecipesFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE), DefossilizerRecipeCategory.ID);
+		registry.addRecipes(world.getRecipeManager().getAllRecipesFor(CARecipeTypes.DEFOSSILIZING_RECIPE_TYPE), DefossilizerRecipeCategory.ID);
 		addDescription(registry, new TranslationTextComponent("jei_desc.chaosawakens.copper_defossilizer"), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()));
 		addDescription(registry, new TranslationTextComponent("jei_desc.chaosawakens.iron_defossilizer"), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()));
 		addDescription(registry, new TranslationTextComponent("jei_desc.chaosawakens.defossilizer"), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()), new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()));

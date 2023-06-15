@@ -17,7 +17,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected double transitionLength;
 	protected double transitionProgress = 0;
 	protected double animationLength;
-	protected double animationProgress;	
+	protected double animationProgress = 0;	
 	protected final AnimationController<E> controller;
 	protected MinecraftServer server;
 	

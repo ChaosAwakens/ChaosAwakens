@@ -78,6 +78,27 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 		return dxSqr + dzSqr < 2.500000277905201E-7;
 	}
 	
+	public boolean canBeKnockedBack() {
+		return true;
+	}
+	
+	@Override
+	public boolean isPushable() {
+		return canBeKnockedBack();
+	}
+	
+	@Override
+	public void push(double pX, double pY, double pZ) {
+		if (!canBeKnockedBack()) return;
+		super.push(pX, pY, pZ);
+	}
+	
+	@Override
+	public void knockback(float pStrength, double pRatioX, double pRatioZ) {
+		if (!canBeKnockedBack()) return;
+		super.knockback(pStrength, pRatioX, pRatioZ);
+	}
+	
 	@Override
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {

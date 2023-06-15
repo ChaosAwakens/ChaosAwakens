@@ -6,7 +6,7 @@ import io.github.chaosawakens.common.blocks.tileentities.containers.Defossilizer
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CARecipes;
+import io.github.chaosawakens.common.registry.CARecipeTypes;
 import io.github.chaosawakens.common.registry.CATileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -86,7 +86,7 @@ public class DefossilizerCrystalTileEntity extends LockableTileEntity implements
 	@Nullable
 	public DefossilizingRecipe getRecipe() {
 		if (this.level == null || getItem(0).isEmpty() || getItem(1).isEmpty() || getItem(2).isEmpty()) return null;
-		return level.getRecipeManager().getRecipeFor(CARecipes.DEFOSSILIZING_RECIPE_TYPE, this, level).orElse(null);
+		return level.getRecipeManager().getRecipeFor(CARecipeTypes.DEFOSSILIZING_RECIPE_TYPE, this, level).orElse(null);
 	}
 
 	private ItemStack getWorkOutput(@Nullable DefossilizingRecipe recipe) {

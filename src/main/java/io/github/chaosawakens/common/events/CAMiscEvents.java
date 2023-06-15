@@ -6,7 +6,10 @@ import java.util.UUID;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableFishEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableWaterMobEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -55,6 +58,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -285,11 +289,38 @@ public class CAMiscEvents {
 	}
 	
 	@SubscribeEvent
-	public static void onUseHoeOnDense(BlockToolInteractEvent event) {
+	public static void onBlockToolInteractEvent(BlockToolInteractEvent event) {
 		//TODO Replace with base spreadabledirtblock class or something
 		if (event.getToolType().equals(ToolType.HOE)) {
 			if (event.getState().is(CATags.Blocks.DENSE_DIRT)) event.setFinalState(CABlocks.DENSE_FARMLAND.get().defaultBlockState());
 			else if (event.getState().is(CATags.Blocks.TERRA_PRETA)) event.setFinalState(CABlocks.TERRA_PRETA_FARMLAND.get().defaultBlockState());
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onLivingKnockbackEvent(LivingKnockBackEvent event) {
+		LivingEntity target = event.getEntityLiving();
+		
+		if (target != null) {
+			if (target instanceof AnimatableMonsterEntity) {
+				AnimatableMonsterEntity monsterTarget = (AnimatableMonsterEntity) target;
+				if (!monsterTarget.canBeKnockedBack()) event.setCanceled(true);
+			}
+			
+			if (target instanceof AnimatableAnimalEntity) {
+				AnimatableAnimalEntity animalTarget = (AnimatableAnimalEntity) target;
+				if (!animalTarget.canBeKnockedBack()) event.setCanceled(true);
+			}
+			
+			if (target instanceof AnimatableFishEntity) {
+				AnimatableFishEntity fishTarget = (AnimatableFishEntity) target;
+				if (!fishTarget.canBeKnockedBack()) event.setCanceled(true);
+			}
+			
+			if (target instanceof AnimatableWaterMobEntity) {
+				AnimatableWaterMobEntity waterMobTarget = (AnimatableWaterMobEntity) target;
+				if (!waterMobTarget.canBeKnockedBack()) event.setCanceled(true);
+			}
 		}
 	}
 	

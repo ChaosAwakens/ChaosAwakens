@@ -10,7 +10,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CARecipes;
+import io.github.chaosawakens.common.registry.CARecipeTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -23,7 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class DefossilizerRecipeCategory implements IRecipeCategory<DefossilizingRecipe> {
-	public static final ResourceLocation ID = new ResourceLocation(CARecipes.DEFOSSILIZING_RECIPE_TYPE.toString());
+	public static final ResourceLocation ID = new ResourceLocation(CARecipeTypes.DEFOSSILIZING_RECIPE_TYPE.toString());
 	private IDrawable bg;
 	private IDrawable icon;
 //	private IDrawable arrow;

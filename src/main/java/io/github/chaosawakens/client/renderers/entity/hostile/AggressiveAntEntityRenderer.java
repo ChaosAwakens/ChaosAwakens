@@ -15,7 +15,7 @@ public class AggressiveAntEntityRenderer extends ExtendedGeoEntityRenderer<Aggre
 
 	@Override
 	protected boolean shouldRotateOnDeath() {
-		return false;
+		return true;
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CALootModifiers;
 import io.github.chaosawakens.common.registry.CAPaintings;
 import io.github.chaosawakens.common.registry.CAParticleTypes;
-import io.github.chaosawakens.common.registry.CARecipes;
+import io.github.chaosawakens.common.registry.CARecipeTypes;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CAStats;
 import io.github.chaosawakens.common.registry.CAStructures;
@@ -40,7 +40,7 @@ public class CARegistryManager {
 		CAEffects.EFFECTS.register(modBus);
 		CAEffects.POTIONS.register(modBus);
 		CATileEntities.TILE_ENTITIES.register(modBus);
-		CARecipes.RECIPE_SERIALIZERS.register(modBus);
+		CARecipeTypes.RECIPE_SERIALIZERS.register(modBus);
 		CAStats.STAT_TYPES.register(modBus);
 		CAStructures.STRUCTURES.register(modBus);
 		CAFeatures.FEATURES.register(modBus);

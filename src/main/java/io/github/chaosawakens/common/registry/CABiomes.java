@@ -12,28 +12,28 @@ public class CABiomes {
 	public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, ChaosAwakens.MODID);
 
 	// Mining Paradise
-	public static RegistryObject<Biome> DENSE_PLAINS = registerVoidBiome("dense_plains");
-	public static RegistryObject<Biome> DENSE_FOREST = registerVoidBiome("dense_forest");
-	public static RegistryObject<Biome> DENSE_GINKGO_FOREST = registerVoidBiome("dense_ginkgo_forest");
-	public static RegistryObject<Biome> DENSE_MOUNTAINS = registerVoidBiome("dense_mountains");
-	public static RegistryObject<Biome> STALAGMITE_VALLEY = registerVoidBiome("stalagmite_valley");
-	public static RegistryObject<Biome> MESOZOIC_JUNGLE = registerVoidBiome("mesozoic_jungle");
+	public static final RegistryObject<Biome> DENSE_PLAINS = registerVoidBiome("dense_plains");
+	public static final RegistryObject<Biome> DENSE_FOREST = registerVoidBiome("dense_forest");
+	public static final RegistryObject<Biome> DENSE_GINKGO_FOREST = registerVoidBiome("dense_ginkgo_forest");
+	public static final RegistryObject<Biome> DENSE_MOUNTAINS = registerVoidBiome("dense_mountains");
+	public static final RegistryObject<Biome> STALAGMITE_VALLEY = registerVoidBiome("stalagmite_valley");
+	public static final RegistryObject<Biome> MESOZOIC_JUNGLE = registerVoidBiome("mesozoic_jungle");
 	
 	// Village Mania
-	public static RegistryObject<Biome> VILLAGE_PLAINS = registerVoidBiome("village_plains");
-	public static RegistryObject<Biome> VILLAGE_SAVANNA = registerVoidBiome("village_savanna");
-	public static RegistryObject<Biome> VILLAGE_TAIGA = registerVoidBiome("village_taiga");
-	public static RegistryObject<Biome> VILLAGE_SNOWY = registerVoidBiome("village_snowy");
-	public static RegistryObject<Biome> VILLAGE_DESERT = registerVoidBiome("village_desert");
+	public static final RegistryObject<Biome> VILLAGE_PLAINS = registerVoidBiome("village_plains");
+	public static final RegistryObject<Biome> VILLAGE_SAVANNA = registerVoidBiome("village_savanna");
+	public static final RegistryObject<Biome> VILLAGE_TAIGA = registerVoidBiome("village_taiga");
+	public static final RegistryObject<Biome> VILLAGE_SNOWY = registerVoidBiome("village_snowy");
+	public static final RegistryObject<Biome> VILLAGE_DESERT = registerVoidBiome("village_desert");
 	
 	// CrystalWorld
-	public static RegistryObject<Biome> CRYSTAL_PLAINS = registerVoidBiome("crystal_plains");
-	public static RegistryObject<Biome> CRYSTAL_HILLS = registerVoidBiome("crystal_hills");
+	public static final RegistryObject<Biome> CRYSTAL_PLAINS = registerVoidBiome("crystal_plains");
+	public static final RegistryObject<Biome> CRYSTAL_HILLS = registerVoidBiome("crystal_hills");
 	
 	// Danger Isles
-	public static RegistryObject<Biome> DANGER_ISLANDS = registerVoidBiome("danger_islands");
+	public static final RegistryObject<Biome> DANGER_ISLANDS = registerVoidBiome("danger_islands");
 	
-	public static RegistryObject<Biome> registerVoidBiome(String regName) {
+	private static RegistryObject<Biome> registerVoidBiome(String regName) {
 		RegistryObject<Biome> regBiome = BIOMES.register(regName, BiomeMaker::theVoidBiome);
 		return regBiome;
 	}

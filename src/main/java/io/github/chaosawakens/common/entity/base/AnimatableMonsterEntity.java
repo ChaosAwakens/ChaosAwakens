@@ -130,6 +130,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	public boolean shouldAllowDismount() {
 		return false;
 	}
+	
+	public boolean canBeKnockedBack() {
+		return true;
+	}
 
 	@Override
 	protected void tickDeath() {
@@ -162,7 +166,24 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	public AxisAlignedBB getBoundingBox() {
 		return super.getBoundingBox();
 	}
-
+	
+	@Override
+	public boolean isPushable() {
+		return canBeKnockedBack();
+	}
+	
+	@Override
+	public void push(double pX, double pY, double pZ) {
+		if (!canBeKnockedBack()) return;
+		super.push(pX, pY, pZ);
+	}
+	
+	@Override
+	public void knockback(float pStrength, double pRatioX, double pRatioZ) {
+		if (!canBeKnockedBack()) return;
+		super.knockback(pStrength, pRatioX, pRatioZ);
+	}
+		
 	@Override
 	public boolean doHurtTarget(Entity target) {
 		if (target != null && target instanceof LivingEntity) manageAttack((LivingEntity) target);

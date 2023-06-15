@@ -15,11 +15,11 @@ import net.minecraft.loot.ConditionArraySerializer;
 import net.minecraft.util.ResourceLocation;
 
 public class AdvancementCompleteTrigger extends AbstractCriterionTrigger<AdvancementCompleteTrigger.Instance>{
-	public static final ResourceLocation ID = new ResourceLocation(ChaosAwakens.MODID, "advancement_complete");
+	public static final ResourceLocation ADVANCEMENT_TRIGGER_ID = ChaosAwakens.prefix("advancement_complete");
 	
 	@Override
 	public ResourceLocation getId() {
-		return ID;
+		return ADVANCEMENT_TRIGGER_ID;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class AdvancementCompleteTrigger extends AbstractCriterionTrigger<Advance
 		private final AdvancementLocationPredicate predicate;
 		
 		public Instance(AdvancementLocationPredicate reqAdv) {
-			super(ID, EntityPredicate.AndPredicate.ANY);
+			super(ADVANCEMENT_TRIGGER_ID, EntityPredicate.AndPredicate.ANY);
 			this.predicate = reqAdv;
 		}
 

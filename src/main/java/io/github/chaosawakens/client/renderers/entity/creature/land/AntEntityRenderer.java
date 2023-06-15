@@ -15,7 +15,7 @@ public class AntEntityRenderer extends ExtendedGeoEntityRenderer<AntEntity> {
 
 	@Override
 	protected boolean shouldRotateOnDeath() {
-		return false;
+		return true;
 	}
 
 	@Override

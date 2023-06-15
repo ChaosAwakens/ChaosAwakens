@@ -8,7 +8,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class CARecipes {
+public class CARecipeTypes {
 	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ChaosAwakens.MODID);
 
 	public static final IRecipeType<DefossilizingRecipe> DEFOSSILIZING_RECIPE_TYPE = IRecipeType.register(ChaosAwakens.MODID + "defossilizing");

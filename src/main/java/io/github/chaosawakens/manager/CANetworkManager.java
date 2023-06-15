@@ -50,7 +50,7 @@ public class CANetworkManager {
 	}
 	
 	/**
-	 * Sends a tracking entity/player packet to all tracking clients from the server.
+	 * Sends a tracking entity/player packet to all tracking clients from the server. S2C.
 	 * @param packet Packet to send (S2C)
 	 * @param trackedEntity Tracked Entity
 	 */

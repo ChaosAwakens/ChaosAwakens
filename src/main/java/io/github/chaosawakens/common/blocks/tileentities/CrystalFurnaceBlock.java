@@ -3,13 +3,13 @@ package io.github.chaosawakens.common.blocks.tileentities;
 import java.util.Random;
 
 import io.github.chaosawakens.common.registry.CAStats;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
 	
-	public CrystalFurnaceBlock(AbstractBlock.Properties properties) {
+	public CrystalFurnaceBlock(Properties properties) {
 		super(properties);
 	}
 
@@ -28,23 +28,30 @@ public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
 	}
 
 	@Override
-	protected void openContainer(World worldIn, BlockPos pos, PlayerEntity player) {
-		TileEntity tileentity = worldIn.getBlockEntity(pos);
-		if (tileentity instanceof CrystalFurnaceTileEntity) {
-			player.openMenu((INamedContainerProvider) tileentity);
-			player.awardStat(CAStats.INTERACT_WITH_CRYSTAL_FURNACE);
+	protected void openContainer(World curWorld, BlockPos targetPos, PlayerEntity interactingPlayer) {
+		TileEntity targetTE = curWorld.getBlockEntity(targetPos);
+		
+		if (targetTE instanceof CrystalFurnaceTileEntity) {
+			interactingPlayer.openMenu((INamedContainerProvider) targetTE);
+			interactingPlayer.awardStat(CAStats.INTERACT_WITH_CRYSTAL_FURNACE);
 		}
 	}
 
 	@Override
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.getValue(LIT)) {
-			double d0 = (double) pos.getX() + 0.5D;
-			double d1 = pos.getY();
-			double d2 = (double) pos.getZ() + 0.5D;
-			if (rand.nextDouble() < 0.1D) worldIn.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+	public void animateTick(BlockState targetState, World curWorld, BlockPos targetPos, Random rand) {
+		if (targetState.getValue(LIT)) {
+			Direction curFacingDir = targetState.getValue(FACING);
+			double xPos = (double) targetPos.getX() + 0.5D;
+			double yPos = targetPos.getY();
+			double zPos = (double) targetPos.getZ() + 0.5D;
+	        double fallbackOffset = rand.nextDouble() * 0.6D - 0.3D;
+	        double randXOffset = curFacingDir.getAxis() == Direction.Axis.X ? curFacingDir.getStepX() * 0.52D : fallbackOffset;
+	        double randYOffset = rand.nextDouble() * 6.0D / 16.0D;
+	        double randZOffset = curFacingDir.getAxis() == Direction.Axis.Z ? curFacingDir.getStepZ() * 0.52D : fallbackOffset;
+			
+	        if (rand.nextDouble() < 0.1D) curWorld.playLocalSound(xPos, yPos, zPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 
-			worldIn.addParticle(ParticleTypes.FLAME, d0, d1 + 1.1D, d2, 0.0D, 0.0D, 0.0D);
+			curWorld.addParticle(ParticleTypes.FLAME, xPos + randXOffset, yPos + randYOffset, zPos + randZOffset, 0.0D, 0.0D, 0.0D);
 		}
 	}
 }

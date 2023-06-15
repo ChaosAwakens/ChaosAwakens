@@ -1,16 +1,18 @@
 package io.github.chaosawakens.common.blocks.tileentities.slots;
 
-import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 public class CrystalFurnaceFuelSlot extends Slot {
-	public CrystalFurnaceFuelSlot(IInventory p_i50084_2_, int p_i50084_3_, int p_i50084_4_, int p_i50084_5_) {
-		super(p_i50084_2_, p_i50084_3_, p_i50084_4_, p_i50084_5_);
+	
+	public CrystalFurnaceFuelSlot(IInventory inv, int slotIndex, int xPos, int yPos) {
+		super(inv, slotIndex, xPos, yPos);
 	}
 
+	@Override
 	public boolean mayPlace(ItemStack itemStack) {
-		return itemStack.getItem() == CABlocks.ENERGIZED_KYANITE.get().asItem();
+		return itemStack.getItem().is(CATags.Items.CRYSTAL_FURNACE_FUEL);
 	}
 }

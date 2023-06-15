@@ -15,18 +15,15 @@ public class AdvancementLocationPredicate {
 		this.loc = advLoc;
 	}
 	
-	public static AdvancementLocationPredicate fromJson(JsonElement e) {
-		if (!e.isJsonNull()) {
-			JsonObject advLocObj = JSONUtils.convertToJsonObject(e, ADVANCEMENT_LOCATION);
+	public static AdvancementLocationPredicate fromJson(JsonElement element) {
+		if (!element.isJsonNull()) {
+			JsonObject advLocObj = JSONUtils.convertToJsonObject(element, ADVANCEMENT_LOCATION);
 			JsonObject advLocObj1 = (JsonObject) advLocObj.get(ADVANCEMENT_LOCATION);
 			
 			ResourceLocation newAdvLoc;
 			
-			if (advLocObj1.has(ADV_ID)) {
-				newAdvLoc = new ResourceLocation(JSONUtils.getAsString(advLocObj1, ADV_ID));
-			} else {
-				throw new NullPointerException("Couldn't find advancement location: " + ADVANCEMENT_LOCATION);
-			}
+			if (advLocObj1.has(ADV_ID)) newAdvLoc = new ResourceLocation(JSONUtils.getAsString(advLocObj1, ADV_ID));
+			else throw new NullPointerException("Couldn't find advancement location: " + ADVANCEMENT_LOCATION);
 			
 			return new AdvancementLocationPredicate(newAdvLoc);
 		}

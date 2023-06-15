@@ -20,10 +20,6 @@ public abstract class AnimatableBossEntity extends AnimatableMonsterEntity {
 	
 	public abstract ServerBossInfo getBossInfo();
 	
-	public boolean canBePushed() {
-		return false;
-	}
-	
 	@Override
 	public void readAdditionalSaveData(CompoundNBT pCompound) {
 		super.readAdditionalSaveData(pCompound);
@@ -86,26 +82,8 @@ public abstract class AnimatableBossEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
-	public void push(double pX, double pY, double pZ) {
-		if (!canBePushed()) return;
-		else super.push(pX, pY, pZ);
-	}
-
-	@Override
-	public void push(Entity pEntity) {
-		if (!canBePushed()) return;
-		else super.push(pEntity);
-	}
-
-	@Override
 	public boolean canCollideWith(Entity pEntity) {
 		return false;
-	}
-
-	@Override
-	public void knockback(float pStrength, double pRatioX, double pRatioZ) {
-		if (!canBePushed()) return;
-		else super.knockback(pStrength, pRatioX, pRatioZ);
 	}
 
 	@Override
@@ -120,11 +98,6 @@ public abstract class AnimatableBossEntity extends AnimatableMonsterEntity {
 	@Override
 	public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
 		return false;
-	}
-
-	@Override
-	public boolean isPushable() {
-		return !canBePushed() ? false : super.isPushable();
 	}
 
 	@Override

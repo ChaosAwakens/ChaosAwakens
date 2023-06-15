@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
-import io.github.chaosawakens.common.registry.CARecipes;
+import io.github.chaosawakens.common.registry.CARecipeTypes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -18,8 +18,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class DefossilizingRecipe extends AbstractDefossilizingRecipe {
+	
 	public DefossilizingRecipe(ResourceLocation recipeId, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result, float experience, int defossilizingTime, String defossilizerType) {
-		super(CARecipes.DEFOSSILIZING_RECIPE_TYPE, CARecipes.DEFOSSILIZING_SERIALIZER.get(), recipeId, ingredient1, ingredient2, ingredient3, result, experience, defossilizingTime, defossilizerType);
+		super(CARecipeTypes.DEFOSSILIZING_RECIPE_TYPE, CARecipeTypes.DEFOSSILIZING_SERIALIZER.get(), recipeId, ingredient1, ingredient2, ingredient3, result, experience, defossilizingTime, defossilizerType);
 	}
 
 	public ItemStack getResult() {
@@ -27,7 +28,7 @@ public class DefossilizingRecipe extends AbstractDefossilizingRecipe {
 	}
 
 	public IRecipeType<?> getType() {
-		return CARecipes.DEFOSSILIZING_RECIPE_TYPE;
+		return CARecipeTypes.DEFOSSILIZING_RECIPE_TYPE;
 	}
 
 	@Override
