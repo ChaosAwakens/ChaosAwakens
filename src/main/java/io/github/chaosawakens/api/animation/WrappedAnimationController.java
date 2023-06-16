@@ -30,7 +30,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public void tick() {
-		double delta = server == null ? controller.tickOffset / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+		double delta = server == null ? net.minecraft.client.Minecraft.getInstance().getDeltaFrameTime() : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {
 		case TRANSITIONING:
