@@ -260,11 +260,11 @@ public class CAEntityTypes {
 	// Emerald Gator
 	public static final RegistryObject<EntityType<EmeraldGatorEntity>> EMERALD_GATOR = ENTITY_TYPES.register("emerald_gator",
 			() -> EntityType.Builder.of(EmeraldGatorEntity::new, EntityClassification.CREATURE)
-					.sized(1.5f, 1.0f)
+					.sized(1.0F, 0.58F)
 					.build(ChaosAwakens.prefix("emerald_gator").toString()));
 	public static final RegistryObject<EntityType<CrystalGatorEntity>> CRYSTAL_GATOR = ENTITY_TYPES.register("crystal_gator",
 			() -> EntityType.Builder.of(CrystalGatorEntity::new, EntityClassification.CREATURE)
-					.sized(1.5f, 1.0f) // Hitbox Size ()
+					.sized(1.5f, 058f) // Hitbox Size ()
 					.build(ChaosAwakens.prefix("crystal_gator").toString()));
 
 	// Ruby Bug
@@ -276,7 +276,7 @@ public class CAEntityTypes {
 	// Stink Bug
 	public static final RegistryObject<EntityType<StinkBugEntity>> STINK_BUG = ENTITY_TYPES.register("stink_bug",
 			() -> EntityType.Builder.of(StinkBugEntity::new, EntityClassification.CREATURE)
-					.sized(0.5f, 0.5f)
+					.sized(0.5f, 0.37f)
 					.build(ChaosAwakens.prefix("stink_bug").toString()));
 
 	// Robos

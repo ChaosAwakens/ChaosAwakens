@@ -9,7 +9,7 @@
   "power_chip_ingredient": {
     "item": "chaosawakens:aluminum_power_chip"
   },
-  "result": "chaosawakens:leafy_chicken_spawn_egg",
+  "result": "chaosawakens:lettuce_chicken_spawn_egg",
   "experience": 1,
   "defossilizing_time": 20,
   "defossilizer_type": "copper"

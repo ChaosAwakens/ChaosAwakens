@@ -25,6 +25,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.DrinkHelper;
@@ -126,6 +127,12 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	protected float getSoundVolume() {
 		return 0.4F;
 	}
+	
+	@Override
+	public void aiStep() {
+		if (this.level.isClientSide) this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, getRandomX(0.5D), getY(0.85D), getRandomZ(0.5D), -1000, -1000, -1000);
+		super.aiStep();
+	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
@@ -134,14 +141,14 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
+		return isBaby() ? sizeIn.height * 0.95F : 1.3F;
 	}
 	
 	@Override
 	public ActionResultType mobInteract(PlayerEntity playerIn, Hand hand) {
 		ItemStack handStack = playerIn.getItemInHand(hand);
 		
-		if (handStack.getItem() == Items.BUCKET && !this.isBaby()) {
+		if (handStack.getItem() == Items.BUCKET && !isBaby()) {
 			playerIn.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 			ItemStack milkBucketStack = DrinkHelper.createFilledResult(handStack, playerIn, Items.MILK_BUCKET.getDefaultInstance());
 			playerIn.setItemInHand(hand, milkBucketStack);

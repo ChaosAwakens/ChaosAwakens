@@ -340,6 +340,7 @@ public class CAClientSetupEvents {
 		RenderTypeLookup.setRenderLayer(CABlocks.CATS_EYE_BLOCK.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALISED_CRYSTAL_GATOR.get(), RenderType.cutoutMipped());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_TORCH.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.WALL_CRYSTAL_TORCH.get(), RenderType.cutoutMipped());

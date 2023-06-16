@@ -19,7 +19,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class CABoatItem extends BoatItem {
-	private static final Predicate<Entity> ENTITY_PREDICATE = EntityPredicates.NO_SPECTATORS.and(Entity::isPickable);
+	private static final Predicate<Entity> PICKABLE_ENTITY_PREDICATE = EntityPredicates.NO_SPECTATORS.and(Entity::isPickable);
 	private final String boatType;
 
 	public CABoatItem(String woodType, Properties properties) {
@@ -32,15 +32,14 @@ public class CABoatItem extends BoatItem {
 		RayTraceResult playerHitResult = getPlayerPOVHitResult(world, player, RayTraceContext.FluidMode.ANY);
 
 		if (playerHitResult.getType() == RayTraceResult.Type.MISS) return ActionResult.pass(mainHandItem);
-
 		else {
 			Vector3d viewVec = player.getViewVector(1.0F);
-			List<Entity> viableEntities = world.getEntities(player, player.getBoundingBox().expandTowards(viewVec.scale(5.0D)).inflate(1.0D), ENTITY_PREDICATE);
+			List<Entity> viableEntities = world.getEntities(player, player.getBoundingBox().expandTowards(viewVec.scale(5.0D)).inflate(1.0D), PICKABLE_ENTITY_PREDICATE);
 
 			if (!viableEntities.isEmpty()) {
 				Vector3d eyeVec = player.getEyePosition(1.0F);
 
-				for(Entity target : viableEntities) {
+				for (Entity target : viableEntities) {
 					AxisAlignedBB targetBB = target.getBoundingBox().inflate((double)target.getPickRadius());
 
 					if (targetBB.contains(eyeVec)) return ActionResult.pass(mainHandItem);
@@ -65,5 +64,4 @@ public class CABoatItem extends BoatItem {
 			} else return ActionResult.pass(mainHandItem);
 		}
 	}
-
 }

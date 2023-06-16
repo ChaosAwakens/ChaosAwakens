@@ -25,7 +25,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAnimatableEntity {
 	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableAnimalEntity.class, DataSerializers.BOOLEAN);
-	public float prevBodyRot;
+	public float prevYRot;
 	
 	public AnimatableAnimalEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -118,7 +118,7 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	
 	@Override
 	public void tick() {
-		this.prevBodyRot = yBodyRot;
+		this.prevYRot = yRot;
 		super.tick();
 		
 		if (!level.isClientSide) setMoving(!isStuck());

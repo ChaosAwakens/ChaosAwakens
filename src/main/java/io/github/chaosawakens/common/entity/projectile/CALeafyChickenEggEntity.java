@@ -32,7 +32,7 @@ public class CALeafyChickenEggEntity extends ProjectileItemEntity {
 	
 	@Override
 	protected Item getDefaultItem() {
-		return CAItems.LEAFY_CHICKEN_EGG.get();
+		return CAItems.LETTUCE_CHICKEN_EGG.get();
 	}
 	
 	@Override

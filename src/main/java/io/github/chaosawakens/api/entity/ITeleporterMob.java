@@ -13,15 +13,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 
 public interface ITeleporterMob {
-	ITextComponent EMPTY_INVENTORY_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
-	ITextComponent INACCESSIBLE_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
+	TranslationTextComponent EMPTY_INVENTORY_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
+	TranslationTextComponent INACCESSIBLE_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
 
 	default ActionResultType mobInteract(PlayerEntity playerIn, Hand hand, World level, BooleanValue tpConfig, RegistryKey<World> targetDimension) {
 		ItemStack heldStack = playerIn.getItemInHand(hand);

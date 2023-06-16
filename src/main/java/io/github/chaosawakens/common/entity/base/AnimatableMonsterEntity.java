@@ -41,7 +41,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatableEntity {
 	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
 	protected static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BYTE);
-	public float prevBodyRot;
+	public float prevYRot;
 	
 	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -215,7 +215,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	@Override
 	public void tick() {
-		this.prevBodyRot = yBodyRot;
+		this.prevYRot = yRot;
 		tickAnims();
 		super.tick();
 		

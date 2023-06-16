@@ -472,24 +472,25 @@ public class CACommonSetupEvents {
 	//@SubscribeEvent
 	public static void onGatherDataEvent(final GatherDataEvent event) {
 		DataGenerator dataGenerator = event.getGenerator();
-		final ExistingFileHelper existing = event.getExistingFileHelper();
+		final ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+		
 		if (event.includeClient()) {
-			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, existing));
-			dataGenerator.addProvider(new CAItemModelProvider(dataGenerator, existing));
-			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, existing));
+			dataGenerator.addProvider(new CABlockModelProvider(dataGenerator, existingFileHelper));
+			dataGenerator.addProvider(new CAItemModelProvider(dataGenerator, existingFileHelper));
+			dataGenerator.addProvider(new CABlockStateProvider(dataGenerator, existingFileHelper));
+			dataGenerator.addProvider(new CAParticleTypeProvider(dataGenerator));
 		}
 		//		dataGenerator.addProvider(new CALanguageProvider(dataGenerator));
-		dataGenerator.addProvider(new CAParticleTypeProvider(dataGenerator));
 		if (event.includeServer()) {
-			dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator));
+			dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator, existingFileHelper));
 			dataGenerator.addProvider(new CACustomConversionProvider(dataGenerator));
 			dataGenerator.addProvider(new CADimensionTypeProvider(dataGenerator));
 			dataGenerator.addProvider(new CAGlobalLootModifierProvider(dataGenerator));
 			dataGenerator.addProvider(new CALootTableProvider(dataGenerator));
 			dataGenerator.addProvider(new CARecipeProvider(dataGenerator));
-			dataGenerator.addProvider(new CATagProvider.CABlockTagProvider(dataGenerator, existing));
-			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, existing));
-			dataGenerator.addProvider(new CATagProvider.CAEntityTypeTagProvider(dataGenerator, existing));
+			dataGenerator.addProvider(new CATagProvider.CABlockTagProvider(dataGenerator, existingFileHelper));
+			dataGenerator.addProvider(new CATagProvider.CAItemTagProvider(dataGenerator, existingFileHelper));
+			dataGenerator.addProvider(new CATagProvider.CAEntityTypeTagProvider(dataGenerator, existingFileHelper));
 		}
 	}
 }

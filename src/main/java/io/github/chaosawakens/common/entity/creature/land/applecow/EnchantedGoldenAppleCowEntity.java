@@ -115,7 +115,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
+		playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -123,8 +123,9 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 		return 0.4F;
 	}
 
+	@Override
 	public void aiStep() {
-		if (this.level.isClientSide) this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, this.getRandomX(0.5D), this.getY(0.85D), this.getRandomZ(0.5D), -1000, -1000, -1000);
+		if (this.level.isClientSide) this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, getRandomX(0.5D), getY(0.85D), getRandomZ(0.5D), -1000, -1000, -1000);
 		super.aiStep();
 	}
 
@@ -162,7 +163,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.isBaby() ? sizeIn.height * 0.95F : 1.3F;
+		return isBaby() ? sizeIn.height * 0.95F : 1.3F;
 	}
 
 	@Nullable

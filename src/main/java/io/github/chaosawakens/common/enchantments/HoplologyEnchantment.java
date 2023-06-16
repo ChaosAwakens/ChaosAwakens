@@ -17,7 +17,7 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 	
 	@Override
 	public int getDamageProtection(int pLevel, DamageSource pSource) {
-		if(pSource.isBypassArmor() || pSource.isBypassInvul()) return 0;
+		if (pSource.isBypassArmor() || pSource.isBypassInvul()) return 0;
 		else return protection;
 	}
 	
@@ -29,6 +29,10 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 	@Override
 	public int getMaxLevel() {
 		return 1;
+	}
+	
+	public int getProtection() {
+		return protection;
 	}
 	
 	public void incrementProtection(int protection) {

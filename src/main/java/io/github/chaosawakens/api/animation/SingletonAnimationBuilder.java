@@ -9,12 +9,12 @@ import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 
 /**
- * {@code IAnimationBuilder} instance class. Allows for the instantiation of only 1 (immutable) animation by wrapping
+ * {@link IAnimationBuilder} instance class. Allows for the instantiation of only 1 (immutable) animation by wrapping
  * around an {@link AnimationBuilder} instance and pruning its list down to the first animation (the one passed in here).
  * <br> </br>
  * This class holds both client and server side data for its animation. Standard metadata such as Geckolib's animation
  * tick, the animation state, and animation loop type are <b>ONLY</b> present on the client. Other metadata unique to
- * CA such as a server-side animation progress (tick) field, animation length (Geckolib), and animation name are present
+ * CA such as a server-side animation progress (tick) field, {@link ExpandedAnimationState}, animation length (Geckolib), and animation name are present
  * on the server (sometimes on the client, depends on the data).
  * <br> </br>
  * It's advised that animation handling is done solely through {@link IAnimatableEntity} methods, as they handle any

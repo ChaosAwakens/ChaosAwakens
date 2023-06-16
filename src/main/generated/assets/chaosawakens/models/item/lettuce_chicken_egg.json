@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "chaosawakens:item/leafy_chicken_egg"
+    "layer0": "chaosawakens:item/lettuce_chicken_egg"
   }
 }

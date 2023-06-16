@@ -217,7 +217,7 @@
 	"entity.chaosawakens.robo_warrior": "Robo Warrior",
 	"entity.chaosawakens.robo_laser": "Robo Laser",
 	"entity.chaosawakens.gazelle": "Gazelle",
-	"entity.chaosawakens.leafy_chicken": "Lettuce Chicken",
+	"entity.chaosawakens.lettuce_chicken": "Lettuce Chicken",
 	"entity.chaosawakens.beaver": "Beaver",
 	"entity.chaosawakens.apple_cow": "Apple Cow",
 	"entity.chaosawakens.golden_apple_cow": "Golden Apple Cow",
@@ -243,7 +243,7 @@
 	"entity.chaosawakens.crystal_zombie": "Crystal Zombie",
 	"entity.chaosawakens.crystal_skeleton": "Crystal Skeleton",
 	"entity.chaosawakens.crystal_creeper": "Crystal Creeper",
-	"entity.chaosawakens.leafy_chicken_egg": "Thrown Leafy Chicken Egg",
+	"entity.chaosawakens.lettuce_chicken_egg": "Thrown Lettuce Chicken Egg",
 	"entity.chaosawakens.screen_shake": "Screen Shake",
 	"entity.chaosawakens.falling_block": "Falling Block",
 	
@@ -276,8 +276,8 @@
 	"item.chaosawakens.unstable_ant_spawn_egg": "Unstable Ant Spawn Egg",
 	"item.chaosawakens.termite_spawn_egg": "Termite Spawn Egg",
 	"item.chaosawakens.tree_frog_spawn_egg": "Tree Frog Spawn Egg",
-	"item.chaosawakens.leafy_chicken_spawn_egg": "Lettuce Chicken Spawn Egg",
-	"item.chaosawakens.leafy_chicken_egg": "Lettuce Chicken Egg",
+	"item.chaosawakens.lettuce_chicken_spawn_egg": "Lettuce Chicken Spawn Egg",
+	"item.chaosawakens.lettuce_chicken_egg": "Lettuce Chicken Egg",
 	"item.chaosawakens.hercules_beetle_spawn_egg": "Hercules Beetle Spawn Egg",
 	"item.chaosawakens.dimetrodon_spawn_egg": "Dimetrodon Spawn Egg",
 	"item.chaosawakens.emerald_gator_spawn_egg": "Emerald Gator Spawn Egg",
@@ -742,6 +742,7 @@
 
 	"block.chaosawakens.crystalised_crystal_apple_cow": "Crystalised Crystal Apple Cow",
 	"block.chaosawakens.crystalised_crystal_carrot_pig": "Crystalised Crystal Carrot Pig",
+	"block.chaosawakens.crystalised_crystal_gator": "Crystalised Crystal Gator",
 	"block.chaosawakens.crystalised_fairy": "Crystalised Fairy",
 	"block.chaosawakens.crystalised_rat": "Crystalised Rat",
 

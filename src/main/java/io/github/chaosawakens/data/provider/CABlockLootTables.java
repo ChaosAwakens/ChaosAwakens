@@ -70,8 +70,8 @@ public class CABlockLootTables extends BlockLootTables {
 		add(CABlocks.SILVER_ORE.get(), (ore) -> createOreDrop(ore, CAItems.SILVER_LUMP.get()));
 		add(CABlocks.TIN_ORE.get(), (ore) -> createOreDrop(ore, CAItems.TIN_LUMP.get()));
 
-		add(CABlocks.CATS_EYE_CLUSTER.get(), (ore) -> createCluster(ore, CAItems.CATS_EYE_SHARD.get()));
-		add(CABlocks.PINK_TOURMALINE_CLUSTER.get(), (ore) -> createCluster(ore, CAItems.PINK_TOURMALINE_SHARD.get()));
+		add(CABlocks.CATS_EYE_CLUSTER.get(), (ore) -> createClusterDrop(ore, CAItems.CATS_EYE_SHARD.get()));
+		add(CABlocks.PINK_TOURMALINE_CLUSTER.get(), (ore) -> createClusterDrop(ore, CAItems.PINK_TOURMALINE_SHARD.get()));
 
 		dropSelf(CABlocks.ALUMINUM_ORE.get());
 		dropSelf(CABlocks.TITANIUM_ORE.get());
@@ -717,7 +717,7 @@ public class CABlockLootTables extends BlockLootTables {
 				.collect(Collectors.toList());
 	}
 	
-	private static LootTable.Builder createCluster(Block cluster, Item shard) {
+	private static LootTable.Builder createClusterDrop(Block cluster, Item shard) {
 		return applyExplosionDecay(cluster, LootTable.lootTable()
 				.withPool(LootPool.lootPool()
 						.when(BlockStateProperty.hasBlockStateProperties(cluster)

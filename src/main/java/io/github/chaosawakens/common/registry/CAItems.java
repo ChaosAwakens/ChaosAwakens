@@ -201,7 +201,7 @@ public class CAItems {
 	public static final RegistryObject<Item> BIG_BERTHA_GUARD = ITEMS.register("big_bertha_guard", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> BIG_BERTHA_HANDLE = ITEMS.register("big_bertha_handle", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.ITEMS)));
 
-	public static final RegistryObject<LeafyChickenEggItem> LEAFY_CHICKEN_EGG = ITEMS.register("leafy_chicken_egg", () -> new LeafyChickenEggItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<LeafyChickenEggItem> LETTUCE_CHICKEN_EGG = ITEMS.register("lettuce_chicken_egg", () -> new LeafyChickenEggItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.ITEMS)));
 
 	// CARROT PIG
 	public static final RegistryObject<BeetrootOnAStickItem> BEETROOT_ON_A_STICK = ITEMS.register("beetroot_on_a_stick",() -> new BeetrootOnAStickItem(new Item.Properties().durability(120).tab(CAItemGroups.ITEMS), 3));
@@ -583,7 +583,7 @@ public class CAItems {
 	public static final RegistryObject<CASpawnEggItem> UNSTABLE_ANT_SPAWN_EGG = ITEMS.register("unstable_ant_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.UNSTABLE_ANT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> TERMITE_SPAWN_EGG = ITEMS.register("termite_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.TERMITE.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> TREE_FROG_SPAWN_EGG = ITEMS.register("tree_frog_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.TREE_FROG.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
-	public static final RegistryObject<CASpawnEggItem> LEAFY_CHICKEN_SPAWN_EGG = ITEMS.register("leafy_chicken_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.LETTUCE_CHICKEN.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<CASpawnEggItem> LETTUCE_CHICKEN_SPAWN_EGG = ITEMS.register("lettuce_chicken_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.LETTUCE_CHICKEN.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> HERCULES_BEETLE_SPAWN_EGG = ITEMS.register("hercules_beetle_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.HERCULES_BEETLE.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> DIMETRODON_SPAWN_EGG = ITEMS.register("dimetrodon_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.DIMETRODON.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> EMERALD_GATOR_SPAWN_EGG = ITEMS.register("emerald_gator_spawn_egg", () -> new CASpawnEggItem(() ->CAEntityTypes.EMERALD_GATOR.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));

@@ -322,7 +322,7 @@ public class CAVanillaCompat {
 				return new IrukandjiArrowEntity(world, pos.x(), pos.y(), pos.z());
 			}
 		});
-		DispenserBlock.registerBehavior(CAItems.LEAFY_CHICKEN_EGG.get(), new ProjectileDispenseBehavior() {			
+		DispenserBlock.registerBehavior(CAItems.LETTUCE_CHICKEN_EGG.get(), new ProjectileDispenseBehavior() {			
 			@Override
 			protected ProjectileEntity getProjectile(World world, IPosition pos, ItemStack stack) {
 				return new CALeafyChickenEggEntity(world, pos.x(), pos.y(), pos.z());

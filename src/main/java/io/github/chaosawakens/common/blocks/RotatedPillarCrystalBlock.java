@@ -8,14 +8,15 @@ import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Rotation;
 
 public class RotatedPillarCrystalBlock extends CrystalBlock {
-	public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
+	public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
 
 	public RotatedPillarCrystalBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
+		this.registerDefaultState(defaultBlockState().setValue(AXIS, Axis.Y));
 	}
 
 	@Override
@@ -26,18 +27,14 @@ public class RotatedPillarCrystalBlock extends CrystalBlock {
 	@Override
 	public BlockState rotate(BlockState state, Rotation rotation) {
 		switch (rotation) {
+		default: return state;
 		case COUNTERCLOCKWISE_90:
 		case CLOCKWISE_90:
 			switch (state.getValue(AXIS)) {
-			case X:
-				return state.setValue(AXIS, Direction.Axis.Z);
-			case Z:
-				return state.setValue(AXIS, Direction.Axis.X);
-			default:
-				return state;
+			default: return state;
+			case X: return state.setValue(AXIS, Direction.Axis.Z);
+			case Z: return state.setValue(AXIS, Direction.Axis.X);
 			}
-		default:
-			return state;
 		}
 	}
 
@@ -47,7 +44,7 @@ public class RotatedPillarCrystalBlock extends CrystalBlock {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext blockItemUseContext) {
-		return this.defaultBlockState().setValue(AXIS, blockItemUseContext.getClickedFace().getAxis());
+	public BlockState getStateForPlacement(BlockItemUseContext ctx) {
+		return defaultBlockState().setValue(AXIS, ctx.getClickedFace().getAxis());
 	}
 }

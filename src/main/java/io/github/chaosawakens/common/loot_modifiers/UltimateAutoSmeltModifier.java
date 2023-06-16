@@ -29,14 +29,15 @@ public class UltimateAutoSmeltModifier extends LootModifier {
 	
 	protected final ItemStack getSmeltedOutput(LootContext context, ItemStack stack) {
 		if (context.getLevel() != null) {
-			for (PlayerEntity player : context.getLevel().getPlayers((player) -> player.isCrouching())) {
-				int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, player.getMainHandItem());
+			for (PlayerEntity targetPlayer : context.getLevel().getPlayers((player) -> player.isCrouching())) {
+				int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, targetPlayer.getMainHandItem());
 				boolean hasFortune = fortuneLevel > 0;
 				Random random = new Random();
+				
 				return context.getLevel().getRecipeManager()
 						.getRecipeFor(IRecipeType.SMELTING, new Inventory(stack), context.getLevel())
-						.map(FurnaceRecipe::getResultItem).filter(itemStack -> !itemStack.isEmpty() && itemStack != null)
-						.map(itemStack -> hasFortune ? copyStackWithSize(itemStack, stack.getCount() + random.nextInt(fortuneLevel + 1)) : copyStackWithSize(itemStack, stack.getCount())).orElse(stack);
+						.map(FurnaceRecipe::getResultItem).filter(targetStack -> !targetStack.isEmpty() && targetStack != null)
+						.map(targetStack -> hasFortune && targetPlayer.isCrouching() ? copyStackWithSize(targetStack, stack.getCount() + random.nextInt(fortuneLevel + 1)) : copyStackWithSize(targetStack, stack.getCount())).orElse(stack);
 			}
 		} 
 		return stack;
@@ -54,7 +55,7 @@ public class UltimateAutoSmeltModifier extends LootModifier {
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
 		List<ItemStack> stackArrayList = new ObjectArrayList<>();
-		generatedLoot.forEach((stack) -> stackArrayList.add(getSmeltedOutput(context, stack)));
+		generatedLoot.forEach((targetStack) -> stackArrayList.add(getSmeltedOutput(context, targetStack)));
 		return stackArrayList;
 	}
 	
