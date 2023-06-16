@@ -141,8 +141,6 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		setAttackID((byte) 0);
 		if (getDeathAnim() != null) {
 			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getDeathAnim().getWrappedController();
-			playAnimation(getDeathAnim(), false);
-			
 			if (wrappedController.isCurrentAnimationFinished()) {
 				this.remove();
 				for (int i = 0; i < 20; ++i) {
@@ -152,6 +150,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset, yOffset, zOffset);
 				}
 			}
+			playAnimation(getDeathAnim(), false);
 		} else {
 			super.tickDeath();
 		}
