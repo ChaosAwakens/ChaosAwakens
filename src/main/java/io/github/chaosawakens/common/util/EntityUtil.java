@@ -126,7 +126,7 @@ public final class EntityUtil {
 	 * @param targetEntity The target entity to have its rotation stopped
 	 */
 	public static void freezeEntityRotation(AnimatableMonsterEntity targetEntity) {
-		targetEntity.yRot = targetEntity.prevYRot;
+		targetEntity.yRot = targetEntity.yRotO;
 	}
 
 	/**
@@ -135,7 +135,7 @@ public final class EntityUtil {
 	 * @param targetEntity The target entity to have its rotation stopped
 	 */
 	public static void freezeEntityRotation(AnimatableAnimalEntity targetEntity) {
-		targetEntity.yRot = targetEntity.prevYRot;
+		targetEntity.yRot = targetEntity.yRotO;
 	}
 
 	/**

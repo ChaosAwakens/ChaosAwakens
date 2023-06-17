@@ -84,7 +84,6 @@ public class EmeraldGatorEntity extends AnimatableAngerableAnimalEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isInWater()) playAnimation(swimAnim, false);
 		return PlayState.CONTINUE;
 	}
 	
@@ -161,5 +160,12 @@ public class EmeraldGatorEntity extends AnimatableAngerableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<EmeraldGatorEntity>> getWrappedControllers() {
 		return emeraldGatorControllers;
+	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving() && !isAttacking() && !isInWaterOrBubble()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isInWaterOrBubble()) playAnimation(getWalkAnim(), false);
+		if (isInWaterOrBubble()) playAnimation(swimAnim, false);
 	}
 }

@@ -264,7 +264,7 @@ public class CAEntityTypes {
 					.build(ChaosAwakens.prefix("emerald_gator").toString()));
 	public static final RegistryObject<EntityType<CrystalGatorEntity>> CRYSTAL_GATOR = ENTITY_TYPES.register("crystal_gator",
 			() -> EntityType.Builder.of(CrystalGatorEntity::new, EntityClassification.CREATURE)
-					.sized(1.5f, 058f) // Hitbox Size ()
+					.sized(1.0f, 0.58f) // Hitbox Size ()
 					.build(ChaosAwakens.prefix("crystal_gator").toString()));
 
 	// Ruby Bug

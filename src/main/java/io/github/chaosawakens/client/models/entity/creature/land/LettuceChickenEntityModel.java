@@ -3,12 +3,8 @@ package io.github.chaosawakens.client.models.entity.creature.land;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.creature.land.LettuceChickenEntity;
-import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.AnimationProcessor;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class LettuceChickenEntityModel extends ExtendedAnimatedTickingGeoModel<LettuceChickenEntity> {
 

@@ -7,6 +7,7 @@ import io.github.chaosawakens.client.renderers.item.extended.BigBerthaItemRender
 import io.github.chaosawakens.client.renderers.item.extended.QueenScaleBattleAxeItemRenderer;
 import io.github.chaosawakens.client.renderers.item.extended.RoyalGuardianSwordItemRenderer;
 import io.github.chaosawakens.client.renderers.item.extended.SlayerChainsawItemRenderer;
+import io.github.chaosawakens.common.entity.bucket.PinkTourmalineBucketItem;
 import io.github.chaosawakens.common.items.BeetrootOnAStickItem;
 import io.github.chaosawakens.common.items.CritterCageItem;
 import io.github.chaosawakens.common.items.MantisClawItem;
@@ -18,6 +19,7 @@ import io.github.chaosawakens.common.items.armor.LavaEelArmorItem;
 import io.github.chaosawakens.common.items.armor.SlowFallBoots;
 import io.github.chaosawakens.common.items.base.CABoatItem;
 import io.github.chaosawakens.common.items.base.CASpawnEggItem;
+import io.github.chaosawakens.common.items.base.ConsumableBucketItem;
 import io.github.chaosawakens.common.items.base.EnchantedArmorItem;
 import io.github.chaosawakens.common.items.base.EnchantedAxeItem;
 import io.github.chaosawakens.common.items.base.EnchantedHoeItem;
@@ -26,7 +28,6 @@ import io.github.chaosawakens.common.items.base.EnchantedPickaxeItem;
 import io.github.chaosawakens.common.items.base.EnchantedShovelItem;
 import io.github.chaosawakens.common.items.base.EnchantedSwordItem;
 import io.github.chaosawakens.common.items.base.StructureItem;
-import io.github.chaosawakens.common.items.bucket.PinkTourmalineBucketItem;
 import io.github.chaosawakens.common.items.dev.DevItem;
 import io.github.chaosawakens.common.items.projectile.IrukandjiArrowItem;
 import io.github.chaosawakens.common.items.projectile.LeafyChickenEggItem;
@@ -226,6 +227,7 @@ public class CAItems {
 	public static final RegistryObject<PinkTourmalineBucketItem> PINK_TOURMALINE_BUCKET = ITEMS.register("pink_tourmaline_bucket", () -> new PinkTourmalineBucketItem(() -> Fluids.EMPTY, new Item.Properties().stacksTo(16).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<PinkTourmalineBucketItem> LAVA_PINK_TOURMALINE_BUCKET = ITEMS.register("lava_pink_tourmaline_bucket", () -> new PinkTourmalineBucketItem(() -> Fluids.LAVA, new Item.Properties().stacksTo(1).craftRemainder(CAItems.PINK_TOURMALINE_BUCKET.get()).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<PinkTourmalineBucketItem> WATER_PINK_TOURMALINE_BUCKET = ITEMS.register("water_pink_tourmaline_bucket", () -> new PinkTourmalineBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1).craftRemainder(CAItems.PINK_TOURMALINE_BUCKET.get()).tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<ConsumableBucketItem> MILK_PINK_TOURMALINE_BUCKET = ITEMS.register("milk_pink_tourmaline_bucket", () -> new ConsumableBucketItem(() -> PINK_TOURMALINE_BUCKET.get(), new Item.Properties().stacksTo(1).craftRemainder(CAItems.PINK_TOURMALINE_BUCKET.get()).tab(CAItemGroups.ITEMS), true));
 	
 	// SIGNS
 	public static final RegistryObject<SignItem> APPLE_SIGN = ITEMS.register("apple_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(CAItemGroups.BLOCKS), CABlocks.APPLE_SIGN.get(), CABlocks.APPLE_WALL_SIGN.get()));

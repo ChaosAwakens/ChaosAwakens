@@ -10,6 +10,7 @@ import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.neutral.AnimatableAngerMeleeAttackGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableAngerableAnimalEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.AgeableEntity;
@@ -100,7 +101,6 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isInWater()) playAnimation(swimAnim, false);
 		return PlayState.CONTINUE;
 	}
 	
@@ -204,13 +204,25 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 
 	@Override
 	public CrystalGatorEntity getBreedOffspring(ServerWorld pServerLevel, AgeableEntity pMate) {
-		return null;
+		CrystalGatorEntity offspring = CAEntityTypes.CRYSTAL_GATOR.get().create(pServerLevel);
+
+		assert offspring != null;
+		offspring.setCrystalGatorType(((CrystalGatorEntity) pMate).getCrystalGatorType());
+
+		return offspring;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public ObjectArrayList<WrappedAnimationController<CrystalGatorEntity>> getWrappedControllers() {
 		return crystalGatorControllers;
+	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving() && !isAttacking() && !isInWaterOrBubble()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isInWaterOrBubble()) playAnimation(getWalkAnim(), false);
+		if (isInWaterOrBubble()) playAnimation(swimAnim, false);
 	}
 	
 	private class CrystalGatorData extends AgeableData {

@@ -4,7 +4,6 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.core.processor.IBone;
 
 public class CrystalGatorEntityModel extends ExtendedAnimatedTickingGeoModel<CrystalGatorEntity> {
 
@@ -43,10 +42,5 @@ public class CrystalGatorEntityModel extends ExtendedAnimatedTickingGeoModel<Cry
 	@Override
 	protected boolean shouldScaleHeadWithChild() {
 		return true;
-	}
-	
-	@Override
-	public IBone getBodyBone() {
-		return getAnimationProcessor().getBone("body");
 	}
 }

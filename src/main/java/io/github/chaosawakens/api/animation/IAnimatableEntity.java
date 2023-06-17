@@ -11,6 +11,8 @@ import io.github.chaosawakens.manager.CANetworkManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimatableModel;
@@ -240,6 +242,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 	@SuppressWarnings("unchecked")
 	default <E extends Entity> IAnimatableModel<E> getModel() { //TODO Dedicated server crash fix
+		if (!FMLEnvironment.dist.equals(Dist.CLIENT)) return null;
 		return (IAnimatableModel<E>) AnimationUtils.getGeoModelForEntity((E) this);
 	}
 }

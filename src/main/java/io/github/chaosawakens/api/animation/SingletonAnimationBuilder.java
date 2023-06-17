@@ -98,7 +98,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		
 		if (isPlaying()) wasPlaying = true;
 		
-		return wasPlaying ? targetController.isAnimationFinished(this) || (getWrappedController().getAnimationProgress() >= getWrappedAnimLength() && targetController.getAnimationState() == ExpandedAnimationState.RUNNING) : false;
+		return wasPlaying ? targetController.isAnimationFinished(this) || (getWrappedController().getAnimationProgress() >= getWrappedAnimLength() && (targetController.getAnimationState() == ExpandedAnimationState.RUNNING || targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING)) : false;
 	}
 
 	@Override

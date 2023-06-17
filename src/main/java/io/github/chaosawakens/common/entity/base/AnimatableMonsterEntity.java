@@ -140,9 +140,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
 		if (getDeathAnim() != null) {
-			WrappedAnimationController<? extends IAnimatableEntity> wrappedController = getDeathAnim().getWrappedController();
-			if (wrappedController.isCurrentAnimationFinished()) {
-				this.remove();
+			playAnimation(getDeathAnim(), false);
+			if (getDeathAnim().hasAnimationFinished()) {
+				remove();
+				
 				for (int i = 0; i < 20; ++i) {
 					double xOffset = this.random.nextGaussian() * 0.02D;
 					double yOffset = this.random.nextGaussian() * 0.02D;
@@ -150,7 +151,6 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset, yOffset, zOffset);
 				}
 			}
-			playAnimation(getDeathAnim(), false);
 		} else {
 			super.tickDeath();
 		}
