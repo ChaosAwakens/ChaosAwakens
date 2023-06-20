@@ -62,7 +62,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
-		if (!builder.getAnimation().animationName.equals(getCurrentAnimation().animationName) || clearCache) {
+		if (!getCurrentAnimation().animationName.equals(builder.getAnimation().animationName) || clearCache) {
 			if (clearCache) builder.playAnimation(true);
 			else builder.playAnimation(false);
 			

@@ -59,13 +59,13 @@ public class AnimatableMeleeGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceToSqr(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget()) * 2
+				&& owner.distanceToSqr(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget())
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, meleeAnim.get(), attackId) && owner.isAlive() && !meleeAnim.get().getWrappedController().isCurrentAnimationFinished();
+		return ObjectUtil.performNullityChecks(false, owner, meleeAnim.get(), attackId) && owner.isAlive() && !meleeAnim.get().hasAnimationFinished();
 	}
 
 	@Override
@@ -88,8 +88,12 @@ public class AnimatableMeleeGoal extends Goal {
 		
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
 		
-		double reach = owner.getMeleeAttackReachSqr(target);
+		double reach = Math.sqrt(owner.getMeleeAttackReachSqr(target));
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
+		ChaosAwakens.debug("REACH", reach);
+		ChaosAwakens.debug("REACH SQ", owner.getMeleeAttackReachSqr(target));
+		ChaosAwakens.debug("DIST", owner.distanceToSqr(owner.getTarget()));
+		ChaosAwakens.debug("TARGETS", potentialAffectedTargets);
 
 		if (meleeAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
@@ -103,11 +107,8 @@ public class AnimatableMeleeGoal extends Goal {
 			float hitDistanceSqr = (float) (Math.sqrt((target.getZ() - owner.getZ()) * (target.getZ() - owner.getZ()) + (target.getX() - owner.getX()) * (target.getX() - owner.getX())) - owner.getBbWidth() / 2F);
 			
 			if (MathUtil.isBetween(meleeAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
-				ChaosAwakens.debug("GOAL", "------------");
-				ChaosAwakens.debug("TARGET", potentialAffectedTarget);
-				ChaosAwakens.debug("REL ATK ANGLE", relativeHitAngle);
-				ChaosAwakens.debug("RESTRICTION", MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange));
-				ChaosAwakens.debug("END", "------------");
+//				ChaosAwakens.debug("GOAL", "------------");
+//				ChaosAwakens.debug("END", "------------");
 				if (hitDistanceSqr <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) owner.doHurtTarget(potentialAffectedTarget);
 			}
 		}

@@ -93,8 +93,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@Override
 	protected void registerGoals() {
 		this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> punchAnim, PUNCH_ATTACK_ID, 20D, 22.4D, 42));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, smashAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 10.0D, 4));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> punchAnim, PUNCH_ATTACK_ID, 20D, 22.4D, 2));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 10.0D, 4));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));

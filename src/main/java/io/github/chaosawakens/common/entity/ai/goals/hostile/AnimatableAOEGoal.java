@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -14,7 +15,7 @@ import net.minecraft.entity.ai.goal.Goal;
 
 public class AnimatableAOEGoal extends Goal {
 	private final AnimatableMonsterEntity owner;
-	private SingletonAnimationBuilder aoeAnim;
+	private Supplier<SingletonAnimationBuilder> aoeAnim;
 	private final byte attackId;
 	private final double actionPointTickStart;
 	private final double actionPointTickEnd;
@@ -24,7 +25,7 @@ public class AnimatableAOEGoal extends Goal {
 	private final boolean shouldFreezeRotation;
 	private Predicate<AnimatableMonsterEntity> extraActivationConditions;
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, boolean shouldFreezeRotation) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, boolean shouldFreezeRotation) {
 		this.owner = owner;
 		this.aoeAnim = aoeAnim;
 		this.attackId = attackId;
@@ -36,61 +37,61 @@ public class AnimatableAOEGoal extends Goal {
 		this.shouldFreezeRotation = shouldFreezeRotation;
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, amountThreshold, probability, true);
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, boolean shouldFreezeRotation) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, boolean shouldFreezeRotation) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, amountThreshold, 1, shouldFreezeRotation);
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, 3, 1, true);
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, boolean shouldFreezeRotation) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, boolean shouldFreezeRotation) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, 3, 1, shouldFreezeRotation);
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, 3, 1, true);
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, boolean shouldFreezeRotation) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, boolean shouldFreezeRotation) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, 8.0D, 3, 1, shouldFreezeRotation);
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, 8.0D, 3, 1, true);
 	}
 
 	//TODO Organize
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, amountThreshold, 1, true);
 		this.extraActivationConditions = extraActivationConditions;
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, boolean shouldFreezeRotation, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, boolean shouldFreezeRotation, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, amountThreshold, 1, shouldFreezeRotation);
 		this.extraActivationConditions = extraActivationConditions;
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, boolean shouldFreezeRotation, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, boolean shouldFreezeRotation, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, 3, 1, shouldFreezeRotation);
 		this.extraActivationConditions = extraActivationConditions;
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, 3, 1, true);
 		this.extraActivationConditions = extraActivationConditions;
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, boolean shouldFreezeRotation, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, boolean shouldFreezeRotation, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, 8.0D, 3, 1, shouldFreezeRotation);
 		this.extraActivationConditions = extraActivationConditions;
 	}
 
-	public AnimatableAOEGoal(AnimatableMonsterEntity owner, SingletonAnimationBuilder aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
+	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, 8.0D, 3, 1, true);
 		this.extraActivationConditions = extraActivationConditions;
 	}
@@ -100,20 +101,20 @@ public class AnimatableAOEGoal extends Goal {
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation)
 				&& EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange).size() >= amountThreshold
 				&& owner.isAlive() && owner.getTarget().isAlive() && owner.getAttackID() == (byte) 0
-				&& actionPointTickStart <= aoeAnim.getWrappedController().getAnimationLength()
-				&& actionPointTickEnd <= aoeAnim.getWrappedController().getAnimationLength()
+				&& actionPointTickStart <= aoeAnim.get().getWrappedAnimLength()
+				&& actionPointTickEnd <= aoeAnim.get().getWrappedAnimLength()
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
 	public boolean canContinueToUse() {
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), aoeAnim, attackId, shouldFreezeRotation)
-				&& !aoeAnim.getWrappedController().isAnimationFinished(aoeAnim) && owner.isAlive();
+				&& !aoeAnim.get().hasAnimationFinished() && owner.isAlive();
 	}
 
 	@Override
 	public void start() {
-		owner.playAnimation(aoeAnim, false);
+		owner.playAnimation(aoeAnim.get(), false);
 		owner.setAttackID(attackId);
 		owner.getNavigation().stop();
 	}
@@ -128,16 +129,16 @@ public class AnimatableAOEGoal extends Goal {
 		List<LivingEntity> affectedTargets = EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange);
 
 		if (shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
-		else if (aoeAnim.getWrappedController().getAnimationProgress() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
+		else if (aoeAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
 		
 		if (!affectedTargets.isEmpty()) {
 			for (LivingEntity affectedTarget : affectedTargets) {
-				if (MathUtil.isBetween(aoeAnim.getWrappedController().getAnimationProgress(), actionPointTickStart, actionPointTickEnd)) {
+				if (MathUtil.isBetween(aoeAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 					if (MathUtil.getDistanceBetween(owner, affectedTarget) <= aoeRange) owner.doHurtTarget(affectedTarget);
 				}
 			}
 		}
-		if (aoeAnim.getWrappedController().getAnimationProgress() >= actionPointTickStart && !shouldFreezeRotation)
+		if (aoeAnim.get().getWrappedAnimProgress() >= actionPointTickStart && !shouldFreezeRotation)
 			EntityUtil.freezeEntityRotation(owner);
 	}
 
