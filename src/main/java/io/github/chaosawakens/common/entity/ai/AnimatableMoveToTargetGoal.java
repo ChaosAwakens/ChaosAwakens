@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.ai;
 import java.util.EnumSet;
 
 import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -40,13 +41,12 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	@Override
 	public boolean canContinueToUse() {
 //		if (RANDOM.nextInt(this.checkRate) == 0) return true;
-		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) &&entity.distanceTo(entity.getTarget()) > AnimatableGoal.getAttackReachSq(entity, entity.getTarget());
+		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) && entity.distanceToSqr(entity.getTarget()) > EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget());
 	}
 	
 	@Override
 	public void start() {
 		pathCheckRate = 10;
-		this.entity.setAggressive(true);
 		this.entity.lookAt(this.entity.getTarget(), 100, 100);
 		this.entity.getLookControl().setLookAt(this.entity.getTarget(), 30F, 30F);
 		this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
@@ -57,7 +57,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		pathCheckRate = 1;
 		LivingEntity target = this.entity.getTarget();
 		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.entity.setTarget(null);
-		this.entity.setAggressive(false);
+		this.entity.setDeltaMovement(this.entity.getDeltaMovement().multiply(0, 1, 0));
 		this.entity.getNavigation().stop();
 	}
 
@@ -79,7 +79,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		this.entity.lookAt(target, 100, 100);
 		this.entity.getLookControl().setLookAt(target, 30F, 30F);
 		
-		if (pathCheckRate <= 0 && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= AnimatableGoal.getAttackReachSq(this.entity, target) - 1) {
+		if (pathCheckRate <= 0 && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget())) {
 			Vector3d targetPosition = target.position();
 			pathCheckRate = IUtilityHelper.randomBetween(4, 11);
 			this.entity.getNavigation().moveTo(path, this.speedMultiplier);

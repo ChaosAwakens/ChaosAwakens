@@ -21,7 +21,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 public class CABossBarRenderer {	
 	private static final HashMap<String, ResourceLocation> textureCache = new HashMap<String, ResourceLocation>();
 
-	@SuppressWarnings("deprecation")
 	public static void onBossInfoRender(final RenderGameOverlayEvent.BossInfo ev) {
 		if (!ev.isCanceled()) {
 			ITextComponent nameComponent = ev.getBossInfo().getName();

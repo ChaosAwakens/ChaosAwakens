@@ -41,7 +41,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings("all")
-public class CABlockLootTables extends BlockLootTables {
+public class CABlockLootTableProvider extends BlockLootTables {
 	private static final ILootCondition.IBuilder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
 	private static final ILootCondition.IBuilder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
 	private static final ILootCondition.IBuilder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);

@@ -138,8 +138,7 @@ public class AnimatableAOEGoal extends Goal {
 				}
 			}
 		}
-		if (aoeAnim.get().getWrappedAnimProgress() >= actionPointTickStart && !shouldFreezeRotation)
-			EntityUtil.freezeEntityRotation(owner);
+		if (aoeAnim.get().getWrappedAnimProgress() >= actionPointTickStart && !shouldFreezeRotation) EntityUtil.freezeEntityRotation(owner);
 	}
 
 }

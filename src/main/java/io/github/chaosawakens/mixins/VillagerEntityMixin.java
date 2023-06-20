@@ -4,24 +4,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import io.github.chaosawakens.common.items.weapons.extended.AttitudeAdjusterItem;
-import io.github.chaosawakens.common.items.weapons.extended.BattleAxeItem;
-import io.github.chaosawakens.common.items.weapons.extended.BigBerthaItem;
-import io.github.chaosawakens.common.items.weapons.extended.QueenScaleBattleAxeItem;
-import io.github.chaosawakens.common.items.weapons.extended.RoyalGuardianSwordItem;
-import io.github.chaosawakens.common.items.weapons.extended.ScytheItem;
-import io.github.chaosawakens.common.items.weapons.extended.SlayerChainsawItem;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.MerchantOffer;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
 
 @Mixin(VillagerEntity.class)
 public abstract class VillagerEntityMixin {
@@ -51,17 +40,4 @@ public abstract class VillagerEntityMixin {
 			}
 		}
 	}
-	
-	@Inject(method = "Lnet/minecraft/entity/merchant/villager/VillagerEntity;mobInteract(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;", at = @At("HEAD"), cancellable = true)
-	private void chaosawakens$mobInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResultType> cir) {
-		Item mainHandItem = player.getMainHandItem().getItem();
-		
-		//TODO Make a base class for all those items
-		if (mainHandItem instanceof AttitudeAdjusterItem || mainHandItem instanceof BattleAxeItem || mainHandItem instanceof BigBerthaItem
-				|| mainHandItem instanceof ScytheItem || mainHandItem instanceof QueenScaleBattleAxeItem || mainHandItem instanceof RoyalGuardianSwordItem
-				|| mainHandItem instanceof SlayerChainsawItem) {
-			cir.cancel();
-		}
-	}
-	
 }

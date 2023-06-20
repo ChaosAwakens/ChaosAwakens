@@ -1,22 +1,13 @@
 package io.github.chaosawakens.common.items.weapons.extended;
 
-import java.util.UUID;
+import java.util.function.Supplier;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
-
-import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.items.base.CAAxeItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -24,23 +15,17 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
+import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -49,94 +34,34 @@ import software.bernie.geckolib3.network.GeckoLibNetwork;
 import software.bernie.geckolib3.network.ISyncable;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimatable, ISyncable {
+public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISyncable {
+	private final AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationController<SlayerChainsawItem> mainController = new AnimationController<SlayerChainsawItem>(this, "slayerchainsawmaincontroller", 0, this::mainPredicate);
+	private static final AnimationBuilder ACTIVATED_ANIM = new AnimationBuilder().addAnimation("Activated", EDefaultLoopTypes.LOOP);
 	private static final int CHAINSAW_LENGTH = 5;
 	private static final int CHAINSAW_WIDTH = 5;
 	private static final int CHAINSAW_HEIGHT = 48;
-	private static final String CONTROLLER_NAME = "popupController";
+	private static final String CONTROLLER_NAME = "popupcontroller";
 	private static final int ANIM = 0;
-	private static boolean ACTIVATED = false;
-	public static final UUID REACH_MODIFIER = UUID.fromString("AF69D588-EC5D-11EC-8EA0-0242AC120002");
-	public static final UUID KB_MODIFIER = UUID.fromString("BB29C4D2-EC5D-11EC-8EA0-0242AC120002");
-	public int attackDamage;
-	public int attackSpeed;
-	public double attackReach;
-	public double attackKnockback;
-	public Lazy<? extends Multimap<Attribute, AttributeModifier>> LAZY = Lazy.of(() -> {
-		Multimap<Attribute, AttributeModifier> map;
-		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeed, AttributeModifier.Operation.ADDITION));
-		if (ForgeMod.REACH_DISTANCE.isPresent()) {
-			builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(REACH_MODIFIER, "Weapon modifier", attackReach, AttributeModifier.Operation.ADDITION));
-		}
-		builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KB_MODIFIER, "Weapon modifier", attackKnockback, AttributeModifier.Operation.ADDITION));
-		map = builder.build();
-		return map;
-	});
-	public AnimationFactory factory = new AnimationFactory(this);
+	private boolean isActivated = false;
 
-    public SlayerChainsawItem(CAItemTier tierIn, int attackDamageIn, float attackSpeedIn, double attackReachIn, int attackKnockbackIn, Properties builderIn) {
-	    super(tierIn, attackDamageIn, attackSpeedIn, builderIn);
-	    attackDamage = (int) ((float)attackDamageIn + tierIn.getAttackDamageBonus());
-	    attackSpeed = (int) attackSpeedIn;
-	    attackReach = attackReachIn;
-	    attackKnockback = attackKnockbackIn;
-        GeckoLibNetwork.registerSyncable(this);
-    }
-
-	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
-		return slot == EquipmentSlotType.MAINHAND ? LAZY.get() : super.getAttributeModifiers(slot, stack);
+	public SlayerChainsawItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties) {
+		super(pTier, configDmg, -3F, 2.5D, pProperties);
+		GeckoLibNetwork.registerSyncable(this);
 	}
-
-	@Override
-	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-//    	InputEvent.ClickInputEvent inputEvent = ForgeHooksClient.onClickInput(1, new KeyBinding("key.attack", InputMappings.Type.MOUSE, 0, "key.categories.gameplay"), Hand.MAIN_HAND);
-//      if (entity instanceof PlayerEntity && inputEvent.isAttack()) {
-          if (entity.getAttribute(ForgeMod.REACH_DISTANCE.get()) != null) {
-          	double reach = entity.getAttributeValue(ForgeMod.REACH_DISTANCE.get());
-          	double reachSqr = reach * reach;
-              World world = entity.level;
-
-              Vector3d viewVec = entity.getViewVector(1.0F);
-              Vector3d eyeVec = entity.getEyePosition(1.0F);
-              Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
-
-              AxisAlignedBB bb = entity.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
-              EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(world, entity, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
-
-              if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
-
-              LivingEntity target = (LivingEntity) result.getEntity();
-
-              double distanceToTargetSqr = entity.distanceToSqr(target);
-
-              boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
-
-              if (resultBool) {
-//                  if (entity instanceof PlayerEntity) {
-                      if (reachSqr >= distanceToTargetSqr) {
-                          target.hurt(DamageSource.playerAttack((PlayerEntity) entity), attackDamage);
-                          this.hurtEnemy(stack, target, entity);
-                      }
-   //               }
-              }
-//          }
-          }
-      return super.onEntitySwing(stack, entity);
+	
+	public boolean isActivated() {
+		return isActivated;
+	}
+	
+	public void setActivated(boolean activated) {
+		this.isActivated = activated;
 	}
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		if (ACTIVATED) {
-			if (target.getEntity().getType() == CAEntityTypes.ACACIA_ENT.get() || target.getEntity().getType() == CAEntityTypes.BIRCH_ENT.get()
-					|| target.getEntity().getType() == CAEntityTypes.CRIMSON_ENT.get() || target.getEntity().getType() == CAEntityTypes.DARK_OAK_ENT.get()
-					|| target.getEntity().getType() == CAEntityTypes.JUNGLE_ENT.get() || target.getEntity().getType() == CAEntityTypes.OAK_ENT.get()
-					|| target.getEntity().getType() == CAEntityTypes.SPRUCE_ENT.get() || target.getEntity().getType() == CAEntityTypes.WARPED_ENT.get()
-					&& !target.level.isClientSide) {
-				target.hurt(DamageSource.GENERIC, (attackDamage * 2));
-			}
+		if (isActivated) {
+			if (target.getEntity().getType().getRegistryName().getPath().endsWith("_ent") && !target.level.isClientSide) target.hurt(DamageSource.GENERIC, (getActualAttackDamage().get().get() * 2));
 			stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
 		return super.hurtEnemy(stack, target, attacker);
@@ -144,7 +69,7 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 
 	@Override
 	public boolean mineBlock(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entity) {
-		if (ACTIVATED) {
+		if (isActivated) {
 			if (state.is(BlockTags.LOGS)) {
 				for (int i = 0; i < CHAINSAW_LENGTH; i++) {
 					for (int j = 0; j < CHAINSAW_HEIGHT; j++) {
@@ -156,18 +81,14 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 					}
 				}
 			}	   
-			if (!world.isClientSide) {					
-				stack.hurtAndBreak(8, entity, (owner) -> {	          				
-					owner.broadcastBreakEvent(EquipmentSlotType.MAINHAND);         		
-				});
-			}
+			if (!world.isClientSide) stack.hurtAndBreak(8, entity, (owner) -> owner.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
 		return super.mineBlock(stack, world, state, pos, entity);
 	}
 
-	private <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {		
-		if (ACTIVATED) {				
-			event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", ILoopType.EDefaultLoopTypes.LOOP));				
+	private <I extends Item & IAnimatable> PlayState mainPredicate(AnimationEvent<I> event) {		
+		if (isActivated) {				
+			event.getController().setAnimation(ACTIVATED_ANIM);				
 			return PlayState.CONTINUE;
 		}
 		return PlayState.STOP;
@@ -175,50 +96,52 @@ public class SlayerChainsawItem extends AxeItem implements IVanishable, IAnimata
 
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		if (!world.isClientSide) {
-			if (!ACTIVATED) {
-				ACTIVATED = true;
-				if (ACTIVATED) {
-					final ItemStack stack = player.getItemInHand(hand);
-					final int id = GeckoLibUtil.guaranteeIDForStack(stack, (ServerWorld) world);
-					final PacketDistributor.PacketTarget target = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player);
-					GeckoLibNetwork.syncAnimation(target, this, id, ANIM);
-				}
-			} else {
-				ACTIVATED = false;
-			}
-		}
+		handleChainsawBehaviour(world, player, hand);
 		return super.use(world, player, hand);
 	}
-	
+
 	@Override
-	public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {		
-		use(context.getLevel(), context.getPlayer(), context.getHand());
-		return ActionResultType.SUCCESS;
+	public ActionResultType onItemUseFirst(ItemStack targetStack, ItemUseContext ctx) {		
+		handleChainsawBehaviour(ctx.getLevel(), ctx.getPlayer(), ctx.getHand());
+		return super.onItemUseFirst(targetStack, ctx);
+	}
+	
+	private void handleChainsawBehaviour(World targetWorld, PlayerEntity ownerPlayer, Hand curHand) {
+		if (!targetWorld.isClientSide) {
+			if (!isActivated()) setActivated(true);
+			else setActivated(false);
+			
+			if (isActivated()) {
+				final ItemStack targetStack = ownerPlayer.getItemInHand(curHand);
+				final int id = GeckoLibUtil.guaranteeIDForStack(targetStack, (ServerWorld) targetWorld);
+				final PacketDistributor.PacketTarget target = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> ownerPlayer);
+				GeckoLibNetwork.syncAnimation(target, this, id, ANIM);
+			}
+		}
 	}
 
 	@Override
 	public void onAnimationSync(int id, int state) {
 		if (state == ANIM) {
-			final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id, CONTROLLER_NAME);
-			assert controller != null;
-			if (controller != null) {
-				if (controller.getAnimationState() == AnimationState.Stopped) {
-					controller.markNeedsReload();
-					controller.setAnimation(new AnimationBuilder().addAnimation("animation.slayer_chainsaw.use_animation", ILoopType.EDefaultLoopTypes.LOOP));
+			final AnimationController<?> targetController = GeckoLibUtil.getControllerForID(factory, id, CONTROLLER_NAME);
+			assert targetController != null;
+			
+			if (targetController != null) {
+				if (targetController.getAnimationState() == AnimationState.Stopped) {
+					targetController.markNeedsReload();
+					targetController.setAnimation(ACTIVATED_ANIM);
 				}
 			}
 		}
 	}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController(this, "slayerchainsawcontroller", 0, this::predicate));
+		data.addAnimationController(mainController);
 	}
 
 	@Override
 	public AnimationFactory getFactory() {
-		return this.factory;
+		return factory;
 	}
 }

@@ -31,21 +31,22 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 	@Override
 	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		if (allowdedIn(group)) {
-			ItemStack stack = new ItemStack(this);
+			ItemStack fishingRodStack = new ItemStack(this);
+			
 			if (CAConfigManager.MAIN_COMMON.enableAutoEnchanting.get()) {
 				for (EnchantmentData enchant : enchantments.get()) {
-					stack.enchant(enchant.enchantment, enchant.level);
+					fishingRodStack.enchant(enchant.enchantment, enchant.level);
 				}
 			}
-			items.add(stack);
+			items.add(fishingRodStack);
 		}
 	}
 
 	@Override
-	public void onCraftedBy(ItemStack itemStack, World world, PlayerEntity playerEntity) {
+	public void onCraftedBy(ItemStack targetStack, World world, PlayerEntity playerEntity) {
 		if (CAConfigManager.MAIN_COMMON.enableAutoEnchanting.get()) {
 			for (EnchantmentData enchant : enchantments.get()) {
-				itemStack.enchant(enchant.enchantment, enchant.level);
+				targetStack.enchant(enchant.enchantment, enchant.level);
 			}
 		}
 	}

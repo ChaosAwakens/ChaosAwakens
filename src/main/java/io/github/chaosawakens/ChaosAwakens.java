@@ -9,10 +9,6 @@ import org.apache.maven.artifact.versioning.ArtifactVersion;
 
 import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.manager.CAModManager;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -32,17 +28,16 @@ public class ChaosAwakens {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static ChaosAwakens INSTANCE;
 	public static boolean DISABLE_IN_DEV = false;
-	public static ItemGroup DEVELOPMENT;
-	public static boolean DEVELOPMENT_ENVIRONMENT = false;
+	private static boolean DEVELOPMENT_ENVIRONMENT = false;
 
 	public ChaosAwakens() {		
 		GeckoLib.initialize();
 		
 		INSTANCE = this;
 
-		Optional<? extends ModContainer> opt = ModList.get().getModContainerById(MODID);
-		if (opt.isPresent()) {
-			IModInfo modInfo = opt.get().getModInfo();
+		Optional<? extends ModContainer> mod = ModList.get().getModContainerById(MODID);
+		if (mod.isPresent()) {
+			IModInfo modInfo = mod.get().getModInfo();
 			VERSION = modInfo.getVersion();
 		} else {
 			LOGGER.warn("Could not get version from mod info!");
@@ -57,32 +52,6 @@ public class ChaosAwakens {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		
 		CAModManager.registerAll(modBus, forgeBus);
-		
-		if (DEVELOPMENT_ENVIRONMENT) {
-			DEVELOPMENT = new ItemGroup("chaosawakens.development") {
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(Items.COMMAND_BLOCK);
-				}
-
-				/**
-				 * Fills {@code items} with all items that are in this group.
-				 */
-				public void fillItemList(NonNullList<ItemStack> items) {
-					items.add(Items.SPAWNER.getDefaultInstance());
-					items.add(Items.COMMAND_BLOCK.getDefaultInstance());
-					items.add(Items.REPEATING_COMMAND_BLOCK.getDefaultInstance());
-					items.add(Items.CHAIN_COMMAND_BLOCK.getDefaultInstance());
-					items.add(Items.STRUCTURE_BLOCK.getDefaultInstance());
-					items.add(Items.STRUCTURE_VOID.getDefaultInstance());
-					items.add(Items.BARRIER.getDefaultInstance());
-					items.add(Items.JIGSAW.getDefaultInstance());
-					items.add(Items.DEBUG_STICK.getDefaultInstance());
-
-					super.fillItemList(items);
-				}
-			};
-		}
 	}
 
 	public static final ResourceLocation prefix(String name) {
@@ -91,6 +60,10 @@ public class ChaosAwakens {
 
 	public static boolean isLoaded() {
 		return INSTANCE != null;
+	}
+	
+	public static boolean isInDevEnv() {
+		return DEVELOPMENT_ENVIRONMENT;
 	}
 
 	/**

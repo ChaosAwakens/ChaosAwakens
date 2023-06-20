@@ -32,6 +32,7 @@ public class StructureItem extends Item {
 		if (world instanceof ServerWorld) {
 			Template structureTemplate = ((ServerWorld) world).getStructureManager().getOrCreate(ChaosAwakens.prefix(structureName));
 			PlacementHelper targetPlacement = new PlacementHelper(clickedPos, structureTemplate.getSize(), context.getHorizontalDirection());
+			
 			if (structureTemplate != null) {
 				structureTemplate.placeInWorldChunk((ServerWorld) world, targetPlacement.getTargetPos(), new PlacementSettings().setRotation(targetPlacement.getRotation()).setMirror(Mirror.NONE).setChunkPos(null).setIgnoreEntities(false), (world).random);
 				player.awardStat(Stats.ITEM_USED.get(this));

@@ -36,6 +36,11 @@ public class EnchantedSwordItem extends CASwordItem implements IAutoEnchantable 
 		this.enchantments = enchantments;
 	}
 	
+	public EnchantedSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, float pAttackSpeedModifier, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pAttackSpeedModifier, pProperties);
+		this.enchantments = enchantments;
+	}
+	
 	public EnchantedSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
 		super(pTier, configDmg, pProperties);
 		this.enchantments = enchantments;

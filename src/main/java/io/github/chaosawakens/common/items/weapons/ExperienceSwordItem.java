@@ -18,8 +18,8 @@ import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
 public class ExperienceSwordItem extends EnchantedSwordItem {
 	
-	public ExperienceSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, double reach, double attackKnockback,Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
-		super(pTier, configDmg, reach, attackKnockback, pProperties, enchantments);
+	public ExperienceSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pProperties, enchantments);
 	}
 
 	@Override

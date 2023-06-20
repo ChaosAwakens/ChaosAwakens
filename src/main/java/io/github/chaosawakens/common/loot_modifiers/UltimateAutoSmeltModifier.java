@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
 
+import io.github.chaosawakens.manager.CAConfigManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -36,8 +37,10 @@ public class UltimateAutoSmeltModifier extends LootModifier {
 				
 				return context.getLevel().getRecipeManager()
 						.getRecipeFor(IRecipeType.SMELTING, new Inventory(stack), context.getLevel())
-						.map(FurnaceRecipe::getResultItem).filter(targetStack -> !targetStack.isEmpty() && targetStack != null)
-						.map(targetStack -> hasFortune && targetPlayer.isCrouching() ? copyStackWithSize(targetStack, stack.getCount() + random.nextInt(fortuneLevel + 1)) : copyStackWithSize(targetStack, stack.getCount())).orElse(stack);
+						.map(FurnaceRecipe::getResultItem)
+						.filter(targetStack -> !targetStack.isEmpty() && targetStack != null)
+						.map(targetStack -> hasFortune && targetPlayer.isCrouching() && CAConfigManager.MAIN_COMMON.enableUltimatePickaxeBonus.get() ? copyStackWithSize(targetStack, stack.getCount() + random.nextInt(fortuneLevel + 1)) : copyStackWithSize(targetStack, stack.getCount()))
+						.orElse(stack);
 			}
 		} 
 		return stack;
@@ -46,9 +49,9 @@ public class UltimateAutoSmeltModifier extends LootModifier {
 	@Nonnull
 	public static ItemStack copyStackWithSize(@Nonnull ItemStack itemStack, int size) {
 		if (size == 0) return ItemStack.EMPTY;
-		ItemStack copy = itemStack.copy();
-		copy.setCount(size);
-		return copy;
+		ItemStack copiedStack = itemStack.copy();
+		copiedStack.setCount(size);
+		return copiedStack;
 	}
 	
 	@Nonnull

@@ -1,17 +1,20 @@
 package io.github.chaosawakens.common.items;
 
+import java.util.function.Supplier;
+
+import io.github.chaosawakens.common.items.base.CASwordItem;
+import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
-public class MantisClawItem extends SwordItem {
-
-	public MantisClawItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn);
+public class MantisClawItem extends CASwordItem {
+	
+	public MantisClawItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties) {
+		super(pTier, configDmg, pProperties);
 	}
 
 	@Override

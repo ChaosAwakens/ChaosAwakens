@@ -34,6 +34,8 @@ public class CACommonConfig {
 	public final DoubleValue emeraldArmorDiscountMultiplier;
 
 	public final IntValue lapisArmorSetBookshelfPowerModifier;
+	
+	public final BooleanValue enableUltimatePickaxeBonus;
 
 	public final BooleanValue crystalWorldRequiresEmptyInventory;
 	public final BooleanValue enableBrownAntTeleport;
@@ -202,6 +204,11 @@ public class CACommonConfig {
 		builder.push("Experience Sword");
 		experienceSwordXPMultiplier = builder.defineInRange("Multiplier for XP dropped by killing mobs", 2, 0, 1000);
 		enableExperienceSwordBonus = builder.define("Enable Experience Sword Weapon Bonus", true);
+		builder.pop(2);
+		
+		builder.push("Pickaxes");
+		builder.push("Ultimate Pickaxe");
+		enableUltimatePickaxeBonus = builder.define("Enable Ultimate Pickaxe Tool Bonus", true);
 		builder.pop(2);
 		
 		enableAutoEnchanting = builder

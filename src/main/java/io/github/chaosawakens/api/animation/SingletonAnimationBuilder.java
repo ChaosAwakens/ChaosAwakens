@@ -26,7 +26,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * <br> </br>
  * Another thing to note is that this object <b>CANNOT</b> be statically instantiated, due to the fact that you need to
  * pass an {@link IAnimatableEntity} instance in. This means that it'll be instantiated every time an animation
- * controller needs to play it, but not every <i>frame</i>. Still much better than handling metadata and such per frame
+ * controller needs to play it/once per entity instance, but not every <i>frame</i>. Still much better than handling metadata and such per frame
  * (potentially multiple times per-frame), though.
  */
 public class SingletonAnimationBuilder implements IAnimationBuilder {

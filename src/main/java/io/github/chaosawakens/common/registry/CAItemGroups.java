@@ -2,9 +2,12 @@ package io.github.chaosawakens.common.registry;
 
 import java.util.Random;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.NonNullList;
 
 public class CAItemGroups {
 	private static Random random = new Random();
@@ -50,4 +53,26 @@ public class CAItemGroups {
 			return new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(random.nextInt(2))).get());
 		}
 	};
+	
+	public static ItemGroup DEVELOPMENT = ChaosAwakens.isInDevEnv() ? new ItemGroup("chaosawakens.development") {
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(Items.COMMAND_BLOCK);
+		}
+
+		@Override
+		public void fillItemList(NonNullList<ItemStack> items) {
+			items.add(Items.SPAWNER.getDefaultInstance());
+			items.add(Items.COMMAND_BLOCK.getDefaultInstance());
+			items.add(Items.REPEATING_COMMAND_BLOCK.getDefaultInstance());
+			items.add(Items.CHAIN_COMMAND_BLOCK.getDefaultInstance());
+			items.add(Items.STRUCTURE_BLOCK.getDefaultInstance());
+			items.add(Items.STRUCTURE_VOID.getDefaultInstance());
+			items.add(Items.BARRIER.getDefaultInstance());
+			items.add(Items.JIGSAW.getDefaultInstance());
+			items.add(Items.DEBUG_STICK.getDefaultInstance());
+
+			super.fillItemList(items);
+		}
+	} : null;
 }

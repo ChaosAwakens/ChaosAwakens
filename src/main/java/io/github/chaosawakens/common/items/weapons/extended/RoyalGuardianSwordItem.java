@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.items.weapons.extended;
 
 import java.util.function.Supplier;
 
+import io.github.chaosawakens.client.renderers.item.extended.RoyalGuardianSwordItemRenderer;
 import io.github.chaosawakens.common.items.base.EnchantedSwordItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.enchantment.EnchantmentData;
@@ -16,7 +17,7 @@ public class RoyalGuardianSwordItem extends EnchantedSwordItem implements IAnima
 	private final AnimationFactory factory = new AnimationFactory(this);
 	
 	public RoyalGuardianSwordItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
-		super(pTier, configDmg, -3.25F, 5.5D, pProperties, enchantments);
+		super(pTier, configDmg, -3.25F, 5.5D, pProperties.setISTER(() -> RoyalGuardianSwordItemRenderer::new), enchantments);
 	}
 
 	@Override

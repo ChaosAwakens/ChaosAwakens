@@ -45,7 +45,6 @@ public class AnimationStopPacket implements ICAPacket {
 				
 				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity) {
 					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
-					// final SingletonAnimationBuilder targetAnim = targetAnimatable.getCurrentAnimationAsSAB(controllerName); //TODO Make this work
 					
 				//	targetAnimatable.stopAnimation(targetAnim); 
 				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationStopPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");

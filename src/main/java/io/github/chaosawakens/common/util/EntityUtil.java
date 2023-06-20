@@ -286,10 +286,21 @@ public final class EntityUtil {
 	 * @param cooldown The cooldown (in ticks) before the shield becomes usable again
 	 */
 	public static void disableShield(PlayerEntity shieldHolder, int cooldown) {
-		if (shieldHolder != null && isHoldingItem(shieldHolder, Items.SHIELD)) {
+		if (shieldHolder != null && isHoldingItem(shieldHolder, Items.SHIELD) && shieldHolder.getUseItem().getItem().equals(Items.SHIELD)) {
 			shieldHolder.getCooldowns().addCooldown(shieldHolder.getUseItem().getItem(), cooldown);
 	        shieldHolder.stopUsingItem();
 	        shieldHolder.level.broadcastEntityEvent(shieldHolder, (byte) 30);
 		}
+	}
+	
+	/**
+	 * Gets a standard value for the attack range of an attacking {@link LivingEntity} relative to its target.
+	 * @param attacker The attacking entity
+	 * @param target The affected entity
+	 * @return The standard attack range value of the attacking entity
+	 */
+	public static double getMeleeAttackReachSqr(LivingEntity attacker, LivingEntity target) {
+		if (target == null) return 0;
+		return (attacker.getBbWidth() * 2.0F * attacker.getBbWidth() * 2.0F + target.getBbWidth());
 	}
 }

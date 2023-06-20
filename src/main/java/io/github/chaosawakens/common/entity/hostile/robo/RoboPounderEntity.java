@@ -143,10 +143,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 		if (getTarget() != null) {
 			for (LivingEntity potentialTarget : potentialTargets) {
-				if (getTarget() == potentialTarget && !confirmedTargets.contains(potentialTarget))
-					confirmedTargets.add(potentialTarget);
-				if (potentialTarget.isDeadOrDying() && confirmedTargets.contains(potentialTarget))
-					confirmedTargets.remove(potentialTarget);
+				if (getTarget() == potentialTarget && !confirmedTargets.contains(potentialTarget)) confirmedTargets.add(potentialTarget);
+				if (potentialTarget.isDeadOrDying() && confirmedTargets.contains(potentialTarget)) confirmedTargets.remove(potentialTarget);
 			}
 		}
 

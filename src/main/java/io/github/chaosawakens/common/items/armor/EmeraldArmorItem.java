@@ -2,12 +2,12 @@ package io.github.chaosawakens.common.items.armor;
 
 import java.util.List;
 
+import io.github.chaosawakens.common.util.EnumUtil.CAArmorMaterial;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class EmeraldArmorItem extends ArmorItem {
 
-	public EmeraldArmorItem(IArmorMaterial material, EquipmentSlotType type, Properties properties) {
-		super(material, type, properties);
+	public EmeraldArmorItem(CAArmorMaterial armorMaterial, EquipmentSlotType type, Properties properties) {
+		super(armorMaterial, type, properties);
 	}
 	
 	@Override

@@ -3,10 +3,10 @@ package io.github.chaosawakens.common.items.tools;
 import java.util.function.Supplier;
 
 import io.github.chaosawakens.common.items.base.EnchantedHoeItem;
+import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -14,41 +14,44 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class UltimateHoeItem extends EnchantedHoeItem {
 	
-	public UltimateHoeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Supplier<EnchantmentData[]> enchantments) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn, enchantments);
+	public UltimateHoeItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties, Supplier<EnchantmentData[]> enchantments) {
+		super(pTier, configDmg, pProperties, enchantments);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
-		World world = context.getLevel();
+		World curWorld = context.getLevel();
 		BlockPos eventPos = context.getClickedPos();
-
-		int hook = ForgeEventFactory.onHoeUse(context);
-		if (hook != 0) return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
-		if (context.getClickedFace() != Direction.DOWN && world.isEmptyBlock(eventPos.above())) {
-			BlockState blockState = world.getBlockState(eventPos).getToolModifiedState(world, eventPos, context.getPlayer(), context.getItemInHand(), ToolType.HOE);
-			if (blockState != null) {
-				PlayerEntity playerentity = context.getPlayer();
-				world.playSound(playerentity, eventPos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				if (!world.isClientSide && playerentity != null) context.getItemInHand().hurtAndBreak(1, playerentity, (player) -> player.broadcastBreakEvent(context.getHand()));
+		int hoeUseHook = ForgeEventFactory.onHoeUse(context);
+		
+		if (hoeUseHook != 0) return hoeUseHook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
+		if (context.getClickedFace() != Direction.DOWN && curWorld.isEmptyBlock(eventPos.above())) {
+			BlockState modifiedState = curWorld.getBlockState(eventPos).getToolModifiedState(curWorld, eventPos, context.getPlayer(), context.getItemInHand(), ToolType.HOE);
+			if (modifiedState != null) {
+				PlayerEntity curPlayer = context.getPlayer();
+				curWorld.playSound(curPlayer, eventPos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				
+				if (!curWorld.isClientSide && curPlayer != null) context.getItemInHand().hurtAndBreak(1, curPlayer, (player) -> player.broadcastBreakEvent(context.getHand()));
 				for (int x = -1; x < 2; x++) {
 					for (int y = -1; y < 2; y++) {
 						for (int z = -1; z < 2; z++) {
 							BlockPos targetPos = new BlockPos(eventPos.getX() + x, eventPos.getY() + y, eventPos.getZ() + z);
-							if (world.isEmptyBlock(targetPos.above())) {
-								blockState = world.getBlockState(targetPos).getToolModifiedState(world, targetPos, context.getPlayer(), context.getItemInHand(), ToolType.HOE);
-								if (blockState != null && !world.isClientSide) world.setBlock(targetPos, blockState, 11);
+							
+							if (curWorld.isEmptyBlock(targetPos.above())) {
+								modifiedState = curWorld.getBlockState(targetPos).getToolModifiedState(curWorld, targetPos, context.getPlayer(), context.getItemInHand(), ToolType.HOE);
+								if (modifiedState != null && !curWorld.isClientSide) curWorld.setBlock(targetPos, modifiedState, 11);
 							}
 						}
 					}
 				}
-				return ActionResultType.sidedSuccess(world.isClientSide);
+				return ActionResultType.sidedSuccess(curWorld.isClientSide);
 			}
 		}
 		return ActionResultType.PASS;

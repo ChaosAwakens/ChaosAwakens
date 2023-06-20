@@ -12,9 +12,9 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
-public class SlowFallBoots extends EnchantedArmorItem {
+public class SlowFallBootsItem extends EnchantedArmorItem {
 	
-	public SlowFallBoots(IArmorMaterial materialIn, Properties builderIn, Supplier<EnchantmentData[]> enchantments) {
+	public SlowFallBootsItem(IArmorMaterial materialIn, Properties builderIn, Supplier<EnchantmentData[]> enchantments) {
 		super(materialIn, EquipmentSlotType.FEET, builderIn, enchantments);
 	}
 

@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 public class EnchantedItem extends Item {
 	
-	public EnchantedItem(Item.Properties builderIn) {
+	public EnchantedItem(Properties builderIn) {
 		super(builderIn);
 	}
 
