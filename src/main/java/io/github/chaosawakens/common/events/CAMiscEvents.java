@@ -328,10 +328,10 @@ public class CAMiscEvents {
 			if (target.isUsingItem() && target.getUseItem().getItem() instanceof AnimatableShieldItem) {
 				AnimatableShieldItem animatableShield = (AnimatableShieldItem) target.getUseItem().getItem();
 				float curKnockbackMagnitude = event.getStrength();
-				float knockBackReductionPercentage = animatableShield.getShieldMaterial().getKnockbackResistance();
-				float newKnockBackStrength = MathUtil.reduceByPercentage(curKnockbackMagnitude, knockBackReductionPercentage);
+				float knockbackReductionPercentage = animatableShield.getShieldMaterial().getKnockbackResistance();
+				float newKnockbackStrength = MathUtil.reduceByPercentage(curKnockbackMagnitude, knockbackReductionPercentage);
 				
-				event.setStrength(newKnockBackStrength);
+				event.setStrength(newKnockbackStrength);
 			}
 		}
 	}
