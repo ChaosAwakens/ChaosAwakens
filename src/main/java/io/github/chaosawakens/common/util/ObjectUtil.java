@@ -3,6 +3,8 @@ package io.github.chaosawakens.common.util;
 import java.util.Locale;
 import java.util.Objects;
 
+import io.github.chaosawakens.ChaosAwakens;
+
 public final class ObjectUtil {
 	
 	private ObjectUtil() {
@@ -59,5 +61,20 @@ public final class ObjectUtil {
 	public static void decrementToZero(float targetToDecrement) {
 		if (targetToDecrement > 0) targetToDecrement--;
 		if (targetToDecrement < 0) targetToDecrement = 0;
+	}
+	
+	/**
+	 * Attempts to initialize/load a class at method call.
+	 * @param classNamePath The complete path to the class to try and load.
+	 * 
+	 * @throws ClassNotFoundException If the specified path/class does not exist.
+	 */
+	public static void loadClass(String classNamePath) {
+		try {
+			Class.forName(classNamePath);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			ChaosAwakens.LOGGER.error("[CLASSLOAD]: Failed to load a class (" + classNamePath + "). This error probably happened due to file corruption, so please try downloading the mod again.");
+		}
 	}
 }

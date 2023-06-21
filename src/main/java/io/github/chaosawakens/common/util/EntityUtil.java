@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.util;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -301,6 +302,17 @@ public final class EntityUtil {
 	 */
 	public static double getMeleeAttackReachSqr(LivingEntity attacker, LivingEntity target) {
 		if (target == null) return 0;
-		return (attacker.getBbWidth() * 2.0F * attacker.getBbWidth() * 2.0F + target.getBbWidth());
+		return (attacker.getBbWidth() * 2.0F * attacker.getBbWidth() * 2.0F + target.getBbWidth()) / 4;
+	}
+	
+	/**
+	 * Checks if the {@link UUID} of an entity or player is equal to the specified {@link UUID}.
+	 * 
+	 * @param entityToCheck entity to check UUID of
+	 * @param uuidToCheck   UUID to test entity's UUID against
+	 * @return true if entity's UUID is equal to the specified UUID, else returns false
+	 */
+	public static boolean isUserOrEntityUUIDEqualTo(Entity entityToCheck, UUID uuidToCheck) {
+		return entityToCheck.getUUID().equals(uuidToCheck);
 	}
 }

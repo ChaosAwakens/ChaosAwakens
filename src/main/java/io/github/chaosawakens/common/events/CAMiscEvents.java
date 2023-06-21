@@ -10,11 +10,13 @@ import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableFishEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableWaterMobEntity;
+import io.github.chaosawakens.common.items.base.AnimatableShieldItem;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.EntityUtil;
+import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -150,7 +152,7 @@ public class CAMiscEvents {
 		
 		if (deadTarget instanceof PlayerEntity) {
 			// Make myself (Blackout03_) drop Ink Sacs any time I die. Even if I have none on me.
-			if (IUtilityHelper.isUserOrEntityUUIDEqualTo(deadTarget, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
+			if (EntityUtil.isUserOrEntityUUIDEqualTo(deadTarget, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
 				((PlayerEntity) deadTarget).drop(new ItemStack(Items.INK_SAC, random.nextInt(3)), true, false);
 			}
 		}
@@ -218,6 +220,7 @@ public class CAMiscEvents {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void onSleepFinishedTimeEvent(SleepFinishedTimeEvent event) {
 		IWorld curWorld = event.getWorld();
@@ -235,7 +238,7 @@ public class CAMiscEvents {
 	@SubscribeEvent
 	public static void onEnchantLevelSetEvent(EnchantmentLevelSetEvent event) {
 		World world = event.getWorld();
-		//I found that the best way to do this is to loop through each player
+
 		for (PlayerEntity player : world.players()) {
 			if (player == null) return;
 			if (EntityUtil.isFullArmorSet(player, CAItems.LAPIS_HELMET.get(), CAItems.LAPIS_CHESTPLATE.get(), CAItems.LAPIS_LEGGINGS.get(), CAItems.LAPIS_BOOTS.get())) {
@@ -320,6 +323,15 @@ public class CAMiscEvents {
 			if (target instanceof AnimatableWaterMobEntity) {
 				AnimatableWaterMobEntity waterMobTarget = (AnimatableWaterMobEntity) target;
 				if (!waterMobTarget.canBeKnockedBack()) event.setCanceled(true);
+			}
+			
+			if (target.isUsingItem() && target.getUseItem().getItem() instanceof AnimatableShieldItem) {
+				AnimatableShieldItem animatableShield = (AnimatableShieldItem) target.getUseItem().getItem();
+				float curKnockbackMagnitude = event.getStrength();
+				float knockBackReductionPercentage = animatableShield.getShieldMaterial().getKnockbackResistance();
+				float newKnockBackStrength = MathUtil.reduceByPercentage(curKnockbackMagnitude, knockBackReductionPercentage);
+				
+				event.setStrength(newKnockBackStrength);
 			}
 		}
 	}

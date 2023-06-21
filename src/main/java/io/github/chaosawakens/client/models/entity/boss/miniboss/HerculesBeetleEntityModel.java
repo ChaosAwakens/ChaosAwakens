@@ -3,7 +3,7 @@ package io.github.chaosawakens.client.models.entity.boss.miniboss;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
-import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity.HerculesBeetleType;
+import io.github.chaosawakens.common.util.EnumUtil.HerculesBeetleType;
 import net.minecraft.util.ResourceLocation;
 
 public class HerculesBeetleEntityModel extends ExtendedAnimatedTickingGeoModel<HerculesBeetleEntity> {

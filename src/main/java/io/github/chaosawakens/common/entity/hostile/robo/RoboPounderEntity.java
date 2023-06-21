@@ -38,7 +38,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<WrappedAnimationController<RoboPounderEntity>>(1);
+	private final ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<WrappedAnimationController<RoboPounderEntity>>(2);
 	private static final DataParameter<Boolean> SHOULD_TAUNT = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<RoboPounderEntity> mainController = createMainMappedController("robopoundermaincontroller");
 	private final WrappedAnimationController<RoboPounderEntity> attackController = createMappedController("robopounderattackcontroller", this::attackPredicate);
@@ -103,7 +103,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
+		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3)); //TODO fix
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 14.2D, 17.3D, 50, 2));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftSwingAnim, () -> rightSwingAnim, random), SWING_ATTACK_ID, 12D, 14D, 80, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 13.5D, 2));
@@ -137,7 +137,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (!level.isClientSide && !dead) handleTaunting();
 	}
 
-	private void handleTaunting() {
+	private void handleTaunting() { //TODO
 		List<LivingEntity> potentialTargets = EntityUtil.getAllEntitiesAround(this, getFollowRange(), getFollowRange(), getFollowRange(), getFollowRange());
 		List<LivingEntity> confirmedTargets = new ObjectArrayList<LivingEntity>(1);
 
@@ -164,7 +164,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
-		return super.getStandingEyeHeight(pPose, pSize) + 0.6F;
+		return pSize.height * 0.85F + 0.6F;
 	}
 
 	@Override

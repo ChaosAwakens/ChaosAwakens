@@ -64,6 +64,7 @@ public class DefossilizerCrystalTileEntity extends LockableTileEntity implements
 			return 1;
 		}
 	};
+	
 	public DefossilizerCrystalTileEntity() {
 		super(CATileEntities.CRYSTAL_DEFOSSILIZER.get());
 		this.handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);

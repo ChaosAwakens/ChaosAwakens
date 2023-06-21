@@ -31,7 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>>(1);
+	private final ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>>(3);
 	private static final DataParameter<Boolean> IS_DOCILE = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> DOCILITY_DURATION = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	private static final DataParameter<Boolean> IS_AWAKENING = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
@@ -305,20 +305,5 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> getWrappedControllers() {
 		return herculesBeetleControllers;
-	}
-	
-	public enum HerculesBeetleType {
-		MODERN("modern"),
-		THROWBACK("throwback");
-
-		private final String name;
-
-		HerculesBeetleType(String name) {
-			this.name = name;
-		}
-
-		public String getName() {
-			return this.name;
-		}
 	}
 }

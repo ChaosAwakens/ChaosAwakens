@@ -75,6 +75,36 @@ public final class MathUtil {
     }
 	
 	/**
+	 * Increases/increments a specified {@code int} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageIncrease The percentage by which to increase the specified number
+	 * @return The percentage-wise increased {@code int}/specified number
+	 */
+	public static int increaseByPercentage(int numToReduce, int percentageIncrease) {
+		int percIncActual = percentageIncrease / 100;
+		
+		if (percIncActual > 1) percIncActual = 1;
+		if (percIncActual < 0) percIncActual = 0;
+		
+		return numToReduce + (numToReduce * percIncActual);
+	}
+	
+	/**
+	 * Reduces a specified {@code int} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageReduction The percentage by which to reduce the specified number
+	 * @return The percentage-wise reduced {@code int}/specified number
+	 */
+	public static int reduceByPercentage(int numToReduce, int percentageReduction) {
+		int percRedActual = percentageReduction / 100;
+		
+		if (percRedActual > 1) percRedActual = 1;
+		if (percRedActual < 0) percRedActual = 0;
+		
+		return numToReduce - (numToReduce * percRedActual);
+	}
+	
+	/**
 	 * Converts 1 experience orb to its equivalent durability value.
 	 * @param xp XP value
 	 * @return XP to durability (XP * 2)
@@ -90,6 +120,36 @@ public final class MathUtil {
 	 */
 	public static int convertDurabilityToXP(int durability) {
 		return durability / 2;
+	}
+	
+	/**
+	 * Increases/increments a specified {@code double} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageIncrease The percentage by which to increase the specified number
+	 * @return The percentage-wise increased {@code double}/specified number
+	 */
+	public static double increaseByPercentage(double numToReduce, double percentageIncrease) {
+		double percIncActual = percentageIncrease / 100D;
+		
+		if (percIncActual > 1) percIncActual = 1;
+		if (percIncActual < 0) percIncActual = 0;
+		
+		return numToReduce + (numToReduce * percIncActual);
+	}
+	
+	/**
+	 * Reduces a specified {@code double} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageReduction The percentage by which to reduce the specified number
+	 * @return The percentage-wise reduced {@code double}/specified number
+	 */
+	public static double reduceByPercentage(double numToReduce, double percentageReduction) {
+		double percRedActual = percentageReduction / 100D;
+		
+		if (percRedActual > 1) percRedActual = 1;
+		if (percRedActual < 0) percRedActual = 0;
+		
+		return numToReduce - (numToReduce * percRedActual);
 	}
 	
 	/**
@@ -235,5 +295,94 @@ public final class MathUtil {
 	public static double getDistanceBetween(Entity entityA, Entity entityB) {
 		return getDistanceBetween(entityA.blockPosition(), entityB.blockPosition());
 	}
-
+	
+	/**
+	 * Increases/increments a specified {@code float} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageIncrease The percentage by which to increase the specified number
+	 * @return The percentage-wise increased {@code float}/specified number
+	 */
+	public static float increaseByPercentage(float numToReduce, float percentageIncrease) {
+		float percIncActual = percentageIncrease / 100F;
+		
+		if (percIncActual > 1) percIncActual = 1;
+		if (percIncActual < 0) percIncActual = 0;
+		
+		return numToReduce + (numToReduce * percIncActual);
+	}
+	
+	/**
+	 * Reduces a specified {@code float} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageReduction The percentage by which to reduce the specified number
+	 * @return The percentage-wise reduced {@code float}/specified number
+	 */
+	public static float reduceByPercentage(float numToReduce, float percentageReduction) {
+		float percRedActual = percentageReduction / 100F;
+		
+		if (percRedActual > 1) percRedActual = 1;
+		if (percRedActual < 0) percRedActual = 0;
+		
+		return numToReduce - (numToReduce * percRedActual);
+	}
+	
+	/**
+	 * Increases/increments a specified {@code short} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageIncrease The percentage by which to increase the specified number
+	 * @return The percentage-wise increased {@code short}/specified number
+	 */
+	public static short increaseByPercentage(short numToReduce, short percentageIncrease) {
+		short percIncActual = (short) (percentageIncrease / 100);
+		
+		if (percIncActual > 1) percIncActual = 1;
+		if (percIncActual < 0) percIncActual = 0;
+		
+		return (short) (numToReduce + (numToReduce * percIncActual));
+	}
+	
+	/**
+	 * Reduces a specified {@code short} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageReduction The percentage by which to reduce the specified number
+	 * @return The percentage-wise reduced {@code short}/specified number
+	 */
+	public static short reduceByPercentage(short numToReduce, short percentageReduction) {
+		short percRedActual = (short) (percentageReduction / 100);
+		
+		if (percRedActual > 1) percRedActual = 1;
+		if (percRedActual < 0) percRedActual = 0;
+		
+		return (short) (numToReduce - (numToReduce * percRedActual));
+	}
+	
+	/**
+	 * Increases/increments a specified {@code long} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageIncrease The percentage by which to increase the specified number
+	 * @return The percentage-wise increased {@code long}/specified number
+	 */
+	public static long increaseByPercentage(long numToReduce, long percentageIncrease) {
+		long percIncActual = percentageIncrease / 100L;
+		
+		if (percIncActual > 1) percIncActual = 1;
+		if (percIncActual < 0) percIncActual = 0;
+		
+		return numToReduce + (numToReduce * percIncActual);
+	}
+	
+	/**
+	 * Reduces a specified {@code long} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).
+	 * @param numToReduce The number to reduce
+	 * @param percentageReduction The percentage by which to reduce the specified number
+	 * @return The percentage-wise reduced {@code long}/specified number
+	 */
+	public static long reduceByPercentage(long numToReduce, long percentageReduction) {
+		long percRedActual = percentageReduction / 100L;
+		
+		if (percRedActual > 1) percRedActual = 1;
+		if (percRedActual < 0) percRedActual = 0;
+		
+		return numToReduce - (numToReduce * percRedActual);
+	}
 }

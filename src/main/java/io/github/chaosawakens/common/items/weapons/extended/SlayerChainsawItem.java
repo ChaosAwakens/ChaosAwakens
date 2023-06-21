@@ -11,6 +11,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
@@ -43,52 +44,56 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 	private static final int CHAINSAW_HEIGHT = 48;
 	private static final String CONTROLLER_NAME = "popupcontroller";
 	private static final int ANIM = 0;
-	private boolean isActivated = false;
 
 	public SlayerChainsawItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties) {
 		super(pTier, configDmg, -3F, 2.5D, pProperties);
 		GeckoLibNetwork.registerSyncable(this);
 	}
 	
-	public boolean isActivated() {
-		return isActivated;
+	public boolean isActivated(ItemStack chainsawStack) {
+		return !chainsawStack.isEmpty() && chainsawStack.hasTag() && chainsawStack.getTag().contains("activated") && chainsawStack.getTag().getBoolean("activated") == true;
 	}
 	
-	public void setActivated(boolean activated) {
-		this.isActivated = activated;
+	public void setActivated(ItemStack chainsawStack, boolean activated) {
+		if (!chainsawStack.hasTag() || chainsawStack.isEmpty()) return;
+		
+		if (!chainsawStack.getTag().contains("activated")) {
+			CompoundNBT activationNBT = chainsawStack.getOrCreateTag();
+			activationNBT.putBoolean("activated", activated);
+		} else chainsawStack.getTag().putBoolean("activated", activated);
 	}
 
 	@Override
-	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		if (isActivated) {
+	public boolean hurtEnemy(ItemStack targetStack, LivingEntity target, LivingEntity attacker) {
+		if (isActivated(targetStack)) {
 			if (target.getEntity().getType().getRegistryName().getPath().endsWith("_ent") && !target.level.isClientSide) target.hurt(DamageSource.GENERIC, (getActualAttackDamage().get().get() * 2));
-			stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+			targetStack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
-		return super.hurtEnemy(stack, target, attacker);
+		return super.hurtEnemy(targetStack, target, attacker);
 	}
 
 	@Override
-	public boolean mineBlock(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entity) {
-		if (isActivated) {
-			if (state.is(BlockTags.LOGS)) {
+	public boolean mineBlock(ItemStack targetStack, World curWorld, BlockState targetState, BlockPos targetPos, LivingEntity miningEntity) {
+		if (isActivated(targetStack)) {
+			if (targetState.is(BlockTags.LOGS)) {
 				for (int i = 0; i < CHAINSAW_LENGTH; i++) {
 					for (int j = 0; j < CHAINSAW_HEIGHT; j++) {
 						for (int k = -CHAINSAW_WIDTH; k <= CHAINSAW_WIDTH; k++) {
-							BlockPos targetPos = pos.offset(i - CHAINSAW_LENGTH / 2, j - CHAINSAW_HEIGHT / 2, k - CHAINSAW_WIDTH / 2);
-							BlockState targetState = world.getBlockState(targetPos);
-							if (targetState.is(BlockTags.LOGS)) world.destroyBlock(targetPos, true);
+							BlockPos offsetPos = targetPos.offset(i - CHAINSAW_LENGTH / 2, j - CHAINSAW_HEIGHT / 2, k - CHAINSAW_WIDTH / 2);
+							BlockState targetOffsetState = curWorld.getBlockState(offsetPos);
+							if (targetOffsetState.is(BlockTags.LOGS)) curWorld.destroyBlock(offsetPos, true);
 						}
 					}
 				}
 			}	   
-			if (!world.isClientSide) stack.hurtAndBreak(8, entity, (owner) -> owner.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+			if (!curWorld.isClientSide) targetStack.hurtAndBreak(8, miningEntity, (owner) -> owner.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
-		return super.mineBlock(stack, world, state, pos, entity);
+		return super.mineBlock(targetStack, curWorld, targetState, targetPos, miningEntity);
 	}
 
 	private <I extends Item & IAnimatable> PlayState mainPredicate(AnimationEvent<I> event) {		
-		if (isActivated) {				
-			event.getController().setAnimation(ACTIVATED_ANIM);				
+		if (isActivated(getDefaultInstance())) {				
+			event.getController().setAnimation(ACTIVATED_ANIM);
 			return PlayState.CONTINUE;
 		}
 		return PlayState.STOP;
@@ -107,12 +112,13 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 	}
 	
 	private void handleChainsawBehaviour(World targetWorld, PlayerEntity ownerPlayer, Hand curHand) {
+		final ItemStack targetStack = ownerPlayer.getItemInHand(curHand);
+		
 		if (!targetWorld.isClientSide) {
-			if (!isActivated()) setActivated(true);
-			else setActivated(false);
+			if (!isActivated(targetStack)) setActivated(targetStack, true);
+			else setActivated(targetStack, false);
 			
-			if (isActivated()) {
-				final ItemStack targetStack = ownerPlayer.getItemInHand(curHand);
+			if (isActivated(targetStack)) {
 				final int id = GeckoLibUtil.guaranteeIDForStack(targetStack, (ServerWorld) targetWorld);
 				final PacketDistributor.PacketTarget target = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> ownerPlayer);
 				GeckoLibNetwork.syncAnimation(target, this, id, ANIM);

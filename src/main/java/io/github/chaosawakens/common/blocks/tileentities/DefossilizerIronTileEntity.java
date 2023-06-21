@@ -30,6 +30,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
@@ -80,8 +81,8 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 		if (this.level == null || this.level.isClientSide) return;
 
 		DefossilizingRecipe recipe = getRecipe();
-		if (recipe != null) doWork(recipe);
-		else stopWork();
+		if (recipe != null) defossilizeRecipe(recipe);
+		else stopDefossilization();
 	}
 
 	@Nullable
@@ -90,45 +91,44 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 		return level.getRecipeManager().getRecipeFor(CARecipeTypes.DEFOSSILIZING_RECIPE_TYPE, this, level).orElse(null);
 	}
 
-	private ItemStack getWorkOutput(@Nullable DefossilizingRecipe recipe) {
+	private ItemStack getDefossilizationOutput(@Nullable DefossilizingRecipe recipe) {
 		if (recipe != null) return recipe.assemble(this);
 		return ItemStack.EMPTY;
 	}
 
-	private void doWork(DefossilizingRecipe recipe) {
+	private void defossilizeRecipe(DefossilizingRecipe recipe) {
 		if (!(recipe.getDefossilizerType().equals("copper") || recipe.getDefossilizerType().equals("iron"))) return;
 		assert this.level != null;
 
 		ItemStack current = getItem(3);
-		ItemStack output = getWorkOutput(recipe);
+		ItemStack output = getDefossilizationOutput(recipe);
 
 		if (!current.isEmpty()) {
 			int newCount = current.getCount() + output.getCount();
 
 			if (!ItemStack.isSame(current, output) || newCount > output.getMaxStackSize()) {
-				stopWork();
+				stopDefossilization();
 				return;
 			}
 		}
 
 		if (progress < WORK_TIME) ++progress;
-
-		if (progress >= WORK_TIME && !level.isClientSide) finishWork(recipe, current);
+		if (progress >= WORK_TIME && !level.isClientSide) finalizeDefossiliization(recipe, current);
 	}
 
-	private void stopWork() {
+	private void stopDefossilization() {
 		progress = 0;
 	}
 
-	private void finishWork(DefossilizingRecipe recipe, ItemStack current) {
-		ItemStack output = getWorkOutput(recipe);
+	private void finalizeDefossiliization(DefossilizingRecipe recipe, ItemStack current) {
+		ItemStack output = getDefossilizationOutput(recipe);
 		if (!current.isEmpty()) current.grow(output.getCount());
 		else setItem(3, output);
 
 		progress = 0;
-		this.removeItem(0, 1);
-		this.setItem(1, Items.BUCKET.getDefaultInstance());
-		this.removeItem(2, 1);
+		removeItem(0, 1);
+		setItem(1, Items.BUCKET.getDefaultInstance());
+		removeItem(2, 1);
 	}
 
 	@Override
@@ -220,7 +220,7 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 	@Nullable
 	@Override
 	public SUpdateTileEntityPacket getUpdatePacket() {
-		CompoundNBT tags = this.getUpdateTag();
+		CompoundNBT tags = getUpdateTag();
 		ItemStackHelper.saveAllItems(tags, this.items);
 		return new SUpdateTileEntityPacket(this.worldPosition, 1, tags);
 	}
@@ -235,7 +235,7 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 	@Nullable
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-		if (!this.remove && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+		if (!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == Direction.UP) return handlers[0].cast();
 			else if (facing == Direction.DOWN) return handlers[1].cast();
 			else return handlers[2].cast();
@@ -279,16 +279,16 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 	public boolean isItemValid(int slot, ItemStack stack) {
 		switch (slot) {
 			case 0:
-				if (this.getStackInSlot(0) != null && this.getStackInSlot(0) != this.getStackInSlot(slot)) return false;
+				if (getStackInSlot(0) != null && getStackInSlot(0) != getStackInSlot(slot)) return false;
 				return handlers[0].cast() != null;
 			case 1:
-				if (this.getStackInSlot(1) != null && this.getStackInSlot(1) != this.getStackInSlot(slot)) return false;
+				if (getStackInSlot(1) != null && getStackInSlot(1) != getStackInSlot(slot)) return false;
 				return handlers[1].cast() != null;
 			case 2:
-				if (this.getStackInSlot(2) != null && this.getStackInSlot(2) != this.getStackInSlot(slot)) return false;
+				if (getStackInSlot(2) != null && getStackInSlot(2) != getStackInSlot(slot)) return false;
 				return handlers[2].cast() != null;
 			case 3:
-				if (this.getStackInSlot(3) != null && this.getStackInSlot(3) != this.getStackInSlot(slot)) return false;
+				if (getStackInSlot(3) != null && getStackInSlot(3) != getStackInSlot(slot)) return false;
 				return handlers[3].cast() != null;
 		}
 		return false;

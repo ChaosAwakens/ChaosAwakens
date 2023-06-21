@@ -42,7 +42,6 @@ import io.github.chaosawakens.client.renderers.entity.projectile.UltimateArrowPr
 import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerCopperScreen;
 import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerCrystalScreen;
 import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerIronScreen;
-import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity.HerculesBeetleType;
 import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
 import io.github.chaosawakens.common.items.armor.EnderScaleArmorItem;
 import io.github.chaosawakens.common.items.tools.UltimateFishingRodItem;
@@ -56,6 +55,7 @@ import io.github.chaosawakens.common.registry.CAParticleTypes;
 import io.github.chaosawakens.common.registry.CATileEntities;
 import io.github.chaosawakens.common.registry.CAWoodTypes;
 import io.github.chaosawakens.common.util.EnumUtil.EntType;
+import io.github.chaosawakens.common.util.EnumUtil.HerculesBeetleType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;

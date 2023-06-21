@@ -328,6 +328,7 @@ public class CAVanillaCompat {
 				return new CALeafyChickenEggEntity(world, pos.x(), pos.y(), pos.z());
 			}
 		});
+	//	DispenserBlock.registerBehavior(null, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
 	}
 	
 	private static void registerStrippable(Block log, Block stripped_log) {

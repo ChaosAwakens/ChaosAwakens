@@ -4,8 +4,6 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.creature.water.fish.SparkFishEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.IBone;
 
 public class SparkFishEntityModel extends ExtendedAnimatedTickingGeoModel<SparkFishEntity> {
 	
@@ -32,13 +30,5 @@ public class SparkFishEntityModel extends ExtendedAnimatedTickingGeoModel<SparkF
 	@Override
 	protected boolean shouldApplyChildScaling() {
 		return false;
-	}
-	
-	@Override
-	public void setLivingAnimations(SparkFishEntity entity, Integer uniqueID, @SuppressWarnings("rawtypes") AnimationEvent customPredicate) {
-		super.setLivingAnimations(entity, uniqueID, customPredicate);
-		
-		IBone root = this.getAnimationProcessor().getBone("root");	
-		if (!entity.isInWaterOrBubble()) root.setRotationZ(-90);
 	}
 }

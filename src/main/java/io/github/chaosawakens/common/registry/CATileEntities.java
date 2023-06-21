@@ -16,9 +16,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class CATileEntities {
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ChaosAwakens.MODID);
 
+	// Furnaces
 	public static final RegistryObject<TileEntityType<CrystalFurnaceTileEntity>> CRYSTAL_FURNACE = TILE_ENTITIES.register("crystal_furnace",
 			() -> TileEntityType.Builder.of(CrystalFurnaceTileEntity::new,
 					CABlocks.CRYSTAL_FURNACE.get()).build(null));
+	
+	// Defossilizers
 	public static final RegistryObject<TileEntityType<DefossilizerCopperTileEntity>> COPPER_DEFOSSILIZER = TILE_ENTITIES.register("copper_defossilizer",
 			() -> TileEntityType.Builder.of(DefossilizerCopperTileEntity::new,
 					CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()).build(null));
@@ -28,10 +31,13 @@ public class CATileEntities {
 	public static final RegistryObject<TileEntityType<DefossilizerCrystalTileEntity>> CRYSTAL_DEFOSSILIZER = TILE_ENTITIES.register("crystal_defossilizer",
 			() -> TileEntityType.Builder.of(DefossilizerCrystalTileEntity::new,
 					CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.CRYSTAL.getId())).get()).build(null));
+	
+	// Robo Crate
 	public static final RegistryObject<TileEntityType<RoboCrateTileEntity>> ROBO_CRATE = TILE_ENTITIES.register("robo_crate",
 			() -> TileEntityType.Builder.of(RoboCrateTileEntity::new,
 					CABlocks.ROBO_CRATE.get()).build(null));
 
+	// Signs
 	public static final RegistryObject<TileEntityType<CASignTileEntity>> CUSTOM_SIGN = TILE_ENTITIES.register("custom_sign",
 					() -> TileEntityType.Builder.of(CASignTileEntity::new, CABlocks.APPLE_WALL_SIGN.get(),
 							CABlocks.APPLE_SIGN.get(), CABlocks.CHERRY_WALL_SIGN.get(), CABlocks.CHERRY_SIGN.get(), CABlocks.DENSEWOOD_WALL_SIGN.get(), CABlocks.DENSEWOOD_SIGN.get(),

@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 
-import io.github.chaosawakens.api.CAReflectionHelper;
+import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.manager.CAModManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,7 +26,7 @@ public class ChaosAwakens {
 	public static final String MODNAME = "Chaos Awakens";
 	public static ArtifactVersion VERSION = null;
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static ChaosAwakens INSTANCE;
+	private static ChaosAwakens INSTANCE;
 	public static boolean DISABLE_IN_DEV = false;
 	private static boolean DEVELOPMENT_ENVIRONMENT = false;
 
@@ -47,7 +47,7 @@ public class ChaosAwakens {
 		LOGGER.debug("Mod ID for " + MODNAME + " is: " + MODID);
 		DEVELOPMENT_ENVIRONMENT = !FMLEnvironment.production && !DISABLE_IN_DEV;
 
-		CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CATags");
+		ObjectUtil.loadClass("io.github.chaosawakens.common.registry.CATags");
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		
@@ -56,6 +56,10 @@ public class ChaosAwakens {
 
 	public static final ResourceLocation prefix(String name) {
 		return new ResourceLocation(MODID, name.toLowerCase(Locale.ROOT));
+	}
+	
+	public static ChaosAwakens getInstance() {
+		return INSTANCE;
 	}
 
 	public static boolean isLoaded() {

@@ -136,7 +136,7 @@ public final class EnumUtil {
 		private final Supplier<Ingredient> repairMaterial;
 
 		CAArmorMaterial(String nameIn, int durabilityIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundOnEquip, float toughnessIn, float knockbackResistanceIn, Supplier<Ingredient> repairMaterialIn) {
-			this.name = ChaosAwakens.MODID + ":" + nameIn;
+			this.name = ChaosAwakens.prefix(nameIn).toString();
 			this.durability = durabilityIn;
 			this.damageReductionAmountArray = damageReductionAmountArrayIn;
 			this.enchantability = enchantabilityIn;
@@ -187,6 +187,10 @@ public final class EnumUtil {
 		}
 	}
 	
+	public enum CAShieldMaterial {
+		
+	}
+	
 	// Entities
 	public enum EntType {
 		APPLE("apple"),
@@ -206,6 +210,21 @@ public final class EnumUtil {
 		private final String name;
 
 		EntType(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return this.name;
+		}
+	}
+	
+	public enum HerculesBeetleType {
+		MODERN("modern"),
+		THROWBACK("throwback");
+
+		private final String name;
+
+		HerculesBeetleType(String name) {
 			this.name = name;
 		}
 

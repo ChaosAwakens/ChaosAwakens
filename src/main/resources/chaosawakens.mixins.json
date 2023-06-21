@@ -4,6 +4,7 @@
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
 		"AttachedStemBlockMixin",
+		"CooldownTrackerMixin",
 		"CropsBlockMixin",
 		"IForgeBlockMixin",
 		"LivingEntityMixin",

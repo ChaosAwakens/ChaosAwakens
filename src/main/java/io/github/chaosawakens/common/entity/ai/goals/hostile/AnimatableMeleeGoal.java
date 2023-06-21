@@ -79,6 +79,11 @@ public class AnimatableMeleeGoal extends Goal {
 	public void stop() {
 		owner.setAttackID((byte) 0);
 	}
+	
+	@Override
+	public boolean isInterruptable() {
+		return owner.isDeadOrDying();
+	}
 
 	@Override
 	public void tick() {

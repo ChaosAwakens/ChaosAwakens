@@ -14,7 +14,6 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.CAReflectionHelper;
 import io.github.chaosawakens.api.item.ICATieredItem;
 import io.github.chaosawakens.api.wrapper.CarverWrapper;
 import io.github.chaosawakens.api.wrapper.FeatureWrapper;
@@ -63,6 +62,7 @@ import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.registry.CAVanillaCompat;
 import io.github.chaosawakens.common.registry.CAVillagers;
 import io.github.chaosawakens.common.registry.CAWoodTypes;
+import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.common.util.TradeUtil;
 import io.github.chaosawakens.common.util.TradeUtil.CABasicTrade;
 import io.github.chaosawakens.common.util.TradeUtil.CAIngredientTrade;
@@ -359,7 +359,7 @@ public class CACommonSetupEvents {
 				CAVillagers.registerVillagerTypes();
 				CAWoodTypes.registerWoodtypes();
 
-				CAReflectionHelper.classLoad("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
+				ObjectUtil.loadClass("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
 				CONFIG_FEATURES.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
 				CONFIG_CARVERS.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_CARVER, wrapper.getIdentifier(), wrapper.getCarver()));
 			});

@@ -48,7 +48,6 @@ public class CritterCageItem extends Item {
 		return ActionResultType.SUCCESS;
 	}
 	
-	@SuppressWarnings("unused")
 	@Override
 	public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 		stack = playerIn.getMainHandItem();
@@ -73,15 +72,11 @@ public class CritterCageItem extends Item {
 				if (!containsEntity(stack) || !containsEntity(stackFill)) {
 				  	stack.shrink(1);
 				  	playerIn.inventory.add(stackFill);
-				  	if (playerIn.inventory.getFreeSlot() <= 0) {
-//				  	PlayerEntity.drop(itemstack, includename) // doesn't work for some reason
-				  		playerIn.drop(stackFill, true, true); // This still doesn't work btw
-				  	}
 					target.remove(true);
 					return ActionResultType.SUCCESS;
 				}
 				boolean add = playerIn.inventory.add(stackFill);
-				add = false;
+				if (!add) playerIn.drop(stackFill, true, false);
 				return ActionResultType.FAIL;
 			} 
 			return ActionResultType.SUCCESS;
