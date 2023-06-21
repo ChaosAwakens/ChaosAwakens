@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.util;
 import java.util.function.Supplier;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.item.IShieldMaterial;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.block.Blocks;
@@ -187,8 +188,61 @@ public final class EnumUtil {
 		}
 	}
 	
-	public enum CAShieldMaterial {
+	public enum CAShieldMaterial implements IShieldMaterial {
+		;
 		
+		private final String name;
+		private final int durability;
+		private final float toughness;
+		private final int enchantability;
+		private final float knockbackResistance;
+		private final double damageResistance;
+		private final Supplier<Ingredient> repairMaterial;
+		
+		CAShieldMaterial(String materialName, int durability, float toughness, int enchantability, float knockbackResistance, double damageResistance, Supplier<Ingredient> repairMaterial) {
+			this.name = ChaosAwakens.prefix(materialName).toString();
+			this.durability = durability;
+			this.toughness = toughness;
+			this.enchantability = enchantability;
+			this.knockbackResistance = knockbackResistance;
+			this.damageResistance = damageResistance;
+			this.repairMaterial = repairMaterial;
+		}
+
+		@Override
+		public String getMaterialName() {
+			return name;
+		}
+
+		@Override
+		public int getDurability() {
+			return durability;
+		}
+
+		@Override
+		public float getToughness() {
+			return toughness;
+		}
+
+		@Override
+		public int getEnchantability() {
+			return enchantability;
+		}
+
+		@Override
+		public float getKnockbackResistance() {
+			return knockbackResistance;
+		}
+
+		@Override
+		public double getDamageResistance() {
+			return damageResistance;
+		}
+
+		@Override
+		public Ingredient getRepairIngredient() {
+			return repairMaterial.get();
+		}
 	}
 	
 	// Entities
