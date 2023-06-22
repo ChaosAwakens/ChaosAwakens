@@ -62,6 +62,7 @@ public class CritterCageItem extends Item {
 					return ActionResultType.SUCCESS;
 				} else return ActionResultType.FAIL;
 			}
+			
 		  	if (!playerOwner.inventory.add(filledStack)) playerOwner.drop(filledStack, false, true);
 		  	targetEmptyStack.shrink(1);
 		  	target.remove(true);
@@ -135,20 +136,19 @@ public class CritterCageItem extends Item {
 	}
 	
 	public boolean containsEntity(ItemStack targetStack) {
-		if (targetStack == null) return false;
-		return !targetStack.isEmpty() && targetStack.hasTag() && targetStack.getTag().contains("entity");
+		return targetStack != null && !targetStack.isEmpty() && targetStack.hasTag() && targetStack.getTag().contains("entity");
 	}
 	
 	@Override
 	public void appendHoverText(ItemStack targetStack, World curWorld, List<ITextComponent> tooltip, ITooltipFlag flag) {
 		if (containsEntity(targetStack) && CAConfigManager.MAIN_CLIENT.enableCritterCageTooltips.get()) {
+			LivingEntity target = getEntityFromStack(targetStack, curWorld, true);
+			
 			if (CAConfigManager.MAIN_CLIENT.enableCritterCageMobIDToolTip.get()) tooltip.add(new StringTextComponent("Mob: " + getMobID(targetStack)));
 			if (CAConfigManager.MAIN_CLIENT.enableCritterCageMobNameToolTip.get()) tooltip.add(new StringTextComponent("Mob Name: " + getMobName(targetStack)));
 			if (CAConfigManager.MAIN_CLIENT.enableCritterCageMobHealthToolTip.get()) tooltip.add(new StringTextComponent("Health: " + targetStack.getTag().getFloat("Health") + "/" + targetStack.getTag().getDouble("entityMaxHealth")));
 		//	tooltip.add(new StringTextComponent("Is Baby: " + stack.getTag().getBoolean("isBaby"))); -Unneeded for now --Meme Man
-			if (targetStack.getTag() != null && targetStack.getTag().getBoolean("isVillager")) {
-				LivingEntity target = getEntityFromStack(targetStack, curWorld, true);
-				
+			if (targetStack.getTag().getBoolean("isVillager")) {				
 				if (target instanceof VillagerEntity) {
 					if (CAConfigManager.MAIN_CLIENT.enableCritterCageVillagerProfessionToolTip.get()) tooltip.add(new StringTextComponent("Profession: " + targetStack.getTag().getString("villagerProfession")));
 					if (CAConfigManager.MAIN_CLIENT.enableCritterCageVillagerTradingLevelToolTip.get()) {
@@ -164,9 +164,7 @@ public class CritterCageItem extends Item {
 				}
 			}
 			
-			if (targetStack.getTag() != null && targetStack.getTag().getBoolean("isTameable")) {
-				LivingEntity target = getEntityFromStack(targetStack, curWorld, true);
-				
+			if (targetStack.getTag().getBoolean("isTameable")) {				
 				if (target instanceof TameableEntity) {
 					if (CAConfigManager.MAIN_CLIENT.enableCritterCageMobOwnerToolTip.get()) tooltip.add(new StringTextComponent("Owner: " + targetStack.getTag().getString("owner")));
 					if (target instanceof WolfEntity) {
@@ -174,7 +172,6 @@ public class CritterCageItem extends Item {
 					}
 				}
 			}
-			
  		}
 	}
 	
@@ -204,7 +201,7 @@ public class CritterCageItem extends Item {
 	}
 	
 	public String getMobName(ItemStack stack) {
-		return stack.getTag().getBoolean("isBaby") ? "Baby " +  stack.getTag().getString("entityName"): stack.getTag().getString("entityName");
+		return stack.getTag().getBoolean("isBaby") ? "Baby " +  stack.getTag().getString("entityName") : stack.getTag().getString("entityName");
 	}
 	
 	@Nonnull
