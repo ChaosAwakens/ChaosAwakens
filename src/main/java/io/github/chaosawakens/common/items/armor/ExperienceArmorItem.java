@@ -3,9 +3,10 @@ package io.github.chaosawakens.common.items.armor;
 import java.util.List;
 import java.util.function.Supplier;
 
-import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.items.base.EnchantedArmorItem;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.util.EntityUtil;
+import io.github.chaosawakens.common.util.EnumUtil.CAArmorMaterial;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,38 +14,35 @@ import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerXpEvent;
+import net.minecraftforge.event.entity.player.PlayerXpEvent.PickupXp;
 
 public class ExperienceArmorItem extends EnchantedArmorItem {
 
-	public ExperienceArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn,	Supplier<EnchantmentData[]> enchantments) {
+	public ExperienceArmorItem(CAArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn, Supplier<EnchantmentData[]> enchantments) {
 		super(materialIn, slot, builderIn, enchantments);
 	}
 	
-	@SuppressWarnings({"unused"})
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-		if (IUtilityHelper.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
-			PlayerXpEvent.PickupXp event = new PlayerXpEvent.PickupXp(player, new ExperienceOrbEntity(world, player.getX(), player.getY(), player.getZ(), player.level.random.nextInt(player.getXpNeededForNextLevel()) / 3));
-			MinecraftForge.EVENT_BUS.post(event);
-			event.setCanceled(false);
+		if (EntityUtil.isFullArmorSet(player, CAItems.EXPERIENCE_HELMET.get(), CAItems.EXPERIENCE_CHESTPLATE.get(), CAItems.EXPERIENCE_LEGGINGS.get(), CAItems.EXPERIENCE_BOOTS.get())) {
+			PickupXp xpPickupEvent = new PickupXp(player, new ExperienceOrbEntity(world, player.getX(), player.getY(), player.getZ(), player.level.random.nextInt(player.getXpNeededForNextLevel()) / 3));
+			MinecraftForge.EVENT_BUS.post(xpPickupEvent);
+			xpPickupEvent.setCanceled(false);
 			
 			if (player.getRandom().nextInt(CAConfigManager.MAIN_COMMON.experienceArmorSetRandomBonusXPSpawnTime.get()) == 0 && !player.level.isClientSide && CAConfigManager.MAIN_COMMON.enableExperienceArmorSetBonus.get()) {
-				ExperienceOrbEntity xp = event.getOrb();
-				int value = xp.value;
-				value = player.level.random.nextInt(player.getXpNeededForNextLevel() - 6 + player.level.random.nextInt(3));
-				if (player.experienceLevel >= 30) {
-					value = player.level.random.nextInt(player.getXpNeededForNextLevel() - 12 + player.level.random.nextInt(17));
-				}
+				ExperienceOrbEntity xp = xpPickupEvent.getOrb();
+				xp.value = player.level.random.nextInt(player.getXpNeededForNextLevel() - 6 + player.level.random.nextInt(3));
+				
+				if (player.experienceLevel >= 30) xp.value = player.level.random.nextInt(player.getXpNeededForNextLevel() - 12 + player.level.random.nextInt(17));
+				
 				player.level.addFreshEntity(xp);
-				event.setCanceled(true);
+				xpPickupEvent.setCanceled(true);
 			}
 		}
 	}

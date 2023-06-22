@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
@@ -29,14 +30,14 @@ public class ConsumableBucketItem extends Item {
 		return emptyBucketItem.get();
 	}
 	
-	public boolean curesHarmfulEffects() {
+	public boolean curesHarmfulEffects() {//TODO Ceramic Buckets mod
 		return curesHarmfulEffects;
 	}
 
 	@Override
 	public ItemStack finishUsingItem(ItemStack pStack, World pLevel, LivingEntity pEntityLiving) {
-		if (!pLevel.isClientSide && curesHarmfulEffects) pEntityLiving.curePotionEffects(pStack);
-
+		if (!pLevel.isClientSide && curesHarmfulEffects) pEntityLiving.curePotionEffects(Items.MILK_BUCKET.getDefaultInstance());
+		
 		if (pEntityLiving instanceof ServerPlayerEntity) {
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) pEntityLiving;
 			CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, pStack);

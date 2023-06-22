@@ -29,14 +29,14 @@ public class CrystalBushBlock extends Block implements IPlantable {
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader worldReader, BlockPos pos) {
-		BlockPos blockpos = pos.below();
-		if (state.getBlock() == this) return worldReader.getBlockState(blockpos).canSustainPlant(worldReader, blockpos, Direction.UP, this);
-		return this.mayPlaceOn(worldReader.getBlockState(blockpos), worldReader, blockpos);
+	public boolean canSurvive(BlockState targetState, IWorldReader worldReader, BlockPos targetPos) {
+		BlockPos belowPos = targetPos.below();
+		if (targetState.getBlock() == this) return worldReader.getBlockState(belowPos).canSustainPlant(worldReader, belowPos, Direction.UP, this);
+		return mayPlaceOn(worldReader.getBlockState(belowPos), worldReader, belowPos);
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState state, IBlockReader p_200123_2_, BlockPos p_200123_3_) {
+	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos targetPos) {
 		return state.getFluidState().isEmpty();
 	}
 
@@ -47,9 +47,9 @@ public class CrystalBushBlock extends Block implements IPlantable {
 	}
 
 	@Override
-	public BlockState getPlant(IBlockReader world, BlockPos pos) {
-		BlockState state = world.getBlockState(pos);
-		if (state.getBlock() != this) return defaultBlockState();
-		return state;
+	public BlockState getPlant(IBlockReader world, BlockPos targetPos) {
+		BlockState targetState = world.getBlockState(targetPos);
+		if (targetState.getBlock() != this) return defaultBlockState();
+		return targetState;
 	}
 }
