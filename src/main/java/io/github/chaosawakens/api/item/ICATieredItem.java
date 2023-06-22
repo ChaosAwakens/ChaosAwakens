@@ -10,7 +10,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.common.util.Lazy;
 
-//TODO Supplier conversion
+//TODO Supplier conversion (for config values, later)
 public interface ICATieredItem {
 	
 	Supplier<IntValue> getActualAttackDamage();

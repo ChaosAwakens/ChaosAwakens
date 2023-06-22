@@ -1,8 +1,15 @@
 package io.github.chaosawakens.common.enchantments;
 
+import java.util.stream.Collectors;
+
+import io.github.chaosawakens.common.util.EnchantmentUtil;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.ProtectionEnchantment;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 /**
@@ -39,7 +46,35 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 		this.protection += protection;
 	}
 	
+	public void decrementProtection(int protection) {
+		this.protection -= protection;
+	}
+	
 	public void setProtection(int protection) {
 		this.protection = protection;
+	}
+	
+	public static void handleHoplologyProtection(LivingEntity owner, HoplologyEnchantment hoplologyEnchantment) {
+		ObjectArrayList<ItemStack> curStacks = EnchantmentUtil.getItemStacksWithEnchantment(hoplologyEnchantment.getSlotItems(owner).values(), hoplologyEnchantment);
+		final int maxHoplologyXPLevel = 50;
+		
+		if (curStacks == null) return;
+		
+		ObjectArrayList<ItemStack> targetStacks = hoplologyEnchantment.getSlotItems(owner).values().stream()
+				.filter((targetStack) -> !targetStack.isEmpty() && curStacks.contains(targetStack))
+				.collect(Collectors.toCollection(ObjectArrayList::new));
+		
+		if (!targetStacks.isEmpty()) {
+			targetStacks.forEach((targetStack) -> {				
+				if (!(owner instanceof PlayerEntity)) return;
+				
+				PlayerEntity playerOwner = (PlayerEntity) owner;
+				int playerXPLevel = playerOwner.experienceLevel;
+				
+				if (playerXPLevel > maxHoplologyXPLevel) playerXPLevel = maxHoplologyXPLevel;
+				
+				hoplologyEnchantment.setProtection(Math.abs(playerXPLevel / 10));
+			});
+		}
 	}
 }

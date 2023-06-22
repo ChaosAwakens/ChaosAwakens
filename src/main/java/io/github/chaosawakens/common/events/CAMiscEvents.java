@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.IUtilityHelper;
+import io.github.chaosawakens.common.enchantments.HoplologyEnchantment;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableFishEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -13,6 +13,7 @@ import io.github.chaosawakens.common.entity.base.AnimatableWaterMobEntity;
 import io.github.chaosawakens.common.items.base.AnimatableShieldItem;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.registry.CAEnchantments;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -60,6 +61,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
@@ -90,19 +92,19 @@ public class CAMiscEvents {
 					.append(new StringTextComponent(" is now available from: ").withStyle(TextFormatting.WHITE))
 					.append(new StringTextComponent("https://chaosawakens.github.io/#downloadsDiv").withStyle((style) -> style.withColor(TextFormatting.GOLD).withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://chaosawakens.github.io/#downloadsDiv")))), Util.NIL_UUID);
 		}
-		if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
+		if (EntityUtil.isUserOrEntityUUIDEqualTo(target, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
 			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.GREEN)
 					.append(new StringTextComponent("Blackout03_").withStyle(TextFormatting.BOLD, TextFormatting.DARK_GREEN))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.GREEN)), ChatType.SYSTEM, Util.NIL_UUID);
-		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("29aa413b-d714-46f1-a3f5-68b9c67a4923"))) { // UUID of Ninjaguy169
+		} else if (EntityUtil.isUserOrEntityUUIDEqualTo(target, UUID.fromString("29aa413b-d714-46f1-a3f5-68b9c67a4923"))) { // UUID of Ninjaguy169
 			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.BLUE)
 					.append(new StringTextComponent("Ninjaguy169").withStyle(TextFormatting.BOLD, TextFormatting.DARK_BLUE))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.BLUE)), ChatType.SYSTEM, Util.NIL_UUID);
-		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("2668a475-2166-4539-9935-00f087818c4a"))) { // UUID of T40ne
+		} else if (EntityUtil.isUserOrEntityUUIDEqualTo(target, UUID.fromString("2668a475-2166-4539-9935-00f087818c4a"))) { // UUID of T40ne
 			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.GOLD)
 					.append(new StringTextComponent("T40ne").withStyle(TextFormatting.BOLD, TextFormatting.YELLOW))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.GOLD)), ChatType.SYSTEM, Util.NIL_UUID);
-		} else if (IUtilityHelper.isUserOrEntityUUIDEqualTo(target, UUID.fromString("8c89a0d3-3271-459d-a8c1-a9d34d53365b"))) { // UUID of FunkyMonk127
+		} else if (EntityUtil.isUserOrEntityUUIDEqualTo(target, UUID.fromString("8c89a0d3-3271-459d-a8c1-a9d34d53365b"))) { // UUID of FunkyMonk127
 			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Owner, ").withStyle(TextFormatting.RED)
 					.append(new StringTextComponent("FunkyMonk127").withStyle(TextFormatting.BOLD, TextFormatting.DARK_RED))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.RED)), ChatType.SYSTEM, Util.NIL_UUID);
@@ -139,6 +141,16 @@ public class CAMiscEvents {
 			Objects.requireNonNull(giantTarget.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.15F); // MOVEMENT_SPEED
 			Objects.requireNonNull(giantTarget.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(20.0D); // ATTACK_DAMAGE
 			Objects.requireNonNull(giantTarget.getAttribute(Attributes.ARMOR)).setBaseValue(10.0D); // ARMOR
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onLivingHurtEvent(LivingHurtEvent event) {
+		LivingEntity curEntity = event.getEntityLiving();
+		
+		if (curEntity != null) {
+			int hoplologyLevel = EnchantmentHelper.getEnchantmentLevel(CAEnchantments.HOPLOLOGY.get(), curEntity);
+			if (hoplologyLevel > 0) HoplologyEnchantment.handleHoplologyProtection(curEntity, CAEnchantments.HOPLOLOGY.get());
 		}
 	}
 
