@@ -146,7 +146,7 @@
 	"dungeon.chaosawakens.jer.mining_wasp_dungeon.loot": "Giant Wasp Dungeon - Loot",
 	"dungeon.chaosawakens.jer.village_cherry_house": "Village - Cherry House",
 
-	"container.chaosawakens.crystal_crafting_table": "Crystal Crafting Table",
+	"container.chaosawakens.crystal_crafting_table": "Crystalwood Crafting Table",
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
 	"container.chaosawakens.defossilizer": "Defossilizer",
 	"container.chaosawakens.robo_crate": "Robo Crate",
@@ -788,11 +788,11 @@
 	"item.chaosawakens.water_pink_tourmaline_bucket": "Water Pink Tourmaline Bucket",
 	"item.chaosawakens.milk_pink_tourmaline_bucket": "Milk Pink Tourmaline Bucket",
 
-	"item.chaosawakens.crystalwood_sword": "Crystal Wood Sword",
-	"item.chaosawakens.crystalwood_pickaxe": "Crystal Wood Pickaxe",
-	"item.chaosawakens.crystalwood_shovel": "Crystal Wood Shovel",
-	"item.chaosawakens.crystalwood_axe": "Crystal Wood Axe",
-	"item.chaosawakens.crystalwood_hoe": "Crystal Wood Hoe",
+	"item.chaosawakens.crystalwood_sword": "Crystalwood Sword",
+	"item.chaosawakens.crystalwood_pickaxe": "Crystalwood Pickaxe",
+	"item.chaosawakens.crystalwood_shovel": "Crystalwood Shovel",
+	"item.chaosawakens.crystalwood_axe": "Crystalwood Axe",
+	"item.chaosawakens.crystalwood_hoe": "Crystalwood Hoe",
 
 	"item.chaosawakens.kyanite_sword": "Kyanite Sword",
 	"item.chaosawakens.kyanite_pickaxe": "Kyanite Pickaxe",
@@ -854,7 +854,7 @@
 	"item.chaosawakens.prismatic_reaper": "Prismatic Reaper",
 	"item.chaosawakens.thunder_staff": "Thunder Staff",
 	"item.chaosawakens.beetroot_on_a_stick": "Beetroot on a Stick",
-	"item.chaosawakens.crystal_beetroot_on_a_stick": "Crystal Beetroot on a Stick",
+	"item.chaosawakens.crystal_beetroot_on_a_stick": "Crystal Beetroot on a Crystalwood Shard",
 	"item.chaosawakens.golden_beetroot_on_a_stick": "Golden Beetroot on a Stick",
 
 	"item.chaosawakens.skate_string_bow": "Skate String Bow",

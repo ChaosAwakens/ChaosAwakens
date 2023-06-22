@@ -130,6 +130,10 @@ public class DefossilizerBlock extends Block {
 		public int getId() {
 			return this.id;
 		}
+		
+		public String getName() {
+			return name;
+		}
 
 		public static DefossilizerType byId(int id) {
 			if(id < 0 || id >= VALUES.length) id = 0;

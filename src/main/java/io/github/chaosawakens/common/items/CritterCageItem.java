@@ -67,17 +67,16 @@ public class CritterCageItem extends Item {
 		  	targetEmptyStack.shrink(1);
 		  	target.remove(true);
 			return ActionResultType.SUCCESS;
-		}
-		return ActionResultType.FAIL;
+		} else return ActionResultType.FAIL;
 	}
 	
 	@SuppressWarnings("resource")
-	public boolean shouldCaptureEntity(ItemStack stack, PlayerEntity player, LivingEntity target) {
+	public boolean shouldCaptureEntity(ItemStack targetStack, PlayerEntity player, LivingEntity target) {
 		if (target.getCommandSenderWorld().isClientSide) return false;
 		if (target instanceof PlayerEntity || !target.isAlive()) return false;
-		if (containsEntity(stack)) return false;
+		if (containsEntity(targetStack)) return false;
 		if (isBlacklisted(target.getType())) return false;
-		if (target.getBbWidth() > 2.0F || target.getBbHeight() > 3.125F) return false; //Ent size or higher
+		if (target.getBbWidth() >= 2.0F || target.getBbHeight() >= 3.125F) return false; //Ent size or higher
 		
 		CompoundNBT critterCageData = new CompoundNBT();
 		
@@ -111,9 +110,9 @@ public class CritterCageItem extends Item {
 		critterCageData.putString("entityRegName", target.getType().getRegistryName().toString());
 		
 		target.saveWithoutId(critterCageData);
-		stack.setTag(critterCageData);
+		targetStack.setTag(critterCageData);
 		
-		stack.setCount(1);
+		targetStack.setCount(1);
 		return true;
 	}
 	
