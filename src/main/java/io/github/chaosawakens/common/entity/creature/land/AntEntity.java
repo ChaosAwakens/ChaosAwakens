@@ -109,7 +109,7 @@ public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob 
 
 	@Override
 	public ActionResultType mobInteract(PlayerEntity pPlayer, Hand pHand) {
-		return mobInteract(pPlayer, pHand, level, tpConfig, targetDimension);
+		return handleDimensionTeleporting(pPlayer, pHand, level, tpConfig, targetDimension);
 	}
 
 	@Override

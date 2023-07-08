@@ -13,7 +13,7 @@ public final class ObjectUtil {
 	
 	/**
 	 * Performs nullity checks, to ascertain that all object parameters passed in aren't null
-	 * @param throwsException Whether or not a {@link NullPointerException} will be thrown if any of the objects passed in are null
+	 * @param throwsException Whether or not a {@link NullPointerException} should be thrown if any of the objects passed in are null
 	 * @param objects The objects to perform nullity checks on
 	 * @return True if all objects are not null, else returns False (or throws NPM if <code>throwsException</code> is true.
 	 */
@@ -34,33 +34,6 @@ public final class ObjectUtil {
 	 */
 	public static String capitalizeFirstLetter(String targetString) {
 		return targetString.replaceAll(targetString.substring(0, 1), targetString.substring(0, 1).toUpperCase(Locale.ROOT));
-	}
-	
-	/**
-	 * Decrements a specified {@code int} until it reaches 0. Sets the specified {@code int} to 0 if it tries to decrement further.
-	 * @param targetToDecrement The {@code int} to decrement
-	 */
-	public static void decrementToZero(int targetToDecrement) {
-		if (targetToDecrement > 0) targetToDecrement--;
-		if (targetToDecrement < 0) targetToDecrement = 0;
-	}
-	
-	/**
-	 * Decrements a specified {@code double} until it reaches 0. Sets the specified {@code double} to 0 if it tries to decrement further.
-	 * @param targetToDecrement The {@code double} to decrement
-	 */
-	public static void decrementToZero(double targetToDecrement) {
-		if (targetToDecrement > 0) targetToDecrement--;
-		if (targetToDecrement < 0) targetToDecrement = 0;
-	}
-	
-	/**
-	 * Decrements a specified {@code float} until it reaches 0. Sets the specified {@code float} to 0 if it tries to decrement further.
-	 * @param targetToDecrement The {@code float} to decrement
-	 */
-	public static void decrementToZero(float targetToDecrement) {
-		if (targetToDecrement > 0) targetToDecrement--;
-		if (targetToDecrement < 0) targetToDecrement = 0;
 	}
 	
 	/**

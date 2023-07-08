@@ -311,6 +311,7 @@ public class CAClientSetupEvents {
 
 		RenderTypeLookup.setRenderLayer(CABlocks.LETTUCE.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.RADISH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.QUINOA.get(), RenderType.cutout());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_GRASS_BLOCK.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.KYANITE.get(), RenderType.cutoutMipped());

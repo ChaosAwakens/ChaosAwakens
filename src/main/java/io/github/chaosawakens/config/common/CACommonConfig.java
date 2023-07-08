@@ -327,8 +327,7 @@ public class CACommonConfig {
 		builder.push("Biomes");
 		builder.push("Stalagmite Valley");
 		enableStalagmiteOreGen = builder
-				.comment("Enable/Disable ores generating on the stalagmites in Stalagmite Valley. Note that this may require a more powerful computer, \n"
-						+ "until further optimization is made.")
+				.comment("Enable/Disable ores generating on the stalagmites in the Stalagmite Valley.")
 				.define("Enable Stalamite Ore Gen", true);
 		builder.pop(3);
 		

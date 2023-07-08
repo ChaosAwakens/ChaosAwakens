@@ -23,5 +23,4 @@ public class GeoEntityGlintLayer<E extends LivingEntity & IAnimatableEntity> ext
 		final RenderType entityGlint = RenderType.entityGlint();
 		getRenderer().render(getEntityModel().getModel(modelLoc), entityLivingBaseIn, partialTicks, entityGlint, matrixStackIn, bufferIn, bufferIn.getBuffer(entityGlint), packedLightIn, packedLightIn, packedLightIn, ageInTicks, netHeadYaw, headPitch);
 	}
-
 }

@@ -65,13 +65,40 @@ public final class MathUtil {
 	}
 	
 	/**
-	 * Returns an angle between 2 entities via the use of polar coordinate conversion
+	 * Decrements a specified {@code int} until it reaches 0. Sets the specified {@code int} to 0 if it tries to decrement further.
+	 * @param targetToDecrement The {@code int} to decrement
+	 */
+	public static void decrementToZero(int targetToDecrement) {
+		if (targetToDecrement > 0) targetToDecrement--;
+		if (targetToDecrement < 0) targetToDecrement = 0;
+	}
+	
+	/**
+	 * Decrements a specified {@code double} until it reaches 0. Sets the specified {@code double} to 0 if it tries to decrement further.
+	 * @param targetToDecrement The {@code double} to decrement
+	 */
+	public static void decrementToZero(double targetToDecrement) {
+		if (targetToDecrement > 0) targetToDecrement--;
+		if (targetToDecrement < 0) targetToDecrement = 0;
+	}
+	
+	/**
+	 * Decrements a specified {@code float} until it reaches 0. Sets the specified {@code float} to 0 if it tries to decrement further.
+	 * @param targetToDecrement The {@code float} to decrement
+	 */
+	public static void decrementToZero(float targetToDecrement) {
+		if (targetToDecrement > 0) targetToDecrement--;
+		if (targetToDecrement < 0) targetToDecrement = 0;
+	}
+	
+	/**
+	 * Returns an angle between 2 entities (in radians) via the use of polar coordinate conversion
 	 * @param first The first entity to get its angle
 	 * @param second The second entity to get its angle
-	 * @return The angle between both entities
+	 * @return The angle (in radians) between both entities
 	 */
 	public static double getAngleBetweenEntities(Entity first, Entity second) {
-        return Math.atan2(second.getZ() - first.getZ(), second.getX() - first.getX()) * (180 / Math.PI) + 90;
+        return ((Math.atan2(second.getZ() - first.getZ(), second.getX() - first.getX()) * (180 / Math.PI) + 90) + 90) * Math.PI / 180;
     }
 	
 	/**

@@ -24,7 +24,7 @@ public class RubyBugEntityModel extends ExtendedAnimatedTickingGeoModel<RubyBugE
 	
 	@Override
 	protected boolean shouldApplyHeadRot() {
-		return true;
+		return false;
 	}
 
 	@Override

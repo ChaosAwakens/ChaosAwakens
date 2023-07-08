@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.entity.base;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
-import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.passive.water.RandomRoamSwimmingGoal;
 import io.github.chaosawakens.common.registry.CAEffects;
@@ -62,13 +62,21 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	}
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getIdleAnim();
+	@Override
+	public abstract IAnimationBuilder getIdleAnim();
+	
+	@Override
+	public IAnimationBuilder getWalkAnim() {
+		return null;
+	}
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getSwimAnim();
+	@Override
+	public abstract IAnimationBuilder getSwimAnim();
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getDeathAnim();
+	@Override
+	public abstract IAnimationBuilder getDeathAnim();
 	
 	@Override
 	protected SoundEvent getFlopSound() {
@@ -164,6 +172,13 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 		} else {
 			super.tickDeath();
 		}
+	}
+	
+	@Override
+	public void die(DamageSource pCause) {
+		if (getDeathAnim() != null) {
+			if (getDeathAnim().hasAnimationFinished()) super.die(pCause);
+		} else super.die(pCause);
 	}
 
 	@Override

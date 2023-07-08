@@ -2,6 +2,7 @@ package io.github.chaosawakens.api.animation;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
@@ -21,6 +22,14 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected final AnimationController<E> controller;
 	protected MinecraftServer server;
 	
+	public WrappedAnimationController(E animatable, int transitionTicks, AnimationController<E> controller) {
+		this.animatable = animatable;
+		this.transitionLength = transitionTicks;
+		this.controller = controller;
+		this.name = controller.getName();
+		this.server = ((Entity) animatable).getServer();
+	}
+	
 	public WrappedAnimationController(E animatable, AnimationController<E> controller) {
 		this.animatable = animatable;
 		this.transitionLength = animatable.animationInterval();
@@ -29,8 +38,8 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		this.server = ((Entity) animatable).getServer();
 	}
 	
-	public void tick() {
-		double delta = server == null ? net.minecraft.client.Minecraft.getInstance().getDeltaFrameTime() : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+	public void tick() { //TODO Sync client somewhat
+		double delta = server == null ? Math.max(Minecraft.getInstance().getFrameTime() - Util.getMillis(), 0.0) / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -55,6 +64,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			}
 			break;
 		case STOPPED:
+			if (this.currentAnimation != null) this.animationState = ExpandedAnimationState.TRANSITIONING;
 			break;
 		case FINISHED:
 			break;
@@ -62,6 +72,13 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
+		if (builder == null) {
+			this.animationProgress = 0;
+			this.animationLength = 0;
+			this.transitionProgress = 0;
+			this.animationState = ExpandedAnimationState.FINISHED;
+		}
+		
 		if (!getCurrentAnimation().animationName.equals(builder.getAnimation().animationName) || clearCache) {
 			if (clearCache) builder.playAnimation(true);
 			else builder.playAnimation(false);
@@ -88,27 +105,27 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isAnimationFinished(IAnimationBuilder targetAnim) {
-		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName) && animationState.equals(ExpandedAnimationState.FINISHED);
+		return isAnimationFinished(targetAnim.getAnimation().animationName);
 	}
 	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.RUNNING);
+		return currentAnimation.animationName.equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
-		return currentAnimation.animationName.equals(targetAnim.getAnimation().animationName) && animationState.equals(ExpandedAnimationState.RUNNING);
+		return isPlayingAnimation(targetAnim.getAnimation().animationName);
 	}
 	
 	public ExpandedAnimationState getAnimationState() {
 		return animationState;
 	}
 
-	public double getAnimationProgress() {
-		return animationProgress + 3;
+	public double getAnimationProgressTicks() {
+		return Math.ceil(animationProgress) + 3;
 	}
 	
 	public double getAnimationLength() {
-		return animationLength;
+		return Math.floor(animationLength) - 4;
 	}
 	
 	public AnimationController<E> getWrappedController() {

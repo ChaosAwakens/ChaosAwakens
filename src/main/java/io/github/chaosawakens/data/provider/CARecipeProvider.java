@@ -179,11 +179,11 @@ public class CARecipeProvider extends RecipeProvider {
 				.save(consumer);
 
 		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_TORCH.get(), 4)
-				.define('#', CABlocks.ENERGIZED_KYANITE.get())
+				.define('#', CAItems.CRYSTAL_ENERGY.get())
 				.define('$', CAItems.CRYSTALWOOD_SHARD.get())
 				.pattern("#")
 				.pattern("$")
-				.unlockedBy("has_" + CABlocks.ENERGIZED_KYANITE.get().asItem(), has(CABlocks.ENERGIZED_KYANITE.get()))
+				.unlockedBy("has_" + CAItems.CRYSTAL_ENERGY.get().asItem(), has(CAItems.CRYSTAL_ENERGY.get()))
 				.unlockedBy("has_" + CAItems.CRYSTALWOOD_SHARD.get().asItem(), has(CAItems.CRYSTALWOOD_SHARD.get()))
 				.save(consumer);
 		ShapelessRecipeBuilder.shapeless(CAItems.EXTREME_TORCH.get(), 2)
@@ -1347,6 +1347,7 @@ public class CARecipeProvider extends RecipeProvider {
 
 		plantSeeds(consumer, CAItems.STRAWBERRY_SEEDS.get(), CAItems.STRAWBERRY.get());
 		plantSeeds(consumer, CAItems.RADISH_SEEDS.get(), CAItems.RADISH.get());
+		plantSeeds(consumer, CAItems.QUINOA_SEEDS.get(), CAItems.QUINOA.get());
 		plantSeeds(consumer, CAItems.LETTUCE_SEEDS.get(), CAItems.LETTUCE.get());
 		plantSeeds(consumer, CAItems.CORN_SEEDS.get(), CAItems.CORN.get());
 		plantSeeds(consumer, CAItems.TOMATO_SEEDS.get(), CAItems.TOMATO.get());
@@ -1404,6 +1405,15 @@ public class CARecipeProvider extends RecipeProvider {
 				.requires(CAItems.RADISH.get())
 				.requires(CAItems.RADISH.get())
 				.unlockedBy("has_" + CAItems.RADISH.get().asItem(), has(CAItems.RADISH.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(CAItems.QUINOA_SALAD.get())
+				.requires(Items.BOWL)
+				.requires(Items.BEETROOT)
+				.requires(CAItems.QUINOA.get())
+				.requires(CAItems.RADISH.get())
+				.requires(CAItems.LETTUCE.get())
+				.unlockedBy("has_" + CAItems.QUINOA.get().asItem(), has(CAItems.QUINOA.get()))
+				.unlockedBy("has_" + CAItems.RADISH.get().asItem(), has(CAItems.RADISH.get()))
+				.unlockedBy("has_" + CAItems.LETTUCE.get().asItem(), has(CAItems.LETTUCE.get())).save(consumer);
 		ShapelessRecipeBuilder.shapeless(CAItems.SEAFOOD_PATTY.get())
 				.requires(Items.BREAD)
 				.requires(CAItems.LETTUCE.get())
@@ -1627,13 +1637,13 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + Tags.Items.INGOTS_IRON.getName(), has(Tags.Items.INGOTS_IRON))
 				.save(consumer);
 		ShapedRecipeBuilder.shaped(CAItems.CRYSTAL_POWER_CHIP.get())
-				.define('R', CABlocks.ENERGIZED_KYANITE.get())
+				.define('R', CAItems.CRYSTAL_ENERGY.get())
 				.define('A', CAItems.PINK_TOURMALINE_INGOT.get())
 				.define('I', CAItems.CATS_EYE_INGOT.get())
 				.pattern("ARA")
 				.pattern("RIR")
 				.pattern("ARA")
-				.unlockedBy("has_" + CABlocks.ENERGIZED_KYANITE.get().asItem(), has(CABlocks.ENERGIZED_KYANITE.get()))
+				.unlockedBy("has_" + CAItems.CRYSTAL_ENERGY.get().asItem(), has(CAItems.CRYSTAL_ENERGY.get()))
 				.unlockedBy("has_" + CAItems.PINK_TOURMALINE_INGOT.get().asItem(), has(CAItems.ALUMINUM_INGOT.get()))
 				.unlockedBy("has_" + CAItems.CATS_EYE_INGOT.get().asItem(), has(CAItems.CATS_EYE_INGOT.get()))
 				.save(consumer);

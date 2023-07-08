@@ -18,7 +18,7 @@ public class MantisClawItem extends CASwordItem {
 	}
 
 	@Override
-	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+	public boolean hurtEnemy(ItemStack targetStack, LivingEntity target, LivingEntity attacker) {
 		int damageMultiplier = attacker.getHealth() >= attacker.getMaxHealth() ? 2 : 1;
 		
 		if (target != null && !target.level.isClientSide) {
@@ -26,7 +26,7 @@ public class MantisClawItem extends CASwordItem {
 			target.hurt(attacker instanceof PlayerEntity ? DamageSource.playerAttack((PlayerEntity) attacker) : DamageSource.mobAttack(attacker), 1F);
 		}
 		
-		stack.hurtAndBreak(damageMultiplier, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+		targetStack.hurtAndBreak(damageMultiplier, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 }

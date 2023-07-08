@@ -48,7 +48,7 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 2)
-				.add(Attributes.ATTACK_SPEED, 1)
+				.add(Attributes.ATTACK_SPEED, 2)
 				.add(Attributes.MOVEMENT_SPEED, 0.15D)
 				.add(Attributes.ATTACK_DAMAGE, 1)
 				.add(Attributes.ATTACK_KNOCKBACK, 0.5D)
@@ -72,12 +72,12 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 	
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new MeleeAttackGoal(this, 1.0D, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AntEntity>(this, AntEntity.class, false));
+		this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.0D, true));
+		this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<AntEntity>(this, AntEntity.class, false));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(AggressiveAntEntity.class));
-		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-		this.goalSelector.addGoal(1, new LookRandomlyGoal(this));
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 
 	@Override
 	public ActionResultType mobInteract(PlayerEntity pPlayer, Hand pHand) {
-		return mobInteract(pPlayer, pHand, level, tpConfig, targetDimension);
+		return handleDimensionTeleporting(pPlayer, pHand, level, tpConfig, targetDimension);
 	}
 
 	@SuppressWarnings("unchecked")

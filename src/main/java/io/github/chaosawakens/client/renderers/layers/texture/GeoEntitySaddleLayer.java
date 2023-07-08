@@ -25,6 +25,12 @@ public class GeoEntitySaddleLayer<E extends LivingEntity & IAnimatableEntity & I
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, E entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		final RenderType saddleCutoutNoCull = RenderType.armorCutoutNoCull(SADDLE);
-		if (entityLivingBaseIn.isSaddled()) getRenderer().render(getEntityModel().getModel(modelLoc), entityLivingBaseIn, partialTicks, saddleCutoutNoCull, matrixStackIn, bufferIn, bufferIn.getBuffer(saddleCutoutNoCull), packedLightIn, packedLightIn, packedLightIn, ageInTicks, netHeadYaw, headPitch);
+		
+		if (entityLivingBaseIn.isSaddled()) {
+			matrixStackIn.pushPose();
+			matrixStackIn.translate(0, 0.03D, 0);
+			getRenderer().render(getEntityModel().getModel(modelLoc), entityLivingBaseIn, partialTicks, saddleCutoutNoCull, matrixStackIn, bufferIn, bufferIn.getBuffer(saddleCutoutNoCull), packedLightIn, packedLightIn, packedLightIn, ageInTicks, netHeadYaw, headPitch);
+			matrixStackIn.popPose();
+		}
 	}
 }

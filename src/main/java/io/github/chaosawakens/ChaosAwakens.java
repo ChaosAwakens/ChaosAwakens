@@ -17,7 +17,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.forgespi.language.IModInfo;
 import software.bernie.geckolib3.GeckoLib;
 
 @Mod(ChaosAwakens.MODID)
@@ -34,14 +33,10 @@ public class ChaosAwakens {
 		GeckoLib.initialize();
 		
 		INSTANCE = this;
-
 		Optional<? extends ModContainer> mod = ModList.get().getModContainerById(MODID);
-		if (mod.isPresent()) {
-			IModInfo modInfo = mod.get().getModInfo();
-			VERSION = modInfo.getVersion();
-		} else {
-			LOGGER.warn("Could not get version from mod info!");
-		}
+		
+		if (mod.isPresent()) VERSION = mod.get().getModInfo().getVersion();
+		else LOGGER.warn("Could not get version from mod info!");
 
 		LOGGER.debug(MODNAME + " Version is: " + VERSION);
 		LOGGER.debug("Mod ID for " + MODNAME + " is: " + MODID);

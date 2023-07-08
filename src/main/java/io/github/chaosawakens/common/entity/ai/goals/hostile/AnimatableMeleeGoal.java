@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
-import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
@@ -23,6 +21,7 @@ public class AnimatableMeleeGoal extends Goal {
 	private final double angleRange;
 	private final int probability;
 	private Predicate<AnimatableMonsterEntity> extraActivationConditions;
+	private int presetCooldown = 0;
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability) {
 		this.owner = owner;
@@ -58,6 +57,10 @@ public class AnimatableMeleeGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
+		if (presetCooldown > 0) {
+			presetCooldown--;
+			return false;
+		}
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
 				&& owner.distanceToSqr(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget())
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
@@ -78,6 +81,7 @@ public class AnimatableMeleeGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
+		presetCooldown = 20;
 	}
 	
 	@Override
@@ -93,14 +97,10 @@ public class AnimatableMeleeGoal extends Goal {
 		
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
 		
-		double reach = Math.sqrt(owner.getMeleeAttackReachSqr(target));
+		double reach = EntityUtil.getMeleeAttackReachSqr(owner, target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
-		ChaosAwakens.debug("REACH", reach);
-		ChaosAwakens.debug("REACH SQ", owner.getMeleeAttackReachSqr(target));
-		ChaosAwakens.debug("DIST", owner.distanceToSqr(owner.getTarget()));
-		ChaosAwakens.debug("TARGETS", potentialAffectedTargets);
 
-		if (meleeAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, target.position());
+		if (meleeAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(target, 30F, 30F);;
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			double targetAngle = MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
 			double attackAngle = owner.yBodyRot + 180;
@@ -112,8 +112,6 @@ public class AnimatableMeleeGoal extends Goal {
 			float hitDistanceSqr = (float) (Math.sqrt((target.getZ() - owner.getZ()) * (target.getZ() - owner.getZ()) + (target.getX() - owner.getX()) * (target.getX() - owner.getX())) - owner.getBbWidth() / 2F);
 			
 			if (MathUtil.isBetween(meleeAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
-//				ChaosAwakens.debug("GOAL", "------------");
-//				ChaosAwakens.debug("END", "------------");
 				if (hitDistanceSqr <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) owner.doHurtTarget(potentialAffectedTarget);
 			}
 		}

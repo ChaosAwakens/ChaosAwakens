@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "chaosawakens:block/quinoa_crop_1"
+  }
+}

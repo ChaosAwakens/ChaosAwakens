@@ -139,12 +139,12 @@ public class CAServerConfig {
 		tigersEyeHoeDamage = builder.defineInRange("Damage of the Tiger's Eye Hoe", 1, 0, 10000);
 		builder.pop();
 		
-		builder.push("Crystal Wood Weapons/Tools");
-		crystalWoodSwordDamage = builder.defineInRange("Damage of the Crystal Wood Sword", 5, 0, 10000);
-		crystalWoodAxeDamage = builder.defineInRange("Damage of the Crystal Wood Axe", 9, 0, 10000);
-		crystalWoodPickaxeDamage = builder.defineInRange("Damage of the Crystal Wood Pickaxe", 3, 0, 10000);
-		crystalWoodShovelDamage = builder.defineInRange("Damage of the Crystal Wood Shovel", 3, 0, 10000);
-		crystalWoodHoeDamage = builder.defineInRange("Damage of the Crystal Wood Hoe", 1, 0, 10000);
+		builder.push("Crystalwood Weapons/Tools");
+		crystalWoodSwordDamage = builder.defineInRange("Damage of the Crystalwood Sword", 5, 0, 10000);
+		crystalWoodAxeDamage = builder.defineInRange("Damage of the Crystalwood Axe", 9, 0, 10000);
+		crystalWoodPickaxeDamage = builder.defineInRange("Damage of the Crystalwood Pickaxe", 3, 0, 10000);
+		crystalWoodShovelDamage = builder.defineInRange("Damage of the Crystalwood Shovel", 3, 0, 10000);
+		crystalWoodHoeDamage = builder.defineInRange("Damage of the Crystalwood Hoe", 1, 0, 10000);
 		builder.pop();
 		
 		builder.push("Kyanite Weapons/Tools");

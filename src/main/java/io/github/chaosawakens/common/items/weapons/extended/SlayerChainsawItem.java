@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -37,7 +38,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISyncable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<SlayerChainsawItem> mainController = new AnimationController<SlayerChainsawItem>(this, "slayerchainsawmaincontroller", 0, this::mainPredicate);
+	private final AnimationController<SlayerChainsawItem> mainController = new AnimationController<SlayerChainsawItem>(this, "slayerchainsawmaincontroller", 1, this::mainPredicate);
 	private static final AnimationBuilder ACTIVATED_ANIM = new AnimationBuilder().addAnimation("Activated", EDefaultLoopTypes.LOOP);
 	private static final int CHAINSAW_LENGTH = 5;
 	private static final int CHAINSAW_WIDTH = 5;
@@ -51,7 +52,7 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 	}
 	
 	public boolean isActivated(ItemStack chainsawStack) {
-		return !chainsawStack.isEmpty() && chainsawStack.hasTag() && chainsawStack.getTag().contains("activated") && chainsawStack.getTag().getBoolean("activated") == true;
+		return !chainsawStack.isEmpty() && chainsawStack.hasTag() && chainsawStack.getTag().contains("activated") && chainsawStack.getTag().getBoolean("activated");
 	}
 	
 	public void setActivated(ItemStack chainsawStack, boolean activated) {
@@ -85,14 +86,16 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 						}
 					}
 				}
-			}	   
+			}
 			if (!curWorld.isClientSide) targetStack.hurtAndBreak(8, miningEntity, (owner) -> owner.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
 		return super.mineBlock(targetStack, curWorld, targetState, targetPos, miningEntity);
 	}
 
-	private <I extends Item & IAnimatable> PlayState mainPredicate(AnimationEvent<I> event) {		
-		if (isActivated(getDefaultInstance())) {				
+	private <I extends Item & IAnimatable> PlayState mainPredicate(AnimationEvent<I> event) {
+		final ItemStack chainsawStack  = getDefaultInstance();
+		
+		if (isActivated(chainsawStack)) {
 			event.getController().setAnimation(ACTIVATED_ANIM);
 			return PlayState.CONTINUE;
 		}
@@ -103,6 +106,12 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		handleChainsawBehaviour(world, player, hand);
 		return super.use(world, player, hand);
+	}
+	
+	@Override
+	public ActionResultType useOn(ItemUseContext ctx) {
+		handleChainsawBehaviour(ctx.getLevel(), ctx.getPlayer(), ctx.getHand());
+		return super.useOn(ctx);
 	}
 
 	@Override
@@ -120,8 +129,8 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 			
 			if (isActivated(targetStack)) {
 				final int id = GeckoLibUtil.guaranteeIDForStack(targetStack, (ServerWorld) targetWorld);
-				final PacketDistributor.PacketTarget target = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> ownerPlayer);
-				GeckoLibNetwork.syncAnimation(target, this, id, ANIM);
+				final PacketTarget trackingTarget = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> ownerPlayer);
+				GeckoLibNetwork.syncAnimation(trackingTarget, this, id, ANIM);
 			}
 		}
 	}

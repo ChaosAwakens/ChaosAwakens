@@ -21,7 +21,6 @@ import net.minecraftforge.common.util.FakePlayer;
 public abstract class PlayerAdvancementMixin {
     @Shadow
     private ServerPlayerEntity player;
-    
     @Shadow
     @Final
     private Map<Advancement, AdvancementProgress> advancements;

@@ -25,17 +25,18 @@ public class StalagmiteFeature extends Feature<StalagmiteFeatureConfig> {
 		float steepness = cfg.baseSteepness + ((rand.nextFloat() - 0.5F) * cfg.variation) * cfg.baseSteepness;
 		int variationFloor = (int) Math.floor(steepness);
 		int radius = cfg.baseRadius + (rand.nextInt(variationFloor * 2 + 1) - variationFloor);
-		if(radius == 0) radius++;
+		
+		if( radius == 0) radius++;
 		// Don't generate ores when ore generation is deactivated
 		if(!CAConfigManager.MAIN_COMMON.enableStalagmiteOreGen.get())oreFlag = false;
 
-		Mutable mutable = new Mutable(pos.getX(), getLowestCorner(gen, pos, radius), pos.getZ());
+		Mutable targetMutable = new Mutable(pos.getX(), getLowestCorner(gen, pos, radius), pos.getZ());
 
 		//Micro-optimization: Cache this math operation since the result is constant
 		float rrs = radius * radius * steepness;
 
 		//Break from both for-s when Y bigger than height limit
-		higherthan255break:
+		worldHeightLoop:
 			for (int j = 0; j < rrs; j++) {
 				for (int i = -radius; i <= radius; i++) {
 					for (int k = -radius; k <= radius; k++) {
@@ -43,16 +44,11 @@ public class StalagmiteFeature extends Feature<StalagmiteFeatureConfig> {
 						int smallerThanZeroFlag = i < 0 || k < 0 ? -1 : 0;
 
 						if (pillarCeiling >= -1 * smallerThanZeroFlag && pillarCeiling >= j) {
-							if (mutable.getY() + j > 255) break higherthan255break;
+							if (targetMutable.getY() + j > 255) break worldHeightLoop;
 							if (oreFlag) {
-								if (cfg.oreChance >= rand.nextFloat()) {
-									reader.setBlock(mutable.offset(i, j, k), cfg.oresTag.get().getRandomElement(rand).defaultBlockState(), 2);
-								} else {
-									reader.setBlock(mutable.offset(i, j, k), cfg.state, 2);
-								}
-							} else {
-								reader.setBlock(mutable.offset(i, j, k), cfg.state, 2);
-							}
+								if (cfg.oreChance >= rand.nextFloat()) reader.setBlock(targetMutable.offset(i, j, k), cfg.oresTag.get().getRandomElement(rand).defaultBlockState(), 2);
+								else reader.setBlock(targetMutable.offset(i, j, k), cfg.state, 2);
+							} else reader.setBlock(targetMutable.offset(i, j, k), cfg.state, 2);
 						}
 					}
 				}

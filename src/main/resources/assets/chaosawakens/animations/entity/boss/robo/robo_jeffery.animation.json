@@ -1609,7 +1609,7 @@
 				}
 			}
 		},
-		"Jump AOE Attack 1": {
+		"Leap Attack: Leap": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.79167,
 			"bones": {
@@ -1889,7 +1889,7 @@
 				}
 			}
 		},
-		"Jump AOE Attack 2": {
+		"Leap Attack: Midair": {
 			"loop": true,
 			"bones": {
 				"LowerBody": {
@@ -2064,7 +2064,7 @@
 				}
 			}
 		},
-		"Jump AOE Attack 3": {
+		"Leap Attack: Land": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 2,
 			"bones": {

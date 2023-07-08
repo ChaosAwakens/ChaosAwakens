@@ -131,12 +131,18 @@ public class CABlockLootTableProvider extends BlockLootTables {
 								.apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))));
 		ILootCondition.IBuilder radish = BlockStateProperty.hasBlockStateProperties(CABlocks.RADISH.get())
 				.setProperties(StatePropertiesPredicate.Builder.properties()
-						.hasProperty(CACropsBlock.AGE, 3));
+						.hasProperty(CABlocks.RADISH.get().getAgeProperty(), CABlocks.RADISH.get().getMaxAge()));
 		add(CABlocks.RADISH.get(), createCropDrops(CABlocks.RADISH.get(), CAItems.RADISH.get(), CAItems.RADISH_SEEDS.get(), radish));
+		
 		ILootCondition.IBuilder lettuce = BlockStateProperty.hasBlockStateProperties(CABlocks.LETTUCE.get())
 				.setProperties(StatePropertiesPredicate.Builder.properties()
-						.hasProperty(CACropsBlock.AGE, 3));
+						.hasProperty(CABlocks.LETTUCE.get().getAgeProperty(), CABlocks.LETTUCE.get().getMaxAge()));
 		add(CABlocks.LETTUCE.get(), createCropDrops(CABlocks.LETTUCE.get(), CAItems.LETTUCE.get(), CAItems.LETTUCE_SEEDS.get(), lettuce));
+		
+		ILootCondition.IBuilder quinoa = BlockStateProperty.hasBlockStateProperties(CABlocks.QUINOA.get())
+				.setProperties(StatePropertiesPredicate.Builder.properties()
+						.hasProperty(CABlocks.QUINOA.get().getAgeProperty(), CABlocks.QUINOA.get().getMaxAge()));
+		add(CABlocks.QUINOA.get(), createCropDrops(CABlocks.QUINOA.get(), CAItems.QUINOA.get(), CAItems.QUINOA_SEEDS.get(), quinoa));
 
 		// Wood Types/Leaves
 		dropOther(CABlocks.DUPLICATION_LOG.get(), CABlocks.DEAD_DUPLICATION_LOG.get());

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:quinoa_seeds"
+    ]
+  },
+  "criteria": {
+    "has_quinoa": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:quinoa"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:quinoa_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_quinoa",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -24,7 +24,7 @@ public abstract class MobEntityMixin {
 		MobEntity targetMob = (MobEntity) (Object) this;
 		
 		// Account for other entities (Tameable entities, etc.) that don't get caged due to limitations set in their mobInteract methods
-		if (interactingPlayer.getMainHandItem().getItem() == CAItems.CRITTER_CAGE.get()) {
+		if (interactingPlayer.getMainHandItem().getItem().equals(CAItems.CRITTER_CAGE.get())) {
 			CritterCageItem curCage = (CritterCageItem) interactingPlayer.getMainHandItem().getItem();
 			
 			if (!curCage.containsEntity(interactingPlayer.getMainHandItem())) {

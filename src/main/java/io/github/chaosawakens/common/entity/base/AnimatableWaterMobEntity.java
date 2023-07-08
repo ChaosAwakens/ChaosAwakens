@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.entity.base;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
-import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEffects;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -17,6 +17,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
@@ -36,10 +37,10 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	public abstract AnimationFactory getFactory();
 
 	@Override
-	abstract public WrappedAnimationController<? extends AnimatableWaterMobEntity> getMainWrappedController();
+	public abstract WrappedAnimationController<? extends AnimatableWaterMobEntity> getMainWrappedController();
 	
 	@Override
-	abstract public <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
+	public abstract <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
 
 	@Override
 	public abstract int animationInterval();
@@ -48,13 +49,22 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	public abstract <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
 	
 	@Nullable
-	abstract public SingletonAnimationBuilder getIdleAnim();
+	@Override
+	public abstract IAnimationBuilder getIdleAnim();
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getSwimAnim();
+	@Override
+	public IAnimationBuilder getWalkAnim() {
+		return null;
+	}
+	
+	@Nullable
+	@Override
+	public abstract IAnimationBuilder getSwimAnim();
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getDeathAnim();
+	@Override
+	public abstract IAnimationBuilder getDeathAnim();
 	
 	@Override
 	protected void defineSynchedData() {
@@ -114,6 +124,11 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 		} else {
 			super.tickDeath();
 		}
+	}
+	
+	@Override
+	public void die(DamageSource pCause) {
+		super.die(pCause);
 	}
 	
 	@Override

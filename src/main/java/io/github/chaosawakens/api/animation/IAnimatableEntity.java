@@ -10,6 +10,7 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.manager.CANetworkManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -26,6 +27,11 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.util.AnimationUtils;
 
+/**
+ * An extended implementation of {@link IAnimatable} and {@link IAnimationTickable} which provides extended functionality to any GeoAnimatable 
+ * {@link LivingEntity}. This interface must be implemented to any {@link LivingEntity} that intends to utilize the extended 
+ * functionality provided by wrappers such as {@link IAnimationBuilder} instances and {@link WrappedAnimationController}.
+ */
 public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	
 	<E extends IAnimatableEntity> WrappedAnimationController<? extends E> getMainWrappedController();
@@ -47,6 +53,11 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	<E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
 	
 	<E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
+	
+	IAnimationBuilder getIdleAnim();
+	IAnimationBuilder getWalkAnim();
+	IAnimationBuilder getSwimAnim();
+	IAnimationBuilder getDeathAnim();
 
 	@Override
 	default void registerControllers(AnimationData data) {
@@ -54,36 +65,29 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 			if (controller != null) data.addAnimationController(controller.getWrappedController());
 		}
 	}
-
+	
 	/**
-	 * Iterates through {@link IAnimatableEntity#getControllers()} in order to return a controller matching the {@code name} string passed in. If no such 
+	 * Iterates through {@link #getWrappedControllers()} in order to return a controller matching the {@code name} string passed in. If no such 
 	 * controller with the specified name exists, this returns null.
 	 * @param name The name of the controller to find/get.
-	 * @return An {@link AnimationController} with the specified name if it exists, else returns null.
+	 * @return A {@link WrappedAnimationController} with the specified name if it exists, else returns null.
 	 */
 	@Nullable
-	default AnimationController<? extends IAnimatableEntity> getControllerByName(String name) {
-		if (getWrappedControllers().isEmpty()) return null;
-
-		ObjectArrayList<WrappedAnimationController<? extends IAnimatableEntity>> results = getWrappedControllers().stream()
-				.filter((p) -> p.getName().equalsIgnoreCase(name))
-				.collect(Collectors.toCollection(ObjectArrayList::new));
-
-		if (results.isEmpty()) return null;
-
-		return results.get(0).getWrappedController();
-	}
-	
 	default WrappedAnimationController<? extends IAnimatableEntity> getControllerWrapperByName(String name) {
 		if (getWrappedControllers().isEmpty()) return null;
 
 		ObjectArrayList<WrappedAnimationController<? extends IAnimatableEntity>> results = getWrappedControllers().stream()
-				.filter((p) -> p.getName().equalsIgnoreCase(name))
+				.filter((curController) -> curController.getName().equalsIgnoreCase(name))
 				.collect(Collectors.toCollection(ObjectArrayList::new));
 
 		if (results.isEmpty()) return null;
 
 		return results.get(0);
+	}
+	
+	@Nullable
+	default AnimationController<? extends IAnimatableEntity> getControllerByName(String name) {
+		return getControllerWrapperByName(name).getWrappedController();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,34 +137,55 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		return targetController.getCurrentAnimation();
 	}
 
+	/**
+	 * Checks if any of the {@link AnimationController}s in an entity are running an animation at all.
+	 * @return true if any controllers (stored in {@link #getWrappedControllers()}) are actively playing an animation at all, else returns false.
+	 */
 	default boolean isPlayingAnimation() {
 		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
 			if (controller.getCurrentAnimation() != null) return true;
 		}
 		return false;
 	}
-
-	default boolean isPlayingAnimation(Animation targetAnim) {
-		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
-			if (controller.getCurrentAnimation().animationName == targetAnim.animationName) return true;
-		}
-		return false;
-	}
-
+	
+	/**
+	 * Checks if a certain animation (by name) is playing in any of the controllers stored in {@link #getWrappedControllers()}.
+	 * @param targetAnimName The target animation name to check for.
+	 * @return true if the specified animation (by name) is playing in any of the controllers stored in {@link #getWrappedControllers()}, else returns false.
+	 */
 	default boolean isPlayingAnimation(String targetAnimName) {
 		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
 			if (controller.getCurrentAnimation().animationName == targetAnimName) return true;
 		}
 		return false;
 	}
+
+	/**
+	 * Overloaded method for {@link #isPlayingAnimation(String)}.
+	 * @param targetAnim The target animation to check for.
+	 * @return {@link #isPlayingAnimation(String)}.
+	 */
+	default boolean isPlayingAnimation(Animation targetAnim) {
+		return isPlayingAnimation(targetAnim.animationName);
+	}
 	
-	default boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim) {
+	/**
+	 * Uses the target {@link IAnimationBuilder}'s {@link WrappedAnimationController} to check if it's playing the specified 
+	 * animation (via {@link WrappedAnimationController#isPlayingAnimation(IAnimationBuilder)}).
+	 * @param targetAnim The target animation to check the controller of for matching.
+	 * @return true if the specified {@link IAnimationBuilder}'s {@link WrappedAnimationController} is playing the specified animation, 
+	 * else returns false.
+	 */
+	default boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
 		return getControllerWrapperByName(targetAnim.getWrappedController().getName()).isPlayingAnimation(targetAnim);
 	}
+	
+	default <E extends IAnimatableEntity> boolean isPlayingAnimation(String targetAnimName, WrappedAnimationController<E> controllerToCheck) {
+		return controllerToCheck.isPlayingAnimation(targetAnimName);
+	}
 
-	default <E extends IAnimatableEntity> boolean isPlayingAnimation(SingletonAnimationBuilder targetAnim, WrappedAnimationController<E> controllerToCheck) {
-		if (controllerToCheck.getCurrentAnimation() == null) return false;
-		return controllerToCheck.getCurrentAnimation().animationName == targetAnim.getAnimation().animationName;
+	default <E extends IAnimatableEntity> boolean isPlayingAnimation(IAnimationBuilder targetAnim, WrappedAnimationController<E> controllerToCheck) {
+		return controllerToCheck.isPlayingAnimation(targetAnim);
 	}
 
 	default boolean isPlayingAnimationInController(AnimationController<? extends IAnimatableEntity> targetController) {
@@ -194,28 +219,28 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	/**
 	 * <b>GECKOLIB 4 IMPL</b>
 	 * <br> </br>
-	 * Plays an animation through the passed in animation's owner controller. Like the {@code triggerAnim} method in
-	 * Geckolib 4, this can be called on either the client or the server. This does so by sending a packet to all
-	 * tracking entities if triggered on the server. Otherwise it'll just play an animation normally on the client.
+	 * Plays an animation through the passed in {@link IAnimationBuilder}'s owner {@link WrappedAnimationController}. Like the {@code triggerAnim} 
+	 * method in Geckolib 4, this can be called on either the client or the server. This does so by sending a packet to all
+	 * tracking entities if triggered on the server. Otherwise, it'll just play an animation normally on the client.
 	 * <br> </br>
 	 * No need to implement other means of triggering animations for now, so long as this exists.
 	 * <br> </br>
 	 * <b>IMPORTANT: </b> Just because you can trigger the animation from the server DOES NOT MEAN that animation
 	 * predicates are useless! You can still use them to return an {@link AnimationState}, which will be synced and
-	 * handled accordingly on the server. You still have to use {@link DataParameter}s for that, though. Animation
+	 * handled accordingly on the server. You still have to use {@link DataParameter}s for syncing, though. Animation
 	 * predicates will <i>always</i> be client side.
 	 * @param animation The animation to play.
-	 * @param clearCache If the {@link AnimationBuilder}'s cache should be cleared
+	 * @param clearCache If the {@link IAnimationBuilder}'s {@link AnimationBuilder} cache should be cleared
 	 */
-	default void playAnimation(SingletonAnimationBuilder animation, boolean clearCache) {
+	default void playAnimation(IAnimationBuilder animation, boolean clearCache) {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
-		animation.getWrappedController().playAnimation(animation, false);
+		animation.getWrappedController().playAnimation(animation, clearCache);
 		
 		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, animation.getLoopType(), animation.getWrappedController().getName(), clearCache), (Entity) this);
 	}
 	
 	//TODO Finish implementing this
-	default void stopAnimation(SingletonAnimationBuilder animation) {
+	default void stopAnimation(IAnimationBuilder animation) {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
 		animation.stopAnimation();
 		

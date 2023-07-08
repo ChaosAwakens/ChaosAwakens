@@ -71,16 +71,6 @@ public interface IUtilityHelper {
 	 * The smallest possible number greater than 1.0F (+0.0000001)
 	 */
 	final float EPSILON = 1.0E-8F;
-	
-	/**
-	 * The absolute maximum number the signed primitive type int can hold
-	 */
-	final int THIRTY_TWO_BIT_INTEGER_LIMIT = 2147483647;
-	
-	/**
-	 * The absolute minimum number the signed primitive type int can hold
-	 */
-	final int NEGATIVE_THIRTY_TWO_BIT_INTEGER_LIMIT = -2147483647;
 
 	///////////////////////////////
 	//         Functions         //

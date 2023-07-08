@@ -85,7 +85,9 @@ public class CAMiscEvents {
 	@SubscribeEvent
 	public static void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
 		Entity target = event.getEntity();
+		
 		if (target == null) return;
+		
 		if (CAConfigManager.MAIN_COMMON.showUpdateMessage.get() && VersionChecker.getResult(ModList.get().getModContainerById(ChaosAwakens.MODID).get().getModInfo()).status == VersionChecker.Status.OUTDATED) {
 			target.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)
 					.append(new StringTextComponent(ChaosAwakens.MODNAME).withStyle(TextFormatting.BOLD, TextFormatting.GOLD))
@@ -208,7 +210,7 @@ public class CAMiscEvents {
 	
 	@SubscribeEvent
 	public static void onLivingDropsEvent(LivingDropsEvent event) {
-		ItemStack stack;
+		ItemStack targetStack;
 		ItemEntity drop;
 
 		// ENDER DRAGON
@@ -218,15 +220,15 @@ public class CAMiscEvents {
 			// Drop #1: Ender Dragon Scales
 			int amount = 8 + (int) (Math.random() * 6) + (int) (Math.random() * event.getLootingLevel() * 4);
 			if (Objects.requireNonNull(dragon.getDragonFight()).hasPreviouslyKilledDragon()) amount /= 2; // Amount is halved with repeat kills.
-			stack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
-			drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
+			targetStack = new ItemStack(CAItems.ENDER_DRAGON_SCALE.get(), amount);
+			drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, targetStack);
 			event.getDrops().add(drop);
 
 			// Drop #2: Ender Dragon Head
 			double chance = 0.1D + event.getLootingLevel() * 0.1D;
 			if (Math.random() < chance && CAConfigManager.MAIN_COMMON.enderDragonHeadDrop.get()) {
-				stack = new ItemStack(Items.DRAGON_HEAD, 1);
-				drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, stack);
+				targetStack = new ItemStack(Items.DRAGON_HEAD, 1);
+				drop = new ItemEntity(event.getEntityLiving().level, 0, 90, 0, targetStack);
 				event.getDrops().add(drop);
 			}
 		}

@@ -19,22 +19,18 @@ public class GeodeFeature extends Feature<GeodeFeatureConfig> {
 	@Override
 	public boolean place(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, GeodeFeatureConfig config) {
 		int chance = config.buddingChance.sample(rand);
-		float radius = config.diameter.sample(rand)/2,
-				radiusSqrd = radius*radius,
-				borderSqrd = (radius+1)*(radius+1);
-		BlockPos.Mutable mutable = new BlockPos.Mutable(pos.getX(), pos.getY(), pos.getZ());
-		for(float i = -radius; i <= radius; i++) {
-			for(float j = -radius; j <= radius; j++) {
-				for(float k = -radius; k <= radius; k++) {
-					float distance = Math.abs(i*i) + Math.abs(j*j) + Math.abs(k*k);
-					if(distance < radiusSqrd)
-						reader.setBlock(mutable.offset(i, j, k), Blocks.CAVE_AIR.defaultBlockState(), 3);
-					else if(distance <= borderSqrd)
-						if(rand.nextInt(chance) == 0)
-							reader.setBlock(mutable.offset(i, j, k), config.budding, 3);
-						else
-							if(!reader.getBlockState(mutable.offset(i, j, k)).is(config.base.getBlock()))
-								reader.setBlock(mutable.offset(i, j, k), config.base, 3);
+		float radius = config.diameter.sample(rand) / 2, radiusSqrd = radius * radius, borderSqrd = (radius + 1) * (radius + 1);
+		BlockPos.Mutable targetMutable = new BlockPos.Mutable(pos.getX(), pos.getY(), pos.getZ());
+		
+		for (float xRad = -radius; xRad <= radius; xRad++) {
+			for (float yRad = -radius; yRad <= radius; yRad++) {
+				for (float zRad = -radius; zRad <= radius; zRad++) {
+					float distance = Math.abs(xRad * xRad) + Math.abs(yRad * yRad) + Math.abs(zRad * zRad);
+					
+					if (distance < radiusSqrd) reader.setBlock(targetMutable.offset(xRad, yRad, zRad), Blocks.CAVE_AIR.defaultBlockState(), 3);
+					else if (distance <= borderSqrd) {
+						if (rand.nextInt(chance) == 0) reader.setBlock(targetMutable.offset(xRad, yRad, zRad), config.budding, 3);
+					} else if (!reader.getBlockState(targetMutable.offset(xRad, yRad, zRad)).is(config.base.getBlock())) reader.setBlock(targetMutable.offset(xRad, yRad, zRad), config.base, 3);
 				}
 			}
 		}

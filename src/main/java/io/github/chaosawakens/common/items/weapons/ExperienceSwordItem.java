@@ -39,5 +39,4 @@ public class ExperienceSwordItem extends EnchantedSwordItem {
 			tooltip.add(new StringTextComponent("This weapon bonus is disabled in the config!").withStyle(TextFormatting.RED).withStyle(TextFormatting.BOLD));
 		}
 	}
-
 }

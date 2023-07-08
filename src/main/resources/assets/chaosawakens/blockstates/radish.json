@@ -1,16 +1,16 @@
 {
   "variants": {
     "age=0": {
-      "model": "chaosawakens:block/radish_crop0"
+      "model": "chaosawakens:block/radish_crop_0"
     },
     "age=1": {
-      "model": "chaosawakens:block/radish_crop1"
+      "model": "chaosawakens:block/radish_crop_1"
     },
     "age=2": {
-      "model": "chaosawakens:block/radish_crop2"
+      "model": "chaosawakens:block/radish_crop_2"
     },
     "age=3": {
-      "model": "chaosawakens:block/radish_crop3"
+      "model": "chaosawakens:block/radish_crop_3"
     }
   }
 }

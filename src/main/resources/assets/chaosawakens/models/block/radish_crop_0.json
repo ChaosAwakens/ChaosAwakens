@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/crop",
   "textures": {
-    "crop": "chaosawakens:block/radish_crop2"
+    "crop": "chaosawakens:block/radish_crop_0"
   }
 }

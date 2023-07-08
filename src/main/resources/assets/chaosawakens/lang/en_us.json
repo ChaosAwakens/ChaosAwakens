@@ -183,6 +183,7 @@
 	"stat.chaosawakens.interact_with_crystal_crafting_table": "Interactions with Crystal Crafting Table",
 	"stat.chaosawakens.interact_with_crystal_furnace": "Interactions with Crystal Furnace",
 	"stat.chaosawakens.interact_with_defossilizer": "Interactions with Defossilizer",
+	"stat.chaosawakens.interact_with_robo_crate": "Interactions with Robo Crate",
 
 	"entity.chaosawakens.acacia_ent": "Acacia Ent",
 	"entity.chaosawakens.apple_ent": "Apple Ent",
@@ -379,7 +380,9 @@
 	"item.chaosawakens.garden_salad": "Garden Salad",
 	"item.chaosawakens.blt_sandwich": "BLT Sandwich",
 	"item.chaosawakens.radish": "Radish",
+	"item.chaosawakens.quinoa": "Quinoa",
 	"item.chaosawakens.radish_stew": "Radish Stew",
+	"item.chaosawakens.quinoa_salad": "Quinoa Salad",
 	"item.chaosawakens.crab_meat": "Raw Crab Meat",
 	"item.chaosawakens.cooked_crab_meat": "Cooked Crab Meat",
 	"item.chaosawakens.peacock_leg": "Raw Peacock Leg",
@@ -395,6 +398,7 @@
 	"item.chaosawakens.peach_seed": "Peach Seed",
 	"item.chaosawakens.tomato_seeds": "Tomato Seeds",
 	"item.chaosawakens.radish_seeds": "Radish Seeds",
+	"item.chaosawakens.quinoa_seeds": "Quinoa Seeds",
 	"item.chaosawakens.corn_seeds": "Corn Seeds",
 	"item.chaosawakens.lettuce_seeds": "Lettuce Seeds",
 	"item.chaosawakens.green_fish": "Green Fish",
@@ -945,6 +949,7 @@
 	"block.chaosawakens.strawberry_plant": "Strawberry Bush",
 	"block.chaosawakens.lettuce": "Lettuce",
 	"block.chaosawakens.radish": "Radish",
+	"block.chaosawakens.quinoa": "Quinoa",
 
 	"block.chaosawakens.apple_sapling": "Apple Sapling",
 	"block.chaosawakens.apple_log": "Apple Log",

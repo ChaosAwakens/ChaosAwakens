@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:beetroot"
+    },
+    {
+      "item": "chaosawakens:quinoa"
+    },
+    {
+      "item": "chaosawakens:radish"
+    },
+    {
+      "item": "chaosawakens:lettuce"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:quinoa_salad"
+  }
+}

@@ -128,7 +128,7 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundNBT nbt) {
 		super.readAdditionalSaveData(nbt);
-		this.setAppleCowType(nbt.getInt("AppleCowType"));
+		setAppleCowType(nbt.getInt("AppleCowType"));
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	
 	@Override
 	public void thunderHit(ServerWorld pLevel, LightningBoltEntity pLightning) {
-		if (getAppleCowType() != 1) {
+		if (getAppleCowType() == 0) {
 			if (!EntityUtil.convertEntity(this, CAEntityTypes.CARROT_PIG.get(), pLevel)) super.thunderHit(pLevel, pLightning);
 		} else super.thunderHit(pLevel, pLightning);
 	}

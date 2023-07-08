@@ -22,7 +22,7 @@ public interface ITeleporterMob {
 	TranslationTextComponent EMPTY_INVENTORY_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
 	TranslationTextComponent INACCESSIBLE_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
 
-	default ActionResultType mobInteract(PlayerEntity playerIn, Hand hand, World level, BooleanValue tpConfig, RegistryKey<World> targetDimension) {
+	default ActionResultType handleDimensionTeleporting(PlayerEntity playerIn, Hand hand, World level, BooleanValue tpConfig, RegistryKey<World> targetDimension) {
 		ItemStack heldStack = playerIn.getItemInHand(hand);
 
 		if (!tpConfig.get() || level.isClientSide || heldStack.getItem() != Items.AIR) return ActionResultType.PASS;

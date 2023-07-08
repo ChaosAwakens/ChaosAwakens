@@ -1,11 +1,18 @@
 package io.github.chaosawakens.common.util;
 
+import java.util.Comparator;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import javax.annotation.Nullable;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.item.IShieldMaterial;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
@@ -14,13 +21,16 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.world.World;
 
 public final class EnumUtil {
-	
+
 	private EnumUtil() {
 		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
-	
+
 	public enum CAItemTier implements IItemTier {
 		// Harvest Level, Max Uses, Efficiency, Attack Damage,
 		// Enchantability, Repair Material
@@ -95,7 +105,7 @@ public final class EnumUtil {
 		public Ingredient getRepairIngredient() {
 			return this.repairMaterial.get();
 		}
-		
+
 		public int getAttackDamageMod() {
 			return (int) (getAttackDamageBonus() - (getAttackDamageBonus() + 1)) - 2;
 		}
@@ -187,10 +197,10 @@ public final class EnumUtil {
 			return this.repairMaterial.get();
 		}
 	}
-	
+
 	public enum CAShieldMaterial implements IShieldMaterial {
 		;
-		
+
 		private final String name;
 		private final int durability;
 		private final float toughness;
@@ -198,7 +208,7 @@ public final class EnumUtil {
 		private final float knockbackResistance;
 		private final double damageResistance;
 		private final Supplier<Ingredient> repairMaterial;
-		
+
 		CAShieldMaterial(String materialName, int durability, float toughness, int enchantability, float knockbackResistance, double damageResistance, Supplier<Ingredient> repairMaterial) {
 			this.name = ChaosAwakens.prefix(materialName).toString();
 			this.durability = durability;
@@ -244,7 +254,7 @@ public final class EnumUtil {
 			return repairMaterial.get();
 		}
 	}
-	
+
 	// Entities
 	public enum EntType {
 		APPLE("apple"),
@@ -271,7 +281,7 @@ public final class EnumUtil {
 			return this.name;
 		}
 	}
-	
+
 	public enum HerculesBeetleType {
 		MODERN("modern"),
 		THROWBACK("throwback");
@@ -286,13 +296,13 @@ public final class EnumUtil {
 			return this.name;
 		}
 	}
-	
+
 	// Config
 	public enum ElytraDamageType {
 		ARMOR,
 		ELYTRA
 	}
-	
+
 	public enum SurvivalSpawnerManipulationType {
 		NO_BLOCKING,
 		BLOCK_ALL,
@@ -300,18 +310,110 @@ public final class EnumUtil {
 		TAG_BLACKLISTED,
 		TAG_WHITELISTED
 	}
-	
+
 	public enum ExplosionType {
 		NONE,
 		BREAK,
 		DESTROY
 	}
-	
+
 	public enum StalagmiteBlockGenType {
 		ORE_ALL,
 		ORE_RARE,
 		ORE_COMMON,
 		FOSSIL,
 		NONE
+	}
+
+	// Misc
+	public enum BlockPatternShape {
+		CIRCLE {
+			@Override
+			public ObjectArrayList<BlockPos> applyShape(World targetWorld, BlockPos originPos, double radius, double height, boolean shouldFill, boolean includeCenter, ObjectArrayList<Block> blacklistedBlocks) {
+				ObjectArrayList<BlockPos> validPositions = new ObjectArrayList<BlockPos>(1);
+				Mutable mutablePos = new Mutable();
+
+				mutablePos.set(originPos);
+				if (includeCenter) validPositions.add(originPos);
+
+				double minRadX = originPos.getX() - radius;
+				double maxRadX = originPos.getX() + radius;
+				double minRadY = originPos.getY() - height;
+				double maxRadY = originPos.getY() + height;
+				double minRadZ = originPos.getZ() - radius;
+				double maxRadZ = originPos.getZ() + radius;
+
+				if (!shouldFill) {
+					for (int angleTheta = 0; angleTheta < 360; angleTheta++) {
+						for (double targetY = minRadY; targetY < maxRadY; targetY++) {
+							mutablePos.set(maxRadX * Math.cos(angleTheta), targetY, maxRadZ * Math.sin(angleTheta));
+							
+							BlockPos targetHollowPos = mutablePos.immutable();
+							Block targetHollowBlock = targetWorld.getBlockState(targetHollowPos).getBlock();
+							
+							if (blacklistedBlocks != null && blacklistedBlocks.contains(targetHollowBlock)) break;
+							
+							validPositions.add(targetHollowPos);
+						}
+					}
+				} else {
+					for (int angleTheta = 0; angleTheta < 360; angleTheta++) {
+						for (double targetX = minRadX; targetX < maxRadX; targetX++) {
+							for (double targetZ = minRadZ; targetZ < maxRadZ; targetZ++) {
+								for (double targetY = minRadY; targetY < maxRadY; targetY++) {
+									mutablePos.set(targetX * Math.cos(angleTheta), targetY, targetZ * Math.sin(angleTheta));
+									
+									BlockPos targetPos = mutablePos.immutable();
+									Block targetBlock = targetWorld.getBlockState(targetPos).getBlock();
+									
+									if (blacklistedBlocks != null && blacklistedBlocks.contains(targetBlock)) break;
+									
+									validPositions.add(targetPos);
+								}
+							}
+						}
+					}
+				}
+				return validPositions;
+			}
+			
+			@Override
+			public ObjectArrayList<ObjectArrayList<BlockPos>> getRingPositions(BlockPos originPos, ObjectArrayList<BlockPos> originalShapePositions) {
+				ObjectArrayList<ObjectArrayList<BlockPos>> ringPositions = new ObjectArrayList<ObjectArrayList<BlockPos>>();
+				
+				if (!originalShapePositions.isEmpty()) {
+					for (BlockPos targetRingPos : originalShapePositions) {
+						ObjectArrayList<BlockPos> validRingPositions = new ObjectArrayList<BlockPos>(1);
+						
+						if (!validRingPositions.contains(targetRingPos)) validRingPositions.add(targetRingPos);
+						
+						final double firstRingPosDistToOriginSqr = validRingPositions.get(0).distSqr(originPos);
+						
+						ObjectArrayList<BlockPos> queuedRingPositions = originalShapePositions.stream()
+								.filter((curTargetPos) -> curTargetPos.distSqr(originPos) == firstRingPosDistToOriginSqr)
+								.collect(Collectors.toCollection(ObjectArrayList::new));
+						
+						validRingPositions.addAll(queuedRingPositions);
+						
+						if (!ringPositions.contains(validRingPositions)) ringPositions.add(validRingPositions);
+					}
+				}
+				Comparator<ObjectArrayList<BlockPos>> ringPosComparator = (ringListPrev, ringListPost) -> IntStream.range(0, Math.min(ringListPrev.size(), ringListPost.size()))
+						.map(ringPosIndex -> Integer.compare((int) ringListPrev.get(ringPosIndex).distSqr(originPos), (int) ringListPost.get(ringPosIndex).distSqr(originPos)))
+						.filter((resultingDistValue) -> resultingDistValue != 0)
+						.findFirst()
+						.orElse(0);
+				
+				ringPositions.sort(ringPosComparator);
+				
+				return ringPositions;
+			}
+		};
+		
+		BlockPatternShape() {
+		}
+		
+		public abstract ObjectArrayList<BlockPos> applyShape(World targetWorld, BlockPos originPos, double radius, double height, boolean shouldFill, boolean includeCenter, @Nullable ObjectArrayList<Block> blacklistedBlocks);
+		public abstract ObjectArrayList<ObjectArrayList<BlockPos>> getRingPositions(BlockPos originPos, ObjectArrayList<BlockPos> originalShapePositions);
 	}
 }

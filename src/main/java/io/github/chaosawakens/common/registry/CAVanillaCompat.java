@@ -76,6 +76,7 @@ public class CAVanillaCompat {
 		registerCompostable(0.15F, CAItems.CORN_SEEDS.get());
 		registerCompostable(0.15F, CAItems.TOMATO_SEEDS.get());
 		registerCompostable(0.15F, CAItems.RADISH_SEEDS.get());
+		registerCompostable(0.15F, CAItems.QUINOA_SEEDS.get());
 		registerCompostable(0.15F, CAItems.LETTUCE_SEEDS.get());
 		registerCompostable(0.15F, CAItems.STRAWBERRY_SEEDS.get());
 		registerCompostable(0.45F, CABlocks.DENSE_GRASS.get());
@@ -95,6 +96,7 @@ public class CAVanillaCompat {
 		registerCompostable(0.5F, CAItems.TOMATO.get());
 		registerCompostable(0.35F, CAItems.STRAWBERRY.get());
 		registerCompostable(0.4F, CAItems.RADISH.get());
+		registerCompostable(0.45F, CAItems.QUINOA.get());
 		registerCompostable(0.5F, CAItems.LETTUCE.get());
 		registerCompostable(0.5F, CAItems.CHEESE.get());
 		registerCompostable(0.25F, CAItems.CHERRIES.get());

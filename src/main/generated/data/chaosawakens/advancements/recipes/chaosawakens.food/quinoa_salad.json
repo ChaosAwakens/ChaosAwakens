@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:quinoa_salad"
+    ]
+  },
+  "criteria": {
+    "has_quinoa": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:quinoa"
+          }
+        ]
+      }
+    },
+    "has_radish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:radish"
+          }
+        ]
+      }
+    },
+    "has_lettuce": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:lettuce"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:quinoa_salad"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_quinoa",
+      "has_radish",
+      "has_lettuce",
+      "has_the_recipe"
+    ]
+  ]
+}

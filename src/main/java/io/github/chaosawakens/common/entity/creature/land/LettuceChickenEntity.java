@@ -256,6 +256,11 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	}
 
 	@Override
+	public int getMaxHeadXRot() {
+		return isSitting() ? 0 : super.getMaxHeadXRot();
+	}
+	
+	@Override
 	protected int calculateFallDamage(float pDistance, float pDamageMultiplier) {
 		return 0;
 	}

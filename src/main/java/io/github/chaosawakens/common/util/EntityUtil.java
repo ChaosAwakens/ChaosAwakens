@@ -53,7 +53,7 @@ public final class EntityUtil {
 	 * @return a list of entities within the valid specified distance inside the grown bounding box
 	 */
 	public static <E extends Entity> List<E> getEntitiesAround(LivingEntity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
-		Predicate<Entity> distPredicate = living -> living != user && (user.getTeam() != null && living.getTeam() != null ? !living.getTeam().equals(user.getTeam()) : living.isAlive()) && living.getClass() != user.getClass() && user.distanceTo(living) <= radius + living.getBbWidth() / 2F;
+		Predicate<E> distPredicate = living -> living != user && (user.getTeam() != null && living.getTeam() != null ? !living.getTeam().equals(user.getTeam()) : living.isAlive()) && living.getClass() != user.getClass() && user.distanceTo(living) <= radius + living.getBbWidth() / 2F;
 		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), distPredicate);
 	}
 
@@ -262,21 +262,21 @@ public final class EntityUtil {
 			Vector3d eyeVec = owner.getEyePosition(1.0F);
 			Vector3d targetVec = eyeVec.add(viewVec.x * reach, viewVec.y * reach, viewVec.z * reach);
 
-			AxisAlignedBB bb = owner.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
-			EntityRayTraceResult result = ProjectileHelper.getEntityHitResult(curWorld, owner, eyeVec, targetVec, bb, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
+			AxisAlignedBB reachBB = owner.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
+			EntityRayTraceResult reachedEntityHitResult = ProjectileHelper.getEntityHitResult(curWorld, owner, eyeVec, targetVec, reachBB, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 
-			if (result == null || !(result.getEntity() instanceof LivingEntity) || result.getType() != RayTraceResult.Type.ENTITY) return false;
+			if (reachedEntityHitResult == null || !(reachedEntityHitResult.getEntity() instanceof LivingEntity) || reachedEntityHitResult.getType() != RayTraceResult.Type.ENTITY) return false;
 
-			LivingEntity target = (LivingEntity) result.getEntity();
+			LivingEntity target = (LivingEntity) reachedEntityHitResult.getEntity();
 			double distanceToTargetSqr = owner.distanceToSqr(target);
-			boolean resultBool = (result != null ? target : null) != null && result.getType() == RayTraceResult.Type.ENTITY;
+			boolean isValidTarget = (reachedEntityHitResult != null ? target : null) != null && reachedEntityHitResult.getType() == RayTraceResult.Type.ENTITY;
 
-			if (resultBool) {
+			if (isValidTarget) {
 				if (reachSqr >= distanceToTargetSqr) {
 					target.hurt(DamageSource.mobAttack(owner), attackDamage);
 					heldStack.getItem().hurtEnemy(heldStack, target, owner);
 				}
-			}		
+			}
 		}
 		return true;
 	}
@@ -307,12 +307,32 @@ public final class EntityUtil {
 	
 	/**
 	 * Checks if the {@link UUID} of an entity or player is equal to the specified {@link UUID}.
-	 * 
 	 * @param entityToCheck entity to check UUID of
 	 * @param uuidToCheck   UUID to test entity's UUID against
 	 * @return true if entity's UUID is equal to the specified UUID, else returns false
 	 */
 	public static boolean isUserOrEntityUUIDEqualTo(Entity entityToCheck, UUID uuidToCheck) {
 		return entityToCheck.getUUID().equals(uuidToCheck);
+	}
+	
+	/**
+	 * Attracts {@link LivingEntity}s to a specified {@link LivingEntity}.
+	 * @param targetEntity The central {@link LivingEntity} to attract other entities to
+	 * @param radius The horizontal radius of the attraction effect
+	 * @param height The vertical radius of the attraction effect
+	 * @param attractionSpeed The speed at which entities should attract to the central {@link LivingEntity} (clamped between {@code 0.01 - 1.0D})
+	 */
+	public static void attractEntities(LivingEntity targetEntity, double radius, double height, double attractionSpeed) {
+		if (targetEntity == null || !targetEntity.isAlive() || targetEntity.noPhysics) return;
+		
+		List<LivingEntity> potentialAffectedTargets = getAllEntitiesAround(targetEntity, radius, height, radius, radius + height);
+		
+		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
+			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
+			
+			double relAngleRadians = MathUtil.getAngleBetweenEntities(targetEntity, potentialAffectedTarget);
+			double clampedAttractionSpeed = MathHelper.clamp(attractionSpeed, 0.01D, 1.0D);
+			potentialAffectedTarget.setDeltaMovement(clampedAttractionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedAttractionSpeed * Math.sin(relAngleRadians));
+		}
 	}
 }

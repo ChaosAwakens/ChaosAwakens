@@ -32,7 +32,7 @@ import snownee.jade.JadePlugin;
 public class CAJadePlugin implements IWailaPlugin {
 	private static final Cache<Block, ITextComponent> CACHE = CacheBuilder.newBuilder().build();
 	
-	public static CAJadePlugin registerJadeCompat() {
+	public static CAJadePlugin register() {
 		return new CAJadePlugin();
 	}
 

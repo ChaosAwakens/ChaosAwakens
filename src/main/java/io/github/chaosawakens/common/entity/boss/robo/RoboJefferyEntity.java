@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.boss.robo;
 
+import io.github.chaosawakens.api.animation.ChainedAnimationBuilder;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
@@ -39,7 +40,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<WrappedAnimationController<RoboJefferyEntity>> roboJefferyControllers = new ObjectArrayList<WrappedAnimationController<RoboJefferyEntity>>(1);
+	private final ObjectArrayList<WrappedAnimationController<RoboJefferyEntity>> roboJefferyControllers = new ObjectArrayList<WrappedAnimationController<RoboJefferyEntity>>(3);
 	private final ServerBossInfo bossInfo = (ServerBossInfo) new ServerBossInfo(getType().getDescription().copy().append(getDisplayName().copy().withStyle(TextFormatting.DARK_PURPLE).withStyle(TextFormatting.BOLD)), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS).setDarkenScreen(true).setCreateWorldFog(true);
 	private static final DataParameter<Boolean> HAS_CORE = EntityDataManager.defineId(RoboJefferyEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<RoboJefferyEntity> mainController = createMainMappedController("robojefferymaincontroller");
@@ -53,6 +54,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final ChainedAnimationBuilder leapChainAnim = new ChainedAnimationBuilder(this, "Leap Attack: Leap", "Leap Attack: Midair", "Leap Attack: Land").setWrappedController(attackController).setLoopRepsFor("Leap Attack: Midair", 100);
 	public static final byte PUNCH_ATTACK_ID = 1;
 	public static final byte SMASH_ATTACK_ID = 2;
 	public static final byte LEAP_ATTACK_ID = 3;
@@ -124,6 +126,17 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	public int animationInterval() {
 		return 2;
+	}
+	
+	@Override
+	protected void tickDeath() {
+		super.tickDeath();
+		
+		if (isPlayingAnimation(deathAnim)) {
+			if (deathAnim.getWrappedAnimProgress() >= 75) {
+				EntityUtil.attractEntities(this, 30, 30, 30);
+			}
+		}
 	}
 
 	@Override

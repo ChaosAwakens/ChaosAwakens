@@ -39,6 +39,7 @@ public class CAConfigManager {
 	
 	protected static void registerConfigs() {
 		registerConfigFolder();
+		
 		registerClientConfig();
 		registerCommonConfig();
 		registerServerConfig();

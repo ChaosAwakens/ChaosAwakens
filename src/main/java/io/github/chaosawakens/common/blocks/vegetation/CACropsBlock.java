@@ -8,36 +8,74 @@ import net.minecraft.block.CropsBlock;
 import net.minecraft.item.Item;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-public class CACropsBlock extends CropsBlock {
-	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+public abstract class CACropsBlock extends CropsBlock {
 	private final Supplier<? extends Item> seedItem;
-	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
+	private final int maxAge;
+	private final VoxelShape[] shapeByAge;
+	private static final VoxelShape[] STANDARD_SHAPE_BY_AGE = new VoxelShape[] {
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)
 	};
 
-	public CACropsBlock(Supplier<Item> seedItem, Properties properties) {
+	public CACropsBlock(Supplier<Item> seedItem, VoxelShape[] shapeByAge, int maxAge, Properties properties) {
 		super(properties);
 		this.seedItem = seedItem;
+		this.shapeByAge = shapeByAge;
+		this.maxAge = maxAge;
+	}
+
+	public CACropsBlock(Supplier<Item> seedItem, VoxelShape[] shapeByAge, Properties properties) {
+		this(seedItem, shapeByAge, 3, properties);
+	}
+
+	public CACropsBlock(Supplier<Item> seedItem, int maxAge, Properties properties) {
+		this(seedItem, STANDARD_SHAPE_BY_AGE, maxAge, properties);
+	}
+
+	public CACropsBlock(Supplier<Item> seedItem, Properties properties) {
+		this(seedItem, 3, properties);
 	}
 
 	@Override
 	public IntegerProperty getAgeProperty() {
-		return AGE;
+		return getCustomAgeProperty();
 	}
+	
+	public abstract IntegerProperty getCustomAgeProperty();
 
 	@Override
 	public int getMaxAge() {
-		return 3;
+		return maxAge;
 	}
 
 	@Override
@@ -47,11 +85,11 @@ public class CACropsBlock extends CropsBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateBuilder) {
-		stateBuilder.add(AGE);
+		stateBuilder.add(getCustomAgeProperty());
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext selectionContext) {
-		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+		return shapeByAge[state.getValue(getAgeProperty())];
 	}
 }

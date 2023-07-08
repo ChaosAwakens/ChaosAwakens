@@ -27,8 +27,8 @@ public class CABoatEntity extends BoatEntity {
 	
 	public CABoatEntity(World world, double x, double y, double z) {
 		this(CAEntityTypes.CA_BOAT.get(), world);
-		this.setPos(x, y, z);
-		this.setDeltaMovement(Vector3d.ZERO);
+		setPos(x, y, z);
+		setDeltaMovement(Vector3d.ZERO);
 		this.xo = x;
 		this.yo = y;
 		this.zo = z;

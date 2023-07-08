@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosawakens:quinoa"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:quinoa_seeds",
+    "count": 2
+  }
+}

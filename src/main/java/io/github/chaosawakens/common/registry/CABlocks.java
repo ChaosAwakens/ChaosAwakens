@@ -90,9 +90,11 @@ import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effects;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -534,9 +536,31 @@ public class CABlocks {
 	public static final RegistryObject<CropTopPlantBlock> TOMATO_TOP_BLOCK = registerBlock("tomato_top_block", () -> new CropTopPlantBlock(Direction.UP, Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D), 0.5, () -> CABlocks.TOMATO_BODY_BLOCK.get(), Properties.copy(Blocks.SUGAR_CANE).randomTicks()).maxHeight(2), CAItemGroups.FOOD, false);
 	public static final RegistryObject<CropBodyPlantBlock> TOMATO_BODY_BLOCK = registerBlock("tomato_body_block", () -> new CropBodyPlantBlock(Direction.UP, Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D), () -> CABlocks.TOMATO_TOP_BLOCK.get(), Properties.copy(Blocks.SUGAR_CANE).randomTicks()), CAItemGroups.FOOD, false);
 	public static final RegistryObject<StrawberryBushBlock> STRAWBERRY_BUSH = registerBlock("strawberry_bush", () -> new StrawberryBushBlock(() -> CAItems.STRAWBERRY_SEEDS.get(), () -> CAItems.STRAWBERRY.get(), Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks()), CAItemGroups.FOOD, false);
-	public static final RegistryObject<CACropsBlock> LETTUCE = registerBlock("lettuce", () -> new CACropsBlock(() -> CAItems.LETTUCE_SEEDS.get(), Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)), CAItemGroups.FOOD, false);
-	public static final RegistryObject<CACropsBlock> RADISH = registerBlock("radish", () -> new CACropsBlock(() -> CAItems.RADISH_SEEDS.get(), Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)), CAItemGroups.FOOD, false);
-
+	public static final RegistryObject<CACropsBlock> LETTUCE = registerBlock("lettuce", () -> new CACropsBlock(() -> CAItems.LETTUCE_SEEDS.get(), Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)) {
+		@Override
+		public IntegerProperty getCustomAgeProperty() {
+			return BlockStateProperties.AGE_3;
+		}
+	}, CAItemGroups.FOOD, false);
+	public static final RegistryObject<CACropsBlock> RADISH = registerBlock("radish", () -> new CACropsBlock(() -> CAItems.RADISH_SEEDS.get(), Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)) {
+		@Override
+		public IntegerProperty getCustomAgeProperty() {
+			return BlockStateProperties.AGE_3;
+		}
+	}, CAItemGroups.FOOD, false);
+	public static final RegistryObject<CACropsBlock> QUINOA = registerBlock("quinoa", () -> new CACropsBlock(() -> CAItems.QUINOA_SEEDS.get(), new VoxelShape[]{
+			Block.box(7.0D, 0.0D, 7.0D, 9.0D, 9.0D, 9.0D),
+			Block.box(7.0D, 0.0D, 8.0D, 10.0D, 12.0D, 10.0D),
+			Block.box(5.0D, 0.0D, 5.0D, 10.0D, 14.0D, 10.0D),
+			Block.box(4.0D, 0.0D, 4.0D, 13.0D, 14.0D, 13.0D),
+			Block.box(3.0D, 0.0D, 3.0D, 14.0D, 14.0D, 14.0D)},
+			4, Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)) {
+		@Override
+		public IntegerProperty getCustomAgeProperty() {
+			return CABlockStateProperties.AGE_4;
+		}
+	}, CAItemGroups.FOOD, false);
+	
 	// FLOWER BLOCKS
 	public static final RegistryObject<RotatedPillarBlock> FLOWER_STEM = registerBlock("flower_stem", () -> new RotatedPillarBlock(Properties.of(CAMaterial.FLOWER_BLOCK).harvestTool(ToolType.AXE).harvestTool(ToolType.HOE).strength(0.3F).sound(SoundType.GRASS).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<Block> NAVY_BLUE_PETAL_BLOCK = registerBlock("navy_blue_petal_block", () -> new Block(Properties.of(CAMaterial.FLOWER_BLOCK, MaterialColor.TERRACOTTA_BLUE).harvestTool(ToolType.AXE).harvestTool(ToolType.HOE).strength(0.2F).sound(SoundType.GRASS).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);

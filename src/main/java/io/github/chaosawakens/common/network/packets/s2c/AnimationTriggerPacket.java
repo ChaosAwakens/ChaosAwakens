@@ -64,8 +64,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 					
 					targetAnimatable.getControllerWrapperByName(controllerName).playAnimation(targetAnim, clearCache);
 					targetAnimatable.playAnimation(targetAnim, clearCache);
-				} else if (target != null)
-					ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
+				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
 			});
 		});
 		

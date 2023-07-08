@@ -66,7 +66,8 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.common.util.TradeUtil;
 import io.github.chaosawakens.common.util.TradeUtil.CABasicTrade;
 import io.github.chaosawakens.common.util.TradeUtil.CAIngredientTrade;
-import io.github.chaosawakens.common.worldgen.BiomeHandlers;
+import io.github.chaosawakens.common.worldgen.BiomeHandlers.GenerationHandler;
+import io.github.chaosawakens.common.worldgen.BiomeHandlers.MobSpawnHandler;
 import io.github.chaosawakens.data.provider.CAAdvancementProvider;
 import io.github.chaosawakens.data.provider.CABlockModelProvider;
 import io.github.chaosawakens.data.provider.CABlockStateProvider;
@@ -83,7 +84,6 @@ import io.github.chaosawakens.data.provider.CATagProvider.CAItemTagProvider;
 import io.github.chaosawakens.manager.CAConfigManager;
 import io.github.chaosawakens.manager.CANetworkManager;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandSource;
@@ -157,17 +157,17 @@ public class CACommonSetupEvents {
 				// TODO Fix this
 				ResourceLocation chunkGeneratorKey = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) codecMethod.invoke(chunkProvider.generator));
 				if (chunkGeneratorKey != null && chunkGeneratorKey.getNamespace().equals("terraforged")) return;
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-				ChaosAwakens.LOGGER.warn("[WORLDGEN]: " + e);
-				e.printStackTrace();
-			} catch (UnableToFindMethodException e) {
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception) {
+				ChaosAwakens.LOGGER.warn("[WORLDGEN]: " + exception);
+				exception.printStackTrace();
+			} catch (UnableToFindMethodException exception) {
 				if (CAConfigManager.MAIN_COMMON.terraforgedCheckMsg.get()) ChaosAwakens.LOGGER.info("[WORLDGEN]: Unable to check if " + serverWorld.dimension().location() + " is using Terraforged's ChunkGenerator due to Terraforged not being present or not accessible," + " if you aren't using Terraforged please ignore this message");
 			}
 
 			if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD)) return;
 
 			Map<Structure<?>, StructureSeparationSettings> testTempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
-			Object2ObjectMap<Structure<?>, StructureSeparationSettings> tempMap = new Object2ObjectArrayMap<>(testTempMap);
+			Object2ObjectArrayMap<Structure<?>, StructureSeparationSettings> tempMap = new Object2ObjectArrayMap<>(testTempMap);
 
 			tempMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.ACACIA_ENT_TREE.get()));
 			tempMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.BIRCH_ENT_TREE.get()));
@@ -185,8 +185,8 @@ public class CACommonSetupEvents {
 
 		@SubscribeEvent(priority = EventPriority.HIGH)
 		public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
-			BiomeHandlers.GenerationHandler.addFeatures(event);
-			BiomeHandlers.MobSpawnHandler.addMobSpawns(event);
+			GenerationHandler.addFeatures(event);
+			MobSpawnHandler.addMobSpawns(event);
 		}
 
 		@SubscribeEvent
@@ -272,8 +272,11 @@ public class CACommonSetupEvents {
 			TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.APPRENTICE,
 					new CABasicTrade(1, CAItems.PEACH.get(), 6, 16, 5),
 					new CABasicTrade(2, CAItems.STRAWBERRY.get(), 6, 12, 5),
+					new CABasicTrade(2, CAItems.QUINOA.get(), 4, 10, 9),
 					new CABasicTrade(1, CAItems.RADISH.get(), 5, 12, 8));
+			
 			TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.JOURNEYMAN,
+					new CABasicTrade(1, CAItems.QUINOA_SALAD.get(), 1, 11, 17),
 					new CABasicTrade(1, CAItems.RADISH_STEW.get(), 1, 12, 15));
 			TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.EXPERT,
 					new CABasicTrade(1, CAItems.GOLDEN_MELON_SLICE.get().asItem(), 4, 12, 15),
@@ -360,10 +363,10 @@ public class CACommonSetupEvents {
 				CAWoodTypes.registerWoodtypes();
 
 				ObjectUtil.loadClass("io.github.chaosawakens.common.registry.CAConfiguredFeatures");
-				CONFIG_FEATURES.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, wrapper.getIdentifier(), wrapper.getFeatureType()));
-				CONFIG_CARVERS.forEach((wrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_CARVER, wrapper.getIdentifier(), wrapper.getCarver()));
+				CONFIG_FEATURES.forEach((cfWrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, cfWrapper.getIdentifier(), cfWrapper.getFeatureType()));
+				CONFIG_CARVERS.forEach((ccWrapper) -> Registry.register(WorldGenRegistries.CONFIGURED_CARVER, ccWrapper.getIdentifier(), ccWrapper.getCarver()));
 			});
-
+			
 			BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_FOREST.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_FOREST);
 			BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_GINKGO_FOREST.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_GINKGO_FOREST);
 			BiomeDictionary.addTypes(RegistryKey.create(Registry.BIOME_REGISTRY, CABiomes.DENSE_MOUNTAINS.getId()), CABiomes.Type.MINING_PARADISE, CABiomes.Type.DENSE_MOUNTAINS);
@@ -457,8 +460,8 @@ public class CACommonSetupEvents {
 
 					if (mapping.key.getPath().contains("crystal_energy")) {
 						String newName = mapping.key.getPath().replace("crystal_energy", "energized_kyanite");
-						ResourceLocation remappCrystalEnergy = ChaosAwakens.prefix(newName);
-						mapping.remap(ForgeRegistries.BLOCKS.getValue(remappCrystalEnergy));
+						ResourceLocation remappedCrystalEnergy = ChaosAwakens.prefix(newName);
+						mapping.remap(ForgeRegistries.BLOCKS.getValue(remappedCrystalEnergy));
 					}
 				}
 			}
@@ -518,11 +521,14 @@ public class CACommonSetupEvents {
 
 	// Took the main functionality of AttributeFix and clamped it into a singular method --Meme Man
 	private static void modifyAttributeValues() {
-		Map<RangedAttribute, ?> attributes = new HashMap<>();
+		ObjectArrayList<Attribute> registeredAttributes = ForgeRegistries.ATTRIBUTES.getEntries().stream()
+				.map(Entry::getValue)
+				.filter((targetAttribute) -> targetAttribute != null && targetAttribute instanceof RangedAttribute)
+				.collect(Collectors.toCollection(ObjectArrayList::new));
 
-		for (final Entry<RangedAttribute, ?> attributeEntry : attributes.entrySet()) {
-			final RangedAttribute attribute = attributeEntry.getKey();
-			attribute.maxValue = Math.max(attribute.maxValue, Double.MAX_VALUE);
+		for (Attribute targetAttribute : registeredAttributes) {
+			RangedAttribute targetRangedAttribute = (RangedAttribute) targetAttribute;
+			targetRangedAttribute.maxValue = Math.max(targetRangedAttribute.maxValue, Double.MAX_VALUE);
 		}
 	}
 

@@ -4,9 +4,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
-import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
 import io.github.chaosawakens.common.registry.CAEffects;
@@ -26,6 +27,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -49,30 +51,39 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	@Override
-	abstract public AnimationFactory getFactory();
+	public abstract AnimationFactory getFactory();
 
 	@Override
-	abstract public WrappedAnimationController<? extends AnimatableMonsterEntity> getMainWrappedController();
+	public abstract WrappedAnimationController<? extends IAnimatableEntity> getMainWrappedController();
 	
 	@Override
-	abstract public <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
+	public abstract <E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
 
 	@Override
-	abstract public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
+	public abstract <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
 
 	@Override
-	abstract public int animationInterval();
+	public abstract int animationInterval();
 
-	abstract public void manageAttack(LivingEntity target);
-
-	@Nullable
-	abstract public SingletonAnimationBuilder getIdleAnim();
+	public abstract void manageAttack(LivingEntity target);
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getWalkAnim();
+	@Override
+	public abstract IAnimationBuilder getIdleAnim();
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getDeathAnim();
+	@Override
+	public abstract IAnimationBuilder getWalkAnim();
+	
+	@Nullable
+	@Override
+	public IAnimationBuilder getSwimAnim() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public abstract IAnimationBuilder getDeathAnim();
 	
 	@Override
 	protected void defineSynchedData() {
@@ -103,9 +114,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	protected void repelEntities(double x, double y, double z, float radius) {
 		List<LivingEntity> validTargets = EntityUtil.getEntitiesAround(this, LivingEntity.class, x, y, z, radius);
+		
 		for (Entity target : validTargets) {
 			if (target.canBeCollidedWith() && !target.noPhysics) {
-				double angle = (MathUtil.getAngleBetweenEntities(this, target) + 90) * Math.PI / 180;
+				double angle = MathUtil.getAngleBetweenEntities(this, target);
 				target.setDeltaMovement(-0.1 * Math.cos(angle), target.getDeltaMovement().y, -0.1 * Math.sin(angle));
 			}
 		}
@@ -139,8 +151,24 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	protected void tickDeath() {
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
+				
 		if (getDeathAnim() != null) {
 			playAnimation(getDeathAnim(), false);
+			
+			if (level.isClientSide) {
+				ChaosAwakens.debug("CLIENT START", "---------------------------------------------------------------");
+				ChaosAwakens.debug("DEATH ANIM PROG", getDeathAnim().getWrappedAnimProgress() + "/" + getDeathAnim().getWrappedAnimLength());
+				ChaosAwakens.debug("DEATH ANIM FINISHED", getDeathAnim().hasAnimationFinished());
+				ChaosAwakens.debug("CLIENT END", "-----------------------------------------------------------------");
+			}
+			
+			if (!level.isClientSide) {
+				ChaosAwakens.debug("SERVER START", "---------------------------------------------------------------");
+				ChaosAwakens.debug("DEATH ANIM PROG", getDeathAnim().getWrappedAnimProgress() + "/" + getDeathAnim().getWrappedAnimLength());
+				ChaosAwakens.debug("DEATH ANIM FINISHED", getDeathAnim().hasAnimationFinished());
+				ChaosAwakens.debug("SERVER END", "-----------------------------------------------------------------");
+			}
+			
 			if (getDeathAnim().hasAnimationFinished()) {
 				remove();
 				
@@ -154,6 +182,13 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		} else {
 			super.tickDeath();
 		}
+	}
+	
+	@Override
+	public void die(DamageSource pCause) {
+		if (getDeathAnim() != null) {
+			if (getDeathAnim().hasAnimationFinished()) super.die(pCause);
+		} else super.die(pCause);
 	}
 
 	@Override

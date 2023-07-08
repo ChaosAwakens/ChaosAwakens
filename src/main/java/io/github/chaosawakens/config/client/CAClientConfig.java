@@ -32,10 +32,7 @@ public class CAClientConfig {
 	public CAClientConfig(ForgeConfigSpec.Builder builder) {
 		builder.push("ToolTips");
 		enableTooltips = builder.define("Enable tooltips", true);
-		toolTipColor = builder.comment("(ToolTip color applies to both default tooltip description text and when shift-clicking) \n"
-				+ "Colors include: \n"
-				+ "AQUA, BLACK, DARK_AQUA, DARK_BLUE, DARK_GRAY, DARK_GREEN, DARK_PURPLE, DARK_RED, \n"
-				+ "GREEN, GOLD, LIGHT_PURPLE, RED, WHITE, YELLOW")
+		toolTipColor = builder.comment("(ToolTip color applies to both default tooltip description text and when shift-clicking).")
 				.defineEnum("ToolTip Color", TextFormatting.AQUA);
 		enableDamageTooltips = builder.define("Enable damage tooltips", true);
 		
@@ -54,15 +51,16 @@ public class CAClientConfig {
 		builder.push("Crystal Dimension");
 		enableCrystalDimensionFog = builder.define("Enable fog in the Crystal Dimension", true);
 		enableCrystalDimensionParticles = builder.define("Enable particles in the Crystal Dimension", true);
-		crystalDimensionFogDensity = builder.defineInRange("Crystal Dimension fog density", 0.05D, 0, 1.0D);
+		crystalDimensionFogDensity = builder.defineInRange("Crystal Dimension fog density", 0.03D, 0, 1.0D);
 		crystalDimensionParticleDensity = builder.defineInRange("Crystal Dimension particle density", 2, 0, 100);
 		builder.pop(2);
 		
 		builder.push("Functionality");
 		
+		builder.push("VFX Effects");
 		builder.push("Camera");
 		enableCameraShake = builder.define("Enable camera shake", true);
-		builder.pop();
+		builder.pop(2);
 		
 		builder.push("Armor");
 		builder.push("Lava Eel Armor");

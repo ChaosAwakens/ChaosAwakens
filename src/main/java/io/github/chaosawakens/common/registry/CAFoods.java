@@ -23,6 +23,7 @@ public class CAFoods {
 	public static final Food FOOD_LETTUCE = new Food.Builder().nutrition(3).saturationMod(0.45F).build();
 	public static final Food FOOD_PEACH = new Food.Builder().nutrition(3).saturationMod(0.55F).build();
 	public static final Food FOOD_RADISH = new Food.Builder().nutrition(2).saturationMod(0.45F).build();
+	public static final Food FOOD_QUINOA = new Food.Builder().nutrition(2).saturationMod(0.6F).build();
 	public static final Food FOOD_STRAWBERRY = new Food.Builder().nutrition(2).saturationMod(0.65F).build();
 	public static final Food FOOD_TOMATO = new Food.Builder().nutrition(2).saturationMod(0.55F).build();
 
@@ -38,6 +39,7 @@ public class CAFoods {
 	public static final Food FOOD_GARDEN_SALAD = new Food.Builder().nutrition(5).saturationMod(0.95F).build();
 	public static final Food FOOD_SEAFOOD_PATTY = new Food.Builder().nutrition(8).saturationMod(0.9F).build();
 	public static final Food FOOD_RADISH_STEW = new Food.Builder().nutrition(5).saturationMod(0.75F).build();
+	public static final Food FOOD_QUINOA_SALAD = new Food.Builder().nutrition(7).saturationMod(0.9F).build();
 
 	// POPCORN
 	public static final Food FOOD_POPCORN = new Food.Builder().nutrition(2).saturationMod(0.2F).build();

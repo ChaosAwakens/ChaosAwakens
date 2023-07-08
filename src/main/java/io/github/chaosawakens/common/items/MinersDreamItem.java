@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.BlockState;
@@ -31,29 +30,28 @@ public class MinersDreamItem extends Item {
 
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
-		Direction direction = context.getHorizontalDirection();
-		World worldIn = context.getLevel();
+		Direction targetDirection = context.getHorizontalDirection();
+		World curWorld = context.getLevel();
 
-		if (worldIn.isClientSide) return ActionResultType.FAIL;
-		if (direction == Direction.UP || direction == Direction.DOWN) return ActionResultType.FAIL;
+		if (curWorld.isClientSide) return ActionResultType.FAIL;
+		if (targetDirection == Direction.UP || targetDirection == Direction.DOWN) return ActionResultType.FAIL;
 
 		BlockPos breakPos = context.getClickedPos();
 		int targetY = breakPos.getY() % 8;
-		PlayerEntity playerIn = context.getPlayer();
-		ChaosAwakens.LOGGER.debug("[AA]: " + targetY);
-		Vector3i facing = direction.getNormal();
+		PlayerEntity curPlayer = context.getPlayer();
+		Vector3i targetFacingDirection = targetDirection.getNormal();
 
-		playerIn.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
-		worldIn.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F,
+		curPlayer.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
+		curWorld.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F,
 				0.25F, 0.25F);
 
 		for (int i = 0; i < HOLE_LENGTH; i++) {
 			for (int j = 0; j < HOLE_HEIGHT; j++) {
 				for (int k = -HOLE_WIDTH; k <= HOLE_WIDTH; k++) {
-					int lengthDelta = i * facing.getX() + k * facing.getZ();
-					int widthDelta = i * facing.getZ() + k * facing.getX();
+					int lengthDelta = i * targetFacingDirection.getX() + k * targetFacingDirection.getZ();
+					int widthDelta = i * targetFacingDirection.getZ() + k * targetFacingDirection.getX();
 					BlockPos targetPos = breakPos.offset(lengthDelta, -targetY + j, widthDelta);
-					BlockState targetBlockState = worldIn.getBlockState(targetPos);
+					BlockState targetBlockState = curWorld.getBlockState(targetPos);
 
 					if (targetBlockState.is(CATags.Blocks.MINERS_DREAM_MINEABLE)
 							|| targetBlockState.getBlock().getRegistryName().getNamespace().contains("extcaves")
@@ -75,7 +73,7 @@ public class MinersDreamItem extends Item {
 							|| targetBlockState.getFluidState().getType().equals(Fluids.WATER)
 							|| targetBlockState.getFluidState().getType().equals(Fluids.FLOWING_WATER)
 							|| targetBlockState.getBlock().getRegistryName().toString().contains("rocky_dirt")) {
-						this.placeWoodPillars(worldIn, targetPos, i, j, k);
+						this.placeWoodPillars(curWorld, targetPos, i, j, k);
 					}
 				}
 			}

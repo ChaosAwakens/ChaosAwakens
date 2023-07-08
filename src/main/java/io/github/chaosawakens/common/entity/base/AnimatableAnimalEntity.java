@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.entity.base;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
-import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEffects;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -16,6 +16,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -48,13 +49,21 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	public abstract <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
 	
 	@Nullable
-	abstract public SingletonAnimationBuilder getIdleAnim();
+	@Override
+	public abstract IAnimationBuilder getIdleAnim();
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getWalkAnim();
+	@Override
+	public abstract IAnimationBuilder getWalkAnim();
+	
+	@Override
+	public IAnimationBuilder getSwimAnim() {
+		return null;
+	}
 
 	@Nullable
-	abstract public SingletonAnimationBuilder getDeathAnim();
+	@Override
+	public abstract IAnimationBuilder getDeathAnim();
 	
 	@Override
 	protected void defineSynchedData() {
@@ -116,6 +125,13 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 		} else {
 			super.tickDeath();
 		}
+	}
+	
+	@Override
+	public void die(DamageSource pCause) {
+		if (getDeathAnim() != null) {
+			if (getDeathAnim().hasAnimationFinished()) super.die(pCause);
+		} else super.die(pCause);
 	}
 	
 	@Override

@@ -13,9 +13,90 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * around an {@link AnimationBuilder} instance and pruning its list down to the first animation (the one passed in here).
  * <br> </br>
  * This class holds both client and server side data for its animation. Standard metadata such as Geckolib's animation
- * tick, the animation state, and animation loop type are <b>ONLY</b> present on the client. Other metadata unique to
- * CA such as a server-side animation progress (tick) field, {@link ExpandedAnimationState}, animation length (Geckolib), and animation name are present
+ * tick, the animation state, and animation loop type is <b>ONLY</b> present on the client. Other metadata unique to
+ * CA such as a server-side animation progress (tick) field, {@link ExpandedAnimationState}, animation length (Geckolib), and animation name is present
  * on the server (sometimes on the client, depends on the data).
+ * <br> </br>
+ * 
+ * 
+ * <table> <tbody>
+ * <caption><i>The following table represents which animation data/metadata is present on which side. All unattached data is effectively 
+ * synced about 99% of the time anyway, so the fact that data is unattached (i.e. not actively synced between sides) doesn't necessarily 
+ * mean that it's unsafe to use.</i></caption>
+ * <thead>
+ * <tr>
+ *   <th scope="col">Data Type</th>
+ *   <th scope="col">Client</th>
+ *   <th scope="col">Server</th>
+ *   <th scope="col">Attached</th>
+ * </tr>
+ * </thead>
+ * 
+ * <tr>
+ * 	 <td>Animation Progress (Chaos Awakens)</td>
+ * 	 <td>Present</td>
+ * 	 <td>Present</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+ * </tr>
+ * 
+ * <tr>
+ * 	 <td>Animation Progress (Geckolib)</td>
+ * 	 <td>Present</td>
+ * 	 <td>Absent</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+ * </tr>
+ * 
+ * <tr>
+ * 	 <td>Animation Length (Geckolib)</td>
+ * 	 <td>Present</td>
+ * 	 <td>Present</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+ * </tr>
+ * 
+ * <tr>
+ * 	 <td>Animation Name (Chaos Awakens)</td>
+ * 	 <td>Present</td>
+ * 	 <td>Present</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+ * </tr>
+ * 
+ * <tr>
+ * 	 <td>Animation Name (Geckolib)</td>
+ * 	 <td>Present</td>
+ * 	 <td>Present</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+ * </tr>
+ * 
+ * <tr>
+ * 	 <td>Animation State (Chaos Awakens)</td>
+ * 	 <td>Present</td>
+ * 	 <td>Present</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+ * </tr>
+ * 
+ * <tr>
+ * 	 <td>Animation State (Geckolib)</td>
+ * 	 <td>Present</td>
+ * 	 <td>Absent</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+ * </tr>
+ * 
+ * <tr>
+ *   <td>Animation Loop Type (Geckolib)</td>
+ *   <td>Present</td>
+ *   <td>Present</td>
+ *   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+ * </tr>
+ * 
+ * <tr>
+ *   <td>Animation Model (Geckolib)</td>
+ *   <td>Present</td>
+ *   <td>Absent</td>
+ *   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+ * </tr>
+ * </tbody></table>
+ * 
+ * 
  * <br> </br>
  * It's advised that animation handling is done solely through {@link IAnimatableEntity} methods, as they handle any
  * necessary siding (note that this does not mean client data will be present on the server and vice versa). The server
@@ -36,7 +117,6 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	private final AnimationBuilder animBuilder;
 	private final String animName;
 	private ILoopType loopType = EDefaultLoopTypes.PLAY_ONCE;
-	private ExpandedAnimationState animState;
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName) {
 		this.owner = owner;
@@ -44,7 +124,6 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
-		this.animState = targetController.getAnimationState();
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, ILoopType loopType) {
@@ -54,7 +133,6 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.loopType = loopType;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName, loopType);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
-		this.animState = targetController.getAnimationState();
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, int loopReps) {
@@ -63,9 +141,9 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addRepeatingAnimation(animName, loopReps);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
-		this.animState = targetController.getAnimationState();
 	}
 
+	@Override
 	public SingletonAnimationBuilder setWrappedController(WrappedAnimationController<? extends IAnimatableEntity> targetWrappedController) {
 		this.targetController = targetWrappedController;
 		return this;
@@ -80,6 +158,10 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public IAnimatableEntity getOwner() {
 		return owner;
 	}
+	
+	public void setLoopType(ILoopType loopType) {
+		this.loopType = loopType;
+	}
 
 	@Override
 	public EDefaultLoopTypes getLoopType() {
@@ -88,17 +170,14 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public boolean isPlaying() {
-		return ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController) && getWrappedController().getAnimationProgress() < getWrappedAnimLength() && owner.isPlayingAnimation(this, targetController);
+		return ObjectUtil.performNullityChecks(false, animBuilder, targetController) && getWrappedController().getAnimationProgressTicks() < getWrappedAnimLength() && owner.isPlayingAnimation(this, targetController);
 	}
 
 	@Override
 	public boolean hasAnimationFinished() {
-		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return false;
-		boolean wasPlaying = false;
+		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return false;
 		
-		if (isPlaying()) wasPlaying = true;
-		
-		return wasPlaying ? targetController.isAnimationFinished(this) || (getWrappedController().getAnimationProgress() >= getWrappedAnimLength() && (targetController.getAnimationState() == ExpandedAnimationState.RUNNING || targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING)) : false;
+		return targetController.isAnimationFinished(this) || (targetController.getAnimationProgressTicks() >= getWrappedAnimLength() && (targetController.getAnimationState() == ExpandedAnimationState.RUNNING || targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING));
 	}
 
 	@Override
@@ -106,9 +185,14 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		return owner.getModel().getAnimation(animName, owner);
 	}
 	
-	public ExpandedAnimationState getAnimState() {
-		this.animState = targetController.getAnimationState();
-		return animState;
+	@Override
+	public String getAnimationName() {
+		return animName;
+	}
+	
+	@Override
+	public ExpandedAnimationState getAnimationState() {
+		return targetController.getAnimationState();
 	}
 
 	@Override
@@ -118,11 +202,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public void playAnimation(boolean forceAnim) {
-		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return;
+		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 
 		if (forceAnim) targetController.getWrappedController().clearAnimationCache();
-		targetController.getWrappedController().setAnimation(getBuilder());
+		targetController.getWrappedController().setAnimation(animBuilder);
 	}
 
 	/**
@@ -137,13 +221,14 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public void stopAnimation() {
-		if (!ObjectUtil.performNullityChecks(false, animBuilder, getAnimation(), targetController)) return;
+		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
+		
 		targetController.getWrappedController().setAnimation(null);
 	}
 
 	@Override
 	public double getWrappedAnimProgress() {
-		return getWrappedController().getAnimationProgress();
+		return getWrappedController().getAnimationProgressTicks();
 	}
 
 	@Override

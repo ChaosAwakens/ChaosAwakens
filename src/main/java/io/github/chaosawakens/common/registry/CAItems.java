@@ -99,6 +99,7 @@ public class CAItems {
 	public static final RegistryObject<Item> LETTUCE = ITEMS.register("lettuce", () -> new Item(new Item.Properties().food(CAFoods.FOOD_LETTUCE).tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<Item> PEACH = ITEMS.register("peach", () -> new Item(new Item.Properties().food(CAFoods.FOOD_PEACH).tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<Item> RADISH = ITEMS.register("radish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_RADISH).tab(CAItemGroups.FOOD)));
+	public static final RegistryObject<Item> QUINOA = ITEMS.register("quinoa", () -> new Item(new Item.Properties().food(CAFoods.FOOD_QUINOA).tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () -> new Item(new Item.Properties().food(CAFoods.FOOD_STRAWBERRY).tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_TOMATO).tab(CAItemGroups.FOOD)));
 
@@ -114,6 +115,7 @@ public class CAItems {
 	public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CHEESE).tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<Item> GARDEN_SALAD = ITEMS.register("garden_salad", () -> new SoupItem(new Item.Properties().food(CAFoods.FOOD_GARDEN_SALAD).stacksTo(1).tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<Item> RADISH_STEW = ITEMS.register("radish_stew", () -> new SoupItem(new Item.Properties().food(CAFoods.FOOD_RADISH_STEW).stacksTo(1).tab(CAItemGroups.FOOD)));
+	public static final RegistryObject<Item> QUINOA_SALAD = ITEMS.register("quinoa_salad", () -> new SoupItem(new Item.Properties().food(CAFoods.FOOD_QUINOA_SALAD).stacksTo(1).tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<Item> SEAFOOD_PATTY = ITEMS.register("seafood_patty", () -> new Item(new Item.Properties().food(CAFoods.FOOD_SEAFOOD_PATTY).tab(CAItemGroups.FOOD)));
 
 	// POPCORN
@@ -153,7 +155,8 @@ public class CAItems {
 	public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds", () -> new BlockNamedItem(CABlocks.CORN_TOP_BLOCK.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<BlockNamedItem> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds", () -> new BlockNamedItem(CABlocks.LETTUCE.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
 	public static final RegistryObject<BlockNamedItem> RADISH_SEEDS = ITEMS.register("radish_seeds", () -> new BlockNamedItem(CABlocks.RADISH.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
-
+	public static final RegistryObject<BlockNamedItem> QUINOA_SEEDS = ITEMS.register("quinoa_seeds", () -> new BlockNamedItem(CABlocks.QUINOA.get(), new Item.Properties().tab(CAItemGroups.FOOD)));
+	
 	// SALT
 	public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(CAItemGroups.FOOD)));
 
