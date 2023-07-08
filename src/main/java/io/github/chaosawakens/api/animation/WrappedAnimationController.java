@@ -9,6 +9,7 @@ import net.minecraft.util.Util;
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.keyframe.BoneAnimation;
 
 public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected E animatable;
@@ -39,7 +40,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public void tick() { //TODO Sync client somewhat
-		double delta = server == null ? Math.max(Minecraft.getInstance().getFrameTime() - Util.getMillis(), 0.0) / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+		double tickProgressDelta = server == null ? Math.max(Minecraft.getInstance().getFrameTime() - Util.getMillis(), 0.0) / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -47,7 +48,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 				this.transitionProgress = 0;
 				this.animationState = ExpandedAnimationState.RUNNING;
 			} else {
-				this.transitionProgress += delta;
+				this.transitionProgress += tickProgressDelta;
 			}
 			break;
 		case RUNNING:
@@ -60,7 +61,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 					this.animationState = ExpandedAnimationState.FINISHED;
 				}
 			} else {
-				this.animationProgress += delta;
+				this.animationProgress += tickProgressDelta;
 			}
 			break;
 		case STOPPED:
@@ -139,7 +140,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	public static Animation none() {
 		Animation noneAnimation = new Animation();
 		noneAnimation.animationName = "None";
-		noneAnimation.boneAnimations = new ArrayList<>();
+		noneAnimation.boneAnimations = new ArrayList<BoneAnimation>();
 		noneAnimation.animationLength = 0.0;
 		return noneAnimation;
 	}

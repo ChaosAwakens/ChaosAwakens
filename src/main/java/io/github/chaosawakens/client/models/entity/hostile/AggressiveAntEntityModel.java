@@ -29,7 +29,7 @@ public class AggressiveAntEntityModel extends ExtendedAnimatedTickingGeoModel<Ag
 
 	@Override
 	protected boolean shouldApplyHeadRot() {
-		return true;
+		return false;
 	}
 
 	@Override

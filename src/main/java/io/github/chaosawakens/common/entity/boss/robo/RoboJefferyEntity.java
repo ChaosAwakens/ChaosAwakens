@@ -54,7 +54,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
-	private final ChainedAnimationBuilder leapChainAnim = new ChainedAnimationBuilder(this, "Leap Attack: Leap", "Leap Attack: Midair", "Leap Attack: Land").setWrappedController(attackController).setLoopRepsFor("Leap Attack: Midair", 100);
+	private final ChainedAnimationBuilder leapChainAnim = new ChainedAnimationBuilder(this, "Leap Attack: Leap", "Leap Attack: Midair", "Leap Attack: Land").setWrappedController(attackController).setLoopRepsFor("Leap Attack: Midair", 30000).skipAnimationIf("Leap Attack: Midair", (roboJeffery) -> ((RoboJefferyEntity) roboJeffery).isOnGround());
 	public static final byte PUNCH_ATTACK_ID = 1;
 	public static final byte SMASH_ATTACK_ID = 2;
 	public static final byte LEAP_ATTACK_ID = 3;

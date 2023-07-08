@@ -1,5 +1,7 @@
 package io.github.chaosawakens.api.animation;
 
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.common.util.ObjectUtil;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.AnimationProcessor;
@@ -8,7 +10,9 @@ import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public interface ICAGeoModel {
 	
+	@Nullable
 	IBone getBodyBone();
+	@Nullable
 	IBone getHeadBone();
 
 	default void setBabyScaling(AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate, boolean scaleHead) {

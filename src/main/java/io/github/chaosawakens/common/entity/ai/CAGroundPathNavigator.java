@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import io.github.chaosawakens.api.entity.IBlockBreakingMob;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAPathFinder;
 import net.minecraft.block.Block;
 import net.minecraft.entity.MobEntity;
@@ -91,8 +90,6 @@ public class CAGroundPathNavigator extends GroundPathNavigator {
 	}
 	
 	public CAGroundPathNavigator makeBlocksBreakable(Block... blocks) {
-		if (!(mob instanceof IBlockBreakingMob)) return this;
-		shouldWalkThroughBlocks = mob instanceof IBlockBreakingMob ? true : false;
 		this.nodeEvaluator = new CAWalkNodeProcessor().setCanBreakBlocks(true).addBlockToBreakablesList(blocks);
 		return this;
 	}

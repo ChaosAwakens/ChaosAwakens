@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.entity.ai.pathfinding;
 
 import io.github.chaosawakens.api.IUtilityHelper;
-import io.github.chaosawakens.api.entity.IBlockBreakingMob;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.math.MathHelper;
@@ -11,7 +10,7 @@ import net.minecraft.world.World;
 // NV = Not vanilla, where mobs won't just "swim" as vanilla mobs do (which is just hopping around in water). This should be used for the bigger mobs that sink in
 // water and move, such as the Robo Pounder --Meme Man
 // TODO W.I.P
-public class CAGroundWaterNVPathNavigator extends CAStrictGroundPathNavigator implements IBlockBreakingMob {
+public class CAGroundWaterNVPathNavigator extends CAStrictGroundPathNavigator {
 
 	public CAGroundWaterNVPathNavigator(MobEntity entity, World world) {
 		super(entity, world);
