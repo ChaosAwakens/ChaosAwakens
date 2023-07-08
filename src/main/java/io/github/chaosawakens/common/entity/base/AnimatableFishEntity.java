@@ -184,6 +184,7 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	@Override
 	public void tick() {
 		this.prevBodyRot = yBodyRot;
+		tickAnims();
 		super.tick();
 
 		if (!level.isClientSide) setSwimming(!isStuck());

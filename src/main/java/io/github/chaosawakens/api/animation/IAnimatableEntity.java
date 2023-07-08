@@ -119,15 +119,6 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	/**
-	 * Gets the current animation that the entity is playing in its main controller. Can be null.
-	 * @return The main controller's currently playing animation if present, else returns null.
-	 */
-	@Nullable
-	default Animation getCurrentAnimation() {
-		return getMainWrappedController().getCurrentAnimation();
-	}
-
-	/**
 	 * Gets the current animation in a specified {@link AnimationController}. Can be null.
 	 * @param targetController Controller to check current animation from.
 	 * @return The specified controller's currently playing animation if present, else returns null.
@@ -143,7 +134,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	default boolean isPlayingAnimation() {
 		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
-			if (controller.getCurrentAnimation() != null) return true;
+			if (controller.getCurAnim() != null && !controller.getCurAnim().getAnimationName().equalsIgnoreCase("none")) return true;
 		}
 		return false;
 	}
@@ -155,7 +146,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	default boolean isPlayingAnimation(String targetAnimName) {
 		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
-			if (controller.getCurrentAnimation().animationName == targetAnimName) return true;
+			if (controller.getCurAnim().getAnimationName().equalsIgnoreCase(targetAnimName)) return true;
 		}
 		return false;
 	}
@@ -193,7 +184,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 	
 	default boolean isPlayingAnimationInController(WrappedAnimationController<? extends IAnimatableEntity> targetController) {
-		return targetController.getCurrentAnimation() != null;
+		return targetController.getCurAnim() != null && !targetController.getCurAnim().getAnimationName().equalsIgnoreCase("none");
 	}
 
 	default boolean isPlayingAnimationInController(String targetControllerName) {
@@ -209,7 +200,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 	
 	default boolean isPlayingAnimationInWrappedController(String animName, WrappedAnimationController<? extends IAnimatableEntity> targetController) {
-		return targetController.getCurrentAnimation() != null && targetController.getCurrentAnimation().animationName == animName;
+		return targetController.getCurAnim() != null && targetController.getCurAnim().getAnimationName().equalsIgnoreCase(animName);
 	}
 
 	default boolean isPlayingAnimationInWrappedController(String animName, String targetControllerName) {
@@ -236,7 +227,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
 		animation.getWrappedController().playAnimation(animation, clearCache);
 		
-		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimation().animationName, animation.getLoopType(), animation.getWrappedController().getName(), clearCache), (Entity) this);
+		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimationName(), animation.getLoopType(), animation.getWrappedController().getName(), clearCache), (Entity) this);
 	}
 	
 	//TODO Finish implementing this
@@ -244,7 +235,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
 		animation.stopAnimation();
 		
-		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getWrappedController().getName(), animation.getAnimation().animationName), (Entity) this);
+		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getWrappedController().getName(), animation.getAnimationName()), (Entity) this);
 	}
 
 	/**

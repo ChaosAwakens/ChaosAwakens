@@ -16,11 +16,11 @@
 		"RabbitEntityMixin",
 		"SpawnEggItemMixin",
 		"StemBlockMixin",
-		"ServerWorldInfoMixin",
 		"VillagerEntityMixin"
 	],
 	"client": [
-		"RabbitEntityRendererMixin"
+		"RabbitEntityRendererMixin",
+		"ServerWorldInfoMixin"
 	],
 	"server": [
 		

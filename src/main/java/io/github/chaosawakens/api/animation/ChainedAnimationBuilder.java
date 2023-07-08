@@ -15,12 +15,11 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.LivingEntity;
-import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.builder.RawAnimation;
+import software.bernie.geckolib3.core.controller.AnimationController;
 
 /**
  * Wrapper class for {@link SingletonAnimationBuilder} which allows for the instantiation of multiple chained animations. It also provides additional 
@@ -65,7 +64,7 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 		this.animBuilder = new AnimationBuilder();
 
 		for (String animName : animNames) {
-			if (animName == null || animName.isBlank() || animName.isEmpty()) continue;
+			if (animName == null || animName.isEmpty()) continue;
 
 			SingletonAnimationBuilder singletonAnim = new SingletonAnimationBuilder(owner, animName, loopType);
 
@@ -143,7 +142,7 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	 * @return {@code this} (builder method).
 	 */
 	public ChainedAnimationBuilder setLoopRepsFor(SingletonAnimationBuilder targetAnim, int loopReps) {
-		return setLoopRepsFor(targetAnim.getAnimation().animationName, loopReps);
+		return setLoopRepsFor(targetAnim.getAnimationName(), loopReps);
 	}
 
 	/**
@@ -154,7 +153,7 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	public ChainedAnimationBuilder setIndexFrozenAnimations(String... animNames) {		
 		for (String animName : animNames) {
 			if (animations.isEmpty() || !isRandomized) break;
-			if (animName == null || animName.isEmpty() || animName.isBlank()) continue;
+			if (animName == null || animName.isEmpty()) continue;
 
 			for (SingletonAnimationBuilder singletonAnim : animations) {
 				if (frozenAnimations.contains(singletonAnim)) continue;
@@ -268,11 +267,6 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	public boolean hasAnimationFinished() {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return false;
 		return curAnim == null || queuedAnimations.isEmpty();
-	}
-
-	@Override
-	public Animation getAnimation() {
-		return curAnim.getAnimation();
 	}
 
 	@Override

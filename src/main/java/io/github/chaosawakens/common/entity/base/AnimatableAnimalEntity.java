@@ -137,6 +137,7 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	@Override
 	public void tick() {
 		this.prevYRot = yRot;
+		tickAnims();
 		super.tick();
 		
 		if (!level.isClientSide) setMoving(!isStuck());

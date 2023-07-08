@@ -15,7 +15,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected E animatable;
 	protected String name;
 	protected ExpandedAnimationState animationState = ExpandedAnimationState.FINISHED;	
-	protected Animation currentAnimation = none();
+	protected IAnimationBuilder curAnim;
 	protected double transitionLength;
 	protected double transitionProgress = 0;
 	protected double animationLength;
@@ -54,7 +54,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		case RUNNING:
 			if (this.animationProgress >= this.animationLength) {
 				this.animationProgress = 0;
-				if (this.currentAnimation.loop == EDefaultLoopTypes.LOOP) {
+				if (this.curAnim.getLoopType() == EDefaultLoopTypes.LOOP) {
 					this.animationProgress = 0;
 					this.animationState = ExpandedAnimationState.TRANSITIONING;
 				} else {
@@ -65,32 +65,31 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			}
 			break;
 		case STOPPED:
-			if (this.currentAnimation != null) this.animationState = ExpandedAnimationState.TRANSITIONING;
+			if (this.curAnim != null && !this.curAnim.getAnimationName().equalsIgnoreCase("none")) this.animationState = ExpandedAnimationState.TRANSITIONING;
 			break;
 		case FINISHED:
 			break;
 		}
 	}
 	
-	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
-		if (builder == null) {
+	public void playAnimation(IAnimationBuilder targetAnim, boolean clearCache) {
+		if (targetAnim == null) {
 			this.animationProgress = 0;
 			this.animationLength = 0;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.FINISHED;
 		}
 		
-		if (!getCurrentAnimation().animationName.equals(builder.getAnimation().animationName) || clearCache) {
-			if (clearCache) builder.playAnimation(true);
-			else builder.playAnimation(false);
+		if (!curAnim.getAnimationName().equalsIgnoreCase(targetAnim.getAnimationName()) || clearCache) {
+			if (clearCache) targetAnim.playAnimation(true);
+			else targetAnim.playAnimation(false);
 			
 			this.animationProgress = 0;
-			this.animationLength = builder.getAnimation().animationLength;
+			this.animationLength = 70;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.TRANSITIONING;
 		}
-		this.currentAnimation = builder.getAnimation();
-		this.controller.setAnimation(builder.getBuilder());
+		this.controller.setAnimation(targetAnim.getBuilder());
 	}
 	
 	public String getName() {
@@ -102,19 +101,19 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isAnimationFinished(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
+		return curAnim.getAnimationName().equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
 	public boolean isAnimationFinished(IAnimationBuilder targetAnim) {
-		return isAnimationFinished(targetAnim.getAnimation().animationName);
+		return isAnimationFinished(targetAnim.getAnimationName());
 	}
 	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
+		return curAnim.getAnimationName().equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
-		return isPlayingAnimation(targetAnim.getAnimation().animationName);
+		return isPlayingAnimation(targetAnim.getAnimationName());
 	}
 	
 	public ExpandedAnimationState getAnimationState() {
@@ -133,8 +132,8 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		return controller;
 	}
 	
-	public Animation getCurrentAnimation() {
-		return currentAnimation;
+	public IAnimationBuilder getCurAnim() {
+		return curAnim;
 	}
 	
 	public static Animation none() {

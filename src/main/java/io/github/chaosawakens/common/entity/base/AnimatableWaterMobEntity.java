@@ -134,6 +134,7 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	@Override
 	public void tick() {
 		this.prevBodyRot = yBodyRot;
+		tickAnims();
 		super.tick();
 		
 		if (!level.isClientSide) setSwimming(!isStuck() && isInWater());
