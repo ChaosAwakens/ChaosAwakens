@@ -22,6 +22,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.builder.RawAnimation;
 import software.bernie.geckolib3.core.controller.AnimationController;
 
+//TODO Forever incomplete.
 /**
  * Wrapper class for {@link SingletonAnimationBuilder} which allows for the instantiation of multiple chained animations. It also provides additional 
  * functionality, such as randomization (shuffling) of chained animation selection during a chaining sequence. It's important to note that this does not mean

@@ -91,6 +91,14 @@ public final class MathUtil {
 		if (targetToDecrement < 0) targetToDecrement = 0;
 	}
 	
+	public static double getAngleBetween(double x1, double z1, double x2, double z2) {
+        return ((Math.atan2(z2 - z1, x2 - x1) * (180 / Math.PI) + 90) + 90) * Math.PI / 180;
+    }
+	
+	public static double getAngleBetweenBlockPositions(BlockPos posA, BlockPos posB) {
+        return getAngleBetween(posA.getX(), posA.getZ(), posB.getX(), posB.getZ());
+    }
+	
 	/**
 	 * Returns an angle between 2 entities (in radians) via the use of polar coordinate conversion
 	 * @param first The first entity to get its angle

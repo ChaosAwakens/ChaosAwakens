@@ -6,8 +6,8 @@ public class CAModManager {
 	
 	public static final void registerAll(IEventBus modBus, IEventBus forgeBus) {
 		CAConfigManager.registerConfigs();
-		CAEventManager.registerEvents(modBus, forgeBus);		
 		CARegistryManager.registerRegistries(modBus);
+		CAEventManager.registerEvents(modBus, forgeBus);
 		CAModIntegrationManager.registerIntegration(modBus, forgeBus);
 	}
 }

@@ -2,7 +2,6 @@ package io.github.chaosawakens.api.animation;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
@@ -39,8 +38,8 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		this.server = ((Entity) animatable).getServer();
 	}
 	
-	public void tick() { //TODO Sync client somewhat
-		double tickProgressDelta = server == null ? Math.max(Minecraft.getInstance().getFrameTime() - Util.getMillis(), 0.0) / 50.0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+	public void tick() {
+		double tickProgressDelta = server == null ? 0.98D : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -65,7 +64,6 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			}
 			break;
 		case STOPPED:
-			if (this.currentAnimation != null) this.animationState = ExpandedAnimationState.TRANSITIONING;
 			break;
 		case FINISHED:
 			break;

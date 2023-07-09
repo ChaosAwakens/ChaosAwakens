@@ -52,7 +52,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.DerivedWorldInfo;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -240,12 +239,9 @@ public class CAMiscEvents {
 		IWorld curWorld = event.getWorld();
 		
 		if (curWorld instanceof ServerWorld) {
-			if (curWorld.getLevelData() instanceof DerivedWorldInfo) {
-				ServerWorld serverWorld = (ServerWorld) curWorld;
-				DerivedWorldInfo derivedWorldInfo = (DerivedWorldInfo) curWorld.getLevelData();
-				
-				if (serverWorld.dimension().location().getNamespace().equals(ChaosAwakens.MODID)) derivedWorldInfo.wrapped.setDayTime(event.getNewTime());
-			}
+			ServerWorld curServerWorld = (ServerWorld) curWorld;
+			
+			if (curServerWorld.dimension().location().getNamespace().equalsIgnoreCase(ChaosAwakens.MODID)) curServerWorld.getServer().overworld().setDayTime(event.getNewTime());
 		}
 	}
 	

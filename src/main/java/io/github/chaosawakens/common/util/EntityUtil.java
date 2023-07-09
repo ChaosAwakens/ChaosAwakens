@@ -302,7 +302,7 @@ public final class EntityUtil {
 	 */
 	public static double getMeleeAttackReachSqr(LivingEntity attacker, LivingEntity target) {
 		if (target == null) return 0;
-		return (attacker.getBbWidth() * 2.0F * attacker.getBbWidth() * 2.0F + target.getBbWidth()) / 4;
+		return (attacker.getBbWidth() * 2.0F * attacker.getBbWidth() * 2.0F + target.getBbWidth()) / 5;
 	}
 	
 	/**
@@ -323,7 +323,7 @@ public final class EntityUtil {
 	 * @param attractionSpeed The speed at which entities should attract to the central {@link LivingEntity} (clamped between {@code 0.01 - 1.0D})
 	 */
 	public static void attractEntities(LivingEntity targetEntity, double radius, double height, double attractionSpeed) {
-		if (targetEntity == null || !targetEntity.isAlive() || targetEntity.noPhysics) return;
+		if (targetEntity == null || targetEntity.noPhysics) return;
 		
 		List<LivingEntity> potentialAffectedTargets = getAllEntitiesAround(targetEntity, radius, height, radius, radius + height);
 		

@@ -216,20 +216,18 @@ public class CACommonConfig {
 				.define("Auto-enchant specific tools and weapons", true);
 		builder.pop();
 		
+		builder.push("Items");
+		builder.pop();
+		
+		builder.push("Entity");
+		
 		builder.push("Breeding");
 		enableEnchantedAnimalBreeding = builder
 				.comment("Will Enchanted Animals be Breedable?")
 				.define("Enchanted Animal Breeding", false);
 		builder.pop();
 		
-		builder.push("Items");
-		builder.pop();
-		
-		builder.push("Textures");
-		holidayTextures = builder
-				.comment("Will holiday special textures be obtainable?")
-				.define("Obtainable Holiday Textures", true);
-		builder.pop();
+		builder.push("Specific Entities");
 		
 		builder.push("Ender Dragon");
 		enableDragonEggRespawns = builder
@@ -238,6 +236,31 @@ public class CACommonConfig {
 		enderDragonHeadDrop = builder
 				.comment("Will the Ender Dragon drop her head?")
 				.define("Ender Dragon Head Drop", true);
+		builder.pop();
+		
+		builder.push("Wandering Trader");
+		wanderingTraderSellsTriffidGoo = builder
+				.comment("Can the Wandering Trader sell Triffid Goo?")
+				.define("Triffid Goo from Wandering Trader?", true);
+		wanderingTraderSellsUraniumAndTitanium = builder
+				.comment("Can the Wandering Trader sell Uranium and Titanium?")
+				.define("Uranium and Titanium from Wandering Trader?", false);
+		builder.pop();
+		
+		builder.push("Robo Warrior");
+		roboWarriorExplosionSize = builder.defineInRange("Robo Warrior explosion size", 6, 0, 500);
+		roboWarriorExplosionType = builder
+				.comment("NONE - The Robo Warrior will not affect the terrain." + "\n"
+						+ "BREAK - The Robo Warrior will drop some blocks that it breaks." + "\n"
+						+ "DESTROY - The Robo Warrior will destroy blocks and never drop them.")
+				.defineEnum("Ray Gun explosion type", ExplosionType.BREAK);
+		roboWarriorExplosionFire = builder.define("Fire from Robo Warrior explosion", false);
+		builder.pop(3);
+		
+		builder.push("Textures");
+		holidayTextures = builder
+				.comment("Will holiday special textures be obtainable?")
+				.define("Obtainable Holiday Textures", true);
 		builder.pop();
 		
 		builder.push("Update Checker");
@@ -356,26 +379,5 @@ public class CACommonConfig {
 				.comment("Will the Butterfly teleport you to its Dimension?")
 				.define("Butterfly Teleport", true);
 		builder.pop();
-		
-		builder.push("Entity");
-		
-		builder.push("Wandering Trader");
-		wanderingTraderSellsTriffidGoo = builder
-				.comment("Can the Wandering Trader sell Triffid Goo?")
-				.define("Triffid Goo from Wandering Trader?", true);
-		wanderingTraderSellsUraniumAndTitanium = builder
-				.comment("Can the Wandering Trader sell Uranium and Titanium?")
-				.define("Uranium and Titanium from Wandering Trader?", false);
-		builder.pop();
-		
-		builder.push("Robo Warrior");
-		roboWarriorExplosionSize = builder.defineInRange("Robo Warrior explosion size", 6, 0, 500);
-		roboWarriorExplosionType = builder
-				.comment("NONE - The Robo Warrior will not affect the terrain." + "\n"
-						+ "BREAK - The Robo Warrior will drop some blocks that it breaks." + "\n"
-						+ "DESTROY - The Robo Warrior will destroy blocks and never drop them.")
-				.defineEnum("Ray Gun explosion type", ExplosionType.BREAK);
-		roboWarriorExplosionFire = builder.define("Fire from Robo Warrior explosion", false);
-		builder.pop(2);
 	}
 }

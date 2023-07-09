@@ -36,10 +36,9 @@ public class EntEntity extends AnimatableMonsterEntity {
 	private final ObjectArrayList<WrappedAnimationController<EntEntity>> entControllers = new ObjectArrayList<WrappedAnimationController<EntEntity>>(1);
 	private final WrappedAnimationController<EntEntity> mainController = createMainMappedController("entmaincontroller");
 	private final WrappedAnimationController<EntEntity> attackController = createMappedController("entattackcontroller", this::attackPredicate);
-	private final WrappedAnimationController<EntEntity> deathController = createMappedController("entdeathcontroller", this::deathPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(deathController);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder punchAnim = new SingletonAnimationBuilder(this, "Punch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
@@ -139,7 +138,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return CASoundEvents.ENT_HURT.get();
+		return CASoundEvents.ENT_DEATH.get();
 	}
 
 	@Override
