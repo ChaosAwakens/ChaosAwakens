@@ -119,6 +119,15 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	/**
+	 * Gets the current animation that the entity is playing in its main controller. Can be null.
+	 * @return The main controller's currently playing animation if present, else returns null.
+	 */
+	@Nullable
+	default Animation getCurrentAnimation() {
+		return getMainWrappedController().getCurrentAnimation();
+	}
+
+	/**
 	 * Gets the current animation in a specified {@link AnimationController}. Can be null.
 	 * @param targetController Controller to check current animation from.
 	 * @return The specified controller's currently playing animation if present, else returns null.
@@ -134,7 +143,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	default boolean isPlayingAnimation() {
 		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
-			if (controller.getCurAnim() != null && !controller.getCurAnim().getAnimationName().equalsIgnoreCase("none")) return true;
+			if (controller.getCurrentAnimation() != null) return true;
 		}
 		return false;
 	}
@@ -146,7 +155,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 */
 	default boolean isPlayingAnimation(String targetAnimName) {
 		for (WrappedAnimationController<? extends IAnimatableEntity> controller : getWrappedControllers()) {
-			if (controller.getCurAnim().getAnimationName().equalsIgnoreCase(targetAnimName)) return true;
+			if (controller.getCurrentAnimation().animationName == targetAnimName) return true;
 		}
 		return false;
 	}
@@ -184,7 +193,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 	
 	default boolean isPlayingAnimationInController(WrappedAnimationController<? extends IAnimatableEntity> targetController) {
-		return targetController.getCurAnim() != null && !targetController.getCurAnim().getAnimationName().equalsIgnoreCase("none");
+		return targetController.getCurrentAnimation() != null;
 	}
 
 	default boolean isPlayingAnimationInController(String targetControllerName) {
@@ -200,7 +209,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 	
 	default boolean isPlayingAnimationInWrappedController(String animName, WrappedAnimationController<? extends IAnimatableEntity> targetController) {
-		return targetController.getCurAnim() != null && targetController.getCurAnim().getAnimationName().equalsIgnoreCase(animName);
+		return targetController.getCurrentAnimation() != null && targetController.getCurrentAnimation().animationName == animName;
 	}
 
 	default boolean isPlayingAnimationInWrappedController(String animName, String targetControllerName) {

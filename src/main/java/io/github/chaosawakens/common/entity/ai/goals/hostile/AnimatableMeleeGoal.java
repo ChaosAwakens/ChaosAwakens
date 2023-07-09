@@ -21,7 +21,7 @@ public class AnimatableMeleeGoal extends Goal {
 	private final double angleRange;
 	private final int probability;
 	private Predicate<AnimatableMonsterEntity> extraActivationConditions;
-	private int presetCooldown = 0;
+	private int presetCooldown = 10;
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability) {
 		this.owner = owner;
@@ -81,7 +81,7 @@ public class AnimatableMeleeGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
-		presetCooldown = 20;
+		presetCooldown = 30;
 	}
 	
 	@Override

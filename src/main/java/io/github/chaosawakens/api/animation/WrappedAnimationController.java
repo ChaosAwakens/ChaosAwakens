@@ -15,7 +15,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected E animatable;
 	protected String name;
 	protected ExpandedAnimationState animationState = ExpandedAnimationState.FINISHED;	
-	protected IAnimationBuilder curAnim;
+	protected Animation currentAnimation = none();
 	protected double transitionLength;
 	protected double transitionProgress = 0;
 	protected double animationLength;
@@ -54,7 +54,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		case RUNNING:
 			if (this.animationProgress >= this.animationLength) {
 				this.animationProgress = 0;
-				if (this.curAnim.getLoopType() == EDefaultLoopTypes.LOOP) {
+				if (this.currentAnimation.loop == EDefaultLoopTypes.LOOP) {
 					this.animationProgress = 0;
 					this.animationState = ExpandedAnimationState.TRANSITIONING;
 				} else {
@@ -65,31 +65,32 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			}
 			break;
 		case STOPPED:
-			if (this.curAnim != null && !this.curAnim.getAnimationName().equalsIgnoreCase("none")) this.animationState = ExpandedAnimationState.TRANSITIONING;
+			if (this.currentAnimation != null) this.animationState = ExpandedAnimationState.TRANSITIONING;
 			break;
 		case FINISHED:
 			break;
 		}
 	}
 	
-	public void playAnimation(IAnimationBuilder targetAnim, boolean clearCache) {
-		if (targetAnim == null) {
+	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
+		if (builder == null) {
 			this.animationProgress = 0;
 			this.animationLength = 0;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.FINISHED;
 		}
 		
-		if (!curAnim.getAnimationName().equalsIgnoreCase(targetAnim.getAnimationName()) || clearCache) {
-			if (clearCache) targetAnim.playAnimation(true);
-			else targetAnim.playAnimation(false);
+		if (!getCurrentAnimation().animationName.equals(builder.getAnimationName()) || clearCache) {
+			if (clearCache) builder.playAnimation(true);
+			else builder.playAnimation(false);
 			
 			this.animationProgress = 0;
-			this.animationLength = 70;
+			this.animationLength = builder.getAnimation().animationLength;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.TRANSITIONING;
 		}
-		this.controller.setAnimation(targetAnim.getBuilder());
+		this.currentAnimation = builder.getAnimation();
+		this.controller.setAnimation(builder.getBuilder());
 	}
 	
 	public String getName() {
@@ -101,7 +102,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isAnimationFinished(String targetAnimName) {
-		return curAnim.getAnimationName().equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
+		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
 	public boolean isAnimationFinished(IAnimationBuilder targetAnim) {
@@ -109,7 +110,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return curAnim.getAnimationName().equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
+		return currentAnimation.animationName.equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
@@ -132,8 +133,8 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		return controller;
 	}
 	
-	public IAnimationBuilder getCurAnim() {
-		return curAnim;
+	public Animation getCurrentAnimation() {
+		return currentAnimation;
 	}
 	
 	public static Animation none() {

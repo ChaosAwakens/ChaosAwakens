@@ -1,5 +1,8 @@
 package io.github.chaosawakens.api.animation;
 
+import javax.annotation.Nullable;
+
+import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 
@@ -36,6 +39,9 @@ public interface IAnimationBuilder {
 	
 	boolean isPlaying();
 	boolean hasAnimationFinished();
+	
+	@Nullable
+	Animation getAnimation();
 	
 	String getAnimationName();
 	

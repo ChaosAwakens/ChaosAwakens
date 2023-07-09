@@ -15,6 +15,7 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.LivingEntity;
+import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -273,7 +274,12 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	public String getAnimationName() {
 		return curAnim != null ? curAnim.getAnimationName() : "None";
 	}
-
+	
+	@Override
+	public Animation getAnimation() {
+		return owner.getModel().getAnimation(curAnim.getAnimationName(), owner);
+	}
+	
 	@Nullable
 	public SingletonAnimationBuilder getCurrentAnimation() {
 		return curAnim;

@@ -3,6 +3,7 @@ package io.github.chaosawakens.api.animation;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.common.util.ObjectUtil;
+import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -177,6 +178,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return false;
 		
 		return targetController.isAnimationFinished(this) || (targetController.getAnimationProgressTicks() >= getWrappedAnimLength() && (targetController.getAnimationState() == ExpandedAnimationState.RUNNING || targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING));
+	}
+
+	@Override
+	public Animation getAnimation() {
+		return owner.getModel().getAnimation(animName, owner);
 	}
 	
 	@Override
