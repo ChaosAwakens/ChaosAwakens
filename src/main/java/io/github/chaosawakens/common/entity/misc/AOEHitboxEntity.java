@@ -27,15 +27,17 @@ public class AOEHitboxEntity extends Entity {
 	private static final DataParameter<Integer> LIFETIME = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.INT);
 	private static final DataParameter<Integer> ACTION_EXECUTION_INTERVAL = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.INT);
 	private Consumer<LivingEntity> actionOnIntersection;
-
+	
 	public AOEHitboxEntity(EntityType<?> pType, World pLevel) {
 		super(pType, pLevel);
+		this.noPhysics = true;
+		this.noCulling = true;
 	}
-
+	
 	@Override
 	protected void defineSynchedData() {
 		this.entityData.define(CUR_RADIUS, 0.0F);
-		this.entityData.define(CUR_HEIGHT, 0.0F);
+		this.entityData.define(CUR_HEIGHT, 0.5F);
 		this.entityData.define(EXPANSION_SPEED, 0.0F);
 		this.entityData.define(RADIUS_CAP, 0.0F);
 		this.entityData.define(HEIGHT_CAP, 0.0F);

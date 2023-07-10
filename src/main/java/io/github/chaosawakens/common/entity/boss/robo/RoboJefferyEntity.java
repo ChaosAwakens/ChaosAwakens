@@ -7,7 +7,9 @@ import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
+import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAParticleTypes;
 import io.github.chaosawakens.common.util.AnimationUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -156,6 +158,16 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 						this.level.addParticle(CAParticleTypes.ROBO_SPARK.get(), getX() + plusX, getRandomY() * 0.8D, getZ() + plusZ, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
 					}
 				}
+				
+				AOEHitboxEntity deathHitBox = CAEntityTypes.BASE_AOE_HITBOX.get().create(level);
+				
+				deathHitBox.setPos(getX(), getY(), getZ());
+				deathHitBox.setMaxRadius(20.0F);
+				deathHitBox.setMaxHeight(3.7F);
+				deathHitBox.setExpansionSpeed(0.7F);
+				deathHitBox.setMaxAge(60);
+				
+				level.addFreshEntity(deathHitBox);
 			}
 		}
 	}
