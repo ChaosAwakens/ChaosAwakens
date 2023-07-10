@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -27,6 +29,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -52,7 +56,7 @@ public final class EntityUtil {
 	 * @param radius the radius in which to validate entities that are already inside the bounding box
 	 * @return a list of entities within the valid specified distance inside the grown bounding box
 	 */
-	public static <E extends Entity> List<E> getEntitiesAround(LivingEntity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
+	public static <E extends Entity> List<E> getEntitiesAround(Entity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
 		Predicate<E> distPredicate = living -> living != user && (user.getTeam() != null && living.getTeam() != null ? !living.getTeam().equals(user.getTeam()) : living.isAlive()) && living.getClass() != user.getClass() && user.distanceTo(living) <= radius + living.getBbWidth() / 2F;
 		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), distPredicate);
 	}
@@ -69,7 +73,7 @@ public final class EntityUtil {
 	 * @param detectionConditions The conditions for the entities within the defined area to be included
 	 * @return a list of entities within the valid specified distance inside the grown bounding box
 	 */
-	public static <E extends Entity> List<E> getEntitiesAround(LivingEntity user, Class<E> entityClass, double dX, double dY, double dZ, Predicate<E> detectionConditions) {
+	public static <E extends Entity> List<E> getEntitiesAround(Entity user, Class<E> entityClass, double dX, double dY, double dZ, Predicate<E> detectionConditions) {
 		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), detectionConditions);
 	}
 
@@ -86,7 +90,7 @@ public final class EntityUtil {
 	 * @param radius the radius in which to validate entities that are already inside the bounding box
 	 * @return a list of entities within the valid specified distance inside the grown bounding box
 	 */
-	public static <E extends Entity> List<E> getEntitiesAroundNoPredicate(LivingEntity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
+	public static <E extends Entity> List<E> getEntitiesAroundNoPredicate(Entity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
 		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ));
 	}
 
@@ -101,7 +105,7 @@ public final class EntityUtil {
 	 * @return a list of all living entities within the valid specified distance inside the grown bounding box
 	 */
 	@Nullable
-	public static List<LivingEntity> getAllEntitiesAround(LivingEntity user, double dX, double dY, double dZ, double radius) {
+	public static List<LivingEntity> getAllEntitiesAround(Entity user, double dX, double dY, double dZ, double radius) {
 		return getEntitiesAround(user, LivingEntity.class, dX, dY, dZ, radius);
 	}
 
@@ -115,7 +119,7 @@ public final class EntityUtil {
 	 * @param radius radius the radius in which to validate entities that are already inside the bounding box
 	 * @return a list of all players within the valid specified distance inside the grown bounding box
 	 */
-	public static List<PlayerEntity> getAllPlayersAround(LivingEntity user, double dX, double dY, double dZ, double radius) {
+	public static List<PlayerEntity> getAllPlayersAround(Entity user, double dX, double dY, double dZ, double radius) {
 		List<Entity> nearbyEntities = user.level.getEntities(user, user.getBoundingBox().inflate(dX, dY, dZ));
 		List<PlayerEntity> listEntityPlayers = nearbyEntities.stream().filter(neighbouringEntity -> neighbouringEntity instanceof PlayerEntity && user.distanceTo(neighbouringEntity) <= radius + neighbouringEntity.getBbWidth() / 2f).map(entityNeighbor -> (PlayerEntity) entityNeighbor).collect(Collectors.toList());
 		return listEntityPlayers;
@@ -235,15 +239,15 @@ public final class EntityUtil {
 
 	public static void setEntityInFloatingMotion(Entity targetEntity, double yFloatingThreshold, float yFloatSpeed, boolean canMoveHorizontally) {
 		if (targetEntity.isNoGravity() || targetEntity == null || !targetEntity.isAlive()) return;
-		
+
 		if (targetEntity.getDeltaMovement().y() <= -yFloatingThreshold) targetEntity.setDeltaMovement(canMoveHorizontally ? 1.0D : 0, MathHelper.lerp(1, Math.abs(targetEntity.getDeltaMovement().y * yFloatSpeed), yFloatingThreshold), canMoveHorizontally ? 1.0D : 0);
 		if (targetEntity.getDeltaMovement().y() >= yFloatingThreshold) targetEntity.setDeltaMovement(canMoveHorizontally ? 1.0D : 0, MathHelper.lerp(1, -Math.abs(targetEntity.getDeltaMovement().y * yFloatSpeed), yFloatingThreshold), canMoveHorizontally ? 1.0D : 0);
 	}
-	
+
 	public static void setEntityInFloatingMotion(Entity targetEntity, double yFloatingThreshold, float yFloatSpeed) {
 		setEntityInFloatingMotion(targetEntity, yFloatingThreshold, yFloatSpeed, false);
 	}
-	
+
 	/**
 	 * Applies modification an entity's reach attribute if the reach attribute's value isn't default. This should usually be called in an item's 
 	 * {@link Item#onEntitySwing(ItemStack, LivingEntity)} method.
@@ -280,7 +284,7 @@ public final class EntityUtil {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Disables a player's shields if the player is holding one.
 	 * @param shieldHolder Target player holding/using the shield
@@ -289,11 +293,11 @@ public final class EntityUtil {
 	public static void disableShield(PlayerEntity shieldHolder, int cooldown) {
 		if (shieldHolder != null && isHoldingItem(shieldHolder, Items.SHIELD) && shieldHolder.getUseItem().getItem().equals(Items.SHIELD)) {
 			shieldHolder.getCooldowns().addCooldown(shieldHolder.getUseItem().getItem(), cooldown);
-	        shieldHolder.stopUsingItem();
-	        shieldHolder.level.broadcastEntityEvent(shieldHolder, (byte) 30);
+			shieldHolder.stopUsingItem();
+			shieldHolder.level.broadcastEntityEvent(shieldHolder, (byte) 30);
 		}
 	}
-	
+
 	/**
 	 * Gets a standard value for the attack range of an attacking {@link LivingEntity} relative to its target.
 	 * @param attacker The attacking entity
@@ -304,17 +308,17 @@ public final class EntityUtil {
 		if (target == null) return 0;
 		return (attacker.getBbWidth() * 2.0F * attacker.getBbWidth() * 2.0F + target.getBbWidth()) / 5;
 	}
-	
+
 	/**
 	 * Checks if the {@link UUID} of an entity or player is equal to the specified {@link UUID}.
-	 * @param entityToCheck entity to check UUID of
+	 * @param entityToCheck entity to check UUID of 
 	 * @param uuidToCheck   UUID to test entity's UUID against
 	 * @return true if entity's UUID is equal to the specified UUID, else returns false
 	 */
 	public static boolean isUserOrEntityUUIDEqualTo(Entity entityToCheck, UUID uuidToCheck) {
 		return entityToCheck.getUUID().equals(uuidToCheck);
 	}
-	
+
 	/**
 	 * Attracts {@link LivingEntity}s to a specified {@link LivingEntity}.
 	 * @param targetEntity The central {@link LivingEntity} to attract other entities to
@@ -324,15 +328,55 @@ public final class EntityUtil {
 	 */
 	public static void attractEntities(LivingEntity targetEntity, double radius, double height, double attractionSpeed) {
 		if (targetEntity == null || targetEntity.noPhysics) return;
-		
+
 		List<LivingEntity> potentialAffectedTargets = getAllEntitiesAround(targetEntity, radius, height, radius, radius + height);
-		
+
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
 			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
-			
+
 			double relAngleRadians = MathUtil.getAngleBetweenEntities(targetEntity, potentialAffectedTarget);
 			double clampedAttractionSpeed = MathHelper.clamp(attractionSpeed, 0.01D, 1.0D);
 			potentialAffectedTarget.setDeltaMovement(clampedAttractionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedAttractionSpeed * Math.sin(relAngleRadians));
+		}
+	}
+
+	/**
+	 * Helper method which handles an animatable entity's death sequence by altering the order in which methods are called inside {@link LivingEntity#die(DamageSource)} 
+	 * to match the specified {@link IAnimatableEntity}'s death animation (if it has one).
+	 * @param targetAnimatable The animatable to invoke the {@code die} method onto
+	 * @param deathCause The cause of death used to determine things like death loot, returning due to {@link ForgeHooks#onLivingDeath(LivingEntity, DamageSource)}, 
+	 * etc.
+	 */
+	@SuppressWarnings("deprecation")
+	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause) {
+		if (targetAnimatable.getDeathAnim() == null || !(targetAnimatable instanceof LivingEntity) || ForgeHooks.onLivingDeath((LivingEntity) targetAnimatable, deathCause)) return;
+
+		LivingEntity livingAnimatable = (LivingEntity) targetAnimatable;
+		Entity causeEntity = deathCause.getEntity();
+		LivingEntity killerEntity = livingAnimatable.getKillCredit();
+
+		if (!livingAnimatable.removed && !livingAnimatable.dead) {
+			if (targetAnimatable.getDeathAnim().getWrappedAnimProgress() == 0) {
+				if (livingAnimatable.deathScore >= 0 && killerEntity != null)  killerEntity.awardKillScore(livingAnimatable, livingAnimatable.deathScore, deathCause);
+				if (livingAnimatable.isSleeping()) livingAnimatable.stopSleeping();
+
+				livingAnimatable.dead = true;
+				livingAnimatable.getCombatTracker().recheckStatus();
+				livingAnimatable.level.broadcastEntityEvent(livingAnimatable, (byte) 3);
+			}
+
+			if (targetAnimatable.getDeathAnim().hasAnimationFinished()) {			
+				if (livingAnimatable.level instanceof ServerWorld) {
+					ServerWorld curServerWorld = (ServerWorld) livingAnimatable.level;
+
+					if (causeEntity != null) causeEntity.killed(curServerWorld, livingAnimatable);
+
+					livingAnimatable.dropAllDeathLoot(deathCause);
+					livingAnimatable.createWitherRose(killerEntity);
+				}
+
+				livingAnimatable.setPose(Pose.DYING);
+			}
 		}
 	}
 }

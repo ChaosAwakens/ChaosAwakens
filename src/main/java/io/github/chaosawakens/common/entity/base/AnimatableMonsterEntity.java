@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
@@ -155,20 +154,6 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		if (getDeathAnim() != null) {
 			playAnimation(getDeathAnim(), false);
 			
-			if (level.isClientSide) {
-				ChaosAwakens.debug("CLIENT START", "---------------------------------------------------------------");
-				ChaosAwakens.debug("DEATH ANIM PROG", getDeathAnim().getWrappedAnimProgress() + "/" + getDeathAnim().getWrappedAnimLength());
-				ChaosAwakens.debug("DEATH ANIM FINISHED", getDeathAnim().hasAnimationFinished());
-				ChaosAwakens.debug("CLIENT END", "-----------------------------------------------------------------");
-			}
-			
-			if (!level.isClientSide) {
-				ChaosAwakens.debug("SERVER START", "---------------------------------------------------------------");
-				ChaosAwakens.debug("DEATH ANIM PROG", getDeathAnim().getWrappedAnimProgress() + "/" + getDeathAnim().getWrappedAnimLength());
-				ChaosAwakens.debug("DEATH ANIM FINISHED", getDeathAnim().hasAnimationFinished());
-				ChaosAwakens.debug("SERVER END", "-----------------------------------------------------------------");
-			}
-			
 			if (getDeathAnim().hasAnimationFinished()) {
 				remove();
 				
@@ -186,9 +171,8 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	
 	@Override
 	public void die(DamageSource pCause) {
-		if (getDeathAnim() != null) {
-			if (getDeathAnim().hasAnimationFinished()) super.die(pCause);
-		} else super.die(pCause);
+		if (getDeathAnim() != null) EntityUtil.handleAnimatableDeath(this, pCause);
+		else super.die(pCause);
 	}
 
 	@Override

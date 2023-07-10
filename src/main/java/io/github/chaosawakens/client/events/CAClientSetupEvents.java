@@ -151,6 +151,7 @@ public class CAClientSetupEvents {
 	//	RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LAVA_EEL.get(), LavaEelEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.FALLING_BLOCK.get(), CAFallingBlockRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SCREEN_SHAKE.get(), CAEmptyRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BASE_AOE_HITBOX.get(), CAEmptyRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LETTUCE_CHICKEN_EGG.get(), (manager) -> new SpriteRenderer<CALeafyChickenEggEntity>(manager, Minecraft.getInstance().getItemRenderer()));
 
 		

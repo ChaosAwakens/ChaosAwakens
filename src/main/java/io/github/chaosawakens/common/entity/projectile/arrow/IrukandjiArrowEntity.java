@@ -16,7 +16,7 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 
 	public IrukandjiArrowEntity(EntityType<? extends IrukandjiArrowEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.setBaseDamage(100D);
+		setBaseDamage(100D);
 	}
 
 	public IrukandjiArrowEntity(World worldIn, double x, double y, double z) {

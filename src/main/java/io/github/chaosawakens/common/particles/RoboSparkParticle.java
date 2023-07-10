@@ -15,11 +15,11 @@ public class RoboSparkParticle extends SpriteTexturedParticle {
 	public RoboSparkParticle(ClientWorld world, double x, double y, double z, double xd, double yd, double zd, IAnimatedSprite spriteFromAge) {
 		super(world, x, y, z, xd, yd, zd);
 		this.hasPhysics = true;
-		this.lifetime = 16;
+		this.lifetime = 30;
 		
 		this.sprite = spriteFromAge;
 		
-		this.setSpriteFromAge(spriteFromAge);
+		setSpriteFromAge(spriteFromAge);
 		
 		//Positions
 		this.xo = x;
@@ -51,10 +51,13 @@ public class RoboSparkParticle extends SpriteTexturedParticle {
 		fade();
 		
         this.yd += 0.004D;
-        this.move(this.xd, this.yd, this.zd);
+        
+        move(this.xd, this.yd, this.zd);
+        
         this.xd *= (double)0.9F;
         this.yd *= (double)0.9F;
         this.zd *= (double)0.9F;
+        
         if (this.onGround) {
            this.xd *= (double)0.7F;
            this.zd *= (double)0.7F;
@@ -76,5 +79,4 @@ public class RoboSparkParticle extends SpriteTexturedParticle {
 		}
 		
 	}
-
 }

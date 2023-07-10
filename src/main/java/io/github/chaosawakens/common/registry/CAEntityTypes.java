@@ -30,6 +30,7 @@ import io.github.chaosawakens.common.entity.hostile.EntEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
+import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAFallingBlockEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
@@ -349,14 +350,22 @@ public class CAEntityTypes {
 	public static final RegistryObject<EntityType<CAFallingBlockEntity>> FALLING_BLOCK = ENTITY_TYPES.register("falling_block",
 			() -> EntityType.Builder.<CAFallingBlockEntity>of(CAFallingBlockEntity::new, EntityClassification.MISC)
 					.sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(20)
+					.noSummon()
 					.build(ChaosAwakens.prefix("falling_block").toString()));
 	public static final RegistryObject<EntityType<CAScreenShakeEntity>> SCREEN_SHAKE = ENTITY_TYPES.register("screen_shake", 
 			() -> EntityType.Builder.<CAScreenShakeEntity>of(CAScreenShakeEntity::new, EntityClassification.MISC)
+					.noSummon()
 			        .build(ChaosAwakens.prefix("screen_shake").toString()));
 	public static final RegistryObject<EntityType<CALeafyChickenEggEntity>> LETTUCE_CHICKEN_EGG = ENTITY_TYPES.register("lettuce_chicken_egg",
 			() -> EntityType.Builder.<CALeafyChickenEggEntity>of(CALeafyChickenEggEntity::new, EntityClassification.MISC)
 					.sized(0.25F, 0.25F).clientTrackingRange(10).updateInterval(20)
+					.noSummon()
 					.build(ChaosAwakens.prefix("lettuce_chicken_egg").toString()));
+	public static final RegistryObject<EntityType<AOEHitboxEntity>> BASE_AOE_HITBOX = ENTITY_TYPES.register("aoe_hitbox",
+			() -> EntityType.Builder.<AOEHitboxEntity>of(AOEHitboxEntity::new, EntityClassification.MISC)
+					.noSummon()
+					.build(ChaosAwakens.prefix("aoe_hitbox").toString()));
+	
 
 	public static void registerSpawnPlacementTypes() {
 		EntitySpawnPlacementRegistry.register(ACACIA_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);

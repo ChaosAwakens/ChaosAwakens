@@ -12,8 +12,6 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 // MM implementation
@@ -27,19 +25,19 @@ public class CAScreenShakeEntity extends Entity {
 		super(type, world);
 	}
 	
-	public CAScreenShakeEntity(World world, Vector3d pos, float radius, float magnitude, int dur, int fadeDur) {
+	public CAScreenShakeEntity(World world, Vector3d pos, float radius, float magnitude, int dur, int fadeDist) {
 		super(CAEntityTypes.SCREEN_SHAKE.get(), world);
 		setRadius(radius);
 		setMagnitude(magnitude);
 		setLifetimeDuration(dur);
-		setFadeDuration(fadeDur);
+		setFadeDuration(fadeDist);
 		setPos(pos.x, pos.y, pos.z);
 	}
 	
 	@Override
 	public void tick() {
 		super.tick();	
-		if (tickCount >= getLifetimeDuration()) this.remove();
+		if (tickCount >= getLifetimeDuration()) remove();
 	}
 
 	@Override
@@ -82,14 +80,13 @@ public class CAScreenShakeEntity extends Entity {
 		entityData.set(FADE_DURATION, fadeDuration);
 	}
 	
-	//TODO Is the @OnlyIn annotation really necessary?
-	@OnlyIn(Dist.CLIENT)
 	public float getAmp(PlayerEntity owner, float delta) {
 		float tickDelta = tickCount + delta;
         float timeFrac = 1.0f - (tickDelta - getLifetimeDuration()) / (getFadeDuration() + 1.0f);
         float baseAmount = tickDelta < getLifetimeDuration() ? getMagnitude() : timeFrac * timeFrac * getMagnitude();
         Vector3d playerPos = owner.getEyePosition(delta);
         float distFrac = (float) (1.0f - MathHelper.clamp(position().distanceTo(playerPos) / getRadius(), 0, 1));
+        
         return baseAmount * distFrac * distFrac;
 	}
 
@@ -116,11 +113,10 @@ public class CAScreenShakeEntity extends Entity {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	
-	public static void shakeScreen(World world, Vector3d pos, float radius, float magnitude, int dur, int fadeDur) {
+	public static void shakeScreen(World world, Vector3d pos, float radius, float magnitude, int dur, int fadeDist) {
 		if (!world.isClientSide) {
-			CAScreenShakeEntity screenShake = new CAScreenShakeEntity(world, pos, radius, magnitude, dur, fadeDur);
+			CAScreenShakeEntity screenShake = new CAScreenShakeEntity(world, pos, radius, magnitude, dur, fadeDist);
 			world.addFreshEntity(screenShake);
 		}
 	}
-
 }

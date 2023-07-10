@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.util.EntityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -128,7 +129,8 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	
 	@Override
 	public void die(DamageSource pCause) {
-		super.die(pCause);
+		if (getDeathAnim() != null) EntityUtil.handleAnimatableDeath(this, pCause);
+		else super.die(pCause);
 	}
 	
 	@Override
