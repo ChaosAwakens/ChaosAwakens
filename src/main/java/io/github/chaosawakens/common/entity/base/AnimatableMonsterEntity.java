@@ -116,7 +116,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		
 		for (Entity target : validTargets) {
 			if (target.canBeCollidedWith() && !target.noPhysics) {
-				double angle = MathUtil.getAngleBetweenEntities(this, target);
+				double angle = MathUtil.getRelativeAngleBetweenEntities(this, target);
 				target.setDeltaMovement(-0.1 * Math.cos(angle), target.getDeltaMovement().y, -0.1 * Math.sin(angle));
 			}
 		}
@@ -328,9 +328,9 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.addAdditionalSaveData(pCompound);
 	}
 
-	public double getMeleeAttackReachSqr(LivingEntity target) {
+	public float getMeleeAttackReachSqr(LivingEntity target) {
 		if (target == null) return 0;
-		return (getBbWidth() * getBbWidth() + getBbHeight() * getBbHeight());
+		return (1.0F + getBbWidth() / 2.0F) * 2;
 	}
 	
 	protected boolean shouldPlayIdleAnim() {

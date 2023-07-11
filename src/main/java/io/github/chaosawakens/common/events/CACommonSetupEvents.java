@@ -138,8 +138,8 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CACommonSetupEvents {	
-	public static ObjectArrayList<FeatureWrapper> CONFIG_FEATURES = new ObjectArrayList<>();
-	public static ObjectArrayList<CarverWrapper> CONFIG_CARVERS = new ObjectArrayList<>();
+	public static ObjectArrayList<FeatureWrapper> CONFIG_FEATURES = new ObjectArrayList<FeatureWrapper>();
+	public static ObjectArrayList<CarverWrapper> CONFIG_CARVERS = new ObjectArrayList<CarverWrapper>();
 	private static Method codecMethod;
 	
 	public static class ForgeSetupEvents {

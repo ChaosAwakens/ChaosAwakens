@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.ai;
 
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -18,7 +19,11 @@ public abstract class AnimatableMovableGoal extends AnimatableGoal {
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;
 			goal.path = attacker.getNavigation().createPath(target,2);
-			return attacker.getSensing().canSee(target) && goal.path != null;
+			
+			if (attacker instanceof AnimatableMonsterEntity) {
+				return attacker.getSensing().canSee(target) && goal.path != null && !((AnimatableMonsterEntity) attacker).isAttacking() && attacker.distanceTo(target) > ((AnimatableMonsterEntity) attacker).getMeleeAttackReachSqr(target);
+			}
+			else return attacker.getSensing().canSee(target) && goal.path != null;
 		}
 		return false;
 	}

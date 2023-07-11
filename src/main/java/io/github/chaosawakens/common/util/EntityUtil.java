@@ -305,8 +305,9 @@ public final class EntityUtil {
 	 * @return The standard attack range value of the attacking entity
 	 */
 	public static double getMeleeAttackReachSqr(LivingEntity attacker, LivingEntity target) {
-		if (target == null) return 0;
-		return (attacker.getBbWidth() * 2.0F * attacker.getBbWidth() * 2.0F + target.getBbWidth()) / 5;
+	    double atkRch = attacker.getBbWidth() * 1.75D + attacker.getBbWidth() / 3.6D * 0.25D;
+	    
+	    return atkRch * atkRch / 1.5D;
 	}
 
 	/**
@@ -334,7 +335,7 @@ public final class EntityUtil {
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
 			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
 
-			double relAngleRadians = MathUtil.getAngleBetweenEntities(targetEntity, potentialAffectedTarget);
+			double relAngleRadians = MathUtil.getRelativeAngleBetweenEntities(targetEntity, potentialAffectedTarget);
 			double clampedAttractionSpeed = MathHelper.clamp(attractionSpeed, 0.01D, 1.0D);
 			potentialAffectedTarget.setDeltaMovement(clampedAttractionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedAttractionSpeed * Math.sin(relAngleRadians));
 		}

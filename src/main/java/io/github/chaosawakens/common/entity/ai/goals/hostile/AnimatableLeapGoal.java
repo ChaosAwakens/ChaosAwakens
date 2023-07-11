@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
-import java.util.EnumSet;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -46,7 +45,6 @@ public class AnimatableLeapGoal extends Goal {
 		this.minDistanceBlocks = minDistance;
 		this.probability = probability;
 		this.extraActivationConditions = extraActivationConditions;
-		setFlags(EnumSet.of(Flag.TARGET, Flag.JUMP, Flag.LOOK));
 	}
 	
 	public AnimatableLeapGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> leapAnim, Supplier<SingletonAnimationBuilder> midairAnim, Supplier<SingletonAnimationBuilder> landAnim, byte attackId, double leapPower, double minDistance) {
@@ -119,10 +117,7 @@ public class AnimatableLeapGoal extends Goal {
 		LivingEntity target = owner.getTarget();
 		
 		if (target != null && target.isAlive()) {
-			if (owner.isPlayingAnimation(leapAnim.get())) {
-				owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
-				owner.lookAt(target, 30F, 30F);
-			}
+			if (owner.isPlayingAnimation(leapAnim.get())) owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 			
 			BlockPos targetPos = target.blockPosition();
 			
@@ -147,14 +142,13 @@ public class AnimatableLeapGoal extends Goal {
 				BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), blockBreakPredicate);
 			}
 			
-			if (owner.isOnGround() || (MathUtil.getVerticalDistanceBetween(owner.blockPosition(), targetPos) <= 1.0D)) {
+			if (owner.isOnGround() || (MathUtil.getVerticalDistanceBetween(owner.blockPosition(), targetPos) <= 1.0D) && owner.isPlayingAnimation(midairAnim.get())) {
 				owner.playAnimation(landAnim.get(), true);
 				
-		//		ObjectArrayList<BlockPos> affectedPositions = BlockPatternShape.CIRCLE.applyShape(owner.level, targetPos, 10, 1, true, false, null);
-				
-				AOEHitboxEntity aoeDamageEffect = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) (Math.ceil(leapPower) * 10), (float) (leapPower * 3), 20, 1, actionOnLand);
-				
-				owner.level.addFreshEntity(aoeDamageEffect);
+				if (landAnim.get().getWrappedAnimProgress() == 0) {
+					AOEHitboxEntity aoeDamageEffect = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) (Math.ceil(leapPower) * 10), (float) (leapPower * 3), 20, 5, actionOnLand);
+					owner.level.addFreshEntity(aoeDamageEffect);
+				}
 			}
 		}
 	}

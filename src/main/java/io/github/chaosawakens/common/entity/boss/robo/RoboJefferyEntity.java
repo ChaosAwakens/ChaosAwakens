@@ -4,7 +4,6 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableLeapGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
@@ -114,7 +113,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 16.6D, 20.1D, 55));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 16.6D, 20.1D, 90).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
 	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
 		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
 			affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
@@ -154,25 +153,25 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 			double plusX = facingDir.equals(Axis.X) ? 1 : 0;
 			double plusZ = facingDir.equals(Axis.Z) ? 1 : 0;
 			
-			if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 29, 77)) CAScreenShakeEntity.shakeScreen(level, position(), 60F, (float) (deathAnim.getWrappedAnimProgress() / 100F) / 6, 2, 80);
+			if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 29, 77)) CAScreenShakeEntity.shakeScreen(level, position(), 160F, (float) (deathAnim.getWrappedAnimProgress() / 100F) / 6, 2, 240);
 			
 			if (deathAnim.getWrappedAnimProgress() == 75) {
-				CAScreenShakeEntity.shakeScreen(level, position(), 80F, 0.45F, 5, 120);
+				CAScreenShakeEntity.shakeScreen(level, position(), 200F, 0.45F, 5, 300);
 				
 				for (int angleDeg = 0; angleDeg < 360; angleDeg++) {
-					for (int rep = 0; rep < 5; rep++) {
+					for (int rep = 0; rep < 6; rep++) {
 						this.level.addParticle(CAParticleTypes.ROBO_SPARK.get(), getX() + plusX, getRandomY() * 0.8D, getZ() + plusZ, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
 					}
 				}
 				
-				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(level, blockPosition(), 20.0F, 2.7F, 10, 1, null);
+				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(level, blockPosition(), 20.0F, 2.7F, 15, 5, null);
 				
 				deathHitBox.setActionOnIntersection((target) -> {
 					target.hurt(DamageSource.mobAttack(this), 20.0F);
 					
-					double angle = MathUtil.getAngleBetweenEntities(deathHitBox, target); //TODO Dist calc
-					
-					target.setDeltaMovement(-5.7D * Math.cos(angle), target.getDeltaMovement().y + 0.7D, -5.7D * Math.sin(angle));
+					double targetAngle = (MathUtil.getAngleBetweenEntities(deathHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
+										
+					target.setDeltaMovement(-1.7D * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + 0.8D, -1.7D * Math.sin(targetAngle));
 				});
 				
 				if (!level.isClientSide) level.addFreshEntity(deathHitBox);
@@ -193,8 +192,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 	
 	@Override
-	public double getMeleeAttackReachSqr(LivingEntity target) {
-		return super.getMeleeAttackReachSqr(target) + 2;
+	public float getMeleeAttackReachSqr(LivingEntity target) {
+		return super.getMeleeAttackReachSqr(target);
 	}
 
 	@Override

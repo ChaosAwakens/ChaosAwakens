@@ -91,23 +91,27 @@ public final class MathUtil {
 		if (targetToDecrement < 0) targetToDecrement = 0;
 	}
 	
-	public static double getAngleBetween(double x1, double z1, double x2, double z2) {
-        return ((Math.atan2(z2 - z1, x2 - x1) * (180 / Math.PI) + 90) + 90) * Math.PI / 180;
+	public static double getRelativeAngleBetween(double x1, double z1, double x2, double z2) {
+        return (Math.atan2(z2 - z1, x2 - x1) * (180 / Math.PI) - 90) % 360;
     }
 	
-	public static double getAngleBetweenBlockPositions(BlockPos posA, BlockPos posB) {
-        return getAngleBetween(posA.getX(), posA.getZ(), posB.getX(), posB.getZ());
+	public static double getRelativeAngleBetweenBlockPositions(BlockPos posA, BlockPos posB) {
+        return getRelativeAngleBetween(posA.getX(), posA.getZ(), posB.getX(), posB.getZ());
     }
 	
 	/**
-	 * Returns an angle between 2 entities (in radians) via the use of polar coordinate conversion
+	 * Returns the relative angle between 2 entities (in degrees) via the use of polar coordinate conversion
 	 * @param first The first entity to get its angle
 	 * @param second The second entity to get its angle
-	 * @return The angle (in radians) between both entities
+	 * @return The angle (in degrees) between both entities
 	 */
-	public static double getAngleBetweenEntities(Entity first, Entity second) {
-        return ((Math.atan2(second.getZ() - first.getZ(), second.getX() - first.getX()) * (180 / Math.PI) + 90) + 90) * Math.PI / 180;
+	public static double getRelativeAngleBetweenEntities(Entity first, Entity second) {
+        return getRelativeAngleBetween(first.getX(), first.getZ(), second.getX(), second.getZ());
     }
+	
+	public static double getAngleBetweenEntities(Entity first, Entity second) {
+		return Math.atan2(second.getZ() - first.getZ(), second.getX() - first.getX()) * (180 / Math.PI) + 90;
+	}
 	
 	/**
 	 * Increases/increments a specified {@code int} by the specified percentage (between 0 ~ 100%, values higher than 100% default to 100%, same goes for 0).

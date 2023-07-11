@@ -4947,7 +4947,7 @@
 			}
 		},
 		"Death": {
-			"animation_length": 3.5,
+			"animation_length": 3.78,
 			"bones": {
 				"Head": {
 					"rotation": {

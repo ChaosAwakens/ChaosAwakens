@@ -101,7 +101,7 @@ public class AnimatableAngerMeleeAttackGoal extends Goal {
 		if (meleeAnim.getWrappedAnimProgress() < actionPointTickStart)
 			owner.lookAt(Type.EYES, target.position());
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
-			float targetAngle = (float) MathUtil.getAngleBetweenEntities(owner, potentialAffectedTarget);
+			float targetAngle = (float) MathUtil.getRelativeAngleBetweenEntities(owner, potentialAffectedTarget);
 			float attackAngle = owner.yBodyRot % 360;
 
 			if (targetAngle < 0) targetAngle += 360;
