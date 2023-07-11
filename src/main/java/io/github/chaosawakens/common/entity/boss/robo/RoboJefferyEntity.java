@@ -76,7 +76,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.23D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 720.0D)
 				.add(Attributes.ATTACK_DAMAGE, 45)
-				.add(Attributes.ATTACK_KNOCKBACK, 50)
+				.add(Attributes.ATTACK_KNOCKBACK, 25)
 				.add(Attributes.FOLLOW_RANGE, 95);
 	}
 
@@ -111,7 +111,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 16.6D, 20.1D, 115, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).setCooldown(20));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 13.6D, 17.1D, 130.0D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
 	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
 	/*	this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
 			affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
@@ -192,7 +192,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	
 	@Override
 	public float getMeleeAttackReachSqr(LivingEntity target) {
-		return super.getMeleeAttackReachSqr(target) * 1.3F;
+		return super.getMeleeAttackReachSqr(target) * 1.1F;
 	}
 
 	@Override

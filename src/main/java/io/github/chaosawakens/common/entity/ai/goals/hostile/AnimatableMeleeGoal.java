@@ -27,10 +27,11 @@ public class AnimatableMeleeGoal extends Goal {
 	private Predicate<AnimatableMonsterEntity> extraActivationConditions;
 	@Nullable
 	private List<Supplier<? extends IAnimationBuilder>> animationsToPick;
-	private int presetCooldown = 10;
+	private final int presetCooldown;
+	private int curCooldown;
 	private Supplier<? extends IAnimationBuilder> curAnim;
 
-	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability) {
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability, int presetCooldown) {
 		this.owner = owner;
 		this.meleeAnim = meleeAnim;
 		this.attackId = attackId;
@@ -38,27 +39,50 @@ public class AnimatableMeleeGoal extends Goal {
 		this.actionPointTickEnd = actionPointTickEnd;
 		this.angleRange = angleRange;
 		this.probability = probability;
+		this.presetCooldown = presetCooldown;
 	}
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double angleRange, double actionPointTickStart, double actionPointTickEnd) {
-		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1);
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1, 20);
 	}
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, int probability) {
-		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, probability);
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, probability, 20);
 	}
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd) {
-		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1);
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1, 20);
 	}
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, Predicate<AnimatableMonsterEntity> activationPredicate) {
-		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1);
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1, 20);
 		this.extraActivationConditions = activationPredicate;
 	}
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, Predicate<AnimatableMonsterEntity> activationPredicate) {
-		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1);
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1, 20);
+		this.extraActivationConditions = activationPredicate;
+	}
+	
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double angleRange, double actionPointTickStart, double actionPointTickEnd, int presetCooldown) {
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1, presetCooldown);
+	}
+
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, int probability, int presetCooldown) {
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, probability, presetCooldown);
+	}
+
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, Integer presetCooldown) {
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1, presetCooldown);
+	}
+
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int presetCooldown, Predicate<AnimatableMonsterEntity> activationPredicate) {
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, 1, presetCooldown);
+		this.extraActivationConditions = activationPredicate;
+	}
+
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, int presetCooldown, Predicate<AnimatableMonsterEntity> activationPredicate) {
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, 1, presetCooldown);
 		this.extraActivationConditions = activationPredicate;
 	}
 	
@@ -73,21 +97,12 @@ public class AnimatableMeleeGoal extends Goal {
 		
 		return this;
 	}
-	
-	public AnimatableMeleeGoal setCooldown(int cooldown) {
-		this.presetCooldown = cooldown;
-		
-		return this;
-	}
 
 	@Override
 	public boolean canUse() {
-		if (presetCooldown > 0) {
-			presetCooldown--;
-			return false;
-		}
+		if (curCooldown > 0) curCooldown--;
 		
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
 				&& owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget())
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
@@ -115,6 +130,7 @@ public class AnimatableMeleeGoal extends Goal {
 		owner.playAnimation(owner.getIdleAnim(), true);
 		
 		this.curAnim = null;
+		this.curCooldown = presetCooldown;
 	}
 	
 	@Override
