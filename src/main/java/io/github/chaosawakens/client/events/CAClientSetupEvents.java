@@ -296,6 +296,13 @@ public class CAClientSetupEvents {
 		RenderTypeLookup.setRenderLayer(CABlocks.DENSEWOOD_LEAF_CARPET.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.PEACH_LEAF_CARPET.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.SKYWOOD_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		
+		RenderTypeLookup.setRenderLayer(CABlocks.RED_CRYSTAL_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.GREEN_CRYSTAL_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.YELLOW_CRYSTAL_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.PINK_CRYSTAL_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.BLUE_CRYSTAL_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ORANGE_CRYSTAL_LEAF_CARPET.get(), RenderType.cutoutMipped());
 
 		RenderTypeLookup.setRenderLayer(CABlocks.OAK_LEAF_CARPET.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SPRUCE_LEAF_CARPET.get(), RenderType.cutout());

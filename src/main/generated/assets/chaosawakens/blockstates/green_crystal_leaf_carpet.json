@@ -1,0 +1,150 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet"
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "x": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "x": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "x": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chaosawakens:block/green_crystal_leaf_carpet",
+        "x": 90,
+        "uvlock": true
+      }
+    }
+  ]
+}

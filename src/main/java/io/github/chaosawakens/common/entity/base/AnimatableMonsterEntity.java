@@ -191,6 +191,11 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 	
 	@Override
+	protected boolean isMovementNoisy() {
+		return canBeKnockedBack();
+	}
+	
+	@Override
 	public void push(double pX, double pY, double pZ) {
 		if (!canBeKnockedBack()) return;
 		super.push(pX, pY, pZ);

@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -35,6 +36,7 @@ public class AnimatableAOEGoal extends Goal {
 		this.amountThreshold = amountThreshold;
 		this.probability = probability;
 		this.shouldFreezeRotation = shouldFreezeRotation;
+		setFlags(EnumSet.of(Flag.TARGET));
 	}
 
 	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability) {

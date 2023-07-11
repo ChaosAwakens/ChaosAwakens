@@ -13,6 +13,7 @@ import net.minecraft.tags.ItemTags;
 
 public class CATags {
 	public static class Blocks {
+		
 		public static ITag.INamedTag<Block> tag(String name) {
 			return BlockTags.bind(ChaosAwakens.MODID + ":" + name);
 		}
@@ -46,9 +47,13 @@ public class CATags {
 
 		public static final ITag.INamedTag<Block> WHITELIST = tag("whitelist");
 		public static final ITag.INamedTag<Block> BLACKLIST = tag("blacklist");
+		
+		public static final ITag.INamedTag<Block> ROBO_IMMUNE = tag("robo_immune");
+		public static final ITag.INamedTag<Block> JEFFERY_IMMUNE = tag("jeffery_immune");
 	}
 
 	public static class Items {
+		
 		public static ITag.INamedTag<Item> tag(String name) {
 			return ItemTags.bind(ChaosAwakens.MODID + ":" + name);
 		}
@@ -118,6 +123,7 @@ public class CATags {
 	}
 
 	public static class EntityTypes {
+		
 		public static ITag.INamedTag<EntityType<?>> tag(String name) {
 			return EntityTypeTags.bind(ChaosAwakens.MODID + ":" + name);
 		}

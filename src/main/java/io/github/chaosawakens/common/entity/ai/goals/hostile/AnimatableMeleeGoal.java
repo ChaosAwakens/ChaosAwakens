@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -31,6 +32,7 @@ public class AnimatableMeleeGoal extends Goal {
 		this.actionPointTickEnd = actionPointTickEnd;
 		this.angleRange = angleRange;
 		this.probability = probability;
+		setFlags(EnumSet.of(Flag.TARGET, Flag.LOOK));
 	}
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> meleeAnim, byte attackId, double angleRange, double actionPointTickStart, double actionPointTickEnd) {

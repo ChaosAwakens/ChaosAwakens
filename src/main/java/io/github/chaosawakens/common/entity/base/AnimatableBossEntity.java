@@ -60,6 +60,11 @@ public abstract class AnimatableBossEntity extends AnimatableMonsterEntity {
 	protected boolean canRide(Entity vehicle) {
 		return false;
 	}
+	
+	@Override
+	protected boolean isMovementNoisy() {
+		return false;
+	}
 
 	@Override
 	protected int calculateFallDamage(float f1, float f2) {
@@ -70,9 +75,9 @@ public abstract class AnimatableBossEntity extends AnimatableMonsterEntity {
 	public boolean isAffectedByFluids() {
 		return false;
 	}
-
+	
 	@Override
-	public boolean isSuppressingBounce() {
+	public boolean canBeKnockedBack() {
 		return false;
 	}
 

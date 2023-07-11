@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.misc;
 import java.util.List;
 import java.util.function.Consumer;
 
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.Entity;
@@ -15,15 +16,14 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class AOEHitboxEntity extends Entity {
 	private static final DataParameter<Float> CUR_RADIUS = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.FLOAT);
-	private static final DataParameter<Float> CUR_HEIGHT = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.FLOAT);
 	private static final DataParameter<Float> EXPANSION_SPEED = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.FLOAT);
 	private static final DataParameter<Float> RADIUS_CAP = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.FLOAT);
-	private static final DataParameter<Float> HEIGHT_CAP = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.FLOAT);
 	private static final DataParameter<Integer> LIFETIME = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.INT);
 	private static final DataParameter<Integer> ACTION_EXECUTION_INTERVAL = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.INT);
 	private Consumer<LivingEntity> actionOnIntersection;
@@ -34,14 +34,25 @@ public class AOEHitboxEntity extends Entity {
 		this.noCulling = true;
 	}
 	
+	public AOEHitboxEntity(World world, BlockPos spawnPos, float maxRad, float expSpeed, int maxAge, int execInterv, Consumer<LivingEntity> actionOnInters) {
+		this(CAEntityTypes.BASE_AOE_HITBOX.get(), world);
+		this.noPhysics = true;
+		this.noCulling = true;
+		
+		setMaxRadius(maxRad);
+		setExpansionSpeed(expSpeed);
+		setMaxAge(maxAge);
+		setActionExecutionInterval(execInterv);
+		setActionOnIntersection(actionOnInters);
+		setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+	}
+	
 	@Override
 	protected void defineSynchedData() {
-		this.entityData.define(CUR_RADIUS, 0.0F);
-		this.entityData.define(CUR_HEIGHT, 0.5F);
-		this.entityData.define(EXPANSION_SPEED, 0.0F);
-		this.entityData.define(RADIUS_CAP, 0.0F);
-		this.entityData.define(HEIGHT_CAP, 0.0F);
-		this.entityData.define(LIFETIME, 0);
+		this.entityData.define(CUR_RADIUS, Float.valueOf(0.5F));
+		this.entityData.define(EXPANSION_SPEED, Float.valueOf(0.1F));
+		this.entityData.define(RADIUS_CAP, Float.valueOf(6.0F));
+		this.entityData.define(LIFETIME, 200);
 		this.entityData.define(ACTION_EXECUTION_INTERVAL, 20);
 	}
 	
@@ -50,36 +61,19 @@ public class AOEHitboxEntity extends Entity {
 	}
 	
 	public void setRadius(float curRadius) {
-		this.entityData.set(CUR_RADIUS, curRadius);
-	}
-	
-	public float getHeight() {
-		return this.entityData.get(CUR_HEIGHT);
-	}
-	
-	public void setHeight(float curHeight) {
-		this.entityData.set(CUR_HEIGHT, curHeight);
+		this.entityData.set(CUR_RADIUS, Float.valueOf(curRadius));
 	}
 	
 	protected void incrementRadius() {
 		setRadius(getRadius() + getExpansionSpeed());
 	}
-	
-	protected void incrementHeight() {
-		setHeight(getHeight() + getExpansionSpeed());
-	}
-	
-	protected void incrementSize() {
-		incrementRadius();
-		incrementHeight();
-	}
-	
+
 	public float getExpansionSpeed() {
 		return this.entityData.get(EXPANSION_SPEED);
 	}
 	
 	public void setExpansionSpeed(float expansionSpeed) {
-		this.entityData.set(EXPANSION_SPEED, expansionSpeed);
+		this.entityData.set(EXPANSION_SPEED, Float.valueOf(expansionSpeed));
 	}
 	
 	public float getMaxRadius() {
@@ -87,15 +81,7 @@ public class AOEHitboxEntity extends Entity {
 	}
 	
 	public void setMaxRadius(float radiusCap) {
-		this.entityData.set(RADIUS_CAP, radiusCap);
-	}
-	
-	public float getMaxHeight() {
-		return this.entityData.get(HEIGHT_CAP);
-	}
-	
-	public void setMaxHeight(float heightCap) {
-		this.entityData.set(HEIGHT_CAP, heightCap);
+		this.entityData.set(RADIUS_CAP, Float.valueOf(radiusCap));
 	}
 	
 	public int getMaxAge() {
@@ -128,14 +114,24 @@ public class AOEHitboxEntity extends Entity {
 	
 	@Override
 	public void tick() {
-		if (tickCount >= getMaxAge()) remove();
+		super.tick();
+		
+		if (tickCount >= getMaxAge()) {
+			remove();
+			return;
+		}
 		
 		updateHitbox();
 	}
 	
 	private void updateHitbox() {
 		if (getRadius() < getMaxRadius()) incrementRadius();
-		if (getHeight() < getMaxHeight()) incrementHeight();
+		if (getRadius() > getMaxRadius()) setRadius(getMaxRadius());
+		
+		if (getRadius() < 0.5F) {
+			remove();
+			return;
+		}
 		
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(this, getBoundingBox().getXsize(), getBoundingBox().getYsize(), getBoundingBox().getZsize(), getBoundingBox().getSize());
 		
@@ -143,7 +139,7 @@ public class AOEHitboxEntity extends Entity {
 			if (actionOnIntersection == null) break;
 			if (potentialTarget == null) continue;
 			
-			actionOnIntersection.accept(potentialTarget);
+			if ((getActionExecutionInterval() > 0 && tickCount % getActionExecutionInterval() == 0) || getActionExecutionInterval() <= 0) actionOnIntersection.accept(potentialTarget);
 		}
 	}
 
@@ -151,10 +147,8 @@ public class AOEHitboxEntity extends Entity {
 	protected void readAdditionalSaveData(CompoundNBT pCompound) {
 		setAge(pCompound.getInt("Age"));
 		setRadius(pCompound.getFloat("Radius"));
-		setHeight(pCompound.getFloat("Height"));
 		setExpansionSpeed(pCompound.getFloat("RadiusExpansionSpeed"));
 		setMaxRadius(pCompound.getFloat("RadiusCap"));
-		setMaxHeight(pCompound.getFloat("HeightCap"));
 		setMaxAge(pCompound.getInt("Lifetime"));
 		setActionExecutionInterval(pCompound.getInt("ActionExecutionInterval"));
 	}
@@ -163,17 +157,32 @@ public class AOEHitboxEntity extends Entity {
 	protected void addAdditionalSaveData(CompoundNBT pCompound) {
 		pCompound.putInt("Age", tickCount);
 		pCompound.putFloat("Radius", getRadius());
-		pCompound.putFloat("Height", getHeight());
 		pCompound.putFloat("RadiusExpansionSpeed", getExpansionSpeed());
 		pCompound.putFloat("RadiusCap", getMaxRadius());
-		pCompound.putFloat("HeightCap", getMaxHeight());
 		pCompound.putInt("Lifetime", getMaxAge());
 		pCompound.putInt("ActionExecutionInterval", getActionExecutionInterval());
 	}
 	
 	@Override
 	public EntitySize getDimensions(Pose pPose) {
-		return EntitySize.scalable(getRadius() * 2.0F, getHeight() * 2.0F);
+		return EntitySize.scalable(getRadius() * 2.0F, getRadius() * 2.0F);
+	}
+	
+	@Override
+	public void refreshDimensions() {
+		double curX = getX();
+		double curY = getY();
+		double curZ = getZ();
+		
+		super.refreshDimensions();
+		
+		setPos(curX, curY, curZ);
+	}
+	
+	@Override
+	public void onSyncedDataUpdated(DataParameter<?> pKey) {
+		if (CUR_RADIUS.equals(pKey)) refreshDimensions();
+		super.onSyncedDataUpdated(pKey);
 	}
 	
 	@Override

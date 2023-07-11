@@ -363,6 +363,7 @@ public class CAEntityTypes {
 					.build(ChaosAwakens.prefix("lettuce_chicken_egg").toString()));
 	public static final RegistryObject<EntityType<AOEHitboxEntity>> BASE_AOE_HITBOX = ENTITY_TYPES.register("aoe_hitbox",
 			() -> EntityType.Builder.<AOEHitboxEntity>of(AOEHitboxEntity::new, EntityClassification.MISC)
+					.sized(0.5F, 0.5F).updateInterval(20).clientTrackingRange(20)
 					.noSummon()
 					.build(ChaosAwakens.prefix("aoe_hitbox").toString()));
 	

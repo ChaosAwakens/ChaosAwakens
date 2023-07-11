@@ -152,12 +152,6 @@ public class CACommonConfig {
 		
 		builder.push("Lapis Armor");
 		enableLapisArmorSetBonus = builder.define("Enable the Lapis set bonus", true);
-/*		lapisArmorSetLevelRequirementReductionModifier = builder
-				.comment("Modify/Substract from the enchantment level requirements for each enchantment row in the enchantment table. Note that if you attempt to expand or reduce \n"
-						+ " the size of the contents within the list, or define a number higher than the price listed in the enchantment table, the prices will automatically default to vanilla values. If you attempt \n"
-						+ " to define a NAN (not a number) value the game will crash. The first value is the modifier for the first row, the second value if the modifier for the \n"
-						+ "second row, and the third value is the modifier for the third row.")
-				.defineList("Lapis Set Enchantment Level Requirement Modifiers", LAPISMODLIST, cost -> cost instanceof Integer);*/
 		lapisArmorSetBookshelfPowerModifier = builder
 				.comment("The power of each bookshelf around the enchantment table when a player with the full Lapis Armor Set is present. This effect stacks with each present player.")
 				.defineInRange("Lapis Armor Set Bookshelf Power Moifier", 2, 0, 15);

@@ -65,6 +65,9 @@ public class CATagProvider extends BlockTagsProvider {
 			
 			tag(CATags.Blocks.WHITELIST).addTags(BlockTags.LOGS);
 			tag(CATags.Blocks.BLACKLIST).add(Blocks.BEDROCK);
+			
+			tag(CATags.Blocks.ROBO_IMMUNE).add(CABlocks.ROBO_BLOCK_I.get(), CABlocks.ROBO_BLOCK_V.get(), CABlocks.ROBO_BLOCK_X.get(), CABlocks.ROBO_BRICK_SLAB.get(), CABlocks.ROBO_BRICK_STAIRS.get(), CABlocks.ROBO_BRICK_WALL.get(), CABlocks.ROBO_BRICKS.get(), CABlocks.ROBO_CRATE.get(), CABlocks.ROBO_GATE_BLOCK.get(), CABlocks.ROBO_LAMP.get(), CABlocks.ROBO_SLAB_I.get(), CABlocks.ROBO_SLAB_X.get(), CABlocks.ROBO_STAIRS_I.get(), CABlocks.ROBO_STAIRS_X.get(), CABlocks.ROBO_WALL_I.get(), CABlocks.ROBO_WALL_X.get(), CABlocks.COMPACT_ROBO_BLOCK.get());
+			tag(CATags.Blocks.JEFFERY_IMMUNE).addTag(BlockTags.WITHER_IMMUNE).addTag(CATags.Blocks.ROBO_IMMUNE);
 
 			tag(CATags.Blocks.DENSE_DIRT).add(CABlocks.DENSE_GRASS_BLOCK.get(), CABlocks.DENSE_DIRT.get());
 			tag(CATags.Blocks.TERRA_PRETA).add(CABlocks.TERRA_PRETA.get());

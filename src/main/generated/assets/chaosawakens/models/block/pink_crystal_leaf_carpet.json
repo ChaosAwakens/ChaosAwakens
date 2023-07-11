@@ -1,0 +1,6 @@
+{
+  "parent": "chaosawakens:block/leaf_carpet",
+  "textures": {
+    "texture": "chaosawakens:block/pink_crystal_leaves"
+  }
+}

@@ -5,12 +5,13 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
+import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableLeapGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAParticleTypes;
+import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.AnimationUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -33,6 +34,7 @@ import net.minecraft.item.Items;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
@@ -112,14 +114,18 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 16.6D, 20.1D, 55));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
+	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
+		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
+			affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
+			CAScreenShakeEntity.shakeScreen(level, position(), 80F, 0.2F, 34, 120);
+		}).setBlockBreakPredicate((targetBlock) -> !targetBlock.is(CATags.Blocks.JEFFERY_IMMUNE)));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, false));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 	}
 
 	@Override
@@ -159,15 +165,17 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 					}
 				}
 				
-				AOEHitboxEntity deathHitBox = CAEntityTypes.BASE_AOE_HITBOX.get().create(level);
+				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(level, blockPosition(), 20.0F, 2.7F, 10, 1, null);
 				
-				deathHitBox.setPos(getX(), getY(), getZ());
-				deathHitBox.setMaxRadius(20.0F);
-				deathHitBox.setMaxHeight(3.7F);
-				deathHitBox.setExpansionSpeed(0.7F);
-				deathHitBox.setMaxAge(60);
+				deathHitBox.setActionOnIntersection((target) -> {
+					target.hurt(DamageSource.mobAttack(this), 20.0F);
+					
+					double angle = MathUtil.getAngleBetweenEntities(deathHitBox, target); //TODO Dist calc
+					
+					target.setDeltaMovement(-5.7D * Math.cos(angle), target.getDeltaMovement().y + 0.7D, -5.7D * Math.sin(angle));
+				});
 				
-				level.addFreshEntity(deathHitBox);
+				if (!level.isClientSide) level.addFreshEntity(deathHitBox);
 			}
 		}
 	}
