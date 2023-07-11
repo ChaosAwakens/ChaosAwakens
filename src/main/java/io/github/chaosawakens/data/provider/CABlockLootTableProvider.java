@@ -225,6 +225,10 @@ public class CABlockLootTableProvider extends BlockLootTables {
 		dropSelf(CABlocks.MOSSY_MARBLE_BRICKS.get());
 		dropSelf(CABlocks.POLISHED_MARBLE.get());
 		dropSelf(CABlocks.MARBLE_PILLAR.get());
+		dropSelf(CABlocks.MARBLE_PILLAR_3.get());
+		dropSelf(CABlocks.MARBLE_PILLAR_S.get());
+		dropSelf(CABlocks.MARBLE_PILLAR_T.get());
+		dropSelf(CABlocks.MARBLE_PILLAR_Z.get());
 		dropSelf(CABlocks.MARBLE_SLAB.get());
 		dropSelf(CABlocks.MARBLE_BRICK_SLAB.get());
 		dropSelf(CABlocks.CHISELED_MARBLE_BRICK_SLAB.get());

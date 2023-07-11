@@ -279,6 +279,10 @@ public class CARecipeProvider extends RecipeProvider {
 		stonecutting(recipeConsumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_STAIRS.get());
 		stonecutting(recipeConsumer, CABlocks.MARBLE.get(), CABlocks.POLISHED_MARBLE_WALL.get());
 		stonecutting(recipeConsumer, CABlocks.MARBLE.get(), CABlocks.MARBLE_PILLAR.get());
+		stonecutting(recipeConsumer, CABlocks.MARBLE_PILLAR.get(), CABlocks.MARBLE_PILLAR_3.get());
+		stonecutting(recipeConsumer, CABlocks.MARBLE_PILLAR.get(), CABlocks.MARBLE_PILLAR_S.get());
+		stonecutting(recipeConsumer, CABlocks.MARBLE_PILLAR.get(), CABlocks.MARBLE_PILLAR_T.get());
+		stonecutting(recipeConsumer, CABlocks.MARBLE_PILLAR.get(), CABlocks.MARBLE_PILLAR_Z.get());
 
 		bricks(recipeConsumer, CABlocks.MARBLE_BRICKS.get(),  CABlocks.POLISHED_MARBLE.get());
 		slab(recipeConsumer, CABlocks.MARBLE_BRICK_SLAB.get(), CABlocks.MARBLE_BRICKS.get());

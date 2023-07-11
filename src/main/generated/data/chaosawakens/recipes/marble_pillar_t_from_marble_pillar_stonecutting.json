@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "chaosawakens:marble_pillar"
+  },
+  "result": "chaosawakens:marble_pillar_t",
+  "count": 1
+}

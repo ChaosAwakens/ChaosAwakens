@@ -314,6 +314,10 @@ public class CABlocks {
 	public static final RegistryObject<StairsBlock> POLISHED_MARBLE_STAIRS = registerBlock("polished_marble_stairs", () -> new StairsBlock(() ->  POLISHED_MARBLE.get().defaultBlockState(), Properties.copy(CABlocks.POLISHED_MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<WallBlock> POLISHED_MARBLE_WALL = registerBlock("polished_marble_wall", () -> new WallBlock(Properties.copy(CABlocks.POLISHED_MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR = registerBlock("marble_pillar", () -> new RotatedPillarBlock(Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR_T = registerBlock("marble_pillar_t", () -> new RotatedPillarBlock(Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR_3 = registerBlock("marble_pillar_3", () -> new RotatedPillarBlock(Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR_S = registerBlock("marble_pillar_s", () -> new RotatedPillarBlock(Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<RotatedPillarBlock> MARBLE_PILLAR_Z = registerBlock("marble_pillar_z", () -> new RotatedPillarBlock(Properties.copy(Blocks.QUARTZ_PILLAR).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 
 	// LIMESTONE
 	public static final RegistryObject<Block> LIMESTONE = registerBlock("limestone_block", () -> new Block(Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);

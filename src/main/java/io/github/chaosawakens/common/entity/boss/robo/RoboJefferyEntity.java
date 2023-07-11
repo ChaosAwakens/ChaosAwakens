@@ -4,14 +4,11 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableLeapGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CAParticleTypes;
-import io.github.chaosawakens.common.registry.CATags;
-import io.github.chaosawakens.common.util.AnimationUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -111,14 +108,15 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		return PlayState.CONTINUE;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 16.6D, 20.1D, 90).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 16.6D, 20.1D, 115, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).setCooldown(20));
 	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
-		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
+	/*	this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
 			affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
 			CAScreenShakeEntity.shakeScreen(level, position(), 80F, 0.2F, 34, 120);
-		}).setBlockBreakPredicate((targetBlock) -> !targetBlock.is(CATags.Blocks.JEFFERY_IMMUNE)));
+		}).setBlockBreakPredicate((targetBlock) -> !targetBlock.is(CATags.Blocks.JEFFERY_IMMUNE)));*/
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
@@ -164,14 +162,15 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 					}
 				}
 				
-				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(level, blockPosition(), 20.0F, 2.7F, 15, 5, null);
+				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(level, blockPosition(), 20.0F, 2.7F, 15, 3, null);
 				
 				deathHitBox.setActionOnIntersection((target) -> {
 					target.hurt(DamageSource.mobAttack(this), 20.0F);
 					
 					double targetAngle = (MathUtil.getAngleBetweenEntities(deathHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
+					double kbMultiplier = target instanceof PlayerEntity ? -4.7D : -1.7D;
 										
-					target.setDeltaMovement(-1.7D * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + 0.8D, -1.7D * Math.sin(targetAngle));
+					target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + 0.7D, kbMultiplier * Math.sin(targetAngle));
 				});
 				
 				if (!level.isClientSide) level.addFreshEntity(deathHitBox);
@@ -193,7 +192,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	
 	@Override
 	public float getMeleeAttackReachSqr(LivingEntity target) {
-		return super.getMeleeAttackReachSqr(target);
+		return super.getMeleeAttackReachSqr(target) * 1.3F;
 	}
 
 	@Override

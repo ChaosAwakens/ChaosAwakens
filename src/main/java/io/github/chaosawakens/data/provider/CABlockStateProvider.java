@@ -71,6 +71,10 @@ public class CABlockStateProvider extends BlockStateProvider {
 		simpleBlock(CABlocks.MOSSY_MARBLE_BRICKS.get());
 		simpleBlock(CABlocks.POLISHED_MARBLE.get());
 		logBlock(CABlocks.MARBLE_PILLAR.get());
+		axisBlock(CABlocks.MARBLE_PILLAR_3.get(), chaosRL("marble_pillar_3"), chaosRL("marble_pillar_top"));
+		axisBlock(CABlocks.MARBLE_PILLAR_S.get(), chaosRL("marble_pillar_s"), chaosRL("marble_pillar_top"));
+		axisBlock(CABlocks.MARBLE_PILLAR_T.get(), chaosRL("marble_pillar_t"), chaosRL("marble_pillar_top"));
+		axisBlock(CABlocks.MARBLE_PILLAR_Z.get(), chaosRL("marble_pillar_z"), chaosRL("marble_pillar_top"));
 		slabBlock(CABlocks.MARBLE_SLAB.get(), chaosRL("marble_block"), chaosRL("marble_block"));
 		slabBlock(CABlocks.MARBLE_BRICK_SLAB.get(), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
 		slabBlock(CABlocks.CHISELED_MARBLE_BRICK_SLAB.get(), chaosRL("chiseled_marble_bricks"), chaosRL("chiseled_marble_bricks"));

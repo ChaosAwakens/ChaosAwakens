@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:marble_pillar_z_from_marble_pillar_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_marble_pillar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:marble_pillar"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:marble_pillar_z_from_marble_pillar_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_marble_pillar",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -73,6 +73,12 @@ public class AnimatableMeleeGoal extends Goal {
 		
 		return this;
 	}
+	
+	public AnimatableMeleeGoal setCooldown(int cooldown) {
+		this.presetCooldown = cooldown;
+		
+		return this;
+	}
 
 	@Override
 	public boolean canUse() {
@@ -81,14 +87,14 @@ public class AnimatableMeleeGoal extends Goal {
 			return false;
 		}
 		
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), meleeAnim.get(), attackId) && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
 				&& owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget())
-				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
+				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, curAnim, attackId) && owner.isAlive() && !curAnim.get().hasAnimationFinished();
+		return ObjectUtil.performNullityChecks(false, owner, curAnim.get(), attackId) && owner.isAlive() && !curAnim.get().hasAnimationFinished();
 	}
 
 	@Override
@@ -109,7 +115,6 @@ public class AnimatableMeleeGoal extends Goal {
 		owner.playAnimation(owner.getIdleAnim(), true);
 		
 		this.curAnim = null;
-		this.presetCooldown = 30;
 	}
 	
 	@Override

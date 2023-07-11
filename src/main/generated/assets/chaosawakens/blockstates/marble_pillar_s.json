@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "chaosawakens:block/marble_pillar_s_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "chaosawakens:block/marble_pillar_s"
+    },
+    "axis=z": {
+      "model": "chaosawakens:block/marble_pillar_s_horizontal",
+      "x": 90
+    }
+  }
+}

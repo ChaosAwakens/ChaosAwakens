@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chaosawakens:block/marble_pillar_z",
+    "end": "chaosawakens:block/marble_pillar_top"
+  }
+}

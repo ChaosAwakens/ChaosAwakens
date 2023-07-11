@@ -6,7 +6,6 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.AnimationUtil;
@@ -101,12 +100,13 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		return 2;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3)); //TODO fix
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftPunchAnim, () -> rightPunchAnim, random), PUNCH_ATTACK_ID, 14.2D, 17.3D, 90, 2));
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, AnimationUtil.pickAnimation(() -> leftSwingAnim, () -> rightSwingAnim, random), SWING_ATTACK_ID, 12D, 14D, 150, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3));
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 13.5D, 130, 2));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 14.2D, 17.3D, 95, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() < 6).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).setCooldown(20));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 7).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim).setCooldown(10));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 13.5D, 115, 5).setCooldown(30));
 	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, AnimationUtil.pickAnimation(() -> leftStompAnim, () -> rightStompAnim, random), STOMP_ATTACK_ID, 10.4D, 14.7D, 8.0D, 2));
 	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.6D, 17.5D, 12.0D, 2));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
@@ -173,7 +173,9 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	public float getMeleeAttackReachSqr(LivingEntity target) {
-		return getAttackID() != DASH_ATTACK_ID ? super.getMeleeAttackReachSqr(target) : super.getMeleeAttackReachSqr(target) * 1.5F;
+		if (getAttackID() == SWING_ATTACK_ID) return super.getMeleeAttackReachSqr(target) * 0.8F;
+		if (getAttackID() == DASH_ATTACK_ID) return super.getMeleeAttackReachSqr(target) * 1.3F;
+		return super.getMeleeAttackReachSqr(target);
 	}
 
 	@Override

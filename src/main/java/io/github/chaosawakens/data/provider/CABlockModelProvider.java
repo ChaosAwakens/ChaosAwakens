@@ -149,6 +149,14 @@ public class CABlockModelProvider extends BlockModelProvider {
 		cubeAll("polished_marble_block", chaosRL("polished_marble_block"));
 		cubeColumn("marble_pillar", chaosRL("marble_pillar"), chaosRL("marble_pillar_top"));
 		cubeColumnHorizontal("marble_pillar", chaosRL("marble_pillar"), chaosRL("marble_pillar_top"));
+		cubeColumn("marble_pillar_t", chaosRL("marble_pillar_t"), chaosRL("marble_pillar_top"));
+		cubeColumnHorizontal("marble_pillar_t", chaosRL("marble_pillar_t"), chaosRL("marble_pillar_top"));
+		cubeColumn("marble_pillar_s", chaosRL("marble_pillar_s"), chaosRL("marble_pillar_top"));
+		cubeColumnHorizontal("marble_pillar_s", chaosRL("marble_pillar_s"), chaosRL("marble_pillar_top"));
+		cubeColumn("marble_pillar_3", chaosRL("marble_pillar_3"), chaosRL("marble_pillar_top"));
+		cubeColumnHorizontal("marble_pillar_3", chaosRL("marble_pillar_3"), chaosRL("marble_pillar_top"));
+		cubeColumn("marble_pillar_z", chaosRL("marble_pillar_z"), chaosRL("marble_pillar_top"));
+		cubeColumnHorizontal("marble_pillar_z", chaosRL("marble_pillar_z"), chaosRL("marble_pillar_top"));
 		slab("marble_slab", chaosRL("marble_block"), chaosRL("marble_block"), chaosRL("marble_block"));
 		slabTop("marble_slab", chaosRL("marble_block"), chaosRL("marble_block"), chaosRL("marble_block"));
 		slab("marble_brick_slab", chaosRL("marble_bricks"), chaosRL("marble_bricks"), chaosRL("marble_bricks"));
