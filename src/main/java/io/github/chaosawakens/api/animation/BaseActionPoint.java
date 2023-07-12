@@ -2,6 +2,7 @@ package io.github.chaosawakens.api.animation;
 
 import io.github.chaosawakens.api.animation.BaseActionPoint.BaseAction;
 
+//TODO Forever incomplete.
 public abstract class BaseActionPoint<A extends BaseAction> {
 	private final double actionTick;
 	/*public static final BiAction<LivingEntity, Float> HURT_TARGET = (target, damage) -> {
