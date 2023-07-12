@@ -38,7 +38,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		this.server = ((Entity) animatable).getServer();
 	}
 	
-	public void tick() {
+	public void tick() { //TODO Enforce on client w/packets, fix dedicated server crash by caching static info (primarily anim length, everything else is fine) on dedicated server.
 		double tickProgressDelta = server == null ? 0.98D : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 		
 		switch (animationState) {

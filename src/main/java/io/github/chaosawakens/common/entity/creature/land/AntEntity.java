@@ -61,7 +61,7 @@ public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob 
 
 	@Override
 	public int animationInterval() {
-		return 0;
+		return 1;
 	}
 
 	@Override

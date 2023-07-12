@@ -20,7 +20,7 @@ public class CAEntityTrapOreBlock extends CAOreBlock {
 	public CAEntityTrapOreBlock(Supplier<EntityType<?>> entityToSummon, Properties properties) {
 		super(properties);
 		this.entityToSummon = entityToSummon;
-		this.amountToSummon = RANDOM.nextInt(20);
+		this.amountToSummon = RANDOM.nextInt(10, 20);
 	}
 
 	protected void summonEntityAt(BlockPos targetPos, World world, boolean shouldSpawnByAmount) {
@@ -46,8 +46,9 @@ public class CAEntityTrapOreBlock extends CAOreBlock {
 	@Override
 	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean moving) {
 		ItemStack blockStack = getBlock().asItem().getDefaultInstance();
+		
 		if (!world.isClientSide && world.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, blockStack) == 0) {
-			summonEntityAt(pos, world, false);
+			summonEntityAt(pos, world, true);
 		}
 	}
 

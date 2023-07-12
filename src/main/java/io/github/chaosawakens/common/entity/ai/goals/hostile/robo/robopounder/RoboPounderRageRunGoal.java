@@ -1,13 +1,43 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder;
 
+import java.util.function.Supplier;
+
+import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 public class RoboPounderRageRunGoal extends Goal {
-	private final RoboPounderEntity animatableOwner;
+	private final RoboPounderEntity owner;
+	private final Supplier<SingletonAnimationBuilder> rageBeginAnim;
+	private final Supplier<SingletonAnimationBuilder> rageRunAnim;
+	private final Supplier<SingletonAnimationBuilder> rageCooldownAnim;
+	private final Supplier<SingletonAnimationBuilder> rageRestartAnim;
+	private final byte rageRunAttackId;
+	private final int presetMaxCooldown;
+	private int curCooldown;
+	private final int probability;
 	
-	public RoboPounderRageRunGoal(RoboPounderEntity animatableOwner) {
-		this.animatableOwner = animatableOwner;
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
+		this.owner = owner;
+		this.rageBeginAnim = rageBeginAnim;
+		this.rageRunAnim = rageRunAnim;
+		this.rageCooldownAnim = rageCooldownAnim;
+		this.rageRestartAnim = rageRestartAnim;
+		this.rageRunAttackId = rageRunAttackId;
+		this.presetMaxCooldown = presetMaxCooldown;
+		this.probability = probability;
+	}
+	
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId, int presetMaxCooldown) {
+		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageRunAttackId, presetMaxCooldown, 1);
+	}
+	
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId, Integer probability) {
+		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageRunAttackId, 400, probability);
+	}
+	
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId) {
+		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageRunAttackId, 400, 1);
 	}
 
 	@Override
@@ -27,10 +57,14 @@ public class RoboPounderRageRunGoal extends Goal {
 	
 	@Override
 	public void start() {
+		owner.setAttackID(rageRunAttackId);
+		owner.getNavigation().stop();
+		owner.playAnimation(rageBeginAnim.get(), true);
 	}
 	
 	@Override
 	public void stop() {
+		owner.setAttackID((byte) 0);
 	}
 	
 	@Override

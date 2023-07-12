@@ -82,7 +82,7 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 
 	@Override
 	public int animationInterval() {
-		return 0;
+		return 1;
 	}
 
 	@Override
