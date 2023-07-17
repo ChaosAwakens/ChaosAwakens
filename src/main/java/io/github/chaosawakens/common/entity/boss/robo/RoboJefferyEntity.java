@@ -201,11 +201,6 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 	
 	@Override
-	public boolean displayFireAnimation() {
-		return false;
-	}
-	
-	@Override
 	public boolean ignoreExplosion() {
 		return true;
 	}
