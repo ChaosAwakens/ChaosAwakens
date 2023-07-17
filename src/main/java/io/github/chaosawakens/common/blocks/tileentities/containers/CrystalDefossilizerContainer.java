@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.blocks.tileentities.containers;
 
-import io.github.chaosawakens.common.blocks.tileentities.CopperDefossilizerTileEntity;
+import io.github.chaosawakens.common.blocks.tileentities.CrystalDefossilizerTileEntity;
 import io.github.chaosawakens.common.items.PowerChipItem;
 import io.github.chaosawakens.common.registry.CAContainerTypes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,7 +15,7 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
 
-public class DefossilizerCopperContainer extends Container {
+public class CrystalDefossilizerContainer extends Container {
 	private final IInventory inventory;
 	private IIntArray fields;
 	protected final World level;
@@ -24,12 +24,12 @@ public class DefossilizerCopperContainer extends Container {
 	private final Slot powerchipSlot;
 	private final Slot resultSlot;
 
-	public DefossilizerCopperContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
-		this(id, playerInventory, new CopperDefossilizerTileEntity(), new IntArray(buffer.readByte()));
+	public CrystalDefossilizerContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
+		this(id, playerInventory, new CrystalDefossilizerTileEntity(), new IntArray(buffer.readByte()));
 	}
 
-	public DefossilizerCopperContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
-		super(CAContainerTypes.COPPER_DEFOSSILIZER.get(), id);
+	public CrystalDefossilizerContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
+		super(CAContainerTypes.CRYSTAL_DEFOSSILIZER.get(), id);
 		this.level = playerInventory.player.level;
 		this.inventory = inventory;
 		this.fields = fields;
@@ -71,15 +71,12 @@ public class DefossilizerCopperContainer extends Container {
 
 	public int getProgressArrowScale() {
 		int progress = fields.get(0);
-		return progress != 0 ? progress * 24 / CopperDefossilizerTileEntity.WORK_TIME : 0;
+		return progress != 0 ? progress * 24 / CrystalDefossilizerTileEntity.WORK_TIME : 0;
 	}
 
-	public int getLitScale() {
+	public int getLitProgress() {
 		int progress = fields.get(0);
-		if (progress == 0) {
-			progress = 200;
-		}
-		return progress * 17 / CopperDefossilizerTileEntity.WORK_TIME;
+		return progress != 0 ? progress * 24 / CrystalDefossilizerTileEntity.WORK_TIME : 0;
 	}
 
 	@Override

@@ -149,11 +149,12 @@
 	"container.chaosawakens.crystal_crafting_table": "Crystalwood Crafting Table",
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",
 	"container.chaosawakens.copper_defossilizer": "Copper Defossilizer",
-	"container.chaosawakens.crystal_defossilizer": "Crystal Defossilizer",
+	"container.chaosawakens.crystal_defossilizer": "Pink Tourmaline Defossilizer",
 	"container.chaosawakens.iron_defossilizer": "Iron Defossilizer",
 	"container.chaosawakens.robo_crate": "Robo Crate",
 	"container.chaosawakens.jei.copper_defossilizer": "Copper Defossilizer",
 	"container.chaosawakens.jei.iron_defossilizer": "Iron Defossilizer",
+	"container.chaosawakens.jei.crystal_defossilizer": "Crystal Defossilizer",
 	
 	"effect.chaosawakens.paralysis": "Paralysis",
 	"effect.chaosawakens.paralysis.description": "Paralyzes the afflicted target, completely immobilising them. (W.I.P)",

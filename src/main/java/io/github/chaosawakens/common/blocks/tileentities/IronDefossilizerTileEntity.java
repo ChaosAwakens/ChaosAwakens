@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerIronContainer;
+import io.github.chaosawakens.common.blocks.tileentities.containers.IronDefossilizerContainer;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -160,7 +160,7 @@ public class IronDefossilizerTileEntity extends LockableTileEntity implements IS
 
 	@Override
 	protected Container createMenu(int id, PlayerInventory playerInventory) {
-		return new DefossilizerIronContainer(id, playerInventory, this, this.fields);
+		return new IronDefossilizerContainer(id, playerInventory, this, this.fields);
 	}
 
 	@Override

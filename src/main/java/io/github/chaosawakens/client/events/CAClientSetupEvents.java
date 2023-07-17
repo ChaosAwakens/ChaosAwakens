@@ -39,9 +39,9 @@ import io.github.chaosawakens.client.renderers.entity.projectile.IrukandjiArrowP
 import io.github.chaosawakens.client.renderers.entity.projectile.RayGunProjectileRenderer;
 import io.github.chaosawakens.client.renderers.entity.projectile.ThunderStaffProjectileRenderer;
 import io.github.chaosawakens.client.renderers.entity.projectile.UltimateArrowProjectileRenderer;
-import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerCopperScreen;
-import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerCrystalScreen;
-import io.github.chaosawakens.common.blocks.tileentities.screens.DefossilizerIronScreen;
+import io.github.chaosawakens.common.blocks.tileentities.screens.CopperDefossilizerScreen;
+import io.github.chaosawakens.common.blocks.tileentities.screens.CrystalDefossilizerScreen;
+import io.github.chaosawakens.common.blocks.tileentities.screens.IronDefossilizerScreen;
 import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
 import io.github.chaosawakens.common.items.armor.EnderScaleArmorItem;
 import io.github.chaosawakens.common.items.tools.UltimateFishingRodItem;
@@ -628,9 +628,9 @@ public class CAClientSetupEvents {
 					return stack != null && stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Zombie") && !stack.getTag().contains("entity") && stack.getItem().getName(stack).toString().contains("Villager") ? 1.0F : 0.0F;
 		 });
 		
-		ScreenManager.register(CAContainerTypes.COPPER_DEFOSSILIZER.get(), DefossilizerCopperScreen::new);
-		ScreenManager.register(CAContainerTypes.IRON_DEFOSSILIZER.get(), DefossilizerIronScreen::new);
-		ScreenManager.register(CAContainerTypes.CRYSTAL_DEFOSSILIZER.get(), DefossilizerCrystalScreen::new);
+		ScreenManager.register(CAContainerTypes.COPPER_DEFOSSILIZER.get(), CopperDefossilizerScreen::new);
+		ScreenManager.register(CAContainerTypes.IRON_DEFOSSILIZER.get(), IronDefossilizerScreen::new);
+		ScreenManager.register(CAContainerTypes.CRYSTAL_DEFOSSILIZER.get(), CrystalDefossilizerScreen::new);
 	}
 	
 	@SubscribeEvent

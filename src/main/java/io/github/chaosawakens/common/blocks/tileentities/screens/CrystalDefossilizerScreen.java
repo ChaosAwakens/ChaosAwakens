@@ -4,16 +4,16 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerIronContainer;
+import io.github.chaosawakens.common.blocks.tileentities.containers.CrystalDefossilizerContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class DefossilizerIronScreen extends ContainerScreen<DefossilizerIronContainer> {
+public class CrystalDefossilizerScreen extends ContainerScreen<CrystalDefossilizerContainer> {
 	public static final ResourceLocation TEXTURE = ChaosAwakens.prefix("textures/gui/container/defossilizer.png");
 
-	public DefossilizerIronScreen(DefossilizerIronContainer container, PlayerInventory playerInventory, ITextComponent title) {
+	public CrystalDefossilizerScreen(CrystalDefossilizerContainer container, PlayerInventory playerInventory, ITextComponent title) {
 		super(container, playerInventory, title);
 	}
 
@@ -37,6 +37,5 @@ public class DefossilizerIronScreen extends ContainerScreen<DefossilizerIronCont
 
 		// Progress arrow
 		blit(matrixStack, posX + 79, posY + 35, 176, 14, menu.getProgressArrowScale() + 1, 16);
-		
     }
 }

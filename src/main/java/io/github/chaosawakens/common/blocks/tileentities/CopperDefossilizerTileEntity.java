@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerCopperContainer;
+import io.github.chaosawakens.common.blocks.tileentities.containers.CopperDefossilizerContainer;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -158,7 +158,7 @@ public class CopperDefossilizerTileEntity extends LockableTileEntity implements 
 
 	@Override
 	protected Container createMenu(int id, PlayerInventory playerInventory) {
-		return new DefossilizerCopperContainer(id, playerInventory, this, this.fields);
+		return new CopperDefossilizerContainer(id, playerInventory, this, this.fields);
 	}
 
 	@Override

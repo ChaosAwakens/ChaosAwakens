@@ -21,7 +21,6 @@ import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 
 public class AnimatableAOEGoal extends Goal {
@@ -145,7 +144,7 @@ public class AnimatableAOEGoal extends Goal {
 		if (curCooldown > 0) curCooldown--;
 
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId, shouldFreezeRotation) && curCooldown <= 0
-				&& owner.distanceTo(owner.getTarget()) <= aoeRange
+				&& owner.distanceTo(owner.getTarget()) <= aoeRange + 2.0D
 				&& EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange).size() >= amountThreshold
 				&& owner.isAlive() && owner.getTarget().isAlive() && !owner.isAttacking()
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
@@ -166,25 +165,6 @@ public class AnimatableAOEGoal extends Goal {
 		owner.playAnimation(targetAnim.get(), true);
 
 		this.curAnim = targetAnim;
-
-		if (isProgressive && aoeDamageHitBox == null) {
-			this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()), 1, null);
-
-			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
-
-				aoeDamageHitBox.setActionOnIntersection((target) -> {
-					if (!affectedEntities.contains(target)) {
-						target.hurt(DamageSource.mobAttack(owner), 12.0F);
-
-						double targetAngle = (MathUtil.getAngleBetweenEntities(aoeDamageHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
-						double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 5, 100.0D) : -Math.min(owner.getAttackDamage() / 5, 100.0D) / 2.1D;
-
-						target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + Math.min(owner.getAttackDamage() / 10, 1.0), kbMultiplier * Math.sin(targetAngle));
-						affectedEntities.add(target);
-					}
-				});
-			}
-		}
 
 		affectedEntities.clear();
 	}
@@ -218,6 +198,20 @@ public class AnimatableAOEGoal extends Goal {
 
 		if (isProgressive) {
 			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
+				AOEHitboxEntity aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()), 1, null);
+
+				aoeDamageHitBox.setActionOnIntersection((target) -> {
+					if (!affectedEntities.contains(target)) {
+						owner.doHurtTarget(target);
+
+						double targetAngle = (MathUtil.getAngleBetweenEntities(aoeDamageHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
+						double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 5, 100.0D) : -Math.min(owner.getAttackDamage() / 5, 100.0D) / 2.1D;
+
+						target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + Math.min(owner.getAttackDamage() / 10, 1.0), kbMultiplier * Math.sin(targetAngle));
+						affectedEntities.add(target);
+					}
+				});
+				
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange, (float) Math.min(aoeRange / 100, 1.0D), 20, (int) aoeRange * 2);
 				owner.level.addFreshEntity(aoeDamageHitBox);
 			}

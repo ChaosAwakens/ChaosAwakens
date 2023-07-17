@@ -15,7 +15,7 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
 
-public class DefossilizerIronContainer extends Container {
+public class IronDefossilizerContainer extends Container {
 	private final IInventory inventory;
 	private IIntArray fields;
 	protected final World level;
@@ -24,11 +24,11 @@ public class DefossilizerIronContainer extends Container {
 	private final Slot powerchipSlot;
 	private final Slot resultSlot;
 
-	public DefossilizerIronContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
+	public IronDefossilizerContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
 		this(id, playerInventory, new IronDefossilizerTileEntity(), new IntArray(buffer.readByte()));
 	}
 
-	public DefossilizerIronContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
+	public IronDefossilizerContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
 		super(CAContainerTypes.IRON_DEFOSSILIZER.get(), id);
 		this.level = playerInventory.player.level;
 		this.inventory = inventory;

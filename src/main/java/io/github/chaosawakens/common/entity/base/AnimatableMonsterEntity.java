@@ -19,7 +19,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -210,7 +209,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	
 	@Override
 	public boolean hurt(DamageSource pSource, float pAmount) {
-		if (pSource.getEntity() != null && pSource.getEntity() instanceof GolemEntity) {
+		if (pSource.getEntity() != null && !canBeKnockedBack()) {
 			super.hurt(pSource, pAmount);
 			return false;
 		}

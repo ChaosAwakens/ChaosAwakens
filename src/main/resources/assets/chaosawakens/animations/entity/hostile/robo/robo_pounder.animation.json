@@ -221,7 +221,7 @@
 		},
 		"Dash Attack": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 3,
+			"animation_length": 3.2,
 			"bones": {
 				"Head": {
 					"rotation": {
@@ -3371,7 +3371,8 @@
 			}
 		},
 		"Heavy AoE Attack": {
-			"animation_length": 2,
+			"loop": "hold_on_last_frame",
+			"animation_length": 2.3,
 			"bones": {
 				"Head": {
 					"rotation": {
