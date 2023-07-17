@@ -12,7 +12,6 @@ import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
-import io.github.chaosawakens.common.util.EnumUtil.BlockPatternShape;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -21,7 +20,6 @@ import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
 
 public class AnimatableAOEGoal extends Goal {
 	private final AnimatableMonsterEntity owner;
@@ -165,6 +163,20 @@ public class AnimatableAOEGoal extends Goal {
 		owner.playAnimation(targetAnim.get(), true);
 
 		this.curAnim = targetAnim;
+		
+		this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()), 1, null);
+
+		aoeDamageHitBox.setActionOnIntersection((target) -> {
+			if (!affectedEntities.contains(target)) {
+				owner.doHurtTarget(target);
+
+				double targetAngle = (MathUtil.getAngleBetweenEntities(aoeDamageHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
+				double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 5, 100.0D) : -Math.min(owner.getAttackDamage() / 5, 100.0D) / 2.1D;
+
+				target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + Math.min(owner.getAttackDamage() / 10, 1.0), kbMultiplier * Math.sin(targetAngle));
+				affectedEntities.add(target);
+			}
+		});
 
 		affectedEntities.clear();
 	}
@@ -191,29 +203,16 @@ public class AnimatableAOEGoal extends Goal {
 		owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 
 		List<LivingEntity> affectedTargets = EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange);
-		List<BlockPos> affectedBlockPositions = BlockPatternShape.CIRCLE.applyShape(owner.level, owner.blockPosition(), aoeRange, 1, true, false, blockAffectConditions);
+	//	List<BlockPos> affectedBlockPositions = BlockPatternShape.CIRCLE.applyShape(owner.level, owner.blockPosition(), aoeRange, 1, true, false, blockAffectConditions);
 
 		if (shouldFreezeRotation || curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 		else if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
 
 		if (isProgressive) {
 			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
-				AOEHitboxEntity aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()), 1, null);
-
-				aoeDamageHitBox.setActionOnIntersection((target) -> {
-					if (!affectedEntities.contains(target)) {
-						owner.doHurtTarget(target);
-
-						double targetAngle = (MathUtil.getAngleBetweenEntities(aoeDamageHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
-						double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 5, 100.0D) : -Math.min(owner.getAttackDamage() / 5, 100.0D) / 2.1D;
-
-						target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + Math.min(owner.getAttackDamage() / 10, 1.0), kbMultiplier * Math.sin(targetAngle));
-						affectedEntities.add(target);
-					}
-				});
-				
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange, (float) Math.min(aoeRange / 100, 1.0D), 20, (int) aoeRange * 2);
-				owner.level.addFreshEntity(aoeDamageHitBox);
+				
+				if (aoeDamageHitBox != null) owner.level.addFreshEntity(aoeDamageHitBox);
 			}
 		} else {
 			if (!affectedTargets.isEmpty()) {
