@@ -71,8 +71,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 600)
-				.add(Attributes.ARMOR, 80)
-				.add(Attributes.ARMOR_TOUGHNESS, 50)
+				.add(Attributes.ARMOR, 50)
+				.add(Attributes.ARMOR_TOUGHNESS, 20)
 				.add(Attributes.MOVEMENT_SPEED, 0.23D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 720.0D)
 				.add(Attributes.ATTACK_DAMAGE, 45)
@@ -111,7 +111,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 13.6D, 17.1D, 130.0D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 13.6D, 17.1D, 240.0D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
 	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
 	/*	this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
 			affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
@@ -165,10 +165,10 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(level, blockPosition(), 20.0F, 2.7F, 15, 3, null);
 				
 				deathHitBox.setActionOnIntersection((target) -> {
-					target.hurt(DamageSource.mobAttack(this), 20.0F);
+					target.hurt(DamageSource.mobAttack(this), 12.0F);
 					
 					double targetAngle = (MathUtil.getAngleBetweenEntities(deathHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
-					double kbMultiplier = target instanceof PlayerEntity ? -4.7D : -1.7D;
+					double kbMultiplier = target instanceof PlayerEntity ? -5.7D : -2.7D;
 										
 					target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + 0.7D, kbMultiplier * Math.sin(targetAngle));
 				});
@@ -192,12 +192,22 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	
 	@Override
 	public float getMeleeAttackReachSqr(LivingEntity target) {
-		return super.getMeleeAttackReachSqr(target) * 1.1F;
+		return super.getMeleeAttackReachSqr(target) * 1.2F;
 	}
 
 	@Override
 	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
 		return super.getStandingEyeHeight(pPose, pSize) + 0.34F;
+	}
+	
+	@Override
+	public boolean displayFireAnimation() {
+		return false;
+	}
+	
+	@Override
+	public boolean ignoreExplosion() {
+		return true;
 	}
 
 	@Override
@@ -224,7 +234,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	protected void handleBaseAnimations() {
 		super.handleBaseAnimations();
-		if (!isAttacking() && getHealth() > getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(idleExtrasAnim, false);
-		if (getHealth() <= getMaxHealth() / 8 && !isDeadOrDying()) playAnimation(lowHealthAnim, false);
+		if (!isAttacking() && !isDeadOrDying()) playAnimation(idleExtrasAnim, false);
+	//	if (getHealth() <= getMaxHealth() / 6 && !isDeadOrDying()) playAnimation(lowHealthAnim, false);
 	}
 }

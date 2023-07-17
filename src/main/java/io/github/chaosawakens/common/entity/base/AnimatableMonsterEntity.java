@@ -285,6 +285,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	protected void setAttackSpeed(double newBaseValue) {
 		getAttribute(Attributes.ATTACK_SPEED).setBaseValue(newBaseValue);;
 	}
+	
+	protected void setAttackKnockback(double newBaseValue) {
+		getAttribute(Attributes.ATTACK_KNOCKBACK).setBaseValue(newBaseValue);;
+	}
 
 	protected void setMovementSpeed(double newBaseValue) {
 		getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(newBaseValue);;
@@ -300,6 +304,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	protected void setArmor(double newBaseValue) {
 		getAttribute(Attributes.ARMOR).setBaseValue(newBaseValue);;
+	}
+	
+	protected void setArmorToughness(double newBaseValue) {
+		getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(newBaseValue);;
 	}
 
 	@Override

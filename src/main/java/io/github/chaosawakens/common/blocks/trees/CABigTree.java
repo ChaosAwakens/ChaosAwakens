@@ -29,5 +29,4 @@ public class CABigTree extends BigTree {
 	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random pRandom, boolean pLargeHive) {
 		return tree.get();
 	}
-
 }

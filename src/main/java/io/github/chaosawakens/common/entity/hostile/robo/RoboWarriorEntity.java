@@ -68,6 +68,11 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	@Override
 	public void manageAttack(LivingEntity target) {		
 	}
+	
+	@Override
+	public boolean ignoreExplosion() {
+		return true;
+	}
 
 	@Override
 	public SingletonAnimationBuilder getIdleAnim() {

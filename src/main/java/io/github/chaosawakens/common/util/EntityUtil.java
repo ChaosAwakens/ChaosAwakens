@@ -21,9 +21,11 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.CooldownTracker;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -213,12 +215,22 @@ public final class EntityUtil {
 	public static boolean isHoldingItem(LivingEntity targetEntity, Item holdingItem) {
 		return targetEntity.getMainHandItem().getItem() == holdingItem || targetEntity.getOffhandItem().getItem() == holdingItem;
 	}
+	
+	/**
+	 * Checks if an {@link Item} is on cooldown via {@link CooldownTracker#isOnCooldown(Item)}
+	 * @param playerOwner The owner of the {@link Item} to check for cooldown
+	 * @param targetItem The target {@link Item} to check for cooldown
+	 * @return {@code true} if the specified item is on cooldown (and the player/item aren't nul), else returns {@code false}
+	 */
+	public static boolean isItemOnCooldown(PlayerEntity playerOwner, Item targetItem) {
+		return ObjectUtil.performNullityChecks(false, playerOwner, targetItem) ? playerOwner.getCooldowns().isOnCooldown(targetItem) : false;
+	}
 
 	/**
 	 * Checks if the player's Curios slots are empty
 	 *
 	 * @param targetPlayer Player to check the Curios slots of
-	 * @return True if Curios slots are empty or Curios is not installed, else returns False
+	 * @return {@code true} if Curios slots are empty or Curios is not installed, else returns {@code false}
 	 */
 	public static boolean areCuriosSlotsEmpty(PlayerEntity targetPlayer) {
 		if (ModList.get().isLoaded("curios")) {
@@ -228,9 +240,7 @@ public final class EntityUtil {
 				IItemHandlerModifiable handler = curiosHandler.orElseThrow(IllegalStateException::new);
 
 				for (int slot = 0; slot < handler.getSlots(); slot++) {
-					if (!handler.getStackInSlot(slot).isEmpty()) {
-						return false;
-					}
+					if (!handler.getStackInSlot(slot).isEmpty()) return false;
 				}
 			}
 		}
@@ -291,7 +301,7 @@ public final class EntityUtil {
 	 * @param cooldown The cooldown (in ticks) before the shield becomes usable again
 	 */
 	public static void disableShield(PlayerEntity shieldHolder, int cooldown) {
-		if (shieldHolder != null && isHoldingItem(shieldHolder, Items.SHIELD) && shieldHolder.getUseItem().getItem().equals(Items.SHIELD)) {
+		if (shieldHolder != null && isHoldingItem(shieldHolder, Items.SHIELD) && !isItemOnCooldown(shieldHolder, Items.SHIELD) && shieldHolder.getUseItem().getItem().equals(Items.SHIELD)) {
 			shieldHolder.getCooldowns().addCooldown(shieldHolder.getUseItem().getItem(), cooldown);
 			shieldHolder.stopUsingItem();
 			shieldHolder.level.broadcastEntityEvent(shieldHolder, (byte) 30);
@@ -339,6 +349,39 @@ public final class EntityUtil {
 			double clampedAttractionSpeed = MathHelper.clamp(attractionSpeed, 0.01D, 1.0D);
 			potentialAffectedTarget.setDeltaMovement(clampedAttractionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedAttractionSpeed * Math.sin(relAngleRadians));
 		}
+	}
+	
+	/**
+	 * Makes the specified attacking {@link LivingEntity} "charge" towards a target {@link LivingEntity} with a specified overshoot.
+	 * @param attackingEntity The {@link LivingEntity} to have "charge" towards its target
+	 * @param targetEntity The target {@link LivingEntity} for the attacking {@link LivingEntity} to charge towards
+	 * @param overshootAmount The extra distance traveled by the attacking {@link LivingEntity}'s charge
+	 * @param chargeThreshold The maximum distance the attacking {@link LivingEntity}'s charge can travel. Set to -1 to remove the limit
+	 * @param chargePercentageMod A percentage modifier to how far the charge should go relative to its length
+	 */
+	public static void chargeTowards(LivingEntity attackingEntity, LivingEntity targetEntity, double overshootAmount, double chargeThreshold, double chargePercentageMod) {
+		double relativeAngle = Math.atan2(targetEntity.getZ() - attackingEntity.getZ(), targetEntity.getX() - attackingEntity.getX());
+		float hitDistanceSqr = (float) Math.sqrt((targetEntity.getZ() - attackingEntity.getZ()) * (targetEntity.getZ() - attackingEntity.getZ()) + (targetEntity.getX() - attackingEntity.getX()) * (targetEntity.getX() - attackingEntity.getX()));
+		
+		double targetX = Math.min(Math.cos(relativeAngle) * (hitDistanceSqr + overshootAmount), Math.cos(relativeAngle) * (hitDistanceSqr + chargeThreshold));
+		double targetZ = Math.min(Math.sin(relativeAngle) * (hitDistanceSqr + overshootAmount), Math.sin(relativeAngle) * (hitDistanceSqr + chargeThreshold));
+		
+		final BlockPos targetPos = new BlockPos(attackingEntity.getX() + targetX, attackingEntity.getY(), attackingEntity.getZ() + targetZ).immutable();
+		Vector3d chargeVec = new Vector3d(targetPos.getX() - attackingEntity.getX(), 0, targetPos.getZ() - attackingEntity.getZ());
+		
+		attackingEntity.setDeltaMovement(chargeVec.scale(Math.min(chargePercentageMod, 1)));
+		attackingEntity.refreshDimensions();
+	}
+	
+	/**
+	 * Overloaded method for {@link #chargeTowards(LivingEntity, LivingEntity, double, double, double)}.
+	 * @param attackingEntity The {@link LivingEntity} to have "charge" towards its target
+	 * @param targetEntity The target {@link LivingEntity} for the attacking {@link LivingEntity} to charge towards
+	 * @param overshootAmount The extra distance traveled by the attacking {@link LivingEntity}'s charge
+	 * @param chargeThreshold The maximum distance the attacking {@link LivingEntity}'s charge can travel. Set to -1 to remove the limit
+	 */
+	public static void chargeTowards(LivingEntity attackingEntity, LivingEntity targetEntity, double overshootAmount, double chargeThreshold) {
+		chargeTowards(attackingEntity, targetEntity, overshootAmount, chargeThreshold, 1);
 	}
 
 	/**

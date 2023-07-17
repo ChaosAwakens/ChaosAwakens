@@ -8,6 +8,7 @@ import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -83,6 +84,70 @@ public abstract class AnimatableTameableAnimalEntity extends TameableEntity impl
 	
 	public IParticleData getTamingParticles() {
 		return ParticleTypes.HEART;
+	}
+	
+	protected double getFollowRange() {
+		return getAttributeValue(Attributes.FOLLOW_RANGE);
+	}
+
+	protected double getAttackDamage() {
+		return getAttributeValue(Attributes.ATTACK_DAMAGE);
+	}
+
+	protected double getAttackSpeed() {
+		return getAttributeValue(Attributes.ATTACK_SPEED);
+	}
+
+	protected double getMovementSpeed() {
+		return getAttributeValue(Attributes.MOVEMENT_SPEED);
+	}
+
+	protected double getFlyingSpeed() {
+		return getAttributeValue(Attributes.FLYING_SPEED);
+	}
+
+	protected double getKnockbackResistance() {
+		return getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
+	}
+
+	protected double getArmor() {
+		return getAttributeValue(Attributes.ARMOR);
+	}
+
+	protected void setFollowRange(double newBaseValue) {
+		getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(newBaseValue);;
+	}
+
+	protected void setAttackDamage(double newBaseValue) {
+		getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(newBaseValue);;
+	}
+
+	protected void setAttackSpeed(double newBaseValue) {
+		getAttribute(Attributes.ATTACK_SPEED).setBaseValue(newBaseValue);;
+	}
+	
+	protected void setAttackKnockback(double newBaseValue) {
+		getAttribute(Attributes.ATTACK_KNOCKBACK).setBaseValue(newBaseValue);;
+	}
+
+	protected void setMovementSpeed(double newBaseValue) {
+		getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(newBaseValue);;
+	}
+
+	protected void setFlyingSpeed(double newBaseValue) {
+		getAttribute(Attributes.FLYING_SPEED).setBaseValue(newBaseValue);;
+	}
+
+	protected void setKnockbackResistance(double newBaseValue) {
+		getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(newBaseValue);;
+	}
+
+	protected void setArmor(double newBaseValue) {
+		getAttribute(Attributes.ARMOR).setBaseValue(newBaseValue);;
+	}
+	
+	protected void setArmorToughness(double newBaseValue) {
+		getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(newBaseValue);;
 	}
 	
 	@Override

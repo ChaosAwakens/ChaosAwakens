@@ -143,21 +143,6 @@
 					"rotation": {
 						"vector": [0, 40, 0]
 					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
 				}
 			}
 		},
@@ -311,21 +296,6 @@
 				"Left3_Finger2": {
 					"rotation": {
 						"vector": [0, 40, 0]
-					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
 					}
 				}
 			}
@@ -586,21 +556,6 @@
 					"rotation": {
 						"vector": [0, 40, 0]
 					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
 				}
 			}
 		},
@@ -859,21 +814,6 @@
 						"1.5": {
 							"vector": [0, 40, 0]
 						}
-					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
 					}
 				}
 			}
@@ -1166,21 +1106,6 @@
 				"Left3_Finger2": {
 					"rotation": {
 						"vector": [0, 40, 0]
-					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
 					}
 				}
 			}
@@ -1591,21 +1516,6 @@
 					"rotation": {
 						"vector": [0, 40, 0]
 					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
 				}
 			}
 		},
@@ -1871,21 +1781,6 @@
 					"rotation": {
 						"vector": [0, 40, 0]
 					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
 				}
 			}
 		},
@@ -2046,27 +1941,12 @@
 					"rotation": {
 						"vector": [0, 40, 0]
 					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
 				}
 			}
 		},
 		"Leap Attack: Land": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 2,
+			"animation_length": 2.2,
 			"bones": {
 				"LowerBody": {
 					"rotation": {
@@ -2387,21 +2267,6 @@
 					"rotation": {
 						"vector": [0, 40, 0]
 					}
-				},
-				"CoreBlast": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart1": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"LowHealthPart2": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
 				}
 			}
 		},
@@ -2669,11 +2534,8 @@
 						"2.3333": {
 							"vector": [25, 0, 0]
 						},
-						"2.7917": {
-							"vector": [-15, "math.sin(query.anim_time * 1000) * -4", 0]
-						},
-						"3.625": {
-							"vector": [-15, "math.sin(query.anim_time * 4000) * -30", 0]
+						"3.7083": {
+							"vector": [-15, "math.sin(query.life_time * 4000) * q.life_time * -4", 0]
 						},
 						"3.75": {
 							"vector": [-15, 0, 0]
@@ -3117,6 +2979,26 @@
 				"LowHealthPart2": {
 					"rotation": {
 						"vector": [0, "query.anim_time * 700 + 90", 0]
+					}
+				}
+			}
+		},
+		"Healthy ": {
+			"loop": true,
+			"bones": {
+				"CoreBlast": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"LowHealthPart1": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"LowHealthPart2": {
+					"scale": {
+						"vector": [0, 0, 0]
 					}
 				}
 			}

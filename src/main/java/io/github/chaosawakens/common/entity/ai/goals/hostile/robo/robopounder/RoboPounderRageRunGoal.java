@@ -4,6 +4,8 @@ import java.util.function.Supplier;
 
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.util.EntityUtil;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 public class RoboPounderRageRunGoal extends Goal {
@@ -58,6 +60,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	@Override
 	public void start() {
 		owner.setAttackID(rageRunAttackId);
+		owner.setRageRunning(true);
 		owner.getNavigation().stop();
 		owner.playAnimation(rageBeginAnim.get(), true);
 	}
@@ -65,10 +68,29 @@ public class RoboPounderRageRunGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
+		owner.setRageRunning(false);
+	}
+	
+	private void createRageRunPath() {
+		
 	}
 	
 	@Override
 	public void tick() {
+		LivingEntity target = owner.getTarget();
 		
+		if (rageBeginAnim.get().isPlaying() || rageCooldownAnim.get().isPlaying() || rageRestartAnim.get().isPlaying()) {
+			owner.getNavigation().stop();
+			owner.setDeltaMovement(owner.getDeltaMovement().multiply(0, 1, 0));
+			EntityUtil.freezeEntityRotation(owner);
+		} else {
+			if (rageBeginAnim.get().hasAnimationFinished()) {
+				if (target != null) {
+					
+				} else owner.playAnimation(rageCooldownAnim.get(), true);
+			}
+			
+			if (rageCooldownAnim.get().hasAnimationFinished()) owner.playAnimation(rageRestartAnim.get(), true);
+		}
 	}
 }

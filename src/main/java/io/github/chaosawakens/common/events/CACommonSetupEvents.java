@@ -190,7 +190,7 @@ public class CACommonSetupEvents {
 		}
 
 		@SubscribeEvent
-		public static void onRegisterFurnaceFuelEvent(FurnaceFuelBurnTimeEvent event) { //TODO Tags
+		public static void onRegisterFurnaceFuelEvent(FurnaceFuelBurnTimeEvent event) { //TODO Tags/organize
 			ItemStack fuel = event.getItemStack();
 			
 			if (fuel.getItem() == CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()) {

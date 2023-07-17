@@ -16,20 +16,20 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 public class AnimatableMeleeGoal extends Goal {
-	private final AnimatableMonsterEntity owner;
-	private final Supplier<? extends IAnimationBuilder> meleeAnim;
-	private final byte attackId;
-	private final double actionPointTickStart;
-	private final double actionPointTickEnd;
-	private final double angleRange;
-	private final int probability;
+	protected final AnimatableMonsterEntity owner;
+	protected final Supplier<? extends IAnimationBuilder> meleeAnim;
+	protected final byte attackId;
+	protected final double actionPointTickStart;
+	protected final double actionPointTickEnd;
+	protected final double angleRange;
+	protected final int probability;
 	@Nullable
-	private Predicate<AnimatableMonsterEntity> extraActivationConditions;
+	protected Predicate<AnimatableMonsterEntity> extraActivationConditions;
 	@Nullable
-	private List<Supplier<? extends IAnimationBuilder>> animationsToPick;
-	private final int presetCooldown;
-	private int curCooldown;
-	private Supplier<? extends IAnimationBuilder> curAnim;
+	protected List<Supplier<? extends IAnimationBuilder>> animationsToPick;
+	protected final int presetCooldown;
+	protected int curCooldown;
+	protected Supplier<? extends IAnimationBuilder> curAnim;
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability, int presetCooldown) {
 		this.owner = owner;
@@ -109,7 +109,7 @@ public class AnimatableMeleeGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, curAnim.get(), attackId) && owner.isAlive() && !curAnim.get().hasAnimationFinished();
+		return ObjectUtil.performNullityChecks(false, owner, curAnim.get(), attackId) && !owner.isDeadOrDying() && !curAnim.get().hasAnimationFinished();
 	}
 
 	@Override
@@ -149,7 +149,8 @@ public class AnimatableMeleeGoal extends Goal {
 		double reach = owner.getMeleeAttackReachSqr(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
-		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(target, 30F, 30F);;
+		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(target, 30F, 30F);
+		else if (curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			double targetAngle = MathUtil.getRelativeAngleBetweenEntities(owner, potentialAffectedTarget);
 			double attackAngle = owner.yBodyRot % 360;
@@ -164,6 +165,5 @@ public class AnimatableMeleeGoal extends Goal {
 				if (hitDistanceSqr <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, angleRange)) owner.doHurtTarget(potentialAffectedTarget);
 			}
 		}
-		if (curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 	}
 }

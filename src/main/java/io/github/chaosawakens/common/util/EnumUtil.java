@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.util;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -329,7 +330,7 @@ public final class EnumUtil {
 	public enum BlockPatternShape {
 		CIRCLE {
 			@Override
-			public ObjectArrayList<BlockPos> applyShape(World targetWorld, BlockPos originPos, double radius, double height, boolean shouldFill, boolean includeCenter, ObjectArrayList<Block> blacklistedBlocks) {
+			public ObjectArrayList<BlockPos> applyShape(World targetWorld, BlockPos originPos, double radius, double height, boolean shouldFill, boolean includeCenter, Predicate<Block> blockAffectPredicate) {
 				ObjectArrayList<BlockPos> validPositions = new ObjectArrayList<BlockPos>(1);
 				Mutable mutablePos = new Mutable();
 
@@ -351,7 +352,7 @@ public final class EnumUtil {
 							BlockPos targetHollowPos = mutablePos.immutable();
 							Block targetHollowBlock = targetWorld.getBlockState(targetHollowPos).getBlock();
 							
-							if (blacklistedBlocks != null && blacklistedBlocks.contains(targetHollowBlock)) break;
+							if (blockAffectPredicate != null && !blockAffectPredicate.test(targetHollowBlock)) continue;
 							
 							validPositions.add(targetHollowPos);
 						}
@@ -366,7 +367,7 @@ public final class EnumUtil {
 									BlockPos targetPos = mutablePos.immutable();
 									Block targetBlock = targetWorld.getBlockState(targetPos).getBlock();
 									
-									if (blacklistedBlocks != null && blacklistedBlocks.contains(targetBlock)) break;
+									if (blockAffectPredicate != null && !blockAffectPredicate.test(targetBlock)) continue;
 									
 									validPositions.add(targetPos);
 								}
@@ -413,7 +414,7 @@ public final class EnumUtil {
 		BlockPatternShape() {
 		}
 		
-		public abstract ObjectArrayList<BlockPos> applyShape(World targetWorld, BlockPos originPos, double radius, double height, boolean shouldFill, boolean includeCenter, @Nullable ObjectArrayList<Block> blacklistedBlocks);
+		public abstract ObjectArrayList<BlockPos> applyShape(World targetWorld, BlockPos originPos, double radius, double height, boolean shouldFill, boolean includeCenter, @Nullable Predicate<Block> blockAffectPredicate);
 		public abstract ObjectArrayList<ObjectArrayList<BlockPos>> getRingPositions(BlockPos originPos, ObjectArrayList<BlockPos> originalShapePositions);
 	}
 }

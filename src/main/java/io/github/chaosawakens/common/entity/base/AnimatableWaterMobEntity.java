@@ -144,59 +144,67 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	}
 
 	protected double getFollowRange() {
-		return this.getAttributeValue(Attributes.FOLLOW_RANGE);
+		return getAttributeValue(Attributes.FOLLOW_RANGE);
 	}
 
 	protected double getAttackDamage() {
-		return this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+		return getAttributeValue(Attributes.ATTACK_DAMAGE);
 	}
 
 	protected double getAttackSpeed() {
-		return this.getAttributeValue(Attributes.ATTACK_SPEED);
+		return getAttributeValue(Attributes.ATTACK_SPEED);
 	}
 
 	protected double getMovementSpeed() {
-		return this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+		return getAttributeValue(Attributes.MOVEMENT_SPEED);
 	}
 
 	protected double getFlyingSpeed() {
-		return this.getAttributeValue(Attributes.FLYING_SPEED);
+		return getAttributeValue(Attributes.FLYING_SPEED);
 	}
 
 	protected double getKnockbackResistance() {
-		return this.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
+		return getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
 	}
 
 	protected double getArmor() {
-		return this.getAttributeValue(Attributes.ARMOR);
+		return getAttributeValue(Attributes.ARMOR);
 	}
 
 	protected void setFollowRange(double newBaseValue) {
-		this.getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(newBaseValue);;
 	}
 
 	protected void setAttackDamage(double newBaseValue) {
-		this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(newBaseValue);;
 	}
 
 	protected void setAttackSpeed(double newBaseValue) {
-		this.getAttribute(Attributes.ATTACK_SPEED).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ATTACK_SPEED).setBaseValue(newBaseValue);;
+	}
+	
+	protected void setAttackKnockback(double newBaseValue) {
+		getAttribute(Attributes.ATTACK_KNOCKBACK).setBaseValue(newBaseValue);;
 	}
 
 	protected void setMovementSpeed(double newBaseValue) {
-		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(newBaseValue);;
 	}
 
 	protected void setFlyingSpeed(double newBaseValue) {
-		this.getAttribute(Attributes.FLYING_SPEED).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.FLYING_SPEED).setBaseValue(newBaseValue);;
 	}
 
 	protected void setKnockbackResistance(double newBaseValue) {
-		this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(newBaseValue);;
 	}
 
 	protected void setArmor(double newBaseValue) {
-		this.getAttribute(Attributes.ARMOR).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ARMOR).setBaseValue(newBaseValue);;
+	}
+	
+	protected void setArmorToughness(double newBaseValue) {
+		getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(newBaseValue);;
 	}
 
 	@Override

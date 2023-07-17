@@ -6,7 +6,7 @@
 				"identifier": "geometry.robo_jeffrey",
 				"texture_width": 400,
 				"texture_height": 400,
-				"visible_bounds_width": 8,
+				"visible_bounds_width": 11,
 				"visible_bounds_height": 8.5,
 				"visible_bounds_offset": [0, 3.75, 0]
 			},

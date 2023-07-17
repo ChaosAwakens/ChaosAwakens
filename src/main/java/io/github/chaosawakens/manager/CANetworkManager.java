@@ -3,6 +3,7 @@ package io.github.chaosawakens.manager;
 import java.util.Optional;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.network.packets.s2c.AnimationFunctionalProgressPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
 import net.minecraft.client.Minecraft;
@@ -31,6 +32,7 @@ public class CANetworkManager {
 	private static void registerSTCPackets(int id) {
 		CHANNEL.registerMessage(id++, AnimationTriggerPacket.class, AnimationTriggerPacket::encode, AnimationTriggerPacket::decode, AnimationTriggerPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(id++, AnimationStopPacket.class, AnimationStopPacket::encode, AnimationStopPacket::decode, AnimationStopPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		CHANNEL.registerMessage(id++, AnimationFunctionalProgressPacket.class, AnimationFunctionalProgressPacket::encode, AnimationFunctionalProgressPacket::decode, AnimationFunctionalProgressPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 	}
 
 	/**

@@ -2,6 +2,8 @@ package io.github.chaosawakens.api.animation;
 
 import java.util.ArrayList;
 
+import io.github.chaosawakens.common.network.packets.s2c.AnimationFunctionalProgressPacket;
+import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
@@ -38,8 +40,8 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		this.server = ((Entity) animatable).getServer();
 	}
 	
-	public void tick() { //TODO Enforce on client w/packets, fix dedicated server crash by caching static info (primarily anim length, everything else is fine) on dedicated server.
-		double tickProgressDelta = server == null ? 0.98D : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+	public void tick() {
+		double tickProgressDelta = server == null ? 0 : getSyncedProgress(Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0);
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -91,6 +93,15 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		this.controller.setAnimation(builder.getBuilder());
 	}
 	
+	public double getSyncedProgress(double animProgress) {
+		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), animProgress), (Entity) animatable);
+		return server == null ? 0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+	}
+	
+	public void updateAnimProgress(double animationProgressDelta) {
+		this.animationProgress += animationProgressDelta;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -100,7 +111,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isAnimationFinished(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
+		return currentAnimation != null && currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
 	}
 	
 	public boolean isAnimationFinished(IAnimationBuilder targetAnim) {
@@ -108,7 +119,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return currentAnimation.animationName.equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
+		return currentAnimation != null && currentAnimation.animationName.equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {

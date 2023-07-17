@@ -19,8 +19,8 @@ public final class BlockPosUtil {
 		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 	
-	public static ObjectArrayList<BlockPos> createHollowCircle(World targetWorld, BlockPos originPos, double radius, double height, @Nullable ObjectArrayList<Block> blackListedBlocks) {
-		return BlockPatternShape.CIRCLE.applyShape(targetWorld, originPos, radius, height, false, false, blackListedBlocks);
+	public static ObjectArrayList<BlockPos> createHollowCircle(World targetWorld, BlockPos originPos, double radius, double height, @Nullable Predicate<Block> blockAffectPredicate) {
+		return BlockPatternShape.CIRCLE.applyShape(targetWorld, originPos, radius, height, false, false, blockAffectPredicate);
 	}
 	
 	public static ObjectArrayList<BlockPos> createHollowCircle(World targetWorld, BlockPos originPos, double radius, double height) {
