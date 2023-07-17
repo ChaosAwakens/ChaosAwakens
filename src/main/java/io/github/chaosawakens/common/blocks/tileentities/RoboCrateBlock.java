@@ -5,7 +5,6 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.common.registry.CAStats;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -38,19 +37,19 @@ public class RoboCrateBlock extends ContainerBlock {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
-	public RoboCrateBlock(AbstractBlock.Properties properties) {
+	public RoboCrateBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, Boolean.FALSE));
+		registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, Boolean.FALSE));
 	}
 
 	@Override
 	public ActionResultType use(BlockState pState, World pLevel, BlockPos pPos, PlayerEntity pPlayer, Hand pHand, BlockRayTraceResult pHit) {
-		if (pLevel.isClientSide) {
-			return ActionResultType.SUCCESS;
-		} else {
-			TileEntity tileentity = pLevel.getBlockEntity(pPos);
-			if (tileentity instanceof RoboCrateTileEntity) {
-				pPlayer.openMenu((RoboCrateTileEntity)tileentity);
+		if (pLevel.isClientSide) return ActionResultType.SUCCESS;
+		else {
+			TileEntity targetTileEntity = pLevel.getBlockEntity(pPos);
+			
+			if (targetTileEntity instanceof RoboCrateTileEntity) {
+				pPlayer.openMenu((RoboCrateTileEntity)targetTileEntity);
 				pPlayer.awardStat(CAStats.INTERACT_WITH_ROBO_CRATE);
 				PiglinTasks.angerNearbyPiglins(pPlayer, true);
 			}
@@ -63,9 +62,10 @@ public class RoboCrateBlock extends ContainerBlock {
 	@Override
 	public void onRemove(BlockState pState, World pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
 		if (!pState.is(pNewState.getBlock())) {
-			TileEntity tileentity = pLevel.getBlockEntity(pPos);
-			if (tileentity instanceof IInventory) {
-				InventoryHelper.dropContents(pLevel, pPos, (IInventory)tileentity);
+			TileEntity targetTileEntity = pLevel.getBlockEntity(pPos);
+			
+			if (targetTileEntity instanceof IInventory) {
+				InventoryHelper.dropContents(pLevel, pPos, (IInventory)targetTileEntity);
 				pLevel.updateNeighbourForOutputSignal(pPos, this);
 			}
 
@@ -73,12 +73,11 @@ public class RoboCrateBlock extends ContainerBlock {
 		}
 	}
 
+	@Override
 	public void tick(BlockState pState, ServerWorld pLevel, BlockPos pPos, Random pRand) {
-		TileEntity tileentity = pLevel.getBlockEntity(pPos);
-		if (tileentity instanceof RoboCrateTileEntity) {
-			((RoboCrateTileEntity)tileentity).recheckOpen();
-		}
-
+		TileEntity targetTileEntity = pLevel.getBlockEntity(pPos);
+		
+		if (targetTileEntity instanceof RoboCrateTileEntity) ((RoboCrateTileEntity) targetTileEntity).recheckOpen();
 	}
 
 	@Nullable
@@ -87,33 +86,37 @@ public class RoboCrateBlock extends ContainerBlock {
 		return new RoboCrateTileEntity();
 	}
 
+	@Override
 	public BlockRenderType getRenderShape(BlockState pState) {
 		return BlockRenderType.MODEL;
 	}
 
+	@Override
 	public void setPlacedBy(World pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
 		if (pStack.hasCustomHoverName()) {
-			TileEntity tileentity = pLevel.getBlockEntity(pPos);
-			if (tileentity instanceof RoboCrateTileEntity) {
-				((RoboCrateTileEntity)tileentity).setCustomName(pStack.getHoverName());
-			}
+			TileEntity targetTileEntity = pLevel.getBlockEntity(pPos);
+			
+			if (targetTileEntity instanceof RoboCrateTileEntity) ((RoboCrateTileEntity) targetTileEntity).setCustomName(pStack.getHoverName());
 		}
-
 	}
 
+	@Override
 	public boolean hasAnalogOutputSignal(BlockState pState) {
 		return true;
 	}
 
+	@Override
 	public int getAnalogOutputSignal(BlockState pBlockState, World pLevel, BlockPos pPos) {
 		return Container.getRedstoneSignalFromBlockEntity(pLevel.getBlockEntity(pPos));
 	}
 
+	@Override
 	public BlockState rotate(BlockState pState, Rotation pRotation) {
 		return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
 	}
 
 	@SuppressWarnings("deprecation")
+	@Override
 	public BlockState mirror(BlockState pState, Mirror pMirror) {
 		return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
 	}
@@ -125,6 +128,6 @@ public class RoboCrateBlock extends ContainerBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext pContext) {
-		return this.defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
+		return defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
 	}
 }

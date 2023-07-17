@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.blocks.tileentities.containers;
 
-import io.github.chaosawakens.common.blocks.tileentities.DefossilizerCopperTileEntity;
+import io.github.chaosawakens.common.blocks.tileentities.CopperDefossilizerTileEntity;
 import io.github.chaosawakens.common.items.PowerChipItem;
 import io.github.chaosawakens.common.registry.CAContainerTypes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +25,7 @@ public class DefossilizerCopperContainer extends Container {
 	private final Slot resultSlot;
 
 	public DefossilizerCopperContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
-		this(id, playerInventory, new DefossilizerCopperTileEntity(), new IntArray(buffer.readByte()));
+		this(id, playerInventory, new CopperDefossilizerTileEntity(), new IntArray(buffer.readByte()));
 	}
 
 	public DefossilizerCopperContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
@@ -71,7 +71,7 @@ public class DefossilizerCopperContainer extends Container {
 
 	public int getProgressArrowScale() {
 		int progress = fields.get(0);
-		return progress != 0 ? progress * 24 / DefossilizerCopperTileEntity.WORK_TIME : 0;
+		return progress != 0 ? progress * 24 / CopperDefossilizerTileEntity.WORK_TIME : 0;
 	}
 
 	public int getLitScale() {
@@ -79,7 +79,7 @@ public class DefossilizerCopperContainer extends Container {
 		if (progress == 0) {
 			progress = 200;
 		}
-		return progress * 17 / DefossilizerCopperTileEntity.WORK_TIME;
+		return progress * 17 / CopperDefossilizerTileEntity.WORK_TIME;
 	}
 
 	@Override

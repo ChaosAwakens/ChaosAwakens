@@ -191,8 +191,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 	
 	@Override
-	public float getMeleeAttackReachSqr(LivingEntity target) {
-		return super.getMeleeAttackReachSqr(target) * 1.2F;
+	public float getMeleeAttackReach(LivingEntity target) {
+		return super.getMeleeAttackReach(target) * 1.2F;
 	}
 
 	@Override

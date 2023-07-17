@@ -34,7 +34,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 		if (curCooldown > 0) curCooldown--;
 		
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReachSqr(owner.getTarget()) && owner.distanceTo(owner.getTarget()) <= 12.0D
+				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) && owner.distanceTo(owner.getTarget()) <= 16.0D
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
 	
@@ -62,7 +62,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 		
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) EntityUtil.chargeTowards(owner, target, overshoot, overshoot, 0.19);
 		
-		double reach = owner.getMeleeAttackReachSqr(target);
+		double reach = owner.getMeleeAttackReach(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 		
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			

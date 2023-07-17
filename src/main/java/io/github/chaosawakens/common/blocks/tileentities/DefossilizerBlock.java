@@ -43,57 +43,72 @@ public class DefossilizerBlock extends Block {
 
 	@Nullable
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get())) {
-			return new DefossilizerCopperTileEntity();
-		}
-		if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get())) {
-			return new DefossilizerIronTileEntity();
-		}
+	public TileEntity createTileEntity(BlockState targetState, IBlockReader world) {
+		if (targetState.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get())) return new CopperDefossilizerTileEntity();
+		if (targetState.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get())) return new IronDefossilizerTileEntity();
+		if (targetState.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.CRYSTAL.getId())).get())) return new CrystalDefossilizerTileEntity();
 		return null;
 	}
 
 	@Override
 	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) {
 		if (world.isClientSide) return ActionResultType.SUCCESS;
-		this.interactWith(world, pos, player);
+		
+		interactWith(world, pos, player);
 		player.awardStat(CAStats.INTERACT_WITH_DEFOSSILIZER);
+		
 		return ActionResultType.CONSUME;
 	}
 
-	private void interactWith(World world, BlockPos pos, PlayerEntity player) {
-		TileEntity tileEntity = world.getBlockEntity(pos);
-		if (!(player instanceof ServerPlayerEntity)) return;
-		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
-			DefossilizerCopperTileEntity te = (DefossilizerCopperTileEntity) tileEntity;
-			NetworkHooks.openGui((ServerPlayerEntity) player, te, te::encodeExtraData);
+	private void interactWith(World curWorld, BlockPos targetPos, PlayerEntity interactingPlayer) { //TODO Un-hardcode (if we still maintain this MC version by then)
+		TileEntity curTileEntity = curWorld.getBlockEntity(targetPos);
+		
+		if (!(interactingPlayer instanceof ServerPlayerEntity)) return;
+		
+		if (curWorld.getBlockState(targetPos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()) && curTileEntity instanceof CopperDefossilizerTileEntity) {
+			CopperDefossilizerTileEntity copperDefossilizerTileEntity = (CopperDefossilizerTileEntity) curTileEntity;
+			NetworkHooks.openGui((ServerPlayerEntity) interactingPlayer, copperDefossilizerTileEntity, copperDefossilizerTileEntity::encodeExtraData);
 		}
-		if (world.getBlockState(pos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
-			DefossilizerIronTileEntity te = (DefossilizerIronTileEntity) tileEntity;
-			NetworkHooks.openGui((ServerPlayerEntity) player, te, te::encodeExtraData);
+		
+		if (curWorld.getBlockState(targetPos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()) && curTileEntity instanceof IronDefossilizerTileEntity) {
+			IronDefossilizerTileEntity ironDefossilizerTileEntity = (IronDefossilizerTileEntity) curTileEntity;
+			NetworkHooks.openGui((ServerPlayerEntity) interactingPlayer, ironDefossilizerTileEntity, ironDefossilizerTileEntity::encodeExtraData);
+		}
+		
+		if (curWorld.getBlockState(targetPos).is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.CRYSTAL.getId())).get()) && curTileEntity instanceof CrystalDefossilizerTileEntity) {
+			CrystalDefossilizerTileEntity crystalDefossilizerTileEntity = (CrystalDefossilizerTileEntity) curTileEntity;
+			NetworkHooks.openGui((ServerPlayerEntity) interactingPlayer, crystalDefossilizerTileEntity, crystalDefossilizerTileEntity::encodeExtraData);
 		}
 	}
 
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+		return defaultBlockState().setValue(FACING, context.getHorizontalDirection());
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			TileEntity tileEntity = world.getBlockEntity(pos);
-			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()) && tileEntity instanceof DefossilizerCopperTileEntity) {
-				InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
-				world.updateNeighbourForOutputSignal(pos, this);
+	public void onRemove(BlockState curState, World curWorld, BlockPos targetPos, BlockState newState, boolean isMoving) {
+		if (!curState.is(newState.getBlock())) {
+			TileEntity curTileEntity = curWorld.getBlockEntity(targetPos);
+			
+			if (curState.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.COPPER.getId())).get()) && curTileEntity instanceof CopperDefossilizerTileEntity) {
+				InventoryHelper.dropContents(curWorld, targetPos, (IInventory) curTileEntity);
+				curWorld.updateNeighbourForOutputSignal(targetPos, this);
 			}
-			if (state.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()) && tileEntity instanceof DefossilizerIronTileEntity) {
-				InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
-				world.updateNeighbourForOutputSignal(pos, this);
+			
+			if (curState.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.IRON.getId())).get()) && curTileEntity instanceof IronDefossilizerTileEntity) {
+				InventoryHelper.dropContents(curWorld, targetPos, (IInventory) curTileEntity);
+				curWorld.updateNeighbourForOutputSignal(targetPos, this);
 			}
-			super.onRemove(state, world, pos, newState, isMoving);
+			
+			if (curState.is(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(DefossilizerType.CRYSTAL.getId())).get()) && curTileEntity instanceof CrystalDefossilizerTileEntity) {
+				InventoryHelper.dropContents(curWorld, targetPos, (IInventory) curTileEntity);
+				curWorld.updateNeighbourForOutputSignal(targetPos, this);
+			}
+			
+			super.onRemove(curState, curWorld, targetPos, newState, isMoving);
 		}
 	}
 
@@ -128,7 +143,7 @@ public class DefossilizerBlock extends Block {
 		}
 
 		public int getId() {
-			return this.id;
+			return id;
 		}
 		
 		public String getName() {
@@ -136,21 +151,19 @@ public class DefossilizerBlock extends Block {
 		}
 
 		public static DefossilizerType byId(int id) {
-			if(id < 0 || id >= VALUES.length) id = 0;
+			if (id < 0 || id >= VALUES.length) id = 0;
 			return VALUES[id];
 		}
 
 		public static String getDefossilizerTypeByID(int id) {
-			for(DefossilizerType defossilizerType : values()) {
-				if(defossilizerType.getId() == id) return defossilizerType.getSerializedName();
+			for (DefossilizerType defossilizerType : values()) {
+				if (defossilizerType.getId() == id) return defossilizerType.getSerializedName();
 			}
 			return null;
 		}
 
 		public static boolean getBooleanDefossilizerTypeByID(int id) {
-			for(DefossilizerType defossilizerType : values()) {
-				if(defossilizerType.getId() == id) return true;
-			}
+			for (DefossilizerType defossilizerType : values()) return defossilizerType.getId() == id;
 			return false;
 		}
 

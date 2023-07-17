@@ -103,7 +103,7 @@ public class AnimatableMeleeGoal extends Goal {
 		if (curCooldown > 0) curCooldown--;
 		
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReachSqr(owner.getTarget())
+				&& owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReach(owner.getTarget())
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
 
@@ -146,7 +146,7 @@ public class AnimatableMeleeGoal extends Goal {
 		
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
 		
-		double reach = owner.getMeleeAttackReachSqr(target);
+		double reach = owner.getMeleeAttackReach(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
 		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(target, 30F, 30F);

@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerCopperContainer;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
@@ -32,8 +33,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class DefossilizerCopperTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
+public class CopperDefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
 	public static final int WORK_TIME = AbstractDefossilizingRecipe.getDefossilizingTime();
+	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + ChaosAwakens.MODID + ".copper_defossilizer");
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
 	private static final int[] SLOTS_FOR_SIDES = new int[] { 1, 2 };
@@ -64,7 +66,7 @@ public class DefossilizerCopperTileEntity extends LockableTileEntity implements 
 		}
 	};
 
-	public DefossilizerCopperTileEntity() {
+	public CopperDefossilizerTileEntity() {
 		super(CATileEntities.COPPER_DEFOSSILIZER.get());
 		this.handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
 		this.items = NonNullList.withSize(4, ItemStack.EMPTY);
@@ -111,7 +113,6 @@ public class DefossilizerCopperTileEntity extends LockableTileEntity implements 
 		}
 
 		if (progress < WORK_TIME) ++progress;
-
 		if (progress >= WORK_TIME && !level.isClientSide) finishWork(recipe, current);
 	}
 
@@ -124,10 +125,11 @@ public class DefossilizerCopperTileEntity extends LockableTileEntity implements 
 		if (!current.isEmpty()) current.grow(output.getCount());
 		else setItem(3, output);
 
-		progress = 0;
-		this.removeItem(0, 1);
-		this.setItem(1, Items.BUCKET.getDefaultInstance());
-		this.removeItem(2, 1);
+		this.progress = 0;
+		
+		removeItem(0, 1);
+		setItem(1, Items.BUCKET.getDefaultInstance());
+		removeItem(2, 1);
 	}
 
 	@Override
@@ -151,7 +153,7 @@ public class DefossilizerCopperTileEntity extends LockableTileEntity implements 
 
 	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.chaosawakens.defossilizer");
+		return CONTAINER_NAME;
 	}
 
 	@Override

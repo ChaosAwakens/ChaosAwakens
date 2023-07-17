@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.containers.DefossilizerIronContainer;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
@@ -34,8 +35,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class DefossilizerIronTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
+public class IronDefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
 	public static final int WORK_TIME = 4 * AbstractDefossilizingRecipe.getDefossilizingTime();
+	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + ChaosAwakens.MODID + ".iron_defossilizer");
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
 	private static final int[] SLOTS_FOR_SIDES = new int[] { 1, 2 };
@@ -66,7 +68,7 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 		}
 	};
 
-	public DefossilizerIronTileEntity() {
+	public IronDefossilizerTileEntity() {
 		super(CATileEntities.IRON_DEFOSSILIZER.get());
 		this.handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
 		this.items = NonNullList.withSize(4, ItemStack.EMPTY);
@@ -125,7 +127,8 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 		if (!current.isEmpty()) current.grow(output.getCount());
 		else setItem(3, output);
 
-		progress = 0;
+		this.progress = 0;
+		
 		removeItem(0, 1);
 		setItem(1, Items.BUCKET.getDefaultInstance());
 		removeItem(2, 1);
@@ -152,7 +155,7 @@ public class DefossilizerIronTileEntity extends LockableTileEntity implements IS
 
 	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.chaosawakens.defossilizer");
+		return CONTAINER_NAME;
 	}
 
 	@Override

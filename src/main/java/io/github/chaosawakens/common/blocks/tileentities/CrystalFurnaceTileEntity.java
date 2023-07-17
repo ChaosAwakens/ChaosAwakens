@@ -11,15 +11,18 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class CrystalFurnaceTileEntity extends AbstractFurnaceTileEntity {
-	
+	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + ChaosAwakens.MODID + ".crystal_furnace");
+
 	public CrystalFurnaceTileEntity() {
 		super(CATileEntities.CRYSTAL_FURNACE.get(), IRecipeType.SMELTING);
 	}
 
+	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container." + ChaosAwakens.MODID + ".crystal_furnace");
+		return CONTAINER_NAME;
 	}
 
+	@Override
 	protected Container createMenu(int id, PlayerInventory player) {
 		return new CrystalFurnaceContainer(id, player, this, this.dataAccess);
 	}

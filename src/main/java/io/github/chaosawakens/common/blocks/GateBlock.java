@@ -28,30 +28,25 @@ public class GateBlock extends Block {
 
 	public GateBlock(Properties props) {
 		super(props);
-		this.registerDefaultState(stateDefinition.any().setValue(ACTIVE, false));
+		registerDefaultState(stateDefinition.any().setValue(ACTIVE, false));
 	}
 
 	@Override
-	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		if (isVanished(state)) {
-			if (state.getValue(ACTIVE)) {
-				world.setBlockAndUpdate(pos, state.setValue(VANISHED, false).setValue(ACTIVE, false));
-			} else {
-				world.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
-				world.getBlockTicks().scheduleTick(pos, this, 15);
+	public void tick(BlockState curState, ServerWorld curWorld, BlockPos curPos, Random random) {
+		if (isVanished(curState)) {
+			if (curState.getValue(ACTIVE)) curWorld.setBlockAndUpdate(curPos, curState.setValue(VANISHED, false).setValue(ACTIVE, false));
+			else {
+				curWorld.setBlockAndUpdate(curPos, curState.setValue(ACTIVE, true));
+				curWorld.getBlockTicks().scheduleTick(curPos, this, 15);
 			}
 		} else {
-			if (state.getValue(ACTIVE)) {
-				if (state.hasProperty(VANISHED)) {
-					world.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(VANISHED, true));
-					world.getBlockTicks().scheduleTick(pos, this, 80);
-				} else {
-					world.removeBlock(pos, false);
-				}
+			if (curState.getValue(ACTIVE)) {
+				if (curState.hasProperty(VANISHED)) {
+					curWorld.setBlockAndUpdate(curPos, curState.setValue(ACTIVE, false).setValue(VANISHED, true));
+					curWorld.getBlockTicks().scheduleTick(curPos, this, 80);
+				} else curWorld.removeBlock(curPos, false);
 
-				for (Direction curDir : Direction.values()) {
-					activate(world, pos.relative(curDir));
-				}
+				for (Direction curDir : Direction.values()) activate(curWorld, curPos.relative(curDir));
 			}
 		}
 	}
@@ -105,6 +100,7 @@ public class GateBlock extends Block {
 
 	private void activate(World world, BlockPos targetPos) {
 		BlockState targetState = world.getBlockState(targetPos);
+		
 		if (targetState.getBlock() instanceof GateBlock && !isVanished(targetState) && !targetState.getValue(ACTIVE)) {
 			world.setBlockAndUpdate(targetPos, targetState.setValue(ACTIVE, true));
 			world.getBlockTicks().scheduleTick(targetPos, targetState.getBlock(), 2 + world.random.nextInt(5));

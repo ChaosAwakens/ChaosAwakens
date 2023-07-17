@@ -16,7 +16,7 @@ public class RotatedPillarCrystalBlock extends CrystalBlock {
 
 	public RotatedPillarCrystalBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(defaultBlockState().setValue(AXIS, Axis.Y));
+		registerDefaultState(defaultBlockState().setValue(AXIS, Axis.Y));
 	}
 
 	@Override

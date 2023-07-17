@@ -21,7 +21,7 @@ public abstract class AnimatableMovableGoal extends AnimatableGoal {
 			goal.path = attacker.getNavigation().createPath(target,2);
 			
 			if (attacker instanceof AnimatableMonsterEntity) {
-				return attacker.getSensing().canSee(target) && goal.path != null && !((AnimatableMonsterEntity) attacker).isAttacking() && attacker.distanceTo(target) > ((AnimatableMonsterEntity) attacker).getMeleeAttackReachSqr(target);
+				return attacker.getSensing().canSee(target) && goal.path != null && !((AnimatableMonsterEntity) attacker).isAttacking() && attacker.distanceTo(target) > ((AnimatableMonsterEntity) attacker).getMeleeAttackReach(target);
 			}
 			else return attacker.getSensing().canSee(target) && goal.path != null;
 		}

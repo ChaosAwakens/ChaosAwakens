@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.blocks.tileentities;
 
 import javax.annotation.Nullable;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAParticleTypes;
 import io.github.chaosawakens.common.registry.CATileEntities;
@@ -29,6 +30,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class RoboCrateTileEntity extends LockableLootTileEntity {
+	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + ChaosAwakens.MODID + ".robo_crate");
 	private NonNullList<ItemStack> items = NonNullList.withSize(36, ItemStack.EMPTY);
 	private int openCount;
 
@@ -39,9 +41,8 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 	@Override
 	public CompoundNBT save(CompoundNBT pCompound) {
 		super.save(pCompound);
-		if (!this.trySaveLootTable(pCompound)) {
-			ItemStackHelper.saveAllItems(pCompound, this.items);
-		}
+		
+		if (!this.trySaveLootTable(pCompound)) ItemStackHelper.saveAllItems(pCompound, items);
 
 		return pCompound;
 	}
@@ -49,16 +50,12 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 	@Override
 	public void load(BlockState state, CompoundNBT nbt) {
 		super.load(state, nbt);
+		
 		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		if (!this.tryLoadLootTable(nbt)) {
-			ItemStackHelper.loadAllItems(nbt, this.items);
-		}
-
+		
+		if (!this.tryLoadLootTable(nbt)) ItemStackHelper.loadAllItems(nbt, items);
 	}
 
-	/**
-	 * Returns the number of slots in the inventory.
-	 */
 	@Override
 	public int getContainerSize() {
 		return 36;
@@ -76,7 +73,7 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 
 	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.chaosawakens.robo_crate");
+		return CONTAINER_NAME;
 	}
 
 	@Override
@@ -91,83 +88,85 @@ public class RoboCrateTileEntity extends LockableLootTileEntity {
 	@Override
 	public void startOpen(PlayerEntity pPlayer) {
 		if (!pPlayer.isSpectator()) {
-			if (this.openCount < 0) {
-				this.openCount = 0;
-			}
+			if (this.openCount < 0) this.openCount = 0;
 
 			++this.openCount;
-			BlockState blockstate = this.getBlockState();
-			boolean flag = blockstate.getValue(RoboCrateBlock.OPEN);
-			if (!flag) {
-				this.playSound(blockstate, SoundEvents.BARREL_OPEN);
-				this.updateBlockState(blockstate, true);
+			
+			BlockState curState = getBlockState();
+			boolean isOpen = curState.getValue(RoboCrateBlock.OPEN);
+			
+			if (!isOpen) {
+				playSound(curState, SoundEvents.BARREL_OPEN);
+				setOpen(curState, true);
 				tick();
 			}
 
-			this.scheduleRecheck();
+			scheduleRecheck();
 		}
-
 	}
 
 	public void tick() {
-		World world = this.getLevel();
-		BlockPos blockpos = this.worldPosition;
-		if (world.isClientSide) {
-			double xo = (double)blockpos.getX() + world.random.nextDouble();
-			double yo = (double)blockpos.getY() + world.random.nextDouble();
-			double zo = (double)blockpos.getZ() + world.random.nextDouble();
-			world.addParticle(CAParticleTypes.ROBO_SPARK.get(), xo, yo, zo, level.random.nextBoolean() ? 0.01D : -0.01D, 0.02D, level.random.nextBoolean() ? 0.01D : -0.01D);
+		World curWorld = getLevel();
+		BlockPos curPos = worldPosition;
+		
+		if (curWorld.isClientSide) {
+			double xOffset = (double) curPos.getX() + curWorld.random.nextDouble();
+			double yOffset = (double) curPos.getY() + curWorld.random.nextDouble();
+			double zOffset = (double) curPos.getZ() + curWorld.random.nextDouble();
+			
+			curWorld.addParticle(CAParticleTypes.ROBO_SPARK.get(), xOffset, yOffset, zOffset, level.random.nextBoolean() ? 0.01D : -0.01D, 0.02D, level.random.nextBoolean() ? 0.01D : -0.01D);
 		}
 	}
 	
-	@Nullable	
+	@Nullable
+	@Override
 	public SUpdateTileEntityPacket getUpdatePacket() {	 
-		return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());  
+		return new SUpdateTileEntityPacket(worldPosition, 1, getUpdateTag());  
 	}
 
 	private void scheduleRecheck() {
-		this.level.getBlockTicks().scheduleTick(this.getBlockPos(), this.getBlockState().getBlock(), 5);
+		level.getBlockTicks().scheduleTick(this.getBlockPos(), this.getBlockState().getBlock(), 5);
 	}
 
 	public void recheckOpen() {
-		int i = this.worldPosition.getX();
-		int j = this.worldPosition.getY();
-		int k = this.worldPosition.getZ();
-		this.openCount = ChestTileEntity.getOpenCount(this.level, this, i, j, k);
-		if (this.openCount > 0) {
-			this.scheduleRecheck();
-		} else {
-			BlockState blockstate = this.getBlockState();
-			if (!blockstate.is(CABlocks.ROBO_CRATE.get())) {
+		int curX = worldPosition.getX();
+		int curY = worldPosition.getY();
+		int curZ = worldPosition.getZ();
+		this.openCount = ChestTileEntity.getOpenCount(level, this, curX, curY, curZ);
+		
+		if (openCount > 0) scheduleRecheck();
+		else {
+			BlockState curState = getBlockState();
+			
+			if (!curState.is(CABlocks.ROBO_CRATE.get())) {
 				this.setRemoved();
 				return;
 			}
 
-			boolean flag = blockstate.getValue(RoboCrateBlock.OPEN);
-			if (flag) {
-				this.playSound(blockstate, SoundEvents.BARREL_CLOSE);
-				this.updateBlockState(blockstate, false);
+			boolean isOpen = curState.getValue(RoboCrateBlock.OPEN);
+			
+			if (isOpen) {
+				playSound(curState, SoundEvents.BARREL_CLOSE);
+				setOpen(curState, false);
 			}
 		}
-
 	}
 
+	@Override
 	public void stopOpen(PlayerEntity pPlayer) {
-		if (!pPlayer.isSpectator()) {
-			--this.openCount;
-		}
-
+		if (!pPlayer.isSpectator()) --openCount;
 	}
 
-	private void updateBlockState(BlockState pState, boolean pOpen) {
-		this.level.setBlock(this.getBlockPos(), pState.setValue(RoboCrateBlock.OPEN, pOpen), 3);
+	private void setOpen(BlockState pState, boolean pOpen) {
+		level.setBlock(getBlockPos(), pState.setValue(RoboCrateBlock.OPEN, pOpen), 3);
 	}
 
 	private void playSound(BlockState pState, SoundEvent pSound) {
-		Vector3i vector3i = pState.getValue(RoboCrateBlock.FACING).getNormal();
-		double d0 = (double)this.worldPosition.getX() + 0.5D + (double)vector3i.getX() / 2.0D;
-		double d1 = (double)this.worldPosition.getY() + 0.5D + (double)vector3i.getY() / 2.0D;
-		double d2 = (double)this.worldPosition.getZ() + 0.5D + (double)vector3i.getZ() / 2.0D;
-		this.level.playSound(null, d0, d1, d2, pSound, SoundCategory.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+		Vector3i curFacingVec = pState.getValue(RoboCrateBlock.FACING).getNormal();
+		double angledX = (double) worldPosition.getX() + 0.5D + (double) curFacingVec.getX() / 2.0D;
+		double angledY = (double) worldPosition.getY() + 0.5D + (double) curFacingVec.getY() / 2.0D;
+		double angledZ = (double) worldPosition.getZ() + 0.5D + (double) curFacingVec.getZ() / 2.0D;
+		
+		level.playSound(null, angledX, angledY, angledZ, pSound, SoundCategory.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
 	}
 }

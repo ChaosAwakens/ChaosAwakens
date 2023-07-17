@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.gui.container.CraftingTableContainer;
 import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.Block;
@@ -12,12 +13,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class CrystalCraftingTableBlock extends Block {
-	private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent("container.chaosawakens.crystal_crafting_table");
+	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + ChaosAwakens.MODID + ".crystal_crafting_table");
 
 	public CrystalCraftingTableBlock(Properties properties) {
 		super(properties);
@@ -25,11 +25,11 @@ public class CrystalCraftingTableBlock extends Block {
 
 	@Override
 	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isClientSide) {
-			return ActionResultType.SUCCESS;
-		} else {
+		if (worldIn.isClientSide) return ActionResultType.SUCCESS;
+		else {
 			player.openMenu(state.getMenuProvider(worldIn, pos));
 			player.awardStat(CAStats.INTERACT_WITH_CRYSTAL_CRAFTING_TABLE);
+			
 			return ActionResultType.CONSUME;
 		}
 	}

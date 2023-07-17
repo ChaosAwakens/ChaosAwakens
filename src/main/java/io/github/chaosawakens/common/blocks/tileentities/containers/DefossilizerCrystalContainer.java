@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.blocks.tileentities.containers;
 
-import io.github.chaosawakens.common.blocks.tileentities.DefossilizerCrystalTileEntity;
+import io.github.chaosawakens.common.blocks.tileentities.CrystalDefossilizerTileEntity;
 import io.github.chaosawakens.common.items.PowerChipItem;
 import io.github.chaosawakens.common.registry.CAContainerTypes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +25,7 @@ public class DefossilizerCrystalContainer extends Container {
 	private final Slot resultSlot;
 
 	public DefossilizerCrystalContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
-		this(id, playerInventory, new DefossilizerCrystalTileEntity(), new IntArray(buffer.readByte()));
+		this(id, playerInventory, new CrystalDefossilizerTileEntity(), new IntArray(buffer.readByte()));
 	}
 
 	public DefossilizerCrystalContainer(int id, PlayerInventory playerInventory, IInventory inventory, IIntArray fields) {
@@ -71,12 +71,12 @@ public class DefossilizerCrystalContainer extends Container {
 
 	public int getProgressArrowScale() {
 		int progress = fields.get(0);
-		return progress != 0 ? progress * 24 / DefossilizerCrystalTileEntity.WORK_TIME : 0;
+		return progress != 0 ? progress * 24 / CrystalDefossilizerTileEntity.WORK_TIME : 0;
 	}
 
 	public int getLitProgress() {
 		int progress = fields.get(0);
-		return progress != 0 ? progress * 24 / DefossilizerCrystalTileEntity.WORK_TIME : 0;
+		return progress != 0 ? progress * 24 / CrystalDefossilizerTileEntity.WORK_TIME : 0;
 	}
 
 	@Override
