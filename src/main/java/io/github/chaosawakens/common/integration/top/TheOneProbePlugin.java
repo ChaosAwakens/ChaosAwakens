@@ -4,11 +4,11 @@ import java.util.function.Function;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.ore.CAEntityTrapOreBlock;
-import io.github.chaosawakens.common.entity.base.CABoatEntity;
 import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;
 import io.github.chaosawakens.common.entity.creature.land.StinkBugEntity;
 import io.github.chaosawakens.common.entity.creature.land.TreeFrogEntity;
 import io.github.chaosawakens.common.entity.creature.land.applecow.AppleCowEntity;
+import io.github.chaosawakens.common.entity.misc.CABoatEntity;
 import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
 import io.github.chaosawakens.common.registry.CABlocks;

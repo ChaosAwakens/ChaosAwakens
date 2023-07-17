@@ -120,9 +120,9 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			}
 		});
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 14.2D, 17.3D, 95.0D, 10, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() < 5).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 20, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 8).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 10, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 8).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim));
 		this.targetSelector.addGoal(0, new RoboPounderDysonDashGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 25.4D, 360.0D, 5, 450, 5.0D));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 5.0D, 8, 3, true, false, true, 20).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 5.0D, 6, 2, true, false, true, 10).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
 		//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.6D, 17.5D, 12.0D, 2));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
@@ -246,10 +246,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			setRageRunAttributes();
 			if (getRageRunDuration() == 0) setRageRunDuration(getRageRunDurationStaged());
 			updateRageRunDuration();
-		} else {
-			resetAttributes();
-			setRageRunDuration(0);
-		}
+		} else setRageRunDuration(0);
 	}
 
 	protected void setRageRunAttributes() {
@@ -292,30 +289,28 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public void manageAttack(LivingEntity target) {
-		if (target instanceof PlayerEntity) {
-			PlayerEntity playerTarget = (PlayerEntity) target;
-
-			switch (getAttackID()) {
-			default: break;
-			case DASH_ATTACK_ID:
-				EntityUtil.disableShield(playerTarget, 300);
-				break;
-			}
+		switch (getAttackID()) {
+		default:
+			resetAttributes();
+			break;
+		case SWING_ATTACK_ID:
+			setAttackDamage(12);
+			break;
+		case STOMP_ATTACK_ID:
+			setAttackDamage(15);
+			break;
+		case RAGE_RUN_ATTACK_ID:
+			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 100);
+			break;
+		case DASH_ATTACK_ID:
+			setAttackDamage(25);
+			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 300);
+			break;
 		}
 	}
 
 	@Override
 	protected void blockedByShield(LivingEntity pDefender) {
-		if (pDefender instanceof PlayerEntity) {
-			PlayerEntity playerTarget = (PlayerEntity) pDefender;
-
-			switch (getAttackID()) {
-			default: break;
-			case RAGE_RUN_ATTACK_ID:
-				EntityUtil.disableShield(playerTarget, 100);
-				break;
-			}
-		}
 	}
 
 	@Override

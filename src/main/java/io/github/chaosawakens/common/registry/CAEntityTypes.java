@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.entity.base.CABoatEntity;
 import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
 import io.github.chaosawakens.common.entity.creature.land.AntEntity;
@@ -31,6 +30,7 @@ import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
+import io.github.chaosawakens.common.entity.misc.CABoatEntity;
 import io.github.chaosawakens.common.entity.misc.CAFallingBlockEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;

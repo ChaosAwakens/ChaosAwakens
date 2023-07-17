@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.entity.bucket;
+package io.github.chaosawakens.common.items.bucket;
 
 import java.util.function.Supplier;
 

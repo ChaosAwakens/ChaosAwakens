@@ -144,67 +144,67 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 		handleBaseAnimations();
 	}
 
-	protected double getFollowRange() {
+	public double getFollowRange() {
 		return getAttributeValue(Attributes.FOLLOW_RANGE);
 	}
 
-	protected double getAttackDamage() {
+	public double getAttackDamage() {
 		return getAttributeValue(Attributes.ATTACK_DAMAGE);
 	}
 
-	protected double getAttackSpeed() {
+	public double getAttackSpeed() {
 		return getAttributeValue(Attributes.ATTACK_SPEED);
 	}
 
-	protected double getMovementSpeed() {
+	public double getMovementSpeed() {
 		return getAttributeValue(Attributes.MOVEMENT_SPEED);
 	}
 
-	protected double getFlyingSpeed() {
+	public double getFlyingSpeed() {
 		return getAttributeValue(Attributes.FLYING_SPEED);
 	}
 
-	protected double getKnockbackResistance() {
+	public double getKnockbackResistance() {
 		return getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
 	}
 
-	protected double getArmor() {
+	public double getArmor() {
 		return getAttributeValue(Attributes.ARMOR);
 	}
 
-	protected void setFollowRange(double newBaseValue) {
+	public void setFollowRange(double newBaseValue) {
 		getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(newBaseValue);;
 	}
 
-	protected void setAttackDamage(double newBaseValue) {
+	public void setAttackDamage(double newBaseValue) {
 		getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(newBaseValue);;
 	}
 
-	protected void setAttackSpeed(double newBaseValue) {
+	public void setAttackSpeed(double newBaseValue) {
 		getAttribute(Attributes.ATTACK_SPEED).setBaseValue(newBaseValue);;
 	}
 	
-	protected void setAttackKnockback(double newBaseValue) {
+	public void setAttackKnockback(double newBaseValue) {
 		getAttribute(Attributes.ATTACK_KNOCKBACK).setBaseValue(newBaseValue);;
 	}
 
-	protected void setMovementSpeed(double newBaseValue) {
+	public void setMovementSpeed(double newBaseValue) {
 		getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(newBaseValue);;
 	}
 
-	protected void setFlyingSpeed(double newBaseValue) {
+	public void setFlyingSpeed(double newBaseValue) {
 		getAttribute(Attributes.FLYING_SPEED).setBaseValue(newBaseValue);;
 	}
 
-	protected void setKnockbackResistance(double newBaseValue) {
+	public void setKnockbackResistance(double newBaseValue) {
 		getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(newBaseValue);;
 	}
 
-	protected void setArmor(double newBaseValue) {
+	public void setArmor(double newBaseValue) {
 		getAttribute(Attributes.ARMOR).setBaseValue(newBaseValue);;
 	}
 	
-	protected void setArmorToughness(double newBaseValue) {
+	public void setArmorToughness(double newBaseValue) {
 		getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(newBaseValue);;
 	}
 

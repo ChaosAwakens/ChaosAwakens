@@ -19,6 +19,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -205,6 +206,15 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	public void knockback(float pStrength, double pRatioX, double pRatioZ) {
 		if (!canBeKnockedBack()) return;
 		super.knockback(pStrength, pRatioX, pRatioZ);
+	}
+	
+	@Override
+	public boolean hurt(DamageSource pSource, float pAmount) {
+		if (pSource.getEntity() != null && pSource.getEntity() instanceof GolemEntity) {
+			super.hurt(pSource, pAmount);
+			return false;
+		}
+		return super.hurt(pSource, pAmount);
 	}
 		
 	@Override

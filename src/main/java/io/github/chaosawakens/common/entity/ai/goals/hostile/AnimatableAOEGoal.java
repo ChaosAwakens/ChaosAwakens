@@ -46,6 +46,7 @@ public class AnimatableAOEGoal extends Goal {
 	protected int curCooldown;
 	protected Supplier<? extends IAnimationBuilder> curAnim;
 	private final ObjectArrayList<LivingEntity> affectedEntities = new ObjectArrayList<>();
+	private AOEHitboxEntity aoeDamageHitBox; // Cache to prevent lag
 
 	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, boolean shouldFreezeRotation, boolean shouldAffectBlocks, boolean isProgressive, int presetCooldown) {
 		this.owner = owner;
@@ -144,7 +145,7 @@ public class AnimatableAOEGoal extends Goal {
 		if (curCooldown > 0) curCooldown--;
 
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId, shouldFreezeRotation) && curCooldown <= 0
-				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) && owner.distanceTo(owner.getTarget()) <= aoeRange
+				&& owner.distanceTo(owner.getTarget()) <= aoeRange
 				&& EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange).size() >= amountThreshold
 				&& owner.isAlive() && owner.getTarget().isAlive() && !owner.isAttacking()
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
@@ -152,7 +153,7 @@ public class AnimatableAOEGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), curAnim, attackId, shouldFreezeRotation) && !aoeAnim.get().hasAnimationFinished() && !owner.isDeadOrDying();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), curAnim, attackId, shouldFreezeRotation) && !curAnim.get().hasAnimationFinished() && !owner.isDeadOrDying();
 	}
 
 	@Override
@@ -165,7 +166,26 @@ public class AnimatableAOEGoal extends Goal {
 		owner.playAnimation(targetAnim.get(), true);
 
 		this.curAnim = targetAnim;
-		
+
+		if (isProgressive && aoeDamageHitBox == null) {
+			this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()), 1, null);
+
+			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
+
+				aoeDamageHitBox.setActionOnIntersection((target) -> {
+					if (!affectedEntities.contains(target)) {
+						target.hurt(DamageSource.mobAttack(owner), 12.0F);
+
+						double targetAngle = (MathUtil.getAngleBetweenEntities(aoeDamageHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
+						double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 5, 100.0D) : -Math.min(owner.getAttackDamage() / 5, 100.0D) / 2.1D;
+
+						target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + Math.min(owner.getAttackDamage() / 10, 1.0), kbMultiplier * Math.sin(targetAngle));
+						affectedEntities.add(target);
+					}
+				});
+			}
+		}
+
 		affectedEntities.clear();
 	}
 
@@ -176,10 +196,10 @@ public class AnimatableAOEGoal extends Goal {
 
 		this.curAnim = null;
 		this.curCooldown = presetCooldown;
-		
+
 		affectedEntities.clear();
 	}
-	
+
 	@Override
 	public boolean isInterruptable() {
 		return owner.isDeadOrDying();
@@ -187,38 +207,27 @@ public class AnimatableAOEGoal extends Goal {
 
 	@Override
 	public void tick() {
+		owner.getNavigation().stop();
+		owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
+
 		List<LivingEntity> affectedTargets = EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange);
 		List<BlockPos> affectedBlockPositions = BlockPatternShape.CIRCLE.applyShape(owner.level, owner.blockPosition(), aoeRange, 1, true, false, blockAffectConditions);
 
-		if (shouldFreezeRotation || aoeAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
-		else if (aoeAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
-		
+		if (shouldFreezeRotation || curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
+		else if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
+
 		if (isProgressive) {
-			if (MathUtil.isBetween(aoeAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
-				AOEHitboxEntity aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (aoeAnim.get().getWrappedAnimLength() - aoeAnim.get().getWrappedAnimProgress()), 1, null);
-				
-				aoeDamageHitBox.setActionOnIntersection((target) -> {
-					if (!affectedEntities.contains(target)) {
-						target.hurt(DamageSource.mobAttack(owner), 12.0F);
-						
-						double targetAngle = (MathUtil.getAngleBetweenEntities(aoeDamageHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
-						double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 10, 100.0D) : -Math.min(owner.getAttackDamage() / 10, 100.0D) / 2.1D;
-											
-						target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + Math.min(owner.getAttackDamage() / 10, 1.0), kbMultiplier * Math.sin(targetAngle));
-						affectedEntities.add(target);
-					}
-				});
-				
+			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange, (float) Math.min(aoeRange / 100, 1.0D), 20, (int) aoeRange * 2);
 				owner.level.addFreshEntity(aoeDamageHitBox);
 			}
 		} else {
 			if (!affectedTargets.isEmpty()) {
 				for (LivingEntity affectedTarget : affectedTargets) {
-					if (MathUtil.isBetween(aoeAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
+					if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 						if (MathUtil.getDistanceBetween(owner, affectedTarget) <= aoeRange) {
 							CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange, (float) Math.min(aoeRange / 100, 1.0D), 20, (int) aoeRange * 2);
-							
+
 							if (!affectedEntities.contains(affectedTarget)) {
 								owner.doHurtTarget(affectedTarget);
 								affectedTargets.add(affectedTarget);
@@ -228,9 +237,9 @@ public class AnimatableAOEGoal extends Goal {
 				}
 			}
 		}
-		
+
 		if (shouldAffectBlocks) {
-//			affectedBlockPositions.forEach((targetPos) -> owner.level.setBlock(targetPos, Blocks.BRAIN_CORAL_BLOCK.defaultBlockState(), 2));
+			//			affectedBlockPositions.forEach((targetPos) -> owner.level.setBlock(targetPos, Blocks.BRAIN_CORAL_BLOCK.defaultBlockState(), 2));
 		}
 	}
 }

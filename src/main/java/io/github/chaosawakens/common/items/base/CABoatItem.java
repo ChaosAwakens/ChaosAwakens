@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.items.base;
 import java.util.List;
 import java.util.function.Predicate;
 
-import io.github.chaosawakens.common.entity.base.CABoatEntity;
+import io.github.chaosawakens.common.entity.misc.CABoatEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BoatItem;
