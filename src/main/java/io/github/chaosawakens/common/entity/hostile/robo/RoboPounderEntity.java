@@ -72,7 +72,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 300)
 				.add(Attributes.ARMOR, 20)
-				.add(Attributes.ARMOR_TOUGHNESS, 6)
+				.add(Attributes.ARMOR_TOUGHNESS, 8)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 360.0D)
 				.add(Attributes.ATTACK_DAMAGE, 20)
