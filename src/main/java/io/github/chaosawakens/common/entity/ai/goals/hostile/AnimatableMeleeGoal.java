@@ -151,6 +151,7 @@ public class AnimatableMeleeGoal extends Goal {
 
 		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(target, 30F, 30F);
 		else if (curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
+		
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
 			double targetAngle = MathUtil.getRelativeAngleBetweenEntities(owner, potentialAffectedTarget);
 			double attackAngle = owner.yBodyRot % 360;
