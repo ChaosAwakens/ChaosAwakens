@@ -347,7 +347,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	public float getMeleeAttackReach(LivingEntity target) {
 		if (target == null) return 0;
-		return (1.0F + getBbWidth() / 2.0F) * 2;
+		return ((1.0F + getBbWidth() / 2.0F) * 2) + 0.2F;
 	}
 	
 	protected boolean shouldPlayIdleAnim() {

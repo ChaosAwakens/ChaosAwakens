@@ -20,6 +20,7 @@ import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.EntityPredicates;
 
 public class AnimatableAOEGoal extends Goal {
 	private final AnimatableMonsterEntity owner;
@@ -164,10 +165,10 @@ public class AnimatableAOEGoal extends Goal {
 
 		this.curAnim = targetAnim;
 		
-		this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()), 1, null);
+		this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()) / 2, 3, null);
 
 		aoeDamageHitBox.setActionOnIntersection((target) -> {
-			if (!affectedEntities.contains(target)) {
+			if (!affectedEntities.contains(target) && owner != target && !owner.isAlliedTo(target) && EntityPredicates.ATTACK_ALLOWED.test(target) && owner.getClass() != target.getClass()) {
 				owner.doHurtTarget(target);
 
 				double targetAngle = (MathUtil.getAngleBetweenEntities(aoeDamageHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
@@ -177,8 +178,6 @@ public class AnimatableAOEGoal extends Goal {
 				affectedEntities.add(target);
 			}
 		});
-
-		affectedEntities.clear();
 	}
 
 	@Override
@@ -210,7 +209,7 @@ public class AnimatableAOEGoal extends Goal {
 
 		if (isProgressive) {
 			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
-				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange, (float) Math.min(aoeRange / 100, 1.0D), 20, (int) aoeRange * 2);
+				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 6, (float) Math.min(aoeRange / 10, 0.6D), 4, 20);
 				
 				if (aoeDamageHitBox != null) owner.level.addFreshEntity(aoeDamageHitBox);
 			}
@@ -219,7 +218,7 @@ public class AnimatableAOEGoal extends Goal {
 				for (LivingEntity affectedTarget : affectedTargets) {
 					if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 						if (MathUtil.getDistanceBetween(owner, affectedTarget) <= aoeRange) {
-							CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange, (float) Math.min(aoeRange / 100, 1.0D), 20, (int) aoeRange * 2);
+							CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 6, (float) Math.min(aoeRange / 10, 0.6D), 4, 20);
 
 							if (!affectedEntities.contains(affectedTarget)) {
 								owner.doHurtTarget(affectedTarget);

@@ -64,7 +64,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private static final byte STOMP_ATTACK_ID = 4;
 	private static final byte GROUND_SLAM_ATTACK_ID = 5;
 	private static final byte RAGE_RUN_ATTACK_ID = 6;
-	private final ObjectArrayList<LivingEntity> confirmedDeadTargets = new ObjectArrayList<LivingEntity>();
+	private final ObjectArrayList<LivingEntity> potentialDeadTargets = new ObjectArrayList<LivingEntity>();
 
 	public RoboPounderEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -127,8 +127,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		this.targetSelector.addGoal(0, new RoboPounderDysonDashGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 25.4D, 360.0D, 5, 450, 5.0D));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 3.0D, 6, 2, true, false, true, 10).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.6D, 17.5D, 6.0D, 10, 2, true, false, true, 15));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 3.0D, 1, 4, true, false, true, 40).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.4D, 17.5D, 6.0D, 1, 8, true, false, true, 80));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 3.0D, 1, 6, true, false, true, 40).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.4D, 17.5D, 6.0D, 1, 8, true, false, true, 60));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
@@ -295,21 +295,21 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	private void handleTaunting() {
 		final int killThreshold = this.random.nextInt(4, 8);
-		boolean shouldTaunt = !confirmedDeadTargets.isEmpty() && !isAttacking() && (confirmedDeadTargets.size() >= killThreshold || ((confirmedDeadTargets.get(confirmedDeadTargets.size() - 1) instanceof PlayerEntity || confirmedDeadTargets.get(confirmedDeadTargets.size() - 1).getMaxHealth() >= 150) && this.random.nextBoolean())) && getTarget() == null;
+		boolean shouldTaunt = !potentialDeadTargets.isEmpty() && !isAttacking() && isPlayingAnimation(idleAnim) && (potentialDeadTargets.size() >= killThreshold || ((potentialDeadTargets.get(potentialDeadTargets.size() - 1) instanceof PlayerEntity || potentialDeadTargets.get(potentialDeadTargets.size() - 1).getMaxHealth() >= 150) && this.random.nextBoolean())) && getTarget() == null;
 		
 		if (shouldTaunt) {
 			setShouldTaunt(true);
 			getNavigation().stop();
 			EntityUtil.freezeEntityRotation(this);
-			confirmedDeadTargets.clear();
+			potentialDeadTargets.clear();
 		}
 
-		if (tauntAnim.hasAnimationFinished() || (getTarget() != null && distanceTo(getTarget()) <= 20.0D)) setShouldTaunt(false);
+		if (tauntAnim.hasAnimationFinished() || (getTarget() != null && distanceTo(getTarget()) <= 15.0D) || isDeadOrDying()) setShouldTaunt(false);
 	}
 
 	@Override
 	public void manageAttack(LivingEntity target) {
-		if (!confirmedDeadTargets.contains(target)) confirmedDeadTargets.add(target);
+		if (!potentialDeadTargets.contains(target)) potentialDeadTargets.add(target);
 		
 		switch (getAttackID()) {
 		default:
@@ -337,7 +337,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void blockedByShield(LivingEntity pDefender) {		
-		if (getTargetShieldBlocks() > 4) {
+		if (getTargetShieldBlocks() > 5) {
 			if (pDefender instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) pDefender, 100);
 			setTargetShieldBlocks(0);
 			return;
@@ -362,7 +362,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public float getMeleeAttackReach(LivingEntity target) {
 		if (getAttackID() == SWING_ATTACK_ID) return super.getMeleeAttackReach(target) * 0.8F;
-		else if (getAttackID() == DASH_ATTACK_ID) return super.getMeleeAttackReach(target) * 1.3F;
+		else if (getAttackID() == DASH_ATTACK_ID) return super.getMeleeAttackReach(target) * 1.2F;
 		else if (getAttackID() == RAGE_RUN_ATTACK_ID) return super.getMeleeAttackReach(target) * 0.65F;
 		else return super.getMeleeAttackReach(target);
 	}
@@ -375,11 +375,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
-	}
-
-	@Override
-	public boolean isPushable() {
-		return false;
 	}
 
 	@Override
