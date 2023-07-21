@@ -332,7 +332,7 @@ public final class EnumUtil {
 			@Override
 			public ObjectArrayList<BlockPos> applyShape(World targetWorld, BlockPos originPos, double radius, double height, boolean shouldFill, boolean includeCenter, Predicate<Block> blockAffectPredicate) {
 				ObjectArrayList<BlockPos> validPositions = new ObjectArrayList<BlockPos>(1);
-				Mutable mutablePos = new Mutable();
+				Mutable mutablePos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
 
 				mutablePos.set(originPos);
 				if (includeCenter) validPositions.add(originPos);

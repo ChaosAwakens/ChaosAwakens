@@ -9,8 +9,10 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
 
 public final class BlockPosUtil {
@@ -83,7 +85,7 @@ public final class BlockPosUtil {
 	 * @return A list of {@link BlockPos}es affected by the destruction operation.
 	 */
 	public static ObjectArrayList<BlockPos> destroyCollidingBlocks(World targetWorld, AxisAlignedBB targetHitbox, boolean dropBlocks, @Nullable Predicate<Block> destructibilityPredicate) {
-		return destroyBlocksBetween(targetWorld, (int) Math.floor(targetHitbox.minX), (int) Math.floor(targetHitbox.minY), (int) Math.floor(targetHitbox.minZ), (int) Math.floor(targetHitbox.maxX), (int) Math.floor(targetHitbox.maxY), (int) Math.floor(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
+		return destroyBlocksBetween(targetWorld, (int) Math.floor(targetHitbox.minX), (int) Math.floor(targetHitbox.minY) + 1, (int) Math.floor(targetHitbox.minZ), (int) Math.floor(targetHitbox.maxX), (int) Math.floor(targetHitbox.maxY), (int) Math.floor(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
 	}
 	
 	/**
@@ -95,5 +97,45 @@ public final class BlockPosUtil {
 	 */
 	public static ObjectArrayList<BlockPos> destroyCollidingBlocks(Entity targetEntity, boolean dropBlocks, @Nullable Predicate<Block> destructibilityPredicate) {
 		return destroyCollidingBlocks(targetEntity.level, targetEntity.getBoundingBox(), dropBlocks, destructibilityPredicate);
+	}
+	
+	public static ObjectArrayList<BlockPos> detectWall(World targetWorld, LivingEntity entityToCompare, BlockPos originPos, double length, double depth, double height, boolean shouldBeFilled) {
+		ObjectArrayList<BlockPos> lengthWallPositions = new ObjectArrayList<BlockPos>();
+		ObjectArrayList<BlockPos> depthWallPositions = new ObjectArrayList<BlockPos>();
+		ObjectArrayList<BlockPos> heightWallPositions = new ObjectArrayList<BlockPos>();
+		ObjectArrayList<BlockPos> potentialWallPositions = new ObjectArrayList<BlockPos>();
+		final ObjectArrayList<BlockPos> confirmedWallPositions = new ObjectArrayList<BlockPos>();
+		Mutable mutableLengthPos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
+		Mutable mutableDepthPos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
+		Mutable mutableHeightPos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
+		AxisAlignedBB targetEntityHitbox = entityToCompare.getBoundingBox();
+		double lengthCompMin = Math.floor(targetEntityHitbox.minX);
+		double lengthCompMax = Math.floor(targetEntityHitbox.maxX);
+		double heightCompMin = Math.floor(targetEntityHitbox.minY);
+		double heightCompMax = Math.floor(targetEntityHitbox.maxY);
+		
+		
+		
+		return confirmedWallPositions;
+	}
+	
+	/**
+	 * Finds a horizontal position (on the X axis and Z axis) "beyond" a specified target {@link BlockPos} using the specified 
+	 * offset using angle and offset calculations.
+	 * @param originEntity The entity from which to trace the target {@link BlockPos}.
+	 * @param targetPos The target {@link BlockPos} to offset from.
+	 * @param offset The offset of the new target {@link BlockPos} relative to the specified target {@link BlockPos}.
+	 * @return An offset {@link BlockPos} relative to the specified target {@link BlockPos} using the specified offset.
+	 */
+	public static BlockPos findHorizontalPositionBeyond(LivingEntity originEntity, BlockPos targetPos, double offset) {
+		double relativeAngle = Math.atan2(targetPos.getZ() - originEntity.getZ(), targetPos.getX() - originEntity.getX());
+		float targetDistSqr = (float) Math.sqrt((targetPos.getZ() - originEntity.getZ()) * (targetPos.getZ() - originEntity.getZ()) + (targetPos.getX() - originEntity.getX()) * (targetPos.getX() - originEntity.getX()));
+		
+		double targetX = Math.cos(relativeAngle) * (targetDistSqr + offset);
+		double targetZ = Math.sin(relativeAngle) * (targetDistSqr + offset);
+		
+		final BlockPos targetOffsetPos = new BlockPos(originEntity.getX() + targetX, originEntity.getY(), originEntity.getZ() + targetZ).immutable();
+		
+		return targetOffsetPos;
 	}
 }

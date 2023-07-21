@@ -34,7 +34,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 		if (curCooldown > 0) curCooldown--;
 		
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) && owner.distanceTo(owner.getTarget()) <= 16.0D
+				&& ((owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) && owner.distanceTo(owner.getTarget()) <= 16.0D))
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
 	
@@ -57,7 +57,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 		
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
 
-		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(target, 30F, 30F);
+		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
 		else if (curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 		
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) EntityUtil.chargeTowards(owner, target, overshoot, overshoot, 0.19);

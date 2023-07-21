@@ -127,7 +127,6 @@ public class AnimatableMeleeGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
-		owner.playAnimation(owner.getIdleAnim(), true);
 		
 		this.curAnim = null;
 		this.curCooldown = presetCooldown;
@@ -149,10 +148,12 @@ public class AnimatableMeleeGoal extends Goal {
 		double reach = owner.getMeleeAttackReach(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
-		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(target, 30F, 30F);
+		if (curAnim.get().getWrappedAnimProgress() <= actionPointTickStart) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
 		else EntityUtil.freezeEntityRotation(owner);
 		
-		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {			
+		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {		
+			if (owner.isAlliedTo(potentialAffectedTarget) || owner.getClass() == potentialAffectedTarget.getClass()) continue;
+			
 			double targetAngle = MathUtil.getRelativeAngleBetweenEntities(owner, potentialAffectedTarget);
 			double attackAngle = owner.yBodyRot % 360;
 			

@@ -9,6 +9,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
+import io.github.chaosawakens.common.entity.ai.pathfinding.bodycontrollers.base.SmoothBodyController;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -18,6 +19,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
@@ -237,6 +239,11 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	@Override
 	protected PathNavigator createNavigation(World pLevel) {
 		return new CAStrictGroundPathNavigator(this, pLevel);
+	}
+	
+	@Override
+	protected BodyController createBodyControl() {
+		return new SmoothBodyController(this);
 	}
 
 	@Override

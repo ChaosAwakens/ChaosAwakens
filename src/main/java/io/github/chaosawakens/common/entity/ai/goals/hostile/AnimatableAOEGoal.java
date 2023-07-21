@@ -16,7 +16,6 @@ import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
-import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -151,7 +150,7 @@ public class AnimatableAOEGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), curAnim, attackId, shouldFreezeRotation) && !curAnim.get().hasAnimationFinished() && !owner.isDeadOrDying();
+		return ObjectUtil.performNullityChecks(false, owner, curAnim, attackId, shouldFreezeRotation) && !curAnim.get().hasAnimationFinished() && !owner.isDeadOrDying();
 	}
 
 	@Override
@@ -183,7 +182,6 @@ public class AnimatableAOEGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
-		owner.playAnimation(owner.getIdleAnim(), true);
 
 		this.curAnim = null;
 		this.curCooldown = presetCooldown;
@@ -205,7 +203,7 @@ public class AnimatableAOEGoal extends Goal {
 	//	List<BlockPos> affectedBlockPositions = BlockPatternShape.CIRCLE.applyShape(owner.level, owner.blockPosition(), aoeRange, 1, true, false, blockAffectConditions);
 
 		if (shouldFreezeRotation || curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
-		else if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.lookAt(Type.EYES, owner.getTarget().position());
+		else if (owner.getTarget() != null) owner.getLookControl().setLookAt(owner.getTarget(), 30.0F, 30.0F);
 
 		if (isProgressive) {
 			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {

@@ -133,7 +133,7 @@ public final class EntityUtil {
 	 * @param targetEntity The target entity to have its rotation stopped
 	 */
 	public static void freezeEntityRotation(AnimatableMonsterEntity targetEntity) {
-		targetEntity.yRot = targetEntity.yRotO;
+		targetEntity.yBodyRot = targetEntity.yBodyRotO;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public final class EntityUtil {
 	 * @param targetEntity The target entity to have its rotation stopped
 	 */
 	public static void freezeEntityRotation(AnimatableAnimalEntity targetEntity) {
-		targetEntity.yRot = targetEntity.yRotO;
+		targetEntity.yBodyRot = targetEntity.yBodyRotO;
 	}
 
 	/**
@@ -352,16 +352,16 @@ public final class EntityUtil {
 	}
 	
 	/**
-	 * Makes the specified attacking {@link LivingEntity} "charge" towards a target {@link LivingEntity} with a specified overshoot.
+	 * Makes the specified attacking {@link LivingEntity} "charge" towards a target {@link BlockPos} with a specified overshoot.
 	 * @param attackingEntity The {@link LivingEntity} to have "charge" towards its target
-	 * @param targetEntity The target {@link LivingEntity} for the attacking {@link LivingEntity} to charge towards
+	 * @param targetPosition The target {@link BlockPos} for the attacking {@link LivingEntity} to charge towards
 	 * @param overshootAmount The extra distance traveled by the attacking {@link LivingEntity}'s charge
 	 * @param chargeThreshold The maximum distance the attacking {@link LivingEntity}'s charge can travel. Set to -1 to remove the limit
 	 * @param chargePercentageMod A percentage modifier to how far the charge should go relative to its length
 	 */
-	public static void chargeTowards(LivingEntity attackingEntity, LivingEntity targetEntity, double overshootAmount, double chargeThreshold, double chargePercentageMod) {
-		double relativeAngle = Math.atan2(targetEntity.getZ() - attackingEntity.getZ(), targetEntity.getX() - attackingEntity.getX());
-		float hitDistanceSqr = (float) Math.sqrt((targetEntity.getZ() - attackingEntity.getZ()) * (targetEntity.getZ() - attackingEntity.getZ()) + (targetEntity.getX() - attackingEntity.getX()) * (targetEntity.getX() - attackingEntity.getX()));
+	public static void chargeTowards(LivingEntity attackingEntity, BlockPos targetPosition, double overshootAmount, double chargeThreshold, double chargePercentageMod) {
+		double relativeAngle = Math.atan2(targetPosition.getZ() - attackingEntity.getZ(), targetPosition.getX() - attackingEntity.getX());
+		float hitDistanceSqr = (float) Math.sqrt((targetPosition.getZ() - attackingEntity.getZ()) * (targetPosition.getZ() - attackingEntity.getZ()) + (targetPosition.getX() - attackingEntity.getX()) * (targetPosition.getX() - attackingEntity.getX()));
 		
 		double targetX = Math.min(Math.cos(relativeAngle) * (hitDistanceSqr + overshootAmount), Math.cos(relativeAngle) * (hitDistanceSqr + chargeThreshold));
 		double targetZ = Math.min(Math.sin(relativeAngle) * (hitDistanceSqr + overshootAmount), Math.sin(relativeAngle) * (hitDistanceSqr + chargeThreshold));
@@ -371,6 +371,18 @@ public final class EntityUtil {
 		
 		attackingEntity.setDeltaMovement(chargeVec.scale(Math.min(chargePercentageMod, 1)));
 		attackingEntity.refreshDimensions();
+	}
+	
+	/**
+	 * Overloaded method for {@link #chargeTowards(LivingEntity, BlockPos, double, double, double)}.
+	 * @param attackingEntity The {@link LivingEntity} to have "charge" towards its target
+	 * @param targetEntity The target {@link LivingEntity} for the attacking {@link LivingEntity} to charge towards
+	 * @param overshootAmount The extra distance traveled by the attacking {@link LivingEntity}'s charge
+	 * @param chargeThreshold The maximum distance the attacking {@link LivingEntity}'s charge can travel. Set to -1 to remove the limit
+	 * @param chargePercentageMod A percentage modifier to how far the charge should go relative to its length
+	 */
+	public static void chargeTowards(LivingEntity attackingEntity, LivingEntity targetEntity, double overshootAmount, double chargeThreshold, double chargePercentageMod) {
+		chargeTowards(attackingEntity, targetEntity.blockPosition(), overshootAmount, chargeThreshold, chargePercentageMod);
 	}
 	
 	/**

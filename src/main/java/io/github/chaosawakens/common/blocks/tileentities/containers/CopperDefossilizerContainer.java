@@ -34,20 +34,20 @@ public class CopperDefossilizerContainer extends Container {
 		this.inventory = inventory;
 		this.fields = fields;
 
-		this.fossilSlot = this.addSlot(new Slot(this.inventory, 0, 56, 17));
-		this.bucketSlot = this.addSlot(new Slot(this.inventory, 1, 47, 53) {
+		this.fossilSlot = addSlot(new Slot(inventory, 0, 56, 17));
+		this.bucketSlot = addSlot(new Slot(inventory, 1, 47, 53) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return stack.getItem() instanceof BucketItem;
 			}
 		});
-		this.powerchipSlot = this.addSlot(new Slot(this.inventory, 2, 65, 53) {
+		this.powerchipSlot = addSlot(new Slot(inventory, 2, 65, 53) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return stack.getItem() instanceof PowerChipItem;
 			}
 		});
-		this.resultSlot = this.addSlot(new Slot(this.inventory, 3, 116, 35) {
+		this.resultSlot = addSlot(new Slot(inventory, 3, 116, 35) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return false;
@@ -56,17 +56,13 @@ public class CopperDefossilizerContainer extends Container {
 
 		// Player backpack
 		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 9; ++j) {
-				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-			}
+			for (int j = 0; j < 9; ++j) addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 		}
 
 		// Player hotbar
-		for (int k = 0; k < 9; ++k) {
-			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
-		}
+		for (int k = 0; k < 9; ++k) addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
 
-		this.addDataSlots(fields);
+		addDataSlots(fields);
 	}
 
 	public int getProgressArrowScale() {
@@ -89,54 +85,37 @@ public class CopperDefossilizerContainer extends Container {
 
 	@Override
 	public ItemStack quickMoveStack(PlayerEntity player, int index) {
-		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = this.slots.get(index);
-		if (slot != null && slot.hasItem()) {
-			ItemStack itemstack1 = slot.getItem();
-			itemstack = itemstack1.copy();
-			if (index == this.resultSlot.index) {
-				if (!this.moveItemStackTo(itemstack1, 4, 40, true)) {
-					return ItemStack.EMPTY;
-				}
+		ItemStack curStack = ItemStack.EMPTY;
+		Slot curSlot = slots.get(index);
+		
+		if (curSlot != null && curSlot.hasItem()) {
+			ItemStack curFilledStack = curSlot.getItem();
+			curStack = curFilledStack.copy();
+			
+			if (index == resultSlot.index) {
+				if (!moveItemStackTo(curFilledStack, 4, 40, true)) return ItemStack.EMPTY;
 
-				slot.onQuickCraft(itemstack1, itemstack);
-			} else if (index != this.bucketSlot.index && index != this.fossilSlot.index && index != this.powerchipSlot.index) {
-				if (!(itemstack1.getItem() instanceof BucketItem) && !(itemstack1.getItem() instanceof PowerChipItem)) {
-					if (!this.moveItemStackTo(itemstack1, this.fossilSlot.index, this.fossilSlot.index + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (itemstack1.getItem() instanceof BucketItem) {
-					if (!this.moveItemStackTo(itemstack1, this.bucketSlot.index, this.bucketSlot.index + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (itemstack1.getItem() instanceof PowerChipItem) {
-					if (!this.moveItemStackTo(itemstack1, this.powerchipSlot.index, this.powerchipSlot.index + 1, false)) {
-						return ItemStack.EMPTY;
-					}
+				curSlot.onQuickCraft(curFilledStack, curStack);
+			} else if (index != bucketSlot.index && index != fossilSlot.index && index != powerchipSlot.index) {
+				if (!(curFilledStack.getItem() instanceof BucketItem) && !(curFilledStack.getItem() instanceof PowerChipItem)) {
+					if (!moveItemStackTo(curFilledStack, fossilSlot.index, fossilSlot.index + 1, false)) return ItemStack.EMPTY;
+				} else if (curFilledStack.getItem() instanceof BucketItem) {
+					if (!moveItemStackTo(curFilledStack, bucketSlot.index, bucketSlot.index + 1, false)) return ItemStack.EMPTY;
+				} else if (curFilledStack.getItem() instanceof PowerChipItem) {
+					if (!moveItemStackTo(curFilledStack, powerchipSlot.index, powerchipSlot.index + 1, false)) return ItemStack.EMPTY;
 				} else if (index >= 4 && index < 31) {
-					if (!this.moveItemStackTo(itemstack1, 31, 40, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (index >= 31 && index < 40 && !this.moveItemStackTo(itemstack1, 4, 31, false)) {
-					return ItemStack.EMPTY;
-				}
-			} else if (!this.moveItemStackTo(itemstack1, 4, 40, false)) {
-				return ItemStack.EMPTY;
-			}
+					if (!moveItemStackTo(curFilledStack, 31, 40, false)) return ItemStack.EMPTY;
+				} else if (index >= 31 && index < 40 && !moveItemStackTo(curFilledStack, 4, 31, false)) return ItemStack.EMPTY;
+			} else if (!moveItemStackTo(curFilledStack, 4, 40, false)) return ItemStack.EMPTY;
 
-			if (itemstack1.isEmpty()) {
-				slot.set(ItemStack.EMPTY);
-			} else {
-				slot.setChanged();
-			}
+			if (curFilledStack.isEmpty()) curSlot.set(ItemStack.EMPTY);
+			else curSlot.setChanged();
 
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
+			if (curFilledStack.getCount() == curStack.getCount()) return ItemStack.EMPTY;
 
-			slot.onTake(player, itemstack1);
+			curSlot.onTake(player, curFilledStack);
 		}
 
-		return itemstack;
+		return curStack;
 	}
 }

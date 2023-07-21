@@ -3821,7 +3821,7 @@
 				}
 			}
 		},
-		"Rage Run 1": {
+		"Rage Begin": {
 			"animation_length": 3.5,
 			"bones": {
 				"Head": {
@@ -4054,7 +4054,7 @@
 				}
 			}
 		},
-		"Rage Run 2": {
+		"Rage Run": {
 			"loop": true,
 			"bones": {
 				"Head": {
@@ -4163,7 +4163,7 @@
 				}
 			}
 		},
-		"Cool Down 1": {
+		"Cooldown": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 10.25,
 			"bones": {
@@ -4507,9 +4507,9 @@
 				}
 			}
 		},
-		"Cool Down 2": {
+		"Cooldown Restart": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 1.16667,
+			"animation_length": 1.6,
 			"bones": {
 				"Head": {
 					"rotation": {

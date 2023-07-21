@@ -177,7 +177,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public boolean hasAnimationFinished() {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return false;
 		
-		return targetController.isAnimationFinished(this) || (targetController.getAnimationProgressTicks() >= getWrappedAnimLength() && (targetController.getAnimationState() == ExpandedAnimationState.RUNNING || targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING));
+		return targetController.isAnimationFinished(this) || (isPlaying() && targetController.getAnimationProgressTicks() >= getWrappedAnimLength() && (targetController.getAnimationState() == ExpandedAnimationState.RUNNING || targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING));
 	}
 
 	@Override

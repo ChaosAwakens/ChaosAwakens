@@ -7,6 +7,7 @@ import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderDysonDashGoal;
+import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderRageRunGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -58,6 +59,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final SingletonAnimationBuilder rightStompAnim = new SingletonAnimationBuilder(this, "Right Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder leftStompAnim = new SingletonAnimationBuilder(this, "Left Leg Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder groundSlamAnim = new SingletonAnimationBuilder(this, "Heavy AoE Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rageBeginAnim = new SingletonAnimationBuilder(this, "Rage Begin", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rageRunAnim = new SingletonAnimationBuilder(this, "Rage Run", EDefaultLoopTypes.LOOP).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rageCooldownAnim = new SingletonAnimationBuilder(this, "Cooldown", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder cooldownRestartAnim = new SingletonAnimationBuilder(this, "Cooldown Restart", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SWING_ATTACK_ID = 2;
 	private static final byte DASH_ATTACK_ID = 3;
@@ -125,6 +130,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 10, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 8).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 10, 50).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim));
 		this.targetSelector.addGoal(0, new RoboPounderDysonDashGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 25.4D, 360.0D, 5, 450, 5.0D));
+		this.targetSelector.addGoal(0, new RoboPounderRageRunGoal(this, () -> rageBeginAnim, () -> rageRunAnim, () -> rageCooldownAnim, () -> cooldownRestartAnim, RAGE_RUN_ATTACK_ID, 400, 5));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 3.0D, 6, 2, true, false, true, 10).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.6D, 17.5D, 6.0D, 10, 2, true, false, true, 15));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 3.0D, 1, 6, true, false, true, 40).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
@@ -192,8 +198,18 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	public void updateTargetShieldBlocks() {
 		updateTargetShieldBlocks(1);
 	}
+	
+	public boolean shouldRageRunBasedOnChance() {
+		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return Math.random() < 0.35D;
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return Math.random() < 0.45D;
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return Math.random() < 0.5D;
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return Math.random() < 0.65D;
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return Math.random() < 0.7D;
+		else if (getHealth() <= 20.0F) return Math.random() < 0.8D;
+		else return Math.random() < 0.3D;
+	}
 
-	protected int getRageRunDurationStaged() {
+	public int getRageRunDurationStaged() {
 		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return this.random.nextInt(300, 550);
 		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return this.random.nextInt(275, 500);
 		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return this.random.nextInt(225, 450);
@@ -204,13 +220,13 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	protected double getRageRunSpeed() {
-		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 0.42D;
-		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 0.44D;
-		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 0.46D;
-		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return 0.47D;
-		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return 0.48D;
-		else if (getHealth() <= 20.0F) return 0.5D;
-		else return 0.4D;
+		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 0.56D;
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 0.58D;
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 0.6D;
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return 0.62D;
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return 0.64D;
+		else if (getHealth() <= 20.0F) return 0.66D;
+		else return 0.55D;
 	}
 
 	protected double getRageRunAttackDamage() {
@@ -244,23 +260,21 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	protected int getRageRunDeflectionPower() {
-		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return -3;
-		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return -4;
-		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return -4;
-		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return -5;
-		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return -5;
-		else if (getHealth() <= 20.0F) return -6;
-		else return -2;
+		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return -6;
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return -7;
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return -7;
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return -8;
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return -9;
+		else if (getHealth() <= 20.0F) return -10;
+		else return -5;
 	}
 
 	@Override
 	public void aiStep() {
 		super.aiStep();
 
-		if (!level.isClientSide) {
-			handleRageRun();
-			handleTaunting();
-		}
+		handleRageRun();
+		handleTaunting();
 	}
 
 	private void handleRageRun() {
@@ -271,14 +285,14 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		} else setRageRunDuration(0);
 	}
 
-	protected void setRageRunAttributes() {
+	public void setRageRunAttributes() {
 		setArmor(getRageRunArmor());
 		setArmorToughness(getRageRunArmorToughness());
 		setMovementSpeed(getRageRunSpeed());
 		setAttackDamage(getRageRunAttackDamage());
 	}
 
-	private void resetAttributes() {
+	public void resetAttributes() {
 		setArmor(20.0D);
 		setArmorToughness(6.0D);
 		setMovementSpeed(0.25D);
@@ -289,7 +303,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (hurtSource != null && hurtSource.isProjectile() && isAlive()) {
 			Entity projectileDamageSource = hurtSource.getDirectEntity();
 
-			if (projectileDamageSource != null) projectileDamageSource.setDeltaMovement(projectileDamageSource.getDeltaMovement().multiply(getRageRunDeflectionPower(), -1, getRageRunDeflectionPower()));
+			if (projectileDamageSource != null) repelEntities(projectileDamageSource.blockPosition(), -getRageRunDeflectionPower());
 		}
 	}
 
@@ -326,7 +340,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 200);
 			break;
 		case RAGE_RUN_ATTACK_ID:
-			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 100);
+			setRageRunAttributes();
+			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 20);
 			break;
 		case DASH_ATTACK_ID:
 			setAttackDamage(25);
@@ -337,11 +352,16 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void blockedByShield(LivingEntity pDefender) {		
-		if (getTargetShieldBlocks() > 5) {
+		if (getTargetShieldBlocks() > 25) {
 			if (pDefender instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) pDefender, 100);
 			setTargetShieldBlocks(0);
 			return;
 		} else if (pDefender instanceof PlayerEntity && !EntityUtil.isItemOnCooldown((PlayerEntity) pDefender, Items.SHIELD)) updateTargetShieldBlocks();
+	}
+	
+	@Override
+	protected void divertTarget() {
+		if (!isRageRunning()) super.divertTarget();
 	}
 
 	@Override
