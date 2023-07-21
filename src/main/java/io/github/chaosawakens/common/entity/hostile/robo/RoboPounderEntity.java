@@ -99,7 +99,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (shouldTaunt()) playAnimation(tauntAnim, false);
 		return PlayState.CONTINUE;
 	}
 
