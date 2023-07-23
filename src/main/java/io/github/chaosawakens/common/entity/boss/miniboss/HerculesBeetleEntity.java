@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.boss.miniboss;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -32,6 +33,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>>(3);
+	private final ObjectArrayList<IAnimationBuilder> herculesBeetleAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Boolean> IS_DOCILE = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> DOCILITY_DURATION = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.INT);
 	private static final DataParameter<Boolean> IS_AWAKENING = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
@@ -305,5 +307,10 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> getWrappedControllers() {
 		return herculesBeetleControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return herculesBeetleAnimations;
 	}
 }

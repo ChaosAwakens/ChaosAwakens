@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.creature.land;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.api.entity.ITeleporterMob;
@@ -30,6 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<AntEntity>> antControllers = new ObjectArrayList<WrappedAnimationController<AntEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> antAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<AntEntity> mainController = createMainMappedController("antmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
@@ -121,5 +123,10 @@ public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob 
 	@Override
 	public ObjectArrayList<WrappedAnimationController<AntEntity>> getWrappedControllers() {
 		return antControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return antAnimations;
 	}
 }

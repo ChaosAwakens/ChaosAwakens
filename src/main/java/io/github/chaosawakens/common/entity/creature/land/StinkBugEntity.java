@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.creature.land;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -39,6 +40,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class StinkBugEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<StinkBugEntity>> stinkBugControllers = new ObjectArrayList<WrappedAnimationController<StinkBugEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> stinkBugAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(StinkBugEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<StinkBugEntity> mainController = createMainMappedController("stinkbugmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
@@ -173,6 +175,11 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<StinkBugEntity>> getWrappedControllers() {
 		return stinkBugControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return stinkBugAnimations;
 	}
 	
 	private class StinkBugData extends AgeableData {

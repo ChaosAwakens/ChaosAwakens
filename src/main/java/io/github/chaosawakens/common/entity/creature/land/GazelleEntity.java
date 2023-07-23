@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.creature.land;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -48,6 +49,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class GazelleEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<GazelleEntity>> gazelleControllers = new ObjectArrayList<WrappedAnimationController<GazelleEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> gazelleAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<GazelleEntity> mainController = createMainMappedController("gazellemaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
@@ -182,6 +184,11 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<GazelleEntity>> getWrappedControllers() {
 		return gazelleControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return gazelleAnimations;
 	}
 	
 	private class GazelleData extends AgeableData {

@@ -126,6 +126,11 @@ dependencies {
 	compileOnly fg.deobf("curse.maven:iron-shulker-boxes-314911:${ironshulkerboxes_version}")
 	compileOnly fg.deobf("curse.maven:iron-furnaces-237664:${ironfurnaces_version}")
 	
+	implementation fg.deobf("curse.maven:mob-battle-mod-268746:3815712")
+	implementation fg.deobf("curse.maven:citadel-331936:3441028")
+	runtimeOnly fg.deobf("curse.maven:l_ender-s-cataclysm-551586:${cataclysm_version}")
+	runtimeOnly fg.deobf("curse.maven:extra-golems-233300:${extra_golems_version}")
+	
 	compileOnly fg.deobf("curse.maven:curios-309927:${curios_version}")
 	
 	implementation fg.deobf("curse.maven:datafixerslayer-416519:${dfs_version}")

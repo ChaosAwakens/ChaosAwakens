@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -19,6 +20,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> roboSniperAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RoboSniperEntity> mainController = createMainMappedController("robosnipermaincontroller");
 	
 	public RoboSniperEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -84,5 +86,10 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> getWrappedControllers() {
 		return roboSniperControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return roboSniperAnimations;
 	}
 }

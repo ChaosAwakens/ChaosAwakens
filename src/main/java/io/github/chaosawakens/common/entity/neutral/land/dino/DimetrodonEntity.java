@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.neutral.land.dino;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
@@ -54,6 +55,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<DimetrodonEntity>> dimetrodonControllers = new ObjectArrayList<WrappedAnimationController<DimetrodonEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> dimetrodonAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(DimetrodonEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<DimetrodonEntity> mainController = createMainMappedController("dimetrodonmaincontroller");
 	private final WrappedAnimationController<DimetrodonEntity> attackController = createMappedController("dimetrodonattackcontroller", this::attackPredicate);
@@ -211,6 +213,11 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<DimetrodonEntity>> getWrappedControllers() {
 		return dimetrodonControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return dimetrodonAnimations;
 	}
 	
 	private class DimetrodonData extends AgeableData {

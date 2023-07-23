@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.creature.land;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -29,6 +30,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class BeaverEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<BeaverEntity>> beaverControllers = new ObjectArrayList<WrappedAnimationController<BeaverEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> beaverAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Boolean> CHIPPING = EntityDataManager.defineId(BeaverEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<BeaverEntity> mainController = createMainMappedController("beavermaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
@@ -119,5 +121,10 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<BeaverEntity>> getWrappedControllers() {
 		return beaverControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return beaverAnimations;
 	}
 }

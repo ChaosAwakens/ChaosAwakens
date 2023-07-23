@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.creature.land.applecow;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -56,6 +57,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class AppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<AppleCowEntity>> appleCowControllers = new ObjectArrayList<WrappedAnimationController<AppleCowEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> appleCowAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<AppleCowEntity> mainController = createMainMappedController("applecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
@@ -220,6 +222,11 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<AppleCowEntity>> getWrappedControllers() {
 		return appleCowControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return appleCowAnimations;
 	}
 	
 	private class AppleCowData extends AgeableData {

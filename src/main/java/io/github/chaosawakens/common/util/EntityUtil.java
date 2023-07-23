@@ -352,6 +352,27 @@ public final class EntityUtil {
 	}
 	
 	/**
+	 * Repels {@link LivingEntity}s from a specified {@link LivingEntity}.
+	 * @param targetEntity The central {@link LivingEntity} to repel other entities from
+	 * @param radius The horizontal radius of the repulsion effect
+	 * @param height The vertical radius of the repulsion effect
+	 * @param repulsionPower The power/speed at which entities will be repelled from the specified {@link LivingEntity} (clamped between {@code 0.01 - 10.0D}, with necessary negative conversions already done)
+	 */
+	public static void repelEntities(LivingEntity targetEntity, double radius, double height, double repulsionPower) {
+		if (targetEntity == null || targetEntity.noPhysics) return;
+
+		List<LivingEntity> potentialAffectedTargets = getAllEntitiesAround(targetEntity, radius, height, radius, radius + height);
+
+		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
+			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
+
+			double relAngleRadians = MathUtil.getRelativeAngleBetweenEntities(targetEntity, potentialAffectedTarget);
+			double clampedRepulsionSpeed = -MathHelper.clamp(repulsionPower, 0.01D, 10.0D);
+			potentialAffectedTarget.setDeltaMovement(clampedRepulsionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedRepulsionSpeed * Math.sin(relAngleRadians));
+		}
+	}
+	
+	/**
 	 * Makes the specified attacking {@link LivingEntity} "charge" towards a target {@link BlockPos} with a specified overshoot.
 	 * @param attackingEntity The {@link LivingEntity} to have "charge" towards its target
 	 * @param targetPosition The target {@link BlockPos} for the attacking {@link LivingEntity} to charge towards
@@ -427,7 +448,7 @@ public final class EntityUtil {
 
 					if (causeEntity != null) causeEntity.killed(curServerWorld, livingAnimatable);
 
-					livingAnimatable.dropAllDeathLoot(deathCause);
+			//		livingAnimatable.dropAllDeathLoot(deathCause);
 					livingAnimatable.createWitherRose(killerEntity);
 				}
 

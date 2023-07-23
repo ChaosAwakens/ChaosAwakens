@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.creature.land;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -50,6 +51,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<LettuceChickenEntity>> lettuceChickenControllers = new ObjectArrayList<WrappedAnimationController<LettuceChickenEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> lettuceChickenAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(LettuceChickenEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(LettuceChickenEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> SITTING_TIME = EntityDataManager.defineId(LettuceChickenEntity.class, DataSerializers.INT);
@@ -285,6 +287,11 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<LettuceChickenEntity>> getWrappedControllers() {
 		return lettuceChickenControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return lettuceChickenAnimations;
 	}
 
 	@Override

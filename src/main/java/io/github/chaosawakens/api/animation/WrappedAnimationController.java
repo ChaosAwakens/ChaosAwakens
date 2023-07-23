@@ -41,7 +41,12 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public void tick() {
-		double tickProgressDelta = server == null ? 0 : getSyncedProgress(Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0);
+		double tickProgressDelta = server == null ? 0 : getSyncedProgress();
+		
+		if (this.transitionLength != animatable.animationInterval() || this.controller.transitionLengthTicks != animatable.animationInterval()) {
+			this.transitionLength = animatable.animationInterval();
+			this.controller.transitionLengthTicks = animatable.animationInterval();
+		}
 		
 		switch (animationState) {
 		case TRANSITIONING:
@@ -72,29 +77,42 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		}
 	}
 	
-	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
+	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {		
 		if (builder == null) {
 			this.animationProgress = 0;
 			this.animationLength = 0;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.FINISHED;
+			return;
 		}
-		
+					
 		if (!getCurrentAnimation().animationName.equals(builder.getAnimationName()) || clearCache) {
-			if (clearCache) builder.playAnimation(true);
-			else builder.playAnimation(false);
+			builder.playAnimation(clearCache);
 			
 			this.animationProgress = 0;
 			this.animationLength = builder.getAnimation().animationLength;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.TRANSITIONING;
 		}
+		
 		this.currentAnimation = builder.getAnimation();
 		this.controller.setAnimation(builder.getBuilder());
 	}
 	
-	public double getSyncedProgress(double animProgress) {
-		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), animProgress), (Entity) animatable);
+	public void stopAnimation(IAnimationBuilder targetAnim) {
+		targetAnim.stopAnimation();
+		
+		this.animationProgress = 0;
+		this.animationLength = 0;
+		this.transitionProgress = 0;
+		this.animationState = ExpandedAnimationState.FINISHED;
+		this.currentAnimation = none();
+		
+		this.controller.setAnimation(null);
+	}
+	
+	public double getSyncedProgress() {
+		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0), (Entity) animatable);
 		return server == null ? 0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
 	}
 	

@@ -124,6 +124,8 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
+		
+		owner.getCachedAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, ILoopType loopType) {
@@ -133,6 +135,8 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.loopType = loopType;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName, loopType);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
+		
+		owner.getCachedAnimations().add(this);
 	}
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName, int loopReps) {
@@ -141,6 +145,8 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addRepeatingAnimation(animName, loopReps);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
+		
+		owner.getCachedAnimations().add(this);
 	}
 
 	@Override
@@ -203,7 +209,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public void playAnimation(boolean forceAnim) {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
-		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
+		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 1);
 
 		if (forceAnim) targetController.getWrappedController().clearAnimationCache();
 		targetController.getWrappedController().setAnimation(animBuilder);
@@ -222,6 +228,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public void stopAnimation() {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
+		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 1);
 		
 		targetController.getWrappedController().setAnimation(null);
 	}

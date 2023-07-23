@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.creature.water.fish;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableGroupFishEntity;
@@ -21,6 +22,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class SparkFishEntity extends AnimatableGroupFishEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<SparkFishEntity>> sparkFishControllers = new ObjectArrayList<WrappedAnimationController<SparkFishEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> sparkFishAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<SparkFishEntity> mainController = createMainMappedController("sparkfishmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
@@ -80,5 +82,10 @@ public class SparkFishEntity extends AnimatableGroupFishEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<SparkFishEntity>> getWrappedControllers() {
 		return sparkFishControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return sparkFishAnimations;
 	}
 }

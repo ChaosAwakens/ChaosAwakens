@@ -141,7 +141,7 @@ public class AnimatableAOEGoal extends Goal {
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
 
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId, shouldFreezeRotation) && curCooldown <= 0
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId, shouldFreezeRotation) && !owner.isOnAttackCooldown() && curCooldown <= 0
 				&& owner.distanceTo(owner.getTarget()) <= aoeRange + 2.0D
 				&& EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange).size() >= amountThreshold
 				&& owner.isAlive() && owner.getTarget().isAlive() && !owner.isAttacking()
@@ -182,6 +182,8 @@ public class AnimatableAOEGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
+		owner.setAttackCooldown(10);
+		owner.stopAnimation(curAnim.get());
 
 		this.curAnim = null;
 		this.curCooldown = presetCooldown;

@@ -33,7 +33,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
 		
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
 				&& ((owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) && owner.distanceTo(owner.getTarget()) <= 16.0D))
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
@@ -46,6 +46,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 	
 	@Override
 	public void stop() {
+		owner.stopAnimation(curAnim.get());
 		super.stop();
 		affectedEntities.clear();
 	}

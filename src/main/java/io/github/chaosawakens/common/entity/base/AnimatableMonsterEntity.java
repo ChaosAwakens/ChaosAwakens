@@ -4,12 +4,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
-import io.github.chaosawakens.common.entity.ai.pathfinding.bodycontrollers.base.SmoothBodyController;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -44,6 +42,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatableEntity {
 	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
 	protected static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BYTE);
+	protected static final DataParameter<Integer> ATTACK_COOLDOWN = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.INT);
 	public float prevYRot;
 	
 	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -91,6 +90,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.defineSynchedData();
 		this.entityData.define(MOVING, !isStuck());
 		this.entityData.define(ATTACK_ID, (byte) 0);
+		this.entityData.define(ATTACK_COOLDOWN, 0);
 	}
 
 	public boolean isMoving() {
@@ -111,6 +111,18 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	
 	public boolean isAttacking() {
 		return getAttackID() != (byte) 0;
+	}
+	
+	public int getAttackCooldown() {
+		return this.entityData.get(ATTACK_COOLDOWN);
+	}
+	
+	public void setAttackCooldown(int attackCooldownTicks) {
+		this.entityData.set(ATTACK_COOLDOWN, attackCooldownTicks);
+	}
+	
+	public boolean isOnAttackCooldown() {
+		return getAttackCooldown() > 0;
 	}
 
 	protected void repelEntities(double x, double y, double z, float radius) {
@@ -225,12 +237,12 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	protected void divertTarget() {
-		List<LivingEntity> allAttackableEntitiesAround = IUtilityHelper.getAllEntitiesAround(this, getFollowRange(), getFollowRange(), getFollowRange(), getFollowRange());
+		List<LivingEntity> allAttackableEntitiesAround = EntityUtil.getAllEntitiesAround(this, getFollowRange(), getFollowRange(), getFollowRange(), getFollowRange());
 		
 		for (LivingEntity target : allAttackableEntitiesAround) {
 			if (getTarget() != null) {
-				if (this.distanceTo(target) < this.distanceTo(getTarget()) && EntityPredicates.ATTACK_ALLOWED.test(target) && this.getSensing().canSee(target)) {
-					this.setTarget(target);
+				if (!isAttacking() && distanceTo(target) < distanceTo(getTarget()) && EntityPredicates.ATTACK_ALLOWED.test(target) && getSensing().canSee(target)) {
+					setTarget(target);
 				}
 			}
 		}
@@ -243,7 +255,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	
 	@Override
 	protected BodyController createBodyControl() {
-		return new SmoothBodyController(this);
+		return new BodyController(this);
 	}
 
 	@Override
@@ -255,11 +267,18 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	@Override
 	public void tick() {
 		this.prevYRot = yRot;
+		
 		tickAnims();
 		super.tick();
 		
-		if (!level.isClientSide) setMoving(!isStuck());
+		updateAttackCooldown();
+		setMoving(!isStuck());
 		handleBaseAnimations();
+	}
+	
+	protected void updateAttackCooldown() {
+		if (getAttackCooldown() > 0) setAttackCooldown(getAttackCooldown() - 1);
+		if (getAttackCooldown() < 0) setAttackCooldown(0);
 	}
 
 	public double getFollowRange() {
@@ -291,39 +310,39 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	public void setFollowRange(double newBaseValue) {
-		getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(newBaseValue);
 	}
 
 	public void setAttackDamage(double newBaseValue) {
-		getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(newBaseValue);
 	}
 
 	public void setAttackSpeed(double newBaseValue) {
-		getAttribute(Attributes.ATTACK_SPEED).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ATTACK_SPEED).setBaseValue(newBaseValue);
 	}
 	
 	public void setAttackKnockback(double newBaseValue) {
-		getAttribute(Attributes.ATTACK_KNOCKBACK).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ATTACK_KNOCKBACK).setBaseValue(newBaseValue);
 	}
 
 	public void setMovementSpeed(double newBaseValue) {
-		getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(newBaseValue);
 	}
 
 	public void setFlyingSpeed(double newBaseValue) {
-		getAttribute(Attributes.FLYING_SPEED).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.FLYING_SPEED).setBaseValue(newBaseValue);
 	}
 
 	public void setKnockbackResistance(double newBaseValue) {
-		getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(newBaseValue);
 	}
 
 	public void setArmor(double newBaseValue) {
-		getAttribute(Attributes.ARMOR).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ARMOR).setBaseValue(newBaseValue);
 	}
 	
 	public void setArmorToughness(double newBaseValue) {
-		getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(newBaseValue);;
+		getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(newBaseValue);
 	}
 
 	@Override

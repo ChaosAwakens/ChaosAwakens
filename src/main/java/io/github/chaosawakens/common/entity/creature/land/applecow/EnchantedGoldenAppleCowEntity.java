@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.creature.land.applecow;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -50,6 +51,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>> enchantedGoldenAppleCowControllers = new ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> enchantedGoldenAppleCowAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<EnchantedGoldenAppleCowEntity> mainController = createMainMappedController("enchantedgoldenapplecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
@@ -176,5 +178,10 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>> getWrappedControllers() {
 		return enchantedGoldenAppleCowControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return enchantedGoldenAppleCowAnimations;
 	}
 }

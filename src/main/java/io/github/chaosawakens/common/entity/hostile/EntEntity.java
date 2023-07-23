@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.hostile;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
@@ -34,6 +35,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class EntEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<EntEntity>> entControllers = new ObjectArrayList<WrappedAnimationController<EntEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> entAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<EntEntity> mainController = createMainMappedController("entmaincontroller");
 	private final WrappedAnimationController<EntEntity> attackController = createMappedController("entattackcontroller", this::attackPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
@@ -164,5 +166,10 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<EntEntity>> getWrappedControllers() {
 		return entControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return entAnimations;
 	}
 }

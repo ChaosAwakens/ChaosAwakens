@@ -1,6 +1,6 @@
 package io.github.chaosawakens.api.animation;
 
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import javax.annotation.Nullable;
 
@@ -53,6 +53,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	<E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
 	
 	<E extends IAnimatableEntity> ObjectArrayList<WrappedAnimationController<? extends E>> getWrappedControllers();
+	<B extends IAnimationBuilder> ObjectArrayList<B> getCachedAnimations();
 	
 	IAnimationBuilder getIdleAnim();
 	IAnimationBuilder getWalkAnim();
@@ -76,18 +77,27 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	default WrappedAnimationController<? extends IAnimatableEntity> getControllerWrapperByName(String name) {
 		if (getWrappedControllers().isEmpty()) return null;
 
-		ObjectArrayList<WrappedAnimationController<? extends IAnimatableEntity>> results = getWrappedControllers().stream()
+		Optional<WrappedAnimationController<? extends IAnimatableEntity>> filteredResult = getWrappedControllers().stream()
 				.filter((curController) -> curController.getName().equalsIgnoreCase(name))
-				.collect(Collectors.toCollection(ObjectArrayList::new));
+				.findFirst();
 
-		if (results.isEmpty()) return null;
-
-		return results.get(0);
+		return filteredResult.get();
 	}
 	
 	@Nullable
 	default AnimationController<? extends IAnimatableEntity> getControllerByName(String name) {
 		return getControllerWrapperByName(name).getWrappedController();
+	}
+	
+	@Nullable
+	default IAnimationBuilder getCachedAnimationByName(String animName) {
+		if (getCachedAnimations().isEmpty()) return null;
+		
+		Optional<? extends IAnimationBuilder> filteredResult = getCachedAnimations().stream()
+				.filter((curAnim) -> curAnim.getAnimationName().equalsIgnoreCase(animName))
+				.findFirst();
+		
+		return filteredResult.get();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -239,10 +249,9 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimationName(), animation.getLoopType(), animation.getWrappedController().getName(), clearCache), (Entity) this);
 	}
 	
-	//TODO Finish implementing this
 	default void stopAnimation(IAnimationBuilder animation) {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
-		animation.stopAnimation();
+		animation.getWrappedController().stopAnimation(animation);
 		
 		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationStopPacket(((Entity) this).getId(), animation.getWrappedController().getName(), animation.getAnimationName()), (Entity) this);
 	}
@@ -262,7 +271,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default void tickAnims() {
-		for (WrappedAnimationController<? extends IAnimatableEntity> wrapper : getWrappedControllers()) wrapper.tick();
+		for (WrappedAnimationController<? extends IAnimatableEntity> wrappedController : getWrappedControllers()) wrappedController.tick();
 	}
 
 	@SuppressWarnings("unchecked")

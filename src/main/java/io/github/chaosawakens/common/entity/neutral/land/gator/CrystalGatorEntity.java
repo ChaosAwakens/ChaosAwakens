@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.neutral.AnimatableAngerMeleeAttackGoal;
@@ -59,6 +60,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<CrystalGatorEntity>> crystalGatorControllers = new ObjectArrayList<WrappedAnimationController<CrystalGatorEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> crystalGatorAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(CrystalGatorEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<CrystalGatorEntity> mainController = createMainMappedController("crystalgatormaincontroller");
 	private final WrappedAnimationController<CrystalGatorEntity> attackController = createMappedController("crystalgatorattackcontroller", this::attackPredicate);
@@ -216,6 +218,11 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<CrystalGatorEntity>> getWrappedControllers() {
 		return crystalGatorControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return crystalGatorAnimations;
 	}
 	
 	@Override

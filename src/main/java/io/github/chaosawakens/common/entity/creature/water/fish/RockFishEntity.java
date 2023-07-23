@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableGroupFishEntity;
@@ -35,6 +36,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class RockFishEntity extends AnimatableGroupFishEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RockFishEntity>> rockFishControllers = new ObjectArrayList<WrappedAnimationController<RockFishEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> rockFishAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RockFishEntity> mainController = createMainMappedController("rockfishmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
@@ -124,5 +126,10 @@ public class RockFishEntity extends AnimatableGroupFishEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<RockFishEntity>> getWrappedControllers() {
 		return rockFishControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return rockFishAnimations;
 	}
 }

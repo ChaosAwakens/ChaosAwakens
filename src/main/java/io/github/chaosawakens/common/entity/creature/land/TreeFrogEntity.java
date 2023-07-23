@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.creature.land;
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -33,6 +34,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class TreeFrogEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<TreeFrogEntity>> treeFrogControllers = new ObjectArrayList<WrappedAnimationController<TreeFrogEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> treeFrogAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(TreeFrogEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<TreeFrogEntity> mainController = createMainMappedController("treefrogmaincontroller");
 	private final WrappedAnimationController<TreeFrogEntity> ambienceController = createMainMappedController("treefrogambiencecontroller");
@@ -158,6 +160,11 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<TreeFrogEntity>> getWrappedControllers() {
 		return treeFrogControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return treeFrogAnimations;
 	}
 	
 	private class TreeFrogData extends AgeableData {

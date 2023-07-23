@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.neutral.land.gator;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.neutral.AnimatableAngerMeleeAttackGoal;
@@ -43,6 +44,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class EmeraldGatorEntity extends AnimatableAngerableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<EmeraldGatorEntity>> emeraldGatorControllers = new ObjectArrayList<WrappedAnimationController<EmeraldGatorEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> emeraldGatorAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<EmeraldGatorEntity> mainController = createMainMappedController("emeraldgatormaincontroller");
 	private final WrappedAnimationController<EmeraldGatorEntity> attackController = createMappedController("emeraldgatorattackcontroller", this::attackPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
@@ -160,6 +162,11 @@ public class EmeraldGatorEntity extends AnimatableAngerableAnimalEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<EmeraldGatorEntity>> getWrappedControllers() {
 		return emeraldGatorControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return emeraldGatorAnimations;
 	}
 	
 	@Override

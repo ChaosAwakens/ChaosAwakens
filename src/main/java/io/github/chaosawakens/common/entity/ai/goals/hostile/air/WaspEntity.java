@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile.air;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -22,6 +23,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class WaspEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<WaspEntity>> waspControllers = new ObjectArrayList<WrappedAnimationController<WaspEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> waspAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<WaspEntity> mainController = createMainMappedController("waspmaincontroller");
 	
 	public WaspEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -87,5 +89,10 @@ public class WaspEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<WrappedAnimationController<WaspEntity>> getWrappedControllers() {
 		return waspControllers;
+	}
+	
+	@Override
+	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
+		return waspAnimations;
 	}
 }

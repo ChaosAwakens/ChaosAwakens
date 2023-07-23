@@ -86,6 +86,16 @@ public class AnimatableMeleeGoal extends Goal {
 		this.extraActivationConditions = activationPredicate;
 	}
 	
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, int probability, int presetCooldown, Predicate<AnimatableMonsterEntity> activationPredicate) {
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, 50, probability, presetCooldown);
+		this.extraActivationConditions = activationPredicate;
+	}
+	
+	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability, int presetCooldown, Predicate<AnimatableMonsterEntity> activationPredicate) {
+		this(owner, meleeAnim, attackId, actionPointTickStart, actionPointTickEnd, angleRange, probability, presetCooldown);
+		this.extraActivationConditions = activationPredicate;
+	}
+	
 	public AnimatableMeleeGoal pickBetweenAnimations(Supplier<? extends IAnimationBuilder>... animations) {
 		this.animationsToPick = new ObjectArrayList<Supplier<? extends IAnimationBuilder>>(animations.length);
 		
@@ -102,7 +112,7 @@ public class AnimatableMeleeGoal extends Goal {
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
 		
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
 				&& owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReach(owner.getTarget())
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
@@ -127,6 +137,8 @@ public class AnimatableMeleeGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
+		owner.setAttackCooldown(10);
+		owner.stopAnimation(curAnim.get());
 		
 		this.curAnim = null;
 		this.curCooldown = presetCooldown;

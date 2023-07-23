@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.network.ICAPacket;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.client.world.ClientWorld;
@@ -45,8 +46,15 @@ public class AnimationStopPacket implements ICAPacket {
 				
 				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity) {
 					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
+					final IAnimationBuilder targetAnim = targetAnimatable.getCachedAnimationByName(animationName);
 					
-				//	targetAnimatable.stopAnimation(targetAnim); 
+					if (targetAnim == null) {
+						ChaosAwakens.LOGGER.warn("Attempted to send AnimationStopPacket for target entity of type {}, using an IAnimationBuilder instance for animation of name {}, but the target animation is null!", target.getClass().getSimpleName(), animationName);
+						return;
+					}
+					
+					targetAnimatable.getControllerWrapperByName(controllerName).stopAnimation(targetAnim);
+					targetAnimatable.stopAnimation(targetAnim); 
 				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationStopPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
 			});
 		});

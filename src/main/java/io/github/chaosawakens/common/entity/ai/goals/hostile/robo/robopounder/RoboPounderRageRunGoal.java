@@ -56,7 +56,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
 		
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget()) && curCooldown <= 0 && !owner.getTarget().isInvulnerable()
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget()) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !owner.getTarget().isInvulnerable()
 				&& owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
 				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) * 5 && owner.distanceTo(owner.getTarget()) <= owner.getFollowRange()
 				&& owner.shouldRageRunBasedOnChance() && owner.getRandom().nextInt(probability) == 0;
@@ -86,6 +86,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
+		owner.setAttackCooldown(10);
 		owner.setRageRunning(false);
 		owner.resetAttributes();
 		
@@ -159,14 +160,14 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		if (rageBeginAnim.get().hasAnimationFinished()) {
 			if (target != null) {
-				if (!owner.isPlayingAnimation(rageRunAnim.get())) owner.playAnimation(rageRunAnim.get(), true);
+				owner.playAnimation(rageRunAnim.get(), false);
 				createRageRunPath();
-			} else owner.playAnimation(owner.getIdleAnim(), true);
+			}
 		}
 		
 		if (rageRunAnim.get().isPlaying()) {
 			// TODO Rage Crash
-			if (target == null || (target != null && target.isDeadOrDying()) || owner.getRageRunDuration() <= 0) owner.playAnimation(rageCooldownAnim.get(), true);
+			if (target == null || (target != null && target.isDeadOrDying()) || owner.getRageRunDuration() <= 0) owner.playAnimation(rageCooldownAnim.get(), false);
 			createRageRunPath();
 			affectTargets();
 		}
@@ -177,13 +178,12 @@ public class RoboPounderRageRunGoal extends Goal {
 				hasCharged = true;
 			}
 			
-			if (rageCooldownAnim.get().getWrappedAnimProgress() >= 35) {
+			if (rageCooldownAnim.get().getWrappedAnimProgress() >= owner.getRandom().nextInt(30, 35)) {
 				owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 				EntityUtil.freezeEntityRotation(owner);
 			}
 		}
 		
-		if (shouldExitCooldown()) owner.playAnimation(rageRestartAnim.get(), true);
-		if (owner.isDeadOrDying()) owner.playAnimation(owner.getDeathAnim(), true);
+		if (shouldExitCooldown()) owner.playAnimation(rageRestartAnim.get(), false);
 	}
 }
