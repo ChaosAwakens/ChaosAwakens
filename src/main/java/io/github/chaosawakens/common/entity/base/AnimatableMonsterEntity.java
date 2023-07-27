@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.common.entity.ai.bodycontrollers.base.SmoothBodyController;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -255,7 +256,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	
 	@Override
 	protected BodyController createBodyControl() {
-		return new BodyController(this);
+		return new SmoothBodyController(this);
 	}
 
 	@Override

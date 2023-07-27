@@ -39,6 +39,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -63,7 +64,7 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	private final SingletonAnimationBuilder flapAnim = new SingletonAnimationBuilder(this, "Flap", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder sitAnim = new SingletonAnimationBuilder(this, "Sit", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, CAItems.LETTUCE_SEEDS.get(), CAItems.CORN_SEEDS.get(), CAItems.RADISH_SEEDS.get(), CAItems.STRAWBERRY_SEEDS.get(), CAItems.TOMATO_SEEDS.get());
-	private int eggTime = this.random.nextInt(2000, 4000);
+	private int eggTime = MathHelper.nextInt(random, 2000, 4000);
 
 	public LettuceChickenEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -235,7 +236,7 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 		if (!level.isClientSide() && isAlive() && !isBaby() && --this.eggTime <= 0) {
 			playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			spawnAtLocation(targetEggItem);
-			this.eggTime = this.random.nextInt(2000, 4000);
+			this.eggTime = MathHelper.nextInt(random, 2000, 4000);
 		}
 	}
 
@@ -249,7 +250,7 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 			getDeltaMovement().multiply(0, 1, 0);
 			EntityUtil.freezeEntityRotation(this);
 		} else if (!isSitting()) {
-			if (getSittingCooldown() <= 0) setSittingCooldown(random.nextInt(250, 1200));
+			if (getSittingCooldown() <= 0) setSittingCooldown(MathHelper.nextInt(random, 250, 1200));
 			resetSittingTime();
 		}
 

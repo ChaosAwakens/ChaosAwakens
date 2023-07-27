@@ -133,7 +133,7 @@ public final class EntityUtil {
 	 * @param targetEntity The target entity to have its rotation stopped
 	 */
 	public static void freezeEntityRotation(AnimatableMonsterEntity targetEntity) {
-		targetEntity.yBodyRot = targetEntity.yBodyRotO;
+		targetEntity.yRot = targetEntity.yRotO;
 	}
 
 	/**

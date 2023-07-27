@@ -19,7 +19,13 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.BlockParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.server.ServerWorld;
 
 public class AnimatableAOEGoal extends Goal {
 	private final AnimatableMonsterEntity owner;
@@ -203,13 +209,20 @@ public class AnimatableAOEGoal extends Goal {
 
 		List<LivingEntity> affectedTargets = EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange);
 	//	List<BlockPos> affectedBlockPositions = BlockPatternShape.CIRCLE.applyShape(owner.level, owner.blockPosition(), aoeRange, 1, true, false, blockAffectConditions);
-
+		BlockPos negBlockRange = new BlockPos(owner.blockPosition().getX() - aoeRange, owner.blockPosition().getY() - 2, owner.blockPosition().getZ() - aoeRange).immutable();
+		BlockPos posBlockRange = new BlockPos(owner.blockPosition().getX() + aoeRange, owner.blockPosition().getY() + 2, owner.blockPosition().getZ() + aoeRange).immutable();
+		
 		if (shouldFreezeRotation || curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 		else if (owner.getTarget() != null) owner.getLookControl().setLookAt(owner.getTarget(), 30.0F, 30.0F);
 
 		if (isProgressive) {
 			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 6, (float) Math.min(aoeRange / 10, 0.6D), 4, 20);
+				owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
+				
+				for (BlockPos curAffectedParticlePos : BlockPos.betweenClosed(negBlockRange, posBlockRange)) {
+					if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(curAffectedParticlePos)), curAffectedParticlePos.getX(), curAffectedParticlePos.getY(), curAffectedParticlePos.getZ(), 0, 1, 0, 20, 0.05D);
+				}
 				
 				if (aoeDamageHitBox != null) owner.level.addFreshEntity(aoeDamageHitBox);
 			}

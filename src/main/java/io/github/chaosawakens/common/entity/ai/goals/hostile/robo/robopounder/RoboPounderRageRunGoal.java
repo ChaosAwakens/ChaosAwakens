@@ -5,16 +5,25 @@ import java.util.function.Supplier;
 
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.BlockPosUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.particles.BlockParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.server.ServerWorld;
 
 public class RoboPounderRageRunGoal extends Goal {
 	private final RoboPounderEntity owner;
@@ -22,6 +31,8 @@ public class RoboPounderRageRunGoal extends Goal {
 	private final Supplier<SingletonAnimationBuilder> rageRunAnim;
 	private final Supplier<SingletonAnimationBuilder> rageCooldownAnim;
 	private final Supplier<SingletonAnimationBuilder> rageRestartAnim;
+	private final Supplier<SingletonAnimationBuilder> rageCrashAnim;
+	private final Supplier<SingletonAnimationBuilder> rageCrashRestartAnim;
 	private final byte rageRunAttackId;
 	private final int presetMaxCooldown;
 	private int curCooldown;
@@ -29,27 +40,29 @@ public class RoboPounderRageRunGoal extends Goal {
 	private BlockPos targetRageRunPos;
 	private boolean isPathingRageRun;
 	
-	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
 		this.owner = owner;
 		this.rageBeginAnim = rageBeginAnim;
 		this.rageRunAnim = rageRunAnim;
 		this.rageCooldownAnim = rageCooldownAnim;
 		this.rageRestartAnim = rageRestartAnim;
+		this.rageCrashAnim = rageCrashAnim;
+		this.rageCrashRestartAnim = rageCrashRestartAnim;
 		this.rageRunAttackId = rageRunAttackId;
 		this.presetMaxCooldown = presetMaxCooldown;
 		this.probability = probability;
 	}
 	
-	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId, int presetMaxCooldown) {
-		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageRunAttackId, presetMaxCooldown, 1);
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, int presetMaxCooldown) {
+		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageCrashAnim, rageCrashRestartAnim, rageRunAttackId, presetMaxCooldown, 1);
 	}
 	
-	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId, Integer probability) {
-		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageRunAttackId, 400, probability);
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, Integer probability) {
+		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageCrashAnim, rageCrashRestartAnim, rageRunAttackId, 400, probability);
 	}
 	
-	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, byte rageRunAttackId) {
-		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageRunAttackId, 400, 1);
+	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId) {
+		this(owner, rageBeginAnim, rageRunAnim, rageCooldownAnim, rageRestartAnim, rageCrashAnim, rageCrashRestartAnim, rageRunAttackId, 400, 1);
 	}
 
 	@Override
@@ -64,7 +77,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	
 	@Override
 	public boolean canContinueToUse() {
-		return ObjectUtil.performNullityChecks(false, owner) && !owner.isDeadOrDying() && !rageRestartAnim.get().hasAnimationFinished();
+		return ObjectUtil.performNullityChecks(false, owner) && !owner.isDeadOrDying() && (rageRestartAnim.get().isPlaying() ? !rageRestartAnim.get().hasAnimationFinished() : !rageCrashRestartAnim.get().hasAnimationFinished());
 	}
 	
 	@Override
@@ -89,35 +102,46 @@ public class RoboPounderRageRunGoal extends Goal {
 		owner.setAttackCooldown(10);
 		owner.setRageRunning(false);
 		owner.resetAttributes();
+		owner.getNavigation().stop();
 		
 		this.curCooldown = presetMaxCooldown;
 	}
 	
 	private void createRageRunPath() {
+		if (!owner.isPlayingAnimation(rageRunAnim.get())) {
+			owner.getNavigation().stop();
+			return;
+		}
+		
 		PathNavigator ownerPathNav = owner.getNavigation();
 		Path rageRunPath = null;
 		Vector3d relevantLookPos = null;
 		
 		if (owner.getTarget() != null && owner.getTarget().isAlive() && rageRunAnim.get().isPlaying()) {
 			if (!isPathingRageRun) {
-				this.targetRageRunPos = BlockPosUtil.findHorizontalPositionBeyond(owner, owner.getTarget().blockPosition(), owner.getRandom().nextInt(10, 20));
+				this.targetRageRunPos = BlockPosUtil.findHorizontalPositionBeyond(owner, owner.getTarget().blockPosition(), MathHelper.nextInt(owner.getRandom(), 10, 20));
 				this.isPathingRageRun = true;
 			}
 			
 			if (targetRageRunPos != null) {				
 				rageRunPath = ownerPathNav.createPath(targetRageRunPos, 0);
-				relevantLookPos = new Vector3d(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ());
+				relevantLookPos = new Vector3d(targetRageRunPos.getX(), targetRageRunPos.getY() + owner.getEyeY(), targetRageRunPos.getZ());
 			}
 		}
 		
 		if (ObjectUtil.performNullityChecks(false, rageRunPath, relevantLookPos)) {
 			ownerPathNav.moveTo(rageRunPath, 1);
-			owner.getLookControl().setLookAt(relevantLookPos);
+			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
 			
 			if (!rageRunPath.isDone()) rageRunPath.setNextNodeIndex(rageRunPath.getNodeCount() - 1);
 		}
 		
 		if ((ownerPathNav.isDone() || (relevantLookPos != null && owner.distanceToSqr(relevantLookPos) <= 15.0D)) && isPathingRageRun) this.isPathingRageRun = false;
+		
+		if (owner.getTarget() == null || owner.getRageRunDuration() <= 0) {
+			owner.stopAnimation(rageRunAnim.get());
+			owner.playAnimation(rageCooldownAnim.get(), true);
+		}
 	}
 	
 	private void affectTargets() {
@@ -144,16 +168,59 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 	}
 	
+	private void handleRageCrash() {
+		boolean foundCrashCollision = false;
+		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ));
+		
+		if (owner.horizontalCollision) {
+			for (BlockPos detectedPos : BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ))) {
+				BlockState detectedState = owner.level.getBlockState(detectedPos);
+				
+				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE) && detectedPos.getY() >= Math.floor(owner.getBoundingBox().minY) + 1) {
+					foundCrashCollision = true;
+					break;
+				}
+			}
+		}
+		
+		if (foundCrashCollision) {
+			CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 20.0F, 0.2F, 20, 60);
+			
+			owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, MathHelper.nextFloat(owner.getRandom(), 0.7F, 0.8F));
+			
+			for (BlockPos targetPos : collisionBlocks) {
+				if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(targetPos)), targetPos.getX() + 0.5D, targetPos.getY() + 0.5D, targetPos.getZ() + 0.5D, owner.getRandom().nextInt(20), 0, 0, 0, 1);
+			}
+			
+			owner.stopAnimation(rageRunAnim.get());
+			owner.stopAnimation(owner.getWalkAnim());
+			owner.playAnimation(rageCrashAnim.get(), true);
+			owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
+			owner.getNavigation().stop();
+			EntityUtil.freezeEntityRotation(owner);
+		}
+	}
+	
 	private boolean shouldExitCooldown() {
-		return rageCooldownAnim.get().isPlaying() ? rageCooldownAnim.get().getWrappedAnimProgress() >= owner.getRandom().nextDouble(rageCooldownAnim.get().getWrappedAnimLength() / 2, rageCooldownAnim.get().getWrappedAnimLength()) : false;
+		if (rageCrashAnim.get().isPlaying()) return rageCrashAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCrashAnim.get().getWrappedAnimLength() / 2, rageCrashAnim.get().getWrappedAnimLength());
+		else return rageCooldownAnim.get().isPlaying() ? rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 4, rageCooldownAnim.get().getWrappedAnimLength()) : false;
 	}
 	
 	@Override
 	public void tick() {
+		owner.stopAnimation(owner.getIdleAnim());
+		owner.stopAnimation(owner.getWalkAnim());
+		
 		LivingEntity target = owner.getTarget();
 		boolean hasCharged = false;
 		
-		if (rageBeginAnim.get().isPlaying() || rageRestartAnim.get().isPlaying() || rageCooldownAnim.get().isPlaying()) {
+		if (rageBeginAnim.get().isPlaying() || rageRestartAnim.get().isPlaying()) {
+			owner.getNavigation().stop();
+			EntityUtil.freezeEntityRotation(owner);
+		}
+		
+		if (rageCrashAnim.get().isPlaying()) {
+			owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 			owner.getNavigation().stop();
 			EntityUtil.freezeEntityRotation(owner);
 		}
@@ -166,24 +233,30 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 		
 		if (rageRunAnim.get().isPlaying()) {
-			// TODO Rage Crash
-			if (target == null || (target != null && target.isDeadOrDying()) || owner.getRageRunDuration() <= 0) owner.playAnimation(rageCooldownAnim.get(), false);
 			createRageRunPath();
 			affectTargets();
+			handleRageCrash();
+			
+			BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 		}
 		
 		if (rageCooldownAnim.get().isPlaying()) {
+			owner.getNavigation().stop();
+			
 			if (!hasCharged) {
 				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRandom().nextInt(4)), 5, 4, 0.02);
 				hasCharged = true;
 			}
 			
-			if (rageCooldownAnim.get().getWrappedAnimProgress() >= owner.getRandom().nextInt(30, 35)) {
+			if (rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextInt(owner.getRandom(), 30, 35)) {
 				owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 				EntityUtil.freezeEntityRotation(owner);
 			}
 		}
 		
-		if (shouldExitCooldown()) owner.playAnimation(rageRestartAnim.get(), false);
+		if (shouldExitCooldown()) {
+			if (owner.isPlayingAnimation(rageCooldownAnim.get())) owner.playAnimation(rageRestartAnim.get(), false);
+			if (owner.isPlayingAnimation(rageCrashAnim.get())) owner.playAnimation(rageCrashRestartAnim.get(), false);
+		}
 	}
 }

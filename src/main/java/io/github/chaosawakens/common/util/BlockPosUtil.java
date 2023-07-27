@@ -49,12 +49,12 @@ public final class BlockPosUtil {
 		BlockPos.betweenClosed(x1, y1, z1, x2, y2, z2).forEach((curPos) -> positionsToDestroy.add(curPos));
 		
 		if (!positionsToDestroy.isEmpty()) {
-			positionsToDestroy.forEach((targetPos) -> {
+			BlockPos.betweenClosed(x1, y1, z1, x2, y2, z2).forEach((targetPos) -> {
 				if (targetPos != null) {
 					BlockState targetState = targetWorld.getBlockState(targetPos);
 					Block targetBlock = targetState.getBlock();
 					
-					if (destructibilityPredicate == null || (destructibilityPredicate != null && destructibilityPredicate.test(targetBlock))) targetWorld.destroyBlock(targetPos, dropBlocks);
+					if (destructibilityPredicate == null || (destructibilityPredicate != null && destructibilityPredicate.test(targetBlock)) && !targetWorld.isClientSide && targetWorld.isLoaded(targetPos)) targetWorld.destroyBlock(targetPos, dropBlocks);
 				}
 			});
 		}
@@ -85,7 +85,7 @@ public final class BlockPosUtil {
 	 * @return A list of {@link BlockPos}es affected by the destruction operation.
 	 */
 	public static ObjectArrayList<BlockPos> destroyCollidingBlocks(World targetWorld, AxisAlignedBB targetHitbox, boolean dropBlocks, @Nullable Predicate<Block> destructibilityPredicate) {
-		return destroyBlocksBetween(targetWorld, (int) Math.floor(targetHitbox.minX), (int) Math.floor(targetHitbox.minY) + 1, (int) Math.floor(targetHitbox.minZ), (int) Math.floor(targetHitbox.maxX), (int) Math.floor(targetHitbox.maxY), (int) Math.floor(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
+		return destroyBlocksBetween(targetWorld, (int) Math.floor(targetHitbox.minX), (int) Math.floor(targetHitbox.minY), (int) Math.floor(targetHitbox.minZ), (int) Math.floor(targetHitbox.maxX), (int) Math.floor(targetHitbox.maxY), (int) Math.floor(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
 	}
 	
 	/**

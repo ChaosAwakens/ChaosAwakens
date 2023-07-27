@@ -59,7 +59,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
 
 		if (curAnim.get().getWrappedAnimProgress() < actionPointTickStart) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
-		else if (curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
+		else EntityUtil.freezeEntityRotation(owner);
 		
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) EntityUtil.chargeTowards(owner, target, overshoot, overshoot, 0.19);
 		

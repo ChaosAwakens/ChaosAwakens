@@ -24,7 +24,7 @@ public abstract class ExtendedGeoEntityRenderer<E extends LivingEntity & IAnimat
 		
 		if (getLayers() != null && !getLayers().isEmpty()) {
 			for (GeoLayerRenderer<E> renderLayer : getLayers()) {
-				if (renderLayer != null && !this.layerRenderers.contains(renderLayer)) this.addLayer(renderLayer);
+				if (renderLayer != null && !this.layerRenderers.contains(renderLayer)) addLayer(renderLayer);
 			}
 		}
 	}

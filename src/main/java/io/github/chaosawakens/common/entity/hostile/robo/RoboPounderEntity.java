@@ -33,6 +33,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -64,6 +65,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final SingletonAnimationBuilder rageBeginAnim = new SingletonAnimationBuilder(this, "Rage Begin", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rageRunAnim = new SingletonAnimationBuilder(this, "Rage Run", EDefaultLoopTypes.LOOP).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rageCooldownAnim = new SingletonAnimationBuilder(this, "Cooldown", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rageCrashAnim = new SingletonAnimationBuilder(this, "Rage Crash", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rageCrashRestartAnim = new SingletonAnimationBuilder(this, "Rage Crash Restart", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder cooldownRestartAnim = new SingletonAnimationBuilder(this, "Cooldown Restart", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SWING_ATTACK_ID = 2;
@@ -75,6 +78,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	public RoboPounderEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
+		this.maxUpStep = 1.0F;
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -131,7 +135,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 3, 10, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 8).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 5, 50).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim));
 		this.targetSelector.addGoal(0, new RoboPounderDysonDashGoal(this, () -> dashAttackAnim, DASH_ATTACK_ID, 9.6D, 25.4D, 360.0D, 5, 450, 5.0D));
-		this.targetSelector.addGoal(0, new RoboPounderRageRunGoal(this, () -> rageBeginAnim, () -> rageRunAnim, () -> rageCooldownAnim, () -> cooldownRestartAnim, RAGE_RUN_ATTACK_ID, 400, 5));
+		this.targetSelector.addGoal(0, new RoboPounderRageRunGoal(this, () -> rageBeginAnim, () -> rageRunAnim, () -> rageCooldownAnim, () -> cooldownRestartAnim, () -> rageCrashAnim, () -> rageCrashRestartAnim, RAGE_RUN_ATTACK_ID, 400, 5));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 4.0D, 6, 2, true, false, true, 10).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> groundSlamAnim, GROUND_SLAM_ATTACK_ID, 11.6D, 17.5D, 6.0D, 10, 2, true, false, true, 15));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, null, STOMP_ATTACK_ID, 10.4D, 14.7D, 4.0D, 1, 6, true, false, true, 40).pickBetweenAnimations(() -> leftStompAnim, () -> rightStompAnim));
@@ -213,13 +217,13 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	public int getRageRunDurationStaged() {
-		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return this.random.nextInt(300, 550);
-		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return this.random.nextInt(275, 500);
-		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return this.random.nextInt(225, 450);
-		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return this.random.nextInt(200, 400);
-		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return this.random.nextInt(150, 300);
-		else if (getHealth() <= 20.0F) return this.random.nextInt(100, 200);
-		else return this.random.nextInt(350, 700);
+		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return MathHelper.nextInt(random, 300, 550);
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return MathHelper.nextInt(random, 275, 500);
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return MathHelper.nextInt(random, 225, 450);
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return MathHelper.nextInt(random, 200, 400);
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return MathHelper.nextInt(random, 150, 300);
+		else if (getHealth() <= 20.0F) return MathHelper.nextInt(random, 100, 200);
+		else return MathHelper.nextInt(random, 350, 700);
 	}
 
 	protected double getRageRunSpeed() {
@@ -287,6 +291,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			updateRageRunDuration();
 		} else setRageRunDuration(0);
 	}
+	
 	public void setRageRunAttributes() {
 		setArmor(getRageRunArmor());
 		setArmorToughness(getRageRunArmorToughness());
@@ -305,12 +310,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (hurtSource != null && hurtSource.isProjectile() && isAlive()) {
 			Entity projectileDamageSource = hurtSource.getDirectEntity();
 
-			if (projectileDamageSource != null) EntityUtil.repelEntities(this, getBbWidth(), getBbHeight(), getRageRunDeflectionPower());
+			if (projectileDamageSource != null) EntityUtil.repelEntities(this, getBbWidth(), getBbHeight(), -getRageRunDeflectionPower());
 		}
 	}
 
 	private void handleTaunting() {
-		final int killThreshold = this.random.nextInt(4, 8);
+		final int killThreshold = MathHelper.nextInt(random, 4, 8);
 		boolean shouldTaunt = !potentialDeadTargets.isEmpty() && !isAttacking() && isPlayingAnimation(idleAnim) && (potentialDeadTargets.size() >= killThreshold || ((potentialDeadTargets.get(potentialDeadTargets.size() - 1) instanceof PlayerEntity || potentialDeadTargets.get(potentialDeadTargets.size() - 1).getMaxHealth() >= 150) && this.random.nextBoolean())) && getTarget() == null;
 		
 		if (shouldTaunt) {
@@ -319,7 +324,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			EntityUtil.freezeEntityRotation(this);
 			potentialDeadTargets.clear();
 		}
-
+		
 		if (tauntAnim.hasAnimationFinished() || (getTarget() != null && distanceTo(getTarget()) <= 15.0D) || isDeadOrDying()) setShouldTaunt(false);
 	}
 
@@ -346,6 +351,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 300);
 			break;
 		}
+	}
+	
+	@Override
+	public boolean canSee(Entity pEntity) {
+		return MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= getFollowRange() / 4;
 	}
 
 	@Override
@@ -387,6 +397,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
 		return pSize.height * 0.85F + 0.6F;
 	}
+	
+	@Override
+	protected void jumpFromGround() {
+	}
 
 	@Override
 	public float getMeleeAttackReach(LivingEntity target) {
@@ -419,6 +433,16 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public boolean isAffectedByFluids() {
 		return false;
+	}
+	
+	@Override
+	public boolean isPushedByFluid() {
+		return false;
+	}
+	
+	@Override
+	public boolean canCollideWith(Entity pEntity) {
+		return isRageRunning() ? false : super.canCollideWith(pEntity);
 	}
 
 	@Override

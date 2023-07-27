@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -20,7 +21,7 @@ public class CAEntityTrapOreBlock extends CAOreBlock {
 	public CAEntityTrapOreBlock(Supplier<EntityType<?>> entityToSummon, Properties properties) {
 		super(properties);
 		this.entityToSummon = entityToSummon;
-		this.amountToSummon = RANDOM.nextInt(10, 20);
+		this.amountToSummon = MathHelper.nextInt(RANDOM, 10, 20);
 	}
 
 	protected void summonEntityAt(BlockPos targetPos, World world, boolean shouldSpawnByAmount) {

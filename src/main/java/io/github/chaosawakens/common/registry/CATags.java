@@ -49,6 +49,7 @@ public class CATags {
 		public static final ITag.INamedTag<Block> BLACKLIST = tag("blacklist");
 		
 		public static final ITag.INamedTag<Block> ROBO_IMMUNE = tag("robo_immune");
+		public static final ITag.INamedTag<Block> POUNDER_IMMUNE = tag("pounder_immune");
 		public static final ITag.INamedTag<Block> JEFFERY_IMMUNE = tag("jeffery_immune");
 	}
 
