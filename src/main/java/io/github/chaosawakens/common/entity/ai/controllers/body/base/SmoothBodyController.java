@@ -1,12 +1,13 @@
-package io.github.chaosawakens.common.entity.ai.bodycontrollers.base;
+package io.github.chaosawakens.common.entity.ai.controllers.body.base;
 
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.util.math.MathHelper;
 
 // MM implementation revised
 public class SmoothBodyController extends BodyController {
-	protected final MobEntity owner;
+	protected final AnimatableMonsterEntity owner;
 	protected static final int ROT_TICK_THRESHOLD = 10;
 	protected static final int ROT_THRESHOLD = 75;
 	protected int curRotTime;
@@ -14,24 +15,26 @@ public class SmoothBodyController extends BodyController {
 	protected double[] xRotHist = new double[ROT_TICK_THRESHOLD];
 	protected double[] zRotHist = new double[ROT_TICK_THRESHOLD];
 
-	public SmoothBodyController(MobEntity owner) {
+	public SmoothBodyController(AnimatableMonsterEntity owner) {
 		super(owner);
 		this.owner = owner;
 	}
 
 	@Override
 	public void clientTick() {
-		updateRotation();
+		for (int i = ROT_TICK_THRESHOLD - 1; i > 0; i--) {
+			this.xRotHist[i] = xRotHist[i - 1];
+			this.zRotHist[i] = zRotHist[i - 1];
+		}
 
-		double distX = meanDelta(xRotHist);
-		double distZ = meanDelta(zRotHist);
-		double horizontalDistSqr = distX * distX + distZ * distZ;
+		this.xRotHist[0] = owner.getX();
+		this.zRotHist[0] = owner.getZ();
 
-		if (horizontalDistSqr > 2.5E-7) {
-			float movementAngleDeg = (float) Math.atan2(distZ, distX) * (180 / (float) Math.PI) - 90;
-
-			owner.yBodyRot += MathHelper.degreesDifference(owner.yBodyRot, movementAngleDeg) * 0.6F;
-
+		if (owner.isMoving()) {
+			owner.yBodyRot = owner.yRot;
+			
+			rotateHeadIfNecessary();
+			
 			this.targetHeadRot = owner.yHeadRot;
 			this.curRotTime = 0;
 		} else if (owner.getPassengers().isEmpty() || !(owner.getPassengers().get(0) instanceof MobEntity)) {
@@ -40,15 +43,16 @@ public class SmoothBodyController extends BodyController {
 			if (Math.abs(owner.yHeadRot - targetHeadRot) > 15) {
 				this.curRotTime = 0;
 				this.targetHeadRot = owner.yHeadRot;
+				rotateBodyIfNecessary();
 			} else {
+				final int rotSpeed = 10;
+
 				this.curRotTime++;
 
-				final int rotSpeed = 20;
-
 				if (curRotTime > rotSpeed) rotLimit = Math.max(1 - (curRotTime - rotSpeed) / rotSpeed, 0) * ROT_THRESHOLD;
+				
+				owner.yBodyRot = approachRot(owner.yHeadRot, owner.yBodyRot, rotLimit);
 			}
-
-			owner.yBodyRot = approachRot(owner.yHeadRot, owner.yBodyRot, rotLimit);
 		}
 	}
 
@@ -90,5 +94,13 @@ public class SmoothBodyController extends BodyController {
 
 	public int getRotationTickThreshold() {
 		return ROT_TICK_THRESHOLD;
+	}
+
+	private void rotateBodyIfNecessary() {
+		this.owner.yBodyRot = MathHelper.rotateIfNecessary(this.owner.yBodyRot, this.owner.yHeadRot, (float)this.owner.getMaxHeadYRot());
+	}
+
+	private void rotateHeadIfNecessary() {
+		this.owner.yHeadRot = MathHelper.rotateIfNecessary(this.owner.yHeadRot, this.owner.yBodyRot, (float)this.owner.getMaxHeadYRot());
 	}
 }

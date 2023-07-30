@@ -26,6 +26,9 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
@@ -45,9 +48,11 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<UltimateAppleCowEntity>> ultimateAppleCowControllers = new ObjectArrayList<WrappedAnimationController<UltimateAppleCowEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> ultimateAppleCowAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(UltimateAppleCowEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<UltimateAppleCowEntity> mainController = createMainMappedController("ultimateapplecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
 
 	public UltimateAppleCowEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -83,11 +88,37 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D) {
+			@Override
+			public void start() {
+				super.start();
+				setPanicking(true);
+			}
+			
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+		});
 		this.goalSelector.addGoal(2, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
+	}
+	
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(PANICKING, false);
+	}
+	
+	public boolean isPanicking() {
+		return this.entityData.get(PANICKING);
+	}
+	
+	public void setPanicking(boolean panicking) {
+		this.entityData.set(PANICKING, panicking);
 	}
 
 	@Override
@@ -162,6 +193,13 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	public AgeableEntity getBreedOffspring(ServerWorld pServerLevel, AgeableEntity pMate) {
 		return null;
+	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isPanicking()) playAnimation(getWalkAnim(), false);
+		if (isPanicking()) playAnimation(runAnim, false);
 	}
 
 	@SuppressWarnings("unchecked")

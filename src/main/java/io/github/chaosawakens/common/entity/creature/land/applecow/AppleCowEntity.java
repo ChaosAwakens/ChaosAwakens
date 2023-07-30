@@ -59,9 +59,11 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	private final ObjectArrayList<WrappedAnimationController<AppleCowEntity>> appleCowControllers = new ObjectArrayList<WrappedAnimationController<AppleCowEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> appleCowAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
+	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<AppleCowEntity> mainController = createMainMappedController("applecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
 
 	public AppleCowEntity(EntityType<? extends AnimalEntity> type, World world) {
@@ -98,7 +100,19 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D) {
+			@Override
+			public void start() {
+				super.start();
+				setPanicking(true);
+			}
+			
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, FOOD_ITEMS, false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -111,6 +125,7 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(TYPE_ID, 0);
+		this.entityData.define(PANICKING, false);
 	}
 	
 	public int getAppleCowType() {
@@ -119,6 +134,14 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 
 	public void setAppleCowType(int id) {
 		this.entityData.set(TYPE_ID, id);
+	}
+	
+	public boolean isPanicking() {
+		return this.entityData.get(PANICKING);
+	}
+	
+	public void setPanicking(boolean panicking) {
+		this.entityData.set(PANICKING, panicking);
 	}
 	
 	@Override
@@ -216,6 +239,13 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 		if (DateUtil.canApplyHalloweenTextures(offspring, 0.05F)) offspring.setAppleCowType(1);
 		else offspring.setAppleCowType(((AppleCowEntity) pMate).getAppleCowType());
 		return offspring;
+	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isPanicking()) playAnimation(getWalkAnim(), false);
+		if (isPanicking()) playAnimation(runAnim, false);
 	}
 	
 	@SuppressWarnings("unchecked")

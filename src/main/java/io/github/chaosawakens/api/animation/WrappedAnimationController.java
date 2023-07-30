@@ -33,20 +33,13 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public WrappedAnimationController(E animatable, AnimationController<E> controller) {
-		this.animatable = animatable;
-		this.transitionLength = animatable.animationInterval();
-		this.controller = controller;
+		this(animatable, animatable.animationInterval(), controller);
 		this.name = controller.getName();
 		this.server = ((Entity) animatable).getServer();
 	}
 	
 	public void tick() {
-		double tickProgressDelta = server == null ? 0 : getSyncedProgress();
-		
-		if (this.transitionLength != animatable.animationInterval() || this.controller.transitionLengthTicks != animatable.animationInterval()) {
-			this.transitionLength = animatable.animationInterval();
-			this.controller.transitionLengthTicks = animatable.animationInterval();
-		}
+		double tickProgressDelta = getSyncedProgress();
 		
 		switch (animationState) {
 		case TRANSITIONING:
