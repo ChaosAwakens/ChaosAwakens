@@ -58,7 +58,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 			clientWorldHolder.filter(ClientWorld.class::isInstance).ifPresent(curWorld -> {
 				Entity target = curWorld.getEntity(animatableOwnerID);
 				
-				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity && !"None".equals(animationName)) {
+				if (ObjectUtil.performNullityChecks(false, curWorld, target) && target instanceof IAnimatableEntity && !"None".equalsIgnoreCase(animationName)) {
 					IAnimatableEntity targetAnimatable = (IAnimatableEntity) target;
 					final IAnimationBuilder targetAnim = targetAnimatable.getCachedAnimationByName(animationName);
 					

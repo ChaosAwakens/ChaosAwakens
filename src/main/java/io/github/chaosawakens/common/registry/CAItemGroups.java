@@ -10,7 +10,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
 
 public class CAItemGroups {
-	private static Random random = new Random();
+	private static Random RANDOM = new Random();
 
 	public static final ItemGroup BLOCKS = new ItemGroup("chaosawakens.blocks") {
 		@Override
@@ -50,7 +50,7 @@ public class CAItemGroups {
 	public static final ItemGroup FOSSILS = new ItemGroup("chaosawakens.fossils") {
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(random.nextInt(2))).get());
+			return new ItemStack(CABlocks.DEFOSSILIZER_BLOCKS.get(DefossilizerType.byId(RANDOM.nextInt(2))).get());
 		}
 	};
 	
