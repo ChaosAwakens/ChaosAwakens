@@ -114,13 +114,17 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {
 			playAnimation(getDeathAnim(), false);
-			if (getDeathAnim().hasAnimationFinished()) remove();
-
-			for(int i = 0; i < 20; ++i) {
-				double xOffset = this.random.nextGaussian() * 0.02D;
-				double yOffset = this.random.nextGaussian() * 0.02D;
-				double zOffset = this.random.nextGaussian() * 0.02D;
-				this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset, yOffset, zOffset);
+			EntityUtil.handleAnimatableDeath(this, getLastDamageSource() == null ? DamageSource.GENERIC : getLastDamageSource());
+			
+			if (getDeathAnim().hasAnimationFinished()) {
+				remove();
+				
+				for (int i = 0; i < 20; ++i) {
+					double xOffset = this.random.nextGaussian() * 0.02D;
+					double yOffset = this.random.nextGaussian() * 0.02D;
+					double zOffset = this.random.nextGaussian() * 0.02D;
+					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset, yOffset, zOffset);
+				}
 			}
 		} else {
 			super.tickDeath();
@@ -129,7 +133,7 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	
 	@Override
 	public void die(DamageSource pCause) {
-		if (getDeathAnim() != null) EntityUtil.handleAnimatableDeath(this, pCause);
+		if (getDeathAnim() != null) return;
 		else super.die(pCause);
 	}
 	

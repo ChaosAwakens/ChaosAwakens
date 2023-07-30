@@ -426,7 +426,7 @@ public final class EntityUtil {
 	 */
 	@SuppressWarnings("deprecation")
 	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause) {
-		if (targetAnimatable.getDeathAnim() == null || !(targetAnimatable instanceof LivingEntity) || ForgeHooks.onLivingDeath((LivingEntity) targetAnimatable, deathCause)) return;
+		if (targetAnimatable.getDeathAnim() == null || !(targetAnimatable instanceof LivingEntity || ForgeHooks.onLivingDeath((LivingEntity) targetAnimatable, deathCause))) return;
 
 		LivingEntity livingAnimatable = (LivingEntity) targetAnimatable;
 		Entity causeEntity = deathCause.getEntity();
@@ -439,7 +439,6 @@ public final class EntityUtil {
 
 				livingAnimatable.dead = true;
 				livingAnimatable.getCombatTracker().recheckStatus();
-				livingAnimatable.level.broadcastEntityEvent(livingAnimatable, (byte) 3);
 			}
 
 			if (targetAnimatable.getDeathAnim().hasAnimationFinished()) {			
@@ -448,10 +447,11 @@ public final class EntityUtil {
 
 					if (causeEntity != null) causeEntity.killed(curServerWorld, livingAnimatable);
 
-			//		livingAnimatable.dropAllDeathLoot(deathCause);
+					livingAnimatable.dropAllDeathLoot(deathCause);
 					livingAnimatable.createWitherRose(killerEntity);
 				}
-
+				
+				livingAnimatable.level.broadcastEntityEvent(livingAnimatable, (byte) 3);
 				livingAnimatable.setPose(Pose.DYING);
 			}
 		}

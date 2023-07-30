@@ -160,6 +160,8 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {
 			playAnimation(getDeathAnim(), false);
+			EntityUtil.handleAnimatableDeath(this, getLastDamageSource() == null ? DamageSource.GENERIC : getLastDamageSource());
+			
 			if (getDeathAnim().hasAnimationFinished()) {
 				remove();
 				
@@ -177,7 +179,7 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	
 	@Override
 	public void die(DamageSource pCause) {
-		if (getDeathAnim() != null) EntityUtil.handleAnimatableDeath(this, pCause);
+		if (getDeathAnim() != null) return;
 		else super.die(pCause);
 	}
 
