@@ -459,6 +459,13 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return deathAnim;
 	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
+		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -469,12 +476,5 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return roboPounderAnimations;
-	}
-
-	@Override
-	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
-		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
 	}
 }
