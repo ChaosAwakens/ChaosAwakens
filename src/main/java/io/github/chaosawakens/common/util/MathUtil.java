@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.util;
 
-import org.apache.commons.lang3.RandomUtils;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
@@ -113,18 +111,6 @@ public final class MathUtil {
 	
 	public static double getAngleBetweenEntities(Entity first, Entity second) {
 		return Math.atan2(second.getZ() - first.getZ(), second.getX() - first.getX()) * (180 / Math.PI) + 90;
-	}
-	
-	public static double nextDouble(double min, double max) {
-		return RandomUtils.nextDouble(min, max);
-	}
-	
-	public static float nextFloat(float min, float max) {
-		return RandomUtils.nextFloat(min, max);
-	}
-	
-	public static int nextInt(int min, int max) {
-		return RandomUtils.nextInt(min, max);
 	}
 	
 	/**
