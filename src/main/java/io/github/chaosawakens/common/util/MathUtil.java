@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.util;
 
-import java.util.Random;
-
 import org.apache.commons.lang3.RandomUtils;
 
 import net.minecraft.entity.Entity;
@@ -9,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
 public final class MathUtil {
-	private static final Random RNG = new Random();
 	
 	private MathUtil() {
 		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
