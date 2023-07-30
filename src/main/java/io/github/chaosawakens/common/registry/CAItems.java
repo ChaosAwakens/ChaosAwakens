@@ -571,7 +571,7 @@ public class CAItems {
 	public static final RegistryObject<ArmorItem> MOBZILLA_SCALE_BOOTS = ITEMS.register("mobzilla_scale_boots", () -> new ArmorItem(CAArmorMaterial.MOBZILLA_SCALE, EquipmentSlotType.FEET, new Item.Properties().rarity(Rarity.EPIC).tab(CAItemGroups.EQUIPMENT)));
 
 	// Miners Dream
-	public static final RegistryObject<Item> MINERS_DREAM = ITEMS.register("miners_dream", () -> new MinersDreamItem(new Item.Properties().tab(CAItemGroups.ITEMS).stacksTo(16)));
+	public static final RegistryObject<MinersDreamItem> MINERS_DREAM = ITEMS.register("miners_dream", () -> new MinersDreamItem(new Item.Properties().tab(CAItemGroups.ITEMS).stacksTo(16)));
 
 	// SPAWN EGGS
 	public static final RegistryObject<CASpawnEggItem> ACACIA_ENT_SPAWN_EGG = ITEMS.register("acacia_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.ACACIA_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
