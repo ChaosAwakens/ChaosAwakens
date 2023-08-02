@@ -78,7 +78,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	public RoboPounderEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.maxUpStep = 1.0F;
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -105,7 +104,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		return isAttacking() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
@@ -123,12 +122,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3) {
 			@Override
 			public boolean canUse() {
-				return super.canUse() && !shouldTaunt() && !isRageRunning();
+				return super.canUse() && !shouldTaunt();
 			}
 
 			@Override
 			public boolean canContinueToUse() {
-				return super.canContinueToUse() && !shouldTaunt() && !isRageRunning();
+				return super.canContinueToUse() && !shouldTaunt();
 			}
 		});
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 14.2D, 17.3D, 95.0D, 3, 10, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 6).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
@@ -146,7 +145,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, false));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(RoboPounderEntity.class));
 	}
 
 	@Override
@@ -462,8 +461,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), false);
 		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
+		if (getIdleAnim() != null && !isAttacking() && !isOnAttackCooldown() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), true);
 		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
 	}
 

@@ -54,6 +54,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
 	private final SingletonAnimationBuilder lowHealthAnim = new SingletonAnimationBuilder(this, "Low Health", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
+	private final SingletonAnimationBuilder highHealthAnim = new SingletonAnimationBuilder(this, "Healthy", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
@@ -236,7 +237,10 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	protected void handleBaseAnimations() {
 		super.handleBaseAnimations();
-		if (!isAttacking() && !isDeadOrDying()) playAnimation(idleExtrasAnim, false);
-	//	if (getHealth() <= getMaxHealth() / 6 && !isDeadOrDying()) playAnimation(lowHealthAnim, false);
+		if (!isAttacking() && !isDeadOrDying() && getHealth() > 50.0F) {
+			playAnimation(idleExtrasAnim, false);
+			playAnimation(highHealthAnim, false);
+		}
+		if (getHealth() <= 50.0F) playAnimation(lowHealthAnim, false);
 	}
 }

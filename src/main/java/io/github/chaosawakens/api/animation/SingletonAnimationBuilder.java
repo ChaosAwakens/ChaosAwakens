@@ -210,9 +210,12 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public void playAnimation(boolean forceAnim) {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 1);
-
-		if (forceAnim) targetController.getWrappedController().clearAnimationCache();
-		targetController.getWrappedController().setAnimation(animBuilder);
+		
+		if (forceAnim && !isPlaying()) {
+			targetController.getWrappedController().clearAnimationCache();
+			targetController.getWrappedController().markNeedsReload();
+		}
+		if (!isPlaying()) targetController.getWrappedController().setAnimation(animBuilder);
 	}
 
 	/**

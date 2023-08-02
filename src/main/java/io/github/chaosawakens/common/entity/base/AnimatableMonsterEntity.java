@@ -49,6 +49,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.noCulling = true;
+		this.maxUpStep = 1.0F;
 	}
 
 	@Override
@@ -274,7 +275,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.tick();
 		
 		updateAttackCooldown();
-		setMoving(!isStuck());
+		setMoving(!isStuck() && !jumping);
 		handleBaseAnimations();
 	}
 	

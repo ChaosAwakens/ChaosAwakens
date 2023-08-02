@@ -8,6 +8,8 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.registry.CATags;
+import io.github.chaosawakens.common.util.BlockPosUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
@@ -62,6 +64,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 		else EntityUtil.freezeEntityRotation(owner);
 		
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) EntityUtil.chargeTowards(owner, target, overshoot, overshoot, 0.19);
+		BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 		
 		double reach = owner.getMeleeAttackReach(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);

@@ -43,7 +43,30 @@ public class RoboPounderEntityRenderer extends ExtendedGeoEntityRenderer<RoboPou
 		Optional<GeoBone> leftBackHatch = model.getBone("LeftBackHatch");
 		Optional<GeoBone> rightBackHatch = model.getBone("RightBackHatch");
 		Optional<GeoBone> headArmor = model.getBone("Head2");
+		IAnimationBuilder rageCrashAnim = animatable.getCachedAnimationByName("Rage Crash");
 		IAnimationBuilder deathAnim = animatable.getCachedAnimationByName("Death");
+		
+		if (animatable.isPlayingAnimation(rageCrashAnim)) {
+			if (leftBackHatch.isPresent() && rightBackHatch.isPresent()) {
+				animatable.getCommandSenderWorld().addParticle(
+						ParticleTypes.CAMPFIRE_COSY_SMOKE,
+						leftBackHatch.get().getWorldPosition().x,
+						leftBackHatch.get().getWorldPosition().y,
+						leftBackHatch.get().getWorldPosition().z,
+						0,
+						0.04D,
+						0);
+
+				animatable.getCommandSenderWorld().addParticle(
+						ParticleTypes.CAMPFIRE_COSY_SMOKE,
+						rightBackHatch.get().getWorldPosition().x,
+						rightBackHatch.get().getWorldPosition().y,
+						rightBackHatch.get().getWorldPosition().z,
+						0,
+						0.04D,
+						0);
+			}
+		}
 
 		if (animatable.getAttackID() == (byte) 3 && animatable.isMoving()) {
 			if (leftLeg.isPresent() && rightLeg.isPresent()) {

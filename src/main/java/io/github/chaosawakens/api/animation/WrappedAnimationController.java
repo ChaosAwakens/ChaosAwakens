@@ -86,10 +86,10 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			this.animationLength = builder.getAnimation().animationLength;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.TRANSITIONING;
+			
+			this.currentAnimation = builder.getAnimation();
+			this.controller.setAnimation(builder.getBuilder());
 		}
-		
-		this.currentAnimation = builder.getAnimation();
-		this.controller.setAnimation(builder.getBuilder());
 	}
 	
 	public void stopAnimation(IAnimationBuilder targetAnim) {

@@ -176,7 +176,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			for (BlockPos detectedPos : BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ))) {
 				BlockState detectedState = owner.level.getBlockState(detectedPos);
 				
-				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE) && detectedPos.getY() >= Math.floor(owner.getBoundingBox().minY) + 1) {
+				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE) && detectedPos.getY() > Math.floor(owner.getBoundingBox().minY)) {
 					foundCrashCollision = true;
 					break;
 				}
@@ -192,8 +192,6 @@ public class RoboPounderRageRunGoal extends Goal {
 				if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(targetPos)), targetPos.getX() + 0.5D, targetPos.getY() + 0.5D, targetPos.getZ() + 0.5D, owner.getRandom().nextInt(20), 0, 0, 0, 1);
 			}
 			
-			owner.stopAnimation(rageRunAnim.get());
-			owner.stopAnimation(owner.getWalkAnim());
 			owner.playAnimation(rageCrashAnim.get(), true);
 			owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 			owner.getNavigation().stop();
@@ -233,11 +231,11 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 		
 		if (rageRunAnim.get().isPlaying()) {
+			BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+			
 			createRageRunPath();
 			affectTargets();
 			handleRageCrash();
-			
-			BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 		}
 		
 		if (rageCooldownAnim.get().isPlaying()) {
