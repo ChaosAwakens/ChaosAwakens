@@ -46,19 +46,19 @@ public class PipeBlock extends Block {
 		VoxelShape blockShape = Block.box((apothemOffsetN * 16.0F), (apothemOffsetN * 16.0F), (apothemOffsetN * 16.0F), (apothemOffsetP * 16.0F), (apothemOffsetP * 16.0F), (apothemOffsetP * 16.0F));
 		VoxelShape[] shapeByDirection = new VoxelShape[DIRECTIONS.length];
 
-		for(int i = 0; i < DIRECTIONS.length; ++i) {
+		for (int i = 0; i < DIRECTIONS.length; ++i) {
 			Direction curDirection = DIRECTIONS[i];
 			shapeByDirection[i] = VoxelShapes.box(0.5D + Math.min((-apothem), (double)curDirection.getStepX() * 0.5D), 0.5D + Math.min((-apothem), (double)curDirection.getStepY() * 0.5D), 0.5D + Math.min((-apothem), (double)curDirection.getStepZ() * 0.5D), 0.5D + Math.max(apothem, (double)curDirection.getStepX() * 0.5D), 0.5D + Math.max(apothem, (double)curDirection.getStepY() * 0.5D), 0.5D + Math.max(apothem, (double)curDirection.getStepZ() * 0.5D));
 		}
 
 		VoxelShape[] blockShapes = new VoxelShape[64];
 
-		for(int k = 0; k < 64; ++k) {
+		for (int k = 0; k < 64; ++k) {
 			VoxelShape blockShapeByDirection = blockShape;
 
-			for(int j = 0; j < DIRECTIONS.length; ++j) {
-				if ((k & 1 << j) != 0) {
-					blockShapeByDirection = VoxelShapes.or(blockShapeByDirection, shapeByDirection[j]);
+			for (int curDir = 0; curDir < DIRECTIONS.length; ++curDir) {
+				if ((k & 1 << curDir) != 0) {
+					blockShapeByDirection = VoxelShapes.or(blockShapeByDirection, shapeByDirection[curDir]);
 				}
 			}
 

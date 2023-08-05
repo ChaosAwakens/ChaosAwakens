@@ -403,10 +403,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public float getMeleeAttackReach(LivingEntity target) {
-		if (getAttackID() == SWING_ATTACK_ID) return super.getMeleeAttackReach(target) * 0.8F;
-		else if (getAttackID() == DASH_ATTACK_ID) return super.getMeleeAttackReach(target) * 1.2F;
-		else if (getAttackID() == RAGE_RUN_ATTACK_ID) return super.getMeleeAttackReach(target) * 0.65F;
-		else return super.getMeleeAttackReach(target);
+		switch (getAttackID()) {
+		default: return super.getMeleeAttackReach(target);
+		case SWING_ATTACK_ID: return super.getMeleeAttackReach(target) * 0.8F;
+		case DASH_ATTACK_ID: return super.getMeleeAttackReach(target) * 1.2F;
+		case RAGE_RUN_ATTACK_ID: return super.getMeleeAttackReach(target) * 0.65F;
+		}
 	}
 
 	@Override

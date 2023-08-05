@@ -58,8 +58,8 @@ public abstract class MultifaceBlock extends Block {
 	private final boolean canMirrorX;
 	private final boolean canMirrorZ;
 
-	public MultifaceBlock(Properties p_153822_) {
-		super(p_153822_);
+	public MultifaceBlock(Properties properties) {
+		super(properties);
 		this.registerDefaultState(getDefaultMultifaceState(this.stateDefinition));
 		this.shapesCache = this.getShapeForEachState(MultifaceBlock::calculateMultifaceShape);
 		this.canRotate = Direction.Plane.HORIZONTAL.stream().allMatch(this::isFaceSupported);
@@ -67,75 +67,58 @@ public abstract class MultifaceBlock extends Block {
 		this.canMirrorZ = Direction.Plane.HORIZONTAL.stream().filter(Direction.Axis.Z).filter(this::isFaceSupported).count() % 2L == 0L;
 	}
 
-	protected ImmutableMap<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> func) {
-		return this.stateDefinition.getPossibleStates().stream().collect(ImmutableMap.toImmutableMap(Function.identity(), func));
+	protected ImmutableMap<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> stateShapeFunc) {
+		return this.stateDefinition.getPossibleStates().stream().collect(ImmutableMap.toImmutableMap(Function.identity(), stateShapeFunc));
 	}
 
 	public static Set<Direction> availableFaces(BlockState state) {
-		if (!(state.getBlock() instanceof MultifaceBlock)) {
-			return null;
-		} else {
-			Set<Direction> set = EnumSet.noneOf(Direction.class);
+		if (!(state.getBlock() instanceof MultifaceBlock)) return null;
+		else {
+			Set<Direction> availableDirs = EnumSet.noneOf(Direction.class);
 
-			for(Direction direction : Direction.values()) {
-				if (hasFace(state, direction)) {
-					set.add(direction);
-				}
+			for (Direction targetDir : Direction.values()) {
+				if (hasFace(state, targetDir)) availableDirs.add(targetDir);
 			}
 
-			return set;
+			return availableDirs;
 		}
 	}
 
-	public static Set<Direction> unpack(byte stateb) {
-		Set<Direction> set = EnumSet.noneOf(Direction.class);
+	public static Set<Direction> unpack(byte curStateByte) {
+		Set<Direction> availableDirections = EnumSet.noneOf(Direction.class);
 
-		for(Direction direction : Direction.values()) {
-			if ((stateb & (byte)(1 << direction.ordinal())) > 0) {
-				set.add(direction);
-			}
+		for (Direction targetDir : Direction.values()) {
+			if ((curStateByte & (byte)(1 << targetDir.ordinal())) > 0) availableDirections.add(targetDir);
 		}
 
-		return set;
+		return availableDirections;
 	}
 
 	public static byte pack(Collection<Direction> directions) {
-		byte b0 = 0;
+		byte packedDirBytes = 0;
 
-		for(Direction direction : directions) {
-			b0 = (byte)(b0 | 1 << direction.ordinal());
-		}
+		for (Direction targetDir : directions) packedDirBytes = (byte) (packedDirBytes | 1 << targetDir.ordinal());
 
-		return b0;
+		return packedDirBytes;
 	}
 
-	protected boolean isFaceSupported(Direction p_153921_) {
+	protected boolean isFaceSupported(Direction targetDir) {
 		return true;
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
-		for(Direction direction : DIRECTIONS) {
-			if (this.isFaceSupported(direction)) {
-				pBuilder.add(getFaceProperty(direction));
+		for (Direction targetDir : DIRECTIONS) {
+			if (isFaceSupported(targetDir)) {
+				pBuilder.add(getFaceProperty(targetDir));
 			}
 		}
-
 	}
 
-	/**
-	 * Update the provided state given the provided neighbor direction and neighbor state, returning a new state.
-	 * For example, fences make their connections to the passed in state if possible, and wet concrete powder immediately
-	 * returns its solidified counterpart.
-	 * Note that this method should ideally consider only the specific direction passed in.
-	 */
 	@Override
 	public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, IWorld pWorld, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-		if (!hasAnyFace(pState)) {
-			return Blocks.AIR.defaultBlockState();
-		} else {
-			return hasFace(pState, pDirection) && !canAttachTo(pWorld, pDirection, pNeighborPos, pNeighborState) ? removeFace(pState, getFaceProperty(pDirection)) : pState;
-		}
+		if (!hasAnyFace(pState)) return Blocks.AIR.defaultBlockState();
+		return hasFace(pState, pDirection) && !canAttachTo(pWorld, pDirection, pNeighborPos, pNeighborState) ? removeFace(pState, getFaceProperty(pDirection)) : pState;
 	}
 	
 	@Override
@@ -144,20 +127,19 @@ public abstract class MultifaceBlock extends Block {
 	}
 
 	public boolean canSurvive(BlockState pState, World pWorld, BlockPos pPos) {
-		boolean flag = false;
+		boolean canAttachToFace = false;
 
-		for(Direction direction : DIRECTIONS) {
-			if (hasFace(pState, direction)) {
-				BlockPos blockpos = pPos.relative(direction);
-				if (!canAttachTo(pWorld, direction, blockpos, pWorld.getBlockState(blockpos))) {
-					return false;
-				}
+		for (Direction targetDir : DIRECTIONS) {
+			if (hasFace(pState, targetDir)) {
+				BlockPos relativePos = pPos.relative(targetDir);
+				
+				if (!canAttachTo(pWorld, targetDir, relativePos, pWorld.getBlockState(relativePos))) return false;
 
-				flag = true;
+				canAttachToFace = true;
 			}
 		}
 
-		return flag;
+		return canAttachToFace;
 	}
 
 	@Override
@@ -168,82 +150,58 @@ public abstract class MultifaceBlock extends Block {
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext pContext) {
-		World world = pContext.getLevel();
-		BlockPos blockpos = pContext.getClickedPos();
-		BlockState blockstate = world.getBlockState(blockpos);
-		return Arrays.stream(pContext.getNearestLookingDirections()).map((p_153865_) -> {
-			return this.getStateForPlacement(blockstate, world, blockpos, p_153865_);
-		}).filter(Objects::nonNull).findFirst().orElse((BlockState)null);
+		World curWorld = pContext.getLevel();
+		BlockPos targetPos = pContext.getClickedPos();
+		BlockState targetState = curWorld.getBlockState(targetPos);
+		
+		return Arrays.stream(pContext.getNearestLookingDirections()).map((targettDir) -> {
+			return getStateForPlacement(targetState, curWorld, targetPos, targettDir);
+		}).filter(Objects::nonNull).findFirst().orElse((BlockState) null);
 	}
 
-	public boolean isValidStateForPlacement(World world, BlockState state, BlockPos pos, Direction dir) {
-		if (this.isFaceSupported(dir) && (!state.is(this) || !hasFace(state, dir))) {
-			BlockPos blockpos = pos.relative(dir);
-			return canAttachTo(world, dir, blockpos, world.getBlockState(blockpos));
-		} else {
-			return false;
-		}
+	public boolean isValidStateForPlacement(World world, BlockState curState, BlockPos targetPos, Direction targetDir) {
+		return isFaceSupported(targetDir) && (!curState.is(this) || !hasFace(curState, targetDir)) ? canAttachTo(world, targetDir, targetPos.relative(targetDir), world.getBlockState(targetPos.relative(targetDir))) : false;
 	}
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockState pCurrentState, World pWorld, BlockPos pPos, Direction pLookingDirection) {
-		if (!this.isValidStateForPlacement(pWorld, pCurrentState, pPos, pLookingDirection)) {
-			return null;
-		} else {
-			BlockState blockstate;
-			if (pCurrentState.is(this)) {
-				blockstate = pCurrentState;
-			} else if (this.isWaterloggable() && pCurrentState.getFluidState().is(FluidTags.WATER)) {
-				blockstate = this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true);
-			} else {
-				blockstate = this.defaultBlockState();
-			}
+		if (!isValidStateForPlacement(pWorld, pCurrentState, pPos, pLookingDirection)) return null;
+		else {
+			BlockState targetState;
+			
+			if (pCurrentState.is(this)) targetState = pCurrentState;
+			else if (isWaterloggable() && pCurrentState.getFluidState().is(FluidTags.WATER)) targetState = defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true);
+			else targetState = defaultBlockState();
 
-			return blockstate.setValue(getFaceProperty(pLookingDirection), true);
+			return targetState.setValue(getFaceProperty(pLookingDirection), true);
 		}
 	}
 
-	/**
-	 * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-	 * blockstate.
-	 * @deprecated call via {@link net.minecraft.block.AbstractBlock.AbstractBlockState#rotate} whenever
-	 * possible. Implementing/overriding is fine.
-	 */
 	@Override
 	public BlockState rotate(BlockState pState, Rotation pRotation) {
-		return !this.canRotate ? pState : this.mapDirections(pState, pRotation::rotate);
+		return !canRotate ? pState : mapDirections(pState, pRotation::rotate);
 	}
 
-	/**
-	 * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-	 * blockstate.
-	 * @deprecated call via {@link net.minecraft.block.AbstractBlock.AbstractBlockState#mirror} whenever
-	 * possible. Implementing/overriding is fine.
-	 */
 	@Override
 	public BlockState mirror(BlockState pState, Mirror pMirror) {
-		if (pMirror == Mirror.FRONT_BACK && !this.canMirrorX) {
-			return pState;
-		} else {
-			return pMirror == Mirror.LEFT_RIGHT && !this.canMirrorZ ? pState : this.mapDirections(pState, pMirror::mirror);
-		}
+		if (pMirror == Mirror.FRONT_BACK && !canMirrorX) return pState;
+		else return pMirror == Mirror.LEFT_RIGHT && !canMirrorZ ? pState : mapDirections(pState, pMirror::mirror);
 	}
 
-	private BlockState mapDirections(BlockState state, Function<Direction, Direction> dirFunc) {
-		BlockState blockstate = state;
+	private BlockState mapDirections(BlockState targetState, Function<Direction, Direction> mapDirFunc) {
+		BlockState curState = targetState;
 
-		for(Direction direction : DIRECTIONS) {
-			if (this.isFaceSupported(direction)) {
-				blockstate = blockstate.setValue(getFaceProperty(dirFunc.apply(direction)), state.getValue(getFaceProperty(direction)));
-			}
+		for (Direction targetDir : DIRECTIONS) {
+			if (isFaceSupported(targetDir)) curState = curState.setValue(getFaceProperty(mapDirFunc.apply(targetDir)), curState.getValue(getFaceProperty(targetDir)));
 		}
 
-		return blockstate;
+		return curState;
 	}
 
 	public static boolean hasFace(BlockState state, Direction dir) {
-		BooleanProperty booleanproperty = getFaceProperty(dir);
-		return state.hasProperty(booleanproperty) && state.getValue(booleanproperty);
+		BooleanProperty faceProperty = getFaceProperty(dir);
+		
+		return state.hasProperty(faceProperty) && state.getValue(faceProperty);
 	}
 
 	public static boolean canAttachTo(IWorld world, Direction dir, BlockPos pos, BlockState state) {
@@ -251,7 +209,7 @@ public abstract class MultifaceBlock extends Block {
 	}
 
 	private boolean isWaterloggable() {
-		return this.stateDefinition.getProperties().contains(BlockStateProperties.WATERLOGGED);
+		return stateDefinition.getProperties().contains(BlockStateProperties.WATERLOGGED);
 	}
 
 	private static BlockState removeFace(BlockState state, BooleanProperty boolProp) {
@@ -259,49 +217,38 @@ public abstract class MultifaceBlock extends Block {
 		return hasAnyFace(blockstate) ? blockstate : Blocks.AIR.defaultBlockState();
 	}
 
-	public static BooleanProperty getFaceProperty(Direction dir) {
-		return PROPERTY_BY_DIRECTION.get(dir);
+	public static BooleanProperty getFaceProperty(Direction targetDir) {
+		return PROPERTY_BY_DIRECTION.get(targetDir);
 	}
 
 	public static int getFaceCount() {
-		int i = 0;
-		for (Direction direction : DIRECTIONS) {
-			ChaosAwakens.LOGGER.debug("1: " + direction);
-			ChaosAwakens.LOGGER.debug("2: " + getFaceProperty(direction));
-			ChaosAwakens.LOGGER.debug("3: " + getFaceProperty(direction).getPossibleValues());
-			ChaosAwakens.LOGGER.debug("4: " + getFaceProperty(direction).getAllValues());
-			ChaosAwakens.LOGGER.debug("5: " + getFaceProperty(direction).getAllValues().findFirst());
-			ChaosAwakens.LOGGER.debug("6: " + getFaceProperty(direction).getAllValues().findFirst().get());
-			ChaosAwakens.LOGGER.debug("7: " + getFaceProperty(direction).getAllValues().findFirst().get().value());
-			if (getFaceProperty(direction).getAllValues().findFirst().get().value()) {
-				i++;
-			}
+		int faceCount = 0;
+		
+		for (Direction targetDir : DIRECTIONS) {
+			if (getFaceProperty(targetDir).getAllValues().findFirst().get().value()) faceCount++;
 		}
-		return i;
+		
+		return faceCount;
 	}
 
 	private static BlockState getDefaultMultifaceState(StateContainer<Block, BlockState> container) {
-		BlockState blockstate = container.any();
+		BlockState pickedTargetState = container.any();
 
-		for(BooleanProperty booleanproperty : PROPERTY_BY_DIRECTION.values()) {
-			if (blockstate.hasProperty(booleanproperty)) {
-				blockstate = blockstate.setValue(booleanproperty, false);
-			}
+		for (BooleanProperty dirProperty : PROPERTY_BY_DIRECTION.values()) {
+			if (pickedTargetState.hasProperty(dirProperty)) pickedTargetState = pickedTargetState.setValue(dirProperty, false);
 		}
 
-		return blockstate;
+		return pickedTargetState;
 	}
 
 	private static VoxelShape calculateMultifaceShape(BlockState state) {
-		VoxelShape voxelshape = VoxelShapes.empty();
+		VoxelShape curVoxelShape = VoxelShapes.empty();
 
-		for(Direction direction : DIRECTIONS) {
-			if (hasFace(state, direction)) {
-				voxelshape = VoxelShapes.or(voxelshape, SHAPE_BY_DIRECTION.get(direction));
-			}
+		for (Direction targetDir : DIRECTIONS) {
+			if (hasFace(state, targetDir)) curVoxelShape = VoxelShapes.or(curVoxelShape, SHAPE_BY_DIRECTION.get(targetDir));
 		}
 
-		return voxelshape.isEmpty() ? VoxelShapes.block() : voxelshape;
+		return curVoxelShape.isEmpty() ? VoxelShapes.block() : curVoxelShape;
 	}
 
 	protected static boolean hasAnyFace(BlockState state) {
