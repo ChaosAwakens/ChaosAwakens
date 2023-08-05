@@ -108,14 +108,14 @@
 				},
 				{
 					"name": "right_wing",
-					"pivot": [4, 11, 0],
+					"pivot": [-3.5, 11, 0],
 					"cubes": [
 						{"origin": [-4, 7, -3], "size": [1, 4, 6], "uv": [0, 14]}
 					]
 				},
 				{
 					"name": "left_wing",
-					"pivot": [-4, 11, 0],
+					"pivot": [3.5, 11, 0],
 					"cubes": [
 						{"origin": [3, 7, -3], "size": [1, 4, 6], "uv": [0, 14]}
 					]
