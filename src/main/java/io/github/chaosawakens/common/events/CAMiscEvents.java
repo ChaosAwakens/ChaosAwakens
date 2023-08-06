@@ -116,19 +116,24 @@ public class CAMiscEvents {
 	@SubscribeEvent
 	public static void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
 		Entity target = event.getEntity();
-		// Make villagers afraid of our entities
+		
 		if (target instanceof VillagerEntity) {
 			VillagerEntity villagerTarget = (VillagerEntity) target;
+			
 			villagerTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(villagerTarget, AnimatableMonsterEntity.class, 40.0F, 0.5D, 0.5D));
 			villagerTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(villagerTarget, GiantEntity.class, 32.0F, 0.5D, 0.5D));
 		}
+		
 		if (target instanceof WanderingTraderEntity) {
 			WanderingTraderEntity wanderingTraderTarget = (WanderingTraderEntity) target;
+			
 			wanderingTraderTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTraderTarget, AnimatableMonsterEntity.class, 40.0F, 0.5D, 0.5D));
 			wanderingTraderTarget.goalSelector.addGoal(1, new AvoidEntityGoal<>(wanderingTraderTarget, GiantEntity.class, 32.0F, 0.5D, 0.5D));
 		}
+		
 		if (target instanceof GiantEntity) {
 			GiantEntity giantTarget = (GiantEntity) target;
+			
 			giantTarget.goalSelector.addGoal(8, new LookAtGoal(giantTarget, PlayerEntity.class, 24.0F));
 			giantTarget.goalSelector.addGoal(8, new LookRandomlyGoal(giantTarget));
 

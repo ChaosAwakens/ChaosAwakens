@@ -2,12 +2,12 @@ package io.github.chaosawakens.common.entity.ai;
 
 import java.util.EnumSet;
 
-import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
@@ -76,15 +76,13 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		
 //		ChaosAwakens.LOGGER.debug(this.entity.level.getGameTime());
 		
-		this.entity.lookAt(target, 100, 100);
+//		this.entity.lookAt(target, 100, 100);
 		this.entity.getLookControl().setLookAt(target, 30F, 30F);
 		
 		if (pathCheckRate <= 0 && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget())) {
 			Vector3d targetPosition = target.position();
-			pathCheckRate = IUtilityHelper.randomBetween(4, 11);
+			pathCheckRate = MathHelper.nextInt(entity.getRandom(), 4, 11);
 			this.entity.getNavigation().moveTo(path, this.speedMultiplier);
-			this.entity.lookAt(target, 100, 100);
-			this.entity.getLookControl().setLookAt(target, 30F, 30F);
 			
 	//		if (path == null) {
 	//			this.path = this.entity.getNavigation().createPath(target, 0);				

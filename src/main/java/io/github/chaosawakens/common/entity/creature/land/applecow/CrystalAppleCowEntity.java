@@ -16,6 +16,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.BreedGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
@@ -25,6 +26,7 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.effect.LightningBoltEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -103,6 +105,20 @@ public class CrystalAppleCowEntity extends AnimatableAnimalEntity {
 			public void stop() {
 				super.stop();
 				setPanicking(false);
+			}
+		});
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.2D, 2.0D) {
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+			
+			@Override
+			public void tick() {
+				super.tick();
+				if (distanceToSqr(toAvoid) < 49.0D) setPanicking(true);
+				else setPanicking(false);
 			}
 		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));

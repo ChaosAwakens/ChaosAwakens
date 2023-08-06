@@ -13,6 +13,7 @@ public class PopcornItem extends Item {
 		super(properties);
 	}
 
+	@Override
 	public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity user) {
 		ItemStack resultUseItem = super.finishUsingItem(stack, world, user);
 		return user instanceof PlayerEntity && ((PlayerEntity)user).abilities.instabuild ? resultUseItem : new ItemStack(CAItems.EMPTY_POPCORN_BAG.get());

@@ -36,7 +36,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * 	 <td>Animation Progress (Chaos Awakens)</td>
  * 	 <td>Present</td>
  * 	 <td>Present</td>
- * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
  * </tr>
  * 
  * <tr>
@@ -71,7 +71,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * 	 <td>Animation State (Chaos Awakens)</td>
  * 	 <td>Present</td>
  * 	 <td>Present</td>
- * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
  * </tr>
  * 
  * <tr>
@@ -99,9 +99,9 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * 
  * <br> </br>
  * It's advised that animation handling is done solely through {@link IAnimatableEntity} methods, as they handle any
- * necessary siding (note that this does not mean client data will be present on the server and vice versa). The server
- * progress is effectively "detached" from the client tick progress due to variation in client animation progress between
- * clients and other factors. The server side progress should still pretty much sync to the client progress, but there's
+ * necessary siding (note that this does not mean client data will be present on the server and vice versa). The "functional" 
+ * progress is effectively "detached" from Geckolib's tick progress due to variation in client animation progress between
+ * clients and other factors. The functional tick progress should still pretty much sync to Geckolib's tick progress, but there's
  * no guarantee that both will communicate with each other as that in itself can and will cause hard to debug logical
  * errors. Can still be attributed to MC's goofiness, though :p
  * <br> </br>

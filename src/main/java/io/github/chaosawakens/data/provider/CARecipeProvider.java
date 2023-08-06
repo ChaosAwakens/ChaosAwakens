@@ -158,6 +158,12 @@ public class CARecipeProvider extends RecipeProvider {
 		leafCarpet(recipeConsumer, CABlocks.JUNGLE_LEAF_CARPET.get(), Blocks.JUNGLE_LEAVES);
 		leafCarpet(recipeConsumer, CABlocks.ACACIA_LEAF_CARPET.get(), Blocks.ACACIA_LEAVES);
 		leafCarpet(recipeConsumer, CABlocks.DARK_OAK_LEAF_CARPET.get(), Blocks.DARK_OAK_LEAVES);
+		leafCarpet(recipeConsumer, CABlocks.BLUE_CRYSTAL_LEAF_CARPET.get(), CABlocks.BLUE_CRYSTAL_LEAVES.get());
+		leafCarpet(recipeConsumer, CABlocks.GREEN_CRYSTAL_LEAF_CARPET.get(), CABlocks.GREEN_CRYSTAL_LEAVES.get());
+		leafCarpet(recipeConsumer, CABlocks.ORANGE_CRYSTAL_LEAF_CARPET.get(), CABlocks.ORANGE_CRYSTAL_LEAVES.get());
+		leafCarpet(recipeConsumer, CABlocks.PINK_CRYSTAL_LEAF_CARPET.get(), CABlocks.PINK_CRYSTAL_LEAVES.get());
+		leafCarpet(recipeConsumer, CABlocks.RED_CRYSTAL_LEAF_CARPET.get(), CABlocks.RED_CRYSTAL_LEAVES.get());
+		leafCarpet(recipeConsumer, CABlocks.YELLOW_CRYSTAL_LEAF_CARPET.get(), CABlocks.YELLOW_CRYSTAL_LEAVES.get());
 
 		ShapedRecipeBuilder.shaped(CABlocks.CRYSTAL_CRAFTING_TABLE.get())
 				.define('#', CABlocks.CRYSTALWOOD_PLANKS.get())

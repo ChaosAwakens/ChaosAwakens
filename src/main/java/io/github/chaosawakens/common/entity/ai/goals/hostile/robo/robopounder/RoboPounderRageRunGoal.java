@@ -163,7 +163,7 @@ public class RoboPounderRageRunGoal extends Goal {
 				double relativeHitAngle = targetAngle - attackAngle;
 				float hitDistanceSqr = (float) (Math.sqrt((target.getZ() - owner.getZ()) * (target.getZ() - owner.getZ()) + (target.getX() - owner.getX()) * (target.getX() - owner.getX())) - owner.getBbWidth() / 2F);
 				
-				if (hitDistanceSqr <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, 300.0D)) owner.doHurtTarget(potentialAffectedTarget);
+				if (hitDistanceSqr <= reach && MathUtil.isWithinAngleRestriction(relativeHitAngle, 360.0D)) owner.doHurtTarget(potentialAffectedTarget);
 			}
 		}
 	}

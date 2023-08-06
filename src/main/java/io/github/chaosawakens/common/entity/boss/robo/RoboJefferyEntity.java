@@ -31,6 +31,7 @@ import net.minecraft.item.Items;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.text.TextFormatting;
@@ -50,11 +51,12 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private static final DataParameter<Boolean> HAS_CORE = EntityDataManager.defineId(RoboJefferyEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<RoboJefferyEntity> mainController = createMainMappedController("robojefferymaincontroller");
 	private final WrappedAnimationController<RoboJefferyEntity> ambienceController = createMappedController("robojefferyambiencecontroller", this::ambiencePredicate);
+	private final WrappedAnimationController<RoboJefferyEntity> secondaryAmbienceController = createMappedController("robojefferysecondaryambiencecontroller", this::secondaryAmbiencePredicate);
 	private final WrappedAnimationController<RoboJefferyEntity> attackController = createMappedController("robojefferyattackcontroller", this::attackPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
-	private final SingletonAnimationBuilder lowHealthAnim = new SingletonAnimationBuilder(this, "Low Health", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
-	private final SingletonAnimationBuilder highHealthAnim = new SingletonAnimationBuilder(this, "Healthy", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
+	private final SingletonAnimationBuilder lowHealthAnim = new SingletonAnimationBuilder(this, "Low Health", EDefaultLoopTypes.LOOP).setWrappedController(secondaryAmbienceController);
+	private final SingletonAnimationBuilder highHealthAnim = new SingletonAnimationBuilder(this, "Healthy", EDefaultLoopTypes.LOOP).setWrappedController(secondaryAmbienceController);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
@@ -100,10 +102,17 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		if (isAttacking()) {
+			playAnimation(idleAnim, true);
+			return PlayState.CONTINUE;
+		} else return PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
+		return PlayState.CONTINUE;
+	}
+	
+	public <E extends IAnimatableEntity> PlayState secondaryAmbiencePredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
 	}
 
@@ -114,7 +123,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 13.6D, 17.1D, 240.0D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 140D, 15.6D, 18.1D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
 	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
 	/*	this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
 			affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
@@ -161,7 +170,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				
 				for (int angleDeg = 0; angleDeg < 360; angleDeg++) {
 					for (int rep = 0; rep < 6; rep++) {
-						this.level.addParticle(CAParticleTypes.ROBO_SPARK.get(), getX() + plusX, getRandomY() * 0.8D, getZ() + plusZ, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
+						this.level.addParticle(ParticleTypes.SMOKE, getX() + plusX, getRandomY() * 0.8D, getZ() + plusZ, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
 					}
 				}
 				
@@ -183,19 +192,18 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	public void manageAttack(LivingEntity target) {
-		if (getAttackID() == SMASH_ATTACK_ID) {
-			if (EntityUtil.isHoldingItem(target, Items.SHIELD)) {
-				if (target instanceof PlayerEntity) {
-					PlayerEntity playerTarget = (PlayerEntity) target;
-					EntityUtil.disableShield(playerTarget, 200);
-				}
-			}
+		switch (getAttackID()) {
+		default:
+			break;
+		case SMASH_ATTACK_ID:
+			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 400);
+			break;
 		}
 	}
 	
 	@Override
 	public float getMeleeAttackReach(LivingEntity target) {
-		return super.getMeleeAttackReach(target) * 1.2F;
+		return super.getMeleeAttackReach(target) * 0.8F;
 	}
 
 	@Override
@@ -237,6 +245,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	protected void handleBaseAnimations() {
 		super.handleBaseAnimations();
+		
 		if (!isAttacking() && !isDeadOrDying() && getHealth() > 50.0F) {
 			playAnimation(idleExtrasAnim, false);
 			playAnimation(highHealthAnim, false);

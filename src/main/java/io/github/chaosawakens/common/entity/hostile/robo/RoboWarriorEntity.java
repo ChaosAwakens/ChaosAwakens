@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -70,7 +69,10 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return isAttacking() ? PlayState.STOP : PlayState.CONTINUE;
+		if (isAttacking()) {
+			playAnimation(idleAnim, true);
+			return PlayState.CONTINUE;
+		} else return PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
@@ -95,7 +97,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public int animationInterval() {
-		return 4;
+		return 3;
 	}
 
 	@Override
@@ -129,12 +131,10 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	protected void handleBaseAnimations() {
-		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isOnAttackCooldown() && !isDeadOrDying()) playAnimation(walkAnim, false);
-		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) {
-			playAnimation(idleAnim, true);
-			playAnimation(idleExtrasAnim, true);
-		}
-		ChaosAwakens.debug("CUR MAIN ANIM", mainController.getCurrentAnimation().animationName);
+		playAnimation(idleExtrasAnim, true);
+		
+		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(idleAnim, true);
+		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(walkAnim, false);
 	}
 	
 	@SuppressWarnings("unchecked")

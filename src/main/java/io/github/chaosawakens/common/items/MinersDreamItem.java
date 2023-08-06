@@ -42,8 +42,7 @@ public class MinersDreamItem extends Item {
 		Vector3i targetFacingDirection = targetDirection.getNormal();
 
 		curPlayer.playNotifySound(SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS, 1.0F, 1.5F);
-		curWorld.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F,
-				0.25F, 0.25F);
+		curWorld.addParticle(ParticleTypes.EXPLOSION.getType(), breakPos.getX(), breakPos.getY(), breakPos.getZ(), 0.25F, 0.25F, 0.25F);
 
 		for (int i = 0; i < HOLE_LENGTH; i++) {
 			for (int j = 0; j < HOLE_HEIGHT; j++) {
@@ -73,7 +72,7 @@ public class MinersDreamItem extends Item {
 							|| targetBlockState.getFluidState().getType().equals(Fluids.WATER)
 							|| targetBlockState.getFluidState().getType().equals(Fluids.FLOWING_WATER)
 							|| targetBlockState.getBlock().getRegistryName().toString().contains("rocky_dirt")) {
-						this.placeWoodPillars(curWorld, targetPos, i, j, k);
+						placeWoodPillars(curWorld, targetPos, i, j, k);
 					}
 				}
 			}

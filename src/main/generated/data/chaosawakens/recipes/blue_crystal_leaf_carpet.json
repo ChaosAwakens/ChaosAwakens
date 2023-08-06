@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "leaf_carpet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:blue_crystal_leaves"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:blue_crystal_leaf_carpet"
+  }
+}

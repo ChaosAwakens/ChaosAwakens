@@ -104,7 +104,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return isAttacking() ? PlayState.STOP : PlayState.CONTINUE;
+		if (isAttacking() || isDeadOrDying()) {
+			playAnimation(idleAnim, true);
+			return PlayState.CONTINUE;
+		} else return PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
@@ -113,7 +116,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public int animationInterval() {
-		return isRageRunning() ? 1 : 2;
+		return 2;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -462,9 +465,9 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 	
 	@Override
-	protected void handleBaseAnimations() {
+	protected void handleBaseAnimations() {		
+		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), true);
 		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
-		if (getIdleAnim() != null && !isAttacking() && !isOnAttackCooldown() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), true);
 		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
 	}
 

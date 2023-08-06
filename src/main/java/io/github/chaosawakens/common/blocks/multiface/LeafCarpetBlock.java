@@ -26,9 +26,7 @@ public class LeafCarpetBlock extends MultifaceBlock implements IWaterLoggable {
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction facingDir, BlockState facingState, IWorld world, BlockPos curPos, BlockPos facingPos) {
-		if (state.getValue(WATERLOGGED)) {
-			world.getLiquidTicks().scheduleTick(curPos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
-		}
+		if (state.getValue(WATERLOGGED)) world.getLiquidTicks().scheduleTick(curPos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 
 		return super.updateShape(state, facingDir, facingState, world, curPos, facingPos);
 	}

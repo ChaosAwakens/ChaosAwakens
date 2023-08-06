@@ -17,6 +17,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.BreedGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
@@ -25,6 +26,7 @@ import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -126,6 +128,20 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 			public void stop() {
 				super.stop();
 				setPanicking(false);
+			}
+		});
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.1D, 1.4D) {
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+			
+			@Override
+			public void tick() {
+				super.tick();
+				if (distanceToSqr(toAvoid) < 49.0D) setPanicking(true);
+				else setPanicking(false);
 			}
 		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.2D));
@@ -283,6 +299,15 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	public LettuceChickenEntity getBreedOffspring(ServerWorld pServerLevel, AgeableEntity pMate) {
 		return CAEntityTypes.LETTUCE_CHICKEN.get().create(pServerLevel);
 	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving() && isOnGround() && !isSitting()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isPanicking() && isOnGround()) playAnimation(getWalkAnim(), false);
+		if (!isOnGround()) playAnimation(flapAnim, false);
+		if (isSitting()) playAnimation(sitAnim, false);
+		if (isPanicking() && isOnGround()) playAnimation(runAnim, false);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -293,14 +318,5 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return lettuceChickenAnimations;
-	}
-
-	@Override
-	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isMoving() && isOnGround() && !isSitting()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving() && !isPanicking() && isOnGround()) playAnimation(getWalkAnim(), false);
-		if (!isOnGround()) playAnimation(flapAnim, false);
-		if (isSitting()) playAnimation(sitAnim, false);
-		if (isPanicking() && isOnGround()) playAnimation(runAnim, false);
 	}
 }
