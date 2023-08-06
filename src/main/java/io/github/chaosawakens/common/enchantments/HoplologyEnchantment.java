@@ -16,6 +16,7 @@ import net.minecraft.util.DamageSource;
  * @author invalid2
  */
 public class HoplologyEnchantment extends ProtectionEnchantment {
+	private static final int MAX_PROTECTION_LEVEL = 50;
 	private int protection;
 	
 	public HoplologyEnchantment(EquipmentSlotType... slotType) {
@@ -54,9 +55,12 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 		this.protection = protection;
 	}
 	
+	public static int getMaxHoplologyProtectionLevel() {
+		return MAX_PROTECTION_LEVEL;
+	}
+	
 	public static void handleHoplologyProtection(LivingEntity owner, HoplologyEnchantment hoplologyEnchantment) {
 		ObjectArrayList<ItemStack> curStacks = EnchantmentUtil.getItemStacksWithEnchantment(hoplologyEnchantment.getSlotItems(owner).values(), hoplologyEnchantment);
-		final int maxHoplologyXPLevel = 50;
 		
 		if (curStacks == null) return;
 		
@@ -71,7 +75,7 @@ public class HoplologyEnchantment extends ProtectionEnchantment {
 				PlayerEntity playerOwner = (PlayerEntity) owner;
 				int playerXPLevel = playerOwner.experienceLevel;
 				
-				if (playerXPLevel > maxHoplologyXPLevel) playerXPLevel = maxHoplologyXPLevel;
+				if (playerXPLevel > MAX_PROTECTION_LEVEL) playerXPLevel = MAX_PROTECTION_LEVEL;
 				
 				hoplologyEnchantment.setProtection(Math.abs(playerXPLevel / 10));
 			});
