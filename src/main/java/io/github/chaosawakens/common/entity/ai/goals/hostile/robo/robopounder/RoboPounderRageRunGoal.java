@@ -230,9 +230,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			}
 		}
 		
-		if (rageRunAnim.get().isPlaying()) {
-			BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
-			
+		if (rageRunAnim.get().isPlaying()) {			
 			createRageRunPath();
 			affectTargets();
 			handleRageCrash();

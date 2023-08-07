@@ -10,6 +10,8 @@ import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal
 import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderDysonDashGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderRageRunGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.registry.CATags;
+import io.github.chaosawakens.common.util.BlockPosUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -40,7 +42,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RoboPounderEntity extends AnimatableMonsterEntity {
+public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry advanced attack logic over to aiStep()
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<WrappedAnimationController<RoboPounderEntity>>(2);
 	private final ObjectArrayList<IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>(1);
@@ -291,7 +293,20 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			setRageRunAttributes();
 			if (getRageRunDuration() == 0) setRageRunDuration(getRageRunDurationStaged());
 			updateRageRunDuration();
+			handleRageRunMechanics();
 		} else setRageRunDuration(0);
+	}
+	
+	private void handleRageRunMechanics() {
+		if (isRageRunning() && !isDeadOrDying()) {
+			if (isPlayingAnimation(rageRunAnim)) handleRageRunCollision();
+		}
+	}
+	
+	private void handleRageRunCollision() {
+		BlockPosUtil.destroyCollidingBlocks(this, getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+		
+		
 	}
 	
 	public void setRageRunAttributes() {
