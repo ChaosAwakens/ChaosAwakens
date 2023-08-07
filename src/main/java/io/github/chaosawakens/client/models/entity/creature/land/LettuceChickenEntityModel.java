@@ -32,14 +32,4 @@ public class LettuceChickenEntityModel extends ExtendedAnimatedTickingGeoModel<L
 	protected boolean shouldApplyChildScaling() {
 		return true;
 	}
-	
-	@Override
-	public IBone getHeadBone() {
-		return getAnimationProcessor().getBone("head");
-	}
-	
-	@Override
-	public IBone getBodyBone() {
-		return getAnimationProcessor().getBone("body");
-	}
 }

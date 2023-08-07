@@ -47,6 +47,11 @@ public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleE
 	
 	@Override
 	public IBone getBodyBone() {
-		return getAnimationProcessor().getBone("body");
+		return getAnimationProcessor().getBone("Gazelle");
+	}
+	
+	@Override
+	public IBone getHeadBone() {
+		return getAnimationProcessor().getBone("Head");
 	}
 }
