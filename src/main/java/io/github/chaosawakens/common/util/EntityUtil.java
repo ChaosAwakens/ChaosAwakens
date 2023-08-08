@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.util;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -451,9 +452,11 @@ public final class EntityUtil {
 	 * @param targetAnimatable The animatable to invoke the {@code die} method onto
 	 * @param deathCause The cause of death used to determine things like death loot, returning due to {@link ForgeHooks#onLivingDeath(LivingEntity, DamageSource)}, 
 	 * etc.
+	 * @param extraProtectedDeathFunctions Any extra protected methods in the target living animatable (which may cause compilation 
+	 * errors for some reason if AT'd)
 	 */
 	@SuppressWarnings("deprecation")
-	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause) {
+	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause, Consumer<LivingEntity> extraProtectedDeathFunctions) {
 		if (targetAnimatable.getDeathAnim() == null || !(targetAnimatable instanceof LivingEntity || ForgeHooks.onLivingDeath((LivingEntity) targetAnimatable, deathCause))) return;
 
 		LivingEntity livingAnimatable = (LivingEntity) targetAnimatable;
@@ -475,7 +478,7 @@ public final class EntityUtil {
 
 					if (causeEntity != null) causeEntity.killed(curServerWorld, livingAnimatable);
 
-					livingAnimatable.dropAllDeathLoot(deathCause);
+					extraProtectedDeathFunctions.accept(livingAnimatable);
 					livingAnimatable.createWitherRose(killerEntity);
 				}
 				
