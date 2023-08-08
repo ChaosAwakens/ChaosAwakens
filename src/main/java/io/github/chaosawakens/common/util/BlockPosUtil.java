@@ -85,7 +85,7 @@ public final class BlockPosUtil {
 	 * @return A list of {@link BlockPos}es affected by the destruction operation.
 	 */
 	public static ObjectArrayList<BlockPos> destroyCollidingBlocks(World targetWorld, AxisAlignedBB targetHitbox, boolean dropBlocks, @Nullable Predicate<Block> destructibilityPredicate) {
-		return destroyBlocksBetween(targetWorld, (int) Math.floor(targetHitbox.minX), (int) Math.floor(targetHitbox.minY), (int) Math.floor(targetHitbox.minZ), (int) Math.floor(targetHitbox.maxX), (int) Math.floor(targetHitbox.maxY), (int) Math.floor(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
+		return destroyBlocksBetween(targetWorld, (int) Math.ceil(targetHitbox.minX), (int) Math.ceil(targetHitbox.minY), (int) Math.ceil(targetHitbox.minZ), (int) Math.ceil(targetHitbox.maxX), (int) Math.ceil(targetHitbox.maxY), (int) Math.ceil(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
 	}
 	
 	/**

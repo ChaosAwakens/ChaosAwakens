@@ -10,6 +10,7 @@ import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal
 import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderDysonDashGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderRageRunGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.BlockPosUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -30,6 +31,7 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Items;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -118,7 +120,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 
 	@Override
 	public int animationInterval() {
-		return 2;
+		return isRageRunning() ? 1 : 2;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -299,14 +301,16 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 	
 	private void handleRageRunMechanics() {
 		if (isRageRunning() && !isDeadOrDying()) {
-			if (isPlayingAnimation(rageRunAnim)) handleRageRunCollision();
+			if (isPlayingAnimation(rageRunAnim)) {
+				handleRageRunCollision();
+				
+				if (tickCount % 8 == 0) CAScreenShakeEntity.shakeScreen(level, position(), 35.0F, 0.08F, 5, 20);
+			}
 		}
 	}
 	
 	private void handleRageRunCollision() {
 		BlockPosUtil.destroyCollidingBlocks(this, getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
-		
-		
 	}
 	
 	public void setRageRunAttributes() {
@@ -324,16 +328,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 	}
 
 	private void deflectProjectiles(DamageSource hurtSource) {
-		if (hurtSource != null && hurtSource.isProjectile() && isAlive()) {
-			Entity projectileDamageSource = hurtSource.getDirectEntity();
-
-			if (projectileDamageSource != null) EntityUtil.repelEntities(this, getBbWidth(), getBbHeight(), -getRageRunDeflectionPower());
-		}
+		EntityUtil.repelEntitiesOfClass(this, ProjectileEntity.class, getBbWidth(), getBbHeight(), -getRageRunDeflectionPower());
 	}
 
 	private void handleTaunting() {
 		final int killThreshold = MathHelper.nextInt(random, 4, 8);
-		boolean shouldTaunt = !potentialDeadTargets.isEmpty() && !isAttacking() && isPlayingAnimation(idleAnim) && (potentialDeadTargets.size() >= killThreshold || ((potentialDeadTargets.get(potentialDeadTargets.size() - 1) instanceof PlayerEntity || potentialDeadTargets.get(potentialDeadTargets.size() - 1).getMaxHealth() >= 150) && this.random.nextBoolean())) && getTarget() == null;
+		boolean shouldTaunt = !potentialDeadTargets.isEmpty() && !isAttacking() && !isOnAttackCooldown() && isPlayingAnimation(idleAnim) && (potentialDeadTargets.size() >= killThreshold || ((potentialDeadTargets.get(potentialDeadTargets.size() - 1) instanceof PlayerEntity || potentialDeadTargets.get(potentialDeadTargets.size() - 1).getMaxHealth() >= 150) && this.random.nextBoolean())) && getTarget() == null;
 		
 		if (shouldTaunt) {
 			setShouldTaunt(true);

@@ -206,8 +206,8 @@ public class RoboPounderRageRunGoal extends Goal {
 	
 	@Override
 	public void tick() {
-		owner.stopAnimation(owner.getIdleAnim());
 		owner.stopAnimation(owner.getWalkAnim());
+		owner.stopAnimation(owner.getIdleAnim());
 		
 		LivingEntity target = owner.getTarget();
 		boolean hasCharged = false;
