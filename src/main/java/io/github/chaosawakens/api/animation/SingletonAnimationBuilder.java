@@ -116,6 +116,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	private WrappedAnimationController<? extends IAnimatableEntity> targetController;
 	private final AnimationBuilder animBuilder;
 	private final String animName;
+	private double animSpeedMultiplier = 1.0D;
 	private ILoopType loopType = EDefaultLoopTypes.PLAY_ONCE;
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName) {
@@ -124,7 +125,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
-		
+
 		owner.getCachedAnimations().add(this);
 	}
 
@@ -135,7 +136,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.loopType = loopType;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName, loopType);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
-		
+
 		owner.getCachedAnimations().add(this);
 	}
 
@@ -145,13 +146,19 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addRepeatingAnimation(animName, loopReps);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
-		
+
 		owner.getCachedAnimations().add(this);
 	}
 
 	@Override
 	public SingletonAnimationBuilder setWrappedController(WrappedAnimationController<? extends IAnimatableEntity> targetWrappedController) {
 		this.targetController = targetWrappedController;
+		return this;
+	}
+
+	@Override
+	public SingletonAnimationBuilder setAnimSpeed(double animSpeedMultiplier) {
+		this.animSpeedMultiplier = animSpeedMultiplier;
 		return this;
 	}
 
@@ -164,7 +171,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public IAnimatableEntity getOwner() {
 		return owner;
 	}
-	
+
 	public void setLoopType(ILoopType loopType) {
 		this.loopType = loopType;
 	}
@@ -182,7 +189,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public boolean hasAnimationFinished() {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return false;
-		
+
 		return targetController.isAnimationFinished(this) || (isPlaying() && targetController.getAnimationProgressTicks() >= getWrappedAnimLength() && (targetController.getAnimationState() == ExpandedAnimationState.RUNNING || targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING));
 	}
 
@@ -190,12 +197,12 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public Animation getAnimation() {
 		return owner.getModel().getAnimation(animName, owner);
 	}
-	
+
 	@Override
 	public String getAnimationName() {
 		return animName;
 	}
-	
+
 	@Override
 	public ExpandedAnimationState getAnimationState() {
 		return targetController.getAnimationState();
@@ -210,7 +217,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public void playAnimation(boolean forceAnim) {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 1);
-		
+
 		if (forceAnim && !isPlaying()) {
 			targetController.getWrappedController().clearAnimationCache();
 			targetController.getWrappedController().markNeedsReload();
@@ -232,7 +239,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	public void stopAnimation() {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 1);
-		
+
 		targetController.getWrappedController().setAnimation(null);
 	}
 
@@ -244,5 +251,10 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public double getWrappedAnimLength() {
 		return getWrappedController().getAnimationLength();
+	}
+
+	@Override
+	public double getWrappedAnimSpeed() {
+		return animSpeedMultiplier;
 	}
 }

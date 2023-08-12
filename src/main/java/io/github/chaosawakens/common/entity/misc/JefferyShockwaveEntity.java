@@ -18,7 +18,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class JefferyShockwaveEntity extends AOEHitboxEntity implements IAnimatable, IAnimationTickable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<JefferyShockwaveEntity> mainController = new AnimationController<JefferyShockwaveEntity>(this, "jefferyshockwavemaincontroller", 4, this::mainPredicate);
+	private final AnimationController<JefferyShockwaveEntity> mainController = new AnimationController<JefferyShockwaveEntity>(this, "jefferyshockwavemaincontroller", 0, this::mainPredicate);
 	private static final AnimationBuilder EXPANSION_ANIM = new AnimationBuilder().addAnimation("Expand", EDefaultLoopTypes.PLAY_ONCE);
 	
 	public JefferyShockwaveEntity(EntityType<?> pType, World pLevel) {

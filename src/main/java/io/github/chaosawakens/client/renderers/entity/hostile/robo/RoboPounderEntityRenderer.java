@@ -36,6 +36,8 @@ public class RoboPounderEntityRenderer extends ExtendedGeoEntityRenderer<RoboPou
 
 	@Override
 	public void render(GeoModel model, RoboPounderEntity animatable, float partialTicks, RenderType type, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+
 		Optional<GeoBone> leftLeg = model.getBone("LeftLeg2");
 		Optional<GeoBone> rightLeg = model.getBone("RightLeg2");
 		Optional<GeoBone> leftHatch = model.getBone("LeftHatch");
@@ -201,9 +203,7 @@ public class RoboPounderEntityRenderer extends ExtendedGeoEntityRenderer<RoboPou
 						0.07D,
 						0);
 			}
-		}
-		
-		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		}		
 	}
 
 	@Override

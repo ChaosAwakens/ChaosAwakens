@@ -131,8 +131,8 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		if (ObjectUtil.performNullityChecks(false, rageRunPath, relevantLookPos)) {
 			ownerPathNav.moveTo(rageRunPath, 1);
-			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
 			
+			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
 			if (!rageRunPath.isDone()) rageRunPath.setNextNodeIndex(rageRunPath.getNodeCount() - 1);
 		}
 		
@@ -240,7 +240,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			owner.getNavigation().stop();
 			
 			if (!hasCharged) {
-				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRandom().nextInt(4)), 5, 4, 0.02);
+				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRandom().nextInt(8)), 5, 4, 0.035);
 				hasCharged = true;
 			}
 			

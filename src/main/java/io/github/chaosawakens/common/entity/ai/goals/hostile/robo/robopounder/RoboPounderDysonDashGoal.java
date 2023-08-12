@@ -55,7 +55,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 	
 	@Override
 	public void tick() {
-		BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+		BlockPosUtil.destroyCollidingBlocksWithOffset(owner, owner.getRandom().nextBoolean(), 0.7D, 0, 0.7D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 		
 		owner.getNavigation().stop();
 		LivingEntity target = owner.getTarget();
@@ -66,7 +66,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 		else EntityUtil.freezeEntityRotation(owner);
 		
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) EntityUtil.chargeTowards(owner, target, overshoot, overshoot, 0.19);
-				
+		
 		double reach = owner.getMeleeAttackReach(target);
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 		

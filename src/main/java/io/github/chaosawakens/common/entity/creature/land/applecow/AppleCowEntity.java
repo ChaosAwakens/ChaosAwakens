@@ -125,6 +125,7 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 			@Override
 			public void tick() {
 				super.tick();
+				
 				if (distanceToSqr(toAvoid) < 49.0D) setPanicking(true);
 				else setPanicking(false);
 			}

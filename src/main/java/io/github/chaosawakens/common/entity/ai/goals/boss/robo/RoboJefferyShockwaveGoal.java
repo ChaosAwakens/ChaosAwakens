@@ -88,17 +88,15 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 		if (shouldFreezeRotation || curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 		else if (owner.getTarget() != null) owner.getLookControl().setLookAt(owner.getTarget(), 30.0F, 30.0F);
 
-		if (isProgressive) {
-			if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
-				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 10, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
-				owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
-				
-				for (BlockPos curAffectedParticlePos : BlockPos.betweenClosed(negBlockRange, posBlockRange)) {
-					if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(curAffectedParticlePos)), curAffectedParticlePos.getX(), curAffectedParticlePos.getY(), curAffectedParticlePos.getZ(), 0, 1, 0, 20, 0.05D);
-				}
-				
-				if (jefferyShockwave != null) owner.level.addFreshEntity(jefferyShockwave);
+		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
+			CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 10, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
+			owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
+			
+			for (BlockPos curAffectedParticlePos : BlockPos.betweenClosed(negBlockRange, posBlockRange)) {
+				if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(curAffectedParticlePos)), curAffectedParticlePos.getX(), curAffectedParticlePos.getY(), curAffectedParticlePos.getZ(), 0, 1, 0, 20, 0.05D);
 			}
+			
+			if (jefferyShockwave != null) owner.level.addFreshEntity(jefferyShockwave);
 		}
 	}
 }

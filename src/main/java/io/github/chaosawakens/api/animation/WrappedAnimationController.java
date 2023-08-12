@@ -20,7 +20,8 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected double transitionLength;
 	protected double transitionProgress = 0;
 	protected double animationLength;
-	protected double animationProgress = 0;	
+	protected double animationProgress = 0;
+	protected double animSpeedMultiplier = 1.0D;
 	protected final AnimationController<E> controller;
 	protected MinecraftServer server;
 	
@@ -78,7 +79,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			this.animationState = ExpandedAnimationState.FINISHED;
 			return;
 		}
-					
+		
 		if (!getCurrentAnimation().animationName.equals(builder.getAnimationName()) || clearCache) {
 			builder.playAnimation(clearCache);
 			
@@ -86,9 +87,11 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			this.animationLength = builder.getAnimation().animationLength;
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.TRANSITIONING;
+			this.animSpeedMultiplier = builder.getWrappedAnimSpeed();
 			
 			this.currentAnimation = builder.getAnimation();
 			this.controller.setAnimation(builder.getBuilder());
+			this.controller.setAnimationSpeed(animSpeedMultiplier);
 		}
 	}
 	
@@ -105,12 +108,20 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public double getSyncedProgress() {
-		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0), (Entity) animatable);
-		return server == null ? 0 : Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0;
+		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0) * animSpeedMultiplier), (Entity) animatable);
+		return server == null ? 0 : (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0) * animSpeedMultiplier;
 	}
 	
 	public void updateAnimProgress(double animationProgressDelta) {
 		this.animationProgress += animationProgressDelta;
+	}
+	
+	public double getAnimSpeed() {
+		return animSpeedMultiplier;
+	}
+	
+	public void setAnimSpeed(double animSpeedMultiplier) {
+		this.animSpeedMultiplier = animSpeedMultiplier;
 	}
 	
 	public String getName() {
