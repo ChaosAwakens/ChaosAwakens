@@ -55,7 +55,7 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 	
 	@Override
 	public void tick() {
-		BlockPosUtil.destroyCollidingBlocksWithOffset(owner, owner.getRandom().nextBoolean(), 0.7D, 0, 0.7D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+		BlockPosUtil.destroyCollidingBlocksWithOffset(owner, owner.getRandom().nextBoolean(), 0.8D, 0, 0.8D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 		
 		owner.getNavigation().stop();
 		LivingEntity target = owner.getTarget();
