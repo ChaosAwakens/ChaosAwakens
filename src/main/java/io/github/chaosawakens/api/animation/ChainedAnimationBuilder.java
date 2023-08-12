@@ -428,7 +428,6 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public double getWrappedAnimSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return curAnim == null ? 1.0D : curAnim.getWrappedAnimSpeed();
 	}
 }

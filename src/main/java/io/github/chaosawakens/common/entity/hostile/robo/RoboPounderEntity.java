@@ -273,13 +273,13 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 	}
 
 	protected int getRageRunDeflectionPower() {
-		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return -6;
-		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return -7;
-		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return -7;
-		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return -8;
-		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return -9;
-		else if (getHealth() <= 20.0F) return -10;
-		else return -5;
+		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 6;
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 7;
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 7;
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return 8;
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return 9;
+		else if (getHealth() <= 20.0F) return 10;
+		else return 5;
 	}
 
 	@Override
@@ -327,7 +327,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 	}
 
 	private void deflectProjectiles(DamageSource hurtSource) {
-		EntityUtil.repelEntitiesOfClass(this, ProjectileEntity.class, getBbWidth(), getBbHeight(), -getRageRunDeflectionPower());
+		EntityUtil.repelEntitiesOfClass(this, ProjectileEntity.class, getBbWidth(), getBbHeight(), getRageRunDeflectionPower());
 	}
 
 	private void handleTaunting() {
