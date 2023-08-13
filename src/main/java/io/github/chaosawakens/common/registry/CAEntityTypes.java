@@ -33,6 +33,7 @@ import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CABoatEntity;
 import io.github.chaosawakens.common.entity.misc.CAFallingBlockEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.entity.misc.JefferyShockwaveEntity;
 import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.EmeraldGatorEntity;
@@ -366,6 +367,11 @@ public class CAEntityTypes {
 					.sized(0.5F, 0.5F).updateInterval(20).clientTrackingRange(20)
 					.noSummon()
 					.build(ChaosAwakens.prefix("aoe_hitbox").toString()));
+	public static final RegistryObject<EntityType<JefferyShockwaveEntity>> JEFFERY_SHOCKWAVE = ENTITY_TYPES.register("jeffery_shockwave",
+			() -> EntityType.Builder.<JefferyShockwaveEntity>of(JefferyShockwaveEntity::new, EntityClassification.MISC)
+					.sized(0.5F, 0.5F).updateInterval(20).clientTrackingRange(20)
+					.noSummon()
+					.build(ChaosAwakens.prefix("jeffery_shockwave").toString()));
 	
 
 	public static void registerSpawnPlacementTypes() {

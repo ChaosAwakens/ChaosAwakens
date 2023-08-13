@@ -1110,7 +1110,7 @@
 				}
 			}
 		},
-		"Normal AOE Attack": {
+		"Smash Attack": {
 			"animation_length": 3,
 			"bones": {
 				"LowerBody": {

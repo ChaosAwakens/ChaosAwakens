@@ -112,8 +112,10 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	@Override
 	protected void tickDeath() {
 		if (getDeathAnim() != null) {
+			DamageSource lastValidDamageSource = getLastDamageSource() == null ? DamageSource.GENERIC : getLastDamageSource();
+			
 			playAnimation(getDeathAnim(), false);
-			EntityUtil.handleAnimatableDeath(this, getLastDamageSource() == null ? DamageSource.GENERIC : getLastDamageSource());
+			EntityUtil.handleAnimatableDeath(this, lastValidDamageSource, (owner) -> dropAllDeathLoot(lastValidDamageSource));
 			
 			if (getDeathAnim().hasAnimationFinished()) {
 				remove();

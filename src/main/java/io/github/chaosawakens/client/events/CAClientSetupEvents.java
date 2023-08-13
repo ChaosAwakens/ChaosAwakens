@@ -31,6 +31,7 @@ import io.github.chaosawakens.client.renderers.entity.hostile.robo.RoboWarriorEn
 import io.github.chaosawakens.client.renderers.entity.misc.CABoatRenderer;
 import io.github.chaosawakens.client.renderers.entity.misc.CAEmptyRenderer;
 import io.github.chaosawakens.client.renderers.entity.misc.CAFallingBlockRenderer;
+import io.github.chaosawakens.client.renderers.entity.misc.JefferyShockwaveEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.misc.UltimateBobberProjectileRenderer;
 import io.github.chaosawakens.client.renderers.entity.neutral.land.dino.CrystalGatorEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.neutral.land.dino.DimetrodonEntityRenderer;
@@ -152,9 +153,9 @@ public class CAClientSetupEvents {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.FALLING_BLOCK.get(), CAFallingBlockRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SCREEN_SHAKE.get(), CAEmptyRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BASE_AOE_HITBOX.get(), CAEmptyRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.JEFFERY_SHOCKWAVE.get(), JefferyShockwaveEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LETTUCE_CHICKEN_EGG.get(), (manager) -> new SpriteRenderer<CALeafyChickenEggEntity>(manager, Minecraft.getInstance().getItemRenderer()));
 
-		
 		// BLOCKS
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM_PLANT.get(), RenderType.cutoutMipped());

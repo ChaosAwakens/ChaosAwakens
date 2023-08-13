@@ -28,22 +28,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 
 public class AnimatableAOEGoal extends Goal {
-	private final AnimatableMonsterEntity owner;
-	private Supplier<SingletonAnimationBuilder> aoeAnim;
-	private final byte attackId;
-	private final double actionPointTickStart;
-	private final double actionPointTickEnd;
-	private double aoeRange;
-	private final int amountThreshold;
-	private final int probability;
-	private final boolean shouldFreezeRotation;
-	private final boolean shouldAffectBlocks;
-	private final boolean isProgressive;
+	protected final AnimatableMonsterEntity owner;
+	protected Supplier<SingletonAnimationBuilder> aoeAnim;
+	protected final byte attackId;
+	protected final double actionPointTickStart;
+	protected final double actionPointTickEnd;
+	protected double aoeRange;
+	protected final int amountThreshold;
+	protected final int probability;
+	protected final boolean shouldFreezeRotation;
+	protected final boolean shouldAffectBlocks;
+	protected final boolean isProgressive;
 	@Nullable
-	private Predicate<AnimatableMonsterEntity> extraActivationConditions;
+	protected Predicate<AnimatableMonsterEntity> extraActivationConditions;
 	@Nullable
-	private Predicate<Block> blockAffectConditions;
-	private final int presetCooldown;
+	protected Predicate<Block> blockAffectConditions;
+	protected final int presetCooldown;
 	@Nullable
 	protected List<Supplier<? extends IAnimationBuilder>> animationsToPick;
 	protected int curCooldown;

@@ -85,7 +85,7 @@ public final class BlockPosUtil {
 	 * @return A list of {@link BlockPos}es affected by the destruction operation.
 	 */
 	public static ObjectArrayList<BlockPos> destroyCollidingBlocks(World targetWorld, AxisAlignedBB targetHitbox, boolean dropBlocks, @Nullable Predicate<Block> destructibilityPredicate) {
-		return destroyBlocksBetween(targetWorld, (int) Math.floor(targetHitbox.minX), (int) Math.floor(targetHitbox.minY), (int) Math.floor(targetHitbox.minZ), (int) Math.floor(targetHitbox.maxX), (int) Math.floor(targetHitbox.maxY), (int) Math.floor(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
+		return destroyBlocksBetween(targetWorld, (int) Math.ceil(targetHitbox.minX), (int) Math.ceil(targetHitbox.minY), (int) Math.ceil(targetHitbox.minZ), (int) Math.ceil(targetHitbox.maxX), (int) Math.ceil(targetHitbox.maxY), (int) Math.ceil(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
 	}
 	
 	/**
@@ -97,6 +97,21 @@ public final class BlockPosUtil {
 	 */
 	public static ObjectArrayList<BlockPos> destroyCollidingBlocks(Entity targetEntity, boolean dropBlocks, @Nullable Predicate<Block> destructibilityPredicate) {
 		return destroyCollidingBlocks(targetEntity.level, targetEntity.getBoundingBox(), dropBlocks, destructibilityPredicate);
+	}
+	
+	/**
+	 * Overloaded method for {@link #destroyCollidingBlocks(World, AxisAlignedBB, boolean, Predicate)} which allows for a specified 
+	 * offset.
+	 * @param targetEntity The entity to destroy blocks with which it collides.
+	 * @param dropBlocks Whether or not the destroyed blocks should be dropped.
+	 * @param destructibilityPredicate A predicate applied to a {@link Block}. Can be null.
+	 * @param xbOffset the amount of offset on the specified {@link LivingEntity}'s {@code minX} and {@code maxX}.
+	 * @param ybOffset the amount of offset on the specified {@link LivingEntity}'s {@code minY} and {@code maxY}.
+	 * @param zbOffset the amount of offset on the specified {@link LivingEntity}'s {@code minZ} and {@code maxZ}.
+	 * @return A list of {@link BlockPos}es affected by the destruction operation.
+	 */
+	public static ObjectArrayList<BlockPos> destroyCollidingBlocksWithOffset(Entity targetEntity, boolean dropBlocks, double xbOffset, double ybOffset, double zbOffset, @Nullable Predicate<Block> destructibilityPredicate) {
+		return destroyCollidingBlocks(targetEntity.level, targetEntity.getBoundingBox().inflate(xbOffset, ybOffset, zbOffset), dropBlocks, destructibilityPredicate);
 	}
 	
 	public static ObjectArrayList<BlockPos> detectWall(World targetWorld, LivingEntity entityToCompare, BlockPos originPos, double length, double depth, double height, boolean shouldBeFilled) {

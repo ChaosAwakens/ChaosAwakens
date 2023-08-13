@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.util;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -61,6 +62,23 @@ public final class EntityUtil {
 	public static <E extends Entity> List<E> getEntitiesAround(Entity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
 		Predicate<E> distPredicate = living -> living != user && (user.getTeam() != null && living.getTeam() != null ? !living.getTeam().equals(user.getTeam()) : living.isAlive()) && living.getClass() != user.getClass() && user.distanceTo(living) <= radius + living.getBbWidth() / 2F;
 		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), distPredicate);
+	}
+	
+	/**
+	 * Gets entities inside a certain bounding box, the base being around a specified user entity, and allows for specifying 
+	 * a certain radius to validate entities inside the bounding box as targets. This applies to all entities, as opposed to the other method,
+	 * which only applies to attackable entities
+	 * 
+	 * @param user user entity, base from which the bounding box will grow
+	 * @param entityClass the class of the entity the user should check for
+	 * @param dX the distance on the x axis in which the bounding box will grow
+	 * @param dY the distance on the y axis in which the bounding box will grow
+	 * @param dZ the distance on the z axis in which the bounding box will grow
+	 * @param radius the radius in which to validate entities that are already inside the bounding box
+	 * @return a list of entities within the valid specified distance inside the grown bounding box
+	 */
+	public static <E extends Entity> List<E> getEntitiesAroundNoPredicate(LivingEntity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
+		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ));
 	}
 
 	/**
@@ -352,24 +370,35 @@ public final class EntityUtil {
 	}
 	
 	/**
-	 * Repels {@link LivingEntity}s from a specified {@link LivingEntity}.
-	 * @param targetEntity The central {@link LivingEntity} to repel other entities from
+	 * Repels {@linkplain Entity Entities} from a specified {@link Entity}.
+	 * @param targetEntity The central {@link Entity} to repel other entities from
 	 * @param radius The horizontal radius of the repulsion effect
 	 * @param height The vertical radius of the repulsion effect
-	 * @param repulsionPower The power/speed at which entities will be repelled from the specified {@link LivingEntity} (clamped between {@code 0.01 - 10.0D}, with necessary negative conversions already done)
+	 * @param repulsionPower The power/speed at which entities will be repelled from the specified {@link Entity} (clamped between {@code 0.01 - 10.0D}, with necessary negative conversions already done)
 	 */
-	public static void repelEntities(LivingEntity targetEntity, double radius, double height, double repulsionPower) {
+	public static <E extends Entity> void repelEntitiesOfClass(Entity targetEntity, Class<E> entityClassToRepel, double radius, double height, double repulsionPower) {
 		if (targetEntity == null || targetEntity.noPhysics) return;
 
-		List<LivingEntity> potentialAffectedTargets = getAllEntitiesAround(targetEntity, radius, height, radius, radius + height);
+		List<E> potentialAffectedTargets = getEntitiesAround(targetEntity, entityClassToRepel, radius, height, radius, radius + height);
 
-		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
+		for (E potentialAffectedTarget : potentialAffectedTargets) {
 			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
 
 			double relAngleRadians = MathUtil.getRelativeAngleBetweenEntities(targetEntity, potentialAffectedTarget);
 			double clampedRepulsionSpeed = -MathHelper.clamp(repulsionPower, 0.01D, 10.0D);
 			potentialAffectedTarget.setDeltaMovement(clampedRepulsionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedRepulsionSpeed * Math.sin(relAngleRadians));
 		}
+	}
+	
+	/**
+	 * Repels {@link LivingEntity}s from a specified {@link LivingEntity}. Overloaded method from {@link #repelEntitiesOfClass(Entity, Class, double, double, double)}.
+	 * @param targetEntity The central {@link LivingEntity} to repel other entities from
+	 * @param radius The horizontal radius of the repulsion effect
+	 * @param height The vertical radius of the repulsion effect
+	 * @param repulsionPower The power/speed at which entities will be repelled from the specified {@link LivingEntity} (clamped between {@code 0.01 - 10.0D}, with necessary negative conversions already done)
+	 */
+	public static void repelEntities(LivingEntity targetEntity, double radius, double height, double repulsionPower) {
+		repelEntitiesOfClass(targetEntity, LivingEntity.class, radius, height, repulsionPower);
 	}
 	
 	/**
@@ -423,9 +452,11 @@ public final class EntityUtil {
 	 * @param targetAnimatable The animatable to invoke the {@code die} method onto
 	 * @param deathCause The cause of death used to determine things like death loot, returning due to {@link ForgeHooks#onLivingDeath(LivingEntity, DamageSource)}, 
 	 * etc.
+	 * @param extraProtectedDeathFunctions Any extra protected methods in the target living animatable (which may cause compilation 
+	 * errors for some reason if AT'd)
 	 */
 	@SuppressWarnings("deprecation")
-	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause) {
+	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause, Consumer<LivingEntity> extraProtectedDeathFunctions) {
 		if (targetAnimatable.getDeathAnim() == null || !(targetAnimatable instanceof LivingEntity || ForgeHooks.onLivingDeath((LivingEntity) targetAnimatable, deathCause))) return;
 
 		LivingEntity livingAnimatable = (LivingEntity) targetAnimatable;
@@ -447,7 +478,7 @@ public final class EntityUtil {
 
 					if (causeEntity != null) causeEntity.killed(curServerWorld, livingAnimatable);
 
-					livingAnimatable.dropAllDeathLoot(deathCause);
+					extraProtectedDeathFunctions.accept(livingAnimatable);
 					livingAnimatable.createWitherRose(killerEntity);
 				}
 				

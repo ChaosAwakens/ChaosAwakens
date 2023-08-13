@@ -5,6 +5,7 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
+import io.github.chaosawakens.common.entity.ai.goals.boss.robo.RoboJefferyShockwaveGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
@@ -121,8 +122,10 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 140D, 15.6D, 18.1D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
-	//	this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5));
+		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5, 3, 40));
+		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 14.5D, 40, (owner) -> getRandom().nextInt(35) == 0 && distanceTo(getTarget()) > getMeleeAttackReach(getTarget()) && MathUtil.isBetween(distanceTo(getTarget()), getMeleeAttackReach(getTarget()) + 1, getMeleeAttackReach(getTarget()) * 5)));
 	/*	this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 0.75D, 15.0D).setLandAction((affectedTarget) -> { 
 			affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
 			CAScreenShakeEntity.shakeScreen(level, position(), 80F, 0.2F, 34, 120);
@@ -132,7 +135,6 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, false));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 	}
 
 	@Override
@@ -179,7 +181,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 					
 					double targetAngle = (MathUtil.getAngleBetweenEntities(deathHitBox, target) + 90) * Math.PI / 180; //TODO Dist calc
 					double kbMultiplier = target instanceof PlayerEntity ? -5.7D : -2.7D;
-										
+					
 					target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + 0.7D, kbMultiplier * Math.sin(targetAngle));
 				});
 				

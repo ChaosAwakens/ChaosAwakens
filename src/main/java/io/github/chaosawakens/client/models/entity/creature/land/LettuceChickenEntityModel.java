@@ -4,7 +4,6 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.creature.land.LettuceChickenEntity;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.core.processor.IBone;
 
 public class LettuceChickenEntityModel extends ExtendedAnimatedTickingGeoModel<LettuceChickenEntity> {
 

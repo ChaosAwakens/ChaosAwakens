@@ -24,6 +24,12 @@ public interface IAnimationBuilder {
 	 * @return {@code this} (builder method).
 	 */
 	IAnimationBuilder setWrappedController(WrappedAnimationController<? extends IAnimatableEntity> targetWrappedController);
+	/**
+	 * Sets the animation speed multiplier for this {@code IAnimationBuilder} instance.
+	 * @param animSpeedMultiplier The animation speed multiplier.
+	 * @return {@code this} (builder method).
+	 */
+	IAnimationBuilder setAnimSpeed(double animSpeedMultiplier);
 	
 	/**
 	 * Gets the owner {@link IAnimatableEntity} of this {@code IAnimationBuilder} instance.
@@ -55,6 +61,11 @@ public interface IAnimationBuilder {
 	
 	double getWrappedAnimProgress();
 	double getWrappedAnimLength();
+	/**
+	 * Gets the animation's speed multiplier.
+	 * @return The animation's speed multiplier.
+	 */
+	double getWrappedAnimSpeed();
 	
 	/**
 	 * The main method which handles starting and playing an animation (client-side).

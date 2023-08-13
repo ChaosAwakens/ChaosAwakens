@@ -8,6 +8,7 @@ import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -40,15 +41,14 @@ public class CAClientMiscEvents {
 		if (CAConfigManager.MAIN_CLIENT.enableCameraShake.get()) {
 			float amp = 0F;
 
-			for (CAScreenShakeEntity shaker : IUtilityHelper.getEntitiesAroundNoPredicate(clientPlayer, CAScreenShakeEntity.class, 20, 20, 20, 20)) {
+			for (CAScreenShakeEntity shaker : EntityUtil.getEntitiesAroundNoPredicate(clientPlayer, CAScreenShakeEntity.class, 20, 20, 20, 20)) {
 				if (shaker.distanceTo(clientPlayer) < shaker.getRadius()) amp += shaker.getAmp(clientPlayer, Minecraft.getInstance().getFrameTime());
 			}
 
-			//Cap
 			if (amp > 1.0F) amp = 1.0F;
 
 			if (!Minecraft.getInstance().isPaused()) {
-				//Note to self: Don't use .random, and don't EVER leave this inside a loop. Seriously. -- Meme Man
+				// Note to self: Don't use .random, and don't EVER leave this inside a loop. Seriously. -- Meme Man
 				event.setPitch((float) (event.getPitch() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 3 + 2) * 25));
 				event.setYaw((float) (event.getYaw() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 5 + 1) * 25));
 				event.setRoll((float) (event.getRoll() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 4) * 25));

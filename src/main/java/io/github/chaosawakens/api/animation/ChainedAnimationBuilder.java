@@ -95,6 +95,11 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 		this.targetController = targetWrappedController;
 		return this;
 	}
+	
+	@Override
+	public ChainedAnimationBuilder setAnimSpeed(double animSpeedMultiplier) {
+		return this;
+	}
 
 	/**
 	 * Sets whether or not the chain in this {@code ChainedAnimationBuilder} instance should be shuffled.
@@ -419,5 +424,10 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 
 			animBuilder.getRawAnimationList().addAll(reorderedRawAnims);
 		}
+	}
+
+	@Override
+	public double getWrappedAnimSpeed() {
+		return curAnim == null ? 1.0D : curAnim.getWrappedAnimSpeed();
 	}
 }

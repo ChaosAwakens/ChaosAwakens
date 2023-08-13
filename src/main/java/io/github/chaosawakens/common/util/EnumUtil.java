@@ -32,6 +32,7 @@ public final class EnumUtil {
 		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
 
+	// Tiers
 	public enum CAItemTier implements IItemTier {
 		// Harvest Level, Max Uses, Efficiency, Attack Damage,
 		// Enchantability, Repair Material
@@ -296,6 +297,15 @@ public final class EnumUtil {
 		public String getName() {
 			return this.name;
 		}
+	}
+	
+	// AI
+	public enum GroundMovementOperation {
+		MOVE,
+		REVERSE,
+		STRAFE,
+		JUMP,
+		WAIT
 	}
 
 	// Config
