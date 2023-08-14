@@ -5,7 +5,6 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
-import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Blocks;
@@ -167,7 +166,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
     @Override
     public void addAdditionalSaveData(CompoundNBT nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putInt("GazelleType", this.getGazelleType());    }
+        nbt.putInt("GazelleType", getGazelleType());    }
 
     @Override
     public void readAdditionalSaveData(CompoundNBT nbt) {
@@ -230,9 +229,10 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	@Override
 	protected void handleBaseAnimations() {
 		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving())
+		if (getWalkAnim() != null && isMoving()) {
 			if (!isPanicking()) playAnimation(getWalkAnim(), false);
 			else playAnimation(runAnim, false);
+		}
 	}
 	
 	private class GazelleData extends AgeableData {
