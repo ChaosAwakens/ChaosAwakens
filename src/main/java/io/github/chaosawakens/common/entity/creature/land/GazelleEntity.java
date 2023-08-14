@@ -26,6 +26,7 @@ import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -50,6 +51,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<GazelleEntity>> gazelleControllers = new ObjectArrayList<WrappedAnimationController<GazelleEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> gazelleAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<GazelleEntity> mainController = createMainMappedController("gazellemaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
@@ -65,7 +67,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 12)
-				.add(Attributes.MOVEMENT_SPEED, 0.2D)
+				.add(Attributes.MOVEMENT_SPEED, 0.18D)
 				.add(Attributes.FOLLOW_RANGE, 14);
 	}
 
@@ -93,8 +95,33 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	protected void registerGoals() { //TODO Herd panic goal
 		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1.0D, 1));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.2D));
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<AnimatableMonsterEntity>(this, AnimatableMonsterEntity.class, 10, 0.0D, 2.0D));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.8D) {
+			@Override
+			public void start() {
+				super.start();
+				setPanicking(true);
+			}
+
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+		});
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 10, 0.0D, 2.0D) {
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+			
+			@Override
+			public void tick() {
+				super.tick();
+				if (distanceToSqr(toAvoid) < 49.0D) setPanicking(true);
+				else setPanicking(false);
+			}
+		});
 		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 2.0F));
 		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(2, new EatGrassGoal(this) {
@@ -113,12 +140,21 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(PANICKING, false);
 		this.entityData.define(TYPE_ID, 0);
 	}
 	
 	private int getRandomGazelleType(IWorld world) {
         return this.random.nextInt(6);
     }
+	
+	public boolean isPanicking() {
+		return this.entityData.get(PANICKING);
+	}
+
+	public void setPanicking(boolean panicking) {
+		this.entityData.set(PANICKING, panicking);
+	}
 	
 	public int getGazelleType() {
 		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 6);
@@ -189,6 +225,14 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return gazelleAnimations;
+	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving())
+			if (!isPanicking()) playAnimation(getWalkAnim(), false);
+			else playAnimation(runAnim, false);
 	}
 	
 	private class GazelleData extends AgeableData {

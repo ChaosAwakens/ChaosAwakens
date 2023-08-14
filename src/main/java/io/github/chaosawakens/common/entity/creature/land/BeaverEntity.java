@@ -86,7 +86,7 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
-		this.entityData.set(CHIPPING, false);
+		this.entityData.define(CHIPPING, false);
 	}
 	
 	public boolean getChipping() {
