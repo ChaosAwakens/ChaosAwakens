@@ -312,6 +312,15 @@ public final class EntityUtil {
 		}
 		return true;
 	}
+	
+	/**
+	 * Gets a rounded number from the target {@link Entity}'s horizontal {@linkplain Entity#getDeltaMovement() Delta Movement}.
+	 * @param targetEntity The target entity to get the rounded horizontal {@linkplain Entity#getDeltaMovement() Delta Movement} of
+	 * @return 0 if the target {@link Entity} is null, else returns the {@link Entity}'s the rounded horizontal {@linkplain Entity#getDeltaMovement() Delta Movement}
+	 */
+	public static double getCeiledHorizontalMovement(Entity targetEntity) {
+		return targetEntity == null ? 0 : Math.sqrt((targetEntity.getDeltaMovement().x * targetEntity.getDeltaMovement().x) + (targetEntity.getDeltaMovement().z * targetEntity.getDeltaMovement().z)) * 10;
+	}
 
 	/**
 	 * Disables a player's shields if the player is holding one.

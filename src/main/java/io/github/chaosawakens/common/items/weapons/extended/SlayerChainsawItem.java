@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.items.weapons.extended;
 
 import java.util.function.Supplier;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.items.base.CAAxeItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.block.BlockState;
@@ -38,26 +39,31 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISyncable {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final AnimationController<SlayerChainsawItem> mainController = new AnimationController<SlayerChainsawItem>(this, "slayerchainsawmaincontroller", 1, this::mainPredicate);
+	private final AnimationController<?> mainController = new AnimationController<SlayerChainsawItem>(this, "slayerchainsawmaincontroller", 1, this::mainPredicate);
 	private static final AnimationBuilder ACTIVATED_ANIM = new AnimationBuilder().addAnimation("Activated", EDefaultLoopTypes.LOOP);
 	private static final int CHAINSAW_LENGTH = 5;
 	private static final int CHAINSAW_WIDTH = 5;
 	private static final int CHAINSAW_HEIGHT = 48;
-	private static final String CONTROLLER_NAME = "popupcontroller";
-	private static final int ANIM = 0;
+	private static final String CONTROLLER_NAME = "slayerchainsawmaincontroller";
+	private static final int DEACTIVATED_ANIM_STATE = 0;
+	private static final int ACTIVATED_ANIM_STATE = 1;
 
 	public SlayerChainsawItem(CAItemTier pTier, Supplier<IntValue> configDmg, Properties pProperties) {
 		super(pTier, configDmg, -3F, 2.5D, pProperties);
 		GeckoLibNetwork.registerSyncable(this);
 	}
 	
+	private <I extends Item & IAnimatable> PlayState mainPredicate(AnimationEvent<I> event) {
+		return event.getController().getAnimationState().equals(AnimationState.Stopped) ? PlayState.STOP : PlayState.CONTINUE;
+	}
+
 	public boolean isActivated(ItemStack chainsawStack) {
 		return !chainsawStack.isEmpty() && chainsawStack.hasTag() && chainsawStack.getTag().contains("activated") && chainsawStack.getTag().getBoolean("activated");
 	}
-	
+
 	public void setActivated(ItemStack chainsawStack, boolean activated) {
 		if (!chainsawStack.hasTag() || chainsawStack.isEmpty()) return;
-		
+
 		if (!chainsawStack.getTag().contains("activated")) {
 			CompoundNBT activationNBT = chainsawStack.getOrCreateTag();
 			activationNBT.putBoolean("activated", activated);
@@ -67,7 +73,7 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 	@Override
 	public boolean hurtEnemy(ItemStack targetStack, LivingEntity target, LivingEntity attacker) {
 		if (isActivated(targetStack)) {
-			if (target.getEntity().getType().getRegistryName().getPath().endsWith("_ent") && !target.level.isClientSide) target.hurt(DamageSource.GENERIC, (getActualAttackDamage().get().get() * 2));
+			if (target.getEntity().getType().getRegistryName().getPath().endsWith("_ent") && !target.level.isClientSide) target.hurt(DamageSource.mobAttack(attacker), (getActualAttackDamage().get().get() * 2));
 			targetStack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
 		return super.hurtEnemy(targetStack, target, attacker);
@@ -92,22 +98,12 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 		return super.mineBlock(targetStack, curWorld, targetState, targetPos, miningEntity);
 	}
 
-	private <I extends Item & IAnimatable> PlayState mainPredicate(AnimationEvent<I> event) {
-		final ItemStack chainsawStack  = getDefaultInstance();
-		
-		if (isActivated(chainsawStack)) {
-			event.getController().setAnimation(ACTIVATED_ANIM);
-			return PlayState.CONTINUE;
-		}
-		return PlayState.STOP;
-	}
-
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		handleChainsawBehaviour(world, player, hand);
 		return super.use(world, player, hand);
 	}
-	
+
 	@Override
 	public ActionResultType useOn(ItemUseContext ctx) {
 		handleChainsawBehaviour(ctx.getLevel(), ctx.getPlayer(), ctx.getHand());
@@ -119,33 +115,38 @@ public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISynca
 		handleChainsawBehaviour(ctx.getLevel(), ctx.getPlayer(), ctx.getHand());
 		return super.onItemUseFirst(targetStack, ctx);
 	}
-	
+
 	private void handleChainsawBehaviour(World targetWorld, PlayerEntity ownerPlayer, Hand curHand) {
 		final ItemStack targetStack = ownerPlayer.getItemInHand(curHand);
-		
+
 		if (!targetWorld.isClientSide) {
 			if (!isActivated(targetStack)) setActivated(targetStack, true);
 			else setActivated(targetStack, false);
-			
-			if (isActivated(targetStack)) {
-				final int id = GeckoLibUtil.guaranteeIDForStack(targetStack, (ServerWorld) targetWorld);
-				final PacketTarget trackingTarget = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> ownerPlayer);
-				GeckoLibNetwork.syncAnimation(trackingTarget, this, id, ANIM);
-			}
+
+			final int id = GeckoLibUtil.guaranteeIDForStack(targetStack, (ServerWorld) targetWorld);
+			final PacketTarget trackingTarget = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> ownerPlayer);
+
+			if (isActivated(targetStack)) GeckoLibNetwork.syncAnimation(trackingTarget, this, id, ACTIVATED_ANIM_STATE);
+			else GeckoLibNetwork.syncAnimation(trackingTarget, this, id, DEACTIVATED_ANIM_STATE);
 		}
+		
+		ChaosAwakens.debug("ACTIVATED", isActivated(targetStack));
 	}
 
 	@Override
 	public void onAnimationSync(int id, int state) {
-		if (state == ANIM) {
-			final AnimationController<?> targetController = GeckoLibUtil.getControllerForID(factory, id, CONTROLLER_NAME);
-			assert targetController != null;
-			
-			if (targetController != null) {
-				if (targetController.getAnimationState() == AnimationState.Stopped) {
-					targetController.markNeedsReload();
-					targetController.setAnimation(ACTIVATED_ANIM);
-				}
+		AnimationController<?> targetController = GeckoLibUtil.getControllerForID(factory, id, CONTROLLER_NAME);
+		
+		if (targetController != null) {
+			switch (state) {
+			default: break;
+			case ACTIVATED_ANIM_STATE:
+				targetController.markNeedsReload();
+				targetController.setAnimation(ACTIVATED_ANIM);
+			break;
+			case DEACTIVATED_ANIM_STATE:
+				targetController.setAnimation(null);
+			break;
 			}
 		}
 	}

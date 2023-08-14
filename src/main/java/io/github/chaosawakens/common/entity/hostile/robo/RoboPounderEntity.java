@@ -309,7 +309,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 	}
 
 	private void handleRageRunCollision() {
-		BlockPosUtil.destroyCollidingBlocks(this, getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+		BlockPosUtil.destroyCollidingBlocksWithOffset(this, getRandom().nextBoolean(), 0.7, 0.5, 0.7, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 	}
 
 	public void setRageRunAttributes() {

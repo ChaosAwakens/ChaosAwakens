@@ -49,8 +49,8 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * <tr>
  * 	 <td>Animation Length (Geckolib)</td>
  * 	 <td>Present</td>
- * 	 <td>Present</td>
- * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+ * 	 <td>Absent</td>
+ * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
  * </tr>
  * 
  * <tr>
