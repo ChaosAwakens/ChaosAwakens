@@ -65,9 +65,9 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
-				.add(Attributes.MAX_HEALTH, 12)
-				.add(Attributes.MOVEMENT_SPEED, 0.18D)
-				.add(Attributes.FOLLOW_RANGE, 14);
+				.add(Attributes.MAX_HEALTH, 12.0D)
+				.add(Attributes.MOVEMENT_SPEED, 0.2D)
+				.add(Attributes.FOLLOW_RANGE, 14.0D);
 	}
 
 	@Override
@@ -89,12 +89,12 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
 	}
-	
+
 	@Override
 	protected void registerGoals() { //TODO Herd panic goal
 		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1.0D, 1));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.8D) {
+		this.goalSelector.addGoal(1, new PanicGoal(this, 2.5D) {
 			@Override
 			public void start() {
 				super.start();
@@ -107,13 +107,13 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 				setPanicking(false);
 			}
 		});
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 10, 0.0D, 2.0D) {
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.0D, 2.5D) {
 			@Override
 			public void stop() {
 				super.stop();
 				setPanicking(false);
 			}
-			
+
 			@Override
 			public void tick() {
 				super.tick();
@@ -127,7 +127,12 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 			@Override
 			public void start() {
 				super.start();
-				playAnimation(grazeAnim, false);
+				playAnimation(grazeAnim, true);
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return !grazeAnim.hasAnimationFinished();
 			}
 		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
@@ -135,18 +140,18 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 		this.goalSelector.addGoal(3, new TemptGoal(this, 0.2D, false, FOOD_ITEMS));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 	}
-	
+
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(PANICKING, false);
 		this.entityData.define(TYPE_ID, 0);
 	}
-	
+
 	private int getRandomGazelleType(IWorld world) {
-        return this.random.nextInt(6);
-    }
-	
+		return this.random.nextInt(6);
+	}
+
 	public boolean isPanicking() {
 		return this.entityData.get(PANICKING);
 	}
@@ -154,25 +159,26 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	public void setPanicking(boolean panicking) {
 		this.entityData.set(PANICKING, panicking);
 	}
-	
+
 	public int getGazelleType() {
 		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 6);
 	}
 
-    public void setGazelleType(int type) {
-        this.entityData.set(TYPE_ID, type);
-    }
-    
-    @Override
-    public void addAdditionalSaveData(CompoundNBT nbt) {
-        super.addAdditionalSaveData(nbt);
-        nbt.putInt("GazelleType", getGazelleType());    }
+	public void setGazelleType(int type) {
+		this.entityData.set(TYPE_ID, type);
+	}
 
-    @Override
-    public void readAdditionalSaveData(CompoundNBT nbt) {
-        super.readAdditionalSaveData(nbt);
-        setGazelleType(nbt.getInt("GazelleType"));
-    }
+	@Override
+	public void addAdditionalSaveData(CompoundNBT nbt) {
+		super.addAdditionalSaveData(nbt);
+		nbt.putInt("GazelleType", getGazelleType());
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundNBT nbt) {
+		super.readAdditionalSaveData(nbt);
+		setGazelleType(nbt.getInt("GazelleType"));
+	}
 
 	@Override
 	public SingletonAnimationBuilder getIdleAnim() {
@@ -193,14 +199,14 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	public boolean isFood(ItemStack pStack) {
 		return FOOD_ITEMS.test(pStack);
 	}
-	
+
 	@Override
 	public ILivingEntityData finalizeSpawn(IServerWorld pLevel, DifficultyInstance pDifficulty, SpawnReason pReason, ILivingEntityData pSpawnData, CompoundNBT pDataTag) {
 		int randGazelleType = getRandomGazelleType(pLevel);
-		
+
 		if (pSpawnData instanceof GazelleData) randGazelleType = ((GazelleData) pSpawnData).gazelletype;
 		else pSpawnData = new GazelleData(randGazelleType);
-		
+
 		setGazelleType(randGazelleType);
 		return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
 	}
@@ -214,27 +220,25 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 
 		return offspring;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public ObjectArrayList<WrappedAnimationController<GazelleEntity>> getWrappedControllers() {
 		return gazelleControllers;
 	}
-	
+
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return gazelleAnimations;
 	}
-	
+
 	@Override
 	protected void handleBaseAnimations() {
 		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving()) {
-			if (!isPanicking()) playAnimation(getWalkAnim(), false);
-			else playAnimation(runAnim, false);
-		}
+		if (getWalkAnim() != null && isMoving() && isOnGround() && !isPanicking()) playAnimation(getWalkAnim(), false);
+		if (isMoving() && isOnGround() && isPanicking()) playAnimation(runAnim, false);
 	}
-	
+
 	private class GazelleData extends AgeableData {
 		public final int gazelletype;
 

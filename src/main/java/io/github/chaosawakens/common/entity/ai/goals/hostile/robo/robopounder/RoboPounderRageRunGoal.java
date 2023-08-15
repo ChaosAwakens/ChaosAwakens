@@ -88,6 +88,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	@Override
 	public void start() {
 		owner.setAttackID(rageRunAttackId);
+		owner.setRageRunning(true);
 		owner.getNavigation().stop();
 		owner.setRageRunAttributes();
 		owner.playAnimation(rageBeginAnim.get(), true);
@@ -229,13 +230,11 @@ public class RoboPounderRageRunGoal extends Goal {
 			}
 		}
 		
-		if (rageRunAnim.get().isPlaying()) {
-			if (!owner.isRageRunning()) owner.setRageRunning(true);
-			
+		if (rageRunAnim.get().isPlaying()) {			
 			createRageRunPath();
 			affectTargets();
 			handleRageCrash();
-		} else if (!rageRunAnim.get().isPlaying() && owner.isRageRunning()) owner.setRageRunning(false);
+		}
 		
 		if (rageCooldownAnim.get().isPlaying()) {
 			owner.getNavigation().stop();

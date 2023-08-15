@@ -483,6 +483,17 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), true);
 		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
 		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
+		
+		double attackSpeedMult = getHealth() <= 50.0F ? 1.25D : 1.0D;
+		
+		leftPunchAnim.setAnimSpeed(attackSpeedMult);
+		rightPunchAnim.setAnimSpeed(attackSpeedMult);
+		leftSwingAnim.setAnimSpeed(attackSpeedMult);
+		rightSwingAnim.setAnimSpeed(attackSpeedMult);
+		leftStompAnim.setAnimSpeed(attackSpeedMult);
+		rightStompAnim.setAnimSpeed(attackSpeedMult);
+		groundSlamAnim.setAnimSpeed(attackSpeedMult);
+		dashAttackAnim.setAnimSpeed(attackSpeedMult);
 	}
 
 	@SuppressWarnings("unchecked")
