@@ -426,7 +426,7 @@ public final class EntityUtil {
 		double targetZ = Math.min(Math.sin(relativeAngle) * (hitDistanceSqr + overshootAmount), Math.sin(relativeAngle) * (hitDistanceSqr + chargeThreshold));
 		
 		final BlockPos targetPos = new BlockPos(attackingEntity.getX() + targetX, attackingEntity.getY(), attackingEntity.getZ() + targetZ).immutable();
-		Vector3d chargeVec = new Vector3d(targetPos.getX() - attackingEntity.getX(), 0, targetPos.getZ() - attackingEntity.getZ());
+		Vector3d chargeVec = new Vector3d(targetPos.getX() - attackingEntity.getX(), attackingEntity.getDeltaMovement().y, targetPos.getZ() - attackingEntity.getZ());
 		
 		attackingEntity.setDeltaMovement(chargeVec.scale(Math.min(chargePercentageMod, 1)));
 		attackingEntity.refreshDimensions();

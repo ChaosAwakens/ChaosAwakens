@@ -32,14 +32,14 @@ public class CATreasure {
 	public static final CATreasure ENT_TREE_RED_MUSHROOM_LOOT = new CATreasure("ent_tree/red_mushroom_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/red_mushroom_loot"}} 1
 	public static final CATreasure ENT_TREE_GINKGO_LOOT = new CATreasure("ent_tree/ginkgo_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/ginkgo_loot"}} 1
 	public static final CATreasure WASP_DUNGEON_LOOT = new CATreasure("wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
-	public static final CATreasure MINING_WASP_DUNGEON_LOOT = new CATreasure("mining_wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}} 1
-
+	public static final CATreasure MINING_WASP_DUNGEON_LOOT = new CATreasure("mining_wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}} 
+	
 	private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
 	public static LootFunctionType ENCHANT;
 	public final ResourceLocation lootTable;
 
 	private CATreasure(String path) {
-		lootTable = ChaosAwakens.prefix(String.format("chests/%s", path));
+		this.lootTable = ChaosAwakens.prefix(String.format("chests/%s", path));
 	}
 
 	public static void init() {

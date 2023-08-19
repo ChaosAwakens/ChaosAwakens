@@ -277,7 +277,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.tick();
 		
 		updateAttackCooldown();
-		setMoving(!isStuck() && !jumping);
+		setMoving(!isStuck());
 		handleBaseAnimations();
 	}
 	

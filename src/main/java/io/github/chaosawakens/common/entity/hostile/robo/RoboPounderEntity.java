@@ -92,7 +92,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.25D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 360.0D)
 				.add(Attributes.ATTACK_DAMAGE, 20)
-				.add(Attributes.ATTACK_KNOCKBACK, 15)
+				.add(Attributes.ATTACK_KNOCKBACK, 10)
 				.add(Attributes.FOLLOW_RANGE, 60);
 	}
 
@@ -231,8 +231,18 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		else if (getHealth() <= 20.0F) return MathHelper.nextInt(random, 100, 200);
 		else return MathHelper.nextInt(random, 350, 700);
 	}
+	
+	public int getRageRunSlideOffset() {
+		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return MathHelper.nextInt(random, 4, 8);
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return MathHelper.nextInt(random, 4, 9);
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return MathHelper.nextInt(random, 4, 9);
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return MathHelper.nextInt(random, 4, 10);
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return MathHelper.nextInt(random, 5, 10);
+		else if (getHealth() <= 20.0F) return MathHelper.nextInt(random, 5, 10);
+		else return MathHelper.nextInt(random, 6, 12);
+	}
 
-	protected double getRageRunSpeed() {
+	public double getRageRunSpeed() {
 		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 0.56D;
 		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 0.58D;
 		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 0.6D;
@@ -242,7 +252,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		else return 0.55D;
 	}
 
-	protected double getRageRunAttackDamage() {
+	public double getRageRunAttackDamage() {
 		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 26.0D;
 		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 27.0D;
 		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 28.0D;
@@ -252,7 +262,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		else return 25.0D;
 	}
 
-	protected double getRageRunArmor() {
+	public double getRageRunArmor() {
 		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 24.0D;
 		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 25.0D;
 		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 26.0D;
@@ -262,7 +272,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		else return 22.0D;
 	}
 
-	protected double getRageRunArmorToughness() {
+	public double getRageRunArmorToughness() {
 		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 8.0D;
 		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 9.0D;
 		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 9.0D;
@@ -272,7 +282,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		else return 7.0D;
 	}
 
-	protected int getRageRunDeflectionPower() {
+	public int getRageRunDeflectionPower() {
 		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return 6;
 		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return 7;
 		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return 7;
@@ -309,7 +319,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	private void handleRageRunCollision() {
-		BlockPosUtil.destroyCollidingBlocks(this, getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+		BlockPosUtil.destroyCollidingBlocksWithOffset(this, getRandom().nextBoolean(), 0.05D, 0, 0.05D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 	}
 
 	public void setRageRunAttributes() {

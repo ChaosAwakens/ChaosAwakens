@@ -69,6 +69,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
+		if (!attackController.getCurrentAnimation().animationName.equalsIgnoreCase("None") && !isDeadOrDying()) return PlayState.STOP;
+		
 		if (isAttacking()) {
 			playAnimation(idleAnim, true);
 			return PlayState.CONTINUE;
@@ -97,7 +99,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public int animationInterval() {
-		return 3;
+		return 1;
 	}
 
 	@Override

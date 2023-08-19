@@ -173,7 +173,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		boolean lowCrash = false;
 		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ));
 		
-		if (owner.horizontalCollision) {
+		if (owner.horizontalCollision) { //TODO Move rage crash logic to dataparams and stuff
 			for (BlockPos detectedPos : BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ))) {
 				BlockState detectedState = owner.level.getBlockState(detectedPos);
 				
@@ -241,7 +241,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			owner.getNavigation().stop();
 			
 			if (!hasCharged) {
-				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRandom().nextInt(8)), 5, 4, 0.035);
+				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRageRunSlideOffset()), 5, 4, 0.035);
 				hasCharged = true;
 			}
 			
