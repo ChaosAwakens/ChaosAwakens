@@ -275,7 +275,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	@SuppressWarnings("unchecked")
-	default <E extends Entity> IAnimatableModel<E> getModel() { //TODO Dedicated server crash fix
+	default <E extends Entity> IAnimatableModel<E> getModel() {
 		if (!FMLEnvironment.dist.equals(Dist.CLIENT)) return null;
 		return (IAnimatableModel<E>) AnimationUtils.getGeoModelForEntity((E) this);
 	}

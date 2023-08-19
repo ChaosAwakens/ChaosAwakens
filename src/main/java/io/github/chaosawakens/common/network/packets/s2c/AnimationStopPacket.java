@@ -55,7 +55,7 @@ public class AnimationStopPacket implements ICAPacket {
 					
 					targetAnimatable.getControllerWrapperByName(controllerName).stopAnimation(targetAnim);
 					targetAnimatable.stopAnimation(targetAnim); 
-				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationStopPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
+				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationStopPacket for target entity of type {}, but the target entity class does not implement IAnimatableEntity!", target.getClass().getSimpleName());
 			});
 		});
 		

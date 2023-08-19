@@ -24,7 +24,6 @@ public abstract class NoiseChunkGeneratorMixin {
 	@Final
 	@Mutable
 	public static Codec<NoiseChunkGenerator> CODEC;
-
 	@Unique
 	private static long generationSeed = 0;
 

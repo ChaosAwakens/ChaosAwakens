@@ -61,12 +61,12 @@ public class CritterCageItem extends Item {
 					target.remove(true);
 					return ActionResultType.SUCCESS;
 				} else return ActionResultType.FAIL;
+			} else {
+			  	if (!playerOwner.inventory.add(filledStack)) playerOwner.drop(filledStack, false, true);
+			  	targetEmptyStack.shrink(1);
+			  	target.remove(true);
+				return ActionResultType.SUCCESS;
 			}
-			
-		  	if (!playerOwner.inventory.add(filledStack)) playerOwner.drop(filledStack, false, true);
-		  	targetEmptyStack.shrink(1);
-		  	target.remove(true);
-			return ActionResultType.SUCCESS;
 		} else return ActionResultType.FAIL;
 	}
 	

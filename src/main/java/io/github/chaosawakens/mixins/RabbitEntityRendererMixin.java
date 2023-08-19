@@ -22,6 +22,7 @@ public abstract class RabbitEntityRendererMixin {
 	@Inject(method = "getTextureLocation(Lnet/minecraft/entity/passive/RabbitEntity;)Lnet/minecraft/util/ResourceLocation;", at = @At("HEAD"), cancellable = true)
 	private void chaosawakens$getTextureLocation(RabbitEntity rabbitEntity, CallbackInfoReturnable<ResourceLocation> cir) {
 		String formattedName = TextFormatting.stripFormatting(rabbitEntity.getName().getString());
-		if (formattedName.equals("Oreo")) cir.setReturnValue(RABBIT_OREO_LOCATION);
+		
+		if (formattedName.equalsIgnoreCase("Oreo")) cir.setReturnValue(RABBIT_OREO_LOCATION);
 	}
 }

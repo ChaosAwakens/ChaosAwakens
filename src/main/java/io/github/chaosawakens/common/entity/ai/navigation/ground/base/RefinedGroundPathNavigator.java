@@ -9,5 +9,14 @@ public class RefinedGroundPathNavigator extends GroundPathNavigator {
 	public RefinedGroundPathNavigator(MobEntity owner, World curWorld) {
 		super(owner, curWorld);
 	}
-
+	
+	@Override
+	protected void followThePath() {
+		super.followThePath();
+	}
+	
+	@Override
+	public void tick() {
+		super.tick();
+	}
 }

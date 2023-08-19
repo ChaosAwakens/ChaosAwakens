@@ -50,7 +50,7 @@ public class AnimationFunctionalProgressPacket implements ICAPacket {
 					WrappedAnimationController<? extends IAnimatableEntity> targetWrappedController = targetAnimatable.getControllerWrapperByName(wrappedControllerName);
 					
 					if (targetWrappedController != null) targetWrappedController.updateAnimProgress(updatedClientProgressTicks);
-				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationFunctionalProgressPacket for target entity of type " + target.getClass().getSimpleName() + ", but the target entity class does not implement IAnimatableEntity!");
+				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationFunctionalProgressPacket for target entity of type {}, but the target entity class does not implement IAnimatableEntity!", target.getClass().getSimpleName());
 			});
 		});
 		

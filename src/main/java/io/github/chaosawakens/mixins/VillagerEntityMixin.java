@@ -21,12 +21,10 @@ public abstract class VillagerEntityMixin {
 	
 	@Inject(method = "Lnet/minecraft/entity/merchant/villager/VillagerEntity;updateSpecialPrices(Lnet/minecraft/entity/player/PlayerEntity;)V", at = @At("HEAD"), cancellable = true)
 	private void chaosawakens$updateSpecialPrices(PlayerEntity player, CallbackInfo info) {
-		VillagerEntity villager = (VillagerEntity) (Object) this;		
-		//TODO make this armor also affect player rep once we get a better understanding of how the system works --Meme Man
-	//	int rep = villager.getPlayerReputation(player);
+		VillagerEntity villager = (VillagerEntity) (Object) this;
 		
 		if (CAConfigManager.MAIN_COMMON.enableEmeraldArmorSetBonus.get()) {					
-			if (EntityUtil.isFullArmorSet(player, CAItems.EMERALD_HELMET.get(), CAItems.EMERALD_CHESTPLATE.get(), CAItems.EMERALD_LEGGINGS.get(), CAItems.EMERALD_BOOTS.get())) {			
+			if (EntityUtil.isFullArmorSet(player, CAItems.EMERALD_HELMET.get(), CAItems.EMERALD_CHESTPLATE.get(), CAItems.EMERALD_LEGGINGS.get(), CAItems.EMERALD_BOOTS.get()) && villager.getTradingPlayer() != null && villager.getTradingPlayer().getUUID().equals(player.getUUID())) {			
 				for (MerchantOffer offer : villager.getOffers()) {			
 					//4 = ~50% Discount
 					double amp = 0.3D + 0.0625D * CAConfigManager.MAIN_COMMON.emeraldArmorDiscountMultiplier.get();

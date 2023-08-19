@@ -44,7 +44,7 @@ public class AnimationTriggerPacket implements ICAPacket {
 		buf.writeBoolean(clearCache);
 	}
 	
-	private static EDefaultLoopTypes utfToLoopEnum(String name) {
+	private static EDefaultLoopTypes utfToLoopEnum(String name) { // Patch
 		if (name.equals("LOOP")) return EDefaultLoopTypes.LOOP;
 		else if (name.equals("HOLD_ON_LAST_FRAME")) return EDefaultLoopTypes.HOLD_ON_LAST_FRAME;
 		else return EDefaultLoopTypes.PLAY_ONCE;

@@ -6,7 +6,6 @@
 		"AttachedStemBlockMixin",
 		"CooldownTrackerMixin",
 		"CropsBlockMixin",
-		"IForgeBlockMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"NoiseChunkGeneratorAccessor",

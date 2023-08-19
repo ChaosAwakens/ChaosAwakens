@@ -4,6 +4,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.common.entity.ai.goals.passive.land.AnimatableEatGrassGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -17,7 +18,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.BreedGoal;
-import net.minecraft.entity.ai.goal.EatGrassGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
@@ -123,19 +123,9 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 		});
 		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 2.0F));
 		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
-		this.goalSelector.addGoal(2, new EatGrassGoal(this) {
-			@Override
-			public void start() {
-				super.start();
-				playAnimation(grazeAnim, true);
-			}
-
-			@Override
-			public boolean canContinueToUse() {
-				return !grazeAnim.hasAnimationFinished();
-			}
-		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(2, new AnimatableEatGrassGoal(this, () -> grazeAnim, 15));
+		this.goalSelector.addGoal(2, new AnimatableEatGrassGoal(this, () -> grazeAnim, 30));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 0.2D, FOOD_ITEMS, false));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 0.2D, false, FOOD_ITEMS));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
@@ -220,6 +210,13 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 
 		return offspring;
 	}
+	
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && isOnGround() && !isPanicking()) playAnimation(getWalkAnim(), false);
+		if (isMoving() && isOnGround() && isPanicking()) playAnimation(runAnim, false);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -230,13 +227,6 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return gazelleAnimations;
-	}
-
-	@Override
-	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving() && isOnGround() && !isPanicking()) playAnimation(getWalkAnim(), false);
-		if (isMoving() && isOnGround() && isPanicking()) playAnimation(runAnim, false);
 	}
 
 	private class GazelleData extends AgeableData {

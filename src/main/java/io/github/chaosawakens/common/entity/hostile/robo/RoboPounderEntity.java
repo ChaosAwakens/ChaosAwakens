@@ -44,7 +44,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry advanced attack logic over to aiStep()
+public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<WrappedAnimationController<RoboPounderEntity>>(2);
 	private final ObjectArrayList<IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>(1);
@@ -309,7 +309,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity { //TODO Carry ad
 	}
 
 	private void handleRageRunCollision() {
-		BlockPosUtil.destroyCollidingBlocksWithOffset(this, getRandom().nextBoolean(), 0.7, 0.5, 0.7, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+		BlockPosUtil.destroyCollidingBlocks(this, getRandom().nextBoolean(), (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 	}
 
 	public void setRageRunAttributes() {

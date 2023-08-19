@@ -85,7 +85,7 @@ public final class BlockPosUtil {
 	 * @return A list of {@link BlockPos}es affected by the destruction operation.
 	 */
 	public static ObjectArrayList<BlockPos> destroyCollidingBlocks(World targetWorld, AxisAlignedBB targetHitbox, boolean dropBlocks, @Nullable Predicate<Block> destructibilityPredicate) {
-		return destroyBlocksBetween(targetWorld, (int) Math.ceil(targetHitbox.minX), (int) Math.ceil(targetHitbox.minY), (int) Math.ceil(targetHitbox.minZ), (int) Math.ceil(targetHitbox.maxX), (int) Math.ceil(targetHitbox.maxY), (int) Math.ceil(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
+		return destroyBlocksBetween(targetWorld, (int) Math.floor(targetHitbox.minX), (int) Math.floor(targetHitbox.minY), (int) Math.floor(targetHitbox.minZ), (int) Math.ceil(targetHitbox.maxX), (int) Math.ceil(targetHitbox.maxY), (int) Math.ceil(targetHitbox.maxZ), dropBlocks, destructibilityPredicate);
 	}
 	
 	/**
@@ -152,5 +152,16 @@ public final class BlockPosUtil {
 		final BlockPos targetOffsetPos = new BlockPos(originEntity.getX() + targetX, originEntity.getY(), originEntity.getZ() + targetZ).immutable();
 		
 		return targetOffsetPos;
+	}
+	
+	/**
+	 * Quick shortcut method to run a validation check against a {@link BlockPos}' {@link BlockState}.
+	 * @param targetWorld The world from which to get the target {@link BlockState}.
+	 * @param targetPos The target position to validate against the state predicate.
+	 * @param validityCheck The check to run against the specified {@link BlockPos}.
+	 * @return {@code true} if the {@code validityCheck} is successful, else returns false.
+	 */
+	public static boolean checkValidPos(World targetWorld, BlockPos targetPos, Predicate<BlockState> validityCheck) {
+		return validityCheck.test(targetWorld.getBlockState(targetPos));
 	}
 }

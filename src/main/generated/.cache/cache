@@ -5730,7 +5730,7 @@ a7b59ddd1ba9a3afb5bd726044afb38db7b3dd80 data/minecraft/tags/blocks/small_flower
 f935c3c9df706354342c8a817debfb668cf57219 data/minecraft/tags/blocks/standing_signs.json
 c561e32eef4d4a140d41f48fbb91ba90af3a2df9 data/minecraft/tags/blocks/valid_spawn.json
 318f3d9ee07452d6bb62f1252cc5387b1977aef9 data/minecraft/tags/blocks/wall_signs.json
-84ff63dfd5e4e231c2db65fbbf8c6e54aa3a763f data/minecraft/tags/blocks/walls.json
+eda7d44d62b9173c5eaac8319200075fcd6a8de1 data/minecraft/tags/blocks/walls.json
 1ec3a3798dec480a6a02cafacb00cc24aad9b88d data/minecraft/tags/blocks/wooden_buttons.json
 33c29c3b0c6f2f531cee576b9b23260d97779df4 data/minecraft/tags/blocks/wooden_fences.json
 9a9a406a7b558df0a5873c5443fdf36d2beeb02d data/minecraft/tags/blocks/wooden_pressure_plates.json

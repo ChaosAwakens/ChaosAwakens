@@ -22,6 +22,7 @@ public class CANetworkManager {
 
 	public static void registerPackets() {
 		int networkId = 0;
+		
 		registerCTSPackets(networkId);
 		registerSTCPackets(networkId);
 	}
@@ -36,7 +37,7 @@ public class CANetworkManager {
 	}
 
 	/**
-	 * Sends a packet from client to server.
+	 * Sends a packet from client to server. C2S.
 	 * @param packet Packet to send to the server.
 	 */
 	public static void sendPacketToServer(Object packet) {
@@ -44,7 +45,7 @@ public class CANetworkManager {
 	}
 	
 	/**
-	 * Sends a packet to all clients from the server.
+	 * Sends a packet to all clients from the server. S2C.
 	 * @param packet Packet to send to client.
 	 */
 	public static void sendPacketToClient(Object packet) {
@@ -52,7 +53,7 @@ public class CANetworkManager {
 	}
 	
 	/**
-	 * Sends a tracking entity/player packet to all tracking clients from the server. S2C.
+	 * Sends a tracking entity/player packet to all tracking clients (as well as the {@code trackedEntity} from the server. S2C.
 	 * @param packet Packet to send (S2C)
 	 * @param trackedEntity Tracked Entity
 	 */

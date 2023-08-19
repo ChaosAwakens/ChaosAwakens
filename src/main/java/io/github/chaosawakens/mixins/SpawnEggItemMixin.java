@@ -73,11 +73,9 @@ public abstract class SpawnEggItemMixin {
 			}
 
 			BlockPos relTargetPos;
-			if (targetState.getCollisionShape(curWorld, clickedPos).isEmpty()) {
-				relTargetPos = clickedPos;
-			} else {
-				relTargetPos = clickedPos.relative(clickedDir);
-			}
+			
+			if (targetState.getCollisionShape(curWorld, clickedPos).isEmpty()) relTargetPos = clickedPos;
+			else relTargetPos = clickedPos.relative(clickedDir);
 
 			EntityType<?> tagEntityType = getType(stackInHand.getTag());
 			if (!targetState.is(Blocks.SPAWNER)) {
