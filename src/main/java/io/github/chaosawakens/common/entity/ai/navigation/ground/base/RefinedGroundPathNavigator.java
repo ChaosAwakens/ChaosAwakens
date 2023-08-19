@@ -10,6 +10,8 @@ public class RefinedGroundPathNavigator extends GroundPathNavigator {
 		super(owner, curWorld);
 	}
 	
+	
+	
 	@Override
 	protected void followThePath() {
 		super.followThePath();

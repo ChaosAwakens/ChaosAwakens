@@ -1,18 +1,30 @@
 package io.github.chaosawakens.common.entity.ai.navigation.ground.base;
 
+import javax.annotation.Nullable;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.FlaggedPathPoint;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.pathfinding.WalkNodeProcessor;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.Region;
 
 public class RefinedWalkNodeProcessor extends WalkNodeProcessor {
+	@Nullable
+	private ITag<Block> breakableBlocksTag;
 	
 	public RefinedWalkNodeProcessor() {
 		
+	}
+	
+	public RefinedWalkNodeProcessor setBreakableBlocks(ITag<Block> breakableBlocksTag) {
+		this.breakableBlocksTag = breakableBlocksTag;
+		return this;
 	}
 	
 	@Override
@@ -37,6 +49,12 @@ public class RefinedWalkNodeProcessor extends WalkNodeProcessor {
 	
 	@Override
 	protected PathNodeType evaluateBlockPathType(IBlockReader pLevel, boolean pCanOpenDoors, boolean pCanEnterDoors, BlockPos pPos, PathNodeType pNodeType) {
-		return super.evaluateBlockPathType(pLevel, pCanOpenDoors, pCanEnterDoors, pPos, pNodeType);
+		BlockState targetState = pLevel.getBlockState(pPos);
+		
+		switch (pNodeType) {
+		default: return super.evaluateBlockPathType(pLevel, pCanOpenDoors, pCanEnterDoors, pPos, pNodeType);
+		case BLOCKED: return targetState.is(breakableBlocksTag) ? PathNodeType.BREACH : PathNodeType.BLOCKED;
+		
+		}
 	}
 }
