@@ -72,15 +72,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {		
-		if (builder == null) {
-			this.animationProgress = 0;
-			this.animationLength = 0;
-			this.transitionProgress = 0;
-			this.animationState = ExpandedAnimationState.FINISHED;
-			return;
-		}
-		
-		if (!getCurrentAnimation().animationName.equals(builder.getAnimationName()) || clearCache) {
+		if (builder != null && !getCurrentAnimation().animationName.equals(builder.getAnimationName()) || clearCache) {
 			builder.playAnimation(clearCache);
 			
 			this.animationProgress = 0;

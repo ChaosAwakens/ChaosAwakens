@@ -77,7 +77,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * <tr>
  * 	 <td>Animation State (Geckolib)</td>
  * 	 <td>Present</td>
- * 	 <td>Absent</td>
+ * 	 <td>Present</td>
  * 	 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
  * </tr>
  * 

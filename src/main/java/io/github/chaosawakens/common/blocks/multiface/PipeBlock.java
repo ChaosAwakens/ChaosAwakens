@@ -73,7 +73,7 @@ public class PipeBlock extends Block {
 	}
 
 	public VoxelShape getShape(BlockState pState, World pWorld, BlockPos pPos, ICollisionReader pContext) {
-		return this.shapeByIndex[this.getAABBIndex(pState)];
+		return this.shapeByIndex[getAABBIndex(pState)];
 	}
 
 	protected int getAABBIndex(BlockState pState) {

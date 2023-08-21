@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -60,6 +61,11 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public void manageAttack(LivingEntity target) {		
+	}
+	
+	@Override
+	public boolean isAlliedTo(Entity pEntity) {
+		return pEntity.getDisplayName().getString().contains("Robo");
 	}
 	
 	@Override

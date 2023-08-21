@@ -223,7 +223,7 @@
 		},
 		"Death": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 3.2,
+			"animation_length": 3.5,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {
@@ -4734,7 +4734,7 @@
 			}
 		},
 		"Left Uppercut Attack": {
-			"animation_length": 1.72,
+			"animation_length": 1.85,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {
@@ -5067,7 +5067,7 @@
 			}
 		},
 		"Right Uppercut Attack": {
-			"animation_length": 1.72,
+			"animation_length": 1.85,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {

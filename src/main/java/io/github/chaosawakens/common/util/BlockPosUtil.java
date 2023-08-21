@@ -77,7 +77,8 @@ public final class BlockPosUtil {
 	
 	/**
 	 * Overloaded method for {@link #destroyBlocksBetween(World, int, int, int, int, int, int, boolean, Predicate)}. Only destroys blocks that collide 
-	 * with the specified {@link AxisAlignedBB}.
+	 * with the specified {@link AxisAlignedBB}. It maximizes the effect radius by {@code flooring} the hitbox's min bounds, whilst {@code ceiling} 
+	 * the hitbox's max bounds.
 	 * @param targetWorld The world to destroy blocks in.
 	 * @param targetHitbox The hitbox to destroy blocks with which it collides.
 	 * @param dropBlocks Whether or not the destroyed blocks should be dropped.
@@ -125,9 +126,9 @@ public final class BlockPosUtil {
 		Mutable mutableHeightPos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
 		AxisAlignedBB targetEntityHitbox = entityToCompare.getBoundingBox();
 		double lengthCompMin = Math.floor(targetEntityHitbox.minX);
-		double lengthCompMax = Math.floor(targetEntityHitbox.maxX);
+		double lengthCompMax = Math.ceil(targetEntityHitbox.maxX);
 		double heightCompMin = Math.floor(targetEntityHitbox.minY);
-		double heightCompMax = Math.floor(targetEntityHitbox.maxY);
+		double heightCompMax = Math.ceil(targetEntityHitbox.maxY);
 		
 		
 		

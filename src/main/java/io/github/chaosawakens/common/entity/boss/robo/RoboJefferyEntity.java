@@ -13,6 +13,7 @@ import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -209,6 +210,11 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
 		return super.getStandingEyeHeight(pPose, pSize) + 0.34F;
+	}
+	
+	@Override
+	public boolean isAlliedTo(Entity pEntity) {
+		return pEntity.getDisplayName().getString().contains("Robo");
 	}
 	
 	@Override

@@ -50,6 +50,7 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	@Nullable
 	private WrappedAnimationController<? extends IAnimatableEntity> targetController;
 	private final AnimationBuilder animBuilder;
+	private double animSpeedMultiplier = 1.0D;
 	private final ObjectArrayList<SingletonAnimationBuilder> animations = new ObjectArrayList<SingletonAnimationBuilder>();
 	private final ObjectArrayList<SingletonAnimationBuilder> frozenAnimations = new ObjectArrayList<SingletonAnimationBuilder>();
 	private final Object2ObjectArrayMap<SingletonAnimationBuilder, Predicate<? extends IAnimatableEntity>> animationsToSkip = new Object2ObjectArrayMap<SingletonAnimationBuilder, Predicate<? extends IAnimatableEntity>>();
@@ -98,6 +99,7 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	
 	@Override
 	public ChainedAnimationBuilder setAnimSpeed(double animSpeedMultiplier) {
+		this.animSpeedMultiplier = animSpeedMultiplier;
 		return this;
 	}
 

@@ -152,7 +152,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, false));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(RoboPounderEntity.class));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 	}
 
 	@Override
@@ -426,6 +426,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void jumpFromGround() {
+	}
+	
+	@Override
+	public boolean isAlliedTo(Entity pEntity) {
+		return pEntity.getDisplayName().getString().contains("Robo");
 	}
 
 	@Override

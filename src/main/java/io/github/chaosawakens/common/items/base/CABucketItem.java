@@ -92,8 +92,9 @@ public abstract class CABucketItem extends BucketItem {
 					BlockState targetState = pLevel.getBlockState(targetPos);
 					BlockPos finalTargetPos = canBlockContainFluid(pLevel, targetPos, targetState) ? targetPos : relPos;
 
-					if (this.emptyBucket(pPlayer, pLevel, finalTargetPos, playerBlockHitResult)) {
-						this.checkExtraContent(pLevel, heldItem, finalTargetPos);
+					if (emptyBucket(pPlayer, pLevel, finalTargetPos, playerBlockHitResult)) {
+						checkExtraContent(pLevel, heldItem, finalTargetPos);
+						
 						if (pPlayer instanceof ServerPlayerEntity) CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) pPlayer, finalTargetPos, heldItem);
 
 						pPlayer.awardStat(Stats.ITEM_USED.get(this));

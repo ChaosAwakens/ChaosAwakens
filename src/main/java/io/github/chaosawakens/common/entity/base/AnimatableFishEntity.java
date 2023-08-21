@@ -132,7 +132,12 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 		double dz = getZ() - zo;
 		double dxSqr = dx * dx;
 		double dzSqr = dz * dz;
-		return dxSqr + dzSqr < 2.500000277905201E-7;
+		
+		return dxSqr + dzSqr < getMovementThreshold();
+	}
+	
+	public double getMovementThreshold() {
+		return 2.500000277905201E-7;
 	}
 	
 	public boolean canBeKnockedBack() {

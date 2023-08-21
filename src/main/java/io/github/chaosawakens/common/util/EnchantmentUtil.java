@@ -13,7 +13,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
-public class EnchantmentUtil {
+public final class EnchantmentUtil {
 	
 	private EnchantmentUtil() {
 		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");

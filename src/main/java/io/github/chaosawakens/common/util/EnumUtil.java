@@ -396,7 +396,7 @@ public final class EnumUtil {
 					for (BlockPos targetRingPos : originalShapePositions) {
 						ObjectArrayList<BlockPos> validRingPositions = new ObjectArrayList<BlockPos>(1);
 						
-						if (!validRingPositions.contains(targetRingPos)) validRingPositions.add(targetRingPos);
+						if (!validRingPositions.contains(targetRingPos) && targetRingPos.distSqr(originPos) > 0) validRingPositions.add(targetRingPos);
 						
 						final double firstRingPosDistToOriginSqr = validRingPositions.get(0).distSqr(originPos);
 						

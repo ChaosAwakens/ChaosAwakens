@@ -8,6 +8,7 @@ import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -82,7 +83,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	}
 	
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		return isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -107,6 +108,11 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	}
 	
 	@Override
+	public boolean isAlliedTo(Entity pEntity) {
+		return pEntity.getDisplayName().getString().contains("Robo");
+	}
+	
+	@Override
 	public boolean ignoreExplosion() {
 		return true;
 	}
@@ -114,6 +120,11 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	@Override
 	public float getMeleeAttackReach(LivingEntity target) {
 		return super.getMeleeAttackReach(target) * 0.75F;
+	}
+	
+	@Override
+	public double getMovementThreshold() {
+		return super.getMovementThreshold();
 	}
 	
 	@Override
@@ -134,7 +145,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	@Override
 	protected void handleBaseAnimations() {
 		playAnimation(idleExtrasAnim, true);
-		
+				
 		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(idleAnim, true);
 		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(walkAnim, false);
 	}

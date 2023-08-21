@@ -85,7 +85,12 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 		double dz = getZ() - zo;
 		double dxSqr = dx * dx;
 		double dzSqr = dz * dz;
-		return dxSqr + dzSqr < 2.500000277905201E-7;
+		
+		return dxSqr + dzSqr < getMovementThreshold();
+	}
+	
+	public double getMovementThreshold() {
+		return 2.500000277905201E-7;
 	}
 	
 	public boolean canBeKnockedBack() {
@@ -111,6 +116,9 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	
 	@Override
 	protected void tickDeath() {
+		EntityUtil.freezeEntityRotation(this);
+		setMoving(false);
+		
 		if (getDeathAnim() != null) {
 			DamageSource lastValidDamageSource = getLastDamageSource() == null ? DamageSource.GENERIC : getLastDamageSource();
 			

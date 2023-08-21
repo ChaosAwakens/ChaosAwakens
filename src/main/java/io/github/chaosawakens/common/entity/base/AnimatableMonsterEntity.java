@@ -151,7 +151,12 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		double dz = getZ() - zo;
 		double dxSqr = dx * dx;
 		double dzSqr = dz * dz;
-		return dxSqr + dzSqr < 2.500000277905201E-7;
+		
+		return dxSqr + dzSqr < getMovementThreshold();
+	}
+	
+	public double getMovementThreshold() {
+		return 2.500000277905201E-7;
 	}
 	
 	public boolean shouldAllowDismount() {
@@ -166,6 +171,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	protected void tickDeath() {
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
+		setMoving(false);
 				
 		if (getDeathAnim() != null) {
 			DamageSource lastValidDamageSource = getLastDamageSource() == null ? DamageSource.GENERIC : getLastDamageSource();
@@ -386,7 +392,9 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	protected void handleBaseAnimations() {
+		double walkAnimSpeed = Math.sqrt((getDeltaMovement().x * getDeltaMovement().x) + (getDeltaMovement().z * getDeltaMovement().z)) * 10;
+		
 		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(getWalkAnim().setAnimSpeed(walkAnimSpeed), false);
 	}
 }

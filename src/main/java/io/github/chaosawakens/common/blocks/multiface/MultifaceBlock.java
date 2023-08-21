@@ -108,9 +108,7 @@ public abstract class MultifaceBlock extends Block {
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
 		for (Direction targetDir : DIRECTIONS) {
-			if (isFaceSupported(targetDir)) {
-				pBuilder.add(getFaceProperty(targetDir));
-			}
+			if (isFaceSupported(targetDir)) pBuilder.add(getFaceProperty(targetDir));
 		}
 	}
 
