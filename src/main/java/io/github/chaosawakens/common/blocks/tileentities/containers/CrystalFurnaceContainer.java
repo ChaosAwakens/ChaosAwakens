@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.blocks.tileentities.slots;
+package io.github.chaosawakens.common.blocks.tileentities.containers;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;

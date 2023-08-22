@@ -1,5 +1,6 @@
-package io.github.chaosawakens.common.blocks.tileentities.slots;
+package io.github.chaosawakens.common.blocks.tileentities.containers;
 
+import io.github.chaosawakens.common.blocks.tileentities.slots.CrystalFurnaceFuelSlot;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -42,20 +43,17 @@ public abstract class AbstractCrystalFurnaceContainer extends RecipeBookContaine
 		this.container = inv;
 		this.data = data;
 		this.level = targetPlayerInv.player.level;
-		this.addSlot(new Slot(inv, 0, 56, 17));
-		this.addSlot(new CrystalFurnaceFuelSlot(inv, 1, 56, 53));
-		this.addSlot(new FurnaceResultSlot(targetPlayerInv.player, inv, 2, 116, 35));
+		
+		addSlot(new Slot(inv, 0, 56, 17));
+		addSlot(new CrystalFurnaceFuelSlot(inv, 1, 56, 53));
+		addSlot(new FurnaceResultSlot(targetPlayerInv.player, inv, 2, 116, 35));
 
 		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 9; ++j) {
-				addSlot(new Slot(targetPlayerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-			}
+			for (int j = 0; j < 9; ++j) addSlot(new Slot(targetPlayerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 		}
 
-		for (int k = 0; k < 9; ++k) {
-			addSlot(new Slot(targetPlayerInv, k, 8 + k * 18, 142));
-		}
-
+		for (int k = 0; k < 9; ++k) addSlot(new Slot(targetPlayerInv, k, 8 + k * 18, 142));
+		
 		addDataSlots(data);
 	}
 
