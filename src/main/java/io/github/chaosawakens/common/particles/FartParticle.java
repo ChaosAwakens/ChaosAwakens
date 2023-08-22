@@ -63,8 +63,6 @@ public class FartParticle extends SpriteTexturedParticle {
 			FartParticle particleA = new FartParticle(world, x, y, z, xd, yd, zd, spriteF);
 			particleA.setSpriteFromAge(spriteF);
 			return particleA;
-		}
-		
+		}	
 	}
-
 }
