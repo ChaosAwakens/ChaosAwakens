@@ -99,15 +99,15 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * 
  * <br> </br>
  * It's advised that animation handling is done solely through {@link IAnimatableEntity} methods, as they handle any
- * necessary siding (note that this does not mean client data will be present on the server and vice versa). The "functional" 
- * progress is effectively "detached" from Geckolib's tick progress due to variation in client animation progress between
+ * necessary siding (note that this does not mean client-exclusive data will be present on the server and vice versa). The "functional" 
+ * progress is effectively "detached" from Geckolib's tick progress (unless enforced otherwise) due to variation in client animation progress between
  * clients and other factors. The functional tick progress should still pretty much sync to Geckolib's tick progress, but there's
  * no guarantee that both will communicate with each other as that in itself can and will cause hard to debug logical
  * errors. Can still be attributed to MC's goofiness, though :p
  * <br> </br>
  * Another thing to note is that this object <b>CANNOT</b> be statically instantiated, due to the fact that you need to
  * pass an {@link IAnimatableEntity} instance in. This means that it'll be instantiated every time an animation
- * controller needs to play it/once per entity instance, but not every <i>frame</i>. Still much better than handling metadata and such per frame
+ * once per entity instance, but not every <i>frame</i>. Still much better than handling metadata and such per frame
  * (potentially multiple times per-frame), though.
  */
 public class SingletonAnimationBuilder implements IAnimationBuilder {
