@@ -18,6 +18,7 @@ public class CAConfiguredStructures {
 	public static StructureFeature<?, ?> CONFIGURED_SPRUCE_ENT_TREE = CAStructures.SPRUCE_ENT_TREE.get().configured(IFeatureConfig.NONE);
 	public static StructureFeature<?, ?> CONFIGURED_WARPED_ENT_TREE = CAStructures.WARPED_ENT_TREE.get().configured(IFeatureConfig.NONE);
 	public static StructureFeature<?, ?> CONFIGURED_GINKGO_ENT_TREE = CAStructures.GINKGO_ENT_TREE.get().configured(IFeatureConfig.NONE);
+
 //	public static StructureFeature<?, ?> CONFIGURED_WASP_DUNGEON = CAStructures.WASP_DUNGEON.get().configured(IFeatureConfig.NONE);
 //	public static StructureFeature<?, ?> CONFIGURED_MINING_WASP_DUNGEON = CAStructures.MINING_WASP_DUNGEON.get().configured(IFeatureConfig.NONE);
 

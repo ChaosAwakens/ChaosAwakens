@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "chaosawakens:block/red_ant_infested_ore"
+      "model": "minecraft:block/diamond_ore"
     }
   }
 }

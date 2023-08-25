@@ -37,7 +37,7 @@ import io.github.chaosawakens.common.entity.misc.JefferyShockwaveEntity;
 import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.EmeraldGatorEntity;
-import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
+import io.github.chaosawakens.common.entity.projectile.CALettuceChickenEggEntity;
 import io.github.chaosawakens.common.entity.projectile.ExplosiveFireworkEntity;
 import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
 import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
@@ -357,8 +357,8 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.<CAScreenShakeEntity>of(CAScreenShakeEntity::new, EntityClassification.MISC)
 					.noSummon()
 			        .build(ChaosAwakens.prefix("screen_shake").toString()));
-	public static final RegistryObject<EntityType<CALeafyChickenEggEntity>> LETTUCE_CHICKEN_EGG = ENTITY_TYPES.register("lettuce_chicken_egg",
-			() -> EntityType.Builder.<CALeafyChickenEggEntity>of(CALeafyChickenEggEntity::new, EntityClassification.MISC)
+	public static final RegistryObject<EntityType<CALettuceChickenEggEntity>> LETTUCE_CHICKEN_EGG = ENTITY_TYPES.register("lettuce_chicken_egg",
+			() -> EntityType.Builder.<CALettuceChickenEggEntity>of(CALettuceChickenEggEntity::new, EntityClassification.MISC)
 					.sized(0.25F, 0.25F).clientTrackingRange(10).updateInterval(20)
 					.noSummon()
 					.build(ChaosAwakens.prefix("lettuce_chicken_egg").toString()));

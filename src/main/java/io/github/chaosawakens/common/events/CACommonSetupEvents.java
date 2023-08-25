@@ -177,8 +177,10 @@ public class CACommonSetupEvents {
 			tempMap.putIfAbsent(CAStructures.OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
 			tempMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
 			tempMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
-			//		tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
-			//		tempMap.putIfAbsent(CAStructures.MINING_WASP_DUNGEON.get(),	DimensionStructuresSettings.DEFAULTS.get(CAStructures.MINING_WASP_DUNGEON.get()));
+			tempMap.putIfAbsent(CAStructures.GINKGO_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.GINKGO_ENT_TREE.get()));
+
+//			tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
+//			tempMap.putIfAbsent(CAStructures.MINING_WASP_DUNGEON.get(),	DimensionStructuresSettings.DEFAULTS.get(CAStructures.MINING_WASP_DUNGEON.get()));
 
 			chunkProvider.generator.getSettings().structureConfig = testTempMap;
 		}
@@ -195,8 +197,12 @@ public class CACommonSetupEvents {
 			
 			if (fuel.getItem() == CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()) {
 				event.setBurnTime(20000);
+			} else if(fuel.getItem() == CABlocks.TAR.get().asItem() ) {
+				event.setBurnTime(10000);
 			} else if (fuel.getItem() == CAItems.CRYSTAL_ENERGY.get()) {
 				event.setBurnTime(3600);
+			} else if (fuel.getItem() instanceof CABoatItem) {
+				event.setBurnTime(1200);
 			} else if (fuel.getItem() == CABlocks.CRYSTAL_CRAFTING_TABLE.get().asItem() || fuel.getItem() == CABlocks.APPLE_FENCE.get().asItem()
 					|| fuel.getItem() == CABlocks.CHERRY_FENCE.get().asItem() || fuel.getItem() == CABlocks.DUPLICATION_FENCE.get().asItem()
 					|| fuel.getItem() == CABlocks.MOLDY_FENCE.get().asItem() || fuel.getItem() == CABlocks.PEACH_FENCE.get().asItem()
@@ -213,8 +219,6 @@ public class CACommonSetupEvents {
 					|| fuel.getItem() == CABlocks.MESOZOIC_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.DENSEWOOD_TRAPDOOR.get().asItem()
 					|| fuel.getItem() == CABlocks.PEACH_TRAPDOOR.get().asItem() || fuel.getItem() == CABlocks.SKYWOOD_TRAPDOOR.get().asItem()) {
 				event.setBurnTime(300);
-			} else if (fuel.getItem() instanceof CABoatItem) {
-				event.setBurnTime(1200);
 			} else if (fuel.getItem() == CAItems.CRYSTALWOOD_SHOVEL.get() || fuel.getItem() == CAItems.CRYSTALWOOD_SWORD.get()
 					|| fuel.getItem() == CAItems.CRYSTALWOOD_HOE.get() || fuel.getItem() == CAItems.CRYSTALWOOD_AXE.get()
 					|| fuel.getItem() == CAItems.CRYSTALWOOD_PICKAXE.get() || fuel.getItem() == CAItems.APPLE_SIGN.get() 
@@ -227,8 +231,6 @@ public class CACommonSetupEvents {
 				event.setBurnTime(200);
 			} else if (fuel.getItem() == CAItems.CRYSTALWOOD_SHARD.get() || fuel.getItem() == CATags.Items.CRYSTAL_SAPLING) {
 				event.setBurnTime(100);
-			} else if(fuel.getItem() == CABlocks.TAR.get().asItem() ) {
-				event.setBurnTime(10000);
 			}
 		}
 
@@ -346,7 +348,7 @@ public class CACommonSetupEvents {
 	}
 	
 	public static class ModSetupEvents {
-		
+
 		@SubscribeEvent
 		public static void onFMLCommonSetupEvent(FMLCommonSetupEvent event) {
 			CAEntityTypes.registerSpawnPlacementTypes();
@@ -416,8 +418,8 @@ public class CACommonSetupEvents {
 			event.put(CAEntityTypes.TERMITE.get(), AggressiveAntEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.TREE_FROG.get(), TreeFrogEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
-			//	event.put(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
-			//	event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
+//			event.put(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
+//			event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ULTIMATE_APPLE_COW.get(), UltimateAppleCowEntity.setCustomAttributes().build());
@@ -439,13 +441,13 @@ public class CACommonSetupEvents {
 			event.put(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().build());
-			//		event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
+//			event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.WHALE.get(), WhaleEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.GREEN_FISH.get(), GreenFishEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROCK_FISH.get(), RockFishEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.SPARK_FISH.get(), SparkFishEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.WOOD_FISH.get(), WoodFishEntity.setCustomAttributes().build());
-			//	event.put(CAEntityTypes.LAVA_EEL.get(), LavaEelEntity.setCustomAttributes().build());
+//			event.put(CAEntityTypes.LAVA_EEL.get(), LavaEelEntity.setCustomAttributes().build());
 		}
 
 		@SubscribeEvent

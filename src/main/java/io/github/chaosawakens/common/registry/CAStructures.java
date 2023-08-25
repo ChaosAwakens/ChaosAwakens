@@ -43,7 +43,8 @@ public class CAStructures {
 		setupMapSpacingAndLand(OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 170597541), false);
 		setupMapSpacingAndLand(SPRUCE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 49224289), false);
 		setupMapSpacingAndLand(WARPED_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 37834092), false);
-		setupMapSpacingAndLand(GINKGO_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 776270520), false);
+		setupMapSpacingAndLand(GINKGO_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 276270520), false);
+
 //		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21, 19, 159332311), false);
 //		setupMapSpacingAndLand(MINING_WASP_DUNGEON.get(), new StructureSeparationSettings(38, 34, 159342356), false);
 	}

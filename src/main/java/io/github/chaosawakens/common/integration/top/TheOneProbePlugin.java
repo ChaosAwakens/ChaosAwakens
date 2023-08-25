@@ -123,28 +123,13 @@ public class TheOneProbePlugin {
 							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Green (" + type + ")"));
 							return;
 						case 1:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Brown (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Gray (" + type + ")"));
 							return;
 						case 2:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Pink (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Squirrel (" + type + ")"));
 							return;
 						case 3:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Dark Green (" + type + ")"));
-							return;
-						case 4:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Red (" + type + ")"));
-							return;
-						case 5:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Orange (" + type + ")"));
-							return;
-						case 6:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Pale (" + type + ")"));
-							return;
-						case 7:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Yellow (" + type + ")"));
-							return;
-						case 99:
-							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Black (" + type + ")"));
+							iProbeInfo.text(CompoundText.createLabelInfo("Tree Frog Species: ", "Pine Woods (" + type + ")"));
 						}
 					}
 

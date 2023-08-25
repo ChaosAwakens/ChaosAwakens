@@ -2,7 +2,7 @@ package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.Maps;
 
-import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
+import io.github.chaosawakens.common.entity.projectile.CALettuceChickenEggEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.IrukandjiArrowEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -327,7 +327,7 @@ public class CAVanillaCompat {
 		DispenserBlock.registerBehavior(CAItems.LETTUCE_CHICKEN_EGG.get(), new ProjectileDispenseBehavior() {			
 			@Override
 			protected ProjectileEntity getProjectile(World world, IPosition pos, ItemStack stack) {
-				return new CALeafyChickenEggEntity(world, pos.x(), pos.y(), pos.z());
+				return new CALettuceChickenEggEntity(world, pos.x(), pos.y(), pos.z());
 			}
 		});
 	//	DispenserBlock.registerBehavior(null, ArmorItem.DISPENSE_ITEM_BEHAVIOR);

@@ -239,6 +239,18 @@ public class CATagProvider extends BlockTagsProvider {
 			
 			tag(ItemTags.bind("forge:ingots/copper")).add(CAItems.COPPER_LUMP.get());
 			tag(CATags.Items.CRYSTAL_FURNACE_FUEL).add(CAItems.CRYSTAL_ENERGY.get(), CAItems.LAVA_PINK_TOURMALINE_BUCKET.get());
+
+			tag(ItemTags.bind("giantpacman:undroppable")).add(CAItems.ROYAL_GUARDIAN_SCALE.get() ,CAItems.ROYAL_GUARDIAN_SWORD.get() ,CAItems.ROYAL_GUARDIAN_HELMET.get(), CAItems.ROYAL_GUARDIAN_CHESTPLATE.get(), CAItems.ROYAL_GUARDIAN_LEGGINGS.get(), CAItems.ROYAL_GUARDIAN_BOOTS.get(),
+					CAItems.QUEEN_SCALE.get(), CAItems.QUEEN_SCALE_BATTLE_AXE.get(), CAItems.QUEEN_SCALE_HELMET.get(), CAItems.QUEEN_SCALE_CHESTPLATE.get(), CAItems.QUEEN_SCALE_LEGGINGS.get(), CAItems.QUEEN_SCALE_BOOTS.get(),
+					CAItems.MOBZILLA_SCALE.get(), CAItems.MOBZILLA_SCALE_HELMET.get(), CAItems.MOBZILLA_SCALE_CHESTPLATE.get(), CAItems.MOBZILLA_SCALE_LEGGINGS.get(), CAItems.MOBZILLA_SCALE_BOOTS.get(),
+					CAItems.BIG_BERTHA.get(), CAItems.BIG_BERTHA_BLADE.get(), CAItems.BIG_BERTHA_GUARD.get(), CAItems.BIG_BERTHA_HANDLE.get(),
+					CAItems.DEV_ITEM1.get(), CAItems.DEV_ITEM16.get(), CAItems.DEV_ITEM64.get(), CAItems.DEV_ITEM_DAMAGE.get(),
+					CAItems.NIGHTMARE_SWORD.get(), CAItems.BASILISK_SWORD.get(), CAItems.RAT_SWORD.get(), CAItems.FAIRY_SWORD.get(), CAItems.MANTIS_CLAW.get(),
+					CAItems.MOTH_SCALE_HELMET.get(), CAItems.MOTH_SCALE_CHESTPLATE.get(), CAItems.MOTH_SCALE_LEGGINGS.get(), CAItems.MOTH_SCALE_BOOTS.get(),
+					CAItems.DEAD_IRUKANDJI.get(), CAItems.BASILISK_SCALE.get(), CAItems.EMPEROR_SCORPION_SCALE.get(), CAItems.MOTH_SCALE.get(), CAItems.NIGHTMARE_SCALE.get(),
+					CAItems.SEA_VIPER_TONGUE.get(), CAItems.VORTEX_EYE.get(), CAItems.WATER_DRAGON_SCALE.get(), CAItems.WORM_TOOTH.get(), CAItems.JEFFERY_CORE.get(),
+					CABlocks.MOTH_SCALE_BLOCK.get().asItem(), CABlocks.WATER_DRAGON_SCALE_BLOCK.get().asItem(), CABlocks.NIGHTMARE_SCALE_BLOCK.get().asItem(), CABlocks.BASILISK_SCALE_BLOCK.get().asItem(),
+					CABlocks.EMPEROR_SCORPION_SCALE_BLOCK.get().asItem(), CABlocks.MOBZILLA_SCALE_BLOCK.get().asItem(), CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK.get().asItem(), CABlocks.QUEEN_SCALE_BLOCK.get().asItem());
 		}
 	}
 

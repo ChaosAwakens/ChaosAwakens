@@ -9,6 +9,7 @@ import io.github.chaosawakens.common.blocks.GateBlock;
 import io.github.chaosawakens.common.blocks.crystal.EnergizedKyaniteBlock;
 import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
+import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.StandingSignBlock;
@@ -69,18 +70,17 @@ public class CABlockModelProvider extends BlockModelProvider {
 					cross(name, chaosRL(name));
 				} else if (name.contains("sandstone")) {
 					cubeBottomTop(name, chaosRL(name), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
-				} else if (name.contains("ant_infested") || name.contains("termite_infested")) { 
-					cubeAll(name, new ResourceLocation("block/diamond_ore")); // temp patch??
 				} else {
-					cubeAll(name, chaosRL(name));
+					if (!(name.contains("ant_infested") || name.contains("termite_infested"))) {
+						cubeAll(name, chaosRL(name));
+					}
 				}
+			} else if (block instanceof DefossilizerBlock) {
+				String type = name.replace("_defossilizer", "");
+				orientable(name, type.equals("iron") ? mcRL(type + "_block") : type.equals("crystal") ? chaosRL("pink_tourmaline_block") :  chaosRL(type + "_block"), chaosRL(type + "_defossilizer_front"), chaosRL(type + "_defossilizer_top"));
 			}
 		}
 
-		orientable("copper_defossilizer", chaosRL("copper_block"), chaosRL("copper_defossilizer_front"), chaosRL("copper_defossilizer_top"));
-		orientable("iron_defossilizer", mcRL("iron_block"), chaosRL("iron_defossilizer_front"), chaosRL("iron_defossilizer_top"));
-		orientable("crystal_defossilizer", chaosRL("pink_tourmaline_block"), chaosRL("crystal_defossilizer_front"), chaosRL("crystal_defossilizer_top"));
-		
 		grassBlock("dense_grass_block", chaosRL("dense_dirt"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"), chaosRL("dense_grass_block_side"), chaosRL("dense_grass_block_side_overlay"));
 		//cubeBottomTop("dense_grass_block", chaosRL("dense_grass_block_side"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"));
 		cubeAll("dense_dirt", chaosRL("dense_dirt"));
@@ -140,7 +140,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		cubeAll("budding_pink_tourmaline", chaosRL("budding_pink_tourmaline"));
 		cubeAll("pink_tourmaline_block", chaosRL("pink_tourmaline_block"));
 		cubeAll("energized_kyanite", chaosRL("energized_kyanite"));
-		
+
 		cubeAll("marble_block", chaosRL("marble_block"));
 		cubeAll("marble_bricks", chaosRL("marble_bricks"));
 		cubeAll("chiseled_marble_bricks", chaosRL("chiseled_marble_bricks"));
@@ -274,7 +274,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		wallInventory("polished_limestone_wall_inventory", chaosRL("polished_limestone_block"));
 		wallSide("polished_limestone_wall", chaosRL("polished_limestone_block"));
 		wallSideTall("polished_limestone_wall", chaosRL("polished_limestone_block"));
-		
+
 		cubeAll("rhinestone_block", chaosRL("rhinestone_block"));
 		cubeAll("rhinestone_bricks", chaosRL("rhinestone_bricks"));
 		cubeAll("chiseled_rhinestone_bricks", chaosRL("chiseled_rhinestone_bricks"));
@@ -1022,7 +1022,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		pressurePlateDown("skywood_pressure_plate", chaosRL("skywood_planks"));
 		pressurePlateUp("crystalwood_pressure_plate", chaosRL("crystalwood_planks"));
 		pressurePlateDown("crystalwood_pressure_plate", chaosRL("crystalwood_planks"));
-		
+
 		buttonInventory("apple_button_inventory", chaosRL("apple_planks"));
 		buttonInventory("cherry_button_inventory", chaosRL("cherry_planks"));
 		buttonInventory("ginkgo_button_inventory", chaosRL("ginkgo_planks"));
@@ -1032,7 +1032,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		buttonInventory("peach_button_inventory", chaosRL("peach_planks"));
 		buttonInventory("skywood_button_inventory", chaosRL("skywood_planks"));
 		buttonInventory("crystalwood_button_inventory", chaosRL("crystalwood_planks"));
-		
+
 		cubeAll("moldy_planks", chaosRL("moldy_planks"));
 		slab("moldy_slab", chaosRL("moldy_planks"), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
 		slabTop("moldy_slab", chaosRL("moldy_planks"), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
@@ -1060,7 +1060,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		cross("pink_crystal_flower", chaosRL("pink_crystal_flower"));
 		cross("orange_crystal_flower", chaosRL("orange_crystal_flower"));
 		cross("crystal_rose", chaosRL("crystal_rose"));
-		
+
 		pottedCross("potted_ginkgo_sapling", chaosRL("ginkgo_sapling"));
 		pottedCross("potted_mesozoic_sapling", chaosRL("mesozoic_sapling"));
 		pottedCross("potted_densewood_sapling", chaosRL("densewood_sapling"));
@@ -1117,13 +1117,13 @@ public class CABlockModelProvider extends BlockModelProvider {
 		cross(name + "_top", chaosRL(texture + "_top"));
 		cross(name + "_bottom", chaosRL(texture + "_bottom"));
 	}
-	
+
 	public BlockModelBuilder farmland(String name, ResourceLocation dirt, ResourceLocation top) {
 		return withExistingParent(name, BLOCK_FOLDER + "/template_farmland")
 				.texture("dirt", dirt)
 				.texture("top", top);
 	}
-	
+
 	public BlockModelBuilder grassBlock(String name, ResourceLocation particle, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation overlay) {
 		return withExistingParent(name, BLOCK_FOLDER + "/grass_block")
 				.texture("particle", particle)
@@ -1132,27 +1132,27 @@ public class CABlockModelProvider extends BlockModelProvider {
 				.texture("side", side)
 				.texture("overlay", overlay);
 	}
-	
+
 	public BlockModelBuilder tintedCross(String name, ResourceLocation cross) {
 		return withExistingParent(name, BLOCK_FOLDER + "/tinted_cross")
 				.texture("cross", cross);
 	}
-	
+
 	public void doubleTintedCross(String name, String texture) {
 		tintedCross(name + "_top", chaosRL(texture + "_top"));
 		tintedCross(name + "_bottom", chaosRL(texture + "_bottom"));
 	}
-	
+
 	public BlockModelBuilder buttonInventory(String name, ResourceLocation texture) {
 		return withExistingParent(name, BLOCK_FOLDER + "/button_inventory")
 				.texture("texture", texture);
 	}
-	
+
 	public BlockModelBuilder pottedCross(String name, ResourceLocation texture) {
 		return withExistingParent(name, BLOCK_FOLDER + "/flower_pot_cross")
 				.texture("plant", texture);
 	}
-	
+
 	@Override
 	public BlockModelBuilder cubeColumn(String name, ResourceLocation side, ResourceLocation end) {
 		return withExistingParent(name, BLOCK_FOLDER).texture("side", side).texture("end", end);

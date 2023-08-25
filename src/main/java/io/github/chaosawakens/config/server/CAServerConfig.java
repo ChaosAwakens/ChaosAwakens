@@ -53,11 +53,11 @@ public class CAServerConfig {
 	public final IntValue platinumPickaxeDamage;
 	public final IntValue platinumShovelDamage;
 	public final IntValue platinumHoeDamage;
-	public final IntValue crystalWoodSwordDamage;
-	public final IntValue crystalWoodAxeDamage;
-	public final IntValue crystalWoodPickaxeDamage;
-	public final IntValue crystalWoodShovelDamage;
-	public final IntValue crystalWoodHoeDamage;
+	public final IntValue crystalwoodSwordDamage;
+	public final IntValue crystalwoodAxeDamage;
+	public final IntValue crystalwoodPickaxeDamage;
+	public final IntValue crystalwoodShovelDamage;
+	public final IntValue crystalwoodHoeDamage;
 	public final IntValue kyaniteSwordDamage;
 	public final IntValue kyaniteAxeDamage;
 	public final IntValue kyanitePickaxeDamage;
@@ -140,11 +140,11 @@ public class CAServerConfig {
 		builder.pop();
 		
 		builder.push("Crystalwood Weapons/Tools");
-		crystalWoodSwordDamage = builder.defineInRange("Damage of the Crystalwood Sword", 5, 0, Integer.MAX_VALUE);
-		crystalWoodAxeDamage = builder.defineInRange("Damage of the Crystalwood Axe", 9, 0, Integer.MAX_VALUE);
-		crystalWoodPickaxeDamage = builder.defineInRange("Damage of the Crystalwood Pickaxe", 3, 0, Integer.MAX_VALUE);
-		crystalWoodShovelDamage = builder.defineInRange("Damage of the Crystalwood Shovel", 3, 0, Integer.MAX_VALUE);
-		crystalWoodHoeDamage = builder.defineInRange("Damage of the Crystalwood Hoe", 1, 0, Integer.MAX_VALUE);
+		crystalwoodSwordDamage = builder.defineInRange("Damage of the Crystalwood Sword", 5, 0, Integer.MAX_VALUE);
+		crystalwoodAxeDamage = builder.defineInRange("Damage of the Crystalwood Axe", 9, 0, Integer.MAX_VALUE);
+		crystalwoodPickaxeDamage = builder.defineInRange("Damage of the Crystalwood Pickaxe", 3, 0, Integer.MAX_VALUE);
+		crystalwoodShovelDamage = builder.defineInRange("Damage of the Crystalwood Shovel", 3, 0, Integer.MAX_VALUE);
+		crystalwoodHoeDamage = builder.defineInRange("Damage of the Crystalwood Hoe", 1, 0, Integer.MAX_VALUE);
 		builder.pop();
 		
 		builder.push("Kyanite Weapons/Tools");

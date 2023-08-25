@@ -131,6 +131,8 @@ dependencies {
 	runtimeOnly fg.deobf("curse.maven:l_ender-s-cataclysm-551586:${cataclysm_version}")
 	
 	compileOnly fg.deobf("curse.maven:curios-309927:${curios_version}")
+
+	implementation fg.deobf("curse.maven:worldedit-225608:${worldedit_version}")
 	
 	implementation fg.deobf("curse.maven:datafixerslayer-416519:${dfs_version}")
 }

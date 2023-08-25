@@ -92,7 +92,9 @@ public class CACommonConfig {
 	public final BooleanValue generateOakEntTree;
 	public final BooleanValue generateSpruceEntTree;
 	public final BooleanValue generateWarpedEntTree;
-	public final BooleanValue generateWaspNest;
+	public final BooleanValue generateGinkgoEntTree;
+//	public final BooleanValue generateWaspNest;
+//	public final BooleanValue generateMiningWaspNest;
 
 	public final BooleanValue holidayTextures;
 
@@ -111,14 +113,12 @@ public class CACommonConfig {
 
 	public final BooleanValue showUpdateMessage;
 
-	//TODO Remove damage config things
 	public CACommonConfig(ForgeConfigSpec.Builder builder) {
 		builder.push("Log messages");
 		terraforgedCheckMsg = builder.define("Terraforged check message active", true);
 		builder.pop();
 		
 		builder.push("Functionality");
-		
 		builder.push("Armor");
 		builder.push("Ender Dragon Scale Armor");
 		enderDragonScaleArmorElytraDamageType = builder
@@ -154,7 +154,7 @@ public class CACommonConfig {
 		enableLapisArmorSetBonus = builder.define("Enable the Lapis set bonus", true);
 		lapisArmorSetBookshelfPowerModifier = builder
 				.comment("The power of each bookshelf around the enchantment table when a player with the full Lapis Armor Set is present. This effect stacks with each present player.")
-				.defineInRange("Lapis Armor Set Bookshelf Power Moifier", 2, 0, 15);
+				.defineInRange("Lapis Armor Set Bookshelf Power Modifier", 2, 0, 15);
 		builder.pop();
 		
 		builder.push("Lava Eel Armor");
@@ -333,19 +333,25 @@ public class CACommonConfig {
 		generateWarpedEntTree = builder
 				.comment("Will Warped Ent Trees be generated?")
 				.define("Generate Warped Ent Trees", true);
-		generateWaspNest = builder
-				.comment("Will Wasp Nests be generated?")
-				.define("Generate Wasp Nests", true);
+		generateGinkgoEntTree = builder
+				.comment("Will Ginkgo Ent Trees be generated?")
+				.define("Generate Ginkgo Ent Trees", true);
+//		generateWaspNest = builder
+//				.comment("Will Wasp Nests be generated?")
+//				.define("Generate Wasp Nests", true);
+//		generateMiningWaspNest = builder
+//				.comment("Will Mining Wasp Nests be generated?")
+//				.define("Generate Mining Wasp Nests", true);
 		builder.pop();
 		
-		builder.push("Dimensioms");
+		builder.push("Dimensions");
 		
 		builder.push("Mining Paradise");
 		builder.push("Biomes");
 		builder.push("Stalagmite Valley");
 		enableStalagmiteOreGen = builder
 				.comment("Enable/Disable ores generating on the stalagmites in the Stalagmite Valley.")
-				.define("Enable Stalamite Ore Gen", true);
+				.define("Enable Stalagmite Ore Gen", true);
 		builder.pop(3);
 		
 		builder.pop(2);

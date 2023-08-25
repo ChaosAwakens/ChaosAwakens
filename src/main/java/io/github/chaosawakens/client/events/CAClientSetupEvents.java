@@ -43,7 +43,7 @@ import io.github.chaosawakens.client.renderers.entity.projectile.UltimateArrowPr
 import io.github.chaosawakens.common.blocks.tileentities.screens.CopperDefossilizerScreen;
 import io.github.chaosawakens.common.blocks.tileentities.screens.CrystalDefossilizerScreen;
 import io.github.chaosawakens.common.blocks.tileentities.screens.IronDefossilizerScreen;
-import io.github.chaosawakens.common.entity.projectile.CALeafyChickenEggEntity;
+import io.github.chaosawakens.common.entity.projectile.CALettuceChickenEggEntity;
 import io.github.chaosawakens.common.items.armor.EnderScaleArmorItem;
 import io.github.chaosawakens.common.items.tools.UltimateFishingRodItem;
 import io.github.chaosawakens.common.particles.FartParticle.FartParticleProvider;
@@ -154,7 +154,7 @@ public class CAClientSetupEvents {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.SCREEN_SHAKE.get(), CAEmptyRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BASE_AOE_HITBOX.get(), CAEmptyRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.JEFFERY_SHOCKWAVE.get(), JefferyShockwaveEntityRenderer::new);
-		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LETTUCE_CHICKEN_EGG.get(), (manager) -> new SpriteRenderer<CALeafyChickenEggEntity>(manager, Minecraft.getInstance().getItemRenderer()));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.LETTUCE_CHICKEN_EGG.get(), (manager) -> new SpriteRenderer<CALettuceChickenEggEntity>(manager, Minecraft.getInstance().getItemRenderer()));
 
 		// BLOCKS
 		RenderTypeLookup.setRenderLayer(CABlocks.TUBE_WORM.get(), RenderType.cutoutMipped());

@@ -12,14 +12,7 @@ import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import io.github.chaosawakens.common.blocks.vegetation.GenericFarmlandBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
-import net.minecraft.block.AbstractButtonBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.HorizontalFaceBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.block.TrapDoorBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.DoorHingeSide;
@@ -315,6 +308,8 @@ public class CABlockStateProvider extends BlockStateProvider {
 			if (block instanceof CAOreBlock || block instanceof CAFallingOreBlock) {
 				if (name.contains("sandstone")) {
 					cubeBottomTopBlock(block, chaosRL(name), mcRL("sandstone_bottom"), mcRL("sandstone_top"));
+				} else if (name.contains("ant_infested") || name.contains("termite_infested")) {
+					simpleBlock(block, name.contains("ant_infested") ? Blocks.DIAMOND_ORE : Blocks.EMERALD_ORE);
 				} else {
 					noVariant(block);
 				}
@@ -544,6 +539,10 @@ public class CABlockStateProvider extends BlockStateProvider {
 
 	private static ResourceLocation getBlockResourceLocation(String name) {
 		return getResourceLocation("block/" + name);
+	}
+
+	public void simpleBlock(Block block, Block other) {
+		simpleBlock(block, models().getExistingFile(other.getRegistryName()));
 	}
 
 	public void cross(Block block) {

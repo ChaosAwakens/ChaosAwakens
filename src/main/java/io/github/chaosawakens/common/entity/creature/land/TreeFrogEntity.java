@@ -131,7 +131,7 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	public void aiStep() {
 		super.aiStep();
 		
-		if (hasCustomName() && getCustomName().getContents().contentEquals("froakie")) setTreeFrogType(4);
+		if (hasCustomName() && getCustomName().getContents().toLowerCase().contentEquals("froakie")) setTreeFrogType(4);
 	}
 	
 	@Override

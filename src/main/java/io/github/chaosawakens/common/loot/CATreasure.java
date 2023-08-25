@@ -37,9 +37,13 @@ public class CATreasure {
 	private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
 	public static LootFunctionType ENCHANT;
 	public final ResourceLocation lootTable;
+	public final String stringName;
+	public final String langName;
 
 	private CATreasure(String path) {
 		this.lootTable = ChaosAwakens.prefix(String.format("chests/%s", path));
+		this.stringName = String.valueOf(lootTable);
+		this.langName = "dungeon.chaosawakens.jer." + path.replace("/", ".");
 	}
 
 	public static void init() {

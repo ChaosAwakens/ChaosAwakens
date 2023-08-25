@@ -6,5 +6,4 @@ import net.minecraft.util.text.TextFormatting;
 
 public class CARarities {
 	public static final Rarity ROYALTY = Rarity.create(ChaosAwakens.MODID + ":royalty", TextFormatting.GOLD);
-
 }

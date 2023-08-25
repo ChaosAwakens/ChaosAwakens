@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "chaosawakens:block/termite_infested_ore"
+      "model": "minecraft:block/emerald_ore"
     }
   }
 }
