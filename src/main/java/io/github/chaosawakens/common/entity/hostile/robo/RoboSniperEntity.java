@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
@@ -23,6 +24,9 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> roboSniperAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RoboSniperEntity> mainController = createMainMappedController("robosnipermaincontroller");
+	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "animation.robo_sniper.idle_animation", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "animation.robo_sniper.walking_animation", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "animation.robo_sniper.death");
 	
 	public RoboSniperEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -75,17 +79,17 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public SingletonAnimationBuilder getIdleAnim() {
-		return null;
+		return idleAnim;
 	}
 
 	@Override
 	public SingletonAnimationBuilder getWalkAnim() {
-		return null;
+		return walkAnim;
 	}
 
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
-		return null;
+		return deathAnim;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -19,7 +19,7 @@ public class RoboSniperEntityModel extends ExtendedAnimatedTickingGeoModel<RoboS
 
 	@Override
 	public ResourceLocation getTextureLocation(RoboSniperEntity entity) {
-		return ChaosAwakens.prefix("textures/entity/robo/robo_sniper.png");
+		return ChaosAwakens.prefix("textures/entity/hostile/robo/robo_sniper.png");
 	}
 
 	@Override
