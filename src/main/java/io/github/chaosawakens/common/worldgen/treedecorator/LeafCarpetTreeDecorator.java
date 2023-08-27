@@ -20,10 +20,10 @@ import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class LeafCarpetTreeDecorator extends TreeDecorator {
 	public static final Codec<LeafCarpetTreeDecorator> CODEC = RecordCodecBuilder.create((decorator) ->
-	decorator.group(BlockState.CODEC.fieldOf("leaf_carpet").forGetter((instance) -> instance.carpet))
-	.apply(decorator, LeafCarpetTreeDecorator::new));
+					decorator.group(BlockState.CODEC.fieldOf("leaf_carpet").forGetter((instance) -> instance.carpet))
+					.apply(decorator, LeafCarpetTreeDecorator::new));
 	public final BlockState carpet;
-	
+
 	public LeafCarpetTreeDecorator(BlockState carpet) {
 		this.carpet = carpet;
 	}
@@ -34,18 +34,18 @@ public class LeafCarpetTreeDecorator extends TreeDecorator {
 	}
 
 	@Override
-	public void place(ISeedReader reader, Random rand, List<BlockPos> logs,
-			List<BlockPos> leaves, Set<BlockPos> set, MutableBoundingBox bB) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(0, 0, 0);
-		for(int i = bB.x0; i < bB.x1; i++)
-			for(int j = bB.z0; j < bB.z1; j++) {
+	public void place(ISeedReader reader, Random rand, List<BlockPos> logs, List<BlockPos> leaves, Set<BlockPos> set, MutableBoundingBox bB) {
+		BlockPos.Mutable potentialCarpetPos = new BlockPos.Mutable();
+
+		for (int i = bB.x0; i < bB.x1; i++) {
+			for (int j = bB.z0; j < bB.z1; j++) {
 				int yMBNL = reader.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, i, j);
 				int yWS = reader.getHeight(Heightmap.Type.WORLD_SURFACE, i, j);
-				if(yMBNL != yWS && reader.isEmptyBlock(pos.offset(i, yMBNL, j))
-						&& !(reader.getBlockState(pos.offset(i, yMBNL, j).below()).getBlock() instanceof LeafCarpetBlock))
-					if(rand.nextInt(5) < 3)
-						reader.setBlock(reader.getHeightmapPos(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.offset(i, yMBNL, j)),
-								carpet.setValue(LeafCarpetBlock.getFaceProperty(Direction.DOWN), true), 2);
+
+				if (yMBNL != yWS && reader.isEmptyBlock(potentialCarpetPos.offset(i, yMBNL, j)) && !(reader.getBlockState(potentialCarpetPos.offset(i, yMBNL, j).below()).getBlock() instanceof LeafCarpetBlock)) {
+					if (rand.nextInt(5) < 3) reader.setBlock(reader.getHeightmapPos(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, potentialCarpetPos.offset(i, yMBNL, j)), carpet.setValue(LeafCarpetBlock.getFaceProperty(Direction.DOWN), true), 2);
+				}
 			}
+		}
 	}
 }

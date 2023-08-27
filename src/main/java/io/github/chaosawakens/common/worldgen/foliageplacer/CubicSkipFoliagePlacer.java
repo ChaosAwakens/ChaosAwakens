@@ -24,7 +24,7 @@ public class CubicSkipFoliagePlacer extends FoliagePlacer {
 	});
 	protected final FeatureSpread skip;
 	private boolean isSkipping = false;
-	
+
 	public CubicSkipFoliagePlacer(FeatureSpread blobWidthRange, FeatureSpread blobHeightRange, FeatureSpread skipBlobRange) {
 		super(blobWidthRange, blobHeightRange);
 		this.skip = skipBlobRange;
@@ -36,22 +36,19 @@ public class CubicSkipFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(IWorldGenerationReader reader, Random rand,
-			BaseTreeFeatureConfig config, int maxFreeHeight, Foliage foliage, int foliageHeight, int radius,
-			Set<BlockPos> set, int offset, MutableBoundingBox bBox) {
+	protected void createFoliage(IWorldGenerationReader reader, Random rand, BaseTreeFeatureConfig config, int maxFreeHeight, Foliage foliage, int foliageHeight, int radius, Set<BlockPos> set, int offset, MutableBoundingBox bBox) {
 		int startY = foliageHeight - rand.nextInt(3) - 1, bWidth = this.radius.sample(rand), bHeight = this.offset.sample(rand), skip = 0;
-		
-		for(int i = 0; i > -startY; i--) {
-			if(isSkipping) {
-				if(skip > 1) {
-					skip--;
-				} else {
+
+		for (int i = 0; i > -startY; i--) {
+			if (isSkipping) {
+				if (skip > 1) skip--;
+				else {
 					bHeight = this.offset.sample(rand);
 					this.isSkipping = false;
 				}
 			} else {
-				if(bHeight > 0) {
-					this.placeLeavesRow(reader, rand, config, foliage.foliagePos(), bWidth, set, i, foliage.doubleTrunk(), bBox);
+				if (bHeight > 0) {
+					placeLeavesRow(reader, rand, config, foliage.foliagePos(), bWidth, set, i, foliage.doubleTrunk(), bBox);
 					bHeight--;
 				} else {
 					skip = this.skip.sample(rand);

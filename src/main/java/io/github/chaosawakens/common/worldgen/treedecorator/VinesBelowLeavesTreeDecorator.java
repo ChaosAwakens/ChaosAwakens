@@ -18,14 +18,14 @@ import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class VinesBelowLeavesTreeDecorator extends TreeDecorator {
 	public static final Codec<VinesBelowLeavesTreeDecorator> CODEC = RecordCodecBuilder.create((decorator) ->
-		decorator.group(BlockState.CODEC.fieldOf("vine").forGetter((instance) -> instance.vine))
-		.apply(decorator, VinesBelowLeavesTreeDecorator::new));
+					decorator.group(BlockState.CODEC.fieldOf("vine").forGetter((instance) -> instance.vine))
+					.apply(decorator, VinesBelowLeavesTreeDecorator::new));
 	private final BlockState vine;
-	
+
 	public VinesBelowLeavesTreeDecorator(BlockState vine) {
 		this.vine = vine;
 	}
-	
+
 	@Override
 	protected TreeDecoratorType<?> type() {
 		return CATreeDecoratorTypes.VINES_BELOW_LEAVES_TREE_DECORATOR.get();
@@ -33,20 +33,19 @@ public class VinesBelowLeavesTreeDecorator extends TreeDecorator {
 
 	@Override
 	public void place(ISeedReader reader, Random rand, List<BlockPos> logs, List<BlockPos> leaves, Set<BlockPos> set, MutableBoundingBox bB) {
-		leaves.stream().filter((pos) -> Feature.isAir(reader, pos.below())).forEach((pos) -> this.vineAttempt(reader, rand, pos));
+		leaves.stream().filter((pos) -> Feature.isAir(reader, pos.below())).forEach((pos) -> vineAttempt(reader, rand, pos));
 	}
-	
-	public void vineAttempt(ISeedReader reader, Random rand, BlockPos pos) {
+
+	public void vineAttempt(ISeedReader reader, Random rand, BlockPos targetPos) {
 		int height = rand.nextInt(4) + 1;
-		BlockPos.Mutable mutable = new BlockPos.Mutable(pos.getX(), pos.getY(), pos.getZ());
-		
-		if(rand.nextInt(10) == 0) {
-			for(int i = 0; i < height; i++) {
+		BlockPos.Mutable mutable = new BlockPos.Mutable(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+
+		if (rand.nextInt(10) == 0) {
+			for (int i = 0; i < height; i++) {
 				BlockPos placePos = mutable.offset(0, -1 - i, 0);
-				if(Feature.isAir(reader, placePos))
-					reader.setBlock(placePos, vine, 2);
-				else
-					return;
+
+				if (Feature.isAir(reader, placePos)) reader.setBlock(placePos, vine, 2);
+				else return;
 			}
 		}
 	}

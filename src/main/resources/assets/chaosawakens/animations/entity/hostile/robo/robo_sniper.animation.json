@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.robo_sniper.walking_animation": {
+		"Walk": {
 			"loop": true,
 			"animation_length": 2.08,
 			"anim_time_update": "0",
@@ -437,7 +437,7 @@
 				}
 			}
 		},
-		"animation.robo_sniper.accelerate_animation": {
+		"Accelerate": {
 			"loop": true,
 			"animation_length": 2.08,
 			"anim_time_update": "0",
@@ -561,7 +561,7 @@
 				}
 			}
 		},
-		"animation.robo_sniper.attacking_animation": {
+		"Shoot": {
 			"loop": true,
 			"animation_length": 1.2,
 			"anim_time_update": "0",
@@ -899,7 +899,7 @@
 				}
 			}
 		},
-		"animation.robo_sniper.idle_animation": {
+		"Idle": {
 			"loop": true,
 			"animation_length": 3.12,
 			"anim_time_update": "0",
@@ -942,7 +942,7 @@
 				}
 			}
 		},
-		"animation.robo_sniper.death": {
+		"Death": {
 			"animation_length": 1.8,
 			"bones": {
 				"robo_gunner": {

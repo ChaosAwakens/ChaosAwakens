@@ -24,9 +24,9 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> roboSniperAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RoboSniperEntity> mainController = createMainMappedController("robosnipermaincontroller");
-	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "animation.robo_sniper.idle_animation", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "animation.robo_sniper.walking_animation", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "animation.robo_sniper.death");
+	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	
 	public RoboSniperEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -64,7 +64,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
-	public void manageAttack(LivingEntity target) {		
+	public void manageAttack(LivingEntity target) {
 	}
 	
 	@Override

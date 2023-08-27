@@ -35,14 +35,16 @@ public class GiantConiferTrunkPlacer extends DirtlessGiantTrunkPlacer {
 	@Override
 	public List<FoliagePlacer.Foliage> placeTrunk(IWorldGenerationReader reader, Random rand, int height, BlockPos pos, Set<BlockPos> set, MutableBoundingBox bb, BaseTreeFeatureConfig config) {
 		List<FoliagePlacer.Foliage> trunks = Lists.newArrayList();
+		
 		trunks.addAll(super.placeTrunk(reader, rand, height, pos, set, bb, config));
+		
 		BlockPos.Mutable mutablePos = new BlockPos.Mutable();
 		
-		for(int i = 1; i >= -1; i--) {
-			for(int j = 1; j >= -1; j--) {
-				if(i == 0 && j == 0) continue;
-				if(i != 0 && j != 0) trunks.add(placeBranch(reader, rand, mutablePos, i, height / 3, j, 8, pos, set, bb, config));
-				if(i == 0 || j == 0) trunks.add(placeBranch(reader, rand, mutablePos, i, height * 2 / 3, j, 8, pos, set, bb, config));
+		for (int i = 1; i >= -1; i--) {
+			for (int j = 1; j >= -1; j--) {
+				if (i == 0 && j == 0) continue;
+				if (i != 0 && j != 0) trunks.add(placeBranch(reader, rand, mutablePos, i, height / 3, j, 8, pos, set, bb, config));
+				if (i == 0 || j == 0) trunks.add(placeBranch(reader, rand, mutablePos, i, height * 2 / 3, j, 8, pos, set, bb, config));
 			}	
 		}
 		
@@ -53,7 +55,7 @@ public class GiantConiferTrunkPlacer extends DirtlessGiantTrunkPlacer {
 		int length = rand.nextInt(2) - 2 + baseLength;
 		y = rand.nextInt(5) - 2 + y;
 		
-		for(int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++) {
 			placeLogIfFreeWithOffset(reader, rand, mutablePos, set, bb, config, pos, offX * i, y - 1 + (i / 2), offZ * i);
 			placeLogIfFreeWithOffset(reader, rand, mutablePos, set, bb, config, pos, offX * i + 1, y - 1 + (i / 2), offZ * i);
 			placeLogIfFreeWithOffset(reader, rand, mutablePos, set, bb, config, pos, offX * i + 1, y - 1 + (i / 2), offZ * i + 1);
