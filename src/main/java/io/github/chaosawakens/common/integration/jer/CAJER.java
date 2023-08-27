@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.Biome;
 
 public class CAJER {
+
 	public static void register() {
 		registerDungeonLoot();
 		registerPlants();
@@ -56,23 +57,23 @@ public class CAJER {
 		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_WARPED_LOOT.stringName, CATreasure.ENT_TREE_WARPED_LOOT.langName);
 		dungeonRegistry.registerChest(CATreasure.ENT_TREE_WARPED_LOOT.stringName, CATreasure.ENT_TREE_WARPED_LOOT.lootTable);
 
-// Uncomment: When Mushroom Dungeons are added.
- //		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.langName);
- //		dungeonRegistry.registerChest(CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.lootTable);
- //
- //		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.langName);
- // 	dungeonRegistry.registerChest(CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.lootTable);
+		// Uncomment: When Mushroom Dungeons are added.
+		//		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.langName);
+		//		dungeonRegistry.registerChest(CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.lootTable);
+		//
+		//		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.langName);
+		// 	dungeonRegistry.registerChest(CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.lootTable);
 
 		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_GINKGO_LOOT.stringName, CATreasure.ENT_TREE_GINKGO_LOOT.langName);
 		dungeonRegistry.registerChest(CATreasure.ENT_TREE_GINKGO_LOOT.stringName, CATreasure.ENT_TREE_GINKGO_LOOT.lootTable);
 
 		// WASP DUNGEON
-// Uncomment: When Wasp and Wasp Dungeons are added again.
- // 	dungeonRegistry.registerCategory(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.langName);
- // 	dungeonRegistry.registerChest(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.lootTable);
- //
- //		dungeonRegistry.registerCategory(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.langName);
- //		dungeonRegistry.registerChest(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.lootTable);
+		// Uncomment: When Wasp and Wasp Dungeons are added again.
+		// 	dungeonRegistry.registerCategory(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.langName);
+		// 	dungeonRegistry.registerChest(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.lootTable);
+		//
+		//		dungeonRegistry.registerCategory(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.langName);
+		//		dungeonRegistry.registerChest(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.lootTable);
 	}
 
 	private static void registerPlants() {
@@ -88,6 +89,7 @@ public class CAJER {
 
 	private static void registerOres() {
 		IWorldGenRegistry worldGenRegistry = JERAPI.getInstance().getWorldGenRegistry();
+
 		if (CAConfigManager.MAIN_COMMON.enableOreGen.get()) {
 			if (CAConfigManager.MAIN_COMMON.enableOreAluminumGen.get()) {
 				worldGenRegistry.register(new ItemStack(CABlocks.ALUMINUM_ORE.get()),
@@ -159,7 +161,7 @@ public class CAJER {
 								new DistributionSquare(6, 4, 40, 104),
 								Restriction.OVERWORLD,
 								true,
-								LootDropMinMax(new ItemStack(CAItems.COPPER_LUMP.get()), 2, 5));
+								lootDropMinMax(new ItemStack(CAItems.COPPER_LUMP.get()), 2, 5));
 					}
 					if (CAConfigManager.MAIN_COMMON.enableOreTinGen.get()) {
 						worldGenRegistry.register(new ItemStack(CABlocks.TIN_ORE.get()),
@@ -203,7 +205,7 @@ public class CAJER {
 							new DistributionSquare(6, 4, 34, 94),
 							new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)),
 							true,
-							LootDropMinMax(new ItemStack(CAItems.COPPER_LUMP.get()), 2, 5));
+							lootDropMinMax(new ItemStack(CAItems.COPPER_LUMP.get()), 2, 5));
 				}
 				if (CAConfigManager.MAIN_COMMON.enableOreTinGen.get()) {
 					worldGenRegistry.register(new ItemStack(CABlocks.TIN_ORE.get()),
@@ -247,12 +249,12 @@ public class CAJER {
 						new DistributionSquare(14, 7, 32, 96),
 						Restriction.OVERWORLD,
 						true,
-						LootDropMinMax(new ItemStack(CAItems.SALT.get()), 4, 8));
+						lootDropMinMax(new ItemStack(CAItems.SALT.get()), 4, 8));
 				worldGenRegistry.register(new ItemStack(CABlocks.SALT_ORE.get()),
 						new DistributionSquare(12, 7, 32, 152),
 						new Restriction(new DimensionRestriction(CADimensions.MINING_PARADISE)),
 						true,
-						LootDropMinMax(new ItemStack(CAItems.SALT.get()), 4, 8));
+						lootDropMinMax(new ItemStack(CAItems.SALT.get()), 4, 8));
 			}
 
 			if (CAConfigManager.MAIN_COMMON.enableOreTitaniumGen.get()) {
@@ -347,12 +349,12 @@ public class CAJER {
 					new DistributionSquare(28, 52, 12),
 					new Restriction(new DimensionRestriction(CADimensions.CRYSTAL_WORLD)),
 					true,
-					LootDropMinMax(new ItemStack(CAItems.PINK_TOURMALINE_SHARD.get()), 1, 4));
+					lootDropMinMax(new ItemStack(CAItems.PINK_TOURMALINE_SHARD.get()), 1, 4));
 			worldGenRegistry.register(new ItemStack(CABlocks.CATS_EYE_CLUSTER.get()),
 					new DistributionSquare(6, 30, 18),
 					new Restriction(new DimensionRestriction(CADimensions.CRYSTAL_WORLD)),
 					true,
-					LootDropMinMax(new ItemStack(CAItems.CATS_EYE_SHARD.get()), 1, 4));
+					lootDropMinMax(new ItemStack(CAItems.CATS_EYE_SHARD.get()), 1, 4));
 
 			if (CAConfigManager.MAIN_COMMON.enableFossilGen.get()) {
 				// Note: Chaos Awakens Overworld Fossils
@@ -956,7 +958,7 @@ public class CAJER {
 	 * @param minDrop      the maximum amount dropped
 	 * @param maxDrop      the minimum amount dropped
 	 */
-	public static LootDrop LootDropMinMax(ItemStack item, int minDrop, int maxDrop) {
+	public static LootDrop lootDropMinMax(ItemStack item, int minDrop, int maxDrop) {
 		return new LootDrop(item, minDrop, maxDrop, 1F);
 	}
 }

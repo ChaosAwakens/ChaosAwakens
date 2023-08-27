@@ -146,6 +146,11 @@
 	"dungeon.chaosawakens.jer.ent_tree.ginkgo_loot": "Ent Tree - Ginkgo Loot",
 	"dungeon.chaosawakens.jer.wasp_dungeon.loot": "Wasp Dungeon - Loot",
 	"dungeon.chaosawakens.jer.mining_wasp_dungeon.loot": "Giant Wasp Dungeon - Loot",
+	
+	"jer.dim.chaosawakens:danger_isles": "Danger Isles",
+	"jer.dim.chaosawakens:village_mania": "Village Mania",
+	"jer.dim.chaosawakens:mining_paradise": "Mining Paradise",
+	"jer.dim.chaosawakens:crystal_world": "Crystalworld",
 
 	"container.chaosawakens.crystal_crafting_table": "Crystalwood Crafting Table",
 	"container.chaosawakens.crystal_furnace": "Crystal Furnace",

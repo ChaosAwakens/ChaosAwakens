@@ -188,7 +188,7 @@ public class BiomeHandlers {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_PEACH);
 				}
 				
-				// Forest (!Jungle && Mountain)
+				// Forest !(Jungle && Mountain)
 				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN)) {
 					if (!location.contains("birch") && !location.contains("dark") && !location.contains("jungle") && !location.contains("taiga")) {
 						gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_STRAWBERRY_BUSH);

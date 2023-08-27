@@ -16,8 +16,7 @@ import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
 
 public class ConiferousFoliagePlacer extends FoliagePlacer {
-	public static final Codec<ConiferousFoliagePlacer> CODEC = RecordCodecBuilder
-			.create((instance) -> foliagePlacerParts(instance).apply(instance, ConiferousFoliagePlacer::new));
+	public static final Codec<ConiferousFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance).apply(instance, ConiferousFoliagePlacer::new));
 	
 	public ConiferousFoliagePlacer(FeatureSpread radius, FeatureSpread offset) {
 		super(radius, offset);
@@ -29,12 +28,10 @@ public class ConiferousFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(IWorldGenerationReader reader, Random rand,
-			BaseTreeFeatureConfig config, int maxFreeHeight, Foliage foliage, int foliageHeight, int radius,
-			Set<BlockPos> set, int offset, MutableBoundingBox bBox) {
-		int h = this.foliageHeight(rand, foliageHeight, config);
+	protected void createFoliage(IWorldGenerationReader reader, Random rand, BaseTreeFeatureConfig config, int maxFreeHeight, Foliage foliage, int foliageHeight, int radius, Set<BlockPos> set, int offset, MutableBoundingBox bBox) {
+		int curFoliageHeight = foliageHeight(rand, foliageHeight, config);
 		
-		for(int i = 1; i > -h; i--) this.placeLeavesRow(reader, rand, config, foliage.foliagePos(), radius, set, i, foliage.doubleTrunk(), bBox);
+		for(int i = 1; i > -curFoliageHeight; i--) this.placeLeavesRow(reader, rand, config, foliage.foliagePos(), radius, set, i, foliage.doubleTrunk(), bBox);
 	}
 
 	@Override
@@ -44,21 +41,19 @@ public class ConiferousFoliagePlacer extends FoliagePlacer {
 
 	@Override
 	protected boolean shouldSkipLocation(Random pRandom, int x, int y, int z, int radius, boolean doubleTrunk) {
-		if(y > 0) {
-			if(x == 0 && z == 0) return false;
-			return true;
-		}
+		if (y > 0) return x != 0 && z != 0;
 		
 		int remainder = -(y % 3), radiusMinus1 = radius - 1, abX = Math.abs(x), abZ = Math.abs(z);
+		
 		switch(remainder) {
 		case 0:
-			if(abX + abZ <= radiusMinus1) return false;
+			if (abX + abZ <= radiusMinus1) return false;
 			break;
 		case 1:
-			if(abX <= radiusMinus1 && abZ <= radiusMinus1) return false;
+			if (abX <= radiusMinus1 && abZ <= radiusMinus1) return false;
 			break;
 		case 2:
-			if((abX != radius && abZ != 0) || (abX != 0 && abZ != radius)) return false;
+			if ((abX != radius && abZ != 0) || (abX != 0 && abZ != radius)) return false;
 			break;
 		}
 		return true;

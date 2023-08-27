@@ -16,6 +16,7 @@ import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
+import net.minecraft.world.gen.foliageplacer.FoliagePlacer.Foliage;
 import net.minecraft.world.gen.trunkplacer.AbstractTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
 
@@ -39,20 +40,23 @@ public class DirtlessGiantTrunkPlacer extends AbstractTrunkPlacer {
 	
 	@Override
 	public List<FoliagePlacer.Foliage> placeTrunk(IWorldGenerationReader reader, Random rand, int height, BlockPos pos, Set<BlockPos> set, MutableBoundingBox bb, BaseTreeFeatureConfig config) {
-		BlockPos below = pos.below();
-		this.baseAt(reader, below);
-		this.baseAt(reader, below.east());
-		this.baseAt(reader, below.south());
-		this.baseAt(reader, below.south().east());
+		BlockPos belowPos = pos.below();
+		
+		baseAt(reader, belowPos);
+		baseAt(reader, belowPos.east());
+		baseAt(reader, belowPos.south());
+		baseAt(reader, belowPos.south().east());
+		
 		BlockPos.Mutable mutablePos = new BlockPos.Mutable();
 		
-		for(int i = 0; i < height; ++i) {
+		for (int i = 0; i < height; ++i) {
 			placeLogIfFreeWithOffset(reader, rand, mutablePos, set, bb, config, pos, 0, i, 0);
 			placeLogIfFreeWithOffset(reader, rand, mutablePos, set, bb, config, pos, 1, i, 0);
 			placeLogIfFreeWithOffset(reader, rand, mutablePos, set, bb, config, pos, 1, i, 1);
 			placeLogIfFreeWithOffset(reader, rand, mutablePos, set, bb, config, pos, 0, i, 1);
 		}
-		return ImmutableList.of(new FoliagePlacer.Foliage(pos.above(height), 0, true));
+		
+		return ImmutableList.of(new Foliage(pos.above(height), 0, true));
 	}
 	
 	protected static void placeLogIfFreeWithOffset(IWorldGenerationReader reader, Random rand, BlockPos.Mutable mutable, Set<BlockPos> set, MutableBoundingBox bb, BaseTreeFeatureConfig config, BlockPos pos, int xOffset, int yOffset, int zOffset) {

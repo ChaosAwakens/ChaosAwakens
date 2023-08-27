@@ -28,6 +28,7 @@ public class CATagProvider extends BlockTagsProvider {
 	}
 
 	public static class CABlockTagProvider extends BlockTagsProvider {
+		
 		public CABlockTagProvider(DataGenerator gen, ExistingFileHelper existingFileHelper) {
 			super(gen, ChaosAwakens.MODID, existingFileHelper);
 		}
@@ -117,6 +118,7 @@ public class CATagProvider extends BlockTagsProvider {
 	}
 
 	public static class CAItemTagProvider extends ItemTagsProvider {
+		
 		public CAItemTagProvider(DataGenerator gen, ExistingFileHelper existingFileHelper) {
 			super(gen, new CABlockTagProvider(gen, existingFileHelper), ChaosAwakens.MODID, existingFileHelper);
 		}
@@ -255,6 +257,7 @@ public class CATagProvider extends BlockTagsProvider {
 	}
 
 	public static class CAEntityTypeTagProvider extends EntityTypeTagsProvider {
+		
 		public CAEntityTypeTagProvider(DataGenerator gen, ExistingFileHelper existingFileHelper) {
 			super(gen, ChaosAwakens.MODID, existingFileHelper);
 		}
