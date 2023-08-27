@@ -302,8 +302,9 @@ public class BiomeHandlers {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.DENSE_BULB_DEFAULT);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_GINKGO);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_FLOWER);
-
-					if (CAConfigManager.MAIN_COMMON.generateGinkgoEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_GINKGO_ENT_TREE);
+					
+					if (CAConfigManager.MAIN_COMMON.generateGinkgoEntTree.get())
+						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_GINKGO_ENT_TREE);
 				}
 
 				// Dense Plains

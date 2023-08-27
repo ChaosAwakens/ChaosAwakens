@@ -49,15 +49,19 @@ public class CAStructures {
 //		setupMapSpacingAndLand(MINING_WASP_DUNGEON.get(), new StructureSeparationSettings(38, 34, 159342356), false);
 	}
 
-	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {
+	public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure,
+			StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {
 		Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 
-		if (transformSurroundingLand) Structure.NOISE_AFFECTING_FEATURES = ImmutableList.<Structure<?>>builder().addAll(Structure.NOISE_AFFECTING_FEATURES).add(structure).build();
+		if (transformSurroundingLand) Structure.NOISE_AFFECTING_FEATURES = ImmutableList.<Structure<?>>builder()
+				.addAll(Structure.NOISE_AFFECTING_FEATURES).add(structure).build();
 
-		DimensionStructuresSettings.DEFAULTS = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder().putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build();
+		DimensionStructuresSettings.DEFAULTS = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
+				.putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build();
 
 		WorldGenRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
-			Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().structureSettings().structureConfig;
+			Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().structureSettings()
+					.structureConfig;
 
 			if (structureMap instanceof ImmutableMap) {
 				Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);

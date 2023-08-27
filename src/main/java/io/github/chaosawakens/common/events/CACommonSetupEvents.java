@@ -145,11 +145,12 @@ public class CACommonSetupEvents {
 	public static class ForgeSetupEvents {
 		
 		@SuppressWarnings("unchecked")
-		@SubscribeEvent(priority = EventPriority.HIGH)
+		@SubscribeEvent
 		public static void onDimensionalSpacingWorldLoadEvent(final WorldEvent.Load event) {
 			if (!(event.getWorld() instanceof ServerWorld)) return;
 
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
+			ChaosAwakens.debug("DIMENSION", serverWorld.dimension());
 			ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
 
 			try {
@@ -166,23 +167,22 @@ public class CACommonSetupEvents {
 
 			if (serverWorld.getChunkSource().getGenerator() instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD)) return;
 
-			Map<Structure<?>, StructureSeparationSettings> testTempMap = new HashMap<>(chunkProvider.generator.getSettings().structureConfig());
-			Object2ObjectArrayMap<Structure<?>, StructureSeparationSettings> tempMap = new Object2ObjectArrayMap<>(testTempMap);
+			Object2ObjectArrayMap<Structure<?>, StructureSeparationSettings> newMap = new Object2ObjectArrayMap<>(chunkProvider.generator.getSettings().structureConfig());
 
-			tempMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.ACACIA_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.BIRCH_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.CRIMSON_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.CRIMSON_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.DARK_OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.DARK_OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.JUNGLE_ENT_TREE.get(),	DimensionStructuresSettings.DEFAULTS.get(CAStructures.JUNGLE_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
-			tempMap.putIfAbsent(CAStructures.GINKGO_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.GINKGO_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.ACACIA_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.ACACIA_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.BIRCH_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.BIRCH_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.CRIMSON_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.CRIMSON_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.DARK_OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.DARK_OAK_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.JUNGLE_ENT_TREE.get(),	DimensionStructuresSettings.DEFAULTS.get(CAStructures.JUNGLE_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.OAK_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.OAK_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
+			newMap.putIfAbsent(CAStructures.GINKGO_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.GINKGO_ENT_TREE.get()));
 
 //			tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
 //			tempMap.putIfAbsent(CAStructures.MINING_WASP_DUNGEON.get(),	DimensionStructuresSettings.DEFAULTS.get(CAStructures.MINING_WASP_DUNGEON.get()));
 
-			chunkProvider.generator.getSettings().structureConfig = testTempMap;
+			chunkProvider.generator.getSettings().structureConfig = newMap;
 		}
 
 		@SubscribeEvent(priority = EventPriority.HIGH)
