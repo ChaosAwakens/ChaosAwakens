@@ -88,12 +88,12 @@ public class CAMaterial {
 			return this;
 		}
 
-		Builder notSolidBlocking() {
+		public Builder notSolidBlocking() {
 			this.solidBlocking = false;
 			return this;
 		}
 
-		protected Builder flammable() {
+		public Builder flammable() {
 			this.flammable = true;
 			return this;
 		}
@@ -103,12 +103,12 @@ public class CAMaterial {
 			return this;
 		}
 
-		protected Builder destroyOnPush() {
+		public Builder destroyOnPush() {
 			this.pushReaction = PushReaction.DESTROY;
 			return this;
 		}
 
-		protected Builder notPushable() {
+		public Builder notPushable() {
 			this.pushReaction = PushReaction.BLOCK;
 			return this;
 		}
