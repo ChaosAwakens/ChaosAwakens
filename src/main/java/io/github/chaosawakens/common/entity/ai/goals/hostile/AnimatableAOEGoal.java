@@ -11,6 +11,7 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
@@ -147,11 +148,16 @@ public class AnimatableAOEGoal extends Goal {
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
 
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId, shouldFreezeRotation) && !owner.isOnAttackCooldown() && curCooldown <= 0
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId, shouldFreezeRotation)
+				&& !owner.isOnAttackCooldown()
+				&& curCooldown <= 0
 				&& owner.distanceTo(owner.getTarget()) <= aoeRange + 2.0D
 				&& EntityUtil.getAllEntitiesAround(owner, aoeRange, aoeRange, aoeRange, aoeRange).size() >= amountThreshold
-				&& owner.isAlive() && owner.getTarget().isAlive() && !owner.isAttacking()
-				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
+				&& owner.isAlive()
+				&& owner.getTarget().isAlive()
+				&& !owner.isAttacking()
+				&& (extraActivationConditions != null ? extraActivationConditions.test(owner)
+						&& owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
@@ -170,7 +176,7 @@ public class AnimatableAOEGoal extends Goal {
 
 		this.curAnim = targetAnim;
 		
-		this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()) / 2, 3, null);
+		this.aoeDamageHitBox = new AOEHitboxEntity(CAEntityTypes.BASE_AOE_HITBOX.get(), owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()) / 2, 3, null);
 
 		aoeDamageHitBox.setActionOnIntersection((target) -> {
 			if (!affectedEntities.contains(target) && owner != target && !owner.isAlliedTo(target) && EntityPredicates.ATTACK_ALLOWED.test(target) && owner.getClass() != target.getClass()) {

@@ -28,6 +28,7 @@ import net.minecraft.world.server.ServerWorld;
 public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 	private JefferyShockwaveEntity jefferyShockwave;
 	private final ObjectArrayList<LivingEntity> affectedEntities = new ObjectArrayList<>();
+	private boolean hasSpawnedShockwave = false;
 
 	public RoboJefferyShockwaveGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, int presetCooldown) {
 		super(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, amountThreshold, probability, presetCooldown);
@@ -45,24 +46,25 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 		Supplier<? extends IAnimationBuilder> targetAnim = animationsToPick != null && !animationsToPick.isEmpty() ? animationsToPick.get(owner.level.getRandom().nextInt(animationsToPick.size())) : aoeAnim;
 
 		owner.playAnimation(targetAnim.get(), true);
-
-		this.curAnim = targetAnim;
 		
-		this.jefferyShockwave = new JefferyShockwaveEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, 49, 2, null);
-
+		jefferyShockwave = new JefferyShockwaveEntity(owner.level, owner.blockPosition().above(), (float) aoeRange, (float) aoeRange / 2, 49, 2, null);
+		
 		jefferyShockwave.setActionOnIntersection((target) -> {
-			if (!affectedEntities.contains(target) && owner != target && !owner.isAlliedTo(target) && EntityPredicates.ATTACK_ALLOWED.test(target) && owner.getClass() != target.getClass()) {
+			if (jefferyShockwave != null && !affectedEntities.contains(target) && owner != target && !owner.isAlliedTo(target) && EntityPredicates.ATTACK_ALLOWED.test(target) && owner.getClass() != target.getClass()) {
 				target.hurt(CADamageSources.SHOCKWAVE, 35.0F - owner.distanceTo(target) / 2);
-
+				
 				double targetAngle = (MathUtil.getAngleBetweenEntities(jefferyShockwave, target) + 90) * Math.PI / 180; //TODO Dist calc
 				double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 5, 100.0D) : -Math.min(owner.getAttackDamage() / 5, 100.0D) / 2.1D;
-
+				
 				target.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), target.getDeltaMovement().normalize().y + Math.min(owner.getAttackDamage() / 10, 2.3D), kbMultiplier * Math.sin(targetAngle));
 				target.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 62, 4));
 				
 				affectedEntities.add(target);
 			}
-		}); //TODO Make shockwave visible + no lag
+		});
+		
+		this.hasSpawnedShockwave = false;
+		this.curAnim = targetAnim;
 	}
 	
 	@Override
@@ -73,7 +75,9 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 
 		this.curAnim = null;
 		this.curCooldown = presetCooldown;
-
+		this.jefferyShockwave = null;
+		
+		this.hasSpawnedShockwave = false;
 		affectedEntities.clear();
 	}
 	
@@ -89,14 +93,17 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 		else if (owner.getTarget() != null) owner.getLookControl().setLookAt(owner.getTarget(), 30.0F, 30.0F);
 
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
-			CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 10, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
 			owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
 			
 			for (BlockPos curAffectedParticlePos : BlockPos.betweenClosed(negBlockRange, posBlockRange)) {
 				if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(curAffectedParticlePos)), curAffectedParticlePos.getX(), curAffectedParticlePos.getY(), curAffectedParticlePos.getZ(), 0, 1, 0, 20, 0.05D);
 			}
 			
-			if (jefferyShockwave != null) owner.level.addFreshEntity(jefferyShockwave);
+			if (!this.hasSpawnedShockwave) {
+				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 10, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
+				owner.level.addFreshEntity(jefferyShockwave);
+				this.hasSpawnedShockwave = true;
+			}
 		}
 	}
 }

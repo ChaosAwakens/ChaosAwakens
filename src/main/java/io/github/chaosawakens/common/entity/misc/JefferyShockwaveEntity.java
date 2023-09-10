@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.misc;
 
 import java.util.function.Consumer;
 
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +27,7 @@ public class JefferyShockwaveEntity extends AOEHitboxEntity implements IAnimatab
 	}
 	
 	public JefferyShockwaveEntity(World world, BlockPos spawnPos, float maxRad, float expSpeed, int maxAge, int execInterv, Consumer<LivingEntity> actionOnInters) {
-		super(world, spawnPos, maxRad, expSpeed, maxAge, execInterv, actionOnInters);
+		super(CAEntityTypes.JEFFERY_SHOCKWAVE.get(), world, spawnPos, maxRad, expSpeed, maxAge, execInterv, actionOnInters);
 	}
 	
 	public <E extends IAnimatable> PlayState mainPredicate(AnimationEvent<E> event) {
