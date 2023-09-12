@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.entity.misc;
 import java.util.List;
 import java.util.function.Consumer;
 
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.Entity;
@@ -33,7 +34,20 @@ public class AOEHitboxEntity extends Entity {
 		this.noCulling = true;
 	}
 	
-	public AOEHitboxEntity(EntityType<?> pType, World world, BlockPos spawnPos, float maxRad, float expSpeed, int maxAge, int execInterv, Consumer<LivingEntity> actionOnInters) {
+	public AOEHitboxEntity(World world, BlockPos spawnPos, float maxRad, float expSpeed, int maxAge, int execInterv, Consumer<LivingEntity> actionOnInters) {
+		this(CAEntityTypes.BASE_AOE_HITBOX.get(), world);
+		this.noPhysics = true;
+		this.noCulling = true;
+		
+		setMaxRadius(maxRad);
+		setExpansionSpeed(expSpeed);
+		setMaxAge(maxAge);
+		setActionExecutionInterval(execInterv);
+		setActionOnIntersection(actionOnInters);
+		setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+	}
+	
+	protected AOEHitboxEntity(EntityType<?> pType, World world, BlockPos spawnPos, float maxRad, float expSpeed, int maxAge, int execInterv, Consumer<LivingEntity> actionOnInters) {
 		this(pType, world);
 		this.noPhysics = true;
 		this.noCulling = true;

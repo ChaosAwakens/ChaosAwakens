@@ -106,7 +106,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
  * errors. Can still be attributed to MC's goofiness, though :p
  * <br> </br>
  * Another thing to note is that this object <b>CANNOT</b> be statically instantiated, due to the fact that you need to
- * pass an {@link IAnimatableEntity} instance in. This means that it'll be instantiated every time an animation
+ * pass an {@link IAnimatableEntity} instance in. This means that it'll be instantiated 
  * once per entity instance, but not every <i>frame</i>. Still much better than handling metadata and such per frame
  * (potentially multiple times per-frame), though.
  */
@@ -216,7 +216,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public void playAnimation(boolean forceAnim) {
 		if (!ObjectUtil.performNullityChecks(false, animBuilder, targetController)) return;
-		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 1);
+		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
 
 		if (forceAnim && !isPlaying()) {
 			targetController.getWrappedController().clearAnimationCache();

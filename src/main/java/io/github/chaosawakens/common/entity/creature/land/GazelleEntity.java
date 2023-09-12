@@ -189,6 +189,12 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	public boolean isFood(ItemStack pStack) {
 		return FOOD_ITEMS.test(pStack);
 	}
+	
+	@Override
+	protected void tickDeath() {
+		super.tickDeath();
+		setPanicking(false);
+	}
 
 	@Override
 	public ILivingEntityData finalizeSpawn(IServerWorld pLevel, DifficultyInstance pDifficulty, SpawnReason pReason, ILivingEntityData pSpawnData, CompoundNBT pDataTag) {

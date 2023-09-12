@@ -162,6 +162,12 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	}
 	
 	@Override
+	protected void tickDeath() {
+		super.tickDeath();
+		setPanicking(false);
+	}
+	
+	@Override
 	public void aiStep() {
 		if (this.level.isClientSide) this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, getRandomX(0.5D), getY(0.85D), getRandomZ(0.5D), -1000, -1000, -1000);
 		super.aiStep();

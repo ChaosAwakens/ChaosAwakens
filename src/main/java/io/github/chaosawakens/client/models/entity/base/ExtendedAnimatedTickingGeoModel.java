@@ -1,16 +1,19 @@
 package io.github.chaosawakens.client.models.entity.base;
 
+import java.util.Collections;
+
 import javax.annotation.Nullable;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.ICAGeoModel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.resource.GeckoLibCache;
-import software.bernie.shadowed.eliotlash.molang.MolangParser;
 
 public abstract class ExtendedAnimatedTickingGeoModel<E extends IAnimatableEntity> extends AnimatedTickingGeoModel<E> implements ICAGeoModel {
 	protected abstract boolean shouldApplyHeadRot();
@@ -30,29 +33,65 @@ public abstract class ExtendedAnimatedTickingGeoModel<E extends IAnimatableEntit
 		return getAnimationProcessor().getBone("head");
 	}
 	
-	protected void handleAnimTick(E owner, AnimationData manager) {
-		if (manager.startTick == null) manager.startTick = (double) (owner.tickTimer() + Minecraft.getInstance().getFrameTime());
+	protected void handleClientAnimTick(E owner, Integer uniqueID, @Nullable AnimationEvent<E> customPredicate) {	
+		AnimationData curAnimManager = owner.getFactory().getOrCreateAnimationData(uniqueID);
+		boolean shouldTick = !Minecraft.getInstance().isPaused() || curAnimManager.shouldPlayWhilePaused;
+		double curTrackedProgress = owner.tickTimer() + Minecraft.getInstance().getFrameTime();
 		
-		manager.tick = (owner.tickTimer() + Minecraft.getInstance().getFrameTime());
+		if (curAnimManager.startTick == null) curAnimManager.startTick = curTrackedProgress;
 		
-		double gameTick = manager.tick;
-		double deltaTicks = gameTick - lastGameTickTime;
+		if (shouldTick) {
+			curAnimManager.tick = curTrackedProgress;
+			
+			double gameTick = curAnimManager.tick;
+			double deltaTicks = gameTick - lastGameTickTime;
+			
+			seekTime += deltaTicks;
+			lastGameTickTime = gameTick;
+		}
 		
-		seekTime += deltaTicks;
-		lastGameTickTime = gameTick;
+		AnimationEvent<E> safeCustomPredicate = customPredicate == null ? new AnimationEvent<E>(owner, 0, 0, 0, false, Collections.emptyList()) : customPredicate;
+		
+		safeCustomPredicate.animationTick = seekTime;
+		
+		getAnimationProcessor().preAnimationSetup(safeCustomPredicate.getAnimatable(), seekTime);
+		
+		if (!getAnimationProcessor().getModelRendererList().isEmpty()) getAnimationProcessor().tickAnimation(owner, uniqueID, seekTime, safeCustomPredicate, GeckoLibCache.getInstance().parser, shouldCrashOnMissing);
+		if (shouldTick) codeAnimations(owner, uniqueID, customPredicate);
 	}
 	
-	@SuppressWarnings("rawtypes")
-	@Override
-	public void setLivingAnimations(E entity, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
-		super.setLivingAnimations(entity, uniqueID, customPredicate);
+	protected void handleFunctionalAnimTick(E owner, Integer uniqueID, @Nullable AnimationEvent<E> customPredicate) {
+		AnimationData curAnimManager = owner.getFactory().getOrCreateAnimationData(uniqueID);
+		MinecraftServer curServer = ServerLifecycleHooks.getCurrentServer();
+		curAnimManager.shouldPlayWhilePaused = curServer != null && curServer.isDedicatedServer();
+		boolean shouldTick = (!Minecraft.getInstance().isPaused() || curAnimManager.shouldPlayWhilePaused);
+		double curTrackedProgress = owner.tickTimer() + Minecraft.getInstance().getFrameTime();
 		
-		MolangParser p = GeckoLibCache.getInstance().parser;
-		/*try {
-			ChaosAwakens.debug("GECKOLIB ANIM PROGRESS", p.parse("query.anim_time").get());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+		if (curAnimManager.startTick == null) curAnimManager.startTick = curTrackedProgress;
+		if (shouldTick) {
+			curAnimManager.tick = curTrackedProgress;
+			
+			double curTick = curAnimManager.tick;
+			double deltaTicks = curTick - lastGameTickTime;
+			
+			seekTime += deltaTicks;
+			lastGameTickTime = curTick;
+		}
+		
+		AnimationEvent<E> safeCustomPredicate = customPredicate == null ? new AnimationEvent<E>(owner, 0, 0, 0, false, Collections.emptyList()) : customPredicate;
+		
+		safeCustomPredicate.animationTick = seekTime;
+		
+		getAnimationProcessor().preAnimationSetup(safeCustomPredicate.getAnimatable(), seekTime);
+		
+		if (!getAnimationProcessor().getModelRendererList().isEmpty()) getAnimationProcessor().tickAnimation(owner, uniqueID, seekTime, safeCustomPredicate, GeckoLibCache.getInstance().parser, shouldCrashOnMissing);
+		if (shouldTick) codeAnimations(owner, uniqueID, customPredicate);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void setLivingAnimations(E entity, Integer uniqueID, @Nullable AnimationEvent customPredicate) {		
+		handleFunctionalAnimTick(entity, uniqueID, customPredicate);
 		
 		if (shouldApplyHeadRot()) applyHeadRotations(getAnimationProcessor(), customPredicate);
 		if (shouldApplyChildScaling()) setBabyScaling(getAnimationProcessor(), customPredicate, shouldScaleHeadWithChild());

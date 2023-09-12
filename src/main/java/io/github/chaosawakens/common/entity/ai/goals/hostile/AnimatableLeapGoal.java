@@ -6,12 +6,10 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.BlockPosUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.block.Block;
@@ -122,8 +120,7 @@ public class AnimatableLeapGoal extends Goal {
 		
 		if (target == null || !target.isAlive() || owner.isDeadOrDying()) return;
 		
-		if (owner.isPlayingAnimation(leapAnim.get()))
-			owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
+		if (owner.isPlayingAnimation(leapAnim.get())) owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 		
 		BlockPos targetPos = target.blockPosition();
 		
@@ -131,22 +128,23 @@ public class AnimatableLeapGoal extends Goal {
 			if (owner.isPlayingAnimation(midairAnim.get())) {
 				owner.playAnimation(landAnim.get(), true);
 				
-				if (!this.hasDoneAOE) {
-					AOEHitboxEntity aoeDamageEffect = new AOEHitboxEntity(CAEntityTypes.BASE_AOE_HITBOX.get(), owner.level, owner.blockPosition(), (float) (Math.ceil(leapPower) * 10), (float) (leapPower * 3), 20, 5, actionOnLand);
+				if (!hasDoneAOE) {
+					AOEHitboxEntity aoeDamageEffect = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) (Math.ceil(leapPower) * 2), (float) (leapPower * 3), 20, 5, actionOnLand);
+					
 					owner.level.addFreshEntity(aoeDamageEffect);
-					CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 80F, 0.2F, 4, 120);
+					CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 80F, 0.2F, 10, 120);
+					
 					this.hasDoneAOE = true;
 				}
 			} else if (leapAnim.get().hasAnimationFinished()) {
-				targetPos = target.blockPosition().immutable(); // Update the target's cached position if not null
+				targetPos = BlockPosUtil.findHorizontalPositionBeyond(owner, target.blockPosition().immutable(), -20); // Update the target's cached position if not null
 				
 				Vector3d curOwnerMovementVec = owner.getDeltaMovement();
 				Vector3d launchVec = new Vector3d(targetPos.getX() - owner.getX(), 0, targetPos.getZ() - owner.getZ());
-				if (launchVec.lengthSqr() > 1.0E-7D)
-					launchVec = launchVec.normalize().scale(leapPower * launchVec.length() / 11.0)
-						.add(curOwnerMovementVec.scale(leapPower / 1.36D));
 				
-				owner.setDeltaMovement(launchVec.x, leapPower, launchVec.z);
+				if (launchVec.lengthSqr() > 1.0E-7D) launchVec = launchVec.normalize().scale((Math.PI * leapPower * 2) * 0.5D).scale(0.55D); // Semicircle
+				
+				owner.setDeltaMovement(launchVec.x, leapPower * 0.55D, launchVec.z);
 				owner.playAnimation(midairAnim.get(), true);
 			}
 		} else {

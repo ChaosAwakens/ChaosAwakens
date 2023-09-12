@@ -76,7 +76,7 @@ minecraft {
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
 			
-			args '--mod', "${modId}", '--all', '--output', file('src/main/generated/'), '--existing', file('src/main/resources/')
+			args '--mod', project.modId, '--all', '--output', file('src/main/generated/'), '--existing', file('src/main/resources/')
 			mods {
 				"${modId}" {
 					source sourceSets.main
