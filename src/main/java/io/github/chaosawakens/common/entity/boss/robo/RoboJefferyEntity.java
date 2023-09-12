@@ -162,8 +162,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 			super.tickDeath();
 			
 			Axis facingDir = getDirection().getAxis();
-			double plusX = facingDir.equals(Axis.X) ? 1 : 0;
-			double plusZ = facingDir.equals(Axis.Z) ? 1 : 0;
+			double xOffset = facingDir.equals(Axis.X) ? 1 : 0;
+			double zOffset = facingDir.equals(Axis.Z) ? 1 : 0;
 			
 			if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 29, 77)) CAScreenShakeEntity.shakeScreen(level, position(), 160F, (float) (deathAnim.getWrappedAnimProgress() / 100F) / 6, 2, 240);
 			
@@ -172,7 +172,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				
 				for (int angleDeg = 0; angleDeg < 360; angleDeg++) {
 					for (int rep = 0; rep < 6; rep++) {
-						this.level.addParticle(ParticleTypes.SMOKE, getX() + plusX, getRandomY() * 0.8D, getZ() + plusZ, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
+						this.level.addParticle(ParticleTypes.SMOKE, getX() + xOffset, getRandomY() * 0.8D, getZ() + zOffset, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
 					}
 				}
 				
