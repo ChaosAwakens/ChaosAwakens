@@ -5,13 +5,12 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.goals.boss.robo.RoboJefferyShockwaveGoal;
+import io.github.chaosawakens.common.entity.ai.goals.boss.robo.robojeffery.RoboJefferyShockwaveGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableLeapGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -61,16 +60,16 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final SingletonAnimationBuilder lowHealthAnim = new SingletonAnimationBuilder(this, "Low Health", EDefaultLoopTypes.LOOP).setWrappedController(secondaryAmbienceController);
 	private final SingletonAnimationBuilder highHealthAnim = new SingletonAnimationBuilder(this, "Healthy", EDefaultLoopTypes.LOOP).setWrappedController(secondaryAmbienceController);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder leapBeginAnim = new SingletonAnimationBuilder(this, "Leap Attack: Leap", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder leapMidairAnim = new SingletonAnimationBuilder(this, "Leap Attack: Midair", EDefaultLoopTypes.LOOP).setWrappedController(attackController);
 	private final SingletonAnimationBuilder leapLandAnim = new SingletonAnimationBuilder(this, "Leap Attack: Land", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
-	public static final byte PUNCH_ATTACK_ID = 1;
-	public static final byte SMASH_ATTACK_ID = 2;
-	public static final byte LEAP_ATTACK_ID = 3;
+	private static final byte PUNCH_ATTACK_ID = 1;
+	private static final byte SMASH_ATTACK_ID = 2;
+	private static final byte LEAP_ATTACK_ID = 3;
 
 	public RoboJefferyEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -130,9 +129,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 140D, 15.6D, 18.1D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
 		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 5, 3, 40));
 		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 14.5D, 40, (owner) -> getRandom().nextInt(35) == 0 && distanceTo(getTarget()) > getMeleeAttackReach(getTarget()) && MathUtil.isBetween(distanceTo(getTarget()), getMeleeAttackReach(getTarget()) + 1, getMeleeAttackReach(getTarget()) * 5)));
-		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 1.75D, 15.0D).setLandAction((affectedTarget) -> { 
-			if (!(affectedTarget instanceof RoboJefferyEntity))
-				affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
+		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 2.75D, 25.0D).setLandAction((affectedTarget) -> { 
+			if (!(affectedTarget instanceof RoboJefferyEntity)) affectedTarget.hurt(DamageSource.mobAttack(this), 20.0F);
 		}).setBlockBreakPredicate((targetBlock) -> !targetBlock.is(CATags.Blocks.JEFFERY_IMMUNE)));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
@@ -159,13 +157,13 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	protected void tickDeath() {
-		if (!isOnGround() && getAttackID() == LEAP_ATTACK_ID) playAnimation(leapMidairAnim, false);
+		if (!isOnGround() && getAttackID() == LEAP_ATTACK_ID) return;
 		else {
 			super.tickDeath();
 			
 			Axis facingDir = getDirection().getAxis();
-			double plusX = facingDir.equals(Axis.X) ? 1 : 0;
-			double plusZ = facingDir.equals(Axis.Z) ? 1 : 0;
+			double xOffset = facingDir.equals(Axis.X) ? 1 : 0;
+			double zOffset = facingDir.equals(Axis.Z) ? 1 : 0;
 			
 			if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 29, 77)) CAScreenShakeEntity.shakeScreen(level, position(), 160F, (float) (deathAnim.getWrappedAnimProgress() / 100F) / 6, 2, 240);
 			
@@ -174,11 +172,11 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				
 				for (int angleDeg = 0; angleDeg < 360; angleDeg++) {
 					for (int rep = 0; rep < 6; rep++) {
-						this.level.addParticle(ParticleTypes.SMOKE, getX() + plusX, getRandomY() * 0.8D, getZ() + plusZ, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
+						this.level.addParticle(ParticleTypes.SMOKE, getX() + xOffset, getRandomY() * 0.8D, getZ() + zOffset, 1.75D * Math.cos(angleDeg), -0.02D, 1.75D * Math.sin(angleDeg));
 					}
 				}
 				
-				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(CAEntityTypes.JEFFERY_SHOCKWAVE.get(), level, blockPosition(), 20.0F, 2.7F, 15, 3, null);
+				AOEHitboxEntity deathHitBox = new AOEHitboxEntity(level, blockPosition(), 20.0F, 2.7F, 15, 3, null);
 				
 				deathHitBox.setActionOnIntersection((target) -> {
 					target.hurt(DamageSource.mobAttack(this), 12.0F);

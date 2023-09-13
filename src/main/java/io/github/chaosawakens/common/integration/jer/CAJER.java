@@ -1,27 +1,50 @@
 package io.github.chaosawakens.common.integration.jer;
 
+import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.loot.CATreasure;
 import io.github.chaosawakens.common.registry.CABiomes;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.manager.CAConfigManager;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import jeresources.api.IDungeonRegistry;
 import jeresources.api.IPlantRegistry;
 import jeresources.api.IWorldGenRegistry;
 import jeresources.api.distributions.DistributionSquare;
 import jeresources.api.drop.LootDrop;
 import jeresources.api.drop.PlantDrop;
+import jeresources.api.render.IMobRenderHook;
 import jeresources.api.restrictions.BiomeRestriction;
 import jeresources.api.restrictions.DimensionRestriction;
 import jeresources.api.restrictions.Restriction;
 import jeresources.compatibility.JERAPI;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.Biome;
 
 public class CAJER {
+	private static final ObjectArrayList<Class<? extends LivingEntity>> CUSTOM_RENDER_HOOK_ENTITIES = new ObjectArrayList<Class<? extends LivingEntity>>();
+	public static IMobRenderHook DEFAULT = (renderInfo, targetEntity) -> {
+		if (targetEntity != null && targetEntity instanceof IAnimatableEntity && !CUSTOM_RENDER_HOOK_ENTITIES.contains(targetEntity.getClass())) {
+			IAnimatableEntity targetAnimatable = (IAnimatableEntity) targetEntity;
+			
+			if (targetAnimatable.getIdleAnim() != null) targetAnimatable.playAnimation(targetAnimatable.getIdleAnim(), true);
+		}
+		return renderInfo;
+	};
+	public static IMobRenderHook<RoboWarriorEntity> ROBO_WARRIOR = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getCachedAnimationByName("Idle Extras"), true);
+			targetEntity.playAnimation(targetEntity.getIdleAnim(), false);
+		}
+		
+		return renderInfo;
+	};
 
 	public static void register() {
+		registerEntityRenderers();
 		registerDungeonLoot();
 		registerPlants();
 		registerOres();
@@ -952,6 +975,12 @@ public class CAJER {
 			}
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	private static void registerEntityRenderers() {
+		registerMobRenderHook((Class<? extends LivingEntity>) IAnimatableEntity.class, DEFAULT);
+		registerMobRenderHook(RoboWarriorEntity.class, ROBO_WARRIOR);
+	}
 
 	/**
 	 * @param item         The dropped {@link net.minecraft.item.ItemStack}
@@ -960,5 +989,14 @@ public class CAJER {
 	 */
 	public static LootDrop lootDropMinMax(ItemStack item, int minDrop, int maxDrop) {
 		return new LootDrop(item, minDrop, maxDrop, 1F);
+	}
+	
+	public static <E extends LivingEntity> void registerMobRenderHook(Class<E> clazz, IMobRenderHook<E> renderHook) {
+		if (renderHook != DEFAULT) CUSTOM_RENDER_HOOK_ENTITIES.add(clazz);
+        JERAPI.getInstance().getMobRegistry().registerRenderHook(clazz, renderHook);
+    }
+	
+	public static void renderAnimatableEntity() {
+		
 	}
 }

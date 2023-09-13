@@ -30,7 +30,7 @@ public class JefferyShockwaveEntityRenderer extends GeoProjectilesRenderer<Jeffe
         
         matrixStackIn.scale(horizontalScale, horizontalScale / 1.4654336F, horizontalScale);
         
-   //     if (animatable.getRadius() >= animatable.getMaxRadius()) alpha -= 0.001F;
+        alpha -= 0.1;
         
 		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}

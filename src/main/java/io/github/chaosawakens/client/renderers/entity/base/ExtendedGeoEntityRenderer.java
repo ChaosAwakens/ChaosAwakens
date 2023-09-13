@@ -45,4 +45,9 @@ public abstract class ExtendedGeoEntityRenderer<E extends LivingEntity & IAnimat
 	public RenderType getRenderType(E animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
 		return RenderType.entityTranslucent(getTextureLocation(animatable));
 	}
+	
+	@Override
+	public void render(E entity, float entityYaw, float partialTicks, MatrixStack stack, IRenderTypeBuffer bufferIn, int packedLightIn) {
+		super.render(entity, entityYaw, partialTicks, stack, bufferIn, packedLightIn);
+	}
 }

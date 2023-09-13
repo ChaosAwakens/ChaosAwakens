@@ -317,11 +317,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			}
 		}
 	}
-
+	
 	private void handleRageRunCollision() {
 		BlockPosUtil.destroyCollidingBlocksWithOffset(this, getRandom().nextBoolean(), 0.05D, 0, 0.05D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 	}
-
+	
 	public void setRageRunAttributes() {
 		setArmor(getRageRunArmor());
 		setArmorToughness(getRageRunArmorToughness());

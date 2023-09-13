@@ -178,6 +178,12 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 		if (this.level.isClientSide) this.level.addParticle(ParticleTypes.INSTANT_EFFECT, false, getRandomX(0.5D), getY(0.85D), getRandomZ(0.5D), -1000, -1000, -1000);
 		super.aiStep();
 	}
+	
+	@Override
+	protected void tickDeath() {
+		super.tickDeath();
+		setPanicking(false);
+	}
 
 	@Override
 	public SingletonAnimationBuilder getIdleAnim() {

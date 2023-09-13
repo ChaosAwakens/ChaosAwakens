@@ -24,6 +24,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected double animationProgress = 0;
 	protected double animSpeedMultiplier = 1.0D;
 	protected final AnimationController<E> controller;
+	protected boolean enforcesProgress = false;
 	protected MinecraftServer server;
 	
 	public WrappedAnimationController(E animatable, int transitionTicks, AnimationController<E> controller) {
@@ -38,6 +39,11 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		this(animatable, animatable.animationInterval(), controller);
 		this.name = controller.getName();
 		this.server = ((Entity) animatable).getServer();
+	}
+	
+	public WrappedAnimationController<? extends E> setEnforcesAnimProgress() {
+		this.enforcesProgress = true;
+		return this;
 	}
 	
 	public void tick() {
@@ -119,6 +125,10 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public boolean enforcesProgress() {
+		return enforcesProgress;
 	}
 	
 	public boolean isCurrentAnimationFinished() {

@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.entity.ai.goals.boss.robo;
+package io.github.chaosawakens.common.entity.ai.goals.boss.robo.robojeffery;
 
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -7,6 +7,7 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.entity.misc.JefferyShockwaveEntity;
 import io.github.chaosawakens.common.registry.CADamageSources;
@@ -30,11 +31,11 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 	private final ObjectArrayList<LivingEntity> affectedEntities = new ObjectArrayList<>();
 	private boolean hasSpawnedShockwave = false;
 
-	public RoboJefferyShockwaveGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, int presetCooldown) {
+	public RoboJefferyShockwaveGoal(RoboJefferyEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, int presetCooldown) {
 		super(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, amountThreshold, probability, presetCooldown);
 	}
 	
-	public RoboJefferyShockwaveGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int presetCooldown, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
+	public RoboJefferyShockwaveGoal(RoboJefferyEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int presetCooldown, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		super(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, presetCooldown, extraActivationConditions);
 	}
 	
@@ -47,7 +48,7 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 
 		owner.playAnimation(targetAnim.get(), true);
 		
-		jefferyShockwave = new JefferyShockwaveEntity(owner.level, owner.blockPosition().above(), (float) aoeRange, (float) aoeRange / 2, 49, 2, null);
+		this.jefferyShockwave = new JefferyShockwaveEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, 49, 2, null);
 		
 		jefferyShockwave.setActionOnIntersection((target) -> {
 			if (jefferyShockwave != null && !affectedEntities.contains(target) && owner != target && !owner.isAlliedTo(target) && EntityPredicates.ATTACK_ALLOWED.test(target) && owner.getClass() != target.getClass()) {
@@ -72,13 +73,13 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 		owner.setAttackID((byte) 0);
 		owner.setAttackCooldown(10);
 		owner.stopAnimation(curAnim.get());
+		affectedEntities.clear();
 
 		this.curAnim = null;
 		this.curCooldown = presetCooldown;
 		this.jefferyShockwave = null;
 		
 		this.hasSpawnedShockwave = false;
-		affectedEntities.clear();
 	}
 	
 	@Override
@@ -99,7 +100,7 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 				if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(curAffectedParticlePos)), curAffectedParticlePos.getX(), curAffectedParticlePos.getY(), curAffectedParticlePos.getZ(), 0, 1, 0, 20, 0.05D);
 			}
 			
-			if (!this.hasSpawnedShockwave) {
+			if (!hasSpawnedShockwave) {
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 10, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
 				owner.level.addFreshEntity(jefferyShockwave);
 				this.hasSpawnedShockwave = true;

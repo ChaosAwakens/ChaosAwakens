@@ -301,7 +301,7 @@
 			}
 		},
 		"Right Punch Attack": {
-			"animation_length": 1.5,
+			"animation_length": 1.7,
 			"bones": {
 				"LowerBody": {
 					"position": {
@@ -560,7 +560,7 @@
 			}
 		},
 		"Left Punch Attack": {
-			"animation_length": 1.5,
+			"animation_length": 1.7,
 			"bones": {
 				"LowerBody": {
 					"position": {

@@ -161,12 +161,18 @@ public class CrystalAppleCowEntity extends AnimatableAnimalEntity {
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
+		playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	protected float getSoundVolume() {
 		return 0.4F;
+	}
+	
+	@Override
+	protected void tickDeath() {
+		super.tickDeath();
+		setPanicking(false);
 	}
 
 	@Override
