@@ -7,6 +7,7 @@ import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -125,7 +126,12 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isAnimationFinished(String targetAnimName) {
-		return currentAnimation != null && currentAnimation.animationName.equals(targetAnimName) && animationState.equals(ExpandedAnimationState.FINISHED);
+		if (server == null) {
+			return this.getWrappedController().getAnimationState().equals(AnimationState.Stopped);
+		} else {
+			return currentAnimation != null && currentAnimation.animationName.equals(targetAnimName)
+					&& animationState.equals(ExpandedAnimationState.FINISHED);
+		}
 	}
 	
 	public boolean isAnimationFinished(IAnimationBuilder targetAnim) {
@@ -133,7 +139,9 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isPlayingAnimation(String targetAnimName) {
-		return currentAnimation != null && currentAnimation.animationName.equals(targetAnimName) && (animationState.equals(ExpandedAnimationState.RUNNING) || animationState.equals(ExpandedAnimationState.TRANSITIONING));
+		return currentAnimation != null && currentAnimation.animationName.equals(targetAnimName)
+				&& (animationState.equals(ExpandedAnimationState.RUNNING)
+						|| animationState.equals(ExpandedAnimationState.TRANSITIONING));
 	}
 	
 	public boolean isPlayingAnimation(IAnimationBuilder targetAnim) {
