@@ -54,9 +54,10 @@ public class ServerAssetSyncPacket implements ICAPacket {
 						return;
 					}
 					
-					if (CAConfigManager.MAIN_SERVER.lenientAssetEnforcement.get()) {
+			//		if (CAConfigManager.MAIN_SERVER.lenientAssetEnforcement.get()) {} // Singleton population but not static cuz uhh, no static context :p
+					
+					
 						
-					}
 				}
 			});
 		});

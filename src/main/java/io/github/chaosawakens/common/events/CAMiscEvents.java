@@ -64,8 +64,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty;
@@ -80,10 +80,10 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.VersionChecker;
 
 public class CAMiscEvents {
-	static String downloads = "https://chaosawakens.github.io/downloads";
+	private static String DOWNLOADS = "https://chaosawakens.github.io/downloads";
 
 	@SubscribeEvent
-	public static void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
+	public static void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
 		Entity target = event.getEntity();
 		
 		if (target == null) return;
@@ -92,10 +92,10 @@ public class CAMiscEvents {
 			target.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)
 					.append(new StringTextComponent(ChaosAwakens.MODNAME).withStyle(TextFormatting.BOLD, TextFormatting.GOLD))
 					.append(new StringTextComponent(" is now available from: ").withStyle(TextFormatting.WHITE))
-					.append(new StringTextComponent(downloads)
+					.append(new StringTextComponent(DOWNLOADS)
 							.withStyle((style) -> style
 									.withColor(TextFormatting.GOLD)
-									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, downloads)))), Util.NIL_UUID);
+									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, DOWNLOADS)))), Util.NIL_UUID);
 		}
 		
 		if (EntityUtil.isUserOrEntityUUIDEqualTo(target, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
