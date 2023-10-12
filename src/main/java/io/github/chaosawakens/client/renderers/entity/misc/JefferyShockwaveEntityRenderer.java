@@ -9,10 +9,10 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.geo.render.built.GeoModel;
+import software.bernie.geckolib3.core.util.Color;
 import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
 
-public class JefferyShockwaveEntityRenderer extends GeoProjectilesRenderer<JefferyShockwaveEntity>{
+public class JefferyShockwaveEntityRenderer extends GeoProjectilesRenderer<JefferyShockwaveEntity> {
 
 	public JefferyShockwaveEntityRenderer(EntityRendererManager renderManager) {
 		super(renderManager, new JefferyShockwaveEntityModel());
@@ -24,14 +24,27 @@ public class JefferyShockwaveEntityRenderer extends GeoProjectilesRenderer<Jeffe
 	}
 	
 	@Override
-	public void render(GeoModel model, JefferyShockwaveEntity animatable, float partialTicks, RenderType type, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderEarly(JefferyShockwaveEntity animatable, MatrixStack stackIn, float partialTicks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		float horizontalScale = 1;
         horizontalScale = (float) (horizontalScale * animatable.getRadius() / 3.2 * 0.328754F);
         
-        matrixStackIn.scale(horizontalScale, horizontalScale / 1.4654336F, horizontalScale);
+        stackIn.scale(horizontalScale, horizontalScale / 1.4654336F, horizontalScale);
         
-        alpha -= 0.1;
-        
-		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		super.renderEarly(animatable, stackIn, partialTicks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
+	
+	@Override
+	public float getHeightScale(JefferyShockwaveEntity entity) {
+		return super.getHeightScale(entity);
+	}
+	
+	@Override
+	public float getWidthScale(JefferyShockwaveEntity animatable2) {
+		return super.getWidthScale(animatable2);
+	}
+	
+	@Override
+	public Color getRenderColor(JefferyShockwaveEntity animatable, float partialTicks, MatrixStack stack, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn) {
+		return super.getRenderColor(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn);
 	}
 }
