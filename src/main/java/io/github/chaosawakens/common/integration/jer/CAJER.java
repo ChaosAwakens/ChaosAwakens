@@ -978,8 +978,8 @@ public class CAJER {
 	
 	@SuppressWarnings("unchecked")
 	private static void registerEntityRenderers() {
-		registerMobRenderHook((Class<? extends LivingEntity>) IAnimatableEntity.class, DEFAULT);
-		registerMobRenderHook(RoboWarriorEntity.class, ROBO_WARRIOR);
+	//	registerMobRenderHook((Class<? extends LivingEntity>) IAnimatableEntity.class, DEFAULT);
+	//	registerMobRenderHook(RoboWarriorEntity.class, ROBO_WARRIOR);
 	}
 
 	/**
