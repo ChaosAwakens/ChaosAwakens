@@ -26,6 +26,7 @@ import io.github.chaosawakens.common.entity.creature.water.fish.SparkFishEntity;
 import io.github.chaosawakens.common.entity.creature.water.fish.WoodFishEntity;
 import io.github.chaosawakens.common.entity.hostile.AggressiveAntEntity;
 import io.github.chaosawakens.common.entity.hostile.EntEntity;
+import io.github.chaosawakens.common.entity.hostile.insect.WaspEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
@@ -300,10 +301,10 @@ public class CAEntityTypes {
 					.build(ChaosAwakens.prefix("robo_jeffery").toString()));
 
 	// Wasp
-/*	public static final RegistryObject<EntityType<WaspEntity>> WASP = ENTITY_TYPES.register("wasp",
+	public static final RegistryObject<EntityType<WaspEntity>> WASP = ENTITY_TYPES.register("wasp",
 			() -> EntityType.Builder.of(WaspEntity::new, EntityClassification.MONSTER)
 					.sized(1.5f, 2.0f)
-					.build(ChaosAwakens.prefix("wasp").toString()));*/
+					.build(ChaosAwakens.prefix("wasp").toString()));
 	
 	//Boat
 	public static final RegistryObject<EntityType<CABoatEntity>> CA_BOAT = ENTITY_TYPES.register("ca_boat", 

@@ -25,6 +25,7 @@ import io.github.chaosawakens.client.renderers.entity.creature.water.fish.SparkF
 import io.github.chaosawakens.client.renderers.entity.creature.water.fish.WoodFishEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.hostile.AggressiveAntEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.hostile.EntEntityRenderer;
+import io.github.chaosawakens.client.renderers.entity.hostile.insect.WaspEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.hostile.robo.RoboPounderEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.hostile.robo.RoboSniperEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.hostile.robo.RoboWarriorEntityRenderer;
@@ -87,9 +88,7 @@ public class CAClientSetupEvents {
 	public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
 		ClientRegistry.bindTileEntityRenderer(CATileEntities.CUSTOM_SIGN.get(), SignTileEntityRenderer::new);
 		
-		event.enqueueWork(() -> {
-			CAWoodTypes.registerWoodTypesAtlas();
-		});
+		event.enqueueWork(CAWoodTypes::registerWoodTypesAtlas);
 
 		// ENTITIES
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), (manager) -> new HerculesBeetleEntityRenderer(manager, HerculesBeetleType.MODERN));
@@ -143,7 +142,7 @@ public class CAClientSetupEvents {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntityRenderer::new);
 //		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserProjectileRenderer::new);
 //		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.JEFFERY_SHOCKWAVE.get(), JefferyShockwaveEntityRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WASP.get(), WaspEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WASP.get(), WaspEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WHALE.get(), WhaleEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GREEN_FISH.get(), GreenFishEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROCK_FISH.get(), RockFishEntityRenderer::new);
