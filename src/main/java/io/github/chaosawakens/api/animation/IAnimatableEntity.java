@@ -288,7 +288,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		
 		animMetadata.retainAll(cachedAnimationsMapped);
 		
-		if (curServer != null) {
+		if (curServer != null) { //TODO Move to events, respectively
 			PlayerList curOnlinePlayers = curServer.getPlayerList();
 			
 			curOnlinePlayers.getPlayers().forEach((curPlayer) -> {
