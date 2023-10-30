@@ -21,16 +21,14 @@ public class EntEntityModel extends ExtendedAnimatedTickingGeoModel<EntEntity> {
 	
 	@Override
 	public ResourceLocation getModelLocation(EntEntity object) {
-		// Only Oak Ent right now
+		// Only Oak Ent geo right now
 //		return ChaosAwakens.prefix("geo/entity/hostile/ent/" + entType.getName() + "_ent.geo.json");
 		return ChaosAwakens.prefix("geo/entity/hostile/ent/ent.geo.json");
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(EntEntity object) {
-		// Only Oak Ent right now
-//		return ChaosAwakens.prefix("textures/entity/hostile/ent/" + entType.getName() + "_ent.png");
-		return ChaosAwakens.prefix("textures/entity/hostile/ent/oak_ent.png");
+		return ChaosAwakens.prefix("textures/entity/hostile/ent/ent_" + entType.getName() + ".png");
 	}
 
 	@Override

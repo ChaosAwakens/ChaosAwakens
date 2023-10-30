@@ -28,4 +28,14 @@ public class EntEntityRenderer extends ExtendedGeoEntityRenderer<EntEntity> {
 	protected ObjectArrayList<GeoLayerRenderer<EntEntity>> getLayers() {
 		return null;
 	}
+
+	@Override
+	public float getHeightScale(EntEntity entity) {
+		return 2;
+	}
+
+	@Override
+	public float getWidthScale(EntEntity animatable2) {
+		return 2;
+	}
 }

@@ -38,6 +38,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 	private final ObjectArrayList<IAnimationBuilder> entAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<EntEntity> mainController = createMainMappedController("entmaincontroller");
 	private final WrappedAnimationController<EntEntity> attackController = createMappedController("entattackcontroller", this::attackPredicate);
+	private final WrappedAnimationController<EntEntity> ambientController = createMappedController("entambientcontroller", this::ambientPredicate);
+	private final SingletonAnimationBuilder alwaysPlayAnim = new SingletonAnimationBuilder(this, "Always Play", EDefaultLoopTypes.LOOP).setWrappedController(ambientController);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
@@ -82,6 +84,10 @@ public class EntEntity extends AnimatableMonsterEntity {
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
 	}
+
+	public <E extends IAnimatableEntity> PlayState ambientPredicate(AnimationEvent<E> event) {
+		return PlayState.CONTINUE;
+	}
 	
 	public <E extends IAnimatableEntity> PlayState deathPredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
@@ -97,8 +103,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 20D, 22.4D, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 3, 8, 50));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 	}
 
@@ -172,5 +178,12 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return entAnimations;
+	}
+
+	@Override
+	protected void handleBaseAnimations() {
+		super.handleBaseAnimations();
+
+		if(alwaysPlayAnim != null) playAnimation(alwaysPlayAnim, false);
 	}
 }
