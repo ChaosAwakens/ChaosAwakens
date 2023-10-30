@@ -24,28 +24,25 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 
-public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, IAnimatableEntity {
-    private final AnimationFactory animationFactory;
-
-    public WaspEntity(EntityType<? extends WaspEntity> entityType, World world) {
-        super(entityType, world);
-        this.animationFactory = new AnimationFactory(this);
-    }
+public class WaspEntity extends AnimatableMonsterEntity {
+    private final AnimationFactory animationFactory = new AnimationFactory(this);
     private final ObjectArrayList<WrappedAnimationController<WaspEntity>> waspControllers = new ObjectArrayList<WrappedAnimationController<WaspEntity>>(3);
     private final ObjectArrayList<IAnimationBuilder> waspAnimations = new ObjectArrayList<IAnimationBuilder>(1);
     private final WrappedAnimationController<WaspEntity> mainController = createMainMappedController("waspmaincontroller");
-    private final WrappedAnimationController<WaspEntity> attackController = createMappedController("entattackcontroller", this::attackPredicate);
-
+    private final WrappedAnimationController<WaspEntity> attackController = createMappedController("waspattackcontroller", this::attackPredicate);
     private final SingletonAnimationBuilder flyAnim = new SingletonAnimationBuilder(this, "fly", ILoopType.EDefaultLoopTypes.LOOP);
-    private final SingletonAnimationBuilder fly_attackAnim = new SingletonAnimationBuilder(this, "fly_attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+    private final SingletonAnimationBuilder flyAttackAnim = new SingletonAnimationBuilder(this, "fly_attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
     private static final byte FLY_ATTACK_ID = 1;
+
+    public WaspEntity(EntityType<? extends WaspEntity> entityType, World world) {
+        super(entityType, world);
+    }
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 20)
@@ -54,6 +51,68 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
                 .add(Attributes.ARMOR, 4)
                 .add(Attributes.ATTACK_DAMAGE, 3)
                 .add(Attributes.FLYING_SPEED, 0.4);
+    }
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.2, 4));
+        this.targetSelector.addGoal(0, new AnimatableFlyingAttackGoal(this, () -> flyAttackAnim, FLY_ATTACK_ID, 20D, 22.4D, 2));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BeeEntity.class, false));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(4, new WaterAvoidingRandomFlyingGoal(this,1.00D));
+    }
+    @Override
+    public void manageAttack(LivingEntity target) {
+        if (getAttackID() == FLY_ATTACK_ID) {
+            // Perform sting attack similar to Minecraft bee
+            target.hurt(DamageSource.sting(this), 5.0f);
+            // Apply poison effect to the target
+            target.addEffect(new EffectInstance(Effects.POISON, 200, 0));
+        }
+    }
+    @Override
+    public boolean isPersistenceRequired() {
+        return true;
+    }
+
+//    Commented because it does not exist yet
+//    @Override
+//    protected SoundEvent getHurtSound(DamageSource damageSource) {
+//        return CASoundEvents.WASP_HURT.get();
+//    }
+//    @Override
+//    protected SoundEvent getDeathSound() {
+//        return CASoundEvents.WASP_DEATH.get();
+//    }
+
+    @Override
+    protected void playStepSound(BlockPos blockPos, BlockState blockState) {
+        if (!blockState.getMaterial().isLiquid()) playSound(CASoundEvents.WASP_AMBIENT.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
+    }
+    @Override
+    public void tick() {
+        super.tick();
+        this.checkFallFlying();
+        BlockPos groundPos = new BlockPos(this.position().x(), this.position().y() - 1, this.position().z());
+        if (this.level.getBlockState(groundPos).canOcclude()) {
+            this.move(MoverType.SELF, new Vector3d(0, 0.2, 0)); // Apply additional upwards motion to avoid hitting the ground
+        }
+        this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
+        if (this.isOnFire()) {
+            this.clearFire();
+        }
+        if (this.isInWater()) {
+            this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
+        }
+        if (this.isInLava()) {
+            this.setSecondsOnFire(1);
+        }
+    }
+
+    public void checkFallFlying() {
+        if (this.flyAnim.hasAnimationFinished()) {
+            this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
+        }
     }
     @Override
     public AnimationFactory getFactory() {
@@ -77,37 +136,9 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
         return 1;
     }
     @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.2, 4));
-        this.targetSelector.addGoal(0, new AnimatableFlyingAttackGoal(this, () -> fly_attackAnim, FLY_ATTACK_ID, 20D, 22.4D, 2));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BeeEntity.class, false));
-        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(4, new WaterAvoidingRandomFlyingGoal(this,1.00D));
-    }
-    @Override
-    public void manageAttack(LivingEntity target) {
-        if (getAttackID() == FLY_ATTACK_ID) {
-            // Perform sting attack similar to Minecraft bee
-            target.hurt(DamageSource.sting(this), 5.0f);
-            // Apply poison effect to the target
-            target.addEffect(new EffectInstance(Effects.POISON, 200, 0));
-        }
-    }
-    @Override
-    public boolean isPersistenceRequired() {
-        return true;
-    }
-    @Override
     public SingletonAnimationBuilder getIdleAnim() {
         return flyAnim;
     }
-
-    @Override
-    public boolean isFallFlying() {
-        return flyAnim.hasAnimationFinished();
-    }
-
     @Override
     public SingletonAnimationBuilder getWalkAnim() {
         return flyAnim;
@@ -115,51 +146,6 @@ public class WaspEntity extends AnimatableMonsterEntity implements IAnimatable, 
     @Override
     public SingletonAnimationBuilder getDeathAnim() {
         return null;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return CASoundEvents.WASP_HURT.get();
-    }
-    @Override
-    protected SoundEvent getDeathSound() {
-        return CASoundEvents.WASP_DEATH.get();
-    }
-
-    @Override
-    protected void playStepSound(BlockPos blockPos, BlockState blockState) {
-        if (!blockState.getMaterial().isLiquid()) playSound(CASoundEvents.WASP_AMBIENT.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
-    }
-    @Override
-    public void tick() {
-        super.tick();
-        this.checkFallFlying();
-        if(this.isFlying()){
-            BlockPos groundPos = new BlockPos(this.position().x(), this.position().y() - 1, this.position().z());
-            if (this.level.getBlockState(groundPos).canOcclude()) {
-                this.move(MoverType.SELF, new Vector3d(0, 0.2, 0)); // Apply additional upwards motion to avoid hitting the ground
-            }
-            this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
-            if (this.isOnFire()) {
-                this.clearFire();
-            }
-            if (this.isInWater()) {
-                this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
-            }
-            if (this.isInLava()) {
-                this.setSecondsOnFire(1);
-            }
-        }
-    }
-
-    public boolean isFlying() {
-        return true;
-    }
-
-    public void checkFallFlying() {
-        if (this.isFallFlying()) {
-            this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
-        }
     }
     @SuppressWarnings("unchecked")
     @Override
