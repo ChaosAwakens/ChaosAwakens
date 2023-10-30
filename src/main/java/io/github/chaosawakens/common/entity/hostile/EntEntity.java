@@ -34,15 +34,17 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<WrappedAnimationController<EntEntity>> entControllers = new ObjectArrayList<WrappedAnimationController<EntEntity>>(1);
+	private final ObjectArrayList<WrappedAnimationController<EntEntity>> entControllers = new ObjectArrayList<WrappedAnimationController<EntEntity>>(2);
 	private final ObjectArrayList<IAnimationBuilder> entAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<EntEntity> mainController = createMainMappedController("entmaincontroller");
 	private final WrappedAnimationController<EntEntity> attackController = createMappedController("entattackcontroller", this::attackPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder punchAnim = new SingletonAnimationBuilder(this, "Punch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
-	private final SingletonAnimationBuilder smashAnim = new SingletonAnimationBuilder(this, "Smash", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	// No death anim yet, so unused
+//	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Punch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder smashAttackAnim = new SingletonAnimationBuilder(this, "Smash Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SMASH_ATTACK_ID = 2;
 	private final EntType entType;
@@ -94,8 +96,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> punchAnim, PUNCH_ATTACK_ID, 20D, 22.4D, 2));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 3, 8, 50));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 20D, 22.4D, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 3, 8, 50));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
@@ -130,7 +132,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
-		return deathAnim;
+		return null;
 	}
 	
 	@Override
