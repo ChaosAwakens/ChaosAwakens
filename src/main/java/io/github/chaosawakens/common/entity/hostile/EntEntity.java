@@ -78,7 +78,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-        if (!walkAnim.isPlaying() && !deathAnim.isPlaying() && !leftPunchAnim.isPlaying() && !rightPunchAnim.isPlaying() && !smashAttackAnim.isPlaying()) {
+        if (isAttacking()) {
             playAnimation(idleAnim, true);
         }
 		return PlayState.CONTINUE;
