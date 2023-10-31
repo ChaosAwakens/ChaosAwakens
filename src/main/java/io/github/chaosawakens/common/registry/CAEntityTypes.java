@@ -65,55 +65,55 @@ public class CAEntityTypes {
 	// Ents
 	public static final RegistryObject<EntityType<EntEntity>> ACACIA_ENT = ENTITY_TYPES.register("acacia_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.ACACIA), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("acacia_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> APPLE_ENT = ENTITY_TYPES.register("apple_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.APPLE), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("apple_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> BIRCH_ENT = ENTITY_TYPES.register("birch_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.BIRCH), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("birch_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> CHERRY_ENT = ENTITY_TYPES.register("cherry_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.CHERRY), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("cherry_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> CRIMSON_ENT = ENTITY_TYPES.register("crimson_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.CRIMSON), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f).fireImmune()
+					.sized(3.35F, 4.225F).fireImmune()
 					.build(ChaosAwakens.prefix("crimson_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> DARK_OAK_ENT = ENTITY_TYPES.register("dark_oak_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.DARK_OAK), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("dark_oak_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> JUNGLE_ENT = ENTITY_TYPES.register("jungle_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.JUNGLE), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("jungle_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> OAK_ENT = ENTITY_TYPES.register("oak_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.OAK), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("oak_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> PEACH_ENT = ENTITY_TYPES.register("peach_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.PEACH), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("peach_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> SKYWOOD_ENT = ENTITY_TYPES.register("skywood_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.SKYWOOD), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("skywood_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> SPRUCE_ENT = ENTITY_TYPES.register("spruce_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.SPRUCE), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f)
+					.sized(3.35F, 4.225F)
 					.build(ChaosAwakens.prefix("spruce_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> WARPED_ENT = ENTITY_TYPES.register("warped_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.WARPED), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f).fireImmune()
+					.sized(3.35F, 4.225F).fireImmune()
 					.build(ChaosAwakens.prefix("warped_ent").toString()));
 	public static final RegistryObject<EntityType<EntEntity>> GINKGO_ENT = ENTITY_TYPES.register("ginkgo_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.GINKGO), EntityClassification.MONSTER)
-					.sized(2.5f, 3.125f).fireImmune()
+					.sized(3.35F, 4.225F).fireImmune()
 					.build(ChaosAwakens.prefix("ginkgo_ent").toString()));
 
 	// Hercules Beetle

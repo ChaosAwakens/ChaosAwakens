@@ -324,10 +324,16 @@ public class CAMiscEvents {
 	public static void onLivingKnockbackEvent(LivingKnockBackEvent event) {
 		LivingEntity target = event.getEntityLiving();
 		
-		if (target != null) {
+		if (target != null) { //TODO Make this a common interface impl :bruh:
 			if (target instanceof AnimatableMonsterEntity) {
 				AnimatableMonsterEntity monsterTarget = (AnimatableMonsterEntity) target;
 				if (!monsterTarget.canBeKnockedBack()) event.setCanceled(true);
+
+				float curKnockbackMagnitude = event.getStrength();
+				float knockbackReductionPercentage = monsterTarget.getDeltaKnockbackResistance();
+				float newKnockbackStrength = MathUtil.reduceByPercentage(curKnockbackMagnitude, knockbackReductionPercentage);
+
+				event.setStrength(newKnockbackStrength);
 			}
 			
 			if (target instanceof AnimatableAnimalEntity) {

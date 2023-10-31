@@ -168,7 +168,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 	}
 	
-	private void handleRageCrash() {
+	private void handleRageCrash() { //TODO Migrate to entity data (probably)
 		boolean foundCrashCollision = false;
 		boolean lowCrash = false;
 		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ));

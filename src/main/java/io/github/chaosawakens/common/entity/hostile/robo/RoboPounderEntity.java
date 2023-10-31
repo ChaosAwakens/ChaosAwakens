@@ -47,7 +47,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboPounderEntity>> roboPounderControllers = new ObjectArrayList<WrappedAnimationController<RoboPounderEntity>>(2);
-	private final ObjectArrayList<IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> roboPounderAnimations = new ObjectArrayList<IAnimationBuilder>(18);
 	private static final DataParameter<Boolean> SHOULD_TAUNT = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> IS_RAGE_RUNNING = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> RAGE_RUN_DURATION = EntityDataManager.defineId(RoboPounderEntity.class, DataSerializers.INT);
@@ -108,10 +108,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isAttacking() || isDeadOrDying()) {
-			playAnimation(idleAnim, true);
-			return PlayState.CONTINUE;
-		} else return PlayState.CONTINUE;
+		if (isAttacking() || isDeadOrDying()) playAnimation(idleAnim, true);
+		return PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
@@ -500,7 +498,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
 		
 		double attackSpeedMult = getHealth() <= 50.0F ? 1.25D : 1.0D;
-		
+
 		leftPunchAnim.setAnimSpeed(attackSpeedMult);
 		rightPunchAnim.setAnimSpeed(attackSpeedMult);
 		leftSwingAnim.setAnimSpeed(attackSpeedMult);
