@@ -8,8 +8,10 @@ import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.util.EnumUtil.EntType;
+import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -109,8 +111,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 20.5D, 22.4D, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 1, 8, 60));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 2, 6, 45));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 1, 18, 60));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 2, 10, 45));
 		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 4, 2, 35));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
@@ -162,7 +164,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void playStepSound(BlockPos blockPos, BlockState blockState) {
-		if (!blockState.getMaterial().isLiquid()) playSound(CASoundEvents.ENT_WALK.get(), this.getVoicePitch() * 0.30F, this.getSoundVolume() * 1);
+		if (!blockState.getMaterial().isLiquid()) playSound(CASoundEvents.ENT_WALK.get(), getVoicePitch() * 0.30F, getSoundVolume() * 1);
 	}
 
 	@Override
@@ -202,6 +204,18 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@Override
 	public boolean canCollideWith(Entity pEntity) {
 		return false;
+	}
+
+	@Override
+	public float getMeleeAttackReach(LivingEntity target) {
+		return super.getMeleeAttackReach(target) / 1.32F;
+	}
+
+	@Override
+	public void aiStep() {
+		super.aiStep();
+
+		if (MathUtil.isBetween(leftPunchAnim.getWrappedAnimProgress(), 18.8D, 22.4D) || MathUtil.isBetween(rightPunchAnim.getWrappedAnimProgress(), 18.8D, 22.4D)) CAScreenShakeEntity.shakeScreen(level, position(), 15.0F, 0.07F, 5, 20); // Cause it's part of the AI n stuff :p
 	}
 
 	@SuppressWarnings("unchecked")
