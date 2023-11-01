@@ -49,10 +49,17 @@ public class EntEntity extends AnimatableMonsterEntity {
 	private static final byte SMASH_ATTACK_ID = 2;
 	private final EntType entType;
 
+	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+		super(type, worldIn);
+		this.entType = EntType.OAK;
+	}
+
 	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn, EntType entType) {
 		super(type, worldIn);
 		this.entType = entType;
 	}
+
+
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
