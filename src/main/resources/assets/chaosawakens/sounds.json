@@ -317,9 +317,36 @@
     ]
   },
   "entity.wasp.ambient": {
-    "subtitle": "subtitles.chaosawakens.entity.wasp.ambient",
     "sounds": [
-      "chaosawakens:entity/wasp/ambient"
+      {
+        "name": "chaosawakens:entity/wasp/wasp_ambient_1",
+        "volume": 0.95
+      },
+      {
+        "name": "chaosawakens:entity/wasp/wasp_ambient_2",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:entity/wasp/wasp_ambient_3",
+        "volume": 0.93
+      },
+      {
+        "name": "chaosawakens:entity/wasp/wasp_ambient_4",
+        "volume": 0.93
+      }
+    ],
+    "subtitle": "subtitles.chaosawakens.entity.wasp.wasp_ambient"
+  },
+  "entity.wasp.wasp_death": {
+    "subtitle": "subtitles.chaosawakens.entity.wasp.wasp_death",
+    "sounds": [
+      "chaosawakens:entity/wasp/wasp_death"
+    ]
+  },
+  "entity.wasp.wasp_hurt_1": {
+    "subtitle": "subtitles.chaosawakens.entity.wasp.wasp_hurt_1",
+    "sounds": [
+      "chaosawakens:entity/wasp/wasp_hurt_1"
     ]
   },
   "block.sky_moss.break": {

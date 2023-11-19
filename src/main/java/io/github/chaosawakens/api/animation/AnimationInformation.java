@@ -42,6 +42,21 @@ public class AnimationInformation {
 		return animationLength;
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) return false;
+		else if (!(other instanceof AnimationInformation)) return false;
+		
+		AnimationInformation otherAnimInfo = (AnimationInformation) other;
+				
+		return getAnimationName().equalsIgnoreCase(otherAnimInfo.getAnimationName());
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("AnimationInfo{Animation Name = %1$s, Animation Length = %2$d}", getAnimationName(), getAnimationLength());
+	}
+	
 	public static class AnimInfoBuilder {
 		protected String animationName = "None";
 		protected double animationLength = 0.0D;

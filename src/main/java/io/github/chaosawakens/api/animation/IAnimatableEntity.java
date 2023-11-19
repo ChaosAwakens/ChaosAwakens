@@ -1,6 +1,7 @@
 package io.github.chaosawakens.api.animation;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -12,8 +13,11 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.PlayerList;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimatableModel;
@@ -274,12 +278,30 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default void tickAnims() {
-		for (WrappedAnimationController<? extends IAnimatableEntity> wrappedController : getWrappedControllers()) wrappedController.tick();
+		getWrappedControllers().forEach(targetWrappedController -> targetWrappedController.tick());
+		
+		MinecraftServer curServer = ServerLifecycleHooks.getCurrentServer();
+		ObjectArrayList<AnimationInformation> animMetadata = AnimationInformation.getAnimationMetadata().entrySet().stream()
+				.map((animMetadataEntry) -> new AnimationInformation(animMetadataEntry.getKey(), animMetadataEntry.getValue()))
+				.collect(Collectors.toCollection(ObjectArrayList::new));
+		ObjectArrayList<IAnimationBuilder> cachedAnimationsCopied = new ObjectArrayList<IAnimationBuilder>(getCachedAnimations());
+		ObjectArrayList<AnimationInformation> cachedAnimationsMapped = cachedAnimationsCopied.stream()
+				.map((curAnim) -> new AnimationInformation(curAnim.getAnimationName(), curAnim.getWrappedAnimLength()))
+				.collect(Collectors.toCollection(ObjectArrayList::new));
+		
+		animMetadata.retainAll(cachedAnimationsMapped);
+		
+		if (curServer != null) { //TODO Move to events, respectively
+			PlayerList curOnlinePlayers = curServer.getPlayerList();
+			
+			curOnlinePlayers.getPlayers().forEach((curPlayer) -> {
+				
+			});
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	default <E extends Entity> IAnimatableModel<E> getModel() {
-		if (!FMLEnvironment.dist.equals(Dist.CLIENT)) return null;
-		return (IAnimatableModel<E>) AnimationUtils.getGeoModelForEntity((E) this);
+		return !FMLEnvironment.dist.equals(Dist.CLIENT) ? null : (IAnimatableModel<E>) AnimationUtils.getGeoModelForEntity((E) this);
 	}
 }

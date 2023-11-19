@@ -72,10 +72,9 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			}
 			break;
 		case STOPPED:
-			break;
-		case FINISHED:
-			break;
-		}
+            case FINISHED:
+                break;
+        }
 	}
 	
 	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {		

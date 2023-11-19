@@ -36,6 +36,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.royawesome.jlibnoise.MathHelper;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -361,6 +362,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		if (hasEffect(CAEffects.PARALYSIS_EFFECT.get())) return false;
 		return super.canUpdate();
 	}
+
+	public float getDeltaKnockbackResistance() {
+		return (float) MathHelper.clamp(getAttributeValue(Attributes.KNOCKBACK_RESISTANCE) * 100, 0.0D, 100.0D);
+	}
 	
 	@Override
 	public IPacket<?> getAddEntityPacket() {
@@ -392,9 +397,12 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	protected void handleBaseAnimations() {
-		double walkAnimSpeed = Math.sqrt((getDeltaMovement().x * getDeltaMovement().x) + (getDeltaMovement().z * getDeltaMovement().z)) * 10;
-		
-		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(getWalkAnim().setAnimSpeed(walkAnimSpeed), false);
+		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(getIdleAnim(), true);
+		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(getWalkAnim(), true);
+
+		if (isDeadOrDying()) {
+			stopAnimation(getIdleAnim());
+			stopAnimation(getWalkAnim());
+		}
 	}
 }

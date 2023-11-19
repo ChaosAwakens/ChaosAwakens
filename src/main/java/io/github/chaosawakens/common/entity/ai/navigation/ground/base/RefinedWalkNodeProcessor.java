@@ -17,6 +17,8 @@ import net.minecraft.world.Region;
 public class RefinedWalkNodeProcessor extends WalkNodeProcessor {
 	@Nullable
 	private ITag<Block> breakableBlocksTag;
+	@Nullable
+	private ITag<Block> validPassOverride;
 	
 	public RefinedWalkNodeProcessor() {
 		
@@ -47,14 +49,15 @@ public class RefinedWalkNodeProcessor extends WalkNodeProcessor {
 		return super.getGoal(targetX, targetY, targetZ);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected PathNodeType evaluateBlockPathType(IBlockReader pLevel, boolean pCanOpenDoors, boolean pCanEnterDoors, BlockPos pPos, PathNodeType pNodeType) {
 		BlockState targetState = pLevel.getBlockState(pPos);
 		
 		switch (pNodeType) {
+		case BLOCKED: return targetState.is(breakableBlocksTag) ? PathNodeType.BREACH : targetState.isAir(pLevel, pPos) ? PathNodeType.OPEN : PathNodeType.BLOCKED;
+		case BREACH: return targetState.is(validPassOverride) ? PathNodeType.WALKABLE : targetState.isAir(pLevel, pPos) ? PathNodeType.OPEN : PathNodeType.BREACH;
 		default: return super.evaluateBlockPathType(pLevel, pCanOpenDoors, pCanEnterDoors, pPos, pNodeType);
-		case BLOCKED: return targetState.is(breakableBlocksTag) ? PathNodeType.BREACH : PathNodeType.BLOCKED;
-		
 		}
 	}
 	
