@@ -224,7 +224,7 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 			} else {		        
 				projectileentity = getArrow(world, owner, crossbowStack, arrowStack);		        
 				if (b1 || f4 != 0.0F) {		          
-					((UltimateArrowEntity)projectileentity).pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;		         
+					((AbstractArrowEntity)projectileentity).pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;		         
 				}		       
 			}		       
 			if (owner instanceof ICrossbowUser) {		        
