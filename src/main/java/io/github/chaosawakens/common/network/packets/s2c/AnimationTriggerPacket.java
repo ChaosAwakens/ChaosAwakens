@@ -7,6 +7,8 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.network.ICAPacket;
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -66,8 +68,6 @@ public class AnimationTriggerPacket implements ICAPacket {
 						ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type {}, using an IAnimationBuilder instance for animation of name {}, but the target animation is null!", target.getClass().getSimpleName(), animationName);
 						return;
 					}
-					
-					targetAnimatable.getControllerWrapperByName(controllerName).playAnimation(targetAnim, clearCache);
 					targetAnimatable.playAnimation(targetAnim, clearCache);
 				} else if (target != null) ChaosAwakens.LOGGER.warn("Attempted to send AnimationTriggerPacket for target entity of type {}, but the target entity class does not implement IAnimatableEntity!", target.getClass().getSimpleName());
 			});

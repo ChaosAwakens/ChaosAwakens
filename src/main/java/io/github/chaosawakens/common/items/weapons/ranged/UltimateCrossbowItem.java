@@ -248,16 +248,16 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 	   
 	private static AbstractArrowEntity getArrow(World world, LivingEntity owner, ItemStack crossbowStack, ItemStack arrowStack) {		  
 		ArrowItem arrowitem = (ArrowItem)(arrowStack.getItem() instanceof ArrowItem ? arrowStack.getItem() : Items.ARROW);		    
-		UltimateArrowEntity abstractarrowentity = (UltimateArrowEntity) arrowitem.createArrow(world, arrowStack, owner);		     
-		abstractarrowentity.setCritArrow(true);
-		abstractarrowentity.setSoundEvent(SoundEvents.CROSSBOW_HIT);		     
-		abstractarrowentity.setShotFromCrossbow(true);		
-		abstractarrowentity.setPierceLevel((byte) 4);
+		AbstractArrowEntity abstractArrowEntity = arrowitem.createArrow(world, arrowStack, owner);		     
+		abstractArrowEntity.setCritArrow(true);
+		abstractArrowEntity.setSoundEvent(SoundEvents.CROSSBOW_HIT);		     
+		abstractArrowEntity.setShotFromCrossbow(true);		
+		abstractArrowEntity.setPierceLevel((byte) 4);
 		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, crossbowStack);		     
 		if (i > 0) {	     
-			abstractarrowentity.setPierceLevel((byte) ((byte)i + 4));		     
+			abstractArrowEntity.setPierceLevel((byte) ((byte)i + 4));		     
 		}
-		return abstractarrowentity;		  
+		return abstractArrowEntity;		  
 	}
 		  
 	private static float[] getShotPitches(Random random) {		

@@ -246,7 +246,10 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
 		animation.getWrappedController().playAnimation(animation, clearCache);
 		
-		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimationName(), animation.getLoopType(), animation.getWrappedController().getName(), clearCache), (Entity) this);
+		if (!((Entity) this).level.isClientSide())
+			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(),
+					animation.getAnimationName(), animation.getLoopType(),
+					animation.getWrappedController().getName(), clearCache), (Entity) this);
 	}
 	
 	default void stopAnimation(IAnimationBuilder animation) {
