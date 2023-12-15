@@ -177,6 +177,7 @@ public class CAClientSetupEvents {
 		RenderTypeLookup.setRenderLayer(CABlocks.ALSTROEMERIAT.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.DENSE_ORCHID.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SMALL_BUSH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(CABlocks.TALL_BUSH.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.SMALL_CARNIVOROUS_PLANT.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.BIG_CARNIVOROUS_PLANT.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.MESOZOIC_VINES.get(), RenderType.cutout());

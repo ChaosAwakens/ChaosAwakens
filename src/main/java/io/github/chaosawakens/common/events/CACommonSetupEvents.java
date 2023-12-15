@@ -150,8 +150,9 @@ public class CACommonSetupEvents {
 			if (!(event.getWorld() instanceof ServerWorld)) return;
 
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
-			ChaosAwakens.debug("DIMENSION", serverWorld.dimension());
 			ServerChunkProvider chunkProvider = serverWorld.getChunkSource();
+
+			ChaosAwakens.debug("CURRENT DIMENSION", serverWorld.dimension());
 
 			try {
 				if (codecMethod == null) codecMethod = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");

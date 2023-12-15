@@ -1,14 +1,14 @@
 package io.github.chaosawakens.client.events;
 
-import java.util.Objects;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.util.EntityUtil;
+import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -25,33 +25,129 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.Objects;
+
 public class CAClientMiscEvents {
 
 	@SuppressWarnings("resource")
 	@SubscribeEvent
-	public static void onCameraSetupEvent(EntityViewRenderEvent.CameraSetup event) {
+	public static void onCameraSetupEvent(EntityViewRenderEvent.CameraSetup event) { // Credits to BobMowzie for screen shake camera math
+		PlayerEntity clientPlayer = Minecraft.getInstance().player;
+		float defaultCamYaw = clientPlayer.getYHeadRot();
+
+		if (CAConfigManager.MAIN_CLIENT.enableVFXEffects.get()) {
+			if (CAConfigManager.MAIN_CLIENT.enableCameraShake.get()) {
+				float amp = 0F;
+
+				for (CAScreenShakeEntity shaker : EntityUtil.getEntitiesAroundNoPredicate(clientPlayer, CAScreenShakeEntity.class, 20, 20, 20, 20)) {
+					if (shaker.distanceTo(clientPlayer) < shaker.getRadius()) amp += shaker.getAmp(clientPlayer, Minecraft.getInstance().getFrameTime());
+				}
+
+				if (amp > 1.0F) amp = 1.0F;
+
+				if (!Minecraft.getInstance().isPaused()) {
+					// Note to self: Don't use .random, and don't EVER leave this inside a loop. Seriously. -- Meme Man
+					event.setPitch((float) (event.getPitch() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 3 + 2) * 25));
+					event.setYaw((float) (event.getYaw() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 5 + 1) * 25));
+					event.setRoll((float) (event.getRoll() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 4) * 25));
+				}
+
+				AnimatableMonsterEntity selectedEntity = null;
+
+				for (AnimatableMonsterEntity potentialSelectedEntity : EntityUtil.getEntitiesAroundNoPredicate(clientPlayer, AnimatableMonsterEntity.class, 10, 10, 10, 10)) {
+					if (potentialSelectedEntity == null || !potentialSelectedEntity.isAlive()) continue;
+
+					if (selectedEntity != null) {
+						if (MathUtil.getDistanceBetween(clientPlayer, potentialSelectedEntity) < MathUtil.getDistanceBetween(clientPlayer, selectedEntity)) selectedEntity = potentialSelectedEntity;
+					} else selectedEntity = potentialSelectedEntity;
+				}
+
+				if (selectedEntity != null) {
+					final AnimatableMonsterEntity finalizedSelectedEntity = selectedEntity;
+
+					if (finalizedSelectedEntity instanceof RoboPounderEntity) {
+						RoboPounderEntity selectedPounder = (RoboPounderEntity) finalizedSelectedEntity;
+						double leftPunchAnimProgress = selectedPounder.getCachedAnimationByName("Left Heavy Attack").getWrappedAnimProgress();
+						double rightPunchAnimProgress = selectedPounder.getCachedAnimationByName("Right Heavy Attack").getWrappedAnimProgress();
+						double leftSweepAnimProgress = selectedPounder.getCachedAnimationByName("Left Swing Attack").getWrappedAnimProgress();
+						double rightSweepAnimProgress = selectedPounder.getCachedAnimationByName("Right Swing Attack").getWrappedAnimProgress();
+
+						if (selectedPounder.getAttackID() == RoboPounderEntity.PUNCH_ATTACK_ID) {
+							if (MathUtil.isBetween(rightPunchAnimProgress, 1.0D, 14.6D)) event.setRoll(16);
+							if (MathUtil.isBetween(rightPunchAnimProgress, 15.0D, 22.6D)) event.setRoll(-37);
+							if (MathUtil.isBetween(leftPunchAnimProgress, 1.0D, 14.6D)) event.setRoll(-16);
+							if (MathUtil.isBetween(leftPunchAnimProgress, 15.0D, 22.6D)) event.setRoll(37);
+						}
+
+						if (selectedPounder.getAttackID() == RoboPounderEntity.SWING_ATTACK_ID) {
+							if (MathUtil.isBetween(rightSweepAnimProgress, 1.0D, 15.6D)) {
+								event.setYaw(event.getYaw() + 17.5F);
+								event.setRoll(6);
+							}
+							if (MathUtil.isBetween(rightSweepAnimProgress, 16.0D, 25.6D)) {
+								event.setYaw(event.getYaw() - 30F);
+								event.setRoll(-15);
+							}
+							if (MathUtil.isBetween(leftSweepAnimProgress, 1.0D, 15.6D)) {
+								event.setYaw(event.getYaw() - 17.5F);
+								event.setRoll(-6);
+							}
+							if (MathUtil.isBetween(leftSweepAnimProgress, 16.0D, 25.6D)) {
+								event.setYaw(event.getYaw() + 30F);
+								event.setRoll(15);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onFOVUpdateEvent(FOVUpdateEvent event) { //TODO Un-hardcode
 		PlayerEntity clientPlayer = Minecraft.getInstance().player;
 
-		if (CAConfigManager.MAIN_CLIENT.enableCameraShake.get()) {
-			float amp = 0F;
+		if (CAConfigManager.MAIN_CLIENT.enableVFXEffects.get()) {
+			if (CAConfigManager.MAIN_CLIENT.enableCameraZoom.get()) {
+				float curFOV = event.getFov();
+				AnimatableMonsterEntity selectedEntity = null;
 
-			for (CAScreenShakeEntity shaker : EntityUtil.getEntitiesAroundNoPredicate(clientPlayer, CAScreenShakeEntity.class, 20, 20, 20, 20)) {
-				if (shaker.distanceTo(clientPlayer) < shaker.getRadius()) amp += shaker.getAmp(clientPlayer, Minecraft.getInstance().getFrameTime());
-			}
+				for (AnimatableMonsterEntity potentialSelectedEntity : EntityUtil.getEntitiesAroundNoPredicate(clientPlayer, AnimatableMonsterEntity.class, 15, 15, 15, 15)) {
+					if (potentialSelectedEntity == null || !potentialSelectedEntity.isAlive()) continue;
 
-			if (amp > 1.0F) amp = 1.0F;
+					if (selectedEntity != null) {
+						if (MathUtil.getDistanceBetween(clientPlayer, potentialSelectedEntity) < MathUtil.getDistanceBetween(clientPlayer, selectedEntity)) selectedEntity = potentialSelectedEntity;
+					} else selectedEntity = potentialSelectedEntity;
+				}
 
-			if (!Minecraft.getInstance().isPaused()) {
-				// Note to self: Don't use .random, and don't EVER leave this inside a loop. Seriously. -- Meme Man
-				event.setPitch((float) (event.getPitch() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 3 + 2) * 25));
-				event.setYaw((float) (event.getYaw() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 5 + 1) * 25));
-				event.setRoll((float) (event.getRoll() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 4) * 25));
+				if (selectedEntity != null) {
+					final AnimatableMonsterEntity finalizedSelectedEntity = selectedEntity;
+
+					if (finalizedSelectedEntity instanceof RoboPounderEntity) {
+						RoboPounderEntity selectedPounder = (RoboPounderEntity) finalizedSelectedEntity;
+						double leftPunchAnimProgress = selectedPounder.getCachedAnimationByName("Left Heavy Attack").getWrappedAnimProgress();
+						double rightPunchAnimProgress = selectedPounder.getCachedAnimationByName("Right Heavy Attack").getWrappedAnimProgress();
+						double leftSweepAnimProgress = selectedPounder.getCachedAnimationByName("Left Swing Attack").getWrappedAnimProgress();
+						double rightSweepAnimProgress = selectedPounder.getCachedAnimationByName("Right Swing Attack").getWrappedAnimProgress();
+
+						if (selectedPounder.getAttackID() == RoboPounderEntity.PUNCH_ATTACK_ID) {
+							if (MathUtil.isBetween(leftPunchAnimProgress, 1.0D, 14.6D) || MathUtil.isBetween(rightPunchAnimProgress, 1.0D, 14.6D)) event.setNewfov(curFOV * 0.35F);
+							else if (leftPunchAnimProgress > 0 || rightPunchAnimProgress > 0) event.setNewfov(curFOV * 3.2526103764F); // Guess the reference +1 :trollhappy:
+						}
+
+						if (selectedPounder.getAttackID() == RoboPounderEntity.SWING_ATTACK_ID) {
+							if (MathUtil.isBetween(leftSweepAnimProgress, 1.0D, 15.6D) || MathUtil.isBetween(rightSweepAnimProgress, 1.0D, 12.6D)) event.setNewfov(curFOV * 0.75F);
+							else if (leftSweepAnimProgress > 0 || rightSweepAnimProgress > 0) event.setNewfov(curFOV * 1.75F);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -134,7 +230,7 @@ public class CAClientMiscEvents {
 
 		if (CAConfigManager.MAIN_COMMON.enableLavaEelArmorSetBonus.get()) {
 			if (cameraEntity instanceof PlayerEntity) {
-				if (IUtilityHelper.isFullArmorSet((PlayerEntity) cameraEntity, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
+				if (EntityUtil.isFullArmorSet((PlayerEntity) cameraEntity, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
 					if (cameraEntity.isEyeInFluid(FluidTags.LAVA)) {
 						event.setDensity(Float.valueOf(CAConfigManager.MAIN_CLIENT.lavaEelSetLavaFogDensity.get().toString()));
 						event.setCanceled(true);
@@ -162,7 +258,7 @@ public class CAClientMiscEvents {
 	public static void onBlockOverlayEvent(RenderBlockOverlayEvent event) {
 		if (CAConfigManager.MAIN_COMMON.enableLavaEelArmorSetBonus.get()) {
 			PlayerEntity player = event.getPlayer();
-			if (IUtilityHelper.isFullArmorSet(player, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
+			if (EntityUtil.isFullArmorSet(player, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
 				if (player.isEyeInFluid(FluidTags.LAVA) && player.hasEffect(Effects.FIRE_RESISTANCE) || player.isInLava() || player.isOnFire()) {
 					event.getMatrixStack().translate(0, CAConfigManager.MAIN_CLIENT.lavaEelSetFireStackTranslation.get(), 0);
 				}

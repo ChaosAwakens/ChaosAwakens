@@ -49,7 +49,7 @@ public class AnimationInformation {
 		
 		AnimationInformation otherAnimInfo = (AnimationInformation) other;
 				
-		return getAnimationName().equalsIgnoreCase(otherAnimInfo.getAnimationName());
+		return getAnimationName().equalsIgnoreCase(otherAnimInfo.getAnimationName()) && getAnimationLength() == otherAnimInfo.getAnimationLength();
 	}
 	
 	@Override

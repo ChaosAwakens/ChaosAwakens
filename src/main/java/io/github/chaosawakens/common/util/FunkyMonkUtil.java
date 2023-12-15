@@ -10,5 +10,4 @@ public class FunkyMonkUtil {
 	public static boolean dotNextBoolean(Boolean boo_lean) { // BOOOOOOOOOLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAN
 		return boo_lean;
 	}
-
 }

@@ -23,6 +23,7 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
@@ -50,6 +51,9 @@ public class AnimatableAOEGoal extends Goal {
 	protected Supplier<? extends IAnimationBuilder> curAnim;
 	private final ObjectArrayList<LivingEntity> affectedEntities = new ObjectArrayList<>();
 	private AOEHitboxEntity aoeDamageHitBox; // Cache to prevent lag
+	@Nullable
+	protected Supplier<SoundEvent> soundOnStart;
+	protected float soundPitch = 1.0F;
 
 	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, boolean shouldFreezeRotation, boolean shouldAffectBlocks, boolean isProgressive, int presetCooldown) {
 		this.owner = owner;
@@ -143,6 +147,12 @@ public class AnimatableAOEGoal extends Goal {
 		return this;
 	}
 
+	public AnimatableAOEGoal soundOnStart(Supplier<SoundEvent> sound, float soundPitch) {
+		this.soundOnStart = sound;
+		this.soundPitch = soundPitch;
+		return this;
+	}
+
 	@Override
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
@@ -171,6 +181,8 @@ public class AnimatableAOEGoal extends Goal {
 		Supplier<? extends IAnimationBuilder> targetAnim = animationsToPick != null && !animationsToPick.isEmpty() ? animationsToPick.get(owner.level.getRandom().nextInt(animationsToPick.size())) : aoeAnim;
 
 		owner.playAnimation(targetAnim.get(), true);
+
+		if (soundOnStart != null) owner.level.playSound(null, owner.blockPosition(), soundOnStart.get(), SoundCategory.HOSTILE, 1.0F, soundPitch);
 
 		this.curAnim = targetAnim;
 		

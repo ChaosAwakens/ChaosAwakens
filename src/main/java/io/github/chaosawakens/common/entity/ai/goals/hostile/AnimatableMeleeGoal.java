@@ -14,6 +14,8 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 
 public class AnimatableMeleeGoal extends Goal {
 	protected final AnimatableMonsterEntity owner;
@@ -30,6 +32,9 @@ public class AnimatableMeleeGoal extends Goal {
 	protected final int presetCooldown;
 	protected int curCooldown;
 	protected Supplier<? extends IAnimationBuilder> curAnim;
+	@Nullable
+	protected Supplier<SoundEvent> soundOnStart;
+	protected float soundPitch = 1.0F;
 
 	public AnimatableMeleeGoal(AnimatableMonsterEntity owner, Supplier<? extends IAnimationBuilder> meleeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double angleRange, int probability, int presetCooldown) {
 		this.owner = owner;
@@ -108,6 +113,12 @@ public class AnimatableMeleeGoal extends Goal {
 		return this;
 	}
 
+	public AnimatableMeleeGoal soundOnStart(Supplier<SoundEvent> sound, float soundPitch) {
+		this.soundOnStart = sound;
+		this.soundPitch = soundPitch;
+		return this;
+	}
+
 	@Override
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
@@ -130,7 +141,9 @@ public class AnimatableMeleeGoal extends Goal {
 		Supplier<? extends IAnimationBuilder> targetAnim = animationsToPick != null && !animationsToPick.isEmpty() ? animationsToPick.get(owner.level.getRandom().nextInt(animationsToPick.size())) : meleeAnim;
 		
 		owner.playAnimation(targetAnim.get(), true);
-		
+
+		if (soundOnStart != null) owner.level.playSound(null, owner.blockPosition(), soundOnStart.get(), SoundCategory.HOSTILE, 1.0F, soundPitch);
+
 		this.curAnim = targetAnim;
 	}
 

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "chaosawakens:block/tall_bush_top"
+    },
+    "half=lower": {
+      "model": "chaosawakens:block/tall_bush_bottom"
+    }
+  }
+}

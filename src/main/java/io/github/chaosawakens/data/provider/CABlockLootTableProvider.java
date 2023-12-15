@@ -177,6 +177,7 @@ public class CABlockLootTableProvider extends BlockLootTables {
 		add(CABlocks.THORNY_SUN.get(), (plant) -> createSinglePropConditionTable(plant, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 		add(CABlocks.ALSTROEMERIAT.get(), (plant) -> createSinglePropConditionTable(plant, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 		add(CABlocks.SMALL_BUSH.get(), (plant) -> createShearsOnlyDrop(CABlocks.SMALL_BUSH.get()));
+		add(CABlocks.TALL_BUSH.get(), (plant) -> createShearsOnlyDrop(CABlocks.TALL_BUSH.get()));
 		dropSelf(CABlocks.TERRA_PRETA.get());
 		dropSelf(CABlocks.SMALL_CARNIVOROUS_PLANT.get());
 		dropSelf(CABlocks.BIG_CARNIVOROUS_PLANT.get());

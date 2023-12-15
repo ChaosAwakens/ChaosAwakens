@@ -15,6 +15,7 @@ import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.SoundCategory;
 
 public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 	private final double overshoot;
@@ -42,7 +43,17 @@ public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 	
 	@Override
 	public void start() {
-		super.start();
+		owner.setAttackID(attackId);
+		owner.getNavigation().stop();
+
+		Supplier<? extends IAnimationBuilder> targetAnim = animationsToPick != null && !animationsToPick.isEmpty() ? animationsToPick.get(owner.level.getRandom().nextInt(animationsToPick.size())) : meleeAnim;
+
+		owner.playAnimation(targetAnim.get(), true);
+
+		if (soundOnStart != null) owner.level.playSound(null, owner.blockPosition(), soundOnStart.get(), SoundCategory.HOSTILE, 2.5F, soundPitch);
+
+		this.curAnim = targetAnim;
+
 		affectedEntities.clear();
 	}
 	

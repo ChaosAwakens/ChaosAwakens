@@ -17,6 +17,85 @@
       "chaosawakens:entity/robo/death"
     ]
   },
+
+  "entity.robo_pounder.idle": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.idle",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/idle"
+    ]
+  },
+  "entity.robo_pounder.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.walk",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/walk"
+    ]
+  },
+  "entity.robo_pounder.taunt": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.taunt",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/taunt"
+    ]
+  },
+  "entity.robo_pounder.death": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.death",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/death"
+    ]
+  },
+  "entity.robo_pounder.piston_punch": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.piston_punch",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/attacks/piston_punch"
+    ]
+  },
+  "entity.robo_pounder.side_sweep": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.side_sweep",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/attacks/side_sweep"
+    ]
+  },
+  "entity.robo_pounder.dyson_dash": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.dyson_dash",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/attacks/dyson_dash"
+    ]
+  },
+  "entity.robo_pounder.ground_slam": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.ground_slam",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/attacks/ground_slam"
+    ]
+  },
+  "entity.robo_pounder.dome_stomp": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.dome_stomp",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/attacks/dome_stomp"
+    ]
+  },
+  "entity.robo_pounder.rage_run_windup": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.rage_run_windup",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_windup"
+    ]
+  },
+  "entity.robo_pounder.rage_run": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.rage_run",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run"
+    ]
+  },
+  "entity.robo_pounder.rage_run_cooldown": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.rage_run_cooldown",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_cooldown"
+    ]
+  },
+  "entity.robo_pounder.rage_run_restart": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.rage_run_restart",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_restart"
+    ]
+  },
   
   "entity.emerald_gator.walk": {
     "subtitle": "subtitles.chaosawakens.entity.emerald_gator.walk",

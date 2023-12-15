@@ -101,13 +101,22 @@ public class CAJER {
 
 	private static void registerPlants() {
 		IPlantRegistry plantRegistry = JERAPI.getInstance().getPlantRegistry();
+
 		PlantDrop radish = new PlantDrop(new ItemStack(CAItems.RADISH.get()), 1, 1);
-		PlantDrop radishSeeds = new PlantDrop(new ItemStack(CAItems.RADISH_SEEDS.get()), 0, 3);
+		PlantDrop radishSeeds = new PlantDrop(new ItemStack(CAItems.RADISH_SEEDS.get()), 1, 3);
 		plantRegistry.register(CABlocks.RADISH.get(), radish, radishSeeds);
 
 		PlantDrop lettuce = new PlantDrop(new ItemStack(CAItems.LETTUCE.get()), 1, 1);
-		PlantDrop lettuceSeeds = new PlantDrop(new ItemStack(CAItems.LETTUCE_SEEDS.get()), 0, 3);
+		PlantDrop lettuceSeeds = new PlantDrop(new ItemStack(CAItems.LETTUCE_SEEDS.get()), 1, 3);
 		plantRegistry.register(CABlocks.LETTUCE.get(), lettuce, lettuceSeeds);
+
+		PlantDrop strawberry = new PlantDrop(new ItemStack(CAItems.STRAWBERRY.get()), 1, 3);
+		PlantDrop strawberrySeeds = new PlantDrop(new ItemStack(CAItems.STRAWBERRY_SEEDS.get()), 1, 3);
+		plantRegistry.register(CABlocks.STRAWBERRY_BUSH.get(), strawberry, strawberrySeeds);
+
+		PlantDrop quinoa = new PlantDrop(new ItemStack(CAItems.QUINOA.get()), 1, 3);
+		PlantDrop quinoaSeeds = new PlantDrop(new ItemStack(CAItems.QUINOA_SEEDS.get()), 1, 3);
+		plantRegistry.register(CABlocks.QUINOA.get(), quinoa, quinoaSeeds);
 	}
 
 	private static void registerOres() {

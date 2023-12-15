@@ -98,6 +98,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 		doublePlant("alstroemeriat", "alstroemeriat");
 		cross("dense_orchid", chaosRL("dense_orchid"));
 		cross("small_bush", chaosRL("small_bush"));
+		doublePlant("tall_bush", "tall_bush");
 		cross("small_carnivorous_plant", chaosRL("small_carnivorous_plant"));
 		cross("big_carnivorous_plant", chaosRL("big_carnivorous_plant"));
 		cross("blue_bulb", chaosRL("blue_bulb"));

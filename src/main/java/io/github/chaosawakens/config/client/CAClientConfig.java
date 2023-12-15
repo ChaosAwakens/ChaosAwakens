@@ -26,8 +26,10 @@ public class CAClientConfig {
 	
 	public final DoubleValue lavaEelSetLavaFogDensity;
 	public final DoubleValue lavaEelSetFireStackTranslation;
-	
+
+	public final BooleanValue enableVFXEffects;
 	public final BooleanValue enableCameraShake;
+	public final BooleanValue enableCameraZoom;
 	
 	public CAClientConfig(ForgeConfigSpec.Builder builder) {
 		builder.push("ToolTips");
@@ -58,8 +60,11 @@ public class CAClientConfig {
 		builder.push("Functionality");
 		
 		builder.push("VFX Effects");
+		enableVFXEffects = builder.comment("Enable/Disable all VFX effects under the 'VFX Effects' section.")
+				.define("Enable VFX effects", true);
 		builder.push("Camera");
 		enableCameraShake = builder.define("Enable camera shake", true);
+		enableCameraZoom = builder.define("Enable camera zoom", true);
 		builder.pop(2);
 		
 		builder.push("Armor");

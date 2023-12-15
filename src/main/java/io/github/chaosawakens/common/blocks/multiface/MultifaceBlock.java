@@ -151,9 +151,7 @@ public abstract class MultifaceBlock extends Block {
 		BlockPos targetPos = pContext.getClickedPos();
 		BlockState targetState = curWorld.getBlockState(targetPos);
 		
-		return Arrays.stream(pContext.getNearestLookingDirections()).map((targettDir) -> {
-			return getStateForPlacement(targetState, curWorld, targetPos, targettDir);
-		}).filter(Objects::nonNull).findFirst().orElse((BlockState) null);
+		return Arrays.stream(pContext.getNearestLookingDirections()).map((targettDir) -> getStateForPlacement(targetState, curWorld, targetPos, targettDir)).filter(Objects::nonNull).findFirst().orElse((BlockState) null);
 	}
 
 	public boolean isValidStateForPlacement(World world, BlockState curState, BlockPos targetPos, Direction targetDir) {

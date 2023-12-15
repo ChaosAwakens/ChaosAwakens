@@ -1,9 +1,8 @@
 package io.github.chaosawakens.common.events;
 
-import java.util.Objects;
-import java.util.Random;
-import java.util.UUID;
-
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.MultimapBuilder;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.enchantments.HoplologyEnchantment;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -11,11 +10,7 @@ import io.github.chaosawakens.common.entity.base.AnimatableFishEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableWaterMobEntity;
 import io.github.chaosawakens.common.items.base.AnimatableShieldItem;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CAEffects;
-import io.github.chaosawakens.common.registry.CAEnchantments;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CATags;
+import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
@@ -24,13 +19,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
@@ -39,6 +28,7 @@ import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.monster.GiantEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
@@ -55,13 +45,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
@@ -79,14 +64,33 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.VersionChecker;
 
+import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
+
 public class CAMiscEvents {
-	private static String DOWNLOADS = "https://chaosawakens.github.io/downloads";
+	private static final String DOWNLOADS = "https://chaosawakens.github.io/downloads";
+	private static final ListMultimap<UUID, TextFormatting> DEVELOPER_COLORS = Util.make(MultimapBuilder.hashKeys().arrayListValues(2).build(), (devMultiMap) -> {
+		devMultiMap.putAll(UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"), Lists.newArrayList(TextFormatting.GREEN, TextFormatting.DARK_GREEN)); // Blackout03
+		devMultiMap.putAll(UUID.fromString("29aa413b-d714-46f1-a3f5-68b9c67a4923"), Lists.newArrayList(TextFormatting.BLUE, TextFormatting.DARK_BLUE));// Ninjaguy169
+		devMultiMap.putAll(UUID.fromString("2668a475-2166-4539-9935-00f087818c4a"), Lists.newArrayList(TextFormatting.GOLD, TextFormatting.YELLOW));// T40ne
+		devMultiMap.putAll(UUID.fromString("8c89a0d3-3271-459d-a8c1-a9d34d53365b"), Lists.newArrayList(TextFormatting.RED, TextFormatting.DARK_RED));// FunkyMonk127
+	});
 
 	@SubscribeEvent
 	public static void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
 		Entity target = event.getEntity();
+
+		//TODO Reload for anim metadata (RP reload?) + common/first-time metadata sync on login.
+		//TODO Also run SP and MP tests to ensure that there aren't any rogue bugs running on SP.
 		
 		if (target == null) return;
+
+		if (target instanceof ServerPlayerEntity) {
+			ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) target;
+
+
+		}
 		
 		if (CAConfigManager.MAIN_COMMON.showUpdateMessage.get() && VersionChecker.getResult(ModList.get().getModContainerById(ChaosAwakens.MODID).get().getModInfo()).status == VersionChecker.Status.OUTDATED) {
 			target.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)
@@ -97,7 +101,8 @@ public class CAMiscEvents {
 									.withColor(TextFormatting.GOLD)
 									.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, DOWNLOADS)))), Util.NIL_UUID);
 		}
-		
+
+		//TODO Reorganize this Yandere-dev ahh code
 		if (EntityUtil.isUserOrEntityUUIDEqualTo(target, UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"))) { // UUID of Blackout03_
 			Objects.requireNonNull(target.getServer()).getPlayerList().broadcastMessage(new StringTextComponent("The Developer, ").withStyle(TextFormatting.GREEN)
 					.append(new StringTextComponent("Blackout03_").withStyle(TextFormatting.BOLD, TextFormatting.DARK_GREEN))
@@ -115,10 +120,12 @@ public class CAMiscEvents {
 					.append(new StringTextComponent("FunkyMonk127").withStyle(TextFormatting.BOLD, TextFormatting.DARK_RED))
 					.append(new StringTextComponent(" has joined the Server!").withStyle(TextFormatting.RED)), ChatType.SYSTEM, Util.NIL_UUID);
 		}
+
+
 	}
 	
 	@SubscribeEvent
-	public static void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
+	public static void onEntityJoinWorldEvent(EntityJoinWorldEvent event) { //TODO Also this
 		Entity target = event.getEntity();
 		
 		if (target instanceof VillagerEntity) {
@@ -277,7 +284,7 @@ public class CAMiscEvents {
 					break;
 				case 2:
 					event.setLevel(event.getLevel() - 5);
-					
+
 					if (event.getLevel() <= 0) {
 						event.setLevel(EnchantmentHelper.getEnchantmentCost(world.random, row, power, stack));
 					}
@@ -307,7 +314,7 @@ public class CAMiscEvents {
 		}
 
 		if (curPlayer instanceof LivingEntity) {
-			if (event.isCancelable() && ((LivingEntity) curPlayer).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+			if (event.isCancelable() && curPlayer.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 		}
 	}
 	

@@ -3,10 +3,10 @@ package io.github.chaosawakens.manager;
 import io.github.chaosawakens.client.events.CABossBarRenderer;
 import io.github.chaosawakens.client.events.CAClientMiscEvents;
 import io.github.chaosawakens.client.events.CAClientSetupEvents;
+import io.github.chaosawakens.common.events.CACommonSetupEvents;
 import io.github.chaosawakens.common.events.CACommonSetupEvents.ForgeSetupEvents;
-import io.github.chaosawakens.common.events.CACommonSetupEvents.ModSetupEvents;
 import io.github.chaosawakens.common.events.CAMiscEvents;
-import io.github.chaosawakens.server.events.ServerSetupEvent;
+import io.github.chaosawakens.server.events.ServerSetupEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -29,7 +29,7 @@ public class CAEventManager {
 	}
 
 	private static void registerCommonEvents(IEventBus modBus, IEventBus forgeBus) {		
-		modBus.register(ModSetupEvents.class);
+		modBus.register(CACommonSetupEvents.ModSetupEvents.class);
 
 		forgeBus.register(ForgeSetupEvents.class);
 		forgeBus.register(CAMiscEvents.class);
@@ -37,10 +37,9 @@ public class CAEventManager {
 
 	private static void registerServerEvents(IEventBus modBus, IEventBus forgeBus) {
 		if (FMLEnvironment.dist.equals(Dist.DEDICATED_SERVER)) {
-			modBus.addListener(ServerSetupEvent::onFMLServerSetupEvent);
+			modBus.register(ServerSetupEvents.ModSetupEvents.class);
 
-			forgeBus.addListener(ServerSetupEvent::onFMLServerStartEvent);
-			forgeBus.addListener(ServerSetupEvent::onFMLServerStartingEvent);
+			forgeBus.register(ServerSetupEvents.ForgeSetupEvents.class);
 		}
 	}
 }

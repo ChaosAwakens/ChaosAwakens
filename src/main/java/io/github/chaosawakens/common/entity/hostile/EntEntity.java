@@ -93,7 +93,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 		}
 		return PlayState.CONTINUE;
 	}
-	
+
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
 	}

@@ -35,12 +35,13 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	@Override
-	protected void registerStatesAndModels() {
+	protected void registerStatesAndModels() { //TODO Automate
 		grassBlock(CABlocks.DENSE_GRASS_BLOCK.get(), chaosRL("dense_dirt"), chaosRL("dense_dirt"), chaosRL("dense_grass_block_top"), chaosRL("dense_grass_block_side"), chaosRL("dense_grass_block_side_overlay"));
 		simpleBlock(CABlocks.DENSE_DIRT.get());
 		grassBlock(CABlocks.DENSE_RED_ANT_NEST.get(), chaosRL("dense_dirt"), chaosRL("dense_dirt"), chaosRL("dense_red_ant_nest"), chaosRL("dense_grass_block_side"), chaosRL("dense_grass_block_side_overlay"));
 		cross(CABlocks.DENSE_GRASS.get());
 		doubleCross(CABlocks.TALL_DENSE_GRASS.get());
+		doubleCross(CABlocks.TALL_BUSH.get());
 		doubleCross(CABlocks.THORNY_SUN.get());
 		simpleBlock(CABlocks.TERRA_PRETA.get());
 		farmland(CABlocks.TERRA_PRETA_FARMLAND.get());

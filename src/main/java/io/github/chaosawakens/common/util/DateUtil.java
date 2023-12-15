@@ -6,7 +6,7 @@ import java.time.temporal.ChronoField;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.Entity;
 
-public class DateUtil {
+public final class DateUtil {
 	
 	private DateUtil() {
 		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");

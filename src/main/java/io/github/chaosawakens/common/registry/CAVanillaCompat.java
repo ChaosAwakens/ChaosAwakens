@@ -87,6 +87,7 @@ public class CAVanillaCompat {
 		registerCompostable(0.65F, CABlocks.PURPLE_BULB.get());
 		registerCompostable(0.75F, CABlocks.ALSTROEMERIAT.get());
 		registerCompostable(0.6F, CABlocks.SMALL_BUSH.get());
+		registerCompostable(0.7F, CABlocks.TALL_BUSH.get());
 		registerCompostable(0.55F, CABlocks.SMALL_CARNIVOROUS_PLANT.get());
 		registerCompostable(0.55F, CABlocks.BIG_CARNIVOROUS_PLANT.get());
 		registerCompostable(0.45F, CABlocks.MESOZOIC_VINES.get());
@@ -253,6 +254,7 @@ public class CAVanillaCompat {
 		registerFlammable(CABlocks.DENSE_ORCHID.get(), 60, 100);
 		registerFlammable(CABlocks.ALSTROEMERIAT.get(), 60, 100);
 		registerFlammable(CABlocks.SMALL_BUSH.get(), 50, 80);
+		registerFlammable(CABlocks.TALL_BUSH.get(), 50, 90);
 		registerFlammable(CABlocks.SMALL_CARNIVOROUS_PLANT.get(), 50, 80);
 		registerFlammable(CABlocks.BIG_CARNIVOROUS_PLANT.get(), 50, 80);
 		registerFlammable(CABlocks.MESOZOIC_VINES.get(), 50, 80);
