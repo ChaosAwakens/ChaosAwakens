@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.ore.CAEntityTrapOreBlock;
+import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
 import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;
 import io.github.chaosawakens.common.entity.creature.land.StinkBugEntity;
 import io.github.chaosawakens.common.entity.creature.land.TreeFrogEntity;
@@ -89,26 +90,29 @@ public class TheOneProbePlugin {
 						}
 					}
 
-		/*			if (entity instanceof BirdEntity) {
-						int type = ((BirdEntity) entity).getBirdType();
+					if (entity instanceof BirdEntity) {
+						int type = ((BirdEntity) entity).getColour();
 						switch (type) {
-						case 0:
-						default:
-							iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Black (" + type + ")"));
-							return;
-						case 1:
-							iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Brown (" + type + ")"));
-							return;
-						case 2:
-							iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Blue (" + type + ")"));
-							return;
-						case 3:
-							iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Green (" + type + ")"));
-							return;
-						case 4:
-							iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Red (" + type + ")"));
+							case 0:
+							default:
+								iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Black (" + type + ")"));
+								return;
+							case 1:
+								iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Blue (" + type + ")"));
+								return;
+							case 2:
+								iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Brown (" + type + ")"));
+								return;
+							case 3:
+								iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Green (" + type + ")"));
+								return;
+							case 4:
+								iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Red (" + type + ")"));
+								return;
+							case 5:
+								iProbeInfo.text(CompoundText.createLabelInfo("Bird Species: ", "Ruby (" + type + ")"));
 						}
-					}*/
+					}
 					
 					if (entity instanceof CABoatEntity) {
 						String type = ((CABoatEntity) entity).getBoatWoodType();

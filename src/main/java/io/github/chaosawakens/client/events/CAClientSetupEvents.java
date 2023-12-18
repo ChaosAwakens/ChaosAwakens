@@ -2,6 +2,7 @@ package io.github.chaosawakens.client.events;
 
 import io.github.chaosawakens.client.renderers.entity.boss.miniboss.HerculesBeetleEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.boss.robo.RoboJefferyEntityRenderer;
+import io.github.chaosawakens.client.renderers.entity.creature.air.BirdEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.creature.land.AntEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.creature.land.BeaverEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.creature.land.GazelleEntityRenderer;
@@ -93,7 +94,7 @@ public class CAClientSetupEvents {
 		// ENTITIES
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), (manager) -> new HerculesBeetleEntityRenderer(manager, HerculesBeetleType.MODERN));
 //		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), (manager) -> new HerculesBeetleEntityRenderer(manager, HerculesBeetleEntity.Type.THROWBACK));
-//		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRD.get(), BirdEntityRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRD.get(), BirdEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.OAK_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntType.OAK));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ACACIA_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntType.ACACIA));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.APPLE_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntType.APPLE));

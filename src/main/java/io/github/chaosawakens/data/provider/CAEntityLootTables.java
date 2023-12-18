@@ -1078,14 +1078,14 @@ public class CAEntityLootTables extends EntityLootTables {
 								.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 								.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
 								.when(KilledByPlayer.killedByPlayer()))));
-		/*		add(CAEntityTypes.BIRD.get(),
+		add(CAEntityTypes.BIRD.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.FEATHER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
-										.when(KilledByPlayer.killedByPlayer()))));*/
+										.when(KilledByPlayer.killedByPlayer()))));
 		add(CAEntityTypes.LETTUCE_CHICKEN.get(),
 				LootTable.lootTable()
 				.withPool(LootPool.lootPool()

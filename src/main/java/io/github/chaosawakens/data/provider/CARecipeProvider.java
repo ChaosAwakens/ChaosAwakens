@@ -1832,13 +1832,13 @@ public class CARecipeProvider extends RecipeProvider {
 				        Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 				        CAItems.LETTUCE_CHICKEN_SPAWN_EGG.get(), 1, 20, "copper")
 		        .build(recipeConsumer, ChaosAwakens.prefix("defossilizing/" + CABlocks.FOSSILISED_LETTUCE_CHICKEN.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
-	/*	FossilRecipeBuilder
-				.builder(CARecipes.DEFOSSILIZING_SERIALIZER.get(),
+		FossilRecipeBuilder
+				.builder(CARecipeTypes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_BIRD.get()),
 						Ingredient.of(Items.WATER_BUCKET),
 						Ingredient.of(CAItems.ALUMINUM_POWER_CHIP.get()),
 						CAItems.BIRD_SPAWN_EGG.get(), 1, 20, "copper")
-				.build(recipeConsumer, ChaosAwakens.prefix("defossilizing/" + CABlocks.FOSSILISED_BIRD.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));*/
+				.build(recipeConsumer, ChaosAwakens.prefix("defossilizing/" + CABlocks.FOSSILISED_BIRD.getId().toString().replaceAll("chaosawakens:", "") + "_to_spawn_egg"));
 		FossilRecipeBuilder
 				.builder(CARecipeTypes.DEFOSSILIZING_SERIALIZER.get(),
 						Ingredient.of(CABlocks.FOSSILISED_TREE_FROG.get()),

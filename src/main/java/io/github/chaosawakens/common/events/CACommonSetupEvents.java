@@ -2,8 +2,6 @@ package io.github.chaosawakens.common.events;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
@@ -19,6 +17,7 @@ import io.github.chaosawakens.api.wrapper.CarverWrapper;
 import io.github.chaosawakens.api.wrapper.FeatureWrapper;
 import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
+import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
 import io.github.chaosawakens.common.entity.creature.land.AntEntity;
 import io.github.chaosawakens.common.entity.creature.land.BeaverEntity;
 import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;
@@ -42,6 +41,7 @@ import io.github.chaosawakens.common.entity.creature.water.fish.SparkFishEntity;
 import io.github.chaosawakens.common.entity.creature.water.fish.WoodFishEntity;
 import io.github.chaosawakens.common.entity.hostile.AggressiveAntEntity;
 import io.github.chaosawakens.common.entity.hostile.EntEntity;
+import io.github.chaosawakens.common.entity.hostile.insect.WaspEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
@@ -420,7 +420,7 @@ public class CACommonSetupEvents {
 			event.put(CAEntityTypes.TREE_FROG.get(), TreeFrogEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
 //			event.put(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
-//			event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
+			event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ULTIMATE_APPLE_COW.get(), UltimateAppleCowEntity.setCustomAttributes().build());
@@ -442,7 +442,7 @@ public class CACommonSetupEvents {
 			event.put(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().build());
-//			event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
+			event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.WHALE.get(), WhaleEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.GREEN_FISH.get(), GreenFishEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROCK_FISH.get(), RockFishEntity.setCustomAttributes().build());
