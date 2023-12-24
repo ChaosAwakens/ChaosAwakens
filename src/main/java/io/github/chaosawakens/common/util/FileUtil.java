@@ -1,7 +1,13 @@
 package io.github.chaosawakens.common.util;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import io.github.chaosawakens.api.animation.LazyLoadedField;
+import net.minecraft.resources.IResourceManager;
+import net.minecraft.util.JSONUtils;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.loading.FMLPaths;
+import software.bernie.geckolib3.file.AnimationFileLoader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -136,5 +142,11 @@ public final class FileUtil {
             if (directory.delete()) checkAndMakeDirectory(directory, shouldHide);
             else throw new IOException("Directory [" + directory.getAbsolutePath() + "] is not a folder and thus could not be deleted!");
         }
+    }
+
+    public static JsonObject loadFile(ResourceLocation location, IResourceManager manager) {
+        String content = AnimationFileLoader.getResourceAsString(location, manager);
+        Gson GSON = new Gson();
+        return JSONUtils.fromJson(GSON, content, JsonObject.class);
     }
 }

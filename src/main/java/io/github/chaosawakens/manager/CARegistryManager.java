@@ -1,5 +1,6 @@
 package io.github.chaosawakens.manager;
 
+import io.github.chaosawakens.common.network.packets.s2c.EnforceAssetsPacket;
 import io.github.chaosawakens.common.registry.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 
@@ -31,5 +32,7 @@ public class CARegistryManager {
 		CAFoliagePlacerTypes.FOLIAGE_PLACER_TYPES.register(modBus);
 		CATreeDecoratorTypes.TREE_DECORATOR_TYPES.register(modBus);
 		CASurfaceBuilders.SURFACE_BUILDERS.register(modBus);
+
+		CADataLoaders.ANIMATION_DATA.subscribeAsSyncable(CANetworkManager.CHANNEL, EnforceAssetsPacket::new);
 	}
 }
