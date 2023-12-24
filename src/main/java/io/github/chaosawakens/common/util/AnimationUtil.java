@@ -12,6 +12,7 @@ import software.bernie.geckolib3.resource.GeckoLibCache;
 import software.bernie.shadowed.eliotlash.molang.MolangParser;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public final class AnimationUtil {
 	
@@ -28,7 +29,7 @@ public final class AnimationUtil {
 	 * TODO THIS IS A VERY ICKY IMPL, BUT WE NEED QUICKNESS IN RELEASING 0.12 AND HEADING OVER TO NEWER VERSIONS!!
 	 *
 	 * @param animLoc The animation's resource location.
-	 * @param targetAnimName The name of the animation to get the length of (relevant only on the client).
+	 * @param targetAnimName The name of the animation to get the length of.
 	 *
 	 * @return The length of the specified animation, from the determined side.
 	 */
@@ -49,7 +50,9 @@ public final class AnimationUtil {
 		} else if (fullRl.contains("animation_metadata")) {
 			AnimationDataCodec animData = CADataLoaders.ANIMATION_DATA.getData(animLoc);
 
-			if (animData != null) length = animData.getAnimationLength();
+			if (animData != null) length = Objects.requireNonNull(animData.getStoredAnims().stream()
+					.filter(a -> a.getAnimationName().equals(targetAnimName))
+					.findFirst().orElse(null)).getAnimationLength();
 			else ChaosAwakens.LOGGER.warn("Attempted to get length of animation data that does not exist: {}", animLoc);
 		}
 
@@ -61,7 +64,7 @@ public final class AnimationUtil {
 	 * TODO THIS IS A VERY ICKY IMPL, BUT WE NEED QUICKNESS IN RELEASING 0.12 AND HEADING OVER TO NEWER VERSIONS!!
 	 *
 	 * @param animLoc The animation's resource location.
-	 * @param targetAnimName The name of the animation to get the loop type of (relevant only on the client).
+	 * @param targetAnimName The name of the animation to get the loop type of.
 	 *
 	 * @return The {@link ILoopType} of the specified animation, from the determined side.
 	 */
@@ -81,7 +84,9 @@ public final class AnimationUtil {
 		} else if (animLoc.toString().contains("animation_metadata")) {
 			AnimationDataCodec animData = CADataLoaders.ANIMATION_DATA.getData(animLoc);
 
-			if (animData != null) loopType = animData.getLoopType();
+			if (animData != null) loopType = Objects.requireNonNull(animData.getStoredAnims().stream()
+					.filter(a -> a.getAnimationName().equals(targetAnimName))
+					.findFirst().orElse(null)).getLoopType();
 			else ChaosAwakens.LOGGER.warn("Attempted to get loop type of animation data that does not exist: {}", animLoc);
 		}
 

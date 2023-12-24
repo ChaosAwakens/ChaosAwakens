@@ -317,7 +317,7 @@ public class CACommonSetupEvents {
 		}
 
 		public static void onAddReloadListenerEvent(AddReloadListenerEvent event) {
-
+			event.addListener(CADataLoaders.ANIMATION_DATA);
 		}
 	}
 	
@@ -482,6 +482,7 @@ public class CACommonSetupEvents {
 			}
 			//		dataGenerator.addProvider(new CALanguageProvider(dataGenerator));
 			if (event.includeServer()) {
+				dataGenerator.addProvider(new CAAnimationMetadataProvider(dataGenerator));
 				dataGenerator.addProvider(new CAAdvancementProvider(dataGenerator, existingFileHelper));
 				dataGenerator.addProvider(new CACustomConversionProvider(dataGenerator));
 				dataGenerator.addProvider(new CADimensionTypeProvider(dataGenerator));

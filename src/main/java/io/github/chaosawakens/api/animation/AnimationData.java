@@ -34,15 +34,6 @@ public class AnimationData implements IReloadableResourceManager {
     }
 
     public byte[] encodeAnimationData(ResourceLocation targetAnimLoc) {
-        ObjectArrayList<ResourceLocation> mappedAnimInfoLoc = animationInformation.stream().map(AnimationDataHolder::getClientFileLoc).collect(Collectors.toCollection(ObjectArrayList::new));
-        Optional<ResourceLocation> optAnimLoc = Optional.ofNullable(mappedAnimInfoLoc.stream().filter(targetAnimLoc::equals).findFirst().get());
-
-        if (optAnimLoc.isPresent()) {
-            ResourceLocation animLoc = optAnimLoc.get();
-
-
-        }
-
         return new byte[0];
     }
 

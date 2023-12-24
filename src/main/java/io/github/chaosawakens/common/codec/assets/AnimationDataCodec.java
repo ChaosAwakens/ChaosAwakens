@@ -14,41 +14,57 @@ public class AnimationDataCodec {
     public static final Codec<AnimationDataCodec> CODEC = RecordCodecBuilder.create(builder ->
             builder.group(
                     ResourceLocation.CODEC.fieldOf("anim_file_loc").forGetter(data -> data.animFileLoc),
-                    Codec.STRING.fieldOf("animation_name").forGetter(data -> data.animationName),
-                    Codec.DOUBLE.fieldOf("animation_length").forGetter(data -> data.animationLength),
-                    Codec.STRING.fieldOf("loop_type").forGetter(data -> ((ILoopType.EDefaultLoopTypes) data.loopType).toString())
+                    AnimationMetadataCodec.CODEC.listOf().fieldOf("animations").forGetter(data -> data.storedAnims)
             ).apply(builder, AnimationDataCodec::new));
 
     private final ResourceLocation animFileLoc;
-    private final String animationName;
-    private final Double animationLength;
-    private final ILoopType loopType;
+    private final List<AnimationMetadataCodec> storedAnims;
 
-    public AnimationDataCodec(ResourceLocation animFileLoc, String animationName, Double animationLength, ILoopType loopType) {
+    public AnimationDataCodec(ResourceLocation animFileLoc, List<AnimationMetadataCodec> storedAnims) {
         this.animFileLoc = animFileLoc;
-        this.animationName = animationName;
-        this.animationLength = animationLength;
-        this.loopType = loopType;
-    }
-
-    public AnimationDataCodec(ResourceLocation animFileLoc, String animationName, Double animationLength, String loopTypeByName) {
-        this(animFileLoc, animationName, animationLength, ILoopType.EDefaultLoopTypes.valueOf(loopTypeByName));
+        this.storedAnims = storedAnims;
     }
 
     public ResourceLocation getAnimFileLoc() {
         return animFileLoc;
     }
 
-    public String getAnimationName() {
-        return animationName;
+    public List<AnimationMetadataCodec> getStoredAnims() {
+        return storedAnims;
     }
 
-    public Double getAnimationLength() {
-        return animationLength;
-    }
+    public static class AnimationMetadataCodec {
+        public static final Codec<AnimationMetadataCodec> CODEC = RecordCodecBuilder.create(builder -> builder.group(
+                Codec.STRING.fieldOf("animation_name").forGetter(data -> data.animationName),
+                Codec.DOUBLE.fieldOf("animation_length").forGetter(data -> data.animationLength),
+                Codec.STRING.fieldOf("loop_type").forGetter(data -> ((ILoopType.EDefaultLoopTypes) data.loopType).toString())
+        ).apply(builder, AnimationMetadataCodec::new));
 
-    public ILoopType getLoopType() {
-        return loopType;
+        private final String animationName;
+        private final Double animationLength;
+        private final ILoopType loopType;
+
+        public AnimationMetadataCodec(String animationName, Double animationLength, ILoopType loopType) {
+            this.animationName = animationName;
+            this.animationLength = animationLength;
+            this.loopType = loopType;
+        }
+
+        public AnimationMetadataCodec(String animationName, Double animationLength, String loopTypeByName) {
+            this(animationName, animationLength, ILoopType.EDefaultLoopTypes.valueOf(loopTypeByName));
+        }
+
+        public String getAnimationName() {
+            return animationName;
+        }
+
+        public Double getAnimationLength() {
+            return animationLength;
+        }
+
+        public ILoopType getLoopType() {
+            return loopType;
+        }
     }
 
     public static class BoneAnimationMetadataCodec {

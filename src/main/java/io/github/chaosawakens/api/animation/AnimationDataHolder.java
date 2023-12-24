@@ -1,28 +1,19 @@
 package io.github.chaosawakens.api.animation;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.util.ResourceLocation;
+import software.bernie.geckolib3.core.builder.ILoopType;
 
-/**
- * TODO Unused
- */
 public class AnimationDataHolder {
     private final String animationName;
     private final double animationLength;
-    private final ResourceLocation clientFileLoc;
-    public static final AnimationDataHolder EMPTY = new AnimationDataHolder("empty", 0, null);
-    public static final Codec<AnimationDataHolder> CODEC = RecordCodecBuilder.create(builder ->
-            builder.group(
-                    Codec.STRING.fieldOf("animation_name").forGetter(data -> data.animationName),
-                    Codec.DOUBLE.fieldOf("animation_length").forGetter(data -> data.animationLength),
-                    ResourceLocation.CODEC.fieldOf("client_file_loc").forGetter(data -> data.clientFileLoc)
-            ).apply(builder, AnimationDataHolder::new));
+    private final ILoopType loopType;
+    public static final AnimationDataHolder EMPTY = new AnimationDataHolder("empty", 0, ILoopType.EDefaultLoopTypes.PLAY_ONCE);
 
-    public AnimationDataHolder(String animationName, double animationLength, ResourceLocation clientFileLoc) {
+    public AnimationDataHolder(String animationName, double animationLength, ILoopType loopType) {
         this.animationName = animationName;
         this.animationLength = animationLength;
-        this.clientFileLoc = clientFileLoc;
+        this.loopType = loopType;
     }
 
     public String getAnimationName() {
@@ -33,7 +24,7 @@ public class AnimationDataHolder {
         return animationLength;
     }
 
-    public ResourceLocation getClientFileLoc() {
-        return clientFileLoc;
+    public ILoopType getLoopType() {
+        return loopType;
     }
 }

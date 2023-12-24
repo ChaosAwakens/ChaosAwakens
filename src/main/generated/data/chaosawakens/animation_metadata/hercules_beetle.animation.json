@@ -1,0 +1,13 @@
+{
+  "clientLoc": "chaosawakens:animations/boss/miniboss/hercules_beetle.animation.json",
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 3.52,
+    "loopType": "LOOP"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 1.76,
+    "loopType": "HOLD_ON_LAST_FRAME"
+  }
+}

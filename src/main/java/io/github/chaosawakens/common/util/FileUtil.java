@@ -2,18 +2,29 @@ package io.github.chaosawakens.common.util;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.LazyLoadedField;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.loading.FMLPaths;
 import software.bernie.geckolib3.file.AnimationFileLoader;
+import software.bernie.geckolib3.util.json.JsonAnimationUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -144,9 +155,13 @@ public final class FileUtil {
         }
     }
 
-    public static JsonObject loadFile(ResourceLocation location, IResourceManager manager) {
-        String content = AnimationFileLoader.getResourceAsString(location, manager);
-        Gson GSON = new Gson();
-        return JSONUtils.fromJson(GSON, content, JsonObject.class);
+    public static Collection<ResourceLocation> findClientAnimResources() throws ExecutionException, InterruptedException {
+        IReloadableResourceManager resourceManager = (IReloadableResourceManager) Minecraft.getInstance().getResourceManager();
+
+        CompletableFuture<Collection<ResourceLocation>> future = CompletableFuture.supplyAsync(() -> resourceManager.listResources("animations", path -> path.endsWith(".animation.json")).stream()
+                .filter(animRl -> animRl.getNamespace().equals(ChaosAwakens.MODID))
+                .collect(Collectors.toCollection(ObjectArrayList::new)));
+
+        return future.get();
     }
 }
