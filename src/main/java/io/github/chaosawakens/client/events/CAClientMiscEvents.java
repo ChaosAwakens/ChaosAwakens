@@ -59,7 +59,7 @@ public class CAClientMiscEvents {
 					event.setRoll((float) (event.getRoll() + amp * Math.cos(Minecraft.getInstance().getFrameTime() * 4) * 25));
 				}
 
-				AnimatableMonsterEntity selectedEntity = null;
+				/*AnimatableMonsterEntity selectedEntity = null;
 
 				for (AnimatableMonsterEntity potentialSelectedEntity : EntityUtil.getEntitiesAroundNoPredicate(clientPlayer, AnimatableMonsterEntity.class, 10, 10, 10, 10)) {
 					if (potentialSelectedEntity == null || !potentialSelectedEntity.isAlive()) continue;
@@ -105,7 +105,7 @@ public class CAClientMiscEvents {
 							}
 						}
 					}
-				}
+				}*/
 			}
 		}
 	}
@@ -117,7 +117,7 @@ public class CAClientMiscEvents {
 		if (CAConfigManager.MAIN_CLIENT.enableVFXEffects.get()) {
 			if (CAConfigManager.MAIN_CLIENT.enableCameraZoom.get()) {
 				float curFOV = event.getFov();
-				AnimatableMonsterEntity selectedEntity = null;
+				/*AnimatableMonsterEntity selectedEntity = null;
 
 				for (AnimatableMonsterEntity potentialSelectedEntity : EntityUtil.getEntitiesAroundNoPredicate(clientPlayer, AnimatableMonsterEntity.class, 15, 15, 15, 15)) {
 					if (potentialSelectedEntity == null || !potentialSelectedEntity.isAlive()) continue;
@@ -147,7 +147,7 @@ public class CAClientMiscEvents {
 							else if (leftSweepAnimProgress > 0 || rightSweepAnimProgress > 0) event.setNewfov(curFOV * 1.75F);
 						}
 					}
-				}
+				}*/
 			}
 		}
 	}
