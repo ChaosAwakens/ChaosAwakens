@@ -1,15 +1,9 @@
 package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.Maps;
-
 import io.github.chaosawakens.common.entity.projectile.CALettuceChickenEggEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.IrukandjiArrowEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FireBlock;
-import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.*;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.projectile.ProjectileEntity;

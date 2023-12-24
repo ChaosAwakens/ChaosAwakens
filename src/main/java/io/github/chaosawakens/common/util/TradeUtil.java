@@ -1,11 +1,6 @@
 package io.github.chaosawakens.common.util;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.mojang.datafixers.util.Pair;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
@@ -17,6 +12,9 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.BasicTrade;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public final class TradeUtil {
 	public static final int NOVICE = 1;

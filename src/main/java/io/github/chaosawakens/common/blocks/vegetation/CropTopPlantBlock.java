@@ -1,13 +1,6 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
-import net.minecraft.block.AbstractTopPlantBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.IGrowable;
+import net.minecraft.block.*;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,6 +16,9 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class CropTopPlantBlock extends AbstractTopPlantBlock implements IGrowable {
 	public static final IntegerProperty GROWTH = IntegerProperty.create("growth", 0, 3);

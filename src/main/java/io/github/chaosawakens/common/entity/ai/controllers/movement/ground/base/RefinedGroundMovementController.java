@@ -1,12 +1,12 @@
 package io.github.chaosawakens.common.entity.ai.controllers.movement.ground.base;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.util.EnumUtil.GroundMovementOperation;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+
+import javax.annotation.Nullable;
 
 public class RefinedGroundMovementController extends MovementController {
 	protected double speedMod = 1.0D;

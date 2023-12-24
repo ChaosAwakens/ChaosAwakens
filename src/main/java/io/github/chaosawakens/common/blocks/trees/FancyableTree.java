@@ -1,11 +1,11 @@
 package io.github.chaosawakens.common.blocks.trees;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class FancyableTree extends Tree {
 	private final Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree;

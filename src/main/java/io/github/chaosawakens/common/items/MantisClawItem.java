@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.CASwordItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +8,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+
+import java.util.function.Supplier;
 
 public class MantisClawItem extends CASwordItem {
 	

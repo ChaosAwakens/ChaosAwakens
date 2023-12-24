@@ -1,11 +1,10 @@
 package io.github.chaosawakens.manager;
 
-import java.util.Optional;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationFunctionalProgressPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
+import io.github.chaosawakens.common.network.packets.s2c.EnforceAssetsPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.network.NetworkDirection;
@@ -13,9 +12,11 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
+import java.util.Optional;
+
 public class CANetworkManager {
 	private static final String PROTOCOL_VERSION = "1";
-	private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(ChaosAwakens.prefix("channel"), () ->
+	protected static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(ChaosAwakens.prefix("channel"), () ->
 			      PROTOCOL_VERSION, 
 			      PROTOCOL_VERSION::equals,
 			      PROTOCOL_VERSION::equals);
@@ -34,6 +35,7 @@ public class CANetworkManager {
 		CHANNEL.registerMessage(id++, AnimationTriggerPacket.class, AnimationTriggerPacket::encode, AnimationTriggerPacket::decode, AnimationTriggerPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(id++, AnimationStopPacket.class, AnimationStopPacket::encode, AnimationStopPacket::decode, AnimationStopPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(id++, AnimationFunctionalProgressPacket.class, AnimationFunctionalProgressPacket::encode, AnimationFunctionalProgressPacket::decode, AnimationFunctionalProgressPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		CHANNEL.registerMessage(id++, EnforceAssetsPacket.class, EnforceAssetsPacket::encode, EnforceAssetsPacket::decode, EnforceAssetsPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 	}
 
 	/**

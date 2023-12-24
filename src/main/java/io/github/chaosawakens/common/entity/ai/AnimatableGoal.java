@@ -1,11 +1,11 @@
 package io.github.chaosawakens.common.entity.ai;
 
-import java.util.Random;
-
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
+
+import java.util.Random;
 
 public abstract class AnimatableGoal extends Goal {
 	protected static final Random RANDOM = new Random();

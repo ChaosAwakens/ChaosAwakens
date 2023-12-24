@@ -4,13 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.hostile.EntEntity;
 import io.github.chaosawakens.common.util.EnumUtil.EntType;
-import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.provider.data.EntityModelData;
-
-import javax.annotation.Nullable;
 
 public class EntEntityModel extends ExtendedAnimatedTickingGeoModel<EntEntity> {
 	private EntType entType;

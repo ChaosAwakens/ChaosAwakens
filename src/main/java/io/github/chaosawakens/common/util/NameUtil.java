@@ -1,15 +1,13 @@
 package io.github.chaosawakens.common.util;
 
-import java.util.regex.Pattern;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import javax.annotation.Nullable;
+import java.util.regex.Pattern;
 
 public final class NameUtil {
 	private static final Pattern PATTERN = Pattern.compile("([a-z0-9._-]+:)?[a-z0-9/._-]+");

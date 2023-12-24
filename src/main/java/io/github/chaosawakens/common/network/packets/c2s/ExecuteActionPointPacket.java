@@ -1,10 +1,10 @@
 package io.github.chaosawakens.common.network.packets.c2s;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.network.ICAPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
+
+import java.util.function.Supplier;
 
 public class ExecuteActionPointPacket implements ICAPacket {
 	private final double actionPointTick;

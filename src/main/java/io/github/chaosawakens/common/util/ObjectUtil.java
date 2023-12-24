@@ -1,9 +1,9 @@
 package io.github.chaosawakens.common.util;
 
+import io.github.chaosawakens.ChaosAwakens;
+
 import java.util.Locale;
 import java.util.Objects;
-
-import io.github.chaosawakens.ChaosAwakens;
 
 public final class ObjectUtil {
 	

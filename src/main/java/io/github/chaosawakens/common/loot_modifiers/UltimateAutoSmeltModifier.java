@@ -1,12 +1,6 @@
 package io.github.chaosawakens.common.loot_modifiers;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import com.google.gson.JsonObject;
-
 import io.github.chaosawakens.manager.CAConfigManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -21,6 +15,10 @@ import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 public class UltimateAutoSmeltModifier extends LootModifier {
 	

@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.armor;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.EnchantedArmorItem;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class SlowFallBootsItem extends EnchantedArmorItem {
 	

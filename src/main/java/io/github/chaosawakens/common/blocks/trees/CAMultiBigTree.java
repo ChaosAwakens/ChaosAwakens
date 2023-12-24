@@ -1,12 +1,12 @@
 package io.github.chaosawakens.common.blocks.trees;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.trees.BigTree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class CAMultiBigTree extends BigTree {
 	private ObjectArrayList<Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>>> bigTrees;

@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity.creature.water;
 
-import java.util.Objects;
-import java.util.Optional;
-
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -29,6 +26,9 @@ import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.Objects;
+import java.util.Optional;
 
 public class WhaleEntity extends AnimatableWaterMobEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);

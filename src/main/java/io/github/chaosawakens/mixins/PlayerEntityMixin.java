@@ -1,12 +1,11 @@
 package io.github.chaosawakens.mixins;
 
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {

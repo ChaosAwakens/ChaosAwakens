@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.worldgen.carver;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.world.gen.carver.CanyonWorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;

@@ -1,10 +1,5 @@
 package io.github.chaosawakens.data.provider;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -14,12 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
@@ -27,6 +17,10 @@ import net.minecraft.loot.functions.EnchantWithLevels;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.Smelt;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CAEntityLootTables extends EntityLootTables {
 	private final Set<EntityType<?>> knownEntities = new HashSet<>();
@@ -1078,14 +1072,14 @@ public class CAEntityLootTables extends EntityLootTables {
 								.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 								.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
 								.when(KilledByPlayer.killedByPlayer()))));
-		/*		add(CAEntityTypes.BIRD.get(),
+		add(CAEntityTypes.BIRD.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.FEATHER)
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))
-										.when(KilledByPlayer.killedByPlayer()))));*/
+										.when(KilledByPlayer.killedByPlayer()))));
 		add(CAEntityTypes.LETTUCE_CHICKEN.get(),
 				LootTable.lootTable()
 				.withPool(LootPool.lootPool()

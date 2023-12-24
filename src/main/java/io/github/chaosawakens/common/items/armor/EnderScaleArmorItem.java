@@ -1,14 +1,7 @@
 package io.github.chaosawakens.common.items.armor;
 
-import java.awt.Color;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.items.base.EnchantedArmorItem;
@@ -42,6 +35,12 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import java.awt.*;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 //TODO Elytra set bonus W.I.P 
 public class EnderScaleArmorItem extends EnchantedArmorItem {

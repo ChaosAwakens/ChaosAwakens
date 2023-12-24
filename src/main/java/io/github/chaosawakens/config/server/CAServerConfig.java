@@ -230,10 +230,10 @@ public class CAServerConfig {
 				.define("Chaos Awakens has OP server permissions", true);
 		debugLogging = builder.comment("Debug CA events on the server while it's running.")
 				.define("Debug logging", true);
-		lenientAssetEnforcement = builder.comment("If set to true, dedicated servers will only enforce asset metadata (animation length, animation name, etc.). "
-				+ "Otherwise, all asset data (animation keyframes, etc.) will be enforced from the server. Tinker at your own risk! "
-				+ "(Only applies to dedicated servers.) TBD (To Be Done).")
-				.define("Only Enforce Asset Metadata From Server", true);
+		lenientAssetEnforcement = builder.comment("If set to true, dedicated servers will not throw an exception (crash) if there's a mismatch between metadata " +
+						"(animation length, name, loop type). Tinker at your own risk! "
+				+ "(Only applies to dedicated servers).")
+				.define("Lenient Asset Enforcement", true);
 		builder.pop();
 	}
 }

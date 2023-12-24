@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.base;
 
-import java.util.function.Supplier;
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,6 +13,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class ConsumableBucketItem extends Item {
 	private final Supplier<Item> emptyBucketItem;

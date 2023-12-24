@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.navigation.ground.base;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.MobEntity;
@@ -13,6 +11,8 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.Region;
+
+import javax.annotation.Nullable;
 
 public class RefinedWalkNodeProcessor extends WalkNodeProcessor {
 	@Nullable

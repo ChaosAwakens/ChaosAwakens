@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.items.base;
 
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -11,6 +7,9 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class CASpawnEggItem extends ForgeSpawnEggItem {
 	protected final Supplier<? extends EntityType<?>> typeGetter;

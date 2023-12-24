@@ -1,13 +1,13 @@
 package io.github.chaosawakens.common.entity.ai.pathfinding;
 
-import static net.minecraft.entity.ai.controller.MovementController.Action.MOVE_TO;
-import static net.minecraft.entity.ai.controller.MovementController.Action.WAIT;
-
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
+
+import static net.minecraft.entity.ai.controller.MovementController.Action.MOVE_TO;
+import static net.minecraft.entity.ai.controller.MovementController.Action.WAIT;
 
 public class CAGeneralFlightController extends MovementController {
 	private final boolean shouldAlwaysFaceTarget;

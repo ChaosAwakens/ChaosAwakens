@@ -4,11 +4,13 @@ buildscript {
 		maven { url = "https://maven.parchmentmc.org" }
 		maven { url = "https://repo.spongepowered.org/maven" }
 		mavenCentral()
+		jcenter()
 	}
 	dependencies {
 		classpath(group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true)
-		classpath 'org.parchmentmc:librarian:1.+'
-		classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+		classpath("org.parchmentmc:librarian:1.+")
+		classpath(group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT")
+		classpath(group: "com.github.jengelman.gradle.plugins", name: "shadow", version: "5.2.0")
 	}
 }
 
@@ -16,6 +18,8 @@ apply plugin: "net.minecraftforge.gradle"
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: "org.spongepowered.mixin"
 apply plugin: "eclipse"
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "java"
 apply plugin: "maven-publish"
 
 group = "io.github"
@@ -101,6 +105,10 @@ mixin {
 	debug.export = true
 }
 
+configurations {
+	shade
+}
+
 dependencies {
 	// Base
 	minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
@@ -108,6 +116,9 @@ dependencies {
 
     // Libraries
 	implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+
+	compileOnly fg.deobf("commoble.databuddy:databuddy-1.16.4:${databuddy_version}")
+	shade fg.deobf("commoble.databuddy:databuddy-1.16.4:${databuddy_version}")
 
     // Extras
 	implementation fg.deobf("curse.maven:projecte-226410:${projecte_version}")
@@ -156,6 +167,10 @@ repositories {
 		name = "GeckoLib Maven"
 		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
 	}
+	maven {
+		name = "CubicInterpolation Maven"
+		url = "https://cubicinterpolation.net/maven/"
+	}
 }
 
 jar {
@@ -172,6 +187,19 @@ jar {
 		])
 	}
 }
+
+shadowJar {
+	classifier = ''
+	configurations = [project.configurations.shade]
+	relocate "commoble.databuddy", "${project.group}.shadow.commoble.databuddy"
+}
+
+reobf {
+	shadowJar { }
+}
+
+tasks.build.dependsOn reobfShadowJar
+jar.finalizedBy('reobfShadowJar')
 
 processResources {
 	exclude '**/.cache/'

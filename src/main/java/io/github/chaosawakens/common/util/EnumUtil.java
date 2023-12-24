@@ -1,13 +1,5 @@
 package io.github.chaosawakens.common.util;
 
-import java.util.Comparator;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.item.IShieldMaterial;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -25,6 +17,13 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Comparator;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class EnumUtil {
 

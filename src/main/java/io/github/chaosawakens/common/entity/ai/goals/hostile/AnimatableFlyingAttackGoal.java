@@ -1,12 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -14,6 +7,12 @@ import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class AnimatableFlyingAttackGoal extends Goal {
     protected final AnimatableMonsterEntity owner;

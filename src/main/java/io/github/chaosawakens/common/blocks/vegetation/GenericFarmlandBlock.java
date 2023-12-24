@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FarmlandBlock;
@@ -18,6 +16,8 @@ import net.minecraftforge.common.FarmlandWaterManager;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.RegistryObject;
+
+import java.util.Random;
 
 public class GenericFarmlandBlock extends FarmlandBlock {
 	private final RegistryObject<? extends Block> turnTo;

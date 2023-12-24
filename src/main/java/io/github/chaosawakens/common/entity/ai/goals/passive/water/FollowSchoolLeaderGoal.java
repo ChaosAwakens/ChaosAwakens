@@ -1,11 +1,11 @@
 package io.github.chaosawakens.common.entity.ai.goals.passive.water;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import io.github.chaosawakens.common.entity.base.AnimatableGroupFishEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.entity.ai.goal.Goal;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 // Slightly rewritten net.minecraft.entity.ai.goal.FollowSchoolLeaderGoal
 public class FollowSchoolLeaderGoal extends Goal {

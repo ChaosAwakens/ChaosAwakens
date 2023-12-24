@@ -1,8 +1,8 @@
 package io.github.chaosawakens.api.item;
 
-import java.util.function.Supplier;
-
 import net.minecraft.item.crafting.Ingredient;
+
+import java.util.function.Supplier;
 
 public interface IShieldMaterial {
 	

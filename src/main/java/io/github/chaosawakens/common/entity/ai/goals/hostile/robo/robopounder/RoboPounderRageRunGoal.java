@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
@@ -25,6 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class RoboPounderRageRunGoal extends Goal {
 	private final RoboPounderEntity owner;

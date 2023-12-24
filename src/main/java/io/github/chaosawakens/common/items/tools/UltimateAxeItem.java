@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.tools;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.EnchantedAxeItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.block.BlockState;
@@ -16,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.common.ToolType;
+
+import java.util.function.Supplier;
 
 public class UltimateAxeItem extends EnchantedAxeItem {
 

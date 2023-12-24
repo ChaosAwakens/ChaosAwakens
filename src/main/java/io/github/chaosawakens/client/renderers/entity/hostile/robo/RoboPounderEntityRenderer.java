@@ -1,10 +1,7 @@
 package io.github.chaosawakens.client.renderers.entity.hostile.robo;
 
-import java.util.Optional;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.client.models.entity.hostile.robo.RoboPounderEntityModel;
 import io.github.chaosawakens.client.renderers.entity.base.ExtendedGeoEntityRenderer;
@@ -17,6 +14,8 @@ import net.minecraft.particles.ParticleTypes;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
+
+import java.util.Optional;
 
 public class RoboPounderEntityRenderer extends ExtendedGeoEntityRenderer<RoboPounderEntity> {
 

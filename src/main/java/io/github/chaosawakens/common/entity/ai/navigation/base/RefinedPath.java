@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.navigation.base;
 
-import java.util.List;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.pathfinding.Path;
@@ -9,6 +7,8 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+
+import java.util.List;
 
 public class RefinedPath extends Path {
 

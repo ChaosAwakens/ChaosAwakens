@@ -1,16 +1,9 @@
 package io.github.chaosawakens.common.entity.misc;
 
-import java.util.List;
-import java.util.function.Consumer;
-
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.block.material.PushReaction;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Pose;
+import net.minecraft.entity.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,6 +12,9 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 public class AOEHitboxEntity extends Entity {
 	private static final DataParameter<Float> CUR_RADIUS = EntityDataManager.defineId(AOEHitboxEntity.class, DataSerializers.FLOAT);

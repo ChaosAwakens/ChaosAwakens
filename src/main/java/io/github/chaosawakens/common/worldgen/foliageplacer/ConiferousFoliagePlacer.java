@@ -1,11 +1,7 @@
 package io.github.chaosawakens.common.worldgen.foliageplacer;
 
-import java.util.Random;
-import java.util.Set;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import io.github.chaosawakens.common.registry.CAFoliagePlacerTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -14,6 +10,9 @@ import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
+
+import java.util.Random;
+import java.util.Set;
 
 public class ConiferousFoliagePlacer extends FoliagePlacer {
 	public static final Codec<ConiferousFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance).apply(instance, ConiferousFoliagePlacer::new));

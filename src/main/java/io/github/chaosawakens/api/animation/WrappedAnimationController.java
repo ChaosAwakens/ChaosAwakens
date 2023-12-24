@@ -1,7 +1,5 @@
 package io.github.chaosawakens.api.animation;
 
-import java.util.ArrayList;
-
 import io.github.chaosawakens.common.network.packets.s2c.AnimationFunctionalProgressPacket;
 import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.entity.Entity;
@@ -12,6 +10,8 @@ import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.keyframe.BoneAnimation;
+
+import java.util.ArrayList;
 
 public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected E animatable;

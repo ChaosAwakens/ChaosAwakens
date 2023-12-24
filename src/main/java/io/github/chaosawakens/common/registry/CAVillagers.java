@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableSet;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
@@ -11,11 +10,7 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.structure.DesertVillagePools;
-import net.minecraft.world.gen.feature.structure.PlainsVillagePools;
-import net.minecraft.world.gen.feature.structure.SavannaVillagePools;
-import net.minecraft.world.gen.feature.structure.SnowyVillagePools;
-import net.minecraft.world.gen.feature.structure.TaigaVillagePools;
+import net.minecraft.world.gen.feature.structure.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

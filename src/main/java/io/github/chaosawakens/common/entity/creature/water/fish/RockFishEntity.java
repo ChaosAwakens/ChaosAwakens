@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.entity.creature.water.fish;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
-
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -32,6 +28,10 @@ import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
 
 public class RockFishEntity extends AnimatableGroupFishEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);

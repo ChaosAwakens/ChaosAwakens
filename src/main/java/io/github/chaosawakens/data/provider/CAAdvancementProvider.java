@@ -1,41 +1,18 @@
 package io.github.chaosawakens.data.provider;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.function.Consumer;
-
-import org.apache.commons.lang3.Validate;
-
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.advancements.triggers.AdvancementCompleteTrigger;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CADimensions;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CATags;
+import io.github.chaosawakens.common.registry.*;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.IRequirementsStrategy;
-import net.minecraft.advancements.criterion.BredAnimalsTrigger;
-import net.minecraft.advancements.criterion.ChangeDimensionTrigger;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemDurabilityTrigger;
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.advancements.criterion.KilledTrigger;
-import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.advancements.criterion.MinMaxBounds.IntBound;
-import net.minecraft.advancements.criterion.PlayerEntityInteractionTrigger;
-import net.minecraft.advancements.criterion.PositionTrigger;
-import net.minecraft.advancements.criterion.RightClickBlockWithItemTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.AdvancementProvider;
 import net.minecraft.data.DataGenerator;
@@ -49,6 +26,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.apache.commons.lang3.Validate;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.function.Consumer;
 
 public class CAAdvancementProvider extends AdvancementProvider {
 	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/gui/advancement_bg.png");

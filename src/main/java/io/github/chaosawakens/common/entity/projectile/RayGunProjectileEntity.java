@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import javax.annotation.Nonnull;
-
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.EntityType;
@@ -14,6 +12,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import javax.annotation.Nonnull;
 
 public class RayGunProjectileEntity extends AbstractFireballEntity {
 	private static final float EXPLOSION_POWER = CAConfigManager.MAIN_COMMON.rayGunExplosionSize.get();

@@ -2,6 +2,7 @@
 	"required": true,
 	"package": "io.github.chaosawakens.mixins",
 	"compatibilityLevel": "JAVA_8",
+	"minVersion": "0.8.4",
 	"mixins": [
 		"AttachedStemBlockMixin",
 		"CooldownTrackerMixin",

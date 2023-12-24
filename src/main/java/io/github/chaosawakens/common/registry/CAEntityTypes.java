@@ -3,18 +3,9 @@ package io.github.chaosawakens.common.registry;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
-import io.github.chaosawakens.common.entity.creature.land.AntEntity;
-import io.github.chaosawakens.common.entity.creature.land.BeaverEntity;
-import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;
-import io.github.chaosawakens.common.entity.creature.land.LettuceChickenEntity;
-import io.github.chaosawakens.common.entity.creature.land.RubyBugEntity;
-import io.github.chaosawakens.common.entity.creature.land.StinkBugEntity;
-import io.github.chaosawakens.common.entity.creature.land.TreeFrogEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.AppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.CrystalAppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.EnchantedGoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.GoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.UltimateAppleCowEntity;
+import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
+import io.github.chaosawakens.common.entity.creature.land.*;
+import io.github.chaosawakens.common.entity.creature.land.applecow.*;
 import io.github.chaosawakens.common.entity.creature.land.carrotpig.CarrotPigEntity;
 import io.github.chaosawakens.common.entity.creature.land.carrotpig.CrystalCarrotPigEntity;
 import io.github.chaosawakens.common.entity.creature.land.carrotpig.EnchantedGoldenCarrotPigEntity;
@@ -30,11 +21,7 @@ import io.github.chaosawakens.common.entity.hostile.insect.WaspEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
-import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
-import io.github.chaosawakens.common.entity.misc.CABoatEntity;
-import io.github.chaosawakens.common.entity.misc.CAFallingBlockEntity;
-import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
-import io.github.chaosawakens.common.entity.misc.JefferyShockwaveEntity;
+import io.github.chaosawakens.common.entity.misc.*;
 import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.EmeraldGatorEntity;
@@ -151,10 +138,10 @@ public class CAEntityTypes {
 					.build(ChaosAwakens.prefix("lava_eel").toString()));*/
 
 	// Bird
-/*	public static final RegistryObject<EntityType<BirdEntity>> BIRD = ENTITY_TYPES.register("bird",
+  	public static final RegistryObject<EntityType<BirdEntity>> BIRD = ENTITY_TYPES.register("bird",
 			() -> EntityType.Builder.of(BirdEntity::new, EntityClassification.CREATURE)
 					.sized(0.4f, 0.3f).clientTrackingRange(10)
-					.build(ChaosAwakens.prefix("bird").toString()));*/
+					.build(ChaosAwakens.prefix("bird").toString()));
 
 	// Whale
 	public static final RegistryObject<EntityType<WhaleEntity>> WHALE = ENTITY_TYPES.register("whale",
@@ -386,7 +373,7 @@ public class CAEntityTypes {
 		EntitySpawnPlacementRegistry.register(WARPED_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(GINKGO_ENT.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(TREE_FROG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
-	//	EntitySpawnPlacementRegistry.register(BIRD.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, BirdEntity::checkBirdSpawnRules);
+		EntitySpawnPlacementRegistry.register(BIRD.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, BirdEntity::checkBirdSpawnRules);
 //		EntitySpawnPlacementRegistry.register(LAVA_EEL.get(), EntitySpawnPlacementRegistry.PlacementType.IN_LAVA, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AbstractLavaEntity::checkLavaMobSpawnRules);
 		EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 //		EntitySpawnPlacementRegistry.register(THROWBACK_HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);

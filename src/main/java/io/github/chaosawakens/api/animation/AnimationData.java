@@ -1,6 +1,8 @@
 package io.github.chaosawakens.api.animation;
 
 import io.github.chaosawakens.common.util.FileUtil;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.resources.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Unit;
@@ -11,28 +13,29 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * TODO Unused
  * Credits to DerToaster for foundational implementation/idea. Code reworked and refactored (by me, duh) in accordance to 1.16 conventions and API.
  */
 public class AnimationData implements IReloadableResourceManager {
-    private final AdvancedAnimationInformation animationInformation;
+    private final List<AnimationDataHolder> animationInformation;
     private final File serverAnimAssetDir = createServerAnimDirectory();
     private final File clientAnimAssetDir = createClientAnimDirectory();
     private final File serverModelAssetDir = createServerModelDirectory();
     private final File clientModelAssetDir = createClientModelDirectory();
     private final LazyLoadedField<Set<String>> namespaces = new LazyLoadedField<>(this::extractNamespaces);
-    private final Set<ResourceLocation> currentlyEnforcedAssets = new HashSet<>();
+    private final Set<ResourceLocation> currentlyEnforcedAssets = new ObjectOpenHashSet<>();
 
-    public AnimationData(AdvancedAnimationInformation animationInformation) {
+    public AnimationData(List<AnimationDataHolder> animationInformation) {
         this.animationInformation = animationInformation;
     }
 
     public byte[] encodeAnimationData(ResourceLocation targetAnimLoc) {
-        if (!animationInformation.getAnimationDirectories().contains(targetAnimLoc)) return new byte[0];
-
-        Optional<ResourceLocation> optAnimLoc = Optional.ofNullable(animationInformation.getAnimationDirectories().stream().filter(targetAnimLoc::equals).findFirst().get());
+        ObjectArrayList<ResourceLocation> mappedAnimInfoLoc = animationInformation.stream().map(AnimationDataHolder::getClientFileLoc).collect(Collectors.toCollection(ObjectArrayList::new));
+        Optional<ResourceLocation> optAnimLoc = Optional.ofNullable(mappedAnimInfoLoc.stream().filter(targetAnimLoc::equals).findFirst().get());
 
         if (optAnimLoc.isPresent()) {
             ResourceLocation animLoc = optAnimLoc.get();
@@ -43,11 +46,7 @@ public class AnimationData implements IReloadableResourceManager {
         return new byte[0];
     }
 
-    public byte[] encodeModelData() {
-        return new byte[0];
-    }
-
-    public byte[] encodeTextureData() {
+    public byte[] encodeModelData(ResourceLocation targetModelLoc) {
         return new byte[0];
     }
 
@@ -56,10 +55,6 @@ public class AnimationData implements IReloadableResourceManager {
     }
 
     public byte[] decodeModelData() {
-        return new byte[0];
-    }
-
-    public byte[] decodeTextureData() {
         return new byte[0];
     }
 
@@ -109,9 +104,9 @@ public class AnimationData implements IReloadableResourceManager {
 
     private Set<String> extractNamespaces() {
         Set<String> result = new HashSet<>();
-        this.currentlyEnforcedAssets.forEach(rs -> {
-            result.add(rs.getNamespace());
-        });
+
+        this.currentlyEnforcedAssets.forEach(rs -> result.add(rs.getNamespace()));
+
         return result;
     }
 
@@ -140,3 +135,4 @@ public class AnimationData implements IReloadableResourceManager {
         return null;
     }
 }
+

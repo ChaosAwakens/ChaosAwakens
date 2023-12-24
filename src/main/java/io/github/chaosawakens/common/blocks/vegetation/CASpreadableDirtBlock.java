@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.FluidTags;
@@ -10,6 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.lighting.LightEngine;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
 
 public abstract class CASpreadableDirtBlock extends Block {
 

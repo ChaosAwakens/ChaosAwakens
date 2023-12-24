@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.items.armor;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.EnchantedArmorItem;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -21,6 +18,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerXpEvent.PickupXp;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class ExperienceArmorItem extends EnchantedArmorItem {
 

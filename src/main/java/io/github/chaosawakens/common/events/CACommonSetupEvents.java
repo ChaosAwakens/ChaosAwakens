@@ -1,36 +1,19 @@
 package io.github.chaosawakens.common.events;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.item.ICATieredItem;
 import io.github.chaosawakens.api.wrapper.CarverWrapper;
 import io.github.chaosawakens.api.wrapper.FeatureWrapper;
 import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
-import io.github.chaosawakens.common.entity.creature.land.AntEntity;
-import io.github.chaosawakens.common.entity.creature.land.BeaverEntity;
-import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;
-import io.github.chaosawakens.common.entity.creature.land.LettuceChickenEntity;
-import io.github.chaosawakens.common.entity.creature.land.RubyBugEntity;
-import io.github.chaosawakens.common.entity.creature.land.StinkBugEntity;
-import io.github.chaosawakens.common.entity.creature.land.TreeFrogEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.AppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.CrystalAppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.EnchantedGoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.GoldenAppleCowEntity;
-import io.github.chaosawakens.common.entity.creature.land.applecow.UltimateAppleCowEntity;
+import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
+import io.github.chaosawakens.common.entity.creature.land.*;
+import io.github.chaosawakens.common.entity.creature.land.applecow.*;
 import io.github.chaosawakens.common.entity.creature.land.carrotpig.CarrotPigEntity;
 import io.github.chaosawakens.common.entity.creature.land.carrotpig.CrystalCarrotPigEntity;
 import io.github.chaosawakens.common.entity.creature.land.carrotpig.EnchantedGoldenCarrotPigEntity;
@@ -42,6 +25,7 @@ import io.github.chaosawakens.common.entity.creature.water.fish.SparkFishEntity;
 import io.github.chaosawakens.common.entity.creature.water.fish.WoodFishEntity;
 import io.github.chaosawakens.common.entity.hostile.AggressiveAntEntity;
 import io.github.chaosawakens.common.entity.hostile.EntEntity;
+import io.github.chaosawakens.common.entity.hostile.insect.WaspEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
@@ -49,35 +33,14 @@ import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.EmeraldGatorEntity;
 import io.github.chaosawakens.common.items.base.CABoatItem;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CACommands;
-import io.github.chaosawakens.common.registry.CAConfiguredStructures;
-import io.github.chaosawakens.common.registry.CAEffects;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CAStructures;
-import io.github.chaosawakens.common.registry.CASurfaceBuilders;
-import io.github.chaosawakens.common.registry.CATags;
-import io.github.chaosawakens.common.registry.CAVanillaCompat;
-import io.github.chaosawakens.common.registry.CAVillagers;
-import io.github.chaosawakens.common.registry.CAWoodTypes;
+import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.common.util.TradeUtil;
 import io.github.chaosawakens.common.util.TradeUtil.CABasicTrade;
 import io.github.chaosawakens.common.util.TradeUtil.CAIngredientTrade;
 import io.github.chaosawakens.common.worldgen.BiomeHandlers.GenerationHandler;
 import io.github.chaosawakens.common.worldgen.BiomeHandlers.MobSpawnHandler;
-import io.github.chaosawakens.data.provider.CAAdvancementProvider;
-import io.github.chaosawakens.data.provider.CABlockModelProvider;
-import io.github.chaosawakens.data.provider.CABlockStateProvider;
-import io.github.chaosawakens.data.provider.CACustomConversionProvider;
-import io.github.chaosawakens.data.provider.CADimensionTypeProvider;
-import io.github.chaosawakens.data.provider.CAGlobalLootModifierProvider;
-import io.github.chaosawakens.data.provider.CAItemModelProvider;
-import io.github.chaosawakens.data.provider.CALootTableProvider;
-import io.github.chaosawakens.data.provider.CAParticleTypeProvider;
-import io.github.chaosawakens.data.provider.CARecipeProvider;
+import io.github.chaosawakens.data.provider.*;
 import io.github.chaosawakens.data.provider.CATagProvider.CABlockTagProvider;
 import io.github.chaosawakens.data.provider.CATagProvider.CAEntityTypeTagProvider;
 import io.github.chaosawakens.data.provider.CATagProvider.CAItemTagProvider;
@@ -116,6 +79,7 @@ import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -136,6 +100,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class CACommonSetupEvents {	
 	public static ObjectArrayList<FeatureWrapper> CONFIG_FEATURES = new ObjectArrayList<FeatureWrapper>();
@@ -346,6 +315,10 @@ public class CACommonSetupEvents {
 					new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_RARE), 2), 7, 30),
 					new CAIngredientTrade(4, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_EPIC), 1), 3, 40));
 		}
+
+		public static void onAddReloadListenerEvent(AddReloadListenerEvent event) {
+
+		}
 	}
 	
 	public static class ModSetupEvents {
@@ -420,7 +393,7 @@ public class CACommonSetupEvents {
 			event.put(CAEntityTypes.TREE_FROG.get(), TreeFrogEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
 //			event.put(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), HerculesBeetleEntity.setCustomAttributes().build());
-//			event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
+			event.put(CAEntityTypes.BIRD.get(), BirdEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.APPLE_COW.get(), AppleCowEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.GOLDEN_APPLE_COW.get(), GoldenAppleCowEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ULTIMATE_APPLE_COW.get(), UltimateAppleCowEntity.setCustomAttributes().build());
@@ -442,7 +415,7 @@ public class CACommonSetupEvents {
 			event.put(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROBO_SNIPER.get(), RoboSniperEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROBO_WARRIOR.get(), RoboWarriorEntity.setCustomAttributes().build());
-//			event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
+			event.put(CAEntityTypes.WASP.get(), WaspEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.WHALE.get(), WhaleEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.GREEN_FISH.get(), GreenFishEntity.setCustomAttributes().build());
 			event.put(CAEntityTypes.ROCK_FISH.get(), RockFishEntity.setCustomAttributes().build());

@@ -1,7 +1,6 @@
 package io.github.chaosawakens.client.renderers.layers.texture;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

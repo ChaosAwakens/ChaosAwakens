@@ -1,9 +1,5 @@
 package io.github.chaosawakens.data.provider;
 
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.crystal.CrystalBushBlock;
 import io.github.chaosawakens.common.blocks.crystal.DoubleCrystalPlantBlock;
@@ -13,11 +9,7 @@ import io.github.chaosawakens.common.blocks.multiface.LeafCarpetBlock;
 import io.github.chaosawakens.common.blocks.vegetation.MesozoicVinesTopBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
-import net.minecraft.block.AbstractButtonBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.SaplingBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -30,6 +22,9 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
+
+import javax.annotation.Nonnull;
+import java.util.Collection;
 
 public class CAItemModelProvider extends ItemModelProvider {
 	private static final ResourceLocation ITEM_GENERATED = new ResourceLocation("item/generated");

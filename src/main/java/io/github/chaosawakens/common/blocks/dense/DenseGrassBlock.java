@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.blocks.dense;
 
-import java.util.List;
-import java.util.Random;
-
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,6 +14,9 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.common.Tags;
+
+import java.util.List;
+import java.util.Random;
 
 public class DenseGrassBlock extends SpreadableDenseDirtBlock implements IGrowable {
 

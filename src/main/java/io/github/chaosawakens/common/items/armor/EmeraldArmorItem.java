@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.armor;
 
-import java.util.List;
-
 import io.github.chaosawakens.common.util.EnumUtil.CAArmorMaterial;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.gui.screen.Screen;
@@ -13,6 +11,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EmeraldArmorItem extends ArmorItem {
 

@@ -1,10 +1,5 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.Block;
@@ -18,16 +13,16 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class DefossilizerBlock extends Block {
 	public static final DirectionProperty FACING = HorizontalBlock.FACING;

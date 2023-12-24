@@ -1,13 +1,8 @@
 package io.github.chaosawakens.common.worldgen.trunkplacer;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import io.github.chaosawakens.common.registry.CATrunkPlacerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -17,6 +12,10 @@ import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer.Foliage;
 import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
+
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class GiantConiferTrunkPlacer extends DirtlessGiantTrunkPlacer {
 	public static final Codec<GiantConiferTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) ->

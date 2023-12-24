@@ -1,15 +1,14 @@
 package io.github.chaosawakens.common.worldgen.feature;
 
-import java.util.Optional;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.TagCollectionManager;
 import net.minecraft.world.gen.feature.IFeatureConfig;
+
+import java.util.Optional;
 
 public class StalagmiteFeatureConfig implements IFeatureConfig {
 	public static final Codec<StalagmiteFeatureConfig> CODEC = RecordCodecBuilder.create(builder -> builder

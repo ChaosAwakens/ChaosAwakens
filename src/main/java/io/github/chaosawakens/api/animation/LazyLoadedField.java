@@ -3,6 +3,7 @@ package io.github.chaosawakens.api.animation;
 import com.google.common.base.Supplier;
 
 /**
+ * TODO Unused
  * Credits to DerToaster for LLF implementation. Constantly updated lazy object holder.
  */
 public class LazyLoadedField<T> implements Supplier<T> {

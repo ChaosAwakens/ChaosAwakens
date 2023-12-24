@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.weapons;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.EnchantedSwordItem;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
@@ -10,6 +8,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+
+import java.util.function.Supplier;
 
 public class BasiliskSwordItem extends EnchantedSwordItem {
 

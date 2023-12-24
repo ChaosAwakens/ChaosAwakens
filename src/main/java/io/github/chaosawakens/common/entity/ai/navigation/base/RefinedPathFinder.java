@@ -1,11 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.navigation.base;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.annotation.Nonnull;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.NodeProcessor;
@@ -14,6 +8,11 @@ import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.Region;
+
+import javax.annotation.Nonnull;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class RefinedPathFinder extends PathFinder {
 

@@ -1,10 +1,6 @@
 package io.github.chaosawakens.common.blocks.crystal;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.ImmutableList;
-
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.IParticleData;
@@ -12,6 +8,9 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 public class EnergizedKyaniteBlock extends CAOreBlock {
 	private static final List<IParticleData> EMIT_PARTICLES = ImmutableList.of(ParticleTypes.FLAME.getType(), ParticleTypes.SMOKE.getType(), new RedstoneParticleData(0.3F, 0.4F, 0.2F, 0.8F));

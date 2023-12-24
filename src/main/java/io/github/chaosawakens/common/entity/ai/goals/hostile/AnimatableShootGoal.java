@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -13,6 +10,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 public class AnimatableShootGoal extends Goal {
 	private final AnimatableMonsterEntity owner;

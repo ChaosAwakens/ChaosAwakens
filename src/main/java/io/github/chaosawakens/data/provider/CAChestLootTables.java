@@ -1,24 +1,20 @@
 package io.github.chaosawakens.data.provider;
 
-import java.util.function.BiConsumer;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.loot.CATreasure;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.data.loot.ChestLootTables;
 import net.minecraft.item.Items;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.SetNBT;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
+
+import java.util.function.BiConsumer;
 
 public class CAChestLootTables extends ChestLootTables {
 	public String getName() {

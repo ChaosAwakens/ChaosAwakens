@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAParticleTypes;
@@ -28,6 +26,8 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class RoboCrateTileEntity extends LockableLootTileEntity {
 	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + ChaosAwakens.MODID + ".robo_crate");

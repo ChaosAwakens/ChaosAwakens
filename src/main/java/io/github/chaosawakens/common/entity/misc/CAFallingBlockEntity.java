@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity.misc;
 
-import java.util.Optional;
-
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import java.util.Optional;
 
 public class CAFallingBlockEntity extends Entity {
 	public int lifetime;

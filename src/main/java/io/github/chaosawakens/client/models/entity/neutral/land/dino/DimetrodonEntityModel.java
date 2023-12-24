@@ -21,10 +21,10 @@ public class DimetrodonEntityModel extends ExtendedAnimatedTickingGeoModel<Dimet
 	@Override
 	public ResourceLocation getTextureLocation(DimetrodonEntity animatable) {
 		switch (animatable.getDimetrodonType()) {
-		default: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/green_dimetrodon.png");
-		case 1: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/orange_dimetrodon.png");
-		case 2: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/purple_dimetrodon.png");
-		case 3: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/throwback_dimetrodon.png");
+			default: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/green_dimetrodon.png");
+			case 1: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/orange_dimetrodon.png");
+			case 2: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/purple_dimetrodon.png");
+			case 3: return ChaosAwakens.prefix("textures/entity/neutral/land/dimetrodon/throwback_dimetrodon.png");
 		}
 	}
 

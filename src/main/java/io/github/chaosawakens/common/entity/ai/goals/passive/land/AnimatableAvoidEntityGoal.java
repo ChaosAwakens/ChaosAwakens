@@ -1,12 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.passive.land;
 
-import java.util.EnumSet;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import net.minecraft.entity.EntityPredicate;
@@ -16,6 +9,12 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.vector.Vector3d;
+
+import javax.annotation.Nullable;
+import java.util.EnumSet;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class AnimatableAvoidEntityGoal<E extends LivingEntity> extends Goal {
 	protected final AnimatableAnimalEntity owner;

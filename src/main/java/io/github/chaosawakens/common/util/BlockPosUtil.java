@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.util;
 
-import java.util.function.Predicate;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.util.EnumUtil.BlockPatternShape;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
@@ -14,6 +10,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.function.Predicate;
 
 public final class BlockPosUtil {
 	

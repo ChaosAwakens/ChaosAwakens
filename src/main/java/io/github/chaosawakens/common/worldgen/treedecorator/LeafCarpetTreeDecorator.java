@@ -1,12 +1,7 @@
 package io.github.chaosawakens.common.worldgen.treedecorator;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import io.github.chaosawakens.common.blocks.multiface.LeafCarpetBlock;
 import io.github.chaosawakens.common.registry.CATreeDecoratorTypes;
 import net.minecraft.block.BlockState;
@@ -17,6 +12,10 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
+
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class LeafCarpetTreeDecorator extends TreeDecorator {
 	public static final Codec<LeafCarpetTreeDecorator> CODEC = RecordCodecBuilder.create((decorator) ->

@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.network.packets.s2c;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
@@ -14,6 +11,9 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
+
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class AnimationStopPacket implements ICAPacket {
 	private final int animatableOwnerID;

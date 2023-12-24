@@ -1,10 +1,7 @@
 package io.github.chaosawakens.common.items.base;
 
-import java.util.function.Supplier;
-
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-
 import io.github.chaosawakens.api.item.ICATieredItem;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
@@ -18,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
+
+import java.util.function.Supplier;
 
 public class CAAxeItem extends AxeItem implements ICATieredItem {
 	private Supplier<IntValue> configDmg;

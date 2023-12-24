@@ -1,7 +1,5 @@
 package io.github.chaosawakens.manager;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.config.client.CAClientConfig;
 import io.github.chaosawakens.config.common.CACommonConfig;
@@ -11,6 +9,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.fml.loading.FileUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class CAConfigManager {
 	public static final ForgeConfigSpec MAIN_CLIENT_SPEC;

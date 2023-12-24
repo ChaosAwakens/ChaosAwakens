@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.base;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.item.IAutoEnchantable;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.enchantment.EnchantmentData;
@@ -11,6 +9,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class EnchantedBowItem extends BowItem implements IAutoEnchantable {
 	private final Supplier<EnchantmentData[]> enchantments;

@@ -1,15 +1,14 @@
 package io.github.chaosawakens.common.entity.ai.pathfinding;
 
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Region;
+
+import javax.annotation.Nullable;
+import java.util.Set;
 
 public class CAPathFinder extends PathFinder {
 

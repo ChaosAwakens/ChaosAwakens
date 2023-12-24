@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.worldgen.structures;
 
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
