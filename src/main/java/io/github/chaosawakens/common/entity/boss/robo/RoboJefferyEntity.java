@@ -80,7 +80,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				.add(Attributes.MAX_HEALTH, 600)
 				.add(Attributes.ARMOR, 50)
 				.add(Attributes.ARMOR_TOUGHNESS, 20)
-				.add(Attributes.MOVEMENT_SPEED, 0.23D)
+				.add(Attributes.MOVEMENT_SPEED, 0.33D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 720.0D)
 				.add(Attributes.ATTACK_DAMAGE, 45)
 				.add(Attributes.ATTACK_KNOCKBACK, 25)

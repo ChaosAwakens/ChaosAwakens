@@ -16,15 +16,11 @@ import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particles.BlockParticleData;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
 
 public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 	private JefferyShockwaveEntity jefferyShockwave;
@@ -62,8 +58,7 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 				
 				affectedEntities.add(target);
 			}
-		});
-		
+		});		
 		this.hasSpawnedShockwave = false;
 		this.curAnim = targetAnim;
 	}
@@ -86,21 +81,12 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 	public void tick() {
 		owner.getNavigation().stop();
 		owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
-
-		BlockPos negBlockRange = new BlockPos(owner.blockPosition().getX() - aoeRange, owner.blockPosition().getY() - 2, owner.blockPosition().getZ() - aoeRange).immutable();
-		BlockPos posBlockRange = new BlockPos(owner.blockPosition().getX() + aoeRange, owner.blockPosition().getY() + 2, owner.blockPosition().getZ() + aoeRange).immutable();
-		
 		if (shouldFreezeRotation || curAnim.get().getWrappedAnimProgress() >= actionPointTickStart) EntityUtil.freezeEntityRotation(owner);
 		else if (owner.getTarget() != null) owner.getLookControl().setLookAt(owner.getTarget(), 30.0F, 30.0F);
 
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
-			owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
-			
-			for (BlockPos curAffectedParticlePos : BlockPos.betweenClosed(negBlockRange, posBlockRange)) {
-				if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(curAffectedParticlePos)), curAffectedParticlePos.getX(), curAffectedParticlePos.getY(), curAffectedParticlePos.getZ(), 0, 1, 0, 20, 0.05D);
-			}
-			
 			if (!hasSpawnedShockwave) {
+				owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 10, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
 				owner.level.addFreshEntity(jefferyShockwave);
 				this.hasSpawnedShockwave = true;

@@ -26,10 +26,10 @@ public class JefferyShockwaveEntityRenderer extends GeoProjectilesRenderer<Jeffe
 	@Override
 	public void renderEarly(JefferyShockwaveEntity animatable, MatrixStack stackIn, float partialTicks, IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		float horizontalScale = 1;
-        horizontalScale = (float) (horizontalScale * animatable.getRadius() / 3.2 * 0.328754F);
-        
-        stackIn.scale(horizontalScale, horizontalScale / 1.4654336F, horizontalScale);
-        
+		horizontalScale = (float) (horizontalScale * animatable.getRadius() / 3.2 * 0.328754F);
+		
+		stackIn.scale(horizontalScale, horizontalScale / 1.4654336F, horizontalScale);
+		
 		super.renderEarly(animatable, stackIn, partialTicks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 	

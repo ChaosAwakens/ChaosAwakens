@@ -3,8 +3,10 @@ package io.github.chaosawakens.common.entity.misc;
 import java.util.function.Consumer;
 
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -37,6 +39,11 @@ public class JefferyShockwaveEntity extends AOEHitboxEntity implements IAnimatab
 			return PlayState.CONTINUE;
 		}
 		return PlayState.CONTINUE;
+	}
+
+	@Override
+	public EntitySize getDimensions(Pose pPose) {
+		return EntitySize.scalable(getRadius() * 2.0F, getRadius() * 0.1F);
 	}
 	
 	@Override

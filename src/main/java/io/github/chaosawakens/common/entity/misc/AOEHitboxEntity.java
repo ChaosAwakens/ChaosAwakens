@@ -133,7 +133,6 @@ public class AOEHitboxEntity extends Entity {
 			remove();
 			return;
 		}
-		
 		updateHitbox();
 	}
 	
