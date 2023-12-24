@@ -67,7 +67,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 150)
 				.add(Attributes.ARMOR, 10)
-				.add(Attributes.MOVEMENT_SPEED, 0.275D)
+				.add(Attributes.MOVEMENT_SPEED, 0.325D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.add(Attributes.ATTACK_DAMAGE, 15)
 				.add(Attributes.ATTACK_KNOCKBACK, 4.5D)
