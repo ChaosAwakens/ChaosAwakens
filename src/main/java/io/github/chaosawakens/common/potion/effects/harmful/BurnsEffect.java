@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.potion.effects.harmful;
 
-import java.util.Map.Entry;
-
 import io.github.chaosawakens.common.registry.CADamageSources;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -10,6 +8,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
+
+import java.util.Map.Entry;
 
 public class BurnsEffect extends Effect {
 

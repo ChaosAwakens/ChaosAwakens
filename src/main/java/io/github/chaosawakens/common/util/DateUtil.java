@@ -1,10 +1,10 @@
 package io.github.chaosawakens.common.util;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.Entity;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 
 public final class DateUtil {
 	

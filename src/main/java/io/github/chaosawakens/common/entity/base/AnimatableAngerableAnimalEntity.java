@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.entity.base;
 
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -17,6 +13,9 @@ import net.minecraft.util.RangedInteger;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import javax.annotation.Nullable;
+import java.util.UUID;
 
 public abstract class AnimatableAngerableAnimalEntity extends AnimatableAnimalEntity implements IAngerable {
 	protected static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(AnimatableAngerableAnimalEntity.class, DataSerializers.BYTE);

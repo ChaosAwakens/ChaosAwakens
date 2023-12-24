@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.advancements.triggers;
 
 import com.google.gson.JsonObject;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.advancements.predicates.AdvancementLocationPredicate;
 import net.minecraft.advancements.Advancement;

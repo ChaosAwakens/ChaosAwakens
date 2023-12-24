@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.weapons.extended;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.client.renderers.item.extended.RoyalGuardianSwordItemRenderer;
 import io.github.chaosawakens.common.items.base.EnchantedSwordItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
@@ -12,6 +10,8 @@ import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.function.Supplier;
 
 public class RoyalGuardianSwordItem extends EnchantedSwordItem implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);

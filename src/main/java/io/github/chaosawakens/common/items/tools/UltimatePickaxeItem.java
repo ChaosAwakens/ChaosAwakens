@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.items.tools;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.EnchantedPickaxeItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import io.github.chaosawakens.manager.CAConfigManager;
@@ -15,6 +12,9 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class UltimatePickaxeItem extends EnchantedPickaxeItem {
 

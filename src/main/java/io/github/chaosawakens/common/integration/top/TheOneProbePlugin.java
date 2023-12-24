@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.integration.top;
 
-import java.util.function.Function;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.ore.CAEntityTrapOreBlock;
 import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
@@ -14,13 +12,7 @@ import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
 import io.github.chaosawakens.common.registry.CABlocks;
 import mcjty.theoneprobe.Tools;
-import mcjty.theoneprobe.api.CompoundText;
-import mcjty.theoneprobe.api.IProbeHitEntityData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
-import mcjty.theoneprobe.api.ITheOneProbe;
-import mcjty.theoneprobe.api.ProbeMode;
-import mcjty.theoneprobe.api.TextStyleClass;
+import mcjty.theoneprobe.api.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,6 +20,8 @@ import net.minecraft.item.Items;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
+
+import java.util.function.Function;
 
 public class TheOneProbePlugin {
 	

@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.blocks.crystal;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.entity.creature.land.AntEntity;
 import io.github.chaosawakens.common.entity.hostile.AggressiveAntEntity;
 import net.minecraft.block.BlockState;
@@ -14,6 +10,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class CrystalAntNestBlock extends CrystalBlock {
 	private final Supplier<? extends EntityType<? extends CreatureEntity>> ant;

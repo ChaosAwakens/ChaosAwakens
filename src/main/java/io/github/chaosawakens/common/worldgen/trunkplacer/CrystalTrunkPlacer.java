@@ -1,13 +1,7 @@
 package io.github.chaosawakens.common.worldgen.trunkplacer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import io.github.chaosawakens.common.registry.CATrunkPlacerTypes;
 import io.github.chaosawakens.common.worldgen.feature.CrystalBranchConfig;
 import net.minecraft.util.Direction;
@@ -20,6 +14,11 @@ import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer.Foliage;
 import net.minecraft.world.gen.trunkplacer.AbstractTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class CrystalTrunkPlacer extends AbstractTrunkPlacer {
 	@SuppressWarnings("unused")

@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder;
 
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
@@ -16,6 +12,10 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.SoundCategory;
+
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class RoboPounderDysonDashGoal extends AnimatableMeleeGoal {
 	private final double overshoot;

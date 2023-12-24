@@ -1,17 +1,16 @@
 package io.github.chaosawakens.common.util;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
-
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class EnchantmentUtil {
 	

@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
-import java.util.function.Supplier;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.Entity;
@@ -17,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class StrawberryBushBlock extends SweetBerryBushBlock {
 	private final Supplier<? extends Item> seedItem;

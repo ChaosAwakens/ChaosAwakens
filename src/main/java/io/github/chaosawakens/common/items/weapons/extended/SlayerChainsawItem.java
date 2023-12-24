@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.items.weapons.extended;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.items.base.CAAxeItem;
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
@@ -36,6 +34,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.network.GeckoLibNetwork;
 import software.bernie.geckolib3.network.ISyncable;
 import software.bernie.geckolib3.util.GeckoLibUtil;
+
+import java.util.function.Supplier;
 
 public class SlayerChainsawItem extends CAAxeItem implements IAnimatable, ISyncable {
 	private final AnimationFactory factory = new AnimationFactory(this);

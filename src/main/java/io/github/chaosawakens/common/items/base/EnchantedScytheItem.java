@@ -1,12 +1,12 @@
 package io.github.chaosawakens.common.items.base;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.util.EnumUtil.CAItemTier;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+
+import java.util.function.Supplier;
 
 public class EnchantedScytheItem extends EnchantedSwordItem {
 

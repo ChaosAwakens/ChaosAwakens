@@ -1,9 +1,6 @@
 package io.github.chaosawakens.client.renderers.entity.misc;
 
-import java.util.Random;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import io.github.chaosawakens.common.entity.misc.CAFallingBlockEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -18,6 +15,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
+
+import java.util.Random;
 
 public class CAFallingBlockRenderer extends EntityRenderer<CAFallingBlockEntity>{
 

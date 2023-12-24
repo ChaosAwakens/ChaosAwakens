@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity.misc;
 
-import java.util.function.Consumer;
-
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +14,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.function.Consumer;
 
 public class JefferyShockwaveEntity extends AOEHitboxEntity implements IAnimatable, IAnimationTickable {
 	private final AnimationFactory factory = new AnimationFactory(this);

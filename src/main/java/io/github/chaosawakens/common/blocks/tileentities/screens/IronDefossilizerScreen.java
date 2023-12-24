@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.blocks.tileentities.screens;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.containers.IronDefossilizerContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;

@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.worldgen.surfacebuilder.StalagmiteValleySurfaceBuilder;
 import net.minecraft.block.Blocks;
@@ -14,6 +12,8 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.function.Supplier;
 
 
 public class CASurfaceBuilders {

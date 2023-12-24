@@ -1,15 +1,14 @@
 package io.github.chaosawakens.mixins;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.client.renderer.entity.RabbitRenderer;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(RabbitRenderer.class)
 public abstract class RabbitEntityRendererMixin {

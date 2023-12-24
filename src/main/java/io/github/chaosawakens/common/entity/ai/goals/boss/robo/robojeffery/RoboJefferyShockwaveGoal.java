@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.boss.robo.robojeffery;
 
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
@@ -25,6 +22,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 	private JefferyShockwaveEntity jefferyShockwave;

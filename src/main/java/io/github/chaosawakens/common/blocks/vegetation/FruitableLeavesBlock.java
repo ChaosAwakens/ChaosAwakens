@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -17,6 +14,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class FruitableLeavesBlock extends LeavesBlock {
 	protected static final BooleanProperty RIPE = BooleanProperty.create("ripe");

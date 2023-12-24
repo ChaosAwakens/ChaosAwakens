@@ -1,7 +1,5 @@
 package io.github.chaosawakens.data.provider;
 
-import java.util.Objects;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.GateBlock;
 import io.github.chaosawakens.common.blocks.RotatedPillarCrystalBlock;
@@ -24,6 +22,8 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class CABlockStateProvider extends BlockStateProvider {

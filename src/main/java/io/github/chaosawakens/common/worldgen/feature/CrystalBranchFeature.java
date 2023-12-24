@@ -1,13 +1,12 @@
 package io.github.chaosawakens.common.worldgen.feature;
 
-import java.util.Random;
-
 import com.mojang.serialization.Codec;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+
+import java.util.Random;
 
 public class CrystalBranchFeature extends Feature<CrystalBranchConfig>{
 

@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.passive.water.whale;
 
-import java.util.EnumSet;
-import java.util.Iterator;
-
 import io.github.chaosawakens.common.entity.creature.water.WhaleEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -12,6 +9,9 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorldReader;
+
+import java.util.EnumSet;
+import java.util.Iterator;
 
 //TODO Rewrite
 public class WhaleBreatheGoal extends Goal {

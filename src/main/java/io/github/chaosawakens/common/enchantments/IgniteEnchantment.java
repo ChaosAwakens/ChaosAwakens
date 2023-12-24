@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.enchantments;
 
-import java.util.Map.Entry;
-import java.util.Random;
-
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAEnchantments;
 import net.minecraft.enchantment.Enchantment;
@@ -13,6 +10,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
+
+import java.util.Map.Entry;
+import java.util.Random;
 
 public class IgniteEnchantment extends Enchantment {
 

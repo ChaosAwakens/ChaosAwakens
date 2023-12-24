@@ -1,13 +1,13 @@
 package io.github.chaosawakens.common.registry;
 
-import java.util.Random;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
+
+import java.util.Random;
 
 public class CAItemGroups {
 	private static Random RANDOM = new Random();

@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.neutral;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableAngerableAnimalEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -11,6 +8,9 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class AnimatableAngerMeleeAttackGoal extends Goal {
 	private final AnimatableAngerableAnimalEntity owner;

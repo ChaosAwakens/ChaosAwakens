@@ -1,7 +1,5 @@
 package io.github.chaosawakens.manager;
 
-import java.util.Optional;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationFunctionalProgressPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
@@ -12,6 +10,8 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+
+import java.util.Optional;
 
 public class CANetworkManager {
 	private static final String PROTOCOL_VERSION = "1";

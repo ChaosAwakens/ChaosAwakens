@@ -1,14 +1,8 @@
 package io.github.chaosawakens.common.items.weapons.ranged;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
-
 import com.google.common.collect.Lists;
-
 import io.github.chaosawakens.api.item.IAutoEnchantable;
 import io.github.chaosawakens.common.entity.projectile.ExplosiveFireworkEntity;
-import io.github.chaosawakens.common.entity.projectile.arrow.UltimateArrowEntity;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.enchantment.EnchantmentData;
@@ -20,24 +14,19 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantable {	  
 	private boolean startSoundPlayed = false;	  

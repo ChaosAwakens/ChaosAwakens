@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.items.weapons.ranged;
 
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateArrowEntity;
 import io.github.chaosawakens.common.items.base.EnchantedBowItem;
 import io.github.chaosawakens.manager.CAConfigManager;
@@ -21,6 +18,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class UltimateBowItem extends EnchantedBowItem implements IVanishable {
 

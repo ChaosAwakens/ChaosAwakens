@@ -1,12 +1,5 @@
 package io.github.chaosawakens;
 
-import java.util.Locale;
-import java.util.Optional;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.maven.artifact.versioning.ArtifactVersion;
-
 import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.manager.CAModManager;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +10,13 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.maven.artifact.versioning.ArtifactVersion;
 import software.bernie.geckolib3.GeckoLib;
+
+import java.util.Locale;
+import java.util.Optional;
 
 @Mod(ChaosAwakens.MODID)
 public class ChaosAwakens {

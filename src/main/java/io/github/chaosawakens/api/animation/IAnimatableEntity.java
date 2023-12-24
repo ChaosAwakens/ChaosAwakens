@@ -1,10 +1,5 @@
 package io.github.chaosawakens.api.animation;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
 import io.github.chaosawakens.common.util.ObjectUtil;
@@ -13,16 +8,9 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.PlayerList;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
-import software.bernie.geckolib3.core.AnimationState;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimatableModel;
-import software.bernie.geckolib3.core.IAnimationTickable;
-import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.*;
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -30,6 +18,9 @@ import software.bernie.geckolib3.core.controller.AnimationController.IAnimationP
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.util.AnimationUtils;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 /**
  * An extended implementation of {@link IAnimatable} and {@link IAnimationTickable} which provides extended functionality to any GeoAnimatable 
@@ -279,25 +270,6 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 
 	default void tickAnims() {
 		getWrappedControllers().forEach(targetWrappedController -> targetWrappedController.tick());
-		
-		MinecraftServer curServer = ServerLifecycleHooks.getCurrentServer();
-		ObjectArrayList<AnimationInformation> animMetadata = AnimationInformation.getAnimationMetadata().entrySet().stream()
-				.map((animMetadataEntry) -> new AnimationInformation(animMetadataEntry.getKey(), animMetadataEntry.getValue()))
-				.collect(Collectors.toCollection(ObjectArrayList::new));
-		ObjectArrayList<IAnimationBuilder> cachedAnimationsCopied = new ObjectArrayList<IAnimationBuilder>(getCachedAnimations());
-		ObjectArrayList<AnimationInformation> cachedAnimationsMapped = cachedAnimationsCopied.stream()
-				.map((curAnim) -> new AnimationInformation(curAnim.getAnimationName(), curAnim.getWrappedAnimLength()))
-				.collect(Collectors.toCollection(ObjectArrayList::new));
-		
-		animMetadata.retainAll(cachedAnimationsMapped);
-		
-		if (curServer != null) { //TODO Move to events, respectively
-			PlayerList curOnlinePlayers = curServer.getPlayerList();
-			
-			curOnlinePlayers.getPlayers().forEach((curPlayer) -> {
-				
-			});
-		}
 	}
 
 	@SuppressWarnings("unchecked")

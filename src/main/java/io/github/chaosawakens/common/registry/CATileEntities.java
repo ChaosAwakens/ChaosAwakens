@@ -1,13 +1,8 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.blocks.tileentities.CASignTileEntity;
-import io.github.chaosawakens.common.blocks.tileentities.CopperDefossilizerTileEntity;
-import io.github.chaosawakens.common.blocks.tileentities.CrystalDefossilizerTileEntity;
-import io.github.chaosawakens.common.blocks.tileentities.CrystalFurnaceTileEntity;
+import io.github.chaosawakens.common.blocks.tileentities.*;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
-import io.github.chaosawakens.common.blocks.tileentities.IronDefossilizerTileEntity;
-import io.github.chaosawakens.common.blocks.tileentities.RoboCrateTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

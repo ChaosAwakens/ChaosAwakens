@@ -1,19 +1,15 @@
 package io.github.chaosawakens.common.items.base;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.item.IAutoEnchantable;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class EnchantedArmorItem extends ArmorItem implements IAutoEnchantable {
 	private final Supplier<EnchantmentData[]> enchantments;

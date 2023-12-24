@@ -1,26 +1,21 @@
 package io.github.chaosawakens.data.provider;
 
-import java.util.Objects;
-
-import javax.annotation.Nonnull;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.GateBlock;
 import io.github.chaosawakens.common.blocks.crystal.EnergizedKyaniteBlock;
 import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.TrapDoorBlock;
-import net.minecraft.block.WallSignBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class CABlockModelProvider extends BlockModelProvider {

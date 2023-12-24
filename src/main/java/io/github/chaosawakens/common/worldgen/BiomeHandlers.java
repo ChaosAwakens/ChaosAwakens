@@ -1,13 +1,6 @@
 package io.github.chaosawakens.common.worldgen;
 
-import java.util.Objects;
-import java.util.function.Consumer;
-
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CAConfiguredCarvers;
-import io.github.chaosawakens.common.registry.CAConfiguredFeatures;
-import io.github.chaosawakens.common.registry.CAConfiguredStructures;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.RegistryKey;
@@ -19,6 +12,9 @@ import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public class BiomeHandlers {
 	

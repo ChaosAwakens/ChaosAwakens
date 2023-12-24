@@ -1,14 +1,9 @@
 package io.github.chaosawakens.common.network.packets.s2c;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.network.ICAPacket;
-import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
-import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -17,6 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
+
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class AnimationTriggerPacket implements ICAPacket {
 	private final int animatableOwnerID;

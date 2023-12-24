@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.ore;
 
-import java.util.function.Supplier;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -13,6 +11,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class CAEntityTrapOreBlock extends CAOreBlock {
 	private final Supplier<? extends EntityType<?>> entityToSummon;

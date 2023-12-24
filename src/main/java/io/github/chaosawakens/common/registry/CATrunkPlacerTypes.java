@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
 import com.mojang.serialization.Codec;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.worldgen.trunkplacer.CrystalTrunkPlacer;
 import io.github.chaosawakens.common.worldgen.trunkplacer.DirtlessGiantTrunkPlacer;

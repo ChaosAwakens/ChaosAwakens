@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
-import java.util.Random;
-
 import io.github.chaosawakens.common.registry.CAStats;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
@@ -15,6 +13,8 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class CrystalFurnaceBlock extends AbstractFurnaceBlock {
 	

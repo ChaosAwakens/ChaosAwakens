@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.blocks.crystal;
 
-import java.util.List;
-import java.util.Random;
-
 import io.github.chaosawakens.common.blocks.SpreadableCrystalDirtBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.BlockState;
@@ -16,6 +13,9 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.FlowersFeature;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
+
+import java.util.List;
+import java.util.Random;
 
 public class CrystalGrassBlock extends SpreadableCrystalDirtBlock implements IGrowable {
 	

@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -20,6 +18,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
 
 public class GateBlock extends Block {
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");

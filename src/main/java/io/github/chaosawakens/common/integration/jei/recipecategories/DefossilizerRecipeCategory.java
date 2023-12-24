@@ -1,10 +1,5 @@
 package io.github.chaosawakens.common.integration.jei.recipecategories;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock.DefossilizerType;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
@@ -20,6 +15,11 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class DefossilizerRecipeCategory implements IRecipeCategory<DefossilizingRecipe> {
 	public static final ResourceLocation ID = ChaosAwakens.prefix(CARecipeTypes.DEFOSSILIZING_RECIPE_TYPE.toString());

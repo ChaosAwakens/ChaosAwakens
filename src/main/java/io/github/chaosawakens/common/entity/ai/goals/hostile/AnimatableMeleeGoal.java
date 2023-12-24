@@ -1,11 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -16,6 +10,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class AnimatableMeleeGoal extends Goal {
 	protected final AnimatableMonsterEntity owner;

@@ -1,12 +1,12 @@
 package io.github.chaosawakens.api.animation;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.util.ObjectUtil;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.AnimationProcessor;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
+
+import javax.annotation.Nullable;
 
 public interface ICAGeoModel {
 	

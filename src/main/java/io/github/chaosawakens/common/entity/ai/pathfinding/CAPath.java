@@ -1,14 +1,14 @@
 package io.github.chaosawakens.common.entity.ai.pathfinding;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.vector.Vector3d;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CAPath extends Path {
 	

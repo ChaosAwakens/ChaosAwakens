@@ -1,9 +1,5 @@
 package io.github.chaosawakens.client.models.entity.base;
 
-import java.util.Collections;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.ICAGeoModel;
 import net.minecraft.client.Minecraft;
@@ -14,6 +10,9 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.resource.GeckoLibCache;
+
+import javax.annotation.Nullable;
+import java.util.Collections;
 
 public abstract class ExtendedAnimatedTickingGeoModel<E extends IAnimatableEntity> extends AnimatedTickingGeoModel<E> implements ICAGeoModel {
 	protected abstract boolean shouldApplyHeadRot();

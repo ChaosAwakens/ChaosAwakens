@@ -1,7 +1,5 @@
 package io.github.chaosawakens.data.provider;
 
-import java.nio.file.Path;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
@@ -19,6 +17,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
+import java.nio.file.Path;
 
 @SuppressWarnings("all")
 public class CATagProvider extends BlockTagsProvider {

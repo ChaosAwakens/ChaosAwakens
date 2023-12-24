@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.entity.base;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
@@ -40,6 +36,9 @@ import net.royawesome.jlibnoise.MathHelper;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public abstract class AnimatableMonsterEntity extends MonsterEntity implements IAnimatableEntity {
 	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);

@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.advancements.predicates;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 

@@ -1,10 +1,7 @@
 package io.github.chaosawakens.client.events;
 
-import java.util.HashMap;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import io.github.chaosawakens.ChaosAwakens;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
@@ -17,6 +14,8 @@ import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+
+import java.util.HashMap;
 
 public class CABossBarRenderer {	
 	private static final HashMap<String, ResourceLocation> textureCache = new HashMap<String, ResourceLocation>();

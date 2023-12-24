@@ -1,8 +1,7 @@
 package io.github.chaosawakens.mixins;
 
-import org.spongepowered.asm.mixin.Mixin;
-
 import net.minecraft.block.LeavesBlock;
+import org.spongepowered.asm.mixin.Mixin;
 
 
 @Mixin(LeavesBlock.class)

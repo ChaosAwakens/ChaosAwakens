@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks;
 
-import java.util.Random;
-
 import io.github.chaosawakens.common.blocks.crystal.CrystalBushBlock;
 import io.github.chaosawakens.common.blocks.crystal.DoubleCrystalPlantBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -16,6 +14,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IForgeShearable;
+
+import java.util.Random;
 
 public class TallCrystalGrassBlock extends CrystalBushBlock implements IGrowable, IForgeShearable {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);

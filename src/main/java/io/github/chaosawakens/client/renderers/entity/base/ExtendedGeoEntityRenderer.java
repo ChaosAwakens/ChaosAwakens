@@ -1,10 +1,7 @@
 package io.github.chaosawakens.client.renderers.entity.base;
 
-import javax.annotation.Nullable;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -15,6 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
+
+import javax.annotation.Nullable;
 
 public abstract class ExtendedGeoEntityRenderer<E extends LivingEntity & IAnimatableEntity> extends GeoEntityRenderer<E> {
 

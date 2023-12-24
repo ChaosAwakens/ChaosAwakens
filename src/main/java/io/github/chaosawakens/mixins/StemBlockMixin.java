@@ -1,15 +1,14 @@
 package io.github.chaosawakens.mixins;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StemBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(StemBlock.class)
 public abstract class StemBlockMixin {

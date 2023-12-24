@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.blocks.spawner;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -14,6 +10,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class EntityNestBlock extends Block {
 	private final Supplier<? extends EntityType<? extends MobEntity>> entityType;

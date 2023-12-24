@@ -121,4 +121,20 @@ public final class FileUtil {
             return false;
         }
     }
+
+    /**
+     *
+     *
+     * @param directory
+     * @param shouldHide
+     *
+     * @throws IOException
+     */
+    public static void checkAndMakeDirectory(File directory, boolean shouldHide) throws IOException {
+        if (!directory.exists() && !directory.mkdirs()) throw new IOException("Unable to make directory [" + directory.getAbsolutePath() + "]!");
+        else if (!directory.isDirectory()) {
+            if (directory.delete()) checkAndMakeDirectory(directory, shouldHide);
+            else throw new IOException("Directory [" + directory.getAbsolutePath() + "] is not a folder and thus could not be deleted!");
+        }
+    }
 }

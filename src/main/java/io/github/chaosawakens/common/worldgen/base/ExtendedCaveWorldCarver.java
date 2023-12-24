@@ -1,16 +1,15 @@
 package io.github.chaosawakens.common.worldgen.base;
 
-import java.util.BitSet;
-import java.util.Random;
-import java.util.function.Function;
-
 import com.mojang.serialization.Codec;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.CaveWorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
+
+import java.util.BitSet;
+import java.util.Random;
+import java.util.function.Function;
 
 /**
  * Remapped version of {@link CaveWorldCarver}, with extra functionality added to it as well.

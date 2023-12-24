@@ -1,10 +1,10 @@
 package io.github.chaosawakens.api.animation;
 
-import javax.annotation.Nullable;
-
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
+
+import javax.annotation.Nullable;
 
 /**
  * A shared interface across all {@code AnimationBuilder} types/classes. Provides an implementation for all common helper

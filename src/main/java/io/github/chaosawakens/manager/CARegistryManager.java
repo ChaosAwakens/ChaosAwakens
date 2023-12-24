@@ -1,27 +1,6 @@
 package io.github.chaosawakens.manager;
 
-import io.github.chaosawakens.common.registry.CAAttributes;
-import io.github.chaosawakens.common.registry.CABiomes;
-import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CACarvers;
-import io.github.chaosawakens.common.registry.CAContainerTypes;
-import io.github.chaosawakens.common.registry.CAEffects;
-import io.github.chaosawakens.common.registry.CAEnchantments;
-import io.github.chaosawakens.common.registry.CAEntityTypes;
-import io.github.chaosawakens.common.registry.CAFeatures;
-import io.github.chaosawakens.common.registry.CAFoliagePlacerTypes;
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.registry.CALootModifiers;
-import io.github.chaosawakens.common.registry.CAPaintings;
-import io.github.chaosawakens.common.registry.CAParticleTypes;
-import io.github.chaosawakens.common.registry.CARecipeTypes;
-import io.github.chaosawakens.common.registry.CASoundEvents;
-import io.github.chaosawakens.common.registry.CAStats;
-import io.github.chaosawakens.common.registry.CAStructures;
-import io.github.chaosawakens.common.registry.CASurfaceBuilders;
-import io.github.chaosawakens.common.registry.CATileEntities;
-import io.github.chaosawakens.common.registry.CATreeDecoratorTypes;
-import io.github.chaosawakens.common.registry.CAVillagers;
+import io.github.chaosawakens.common.registry.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 public class CARegistryManager {

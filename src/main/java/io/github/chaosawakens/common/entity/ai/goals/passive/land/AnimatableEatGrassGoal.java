@@ -1,10 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.passive.land;
 
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.util.BlockPosUtil;
@@ -15,6 +10,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraftforge.event.ForgeEventFactory;
+
+import javax.annotation.Nullable;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class AnimatableEatGrassGoal extends Goal {
 	protected final AnimatableAnimalEntity owner;

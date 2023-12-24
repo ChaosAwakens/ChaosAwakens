@@ -1,17 +1,16 @@
 package io.github.chaosawakens.data.builder.provider;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import io.github.chaosawakens.data.builder.ParticleTypeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public abstract class ParticleTypeProvider implements IDataProvider {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

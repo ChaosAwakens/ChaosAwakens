@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.items.armor;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.EnchantedArmorItem;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.gui.screen.Screen;
@@ -15,6 +12,9 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class LapisArmorItem extends EnchantedArmorItem {
 

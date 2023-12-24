@@ -1,13 +1,12 @@
 package io.github.chaosawakens.common.blocks.trees;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.trees.BigTree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class CABigTree extends BigTree {
 	private Supplier<ConfiguredFeature<BaseTreeFeatureConfig, ?>> tree;

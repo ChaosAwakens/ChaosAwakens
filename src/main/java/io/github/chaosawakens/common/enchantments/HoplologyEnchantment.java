@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.enchantments;
 
-import java.util.stream.Collectors;
-
 import io.github.chaosawakens.common.util.EnchantmentUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.enchantment.Enchantment;
@@ -11,6 +9,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+
+import java.util.stream.Collectors;
 
 /**
  * @author invalid2

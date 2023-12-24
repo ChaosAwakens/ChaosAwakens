@@ -1,20 +1,19 @@
 package io.github.chaosawakens.data.builder.provider;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import io.github.chaosawakens.data.builder.BiomeTypeBuilder;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DirectoryCache;
+import net.minecraft.data.IDataProvider;
+import net.minecraft.util.ResourceLocation;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import io.github.chaosawakens.data.builder.BiomeTypeBuilder;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.ResourceLocation;
 
 public abstract class BiomeTypeProvider implements IDataProvider {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

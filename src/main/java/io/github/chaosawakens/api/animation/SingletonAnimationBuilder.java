@@ -1,12 +1,12 @@
 package io.github.chaosawakens.api.animation;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.util.ObjectUtil;
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
+
+import javax.annotation.Nullable;
 
 /**
  * {@link IAnimationBuilder} instance class. Allows for the instantiation of only 1 (immutable) animation by wrapping

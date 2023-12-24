@@ -1,10 +1,5 @@
 package io.github.chaosawakens.common.entity.base;
 
-import java.util.List;
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.common.entity.ai.goals.passive.water.FollowSchoolLeaderGoal;
 import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.entity.EntityType;
@@ -17,6 +12,10 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.stream.Stream;
 
 public abstract class AnimatableGroupFishEntity extends AnimatableFishEntity {
 	private AnimatableGroupFishEntity animatableGroupLeader;

@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.blocks.misc;
 
-import java.util.Objects;
-import java.util.Random;
-
 import io.github.chaosawakens.common.blocks.crystal.CrystalClusterBlock;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
@@ -13,6 +10,9 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.Objects;
+import java.util.Random;
 
 public class BuddingBlock extends Block {
 	private static final IntegerProperty MAX_GENERATABLE = BlockStateProperties.AGE_25;

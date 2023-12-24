@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
-import java.util.function.Supplier;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SaplingBlock;
@@ -10,6 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.common.IPlantable;
+
+import java.util.function.Supplier;
 
 public class CASaplingBlock extends SaplingBlock implements IPlantable {
 	protected Supplier<Block> soilBlock;

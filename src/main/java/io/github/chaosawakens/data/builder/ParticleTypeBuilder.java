@@ -1,11 +1,10 @@
 package io.github.chaosawakens.data.builder;
 
-import java.util.ArrayList;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import io.github.chaosawakens.ChaosAwakens;
+
+import java.util.ArrayList;
 
 public class ParticleTypeBuilder {
 	private ArrayList<String> particleTypeNameArray;

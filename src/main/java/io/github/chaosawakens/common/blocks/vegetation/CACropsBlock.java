@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
-import java.util.function.Supplier;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
@@ -13,6 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+
+import java.util.function.Supplier;
 
 public abstract class CACropsBlock extends CropsBlock {
 	private final Supplier<? extends Item> seedItem;

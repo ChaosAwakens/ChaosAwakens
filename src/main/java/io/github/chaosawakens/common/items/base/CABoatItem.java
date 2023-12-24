@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.items.base;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import io.github.chaosawakens.common.entity.misc.CABoatEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +14,9 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class CABoatItem extends BoatItem {
 	private static final Predicate<Entity> PICKABLE_ENTITY_PREDICATE = EntityPredicates.NO_SPECTATORS.and(Entity::isPickable);

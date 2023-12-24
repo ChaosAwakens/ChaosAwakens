@@ -1,16 +1,7 @@
 package io.github.chaosawakens.common.loot;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSyntaxException;
-
+import com.google.gson.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.EnchantedBookItem;
@@ -25,6 +16,9 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IRegistryDelegate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LootFunctionEnchant extends LootFunction {
 	private final Map<IRegistryDelegate<Enchantment>, Short> enchantments;

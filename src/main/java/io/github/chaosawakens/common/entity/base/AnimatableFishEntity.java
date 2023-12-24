@@ -1,7 +1,5 @@
 package io.github.chaosawakens.common.entity.base;
 
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
@@ -31,6 +29,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import javax.annotation.Nullable;
 
 public abstract class AnimatableFishEntity extends AbstractFishEntity implements IAnimatableEntity {
 	private static final DataParameter<Boolean> SWIMMING = EntityDataManager.defineId(AnimatableFishEntity.class, DataSerializers.BOOLEAN);

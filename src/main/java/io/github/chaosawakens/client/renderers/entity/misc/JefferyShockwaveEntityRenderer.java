@@ -2,7 +2,6 @@ package io.github.chaosawakens.client.renderers.entity.misc;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import io.github.chaosawakens.client.models.entity.misc.JefferyShockwaveEntityModel;
 import io.github.chaosawakens.common.entity.misc.JefferyShockwaveEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

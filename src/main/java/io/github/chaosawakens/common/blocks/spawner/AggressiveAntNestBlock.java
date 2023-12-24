@@ -1,10 +1,10 @@
 package io.github.chaosawakens.common.blocks.spawner;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.entity.hostile.AggressiveAntEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class AggressiveAntNestBlock extends EntityNestBlock {
 	private final Supplier<EntityType<AggressiveAntEntity>> antType;

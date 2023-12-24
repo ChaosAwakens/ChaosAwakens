@@ -1,7 +1,11 @@
 package io.github.chaosawakens.mixins;
 
-import java.util.Map;
-
+import io.github.chaosawakens.events.CAEventFactory;
+import io.github.chaosawakens.events.common.ItemCooldownEvent.ItemCooldownStartEvent;
+import io.github.chaosawakens.events.common.ItemCooldownEvent.ItemCooldownTickEvent;
+import net.minecraft.item.Item;
+import net.minecraft.util.CooldownTracker;
+import net.minecraft.util.CooldownTracker.Cooldown;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -10,12 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import io.github.chaosawakens.events.CAEventFactory;
-import io.github.chaosawakens.events.common.ItemCooldownEvent.ItemCooldownStartEvent;
-import io.github.chaosawakens.events.common.ItemCooldownEvent.ItemCooldownTickEvent;
-import net.minecraft.item.Item;
-import net.minecraft.util.CooldownTracker;
-import net.minecraft.util.CooldownTracker.Cooldown;
+import java.util.Map;
 
 @Mixin(CooldownTracker.class)
 public abstract class CooldownTrackerMixin {

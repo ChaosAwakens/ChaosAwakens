@@ -1,14 +1,13 @@
 package io.github.chaosawakens.api.item;
 
-import java.util.UUID;
-import java.util.function.Supplier;
-
 import com.google.common.collect.Multimap;
-
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.common.util.Lazy;
+
+import java.util.UUID;
+import java.util.function.Supplier;
 
 //TODO Supplier conversion (for config values, later)
 public interface ICATieredItem {

@@ -1,11 +1,11 @@
 package io.github.chaosawakens.common.items.bucket;
 
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.common.items.base.CABucketItem;
 import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.fluid.Fluid;
 import net.minecraftforge.fml.RegistryObject;
+
+import java.util.function.Supplier;
 
 public class PinkTourmalineBucketItem extends CABucketItem {
 
