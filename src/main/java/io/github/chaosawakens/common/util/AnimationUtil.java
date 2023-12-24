@@ -65,7 +65,7 @@ public final class AnimationUtil {
 	 *
 	 * @return The {@link ILoopType} of the specified animation, from the determined side.
 	 */
-	public static ILoopType getLoopType(ResourceLocation animLoc, @Nullable String targetAnimName) {
+	public static ILoopType getSidedLoopType(ResourceLocation animLoc, @Nullable String targetAnimName) {
 		ILoopType loopType = ILoopType.EDefaultLoopTypes.PLAY_ONCE;
 
 		if (animLoc.toString().contains("animations")) {
