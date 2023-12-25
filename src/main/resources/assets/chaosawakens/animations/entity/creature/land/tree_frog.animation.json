@@ -28,7 +28,7 @@
 		},
 		"Jump": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 1.04,
+			"animation_length": 8.04,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {

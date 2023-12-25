@@ -1508,7 +1508,7 @@
 			}
 		},
 		"Smash Attack": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 1.8,
 			"anim_time_update": "0",
 			"blend_weight": "1",
@@ -2258,7 +2258,7 @@
 			}
 		},
 		"Death": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 3.6,
 			"anim_time_update": "0",
 			"blend_weight": "1",

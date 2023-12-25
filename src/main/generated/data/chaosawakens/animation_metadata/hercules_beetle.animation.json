@@ -1,13 +1,63 @@
 {
   "clientLoc": "chaosawakens:animations/boss/miniboss/hercules_beetle.animation.json",
+  "Awaken": {
+    "animationName": "Awaken",
+    "animationLength": 7.28,
+    "loopType": "PLAY_ONCE"
+  },
+  "Docile": {
+    "animationName": "Docile",
+    "animationLength": 3.6,
+    "loopType": "LOOP"
+  },
+  "Hover": {
+    "animationName": "Hover",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Ground Slam": {
+    "animationName": "Ground Slam",
+    "animationLength": 2.8,
+    "loopType": "LOOP"
+  },
+  "Leap": {
+    "animationName": "Leap",
+    "animationLength": 2.76,
+    "loopType": "PLAY_ONCE"
+  },
   "Idle": {
     "animationName": "Idle",
     "animationLength": 3.52,
     "loopType": "LOOP"
   },
+  "Ram": {
+    "animationName": "Ram",
+    "animationLength": 1.16,
+    "loopType": "PLAY_ONCE"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
   "Death": {
     "animationName": "Death",
     "animationLength": 1.76,
-    "loopType": "HOLD_ON_LAST_FRAME"
+    "loopType": "PLAY_ONCE"
+  },
+  "Grab": {
+    "animationName": "Grab",
+    "animationLength": 0.64,
+    "loopType": "PLAY_ONCE"
+  },
+  "Descend": {
+    "animationName": "Descend",
+    "animationLength": 10.08,
+    "loopType": "PLAY_ONCE"
+  },
+  "Munch": {
+    "animationName": "Munch",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
   }
 }

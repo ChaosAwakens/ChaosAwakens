@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.wasp.fly": {
+		"Fly": {
 			"loop": true,
 			"animation_length": 1.56,
 			"anim_time_update": "0",
@@ -316,8 +316,8 @@
 				}
 			}
 		},
-		"animation.wasp.fly_attack": {
-			"loop": true,
+		"Pinch Attack": {
+			"loop": false,
 			"animation_length": 1.72,
 			"anim_time_update": "0",
 			"blend_weight": "1",
