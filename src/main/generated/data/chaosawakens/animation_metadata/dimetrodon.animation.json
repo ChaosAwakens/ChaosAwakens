@@ -1,0 +1,23 @@
+{
+  "clientLoc": "chaosawakens:animations/neutral/land/dimetrodon.animation.json",
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 3.52,
+    "loopType": "LOOP"
+  },
+  "Swim": {
+    "animationName": "Swim",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Bite Attack": {
+    "animationName": "Bite Attack",
+    "animationLength": 0.64,
+    "loopType": "PLAY_ONCE"
+  }
+}

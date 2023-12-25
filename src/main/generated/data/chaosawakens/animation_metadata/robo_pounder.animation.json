@@ -1,0 +1,108 @@
+{
+  "clientLoc": "chaosawakens:animations/hostile/robo/robo_pounder.animation.json",
+  "Cooldown": {
+    "animationName": "Cooldown",
+    "animationLength": 10.25,
+    "loopType": "PLAY_ONCE"
+  },
+  "Rage Crash Restart": {
+    "animationName": "Rage Crash Restart",
+    "animationLength": 1.2,
+    "loopType": "PLAY_ONCE"
+  },
+  "Taunt": {
+    "animationName": "Taunt",
+    "animationLength": 2.4,
+    "loopType": "PLAY_ONCE"
+  },
+  "Heavy AoE Attack": {
+    "animationName": "Heavy AoE Attack",
+    "animationLength": 2.3,
+    "loopType": "PLAY_ONCE"
+  },
+  "Left Swing Attack": {
+    "animationName": "Left Swing Attack",
+    "animationLength": 2.0,
+    "loopType": "PLAY_ONCE"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Right Leg Attack": {
+    "animationName": "Right Leg Attack",
+    "animationLength": 1.75,
+    "loopType": "PLAY_ONCE"
+  },
+  "Pose 1": {
+    "animationName": "Pose 1",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Left Leg Attack": {
+    "animationName": "Left Leg Attack",
+    "animationLength": 1.75,
+    "loopType": "PLAY_ONCE"
+  },
+  "Rage Crash": {
+    "animationName": "Rage Crash",
+    "animationLength": 10.0,
+    "loopType": "PLAY_ONCE"
+  },
+  "Rage Run": {
+    "animationName": "Rage Run",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "The California Gurls Dance": {
+    "animationName": "The California Gurls Dance",
+    "animationLength": 8.5,
+    "loopType": "LOOP"
+  },
+  "Dash Attack": {
+    "animationName": "Dash Attack",
+    "animationLength": 3.2,
+    "loopType": "PLAY_ONCE"
+  },
+  "Cooldown Restart": {
+    "animationName": "Cooldown Restart",
+    "animationLength": 1.6,
+    "loopType": "PLAY_ONCE"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Left Heavy Attack": {
+    "animationName": "Left Heavy Attack",
+    "animationLength": 1.75,
+    "loopType": "PLAY_ONCE"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 3.78,
+    "loopType": "PLAY_ONCE"
+  },
+  "Right Swing Attack": {
+    "animationName": "Right Swing Attack",
+    "animationLength": 2.0,
+    "loopType": "PLAY_ONCE"
+  },
+  "Right Heavy Attack": {
+    "animationName": "Right Heavy Attack",
+    "animationLength": 1.75,
+    "loopType": "PLAY_ONCE"
+  },
+  "Pose 2": {
+    "animationName": "Pose 2",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Rage Begin": {
+    "animationName": "Rage Begin",
+    "animationLength": 3.5,
+    "loopType": "PLAY_ONCE"
+  }
+}

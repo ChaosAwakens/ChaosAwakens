@@ -1,0 +1,38 @@
+{
+  "clientLoc": "chaosawakens:animations/hostile/ent/ent.animation.json",
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 3.6,
+    "loopType": "LOOP"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 3.6,
+    "loopType": "LOOP"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 3.6,
+    "loopType": "PLAY_ONCE"
+  },
+  "Always Play": {
+    "animationName": "Always Play",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Smash Attack": {
+    "animationName": "Smash Attack",
+    "animationLength": 1.8,
+    "loopType": "PLAY_ONCE"
+  },
+  "Right Punch": {
+    "animationName": "Right Punch",
+    "animationLength": 1.8,
+    "loopType": "PLAY_ONCE"
+  },
+  "Left Punch": {
+    "animationName": "Left Punch",
+    "animationLength": 1.8,
+    "loopType": "PLAY_ONCE"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "clientLoc": "chaosawakens:animations/boss/robo/robo_jeffery.animation.json",
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Healthy": {
+    "animationName": "Healthy",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 9.5,
+    "loopType": "PLAY_ONCE"
+  },
+  "Leap Attack: Land": {
+    "animationName": "Leap Attack: Land",
+    "animationLength": 2.2,
+    "loopType": "PLAY_ONCE"
+  },
+  "Robo-Bomb Attack": {
+    "animationName": "Robo-Bomb Attack",
+    "animationLength": 2.0,
+    "loopType": "PLAY_ONCE"
+  },
+  "Low Health": {
+    "animationName": "Low Health",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Leap Attack: Midair": {
+    "animationName": "Leap Attack: Midair",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Leap Attack: Leap": {
+    "animationName": "Leap Attack: Leap",
+    "animationLength": 0.79167,
+    "loopType": "PLAY_ONCE"
+  },
+  "Right Punch Attack": {
+    "animationName": "Right Punch Attack",
+    "animationLength": 1.7,
+    "loopType": "PLAY_ONCE"
+  },
+  "Smash Attack": {
+    "animationName": "Smash Attack",
+    "animationLength": 3.0,
+    "loopType": "PLAY_ONCE"
+  },
+  "Left Punch Attack": {
+    "animationName": "Left Punch Attack",
+    "animationLength": 1.7,
+    "loopType": "PLAY_ONCE"
+  },
+  "Idle Extras": {
+    "animationName": "Idle Extras",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  }
+}

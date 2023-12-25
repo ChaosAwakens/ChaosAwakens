@@ -1,0 +1,8 @@
+{
+  "clientLoc": "chaosawakens:animations/misc/jeffery_schockwave.animation.json",
+  "Expand": {
+    "animationName": "Expand",
+    "animationLength": 18.5,
+    "loopType": "PLAY_ONCE"
+  }
+}

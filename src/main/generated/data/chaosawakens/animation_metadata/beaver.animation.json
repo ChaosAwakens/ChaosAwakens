@@ -1,0 +1,18 @@
+{
+  "clientLoc": "chaosawakens:animations/creature/land/beaver.animation.json",
+  "Gnaw": {
+    "animationName": "Gnaw",
+    "animationLength": 2.0,
+    "loopType": "LOOP"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 2.0,
+    "loopType": "LOOP"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 0.6667,
+    "loopType": "LOOP"
+  }
+}

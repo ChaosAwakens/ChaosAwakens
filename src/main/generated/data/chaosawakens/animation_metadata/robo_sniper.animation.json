@@ -1,0 +1,28 @@
+{
+  "clientLoc": "chaosawakens:animations/hostile/robo/robo_sniper.animation.json",
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 2.08,
+    "loopType": "LOOP"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 3.12,
+    "loopType": "LOOP"
+  },
+  "Shoot": {
+    "animationName": "Shoot",
+    "animationLength": 1.2,
+    "loopType": "PLAY_ONCE"
+  },
+  "Accelerate": {
+    "animationName": "Accelerate",
+    "animationLength": 2.08,
+    "loopType": "LOOP"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 1.8,
+    "loopType": "PLAY_ONCE"
+  }
+}

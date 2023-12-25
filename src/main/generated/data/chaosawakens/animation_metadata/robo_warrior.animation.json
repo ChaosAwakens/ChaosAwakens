@@ -1,0 +1,63 @@
+{
+  "clientLoc": "chaosawakens:animations/hostile/robo/robo_warrior.animation.json",
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 3.56,
+    "loopType": "LOOP"
+  },
+  "Right Uppercut Attack": {
+    "animationName": "Right Uppercut Attack",
+    "animationLength": 1.85,
+    "loopType": "PLAY_ONCE"
+  },
+  "Burst Laser Attack": {
+    "animationName": "Burst Laser Attack",
+    "animationLength": 2.56,
+    "loopType": "PLAY_ONCE"
+  },
+  "Left Uppercut Attack": {
+    "animationName": "Left Uppercut Attack",
+    "animationLength": 1.85,
+    "loopType": "PLAY_ONCE"
+  },
+  "Charged Laser Attack": {
+    "animationName": "Charged Laser Attack",
+    "animationLength": 5.32,
+    "loopType": "PLAY_ONCE"
+  },
+  "Idle Extras": {
+    "animationName": "Idle Extras",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  },
+  "Activate Shield": {
+    "animationName": "Activate Shield",
+    "animationLength": 1.52,
+    "loopType": "PLAY_ONCE"
+  },
+  "Deactivate Shield": {
+    "animationName": "Deactivate Shield",
+    "animationLength": 1.52,
+    "loopType": "PLAY_ONCE"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 3.56,
+    "loopType": "LOOP"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 3.5,
+    "loopType": "PLAY_ONCE"
+  },
+  "Destroy Shield": {
+    "animationName": "Destroy Shield",
+    "animationLength": 1.52,
+    "loopType": "PLAY_ONCE"
+  },
+  "Shield Up": {
+    "animationName": "Shield Up",
+    "animationLength": 3.56,
+    "loopType": "LOOP"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "clientLoc": "chaosawakens:animations/creature/water/fish/rock_fish.animation.json",
+  "Swim": {
+    "animationName": "Swim",
+    "animationLength": 1.76,
+    "loopType": "LOOP"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 1.76,
+    "loopType": "LOOP"
+  }
+}

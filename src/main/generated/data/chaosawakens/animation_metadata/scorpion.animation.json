@@ -1,0 +1,23 @@
+{
+  "clientLoc": "chaosawakens:animations/hostile/insect/scorpion.animation.json",
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 2.0,
+    "loopType": "LOOP"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 2.0,
+    "loopType": "LOOP"
+  },
+  "Pinch Attack": {
+    "animationName": "Pinch Attack",
+    "animationLength": 0.8,
+    "loopType": "PLAY_ONCE"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 3.6,
+    "loopType": "PLAY_ONCE"
+  }
+}

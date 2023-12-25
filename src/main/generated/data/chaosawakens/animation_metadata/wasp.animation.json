@@ -1,0 +1,13 @@
+{
+  "clientLoc": "chaosawakens:animations/hostile/insect/wasp.animation.json",
+  "Pinch Attack": {
+    "animationName": "Pinch Attack",
+    "animationLength": 1.72,
+    "loopType": "PLAY_ONCE"
+  },
+  "Fly": {
+    "animationName": "Fly",
+    "animationLength": 1.56,
+    "loopType": "LOOP"
+  }
+}

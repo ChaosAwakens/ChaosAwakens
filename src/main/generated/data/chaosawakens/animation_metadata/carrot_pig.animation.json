@@ -1,0 +1,13 @@
+{
+  "clientLoc": "chaosawakens:animations/creature/land/carrot_pig.animation.json",
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  }
+}

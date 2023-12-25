@@ -1,0 +1,18 @@
+{
+  "clientLoc": "chaosawakens:animations/hostile/water/attack_squid.animation.json",
+  "Shoot": {
+    "animationName": "Shoot",
+    "animationLength": 1.56,
+    "loopType": "PLAY_ONCE"
+  },
+  "Death": {
+    "animationName": "Death",
+    "animationLength": 5.2,
+    "loopType": "PLAY_ONCE"
+  },
+  "Swim": {
+    "animationName": "Swim",
+    "animationLength": 1.7976931348623157E308,
+    "loopType": "LOOP"
+  }
+}

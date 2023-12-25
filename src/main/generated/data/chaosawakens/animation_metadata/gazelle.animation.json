@@ -1,0 +1,23 @@
+{
+  "clientLoc": "chaosawakens:animations/creature/land/gazelle.animation.json",
+  "Run": {
+    "animationName": "Run",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Graze": {
+    "animationName": "Graze",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  },
+  "Walk": {
+    "animationName": "Walk",
+    "animationLength": 1.8,
+    "loopType": "LOOP"
+  }
+}

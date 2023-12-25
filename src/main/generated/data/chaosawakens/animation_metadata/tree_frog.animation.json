@@ -1,0 +1,18 @@
+{
+  "clientLoc": "chaosawakens:animations/creature/land/tree_frog.animation.json",
+  "Jump": {
+    "animationName": "Jump",
+    "animationLength": 8.04,
+    "loopType": "PLAY_ONCE"
+  },
+  "Blink": {
+    "animationName": "Blink",
+    "animationLength": 1.64,
+    "loopType": "LOOP"
+  },
+  "Idle": {
+    "animationName": "Idle",
+    "animationLength": 1.76,
+    "loopType": "LOOP"
+  }
+}

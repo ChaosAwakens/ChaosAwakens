@@ -1,0 +1,13 @@
+{
+  "clientLoc": "chaosawakens:animations/neutral/lava/lava_eel.animation.json",
+  "Flop": {
+    "animationName": "Flop",
+    "animationLength": 1.76,
+    "loopType": "LOOP"
+  },
+  "Swim": {
+    "animationName": "Swim",
+    "animationLength": 1.76,
+    "loopType": "LOOP"
+  }
+}
