@@ -41,6 +41,7 @@ public class EnchantedGoldenCarrotPigEntity extends AnimatableRideableAnimalEnti
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.GOLDEN_CARROT, CAItems.GOLDEN_POTATO.get(), CAItems.GOLDEN_BEETROOT.get());
+	public static final String ENCHANTED_CARROT_PIG_MDF_NAME = "carrot_pig";
 
 	public EnchantedGoldenCarrotPigEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -105,7 +106,12 @@ public class EnchantedGoldenCarrotPigEntity extends AnimatableRideableAnimalEnti
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ENCHANTED_CARROT_PIG_MDF_NAME;
+	}
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.PIG_AMBIENT;

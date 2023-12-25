@@ -46,6 +46,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder grazeAnim = new SingletonAnimationBuilder(this, "Graze", EDefaultLoopTypes.PLAY_ONCE);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT, Items.SUGAR, Blocks.HAY_BLOCK.asItem(), Items.APPLE);
+	public static final String GAZELLE_MDF_NAME = "gazelle";
 
 	public GazelleEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -171,6 +172,11 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return GAZELLE_MDF_NAME;
 	}
 
 	@Override

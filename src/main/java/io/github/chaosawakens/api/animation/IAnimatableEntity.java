@@ -1,7 +1,10 @@
 package io.github.chaosawakens.api.animation;
 
+import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.common.codec.assets.AnimationDataCodec;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationStopPacket;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationTriggerPacket;
+import io.github.chaosawakens.common.registry.CADataLoaders;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.manager.CANetworkManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -20,6 +23,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.util.AnimationUtils;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -275,5 +279,17 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	@SuppressWarnings("unchecked")
 	default <E extends Entity> IAnimatableModel<E> getModel() {
 		return !FMLEnvironment.dist.equals(Dist.CLIENT) ? null : (IAnimatableModel<E>) AnimationUtils.getGeoModelForEntity((E) this);
+	}
+
+	String getOwnerMDFileName();
+
+	default List<AnimationDataCodec.AnimationMetadataCodec> getSidedAnimationData() {
+		return CADataLoaders.ANIMATION_DATA.getData(ChaosAwakens.prefix(getOwnerMDFileName() + ".animation")).getStoredAnims();
+	}
+
+	default Optional<AnimationDataCodec.AnimationMetadataCodec> getSidedMetadataFor(String animationName) {
+		List<AnimationDataCodec.AnimationMetadataCodec> storedAnims = getSidedAnimationData();
+
+		return Optional.ofNullable(storedAnims.stream().filter(anim -> anim.getAnimationName().equalsIgnoreCase(animationName)).findFirst().orElse(null));
 	}
 }

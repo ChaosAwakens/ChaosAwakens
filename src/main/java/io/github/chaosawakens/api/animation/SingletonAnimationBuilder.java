@@ -118,6 +118,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	private final String animName;
 	private double animSpeedMultiplier = 1.0D;
 	private ILoopType loopType = EDefaultLoopTypes.PLAY_ONCE;
+	private Animation heldAnim;
 
 	public SingletonAnimationBuilder(IAnimatableEntity owner, String animName) {
 		this.owner = owner;
@@ -125,6 +126,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
+		this.heldAnim = new Animation();
+
+		this.heldAnim.animationLength = owner.getSidedMetadataFor(animName).get().getAnimationLength();
+		this.heldAnim.animationName = animName;
+		this.heldAnim.loop = owner.getSidedMetadataFor(animName).get().getLoopType();
 
 		owner.getCachedAnimations().add(this);
 	}
@@ -136,6 +142,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.loopType = loopType;
 		this.animBuilder = new AnimationBuilder().addAnimation(animName, loopType);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
+		this.heldAnim = new Animation();
+
+		this.heldAnim.animationLength = owner.getSidedMetadataFor(animName).get().getAnimationLength();
+		this.heldAnim.animationName = animName;
+		this.heldAnim.loop = owner.getSidedMetadataFor(animName).get().getLoopType();
 
 		owner.getCachedAnimations().add(this);
 	}
@@ -146,6 +157,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		this.animName = animName;
 		this.animBuilder = new AnimationBuilder().addRepeatingAnimation(animName, loopReps);
 		this.animBuilder.getRawAnimationList().removeIf((anim) -> animBuilder.getRawAnimationList().indexOf(anim) > 0);
+		this.heldAnim = new Animation();
+
+		this.heldAnim.animationLength = owner.getSidedMetadataFor(animName).get().getAnimationLength();
+		this.heldAnim.animationName = animName;
+		this.heldAnim.loop = owner.getSidedMetadataFor(animName).get().getLoopType();
 
 		owner.getCachedAnimations().add(this);
 	}
@@ -201,7 +217,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 
 	@Override
 	public Animation getAnimation() {
-		return owner.getModel().getAnimation(animName, owner);
+		return heldAnim;
 	}
 
 	@Override
@@ -262,5 +278,10 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public double getWrappedAnimSpeed() {
 		return animSpeedMultiplier;
+	}
+
+	@Override
+	public String getDatapackFileName() {
+		return owner.getOwnerMDFileName();
 	}
 }

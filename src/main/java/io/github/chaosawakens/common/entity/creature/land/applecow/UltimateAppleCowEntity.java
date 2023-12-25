@@ -39,6 +39,7 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
+	public static final String ULTIMATE_APPLE_COW_MDF_NAME = "apple_cow";
 
 	public UltimateAppleCowEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -121,7 +122,12 @@ public class UltimateAppleCowEntity extends AnimatableAnimalEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ULTIMATE_APPLE_COW_MDF_NAME;
+	}
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.COW_AMBIENT;

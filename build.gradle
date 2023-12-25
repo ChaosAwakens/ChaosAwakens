@@ -117,7 +117,7 @@ dependencies {
     // Libraries
 	implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
 
-	compileOnly fg.deobf("commoble.databuddy:databuddy-1.16.4:${databuddy_version}")
+	implementation fg.deobf("commoble.databuddy:databuddy-1.16.4:${databuddy_version}")
 	shade fg.deobf("commoble.databuddy:databuddy-1.16.4:${databuddy_version}")
 
     // Extras

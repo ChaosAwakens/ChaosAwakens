@@ -38,6 +38,6 @@ public class EnforceAssetsPacket implements ICAPacket {
     }
 
     private void setAnimMetadata() {
-        CADataLoaders.ANIMATION_DATA.setData(data);
+        CADataLoaders.ANIMATION_DATA.data = data;
     }
 }

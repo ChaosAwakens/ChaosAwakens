@@ -40,6 +40,7 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 	private final WrappedAnimationController<StinkBugEntity> mainController = createMainMappedController("stinkbugmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	public static final String STINK_BUG_MDF_NAME = "stink_bug";
 
 	public StinkBugEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -121,7 +122,12 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return STINK_BUG_MDF_NAME;
+	}
+
 	@Override
 	public boolean hurt(DamageSource damageSource, float damage) {
 		if (!damageSource.isMagic() && damageSource.getDirectEntity() instanceof LivingEntity) {

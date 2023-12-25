@@ -1,13 +1,15 @@
 {
-  "clientLoc": "chaosawakens:animations/creature/land/ant.animation.json",
-  "Idle": {
-    "animationName": "Idle",
-    "animationLength": 2.6,
-    "loopType": "LOOP"
-  },
-  "Walk": {
-    "animationName": "Walk",
-    "animationLength": 1.64,
-    "loopType": "LOOP"
-  }
+  "anim_file_loc": "chaosawakens:animations/creature/land/ant.animation.json",
+  "animations": [
+    {
+      "animation_name": "Walk",
+      "animation_length": 1.64,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 2.6,
+      "loop_type": "LOOP"
+    }
+  ]
 }

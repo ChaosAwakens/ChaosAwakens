@@ -40,6 +40,7 @@ public class RockFishEntity extends AnimatableGroupFishEntity {
 	private final WrappedAnimationController<RockFishEntity> mainController = createMainMappedController("rockfishmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
+	public static final String ROCK_FISH_MDF_NAME = "rock_fish";
 
 	public RockFishEntity(EntityType<? extends AbstractFishEntity> type, World world) {
 		super(type, world);
@@ -107,7 +108,12 @@ public class RockFishEntity extends AnimatableGroupFishEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ROCK_FISH_MDF_NAME;
+	}
+
 	@Override
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {

@@ -59,6 +59,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		return fireball;
 	};
 	private static final Vector3d projecileOffset = new Vector3d(2.0, 0.4, 2.0);
+	public static final String ROBO_SNIPER_MDF_NAME = "robo_sniper";
 	
 	public RoboSniperEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -153,6 +154,11 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return deathAnim;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ROBO_SNIPER_MDF_NAME;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -50,6 +50,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SMASH_ATTACK_ID = 2;
 	private final EntType entType;
+	public static final String ENT_MDF_NAME = "ent";
 
 	public EntEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -60,8 +61,6 @@ public class EntEntity extends AnimatableMonsterEntity {
 		super(type, worldIn);
 		this.entType = entType;
 	}
-
-
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
@@ -151,7 +150,12 @@ public class EntEntity extends AnimatableMonsterEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return deathAnim;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ENT_MDF_NAME;
+	}
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSource) {
 		return CASoundEvents.ENT_HURT.get();

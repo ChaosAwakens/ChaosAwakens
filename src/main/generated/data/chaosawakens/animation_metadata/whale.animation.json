@@ -1,13 +1,15 @@
 {
-  "clientLoc": "chaosawakens:animations/creature/water/whale.animation.json",
-  "Idle": {
-    "animationName": "Idle",
-    "animationLength": 3.52,
-    "loopType": "LOOP"
-  },
-  "Swim": {
-    "animationName": "Swim",
-    "animationLength": 3.52,
-    "loopType": "LOOP"
-  }
+  "anim_file_loc": "chaosawakens:animations/creature/water/whale.animation.json",
+  "animations": [
+    {
+      "animation_name": "Idle",
+      "animation_length": 3.52,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Swim",
+      "animation_length": 3.52,
+      "loop_type": "LOOP"
+    }
+  ]
 }

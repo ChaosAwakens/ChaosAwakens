@@ -50,6 +50,8 @@ public interface IAnimationBuilder {
 	Animation getAnimation();
 	
 	String getAnimationName();
+
+	String getDatapackFileName();
 	
 	/**
 	 * Gets the owner {@link WrappedAnimationController}'s {@link ExpandedAnimationState} while this {@code IAnimationBuilder} instance is running.

@@ -26,6 +26,7 @@ public class SparkFishEntity extends AnimatableGroupFishEntity {
 	private final WrappedAnimationController<SparkFishEntity> mainController = createMainMappedController("sparkfishmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
+	public static final String SPARK_FISH_MDF_NAME = "spark_fish";
 
 	public SparkFishEntity(EntityType<? extends AbstractFishEntity> type, World world) {
 		super(type, world);
@@ -71,6 +72,11 @@ public class SparkFishEntity extends AnimatableGroupFishEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return SPARK_FISH_MDF_NAME;
 	}
 
 	@Override

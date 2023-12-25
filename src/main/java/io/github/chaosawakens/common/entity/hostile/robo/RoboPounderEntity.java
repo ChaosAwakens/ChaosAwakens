@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -83,6 +84,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
     public static final byte GROUND_SLAM_ATTACK_ID = 5;
     public static final byte RAGE_RUN_ATTACK_ID = 6;
 	private final ObjectArrayList<LivingEntity> potentialDeadTargets = new ObjectArrayList<LivingEntity>();
+	public static final String ROBO_POUNDER_MDF_NAME = "robo_pounder";
 
 	public RoboPounderEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -527,13 +529,20 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
+	public String getOwnerMDFileName() {
+		return ROBO_POUNDER_MDF_NAME;
+	}
+
+	@Override
 	protected void handleBaseAnimations() {		
 		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), true);
 		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
 		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
 		
 		double attackSpeedMult = getHealth() <= 50.0F ? 1.25D : 1.0D;
-		double dashAttackSpeedMult = MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 8.4, 25.8) ? 1.125D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 25.8D, 31.6D) ? 0D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 31.6D, 58.4D) ? 0.9D : 0.76D;
+		double dashAttackSpeedMult = MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 7.6, 29.2) ? 1.325D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 29.2D, 35.6D) ? 0.02D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 35.6D, 58.4D) ? 2.0D : 0.76D;
+
+		ChaosAwakens.debug("Dash Anim Progress", "Multiplier: "+ dashAttackSpeedMult + ", Progress: " + dashAttackAnim.getWrappedAnimProgress());
 
 		leftPunchAnim.setAnimSpeed(attackSpeedMult);
 		rightPunchAnim.setAnimSpeed(attackSpeedMult);

@@ -46,6 +46,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
+	public static final String ENCHANTED_APPLE_COW_MDF_NAME = "apple_cow";
 	
 	public EnchantedGoldenAppleCowEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -182,7 +183,12 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ENCHANTED_APPLE_COW_MDF_NAME;
+	}
+
 	@Override
 	public void thunderHit(ServerWorld pLevel, LightningBoltEntity pLightning) {
 		if (!EntityUtil.convertEntity(this, CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), pLevel)) super.thunderHit(pLevel, pLightning);

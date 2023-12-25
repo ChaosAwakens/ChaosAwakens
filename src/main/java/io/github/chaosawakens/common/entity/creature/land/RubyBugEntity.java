@@ -29,6 +29,7 @@ public class RubyBugEntity extends AnimatableAnimalEntity {
 	private final WrappedAnimationController<RubyBugEntity> mainController = createMainMappedController("rubybugmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	public static final String RUBY_BUG_MDF_NAME = "ruby_bug";
 
 	public RubyBugEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -81,6 +82,11 @@ public class RubyBugEntity extends AnimatableAnimalEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return RUBY_BUG_MDF_NAME;
 	}
 
 	@Override

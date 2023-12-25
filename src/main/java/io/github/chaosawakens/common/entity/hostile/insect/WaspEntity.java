@@ -39,9 +39,10 @@ public class WaspEntity extends AnimatableMonsterEntity {
     private final ObjectArrayList<IAnimationBuilder> waspAnimations = new ObjectArrayList<IAnimationBuilder>(1);
     private final WrappedAnimationController<WaspEntity> mainController = createMainMappedController("waspmaincontroller");
     private final WrappedAnimationController<WaspEntity> attackController = createMappedController("waspattackcontroller", this::attackPredicate);
-    private final SingletonAnimationBuilder flyAnim = new SingletonAnimationBuilder(this, "fly", ILoopType.EDefaultLoopTypes.LOOP);
-    private final SingletonAnimationBuilder flyAttackAnim = new SingletonAnimationBuilder(this, "fly_attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+    private final SingletonAnimationBuilder flyAnim = new SingletonAnimationBuilder(this, "Fly", ILoopType.EDefaultLoopTypes.LOOP);
+    private final SingletonAnimationBuilder flyAttackAnim = new SingletonAnimationBuilder(this, "Pinch Attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
     private static final byte FLY_ATTACK_ID = 1;
+    public static final String WASP_MDF_NAME = "wasp";
 
     public WaspEntity(EntityType<? extends WaspEntity> entityType, World world) {
         super(entityType, world);
@@ -150,6 +151,12 @@ public class WaspEntity extends AnimatableMonsterEntity {
     public SingletonAnimationBuilder getDeathAnim() {
         return null;
     }
+
+    @Override
+    public String getOwnerMDFileName() {
+        return WASP_MDF_NAME;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public ObjectArrayList<WrappedAnimationController<WaspEntity>> getWrappedControllers() {

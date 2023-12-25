@@ -42,6 +42,7 @@ public class CrystalAppleCowEntity extends AnimatableAnimalEntity {
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
+	public static final String CRYSTAL_APPLE_COW_MDF_NAME = "apple_cow";
 
 	public CrystalAppleCowEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -172,7 +173,12 @@ public class CrystalAppleCowEntity extends AnimatableAnimalEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return CRYSTAL_APPLE_COW_MDF_NAME;
+	}
+
 	@Override
 	public void thunderHit(ServerWorld pLevel, LightningBoltEntity pLightning) {
 		if (!EntityUtil.convertEntity(this, CAEntityTypes.CRYSTAL_CARROT_PIG.get(), pLevel)) super.thunderHit(pLevel, pLightning);

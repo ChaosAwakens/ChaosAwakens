@@ -36,6 +36,7 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder gnawAnim = new SingletonAnimationBuilder(this, "Gnaw", EDefaultLoopTypes.LOOP);
+	public static final String BEAVER_MDF_NAME = "beaver";
 
 	public BeaverEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -110,6 +111,11 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return BEAVER_MDF_NAME;
 	}
 
 	@Override

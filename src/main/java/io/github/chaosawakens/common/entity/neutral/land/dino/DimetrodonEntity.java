@@ -53,6 +53,7 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(60, 120);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH, CAItems.GREEN_FISH.get(), CAItems.SPARK_FISH.get());
 	private static final byte BITE_ATTACK_ID = 1;
+	public static final String DIMETRODON_MDF_NAME = "dimetrodon";
 	
 	public DimetrodonEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -157,6 +158,11 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return DIMETRODON_MDF_NAME;
 	}
 
 	@Override

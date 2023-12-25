@@ -41,6 +41,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	private final SingletonAnimationBuilder leftUppercutAnim = new SingletonAnimationBuilder(this, "Left Uppercut Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rightUppercutAnim = new SingletonAnimationBuilder(this, "Right Uppercut Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte UPPERCUT_ATTACK_ID = 1;
+	public static final String ROBO_WARRIOR_MDF_NAME = "robo_warrior";
 	
 	public RoboWarriorEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -141,7 +142,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return deathAnim;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ROBO_WARRIOR_MDF_NAME;
+	}
+
 	@Override
 	protected void handleBaseAnimations() {
 		playAnimation(idleExtrasAnim, true);

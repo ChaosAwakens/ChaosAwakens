@@ -280,7 +280,12 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	public String getAnimationName() {
 		return curAnim != null ? curAnim.getAnimationName() : "None";
 	}
-	
+
+	@Override
+	public String getDatapackFileName() {
+		return null;
+	}
+
 	@Override
 	public Animation getAnimation() {
 		return owner.getModel().getAnimation(curAnim.getAnimationName(), owner);

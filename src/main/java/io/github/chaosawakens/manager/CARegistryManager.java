@@ -32,7 +32,5 @@ public class CARegistryManager {
 		CAFoliagePlacerTypes.FOLIAGE_PLACER_TYPES.register(modBus);
 		CATreeDecoratorTypes.TREE_DECORATOR_TYPES.register(modBus);
 		CASurfaceBuilders.SURFACE_BUILDERS.register(modBus);
-
-		CADataLoaders.ANIMATION_DATA.subscribeAsSyncable(CANetworkManager.CHANNEL, EnforceAssetsPacket::new);
 	}
 }

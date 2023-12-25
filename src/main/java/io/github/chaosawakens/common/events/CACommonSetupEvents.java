@@ -316,6 +316,7 @@ public class CACommonSetupEvents {
 					new CAIngredientTrade(4, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_EPIC), 1), 3, 40));
 		}
 
+		@SubscribeEvent
 		public static void onAddReloadListenerEvent(AddReloadListenerEvent event) {
 			event.addListener(CADataLoaders.ANIMATION_DATA);
 		}

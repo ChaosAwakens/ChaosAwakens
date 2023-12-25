@@ -35,6 +35,7 @@ import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
@@ -109,7 +110,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
  * name collisions, e.g. using "blockholdermod/block_holders" as the folder name would result in a json with the
  * id "bananas:banana_block" to be located at data/bananas/blockholdermod/block_holders/some_json.json</p>
  */
-public class CodecJsonDataManager<T> extends JsonReloadListener //TODO Copied/overriden to access data field
+public class CodecJsonDataManager<T> extends JsonReloadListener
 {
     // default gson if unspecified
     private static final Gson STANDARD_GSON = new Gson();
@@ -123,7 +124,7 @@ public class CodecJsonDataManager<T> extends JsonReloadListener //TODO Copied/ov
     private final String folderName;
 
     /** The raw data that we parsed from json last time resources were reloaded **/
-    protected Map<ResourceLocation, T> data = new HashMap<>();
+    public Map<ResourceLocation, T> data = new HashMap<>();
     private Optional<Runnable> syncOnReloadCallback = Optional.empty();
 
     /**
@@ -168,10 +169,6 @@ public class CodecJsonDataManager<T> extends JsonReloadListener //TODO Copied/ov
         return this.data.get(id);
     }
 
-    public void setData(Map<ResourceLocation, T> data) {
-        this.data = data;
-    }
-
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> jsons, IResourceManager resourceManager, IProfiler profiler)
     {
@@ -185,7 +182,7 @@ public class CodecJsonDataManager<T> extends JsonReloadListener //TODO Copied/ov
         {
             LogicalSidedProvider.INSTANCE.get(LogicalSide.SERVER);
         }
-        catch(NullPointerException e)
+        catch(NullPointerException | IllegalStateException e)
         {
             isServer = false;
         }
@@ -247,3 +244,4 @@ public class CodecJsonDataManager<T> extends JsonReloadListener //TODO Copied/ov
         };
     }
 }
+

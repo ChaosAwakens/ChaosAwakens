@@ -54,6 +54,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private final SingletonAnimationBuilder munchAnim = new SingletonAnimationBuilder(this, "Munch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte RAM_ATTACK_ID = 1;
 	private static final byte MUNCH_ATTACK_ID = 2;
+	public static final String HERCULES_BEETLE_MDF_NAME = "hercules_beetle";
 	
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -292,7 +293,12 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return deathAnim;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return HERCULES_BEETLE_MDF_NAME;
+	}
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource pDamageSource) {
 		return CASoundEvents.HERCULES_BEETLE_HURT.get();

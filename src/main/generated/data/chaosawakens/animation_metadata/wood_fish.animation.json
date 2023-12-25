@@ -1,18 +1,20 @@
 {
-  "clientLoc": "chaosawakens:animations/creature/water/fish/wood_fish.animation.json",
-  "Idle": {
-    "animationName": "Idle",
-    "animationLength": 1.8,
-    "loopType": "LOOP"
-  },
-  "Swim": {
-    "animationName": "Swim",
-    "animationLength": 1.8,
-    "loopType": "LOOP"
-  },
-  "Flop": {
-    "animationName": "Flop",
-    "animationLength": 1.8,
-    "loopType": "LOOP"
-  }
+  "anim_file_loc": "chaosawakens:animations/creature/water/fish/wood_fish.animation.json",
+  "animations": [
+    {
+      "animation_name": "Swim",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Flop",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    }
+  ]
 }

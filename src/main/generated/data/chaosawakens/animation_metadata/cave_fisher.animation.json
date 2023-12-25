@@ -1,38 +1,40 @@
 {
-  "clientLoc": "chaosawakens:animations/hostile/insect/cave_fisher.animation.json",
-  "Climb": {
-    "animationName": "Climb",
-    "animationLength": 1.24,
-    "loopType": "LOOP"
-  },
-  "Walk": {
-    "animationName": "Walk",
-    "animationLength": 1.24,
-    "loopType": "LOOP"
-  },
-  "Inverse Idle": {
-    "animationName": "Inverse Idle",
-    "animationLength": 2.08,
-    "loopType": "LOOP"
-  },
-  "Pinch Attack": {
-    "animationName": "Pinch Attack",
-    "animationLength": 2.08,
-    "loopType": "PLAY_ONCE"
-  },
-  "Walk Attack": {
-    "animationName": "Walk Attack",
-    "animationLength": 1.24,
-    "loopType": "LOOP"
-  },
-  "Idle": {
-    "animationName": "Idle",
-    "animationLength": 2.08,
-    "loopType": "LOOP"
-  },
-  "Inverse Walk": {
-    "animationName": "Inverse Walk",
-    "animationLength": 1.24,
-    "loopType": "LOOP"
-  }
+  "anim_file_loc": "chaosawakens:animations/hostile/insect/cave_fisher.animation.json",
+  "animations": [
+    {
+      "animation_name": "Climb",
+      "animation_length": 1.24,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Walk",
+      "animation_length": 1.24,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Inverse Idle",
+      "animation_length": 2.08,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 2.08,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Inverse Walk",
+      "animation_length": 1.24,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Pinch Attack",
+      "animation_length": 2.08,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Walk Attack",
+      "animation_length": 1.24,
+      "loop_type": "LOOP"
+    }
+  ]
 }

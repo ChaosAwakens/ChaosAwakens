@@ -66,6 +66,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private static final byte PUNCH_ATTACK_ID = 1;
 	private static final byte SMASH_ATTACK_ID = 2;
 	private static final byte LEAP_ATTACK_ID = 3;
+	public static final String ROBO_JEFFERY_MDF_NAME = "robo_jeffery";
 
 	public RoboJefferyEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -232,6 +233,11 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return deathAnim;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ROBO_JEFFERY_MDF_NAME;
 	}
 
 	@SuppressWarnings("unchecked")

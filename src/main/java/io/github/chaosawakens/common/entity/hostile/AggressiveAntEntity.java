@@ -36,6 +36,7 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final BooleanValue tpConfig;
 	private final RegistryKey<World> targetDimension;
+	public static final String AGGRESSIVE_ANT_MDF_NAME = "ant";
 
 	public AggressiveAntEntity(EntityType<? extends MonsterEntity> type, World worldIn, BooleanValue tpConfig, RegistryKey<World> targetDimension) {
 		super(type, worldIn);
@@ -101,7 +102,12 @@ public class AggressiveAntEntity extends AnimatableMonsterEntity implements ITel
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return AGGRESSIVE_ANT_MDF_NAME;
+	}
+
 	@Override
 	protected boolean shouldDropExperience() {
 		return false;

@@ -1,23 +1,25 @@
 {
-  "clientLoc": "chaosawakens:animations/neutral/land/gator.animation.json",
-  "Walk": {
-    "animationName": "Walk",
-    "animationLength": 1.8,
-    "loopType": "LOOP"
-  },
-  "Bite Attack": {
-    "animationName": "Bite Attack",
-    "animationLength": 0.56,
-    "loopType": "PLAY_ONCE"
-  },
-  "Idle": {
-    "animationName": "Idle",
-    "animationLength": 3.56,
-    "loopType": "LOOP"
-  },
-  "Swim": {
-    "animationName": "Swim",
-    "animationLength": 1.8,
-    "loopType": "LOOP"
-  }
+  "anim_file_loc": "chaosawakens:animations/neutral/land/gator.animation.json",
+  "animations": [
+    {
+      "animation_name": "Bite Attack",
+      "animation_length": 0.56,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Walk",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Swim",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 3.56,
+      "loop_type": "LOOP"
+    }
+  ]
 }

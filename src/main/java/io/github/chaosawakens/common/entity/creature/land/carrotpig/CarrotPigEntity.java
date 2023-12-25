@@ -40,6 +40,7 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.POTATO, Items.BEETROOT);
+	public static final String CARROT_PIG_MDF_NAME = "carrot_pig";
 
 	public CarrotPigEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -99,7 +100,12 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return CARROT_PIG_MDF_NAME;
+	}
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.PIG_AMBIENT;

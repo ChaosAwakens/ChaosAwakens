@@ -37,6 +37,7 @@ public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob 
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final BooleanValue tpConfig;
 	private final RegistryKey<World> targetDimension;
+	public static final String ANT_MDF_NAME = "ant";
 
 	public AntEntity(EntityType<? extends AnimalEntity> type, World world, BooleanValue tpConfig, RegistryKey<World> targetDimension) {
 		super(type, world);
@@ -90,6 +91,11 @@ public class AntEntity extends AnimatableAnimalEntity implements ITeleporterMob 
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return ANT_MDF_NAME;
 	}
 
 	@Override

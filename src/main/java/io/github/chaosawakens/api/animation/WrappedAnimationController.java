@@ -1,5 +1,6 @@
 package io.github.chaosawakens.api.animation;
 
+import io.github.chaosawakens.common.codec.assets.AnimationDataCodec;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationFunctionalProgressPacket;
 import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.entity.Entity;
@@ -7,17 +8,22 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.builder.Animation;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.keyframe.BoneAnimation;
+import software.bernie.geckolib3.util.AnimationUtils;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected E animatable;
 	protected String name;
-	protected ExpandedAnimationState animationState = ExpandedAnimationState.FINISHED;	
+	protected ExpandedAnimationState animationState = ExpandedAnimationState.FINISHED;
+	protected ILoopType curAnimLoopType = EDefaultLoopTypes.PLAY_ONCE;
 	protected Animation currentAnimation = none();
+	protected IAnimationBuilder currentAnimationBuilder;
 	protected double transitionLength;
 	protected double transitionProgress = 0;
 	protected double animationLength;
@@ -61,7 +67,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		case RUNNING:
 			if (this.animationProgress >= this.animationLength) {
 				this.animationProgress = 0;
-				if (this.currentAnimation.loop == EDefaultLoopTypes.LOOP) {
+				if (this.curAnimLoopType == EDefaultLoopTypes.LOOP) {
 					this.animationProgress = 0;
 					this.animationState = ExpandedAnimationState.TRANSITIONING;
 				} else {
@@ -77,16 +83,20 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
         }
 	}
 	
-	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {		
+	public void playAnimation(IAnimationBuilder builder, boolean clearCache) {
+		Optional<AnimationDataCodec.AnimationMetadataCodec> animatableMetadata = animatable.getSidedMetadataFor(builder.getAnimationName());
+
 		if (builder != null && !getCurrentAnimation().animationName.equals(builder.getAnimationName()) || clearCache) {
 			builder.playAnimation(clearCache);
-			
+
 			this.animationProgress = 0;
-			this.animationLength = builder.getAnimation().animationLength;
+			this.animationLength = Optional.ofNullable(AnimationUtils.convertSecondsToTicks(animatableMetadata.get().getAnimationLength())).orElse(0.0D);
+			this.curAnimLoopType = Optional.ofNullable(animatableMetadata.get().getLoopType()).orElse(EDefaultLoopTypes.PLAY_ONCE);
 			this.transitionProgress = 0;
 			this.animationState = ExpandedAnimationState.TRANSITIONING;
 			this.animSpeedMultiplier = builder.getWrappedAnimSpeed();
-			
+
+			this.currentAnimationBuilder = builder;
 			this.currentAnimation = builder.getAnimation();
 			this.controller.setAnimation(builder.getBuilder());
 			this.controller.setAnimationSpeed(animSpeedMultiplier);
@@ -97,10 +107,12 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 		targetAnim.stopAnimation();
 		
 		this.animationProgress = 0;
+		this.curAnimLoopType = EDefaultLoopTypes.PLAY_ONCE;
 		this.animationLength = 0;
 		this.transitionProgress = 0;
 		this.animationState = ExpandedAnimationState.FINISHED;
 		this.currentAnimation = none();
+		this.currentAnimationBuilder = null;
 		
 		this.controller.setAnimation(null);
 	}

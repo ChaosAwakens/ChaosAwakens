@@ -37,6 +37,7 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder jumpAnim = new SingletonAnimationBuilder(this, "Jump", EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder blinkAnim = new SingletonAnimationBuilder(this, "Blink", random.nextInt(3)).setWrappedController(ambienceController);
+	public static final String TREE_FROG_MDF_NAME = "tree_frog";
 
 	public TreeFrogEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -122,7 +123,12 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return TREE_FROG_MDF_NAME;
+	}
+
 	@Override
 	public void aiStep() {
 		super.aiStep();

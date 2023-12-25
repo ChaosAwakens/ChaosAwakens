@@ -37,6 +37,7 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	private final WrappedAnimationController<WhaleEntity> mainController = createMainMappedController("whalemaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
+	public static final String WHALE_MDF_NAME = "whale";
 	
 	public WhaleEntity(EntityType<? extends WaterMobEntity> type, World world) {
 		super(type, world);
@@ -100,7 +101,12 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
 	}
-	
+
+	@Override
+	public String getOwnerMDFileName() {
+		return WHALE_MDF_NAME;
+	}
+
 	@Override
 	public int getMaxAirSupply() {
 		return 5000;

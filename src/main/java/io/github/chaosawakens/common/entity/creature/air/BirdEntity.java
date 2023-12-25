@@ -61,6 +61,7 @@ public class BirdEntity extends AnimatableAnimalEntity {
     private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", ILoopType.EDefaultLoopTypes.LOOP);
     private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(BirdEntity.class, DataSerializers.INT);
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, CAItems.LETTUCE_SEEDS.get(), CAItems.CORN_SEEDS.get(), CAItems.RADISH_SEEDS.get(), CAItems.STRAWBERRY_SEEDS.get(), CAItems.TOMATO_SEEDS.get());
+    public static final String BIRD_MDF_NAME = "bird";
 
     public BirdEntity(EntityType<? extends AnimalEntity> type, World world) {
         super(type, world);
@@ -214,6 +215,11 @@ public class BirdEntity extends AnimatableAnimalEntity {
     @Override
     public IAnimationBuilder getDeathAnim() {
         return null;
+    }
+
+    @Override
+    public String getOwnerMDFileName() {
+        return BIRD_MDF_NAME;
     }
 
     @Nullable

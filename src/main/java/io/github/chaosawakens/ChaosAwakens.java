@@ -1,7 +1,10 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.common.network.packets.s2c.EnforceAssetsPacket;
+import io.github.chaosawakens.common.registry.CADataLoaders;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import io.github.chaosawakens.manager.CAModManager;
+import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,6 +49,8 @@ public class ChaosAwakens {
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		
 		CAModManager.registerAll(modBus, forgeBus);
+
+		CADataLoaders.ANIMATION_DATA.subscribeAsSyncable(CANetworkManager.CHANNEL, EnforceAssetsPacket::new);
 	}
 
 	public static final ResourceLocation prefix(String name) {

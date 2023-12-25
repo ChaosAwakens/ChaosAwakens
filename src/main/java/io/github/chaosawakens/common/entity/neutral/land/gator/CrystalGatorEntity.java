@@ -57,6 +57,7 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(40, 80);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH);
 	private static final byte BITE_ATTACK_ID = 1;
+	public static final String CRYSTAL_GATOR_MDF_NAME = "gator";
 	
 	public CrystalGatorEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -151,6 +152,11 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 	@Override
 	public SingletonAnimationBuilder getDeathAnim() {
 		return null;
+	}
+
+	@Override
+	public String getOwnerMDFileName() {
+		return CRYSTAL_GATOR_MDF_NAME;
 	}
 
 	@Override

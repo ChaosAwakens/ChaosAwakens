@@ -24,18 +24,21 @@ public class AnimationMetadataBuilder {
 
     public JsonObject serialize() {
         JsonObject animJsonObj = new JsonObject();
+        JsonArray actualAnimDataArray = new JsonArray();
 
-        animJsonObj.addProperty("clientLoc", this.clientLoc.toString());
+        animJsonObj.addProperty("anim_file_loc", this.clientLoc.toString());
 
         for (AnimationDataHolder heldAnim : storedAnims) {
             JsonObject animDataArray = new JsonObject();
 
-            animDataArray.addProperty("animationName", heldAnim.getAnimationName());
-            animDataArray.addProperty("animationLength", heldAnim.getAnimationLength());
-            animDataArray.addProperty("loopType", ((ILoopType.EDefaultLoopTypes) heldAnim.getLoopType()).toString());
+            animDataArray.addProperty("animation_name", heldAnim.getAnimationName());
+            animDataArray.addProperty("animation_length", heldAnim.getAnimationLength());
+            animDataArray.addProperty("loop_type", ((ILoopType.EDefaultLoopTypes) heldAnim.getLoopType()).toString());
 
-            animJsonObj.add(heldAnim.getAnimationName(), animDataArray);
+            actualAnimDataArray.add(animDataArray);
         }
+
+        animJsonObj.add("animations", actualAnimDataArray);
 
         return animJsonObj;
     }
