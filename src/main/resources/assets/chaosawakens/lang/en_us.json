@@ -1408,7 +1408,9 @@
 	
 	"item.chaosawakens.jeffery_core": "Jeffery Core",
 	
-	"misc.chaosawakens.empty_inventory": "Empty inventory required to acces Crystalworld!",
+	"misc.chaosawakens.empty_inventory": "Empty inventory required to access Crystalworld!",
+	"misc.chaosawakens.empty_curios": "Empty curios slots required to access Crystalworld!",
+	"misc.chaosawakens.wearing_backpack": "You may not wear a traveler's backpack when entering trying to access Crystalworld!",
 	"misc.chaosawakens.inaccessible_dimension": "This dimension hasn't been added to the mod yet!",
 
 	"subtitles.chaosawakens.entity.emerald_gator.attack": "Emerald Gator bites",

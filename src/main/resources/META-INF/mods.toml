@@ -118,6 +118,13 @@ configBackground="chaosawakens:textures/gui/advancement_bg.png"
 	side="BOTH"
 
 [[dependencies.chaosawakens]]
+	modId="travelersbackpack"
+	mandatory=false
+	versionRange="[5.4.45,]"
+	ordering="AFTER"
+	side="BOTH"
+
+[[dependencies.chaosawakens]]
 	modId="datafixerslayer"
 	mandatory=false
 	versionRange="[1.0-3,]"

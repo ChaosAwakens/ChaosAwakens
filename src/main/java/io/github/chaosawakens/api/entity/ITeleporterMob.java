@@ -1,5 +1,6 @@
 package io.github.chaosawakens.api.entity;
 
+import com.tiviacz.travelersbackpack.capability.CapabilityUtils;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.HeightmapTeleporter;
 import io.github.chaosawakens.common.registry.CADimensions;
@@ -17,9 +18,12 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.fml.ModList;
 
 public interface ITeleporterMob {
 	TranslationTextComponent EMPTY_INVENTORY_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_inventory");
+	TranslationTextComponent EMPTY_CURIOS_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".empty_curios");
+	TranslationTextComponent WEARING_BACKPACK_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".wearing_backpack");
 	TranslationTextComponent INACCESSIBLE_MESSAGE = new TranslationTextComponent("misc." + ChaosAwakens.MODID + ".inaccessible_dimension");
 
 	default ActionResultType handleDimensionTeleporting(PlayerEntity playerIn, Hand hand, World level, BooleanValue tpConfig, RegistryKey<World> targetDimension) {
@@ -28,13 +32,20 @@ public interface ITeleporterMob {
 		if (!tpConfig.get() || level.isClientSide || heldStack.getItem() != Items.AIR) return ActionResultType.PASS;
 
 		boolean requireEmptyInventory = CAConfigManager.MAIN_COMMON.crystalWorldRequiresEmptyInventory.get();
-		boolean hasEmptyInventory = playerIn.inventory.isEmpty() && EntityUtil.areCuriosSlotsEmpty(playerIn);
+		boolean isWearingTravelersBackpack = ModList.get().isLoaded("travelersbackpack") ? !CapabilityUtils.isWearingBackpack(playerIn) : true;
+		boolean hasEmptyInventory = playerIn.inventory.isEmpty() && EntityUtil.areCuriosSlotsEmpty(playerIn) && isWearingTravelersBackpack;
 		boolean isCreative = playerIn.isCreative();
 		boolean canTeleport = targetDimension != null;
 
 		if (requireEmptyInventory && level.dimension() != CADimensions.CRYSTAL_WORLD && targetDimension == CADimensions.CRYSTAL_WORLD) {
 			if (!hasEmptyInventory && !isCreative) {
-				playerIn.displayClientMessage(EMPTY_INVENTORY_MESSAGE, true);
+				if (!playerIn.inventory.isEmpty()) {
+					playerIn.displayClientMessage(EMPTY_INVENTORY_MESSAGE, true);
+				} else if (!EntityUtil.areCuriosSlotsEmpty(playerIn)) {
+					playerIn.displayClientMessage(EMPTY_CURIOS_MESSAGE, true);
+				} else if (!isWearingTravelersBackpack) {
+					playerIn.displayClientMessage(WEARING_BACKPACK_MESSAGE, true);
+				}
 				return ActionResultType.PASS;
 			}
 		} else if (!canTeleport) {

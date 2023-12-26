@@ -146,8 +146,9 @@ dependencies {
 	implementation fg.deobf("curse.maven:mob-battle-mod-268746:3815712")
 	implementation fg.deobf("curse.maven:citadel-331936:3441028")
 	runtimeOnly fg.deobf("curse.maven:l_ender-s-cataclysm-551586:${cataclysm_version}")
-	
+
 	compileOnly fg.deobf("curse.maven:curios-309927:${curios_version}")
+	compileOnly fg.deobf("curse.maven:travelers-backpack-321117:${travelersbackpack_version}")
 
 	implementation fg.deobf("curse.maven:worldedit-225608:${worldedit_version}")
 	
