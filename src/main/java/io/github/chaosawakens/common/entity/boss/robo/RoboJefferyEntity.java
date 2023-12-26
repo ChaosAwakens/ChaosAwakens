@@ -108,7 +108,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		return isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatableEntity> PlayState secondaryAmbiencePredicate(AnimationEvent<E> event) {

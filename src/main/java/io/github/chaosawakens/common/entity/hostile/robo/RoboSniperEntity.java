@@ -36,11 +36,13 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> roboSniperAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RoboSniperEntity> mainController = createMainMappedController("robosnipermaincontroller");
+	private final WrappedAnimationController<RoboSniperEntity> attackController = createMappedController("robosniperattackcontroller", this::attackPredicate);
+	private final WrappedAnimationController<RoboSniperEntity> ambienceController = createMappedController("robosniperambiencecontroller", this::ambiencePredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Accelerate", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder shootAnim = new SingletonAnimationBuilder(this, "Shoot Attack", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder shootAnim = new SingletonAnimationBuilder(this, "Shoot Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte SHOOT_ATTACK_ID = 1;
 	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> projectileFactory = (owner, offset) -> {
 		LivingEntity target = owner.getTarget();
@@ -107,9 +109,15 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isAttacking() && getAttackID() == SHOOT_ATTACK_ID && !isDeadOrDying())
-			playAnimation(shootAnim, false);
 		return PlayState.CONTINUE;
+	}
+
+	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
+		return PlayState.CONTINUE;
+	}
+
+	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
+		return isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	@Override
