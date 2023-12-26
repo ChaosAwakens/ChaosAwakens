@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"misc.idle": {
+		"Idle": {
 			"loop": true,
 			"animation_length": 3.52,
 			"anim_time_update": "0",
@@ -148,7 +148,7 @@
 				}
 			}
 		},
-		"misc.death": {
+		"Death": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.76,
 			"anim_time_update": "0",
@@ -675,7 +675,7 @@
 				}
 			}
 		},
-		"movement.walk": {
+		"Walk": {
 			"loop": true,
 			"animation_length": 1.8,
 			"anim_time_update": "0",
@@ -803,7 +803,7 @@
 				}
 			}
 		},
-		"movement.fling_upwards": {
+		"Leap": {
 			"loop": true,
 			"animation_length": 2.76,
 			"anim_time_update": "0",
@@ -1290,7 +1290,7 @@
 				}
 			}
 		},
-		"movement.fly": {
+		"Fly": {
 			"loop": true,
 			"animation_length": 1.8,
 			"anim_time_update": "0",
@@ -1477,7 +1477,7 @@
 				}
 			}
 		},
-		"attack.ram": {
+		"Ram Attack": {
 			"animation_length": 1.16,
 			"anim_time_update": "0",
 			"blend_weight": "1",
@@ -2132,7 +2132,7 @@
 				}
 			}
 		},
-		"attack.grab": {
+		"Grab": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.64,
 			"anim_time_update": "0",
@@ -2267,7 +2267,7 @@
 				}
 			}
 		},
-		"attack.munch": {
+		"Munch Attack": {
 			"loop": true,
 			"animation_length": 1.8,
 			"anim_time_update": "0",
@@ -2326,7 +2326,7 @@
 				}
 			}
 		},
-		"attack.body_slam": {
+		"Body Slam Attack": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 2.08,
 			"anim_time_update": "0",
@@ -2693,7 +2693,7 @@
 				}
 			}
 		},
-		"attack.body_slam_hit_theground": {
+		"Ground Slam": {
 			"animation_length": 0.44,
 			"anim_time_update": "0",
 			"blend_weight": "1",
@@ -2946,7 +2946,7 @@
 				}
 			}
 		},
-		"misc.sleeping": {
+		"Docile": {
 			"loop": true,
 			"animation_length": 14.32,
 			"anim_time_update": "0",
@@ -3422,7 +3422,7 @@
 				}
 			}
 		},
-		"misc.disturbed": {
+		"Awaken": {
 			"loop": true,
 			"animation_length": 7.28,
 			"anim_time_update": "0",
@@ -4389,7 +4389,7 @@
 				}
 			}
 		},
-		"misc.defensive_mechanism": {
+		"Flail Flap": {
 			"animation_length": 3.88,
 			"anim_time_update": "0",
 			"blend_weight": "1",
