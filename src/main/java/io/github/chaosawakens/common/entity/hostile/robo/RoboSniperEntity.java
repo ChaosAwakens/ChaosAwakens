@@ -36,11 +36,11 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> roboSniperAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RoboSniperEntity> mainController = createMainMappedController("robosnipermaincontroller");
-	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder idleAnim2 = new SingletonAnimationBuilder(this, "idle2", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "drive", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "death", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder shootAnim = new SingletonAnimationBuilder(this, "shoot", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Accelerate", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder shootAnim = new SingletonAnimationBuilder(this, "Shoot Attack", EDefaultLoopTypes.PLAY_ONCE);
 	private static final byte SHOOT_ATTACK_ID = 1;
 	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> projectileFactory = (owner, offset) -> {
 		LivingEntity target = owner.getTarget();

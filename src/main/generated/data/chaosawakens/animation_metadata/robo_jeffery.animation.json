@@ -7,22 +7,12 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Death",
-      "animation_length": 9.5,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Smash Attack",
-      "animation_length": 3.0,
+      "animation_name": "Left Punch Attack",
+      "animation_length": 1.7,
       "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Healthy",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Idle Extras",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -32,12 +22,22 @@
       "loop_type": "PLAY_ONCE"
     },
     {
+      "animation_name": "Death",
+      "animation_length": 9.5,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
       "animation_name": "Leap Attack: Midair",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
+      "animation_name": "Smash Attack",
+      "animation_length": 3.0,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Walk",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -47,22 +47,22 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Right Punch Attack",
-      "animation_length": 1.7,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Walk",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Leap Attack: Leap",
       "animation_length": 0.79167,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Left Punch Attack",
+      "animation_name": "Idle",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle Extras",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Right Punch Attack",
       "animation_length": 1.7,
       "loop_type": "PLAY_ONCE"
     }
