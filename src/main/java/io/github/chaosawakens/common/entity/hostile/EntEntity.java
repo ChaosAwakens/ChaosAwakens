@@ -110,9 +110,9 @@ public class EntEntity extends AnimatableMonsterEntity {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 20.5D, 22.4D, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 1, 18, 60));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 2, 10, 45));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 4, 2, 35));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 1, 18, false, false, true, 60));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 2, 10, false, false, true, 45));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.4D, 5.0D, 4, 2, false, false, true, 35));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, SheepEntity.class, false));

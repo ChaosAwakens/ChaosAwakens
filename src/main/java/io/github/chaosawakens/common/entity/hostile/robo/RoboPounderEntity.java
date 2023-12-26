@@ -542,8 +542,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		double attackSpeedMult = getHealth() <= 50.0F ? 1.25D : 1.0D;
 		double dashAttackSpeedMult = MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 7.6, 29.2) ? 1.325D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 29.2D, 35.6D) ? 0.02D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 35.6D, 58.4D) ? 2.0D : 0.76D;
 
-		ChaosAwakens.debug("Dash Anim Progress", "Multiplier: "+ dashAttackSpeedMult + ", Progress: " + dashAttackAnim.getWrappedAnimProgress());
-
 		leftPunchAnim.setAnimSpeed(attackSpeedMult);
 		rightPunchAnim.setAnimSpeed(attackSpeedMult);
 		leftSwingAnim.setAnimSpeed(attackSpeedMult);

@@ -12,6 +12,7 @@ import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -333,6 +334,33 @@ public final class EnumUtil {
 		ORE_COMMON,
 		FOSSIL,
 		NONE
+	}
+
+	// Blocks
+	public enum WireDirection implements IStringSerializable {
+		DEFAULT("default"),
+		SIDE_VERTICAL("side_vertical"),
+		SIDE_HORIZONTAL("side_horizontal");
+
+		private final String name;
+
+		WireDirection(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String getSerializedName() {
+			return name;
+		}
+
+		@Override
+		public String toString() {
+			return getSerializedName();
+		}
+
+		public boolean hasConnection() {
+			return this != DEFAULT;
+		}
 	}
 
 	// Misc
