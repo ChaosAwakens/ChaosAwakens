@@ -2,14 +2,14 @@
   "anim_file_loc": "chaosawakens:animations/hostile/insect/wasp.animation.json",
   "animations": [
     {
-      "animation_name": "Fly",
-      "animation_length": 1.56,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Pinch Attack",
       "animation_length": 1.72,
       "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Fly",
+      "animation_length": 1.56,
+      "loop_type": "LOOP"
     }
   ]
 }

@@ -44,14 +44,14 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 	private final WrappedAnimationController<HerculesBeetleEntity> mainController = createMainMappedController("herculesbeetlemaincontroller");
 	private final WrappedAnimationController<HerculesBeetleEntity> attackController = createMappedController("herculesbeetleattackcontroller", this::attackPredicate);
 	private final WrappedAnimationController<HerculesBeetleEntity> deathController = createMappedController("herculesbeetledeathcontroller", this::deathPredicate);
-	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(deathController);
-	private final SingletonAnimationBuilder docileAnim = new SingletonAnimationBuilder(this, "Docile", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder awakeningAnim = new SingletonAnimationBuilder(this, "Awaken", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder ramAnim = new SingletonAnimationBuilder(this, "Ram", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
-	private final SingletonAnimationBuilder grabAnim = new SingletonAnimationBuilder(this, "Grab", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
-	private final SingletonAnimationBuilder munchAnim = new SingletonAnimationBuilder(this, "Munch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "misc.idle", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "movement.walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "misc.death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(deathController);
+	private final SingletonAnimationBuilder docileAnim = new SingletonAnimationBuilder(this, "misc.sleeping", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder awakeningAnim = new SingletonAnimationBuilder(this, "misc.disturbed", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder ramAnim = new SingletonAnimationBuilder(this, "attack.ram", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder grabAnim = new SingletonAnimationBuilder(this, "attack.grab", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder munchAnim = new SingletonAnimationBuilder(this, "attack.munch", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final byte RAM_ATTACK_ID = 1;
 	private static final byte MUNCH_ATTACK_ID = 2;
 	public static final String HERCULES_BEETLE_MDF_NAME = "hercules_beetle";
@@ -85,8 +85,8 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isDocile() && !isAttacking()) playAnimation(docileAnim, false);
-		if (isAwakening()) playAnimation(awakeningAnim, false);
+		if (isDocile() && !isAttacking()) playAnimation(docileAnim, true);
+		if (isAwakening()) playAnimation(awakeningAnim, true);
 		return PlayState.CONTINUE;
 	}
 	

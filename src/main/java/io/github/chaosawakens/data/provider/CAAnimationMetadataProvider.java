@@ -1,24 +1,12 @@
 package io.github.chaosawakens.data.provider;
 
 import com.google.common.collect.Lists;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.AnimationDataHolder;
-import io.github.chaosawakens.common.util.FileUtil;
 import io.github.chaosawakens.data.builder.provider.AnimationMetadataProvider;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.minecraft.client.Minecraft;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.IReloadableResourceManager;
 import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.file.AnimationFile;
-import software.bernie.geckolib3.file.AnimationFileLoader;
-import software.bernie.geckolib3.resource.GeckoLibCache;
-import software.bernie.shadowed.eliotlash.molang.MolangParser;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * TODO DISCLAIMER: THIS DATAPACKING SYSTEM IS VERY INEFFICIENT AND WILL NOT BE USED IN VERSIONS 1.20.1+ (Since we'd depend on the up n coming EEL by then). 1.19 WILL
@@ -34,18 +22,19 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
     protected void initializeAnimMetadata() { //TODO Automation doesn't work cuz Minecraft's Resource Manager doesn't exist on the server :p
         // Boss/Miniboss
         createAnimationMetadata(ChaosAwakens.prefix("animations/boss/miniboss/hercules_beetle.animation.json"), Lists.newArrayList(
-                new AnimationDataHolder("Idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Death", 1.76D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Leap", 2.76D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Hover", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Ram", 1.16D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Grab", 0.64D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Munch", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Descend", 10.08D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Ground Slam", 2.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Docile", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Awaken", 7.28D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+                new AnimationDataHolder("misc.idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("misc.death", 0.76D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("movement.walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("movement.fling_upwards", 2.76D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("movement.fly", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("attack.ram", 1.16D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("attack.grab", 0.64D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("attack.munch", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("attack.body_slam", 2.08D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("attack.body_slam_hit_theground", 0.44D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("misc.sleeping", 14.32D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("misc.disturbed", 7.28D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("misc.defensive_mechanism", 3.88D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Boss/Robo
         createAnimationMetadata(ChaosAwakens.prefix("animations/boss/robo/robo_jeffery.animation.json"), Lists.newArrayList( //TODO Only apply max double value (1.7976931348623157E308) to looping anims with no predefined length, as that's what they default to in Geckolib3
@@ -183,11 +172,11 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Pose 1", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Pose 2", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/robo/robo_sniper.animation.json"), Lists.newArrayList(
-                new AnimationDataHolder("Walk", 2.08D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Accelerate", 2.08D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Shoot", 1.2D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Idle", 3.12D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Death", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+        		new AnimationDataHolder("idle", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("idle2", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("drive", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("shoot", 0.64D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("death", 0.84D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/robo/robo_warrior.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 3.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),

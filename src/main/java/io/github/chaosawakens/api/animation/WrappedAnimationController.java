@@ -78,7 +78,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			}
 			break;
 		case STOPPED:
-            case FINISHED:
+		case FINISHED:
                 break;
         }
 	}

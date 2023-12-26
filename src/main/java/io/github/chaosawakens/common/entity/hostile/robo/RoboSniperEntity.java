@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
+import java.util.function.BiFunction;
+
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -7,7 +9,10 @@ import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableShootGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
@@ -19,9 +24,6 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
@@ -29,19 +31,16 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.function.BiFunction;
-
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> roboSniperAnimations = new ObjectArrayList<IAnimationBuilder>(1);
-	private static final DataParameter<Boolean> AVOIDING = EntityDataManager.defineId(RoboSniperEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<RoboSniperEntity> mainController = createMainMappedController("robosnipermaincontroller");
-	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Accelerate", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
-	private final SingletonAnimationBuilder shootAnim = new SingletonAnimationBuilder(this, "Shoot", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "idle", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder idleAnim2 = new SingletonAnimationBuilder(this, "idle2", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "drive", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "death", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder shootAnim = new SingletonAnimationBuilder(this, "shoot", EDefaultLoopTypes.PLAY_ONCE);
 	private static final byte SHOOT_ATTACK_ID = 1;
 	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> projectileFactory = (owner, offset) -> {
 		LivingEntity target = owner.getTarget();
@@ -85,24 +84,15 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, false));
-		this.targetSelector.addGoal(2, new SniperAvoidGoal<>(this, PlayerEntity.class, 16f, 1.0f, 1.5f));
-		this.targetSelector.addGoal(2, new SniperAvoidGoal<>(this, IronGolemEntity.class, 16f, 1.0f, 1.5f));
-		this.targetSelector.addGoal(2, new SniperAvoidGoal<>(this, AnimalEntity.class, 16f, 1.0f, 1.5f));
+		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 16f, 1.0f, 1.5f));
+		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, IronGolemEntity.class, 16f, 1.0f, 1.5f));
+		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, AnimalEntity.class, 16f, 1.0f, 1.5f));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 	}
 	
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
-		this.entityData.define(AVOIDING, false);
-	}
-	
-	public boolean isAvoiding() {
-		return this.entityData.get(AVOIDING);
-	}
-	
-	public void setAvoiding(boolean avoiding) {
-		this.entityData.set(AVOIDING, avoiding);
 	}
 	
 	@Override
@@ -117,7 +107,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isAttacking() && getAttackID() == SHOOT_ATTACK_ID)
+		if (isAttacking() && getAttackID() == SHOOT_ATTACK_ID && !isDeadOrDying())
 			playAnimation(shootAnim, false);
 		return PlayState.CONTINUE;
 	}
@@ -170,50 +160,5 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return roboSniperAnimations;
-	}
-	
-	@Override
-	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !isDeadOrDying())
-			playAnimation(getIdleAnim(), true);
-		if (getWalkAnim() != null && isMoving() && !isAttacking() && !isDeadOrDying())
-			if (isAvoiding())
-				playAnimation(runAnim, true);
-			else
-				playAnimation(getWalkAnim(), true);
-
-		if (isDeadOrDying()) {
-			stopAnimation(getIdleAnim());
-			stopAnimation(getWalkAnim());
-		}
-	}
-	
-	private class SniperAvoidGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
-
-		public SniperAvoidGoal(CreatureEntity thiz, Class<T> toAvoid, float maxDistance,
-				double walkSpeedModifier, double sprintSpeedModifier) {
-			super(thiz, toAvoid, maxDistance, walkSpeedModifier,
-					sprintSpeedModifier);
-		}
-		
-		@Override
-		public void start() {
-			super.start();
-			setAvoiding(true);
-		}
-		
-		@Override
-		public void stop() {
-			super.stop();
-			setAvoiding(false);
-		}
-		
-		@Override
-		public void tick() {
-			super.tick();
-			
-			if (distanceToSqr(toAvoid) < 49.0D) setAvoiding(true);
-			else setAvoiding(false);
-		}
 	}
 }

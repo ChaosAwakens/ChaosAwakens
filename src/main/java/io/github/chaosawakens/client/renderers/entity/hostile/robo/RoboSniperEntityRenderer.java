@@ -2,7 +2,6 @@ package io.github.chaosawakens.client.renderers.entity.hostile.robo;
 
 import io.github.chaosawakens.client.models.entity.hostile.robo.RoboSniperEntityModel;
 import io.github.chaosawakens.client.renderers.entity.base.ExtendedGeoEntityRenderer;
-import io.github.chaosawakens.client.renderers.layers.texture.RoboSniperGlowLayer;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -26,8 +25,6 @@ public class RoboSniperEntityRenderer extends ExtendedGeoEntityRenderer<RoboSnip
 
 	@Override
 	protected ObjectArrayList<GeoLayerRenderer<RoboSniperEntity>> getLayers() {
-		ObjectArrayList<GeoLayerRenderer<RoboSniperEntity>> renderLayers = new ObjectArrayList<GeoLayerRenderer<RoboSniperEntity>>();
-		renderLayers.add(new RoboSniperGlowLayer(this));
-		return renderLayers;
+		return null;
 	}
 }

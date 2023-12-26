@@ -140,7 +140,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	}
 
 	public int getGazelleType() {
-		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 6);
+		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 1);
 	}
 
 	public void setGazelleType(int type) {
