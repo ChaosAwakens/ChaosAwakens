@@ -307,8 +307,8 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> PATCH_THORNY_SUN = registerFeature("patch_thorny_sun", Feature.RANDOM_PATCH.configured(Configs.THORNY_SUN_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(7));
 	public static final ConfiguredFeature<?, ?> PATCH_ALSTROEMERIAT = registerFeature("patch_alstroemeriat", Feature.RANDOM_PATCH.configured(Configs.ALSTROEMERIAT_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(7));
 	public static final ConfiguredFeature<?, ?> DENSE_BULB_DEFAULT = registerFeature("dense_bulb_default", Feature.FLOWER.configured(Configs.DENSE_BULB_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2));
-	public static final ConfiguredFeature<?, ?> PATCH_MESO_PLANTS = registerFeature("patch_meso_plants", Feature.FLOWER.configured(Configs.MESOZOIC_PLANT_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4));
-	public static final ConfiguredFeature<?, ?> PATCH_MESO_TALL_BUSH = registerFeature("patch_meso_plants", Feature.FLOWER.configured(Configs.MESOZOIC_TALL_BUSH_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4));
+	public static final ConfiguredFeature<?, ?> PATCH_MESO_PLANTS = registerFeature("patch_meso_plants", Feature.FLOWER.configured(Configs.MESOZOIC_PLANT_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(5));
+	public static final ConfiguredFeature<?, ?> PATCH_MESO_TALL_BUSH = registerFeature("patch_meso_plants", Feature.RANDOM_PATCH.configured(Configs.MESOZOIC_TALL_BUSH_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4));
 	public static final ConfiguredFeature<?, ?> PATCH_DENSE_FLOWER = registerFeature("patch_dense_flower", Feature.FLOWER.configured(Configs.DENSE_FLOWER_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4));
 	
 	// CROPS
@@ -587,7 +587,7 @@ public class CAConfiguredFeatures {
 		private static final BlockState TALL_BUSH = CABlocks.TALL_BUSH.get().defaultBlockState();
 		private static final BlockState SMALL_CARNIVOROUS_PLANT = CABlocks.SMALL_CARNIVOROUS_PLANT.get().defaultBlockState();
 		private static final BlockState BIG_CARNIVOROUS_PLANT = CABlocks.BIG_CARNIVOROUS_PLANT.get().defaultBlockState();
-		private static final BlockState MESOZOIC_VINES = CABlocks.MESOZOIC_VINES.get().defaultBlockState();
+		private static final BlockState MESOZOIC_VINES = CABlocks.MESOZOIC_VINES_PLANT.get().defaultBlockState();
 		
 		private static final BlockState STRAWBERRY_BUSH = CABlocks.STRAWBERRY_BUSH.get().defaultBlockState().setValue(SweetBerryBushBlock.AGE, 3);
 		private static final BlockState CORN = CABlocks.CORN_BODY_BLOCK.get().defaultBlockState();
@@ -609,7 +609,7 @@ public class CAConfiguredFeatures {
 		public static final BlockClusterFeatureConfig THORNY_SUN_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.THORNY_SUN), new DoubleDensePlantBlockPlacer())).tries(32).noProjection().build();
 		public static final BlockClusterFeatureConfig DENSE_BULB_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.BLUE_BULB, 2).add(States.PINK_BULB, 2).add(States.PURPLE_BULB, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig MESOZOIC_PLANT_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.SMALL_BUSH, 2).add(States.SMALL_CARNIVOROUS_PLANT, 2).add(States.BIG_CARNIVOROUS_PLANT, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
-		public static final BlockClusterFeatureConfig MESOZOIC_TALL_BUSH_CONFIG = new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TALL_BUSH), new DoubleDensePlantBlockPlacer()).tries(32).build();
+		public static final BlockClusterFeatureConfig MESOZOIC_TALL_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TALL_BUSH), new DoubleDensePlantBlockPlacer())).tries(32).noProjection().build();
 		public static final BlockClusterFeatureConfig ALSTROEMERIAT_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.ALSTROEMERIAT), new DoubleDensePlantBlockPlacer())).tries(32).noProjection().build();
 		public static final BlockClusterFeatureConfig DENSE_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.DENSE_ORCHID, 2).add(States.PRIMROSE, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig STRAWBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.STRAWBERRY_BUSH), SimpleBlockPlacer.INSTANCE)).tries(64).whitelist(ImmutableSet.of(States.GRASS_BLOCK.getBlock())).noProjection().build();
