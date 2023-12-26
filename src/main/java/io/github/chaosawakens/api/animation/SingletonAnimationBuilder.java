@@ -12,12 +12,13 @@ import javax.annotation.Nullable;
  * {@link IAnimationBuilder} instance class. Allows for the instantiation of only 1 (immutable) animation by wrapping
  * around an {@link AnimationBuilder} instance and pruning its list down to the first animation (the one passed in here).
  * <br> </br>
+ * <br> </br>
  * This class holds both client and server side data for its animation. Standard metadata such as Geckolib's animation
  * tick, the animation state, and animation loop type is <b>ONLY</b> present on the client. Other metadata unique to
  * CA such as a server-side animation progress (tick) field, {@link ExpandedAnimationState}, animation length (Geckolib), and animation name is present
  * on the server (sometimes on the client, depends on the data).
  * <br> </br>
- * 
+ * <br> </br>
  * 
  * <table> <tbody>
  * <caption><i>The following table represents which animation data/metadata is present on which side. All unattached data is effectively 
@@ -96,7 +97,7 @@ import javax.annotation.Nullable;
  * </tr>
  * </tbody></table>
  * 
- * 
+ * <br> </br>
  * <br> </br>
  * It's advised that animation handling is done solely through {@link IAnimatableEntity} methods, as they handle any
  * necessary siding (note that this does not mean client-exclusive data will be present on the server and vice versa). The "functional" 
@@ -104,6 +105,7 @@ import javax.annotation.Nullable;
  * clients and other factors. The functional tick progress should still pretty much sync to Geckolib's tick progress, but there's
  * no guarantee that both will communicate with each other as that in itself can and will cause hard to debug logical
  * errors. Can still be attributed to MC's goofiness, though :p
+ * <br> </br>
  * <br> </br>
  * Another thing to note is that this object <b>CANNOT</b> be statically instantiated, due to the fact that you need to
  * pass an {@link IAnimatableEntity} instance in. This means that it'll be instantiated 
