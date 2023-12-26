@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
+import java.util.Random;
+
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.AbstractTopPlantBlock;
 import net.minecraft.block.Block;
@@ -9,8 +11,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IWorldReader;
-
-import java.util.Random;
 
 public class MesozoicVinesTopBlock extends AbstractTopPlantBlock {
 	public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
