@@ -1,8 +1,10 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
+
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
-import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.entity.Entity;
@@ -10,9 +12,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 public class AnimatableShootGoal extends Goal {
 	private final AnimatableMonsterEntity owner;
@@ -62,6 +61,7 @@ public class AnimatableShootGoal extends Goal {
 		owner.getNavigation().stop();
 		owner.playAnimation(shootAnim.get(), true);
 		this.hasShotProjectile = false;
+		owner.getLookControl().setLookAt(owner.getTarget(), 30.0F, 30.0F);
 	}
 
 	/**
@@ -80,19 +80,15 @@ public class AnimatableShootGoal extends Goal {
 	 */
 	public void tick() {
 		owner.getNavigation().stop();
-//		owner.playAnimation(shootAnim.get(), false); // ???
 		LivingEntity target = this.owner.getTarget();
-		if (shootAnim.get().getWrappedAnimProgress() <= actionPointTickStart)
-			owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
-		else
-			EntityUtil.freezeEntityRotation(owner);
-		
 		if (MathUtil.isBetween(shootAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 			if (!this.hasShotProjectile) {
 				World world = this.owner.level;
 				world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
 				this.hasShotProjectile = true;
 			}
+		} else {
+			owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
 		}
 	}
 }

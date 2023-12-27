@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import net.minecraft.util.ResourceLocation;
+import software.bernie.geckolib3.core.processor.IBone;
 
 public class RoboSniperEntityModel extends ExtendedAnimatedTickingGeoModel<RoboSniperEntity> {
 	
@@ -21,10 +22,15 @@ public class RoboSniperEntityModel extends ExtendedAnimatedTickingGeoModel<RoboS
 	public ResourceLocation getTextureLocation(RoboSniperEntity entity) {
 		return ChaosAwakens.prefix("textures/entity/hostile/robo/robo_sniper.png");
 	}
+	
+	@Override
+	public IBone getHeadBone() {
+		return getAnimationProcessor().getBone("turret");
+	}
 
 	@Override
 	protected boolean shouldApplyHeadRot() {
-		return false;
+		return true;
 	}
 
 	@Override

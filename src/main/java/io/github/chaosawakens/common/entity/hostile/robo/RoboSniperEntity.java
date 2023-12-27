@@ -8,6 +8,7 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableShootGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -54,10 +55,11 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		double d3 = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
 		double d4 = target.getZ() - (owner.getZ() + vector3d.z * offset.z());
 		FireballEntity fireball = new FireballEntity(world, owner, d2, d3, d4);
+		RoboLaserEntity laser = new RoboLaserEntity(world, owner, d2, d3, d4);
 		fireball.explosionPower = 1;
-		fireball.setPos(owner.getX() + vector3d.x * offset.x(), owner.getY(0.5D) + offset.y(),
+		laser.setPos(owner.getX() + vector3d.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				fireball.getZ() + vector3d.z * offset.z());
-		return fireball;
+		return laser;
 	};
 	private static final Vector3d projecileOffset = new Vector3d(2.0, 0.4, 2.0);
 	public static final String ROBO_SNIPER_MDF_NAME = "robo_sniper";
@@ -80,8 +82,8 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	protected void registerGoals() {
 		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, SHOOT_ATTACK_ID,
-				() -> this.shootAnim, projectileFactory, projecileOffset, 13.0,
-				16.0, 60, 3, 8));
+				() -> this.shootAnim, projectileFactory, projecileOffset, 1.0,
+				3.0, 60, 3, 8));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));

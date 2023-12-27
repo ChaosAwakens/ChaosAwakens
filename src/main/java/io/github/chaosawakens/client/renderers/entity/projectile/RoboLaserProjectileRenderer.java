@@ -1,19 +1,26 @@
 package io.github.chaosawakens.client.renderers.entity.projectile;
 
-import io.github.chaosawakens.ChaosAwakens;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 
-public class RoboLaserProjectileRenderer extends LaserProjectileRendererer {
-	private static final ResourceLocation LASER_TEXTURE = ChaosAwakens.prefix("textures/entity/projectiles/laser.png"); //TODO Texture
+import io.github.chaosawakens.client.models.entity.projectile.RoboLaserModel;
+import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.util.ResourceLocation;
+import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
+
+public class RoboLaserProjectileRenderer extends GeoProjectilesRenderer<RoboLaserEntity> {
 
 	public RoboLaserProjectileRenderer(EntityRendererManager manager) {
-		super(manager);
+		super(manager, new RoboLaserModel());
 	}
-
+	
 	@Override
-	public ResourceLocation getTextureLocation(Entity entity) {
-		return LASER_TEXTURE;
+	public RenderType getRenderType(RoboLaserEntity animatable, float partialTicks, MatrixStack stack,
+			IRenderTypeBuffer renderTypeBuffer, IVertexBuilder vertexBuilder, int packedLightIn,
+			ResourceLocation textureLocation) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
 	}
 }

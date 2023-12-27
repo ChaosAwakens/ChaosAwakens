@@ -2,14 +2,9 @@
   "anim_file_loc": "chaosawakens:animations/boss/miniboss/hercules_beetle.animation.json",
   "animations": [
     {
-      "animation_name": "Idle",
-      "animation_length": 3.52,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Awaken",
-      "animation_length": 7.28,
-      "loop_type": "LOOP"
+      "animation_name": "Death",
+      "animation_length": 0.76,
+      "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
       "animation_name": "Ground Slam",
@@ -17,23 +12,18 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Docile",
-      "animation_length": 14.32,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Body Slam Attack",
       "animation_length": 2.08,
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Leap",
-      "animation_length": 2.76,
+      "animation_name": "Idle",
+      "animation_length": 3.52,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Walk",
-      "animation_length": 1.8,
+      "animation_name": "Docile",
+      "animation_length": 14.32,
       "loop_type": "LOOP"
     },
     {
@@ -42,14 +32,29 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Munch Attack",
+      "animation_name": "Fly",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Death",
-      "animation_length": 0.76,
+      "animation_name": "Leap",
+      "animation_length": 2.76,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Awaken",
+      "animation_length": 7.28,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Grab",
+      "animation_length": 0.64,
       "loop_type": "HOLD_ON_LAST_FRAME"
+    },
+    {
+      "animation_name": "Walk",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
     },
     {
       "animation_name": "Flail Flap",
@@ -57,14 +62,9 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Fly",
+      "animation_name": "Munch Attack",
       "animation_length": 1.8,
       "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Grab",
-      "animation_length": 0.64,
-      "loop_type": "HOLD_ON_LAST_FRAME"
     }
   ]
 }

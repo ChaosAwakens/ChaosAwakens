@@ -2,8 +2,13 @@
   "anim_file_loc": "chaosawakens:animations/boss/robo/robo_jeffery.animation.json",
   "animations": [
     {
-      "animation_name": "Robo-Bomb Attack",
-      "animation_length": 2.0,
+      "animation_name": "Right Punch Attack",
+      "animation_length": 1.7,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Leap Attack: Land",
+      "animation_length": 2.2,
       "loop_type": "PLAY_ONCE"
     },
     {
@@ -12,32 +17,12 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Healthy",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Leap Attack: Land",
-      "animation_length": 2.2,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
       "animation_name": "Death",
       "animation_length": 9.5,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Leap Attack: Midair",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Smash Attack",
-      "animation_length": 3.0,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Walk",
+      "animation_name": "Healthy",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -47,14 +32,19 @@
       "loop_type": "LOOP"
     },
     {
+      "animation_name": "Leap Attack: Midair",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Leap Attack: Leap",
       "animation_length": 0.79167,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
+      "animation_name": "Smash Attack",
+      "animation_length": 3.0,
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Idle Extras",
@@ -62,9 +52,19 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Right Punch Attack",
-      "animation_length": 1.7,
+      "animation_name": "Idle",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Robo-Bomb Attack",
+      "animation_length": 2.0,
       "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Walk",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
     }
   ]
 }

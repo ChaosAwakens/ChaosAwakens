@@ -200,7 +200,12 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
         // Misc
         createAnimationMetadata(ChaosAwakens.prefix("animations/misc/jeffery_schockwave.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Expand", 18.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
-
+        
+        // Projectile
+        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/water/robo_sniper_laser.animation.json"), Lists.newArrayList(
+                new AnimationDataHolder("always play", 5.04D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("death", 0.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+        
         // Neutral/Land
         createAnimationMetadata(ChaosAwakens.prefix("animations/neutral/land/dimetrodon.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),

@@ -28,6 +28,7 @@ import io.github.chaosawakens.common.entity.neutral.land.gator.EmeraldGatorEntit
 import io.github.chaosawakens.common.entity.projectile.CALettuceChickenEggEntity;
 import io.github.chaosawakens.common.entity.projectile.ExplosiveFireworkEntity;
 import io.github.chaosawakens.common.entity.projectile.RayGunProjectileEntity;
+import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.IrukandjiArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateArrowEntity;
@@ -334,7 +335,10 @@ public class CAEntityTypes {
 					.noSave().noSummon().setShouldReceiveVelocityUpdates(true)
 					.sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(5).fireImmune()
 					.build(ChaosAwakens.prefix("ultimate_fishing_bobber").toString()));
-	
+	public static final RegistryObject<EntityType<RoboLaserEntity>> ROBO_LASER = ENTITY_TYPES.register("robo_laser",
+			() -> EntityType.Builder.<RoboLaserEntity>of(RoboLaserEntity::new, EntityClassification.MISC)
+					.sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(20)
+					.build(ChaosAwakens.prefix("robo_laser").toString()));
 	// Misc
 	public static final RegistryObject<EntityType<CAFallingBlockEntity>> FALLING_BLOCK = ENTITY_TYPES.register("falling_block",
 			() -> EntityType.Builder.<CAFallingBlockEntity>of(CAFallingBlockEntity::new, EntityClassification.MISC)

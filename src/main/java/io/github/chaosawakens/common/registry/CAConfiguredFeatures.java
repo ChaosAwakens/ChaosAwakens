@@ -604,7 +604,7 @@ public class CAConfiguredFeatures {
 	}
 
 	public static final class Configs {
-		public static final BlockClusterFeatureConfig CHAOS_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.CYAN_ROSE, 2).add(States.RED_ROSE, 2).add(States.PAEONIA, 2).add(States.SWAMP_MILKWEED, 2).add(States.DAISY, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
+		public static final BlockClusterFeatureConfig CHAOS_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.CYAN_ROSE, 2).add(States.RED_ROSE, 2).add(States.PAEONIA, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig DENSE_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.DENSE_GRASS), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig TALL_DENSE_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TALL_DENSE_GRASS), new DoubleDensePlantBlockPlacer())).tries(64).noProjection().build();
 		public static final BlockClusterFeatureConfig THORNY_SUN_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.THORNY_SUN), new DoubleDensePlantBlockPlacer())).tries(32).noProjection().build();
@@ -612,7 +612,7 @@ public class CAConfiguredFeatures {
 		public static final BlockClusterFeatureConfig MESOZOIC_PLANT_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.SMALL_BUSH, 2).add(States.SMALL_CARNIVOROUS_PLANT, 2).add(States.BIG_CARNIVOROUS_PLANT, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig MESOZOIC_TALL_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TALL_BUSH), new DoubleDensePlantBlockPlacer())).tries(32).noProjection().build();
 		public static final BlockClusterFeatureConfig ALSTROEMERIAT_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.ALSTROEMERIAT), new DoubleDensePlantBlockPlacer())).tries(32).noProjection().build();
-		public static final BlockClusterFeatureConfig DENSE_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.DENSE_ORCHID, 2).add(States.PRIMROSE, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
+		public static final BlockClusterFeatureConfig DENSE_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).add(States.DENSE_ORCHID, 2).add(States.PRIMROSE, 2).add(States.SWAMP_MILKWEED, 2).add(States.DAISY, 2), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig STRAWBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.STRAWBERRY_BUSH), SimpleBlockPlacer.INSTANCE)).tries(64).whitelist(ImmutableSet.of(States.GRASS_BLOCK.getBlock())).noProjection().build();
 		public static final BlockClusterFeatureConfig CRYSTAL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.CRYSTAL_GRASS), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 		public static final BlockClusterFeatureConfig TALL_CRYSTAL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(States.TALL_CRYSTAL_GRASS), new DoubleCrystalPlantBlockPlacer())).tries(64).noProjection().build();
