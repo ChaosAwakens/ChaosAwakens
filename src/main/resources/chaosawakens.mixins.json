@@ -5,6 +5,7 @@
 	"minVersion": "0.8.4",
 	"mixins": [
 		"AttachedStemBlockMixin",
+		"CrossbowItemMixin",
 		"CooldownTrackerMixin",
 		"CropsBlockMixin",
 		"LivingEntityMixin",

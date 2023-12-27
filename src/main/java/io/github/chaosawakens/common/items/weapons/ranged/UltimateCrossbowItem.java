@@ -67,7 +67,7 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 	
 	@Override
 	public int getUseDuration(ItemStack stack) {
-		return super.getUseDuration(stack) / 2;
+		return getChargeDuration(stack) + 10;
 	}	
 	 
 	@Override
@@ -237,7 +237,8 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 	   
 	private static AbstractArrowEntity getArrow(World world, LivingEntity owner, ItemStack crossbowStack, ItemStack arrowStack) {		  
 		ArrowItem arrowitem = (ArrowItem)(arrowStack.getItem() instanceof ArrowItem ? arrowStack.getItem() : Items.ARROW);		    
-		AbstractArrowEntity abstractArrowEntity = arrowitem.createArrow(world, arrowStack, owner);		     
+		AbstractArrowEntity abstractArrowEntity = arrowitem.createArrow(world, arrowStack, owner);		
+		abstractArrowEntity.setBaseDamage(abstractArrowEntity.getBaseDamage() * 12);
 		abstractArrowEntity.setCritArrow(true);
 		abstractArrowEntity.setSoundEvent(SoundEvents.CROSSBOW_HIT);		     
 		abstractArrowEntity.setShotFromCrossbow(true);		
