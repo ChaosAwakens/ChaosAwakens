@@ -32,6 +32,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction.Axis;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
@@ -254,11 +255,13 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	protected void handleBaseAnimations() {
 		super.handleBaseAnimations();
-		
+
 		if (!isAttacking() && !isDeadOrDying() && getHealth() > 50.0F) {
 			playAnimation(idleExtrasAnim, false);
 			playAnimation(highHealthAnim, false);
 		}
 		if (getHealth() <= 50.0F) playAnimation(lowHealthAnim, false);
+
+		lowHealthAnim.setAnimSpeed(MathHelper.clamp(deathAnim.getWrappedAnimProgress() + 1, 1.0D,deathAnim.getWrappedAnimProgress() + 1));
 	}
 }

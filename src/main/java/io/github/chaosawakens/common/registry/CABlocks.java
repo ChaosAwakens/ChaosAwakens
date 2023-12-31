@@ -15,6 +15,7 @@ import io.github.chaosawakens.common.blocks.ore.CAEntityTrapOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import io.github.chaosawakens.common.blocks.ore.UraniumOreBlock;
+import io.github.chaosawakens.common.blocks.robo.WiredRoboBlock;
 import io.github.chaosawakens.common.blocks.spawner.AggressiveAntNestBlock;
 import io.github.chaosawakens.common.blocks.spawner.AntNestBlock;
 import io.github.chaosawakens.common.blocks.tileentities.*;
@@ -58,6 +59,7 @@ public class CABlocks {
 	public static final DeferredRegister<Item> ITEM_BLOCKS = DeferredRegister.create(ForgeRegistries.ITEMS, ChaosAwakens.MODID);
 
 	private static final IPositionPredicate NO_REDSTONE_CONDUCTIVITY = (state, reader, pos) -> false;
+	private static final IPositionPredicate ALWAYS_REDSTONE_CONDUCTIVE = (state, reader, pos) -> true;
 
 	private static final Function<Integer, ToIntFunction<BlockState>> LIGHT_VALUE_FUNCTION = (lightValue) -> (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
 
@@ -329,6 +331,7 @@ public class CABlocks {
 	public static final RegistryObject<Block> ROBO_BLOCK_I = registerBlock("robo_block_l", () -> new Block(Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> ROBO_BLOCK_V = registerBlock("robo_block_v", () -> new RotatedPillarBlock(Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> ROBO_BLOCK_X = registerBlock("robo_block_x", () -> new RotatedPillarBlock(Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
+	public static final RegistryObject<WiredRoboBlock> WIRED_ROBO_BLOCK = registerBlock("wired_robo_block", () -> new WiredRoboBlock(Properties.of(Material.HEAVY_METAL).strength(60.0F, 2800.0F).requiresCorrectToolForDrops().isRedstoneConductor(ALWAYS_REDSTONE_CONDUCTIVE)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> ROBO_SLAB_I = registerBlock("robo_slab_l", () -> new SlabBlock(Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> ROBO_SLAB_X = registerBlock("robo_slab_x", () -> new SlabBlock(Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<StairsBlock> ROBO_STAIRS_I = registerBlock("robo_stairs_l", () -> new StairsBlock(() ->  Blocks.OBSIDIAN.defaultBlockState(), Properties.of(Material.HEAVY_METAL).strength(55.0F, 1800.0F).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);

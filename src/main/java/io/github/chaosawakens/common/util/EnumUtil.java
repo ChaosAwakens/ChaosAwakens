@@ -340,7 +340,10 @@ public final class EnumUtil {
 	public enum WireDirection implements IStringSerializable {
 		DEFAULT("default"),
 		SIDE_VERTICAL("side_vertical"),
-		SIDE_HORIZONTAL("side_horizontal");
+		SIDE_HORIZONTAL("side_horizontal"),
+		ALL_HORIZONTAL("all_horizontal"),
+		ALL_VERTICAL("all_vertical"),
+		ALL("all");
 
 		private final String name;
 

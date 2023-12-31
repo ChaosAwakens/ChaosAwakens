@@ -2,12 +2,12 @@
   "anim_file_loc": "chaosawakens:animations/neutral/lava/lava_eel.animation.json",
   "animations": [
     {
-      "animation_name": "Flop",
+      "animation_name": "Swim",
       "animation_length": 1.76,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Swim",
+      "animation_name": "Flop",
       "animation_length": 1.76,
       "loop_type": "LOOP"
     }
