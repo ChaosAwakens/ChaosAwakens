@@ -25,6 +25,8 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> ROBO_POUNDER_RAGE_RUN = SOUND_EVENTS.register("entity.robo_pounder.rage_run", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.rage_run")));
 	public static final RegistryObject<SoundEvent> ROBO_POUNDER_RAGE_RUN_COOLDOWN = SOUND_EVENTS.register("entity.robo_pounder.rage_run_cooldown", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.rage_run_cooldown")));
 	public static final RegistryObject<SoundEvent> ROBO_POUNDER_RAGE_RUN_RESTART = SOUND_EVENTS.register("entity.robo_pounder.rage_run_restart", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.rage_run_restart")));
+	public static final RegistryObject<SoundEvent> ROBO_POUNDER_RAGE_RUN_CRASH = SOUND_EVENTS.register("entity.robo_pounder.rage_run_crash", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.rage_run_restart")));
+	public static final RegistryObject<SoundEvent> ROBO_POUNDER_RAGE_RUN_CRASH_RESTART = SOUND_EVENTS.register("entity.robo_pounder.rage_run_crash_restart", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.rage_run_restart")));
 	public static final RegistryObject<SoundEvent> ROBO_POUNDER_DEATH = SOUND_EVENTS.register("entity.robo_pounder.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.death")));
 
 	public static final RegistryObject<SoundEvent> EMERALD_GATOR_WALK = SOUND_EVENTS.register("entity.emerald_gator.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.emerald_gator.walk")));

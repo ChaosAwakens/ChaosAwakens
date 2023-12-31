@@ -1,10 +1,10 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.client.sounds.tickable.AnimatableTickableWalkSound;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -19,12 +19,7 @@ import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -130,7 +125,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
-		float defaultAttackVoicePitch = getHealth() <= 50.0F ? 1.1F : 1.0F; //TODO Proper updates in goals
+		float defaultAttackVoicePitch = getHealth() <= 50.0F ? 1.25F : 1.0F; //TODO Proper updates in goals
 
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3) {
 			@Override
@@ -304,6 +299,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 		handleRageRun();
 		handleTaunting();
+		handleIntervalSounds();
 	}
 
 	private void handleRageRun() {
@@ -349,16 +345,31 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private void handleTaunting() {
 		final int killThreshold = MathHelper.nextInt(random, 4, 8);  //TODO Move to a cached field
 		boolean shouldTaunt = !potentialDeadTargets.isEmpty() && !isAttacking() && !isOnAttackCooldown() && isPlayingAnimation(idleAnim) && (potentialDeadTargets.size() >= killThreshold || ((potentialDeadTargets.get(potentialDeadTargets.size() - 1) instanceof PlayerEntity || potentialDeadTargets.get(potentialDeadTargets.size() - 1).getMaxHealth() >= 150) && this.random.nextBoolean())) && getTarget() == null;
+		boolean playTauntSound = false;
 
 		if (shouldTaunt) {
 			setShouldTaunt(true);
 			getNavigation().stop();
 			EntityUtil.freezeEntityRotation(this);
 			potentialDeadTargets.clear();
+
+            playTauntSound = true;
 		}
 
-		if (MathUtil.isBetween(tauntAnim.getWrappedAnimProgress(), 1, 2)) playSound(CASoundEvents.ROBO_POUNDER_TAUNT.get(), 1.0F, getVoicePitch());
+		if (playTauntSound) {
+			playSound(CASoundEvents.ROBO_POUNDER_TAUNT.get(), 1.0F, getVoicePitch());
+
+			playTauntSound = false;
+		}
 		if (tauntAnim.hasAnimationFinished() || (getTarget() != null && distanceTo(getTarget()) <= 15.0D) || isDeadOrDying()) setShouldTaunt(false);
+	}
+
+	private void handleIntervalSounds() {
+		if (isMoving() && isPlayingAnimation(rageRunAnim)) {
+			if (rageRunAnim.getWrappedAnimProgress() % 5 == 0) {
+				playSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), 2.0F, getVoicePitch()); //TODO TickableSound impl
+			}
+		}
 	}
 
 	@Override
@@ -500,7 +511,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void playStepSound(BlockPos pPos, BlockState pBlock) {
-		if (!pBlock.getMaterial().isLiquid()) playSound(CASoundEvents.ROBO_POUNDER_WALK.get(), 1.0F, 1.0F);
+		if (!pBlock.getMaterial().isLiquid() && level.isClientSide()) {
+			AnimatableTickableWalkSound rpws = new AnimatableTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), this);
+			rpws.playSound();
+		}
 	}
 
 	@Override
@@ -534,7 +548,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
-	protected void handleBaseAnimations() {		
+	protected void handleBaseAnimations() {
 		if (getIdleAnim() != null && !isAttacking() && !isMoving() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getIdleAnim(), true);
 		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
 		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
@@ -546,8 +560,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		rightPunchAnim.setAnimSpeed(attackSpeedMult);
 		leftSwingAnim.setAnimSpeed(attackSpeedMult);
 		rightSwingAnim.setAnimSpeed(attackSpeedMult);
-		leftStompAnim.setAnimSpeed(attackSpeedMult);
-		rightStompAnim.setAnimSpeed(attackSpeedMult);
+		leftStompAnim.setAnimSpeed(attackSpeedMult + 0.03D);
+		rightStompAnim.setAnimSpeed(attackSpeedMult + 0.03D);
 		groundSlamAnim.setAnimSpeed(attackSpeedMult);
 		dashAttackAnim.setAnimSpeed(dashAttackSpeedMult);
 	}

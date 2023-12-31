@@ -1,115 +1,132 @@
 package io.github.chaosawakens.common.blocks.robo;
 
-
-import io.github.chaosawakens.common.util.EnumUtil;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
-public class WiredRoboBlock extends Block {
-    public static final EnumProperty<EnumUtil.WireDirection> NORTH = EnumProperty.create("north_direction", EnumUtil.WireDirection.class);
-    public static final EnumProperty<EnumUtil.WireDirection> SOUTH = EnumProperty.create("south_direction", EnumUtil.WireDirection.class);
-    public static final EnumProperty<EnumUtil.WireDirection> EAST = EnumProperty.create("east_direction", EnumUtil.WireDirection.class);
-    public static final EnumProperty<EnumUtil.WireDirection> WEST = EnumProperty.create("west_direction", EnumUtil.WireDirection.class);
-    public static final EnumProperty<EnumUtil.WireDirection> ABOVE = EnumProperty.create("above_direction", EnumUtil.WireDirection.class);
-    public static final EnumProperty<EnumUtil.WireDirection> BELOW = EnumProperty.create("below_direction", EnumUtil.WireDirection.class);
+public class WiredRoboBlock extends RotatedPillarBlock {
+    public static final BooleanProperty FORCED_DEFAULT = BooleanProperty.create("forced_default");
+    public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
+    public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
+    public static final BooleanProperty EAST = BlockStateProperties.EAST;
+    public static final BooleanProperty WEST = BlockStateProperties.WEST;
+    public static final BooleanProperty ABOVE = BlockStateProperties.UP;
+    public static final BooleanProperty BELOW = BlockStateProperties.DOWN;
+    public static final BooleanProperty POSITIVE_AXIS = BooleanProperty.create("positive_axis");
+    public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = Util.make(() -> {
+        ImmutableMap.Builder<Direction, BooleanProperty> builder = ImmutableMap.builder();
+
+        builder.put(Direction.NORTH, NORTH);
+        builder.put(Direction.SOUTH, SOUTH);
+        builder.put(Direction.EAST, EAST);
+        builder.put(Direction.WEST, WEST);
+        builder.put(Direction.UP, ABOVE);
+        builder.put(Direction.DOWN, BELOW);
+
+        return Maps.newEnumMap(builder.build());
+    });
 
     public WiredRoboBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(NORTH, EnumUtil.WireDirection.DEFAULT).setValue(SOUTH, EnumUtil.WireDirection.DEFAULT).setValue(EAST, EnumUtil.WireDirection.DEFAULT).setValue(WEST, EnumUtil.WireDirection.DEFAULT).setValue(ABOVE, EnumUtil.WireDirection.DEFAULT).setValue(BELOW, EnumUtil.WireDirection.DEFAULT));
+        registerDefaultState(stateDefinition.any().setValue(FORCED_DEFAULT, false).setValue(NORTH, false).setValue(SOUTH, false).setValue(EAST, false).setValue(WEST, false).setValue(ABOVE, false).setValue(BELOW, false).setValue(POSITIVE_AXIS, true));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder);
+        pBuilder.add(FORCED_DEFAULT, NORTH, SOUTH, EAST, WEST, ABOVE, BELOW);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext pContext) {
-        return getConnectionPlacementState(pContext.getLevel(), defaultBlockState(), pContext.getClickedPos());
+        return getConnectionPlacementState(pContext.getLevel(), defaultBlockState().setValue(AXIS, pContext.getClickedFace().getAxis()).setValue(POSITIVE_AXIS, pContext.getClickedFace().getAxisDirection() == Direction.AxisDirection.POSITIVE), pContext.getClickedPos());
     }
 
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+        return pState.setValue(PROPERTY_BY_DIRECTION.get(pFacing), isValidConnection(pLevel, pCurrentPos, pFacing));
     }
 
     @Override
     public void onPlace(BlockState pState, World pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
-        super.onPlace(pState, pLevel, pPos, pOldState, pIsMoving);
+        if ((!pLevel.isClientSide() || pIsMoving) && !pOldState.is(pState.getBlock())) {
+            for (Direction curDir : Direction.values()) {
+                BooleanProperty curDirProp = PROPERTY_BY_DIRECTION.get(curDir);
+
+                if (pState.getValue(curDirProp)) pLevel.updateNeighborsAt(pPos.relative(curDir), this);
+            }
+        }
+    }
+
+    @Override
+    public void neighborChanged(BlockState pState, World pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
+        if (!pIsMoving) {
+            super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, false);
+
+            pLevel.updateNeighborsAt(pFromPos, this);
+
+            for (Direction curDir : Direction.values()) {
+                BooleanProperty curDirProp = PROPERTY_BY_DIRECTION.get(curDir);
+
+                if (isValidConnection(pLevel, pPos, curDir)) pState = pState.setValue(curDirProp, true).setValue(POSITIVE_AXIS, curDir.getAxisDirection() == Direction.AxisDirection.POSITIVE);
+                else pState = pState.setValue(curDirProp, false).setValue(POSITIVE_AXIS, curDir.getAxisDirection() == Direction.AxisDirection.POSITIVE);
+
+                if (pState.getValue(curDirProp)) pLevel.updateNeighborsAt(pPos.relative(curDir), this);
+            }
+        }
     }
 
     @Override
     public void onRemove(BlockState pState, World pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-    }
+        if (!pIsMoving) {
+            super.onRemove(pState, pLevel, pPos, pNewState, false);
 
-    @Override
-    public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(state, world, pos, neighbor);
-    }
+            for (Direction curDir : Direction.values()) {
+                BooleanProperty curDirProp = PROPERTY_BY_DIRECTION.get(curDir);
 
-    @Override
-    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
-        return super.rotate(state, world, pos, direction);
-    }
-
-    @Override
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        return super.mirror(pState, pMirror);
+                if (pState.getValue(curDirProp)) pLevel.updateNeighborsAt(pPos.relative(curDir), this);
+            }
+        }
     }
 
     protected BlockState getConnectionPlacementState(IBlockReader level, BlockState targetState, BlockPos targetPos) {
-        boolean isDefault = isDefault(targetState);
-        boolean isExclusivelyConnectedVertically = isConnectedVertically(targetState, true);
-        boolean isExclusivelyConnectedHorizontally = isConnectedHorizontally(targetState, true);
+        boolean isDefault = isDefault(targetState) || targetState.getValue(FORCED_DEFAULT);
 
         if (isDefault) return targetState;
         else {
-            if (isExclusivelyConnectedVertically) {
-                boolean isConnectedAbove = targetState.getValue(ABOVE).hasConnection();
-                boolean isConnectedBelow = targetState.getValue(BELOW).hasConnection();
+            for (Direction curDir : Direction.values()) {
+                BooleanProperty curDirProp = PROPERTY_BY_DIRECTION.get(curDir);
 
-                if (isConnectedAbove) targetState = targetState.setValue(ABOVE, EnumUtil.WireDirection.SIDE_VERTICAL);
-                if (isConnectedBelow) targetState = targetState.setValue(BELOW, EnumUtil.WireDirection.SIDE_VERTICAL);
-            }
-
-            if (isExclusivelyConnectedHorizontally) {
-                boolean isConnectedEast = targetState.getValue(EAST).hasConnection();
-                boolean isConnectedWest = targetState.getValue(WEST).hasConnection();
-                boolean isConnectedNorth = targetState.getValue(NORTH).hasConnection();
-                boolean isConnectedSouth = targetState.getValue(SOUTH).hasConnection();
-
-                if (isConnectedEast) targetState = targetState.setValue(EAST, EnumUtil.WireDirection.SIDE_HORIZONTAL);
-                if (isConnectedWest) targetState = targetState.setValue(WEST, EnumUtil.WireDirection.SIDE_HORIZONTAL);
-                if (isConnectedNorth) targetState = targetState.setValue(NORTH, EnumUtil.WireDirection.SIDE_HORIZONTAL);
-                if (isConnectedSouth) targetState = targetState.setValue(SOUTH, EnumUtil.WireDirection.SIDE_HORIZONTAL);
+                if (isValidConnection(level, targetPos, curDir)) targetState = targetState.setValue(curDirProp, true).setValue(POSITIVE_AXIS, curDir.getAxisDirection() == Direction.AxisDirection.POSITIVE);
             }
         }
 
-        return null;
+        return targetState;
+    }
+
+    protected boolean isValidConnection(IBlockReader level, BlockPos originPos, Direction relativeDir) {
+        return level.getBlockState(originPos.relative(relativeDir)).getBlock() == this;
     }
 
     protected static boolean isDefault(BlockState targetState) {
-        return !targetState.getValue(NORTH).hasConnection() && !targetState.getValue(SOUTH).hasConnection() && !targetState.getValue(EAST).hasConnection() && !targetState.getValue(WEST).hasConnection() && !targetState.getValue(ABOVE).hasConnection() && !targetState.getValue(BELOW).hasConnection();
-    }
-
-    protected static boolean isConnectedVertically(BlockState targetState, boolean checkExclusively) {
-        return (targetState.getValue(ABOVE).hasConnection() || targetState.getValue(BELOW).hasConnection()) && checkExclusively ? !targetState.getValue(EAST).hasConnection() && !targetState.getValue(WEST).hasConnection() && !targetState.getValue(NORTH).hasConnection() && !targetState.getValue(SOUTH).hasConnection() : true;
-    }
-
-    protected static boolean isConnectedHorizontally(BlockState targetState, boolean checkExclusively) {
-        return (targetState.getValue(EAST).hasConnection() || targetState.getValue(WEST).hasConnection() || targetState.getValue(NORTH).hasConnection() || targetState.getValue(SOUTH).hasConnection()) && checkExclusively ? !targetState.getValue(ABOVE).hasConnection() && !targetState.getValue(BELOW).hasConnection() : true;
-    }
-
-    protected static boolean canConnect(IBlockReader level, BlockState targetState, BlockPos targetPos, @Nullable Direction targetDir) {
-        return true;
+        return !targetState.getValue(NORTH) && !targetState.getValue(SOUTH) && !targetState.getValue(EAST) && !targetState.getValue(WEST) && !targetState.getValue(ABOVE) && !targetState.getValue(BELOW);
     }
 }

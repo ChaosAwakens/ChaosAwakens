@@ -541,7 +541,7 @@
 			}
 		},
 		"Death": {
-			"animation_length": 0.84,
+			"animation_length": 2.24,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {

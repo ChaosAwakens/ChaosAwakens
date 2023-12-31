@@ -8,8 +8,10 @@ import io.github.chaosawakens.common.blocks.multiface.LeafCarpetBlock;
 import io.github.chaosawakens.common.blocks.multiface.PipeBlock;
 import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
+import io.github.chaosawakens.common.blocks.robo.WiredRoboBlock;
 import io.github.chaosawakens.common.blocks.vegetation.GenericFarmlandBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.util.EnumUtil;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
@@ -535,7 +537,7 @@ public class CABlockStateProvider extends BlockStateProvider {
 	}
 
 	private static ResourceLocation getResourceLocation(String path) {
-		return new ResourceLocation(ChaosAwakens.MODID, path);
+		return ChaosAwakens.prefix(path);
 	}
 
 	private static ResourceLocation getBlockResourceLocation(String name) {
@@ -789,11 +791,108 @@ public class CABlockStateProvider extends BlockStateProvider {
 					.condition(PipeBlock.WEST, false).end();
 	}
 
-	private ResourceLocation chaosRL(String texture) {
-		return new ResourceLocation(ChaosAwakens.MODID, "block/" + texture);
+	private void wireBlock(WiredRoboBlock targetBlock, ResourceLocation textureName) { //TODO Harcoded ahh
+		ModelFile wiredRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath()));
+		ModelFile wiredTopRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_top"));
+		ModelFile wiredCenterRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_center"));
+		ModelFile wiredBottomRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_bottom"));
+		ModelFile wiredNorth2WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_north"));
+		ModelFile wiredSouth2WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_south"));
+		ModelFile wiredTop3WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_south"));
+		ModelFile wiredBottom3WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_south"));
+		ModelFile wiredNorth3WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_south"));
+		ModelFile wiredSouth3WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_south"));
+		ModelFile wiredEast3WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_south"));
+		ModelFile wiredWest3WayRoboBlockModel = models().getExistingFile(chaosRL(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_2_south"));
+
+		//N/S = Z, E/W = X, U/D = Y, N == W, S == E
+		getMultipartBuilder(targetBlock).part()
+				.modelFile(wiredRoboBlockModel).addModel()
+				.condition(WiredRoboBlock.FORCED_DEFAULT, true)
+				.end()
+
+				.part()
+				.modelFile(wiredBottomRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.NORTH, false)
+				.condition(WiredRoboBlock.SOUTH, false)
+				.condition(WiredRoboBlock.EAST, false)
+				.condition(WiredRoboBlock.WEST, false)
+				.condition(WiredRoboBlock.ABOVE, false)
+				.condition(WiredRoboBlock.BELOW, false)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredBottomRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.NORTH, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredTopRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.SOUTH, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredCenterRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.NORTH, true)
+				.condition(WiredRoboBlock.SOUTH, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredBottomRoboBlockModel).rotationX(0).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.EAST, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredTopRoboBlockModel).rotationX(0).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.WEST, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredCenterRoboBlockModel).rotationX(0).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.EAST, true)
+				.condition(WiredRoboBlock.WEST, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredBottomRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.ABOVE, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredTopRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.BELOW, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredCenterRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.ABOVE, true)
+				.condition(WiredRoboBlock.BELOW, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end()
+
+				.part()
+				.modelFile(wiredTop3WayRoboBlockModel).rotationX(90).rotationY(90).uvLock(true).addModel()
+				.condition(WiredRoboBlock.WEST, true)
+				.condition(WiredRoboBlock.NORTH, true)
+				.condition(WiredRoboBlock.EAST, true)
+				.condition(WiredRoboBlock.AXIS, Direction.Axis.X)
+				.end();
+	}
+
+	private ResourceLocation chaosRL(String texturePath) {
+		return ChaosAwakens.prefix("block/" + texturePath);
 	}
 
 	private ResourceLocation mcRL(String texture) {
-		return new ResourceLocation("minecraft", "block/" + texture);
+		return new ResourceLocation("block/" + texture);
 	}
 }

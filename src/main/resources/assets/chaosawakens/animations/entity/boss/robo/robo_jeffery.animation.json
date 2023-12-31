@@ -1521,7 +1521,7 @@
 		},
 		"Leap Attack: Leap": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.79167,
+			"animation_length": 0.81,
 			"bones": {
 				"LowerBody": {
 					"position": {

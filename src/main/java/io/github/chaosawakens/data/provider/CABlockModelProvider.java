@@ -1072,7 +1072,7 @@ public class CABlockModelProvider extends BlockModelProvider {
 	}
 
 	private ResourceLocation chaosRL(String texture) {
-		return new ResourceLocation(ChaosAwakens.MODID, BLOCK_FOLDER + "/" + texture);
+		return ChaosAwakens.prefix(BLOCK_FOLDER + "/" + texture);
 	}
 
 	private ResourceLocation mcRL(String texture) {
@@ -1099,6 +1099,20 @@ public class CABlockModelProvider extends BlockModelProvider {
 
 	public void leafCarpetInventory(String name, ResourceLocation texture) {
 		singleTexture(name, chaosRL("leaf_carpet_inventory"), "texture", texture);
+	}
+
+	public BlockModelBuilder wired2SidedLeftBlock(String name, ResourceLocation targetTexture, ResourceLocation sideTexture) {
+		return orientableWithBottom(name, sideTexture, targetTexture, chaosRL(targetTexture.getPath() + "_lb"), chaosRL(targetTexture.getPath() + "_lt"));
+	}
+
+	public BlockModelBuilder wired2SidedRightBlock(String name, ResourceLocation targetTexture, ResourceLocation sideTexture) {
+		return orientableWithBottom(name, sideTexture, targetTexture, chaosRL(targetTexture.getPath() + "_rb"), chaosRL(targetTexture.getPath() + "_rt"));
+	}
+
+	public BlockModelBuilder wired3SidedLeftBlock(String name, ResourceLocation targetTexture, ResourceLocation sideTexture) {
+		return orientableWithBottom(name, sideTexture, targetTexture, chaosRL(targetTexture.getPath() + "_bottom"), chaosRL(targetTexture.getPath() + "_top"))
+				.texture("east", chaosRL(targetTexture.getPath() + "_right"))
+				.texture("west", chaosRL(targetTexture.getPath() + "_left"));
 	}
 
 	public void gateBlock(String name, ResourceLocation top) {

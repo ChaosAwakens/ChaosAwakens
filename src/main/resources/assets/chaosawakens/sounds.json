@@ -96,6 +96,18 @@
       "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_restart"
     ]
   },
+  "entity.robo_pounder.rage_run_crash": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.rage_run_crash",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_crash"
+    ]
+  },
+  "entity.robo_pounder.rage_run_crash_restart": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_pounder.rage_run_crash_restart",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_crash_restart"
+    ]
+  },
   
   "entity.emerald_gator.walk": {
     "subtitle": "subtitles.chaosawakens.entity.emerald_gator.walk",

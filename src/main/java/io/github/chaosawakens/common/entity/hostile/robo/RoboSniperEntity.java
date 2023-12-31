@@ -124,7 +124,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public int animationInterval() {
-		return 2;
+		return 1;
 	}
 
 	@Override
@@ -170,5 +170,12 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return roboSniperAnimations;
+	}
+
+	@Override
+	protected void handleBaseAnimations() {
+		super.handleBaseAnimations();
+
+		if (random.nextInt(150) == 0 && !isPlayingAnimation(idleExtrasAnim) && getTarget() == null) playAnimation(idleExtrasAnim, true);
 	}
 }

@@ -44,7 +44,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Left Punch Attack", 1.7D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Robo-Bomb Attack", 2D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Smash Attack", 3.0D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Leap Attack: Leap", 0.79167D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Leap Attack: Leap", 0.81D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Leap Attack: Midair", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Leap Attack: Land", 2.2D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Idle Extras", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
@@ -176,7 +176,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Idle Extras", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Accelerate", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Shoot Attack", 0.64D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Death", 0.84D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+                new AnimationDataHolder("Death", 2.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/robo/robo_warrior.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 3.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
