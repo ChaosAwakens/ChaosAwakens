@@ -100,7 +100,8 @@ public class AnimatableMeleeGoal extends Goal {
 		this.extraActivationConditions = activationPredicate;
 	}
 	
-	public AnimatableMeleeGoal pickBetweenAnimations(Supplier<? extends IAnimationBuilder>... animations) {
+	@SafeVarargs
+	public final AnimatableMeleeGoal pickBetweenAnimations(Supplier<? extends IAnimationBuilder>... animations) {
 		this.animationsToPick = new ObjectArrayList<Supplier<? extends IAnimationBuilder>>(animations.length);
 		
 		for (Supplier<? extends IAnimationBuilder> anim : animations) {

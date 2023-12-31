@@ -15,6 +15,6 @@ public abstract class CrossbowItemMixin {
 	@Inject(method = "Lnet/minecraft/item/CrossbowItem;getChargeDuration(Lnet/minecraft/item/ItemStack;)I", at = @At("TAIL"), cancellable = true)
 	private static void chaosawakens$getChargeDuration(ItemStack pCrossbowStack, CallbackInfoReturnable<Integer> cIR) {
 		if(pCrossbowStack.getItem() instanceof UltimateCrossbowItem)
-			cIR.setReturnValue(70 + cIR.getReturnValueI());
+			cIR.setReturnValue(50 + cIR.getReturnValueI());
 	}
 }

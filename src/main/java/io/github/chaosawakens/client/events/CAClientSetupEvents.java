@@ -70,7 +70,9 @@ import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.GrassColors;
@@ -374,13 +376,18 @@ public class CAClientSetupEvents {
 					if (living == null) {
 						return 0.0F;
 					} else {
-						return living.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration() - living.getUseItemRemainingTicks()) / 8.0F;
+						return CrossbowItem.isCharged(stack) ? 0.0F : (float) (living.getTicksUsingItem()) / (float) CrossbowItem.getChargeDuration(stack);
 					}
 				});
 		ItemModelsProperties.register(CAItems.ULTIMATE_BOW.get(), new ResourceLocation("pulling"),
 				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);
 		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("pulling"),
 				(stack, world, living) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F);
+		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("charged"),
+				(stack, world, living) -> living != null && CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+		ItemModelsProperties.register(CAItems.ULTIMATE_CROSSBOW.get(), new ResourceLocation("firework"),
+						(stack, world, living) -> living != null && CrossbowItem.isCharged(stack)
+						&& CrossbowItem.containsChargedProjectile(stack, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F);
 		ItemModelsProperties.register(CAItems.SKATE_STRING_BOW.get(), new ResourceLocation("pull"),
 				(stack, world, living) -> {
 					if (living == null) {
