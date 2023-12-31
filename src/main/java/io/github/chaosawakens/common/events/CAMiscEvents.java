@@ -1,8 +1,14 @@
 package io.github.chaosawakens.common.events;
 
+import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
+
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.MultimapBuilder;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.enchantments.HoplologyEnchantment;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
@@ -10,7 +16,11 @@ import io.github.chaosawakens.common.entity.base.AnimatableFishEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableWaterMobEntity;
 import io.github.chaosawakens.common.items.base.AnimatableShieldItem;
-import io.github.chaosawakens.common.registry.*;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.registry.CAEnchantments;
+import io.github.chaosawakens.common.registry.CAItems;
+import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
@@ -19,7 +29,13 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
@@ -43,10 +59,16 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.EndPodiumFeature;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
@@ -63,10 +85,6 @@ import net.minecraftforge.event.world.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.VersionChecker;
-
-import java.util.Objects;
-import java.util.Random;
-import java.util.UUID;
 
 public class CAMiscEvents {
 	private static final String DOWNLOADS = "https://chaosawakens.github.io/downloads";
@@ -426,5 +444,17 @@ public class CAMiscEvents {
 	@SubscribeEvent
 	public static void onPlayerRightClickInteractBlockEvent(RightClickBlock event) {
 		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerCommand(CommandEvent event) throws CommandSyntaxException {
+		String command = event.getParseResults().getReader().getString();
+		Entity e = event.getParseResults().getContext().getSource().getEntity();
+		if (e != null && "chaosawakens".equals(e.level.dimension().location().getNamespace())
+				&& command.contains("/weather")) {
+			event.setParseResults(event.getParseResults().getContext().getDispatcher()
+					.parse("execute in minecraft:overworld run ".concat(
+							command.substring(1)), event.getParseResults().getContext().getSource()));
+		}
 	}
 }

@@ -1,19 +1,17 @@
 package io.github.chaosawakens.common.entity.projectile;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.network.IPacket;
-import net.minecraft.network.play.server.SSpawnObjectPacket;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
@@ -23,8 +21,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimatableEntity {
 	AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<WrappedAnimationController<RoboLaserEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboLaserEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> roboSniperAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<WrappedAnimationController<RoboLaserEntity>> roboLaserControllers = new ObjectArrayList<WrappedAnimationController<RoboLaserEntity>>(1);
+	private final ObjectArrayList<IAnimationBuilder> roboLaserAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RoboLaserEntity> mainController = createMainMappedController("robolasermaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "death", EDefaultLoopTypes.PLAY_ONCE);
@@ -43,10 +41,14 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	public void tick() {
 		tickAnims();
 		super.tick();
-//		if(hit)
-//			playAnimation(deathAnim, true);
-//		else
-			playAnimation(idleAnim, true);
+		if(hit) {
+			stopAnimation(getIdleAnim());
+			playAnimation(getDeathAnim(), true);
+		}
+		else
+			playAnimation(getIdleAnim(), true);
+		ChaosAwakens.debug("LASER", this.mainController.getCurrentAnimation() != null ?
+				this.mainController.getCurrentAnimation().animationName : "null");
 //		if(deathAnim.hasAnimationFinished())
 //			this.remove();
 	}
@@ -79,12 +81,12 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	@SuppressWarnings("unchecked")
 	@Override
 	public ObjectArrayList<WrappedAnimationController<RoboLaserEntity>> getWrappedControllers() {
-		return roboSniperControllers;
+		return roboLaserControllers;
 	}
 
 	@Override
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
-		return roboSniperAnimations;
+		return roboLaserAnimations;
 	}
 
 	@Override
