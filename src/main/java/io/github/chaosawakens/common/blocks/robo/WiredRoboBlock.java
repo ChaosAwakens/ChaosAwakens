@@ -2,13 +2,11 @@ package io.github.chaosawakens.common.blocks.robo;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
