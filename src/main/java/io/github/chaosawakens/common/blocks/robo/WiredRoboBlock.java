@@ -49,7 +49,7 @@ public class WiredRoboBlock extends RotatedPillarBlock {
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(FORCED_DEFAULT, NORTH, SOUTH, EAST, WEST, ABOVE, BELOW);
+        pBuilder.add(FORCED_DEFAULT, NORTH, SOUTH, EAST, WEST, ABOVE, BELOW, POSITIVE_AXIS);
     }
 
     @Nullable
