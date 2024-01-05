@@ -505,6 +505,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
+	protected float getSoundVolume() {
+		return super.getSoundVolume() + 0.5F;
+	}
+
+	@Override
 	protected float getVoicePitch() {
 		return MathHelper.clamp(super.getVoicePitch(), 1.0F, 1.02F);
 	}
@@ -560,8 +565,8 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		rightPunchAnim.setAnimSpeed(attackSpeedMult);
 		leftSwingAnim.setAnimSpeed(attackSpeedMult);
 		rightSwingAnim.setAnimSpeed(attackSpeedMult);
-		leftStompAnim.setAnimSpeed(attackSpeedMult + 0.03D);
-		rightStompAnim.setAnimSpeed(attackSpeedMult + 0.03D);
+		leftStompAnim.setAnimSpeed(attackSpeedMult + 0.13D);
+		rightStompAnim.setAnimSpeed(attackSpeedMult + 0.13D);
 		groundSlamAnim.setAnimSpeed(attackSpeedMult);
 		dashAttackAnim.setAnimSpeed(dashAttackSpeedMult);
 	}

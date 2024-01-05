@@ -13,6 +13,7 @@ public class IrukandjiArrowProjectileRenderer extends ArrowRenderer<IrukandjiArr
 		super(manager);
 	}
 
+	@Override
 	public ResourceLocation getTextureLocation(IrukandjiArrowEntity entity) {
 		return IRUKANDJI_ARROW_TEXTURE;
 	}

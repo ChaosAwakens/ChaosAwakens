@@ -50,7 +50,7 @@
 			"predicate": {
 				"charged": 1
 			},
-			"model": "chaosawakens:item/ultimate_crossbow_arrow"
+			"model": "chaosawakens:item/ultimate_crossbow_charged"
 		},
 		{
 			"predicate": {

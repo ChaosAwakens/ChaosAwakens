@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:ultimate_crossbow_bolt"
+    ]
+  },
+  "criteria": {
+    "has_sunstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:sunstone"
+          }
+        ]
+      }
+    },
+    "has_platinum_lump": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:platinum_lump"
+          }
+        ]
+      }
+    },
+    "has_uranium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:uranium_nugget"
+          }
+        ]
+      }
+    },
+    "has_titanium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:titanium_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:ultimate_crossbow_bolt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sunstone",
+      "has_platinum_lump",
+      "has_uranium_nugget",
+      "has_titanium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

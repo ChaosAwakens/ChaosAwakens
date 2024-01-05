@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SU ",
+    "UPT",
+    " TP"
+  ],
+  "key": {
+    "S": {
+      "item": "chaosawakens:sunstone"
+    },
+    "P": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_nugget"
+    },
+    "T": {
+      "item": "chaosawakens:titanium_nugget"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:ultimate_crossbow_bolt",
+    "count": 8
+  }
+}

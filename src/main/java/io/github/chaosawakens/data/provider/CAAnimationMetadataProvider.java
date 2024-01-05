@@ -223,6 +223,15 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Swim", 1.76D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Flop", 1.76D, ILoopType.EDefaultLoopTypes.LOOP)));
 
+        // Projectiles
+        createAnimationMetadata(ChaosAwakens.prefix("animations/projectiles/robo_sniper_laser.animation.json"), Lists.newArrayList(
+                new AnimationDataHolder("Idle", 5.04D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Death", 0.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+        createAnimationMetadata(ChaosAwakens.prefix("animations/projectiles/ultimate_bolt.animation.json"), Lists.newArrayList(
+                new AnimationDataHolder("Moving", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Stuck", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Hit", 1.0D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+
   /*      MolangParser glibMolangParser = GeckoLibCache.getInstance().parser;
 
         try {

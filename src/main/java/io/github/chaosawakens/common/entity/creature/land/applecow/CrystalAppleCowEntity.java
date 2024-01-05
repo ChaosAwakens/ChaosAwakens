@@ -101,9 +101,9 @@ public class CrystalAppleCowEntity extends AnimatableAnimalEntity {
 			@Override
 			public void tick() {
 				super.tick();
-				
-				if (distanceToSqr(toAvoid) < 49.0D) setPanicking(true);
-				else setPanicking(false);
+
+                setPanicking(distanceToSqr(toAvoid) < 109.0D);
+				getNavigation().setSpeedModifier(distanceToSqr(toAvoid) < 109.0D ? 2.0D : 1.2D);
 			}
 		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));

@@ -24,8 +24,8 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	private final ObjectArrayList<WrappedAnimationController<RoboLaserEntity>> roboLaserControllers = new ObjectArrayList<WrappedAnimationController<RoboLaserEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> roboLaserAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final WrappedAnimationController<RoboLaserEntity> mainController = createMainMappedController("robolasermaincontroller");
-	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "death", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	public static final String ROBO_LASER_MDF_NAME = "robo_sniper_laser";
 	private boolean hit;
 	
@@ -70,7 +70,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 
 	@Override
 	public int animationInterval() {
-		return 0;
+		return 1;
 	}
 
 	@Override

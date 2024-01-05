@@ -58,7 +58,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 /**
  * TODO Copied from Databuddy to patch uncaught {@link IllegalStateException} due to accessing the server too early (it's the exception thrown whenever that happens,
- * but this also catches NPE too so dw). Also makes data field public to allow for data syncing w/packets.
+ * but this also catches NPE too so dw). Also makes {@link #data} field public to allow for data syncing w/packets.
  * <br> </br>
  * <br> </br>
  * <p>See drullkus's primer on what codecs are and how to assemble them:<br>

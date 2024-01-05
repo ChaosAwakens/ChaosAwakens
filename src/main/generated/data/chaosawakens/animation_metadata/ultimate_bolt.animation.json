@@ -1,0 +1,20 @@
+{
+  "anim_file_loc": "chaosawakens:animations/projectiles/ultimate_bolt.animation.json",
+  "animations": [
+    {
+      "animation_name": "Stuck",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Hit",
+      "animation_length": 1.0,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Moving",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    }
+  ]
+}

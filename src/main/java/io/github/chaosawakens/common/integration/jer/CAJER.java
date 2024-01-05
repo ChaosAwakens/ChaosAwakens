@@ -27,7 +27,7 @@ import net.minecraft.world.biome.Biome;
 public class CAJER {
 	private static final ObjectArrayList<Class<? extends LivingEntity>> CUSTOM_RENDER_HOOK_ENTITIES = new ObjectArrayList<Class<? extends LivingEntity>>();
 	public static IMobRenderHook DEFAULT = (renderInfo, targetEntity) -> {
-		if (targetEntity != null && targetEntity instanceof IAnimatableEntity && !CUSTOM_RENDER_HOOK_ENTITIES.contains(targetEntity.getClass())) {
+		if (targetEntity instanceof IAnimatableEntity && !CUSTOM_RENDER_HOOK_ENTITIES.contains(targetEntity.getClass())) {
 			IAnimatableEntity targetAnimatable = (IAnimatableEntity) targetEntity;
 			
 			if (targetAnimatable.getIdleAnim() != null) targetAnimatable.playAnimation(targetAnimatable.getIdleAnim(), true);

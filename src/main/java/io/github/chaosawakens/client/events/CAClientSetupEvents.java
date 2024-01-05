@@ -38,11 +38,7 @@ import io.github.chaosawakens.client.renderers.entity.misc.UltimateBobberProject
 import io.github.chaosawakens.client.renderers.entity.neutral.land.dino.CrystalGatorEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.neutral.land.dino.DimetrodonEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.neutral.land.gator.EmeraldGatorEntityRenderer;
-import io.github.chaosawakens.client.renderers.entity.projectile.IrukandjiArrowProjectileRenderer;
-import io.github.chaosawakens.client.renderers.entity.projectile.RayGunProjectileRenderer;
-import io.github.chaosawakens.client.renderers.entity.projectile.RoboLaserProjectileRenderer;
-import io.github.chaosawakens.client.renderers.entity.projectile.ThunderStaffProjectileRenderer;
-import io.github.chaosawakens.client.renderers.entity.projectile.UltimateArrowProjectileRenderer;
+import io.github.chaosawakens.client.renderers.entity.projectile.*;
 import io.github.chaosawakens.common.blocks.tileentities.screens.CopperDefossilizerScreen;
 import io.github.chaosawakens.common.blocks.tileentities.screens.CrystalDefossilizerScreen;
 import io.github.chaosawakens.common.blocks.tileentities.screens.IronDefossilizerScreen;
@@ -118,6 +114,7 @@ public class CAClientSetupEvents {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TERMITE.get(), (manager) -> new AggressiveAntEntityRenderer(manager, CAEntityTypes.TERMITE.getId().getPath()));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.TREE_FROG.get(), TreeFrogEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_ARROW.get(), UltimateArrowProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ULTIMATE_CROSSBOW_BOLT.get(), UltimateCrossbowBoltEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.IRUKANDJI_ARROW.get(), IrukandjiArrowProjectileRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THUNDER_BALL.get(), ThunderStaffProjectileRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.EXPLOSIVE_BALL.get(), RayGunProjectileRenderer::new);

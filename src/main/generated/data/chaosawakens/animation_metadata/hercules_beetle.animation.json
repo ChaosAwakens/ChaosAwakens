@@ -2,9 +2,44 @@
   "anim_file_loc": "chaosawakens:animations/boss/miniboss/hercules_beetle.animation.json",
   "animations": [
     {
+      "animation_name": "Awaken",
+      "animation_length": 7.28,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Ram Attack",
+      "animation_length": 1.16,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Docile",
+      "animation_length": 14.32,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Death",
       "animation_length": 0.76,
       "loop_type": "HOLD_ON_LAST_FRAME"
+    },
+    {
+      "animation_name": "Munch Attack",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Leap",
+      "animation_length": 2.76,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Grab",
+      "animation_length": 0.64,
+      "loop_type": "HOLD_ON_LAST_FRAME"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 3.52,
+      "loop_type": "LOOP"
     },
     {
       "animation_name": "Ground Slam",
@@ -17,39 +52,9 @@
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 3.52,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Docile",
-      "animation_length": 14.32,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Ram Attack",
-      "animation_length": 1.16,
+      "animation_name": "Flail Flap",
+      "animation_length": 3.88,
       "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Fly",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Leap",
-      "animation_length": 2.76,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Awaken",
-      "animation_length": 7.28,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Grab",
-      "animation_length": 0.64,
-      "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
       "animation_name": "Walk",
@@ -57,12 +62,7 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Flail Flap",
-      "animation_length": 3.88,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Munch Attack",
+      "animation_name": "Fly",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     }

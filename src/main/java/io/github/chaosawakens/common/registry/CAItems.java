@@ -10,6 +10,7 @@ import io.github.chaosawakens.common.items.bucket.PinkTourmalineBucketItem;
 import io.github.chaosawakens.common.items.dev.DevItem;
 import io.github.chaosawakens.common.items.projectile.IrukandjiArrowItem;
 import io.github.chaosawakens.common.items.projectile.LettuceChickenEggItem;
+import io.github.chaosawakens.common.items.projectile.UltimateCrossbowBoltItem;
 import io.github.chaosawakens.common.items.tools.*;
 import io.github.chaosawakens.common.items.weapons.BasiliskSwordItem;
 import io.github.chaosawakens.common.items.weapons.BigHammerItem;
@@ -177,6 +178,7 @@ public class CAItems {
 	public static final RegistryObject<Item> PEACOCK_FEATHER = ITEMS.register("peacock_feather", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> DEAD_IRUKANDJI = ITEMS.register("dead_irukandji", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<IrukandjiArrowItem> IRUKANDJI_ARROW = ITEMS.register("irukandji_arrow", () -> new IrukandjiArrowItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
+	public static final RegistryObject<UltimateCrossbowBoltItem> ULTIMATE_CROSSBOW_BOLT = ITEMS.register("ultimate_crossbow_bolt", () -> new UltimateCrossbowBoltItem(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<WallOrFloorItem> CRYSTAL_TORCH = ITEMS.register("crystal_torch", () -> new WallOrFloorItem(CABlocks.CRYSTAL_TORCH.get(), CABlocks.WALL_CRYSTAL_TORCH.get(), new Item.Properties().tab(CAItemGroups.BLOCKS)));
 	public static final RegistryObject<WallOrFloorItem> SUNSTONE_TORCH = ITEMS.register("sunstone_torch", () -> new WallOrFloorItem(CABlocks.SUNSTONE_TORCH.get(), CABlocks.WALL_SUNSTONE_TORCH.get(), new Item.Properties().tab(CAItemGroups.BLOCKS)));
 	public static final RegistryObject<WallOrFloorItem> EXTREME_TORCH = ITEMS.register("extreme_torch", () -> new WallOrFloorItem(CABlocks.EXTREME_TORCH.get(), CABlocks.WALL_EXTREME_TORCH.get(), new Item.Properties().tab(CAItemGroups.BLOCKS)));

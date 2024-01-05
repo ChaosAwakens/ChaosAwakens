@@ -1102,6 +1102,19 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.TITANIUM_INGOT.get().asItem(), has(CAItems.TITANIUM_INGOT.get()))
 				.unlockedBy("has_" + CAItems.URANIUM_INGOT.get().asItem(), has(CAItems.URANIUM_INGOT.get()))
 				.save(recipeConsumer);
+		ShapedRecipeBuilder.shaped(CAItems.ULTIMATE_CROSSBOW_BOLT.get(), 8)
+				.define('S', CAItems.SUNSTONE.get())
+				.define('P', CAItems.PLATINUM_LUMP.get())
+				.define('U', CAItems.URANIUM_NUGGET.get())
+				.define('T', CAItems.TITANIUM_NUGGET.get())
+				.pattern("SU ")
+				.pattern("UPT")
+				.pattern(" TP")
+				.unlockedBy("has_" + CAItems.SUNSTONE.get().asItem(), has(CAItems.SUNSTONE.get()))
+				.unlockedBy("has_" + CAItems.PLATINUM_LUMP.get().asItem(), has(CAItems.PLATINUM_LUMP.get()))
+				.unlockedBy("has_" + CAItems.URANIUM_NUGGET.get().asItem(), has(CAItems.URANIUM_NUGGET.get()))
+				.unlockedBy("has_" + CAItems.TITANIUM_NUGGET.get().asItem(), has(CAItems.TITANIUM_NUGGET.get()))
+				.save(recipeConsumer);
 
 		ShapedRecipeBuilder.shaped(CAItems.SKATE_STRING_BOW.get())
 				.define('C', CAItems.CRYSTALWOOD_SHARD.get())

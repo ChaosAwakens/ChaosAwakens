@@ -12,7 +12,9 @@ public class CAServerConfig {
 	public final IntValue ultimateShovelDamage;
 	public final IntValue ultimateHoeDamage;
 	public final DoubleValue ultimateBowArrowBaseDamage;
+	public final DoubleValue ultimateCrossbowBoltBaseDamage;
 	public final DoubleValue ultimateBowArrowDamageMultiplier;
+	public final DoubleValue ultimateCrossbowBoltDamageMultiplier;
 	public final IntValue emeraldSwordDamage;
 	public final IntValue emeraldAxeDamage;
 	public final IntValue emeraldPickaxeDamage;
@@ -105,7 +107,9 @@ public class CAServerConfig {
 		ultimateBowArrowBaseDamage = builder
 				.comment("How much damage the Ultimate bow will add up to the base arrow damage")
 				.defineInRange("Additional Damage of the Ultimate Bow Arrows", 5D, 0D, Integer.MAX_VALUE);
+		ultimateCrossbowBoltBaseDamage = builder.defineInRange("Added Power Damage of the Ultimate Crossbow Bolts", 50D, 0D, Integer.MAX_VALUE);
 		ultimateBowArrowDamageMultiplier = builder.defineInRange("Damage Multiplier of the Ultimate Bow's Power Enchantment", 0.5, 0, Integer.MAX_VALUE);
+		ultimateCrossbowBoltDamageMultiplier = builder.defineInRange("Damage Multiplier of the Ultimate Crossbow's Power Enchantment", 1D, 0, Integer.MAX_VALUE);
 		builder.pop();
 		
 		builder.push("Emerald Weapons/Tools");

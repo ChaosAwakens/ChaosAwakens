@@ -28,7 +28,7 @@ import java.util.Optional;
 
 /**
  * An extended implementation of {@link IAnimatable} and {@link IAnimationTickable} which provides extended functionality to any GeoAnimatable 
- * {@link LivingEntity}. This interface must be implemented to any {@link LivingEntity} that intends to utilize the extended 
+ * {@link LivingEntity}. Also works on a basic level for non-living entities. This interface must be implemented to any {@link LivingEntity} that intends to utilize the extended
  * functionality provided by wrappers such as {@link IAnimationBuilder} instances and {@link WrappedAnimationController}.
  */
 public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
@@ -36,8 +36,14 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	<E extends IAnimatableEntity> WrappedAnimationController<? extends E> getMainWrappedController();
 	
 	/**
-	 * A forced (tick) interval between each animation. Is used by default in controller creation methods in this interface, though there are overloaded methods 
-	 * that allow you to specify different animation intervals per-controller if needed.
+	 * A forced (tick) interval between each animation. Used by default in controller creation methods in this interface, though there are overloaded methods
+	 * which allow you to specify different animation intervals per-controller if needed.
+	 * <br></br>
+	 * <br></br>
+	 * <b>DO NOT SET THIS TO A VALUE LESS THAN 1!!</b> Otherwise, due to some odd deference
+	 * in the existence of the animatable on the client (specifically Geckolib's side), the current animation on the client (Geckolib) will always return {@code null}
+	 * and thus crash the game with a {@code NullPointerException}.
+	 *
 	 * @return The transitioning delay (in ticks) between animations.
 	 */
 	int animationInterval();
@@ -46,7 +52,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * This is the main predicate, in which all the animations are handled conditionally.
 	 * If you need to, you can make more predicates for your use case(s).
 	 * @param <E> IAnimatable type parameter.
-	 * @param Event the animation event.
+	 * @param event the animation event.
 	 * @return a PlayState for each set animation.
 	 */
 	<E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event);
@@ -158,7 +164,8 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 	
 	/**
-	 * Checks if a certain animation (by name) is playing in any of the controllers stored in {@link #getWrappedControllers()}.
+	 * Checks if a certain animation (by name) is playing in any of the controllers stored in {@link #getWrappedControllers()} on both the server and the client.
+	 *
 	 * @param targetAnimName The target animation name to check for.
 	 * @return true if the specified animation (by name) is playing in any of the controllers stored in {@link #getWrappedControllers()}, else returns false.
 	 */
@@ -170,7 +177,8 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	/**
-	 * Overloaded method for {@link #isPlayingAnimation(String)}.
+	 * Overloaded method for {@link #isPlayingAnimation(String)}. Should primarily be used on the client.
+	 *
 	 * @param targetAnim The target animation to check for.
 	 * @return {@link #isPlayingAnimation(String)}.
 	 */
@@ -238,6 +246,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * predicates are useless! You can still use them to return an {@link AnimationState}, which will be synced and
 	 * handled accordingly on the server. You still have to use {@link DataParameter}s for syncing, though. Animation
 	 * predicates will <i>always</i> be client side.
+	 *
 	 * @param animation The animation to play.
 	 * @param clearCache If the {@link IAnimationBuilder}'s {@link AnimationBuilder} cache should be cleared
 	 */
@@ -245,12 +254,14 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
 		animation.getWrappedController().playAnimation(animation, clearCache);
 		
-		if (!((Entity) this).level.isClientSide())
-			CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(),
-					animation.getAnimationName(), animation.getLoopType(),
-					animation.getWrappedController().getName(), clearCache), (Entity) this);
+		if (!((Entity) this).level.isClientSide()) CANetworkManager.sendEntityTrackingPacket(new AnimationTriggerPacket(((Entity) this).getId(), animation.getAnimationName(), animation.getLoopType(), animation.getWrappedController().getName(), clearCache), (Entity) this);
 	}
-	
+
+	/**
+	 * Forcefully stops the specified animation if it's playing from both the server and the client.
+	 *
+	 * @param animation The animation to stop.
+	 */
 	default void stopAnimation(IAnimationBuilder animation) {
 		if (!ObjectUtil.performNullityChecks(false, animation)) return;
 		animation.getWrappedController().stopAnimation(animation);
@@ -273,7 +284,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default void tickAnims() {
-		getWrappedControllers().forEach(targetWrappedController -> targetWrappedController.tick());
+		getWrappedControllers().forEach(WrappedAnimationController::tick);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.registry;
 import com.google.common.collect.Maps;
 import io.github.chaosawakens.common.entity.projectile.CALettuceChickenEggEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.IrukandjiArrowEntity;
+import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowBoltEntity;
 import net.minecraft.block.*;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
@@ -326,7 +327,12 @@ public class CAVanillaCompat {
 				return new CALettuceChickenEggEntity(world, pos.x(), pos.y(), pos.z());
 			}
 		});
-	//	DispenserBlock.registerBehavior(null, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
+		DispenserBlock.registerBehavior(CAItems.ULTIMATE_CROSSBOW_BOLT.get(), new ProjectileDispenseBehavior() {
+			@Override
+			protected ProjectileEntity getProjectile(World world, IPosition pos, ItemStack stack) {
+				return new UltimateCrossbowBoltEntity(world, pos.x(), pos.y(), pos.z());
+			}
+		});
 	}
 	
 	private static void registerStrippable(Block log, Block stripped_log) {

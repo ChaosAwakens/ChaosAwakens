@@ -106,8 +106,9 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 			@Override
 			public void tick() {
 				super.tick();
-				if (distanceToSqr(toAvoid) < 49.0D) setPanicking(true);
-				else setPanicking(false);
+
+                setPanicking(distanceToSqr(toAvoid) < 150.5D);
+				getNavigation().setSpeedModifier(distanceToSqr(toAvoid) < 150.5D ? 2.5D : 1.0D);
 			}
 		});
 		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 2.0F));

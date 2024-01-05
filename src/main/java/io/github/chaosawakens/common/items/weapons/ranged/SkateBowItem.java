@@ -21,74 +21,72 @@ public class SkateBowItem extends BowItem {
 	}
 
 	private ItemStack findAmmo(ItemStack shootable, PlayerEntity playerEntity) {
-		Predicate<ItemStack> predicate = ((ShootableItem) shootable.getItem()).getSupportedHeldProjectiles();
-		ItemStack itemstack = ShootableItem.getHeldProjectile(playerEntity, predicate);
-		if (!itemstack.isEmpty()) return itemstack;
+		Predicate<ItemStack> supportedProjectilesPredicate = ((ShootableItem) shootable.getItem()).getSupportedHeldProjectiles();
+		ItemStack heldProjectileStack = ShootableItem.getHeldProjectile(playerEntity, supportedProjectilesPredicate);
+
+		if (!heldProjectileStack.isEmpty()) return heldProjectileStack;
 		else {
-			predicate = ((ShootableItem) shootable.getItem()).getAllSupportedProjectiles();
+			supportedProjectilesPredicate = ((ShootableItem) shootable.getItem()).getAllSupportedProjectiles();
+
 			for (int i = 0; i < playerEntity.inventory.getContainerSize(); ++i) {
-				ItemStack itemstack1 = playerEntity.inventory.getItem(i);
-				if (predicate.test(itemstack1)) return itemstack1;
+				ItemStack curStack = playerEntity.inventory.getItem(i);
+
+				if (supportedProjectilesPredicate.test(curStack)) return curStack;
 			}
-			return playerEntity.abilities.instabuild ? new ItemStack(CAItems.IRUKANDJI_ARROW.get()) : ItemStack.EMPTY;
+			return playerEntity.abilities.instabuild ? CAItems.IRUKANDJI_ARROW.get().getDefaultInstance() : ItemStack.EMPTY;
 		}
 	}
 
 	@Override
 	public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
-			PlayerEntity playerentity = (PlayerEntity) entityLiving;
-			boolean flag = playerentity.abilities.instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
-			ItemStack itemstack = findAmmo(stack, playerentity);
+			PlayerEntity chargingEntity = (PlayerEntity) entityLiving;
+			boolean applyInfinityLogic = chargingEntity.abilities.instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
+			ItemStack existingAmmoStack = findAmmo(stack, chargingEntity);
+			int remainingUseDuration = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, chargingEntity, getUseDuration(stack) - timeLeft, !existingAmmoStack.isEmpty() || applyInfinityLogic);
 
-			int i = this.getUseDuration(stack) - timeLeft;
-			i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, !itemstack.isEmpty() || flag);
-			if (i < 0) return;
+			if (remainingUseDuration < 0) return;
 
-			if (!itemstack.isEmpty() || flag) {
-				if (itemstack.isEmpty()) itemstack = new ItemStack(CAItems.IRUKANDJI_ARROW.get());
+			if (!existingAmmoStack.isEmpty() || applyInfinityLogic) {
+				if (existingAmmoStack.isEmpty()) existingAmmoStack = CAItems.IRUKANDJI_ARROW.get().getDefaultInstance();
 
-				float f = getPowerForTime(i);
-				if (!((double) f < 0.1D)) {
-					boolean flag1 = playerentity.abilities.instabuild
-							|| (itemstack.getItem() instanceof ArrowItem
-							&& ((ArrowItem) itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
-					if (!worldIn.isClientSide) {
-						ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem
-								? itemstack.getItem()
-								: CAItems.IRUKANDJI_ARROW.get());
-						AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
-						abstractarrowentity = customArrow(abstractarrowentity);
-						abstractarrowentity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F,
-								f * 3.0F, 1.0F);
+				float chargedPower = getPowerForTime(remainingUseDuration);
 
-						if (f == 1.0F) abstractarrowentity.setCritArrow(true);
+				if (chargedPower >= 0.1F) {
+					boolean hasInfiniteAmmo = chargingEntity.abilities.instabuild || (existingAmmoStack.getItem() instanceof ArrowItem && ((ArrowItem) existingAmmoStack.getItem()).isInfinite(existingAmmoStack, stack, chargingEntity));
 
-						int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
-						if (j > 0) abstractarrowentity.setBaseDamage(abstractarrowentity.getBaseDamage() + (double) j * 0.5D + 0.5D);
+					if (!worldIn.isClientSide()) {
+						ArrowItem targetArrow = (ArrowItem) (existingAmmoStack.getItem() instanceof ArrowItem ? existingAmmoStack.getItem() : CAItems.IRUKANDJI_ARROW.get());
+						AbstractArrowEntity spawnedArrow = customArrow(targetArrow.createArrow(worldIn, existingAmmoStack, chargingEntity));
 
-						int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
-						if (k > 0) abstractarrowentity.setKnockback(k);
+						spawnedArrow.shootFromRotation(chargingEntity, chargingEntity.xRot, chargingEntity.yRot, 0.0F, chargedPower * 3.0F, 1.0F);
 
-						if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0) abstractarrowentity.setSecondsOnFire(100);
+						if (chargedPower == 1.0F) spawnedArrow.setCritArrow(true);
 
-						stack.hurtAndBreak(1, playerentity, (player) -> player.broadcastBreakEvent(playerentity.getUsedItemHand()));
-						if (flag1 || playerentity.abilities.instabuild
-								&& (itemstack.getItem() == Items.SPECTRAL_ARROW
-								|| itemstack.getItem() == Items.TIPPED_ARROW || itemstack.getItem() == Items.ARROW)) {
-							abstractarrowentity.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
-						}
+						int powerEnchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
+						int punchEnchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
+						int flameEnchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack);
 
-						worldIn.addFreshEntity(abstractarrowentity);
+						if (powerEnchantmentLevel > 0) spawnedArrow.setBaseDamage(spawnedArrow.getBaseDamage() + (double) powerEnchantmentLevel * 0.5D + 0.5D);
+						if (punchEnchantmentLevel > 0) spawnedArrow.setKnockback(punchEnchantmentLevel);
+						if (flameEnchantmentLevel > 0) spawnedArrow.setSecondsOnFire(100);
+
+						stack.hurtAndBreak(1, chargingEntity, (player) -> player.broadcastBreakEvent(chargingEntity.getUsedItemHand()));
+
+						if (hasInfiniteAmmo || chargingEntity.abilities.instabuild && (existingAmmoStack.getItem() == Items.SPECTRAL_ARROW || existingAmmoStack.getItem() == Items.TIPPED_ARROW || existingAmmoStack.getItem() == Items.ARROW)) spawnedArrow.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+
+						worldIn.addFreshEntity(spawnedArrow);
 					}
 
-					worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-					if (!flag1 && !playerentity.abilities.instabuild) {
-						itemstack.shrink(1);
-						if (itemstack.isEmpty()) playerentity.inventory.removeItem(itemstack);
+					worldIn.playSound(null, chargingEntity.getX(), chargingEntity.getY(), chargingEntity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + chargedPower * 0.5F);
+
+					if (!hasInfiniteAmmo && !chargingEntity.abilities.instabuild) {
+						existingAmmoStack.shrink(1);
+
+						if (existingAmmoStack.isEmpty()) chargingEntity.inventory.removeItem(existingAmmoStack);
 					}
 
-					playerentity.awardStat(Stats.ITEM_USED.get(this));
+					chargingEntity.awardStat(Stats.ITEM_USED.get(this));
 				}
 			}
 		}

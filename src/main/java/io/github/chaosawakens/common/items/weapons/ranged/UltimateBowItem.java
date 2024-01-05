@@ -36,11 +36,13 @@ public class UltimateBowItem extends EnchantedBowItem implements IVanishable {
 			if (ForgeEventFactory.onArrowLoose(stack, worldIn, playerOwner, this.getUseDuration(stack) - timeLeft, true) < 0) return;
 			if (!worldIn.isClientSide) {
 				UltimateArrowEntity ultArrow = new UltimateArrowEntity(worldIn, owner);
+
 				ultArrow.shootFromRotation(playerOwner, playerOwner.xRot, playerOwner.yRot, 0.0F, 3.0F, 0F);
 				ultArrow.setCritArrow(true);
 				ultArrow.setSecondsOnFire(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0 ? 250 : 75);
 
 				int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
+
 				if (!CAConfigManager.MAIN_COMMON.enableAutoEnchanting.get()) ultArrow.setBaseDamage(CAConfigManager.MAIN_SERVER.ultimateBowArrowBaseDamage.get() + (double) powerLevel * CAConfigManager.MAIN_SERVER.ultimateBowArrowDamageMultiplier.get() + 2D);
 				else ultArrow.setBaseDamage(CAConfigManager.MAIN_SERVER.ultimateBowArrowBaseDamage.get() + 3D);
 

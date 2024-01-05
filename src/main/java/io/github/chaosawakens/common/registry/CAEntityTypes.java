@@ -33,6 +33,7 @@ import io.github.chaosawakens.common.entity.projectile.ThunderStaffProjectileEnt
 import io.github.chaosawakens.common.entity.projectile.arrow.IrukandjiArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowArrowEntity;
+import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowBoltEntity;
 import io.github.chaosawakens.common.entity.projectile.bobber.UltimateFishingBobberEntity;
 import io.github.chaosawakens.common.util.EnumUtil.EntType;
 import io.github.chaosawakens.manager.CAConfigManager;
@@ -50,6 +51,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class CAEntityTypes {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ChaosAwakens.MODID);
+
 	// Ents
 	public static final RegistryObject<EntityType<EntEntity>> ACACIA_ENT = ENTITY_TYPES.register("acacia_ent",
 			() -> EntityType.Builder.of((IFactory<EntEntity>) (type, world) -> new EntEntity(type, world, EntType.ACACIA), EntityClassification.MONSTER)
@@ -317,6 +319,11 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.<IrukandjiArrowEntity>of(IrukandjiArrowEntity::new, EntityClassification.MISC)
 					.sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20)
 					.build(ChaosAwakens.prefix("irukandji_arrow").toString()));
+
+	public static final RegistryObject<EntityType<UltimateCrossbowBoltEntity>> ULTIMATE_CROSSBOW_BOLT = ENTITY_TYPES.register("ultimate_crossbow_bolt",
+			() -> EntityType.Builder.<UltimateCrossbowBoltEntity>of(UltimateCrossbowBoltEntity::new, EntityClassification.MISC)
+					.sized(0.5F, 0.5F).clientTrackingRange(8).updateInterval(20)
+					.build(ChaosAwakens.prefix("ultimate_crossbow_bolt").toString()));
 	public static final RegistryObject<EntityType<ThunderStaffProjectileEntity>> THUNDER_BALL = ENTITY_TYPES.register("thunder_ball",
 			() -> EntityType.Builder.<ThunderStaffProjectileEntity>of(ThunderStaffProjectileEntity::new, EntityClassification.MISC)
 					.sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(20)

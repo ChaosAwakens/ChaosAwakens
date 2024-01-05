@@ -119,7 +119,7 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 				setPanicking(false);
 			}
 		});
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.1D, 1.4D) {
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.1D, 1.44D) {
 			@Override
 			public void stop() {
 				super.stop();
@@ -129,9 +129,9 @@ public class LettuceChickenEntity extends AnimatableAnimalEntity {
 			@Override
 			public void tick() {
 				super.tick();
-				
-				if (distanceToSqr(toAvoid) < 49.0D) setPanicking(true);
-				else setPanicking(false);
+
+				setPanicking(distanceToSqr(toAvoid) < 120.0D);
+				getNavigation().setSpeedModifier(distanceToSqr(toAvoid) < 120.0D ? 1.44D : 1.1D);
 			}
 		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.2D));

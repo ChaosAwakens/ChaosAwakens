@@ -243,7 +243,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		
 	@Override
 	public boolean doHurtTarget(Entity target) {
-		if (target != null && target instanceof LivingEntity) manageAttack((LivingEntity) target);
+		if (target instanceof LivingEntity) manageAttack((LivingEntity) target);
 		return super.doHurtTarget(target);
 	}
 

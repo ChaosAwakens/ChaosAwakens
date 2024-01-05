@@ -8,7 +8,10 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class IrukandjiArrowEntity extends AbstractArrowEntity {
@@ -16,7 +19,6 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 
 	public IrukandjiArrowEntity(EntityType<? extends IrukandjiArrowEntity> type, World worldIn) {
 		super(type, worldIn);
-		setBaseDamage(100D);
 	}
 
 	public IrukandjiArrowEntity(World worldIn, double x, double y, double z) {
@@ -47,7 +49,9 @@ public class IrukandjiArrowEntity extends AbstractArrowEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.level.isClientSide && this.inGround && this.inGroundTime != 0 && this.inGroundTime >= 600) this.level.broadcastEntityEvent(this, (byte) 0);
+
+		if (!level.isClientSide && inGround && inGroundTime != 0 && inGroundTime >= 600) level.broadcastEntityEvent(this, (byte) 0);
+		if (level instanceof ServerWorld && !inGround && isAlive() && getDeltaMovement().length() > 0.01D) ((ServerWorld) level).sendParticles(ParticleTypes.CRIT, getX(), getY(), getZ(), MathHelper.nextInt(random, 1, 3), 0.0D, 0.0D, 0.0D, 0.1D);
 	}
 
 	@Override

@@ -8,9 +8,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class RefinedPath extends Path {
+	private final LinkedList<PathPoint> existingNodes = new LinkedList<>();
 
 	public RefinedPath(List<PathPoint> nodes, BlockPos targetPos, boolean hasReached) {
 		super(nodes, targetPos, hasReached);

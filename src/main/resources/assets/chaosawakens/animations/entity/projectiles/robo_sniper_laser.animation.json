@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"idle": {
+		"Idle": {
 			"loop": true,
 			"animation_length": 5.04,
 			"anim_time_update": "0",
@@ -61,7 +61,7 @@
 				}
 			}
 		},
-		"death": {
+		"Death": {
 			"animation_length": 0.24,
 			"anim_time_update": "0",
 			"blend_weight": "1",
