@@ -227,12 +227,14 @@ public final class EntityUtil {
 	
 	/**
 	 * Checks if an {@link Item} is on cooldown via {@link CooldownTracker#isOnCooldown(Item)}
+	 *
 	 * @param playerOwner The owner of the {@link Item} to check for cooldown
 	 * @param targetItem The target {@link Item} to check for cooldown
-	 * @return {@code true} if the specified item is on cooldown (and the player/item aren't nul), else returns {@code false}
+	 *
+	 * @return {@code true} if the specified item is on cooldown (and the player/item aren't {@code null}), else returns {@code false}
 	 */
 	public static boolean isItemOnCooldown(PlayerEntity playerOwner, Item targetItem) {
-		return ObjectUtil.performNullityChecks(false, playerOwner, targetItem) ? playerOwner.getCooldowns().isOnCooldown(targetItem) : false;
+		return ObjectUtil.performNullityChecks(false, playerOwner, targetItem) && playerOwner.getCooldowns().isOnCooldown(targetItem);
 	}
 
 	/**

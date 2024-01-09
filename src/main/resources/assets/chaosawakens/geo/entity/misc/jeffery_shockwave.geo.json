@@ -24,7 +24,7 @@
 								"south": {"uv": [0, 0], "uv_size": [50, 0]},
 								"west": {"uv": [0, 0], "uv_size": [50, 0]},
 								"up": {"uv": [0, 0], "uv_size": [50, 50]},
-								"down": {"uv": [0, 100], "uv_size": [50, -50]}
+								"down": {"uv": [0, 0], "uv_size": [50, 50]}
 							}
 						}
 					]
@@ -37,7 +37,7 @@
 				{
 					"name": "Flames1",
 					"parent": "Flames_rotation",
-					"pivot": [0, 9, -22.875],
+					"pivot": [0, 0, -22.875],
 					"cubes": [
 						{
 							"origin": [-13, 0, -23],
@@ -56,7 +56,7 @@
 				{
 					"name": "Flames2",
 					"parent": "Flames_rotation",
-					"pivot": [0, 9, 22.875],
+					"pivot": [0, 0, 22.875],
 					"cubes": [
 						{
 							"origin": [-13, 0, 22.75],
@@ -75,7 +75,7 @@
 				{
 					"name": "Flames3",
 					"parent": "Flames_rotation",
-					"pivot": [-23, 9, 0],
+					"pivot": [-23, 0, 0],
 					"rotation": [0, -90, 0],
 					"cubes": [
 						{
@@ -95,7 +95,7 @@
 				{
 					"name": "Flames4",
 					"parent": "Flames_rotation",
-					"pivot": [23, 9, 0],
+					"pivot": [23, 0, 0],
 					"rotation": [0, 90, 0],
 					"cubes": [
 						{
@@ -115,7 +115,7 @@
 				{
 					"name": "Flames5",
 					"parent": "Flames_rotation",
-					"pivot": [-16.5, 9, -16.1875],
+					"pivot": [-16.5, 0, -16.1875],
 					"rotation": [0, 45, 0],
 					"cubes": [
 						{
@@ -135,7 +135,7 @@
 				{
 					"name": "Flames6",
 					"parent": "Flames_rotation",
-					"pivot": [16.5, 9, -16.1875],
+					"pivot": [16.5, 0, -16.1875],
 					"rotation": [0, -45, 0],
 					"cubes": [
 						{
@@ -155,7 +155,7 @@
 				{
 					"name": "Flames7",
 					"parent": "Flames_rotation",
-					"pivot": [16.5, 9, 16.1875],
+					"pivot": [16.5, 0, 16.1875],
 					"rotation": [0, 45, 0],
 					"cubes": [
 						{
@@ -175,7 +175,7 @@
 				{
 					"name": "Flames8",
 					"parent": "Flames_rotation",
-					"pivot": [-16.5, 9, 16.1875],
+					"pivot": [-16.5, 0, 16.1875],
 					"rotation": [0, -45, 0],
 					"cubes": [
 						{

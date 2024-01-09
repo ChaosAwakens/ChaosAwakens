@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -45,7 +46,14 @@ public class JefferyShockwaveEntity extends AOEHitboxEntity implements IAnimatab
 	public EntitySize getDimensions(Pose pPose) {
 		return EntitySize.scalable(getRadius() * 2.0F, getRadius() * 0.1F);
 	}
-	
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (tickCount < 10) yRot = MathHelper.lerp(1, yRot, yRot + 2.15F);
+	}
+
 	@Override
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(mainController);

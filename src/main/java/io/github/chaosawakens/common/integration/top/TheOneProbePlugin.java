@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.integration.top;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.common.blocks.ore.CAEntityTrapOreBlock;
 import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
 import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;

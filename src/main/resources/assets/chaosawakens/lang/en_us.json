@@ -258,6 +258,7 @@
 	"entity.chaosawakens.screen_shake": "Screen Shake",
 	"entity.chaosawakens.falling_block": "Falling Block",
 	"entity.chaosawakens.aoe_hitbox": "AOE Hitbox",
+	"entity.chaosawakens.jeffery_shockwave": "Jeffery Shockwave",
 	
 	"entity.chaosawakens.ca_boat": "Boat",
 	
@@ -268,6 +269,7 @@
     "death.attack.thorny_sun": "%1$s was prickled to death by a Thorny Sun",
 	"death.attack.ignition": "%1$s was ignited trying to hurt %2$s",
 	"death.attack.ignition.item": "%1$s was ignited while attempting to hurt %2$s",
+	"death.attack.shockwave": "%1$s was shocked by %2$s",
     
 	"item.chaosawakens.acacia_ent_spawn_egg": "Acacia Ent Spawn Egg",
 	"item.chaosawakens.apple_ent_spawn_egg": "Apple Ent Spawn Egg",

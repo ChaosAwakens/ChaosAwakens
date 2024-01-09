@@ -1,6 +1,8 @@
 package io.github.chaosawakens.common.integration.jer;
 
-import io.github.chaosawakens.api.animation.IAnimatableEntity;
+import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.loot.CATreasure;
 import io.github.chaosawakens.common.registry.CABiomes;
@@ -8,7 +10,7 @@ import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.manager.CAConfigManager;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import jeresources.api.IDungeonRegistry;
 import jeresources.api.IPlantRegistry;
 import jeresources.api.IWorldGenRegistry;
@@ -24,22 +26,49 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.Biome;
 
+import java.util.Random;
+
 public class CAJER {
-	private static final ObjectArrayList<Class<? extends LivingEntity>> CUSTOM_RENDER_HOOK_ENTITIES = new ObjectArrayList<Class<? extends LivingEntity>>();
-	public static IMobRenderHook DEFAULT = (renderInfo, targetEntity) -> {
-		if (targetEntity instanceof IAnimatableEntity && !CUSTOM_RENDER_HOOK_ENTITIES.contains(targetEntity.getClass())) {
-			IAnimatableEntity targetAnimatable = (IAnimatableEntity) targetEntity;
-			
-			if (targetAnimatable.getIdleAnim() != null) targetAnimatable.playAnimation(targetAnimatable.getIdleAnim(), true);
+	private static final Object2ObjectArrayMap<Class<? extends LivingEntity>, IMobRenderHook<? extends LivingEntity>> RENDER_HOOK_ENTRIES = new Object2ObjectArrayMap<>();
+	private static final Random RANDOM = new Random();
+	public static IMobRenderHook<RoboJefferyEntity> ROBO_JEFFERY = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getCachedAnimationByName("Healthy"), true);
+			targetEntity.playAnimation(targetEntity.getCachedAnimationByName("Idle Extras").setAnimSpeed(0.4D), true);
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
 		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<RoboPounderEntity> ROBO_POUNDER = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
 		return renderInfo;
 	};
 	public static IMobRenderHook<RoboWarriorEntity> ROBO_WARRIOR = (renderInfo, targetEntity) -> {
 		if (targetEntity != null) {
 			targetEntity.playAnimation(targetEntity.getCachedAnimationByName("Idle Extras"), true);
-			targetEntity.playAnimation(targetEntity.getIdleAnim(), false);
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.5D), true);
+
+			targetEntity.tickCount++;
 		}
 		
+		return renderInfo;
+	};
+	public static IMobRenderHook<RoboSniperEntity> ROBO_SNIPER = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			if (RANDOM.nextInt(120) == 0 && !targetEntity.getCachedAnimationByName("Idle Extras").isPlaying()) targetEntity.playAnimation(targetEntity.getCachedAnimationByName("Idle Extras"), true);
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.2D), true);
+
+			targetEntity.tickCount++;
+		}
+
 		return renderInfo;
 	};
 
@@ -985,10 +1014,12 @@ public class CAJER {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private static void registerEntityRenderers() {
-	//	registerMobRenderHook((Class<? extends LivingEntity>) IAnimatableEntity.class, DEFAULT);
-	//	registerMobRenderHook(RoboWarriorEntity.class, ROBO_WARRIOR);
+		// Robos
+		registerMobRenderHook(RoboJefferyEntity.class, ROBO_JEFFERY);
+		registerMobRenderHook(RoboPounderEntity.class, ROBO_POUNDER);
+		registerMobRenderHook(RoboWarriorEntity.class, ROBO_WARRIOR);
+		registerMobRenderHook(RoboSniperEntity.class, ROBO_SNIPER);
 	}
 
 	/**
@@ -1001,11 +1032,6 @@ public class CAJER {
 	}
 	
 	public static <E extends LivingEntity> void registerMobRenderHook(Class<E> clazz, IMobRenderHook<E> renderHook) {
-		if (renderHook != DEFAULT) CUSTOM_RENDER_HOOK_ENTITIES.add(clazz);
-        JERAPI.getInstance().getMobRegistry().registerRenderHook(clazz, renderHook);
+		JERAPI.getInstance().getMobRegistry().registerRenderHook(clazz, renderHook);
     }
-	
-	public static void renderAnimatableEntity() {
-		
-	}
 }

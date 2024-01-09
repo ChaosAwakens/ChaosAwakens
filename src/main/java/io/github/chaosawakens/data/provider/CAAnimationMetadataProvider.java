@@ -46,7 +46,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Smash Attack", 3.0D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Leap Attack: Leap", 0.81D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Leap Attack: Midair", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Leap Attack: Land", 2.2D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Leap Attack: Land", 2.45D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Idle Extras", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 9.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Low Health", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
@@ -198,7 +198,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Shoot", 1.56D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Misc
-        createAnimationMetadata(ChaosAwakens.prefix("animations/misc/jeffery_schockwave.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/misc/jeffery_shockwave.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Expand", 18.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         
         // Projectile

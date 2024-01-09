@@ -221,7 +221,7 @@ public class ChainedAnimationBuilder implements IAnimationBuilder {
 	}
 
 	/**
-	 * Gets whether or not this {@code ChainedAnimationBuilder} instance should shuffle its animation chain.
+	 * Gets whether this {@code ChainedAnimationBuilder} instance should shuffle its animation chain.
 	 * @return {@code true} if {@link #isRandomized} is set to true (through {@link #setRandomized(boolean)}), else returns {@code false}.
 	 */
 	public boolean isRandomized() {

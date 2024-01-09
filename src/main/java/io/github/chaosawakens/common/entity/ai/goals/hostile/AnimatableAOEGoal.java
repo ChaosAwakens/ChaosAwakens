@@ -53,6 +53,7 @@ public class AnimatableAOEGoal extends Goal {
 	@Nullable
 	protected Supplier<SoundEvent> soundOnStart;
 	protected float soundPitch = 1.0F;
+	protected Double expSpeed;
 
 	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int amountThreshold, int probability, boolean shouldFreezeRotation, boolean shouldAffectBlocks, boolean isProgressive, int presetCooldown) {
 		this.owner = owner;
@@ -114,7 +115,7 @@ public class AnimatableAOEGoal extends Goal {
 	}
 
 	public AnimatableAOEGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> aoeAnim, byte attackId, double actionPointTickStart, double actionPointTickEnd, double aoeRange, int presetCooldown, Predicate<AnimatableMonsterEntity> extraActivationConditions) {
-		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, 3, 1, true, false, true, presetCooldown);
+		this(owner, aoeAnim, attackId, actionPointTickStart, actionPointTickEnd, aoeRange, 1, 1, true, false, true, presetCooldown);
 		this.extraActivationConditions = extraActivationConditions;
 	}
 
@@ -152,6 +153,11 @@ public class AnimatableAOEGoal extends Goal {
 		return this;
 	}
 
+	public AnimatableAOEGoal expSpeed(Double expSpeed) {
+		this.expSpeed = expSpeed;
+		return this;
+	}
+
 	@Override
 	public boolean canUse() {
 		if (curCooldown > 0) curCooldown--;
@@ -185,7 +191,7 @@ public class AnimatableAOEGoal extends Goal {
 
 		this.curAnim = targetAnim;
 		
-		this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()) / 2, 3, null);
+		this.aoeDamageHitBox = new AOEHitboxEntity(owner.level, owner.blockPosition(), (float) aoeRange, expSpeed != null ? Float.parseFloat(expSpeed.toString()) : (float) aoeRange / 2, (int) (curAnim.get().getWrappedAnimLength() - curAnim.get().getWrappedAnimProgress()) / 2, 3, null);
 
 		aoeDamageHitBox.setActionOnIntersection((target) -> {
 			if (!affectedEntities.contains(target) && owner != target && !owner.isAlliedTo(target) && EntityPredicates.ATTACK_ALLOWED.test(target) && owner.getClass() != target.getClass()) {
@@ -235,9 +241,9 @@ public class AnimatableAOEGoal extends Goal {
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 6, (float) Math.min(aoeRange / 10, 0.6D), 4, 20);
 				owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
 				
-				for (BlockPos curAffectedParticlePos : BlockPos.betweenClosed(negBlockRange, posBlockRange)) {
+			/*	for (BlockPos curAffectedParticlePos : BlockPos.betweenClosed(negBlockRange, posBlockRange)) {
 					if (owner.level instanceof ServerWorld) ((ServerWorld) owner.level).sendParticles(new BlockParticleData(ParticleTypes.BLOCK, owner.level.getBlockState(curAffectedParticlePos)), curAffectedParticlePos.getX(), curAffectedParticlePos.getY(), curAffectedParticlePos.getZ(), 0, 1, 0, 20, 0.05D);
-				}
+				} */
 				
 				if (aoeDamageHitBox != null) owner.level.addFreshEntity(aoeDamageHitBox);
 			}

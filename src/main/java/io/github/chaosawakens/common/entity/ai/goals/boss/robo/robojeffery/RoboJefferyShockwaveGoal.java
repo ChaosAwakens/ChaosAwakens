@@ -44,11 +44,11 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 
 		owner.playAnimation(targetAnim.get(), true);
 		
-		this.jefferyShockwave = new JefferyShockwaveEntity(owner.level, owner.blockPosition(), (float) aoeRange, (float) aoeRange / 2, 49, 2, null);
+		this.jefferyShockwave = new JefferyShockwaveEntity(owner.level, owner.blockPosition(), (float) aoeRange, 3.7F, 49, 2, null);
 		
 		jefferyShockwave.setActionOnIntersection((target) -> {
 			if (jefferyShockwave != null && !affectedEntities.contains(target) && owner != target && !owner.isAlliedTo(target) && EntityPredicates.ATTACK_ALLOWED.test(target) && owner.getClass() != target.getClass()) {
-				target.hurt(CADamageSources.SHOCKWAVE, 35.0F - owner.distanceTo(target) / 2);
+				target.hurt(CADamageSources.SHOCKWAVE, 35.0F - owner.distanceTo(target));
 				
 				double targetAngle = (MathUtil.getAngleBetweenEntities(jefferyShockwave, target) + 90) * Math.PI / 180; //TODO Dist calc
 				double kbMultiplier = target instanceof PlayerEntity ? -Math.min(owner.getAttackDamage() / 5, 100.0D) : -Math.min(owner.getAttackDamage() / 5, 100.0D) / 2.1D;
@@ -87,7 +87,7 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 		if (MathUtil.isBetween(curAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickStart + 1)) {
 			if (!hasSpawnedShockwave) {
 				owner.level.playSound(null, owner.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, owner.getRandom().nextFloat());
-				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 10, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
+				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), (float) aoeRange * 22, (float) Math.min(aoeRange / 10, 0.8D), 7, 60);
 				owner.level.addFreshEntity(jefferyShockwave);
 				this.hasSpawnedShockwave = true;
 			}

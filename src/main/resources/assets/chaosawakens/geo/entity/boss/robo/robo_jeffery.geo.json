@@ -6,7 +6,7 @@
 				"identifier": "geometry.robo_jeffrey",
 				"texture_width": 400,
 				"texture_height": 400,
-				"visible_bounds_width": 11,
+				"visible_bounds_width": 20,
 				"visible_bounds_height": 8.5,
 				"visible_bounds_offset": [0, 3.75, 0]
 			},
@@ -2153,6 +2153,25 @@
 					]
 				},
 				{
+					"name": "Right_Swing_Effect",
+					"parent": "RightArm2",
+					"pivot": [-80.21207, 102.025, -31.91433],
+					"cubes": [
+						{
+							"origin": [-112.21207, 102, -36.47683],
+							"size": [38, 0.05, 76],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [38, 0.05]},
+								"east": {"uv": [265, 329], "uv_size": [76, 0.05]},
+								"south": {"uv": [271, 334], "uv_size": [38, 0.05]},
+								"west": {"uv": [265, 338], "uv_size": [76, 0.05]},
+								"up": {"uv": [376, 232], "uv_size": [-38, 76]},
+								"down": {"uv": [376, 308], "uv_size": [-38, -76]}
+							}
+						}
+					]
+				},
+				{
 					"name": "RightShoulder",
 					"parent": "RightArm",
 					"pivot": [-29, 108, 5],
@@ -2772,6 +2791,25 @@
 								"west": {"uv": [131, 48], "uv_size": [47, 6]},
 								"up": {"uv": [6, 129], "uv_size": [6, 47]},
 								"down": {"uv": [6, 176], "uv_size": [-6, -47]}
+							}
+						}
+					]
+				},
+				{
+					"name": "Left_Swing_Effect",
+					"parent": "LeftArm2",
+					"pivot": [80.21207, 102.025, -31.91433],
+					"cubes": [
+						{
+							"origin": [74.21207, 102, -36.47683],
+							"size": [38, 0.05, 76],
+							"uv": {
+								"north": {"uv": [38, 0], "uv_size": [-38, 0.05]},
+								"east": {"uv": [341, 338], "uv_size": [-76, 0.05]},
+								"south": {"uv": [309, 334], "uv_size": [-38, 0.05]},
+								"west": {"uv": [341, 329], "uv_size": [-76, 0.05]},
+								"up": {"uv": [338, 232], "uv_size": [38, 76]},
+								"down": {"uv": [338, 308], "uv_size": [38, -76]}
 							}
 						}
 					]
