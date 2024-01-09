@@ -1,0 +1,10 @@
+{
+  "anim_file_loc": "chaosawakens:animations/misc/jeffery_shockwave.animation.json",
+  "animations": [
+    {
+      "animation_name": "Expand",
+      "animation_length": 18.5,
+      "loop_type": "PLAY_ONCE"
+    }
+  ]
+}
