@@ -242,6 +242,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	 * <br> </br>
 	 * No need to implement other means of triggering animations for now, so long as this exists.
 	 * <br> </br>
+	 * <br> </br>
 	 * <b>IMPORTANT: </b> Just because you can trigger the animation from the server DOES NOT MEAN that animation
 	 * predicates are useless! You can still use them to return an {@link AnimationState}, which will be synced and
 	 * handled accordingly on the server. You still have to use {@link DataParameter}s for syncing, though. Animation

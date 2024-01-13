@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "chaosawakens:robo_glass"
+    }
+  },
+  "result": {
+    "item": "chaosawakens:robo_glass_pane",
+    "count": 16
+  }
+}

@@ -1558,6 +1558,13 @@ public class CARecipeProvider extends RecipeProvider {
 		smelting(recipeConsumer, CABlocks.URANIUM_ORE.get(), CAItems.URANIUM_NUGGET.get(), 0.1F, 200);
 		blasting(recipeConsumer, CABlocks.URANIUM_ORE.get(), CAItems.URANIUM_NUGGET.get(), 0.1F, 100);
 
+		ShapedRecipeBuilder.shaped(CABlocks.ROBO_GLASS_PANE.get(), 16)
+				.define('G', CABlocks.ROBO_GLASS.get())
+				.pattern("GGG")
+				.pattern("GGG")
+				.unlockedBy("has_" + CABlocks.ROBO_GLASS.get().asItem(), has(CABlocks.ROBO_GLASS.get()))
+				.save(recipeConsumer);
+
 		ShapelessRecipeBuilder.shapeless(CAItems.INSTANT_SURVIVAL_SHELTER.get())
 				.requires(Tags.Items.STORAGE_BLOCKS_REDSTONE)
 				.requires(Tags.Items.RODS_WOODEN)

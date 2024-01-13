@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(RabbitRenderer.class)
 public abstract class RabbitEntityRendererMixin {
-	private static final ResourceLocation RABBIT_OREO_LOCATION = ChaosAwakens.prefix("textures/entity/rabbit/oreo.png");
+	private static final ResourceLocation RABBIT_OREO_LOCATION = ChaosAwakens.prefix("textures/entity/creature/land/rabbit/oreo.png");
 
 	private RabbitEntityRendererMixin() {
 		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");

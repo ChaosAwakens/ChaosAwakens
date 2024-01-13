@@ -2,11 +2,6 @@
   "anim_file_loc": "chaosawakens:animations/creature/water/fish/green_fish.animation.json",
   "animations": [
     {
-      "animation_name": "Flop",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Swim",
       "animation_length": 0.88,
       "loop_type": "LOOP"
@@ -14,6 +9,11 @@
     {
       "animation_name": "Idle",
       "animation_length": 0.88,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Flop",
+      "animation_length": 1.8,
       "loop_type": "LOOP"
     }
   ]

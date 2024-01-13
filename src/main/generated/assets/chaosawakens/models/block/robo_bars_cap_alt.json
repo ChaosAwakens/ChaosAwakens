@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/iron_bars_cap_alt",
+  "textures": {
+    "particle": "chaosawakens:block/robo_bars",
+    "bars": "chaosawakens:block/robo_bars",
+    "edge": "chaosawakens:block/robo_bars"
+  }
+}

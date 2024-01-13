@@ -6,6 +6,7 @@ import net.minecraft.block.material.PushReaction;
 
 public class CAMaterial {
 	public static final Material FLOWER_BLOCK = new Builder(MaterialColor.PLANT).build();
+	public static final Material HEAVY_GLASS = new Builder(MaterialColor.NONE).notSolidBlocking().notPushable().build();
 
 	private final MaterialColor color;
 	private final PushReaction pushReaction;

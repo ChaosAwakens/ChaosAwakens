@@ -8,6 +8,9 @@
     "chaosawakens:robo_brick_stairs",
     "chaosawakens:robo_brick_wall",
     "chaosawakens:robo_bricks",
+    "chaosawakens:robo_glass",
+    "chaosawakens:robo_bars",
+    "chaosawakens:robo_glass_pane",
     "chaosawakens:robo_crate",
     "chaosawakens:robo_gate_block",
     "chaosawakens:robo_lamp",
@@ -17,6 +20,7 @@
     "chaosawakens:robo_stairs_x",
     "chaosawakens:robo_wall_l",
     "chaosawakens:robo_wall_x",
-    "chaosawakens:compact_robo_block"
+    "chaosawakens:compact_robo_block",
+    "chaosawakens:double_compact_robo_block"
   ]
 }

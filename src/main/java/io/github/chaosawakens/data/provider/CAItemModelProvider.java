@@ -194,6 +194,9 @@ public class CAItemModelProvider extends ItemModelProvider {
 				withExistingParent(name, getBlockResourceLocation(name + "_bottom"));
 			} else if (item.getId().getPath().contains("_door")) {
 				singleTextureLayer0(name, ITEM_GENERATED, getItemResourceLocation(name));
+			} else if (block instanceof PaneBlock) {
+				if (name.contains("_pane")) singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name.substring(0, name.indexOf("_pane"))));
+				else singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name));
 			} else if (block instanceof SaplingBlock || block instanceof FlowerBlock) {
 				singleTextureLayer0(name, ITEM_GENERATED, getBlockResourceLocation(name));
 			} else if (block instanceof CrystalBushBlock || block instanceof DenseBushBlock || block instanceof MesozoicVinesTopBlock) {

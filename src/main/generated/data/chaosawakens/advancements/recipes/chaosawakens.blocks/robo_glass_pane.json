@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chaosawakens:robo_glass_pane"
+    ]
+  },
+  "criteria": {
+    "has_robo_glass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:robo_glass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chaosawakens:robo_glass_pane"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_robo_glass",
+      "has_the_recipe"
+    ]
+  ]
+}

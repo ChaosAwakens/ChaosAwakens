@@ -322,6 +322,10 @@ public class CAClientSetupEvents {
 		RenderTypeLookup.setRenderLayer(CABlocks.RADISH.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(CABlocks.QUINOA.get(), RenderType.cutout());
 
+		RenderTypeLookup.setRenderLayer(CABlocks.ROBO_GLASS.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ROBO_GLASS_PANE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(CABlocks.ROBO_BARS.get(), RenderType.cutoutMipped());
+
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTAL_GRASS_BLOCK.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.KYANITE.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(CABlocks.CRYSTALWOOD_LOG.get(), RenderType.cutoutMipped());

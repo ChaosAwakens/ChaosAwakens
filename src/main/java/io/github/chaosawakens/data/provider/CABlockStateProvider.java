@@ -11,10 +11,10 @@ import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import io.github.chaosawakens.common.blocks.robo.WiredRoboBlock;
 import io.github.chaosawakens.common.blocks.vegetation.GenericFarmlandBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.util.EnumUtil;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
@@ -152,11 +152,15 @@ public class CABlockStateProvider extends BlockStateProvider {
 		wallBlock(CABlocks.ROBO_WALL_I.get(), chaosRL("robo_block_l"));
 		wallBlock(CABlocks.ROBO_WALL_X.get(), chaosRL("robo_block_x"));
 		simpleBlock(CABlocks.ROBO_LAMP.get());
+		simpleBlock(CABlocks.ROBO_GLASS.get());
+		paneBlock(CABlocks.ROBO_GLASS_PANE.get(), chaosRL("robo_glass"), chaosRL("robo_glass_pane_top"));
+		barBlock(CABlocks.ROBO_BARS.get());
 		simpleBlock(CABlocks.ROBO_BRICKS.get());
 		slabBlock(CABlocks.ROBO_BRICK_SLAB.get(), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
 		stairsBlock(CABlocks.ROBO_BRICK_STAIRS.get(), chaosRL("robo_bricks"));
 		wallBlock(CABlocks.ROBO_BRICK_WALL.get(), chaosRL("robo_bricks"));
 		logBlock(CABlocks.COMPACT_ROBO_BLOCK.get());
+		logBlock(CABlocks.DOUBLE_COMPACT_ROBO_BLOCK.get());
 		cubeBottomTopBlock(CABlocks.ROBO_GATE_BLOCK.get(), chaosRL("robo_gate_block"), chaosRL("robo_gate_block_top"));
 				
 		simpleBlock(CABlocks.BLACK_TERRACOTTA_BRICKS.get());
@@ -654,6 +658,77 @@ public class CABlockStateProvider extends BlockStateProvider {
 		ModelFile standingModel = models().getExistingFile(standing.getRegistryName());
 		getVariantBuilder(standing).partialState().addModels(new ConfiguredModel(standingModel));
 		getVariantBuilder(wall).partialState().addModels(new ConfiguredModel(standingModel));
+	}
+
+	public void barBlock(Block targetBlock) {
+		ModelFile posteEndsLoc = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_post_ends"));
+		ModelFile postLoc = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_post"));
+		ModelFile capLoc = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_cap"));
+		ModelFile capAltLoc = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_cap_alt"));
+		ModelFile sideLoc = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_side"));
+		ModelFile sideAltLoc = models().getExistingFile(getBlockResourceLocation(Objects.requireNonNull(targetBlock.getRegistryName()).getPath() + "_side_alt"));
+
+		getMultipartBuilder(targetBlock)
+				.part().modelFile(posteEndsLoc).addModel()
+				.end()
+
+				.part().modelFile(postLoc).addModel()
+				.condition(BlockStateProperties.WEST, false)
+				.condition(BlockStateProperties.EAST, false)
+				.condition(BlockStateProperties.SOUTH, false)
+				.condition(BlockStateProperties.NORTH, false)
+				.end()
+
+				.part().modelFile(capLoc).addModel()
+				.condition(BlockStateProperties.WEST, false)
+				.condition(BlockStateProperties.EAST, false)
+				.condition(BlockStateProperties.SOUTH, false)
+				.condition(BlockStateProperties.NORTH, true)
+				.end()
+
+				.part().modelFile(capLoc).rotationY(90).addModel()
+				.condition(BlockStateProperties.WEST, false)
+				.condition(BlockStateProperties.EAST, true)
+				.condition(BlockStateProperties.SOUTH, false)
+				.condition(BlockStateProperties.NORTH, false)
+				.end()
+
+				.part().modelFile(capAltLoc).addModel()
+				.condition(BlockStateProperties.WEST, false)
+				.condition(BlockStateProperties.EAST, false)
+				.condition(BlockStateProperties.SOUTH, true)
+				.condition(BlockStateProperties.NORTH, false)
+				.end()
+
+				.part().modelFile(capAltLoc).rotationY(90).addModel()
+				.condition(BlockStateProperties.WEST, true)
+				.condition(BlockStateProperties.EAST, false)
+				.condition(BlockStateProperties.SOUTH, false)
+				.condition(BlockStateProperties.NORTH, false)
+				.end()
+
+				.part().modelFile(capAltLoc).addModel()
+				.condition(BlockStateProperties.WEST, false)
+				.condition(BlockStateProperties.EAST, false)
+				.condition(BlockStateProperties.SOUTH, true)
+				.condition(BlockStateProperties.NORTH, false)
+				.end()
+
+				.part().modelFile(sideLoc).addModel()
+				.condition(BlockStateProperties.NORTH, true)
+				.end()
+
+				.part().modelFile(sideLoc).rotationY(90).addModel()
+				.condition(BlockStateProperties.EAST, true)
+				.end()
+
+				.part().modelFile(sideAltLoc).addModel()
+				.condition(BlockStateProperties.SOUTH, true)
+				.end()
+
+				.part().modelFile(sideAltLoc).rotationY(90).addModel()
+				.condition(BlockStateProperties.WEST, true)
+				.end();
 	}
 	
 	public void doorBlock(DoorBlock block) {

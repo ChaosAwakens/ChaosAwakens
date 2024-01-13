@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.blocks.vegetation;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.*;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -51,10 +52,11 @@ public class CropBodyPlantBlock extends AbstractBodyPlantBlock {
 		BlockPos downPos = pos.relative(this.growthDirection.getOpposite());
 		BlockState downState = reader.getBlockState(downPos);
 		Block belowBlock = downState.getBlock();
-		return belowBlock == this.getHeadBlock() || belowBlock == this.getBodyBlock()
+		return belowBlock == this.getHeadBlock() || belowBlock == getBodyBlock() //TODO Add tags for this
 				|| downState.is(Blocks.GRASS_BLOCK) || downState.is(Blocks.DIRT)
 				|| downState.is(Blocks.COARSE_DIRT) || downState.is(Blocks.PODZOL)
-				|| downState.is(Blocks.FARMLAND);
+				|| downState.is(Blocks.FARMLAND) || downState.is(CABlocks.DENSE_FARMLAND.get())
+				|| downState.is(CABlocks.TERRA_PRETA_FARMLAND.get());
 	}
 
 	@Override

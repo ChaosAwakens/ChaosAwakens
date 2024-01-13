@@ -7,7 +7,8 @@ import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import io.github.chaosawakens.common.blocks.tileentities.DefossilizerBlock;
 import net.minecraft.block.*;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.*;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
@@ -358,6 +359,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		wallSide("robo_wall_x", chaosRL("robo_block_x"));
 		wallSideTall("robo_wall_x", chaosRL("robo_block_x"));
 		cubeAll("robo_lamp", chaosRL("robo_lamp"));
+		cubeAll("robo_glass", chaosRL("robo_glass"));
+		standardPaneBlock("robo_glass_pane", chaosRL("robo_glass"), chaosRL("robo_glass_pane_top"));
+		standardBarBlock("robo_bars", chaosRL("robo_bars"));
 		cubeAll("robo_bricks", chaosRL("robo_bricks"));
 		slab("robo_brick_slab", chaosRL("robo_bricks"), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
 		slabTop("robo_brick_slab", chaosRL("robo_bricks"), chaosRL("robo_bricks"), chaosRL("robo_bricks"));
@@ -370,6 +374,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 		wallSideTall("robo_brick_wall", chaosRL("robo_bricks"));
 		cubeColumn("compact_robo_block", chaosRL("compact_robo_block"), chaosRL("compact_robo_block_top"));
 		cubeColumnHorizontal("compact_robo_block", chaosRL("compact_robo_block"), chaosRL("compact_robo_block_top"));
+		cubeColumn("double_compact_robo_block", chaosRL("double_compact_robo_block"), chaosRL("compact_robo_block_top"));
+		cubeColumnHorizontal("double_compact_robo_block", chaosRL("double_compact_robo_block"), chaosRL("compact_robo_block_top"));
 
 		cubeAll("black_terracotta_bricks", chaosRL("black_terracotta_bricks"));
 		cubeAll("blue_terracotta_bricks", chaosRL("blue_terracotta_bricks"));
@@ -1141,6 +1147,64 @@ public class CABlockModelProvider extends BlockModelProvider {
 				.texture("top", top)
 				.texture("side", side)
 				.texture("overlay", overlay);
+	}
+
+	public void standardPaneBlock(String normalPaneName, ResourceLocation paneTexture, ResourceLocation edgeTexture) {
+		panePost(normalPaneName + "_post", paneTexture, edgeTexture);
+		paneNoSide(normalPaneName + "_noside", paneTexture);
+		paneSide(normalPaneName + "_side", paneTexture, edgeTexture);
+		paneNoSideAlt(normalPaneName + "_noside_alt", paneTexture);
+		paneSideAlt(normalPaneName + "_side_alt", paneTexture, edgeTexture);
+	}
+
+	public void standardBarBlock(String normalBarName, ResourceLocation barTexture) {
+		barCap(normalBarName + "_cap", barTexture);
+		barCapAlt(normalBarName + "_cap_alt", barTexture);
+		barPost(normalBarName + "_post", barTexture);
+		barPostEnds(normalBarName + "_post_ends", barTexture);
+		barSide(normalBarName + "_side", barTexture);
+		barSideAlt(normalBarName + "_side_alt", barTexture);
+	}
+
+	public BlockModelBuilder barCap(String name, ResourceLocation barTexture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/iron_bars_cap")
+				.texture("particle", barTexture)
+				.texture("bars", barTexture)
+				.texture("edge", barTexture);
+	}
+
+	public BlockModelBuilder barCapAlt(String name, ResourceLocation barTexture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/iron_bars_cap_alt")
+				.texture("particle", barTexture)
+				.texture("bars", barTexture)
+				.texture("edge", barTexture);
+	}
+
+	public BlockModelBuilder barPost(String name, ResourceLocation barTexture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/iron_bars_post")
+				.texture("particle", barTexture)
+				.texture("bars", barTexture);
+	}
+
+	public BlockModelBuilder barPostEnds(String name, ResourceLocation barTexture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/iron_bars_post_ends")
+				.texture("particle", barTexture)
+				.texture("bars", barTexture)
+				.texture("edge", barTexture);
+	}
+
+	public BlockModelBuilder barSide(String name, ResourceLocation barTexture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/iron_bars_side")
+				.texture("particle", barTexture)
+				.texture("bars", barTexture)
+				.texture("edge", barTexture);
+	}
+
+	public BlockModelBuilder barSideAlt(String name, ResourceLocation barTexture) {
+		return withExistingParent(name, BLOCK_FOLDER + "/iron_bars_side_alt")
+				.texture("particle", barTexture)
+				.texture("bars", barTexture)
+				.texture("edge", barTexture);
 	}
 
 	public BlockModelBuilder tintedCross(String name, ResourceLocation cross) {

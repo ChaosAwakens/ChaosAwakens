@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/iron_bars_post",
+  "textures": {
+    "particle": "chaosawakens:block/robo_bars",
+    "bars": "chaosawakens:block/robo_bars"
+  }
+}

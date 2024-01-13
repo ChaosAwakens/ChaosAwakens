@@ -338,11 +338,15 @@ public class CABlockLootTableProvider extends BlockLootTables {
 		dropSelf(CABlocks.ROBO_WALL_I.get());
 		dropSelf(CABlocks.ROBO_WALL_X.get());
 		dropSelf(CABlocks.ROBO_LAMP.get());
+		dropSelf(CABlocks.ROBO_GLASS.get());
+		dropSelf(CABlocks.ROBO_GLASS_PANE.get());
+		dropSelf(CABlocks.ROBO_BARS.get());
 		dropSelf(CABlocks.ROBO_BRICKS.get());
 		dropSelf(CABlocks.ROBO_BRICK_SLAB.get());
 		dropSelf(CABlocks.ROBO_BRICK_STAIRS.get());
 		dropSelf(CABlocks.ROBO_BRICK_WALL.get());
 		dropSelf(CABlocks.COMPACT_ROBO_BLOCK.get());
+		dropSelf(CABlocks.DOUBLE_COMPACT_ROBO_BLOCK.get());
 		dropSelf(CABlocks.ROBO_GATE_BLOCK.get());
 		dropSelf(CABlocks.ROBO_CRATE.get());
 
