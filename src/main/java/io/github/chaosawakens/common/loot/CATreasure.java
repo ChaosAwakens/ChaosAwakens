@@ -32,17 +32,26 @@ public class CATreasure {
 	public static final CATreasure ENT_TREE_GINKGO_LOOT = new CATreasure("ent_tree/ginkgo_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/ginkgo_loot"}} 1
 	public static final CATreasure WASP_DUNGEON_LOOT = new CATreasure("wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
 	public static final CATreasure MINING_WASP_DUNGEON_LOOT = new CATreasure("mining_wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}} 
-	
+	public static final CATreasure ROBO_OUTPOST_ANT_UNDERGROUND = new CATreasure("robo_outpost_ant/loot").setPrefix("robo_crates"); // /give @p chaosawakens:robo_crate{BlockEntityTag:{LootTable:"chaosawakens:robo_crates/robo_outpost_ant/loot"}}
+	public static final CATreasure ROBO_OUTPOST_ANT_UNDERGROUND_LOOT = new CATreasure("robo_outpost_ant_underground/loot").setPrefix("robo_crates"); // /give @p chaosawakens:robo_crate{BlockEntityTag:{LootTable:"chaosawakens:robo_crates/robo_outpost_ant_underground/loot"}}
+	public static final CATreasure ROBO_OUTPOST_FLUID = new CATreasure("robo_outpost_fluid/loot").setPrefix("robo_crates"); // /give @p chaosawakens:robo_crate{BlockEntityTag:{LootTable:"chaosawakens:robo_crates/robo_outpost_fluid/loot"}}
+
 	private static final Set<ResourceLocation> CA_LOOT_TABLES = Sets.newHashSet();
 	public static LootFunctionType ENCHANT;
 	public final ResourceLocation lootTable;
+	private String defaultPathPrefix = "chests";
 	public final String stringName;
 	public final String langName;
 
 	private CATreasure(String path) {
-		this.lootTable = ChaosAwakens.prefix(String.format("chests/%s", path));
+		this.lootTable = ChaosAwakens.prefix(String.format("%s/%s", defaultPathPrefix, path));
 		this.stringName = String.valueOf(lootTable);
 		this.langName = "dungeon.chaosawakens.jer." + path.replace("/", ".");
+	}
+
+	private CATreasure setPrefix(String pathPrefix) {
+		this.defaultPathPrefix = pathPrefix;
+		return this;
 	}
 
 	public static void init() {

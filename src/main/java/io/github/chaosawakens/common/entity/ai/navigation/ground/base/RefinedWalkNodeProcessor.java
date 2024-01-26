@@ -28,6 +28,11 @@ public class RefinedWalkNodeProcessor extends WalkNodeProcessor {
 		this.breakableBlocksTag = breakableBlocksTag;
 		return this;
 	}
+
+	public RefinedWalkNodeProcessor setValidPassOverrideTag(ITag<Block> validPassOverride) {
+		this.validPassOverride = validPassOverride;
+		return this;
+	}
 	
 	@Override
 	public void prepare(Region curRegion, MobEntity owner) {

@@ -358,7 +358,6 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	@Override
 	public boolean canUpdate() {
-		if (hasEffect(CAEffects.PARALYSIS_EFFECT.get())) return false;
 		return super.canUpdate();
 	}
 

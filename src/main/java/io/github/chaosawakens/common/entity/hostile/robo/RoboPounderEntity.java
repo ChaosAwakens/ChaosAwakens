@@ -4,7 +4,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
-import io.github.chaosawakens.client.sounds.tickable.AnimatableTickableWalkSound;
+import io.github.chaosawakens.client.sounds.tickable.robo.RoboPounderTickableWalkSound;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -367,7 +367,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	private void handleIntervalSounds() {
 		if (isMoving() && isPlayingAnimation(rageRunAnim)) {
 			if (rageRunAnim.getWrappedAnimProgress() % 5 == 0) {
-				playSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), 2.0F, getVoicePitch()); //TODO TickableSound impl
+		//		playSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), 2.0F, getVoicePitch()); //TODO TickableSound impl
 			}
 		}
 	}
@@ -516,10 +516,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void playStepSound(BlockPos pPos, BlockState pBlock) {
-		if (!pBlock.getMaterial().isLiquid() && level.isClientSide()) {
-			AnimatableTickableWalkSound rpws = new AnimatableTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), this);
-			rpws.playSound();
-		}
+		RoboPounderTickableWalkSound rpws = new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), this);
+		rpws.playSound();
+
+		playSound(CASoundEvents.ROBO_POUNDER_WALK.get(), 1.0F, 1.0F);
 	}
 
 	@Override

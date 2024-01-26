@@ -266,7 +266,6 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 
 	@Override
 	public boolean canUpdate() {
-		if (hasEffect(CAEffects.PARALYSIS_EFFECT.get())) return false;
 		return super.canUpdate();
 	}
 

@@ -1,5 +1,6 @@
-package io.github.chaosawakens.client.sounds.tickable;
+package io.github.chaosawakens.client.sounds.tickable.base;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.EntityTickableSound;
@@ -32,7 +33,10 @@ public class AnimatableTickableWalkSound extends EntityTickableSound {
     public void playSound() {
         SoundHandler mcSoundHandler = Minecraft.getInstance().getSoundManager();
 
-        if (!mcSoundHandler.isActive(this) && shouldPlaySound()) mcSoundHandler.queueTickingSound(this);
+        if (!mcSoundHandler.isActive(this) && shouldPlaySound()) {
+            mcSoundHandler.queueTickingSound(this);
+            ChaosAwakens.LOGGER.debug("Played");
+        }
     }
 
     public boolean shouldPlaySound() {

@@ -222,7 +222,6 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 
 	@Override
 	public boolean canUpdate() {
-		if (hasEffect(CAEffects.PARALYSIS_EFFECT.get())) return false;
 		return super.canUpdate();
 	}
 	
