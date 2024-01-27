@@ -40,7 +40,7 @@ public class WhaleBreatheGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return whale.getAirSupply() < whale.getMaxAirSupply() / whale.getRandom().nextInt(4);
+        return whale.getAirSupply() < whale.getMaxAirSupply() / (whale.getRandom().nextInt(3) + 1);
     }
 
     @SuppressWarnings("rawtypes")
