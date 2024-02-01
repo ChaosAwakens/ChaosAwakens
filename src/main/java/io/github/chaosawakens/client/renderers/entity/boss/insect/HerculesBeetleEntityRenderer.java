@@ -1,8 +1,8 @@
-package io.github.chaosawakens.client.renderers.entity.boss.miniboss;
+package io.github.chaosawakens.client.renderers.entity.boss.insect;
 
-import io.github.chaosawakens.client.models.entity.boss.miniboss.HerculesBeetleEntityModel;
+import io.github.chaosawakens.client.models.entity.boss.insect.HerculesBeetleEntityModel;
 import io.github.chaosawakens.client.renderers.entity.base.ExtendedGeoEntityRenderer;
-import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
 import io.github.chaosawakens.common.util.EnumUtil.HerculesBeetleType;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

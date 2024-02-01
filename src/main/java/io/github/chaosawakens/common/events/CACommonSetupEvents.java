@@ -9,7 +9,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.item.ICATieredItem;
 import io.github.chaosawakens.api.wrapper.CarverWrapper;
 import io.github.chaosawakens.api.wrapper.FeatureWrapper;
-import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
 import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
 import io.github.chaosawakens.common.entity.creature.land.*;

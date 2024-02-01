@@ -142,7 +142,7 @@ public class AnimatableMeleeGoal extends Goal {
 		
 		owner.playAnimation(targetAnim.get(), true);
 
-		if (soundOnStart != null) owner.level.playSound(null, owner.blockPosition(), soundOnStart.get(), SoundCategory.HOSTILE, 1.0F, soundPitch);
+		if (soundOnStart != null) owner.playSound(soundOnStart.get(), 1.0F, soundPitch);
 
 		this.curAnim = targetAnim;
 	}

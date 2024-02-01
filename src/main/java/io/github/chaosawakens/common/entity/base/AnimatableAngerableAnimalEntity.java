@@ -9,6 +9,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.RangedInteger;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -20,7 +21,8 @@ import java.util.UUID;
 public abstract class AnimatableAngerableAnimalEntity extends AnimatableAnimalEntity implements IAngerable {
 	protected static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(AnimatableAngerableAnimalEntity.class, DataSerializers.BYTE);
 	protected static final DataParameter<Integer> ANGER_TIME = EntityDataManager.defineId(AnimatableAngerableAnimalEntity.class, DataSerializers.INT);
-	private UUID persistentAngerTarget;
+	protected UUID persistentAngerTarget;
+	protected float lastDamageAmount;
 
 	public AnimatableAngerableAnimalEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -85,7 +87,22 @@ public abstract class AnimatableAngerableAnimalEntity extends AnimatableAnimalEn
 	public void setPersistentAngerTarget(@Nullable UUID target) {
 		this.persistentAngerTarget = target;
 	}
-	
+
+	public float getLastDamageAmount() {
+		return lastDamageAmount;
+	}
+
+	public void setLastDamageAmount(float updatedPrevDamageAmount) {
+		this.lastDamageAmount = updatedPrevDamageAmount;
+	}
+
+	@Override
+	protected void actuallyHurt(DamageSource pDamageSource, float pDamageAmount) {
+		super.actuallyHurt(pDamageSource, pDamageAmount);
+
+		setLastDamageAmount(pDamageAmount);
+	}
+
 	@Override
 	public boolean canBeLeashed(PlayerEntity player) {
 		return !isAngry() && super.canBeLeashed(player);

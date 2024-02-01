@@ -516,15 +516,40 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void playStepSound(BlockPos pPos, BlockState pBlock) {
-		RoboPounderTickableWalkSound rpws = new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), this);
-		rpws.playSound();
-
-		playSound(CASoundEvents.ROBO_POUNDER_WALK.get(), 1.0F, 1.0F);
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-		return super.getHurtSound(pDamageSource);
+		SoundEvent standardDamageSound = CASoundEvents.ROBO_POUNDER_DAMAGE_V1.get();
+		SoundEvent transitionDamageSound = CASoundEvents.ROBO_POUNDER_DAMAGE_V4.get();
+		SoundEvent rageRunDamageSound = CASoundEvents.ROBO_POUNDER_DAMAGE_V3.get();
+		SoundEvent halfHealthDamageSound = CASoundEvents.ROBO_POUNDER_DAMAGE_V2.get();
+		SoundEvent defaultDamageSound = isRageRunning() ? rageRunDamageSound : standardDamageSound;
+		boolean hasPlayedTransitionDamageSound = false;
+		boolean hasPlayedHalfHealthDamageSound = false;
+		float updatedHealth = getHealth() - getLastDamageAmount();
+
+		if (updatedHealth <= 50.0F && !hasPlayedTransitionDamageSound) {
+			hasPlayedTransitionDamageSound = true;
+
+			return transitionDamageSound;
+		} else if (getHealth() > 50.0F && hasPlayedTransitionDamageSound) {
+			hasPlayedTransitionDamageSound = false;
+
+			return defaultDamageSound;
+		}
+
+		if (updatedHealth <= getMaxHealth() / 2) {
+			hasPlayedHalfHealthDamageSound = true;
+
+			return halfHealthDamageSound;
+		} else if (getHealth() > getMaxHealth() / 2 && hasPlayedHalfHealthDamageSound) {
+			hasPlayedHalfHealthDamageSound = false;
+
+			return defaultDamageSound;
+		}
+
+		return isRageRunning() ? rageRunDamageSound : standardDamageSound;
 	}
 
 	@Override

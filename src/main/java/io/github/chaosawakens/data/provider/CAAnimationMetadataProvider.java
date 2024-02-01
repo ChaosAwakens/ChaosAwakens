@@ -21,7 +21,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
     @Override
     protected void initializeAnimMetadata() { //TODO Automation doesn't work cuz Minecraft's Resource Manager doesn't exist on the server :p
         // Boss/Miniboss
-        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/miniboss/hercules_beetle.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/insect/hercules_beetle.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 0.76D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),

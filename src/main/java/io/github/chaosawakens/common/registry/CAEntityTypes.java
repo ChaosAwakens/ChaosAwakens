@@ -1,7 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.common.entity.boss.miniboss.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
 import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
 import io.github.chaosawakens.common.entity.creature.land.*;

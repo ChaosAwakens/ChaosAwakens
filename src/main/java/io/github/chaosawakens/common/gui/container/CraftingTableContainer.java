@@ -23,7 +23,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class CraftingTableContainer extends RecipeBookContainer<CraftingInventory> {
-
 	private final CraftingInventory craftMatrix = new CraftingInventory(this, 3, 3);
 	private final CraftResultInventory craftResult = new CraftResultInventory();
 	private final IWorldPosCallable worldPosCallable;

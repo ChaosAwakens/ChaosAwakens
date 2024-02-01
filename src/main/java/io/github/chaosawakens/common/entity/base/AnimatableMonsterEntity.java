@@ -25,6 +25,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -44,7 +45,8 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BOOLEAN);
 	protected static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BYTE);
 	protected static final DataParameter<Integer> ATTACK_COOLDOWN = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.INT);
-	public float prevYRot;
+	protected float prevYRot;
+	protected float lastDamageAmount;
 	
 	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -127,6 +129,14 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		return getAttackCooldown() > 0;
 	}
 
+	public float getLastDamageAmount() {
+		return lastDamageAmount;
+	}
+
+	public void setLastDamageAmount(float updatedPrevDamageAmount) {
+		this.lastDamageAmount = updatedPrevDamageAmount;
+	}
+
 	protected void repelEntities(double x, double y, double z, float radius) {
 		List<LivingEntity> validTargets = EntityUtil.getEntitiesAround(this, LivingEntity.class, x, y, z, radius);
 		
@@ -201,6 +211,13 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	@Override
+	protected void actuallyHurt(DamageSource pDamageSource, float pDamageAmount) {
+		super.actuallyHurt(pDamageSource, pDamageAmount);
+
+		setLastDamageAmount(pDamageAmount);
+	}
+
+	@Override
 	public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
 		return super.checkSpawnRules(world, reason);
 	}
@@ -258,7 +275,12 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 			}
 		}
 	}
-	
+
+	@Override
+	public SoundCategory getSoundSource() {
+		return SoundCategory.HOSTILE;
+	}
+
 	@Override
 	protected PathNavigator createNavigation(World pLevel) {
 		return new CAStrictGroundPathNavigator(this, pLevel);

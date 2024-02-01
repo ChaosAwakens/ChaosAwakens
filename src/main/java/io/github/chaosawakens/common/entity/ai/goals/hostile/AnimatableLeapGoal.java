@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
@@ -34,6 +35,11 @@ public class AnimatableLeapGoal extends Goal {
 	private Predicate<Block> blockBreakPredicate;
 	@Nullable
 	private Consumer<LivingEntity> actionOnLand;
+	@Nullable
+	protected Supplier<SoundEvent> leapSound;
+	@Nullable
+	protected Supplier<SoundEvent> landSound;
+	protected float soundPitch = 1.0F;
 
 	public AnimatableLeapGoal(AnimatableMonsterEntity owner, Supplier<SingletonAnimationBuilder> leapAnim, Supplier<SingletonAnimationBuilder> midairAnim, Supplier<SingletonAnimationBuilder> landAnim, byte attackId, double leapPower, double minDistance, int probability, @Nullable Predicate<AnimatableMonsterEntity> extraActivationConditions) {
 		this.owner = owner;
@@ -83,6 +89,14 @@ public class AnimatableLeapGoal extends Goal {
 		return this;
 	}
 
+	public AnimatableLeapGoal setSound(Supplier<SoundEvent> leapSound, Supplier<SoundEvent> landSound, float soundPitch) {
+		this.leapSound = leapSound;
+		this.landSound = landSound;
+		this.soundPitch = soundPitch; //TODO Partition (newer versions probs, I do be lazy)
+
+		return this;
+	}
+
 	@Override
 	public boolean canUse() {
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), leapAnim.get(), midairAnim.get(), landAnim.get(), attackId) && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive() && owner.distanceTo(owner.getTarget()) >= minDistanceBlocks && (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
@@ -104,6 +118,8 @@ public class AnimatableLeapGoal extends Goal {
 		owner.setAttackID(attackId);
 		owner.playAnimation(leapAnim.get(), true);
 		owner.getNavigation().stop();
+
+		if (leapSound != null) owner.playSound(leapSound.get(), 1.0F, soundPitch);
 	}
 
 	@Override
@@ -117,6 +133,8 @@ public class AnimatableLeapGoal extends Goal {
 		owner.getNavigation().stop();
 		LivingEntity target = owner.getTarget();
 
+		BlockPosUtil.destroyCollidingBlocksWithOffset(owner, owner.getRandom().nextBoolean(), 0.1F, 0F, 0.1F, blockBreakPredicate);
+
 		if (owner.isPlayingAnimation(midairAnim.get()) && owner.isOnGround()) {
 			owner.playAnimation(landAnim.get(), true);
 
@@ -127,6 +145,8 @@ public class AnimatableLeapGoal extends Goal {
 				CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 80F, 0.235F, 10, 120);
 
 				this.hasDoneAOE = true;
+
+				if (landSound != null) owner.playSound(landSound.get(), 1.0F, soundPitch);
 			}
 		}
 
@@ -153,7 +173,6 @@ public class AnimatableLeapGoal extends Goal {
 				final Vector3d cachedLookAtPos = new Vector3d(targetPos.getX(), targetPos.getY(), targetPos.getZ());
 
 				owner.lookAt(Type.EYES, cachedLookAtPos);
-				BlockPosUtil.destroyCollidingBlocks(owner, owner.getRandom().nextBoolean(), blockBreakPredicate);
 			}
 		}
 	}

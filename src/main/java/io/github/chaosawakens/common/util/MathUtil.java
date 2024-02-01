@@ -190,14 +190,175 @@ public final class MathUtil {
 		
 		return numToReduce - (numToReduce * percRedActual);
 	}
-	
+
 	/**
-	 * Gets the horizontal distance (on the x and z axis) between 2 coordinate points
+	 * Gets the Manhattan horizontal distance (on the x and z-axis) between 2 coordinate points
+	 *
 	 * @param x1 First X coordinate
 	 * @param z1 First Z coordinate
 	 * @param x2 Second X coordinate
 	 * @param z2 Second Z coordinate
-	 * @return The distance (on the x and z axis) between 2 coordinate points
+	 *
+	 * @return The Manhattan distance (on the x and z-axis) between 2 coordinate points
+	 */
+	public static double getManhattanHorizontalDistanceBetween(double x1, double z1, double x2, double z2) {
+		double x = Math.abs(x1 - x2);
+		double z = Math.abs(z1 - z2);
+
+		return x + z;
+	}
+
+	/**
+	 * Gets the Manhattan vertical distance (on the y-axis) between 2 coordinate points
+	 *
+	 * @param y1 First Y coordinate
+	 * @param y2 Second Y coordinate
+	 *
+	 * @return The Manhattan distance (on the y-axis) between 2 coordinate points
+	 */
+	public static double getManhattanVerticialDistanceBetween(double y1, double y2) {
+		double y = Math.abs(y1 - y2);
+
+		return y;
+	}
+
+	/**
+	 * Gets the Manhattan distance between 2 coordinate points
+	 *
+	 * @param x1 First X coordinate
+	 * @param y1 First Y coordinate
+	 * @param z1 First Z coordinate
+	 * @param x2 Second X coordinate
+	 * @param y2 Second Y coordinate
+	 * @param z2 Second Z coordinate
+	 *
+	 * @return The Manhattan distance between 2 coordinate points
+	 */
+	public static double getManhattanDistanceBetween(double x1, double y1, double z1, double x2, double y2, double z2) {
+		double x = Math.abs(x1 - x2);
+		double y = Math.abs(y1 - y2);
+		double z = Math.abs(z1 - z2);
+
+		return x + y + z;
+	}
+
+	/**
+	 * Gets the Manhattan distance between 2 block positions on the x and z-axis
+	 *
+	 * @param a Starting {@link BlockPos}
+	 * @param b Finishing {@link BlockPos}
+	 *
+	 * @return The Manhattan distance between a and b
+	 */
+	public static double getManhattanHorizontalDistanceBetween(BlockPos a, BlockPos b) {
+		return getHorizontalDistanceBetween(a.getX(), a.getZ(), b.getX(), b.getZ());
+	}
+
+	/**
+	 * Gets the Manhattan distance between 2 block positions on the y-axis
+	 *
+	 * @param a Starting {@link BlockPos}
+	 * @param b Finishing {@link BlockPos}
+	 *
+	 * @return The Manhattan distance between a and b
+	 */
+	public static double getManhattanVerticalDistanceBetween(BlockPos a, BlockPos b) {
+		return getVerticialDistanceBetween(a.getY(), b.getY());
+	}
+
+	/**
+	 * Gets the Manhattan distance between 2 block positions on all axis
+	 *
+	 * @param a Starting {@link BlockPos}
+	 * @param b Finishing {@link BlockPos}
+	 *
+	 * @return The Manhattan distance between a and b
+	 */
+	public static double getManhattanDistanceBetween(BlockPos a, BlockPos b) {
+		return getDistanceBetween(a.getX(), a.getZ(), a.getY(), b.getY(), b.getX(), b.getZ());
+	}
+
+	/**
+	 * Gets the Manhattan distance between 2 vector positions on the x and z-axis
+	 *
+	 * @param a Starting {@link Vector3d}
+	 * @param b Finishing {@link Vector3d}
+	 *
+	 * @return The Manhattan distance between a and b
+	 */
+	public static double getManhattanHorizontalDistanceBetween(Vector3d a, Vector3d b) {
+		return getHorizontalDistanceBetween(a.x(), a.z(), b.x(), b.z());
+	}
+
+	/**
+	 * Gets the Manhattan distance between 2 vector positions on the y-axis
+	 *
+	 * @param a Starting {@link Vector3d}
+	 * @param b Finishing {@link Vector3d}
+	 *
+	 * @return The Manhattan distance between a and b
+	 */
+	public static double getManhattanVerticalDistanceBetween(Vector3d a, Vector3d b) {
+		return getVerticialDistanceBetween(a.y(), b.y());
+	}
+
+	/**
+	 * Gets the Manhattan distance between 2 vector positions on all axis
+	 *
+	 * @param a Starting {@link Vector3d}
+	 * @param b Finishing {@link Vector3d}
+	 *
+	 * @return The Manhattan distance between a and b
+	 */
+	public static double getManhattanDistanceBetween(Vector3d a, Vector3d b) {
+		return getDistanceBetween(a.x(), a.z(), a.y(), b.y(), b.x(), b.z());
+	}
+
+	/**
+	 * Gets the Manhattan horizontal distance (on the x and z-axis) between 2 entities
+	 *
+	 * @param entityA Entity A, starting pos to check
+	 * @param entityB Entity B, finishing pos to check
+	 *
+	 * @return The Manhattan distance (on the x and z-axis) between the 2 entities
+	 */
+	public static double getManhattanHorizontalDistanceBetween(Entity entityA, Entity entityB) {
+		return getHorizontalDistanceBetween(entityA.blockPosition(), entityB.blockPosition());
+	}
+
+	/**
+	 * Gets the Manhattan vertical distance (on the y-axis) between 2 entities
+	 *
+	 * @param entityA Entity A, starting pos to check
+	 * @param entityB Entity B, finishing pos to check
+	 *
+	 * @return The Manhattan distance (on the y-axis) between the 2 entities
+	 */
+	public static double getManhattanVerticalDistanceBetween(Entity entityA, Entity entityB) {
+		return getVerticalDistanceBetween(entityA.blockPosition(), entityB.blockPosition());
+	}
+
+	/**
+	 * Gets Manhattan distance between 2 entities
+	 *
+	 * @param entityA Entity A, starting pos to check
+	 * @param entityB Entity B, finishing pos to check
+	 *
+	 * @return The total Manhattan distance between the 2 entities
+	 */
+	public static double getManhattanDistanceBetween(Entity entityA, Entity entityB) {
+		return getDistanceBetween(entityA.blockPosition(), entityB.blockPosition());
+	}
+	
+	/**
+	 * Gets the Euclidean horizontal distance (on the x and z-axis) between 2 coordinate points
+	 *
+	 * @param x1 First X coordinate
+	 * @param z1 First Z coordinate
+	 * @param x2 Second X coordinate
+	 * @param z2 Second Z coordinate
+	 *
+	 * @return The Euclidean distance (on the x and z-axis) between 2 coordinate points
 	 */
 	public static double getHorizontalDistanceBetween(double x1, double z1, double x2, double z2) {
 		double x = Math.abs(x1 - x2);
@@ -207,10 +368,12 @@ public final class MathUtil {
 	}
 	
 	/**
-	 * Gets the vertical distance (on the y axis) between 2 coordinate points
+	 * Gets the Euclidean vertical distance (on the y-axis) between 2 coordinate points
+	 *
 	 * @param y1 First Y coordinate
 	 * @param y2 Second Y coordinate
-	 * @return The distance (on the y axis) between 2 coordinate points
+	 *
+	 * @return The Euclidean distance (on the y-axis) between 2 coordinate points
 	 */
 	public static double getVerticialDistanceBetween(double y1, double y2) {
 		double y = Math.abs(y1 - y2);
@@ -219,14 +382,16 @@ public final class MathUtil {
 	}
 	
 	/**
-	 * Gets the distance between 2 coordinate points
+	 * Gets the Euclidean distance between 2 coordinate points
+	 *
 	 * @param x1 First X coordinate
 	 * @param y1 First Y coordinate
 	 * @param z1 First Z coordinate
 	 * @param x2 Second X coordinate
 	 * @param y2 Second Y coordinate
 	 * @param z2 Second Z coordinate
-	 * @return The distance between 2 coordinate points
+	 *
+	 * @return The Euclidean distance between 2 coordinate points
 	 */
 	public static double getDistanceBetween(double x1, double y1, double z1, double x2, double y2, double z2) {
 		double x = Math.abs(x1 - x2);
@@ -237,99 +402,108 @@ public final class MathUtil {
 	}
 	
 	/**
-	 * Gets the distance between 2 block positions on the x and z axis
+	 * Gets the Euclidean distance between 2 block positions on the x and z-axis
 	 * 
 	 * @param a Starting {@link BlockPos}
 	 * @param b Finishing {@link BlockPos}
-	 * @return The distance between a and b
+	 *
+	 * @return The Euclidean distance between a and b
 	 */
 	public static double getHorizontalDistanceBetween(BlockPos a, BlockPos b) {
 		return getHorizontalDistanceBetween(a.getX(), a.getZ(), b.getX(), b.getZ());
 	}
 
 	/**
-	 * Gets the distance between 2 block positions on the y axis
+	 * Gets the Euclidean distance between 2 block positions on the y-axis
 	 * 
 	 * @param a Starting {@link BlockPos}
 	 * @param b Finishing {@link BlockPos}
-	 * @return The distance between a and b
+	 *
+	 * @return The Euclidean distance between a and b
 	 */
 	public static double getVerticalDistanceBetween(BlockPos a, BlockPos b) {
 		return getVerticialDistanceBetween(a.getY(), b.getY());
 	}
 
 	/**
-	 * Gets the distance between 2 block positions on all axis
+	 * Gets the Euclidean distance between 2 block positions on all axis
 	 * 
 	 * @param a Starting {@link BlockPos}
 	 * @param b Finishing {@link BlockPos}
-	 * @return The distance between a and b
+	 *
+	 * @return The Euclidean distance between a and b
 	 */
 	public static double getDistanceBetween(BlockPos a, BlockPos b) {
 		return getDistanceBetween(a.getX(), a.getZ(), a.getY(), b.getY(), b.getX(), b.getZ());
 	}
 	
 	/**
-	 * Gets the distance between 2 vector positions on the x and z axis
+	 * Gets the Euclidean distance between 2 vector positions on the x and z-axis
 	 * 
 	 * @param a Starting {@link Vector3d}
 	 * @param b Finishing {@link Vector3d}
-	 * @return The distance between a and b
+	 *
+	 * @return The Euclidean distance between a and b
 	 */
 	public static double getHorizontalDistanceBetween(Vector3d a, Vector3d b) {
 		return getHorizontalDistanceBetween(a.x(), a.z(), b.x(), b.z());
 	}
 
 	/**
-	 * Gets the distance between 2 vector positions on the y axis
+	 * Gets the Euclidean distance between 2 vector positions on the y-axis
 	 * 
 	 * @param a Starting {@link Vector3d}
 	 * @param b Finishing {@link Vector3d}
-	 * @return The distance between a and b
+	 *
+	 * @return The Euclidean distance between a and b
 	 */
 	public static double getVerticalDistanceBetween(Vector3d a, Vector3d b) {
 		return getVerticialDistanceBetween(a.y(), b.y());
 	}
 
 	/**
-	 * Gets the distance between 2 vector positions on all axis
+	 * Gets the Euclidean distance between 2 vector positions on all axis
 	 * 
 	 * @param a Starting {@link Vector3d}
 	 * @param b Finishing {@link Vector3d}
-	 * @return The distance between a and b
+	 *
+	 * @return The Euclidean distance between a and b
 	 */
 	public static double getDistanceBetween(Vector3d a, Vector3d b) {
 		return getDistanceBetween(a.x(), a.z(), a.y(), b.y(), b.x(), b.z());
 	}
 	
 	/**
-	 * Gets the horizontal distance (on the x and z axis) between 2 entities
+	 * Gets the Euclidean horizontal distance (on the x and z-axis) between 2 entities
 	 * 
 	 * @param entityA Entity A, starting pos to check
 	 * @param entityB Entity B, finishing pos to check
-	 * @return The distance (on the x and z axis) between the 2 entities
+	 *
+	 * @return The Euclidean distance (on the x and z-axis) between the 2 entities
 	 */
 	public static double getHorizontalDistanceBetween(Entity entityA, Entity entityB) {
 		return getHorizontalDistanceBetween(entityA.blockPosition(), entityB.blockPosition());
 	}
 
 	/**
-	 * Gets the vertical distance (on the y axis) between 2 entities
+	 * Gets the Euclidean vertical distance (on the y-axis) between 2 entities
 	 * 
 	 * @param entityA Entity A, starting pos to check
 	 * @param entityB Entity B, finishing pos to check
-	 * @return The distance (on the y axis) between the 2 entities
+	 *
+	 * @return The Euclidean distance (on the y-axis) between the 2 entities
 	 */
 	public static double getVerticalDistanceBetween(Entity entityA, Entity entityB) {
 		return getVerticalDistanceBetween(entityA.blockPosition(), entityB.blockPosition());
 	}
 
 	/**
-	 * Gets distance between 2 entities
+	 * Gets Euclidean distance between 2 entities
 	 * 
 	 * @param entityA Entity A, starting pos to check
 	 * @param entityB Entity B, finishing pos to check
-	 * @return The total distance between the 2 entities
+	 *
+	 * @return The total Euclidean distance between the 2 entities
 	 */
 	public static double getDistanceBetween(Entity entityA, Entity entityB) {
 		return getDistanceBetween(entityA.blockPosition(), entityB.blockPosition());

@@ -34,7 +34,8 @@ import javax.annotation.Nullable;
 
 public abstract class AnimatableFishEntity extends AbstractFishEntity implements IAnimatableEntity {
 	private static final DataParameter<Boolean> SWIMMING = EntityDataManager.defineId(AnimatableFishEntity.class, DataSerializers.BOOLEAN);
-	public float prevBodyRot;
+	protected float prevBodyRot;
+	protected float lastDamageAmount;
 
 	public AnimatableFishEntity(EntityType<? extends AbstractFishEntity> type, World world) {
 		super(type, world);
@@ -114,6 +115,14 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 		this.entityData.define(SWIMMING, !isStuck() && isInWater());
 	}
 
+	public float getLastDamageAmount() {
+		return lastDamageAmount;
+	}
+
+	public void setLastDamageAmount(float updatedPrevDamageAmount) {
+		this.lastDamageAmount = updatedPrevDamageAmount;
+	}
+
 	public boolean isSwimming() {
 		return this.entityData.get(SWIMMING);
 	}
@@ -188,6 +197,13 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 	public void die(DamageSource pCause) {
 		if (getDeathAnim() != null) return;
 		else super.die(pCause);
+	}
+
+	@Override
+	protected void actuallyHurt(DamageSource pDamageSource, float pDamageAmount) {
+		super.actuallyHurt(pDamageSource, pDamageAmount);
+
+		setLastDamageAmount(pDamageAmount);
 	}
 
 	@Override
@@ -281,8 +297,6 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 
 	protected void handleBaseAnimations() {
 		if (getIdleAnim() != null && !isSwimming()) playAnimation(getIdleAnim(), false);
-		if (getSwimAnim() != null && isSwimming()) {
-			if (isInWater()) playAnimation(getSwimAnim(), false);
-		}
+		if (getSwimAnim() != null && (isSwimming() || !isStuck())) playAnimation(getSwimAnim(), true);
 	}
 }

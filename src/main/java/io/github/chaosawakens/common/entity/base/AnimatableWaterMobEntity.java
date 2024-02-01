@@ -27,7 +27,8 @@ import javax.annotation.Nullable;
 
 public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements IAnimatableEntity {
 	private static final DataParameter<Boolean> SWIMMING = EntityDataManager.defineId(AnimatableWaterMobEntity.class, DataSerializers.BOOLEAN);
-	public float prevBodyRot;
+	protected float prevBodyRot;
+	protected float lastDamageAmount;
 
 	public AnimatableWaterMobEntity(EntityType<? extends WaterMobEntity> type, World world) {
 		super(type, world);
@@ -71,6 +72,14 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(SWIMMING, !isStuck());
+	}
+
+	public float getLastDamageAmount() {
+		return lastDamageAmount;
+	}
+
+	public void setLastDamageAmount(float updatedPrevDamageAmount) {
+		this.lastDamageAmount = updatedPrevDamageAmount;
 	}
 
 	public boolean isSwimming() {
@@ -138,7 +147,14 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 		if (getDeathAnim() != null) return;
 		else super.die(pCause);
 	}
-	
+
+	@Override
+	protected void actuallyHurt(DamageSource pDamageSource, float pDamageAmount) {
+		super.actuallyHurt(pDamageSource, pDamageAmount);
+
+		setLastDamageAmount(pDamageAmount);
+	}
+
 	@Override
 	public void tick() {
 		this.prevBodyRot = yBodyRot;

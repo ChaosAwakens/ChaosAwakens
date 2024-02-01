@@ -116,7 +116,7 @@ public class RockFishEntity extends AnimatableGroupFishEntity {
 
 	@Override
 	public void aiStep() {
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.verticalCollision) {
 			this.onGround = true;
 			this.hasImpulse = false;
 		}

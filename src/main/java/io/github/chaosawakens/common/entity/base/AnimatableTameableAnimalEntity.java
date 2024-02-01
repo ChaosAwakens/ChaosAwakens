@@ -25,6 +25,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 public abstract class AnimatableTameableAnimalEntity extends TameableEntity implements IAnimatableEntity {
+	protected float lastDamageAmount;
 
 	public AnimatableTameableAnimalEntity(EntityType<? extends TameableEntity> type, World world) {
 		super(type, world);

@@ -43,7 +43,9 @@ public class RoboJefferyShockwaveGoal extends AnimatableAOEGoal {
 		Supplier<? extends IAnimationBuilder> targetAnim = animationsToPick != null && !animationsToPick.isEmpty() ? animationsToPick.get(owner.level.getRandom().nextInt(animationsToPick.size())) : aoeAnim;
 
 		owner.playAnimation(targetAnim.get(), true);
-		
+
+		if (soundOnStart != null) owner.playSound(soundOnStart.get(), 1.0F, soundPitch);
+
 		this.jefferyShockwave = new JefferyShockwaveEntity(owner.level, owner.blockPosition(), (float) aoeRange, 3.7F, 49, 2, null);
 		
 		jefferyShockwave.setActionOnIntersection((target) -> {

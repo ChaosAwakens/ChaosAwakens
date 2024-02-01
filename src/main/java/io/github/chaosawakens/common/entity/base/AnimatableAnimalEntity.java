@@ -27,7 +27,8 @@ import javax.annotation.Nullable;
 
 public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAnimatableEntity {
 	protected static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(AnimatableAnimalEntity.class, DataSerializers.BOOLEAN);
-	public float prevYRot;
+	protected float prevYRot;
+	protected float lastDamageAmount;
 	
 	public AnimatableAnimalEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
@@ -70,6 +71,14 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(MOVING, !isStuck());
+	}
+
+	public float getLastDamageAmount() {
+		return lastDamageAmount;
+	}
+
+	public void setLastDamageAmount(float updatedPrevDamageAmount) {
+		this.lastDamageAmount = updatedPrevDamageAmount;
 	}
 
 	public boolean isMoving() {
@@ -145,7 +154,14 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 		if (getDeathAnim() != null) return;
 		else super.die(pCause);
 	}
-	
+
+	@Override
+	protected void actuallyHurt(DamageSource pDamageSource, float pDamageAmount) {
+		super.actuallyHurt(pDamageSource, pDamageAmount);
+
+		setLastDamageAmount(pDamageAmount);
+	}
+
 	@Override
 	public void tick() {
 		this.prevYRot = yRot;

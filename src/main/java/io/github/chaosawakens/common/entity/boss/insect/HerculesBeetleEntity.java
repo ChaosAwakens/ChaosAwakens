@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.entity.boss.miniboss;
+package io.github.chaosawakens.common.entity.boss.insect;
 
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;

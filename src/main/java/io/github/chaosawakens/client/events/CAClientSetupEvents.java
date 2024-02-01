@@ -1,6 +1,6 @@
 package io.github.chaosawakens.client.events;
 
-import io.github.chaosawakens.client.renderers.entity.boss.miniboss.HerculesBeetleEntityRenderer;
+import io.github.chaosawakens.client.renderers.entity.boss.insect.HerculesBeetleEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.boss.robo.RoboJefferyEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.creature.air.BirdEntityRenderer;
 import io.github.chaosawakens.client.renderers.entity.creature.land.AntEntityRenderer;
