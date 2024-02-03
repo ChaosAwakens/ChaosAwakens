@@ -15,12 +15,12 @@ public final class PathNavigationUtil {
 	}
 	
 	/**
-	 * Determines the {@link PathNodeType} of the specifies {@link BlockPos} for the specified position <i>alone</i>, meaning 
+	 * Determines the {@link PathNodeType} of the specified {@link BlockPos} for the specified position <i>alone</i>, meaning
 	 * that other positions (surrounding or not) are not taken into account when determining the {@link PathNodeType} of the 
 	 * specified {@link BlockPos} (with the only exception being checks for the block being a border block to fluids).
 	 *
 	 * @param blockReader The block reader of the current world to use for getting {@linkplain Block blocks}, {@linkplain BlockPos block positions},
-	 *                       etc. and use to determine the {@link PathNodeType} for the specified {@link BlockPos}.
+	 *                       etc. and used to determine the {@link PathNodeType} for the specified {@link BlockPos}.
 	 * @param targetPos The target position to determine the {@link PathNodeType} of.
 	 *
 	 * @return The {@link PathNodeType} for the specified {@link BlockPos}.

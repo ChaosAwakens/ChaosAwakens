@@ -7,9 +7,19 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Inverse Walk",
+      "animation_name": "Walk Attack",
       "animation_length": 1.24,
       "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 2.08,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Pinch Attack",
+      "animation_length": 2.08,
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Climb",
@@ -22,18 +32,8 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Pinch Attack",
-      "animation_length": 2.08,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Walk Attack",
+      "animation_name": "Inverse Walk",
       "animation_length": 1.24,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Idle",
-      "animation_length": 2.08,
       "loop_type": "LOOP"
     }
   ]

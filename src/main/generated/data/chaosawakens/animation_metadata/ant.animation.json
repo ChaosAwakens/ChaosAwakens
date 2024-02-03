@@ -2,13 +2,13 @@
   "anim_file_loc": "chaosawakens:animations/creature/land/ant.animation.json",
   "animations": [
     {
-      "animation_name": "Walk",
-      "animation_length": 1.64,
+      "animation_name": "Idle",
+      "animation_length": 2.6,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 2.6,
+      "animation_name": "Walk",
+      "animation_length": 1.64,
       "loop_type": "LOOP"
     }
   ]

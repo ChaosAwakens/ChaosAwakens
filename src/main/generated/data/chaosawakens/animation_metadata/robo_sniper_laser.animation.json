@@ -2,14 +2,14 @@
   "anim_file_loc": "chaosawakens:animations/projectiles/robo_sniper_laser.animation.json",
   "animations": [
     {
-      "animation_name": "Death",
-      "animation_length": 0.24,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
       "animation_name": "Idle",
       "animation_length": 5.04,
       "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Death",
+      "animation_length": 0.24,
+      "loop_type": "PLAY_ONCE"
     }
   ]
 }

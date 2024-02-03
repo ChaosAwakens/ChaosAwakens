@@ -60,12 +60,12 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_FLAP = SOUND_EVENTS.register("entity.hercules_beetle.flap", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.flap")));
 
 	// Ent Sounds
-	public static final RegistryObject<SoundEvent> ENT_BREATH = SOUND_EVENTS.register("entity.ent.breath", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.breath")));
-	public static final RegistryObject<SoundEvent> ENT_DEATH = SOUND_EVENTS.register("entity.ent.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.death")));
+	public static final RegistryObject<SoundEvent> ENT_IDLE = SOUND_EVENTS.register("entity.ent.idle", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.idle")));
 	public static final RegistryObject<SoundEvent> ENT_WALK = SOUND_EVENTS.register("entity.ent.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.walk")));
-	public static final RegistryObject<SoundEvent> ENT_PUNCH = SOUND_EVENTS.register("entity.ent.punch", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.punch")));
-	public static final RegistryObject<SoundEvent> ENT_GROUND_SLAM = SOUND_EVENTS.register("entity.ent.ground_slam", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.ground_slam")));
-	public static final RegistryObject<SoundEvent> ENT_HURT = SOUND_EVENTS.register("entity.ent.hurt", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.hurt")));
+	public static final RegistryObject<SoundEvent> ENT_TREE_PUNCH = SOUND_EVENTS.register("entity.ent.tree_punch", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.tree_punch")));
+	public static final RegistryObject<SoundEvent> ENT_ENT_SMASH = SOUND_EVENTS.register("entity.ent.ent_smash", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.ent_smash")));
+	public static final RegistryObject<SoundEvent> ENT_DEATH = SOUND_EVENTS.register("entity.ent.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.death")));
+	public static final RegistryObject<SoundEvent> ENT_DAMAGE = SOUND_EVENTS.register("entity.ent.damage", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.damage")));
 
 	// Whale Sounds
 	public static final RegistryObject<SoundEvent> WHALE_AMBIENT = SOUND_EVENTS.register("entity.whale.ambient", () -> new SoundEvent(ChaosAwakens.prefix("entity.whale.ambient")));
