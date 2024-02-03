@@ -1,9 +1,12 @@
 package io.github.chaosawakens.common.blocks.tileentities;
 
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.tileentities.containers.CrystalDefossilizerContainer;
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
+import io.github.chaosawakens.common.items.PowerChipItem;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CARecipeTypes;
 import io.github.chaosawakens.common.registry.CATileEntities;
@@ -14,6 +17,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
@@ -32,14 +36,13 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-import javax.annotation.Nullable;
-
 public class CrystalDefossilizerTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IItemHandler, ICapabilityProvider {
 	public static final int WORK_TIME = 4 * AbstractDefossilizingRecipe.getDefossilizingTime();
 	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + ChaosAwakens.MODID + ".crystal_defossilizer");
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
-	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
-	private static final int[] SLOTS_FOR_SIDES = new int[] { 1, 2 };
+	private static final int[] SLOTS_FOR_DOWN = new int[] { 3, 1 };
+	private static final int[] SLOTS_FOR_BUCKET = new int[] { 1 };
+	private static final int[] SLOTS_FOR_CHIP = new int[] { 2 };
 	private NonNullList<ItemStack> items;
 	private final LazyOptional<? extends IItemHandler>[] handlers;
 	private int progress = 0;
@@ -136,21 +139,29 @@ public class CrystalDefossilizerTileEntity extends LockableTileEntity implements
 	@Override
 	public int[] getSlotsForFace(Direction direction) {
 		if (direction == Direction.DOWN) return SLOTS_FOR_DOWN;
-		else return direction == Direction.UP ? SLOTS_FOR_UP : SLOTS_FOR_SIDES;
+		else if (direction == Direction.UP) return SLOTS_FOR_UP;
+		else if (direction == Direction.EAST || direction == Direction.NORTH) return SLOTS_FOR_BUCKET;
+		else return SLOTS_FOR_CHIP;
 	}
-
+	
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
+	public boolean canPlaceItem(int pIndex, ItemStack pStack) {
+		if (pIndex == 0 && pStack.getItem() instanceof BlockItem) return true;
+		else if(pIndex == 1 && pStack.getItem() instanceof BucketItem) return true;
+		else if(pIndex == 2 && pStack.getItem() instanceof PowerChipItem) return true;
 		return false;
 	}
 
 	@Override
+	public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
+		return this.canPlaceItem(index, stack);
+	}
+
+	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		if (index == 0) return stack.getItem() == CAItems.PINK_TOURMALINE_BUCKET.get()
-				&& stack.getItem() == CAItems.LAVA_PINK_TOURMALINE_BUCKET.get()
-				&& stack.getItem() == CAItems.WATER_PINK_TOURMALINE_BUCKET.get();
-		else if (index == 1) return stack.getItem() == CAItems.ALUMINUM_POWER_CHIP.get();
-		else if (index == 2) return stack.getItem() instanceof BlockItem;
+		if(direction == Direction.DOWN) {
+			if(index == 3 || (index == 1 && stack.getItem() == CAItems.PINK_TOURMALINE_BUCKET.get())) return true;
+		}
 		return false;
 	}
 
