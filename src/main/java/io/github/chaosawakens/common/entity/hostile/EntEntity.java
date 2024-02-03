@@ -171,6 +171,13 @@ public class EntEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
+	protected void playHurtSound(DamageSource pSource) {
+		SoundEvent hurtSound = getHurtSound(pSource);
+
+		if (hurtSound != null) playSound(hurtSound, 0.2F, getVoicePitch());
+	}
+
+	@Override
 	protected float getVoicePitch() {
 		return isDeadOrDying() ? super.getVoicePitch() * 1.32F : super.getVoicePitch();
 	}
