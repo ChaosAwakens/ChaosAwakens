@@ -60,7 +60,7 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_FLAP = SOUND_EVENTS.register("entity.hercules_beetle.flap", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.flap")));
 
 	// Ent Sounds
-	public static final RegistryObject<SoundEvent> ENT_AMBIENT = SOUND_EVENTS.register("entity.ent.ambient", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.ambient")));
+	public static final RegistryObject<SoundEvent> ENT_BREATH = SOUND_EVENTS.register("entity.ent.breath", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.breath")));
 	public static final RegistryObject<SoundEvent> ENT_DEATH = SOUND_EVENTS.register("entity.ent.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.death")));
 	public static final RegistryObject<SoundEvent> ENT_WALK = SOUND_EVENTS.register("entity.ent.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.walk")));
 	public static final RegistryObject<SoundEvent> ENT_PUNCH = SOUND_EVENTS.register("entity.ent.punch", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.punch")));

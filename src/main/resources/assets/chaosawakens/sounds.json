@@ -281,43 +281,43 @@
       "chaosawakens:entity/whale/death"
     ]
   },
-  "entity.ent.ambient": {
+  "entity.ent.breath": {
     "subtitle": "subtitles.chaosawakens.entity.ent.breath",
     "sounds": [
-      "chaosawakens:entity/ent/tree_breath"
+      "chaosawakens:entity/hostile/ent/tree_breath"
     ]
   },
   "entity.ent.walk": {
     "subtitle": "subtitles.chaosawakens.entity.ent.walk",
     "sounds": [
-      "chaosawakens:entity/ent/tree_walk"
+      "chaosawakens:entity/hostile/ent/tree_walk"
     ]
   },
   "entity.ent.hurt": {
     "subtitle": "subtitles.chaosawakens.entity.ent.hurt",
     "sounds": [
-      "chaosawakens:entity/ent/tree_hurt_1",
-      "chaosawakens:entity/ent/tree_hurt_2",
-      "chaosawakens:entity/ent/tree_hurt_3",
-      "chaosawakens:entity/ent/tree_hurt_4"
+      "chaosawakens:entity/hostile/ent/tree_hurt_1",
+      "chaosawakens:entity/hostile/ent/tree_hurt_2",
+      "chaosawakens:entity/hostile/ent/tree_hurt_3",
+      "chaosawakens:entity/hostile/ent/tree_hurt_4"
     ]
   },
   "entity.ent.death": {
     "subtitle": "subtitles.chaosawakens.entity.ent.death",
     "sounds": [
-      "chaosawakens:entity/ent/tree_death"
+      "chaosawakens:entity/hostile/ent/tree_death"
     ]
   },
   "entity.ent.punch": {
     "subtitle": "subtitles.chaosawakens.entity.ent.punch",
     "sounds": [
-      "chaosawakens:entity/ent/tree_punch"
+      "chaosawakens:entity/hostile/ent/tree_punch"
     ]
   },
   "entity.ent.ground_slam": {
     "subtitle": "subtitles.chaosawakens.entity.ent.ground_slam",
     "sounds": [
-      "chaosawakens:entity/ent/tree_ground_slam"
+      "chaosawakens:entity/hostile/ent/tree_ground_slam"
     ]
   },
   "entity.wasp.ambient": {
