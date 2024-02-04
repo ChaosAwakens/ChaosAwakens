@@ -1,14 +1,14 @@
 package io.github.chaosawakens.common.blocks.tileentities.containers;
 
 import io.github.chaosawakens.common.blocks.tileentities.CrystalDefossilizerTileEntity;
-import io.github.chaosawakens.common.items.bucket.PinkTourmalineBucketItem;
+import io.github.chaosawakens.common.items.PowerChipItem;
 import io.github.chaosawakens.common.registry.CAContainerTypes;
-import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IIntArray;
@@ -38,13 +38,13 @@ public class CrystalDefossilizerContainer extends Container {
 		this.bucketSlot = addSlot(new Slot(inventory, 1, 47, 53) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
-				return stack.getItem() instanceof PinkTourmalineBucketItem;
+				return stack.getItem() instanceof BucketItem;
 			}
 		});
 		this.powerchipSlot = addSlot(new Slot(inventory, 2, 65, 53) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
-				return stack.getItem().equals(CAItems.CRYSTAL_POWER_CHIP.get());
+				return stack.getItem() instanceof PowerChipItem;
 			}
 		});
 		this.resultSlot = addSlot(new Slot(inventory, 3, 116, 35) {
@@ -96,11 +96,11 @@ public class CrystalDefossilizerContainer extends Container {
 
 				curSlot.onQuickCraft(curFilledStack, curStack);
 			} else if (index != bucketSlot.index && index != fossilSlot.index && index != powerchipSlot.index) {
-				if (!(curFilledStack.getItem() instanceof PinkTourmalineBucketItem) && !(curFilledStack.getItem().equals(CAItems.CRYSTAL_POWER_CHIP.get()))) {
+				if (!(curFilledStack.getItem() instanceof BucketItem) && !(curFilledStack.getItem() instanceof PowerChipItem)) {
 					if (!moveItemStackTo(curFilledStack, fossilSlot.index, fossilSlot.index + 1, false)) return ItemStack.EMPTY;
-				} else if (curFilledStack.getItem() instanceof PinkTourmalineBucketItem) {
+				} else if (curFilledStack.getItem() instanceof BucketItem) {
 					if (!moveItemStackTo(curFilledStack, bucketSlot.index, bucketSlot.index + 1, false)) return ItemStack.EMPTY;
-				} else if (curFilledStack.getItem().equals(CAItems.CRYSTAL_POWER_CHIP.get())) {
+				} else if (curFilledStack.getItem() instanceof PowerChipItem) {
 					if (!moveItemStackTo(curFilledStack, powerchipSlot.index, powerchipSlot.index + 1, false)) return ItemStack.EMPTY;
 				} else if (index >= 4 && index < 31) {
 					if (!moveItemStackTo(curFilledStack, 31, 40, false)) return ItemStack.EMPTY;

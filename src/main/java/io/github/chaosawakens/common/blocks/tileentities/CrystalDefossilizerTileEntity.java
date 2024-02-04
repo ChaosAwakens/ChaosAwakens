@@ -7,6 +7,7 @@ import io.github.chaosawakens.common.blocks.tileentities.containers.CrystalDefos
 import io.github.chaosawakens.common.crafting.recipe.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.common.crafting.recipe.DefossilizingRecipe;
 import io.github.chaosawakens.common.items.PowerChipItem;
+import io.github.chaosawakens.common.items.bucket.PinkTourmalineBucketItem;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CARecipeTypes;
 import io.github.chaosawakens.common.registry.CATileEntities;
@@ -19,6 +20,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -101,7 +103,7 @@ public class CrystalDefossilizerTileEntity extends LockableTileEntity implements
 	}
 
 	private void doWork(DefossilizingRecipe recipe) {
-		if (!(recipe.getDefossilizerType().equals("copper") || recipe.getDefossilizerType().equals("crystal"))) return;
+		if (!(recipe.getDefossilizerType().equals("iron") || recipe.getDefossilizerType().equals("crystal"))) return;
 		assert this.level != null;
 
 		ItemStack current = getItem(3);
@@ -132,7 +134,7 @@ public class CrystalDefossilizerTileEntity extends LockableTileEntity implements
 		this.progress = 0;
 		
 		removeItem(0, 1);
-		setItem(1, CAItems.PINK_TOURMALINE_BUCKET.get().getDefaultInstance());
+		setItem(1, (getItem(1).getItem() instanceof PinkTourmalineBucketItem) ? CAItems.PINK_TOURMALINE_BUCKET.get().getDefaultInstance() : Items.BUCKET.getDefaultInstance());
 		removeItem(2, 1);
 	}
 
