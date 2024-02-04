@@ -12,14 +12,9 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle Extras",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Healthy",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
+      "animation_name": "Robo-Bomb Attack",
+      "animation_length": 2.0,
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Left Punch Attack",
@@ -27,18 +22,8 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Leap Attack: Leap",
-      "animation_length": 0.81,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
       "animation_name": "Right Punch Attack",
       "animation_length": 1.7,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Robo-Bomb Attack",
-      "animation_length": 2.0,
       "loop_type": "PLAY_ONCE"
     },
     {
@@ -48,6 +33,11 @@
     },
     {
       "animation_name": "Leap Attack: Midair",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle Extras",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -62,9 +52,19 @@
       "loop_type": "LOOP"
     },
     {
+      "animation_name": "Healthy",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Idle",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Leap Attack: Leap",
+      "animation_length": 0.81,
+      "loop_type": "PLAY_ONCE"
     }
   ]
 }

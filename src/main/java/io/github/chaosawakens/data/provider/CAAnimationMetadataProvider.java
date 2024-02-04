@@ -128,7 +128,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Right Punch", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Smash Attack", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Death", 3.6D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Always Play", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
+                new AnimationDataHolder("Idle Extras", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Hostile/Insect
         createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/insect/cave_fisher.animation.json"), Lists.newArrayList(

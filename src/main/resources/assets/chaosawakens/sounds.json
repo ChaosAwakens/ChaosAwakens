@@ -281,45 +281,55 @@
       "chaosawakens:entity/whale/death"
     ]
   },
-  "entity.ent.breath": {
-    "subtitle": "subtitles.chaosawakens.entity.ent.breath",
+
+  "entity.ent.idle": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.idle",
     "sounds": [
-      "chaosawakens:entity/hostile/ent/tree_breath"
+      "chaosawakens:entity/hostile/ent/idle"
     ]
   },
   "entity.ent.walk": {
     "subtitle": "subtitles.chaosawakens.entity.ent.walk",
     "sounds": [
-      "chaosawakens:entity/hostile/ent/tree_walk"
-    ]
-  },
-  "entity.ent.hurt": {
-    "subtitle": "subtitles.chaosawakens.entity.ent.hurt",
-    "sounds": [
-      "chaosawakens:entity/hostile/ent/tree_hurt_1",
-      "chaosawakens:entity/hostile/ent/tree_hurt_2",
-      "chaosawakens:entity/hostile/ent/tree_hurt_3",
-      "chaosawakens:entity/hostile/ent/tree_hurt_4"
+      "chaosawakens:entity/hostile/ent/walk"
     ]
   },
   "entity.ent.death": {
     "subtitle": "subtitles.chaosawakens.entity.ent.death",
     "sounds": [
-      "chaosawakens:entity/hostile/ent/tree_death"
+      "chaosawakens:entity/hostile/ent/death"
     ]
   },
-  "entity.ent.punch": {
-    "subtitle": "subtitles.chaosawakens.entity.ent.punch",
+  "entity.ent.tree_punch": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.tree_punch",
     "sounds": [
-      "chaosawakens:entity/hostile/ent/tree_punch"
+      "chaosawakens:entity/hostile/ent/attacks/tree_punch"
     ]
   },
-  "entity.ent.ground_slam": {
-    "subtitle": "subtitles.chaosawakens.entity.ent.ground_slam",
+  "entity.ent.ent_smash": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.ent_smash",
     "sounds": [
-      "chaosawakens:entity/hostile/ent/tree_ground_slam"
+      "chaosawakens:entity/hostile/ent/attacks/ent_smash"
     ]
   },
+  "entity.ent.damage": {
+    "subtitle": "subtitles.chaosawakens.entity.ent.damage",
+    "sounds": [
+      {
+        "name": "chaosawakens:entity/hostile/ent/damage/ent_damage_v1"
+      },
+      {
+        "name": "chaosawakens:entity/hostile/ent/damage/ent_damage_v2"
+      },
+      {
+        "name": "chaosawakens:entity/hostile/ent/damage/ent_damage_v3"
+      },
+      {
+        "name": "chaosawakens:entity/hostile/ent/damage/ent_damage_v4"
+      }
+    ]
+  },
+
   "entity.wasp.ambient": {
     "sounds": [
       {
