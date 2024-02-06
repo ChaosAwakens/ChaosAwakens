@@ -19,7 +19,7 @@ public class RoboPounderTickableWalkSound extends AnimatableTickableWalkSound {
     }
 
     @Override
-    public boolean shouldPlaySound() {
-        return !animatable.isAttacking() && !animatable.isDeadOrDying() && super.shouldPlaySound();
+    public boolean canPlaySound() {
+        return super.canPlaySound() && !animatable.isAttacking();
     }
 }
