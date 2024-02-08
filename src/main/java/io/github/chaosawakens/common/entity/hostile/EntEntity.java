@@ -184,7 +184,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected float getSoundVolume() {
-		return 0.85F;
+		return 1.2F;
 	}
 	
 	public EntType getEntType() {
