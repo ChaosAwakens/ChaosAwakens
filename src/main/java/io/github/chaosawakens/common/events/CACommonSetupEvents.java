@@ -432,12 +432,28 @@ public class CACommonSetupEvents {
 					if (mapping.key.getPath().contains("fossilised_frog")) {
 						String newName = mapping.key.getPath().replace("fossilised_frog", "fossilised_tree_frog");
 						ResourceLocation remappedFrog = ChaosAwakens.prefix(newName);
+
 						mapping.remap(ForgeRegistries.BLOCKS.getValue(remappedFrog));
 					}
 
 					if (mapping.key.getPath().contains("crystal_energy")) {
 						String newName = mapping.key.getPath().replace("crystal_energy", "energized_kyanite");
 						ResourceLocation remappedCrystalEnergy = ChaosAwakens.prefix(newName);
+
+						mapping.remap(ForgeRegistries.BLOCKS.getValue(remappedCrystalEnergy));
+					}
+
+					if (mapping.key.getPath().contains("skywood_wood")) {
+						String newName = mapping.key.getPath().replace("skywood_wood", "skywood");
+						ResourceLocation remappedCrystalEnergy = ChaosAwakens.prefix(newName);
+
+						mapping.remap(ForgeRegistries.BLOCKS.getValue(remappedCrystalEnergy));
+					}
+
+					if (mapping.key.getPath().contains("stripped_skywood_wood")) {
+						String newName = mapping.key.getPath().replace("stripped_skywood_wood", "stripped_skywood");
+						ResourceLocation remappedCrystalEnergy = ChaosAwakens.prefix(newName);
+
 						mapping.remap(ForgeRegistries.BLOCKS.getValue(remappedCrystalEnergy));
 					}
 				}
