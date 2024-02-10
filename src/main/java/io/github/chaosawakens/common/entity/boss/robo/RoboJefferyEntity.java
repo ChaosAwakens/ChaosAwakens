@@ -15,6 +15,7 @@ import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
+import io.github.chaosawakens.common.util.SoundUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -170,6 +171,11 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 
 	@Override
+	protected void onSpawn(boolean hasAlreadyDied) {
+		if (!hasAlreadyDied && level.isClientSide) SoundUtil.playIdleSoundAsTickable(CASoundEvents.ROBO_JEFFERY_IDLE.get(), this);
+	}
+
+	@Override
 	protected void tickDeath() {
 		if (!isOnGround() && getAttackID() == LEAP_ATTACK_ID) return;
 		else {
@@ -235,6 +241,17 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	public boolean ignoreExplosion() {
 		return true;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+		SoundEvent standardDamageSound = CASoundEvents.ROBO_JEFFERY_DAMAGE_V1.get();
+		SoundEvent criticalHitDamageSound = CASoundEvents.ROBO_JEFFERY_DAMAGE_V4.get();
+		SoundEvent smashAttackingDamageSound = CASoundEvents.ROBO_JEFFERY_DAMAGE_V3.get();
+		SoundEvent leapAttackingDamageSound = CASoundEvents.ROBO_JEFFERY_DAMAGE_V2.get();
+		float lastDamageAmount = getLastDamageAmount();
+
+		return lastDamageAmount >= 50.0F ? criticalHitDamageSound : getAttackID() == SMASH_ATTACK_ID ? smashAttackingDamageSound : getAttackID() == LEAP_ATTACK_ID ? leapAttackingDamageSound : standardDamageSound;
 	}
 
 	@Override

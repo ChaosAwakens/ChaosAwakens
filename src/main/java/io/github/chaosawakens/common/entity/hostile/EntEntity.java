@@ -12,6 +12,7 @@ import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.util.EnumUtil.EntType;
 import io.github.chaosawakens.common.util.MathUtil;
+import io.github.chaosawakens.common.util.SoundUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -154,6 +155,11 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@Override
 	public String getOwnerMDFileName() {
 		return ENT_MDF_NAME;
+	}
+
+	@Override
+	protected void onSpawn(boolean hasAlreadyDied) {
+		if (!hasAlreadyDied && level.isClientSide) SoundUtil.playIdleSoundAsTickable(CASoundEvents.ENT_IDLE.get(), this);
 	}
 
 	@Override

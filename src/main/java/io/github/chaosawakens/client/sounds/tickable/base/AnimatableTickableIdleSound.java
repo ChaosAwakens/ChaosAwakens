@@ -10,20 +10,33 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
-public class AnimatableTickableWalkSound extends EntityTickableSound {
+public class AnimatableTickableIdleSound extends EntityTickableSound { //TODO Probably group and clean all this up by 1.19/1.20+ (laziness moment)
     protected static final SoundEngine MC_SOUND_ENGINE = Minecraft.getInstance().getSoundManager().soundEngine;
-    private final IAnimatableEntity animatableTarget;
-    private boolean isPaused = false;
+    protected final IAnimatableEntity animatableTarget;
+    protected boolean isPaused = false;
 
-    public AnimatableTickableWalkSound(SoundEvent soundToPlay, SoundCategory targetEntitySoundCategory, Entity targetEntity) {
+    public AnimatableTickableIdleSound(SoundEvent soundToPlay, float volume, float pitch, Entity targetEntity) {
+        super(soundToPlay, targetEntity.getSoundSource(), volume, pitch, targetEntity);
+        this.animatableTarget = (IAnimatableEntity) targetEntity;
+    }
+
+    public AnimatableTickableIdleSound(SoundEvent soundToPlay, float volume, Entity targetEntity) {
+        super(soundToPlay, targetEntity.getSoundSource(), volume, 1.0F, targetEntity);
+        this.animatableTarget = (IAnimatableEntity) targetEntity;
+    }
+
+    public AnimatableTickableIdleSound(SoundEvent soundToPlay, SoundCategory targetEntitySoundCategory, Entity targetEntity) {
         super(soundToPlay, targetEntitySoundCategory, targetEntity);
         this.animatableTarget = (IAnimatableEntity) targetEntity;
     }
 
-    public AnimatableTickableWalkSound(SoundEvent soundToPlay, Entity targetEntity) {
+    public AnimatableTickableIdleSound(SoundEvent soundToPlay, Entity targetEntity) {
         this(soundToPlay, targetEntity.getSoundSource(), targetEntity);
+    }
+
+    public AnimatableTickableIdleSound setVolume(float volume) {
+        this.volume = volume;
+        return this;
     }
 
     @Override
@@ -45,24 +58,19 @@ public class AnimatableTickableWalkSound extends EntityTickableSound {
 
     @Override
     public boolean canPlaySound() {
-        LivingEntity targetLivingEntity = (LivingEntity) animatableTarget;
-        double dx = targetLivingEntity.getX() - targetLivingEntity.xo;
-        double dz = targetLivingEntity.getZ() - targetLivingEntity.zo;
-        double dxSqr = dx * dx;
-        double dzSqr = dz * dz;
-
-        return dxSqr + dzSqr > getDeltaMovementThreshold() && !targetLivingEntity.isDeadOrDying() && targetLivingEntity.isOnGround();
+        return !((LivingEntity) animatableTarget).isDeadOrDying();
     }
 
     public boolean shouldPause() {
-        return false;
+        return !MC_SOUND_ENGINE.loaded;
     }
 
     public boolean isPaused() {
         return isPaused;
     }
 
-    public double getDeltaMovementThreshold() {
-        return 2.500000277905201E-7;
+    @Override
+    public boolean isLooping() {
+        return canPlaySound();
     }
 }

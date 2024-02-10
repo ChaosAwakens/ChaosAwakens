@@ -11,10 +11,13 @@ import net.minecraft.item.ItemStack;
 
 @Mixin(CrossbowItem.class)
 public abstract class CrossbowItemMixin {
+
+	private CrossbowItemMixin() {
+		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
+	}
 	
 	@Inject(method = "Lnet/minecraft/item/CrossbowItem;getChargeDuration(Lnet/minecraft/item/ItemStack;)I", at = @At("TAIL"), cancellable = true)
 	private static void chaosawakens$getChargeDuration(ItemStack pCrossbowStack, CallbackInfoReturnable<Integer> cIR) {
-		if(pCrossbowStack.getItem() instanceof UltimateCrossbowItem)
-			cIR.setReturnValue(50 + cIR.getReturnValueI());
+		if (pCrossbowStack.getItem() instanceof UltimateCrossbowItem) cIR.setReturnValue(50 + cIR.getReturnValueI());
 	}
 }

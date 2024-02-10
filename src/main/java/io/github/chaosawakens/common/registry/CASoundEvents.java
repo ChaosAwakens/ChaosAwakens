@@ -21,6 +21,10 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_PISTON_LEAP_LAUNCH = SOUND_EVENTS.register("entity.robo_jeffery.piston_leap_launch", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.piston_leap_launch")));
 	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_PISTON_LEAP_LAND = SOUND_EVENTS.register("entity.robo_jeffery.piston_leap_land", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.piston_leap_land")));
 	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_DEATH = SOUND_EVENTS.register("entity.robo_jeffery.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.death")));
+	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_DAMAGE_V1 = SOUND_EVENTS.register("entity.robo_jeffery.damage_v1", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.damage_v1")));
+	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_DAMAGE_V2 = SOUND_EVENTS.register("entity.robo_jeffery.damage_v2", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.damage_v2")));
+	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_DAMAGE_V3 = SOUND_EVENTS.register("entity.robo_jeffery.damage_v3", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.damage_v3")));
+	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_DAMAGE_V4 = SOUND_EVENTS.register("entity.robo_jeffery.damage_v4", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.damage_v4")));
 
 	// Robo Pounder
 	public static final RegistryObject<SoundEvent> ROBO_POUNDER_IDLE = SOUND_EVENTS.register("entity.robo_pounder.idle", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.idle")));

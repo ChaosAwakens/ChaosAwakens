@@ -22,11 +22,6 @@ public class CrystalBlock extends Block {
 	}
 
 	@Override
-	public VoxelShape getVisualShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
-		return VoxelShapes.empty();
-	}
-
-	@Override
 	public float getShadeBrightness(BlockState blockState, IBlockReader blockReader, BlockPos blockPos) {
 		return 1.0F;
 	}

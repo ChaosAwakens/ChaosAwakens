@@ -226,6 +226,10 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	public AxisAlignedBB getBoundingBox() {
 		return super.getBoundingBox();
 	}
+
+	protected void onSpawn(boolean hasAlreadyDied) {
+
+	}
 	
 	@Override
 	public boolean isPushable() {
@@ -307,6 +311,8 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		updateAttackCooldown();
 		setMoving(!isStuck());
 		handleBaseAnimations();
+
+		if (tickCount <= 1) onSpawn(isDeadOrDying());
 	}
 	
 	protected void updateAttackCooldown() {

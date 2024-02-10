@@ -23,54 +23,55 @@ public class CrystalGrassBlock extends SpreadableCrystalDirtBlock implements IGr
 		super(properties);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
-	public boolean isValidBonemealTarget(IBlockReader blockReader, BlockPos pos, BlockState state, boolean p_176473_4_) {
+	public boolean isValidBonemealTarget(IBlockReader blockReader, BlockPos pos, BlockState state, boolean isOnClient) {
 		return blockReader.getBlockState(pos.above()).isAir();
 	}
 
-	public boolean isBonemealSuccess(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_, BlockState p_180670_4_) {
+	@Override
+	public boolean isBonemealSuccess(World targetWorld, Random rand, BlockPos targetPos, BlockState targetState) {
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes", "deprecation" })
-	public void performBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		BlockPos blockpos = pos.above();
-		BlockState blockstate = CABlocks.CRYSTAL_GRASS.get().defaultBlockState();
+	public void performBonemeal(ServerWorld targetServerWorld, Random random, BlockPos targetPos, BlockState targetState) {
+		BlockPos bonemealPos = targetPos.above();
+		BlockState defaultCrystalGrassState = CABlocks.CRYSTAL_GRASS.get().defaultBlockState();
 
-		label48: for (int i = 0; i < 128; ++i) {
-			BlockPos blockpos1 = blockpos;
-			for (int j = 0; j < i / 16; ++j) {
-				blockpos1 = blockpos1.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-				if (!world.getBlockState(blockpos1.below()).is(this) || world.getBlockState(blockpos1).isCollisionShapeFullBlock(world, blockpos1)) continue label48;
+		label48: for (int placementAttempts = 0; placementAttempts < 128; ++placementAttempts) {
+			BlockPos targetBonemealPos = bonemealPos;
+
+			for (int actualBlockOffset = 0; actualBlockOffset < placementAttempts / 16; ++actualBlockOffset) {
+				targetBonemealPos = targetBonemealPos.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+
+				if (!targetServerWorld.getBlockState(targetBonemealPos.below()).is(this) || targetServerWorld.getBlockState(targetBonemealPos).isCollisionShapeFullBlock(targetServerWorld, targetBonemealPos)) continue label48;
 			}
 
-			BlockState blockstate2 = world.getBlockState(blockpos1);
-			if (blockstate2.is(blockstate.getBlock()) && random.nextInt(10) == 0) ((IGrowable) blockstate.getBlock()).performBonemeal(world, random, blockpos1, blockstate2);
+			BlockState targetBonemealState = targetServerWorld.getBlockState(targetBonemealPos);
 
-			if (blockstate2.isAir()) {
-				BlockState blockstate1;
+			if (targetBonemealState.is(defaultCrystalGrassState.getBlock()) && random.nextInt(10) == 0) ((IGrowable) defaultCrystalGrassState.getBlock()).performBonemeal(targetServerWorld, random, targetBonemealPos, targetBonemealState);
+			if (targetBonemealState.isAir()) {
+				BlockState targetFlowerState;
 				if (random.nextInt(8) == 0) {
-					List<ConfiguredFeature<?, ?>> list = world.getBiome(blockpos1).getGenerationSettings().getFlowerFeatures();
-					if (list.isEmpty()) continue;
+					List<ConfiguredFeature<?, ?>> validConfiguredFlowerFeatures = targetServerWorld.getBiome(targetBonemealPos).getGenerationSettings().getFlowerFeatures();
+					if (validConfiguredFlowerFeatures.isEmpty()) continue;
 
-					ConfiguredFeature<?, ?> configuredfeature = list.get(0);
-					FlowersFeature flowersfeature = (FlowersFeature) configuredfeature.feature;
-					blockstate1 = flowersfeature.getRandomFlower(random, blockpos1, configuredfeature.config());
-				} else blockstate1 = blockstate;
+					ConfiguredFeature<?, ?> firstAvailableConfiguredFlowerFeature = validConfiguredFlowerFeatures.get(0);
+					FlowersFeature targetFlowerFeature = (FlowersFeature) firstAvailableConfiguredFlowerFeature.feature;
+					targetFlowerState = targetFlowerFeature.getRandomFlower(random, targetBonemealPos, firstAvailableConfiguredFlowerFeature.config());
+				} else targetFlowerState = defaultCrystalGrassState;
 
-				if (blockstate1.canSurvive(world, blockpos1)) world.setBlock(blockpos1, blockstate1, 3);
+				if (targetFlowerState.canSurvive(targetServerWorld, targetBonemealPos)) targetServerWorld.setBlock(targetBonemealPos, targetFlowerState, 3);
 			}
 		}
 	}
 
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
-		BlockState plant = plantable.getPlant(world, pos.relative(facing));
+		BlockState targetPos = plantable.getPlant(world, pos.relative(facing));
 
-		if (plant.getBlock() == Blocks.SUGAR_CANE && this == Blocks.SUGAR_CANE) return true;
-		if (plantable instanceof CrystalBushBlock && ((CrystalBushBlock) plantable).mayPlaceOn(state, world, pos)) return true;
-		if (plantable instanceof CrystalFlowerBlock && ((CrystalFlowerBlock) plantable).mayPlaceOn(state, world, pos)) return true;
-
-		return false;
+		return targetPos.getBlock() == Blocks.SUGAR_CANE && this == Blocks.SUGAR_CANE || plantable instanceof CrystalBushBlock && ((CrystalBushBlock) plantable).mayPlaceOn(state, world, pos) || plantable instanceof CrystalFlowerBlock && ((CrystalFlowerBlock) plantable).mayPlaceOn(state, world, pos);
 	}
 }

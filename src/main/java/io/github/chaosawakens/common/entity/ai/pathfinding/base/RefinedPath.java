@@ -8,9 +8,9 @@ import net.minecraft.util.math.BlockPos;
 import java.util.List;
 
 public class RefinedPath extends Path {
+    private final ObjectArrayList<PathPoint> initialCachedNodes = new ObjectArrayList<>();
     private final ObjectArrayList<PathPoint> openNodes = new ObjectArrayList<>();
     private final ObjectArrayList<PathPoint> closedNodes = new ObjectArrayList<>();
-    
 
     public RefinedPath(List<PathPoint> nodes, BlockPos targetPos, boolean hasReachedTarget) {
         super(nodes, targetPos, hasReachedTarget);

@@ -72,6 +72,30 @@
       }
     ]
   },
+  "entity.robo_jeffery.damage_v1": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_jeffery.damage_v1",
+    "sounds": [
+      "chaosawakens:entity/boss/robo/robojeffery/damage/damage_v1"
+    ]
+  },
+  "entity.robo_jeffery.damage_v2": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_jeffery.damage_v2",
+    "sounds": [
+      "chaosawakens:entity/boss/robo/robojeffery/damage/damage_v2"
+    ]
+  },
+  "entity.robo_jeffery.damage_v3": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_jeffery.damage_v3",
+    "sounds": [
+      "chaosawakens:entity/boss/robo/robojeffery/damage/damage_v3"
+    ]
+  },
+  "entity.robo_jeffery.damage_v4": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_jeffery.damage_v4",
+    "sounds": [
+      "chaosawakens:entity/boss/robo/robojeffery/damage/damage_v4"
+    ]
+  },
 
   "entity.robo_pounder.idle": {
     "subtitle": "subtitles.chaosawakens.entity.robo_pounder.idle",
@@ -130,7 +154,10 @@
   "entity.robo_pounder.rage_run_windup": {
     "subtitle": "subtitles.chaosawakens.entity.robo_pounder.rage_run_windup",
     "sounds": [
-      "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_windup"
+      {
+        "name": "chaosawakens:entity/hostile/robo/robopounder/ragerun/rage_run_windup",
+        "attenuation_distance": 96
+      }
     ]
   },
   "entity.robo_pounder.rage_run": {

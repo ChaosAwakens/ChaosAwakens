@@ -83,8 +83,8 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 	}
 
 	@Override
-	public int getUseDuration(ItemStack stack) {
-		return getChargeDuration(stack) + 10;
+	public int getUseDuration(ItemStack targetStack) {
+		return getChargeDuration(targetStack) + 10;
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 
 	@Override
 	public void appendHoverText(ItemStack targetStack, @Nullable World curLevel, List<ITextComponent> tooltips, ITooltipFlag tooltipFlag) {
-		super.appendHoverText(targetStack, curLevel, tooltips, tooltipFlag);
+		//TODO Re-add tooltip support thingy
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableIdleSound;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -17,6 +18,7 @@ import io.github.chaosawakens.common.util.BlockPosUtil;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -430,6 +432,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
+	protected void onSpawn(boolean hasAlreadyDied) {
+		if (!hasAlreadyDied && level.isClientSide) Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableIdleSound(CASoundEvents.ROBO_POUNDER_IDLE.get(), this).setCriticalSound(new RoboPounderTickableIdleSound(random.nextBoolean() ? CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE.get() : CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE_RADIO.get(), this)));
+	}
+
+	@Override
 	protected void tickDeath() {
 		super.tickDeath();
 
@@ -532,7 +539,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			return defaultDamageSound;
 		}
 
-		if (updatedHealth <= getMaxHealth() / 2) {
+		if (updatedHealth <= getMaxHealth() / 2 && !hasPlayedHalfHealthDamageSound) {
 			hasPlayedHalfHealthDamageSound = true;
 
 			return halfHealthDamageSound;
@@ -542,7 +549,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			return defaultDamageSound;
 		}
 
-		return isRageRunning() ? rageRunDamageSound : standardDamageSound;
+		return defaultDamageSound;
 	}
 
 	@Override
@@ -576,7 +583,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (getWalkAnim() != null && isMoving() && !isAttacking() && !shouldTaunt() && !isDeadOrDying()) playAnimation(getWalkAnim(), false);
 		if (shouldTaunt() && !isAttacking() && !isDeadOrDying()) playAnimation(tauntAnim, false);
 		
-		double attackSpeedMult = getHealth() <= 50.0F ? 1.25D : 1.0D;
+		double attackSpeedMult = getHealth() <= 50.0F ? 1.15D : 1.0D;
 		double dashAttackSpeedMult = MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 7.6, 29.2) ? 1.325D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 29.2D, 35.6D) ? 0.02D : MathUtil.isBetween(dashAttackAnim.getWrappedAnimProgress(), 35.6D, 58.4D) ? 2.0D : 0.76D;
 
 		leftPunchAnim.setAnimSpeed(attackSpeedMult);
