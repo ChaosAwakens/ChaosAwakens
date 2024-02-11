@@ -159,7 +159,10 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void onSpawn(boolean hasAlreadyDied) {
-		if (!hasAlreadyDied && level.isClientSide) SoundUtil.playIdleSoundAsTickable(CASoundEvents.ENT_IDLE.get(), this);
+		if (!hasAlreadyDied && level.isClientSide) {
+			SoundUtil.playIdleSoundAsTickable(CASoundEvents.ENT_IDLE.get(), this);
+			SoundUtil.playWalkingSoundAsTickable(CASoundEvents.ENT_WALK.get(), this);
+		}
 	}
 
 	@Override

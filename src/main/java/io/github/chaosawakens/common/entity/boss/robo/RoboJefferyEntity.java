@@ -22,6 +22,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -58,7 +59,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
 	private final SingletonAnimationBuilder lowHealthAnim = new SingletonAnimationBuilder(this, "Low Health", EDefaultLoopTypes.LOOP).setWrappedController(secondaryAmbienceController);
 	private final SingletonAnimationBuilder highHealthAnim = new SingletonAnimationBuilder(this, "Healthy", EDefaultLoopTypes.LOOP).setWrappedController(secondaryAmbienceController);
-	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP).setAnimSpeed(0.98D);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder leftPunchAnim = new SingletonAnimationBuilder(this, "Left Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rightPunchAnim = new SingletonAnimationBuilder(this, "Right Punch Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
@@ -172,7 +173,10 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	protected void onSpawn(boolean hasAlreadyDied) {
-		if (!hasAlreadyDied && level.isClientSide) SoundUtil.playIdleSoundAsTickable(CASoundEvents.ROBO_JEFFERY_IDLE.get(), this);
+		if (!hasAlreadyDied && level.isClientSide) {
+			SoundUtil.playIdleSoundAsTickable(CASoundEvents.ROBO_JEFFERY_IDLE.get(), this);
+			SoundUtil.playWalkingSoundAsTickable(CASoundEvents.ROBO_JEFFERY_WALK.get(), this);
+		}
 	}
 
 	@Override
@@ -188,7 +192,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 			if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 29, 77)) CAScreenShakeEntity.shakeScreen(level, position(), 560F, (float) (deathAnim.getWrappedAnimProgress() / 100F) / 6, 2, 410);
 			
 			if (deathAnim.getWrappedAnimProgress() == 75) {
-				CAScreenShakeEntity.shakeScreen(level, position(), 660F, 0.45F, 5, 480);
+				CAScreenShakeEntity.shakeScreen(level, position(), 960F, 0.45F, 5, 480);
 				
 				for (int angleDeg = 0; angleDeg < 360; angleDeg++) {
 					for (int rep = 0; rep < 6; rep++) {

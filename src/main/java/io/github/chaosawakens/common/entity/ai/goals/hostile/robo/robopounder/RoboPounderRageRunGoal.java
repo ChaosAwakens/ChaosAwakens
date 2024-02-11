@@ -40,6 +40,10 @@ public class RoboPounderRageRunGoal extends Goal {
 	private final int probability;
 	private BlockPos targetRageRunPos;
 	private boolean isPathingRageRun;
+	private boolean hasPlayedCooldownSound = false;
+	private boolean hasPlayedCrashSound = false;
+	private boolean hasPlayedRestartSound = false;
+	private boolean hasPlayedCrashRestartSound = false;
 	
 	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
 		this.owner = owner;
@@ -95,8 +99,13 @@ public class RoboPounderRageRunGoal extends Goal {
 		owner.playAnimation(rageBeginAnim.get(), true);
 
 		owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_WINDUP.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
-		
+		CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 35F, 0.1F, 32, 16);
+
 		this.isPathingRageRun = false;
+		this.hasPlayedCooldownSound = false;
+		this.hasPlayedRestartSound = false;
+		this.hasPlayedCrashSound = false;
+		this.hasPlayedCrashRestartSound = false;
 	}
 	
 	@Override
@@ -197,6 +206,12 @@ public class RoboPounderRageRunGoal extends Goal {
 			}
 			
 			owner.playAnimation(rageCrashAnim.get(), true);
+
+			if (!hasPlayedCrashSound) {
+				owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_CRASH.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+				this.hasPlayedCrashSound = true;
+			}
+
 			owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 			owner.getNavigation().stop();
 			EntityUtil.freezeEntityRotation(owner);
@@ -239,16 +254,19 @@ public class RoboPounderRageRunGoal extends Goal {
 			createRageRunPath();
 			affectTargets();
 			handleRageCrash();
-
-			if (MathUtil.isBetween(rageRunAnim.get().getWrappedAnimProgress(), 1, 2)) owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
 		}
 		
 		if (rageCooldownAnim.get().isPlaying()) {
 			owner.getNavigation().stop();
-			
+
 			if (!hasCharged) {
 				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRageRunSlideOffset()), 5, 4, 0.035);
-				owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_COOLDOWN.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+
+				if (!hasPlayedCooldownSound) {
+					owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_COOLDOWN.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+
+					this.hasPlayedCooldownSound = true;
+				}
 				hasCharged = true;
 			}
 			
@@ -261,9 +279,18 @@ public class RoboPounderRageRunGoal extends Goal {
 		if (shouldExitCooldown() && !hasExitedCooldown) {
 			if (owner.isPlayingAnimation(rageCooldownAnim.get())) {
 				owner.playAnimation(rageRestartAnim.get(), false);
-				owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_RESTART.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+
+				if (!hasPlayedRestartSound) {
+					owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_RESTART.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+					this.hasPlayedRestartSound = true;
+				}
 			} else if (owner.isPlayingAnimation(rageCrashAnim.get())) {
 				owner.playAnimation(rageCrashRestartAnim.get(), false);
+
+				if (!hasPlayedCrashRestartSound) {
+					owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_CRASH_RESTART.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+					this.hasPlayedCrashRestartSound = true;
+				}
 			}
 			hasExitedCooldown = true;
 		}
