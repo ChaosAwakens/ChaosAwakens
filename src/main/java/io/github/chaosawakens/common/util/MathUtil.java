@@ -1,7 +1,9 @@
 package io.github.chaosawakens.common.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
 public final class MathUtil {
@@ -597,5 +599,35 @@ public final class MathUtil {
 		if (percRedActual < 0) percRedActual = 0;
 		
 		return numToReduce - (numToReduce * percRedActual);
+	}
+
+	/**
+	 * Approximates the horizontal (X-Z) angle (in degrees) from the specified {@linkplain LivingEntity owner entity's} position to the specified {@link Vector3d}.
+	 *
+	 * @param ownerEntity The {@link LivingEntity} to get the initial position from and calculate the angle for.
+	 * @param wantedPos The {@link Vector3d} to get the angle (in degrees) towards.
+	 *
+	 * @return The horizontal angle (in degrees) between the specified {@link LivingEntity} and the specified {@link Vector3d}.
+	 */
+	public static double getHorizontalAngleTowards(LivingEntity ownerEntity, Vector3d wantedPos) {
+		double dx = wantedPos.x - ownerEntity.getX();
+		double dz = wantedPos.z - ownerEntity.getZ();
+
+		return Math.toDegrees(MathHelper.atan2(dz, dx)) - 90.0D;
+	}
+
+	/**
+	 * Approximates the total angle (in degrees) from the specified {@linkplain LivingEntity owner entity's} position to the specified {@link Vector3d}.
+	 *
+	 * @param ownerEntity The {@link LivingEntity} to get the initial position from and calculate the angle for.
+	 * @param wantedPos The {@link Vector3d} to get the angle (in degrees) towards.
+	 *
+	 * @return The total angle (in degrees) between the specified {@link LivingEntity} and the specified {@link Vector3d}.
+	 */
+	public static double getAngleTowards(LivingEntity ownerEntity, Vector3d wantedPos) {
+		double totalHorizontalDistance = Math.sqrt(Math.pow(wantedPos.x, 2) + Math.pow(wantedPos.z, 2));
+		double dy = wantedPos.y - ownerEntity.getY();
+
+		return Math.toDegrees(MathHelper.atan2(dy, totalHorizontalDistance));
 	}
 }
