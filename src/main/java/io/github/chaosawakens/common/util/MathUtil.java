@@ -602,6 +602,116 @@ public final class MathUtil {
 	}
 
 	/**
+	 * Normalizes the specified {@code int} value between the specified {@code min} and {@code max} values to the specified {@code normalizedMin} and
+	 * {@code normalizedMax} values. For example, if you wanted to normalize values {@code [10, 20]} to scale according to where the input {@code value}
+	 * field is between the {@code normalizedMin} and {@code normalizedMax} values (E.G. Assume both aforementioned normalized values are set to {@code [200, 400]}),
+	 * you'd typically want to use this method.
+	 *
+	 * @param value The value to normalize.
+	 * @param min The minimum resulting value after normalization.
+	 * @param max The maximum resulting value after normalization.
+	 * @param normalizedMin The minimum normalization value.
+	 * @param normalizedMax The maximum normalization value.
+	 *
+	 * @return The resulting normalized value.
+	 */
+	public static int normalizeValues(int value, int min, int max, int normalizedMin, int normalizedMax) {
+		int range = max - min;
+		int normalizedRange = normalizedMax - normalizedMin;
+		int normalizedValue = (value - min) / range * normalizedRange + normalizedMin;
+
+		return normalizedValue;
+	}
+
+	/**
+	 * Normalizes the specified {@code double} value between the specified {@code min} and {@code max} values to the specified {@code normalizedMin} and
+	 * {@code normalizedMax} values. For example, if you wanted to normalize values {@code [10, 20]} to scale according to where the input {@code value}
+	 * field is between the {@code normalizedMin} and {@code normalizedMax} values (E.G. Assume both aforementioned normalized values are set to {@code [200, 400]}),
+	 * you'd typically want to use this method.
+	 *
+	 * @param value The value to normalize.
+	 * @param min The minimum resulting value after normalization.
+	 * @param max The maximum resulting value after normalization.
+	 * @param normalizedMin The minimum normalization value.
+	 * @param normalizedMax The maximum normalization value.
+	 *
+	 * @return The resulting normalized value.
+	 */
+	public static double normalizeValues(double value, double min, double max, double normalizedMin, double normalizedMax) {
+		double range = max - min;
+		double normalizedRange = normalizedMax - normalizedMin;
+		double normalizedValue = (value - min) / range * normalizedRange + normalizedMin;
+
+		return normalizedValue;
+	}
+
+	/**
+	 * Normalizes the specified {@code float} value between the specified {@code min} and {@code max} values to the specified {@code normalizedMin} and
+	 * {@code normalizedMax} values. For example, if you wanted to normalize values {@code [10, 20]} to scale according to where the input {@code value}
+	 * field is between the {@code normalizedMin} and {@code normalizedMax} values (E.G. Assume both aforementioned normalized values are set to {@code [200, 400]}),
+	 * you'd typically want to use this method.
+	 *
+	 * @param value The value to normalize.
+	 * @param min The minimum resulting value after normalization.
+	 * @param max The maximum resulting value after normalization.
+	 * @param normalizedMin The minimum normalization value.
+	 * @param normalizedMax The maximum normalization value.
+	 *
+	 * @return The resulting normalized value.
+	 */
+	public static float normalizeValues(float value, float min, float max, float normalizedMin, float normalizedMax) {
+		float range = max - min;
+		float normalizedRange = normalizedMax - normalizedMin;
+		float normalizedValue = (value - min) / range * normalizedRange + normalizedMin;
+
+		return normalizedValue;
+	}
+
+	/**
+	 * Normalizes the specified {@code short} value between the specified {@code min} and {@code max} values to the specified {@code normalizedMin} and
+	 * {@code normalizedMax} values. For example, if you wanted to normalize values {@code [10, 20]} to scale according to where the input {@code value}
+	 * field is between the {@code normalizedMin} and {@code normalizedMax} values (E.G. Assume both aforementioned normalized values are set to {@code [200, 400]}),
+	 * you'd typically want to use this method.
+	 *
+	 * @param value The value to normalize.
+	 * @param min The minimum resulting value after normalization.
+	 * @param max The maximum resulting value after normalization.
+	 * @param normalizedMin The minimum normalization value.
+	 * @param normalizedMax The maximum normalization value.
+	 *
+	 * @return The resulting normalized value.
+	 */
+	public static short normalizeValues(short value, short min, short max, short normalizedMin, short normalizedMax) {
+		short range = (short) (max - min);
+		short normalizedRange = (short) (normalizedMax - normalizedMin);
+		short normalizedValue = (short) ((value - min) / range * normalizedRange + normalizedMin);
+
+		return normalizedValue;
+	}
+
+	/**
+	 * Normalizes the specified {@code long} value between the specified {@code min} and {@code max} values to the specified {@code normalizedMin} and
+	 * {@code normalizedMax} values. For example, if you wanted to normalize values {@code [10, 20]} to scale according to where the input {@code value}
+	 * field is between the {@code normalizedMin} and {@code normalizedMax} values (E.G. Assume both aforementioned normalized values are set to {@code [200, 400]}),
+	 * you'd typically want to use this method.
+	 *
+	 * @param value The value to normalize.
+	 * @param min The minimum resulting value after normalization.
+	 * @param max The maximum resulting value after normalization.
+	 * @param normalizedMin The minimum normalization value.
+	 * @param normalizedMax The maximum normalization value.
+	 *
+	 * @return The resulting normalized value.
+	 */
+	public static long normalizeValues(long value, long min, long max, long normalizedMin, long normalizedMax) {
+		long range = max - min;
+		long normalizedRange = normalizedMax - normalizedMin;
+		long normalizedValue = (value - min) / range * normalizedRange + normalizedMin;
+
+		return normalizedValue;
+	}
+
+	/**
 	 * Approximates the horizontal (X-Z) angle (in degrees) from the specified {@linkplain LivingEntity owner entity's} position to the specified {@link Vector3d}.
 	 *
 	 * @param ownerEntity The {@link LivingEntity} to get the initial position from and calculate the angle for.
