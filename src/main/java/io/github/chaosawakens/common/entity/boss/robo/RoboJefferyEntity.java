@@ -269,6 +269,11 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 
 	@Override
+	protected float getVoicePitch() {
+		return isDeadOrDying() ? 1.015F : super.getVoicePitch();
+	}
+
+	@Override
 	public SingletonAnimationBuilder getIdleAnim() {
 		return idleAnim;
 	}

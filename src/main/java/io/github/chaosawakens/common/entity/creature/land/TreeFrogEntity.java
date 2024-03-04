@@ -29,8 +29,8 @@ import javax.annotation.Nullable;
 
 public class TreeFrogEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
-	private final ObjectArrayList<WrappedAnimationController<TreeFrogEntity>> treeFrogControllers = new ObjectArrayList<WrappedAnimationController<TreeFrogEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> treeFrogAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<WrappedAnimationController<TreeFrogEntity>> treeFrogControllers = new ObjectArrayList<WrappedAnimationController<TreeFrogEntity>>(2);
+	private final ObjectArrayList<IAnimationBuilder> treeFrogAnimations = new ObjectArrayList<IAnimationBuilder>(3);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(TreeFrogEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<TreeFrogEntity> mainController = createMainMappedController("treefrogmaincontroller");
 	private final WrappedAnimationController<TreeFrogEntity> ambienceController = createMainMappedController("treefrogambiencecontroller");

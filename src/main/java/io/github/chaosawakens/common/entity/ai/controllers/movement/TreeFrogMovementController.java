@@ -1,8 +1,14 @@
 package io.github.chaosawakens.common.entity.ai.controllers.movement;
 
 import io.github.chaosawakens.common.entity.creature.land.TreeFrogEntity;
+import io.github.chaosawakens.common.util.MathUtil;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
+import net.minecraft.util.math.BlockPos;
+
+import javax.annotation.Nullable;
 
 public class TreeFrogMovementController extends MovementController {
 	private final TreeFrogEntity owner;
@@ -16,45 +22,69 @@ public class TreeFrogMovementController extends MovementController {
 		this.yRot = (float) (180.0F * owner.yRot / Math.PI);
 	}
 
-	public void setDirection(float newYrot, boolean isPanicking) {
-		this.yRot = newYrot;
-		this.isPanicking = isPanicking;
-	}
-
-	public void setWantedMovement(double speedModifier) {
-		this.speedModifier = speedModifier;
-		this.operation = MovementController.Action.MOVE_TO;
-	}
-
 	@Override
 	public void tick() {
+		MathUtil.decrementToZero(jumpDelay);
+
+		BlockPos selectedTargetPos;
+
 		this.mob.yRot = rotlerp(this.mob.yRot, this.yRot, 180.0F);
 		this.mob.yHeadRot = this.mob.yRot;
 		this.mob.yBodyRot = this.mob.yRot;
-		if (this.operation != MovementController.Action.MOVE_TO) {
-			this.mob.setZza(0.0F);
-		} else {
-			this.operation = MovementController.Action.WAIT;
-			if (this.mob.isOnGround()) {
-				this.mob.setSpeed((float)(this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
-				if (--jumpDelay <= 0) {
-			//		this.jumpDelay = owner.getJumpDelay();
-					if (this.isPanicking) {
-						this.jumpDelay /= 8;
-					}
+		this.isPanicking = owner.hurtTime > 0;
 
-					owner.getJumpControl().jump();
-				//	if (owner.doPlayJumpSound()) {
-				///		this.slime.playSound(this.slime.getJumpSound(), this.slime.getSoundVolume(), this.slime.getSoundPitch());
-				//	}
-				} else {
-					owner.xxa = 0.0F;
-					owner.zza = 0.0F;
-					this.mob.setSpeed(0.0F);
+		if (this.operation == Action.WAIT) {
+			this.mob.setXxa(0.0F);
+			this.mob.setZza(0.0F);
+
+			if (owner.isOnGround()) {
+				BlockPos targetPos = findJumpPos(isPanicking ? 30.0D : 15.0D, isPanicking ? 10.0D : 4.0D);
+
+				if (targetPos != null) {
+					this.operation = Action.JUMPING;
+					selectedTargetPos = targetPos;
 				}
-			} else {
-				this.mob.setSpeed((float)(this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+			} else if (owner.isSwimming()) {
+
 			}
 		}
+
+		if (this.operation == Action.JUMPING) {
+
+		}
+
+		if (this.operation == Action.MOVE_TO) {
+			BlockPos targetPos = findJumpPos(isPanicking ? 30.0D : 15.0D, isPanicking ? 10.0D : 4.0D);
+
+			if (targetPos != null) {
+				this.operation = Action.JUMPING;
+				selectedTargetPos = targetPos;
+			}
+
+
+		}
+	}
+
+	@Nullable
+	private BlockPos findJumpPos(double searchDiameter, double minDistThreshold) {
+		BlockPos originPos = this.owner.blockPosition();
+		BlockPos.Mutable iteratingPos = new BlockPos.Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
+
+		if (owner.isDeadOrDying()) return null;
+
+		for (double curXRange = originPos.getX() - searchDiameter; curXRange <= originPos.getX() + searchDiameter; curXRange++) {
+			for (double curZRange = originPos.getZ() - searchDiameter; curZRange <= originPos.getZ() + searchDiameter; curZRange++) {
+				for (double curYRange = originPos.getY() - owner.getAttributeValue(Attributes.JUMP_STRENGTH); curYRange <= originPos.getY() + owner.getAttributeValue(Attributes.JUMP_STRENGTH); curYRange++) {
+					iteratingPos.set(curXRange, curYRange, curZRange);
+
+					BlockState curState = owner.level.getBlockState(iteratingPos);
+
+					if (!curState.canOcclude() || curState.getCollisionShape(owner.level, iteratingPos).isEmpty() || !owner.level.getFluidState(iteratingPos).isEmpty()) continue;
+					if (!iteratingPos.closerThan(owner.position(), minDistThreshold)) return iteratingPos;
+				}
+			}
+		}
+
+		return null;
 	}
 }
