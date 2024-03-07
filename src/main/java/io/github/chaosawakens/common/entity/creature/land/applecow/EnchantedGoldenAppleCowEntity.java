@@ -214,7 +214,7 @@ public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	@Nullable
 	@Override
 	public AgeableEntity getBreedOffspring(ServerWorld pServerLevel, AgeableEntity pMate) {
-		return CAConfigManager.MAIN_COMMON.enableEnchantedAnimalBreeding.get() ? pServerLevel.random.nextInt(1000) == 0 ? CAEntityTypes.ULTIMATE_APPLE_COW.get().create(pServerLevel) : CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(pServerLevel) : CAEntityTypes.GOLDEN_APPLE_COW.get().create(pServerLevel);
+		return pServerLevel.random.nextInt(1000) == 0 ? CAEntityTypes.ULTIMATE_APPLE_COW.get().create(pServerLevel) : CAConfigManager.MAIN_COMMON.enableEnchantedAnimalBreeding.get() ? CAEntityTypes.ENCHANTED_GOLDEN_APPLE_COW.get().create(pServerLevel) : CAEntityTypes.GOLDEN_APPLE_COW.get().create(pServerLevel);
 	}
 	
 	@Override

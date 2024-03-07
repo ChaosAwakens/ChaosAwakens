@@ -41,7 +41,7 @@ public class EnchantedGoldenCarrotPigEntity extends AnimatableRideableAnimalEnti
 	private final WrappedAnimationController<EnchantedGoldenCarrotPigEntity> mainController = createMainMappedController("enchantedgoldencarrotpigmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.GOLDEN_CARROT, CAItems.GOLDEN_POTATO.get(), CAItems.GOLDEN_BEETROOT.get());
+	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.POTATO, Items.BEETROOT);
 	public static final String ENCHANTED_CARROT_PIG_MDF_NAME = "carrot_pig";
 
 	public EnchantedGoldenCarrotPigEntity(EntityType<? extends AnimalEntity> type, World world) {
@@ -81,7 +81,7 @@ public class EnchantedGoldenCarrotPigEntity extends AnimatableRideableAnimalEnti
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.2D, 2.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.GOLDEN_BEETROOT_ON_A_STICK.get()), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.BEETROOT_ON_A_STICK.get()), false));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
