@@ -4,6 +4,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.common.entity.ai.controllers.movement.TreeFrogMovementController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
@@ -41,6 +42,7 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 
 	public TreeFrogEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
+		this.moveControl = new TreeFrogMovementController(this);
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -116,7 +118,7 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public SingletonAnimationBuilder getWalkAnim() {
-		return null;
+		return jumpAnim;
 	}
 
 	@Override

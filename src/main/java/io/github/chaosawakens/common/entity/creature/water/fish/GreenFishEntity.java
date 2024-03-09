@@ -107,4 +107,9 @@ public class GreenFishEntity extends AnimatableGroupFishEntity {
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return greenFishAnimations;
 	}
+
+	@Override
+	protected void handleBaseAnimations() {
+		super.handleBaseAnimations();
+	}
 }

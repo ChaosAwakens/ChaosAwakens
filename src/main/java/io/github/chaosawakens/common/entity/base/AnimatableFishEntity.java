@@ -212,7 +212,7 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 		tickAnims();
 		super.tick();
 
-		if (!level.isClientSide) setSwimming(!isStuck());
+		if (!level.isClientSide) setSwimming(!isStuck() && isInWater());
 		handleBaseAnimations();
 	}
 
@@ -297,6 +297,6 @@ public abstract class AnimatableFishEntity extends AbstractFishEntity implements
 
 	protected void handleBaseAnimations() {
 		if (getIdleAnim() != null && !isSwimming()) playAnimation(getIdleAnim(), false);
-		if (getSwimAnim() != null && (isSwimming() || !isStuck())) playAnimation(getSwimAnim(), true);
+		if (getSwimAnim() != null && (isSwimming() || !isStuck())) playAnimation(getSwimAnim(), false);
 	}
 }

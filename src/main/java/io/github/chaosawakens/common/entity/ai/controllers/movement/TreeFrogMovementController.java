@@ -26,7 +26,7 @@ public class TreeFrogMovementController extends MovementController {
 	public void tick() {
 		MathUtil.decrementToZero(jumpDelay);
 
-		BlockPos selectedTargetPos;
+		BlockPos selectedTargetPos = null;
 
 		this.mob.yRot = rotlerp(this.mob.yRot, this.yRot, 180.0F);
 		this.mob.yHeadRot = this.mob.yRot;
@@ -44,13 +44,15 @@ public class TreeFrogMovementController extends MovementController {
 					this.operation = Action.JUMPING;
 					selectedTargetPos = targetPos;
 				}
-			} else if (owner.isSwimming()) {
+			} else if (owner.isInWater()) {
 
 			}
 		}
 
 		if (this.operation == Action.JUMPING) {
-
+			if (selectedTargetPos != null) {
+				
+			}
 		}
 
 		if (this.operation == Action.MOVE_TO) {
@@ -59,9 +61,13 @@ public class TreeFrogMovementController extends MovementController {
 			if (targetPos != null) {
 				this.operation = Action.JUMPING;
 				selectedTargetPos = targetPos;
-			}
+			} else if (!owner.getNavigation().isDone()) {
+				selectedTargetPos = owner.getNavigation().getTargetPos();
 
-
+				if (selectedTargetPos != null) {
+					
+				}
+			} else this.operation = Action.WAIT;
 		}
 	}
 
