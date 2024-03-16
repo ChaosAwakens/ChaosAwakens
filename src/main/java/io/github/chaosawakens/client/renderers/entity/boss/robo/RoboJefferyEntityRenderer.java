@@ -48,17 +48,15 @@ public class RoboJefferyEntityRenderer extends ExtendedGeoEntityRenderer<RoboJef
 		IAnimationBuilder deathAnim = animatable.getCachedAnimationByName("Death");
 
 		if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 74, 75)) {
-			if (core.isPresent()) {
-				animatable.getCommandSenderWorld().addParticle(
-						ParticleTypes.EXPLOSION,
-						true,
-						core.get().getWorldPosition().x,
-						core.get().getWorldPosition().y,
-						core.get().getWorldPosition().z,
-						1.5D,
-						0,
-						1.5D);
-			}
+            core.ifPresent(geoBone -> animatable.getCommandSenderWorld().addParticle(
+                    ParticleTypes.EXPLOSION,
+                    true,
+                    geoBone.getWorldPosition().x,
+                    geoBone.getWorldPosition().y,
+                    geoBone.getWorldPosition().z,
+                    1.5D,
+                    0,
+                    1.5D));
 		}
 	}
 }

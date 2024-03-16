@@ -8,6 +8,7 @@
 		"CrossbowItemMixin",
 		"CooldownTrackerMixin",
 		"CropsBlockMixin",
+		"EntityMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"NoiseChunkGeneratorAccessor",
@@ -20,6 +21,7 @@
 		"VillagerEntityMixin"
 	],
 	"client": [
+		"ClientPlayerEntityMixin",
 		"RabbitEntityRendererMixin",
 		"ServerWorldInfoMixin"
 	],

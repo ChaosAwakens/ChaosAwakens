@@ -60,6 +60,6 @@ public class BlockNodeType implements ISubNodeType {
 
     @Override
     public boolean isSolid() {
-        return false;
+        return !isAir() && !isFluid() && targetState.canOcclude();
     }
 }

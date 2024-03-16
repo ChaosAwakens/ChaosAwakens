@@ -9,15 +9,15 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class RefinedPathNode implements Comparable<RefinedPathNode> {
-    private final ObjectArrayList<BlockPos> encompassedPositions = new ObjectArrayList<>(1);
-    private final World curWorld;
-    private BlockPos originPos;
-    private double xSize = 1.0D;
-    private double ySize = 1.0D;
-    private double zSize = 1.0D;
-    private double f;
-    private double g;
-    private double h;
+    protected final ObjectArrayList<BlockPos> encompassedPositions = new ObjectArrayList<>(1);
+    protected final World curWorld;
+    protected BlockPos originPos;
+    protected double xSize = 1.0D;
+    protected double ySize = 1.0D;
+    protected double zSize = 1.0D;
+    protected double f;
+    protected double g;
+    protected double h;
 
     public RefinedPathNode(World curWorld, BlockPos originPos) {
         this.curWorld = Objects.requireNonNull(curWorld);
@@ -27,18 +27,15 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
     }
 
     public RefinedPathNode setXSize(double xSize) {
-        this.xSize = xSize;
-        return this;
+        return setSize(xSize, ySize, zSize);
     }
 
     public RefinedPathNode setYSize(double ySize) {
-        this.ySize = ySize;
-        return this;
+        return setSize(xSize, ySize, zSize);
     }
 
     public RefinedPathNode setZSize(double zSize) {
-        this.zSize = zSize;
-        return this;
+        return setSize(xSize, ySize, zSize);
     }
 
     public RefinedPathNode setSize(double xSize, double ySize, double zSize) {
@@ -89,6 +86,18 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
         return zSize;
     }
 
+    public double getFCost() { // G + H cost (basically total path cost through this particular node)
+        return f;
+    }
+
+    public double getGCost() { // Start node -> Cur node (total cost)
+        return g;
+    }
+
+    public double getHCost() { // Cur node -> End node (total cost)
+        return h;
+    }
+
     public boolean collidesWith(RefinedPathNode o) {
         return encompassedPositions.stream().anyMatch(pos -> o.getEncompassedPositions().contains(pos));
     }
@@ -98,6 +107,10 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
         this.encompassedPositions.clear();
 
         setSize(xSize, ySize, zSize); // Lazy ahh shortcut :skull:
+    }
+
+    public void updateNodeCosts() {
+
     }
 
     @Override
@@ -122,7 +135,12 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
     }
 
     @Override
+    public String toString() {
+        return String.format("[Refined Path Node]: {Origin Pos}: (%s), {Node Size (XYZ)}: (%d%d%d), {Node Costs (FGH)}: (%d%d%d)", originPos, xSize, ySize, zSize, f, g, h);
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(encompassedPositions, curWorld, originPos, xSize, ySize, zSize);
+        return Objects.hash(encompassedPositions, curWorld, originPos, xSize, ySize, zSize); // TODO Revisit and actually hash properly(?)
     }
 }

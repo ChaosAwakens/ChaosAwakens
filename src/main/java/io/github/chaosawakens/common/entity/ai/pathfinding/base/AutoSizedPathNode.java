@@ -19,7 +19,7 @@ public class AutoSizedPathNode extends RefinedPathNode {
     public void moveTo(@Nonnull BlockPos newOriginPos, boolean avoidNodeCollisions) {
         if (!avoidNodeCollisions) moveTo(newOriginPos);
         else {
-
+            
         }
     }
 }
