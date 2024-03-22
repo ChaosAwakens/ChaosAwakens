@@ -43,10 +43,23 @@ public class WhaleEntityRenderer extends ExtendedGeoEntityRenderer<WhaleEntity> 
 	public void render(GeoModel model, WhaleEntity animatable, float partialTicks, RenderType type, MatrixStack matrixStackIn,
 			@Nullable IRenderTypeBuffer renderTypeBuffer, @Nullable IVertexBuilder vertexBuilder, int packedLightIn,
 			int packedOverlayIn, float red, float green, float blue, float alpha) {
-		Optional<GeoBone> root = model.getBone("Whale");
 		float yRotDiff = animatable.yRotO - animatable.yRot;
+		Optional<GeoBone> root = model.getBone("Whale");
 		if (root.isPresent() && yRotDiff != 0) {
-			root.get().setRotationZ((float) Math.toRadians(yRotDiff / 2.0f));
+			root.get().setRotationZ((float) Math.toRadians(yRotDiff / 4.0f));
+		}
+		
+		Optional<GeoBone> midsection = model.getBone("Midsection");
+		if (midsection.isPresent()) {
+			midsection.get().setRotationY((float) Math.toRadians(yRotDiff / -1.0f));
+		}
+		Optional<GeoBone> cube_r3 = model.getBone("cube_r3");
+		if (cube_r3.isPresent()) {
+			cube_r3.get().setRotationY((float) Math.toRadians(yRotDiff / -1.0f));
+		}
+		Optional<GeoBone> tail = model.getBone("Tail");
+		if (tail.isPresent()) {
+			tail.get().setRotationY((float) Math.toRadians(yRotDiff / -1.0f));
 		}
 		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn,
 				packedOverlayIn, red, green, blue, alpha);
