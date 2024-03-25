@@ -162,6 +162,12 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	public void tick() {
 		super.tick();
+
+		if (leapBeginAnim.isPlaying() && leapBeginAnim.hasAnimationFinished()) {
+			for (int angle = 0; angle < 360; angle++) {
+				level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, getX() + 0.5D, getY() + 1.0D, getZ() + 0.5D, Math.cos(angle) * 0.75D, 0, Math.sin(angle) * 0.75D);
+			}
+		}
 	}
 
 	@Override
@@ -169,6 +175,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		super.aiStep();
 
 		if (MathUtil.isBetween(leftPunchAnim.getWrappedAnimProgress(), 15.6D, 18.1D) || MathUtil.isBetween(rightPunchAnim.getWrappedAnimProgress(), 15.6D, 18.1D)) CAScreenShakeEntity.shakeScreen(level, position(), 15.0F, 0.1F, 5, 20); // Cause it's part of the AI n stuff :p
+		if (MathUtil.isBetween(leapMidairAnim.getWrappedAnimProgress(), 1.0D, 2.0D)) CAScreenShakeEntity.shakeScreen(level, position(), 115.0F, 0.265F, 7, 200);
 	}
 
 	@Override

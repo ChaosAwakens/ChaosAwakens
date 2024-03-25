@@ -20,7 +20,7 @@ public class ClientPlayerEntityMixin {
         throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
     }
 
-    @Inject(method = "aiStep", at = @At("HEAD"), cancellable = true)
+ /*   @Inject(method = "aiStep", at = @At("HEAD"), cancellable = true)
     private void chaosawakens$aiStep(CallbackInfo ci) {
         ClientPlayerEntity targetClientPlayer = (ClientPlayerEntity) (Object) this;
         boolean preSprintCheck = targetClientPlayer.getFoodData().getFoodLevel() > 6 || targetClientPlayer.abilities.mayfly;
@@ -36,9 +36,9 @@ public class ClientPlayerEntityMixin {
     private void chaosawakens$aiStep2(CallbackInfo ci) {
         ClientPlayerEntity targetClientPlayer = (ClientPlayerEntity) (Object) this;
 
-        if (EntityUtil.isFullArmorSet(targetClientPlayer, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get()) && (targetClientPlayer.isInLava() || targetClientPlayer.isEyeInFluid(FluidTags.LAVA)) && targetClientPlayer.isSprinting()) {
-            ci.cancel();
+        if (EntityUtil.isFullArmorSet(targetClientPlayer, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get()) && (!targetClientPlayer.isInLava() || targetClientPlayer.isEyeInFluid(FluidTags.LAVA)) && !targetClientPlayer.isSprinting()) {
             targetClientPlayer.setSprinting(true);
+            ci.cancel();
         }
-    }
+    }*/
 }

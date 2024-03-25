@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity.ai.navigation.ground.base;
 
+import io.github.chaosawakens.common.entity.ai.pathfinding.base.RefinedPathNode;
+import it.unimi.dsi.fastutil.objects.Object2DoubleArrayMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.MobEntity;
@@ -15,10 +17,11 @@ import net.minecraft.world.Region;
 import javax.annotation.Nullable;
 
 public class RefinedWalkNodeProcessor extends WalkNodeProcessor {
+	protected final Object2DoubleArrayMap<RefinedPathNode> mappedNodesToDanger = new Object2DoubleArrayMap<>();
 	@Nullable
-	private ITag<Block> breakableBlocksTag;
+	protected ITag<Block> breakableBlocksTag;
 	@Nullable
-	private ITag<Block> validPassOverride;
+	protected ITag<Block> validPassOverride;
 	
 	public RefinedWalkNodeProcessor() {
 		

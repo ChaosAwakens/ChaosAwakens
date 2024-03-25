@@ -46,8 +46,7 @@ import java.util.stream.Collectors;
 
 /**
  * A mini API/Utility class full of general methods that can make your coding experience a little more bearable.
- * 
- * @author Meme Man
+ *
  *
  */
 public interface IUtilityHelper {

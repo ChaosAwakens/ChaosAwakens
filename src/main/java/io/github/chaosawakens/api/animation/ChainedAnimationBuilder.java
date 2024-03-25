@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * that any rough transitions between chained animations will be handled by this builder. Animation transition behaviour will remain as-is, 
  * and Geckolib will still handle the animation transitioning itself using the transition length of the owner controller.
  * <br> </br>
- * As previously stated, this {@link IAnimationBuilder} instance class handles animation chaining, but it can also be interrupted at any time. 
+ * This {@link IAnimationBuilder} instance class handles animation chaining, but it can also be interrupted at any time.
  * It allows for the randomization of the animation chaining sequence, but also allows for effectively freezing animations based on their index in 
  * the chaining sequence using their names or other identifiers. The default {@linkplain EDefaultLoopTypes loop type} used here is {@link EDefaultLoopTypes#PLAY_ONCE}, 
  * but it's also possible to specify the amount of loop repetitions per each animation in the chaining sequence.

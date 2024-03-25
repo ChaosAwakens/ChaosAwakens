@@ -245,6 +245,9 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 
 	protected void handleBaseAnimations() {
 		if (getIdleAnim() != null && !isSwimming()) playAnimation(getIdleAnim(), false);
-		if (getSwimAnim() != null && isSwimming()) playAnimation(getSwimAnim(), false);
+		if (getSwimAnim() != null && isSwimming()) {
+			stopAnimation(getIdleAnim());
+			playAnimation(getSwimAnim(), false);
+		}
 	}
 }

@@ -40,7 +40,7 @@ public class UltimateCrossbowBoltEntity extends AbstractArrowEntity implements I
     }
 
     private <T extends IAnimatable> PlayState mainPredicate(AnimationEvent<T> event) {
-
+        if (getDeltaMovement().length() > 0.01D) event.getController().setAnimation(MOVE_ANIM);
         return PlayState.CONTINUE;
     }
 
@@ -58,15 +58,15 @@ public class UltimateCrossbowBoltEntity extends AbstractArrowEntity implements I
     public void tick() {
         super.tick();
 
-   //     if (!level.isClientSide && inGround && inGroundTime != 0 && inGroundTime >= 600) level.broadcastEntityEvent(this, (byte) 0);
-   //     if (level.isClientSide && inGroundTime > 0) mainController.setAnimation(STUCK_ANIM);
+        if (!level.isClientSide && inGround && inGroundTime != 0 && inGroundTime >= 600) level.broadcastEntityEvent(this, (byte) 0);
+        if (level.isClientSide && inGroundTime > 0) mainController.setAnimation(STUCK_ANIM);
     }
 
     @Override
     protected void onHit(RayTraceResult pResult) {
         super.onHit(pResult);
 
-  //      if (level.isClientSide) mainController.setAnimation(HIT_ANIM);
+        if (level.isClientSide) mainController.setAnimation(HIT_ANIM);
     }
 
     @Override

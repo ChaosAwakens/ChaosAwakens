@@ -26,10 +26,6 @@ public abstract class EntityMixin {
             PlayerEntity playerTarget = (PlayerEntity) target;
 
             if (EntityUtil.isFullArmorSet(playerTarget, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get()) && (playerTarget.isInLava() || playerTarget.isEyeInFluid(FluidTags.LAVA))) {
-                if (playerTarget.isSwimming()) playerTarget.setSwimming(playerTarget.isSprinting() && playerTarget.isInLava() && !playerTarget.isPassenger());
-                else playerTarget.setSwimming(playerTarget.isSprinting() && playerTarget.isInLava() && playerTarget.isEyeInFluid(FluidTags.LAVA) && !playerTarget.isPassenger());
-
-                ci.cancel();
             }
         }
     }

@@ -3,7 +3,13 @@ package io.github.chaosawakens.client.models.entity.projectile;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowBoltEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class UltimateCrossbowBoltEntityModel extends AnimatedTickingGeoModel<UltimateCrossbowBoltEntity> {
 

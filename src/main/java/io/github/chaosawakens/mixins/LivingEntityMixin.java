@@ -32,8 +32,6 @@ public abstract class LivingEntityMixin {
 
 		if (target.isEffectiveAi() || target.isControlledByLocalInstance()) {
 			if (target.isInLava() && target.isAffectedByFluids() && !target.canStandOnFluid(curFluidState.getType()) && target instanceof PlayerEntity && EntityUtil.isFullArmorSet((PlayerEntity) target, CAItems.LAVA_EEL_HELMET.get(), CAItems.LAVA_EEL_CHESTPLATE.get(), CAItems.LAVA_EEL_LEGGINGS.get(), CAItems.LAVA_EEL_BOOTS.get())) {
-				ci.cancel();
-
 				double defaultGravity = target.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).getValue();
 				boolean isFalling = target.getDeltaMovement().y < 0.0D;
 				double curY = target.getY();
@@ -65,6 +63,8 @@ public abstract class LivingEntityMixin {
 				target.setDeltaMovement(postAdjustedMovement);
 
 				if (target.horizontalCollision && target.isFree(postAdjustedMovement.x, postAdjustedMovement.y + 0.6D - curY, postAdjustedMovement.z)) target.setDeltaMovement(postAdjustedMovement.x, 0.3D, postAdjustedMovement.z);
+
+				ci.cancel();
 			}
 		}
 	}

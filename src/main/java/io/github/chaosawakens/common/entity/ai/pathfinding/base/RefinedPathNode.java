@@ -18,6 +18,8 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
     protected double f;
     protected double g;
     protected double h;
+    protected double dangerFactor;
+    protected double totalScore;
 
     public RefinedPathNode(World curWorld, BlockPos originPos) {
         this.curWorld = Objects.requireNonNull(curWorld);
@@ -39,16 +41,16 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
     }
 
     public RefinedPathNode setSize(double xSize, double ySize, double zSize) {
-        this.xSize = xSize;
-        this.ySize = ySize;
-        this.zSize = zSize;
+        this.xSize = Math.round(xSize);
+        this.ySize = Math.round(ySize);
+        this.zSize = Math.round(zSize);
 
         BlockPos.Mutable encompassedPositionCheckerPos = new BlockPos.Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
 
         encompassedPositions.clear(); // In case it was scaled-down
         encompassedPositions.add(originPos);
 
-        for (double curXSize = -xSize; curXSize <= xSize; curXSize++) { // Scale by diameter, not radius
+        for (double curXSize = -xSize; curXSize <= xSize; curXSize++) { // Scale by diameter, not radius, using the provided radius
             for (double curYSize = -ySize; curYSize <= ySize; curYSize++) {
                 for (double curZSize = -zSize; curZSize <= zSize; curZSize++) {
                     encompassedPositionCheckerPos.set(originPos.getX() + curXSize, originPos.getY() + curYSize, originPos.getZ() + curZSize);
@@ -98,6 +100,14 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
         return h;
     }
 
+    public double getDangerFactor() {
+        return dangerFactor;
+    }
+
+    public double getTotalScore() {
+        return totalScore;
+    }
+
     public boolean collidesWith(RefinedPathNode o) {
         return encompassedPositions.stream().anyMatch(pos -> o.getEncompassedPositions().contains(pos));
     }
@@ -115,28 +125,21 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
 
     @Override
     public int compareTo(RefinedPathNode o) {
-        if (equals(o)) return 0;
-
-        boolean isLarger = getXSize() >= o.getXSize() && getYSize() >= o.getYSize() && getZSize() >= o.getZSize();
-        boolean positionComparison = originPos.getX() <= o.originPos.getX() && originPos.getY() <= o.originPos.getY() && originPos.getZ() <= o.originPos.getZ();
-
-        if (isLarger || positionComparison) return 1;
-
-        return -1;
+        return equals(o) ? 0 : totalScore < o.totalScore ? -1 : 1;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || !(o instanceof RefinedPathNode)) return false;
+        if (!(o instanceof RefinedPathNode)) return false;
         if (this == o) return true;
 
         RefinedPathNode otherNode = (RefinedPathNode) o;
-        return Double.compare(xSize, otherNode.xSize) == 0 && Double.compare(ySize, otherNode.ySize) == 0 && Double.compare(zSize, otherNode.zSize) == 0 && Objects.equals(encompassedPositions, otherNode.encompassedPositions) && Objects.equals(originPos, otherNode.originPos);
+        return Double.compare(xSize, otherNode.xSize) == 0 && Double.compare(ySize, otherNode.ySize) == 0 && Double.compare(zSize, otherNode.zSize) == 0 && Double.compare(f, otherNode.f) == 0 && Double.compare(g, otherNode.g) == 0 && Double.compare(h, otherNode.h) == 0 && Double.compare(dangerFactor, otherNode.dangerFactor) == 0 && Double.compare(totalScore, otherNode.totalScore) == 0 && Objects.equals(encompassedPositions, otherNode.encompassedPositions) && Objects.equals(originPos, otherNode.originPos);
     }
 
     @Override
     public String toString() {
-        return String.format("[Refined Path Node]: {Origin Pos}: (%s), {Node Size (XYZ)}: (%d%d%d), {Node Costs (FGH)}: (%d%d%d)", originPos, xSize, ySize, zSize, f, g, h);
+        return String.format("[Refined Path Node]: {Origin Pos}: (%s), {Node Size (XYZ)}: (%d, %d, %d), {Node Costs (FGHDT)}: (%d, %d, %d, %d, %d)", originPos, xSize, ySize, zSize, f, g, h, dangerFactor, totalScore);
     }
 
     @Override
