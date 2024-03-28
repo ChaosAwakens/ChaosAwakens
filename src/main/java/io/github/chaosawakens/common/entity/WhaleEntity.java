@@ -427,7 +427,7 @@ public class WhaleEntity extends WaterMobEntity implements IAnimatableEntity, IA
 
         @Override
         public boolean canContinueToUse() {
-            return whale.getAirSupply() < whale.getMaxAirSupply() / whale.random.nextInt(4);
+            return whale.getAirSupply() < whale.getMaxAirSupply() / (whale.random.nextInt(3) + 1);
         }
 
         @SuppressWarnings("rawtypes")
