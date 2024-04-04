@@ -241,15 +241,11 @@ public class BirdEntity extends AnimatableAnimalEntity {
         entityData.set(TYPE_ID, colour);
     }
 
-    public boolean isFlying() {
-        return ((JumpFlyingMovementController)moveControl).state == JumpFlyingMovementController.State.FLYING && !isOnGround();
-    }
-
     @Override
     protected void handleBaseAnimations() {
-        if (getIdleAnim() != null && !isMoving() && !isFlying()) playAnimation(getIdleAnim(), false);
-        if (getWalkAnim() != null && isMoving() && !isFlying()) playAnimation(getWalkAnim(), false);
-        if (flyAnim != null && isFlying()) playAnimation(flyAnim, false);
+        if (getIdleAnim() != null && !isMoving() && isOnGround()) playAnimation(getIdleAnim(), false);
+        if (getWalkAnim() != null && isMoving() && isOnGround()) playAnimation(getWalkAnim(), false);
+        if (!isOnGround()) playAnimation(flyAnim, true);
     }
 
     private static class BirdData extends AgeableData {
@@ -267,20 +263,17 @@ public class BirdEntity extends AnimatableAnimalEntity {
 
         @Nullable
         protected Vector3d getPosition() {
-            Vector3d vector3d = null;
-            if (this.mob.isInWater()) {
-                vector3d = RandomPositionGenerator.getLandPos(this.mob, 15, 15);
-            }
+            Vector3d targetPos = null;
+            if (this.mob.isInWater())
+                targetPos = RandomPositionGenerator.getLandPos(this.mob, 15, 15);
 
-            if (this.mob.getRandom().nextFloat() >= this.probability) {
-                vector3d = this.getElevatedPos();
-            }
+            if (this.mob.getRandom().nextFloat() >= this.probability * 10)
+                targetPos = this.getElevatedPos();
 
-            if (this.mob.getRandom().nextFloat() >= this.probability * 10) {
-                vector3d = RandomPositionGenerator.getAirPos(mob, 10, 7, 8, BirdEntity.this.getViewVector(0), Math.PI / 2D);
-            }
+            if (this.mob.getRandom().nextFloat() >= this.probability)
+                targetPos = RandomPositionGenerator.getAirPos(mob, 10, 7, 8, BirdEntity.this.getViewVector(0), Math.PI / 2D);
 
-            return vector3d == null ? super.getPosition() : vector3d;
+            return targetPos == null ? super.getPosition() : targetPos;
         }
 
         @Nullable
@@ -289,8 +282,8 @@ public class BirdEntity extends AnimatableAnimalEntity {
             BlockPos.Mutable mutable = new BlockPos.Mutable();
             BlockPos.Mutable mutable1 = new BlockPos.Mutable();
 
-            for(BlockPos blockpos1 : BlockPos.betweenClosed(MathHelper.floor(this.mob.getX() - 30.0D), MathHelper.floor(this.mob.getY() - 6.0D), MathHelper.floor(this.mob.getZ() - 30.0D), MathHelper.floor(this.mob.getX() + 30.0D), MathHelper.floor(this.mob.getY() + 8.0D), MathHelper.floor(this.mob.getZ() + 30.0D))) {
-                if (!blockpos.equals(blockpos1)) {
+            for(BlockPos blockpos1 : BlockPos.betweenClosed(MathHelper.floor(this.mob.getX() - 30.0D), MathHelper.floor(this.mob.getY() + 3.0D), MathHelper.floor(this.mob.getZ() - 30.0D), MathHelper.floor(this.mob.getX() + 30.0D), MathHelper.floor(this.mob.getY() + 10.0D), MathHelper.floor(this.mob.getZ() + 30.0D))) {
+                if (!blockpos.equals(blockpos1) && this.mob.getRandom().nextFloat() >= Math.pow(probability, blockpos1.getY() - this.mob.getY() + 1)) {
                     BlockState state = this.mob.level.getBlockState(mutable1.setWithOffset(blockpos1, Direction.DOWN));
                     boolean flag = state.isCollisionShapeFullBlock(mob.level, mutable1) && !(state.getBlock() instanceof MagmaBlock);
                     if (flag && this.mob.level.isEmptyBlock(blockpos1) && this.mob.level.isEmptyBlock(mutable.setWithOffset(blockpos1, Direction.UP)))
