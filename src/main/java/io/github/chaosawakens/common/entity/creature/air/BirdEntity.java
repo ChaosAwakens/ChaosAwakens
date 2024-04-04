@@ -268,7 +268,7 @@ public class BirdEntity extends AnimatableAnimalEntity {
                 targetPos = RandomPositionGenerator.getLandPos(this.mob, 15, 15);
 
             if (this.mob.getRandom().nextFloat() >= this.probability * 10)
-                targetPos = this.getElevatedPos();
+                targetPos = this.getElevatedPos(targetPos);
 
             if (this.mob.getRandom().nextFloat() >= this.probability)
                 targetPos = RandomPositionGenerator.getAirPos(mob, 10, 7, 8, BirdEntity.this.getViewVector(0), Math.PI / 2D);
@@ -277,7 +277,7 @@ public class BirdEntity extends AnimatableAnimalEntity {
         }
 
         @Nullable
-        private Vector3d getElevatedPos() {
+        private Vector3d getElevatedPos(Vector3d fallback) {
             BlockPos blockpos = this.mob.blockPosition();
             BlockPos.Mutable mutable = new BlockPos.Mutable();
             BlockPos.Mutable mutable1 = new BlockPos.Mutable();
@@ -291,7 +291,7 @@ public class BirdEntity extends AnimatableAnimalEntity {
                 }
             }
 
-            return null;
+            return fallback;
         }
     }
 }
