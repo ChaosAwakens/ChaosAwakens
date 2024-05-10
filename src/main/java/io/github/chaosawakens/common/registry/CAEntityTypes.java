@@ -344,7 +344,7 @@ public class CAEntityTypes {
 					.build(ChaosAwakens.prefix("ultimate_fishing_bobber").toString()));
 	public static final RegistryObject<EntityType<RoboLaserEntity>> ROBO_LASER = ENTITY_TYPES.register("robo_laser",
 			() -> EntityType.Builder.<RoboLaserEntity>of(RoboLaserEntity::new, EntityClassification.MISC)
-					.sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(20)
+					.sized(0.25F, 0.25F).clientTrackingRange(8).updateInterval(20)
 					.build(ChaosAwakens.prefix("robo_laser").toString()));
 	// Misc
 	public static final RegistryObject<EntityType<CAFallingBlockEntity>> FALLING_BLOCK = ENTITY_TYPES.register("falling_block",
@@ -402,7 +402,7 @@ public class CAEntityTypes {
 		EntitySpawnPlacementRegistry.register(BEAVER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(STINK_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(ROCK_FISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, RockFishEntity::checkRockFishSpawnRules);
-	//	EntitySpawnPlacementRegistry.register(WHALE.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WhaleEntity::checkWhaleSpawnRules);
+		EntitySpawnPlacementRegistry.register(WHALE.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WhaleEntity::checkWhaleSpawnRules);
 		EntitySpawnPlacementRegistry.register(ROBO_POUNDER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(ROBO_SNIPER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(ROBO_WARRIOR.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);

@@ -32,33 +32,6 @@ public abstract class ExtendedAnimatedTickingGeoModel<E extends IAnimatableEntit
 		return getAnimationProcessor().getBone("head");
 	}
 	
-	protected void handleClientAnimTick(E owner, Integer uniqueID, @Nullable AnimationEvent<E> customPredicate) {	
-		AnimationData curAnimManager = owner.getFactory().getOrCreateAnimationData(uniqueID);
-		boolean shouldTick = !Minecraft.getInstance().isPaused() || curAnimManager.shouldPlayWhilePaused;
-		double curTrackedProgress = owner.tickTimer() + Minecraft.getInstance().getFrameTime();
-		
-		if (curAnimManager.startTick == null) curAnimManager.startTick = curTrackedProgress;
-		
-		if (shouldTick) {
-			curAnimManager.tick = curTrackedProgress;
-			
-			double gameTick = curAnimManager.tick;
-			double deltaTicks = gameTick - lastGameTickTime;
-			
-			seekTime += deltaTicks;
-			lastGameTickTime = gameTick;
-		}
-		
-		AnimationEvent<E> safeCustomPredicate = customPredicate == null ? new AnimationEvent<E>(owner, 0, 0, 0, false, Collections.emptyList()) : customPredicate;
-		
-		safeCustomPredicate.animationTick = seekTime;
-		
-		getAnimationProcessor().preAnimationSetup(safeCustomPredicate.getAnimatable(), seekTime);
-		
-		if (!getAnimationProcessor().getModelRendererList().isEmpty()) getAnimationProcessor().tickAnimation(owner, uniqueID, seekTime, safeCustomPredicate, GeckoLibCache.getInstance().parser, shouldCrashOnMissing);
-		if (shouldTick) codeAnimations(owner, uniqueID, customPredicate);
-	}
-	
 	protected void handleFunctionalAnimTick(E owner, Integer uniqueID, @Nullable AnimationEvent<E> customPredicate) {
 		AnimationData curAnimManager = owner.getFactory().getOrCreateAnimationData(uniqueID);
 		MinecraftServer curServer = ServerLifecycleHooks.getCurrentServer();

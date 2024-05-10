@@ -54,30 +54,33 @@ public class UltimateFishingRodItem extends FishingRodItem implements IAutoEncha
 
 	@Override
 	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack = playerIn.getItemInHand(handIn);
+		ItemStack curHeldStack = playerIn.getItemInHand(handIn);
 		if (playerIn.fishing != null) {
 			if (!worldIn.isClientSide) {
-				int i = playerIn.fishing.retrieve(itemstack);
-				itemstack.hurtAndBreak(i, playerIn, (player) -> player.broadcastBreakEvent(handIn));
+				int retrievedItemCount = playerIn.fishing.retrieve(curHeldStack);
+				curHeldStack.hurtAndBreak(retrievedItemCount, playerIn, (player) -> player.broadcastBreakEvent(handIn));
 			}
 
 			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 		} else {
 			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.FISHING_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+
 			if (!worldIn.isClientSide) {
-				int k = EnchantmentHelper.getFishingSpeedBonus(itemstack) + 60;
-				int j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 50;
+				int lureMod = EnchantmentHelper.getFishingSpeedBonus(curHeldStack) + 60;
+				int luckMod = EnchantmentHelper.getFishingLuckBonus(curHeldStack) + 50;
+
 				if (worldIn.dimension() == CADimensions.MINING_PARADISE) {
-					k = EnchantmentHelper.getFishingSpeedBonus(itemstack) + 20;
-					j = EnchantmentHelper.getFishingLuckBonus(itemstack) + 40;
+					lureMod = EnchantmentHelper.getFishingSpeedBonus(curHeldStack) + 20;
+					luckMod = EnchantmentHelper.getFishingLuckBonus(curHeldStack) + 40;
 				}
-				worldIn.addFreshEntity(new UltimateFishingBobberEntity(playerIn, worldIn, j, k));
+
+				worldIn.addFreshEntity(new UltimateFishingBobberEntity(playerIn, worldIn, luckMod, lureMod));
 			}
 
 			playerIn.awardStat(Stats.ITEM_USED.get(this));
 		}
 
-		return ActionResult.sidedSuccess(itemstack, worldIn.isClientSide());
+		return ActionResult.sidedSuccess(curHeldStack, worldIn.isClientSide());
 	}
 
 	@Override

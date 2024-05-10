@@ -31,7 +31,7 @@ public class IgniteEnchantment extends Enchantment {
 	}
 
 	public static boolean shouldHit(int level, Random rand) {
-		return level <= 0 ? false : rand.nextFloat() < 0.15F * (float) level;
+		return level > 0 && rand.nextFloat() < 0.15F * (float) level;
 	}
 
 	@Override

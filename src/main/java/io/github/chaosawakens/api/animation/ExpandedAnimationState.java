@@ -10,7 +10,7 @@ public enum ExpandedAnimationState {
 	
 	private final AnimationState translatedState;
 	
-	private ExpandedAnimationState(AnimationState translatedState) {
+	ExpandedAnimationState(AnimationState translatedState) {
 		this.translatedState = translatedState;
 	}
 

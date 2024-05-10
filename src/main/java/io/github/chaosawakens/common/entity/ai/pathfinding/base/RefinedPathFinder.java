@@ -14,10 +14,11 @@ import net.minecraft.world.Region;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class RefinedPathFinder extends PathFinder {
+public class RefinedPathFinder extends PathFinder implements Callable<RefinedPathFinder> {
 	private final LinkedListMultimap<Region, RefinedPath> cachedMappedRegionalPaths = LinkedListMultimap.create();
 	private PathfindingState curState = PathfindingState.IDLE;
 	@Nullable
@@ -56,7 +57,6 @@ public class RefinedPathFinder extends PathFinder {
 
 	@Override
 	public Path findPath(Region pRegion, MobEntity pMob, Set<BlockPos> pTargetPositions, float pMaxRange, int pAccuracy, float pSearchDepthMultiplier) {
-
 		return super.findPath(pRegion, pMob, pTargetPositions, pMaxRange, pAccuracy, pSearchDepthMultiplier);
 	}
 
@@ -87,5 +87,10 @@ public class RefinedPathFinder extends PathFinder {
 		clearAllCachedPathData();
 		setCurrentState(PathfindingState.IDLE);
 		setPreviousState(null);
+	}
+
+	@Override
+	public RefinedPathFinder call() throws Exception {
+		return null;
 	}
 }

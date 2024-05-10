@@ -180,6 +180,11 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		return this;
 	}
 
+	public SingletonAnimationBuilder setLoopType(ILoopType loopType) {
+		this.loopType = loopType;
+		return this;
+	}
+
 	@Override
 	public WrappedAnimationController<? extends IAnimatableEntity> getWrappedController() {
 		return targetController;
@@ -188,10 +193,6 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	@Override
 	public IAnimatableEntity getOwner() {
 		return owner;
-	}
-
-	public void setLoopType(ILoopType loopType) {
-		this.loopType = loopType;
 	}
 
 	@Override
@@ -214,7 +215,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 		return targetController.isAnimationFinished(this)
 				|| (isPlaying() && targetController.getAnimationProgressTicks() >= getWrappedAnimLength()
 					&& (targetController.getAnimationState() == ExpandedAnimationState.RUNNING
-							|| targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING));
+							|| targetController.getAnimationState() == ExpandedAnimationState.TRANSITIONING || targetController.getAnimationState() == ExpandedAnimationState.STOPPED));
 	}
 
 	@Override

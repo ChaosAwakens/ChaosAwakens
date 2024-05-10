@@ -2258,7 +2258,7 @@
 			}
 		},
 		"Death": {
-			"loop": false,
+			"loop": "HOLD_ON_LAST_FRAME",
 			"animation_length": 3.6,
 			"anim_time_update": "0",
 			"blend_weight": "1",

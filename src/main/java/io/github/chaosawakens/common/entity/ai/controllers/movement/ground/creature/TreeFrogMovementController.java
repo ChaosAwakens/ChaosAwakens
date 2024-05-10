@@ -8,4 +8,9 @@ public class TreeFrogMovementController extends MovementController {
     public TreeFrogMovementController(MobEntity ownerFrog) {
         super(ownerFrog);
     }
+
+    @Override
+    public void tick() {
+        super.tick();
+    }
 }

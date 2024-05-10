@@ -2,12 +2,12 @@
   "anim_file_loc": "chaosawakens:animations/creature/water/fish/rock_fish.animation.json",
   "animations": [
     {
-      "animation_name": "Swim",
+      "animation_name": "Idle",
       "animation_length": 1.76,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
+      "animation_name": "Swim",
       "animation_length": 1.76,
       "loop_type": "LOOP"
     }

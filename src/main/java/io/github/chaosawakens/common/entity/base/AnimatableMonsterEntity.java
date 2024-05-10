@@ -22,6 +22,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
@@ -30,6 +31,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -141,8 +143,8 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		List<LivingEntity> validTargets = EntityUtil.getEntitiesAround(this, LivingEntity.class, x, y, z, radius);
 		
 		for (Entity target : validTargets) {
-			if (target.canBeCollidedWith() && !target.noPhysics) {
-				double angle = MathUtil.getRelativeAngleBetweenEntities(this, target);
+			if (target.canBeCollidedWith() && !target.noPhysics && target != this) {
+				double angle = (MathUtil.getRelativeAngleBetweenEntities(this, target) + 90) * Math.PI / 180;
 				target.setDeltaMovement(-0.1 * Math.cos(angle), target.getDeltaMovement().y, -0.1 * Math.sin(angle));
 			}
 		}
@@ -281,15 +283,20 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	@Override
+	public ITextComponent getName() {
+		return getTypeName();
+	}
+
+	@Override
 	public SoundCategory getSoundSource() {
 		return SoundCategory.HOSTILE;
 	}
 
 	@Override
 	protected PathNavigator createNavigation(World pLevel) {
-		return new CAStrictGroundPathNavigator(this, pLevel);
+		return new GroundPathNavigator(this, pLevel);
 	}
-	
+
 	@Override
 	protected BodyController createBodyControl() {
 		return new SmoothBodyController(this);

@@ -32,12 +32,12 @@ public class BlockNodeType implements ISubNodeType {
 
     @Override
     public int getMalus(RefinedNodeProcessor targetProcessor) {
-        return targetProcessor.getMalusFor(this);
+        return targetProcessor.getMalusFor(targetStatePos);
     }
 
     @Override
     public boolean isPassable(LivingEntity targetPathfindingEntity) {
-        return false;
+        return targetPathfindingEntity.noPhysics || targetState.getCollisionShape(curLevel, targetStatePos).isEmpty();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class BlockNodeType implements ISubNodeType {
         float maxUpStep = targetPathfindingEntity.maxUpStep;
         double blockHeight = targetState.getCollisionShape(curLevel, targetStatePos).max(Direction.Axis.Y) - targetPathfindingEntity.getY();
 
-        return !isAir() && !isFluid() && blockHeight <= maxUpStep;
+        return !isAir() && !isFluid() && !isPassable(targetPathfindingEntity) && blockHeight <= maxUpStep;
     }
 
     @Override

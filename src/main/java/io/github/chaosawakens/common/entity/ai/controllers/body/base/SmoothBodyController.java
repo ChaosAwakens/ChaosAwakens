@@ -7,7 +7,7 @@ import net.minecraft.util.math.MathHelper;
 
 // MM implementation revised
 public class SmoothBodyController extends BodyController {
-	protected final AnimatableMonsterEntity owner;
+	protected final MobEntity owner;
 	protected static final int ROT_TICK_THRESHOLD = 10;
 	protected static final int ROT_THRESHOLD = 75;
 	protected int curRotTime;
@@ -15,7 +15,7 @@ public class SmoothBodyController extends BodyController {
 	protected double[] xRotHist = new double[ROT_TICK_THRESHOLD];
 	protected double[] zRotHist = new double[ROT_TICK_THRESHOLD];
 
-	public SmoothBodyController(AnimatableMonsterEntity owner) {
+	public SmoothBodyController(MobEntity owner) {
 		super(owner);
 		this.owner = owner;
 	}
@@ -30,7 +30,7 @@ public class SmoothBodyController extends BodyController {
 		this.xRotHist[0] = owner.getX();
 		this.zRotHist[0] = owner.getZ();
 
-		if (owner.isMoving()) {
+		if (isOwnerMoving()) {
 			owner.yBodyRot = owner.yRot;
 			
 			rotateHeadIfNecessary();
@@ -54,6 +54,15 @@ public class SmoothBodyController extends BodyController {
 				owner.yBodyRot = approachRot(owner.yHeadRot, owner.yBodyRot, rotLimit);
 			}
 		}
+	}
+
+	protected boolean isOwnerMoving() {
+		double dx = owner.getX() - owner.xo;
+		double dz = owner.getZ() - owner.zo;
+		double dxSqr = dx * dx;
+		double dzSqr = dz * dz;
+
+		return dxSqr + dzSqr > (owner instanceof AnimatableMonsterEntity ? ((AnimatableMonsterEntity) owner).getMovementThreshold() : 2.500000277905201E-7);
 	}
 
 	/**

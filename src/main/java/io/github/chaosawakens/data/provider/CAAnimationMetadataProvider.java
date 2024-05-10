@@ -127,7 +127,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Left Punch", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Right Punch", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Smash Attack", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Death", 3.6D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Death", 3.6D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
                 new AnimationDataHolder("Idle Extras", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Hostile/Insect
@@ -179,7 +179,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Death", 2.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/robo/robo_warrior.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Death", 3.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Death", 4.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Activate Shield", 1.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Idle Extras", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Destroy Shield", 1.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),

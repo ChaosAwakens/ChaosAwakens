@@ -4,6 +4,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.*;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -356,17 +357,18 @@ public final class EntityUtil {
 	 * @param radius The horizontal radius of the attraction effect
 	 * @param height The vertical radius of the attraction effect
 	 * @param attractionSpeed The speed at which entities should attract to the central {@link LivingEntity} (clamped between {@code 0.01 - 1.0D})
+	 * @param exponentialPull Whether the attraction force should increase based on an inverse relationship between the attraction speed and distance between entities.
 	 */
-	public static void attractEntities(LivingEntity targetEntity, double radius, double height, double attractionSpeed) {
+	public static void attractEntities(LivingEntity targetEntity, double radius, double height, double attractionSpeed, boolean exponentialPull) {
 		if (targetEntity == null || targetEntity.noPhysics) return;
 
 		List<LivingEntity> potentialAffectedTargets = getAllEntitiesAround(targetEntity, radius, height, radius, radius + height);
 
 		for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
-			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
+			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive() || potentialAffectedTarget.isNoGravity()) continue;
 
 			double relAngleRadians = MathUtil.getRelativeAngleBetweenEntities(targetEntity, potentialAffectedTarget);
-			double clampedAttractionSpeed = MathHelper.clamp(attractionSpeed, 0.01D, 1.0D);
+			double clampedAttractionSpeed = MathHelper.clamp(exponentialPull ? attractionSpeed / targetEntity.distanceTo(potentialAffectedTarget) : attractionSpeed, 0.01D, 1.0D);
 			potentialAffectedTarget.setDeltaMovement(clampedAttractionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedAttractionSpeed * Math.sin(relAngleRadians));
 		}
 	}
@@ -386,8 +388,8 @@ public final class EntityUtil {
 		for (E potentialAffectedTarget : potentialAffectedTargets) {
 			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
 
-			double relAngleRadians = MathUtil.getRelativeAngleBetweenEntities(targetEntity, potentialAffectedTarget);
-			double clampedRepulsionSpeed = -MathHelper.clamp(repulsionPower, 0.01D, 10.0D);
+			double relAngleRadians = (MathUtil.getRelativeAngleBetweenEntities(targetEntity, potentialAffectedTarget) + 90) * Math.PI / 180;
+			double clampedRepulsionSpeed = MathHelper.clamp(repulsionPower, 0.01D, 10.0D);
 			potentialAffectedTarget.setDeltaMovement(clampedRepulsionSpeed * Math.cos(relAngleRadians), potentialAffectedTarget.getDeltaMovement().y, clampedRepulsionSpeed * Math.sin(relAngleRadians));
 		}
 	}
@@ -400,7 +402,7 @@ public final class EntityUtil {
 	 * @param repulsionPower The power/speed at which entities will be repelled from the specified {@link LivingEntity} (clamped between {@code 0.01 - 10.0D}, with necessary negative conversions already done)
 	 */
 	public static void repelEntities(LivingEntity targetEntity, double radius, double height, double repulsionPower) {
-		repelEntitiesOfClass(targetEntity, LivingEntity.class, radius, height, repulsionPower);
+		repelEntitiesOfClass(targetEntity, Entity.class, radius, height, repulsionPower);
 	}
 	
 	/**
@@ -421,7 +423,7 @@ public final class EntityUtil {
 		final BlockPos targetPos = new BlockPos(attackingEntity.getX() + targetX, attackingEntity.getY(), attackingEntity.getZ() + targetZ).immutable();
 		Vector3d chargeVec = new Vector3d(targetPos.getX() - attackingEntity.getX(), attackingEntity.getDeltaMovement().y, targetPos.getZ() - attackingEntity.getZ());
 		
-		attackingEntity.setDeltaMovement(chargeVec.scale(Math.min(chargePercentageMod, 1)));
+		attackingEntity.setDeltaMovement(chargeVec.multiply(Math.min(chargePercentageMod, 1), 1, Math.min(chargePercentageMod, 1)));
 		attackingEntity.refreshDimensions();
 	}
 	
@@ -488,5 +490,31 @@ public final class EntityUtil {
 				livingAnimatable.setPose(Pose.DYING);
 			}
 		}
+	}
+
+	/**
+	 * Attempts to spawn an {@link ItemEntity} with additional motion.
+	 *
+	 * @param ownerEntity The {@linkplain LivingEntity owner entity} that will spawn the specified {@link ItemEntity}.
+	 * @param targetStack The {@link ItemStack} with which the {@link ItemEntity} will be spawned.
+	 * @param additionalMotion The additional motion to apply to the spawned {@link ItemEntity}.
+	 *
+	 * @return The spawned {@link ItemEntity} or {@code null} if the specified {@link ItemStack} is empty/the level is client-side.
+	 */
+	public static ItemEntity spawnItemWithMotion(LivingEntity ownerEntity, ItemStack targetStack, Vector3d additionalMotion) {
+		if (!targetStack.isEmpty() && !ownerEntity.level.isClientSide) {
+			ItemEntity targetItemEntity = new ItemEntity(ownerEntity.level, ownerEntity.getX(), ownerEntity.getY(), ownerEntity.getZ(), targetStack);
+
+			targetItemEntity.setDefaultPickUpDelay();
+
+			if (ownerEntity.captureDrops() != null) ownerEntity.captureDrops().add(targetItemEntity);
+			else {
+				targetItemEntity.setDeltaMovement(targetItemEntity.getDeltaMovement().add(additionalMotion));
+				ownerEntity.level.addFreshEntity(targetItemEntity);
+			}
+			return targetItemEntity;
+		}
+
+		return null;
 	}
 }

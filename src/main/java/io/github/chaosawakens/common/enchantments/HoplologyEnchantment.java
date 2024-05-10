@@ -12,9 +12,6 @@ import net.minecraft.util.DamageSource;
 
 import java.util.stream.Collectors;
 
-/**
- * @author invalid2
- */
 public class HoplologyEnchantment extends ProtectionEnchantment {
 	private static final int MAX_PROTECTION_LEVEL = 50;
 	private int protection;

@@ -10,7 +10,7 @@ public final class ObjectUtil {
 	private ObjectUtil() {
 		throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
 	}
-	
+
 	/**
 	 * Performs nullity checks, to ascertain that all object parameters passed in aren't null
 	 * @param throwsException Whether or not a {@link NullPointerException} should be thrown if any of the objects passed in are null

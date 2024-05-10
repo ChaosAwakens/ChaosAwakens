@@ -3823,6 +3823,7 @@
 		},
 		"Rage Begin": {
 			"animation_length": 3.5,
+			"loop": "HOLD_ON_LAST_FRAME",
 			"bones": {
 				"Head": {
 					"rotation": {

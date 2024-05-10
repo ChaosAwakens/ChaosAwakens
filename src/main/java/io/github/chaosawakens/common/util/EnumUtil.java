@@ -367,6 +367,12 @@ public final class EnumUtil {
 	}
 
 	// Misc
+	public enum BobberLavaType {
+		INVALID,
+		INSIDE_LAVA,
+		ABOVE_LAVA;
+	}
+
 	public enum BlockPatternShape {
 		CIRCLE {
 			@Override

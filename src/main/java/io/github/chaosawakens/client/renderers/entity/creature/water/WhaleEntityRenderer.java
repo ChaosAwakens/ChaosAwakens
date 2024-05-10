@@ -50,18 +50,13 @@ public class WhaleEntityRenderer extends ExtendedGeoEntityRenderer<WhaleEntity> 
 		}
 		
 		Optional<GeoBone> midsection = model.getBone("Midsection");
-		if (midsection.isPresent()) {
-			midsection.get().setRotationY((float) Math.toRadians(yRotDiff / -1.0f));
-		}
 		Optional<GeoBone> cube_r3 = model.getBone("cube_r3");
-		if (cube_r3.isPresent()) {
-			cube_r3.get().setRotationY((float) Math.toRadians(yRotDiff / -1.0f));
-		}
 		Optional<GeoBone> tail = model.getBone("Tail");
-		if (tail.isPresent()) {
-			tail.get().setRotationY((float) Math.toRadians(yRotDiff / -1.0f));
-		}
-		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn,
-				packedOverlayIn, red, green, blue, alpha);
+
+		midsection.ifPresent(geoBone -> geoBone.setRotationY((float) Math.toRadians(yRotDiff / -1.0f)));
+		cube_r3.ifPresent(geoBone -> geoBone.setRotationY((float) Math.toRadians(yRotDiff / -1.0f)));
+        tail.ifPresent(geoBone -> geoBone.setRotationY((float) Math.toRadians(yRotDiff / -1.0f)));
+
+		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 }

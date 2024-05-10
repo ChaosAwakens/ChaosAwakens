@@ -3,9 +3,9 @@ package io.github.chaosawakens.manager;
 import io.github.chaosawakens.client.events.CABossBarRenderer;
 import io.github.chaosawakens.client.events.CAClientMiscEvents;
 import io.github.chaosawakens.client.events.CAClientSetupEvents;
+import io.github.chaosawakens.common.events.CACommonMiscEvents;
 import io.github.chaosawakens.common.events.CACommonSetupEvents;
 import io.github.chaosawakens.common.events.CACommonSetupEvents.ForgeSetupEvents;
-import io.github.chaosawakens.common.events.CAMiscEvents;
 import io.github.chaosawakens.server.events.ServerSetupEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -32,7 +32,7 @@ public class CAEventManager {
 		modBus.register(CACommonSetupEvents.ModSetupEvents.class);
 
 		forgeBus.register(ForgeSetupEvents.class);
-		forgeBus.register(CAMiscEvents.class);
+		forgeBus.register(CACommonMiscEvents.class);
 	}
 
 	private static void registerServerEvents(IEventBus modBus, IEventBus forgeBus) {

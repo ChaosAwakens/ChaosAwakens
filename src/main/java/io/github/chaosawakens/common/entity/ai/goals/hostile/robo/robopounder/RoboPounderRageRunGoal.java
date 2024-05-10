@@ -16,6 +16,7 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -44,7 +45,9 @@ public class RoboPounderRageRunGoal extends Goal {
 	private boolean hasPlayedCrashSound = false;
 	private boolean hasPlayedRestartSound = false;
 	private boolean hasPlayedCrashRestartSound = false;
-	
+	private boolean foundCrashCollision = false;
+	private int targetInterval = 0;
+
 	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
 		this.owner = owner;
 		this.rageBeginAnim = rageBeginAnim;
@@ -91,7 +94,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	}
 	
 	@Override
-	public void start() {
+	public void start() { //TODO Figure out how to get this to always tick
 		owner.setAttackID(rageRunAttackId);
 		owner.setRageRunning(true);
 		owner.getNavigation().stop();
@@ -99,13 +102,15 @@ public class RoboPounderRageRunGoal extends Goal {
 		owner.playAnimation(rageBeginAnim.get(), true);
 
 		owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_WINDUP.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
-		CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 35F, 0.1F, 32, 16);
+		CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 55F, 0.14F, 22, 16);
 
 		this.isPathingRageRun = false;
 		this.hasPlayedCooldownSound = false;
 		this.hasPlayedRestartSound = false;
 		this.hasPlayedCrashSound = false;
 		this.hasPlayedCrashRestartSound = false;
+		this.foundCrashCollision = false;
+		this.targetInterval = 0;
 	}
 	
 	@Override
@@ -142,15 +147,16 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 		
 		if (ObjectUtil.performNullityChecks(false, rageRunPath, relevantLookPos)) {
+			if (!rageRunPath.isDone()) rageRunPath.setNextNodeIndex(rageRunPath.getNodeCount() - 1);
+
 			ownerPathNav.moveTo(rageRunPath, 1);
 			
 			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
-			if (!rageRunPath.isDone()) rageRunPath.setNextNodeIndex(rageRunPath.getNodeCount() - 1);
 		}
 		
 		if ((ownerPathNav.isDone() || (relevantLookPos != null && owner.distanceToSqr(relevantLookPos) <= 15.0D)) && isPathingRageRun) this.isPathingRageRun = false;
 		
-		if (owner.getTarget() == null || owner.getRageRunDuration() <= 0) {
+		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0) {
 			owner.stopAnimation(rageRunAnim.get());
 			owner.playAnimation(rageCooldownAnim.get(), true);
 		}
@@ -180,17 +186,17 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 	}
 	
-	private void handleRageCrash() { //TODO Migrate to entity data
-		boolean foundCrashCollision = false;
-		boolean lowCrash = false;
-		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ));
+	private void handleRageCrash() {
+		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.round(owner.getBoundingBox().minX), (int) Math.round(owner.getBoundingBox().minY) + 1, (int) Math.round(owner.getBoundingBox().minZ), (int) Math.round(owner.getBoundingBox().maxX), (int) Math.round(owner.getBoundingBox().maxY), (int) Math.round(owner.getBoundingBox().maxZ));
 		
-		if (owner.horizontalCollision) { //TODO Move rage crash logic to dataparams and stuff
-			for (BlockPos detectedPos : BlockPos.betweenClosed((int) Math.floor(owner.getBoundingBox().minX), (int) Math.floor(owner.getBoundingBox().minY) + 1, (int) Math.floor(owner.getBoundingBox().minZ), (int) Math.floor(owner.getBoundingBox().maxX), (int) Math.floor(owner.getBoundingBox().maxY), (int) Math.floor(owner.getBoundingBox().maxZ))) {
+		if (owner.horizontalCollision) {
+			for (BlockPos detectedPos : collisionBlocks) {
 				BlockState detectedState = owner.level.getBlockState(detectedPos);
+				float maxUpStep = owner.maxUpStep;
+				double blockHeight = detectedState.getCollisionShape(owner.level, detectedPos).max(Direction.Axis.Y) - owner.getY();
 				
-				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE) && detectedPos.getY() > Math.floor(owner.getBoundingBox().minY)) {
-					foundCrashCollision = true;
+				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE)) {
+					this.foundCrashCollision = true;
 					break;
 				}
 			}
@@ -215,12 +221,12 @@ public class RoboPounderRageRunGoal extends Goal {
 			owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 			owner.getNavigation().stop();
 			EntityUtil.freezeEntityRotation(owner);
-		}
+		} else BlockPosUtil.destroyCollidingBlocksWithOffset(owner, false, 0.05D, 0, 0.05D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 	}
 	
 	private boolean shouldExitCooldown() {
-		if (rageCrashAnim.get().isPlaying()) return rageCrashAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCrashAnim.get().getWrappedAnimLength() / 2, rageCrashAnim.get().getWrappedAnimLength());
-		else return rageCooldownAnim.get().isPlaying() && rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 4, rageCooldownAnim.get().getWrappedAnimLength());
+		if (rageCrashAnim.get().isPlaying()) return rageCrashAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCrashAnim.get().getWrappedAnimLength() / 1.5D, rageCrashAnim.get().getWrappedAnimLength() * 2);
+		else return rageCooldownAnim.get().isPlaying() && rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 2, rageCooldownAnim.get().getWrappedAnimLength());
 	}
 	
 	@Override
@@ -254,13 +260,17 @@ public class RoboPounderRageRunGoal extends Goal {
 			createRageRunPath();
 			affectTargets();
 			handleRageCrash();
+
+			if (owner.tickCount % 8 == 0) CAScreenShakeEntity.shakeScreen(owner.level, owner.position(), 35.0F, 0.08F, 5, 20);
 		}
 		
 		if (rageCooldownAnim.get().isPlaying()) {
 			owner.getNavigation().stop();
+			EntityUtil.freezeEntityRotation(owner);
+			if (owner.horizontalCollision) BlockPosUtil.destroyCollidingBlocksWithOffset(owner, false, 0.05D, 0, 0.05D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 
 			if (!hasCharged) {
-				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRageRunSlideOffset()), 5, 4, 0.035);
+				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, (double) owner.getRageRunFrictionOffset() / 10), 30, 0, 0.025);
 
 				if (!hasPlayedCooldownSound) {
 					owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_COOLDOWN.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
@@ -270,9 +280,8 @@ public class RoboPounderRageRunGoal extends Goal {
 				hasCharged = true;
 			}
 			
-			if (rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextInt(owner.getRandom(), 30, 35)) {
-				owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
-				EntityUtil.freezeEntityRotation(owner);
+			if (rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextInt(owner.getRandom(), 10, 15)) {
+				owner.setDeltaMovement(MathHelper.clamp(owner.getDeltaMovement().x / (((double) owner.getRageRunFrictionOffset() / 100) / 2), 0, 1), owner.getDeltaMovement().y, MathHelper.clamp(owner.getDeltaMovement().z / (((double) owner.getRageRunFrictionOffset() / 100) / 2), 0, 1));
 			}
 		}
 		

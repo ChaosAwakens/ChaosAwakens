@@ -55,7 +55,7 @@ public interface ICAGeoModel {
 	}
 
 	default void applyHeadRotations(AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate) {
-		EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
+		EntityModelData extraData = customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
 		IBone head = getHeadBone();
 
 		if (ObjectUtil.performNullityChecks(false, extraData, head)) {

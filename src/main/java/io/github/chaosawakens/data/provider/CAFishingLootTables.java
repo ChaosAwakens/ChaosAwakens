@@ -31,6 +31,14 @@ public class CAFishingLootTables extends FishingLootTables {
 //				.add(TableLootEntry.lootTableReference(CALootTables.FISHING_LAVA_FISH).setWeight(50).setQuality(2))
 //				.add(TableLootEntry.lootTableReference(CALootTables.FISHING_NETHER_FISH).setWeight(50).setQuality(2))));
 
+		biConsumer.accept(CALootTables.FISHING_LAVA,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(TableLootEntry.lootTableReference(CALootTables.FISHING_LAVA_FISH).setWeight(75).setQuality(-1))
+								.add(TableLootEntry.lootTableReference(CALootTables.FISHING_LAVA_TREASURE).setWeight(5).setQuality(2))
+								.add(TableLootEntry.lootTableReference(CALootTables.FISHING_LAVA_JUNK).setWeight(10).setQuality(-2))));
+
 		biConsumer.accept(CALootTables.FISHING_FISH,
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
@@ -65,10 +73,10 @@ public class CAFishingLootTables extends FishingLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.SUN_FISH.get()))
 								.add(ItemLootEntry.lootTableItem(CAItems.LAVA_EEL.get()))));
 
-//		biConsumer.accept(CALootTables.FISHING_LAVA_TREASURE,
-//				LootTable.lootTable()
-//						.withPool(LootPool.lootPool()
-//								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get()))));
+		biConsumer.accept(CALootTables.FISHING_LAVA_TREASURE,
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get()))));
 
 		biConsumer.accept(CALootTables.FISHING_NETHER_FISH,
 				LootTable.lootTable()
@@ -79,10 +87,10 @@ public class CAFishingLootTables extends FishingLootTables {
 								.add(ItemLootEntry.lootTableItem(Items.GOLD_INGOT).setWeight(25))
 								.add(ItemLootEntry.lootTableItem(CAItems.LAVA_EEL.get()).setWeight(55))));
 
-//        biConsumer.accept(CALootTables.FISHING_NETHER_TREASURE, LootTable.lootTable()
-//                .withPool(LootPool.lootPool()
-//                        .add(ItemLootEntry.lootTableItem(CAItems.RUBY.get()).setWeight(10))
-//                        .add(ItemLootEntry.lootTableItem(CAItems.URANIUM_NUGGET.get()).setWeight(1))
-//                        .add(ItemLootEntry.lootTableItem(Items.GOLD_INGOT).setWeight(25))));
+		biConsumer.accept(CALootTables.FISHING_NETHER_TREASURE, LootTable.lootTable()
+				.withPool(LootPool.lootPool()
+						.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get()).setWeight(10))
+						.add(ItemLootEntry.lootTableItem(CAItems.URANIUM_NUGGET.get()).setWeight(1))
+						.add(ItemLootEntry.lootTableItem(Items.GOLD_INGOT).setWeight(25))));
 	}
 }

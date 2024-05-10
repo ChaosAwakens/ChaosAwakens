@@ -223,7 +223,7 @@
 		},
 		"Death": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 3.5,
+			"animation_length": 4.5,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {

@@ -44,7 +44,7 @@ public class JefferyShockwaveEntity extends AOEHitboxEntity implements IAnimatab
 
 	@Override
 	public EntitySize getDimensions(Pose pPose) {
-		return EntitySize.scalable(getRadius() * 2.0F, getRadius() * 0.1F);
+		return EntitySize.scalable(getRadius() * 2.0F, getRadius() * 0.44F);
 	}
 
 	@Override

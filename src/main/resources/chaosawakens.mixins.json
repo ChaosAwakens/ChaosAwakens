@@ -1,35 +1,35 @@
 {
-	"required": true,
-	"package": "io.github.chaosawakens.mixins",
-	"compatibilityLevel": "JAVA_8",
-	"minVersion": "0.8.4",
-	"mixins": [
-		"AttachedStemBlockMixin",
-		"CrossbowItemMixin",
-		"CooldownTrackerMixin",
-		"CropsBlockMixin",
-		"EntityMixin",
-		"LivingEntityMixin",
-		"MobEntityMixin",
-		"NoiseChunkGeneratorAccessor",
-		"NoiseChunkGeneratorMixin",
-		"PlayerAdvancementMixin",
-		"PlayerEntityMixin",
-		"RabbitEntityMixin",
-		"SpawnEggItemMixin",
-		"StemBlockMixin",
-		"VillagerEntityMixin"
-	],
-	"client": [
-		"ClientPlayerEntityMixin",
-		"RabbitEntityRendererMixin",
-		"ServerWorldInfoMixin"
-	],
-	"server": [
-		
-	],
-	"refmap": "chaosawakens.refmap.json",
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "io.github.chaosawakens.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8.4",
+  "mixins": [
+    "AnimationControllerMixin",
+    "AttachedStemBlockMixin",
+    "CooldownTrackerMixin",
+    "CropsBlockMixin",
+    "CrossbowItemMixin",
+    "EntityMixin",
+    "LivingEntityMixin",
+    "MobEntityMixin",
+    "NoiseChunkGeneratorAccessor",
+    "NoiseChunkGeneratorMixin",
+    "PlayerAdvancementMixin",
+    "PlayerEntityMixin",
+    "RabbitEntityMixin",
+    "SpawnEggItemMixin",
+    "StemBlockMixin",
+    "VillagerEntityMixin"
+  ],
+  "client": [
+    "ClientPlayerEntityMixin",
+    "RabbitEntityRendererMixin",
+    "ServerWorldInfoMixin"
+  ],
+  "server": [
+  ],
+  "refmap": "chaosawakens.refmap.json",
+  "injectors": {
+    "defaultRequire": 1
 	}
 }

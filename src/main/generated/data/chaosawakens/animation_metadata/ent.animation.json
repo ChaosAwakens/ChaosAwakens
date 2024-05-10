@@ -2,8 +2,28 @@
   "anim_file_loc": "chaosawakens:animations/hostile/ent/ent.animation.json",
   "animations": [
     {
+      "animation_name": "Death",
+      "animation_length": 3.6,
+      "loop_type": "HOLD_ON_LAST_FRAME"
+    },
+    {
+      "animation_name": "Smash Attack",
+      "animation_length": 1.8,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Right Punch",
+      "animation_length": 1.8,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
       "animation_name": "Idle",
       "animation_length": 3.6,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle Extras",
+      "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
@@ -12,27 +32,7 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Death",
-      "animation_length": 3.6,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Smash Attack",
-      "animation_length": 1.8,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
       "animation_name": "Left Punch",
-      "animation_length": 1.8,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Idle Extras",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Right Punch",
       "animation_length": 1.8,
       "loop_type": "PLAY_ONCE"
     }

@@ -119,8 +119,8 @@ public class RefinedPathNode implements Comparable<RefinedPathNode> {
         setSize(xSize, ySize, zSize); // Lazy ahh shortcut :skull:
     }
 
-    public void updateNodeCosts() {
-
+    public void updateNodeCosts(RefinedNodeProcessor ownerNodeProcessor) { // Updates based on origin pos, factoring size and danger factor in
+        BlockPos originPos = ownerNodeProcessor.calculateStartingNode().getOriginPos();
     }
 
     @Override

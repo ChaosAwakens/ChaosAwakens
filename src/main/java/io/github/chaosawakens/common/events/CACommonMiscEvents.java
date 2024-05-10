@@ -86,7 +86,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.VersionChecker;
 
-public class CAMiscEvents {
+public class CACommonMiscEvents {
 	private static final String DOWNLOADS = "https://chaosawakens.github.io/downloads";
 	private static final ListMultimap<UUID, TextFormatting> DEVELOPER_COLORS = Util.make(MultimapBuilder.hashKeys().arrayListValues(2).build(), (devMultiMap) -> {
 		devMultiMap.putAll(UUID.fromString("89cd9d1b-9d50-4502-8bd4-95b9e63ff589"), Lists.newArrayList(TextFormatting.GREEN, TextFormatting.DARK_GREEN)); // Blackout03
@@ -98,17 +98,6 @@ public class CAMiscEvents {
 	@SubscribeEvent
 	public static void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
 		Entity target = event.getEntity();
-
-		//TODO Reload for anim metadata (RP reload?) + common/first-time metadata sync on login.
-		//TODO Also run SP and MP tests to ensure that there aren't any rogue bugs running on SP.
-		
-		if (target == null) return;
-
-		if (target instanceof ServerPlayerEntity) {
-			ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) target;
-
-
-		}
 		
 		if (CAConfigManager.MAIN_COMMON.showUpdateMessage.get() && VersionChecker.getResult(ModList.get().getModContainerById(ChaosAwakens.MODID).get().getModInfo()).status == VersionChecker.Status.OUTDATED) {
 			target.sendMessage(new StringTextComponent("A new version of ").withStyle(TextFormatting.WHITE)

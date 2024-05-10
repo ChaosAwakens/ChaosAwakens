@@ -23,6 +23,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	protected ExpandedAnimationState animationState = ExpandedAnimationState.FINISHED;
 	protected ILoopType curAnimLoopType = EDefaultLoopTypes.PLAY_ONCE;
 	protected Animation currentAnimation = none();
+	protected IAnimationBuilder previousCachedAnimationBuilder;
 	protected IAnimationBuilder currentAnimationBuilder;
 	protected double transitionLength;
 	protected double transitionProgress = 0;
@@ -66,11 +67,13 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			break;
 		case RUNNING:
 			if (this.animationProgress >= this.animationLength) {
-				this.animationProgress = 0;
-				if (this.curAnimLoopType == EDefaultLoopTypes.LOOP) {
+				if (this.curAnimLoopType == EDefaultLoopTypes.HOLD_ON_LAST_FRAME) {
+					this.animationState = ExpandedAnimationState.STOPPED;
+				} else if (this.curAnimLoopType == EDefaultLoopTypes.LOOP) {
 					this.animationProgress = 0;
 					this.animationState = ExpandedAnimationState.TRANSITIONING;
 				} else {
+					this.animationProgress = 0;
 					this.animationState = ExpandedAnimationState.FINISHED;
 				}
 			} else {
@@ -78,8 +81,17 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			}
 			break;
 		case STOPPED:
+			if (!currentAnimationBuilder.getAnimationName().equals(previousCachedAnimationBuilder.getAnimationName())) {
+				if (currentAnimation != none() && currentAnimationBuilder != null) {
+					this.animationProgress = 0;
+					this.animationState = ExpandedAnimationState.TRANSITIONING;
+				} else {
+					this.animationState = ExpandedAnimationState.FINISHED;
+				}
+			}
+			break;
 		case FINISHED:
-                break;
+			break;
         }
 	}
 	
@@ -97,6 +109,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			this.animSpeedMultiplier = builder.getWrappedAnimSpeed();
 
 			this.currentAnimationBuilder = builder;
+			this.previousCachedAnimationBuilder = currentAnimationBuilder;
 			this.currentAnimation = builder.getAnimation();
 			this.controller.setAnimation(builder.getBuilder());
 			this.controller.setAnimationSpeed(animSpeedMultiplier);
@@ -143,7 +156,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public boolean isCurrentAnimationFinished() {
-		return animationState.equals(ExpandedAnimationState.FINISHED);
+		return animationState.equals(ExpandedAnimationState.FINISHED) || animationState.equals(ExpandedAnimationState.STOPPED);
 	}
 	
 	public boolean isAnimationFinished(String targetAnimName) {
@@ -151,7 +164,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 			return this.getWrappedController().getAnimationState().equals(AnimationState.Stopped);
 		} else {
 			return currentAnimation != null && currentAnimation.animationName.equals(targetAnimName)
-					&& animationState.equals(ExpandedAnimationState.FINISHED);
+					&& (animationState.equals(ExpandedAnimationState.FINISHED) || animationState.equals(ExpandedAnimationState.STOPPED));
 		}
 	}
 	

@@ -35,38 +35,32 @@ public class WhaleBreatheGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return whale.getAirSupply() < 500;
+        return whale.getAirSupply() < 500 && whale.getRandom().nextInt(85) == 0;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return whale.getAirSupply() < whale.getMaxAirSupply() / (whale.getRandom().nextInt(3) + 1);
+        return whale.getAirSupply() < whale.getMaxAirSupply() && whale.isAlive();
     }
 
     @SuppressWarnings("rawtypes")
 	private void findPos() {
-        Iterable<BlockPos> whaleBox = BlockPos.betweenClosed(MathHelper.floor(whale.getX() - 1.0D), MathHelper.floor(whale.getY()), MathHelper.floor(whale.getZ() - 1.0D), MathHelper.floor(whale.getX() + 1.0D), MathHelper.floor(whale.getY() + 8.0D), MathHelper.floor(whale.getZ() + 1.0D));
-        BlockPos destination = null;
-        Iterator whaleBoxIterator = whaleBox.iterator();
+        Iterable<BlockPos> whaleBox = BlockPos.betweenClosed(MathHelper.floor(whale.getX() - 10.0D), MathHelper.floor(whale.getY()), MathHelper.floor(whale.getZ() - 10.0D), MathHelper.floor(whale.getX() + 10.0D), MathHelper.floor(whale.getY() + 10.0D), MathHelper.floor(whale.getZ() + 10.0D));
+        BlockPos.Mutable destinationSearch = whale.blockPosition().mutable();
 
-        while (whaleBoxIterator.hasNext()) {
-            BlockPos nextPosInWhaleBox = (BlockPos) whaleBoxIterator.next();
-            if (this.canBreatheAt(whale.level, nextPosInWhaleBox)) {
-                destination = nextPosInWhaleBox.above((int) (whale.getBbHeight() * 0.25D));
+        for (BlockPos nextPosInWhaleBox : whaleBox) {
+            if (canBreatheAt(whale.level, nextPosInWhaleBox)) {
+                destinationSearch.set(nextPosInWhaleBox.above((int) (whale.getBbHeight() * 0.25D)));
                 break;
             }
         }
-
-        if (destination == null) {
-            destination = new BlockPos(whale.getX(), whale.getY() + 4.0D, whale.getZ());
-        }
         
-        //Continue to go up until the whale is at the surface
+        // Continue to go up until the whale is at the surface
         if (whale.isEyeInFluid(FluidTags.WATER)) {
         	whale.setDeltaMovement(whale.getDeltaMovement().add(0, 0.03F, 0));
         }
 
-        whale.getNavigation().moveTo(destination.getX(), destination.getY(), destination.getZ(), 0.7D);
+        whale.getNavigation().moveTo(destinationSearch.getX(), destinationSearch.getY(), destinationSearch.getZ(), 0.7D);
     }
 
     private boolean canBreatheAt(IWorldReader world, BlockPos pos) {

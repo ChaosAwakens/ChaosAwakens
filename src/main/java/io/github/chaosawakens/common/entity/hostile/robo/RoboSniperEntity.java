@@ -9,6 +9,7 @@ import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableShootGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
+import io.github.chaosawakens.common.registry.CATeams;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -25,12 +26,15 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import javax.annotation.Nullable;
 
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -130,12 +134,13 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	public void manageAttack(LivingEntity target) {
 	}
-	
+
+	@Nullable
 	@Override
-	public boolean isAlliedTo(Entity pEntity) {
-		return pEntity.getDisplayName().getString().contains("Robo");
+	public Team getTeam() {
+		return CATeams.ROBO_TEAM;
 	}
-	
+
 	@Override
 	public boolean ignoreExplosion() {
 		return true;

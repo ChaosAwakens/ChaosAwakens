@@ -65,8 +65,8 @@ minecraft {
 			property 'forge.logging.markers', 'SCAN'
 			property 'forge.logging.console.level', 'debug'
 
-			jvmArgs "-XXaltjvm=dcevm"
-			
+			jvmArgs "-XXaltjvm=dcevm", "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch"
+
 			mods {
 				"${modId}" {
 					source sourceSets.main
@@ -117,10 +117,9 @@ dependencies {
     // Libraries
 	implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
 
-	implementation fg.deobf("commoble.databuddy:databuddy-1.16.4:${databuddy_version}")
-	shade fg.deobf("commoble.databuddy:databuddy-1.16.4:${databuddy_version}")
-
     // Extras
+	implementation fg.deobf("curse.maven:spark-361579:3767277")
+
 	implementation fg.deobf("curse.maven:projecte-226410:${projecte_version}")
 	implementation fg.deobf("curse.maven:patchouli-306770:${patchouli_version}")
 
@@ -153,6 +152,10 @@ dependencies {
 	implementation fg.deobf("curse.maven:worldedit-225608:${worldedit_version}")
 	
 	implementation fg.deobf("curse.maven:datafixerslayer-416519:${dfs_version}")
+
+	// Temp
+	implementation fg.deobf("curse.maven:modernfix-790626:5259338")
+	implementation fg.deobf("curse.maven:ferritecore-429235:4074330")
 }
 
 repositories {
@@ -171,6 +174,10 @@ repositories {
 	maven {
 		name = "CubicInterpolation Maven"
 		url = "https://cubicinterpolation.net/maven/"
+	}
+	maven {
+		name = "Sonatype Maven"
+		url = "https://oss.sonatype.org/content/repositories/snapshots"
 	}
 }
 

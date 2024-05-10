@@ -15,7 +15,9 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -32,7 +34,6 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 
 	public AnimatableWaterMobEntity(EntityType<? extends WaterMobEntity> type, World world) {
 		super(type, world);
-		this.setPathfindingMalus(PathNodeType.WATER, 8.0F);
 	}
 
 	@Override
@@ -95,7 +96,7 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 		double dz = getZ() - zo;
 		double dxSqr = dx * dx;
 		double dzSqr = dz * dz;
-		return dxSqr + dzSqr < 2.500000277905201E-7;
+		return dxSqr + dzSqr < 1.500000277905201E-7;
 	}
 	
 	public boolean canBeKnockedBack() {
@@ -153,6 +154,11 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 		super.actuallyHurt(pDamageSource, pDamageAmount);
 
 		setLastDamageAmount(pDamageAmount);
+	}
+
+	@Override
+	protected PathNavigator createNavigation(World world) {
+		return new SwimmerPathNavigator(this, world);
 	}
 
 	@Override
@@ -247,7 +253,7 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 		if (getIdleAnim() != null && !isSwimming()) playAnimation(getIdleAnim(), false);
 		if (getSwimAnim() != null && isSwimming()) {
 			stopAnimation(getIdleAnim());
-			playAnimation(getSwimAnim(), false);
+			playAnimation(getSwimAnim(), true);
 		}
 	}
 }
