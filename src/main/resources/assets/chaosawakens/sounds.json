@@ -18,6 +18,91 @@
     ]
   },
 
+  "entity.hercules_beetle.docile": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.docile",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/docile"
+    ]
+  },
+  "entity.hercules_beetle.awaken": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.awaken",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/defense/awaken"
+    ]
+  },
+  "entity.hercules_beetle.idle": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.idle",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/idle"
+    ]
+  },
+  "entity.hercules_beetle.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.walk",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/walk"
+    ]
+  },
+  "entity.hercules_beetle.fly": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.fly",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/fly"
+    ]
+  },
+  "entity.hercules_beetle.death": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/death"
+    ]
+  },
+  "entity.hercules_beetle.leap": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.leap",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/attacks/leap"
+    ]
+  },
+  "entity.hercules_beetle.body_slam_attack": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.body_slam_attack",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/attacks/body_slam_attack"
+    ]
+  },
+  "entity.hercules_beetle.body_slam_attack_hit": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.body_slam_attack_hit",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/attacks/body_slam_attack_hit"
+    ]
+  },
+  "entity.hercules_beetle.roar": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.roar",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/defense/roar"
+    ]
+  },
+  "entity.hercules_beetle.damage_critical": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.damage_critical",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/damage/damage_critical"
+    ]
+  },
+  "entity.hercules_beetle.damage_defense": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.damage_defense",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/damage/damage_defense"
+    ]
+  },
+  "entity.hercules_beetle.damage_evasive": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.damage_evasive",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/damage/damage_evasive"
+    ]
+  },
+  "entity.hercules_beetle.damage_offense": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.damage_offense",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/damage/damage_offense"
+    ]
+  },
+
   "entity.robo_jeffery.idle": {
     "subtitle": "subtitles.chaosawakens.entity.robo_jeffery.idle",
     "sounds": [
@@ -252,60 +337,22 @@
     ]
   },
   
-  "entity.hercules_beetle.walk": {
-    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.walk",
-    "sounds": [
-      "chaosawakens:entity/hercules_beetle/walk"
-    ]
-  },
-  "entity.hercules_beetle.attack": {
-    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.attack",
-    "sounds": [
-      "chaosawakens:entity/hercules_beetle/attack"
-    ]
-  },
-  "entity.hercules_beetle.hurt": {
-    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.hurt",
-    "sounds": [
-      "chaosawakens:entity/hercules_beetle/hurt"
-    ]
-  },
-  "entity.hercules_beetle.swing": {
-    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.swing",
-    "sounds": [
-      "chaosawakens:entity/hercules_beetle/swing"
-    ]
-  },
-  "entity.hercules_beetle.flap": {
-    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.flap",
-    "sounds": [
-      "chaosawakens:entity/hercules_beetle/flap"
-    ]
-  },
-  "entity.hercules_beetle.death": {
-    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death",
-    "sounds": [
-      "chaosawakens:entity/hercules_beetle/death1",
-      "chaosawakens:entity/hercules_beetle/death2"
-    ]
-  },
-  
   "entity.whale.hurt": {
     "subtitle": "subtitles.chaosawakens.entity.whale.hurt",
     "sounds": [
-      "chaosawakens:entity/whale/hurt"
+      "chaosawakens:entity/creature/water/whale/hurt"
     ]
   },
   "entity.whale.ambient": {
     "subtitle": "subtitles.chaosawakens.entity.whale.ambient",
     "sounds": [
-      "chaosawakens:entity/whale/ambient"
+      "chaosawakens:entity/creature/water/whale/ambient"
     ]
   },
   "entity.whale.death": {
     "subtitle": "subtitles.chaosawakens.entity.whale.death",
     "sounds": [
-      "chaosawakens:entity/whale/death"
+      "chaosawakens:entity/creature/water/whale/death"
     ]
   },
 

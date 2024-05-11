@@ -206,6 +206,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 
 		Advancement bugSquasher = registerAdvancement("bug_squasher", FrameType.TASK, CAItems.DEAD_STINK_BUG.get()).parent(root)
 				.addCriterion("hercules_beetle", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.HERCULES_BEETLE.get())))
+				.addCriterion("throwback_hercules_beetle", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get())))
 				.addCriterion("ruby_bug", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.RUBY_BUG.get())))
 				.addCriterion("stink_bug", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.STINK_BUG.get())))
 				.save(advCons, advancementId("bug_squasher"));

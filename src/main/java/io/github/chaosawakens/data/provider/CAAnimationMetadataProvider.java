@@ -9,7 +9,7 @@ import net.minecraft.data.DataGenerator;
 import software.bernie.geckolib3.core.builder.ILoopType;
 
 /**
- * TODO DISCLAIMER: THIS DATAPACKING SYSTEM IS VERY INEFFICIENT AND WILL NOT BE USED IN VERSIONS 1.20.1+ (Since we'd depend on the up n coming EEL by then). 1.19 WILL
+ * DISCLAIMER: THIS DATAPACKING SYSTEM IS VERY INEFFICIENT AND WILL NOT BE USED IN VERSIONS 1.20.1+ (Since we'd depend on the up n coming EEL by then or do something different). 1.20.1+ WILL
  * USE A DIFFERENT, MUCH MORE SAFE AND EFFICIENT SYSTEM. DO NOT REFERENCE THIS FOR PRACTICE!!!
  */
 public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
@@ -20,24 +20,27 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
 
     @Override
     protected void initializeAnimMetadata() { //TODO Automation doesn't work cuz Minecraft's Resource Manager doesn't exist on the server :p
-        // Boss/Miniboss
-        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/insect/hercules_beetle.animation.json"), Lists.newArrayList(
+        // Boss/Insect
+        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/insect/hercules_beetle.animation.json"), Lists.newArrayList( // Only apply max double value (1.7976931348623157E308) to looping anims with no predefined length, as that's what they default to in Geckolib3
                 new AnimationDataHolder("Idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Death", 0.76D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("Death", 3.76D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("Death (Midair)", 0.91667D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Death (Midair, Falling)", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Death (Fallen)", 3.70833D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Leap", 2.76D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Leap", 2.76D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Fly", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Ram Attack", 1.16D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Grab", 0.64D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("Ram Attack", 1.25D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Grab", 0.66D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
                 new AnimationDataHolder("Munch Attack", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Body Slam Attack", 2.08D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
-                new AnimationDataHolder("Ground Slam", 0.44D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Body Slam Attack", 25.08D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("Body Slam Attack (Hit)", 5.04D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
                 new AnimationDataHolder("Docile", 14.32D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Awaken", 7.28D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Flail Flap", 3.88D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+                new AnimationDataHolder("Awakened", 7.28D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Roar Defense Mechanism", 4.28D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Boss/Robo
-        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/robo/robo_jeffery.animation.json"), Lists.newArrayList( //TODO Only apply max double value (1.7976931348623157E308) to looping anims with no predefined length, as that's what they default to in Geckolib3
+        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/robo/robo_jeffery.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Right Punch Attack", 1.7D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),

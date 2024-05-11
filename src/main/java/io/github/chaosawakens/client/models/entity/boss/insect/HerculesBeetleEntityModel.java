@@ -26,7 +26,7 @@ public class HerculesBeetleEntityModel extends ExtendedAnimatedTickingGeoModel<H
 
 	@Override
 	public ResourceLocation getTextureLocation(HerculesBeetleEntity object) {
-		return ChaosAwakens.prefix("textures/entity/boss/insect/" + beetleType.getName() + "_hercules_beetle.png");
+		return ChaosAwakens.prefix("textures/entity/boss/insect/hercules_beetle_" + beetleType.getName() + ".png");
 	}
 
 	@Override

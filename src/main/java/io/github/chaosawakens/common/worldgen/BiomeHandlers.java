@@ -40,7 +40,7 @@ public class BiomeHandlers {
 		};
 
 		private static final Consumer<MobSpawnInfoBuilder> MOUNTAIN_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.HERCULES_BEETLE.get(), 27, 1, 2));
+			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), 27, 1, 2));
 		};
 
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
@@ -124,18 +124,12 @@ public class BiomeHandlers {
 					BASALT_DELTA_MOBS.accept(spawnInfoBuilder);
 				break;
 			default:
-				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.CRYSTAL_WORLD))
-					CRYSTAL_WORLD_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.VILLAGE_MANIA))
-					VILLAGE_MANIA_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.STALAGMITE_VALLEY))
-					STALAGMITE_VALLEY_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.DENSE_MOUNTAINS))
-					DENSE_MOUNTAINS_MOBS.accept(spawnInfoBuilder);
-				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.MESOZOIC_JUNGLE))
-					MESOZOIC_JUNGLE_MOBS.accept(spawnInfoBuilder);
-				if ((BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MODIFIED) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SNOWY) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)))
-					MOUNTAIN_MOBS.accept(spawnInfoBuilder);
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.CRYSTAL_WORLD)) CRYSTAL_WORLD_MOBS.accept(spawnInfoBuilder);
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.VILLAGE_MANIA)) VILLAGE_MANIA_MOBS.accept(spawnInfoBuilder);
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.STALAGMITE_VALLEY)) STALAGMITE_VALLEY_MOBS.accept(spawnInfoBuilder);
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.DENSE_MOUNTAINS)) DENSE_MOUNTAINS_MOBS.accept(spawnInfoBuilder);
+				if (BiomeDictionary.hasType(targetBiome, CABiomes.Type.MESOZOIC_JUNGLE)) MESOZOIC_JUNGLE_MOBS.accept(spawnInfoBuilder);
+				if ((BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MODIFIED) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE)) || (BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MOUNTAIN) && BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SNOWY) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.SAVANNA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.MESA) && !BiomeDictionary.hasType(targetBiome, BiomeDictionary.Type.JUNGLE))) MOUNTAIN_MOBS.accept(spawnInfoBuilder);
 			}
 		}
 	}

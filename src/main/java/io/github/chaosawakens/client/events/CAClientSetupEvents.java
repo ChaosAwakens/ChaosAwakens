@@ -92,7 +92,7 @@ public class CAClientSetupEvents {
 
 		// ENTITIES
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.HERCULES_BEETLE.get(), (manager) -> new HerculesBeetleEntityRenderer(manager, HerculesBeetleType.MODERN));
-//		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), (manager) -> new HerculesBeetleEntityRenderer(manager, HerculesBeetleEntity.Type.THROWBACK));
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(), (manager) -> new HerculesBeetleEntityRenderer(manager, HerculesBeetleType.THROWBACK));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.BIRD.get(), BirdEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.OAK_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntType.OAK));
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ACACIA_ENT.get(), (manager) -> new EntEntityRenderer(manager, EntType.ACACIA));

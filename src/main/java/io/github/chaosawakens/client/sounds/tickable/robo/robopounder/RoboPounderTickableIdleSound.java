@@ -41,7 +41,7 @@ public class RoboPounderTickableIdleSound extends AnimatableTickableIdleMonsterS
     }
 
     @Override
-    public void tick() {
+    public void tick() { //TODO Common impl in 1.20+
         super.tick();
 
         if (shouldSwitchToCriticalSound() && !hasSwitched) {

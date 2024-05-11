@@ -56,12 +56,23 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> EMERALD_GATOR_DEATH = SOUND_EVENTS.register("entity.emerald_gator.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.emerald_gator.death")));
 
 	// Hercules Beetle
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DOCILE = SOUND_EVENTS.register("entity.hercules_beetle.docile", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.docile")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_AWAKEN = SOUND_EVENTS.register("entity.hercules_beetle.awaken", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.awaken")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_IDLE = SOUND_EVENTS.register("entity.hercules_beetle.idle", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.idle")));
 	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_WALK = SOUND_EVENTS.register("entity.hercules_beetle.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.walk")));
-	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_ATTACK = SOUND_EVENTS.register("entity.hercules_beetle.attack", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.attack")));
-	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_HURT = SOUND_EVENTS.register("entity.hercules_beetle.hurt", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.hurt")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_FLY = SOUND_EVENTS.register("entity.hercules_beetle.fly", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.fly")));
 	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DEATH = SOUND_EVENTS.register("entity.hercules_beetle.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.death")));
-	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_SWING = SOUND_EVENTS.register("entity.hercules_beetle.swing", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.swing")));
-	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_FLAP = SOUND_EVENTS.register("entity.hercules_beetle.flap", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.flap")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_BEETLE_RAM = SOUND_EVENTS.register("entity.hercules_beetle.ram_attack", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.ram_attack")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_GRAB = SOUND_EVENTS.register("entity.hercules_beetle.grab", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.grab")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_MAD_MUNCH = SOUND_EVENTS.register("entity.hercules_beetle.munch_attack", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.munch_attack")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_LEAP = SOUND_EVENTS.register("entity.hercules_beetle.leap", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.leap")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_GROUND_SLAM = SOUND_EVENTS.register("entity.hercules_beetle.ground_slam", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.ground_slam")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_GROUND_SLAM_HIT = SOUND_EVENTS.register("entity.hercules_beetle.ground_slam_hit", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.ground_slam_hit")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_ROAR = SOUND_EVENTS.register("entity.hercules_beetle.roar", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.roar")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DAMAGE_CRITICAL = SOUND_EVENTS.register("entity.hercules_beetle.damage_critical", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.damage_critical")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DAMAGE_DEFENSE = SOUND_EVENTS.register("entity.hercules_beetle.damage_defense", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.damage_defense")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DAMAGE_EVASIVE = SOUND_EVENTS.register("entity.hercules_beetle.damage_evasive", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.damage_evasive")));
+	public static final RegistryObject<SoundEvent> HERCULES_BEETLE_DAMAGE_OFFENSE = SOUND_EVENTS.register("entity.hercules_beetle.damage_offense", () -> new SoundEvent(ChaosAwakens.prefix("entity.hercules_beetle.damage_offense")));
 
 	// Ent Sounds
 	public static final RegistryObject<SoundEvent> ENT_IDLE = SOUND_EVENTS.register("entity.ent.idle", () -> new SoundEvent(ChaosAwakens.prefix("entity.ent.idle")));

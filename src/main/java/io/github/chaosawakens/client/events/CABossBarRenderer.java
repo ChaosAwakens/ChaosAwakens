@@ -17,7 +17,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 import java.util.HashMap;
 
-public class CABossBarRenderer {	
+public class CABossBarRenderer {//TODO Not literally be an AOA clone for this custom bossbar stuff. Will likely be deferrred to 1.20.1+.
 	private static final HashMap<String, ResourceLocation> textureCache = new HashMap<String, ResourceLocation>();
 
 	public static void onBossInfoRender(final RenderGameOverlayEvent.BossInfo ev) {

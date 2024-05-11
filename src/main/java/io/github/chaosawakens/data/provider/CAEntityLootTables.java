@@ -504,7 +504,7 @@ public class CAEntityLootTables extends EntityLootTables {
 								.apply(SetCount.setCount(RandomValueRange.between(0.0F, 1.0F)))
 								.when(RandomChance.randomChance(0.2F))
 								.when(KilledByPlayer.killedByPlayer()))));
-		/*		add(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(),
+				add(CAEntityTypes.THROWBACK_HERCULES_BEETLE.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1)).add(
@@ -556,7 +556,7 @@ public class CAEntityLootTables extends EntityLootTables {
 								.add(ItemLootEntry.lootTableItem(CAItems.RUBY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(0.0F, 1.0F)))
 										.when(RandomChance.randomChance(0.2F))
-										.when(KilledByPlayer.killedByPlayer()))));*/
+										.when(KilledByPlayer.killedByPlayer()))));
 		add(CAEntityTypes.RUBY_BUG.get(),
 				LootTable.lootTable()
 				.withPool(LootPool.lootPool()

@@ -50,13 +50,13 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	public WhaleEntity(EntityType<? extends WaterMobEntity> type, World world) {
 		super(type, world);
 		this.moveControl = new WhaleMovementController(this);
-		this.lookControl = new DolphinLookController(this, 20);
+		this.lookControl = new DolphinLookController(this, 1);
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 120)
-				.add(Attributes.MOVEMENT_SPEED, 0.5D)
+				.add(Attributes.MOVEMENT_SPEED, 2.5D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 50D)
 				.add(Attributes.FOLLOW_RANGE, 18);
 	}
@@ -73,7 +73,7 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 
 	@Override
 	public int animationInterval() {
-		return 2;
+		return 20;
 	}
 
 	@Override
@@ -90,9 +90,9 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	}
 	
 	public static boolean checkWhaleSpawnRules(EntityType<WhaleEntity> rockfish, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-		if (pos.getY() > 25 && pos.getY() < world.getSeaLevel()) {
+		if (pos.getY() > 70 && pos.getY() < world.getSeaLevel()) {
 			Optional<RegistryKey<Biome>> targetBiome = world.getBiomeName(pos);
-			return (Objects.equals(targetBiome, Optional.of(Biomes.OCEAN)) || !Objects.equals(targetBiome, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
+			return (Objects.equals(targetBiome, Optional.of(Biomes.OCEAN)) || Objects.equals(targetBiome, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
 		} else return false;
 	}
 
@@ -129,6 +129,11 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	@Override
 	public int getMaxAirSupply() {
 		return 5000;
+	}
+
+	@Override
+	public int getHeadRotSpeed() {
+		return 2;
 	}
 
 	@Override

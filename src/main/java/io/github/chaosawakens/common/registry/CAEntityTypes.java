@@ -35,6 +35,7 @@ import io.github.chaosawakens.common.entity.projectile.arrow.UltimateArrowEntity
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowArrowEntity;
 import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowBoltEntity;
 import io.github.chaosawakens.common.entity.projectile.bobber.UltimateFishingBobberEntity;
+import io.github.chaosawakens.common.util.EnumUtil;
 import io.github.chaosawakens.common.util.EnumUtil.EntType;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.entity.EntityClassification;
@@ -108,13 +109,13 @@ public class CAEntityTypes {
 
 	// Hercules Beetle
 	public static final RegistryObject<EntityType<HerculesBeetleEntity>> HERCULES_BEETLE = ENTITY_TYPES.register("hercules_beetle",
-			() -> EntityType.Builder.of((IFactory<HerculesBeetleEntity>) (type, world) -> new HerculesBeetleEntity(type, world), EntityClassification.MONSTER)
+			() -> EntityType.Builder.of((IFactory<HerculesBeetleEntity>) HerculesBeetleEntity::new, EntityClassification.MONSTER)
 					.sized(4.5f, 1.925f)
 					.build(ChaosAwakens.prefix("hercules_beetle").toString()));
-/*	public static final RegistryObject<EntityType<HerculesBeetleEntity>> THROWBACK_HERCULES_BEETLE = ENTITY_TYPES.register("throwback_hercules_beetle",
-			() -> EntityType.Builder.of((IFactory<HerculesBeetleEntity>) (type, world) -> new HerculesBeetleEntity(type, world, HerculesBeetleEntity.Type.THROWBACK), EntityClassification.MONSTER)
+	public static final RegistryObject<EntityType<HerculesBeetleEntity>> THROWBACK_HERCULES_BEETLE = ENTITY_TYPES.register("throwback_hercules_beetle",
+			() -> EntityType.Builder.of((IFactory<HerculesBeetleEntity>) (type, world) -> new HerculesBeetleEntity(type, world, EnumUtil.HerculesBeetleType.THROWBACK), EntityClassification.MONSTER)
 					.sized(4.5f, 1.925f)
-					.build(ChaosAwakens.prefix("throwback_hercules_beetle").toString()));*/
+					.build(ChaosAwakens.prefix("throwback_hercules_beetle").toString()));
 
 	// Fish
 	public static final RegistryObject<EntityType<GreenFishEntity>> GREEN_FISH = ENTITY_TYPES.register("green_fish",
@@ -387,7 +388,7 @@ public class CAEntityTypes {
 		EntitySpawnPlacementRegistry.register(BIRD.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, BirdEntity::checkBirdSpawnRules);
 //		EntitySpawnPlacementRegistry.register(LAVA_EEL.get(), EntitySpawnPlacementRegistry.PlacementType.IN_LAVA, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AbstractLavaEntity::checkLavaMobSpawnRules);
 		EntitySpawnPlacementRegistry.register(HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
-//		EntitySpawnPlacementRegistry.register(THROWBACK_HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+		EntitySpawnPlacementRegistry.register(THROWBACK_HERCULES_BEETLE.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
 		EntitySpawnPlacementRegistry.register(RUBY_BUG.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(EMERALD_GATOR.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(CRYSTAL_GATOR.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CrystalGatorEntity::checkCrystalGatorSpawnRules);
