@@ -236,13 +236,13 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 	
 	public int getRageRunFrictionOffset() {
-		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return MathHelper.nextInt(random, 54, 68);
-		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return MathHelper.nextInt(random, 64, 79);
-		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return MathHelper.nextInt(random, 74, 89);
-		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return MathHelper.nextInt(random, 84, 90);
-		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return MathHelper.nextInt(random, 95, 99);
-		else if (getHealth() <= 20.0F) return MathHelper.nextInt(random, 98, 99);
-		else return MathHelper.nextInt(random, 46, 52);
+		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return MathHelper.nextInt(random, 4, 8);
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return MathHelper.nextInt(random, 4, 9);
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return MathHelper.nextInt(random, 4, 9);
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return MathHelper.nextInt(random, 4, 10);
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return MathHelper.nextInt(random, 5, 10);
+		else if (getHealth() <= 20.0F) return MathHelper.nextInt(random, 5, 10);
+		else return MathHelper.nextInt(random, 6, 12);
 	}
 
 	public double getRageRunSpeed() {
@@ -353,11 +353,6 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	private void handleIntervalSounds() {
-		if (isMoving() && isPlayingAnimation(rageRunAnim)) {
-			if (rageRunAnim.getWrappedAnimProgress() % 5 == 0) {
-		//		playSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), 2.0F, getVoicePitch()); //TODO TickableSound impl
-			}
-		}
 	}
 
 	@Override

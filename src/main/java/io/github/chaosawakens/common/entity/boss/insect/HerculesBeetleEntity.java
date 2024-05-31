@@ -1,11 +1,15 @@
 package io.github.chaosawakens.common.entity.boss.insect;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableWalkSound;
+import io.github.chaosawakens.common.entity.ai.controllers.movement.hybrid.HerculesBeetleMovementController;
+import io.github.chaosawakens.common.entity.ai.goals.boss.insect.herculesbeetle.HerculesBeetleMoveToTargetGoal;
+import io.github.chaosawakens.common.entity.ai.navigation.ground.base.RefinedGroundPathNavigator;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
@@ -21,6 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -31,9 +36,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -63,6 +73,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	private final SingletonAnimationBuilder awakenedAnim = new SingletonAnimationBuilder(this, "Awakened", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", ILoopType.EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", ILoopType.EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder leapAnim = new SingletonAnimationBuilder(this, "Leap", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
 	private final SingletonAnimationBuilder flyAnim = new SingletonAnimationBuilder(this, "Fly", ILoopType.EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", ILoopType.EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder deathMidairAnim = new SingletonAnimationBuilder(this, "Death (Midair)", ILoopType.EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
@@ -83,19 +94,21 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.type = EnumUtil.HerculesBeetleType.MODERN;
+//		this.moveControl = new HerculesBeetleMovementController(this);
 	}
 
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn, EnumUtil.HerculesBeetleType beetleType) {
 		super(type, worldIn);
 		this.type = beetleType;
+//		this.moveControl = new HerculesBeetleMovementController(this);
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 250)
 				.add(Attributes.ARMOR, 20)
-				.add(Attributes.MOVEMENT_SPEED, 0.25D)
-				.add(Attributes.FLYING_SPEED, 0.37D)
+				.add(Attributes.MOVEMENT_SPEED, 0.15D)
+				.add(Attributes.FLYING_SPEED, 0.12D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
 				.add(Attributes.ATTACK_SPEED, 10)
 				.add(Attributes.ATTACK_DAMAGE, 25)
@@ -196,6 +209,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 	public void setWalking(boolean isWalking) {
 		this.entityData.set(WALKING, isWalking);
+		this.entityData.set(FLYING, !isWalking);
 	}
 
 	public boolean isFlying() {
@@ -203,7 +217,27 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	}
 
 	public void setFlying(boolean isFlying) {
+		if (isFlying && !isFlying()) {
+			getNavigation().stop();
+			setDeltaMovement(0, getDeltaMovement().y, 0);
+
+			if (!isPlayingAnimation(leapAnim)) playAnimation(leapAnim, true);
+			else if (leapAnim.hasAnimationFinished()) playAnimation(flyAnim, false);
+		} else if (!isFlying && isFlying()) {
+			if (isOnGround()) stopAnimation(flyAnim);
+			else if (!isAttacking()) {
+				Vector3d validGroundPos = RandomPositionGenerator.getLandPosTowards(this, 16, 20, Vector3d.atBottomCenterOf(getTarget() != null ? getTarget().blockPosition() : blockPosition()));
+				BlockPos targetPos = new BlockPos(validGroundPos.x, validGroundPos.y, validGroundPos.z);
+
+				getNavigation().moveTo(getNavigation().createPath(targetPos, 0), 1.0D);
+
+				if (getNavigation().isDone() && isOnGround()) stopAnimation(flyAnim);
+				else getNavigation().moveTo(getNavigation().createPath(targetPos, 1), 1.0D);
+			}
+		}
+
 		this.entityData.set(FLYING, isFlying);
+		this.entityData.set(WALKING, !isFlying);
 	}
 
 	public int getDocilityTime() {
@@ -288,6 +322,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 	@Override
 	protected void registerGoals() {
+		this.targetSelector.addGoal(0, new HerculesBeetleMoveToTargetGoal(this));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, RoboPounderEntity.class, false));
@@ -312,10 +347,24 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	protected void tickDeath() {
 		resetStatesToBaselineActivity();
 		setActive(false);
-		setFlying(false);
-		setWalking(false);
 
-		super.tickDeath();
+        if (isFlying()) {
+            setFlying(false);
+
+            if (!isPlayingAnimation(deathMidairAnim)) playAnimation(deathMidairAnim, true);
+			else if (deathMidairAnim.hasAnimationFinished()) {
+                playAnimation(deathMidairFallingAnim, false);
+
+                if (!isPlayingAnimation(deathFallenAnim)) {
+                    if (isOnGround()) {
+                        playAnimation(deathFallenAnim, false);
+                        stopAnimation(deathMidairFallingAnim);
+
+						playSound(CASoundEvents.HERCULES_BEETLE_DEATH_MIDAIR_FALLEN.get(), 1.0F, 1.0F);
+                    }
+                } else if (deathFallenAnim.hasAnimationFinished()) remove();
+            }
+        } else super.tickDeath();
 	}
 
 	@Override
@@ -324,15 +373,16 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 		super.aiStep();
 	}
 
-	private void handleStates() {
+	private void handleStates() { //TODO Move to brains/state handlers in 1.20.1+
 		handleDocility();
 		handleActivity();
+		updateNavigation();
 	}
 
 	private void handleDocility() {
 		boolean hasValidTarget = getTarget() != null && getTarget().isAlive() && (getTarget() instanceof PlayerEntity && getTarget().isCrouching() ? getTarget().distanceTo(getTarget()) <= 8.0F : distanceTo(getTarget()) <= 20.0F);
 
-		if (isDocile()) {
+		if (isDocile() && !isEvasive() && !isCritical()) {
 			boolean shouldAwaken = (hurtTime > 0 || hasValidTarget);
 
 			if (shouldAwaken) {
@@ -385,7 +435,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 			boolean hasValidTarget = getTarget() != null && getTarget().isAlive() && distanceTo(getTarget()) <= getFollowRange();
 
-			if (isOnGround() && !hasValidTarget && ((getActivityTime() > 500 && getActivityTime() % MathHelper.nextInt(random, 10, getActivityTime() * 2) == 0) || (getActivityTime() > 1000 && getHealth() < 100.0F)) && !isDeadOrDying()) {
+			if (isOnGround() && !hasValidTarget && isActivelyPassivelyWandering() && ((getActivityTime() > 500 && getActivityTime() % MathHelper.nextInt(random, 10, getActivityTime() * 2) == 0) || (getActivityTime() > 1000 && getHealth() < 100.0F)) && !isDeadOrDying()) {
 				resetStatesToBaselineActivity();
 				setActive(false);
 				setFlying(false);
@@ -396,8 +446,57 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 		}
 	}
 
-	private void handleBattleStates() {
+	private void handleBattleStates() {//TODO Redundant yanderedev ahh code (seriously not carrying this garbage to 1.20.1+ :skull:)
+		boolean hasValidTarget = getTarget() != null && getTarget().isAlive() && distanceTo(getTarget()) <= getFollowRange();
 
+		if (isOffensive()) {
+			boolean shouldGoDef = (lastDamageAmount >= 30.0F && lastDamageAmount <= 50.0F) && getHealth() <= 175.0F;
+			boolean shouldGoEva = (lastDamageAmount >= 50.0F && lastDamageAmount <= 100.0F) || isInLava();
+			boolean shouldGoCrit = lastDamageAmount >= 150.0F || getHealth() <= 80.0F;
+
+			setDefensive(shouldGoDef);
+			setEvasive(shouldGoEva);
+			setCritical(shouldGoCrit);
+
+			if (!hasValidTarget || isDefensive() || isEvasive() || isCritical()) setOffensive(false);
+		}
+
+		if (isDefensive()) {
+			boolean shouldGoEva = (lastDamageAmount >= 50.0F && lastDamageAmount <= 69.0F) || isInLava() || isInWater() || isInWall() || (getTarget().getAttribute(Attributes.ATTACK_DAMAGE) != null && getTarget().getAttribute(Attributes.ATTACK_DAMAGE).getValue() >= 60.0F);
+			boolean shouldGoCrit = (lastDamageAmount >= 70.0F || getHealth() <= 75.0F) || (getHealth() <= 100.0F && isInLava());
+			boolean shouldGoOff = ((getHealth() >= 200.0F) || (getHealth() >= 180.0F && (getTarget().isBlocking() || getTarget().isCrouching()))) && lastDamageAmount < 35.0F && !shouldGoEva && !shouldGoCrit;
+
+			setOffensive(shouldGoOff);
+			setEvasive(shouldGoEva);
+			setCritical(shouldGoCrit);
+
+			if (!hasValidTarget || isOffensive() || isEvasive() || isCritical()) setDefensive(false);
+		}
+
+		if (isEvasive()) {
+			boolean shouldGoCrit = lastDamageAmount >= 20.0F || isInLava() || isInWall();
+			boolean shouldGoDef = hasValidTarget && getHealth() >= 100.0F && (getTarget().getAttribute(Attributes.ATTACK_DAMAGE) != null && getTarget().getAttribute(Attributes.ATTACK_DAMAGE).getValue() >= 5.0F) && !shouldGoCrit;
+			boolean shouldGoOff = (getHealth() >= 150.0F) || (getHealth() >= 100.0F && (getTarget().isBlocking() || getTarget().isCrouching())) && lastDamageAmount < 35.0F && !shouldGoDef && !shouldGoCrit;
+
+			setOffensive(shouldGoOff);
+			setDefensive(shouldGoDef);
+			setCritical(shouldGoCrit);
+
+			if (isOffensive() || isDefensive() || isCritical()) setEvasive(false);
+		}
+
+		if (isCritical()) {
+			boolean shouldGoOff = hasValidTarget && (getHealth() >= 100.0F && (getTarget().isBlocking() || getTarget().isCrouching() || getTarget().getHealth() <= getTarget().getMaxHealth() * 0.3)) && lastDamageAmount < 35.0F && !isInWall() && !isInLava(); //TODO Change (duh)
+
+			setOffensive(shouldGoOff);
+
+			if (isOffensive() || isDefensive() || isEvasive()) setCritical(false);
+		}
+	}
+
+	private void updateNavigation() {
+		if (isFlying() && !this.navigation.getClass().isAssignableFrom(FlyingPathNavigator.class)) this.navigation = new FlyingPathNavigator(this, level);
+		else if (!this.navigation.getClass().isAssignableFrom(RefinedGroundPathNavigator.class)) this.navigation = new RefinedGroundPathNavigator(this, level);
 	}
 
 	@Override
@@ -410,6 +509,11 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 	@Override
 	public void manageAttack(LivingEntity target) {
+		switch (getAttackID()) {
+			case RAM_ATTACK_ID:
+				if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 60);
+				break;
+		}
 	}
 
 	@Override
@@ -424,7 +528,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return CASoundEvents.HERCULES_BEETLE_DEATH.get();
+		return isFlying() ? CASoundEvents.HERCULES_BEETLE_DEATH_MIDAIR.get() : CASoundEvents.HERCULES_BEETLE_DEATH.get();
 	}
 
 	@Nullable
@@ -454,15 +558,30 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	protected void handleBaseAnimations() {
 		if (isDocile() && !isDeadOrDying()) playAnimation(docileAnim, true);
 
-		if (isActivelyPassivelyWandering() && !isMoving()) playAnimation(idleAnim, true);
-		else if (isActivelyPassivelyWandering() && isMoving()) playAnimation(walkAnim, false);
+		if ((isActivelyPassivelyWandering() || (isActive() && isWalking() && !isFlying())) && !isMoving()) playAnimation(idleAnim, true);
+		else if ((isActivelyPassivelyWandering() || (isActive() && isWalking() && !isFlying())) && isMoving()) playAnimation(walkAnim, false);
 
-		if (isFlying()) playAnimation(flyAnim, false);
+		if (isFlying() && !isOnGround() && !isPlayingAnimation(leapAnim)) {
+			playAnimation(flyAnim, false);
+		}
+
+		ChaosAwakens.debug("S", "-----------------------------------------");
+		ChaosAwakens.debug("Docile:", isDocile());
+		ChaosAwakens.debug("Awakening:", isAwakening());
+		ChaosAwakens.debug("Flying:", isFlying());
+		ChaosAwakens.debug("Walking:", isWalking());
+		ChaosAwakens.debug("Active:", isActive());
+		ChaosAwakens.debug("Defensive:", isDefensive());
+		ChaosAwakens.debug("Evasive:", isEvasive());
+		ChaosAwakens.debug("Offensive:", isOffensive());
+		ChaosAwakens.debug("Critical:", isCritical());
+		ChaosAwakens.debug("E", "-----------------------------------------");
+
 
 		if (isPlayingAnimation(awakenedAnim)) {
 			if (MathUtil.isBetween(awakenedAnim.getWrappedAnimProgress(), 60, 90)) CAScreenShakeEntity.shakeScreen(level, position(), 440F, (float) (awakenedAnim.getWrappedAnimProgress() / 100F) / 6, 2, 210);
 			if (MathUtil.isBetween(awakenedAnim.getWrappedAnimProgress(), 90, 140)) CAScreenShakeEntity.shakeScreen(level, position(), 340F, (float) (awakenedAnim.getWrappedAnimProgress() / 100F) / 18, 2, 210);
-			if (MathUtil.isBetween(awakenedAnim.getWrappedAnimProgress(), 60, 140)) EntityUtil.repelEntities(this, 10, 8, MathHelper.clamp((awakenedAnim.getWrappedAnimProgress() / 100F) / 6, 0.1F, 0.35F));
+			if (MathUtil.isBetween(awakenedAnim.getWrappedAnimProgress(), 60, 140)) EntityUtil.repelEntities(this, 10, 8, MathHelper.clamp((awakenedAnim.getWrappedAnimProgress() / 100F) / 6, 0.2F, 0.55F));
 		}
 	}
 }

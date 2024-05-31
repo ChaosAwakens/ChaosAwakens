@@ -4,6 +4,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.controllers.body.base.SmoothBodyController;
+import io.github.chaosawakens.common.entity.ai.navigation.ground.base.RefinedGroundPathNavigator;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
 import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
@@ -48,7 +49,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	protected static final DataParameter<Byte> ATTACK_ID = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.BYTE);
 	protected static final DataParameter<Integer> ATTACK_COOLDOWN = EntityDataManager.defineId(AnimatableMonsterEntity.class, DataSerializers.INT);
 	protected float prevYRot;
-	protected float lastDamageAmount;
+	protected float lastDamageAmount; // I ONLY JUST FOUND OUT ABOUT lastHurt BRUH :skull:
 	
 	public AnimatableMonsterEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -294,7 +295,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 
 	@Override
 	protected PathNavigator createNavigation(World pLevel) {
-		return new GroundPathNavigator(this, pLevel);
+		return new CAStrictGroundPathNavigator(this, pLevel);
 	}
 
 	@Override

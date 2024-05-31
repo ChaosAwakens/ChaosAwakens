@@ -54,6 +54,24 @@
       "chaosawakens:entity/boss/insect/herculesbeetle/death"
     ]
   },
+  "entity.hercules_beetle.death_midair": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death_midair",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/death_midair"
+    ]
+  },
+  "entity.hercules_beetle.death_midair_falling": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death_midair_falling",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/death_midair_falling"
+    ]
+  },
+  "entity.hercules_beetle.death_midair_fallen": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.death_midair_fallen",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/death_midair_fallen"
+    ]
+  },
   "entity.hercules_beetle.leap": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.leap",
     "sounds": [

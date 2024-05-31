@@ -28,6 +28,4 @@ public class HerculesBeetleEntityRenderer extends ExtendedGeoEntityRenderer<Herc
 	protected ObjectArrayList<GeoLayerRenderer<HerculesBeetleEntity>> getLayers() {
 		return null;
 	}
-
-
 }
