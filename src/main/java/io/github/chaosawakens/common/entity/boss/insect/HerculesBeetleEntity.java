@@ -7,6 +7,7 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableWalkSound;
+import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.controllers.movement.hybrid.HerculesBeetleMovementController;
 import io.github.chaosawakens.common.entity.ai.goals.boss.insect.herculesbeetle.HerculesBeetleMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.navigation.ground.base.RefinedGroundPathNavigator;
@@ -30,6 +31,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -107,8 +109,8 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 		return MobEntity.createLivingAttributes()
 				.add(Attributes.MAX_HEALTH, 250)
 				.add(Attributes.ARMOR, 20)
-				.add(Attributes.MOVEMENT_SPEED, 0.15D)
-				.add(Attributes.FLYING_SPEED, 0.12D)
+				.add(Attributes.MOVEMENT_SPEED, 0.35D)
+				.add(Attributes.FLYING_SPEED, 0.42D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
 				.add(Attributes.ATTACK_SPEED, 10)
 				.add(Attributes.ATTACK_DAMAGE, 25)
@@ -322,7 +324,21 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new HerculesBeetleMoveToTargetGoal(this));
+		this.targetSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 1.0D, 3) {
+			final HerculesBeetleEntity ownerBeetle = HerculesBeetleEntity.this;
+
+			@Override
+			public boolean canUse() {
+				return super.canUse() && ownerBeetle.getTarget() != null && ownerBeetle.getTarget().isAlive() &&
+						ownerBeetle.isAlive() && !ownerBeetle.isEvasive() && !ownerBeetle.isCritical() && !ownerBeetle.isAttacking() &&
+						(ownerBeetle.isFlying() || (ownerBeetle.isWalking() && ownerBeetle.distanceTo(ownerBeetle.getTarget()) > ownerBeetle.getMeleeAttackReach(ownerBeetle.getTarget())));
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return canUse();
+			}
+		});
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, RoboPounderEntity.class, false));
@@ -396,7 +412,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 			}
 		} else if (!isDocile()) {
 			boolean shouldGoOffensive = hasValidTarget;
-			boolean shouldGoDefensive = hasValidTarget && (lastDamageAmount >= 30.0F || getHealth() <= 200.0F);
+			boolean shouldGoDefensive = hasValidTarget && (lastDamageAmount >= 30.0F || getHealth() <= 220.0F);
 			boolean shouldGoEvasive = (hasValidTarget && (lastDamageAmount >= 50.0F || getHealth() <= 175.0F)) || isInLava();
 			boolean shouldGoCritical = hasValidTarget && (lastDamageAmount >= 150.0F || getHealth() <= 80.0F);
 			boolean shouldFlyAwayPassively = !shouldGoDefensive && (isInLava() || isInWater());
@@ -449,8 +465,10 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	private void handleBattleStates() {//TODO Redundant yanderedev ahh code (seriously not carrying this garbage to 1.20.1+ :skull:)
 		boolean hasValidTarget = getTarget() != null && getTarget().isAlive() && distanceTo(getTarget()) <= getFollowRange();
 
+		if ((isActivelyPassivelyWandering() || isActivelyPassivelyFlying()) && hasValidTarget) setOffensive(true);
+
 		if (isOffensive()) {
-			boolean shouldGoDef = (lastDamageAmount >= 30.0F && lastDamageAmount <= 50.0F) && getHealth() <= 175.0F;
+			boolean shouldGoDef = (lastDamageAmount >= 15.0F && lastDamageAmount <= 50.0F) && getHealth() <= 200.0F;
 			boolean shouldGoEva = (lastDamageAmount >= 50.0F && lastDamageAmount <= 100.0F) || isInLava();
 			boolean shouldGoCrit = lastDamageAmount >= 150.0F || getHealth() <= 80.0F;
 
@@ -462,9 +480,9 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 		}
 
 		if (isDefensive()) {
-			boolean shouldGoEva = (lastDamageAmount >= 50.0F && lastDamageAmount <= 69.0F) || isInLava() || isInWater() || isInWall() || (getTarget().getAttribute(Attributes.ATTACK_DAMAGE) != null && getTarget().getAttribute(Attributes.ATTACK_DAMAGE).getValue() >= 60.0F);
+			boolean shouldGoEva = (lastDamageAmount >= 50.0F && lastDamageAmount <= 69.0F) || isInLava() || isInWater() || isInWall() || (hasValidTarget && getTarget().getAttribute(Attributes.ATTACK_DAMAGE) != null && getTarget().getAttribute(Attributes.ATTACK_DAMAGE).getValue() >= 60.0F);
 			boolean shouldGoCrit = (lastDamageAmount >= 70.0F || getHealth() <= 75.0F) || (getHealth() <= 100.0F && isInLava());
-			boolean shouldGoOff = ((getHealth() >= 200.0F) || (getHealth() >= 180.0F && (getTarget().isBlocking() || getTarget().isCrouching()))) && lastDamageAmount < 35.0F && !shouldGoEva && !shouldGoCrit;
+			boolean shouldGoOff = ((getHealth() >= 200.0F) || (getHealth() >= 180.0F && hasValidTarget && (getTarget().isBlocking() || getTarget().isCrouching()))) && lastDamageAmount < 35.0F && !shouldGoEva && !shouldGoCrit;
 
 			setOffensive(shouldGoOff);
 			setEvasive(shouldGoEva);
@@ -476,7 +494,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 		if (isEvasive()) {
 			boolean shouldGoCrit = lastDamageAmount >= 20.0F || isInLava() || isInWall();
 			boolean shouldGoDef = hasValidTarget && getHealth() >= 100.0F && (getTarget().getAttribute(Attributes.ATTACK_DAMAGE) != null && getTarget().getAttribute(Attributes.ATTACK_DAMAGE).getValue() >= 5.0F) && !shouldGoCrit;
-			boolean shouldGoOff = (getHealth() >= 150.0F) || (getHealth() >= 100.0F && (getTarget().isBlocking() || getTarget().isCrouching())) && lastDamageAmount < 35.0F && !shouldGoDef && !shouldGoCrit;
+			boolean shouldGoOff = (getHealth() >= 150.0F) || (getHealth() >= 100.0F && hasValidTarget && (getTarget().isBlocking() || getTarget().isCrouching())) && lastDamageAmount < 35.0F && !shouldGoDef && !shouldGoCrit;
 
 			setOffensive(shouldGoOff);
 			setDefensive(shouldGoDef);
