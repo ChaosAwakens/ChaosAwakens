@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:rabbit_spawn_egg",
+    "chaosawakens:wasp_spawn_egg",
     "chaosawakens:tree_frog_spawn_egg",
     "chaosawakens:apple_cow_spawn_egg",
     "chaosawakens:carrot_pig_spawn_egg",

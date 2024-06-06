@@ -31,6 +31,20 @@
         ]
       }
     },
+    "throwback_hercules_beetle": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:throwback_hercules_beetle"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
     "ruby_bug": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
@@ -63,6 +77,9 @@
   "requirements": [
     [
       "hercules_beetle"
+    ],
+    [
+      "throwback_hercules_beetle"
     ],
     [
       "ruby_bug"

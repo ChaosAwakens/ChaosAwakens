@@ -2,6 +2,11 @@
   "anim_file_loc": "chaosawakens:animations/hostile/insect/scorpion.animation.json",
   "animations": [
     {
+      "animation_name": "Idle",
+      "animation_length": 2.0,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Death",
       "animation_length": 3.6,
       "loop_type": "PLAY_ONCE"
@@ -15,11 +20,6 @@
       "animation_name": "Pinch Attack",
       "animation_length": 0.8,
       "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Idle",
-      "animation_length": 2.0,
-      "loop_type": "LOOP"
     }
   ]
 }

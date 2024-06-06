@@ -8,8 +8,6 @@ import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableWalkSound;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.controllers.movement.hybrid.HerculesBeetleMovementController;
-import io.github.chaosawakens.common.entity.ai.goals.boss.insect.herculesbeetle.HerculesBeetleMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.navigation.ground.base.RefinedGroundPathNavigator;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
@@ -31,7 +29,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,13 +36,11 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.FlyingPathNavigator;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -96,13 +91,11 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.type = EnumUtil.HerculesBeetleType.MODERN;
-//		this.moveControl = new HerculesBeetleMovementController(this);
 	}
 
 	public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn, EnumUtil.HerculesBeetleType beetleType) {
 		super(type, worldIn);
 		this.type = beetleType;
-//		this.moveControl = new HerculesBeetleMovementController(this);
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -324,21 +317,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 1.0D, 3) {
-			final HerculesBeetleEntity ownerBeetle = HerculesBeetleEntity.this;
-
-			@Override
-			public boolean canUse() {
-				return super.canUse() && ownerBeetle.getTarget() != null && ownerBeetle.getTarget().isAlive() &&
-						ownerBeetle.isAlive() && !ownerBeetle.isEvasive() && !ownerBeetle.isCritical() && !ownerBeetle.isAttacking() &&
-						(ownerBeetle.isFlying() || (ownerBeetle.isWalking() && ownerBeetle.distanceTo(ownerBeetle.getTarget()) > ownerBeetle.getMeleeAttackReach(ownerBeetle.getTarget())));
-			}
-
-			@Override
-			public boolean canContinueToUse() {
-				return canUse();
-			}
-		});
+		this.targetSelector.addGoal(1, new AnimatableMoveToTargetGoal(this, 1.0D, 3));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, RoboPounderEntity.class, false));
@@ -357,6 +336,11 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 	@Override
 	public boolean canBeKnockedBack() {
 		return false;
+	}
+
+	@Override
+	public boolean causeFallDamage(float pFallDistance, float pDamageMultiplier) {
+		return !isFlying() && super.causeFallDamage(pFallDistance, pDamageMultiplier);
 	}
 
 	@Override
@@ -424,6 +408,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 				} else if (awakenedAnim.hasAnimationFinished()) {
 					setAwakening(false);
 					setActive(true);
+					setWalking(true);
 
 					if (shouldGoOffensive) {
 						resetStatesToBaselineActivity(); // Failsafe
@@ -514,7 +499,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity { //TODO In 1.
 
 	private void updateNavigation() {
 		if (isFlying() && !this.navigation.getClass().isAssignableFrom(FlyingPathNavigator.class)) this.navigation = new FlyingPathNavigator(this, level);
-		else if (!this.navigation.getClass().isAssignableFrom(RefinedGroundPathNavigator.class)) this.navigation = new RefinedGroundPathNavigator(this, level);
+		else if (isWalking() && !this.navigation.getClass().isAssignableFrom(RefinedGroundPathNavigator.class)) this.navigation = new RefinedGroundPathNavigator(this, level);
 	}
 
 	@Override
