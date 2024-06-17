@@ -226,8 +226,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
-	public float getMeleeAttackReach(LivingEntity target) {
-		return super.getMeleeAttackReach(target) / 1.32F;
+	public float getMeleeAttackReach() {
+		return super.getMeleeAttackReach() / 1.32F;
 	}
 
 	@Override

@@ -55,7 +55,7 @@ public class HerculesBeetleTickableIdleSound extends AnimatableTickableIdleMonst
 
     @Override
     public boolean shouldPause() {
-        return animatable.isFlying() || shouldSwitchToDocilitySound() || animatable.isAwakening() || super.shouldPause();
+        return shouldSwitchToDocilitySound() || animatable.isAwakening() || super.shouldPause();
     }
 
     public boolean shouldSwitchToDocilitySound() {

@@ -645,10 +645,10 @@ public class CAClientSetupEvents {
 	
 	@SubscribeEvent
 	public static void onFMLClientLoadCompleteEvent(FMLLoadCompleteEvent event) {
-		EntityRendererManager rendererManager = Minecraft.getInstance().getEntityRenderDispatcher();
+	/*	EntityRendererManager rendererManager = Minecraft.getInstance().getEntityRenderDispatcher();
 		rendererManager.getSkinMap().values().forEach(renderer -> {
 			renderer.addLayer(new EnderScaleArmorItem.DragonElytraLayer<>(renderer));
-		});
+		}); */
 	}
 	
 	@SuppressWarnings("resource")

@@ -5,14 +5,12 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
-import io.github.chaosawakens.common.entity.ai.controllers.movement.air.JumpFlyingMovementController;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
-import io.github.chaosawakens.common.registry.CASoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -24,17 +22,14 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -55,14 +50,14 @@ public class WaspEntity extends AnimatableMonsterEntity {
 
     public WaspEntity(EntityType<? extends WaspEntity> entityType, World world) {
         super(entityType, world);
-        this.moveControl = new FlyingMovementController(this, 20, true);
+        this.moveControl = new FlyingMovementController(this, 2, true);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 40)
-                .add(Attributes.MOVEMENT_SPEED, 1.25)
-                .add(Attributes.FLYING_SPEED, 0.55)
+                .add(Attributes.MOVEMENT_SPEED, 0.65)
+                .add(Attributes.FLYING_SPEED, 0.75)
                 .add(Attributes.FOLLOW_RANGE, 25)
                 .add(Attributes.ARMOR, 4)
                 .add(Attributes.ATTACK_DAMAGE, 12)
@@ -92,7 +87,7 @@ public class WaspEntity extends AnimatableMonsterEntity {
 
     @Override
     public int animationInterval() {
-        return 1;
+        return 6;
     }
 
     @Override
@@ -104,7 +99,7 @@ public class WaspEntity extends AnimatableMonsterEntity {
     @Override
     protected void registerGoals() {
         this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.2, 3));
-        this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> pinchAttackAnim, FLY_ATTACK_ID, 20D, 22.4D, 135, 1, 10));
+        this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, () -> pinchAttackAnim, FLY_ATTACK_ID, 16.5D, 18.4D, 135, 1, 10));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, false));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
@@ -127,7 +122,7 @@ public class WaspEntity extends AnimatableMonsterEntity {
     }
 
     @Override
-    public float getMeleeAttackReach(LivingEntity target) {
+    public float getMeleeAttackReach() {
         return 2.35F;
     }
 
@@ -137,8 +132,17 @@ public class WaspEntity extends AnimatableMonsterEntity {
     }
 
     @Override
+    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+    }
+
+    @Override
     protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
         return super.getStandingEyeHeight(pPose, pSize) - 0.2F;
+    }
+
+    @Override
+    public boolean onClimbable() {
+        return false;
     }
 
     @Override

@@ -41,7 +41,7 @@ public class AnimatableEatGrassGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return ObjectUtil.performNullityChecks(false, owner, grazeAnim, grazeAnim.get()) && owner.isAlive() && (BlockPosUtil.checkValidPos(owner.level, owner.blockPosition().below(), (targetState) -> targetState.is(Blocks.GRASS_BLOCK)) || BlockPosUtil.checkValidPos(owner.level, owner.blockPosition(), (targetState) -> targetState.is(Blocks.GRASS))) && (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
+		return ObjectUtil.performNullityChecks(false, owner, grazeAnim, grazeAnim.get()) && owner.isAlive() && !owner.isMoving() && (BlockPosUtil.checkValidPos(owner.level, owner.blockPosition().below(), (targetState) -> targetState.is(Blocks.GRASS_BLOCK)) || BlockPosUtil.checkValidPos(owner.level, owner.blockPosition(), (targetState) -> targetState.is(Blocks.GRASS))) && (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
 	
 	@Override
@@ -63,6 +63,7 @@ public class AnimatableEatGrassGoal extends Goal {
 	@Override
 	public void tick() {
 		EntityUtil.freezeEntityRotation(owner);
+		owner.getNavigation().stop();
 		
 		if (MathUtil.isBetween(grazeAnim.get().getWrappedAnimProgress(), eatActionPointTick, eatActionPointTick + 1)) {
 			if (BlockPosUtil.checkValidPos(owner.level, owner.blockPosition().below(), (targetState) -> targetState.is(Blocks.GRASS_BLOCK))) {

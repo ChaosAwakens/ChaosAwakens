@@ -3,12 +3,10 @@ package io.github.chaosawakens.client.events;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
-import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CADimensions;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.util.EntityUtil;
-import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -218,8 +216,7 @@ public class CAClientMiscEvents {
 	public static void onRenderFogDensityEvent(EntityViewRenderEvent.FogDensity event) {
 		Entity cameraEntity = event.getRenderer().getMainCamera().getEntity();
 
-		if (cameraEntity == null)
-			return;
+		if (cameraEntity == null) return;
 
 		if (CAConfigManager.MAIN_CLIENT.enableCrystalDimensionFog.get()) {
 			if (cameraEntity.level.dimension() == CADimensions.CRYSTAL_WORLD) {

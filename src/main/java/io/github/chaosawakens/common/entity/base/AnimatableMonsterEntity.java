@@ -7,6 +7,7 @@ import io.github.chaosawakens.common.entity.ai.controllers.body.base.SmoothBodyC
 import io.github.chaosawakens.common.entity.ai.navigation.ground.base.RefinedGroundPathNavigator;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
 import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -184,6 +185,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	protected void tickDeath() {
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
+		setAttackCooldown(0);
 		setMoving(false);
 				
 		if (getDeathAnim() != null) {
@@ -304,6 +306,11 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	@Override
+	protected boolean canRide(Entity vehicle) {
+		return getBbWidth() <= CAEntityTypes.ACACIA_ENT.get().getWidth() && getBbHeight() < CAEntityTypes.ACACIA_ENT.get().getHeight();
+	}
+
+	@Override
 	public void aiStep() {
 		divertTarget();
 		super.aiStep();
@@ -421,8 +428,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.addAdditionalSaveData(pCompound);
 	}
 
-	public float getMeleeAttackReach(LivingEntity target) {
-		if (target == null) return 0;
+	public float getMeleeAttackReach() {
 		return ((1.0F + getBbWidth() / 2.0F) * 2) + 0.2F;
 	}
 	

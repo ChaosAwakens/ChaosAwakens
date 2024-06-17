@@ -25,7 +25,7 @@ public abstract class LivingEntityMixin {
 		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
 	}
 
-	@Inject(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isInLava()Z"), cancellable = true)
+/*	@Inject(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isInLava()Z"), cancellable = true)
 	private void chaosawakens$travel(Vector3d travelVec, CallbackInfo ci) {
 		LivingEntity target = (LivingEntity) (Object) this;
 		FluidState curFluidState = target.level.getFluidState(target.blockPosition());
@@ -67,5 +67,5 @@ public abstract class LivingEntityMixin {
 				ci.cancel();
 			}
 		}
-	}
+	} */
 }

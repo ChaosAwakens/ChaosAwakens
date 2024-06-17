@@ -7,11 +7,11 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 
 public class RefinedGroundPathNavigator extends GroundPathNavigator {
-
 	private float distancemodifier = 0.75F;
 
 	public RefinedGroundPathNavigator(MobEntity entitylivingIn, World worldIn) {
 		super(entitylivingIn, worldIn);
+		adjustDistanceModifier(entitylivingIn);
 	}
 
 	public RefinedGroundPathNavigator(MobEntity entitylivingIn, World worldIn, float distancemodifier) {
@@ -19,34 +19,43 @@ public class RefinedGroundPathNavigator extends GroundPathNavigator {
 		this.distancemodifier = distancemodifier;
 	}
 
+	private void adjustDistanceModifier(MobEntity entity) {
+		float width = entity.getBbWidth();
+		float height = entity.getBbHeight();
+
+		if (width > 2.0F || height > 2.0F) this.distancemodifier *= 1.5F; //TODO Arbitrary value moment, but it works here and this code ain't being touched again, soooooo...
+	}
+
+	@Override
 	protected void followThePath() {
-		Vector3d vector3d = this.getTempMobPos();
-		this.maxDistanceToWaypoint = this.mob.getBbWidth() * distancemodifier;
-		Vector3i vector3i = this.path.getNextNodePos();
-		double d0 = Math.abs(this.mob.getX() - ((double)vector3i.getX() + 0.5D));
-		double d1 = Math.abs(this.mob.getY() - (double)vector3i.getY());
-		double d2 = Math.abs(this.mob.getZ() - ((double)vector3i.getZ() + 0.5D));
-		boolean flag = d0 < (double)this.maxDistanceToWaypoint && d2 < (double)this.maxDistanceToWaypoint && d1 < 1.0D;
-		if (flag || this.hasValidPathType(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(vector3d)) {
+		Vector3d currentPosition = this.getTempMobPos();
+		this.maxDistanceToWaypoint = this.mob.getBbWidth() * this.distancemodifier;
+
+		Vector3i nextNodePos = this.path.getNextNodePos();
+		double dx = Math.abs(this.mob.getX() - (nextNodePos.getX() + 0.5D));
+		double dy = Math.abs(this.mob.getY() - nextNodePos.getY());
+		double dz = Math.abs(this.mob.getZ() - (nextNodePos.getZ() + 0.5D));
+		boolean withinHorizontalRange = dx < this.maxDistanceToWaypoint && dz < this.maxDistanceToWaypoint;
+		boolean withinVerticalRange = dy < 1.0D;
+
+		if ((withinHorizontalRange && withinVerticalRange) || this.hasValidPathType(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(currentPosition)) {
 			this.path.advance();
 		}
 
-		this.doStuckDetection(vector3d);
+		this.doStuckDetection(currentPosition);
+	}
+
+	@Override
+	protected void doStuckDetection(Vector3d currentPosition) {
+
 	}
 
 	private boolean shouldTargetNextNodeInDirection(Vector3d currentPosition) {
 		if (this.path.getNextNodeIndex() + 1 >= this.path.getNodeCount()) {
 			return false;
 		} else {
-			Vector3d vector3d = Vector3d.atBottomCenterOf(this.path.getNextNodePos());
-			if (!currentPosition.closerThan(vector3d, 2.0D)) {
-				return false;
-			} else {
-				Vector3d vector3d1 = Vector3d.atBottomCenterOf(this.path.getNodePos(this.path.getNextNodeIndex() + 1));
-				Vector3d vector3d2 = vector3d1.subtract(vector3d);
-				Vector3d vector3d3 = currentPosition.subtract(vector3d);
-				return vector3d2.dot(vector3d3) > 0.0D;
-			}
+
 		}
+		return true;
 	}
 }

@@ -31,8 +31,7 @@ public class LavaEelArmorItem extends EnchantedArmorItem {
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		super.onArmorTick(stack, world, player);
 
-		if (player.level.dimension().location() == Dimension.NETHER.location() || player.isInLava() || player.isOnFire())
-			player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 100, 0, true, false));
+		if (player.level.dimension().location() == Dimension.NETHER.location() || player.isInLava() || player.isOnFire()) player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 100, 0, true, false));
 	}
 
 	@Override
@@ -56,5 +55,6 @@ public class LavaEelArmorItem extends EnchantedArmorItem {
 		if (!CAConfigManager.MAIN_COMMON.enableLavaEelArmorSetBonus.get()) {
 			tooltip.add(new StringTextComponent("This full set bonus is disabled in the config!").withStyle(TextFormatting.RED).withStyle(TextFormatting.BOLD));
 		}
+		tooltip.add(new StringTextComponent("Set bonus (lava swimming) disabled, deferred to 0.13.x.x+. TBD.").withStyle(TextFormatting.RED).withStyle(TextFormatting.BOLD));
 	}
 }

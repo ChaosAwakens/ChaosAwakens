@@ -267,7 +267,7 @@ public class SingletonAnimationBuilder implements IAnimationBuilder {
 	/**
 	 * Trigger the animation stored in the <code>AnimationBuilder</code> object through the owner controller.
 	 * It is recommended that you use {@link IAnimatableEntity}'s implementation instead 
-	 * ({@link IAnimatableEntity#playAnimation(SingletonAnimationBuilder, boolean)}), as it handles all the necessary checks
+	 * ({@link IAnimatableEntity#playAnimation(IAnimationBuilder, boolean)}), as it handles all the necessary checks
 	 * should you need to trigger animations server-side. Otherwise, call this with caution (only client-side)!
 	 */
 	public void playAnimation() {

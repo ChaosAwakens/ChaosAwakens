@@ -3,9 +3,11 @@ package io.github.chaosawakens.common.util;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
@@ -53,7 +55,7 @@ public final class EntityUtil {
 	 */
 	public static <E extends Entity> List<E> getEntitiesAround(Entity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
 		Predicate<E> distPredicate = living -> living != user && (user.getTeam() != null && living.getTeam() != null ? !living.getTeam().equals(user.getTeam()) : living.isAlive()) && living.getClass() != user.getClass() && user.distanceTo(living) <= radius + living.getBbWidth() / 2F;
-		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), distPredicate);
+		return new ObjectArrayList<>(user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), distPredicate));
 	}
 	
 	/**
@@ -70,7 +72,7 @@ public final class EntityUtil {
 	 * @return a list of entities within the valid specified distance inside the grown bounding box
 	 */
 	public static <E extends Entity> List<E> getEntitiesAroundNoPredicate(LivingEntity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
-		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ));
+		return new ObjectArrayList<>(user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ)));
 	}
 
 	/**
@@ -86,7 +88,7 @@ public final class EntityUtil {
 	 * @return a list of entities within the valid specified distance inside the grown bounding box
 	 */
 	public static <E extends Entity> List<E> getEntitiesAround(Entity user, Class<E> entityClass, double dX, double dY, double dZ, Predicate<E> detectionConditions) {
-		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), detectionConditions);
+		return new ObjectArrayList<>(user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ), detectionConditions));
 	}
 
 	/**
@@ -103,7 +105,7 @@ public final class EntityUtil {
 	 * @return a list of entities within the valid specified distance inside the grown bounding box
 	 */
 	public static <E extends Entity> List<E> getEntitiesAroundNoPredicate(Entity user, Class<E> entityClass, double dX, double dY, double dZ, double radius) {
-		return user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ));
+		return new ObjectArrayList<>(user.level.getEntitiesOfClass(entityClass, user.getBoundingBox().inflate(dX, dY, dZ)));
 	}
 
 	/**
@@ -133,8 +135,7 @@ public final class EntityUtil {
 	 */
 	public static List<PlayerEntity> getAllPlayersAround(Entity user, double dX, double dY, double dZ, double radius) {
 		List<Entity> nearbyEntities = user.level.getEntities(user, user.getBoundingBox().inflate(dX, dY, dZ));
-		List<PlayerEntity> listEntityPlayers = nearbyEntities.stream().filter(neighbouringEntity -> neighbouringEntity instanceof PlayerEntity && user.distanceTo(neighbouringEntity) <= radius + neighbouringEntity.getBbWidth() / 2f).map(entityNeighbor -> (PlayerEntity) entityNeighbor).collect(Collectors.toList());
-		return listEntityPlayers;
+        return nearbyEntities.stream().filter(neighbouringEntity -> neighbouringEntity instanceof PlayerEntity && user.distanceTo(neighbouringEntity) <= radius + neighbouringEntity.getBbWidth() / 2f).map(entityNeighbor -> (PlayerEntity) entityNeighbor).collect(Collectors.toList());
 	}
 
 	/**
@@ -516,5 +517,41 @@ public final class EntityUtil {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Gets a {@link List} of any potentially incoming projectiles towards the specified {@code targetEntity} within the specified {@code radius}, or an
+	 * empty {@link List} if there are none.
+	 *
+	 * @param targetEntity The {@link Entity} towards which incoming projectiles will be checked.
+	 * @param xRad The radius on the x-axis within which incoming projectiles will be checked.
+	 * @param yRad The radius on the y-axis within which incoming projectiles will be checked.
+	 * @param zRad The radius on the z-axis within which incoming projectiles will be checked.
+	 * @param radius The general (max for each axis) radius within which incoming projectiles will be checked.
+	 * @param accuracyThreshold The accuracy at which incoming projectiles will be considered, clamped between 0 and 1. For instance, a value of 0.5
+	 *                          would indicate that the projectile is within ~60 degrees of the target entity's position.
+	 *
+	 * @return A {@link List} of incoming {@linkplain ProjectileEntity projectiles}, or an empty {@link List} if there aren't any that meet the threshold
+	 * requisites.
+	 */
+	public static List<ProjectileEntity> checkIncomingProjectiles(Entity targetEntity, double xRad, double yRad, double zRad, double radius, double accuracyThreshold) {
+		return getEntitiesAround(targetEntity, ProjectileEntity.class, xRad, yRad, zRad, radius).stream()
+				.filter(curProj -> !curProj.getDeltaMovement().equals(Vector3d.ZERO) && curProj.getDeltaMovement().dot(targetEntity.position().subtract(curProj.position()).normalize()) >= MathHelper.clamp(accuracyThreshold, 0, 1))
+				.collect(Collectors.toCollection(ObjectArrayList::new));
+	}
+
+	/**
+	 * Overloaded method for {@link #checkIncomingProjectiles(Entity, double, double, double, double, double)}.
+	 *
+	 * @param targetEntity The {@link Entity} towards which incoming projectiles will be checked.
+	 * @param radius The radius within which incoming projectiles will be checked.
+	 * @param accuracyThreshold The accuracy at which incoming projectiles will be considered, clamped between 0 and 1. For instance, a value of 0.5
+	 *                          would indicate that the projectile is within ~60 degrees of the target entity's position.
+	 *
+	 * @return A {@link List} of incoming {@linkplain ProjectileEntity projectiles}, or an empty {@link List} if there aren't any that meet the threshold
+	 * requisites.
+	 */
+	public static List<ProjectileEntity> checkIncomingProjectiles(Entity targetEntity, double radius, double accuracyThreshold) {
+		return checkIncomingProjectiles(targetEntity, radius, radius, radius, radius, accuracyThreshold);
 	}
 }

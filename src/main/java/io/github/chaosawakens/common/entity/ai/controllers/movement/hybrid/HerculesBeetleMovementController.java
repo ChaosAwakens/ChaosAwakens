@@ -91,23 +91,18 @@ public class HerculesBeetleMovementController extends MovementController {
         }
     }
 
-    protected void updateMovementStatus() {//TODO Redo
-        if (ownerBeetle.isDocile() || ((ownerBeetle.isActivelyPassivelyWandering() && !ownerBeetle.isMoving()) && ownerBeetle.getNavigation().isDone())) this.curStatus = MovementStatus.IDLE;
-        if ((ownerBeetle.isMoving() || ownerBeetle.getTarget() != null || !ownerBeetle.getNavigation().isDone()) && !ownerBeetle.isFlying()) this.curStatus = MovementStatus.WALKING;
-        if (ownerBeetle.isFlying()) this.curStatus = MovementStatus.FLYING;
-        if ((ownerBeetle.isSwimming() || ownerBeetle.isInWater()) && !ownerBeetle.isFlying()) this.curStatus = MovementStatus.SWIMMING;
-        if (ownerBeetle.isEvasive() || ownerBeetle.isCritical()) this.curStatus = MovementStatus.EVADING;
+    protected void updateMovementStatus() {//TODO Redo noop
     }
 
     protected void rotateBasedOnMovement() {
-        if (ownerBeetle.isFlying()) {
+  /*      if (ownerBeetle.isFlying()) {
             final Vector3d curDeltaMovement = ownerBeetle.getDeltaMovement();
 
             ownerBeetle.yRot = (float) (-((float) Math.atan2(curDeltaMovement.z, curDeltaMovement.x)) * (Math.PI / 180.0F));
 
             ownerBeetle.setYHeadRot(ownerBeetle.yRot);
             ownerBeetle.setYBodyRot(ownerBeetle.yRot);
-        }
+        } */
     }
 
     private boolean hasCollision() {

@@ -32,7 +32,7 @@ public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleE
 
 	@Override
 	protected boolean shouldApplyHeadRot() {
-		return false;
+		return true;
 	}
 
 	@Override

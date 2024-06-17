@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -30,7 +29,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -126,7 +124,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 				return super.canContinueToUse() && !isShielded() && !isShieldDestroyed() && hasShieldGoneDown();
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 0, (owner) -> !isShielded() && !isShieldDestroyed() && hasShieldGoneDown()).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 0, (owner) -> !isShielded() && !isShieldDestroyed() && hasShieldGoneDown() && !isPlayingAnimation(shieldUpAnim) && !isPlayingAnimation(shieldedAnim) && !isPlayingAnimation(shieldDownAnim) && !isPlayingAnimation(shieldDestroyedAnim)).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
@@ -246,8 +244,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	}
 	
 	@Override
-	public float getMeleeAttackReach(LivingEntity target) {
-		return super.getMeleeAttackReach(target) * 0.75F;
+	public float getMeleeAttackReach() {
+		return super.getMeleeAttackReach() * 0.75F;
 	}
 
 	@Override
@@ -281,7 +279,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		handleShield();
 	}
 
-	protected void handleShield() {
+	protected void handleShield() {//TODO Goal migration
 		if (MathUtil.isBetween(getHealth(), 150.0F, getMaxHealth())) setHasHitHealthThreshold(true);
 
 		setCanActivateShield(!isDeadOrDying() && getHealth() <= 90.0F && !isAttacking() && !isShielded() && hasHitHealthThreshold() && getStoredDamage() >= getShieldActivationDamageThreshold());
@@ -360,6 +358,10 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 		if (getIdleAnim() != null && !isShielded() && !isShieldDestroyed() && hasShieldGoneDown() && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(idleAnim, false);
 		if (getWalkAnim() != null && !isShielded() && !isShieldDestroyed() && hasShieldGoneDown() && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(walkAnim, false);
+
+		if (isPlayingAnimation(shieldedAnim)) {
+
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

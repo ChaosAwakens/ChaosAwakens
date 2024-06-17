@@ -6,7 +6,6 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableWalkSound;
-import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderDysonDashGoal;
@@ -452,12 +451,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
-	public float getMeleeAttackReach(LivingEntity target) {
+	public float getMeleeAttackReach() {
 		switch (getAttackID()) {
-		default: return super.getMeleeAttackReach(target);
-		case SWING_ATTACK_ID: return super.getMeleeAttackReach(target) * 0.8F;
-		case DASH_ATTACK_ID: return super.getMeleeAttackReach(target) * 1.2F;
-		case RAGE_RUN_ATTACK_ID: return super.getMeleeAttackReach(target) * 0.65F;
+		default: return super.getMeleeAttackReach();
+		case SWING_ATTACK_ID: return super.getMeleeAttackReach() * 0.8F;
+		case DASH_ATTACK_ID: return super.getMeleeAttackReach() * 1.2F;
+		case RAGE_RUN_ATTACK_ID: return super.getMeleeAttackReach() * 0.65F;
 		}
 	}
 

@@ -75,6 +75,7 @@ public class BirdEntity extends AnimatableAnimalEntity {
                 .add(Attributes.MOVEMENT_SPEED, 0.3F)
                 .add(Attributes.FLYING_SPEED, 0.4);
     }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));

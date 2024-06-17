@@ -34,7 +34,7 @@ configBackground="chaosawakens:textures/gui/advancement_bg.png"
 [[dependencies.chaosawakens]]
 	modId="geckolib3"
 	mandatory=true
-	versionRange="[3.0.90,3.0.98)"
+	versionRange="[3.0.94,3.0.98)"
 	ordering="NONE"
 	side="BOTH"
 

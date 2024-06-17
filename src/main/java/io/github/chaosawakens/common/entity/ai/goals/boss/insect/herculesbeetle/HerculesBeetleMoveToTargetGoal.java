@@ -33,9 +33,9 @@ public class HerculesBeetleMoveToTargetGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return ownerBeetle.getTarget() != null && ownerBeetle.getTarget().isAlive() &&
+        return false; /*ownerBeetle.getTarget() != null && ownerBeetle.getTarget().isAlive() &&
                 ownerBeetle.isAlive() && !ownerBeetle.isEvasive() && !ownerBeetle.isCritical() && !ownerBeetle.isAttacking() &&
-                (ownerBeetle.isFlying() || (ownerBeetle.isWalking() && ownerBeetle.distanceTo(ownerBeetle.getTarget()) > ownerBeetle.getMeleeAttackReach(ownerBeetle.getTarget())));
+                (ownerBeetle.isFlying() || (ownerBeetle.isWalking() && ownerBeetle.distanceTo(ownerBeetle.getTarget()) > ownerBeetle.getMeleeAttackReach(ownerBeetle.getTarget()))); */
     }
 
     @Override
@@ -50,7 +50,7 @@ public class HerculesBeetleMoveToTargetGoal extends Goal {
 
     @Override
     public void tick() {
-        if (ownerBeetle.isFlying()) {
+     /*   if (ownerBeetle.isFlying()) {
             if (curPath == null) this.curPath = ownerBeetle.getNavigation().createPath(ownerBeetle.getTarget(), 4);
             else ownerBeetle.getNavigation().moveTo(curPath, 1.2D);
 
@@ -66,6 +66,6 @@ public class HerculesBeetleMoveToTargetGoal extends Goal {
                 this.curPath = ownerBeetle.getNavigation().createPath(ownerBeetle.getTarget(), 0);
                 this.pathResetCooldown = ownerBeetle.getRandom().nextInt(5) + 5;
             }
-        }
+        }*/
     }
 }

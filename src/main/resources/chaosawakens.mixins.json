@@ -9,6 +9,7 @@
     "CooldownTrackerMixin",
     "CropsBlockMixin",
     "CrossbowItemMixin",
+    "IEntityAccessor",
     "EntityMixin",
     "LivingEntityMixin",
     "MobEntityMixin",

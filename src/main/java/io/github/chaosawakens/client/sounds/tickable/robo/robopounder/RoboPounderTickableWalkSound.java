@@ -61,7 +61,7 @@ public class RoboPounderTickableWalkSound extends AnimatableTickableWalkMonsterS
         double dxSqr = dx * dx;
         double dzSqr = dz * dz;
 
-        return shouldSwitchToRageRunSound() || !MC_SOUND_ENGINE.loaded || dxSqr + dzSqr < getMovementThreshold() || (shouldSwitchToRageRunSound() && !animatable.isPlayingAnimation("Rage Run"));
+        return shouldSwitchToRageRunSound() || !MC_SOUND_ENGINE.loaded || dxSqr + dzSqr < getMovementThreshold() || (shouldSwitchToRageRunSound() && !animatable.isPlayingAnimation("Rage Run")) || animatable.isPlayingAnimation("Rage Cooldown") || animatable.isPlayingAnimation("Rage Crash");
     }
 
     public boolean shouldSwitchToRageRunSound() {

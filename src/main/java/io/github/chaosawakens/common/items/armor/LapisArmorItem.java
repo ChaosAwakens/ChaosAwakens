@@ -38,6 +38,7 @@ public class LapisArmorItem extends EnchantedArmorItem {
 		if (!CAConfigManager.MAIN_COMMON.enableLapisArmorSetBonus.get()) {
 			tooltip.add(new StringTextComponent("This full set bonus is disabled in the config!").withStyle(TextFormatting.RED).withStyle(TextFormatting.BOLD));
 		}
+		tooltip.add(new StringTextComponent("Set bonus disabled, deferred to 0.13.x.x+. TBD.").withStyle(TextFormatting.RED).withStyle(TextFormatting.BOLD));
 	}
 	
 

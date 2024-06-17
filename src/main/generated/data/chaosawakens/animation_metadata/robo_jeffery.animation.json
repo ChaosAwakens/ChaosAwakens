@@ -7,19 +7,24 @@
       "loop_type": "LOOP"
     },
     {
+      "animation_name": "Left Punch Attack",
+      "animation_length": 1.7,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Leap Attack: Land",
       "animation_length": 2.45,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Smash Attack",
-      "animation_length": 3.0,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Robo-Bomb Attack",
-      "animation_length": 2.0,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Leap Attack: Midair",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
     },
     {
       "animation_name": "Leap Attack: Leap",
@@ -27,7 +32,17 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Leap Attack: Midair",
+      "animation_name": "Walk",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Right Punch Attack",
+      "animation_length": 1.7,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Idle Extras",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -42,28 +57,13 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Walk",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Idle Extras",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Left Punch Attack",
-      "animation_length": 1.7,
+      "animation_name": "Smash Attack",
+      "animation_length": 3.0,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Right Punch Attack",
-      "animation_length": 1.7,
+      "animation_name": "Robo-Bomb Attack",
+      "animation_length": 2.0,
       "loop_type": "PLAY_ONCE"
     }
   ]

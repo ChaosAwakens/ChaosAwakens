@@ -79,7 +79,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget()) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !owner.getTarget().isInvulnerable()
 				&& owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) * 5 && owner.distanceTo(owner.getTarget()) <= owner.getFollowRange()
+				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach() * 5 && owner.distanceTo(owner.getTarget()) <= owner.getFollowRange()
 				&& owner.shouldRageRunBasedOnChance() && owner.getRandom().nextInt(probability) == 0;
 	}
 	
@@ -166,7 +166,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		LivingEntity target = owner.getTarget();
 		
 		if (target != null) {
-			double reach = owner.getMeleeAttackReach(target);
+			double reach = owner.getMeleeAttackReach();
 			List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 			
 			for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
@@ -194,7 +194,10 @@ public class RoboPounderRageRunGoal extends Goal {
 
 			for (BlockPos detectedPos : collisionBlocks) {
 				BlockState detectedState = owner.level.getBlockState(detectedPos);
-				double blockHeight = detectedState.getCollisionShape(owner.level, detectedPos).max(Direction.Axis.Y) - owner.getY();
+
+				if (detectedState.isAir(owner.level, detectedPos)) continue;
+
+				double blockHeight = Math.abs(detectedState.getCollisionShape(owner.level, detectedPos).max(Direction.Axis.Y) - owner.getY());
 				
 				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE) && blockHeight > maxUpStep) {
 					this.foundCrashCollision = true;
