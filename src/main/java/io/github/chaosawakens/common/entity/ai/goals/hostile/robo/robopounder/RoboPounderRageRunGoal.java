@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
@@ -47,6 +48,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	private boolean hasPlayedCrashRestartSound = false;
 	private boolean foundCrashCollision = false;
 	private int targetInterval = 0;
+	private double base = -0.8D;
 
 	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
 		this.owner = owner;
@@ -111,6 +113,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		this.hasPlayedCrashRestartSound = false;
 		this.foundCrashCollision = false;
 		this.targetInterval = 0;
+		this.base = -0.8D;
 	}
 	
 	@Override
@@ -274,15 +277,25 @@ public class RoboPounderRageRunGoal extends Goal {
 			owner.getNavigation().stop();
 
 			if (!hasCharged) {
-				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRageRunFrictionOffset()), 5, 4, 0.035);
+			//	EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRageRunFrictionOffset()), 12.0D, 4.5D, 0.035D);
 
 				if (!hasPlayedCooldownSound) {
 					owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_COOLDOWN.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
 
 					this.hasPlayedCooldownSound = true;
 				}
+
 				hasCharged = true;
 			}
+
+			double mod = Math.min(owner.getRageRunFrictionOffset() / 250.0D, 0.09D);
+
+			base += mod;
+
+			double xMod = Math.min(base, 0) * Math.cos(Math.toRadians(owner.yRot - 90));
+			double zMod = Math.min(base, 0) * Math.sin(Math.toRadians(owner.yRot - 90));
+
+			owner.setDeltaMovement(xMod, owner.getDeltaMovement().y, zMod);
 		}
 		
 		if (shouldExitCooldown() && !hasExitedCooldown) {

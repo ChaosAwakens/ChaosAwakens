@@ -236,12 +236,12 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	
 	public int getRageRunFrictionOffset() {
 		if (MathUtil.isBetween(getHealth(), 250.0F, getMaxHealth() - 1)) return MathHelper.nextInt(random, 4, 8);
-		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return MathHelper.nextInt(random, 4, 9);
-		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return MathHelper.nextInt(random, 4, 9);
-		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return MathHelper.nextInt(random, 4, 10);
-		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return MathHelper.nextInt(random, 5, 10);
-		else if (getHealth() <= 20.0F) return MathHelper.nextInt(random, 5, 10);
-		else return MathHelper.nextInt(random, 6, 12);
+		else if (MathUtil.isBetween(getHealth(), 200.0F, 250.0F)) return MathHelper.nextInt(random, 4, 7);
+		else if (MathUtil.isBetween(getHealth(), 150.0F, 200.0F)) return MathHelper.nextInt(random, 4, 6);
+		else if (MathUtil.isBetween(getHealth(), 100.0F, 150.0F)) return MathHelper.nextInt(random, 3, 6);
+		else if (MathUtil.isBetween(getHealth(), 50.0F, 100.0F)) return MathHelper.nextInt(random, 3, 5);
+		else if (getHealth() <= 20.0F) return MathHelper.nextInt(random, 3, 5);
+		else return MathHelper.nextInt(random, 3, 4);
 	}
 
 	public double getRageRunSpeed() {
@@ -462,7 +462,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public int getHeadRotSpeed() {
-		return isRageRunning() ? 360 : super.getHeadRotSpeed();
+		return isRageRunning() ? 720 : super.getHeadRotSpeed();
 	}
 
 	@Override

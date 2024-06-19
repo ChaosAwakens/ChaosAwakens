@@ -75,7 +75,7 @@ public class CritterCageItem extends Item {
 		if (target instanceof PlayerEntity || !target.isAlive()) return false;
 		if (containsEntity(targetStack)) return false;
 		if (isBlacklisted(target.getType())) return false;
-		if (target.getBbWidth() >= 2.0F || target.getBbHeight() >= 3.125F) return false; // Ent size or larger
+		if (target.getBbWidth() >= 3.35F || target.getBbHeight() >= 4.225F) return false; // Ent size or larger
 		
 		CompoundNBT critterCageData = new CompoundNBT();
 		

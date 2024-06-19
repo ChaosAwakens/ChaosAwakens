@@ -4,7 +4,6 @@ import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableWalk
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ITickableSound;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 
@@ -61,7 +60,7 @@ public class RoboPounderTickableWalkSound extends AnimatableTickableWalkMonsterS
         double dxSqr = dx * dx;
         double dzSqr = dz * dz;
 
-        return shouldSwitchToRageRunSound() || !MC_SOUND_ENGINE.loaded || dxSqr + dzSqr < getMovementThreshold() || (shouldSwitchToRageRunSound() && !animatable.isPlayingAnimation("Rage Run")) || animatable.isPlayingAnimation("Rage Cooldown") || animatable.isPlayingAnimation("Rage Crash");
+        return shouldSwitchToRageRunSound() || !MC_SOUND_ENGINE.loaded || dxSqr + dzSqr < getMovementThreshold() || (shouldSwitchToRageRunSound() && !animatable.isPlayingAnimation("Rage Run")) || (animatable.isPlayingAnimation("Cooldown") || animatable.isPlayingAnimation("Rage Crash"));
     }
 
     public boolean shouldSwitchToRageRunSound() {

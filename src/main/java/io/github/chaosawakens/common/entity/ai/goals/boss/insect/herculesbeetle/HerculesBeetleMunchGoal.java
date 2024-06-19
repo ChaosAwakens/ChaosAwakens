@@ -89,6 +89,8 @@ public class HerculesBeetleMunchGoal extends Goal {
 
     @Override
     public void tick() {
+        ownerBeetle.stopAnimation(ownerBeetle.getWalkAnim());
+
         if (!ObjectUtil.performNullityChecks(false, targetToBeGrabbed)) return;
 
         this.shouldFling = !ownerBeetle.isDeadOrDying() && (ownerBeetle.getLastDamageAmount() >= 30.0F || (ownerBeetle.getHealth() <= 150.0F && ownerBeetle.getLastDamageAmount() >= 15.0F) || ownerBeetle.isInLava() || ownerBeetle.isOnFire());

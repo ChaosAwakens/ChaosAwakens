@@ -373,7 +373,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 
     @Override
     public boolean isPersistenceRequired() {
-        return true;
+        return !isDocile();
     }
 
     private void handleStates() { //TODO Move to brains/state handlers in 1.20.1+

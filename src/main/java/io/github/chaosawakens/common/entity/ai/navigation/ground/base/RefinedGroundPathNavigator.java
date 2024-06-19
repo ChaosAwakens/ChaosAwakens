@@ -1,5 +1,7 @@
 package io.github.chaosawakens.common.entity.ai.navigation.ground.base;
 
+import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.math.vector.Vector3d;
@@ -7,23 +9,28 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 
 public class RefinedGroundPathNavigator extends GroundPathNavigator {
+	private final AnimatableMonsterEntity owner;
 	private float distancemodifier = 0.75F;
+	private int stuckCounter = 0;
 
-	public RefinedGroundPathNavigator(MobEntity entitylivingIn, World worldIn) {
-		super(entitylivingIn, worldIn);
-		adjustDistanceModifier(entitylivingIn);
+	public RefinedGroundPathNavigator(AnimatableMonsterEntity owner, World worldIn) {
+		super(owner, worldIn);
+		this.owner = owner;
+		adjustDistanceModifier(owner);
 	}
 
-	public RefinedGroundPathNavigator(MobEntity entitylivingIn, World worldIn, float distancemodifier) {
-		super(entitylivingIn, worldIn);
+	public RefinedGroundPathNavigator(AnimatableMonsterEntity owner, World worldIn, float distancemodifier) {
+		super(owner, worldIn);
 		this.distancemodifier = distancemodifier;
+		this.owner = owner;
+		adjustDistanceModifier(owner);
 	}
 
 	private void adjustDistanceModifier(MobEntity entity) {
 		float width = entity.getBbWidth();
 		float height = entity.getBbHeight();
 
-		if (width > 2.0F || height > 2.0F) this.distancemodifier *= 1.5F; //TODO Arbitrary value moment, but it works here and this code ain't being touched again, soooooo...
+		if (width > 2.0F || height > 2.0F) this.distancemodifier *= 1.5F;
 	}
 
 	@Override
@@ -38,16 +45,22 @@ public class RefinedGroundPathNavigator extends GroundPathNavigator {
 		boolean withinHorizontalRange = dx < this.maxDistanceToWaypoint && dz < this.maxDistanceToWaypoint;
 		boolean withinVerticalRange = dy < 1.0D;
 
-		if ((withinHorizontalRange && withinVerticalRange) || this.hasValidPathType(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(currentPosition)) {
+		if ((withinHorizontalRange && withinVerticalRange) || hasValidPathType(this.path.getNextNode().type) && shouldTargetNextNodeInDirection(currentPosition)) {
 			this.path.advance();
 		}
 
-		this.doStuckDetection(currentPosition);
+		doStuckDetection(currentPosition);
 	}
 
 	@Override
 	protected void doStuckDetection(Vector3d currentPosition) {
+		if (owner.isStuck()) stuckCounter++;
 
+		if (stuckCounter >= 100) {
+			this.stuckCounter = 0;
+			stop();
+			recomputePath();
+		}
 	}
 
 	private boolean shouldTargetNextNodeInDirection(Vector3d currentPosition) {
