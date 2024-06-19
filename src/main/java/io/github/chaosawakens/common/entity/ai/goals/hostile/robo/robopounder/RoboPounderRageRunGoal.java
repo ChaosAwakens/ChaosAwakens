@@ -193,6 +193,8 @@ public class RoboPounderRageRunGoal extends Goal {
 			float maxUpStep = owner.maxUpStep;
 
 			for (BlockPos detectedPos : collisionBlocks) {
+				if (detectedPos == null) continue;
+
 				BlockState detectedState = owner.level.getBlockState(detectedPos);
 
 				if (detectedState.isAir(owner.level, detectedPos)) continue;

@@ -11,9 +11,12 @@ import io.github.chaosawakens.common.entity.creature.land.applecow.AppleCowEntit
 import io.github.chaosawakens.common.entity.misc.CABoatEntity;
 import io.github.chaosawakens.common.entity.neutral.land.dino.DimetrodonEntity;
 import io.github.chaosawakens.common.entity.neutral.land.gator.CrystalGatorEntity;
+import io.github.chaosawakens.common.integration.top.elements.AnimMetadataElement;
 import io.github.chaosawakens.common.registry.CABlocks;
 import mcjty.theoneprobe.Tools;
 import mcjty.theoneprobe.api.*;
+import mcjty.theoneprobe.apiimpl.styles.EntityStyle;
+import mcjty.theoneprobe.config.Config;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -31,8 +34,12 @@ public class TheOneProbePlugin {
 	}
 
 	public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
+		public static int ANIM_METADATA_ID;
+
 		@Override
 		public Void apply(ITheOneProbe iTheOneProbe) {
+			ANIM_METADATA_ID = iTheOneProbe.registerElementFactory(AnimMetadataElement::new);
+
 			iTheOneProbe.registerBlockDisplayOverride((probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData) -> {
 				if (blockState.getBlock() instanceof CAEntityTrapOreBlock) {
 					if (blockState.is(CABlocks.RED_ANT_INFESTED_ORE.get())) {
@@ -72,7 +79,7 @@ public class TheOneProbePlugin {
 					String unformattedName = TextFormatting.stripFormatting(entity.getName().getString());
 					
 					if ("Froakie".equalsIgnoreCase(unformattedName)) iProbeInfo.text(CompoundText.createLabelInfo("Special Frog Species: ", "Blue"));
-					
+
 					if (entity instanceof AppleCowEntity) {
 						int type = ((AppleCowEntity) entity).getAppleCowType();
 						switch (type) {
@@ -223,6 +230,19 @@ public class TheOneProbePlugin {
 					}
 				}
 			});
+
+			iTheOneProbe.registerEntityDisplayOverride((probeMode, iProbeInfo, playerEntity, world, entity, iProbeHitEntityData) -> {
+                if (entity instanceof IAnimatableEntity) {
+					String modName = Tools.getModName(entity.getType());
+					if (Tools.show(probeMode, Config.getRealConfig().getShowModName())) {
+						iProbeInfo.horizontal().element(new AnimMetadataElement(entity, new EntityStyle())).vertical().text(CompoundText.create().name(entity.getName())).text(CompoundText.create().style(TextStyleClass.MODNAME).text(modName));
+					} else {
+						iProbeInfo.horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).element(new AnimMetadataElement(entity, new EntityStyle())).text(CompoundText.create().name(entity.getName()));
+					}
+					return true;
+                }
+                return false;
+            });
 			return null;
 		}
 	}

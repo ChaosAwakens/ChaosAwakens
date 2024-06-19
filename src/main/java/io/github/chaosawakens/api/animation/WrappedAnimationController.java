@@ -117,7 +117,7 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public void stopAnimation(IAnimationBuilder targetAnim) {
-		targetAnim.stopAnimation();
+		if (targetAnim != null) targetAnim.stopAnimation();
 		
 		this.animationProgress = 0;
 		this.curAnimLoopType = EDefaultLoopTypes.PLAY_ONCE;
