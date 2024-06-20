@@ -3,7 +3,6 @@ package io.github.chaosawakens.manager;
 import io.github.chaosawakens.common.integration.jade.CAJadePlugin;
 import io.github.chaosawakens.common.integration.jer.CAJER;
 import io.github.chaosawakens.common.integration.top.TheOneProbePlugin;
-import jeresources.JEResources;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
