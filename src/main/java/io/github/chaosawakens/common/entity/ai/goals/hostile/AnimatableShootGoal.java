@@ -52,7 +52,7 @@ public class AnimatableShootGoal extends Goal {
 	@Override
 	public boolean canContinueToUse() {
 		LivingEntity target = this.owner.getTarget();
-		return ObjectUtil.performNullityChecks(false, target) && !owner.isDeadOrDying()
+		return ObjectUtil.performNullityChecks(false, owner, target) && !owner.isDeadOrDying()
 				&& !this.shootAnim.get().hasAnimationFinished();
 	}
 

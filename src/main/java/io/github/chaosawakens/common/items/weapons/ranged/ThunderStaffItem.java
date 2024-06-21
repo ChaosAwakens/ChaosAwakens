@@ -23,13 +23,7 @@ public class ThunderStaffItem extends Item {
 
 		if (!(worldIn instanceof ServerWorld)) return new ActionResult<>(ActionResultType.PASS, heldStack);
 
-		float xA = -MathHelper.sin(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
-		float yA = -MathHelper.sin(playerIn.xRot * ((float) Math.PI / 180F));
-		float zA = MathHelper.cos(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
-
-		ThunderStaffProjectileEntity projectile = new ThunderStaffProjectileEntity(worldIn, playerIn, xA, yA, zA);
-		projectile.setPos(playerIn.getX(), playerIn.getY() + 1.5, playerIn.getZ());
-		projectile.shootFromRotation(projectile, playerIn.xRot, playerIn.yHeadRot, 0, 1F, 0);
+		ThunderStaffProjectileEntity projectile = getThunderStaffProjectileEntity(worldIn, playerIn);
 
 		if (!playerIn.isCreative()) heldStack.hurtAndBreak(1, playerIn, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 
@@ -38,5 +32,16 @@ public class ThunderStaffItem extends Item {
 
 		playerIn.awardStat(Stats.ITEM_USED.get(this));
 		return new ActionResult<>(ActionResultType.SUCCESS, heldStack);
+	}
+
+	private static ThunderStaffProjectileEntity getThunderStaffProjectileEntity(World worldIn, PlayerEntity playerIn) {
+		float xA = -MathHelper.sin(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
+		float yA = -MathHelper.sin(playerIn.xRot * ((float) Math.PI / 180F));
+		float zA = MathHelper.cos(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
+
+		ThunderStaffProjectileEntity projectile = new ThunderStaffProjectileEntity(worldIn, playerIn, xA, yA, zA);
+		projectile.setPos(playerIn.getX(), playerIn.getY() + 1.5, playerIn.getZ());
+		projectile.shootFromRotation(projectile, playerIn.xRot, playerIn.yHeadRot, 0, 1F, 0);
+		return projectile;
 	}
 }

@@ -33,13 +33,7 @@ public class RayGunItem extends Item {
 
 		if (worldIn.isClientSide) return new ActionResult<>(ActionResultType.PASS, heldStack);
 
-		float xA = -MathHelper.sin(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
-		float yA = -MathHelper.sin(playerIn.xRot * ((float) Math.PI / 180F));
-		float zA = MathHelper.cos(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
-
-		RayGunProjectileEntity projectile = new RayGunProjectileEntity(worldIn, playerIn, xA, yA, zA);
-		projectile.setPos(playerIn.getX(), playerIn.getY() + 1.5, playerIn.getZ());
-		projectile.shootFromRotation(projectile, playerIn.xRot, playerIn.yHeadRot, 0, 1F, 0);
+		RayGunProjectileEntity projectile = getRayGunProjectileEntity(worldIn, playerIn);
 
 		if (!playerIn.isCreative()) heldStack.hurtAndBreak(1, playerIn, (entity) -> entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 
@@ -48,5 +42,16 @@ public class RayGunItem extends Item {
 
 		playerIn.awardStat(Stats.ITEM_USED.get(this));
 		return new ActionResult<>(ActionResultType.SUCCESS, heldStack);
+	}
+
+	private static RayGunProjectileEntity getRayGunProjectileEntity(World worldIn, PlayerEntity playerIn) {
+		float xA = -MathHelper.sin(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
+		float yA = -MathHelper.sin(playerIn.xRot * ((float) Math.PI / 180F));
+		float zA = MathHelper.cos(playerIn.yHeadRot * ((float) Math.PI / 180F)) * MathHelper.cos(playerIn.xRot * ((float) Math.PI / 180F));
+
+		RayGunProjectileEntity projectile = new RayGunProjectileEntity(worldIn, playerIn, xA, yA, zA);
+		projectile.setPos(playerIn.getX(), playerIn.getY() + 1.5, playerIn.getZ());
+		projectile.shootFromRotation(projectile, playerIn.xRot, playerIn.yHeadRot, 0, 1F, 0);
+		return projectile;
 	}
 }
