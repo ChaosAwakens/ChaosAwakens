@@ -18,12 +18,11 @@ public abstract class AnimatableMovableGoal extends AnimatableGoal {
 		if (target == null) return false;
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;
-			goal.path = attacker.getNavigation().createPath(target,2);
-			
+
 			if (attacker instanceof AnimatableMonsterEntity) {
-				return attacker.getSensing().canSee(target) && goal.path != null && !((AnimatableMonsterEntity) attacker).isAttacking() && !((AnimatableMonsterEntity) attacker).isOnAttackCooldown() && attacker.distanceTo(target) > ((AnimatableMonsterEntity) attacker).getMeleeAttackReach();
+				return attacker.getSensing().canSee(target) && !((AnimatableMonsterEntity) attacker).isAttacking() && !((AnimatableMonsterEntity) attacker).isOnAttackCooldown() && attacker.distanceTo(target) > ((AnimatableMonsterEntity) attacker).getMeleeAttackReach();
 			}
-			else return attacker.getSensing().canSee(target) && goal.path != null;
+			else return attacker.getSensing().canSee(target);
 		}
 		return false;
 	}
@@ -33,8 +32,7 @@ public abstract class AnimatableMovableGoal extends AnimatableGoal {
 		if (target.isAlive() && !target.isSpectator()) {
 			if (target instanceof PlayerEntity && ((PlayerEntity) target).isCreative()) return false;
 			double distance = goal.entity.distanceToSqr(target.getX(), target.getY(), target.getZ());
-			goal.path = attacker.getNavigation().createPath(target, 0);
-			return attacker.getSensing().canSee(target) && distance >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget()) && goal.path != null;
+			return attacker.getSensing().canSee(target) && distance >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget());
 		}
 		return false;
 	}

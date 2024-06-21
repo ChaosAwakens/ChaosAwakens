@@ -144,7 +144,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			}
 			
 			if (targetRageRunPos != null) {				
-				rageRunPath = ownerPathNav.createPath(targetRageRunPos, 0);
+				if (rageRunPath == null || !rageRunPath.canReach()) rageRunPath = ownerPathNav.createPath(targetRageRunPos, 0);
 				relevantLookPos = new Vector3d(targetRageRunPos.getX(), targetRageRunPos.getY() + owner.getEyeY(), targetRageRunPos.getZ());
 			}
 		}

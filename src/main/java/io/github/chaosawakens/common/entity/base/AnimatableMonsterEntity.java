@@ -4,9 +4,7 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.controllers.body.base.SmoothBodyController;
-import io.github.chaosawakens.common.entity.ai.navigation.ground.base.RefinedGroundPathNavigator;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
-import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -24,8 +22,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
@@ -56,6 +54,9 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super(type, worldIn);
 		this.noCulling = true;
 		this.maxUpStep = 1.0F;
+
+		setPathfindingMalus(PathNodeType.WATER, -1.0F);
+		setPathfindingMalus(PathNodeType.LAVA, -1.0F);
 	}
 
 	@Override

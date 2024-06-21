@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableWalkSound;
+import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder.RoboPounderDysonDashGoal;
@@ -128,7 +129,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	protected void registerGoals() {
 		float defaultAttackVoicePitch = getHealth() <= 50.0F ? 1.25F : 1.0F; //TODO Proper updates in goals
 
-/*		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3) {
+		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3) {
 			@Override
 			public boolean canUse() {
 				return super.canUse() && !shouldTaunt();
@@ -138,7 +139,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 			public boolean canContinueToUse() {
 				return super.canContinueToUse() && !shouldTaunt();
 			}
-		}); */
+		});
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 14.2D, 17.3D, 95.0D, 3, 10, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 6).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).soundOnStart(CASoundEvents.ROBO_POUNDER_PISTON_PUNCH, defaultAttackVoicePitch));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 3, 10, (owner) -> EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && EntityUtil.getAllEntitiesAround(owner, 6.0D, 6.0D, 6.0D, 6.0D).size() <= 8).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim).soundOnStart(CASoundEvents.ROBO_POUNDER_SIDE_SWEEP, defaultAttackVoicePitch));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, SWING_ATTACK_ID, 12D, 14D, 245.0D, 5, 50).pickBetweenAnimations(() -> leftSwingAnim, () -> rightSwingAnim).soundOnStart(CASoundEvents.ROBO_POUNDER_SIDE_SWEEP, defaultAttackVoicePitch));
@@ -301,6 +302,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		handleRageRun();
 		handleTaunting();
 		handleIntervalSounds();
+		updatePathNav();
 	}
 
 	private void handleRageRun() {
@@ -327,6 +329,9 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	private void deflectProjectiles(DamageSource hurtSource) {
 		EntityUtil.repelEntitiesOfClass(this, ProjectileEntity.class, getBbWidth(), getBbHeight(), getRageRunDeflectionPower());
+	}
+
+	private void updatePathNav() {
 	}
 
 	private void handleTaunting() {

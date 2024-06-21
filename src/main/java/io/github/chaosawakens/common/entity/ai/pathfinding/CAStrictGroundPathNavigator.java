@@ -2,12 +2,9 @@ package io.github.chaosawakens.common.entity.ai.pathfinding;
 
 import io.github.chaosawakens.api.IUtilityHelper;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.pathfinding.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3i;
@@ -26,35 +23,21 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 	
 	@Override
 	protected PathFinder createPathFinder(int maxNodes) {
-//		this.nodeEvaluator = new CAWalkNodeProcessor();
-//		this.nodeEvaluator.setCanPassDoors(true);
-		return super.createPathFinder(maxNodes);
-	}
-	
-	@Override
-	protected boolean canMoveDirectly(Vector3d startPos, Vector3d endPos, int x, int y, int z) {
-		MobEntity pathEntity = this.mob;
-		Vector3d entityPos = new Vector3d(pathEntity.getX(), pathEntity.getY(), pathEntity.getZ());
-		Vector3d pathEntityTempPos = this.getTempMobPos();
-		final Vector3d center = pathEntityTempPos.add(-pathEntity.getBbWidth() * 0.5F, 0.0F, -pathEntity.getBbWidth() * 0.5F);
-		final Vector3d maxArea = center.add(-pathEntity.getBbWidth(), -pathEntity.getBbHeight(), -pathEntity.getBbWidth());
-		
-		return super.canMoveDirectly(startPos, endPos, x, y, z);
+		this.nodeEvaluator = new WalkNodeProcessor();
+		this.nodeEvaluator.setCanPassDoors(true);
+		return new CAPathFinder(this.nodeEvaluator, maxNodes);
 	}
 	
 	@Override
 	protected void followThePath() {
-		//Extra check
-		if (this.mob.level.isClientSide) return;
 		Path curPath = Objects.requireNonNull(path);
 		
-		Vector3d pathEntityTempPos = this.getTempMobPos();
+		Vector3d pathEntityTempPos = getTempMobPos();
 		
 		MobEntity pathEntity = this.mob;
 		
 		int pathLength = curPath.getNodeCount();
-		int curNodeIndex = curPath.getNextNodeIndex();
-		
+
 		final Vector3d center = pathEntityTempPos.add(-pathEntity.getBbWidth() * 0.5F, 0.0F, -pathEntity.getBbWidth() * 0.5F);
 		final Vector3d maxArea = center.add(-pathEntity.getBbWidth(), -pathEntity.getBbHeight(), -pathEntity.getBbWidth());
 		Vector3d entityPos = new Vector3d(pathEntity.getX(), pathEntity.getY(), pathEntity.getZ());
@@ -66,11 +49,6 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 			}
 		}*/
 		
-		if (curNodeIndex < pathLength) {
-	//		ChaosAwakens.debug("NODECUR", "[Current Node Index]: " + curNodeIndex);
-	//		ChaosAwakens.debug("NODEFINAL", "[Target Node Index]: " + pathLength);
-		}
-		
 	//	ChaosAwakens.debug("SWEEPTHROUGH", "[SweepThrough Return Value]: " + sweepThrough(entityPos, center, maxArea));
 	//	ChaosAwakens.debug("TRYTRUNCATENODES", "[TryTruncateNodes Return Value]: " + tryTruncateNodes(curPath, pathLength, entityPos, center, maxArea));
 	//	ChaosAwakens.debug("CANCUTCORNER", "[CanCutCorner Return Value]: " + mob.canCutCorner(mob.getNavigation().getPath().getNextNode().type));
@@ -81,17 +59,17 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 			}
 		}
 		
-/*		for (int i = 0; i < path.getNodeCount() - 1; i++) {
+	/*	for (int i = 0; i < path.getNodeCount() - 1; i++) {
 			PathPoint node = path.getNode(i);
 			final BlockPos p = node.asBlockPos().below();
 			
 			mob.level.setBlockAndUpdate(p, Blocks.ACACIA_LOG.defaultBlockState());
-		}*/
+		} */
 		
 		
 //		mob.getNavigation().moveTo(curPath, 1);
 //		super.followThePath();
-		this.doStuckDetection(pathEntityTempPos);
+		doStuckDetection(pathEntityTempPos);
 	}
 	
 	protected static int leti(float c, int step) {
@@ -216,27 +194,13 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
                     Vector3i facing = mob.getDirection().getNormal();
                     
                  //   ChaosAwakens.debug("VALUES", "[Trail Edge]: " + trailEdge + " | " + "[Lead Edge I]:" + leadEdgeI);
-                    
-                    PathNodeType below = this.nodeEvaluator.getBlockPathType(this.level, x, y0 - 1, z, this.mob, 1, 1, 1, true, true);
-                    if (below == PathNodeType.WATER || below == PathNodeType.LAVA || below == PathNodeType.OPEN) return false;
-                    
-                    PathNodeType inFrontOf = nodeEvaluator.getBlockPathType(level, x + facing.getX() * 4, y0, z + facing.getZ() * 4, mob, MathHelper.floor(mob.getBbWidth() + 1.0F), MathHelper.floor(mob.getBbHeight() + 1.0F), MathHelper.floor(mob.getBbWidth() + 1.0F), true, true);
-                    if (inFrontOf == PathNodeType.WATER || inFrontOf == PathNodeType.LAVA || inFrontOf == PathNodeType.BLOCKED) return false;
-                    
-                    BlockPos nextNodePos = getPath().getNextNodePos();
-                    PathNodeType inFrontOfNextNodePos = nodeEvaluator.getBlockPathType(level, nextNodePos.getX(), y0, nextNodePos.getZ(), mob, MathHelper.floor(mob.getBbWidth() + 1.0F), MathHelper.floor(mob.getBbHeight() + 1.0F), MathHelper.floor(mob.getBbWidth() + 1.0F), true, true);
-                    if (inFrontOfNextNodePos == PathNodeType.WATER || inFrontOfNextNodePos == PathNodeType.LAVA || inFrontOfNextNodePos == PathNodeType.OPEN || inFrontOfNextNodePos == PathNodeType.BLOCKED) return false;
-                    
-                    PathNodeType around = this.nodeEvaluator.getBlockPathType(this.level, x, y0, z, this.mob, MathHelper.floor(mob.getBbWidth() + 1.0F), MathHelper.floor(mob.getBbHeight() + 1.0F), MathHelper.floor(mob.getBbWidth() + 1.0F), true, true);
-                    if (around == PathNodeType.DAMAGE_FIRE || around == PathNodeType.DANGER_FIRE || around == PathNodeType.DAMAGE_OTHER || around == PathNodeType.WATER || around == PathNodeType.LAVA || around == PathNodeType.OPEN || around == PathNodeType.BLOCKED) return false;
 
-                    PathNodeType in = this.nodeEvaluator.getBlockPathType(this.level, x, y0, z, this.mob, 1, y1 - y0, 1, true, true);
-                    float priority = this.mob.getPathfindingMalus(in);
-                    float prioritya = this.mob.getPathfindingMalus(around);
-                    
-                    if (priority < 0.0F || priority >= 8.0F) return false;
-                    if (prioritya < 0.0F || prioritya >= 8.0F) return false;
-                    if (in == PathNodeType.DAMAGE_FIRE || in == PathNodeType.DANGER_FIRE || in == PathNodeType.DAMAGE_OTHER ||in == PathNodeType.WATER || in == PathNodeType.LAVA || in == PathNodeType.OPEN) return false;
+					PathNodeType below = this.nodeEvaluator.getBlockPathType(this.level, x, y0 - 1, z);
+					if (below == PathNodeType.WATER || below == PathNodeType.LAVA || below == PathNodeType.OPEN) return false;
+					PathNodeType in = this.nodeEvaluator.getBlockPathType(this.level, x, y0, z);
+					float priority = this.mob.getPathfindingMalus(in);
+					if (priority < 0.0F || priority >= 8.0F) return false;
+					if (in == PathNodeType.DAMAGE_FIRE || in == PathNodeType.DANGER_FIRE || in == PathNodeType.DAMAGE_OTHER) return false;
                 }
             }
         } while (l <= ml);
@@ -349,47 +313,5 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 		
 		return true;
 	}*/
-	
-	public BlockPos findLandPosY(BlockPos start) {
-		while (!mob.level.getBlockState(start).isSolidRender(level, start)) {
-			start = start.above();
-		}
-		
-		if (start.getY() > 255 && !mob.level.getBlockState(start).isSolidRender(level, start)) {
-			while (true) {
-				start = start.below();
-			}
-		}
-		
-		return start;
-	}
-	
-	public BlockPos findNearestBedrock(BlockPos start) {
-		while (!mob.level.getBlockState(start).getBlock().is(Blocks.BEDROCK)) {
-			start = start.below();
-		}
-		
-		if (start.getY() < 0 && !mob.level.getBlockState(start).getBlock().is(Blocks.BEDROCK)) {
-			// This should be called every tick, anyway
-	//		while (true) {
-				start = start.above();
-		//	}
-		}
-		
-		return start;
-	}
-	
-	private BlockPos findValidLandPos(BlockPos origin) {
-		BlockPos.Mutable temp = new Mutable();
-		Vector3d nullPosTest = RandomPositionGenerator.getLandPos(null, 10, 10);
-		
-		// TODO Add the actual functionality of this, which will be called in an updated version of sweepThrough() and tryTruncateNodes()
-		// In the meantime, a slightly modified version of some other AI code made by Bob Mowzie will suffice as a temporary
-		// placeholder.
-		
-		// Copy the position into a final BlockPos variable, to prevent it from changing further
-		final BlockPos finalPos = temp;
-		return finalPos;
-	}
 	
 }

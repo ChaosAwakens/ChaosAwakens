@@ -49,7 +49,7 @@ public final class BlockPosUtil {
 		
 		if (!positionsToDestroy.isEmpty()) {
 			BlockPos.betweenClosed(x1, y1, z1, x2, y2, z2).forEach((targetPos) -> {
-				if (targetPos != null) {
+				if (targetPos != null && !targetWorld.getBlockState(targetPos).isAir(targetWorld, targetPos) && (targetWorld.getFluidState(targetPos) == null || targetWorld.getFluidState(targetPos).isEmpty())) {
 					BlockState targetState = targetWorld.getBlockState(targetPos);
 					Block targetBlock = targetState.getBlock();
 					
