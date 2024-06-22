@@ -17,6 +17,7 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -159,7 +160,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		if ((ownerPathNav.isDone() || (relevantLookPos != null && owner.distanceToSqr(relevantLookPos) <= 15.0D)) && isPathingRageRun) this.isPathingRageRun = false;
 		
-		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0) {
+		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0 || (owner.getNavigation().isStuck())) {
 			owner.stopAnimation(rageRunAnim.get());
 			owner.playAnimation(rageCooldownAnim.get(), true);
 		}
@@ -191,7 +192,8 @@ public class RoboPounderRageRunGoal extends Goal {
 	
 	private void handleRageCrash() {
 		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.round(owner.getBoundingBox().minX), (int) Math.round(owner.getBoundingBox().minY) + 1, (int) Math.round(owner.getBoundingBox().minZ), (int) Math.round(owner.getBoundingBox().maxX), (int) Math.round(owner.getBoundingBox().maxY), (int) Math.round(owner.getBoundingBox().maxZ));
-		
+
+		if (owner.fluidOnEyes != null) this.foundCrashCollision = true;
 		if (owner.horizontalCollision) {
 			float maxUpStep = owner.maxUpStep;
 

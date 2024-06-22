@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
@@ -15,6 +16,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -40,6 +42,10 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 
 	public RoboLaserEntity(EntityType<? extends RoboLaserEntity> type, World level) {
 		super(type, level);
+	}
+
+	public RoboLaserEntity(World pLevel, LivingEntity pShooter) {
+		this(pLevel, pShooter, pShooter.getX(), pShooter.getEyeY() + 0.1D, pShooter.getZ());
 	}
 
 	public RoboLaserEntity(World pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
@@ -132,6 +138,13 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 
 			remove();
 		}
+	}
+
+	@Override
+	protected void onHitEntity(EntityRayTraceResult pResult) {
+		Entity target = pResult.getEntity();
+
+		if (target != null && target.isAlive()) target.hurt(DamageSource.indirectMobAttack(this, (LivingEntity) getOwner()), 15.0F);
 	}
 
 	@Override

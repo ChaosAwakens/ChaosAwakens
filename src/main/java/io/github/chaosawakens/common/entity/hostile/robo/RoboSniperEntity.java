@@ -52,17 +52,17 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		LivingEntity target = owner.getTarget();
 		World world = owner.level;
 		Vector3d viewVec = owner.getViewVector(1.0F);
-		double xOffset = target.getX() - (owner.getX() + viewVec.x * offset.x());
-		double yOffset = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
-		double zOffset = target.getZ() - (owner.getZ() + viewVec.z * offset.z());
+		float xOffset = (float) (target.getX() - (owner.getX() + viewVec.x * offset.x()));
+		float yOffset = (float) (target.getY(0.5D) - (offset.y() + owner.getY(0.5D)));
+		float zOffset = (float) (target.getZ() - (owner.getZ() + viewVec.z * offset.z()));
 
-		RoboLaserEntity laser = new RoboLaserEntity(world, owner, xOffset, yOffset, zOffset);
+		RoboLaserEntity laser = new RoboLaserEntity(world, owner);
 
-		laser.setPos(owner.getX() + viewVec.x * offset.x(), owner.getY(0.5D) + offset.y(), owner.getZ() + viewVec.z * offset.z());
+		laser.setOwner(owner);
 		laser.setExplosive(true);
 		laser.setExplosionMode(Explosion.Mode.BREAK);
-		laser.xPower = 2;
-		laser.zPower = 2;
+
+		laser.shootFromRotation(owner, owner.xRot, owner.yRot, 0.0F, 2.5F, 1.0F);
 
 		return laser;
 	};
@@ -70,16 +70,16 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		LivingEntity target = owner.getTarget();
 		World world = owner.level;
 		Vector3d viewVec = owner.getViewVector(1.0F);
-		double xOffset = target.getX() - (owner.getX() + viewVec.x * offset.x());
-		double yOffset = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
-		double zOffset = target.getZ() - (owner.getZ() + viewVec.z * offset.z());
+		float xOffset = (float) (target.getX() - (owner.getX() + viewVec.x * offset.x()));
+		float yOffset = (float) (target.getY(0.5D) - (offset.y() + owner.getY(0.5D)));
+		float zOffset = (float) (target.getZ() - (owner.getZ() + viewVec.z * offset.z()));
 
-		RoboLaserEntity laser = new RoboLaserEntity(world, owner, xOffset, yOffset, zOffset);
+		RoboLaserEntity laser = new RoboLaserEntity(world, owner);
 
-		laser.setPos(owner.getX() + viewVec.x * offset.x(), owner.getY(0.5D) + offset.y(), owner.getZ() + viewVec.z * offset.z());
+		laser.setOwner(owner);
 		laser.setExplosive(false);
-		laser.xPower = 2;
-		laser.zPower = 2;
+
+		laser.shootFromRotation(owner, owner.xRot, owner.yRot, 0.0F, 2.5F, 1.0F);
 
 		return laser;
 	};
@@ -137,9 +137,9 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, false));
-		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 16f, 1.0f, 1.5f));
-		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, IronGolemEntity.class, 16f, 1.0f, 1.5f));
-		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, AnimalEntity.class, 16f, 1.0f, 1.5f));
+		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 16f, 1.0f, 1.8f));
+		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, IronGolemEntity.class, 16f, 1.0f, 1.8f));
+		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, AnimalEntity.class, 16f, 1.0f, 1.8f));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 	}
 	

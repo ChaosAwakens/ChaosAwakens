@@ -386,7 +386,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public boolean canSee(Entity pEntity) {
-		return MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= getFollowRange() / 4;
+		return MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && super.canSee(pEntity);
 	}
 
 	@Override
