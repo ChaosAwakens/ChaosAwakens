@@ -19,6 +19,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -50,13 +51,12 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickEmpty;
 import net.minecraftforge.event.world.BlockEvent.BlockToolInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
@@ -282,6 +282,15 @@ public class CACommonMiscEvents {
 			else if (event.getState().is(CATags.Blocks.TERRA_PRETA)) event.setFinalState(CABlocks.TERRA_PRETA_FARMLAND.get().defaultBlockState());
 		}
 	}
+
+	@SubscribeEvent
+	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+		LivingEntity target = event.getEntityLiving();
+
+		if (target != null && target instanceof MobEntity && !target.isDeadOrDying() && target.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) {
+		//	((MobEntity) target).getNavigation().stop(); //TODO For 0.13.x.x+
+		}
+	}
 	
 	@SubscribeEvent
 	public static void onLivingKnockbackEvent(LivingKnockBackEvent event) {
@@ -328,71 +337,65 @@ public class CACommonMiscEvents {
 	// Account for paralysis actually taking full effect
 	@SubscribeEvent
 	public static void onLivingJumpEvent(LivingJumpEvent event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getEntityLiving().isDeadOrDying() && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void onPlayerBreakSpeedEvent(PlayerEvent.BreakSpeed event) {
+		if (event.isCancelable() && !event.getPlayer().isDeadOrDying() && event.getPlayer().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
 	public static void onPlayerInteractEvent(PlayerInteractEvent event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getPlayer().isDeadOrDying() && event.getPlayer().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
 	public static void onLivingAttackEntityEvent(AttackEntityEvent event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getPlayer().isDeadOrDying() && event.getPlayer().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
 	public static void onLivingUseItemEvent(LivingEntityUseItemEvent event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getEntityLiving().isDeadOrDying() && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
 	public static void onLivingBlockPlaceEvent(EntityPlaceEvent event) {
 		if (event.getEntity() instanceof LivingEntity) {
-			if (event.isCancelable() && ((LivingEntity) event.getEntity()) instanceof PlayerEntity && ((LivingEntity) event.getEntity()).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+			if (event.isCancelable() && !((LivingEntity) event.getEntity()).isDeadOrDying() && ((LivingEntity) event.getEntity()).hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 		}
 	}
 	
 	@SubscribeEvent
 	public static void onBucketFillEvent(FillBucketEvent event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getPlayer().isDeadOrDying() && event.getPlayer().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
 	public static void onPlayerItemPickupEvent(ItemPickupEvent event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
-	}
-	
-	// Client side events to prevent the player/entity from swinging their hand or interacting while paralyzed
-	@SubscribeEvent
-	public static void onPlayerLeftClickInteractEmptyEvent(LeftClickEmpty event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
-	}
-
-	@SubscribeEvent
-	public static void onPlayerRightClickInteractEmptyEvent(RightClickEmpty event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getPlayer().isDeadOrDying() && event.getPlayer().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 
 	@SubscribeEvent
 	public static void onPlayerLeftClickInteractBlockEvent(LeftClickBlock event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getPlayer().isDeadOrDying() && event.getPlayer().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 
 	@SubscribeEvent
 	public static void onPlayerRightClickInteractBlockEvent(RightClickBlock event) {
-		if (event.isCancelable() && event.getEntityLiving() instanceof PlayerEntity && event.getEntityLiving().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
+		if (event.isCancelable() && !event.getPlayer().isDeadOrDying() && event.getPlayer().hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
 	public static void onPlayerCommand(CommandEvent event) throws CommandSyntaxException {
 		String command = event.getParseResults().getReader().getString();
-		Entity e = event.getParseResults().getContext().getSource().getEntity();
-		if (e != null && "chaosawakens".equals(e.level.dimension().location().getNamespace())
-				&& command.contains("/weather")) {
+		Entity commandSender = event.getParseResults().getContext().getSource().getEntity();
+
+		if (commandSender != null && "chaosawakens".equals(commandSender.level.dimension().location().getNamespace()) && command.contains("/weather")) {
 			event.setParseResults(event.getParseResults().getContext().getDispatcher()
-					.parse("execute in minecraft:overworld run ".concat(
-							command.substring(1)), event.getParseResults().getContext().getSource()));
+					.parse("execute in minecraft:overworld run "
+							.concat(command.substring(1)), event.getParseResults().getContext().getSource()));
 		}
 	}
 }

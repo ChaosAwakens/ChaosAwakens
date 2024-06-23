@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.BlockPosUtil;
@@ -193,8 +194,8 @@ public class RoboPounderRageRunGoal extends Goal {
 	private void handleRageCrash() {
 		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.round(owner.getBoundingBox().minX), (int) Math.round(owner.getBoundingBox().minY) + 1, (int) Math.round(owner.getBoundingBox().minZ), (int) Math.round(owner.getBoundingBox().maxX), (int) Math.round(owner.getBoundingBox().maxY), (int) Math.round(owner.getBoundingBox().maxZ));
 
-		if (owner.fluidOnEyes != null) this.foundCrashCollision = true;
-		if (owner.horizontalCollision) {
+		if (owner.fluidOnEyes != null || owner.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) this.foundCrashCollision = true;
+		else if (owner.horizontalCollision) {
 			float maxUpStep = owner.maxUpStep;
 
 			for (BlockPos detectedPos : collisionBlocks) {

@@ -1,17 +1,21 @@
 package io.github.chaosawakens.client.events;
 
+import com.google.common.collect.Lists;
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.IUtilityHelper;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.registry.CADimensions;
+import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.manager.CAConfigManager;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.ClientLanguageMap;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -22,14 +26,12 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.RenderBlockOverlayEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class CAClientMiscEvents {
@@ -151,7 +153,7 @@ public class CAClientMiscEvents {
 	}
 
 	@SubscribeEvent
-	public static void onToolTipEvent(ItemTooltipEvent event) {
+	public static void onItemToolTipEvent(ItemTooltipEvent event) {
 		if (event.getPlayer() == null) return;
 		if (CAConfigManager.MAIN_CLIENT.enableTooltips.get()) {
 			final ItemStack targetStack = event.getItemStack();
@@ -276,5 +278,42 @@ public class CAClientMiscEvents {
 				}
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public static void onKeyInputEvent(InputEvent.KeyInputEvent event) {
+		boolean validCanelableInput = Minecraft.getInstance().options.keyAttack.matches(event.getKey(), event.getScanCode()) || Minecraft.getInstance().options.keyJump.matches(event.getKey(), event.getScanCode())
+				|| Minecraft.getInstance().options.keyShift.matches(event.getKey(), event.getScanCode()) || Minecraft.getInstance().options.keyUse.matches(event.getKey(), event.getScanCode())
+				|| Minecraft.getInstance().options.keyPickItem.matches(event.getKey(), event.getScanCode()) || Minecraft.getInstance().options.keySprint.matches(event.getKey(), event.getScanCode())
+				|| Minecraft.getInstance().options.keyUp.matches(event.getKey(), event.getScanCode()) || Minecraft.getInstance().options.keyDown.matches(event.getKey(), event.getScanCode())
+				|| Minecraft.getInstance().options.keyLeft.matches(event.getKey(), event.getScanCode()) || Minecraft.getInstance().options.keyRight.matches(event.getKey(), event.getScanCode())
+				|| Minecraft.getInstance().options.keyDrop.matches(event.getKey(), event.getScanCode()); //TODO Redo this but better (:tm:)
+		ObjectArrayList<KeyBinding> validCancelableInputList = new ObjectArrayList<>();
+
+		validCancelableInputList.addAll(Lists.newArrayList(Minecraft.getInstance().options.keyAttack, Minecraft.getInstance().options.keyJump, Minecraft.getInstance().options.keyShift, Minecraft.getInstance().options.keyUse, Minecraft.getInstance().options.keyPickItem, Minecraft.getInstance().options.keySprint, Minecraft.getInstance().options.keyUp, Minecraft.getInstance().options.keyDown, Minecraft.getInstance().options.keyLeft, Minecraft.getInstance().options.keyRight, Minecraft.getInstance().options.keyDrop));
+		@Nullable
+		PlayerEntity player = Minecraft.getInstance().player;
+		boolean cancel = player != null && !player.isDeadOrDying() && player.hasEffect(CAEffects.PARALYSIS_EFFECT.get()) && validCanelableInput;
+
+		if (cancel) validCancelableInputList.forEach(key -> key.setDown(false));
+	}
+
+	@SubscribeEvent
+	public static void onClickInputEvent(InputEvent.ClickInputEvent event) {
+		@Nullable
+		PlayerEntity player = Minecraft.getInstance().player;
+
+		if (event.isCancelable() && player != null && !player.isDeadOrDying() && player.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) {
+			event.setSwingHand(false);
+			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onMouseScrollEvent(InputEvent.MouseScrollEvent event) {
+		@Nullable
+		PlayerEntity player = Minecraft.getInstance().player;
+
+		if (event.isCancelable() && player != null && !player.isDeadOrDying() && player.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) event.setCanceled(true);
 	}
 }
