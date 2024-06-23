@@ -7,11 +7,17 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.command.arguments.EntityAnchorArgument;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
@@ -27,11 +33,16 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	public static final String ROBO_LASER_MDF_NAME = "robo_sniper_laser";
-	private boolean hit;
+	private boolean hit = false;
+	private boolean isDying = false;
+	private float damagePower;
+	private float explosivePower;
+	private boolean canCauseFire = false;
+	private Vector3d targetPos;
 	
 	public RoboLaserEntity(EntityType<? extends RoboLaserEntity> type, World level) {
-	      super(type, level);
-	   }
+		super(type, level);
+	}
 	
 	public RoboLaserEntity(World pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
 		super(CAEntityTypes.ROBO_LASER.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
@@ -41,21 +52,47 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	public void tick() {
 		tickAnims();
 		super.tick();
-		if(hit) {
-			stopAnimation(getIdleAnim());
-			playAnimation(getDeathAnim(), true);
+		if (hit) {
+			if (!this.isDying) {
+				stopAnimation(getIdleAnim());
+				playAnimation(getDeathAnim(), true);
+				this.isDying = true;
+			}
+			playAnimation(deathAnim, false);
+			this.setDeltaMovement(0, 0, 0);
 		}
 		else
-			playAnimation(getIdleAnim(), true);
-		ChaosAwakens.debug("LASER", this.mainController.getCurrentAnimation() != null ?
-				this.mainController.getCurrentAnimation().animationName : "null");
-//		if(deathAnim.hasAnimationFinished())
-//			this.remove();
+			playAnimation(getIdleAnim(), true);	
+		if(getMainWrappedController().isAnimationFinished(deathAnim)) {
+			this.remove();
+		}
 	}
 	
 	protected void onHit(RayTraceResult result) {
 		super.onHit(result);
 		hit = true;
+		if(!this.level.isClientSide() && explosivePower > 0) {
+			boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+			level.explode((Entity)null, this.getX(), this.getY(), this.getZ(), explosivePower, canCauseFire,
+					flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+		}
+	}
+	
+	@Override
+	protected void onHitEntity(EntityRayTraceResult pResult) {
+		Entity entity = pResult.getEntity();
+		entity.hurt(DamageSource.thrown(this, this.getOwner()), damagePower);
+	}
+	
+	public void setPower(float damagePower, float explosivePower, boolean canCauseFire) {
+		this.damagePower = damagePower;
+		this.explosivePower = explosivePower;
+		this.canCauseFire = canCauseFire;
+	}
+	
+	@Override
+	protected boolean shouldBurn() {
+		return true;
 	}
 
 	@Override

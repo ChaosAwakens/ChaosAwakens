@@ -2,6 +2,8 @@ package io.github.chaosawakens.common.entity.hostile.robo;
 
 import java.util.function.BiFunction;
 
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -11,6 +13,7 @@ import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.registry.CATeams;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.command.arguments.EntityAnchorArgument;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -26,6 +29,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -33,8 +37,6 @@ import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nullable;
 
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -58,11 +60,11 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		double d2 = target.getX() - (owner.getX() + vector3d.x * offset.x());
 		double d3 = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
 		double d4 = target.getZ() - (owner.getZ() + vector3d.z * offset.z());
-		FireballEntity fireball = new FireballEntity(world, owner, d2, d3, d4);
 		RoboLaserEntity laser = new RoboLaserEntity(world, owner, d2, d3, d4);
-		fireball.explosionPower = 1;
+		laser.setPower(4, 0, false);
 		laser.setPos(owner.getX() + vector3d.x * offset.x(), owner.getY(0.5D) + offset.y(),
-				fireball.getZ() + vector3d.z * offset.z());
+				owner.getZ() + vector3d.z * offset.z());
+		laser.lookAt(EntityAnchorArgument.Type.FEET, target.position());
 		return laser;
 	};
 	private static final Vector3d projecileOffset = new Vector3d(2.0, 0.4, 2.0);
