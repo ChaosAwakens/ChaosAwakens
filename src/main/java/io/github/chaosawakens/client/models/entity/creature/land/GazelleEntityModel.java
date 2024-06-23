@@ -4,7 +4,10 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;
 import net.minecraft.util.ResourceLocation;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
+
+import javax.annotation.Nullable;
 
 public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleEntity> {
 
@@ -32,7 +35,7 @@ public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleE
 
 	@Override
 	protected boolean shouldApplyHeadRot() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -53,5 +56,10 @@ public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleE
 	@Override
 	public IBone getHeadBone() {
 		return getAnimationProcessor().getBone("Head");
+	}
+
+	@Override
+	public void setLivingAnimations(GazelleEntity entity, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
+		super.setLivingAnimations(entity, uniqueID, customPredicate);
 	}
 }

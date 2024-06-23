@@ -3,18 +3,15 @@ package io.github.chaosawakens.manager;
 import io.github.chaosawakens.common.integration.jade.CAJadePlugin;
 import io.github.chaosawakens.common.integration.jer.CAJER;
 import io.github.chaosawakens.common.integration.top.TheOneProbePlugin;
-import jeresources.JEResources;
-import mcjty.theoneprobe.TheOneProbe;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import snownee.jade.Jade;
 
 public class CAModIntegrationManager {
 
 	protected static void registerIntegration(IEventBus modBus, IEventBus forgeBus) {
-		if (checkModPresence(Jade.MODID)) CAJadePlugin.register();
-		if (checkModPresence(TheOneProbe.MODID)) TheOneProbePlugin.register();
+		if (checkModPresence("jade")) CAJadePlugin.register();
+		if (checkModPresence("theoneprobe")) TheOneProbePlugin.register();
 //		if (checkModPresence(IronChests.MODID) || DatagenModLoader.isRunningDataGen()) CAIronChestsPlugin.register();
 
 		handleEvents(modBus, forgeBus);
@@ -27,7 +24,7 @@ public class CAModIntegrationManager {
 	}
 
 	private static void handleCommonSetupModIntegration(final FMLCommonSetupEvent event) {
-		if (checkModPresence(JEResources.ID)) CAJER.register();
+		if (checkModPresence("jeresources")) CAJER.register();
 	}
 
 	public static boolean checkModPresence(String modid) {

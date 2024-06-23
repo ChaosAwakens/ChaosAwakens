@@ -23,7 +23,7 @@ import java.util.*;
 
 @Mixin(value = AnimationController.class, remap = false)
 public abstract class AnimationControllerMixin<T extends IAnimatable> {
-    @Shadow
+/*    @Shadow
     protected T animatable;
     @Shadow
     protected Queue<Animation> animationQueue;
@@ -180,5 +180,5 @@ public abstract class AnimationControllerMixin<T extends IAnimatable> {
                 this.currentAnimation = animationQueue.poll();
             }
         }
-    }
+    }*/
 }

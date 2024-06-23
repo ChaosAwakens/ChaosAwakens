@@ -41,10 +41,11 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<GazelleEntity> mainController = createMainMappedController("gazellemaincontroller");
+	private final WrappedAnimationController<GazelleEntity> grazeController = createMappedController("gazellegrazecontroller", this::grazePredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder grazeAnim = new SingletonAnimationBuilder(this, "Graze", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder grazeAnim = new SingletonAnimationBuilder(this, "Graze", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(grazeController);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT, Items.SUGAR, Blocks.HAY_BLOCK.asItem(), Items.APPLE);
 	public static final String GAZELLE_MDF_NAME = "gazelle";
 
@@ -77,6 +78,10 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
+	}
+
+	public <E extends IAnimatableEntity> PlayState grazePredicate(AnimationEvent<E> event) {
+		return !isPlayingAnimation(grazeAnim) ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	@Override
@@ -214,9 +219,9 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 	
 	@Override
 	protected void handleBaseAnimations() {
-		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
-		if (getWalkAnim() != null && isMoving() && isOnGround() && !isPanicking()) playAnimation(getWalkAnim(), false);
-		if (isMoving() && isOnGround() && isPanicking()) playAnimation(runAnim, false);
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), true);
+		else if (getWalkAnim() != null && isMoving() && isOnGround() && !isPanicking()) playAnimation(getWalkAnim(), false);
+		else if (isMoving() && isOnGround() && isPanicking()) playAnimation(runAnim, false);
 	}
 
 	@SuppressWarnings("unchecked")

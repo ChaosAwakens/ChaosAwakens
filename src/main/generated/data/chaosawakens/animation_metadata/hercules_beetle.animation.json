@@ -2,18 +2,38 @@
   "anim_file_loc": "chaosawakens:animations/boss/insect/hercules_beetle.animation.json",
   "animations": [
     {
-      "animation_name": "Fly",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Munch Attack",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Ram Attack",
-      "animation_length": 1.25,
+      "animation_name": "Roar Defense Mechanism",
+      "animation_length": 4.28,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Fly",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Death (Fallen)",
+      "animation_length": 3.70833,
+      "loop_type": "HOLD_ON_LAST_FRAME"
+    },
+    {
+      "animation_name": "Death (Midair)",
+      "animation_length": 0.91667,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Death",
+      "animation_length": 3.76,
+      "loop_type": "HOLD_ON_LAST_FRAME"
+    },
+    {
+      "animation_name": "Awakened",
+      "animation_length": 7.28,
       "loop_type": "PLAY_ONCE"
     },
     {
@@ -22,18 +42,18 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Walk",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
+      "animation_name": "Ram Attack",
+      "animation_length": 1.25,
+      "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Death (Midair)",
-      "animation_length": 0.91667,
+      "animation_name": "Leap",
+      "animation_length": 2.76,
       "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Body Slam Attack",
-      "animation_length": 2.08,
+      "animation_length": 25.08,
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
@@ -47,24 +67,9 @@
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Leap",
-      "animation_length": 2.76,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Body Slam Attack (Hit)",
-      "animation_length": 5.04,
-      "loop_type": "HOLD_ON_LAST_FRAME"
-    },
-    {
-      "animation_name": "Roar Defense Mechanism",
-      "animation_length": 4.28,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Awakened",
-      "animation_length": 7.28,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Walk",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
     },
     {
       "animation_name": "Idle",
@@ -72,13 +77,8 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Death (Fallen)",
-      "animation_length": 3.70833,
-      "loop_type": "HOLD_ON_LAST_FRAME"
-    },
-    {
-      "animation_name": "Death",
-      "animation_length": 3.76,
+      "animation_name": "Body Slam Attack (Hit)",
+      "animation_length": 5.04,
       "loop_type": "HOLD_ON_LAST_FRAME"
     }
   ]

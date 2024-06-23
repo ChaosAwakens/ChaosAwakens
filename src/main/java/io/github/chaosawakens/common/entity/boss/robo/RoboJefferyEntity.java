@@ -131,8 +131,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 140D, 15.6D, 18.1D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).soundOnStart(CASoundEvents.ROBO_JEFFERY_JEFFERY_PUNCH::get, 1.0F));
 		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 4, 3, 40).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
-		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 260, (owner) -> getRandom().nextInt(23) == 0 && distanceTo(getTarget()) > getMeleeAttackReach(getTarget()) && MathUtil.isBetween(distanceTo(getTarget()), getMeleeAttackReach(getTarget()) + 1, getMeleeAttackReach(getTarget()) * 5)).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
-		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 30, (owner) -> getRandom().nextInt(14) == 0 && MathUtil.isBetween(distanceTo(getTarget()), 0, getMeleeAttackReach(getTarget()) * 5) && getTarget().getMaxHealth() >= 150.0F).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
+		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 260, (owner) -> getRandom().nextInt(23) == 0 && distanceTo(getTarget()) > getMeleeAttackReach() && MathUtil.isBetween(distanceTo(getTarget()), getMeleeAttackReach() + 1, getMeleeAttackReach() * 5)).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
+		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 30, (owner) -> getRandom().nextInt(14) == 0 && MathUtil.isBetween(distanceTo(getTarget()), 0, getMeleeAttackReach() * 5) && getTarget().getMaxHealth() >= 150.0F).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
 		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 1.37345D, 25.0D, (owner) -> getRandom().nextInt(17) == 0).setLandAction((affectedTarget) -> {
 			if (!(affectedTarget instanceof RoboJefferyEntity) && !affectedTarget.isAlliedTo(this)) {
 				affectedTarget.hurt(DamageSource.mobAttack(this), 50.0F / distanceTo(affectedTarget));
@@ -192,6 +192,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		if (!isOnGround() && getAttackID() == LEAP_ATTACK_ID) return;
 		else {
 			super.tickDeath();
+
+			boolean hasDropped = false; // Failsafe for server lag
 			
 			if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 29, 77)) CAScreenShakeEntity.shakeScreen(level, position(), 560F, (float) (deathAnim.getWrappedAnimProgress() / 100F) / 6, 2, 410);
 			
@@ -213,7 +215,10 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				
 				if (!level.isClientSide) level.addFreshEntity(deathHitBox);
 
-				EntityUtil.spawnItemWithMotion(this, CAItems.JEFFERY_CORE.get().getDefaultInstance(), new Vector3d(0, 1, 0));
+				if (!hasDropped) {
+					EntityUtil.spawnItemWithMotion(this, CAItems.JEFFERY_CORE.get().getDefaultInstance(), new Vector3d(0, 1, 0));
+					hasDropped = true;
+				}
 			}
 
 			if (deathAnim.getWrappedAnimProgress() < 75) EntityUtil.attractEntities(this, 20.0D, 20.0D, 0.08D + (deathAnim.getWrappedAnimProgress() / 1000), false);
@@ -223,8 +228,6 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@Override
 	public void manageAttack(LivingEntity target) {
 		switch (getAttackID()) {
-		default:
-			break;
 		case SMASH_ATTACK_ID:
 			if (target instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) target, 400);
 			break;
@@ -232,8 +235,8 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	}
 	
 	@Override
-	public float getMeleeAttackReach(LivingEntity target) {
-		return super.getMeleeAttackReach(target) * 0.8F;
+	public float getMeleeAttackReach() {
+		return super.getMeleeAttackReach() * 0.88F;
 	}
 
 	@Override

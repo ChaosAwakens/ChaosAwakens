@@ -49,7 +49,7 @@ public class AnimatableFlyingAttackGoal extends Goal {
         if (curCooldown > 0) curCooldown--;
 
         return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !Objects.requireNonNull(owner.getTarget()).isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-                && owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReach(owner.getTarget())
+                && owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReach()
                 && (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
     }
 
@@ -93,7 +93,7 @@ public class AnimatableFlyingAttackGoal extends Goal {
 
         if (!ObjectUtil.performNullityChecks(false, target)) return;
 
-        double reach = owner.getMeleeAttackReach(target);
+        double reach = owner.getMeleeAttackReach();
         List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
         if (curAnim.get().getWrappedAnimProgress() <= actionPointTickStart) {

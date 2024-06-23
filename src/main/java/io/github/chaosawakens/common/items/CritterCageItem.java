@@ -75,7 +75,7 @@ public class CritterCageItem extends Item {
 		if (target instanceof PlayerEntity || !target.isAlive()) return false;
 		if (containsEntity(targetStack)) return false;
 		if (isBlacklisted(target.getType())) return false;
-		if (target.getBbWidth() >= 2.0F || target.getBbHeight() >= 3.125F) return false; //Ent size or higher
+		if (target.getBbWidth() >= 3.35F || target.getBbHeight() >= 4.225F) return false; // Ent size or larger
 		
 		CompoundNBT critterCageData = new CompoundNBT();
 		
@@ -147,7 +147,7 @@ public class CritterCageItem extends Item {
 			if (CAConfigManager.MAIN_CLIENT.enableCritterCageMobHealthToolTip.get()) tooltip.add(new StringTextComponent("Health: " + targetStack.getTag().getFloat("Health") + "/" + targetStack.getTag().getDouble("entityMaxHealth")));
 		//	tooltip.add(new StringTextComponent("Is Baby: " + stack.getTag().getBoolean("isBaby"))); -Unneeded for now --Meme Man
 			if (targetStack.getTag().getBoolean("isVillager")) {				
-				if (target instanceof VillagerEntity) {
+				if (target instanceof VillagerEntity) { //TODO What is this abomination of a switch statement :skullcry:
 					if (CAConfigManager.MAIN_CLIENT.enableCritterCageVillagerProfessionToolTip.get()) tooltip.add(new StringTextComponent("Profession: " + targetStack.getTag().getString("villagerProfession")));
 					if (CAConfigManager.MAIN_CLIENT.enableCritterCageVillagerTradingLevelToolTip.get()) {
 						switch (targetStack.getTag().getInt("villagerTradingLevel")) {

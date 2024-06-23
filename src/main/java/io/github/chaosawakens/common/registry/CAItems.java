@@ -567,7 +567,7 @@ public class CAItems {
 	public static final RegistryObject<CASpawnEggItem> GOLDEN_CARROT_PIG_SPAWN_EGG = ITEMS.register("golden_carrot_pig_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.GOLDEN_CARROT_PIG.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> ENCHANTED_GOLDEN_CARROT_PIG_SPAWN_EGG = ITEMS.register("enchanted_golden_carrot_pig_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.ENCHANTED_GOLDEN_CARROT_PIG.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS), true));
 	public static final RegistryObject<CASpawnEggItem> CRYSTAL_CARROT_PIG_SPAWN_EGG = ITEMS.register("crystal_carrot_pig_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.CRYSTAL_CARROT_PIG.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
-//	public static final RegistryObject<CASpawnEggItem> WASP_SPAWN_EGG = ITEMS.register("wasp_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.WASP.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<CASpawnEggItem> WASP_SPAWN_EGG = ITEMS.register("wasp_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.WASP.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> WHALE_SPAWN_EGG = ITEMS.register("whale_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.WHALE.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 
 	public static final RegistryObject<CASpawnEggItem> GREEN_FISH_SPAWN_EGG = ITEMS.register("green_fish_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.GREEN_FISH.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));

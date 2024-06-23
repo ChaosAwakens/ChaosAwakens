@@ -8,7 +8,6 @@ import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 
 import javax.annotation.Nullable;
@@ -124,7 +123,7 @@ public class AnimatableMeleeGoal extends Goal {
 		if (curCooldown > 0) curCooldown--;
 		
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), attackId) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !owner.getTarget().isInvulnerable() && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReach(owner.getTarget())
+				&& owner.distanceTo(owner.getTarget()) <= owner.getMeleeAttackReach()
 				&& (extraActivationConditions != null ? extraActivationConditions.test(owner) && owner.getRandom().nextInt(probability) == 0 : owner.getRandom().nextInt(probability) == 0);
 	}
 
@@ -170,7 +169,7 @@ public class AnimatableMeleeGoal extends Goal {
 		
 		if (!ObjectUtil.performNullityChecks(false, target)) return;
 		
-		double reach = owner.getMeleeAttackReach(target);
+		double reach = owner.getMeleeAttackReach();
 		List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 
 		if (curAnim.get().getWrappedAnimProgress() <= actionPointTickStart) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);

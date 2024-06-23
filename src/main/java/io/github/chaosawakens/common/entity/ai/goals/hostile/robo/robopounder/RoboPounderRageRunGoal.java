@@ -1,8 +1,10 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.util.BlockPosUtil;
@@ -16,6 +18,7 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -47,6 +50,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	private boolean hasPlayedCrashRestartSound = false;
 	private boolean foundCrashCollision = false;
 	private int targetInterval = 0;
+	private double base = -0.8D;
 
 	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
 		this.owner = owner;
@@ -79,7 +83,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget()) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !owner.getTarget().isInvulnerable()
 				&& owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach(owner.getTarget()) * 5 && owner.distanceTo(owner.getTarget()) <= owner.getFollowRange()
+				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach() * 5 && owner.distanceTo(owner.getTarget()) <= owner.getFollowRange()
 				&& owner.shouldRageRunBasedOnChance() && owner.getRandom().nextInt(probability) == 0;
 	}
 	
@@ -111,6 +115,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		this.hasPlayedCrashRestartSound = false;
 		this.foundCrashCollision = false;
 		this.targetInterval = 0;
+		this.base = -0.8D;
 	}
 	
 	@Override
@@ -141,7 +146,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			}
 			
 			if (targetRageRunPos != null) {				
-				rageRunPath = ownerPathNav.createPath(targetRageRunPos, 0);
+				if (rageRunPath == null || !rageRunPath.canReach()) rageRunPath = ownerPathNav.createPath(targetRageRunPos, 0);
 				relevantLookPos = new Vector3d(targetRageRunPos.getX(), targetRageRunPos.getY() + owner.getEyeY(), targetRageRunPos.getZ());
 			}
 		}
@@ -156,7 +161,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		if ((ownerPathNav.isDone() || (relevantLookPos != null && owner.distanceToSqr(relevantLookPos) <= 15.0D)) && isPathingRageRun) this.isPathingRageRun = false;
 		
-		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0) {
+		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0 || (owner.getNavigation().isStuck())) {
 			owner.stopAnimation(rageRunAnim.get());
 			owner.playAnimation(rageCooldownAnim.get(), true);
 		}
@@ -166,7 +171,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		LivingEntity target = owner.getTarget();
 		
 		if (target != null) {
-			double reach = owner.getMeleeAttackReach(target);
+			double reach = owner.getMeleeAttackReach();
 			List<LivingEntity> potentialAffectedTargets = EntityUtil.getAllEntitiesAround(owner, reach, reach, reach, reach);
 			
 			for (LivingEntity potentialAffectedTarget : potentialAffectedTargets) {
@@ -188,13 +193,19 @@ public class RoboPounderRageRunGoal extends Goal {
 	
 	private void handleRageCrash() {
 		Iterable<BlockPos> collisionBlocks = BlockPos.betweenClosed((int) Math.round(owner.getBoundingBox().minX), (int) Math.round(owner.getBoundingBox().minY) + 1, (int) Math.round(owner.getBoundingBox().minZ), (int) Math.round(owner.getBoundingBox().maxX), (int) Math.round(owner.getBoundingBox().maxY), (int) Math.round(owner.getBoundingBox().maxZ));
-		
-		if (owner.horizontalCollision) {
+
+		if (owner.fluidOnEyes != null || owner.hasEffect(CAEffects.PARALYSIS_EFFECT.get())) this.foundCrashCollision = true;
+		else if (owner.horizontalCollision) {
 			float maxUpStep = owner.maxUpStep;
 
 			for (BlockPos detectedPos : collisionBlocks) {
+				if (detectedPos == null) continue;
+
 				BlockState detectedState = owner.level.getBlockState(detectedPos);
-				double blockHeight = detectedState.getCollisionShape(owner.level, detectedPos).max(Direction.Axis.Y) - owner.getY();
+
+				if (detectedState.isAir(owner.level, detectedPos)) continue;
+
+				double blockHeight = Math.abs(detectedState.getCollisionShape(owner.level, detectedPos).max(Direction.Axis.Y) - owner.getY());
 				
 				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE) && blockHeight > maxUpStep) {
 					this.foundCrashCollision = true;
@@ -269,15 +280,25 @@ public class RoboPounderRageRunGoal extends Goal {
 			owner.getNavigation().stop();
 
 			if (!hasCharged) {
-				EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRageRunFrictionOffset()), 5, 4, 0.035);
+			//	EntityUtil.chargeTowards(owner, BlockPosUtil.findHorizontalPositionBeyond(owner, targetRageRunPos, owner.getRageRunFrictionOffset()), 12.0D, 4.5D, 0.035D);
 
 				if (!hasPlayedCooldownSound) {
 					owner.level.playSound(null, owner.blockPosition(), CASoundEvents.ROBO_POUNDER_RAGE_RUN_COOLDOWN.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
 
 					this.hasPlayedCooldownSound = true;
 				}
+
 				hasCharged = true;
 			}
+
+			double mod = Math.min(owner.getRageRunFrictionOffset() / 250.0D, 0.09D);
+
+			base += mod;
+
+			double xMod = Math.min(base, 0) * Math.cos(Math.toRadians(owner.yRot - 90));
+			double zMod = Math.min(base, 0) * Math.sin(Math.toRadians(owner.yRot - 90));
+
+			owner.setDeltaMovement(xMod, owner.getDeltaMovement().y, zMod);
 		}
 		
 		if (shouldExitCooldown() && !hasExitedCooldown) {

@@ -27,7 +27,10 @@
   "entity.hercules_beetle.awaken": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.awaken",
     "sounds": [
-      "chaosawakens:entity/boss/insect/herculesbeetle/defense/awaken"
+      {
+        "name": "chaosawakens:entity/boss/insect/herculesbeetle/defense/awaken",
+        "attenuation_distance": 64
+      }
     ]
   },
   "entity.hercules_beetle.idle": {
@@ -72,6 +75,24 @@
       "chaosawakens:entity/boss/insect/herculesbeetle/death_midair_fallen"
     ]
   },
+  "entity.hercules_beetle.ram_attack": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.ram_attack",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/attacks/ram_attack"
+    ]
+  },
+  "entity.hercules_beetle.grab": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.grab",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/attacks/grab"
+    ]
+  },
+  "entity.hercules_beetle.munch_attack": {
+    "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.munch_attack",
+    "sounds": [
+      "chaosawakens:entity/boss/insect/herculesbeetle/attacks/munch_attack"
+    ]
+  },
   "entity.hercules_beetle.leap": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.leap",
     "sounds": [
@@ -93,7 +114,10 @@
   "entity.hercules_beetle.roar": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.roar",
     "sounds": [
-      "chaosawakens:entity/boss/insect/herculesbeetle/defense/roar"
+      {
+        "name": "chaosawakens:entity/boss/insect/herculesbeetle/defense/roar",
+        "attenuation_distance": 80
+      }
     ]
   },
   "entity.hercules_beetle.damage_critical": {

@@ -69,6 +69,6 @@ public class HerculesBeetleTickableWalkSound extends AnimatableTickableWalkMonst
     }
 
     public boolean shouldSwitchToFlyingSound() {
-        return animatable.isFlying() && animatable.isPlayingAnimation("Fly") && flySound != null;
+        return animatable.isPlayingAnimation("Fly") && flySound != null;
     }
 }

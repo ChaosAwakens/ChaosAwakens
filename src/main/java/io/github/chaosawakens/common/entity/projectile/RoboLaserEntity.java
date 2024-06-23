@@ -1,22 +1,22 @@
 package io.github.chaosawakens.common.entity.projectile;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.command.arguments.EntityAnchorArgument;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -28,35 +28,35 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimatableEntity {
 	AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboLaserEntity>> roboLaserControllers = new ObjectArrayList<WrappedAnimationController<RoboLaserEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> roboLaserAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> roboLaserAnimations = new ObjectArrayList<IAnimationBuilder>(2);
+	private static final DataParameter<Boolean> HAS_HIT = EntityDataManager.defineId(RoboLaserEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> DYING = EntityDataManager.defineId(RoboLaserEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> CAUSE_FIRE = EntityDataManager.defineId(RoboLaserEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Float> DAMAGE_POWER = EntityDataManager.defineId(RoboLaserEntity.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> EXPLOSIVE_POWER = EntityDataManager.defineId(RoboLaserEntity.class, DataSerializers.FLOAT);
 	private final WrappedAnimationController<RoboLaserEntity> mainController = createMainMappedController("robolasermaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE);
 	public static final String ROBO_LASER_MDF_NAME = "robo_sniper_laser";
-	private boolean hit = false;
-	private boolean isDying = false;
-	private float damagePower;
-	private float explosivePower;
-	private boolean canCauseFire = false;
-	private Vector3d targetPos;
 	
 	public RoboLaserEntity(EntityType<? extends RoboLaserEntity> type, World level) {
 		super(type, level);
 	}
-	
+
 	public RoboLaserEntity(World pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
 		super(CAEntityTypes.ROBO_LASER.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
 	}
+
 	
 	@Override
 	public void tick() {
 		tickAnims();
 		super.tick();
-		if (hit) {
-			if (!this.isDying) {
+		if (this.hasHit()) {
+			if (!this.isDying()) {
 				stopAnimation(getIdleAnim());
 				playAnimation(getDeathAnim(), true);
-				this.isDying = true;
+				this.setDying(true);
 			}
 			playAnimation(deathAnim, false);
 			this.setDeltaMovement(0, 0, 0);
@@ -70,10 +70,10 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	
 	protected void onHit(RayTraceResult result) {
 		super.onHit(result);
-		hit = true;
-		if(!this.level.isClientSide() && explosivePower > 0) {
+		this.setHasHit(true);
+		if(!this.level.isClientSide() && this.getExplosivePower() > 0) {
 			boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-			level.explode((Entity)null, this.getX(), this.getY(), this.getZ(), explosivePower, canCauseFire,
+			level.explode((Entity)null, this.getX(), this.getY(), this.getZ(), this.getExplosivePower(), this.fireOnHit(),
 					flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 		}
 	}
@@ -81,20 +81,20 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	@Override
 	protected void onHitEntity(EntityRayTraceResult pResult) {
 		Entity entity = pResult.getEntity();
-		entity.hurt(DamageSource.thrown(this, this.getOwner()), damagePower);
+		entity.hurt(DamageSource.thrown(this, this.getOwner()), this.getDamagePower());
 	}
 	
 	public void setPower(float damagePower, float explosivePower, boolean canCauseFire) {
-		this.damagePower = damagePower;
-		this.explosivePower = explosivePower;
-		this.canCauseFire = canCauseFire;
+		this.setDamagePower(damagePower);
+		this.setExplosivePower(explosivePower);
+		this.setFireOnHit(canCauseFire);
 	}
 	
 	@Override
 	protected boolean shouldBurn() {
 		return true;
 	}
-
+	
 	@Override
 	public AnimationFactory getFactory() {
 		return factory;
@@ -113,6 +113,56 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(HAS_HIT, false);
+		this.entityData.define(DYING, false);
+		this.entityData.define(CAUSE_FIRE, false);
+		this.entityData.define(DAMAGE_POWER, 0.0f);
+		this.entityData.define(EXPLOSIVE_POWER, 0.0f);
+	}
+
+	public boolean hasHit() {
+		return this.entityData.get(HAS_HIT);
+	}
+
+	public void setHasHit(boolean hasHit) {
+		this.entityData.set(HAS_HIT, hasHit);
+	}
+	
+	public boolean isDying() {
+		return this.entityData.get(DYING);
+	}
+
+	public void setDying(boolean dying) {
+		this.entityData.set(DYING, dying);
+	}
+
+	public boolean fireOnHit() {
+		return this.entityData.get(CAUSE_FIRE);
+	}
+
+	public void setFireOnHit(boolean fireOnHit) {
+		this.entityData.set(CAUSE_FIRE, fireOnHit);
+	}
+
+	public float getDamagePower() {
+		return this.entityData.get(DAMAGE_POWER);
+	}
+
+	public void setDamagePower(float damage) {
+		this.entityData.set(DAMAGE_POWER, damage);
+	}
+	
+	public float getExplosivePower() {
+		return this.entityData.get(EXPLOSIVE_POWER);
+	}
+
+	public void setExplosivePower(float power) {
+		this.entityData.set(EXPLOSIVE_POWER, power);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -135,7 +185,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	public IAnimationBuilder getWalkAnim() {
 		return idleAnim;
 	}
-	
+
 	@Override
 	public IAnimationBuilder getSwimAnim() {
 		return idleAnim;
@@ -150,7 +200,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	public String getOwnerMDFileName() {
 		return ROBO_LASER_MDF_NAME;
 	}
-	
+
 	@Override
 	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);

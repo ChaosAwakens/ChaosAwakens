@@ -7,12 +7,12 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Swim",
+      "animation_name": "Idle",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
+      "animation_name": "Swim",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     }

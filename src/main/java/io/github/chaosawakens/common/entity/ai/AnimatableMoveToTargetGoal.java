@@ -15,6 +15,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	@SuppressWarnings("unused")
 	private final int checkRate;
 	protected int pathCheckRate;
+	protected int failedIterations = 0;
 
 	/**
 	 * Move an AnimatableMonsterEntity to a target entity
@@ -41,14 +42,18 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	@Override
 	public boolean canContinueToUse() {
 //		if (RANDOM.nextInt(this.checkRate) == 0) return true;
-		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) && entity.distanceToSqr(entity.getTarget()) > EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget());
+		return this.isExecutable(this, this.entity, this.entity.getTarget()) && this.entity.isWithinRestriction(this.entity.getTarget().blockPosition()) && failedIterations < 20 && entity.distanceToSqr(entity.getTarget()) > EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget());
 	}
 	
 	@Override
 	public void start() {
-		pathCheckRate = 10;
+		pathCheckRate = 1;
+		failedIterations = 0;
 		this.entity.lookAt(this.entity.getTarget(), 100, 100);
 		this.entity.getLookControl().setLookAt(this.entity.getTarget(), 30F, 30F);
+
+		path = entity.getNavigation().createPath(this.entity.getTarget(), 2);
+
 		this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
 	}
 	
@@ -78,10 +83,14 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		
 //		this.entity.lookAt(target, 100, 100);
 		this.entity.getLookControl().setLookAt(target, 30F, 30F);
+
+		if (path != null && !path.canReach() && !path.isDone() && pathCheckRate > 0) failedIterations++;
 		
 		if (pathCheckRate <= 0 && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget())) {
 			Vector3d targetPosition = target.position();
 			pathCheckRate = MathHelper.nextInt(entity.getRandom(), 4, 11);
+			entity.getNavigation().stop();
+			path = entity.getNavigation().createPath(this.entity.getTarget(), 2);
 			this.entity.getNavigation().moveTo(path, this.speedMultiplier);
 			
 	//		if (path == null) {
@@ -93,19 +102,10 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 			if (this.entity.getNavigation().getPath() != null) {
 				if (this.entity.getNavigation().getPath().getNextNodeIndex() >= this.entity.getNavigation().getPath().getNodeCount() - 1) {
 					this.entity.getNavigation().stop();
-					this.path = this.entity.getNavigation().createPath(target, 0);
+					this.path = this.entity.getNavigation().createPath(target, 2);
 					this.entity.getNavigation().moveTo(path, this.speedMultiplier);
 				}
 			}
-			
-			if (this.entity.distanceToSqr(target.getX(), target.getY(), target.getZ()) > 256) {
-				pathCheckRate += 5;
-				if (this.entity.distanceToSqr(target.getX(), target.getY(), target.getZ()) > 1024) {
-					pathCheckRate += 10;
-				}
-			}
-			
-			if (!this.entity.getNavigation().moveTo(target, this.speedMultiplier)) pathCheckRate += 15;
 		}
 	}
 }

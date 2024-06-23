@@ -1,6 +1,23 @@
 package io.github.chaosawakens.common.integration.jer;
 
+import io.github.chaosawakens.api.animation.IAnimationBuilder;
+import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
+import io.github.chaosawakens.common.entity.creature.air.BirdEntity;
+import io.github.chaosawakens.common.entity.creature.land.*;
+import io.github.chaosawakens.common.entity.creature.land.applecow.*;
+import io.github.chaosawakens.common.entity.creature.land.carrotpig.CarrotPigEntity;
+import io.github.chaosawakens.common.entity.creature.land.carrotpig.CrystalCarrotPigEntity;
+import io.github.chaosawakens.common.entity.creature.land.carrotpig.EnchantedGoldenCarrotPigEntity;
+import io.github.chaosawakens.common.entity.creature.land.carrotpig.GoldenCarrotPigEntity;
+import io.github.chaosawakens.common.entity.creature.water.WhaleEntity;
+import io.github.chaosawakens.common.entity.creature.water.fish.GreenFishEntity;
+import io.github.chaosawakens.common.entity.creature.water.fish.RockFishEntity;
+import io.github.chaosawakens.common.entity.creature.water.fish.SparkFishEntity;
+import io.github.chaosawakens.common.entity.creature.water.fish.WoodFishEntity;
+import io.github.chaosawakens.common.entity.hostile.AggressiveAntEntity;
+import io.github.chaosawakens.common.entity.hostile.EntEntity;
+import io.github.chaosawakens.common.entity.hostile.insect.WaspEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
@@ -65,6 +82,261 @@ public class CAJER {
 		if (targetEntity != null) {
 			if (RANDOM.nextInt(120) == 0 && !targetEntity.getCachedAnimationByName("Idle Extras").isPlaying()) targetEntity.playAnimation(targetEntity.getCachedAnimationByName("Idle Extras"), true);
 			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.2D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<HerculesBeetleEntity> HERCULES_BEETLE = (renderInfo, targetEntity) -> {
+		int lastTrackedAnimTickCount = 0;
+		boolean hasAlreadyPlayed = false;
+
+		if (targetEntity != null) {
+			IAnimationBuilder modifiedIdleAnim = targetEntity.getIdleAnim().setAnimSpeed(0.3D);
+			IAnimationBuilder docileAnim = targetEntity.getCachedAnimationByName("Docile").setAnimSpeed(0.25D);
+
+			if (!hasAlreadyPlayed) {
+				targetEntity.playAnimation(modifiedIdleAnim, true);
+
+				hasAlreadyPlayed = true;
+			}
+
+			if (targetEntity.isPlayingAnimation(modifiedIdleAnim) || targetEntity.isPlayingAnimation(docileAnim)) {
+				lastTrackedAnimTickCount++;
+
+				if (RANDOM.nextInt(360) == 0 && lastTrackedAnimTickCount >= 1200) {
+					targetEntity.playAnimation(docileAnim.isPlaying() ? modifiedIdleAnim : docileAnim, true);
+					targetEntity.stopAnimation(docileAnim.isPlaying() ? modifiedIdleAnim : docileAnim);
+
+					lastTrackedAnimTickCount = 0;
+				}
+			}
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<EntEntity> ENT = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.2D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<WaspEntity> WASP = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<AppleCowEntity> APPLE_COW = (renderInfo, targetEntity) -> { //TODO Never pull this anti-polymorphism pattern again :skull:
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<GoldenAppleCowEntity> GOLDEN_APPLE_COW = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<EnchantedGoldenAppleCowEntity> ENCHANTED_GOLDEN_APPLE_COW = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<UltimateAppleCowEntity> ULTIMATE_APPLE_COW = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<CrystalAppleCowEntity> CRYSTAL_APPLE_COW = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<CarrotPigEntity> CARROT_PIG = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<GoldenCarrotPigEntity> GOLDEN_CARROT_PIG = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<EnchantedGoldenCarrotPigEntity> ENCHANTED_GOLDEN_CARROT_PIG = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<CrystalCarrotPigEntity> CRYSTAL_CARROT_PIG = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<GreenFishEntity> GREEN_FISH = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<RockFishEntity> ROCK_FISH = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<SparkFishEntity> SPARK_FISH = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<WoodFishEntity> WOOD_FISH = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.25D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<WhaleEntity> WHALE = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.15D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<AntEntity> ANT = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.45D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<AggressiveAntEntity> AGGRESSIVE_ANT = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.45D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<BirdEntity> BIRD = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<BeaverEntity> BEAVER = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<GazelleEntity> GAZELLE = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<LettuceChickenEntity> LETTUCE_CHICKEN = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<TreeFrogEntity> TREE_FROG = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<RubyBugEntity> RUBY_BUG = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
+
+			targetEntity.tickCount++;
+		}
+
+		return renderInfo;
+	};
+	public static IMobRenderHook<StinkBugEntity> STINK_BUG = (renderInfo, targetEntity) -> {
+		if (targetEntity != null) {
+			targetEntity.playAnimation(targetEntity.getIdleAnim().setAnimSpeed(0.35D), true);
 
 			targetEntity.tickCount++;
 		}
@@ -1020,6 +1292,48 @@ public class CAJER {
 		registerMobRenderHook(RoboPounderEntity.class, ROBO_POUNDER);
 		registerMobRenderHook(RoboWarriorEntity.class, ROBO_WARRIOR);
 		registerMobRenderHook(RoboSniperEntity.class, ROBO_SNIPER);
+
+		// Hercules Beetle/Ent
+		registerMobRenderHook(HerculesBeetleEntity.class, HERCULES_BEETLE);
+		registerMobRenderHook(EntEntity.class, ENT);
+
+		// Wasp
+		registerMobRenderHook(WaspEntity.class, WASP);
+
+		// Apple Cows
+		registerMobRenderHook(AppleCowEntity.class, APPLE_COW);
+		registerMobRenderHook(GoldenAppleCowEntity.class, GOLDEN_APPLE_COW);
+		registerMobRenderHook(EnchantedGoldenAppleCowEntity.class, ENCHANTED_GOLDEN_APPLE_COW);
+		registerMobRenderHook(UltimateAppleCowEntity.class, ULTIMATE_APPLE_COW);
+		registerMobRenderHook(CrystalAppleCowEntity.class, CRYSTAL_APPLE_COW);
+
+		// Carrot Pigs
+		registerMobRenderHook(CarrotPigEntity.class, CARROT_PIG);
+		registerMobRenderHook(GoldenCarrotPigEntity.class, GOLDEN_CARROT_PIG);
+		registerMobRenderHook(EnchantedGoldenCarrotPigEntity.class, ENCHANTED_GOLDEN_CARROT_PIG);
+		registerMobRenderHook(CrystalCarrotPigEntity.class, CRYSTAL_CARROT_PIG);
+
+		// Fish/Whale
+		registerMobRenderHook(GreenFishEntity.class, GREEN_FISH);
+		registerMobRenderHook(RockFishEntity.class, ROCK_FISH);
+		registerMobRenderHook(SparkFishEntity.class, SPARK_FISH);
+		registerMobRenderHook(WoodFishEntity.class, WOOD_FISH);
+		registerMobRenderHook(WhaleEntity.class, WHALE);
+
+		// Ants
+		registerMobRenderHook(AntEntity.class, ANT);
+		registerMobRenderHook(AggressiveAntEntity.class, AGGRESSIVE_ANT);
+
+		// Bird/Beaver/Gazelle/Lettuce Chicken/Tree Frog
+		registerMobRenderHook(BirdEntity.class, BIRD);
+		registerMobRenderHook(BeaverEntity.class, BEAVER);
+		registerMobRenderHook(GazelleEntity.class, GAZELLE);
+		registerMobRenderHook(LettuceChickenEntity.class, LETTUCE_CHICKEN);
+		registerMobRenderHook(TreeFrogEntity.class, TREE_FROG);
+
+		// Bugs
+		registerMobRenderHook(RubyBugEntity.class, RUBY_BUG);
+		registerMobRenderHook(StinkBugEntity.class, STINK_BUG);
 	}
 
 	/**

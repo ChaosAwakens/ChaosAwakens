@@ -40,5 +40,5 @@ public class ClientPlayerEntityMixin {
             targetClientPlayer.setSprinting(true);
             ci.cancel();
         }
-    }*/
+    } */
 }

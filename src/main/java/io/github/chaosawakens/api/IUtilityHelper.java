@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
  *
  *
  */
-public interface IUtilityHelper {
+public interface IUtilityHelper { // Note as of 0.12 pre-release: WHY THE HELL DID I MAKE THIS, WHY
 
 	///////////////////////////////
 	//         Variables         //

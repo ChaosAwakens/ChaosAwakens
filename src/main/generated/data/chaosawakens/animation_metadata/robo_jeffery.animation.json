@@ -2,17 +2,27 @@
   "anim_file_loc": "chaosawakens:animations/boss/robo/robo_jeffery.animation.json",
   "animations": [
     {
+      "animation_name": "Low Health",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Left Punch Attack",
       "animation_length": 1.7,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Walk",
+      "animation_name": "Idle",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
+      "animation_name": "Leap Attack: Land",
+      "animation_length": 2.45,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Leap Attack: Midair",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -22,12 +32,7 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Leap Attack: Midair",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Idle Extras",
+      "animation_name": "Walk",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -37,14 +42,9 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Low Health",
+      "animation_name": "Idle Extras",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Robo-Bomb Attack",
-      "animation_length": 2.0,
-      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Death",
@@ -52,19 +52,19 @@
       "loop_type": "PLAY_ONCE"
     },
     {
+      "animation_name": "Healthy",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Smash Attack",
       "animation_length": 3.0,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Leap Attack: Land",
-      "animation_length": 2.45,
+      "animation_name": "Robo-Bomb Attack",
+      "animation_length": 2.0,
       "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Healthy",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
     }
   ]
 }

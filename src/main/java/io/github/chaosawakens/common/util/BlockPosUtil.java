@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -45,11 +44,11 @@ public final class BlockPosUtil {
 		ObjectArrayList<BlockPos> positionsToDestroy = new ObjectArrayList<BlockPos>();
 		
 		// Cache positions beforehand
-		BlockPos.betweenClosed(x1, y1, z1, x2, y2, z2).forEach((curPos) -> positionsToDestroy.add(curPos));
+		BlockPos.betweenClosed(x1, y1, z1, x2, y2, z2).forEach(positionsToDestroy::add);
 		
 		if (!positionsToDestroy.isEmpty()) {
 			BlockPos.betweenClosed(x1, y1, z1, x2, y2, z2).forEach((targetPos) -> {
-				if (targetPos != null) {
+				if (targetPos != null && !targetWorld.getBlockState(targetPos).isAir(targetWorld, targetPos) && (targetWorld.getFluidState(targetPos) == null || targetWorld.getFluidState(targetPos).isEmpty())) {
 					BlockState targetState = targetWorld.getBlockState(targetPos);
 					Block targetBlock = targetState.getBlock();
 					
@@ -114,24 +113,8 @@ public final class BlockPosUtil {
 		return destroyCollidingBlocks(targetEntity.level, targetEntity.getBoundingBox().inflate(xbOffset, ybOffset, zbOffset), dropBlocks, destructibilityPredicate);
 	}
 	
-	public static ObjectArrayList<BlockPos> detectWall(World targetWorld, LivingEntity entityToCompare, BlockPos originPos, double length, double depth, double height, boolean shouldBeFilled) {
-		ObjectArrayList<BlockPos> lengthWallPositions = new ObjectArrayList<BlockPos>();
-		ObjectArrayList<BlockPos> depthWallPositions = new ObjectArrayList<BlockPos>();
-		ObjectArrayList<BlockPos> heightWallPositions = new ObjectArrayList<BlockPos>();
-		ObjectArrayList<BlockPos> potentialWallPositions = new ObjectArrayList<BlockPos>();
-		final ObjectArrayList<BlockPos> confirmedWallPositions = new ObjectArrayList<BlockPos>();
-		Mutable mutableLengthPos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
-		Mutable mutableDepthPos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
-		Mutable mutableHeightPos = new Mutable(originPos.getX(), originPos.getY(), originPos.getZ());
-		AxisAlignedBB targetEntityHitbox = entityToCompare.getBoundingBox();
-		double lengthCompMin = Math.floor(targetEntityHitbox.minX);
-		double lengthCompMax = Math.ceil(targetEntityHitbox.maxX);
-		double heightCompMin = Math.floor(targetEntityHitbox.minY);
-		double heightCompMax = Math.ceil(targetEntityHitbox.maxY);
-		
-		
-		
-		return confirmedWallPositions;
+	public static ObjectArrayList<BlockPos> detectWall(World targetWorld, LivingEntity entityToCompare, BlockPos originPos, double minLength, double minDepth, double minHeight, double maxLength, double maxDepth, double maxHeight, boolean shouldBeFilled) {
+		return null;
 	}
 	
 	/**

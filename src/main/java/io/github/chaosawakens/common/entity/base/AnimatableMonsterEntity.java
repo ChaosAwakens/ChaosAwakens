@@ -4,9 +4,8 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.controllers.body.base.SmoothBodyController;
-import io.github.chaosawakens.common.entity.ai.navigation.ground.base.RefinedGroundPathNavigator;
 import io.github.chaosawakens.common.entity.ai.pathfinding.CAStrictGroundPathNavigator;
-import io.github.chaosawakens.common.registry.CAEffects;
+import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -23,8 +22,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
@@ -55,6 +54,8 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super(type, worldIn);
 		this.noCulling = true;
 		this.maxUpStep = 1.0F;
+
+		setPathfindingMalus(PathNodeType.LAVA, -1.0F);
 	}
 
 	@Override
@@ -184,6 +185,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	protected void tickDeath() {
 		EntityUtil.freezeEntityRotation(this);
 		setAttackID((byte) 0);
+		setAttackCooldown(0);
 		setMoving(false);
 				
 		if (getDeathAnim() != null) {
@@ -304,6 +306,11 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	@Override
+	protected boolean canRide(Entity vehicle) {
+		return getBbWidth() <= CAEntityTypes.ACACIA_ENT.get().getWidth() && getBbHeight() < CAEntityTypes.ACACIA_ENT.get().getHeight();
+	}
+
+	@Override
 	public void aiStep() {
 		divertTarget();
 		super.aiStep();
@@ -421,8 +428,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		super.addAdditionalSaveData(pCompound);
 	}
 
-	public float getMeleeAttackReach(LivingEntity target) {
-		if (target == null) return 0;
+	public float getMeleeAttackReach() {
 		return ((1.0F + getBbWidth() / 2.0F) * 2) + 0.2F;
 	}
 	

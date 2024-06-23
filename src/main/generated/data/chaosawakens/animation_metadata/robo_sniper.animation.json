@@ -7,9 +7,9 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 3.6,
-      "loop_type": "LOOP"
+      "animation_name": "Shoot Attack",
+      "animation_length": 0.64,
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Accelerate",
@@ -17,13 +17,13 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Death",
-      "animation_length": 2.24,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Idle",
+      "animation_length": 3.6,
+      "loop_type": "LOOP"
     },
     {
-      "animation_name": "Shoot Attack",
-      "animation_length": 0.64,
+      "animation_name": "Death",
+      "animation_length": 2.24,
       "loop_type": "PLAY_ONCE"
     }
   ]

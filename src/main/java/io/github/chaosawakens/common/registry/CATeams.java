@@ -21,7 +21,7 @@ public class CATeams {
 
         @Override
         public IFormattableTextComponent getFormattedName(ITextComponent pFormattedName) {
-            return new StringTextComponent("Robo Team").withStyle(TextFormatting.DARK_PURPLE);
+            return new StringTextComponent(pFormattedName.getString()).withStyle(TextFormatting.DARK_PURPLE);
         }
 
         @Override
