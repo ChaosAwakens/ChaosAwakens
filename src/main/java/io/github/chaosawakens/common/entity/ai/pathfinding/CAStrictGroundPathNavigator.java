@@ -57,7 +57,7 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 	//	ChaosAwakens.debug("CANCUTCORNER", "[CanCutCorner Return Value]: " + mob.canCutCorner(mob.getNavigation().getPath().getNextNode().type));
 
 		if (tryTruncateNodes(curPath, pathLength, entityPos, center, maxArea)) {
-			if (followingPath(curPath, 0.5F) || (elevationChangedFor(curPath) && followingPath(curPath, pathEntity.getBbWidth() * 0.5F)) && mob.canCutCorner(path.getNextNode().type)) {
+			if (followingPath(curPath, 1F) || (elevationChangedFor(curPath) && followingPath(curPath, pathEntity.getBbWidth())) && mob.canCutCorner(path.getNextNode().type)) {
 				path.setNextNodeIndex(path.getNextNodeIndex() + 1);
 			}
 		}

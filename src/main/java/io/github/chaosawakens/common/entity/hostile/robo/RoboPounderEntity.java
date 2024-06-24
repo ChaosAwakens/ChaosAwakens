@@ -454,12 +454,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 52.2D, 54.6D)) CAScreenShakeEntity.shakeScreen(level, position(), 15.0F, 0.064F, 4, 18);
 	}
 
-	@Override
-	public boolean canBeCollidedWith() {
-		return false;
-	}
-
-	@Override
+    @Override
 	protected float getStandingEyeHeight(Pose pPose, EntitySize pSize) {
 		return pSize.height * 0.85F + 0.6F;
 	}
@@ -526,7 +521,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public boolean canCollideWith(Entity pEntity) {
-		return isRageRunning() ? false : super.canCollideWith(pEntity);
+		return !isRageRunning() && super.canCollideWith(pEntity);
 	}
 
 	@Override

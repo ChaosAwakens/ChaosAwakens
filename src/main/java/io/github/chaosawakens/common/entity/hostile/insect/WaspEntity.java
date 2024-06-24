@@ -56,8 +56,8 @@ public class WaspEntity extends AnimatableMonsterEntity {
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 40)
-                .add(Attributes.MOVEMENT_SPEED, 0.65)
-                .add(Attributes.FLYING_SPEED, 0.75)
+                .add(Attributes.MOVEMENT_SPEED, 0.35)
+                .add(Attributes.FLYING_SPEED, 0.33)
                 .add(Attributes.FOLLOW_RANGE, 25)
                 .add(Attributes.ARMOR, 4)
                 .add(Attributes.ATTACK_DAMAGE, 12)

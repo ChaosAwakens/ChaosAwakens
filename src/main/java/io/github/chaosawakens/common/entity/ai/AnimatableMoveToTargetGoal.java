@@ -85,7 +85,8 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		
 		if (pathCheckRate <= 0 && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget())) {
 			Vector3d targetPosition = target.position();
-			pathCheckRate = MathHelper.nextInt(entity.getRandom(), 4, 11);
+			pathCheckRate = MathHelper.nextInt(entity.getRandom(), 4, 6);
+			this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier);
 
 	//		if (path == null) {
 	//			this.path = this.entity.getNavigation().createPath(target, 0);				
@@ -93,7 +94,7 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 			
 			//Fix entities mindlessly spinning due to next node index being out of bounds
 			//It never caused any exceptions (when logging previously), though? I dunno how that happened --Meme Man
-			if (!this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier)) pathCheckRate += 15;
+		//	if (!this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier)) pathCheckRate += 5;
 		}
 	}
 }

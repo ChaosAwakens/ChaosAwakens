@@ -384,7 +384,7 @@ public final class EntityUtil {
 	public static <E extends Entity> void repelEntitiesOfClass(Entity targetEntity, Class<E> entityClassToRepel, double radius, double height, double repulsionPower) {
 		if (targetEntity == null || targetEntity.noPhysics) return;
 
-		List<E> potentialAffectedTargets = getEntitiesAround(targetEntity, entityClassToRepel, radius, height, radius, radius + height);
+		List<E> potentialAffectedTargets = getEntitiesAround(targetEntity, entityClassToRepel, radius, height, radius, radius);
 
 		for (E potentialAffectedTarget : potentialAffectedTargets) {
 			if (potentialAffectedTarget == null || !potentialAffectedTarget.isAlive()) break;
