@@ -25,6 +25,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -134,6 +135,17 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	protected void registerGoals() {
 		float defaultAttackVoicePitch = getHealth() <= 50.0F ? 1.25F : 1.0F; //TODO Proper updates in goals
 
+		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.2D) {
+			@Override
+			public boolean canUse() {
+				return super.canUse() && !isAttacking() && !shouldTaunt() && !isOnAttackCooldown() && getTarget() == null;
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return super.canContinueToUse() && !isAttacking() && !shouldTaunt() && !isOnAttackCooldown() && getTarget() == null;
+			}
+		});
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3) {
 			@Override
 			public boolean canUse() {

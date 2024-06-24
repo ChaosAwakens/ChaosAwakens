@@ -261,7 +261,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
                 return super.canContinueToUse() && isActive() && !isAttacking() && !isOnAttackCooldown() && !isFlinging() && getTarget() == null;
             }
         });
-        this.targetSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.0D, 3) {
+        this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.0D, 3) {
             @Override
             public boolean canUse() {
                 return super.canUse() && isActive() && !isFlinging();

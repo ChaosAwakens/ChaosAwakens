@@ -24,6 +24,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -128,6 +129,17 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.2D) {
+			@Override
+			public boolean canUse() {
+				return super.canUse() && !isAttacking() && !isOnAttackCooldown() && getTarget() == null;
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return super.canContinueToUse() && !isAttacking() && !isOnAttackCooldown() && getTarget() == null;
+			}
+		});
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 140D, 15.6D, 18.1D, 20).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).soundOnStart(CASoundEvents.ROBO_JEFFERY_JEFFERY_PUNCH::get, 1.0F));
 		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 4, 3, 40).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));

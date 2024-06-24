@@ -275,7 +275,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	protected void divertTarget() {
-		List<LivingEntity> allAttackableEntitiesAround = EntityUtil.getAllEntitiesAround(this, getFollowRange(), getFollowRange(), getFollowRange(), getFollowRange());
+	/*	List<LivingEntity> allAttackableEntitiesAround = EntityUtil.getAllEntitiesAround(this, getFollowRange(), getFollowRange(), getFollowRange(), getFollowRange());
 		
 		for (LivingEntity target : allAttackableEntitiesAround) {
 			if (getTarget() != null) {
@@ -283,7 +283,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 					setTarget(target);
 				}
 			}
-		}
+		} */
 	}
 
 	@Override
