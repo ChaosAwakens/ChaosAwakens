@@ -22,6 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
@@ -38,6 +39,7 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -85,6 +87,9 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	public RoboPounderEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
+		this.moveControl = new MovementController(this) {
+
+		};
 	}
 
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -386,7 +391,9 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public boolean canSee(Entity pEntity) {
-		return MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && super.canSee(pEntity);
+		Vector3d curPos = new Vector3d(getX(), getEyeY(), getZ());
+		Vector3d targetPos = new Vector3d(pEntity.getX(), pEntity.getEyeY(), pEntity.getZ());
+		return pEntity.level == this.level && MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= 5;//this.level.clip(new RayTraceContext(curPos, targetPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
 	}
 
 	@Override

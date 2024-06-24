@@ -32,9 +32,9 @@ public class SmoothBodyController extends BodyController {
 
 		if (isOwnerMoving()) {
 			owner.yBodyRot = owner.yRot;
-			
+
 			rotateHeadIfNecessary();
-			
+
 			this.targetHeadRot = owner.yHeadRot;
 			this.curRotTime = 0;
 		} else if (owner.getPassengers().isEmpty() || !(owner.getPassengers().get(0) instanceof MobEntity)) {
@@ -50,7 +50,7 @@ public class SmoothBodyController extends BodyController {
 				this.curRotTime++;
 
 				if (curRotTime > rotSpeed) rotLimit = Math.max(1 - (curRotTime - rotSpeed) / rotSpeed, 0) * ROT_THRESHOLD;
-				
+
 				owner.yBodyRot = approachRot(owner.yHeadRot, owner.yBodyRot, rotLimit);
 			}
 		}
@@ -66,8 +66,8 @@ public class SmoothBodyController extends BodyController {
 	}
 
 	/**
-	 * Updates the current horizontal rotation of the owner {@link MobEntity} in decrementing order using {@link #ROT_TICK_THRESHOLD}. 
-	 * Also sets the first element of both {@link #xRotHist} and {@link #zRotHist} to the owner {@link MobEntity}'s current world 
+	 * Updates the current horizontal rotation of the owner {@link MobEntity} in decrementing order using {@link #ROT_TICK_THRESHOLD}.
+	 * Also sets the first element of both {@link #xRotHist} and {@link #zRotHist} to the owner {@link MobEntity}'s current world
 	 * position.
 	 */
 	protected void updateRotation() {

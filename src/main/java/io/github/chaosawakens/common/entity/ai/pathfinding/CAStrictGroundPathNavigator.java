@@ -2,16 +2,19 @@ package io.github.chaosawakens.common.entity.ai.pathfinding;
 
 import io.github.chaosawakens.api.IUtilityHelper;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 
 import java.util.Objects;
 
+/**
+ * Bandaid solution from Mowzie's Mobs, EXCLUSIVELY for 1.16. We have our own pathnav system in 0.13.x.x+.
+ */
 public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 	// TODO implement that one algorithm I plan on making -- Meme Man
 	private int pathTimeCost;
@@ -39,23 +42,23 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 		int pathLength = curPath.getNodeCount();
 
 		final Vector3d center = pathEntityTempPos.add(-pathEntity.getBbWidth() * 0.5F, 0.0F, -pathEntity.getBbWidth() * 0.5F);
-		final Vector3d maxArea = center.add(-pathEntity.getBbWidth(), -pathEntity.getBbHeight(), -pathEntity.getBbWidth());
+		final Vector3d maxArea = center.add(pathEntity.getBbWidth(), pathEntity.getBbHeight(), pathEntity.getBbWidth());
 		Vector3d entityPos = new Vector3d(pathEntity.getX(), pathEntity.getY(), pathEntity.getZ());
 		
-/*		for (int i = curNodeIndex; i < curPath.getNodeCount(); i++) {
+		for (int i = path.getNextNodeIndex(); i < curPath.getNodeCount(); i++) {
 			if (path.getNode(i).y != Math.floor(pathEntityTempPos.y) && hasValidPathType(path.getNode(i).type)) {
 				pathLength = i;
 				break;
 			}
-		}*/
+		}
 		
 	//	ChaosAwakens.debug("SWEEPTHROUGH", "[SweepThrough Return Value]: " + sweepThrough(entityPos, center, maxArea));
 	//	ChaosAwakens.debug("TRYTRUNCATENODES", "[TryTruncateNodes Return Value]: " + tryTruncateNodes(curPath, pathLength, entityPos, center, maxArea));
 	//	ChaosAwakens.debug("CANCUTCORNER", "[CanCutCorner Return Value]: " + mob.canCutCorner(mob.getNavigation().getPath().getNextNode().type));
 
 		if (tryTruncateNodes(curPath, pathLength, entityPos, center, maxArea)) {
-			if (followingPath(curPath, 0.5F) || (elevationChangedFor(curPath) && followingPath(curPath, pathEntity.getBbWidth() * 0.5F)) && mob.canCutCorner(mob.getNavigation().getPath().getNextNode().type)) {
-				path.advance();
+			if (followingPath(curPath, 0.5F) || (elevationChangedFor(curPath) && followingPath(curPath, pathEntity.getBbWidth() * 0.5F)) && mob.canCutCorner(path.getNextNode().type)) {
+				path.setNextNodeIndex(path.getNextNodeIndex() + 1);
 			}
 		}
 		
@@ -63,7 +66,7 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 			PathPoint node = path.getNode(i);
 			final BlockPos p = node.asBlockPos().below();
 			
-			mob.level.setBlockAndUpdate(p, Blocks.ACACIA_LOG.defaultBlockState());
+			mob.level.setBlockAndUpdate(p, Blocks.OAK_LOG.defaultBlockState());
 		} */
 		
 		
@@ -102,7 +105,12 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 		
 		return atPath;
 	}
-	
+
+	@Override
+	protected boolean canMoveDirectly(Vector3d p_75493_1_, Vector3d p_75493_2_, int p_75493_3_, int p_75493_4_, int p_75493_5_) {
+		return true;
+	}
+
 	protected boolean elevationChangedFor(Path ePath) {
 		MobEntity pathEntity = this.mob;
 		
@@ -129,7 +137,6 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 		return true;
 	}
 	
-	// Improving on Mowzie's ground path nav
 	// TODO W.I.P
     protected boolean sweepThrough(Vector3d pathVec, Vector3d center, Vector3d max) {
         float l = 0.0F;
@@ -190,9 +197,7 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
                         BlockState block = this.level.getBlockState(pos.set(x, y, z));
                         if (!block.isPathfindable(this.level, pos, PathType.LAND)) return false;
                     }
-                    
-                    Vector3i facing = mob.getDirection().getNormal();
-                    
+
                  //   ChaosAwakens.debug("VALUES", "[Trail Edge]: " + trailEdge + " | " + "[Lead Edge I]:" + leadEdgeI);
 
 					PathNodeType below = this.nodeEvaluator.getBlockPathType(this.level, x, y0 - 1, z);
@@ -212,7 +217,6 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 	protected boolean hasValidPathType(PathNodeType type) {	
 		if (type == PathNodeType.WATER) return false;	    
 		else if (type == PathNodeType.LAVA) return false;	 
-		else if (type == PathNodeType.BLOCKED) return false;	
 		else return type != PathNodeType.OPEN;
 	}
 

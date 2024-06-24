@@ -9,8 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
 
 public abstract class AnimatableMovableGoal extends AnimatableGoal {
-	protected Path path;
-	
+
 	@Override
 	abstract public boolean canUse();
 

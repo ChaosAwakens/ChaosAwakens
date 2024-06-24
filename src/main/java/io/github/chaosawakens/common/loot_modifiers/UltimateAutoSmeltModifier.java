@@ -5,6 +5,7 @@ import io.github.chaosawakens.manager.CAConfigManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -28,7 +29,7 @@ public class UltimateAutoSmeltModifier extends LootModifier {
 	
 	protected final ItemStack getSmeltedOutput(LootContext context, ItemStack stack) {
 		if (context.getLevel() != null) {
-			for (PlayerEntity targetPlayer : context.getLevel().getPlayers((player) -> player.isCrouching())) {
+			for (PlayerEntity targetPlayer : context.getLevel().getPlayers(Entity::isCrouching)) {
 				int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, targetPlayer.getMainHandItem());
 				boolean hasFortune = fortuneLevel > 0;
 				Random random = new Random();
@@ -36,7 +37,7 @@ public class UltimateAutoSmeltModifier extends LootModifier {
 				return context.getLevel().getRecipeManager()
 						.getRecipeFor(IRecipeType.SMELTING, new Inventory(stack), context.getLevel())
 						.map(FurnaceRecipe::getResultItem)
-						.filter(targetStack -> !targetStack.isEmpty() && targetStack != null)
+						.filter(targetStack -> targetStack != null && !targetStack.isEmpty())
 						.map(targetStack -> hasFortune && targetPlayer.isCrouching() && CAConfigManager.MAIN_COMMON.enableUltimatePickaxeBonus.get() ? copyStackWithSize(targetStack, stack.getCount() + random.nextInt(fortuneLevel + 1)) : copyStackWithSize(targetStack, stack.getCount()))
 						.orElse(stack);
 			}

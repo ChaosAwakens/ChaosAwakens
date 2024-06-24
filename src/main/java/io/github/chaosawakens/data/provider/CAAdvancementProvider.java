@@ -35,7 +35,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class CAAdvancementProvider extends AdvancementProvider {
-	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ChaosAwakens.MODID, "textures/gui/advancement_bg.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE = ChaosAwakens.prefix("textures/gui/advancement_bg.png");
 	private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 	private final DataGenerator generator;
 

@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity.boss.insect;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -23,6 +22,7 @@ import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.EnumUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -42,8 +42,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3i;
@@ -108,6 +111,8 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
                 if (!isPlayingAnimation(munchAttackAnim) && !isFlinging()) super.tick();
             }
         };
+
+        setPathfindingMalus(PathNodeType.LEAVES, 1.0F);
     }
 
     public HerculesBeetleEntity(EntityType<? extends MonsterEntity> type, World worldIn, EnumUtil.HerculesBeetleType beetleType) {
@@ -127,6 +132,8 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
                 if (!isPlayingAnimation(munchAttackAnim) && !isFlinging()) super.tick();
             }
         };
+
+        setPathfindingMalus(PathNodeType.LEAVES, 1.0F);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -306,6 +313,10 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
     }
 
     @Override
+    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+    }
+
+    @Override
     public int animationInterval() {
         return awakenedAnim != null && isPlayingAnimation(awakenedAnim) ? 1 : 2;
     }
@@ -369,6 +380,16 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
     public void aiStep() {
         handleStates();
         super.aiStep();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+    }
+
+    @Override
+    public boolean isColliding(BlockPos targetPos, BlockState targetState) {
+        return !targetState.is(BlockTags.LEAVES) && super.isColliding(targetPos, targetState);
     }
 
     @Override

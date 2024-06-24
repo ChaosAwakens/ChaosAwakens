@@ -75,7 +75,7 @@ public class WoodFishEntity extends AnimatableGroupFishEntity {
 
 	@Override
 	public SingletonAnimationBuilder getSwimAnim() {
-		return swimAnim;
+		return idleAnim;
 	}
 
 	@Override

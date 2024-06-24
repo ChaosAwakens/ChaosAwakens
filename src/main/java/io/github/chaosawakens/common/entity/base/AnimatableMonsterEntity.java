@@ -56,6 +56,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		this.maxUpStep = 1.0F;
 
 		setPathfindingMalus(PathNodeType.LAVA, -1.0F);
+		setPathfindingMalus(PathNodeType.WATER, -1.0F);
 	}
 
 	@Override

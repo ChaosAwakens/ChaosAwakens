@@ -74,7 +74,7 @@ public class GreenFishEntity extends AnimatableGroupFishEntity {
 
 	@Override
 	public SingletonAnimationBuilder getSwimAnim() {
-		return swimAnim;
+		return idleAnim;
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class GreenFishEntity extends AnimatableGroupFishEntity {
 
 	@Override
 	public String getOwnerMDFileName() {
-		return "green_fish";
+		return GREEN_FISH_MDF_NAME;
 	}
 
 	@Override

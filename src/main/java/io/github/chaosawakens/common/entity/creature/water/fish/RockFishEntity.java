@@ -101,7 +101,7 @@ public class RockFishEntity extends AnimatableGroupFishEntity {
 
 	@Override
 	public SingletonAnimationBuilder getSwimAnim() {
-		return swimAnim;
+		return idleAnim;
 	}
 
 	@Override

@@ -49,12 +49,10 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	public void start() {
 		pathCheckRate = 1;
 		failedIterations = 0;
-		this.entity.lookAt(this.entity.getTarget(), 100, 100);
-		this.entity.getLookControl().setLookAt(this.entity.getTarget(), 30F, 30F);
+	//	this.entity.lookAt(this.entity.getTarget(), 100, 100);
+	//	this.entity.getLookControl().setLookAt(this.entity.getTarget(), 30F, 30F);
 
-		path = entity.getNavigation().createPath(this.entity.getTarget(), 2);
-
-		this.entity.getNavigation().moveTo(this.path, this.speedMultiplier);
+		if (this.entity.getTarget() != null) this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier);
 	}
 	
 	@Override
@@ -62,7 +60,6 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 		pathCheckRate = 1;
 		LivingEntity target = this.entity.getTarget();
 		if (!EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target)) this.entity.setTarget(null);
-		this.entity.setDeltaMovement(this.entity.getDeltaMovement().multiply(0, 1, 0));
 		this.entity.getNavigation().stop();
 	}
 
@@ -84,28 +81,19 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 //		this.entity.lookAt(target, 100, 100);
 		this.entity.getLookControl().setLookAt(target, 30F, 30F);
 
-		if (path != null && !path.canReach() && !path.isDone() && pathCheckRate > 0) failedIterations++;
+	//	if (path != null && !path.canReach() && !path.isDone() && pathCheckRate > 0) failedIterations++;
 		
 		if (pathCheckRate <= 0 && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget())) {
 			Vector3d targetPosition = target.position();
 			pathCheckRate = MathHelper.nextInt(entity.getRandom(), 4, 11);
-			entity.getNavigation().stop();
-			path = entity.getNavigation().createPath(this.entity.getTarget(), 2);
-			this.entity.getNavigation().moveTo(path, this.speedMultiplier);
-			
+
 	//		if (path == null) {
 	//			this.path = this.entity.getNavigation().createPath(target, 0);				
 	//		}
 			
 			//Fix entities mindlessly spinning due to next node index being out of bounds
 			//It never caused any exceptions (when logging previously), though? I dunno how that happened --Meme Man
-			if (this.entity.getNavigation().getPath() != null) {
-				if (this.entity.getNavigation().getPath().getNextNodeIndex() >= this.entity.getNavigation().getPath().getNodeCount() - 1) {
-					this.entity.getNavigation().stop();
-					this.path = this.entity.getNavigation().createPath(target, 2);
-					this.entity.getNavigation().moveTo(path, this.speedMultiplier);
-				}
-			}
+			if (!this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier)) pathCheckRate += 15;
 		}
 	}
 }

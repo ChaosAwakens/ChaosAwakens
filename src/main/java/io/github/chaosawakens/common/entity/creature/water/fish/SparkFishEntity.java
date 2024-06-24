@@ -66,7 +66,7 @@ public class SparkFishEntity extends AnimatableGroupFishEntity {
 
 	@Override
 	public SingletonAnimationBuilder getSwimAnim() {
-		return swimAnim;
+		return idleAnim;
 	}
 
 	@Override

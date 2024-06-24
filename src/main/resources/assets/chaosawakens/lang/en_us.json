@@ -163,7 +163,7 @@
 	"container.chaosawakens.jei.crystal_defossilizer": "Crystal Defossilizer",
 	
 	"effect.chaosawakens.paralysis": "Paralysis",
-	"effect.chaosawakens.paralysis.description": "Paralyzes the afflicted target, completely immobilising them. (W.I.P)",
+	"effect.chaosawakens.paralysis.description": "Paralyzes the afflicted target, completely immobilising them. Only works on players.",
 	"effect.chaosawakens.burns": "Burns",
 	"effect.chaosawakens.burns.description": "Burns the target up from the inside, eating away at some flammable items (where applicable) in their inventory. (W.I.P)",
 	
