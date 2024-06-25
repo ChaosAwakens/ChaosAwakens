@@ -405,7 +405,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	public boolean canSee(Entity pEntity) {
 		Vector3d curPos = new Vector3d(getX(), getEyeY(), getZ());
 		Vector3d targetPos = new Vector3d(pEntity.getX(), pEntity.getEyeY(), pEntity.getZ());
-		return pEntity.level == this.level && MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= 5;//this.level.clip(new RayTraceContext(curPos, targetPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
+		return pEntity.level == this.level && MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= 10;//this.level.clip(new RayTraceContext(curPos, targetPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
 	}
 
 	@Override

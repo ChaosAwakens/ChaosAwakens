@@ -68,33 +68,16 @@ public class AnimatableMoveToTargetGoal extends AnimatableMovableGoal {
 	public void tick() {
 		LivingEntity target = this.entity.getTarget();
 		if (target == null || !EntityPredicates.NO_CREATIVE_OR_SPECTATOR.test(target) || !target.isAlive()) return;
-//		if (this.entity.level.getGameTime() < 1 || this.entity.tickCount < 1) return;
+		if (this.entity.level.getGameTime() < 1 || this.entity.tickCount < 1) return;
 		if (pathCheckRate > 0) pathCheckRate--;
-//		ChaosAwakens.LOGGER.debug(pathCheckRate);
-		//FIX Crash debugging the path (when it becomes null for any reason)
-//		if (this.entity.getNavigation().getPath() != null) {
-//			ChaosAwakens.LOGGER.debug(this.entity.getNavigation().getPath().toString());
-//		}
 		
-//		ChaosAwakens.LOGGER.debug(this.entity.level.getGameTime());
-		
-//		this.entity.lookAt(target, 100, 100);
 		this.entity.getLookControl().setLookAt(target, 30F, 30F);
 
-	//	if (path != null && !path.canReach() && !path.isDone() && pathCheckRate > 0) failedIterations++;
-		
-		if (pathCheckRate <= 0 && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget())) {
+		if ((pathCheckRate <= 0 || this.entity.getNavigation().isDone() || this.entity.getNavigation().isStuck()) && this.entity.getSensing().canSee(target) && this.entity.distanceToSqr(target) >= EntityUtil.getMeleeAttackReachSqr(entity, entity.getTarget())) {
 			Vector3d targetPosition = target.position();
-			pathCheckRate = MathHelper.nextInt(entity.getRandom(), 4, 6);
-			this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier);
+			pathCheckRate = MathHelper.nextInt(entity.getRandom(), 4, 11);
 
-	//		if (path == null) {
-	//			this.path = this.entity.getNavigation().createPath(target, 0);				
-	//		}
-			
-			//Fix entities mindlessly spinning due to next node index being out of bounds
-			//It never caused any exceptions (when logging previously), though? I dunno how that happened --Meme Man
-		//	if (!this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier)) pathCheckRate += 5;
+			if (!this.entity.getNavigation().moveTo(this.entity.getTarget(), this.speedMultiplier)) pathCheckRate += 15;
 		}
 	}
 }

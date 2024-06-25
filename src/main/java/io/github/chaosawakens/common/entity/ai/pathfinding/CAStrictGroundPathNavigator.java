@@ -57,12 +57,12 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 	//	ChaosAwakens.debug("CANCUTCORNER", "[CanCutCorner Return Value]: " + mob.canCutCorner(mob.getNavigation().getPath().getNextNode().type));
 
 		if (tryTruncateNodes(curPath, pathLength, entityPos, center, maxArea)) {
-			if (followingPath(curPath, 1F) || (elevationChangedFor(curPath) && followingPath(curPath, 1.0F)) && mob.canCutCorner(path.getNextNode().type)) {
+			if (followingPath(curPath, 0.2F) || (elevationChangedFor(curPath) && followingPath(curPath, mob.getBbWidth() * 0.5F)) && mob.canCutCorner(path.getNextNode().type)) {
 				path.setNextNodeIndex(path.getNextNodeIndex() + 1);
 			}
 		}
 		
-	/*	for (int i = 0; i < path.getNodeCount() - 1; i++) {
+		/* for (int i = 0; i < path.getNodeCount() - 1; i++) {
 			PathPoint node = path.getNode(i);
 			final BlockPos p = node.asBlockPos().below();
 			
@@ -205,7 +205,7 @@ public class CAStrictGroundPathNavigator extends GroundPathNavigator {
 					PathNodeType in = this.nodeEvaluator.getBlockPathType(this.level, x, y0, z);
 					float priority = this.mob.getPathfindingMalus(in);
 					if (priority < 0.0F || priority >= 8.0F) return false;
-					if (in == PathNodeType.DAMAGE_FIRE || in == PathNodeType.DANGER_FIRE || in == PathNodeType.DAMAGE_OTHER) return false;
+					if (in == PathNodeType.DAMAGE_FIRE || in == PathNodeType.DANGER_FIRE || in == PathNodeType.DAMAGE_OTHER || in == PathNodeType.WATER) return false;
                 }
             }
         } while (l <= ml);
