@@ -370,7 +370,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 			playTauntSound = false;
 		}
-		if (tauntAnim.hasAnimationFinished() || (getTarget() != null && distanceTo(getTarget()) <= 15.0D) || isDeadOrDying()) setShouldTaunt(false);
+		if (tauntAnim.hasAnimationFinished() || (getTarget() != null && getTarget().isAlive() && distanceTo(getTarget()) <= 15.0D) || isDeadOrDying()) setShouldTaunt(false);
 	}
 
 	private void handleIntervalSounds() {
