@@ -145,7 +145,7 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 		if (random.nextFloat() < 0.3F) {
 			for (int angle = 0; angle < 360; angle++) {
 				if (angle % 180 == 0) {
-					for (int count = 0; count < 2; count++) {
+					for (int count = 0; count < level.random.nextInt(4); count++) {
 						if (level.random.nextInt() % 50 == 0) {
 							level.addParticle(CAParticleTypes.FART.get(), getX(), this.getRandomY(), getZ(), level.random.nextBoolean() ? 0.01D : -0.01D, 0.03D, level.random.nextBoolean() ? 0.01D : -0.01D);
 						}

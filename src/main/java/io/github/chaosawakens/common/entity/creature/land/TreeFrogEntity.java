@@ -4,18 +4,23 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.common.entity.ai.controllers.body.base.SmoothBodyController;
 import io.github.chaosawakens.common.entity.ai.controllers.movement.TreeFrogMovementController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.controller.BodyController;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
@@ -36,13 +41,15 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	private final WrappedAnimationController<TreeFrogEntity> mainController = createMainMappedController("treefrogmaincontroller");
 	private final WrappedAnimationController<TreeFrogEntity> ambienceController = createMainMappedController("treefrogambiencecontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder jumpAnim = new SingletonAnimationBuilder(this, "Jump", EDefaultLoopTypes.PLAY_ONCE);
+	private final SingletonAnimationBuilder jumpAnim = new SingletonAnimationBuilder(this, "Jump", EDefaultLoopTypes.PLAY_ONCE).setAnimSpeed(2.5D);
 	private final SingletonAnimationBuilder blinkAnim = new SingletonAnimationBuilder(this, "Blink", random.nextInt(3)).setWrappedController(ambienceController);
 	public static final String TREE_FROG_MDF_NAME = "tree_frog";
 
 	public TreeFrogEntity(EntityType<? extends AnimalEntity> type, World world) {
 		super(type, world);
 		this.moveControl = new TreeFrogMovementController(this);
+		setPathfindingMalus(PathNodeType.WATER, 4.0F);
+		setPathfindingMalus(PathNodeType.LEAVES, 1.0F);
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -79,8 +86,24 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	}
 	
 	@Override
-	protected void registerGoals() {}
-	
+	protected void registerGoals() {
+	}
+
+	@Override
+	protected BodyController createBodyControl() {
+		return new SmoothBodyController(this);
+	}
+
+	@Override
+	public boolean isPushedByFluid() {
+		return false;
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
+	}
+
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
@@ -142,7 +165,16 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	protected int calculateFallDamage(float pDistance, float pDamageMultiplier) {
 		return 0;
 	}
-	
+
+	@Override
+	public void travel(Vector3d pTravelVector) {
+		if (isEffectiveAi() && isInWater()) {
+			moveRelative(getSpeed(), pTravelVector);
+			move(MoverType.SELF, getDeltaMovement());
+			setDeltaMovement(getDeltaMovement().scale(0.9D));
+		} else super.travel(pTravelVector);
+	}
+
 	@Nullable
 	@Override
 	public ILivingEntityData finalizeSpawn(IServerWorld pLevel, DifficultyInstance pDifficulty, SpawnReason pReason, ILivingEntityData pSpawnData, CompoundNBT pDataTag) {
@@ -170,7 +202,13 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return treeFrogAnimations;
 	}
-	
+
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), true);
+		if (getWalkAnim() != null && isMoving() && !isOnGround()) playAnimation(getWalkAnim(), false);
+	}
+
 	private class TreeFrogData extends AgeableData {
 		public final int treeFrogType;
 
