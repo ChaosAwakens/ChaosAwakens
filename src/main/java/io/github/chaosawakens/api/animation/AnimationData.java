@@ -1,7 +1,6 @@
 package io.github.chaosawakens.api.animation;
 
 import io.github.chaosawakens.common.util.FileUtil;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.resources.*;
 import net.minecraft.util.ResourceLocation;
@@ -9,11 +8,13 @@ import net.minecraft.util.Unit;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**

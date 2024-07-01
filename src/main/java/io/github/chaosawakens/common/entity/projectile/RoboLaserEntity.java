@@ -19,6 +19,7 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -47,54 +48,58 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 		super(CAEntityTypes.ROBO_LASER.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
 	}
 
-	
 	@Override
 	public void tick() {
 		tickAnims();
 		super.tick();
-		if (this.hasHit()) {
-			if (!this.isDying()) {
+
+		if (hasHit()) {
+			if (!isDying()) {
 				stopAnimation(getIdleAnim());
 				playAnimation(getDeathAnim(), true);
-				this.setDying(true);
+
+				setDying(true);
 			}
+
 			playAnimation(deathAnim, false);
-			this.setDeltaMovement(0, 0, 0);
-		}
-		else
-			playAnimation(getIdleAnim(), true);	
-		if(getMainWrappedController().isAnimationFinished(deathAnim)) {
-			this.remove();
-		}
+			setDeltaMovement(0, 0, 0);
+		} else playAnimation(getIdleAnim(), true);
+
+		if (getMainWrappedController().isAnimationFinished(deathAnim)) remove();
 	}
 	
 	protected void onHit(RayTraceResult result) {
 		super.onHit(result);
-		this.setHasHit(true);
-		if(!this.level.isClientSide() && this.getExplosivePower() > 0) {
-			boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-			level.explode((Entity)null, this.getX(), this.getY(), this.getZ(), this.getExplosivePower(), this.fireOnHit(),
-					flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+		setHasHit(true);
+
+		if (!this.level.isClientSide() && getExplosivePower() > 0) {
+			boolean isMobGriefingAllowed = ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+			level.explode(null, getX(), getY(), getZ(), getExplosivePower(), fireOnHit(), isMobGriefingAllowed ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 		}
 	}
 	
 	@Override
 	protected void onHitEntity(EntityRayTraceResult pResult) {
-		Entity entity = pResult.getEntity();
-		entity.hurt(DamageSource.thrown(this, this.getOwner()), this.getDamagePower());
+		Entity targetEntity = pResult.getEntity();
+		targetEntity.hurt(DamageSource.thrown(this, getOwner()), getDamagePower());
 	}
 	
 	public void setPower(float damagePower, float explosivePower, boolean canCauseFire) {
-		this.setDamagePower(damagePower);
-		this.setExplosivePower(explosivePower);
-		this.setFireOnHit(canCauseFire);
+		setDamagePower(damagePower);
+		setExplosivePower(explosivePower);
+		setFireOnHit(canCauseFire);
 	}
-	
+
 	@Override
 	protected boolean shouldBurn() {
 		return true;
 	}
-	
+
+	@Override
+	public boolean displayFireAnimation() {
+		return false;
+	}
+
 	@Override
 	public AnimationFactory getFactory() {
 		return factory;

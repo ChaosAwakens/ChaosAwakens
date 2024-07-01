@@ -2,7 +2,6 @@ package io.github.chaosawakens.client.sounds.tickable.boss.insect;
 
 import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableIdleSound;
 import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 

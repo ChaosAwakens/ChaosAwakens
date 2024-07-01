@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.entity.ai.pathfinding;
 
 import io.github.chaosawakens.api.IUtilityHelper;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.*;
 import net.minecraft.util.math.BlockPos;

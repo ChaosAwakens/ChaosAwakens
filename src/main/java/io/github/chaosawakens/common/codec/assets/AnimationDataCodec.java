@@ -2,15 +2,12 @@ package io.github.chaosawakens.common.codec.assets;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.chaosawakens.api.animation.AnimationDataHolder;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.easing.EasingType;
 import software.bernie.shadowed.eliotlash.mclib.math.IValue;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 //TODO Bunch of unused stuff, left here for future reference (Heat Death of the Universe:tm:)
 public class AnimationDataCodec {

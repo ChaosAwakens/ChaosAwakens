@@ -1,9 +1,5 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
-import java.util.function.BiFunction;
-
-import javax.annotation.Nullable;
-
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -13,7 +9,6 @@ import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.registry.CATeams;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.command.arguments.EntityAnchorArgument;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -36,6 +31,9 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+import java.util.function.BiFunction;
+
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(3);
@@ -52,33 +50,39 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> LASER_FACTORY_CLOSE = (owner, offset) -> {
 		LivingEntity target = owner.getTarget();
 		World world = owner.level;
-		if (!owner.isSilent())
-			world.levelEvent((PlayerEntity) null, 1016, owner.blockPosition(), 0);
+
 		Vector3d viewVector = owner.getViewVector(1.0F);
 		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
 		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
+
 		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
 		laser.setPower(4, 0, false);
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
-		laser.lookAt(EntityAnchorArgument.Type.EYES, target.position());
+
+		laser.xPower *= 10.0F;
+		laser.zPower *= 10.0F;
+
 		return laser;
 	};
 	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> LASER_FACTORY_EXPLOSIVE = (owner, offset) -> {
 		LivingEntity target = owner.getTarget();
 		World world = owner.level;
-		if (!owner.isSilent())
-			world.levelEvent((PlayerEntity) null, 1016, owner.blockPosition(), 0);
+
 		Vector3d viewVector = owner.getViewVector(1.0F);
 		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
 		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
+
 		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
 		laser.setPower(4, 5, false);
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
-		laser.lookAt(EntityAnchorArgument.Type.EYES, target.position());
+
+		laser.xPower *= 10.0F;
+		laser.zPower *= 10.0F;
+
 		return laser;
 	};
 	private static final Vector3d LASER_OFFSET = new Vector3d(2.0, 0.4, 2.0);
@@ -111,15 +115,15 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		return isDeadOrDying() || isAttacking() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		return !isAttacking() && !isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
-		return isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
+		return isDeadOrDying() || isAttacking() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	@Override
@@ -196,10 +200,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	protected void handleBaseAnimations() {
 		super.handleBaseAnimations();
 
-		if (random.nextInt(150) == 0 && !isPlayingAnimation(idleExtrasAnim) && getTarget() == null) playAnimation(idleExtrasAnim, true);
-		if ((isAttacking() || !isMoving()) && isPlayingAnimation(walkAnim)) {
-			playAnimation(idleAnim, true);
-			stopAnimation(walkAnim);
-		}
+		if (random.nextInt(150) == 0 && !isPlayingAnimation(idleExtrasAnim) && getTarget() == null) playAnimation(idleExtrasAnim, false);
+		if ((isAttacking() || !isMoving()) && isPlayingAnimation(walkAnim)) stopAnimation(walkAnim);
 	}
 }

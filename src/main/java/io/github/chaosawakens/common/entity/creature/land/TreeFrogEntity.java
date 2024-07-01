@@ -12,7 +12,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.BodyController;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -77,11 +76,14 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
+		if (isOnGround()) {
+			stopAnimation(jumpAnim);
+			playAnimation(idleAnim, true);
+		}
 		return PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
-		if (!isMoving() && !isPlayingAnimation(blinkAnim, ambienceController)) playAnimation(blinkAnim, false);
 		return PlayState.CONTINUE;
 	}
 	
@@ -207,6 +209,7 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	protected void handleBaseAnimations() {
 		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), true);
 		if (getWalkAnim() != null && isMoving() && !isOnGround()) playAnimation(getWalkAnim(), false);
+		if (!isMoving() && !isPlayingAnimation(blinkAnim, ambienceController)) playAnimation(blinkAnim, false);
 	}
 
 	private class TreeFrogData extends AgeableData {

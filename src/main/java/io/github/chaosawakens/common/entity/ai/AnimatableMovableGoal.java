@@ -6,7 +6,6 @@ import io.github.chaosawakens.common.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.pathfinding.Path;
 
 public abstract class AnimatableMovableGoal extends AnimatableGoal {
 

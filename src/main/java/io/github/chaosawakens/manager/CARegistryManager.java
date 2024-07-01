@@ -1,6 +1,5 @@
 package io.github.chaosawakens.manager;
 
-import io.github.chaosawakens.common.network.packets.s2c.EnforceAssetsPacket;
 import io.github.chaosawakens.common.registry.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 

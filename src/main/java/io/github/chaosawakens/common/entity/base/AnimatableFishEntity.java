@@ -4,7 +4,6 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.passive.water.RandomRoamSwimmingGoal;
-import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntitySize;

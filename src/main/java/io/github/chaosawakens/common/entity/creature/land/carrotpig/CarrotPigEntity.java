@@ -23,6 +23,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -36,10 +39,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<CarrotPigEntity>> carrotPigControllers = new ObjectArrayList<WrappedAnimationController<CarrotPigEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> carrotPigAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> carrotPigAnimations = new ObjectArrayList<IAnimationBuilder>(3);
+	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(CarrotPigEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<CarrotPigEntity> mainController = createMainMappedController("carrotpigmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.POTATO, Items.BEETROOT);
 	public static final String CARROT_PIG_MDF_NAME = "carrot_pig";
 
@@ -77,8 +82,34 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.2D, 2.0D));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D) {
+			@Override
+			public void start() {
+				super.start();
+				setPanicking(true);
+			}
+
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+		});
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.2D, 2.0D) {
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+
+			@Override
+			public void tick() {
+				super.tick();
+
+				setPanicking(distanceToSqr(toAvoid) < 109.0D);
+				getNavigation().setSpeedModifier(distanceToSqr(toAvoid) < 109.0D ? 2.0D : 1.2D);
+			}
+		});
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(CAItems.BEETROOT_ON_A_STICK.get()), false));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));
@@ -86,6 +117,20 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(PANICKING, false);
+	}
+
+	public boolean isPanicking() {
+		return this.entityData.get(PANICKING);
+	}
+
+	public void setPanicking(boolean panicking) {
+		this.entityData.set(PANICKING, panicking);
 	}
 
 	@Override
@@ -171,6 +216,13 @@ public class CarrotPigEntity extends AnimatableRideableAnimalEntity {
 	@Override
 	public CarrotPigEntity getBreedOffspring(ServerWorld pServerLevel, AgeableEntity pMate) {
 		return CAEntityTypes.CARROT_PIG.get().create(pServerLevel);
+	}
+
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isPanicking()) playAnimation(getWalkAnim(), false);
+		if (isPanicking()) playAnimation(runAnim, false);
 	}
 	
 	@SuppressWarnings("unchecked")

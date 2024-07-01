@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robopounder;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
@@ -18,7 +17,6 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -147,7 +145,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			
 			if (targetRageRunPos != null) {				
 				if (rageRunPath == null || !rageRunPath.canReach()) rageRunPath = ownerPathNav.createPath(targetRageRunPos, 0);
-				relevantLookPos = new Vector3d(targetRageRunPos.getX(), targetRageRunPos.getY() + owner.getEyeY(), targetRageRunPos.getZ());
+				relevantLookPos = new Vector3d(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ());
 			}
 		}
 		
@@ -203,11 +201,11 @@ public class RoboPounderRageRunGoal extends Goal {
 
 				BlockState detectedState = owner.level.getBlockState(detectedPos);
 
-				if (detectedState.isAir(owner.level, detectedPos)) continue;
+				if (detectedState.isAir(owner.level, detectedPos) || detectedState.getCollisionShape(owner.level, detectedPos).isEmpty()) continue;
 
 				double blockHeight = Math.abs(detectedState.getCollisionShape(owner.level, detectedPos).max(Direction.Axis.Y) - owner.getY());
 				
-				if (detectedState.is(CATags.Blocks.POUNDER_IMMUNE) && blockHeight > maxUpStep) {
+				if ((detectedState.is(CATags.Blocks.POUNDER_IMMUNE) || owner.isInWater() || owner.isInLava()) && blockHeight > maxUpStep) {
 					this.foundCrashCollision = true;
 					break;
 				}
@@ -233,12 +231,16 @@ public class RoboPounderRageRunGoal extends Goal {
 			owner.setDeltaMovement(0, owner.getDeltaMovement().y, 0);
 			owner.getNavigation().stop();
 			EntityUtil.freezeEntityRotation(owner);
-		} else BlockPosUtil.destroyCollidingBlocksWithOffset(owner, false, 0.05D, 0, 0.05D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
+		} else BlockPosUtil.destroyCollidingBlocksWithOffset(owner, false, 0.07D, 0, 0.07D, (targetBlock) -> !targetBlock.is(CATags.Blocks.POUNDER_IMMUNE));
 	}
 	
-	private boolean shouldExitCooldown() {
+	private boolean shouldExitCooldown() { // Inlining this would be a crime to the eyes (Oh The Irony:tm:)
 		if (rageCrashAnim.get().isPlaying()) return rageCrashAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCrashAnim.get().getWrappedAnimLength() / 1.5D, rageCrashAnim.get().getWrappedAnimLength() * 2);
-		else return rageCooldownAnim.get().isPlaying() && rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 2, rageCooldownAnim.get().getWrappedAnimLength());
+		else return rageCooldownAnim.get().isPlaying() && rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 1.4D, rageCooldownAnim.get().getWrappedAnimLength() / 1.167D);
+	}
+
+	private boolean hasEffectivelyBegunRageRun() {
+		return rageBeginAnim.get().isPlaying() && rageBeginAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageBeginAnim.get().getWrappedAnimLength() / 1.7D, rageBeginAnim.get().getWrappedAnimLength() / 1.2D);
 	}
 	
 	@Override
@@ -261,7 +263,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			EntityUtil.freezeEntityRotation(owner);
 		}
 		
-		if (rageBeginAnim.get().hasAnimationFinished()) {
+		if (hasEffectivelyBegunRageRun()) {
 			if (target != null) {
 				owner.playAnimation(rageRunAnim.get(), false);
 				createRageRunPath();
@@ -291,11 +293,11 @@ public class RoboPounderRageRunGoal extends Goal {
 				hasCharged = true;
 			}
 
-			double mod = Math.min(owner.getRageRunFrictionOffset() / 250.0D, 0.09D);
+			double mod = Math.min(owner.getRageRunFrictionOffset() / 250.0D, 0.09D); // Hundredth decimal for scalar/power mod
 
 			base += mod;
 
-			double xMod = Math.min(base, 0) * Math.cos(Math.toRadians(owner.yRot - 90));
+			double xMod = Math.min(base, 0) * Math.cos(Math.toRadians(owner.yRot - 90)); // Power * direction (duh, that's what a vector is, basically)
 			double zMod = Math.min(base, 0) * Math.sin(Math.toRadians(owner.yRot - 90));
 
 			owner.setDeltaMovement(xMod, owner.getDeltaMovement().y, zMod);

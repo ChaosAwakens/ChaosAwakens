@@ -3,7 +3,6 @@ package io.github.chaosawakens.common.entity.base;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
-import io.github.chaosawakens.common.registry.CAEffects;
 import io.github.chaosawakens.common.util.EntityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
@@ -16,7 +15,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -29,7 +27,7 @@ import javax.annotation.Nullable;
 
 public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements IAnimatableEntity {
 	private static final DataParameter<Boolean> SWIMMING = EntityDataManager.defineId(AnimatableWaterMobEntity.class, DataSerializers.BOOLEAN);
-	protected float prevBodyRot;
+	public float prevBodyRot;
 	protected float lastDamageAmount;
 
 	public AnimatableWaterMobEntity(EntityType<? extends WaterMobEntity> type, World world) {
@@ -163,12 +161,17 @@ public abstract class AnimatableWaterMobEntity extends WaterMobEntity implements
 
 	@Override
 	public void tick() {
-		this.prevBodyRot = yBodyRot;
 		tickAnims();
 		super.tick();
 		
 		if (!level.isClientSide) setSwimming(!isStuck() && isInWater());
 		handleBaseAnimations();
+
+		if (tickCount <= 1) onSpawn(isDeadOrDying()); // Better called in #finalizeSpawn but whatever
+	}
+
+	public void onSpawn(boolean hasAlreadyDied) {
+
 	}
 
 	public double getFollowRange() {

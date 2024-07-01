@@ -15,7 +15,6 @@ import io.github.chaosawakens.common.blocks.ore.CAEntityTrapOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAFallingOreBlock;
 import io.github.chaosawakens.common.blocks.ore.CAOreBlock;
 import io.github.chaosawakens.common.blocks.ore.UraniumOreBlock;
-import io.github.chaosawakens.common.blocks.robo.WiredRoboBlock;
 import io.github.chaosawakens.common.blocks.spawner.AggressiveAntNestBlock;
 import io.github.chaosawakens.common.blocks.spawner.AntNestBlock;
 import io.github.chaosawakens.common.blocks.tileentities.*;

@@ -4,8 +4,6 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nonnull;
-
 public class AutoSizedPathNode extends RefinedPathNode {
     protected final IAnimatableEntity ownerEntity;
     protected final LivingEntity ownerLivingEntity;

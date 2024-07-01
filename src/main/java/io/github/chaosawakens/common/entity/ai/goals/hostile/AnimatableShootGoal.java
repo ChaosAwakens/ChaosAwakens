@@ -1,8 +1,5 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
-
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -12,6 +9,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 public class AnimatableShootGoal extends Goal {
 	private final AnimatableMonsterEntity owner;
@@ -40,56 +40,53 @@ public class AnimatableShootGoal extends Goal {
 		this.projectileFactory = projectileFactory;
 		this.minimumDistance = minimumDistance;
 	}
-	
+
+	@Override
 	public boolean canUse() {
-		LivingEntity target = this.owner.getTarget();
-		return ObjectUtil.performNullityChecks(false, target)
-				&& owner.distanceTo(target) >= this.minimumDistance && this.owner.canSee(target) && !target.isInvulnerable()
-				&& owner.isAlive() && !owner.isAttacking() && target.isAlive() && !target.isDeadOrDying()
-				&& !this.owner.isOnAttackCooldown() && owner.getRandom().nextInt(this.probability) == 0;
+		return ObjectUtil.performNullityChecks(false, owner.getTarget())
+				&& owner.distanceTo(owner.getTarget()) >= minimumDistance && owner.canSee(owner.getTarget()) && !owner.getTarget().isInvulnerable()
+				&& owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive() && !owner.getTarget().isDeadOrDying()
+				&& !owner.isOnAttackCooldown() && owner.getRandom().nextInt(probability) == 0;
 	}
 	
 	@Override
 	public boolean canContinueToUse() {
-		LivingEntity target = this.owner.getTarget();
-		return ObjectUtil.performNullityChecks(false, owner, target) && !owner.isDeadOrDying()
-				&& !this.shootAnim.get().hasAnimationFinished();
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget()) && !owner.isDeadOrDying() && !this.shootAnim.get().hasAnimationFinished();
 	}
 
+	@Override
 	public void start() {
 		owner.setAttackID(attackId);
 		owner.getNavigation().stop();
 		owner.playAnimation(shootAnim.get(), true);
-		this.hasShotProjectile = false;
 		owner.getLookControl().setLookAt(owner.getTarget(), 30.0F, 30.0F);
+
+		this.hasShotProjectile = false;
 	}
 
-	/**
-	 * Reset the task's internal state. Called when this task is interrupted by
-	 * another one
-	 */
+	@Override
 	public void stop() {
 		owner.setAttackID((byte) 0);
 		owner.stopAnimation(shootAnim.get());
 		owner.setAttackCooldown(fireRate);
+
 		this.hasShotProjectile = false;
 	}
 
-	/**
-	 * Keep ticking a continuous task that has already been started
-	 */
+	@Override
 	public void tick() {
+		owner.stopAnimation(owner.getIdleAnim());
+		owner.stopAnimation(owner.getWalkAnim());
+
 		owner.getNavigation().stop();
 		LivingEntity target = this.owner.getTarget();
+
 		if (MathUtil.isBetween(shootAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 			if (!this.hasShotProjectile) {
 				World world = this.owner.level;
 				world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
 				this.hasShotProjectile = true;
 			}
-		} else {
-			if(target != null)
-				owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
-		}
+		} else if (target != null) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
 	}
 }

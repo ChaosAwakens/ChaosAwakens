@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorldReader;
 
 import java.util.EnumSet;
-import java.util.Iterator;
 
 //TODO Rewrite
 public class WhaleBreatheGoal extends Goal {

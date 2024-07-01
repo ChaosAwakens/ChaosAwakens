@@ -37,7 +37,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class GazelleEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<GazelleEntity>> gazelleControllers = new ObjectArrayList<WrappedAnimationController<GazelleEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> gazelleAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> gazelleAnimations = new ObjectArrayList<IAnimationBuilder>(4);
 	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(GazelleEntity.class, DataSerializers.INT);
 	private final WrappedAnimationController<GazelleEntity> mainController = createMainMappedController("gazellemaincontroller");

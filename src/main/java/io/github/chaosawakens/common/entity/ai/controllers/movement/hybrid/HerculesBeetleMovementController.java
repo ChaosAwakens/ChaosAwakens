@@ -1,11 +1,9 @@
 package io.github.chaosawakens.common.entity.ai.controllers.movement.hybrid;
 
-import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
 
 public class HerculesBeetleMovementController extends MovementController {
     private final HerculesBeetleEntity ownerBeetle;

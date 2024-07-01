@@ -48,11 +48,11 @@ public final class BlockPosUtil {
 		
 		if (!positionsToDestroy.isEmpty()) {
 			BlockPos.betweenClosed(x1, y1, z1, x2, y2, z2).forEach((targetPos) -> {
-				if (targetPos != null && !targetWorld.getBlockState(targetPos).isAir(targetWorld, targetPos) && (targetWorld.getFluidState(targetPos) == null || targetWorld.getFluidState(targetPos).isEmpty())) {
+				if (targetPos != null && !targetWorld.getBlockState(targetPos).isAir(targetWorld, targetPos) && !targetWorld.getBlockState(targetPos).getCollisionShape(targetWorld, targetPos).isEmpty() && (targetWorld.getFluidState(targetPos) == null || targetWorld.getFluidState(targetPos).isEmpty())) {
 					BlockState targetState = targetWorld.getBlockState(targetPos);
 					Block targetBlock = targetState.getBlock();
 					
-					if (destructibilityPredicate == null || (destructibilityPredicate != null && destructibilityPredicate.test(targetBlock)) && !targetWorld.isClientSide && targetWorld.isLoaded(targetPos)) targetWorld.destroyBlock(targetPos, dropBlocks);
+					if (destructibilityPredicate == null || destructibilityPredicate.test(targetBlock) && !targetWorld.isClientSide && targetWorld.isLoaded(targetPos)) targetWorld.destroyBlock(targetPos, dropBlocks);
 				}
 			});
 		}

@@ -2,7 +2,6 @@ package io.github.chaosawakens.common.items.projectile;
 
 import io.github.chaosawakens.common.entity.projectile.arrow.IrukandjiArrowEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

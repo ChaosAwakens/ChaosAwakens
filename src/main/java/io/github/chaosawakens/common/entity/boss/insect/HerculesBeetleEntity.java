@@ -60,7 +60,7 @@ import javax.annotation.Nullable;
 
 public class HerculesBeetleEntity extends AnimatableMonsterEntity {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private final ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>>(4);
+    private final ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>> herculesBeetleControllers = new ObjectArrayList<WrappedAnimationController<HerculesBeetleEntity>>(5);
     private final ObjectArrayList<IAnimationBuilder> herculesBeetleAnimations = new ObjectArrayList<IAnimationBuilder>(16);
     private static final DataParameter<Boolean> DOCILE = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> AWAKENING = EntityDataManager.defineId(HerculesBeetleEntity.class, DataSerializers.BOOLEAN);
@@ -233,6 +233,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 
     @Override
     public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
+        if (isAttacking() || isOnAttackCooldown()) playAnimation(idleAnim, true);
         return isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
     }
 

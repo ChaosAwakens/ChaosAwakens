@@ -2,13 +2,8 @@
   "anim_file_loc": "chaosawakens:animations/hostile/insect/cave_fisher.animation.json",
   "animations": [
     {
-      "animation_name": "Climb",
-      "animation_length": 1.24,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Walk Attack",
-      "animation_length": 1.24,
+      "animation_name": "Idle",
+      "animation_length": 2.08,
       "loop_type": "LOOP"
     },
     {
@@ -22,18 +17,23 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Inverse Walk",
-      "animation_length": 1.24,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Pinch Attack",
       "animation_length": 2.08,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 2.08,
+      "animation_name": "Inverse Walk",
+      "animation_length": 1.24,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Walk Attack",
+      "animation_length": 1.24,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Climb",
+      "animation_length": 1.24,
       "loop_type": "LOOP"
     }
   ]

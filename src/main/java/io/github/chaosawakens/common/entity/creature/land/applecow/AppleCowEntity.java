@@ -40,7 +40,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class AppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<AppleCowEntity>> appleCowControllers = new ObjectArrayList<WrappedAnimationController<AppleCowEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> appleCowAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> appleCowAnimations = new ObjectArrayList<IAnimationBuilder>(3);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.INT);
 	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(AppleCowEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<AppleCowEntity> mainController = createMainMappedController("applecowmaincontroller");

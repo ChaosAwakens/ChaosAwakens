@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 public class EnchantedGoldenAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>> enchantedGoldenAppleCowControllers = new ObjectArrayList<WrappedAnimationController<EnchantedGoldenAppleCowEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> enchantedGoldenAppleCowAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> enchantedGoldenAppleCowAnimations = new ObjectArrayList<IAnimationBuilder>(3);
 	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(EnchantedGoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<EnchantedGoldenAppleCowEntity> mainController = createMainMappedController("enchantedgoldenapplecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);

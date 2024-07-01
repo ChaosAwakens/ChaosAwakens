@@ -1,13 +1,12 @@
 package io.github.chaosawakens.mixins;
 
+import io.github.chaosawakens.common.items.weapons.ranged.UltimateCrossbowItem;
+import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import io.github.chaosawakens.common.items.weapons.ranged.UltimateCrossbowItem;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.ItemStack;
 
 @Mixin(CrossbowItem.class)
 public abstract class CrossbowItemMixin {

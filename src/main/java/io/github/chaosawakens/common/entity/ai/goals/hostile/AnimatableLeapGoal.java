@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;

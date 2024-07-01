@@ -36,6 +36,7 @@ import net.minecraft.item.Items;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -487,6 +488,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	@Override
 	public int getMaxHeadXRot() {
 		return isRageRunning() ? 360 : super.getMaxHeadXRot();
+	}
+
+	@Override
+	public boolean canCutCorner(PathNodeType pPathType) {
+		return isRageRunning() || super.canCutCorner(pPathType);
 	}
 
 	@Override

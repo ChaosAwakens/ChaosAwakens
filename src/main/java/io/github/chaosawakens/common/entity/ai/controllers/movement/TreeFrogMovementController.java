@@ -1,25 +1,15 @@
 package io.github.chaosawakens.common.entity.ai.controllers.movement;
 
-import com.sk89q.worldedit.math.Vector3;
 import io.github.chaosawakens.common.entity.creature.land.TreeFrogEntity;
-import io.github.chaosawakens.common.util.MathUtil;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.pathfinding.WalkNodeProcessor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
-import java.util.Random;
-import java.util.function.Supplier;
-import java.util.function.ToDoubleFunction;
 
 public class TreeFrogMovementController extends MovementController {
 	private final TreeFrogEntity owner;

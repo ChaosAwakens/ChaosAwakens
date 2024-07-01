@@ -7,12 +7,12 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Accelerate",
+      "animation_name": "Idle Extras",
       "animation_length": 3.6,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle Extras",
+      "animation_name": "Idle",
       "animation_length": 3.6,
       "loop_type": "LOOP"
     },
@@ -22,7 +22,7 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle",
+      "animation_name": "Accelerate",
       "animation_length": 3.6,
       "loop_type": "LOOP"
     }

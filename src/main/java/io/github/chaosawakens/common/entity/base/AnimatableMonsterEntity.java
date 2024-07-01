@@ -27,6 +27,7 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -161,6 +162,25 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		repelEntities(originPos.x, originPos.y, originPos.z, radius);
 	}
 
+	public void aimAt(double targetX, double targetY, double targetZ) {
+		double deltaX = targetX - getX();
+		double deltaZ = targetZ - getZ();
+
+		setYHeadRot((float) (MathHelper.atan2(deltaZ, deltaX) * (180F / Math.PI)) - 90.0F);
+	}
+
+	public void aimAt(Vector3d targetPos) {
+		aimAt(targetPos.x, targetPos.y, targetPos.z);
+	}
+
+	public void aimAt(BlockPos targetPos) {
+		aimAt(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+	}
+
+	public void aimAt(Entity target) {
+		aimAt(target.position());
+	}
+
 	public boolean isStuck() {
 		double dx = getX() - xo;
 		double dz = getZ() - zo;
@@ -275,15 +295,16 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 
 	protected void divertTarget() {
-	/*	List<LivingEntity> allAttackableEntitiesAround = EntityUtil.getAllEntitiesAround(this, getFollowRange(), getFollowRange(), getFollowRange(), getFollowRange());
-		
+		double maxRange = Math.min(getFollowRange(), 20);
+		List<LivingEntity> allAttackableEntitiesAround = EntityUtil.getAllEntitiesAround(this, maxRange, maxRange, maxRange, maxRange);
+
 		for (LivingEntity target : allAttackableEntitiesAround) {
 			if (getTarget() != null) {
-				if (!isAttacking() && distanceTo(target) < distanceTo(getTarget()) && EntityPredicates.ATTACK_ALLOWED.test(target) && getSensing().canSee(target)) {
+				if (!isAttacking() && distanceTo(target) < distanceTo(getTarget()) && EntityPredicates.ATTACK_ALLOWED.test(target) && getSensing().canSee(target) && (target.getClass().equals(getTarget().getClass()) || (getLastHurtByMob() != null && getLastHurtByMob().is(target)))) {
 					setTarget(target);
 				}
 			}
-		} */
+		}
 	}
 
 	@Override
@@ -304,6 +325,16 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	@Override
 	protected BodyController createBodyControl() {
 		return new SmoothBodyController(this);
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+		return null;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return null;
 	}
 
 	@Override
@@ -328,7 +359,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 		setMoving(!isStuck());
 		handleBaseAnimations();
 
-		if (tickCount <= 1) onSpawn(isDeadOrDying());
+		if (tickCount <= 1) onSpawn(isDeadOrDying()); // Better called in #finalizeSpawn but whatever
 	}
 	
 	protected void updateAttackCooldown() {

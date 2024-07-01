@@ -6,12 +6,47 @@ import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableWalk
 import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableWalkSound;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundEvent;
 
 public final class SoundUtil { //TODO Add common method impls for non-monster entities (laziness momentos)
 
     private SoundUtil() {
         throw new IllegalAccessError("Attempted to instantiate a Utility Class!");
+    }
+
+    /**
+     * Queues a looping ticking sound on method call (appropriate checks included, see {@link AnimatableTickableIdleSound}).
+     *
+     * @param soundToPlay The {@linkplain SoundEvent looping idle sound} to wrap in an {@link AnimatableTickableIdleSound} and play.
+     * @param targetEntity The target {@link Entity} instance to play the sound for.
+     * @param baseVolume The base ("normal") volume of the target sound to play.
+     * @param basePitch The base ("normal") pitch of the target sound to play.
+     */
+    public static void playIdleSoundAsTickable(SoundEvent soundToPlay, Entity targetEntity, float baseVolume, float basePitch) {
+        AnimatableTickableIdleSound targetSound = new AnimatableTickableIdleSound(soundToPlay, baseVolume, basePitch, targetEntity);
+        Minecraft.getInstance().getSoundManager().queueTickingSound(targetSound);
+    }
+
+    /**
+     * Overloaded variant of {@link #playIdleSoundAsTickable(SoundEvent, AnimatableMonsterEntity, float, float)} with a hard-set pitch value.
+     *
+     * @param soundToPlay The {@linkplain SoundEvent looping idle sound} to wrap in an {@link AnimatableTickableIdleSound} and play.
+     * @param targetEntity The target {@link Entity} instance to play the sound for.
+     * @param baseVolume The base ("normal") volume of the target sound to play.
+     */
+    public static void playIdleSoundAsTickable(SoundEvent soundToPlay, Entity targetEntity, float baseVolume) {
+        playIdleSoundAsTickable(soundToPlay, targetEntity, baseVolume, 1.0F);
+    }
+
+    /**
+     * Overloaded variant of {@link #playIdleSoundAsTickable(SoundEvent, AnimatableMonsterEntity, float)} with a hard-set volume value.
+     *
+     * @param soundToPlay The {@linkplain SoundEvent looping idle sound} to wrap in an {@link AnimatableTickableIdleSound} and play.
+     * @param targetEntity The target {@link Entity} instance to play the sound for.
+     */
+    public static void playIdleSoundAsTickable(SoundEvent soundToPlay, Entity targetEntity) {
+        playIdleSoundAsTickable(soundToPlay, targetEntity, 1.0F, 1.0F);
     }
 
     /**

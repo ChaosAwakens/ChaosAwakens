@@ -3,18 +3,10 @@ package io.github.chaosawakens.common.entity.ai.navigation.ground.base;
 import io.github.chaosawakens.common.entity.ai.pathfinding.base.BandaidPathfinder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.pathfinding.GroundPathNavigator;
-import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.WalkNodeProcessor;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3i;
-import net.minecraft.world.Region;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import java.util.Set;
 
 public class RefinedGroundPathNavigator extends GroundPathNavigator {
 	protected final AnimatableMonsterEntity owner;

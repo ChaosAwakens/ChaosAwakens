@@ -1,7 +1,6 @@
 package io.github.chaosawakens.data.provider;
 
 import com.google.common.collect.Lists;
-
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.AnimationDataHolder;
 import io.github.chaosawakens.data.builder.provider.AnimationMetadataProvider;
@@ -78,12 +77,13 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Gnaw", 2.0D, ILoopType.EDefaultLoopTypes.LOOP)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/carrot_pig.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
+                new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Run", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/gazelle.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Run", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Graze", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
+                new AnimationDataHolder("Graze", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/lettuce_chicken.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),

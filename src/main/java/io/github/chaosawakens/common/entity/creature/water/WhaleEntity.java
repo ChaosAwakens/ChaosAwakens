@@ -6,9 +6,10 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.controllers.body.base.SmoothBodyController;
 import io.github.chaosawakens.common.entity.ai.controllers.movement.water.WhaleMovementController;
-import io.github.chaosawakens.common.entity.ai.goals.passive.water.whale.WhaleBreatheGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableWaterMobEntity;
 import io.github.chaosawakens.common.entity.creature.water.fish.RockFishEntity;
+import io.github.chaosawakens.common.registry.CASoundEvents;
+import io.github.chaosawakens.common.util.SoundUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -17,14 +18,16 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.entity.ai.controller.DolphinLookController;
+import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.FindWaterGoal;
-import net.minecraft.entity.ai.goal.FollowBoatGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -34,6 +37,7 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
@@ -51,6 +55,12 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 		super(type, world);
 		this.moveControl = new WhaleMovementController(this);
 		this.lookControl = new DolphinLookController(this, 1);
+		this.lookControl = new LookController(this) {
+			@Override
+			protected boolean resetXRotOnTick() {
+				return false;
+			}
+		};
 	}
 	
 	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -94,6 +104,32 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 			Optional<RegistryKey<Biome>> targetBiome = world.getBiomeName(pos);
 			return (Objects.equals(targetBiome, Optional.of(Biomes.OCEAN)) || Objects.equals(targetBiome, Optional.of(Biomes.DEEP_OCEAN))) && world.getFluidState(pos).is(FluidTags.WATER);
 		} else return false;
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		this.xRot = (float) MathHelper.clamp(-Math.toDegrees(getDeltaMovement().y), -85, 85);
+	}
+
+	@Override
+	public void onSpawn(boolean hasAlreadyDied) {
+		if (!hasAlreadyDied && level.isClientSide) {
+			SoundUtil.playIdleSoundAsTickable(CASoundEvents.WHALE_AMBIENT.get(), this, 5.0F);
+		}
+	}
+
+	@Nullable
+	@Override
+	protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+		return CASoundEvents.WHALE_HURT.get();
+	}
+
+	@Nullable
+	@Override
+	protected SoundEvent getDeathSound() {
+		return CASoundEvents.WHALE_DEATH.get();
 	}
 
 	@Override

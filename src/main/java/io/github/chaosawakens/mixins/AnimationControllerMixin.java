@@ -1,25 +1,8 @@
 package io.github.chaosawakens.mixins;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.builder.Animation;
-import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.CustomInstructionKeyframeEvent;
-import software.bernie.geckolib3.core.event.ParticleKeyFrameEvent;
-import software.bernie.geckolib3.core.event.SoundKeyframeEvent;
-import software.bernie.geckolib3.core.keyframe.*;
-import software.bernie.geckolib3.core.util.Axis;
-import software.bernie.shadowed.eliotlash.mclib.math.IValue;
-import software.bernie.shadowed.eliotlash.molang.MolangParser;
-
-import java.util.*;
 
 @Mixin(value = AnimationController.class, remap = false)
 public abstract class AnimationControllerMixin<T extends IAnimatable> {

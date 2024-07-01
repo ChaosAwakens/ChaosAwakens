@@ -1,7 +1,5 @@
 package io.github.chaosawakens.api.animation;
 
-import io.github.chaosawakens.ChaosAwakens;
-import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.builder.ILoopType;
 
 public class AnimationDataHolder {

@@ -1,17 +1,7 @@
 package io.github.chaosawakens.mixins;
 
-import io.github.chaosawakens.common.registry.CAItems;
-import io.github.chaosawakens.common.util.EntityUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.potion.Effects;
-import net.minecraft.tags.FluidTags;
-import net.minecraftforge.common.ForgeMod;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {

@@ -36,7 +36,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class GoldenAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<GoldenAppleCowEntity>> goldenAppleCowControllers = new ObjectArrayList<WrappedAnimationController<GoldenAppleCowEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> goldenAppleCowAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> goldenAppleCowAnimations = new ObjectArrayList<IAnimationBuilder>(3);
 	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(GoldenAppleCowEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<GoldenAppleCowEntity> mainController = createMainMappedController("goldenapplecowmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);

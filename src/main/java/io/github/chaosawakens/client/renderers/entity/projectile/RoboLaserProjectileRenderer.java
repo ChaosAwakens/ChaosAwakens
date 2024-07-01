@@ -2,7 +2,6 @@ package io.github.chaosawakens.client.renderers.entity.projectile;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import io.github.chaosawakens.client.models.entity.projectile.RoboLaserModel;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
