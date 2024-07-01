@@ -1,6 +1,7 @@
 package io.github.chaosawakens.client.models.entity.creature.land;
 
 import io.github.chaosawakens.ChaosAwakens;
+import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.creature.land.GazelleEntity;
 import io.github.chaosawakens.common.util.ObjectUtil;
@@ -9,8 +10,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.AnimationProcessor;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
-
-import javax.annotation.Nullable;
 
 public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleEntity> {
 
@@ -57,25 +56,27 @@ public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleE
 	
 	@Override
 	public IBone getHeadBone() {
-		return getAnimationProcessor().getBone("Neck");
+		return getAnimationProcessor().getBone("Head");
 	}
 
 	@Override
-	public void setLivingAnimations(GazelleEntity entity, Integer uniqueID, @Nullable AnimationEvent customPredicate) {
-		super.setLivingAnimations(entity, uniqueID, customPredicate);
+	public <E extends IAnimatableEntity> void applyHeadRotations(E animatable, AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate) {
+		EntityModelData extraData = customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
+		IBone neck = getBone("Neck");
 
-		if (!entity.isPlayingAnimation("Graze")) {
-			getHeadBone().setRotationX(getHeadBone().getRotationX() + 0.85F);
+		if (ObjectUtil.performNullityChecks(false, extraData, neck) && !animatable.isPlayingAnimation("Graze")) {
+			neck.setRotationX(((extraData.headPitch) * ((float) Math.PI / 180F)) + 0.85F);
+			neck.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
 		}
 	}
 
 	@Override
-	public void setBabyScaling(AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate, boolean scaleHead) {
+	public <E extends IAnimatableEntity> void setBabyScaling(E animatable, AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate, boolean scaleHead) {
 		EntityModelData extraData = (EntityModelData) customPredicate.getExtraData().get(0);
 		IBone root = getBodyBone();
-		IBone head = getHeadBone();
+		IBone neck = getBone("Neck");
 
-		if (ObjectUtil.performNullityChecks(false, extraData, root, head)) {
+		if (ObjectUtil.performNullityChecks(false, extraData, root, neck)) {
 			if (extraData.isChild) {
 				root.setScaleX(0.5f);
 				root.setScaleY(0.5f);
@@ -88,21 +89,21 @@ public class GazelleEntityModel extends ExtendedAnimatedTickingGeoModel<GazelleE
 			}
 			if (extraData.isChild) {
 				if (scaleHead) {
-					head.setScaleX(1f);
-					head.setScaleY(1f);
-					head.setScaleZ(1f);
-					head.setPivotY(10.75f);
+					neck.setScaleX(1f);
+					neck.setScaleY(1f);
+					neck.setScaleZ(1f);
+					neck.setPivotY(10.75f);
 				} else {
-					head.setScaleX(2f);
-					head.setScaleY(2f);
-					head.setScaleZ(2f);
-					head.setPivotY(12.70385F);
+					neck.setScaleX(2f);
+					neck.setScaleY(2f);
+					neck.setScaleZ(2f);
+					neck.setPivotY(12.70385F);
 				}
 			} else {
-				head.setScaleX(1.0f);
-				head.setScaleY(1.0f);
-				head.setScaleZ(1.0f);
-				head.setPivotY(12.70385F);
+				neck.setScaleX(1.0f);
+				neck.setScaleY(1.0f);
+				neck.setScaleZ(1.0f);
+				neck.setPivotY(12.70385F);
 			}
 		}
 	}

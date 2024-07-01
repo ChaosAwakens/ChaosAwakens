@@ -77,7 +77,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		return isPlayingAnimation(grazeAnim) ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState grazePredicate(AnimationEvent<E> event) {

@@ -15,7 +15,7 @@ public interface ICAGeoModel {
 	@Nullable
 	IBone getHeadBone();
 
-	default void setBabyScaling(AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate, boolean scaleHead) {
+	default <E extends IAnimatableEntity> void setBabyScaling(E animatable, AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate, boolean scaleHead) {
 		EntityModelData extraData = (EntityModelData) customPredicate.getExtraData().get(0);
 		IBone root = getBodyBone();
 		IBone head = getHeadBone();
@@ -50,11 +50,11 @@ public interface ICAGeoModel {
 		}
 	}
 
-	default void setBabyScaling(AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate) {
-		setBabyScaling(targetProcessor, customPredicate, false);
+	default <E extends IAnimatableEntity> void setBabyScaling(E animatable, AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate) {
+		setBabyScaling(animatable, targetProcessor, customPredicate, false);
 	}
 
-	default void applyHeadRotations(AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate) {
+	default <E extends IAnimatableEntity> void applyHeadRotations(E animatable, AnimationProcessor<?> targetProcessor, AnimationEvent<?> customPredicate) {
 		EntityModelData extraData = customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
 		IBone head = getHeadBone();
 

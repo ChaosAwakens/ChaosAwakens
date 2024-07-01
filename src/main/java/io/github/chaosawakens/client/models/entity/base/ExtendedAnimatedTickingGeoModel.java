@@ -65,7 +65,7 @@ public abstract class ExtendedAnimatedTickingGeoModel<E extends IAnimatableEntit
 	public void setLivingAnimations(E entity, Integer uniqueID, @Nullable AnimationEvent customPredicate) {		
 		handleFunctionalAnimTick(entity, uniqueID, customPredicate);
 		
-		if (shouldApplyHeadRot()) applyHeadRotations(getAnimationProcessor(), customPredicate);
-		if (shouldApplyChildScaling()) setBabyScaling(getAnimationProcessor(), customPredicate, shouldScaleHeadWithChild());
+		if (shouldApplyHeadRot()) applyHeadRotations(entity, getAnimationProcessor(), customPredicate);
+		if (shouldApplyChildScaling()) setBabyScaling(entity, getAnimationProcessor(), customPredicate, shouldScaleHeadWithChild());
 	}
 }
