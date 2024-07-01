@@ -35,7 +35,7 @@ public class BirdEntityModel extends ExtendedAnimatedTickingGeoModel<BirdEntity>
 
     @Override
     protected boolean shouldApplyHeadRot() {
-        return false;
+        return true;
     }
 
     @Override

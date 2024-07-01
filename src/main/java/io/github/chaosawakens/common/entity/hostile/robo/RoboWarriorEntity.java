@@ -6,10 +6,15 @@ import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
+import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableShootGoal;
+import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robowarrior.RoboWarriorShieldGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.registry.CATeams;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
+import io.github.chaosawakens.common.util.ObjectUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -29,6 +34,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -36,12 +42,12 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.function.BiFunction;
 
 public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboWarriorEntity>> roboWarriorControllers = new ObjectArrayList<WrappedAnimationController<RoboWarriorEntity>>(4);
-	private final ObjectArrayList<IAnimationBuilder> roboWarriorAnimations = new ObjectArrayList<IAnimationBuilder>(1);
-	private static final DataParameter<Boolean> CAN_ACTIVATE_SHIELD = EntityDataManager.defineId(RoboWarriorEntity.class, DataSerializers.BOOLEAN);
+	private final ObjectArrayList<IAnimationBuilder> roboWarriorAnimations = new ObjectArrayList<IAnimationBuilder>(12);
 	private static final DataParameter<Boolean> HAS_HIT_HEALTH_THRESHOLD = EntityDataManager.defineId(RoboWarriorEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> IS_SHIELDED = EntityDataManager.defineId(RoboWarriorEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> SHIELD_DESTROYED = EntityDataManager.defineId(RoboWarriorEntity.class, DataSerializers.BOOLEAN);
@@ -53,18 +59,65 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	private final WrappedAnimationController<RoboWarriorEntity> ambienceController = createMappedController("robowarriorambiencecontroller", this::ambiencePredicate);
 	private final WrappedAnimationController<RoboWarriorEntity> attackController = createMappedController("robowarriorattackcontroller", this::attackPredicate);
 	private final WrappedAnimationController<RoboWarriorEntity> shieldController = createMappedController("robowarriorshieldcontroller", this::shieldPredicate);
+	private final WrappedAnimationController<RoboWarriorEntity> walkController = createMappedController("robowarriorwalkcontroller", this::walkPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP).setWrappedController(walkController);
 	private final SingletonAnimationBuilder deathAnim = new SingletonAnimationBuilder(this, "Death", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(shieldController);
 	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
 	private final SingletonAnimationBuilder leftUppercutAnim = new SingletonAnimationBuilder(this, "Left Uppercut Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rightUppercutAnim = new SingletonAnimationBuilder(this, "Right Uppercut Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder burstLaserAttack = new SingletonAnimationBuilder(this, "Burst Laser Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder chargedLaserAttack = new SingletonAnimationBuilder(this, "Charged Laser Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder shieldUpAnim = new SingletonAnimationBuilder(this, "Activate Shield", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(shieldController);
 	private final SingletonAnimationBuilder shieldedAnim = new SingletonAnimationBuilder(this, "Shield Up", EDefaultLoopTypes.LOOP).setWrappedController(shieldController);
 	private final SingletonAnimationBuilder shieldDownAnim = new SingletonAnimationBuilder(this, "Deactivate Shield", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(shieldController);
 	private final SingletonAnimationBuilder shieldDestroyedAnim = new SingletonAnimationBuilder(this, "Destroy Shield", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(shieldController);
 	private static final byte UPPERCUT_ATTACK_ID = 1;
+	private static final byte LASER_BURST_ATTACK_ID = 2;
+	private static final byte CHARGED_SHOT_ATTACK_ID = 3;
 	public static final String ROBO_WARRIOR_MDF_NAME = "robo_warrior";
+	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> LASER_FACTORY_BURST = (owner, offset) -> {
+		LivingEntity target = owner.getTarget();
+		World world = owner.level;
+
+		Vector3d viewVector = owner.getViewVector(1.0F);
+		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
+		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
+		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
+
+		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
+		laser.setPower(10, 0, false);
+		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
+				owner.getZ() + viewVector.z * offset.z());
+
+		laser.xPower *= 55.0F;
+		laser.yPower *= 55.0F;
+		laser.zPower *= 55.0F;
+
+		return laser;
+	};
+	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> LASER_FACTORY_CHARGED = (owner, offset) -> {
+		LivingEntity target = owner.getTarget();
+		World world = owner.level;
+
+		Vector3d viewVector = owner.getViewVector(1.0F);
+		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
+		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
+		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
+
+		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
+		laser.setPower(10, 8, false);
+		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
+				owner.getZ() + viewVector.z * offset.z());
+
+		laser.xPower *= 25.0F;
+		laser.yPower *= 25.0F;
+		laser.zPower *= 25.0F;
+
+		return laser;
+	};
+	private static final Vector3d LASER_OFFSET = new Vector3d(1.0, 0.1, 1.0);
+	private static final Vector3d LASER_BURST_OFFSET = new Vector3d(1.0, 0.1, 1.0);
 	
 	public RoboWarriorEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -94,8 +147,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		if (isAttacking() || isShielded() || isShieldDestroyed() || !hasShieldGoneDown() || isDeadOrDying()) return PlayState.STOP;
-		else return PlayState.CONTINUE;
+		return isAttacking() || isShielded() || isShieldDestroyed() || isShieldGoingDown() || isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
@@ -103,11 +155,15 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	}
 	
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
-		return isDeadOrDying() || isShielded() || isShieldDestroyed() || !hasShieldGoneDown() ? PlayState.STOP : PlayState.CONTINUE;
+		return isDeadOrDying() || isShielded() || isShieldDestroyed() || isShieldGoingDown() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState shieldPredicate(AnimationEvent<E> event) {
 		return PlayState.CONTINUE;
+	}
+
+	public <E extends IAnimatableEntity> PlayState walkPredicate(AnimationEvent<E> event) {
+		return isAttacking() || isShielded() || isShieldDestroyed() || isShieldGoingDown() || isDeadOrDying() || isStuck() || isOnAttackCooldown() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -116,15 +172,83 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1, 3) {
 			@Override
 			public boolean canUse() {
-				return super.canUse() && !isShielded() && !isShieldDestroyed() && hasShieldGoneDown();
+				return super.canUse() && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
 			}
 
 			@Override
 			public boolean canContinueToUse() {
-				return super.canContinueToUse() && !isShielded() && !isShieldDestroyed() && hasShieldGoneDown();
+				return super.canContinueToUse() && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 0, (owner) -> !isShielded() && !isShieldDestroyed() && hasShieldGoneDown() && !isPlayingAnimation(shieldUpAnim) && !isPlayingAnimation(shieldedAnim) && !isPlayingAnimation(shieldDownAnim) && !isPlayingAnimation(shieldDestroyedAnim)).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim));
+		this.goalSelector.addGoal(1, new RoboWarriorShieldGoal(this, () -> shieldUpAnim, () -> shieldedAnim, () -> shieldDownAnim, () -> shieldDestroyedAnim));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 10, (owner) -> !isShielded() && !isShieldDestroyed() && !isShieldGoingDown() && !isPlayingAnimation(shieldUpAnim) && !isPlayingAnimation(shieldedAnim) && !isPlayingAnimation(shieldDownAnim) && !isPlayingAnimation(shieldDestroyedAnim)).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim));
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttack, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
+
+			@Override
+			public boolean canUse() {
+				return super.canUse() && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
+			}
+
+			@Override
+			public void tick() {
+				super.tick();
+
+				if (MathUtil.isBetween(chargedLaserAttack.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
+					CAScreenShakeEntity.shakeScreen(level, position(), 40.0F, 0.174F, 5, 20);
+				}
+			}
+		});
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttack, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
+
+			@Override
+			public boolean canUse() {
+				return ObjectUtil.performNullityChecks(false, getTarget())
+						&& distanceTo(getTarget()) >= minimumDistance && canSee(getTarget()) && !getTarget().isInvulnerable()
+						&& isAlive() && !isAttacking() && getTarget().isAlive() && !getTarget().isDeadOrDying()
+						&& !isOnAttackCooldown() && EntityUtil.getAllEntitiesAround(RoboWarriorEntity.this, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
+			}
+
+			@Override
+			public void tick() {
+				super.tick();
+
+				if (MathUtil.isBetween(chargedLaserAttack.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
+					CAScreenShakeEntity.shakeScreen(level, position(), 40.0F, 0.174F, 5, 20);
+				}
+			}
+		});
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttack, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7) {
+			private boolean shotSecond = false;
+
+			@Override
+			public boolean canUse() {
+				return super.canUse() && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
+			}
+
+			@Override
+			public void start() {
+				super.start();
+
+				this.shotSecond = false;
+			}
+
+			@Override
+			public void tick() {
+				super.tick();
+
+				if (MathUtil.isBetween(burstLaserAttack.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
+					CAScreenShakeEntity.shakeScreen(level, position(), 20.0F, 0.074F, 5, 20);
+				}
+
+				if (MathUtil.isBetween(burstLaserAttack.getWrappedAnimProgress(), 28.0D, 30.8D) && !shotSecond) {
+					if (!shotSecond) {
+						level.addFreshEntity(LASER_FACTORY_BURST.apply(RoboWarriorEntity.this, LASER_BURST_OFFSET));
+						CAScreenShakeEntity.shakeScreen(level, position(), 20.0F, 0.074F, 5, 20);
+						this.shotSecond = true;
+					}
+				}
+			}
+		});
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
@@ -142,15 +266,6 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		this.entityData.define(STORED_DAMAGE, 0);
 		this.entityData.define(SHIELD_ACTIVATION_TIME, 0);
 		this.entityData.define(SHIELD_ACTIVATION_DAMAGE_THRESHOLD, 90);
-		this.entityData.define(CAN_ACTIVATE_SHIELD, false);
-	}
-
-	public boolean canActivateShield() {
-		return this.entityData.get(CAN_ACTIVATE_SHIELD);
-	}
-
-	public void setCanActivateShield(boolean canActivateShield) {
-		this.entityData.set(CAN_ACTIVATE_SHIELD, canActivateShield);
 	}
 
 	public boolean hasHitHealthThreshold() {
@@ -209,8 +324,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		this.entityData.set(SHIELD_ACTIVATION_DAMAGE_THRESHOLD, shieldActivationDamageThreshold);
 	}
 
-	public boolean hasShieldGoneDown() {
-		return !isPlayingAnimation(shieldDownAnim) || shieldDownAnim.hasAnimationFinished();
+	public boolean isShieldGoingDown() {
+		return isPlayingAnimation(shieldDownAnim);
 	}
 
 	@Override
@@ -220,6 +335,11 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public void manageAttack(LivingEntity target) {
+	}
+
+	@Override
+	public boolean canSee(Entity pEntity) {
+		return pEntity.level == this.level && MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= 10;//this.level.clip(new RayTraceContext(curPos, targetPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
 	}
 
 	@Override
@@ -276,60 +396,26 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		handleShield();
+
+		setHasHitHealthThreshold(!isDeadOrDying() && MathUtil.isBetween(getHealth(), 60.0F, 100.0F) || (getHealth() <= 80.0F && lastDamageAmount >= 20.0F) || (getStoredDamage() >= getShieldActivationDamageThreshold()));
+		setShieldDestroyed(getShieldDamage() >= 150.0F || isDeadOrDying());
+
+		if (isShielded()) setShieldActivationTime(getShieldActivationTime() + 1);
 	}
 
-	protected void handleShield() {//TODO Goal migration
-		if (MathUtil.isBetween(getHealth(), 150.0F, getMaxHealth())) setHasHitHealthThreshold(true);
+	@Override
+	protected void tickDeath() {
+		setShielded(false);
+		setStoredDamage(0);
+		setShieldDamage(0);
+		setShieldDestroyed(false);
 
-		setCanActivateShield(!isDeadOrDying() && getHealth() <= 90.0F && !isAttacking() && !isShielded() && hasHitHealthThreshold() && getStoredDamage() >= getShieldActivationDamageThreshold());
+		super.tickDeath();
+	}
 
-	/*	ChaosAwakens.debug("", "--------------------------------------------------------------");
-		ChaosAwakens.debug("Can Activate Shield", canActivateShield());
-		ChaosAwakens.debug("Has Hit Health Threshold", hasHitHealthThreshold());
-		ChaosAwakens.debug("Is Shielded", isShielded());
-		ChaosAwakens.debug("Shield Activation Time", getShieldActivationTime());
-		ChaosAwakens.debug("Shield Activation Damage Threshold", getShieldActivationDamageThreshold());
-		ChaosAwakens.debug("Stored Damage", getStoredDamage());
-		ChaosAwakens.debug("Shield Damage", getShieldDamage());
-		ChaosAwakens.debug("Shield Destroyed", isShieldDestroyed());
-		ChaosAwakens.debug("", "--------------------------------------------------------------"); */
-
-		if (canActivateShield()) {
-			playAnimation(shieldUpAnim, false);
-			setShieldDestroyed(false);
-			setStoredDamage(0);
-			setShieldActivationTime(0);
-			setHasHitHealthThreshold(false);
-			setShielded(true);
-		}
-
-		if (isShielded() && !isPlayingAnimation(shieldUpAnim)) {
-			playAnimation(shieldedAnim, false);
-			EntityUtil.repelEntitiesOfClass(this, Entity.class, getType().getWidth() * 1.65D, getType().getHeight(), 0.1D);
-			heal(0.5F);
-			setShieldActivationTime(getShieldActivationTime() + 1);
-
-			if (getHealth() >= getMaxHealth()) {
-				playAnimation(shieldDownAnim, false);
-				setShieldDestroyed(false);
-				setShielded(false);
-				setHasHitHealthThreshold(false);
-				setShieldActivationTime(0);
-				setShieldDamage(0);
-			}
-
-			if (getShieldDamage() >= 90 || isDeadOrDying()) {
-				setShieldDestroyed(true);
-				setHasHitHealthThreshold(false);
-				setShielded(false);
-				setShieldActivationTime(0);
-				setShieldDamage(0);
-			}
-		}
-
-		if (isShieldDestroyed()) playAnimation(shieldDestroyedAnim, false); // They both need to be in separate conditions otherwise they don't work as intended :skull:
-		if (shieldDestroyedAnim.hasAnimationFinished() || !isPlayingAnimation(shieldDestroyedAnim) || isDeadOrDying()) setShieldDestroyed(false);
+	@Override
+	public boolean displayFireAnimation() {
+		return false;
 	}
 
 	@Override
@@ -356,11 +442,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	protected void handleBaseAnimations() {
 		playAnimation(idleExtrasAnim, true);
 
-		if (getIdleAnim() != null && !isShielded() && !isShieldDestroyed() && hasShieldGoneDown() && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(idleAnim, false);
-		if (getWalkAnim() != null && !isShielded() && !isShieldDestroyed() && hasShieldGoneDown() && isMoving() && !isAttacking() && !isDeadOrDying()) playAnimation(walkAnim, false);
+		if (getIdleAnim() != null && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown() && !isAttacking() && !isMoving() && !isDeadOrDying()) playAnimation(idleAnim, false);
+		if (getWalkAnim() != null && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown() && isMoving() && !isAttacking() && !isDeadOrDying() && !isOnAttackCooldown()) playAnimation(walkAnim, false);
 
 		if (isPlayingAnimation(shieldedAnim)) {
-
+			setDeltaMovement(0, getDeltaMovement().y, 0);
+			EntityUtil.repelEntities(this, getBbWidth() * 1.6D, getBbHeight(), 1);
 		}
 	}
 	

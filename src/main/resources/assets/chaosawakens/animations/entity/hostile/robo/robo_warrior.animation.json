@@ -791,7 +791,7 @@
 			}
 		},
 		"Activate Shield": {
-			"animation_length": 1.52,
+			"animation_length": 2.52,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {
@@ -1112,7 +1112,7 @@
 			}
 		},
 		"Destroy Shield": {
-			"animation_length": 1.52,
+			"animation_length": 2.52,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {
@@ -1785,7 +1785,7 @@
 			}
 		},
 		"Deactivate Shield": {
-			"animation_length": 1.52,
+			"animation_length": 2.52,
 			"anim_time_update": "0",
 			"blend_weight": "1",
 			"bones": {

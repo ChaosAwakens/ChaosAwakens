@@ -7,8 +7,8 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Right Punch Attack",
-      "animation_length": 1.7,
+      "animation_name": "Smash Attack",
+      "animation_length": 3.0,
       "loop_type": "PLAY_ONCE"
     },
     {
@@ -22,17 +22,12 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Smash Attack",
-      "animation_length": 3.0,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Idle",
+      "animation_name": "Low Health",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Walk",
+      "animation_name": "Idle Extras",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -42,17 +37,17 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle Extras",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
+      "animation_name": "Left Punch Attack",
+      "animation_length": 1.7,
+      "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Low Health",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
+      "animation_name": "Right Punch Attack",
+      "animation_length": 1.7,
+      "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Healthy",
+      "animation_name": "Idle",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
@@ -62,9 +57,14 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Left Punch Attack",
-      "animation_length": 1.7,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Walk",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Healthy",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
     }
   ]
 }
