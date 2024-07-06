@@ -3,10 +3,9 @@ package io.github.chaosawakens.common.items.weapons.ranged;
 import com.google.common.collect.Lists;
 import io.github.chaosawakens.api.item.IAutoEnchantable;
 import io.github.chaosawakens.common.entity.projectile.ExplosiveFireworkEntity;
-import io.github.chaosawakens.common.entity.projectile.arrow.UltimateCrossbowBoltEntity;
-import io.github.chaosawakens.common.items.projectile.UltimateCrossbowBoltItem;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.manager.CAConfigManager;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentData;
@@ -22,6 +21,7 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
@@ -38,7 +38,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantable {
-	public static final Predicate<ItemStack> BOLT_ONLY = (targetStack) -> targetStack.getItem() == CAItems.ULTIMATE_CROSSBOW_BOLT.get();
+	public static final Predicate<ItemStack> BOLT_ONLY = (targetStack) -> targetStack.getItem().is(ItemTags.ARROWS);
 	public static final Predicate<ItemStack> BOLT_OR_FIREWORK = BOLT_ONLY.or((targetStack) -> targetStack.getItem() == Items.FIREWORK_ROCKET);
 	private boolean startSoundPlayed = false;
 	private boolean midLoadSoundPlayed = false;
@@ -182,17 +182,17 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 		boolean shouldApplyInfinityLogic = ownerEntity instanceof PlayerEntity && ((PlayerEntity) ownerEntity).abilities.instabuild;
 		ItemStack targetProjectile = ownerEntity.getProjectile(arrowStack);
 		ItemStack copiedProjectileStack = targetProjectile.copy();
-		int storedProjectileAmount = targetProjectile.isEmpty() ? 1 : multishotEnchantmentLevel == 0 && (targetProjectile.getItem() instanceof UltimateCrossbowBoltItem) ? 1 : (multishotEnchantmentLevel * 2) + MathHelper.clamp(targetProjectile.getCount(), 1, 8); //TODO Un-hardcode amount
+		int storedProjectileAmount = targetProjectile.isEmpty() ? 1 : multishotEnchantmentLevel == 0 && (targetProjectile.getItem() instanceof ArrowItem) ? 1 : (multishotEnchantmentLevel * 2) + MathHelper.clamp(targetProjectile.getCount(), 1, 8); //TODO Un-hardcode amount
 
 		for (int projectileAmount = 0; projectileAmount < storedProjectileAmount; projectileAmount++) {
 			if (projectileAmount > 0) targetProjectile = copiedProjectileStack.copy();
 
 			if (targetProjectile.isEmpty() && shouldApplyInfinityLogic) {
-				targetProjectile = CAItems.ULTIMATE_CROSSBOW_BOLT.get().getDefaultInstance();
+				targetProjectile = Items.ARROW.getDefaultInstance();
 				copiedProjectileStack = targetProjectile.copy();
 			}
 
-			if (!loadProjectile(ownerEntity, arrowStack, targetProjectile, !targetProjectile.isEmpty(), shouldApplyInfinityLogic, storedProjectileAmount)) return false;
+			if (!loadProjectile(ownerEntity, arrowStack, targetProjectile, !targetProjectile.isEmpty() || projectileAmount > 0, shouldApplyInfinityLogic, storedProjectileAmount)) return false;
 		}
 		return true;
 	}
@@ -255,13 +255,10 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 		}
 	}
 
-	private static UltimateCrossbowBoltEntity getBolt(World world, LivingEntity owner, ItemStack crossbowStack, ItemStack arrowStack, boolean applyInfinityLogic) {
-		UltimateCrossbowBoltItem boltItem = (UltimateCrossbowBoltItem) (arrowStack.getItem() instanceof UltimateCrossbowBoltItem ? arrowStack.getItem() : null);
+	private static AbstractArrowEntity getBolt(World world, LivingEntity owner, ItemStack crossbowStack, ItemStack arrowStack, boolean applyInfinityLogic) {
+		ArrowItem boltItem = (ArrowItem) (arrowStack.getItem() instanceof ArrowItem ? arrowStack.getItem() : null); //TODO Bolt stub (0.13.x.x+ for actual bolt) (I love GeckoLib3 projectiles :smiling_face_with_3_hearts:)
 
-		if (boltItem == null && applyInfinityLogic) boltItem = CAItems.ULTIMATE_CROSSBOW_BOLT.get();
-		else if (boltItem == null) return null;
-
-		UltimateCrossbowBoltEntity crossbowBolt = boltItem.createArrow(world, arrowStack, owner);
+		AbstractArrowEntity crossbowBolt = boltItem.createArrow(world, arrowStack, owner);
 
 		crossbowBolt.setBaseDamage(CAConfigManager.MAIN_SERVER.ultimateCrossbowBoltBaseDamage.get());
 		crossbowBolt.setCritArrow(true);
@@ -291,16 +288,26 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 	public static void performShooting(World world, LivingEntity owner, Hand hand, ItemStack stack, float projectileVelocity, float projectileInaccuracy) {
 		List<ItemStack> allChargedProjectiles = getChargedProjectiles(stack);
 		float[] shotPitchAngles = getShotPitches(owner.getRandom());
-		boolean shouldApplyInfinityLogic = owner instanceof PlayerEntity && ((PlayerEntity) owner).abilities.instabuild;
+		boolean shouldApplyInfinityLogic = (owner instanceof PlayerEntity && ((PlayerEntity) owner).abilities.instabuild) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
+		boolean isFirework = allChargedProjectiles.get(0).getItem() == Items.FIREWORK_ROCKET; // We know that through any index (this still doesn't have multi-proj variation)
 		AtomicBoolean hasShotBolt = new AtomicBoolean(false);
 
 		allChargedProjectiles.forEach(targetStack -> {
 			if (!targetStack.isEmpty()) {
-				for (float angle = ((float) -allChargedProjectiles.size() / 2) * 10; angle < ((float) allChargedProjectiles.size() / 2) * 10; angle++) { //TODO Yes, sorta hardcoded
-					if (allChargedProjectiles.size() <= 1) {
-						shootProjectile(world, owner, hand, stack, targetStack, shotPitchAngles[0], shouldApplyInfinityLogic, projectileVelocity, projectileInaccuracy, 0);
-						return;
-					} else if (angle % 10 == 0) shootProjectile(world, owner, hand, stack, targetStack, shotPitchAngles[(int) MathHelper.clamp(angle / 10, 0, 2)], shouldApplyInfinityLogic, projectileVelocity, projectileInaccuracy, angle);
+				if (isFirework) {
+					for (float angle = ((float) -allChargedProjectiles.size() / 2) * 10; angle < ((float) allChargedProjectiles.size() / 2) * 10; angle++) { //TODO Yes, sorta hardcoded
+						if (allChargedProjectiles.size() <= 1) {
+							shootProjectile(world, owner, hand, stack, targetStack, shotPitchAngles[0], shouldApplyInfinityLogic, projectileVelocity, projectileInaccuracy, 0);
+							return;
+						} else if (angle % 10 == 0) shootProjectile(world, owner, hand, stack, targetStack, shotPitchAngles[(int) MathHelper.clamp(angle / 10, 0, 2)], shouldApplyInfinityLogic, projectileVelocity, projectileInaccuracy, angle);
+					}
+				} else {
+					for (float angle = ((float) -allChargedProjectiles.size() / 2) * 4; angle < ((float) allChargedProjectiles.size() / 2) * 4; angle++) { //TODO Yes, sorta hardcoded
+						if (allChargedProjectiles.size() <= 1) {
+							shootProjectile(world, owner, hand, stack, targetStack, shotPitchAngles[0], shouldApplyInfinityLogic, projectileVelocity, projectileInaccuracy, 0);
+							return;
+						} else if (angle % 50 == 0) shootProjectile(world, owner, hand, stack, targetStack, shotPitchAngles[(int) MathHelper.clamp(angle / 10, 0, 2)], shouldApplyInfinityLogic, projectileVelocity, projectileInaccuracy, angle);
+					}
 				}
 			}
 		});
@@ -310,7 +317,7 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 	}
 
 	private static List<ItemStack> getChargedProjectiles(ItemStack stack) {
-		List<ItemStack> storedChargedProjectiles = Lists.newArrayList();
+		List<ItemStack> storedChargedProjectiles = new ObjectArrayList<>();
 		CompoundNBT stackNBTData = stack.getTag();
 
 		if (stackNBTData != null && stackNBTData.contains("ChargedProjectiles", 9)) {
@@ -351,7 +358,7 @@ public class UltimateCrossbowItem extends CrossbowItem implements IAutoEnchantab
 	}
 
 	private static float getShootingPowerFor(ItemStack targetStack) {
-		return targetStack.getItem() == CAItems.ULTIMATE_CROSSBOW.get() ? containsChargedProjectile(targetStack, CAItems.ULTIMATE_CROSSBOW_BOLT.get()) ? 5.15F : 3.15F : 3.15F;
+		return targetStack.getItem() == CAItems.ULTIMATE_CROSSBOW.get() ? containsChargedProjectile(targetStack, Items.ARROW) ? 5.15F : 3.15F : 3.15F;
 	}
 
 	public static boolean containsChargedProjectile(ItemStack targetCrossbowStack, Item ammoItem) {

@@ -344,6 +344,10 @@ public class CAEntityTypes {
 			() -> EntityType.Builder.<RoboLaserEntity>of(RoboLaserEntity::new, EntityClassification.MISC)
 					.sized(0.25F, 0.25F).clientTrackingRange(8).updateInterval(20)
 					.build(ChaosAwakens.prefix("robo_laser").toString()));
+	public static final RegistryObject<EntityType<RoboRayEntity>> ROBO_RAY = ENTITY_TYPES.register("robo_ray",
+			() -> EntityType.Builder.<RoboRayEntity>of(RoboRayEntity::new, EntityClassification.MISC)
+					.sized(0.35F, 0.25F).clientTrackingRange(12).updateInterval(10)
+					.build(ChaosAwakens.prefix("robo_ray").toString()));
 	// Misc
 	public static final RegistryObject<EntityType<CAFallingBlockEntity>> FALLING_BLOCK = ENTITY_TYPES.register("falling_block",
 			() -> EntityType.Builder.<CAFallingBlockEntity>of(CAFallingBlockEntity::new, EntityClassification.MISC)

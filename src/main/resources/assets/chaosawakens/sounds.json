@@ -177,7 +177,7 @@
     "sounds": [
       {
         "name": "chaosawakens:entity/boss/robo/robojeffery/attacks/seismic_slam",
-        "attenuation_distance": 64
+        "attenuation_distance": 96
       }
     ]
   },

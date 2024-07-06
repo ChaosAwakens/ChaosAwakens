@@ -1,5 +1,5 @@
 {
-  "anim_file_loc": "chaosawakens:animations/projectiles/robo_sniper_laser.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/projectiles/robo_sniper_laser.animation.json",
   "animations": [
     {
       "animation_name": "Death",

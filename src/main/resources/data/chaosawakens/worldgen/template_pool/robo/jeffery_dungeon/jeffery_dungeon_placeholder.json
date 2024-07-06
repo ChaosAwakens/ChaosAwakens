@@ -1,12 +1,12 @@
 {
-  "name": "chaosawakens:ent_tree/spruce_top",
+  "name": "chaosawakens:robo/jeffery_dungeon/jeffery_dungeon_placeholder",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "chaosawakens:ent_tree/spruce_top",
+        "location": "chaosawakens:robo/jeffery_dungeon/jeffery_dungeon_placeholder",
         "processors": "minecraft:empty",
         "projection": "rigid"
       }

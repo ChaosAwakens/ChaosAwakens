@@ -70,7 +70,7 @@ public abstract class AnimatableProjectileEntity extends DamagingProjectileEntit
                 double yDeltaOffset = getY() + curDeltaMovement.y;
                 double zDeltaOffset = getZ() + curDeltaMovement.z;
 
-                ProjectileHelper.rotateTowardsMovement(this, 0.2F);
+                ProjectileHelper.rotateTowardsMovement(this, 0.9F);
 
                 float motionInertia = getInertia();
 
@@ -88,10 +88,11 @@ public abstract class AnimatableProjectileEntity extends DamagingProjectileEntit
             }
 
             if (satisfyDeathConditions()) {
-                playAnimation(getDeathAnim(), false);
-
-                if (getDeathAnim().hasAnimationFinished()) remove();
+                stopAnimation(getIdleAnim());
+                playAnimation(getDeathAnim(), true);
             }
+
+            if (getDeathAnim().hasAnimationFinished()) remove();
         }
     }
 

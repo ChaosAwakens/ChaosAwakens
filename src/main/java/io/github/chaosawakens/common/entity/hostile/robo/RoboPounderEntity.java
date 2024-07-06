@@ -4,8 +4,6 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
-import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableIdleSound;
-import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableWalkSound;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableAOEGoal;
 import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal;
@@ -17,8 +15,8 @@ import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CATeams;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
+import io.github.chaosawakens.common.util.SoundUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -441,10 +439,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void onSpawn(boolean hasAlreadyDied) {
-		if (!hasAlreadyDied && level.isClientSide) {
-			Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableIdleSound(CASoundEvents.ROBO_POUNDER_IDLE.get(), this).setCriticalSound(new RoboPounderTickableIdleSound(random.nextBoolean() ? CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE.get() : CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE_RADIO.get(), this)));
-			Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), this).setRageRunSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), this)));
-		}
+		if (!hasAlreadyDied && level.isClientSide) SoundUtil.playRoboPounderTickableSounds(this);
 	}
 
 	@Override

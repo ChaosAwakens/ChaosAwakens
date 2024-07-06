@@ -20,7 +20,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
     @Override
     protected void initializeAnimMetadata() { //TODO Automation doesn't work cuz Minecraft's Resource Manager doesn't exist on the server :p
         // Boss/Insect
-        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/insect/hercules_beetle.animation.json"), Lists.newArrayList( // Only apply max double value (1.7976931348623157E308) to looping anims with no predefined length, as that's what they default to in Geckolib3
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/boss/insect/hercules_beetle.animation.json"), Lists.newArrayList( // Only apply max double value (1.7976931348623157E308) to looping anims with no predefined length, as that's what they default to in Geckolib3
                 new AnimationDataHolder("Idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 3.76D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
                 new AnimationDataHolder("Death (Midair)", 0.91667D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
@@ -39,7 +39,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Roar Defense Mechanism", 4.28D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Boss/Robo
-        createAnimationMetadata(ChaosAwakens.prefix("animations/boss/robo/robo_jeffery.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/boss/robo/robo_jeffery.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Right Punch Attack", 1.7D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
@@ -55,76 +55,76 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Healthy", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Creature/Air
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/air/bird.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/air/bird.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Fly", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/air/butterfly.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/air/butterfly.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 2.0D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 5.16D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Creature/Land
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/ant.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/ant.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 2.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.64D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/apple_cow.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/apple_cow.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Run", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/beaver.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/beaver.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 2.0D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 0.6667D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Gnaw", 2.0D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/carrot_pig.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/carrot_pig.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Run", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/gazelle.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/gazelle.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Run", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Graze", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/lettuce_chicken.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/lettuce_chicken.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Run", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Sit", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Flap", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/ruby_bug.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/ruby_bug.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/stink_bug.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/stink_bug.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/land/tree_frog.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/tree_frog.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.76D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Jump", 10008.04D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Blink", 1.64D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Creature/Water
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/water/whale.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/water/whale.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Swim", 3.52D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Creature/Water/Fish
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/water/fish/green_fish.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/water/fish/green_fish.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 0.88D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Swim", 0.88D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Flop", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/water/fish/rock_fish.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/water/fish/rock_fish.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.76D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Swim", 1.76D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/water/fish/spark_fish.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/water/fish/spark_fish.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Swim", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Flop", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/creature/water/fish/wood_fish.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/water/fish/wood_fish.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Swim", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Flop", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Hostile/Ent
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/ent/ent.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/ent/ent.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Left Punch", 1.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
@@ -134,7 +134,7 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Idle Extras", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Hostile/Insect
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/insect/cave_fisher.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/insect/cave_fisher.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 2.08D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Pinch Attack", 2.08D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Walk", 1.24D, ILoopType.EDefaultLoopTypes.LOOP),
@@ -142,17 +142,17 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Inverse Walk", 1.24D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Inverse Idle", 2.08D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk Attack", 1.24D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/insect/scorpion.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/insect/scorpion.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 2.0D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 2.0D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Pinch Attack", 0.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Death", 3.6D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/insect/wasp.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/insect/wasp.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Fly", 1.56D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Pinch Attack", 1.72D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Hostile/Robo
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/robo/robo_pounder.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/robo/robo_pounder.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Dash Attack", 3.2D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
@@ -174,13 +174,13 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("The California Gurls Dance", 8.5D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Pose 1", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Pose 2", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/robo/robo_sniper.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/robo/robo_sniper.animation.json"), Lists.newArrayList(
         		new AnimationDataHolder("Idle", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Idle Extras", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Accelerate", 3.6D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Shoot Attack", 0.64D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Death", 2.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/robo/robo_warrior.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/robo/robo_warrior.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 4.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Activate Shield", 2.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
@@ -195,42 +195,46 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Right Uppercut Attack", 1.85D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Hostile/Water
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/water/attack_squid.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/water/attack_squid.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Swim", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 5.2D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Shoot", 1.56D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Misc
-        createAnimationMetadata(ChaosAwakens.prefix("animations/misc/jeffery_shockwave.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/misc/jeffery_shockwave.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Expand", 18.5D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         
         // Projectile
-        createAnimationMetadata(ChaosAwakens.prefix("animations/hostile/water/robo_sniper_laser.animation.json"), Lists.newArrayList(
-                new AnimationDataHolder("always play", 5.04D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("death", 0.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/projectiles/robo_sniper_laser.animation.json"), Lists.newArrayList(
+                new AnimationDataHolder("Idle", 20.0417D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Death", 0.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/projectiles/robo_ray.animation.json"), Lists.newArrayList(
+                new AnimationDataHolder("Active", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Death", 0.7917D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("Inept", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP)));
         
         // Neutral/Land
-        createAnimationMetadata(ChaosAwakens.prefix("animations/neutral/land/dimetrodon.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/neutral/land/dimetrodon.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.52D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Swim", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Bite Attack", 0.64D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/neutral/land/gator.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/neutral/land/gator.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Swim", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Bite Attack", 0.56D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Neutral/Lava
-        createAnimationMetadata(ChaosAwakens.prefix("animations/neutral/lava/lava_eel.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/neutral/lava/lava_eel.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Swim", 1.76D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Flop", 1.76D, ILoopType.EDefaultLoopTypes.LOOP)));
 
         // Projectiles
-        createAnimationMetadata(ChaosAwakens.prefix("animations/projectiles/robo_sniper_laser.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/projectiles/robo_sniper_laser.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 5.04D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Death", 0.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
-        createAnimationMetadata(ChaosAwakens.prefix("animations/projectiles/ultimate_bolt.animation.json"), Lists.newArrayList(
+        createAnimationMetadata(ChaosAwakens.prefix("animations/entity/projectiles/ultimate_bolt.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Moving", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Stuck", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Hit", 1.0D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));

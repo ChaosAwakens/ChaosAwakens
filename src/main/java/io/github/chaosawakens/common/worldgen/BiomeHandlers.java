@@ -293,8 +293,7 @@ public class BiomeHandlers {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_DENSE_GINKGO);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_FLOWER);
 					
-					if (CAConfigManager.MAIN_COMMON.generateGinkgoEntTree.get())
-						gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_GINKGO_ENT_TREE);
+					if (CAConfigManager.MAIN_COMMON.generateGinkgoEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_GINKGO_ENT_TREE);
 				}
 
 				// Dense Plains
@@ -340,6 +339,7 @@ public class BiomeHandlers {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TOMATO_PATCH);
 
 					if (CAConfigManager.MAIN_COMMON.generateOakEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+					if (CAConfigManager.MAIN_COMMON.generateJefferyDungeonPlaceholder.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_JEFFERY_DUNGEON_PLACEHOLDER);
 				}
 				
 				// Snowy Village Biomes/Village Taiga

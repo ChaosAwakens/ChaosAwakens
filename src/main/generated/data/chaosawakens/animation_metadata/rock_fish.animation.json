@@ -1,5 +1,5 @@
 {
-  "anim_file_loc": "chaosawakens:animations/creature/water/fish/rock_fish.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/creature/water/fish/rock_fish.animation.json",
   "animations": [
     {
       "animation_name": "Idle",

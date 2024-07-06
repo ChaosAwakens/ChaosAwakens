@@ -11,6 +11,7 @@ import io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robowarrior.Ro
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
+import io.github.chaosawakens.common.entity.projectile.RoboRayEntity;
 import io.github.chaosawakens.common.registry.CATeams;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -66,8 +67,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	private final SingletonAnimationBuilder idleExtrasAnim = new SingletonAnimationBuilder(this, "Idle Extras", EDefaultLoopTypes.LOOP).setWrappedController(ambienceController);
 	private final SingletonAnimationBuilder leftUppercutAnim = new SingletonAnimationBuilder(this, "Left Uppercut Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder rightUppercutAnim = new SingletonAnimationBuilder(this, "Right Uppercut Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
-	private final SingletonAnimationBuilder burstLaserAttack = new SingletonAnimationBuilder(this, "Burst Laser Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
-	private final SingletonAnimationBuilder chargedLaserAttack = new SingletonAnimationBuilder(this, "Charged Laser Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
+	private final SingletonAnimationBuilder burstLaserAttackAnim = new SingletonAnimationBuilder(this, "Burst Laser Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController).setAnimSpeed(0.85D);
+	private final SingletonAnimationBuilder chargedLaserAttackAnim = new SingletonAnimationBuilder(this, "Charged Laser Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private final SingletonAnimationBuilder shieldUpAnim = new SingletonAnimationBuilder(this, "Activate Shield", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(shieldController);
 	private final SingletonAnimationBuilder shieldedAnim = new SingletonAnimationBuilder(this, "Shield Up", EDefaultLoopTypes.LOOP).setWrappedController(shieldController);
 	private final SingletonAnimationBuilder shieldDownAnim = new SingletonAnimationBuilder(this, "Deactivate Shield", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(shieldController);
@@ -90,9 +91,9 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
 
-		laser.xPower *= 55.0F;
-		laser.yPower *= 55.0F;
-		laser.zPower *= 55.0F;
+		laser.xPower *= 4.0D;
+		laser.yPower *= 4.0D;
+		laser.zPower *= 4.0D;
 
 		return laser;
 	};
@@ -105,16 +106,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
 
-		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
-		laser.setPower(10, 8, false);
-		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
-				owner.getZ() + viewVector.z * offset.z());
+		RoboRayEntity ray = new RoboRayEntity(owner, offsetX, offsetY, offsetZ, world);
+		ray.setPower(10, 0, false);
+		ray.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(), owner.getZ() + viewVector.z * offset.z());
+		ray.setShot(true);
 
-		laser.xPower *= 25.0F;
-		laser.yPower *= 25.0F;
-		laser.zPower *= 25.0F;
-
-		return laser;
+		return ray;
 	};
 	private static final Vector3d LASER_OFFSET = new Vector3d(1.0, 0.1, 1.0);
 	private static final Vector3d LASER_BURST_OFFSET = new Vector3d(1.0, 0.1, 1.0);
@@ -147,7 +144,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return isAttacking() || isShielded() || isShieldDestroyed() || isShieldGoingDown() || isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
+		return isPresumptuouslyAttacking() || isShielded() || isShieldDestroyed() || isShieldGoingDown() || isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
@@ -182,7 +179,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		});
 		this.goalSelector.addGoal(1, new RoboWarriorShieldGoal(this, () -> shieldUpAnim, () -> shieldedAnim, () -> shieldDownAnim, () -> shieldDestroyedAnim));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 10, (owner) -> !isShielded() && !isShieldDestroyed() && !isShieldGoingDown() && !isPlayingAnimation(shieldUpAnim) && !isPlayingAnimation(shieldedAnim) && !isPlayingAnimation(shieldDownAnim) && !isPlayingAnimation(shieldDestroyedAnim)).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim));
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttack, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
 
 			@Override
 			public boolean canUse() {
@@ -193,12 +190,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			public void tick() {
 				super.tick();
 
-				if (MathUtil.isBetween(chargedLaserAttack.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
+				if (MathUtil.isBetween(chargedLaserAttackAnim.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
 					CAScreenShakeEntity.shakeScreen(level, position(), 40.0F, 0.174F, 5, 20);
 				}
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttack, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
 
 			@Override
 			public boolean canUse() {
@@ -212,12 +209,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			public void tick() {
 				super.tick();
 
-				if (MathUtil.isBetween(chargedLaserAttack.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
-					CAScreenShakeEntity.shakeScreen(level, position(), 40.0F, 0.174F, 5, 20);
+				if (MathUtil.isBetween(chargedLaserAttackAnim.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
+					CAScreenShakeEntity.shakeScreen(level, position(), 50.0F, 0.274F, 7, 20);
 				}
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttack, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7) {
 			private boolean shotSecond = false;
 
 			@Override
@@ -236,11 +233,11 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			public void tick() {
 				super.tick();
 
-				if (MathUtil.isBetween(burstLaserAttack.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
+				if (MathUtil.isBetween(burstLaserAttackAnim.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
 					CAScreenShakeEntity.shakeScreen(level, position(), 20.0F, 0.074F, 5, 20);
 				}
 
-				if (MathUtil.isBetween(burstLaserAttack.getWrappedAnimProgress(), 28.0D, 30.8D) && !shotSecond) {
+				if (MathUtil.isBetween(burstLaserAttackAnim.getWrappedAnimProgress(), 28.0D, 30.8D) && !shotSecond) {
 					if (!shotSecond) {
 						level.addFreshEntity(LASER_FACTORY_BURST.apply(RoboWarriorEntity.this, LASER_BURST_OFFSET));
 						CAScreenShakeEntity.shakeScreen(level, position(), 20.0F, 0.074F, 5, 20);
@@ -326,6 +323,10 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	public boolean isShieldGoingDown() {
 		return isPlayingAnimation(shieldDownAnim);
+	}
+
+	public boolean isPresumptuouslyAttacking() {
+		return isPlayingAnimation(leftUppercutAnim) || isPlayingAnimation(rightUppercutAnim) || isPlayingAnimation(burstLaserAttackAnim) || isPlayingAnimation(chargedLaserAttackAnim);
 	}
 
 	@Override

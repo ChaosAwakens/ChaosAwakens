@@ -225,7 +225,7 @@ public class CAItems {
 	public static final RegistryObject<UltimateBowItem> ULTIMATE_BOW = ITEMS.register("ultimate_bow", () -> new UltimateBowItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.POWER_ARROWS, 5), new EnchantmentData(Enchantments.FLAMING_ARROWS, 1), new EnchantmentData(Enchantments.PUNCH_ARROWS, 2), new EnchantmentData(Enchantments.INFINITY_ARROWS, 1)}));
 	public static final RegistryObject<UltimateCrossbowItem> ULTIMATE_CROSSBOW = ITEMS.register("ultimate_crossbow", () -> new UltimateCrossbowItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
-			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.PIERCING, 4), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
+			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.PIERCING, 4), new EnchantmentData(Enchantments.MULTISHOT, 1), new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 	public static final RegistryObject<UltimateFishingRodItem> ULTIMATE_FISHING_ROD = ITEMS.register("ultimate_fishing_rod", () -> new UltimateFishingRodItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).tab(CAItemGroups.EQUIPMENT).stacksTo(1).durability(1024),
 			() -> new EnchantmentData[]{new EnchantmentData(Enchantments.UNBREAKING, 3)}));
 

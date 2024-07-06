@@ -4,9 +4,6 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
-import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableIdleSound;
-import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableMunchSound;
-import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableWalkSound;
 import io.github.chaosawakens.common.entity.ai.AnimatableMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.ai.goals.boss.insect.herculesbeetle.HerculesBeetleDefenseMechanismGoal;
 import io.github.chaosawakens.common.entity.ai.goals.boss.insect.herculesbeetle.HerculesBeetleMunchGoal;
@@ -21,9 +18,9 @@ import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.EnumUtil;
 import io.github.chaosawakens.common.util.MathUtil;
+import io.github.chaosawakens.common.util.SoundUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -329,11 +326,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
 
     @Override
     protected void onSpawn(boolean hasAlreadyDied) {
-        if (!hasAlreadyDied && level.isClientSide) {
-            Minecraft.getInstance().getSoundManager().queueTickingSound(new HerculesBeetleTickableIdleSound(CASoundEvents.HERCULES_BEETLE_IDLE.get(), this).setDocilitySound(new HerculesBeetleTickableIdleSound(CASoundEvents.HERCULES_BEETLE_DOCILE.get(), this)));
-            Minecraft.getInstance().getSoundManager().queueTickingSound(new HerculesBeetleTickableWalkSound(CASoundEvents.HERCULES_BEETLE_WALK.get(), this).setFlyingSound(new HerculesBeetleTickableWalkSound(CASoundEvents.HERCULES_BEETLE_FLY.get(), this)));
-            Minecraft.getInstance().getSoundManager().queueTickingSound(new HerculesBeetleTickableMunchSound(CASoundEvents.HERCULES_BEETLE_MAD_MUNCH.get(), this));
-        }
+        if (!hasAlreadyDied && level.isClientSide) SoundUtil.playHerculesBeetleTickableSounds(this);
     }
 
     @Override

@@ -1,5 +1,5 @@
 {
-  "anim_file_loc": "chaosawakens:animations/creature/land/tree_frog.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/creature/land/tree_frog.animation.json",
   "animations": [
     {
       "animation_name": "Jump",

@@ -14,9 +14,12 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -27,7 +30,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimatableEntity {
-	AnimationFactory factory = new AnimationFactory(this);
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboLaserEntity>> roboLaserControllers = new ObjectArrayList<WrappedAnimationController<RoboLaserEntity>>(1);
 	private final ObjectArrayList<IAnimationBuilder> roboLaserAnimations = new ObjectArrayList<IAnimationBuilder>(2);
 	private static final DataParameter<Boolean> HAS_HIT = EntityDataManager.defineId(RoboLaserEntity.class, DataSerializers.BOOLEAN);
@@ -53,7 +56,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 		tickAnims();
 		super.tick();
 
-		if (hasHit()) {
+		if (hasHit() || tickCount >= 800) {
 			if (!isDying()) {
 				stopAnimation(getIdleAnim());
 				playAnimation(getDeathAnim(), true);
@@ -63,9 +66,29 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 
 			playAnimation(deathAnim, false);
 			setDeltaMovement(0, 0, 0);
-		} else playAnimation(getIdleAnim(), true);
+		} else playAnimation(getIdleAnim(), false);
 
 		if (getMainWrappedController().isAnimationFinished(deathAnim)) remove();
+
+		Vector3d curMovement = getDeltaMovement();
+		double xMovement = curMovement.x;
+		double yMovement = curMovement.y;
+		double zMovement = curMovement.z;
+
+		double normalizedMovement = MathHelper.sqrt(getHorizontalDistanceSqr(curMovement));
+
+		if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
+			this.yRot = (float) (Math.toDegrees(MathHelper.atan2(xMovement, zMovement)) - 90.0F);
+			this.xRot = (float) (Math.toDegrees(MathHelper.atan2(yMovement, normalizedMovement)) - 90.0F);
+			this.yRotO = this.yRot;
+			this.xRotO = this.xRot;
+		}
+
+		this.yRot = noPhysics ? (float) (Math.toDegrees(MathHelper.atan2(-xMovement, -zMovement)) - 90.0F) : (float) (Math.toDegrees(MathHelper.atan2(xMovement, zMovement)) - 90.0F);
+
+		this.xRot = (float) Math.toDegrees(MathHelper.atan2(yMovement, normalizedMovement));
+		this.xRot = lerpRotation(this.xRotO, this.xRot);
+		this.yRot = lerpRotation(this.yRotO, this.yRot);
 	}
 	
 	protected void onHit(RayTraceResult result) {
@@ -90,12 +113,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 		setFireOnHit(canCauseFire);
 	}
 
-	@Override
-	protected boolean shouldBurn() {
-		return true;
-	}
-
-	@Override
+    @Override
 	public boolean displayFireAnimation() {
 		return false;
 	}

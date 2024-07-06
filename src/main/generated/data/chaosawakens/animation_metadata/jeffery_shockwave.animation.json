@@ -1,5 +1,5 @@
 {
-  "anim_file_loc": "chaosawakens:animations/misc/jeffery_shockwave.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/misc/jeffery_shockwave.animation.json",
   "animations": [
     {
       "animation_name": "Expand",

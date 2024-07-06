@@ -154,7 +154,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 				affectedTarget.setDeltaMovement(kbMultiplier * Math.cos(targetAngle), affectedTarget.getDeltaMovement().normalize().y + 0.47115D, kbMultiplier * Math.sin(targetAngle));
 			}
-		}).setBlockBreakPredicate((targetBlock) -> !targetBlock.is(CATags.Blocks.JEFFERY_IMMUNE)).setSound(CASoundEvents.ROBO_JEFFERY_PISTON_LEAP_LAUNCH::get, CASoundEvents.ROBO_JEFFERY_PISTON_LEAP_LAND::get, 1.0F));
+		}).setBlockBreakPredicate((targetBlock) -> !targetBlock.is(CATags.Blocks.JEFFERY_IMMUNE)).setSound(CASoundEvents.ROBO_JEFFERY_PISTON_LEAP_LAUNCH, CASoundEvents.ROBO_JEFFERY_PISTON_LEAP_LAND, 1.0F));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));

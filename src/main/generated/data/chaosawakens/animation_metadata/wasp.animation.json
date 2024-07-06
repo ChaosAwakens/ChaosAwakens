@@ -1,5 +1,5 @@
 {
-  "anim_file_loc": "chaosawakens:animations/hostile/insect/wasp.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/hostile/insect/wasp.animation.json",
   "animations": [
     {
       "animation_name": "Fly",

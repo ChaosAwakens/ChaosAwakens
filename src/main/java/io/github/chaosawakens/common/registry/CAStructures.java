@@ -23,12 +23,13 @@ public class CAStructures {
 	public static final RegistryObject<Structure<NoFeatureConfig>> ACACIA_ENT_TREE = STRUCTURES.register("acacia_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/acacia"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> BIRCH_ENT_TREE = STRUCTURES.register("birch_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/birch"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> CRIMSON_ENT_TREE = STRUCTURES.register("crimson_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/crimson"));
-	public static final RegistryObject<Structure<NoFeatureConfig>> DARK_OAK_ENT_TREE = STRUCTURES.register("dark_oak_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/dark_oak", new BlockPos(0, -6, 0)));
+	public static final RegistryObject<Structure<NoFeatureConfig>> DARK_OAK_ENT_TREE = STRUCTURES.register("dark_oak_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/dark_oak"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> JUNGLE_ENT_TREE = STRUCTURES.register("jungle_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/jungle"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> OAK_ENT_TREE = STRUCTURES.register("oak_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/oak"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> SPRUCE_ENT_TREE = STRUCTURES.register("spruce_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/spruce"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> WARPED_ENT_TREE = STRUCTURES.register("warped_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/warped"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> GINKGO_ENT_TREE = STRUCTURES.register("ginkgo_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/ginkgo"));
+	public static final RegistryObject<Structure<NoFeatureConfig>> JEFFERY_DUNGEON_PLACEHOLDER = STRUCTURES.register("jeffery_dungeon_placeholder", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "robo/jeffery_dungeon/jeffery_dungeon_placeholder"));
 
 //	public static final RegistryObject<Structure<NoFeatureConfig>> WASP_DUNGEON = STRUCTURES.register("wasp_dungeon", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "wasp_dungeon/start_pool", new BlockPos(0, -5, 0)));
 //	public static final RegistryObject<Structure<NoFeatureConfig>> MINING_WASP_DUNGEON = STRUCTURES.register("mining_wasp_dungeon", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "wasp_dungeon/mining_start_pool", new BlockPos(0, -17, 0)));
@@ -36,13 +37,14 @@ public class CAStructures {
 	public static void setupStructures() {
 		setupMapSpacingAndLand(ACACIA_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), false);
 		setupMapSpacingAndLand(BIRCH_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 38875937), false);
-		setupMapSpacingAndLand(CRIMSON_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 136387957), false);
-		setupMapSpacingAndLand(DARK_OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 49351645), false);
-		setupMapSpacingAndLand(JUNGLE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 193669707), false);
-		setupMapSpacingAndLand(OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 170597541), false);
-		setupMapSpacingAndLand(SPRUCE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 49224289), false);
-		setupMapSpacingAndLand(WARPED_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 37834092), false);
-		setupMapSpacingAndLand(GINKGO_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 276270520), false);
+		setupMapSpacingAndLand(CRIMSON_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 136387957), true);
+		setupMapSpacingAndLand(DARK_OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 49351645), true);
+		setupMapSpacingAndLand(JUNGLE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 193669707), true);
+		setupMapSpacingAndLand(OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 170597541), true);
+		setupMapSpacingAndLand(SPRUCE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 49224289), true);
+		setupMapSpacingAndLand(WARPED_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 37834092), true);
+		setupMapSpacingAndLand(GINKGO_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 276270520), true);
+		setupMapSpacingAndLand(JEFFERY_DUNGEON_PLACEHOLDER.get(), new StructureSeparationSettings(80, 65, 314159265), true);
 
 //		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21, 19, 159332311), false);
 //		setupMapSpacingAndLand(MINING_WASP_DUNGEON.get(), new StructureSeparationSettings(38, 34, 159342356), false);

@@ -1,5 +1,5 @@
 {
-  "anim_file_loc": "chaosawakens:animations/creature/land/beaver.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/creature/land/beaver.animation.json",
   "animations": [
     {
       "animation_name": "Idle",

@@ -99,7 +99,7 @@ public class AnimatableLeapGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), leapAnim.get(), midairAnim.get(), landAnim.get(), attackId) && owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive() && owner.distanceTo(owner.getTarget()) >= minDistanceBlocks && (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
+		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget(), leapAnim.get(), midairAnim.get(), landAnim.get(), attackId) && owner.isAlive() && owner.canSee(owner.getTarget()) && !owner.isAttacking() && owner.getTarget().isAlive() && owner.distanceTo(owner.getTarget()) >= minDistanceBlocks && (extraActivationConditions != null ? extraActivationConditions.test(owner) : owner.getRandom().nextInt(probability) == 0);
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class AnimatableLeapGoal extends Goal {
 		owner.getNavigation().stop();
 		LivingEntity target = owner.getTarget();
 
-		BlockPosUtil.destroyCollidingBlocksWithOffset(owner, owner.getRandom().nextBoolean(), 0.1F, 0F, 0.1F, blockBreakPredicate);
+		BlockPosUtil.destroyCollidingBlocksWithOffset(owner, owner.getRandom().nextBoolean(), 0.3F, 0.0F, 0.3F, blockBreakPredicate);
 
 		if (owner.isPlayingAnimation(midairAnim.get()) && owner.isOnGround()) {
 			owner.playAnimation(landAnim.get(), true);

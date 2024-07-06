@@ -4,7 +4,15 @@ import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableIdle
 import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableWalkMonsterSound;
 import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableWalkSound;
+import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableIdleSound;
+import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableMunchSound;
+import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableWalkSound;
+import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableIdleSound;
+import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableWalkSound;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
+import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundEvent;
@@ -143,5 +151,26 @@ public final class SoundUtil { //TODO Add common method impls for non-monster en
      */
     public static void playWalkingSoundAsTickable(SoundEvent soundToPlay, AnimatableMonsterEntity targetEntity) {
         playWalkingSoundAsTickable(soundToPlay, targetEntity, 1.0F);
+    }
+
+    /**
+     * Server fix method.
+     *
+     * @param owner The {@link HerculesBeetleEntity} instance to play the sound for.
+     */
+    public static void playHerculesBeetleTickableSounds(HerculesBeetleEntity owner) {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new HerculesBeetleTickableIdleSound(CASoundEvents.HERCULES_BEETLE_IDLE.get(), owner).setDocilitySound(new HerculesBeetleTickableIdleSound(CASoundEvents.HERCULES_BEETLE_DOCILE.get(), owner)));
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new HerculesBeetleTickableWalkSound(CASoundEvents.HERCULES_BEETLE_WALK.get(), owner).setFlyingSound(new HerculesBeetleTickableWalkSound(CASoundEvents.HERCULES_BEETLE_FLY.get(), owner)));
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new HerculesBeetleTickableMunchSound(CASoundEvents.HERCULES_BEETLE_MAD_MUNCH.get(), owner));
+    }
+
+    /**
+     * Server fix method.
+     *
+     * @param owner The {@link RoboPounderEntity} instance to play the sound for.
+     */
+    public static void playRoboPounderTickableSounds(RoboPounderEntity owner) {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableIdleSound(CASoundEvents.ROBO_POUNDER_IDLE.get(), owner).setCriticalSound(new RoboPounderTickableIdleSound(owner.getRandom().nextBoolean() ? CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE.get() : CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE_RADIO.get(), owner)));
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), owner).setRageRunSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), owner)));
     }
 }

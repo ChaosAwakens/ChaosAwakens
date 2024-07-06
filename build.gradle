@@ -65,7 +65,7 @@ minecraft {
 			property 'forge.logging.markers', 'SCAN'
 			property 'forge.logging.console.level', 'debug'
 
-			jvmArgs "-XXaltjvm=dcevm", "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch"
+			jvmArgs "-XXaltjvm=dcevm"// , "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch"
 
 			mods {
 				"${modId}" {
@@ -154,8 +154,8 @@ dependencies {
 	implementation fg.deobf("curse.maven:datafixerslayer-416519:${dfs_version}")
 
 	// Temp
-	implementation fg.deobf("curse.maven:modernfix-790626:5259338")
-	implementation fg.deobf("curse.maven:ferritecore-429235:4074330")
+//	implementation fg.deobf("curse.maven:modernfix-790626:5259338")
+//	implementation fg.deobf("curse.maven:ferritecore-429235:4074330")
 }
 
 repositories {

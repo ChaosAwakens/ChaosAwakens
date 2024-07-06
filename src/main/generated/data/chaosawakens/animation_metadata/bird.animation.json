@@ -1,13 +1,13 @@
 {
-  "anim_file_loc": "chaosawakens:animations/creature/air/bird.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/creature/air/bird.animation.json",
   "animations": [
     {
-      "animation_name": "Idle",
+      "animation_name": "Fly",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Fly",
+      "animation_name": "Idle",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },

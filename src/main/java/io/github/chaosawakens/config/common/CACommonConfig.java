@@ -93,7 +93,7 @@ public class CACommonConfig {
 	public final BooleanValue generateSpruceEntTree;
 	public final BooleanValue generateWarpedEntTree;
 	public final BooleanValue generateGinkgoEntTree;
-//	public final BooleanValue generateWaspNest;
+	public final BooleanValue generateJefferyDungeonPlaceholder;
 //	public final BooleanValue generateMiningWaspNest;
 
 	public final BooleanValue holidayTextures;
@@ -202,7 +202,7 @@ public class CACommonConfig {
 		
 		builder.push("Pickaxes");
 		builder.push("Ultimate Pickaxe");
-		enableUltimatePickaxeBonus = builder.define("Enable Ultimate Pickaxe Tool Bonus", true);
+		enableUltimatePickaxeBonus = builder.define("Enable Ultimate Pickaxe Tool Bonus (Fortune on Autosmelt)", true);
 		builder.pop(2);
 		
 		enableAutoEnchanting = builder
@@ -336,6 +336,9 @@ public class CACommonConfig {
 		generateGinkgoEntTree = builder
 				.comment("Will Ginkgo Ent Trees be generated?")
 				.define("Generate Ginkgo Ent Trees", true);
+		generateJefferyDungeonPlaceholder = builder
+				.comment("Will Jeffery Dungeons (Placeholders) be generated?")
+				.define("Generate Jeffery Dungeons", true);
 //		generateWaspNest = builder
 //				.comment("Will Wasp Nests be generated?")
 //				.define("Generate Wasp Nests", true);

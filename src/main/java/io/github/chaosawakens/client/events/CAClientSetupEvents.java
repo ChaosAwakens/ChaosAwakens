@@ -120,6 +120,7 @@ public class CAClientSetupEvents {
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_JEFFERY.get(),  RoboJefferyEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_POUNDER.get(), RoboPounderEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_LASER.get(), RoboLaserProjectileRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.ROBO_RAY.get(), RoboRayProjectileRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WASP.get(), WaspEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.WHALE.get(), WhaleEntityRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(CAEntityTypes.GREEN_FISH.get(), GreenFishEntityRenderer::new);

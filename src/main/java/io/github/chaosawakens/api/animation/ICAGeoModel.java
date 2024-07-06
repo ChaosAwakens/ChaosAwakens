@@ -1,6 +1,7 @@
 package io.github.chaosawakens.api.animation;
 
 import io.github.chaosawakens.common.util.ObjectUtil;
+import net.minecraft.entity.Entity;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.AnimationProcessor;
 import software.bernie.geckolib3.core.processor.IBone;
@@ -20,7 +21,7 @@ public interface ICAGeoModel {
 		IBone root = getBodyBone();
 		IBone head = getHeadBone();
 
-		if (ObjectUtil.performNullityChecks(false, extraData, root, head)) {
+		if (ObjectUtil.performNullityChecks(false, extraData, root, head) && ((Entity) animatable).isAlive()) {
 			if (extraData.isChild) {
 				root.setScaleX(0.5f);
 				root.setScaleY(0.5f);
@@ -58,7 +59,7 @@ public interface ICAGeoModel {
 		EntityModelData extraData = customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
 		IBone head = getHeadBone();
 
-		if (ObjectUtil.performNullityChecks(false, extraData, head)) {
+		if (ObjectUtil.performNullityChecks(false, extraData, head) && ((Entity) animatable).isAlive()) {
 			head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
 			head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 270F));
 		}

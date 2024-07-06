@@ -1,10 +1,10 @@
 {
-  "anim_file_loc": "chaosawakens:animations/hostile/robo/robo_sniper.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/hostile/robo/robo_sniper.animation.json",
   "animations": [
     {
-      "animation_name": "Shoot Attack",
-      "animation_length": 0.64,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Idle Extras",
+      "animation_length": 3.6,
+      "loop_type": "LOOP"
     },
     {
       "animation_name": "Accelerate",
@@ -17,14 +17,14 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle Extras",
+      "animation_name": "Idle",
       "animation_length": 3.6,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 3.6,
-      "loop_type": "LOOP"
+      "animation_name": "Shoot Attack",
+      "animation_length": 0.64,
+      "loop_type": "PLAY_ONCE"
     }
   ]
 }

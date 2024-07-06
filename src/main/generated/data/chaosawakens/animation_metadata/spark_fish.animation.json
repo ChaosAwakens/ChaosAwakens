@@ -1,5 +1,5 @@
 {
-  "anim_file_loc": "chaosawakens:animations/creature/water/fish/spark_fish.animation.json",
+  "anim_file_loc": "chaosawakens:animations/entity/creature/water/fish/spark_fish.animation.json",
   "animations": [
     {
       "animation_name": "Swim",
@@ -7,12 +7,12 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Flop",
+      "animation_name": "Idle",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
+      "animation_name": "Flop",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     }

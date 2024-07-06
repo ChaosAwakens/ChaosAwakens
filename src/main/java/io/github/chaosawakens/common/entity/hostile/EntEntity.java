@@ -123,9 +123,9 @@ public class EntEntity extends AnimatableMonsterEntity {
 		});
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.1, 3));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 20.5D, 22.4D, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).soundOnStart(CASoundEvents.ENT_TREE_PUNCH::get, 0.4F));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 5.0D, 1, 18, false, false, true, 60).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 5.0D, 2, 10, false, false, true, 45).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 5.0D, 4, 2, false, false, true, 35).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 10.0D, 1, 18, false, false, true, 60).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 10.0D, 2, 10, false, false, true, 45).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 10.0D, 4, 2, false, false, true, 35).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, SheepEntity.class, false));
@@ -175,6 +175,8 @@ public class EntEntity extends AnimatableMonsterEntity {
 			SoundUtil.playIdleSoundAsTickable(CASoundEvents.ENT_IDLE.get(), this);
 			SoundUtil.playWalkingSoundAsTickable(CASoundEvents.ENT_WALK.get(), this);
 		}
+
+		if (!level.isClientSide) setMovementSpeed(0.325D);
 	}
 
 	@Override
