@@ -452,8 +452,8 @@ public final class EntityUtil {
 	}
 
 	/**
-	 * Helper method which handles an animatable entity's death sequence by altering the order in which methods are called inside {@link LivingEntity#die(DamageSource)} 
-	 * to match the specified {@link IAnimatableEntity}'s death animation (if it has one).
+	 * Overloaded variant of {@link #handleAnimatableDeath(IAnimatableEntity, DamageSource, Predicate, Consumer)}, with the death predicate set to when the death animation finishes.
+	 *
 	 * @param targetAnimatable The animatable to invoke the {@code die} method onto
 	 * @param deathCause The cause of death used to determine things like death loot, returning due to {@link ForgeHooks#onLivingDeath(LivingEntity, DamageSource)}, 
 	 * etc.
@@ -462,6 +462,22 @@ public final class EntityUtil {
 	 */
 	@SuppressWarnings("deprecation")
 	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause, Consumer<LivingEntity> extraProtectedDeathFunctions) {
+		handleAnimatableDeath(targetAnimatable, deathCause, (animatable) -> animatable.getDeathAnim().hasAnimationFinished(), extraProtectedDeathFunctions);
+	}
+
+	/**
+	 * Helper method which handles an animatable entity's death sequence by altering the order in which methods are called inside {@link LivingEntity#die(DamageSource)}
+	 * to match the specified {@link IAnimatableEntity}'s death animation (if it has one). Accepts a condition to determine if loot drops and other things should occur.
+	 *
+	 * @param targetAnimatable The animatable to invoke the {@code die} method onto
+	 * @param deathCause The cause of death used to determine things like death loot, returning due to {@link ForgeHooks#onLivingDeath(LivingEntity, DamageSource)},
+	 * etc.
+	 * @param dropCondition The condition to determine if loot should be dropped and other operations (usually handled pre-removal) should occur
+	 * @param extraProtectedDeathFunctions Any extra protected methods in the target living animatable (which may cause compilation
+	 * errors for some reason if AT'd)
+	 */
+	@SuppressWarnings("deprecation")
+	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause, Predicate<IAnimatableEntity> dropCondition, Consumer<LivingEntity> extraProtectedDeathFunctions) {
 		if (targetAnimatable.getDeathAnim() == null || !(targetAnimatable instanceof LivingEntity || ForgeHooks.onLivingDeath((LivingEntity) targetAnimatable, deathCause))) return;
 
 		LivingEntity livingAnimatable = (LivingEntity) targetAnimatable;
@@ -477,7 +493,7 @@ public final class EntityUtil {
 				livingAnimatable.getCombatTracker().recheckStatus();
 			}
 
-			if (targetAnimatable.getDeathAnim().hasAnimationFinished()) {			
+			if (dropCondition.test(targetAnimatable)) {
 				if (livingAnimatable.level instanceof ServerWorld) {
 					ServerWorld curServerWorld = (ServerWorld) livingAnimatable.level;
 
@@ -486,7 +502,7 @@ public final class EntityUtil {
 					extraProtectedDeathFunctions.accept(livingAnimatable);
 					livingAnimatable.createWitherRose(killerEntity);
 				}
-				
+
 				livingAnimatable.level.broadcastEntityEvent(livingAnimatable, (byte) 3);
 				livingAnimatable.setPose(Pose.DYING);
 			}

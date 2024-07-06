@@ -11,7 +11,6 @@ import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableMeleeGoal
 import io.github.chaosawakens.common.entity.base.AnimatableBossEntity;
 import io.github.chaosawakens.common.entity.misc.AOEHitboxEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
-import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CATags;
 import io.github.chaosawakens.common.registry.CATeams;
@@ -25,6 +24,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -33,20 +33,24 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
+import net.minecraftforge.common.ForgeHooks;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 
 public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -54,6 +58,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	private final ObjectArrayList<IAnimationBuilder> roboJefferyAnimations = new ObjectArrayList<IAnimationBuilder>(1);
 	private final ServerBossInfo bossInfo = (ServerBossInfo) new ServerBossInfo(getType().getDescription().copy().append(getName().copy().withStyle(TextFormatting.DARK_PURPLE).withStyle(TextFormatting.BOLD)), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS).setDarkenScreen(true).setCreateWorldFog(true);
 	private static final DataParameter<Boolean> HAS_CORE = EntityDataManager.defineId(RoboJefferyEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> DROPPED_DEATH_LOOT = EntityDataManager.defineId(RoboJefferyEntity.class, DataSerializers.BOOLEAN); // Server lag failsafe
 	private final WrappedAnimationController<RoboJefferyEntity> mainController = createMainMappedController("robojefferymaincontroller");
 	private final WrappedAnimationController<RoboJefferyEntity> ambienceController = createMappedController("robojefferyambiencecontroller", this::ambiencePredicate);
 	private final WrappedAnimationController<RoboJefferyEntity> secondaryAmbienceController = createMappedController("robojefferysecondaryambiencecontroller", this::secondaryAmbiencePredicate);
@@ -166,6 +171,23 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(HAS_CORE, true);
+		this.entityData.define(DROPPED_DEATH_LOOT, false);
+	}
+
+	public boolean hasCore() {
+		return this.entityData.get(HAS_CORE);
+	}
+
+	public void setHasCore(boolean hasCore) {
+		this.entityData.set(HAS_CORE, hasCore);
+	}
+
+	public boolean hasDroppedDeathLoot() {
+		return this.entityData.get(DROPPED_DEATH_LOOT);
+	}
+
+	public void setDroppedDeathLoot(boolean droppedDeathLoot) {
+		this.entityData.set(DROPPED_DEATH_LOOT, droppedDeathLoot);
 	}
 
 	@Override
@@ -201,12 +223,28 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 	@Override
 	protected void tickDeath() {
+		EntityUtil.freezeEntityRotation(this);
+		setAttackID((byte) 0);
+		setAttackCooldown(0);
+		setMoving(false);
+
 		if (!isOnGround() && getAttackID() == LEAP_ATTACK_ID) return;
 		else {
-			super.tickDeath();
+			DamageSource lastValidDamageSource = getLastDamageSource() == null ? DamageSource.GENERIC : getLastDamageSource();
 
-			boolean hasDropped = false; // Failsafe for server lag
-			
+			playAnimation(getDeathAnim(), false);
+
+			if (getDeathAnim().hasAnimationFinished()) {
+				remove();
+
+				for (int i = 0; i < 20; ++i) {
+					double xOffset = this.random.nextGaussian() * 0.02D;
+					double yOffset = this.random.nextGaussian() * 0.02D;
+					double zOffset = this.random.nextGaussian() * 0.02D;
+					this.level.addParticle(ParticleTypes.POOF, getRandomX(1.0D), getRandomY(), getRandomZ(1.0D), xOffset, yOffset, zOffset);
+				}
+			}
+
 			if (MathUtil.isBetween(deathAnim.getWrappedAnimProgress(), 29, 77)) CAScreenShakeEntity.shakeScreen(level, position(), 560F, (float) (deathAnim.getWrappedAnimProgress() / 100F) / 6, 2, 410);
 			
 			if (deathAnim.getWrappedAnimProgress() == 75) {
@@ -227,14 +265,35 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 				
 				if (!level.isClientSide) level.addFreshEntity(deathHitBox);
 
-				if (!hasDropped) {
-					EntityUtil.spawnItemWithMotion(this, CAItems.JEFFERY_CORE.get().getDefaultInstance(), new Vector3d(0, 1, 0));
-					hasDropped = true;
+				if (!hasDroppedDeathLoot()) {
+					EntityUtil.handleAnimatableDeath(this, lastValidDamageSource, (owner) -> true, (owner) -> dropAllDeathLoot(lastValidDamageSource));
+					setDroppedDeathLoot(true);
+					setHasCore(false);
 				}
 			}
 
 			if (deathAnim.getWrappedAnimProgress() < 75) EntityUtil.attractEntities(this, 20.0D, 20.0D, 0.08D + (deathAnim.getWrappedAnimProgress() / 1000), false);
 		}
+	}
+
+	@Override
+	protected void dropAllDeathLoot(DamageSource pDamageSource) {
+		Entity dmgSrcEntity = pDamageSource.getEntity();
+		int dmgSrcEntityLootingLevel = ForgeHooks.getLootingLevel(this, dmgSrcEntity, pDamageSource);
+
+		captureDrops(new ObjectArrayList<>());
+
+		if (shouldDropLoot() && this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+			dropFromLootTable(pDamageSource, true);
+			dropCustomDeathLoot(pDamageSource, dmgSrcEntityLootingLevel, true);
+		}
+
+		dropEquipment();
+	//	dropExperience();
+
+		Collection<ItemEntity> allDrops = captureDrops(null);
+
+		if (!ForgeHooks.onLivingDrops(this, pDamageSource, allDrops, dmgSrcEntityLootingLevel, lastHurtByPlayerTime > 0)) allDrops.forEach(targetItemEntity -> EntityUtil.spawnItemWithMotion(this, targetItemEntity.getItem(), new Vector3d(0, 1, 0)));
 	}
 
 	@Override

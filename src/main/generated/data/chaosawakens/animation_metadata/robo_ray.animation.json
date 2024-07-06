@@ -7,12 +7,12 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Inept",
+      "animation_name": "Active",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Active",
+      "animation_name": "Inept",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     }

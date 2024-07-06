@@ -2,8 +2,23 @@
   "anim_file_loc": "chaosawakens:animations/entity/hostile/robo/robo_warrior.animation.json",
   "animations": [
     {
-      "animation_name": "Idle Extras",
-      "animation_length": 1.7976931348623157E308,
+      "animation_name": "Activate Shield",
+      "animation_length": 2.52,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Burst Laser Attack",
+      "animation_length": 2.56,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Deactivate Shield",
+      "animation_length": 2.52,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Shield Up",
+      "animation_length": 3.56,
       "loop_type": "LOOP"
     },
     {
@@ -12,14 +27,14 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Destroy Shield",
-      "animation_length": 2.52,
+      "animation_name": "Death",
+      "animation_length": 4.5,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Shield Up",
-      "animation_length": 3.56,
-      "loop_type": "LOOP"
+      "animation_name": "Destroy Shield",
+      "animation_length": 2.52,
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Right Uppercut Attack",
@@ -32,34 +47,19 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Burst Laser Attack",
-      "animation_length": 2.56,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Death",
-      "animation_length": 4.5,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
       "animation_name": "Left Uppercut Attack",
       "animation_length": 1.85,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 3.56,
+      "animation_name": "Idle Extras",
+      "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Activate Shield",
-      "animation_length": 2.52,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Deactivate Shield",
-      "animation_length": 2.52,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Idle",
+      "animation_length": 3.56,
+      "loop_type": "LOOP"
     }
   ]
 }

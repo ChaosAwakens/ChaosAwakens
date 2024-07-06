@@ -2,23 +2,13 @@
   "anim_file_loc": "chaosawakens:animations/entity/hostile/robo/robo_pounder.animation.json",
   "animations": [
     {
-      "animation_name": "Pose 1",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
+      "animation_name": "Rage Crash Restart",
+      "animation_length": 1.2,
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Taunt",
       "animation_length": 2.4,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Death",
-      "animation_length": 3.78,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Right Swing Attack",
-      "animation_length": 2.0,
       "loop_type": "PLAY_ONCE"
     },
     {
@@ -27,8 +17,28 @@
       "loop_type": "PLAY_ONCE"
     },
     {
+      "animation_name": "Left Heavy Attack",
+      "animation_length": 1.75,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Death",
+      "animation_length": 3.78,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Left Swing Attack",
       "animation_length": 2.0,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Rage Crash",
+      "animation_length": 10.0,
       "loop_type": "PLAY_ONCE"
     },
     {
@@ -37,19 +47,24 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Right Leg Attack",
+      "animation_name": "Heavy AoE Attack",
+      "animation_length": 2.3,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Right Swing Attack",
+      "animation_length": 2.0,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Left Leg Attack",
       "animation_length": 1.75,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Dash Attack",
-      "animation_length": 3.2,
+      "animation_name": "Right Leg Attack",
+      "animation_length": 1.75,
       "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Rage Run",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
     },
     {
       "animation_name": "Right Heavy Attack",
@@ -62,47 +77,32 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Heavy AoE Attack",
-      "animation_length": 2.3,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Left Leg Attack",
-      "animation_length": 1.75,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Pose 2",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Cooldown",
       "animation_length": 10.25,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Rage Crash Restart",
-      "animation_length": 1.2,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Rage Crash",
-      "animation_length": 10.0,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Idle",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Left Heavy Attack",
-      "animation_length": 1.75,
+      "animation_name": "Dash Attack",
+      "animation_length": 3.2,
       "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Walk",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Pose 1",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Rage Run",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Pose 2",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
     }

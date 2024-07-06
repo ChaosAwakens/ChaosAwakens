@@ -7,6 +7,11 @@
       "loop_type": "PLAY_ONCE"
     },
     {
+      "animation_name": "Death",
+      "animation_length": 3.6,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
       "animation_name": "Walk",
       "animation_length": 2.0,
       "loop_type": "LOOP"
@@ -15,11 +20,6 @@
       "animation_name": "Idle",
       "animation_length": 2.0,
       "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Death",
-      "animation_length": 3.6,
-      "loop_type": "PLAY_ONCE"
     }
   ]
 }
