@@ -177,7 +177,7 @@
     "sounds": [
       {
         "name": "chaosawakens:entity/boss/robo/robojeffery/attacks/seismic_slam",
-        "attenuation_distance": 96
+        "attenuation_distance": 168
       }
     ]
   },
@@ -186,7 +186,7 @@
     "sounds": [
       {
         "name": "chaosawakens:entity/boss/robo/robojeffery/attacks/piston_leap_launch",
-        "attenuation_distance": 128
+        "attenuation_distance": 148
       }
     ]
   },
@@ -195,7 +195,7 @@
     "sounds": [
       {
         "name": "chaosawakens:entity/boss/robo/robojeffery/attacks/piston_leap_land",
-        "attenuation_distance": 96
+        "attenuation_distance": 148
       }
     ]
   },

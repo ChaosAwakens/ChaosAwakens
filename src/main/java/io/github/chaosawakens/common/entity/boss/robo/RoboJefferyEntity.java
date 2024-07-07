@@ -150,7 +150,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 4, 3, 40).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
 		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 260, (owner) -> getRandom().nextInt(23) == 0 && distanceTo(getTarget()) > getMeleeAttackReach() && MathUtil.isBetween(distanceTo(getTarget()), getMeleeAttackReach() + 1, getMeleeAttackReach() * 5)).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
 		this.targetSelector.addGoal(0, new RoboJefferyShockwaveGoal(this, () -> smashAnim, SMASH_ATTACK_ID, 20D, 25D, 18D, 30, (owner) -> getRandom().nextInt(140) == 0 && MathUtil.isBetween(distanceTo(getTarget()), 0, getMeleeAttackReach() * 5) && getTarget().getMaxHealth() >= 150.0F).expSpeed(3.1D).soundOnStart(CASoundEvents.ROBO_JEFFERY_SEISMIC_SLAM::get, 1.0F));
-		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 1.37345D, 25.0D, (owner) -> getRandom().nextInt(17) == 0).setLandAction((affectedTarget) -> {
+		this.targetSelector.addGoal(0, new AnimatableLeapGoal(this, () -> leapBeginAnim, () -> leapMidairAnim, () -> leapLandAnim, LEAP_ATTACK_ID, 2.37345D, 25.0D, (owner) -> getRandom().nextInt(17) == 0).setLandAction((affectedTarget) -> {
 			if (!(affectedTarget instanceof RoboJefferyEntity) && !affectedTarget.isAlliedTo(this)) {
 				affectedTarget.hurt(DamageSource.mobAttack(this), 50.0F / distanceTo(affectedTarget));
 
