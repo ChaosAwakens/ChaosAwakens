@@ -452,17 +452,47 @@ public final class EntityUtil {
 	}
 
 	/**
-	 * Overloaded variant of {@link #handleAnimatableDeath(IAnimatableEntity, DamageSource, Predicate, Consumer)}, with the death predicate set to when the death animation finishes.
+	 * Helper method which handles an animatable entity's death sequence by altering the order in which methods are called inside {@link LivingEntity#die(DamageSource)}
+	 * to match the specified {@link IAnimatableEntity}'s death animation (if it has one). Not an overloaded variant of {@link #handleAnimatableDeath(IAnimatableEntity, DamageSource, Predicate, Consumer)}
+	 * due to the game having a skill issue in ticking the death animation finishing predicate.
 	 *
 	 * @param targetAnimatable The animatable to invoke the {@code die} method onto
-	 * @param deathCause The cause of death used to determine things like death loot, returning due to {@link ForgeHooks#onLivingDeath(LivingEntity, DamageSource)}, 
+	 * @param deathCause The cause of death used to determine things like death loot, returning due to {@link ForgeHooks#onLivingDeath(LivingEntity, DamageSource)},
 	 * etc.
-	 * @param extraProtectedDeathFunctions Any extra protected methods in the target living animatable (which may cause compilation 
+	 * @param extraProtectedDeathFunctions Any extra protected methods in the target living animatable (which may cause compilation
 	 * errors for some reason if AT'd)
 	 */
 	@SuppressWarnings("deprecation")
 	public static void handleAnimatableDeath(IAnimatableEntity targetAnimatable, DamageSource deathCause, Consumer<LivingEntity> extraProtectedDeathFunctions) {
-		handleAnimatableDeath(targetAnimatable, deathCause, (animatable) -> animatable.getDeathAnim().hasAnimationFinished(), extraProtectedDeathFunctions);
+		if (targetAnimatable.getDeathAnim() == null || !(targetAnimatable instanceof LivingEntity || ForgeHooks.onLivingDeath((LivingEntity) targetAnimatable, deathCause))) return;
+
+		LivingEntity livingAnimatable = (LivingEntity) targetAnimatable;
+		Entity causeEntity = deathCause.getEntity();
+		LivingEntity killerEntity = livingAnimatable.getKillCredit();
+
+		if (!livingAnimatable.removed && !livingAnimatable.dead) {
+			if (targetAnimatable.getDeathAnim().getWrappedAnimProgress() == 0) {
+				if (livingAnimatable.deathScore >= 0 && killerEntity != null)  killerEntity.awardKillScore(livingAnimatable, livingAnimatable.deathScore, deathCause);
+				if (livingAnimatable.isSleeping()) livingAnimatable.stopSleeping();
+
+				livingAnimatable.dead = true;
+				livingAnimatable.getCombatTracker().recheckStatus();
+			}
+
+			if (targetAnimatable.getDeathAnim().hasAnimationFinished()) {
+				if (livingAnimatable.level instanceof ServerWorld) {
+					ServerWorld curServerWorld = (ServerWorld) livingAnimatable.level;
+
+					if (causeEntity != null) causeEntity.killed(curServerWorld, livingAnimatable);
+
+					extraProtectedDeathFunctions.accept(livingAnimatable);
+					livingAnimatable.createWitherRose(killerEntity);
+				}
+
+				livingAnimatable.level.broadcastEntityEvent(livingAnimatable, (byte) 3);
+				livingAnimatable.setPose(Pose.DYING);
+			}
+		}
 	}
 
 	/**

@@ -293,7 +293,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 
 		Collection<ItemEntity> allDrops = captureDrops(null);
 
-		if (!ForgeHooks.onLivingDrops(this, pDamageSource, allDrops, dmgSrcEntityLootingLevel, lastHurtByPlayerTime > 0)) allDrops.forEach(targetItemEntity -> EntityUtil.spawnItemWithMotion(this, targetItemEntity.getItem(), new Vector3d(0, 1, 0)));
+		if (!ForgeHooks.onLivingDrops(this, pDamageSource, allDrops, dmgSrcEntityLootingLevel, lastHurtByPlayerTime > 0)) allDrops.forEach(targetItemEntity -> EntityUtil.spawnItemWithMotion(this, targetItemEntity.getItem(), new Vector3d(0, 1, 0))); //TODO recentlyHit moment
 	}
 
 	@Override
