@@ -21,7 +21,7 @@ public interface ICAGeoModel {
 		IBone root = getBodyBone();
 		IBone head = getHeadBone();
 
-		if (ObjectUtil.performNullityChecks(false, extraData, root, head) && ((Entity) animatable).isAlive()) {
+		if (ObjectUtil.performNullityChecks(false, extraData, root, head)) {
 			if (extraData.isChild) {
 				root.setScaleX(0.5f);
 				root.setScaleY(0.5f);

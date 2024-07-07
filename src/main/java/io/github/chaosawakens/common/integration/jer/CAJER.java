@@ -391,6 +391,9 @@ public class CAJER {
 		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_GINKGO_LOOT.stringName, CATreasure.ENT_TREE_GINKGO_LOOT.langName);
 		dungeonRegistry.registerChest(CATreasure.ENT_TREE_GINKGO_LOOT.stringName, CATreasure.ENT_TREE_GINKGO_LOOT.lootTable);
 
+		dungeonRegistry.registerCategory(CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.langName);
+		dungeonRegistry.registerChest(CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.lootTable);
+
 		// WASP DUNGEON
 		// Uncomment: When Wasp and Wasp Dungeons are added again.
 		// 	dungeonRegistry.registerCategory(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.langName);

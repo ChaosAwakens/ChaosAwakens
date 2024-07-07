@@ -35,8 +35,8 @@ public class CAStructures {
 //	public static final RegistryObject<Structure<NoFeatureConfig>> MINING_WASP_DUNGEON = STRUCTURES.register("mining_wasp_dungeon", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "wasp_dungeon/mining_start_pool", new BlockPos(0, -17, 0)));
 	
 	public static void setupStructures() {
-		setupMapSpacingAndLand(ACACIA_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), false);
-		setupMapSpacingAndLand(BIRCH_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 38875937), false);
+		setupMapSpacingAndLand(ACACIA_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 32034987), true);
+		setupMapSpacingAndLand(BIRCH_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 38875937), true);
 		setupMapSpacingAndLand(CRIMSON_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 136387957), true);
 		setupMapSpacingAndLand(DARK_OAK_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 49351645), true);
 		setupMapSpacingAndLand(JUNGLE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 193669707), true);

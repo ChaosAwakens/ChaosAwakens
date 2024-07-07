@@ -31,7 +31,8 @@ public class CATreasure {
 	public static final CATreasure ENT_TREE_RED_MUSHROOM_LOOT = new CATreasure("ent_tree/red_mushroom_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/red_mushroom_loot"}} 1
 	public static final CATreasure ENT_TREE_GINKGO_LOOT = new CATreasure("ent_tree/ginkgo_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/ginkgo_loot"}} 1
 	public static final CATreasure WASP_DUNGEON_LOOT = new CATreasure("wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
-	public static final CATreasure MINING_WASP_DUNGEON_LOOT = new CATreasure("mining_wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}} 
+	public static final CATreasure MINING_WASP_DUNGEON_LOOT = new CATreasure("mining_wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}}
+	public static final CATreasure DESERT_ARCHAEOLOGIST_HOUSE_LOOT = new CATreasure("desert_archaeologist_house/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/desert_archaeologist_house/loot"}}
 	public static final CATreasure ROBO_OUTPOST_ANT_UNDERGROUND = new CATreasure("robo_outpost_ant/loot").setPrefix("robo_crates"); // /give @p chaosawakens:robo_crate{BlockEntityTag:{LootTable:"chaosawakens:robo_crates/robo_outpost_ant/loot"}}
 	public static final CATreasure ROBO_OUTPOST_ANT_UNDERGROUND_LOOT = new CATreasure("robo_outpost_ant_underground/loot").setPrefix("robo_crates"); // /give @p chaosawakens:robo_crate{BlockEntityTag:{LootTable:"chaosawakens:robo_crates/robo_outpost_ant_underground/loot"}}
 	public static final CATreasure ROBO_OUTPOST_FLUID = new CATreasure("robo_outpost_fluid/loot").setPrefix("robo_crates"); // /give @p chaosawakens:robo_crate{BlockEntityTag:{LootTable:"chaosawakens:robo_crates/robo_outpost_fluid/loot"}}

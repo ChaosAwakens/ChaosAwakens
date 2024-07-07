@@ -3,15 +3,6 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 4,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "chaosawakens:ent_tree/dark_oak",
-        "processors": "minecraft:empty",
-        "projection": "rigid"
-      }
-    },
-    {
       "weight": 2,
       "element": {
         "element_type": "minecraft:single_pool_element",

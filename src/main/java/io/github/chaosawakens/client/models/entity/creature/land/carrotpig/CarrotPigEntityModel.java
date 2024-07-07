@@ -4,6 +4,7 @@ import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.client.models.entity.base.ExtendedAnimatedTickingGeoModel;
 import io.github.chaosawakens.common.entity.creature.land.carrotpig.CarrotPigEntity;
 import net.minecraft.util.ResourceLocation;
+import software.bernie.geckolib3.core.processor.IBone;
 
 public class CarrotPigEntityModel extends ExtendedAnimatedTickingGeoModel<CarrotPigEntity> {
 	
@@ -20,6 +21,11 @@ public class CarrotPigEntityModel extends ExtendedAnimatedTickingGeoModel<Carrot
 	@Override
 	public ResourceLocation getTextureLocation(CarrotPigEntity object) {
 		return ChaosAwakens.prefix("textures/entity/creature/land/carrot_pig/carrot_pig.png");
+	}
+
+	@Override
+	public IBone getBodyBone() {
+		return getAnimationProcessor().getBone("body");
 	}
 	
 	@Override
