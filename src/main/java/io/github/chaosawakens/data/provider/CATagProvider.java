@@ -73,6 +73,9 @@ public class CATagProvider extends BlockTagsProvider {
 
 			tag(CATags.Blocks.DENSE_DIRT).add(CABlocks.DENSE_GRASS_BLOCK.get(), CABlocks.DENSE_DIRT.get());
 			tag(CATags.Blocks.TERRA_PRETA).add(CABlocks.TERRA_PRETA.get());
+
+			tag(BlockTags.WOODEN_DOORS).add(CABlocks.APPLE_DOOR.get(), CABlocks.CHERRY_DOOR.get(), CABlocks.CRYSTALWOOD_DOOR.get(), CABlocks.DENSEWOOD_DOOR.get(), CABlocks.DUPLICATION_DOOR.get(),
+					CABlocks.GINKGO_DOOR.get(), CABlocks.MESOZOIC_DOOR.get(), CABlocks.PEACH_DOOR.get(), CABlocks.SKYWOOD_DOOR.get());
 			
 			tag(CATags.Blocks.STALAGMITE_ORE_COMMON).add(Blocks.COAL_ORE, Blocks.IRON_ORE, Blocks.GOLD_ORE, 
 					Blocks.LAPIS_ORE, Blocks.EMERALD_ORE, Blocks.DIAMOND_ORE, CABlocks.ALUMINUM_ORE.get(),
@@ -226,7 +229,7 @@ public class CATagProvider extends BlockTagsProvider {
 			tag(CATags.Items.FOSSILS_END_STONE).addTags(CATags.Items.FOSSILS_END_STONE_VANILLA, CATags.Items.FOSSILS_END_STONE_CHAOSAWAKENS);
 			tag(CATags.Items.FOSSILS_END_STONE_VANILLA).add(CABlocks.FOSSILISED_ENDERMAN_END_STONE.get().asItem(), CABlocks.FOSSILISED_ENDERMITE.get().asItem(), CABlocks.FOSSILISED_SHULKER.get().asItem());
 			tag(CATags.Items.FOSSILS_END_STONE_CHAOSAWAKENS).add(Items.AIR);
-			tag(CATags.Items.FOSSILS_KYANITE).add(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get().asItem());
+			tag(CATags.Items.FOSSILS_KYANITE).add(CABlocks.CRYSTALISED_CRYSTAL_APPLE_COW.get().asItem(), CABlocks.CRYSTALISED_CRYSTAL_CARROT_PIG.get().asItem(), CABlocks.CRYSTALISED_CRYSTAL_GATOR.get().asItem());
 
 			tag(CATags.Items.ARCHAEOLOGIST_FOSSILS_COMMON).add(CABlocks.FOSSILISED_BEE.get().asItem(), CABlocks.FOSSILISED_BIRD.get().asItem(), CABlocks.FOSSILISED_COW.get().asItem(), CABlocks.FOSSILISED_DONKEY.get().asItem(), CABlocks.FOSSILISED_DOLPHIN.get().asItem(), CABlocks.FOSSILISED_COD.get().asItem(), CABlocks.FOSSILISED_SALMON.get().asItem(), CABlocks.FOSSILISED_PIG.get().asItem(), CABlocks.FOSSILISED_SHEEP.get().asItem());
 			tag(CATags.Items.ARCHAEOLOGIST_FOSSILS_UNCOMMON).add(CABlocks.FOSSILISED_RABBIT.get().asItem(), CABlocks.FOSSILISED_TREE_FROG.get().asItem(), CABlocks.FOSSILISED_APPLE_COW.get().asItem(), CABlocks.FOSSILISED_CARROT_PIG.get().asItem(), CABlocks.FOSSILISED_CREEPER.get().asItem(), CABlocks.FOSSILISED_ZOMBIE.get().asItem(), CABlocks.FOSSILISED_DROWNED.get().asItem(), CABlocks.FOSSILISED_SKELETON.get().asItem(), CABlocks.FOSSILISED_FOX.get().asItem(), CABlocks.FOSSILISED_CHICKEN.get().asItem(), CABlocks.FOSSILISED_HORSE.get().asItem(), CABlocks.FOSSILISED_WITCH.get().asItem(), CABlocks.FOSSILISED_WOLF.get().asItem());

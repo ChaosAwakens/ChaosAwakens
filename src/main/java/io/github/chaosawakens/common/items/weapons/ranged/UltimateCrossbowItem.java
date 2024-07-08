@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.items.weapons.ranged;
 
-import com.google.common.collect.Lists;
 import io.github.chaosawakens.api.item.IAutoEnchantable;
 import io.github.chaosawakens.common.entity.projectile.ExplosiveFireworkEntity;
 import io.github.chaosawakens.common.registry.CAItems;

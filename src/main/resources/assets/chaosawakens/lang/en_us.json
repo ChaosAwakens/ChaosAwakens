@@ -264,6 +264,10 @@
 	
 	"entity.minecraft.villager.chaosawakens.archaeologist": "Archaeologist",
 	"entity.minecraft.villager.archaeologist": "Archaeologist",
+	"entity.minecraft.villager.chaosawakens.archaeologist_copper": "Archaeologist (Copper)",
+	"entity.minecraft.villager.archaeologist_copper": "Archaeologist (Copper)",
+	"entity.minecraft.villager.chaosawakens.archaeologist_crystal": "Archaeologist (Crystal)",
+	"entity.minecraft.villager.archaeologist_crystal": "Archaeologist (Crystal)",
 	
 	"death.attack.burns": "%1$s burned up on the inside",
     "death.attack.thorny_sun": "%1$s was prickled to death by a Thorny Sun",

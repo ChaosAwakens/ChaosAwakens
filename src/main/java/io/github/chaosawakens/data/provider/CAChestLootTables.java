@@ -17,6 +17,7 @@ import net.minecraft.util.Util;
 import java.util.function.BiConsumer;
 
 public class CAChestLootTables extends ChestLootTables {
+
 	public String getName() {
 		return ChaosAwakens.MODNAME + ": Chest Loot Tables";
 	}
