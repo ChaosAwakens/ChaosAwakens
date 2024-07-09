@@ -177,7 +177,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	/**
-	 * Overloaded method for {@link #isPlayingAnimation(String)}. Should primarily be used on the client.
+	 * Overloaded method for {@link #isPlayingAnimation(String)}.
 	 *
 	 * @param targetAnim The target animation to check for.
 	 * @return {@link #isPlayingAnimation(String)}.
@@ -202,7 +202,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 
 	default <E extends IAnimatableEntity> boolean isPlayingAnimation(IAnimationBuilder targetAnim, WrappedAnimationController<E> controllerToCheck) {
-		return controllerToCheck.isPlayingAnimation(targetAnim);
+		return isPlayingAnimation(targetAnim.getAnimationName(), controllerToCheck);
 	}
 
 	default boolean isPlayingAnimationInController(AnimationController<? extends IAnimatableEntity> targetController) {
@@ -210,7 +210,7 @@ public interface IAnimatableEntity extends IAnimatable, IAnimationTickable {
 	}
 	
 	default boolean isPlayingAnimationInController(WrappedAnimationController<? extends IAnimatableEntity> targetController) {
-		return targetController.getCurrentAnimation() != null;
+		return targetController.getCurrentAnimation() != null && !targetController.getCurrentAnimation().animationName.equals("None");
 	}
 
 	default boolean isPlayingAnimationInController(String targetControllerName) {
