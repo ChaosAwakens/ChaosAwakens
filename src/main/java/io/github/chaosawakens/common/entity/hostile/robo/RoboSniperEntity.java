@@ -133,8 +133,8 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, SHOOT_ATTACK_ID, () -> shootAnim, LASER_FACTORY_CLOSE, LASER_OFFSET, 1.0, 3.0, 60, 3, 6));
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, SHOOT_ATTACK_ID, () -> shootAnim, LASER_FACTORY_EXPLOSIVE, LASER_OFFSET, 1.0, 3.0, 60, 3, 14));
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, SHOOT_ATTACK_ID, () -> shootAnim, LASER_FACTORY_CLOSE, LASER_OFFSET, 2.0, 4.0, 60, 3, 6, 3));
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, SHOOT_ATTACK_ID, () -> shootAnim, LASER_FACTORY_EXPLOSIVE, LASER_OFFSET, 2.0, 4.0, 60, 3, 14, 3));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));

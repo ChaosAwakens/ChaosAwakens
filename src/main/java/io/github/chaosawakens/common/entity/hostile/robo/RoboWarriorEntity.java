@@ -179,7 +179,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		});
 		this.goalSelector.addGoal(1, new RoboWarriorShieldGoal(this, () -> shieldUpAnim, () -> shieldedAnim, () -> shieldDownAnim, () -> shieldDestroyedAnim));
 		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 10, (owner) -> !isShielded() && !isShieldDestroyed() && !isShieldGoingDown() && !isPlayingAnimation(shieldUpAnim) && !isPlayingAnimation(shieldedAnim) && !isPlayingAnimation(shieldDownAnim) && !isPlayingAnimation(shieldDestroyedAnim)).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim));
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10, 0) {
 
 			@Override
 			public boolean canUse() {
@@ -195,7 +195,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 				}
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10, 0) {
 
 			@Override
 			public boolean canUse() {
@@ -214,7 +214,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 				}
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7, 0) {
 			private boolean shotSecond = false;
 
 			@Override
