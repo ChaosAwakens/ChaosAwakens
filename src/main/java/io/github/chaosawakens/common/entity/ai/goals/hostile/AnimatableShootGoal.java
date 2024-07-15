@@ -1,6 +1,8 @@
 package io.github.chaosawakens.common.entity.ai.goals.hostile;
 
-import io.github.chaosawakens.ChaosAwakens;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
+
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.util.MathUtil;
@@ -11,9 +13,6 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 public class AnimatableShootGoal extends Goal {
 	private final AnimatableMonsterEntity owner;
@@ -92,10 +91,8 @@ public class AnimatableShootGoal extends Goal {
 		owner.getNavigation().stop();
 		LivingEntity target = this.owner.getTarget();
 		
-		ChaosAwakens.debug("DIFF", MathHelper.degreesDifferenceAbs(targetAngle, owner.yHeadRot));
-		ChaosAwakens.debug("AMBOS", targetAngle + " " + owner.yHeadRot);
-		if (MathHelper.degreesDifferenceAbs(targetAngle, owner.yHeadRot) < 1.0f) {
-			if (!this.hasStartedAnimations && delayCount >= rotationDelay) {
+		if (MathHelper.degreesDifferenceAbs(targetAngle, owner.yBodyRotO) < 2.0f) {
+			if (!this.hasStartedAnimations/* && delayCount >= rotationDelay*/) {
 				owner.setAttackID(attackId);
 				owner.playAnimation(shootAnim.get(), true);
 				this.hasStartedAnimations = true;
@@ -111,6 +108,7 @@ public class AnimatableShootGoal extends Goal {
 			}
 		} else {
 			if (target != null) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
+			delayCount = 0;
 		}
 	}
 }

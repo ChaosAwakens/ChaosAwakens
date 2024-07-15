@@ -1,5 +1,9 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
+import java.util.function.BiFunction;
+
+import javax.annotation.Nullable;
+
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -31,9 +35,6 @@ import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
-import java.util.function.BiFunction;
-
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<RoboSniperEntity>> roboSniperControllers = new ObjectArrayList<WrappedAnimationController<RoboSniperEntity>>(3);
@@ -61,9 +62,8 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
 
-		laser.xPower *= 10.0F;
-		laser.zPower *= 10.0F;
-
+		laser.changeSpeed(10);
+		
 		return laser;
 	};
 	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> LASER_FACTORY_EXPLOSIVE = (owner, offset) -> {
@@ -80,8 +80,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
 
-		laser.xPower *= 10.0F;
-		laser.zPower *= 10.0F;
+		laser.changeSpeed(10);
 
 		return laser;
 	};

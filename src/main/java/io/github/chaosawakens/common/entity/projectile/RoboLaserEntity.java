@@ -18,7 +18,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -48,6 +47,15 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 
 	public RoboLaserEntity(World pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
 		super(CAEntityTypes.ROBO_LASER.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+		float tempAngle = (float) (MathHelper.wrapDegrees(MathHelper.atan2(zPower, xPower) * 180.0 / Math.PI) - 90.0f);
+		if (tempAngle <= -90.0f) {
+			this.yRotO = -90.0f - tempAngle;
+		} else if(tempAngle > 90.0f) {
+			this.yRotO = 270.0f - tempAngle;
+		} else {
+			this.yRotO = -90.0f - tempAngle;
+		}
+		this.yRot = this.yRotO;
 	}
 
 	@Override
@@ -68,26 +76,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 		} else playAnimation(getIdleAnim(), false);
 
 		if (getMainWrappedController().isAnimationFinished(deathAnim)) remove();
-
-		Vector3d curMovement = getDeltaMovement();
-		double xMovement = curMovement.x;
-		double yMovement = curMovement.y;
-		double zMovement = curMovement.z;
-
-		double normalizedMovement = MathHelper.sqrt(getHorizontalDistanceSqr(curMovement));
-
-		if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-			this.yRot = (float) (Math.toDegrees(MathHelper.atan2(xMovement, zMovement)) - 90.0F);
-			this.xRot = (float) (Math.toDegrees(MathHelper.atan2(yMovement, normalizedMovement)) - 90.0F);
-			this.yRotO = this.yRot;
-			this.xRotO = this.xRot;
-		}
-
-		this.yRot = noPhysics ? (float) (Math.toDegrees(MathHelper.atan2(-xMovement, -zMovement)) - 90.0F) : (float) (Math.toDegrees(MathHelper.atan2(xMovement, zMovement)) - 90.0F);
-
-		this.xRot = (float) Math.toDegrees(MathHelper.atan2(yMovement, normalizedMovement));
-		this.xRot = lerpRotation(this.xRotO, this.xRot);
-		this.yRot = lerpRotation(this.yRotO, this.yRot);
+		this.yRot = this.yRotO;
 	}
 	
 	protected void onHit(RayTraceResult result) {
@@ -111,8 +100,14 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 		setExplosivePower(explosivePower);
 		setFireOnHit(canCauseFire);
 	}
+	
+	public void changeSpeed(double factor) {
+		this.xPower *= factor;
+		this.yPower *= factor;
+		this.zPower *= factor;
+	}
 
-    @Override
+	@Override
 	public boolean displayFireAnimation() {
 		return false;
 	}

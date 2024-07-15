@@ -91,9 +91,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
 
-		laser.xPower *= 4.0D;
-		laser.yPower *= 4.0D;
-		laser.zPower *= 4.0D;
+		laser.changeSpeed(4);
 
 		return laser;
 	};
@@ -106,7 +104,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
 
-		RoboRayEntity ray = new RoboRayEntity(owner, offsetX, offsetY, offsetZ, world);
+		RoboRayEntity ray = new RoboRayEntity(world, owner, offsetX, offsetY, offsetZ);
 		ray.setPower(10, 0, false);
 		ray.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(), owner.getZ() + viewVector.z * offset.z());
 		ray.setShot(true);
