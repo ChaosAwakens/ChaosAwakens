@@ -791,6 +791,13 @@ public class CAEntityLootTables extends EntityLootTables {
 						.add(ItemLootEntry.lootTableItem(Items.LEATHER)
 								.apply(SetCount.setCount(RandomValueRange.between(0.0F, 1.0F)))
 								.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F))))));
+		add(CAEntityTypes.TREE_FROG.get(),
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(Items.SLIME_BALL)
+										.apply(SetCount.setCount(RandomValueRange.between(0.0F, 3.0F)))
+										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 2.0F))))));
 		add(CAEntityTypes.ROBO_JEFFERY.get(),
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()

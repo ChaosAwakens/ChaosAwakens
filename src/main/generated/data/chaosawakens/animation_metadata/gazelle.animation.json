@@ -7,9 +7,9 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Walk",
+      "animation_name": "Graze",
       "animation_length": 1.8,
-      "loop_type": "LOOP"
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Run",
@@ -17,9 +17,9 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Graze",
+      "animation_name": "Walk",
       "animation_length": 1.8,
-      "loop_type": "PLAY_ONCE"
+      "loop_type": "LOOP"
     }
   ]
 }

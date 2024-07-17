@@ -27,7 +27,8 @@
   "client": [
     "ClientPlayerEntityMixin",
     "RabbitEntityRendererMixin",
-    "ServerWorldInfoMixin"
+    "ServerWorldInfoMixin",
+    "VillagerLevelPendantLayerMixin"
   ],
   "server": [
   ],

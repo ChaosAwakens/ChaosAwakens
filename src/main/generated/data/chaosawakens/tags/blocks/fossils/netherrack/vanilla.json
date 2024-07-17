@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "chaosawakens:fossilised_blaze",
+    "chaosawakens:fossilised_ghast",
+    "chaosawakens:fossilised_hoglin",
+    "chaosawakens:fossilised_enderman_netherrack",
+    "chaosawakens:fossilised_magma_cube_netherrack",
+    "chaosawakens:fossilised_piglin",
+    "chaosawakens:fossilised_strider",
+    "chaosawakens:fossilised_wither_skeleton",
+    "chaosawakens:fossilised_zombified_piglin"
+  ]
+}

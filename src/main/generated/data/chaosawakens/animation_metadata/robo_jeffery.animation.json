@@ -2,14 +2,44 @@
   "anim_file_loc": "chaosawakens:animations/entity/boss/robo/robo_jeffery.animation.json",
   "animations": [
     {
-      "animation_name": "Leap Attack: Land",
-      "animation_length": 2.45,
+      "animation_name": "Robo-Bomb Attack",
+      "animation_length": 2.0,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Smash Attack",
-      "animation_length": 3.0,
+      "animation_name": "Death",
+      "animation_length": 9.5,
       "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Idle",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Leap Attack: Leap",
+      "animation_length": 0.81,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Walk",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Idle Extras",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Healthy",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Leap Attack: Midair",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
     },
     {
       "animation_name": "Left Punch Attack",
@@ -22,49 +52,19 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Walk",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Idle",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Death",
-      "animation_length": 9.5,
+      "animation_name": "Smash Attack",
+      "animation_length": 3.0,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle Extras",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
+      "animation_name": "Leap Attack: Land",
+      "animation_length": 2.45,
+      "loop_type": "PLAY_ONCE"
     },
     {
       "animation_name": "Low Health",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Leap Attack: Midair",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Healthy",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Leap Attack: Leap",
-      "animation_length": 0.81,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Robo-Bomb Attack",
-      "animation_length": 2.0,
-      "loop_type": "PLAY_ONCE"
     }
   ]
 }

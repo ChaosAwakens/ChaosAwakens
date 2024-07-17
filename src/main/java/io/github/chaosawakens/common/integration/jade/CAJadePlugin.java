@@ -30,6 +30,8 @@ public class CAJadePlugin implements IWailaPlugin {
 
 	@Override
 	public void register(IRegistrar registrar) {
+		ChaosAwakens.debug("MANAGER [Integration - Jade]", "Registering Jade integration...");
+
 		IComponentProvider provider = new IComponentProvider() {
 			@Override
 			public ItemStack getStack(IDataAccessor accessor, IPluginConfig config) {
@@ -82,5 +84,7 @@ public class CAJadePlugin implements IWailaPlugin {
 		registrar.registerStackProvider(provider, CAEntityTrapOreBlock.class);
 		registrar.registerComponentProvider(provider, TooltipPosition.HEAD, CAEntityTrapOreBlock.class);
 		registrar.registerComponentProvider(provider, TooltipPosition.TAIL, CAEntityTrapOreBlock.class);
+
+		ChaosAwakens.debug("MANAGER [Integration - Jade]", "Successfully registered Jade integration!");
 	}
 }

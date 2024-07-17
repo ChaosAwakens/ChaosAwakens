@@ -21,12 +21,9 @@ public class StinkBugEntityModel extends ExtendedAnimatedTickingGeoModel<StinkBu
 	public ResourceLocation getTextureLocation(StinkBugEntity animatable) {
 		switch (animatable.getStinkBugType()) {
 		default: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/green_stink_bug.png");
-		case 1: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/blue_stink_bug.png");
-		case 2: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/brown_stink_bug.png");
-		case 3: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/cyan_stink_bug.png");
-		case 4: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/gray_blue_stink_bug.png");
-		case 5: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/gray_yellow_stink_bug.png");
-		case 6: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/throwback_stink_bug.png");
+		case 1: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/ash_stink_bug.png");
+		case 2: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/black_stink_bug.png");
+		case 3: return ChaosAwakens.prefix("textures/entity/creature/land/stink_bug/scarlet_stink_bug.png");
 		}
 	}
 	

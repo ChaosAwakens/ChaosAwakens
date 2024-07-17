@@ -113,11 +113,11 @@ public class TreeFrogEntity extends AnimatableAnimalEntity {
 	}
 	
 	private int getRandomTreeFrogType(IWorld world) {
-		return this.random.nextInt(4);
+		return this.random.nextInt(5);
 	}
 	
 	public int getTreeFrogType() {
-		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 5);
+		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 3);
 	}
 
 	public void setTreeFrogType(int type) {

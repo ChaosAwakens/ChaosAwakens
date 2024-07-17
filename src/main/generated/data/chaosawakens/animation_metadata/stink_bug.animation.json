@@ -3,12 +3,17 @@
   "animations": [
     {
       "animation_name": "Idle",
-      "animation_length": 1.8,
+      "animation_length": 1.79167,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Run",
+      "animation_length": 1.79167,
       "loop_type": "LOOP"
     },
     {
       "animation_name": "Walk",
-      "animation_length": 1.8,
+      "animation_length": 1.79167,
       "loop_type": "LOOP"
     }
   ]

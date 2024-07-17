@@ -47,6 +47,36 @@ public class CATags {
 		public static final ITag.INamedTag<Block> ROBO_IMMUNE = tag("robo_immune");
 		public static final ITag.INamedTag<Block> POUNDER_IMMUNE = tag("pounder_immune");
 		public static final ITag.INamedTag<Block> JEFFERY_IMMUNE = tag("jeffery_immune");
+
+		public static final ITag.INamedTag<Block> FOSSILS = tag("fossils");
+		public static final ITag.INamedTag<Block> FOSSILS_STONE = tag("fossils/stone");
+		public static final ITag.INamedTag<Block> FOSSILS_STONE_VANILLA = tag("fossils/stone/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_STONE_CHAOSAWAKENS = tag("fossils/stone/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_GRAVEL = tag("fossils/gravel");
+		public static final ITag.INamedTag<Block> FOSSILS_GRAVEL_VANILLA = tag("fossils/gravel/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_GRAVEL_CHAOSAWAKENS = tag("fossils/gravel/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_SAND = tag("fossils/sand");
+		public static final ITag.INamedTag<Block> FOSSILS_SAND_VANILLA = tag("fossils/sand/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_SAND_CHAOSAWAKENS = tag("fossils/sand/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_SANDSTONE = tag("fossils/sandstone");
+		public static final ITag.INamedTag<Block> FOSSILS_SANDSTONE_VANILLA = tag("fossils/sandstone/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_SANDSTONE_CHAOSAWAKENS = tag("fossils/sandstone/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_ICE = tag("fossils/ice");
+		public static final ITag.INamedTag<Block> FOSSILS_ICE_VANILLA = tag("fossils/ice/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_ICE_CHAOSAWAKENS = tag("fossils/ice/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_NETHERRACK = tag("fossils/netherrack");
+		public static final ITag.INamedTag<Block> FOSSILS_NETHERRACK_VANILLA = tag("fossils/netherrack/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_NETHERRACK_CHAOSAWAKENS = tag("fossils/netherrack/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_BLACKSTONE = tag("fossils/blackstone");
+		public static final ITag.INamedTag<Block> FOSSILS_BLACKSTONE_VANILLA = tag("fossils/blackstone/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_BLACKSTONE_CHAOSAWAKENS = tag("fossils/blackstone/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_SOUL_SOIL = tag("fossils/soul_soil");
+		public static final ITag.INamedTag<Block> FOSSILS_SOUL_SOIL_VANILLA = tag("fossils/soul_soil/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_SOUL_SOIL_CHAOSAWAKENS = tag("fossils/soul_soil/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_END_STONE = tag("fossils/end_stone");
+		public static final ITag.INamedTag<Block> FOSSILS_END_STONE_VANILLA = tag("fossils/end_stone/vanilla");
+		public static final ITag.INamedTag<Block> FOSSILS_END_STONE_CHAOSAWAKENS = tag("fossils/end_stone/chaosawakens");
+		public static final ITag.INamedTag<Block> FOSSILS_KYANITE = tag("fossils/kyanite");
 	}
 
 	public static class Items {

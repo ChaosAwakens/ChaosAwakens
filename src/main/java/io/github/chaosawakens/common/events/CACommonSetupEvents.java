@@ -121,9 +121,10 @@ public class CACommonSetupEvents {
 		public static void onFMLServerAboutToStartEvent(final FMLServerAboutToStartEvent event) {
 			MutableRegistry<JigsawPattern> reg = event.getServer().registryAccess().registry(Registry.TEMPLATE_POOL_REGISTRY).get();
 
-			StructureUtil.addBuildingToPool(reg, new ResourceLocation("village/desert/houses"), ChaosAwakens.prefix("villages/desert/desert_archaeologist_house"), 250);
-			StructureUtil.addBuildingToPool(reg, new ResourceLocation("village/savanna/houses"), ChaosAwakens.prefix("villages/desert/savanna_archaeologist_house"), 250);
-	//		StructureUtil.addBuildingToPool(reg, new ResourceLocation("village/desert/houses"), ChaosAwakens.prefix("villages/desert/small"), 1010);
+			StructureUtil.addProcessedBuildingToPool(reg, new ResourceLocation("village/plains/houses"), ChaosAwakens.prefix("villages/plains/plains_archaeologist_house"), 95, CAStructureProcessorLists.REPLACE_WITH_STONE_FOSSILS);
+			StructureUtil.addProcessedBuildingToPool(reg, new ResourceLocation("village/taiga/houses"), ChaosAwakens.prefix("villages/taiga/taiga_archaeologist_house"), 1010, CAStructureProcessorLists.REPLACE_WITH_STONE_FOSSILS);
+			StructureUtil.addProcessedBuildingToPool(reg, new ResourceLocation("village/savanna/houses"), ChaosAwakens.prefix("villages/savanna/savanna_archaeologist_house"), 75, CAStructureProcessorLists.REPLACE_WITH_GRAVEL_FOSSILS);
+			StructureUtil.addProcessedBuildingToPool(reg, new ResourceLocation("village/snowy/houses"), ChaosAwakens.prefix("villages/snowy/snowy_archaeologist_house"), 85, CAStructureProcessorLists.REPLACE_WITH_FROZEN_FOSSILS);
 		}
 		
 		@SuppressWarnings("unchecked")
@@ -407,6 +408,8 @@ public class CACommonSetupEvents {
 				CAStructures.setupStructures();
 				CAConfiguredStructures.registerConfiguredStructures();
 				CASurfaceBuilders.ConfiguredSurfaceBuilders.registerConfiguredSurfaceBuilders();
+				CAStructureProcessorTypes.registerStructureProcessorTypes();
+				CAStructureProcessorLists.registerStructureProcessorLists();
 				CAWoodTypes.registerWoodtypes();
 
 				ObjectUtil.loadClass("io.github.chaosawakens.common.registry.CAConfiguredFeatures");

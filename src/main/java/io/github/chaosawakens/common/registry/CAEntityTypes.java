@@ -267,7 +267,7 @@ public class CAEntityTypes {
 	// Stink Bug
 	public static final RegistryObject<EntityType<StinkBugEntity>> STINK_BUG = ENTITY_TYPES.register("stink_bug",
 			() -> EntityType.Builder.of(StinkBugEntity::new, EntityClassification.CREATURE)
-					.sized(0.5f, 0.37f)
+					.sized(1.21F, 0.47F)
 					.build(ChaosAwakens.prefix("stink_bug").toString()));
 
 	// Robos

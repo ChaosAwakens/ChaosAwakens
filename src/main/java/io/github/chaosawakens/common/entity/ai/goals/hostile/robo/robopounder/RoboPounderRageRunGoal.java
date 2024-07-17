@@ -23,6 +23,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
@@ -205,7 +206,7 @@ public class RoboPounderRageRunGoal extends Goal {
 
 				double blockHeight = Math.abs(detectedState.getCollisionShape(owner.level, detectedPos).max(Direction.Axis.Y) - owner.getY());
 				
-				if ((detectedState.is(CATags.Blocks.POUNDER_IMMUNE) || owner.isInWater() || owner.isInLava()) && blockHeight > maxUpStep) {
+				if (((detectedState.is(CATags.Blocks.POUNDER_IMMUNE) || owner.isInWater() || owner.isInLava()) && blockHeight > maxUpStep) || !owner.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
 					this.foundCrashCollision = true;
 					break;
 				}

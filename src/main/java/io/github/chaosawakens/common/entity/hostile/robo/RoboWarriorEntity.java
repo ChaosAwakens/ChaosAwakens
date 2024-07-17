@@ -183,15 +183,6 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			public boolean canUse() {
 				return super.canUse() && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
 			}
-
-			@Override
-			public void tick() {
-				super.tick();
-
-				if (MathUtil.isBetween(chargedLaserAttackAnim.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd) && !hasShotProjectile) {
-					CAScreenShakeEntity.shakeScreen(level, position(), 40.0F, 0.174F, 5, 20);
-				}
-			}
 		});
 		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10, 0) {
 
@@ -201,15 +192,6 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 						&& distanceTo(getTarget()) >= minimumDistance && canSee(getTarget()) && !getTarget().isInvulnerable()
 						&& isAlive() && !isAttacking() && getTarget().isAlive() && !getTarget().isDeadOrDying()
 						&& !isOnAttackCooldown() && EntityUtil.getAllEntitiesAround(RoboWarriorEntity.this, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
-			}
-
-			@Override
-			public void tick() {
-				super.tick();
-
-				if (MathUtil.isBetween(chargedLaserAttackAnim.getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
-					CAScreenShakeEntity.shakeScreen(level, position(), 50.0F, 0.274F, 7, 20);
-				}
 			}
 		});
 		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7, 0) {
@@ -448,6 +430,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			setDeltaMovement(0, getDeltaMovement().y, 0);
 			EntityUtil.repelEntities(this, getBbWidth() * 1.6D, getBbHeight(), 1);
 		}
+
+		if (MathUtil.isBetween(chargedLaserAttackAnim.getWrappedAnimProgress(), 75.5D, 76.6D)) {
+			CAScreenShakeEntity.shakeScreen(level, position(), 150.0F, 0.278F, 7, 20);
+		}
+
+
 	}
 	
 	@SuppressWarnings("unchecked")

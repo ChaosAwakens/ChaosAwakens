@@ -72,6 +72,9 @@ public class CrystalGrassBlock extends SpreadableCrystalDirtBlock implements IGr
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
 		BlockState targetPos = plantable.getPlant(world, pos.relative(facing));
 
-		return targetPos.getBlock() == Blocks.SUGAR_CANE && this == Blocks.SUGAR_CANE || plantable instanceof CrystalBushBlock && ((CrystalBushBlock) plantable).mayPlaceOn(state, world, pos) || plantable instanceof CrystalFlowerBlock && ((CrystalFlowerBlock) plantable).mayPlaceOn(state, world, pos);
+		return (targetPos.getBlock() == Blocks.SUGAR_CANE && this == Blocks.SUGAR_CANE)
+				|| (plantable instanceof CrystalBushBlock && ((CrystalBushBlock) plantable).mayPlaceOn(state, world, pos))
+				|| (plantable instanceof CrystalFlowerBlock && ((CrystalFlowerBlock) plantable).mayPlaceOn(state, world, pos))
+				|| (plantable instanceof DoubleCrystalPlantBlock && ((DoubleCrystalPlantBlock) plantable).mayPlaceOn(state, world, pos));
 	}
 }

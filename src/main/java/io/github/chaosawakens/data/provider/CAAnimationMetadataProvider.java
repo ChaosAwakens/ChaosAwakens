@@ -94,8 +94,9 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/stink_bug.animation.json"), Lists.newArrayList(
-                new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
+                new AnimationDataHolder("Idle", 1.79167D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Walk", 1.79167D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Run", 1.79167D, ILoopType.EDefaultLoopTypes.LOOP)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/tree_frog.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.76D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Jump", 10008.04D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),

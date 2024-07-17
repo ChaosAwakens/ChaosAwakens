@@ -2,10 +2,12 @@ package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.wrapper.FeatureWrapper;
 import io.github.chaosawakens.common.events.CACommonSetupEvents;
 import io.github.chaosawakens.common.worldgen.feature.CrystalBranchConfig;
 import io.github.chaosawakens.common.worldgen.feature.GeodeFeatureConfig;
+import io.github.chaosawakens.common.worldgen.feature.NBTFeatureConfig;
 import io.github.chaosawakens.common.worldgen.feature.StalagmiteFeatureConfig;
 import io.github.chaosawakens.common.worldgen.foliageplacer.ConiferousFoliagePlacer;
 import io.github.chaosawakens.common.worldgen.foliageplacer.CubicSkipFoliagePlacer;
@@ -187,6 +189,15 @@ public class CAConfiguredFeatures {
 			CAFeatures.STALAGMITE.get().configured(new StalagmiteFeatureConfig(CABlocks.LIMESTONE.get()
 					.defaultBlockState(), 12, 1.35F, 0.5f, Optional.of(CATags.Blocks.STALAGMITE_ORE_RARE), 0.05f))
 			.decorated(Features.Placements.HEIGHTMAP_SQUARE).chance(192));
+
+	public static final ConfiguredFeature<?, ?> GIANT_SKULL_FOSSIL = registerFeature("giant_skull_fossil", CAFeatures.NBT_STRUCTURE
+			.get().configured(new NBTFeatureConfig(ChaosAwakens.prefix("feature/giant_skull_fossil"), Heightmap.Type.WORLD_SURFACE_WG, true, false))
+			.decorated(Features.Placements.HEIGHTMAP_SQUARE)
+			.chance(200));
+	public static final ConfiguredFeature<?, ?> GIANT_SPINE_FOSSIL = registerFeature("giant_spine_fossil", CAFeatures.NBT_STRUCTURE
+			.get().configured(new NBTFeatureConfig(ChaosAwakens.prefix("feature/giant_spine_fossil"), Heightmap.Type.WORLD_SURFACE_WG, true, false))
+			.decorated(Features.Placements.HEIGHTMAP_SQUARE)
+			.chance(192));
 	
 	public static final ConfiguredFeature<?, ?> MINING_ORE_RUBY_LAVA = registerFeature("mining_ore_ruby", Feature.NO_SURFACE_ORE.configured(new OreFeatureConfig(RuleTests.BASE_LAVA, States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_AMETHYST = registerFeature("mining_ore_amethyst", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.AMETHYST_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(40, 16))).squared().count(4));
@@ -261,9 +272,9 @@ public class CAConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> MINING_LIMESTONE_CAVE_PATCH = registerFeature("mining_limestone_cave_patch", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.LIMESTONE, 36)).squared().range(116).count(3));
 	public static final ConfiguredFeature<?, ?> MINING_RHINESTONE_CAVE_PATCH = registerFeature("mining_rhinestone_cave_patch", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.RHINESTONE, 38)).squared().range(114).count(4));
 	
-	public static final ConfiguredFeature<?, ?> BLOB_TERRA_PRETA = registerFeature("blob_terra_preta", Feature.ORE.configured( new OreFeatureConfig(RuleTests.BASE_DIRT, States.TERRA_PRETA, 24)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared().chance(3));
-	public static final ConfiguredFeature<?, ?> BLOB_LATOSOL = registerFeature("blob_latosol", Feature.ORE.configured( new OreFeatureConfig(RuleTests.BASE_DIRT, States.LATOSOL, 24)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared());
-	public static final ConfiguredFeature<?, ?> BLOB_TAR = registerFeature("blob_tar", Feature.ORE.configured( new OreFeatureConfig(RuleTests.BASE_DIRT, States.TAR, 20)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared());
+	public static final ConfiguredFeature<?, ?> BLOB_TERRA_PRETA = registerFeature("blob_terra_preta", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_DIRT, States.TERRA_PRETA, 24)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared().chance(3));
+	public static final ConfiguredFeature<?, ?> BLOB_LATOSOL = registerFeature("blob_latosol", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_DIRT, States.LATOSOL, 24)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared());
+	public static final ConfiguredFeature<?, ?> BLOB_TAR = registerFeature("blob_tar", Feature.ORE.configured(new OreFeatureConfig(RuleTests.BASE_DIRT, States.TAR, 20)).decorated( Placement.RANGE.configured( new TopSolidRangeConfig(75, 0, 30))).squared());
 	
 	public static final ConfiguredFeature<?, ?> MOUNTAINS_STALAGMITE = registerFeature("mountains_stalagmite", CAFeatures.
 			STALAGMITE.get().configured(new StalagmiteFeatureConfig(Blocks.STONE.defaultBlockState(), 4, 0.35F, 1, 

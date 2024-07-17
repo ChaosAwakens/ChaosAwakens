@@ -1,6 +1,9 @@
 package io.github.chaosawakens.api.animation;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.codec.assets.AnimationDataCodec;
+import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.network.packets.s2c.AnimationFunctionalProgressPacket;
 import io.github.chaosawakens.manager.CANetworkManager;
 import net.minecraft.entity.Entity;
@@ -55,7 +58,15 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	
 	public void tick() {
 		double tickProgressDelta = getSyncedProgress();
-		
+
+		if (animatable instanceof RoboPounderEntity || animatable instanceof RoboJefferyEntity) {
+			if (server != null && !((Entity) animatable).level.isClientSide) {
+				ChaosAwakens.debug("Cur MSPT", server.getAverageTickTime());
+				ChaosAwakens.debug("Cur Progress", animationProgress);
+				ChaosAwakens.debug("Cur Delta", tickProgressDelta);
+			}
+		}
+
 		switch (animationState) {
 		case TRANSITIONING:
 			if (this.transitionProgress >= this.transitionLength) {
@@ -131,8 +142,10 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public double getSyncedProgress() {
-		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0) * animSpeedMultiplier), (Entity) animatable);
-		return server == null ? 0 : (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0) * animSpeedMultiplier;
+		double adjustedDelta = 50.0D; // server == null ? 50.0D : Math.min(1, Math.abs(50.0D - (server.getAverageTickTime() <= 8.0D ? 0 : server.getAverageTickTime())));
+
+		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / adjustedDelta) * animSpeedMultiplier), (Entity) animatable);
+		return server == null ? 0 : (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / adjustedDelta) * animSpeedMultiplier;
 	}
 	
 	public void updateAnimProgress(double animationProgressDelta) {

@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.integration.jer;
 
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
@@ -345,13 +346,19 @@ public class CAJER {
 	};
 
 	public static void register() {
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Registering JER integration...");
+
 		registerEntityRenderers();
 		registerDungeonLoot();
 		registerPlants();
 		registerOres();
+
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Successfully registered JER integration!");
 	}
 
 	private static void registerDungeonLoot() {
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Registering JER Dungeon/Structure Loot...");
+
 		IDungeonRegistry dungeonRegistry = JERAPI.getInstance().getDungeonRegistry();
 		// ENT DUNGEONS
 		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_ACACIA_LOOT.stringName, CATreasure.ENT_TREE_ACACIA_LOOT.langName);
@@ -394,6 +401,18 @@ public class CAJER {
 		dungeonRegistry.registerCategory(CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.langName);
 		dungeonRegistry.registerChest(CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.DESERT_ARCHAEOLOGIST_HOUSE_LOOT.lootTable);
 
+		dungeonRegistry.registerCategory(CATreasure.PLAINS_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.PLAINS_ARCHAEOLOGIST_HOUSE_LOOT.langName);
+		dungeonRegistry.registerChest(CATreasure.PLAINS_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.PLAINS_ARCHAEOLOGIST_HOUSE_LOOT.lootTable);
+
+		dungeonRegistry.registerCategory(CATreasure.TAIGA_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.TAIGA_ARCHAEOLOGIST_HOUSE_LOOT.langName);
+		dungeonRegistry.registerChest(CATreasure.TAIGA_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.TAIGA_ARCHAEOLOGIST_HOUSE_LOOT.lootTable);
+
+		dungeonRegistry.registerCategory(CATreasure.SAVANNA_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.SAVANNA_ARCHAEOLOGIST_HOUSE_LOOT.langName);
+		dungeonRegistry.registerChest(CATreasure.SAVANNA_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.SAVANNA_ARCHAEOLOGIST_HOUSE_LOOT.lootTable);
+
+		dungeonRegistry.registerCategory(CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.langName);
+		dungeonRegistry.registerChest(CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.lootTable);
+
 		// WASP DUNGEON
 		// Uncomment: When Wasp and Wasp Dungeons are added again.
 		// 	dungeonRegistry.registerCategory(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.langName);
@@ -401,9 +420,13 @@ public class CAJER {
 		//
 		//		dungeonRegistry.registerCategory(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.langName);
 		//		dungeonRegistry.registerChest(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.lootTable);
+
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Successfully registered JER Dungeon/Structure Loot!");
 	}
 
 	private static void registerPlants() {
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Registering JER Plant Loot Drops...");
+
 		IPlantRegistry plantRegistry = JERAPI.getInstance().getPlantRegistry();
 
 		PlantDrop radish = new PlantDrop(new ItemStack(CAItems.RADISH.get()), 1, 1);
@@ -421,9 +444,13 @@ public class CAJER {
 		PlantDrop quinoa = new PlantDrop(new ItemStack(CAItems.QUINOA.get()), 1, 3);
 		PlantDrop quinoaSeeds = new PlantDrop(new ItemStack(CAItems.QUINOA_SEEDS.get()), 1, 3);
 		plantRegistry.register(CABlocks.QUINOA.get(), quinoa, quinoaSeeds);
+
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Successfully registered JER Plant Loot Drops!");
 	}
 
 	private static void registerOres() {
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Registering JER Ore WorldGen Info...");
+
 		IWorldGenRegistry worldGenRegistry = JERAPI.getInstance().getWorldGenRegistry();
 
 		if (CAConfigManager.MAIN_COMMON.enableOreGen.get()) {
@@ -1287,9 +1314,13 @@ public class CAJER {
 						new Restriction(new DimensionRestriction(CADimensions.CRYSTAL_WORLD)));
 			}
 		}
+
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Successfully registered JER Ore WorldGen Info!");
 	}
 	
 	private static void registerEntityRenderers() {
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Registering JER Mob Render Hooks...");
+
 		// Robos
 		registerMobRenderHook(RoboJefferyEntity.class, ROBO_JEFFERY);
 		registerMobRenderHook(RoboPounderEntity.class, ROBO_POUNDER);
@@ -1337,6 +1368,8 @@ public class CAJER {
 		// Bugs
 		registerMobRenderHook(RubyBugEntity.class, RUBY_BUG);
 		registerMobRenderHook(StinkBugEntity.class, STINK_BUG);
+
+		ChaosAwakens.debug("MANAGER [Integration - JER]", "Successfully registered JER Mob Render Hooks!");
 	}
 
 	/**

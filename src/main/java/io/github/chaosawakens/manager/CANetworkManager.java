@@ -24,18 +24,29 @@ public class CANetworkManager {
 	public static void registerPackets() {
 		int networkId = 0;
 
+		ChaosAwakens.debug("MANAGER [Networking]", "Registering Packets...");
+
 		registerCTSPackets(networkId);
 		registerSTCPackets(networkId);
+
+		ChaosAwakens.debug("MANAGER [Networking]", "Successfully registered Packets!");
 	}
 
 	private static void registerCTSPackets(int id) {
+		ChaosAwakens.debug("MANAGER [Networking]", "Registering C2S Packets...");
+
+		ChaosAwakens.debug("MANAGER [Networking]", "Successfully registered C2S Packets!");
 	}
 
 	private static void registerSTCPackets(int id) {
+		ChaosAwakens.debug("MANAGER [Networking]", "Registering S2C Packets...");
+
 		CHANNEL.registerMessage(id++, AnimationTriggerPacket.class, AnimationTriggerPacket::encode, AnimationTriggerPacket::decode, AnimationTriggerPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(id++, AnimationStopPacket.class, AnimationStopPacket::encode, AnimationStopPacket::decode, AnimationStopPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(id++, AnimationFunctionalProgressPacket.class, AnimationFunctionalProgressPacket::encode, AnimationFunctionalProgressPacket::decode, AnimationFunctionalProgressPacket::onRecieve, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(id++, EnforceAssetsPacket.class, EnforceAssetsPacket::encode, EnforceAssetsPacket::decode, EnforceAssetsPacket::onRecieve);
+
+		ChaosAwakens.debug("MANAGER [Networking]", "Successfully registered S2C Packets!");
 	}
 
 	/**

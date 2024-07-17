@@ -74,8 +74,8 @@ public class DenseGrassBlock extends SpreadableDenseDirtBlock implements IGrowab
 		PlantType type = plantable.getPlantType(world, pos.relative(facing));
 
 		if (plant.getBlock() == Blocks.SUGAR_CANE && this == Blocks.SUGAR_CANE) return true;
-		if (plantable instanceof DenseBushBlock && ((DenseBushBlock) plantable).mayPlaceOn(state, world, pos)) return true;
-		if (PlantType.PLAINS.equals(type)) return this.getBlock() == Blocks.GRASS_BLOCK || Tags.Blocks.DIRT.contains(this);
+		if ((plantable instanceof DenseBushBlock && ((DenseBushBlock) plantable).mayPlaceOn(state, world, pos)) || (plantable instanceof DenseFlowerBlock && ((DenseFlowerBlock) plantable).mayPlaceOn(state, world, pos)) || (plantable instanceof DoubleDensePlantBlock && ((DoubleDensePlantBlock) plantable).mayPlaceOn(state, world, pos))) return true;
+		if (PlantType.PLAINS.equals(type)) return getBlock() == Blocks.GRASS_BLOCK || Tags.Blocks.DIRT.contains(this);
 
 		return false;
 	}

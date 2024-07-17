@@ -664,9 +664,9 @@ public class CABlocks {
 	public static final RegistryObject<CAOreBlock> FOSSILISED_HUSK_SANDSTONE = registerBlock("fossilised_husk_sandstone", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
 	
 	// Overworld Frozen (Vanilla)
-	public static final RegistryObject<CAOreBlock> FROZEN_POLAR_BEAR = registerBlock("frozen_polar_bear", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
-	public static final RegistryObject<CAOreBlock> FROZEN_SNOW_GOLEM = registerBlock("frozen_snow_golem", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
-	public static final RegistryObject<CAOreBlock> FROZEN_STRAY = registerBlock("frozen_stray", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
+	public static final RegistryObject<CAOreBlock> FROZEN_POLAR_BEAR = registerBlock("frozen_polar_bear", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).sound(SoundType.GLASS).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
+	public static final RegistryObject<CAOreBlock> FROZEN_SNOW_GOLEM = registerBlock("frozen_snow_golem", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).sound(SoundType.GLASS).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
+	public static final RegistryObject<CAOreBlock> FROZEN_STRAY = registerBlock("frozen_stray", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).sound(SoundType.GLASS).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);
 	
 	// Nether (CA)
 	public static final RegistryObject<CAOreBlock> FOSSILISED_CRIMSON_ENT = registerBlock("fossilised_crimson_ent", () -> new CAOreBlock(Properties.copy(Blocks.IRON_ORE).harvestLevel(1).requiresCorrectToolForDrops()), CAItemGroups.FOSSILS);

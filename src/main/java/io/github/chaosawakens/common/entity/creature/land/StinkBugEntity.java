@@ -10,7 +10,10 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -35,11 +38,13 @@ import javax.annotation.Nullable;
 public class StinkBugEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
 	private final ObjectArrayList<WrappedAnimationController<StinkBugEntity>> stinkBugControllers = new ObjectArrayList<WrappedAnimationController<StinkBugEntity>>(1);
-	private final ObjectArrayList<IAnimationBuilder> stinkBugAnimations = new ObjectArrayList<IAnimationBuilder>(1);
+	private final ObjectArrayList<IAnimationBuilder> stinkBugAnimations = new ObjectArrayList<IAnimationBuilder>(3);
 	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.defineId(StinkBugEntity.class, DataSerializers.INT);
+	private static final DataParameter<Boolean> PANICKING = EntityDataManager.defineId(StinkBugEntity.class, DataSerializers.BOOLEAN);
 	private final WrappedAnimationController<StinkBugEntity> mainController = createMainMappedController("stinkbugmaincontroller");
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder runAnim = new SingletonAnimationBuilder(this, "Run", EDefaultLoopTypes.LOOP);
 	public static final String STINK_BUG_MDF_NAME = "stink_bug";
 
 	public StinkBugEntity(EntityType<? extends AnimalEntity> type, World world) {
@@ -65,7 +70,7 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 
 	@Override
 	public int animationInterval() {
-		return 4;
+		return isPanicking() ? 1 : 4;
 	}
 
 	@Override
@@ -75,25 +80,62 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 	
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.1D));
+		this.goalSelector.addGoal(0, new PanicGoal(this, 3.0D) {
+			@Override
+			public void start() {
+				super.start();
+				setPanicking(true);
+			}
+
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+		});
+		this.goalSelector.addGoal(0, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 16.0F, 2.2D, 3.0D) {
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+
+			@Override
+			public void tick() {
+				super.tick();
+
+				setPanicking(distanceToSqr(toAvoid) < 109.0D);
+				getNavigation().setSpeedModifier(distanceToSqr(toAvoid) < 109.0D ? 3.0D : 2.2D);
+			}
+		});
+		this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 1.1D));
 	}
 	
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(TYPE_ID, 0);
+		this.entityData.define(PANICKING, false);
 	}
 
 	private int getRandomStinkBugType(IWorld world) {
-		return this.random.nextInt(7);
+		return this.random.nextInt(4);
 	}
 	
 	public int getStinkBugType() {
-		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 7);
+		return MathHelper.clamp(this.entityData.get(TYPE_ID), 0, 3);
 	}
 
 	public void setStinkBugType(int type) {
 		this.entityData.set(TYPE_ID, type);
+	}
+
+	public boolean isPanicking() {
+		return this.entityData.get(PANICKING);
+	}
+
+	public void setPanicking(boolean panicking) {
+		this.entityData.set(PANICKING, panicking);
 	}
 	
 	@Override
@@ -182,7 +224,14 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 	public ObjectArrayList<IAnimationBuilder> getCachedAnimations() {
 		return stinkBugAnimations;
 	}
-	
+
+	@Override
+	protected void handleBaseAnimations() {
+		if (getIdleAnim() != null && !isMoving()) playAnimation(getIdleAnim(), false);
+		if (getWalkAnim() != null && isMoving() && !isPanicking()) playAnimation(getWalkAnim(), false);
+		if (isMoving() && isPanicking()) playAnimation(runAnim, false);
+	}
+
 	private class StinkBugData extends AgeableData {
 		public final int stinkBugType;
 

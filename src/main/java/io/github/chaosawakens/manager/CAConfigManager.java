@@ -37,11 +37,15 @@ public class CAConfigManager {
 	}
 	
 	protected static void registerConfigs() {
+		ChaosAwakens.debug("MANAGER [Config]", "Registering Configs...");
+
 		registerConfigFolder();
 		
 		registerClientConfig();
 		registerCommonConfig();
 		registerServerConfig();
+
+		ChaosAwakens.debug("MANAGER [Config]", "Successfully registered Configs!");
 	}
 	
 	private static void registerClientConfig() {

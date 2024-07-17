@@ -146,7 +146,7 @@ public class AppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	public void addAdditionalSaveData(CompoundNBT nbt) {
 		super.addAdditionalSaveData(nbt);
-		nbt.putInt("AppleCowType", this.getAppleCowType());
+		nbt.putInt("AppleCowType", getAppleCowType());
 	}
 
 	@Override

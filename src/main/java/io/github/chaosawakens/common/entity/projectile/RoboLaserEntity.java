@@ -47,7 +47,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 
 	public RoboLaserEntity(World pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
 		super(CAEntityTypes.ROBO_LASER.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
-		float tempAngle = (float) (MathHelper.wrapDegrees(MathHelper.atan2(zPower, xPower) * 180.0 / Math.PI) - 90.0f);
+		float tempAngle = (float) (MathHelper.wrapDegrees(MathHelper.atan2(zPower, xPower) * 180.0 / Math.PI) - 90.0F);
 		if (tempAngle <= -90.0f) {
 			this.yRotO = -90.0f - tempAngle;
 		} else if(tempAngle > 90.0f) {

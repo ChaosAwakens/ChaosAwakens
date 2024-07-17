@@ -38,6 +38,8 @@ public class TheOneProbePlugin {
 
 		@Override
 		public Void apply(ITheOneProbe iTheOneProbe) {
+			ChaosAwakens.debug("MANAGER [Integration - The One Probe]", "Registering The One Probe integration...");
+
 			ANIM_METADATA_ID = iTheOneProbe.registerElementFactory(AnimMetadataElement::new);
 
 			iTheOneProbe.registerBlockDisplayOverride((probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData) -> {
@@ -210,22 +212,13 @@ public class TheOneProbePlugin {
 								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Green (" + type + ")"));
 								return;
 							case 1:
-								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Blue (" + type + ")"));
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Ash (" + type + ")"));
 								return;
 							case 2:
-								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Brown (" + type + ")"));
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Black (" + type + ")"));
 								return;
 							case 3:
-								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Cyan (" + type + ")"));
-								return;
-							case 4:
-								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Gray & Blue (" + type + ")"));
-								return;
-							case 5:
-								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Gray & Yellow (" + type + ")"));
-								return;
-							case 6:
-								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Throwback (" + type + ")"));
+								iProbeInfo.text(CompoundText.createLabelInfo("Stink Bug Species: ", "Scarlet (" + type + ")"));
 						}
 					}
 				}
@@ -243,6 +236,7 @@ public class TheOneProbePlugin {
                 }
                 return false;
             });
+			ChaosAwakens.debug("MANAGER [Integration - The One Probe]", "Successfully registered The One Probe integration!");
 			return null;
 		}
 	}

@@ -37,7 +37,7 @@ public class CASurfaceBuilders {
 		public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> STALAGMITE_VALLEY = CASurfaceBuilders.STALAGMITE_VALLEY.get().configured(SurfaceBuilderConfigs.STALAGMITE_VALLEY);
 
 		private static <SC extends ISurfaceBuilderConfig> void register(String key, ConfiguredSurfaceBuilder<SC> builder) {
-			WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_SURFACE_BUILDER, new ResourceLocation(ChaosAwakens.MODID, key), builder);
+			WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_SURFACE_BUILDER, ChaosAwakens.prefix(key), builder);
 		}
 
 		public static void registerConfiguredSurfaceBuilders() {

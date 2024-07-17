@@ -317,11 +317,16 @@ public class BiomeHandlers {
 				// Mesozoic Jungle
 				if (BiomeDictionary.hasType(biome, CABiomes.Type.MESOZOIC_JUNGLE)) {
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.TREES_MESOZOIC);
+
 					gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BLOB_TERRA_PRETA);
 					gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BLOB_LATOSOL);
 					gen.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CAConfiguredFeatures.BLOB_TAR);
+
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_MESO_PLANTS);
 					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_MESO_TALL_BUSH);
+
+					gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.GIANT_SKULL_FOSSIL);
+					gen.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, CAConfiguredFeatures.GIANT_SPINE_FOSSIL);
 				}
 				
 				gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.PATCH_DENSE_GRASS);

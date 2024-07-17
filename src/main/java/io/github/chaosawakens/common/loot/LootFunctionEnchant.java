@@ -59,7 +59,7 @@ public class LootFunctionEnchant extends LootFunction {
 		}
 
 		public ILootFunction build() {
-			return new LootFunctionEnchant(this.getConditions(), this.enchants);
+			return new LootFunctionEnchant(getConditions(), this.enchants);
 		}
 	}
 
