@@ -2,11 +2,6 @@
   "anim_file_loc": "chaosawakens:animations/entity/projectiles/robo_ray.animation.json",
   "animations": [
     {
-      "animation_name": "Death",
-      "animation_length": 0.7917,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
       "animation_name": "Active",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
@@ -15,6 +10,11 @@
       "animation_name": "Inept",
       "animation_length": 1.7976931348623157E308,
       "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Death",
+      "animation_length": 0.7917,
+      "loop_type": "PLAY_ONCE"
     }
   ]
 }

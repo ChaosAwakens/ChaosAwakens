@@ -2,6 +2,11 @@
   "anim_file_loc": "chaosawakens:animations/entity/creature/land/lettuce_chicken.animation.json",
   "animations": [
     {
+      "animation_name": "Flap",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Idle",
       "animation_length": 1.8,
       "loop_type": "LOOP"
@@ -12,17 +17,12 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Run",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Flap",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Sit",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Run",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     }

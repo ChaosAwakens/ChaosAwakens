@@ -1389,11 +1389,13 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.COOKED_BACON.get().asItem(), has(CAItems.COOKED_BACON.get()))
 				.save(recipeConsumer);
 		ShapelessRecipeBuilder.shapeless(CAItems.BUTTER.get(), 4)
-				.requires(Items.MILK_BUCKET, 2)
+				.requires(Items.MILK_BUCKET, 1)
+				.requires(CAItems.SALT.get(), 1)
 				.unlockedBy("has_" + Items.MILK_BUCKET.asItem(), has(Items.MILK_BUCKET))
+				.unlockedBy("has_" + CAItems.SALT.get().asItem(), has(CAItems.SALT.get()))
 				.save(recipeConsumer);
 		ShapelessRecipeBuilder.shapeless(CAItems.CHEESE.get(), 2)
-				.requires(Items.MILK_BUCKET, 4)
+				.requires(Items.MILK_BUCKET, 1)
 				.unlockedBy("has_" + Items.MILK_BUCKET.asItem(), has(Items.MILK_BUCKET))
 				.save(recipeConsumer);
 		ShapelessRecipeBuilder.shapeless(CAItems.CORNDOG.get())
