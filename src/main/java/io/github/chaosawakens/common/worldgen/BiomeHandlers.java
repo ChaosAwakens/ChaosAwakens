@@ -48,6 +48,8 @@ public class BiomeHandlers {
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 2, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LETTUCE_CHICKEN.get(), 16, 4, 6));
+
+			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.WASP.get(), 25, 1, 3));
 		};
 
 		private static final Consumer<MobSpawnInfoBuilder> PLAINS_MOBS = (builder) -> {
@@ -70,9 +72,9 @@ public class BiomeHandlers {
 
 		// VILLAGE MANIA
 		private static final Consumer<MobSpawnInfoBuilder> VILLAGE_MANIA_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_POUNDER.get(), 20, 1, 2));
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_WARRIOR.get(), 55, 1, 4));
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_SNIPER.get(), 60, 1, 3));
+			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_POUNDER.get(), 10, 1, 1));
+			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_WARRIOR.get(), 25, 1, 2));
+			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_SNIPER.get(), 40, 1, 4));
 		};
 
 		// MINER'S PARADISE

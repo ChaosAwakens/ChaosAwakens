@@ -308,7 +308,7 @@ public class CACommonSetupEvents {
 					new CABasicTrade(1, CAItems.COPPER_LUMP.get(), 6, 6, 3),
 					new CAIngredientTrade(Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_COMMON), 3), 5, 3, 3));
 			TradeUtil.addVillagerTrades(event, CAVillagers.ARCHAEOLOGIST.get(), TradeUtil.APPRENTICE,
-					new CABasicTrade(1, Items.LAVA_BUCKET, 1, 6, 5),
+					new CABasicTrade(12, Items.LAVA_BUCKET, 1, 6, 5),
 					new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_COMMON), 3), 4, 5),
 					new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS), 1), 9, 8),
 					new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_COMMON), 1), 3, 8));
@@ -320,7 +320,7 @@ public class CACommonSetupEvents {
 					new CAIngredientTrade(Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS), 6), 11, 3, 20));
 			TradeUtil.addVillagerTrades(event, CAVillagers.ARCHAEOLOGIST.get(), TradeUtil.EXPERT,
 					new CABasicTrade(1, CAItems.ALUMINUM_POWER_CHIP.get(), 6, 5, 20),
-					new CABasicTrade(Items.LAVA_BUCKET, 1, 2, 2, 20),
+					new CABasicTrade(Items.LAVA_BUCKET, 1, 3, 2, 20),
 					new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS), 2), 3, 20),
 					new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 20),
 					new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 30));
@@ -336,7 +336,7 @@ public class CACommonSetupEvents {
 					new CABasicTrade(1, CAItems.COPPER_LUMP.get(), 6, 6, 3),
 					new CAIngredientTrade(Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_COMMON), 3), 5, 3, 3));
 			TradeUtil.addVillagerTrades(event, CAVillagers.ARCHAEOLOGIST_COPPER.get(), TradeUtil.APPRENTICE,
-					new CABasicTrade(1, Items.LAVA_BUCKET, 1, 6, 5),
+					new CABasicTrade(12, Items.LAVA_BUCKET, 1, 6, 5),
 					new CAIngredientTrade(1, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_COMMON), 3), 4, 5),
 					new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS), 1), 9, 8),
 					new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS_COMMON), 1), 3, 8));
@@ -348,7 +348,7 @@ public class CACommonSetupEvents {
 					new CAIngredientTrade(Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS), 6), 11, 3, 20));
 			TradeUtil.addVillagerTrades(event, CAVillagers.ARCHAEOLOGIST_COPPER.get(), TradeUtil.EXPERT,
 					new CABasicTrade(1, CAItems.ALUMINUM_POWER_CHIP.get(), 6, 5, 20),
-					new CABasicTrade(Items.LAVA_BUCKET, 1, 2, 2, 20),
+					new CABasicTrade(Items.LAVA_BUCKET, 1, 3, 2, 20),
 					new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_SPAWN_EGGS), 2), 3, 20),
 					new CAIngredientTrade(2, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 20),
 					new CAIngredientTrade(3, Pair.of(Ingredient.of(CATags.Items.ARCHAEOLOGIST_FOSSILS_RARE), 1), 6, 30));

@@ -41,7 +41,7 @@ public class WhaleEntityRenderer extends ExtendedGeoEntityRenderer<WhaleEntity> 
 	
 	@Override
 	public void render(GeoModel model, WhaleEntity animatable, float partialTicks, RenderType type, MatrixStack matrixStackIn, @Nullable IRenderTypeBuffer renderTypeBuffer, @Nullable IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		float yRotDiff = animatable.prevBodyRot - animatable.yRot == 0 ? 0 : MathHelper.clamp(MathHelper.wrapDegrees(animatable.prevBodyRot - animatable.yRot), animatable.yRot - 40, animatable.yRot + 40);
+	/*	float yRotDiff = animatable.prevBodyRot - animatable.yRot == 0 ? 0 : MathHelper.clamp(MathHelper.wrapDegrees(animatable.prevBodyRot - animatable.yRot), animatable.yRot - 40, animatable.yRot + 40);
 		float targetRotationZ = (float) Math.toRadians(yRotDiff / 3.0F);
         float rotMod = -0.25F;
 		float targetRotationY = (float) MathHelper.clamp(MathHelper.wrapDegrees(Math.toRadians(yRotDiff / rotMod)), animatable.yRot - 40, animatable.yRot + 40);
@@ -60,17 +60,17 @@ public class WhaleEntityRenderer extends ExtendedGeoEntityRenderer<WhaleEntity> 
 		Optional<GeoBone> tail = model.getBone("Tail");
 
 		midsection.ifPresent(geoBone -> {
-			geoBone.setRotationY(MathHelper.wrapDegrees(smoothRotation(geoBone.getRotationY(), targetRotationY, partialTicks)));
+			geoBone.setRotationY(MathHelper.wrapDegrees(smoothRotation(geoBone.getRotationY(), targetRotationY, 1)));
 			ChaosAwakens.debug("MIDSEC", geoBone.getRotationY() + "||" + Math.toDegrees(geoBone.getRotationY()));
 		});
 		cube_r3.ifPresent(geoBone -> {
-			geoBone.setRotationY(MathHelper.wrapDegrees(smoothRotation(geoBone.getRotationY(), targetRotationY, partialTicks)));
+			geoBone.setRotationY(MathHelper.wrapDegrees(smoothRotation(geoBone.getRotationY(), targetRotationY, 1)));
 			ChaosAwakens.debug("CUBER3", geoBone.getRotationY() + "||" + Math.toDegrees(geoBone.getRotationY()));
 		});
         tail.ifPresent(geoBone -> {
-			geoBone.setRotationY(MathHelper.wrapDegrees(smoothRotation(geoBone.getRotationY(), targetRotationY, partialTicks)));
+			geoBone.setRotationY(MathHelper.wrapDegrees(smoothRotation(geoBone.getRotationY(), targetRotationY, 1)));
 			ChaosAwakens.debug("TAIL", geoBone.getRotationY() + "||" + Math.toDegrees(geoBone.getRotationY()));
-		});
+		}); */
 
 		super.render(model, animatable, partialTicks, type, matrixStackIn, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 

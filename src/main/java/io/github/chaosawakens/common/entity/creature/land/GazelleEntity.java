@@ -86,6 +86,7 @@ public class GazelleEntity extends AnimatableAnimalEntity {
 
 	@Override
 	protected void registerGoals() { //TODO Herd panic goal
+		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1.0D, 1));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.5D) {

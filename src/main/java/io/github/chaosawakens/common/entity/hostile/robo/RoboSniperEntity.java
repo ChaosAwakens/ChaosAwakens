@@ -1,9 +1,6 @@
 package io.github.chaosawakens.common.entity.hostile.robo;
 
-import java.util.function.BiFunction;
-
-import javax.annotation.Nullable;
-
+import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
@@ -12,28 +9,35 @@ import io.github.chaosawakens.common.entity.ai.goals.hostile.AnimatableShootGoal
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.registry.CATeams;
+import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.scoreboard.Team;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import javax.annotation.Nullable;
+import java.util.function.BiFunction;
 
 public class RoboSniperEntity extends AnimatableMonsterEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -58,30 +62,12 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
 
 		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
-		laser.setPower(4, 0, false);
+		laser.setPower(15, 0, false);
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
 
-		laser.changeSpeed(10);
+		laser.changeSpeed(5);
 		
-		return laser;
-	};
-	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> LASER_FACTORY_EXPLOSIVE = (owner, offset) -> {
-		LivingEntity target = owner.getTarget();
-		World world = owner.level;
-
-		Vector3d viewVector = owner.getViewVector(1.0F);
-		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
-		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
-		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
-
-		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
-		laser.setPower(4, 5, false);
-		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
-				owner.getZ() + viewVector.z * offset.z());
-
-		laser.changeSpeed(10);
-
 		return laser;
 	};
 	private static final Vector3d LASER_OFFSET = new Vector3d(2.0, 0.4, 2.0);
@@ -99,7 +85,7 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 				.add(Attributes.ATTACK_SPEED, 10)
 				.add(Attributes.ATTACK_DAMAGE, 25)
 				.add(Attributes.ATTACK_KNOCKBACK, 3.5D)
-				.add(Attributes.FOLLOW_RANGE, 500);
+				.add(Attributes.FOLLOW_RANGE, 75);
 	}
 
 	@Override
@@ -132,16 +118,16 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	protected void registerGoals() {
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, SHOOT_ATTACK_ID, () -> shootAnim, LASER_FACTORY_CLOSE, LASER_OFFSET, 2.0, 4.0, 60, 3, 6, 3));
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, SHOOT_ATTACK_ID, () -> shootAnim, LASER_FACTORY_EXPLOSIVE, LASER_OFFSET, 2.0, 4.0, 60, 3, 14, 3));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, false));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, false));
-		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 16f, 1.0f, 1.8f));
-		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, IronGolemEntity.class, 16f, 1.0f, 1.8f));
-		this.targetSelector.addGoal(2, new AvoidEntityGoal<>(this, AnimalEntity.class, 16f, 1.0f, 1.8f));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.12D));
+		this.targetSelector.addGoal(0, new AvoidEntityGoal<>(this, PlayerEntity.class, 16f, 1.5f, 2.2f));
+		this.targetSelector.addGoal(0, new AvoidEntityGoal<>(this, IronGolemEntity.class, 16f, 1.5f, 2.2f));
+		this.targetSelector.addGoal(0, new AvoidEntityGoal<>(this, AnimalEntity.class, 16f, 1.5f, 2.2f));
+		this.targetSelector.addGoal(1, new AnimatableShootGoal(this, SHOOT_ATTACK_ID, () -> shootAnim, LASER_FACTORY_CLOSE, LASER_OFFSET, 2.0, 4.0, 60, 3, 6, 3).setAngleDependant(true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, 0, false, false, null));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, 0, false, false, null));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<IronGolemEntity>(this, IronGolemEntity.class, 0, false, false, null));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<AnimalEntity>(this, AnimalEntity.class, 0, false, false, null));
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	
 	@Override
@@ -182,6 +168,23 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	public String getOwnerMDFileName() {
 		return ROBO_SNIPER_MDF_NAME;
+	}
+
+	@Override
+	public boolean canSee(Entity target) {
+		if (target == null) return false;
+
+		boolean directLOS = this.level.clip(new RayTraceContext(position(), target.position(), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
+		return super.canSee(target) || (directLOS
+				? target.level == this.level && MathUtil.getHorizontalDistanceBetween(this, target) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, target) <= 25
+				: target.level == this.level && MathUtil.getHorizontalDistanceBetween(this, target) <= getFollowRange() / 5 && MathUtil.getVerticalDistanceBetween(this, target) <= 20);
+	}
+
+	@Nullable
+	@Override
+	public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance curDifficulty, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT storedNBTData) {
+		if (spawnReason.equals(SpawnReason.STRUCTURE)) setPersistenceRequired();
+		return super.finalizeSpawn(world, curDifficulty, spawnReason, entityData, storedNBTData);
 	}
 
 	@SuppressWarnings("unchecked")

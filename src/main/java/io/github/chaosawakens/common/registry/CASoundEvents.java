@@ -49,6 +49,13 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> ROBO_POUNDER_DAMAGE_V3 = SOUND_EVENTS.register("entity.robo_pounder.damage_v3", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.damage_v3")));
 	public static final RegistryObject<SoundEvent> ROBO_POUNDER_DAMAGE_V4 = SOUND_EVENTS.register("entity.robo_pounder.damage_v4", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_pounder.damage_v4")));
 
+	// Robo Warrior
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_IDLE = SOUND_EVENTS.register("entity.robo_warrior.idle", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.idle")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_WALK = SOUND_EVENTS.register("entity.robo_warrior.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.walk")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_UPPERCUT = SOUND_EVENTS.register("entity.robo_warrior.uppercut", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.uppercut")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_LASER_BURST = SOUND_EVENTS.register("entity.robo_warrior.laser_burst", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.laser_burst")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_CHARGED_SHOT = SOUND_EVENTS.register("entity.robo_warrior.charged_shot", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.charged_shot")));
+
 	// Emerald Gator
 	public static final RegistryObject<SoundEvent> EMERALD_GATOR_WALK = SOUND_EVENTS.register("entity.emerald_gator.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.emerald_gator.walk")));
 	public static final RegistryObject<SoundEvent> EMERALD_GATOR_ATTACK = SOUND_EVENTS.register("entity.emerald_gator.attack", () -> new SoundEvent(ChaosAwakens.prefix("entity.emerald_gator.attack")));

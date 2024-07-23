@@ -29,6 +29,7 @@ public class AnimatableShootGoal extends Goal {
 	protected boolean hasShotProjectile, hasStartedAnimations;
 	protected float targetAngle;
 	protected int delayCount;
+	protected boolean angleDependant = false;
 
 	public AnimatableShootGoal(AnimatableMonsterEntity owner, byte attackId, Supplier<SingletonAnimationBuilder> shootAnim,
 			BiFunction<AnimatableMonsterEntity, Vector3d, Entity> projectileFactory, Vector3d projectileOffset,
@@ -46,6 +47,11 @@ public class AnimatableShootGoal extends Goal {
 		this.rotationDelay = rotationDelay;
 	}
 
+	public AnimatableShootGoal setAngleDependant(boolean angleDependant) {
+		this.angleDependant = angleDependant;
+		return this;
+	}
+
 	@Override
 	public boolean canUse() {
 		return ObjectUtil.performNullityChecks(false, owner.getTarget())
@@ -61,9 +67,12 @@ public class AnimatableShootGoal extends Goal {
 
 	@Override
 	public void start() {
-//		owner.setAttackID(attackId);
-//		owner.getNavigation().stop();
-//		owner.playAnimation(shootAnim.get(), true);
+		if (!angleDependant) {
+			owner.setAttackID(attackId);
+			owner.getNavigation().stop();
+			owner.playAnimation(shootAnim.get(), true);
+		}
+
 		Vector3d ownerPos = owner.position(), targetPos = owner.getTarget().position();
 		this.targetAngle = (float) (Math.atan2(targetPos.z() - ownerPos.z(), targetPos.x() - ownerPos.x()) * 180 / Math.PI) - 90;
 		
@@ -91,7 +100,7 @@ public class AnimatableShootGoal extends Goal {
 		owner.getNavigation().stop();
 		LivingEntity target = this.owner.getTarget();
 		
-		if (MathHelper.degreesDifferenceAbs(targetAngle, owner.yBodyRotO) < 2.0f) {
+		if (MathHelper.degreesDifferenceAbs(targetAngle, owner.yHeadRotO) < 2.0F && angleDependant) {
 			if (!this.hasStartedAnimations/* && delayCount >= rotationDelay*/) {
 				owner.setAttackID(attackId);
 				owner.playAnimation(shootAnim.get(), true);
@@ -103,12 +112,26 @@ public class AnimatableShootGoal extends Goal {
 						world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
 						this.hasShotProjectile = true;
 					}
+				} else {
+					if (target != null) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
+					delayCount = 0;
 				}
 				delayCount++;
 			}
 		} else {
-			if (target != null) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
-			delayCount = 0;
+			if (MathUtil.isBetween(shootAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
+				if (!this.hasShotProjectile) {
+					World world = this.owner.level;
+					world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
+					this.hasShotProjectile = true;
+				}
+			} else {
+				if (target != null) owner.getLookControl().setLookAt(target, 30.0F, 30.0F);
+				delayCount = 0;
+			}
+			delayCount++;
 		}
+
+		if (!canContinueToUse()) owner.setAttackID((byte) 0);
 	}
 }

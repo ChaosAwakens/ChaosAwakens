@@ -7,10 +7,12 @@ import io.github.chaosawakens.client.sounds.tickable.base.AnimatableTickableWalk
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableMunchSound;
 import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleTickableWalkSound;
+import io.github.chaosawakens.client.sounds.tickable.creature.water.whale.WhaleTickableAmbienceSound;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableWalkSound;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
+import io.github.chaosawakens.common.entity.creature.water.WhaleEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.client.Minecraft;
@@ -172,5 +174,14 @@ public final class SoundUtil { //TODO Add common method impls for non-monster en
     public static void playRoboPounderTickableSounds(RoboPounderEntity owner) {
         Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableIdleSound(CASoundEvents.ROBO_POUNDER_IDLE.get(), owner).setCriticalSound(new RoboPounderTickableIdleSound(owner.getRandom().nextBoolean() ? CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE.get() : CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE_RADIO.get(), owner)));
         Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), owner).setRageRunSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), owner)));
+    }
+
+    /**
+     * Server fix method.
+     *
+     * @param owner The {@link WhaleEntity} instance to play the sound for.
+     */
+    public static void playWhaleTickableSounds(WhaleEntity owner) {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new WhaleTickableAmbienceSound(CASoundEvents.WHALE_AMBIENT.get(), owner));
     }
 }

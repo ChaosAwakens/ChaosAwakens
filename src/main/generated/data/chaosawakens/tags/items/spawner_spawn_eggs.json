@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "chaosawakens:ender_dragon_spawn_egg",
     "chaosawakens:wither_spawn_egg",
     "chaosawakens:snow_golem_spawn_egg",
     "chaosawakens:iron_golem_spawn_egg"

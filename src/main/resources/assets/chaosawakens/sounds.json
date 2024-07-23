@@ -177,7 +177,7 @@
     "sounds": [
       {
         "name": "chaosawakens:entity/boss/robo/robojeffery/attacks/seismic_slam",
-        "attenuation_distance": 300
+        "attenuation_distance": 400
       }
     ]
   },
@@ -351,6 +351,37 @@
     "subtitle": "subtitles.chaosawakens.entity.robo_pounder.damage_v4",
     "sounds": [
       "chaosawakens:entity/hostile/robo/robopounder/damage/damage_v4"
+    ]
+  },
+
+  "entity.robo_warrior.idle": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.idle",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/idle"
+    ]
+  },
+  "entity.robo_warrior.walk": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.walk",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/walk"
+    ]
+  },
+  "entity.robo_warrior.uppercut": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.uppercut",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/attacks/uppercut"
+    ]
+  },
+  "entity.robo_warrior.laser_burst": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.laser_burst",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/attacks/laser_burst"
+    ]
+  },
+  "entity.robo_warrior.charged_shot": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.charged_shot",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/attacks/charged_shot"
     ]
   },
   

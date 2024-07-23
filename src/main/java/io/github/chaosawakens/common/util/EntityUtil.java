@@ -470,16 +470,16 @@ public final class EntityUtil {
 		Entity causeEntity = deathCause.getEntity();
 		LivingEntity killerEntity = livingAnimatable.getKillCredit();
 
-		if (!livingAnimatable.removed && !livingAnimatable.dead) {
+		if (!livingAnimatable.dead) {
 			if (targetAnimatable.getDeathAnim().getWrappedAnimProgress() == 0) {
 				if (livingAnimatable.deathScore >= 0 && killerEntity != null)  killerEntity.awardKillScore(livingAnimatable, livingAnimatable.deathScore, deathCause);
 				if (livingAnimatable.isSleeping()) livingAnimatable.stopSleeping();
-
-				livingAnimatable.dead = true;
-				livingAnimatable.getCombatTracker().recheckStatus();
 			}
 
 			if (targetAnimatable.getDeathAnim().hasAnimationFinished()) {
+				livingAnimatable.dead = true;
+				livingAnimatable.getCombatTracker().recheckStatus();
+
 				if (livingAnimatable.level instanceof ServerWorld) {
 					ServerWorld curServerWorld = (ServerWorld) livingAnimatable.level;
 

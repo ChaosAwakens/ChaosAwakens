@@ -12,10 +12,12 @@ import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboLaserEntity;
 import io.github.chaosawakens.common.entity.projectile.RoboRayEntity;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.registry.CATeams;
 import io.github.chaosawakens.common.util.EntityUtil;
 import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
+import io.github.chaosawakens.common.util.SoundUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -35,8 +37,11 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -87,7 +92,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
 
 		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
-		laser.setPower(10, 0, false);
+		laser.setPower(20, 0, false);
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
 
@@ -105,7 +110,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
 
 		RoboRayEntity ray = new RoboRayEntity(world, owner, offsetX, offsetY, offsetZ);
-		ray.setPower(10, 0, false);
+		ray.setPower(50, 3, false);
+		ray.changeSpeed(1);
 		ray.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(), owner.getZ() + viewVector.z * offset.z());
 		ray.setShot(true);
 
@@ -142,7 +148,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return isPresumptuouslyAttacking() || isShielded() || isShieldDestroyed() || isShieldGoingDown() || isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
+		return !attackController.getWrappedController().getAnimationState().equals(AnimationState.Stopped) || isShielded() || isShieldDestroyed() || isShieldGoingDown() || isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
@@ -176,7 +182,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			}
 		});
 		this.goalSelector.addGoal(1, new RoboWarriorShieldGoal(this, () -> shieldUpAnim, () -> shieldedAnim, () -> shieldDownAnim, () -> shieldDestroyedAnim));
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 10, (owner) -> !isShielded() && !isShieldDestroyed() && !isShieldGoingDown() && !isPlayingAnimation(shieldUpAnim) && !isPlayingAnimation(shieldedAnim) && !isPlayingAnimation(shieldDownAnim) && !isPlayingAnimation(shieldDestroyedAnim)).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, UPPERCUT_ATTACK_ID, 16D, 18.4D, 80.0D, 1, 10, (owner) -> !isShielded() && !isShieldDestroyed() && !isShieldGoingDown() && !isPlayingAnimation(shieldUpAnim) && !isPlayingAnimation(shieldedAnim) && !isPlayingAnimation(shieldDownAnim) && !isPlayingAnimation(shieldDestroyedAnim)).pickBetweenAnimations(() -> leftUppercutAnim, () -> rightUppercutAnim).soundOnStart(CASoundEvents.ROBO_WARRIOR_UPPERCUT, 1.0F));
 		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10, 0) {
 
 			@Override
@@ -191,7 +197,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 				return ObjectUtil.performNullityChecks(false, getTarget())
 						&& distanceTo(getTarget()) >= minimumDistance && canSee(getTarget()) && !getTarget().isInvulnerable()
 						&& isAlive() && !isAttacking() && getTarget().isAlive() && !getTarget().isDeadOrDying()
-						&& !isOnAttackCooldown() && EntityUtil.getAllEntitiesAround(RoboWarriorEntity.this, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 3 && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
+						&& !isOnAttackCooldown() && (EntityUtil.getAllEntitiesAround(RoboWarriorEntity.this, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 2 || EntityUtil.getAllEntitiesAround(RoboWarriorEntity.this, 16.0D, 16.0D, 16.0D, 6.0D).size() >= 4)
+						&& !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
 			}
 		});
 		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7, 0) {
@@ -205,6 +212,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			@Override
 			public void start() {
 				super.start();
+
+				playSound(CASoundEvents.ROBO_WARRIOR_LASER_BURST.get(), 1.0F, 1.0F);
 
 				this.shotSecond = false;
 			}
@@ -320,7 +329,12 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public boolean canSee(Entity pEntity) {
-		return pEntity.level == this.level && MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= 10;//this.level.clip(new RayTraceContext(curPos, targetPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
+		if (pEntity == null) return false;
+
+		boolean directLOS = this.level.clip(new RayTraceContext(position(), pEntity.position(), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this)).getType() == RayTraceResult.Type.MISS;
+		return super.canSee(pEntity) || (directLOS
+				? pEntity.level == this.level && MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() && MathUtil.getVerticalDistanceBetween(this, pEntity) <= 20
+				: pEntity.level == this.level && MathUtil.getHorizontalDistanceBetween(this, pEntity) <= getFollowRange() / 6 && MathUtil.getVerticalDistanceBetween(this, pEntity) <= 14);
 	}
 
 	@Override
@@ -331,6 +345,14 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		if (pSource.isBypassInvul()) return super.hurt(pSource, pAmount);
 
 		return !isShielded() && super.hurt(pSource, pAmount);
+	}
+
+	@Override
+	protected void onSpawn(boolean hasAlreadyDied) {
+		if (!hasAlreadyDied && level.isClientSide) {
+			SoundUtil.playIdleSoundAsTickable(CASoundEvents.ROBO_WARRIOR_IDLE.get(), this);
+			SoundUtil.playWalkingSoundAsTickable(CASoundEvents.ROBO_WARRIOR_WALK.get(), this);
+		}
 	}
 
 	@Nullable
@@ -434,8 +456,6 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		if (MathUtil.isBetween(chargedLaserAttackAnim.getWrappedAnimProgress(), 75.5D, 76.6D)) {
 			CAScreenShakeEntity.shakeScreen(level, position(), 150.0F, 0.278F, 7, 20);
 		}
-
-
 	}
 	
 	@SuppressWarnings("unchecked")

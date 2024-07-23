@@ -85,8 +85,7 @@ public class RoboRayEntity extends DamagingProjectileEntity implements IAnimatab
 		super.onHit(pResult);
 		setHasHit(true);
 		
-		if (getExplosivePower() > 0.0F)
-			level.explode(this, getX(), getY(), getZ(), getExplosivePower(), fireOnHit(), ForgeEventFactory.getMobGriefingEvent(level, getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+		if (getExplosivePower() > 0.0F) level.explode(this, getX(), getY(), getZ(), getExplosivePower(), fireOnHit(), ForgeEventFactory.getMobGriefingEvent(level, getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 	}
 	
 	@Override
@@ -95,8 +94,7 @@ public class RoboRayEntity extends DamagingProjectileEntity implements IAnimatab
 		
 		Entity targetEntity = pResult.getEntity();
 		
-		if (targetEntity != null && targetEntity.isAlive())
-			targetEntity.hurt(DamageSource.thrown(this, getOwner()), getDamagePower());
+		if (targetEntity != null && targetEntity.isAlive()) targetEntity.hurt(DamageSource.thrown(this, getOwner()), getDamagePower());
 	}
 
 	@Override
@@ -180,9 +178,13 @@ public class RoboRayEntity extends DamagingProjectileEntity implements IAnimatab
 	}
 	
 	public void changeSpeed(double factor) {
-		this.xPower *= factor;
-		this.yPower *= factor;
-		this.zPower *= factor;
+		changeSpeed(factor, factor, factor);
+	}
+
+	public void changeSpeed(double xFactor, double yFactor, double zFactor) {
+		this.xPower *= xFactor;
+		this.yPower *= yFactor;
+		this.zPower *= zFactor;
 	}
 
 	@Override

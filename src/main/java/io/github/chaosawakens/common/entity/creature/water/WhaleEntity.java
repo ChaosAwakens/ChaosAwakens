@@ -116,7 +116,7 @@ public class WhaleEntity extends AnimatableWaterMobEntity {
 	@Override
 	public void onSpawn(boolean hasAlreadyDied) {
 		if (!hasAlreadyDied && level.isClientSide) {
-			SoundUtil.playIdleSoundAsTickable(CASoundEvents.WHALE_AMBIENT.get(), this, 5.0F);
+			SoundUtil.playWhaleTickableSounds(this);
 		}
 	}
 

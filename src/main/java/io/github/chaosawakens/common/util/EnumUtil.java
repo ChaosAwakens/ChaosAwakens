@@ -109,7 +109,7 @@ public final class EnumUtil {
 		}
 
 		public int getAttackDamageMod() {
-			return (int) (getAttackDamageBonus() - (getAttackDamageBonus() + 1)) - 2;
+			return (int) (getAttackDamageBonus() - (getAttackDamageBonus() + 1)) - 2; // Yeah idk either
 		}
 	}
 

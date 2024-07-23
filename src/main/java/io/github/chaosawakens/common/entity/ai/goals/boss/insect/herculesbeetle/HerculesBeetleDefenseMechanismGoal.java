@@ -25,7 +25,7 @@ public class HerculesBeetleDefenseMechanismGoal extends Goal {
     @Override
     public boolean canUse() {
         if (curCooldown > 0) curCooldown--; //TODO Maybe inline? Same with other goals n stuff? Eh, who cares.
-        return !ownerBeetle.isDeadOrDying() && ownerBeetle.isActive() && !ownerBeetle.isFlinging() && !ownerBeetle.isAttacking() && ownerBeetle.getAttackCooldown() <= 0 && ((ownerBeetle.getTarget() != null && !ownerBeetle.getTarget().isDeadOrDying()) || (ownerBeetle.getLastHurtByMob() != null && !ownerBeetle.getLastHurtByMob().isDeadOrDying())) && (ownerBeetle.getLastDamageAmount() >= 50.0F || (ownerBeetle.getLastDamageAmount() >= 25.0F && ownerBeetle.isOnFire()) || (ownerBeetle.getLastDamageAmount() >= 20.0F && ownerBeetle.getHealth() <= 100.0F) || (ownerBeetle.getHealth() <= 50.0F) || (!EntityUtil.checkIncomingProjectiles(ownerBeetle, 55.0D, 0.2D).isEmpty()));
+        return !ownerBeetle.isDeadOrDying() && ownerBeetle.isActive() && !ownerBeetle.isFlinging() && !ownerBeetle.isAttacking() && ownerBeetle.getAttackCooldown() <= 0 && (((ownerBeetle.getTarget() != null && !ownerBeetle.getTarget().isDeadOrDying()) || (ownerBeetle.getLastHurtByMob() != null && !ownerBeetle.getLastHurtByMob().isDeadOrDying() && (ownerBeetle.getLastDamageAmount() >= 50.0F || (ownerBeetle.getLastDamageAmount() >= 25.0F && ownerBeetle.isOnFire()) || (ownerBeetle.getLastDamageAmount() >= 20.0F && ownerBeetle.getHealth() <= 100.0F) || (ownerBeetle.getHealth() <= 50.0F))) && curCooldown <= 0) || (!EntityUtil.checkIncomingProjectiles(ownerBeetle, 55.0D, 0.2D).isEmpty()));
     }
 
     @Override

@@ -236,7 +236,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	}
 	
 	private boolean shouldExitCooldown() { // Inlining this would be a crime to the eyes (Oh The Irony:tm:)
-		if (rageCrashAnim.get().isPlaying()) return rageCrashAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCrashAnim.get().getWrappedAnimLength() / 1.5D, rageCrashAnim.get().getWrappedAnimLength() * 2);
+		if (rageCrashAnim.get().isPlaying()) return rageCrashAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCrashAnim.get().getWrappedAnimLength() / 1.5D, rageCrashAnim.get().getWrappedAnimLength() / 1.167D);
 		else return rageCooldownAnim.get().isPlaying() && rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 1.4D, rageCooldownAnim.get().getWrappedAnimLength() / 1.167D);
 	}
 

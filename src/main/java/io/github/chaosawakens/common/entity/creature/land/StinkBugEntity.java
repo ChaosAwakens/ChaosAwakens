@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -109,6 +110,7 @@ public class StinkBugEntity extends AnimatableAnimalEntity {
 			}
 		});
 		this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 1.1D));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
 	}
 	
 	@Override

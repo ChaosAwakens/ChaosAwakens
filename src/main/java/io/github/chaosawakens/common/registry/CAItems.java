@@ -531,11 +531,15 @@ public class CAItems {
 
 	// SPAWN EGGS
 	public static final RegistryObject<CASpawnEggItem> ACACIA_ENT_SPAWN_EGG = ITEMS.register("acacia_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.ACACIA_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<CASpawnEggItem> APPLE_ENT_SPAWN_EGG = ITEMS.register("apple_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.APPLE_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> BIRCH_ENT_SPAWN_EGG = ITEMS.register("birch_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.BIRCH_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<CASpawnEggItem> CHERRY_ENT_SPAWN_EGG = ITEMS.register("cherry_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.CHERRY_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> CRIMSON_ENT_SPAWN_EGG = ITEMS.register("crimson_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.CRIMSON_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> DARK_OAK_ENT_SPAWN_EGG = ITEMS.register("dark_oak_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.DARK_OAK_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> JUNGLE_ENT_SPAWN_EGG = ITEMS.register("jungle_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.JUNGLE_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> OAK_ENT_SPAWN_EGG = ITEMS.register("oak_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.OAK_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<CASpawnEggItem> PEACH_ENT_SPAWN_EGG = ITEMS.register("peach_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.PEACH_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
+	public static final RegistryObject<CASpawnEggItem> SKYWOOD_ENT_SPAWN_EGG = ITEMS.register("skywood_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.SKYWOOD_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> SPRUCE_ENT_SPAWN_EGG = ITEMS.register("spruce_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.SPRUCE_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> WARPED_ENT_SPAWN_EGG = ITEMS.register("warped_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.WARPED_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<CASpawnEggItem> GINKGO_ENT_SPAWN_EGG = ITEMS.register("ginkgo_ent_spawn_egg", () -> new CASpawnEggItem(() -> CAEntityTypes.GINKGO_ENT.get(), new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
@@ -586,7 +590,6 @@ public class CAItems {
 	public static final RegistryObject<ForgeSpawnEggItem> ILLUSIONER_SPAWN_EGG = ITEMS.register("illusioner_spawn_egg", () -> new ForgeSpawnEggItem(() -> EntityType.ILLUSIONER, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<ForgeSpawnEggItem> GIANT_SPAWN_EGG = ITEMS.register("giant_spawn_egg", () -> new ForgeSpawnEggItem(() -> EntityType.GIANT, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 	public static final RegistryObject<ForgeSpawnEggItem> WITHER_SPAWN_EGG = ITEMS.register("wither_spawn_egg", () -> new ForgeSpawnEggItem(() -> EntityType.WITHER, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
-	public static final RegistryObject<ForgeSpawnEggItem> ENDER_DRAGON_SPAWN_EGG = ITEMS.register("ender_dragon_spawn_egg", () -> new ForgeSpawnEggItem(() -> EntityType.ENDER_DRAGON, 0xFFFFFF, 0xFFFFFF, new Item.Properties().tab(CAItemGroups.SPAWN_EGGS)));
 
 	// STRUCTURE SPAWN
 	public static final RegistryObject<StructureItem> INSTANT_SURVIVAL_SHELTER = ITEMS.register("instant_survival_shelter", () -> new StructureItem(new Item.Properties().tab(CAItemGroups.ITEMS).stacksTo(16), "survival_shelter"));
