@@ -384,6 +384,56 @@
       "chaosawakens:entity/hostile/robo/robowarrior/attacks/charged_shot"
     ]
   },
+  "entity.robo_warrior.shield_activation": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.shield_activation",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/shield/shield_activation"
+    ]
+  },
+  "entity.robo_warrior.shield_activated": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.shield_activated",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/shield/shield_activated"
+    ]
+  },
+  "entity.robo_warrior.shield_deactivation": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.shield_deactivation",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/shield/shield_deactivation"
+    ]
+  },
+  "entity.robo_warrior.shield_destroyed": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.shield_destroyed",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/shield/shield_destroyed"
+    ]
+  },
+
+  "entity.robo_laser.travel": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_laser.travel",
+    "sounds": [
+      "chaosawakens:entity/projectile/robolaser/travel"
+    ]
+  },
+  "entity.robo_laser.hit": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_laser.hit",
+    "sounds": [
+      "chaosawakens:entity/projectile/robolaser/hit"
+    ]
+  },
+
+  "entity.robo_ray.travel": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_ray.travel",
+    "sounds": [
+      "chaosawakens:entity/projectile/roboray/travel"
+    ]
+  },
+  "entity.robo_ray.hit": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_ray.hit",
+    "sounds": [
+      "chaosawakens:entity/projectile/roboray/hit"
+    ]
+  },
   
   "entity.emerald_gator.walk": {
     "subtitle": "subtitles.chaosawakens.entity.emerald_gator.walk",

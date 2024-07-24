@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.entity.ai.goals.hostile.robo.robowarrior;
 
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.MathHelper;
@@ -15,6 +16,7 @@ public class RoboWarriorShieldGoal extends Goal {
     protected final Supplier<IAnimationBuilder> shieldDownAnim;
     protected final Supplier<IAnimationBuilder> shieldDestroyedAnim;
     protected int curCooldown;
+    protected boolean hasPlayedDeactivationSound = false;
 
     public RoboWarriorShieldGoal(RoboWarriorEntity owner, Supplier<IAnimationBuilder> shieldUpAnim, Supplier<IAnimationBuilder> shieldAnim, Supplier<IAnimationBuilder> shieldDownAnim, Supplier<IAnimationBuilder> shieldDestroyedAnim) {
         this.owner = owner;
@@ -46,6 +48,9 @@ public class RoboWarriorShieldGoal extends Goal {
         owner.getNavigation().stop();
 
         owner.playAnimation(shieldUpAnim.get(), true);
+        owner.playSound(CASoundEvents.ROBO_WARRIOR_SHIELD_ACTIVATION.get(), 1.0F, 1.0F);
+
+        this.hasPlayedDeactivationSound = false;
     }
 
     @Override
@@ -85,11 +90,24 @@ public class RoboWarriorShieldGoal extends Goal {
 
         if (isShieldUp()) owner.playAnimation(shieldAnim.get(), false);
 
-        if (shieldAnim.get().isPlaying()) {
-            owner.heal(0.5F);
-        }
+        if (shieldAnim.get().isPlaying()) owner.heal(0.5F);
 
-        if (owner.isShieldDestroyed()) owner.playAnimation(shieldDestroyedAnim.get(), false);
-        else if (owner.getHealth() >= owner.getMaxHealth()) owner.playAnimation(shieldDownAnim.get(), false);
+        if (owner.isShieldDestroyed()) {
+            owner.playAnimation(shieldDestroyedAnim.get(), false);
+
+            if (!hasPlayedDeactivationSound) {
+                owner.playSound(CASoundEvents.ROBO_WARRIOR_SHIELD_DESTROYED.get(), 1.0F, 1.0F);
+
+                this.hasPlayedDeactivationSound = true;
+            }
+        } else if (owner.getHealth() >= owner.getMaxHealth()) {
+            owner.playAnimation(shieldDownAnim.get(), false);
+
+            if (!hasPlayedDeactivationSound) {
+                owner.playSound(CASoundEvents.ROBO_WARRIOR_SHIELD_DEACTIVATION.get(), 1.0F, 1.0F);
+
+                this.hasPlayedDeactivationSound = true;
+            }
+        }
     }
 }

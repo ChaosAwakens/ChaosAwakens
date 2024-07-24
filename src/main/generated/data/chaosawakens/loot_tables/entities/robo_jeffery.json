@@ -6,6 +6,388 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
+            }
+          ],
+          "name": "minecraft:iron_block"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 8.0,
+                "max": 16.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
+            }
+          ],
+          "name": "minecraft:redstone_block"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
+            }
+          ],
+          "name": "chaosawakens:uranium_ingot"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
+            }
+          ],
+          "name": "chaosawakens:titanium_ingot"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": 1.0
+            }
+          ],
+          "name": "chaosawakens:aluminum_block"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:repeater"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:comparator"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:piston"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:sticky_piston"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:dropper"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:dispenser"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "name": "minecraft:hopper"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:observer"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 5.0,
+                "max": 8.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "chaosawakens:aluminum_power_chip"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "chaosawakens:uranium_nugget"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "chaosawakens:titanium_nugget"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:redstone_torch"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:redstone_lamp"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "chaosawakens:jeffery_core"
         }
       ]

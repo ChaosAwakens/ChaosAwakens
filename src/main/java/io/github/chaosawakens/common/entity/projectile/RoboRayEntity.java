@@ -5,6 +5,7 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -78,12 +79,15 @@ public class RoboRayEntity extends DamagingProjectileEntity implements IAnimatab
 		} else playAnimation(getWalkAnim(), false);
 		
 		if (getMainWrappedController().isAnimationFinished(deathAnim)) remove();
+		if (tickCount <= 1) playSound(CASoundEvents.ROBO_RAY_TRAVEL.get(), 1.0F, 1.0F);
 	}
 	
 	@Override
 	protected void onHit(RayTraceResult pResult) {
 		super.onHit(pResult);
 		setHasHit(true);
+
+		playSound(CASoundEvents.ROBO_RAY_HIT.get(), 1.0F, 1.0F);
 		
 		if (getExplosivePower() > 0.0F) level.explode(this, getX(), getY(), getZ(), getExplosivePower(), fireOnHit(), ForgeEventFactory.getMobGriefingEvent(level, getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 	}

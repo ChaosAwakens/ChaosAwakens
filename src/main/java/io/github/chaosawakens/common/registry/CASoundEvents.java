@@ -55,6 +55,18 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_UPPERCUT = SOUND_EVENTS.register("entity.robo_warrior.uppercut", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.uppercut")));
 	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_LASER_BURST = SOUND_EVENTS.register("entity.robo_warrior.laser_burst", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.laser_burst")));
 	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_CHARGED_SHOT = SOUND_EVENTS.register("entity.robo_warrior.charged_shot", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.charged_shot")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_SHIELD_ACTIVATION = SOUND_EVENTS.register("entity.robo_warrior.shield_activation", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.shield_activation")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_SHIELD_ACTIVATED = SOUND_EVENTS.register("entity.robo_warrior.shield_activated", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.shield_activated")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_SHIELD_DEACTIVATION = SOUND_EVENTS.register("entity.robo_warrior.shield_deactivation", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.shield_deactivation")));
+	public static final RegistryObject<SoundEvent> ROBO_WARRIOR_SHIELD_DESTROYED = SOUND_EVENTS.register("entity.robo_warrior.shield_destroyed", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_warrior.shield_destroyed")));
+
+	// Robo Laser
+	public static final RegistryObject<SoundEvent> ROBO_LASER_TRAVEL = SOUND_EVENTS.register("entity.robo_laser.travel", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_laser.travel")));
+	public static final RegistryObject<SoundEvent> ROBO_LASER_HIT = SOUND_EVENTS.register("entity.robo_laser.hit", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_laser.hit")));
+
+	// Robo Ray
+	public static final RegistryObject<SoundEvent> ROBO_RAY_TRAVEL = SOUND_EVENTS.register("entity.robo_ray.travel", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_ray.travel")));
+	public static final RegistryObject<SoundEvent> ROBO_RAY_HIT = SOUND_EVENTS.register("entity.robo_ray.hit", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_ray.hit")));
 
 	// Emerald Gator
 	public static final RegistryObject<SoundEvent> EMERALD_GATOR_WALK = SOUND_EVENTS.register("entity.emerald_gator.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.emerald_gator.walk")));

@@ -193,6 +193,13 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 			public boolean canUse() {
 				return super.canUse() && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
 			}
+
+			@Override
+			public void start() {
+				super.start();
+
+				playSound(CASoundEvents.ROBO_WARRIOR_CHARGED_SHOT.get(), 1.0F, 1.0F);
+			}
 		});
 		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 1, 0) {
 
@@ -203,6 +210,13 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 						&& isAlive() && !isAttacking() && getTarget().isAlive() && !getTarget().isDeadOrDying()
 						&& !isOnAttackCooldown() && (EntityUtil.getAllEntitiesAround(RoboWarriorEntity.this, 6.0D, 6.0D, 6.0D, 6.0D).size() >= 2 || EntityUtil.getAllEntitiesAround(RoboWarriorEntity.this, 16.0D, 16.0D, 16.0D, 6.0D).size() >= 4)
 						&& !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
+			}
+
+			@Override
+			public void start() {
+				super.start();
+
+				playSound(CASoundEvents.ROBO_WARRIOR_CHARGED_SHOT.get(), 1.0F, 1.0F);
 			}
 		});
 		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 1, 0) {
@@ -363,10 +377,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void onSpawn(boolean hasAlreadyDied) {
-		if (!hasAlreadyDied && level.isClientSide) {
-			SoundUtil.playIdleSoundAsTickable(CASoundEvents.ROBO_WARRIOR_IDLE.get(), this);
-			SoundUtil.playWalkingSoundAsTickable(CASoundEvents.ROBO_WARRIOR_WALK.get(), this);
-		}
+		if (!hasAlreadyDied && level.isClientSide) SoundUtil.playRoboWarriorTickableSounds(this);
 	}
 
 	@Nullable

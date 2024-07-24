@@ -10,10 +10,12 @@ import io.github.chaosawakens.client.sounds.tickable.boss.insect.HerculesBeetleT
 import io.github.chaosawakens.client.sounds.tickable.creature.water.whale.WhaleTickableAmbienceSound;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableIdleSound;
 import io.github.chaosawakens.client.sounds.tickable.robo.robopounder.RoboPounderTickableWalkSound;
+import io.github.chaosawakens.client.sounds.tickable.robo.robowarrior.RoboWarriorTickableIdleSound;
 import io.github.chaosawakens.common.entity.base.AnimatableMonsterEntity;
 import io.github.chaosawakens.common.entity.boss.insect.HerculesBeetleEntity;
 import io.github.chaosawakens.common.entity.creature.water.WhaleEntity;
 import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -174,6 +176,17 @@ public final class SoundUtil { //TODO Add common method impls for non-monster en
     public static void playRoboPounderTickableSounds(RoboPounderEntity owner) {
         Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableIdleSound(CASoundEvents.ROBO_POUNDER_IDLE.get(), owner).setCriticalSound(new RoboPounderTickableIdleSound(owner.getRandom().nextBoolean() ? CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE.get() : CASoundEvents.ROBO_POUNDER_CRITICAL_DAMAGE_RADIO.get(), owner)));
         Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_WALK.get(), owner).setRageRunSound(new RoboPounderTickableWalkSound(CASoundEvents.ROBO_POUNDER_RAGE_RUN.get(), owner)));
+    }
+
+    /**
+     * Server fix method.
+     *
+     * @param owner The {@link RoboWarriorEntity} instance to play the sound for.
+     */
+    public static void playRoboWarriorTickableSounds(RoboWarriorEntity owner) {
+        Minecraft.getInstance().getSoundManager().queueTickingSound(new RoboWarriorTickableIdleSound(CASoundEvents.ROBO_WARRIOR_IDLE.get(), owner).setShieldSound(new RoboWarriorTickableIdleSound(CASoundEvents.ROBO_WARRIOR_SHIELD_ACTIVATED.get(), owner)));
+
+        playWalkingSoundAsTickable(CASoundEvents.ROBO_WARRIOR_WALK.get(), owner);
     }
 
     /**

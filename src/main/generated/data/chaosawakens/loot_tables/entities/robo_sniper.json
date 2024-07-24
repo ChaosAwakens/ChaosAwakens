@@ -55,6 +55,32 @@
             }
           ],
           "name": "minecraft:redstone"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": {
+                "min": 0.0,
+                "max": 1.0
+              }
+            }
+          ],
+          "name": "minecraft:iron_ingot"
         }
       ]
     },
@@ -79,50 +105,12 @@
             }
           ],
           "name": "minecraft:repeater"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:comparator"
         }
       ]
     },
     {
       "rolls": 1,
       "entries": [
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:piston"
-        },
         {
           "type": "minecraft:item",
           "conditions": [
@@ -164,25 +152,6 @@
               }
             }
           ],
-          "name": "minecraft:dropper"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:dispenser"
         }
       ]
@@ -190,15 +159,6 @@
     {
       "rolls": 1,
       "entries": [
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:killed_by_player"
-            }
-          ],
-          "name": "minecraft:hopper"
-        },
         {
           "type": "minecraft:item",
           "conditions": [

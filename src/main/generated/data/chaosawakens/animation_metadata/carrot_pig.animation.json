@@ -2,7 +2,7 @@
   "anim_file_loc": "chaosawakens:animations/entity/creature/land/carrot_pig.animation.json",
   "animations": [
     {
-      "animation_name": "Run",
+      "animation_name": "Idle",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
@@ -12,7 +12,7 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
+      "animation_name": "Run",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     }

@@ -5,6 +5,7 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -77,11 +78,15 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 
 		if (getMainWrappedController().isAnimationFinished(deathAnim)) remove();
 		this.yRot = this.yRotO;
+
+	//	if (tickCount <= 1) playSound(CASoundEvents.ROBO_LASER_TRAVEL.get(), 1.0F, 1.0F);
 	}
 	
 	protected void onHit(RayTraceResult result) {
 		super.onHit(result);
 		setHasHit(true);
+
+		playSound(CASoundEvents.ROBO_LASER_HIT.get(), 1.0F, 1.0F);
 
 		if (!this.level.isClientSide() && getExplosivePower() > 0) {
 			boolean isMobGriefingAllowed = ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
