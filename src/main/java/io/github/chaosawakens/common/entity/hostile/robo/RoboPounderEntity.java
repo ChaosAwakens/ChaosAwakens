@@ -408,6 +408,16 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	}
 
 	@Override
+	public boolean isMaxGroupSizeReached(int entityCount) {
+		return entityCount >= 1;
+	}
+
+	@Override
+	public int getMaxSpawnClusterSize() {
+		return 1;
+	}
+
+	@Override
 	protected void blockedByShield(LivingEntity pDefender) {		
 		if (getTargetShieldBlocks() > 25) {
 			if (pDefender instanceof PlayerEntity) EntityUtil.disableShield((PlayerEntity) pDefender, 100);

@@ -86,6 +86,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		LivingEntity target = owner.getTarget();
 		World world = owner.level;
 
+		if (target == null) return null;
+
 		Vector3d viewVector = owner.getViewVector(1.0F);
 		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
 		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
@@ -103,6 +105,8 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	private static final BiFunction<AnimatableMonsterEntity, Vector3d, Entity> LASER_FACTORY_CHARGED = (owner, offset) -> {
 		LivingEntity target = owner.getTarget();
 		World world = owner.level;
+
+		if (target == null) return null;
 
 		Vector3d viewVector = owner.getViewVector(1.0F);
 		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
@@ -228,7 +232,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 				if (MathUtil.isBetween(burstLaserAttackAnim.getWrappedAnimProgress(), 28.0D, 30.8D) && !shotSecond) {
 					if (!shotSecond) {
-						level.addFreshEntity(LASER_FACTORY_BURST.apply(RoboWarriorEntity.this, LASER_BURST_OFFSET));
+						if (LASER_FACTORY_BURST.apply(RoboWarriorEntity.this, LASER_BURST_OFFSET) != null) level.addFreshEntity(LASER_FACTORY_BURST.apply(RoboWarriorEntity.this, LASER_BURST_OFFSET));
 						CAScreenShakeEntity.shakeScreen(level, position(), 20.0F, 0.074F, 5, 20);
 						this.shotSecond = true;
 					}
@@ -325,6 +329,16 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public void manageAttack(LivingEntity target) {
+	}
+
+	@Override
+	public boolean isMaxGroupSizeReached(int entityCount) {
+		return entityCount >= 2;
+	}
+
+	@Override
+	public int getMaxSpawnClusterSize() {
+		return 1;
 	}
 
 	@Override

@@ -56,12 +56,15 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 		LivingEntity target = owner.getTarget();
 		World world = owner.level;
 
+		if (target == null) return null;
+
 		Vector3d viewVector = owner.getViewVector(1.0F);
 		double offsetX = target.getX() - (owner.getX() + viewVector.x * offset.x());
 		double offsetY = target.getY(0.5D) - (offset.y() + owner.getY(0.5D));
 		double offsetZ = target.getZ() - (owner.getZ() + viewVector.z * offset.z());
 
 		RoboLaserEntity laser = new RoboLaserEntity(world, owner, offsetX, offsetY, offsetZ);
+
 		laser.setPower(15, 0, false);
 		laser.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(),
 				owner.getZ() + viewVector.z * offset.z());
@@ -168,6 +171,11 @@ public class RoboSniperEntity extends AnimatableMonsterEntity {
 	@Override
 	public String getOwnerMDFileName() {
 		return ROBO_SNIPER_MDF_NAME;
+	}
+
+	@Override
+	public boolean isMaxGroupSizeReached(int entityCount) {
+		return entityCount >= 4;
 	}
 
 	@Override

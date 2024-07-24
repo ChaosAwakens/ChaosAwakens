@@ -135,10 +135,22 @@ public class WrappedAnimationController<E extends IAnimatableEntity> {
 	}
 	
 	public double getSyncedProgress() {
-		double adjustedDelta = 50.0D; // server == null ? 50.0D : Math.min(50.0D, Math.max(1, 60.0D - (server.getAverageTickTime() <= 20.0D ? 0 : server.getAverageTickTime())));
+		double adjustedDelta = server == null ? 50.0D : (Math.min(50.0D, Math.max(1, 50.0D / (server.getNextTickTime() - Util.getMillis()))) * animSpeedMultiplier) / 1.5D;
+		double delta = server == null ? 0 : (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / 50.0D) * animSpeedMultiplier;
+		double deltaDiff = Math.abs(Math.abs(adjustedDelta) - Math.abs(delta));
 
-		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / adjustedDelta) * animSpeedMultiplier), (Entity) animatable);
-		return server == null ? 0 : (Math.max(server.getNextTickTime() - Util.getMillis(), 0.0) / adjustedDelta) * animSpeedMultiplier;
+	/*	if (server != null && (animatable instanceof RoboPounderEntity || animatable instanceof RoboWarriorEntity)) {
+			ChaosAwakens.debug("MSPT", server.getAverageTickTime());
+			ChaosAwakens.debug("Next Tick", server.getNextTickTime());
+			ChaosAwakens.debug("Cur Millis", Util.getMillis());
+			ChaosAwakens.debug("Diff", server.getNextTickTime() - Util.getMillis());
+			ChaosAwakens.debug("Adjusted Delta", adjustedDelta);
+			ChaosAwakens.debug("Equation", delta);
+			ChaosAwakens.debug("Delta Diff", deltaDiff);
+		} */
+
+		if (server != null) CANetworkManager.sendEntityTrackingPacket(new AnimationFunctionalProgressPacket(name, ((Entity) animatable).getId(), delta), (Entity) animatable);
+		return server == null ? 0 : delta;
 	}
 	
 	public void updateAnimProgress(double animationProgressDelta) {

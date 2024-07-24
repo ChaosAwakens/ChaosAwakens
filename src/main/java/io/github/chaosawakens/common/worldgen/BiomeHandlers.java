@@ -72,9 +72,9 @@ public class BiomeHandlers {
 
 		// VILLAGE MANIA
 		private static final Consumer<MobSpawnInfoBuilder> VILLAGE_MANIA_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_POUNDER.get(), 2, 1, 1)).creatureGenerationProbability(0.01F).build();
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_WARRIOR.get(), 5, 1, 2)).creatureGenerationProbability(0.011F).build();
-			builder.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_SNIPER.get(), 10, 1, 4)).creatureGenerationProbability(0.012F).build();
+			builder.addSpawn(CAEntityClassifications.ROBO, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_POUNDER.get(), 2, 1, 1)).addMobCharge(CAEntityTypes.ROBO_POUNDER.get(), 0.1D, 0.1D).creatureGenerationProbability(0.001F).build();
+			builder.addSpawn(CAEntityClassifications.ROBO, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_WARRIOR.get(), 5, 1, 2)).addMobCharge(CAEntityTypes.ROBO_WARRIOR.get(), 0.1D, 0.2D).creatureGenerationProbability(0.0011F).build();
+			builder.addSpawn(CAEntityClassifications.ROBO, new MobSpawnInfo.Spawners(CAEntityTypes.ROBO_SNIPER.get(), 10, 1, 4)).addMobCharge(CAEntityTypes.ROBO_SNIPER.get(), 0.1D, 0.4D).creatureGenerationProbability(0.0012F).build();
 		};
 
 		// MINER'S PARADISE

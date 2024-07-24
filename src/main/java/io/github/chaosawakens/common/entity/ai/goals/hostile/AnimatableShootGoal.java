@@ -109,7 +109,7 @@ public class AnimatableShootGoal extends Goal {
 				if (MathUtil.isBetween(shootAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 					if (!this.hasShotProjectile) {
 						World world = this.owner.level;
-						world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
+						if (this.projectileFactory.apply(this.owner, this.projectileOffset) != null) world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
 						this.hasShotProjectile = true;
 					}
 				} else {
@@ -122,7 +122,7 @@ public class AnimatableShootGoal extends Goal {
 			if (MathUtil.isBetween(shootAnim.get().getWrappedAnimProgress(), actionPointTickStart, actionPointTickEnd)) {
 				if (!this.hasShotProjectile) {
 					World world = this.owner.level;
-					world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
+					if (this.projectileFactory.apply(this.owner, this.projectileOffset) != null) world.addFreshEntity(this.projectileFactory.apply(this.owner, this.projectileOffset));
 					this.hasShotProjectile = true;
 				}
 			} else {

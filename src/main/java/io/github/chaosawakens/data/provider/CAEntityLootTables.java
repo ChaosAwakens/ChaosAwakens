@@ -1025,10 +1025,6 @@ public class CAEntityLootTables extends EntityLootTables {
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(CAItems.BUTTER_CANDY.get())
 										.apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
-										.when(KilledByPlayer.killedByPlayer())))
-						.withPool(LootPool.lootPool()
-								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(Items.TOTEM_OF_UNDYING)
 										.when(KilledByPlayer.killedByPlayer()))));
 		add(EntityType.GIANT,
 				LootTable.lootTable()

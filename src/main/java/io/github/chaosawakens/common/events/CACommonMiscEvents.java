@@ -68,6 +68,7 @@ import net.minecraftforge.fml.VersionChecker;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CACommonMiscEvents {
 	private static final String DOWNLOADS = "https://chaosawakens.github.io/downloads";
@@ -77,6 +78,7 @@ public class CACommonMiscEvents {
 		devMultiMap.putAll(UUID.fromString("2668a475-2166-4539-9935-00f087818c4a"), Lists.newArrayList(TextFormatting.GOLD, TextFormatting.YELLOW));// T40ne
 		devMultiMap.putAll(UUID.fromString("8c89a0d3-3271-459d-a8c1-a9d34d53365b"), Lists.newArrayList(TextFormatting.RED, TextFormatting.DARK_RED));// FunkyMonk127
 	});
+	private static final AtomicBoolean HAS_HIT_ROBO_LIMIT = new AtomicBoolean(false);
 
 	@SubscribeEvent
 	public static void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {

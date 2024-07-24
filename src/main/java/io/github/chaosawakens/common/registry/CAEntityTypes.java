@@ -276,15 +276,15 @@ public class CAEntityTypes {
 					.sized(1.0f, 1.5f)
 					.build(ChaosAwakens.prefix("robo_sniper").toString()));
 	public static final RegistryObject<EntityType<RoboWarriorEntity>> ROBO_WARRIOR = ENTITY_TYPES.register("robo_warrior",
-			() -> EntityType.Builder.of(RoboWarriorEntity::new, EntityClassification.MONSTER)
+			() -> EntityType.Builder.of(RoboWarriorEntity::new, CAEntityClassifications.ROBO)
 					.sized(1.63f, 4.0f)
 					.build(ChaosAwakens.prefix("robo_warrior").toString()));
 	public static final RegistryObject<EntityType<RoboPounderEntity>> ROBO_POUNDER = ENTITY_TYPES.register("robo_pounder",
-			() -> EntityType.Builder.of(RoboPounderEntity::new, EntityClassification.MONSTER)
+			() -> EntityType.Builder.of(RoboPounderEntity::new, CAEntityClassifications.ROBO)
 					.sized(4.1F, 6.0F)
 					.build(ChaosAwakens.prefix("robo_pounder").toString()));
 	public static final RegistryObject<EntityType<RoboJefferyEntity>> ROBO_JEFFERY = ENTITY_TYPES.register("robo_jeffery",
-			() -> EntityType.Builder.of(RoboJefferyEntity::new, EntityClassification.MONSTER)
+			() -> EntityType.Builder.of(RoboJefferyEntity::new, CAEntityClassifications.ROBO)
 					.sized(4.2F, 6.8F)
 					.build(ChaosAwakens.prefix("robo_jeffery").toString()));
 
