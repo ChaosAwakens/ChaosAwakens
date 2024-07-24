@@ -106,10 +106,10 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 		setFireOnHit(canCauseFire);
 	}
 	
-	public void changeSpeed(double factor) {
-		this.xPower *= factor;
-		this.yPower *= factor;
-		this.zPower *= factor;
+	public void changeSpeed(double changeFactor) {
+		this.xPower *= changeFactor;
+		this.yPower *= changeFactor;
+		this.zPower *= changeFactor;
 	}
 
 	@Override
