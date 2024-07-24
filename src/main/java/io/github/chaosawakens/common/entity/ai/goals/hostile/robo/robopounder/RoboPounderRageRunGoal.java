@@ -49,6 +49,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	private boolean hasPlayedCrashRestartSound = false;
 	private boolean foundCrashCollision = false;
 	private int targetInterval = 0;
+	private int pathTries = 0;
 	private double base = -0.8D;
 
 	public RoboPounderRageRunGoal(RoboPounderEntity owner, Supplier<SingletonAnimationBuilder> rageBeginAnim, Supplier<SingletonAnimationBuilder> rageRunAnim, Supplier<SingletonAnimationBuilder> rageCooldownAnim, Supplier<SingletonAnimationBuilder> rageRestartAnim, Supplier<SingletonAnimationBuilder> rageCrashAnim, Supplier<SingletonAnimationBuilder> rageCrashRestartAnim, byte rageRunAttackId, int presetMaxCooldown, int probability) {
@@ -114,6 +115,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		this.hasPlayedCrashRestartSound = false;
 		this.foundCrashCollision = false;
 		this.targetInterval = 0;
+		this.pathTries = 0;
 		this.base = -0.8D;
 	}
 	
@@ -159,6 +161,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 		
 		if ((ownerPathNav.isDone() || (relevantLookPos != null && owner.distanceToSqr(relevantLookPos) <= 15.0D)) && isPathingRageRun) this.isPathingRageRun = false;
+		if (rageRunPath == null) pathTries++;
 		
 		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0 || (owner.getNavigation().isStuck())) {
 			owner.stopAnimation(rageRunAnim.get());
@@ -237,7 +240,7 @@ public class RoboPounderRageRunGoal extends Goal {
 	
 	private boolean shouldExitCooldown() { // Inlining this would be a crime to the eyes (Oh The Irony:tm:)
 		if (rageCrashAnim.get().isPlaying()) return rageCrashAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCrashAnim.get().getWrappedAnimLength() / 1.5D, rageCrashAnim.get().getWrappedAnimLength() / 1.167D);
-		else return rageCooldownAnim.get().isPlaying() && rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 1.4D, rageCooldownAnim.get().getWrappedAnimLength() / 1.167D);
+		else return rageCooldownAnim.get().isPlaying() && rageCooldownAnim.get().getWrappedAnimProgress() >= MathHelper.nextDouble(owner.getRandom(), rageCooldownAnim.get().getWrappedAnimLength() / 1.44D, rageCooldownAnim.get().getWrappedAnimLength() / 1.367D);
 	}
 
 	private boolean hasEffectivelyBegunRageRun() {

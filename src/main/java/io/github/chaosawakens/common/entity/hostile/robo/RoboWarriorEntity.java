@@ -115,7 +115,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 		RoboRayEntity ray = new RoboRayEntity(world, owner, offsetX, offsetY, offsetZ);
 		ray.setPower(50, 3, false);
-		ray.changeSpeed(1);
+		ray.changeSpeed(4);
 		ray.setPos(owner.getX() + viewVector.x * offset.x(), owner.getY(0.5D) + offset.y(), owner.getZ() + viewVector.z * offset.z());
 		ray.setShot(true);
 
@@ -152,7 +152,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public <E extends IAnimatableEntity> PlayState mainPredicate(AnimationEvent<E> event) {
-		return !attackController.getWrappedController().getAnimationState().equals(AnimationState.Stopped) || isShielded() || isShieldDestroyed() || isShieldGoingDown() || isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
+		return !attackController.getWrappedController().getAnimationState().equals(AnimationState.Stopped) || !shieldController.getWrappedController().getAnimationState().equals(AnimationState.Stopped) || isDeadOrDying() ? PlayState.STOP : PlayState.CONTINUE;
 	}
 	
 	public <E extends IAnimatableEntity> PlayState ambiencePredicate(AnimationEvent<E> event) {
@@ -160,11 +160,11 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	}
 	
 	public <E extends IAnimatableEntity> PlayState attackPredicate(AnimationEvent<E> event) {
-		return isDeadOrDying() || isShielded() || isShieldDestroyed() || isShieldGoingDown() ? PlayState.STOP : PlayState.CONTINUE;
+		return isDeadOrDying() || !shieldController.getWrappedController().getAnimationState().equals(AnimationState.Stopped) ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState shieldPredicate(AnimationEvent<E> event) {
-		return PlayState.CONTINUE;
+		return !attackController.getWrappedController().getAnimationState().equals(AnimationState.Stopped) ? PlayState.STOP : PlayState.CONTINUE;
 	}
 
 	public <E extends IAnimatableEntity> PlayState walkPredicate(AnimationEvent<E> event) {
@@ -194,7 +194,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 				return super.canUse() && !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 10, 0) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, CHARGED_SHOT_ATTACK_ID, () -> chargedLaserAttackAnim, LASER_FACTORY_CHARGED, LASER_OFFSET, 73.5D, 75.6D, 20, 100, 1, 0) {
 
 			@Override
 			public boolean canUse() {
@@ -205,7 +205,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 						&& !isShielded() && !isShieldDestroyed() && !isShieldGoingDown();
 			}
 		});
-		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 7, 0) {
+		this.targetSelector.addGoal(0, new AnimatableShootGoal(this, LASER_BURST_ATTACK_ID, () -> burstLaserAttackAnim, LASER_FACTORY_BURST, LASER_BURST_OFFSET, 19.6D, 24.4D, 20, 80, 1, 0) {
 			private boolean shotSecond = false;
 
 			@Override
