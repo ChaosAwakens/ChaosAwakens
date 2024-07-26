@@ -1,0 +1,33 @@
+plugins {
+    id("org.spongepowered.gradle.vanilla")
+}
+base {
+    archivesName = "${mod_name}-${minecraft_version}-common"
+}
+
+minecraft {
+    version(minecraft_version)
+
+    if (file("src/main/resources/${mod_id}.accesswidener").exists()){
+        accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
+    }
+}
+
+dependencies {
+    // Base
+    compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
+
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = base.archivesName.get()
+            version = mod_version
+
+            artifact jar
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}

@@ -1,0 +1,168 @@
+plugins {
+    id("net.minecraftforge.gradle")
+    id("org.spongepowered.mixin")
+    id("org.parchmentmc.librarian.forgegradle") version("${forge_mappings_channel_plugin_version}")
+    id("me.modmuss50.mod-publish-plugin") version("${publisher_plugin_version}")
+}
+
+base {
+    archivesName = "${mod_name}-${minecraft_version}-forge"
+}
+
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
+}
+
+minecraft {
+    mappings channel: "${forge_mappings_channel}", version: "${forge_mappings_channel_version}"
+
+    copyIdeResources = true
+
+    if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
+        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            taskName "${forge_client_taskname}"
+
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
+
+            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch"
+
+            mods {
+                modClientRun {
+                    source sourceSets.main
+                    source project(":common").sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            taskName "${forge_server_taskname}"
+
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
+
+            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch"
+
+            mods {
+                modServerRun {
+                    source sourceSets.main
+                    source project(":common").sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            taskName "${forge_data_taskname}"
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch"
+
+            args "--mod", mod_id, "--all", "--output", file('src/generated/resources/'), "--existing", file('src/main/resources/')
+            mods {
+                modDataRun {
+                    source sourceSets.main
+                    source project(":common").sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+dependencies {
+    // Base
+    minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+    annotationProcessor("org.spongepowered:mixin:${mixin_version}:processor")
+
+    compileOnly project(":common")
+
+    // Dependencies (Mandatory)
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${forge_geckolib_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
+
+    // Dependencies (Optional)
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${forge_jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${forge_jei_version}")
+
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${forge_jei_version}")
+
+    implementation fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:${forge_jeed_version}")
+
+    implementation fg.deobf("curse.maven:configured-457570:${forge_configured_version}")
+    implementation fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_version}")
+    implementation fg.deobf("curse.maven:gamemenumodoption-353051:${forge_gmmo_version}")
+
+    implementation fg.deobf("curse.maven:jade-324717:${forge_jade_version}")
+
+    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${forge_appleskin_version}:api")
+    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${forge_appleskin_version}")
+}
+
+tasks.withType(JavaCompile).configureEach { source(project(":common").sourceSets.main.allSource) }
+tasks.withType(Javadoc).configureEach { source(project(":common").sourceSets.main.allJava) }
+tasks.named("sourcesJar", Jar) { from(project(":common").sourceSets.main.allSource) }
+
+processResources {
+    from project(":common").sourceSets.main.resources
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = base.archivesName.get()
+            version = mod_version
+
+            artifact jar
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+publishMods {
+    file = jar.archiveFile
+    changelog = file("CHANGELOG.md").getText()
+    version = "${minecraft_version}-${mod_version}"
+    displayName = "${mod_name} v${minecraft_version}-${mod_version}"
+    type = STABLE
+
+    modLoaders.add("forge")
+
+    curseforge {
+        projectId = "475414"
+        projectSlug = "chaos-awakens"
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        announcementTitle = "New Chaos Awakens CurseForge Release"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+
+    modrinth {
+        projectId = "frSNDQkA"
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        announcementTitle = "New Chaos Awakens Modrinth Release"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+}

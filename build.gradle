@@ -1,0 +1,220 @@
+plugins {
+    id("fabric-loom") version("${fabric_loom_version}") apply(false)
+    id("net.minecraftforge.gradle") version("${forge_gradle_version}") apply(false)
+    id("org.spongepowered.gradle.vanilla") version("${spongepowered_gradle_version}") apply(false)
+    id("org.spongepowered.mixin") version("${mixin_plugin_version}") apply(false)
+    id("me.modmuss50.mod-publish-plugin") version("${publisher_plugin_version}") apply(false)
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "maven-publish"
+    apply plugin: "idea"
+
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+    java.withSourcesJar()
+    java.withJavadocJar()
+
+    jar {
+        from(rootProject.file("LICENSE")) {
+            rename { "${it}_${mod_name}" }
+        }
+
+        manifest {
+            attributes([
+                    'Specification-Title'     : mod_name,
+                    'Specification-Vendor'    : mod_credits,
+                    'Specification-Version'   : mod_version,
+                    'Implementation-Title'    : mod_name,
+                    'Implementation-Version'  : mod_version,
+                    'Implementation-Vendor'   : mod_credits,
+                    'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                    'Timestamp'               : System.currentTimeMillis(),
+                    'Built-On-Java'           : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
+                    'Built-On-Minecraft'      : minecraft_version
+            ])
+        }
+    }
+
+    sourcesJar {
+        from(rootProject.file("LICENSE")) {
+            rename { "${it}_${mod_name}" }
+        }
+    }
+
+    repositories {
+        mavenCentral()
+
+        maven {
+            name = "Spongepowered Maven"
+            url = "https://repo.spongepowered.org/repository/maven-public/"
+        }
+
+        maven {
+            name = 'GeckoLib'
+            url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            content {
+                includeGroupByRegex("software\\.bernie.*")
+                includeGroup("com.eliotlash.mclib")
+            }
+        }
+
+        maven {
+            name = "CurseMaven"
+            url = "https://www.cursemaven.com"
+        }
+
+        maven {
+            name = "Modrinth"
+            url = "https://api.modrinth.com/maven"
+        }
+
+        maven {
+            name = "CubicInterpolation Maven"
+            url = "https://cubicinterpolation.net/maven/"
+        }
+
+        maven {
+            name = "BlameJared maven"
+            url = "https://maven.blamejared.com/"
+        }
+
+        maven {
+            name = "RyanLiptak Maven"
+            url = "https://maven.ryanliptak.com/"
+        }
+
+        maven {
+            name = "TerraformersMC Maven"
+            url = "https://maven.terraformersmc.com/releases"
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.encoding = 'UTF-8'
+        it.options.getRelease().set(17)
+    }
+
+    processResources {
+        def expandProps = [
+                // Base (Common)
+                "mod_name"                              : mod_name,
+                "mod_authors"                           : mod_authors,
+                "mod_credits"                           : mod_credits,
+                "mod_id"                                : mod_id,
+                "mod_license"                           : mod_license,
+                "mod_description"                       : mod_description,
+                "mod_version"                           : mod_version,
+                "mod_group"                             : mod_group,
+
+                "minecraft_version"                     : minecraft_version,
+
+                "publisher_plugin_version"              : publisher_plugin_version,
+
+                // Base (Forge)
+                "issue_tracker_url"                     : issue_tracker_url,
+                "display_url"                           : display_url,
+                "auto_update_url"                       : auto_update_url,
+
+                "mod_logo_path"                         : mod_logo_path,
+
+                "forge_version"                         : forge_version,
+                "mixin_version"                         : mixin_version,
+
+                "forge_client_taskname"                 : forge_client_taskname,
+                "forge_server_taskname"                 : forge_server_taskname,
+                "forge_data_taskname"                   : forge_data_taskname,
+
+                "forge_mappings_channel"                : forge_mappings_channel,
+                "forge_mappings_channel_version"        : forge_mappings_channel_version,
+                "forge_mappings_channel_plugin_version" : forge_mappings_channel_plugin_version,
+
+                "forge_loader_version_range"            : forge_loader_version_range,
+                "forge_version_range"                   : forge_version_range,
+                "minecraft_version_range"               : minecraft_version_range,
+
+                // Base (Fabric)
+                "homepage_url"                          : homepage_url,
+                "source_code_url"                       : source_code_url,
+
+                "mod_icon_path"                         : mod_icon_path,
+
+                "fabric_common_entrypoint"              : fabric_common_entrypoint,
+                "fabric_client_entrypoint"              : fabric_client_entrypoint,
+                "fabric_datagen_entrypoint"             : fabric_datagen_entrypoint,
+
+                "fabric_loader_version"                 : fabric_loader_version,
+
+                "fabric_mappings_channel"               : fabric_mappings_channel,
+                "fabric_mappings_channel_version"       : fabric_mappings_channel_version,
+
+                "fabric_client_taskname"                : fabric_client_taskname,
+                "fabric_server_taskname"                : fabric_server_taskname,
+                "fabric_data_taskname"                  : fabric_data_taskname,
+
+                "fabric_loader_version_range"           : fabric_loader_version_range,
+                "fabric_minecraft_version_range"        : fabric_minecraft_version_range,
+
+                // Mandatory (Forge)
+                "forge_geckolib_version"                : forge_geckolib_version,
+
+                "forge_geckolib_version_range"          : forge_geckolib_version_range,
+
+                // Mandatory (Fabric)
+                "fabric_api_version_range"              : fabric_api_version_range,
+                "fabric_geckolib_version"               : fabric_geckolib_version,
+
+                // Optional (Forge)
+                "forge_jei_version"                     : forge_jei_version,
+                "forge_jeed_version"                    : forge_jeed_version,
+
+                "forge_jei_version_range"               : forge_jei_version_range,
+                "forge_jeed_version_range"              : forge_jeed_version_range,
+
+                "forge_configured_version"              : forge_configured_version,
+                "forge_catalogue_version"               : forge_catalogue_version,
+                "forge_gmmo_version"                    : forge_gmmo_version,
+
+                "forge_configured_version_range"        : forge_configured_version_range,
+                "forge_catalogue_version_range"         : forge_catalogue_version_range,
+                "forge_gmmo_version_range"              : forge_gmmo_version_range,
+
+                "forge_jade_version"                    : forge_jade_version,
+                "forge_appleskin_version"               : forge_appleskin_version,
+
+                "forge_jade_version_range"              : forge_jade_version_range,
+                "forge_appleskin_version_range"         : forge_appleskin_version_range,
+
+                // Optional (Fabric)
+                "fabric_jei_version"                    : fabric_jei_version,
+                "fabric_appleskin_version"              : fabric_appleskin_version,
+                "fabric_modmenu_version"                : fabric_modmenu_version,
+
+                "fabric_jei_version_range"              : fabric_jei_version_range,
+                "fabric_appleskin_version_range"        : fabric_appleskin_version_range,
+                "fabric_modmenu_version_range"          : fabric_modmenu_version_range
+        ]
+
+        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
+            expand expandProps
+        }
+
+        inputs.properties(expandProps)
+    }
+
+    tasks.withType(GenerateModuleMetadata).configureEach {
+        enabled = false
+    }
+
+    publishing {
+        repositories {
+            maven {
+                name = ""
+                url = ""
+
+                credentials {
+                }
+            }
+        }
+    }
+}

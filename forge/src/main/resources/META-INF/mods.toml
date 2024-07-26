@@ -1,0 +1,83 @@
+modLoader = "javafml"
+loaderVersion = "${forge_loader_version_range}"
+license = "${mod_license}"
+issueTrackerURL = "${issue_tracker_url}"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+updateJSONURL="${auto_update_url}"
+displayURL="${display_url}"
+logoFile = "${mod_logo_path}"
+credits = "${mod_credits}"
+authors = "${mod_authors}"
+description = '''${mod_description}'''
+
+# Base
+[[dependencies.${mod_id}]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "${forge_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.${mod_id}]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "${minecraft_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+# Dependencies (Mandatory)
+[[dependencies.${mod_id}]]
+    modId = "geckolib"
+    mandatory = true
+    versionRange = "${forge_geckolib_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+# Dependencies (Optional)
+#   COMMON
+[[dependencies.${mod_id}]]
+    modId="jei"
+    mandatory=false
+    versionRange="${forge_jei_version_range}"
+    ordering="BEFORE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="jeed"
+    mandatory=false
+    versionRange="${forge_jeed_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="jade"
+    mandatory=false
+    versionRange="${forge_jade_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+#   CLIENT
+[[dependencies.${mod_id}]]
+    modId="appleskin"
+    mandatory=false
+    versionRange="${forge_appleskin_version_range}"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="catalogue"
+    mandatory=false
+    versionRange="${forge_catalogue_version_range}"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="gamemenumodoption"
+    mandatory=false
+    versionRange="${forge_gmmo_version_range}"
+    ordering="NONE"
+    side="CLIENT"

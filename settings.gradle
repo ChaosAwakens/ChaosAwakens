@@ -1,0 +1,32 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+
+        maven {
+            name = "Forge"
+            url = "https://maven.minecraftforge.net/"
+        }
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
+        }
+        maven {
+            name = "Sponge Snapshots"
+            url = "https://repo.spongepowered.org/repository/maven-public/"
+        }
+        maven {
+            name = "Parchment MC"
+            url = "https://maven.parchmentmc.org"
+        }
+    }
+}
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version("0.8.0")
+}
+
+rootProject.name = "ChaosAwakens"
+
+include("common")
+include("fabric")
+include("forge")

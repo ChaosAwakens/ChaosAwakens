@@ -1,0 +1,128 @@
+plugins {
+    id("fabric-loom")
+    id("me.modmuss50.mod-publish-plugin") version("${publisher_plugin_version}")
+}
+
+base {
+    archivesName = "${mod_name}-${minecraft_version}-fabric"
+
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    // Base
+    minecraft("com.mojang:minecraft:${minecraft_version}")
+    mappings(loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:${fabric_mappings_channel}-${fabric_mappings_channel_version}@zip")
+    })
+
+    modImplementation("net.fabricmc:fabric-loader:${fabric_loader_version}")
+
+    implementation project(":common")
+
+    // Dependencies (Mandatory)
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${fabric_api_version}")
+
+    modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${fabric_geckolib_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
+
+    // Dependencies (Optional)
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${fabric_jei_version}")
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${fabric_jei_version}")
+
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${fabric_jei_version}")
+
+    modCompileOnly("squeek.appleskin:appleskin-fabric:${fabric_appleskin_version}:api") { transitive = false }
+
+    modImplementation("com.terraformersmc:modmenu:${fabric_modmenu_version}")
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        mod_id {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+
+    if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
+        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.accesswidener"))
+    }
+
+    mixin { defaultRefmapName.set("${mod_id}.refmap.json") }
+
+    runs {
+        client {
+            client()
+            setConfigName("${fabric_client_taskname}")
+            ideConfigGenerated(true)
+            runDir("run")
+        }
+        server {
+            server()
+            serverWithGui()
+            setConfigName("${fabric_server_taskname}")
+            ideConfigGenerated(true)
+            runDir("run")
+        }
+        datagen {
+            inherit server
+            setConfigName("${fabric_data_taskname}")
+
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.modid=${mod_id}"
+
+            runDir "build/datagen"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach { source(project(":common").sourceSets.main.allSource) }
+tasks.withType(Javadoc).configureEach { source(project(":common").sourceSets.main.allJava) }
+tasks.named("sourcesJar", Jar) { from(project(":common").sourceSets.main.allSource) }
+
+processResources {
+    from project(":common").sourceSets.main.resources
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = base.archivesName.get()
+            version = mod_version
+
+            from components.java
+        }
+    }
+}
+
+publishMods {
+    file = jar.archiveFile
+    changelog = file("CHANGELOG.md").getText()
+    version = "${minecraft_version}-${mod_version}"
+    displayName = "${mod_name} v${minecraft_version}-${mod_version}"
+    type = STABLE
+
+    modLoaders.add("fabric")
+
+    curseforge {
+        projectId = "475414"
+        projectSlug = "chaos-awakens"
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        announcementTitle = "New Chaos Awakens CurseForge Release"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+
+    modrinth {
+        projectId = "frSNDQkA"
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        announcementTitle = "New AdvancedAnimationUtil Modrinth Release"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+}
