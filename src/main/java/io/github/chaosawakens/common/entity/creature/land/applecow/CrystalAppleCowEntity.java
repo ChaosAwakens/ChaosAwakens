@@ -5,6 +5,7 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.util.EntityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -25,12 +26,15 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.Random;
 
 public class CrystalAppleCowEntity extends AnimatableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -146,6 +150,10 @@ public class CrystalAppleCowEntity extends AnimatableAnimalEntity {
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
+	}
+
+	public static boolean checkCrystalAppleCowSpawnRules(EntityType<? extends AnimalEntity> pAnimal, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
+		return pLevel.getBlockState(pPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get()) && pLevel.getRawBrightness(pPos, 0) > 8;
 	}
 
 	@Override

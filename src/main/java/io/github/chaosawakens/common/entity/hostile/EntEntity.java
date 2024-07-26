@@ -190,7 +190,7 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSource) {
-		return CASoundEvents.ENT_DAMAGE.get();
+		return isDeadOrDying() ? CASoundEvents.ENT_DEATH.get() : CASoundEvents.ENT_DAMAGE.get();
 	}
 
 	@Override
@@ -200,13 +200,6 @@ public class EntEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void playStepSound(BlockPos blockPos, BlockState blockState) {
-	}
-
-	@Override
-	protected void playHurtSound(DamageSource pSource) {
-		SoundEvent hurtSound = getHurtSound(pSource);
-
-		if (hurtSound != null) playSound(hurtSound, 0.2F, getVoicePitch());
 	}
 
 	@Override

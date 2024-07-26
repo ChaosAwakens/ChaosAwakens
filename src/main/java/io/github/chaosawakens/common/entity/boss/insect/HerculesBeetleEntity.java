@@ -460,7 +460,7 @@ public class HerculesBeetleEntity extends AnimatableMonsterEntity {
         SoundEvent defenseDamageSound = CASoundEvents.HERCULES_BEETLE_DAMAGE_DEFENSE.get();
         SoundEvent offenseDamageSound = CASoundEvents.HERCULES_BEETLE_DAMAGE_OFFENSE.get();
 
-        return getHealth() <= 80.0F ? criticalDamageSound : offenseDamageSound;
+        return isDeadOrDying() ? CASoundEvents.HERCULES_BEETLE_DEATH.get() : getHealth() <= 80.0F ? criticalDamageSound : offenseDamageSound;
     }
 
     @Override

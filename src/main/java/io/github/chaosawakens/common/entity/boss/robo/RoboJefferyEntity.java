@@ -334,7 +334,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		SoundEvent leapAttackingDamageSound = CASoundEvents.ROBO_JEFFERY_DAMAGE_V2.get();
 		float lastDamageAmount = getLastDamageAmount();
 
-		return lastDamageAmount >= 50.0F ? criticalHitDamageSound : getAttackID() == SMASH_ATTACK_ID ? smashAttackingDamageSound : getAttackID() == LEAP_ATTACK_ID ? leapAttackingDamageSound : standardDamageSound;
+		return isDeadOrDying() ? CASoundEvents.ROBO_JEFFERY_DEATH.get() : lastDamageAmount >= 50.0F ? criticalHitDamageSound : getAttackID() == SMASH_ATTACK_ID ? smashAttackingDamageSound : getAttackID() == LEAP_ATTACK_ID ? leapAttackingDamageSound : standardDamageSound;
 	}
 
 	@Override

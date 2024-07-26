@@ -37,6 +37,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -439,6 +440,16 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		setShieldDestroyed(false);
 
 		super.tickDeath();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+		return isDeadOrDying() ? CASoundEvents.ROBO_WARRIOR_DEATH.get() : CASoundEvents.ROBO_WARRIOR_DAMAGE.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return CASoundEvents.ROBO_WARRIOR_DEATH.get();
 	}
 
 	@Override

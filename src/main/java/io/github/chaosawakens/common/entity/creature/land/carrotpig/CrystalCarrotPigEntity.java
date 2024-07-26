@@ -5,14 +5,17 @@ import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.base.AnimatableRideableAnimalEntity;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.common.util.EntityUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
@@ -29,12 +32,15 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.Random;
 
 public class CrystalCarrotPigEntity extends AnimatableRideableAnimalEntity {
 	private final AnimationFactory factory = new AnimationFactory(this);
@@ -131,6 +137,10 @@ public class CrystalCarrotPigEntity extends AnimatableRideableAnimalEntity {
 
 	public void setPanicking(boolean panicking) {
 		this.entityData.set(PANICKING, panicking);
+	}
+
+	public static boolean checkCrystalCarrotPigSpawnRules(EntityType<? extends AnimalEntity> pAnimal, IWorld pLevel, SpawnReason pSpawnType, BlockPos pPos, Random pRandom) {
+		return pLevel.getBlockState(pPos.below()).is(CABlocks.CRYSTAL_GRASS_BLOCK.get()) && pLevel.getRawBrightness(pPos, 0) > 8;
 	}
 
 	@Override

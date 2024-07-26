@@ -366,6 +366,18 @@
       "chaosawakens:entity/hostile/robo/robowarrior/walk"
     ]
   },
+  "entity.robo_warrior.death": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.death",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/death"
+    ]
+  },
+  "entity.robo_warrior.damage": {
+    "subtitle": "subtitles.chaosawakens.entity.robo_warrior.damage",
+    "sounds": [
+      "chaosawakens:entity/hostile/robo/robowarrior/damage/damage"
+    ]
+  },
   "entity.robo_warrior.uppercut": {
     "subtitle": "subtitles.chaosawakens.entity.robo_warrior.uppercut",
     "sounds": [
@@ -418,7 +430,10 @@
   "entity.robo_laser.hit": {
     "subtitle": "subtitles.chaosawakens.entity.robo_laser.hit",
     "sounds": [
-      "chaosawakens:entity/projectile/robolaser/hit"
+      {
+        "name": "chaosawakens:entity/projectile/robolaser/hit",
+        "attenuation_distance": 75
+      }
     ]
   },
 

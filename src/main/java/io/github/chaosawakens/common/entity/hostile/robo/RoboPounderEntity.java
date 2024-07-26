@@ -559,24 +559,24 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 		if (updatedHealth <= 50.0F && !hasPlayedTransitionDamageSound) {
 			hasPlayedTransitionDamageSound = true;
 
-			return transitionDamageSound;
+			return isDeadOrDying() ? CASoundEvents.ROBO_POUNDER_DEATH.get() : transitionDamageSound;
 		} else if (getHealth() > 50.0F && hasPlayedTransitionDamageSound) {
 			hasPlayedTransitionDamageSound = false;
 
-			return defaultDamageSound;
+			return isDeadOrDying() ? CASoundEvents.ROBO_POUNDER_DEATH.get() : defaultDamageSound;
 		}
 
 		if (updatedHealth <= getMaxHealth() / 2 && !hasPlayedHalfHealthDamageSound) {
 			hasPlayedHalfHealthDamageSound = true;
 
-			return halfHealthDamageSound;
+			return isDeadOrDying() ? CASoundEvents.ROBO_POUNDER_DEATH.get() : halfHealthDamageSound;
 		} else if (getHealth() > getMaxHealth() / 2 && hasPlayedHalfHealthDamageSound) {
 			hasPlayedHalfHealthDamageSound = false;
 
-			return defaultDamageSound;
+			return isDeadOrDying() ? CASoundEvents.ROBO_POUNDER_DEATH.get() : defaultDamageSound;
 		}
 
-		return defaultDamageSound;
+		return isDeadOrDying() ? CASoundEvents.ROBO_POUNDER_DEATH.get() : defaultDamageSound;
 	}
 
 	@Override
