@@ -1,5 +1,5 @@
 # Chaos Awakens
-Chaos Awakens is a spiritual successor of both the very iconic mod [OreSpawn](https://www.orespawn.com/download/), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
+Chaos Awakens is a remaster of both the very iconic mod [OreSpawn](https://www.orespawn.com/download/) and [SoulsOfTheFallen's Chaos Awakens mod pack](https://web.archive.org/web/20180314164908/http://www.dangerzonegame.net/mods.html), built from the ground up. This is the branch for the 1.16.5 version for Minecraft Forge.
 
 ## Download
 You can download the mod at our website, which is located [here](https://chaosawakens.github.io/). The source code for our website is located [here](https://github.com/ChaosAwakens/chaosawakens.github.io)
