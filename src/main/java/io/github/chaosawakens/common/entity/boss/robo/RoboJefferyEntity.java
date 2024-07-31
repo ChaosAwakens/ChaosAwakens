@@ -389,6 +389,7 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		if (!isAttacking() && !isDeadOrDying() && getHealth() > 50.0F) playAnimation(idleExtrasAnim, false);
 		if (getHealth() <= 50.0F && !isDeadOrDying()) playAnimation(lowHealthAnim, false);
 		else stopAnimation(lowHealthAnim);
+
 		if (isDeadOrDying()) {
 			stopAnimation(idleExtrasAnim);
 			stopAnimation(highHealthAnim);
