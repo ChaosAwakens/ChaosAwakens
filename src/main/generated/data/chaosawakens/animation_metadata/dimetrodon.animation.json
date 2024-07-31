@@ -2,8 +2,8 @@
   "anim_file_loc": "chaosawakens:animations/entity/neutral/land/dimetrodon.animation.json",
   "animations": [
     {
-      "animation_name": "Swim",
-      "animation_length": 1.8,
+      "animation_name": "Idle",
+      "animation_length": 3.52,
       "loop_type": "LOOP"
     },
     {
@@ -12,8 +12,8 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 3.52,
+      "animation_name": "Swim",
+      "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {

@@ -89,7 +89,7 @@ public class RoboRayEntity extends DamagingProjectileEntity implements IAnimatab
 
 		playSound(CASoundEvents.ROBO_RAY_HIT.get(), 1.0F, 1.0F);
 		
-		if (getExplosivePower() > 0.0F) level.explode(this, getX(), getY(), getZ(), getExplosivePower(), fireOnHit(), ForgeEventFactory.getMobGriefingEvent(level, getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+		if (getExplosivePower() > 0.0F && !level.isClientSide) level.explode(this, getX(), getY(), getZ(), getExplosivePower(), fireOnHit(), ForgeEventFactory.getMobGriefingEvent(level, getOwner()) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 	}
 	
 	@Override

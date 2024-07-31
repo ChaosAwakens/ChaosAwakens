@@ -217,6 +217,8 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 			
 			if (getDeathAnim().hasAnimationFinished()) {
 				remove();
+				this.deathTime = Integer.MAX_VALUE;
+		//		EntityUtil.handleAnimatableDeath(this, lastValidDamageSource, (owner) -> dropAllDeathLoot(lastValidDamageSource));
 				
 				for (int i = 0; i < 20; ++i) {
 					double xOffset = this.random.nextGaussian() * 0.02D;

@@ -35,6 +35,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -437,6 +438,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 		setShielded(false);
 		setStoredDamage(0);
 		setShieldDamage(0);
+		setShieldActivationTime(0);
 		setShieldDestroyed(false);
 
 		super.tickDeath();

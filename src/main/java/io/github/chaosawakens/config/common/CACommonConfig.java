@@ -206,7 +206,7 @@ public class CACommonConfig {
 		builder.pop(2);
 		
 		enableAutoEnchanting = builder
-				.comment("If disabled, auto-enchanted items will be able to be enchanted manually.")
+				.comment("If disabled, auto-enchanted items will have to be enchanted manually.")
 				.define("Auto-enchant specific tools and weapons", true);
 		builder.pop();
 		

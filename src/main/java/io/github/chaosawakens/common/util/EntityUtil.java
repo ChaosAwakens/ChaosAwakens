@@ -476,7 +476,7 @@ public final class EntityUtil {
 				if (livingAnimatable.isSleeping()) livingAnimatable.stopSleeping();
 			}
 
-			if (targetAnimatable.getDeathAnim().hasAnimationFinished()) {
+			if (targetAnimatable.getDeathAnim().hasAnimationFinished() || livingAnimatable.deathTime == Integer.MAX_VALUE) {
 				livingAnimatable.dead = true;
 				livingAnimatable.getCombatTracker().recheckStatus();
 

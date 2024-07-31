@@ -64,7 +64,7 @@ public class EnchantedPickaxeItem extends CAPickaxeItem implements IAutoEnchanta
 	public void onCraftedBy(ItemStack itemStack, World world, PlayerEntity playerEntity) {
 		if (CAConfigManager.MAIN_COMMON.enableAutoEnchanting.get()) {
 			for (EnchantmentData curEnch : enchantments.get()) {
-				if (curEnch.level == 0) itemStack.enchant(curEnch.enchantment, curEnch.level);
+				itemStack.enchant(curEnch.enchantment, curEnch.level);
 			}
 		}
 	}

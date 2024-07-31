@@ -2,28 +2,23 @@
   "anim_file_loc": "chaosawakens:animations/entity/boss/insect/hercules_beetle.animation.json",
   "animations": [
     {
-      "animation_name": "Idle",
-      "animation_length": 3.52,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Body Slam Attack",
       "animation_length": 25.08,
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Roar Defense Mechanism",
-      "animation_length": 4.28,
+      "animation_name": "Leap",
+      "animation_length": 2.76,
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Awakened",
-      "animation_length": 7.28,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Idle",
+      "animation_length": 3.52,
+      "loop_type": "LOOP"
     },
     {
-      "animation_name": "Munch Attack",
-      "animation_length": 1.8,
+      "animation_name": "Docile",
+      "animation_length": 14.32,
       "loop_type": "LOOP"
     },
     {
@@ -32,13 +27,13 @@
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Ram Attack",
-      "animation_length": 1.25,
-      "loop_type": "PLAY_ONCE"
+      "animation_name": "Death (Fallen)",
+      "animation_length": 3.70833,
+      "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Death (Midair, Falling)",
-      "animation_length": 1.7976931348623157E308,
+      "animation_name": "Munch Attack",
+      "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
@@ -47,29 +42,19 @@
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Death (Midair)",
-      "animation_length": 0.91667,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
       "animation_name": "Walk",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Leap",
-      "animation_length": 2.76,
+      "animation_name": "Death (Midair, Falling)",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Death (Midair)",
+      "animation_length": 0.91667,
       "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Docile",
-      "animation_length": 14.32,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Fly",
-      "animation_length": 1.8,
-      "loop_type": "LOOP"
     },
     {
       "animation_name": "Death",
@@ -77,9 +62,24 @@
       "loop_type": "HOLD_ON_LAST_FRAME"
     },
     {
-      "animation_name": "Death (Fallen)",
-      "animation_length": 3.70833,
-      "loop_type": "HOLD_ON_LAST_FRAME"
+      "animation_name": "Awakened",
+      "animation_length": 7.28,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Ram Attack",
+      "animation_length": 1.25,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Roar Defense Mechanism",
+      "animation_length": 4.28,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Fly",
+      "animation_length": 1.8,
+      "loop_type": "LOOP"
     }
   ]
 }

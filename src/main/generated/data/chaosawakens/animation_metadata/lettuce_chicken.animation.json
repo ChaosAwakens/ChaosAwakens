@@ -7,7 +7,7 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Walk",
+      "animation_name": "Flap",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
@@ -17,12 +17,12 @@
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Flap",
+      "animation_name": "Sit",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Sit",
+      "animation_name": "Walk",
       "animation_length": 1.8,
       "loop_type": "LOOP"
     }
