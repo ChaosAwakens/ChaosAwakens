@@ -471,19 +471,19 @@ public final class EntityUtil {
 		LivingEntity killerEntity = livingAnimatable.getKillCredit();
 
 		if (!livingAnimatable.dead) {
-			if (targetAnimatable.getDeathAnim().getWrappedAnimProgress() == 0) {
-				if (livingAnimatable.deathScore >= 0 && killerEntity != null)  killerEntity.awardKillScore(livingAnimatable, livingAnimatable.deathScore, deathCause);
-				if (livingAnimatable.isSleeping()) livingAnimatable.stopSleeping();
-			}
-
-			if (targetAnimatable.getDeathAnim().hasAnimationFinished() || livingAnimatable.deathTime == Integer.MAX_VALUE) {
+			if (livingAnimatable.isSleeping())
+				livingAnimatable.stopSleeping();
+			if (targetAnimatable.getDeathAnim().hasAnimationFinished()) {
+				if (livingAnimatable.deathScore >= 0 && killerEntity != null) 
+					killerEntity.awardKillScore(livingAnimatable, livingAnimatable.deathScore, deathCause);
 				livingAnimatable.dead = true;
 				livingAnimatable.getCombatTracker().recheckStatus();
 
 				if (livingAnimatable.level instanceof ServerWorld) {
 					ServerWorld curServerWorld = (ServerWorld) livingAnimatable.level;
 
-					if (causeEntity != null) causeEntity.killed(curServerWorld, livingAnimatable);
+					if (causeEntity != null)
+						causeEntity.killed(curServerWorld, livingAnimatable);
 
 					extraProtectedDeathFunctions.accept(livingAnimatable);
 					livingAnimatable.createWitherRose(killerEntity);

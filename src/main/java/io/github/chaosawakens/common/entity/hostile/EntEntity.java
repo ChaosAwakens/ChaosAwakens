@@ -127,10 +127,10 @@ public class EntEntity extends AnimatableMonsterEntity {
 			}
 		});
 		this.goalSelector.addGoal(0, new AnimatableMoveToTargetGoal(this, 1.1, 3));
-		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 20.5D, 22.4D, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).soundOnStart(CASoundEvents.ENT_TREE_PUNCH::get, 0.4F));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 8.0D, 1, 18, false, false, true, 60).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 8.0D, 2, 10, false, false, true, 45).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
-		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 8.0D, 4, 2, false, false, true, 35).soundOnStart(CASoundEvents.ENT_ENT_SMASH::get, 1.0F));
+		this.targetSelector.addGoal(0, new AnimatableMeleeGoal(this, null, PUNCH_ATTACK_ID, 20.5D, 22.4D, 2).pickBetweenAnimations(() -> leftPunchAnim, () -> rightPunchAnim).soundOnStart(() -> getPunchSound(), 0.4F));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 8.0D, 1, 18, false, false, true, 60).soundOnStart(() -> getSmashSound(), 1.0F));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 8.0D, 2, 10, false, false, true, 45).soundOnStart(() -> getSmashSound(), 1.0F));
+		this.targetSelector.addGoal(0, new AnimatableAOEGoal(this, () -> smashAttackAnim, SMASH_ATTACK_ID, 21.6D, 22.6D, 8.0D, 4, 2, false, false, true, 35).soundOnStart(() -> getSmashSound(), 1.0F));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, false));
@@ -181,21 +181,214 @@ public class EntEntity extends AnimatableMonsterEntity {
 	@Override
 	protected void onSpawn(boolean hasAlreadyDied) {
 		if (!hasAlreadyDied && level.isClientSide) {
-			SoundUtil.playIdleSoundAsTickable(CASoundEvents.ENT_IDLE.get(), this);
-			SoundUtil.playWalkingSoundAsTickable(CASoundEvents.ENT_WALK.get(), this);
+			SoundUtil.playIdleSoundAsTickable(getIdleSound(), this);
+			SoundUtil.playWalkingSoundAsTickable(getWalkSound(), this);
 		}
 
 		if (!level.isClientSide) setMovementSpeed(0.325D);
 	}
+	
+	protected SoundEvent getIdleSound() {
+		switch (getEntType()) {
+		case ACACIA:
+			return CASoundEvents.ACACIA_ENT_IDLE.get();
+		case APPLE:
+			return CASoundEvents.APPLE_ENT_IDLE.get();
+		case BIRCH:
+			return CASoundEvents.BIRCH_ENT_IDLE.get();
+		case CHERRY:
+			return CASoundEvents.CHERRY_ENT_IDLE.get();
+		case CRIMSON:
+			return CASoundEvents.CRIMSON_ENT_IDLE.get();
+		case DARK_OAK:
+			return CASoundEvents.DARK_OAK_ENT_IDLE.get();
+		case JUNGLE:
+			return CASoundEvents.JUNGLE_ENT_IDLE.get();
+		case OAK:
+			return CASoundEvents.OAK_ENT_IDLE.get();
+		case PEACH:
+			return CASoundEvents.PEACH_ENT_IDLE.get();
+		case SKYWOOD:
+			return CASoundEvents.SKYWOOD_ENT_IDLE.get();
+		case SPRUCE:
+			return CASoundEvents.SPRUCE_ENT_IDLE.get();
+		case WARPED:
+			return CASoundEvents.WARPED_ENT_IDLE.get();
+		case GINKGO:
+			return CASoundEvents.GINKGO_ENT_IDLE.get();
+		default:
+			return CASoundEvents.ENT_IDLE.get();
+		}
+	}
+	
+	protected SoundEvent getWalkSound() {
+		switch (getEntType()) {
+		case ACACIA:
+			return CASoundEvents.ACACIA_ENT_WALK.get();
+		case APPLE:
+			return CASoundEvents.APPLE_ENT_WALK.get();
+		case BIRCH:
+			return CASoundEvents.BIRCH_ENT_WALK.get();
+		case CHERRY:
+			return CASoundEvents.CHERRY_ENT_WALK.get();
+		case CRIMSON:
+			return CASoundEvents.CRIMSON_ENT_WALK.get();
+		case DARK_OAK:
+			return CASoundEvents.DARK_OAK_ENT_WALK.get();
+		case JUNGLE:
+			return CASoundEvents.JUNGLE_ENT_WALK.get();
+		case OAK:
+			return CASoundEvents.OAK_ENT_WALK.get();
+		case PEACH:
+			return CASoundEvents.PEACH_ENT_WALK.get();
+		case SKYWOOD:
+			return CASoundEvents.SKYWOOD_ENT_WALK.get();
+		case SPRUCE:
+			return CASoundEvents.SPRUCE_ENT_WALK.get();
+		case WARPED:
+			return CASoundEvents.WARPED_ENT_WALK.get();
+		case GINKGO:
+			return CASoundEvents.GINKGO_ENT_WALK.get();
+		default:
+			return CASoundEvents.ENT_WALK.get();
+		}
+	}
 
+	protected SoundEvent getPunchSound() {
+		switch (getEntType()) {
+		case ACACIA:
+			return CASoundEvents.ACACIA_ENT_TREE_PUNCH.get();
+		case APPLE:
+			return CASoundEvents.APPLE_ENT_TREE_PUNCH.get();
+		case BIRCH:
+			return CASoundEvents.BIRCH_ENT_TREE_PUNCH.get();
+		case CHERRY:
+			return CASoundEvents.CHERRY_ENT_TREE_PUNCH.get();
+		case CRIMSON:
+			return CASoundEvents.CRIMSON_ENT_TREE_PUNCH.get();
+		case DARK_OAK:
+			return CASoundEvents.DARK_OAK_ENT_TREE_PUNCH.get();
+		case JUNGLE:
+			return CASoundEvents.JUNGLE_ENT_TREE_PUNCH.get();
+		case OAK:
+			return CASoundEvents.OAK_ENT_TREE_PUNCH.get();
+		case PEACH:
+			return CASoundEvents.PEACH_ENT_TREE_PUNCH.get();
+		case SKYWOOD:
+			return CASoundEvents.SKYWOOD_ENT_TREE_PUNCH.get();
+		case SPRUCE:
+			return CASoundEvents.SPRUCE_ENT_TREE_PUNCH.get();
+		case WARPED:
+			return CASoundEvents.WARPED_ENT_TREE_PUNCH.get();
+		case GINKGO:
+			return CASoundEvents.GINKGO_ENT_TREE_PUNCH.get();
+		default:
+			return CASoundEvents.ENT_TREE_PUNCH.get();
+		}
+	}
+
+	protected SoundEvent getSmashSound() {
+		switch (getEntType()) {
+		case ACACIA:
+			return CASoundEvents.ACACIA_ENT_ENT_SMASH.get();
+		case APPLE:
+			return CASoundEvents.APPLE_ENT_ENT_SMASH.get();
+		case BIRCH:
+			return CASoundEvents.BIRCH_ENT_ENT_SMASH.get();
+		case CHERRY:
+			return CASoundEvents.CHERRY_ENT_ENT_SMASH.get();
+		case CRIMSON:
+			return CASoundEvents.CRIMSON_ENT_ENT_SMASH.get();
+		case DARK_OAK:
+			return CASoundEvents.DARK_OAK_ENT_ENT_SMASH.get();
+		case JUNGLE:
+			return CASoundEvents.JUNGLE_ENT_ENT_SMASH.get();
+		case OAK:
+			return CASoundEvents.OAK_ENT_ENT_SMASH.get();
+		case PEACH:
+			return CASoundEvents.PEACH_ENT_ENT_SMASH.get();
+		case SKYWOOD:
+			return CASoundEvents.SKYWOOD_ENT_ENT_SMASH.get();
+		case SPRUCE:
+			return CASoundEvents.SPRUCE_ENT_ENT_SMASH.get();
+		case WARPED:
+			return CASoundEvents.WARPED_ENT_ENT_SMASH.get();
+		case GINKGO:
+			return CASoundEvents.GINKGO_ENT_ENT_SMASH.get();
+		default:
+			return CASoundEvents.ENT_ENT_SMASH.get();
+		}
+	}
+	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSource) {
-		return isDeadOrDying() ? CASoundEvents.ENT_DEATH.get() : CASoundEvents.ENT_DAMAGE.get();
+		if (isDeadOrDying())
+			return getDeathSound();
+		else
+			switch (getEntType()) {
+			case ACACIA:
+				return CASoundEvents.ACACIA_ENT_DAMAGE.get();
+			case APPLE:
+				return CASoundEvents.APPLE_ENT_DAMAGE.get();
+			case BIRCH:
+				return CASoundEvents.BIRCH_ENT_DAMAGE.get();
+			case CHERRY:
+				return CASoundEvents.CHERRY_ENT_DAMAGE.get();
+			case CRIMSON:
+				return CASoundEvents.CRIMSON_ENT_DAMAGE.get();
+			case DARK_OAK:
+				return CASoundEvents.DARK_OAK_ENT_DAMAGE.get();
+			case JUNGLE:
+				return CASoundEvents.JUNGLE_ENT_DAMAGE.get();
+			case OAK:
+				return CASoundEvents.OAK_ENT_DAMAGE.get();
+			case PEACH:
+				return CASoundEvents.PEACH_ENT_DAMAGE.get();
+			case SKYWOOD:
+				return CASoundEvents.SKYWOOD_ENT_DAMAGE.get();
+			case SPRUCE:
+				return CASoundEvents.SPRUCE_ENT_DAMAGE.get();
+			case WARPED:
+				return CASoundEvents.WARPED_ENT_DAMAGE.get();
+			case GINKGO:
+				return CASoundEvents.GINKGO_ENT_DAMAGE.get();
+			default:
+				return CASoundEvents.ENT_DAMAGE.get();
+			}
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return CASoundEvents.ENT_DEATH.get();
+		switch (getEntType()) {
+		case ACACIA:
+			return CASoundEvents.ACACIA_ENT_DEATH.get();
+		case APPLE:
+			return CASoundEvents.APPLE_ENT_DEATH.get();
+		case BIRCH:
+			return CASoundEvents.BIRCH_ENT_DEATH.get();
+		case CHERRY:
+			return CASoundEvents.CHERRY_ENT_DEATH.get();
+		case CRIMSON:
+			return CASoundEvents.CRIMSON_ENT_DEATH.get();
+		case DARK_OAK:
+			return CASoundEvents.DARK_OAK_ENT_DEATH.get();
+		case JUNGLE:
+			return CASoundEvents.JUNGLE_ENT_DEATH.get();
+		case OAK:
+			return CASoundEvents.OAK_ENT_DEATH.get();
+		case PEACH:
+			return CASoundEvents.PEACH_ENT_DEATH.get();
+		case SKYWOOD:
+			return CASoundEvents.SKYWOOD_ENT_DEATH.get();
+		case SPRUCE:
+			return CASoundEvents.SPRUCE_ENT_DEATH.get();
+		case WARPED:
+			return CASoundEvents.WARPED_ENT_DEATH.get();
+		case GINKGO:
+			return CASoundEvents.GINKGO_ENT_DEATH.get();
+		default:
+			return CASoundEvents.ENT_DEATH.get();
+		}
 	}
 
 	@Override

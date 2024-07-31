@@ -161,12 +161,12 @@ public class CrystalGatorEntity extends AnimatableAngerableAnimalEntity {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return CASoundEvents.EMERALD_GATOR_HURT.get();
+		return CASoundEvents.CRYSTAL_GATOR_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return CASoundEvents.EMERALD_GATOR_DEATH.get();
+		return CASoundEvents.CRYSTAL_GATOR_DEATH.get();
 	}
 	
 	@Override
