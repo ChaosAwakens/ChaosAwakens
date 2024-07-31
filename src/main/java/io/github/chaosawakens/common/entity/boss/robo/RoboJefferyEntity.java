@@ -289,7 +289,6 @@ public class RoboJefferyEntity extends AnimatableBossEntity {
 		}
 
 		dropEquipment();
-	//	dropExperience();
 
 		Collection<ItemEntity> allDrops = captureDrops(null);
 
