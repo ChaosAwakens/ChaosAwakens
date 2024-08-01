@@ -3,7 +3,11 @@ package io.github.chaosawakens.api.services;
 import io.github.chaosawakens.api.asm.ClassFinder;
 import io.github.chaosawakens.api.asm.annotations.NetworkRegistrarEntry;
 import io.github.chaosawakens.api.network.BasePacket;
+import io.github.chaosawakens.api.network.NetworkSide;
 import io.github.chaosawakens.api.platform.services.INetworkManager;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 
 public class FabricNetworkManager implements INetworkManager {
+    private static final Object2ObjectLinkedOpenHashMap<Class<?>, BasePacket<?>> MAPPED_PACKETS = new Object2ObjectLinkedOpenHashMap<>();
 
     @Override
     public void setupNetworkHandler() {
@@ -20,6 +25,25 @@ public class FabricNetworkManager implements INetworkManager {
 
     @Override
     public <MSGT> INetworkManager registerPacket(BasePacket<MSGT> packet) {
+        NetworkSide targetSide = packet.targetSide();
+
+        MAPPED_PACKETS.putIfAbsent(packet.packetClass(), packet);
+
+        if (targetSide.equals(NetworkSide.C2S)) {
+            ServerPlayNetworking.registerGlobalReceiver(packet.packetId(), ((targetServer, playerSender, serverPacketListener, buf, fabricPacketSender) -> {
+                buf.readByte(); // Forge discriminator handling (monke see monke do)
+
+                packet.packetDecoder().apply(buf);
+                packet.packetHandler().handlePacket(playerSender, targetServer.getLevel(playerSender.level().dimension()), NetworkSide.C2S);
+            }));
+        } else if (targetSide.equals(NetworkSide.S2C)) {
+            ClientPlayNetworking.registerGlobalReceiver(packet.packetId(), ((targetClient, clientPacketListener, buf, fabricPacketSender) -> {
+                buf.readByte(); // Forge discriminator handling (monke see monke do)
+
+                packet.packetDecoder().apply(buf);
+                packet.packetHandler().handlePacket(targetClient.player, targetClient.level, NetworkSide.S2C);
+            }));
+        }
         return this;
     }
 
