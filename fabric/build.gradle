@@ -39,12 +39,10 @@ dependencies {
 }
 
 loom {
-    splitEnvironmentSourceSets()
 
     mods {
         mod_id {
             sourceSet sourceSets.main
-            sourceSet sourceSets.client
         }
     }
 
@@ -60,6 +58,7 @@ loom {
             setConfigName("${fabric_client_taskname}")
             ideConfigGenerated(true)
             runDir("run")
+            vmArgs("-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch")
         }
         server {
             server()
@@ -67,6 +66,7 @@ loom {
             setConfigName("${fabric_server_taskname}")
             ideConfigGenerated(true)
             runDir("run")
+            vmArgs("-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch")
         }
         datagen {
             inherit server
@@ -77,6 +77,8 @@ loom {
             vmArg "-Dfabric-api.datagen.modid=${mod_id}"
 
             runDir "build/datagen"
+
+            vmArgs("-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch")
         }
     }
 }
@@ -121,7 +123,7 @@ publishMods {
     modrinth {
         projectId = "frSNDQkA"
         accessToken = providers.environmentVariable("MODRINTH_API_KEY")
-        announcementTitle = "New AdvancedAnimationUtil Modrinth Release"
+        announcementTitle = "New Chaos Awakens Modrinth Release"
 
         getMinecraftVersions().add(minecraft_version)
     }

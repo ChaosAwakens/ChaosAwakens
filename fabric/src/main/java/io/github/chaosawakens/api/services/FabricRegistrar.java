@@ -1,26 +1,18 @@
 package io.github.chaosawakens.api.services;
 
 import io.github.chaosawakens.api.asm.ClassFinder;
+import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.services.IRegistrar;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class FabricRegistrar implements IRegistrar {
 
     @Override
     public void setupRegistrar() {
-        List<String> registryClasses = ClassFinder.findClasses("io.github.chaosawakens.common.registry");
-
-        for (String registryClass : registryClasses) {
-            try {
-                Class.forName(registryClass);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        ClassFinder.discoverAnnotatedClasses(RegistrarEntry.class);
     }
 
     @Override

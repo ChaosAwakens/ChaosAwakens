@@ -65,7 +65,7 @@ minecraft {
         }
 
         data {
-            workingDirectory project.file('run')
+            workingDirectory project.file('run-data')
             ideaModule "${rootProject.name}.${project.name}.main"
 
             taskName "${forge_data_taskname}"
@@ -86,7 +86,7 @@ minecraft {
     }
 }
 
-sourceSets.main.resources.srcDir 'src/generated/resources'
+sourceSets.main.resources.srcDir("src/generated/resources")
 
 dependencies {
     // Base
