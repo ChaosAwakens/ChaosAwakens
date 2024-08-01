@@ -1,5 +1,8 @@
 name: Crowdin Download Translations
 on: [workflow_dispatch]
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   receive-translations:
     runs-on: ubuntu-latest
