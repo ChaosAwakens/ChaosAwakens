@@ -1,4 +1,7 @@
 package io.github.chaosawakens.common.networking;
 
-public class CAPackets {
+import io.github.chaosawakens.api.asm.annotations.NetworkRegistrarEntry;
+
+@NetworkRegistrarEntry
+public final class CAPackets {
 }
