@@ -9,16 +9,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: crowdin action
+      - name: Synch with Crowdin
         uses: crowdin/github-action@v2.1.1
         with:
-          push_sources: false
           upload_sources: true
           upload_translations: true
           download_translations: true
+          localization_branch_name: l10n_crowdin_action
+
+          create_pull_request: true
+          pull_request_title: 'New Crowdin translations'
+          pull_request_body: 'New Crowdin pull request with translations'
+          pull_request_base_branch_name: '1.16.5-forge'
+          
           skip_untranslated_strings: true
           export_only_approved: true
-          localization_branch_name: 1.16.5-forge
         env:
           GITHUB_TOKEN : ${{ secrets.GH_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
