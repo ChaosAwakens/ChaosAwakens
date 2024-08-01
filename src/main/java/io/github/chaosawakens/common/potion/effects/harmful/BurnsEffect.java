@@ -27,6 +27,6 @@ public class BurnsEffect extends Effect {
 	
 	@Override
 	public boolean isDurationEffectTick(int tickCount, int level) {
-		return tickCount % (20 - level * 5) == 0;
+		return tickCount % (level < 4 ? (20 - level * 5) : 5) == 0;
 	}
 }
