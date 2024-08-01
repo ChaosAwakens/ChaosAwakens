@@ -41,9 +41,9 @@ public class ForgeNetworkManager implements INetworkManager {
     }
 
     @Override
-    public <MSGT> INetworkManager registerPacket(BasePacket<MSGT> packet) {
+    public <MSGT> BasePacket<MSGT> registerPacket(BasePacket<MSGT> packet) {
         INSTANCE.registerMessage(PACKET_ID++, packet.packetClass(), packet.packetEncoder(), packet.packetDecoder(), handlePacketFromContext(packet.packetHandler()), Optional.of(packet.targetSide().equals(NetworkSide.C2S) ? NetworkDirection.PLAY_TO_SERVER : NetworkDirection.PLAY_TO_CLIENT));
-        return this;
+        return packet;
     }
 
     @Override

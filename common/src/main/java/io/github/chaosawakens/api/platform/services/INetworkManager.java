@@ -28,11 +28,11 @@ public interface INetworkManager {
      *
      * @param packet The packet object to register.
      *
-     * @return {@code this}.
+     * @return The registered packet.
      *
      * @param <MSGT> The type of the packet object.
      */
-    <MSGT> INetworkManager registerPacket(BasePacket<MSGT> packet);
+    <MSGT> BasePacket<MSGT> registerPacket(BasePacket<MSGT> packet);
 
     /**
      * Sends a C2S packet (client -> server) from the current client.

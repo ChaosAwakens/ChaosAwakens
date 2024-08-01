@@ -31,7 +31,7 @@ public class FabricNetworkManager implements INetworkManager {
     }
 
     @Override
-    public <MSGT> INetworkManager registerPacket(BasePacket<MSGT> packet) {
+    public <MSGT> BasePacket<MSGT> registerPacket(BasePacket<MSGT> packet) {
         NetworkSide targetSide = packet.targetSide();
 
         MAPPED_PACKETS.putIfAbsent(packet.packetClass(), packet);
@@ -51,7 +51,7 @@ public class FabricNetworkManager implements INetworkManager {
                 packet.packetHandler().handlePacket(targetClient.player, targetClient.level, NetworkSide.S2C);
             }));
         }
-        return this;
+        return packet;
     }
 
     @Override
