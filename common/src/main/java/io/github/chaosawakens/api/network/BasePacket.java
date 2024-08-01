@@ -14,9 +14,10 @@ import java.util.function.Function;
  * @param packetEncoder The encoding method used to encode this packet's data into a {@link FriendlyByteBuf} on the initial side.
  * @param packetDecoder The decoding method used to decode this packet's data from a {@link FriendlyByteBuf} on the target side.
  * @param packetHandler The interface responsible for both representing the target side and handling this packet's data on the target side.
+ * @param targetSide The side this packet should be sent to.
  * @param <MSGT> The class representing this packet's data.
  */
-public record BasePacket<MSGT>(ResourceLocation packetId, Class<MSGT> packetClass, BiConsumer<MSGT, FriendlyByteBuf> packetEncoder, Function<FriendlyByteBuf, MSGT> packetDecoder, PacketContext packetHandler) {
+public record BasePacket<MSGT>(ResourceLocation packetId, Class<MSGT> packetClass, BiConsumer<MSGT, FriendlyByteBuf> packetEncoder, Function<FriendlyByteBuf, MSGT> packetDecoder, PacketContext packetHandler, NetworkSide targetSide) {
 
     /**
      * Overloaded constructor with the {@code packetId} set to {@code null}.
@@ -25,8 +26,9 @@ public record BasePacket<MSGT>(ResourceLocation packetId, Class<MSGT> packetClas
      * @param packetEncoder The encoding method used to encode this packet's data into a {@link FriendlyByteBuf} on the initial side.
      * @param packetDecoder The decoding method used to decode this packet's data from a {@link FriendlyByteBuf} on the target side.
      * @param packetHandler The interface responsible for both representing the target side and handling this packet's data on the target side.
+     * @param targetSide The side this packet should be sent to.
      */
-    public BasePacket(Class<MSGT> packetClass, BiConsumer<MSGT, FriendlyByteBuf> packetEncoder, Function<FriendlyByteBuf, MSGT> packetDecoder, PacketContext packetHandler) {
-        this(null, packetClass, packetEncoder, packetDecoder, packetHandler);
+    public BasePacket(Class<MSGT> packetClass, BiConsumer<MSGT, FriendlyByteBuf> packetEncoder, Function<FriendlyByteBuf, MSGT> packetDecoder, PacketContext packetHandler, NetworkSide targetSide) {
+        this(null, packetClass, packetEncoder, packetDecoder, packetHandler, targetSide);
     }
 }

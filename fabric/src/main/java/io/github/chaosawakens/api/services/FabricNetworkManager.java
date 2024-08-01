@@ -1,5 +1,7 @@
 package io.github.chaosawakens.api.services;
 
+import io.github.chaosawakens.api.asm.ClassFinder;
+import io.github.chaosawakens.api.asm.annotations.NetworkRegistrarEntry;
 import io.github.chaosawakens.api.network.BasePacket;
 import io.github.chaosawakens.api.platform.services.INetworkManager;
 import net.minecraft.core.BlockPos;
@@ -7,13 +9,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunk;
 
 public class FabricNetworkManager implements INetworkManager {
 
     @Override
     public void setupNetworkHandler() {
-
+        ClassFinder.discoverAnnotatedClasses(NetworkRegistrarEntry.class);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class FabricNetworkManager implements INetworkManager {
     }
 
     @Override
-    public <MSGT> void sendToTrackingClients(MSGT s2cPacket, ChunkAccess trackedChunk) {
+    public <MSGT> void sendToTrackingClients(MSGT s2cPacket, LevelChunk trackedChunk) {
 
     }
 
@@ -52,7 +54,7 @@ public class FabricNetworkManager implements INetworkManager {
     }
 
     @Override
-    public <MSGT> void sendToClientsWithinRange(MSGT s2cPacket, BlockPos originPos, double range) {
+    public <MSGT> void sendToClientsWithinRange(MSGT s2cPacket, ResourceKey<Level> targetDim, BlockPos originPos, double range) {
 
     }
 

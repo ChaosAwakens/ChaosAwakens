@@ -9,7 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunk;
 
 /**
  * Loader-agnostic interface used for dynamically registering and sending cross-loader packets without needing multiple methods, classes, or redundant loader-specific setup.
@@ -89,11 +89,11 @@ public interface INetworkManager {
      * Sends an S2C packet (server -> client) to all connected clients tracking the specified {@code trackedChunk}.
      *
      * @param s2cPacket The packet object to send.
-     * @param trackedChunk The tracked {@linkplain ChunkAccess Chunk}.
+     * @param trackedChunk The tracked {@linkplain LevelChunk Chunk}.
      *
      * @param <MSGT> The type of the packet object.
      */
-    <MSGT> void sendToTrackingClients(MSGT s2cPacket, ChunkAccess trackedChunk);
+    <MSGT> void sendToTrackingClients(MSGT s2cPacket, LevelChunk trackedChunk);
 
     /**
      * Sends an S2C packet (server -> client) to all connected clients in the specified {@code targetDim}.
@@ -106,15 +106,16 @@ public interface INetworkManager {
     <MSGT> void sendToClientsInDimension(MSGT s2cPacket, ResourceKey<Level> targetDim);
 
     /**
-     * Sends an S2C packet (server -> client) to all connected clients within the specified {@code range} of the specified {@code originPos}.
+     * Sends an S2C packet (server -> client) to all connected clients within the specified {@code range} of the specified {@code originPos} in the specified {@code targetDim}.
      *
      * @param s2cPacket The packet object to send.
+     * @param targetDim The target dimension's {@link ResourceKey}, in which the range check will be validated.
      * @param originPos The origin {@link BlockPos} from which range will be counted.
      * @param range The range from the specified {@code originPos} within which clients will receive the packet.
      *
      * @param <MSGT> The type of the packet object.
      */
-    <MSGT> void sendToClientsWithinRange(MSGT s2cPacket, BlockPos originPos, double range);
+    <MSGT> void sendToClientsWithinRange(MSGT s2cPacket, ResourceKey<Level> targetDim, BlockPos originPos, double range);
 
     /**
      * Sends an S2C packet (server -> client) to the specified {@code targetPlayer}.

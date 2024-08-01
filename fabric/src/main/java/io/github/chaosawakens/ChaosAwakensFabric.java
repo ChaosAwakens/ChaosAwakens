@@ -6,6 +6,6 @@ public class ChaosAwakensFabric implements ModInitializer {
     
     @Override
     public void onInitialize() {
-        ChaosAwakens.init();
+        ChaosAwakens.setup();
     }
 }
