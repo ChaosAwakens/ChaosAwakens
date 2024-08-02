@@ -75,7 +75,7 @@ minecraft {
 
             jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch"
 
-            args "--mod", mod_id, "--all", "--output", file('src/generated/resources/'), "--existing", file('src/main/resources/')
+            args "--mod", mod_id, "--all", "--output", project(':common').file('src/generated/resources/'), "--existing",  project(':common').file('src/main/resources/')
             mods {
                 modDataRun {
                     source sourceSets.main
@@ -86,7 +86,7 @@ minecraft {
     }
 }
 
-sourceSets.main.resources.srcDir("src/generated/resources")
+sourceSets.main.resources.srcDir(project(':common').file('src/generated/resources'))
 
 dependencies {
     // Base
@@ -123,6 +123,7 @@ tasks.named("sourcesJar", Jar) { from(project(":common").sourceSets.main.allSour
 
 processResources {
     from project(":common").sourceSets.main.resources
+    from project(':common').file('src/generated/resources/')
 }
 
 jar.finalizedBy('reobfJar')

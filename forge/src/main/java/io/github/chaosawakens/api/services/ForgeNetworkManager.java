@@ -92,7 +92,7 @@ public class ForgeNetworkManager implements INetworkManager {
                 LogicalSide curSide = ctx.get().getDirection().getReceptionSide().isServer() ? LogicalSide.SERVER : LogicalSide.CLIENT;
                 ServerPlayer playerSender = ctx.get().getSender();
 
-                handler.handlePacket(playerSender, playerSender == null ? LogicalSidedProvider.CLIENTWORLD.get(curSide).filter(ClientLevel.class::isInstance).orElse(Minecraft.getInstance().level) : playerSender.serverLevel(), curSide.isServer() ? NetworkSide.C2S : NetworkSide.S2C);
+                handler.handlePacket(playerSender == null ? Minecraft.getInstance().player : playerSender, playerSender == null ? LogicalSidedProvider.CLIENTWORLD.get(curSide).filter(ClientLevel.class::isInstance).orElse(Minecraft.getInstance().level) : playerSender.serverLevel(), curSide.isServer() ? NetworkSide.C2S : NetworkSide.S2C);
             });
 
             ctx.get().setPacketHandled(true);

@@ -102,7 +102,7 @@ public class FabricNetworkManager implements INetworkManager {
     @Override
     public <MSGT> void sendToClientsInDimension(MSGT s2cPacket, ResourceKey<Level> targetDim) {
         for (ServerPlayer targetServerPlayer : PlayerLookup.all(FabricServerHooks.getCurrentServer())) {
-            if (targetServerPlayer.level().dimension() == targetDim) sendToClient(s2cPacket, targetServerPlayer);
+            if (targetServerPlayer.level().dimension().equals(targetDim)) sendToClient(s2cPacket, targetServerPlayer);
         }
     }
 

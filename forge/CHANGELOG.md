@@ -1,7 +1,7 @@
 # Chaos Awakens Changelog
 
-[](https://cdn.discordapp.com/attachments/952003824439148584/1268653191348883549/image.png?ex=66ad34db&is=66abe35b&hm=4c2bfd720247b27adb0c8195d40854548d2d70327be2d4fb488df44ccd9dda8b&)
 # v0.13.0.0 [The Road To Chaos]
+![](https://cdn.discordapp.com/attachments/952003824439148584/1268856637008121946/The_Road_To_Chaos_update_icon.png?ex=66adf254&is=66aca0d4&hm=355bc0d8c62f5ce453f6d7713c330a0db1369b34540b33788bd3aac51e345c34&)
 ## Important
 - Ported to 1.20.1.
 - Refactored backend.
