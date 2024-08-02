@@ -182,18 +182,18 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Shoot Attack", 0.64D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
                 new AnimationDataHolder("Death", 2.24D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/robo/robo_warrior.animation.json"), Lists.newArrayList(
-                new AnimationDataHolder("Idle", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Death", 4.0D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
-                new AnimationDataHolder("Activate Shield", 2.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Idle Extras", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Destroy Shield", 2.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Deactivate Shield", 2.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Shield Up", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Walk", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Charged Laser Attack", 5.32D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Burst Laser Attack", 2.56D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Left Uppercut Attack", 1.85D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
-                new AnimationDataHolder("Right Uppercut Attack", 1.85D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
+                new AnimationDataHolder("misc.idle", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("misc.death", 2.8D, ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME),
+                new AnimationDataHolder("misc.activate_shield", 1.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("misc.always_play", 1.7976931348623157E308D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("misc.break_shield", 1.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("misc.deactivate_shield", 1.52D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("misc.shield_activated", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("movement.walk", 3.56D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("attack.shoot_charged_laser", 5.32D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("attack.shoot_laser", 2.56D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("attack.left_punch", 1.56D, ILoopType.EDefaultLoopTypes.PLAY_ONCE),
+                new AnimationDataHolder("attack.right_punch", 1.56D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
 
         // Hostile/Water
         createAnimationMetadata(ChaosAwakens.prefix("animations/entity/hostile/water/attack_squid.animation.json"), Lists.newArrayList(

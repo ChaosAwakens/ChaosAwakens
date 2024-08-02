@@ -40,7 +40,7 @@ public class ConiferousFoliagePlacer extends FoliagePlacer {
 
 	@Override
 	protected boolean shouldSkipLocation(Random pRandom, int x, int y, int z, int radius, boolean doubleTrunk) {
-		if (y > 0) return x != 0 && z != 0;
+		if (y > 0) return x != 0 || z != 0;
 		
 		int remainder = -(y % 3), radiusMinus1 = radius - 1, abX = Math.abs(x), abZ = Math.abs(z);
 		
