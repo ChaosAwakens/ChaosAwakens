@@ -9,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Supplier;
 
@@ -17,20 +18,22 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Block>> BLOCKS = new ObjectArrayList<>();
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
-
+    public static final Supplier<Block> TEST_BLOCK = registerBlock("test_block", () -> new Block(BlockBehaviour.Properties.of()));
 
     private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSup) {
         return registerBlock(id, blockSup, new Item.Properties());
     }
 
     private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSup, Item.Properties blockItemProperties) {
-        Supplier<Item> itemSup = () -> new BlockItem(blockSup.get(), blockItemProperties);
-        return registerBlock(id, blockSup, itemSup);
+        Supplier<Block> registeredBlock = registerItemlessBlock(id, blockSup); // Otherwise reference to the block sup is null cuz it needs to be registered b4hand
+        registerBlockItem(id, () -> new BlockItem(registeredBlock.get(), blockItemProperties));
+        return registeredBlock;
     }
 
     private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSup, Supplier<Item> itemSup) {
+        Supplier<Block> registeredBlock = registerItemlessBlock(id, blockSup);
         registerBlockItem(id, itemSup);
-        return registerItemlessBlock(id, blockSup);
+        return registeredBlock;
     }
 
     private static Supplier<Block> registerItemlessBlock(String id, Supplier<Block> blockSup) {

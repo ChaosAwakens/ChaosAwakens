@@ -3,33 +3,88 @@ package io.github.chaosawakens.api.block;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * A wrapper class used to store information referenced in datagen to simplify creating data entries for blocks.
  */
 public class BlockPropertyWrapper {
-    private final BPWBuilder builder;
+    private final Supplier<Block> parentBlock;
+    @Nullable
+    private BPWBuilder builder;
 
-    private BlockPropertyWrapper(BPWBuilder builder) {
-        this.builder = builder;
+    private BlockPropertyWrapper(Supplier<Block> parentBlock) {
+        this.parentBlock = parentBlock;
     }
 
     /**
-     * Constructs a builder chain in which certain datagen properties can be assigned and re-built with in this BlockPropertyWrapper instance.
+     * Creates a new {@link BlockPropertyWrapper} instance. This is usually where you'll begin chaining {@link #builder()} method calls if needed.
      *
-     * @return A new {@link BPWBuilder} instance (builder pattern).
+     * @param parentBlock The parent {@link Supplier<Block>} stored in the newly-initialized BPW instance.
+     *
+     * @return A new {@link BlockPropertyWrapper} instance.
      */
-    public static BPWBuilder builder() {
-        return new BPWBuilder();
+    public static BlockPropertyWrapper create(Supplier<Block> parentBlock) {
+        return new BlockPropertyWrapper(parentBlock);
+    }
+
+    /**
+     * Constructs a builder chain in which certain datagen properties can be assigned and re-built with in this BlockPropertyWrapper instance. Also sets
+     * this BPW instance's {@link #builder} to the newly-constructed {@link BPWBuilder} instance.
+     *
+     * @return A new {@link BPWBuilder} instance from the {@link #builder} field.
+     */
+    public BPWBuilder builder() {
+        return this.builder = new BPWBuilder(this, parentBlock);
+    }
+
+    /**
+     * Gets the parent {@link Supplier<Block>} of this BPW instance.
+     *
+     * @return The parent {@link Supplier<Block>} stored in this BPW instance.
+     */
+    public Supplier<Block> getParentBlock() {
+        return parentBlock;
+    }
+
+    /**
+     * Gets the manually unlocalized block name from the {@link #builder()} if the builder exists.
+     *
+     * @return The manually unlocalized block name, or an empty {@code String} if the {@link #builder()} is {@code null}.
+     */
+    public String getManuallyUnlocalizedBlockName() {
+        return builder == null ? "" : builder.manuallyUnlocalizedBlockName;
+    }
+
+    /**
+     * Gets the defined separator words from the {@link #builder()} if the builder exists.
+     *
+     * @return The defined separator words, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
+     */
+    public List<String> getDefinedSeparatorWords() {
+        return builder == null ? ObjectArrayList.of() : builder.definedSeparatorWords;
+    }
+
+    /**
+     * Gets the {@link LootTable.Builder} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be {@code null}.
+     *
+     * @return The {@link LootTable.Builder}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     */
+    @Nullable
+    public LootTable.Builder getBlockLootTable() {
+        return builder == null ? null : builder.blockLootTableBuilder;
     }
 
     /**
      * A builder class used to construct certain data for datagen.
      */
     public static class BPWBuilder {
+        private final BlockPropertyWrapper ownerWrapper;
+        private final Supplier<Block> parentBlock;
         private String manuallyUnlocalizedBlockName = "";
         private List<String> definedSeparatorWords = ObjectArrayList.of();
         @Nullable
@@ -39,7 +94,9 @@ public class BlockPropertyWrapper {
         @Nullable
         private BlockStateDefinition blockStateDefinition;
 
-        private BPWBuilder() {
+        private BPWBuilder(BlockPropertyWrapper ownerWrapper, Supplier<Block> parentBlock) {
+            this.ownerWrapper = ownerWrapper;
+            this.parentBlock = parentBlock;
         }
 
         /**
@@ -144,7 +201,7 @@ public class BlockPropertyWrapper {
          * @return The newly data-populated {@link BlockPropertyWrapper}.
          */
         public BlockPropertyWrapper build() {
-            return new BlockPropertyWrapper(this);
+            return ownerWrapper;
         }
     }
 }
