@@ -4,10 +4,11 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * A wrapper class used to store information used in datagen to simplify creating data entries for blocks.
+ * A wrapper class used to store information referenced in datagen to simplify creating data entries for blocks.
  */
 public class BlockPropertyWrapper {
     private final BPWBuilder builder;
@@ -31,7 +32,12 @@ public class BlockPropertyWrapper {
     public static class BPWBuilder {
         private String manuallyUnlocalizedBlockName = "";
         private List<String> definedSeparatorWords = ObjectArrayList.of();
+        @Nullable
         private LootTable.Builder blockLootTableBuilder;
+        @Nullable
+        private BlockModelDefinition blockModelDefinition;
+        @Nullable
+        private BlockStateDefinition blockStateDefinition;
 
         private BPWBuilder() {
         }
@@ -49,6 +55,7 @@ public class BlockPropertyWrapper {
          *      public class AlgorithmExampleDescriptor {
          *
          *          public static void main(String[] args) {
+         *              // Input
          *              String unlocalizedName = "block.chaosawakens.block_of_ruby"; // The registry name/initial unlocalized name
          *
          *              // Steps
@@ -102,6 +109,32 @@ public class BlockPropertyWrapper {
          */
         public BPWBuilder withLootTable(LootTable.Builder blockLootTableBuilder) {
             this.blockLootTableBuilder = blockLootTableBuilder;
+            return this;
+        }
+
+        /**
+         * Assigns a custom {@link BlockModelDefinition} to this builder. By default, model datagen is handled based on a series of
+         * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
+         * different model definition that isn't natively handled.
+         *
+         * @param blockModelDefinition The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model in datagen.
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withCustomModelDefinition(BlockModelDefinition blockModelDefinition) {
+            this.blockModelDefinition = blockModelDefinition;
+            return this;
+        }
+
+        /**
+         * Assigns a custom {@link BlockStateDefinition} to this builder. By default, state datagen is handled based on a series of
+         * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
+         * different state definition that isn't natively handled.
+         *
+         * @param blockStateDefinition The {@link BlockStateDefinition} used to build this BPWBuilder's parent block's state in datagen.
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withCustomBlockStateDefinition(BlockStateDefinition blockStateDefinition) {
+            this.blockStateDefinition = blockStateDefinition;
             return this;
         }
 

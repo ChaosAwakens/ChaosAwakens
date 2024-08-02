@@ -1,4 +1,4 @@
 package io.github.chaosawakens.common.registry;
 
-public class CAFoods {
+public final class CAFoods {
 }
