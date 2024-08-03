@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSortedMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -75,13 +76,13 @@ public class BlockPropertyWrapper {
     }
 
     /**
-     * Gets the {@link BlockLootTableDefinition} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@link LootTable.Builder} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
-     * @return The {@link BlockLootTableDefinition}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     * @return The {@link LootTable.Builder}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
      */
     @Nullable
-    public BlockLootTableDefinition getBlockLootTable() {
+    public LootTable.Builder getBlockLootTable() {
         return builder == null ? null : builder.blockLootTableBuilder;
     }
 
@@ -98,7 +99,7 @@ public class BlockPropertyWrapper {
         private String manuallyUnlocalizedBlockName = "";
         private List<String> definedSeparatorWords = ObjectArrayList.of();
         @Nullable
-        private BlockLootTableDefinition blockLootTableBuilder;
+        private LootTable.Builder blockLootTableBuilder;
         @Nullable
         private BlockModelDefinition blockModelDefinition;
         @Nullable
@@ -168,13 +169,13 @@ public class BlockPropertyWrapper {
         }
 
         /**
-         * Assigns a given {@link BlockLootTableDefinition} to this builder. Can be {@code null}.
+         * Assigns a given {@link LootTable.Builder} to this builder. Can be {@code null}.
          *
-         * @param blockLootTableBuilder The {@link BlockLootTableDefinition} used to build this BPWBuilder's parent block's loot table in datagen.
+         * @param blockLootTableBuilder The {@link LootTable.Builder} used to build this BPWBuilder's parent block's loot table in datagen.
          *
          * @return {@code this} (builder method).
          */
-        public BPWBuilder withLootTable(BlockLootTableDefinition blockLootTableBuilder) {
+        public BPWBuilder withLootTable(LootTable.Builder blockLootTableBuilder) {
             this.blockLootTableBuilder = blockLootTableBuilder;
             return this;
         }

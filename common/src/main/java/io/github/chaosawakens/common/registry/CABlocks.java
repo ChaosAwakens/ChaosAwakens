@@ -20,8 +20,9 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
     public static final Supplier<Block> BEM_VINDOS_AO = registerBlock("bem_vindos_ao", BlockPropertyWrapper.create("bem_vindos_ao", () -> new Block(BlockBehaviour.Properties.of()))
+            .builder()
+            .build()
             .getParentBlock());
-
 
     private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSup) {
         return registerBlock(id, blockSup, new Item.Properties());
