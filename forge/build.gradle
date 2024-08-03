@@ -122,6 +122,10 @@ tasks.withType(Javadoc).configureEach { source(project(":common").sourceSets.mai
 tasks.named("sourcesJar", Jar) { from(project(":common").sourceSets.main.allSource) }
 
 processResources {
+    exclude '**/.cache/'
+
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
     from project(":common").sourceSets.main.resources
     from project(':common').file('src/generated/resources/')
 }

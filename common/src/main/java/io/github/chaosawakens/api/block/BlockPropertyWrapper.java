@@ -1,5 +1,7 @@
 package io.github.chaosawakens.api.block;
 
+import com.google.common.collect.ImmutableSortedMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -12,23 +14,28 @@ import java.util.function.Supplier;
  * A wrapper class used to store information referenced in datagen to simplify creating data entries for blocks.
  */
 public class BlockPropertyWrapper {
+    private static final Object2ObjectLinkedOpenHashMap<String, BlockPropertyWrapper> MAPPED_BWPS = new Object2ObjectLinkedOpenHashMap<>();
+    private final String blockRegName;
     private final Supplier<Block> parentBlock;
     @Nullable
     private BPWBuilder builder;
 
-    private BlockPropertyWrapper(Supplier<Block> parentBlock) {
+    private BlockPropertyWrapper(String blockRegName, Supplier<Block> parentBlock) {
+        this.blockRegName = blockRegName;
         this.parentBlock = parentBlock;
     }
 
     /**
      * Creates a new {@link BlockPropertyWrapper} instance. This is usually where you'll begin chaining {@link #builder()} method calls if needed.
      *
+     * @param blockRegName The registry name of the {@code parentBlock}. Used when access to the {@code parentBlock} returns an air/{@code null} delegate (I.E. It's too early to access
+     *                       the parent block).
      * @param parentBlock The parent {@link Supplier<Block>} stored in the newly-initialized BPW instance.
      *
      * @return A new {@link BlockPropertyWrapper} instance.
      */
-    public static BlockPropertyWrapper create(Supplier<Block> parentBlock) {
-        return new BlockPropertyWrapper(parentBlock);
+    public static BlockPropertyWrapper create(String blockRegName, Supplier<Block> parentBlock) {
+        return new BlockPropertyWrapper(blockRegName, parentBlock);
     }
 
     /**
@@ -77,6 +84,10 @@ public class BlockPropertyWrapper {
     @Nullable
     public LootTable.Builder getBlockLootTable() {
         return builder == null ? null : builder.blockLootTableBuilder;
+    }
+
+    public static ImmutableSortedMap<String, BlockPropertyWrapper> getMappedBwps() {
+        return ImmutableSortedMap.copyOf(MAPPED_BWPS);
     }
 
     /**
@@ -128,8 +139,8 @@ public class BlockPropertyWrapper {
          *      }
          *     }
          * </pre>
-         * <b>NOTE:</b> Block registry names ending with "_block" (e.g. "block.chaosawakens.royal_guardian_scale_block") have the "_block" part removed automatically during the translation process (the registry name stays the same,
-         * of course). You may use this method to bypass that step if needed.
+         * <b>NOTE:</b> Block registry names ending with "_block" (e.g. "block.chaosawakens.royal_guardian_scale_block") have the "_block" part removed automatically and the result string is prepended with "Block of"
+         * during the translation process (the registry name stays the same, of course). You may use this method to bypass that step if needed.
          *
          * @param manuallyUnlocalizedBlockName The name override used to de-localize the parent {@linkplain Block Block's} registry name.
          *
@@ -196,11 +207,13 @@ public class BlockPropertyWrapper {
         }
 
         /**
-         * Builds a new {@link BlockPropertyWrapper} using this builder's data.
+         * Builds a new {@link BlockPropertyWrapper} using this builder's data. Also maps the owner
+         * {@link BlockPropertyWrapper} to the parent {@linkplain Block Block's} registry name.
          *
          * @return The newly data-populated {@link BlockPropertyWrapper}.
          */
         public BlockPropertyWrapper build() {
+            MAPPED_BWPS.put(ownerWrapper.blockRegName, ownerWrapper);
             return ownerWrapper;
         }
     }

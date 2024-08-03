@@ -1,5 +1,6 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.datagen.CALanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -14,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 @Mod(CAConstants.MODID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ChaosAwakensForge {
-    
+
     public ChaosAwakensForge() {
         ChaosAwakens.setup();
     }
@@ -31,6 +32,6 @@ public class ChaosAwakensForge {
         final ExistingFileHelper curFileHelper = event.getExistingFileHelper();
         final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-
+        datagen.addProvider(event.includeClient(), new CALanguageProvider(datagenPackOutput));
     }
 }
