@@ -32,6 +32,10 @@ public class ChaosAwakensForge {
         final ExistingFileHelper curFileHelper = event.getExistingFileHelper();
         final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
+        // Resources
         datagen.addProvider(event.includeClient(), new CALanguageProvider(datagenPackOutput));
+
+        // Data
+    //    datagen.addProvider(event.includeServer(), new CALootTableProvider(datagenPackOutput));
     }
 }

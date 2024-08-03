@@ -166,11 +166,14 @@ public class CALanguageProvider extends LanguageProvider {
             Block blockEntry = blockRegEntry.get();
             String blockRegName = blockEntry.getDescriptionId();
 
-            BlockPropertyWrapper.getMappedBwps().forEach((blockRegNameEntry, curBwp) -> { //TODO Optimize :trol:
-                if (blockRegNameEntry.equals(blockRegName.substring(blockRegName.lastIndexOf(".") + 1)) && !curBwp.getManuallyUnlocalizedBlockName().isEmpty() && !curBwp.getManuallyUnlocalizedBlockName().isBlank()) {
-                    addManualTranslation(blockRegName, curBwp.getManuallyUnlocalizedBlockName());
-                }
-            });
+            if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
+                BlockPropertyWrapper.getMappedBwps().forEach((blockRegNameEntry, curBwp) -> { //TODO Optimize and update logging :trol:
+                    if (blockRegNameEntry.equals(blockRegName.substring(blockRegName.lastIndexOf(".") + 1))) {
+                        if (!curBwp.getManuallyUnlocalizedBlockName().isBlank()) addManualTranslation(blockRegName, curBwp.getManuallyUnlocalizedBlockName());
+                        else if (!curBwp.getDefinedSeparatorWords().isEmpty()) localizeGeneralRegistryName(blockRegName, curBwp.getDefinedSeparatorWords(), ObjectArrayList.of());
+                    }
+                });
+            }
 
             CAConstants.LOGGER.debug("[Currently Translating Block]: " + blockRegName + " -> " + (MANUAL_TRANSLATIONS.containsKey(blockRegName) ? MANUAL_TRANSLATIONS.get(blockRegName) : getTranslatedRegistryName(blockRegName)));
 

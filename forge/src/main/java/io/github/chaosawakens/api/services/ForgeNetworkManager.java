@@ -23,6 +23,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -53,7 +54,7 @@ public class ForgeNetworkManager implements INetworkManager {
 
     @Override
     public <MSGT> void sendToClient(MSGT s2cPacket) {
-        INSTANCE.sendTo(s2cPacket, Minecraft.getInstance().getConnection().getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+        INSTANCE.sendTo(s2cPacket, Objects.requireNonNull(Minecraft.getInstance().getConnection(), "Minecraft instance has no connection (Are you sending this packet outside of an active game?)").getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
     @Override

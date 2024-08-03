@@ -72,7 +72,7 @@ public class FabricNetworkManager implements INetworkManager {
 
                 ClientPlayNetworking.send(mappedPacketToSend.packetId(), encodedBuf);
             }
-        } else CAConstants.LOGGER.warn("Attempted to send unknown packet ({}) to server!", c2sPacket.getClass().getTypeName());
+        } else CAConstants.LOGGER.warn("Attempted to send unknown packet ({}) to server! Ensure that the packet is registered!", c2sPacket.getClass().getTypeName());
     }
 
     @Override
@@ -129,6 +129,6 @@ public class FabricNetworkManager implements INetworkManager {
 
                 ServerPlayNetworking.send(targetPlayer, mappedPacketToSend.packetId(), encodedBuf);
             }
-        } else CAConstants.LOGGER.warn("Attempted to send unknown packet ({}) to client!", s2cPacket.getClass().getTypeName());
+        } else CAConstants.LOGGER.warn("Attempted to send unknown packet ({}) to client! Ensure that the packet is registered!", s2cPacket.getClass().getTypeName());
     }
 }
