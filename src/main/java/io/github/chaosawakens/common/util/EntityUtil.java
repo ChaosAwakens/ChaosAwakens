@@ -16,6 +16,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.CooldownTracker;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -299,7 +300,7 @@ public final class EntityUtil {
 			boolean isValidTarget = (reachedEntityHitResult != null ? target : null) != null && reachedEntityHitResult.getType() == RayTraceResult.Type.ENTITY;
 
 			if (isValidTarget) {
-				if (reachSqr >= distanceToTargetSqr) {
+				if (reachSqr >= distanceToTargetSqr && owner.swingingArm.equals(Hand.MAIN_HAND)) {
 					target.hurt(DamageSource.mobAttack(owner), attackDamage);
 					heldStack.getItem().hurtEnemy(heldStack, target, owner);
 				}

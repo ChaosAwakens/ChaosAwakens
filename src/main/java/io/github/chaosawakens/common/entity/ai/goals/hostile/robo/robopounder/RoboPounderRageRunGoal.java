@@ -153,7 +153,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 		
 		if (ObjectUtil.performNullityChecks(false, relevantLookPos) && isPathingRageRun) {
-			owner.getMoveControl().setWantedPosition(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ(), 0.8F);
+			owner.getMoveControl().setWantedPosition(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ(), 0.95F);
 			owner.moveRelative(0.02F, new Vector3d(owner.xxa, owner.yya, owner.zza));
 			owner.move(MoverType.SELF, owner.getDeltaMovement());
 			
