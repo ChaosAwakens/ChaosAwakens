@@ -12,6 +12,7 @@ import io.github.chaosawakens.common.util.MathUtil;
 import io.github.chaosawakens.common.util.ObjectUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -146,24 +147,25 @@ public class RoboPounderRageRunGoal extends Goal {
 				this.isPathingRageRun = true;
 			}
 			
-			if (targetRageRunPos != null) {				
-				if (rageRunPath == null || !rageRunPath.canReach()) rageRunPath = ownerPathNav.createPath(targetRageRunPos, 0);
+			if (targetRageRunPos != null) {
 				relevantLookPos = new Vector3d(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ());
 			}
 		}
 		
-		if (ObjectUtil.performNullityChecks(false, rageRunPath, relevantLookPos)) {
-			if (!rageRunPath.isDone()) rageRunPath.setNextNodeIndex(rageRunPath.getNodeCount() - 1);
-
-			ownerPathNav.moveTo(rageRunPath, 1);
+		if (ObjectUtil.performNullityChecks(false, relevantLookPos) && isPathingRageRun) {
+			owner.getMoveControl().setWantedPosition(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ(), 0.8F);
+			owner.moveRelative(0.02F, new Vector3d(owner.xxa, owner.yya, owner.zza));
+			owner.move(MoverType.SELF, owner.getDeltaMovement());
 			
 			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
 		}
 		
-		if ((ownerPathNav.isDone() || (relevantLookPos != null && owner.distanceToSqr(relevantLookPos) <= 15.0D)) && isPathingRageRun) this.isPathingRageRun = false;
-		if (rageRunPath == null) pathTries++;
-		
-		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0 || (owner.getNavigation().isStuck())) {
+		if (targetRageRunPos != null && owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D && isPathingRageRun) {
+			this.pathTries++;
+			this.isPathingRageRun = false;
+		}
+
+		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0 || (owner.getNavigation().isStuck()) || pathTries >= 25) {
 			owner.stopAnimation(rageRunAnim.get());
 			owner.playAnimation(rageCooldownAnim.get(), true);
 		}
