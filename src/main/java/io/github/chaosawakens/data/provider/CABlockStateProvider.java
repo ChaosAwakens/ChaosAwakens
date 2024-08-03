@@ -2,7 +2,7 @@ package io.github.chaosawakens.data.provider;
 
 import io.github.chaosawakens.ChaosAwakens;
 import io.github.chaosawakens.common.blocks.GateBlock;
-import io.github.chaosawakens.common.blocks.RotatedPillarCrystalBlock;
+import io.github.chaosawakens.common.blocks.crystal.RotatedPillarCrystalBlock;
 import io.github.chaosawakens.common.blocks.dense.DoubleDensePlantBlock;
 import io.github.chaosawakens.common.blocks.multiface.LeafCarpetBlock;
 import io.github.chaosawakens.common.blocks.multiface.PipeBlock;

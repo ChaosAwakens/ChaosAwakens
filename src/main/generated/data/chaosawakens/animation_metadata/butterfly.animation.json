@@ -2,13 +2,13 @@
   "anim_file_loc": "chaosawakens:animations/entity/creature/air/butterfly.animation.json",
   "animations": [
     {
-      "animation_name": "Death",
-      "animation_length": 5.16,
+      "animation_name": "Idle",
+      "animation_length": 2.0,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 2.0,
+      "animation_name": "Death",
+      "animation_length": 5.16,
       "loop_type": "LOOP"
     }
   ]

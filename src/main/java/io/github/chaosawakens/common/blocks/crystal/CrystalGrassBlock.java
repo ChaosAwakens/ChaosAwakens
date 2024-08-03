@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.blocks.crystal;
 
-import io.github.chaosawakens.common.blocks.SpreadableCrystalDirtBlock;
 import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

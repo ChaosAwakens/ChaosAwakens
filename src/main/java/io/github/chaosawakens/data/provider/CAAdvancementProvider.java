@@ -199,6 +199,7 @@ public class CAAdvancementProvider extends AdvancementProvider {
 				.addCriterion("village_mania", ChangeDimensionTrigger.Instance.changedDimensionTo(CADimensions.VILLAGE_MANIA))
 				.save(advCons, advancementId("village_mania"));
 		Advancement roboSlayer = registerAdvancement("robo_slayer", FrameType.TASK, CAItems.RAY_GUN.get()).parent(villageMania)
+				.addCriterion("robo_jeffery", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_JEFFERY.get())))
 				.addCriterion("robo_pounder", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_POUNDER.get())))
 				.addCriterion("robo_sniper", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_SNIPER.get())))
 				.addCriterion("robo_warrior", KilledTrigger.Instance.playerKilledEntity(EntityPredicate.Builder.entity().of(CAEntityTypes.ROBO_WARRIOR.get())))

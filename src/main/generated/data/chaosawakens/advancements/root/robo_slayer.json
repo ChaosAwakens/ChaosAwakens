@@ -18,6 +18,20 @@
     "background": "chaosawakens:textures/gui/advancement_bg.png"
   },
   "criteria": {
+    "robo_jeffery": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "chaosawakens:robo_jeffery"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
     "robo_pounder": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
@@ -62,6 +76,9 @@
     }
   },
   "requirements": [
+    [
+      "robo_jeffery"
+    ],
     [
       "robo_pounder"
     ],
