@@ -1,8 +1,10 @@
 package io.github.chaosawakens.api.block;
 
 import com.google.common.collect.ImmutableSortedMap;
+import io.github.chaosawakens.CAConstants;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +16,8 @@ import java.util.function.Supplier;
  * A wrapper class used to store information referenced in datagen to simplify creating data entries for blocks.
  */
 public class BlockPropertyWrapper {
-    private static final Object2ObjectLinkedOpenHashMap<String, BlockPropertyWrapper> MAPPED_BWPS = new Object2ObjectLinkedOpenHashMap<>();
+    private static final Object2ObjectLinkedOpenHashMap<Supplier<Block>, BlockPropertyWrapper> MAPPED_BWPS = new Object2ObjectLinkedOpenHashMap<>();
+    @Nullable
     private final String blockRegName;
     private final Supplier<Block> parentBlock;
     @Nullable
@@ -25,8 +28,14 @@ public class BlockPropertyWrapper {
         this.parentBlock = parentBlock;
     }
 
+    private BlockPropertyWrapper(Supplier<Block> parentBlock) {
+        this.blockRegName = null;
+        this.parentBlock = parentBlock;
+    }
+
     /**
-     * Creates a new {@link BlockPropertyWrapper} instance. This is usually where you'll begin chaining {@link #builder()} method calls if needed.
+     * Creates a new {@link BlockPropertyWrapper} instance. This is usually where you'll begin chaining {@link #builder()} method calls if needed. Use this variant if you want to directly create a BPW during a registration call
+     * rather than after it/without storing it.
      *
      * @param blockRegName The registry name of the {@code parentBlock}. Used when access to the {@code parentBlock} returns an air/{@code null} delegate (I.E. It's too early to access
      *                       the parent block).
@@ -36,6 +45,18 @@ public class BlockPropertyWrapper {
      */
     public static BlockPropertyWrapper create(String blockRegName, Supplier<Block> parentBlock) {
         return new BlockPropertyWrapper(blockRegName, parentBlock);
+    }
+
+    /**
+     * Creates a new {@link BlockPropertyWrapper} instance. This is usually where you'll begin chaining {@link #builder()} method calls if needed. Use this variant if you want to create a BPW instance with a stored registration call,
+     * such that its parent {@link Supplier<Block>} is not an air delegate/{@code null}.
+     *
+     * @param parentBlock The parent {@link Supplier<Block>} stored in the newly-initialized BPW instance.
+     *
+     * @return A new {@link BlockPropertyWrapper} instance.
+     */
+    public static BlockPropertyWrapper create(Supplier<Block> parentBlock) {
+        return new BlockPropertyWrapper(parentBlock);
     }
 
     /**
@@ -86,7 +107,7 @@ public class BlockPropertyWrapper {
         return builder == null ? null : builder.blockLootTableBuilder;
     }
 
-    public static ImmutableSortedMap<String, BlockPropertyWrapper> getMappedBwps() {
+    public static ImmutableSortedMap<Supplier<Block>, BlockPropertyWrapper> getMappedBwps() {
         return ImmutableSortedMap.copyOf(MAPPED_BWPS);
     }
 
@@ -208,12 +229,12 @@ public class BlockPropertyWrapper {
 
         /**
          * Builds a new {@link BlockPropertyWrapper} using this builder's data. Also maps the owner
-         * {@link BlockPropertyWrapper} to the parent {@linkplain Block Block's} registry name.
+         * {@link BlockPropertyWrapper} to the parent {@linkplain Block}.
          *
          * @return The newly data-populated {@link BlockPropertyWrapper}.
          */
         public BlockPropertyWrapper build() {
-            MAPPED_BWPS.put(ownerWrapper.blockRegName, ownerWrapper);
+            MAPPED_BWPS.put(ownerWrapper.blockRegName == null ? ownerWrapper.parentBlock : () -> BuiltInRegistries.BLOCK.get(CAConstants.prefix(ownerWrapper.blockRegName)), ownerWrapper);
             return ownerWrapper;
         }
     }

@@ -21,8 +21,14 @@ public final class CABlocks {
 
     public static final Supplier<Block> BEM_VINDOS_AO = registerBlock("bem_vindos_ao", BlockPropertyWrapper.create("bem_vindos_ao", () -> new Block(BlockBehaviour.Properties.of()))
             .builder()
+            .withCustomName("BEM VINDOS AO")
             .build()
             .getParentBlock());
+    public static final Supplier<Block> CAOS_WAKENS = BlockPropertyWrapper.create(registerBlock("caos_wakens", () -> new Block(BlockBehaviour.Properties.of())))
+            .builder()
+            .withCustomName("C.A.O.S. WAKENS")
+            .build()
+            .getParentBlock();
 
     private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSup) {
         return registerBlock(id, blockSup, new Item.Properties());

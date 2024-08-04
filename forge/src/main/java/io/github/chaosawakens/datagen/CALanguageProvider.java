@@ -1,6 +1,7 @@
 package io.github.chaosawakens.datagen;
 
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Lists;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -162,18 +163,16 @@ public class CALanguageProvider extends LanguageProvider {
     }
 
     protected void translateBlocks() {
+        if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
+            BlockPropertyWrapper.getMappedBwps().forEach((blockRegNameEntry, curBwp) -> { //TODO Optimize and update logging :trol:
+                if (!curBwp.getManuallyUnlocalizedBlockName().isBlank()) addManualTranslation(blockRegNameEntry.get().getDescriptionId(), curBwp.getManuallyUnlocalizedBlockName());
+                else if (!curBwp.getDefinedSeparatorWords().isEmpty()) localizeGeneralRegistryName(blockRegNameEntry.get().getDescriptionId(), Lists.asList(DEFAULT_SEPARATORS.get(0), DEFAULT_SEPARATORS.get(1), curBwp.getDefinedSeparatorWords().toArray(String[]::new)), ObjectArrayList.of());
+            });
+        }
+
         CABlocks.getBlocks().forEach(blockRegEntry -> {
             Block blockEntry = blockRegEntry.get();
             String blockRegName = blockEntry.getDescriptionId();
-
-            if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
-                BlockPropertyWrapper.getMappedBwps().forEach((blockRegNameEntry, curBwp) -> { //TODO Optimize and update logging :trol:
-                    if (blockRegNameEntry.equals(blockRegName.substring(blockRegName.lastIndexOf(".") + 1))) {
-                        if (!curBwp.getManuallyUnlocalizedBlockName().isBlank()) addManualTranslation(blockRegName, curBwp.getManuallyUnlocalizedBlockName());
-                        else if (!curBwp.getDefinedSeparatorWords().isEmpty()) localizeGeneralRegistryName(blockRegName, curBwp.getDefinedSeparatorWords(), ObjectArrayList.of());
-                    }
-                });
-            }
 
             CAConstants.LOGGER.debug("[Currently Translating Block]: " + blockRegName + " -> " + (MANUAL_TRANSLATIONS.containsKey(blockRegName) ? MANUAL_TRANSLATIONS.get(blockRegName) : getTranslatedRegistryName(blockRegName)));
 
