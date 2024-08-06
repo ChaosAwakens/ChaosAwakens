@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.util.LootUtil;
+import io.github.chaosawakens.util.ModelUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
@@ -26,6 +27,7 @@ public final class CABlocks {
             .withCustomName("C.A.O.S. WAKENS")
             .withLootTable(LootUtil::dropSelf)
             .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.NEEDS_DIAMOND_TOOL))
+            .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("stone/caos_wakens")))
             .build()
             .getParentBlock();
 

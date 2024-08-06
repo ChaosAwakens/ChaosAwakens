@@ -167,14 +167,14 @@ public class BlockPropertyWrapper {
     }
 
     /**
-     * Gets the {@link BlockModelDefinition} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@link List} of {@linkplain BlockModelDefinition BlockModelDefinitions} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
-     * @return The {@link BlockModelDefinition}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     * @return The {@link List} of {@linkplain BlockModelDefinition BlockModelDefinitions}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
     @Nullable
-    public BlockModelDefinition getModelDefinition() {
-        return builder == null ? null : builder.blockModelDefinition;
+    public List<BlockModelDefinition> getModelDefinitions() {
+        return builder == null ? ObjectArrayList.of() : builder.blockModelDefinitions;
     }
 
     /**
@@ -197,8 +197,7 @@ public class BlockPropertyWrapper {
         @Nullable
         private Function<Supplier<Block>, LootTable.Builder> blockLootTableBuilder;
         private List<TagKey<Block>> parentTags = ObjectArrayList.of();
-        @Nullable
-        private BlockModelDefinition blockModelDefinition;
+        private List<BlockModelDefinition> blockModelDefinitions = ObjectArrayList.of();
         @Nullable
         private BlockStateDefinition blockStateDefinition;
 
@@ -281,6 +280,18 @@ public class BlockPropertyWrapper {
         }
 
         /**
+         * Tags this BPWBuilder's parent block with the provided {@link TagKey<Block>}.
+         *
+         * @param parentBlockTag The {@link TagKey<Block>} with which this BPW's parent block will be tagged.
+         *
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withTag(TagKey<Block> parentBlockTag) {
+            this.parentTags.add(parentBlockTag);
+            return this;
+        }
+
+        /**
          * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<Block> Block Tags}.
          *
          * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent block will be tagged.
@@ -293,28 +304,34 @@ public class BlockPropertyWrapper {
         }
 
         /**
-         * Assigns a custom {@link BlockModelDefinition} to this builder. By default, model datagen is handled based on a series of
+         * Appends a custom {@link BlockModelDefinition} to this builder. By default, state datagen is handled based on a series of
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
-         * different model definition that isn't natively handled.
+         * different state definition that isn't natively handled.
          *
-         * @param blockModelDefinition The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model in datagen.
+         * @param blockStateDefinition The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model(s) in datagen.
+         *
          * @return {@code this} (builder method).
+         *
+         * @see #withCustomModelDefinitions(List)
          */
-        public BPWBuilder withCustomModelDefinition(BlockModelDefinition blockModelDefinition) {
-            this.blockModelDefinition = blockModelDefinition;
+        public BPWBuilder withCustomModelDefinition(BlockModelDefinition blockStateDefinition) {
+            this.blockModelDefinitions.add(blockStateDefinition);
             return this;
         }
 
         /**
-         * Assigns a custom {@link BlockStateDefinition} to this builder. By default, state datagen is handled based on a series of
+         * Appends a custom list of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, state datagen is handled based on a series of
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
          * different state definition that isn't natively handled.
          *
-         * @param blockStateDefinition The {@link BlockStateDefinition} used to build this BPWBuilder's parent block's state in datagen.
+         * @param blockModelDefinitions The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's state in datagen.
+         *
          * @return {@code this} (builder method).
+         *
+         * @see #withCustomModelDefinition(BlockModelDefinition)
          */
-        public BPWBuilder withCustomBlockStateDefinition(BlockStateDefinition blockStateDefinition) {
-            this.blockStateDefinition = blockStateDefinition;
+        public BPWBuilder withCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) {
+            this.blockModelDefinitions.addAll(blockModelDefinitions);
             return this;
         }
 

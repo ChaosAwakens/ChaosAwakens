@@ -1,5 +1,6 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.datagen.CABlockModelProvider;
 import io.github.chaosawakens.datagen.CABlockTagsProvider;
 import io.github.chaosawakens.datagen.CALanguageProvider;
 import io.github.chaosawakens.datagen.CALootTableProvider;
@@ -36,6 +37,8 @@ public class ChaosAwakensForge {
 
         // Resources
         datagen.addProvider(event.includeClient(), new CALanguageProvider(datagenPackOutput));
+
+        datagen.addProvider(event.includeClient(), new CABlockModelProvider(datagenPackOutput, curFileHelper));
 
         // Data
         datagen.addProvider(event.includeServer(), new CALootTableProvider(datagenPackOutput));

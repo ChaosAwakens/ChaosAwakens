@@ -1,18 +1,33 @@
 package io.github.chaosawakens.datagen;
 
+import com.google.common.base.Preconditions;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.BlockModelDefinition;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import net.minecraft.client.renderer.block.model.ItemTransform;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.models.blockstates.BlockStateGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
+
 public class CABlockModelProvider extends BlockModelProvider {
+    protected static final ResourceLocation ITEM_GENERATED = new ResourceLocation("item/generated");
+    protected final Object2ObjectLinkedOpenHashMap<ResourceLocation, ItemModelBuilder> generatedBlockItemModels = new Object2ObjectLinkedOpenHashMap<>();
+    protected final Function<ResourceLocation, ItemModelBuilder> itemModelFactory = targetLoc -> new ItemModelBuilder(targetLoc, existingFileHelper);
 
     public CABlockModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, CAConstants.MODID, existingFileHelper);
@@ -21,35 +36,109 @@ public class CABlockModelProvider extends BlockModelProvider {
     @NotNull
     @Override
     public String getName() {
-        return CAConstants.MOD_NAME.concat(": Block Models");
+        return CAConstants.MOD_NAME.concat(": Block & Block Item Models");
     }
 
     @Override
     protected void registerModels() {
         BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, mappedBpw) -> {
-            BlockModelDefinition curModelDef = mappedBpw.getModelDefinition();
-            ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
-            Block curBlock = blockSupEntry.get();
-            String curBlockRegName = curBlock.getDescriptionId();
-            String formattedBlockRegName = curBlockRegName.substring(blockSupEntry.get().getDescriptionId().lastIndexOf(".") + 1);
+            List<BlockModelDefinition> curModelDefs = mappedBpw.getModelDefinitions();
 
-             if (curModelDef != null && parentModelLoc != null) {
-                 ResourceLocation curBlockModelRenderTypeLoc = curModelDef.getBlockModelRenderType();
-                 boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
-                 BlockStateGenerator curBlockModelStateGen = curModelDef.getBackingStateDefinition();
+            if (!curModelDefs.isEmpty()) {
+                curModelDefs.forEach(curModelDef -> {
+                    ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
+                    Block curBlock = blockSupEntry.get();
+                    String curBlockRegName = curBlock.getDescriptionId();
+                    String formattedBlockRegName = curBlockRegName.substring(blockSupEntry.get().getDescriptionId().lastIndexOf(".") + 1);
 
-                 if (curBlockModelRenderTypeLoc != null) { // Screw you Forge (Useless precondition nullity checks WHEN A RGC (reverse-guard-clause) NULLITY CHECK IS DONE AT THE TIME OF SERIALIZATION ANYWAY!!!)
-                     withExistingParent(formattedBlockRegName, parentModelLoc)
-                             .ao(curBMDHasAO)
-                             .renderType(curBlockModelRenderTypeLoc);
-                 } else if (curBlockModelStateGen != null) {
+                    if (curModelDef != null && parentModelLoc != null) {
+                        ResourceLocation curBlockModelRenderTypeLoc = curModelDef.getBlockModelRenderType();
+                        ResourceLocation itemParentModelLoc = curModelDef.getItemParentModelLocation();
+                        boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
+                        Map<ItemDisplayContext, ItemTransform> itemTransforms = curModelDef.getItemModelTransforms();
+                        BlockModelBuilder resultBuilder = withExistingParent(formattedBlockRegName, parentModelLoc)
+                                .ao(curBMDHasAO);
 
-                 } else {
-                     withExistingParent(formattedBlockRegName, parentModelLoc)
-                             .ao(curBMDHasAO);
-                 }
-             }
+                        curModelDef.getParentModel().requiredSlots.forEach(requiredTexSlot -> {
+                            String requiredTexSlotId = requiredTexSlot.getId();
+                            ResourceLocation mappedTextureLocation = curModelDef.getTextureMapping().get(requiredTexSlot);
+
+                            resultBuilder.texture(requiredTexSlotId, mappedTextureLocation);
+                        });
+
+                        if (curBlockModelRenderTypeLoc != null) resultBuilder.renderType(curBlockModelRenderTypeLoc);
+                        if (!itemTransforms.isEmpty()) {
+                            itemTransforms.forEach((curDisplayCtx, curItemTransform) -> {
+                                resultBuilder.transforms()
+                                        .transform(curDisplayCtx)
+                                        .leftRotation(curItemTransform.rotation.x, curItemTransform.rotation.y, curItemTransform.rotation.z)
+                                        .rightRotation(curItemTransform.rightRotation.x, curItemTransform.rightRotation.y, curItemTransform.rightRotation.z)
+                                        .scale(curItemTransform.scale.x, curItemTransform.scale.y, curItemTransform.scale.z)
+                                        .translation(curItemTransform.translation.x, curItemTransform.translation.y, curItemTransform.translation.z)
+                                        .end()
+                                        .end();
+                            });
+                        }
+
+                        ItemModelBuilder resultItemBuilder = withExistingItemParent(formattedBlockRegName, itemParentModelLoc == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + formattedBlockRegName) : itemParentModelLoc);
+                        Map<String, ResourceLocation> textureLayerDefinitionMap = curModelDef.getItemModelTextureLayerDefinitions();
+                        Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
+
+                        if (!textureLayerDefinitionMap.isEmpty()) textureLayerDefinitionMap.forEach(resultItemBuilder::texture); // Less expensive than a fancy schmancy stream operation :p
+                        if (!textureOverrides.isEmpty()) {
+                            textureOverrides.forEach((modelPredicates, resultingDelegateModel) -> {
+                                ItemModelBuilder.OverrideBuilder itemModelOverrides = resultItemBuilder.override();
+
+                                if (!modelPredicates.isEmpty()) modelPredicates.forEach(itemModelOverrides::predicate);
+                                itemModelOverrides.model(getExistingFile(resultingDelegateModel));
+
+                                itemModelOverrides.end();
+                            });
+                        }
+                    }
+                });
+            }
         });
+    }
+
+    @Override
+    protected CompletableFuture<?> generateAll(CachedOutput cache) {
+        CompletableFuture<?>[] futures = new CompletableFuture<?>[this.generatedModels.size() + this.generatedBlockItemModels.size()];
+        int i = 0;
+
+        for (BlockModelBuilder model : this.generatedModels.values()) {
+            Path target = getPath(model);
+            futures[i++] = DataProvider.saveStable(cache, model.toJson(), target);
+        }
+
+        for (ItemModelBuilder model : this.generatedBlockItemModels.values()) {
+            ResourceLocation loc = model.getLocation();
+            Path target = this.output.getOutputFolder(PackOutput.Target.RESOURCE_PACK).resolve(loc.getNamespace()).resolve("models").resolve(loc.getPath() + ".json");
+            futures[i++] = DataProvider.saveStable(cache, model.toJson(), target);
+        }
+
+        return CompletableFuture.allOf(futures);
+    }
+
+    @Override
+    protected void clear() {
+        super.clear();
+        generatedBlockItemModels.clear();
+    }
+
+    protected ItemModelBuilder withExistingItemParent(String name, ResourceLocation parent) {
+        return getItemBuilder(name).parent(getExistingFile(parent));
+    }
+
+    protected ItemModelBuilder getItemBuilder(String path) {
+        Preconditions.checkNotNull(path, "Path must not be null");
+        ResourceLocation outputLoc = extendWithFolder(path.contains(":") ? new ResourceLocation(path) : new ResourceLocation(modid, path));
+        this.existingFileHelper.trackGenerated(outputLoc, MODEL);
+        return generatedBlockItemModels.computeIfAbsent(outputLoc, itemModelFactory);
+    }
+
+    protected ResourceLocation extendWithFolder(ResourceLocation targetRl) {
+        return targetRl.getPath().contains("/") ? targetRl : new ResourceLocation(targetRl.getNamespace(), ITEM_FOLDER + "/" + targetRl.getPath());
     }
 
     protected ResourceLocation chaosRL(String texture) {
