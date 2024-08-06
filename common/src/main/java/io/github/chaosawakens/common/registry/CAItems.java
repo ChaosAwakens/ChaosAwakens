@@ -17,8 +17,9 @@ public final class CAItems {
 
 
     private static Supplier<Item> registerItem(String id, Supplier<Item> itemSup) {
-        ITEMS.add(itemSup);
-        return CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), itemSup, BuiltInRegistries.ITEM);
+        Supplier<Item> registeredItemSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), itemSup, BuiltInRegistries.ITEM); // Otherwise reference to the item sup is null cuz it needs to be registered b4hand
+        ITEMS.add(registeredItemSup);
+        return registeredItemSup;
     }
 
     public static ImmutableList<Supplier<Item>> getItems() {

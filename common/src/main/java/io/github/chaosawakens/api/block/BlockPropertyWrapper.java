@@ -2,11 +2,14 @@ package io.github.chaosawakens.api.block;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.util.LootUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,9 +59,54 @@ public class BlockPropertyWrapper {
      * @param parentBlock The parent {@link Supplier<Block>} stored in the newly-initialized BPW instance.
      *
      * @return A new {@link BlockPropertyWrapper} instance.
+     *
+     * @see #of(Supplier, Supplier)
+     * @see #of(String, Supplier)
      */
     public static BlockPropertyWrapper create(Supplier<Block> parentBlock) {
         return new BlockPropertyWrapper(parentBlock);
+    }
+
+    /**
+     * Creates a new {@link BlockPropertyWrapper} instance from an existing {@link BlockPropertyWrapper} instance based on the provided
+     * {@link Supplier<Block>}. If no such existing BPW instance exists, returns {@link #create(Supplier)}.
+     *
+     * @param parentBlock The parent {@link Supplier<Block>} stored in {@link #MAPPED_BWPS}. Copies its BPW instance's {@link BPWBuilder}
+     *                    properties if it exists, or creates a clean new BPW instance if it doesn't.
+     * @param newBlock The new registry entry to use for the newly constructed BPW instance.
+     *
+     * @return A new {@link BlockPropertyWrapper} instance with copied properties based on the provided {@link Supplier<Block>}, or an entirely new/clean instance if no such BPW exists.
+     *
+     * @see #create(Supplier)
+     * @see #of(String, Supplier)
+     */
+    public static BlockPropertyWrapper of(Supplier<Block> parentBlock, Supplier<Block> newBlock) {
+        if (MAPPED_BWPS.containsKey(parentBlock)) {
+            BlockPropertyWrapper originalWrapper = MAPPED_BWPS.get(parentBlock);
+            BlockPropertyWrapper newWrapper = new BlockPropertyWrapper(newBlock);
+
+            newWrapper.builder = originalWrapper.builder; // Calling the method would literally annihilate the entire point of copying :skull:
+
+            MAPPED_BWPS.put(newBlock, newWrapper);
+
+            return newWrapper;
+        } else return create(newBlock);
+    }
+
+    /**
+     * Overloaded variant of {@link #of(Supplier, Supplier)} that copies the parent block's {@link BlockBehaviour.Properties}.
+     *
+     * @param newBlockRegName The new registry name by which the newly constructed {@link Supplier<Block>} instance will be stored.
+     * @param parentBlock The parent {@link Supplier<Block>} stored in {@link #MAPPED_BWPS}.
+     *
+     * @return A new {@link BlockPropertyWrapper} instance with copied properties (including {@link BlockBehaviour.Properties}) based on the provided {@link Supplier<Block>},
+     * or an entirely new/clean instance if no such BPW exists.
+     *
+     * @see #of(Supplier, Supplier)
+     * @see #create(Supplier)
+     */
+    public static BlockPropertyWrapper of(String newBlockRegName, Supplier<Block> parentBlock) {
+        return of(parentBlock, CABlocks.registerExternalBlock(newBlockRegName, () -> new Block(BlockBehaviour.Properties.copy(parentBlock.get()))));
     }
 
     /**
@@ -99,14 +147,23 @@ public class BlockPropertyWrapper {
     }
 
     /**
-     * Gets the {@link Function<Supplier<Block>, LootTable.Builder>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@code Function<Supplier<Block>, LootTable.Builder>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
-     * @return The {@link Function<Supplier<Block>, LootTable.Builder>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     * @return The {@code Function<Supplier<Block>, LootTable.Builder>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
      */
     @Nullable
-    public Function<Supplier<Block>, LootTable.Builder> getBlockLootTable() {
+    public Function<Supplier<Block>, LootTable.Builder> getBlockLootTableMappingFunction() {
         return builder == null ? null : builder.blockLootTableBuilder;
+    }
+
+    /**
+     * Gets the defined parent {@linkplain TagKey<Block> Block Tags} from the {@link #builder()} if the builder exists.
+     *
+     * @return The defined parent {@linkplain TagKey<Block> Block Tags}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
+     */
+    public List<TagKey<Block>> getParentBlockTags() {
+        return builder == null ? ObjectArrayList.of() : builder.parentTags;
     }
 
     /**
@@ -139,6 +196,7 @@ public class BlockPropertyWrapper {
         private List<String> definedSeparatorWords = ObjectArrayList.of();
         @Nullable
         private Function<Supplier<Block>, LootTable.Builder> blockLootTableBuilder;
+        private List<TagKey<Block>> parentTags = ObjectArrayList.of();
         @Nullable
         private BlockModelDefinition blockModelDefinition;
         @Nullable
@@ -210,7 +268,8 @@ public class BlockPropertyWrapper {
         /**
          * Assigns a given {@link LootTable.Builder} to this builder via the input function. Can be {@code null}.
          *
-         * @param blockLootTableBuilder The {@link LootTable.Builder} used to build this BPWBuilder's parent block's loot table in datagen.
+         * @param blockLootTableBuilder The mapping {@code Function<Supplier<Block>, LootTable.Builder>}
+         *                              used to build this BPWBuilder's parent block's loot table in datagen.
          *
          * @return {@code this} (builder method).
          *
@@ -218,6 +277,18 @@ public class BlockPropertyWrapper {
          */
         public BPWBuilder withLootTable(Function<Supplier<Block>, LootTable.Builder> blockLootTableBuilder) {
             this.blockLootTableBuilder = blockLootTableBuilder;
+            return this;
+        }
+
+        /**
+         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<Block> Block Tags}.
+         *
+         * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent block will be tagged.
+         *
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withTags(List<TagKey<Block>> parentBlockTags) {
+            this.parentTags.addAll(parentBlockTags);
             return this;
         }
 

@@ -15,8 +15,9 @@ public final class CACreativeModeTabs {
     private static final ObjectArrayList<Supplier<CreativeModeTab>> CREATIVE_MODE_TABS = new ObjectArrayList<>();
 
     private static Supplier<CreativeModeTab> registerCreativeModeTab(String id, Supplier<CreativeModeTab> creativeModeTabSup) {
-        CREATIVE_MODE_TABS.add(creativeModeTabSup);
-        return CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), creativeModeTabSup, BuiltInRegistries.CREATIVE_MODE_TAB);
+        Supplier<CreativeModeTab> registeredCreativeModeTabSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), creativeModeTabSup, BuiltInRegistries.CREATIVE_MODE_TAB); // Otherwise reference to the creative mode tab sup is null cuz it needs to be registered b4hand
+        CREATIVE_MODE_TABS.add(registeredCreativeModeTabSup);
+        return registeredCreativeModeTabSup;
     }
 
     public static ImmutableList<Supplier<CreativeModeTab>> getCreativeModeTabs() {

@@ -1,0 +1,6 @@
+// 1.20.1	2024-08-06T15:43:15.2509725	Chaos Awakens: Block Tags
+decb3ce2dd3b964caedfa1fea8202e4a94e5a3dd data/minecraft/tags/blocks/mineable/axe.json
+decb3ce2dd3b964caedfa1fea8202e4a94e5a3dd data/minecraft/tags/blocks/mineable/hoe.json
+decb3ce2dd3b964caedfa1fea8202e4a94e5a3dd data/minecraft/tags/blocks/mineable/pickaxe.json
+decb3ce2dd3b964caedfa1fea8202e4a94e5a3dd data/minecraft/tags/blocks/mineable/shovel.json
+decb3ce2dd3b964caedfa1fea8202e4a94e5a3dd data/minecraft/tags/blocks/needs_diamond_tool.json

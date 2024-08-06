@@ -8,6 +8,7 @@ import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.util.LootUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -20,10 +21,11 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Block>> BLOCKS = new ObjectArrayList<>();
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
-    public static final Supplier<Block> CAOS_WAKENS = BlockPropertyWrapper.create(registerBlock("caos_wakens", () -> new Block(BlockBehaviour.Properties.of())))
+    public static final Supplier<Block> CAOS_WAKENS = BlockPropertyWrapper.create(registerBlock("caos_wakens", () -> new Block(BlockBehaviour.Properties.of().destroyTime(60).requiresCorrectToolForDrops())))
             .builder()
             .withCustomName("C.A.O.S. WAKENS")
             .withLootTable(LootUtil::dropSelf)
+            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.NEEDS_DIAMOND_TOOL))
             .build()
             .getParentBlock();
 
@@ -53,6 +55,10 @@ public final class CABlocks {
         Supplier<Item> registeredItemSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), itemSup, BuiltInRegistries.ITEM); // Otherwise reference to the item sup is null cuz it needs to be registered b4hand
         BLOCK_ITEMS.add(registeredItemSup);
         return registeredItemSup;
+    }
+
+    public static Supplier<Block> registerExternalBlock(String id, Supplier<Block> blockSup) {
+        return registerBlock(id, blockSup);
     }
 
     public static ImmutableList<Supplier<Block>> getBlocks() {

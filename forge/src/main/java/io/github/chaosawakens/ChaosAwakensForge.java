@@ -1,5 +1,6 @@
 package io.github.chaosawakens;
 
+import io.github.chaosawakens.datagen.CABlockTagsProvider;
 import io.github.chaosawakens.datagen.CALanguageProvider;
 import io.github.chaosawakens.datagen.CALootTableProvider;
 import net.minecraft.core.HolderLookup;
@@ -38,5 +39,7 @@ public class ChaosAwakensForge {
 
         // Data
         datagen.addProvider(event.includeServer(), new CALootTableProvider(datagenPackOutput));
+
+        datagen.addProvider(event.includeServer(), new CABlockTagsProvider(datagenPackOutput, lookupProvider, curFileHelper));
     }
 }

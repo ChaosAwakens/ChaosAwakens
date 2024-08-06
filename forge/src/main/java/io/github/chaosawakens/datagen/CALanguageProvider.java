@@ -190,6 +190,8 @@ public class CALanguageProvider extends LanguageProvider {
 
             CAConstants.LOGGER.debug("[Currently Translating Creative Mode Tab]: " + tabRegName + " -> " + getTranslatedRegistryName(tabRegName));
 
+            MANUAL_INSERTIONS.putAll(getTranslatedRegistryName(tabRegName), ObjectArrayList.of("Chaos Awakens", ":"));
+
             localizeGeneralRegistryName(tabRegName);
         });
     }
