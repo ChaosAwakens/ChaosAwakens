@@ -7,7 +7,7 @@ import io.github.chaosawakens.api.platform.services.IRegistrar;
 
 import java.util.ServiceLoader;
 
-public class CAServices {
+public final class CAServices {
     public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
     public static final IRegistrar REGISTRAR = load(IRegistrar.class);
     public static final INetworkManager NETWORK_MANAGER = load(INetworkManager.class);

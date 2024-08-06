@@ -1,8 +1,12 @@
 package io.github.chaosawakens.datagen;
 
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.api.block.BlockModelDefinition;
+import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.models.blockstates.BlockStateGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -22,7 +26,30 @@ public class CABlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
+        BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, mappedBpw) -> {
+            BlockModelDefinition curModelDef = mappedBpw.getModelDefinition();
+            ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
+            Block curBlock = blockSupEntry.get();
+            String curBlockRegName = curBlock.getDescriptionId();
+            String formattedBlockRegName = curBlockRegName.substring(blockSupEntry.get().getDescriptionId().lastIndexOf(".") + 1);
 
+             if (curModelDef != null && parentModelLoc != null) {
+                 ResourceLocation curBlockModelRenderTypeLoc = curModelDef.getBlockModelRenderType();
+                 boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
+                 BlockStateGenerator curBlockModelStateGen = curModelDef.getBackingStateDefinition();
+
+                 if (curBlockModelRenderTypeLoc != null) { // Screw you Forge (Useless precondition nullity checks WHEN A RGC (reverse-guard-clause) NULLITY CHECK IS DONE AT THE TIME OF SERIALIZATION ANYWAY!!!)
+                     withExistingParent(formattedBlockRegName, parentModelLoc)
+                             .ao(curBMDHasAO)
+                             .renderType(curBlockModelRenderTypeLoc);
+                 } else if (curBlockModelStateGen != null) {
+
+                 } else {
+                     withExistingParent(formattedBlockRegName, parentModelLoc)
+                             .ao(curBMDHasAO);
+                 }
+             }
+        });
     }
 
     protected ResourceLocation chaosRL(String texture) {

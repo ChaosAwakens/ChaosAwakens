@@ -1,1 +1,8 @@
 accessWidener v2 named
+
+# ModelTemplate
+accessible field net/minecraft/data/models/model/ModelTemplate model Ljava/util/Optional;
+accessible field net/minecraft/data/models/model/ModelTemplate requiredSlots Ljava/util/Set;
+
+# PropertyDispatch
+accessible method net/minecraft/data/models/blockstates/PropertyDispatch getEntries ()Ljava/util/Map;

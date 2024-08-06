@@ -1,6 +1,7 @@
 package io.github.chaosawakens;
 
 import io.github.chaosawakens.datagen.CALanguageProvider;
+import io.github.chaosawakens.datagen.CALootTableProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -36,6 +37,6 @@ public class ChaosAwakensForge {
         datagen.addProvider(event.includeClient(), new CALanguageProvider(datagenPackOutput));
 
         // Data
-    //    datagen.addProvider(event.includeServer(), new CALootTableProvider(datagenPackOutput));
+        datagen.addProvider(event.includeServer(), new CALootTableProvider(datagenPackOutput));
     }
 }

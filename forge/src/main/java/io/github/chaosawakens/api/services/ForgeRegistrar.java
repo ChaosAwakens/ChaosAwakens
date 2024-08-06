@@ -38,7 +38,7 @@ public class ForgeRegistrar implements IRegistrar {
         return existingDefReg.register(objId.getPath(), objSup);
     }
 
-    public static ImmutableMap<ResourceKey, DeferredRegister> getCachedRegistries() {
+    public static ImmutableMap<ResourceKey<?>, DeferredRegister<?>> getCachedRegistries() {
         return ImmutableMap.copyOf(CACHED_REGISTRIES);
     }
 }

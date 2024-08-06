@@ -2,6 +2,7 @@ package io.github.chaosawakens.api.block;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.util.LootUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -97,16 +99,32 @@ public class BlockPropertyWrapper {
     }
 
     /**
-     * Gets the {@link LootTable.Builder} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@link Function<Supplier<Block>, LootTable.Builder>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
-     * @return The {@link LootTable.Builder}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     * @return The {@link Function<Supplier<Block>, LootTable.Builder>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
      */
     @Nullable
-    public LootTable.Builder getBlockLootTable() {
+    public Function<Supplier<Block>, LootTable.Builder> getBlockLootTable() {
         return builder == null ? null : builder.blockLootTableBuilder;
     }
 
+    /**
+     * Gets the {@link BlockModelDefinition} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be {@code null}.
+     *
+     * @return The {@link BlockModelDefinition}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     */
+    @Nullable
+    public BlockModelDefinition getModelDefinition() {
+        return builder == null ? null : builder.blockModelDefinition;
+    }
+
+    /**
+     * Gets an immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
+     *
+     * @return An immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
+     */
     public static ImmutableSortedMap<Supplier<Block>, BlockPropertyWrapper> getMappedBwps() {
         return ImmutableSortedMap.copyOf(MAPPED_BWPS);
     }
@@ -120,7 +138,7 @@ public class BlockPropertyWrapper {
         private String manuallyUnlocalizedBlockName = "";
         private List<String> definedSeparatorWords = ObjectArrayList.of();
         @Nullable
-        private LootTable.Builder blockLootTableBuilder;
+        private Function<Supplier<Block>, LootTable.Builder> blockLootTableBuilder;
         @Nullable
         private BlockModelDefinition blockModelDefinition;
         @Nullable
@@ -190,13 +208,15 @@ public class BlockPropertyWrapper {
         }
 
         /**
-         * Assigns a given {@link LootTable.Builder} to this builder. Can be {@code null}.
+         * Assigns a given {@link LootTable.Builder} to this builder via the input function. Can be {@code null}.
          *
          * @param blockLootTableBuilder The {@link LootTable.Builder} used to build this BPWBuilder's parent block's loot table in datagen.
          *
          * @return {@code this} (builder method).
+         *
+         * @see LootUtil
          */
-        public BPWBuilder withLootTable(LootTable.Builder blockLootTableBuilder) {
+        public BPWBuilder withLootTable(Function<Supplier<Block>, LootTable.Builder> blockLootTableBuilder) {
             this.blockLootTableBuilder = blockLootTableBuilder;
             return this;
         }

@@ -5,6 +5,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.util.LootUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
@@ -19,14 +20,10 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Block>> BLOCKS = new ObjectArrayList<>();
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
-    public static final Supplier<Block> BEM_VINDOS_AO = registerBlock("bem_vindos_ao", BlockPropertyWrapper.create("bem_vindos_ao", () -> new Block(BlockBehaviour.Properties.of()))
-            .builder()
-            .withCustomName("BEM VINDOS AO")
-            .build()
-            .getParentBlock());
     public static final Supplier<Block> CAOS_WAKENS = BlockPropertyWrapper.create(registerBlock("caos_wakens", () -> new Block(BlockBehaviour.Properties.of())))
             .builder()
             .withCustomName("C.A.O.S. WAKENS")
+            .withLootTable(LootUtil::dropSelf)
             .build()
             .getParentBlock();
 

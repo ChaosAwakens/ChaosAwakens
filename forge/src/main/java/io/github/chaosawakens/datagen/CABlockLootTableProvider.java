@@ -1,5 +1,6 @@
 package io.github.chaosawakens.datagen;
 
+import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Collections;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -25,6 +27,11 @@ public class CABlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        BlockPropertyWrapper.getMappedBwps().forEach(((blockSupEntry, curBpw) -> {
+            Function<Supplier<Block>, LootTable.Builder> lootFunc = curBpw.getBlockLootTable();
+
+            if (lootFunc != null) add(blockSupEntry.get(), lootFunc.apply(blockSupEntry));
+        }));
     }
 
     protected LootTable.Builder createRangedOreDrop(Block oreBlock, Item drop, int minItemDrops, int maxItemDrops) {
