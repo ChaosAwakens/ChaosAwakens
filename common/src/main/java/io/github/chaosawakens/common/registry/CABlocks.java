@@ -5,8 +5,6 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
-import io.github.chaosawakens.util.LootUtil;
-import io.github.chaosawakens.util.ModelUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
@@ -22,18 +20,12 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Block>> BLOCKS = new ObjectArrayList<>();
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
-    public static final Supplier<Block> CAOS_WAKENS = BlockPropertyWrapper.create(registerBlock("caos_wakens", () -> new Block(BlockBehaviour.Properties.of().destroyTime(20).requiresCorrectToolForDrops())))
-            .builder()
-            .withCustomName("C.A.O.S. WAKENS")
-            .withLootTable(LootUtil::dropSelf)
-            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL))
-            .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("stone/caos_wakens")))
-            .withBlockStateDefinition(ModelUtil::simpleBlock)
-            .build()
+    public static final Supplier<Block> CAOS_WAKENS = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("caos_wakens", () -> new Block(BlockBehaviour.Properties.of().destroyTime(20).requiresCorrectToolForDrops())))
             .getParentBlock();
     public static final Supplier<Block> COPIED_WAKER = BlockPropertyWrapper.of("updated_waker", CAOS_WAKENS)
             .cachedBuilder()
             .withCustomName("C.O.P.I.E.D. WAKER")
+            .withTags(ObjectArrayList.of(BlockTags.NEEDS_DIAMOND_TOOL))
             .build()
             .getParentBlock();
 

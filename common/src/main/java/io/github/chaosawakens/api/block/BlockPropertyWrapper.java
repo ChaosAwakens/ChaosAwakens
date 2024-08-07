@@ -27,15 +27,22 @@ public class BlockPropertyWrapper {
     private final Supplier<Block> parentBlock;
     @Nullable
     private BPWBuilder builder;
+    private final boolean isTemplate;
 
     private BlockPropertyWrapper(String blockRegName, Supplier<Block> parentBlock) {
         this.blockRegName = blockRegName;
         this.parentBlock = parentBlock;
+        this.isTemplate = false;
     }
 
     private BlockPropertyWrapper(Supplier<Block> parentBlock) {
+        this(null, parentBlock);
+    }
+
+    private BlockPropertyWrapper() {
         this.blockRegName = null;
-        this.parentBlock = parentBlock;
+        this.parentBlock = null;
+        this.isTemplate = true; // Otherwise can't set with constructor overloading
     }
 
     /**
@@ -62,9 +69,83 @@ public class BlockPropertyWrapper {
      *
      * @see #of(Supplier, Supplier)
      * @see #of(String, Supplier)
+     * @see #of(BlockPropertyWrapper, Supplier)
      */
     public static BlockPropertyWrapper create(Supplier<Block> parentBlock) {
         return new BlockPropertyWrapper(parentBlock);
+    }
+
+    /**
+     * Creates a new {@link BlockPropertyWrapper} instance as a template. Template BPWs are not stored in {@link #MAPPED_BWPS} and do not store a parent {@link Block}.
+     * They're particularly useful for re-using across multiple {@linkplain Block Blocks}.
+     *
+     * @return A new {@link BlockPropertyWrapper} instance, set as a template.
+     *
+     * @see #of(BlockPropertyWrapper, Supplier)
+     * @see #isTemplate()
+     * @see #ofTemplate(BlockPropertyWrapper)
+     */
+    public static BlockPropertyWrapper createTemplate() {
+        return new BlockPropertyWrapper();
+    }
+
+    /**
+     * Creates a new {@link BlockPropertyWrapper} instance as a template, inheriting data from the provided BPW template. Template BPWs are not stored in {@link #MAPPED_BWPS} and do not store a parent {@link Block}.
+     * They're particularly useful for re-using across multiple {@linkplain Block Blocks}.
+     *
+     * @param parentTemplateWrapper The parent {@link BlockPropertyWrapper} template from which {{@link #builder()}} data should be copied.
+     *
+     * @return A new {@link BlockPropertyWrapper} instance, set as a template, inheriting from the provided BPW template. If the provided BPW template is {@code null}, returns {@link #createTemplate()}.
+     *
+     * @see #createTemplate()
+     * @see #isTemplate()
+     */
+    public static BlockPropertyWrapper ofTemplate(BlockPropertyWrapper parentTemplateWrapper) {
+        if (parentTemplateWrapper != null) {
+            BlockPropertyWrapper newTemplateWrapper = new BlockPropertyWrapper();
+
+            newTemplateWrapper.builder()
+                    .withCustomName(parentTemplateWrapper.builder.manuallyUnlocalizedBlockName)
+                    .withCustomSeparatorWords(parentTemplateWrapper.builder.definedSeparatorWords)
+                    .withSetTags(parentTemplateWrapper.builder.parentTags)
+                    .withLootTable(parentTemplateWrapper.builder.blockLootTableBuilder)
+                    .withSetCustomModelDefinitions(parentTemplateWrapper.builder.blockModelDefinitions)
+                    .withBlockStateDefinition(parentTemplateWrapper.builder.blockStateDefinition)
+                    .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
+
+            return newTemplateWrapper;
+        } else return new BlockPropertyWrapper();
+    }
+
+    /**
+     * Creates a new {@link BlockPropertyWrapper} instance based on the provided {@link BlockPropertyWrapper}. If the provided BPW instance is {@code null},
+     * returns {@link #create(Supplier)}. You'd typically use this if you have a BPW template you want multiple registered {@linkplain Block Blocks} to inherit from.
+     *
+     * @param parentWrapper The parent {@link BlockPropertyWrapper} instance from which {{@link #builder()}} should be copied.
+     * @param newBlock The new registry entry to use for the newly constructed BPW instance.
+     *
+     * @return A new {@link BlockPropertyWrapper} instance with copied properties based on the provided BPW, or an entirely new/clean instance if the provided BPW is {@code null}.
+     *
+     * @see #of(Supplier, Supplier)
+     * @see #of(String, Supplier)
+     * @see #create(Supplier)
+     * @see #createTemplate()
+     */
+    public static BlockPropertyWrapper of(BlockPropertyWrapper parentWrapper, Supplier<Block> newBlock) {
+        if (parentWrapper != null) {
+            BlockPropertyWrapper newWrapper = new BlockPropertyWrapper(newBlock);
+
+            newWrapper.builder()
+                    .withCustomName(parentWrapper.builder.manuallyUnlocalizedBlockName)
+                    .withCustomSeparatorWords(parentWrapper.builder.definedSeparatorWords)
+                    .withSetTags(List.copyOf(parentWrapper.builder.parentTags))
+                    .withLootTable(parentWrapper.builder.blockLootTableBuilder)
+                    .withSetCustomModelDefinitions(List.copyOf(parentWrapper.builder.blockModelDefinitions))
+                    .withBlockStateDefinition(parentWrapper.builder.blockStateDefinition)
+                    .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
+
+            return newWrapper;
+        } else return create(newBlock);
     }
 
     /**
@@ -79,6 +160,7 @@ public class BlockPropertyWrapper {
      *
      * @see #create(Supplier)
      * @see #of(String, Supplier)
+     * @see #of(BlockPropertyWrapper, Supplier)
      */
     public static BlockPropertyWrapper of(Supplier<Block> parentBlock, Supplier<Block> newBlock) {
         if (MAPPED_BWPS.containsKey(parentBlock)) {
@@ -88,13 +170,11 @@ public class BlockPropertyWrapper {
             newWrapper.builder()
                     .withCustomName(originalWrapper.builder.manuallyUnlocalizedBlockName)
                     .withCustomSeparatorWords(originalWrapper.builder.definedSeparatorWords)
-                    .withSetTags(originalWrapper.builder.parentTags)
+                    .withSetTags(List.copyOf(originalWrapper.builder.parentTags))
                     .withLootTable(originalWrapper.builder.blockLootTableBuilder)
-                    .withSetCustomModelDefinitions(originalWrapper.builder.blockModelDefinitions)
+                    .withSetCustomModelDefinitions(List.copyOf(originalWrapper.builder.blockModelDefinitions))
                     .withBlockStateDefinition(originalWrapper.builder.blockStateDefinition)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
-
-            MAPPED_BWPS.put(newBlock, newWrapper);
 
             return newWrapper;
         } else return create(newBlock);
@@ -109,6 +189,7 @@ public class BlockPropertyWrapper {
      * @return A new {@link BlockPropertyWrapper} instance with copied properties (including {@link BlockBehaviour.Properties}) based on the provided {@link Supplier<Block>},
      * or an entirely new/clean instance if no such BPW exists.
      *
+     * @see #of(BlockPropertyWrapper, Supplier)
      * @see #of(Supplier, Supplier)
      * @see #create(Supplier)
      */
@@ -216,6 +297,18 @@ public class BlockPropertyWrapper {
      */
     public static ImmutableSortedMap<Supplier<Block>, BlockPropertyWrapper> getMappedBwps() {
         return ImmutableSortedMap.copyOf(MAPPED_BWPS);
+    }
+
+    /**
+     * Whether this BPW instance is a template. Templates are not stored in {@link #getMappedBwps()} and have no parent {@link Block}.
+     *
+     * @return Whether this BPW instance is a template.
+     *
+     * @see #of(BlockPropertyWrapper, Supplier)
+     * @see #createTemplate()
+     */
+    public boolean isTemplate() {
+        return isTemplate;
     }
 
     /**
@@ -347,7 +440,8 @@ public class BlockPropertyWrapper {
          * @see #withTags(List)
          */
         public BPWBuilder withSetTags(List<TagKey<Block>> parentBlockTags) {
-            this.parentTags = parentBlockTags;
+            this.parentTags.clear();
+            this.parentTags.addAll(parentBlockTags);
             return this;
         }
 
@@ -396,7 +490,8 @@ public class BlockPropertyWrapper {
          * @see #withCustomModelDefinitions(List)
          */
         public BPWBuilder withSetCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) {
-            this.blockModelDefinitions = blockModelDefinitions;
+            this.blockModelDefinitions.clear();
+            this.blockModelDefinitions.addAll(blockModelDefinitions);
             return this;
         }
 
@@ -409,19 +504,21 @@ public class BlockPropertyWrapper {
          *
          * @return {@code this} (builder method).
          */
-        public BPWBuilder withBlockStateDefinition(Function<Supplier<Block>, BlockStateDefinition> bsdMappingFunction) { //TODO Function-ify
+        public BPWBuilder withBlockStateDefinition(Function<Supplier<Block>, BlockStateDefinition> bsdMappingFunction) {
             this.blockStateDefinition = bsdMappingFunction;
             return this;
         }
 
         /**
          * Builds a new {@link BlockPropertyWrapper} using this builder's data. Also maps the owner
-         * {@link BlockPropertyWrapper} to the parent {@linkplain Block}.
+         * {@link BlockPropertyWrapper} to the parent {@linkplain Block} if the owner is not a template.
          *
          * @return The newly data-populated {@link BlockPropertyWrapper}.
+         *
+         * @see BlockPropertyWrapper#isTemplate()
          */
         public BlockPropertyWrapper build() {
-            MAPPED_BWPS.putIfAbsent(ownerWrapper.blockRegName == null ? ownerWrapper.parentBlock : () -> BuiltInRegistries.BLOCK.get(CAConstants.prefix(ownerWrapper.blockRegName)), ownerWrapper);
+            if (!ownerWrapper.isTemplate) MAPPED_BWPS.putIfAbsent(ownerWrapper.blockRegName == null ? ownerWrapper.parentBlock : () -> BuiltInRegistries.BLOCK.get(CAConstants.prefix(ownerWrapper.blockRegName)), ownerWrapper);
             return ownerWrapper;
         }
     }
