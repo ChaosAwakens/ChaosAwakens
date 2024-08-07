@@ -108,15 +108,6 @@ public class CABlockModelProvider extends BlockModelProvider {
                 }
             });
         }
-
-        if (!distinctBlocks.isEmpty()) {
-            distinctBlocks.forEach(blockSupEntry -> {
-                Block blockEntry = blockSupEntry.get();
-                String formattedBlockRegName = blockEntry.getDescriptionId().substring(blockEntry.getDescriptionId().lastIndexOf(".") + 1);
-
-
-            });
-        }
     }
 
     @Override

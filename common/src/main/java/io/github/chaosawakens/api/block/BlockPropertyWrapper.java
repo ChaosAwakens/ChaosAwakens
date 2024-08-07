@@ -85,7 +85,14 @@ public class BlockPropertyWrapper {
             BlockPropertyWrapper originalWrapper = MAPPED_BWPS.get(parentBlock);
             BlockPropertyWrapper newWrapper = new BlockPropertyWrapper(newBlock);
 
-            newWrapper.builder = originalWrapper.builder; // Calling the method would literally annihilate the entire point of copying :skull:
+            newWrapper.builder()
+                    .withCustomName(originalWrapper.builder.manuallyUnlocalizedBlockName)
+                    .withCustomSeparatorWords(originalWrapper.builder.definedSeparatorWords)
+                    .withSetTags(originalWrapper.builder.parentTags)
+                    .withLootTable(originalWrapper.builder.blockLootTableBuilder)
+                    .withSetCustomModelDefinitions(originalWrapper.builder.blockModelDefinitions)
+                    .withBlockStateDefinition(originalWrapper.builder.blockStateDefinition)
+                    .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             MAPPED_BWPS.put(newBlock, newWrapper);
 
@@ -117,6 +124,20 @@ public class BlockPropertyWrapper {
      */
     public BPWBuilder builder() {
         return this.builder = new BPWBuilder(this, parentBlock);
+    }
+
+    /**
+     * Gets the cached {@link BPWBuilder} instance from the {@link #builder()} if the builder exists. May be {@code null}. Useful for
+     * overriding specific properties after having copied another BPW instance.
+     *
+     * @return The cached {@link BPWBuilder} instance, or {@code null} if the {@link #builder()} is {@code null}.
+     *
+     * @see #of(String, Supplier)
+     * @see #of(Supplier, Supplier)
+     */
+    @Nullable
+    public BPWBuilder cachedBuilder() {
+        return builder;
     }
 
     /**
@@ -303,14 +324,30 @@ public class BlockPropertyWrapper {
         }
 
         /**
-         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<Block> Block Tags}.
+         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<Block> Block Tags}. Appends to the existing list.
          *
          * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent block will be tagged.
          *
          * @return {@code this} (builder method).
+         *
+         * @see #withSetTags(List)
          */
         public BPWBuilder withTags(List<TagKey<Block>> parentBlockTags) {
             this.parentTags.addAll(parentBlockTags);
+            return this;
+        }
+
+        /**
+         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<Block> Block Tags}. Overwrites the existing list.
+         *
+         * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent block will be tagged.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see #withTags(List)
+         */
+        public BPWBuilder withSetTags(List<TagKey<Block>> parentBlockTags) {
+            this.parentTags = parentBlockTags;
             return this;
         }
 
@@ -347,6 +384,23 @@ public class BlockPropertyWrapper {
         }
 
         /**
+         * Sets a new custom list of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, model datagen is handled based on a series of
+         * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
+         * different model definition that isn't natively handled.
+         *
+         * @param blockModelDefinitions The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model in datagen.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see #withCustomModelDefinition(BlockModelDefinition)
+         * @see #withCustomModelDefinitions(List)
+         */
+        public BPWBuilder withSetCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) {
+            this.blockModelDefinitions = blockModelDefinitions;
+            return this;
+        }
+
+        /**
          * Defines a custom {@link BlockStateDefinition} mapping function to this builder. By default, blockstate datagen is handled based on a series of
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
          * different blockstate definition that isn't natively handled.
@@ -367,7 +421,7 @@ public class BlockPropertyWrapper {
          * @return The newly data-populated {@link BlockPropertyWrapper}.
          */
         public BlockPropertyWrapper build() {
-            MAPPED_BWPS.put(ownerWrapper.blockRegName == null ? ownerWrapper.parentBlock : () -> BuiltInRegistries.BLOCK.get(CAConstants.prefix(ownerWrapper.blockRegName)), ownerWrapper);
+            MAPPED_BWPS.putIfAbsent(ownerWrapper.blockRegName == null ? ownerWrapper.parentBlock : () -> BuiltInRegistries.BLOCK.get(CAConstants.prefix(ownerWrapper.blockRegName)), ownerWrapper);
             return ownerWrapper;
         }
     }
