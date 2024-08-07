@@ -20,6 +20,7 @@ public final class ClassFinder {
      * Uses {@code org.objectweb.asm} in order to discover (and load) classes annotated with the specified annotation type class, or an empty list if there aren't any/the {@code annotationType} passed in isn't an annotation.
      *
      * @param annotationType The annotation type class.
+     *
      * @return A list of classes annotated with the specified annotation type.
      */
     public static List<Class<?>> discoverAnnotatedClasses(Class<?> annotationType) {

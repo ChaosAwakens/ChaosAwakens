@@ -26,8 +26,9 @@ public final class CABlocks {
             .builder()
             .withCustomName("C.A.O.S. WAKENS")
             .withLootTable(LootUtil::dropSelf)
-            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.NEEDS_DIAMOND_TOOL))
+            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL))
             .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("stone/caos_wakens")))
+            .withBlockStateDefinition(ModelUtil::simpleBlock)
             .build()
             .getParentBlock();
 

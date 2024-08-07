@@ -4,7 +4,9 @@ import com.google.common.base.Preconditions;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.BlockModelDefinition;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
+import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.block.model.ItemTransform;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -23,9 +25,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CABlockModelProvider extends BlockModelProvider {
-    protected static final ResourceLocation ITEM_GENERATED = new ResourceLocation("item/generated");
+    public static final ResourceLocation ITEM_GENERATED = new ResourceLocation("item/generated");
     protected final Object2ObjectLinkedOpenHashMap<ResourceLocation, ItemModelBuilder> generatedBlockItemModels = new Object2ObjectLinkedOpenHashMap<>();
     protected final Function<ResourceLocation, ItemModelBuilder> itemModelFactory = targetLoc -> new ItemModelBuilder(targetLoc, existingFileHelper);
 
@@ -41,64 +46,77 @@ public class CABlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
-        BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, mappedBpw) -> {
-            List<BlockModelDefinition> curModelDefs = mappedBpw.getModelDefinitions();
+        ObjectArrayList<Supplier<Block>> distinctBlocks = Stream.concat(CABlocks.getBlocks().stream(), BlockPropertyWrapper.getMappedBwps().keySet().stream())
+                .distinct()
+                .collect(Collectors.toCollection(ObjectArrayList::new));
 
-            if (!curModelDefs.isEmpty()) {
-                curModelDefs.forEach(curModelDef -> {
-                    ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
-                    Block curBlock = blockSupEntry.get();
-                    String curBlockRegName = curBlock.getDescriptionId();
-                    String formattedBlockRegName = curBlockRegName.substring(blockSupEntry.get().getDescriptionId().lastIndexOf(".") + 1);
+        if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
+            BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, mappedBpw) -> {
+                List<BlockModelDefinition> curModelDefs = mappedBpw.getModelDefinitions();
 
-                    if (curModelDef != null && parentModelLoc != null) {
-                        ResourceLocation curBlockModelRenderTypeLoc = curModelDef.getBlockModelRenderType();
-                        ResourceLocation itemParentModelLoc = curModelDef.getItemParentModelLocation();
-                        boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
-                        Map<ItemDisplayContext, ItemTransform> itemTransforms = curModelDef.getItemModelTransforms();
-                        BlockModelBuilder resultBuilder = withExistingParent(formattedBlockRegName, parentModelLoc)
-                                .ao(curBMDHasAO);
+                if (!curModelDefs.isEmpty()) {
+                    curModelDefs.forEach(curModelDef -> {
+                        ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
+                        Block curBlock = blockSupEntry.get();
+                        String curBlockRegName = curBlock.getDescriptionId();
+                        String formattedBlockRegName = curBlockRegName.substring(blockSupEntry.get().getDescriptionId().lastIndexOf(".") + 1);
 
-                        curModelDef.getParentModel().requiredSlots.forEach(requiredTexSlot -> {
-                            String requiredTexSlotId = requiredTexSlot.getId();
-                            ResourceLocation mappedTextureLocation = curModelDef.getTextureMapping().get(requiredTexSlot);
+                        if (curModelDef != null && parentModelLoc != null) { //TODO Add GuiLight & ElementBuilder support
+                            ResourceLocation curBlockModelRenderTypeLoc = curModelDef.getBlockModelRenderType();
+                            ResourceLocation itemParentModelLoc = curModelDef.getItemParentModelLocation();
+                            boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
+                            Map<ItemDisplayContext, ItemTransform> itemTransforms = curModelDef.getItemModelTransforms();
+                            BlockModelBuilder resultBuilder = withExistingParent(formattedBlockRegName, parentModelLoc)
+                                    .ao(curBMDHasAO);
 
-                            resultBuilder.texture(requiredTexSlotId, mappedTextureLocation);
-                        });
+                            curModelDef.getParentModel().requiredSlots.forEach(requiredTexSlot -> {
+                                String requiredTexSlotId = requiredTexSlot.getId();
+                                ResourceLocation mappedTextureLocation = curModelDef.getTextureMapping().get(requiredTexSlot); // Explicit get() call for exception handling + readability
 
-                        if (curBlockModelRenderTypeLoc != null) resultBuilder.renderType(curBlockModelRenderTypeLoc);
-                        if (!itemTransforms.isEmpty()) {
-                            itemTransforms.forEach((curDisplayCtx, curItemTransform) -> {
-                                resultBuilder.transforms()
+                                resultBuilder.texture(requiredTexSlotId, mappedTextureLocation);
+                            });
+
+                            if (curBlockModelRenderTypeLoc != null) resultBuilder.renderType(curBlockModelRenderTypeLoc);
+                            if (!itemTransforms.isEmpty()) {
+                                itemTransforms.forEach((curDisplayCtx, curItemTransform) -> resultBuilder.transforms()
                                         .transform(curDisplayCtx)
                                         .leftRotation(curItemTransform.rotation.x, curItemTransform.rotation.y, curItemTransform.rotation.z)
                                         .rightRotation(curItemTransform.rightRotation.x, curItemTransform.rightRotation.y, curItemTransform.rightRotation.z)
                                         .scale(curItemTransform.scale.x, curItemTransform.scale.y, curItemTransform.scale.z)
                                         .translation(curItemTransform.translation.x, curItemTransform.translation.y, curItemTransform.translation.z)
                                         .end()
-                                        .end();
-                            });
+                                        .end());
+                            }
+
+                            ItemModelBuilder resultItemBuilder = withExistingItemParent(formattedBlockRegName, itemParentModelLoc == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + formattedBlockRegName) : itemParentModelLoc);
+                            Map<String, ResourceLocation> textureLayerDefinitionMap = curModelDef.getItemModelTextureLayerDefinitions();
+                            Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
+
+                            if (!textureLayerDefinitionMap.isEmpty()) textureLayerDefinitionMap.forEach(resultItemBuilder::texture); // Less expensive than a fancy schmancy stream operation :p
+                            if (!textureOverrides.isEmpty()) {
+                                textureOverrides.forEach((modelPredicates, resultingDelegateModel) -> {
+                                    ItemModelBuilder.OverrideBuilder itemModelOverrides = resultItemBuilder.override();
+
+                                    if (!modelPredicates.isEmpty()) modelPredicates.forEach(itemModelOverrides::predicate);
+                                    itemModelOverrides.model(getExistingFile(resultingDelegateModel));
+
+                                    itemModelOverrides.end();
+                                });
+                            }
                         }
+                    });
+                }
+            });
+        }
 
-                        ItemModelBuilder resultItemBuilder = withExistingItemParent(formattedBlockRegName, itemParentModelLoc == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + formattedBlockRegName) : itemParentModelLoc);
-                        Map<String, ResourceLocation> textureLayerDefinitionMap = curModelDef.getItemModelTextureLayerDefinitions();
-                        Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
+        if (!distinctBlocks.isEmpty()) {
+            distinctBlocks.forEach(blockSupEntry -> {
+                Block blockEntry = blockSupEntry.get();
+                String formattedBlockRegName = blockEntry.getDescriptionId().substring(blockEntry.getDescriptionId().lastIndexOf(".") + 1);
 
-                        if (!textureLayerDefinitionMap.isEmpty()) textureLayerDefinitionMap.forEach(resultItemBuilder::texture); // Less expensive than a fancy schmancy stream operation :p
-                        if (!textureOverrides.isEmpty()) {
-                            textureOverrides.forEach((modelPredicates, resultingDelegateModel) -> {
-                                ItemModelBuilder.OverrideBuilder itemModelOverrides = resultItemBuilder.override();
 
-                                if (!modelPredicates.isEmpty()) modelPredicates.forEach(itemModelOverrides::predicate);
-                                itemModelOverrides.model(getExistingFile(resultingDelegateModel));
-
-                                itemModelOverrides.end();
-                            });
-                        }
-                    }
-                });
-            }
-        });
+            });
+        }
     }
 
     @Override

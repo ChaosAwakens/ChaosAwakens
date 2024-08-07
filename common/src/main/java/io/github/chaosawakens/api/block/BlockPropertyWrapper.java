@@ -178,6 +178,17 @@ public class BlockPropertyWrapper {
     }
 
     /**
+     * Gets the {@code Function<Supplier<Block>, BlockStateDefinition>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be {@code null}.
+     *
+     * @return The {@code Function<Supplier<Block>, BlockStateDefinition>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     */
+    @Nullable
+    public Function<Supplier<Block>, BlockStateDefinition> getBlockStateDefinitionMappingFunction() {
+        return builder == null ? null : builder.blockStateDefinition;
+    }
+
+    /**
      * Gets an immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
      *
      * @return An immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
@@ -199,7 +210,7 @@ public class BlockPropertyWrapper {
         private List<TagKey<Block>> parentTags = ObjectArrayList.of();
         private List<BlockModelDefinition> blockModelDefinitions = ObjectArrayList.of();
         @Nullable
-        private BlockStateDefinition blockStateDefinition;
+        private Function<Supplier<Block>, BlockStateDefinition> blockStateDefinition;
 
         private BPWBuilder(BlockPropertyWrapper ownerWrapper, Supplier<Block> parentBlock) {
             this.ownerWrapper = ownerWrapper;
@@ -304,9 +315,9 @@ public class BlockPropertyWrapper {
         }
 
         /**
-         * Appends a custom {@link BlockModelDefinition} to this builder. By default, state datagen is handled based on a series of
+         * Appends a custom {@link BlockModelDefinition} to this builder. By default, model datagen is handled based on a series of
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
-         * different state definition that isn't natively handled.
+         * different model definition that isn't natively handled.
          *
          * @param blockStateDefinition The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model(s) in datagen.
          *
@@ -320,11 +331,11 @@ public class BlockPropertyWrapper {
         }
 
         /**
-         * Appends a custom list of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, state datagen is handled based on a series of
+         * Appends a custom list of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, model datagen is handled based on a series of
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
-         * different state definition that isn't natively handled.
+         * different model definition that isn't natively handled.
          *
-         * @param blockModelDefinitions The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's state in datagen.
+         * @param blockModelDefinitions The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model in datagen.
          *
          * @return {@code this} (builder method).
          *
@@ -332,6 +343,20 @@ public class BlockPropertyWrapper {
          */
         public BPWBuilder withCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) {
             this.blockModelDefinitions.addAll(blockModelDefinitions);
+            return this;
+        }
+
+        /**
+         * Defines a custom {@link BlockStateDefinition} mapping function to this builder. By default, blockstate datagen is handled based on a series of
+         * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
+         * different blockstate definition that isn't natively handled.
+         *
+         * @param bsdMappingFunction The {@link BlockStateDefinition} mapping function used to build this BPWBuilder's parent block's blockstate in datagen.
+         *
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withBlockStateDefinition(Function<Supplier<Block>, BlockStateDefinition> bsdMappingFunction) { //TODO Function-ify
+            this.blockStateDefinition = bsdMappingFunction;
             return this;
         }
 

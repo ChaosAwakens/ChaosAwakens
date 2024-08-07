@@ -20,15 +20,15 @@ public class BlockModelDefinition {
     @NotNull
     private final ModelTemplate parentModel;
     private boolean ambientOcclusion = true;
-    private Map<ItemDisplayContext, ItemTransform> itemModelTransforms = new Object2ObjectLinkedOpenHashMap<>();
+    private final Map<ItemDisplayContext, ItemTransform> itemModelTransforms = new Object2ObjectLinkedOpenHashMap<>();
     @Nullable
     private ResourceLocation blockRenderType;
     @Nullable
     private TextureMapping blockModelTextureMapping;
     @Nullable
     private ResourceLocation itemParentModelLoc;
-    private Map<String, ResourceLocation> itemTextureLayerMap = new Object2ObjectLinkedOpenHashMap<>();
-    private Map<Map<ResourceLocation, Float>, ResourceLocation> itemModelTextureOverrides = new Object2ObjectLinkedOpenHashMap<>();
+    private final Map<String, ResourceLocation> itemTextureLayerMap = new Object2ObjectLinkedOpenHashMap<>();
+    private final Map<Map<ResourceLocation, Float>, ResourceLocation> itemModelTextureOverrides = new Object2ObjectLinkedOpenHashMap<>();
 
     private BlockModelDefinition(ModelTemplate parentModel) {
         this.parentModel = parentModel;

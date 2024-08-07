@@ -6,3 +6,24 @@ accessible field net/minecraft/data/models/model/ModelTemplate requiredSlots Lja
 
 # PropertyDispatch
 accessible method net/minecraft/data/models/blockstates/PropertyDispatch getEntries ()Ljava/util/Map;
+accessible method net/minecraft/data/models/blockstates/PropertyDispatch getDefinedProperties ()Ljava/util/List;
+
+# MultiPartGenerator
+accessible field net/minecraft/data/models/blockstates/MultiPartGenerator parts Ljava/util/List;
+accessible field net/minecraft/data/models/blockstates/MultiPartGenerator$Entry variants Ljava/util/List;
+accessible field net/minecraft/data/models/blockstates/MultiPartGenerator$ConditionalEntry condition Lnet/minecraft/data/models/blockstates/Condition;
+
+# MultiVariantGenerator
+accessible class net/minecraft/data/models/blockstates/MultiPartGenerator$Entry
+accessible class net/minecraft/data/models/blockstates/MultiPartGenerator$ConditionalEntry
+accessible field net/minecraft/data/models/blockstates/MultiVariantGenerator baseVariants Ljava/util/List;
+accessible field net/minecraft/data/models/blockstates/MultiVariantGenerator declaredPropertySets Ljava/util/List;
+
+# Variant
+accessible field net/minecraft/data/models/blockstates/Variant values Ljava/util/Map;
+
+# VariantProperty
+accessible field net/minecraft/data/models/blockstates/VariantProperty$Value value Ljava/lang/Object;
+
+# VariantProperties
+accessible field net/minecraft/data/models/blockstates/VariantProperties$Rotation value I
