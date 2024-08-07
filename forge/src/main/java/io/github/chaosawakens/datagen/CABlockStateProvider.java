@@ -45,6 +45,8 @@ public class CABlockStateProvider extends BlockStateProvider {
                 BlockStateDefinition curStateDef = curBwp.getBlockStateDefinitionMappingFunction() == null ? null : curBwp.getBlockStateDefinitionMappingFunction().apply(blockSupEntry);
 
                 if (curStateDef != null) {
+                    CAConstants.LOGGER.debug("[Setting BlockState]: " + blockSupEntry.get().getDescriptionId());
+
                     BlockStateGenerator curStateGen = curStateDef.getBlockStateSupplier();
                     mappedVanillaGenerators.putIfAbsent(blockSupEntry.get(), curStateGen);
                 }

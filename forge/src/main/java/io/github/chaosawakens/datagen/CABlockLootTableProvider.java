@@ -1,5 +1,6 @@
 package io.github.chaosawakens.datagen;
 
+import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -30,7 +31,10 @@ public class CABlockLootTableProvider extends BlockLootSubProvider {
         BlockPropertyWrapper.getMappedBwps().forEach(((blockSupEntry, curBpw) -> {
             Function<Supplier<Block>, LootTable.Builder> mappedBuilderFunc = curBpw.getBlockLootTableMappingFunction();
 
-            if (mappedBuilderFunc != null) add(blockSupEntry.get(), mappedBuilderFunc.apply(blockSupEntry));
+            if (mappedBuilderFunc != null) {
+                CAConstants.LOGGER.debug("[Adding Loot Table]: " + blockSupEntry.get().getDescriptionId());
+                add(blockSupEntry.get(), mappedBuilderFunc.apply(blockSupEntry));
+            }
         }));
     }
 

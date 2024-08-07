@@ -55,6 +55,8 @@ public class CABlockModelProvider extends BlockModelProvider {
                 List<BlockModelDefinition> curModelDefs = mappedBpw.getModelDefinitions();
 
                 if (!curModelDefs.isEmpty()) {
+                    CAConstants.LOGGER.debug("[Setting Block & Item Model]: " + blockSupEntry.get().getDescriptionId());
+
                     curModelDefs.forEach(curModelDef -> {
                         ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
                         Block curBlock = blockSupEntry.get();

@@ -31,7 +31,11 @@ public class CABlockTagsProvider extends BlockTagsProvider {
 
             if (!parentBlockTags.isEmpty()){
                 parentBlockTags.forEach(curBlockTag -> {
-                    if (curBlockTag != null) tag(curBlockTag).add(blockSupEntry.get());
+                    if (curBlockTag != null) {
+                        CAConstants.LOGGER.debug("[Tagging Block]: " + blockSupEntry.get().getDescriptionId() + " -> " + curBlockTag);
+
+                        tag(curBlockTag).add(blockSupEntry.get());
+                    }
                 });
             }
         });
