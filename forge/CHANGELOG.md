@@ -11,6 +11,7 @@ This is the <b>Forge</b> changelog.
 # ---------------------------------------------------
 ## Blocks
 ### Additions
+- Added CrystalWood, DenseWood, and Mesozoic Gate Blocks.
 
 ### Changes
 

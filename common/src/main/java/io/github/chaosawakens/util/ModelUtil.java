@@ -29,7 +29,7 @@ public final class ModelUtil {
      *
      * <h3>Required Texture Slots</h3>
      * <ul>
-     *  <li>{@link TextureSlot#ALL}</li>
+     *  <li>{@link TextureSlot#ALL} -> {@code sixSideBlockTexture}</li>
      * </ul>
      *
      * @param sixSideBlockTexture The {@link ResourceLocation} representing the texture of every side of a standard cube block.
@@ -62,5 +62,30 @@ public final class ModelUtil {
     public static BlockStateDefinition simpleBlock(Supplier<Block> targetBlock) {
         return BlockStateDefinition.of(targetBlock)
                 .withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get(), Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(targetBlock.get()))));
+    }
+
+    /**
+     * Creates a {@link BlockModelDefinition} with the {@link ModelTemplates#CUBE_BOTTOM_TOP} template.
+     *
+     * <h3>Required Texture Slots</h3>
+     * <ul>
+     *  <li>{@link TextureSlot#SIDE} -> {@code horizontalTexture}</li>
+     *  <li>{@link TextureSlot#TOP} -> {@code verticalTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code verticalTexture}</li>
+     * </ul>
+     *
+     * @param horizontalTexture The {@link ResourceLocation} representing the texture of the 4 horizontal faces of a standard cube block (N, S, E, W).
+     * @param verticalTexture The {@link ResourceLocation} representing the texture of the 2 vertical faces of a standard cube block (U, D).
+     *
+     * @return A {@link BlockModelDefinition} with the {@link ModelTemplates#CUBE_BOTTOM_TOP} template.
+     *
+     * @see #simpleBlock(Supplier<Block>)
+     */
+    public static BlockModelDefinition cubeTopBottomBlock(ResourceLocation horizontalTexture, ResourceLocation verticalTexture) {
+        return BlockModelDefinition.of(ModelTemplates.CUBE_BOTTOM_TOP)
+                .withTextureMapping(new TextureMapping()
+                        .put(TextureSlot.SIDE, horizontalTexture.withPrefix("block/"))
+                        .put(TextureSlot.TOP, verticalTexture.withPrefix("block/"))
+                        .put(TextureSlot.BOTTOM, verticalTexture.withPrefix("block/")));
     }
 }
