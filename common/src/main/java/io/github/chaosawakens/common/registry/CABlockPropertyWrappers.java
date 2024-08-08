@@ -9,7 +9,6 @@ import net.minecraft.tags.BlockTags;
 
 public final class CABlockPropertyWrappers {
 
-    // Basic
     public static final BlockPropertyWrapper BASIC_BLOCK = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
@@ -33,7 +32,6 @@ public final class CABlockPropertyWrappers {
             .cachedBuilder()
             .withTags(ObjectArrayList.of(BlockTags.NEEDS_DIAMOND_TOOL))
             .build();
-
 
     public static final BlockPropertyWrapper BASIC_BLOCK_PICKAXE = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK)
             .cachedBuilder()
@@ -101,5 +99,13 @@ public final class CABlockPropertyWrappers {
     public static final BlockPropertyWrapper BASIC_BLOCK_HOE_DIAMOND = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_SHOVEL)
             .cachedBuilder()
             .withTags(ObjectArrayList.of(BlockTags.NEEDS_DIAMOND_TOOL))
+            .build();
+
+    public static final BlockPropertyWrapper BASIC_WOOD_SLAB = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropSelf)
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE))
+            .withCustomModelDefinitions(ModelUtil.slab(CAConstants.prefix("base/template")))
+            .withBlockStateDefinition(ModelUtil::woodSlab)
             .build();
 }

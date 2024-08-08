@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:base/template"
+    },
+    "type=double": {
+      "model": "chaosawakens:base/template"
+    },
+    "type=top": {
+      "model": "chaosawakens:base/template"
+    }
+  }
+}

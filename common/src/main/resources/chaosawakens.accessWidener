@@ -7,6 +7,7 @@ accessible field net/minecraft/data/models/model/ModelTemplate requiredSlots Lja
 # PropertyDispatch
 accessible method net/minecraft/data/models/blockstates/PropertyDispatch getEntries ()Ljava/util/Map;
 accessible method net/minecraft/data/models/blockstates/PropertyDispatch getDefinedProperties ()Ljava/util/List;
+accessible field net/minecraft/data/models/model/ModelTemplate suffix Ljava/util/Optional;
 
 # MultiPartGenerator
 accessible field net/minecraft/data/models/blockstates/MultiPartGenerator parts Ljava/util/List;

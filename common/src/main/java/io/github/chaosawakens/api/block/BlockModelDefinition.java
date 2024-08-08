@@ -29,6 +29,8 @@ public class BlockModelDefinition {
     private ResourceLocation itemParentModelLoc;
     private final Map<String, ResourceLocation> itemTextureLayerMap = new Object2ObjectLinkedOpenHashMap<>();
     private final Map<Map<ResourceLocation, Float>, ResourceLocation> itemModelTextureOverrides = new Object2ObjectLinkedOpenHashMap<>();
+    @Nullable
+    private String customModelName;
 
     private BlockModelDefinition(ModelTemplate parentModel) {
         this.parentModel = parentModel;
@@ -151,6 +153,19 @@ public class BlockModelDefinition {
     }
 
     /**
+     * Defines a custom model name with which the generated block model file based on this definition will be named. By default, model files generated through BMDs are named based on
+     * the parent {@linkplain Block Block's} registry name.
+     *
+     * @param customModelName The custom model name.
+     *
+     * @return {@code this} (builder method)
+     */
+    public BlockModelDefinition withCustomModelName(String customModelName) {
+        this.customModelName = customModelName;
+        return this;
+    }
+
+    /**
      * Gets the parent {@link ModelTemplate} from which base model data will be serialized during datagen.
      *
      * @return The parent {@link ModelTemplate}.
@@ -240,6 +255,16 @@ public class BlockModelDefinition {
      */
     public Map<Map<ResourceLocation, Float>, ResourceLocation> getItemModelTextureOverrides() {
         return itemModelTextureOverrides;
+    }
+
+    /**
+     * Returns the custom model name with which the generated block model file based on this definition will be named. May be {@code null} if left undefined.
+     *
+     * @return The custom model name, or {@code null} if left undefined.
+     */
+    @Nullable
+    public String getCustomModelName() {
+        return customModelName;
     }
 
     /**

@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.block.model.ItemTransform;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -60,16 +62,18 @@ public class CABlockModelProvider extends BlockModelProvider {
                     curModelDefs.forEach(curModelDef -> {
                         ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
                         Block curBlock = blockSupEntry.get();
-                        String curBlockRegName = curBlock.getDescriptionId();
-                        String formattedBlockRegName = curBlockRegName.substring(blockSupEntry.get().getDescriptionId().lastIndexOf(".") + 1);
+                        String formattedBlockRegName = ModelLocationUtils.getModelLocation(curBlock, curModelDef.getParentModel().suffix.orElse("")).getPath();
+                        formattedBlockRegName = formattedBlockRegName.substring(formattedBlockRegName.lastIndexOf("/") + 1);
+                        String customModelName = curModelDef.getCustomModelName();
 
                         if (curModelDef != null && parentModelLoc != null) { //TODO Add GuiLight & ElementBuilder support
                             ResourceLocation curBlockModelRenderTypeLoc = curModelDef.getBlockModelRenderType();
                             ResourceLocation itemParentModelLoc = curModelDef.getItemParentModelLocation();
                             boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
                             Map<ItemDisplayContext, ItemTransform> itemTransforms = curModelDef.getItemModelTransforms();
-                            BlockModelBuilder resultBuilder = withExistingParent(formattedBlockRegName, parentModelLoc)
-                                    .ao(curBMDHasAO);
+                            String modelFileName = customModelName != null ? customModelName.toLowerCase(Locale.ROOT).trim().replaceAll("\\s+", "_") : formattedBlockRegName;
+                            BlockModelBuilder resultBuilder = withExistingParent(modelFileName, parentModelLoc)
+                                    .ao(curBMDHasAO); // Can't utilise ModelTemplate#create cuz then I'd also have to re-invent vanilla datagen here. No thanks. Much more customizable anyway :l
 
                             curModelDef.getParentModel().requiredSlots.forEach(requiredTexSlot -> {
                                 String requiredTexSlotId = requiredTexSlot.getId();
@@ -90,7 +94,7 @@ public class CABlockModelProvider extends BlockModelProvider {
                                         .end());
                             }
 
-                            ItemModelBuilder resultItemBuilder = withExistingItemParent(formattedBlockRegName, itemParentModelLoc == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + formattedBlockRegName) : itemParentModelLoc);
+                            ItemModelBuilder resultItemBuilder = withExistingItemParent(modelFileName, itemParentModelLoc == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + modelFileName) : itemParentModelLoc); //TODO Probably fix the thing where it generates unnecessary item models (E.G. Slabs only need one model file referencing the bottom variant, not the top variant)
                             Map<String, ResourceLocation> textureLayerDefinitionMap = curModelDef.getItemModelTextureLayerDefinitions();
                             Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
 

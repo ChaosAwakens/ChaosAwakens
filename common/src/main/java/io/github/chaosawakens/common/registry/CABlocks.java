@@ -3,12 +3,15 @@ package io.github.chaosawakens.common.registry;
 import com.google.common.collect.ImmutableList;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
+import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Supplier;
 
@@ -17,7 +20,8 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Block>> BLOCKS = new ObjectArrayList<>();
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
-
+    public static final Supplier<Block> BEM_VINDOS_AO = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_WOOD_SLAB, registerBlock("bem_vindos_ao", () -> new SlabBlock(BlockBehaviour.Properties.of().strength(3.0F))))
+            .getParentBlock();
 
     private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSup) {
         return registerBlock(id, blockSup, new Item.Properties());

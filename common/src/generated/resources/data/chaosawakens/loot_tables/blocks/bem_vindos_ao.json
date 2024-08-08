@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chaosawakens:updated_waker"
+          "name": "chaosawakens:bem_vindos_ao"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "chaosawakens:blocks/updated_waker"
+  "random_sequence": "chaosawakens:blocks/bem_vindos_ao"
 }
