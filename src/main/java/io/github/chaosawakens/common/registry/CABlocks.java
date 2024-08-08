@@ -239,6 +239,8 @@ public class CABlocks {
 	public static final RegistryObject<LeafCarpetBlock> ACACIA_LEAF_CARPET = registerBlock("acacia_leaf_carpet", () -> new LeafCarpetBlock(Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().noCollission().isValidSpawn(CABlocks::always).isSuffocating(CABlocks::never).isViewBlocking(CABlocks::never)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeafCarpetBlock> DARK_OAK_LEAF_CARPET = registerBlock("dark_oak_leaf_carpet", () -> new LeafCarpetBlock(Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().noCollission().isValidSpawn(CABlocks::always).isSuffocating(CABlocks::never).isViewBlocking(CABlocks::never)), CAItemGroups.BLOCKS);
 
+	
+	
 	// MARBLE
 	public static final RegistryObject<Block> MARBLE = registerBlock("marble_block", () -> new Block(Properties.copy(Blocks.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> MARBLE_SLAB = registerBlock("marble_slab", () -> new SlabBlock(Properties.copy(CABlocks.MARBLE.get()).requiresCorrectToolForDrops()), CAItemGroups.BLOCKS);
@@ -552,7 +554,11 @@ public class CABlocks {
 	public static final RegistryObject<GateBlock> WARPED_GATE_BLOCK = registerBlock("warped_gate_block", () -> new GateBlock(Properties.copy(Blocks.WARPED_PLANKS).harvestTool(ToolType.AXE)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<GateBlock> MUSHROOM_GATE_BLOCK = registerBlock("mushroom_gate_block", () -> new GateBlock(Properties.copy(Blocks.MUSHROOM_STEM).harvestTool(ToolType.AXE)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RandomTeleportBlock> RANDOM_TELEPORT_BLOCK = registerBlock("random_teleport_block", () -> new RandomTeleportBlock(Properties.copy(Blocks.OBSIDIAN).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)), CAItemGroups.BLOCKS);
-
+	  
+	// WASP BLOCKS
+	public static final RegistryObject<Block> WASP_NEST_BLOCK = registerBlock("wasp_nest_block", () -> new Block(Properties.copy(Blocks.BEE_NEST)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<Block> PATTERN_WASP_NEST_BLOCK = registerBlock("pattern_wasp_nest_block", () -> new Block(Properties.copy(Blocks.BEE_NEST)), CAItemGroups.BLOCKS);
+	
 	// MINERAL ORES
 	public static final RegistryObject<CAOreBlock> AMETHYST_ORE = registerBlock("amethyst_ore", () -> new CAOreBlock(Properties.of(Material.STONE).strength(4.5F, 3.25F).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).withExpDrop(3, 7), CAItemGroups.BLOCKS);
 	public static final RegistryObject<CAOreBlock> RUBY_ORE = registerBlock("ruby_ore", () -> new CAOreBlock(Properties.of(Material.STONE).strength(6.5F, 3.25F).harvestLevel(4).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).withExpDrop(4, 9), CAItemGroups.BLOCKS);

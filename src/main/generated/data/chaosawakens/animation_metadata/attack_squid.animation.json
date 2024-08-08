@@ -7,14 +7,14 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Swim",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Death",
       "animation_length": 5.2,
       "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Swim",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
     }
   ]
 }

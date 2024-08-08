@@ -84,7 +84,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		return ObjectUtil.performNullityChecks(false, owner, owner.getTarget()) && !owner.isOnAttackCooldown() && curCooldown <= 0 && !owner.getTarget().isInvulnerable()
 				&& owner.isAlive() && !owner.isAttacking() && owner.getTarget().isAlive()
-				&& owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach() * 5 && owner.distanceTo(owner.getTarget()) <= owner.getFollowRange()
+				&& (owner.getHealth() <= owner.getMaxHealth() / 2 || owner.distanceTo(owner.getTarget()) > owner.getMeleeAttackReach() * 5) && owner.distanceTo(owner.getTarget()) <= owner.getFollowRange()
 				&& owner.shouldRageRunBasedOnChance() && owner.getRandom().nextInt(probability) == 0;
 	}
 	
@@ -142,7 +142,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		Vector3d relevantLookPos = null;
 		
 		if (owner.getTarget() != null && owner.getTarget().isAlive() && rageRunAnim.get().isPlaying()) {
-			if (!isPathingRageRun) {
+			if (targetRageRunPos == null || owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D) {
 				this.targetRageRunPos = BlockPosUtil.findHorizontalPositionBeyond(owner, owner.getTarget().blockPosition(), MathHelper.nextInt(owner.getRandom(), 10, 20));
 				this.isPathingRageRun = true;
 			}
@@ -153,14 +153,14 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 		
 		if (ObjectUtil.performNullityChecks(false, relevantLookPos) && isPathingRageRun) {
-			owner.getMoveControl().setWantedPosition(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ(), 0.95F);
+			owner.getMoveControl().setWantedPosition(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ(), 0.8F);
 			owner.moveRelative(0.02F, new Vector3d(owner.xxa, owner.yya, owner.zza));
 			owner.move(MoverType.SELF, owner.getDeltaMovement());
 			
 			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
 		}
 		
-		if (targetRageRunPos != null && owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D && isPathingRageRun) {
+		if (targetRageRunPos != null && owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 16.0D) {
 			this.pathTries++;
 			this.isPathingRageRun = false;
 		}

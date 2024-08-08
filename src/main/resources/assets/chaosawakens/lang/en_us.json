@@ -387,6 +387,9 @@
 	"block.chaosawakens.corn_body_block": "Corn Plant",
 	"block.chaosawakens.tomato_body_block": "Tomato Plant",
 
+	"block.chaosawakens.wasp_nest_block": "Wasp Nest",
+	"block.chaosawakens.pattern_wasp_nest_block": "Wasp Nest (Pattern)",
+
 	"item.chaosawakens.corndog": "Raw Corndog",
 	"item.chaosawakens.cooked_corndog": "Cooked Corndog",
 	"item.chaosawakens.bacon": "Raw Bacon",

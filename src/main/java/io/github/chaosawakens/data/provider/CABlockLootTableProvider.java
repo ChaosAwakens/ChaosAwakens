@@ -80,6 +80,10 @@ public class CABlockLootTableProvider extends BlockLootTables {
 		
 	//	dropSelf(CABlocks.ROCK.get());
 
+		// Wasp Nest Blocks
+		dropSelf(CABlocks.WASP_NEST_BLOCK.get());
+		dropSelf(CABlocks.PATTERN_WASP_NEST_BLOCK.get());
+
 		// Ore Blocks
 		dropSelf(CABlocks.ALUMINUM_BLOCK.get());
 		dropSelf(CABlocks.AMETHYST_BLOCK.get());

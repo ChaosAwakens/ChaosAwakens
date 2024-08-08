@@ -13,10 +13,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.CooldownTracker;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -300,7 +297,7 @@ public final class EntityUtil {
 			boolean isValidTarget = (reachedEntityHitResult != null ? target : null) != null && reachedEntityHitResult.getType() == RayTraceResult.Type.ENTITY;
 
 			if (isValidTarget) {
-				if (reachSqr >= distanceToTargetSqr && owner.swingingArm.equals(Hand.MAIN_HAND)) {
+				if (reachSqr >= distanceToTargetSqr && owner.swingingArm.equals(Hand.MAIN_HAND) && (!(owner instanceof PlayerEntity) || !target.interact((PlayerEntity) owner, Hand.MAIN_HAND).consumesAction())) {
 					target.hurt(DamageSource.mobAttack(owner), attackDamage);
 					heldStack.getItem().hurtEnemy(heldStack, target, owner);
 				}

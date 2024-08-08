@@ -59,6 +59,6 @@ public class RoboWarriorTickableIdleSound extends AnimatableTickableIdleMonsterS
     }
 
     public boolean shouldSwitchToShieldSound() {
-        return animatable.isPlayingAnimation("Shield Up") && shieldSound != null;
+        return animatable.isPlayingAnimation("Shield Active") && shieldSound != null;
     }
 }

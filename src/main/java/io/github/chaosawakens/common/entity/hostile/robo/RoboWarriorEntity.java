@@ -395,7 +395,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 	
 	@Override
 	public float getMeleeAttackReach() {
-		return super.getMeleeAttackReach() * 0.75F;
+		return super.getMeleeAttackReach() * 1.55F;
 	}
 
 	@Override

@@ -102,6 +102,9 @@ public class CABlockModelProvider extends BlockModelProvider {
 		cross("mesozoic_vines", chaosRL("mesozoic_vines"));
 		cross("mesozoic_vines_plant", chaosRL("mesozoic_vines_plant"));
 
+		cubeAll("wasp_nest_block", chaosRL("wasp_nest_block"));
+		cubeAll("pattern_wasp_nest_block", chaosRL("pattern_wasp_nest_block"));
+
 		cubeAll("aluminum_block", chaosRL("aluminum_block"));
 //		cubeAll("aluminum_ore", chaosRL("aluminum_ore"));
 		cubeAll("amethyst_block", chaosRL("amethyst_block"));

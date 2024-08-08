@@ -490,6 +490,9 @@ public class CABlockStateProvider extends BlockStateProvider {
 		slabBlock(CABlocks.MOLDY_SLAB.get(), chaosRL("moldy_planks"), chaosRL("moldy_planks"));
 		fenceBlock(CABlocks.MOLDY_FENCE.get(), chaosRL("moldy_planks"));
 
+		simpleBlock(CABlocks.WASP_NEST_BLOCK.get());
+		simpleBlock(CABlocks.PATTERN_WASP_NEST_BLOCK.get());
+
 		cubeBottomTopBlock(CABlocks.APPLE_GATE_BLOCK.get(), chaosRL("apple_gate_block"), chaosRL("gate_block_top"));
 		cubeBottomTopBlock(CABlocks.CHERRY_GATE_BLOCK.get(), chaosRL("cherry_gate_block"), chaosRL("gate_block_top"));
 		cubeBottomTopBlock(CABlocks.DUPLICATION_GATE_BLOCK.get(), chaosRL("duplication_gate_block"), chaosRL("gate_block_top"));
