@@ -19,6 +19,9 @@
         "main": [
             "${fabric_common_entrypoint}"
         ],
+        "client": [
+            "${fabric_client_entrypoint}"
+        ],
         "data": [
             "${fabric_datagen_entrypoint}"
         ]

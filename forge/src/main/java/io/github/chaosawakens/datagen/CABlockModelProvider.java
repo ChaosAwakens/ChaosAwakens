@@ -97,27 +97,32 @@ public class CABlockModelProvider extends BlockModelProvider {
                                         .end());
                             }
 
-                            ItemModelBuilder resultItemBuilder = withExistingItemParent(modelFileName, itemModelTextureMapping == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + modelFileName) : itemParentModelLoc); //TODO Probably fix the thing where it generates unnecessary item models (E.G. Slabs only need one model file referencing the bottom variant, not the top variant)
-                            TextureMapping textureLayerDefinitionMap = curModelDef.getItemModelTextureMapping();
-                            Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
+                            if (!BlockModelDefinition.getCachedModelDefinitions().containsKey(blockSupEntry)) {
+                                BlockModelDefinition.getCachedModelDefinitions().putIfAbsent(blockSupEntry, curModelDef);
 
-                            if (itemModelTextureMapping != null && !itemParentModelLoc.equals(CAConstants.prefix(BLOCK_FOLDER + "/" + modelFileName))) {
-                                itemModelTextureMapping.requiredSlots.forEach(requiredTexSlot -> {
-                                    String requiredTexSlotId = requiredTexSlot.getId();
-                                    ResourceLocation mappedTextureLocation = textureLayerDefinitionMap.get(requiredTexSlot); // Explicit get() call for exception handling + readability
+                                String itemModelFileName = curBlock.getDescriptionId().substring(curBlock.getDescriptionId().lastIndexOf(".") + 1);
+                                ItemModelBuilder resultItemBuilder = withExistingItemParent(itemModelFileName, itemModelTextureMapping == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + itemModelFileName) : itemParentModelLoc);
+                                TextureMapping textureLayerDefinitionMap = curModelDef.getItemModelTextureMapping();
+                                Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
 
-                                    resultItemBuilder.texture(requiredTexSlotId, mappedTextureLocation);
-                                });
-                            }
-                            if (!textureOverrides.isEmpty()) {
-                                textureOverrides.forEach((modelPredicates, resultingDelegateModel) -> {
-                                    ItemModelBuilder.OverrideBuilder itemModelOverrides = resultItemBuilder.override();
+                                if (itemModelTextureMapping != null && !itemParentModelLoc.equals(CAConstants.prefix(BLOCK_FOLDER + "/" + itemModelFileName))) {
+                                    itemModelTextureMapping.requiredSlots.forEach(requiredTexSlot -> {
+                                        String requiredTexSlotId = requiredTexSlot.getId();
+                                        ResourceLocation mappedTextureLocation = textureLayerDefinitionMap.get(requiredTexSlot); // Explicit get() call for exception handling + readability
 
-                                    if (!modelPredicates.isEmpty()) modelPredicates.forEach(itemModelOverrides::predicate);
-                                    itemModelOverrides.model(getExistingFile(resultingDelegateModel));
+                                        resultItemBuilder.texture(requiredTexSlotId, mappedTextureLocation);
+                                    });
+                                }
+                                if (!textureOverrides.isEmpty()) {
+                                    textureOverrides.forEach((modelPredicates, resultingDelegateModel) -> {
+                                        ItemModelBuilder.OverrideBuilder itemModelOverrides = resultItemBuilder.override();
 
-                                    itemModelOverrides.end();
-                                });
+                                        if (!modelPredicates.isEmpty()) modelPredicates.forEach(itemModelOverrides::predicate);
+                                        itemModelOverrides.model(getExistingFile(resultingDelegateModel));
+
+                                        itemModelOverrides.end();
+                                    });
+                                }
                             }
                         }
                     });

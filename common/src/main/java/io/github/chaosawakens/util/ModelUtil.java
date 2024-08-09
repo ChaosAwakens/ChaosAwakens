@@ -11,16 +11,14 @@ import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.ModelLocationUtils;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.SlabType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Set;
 import java.util.function.Supplier;
@@ -635,7 +633,7 @@ public final class ModelUtil {
      * @see RenderType
      */
     public static BlockModelDefinition crossCutout(ResourceLocation baseCrossTexture) {
-        return cross(baseCrossTexture).withBlockRenderType(new ResourceLocation(RenderType.cutout().toString()));
+        return cross(baseCrossTexture).withBlockRenderType(new ResourceLocation(RenderType.cutout().name));
     }
 
     /**
@@ -942,7 +940,7 @@ public final class ModelUtil {
      * @param targetBlock The {@linkplain Block Block} to use as the base for the {@link BlockStateDefinition} and the {@link ResourceLocation} of its cube-column variant models.
      *
      * @return A {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis,
-     * and with the {@code horizontalModel} defaulted to {@code baseModel + {@code "_horizontal"}}.
+     * and with the {@code horizontalModel} defaulted to {@code baseModel + {@code "_horizontal"}}, where {@code baseModel} defaults to {@link ModelLocationUtils#getModelLocation(Block)}.
      *
      * @see #rotatedPillarBlock(Supplier, ResourceLocation, ResourceLocation)
      * @see #rotatedPillarBlock(Supplier, ResourceLocation)
@@ -957,80 +955,111 @@ public final class ModelUtil {
         return rotatedPillarBlock(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
     }
 
-    public static BlockModelDefinition doorBottomLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorBottomLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static BlockModelDefinition doorBottomLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorBottomLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static BlockModelDefinition doorTopLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorTopLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static BlockModelDefinition doorTopLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorTopLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static BlockModelDefinition doorBottomRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorBottomRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static BlockModelDefinition doorBottomRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorBottomRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static BlockModelDefinition doorTopRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorTopRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static BlockModelDefinition doorTopRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
+    public static BlockModelDefinition doorTopRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
+                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
-    public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dbloTopTexture, ResourceLocation dbloBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture, ResourceLocation dtloTopTexture, ResourceLocation dtloBottomTexture) {
-        return ObjectArrayList.of(doorBottomLeft(dblTopTexture, dblBottomTexture), doorBottomLeftOpen(dbloTopTexture, dbloBottomTexture), doorTopLeft(dtlTopTexture, dtlBottomTexture), doorTopLeftOpen(dtloTopTexture, dtloBottomTexture));
+    public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dbloTopTexture, ResourceLocation dbloBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture, ResourceLocation dtloTopTexture, ResourceLocation dtloBottomTexture, ResourceLocation doorItemTexture) {
+        return ObjectArrayList.of(doorBottomLeft(dblTopTexture, dblBottomTexture, doorItemTexture), doorBottomLeftOpen(dbloTopTexture, dbloBottomTexture, doorItemTexture), doorTopLeft(dtlTopTexture, dtlBottomTexture, doorItemTexture), doorTopLeftOpen(dtloTopTexture, dtloBottomTexture, doorItemTexture));
     }
 
-    public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture) {
-        return doorLeft(dblTopTexture, dblBottomTexture, dblTopTexture, dblBottomTexture, dtlTopTexture, dtlBottomTexture, dtlTopTexture, dtlBottomTexture);
+    public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture, ResourceLocation doorItemTexture) {
+        return doorLeft(dblTopTexture, dblBottomTexture, dblTopTexture, dblBottomTexture, dtlTopTexture, dtlBottomTexture, dtlTopTexture, dtlBottomTexture, doorItemTexture);
     }
 
-    public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
-        return doorLeft(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture);
+    public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
+        return doorLeft(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture, doorItemTexture);
     }
 
-    public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dbroTopTexture, ResourceLocation dbroBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture, ResourceLocation dtroTopTexture, ResourceLocation dtroBottomTexture) {
-        return ObjectArrayList.of(doorBottomRight(dbrTopTexture, dbrBottomTexture), doorBottomRightOpen(dbroTopTexture, dbroBottomTexture), doorTopRight(dtrTopTexture, dtrBottomTexture), doorTopRightOpen(dtroTopTexture, dtroBottomTexture));
+    public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dbroTopTexture, ResourceLocation dbroBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture, ResourceLocation dtroTopTexture, ResourceLocation dtroBottomTexture, ResourceLocation doorItemTexture) {
+        return ObjectArrayList.of(doorBottomRight(dbrTopTexture, dbrBottomTexture, doorItemTexture), doorBottomRightOpen(dbroTopTexture, dbroBottomTexture, doorItemTexture), doorTopRight(dtrTopTexture, dtrBottomTexture, doorItemTexture), doorTopRightOpen(dtroTopTexture, dtroBottomTexture, doorItemTexture));
     }
 
-    public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture) {
-        return doorRight(dbrTopTexture, dbrBottomTexture, dbrTopTexture, dbrBottomTexture, dtrTopTexture, dtrBottomTexture, dtrTopTexture, dtrBottomTexture);
+    public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture, ResourceLocation doorItemTexture) {
+        return doorRight(dbrTopTexture, dbrBottomTexture, dbrTopTexture, dbrBottomTexture, dtrTopTexture, dtrBottomTexture, dtrTopTexture, dtrBottomTexture, doorItemTexture);
     }
 
-    public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
-        return doorRight(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture);
+    public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
+        return doorRight(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture, doorItemTexture);
     }
 
-    public static ObjectArrayList<BlockModelDefinition> door(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dbloTopTexture, ResourceLocation dbloBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture, ResourceLocation dtloTopTexture, ResourceLocation dtloBottomTexture, ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dbroTopTexture, ResourceLocation dbroBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture, ResourceLocation dtroTopTexture, ResourceLocation dtroBottomTexture) {
-        return ObjectArrayList.wrap(Sets.union(Set.copyOf(doorLeft(dblTopTexture, dblBottomTexture, dbloTopTexture, dbloBottomTexture, dtlTopTexture, dtlBottomTexture, dtloTopTexture, dtloBottomTexture)), Set.copyOf(doorRight(dbrTopTexture, dbrBottomTexture, dbroTopTexture, dbroBottomTexture, dtrTopTexture, dtrBottomTexture, dtroTopTexture, dtroBottomTexture))).toArray(BlockModelDefinition[]::new));
+    public static ObjectArrayList<BlockModelDefinition> door(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dbloTopTexture, ResourceLocation dbloBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture, ResourceLocation dtloTopTexture, ResourceLocation dtloBottomTexture, ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dbroTopTexture, ResourceLocation dbroBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture, ResourceLocation dtroTopTexture, ResourceLocation dtroBottomTexture, ResourceLocation doorItemTexture) {
+        return ObjectArrayList.wrap(Sets.union(Set.copyOf(doorLeft(dblTopTexture, dblBottomTexture, dbloTopTexture, dbloBottomTexture, dtlTopTexture, dtlBottomTexture, dtloTopTexture, dtloBottomTexture, doorItemTexture)), Set.copyOf(doorRight(dbrTopTexture, dbrBottomTexture, dbroTopTexture, dbroBottomTexture, dtrTopTexture, dtrBottomTexture, dtroTopTexture, dtroBottomTexture, doorItemTexture))).toArray(BlockModelDefinition[]::new));
     }
 
-    public static ObjectArrayList<BlockModelDefinition> door(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorOpenTopTexture, ResourceLocation doorOpenBottomTexture) {
-        return door(doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture, doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture, doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture, doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture);
+    public static ObjectArrayList<BlockModelDefinition> door(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorOpenTopTexture, ResourceLocation doorOpenBottomTexture, ResourceLocation doorItemTexture) {
+        return door(doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture, doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture, doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture, doorTopTexture, doorBottomTexture, doorOpenTopTexture, doorOpenBottomTexture, doorItemTexture);
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> door(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
+        return door(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture, doorItemTexture);
     }
 
     public static ObjectArrayList<BlockModelDefinition> door(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture) {
-        return door(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture);
+        return door(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture, new ResourceLocation(doorTopTexture.getNamespace(), "block_items/" +
+                (doorTopTexture.getPath().contains("_top")
+                        ? StringUtils.substringBefore(doorTopTexture.getPath(), "_top")
+                        : doorTopTexture.getPath())));
     }
 
     public static BlockStateDefinition door(Supplier<Block> targetBlock, ResourceLocation topLeftDoorModel, ResourceLocation topLeftDoorOpenModel, ResourceLocation bottomLeftDoorModel, ResourceLocation bottomLeftDoorOpenModel, ResourceLocation topRightDoorModel, ResourceLocation topRightDoorOpenModel, ResourceLocation bottomRightDoorModel, ResourceLocation bottomRightDoorOpenModel) {
@@ -1038,91 +1067,92 @@ public final class ModelUtil {
                 PropertyDispatch
                         .properties(BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.DOUBLE_BLOCK_HALF, BlockStateProperties.DOOR_HINGE, BlockStateProperties.OPEN)
                         .select(Direction.EAST, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorModel))
+                                .with(VariantProperties.MODEL, bottomLeftDoorModel))
                         .select(Direction.SOUTH, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorModel)
+                                .with(VariantProperties.MODEL, bottomLeftDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.WEST, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorModel)
+                                .with(VariantProperties.MODEL, bottomLeftDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
                         .select(Direction.NORTH, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorModel)
+                                .with(VariantProperties.MODEL, bottomLeftDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.EAST, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorModel))
+                                .with(VariantProperties.MODEL, bottomRightDoorModel))
                         .select(Direction.SOUTH, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorModel)
+                                .with(VariantProperties.MODEL, bottomRightDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.WEST, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorModel)
+                                .with(VariantProperties.MODEL, bottomRightDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
                         .select(Direction.NORTH, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorModel)
+                                .with(VariantProperties.MODEL, bottomRightDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.EAST, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorOpenModel)
+                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.SOUTH, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorOpenModel)
+                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
                         .select(Direction.WEST, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorOpenModel)
+                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.NORTH, DoubleBlockHalf.LOWER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topLeftDoorOpenModel))
+                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel))
                         .select(Direction.EAST, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorOpenModel)
+                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.SOUTH, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorOpenModel))
+                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel))
                         .select(Direction.WEST, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorOpenModel)
+                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.NORTH, DoubleBlockHalf.LOWER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, topRightDoorOpenModel)
+                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
                         .select(Direction.EAST, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorModel))
+                                .with(VariantProperties.MODEL, topLeftDoorModel))
                         .select(Direction.SOUTH, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorModel))
+                                .with(VariantProperties.MODEL, topLeftDoorModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.WEST, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorModel)
+                                .with(VariantProperties.MODEL, topLeftDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
                         .select(Direction.NORTH, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorModel)
+                                .with(VariantProperties.MODEL, topLeftDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.EAST, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorModel))
+                                .with(VariantProperties.MODEL, topRightDoorModel))
                         .select(Direction.SOUTH, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorModel)
+                                .with(VariantProperties.MODEL, topRightDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.WEST, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorModel)
+                                .with(VariantProperties.MODEL, topRightDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
                         .select(Direction.NORTH, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, false, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorModel)
+                                .with(VariantProperties.MODEL, topRightDoorModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.EAST, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel)
+                                .with(VariantProperties.MODEL, topLeftDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.SOUTH, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel)
+                                .with(VariantProperties.MODEL, topLeftDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
                         .select(Direction.WEST, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel)
+                                .with(VariantProperties.MODEL, topLeftDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.NORTH, DoubleBlockHalf.UPPER, DoorHingeSide.LEFT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomLeftDoorOpenModel))
+                                .with(VariantProperties.MODEL, topLeftDoorOpenModel))
                         .select(Direction.EAST, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel)
+                                .with(VariantProperties.MODEL, topRightDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                         .select(Direction.SOUTH, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel))
+                                .with(VariantProperties.MODEL, topRightDoorOpenModel))
                         .select(Direction.WEST, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel)
+                                .with(VariantProperties.MODEL, topRightDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                         .select(Direction.NORTH, DoubleBlockHalf.UPPER, DoorHingeSide.RIGHT, true, Variant.variant()
-                                .with(VariantProperties.MODEL, bottomRightDoorOpenModel)
+                                .with(VariantProperties.MODEL, topRightDoorOpenModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
         ));
     }

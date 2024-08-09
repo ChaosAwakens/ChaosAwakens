@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 /**
  * A wrapper class used to store information referenced in datagen to simplify creating data entries for blocks.
  */
-public class BlockPropertyWrapper {
+public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     private static final Object2ObjectLinkedOpenHashMap<Supplier<Block>, BlockPropertyWrapper> MAPPED_BWPS = new Object2ObjectLinkedOpenHashMap<>();
     @Nullable
     private final String blockRegName;
@@ -274,7 +274,6 @@ public class BlockPropertyWrapper {
      *
      * @return The {@link List} of {@linkplain BlockModelDefinition BlockModelDefinitions}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
-    @Nullable
     public List<BlockModelDefinition> getModelDefinitions() {
         return builder == null ? ObjectArrayList.of() : builder.blockModelDefinitions;
     }

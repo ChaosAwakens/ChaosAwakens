@@ -28,3 +28,9 @@ accessible field net/minecraft/data/models/blockstates/VariantProperty$Value val
 
 # VariantProperties
 accessible field net/minecraft/data/models/blockstates/VariantProperties$Rotation value I
+
+# DoorBlock (Why is the constructor NOT PUBLIC BY DEFAULT?!?!)
+accessible method net/minecraft/world/level/block/DoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
+
+# RenderStateShard
+accessible field net/minecraft/client/renderer/RenderStateShard name Ljava/lang/String;

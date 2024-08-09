@@ -12,11 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * A wrapper builder class primarily used to hold and group block model data for more convenient model definitions.
  */
 public class BlockModelDefinition {
+    private static final Object2ObjectLinkedOpenHashMap<Supplier<Block>, BlockModelDefinition> CACHED_DEFINITIONS = new Object2ObjectLinkedOpenHashMap<>();
     @NotNull
     private final ModelTemplate parentModel;
     private boolean ambientOcclusion = true;
@@ -303,5 +305,9 @@ public class BlockModelDefinition {
      */
     public ResourceLocation getParentModelLocation() {
         return parentModel.model.orElseGet(ModelTemplates.CUBE.model::get);
+    }
+
+    public static Object2ObjectLinkedOpenHashMap<Supplier<Block>, BlockModelDefinition> getCachedModelDefinitions() {
+        return CACHED_DEFINITIONS;
     }
 }
