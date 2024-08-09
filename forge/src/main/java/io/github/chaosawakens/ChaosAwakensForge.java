@@ -35,6 +35,7 @@ public class ChaosAwakensForge {
         // Resources
         datagen.addProvider(event.includeClient(), new CALanguageProvider(datagenPackOutput));
 
+        datagen.addProvider(event.includeClient(), new CAItemModelProvider(datagenPackOutput, curFileHelper));
         datagen.addProvider(event.includeClient(), new CABlockModelProvider(datagenPackOutput, curFileHelper));
         datagen.addProvider(event.includeClient(), new CABlockStateProvider(datagenPackOutput, curFileHelper));
 

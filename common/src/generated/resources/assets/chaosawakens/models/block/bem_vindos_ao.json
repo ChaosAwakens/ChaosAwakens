@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "chaosawakens:block/base/template",
-    "side": "chaosawakens:block/base/template",
-    "top": "chaosawakens:block/base/template"
-  }
-}

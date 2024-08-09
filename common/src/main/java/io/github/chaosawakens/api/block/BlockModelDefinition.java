@@ -26,8 +26,9 @@ public class BlockModelDefinition {
     @Nullable
     private TextureMapping blockModelTextureMapping;
     @Nullable
-    private ResourceLocation itemParentModelLoc;
-    private final Map<String, ResourceLocation> itemTextureLayerMap = new Object2ObjectLinkedOpenHashMap<>();
+    private ModelTemplate itemParentModel;
+    @Nullable
+    private TextureMapping itemModelTextureMapping;
     private final Map<Map<ResourceLocation, Float>, ResourceLocation> itemModelTextureOverrides = new Object2ObjectLinkedOpenHashMap<>();
     @Nullable
     private String customModelName;
@@ -76,6 +77,18 @@ public class BlockModelDefinition {
 
     /**
      * A {@link ResourceLocation} representing existing render types by which the parent {@link Block} will be rendered.
+     * <p></p>
+     * <b>List of built-in block-specific render types:</b>
+     * <ul>
+     *  <li>{@code minecraft:solid} -> Default, all solid/fully opaque pixels in block textures.</li>
+     *  <li>{@code minecraft:cutout} -> For fully solid, or fully transparent pixels in block textures. No translucency.</li>
+     *  <li>{@code minecraft:cutout_mipped} -> Same as above, but applies mipmapping (basically LODs). Does not apply to block item model.</li>
+     *  <li>{@code minecraft:cutout_mipped_all} -> Same as above, but applies to block item model.</li>
+     *  <li>{@code minecraft:translucent} -> For blocks with translucent (I.E. Not fully opaque or fully transparent) pixels in block textures.</li>
+     *  <li>{@code minecraft:tripwire} -> Oh come on, just look at the tripwire or leash or something 💀</li>
+     * </ul>
+     *
+     * You can also find these out by heading to the {@link RenderType} class and looking for static methods which don't take any parameters in.
      *
      * @param blockRenderType The target render type's {@link ResourceLocation} (E.G. {@code "minecraft:cutout"}).
      *
@@ -111,30 +124,29 @@ public class BlockModelDefinition {
     /**
      * Defines a custom parent block model location for the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}). Defaults
      * to the parent {@linkplain Block Block's} block model location. Can be used for stuff like walls (E.G. {@code "chaosawakens:marble_wall_inventory"}
-     * rather than {@code "chaosawakens:marble_wall"}), which typically need separate models for state vs item representation in-game.
+     * rather than {@code "chaosawakens:marble_wall"}), or for blocks that require generated item models (I.E. parented by {@code "minecraft:item/generated"}),
+     * which typically need separate models for state vs item representation in-game.
      *
-     * @param itemModelLoc The custom parent model location for the parent {@linkplain Block Block's} item model.
+     * @param itemModelLoc The custom parent {@link ModelTemplate} for the parent {@linkplain Block Block's} item model.
      *
      * @return {@code this} (builder method)
      */
-    public BlockModelDefinition withItemParentModelLoc(ResourceLocation itemModelLoc) {
-        this.itemParentModelLoc = itemModelLoc;
+    public BlockModelDefinition withItemParentModelLoc(ModelTemplate itemModelLoc) {
+        this.itemParentModel = itemModelLoc;
         return this;
     }
 
     /**
-     * Defines a custom {@link Map} of {@linkplain ResourceLocation ResourceLocations} mapped to key {@linkplain String Strings} representing the
-     * default {@code "textures"} array within the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}). You'd
-     * typically use this if you needed a {@code "layer0"} texture parented by the {@code "minecraft:item/generated"} model rather than a direct
-     * reference to the parent {@linkplain Block Block's} block model location, for instance.
+     * Defines a custom {@link TextureMapping} representing the default {@code "textures"} array within the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}). You'd
+     * typically use this if you needed a {@code "layer0"} texture parented by the {@code "minecraft:item/generated"} model rather than a direct reference to the parent {@linkplain Block Block's}
+     * block model location, for instance.
      *
-     * @param textureLayerDefinition The custom map of {@linkplain ResourceLocation ResourceLocations} mapped to key {@linkplain String Strings} representing the
-     *                               {@code "textures"} array within the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}).
+     * @param textureLayerDefinition The {@link TextureMapping} representing the {@code "textures"} array within the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}).
      *
      * @return {@code this} (builder method)
      */
-    public BlockModelDefinition withItemModelTextureLayerDefinitions(Map<String, ResourceLocation> textureLayerDefinition) {
-        this.itemTextureLayerMap.putAll(textureLayerDefinition);
+    public BlockModelDefinition withItemModelTextureMapping(TextureMapping textureLayerDefinition) {
+        this.itemModelTextureMapping = textureLayerDefinition;
         return this;
     }
 
@@ -225,25 +237,37 @@ public class BlockModelDefinition {
     }
 
     /**
-     * Gets the {@link ResourceLocation} of the parent {@link Block}'s item model (The one in {@code "model/item"}).
+     * Gets the parent {@link ModelTemplate} from which base item model data will be serialized during datagen.
      *
-     * @return The {@link ResourceLocation} of the parent {@link Block}'s item model. {@code null} if left undefined.
+     * @return The parent {@link ModelTemplate}.
+     *
+     * @see ModelTemplates
      */
     @Nullable
-    public ResourceLocation getItemParentModelLocation() {
-        return itemParentModelLoc;
+    public ModelTemplate getItemParentModel() {
+        return itemParentModel;
     }
 
     /**
-     * Gets the custom map of {@linkplain ResourceLocation ResourceLocations} mapped to key {@linkplain String Strings} representing the
-     * {@code "textures"} array within the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}).
+     * Gets the {@link ResourceLocation} of the parent {@link Block}'s item model (The one in {@code "model/item"}).
      *
-     * @return The texture layer definitions {@link Map}. Empty if left undefined.
-     *
-     * @see #withItemModelTextureLayerDefinitions(Map)
+     * @return The {@link ResourceLocation} of the parent {@link Block}'s item model. {@code null} if the {@link #itemParentModel} is left undefined.
      */
-    public Map<String, ResourceLocation> getItemModelTextureLayerDefinitions() {
-        return itemTextureLayerMap;
+    @Nullable
+    public ResourceLocation getItemParentModelLocation() {
+        return itemParentModel == null ? null : itemParentModel.model.orElseGet(ModelTemplates.FLAT_ITEM.model::get);
+    }
+
+    /**
+     * Gets the custom map of {@link TextureMapping} representing the {@code "textures"} array within the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}).
+     *
+     * @return The block item model's {@link TextureMapping} definition. {@code null} if left undefined.
+     *
+     * @see #withItemModelTextureMapping(TextureMapping)
+     */
+    @Nullable
+    public TextureMapping getItemModelTextureMapping() {
+        return itemModelTextureMapping;
     }
 
     /**

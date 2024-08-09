@@ -12,6 +12,8 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplate;
+import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
@@ -69,6 +71,7 @@ public class CABlockModelProvider extends BlockModelProvider {
                         if (curModelDef != null && parentModelLoc != null) { //TODO Add GuiLight & ElementBuilder support
                             ResourceLocation curBlockModelRenderTypeLoc = curModelDef.getBlockModelRenderType();
                             ResourceLocation itemParentModelLoc = curModelDef.getItemParentModelLocation();
+                            ModelTemplate itemModelTextureMapping = curModelDef.getItemParentModel();
                             boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
                             Map<ItemDisplayContext, ItemTransform> itemTransforms = curModelDef.getItemModelTransforms();
                             String modelFileName = customModelName != null ? customModelName.toLowerCase(Locale.ROOT).trim().replaceAll("\\s+", "_") : formattedBlockRegName;
@@ -94,11 +97,18 @@ public class CABlockModelProvider extends BlockModelProvider {
                                         .end());
                             }
 
-                            ItemModelBuilder resultItemBuilder = withExistingItemParent(modelFileName, itemParentModelLoc == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + modelFileName) : itemParentModelLoc); //TODO Probably fix the thing where it generates unnecessary item models (E.G. Slabs only need one model file referencing the bottom variant, not the top variant)
-                            Map<String, ResourceLocation> textureLayerDefinitionMap = curModelDef.getItemModelTextureLayerDefinitions();
+                            ItemModelBuilder resultItemBuilder = withExistingItemParent(modelFileName, itemModelTextureMapping == null ? CAConstants.prefix(BLOCK_FOLDER + "/" + modelFileName) : itemParentModelLoc); //TODO Probably fix the thing where it generates unnecessary item models (E.G. Slabs only need one model file referencing the bottom variant, not the top variant)
+                            TextureMapping textureLayerDefinitionMap = curModelDef.getItemModelTextureMapping();
                             Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
 
-                            if (!textureLayerDefinitionMap.isEmpty()) textureLayerDefinitionMap.forEach(resultItemBuilder::texture); // Less expensive than a fancy schmancy stream operation :p
+                            if (itemModelTextureMapping != null && !itemParentModelLoc.equals(CAConstants.prefix(BLOCK_FOLDER + "/" + modelFileName))) {
+                                itemModelTextureMapping.requiredSlots.forEach(requiredTexSlot -> {
+                                    String requiredTexSlotId = requiredTexSlot.getId();
+                                    ResourceLocation mappedTextureLocation = textureLayerDefinitionMap.get(requiredTexSlot); // Explicit get() call for exception handling + readability
+
+                                    resultItemBuilder.texture(requiredTexSlotId, mappedTextureLocation);
+                                });
+                            }
                             if (!textureOverrides.isEmpty()) {
                                 textureOverrides.forEach((modelPredicates, resultingDelegateModel) -> {
                                     ItemModelBuilder.OverrideBuilder itemModelOverrides = resultItemBuilder.override();
