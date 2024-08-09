@@ -476,9 +476,15 @@ public final class ModelUtil {
      * <h3>Variants / Properties</h3>
      * <ul>
      *  <li>{@link BlockStateProperties#SLAB_TYPE} -> <ul>
-     *      <li>{@link SlabType#BOTTOM} -> {@link VariantProperties#MODEL} -> {@code bottomModel}</li>
-     *      <li>{@link SlabType#TOP} -> {@link VariantProperties#MODEL} -> {@code topModel}</li>
-     *      <li>{@link SlabType#DOUBLE} -> {@link VariantProperties#MODEL} -> {@code doubleSlabModel}</li>
+     *      <li>{@link SlabType#BOTTOM} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code bottomModel}</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#TOP} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code topModel}</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#DOUBLE} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code doubleBlockModel}</li>
+     *      </ul></li>
      *  </ul></li>
      * </ul>
      *
@@ -510,9 +516,15 @@ public final class ModelUtil {
      * <h3>Variants / Properties</h3>
      * <ul>
      *  <li>{@link BlockStateProperties#SLAB_TYPE} -> <ul>
-     *      <li>{@link SlabType#BOTTOM} -> {@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)}</li>
-     *      <li>{@link SlabType#TOP} -> {@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block, String)} (Suffixed with {@code "_top"})</li>
-     *      <li>{@link SlabType#DOUBLE} -> {@link VariantProperties#MODEL} -> {@code doubleBlockModel}</li>
+     *      <li>{@link SlabType#BOTTOM} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)}</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#TOP} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block, String)} (Suffixed with {@code "_top"})</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#DOUBLE} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code doubleBlockModel}</li>
+     *      </ul></li>
      *  </ul></li>
      * </ul>
      *
@@ -547,9 +559,15 @@ public final class ModelUtil {
      * <h3>Variants / Properties</h3>
      * <ul>
      *  <li>{@link BlockStateProperties#SLAB_TYPE} -> <ul>
-     *      <li>{@link SlabType#BOTTOM} -> {@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)}</li>
-     *      <li>{@link SlabType#TOP} -> {@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block, String)} (Suffixed with {@code "_top"})</li>
-     *      <li>{@link SlabType#DOUBLE} -> {@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)} + {@code replaceAll("_slab", "_planks")}</li>
+     *      <li>{@link SlabType#BOTTOM} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)}</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#TOP} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block, String)} (Suffixed with {@code "_top"})</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#DOUBLE} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)} + {@code replaceAll("_slab", "_planks")}</li>
+     *      </ul></li>
      *  </ul></li>
      * </ul>
      *
@@ -650,7 +668,7 @@ public final class ModelUtil {
 
     /**
      * Overload variant of {@link #cubeColumn(ResourceLocation, ResourceLocation)}. Creates a {@link BlockModelDefinition} with the {@link ModelTemplates#CUBE_COLUMN} template, with both required
-     * {@linkplain TextureSlot TextureSlots} set to the provided {@code baseTexture}.
+     * {@linkplain TextureSlot TextureSlots} mapped to the provided {@code baseTexture}.
      * <p>
      * <h3>Required Texture Slots</h3>
      * <ul>
@@ -705,7 +723,7 @@ public final class ModelUtil {
 
     /**
      * Overload variant of {@link #cubeColumnHorizontal(ResourceLocation, ResourceLocation)}. Creates a {@link BlockModelDefinition} with the {@link ModelTemplates#CUBE_COLUMN_HORIZONTAL} template, with both required
-     * {@linkplain TextureSlot TextureSlots} set to the provided {@code baseTexture}.
+     * {@linkplain TextureSlot TextureSlots} mapped to the provided {@code baseTexture}.
      * <p>
      * <h3>Required Texture Slots</h3>
      * <ul>
@@ -807,6 +825,42 @@ public final class ModelUtil {
         return rotatedPillarBlock(sideTexture, endTexture, sideTexture, endTexture);
     }
 
+    /**
+     * Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis.
+     * <p>
+     * <h3>Variants / Properties</h3>
+     * <ul>
+     *  <li>{@link BlockStateProperties#AXIS} -> <ul>
+     *      <li>{@link Direction.Axis#X} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code horizontalModel}</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *          <li>{@link VariantProperties#Y_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Y} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code baseModel}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Z} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code horizontalModel}</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@linkplain Block Block} to use as the base for the {@link BlockStateDefinition}.
+     * @param baseModel The {@link ResourceLocation} representing the block model of the non-horizontal variant of the supplied {@link Block}.
+     * @param horizontalModel The {@link ResourceLocation} representing the block model of the horizontal (rotated) variant of the supplied {@link Block}.
+     *
+     * @return A {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis.
+     *
+     * @see #rotatedPillarBlock(Supplier, ResourceLocation)
+     * @see #rotatedPillarBlock(Supplier)
+     * @see #rotatedPillarBlock(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #rotatedPillarBlock(ResourceLocation, ResourceLocation)
+     * @see #cubeColumn(ResourceLocation, ResourceLocation)
+     * @see #cubeColumn(ResourceLocation)
+     * @see #cubeColumnHorizontal(ResourceLocation, ResourceLocation)
+     * @see #cubeColumnHorizontal(ResourceLocation)
+     */
     public static BlockStateDefinition rotatedPillarBlock(Supplier<Block> targetBlock, ResourceLocation baseModel, ResourceLocation horizontalModel) {
         return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
                 .with(PropertyDispatch.property(BlockStateProperties.AXIS)
@@ -815,15 +869,90 @@ public final class ModelUtil {
                         .select(Direction.Axis.Z, Variant.variant()
                                 .with(VariantProperties.MODEL, horizontalModel)
                                 .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
-                        .select(Direction.Axis.X, Variant.variant().with(VariantProperties.MODEL, horizontalModel)
+                        .select(Direction.Axis.X, Variant.variant()
+                                .with(VariantProperties.MODEL, horizontalModel)
                                 .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))));
     }
 
+    /**
+     * Overloaded variant of {@link #rotatedPillarBlock(Supplier, ResourceLocation, ResourceLocation)}. Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator}
+     * to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis. Defaults the {@code horizontalModel} to {@code baseModel + {@code "_horizontal"}}.
+     * <p>
+     * <h3>Variants / Properties</h3>
+     * <ul>
+     *  <li>{@link BlockStateProperties#AXIS} -> <ul>
+     *      <li>{@link Direction.Axis#X} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code baseModel + {@code "_horizontal"}}</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *          <li>{@link VariantProperties#Y_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Y} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code baseModel}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Z} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code baseModel + {@code "_horizontal"}}</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@linkplain Block Block} to use as the base for the {@link BlockStateDefinition}.
+     * @param baseModel The {@link ResourceLocation} representing the block model of the non-horizontal variant of the supplied {@link Block}.
+     *
+     * @return A {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis,
+     * and with the {@code horizontalModel} defaulted to {@code baseModel + {@code "_horizontal"}}.
+     *
+     * @see #rotatedPillarBlock(Supplier, ResourceLocation, ResourceLocation)
+     * @see #rotatedPillarBlock(Supplier)
+     * @see #rotatedPillarBlock(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #rotatedPillarBlock(ResourceLocation, ResourceLocation)
+     * @see #cubeColumn(ResourceLocation, ResourceLocation)
+     * @see #cubeColumn(ResourceLocation)
+     * @see #cubeColumnHorizontal(ResourceLocation, ResourceLocation)
+     * @see #cubeColumnHorizontal(ResourceLocation)
+     */
     public static BlockStateDefinition rotatedPillarBlock(Supplier<Block> targetBlock, ResourceLocation baseModel) {
         return rotatedPillarBlock(targetBlock, baseModel, baseModel.withSuffix("_horizontal"));
     }
 
+    /**
+     * Overloaded variant of {@link #rotatedPillarBlock(Supplier, ResourceLocation)}. Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator}
+     * to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis. Defaults the {@code baseModel} to the default location of the supplied {@linkplain Block Block's}
+     * model ({@link ModelLocationUtils#getModelLocation(Block)}).
+     * <p>
+     * <h3>Variants / Properties</h3>
+     * <ul>
+     *  <li>{@link BlockStateProperties#AXIS} -> <ul>
+     *      <li>{@link Direction.Axis#X} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)} (Suffixed with {@code "_horizontal"})</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *          <li>{@link VariantProperties#Y_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Y} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Z} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)} (Suffixed with {@code "_horizontal"})</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@linkplain Block Block} to use as the base for the {@link BlockStateDefinition} and the {@link ResourceLocation} of its cube-column variant models.
+     *
+     * @return A {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis,
+     * and with the {@code horizontalModel} defaulted to {@code baseModel + {@code "_horizontal"}}.
+     *
+     * @see #rotatedPillarBlock(Supplier, ResourceLocation, ResourceLocation)
+     * @see #rotatedPillarBlock(Supplier, ResourceLocation)
+     * @see #rotatedPillarBlock(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #rotatedPillarBlock(ResourceLocation, ResourceLocation)
+     * @see #cubeColumn(ResourceLocation, ResourceLocation)
+     * @see #cubeColumn(ResourceLocation)
+     * @see #cubeColumnHorizontal(ResourceLocation, ResourceLocation)
+     * @see #cubeColumnHorizontal(ResourceLocation)
+     */
     public static BlockStateDefinition rotatedPillarBlock(Supplier<Block> targetBlock) {
         return rotatedPillarBlock(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
     }

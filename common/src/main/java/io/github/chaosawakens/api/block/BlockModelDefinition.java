@@ -144,6 +144,11 @@ public class BlockModelDefinition {
      * @param textureLayerDefinition The {@link TextureMapping} representing the {@code "textures"} array within the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}).
      *
      * @return {@code this} (builder method)
+     *
+     * @see ModelTemplate#requiredSlots
+     * @see TexturedModel
+     * @see ModelTemplates
+     * @see TextureSlot
      */
     public BlockModelDefinition withItemModelTextureMapping(TextureMapping textureLayerDefinition) {
         this.itemModelTextureMapping = textureLayerDefinition;
