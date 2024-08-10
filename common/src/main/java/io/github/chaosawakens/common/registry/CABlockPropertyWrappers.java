@@ -103,7 +103,7 @@ public final class CABlockPropertyWrappers {
 
     public static final BlockPropertyWrapper BASIC_WOOD_SLAB = BlockPropertyWrapper.createTemplate()
             .builder()
-            .withLootTable(LootUtil::dropSelf)
+            .withLootTable(LootUtil::dropSlab)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE))
             .withCustomModelDefinitions(ModelUtil.slab(CAConstants.prefix("base/template")))
             .withBlockStateDefinition(ModelUtil::woodSlab)

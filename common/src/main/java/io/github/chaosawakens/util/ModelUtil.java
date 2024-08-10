@@ -42,7 +42,8 @@ public final class ModelUtil {
      * </ul>
      *
      * @param sixSideBlockTexture The {@link ResourceLocation} representing the texture of every side of a standard cube block.
-     *                            Points to the {@code "block/"} path by default (applies to all BMD methods in this class).
+     *                            Points to the {@code "block/"} path by default (applies to all BMD methods in this class. If they need item locations,
+     *                            those point to the {@code "item/"} path by default, with some automatically pointing towards {@code "item/block_items/"}).
      *
      * @return A {@link BlockModelDefinition} with the {@link ModelTemplates#CUBE_ALL} template.
      *

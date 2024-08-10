@@ -307,6 +307,11 @@ public class BlockModelDefinition {
         return parentModel.model.orElseGet(ModelTemplates.CUBE.model::get);
     }
 
+    /**
+     * Gets a mutable view of all cached model definitions (ONLY PRESENT DURING DATAGEN!!!).
+     *
+     * @return The cached model definitions.
+     */
     public static Object2ObjectLinkedOpenHashMap<Supplier<Block>, BlockModelDefinition> getCachedModelDefinitions() {
         return CACHED_DEFINITIONS;
     }
