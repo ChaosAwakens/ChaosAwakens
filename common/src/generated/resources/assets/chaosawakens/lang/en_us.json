@@ -1,5 +1,15 @@
 {
+  "block.chaosawakens.apple_button": "Apple Button",
+  "block.chaosawakens.apple_door": "Apple Door",
+  "block.chaosawakens.apple_fence": "Apple Fence",
+  "block.chaosawakens.apple_fence_gate": "Apple Fence Gate",
   "block.chaosawakens.apple_log": "Apple Log",
   "block.chaosawakens.apple_planks": "Apple Planks",
-  "block.chaosawakens.apple_wood": "Apple Wood"
+  "block.chaosawakens.apple_pressure_plate": "Apple Pressure Plate",
+  "block.chaosawakens.apple_slab": "Apple Slab",
+  "block.chaosawakens.apple_stairs": "Apple Stairs",
+  "block.chaosawakens.apple_trapdoor": "Apple Trapdoor",
+  "block.chaosawakens.apple_wood": "Apple Wood",
+  "block.chaosawakens.stripped_apple_log": "Stripped Apple Log",
+  "block.chaosawakens.stripped_apple_wood": "Stripped Apple Wood"
 }

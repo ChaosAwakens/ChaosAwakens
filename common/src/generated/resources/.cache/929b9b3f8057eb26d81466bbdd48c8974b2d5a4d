@@ -1,4 +1,12 @@
-// 1.20.1	2024-08-11T10:08:24.0502515	Chaos Awakens: Block Tags
-8c5720ed2273a0cc200d3e5268a413e9331098e9 data/minecraft/tags/blocks/logs_that_burn.json
-0978d5bc65ff8823df33a6e01bd19bc8989691c1 data/minecraft/tags/blocks/mineable/axe.json
+// 1.20.1	2024-08-11T16:59:57.1466156	Chaos Awakens: Block Tags
+2aaa5484d0ddde43519520f3137404065f78ab7c data/minecraft/tags/blocks/fence_gates.json
+8cc569ffadf7cb6d21c5278b136e71c79c48bae5 data/minecraft/tags/blocks/logs_that_burn.json
+7eab62dd0c861102609b159a6dab2f0a9d49b130 data/minecraft/tags/blocks/mineable/axe.json
 5405abb4a53c77449b98874658717593c6950321 data/minecraft/tags/blocks/planks.json
+54ebdf451025d5310a7a9be884c9fc9974fd3239 data/minecraft/tags/blocks/wooden_buttons.json
+10d9ab7e1e6e5ced7d96380234116f4c67dd7ece data/minecraft/tags/blocks/wooden_doors.json
+bb8b4d4a43001848c523777be68b4ff207fec52c data/minecraft/tags/blocks/wooden_fences.json
+0fa60221ba8727714b858304de44d692ca417fca data/minecraft/tags/blocks/wooden_pressure_plates.json
+a807ab1e1198865bf7cfa8b240776d75c5a49f9e data/minecraft/tags/blocks/wooden_slabs.json
+6d901f9daaad31819a1c20f6478ff5d9017ed98e data/minecraft/tags/blocks/wooden_stairs.json
+a0944e3efc174328b9d664bae52e04e5cf1b11e8 data/minecraft/tags/blocks/wooden_trapdoors.json

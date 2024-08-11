@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "chaosawakens:block/wood/apple/apple_planks",
+    "side": "chaosawakens:block/wood/apple/apple_planks",
+    "top": "chaosawakens:block/wood/apple/apple_planks"
+  }
+}

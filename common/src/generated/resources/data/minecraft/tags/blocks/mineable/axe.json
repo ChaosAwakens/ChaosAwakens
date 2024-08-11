@@ -2,6 +2,16 @@
   "values": [
     "chaosawakens:apple_log",
     "chaosawakens:apple_wood",
-    "chaosawakens:apple_planks"
+    "chaosawakens:stripped_apple_log",
+    "chaosawakens:stripped_apple_wood",
+    "chaosawakens:apple_planks",
+    "chaosawakens:apple_stairs",
+    "chaosawakens:apple_slab",
+    "chaosawakens:apple_fence",
+    "chaosawakens:apple_fence_gate",
+    "chaosawakens:apple_door",
+    "chaosawakens:apple_trapdoor",
+    "chaosawakens:apple_pressure_plate",
+    "chaosawakens:apple_button"
   ]
 }

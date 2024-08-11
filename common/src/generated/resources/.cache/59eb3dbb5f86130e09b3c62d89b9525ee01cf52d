@@ -1,4 +1,14 @@
-// 1.20.1	2024-08-11T10:08:24.0508642	Loot Tables
+// 1.20.1	2024-08-11T16:59:57.147776	Loot Tables
+e0ee511bca34f9c60bdb2af23a96292e96f0a64c data/chaosawakens/loot_tables/blocks/apple_button.json
+129675638aede2a57513342e984c863d5f6fd889 data/chaosawakens/loot_tables/blocks/apple_door.json
+6de1cbe7f909970121a2193e802885c0ebce5883 data/chaosawakens/loot_tables/blocks/apple_fence.json
+8c99e199e0b40ad1396752996afc0d4285a6b5a9 data/chaosawakens/loot_tables/blocks/apple_fence_gate.json
 cfb52e349a4376dc3ba93e980d78c45c4f7a906c data/chaosawakens/loot_tables/blocks/apple_log.json
 90ab07c0ce2256593cb9fb583e7fa316b077a868 data/chaosawakens/loot_tables/blocks/apple_planks.json
+4f577291cf4b6980779a71ab70ce50d47b3866d2 data/chaosawakens/loot_tables/blocks/apple_pressure_plate.json
+32a5406ef6045c636f6fedcdc5d6e26551b8eaba data/chaosawakens/loot_tables/blocks/apple_slab.json
+47f73cb509159248b4adb248e2f6039898f382e5 data/chaosawakens/loot_tables/blocks/apple_stairs.json
+60ec4f0ef36887d16fae8113d87eef5e0def9073 data/chaosawakens/loot_tables/blocks/apple_trapdoor.json
 c5733b1c5c3d935fcf049681611acb2c36dbecf2 data/chaosawakens/loot_tables/blocks/apple_wood.json
+0027433abd002962e39b26c35d9af8303ba9801d data/chaosawakens/loot_tables/blocks/stripped_apple_log.json
+363bfe448539e6ed3cbf5dc6138cfa360c6ea342 data/chaosawakens/loot_tables/blocks/stripped_apple_wood.json
