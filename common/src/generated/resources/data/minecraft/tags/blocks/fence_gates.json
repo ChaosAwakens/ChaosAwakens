@@ -1,5 +1,8 @@
 {
   "values": [
-    "chaosawakens:apple_fence_gate"
+    "chaosawakens:apple_fence_gate",
+    "chaosawakens:crystalwood_fence_gate",
+    "chaosawakens:densewood_fence_gate",
+    "chaosawakens:duplicator_fence_gate"
   ]
 }

@@ -471,7 +471,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          *
          * @see #withCustomModelDefinition(BlockModelDefinition)
          */
-        public BPWBuilder withCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) {
+        public BPWBuilder withCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) { //TODO Actually add the native handling so that we can finally prune all these method calls
             this.blockModelDefinitions.addAll(blockModelDefinitions);
             return this;
         }

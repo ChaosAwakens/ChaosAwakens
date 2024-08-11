@@ -1,5 +1,8 @@
 {
   "values": [
-    "chaosawakens:apple_button"
+    "chaosawakens:apple_button",
+    "chaosawakens:crystalwood_button",
+    "chaosawakens:densewood_button",
+    "chaosawakens:duplicator_button"
   ]
 }

@@ -1,5 +1,8 @@
 {
   "values": [
-    "chaosawakens:apple_door"
+    "chaosawakens:apple_door",
+    "chaosawakens:crystalwood_door",
+    "chaosawakens:densewood_door",
+    "chaosawakens:duplicator_door"
   ]
 }

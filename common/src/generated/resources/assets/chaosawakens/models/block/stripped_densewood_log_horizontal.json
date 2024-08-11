@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "chaosawakens:block/wood/densewood/stripped_densewood_log_top",
+    "side": "chaosawakens:block/wood/densewood/stripped_densewood_log"
+  }
+}

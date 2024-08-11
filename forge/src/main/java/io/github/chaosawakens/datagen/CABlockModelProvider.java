@@ -4,9 +4,7 @@ import com.google.common.base.Preconditions;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.BlockModelDefinition;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
-import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.block.model.ItemTransform;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -29,9 +27,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CABlockModelProvider extends BlockModelProvider {
     public static final ResourceLocation ITEM_GENERATED = new ResourceLocation("item/generated");
@@ -50,10 +45,6 @@ public class CABlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
-        ObjectArrayList<Supplier<Block>> distinctBlocks = Stream.concat(CABlocks.getBlocks().stream(), BlockPropertyWrapper.getMappedBwps().keySet().stream())
-                .distinct()
-                .collect(Collectors.toCollection(ObjectArrayList::new));
-
         if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
             BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, mappedBpw) -> {
                 List<BlockModelDefinition> curModelDefs = mappedBpw.getModelDefinitions();
@@ -98,7 +89,7 @@ public class CABlockModelProvider extends BlockModelProvider {
                             }
 
                             if (!BlockModelDefinition.getCachedModelDefinitions().containsKey(blockSupEntry)) {
-                                BlockModelDefinition.getCachedModelDefinitions().putIfAbsent(blockSupEntry, curModelDef);
+                                BlockModelDefinition.getCachedModelDefinitions().putIfAbsent(blockSupEntry, curModelDef); // JIC
 
                                 String itemModelFileName = curBlock.getDescriptionId().substring(curBlock.getDescriptionId().lastIndexOf(".") + 1);
                                 ResourceLocation customBlockModelItemParent = curModelDef.getCustomItemModelParent();
@@ -130,6 +121,31 @@ public class CABlockModelProvider extends BlockModelProvider {
                 }
             });
         }
+
+    /*    ObjectArrayList<Supplier<Block>> distinctBlocks = Stream.concat(CABlocks.getBlocks().stream(), BlockModelDefinition.getCachedModelDefinitions().keySet().stream()) // At this point, BMDs have been mapped/cached
+                .distinct()
+                .collect(Collectors.toCollection(ObjectArrayList::new));
+
+        distinctBlocks.forEach(blockSupEntry -> {
+            Block blockEntry = blockSupEntry.get();
+            String formattedBlockRegName = blockEntry.getDescriptionId().substring(blockEntry.getDescriptionId().lastIndexOf(".") + 1);
+
+            if (blockEntry instanceof SlabBlock slabBlockEntry) {
+
+            }
+
+            if (blockEntry instanceof StairBlock stairBlockEntry) {
+
+            }
+
+            if (blockEntry instanceof RotatedPillarBlock rotatedPillarBlockEntry) {
+
+            }
+
+            if (blockEntry instanceof WallBlock wallBlockEntry) {
+
+            }
+        }); */ //TODO Figure out how to map texture locations such that we can get an actually consistent and useful algorithm instead of this yanderedev looking ahh code block
     }
 
     @Override

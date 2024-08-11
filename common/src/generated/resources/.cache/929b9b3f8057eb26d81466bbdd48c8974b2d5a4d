@@ -1,12 +1,12 @@
-// 1.20.1	2024-08-11T16:59:57.1466156	Chaos Awakens: Block Tags
-2aaa5484d0ddde43519520f3137404065f78ab7c data/minecraft/tags/blocks/fence_gates.json
-8cc569ffadf7cb6d21c5278b136e71c79c48bae5 data/minecraft/tags/blocks/logs_that_burn.json
-7eab62dd0c861102609b159a6dab2f0a9d49b130 data/minecraft/tags/blocks/mineable/axe.json
-5405abb4a53c77449b98874658717593c6950321 data/minecraft/tags/blocks/planks.json
-54ebdf451025d5310a7a9be884c9fc9974fd3239 data/minecraft/tags/blocks/wooden_buttons.json
-10d9ab7e1e6e5ced7d96380234116f4c67dd7ece data/minecraft/tags/blocks/wooden_doors.json
-bb8b4d4a43001848c523777be68b4ff207fec52c data/minecraft/tags/blocks/wooden_fences.json
-0fa60221ba8727714b858304de44d692ca417fca data/minecraft/tags/blocks/wooden_pressure_plates.json
-a807ab1e1198865bf7cfa8b240776d75c5a49f9e data/minecraft/tags/blocks/wooden_slabs.json
-6d901f9daaad31819a1c20f6478ff5d9017ed98e data/minecraft/tags/blocks/wooden_stairs.json
-a0944e3efc174328b9d664bae52e04e5cf1b11e8 data/minecraft/tags/blocks/wooden_trapdoors.json
+// 1.20.1	2024-08-11T22:12:13.2960941	Chaos Awakens: Block Tags
+4650b5149508cd83b0ed15b35bf42a96eea84a33 data/minecraft/tags/blocks/fence_gates.json
+e3dcc19f727825fb305ae85403575c5cc1bacb1a data/minecraft/tags/blocks/logs_that_burn.json
+ab872c0f94d3990dcabaf23b8166e9ce95772f9d data/minecraft/tags/blocks/mineable/axe.json
+a55fe9d812cd0b3f93c1ae919c2372fc143d3801 data/minecraft/tags/blocks/planks.json
+df88fb6f4086e53d56ae38e97ba895d2ce4c7a21 data/minecraft/tags/blocks/wooden_buttons.json
+a77caf3d74b297dc1581b3854b612cde04cb755a data/minecraft/tags/blocks/wooden_doors.json
+588209875a16b3b7913df53ea80ab26d2f9267b5 data/minecraft/tags/blocks/wooden_fences.json
+f00571b074a98f7ff014c815982f533b126a6686 data/minecraft/tags/blocks/wooden_pressure_plates.json
+f9c35c4109cf341c6ccf8dc4f62f217e0102daf5 data/minecraft/tags/blocks/wooden_slabs.json
+8f0c8c96bea3f9c8e51c53273aea57817830f0df data/minecraft/tags/blocks/wooden_stairs.json
+3a95350cfcaa04d1a2744f729f6dc05f4990d49a data/minecraft/tags/blocks/wooden_trapdoors.json

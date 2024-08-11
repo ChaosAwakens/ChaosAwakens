@@ -3,6 +3,20 @@
     "chaosawakens:apple_log",
     "chaosawakens:apple_wood",
     "chaosawakens:stripped_apple_log",
-    "chaosawakens:stripped_apple_wood"
+    "chaosawakens:stripped_apple_wood",
+    "chaosawakens:crystalwood_log",
+    "chaosawakens:crystalwood",
+    "chaosawakens:densewood_log",
+    "chaosawakens:densewood",
+    "chaosawakens:stripped_densewood_log",
+    "chaosawakens:stripped_densewood",
+    "chaosawakens:duplicator_log",
+    "chaosawakens:duplicator_wood",
+    "chaosawakens:stripped_duplicator_log",
+    "chaosawakens:stripped_duplicator_wood",
+    "chaosawakens:dead_duplicator_log",
+    "chaosawakens:dead_duplicator_wood",
+    "chaosawakens:stripped_dead_duplicator_log",
+    "chaosawakens:stripped_dead_duplicator_wood"
   ]
 }

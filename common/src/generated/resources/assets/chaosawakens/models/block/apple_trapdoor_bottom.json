@@ -2,6 +2,6 @@
   "parent": "minecraft:block/template_trapdoor_bottom",
   "render_type": "minecraft:cutout",
   "textures": {
-    "texture": "chaosawakens:block/wood/apple/apple_planks"
+    "texture": "chaosawakens:block/wood/apple/apple_trapdoor"
   }
 }

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "chaosawakens:block/stripped_duplicator_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "chaosawakens:block/stripped_duplicator_log"
+    },
+    "axis=z": {
+      "model": "chaosawakens:block/stripped_duplicator_log_horizontal",
+      "x": 90
+    }
+  }
+}

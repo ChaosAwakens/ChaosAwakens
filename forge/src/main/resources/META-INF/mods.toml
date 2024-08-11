@@ -14,6 +14,12 @@ credits = "${mod_credits}"
 authors = "${mod_authors}"
 description = '''${mod_description}'''
 
+[modproperties."${mod_id}"]
+    #    catalogueItemIcon = ""
+    catalogueImageIcon="${mod_logo_path}"
+    #    catalogueBackground=""
+    configuredBackground="minecraft:textures/block/netherite_block.png"
+
 # Base
 [[dependencies.${mod_id}]]
     modId = "forge"
