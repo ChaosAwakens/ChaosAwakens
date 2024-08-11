@@ -1,10 +1,8 @@
-// 1.20.1	2024-08-09T21:23:43.7922015	Chaos Awakens: Block & Block Item Models
-ada4fb37e9d1a24f979583c3d67dda025bcd20aa assets/chaosawakens/models/block/apple_door_bottom_left.json
-7642bb28e3111d588c18f4d1657770205f4c2c1a assets/chaosawakens/models/block/apple_door_bottom_left_open.json
-599f3c63cebc6e5c65e0fb13cb2153bf6a9f817d assets/chaosawakens/models/block/apple_door_bottom_right.json
-09faebdac99f13f1de9eefe708c0001b7796bf7f assets/chaosawakens/models/block/apple_door_bottom_right_open.json
-9c54080aabb9768b4095d667b2d0b169e4b6d092 assets/chaosawakens/models/block/apple_door_top_left.json
-d876b9e111e15fd80ea6bbbd4d0d2372386f7cb3 assets/chaosawakens/models/block/apple_door_top_left_open.json
-851c3a00a4176396390939c72fb99256c8306aee assets/chaosawakens/models/block/apple_door_top_right.json
-27836dba0474d830d485b25a71bb75bebfadfa27 assets/chaosawakens/models/block/apple_door_top_right_open.json
-405b798b72eed17f54b698f08ed155aa48be9b26 assets/chaosawakens/models/item/apple_door.json
+// 1.20.1	2024-08-11T10:08:24.0526296	Chaos Awakens: Block & Block Item Models
+579acb7d445c43ac35bef9e1eff63fe22f667390 assets/chaosawakens/models/block/apple_log.json
+ff705e467cf3ea1e3e5b7af5947b42cee6c4d3bd assets/chaosawakens/models/block/apple_log_horizontal.json
+2f6d31aa41b558cae4481b15a824ad13e6ac9e12 assets/chaosawakens/models/block/apple_planks.json
+62f67515f5d59a1ad12b73f04d315be177f6d27e assets/chaosawakens/models/block/apple_wood.json
+8cfe7a49469572d13a92f19503e13d71a46fde88 assets/chaosawakens/models/item/apple_log.json
+02389e6307c6292dae5e8bf584768a5958ddb817 assets/chaosawakens/models/item/apple_planks.json
+157d77ff907cb2659f2e6479699cf902edfa5214 assets/chaosawakens/models/item/apple_wood.json

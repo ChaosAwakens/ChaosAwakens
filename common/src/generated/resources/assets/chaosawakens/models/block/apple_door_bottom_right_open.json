@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_right_open",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "chaosawakens:block/wood/apple/apple_door_bottom",
-    "top": "chaosawakens:block/wood/apple/apple_door_top"
-  }
-}

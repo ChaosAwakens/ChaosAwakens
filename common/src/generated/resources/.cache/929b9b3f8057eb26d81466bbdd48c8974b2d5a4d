@@ -1,3 +1,4 @@
-// 1.20.1	2024-08-10T11:00:37.7693382	Chaos Awakens: Block Tags
-10d9ab7e1e6e5ced7d96380234116f4c67dd7ece data/minecraft/tags/blocks/mineable/axe.json
-10d9ab7e1e6e5ced7d96380234116f4c67dd7ece data/minecraft/tags/blocks/wooden_doors.json
+// 1.20.1	2024-08-11T10:08:24.0502515	Chaos Awakens: Block Tags
+8c5720ed2273a0cc200d3e5268a413e9331098e9 data/minecraft/tags/blocks/logs_that_burn.json
+0978d5bc65ff8823df33a6e01bd19bc8989691c1 data/minecraft/tags/blocks/mineable/axe.json
+5405abb4a53c77449b98874658717593c6950321 data/minecraft/tags/blocks/planks.json

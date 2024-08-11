@@ -9,6 +9,7 @@ import net.minecraft.tags.BlockTags;
 
 public final class CABlockPropertyWrappers {
 
+    // Basic
     public static final BlockPropertyWrapper BASIC_BLOCK = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
@@ -101,7 +102,25 @@ public final class CABlockPropertyWrappers {
             .withTags(ObjectArrayList.of(BlockTags.NEEDS_DIAMOND_TOOL))
             .build();
 
-    public static final BlockPropertyWrapper BASIC_WOODEN_SLAB = BlockPropertyWrapper.createTemplate()
+    public static final BlockPropertyWrapper BASIC_ROTATED_PILLAR_BLOCK = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropSelf)
+            .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("base/template"), CAConstants.prefix("base/template")))
+            .withBlockStateDefinition(ModelUtil::rotatedPillarBlock)
+            .build();
+    public static final BlockPropertyWrapper BASIC_AXIS_ALIGNED_BLOCK = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropSelf)
+            .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("base/template")))
+            .withBlockStateDefinition(ModelUtil::axisAlignedBlock)
+            .build();
+
+    // Wooden Stuff
+    public static final BlockPropertyWrapper WOODEN_PLANKS = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_AXE)
+            .cachedBuilder()
+            .withTags(ObjectArrayList.of(BlockTags.PLANKS))
+            .build();
+    public static final BlockPropertyWrapper WOODEN_SLAB = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSlab)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE))
@@ -109,11 +128,42 @@ public final class CABlockPropertyWrappers {
             .withBlockStateDefinition(ModelUtil::woodenSlab)
             .build();
 
-    public static final BlockPropertyWrapper BASIC_WOODEN_DOOR = BlockPropertyWrapper.createTemplate()
+    public static final BlockPropertyWrapper WOODEN_DOOR = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropDoor)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE))
-            .withCustomModelDefinitions(ModelUtil.door(CAConstants.prefix("wood/apple/apple_door_top"), CAConstants.prefix("wood/apple/apple_door_bottom")))
+            .withCustomModelDefinitions(ModelUtil.door(CAConstants.prefix("base/template"), CAConstants.prefix("base/template")))
             .withBlockStateDefinition(ModelUtil::door)
+            .build();
+    public static final BlockPropertyWrapper WOODEN_TRAPDOOR = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropSelf)
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE))
+            .withCustomModelDefinitions(ModelUtil.trapdoor(CAConstants.prefix("base/template")))
+            .withBlockStateDefinition(ModelUtil::trapdoor)
+            .build();
+
+    public static final BlockPropertyWrapper WOODEN_FENCE = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropSelf)
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_FENCES, BlockTags.MINEABLE_WITH_AXE))
+            .withCustomModelDefinitions(ModelUtil.fence(CAConstants.prefix("base/template"), CAConstants.prefix("template_fence_inventory")))
+            .withBlockStateDefinition(ModelUtil::fence)
+            .build();
+    public static final BlockPropertyWrapper WOODEN_FENCE_GATE = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropSelf)
+            .withTags(ObjectArrayList.of(BlockTags.FENCE_GATES, BlockTags.MINEABLE_WITH_AXE))
+            .withCustomModelDefinitions(ModelUtil.fenceGate(CAConstants.prefix("base/template")))
+            .withBlockStateDefinition(ModelUtil::fenceGate)
+            .build();
+
+    public static final BlockPropertyWrapper LOG = BlockPropertyWrapper.ofTemplate(BASIC_ROTATED_PILLAR_BLOCK)
+            .cachedBuilder()
+            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN))
+            .build();
+    public static final BlockPropertyWrapper WOOD = BlockPropertyWrapper.ofTemplate(BASIC_AXIS_ALIGNED_BLOCK)
+            .cachedBuilder()
+            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN))
             .build();
 }

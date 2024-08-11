@@ -7,6 +7,7 @@ import io.github.chaosawakens.api.block.BlockStateDefinition;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplates;
@@ -495,6 +496,16 @@ public final class ModelUtil { //TODO Finish Javadocs
      * based on the {@link BlockStateProperties#SLAB_TYPE} property.
      *
      * @see #slab(Supplier, ResourceLocation)
+     * @see #slab(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slab(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slab(ResourceLocation)
+     * @see #slabBottom(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slabBottom(ResourceLocation, boolean)
+     * @see #slabBottom(ResourceLocation)
+     * @see #slabTop(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slabTop(ResourceLocation, boolean)
+     * @see #slabTop(ResourceLocation)
+     * @see #woodenSlab(Supplier)
      * @see SlabType
      */
     public static BlockStateDefinition slab(Supplier<Block> targetBlock, ResourceLocation bottomModel, ResourceLocation topModel, ResourceLocation doubleSlabModel) {
@@ -542,11 +553,58 @@ public final class ModelUtil { //TODO Finish Javadocs
      * @see #slabTop(ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slabTop(ResourceLocation, boolean)
      * @see #slabTop(ResourceLocation)
+     * @see #slab(Supplier)
      * @see #woodenSlab(Supplier)
      * @see SlabType
      */
     public static BlockStateDefinition slab(Supplier<Block> targetBlock, ResourceLocation doubleBlockModel) {
         return slab(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()), ModelLocationUtils.getModelLocation(targetBlock.get(), "_top"), doubleBlockModel);
+    }
+
+    /**
+     * Overloaded variant of {@link #slab(Supplier, ResourceLocation)}, utilising the supplied {@link Block} as the base for deciding the
+     * {@link ResourceLocation} of every required {@link TextureSlot} in a standard slab. Defaults the double-slab model to an arbitrarily-guessed reference of the should-be existing
+     * block variant of the supplied slab. It first attempts to find the full-block model by only pruning {@code "_slab"} from the supplied {@linkplain Block Block's} registry name,
+     * defaulting to pruning {@code "_slab"} and appending {@code "_block"} if it fails to find a match.
+     * <p>
+     * <h3>Variants / Properties</h3>
+     * <ul>
+     *  <li>{@link BlockStateProperties#SLAB_TYPE} -> <ul>
+     *      <li>{@link SlabType#BOTTOM} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block)}</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#TOP} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@link ModelLocationUtils#getModelLocation(Block, String)} (Suffixed with {@code "_top"})</li>
+     *      </ul></li>
+     *      <li>{@link SlabType#DOUBLE} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code !findPruned(blockName, "_slab") ? blockName.replace("_slab", "").concat("_block") : prune(blockName, "_slab")} (Does not accurately represent how this method actually does String mutation)</li>
+     *      </ul></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@link Block} used as the base for determining the {@link ResourceLocation} of every required {@link TextureSlot} in a standard slab.
+     *
+     * @return A {@link BlockStateDefinition} with the {@link MultiVariantGenerator} with the {@link VariantProperties#MODEL} property set to the required {@linkplain ResourceLocation ResourceLocations}
+     * based on the required {@linkplain TextureSlot TextureSlots} in a standard slab, utilising the supplied {@link Block} as the base.
+     *
+     * @see #slab(Supplier, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slab(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slab(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slab(ResourceLocation)
+     * @see #slabBottom(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slabBottom(ResourceLocation, boolean)
+     * @see #slabBottom(ResourceLocation)
+     * @see #slabTop(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #slabTop(ResourceLocation, boolean)
+     * @see #slabTop(ResourceLocation)
+     * @see #woodenSlab(Supplier)
+     * @see SlabType
+     */
+    public static BlockStateDefinition slab(Supplier<Block> targetBlock) {
+        String targetDoubleBlockModel = StringUtils.substringBefore(ModelLocationUtils.getModelLocation(targetBlock.get()).getPath(), "_slab");
+        String fallbackDoubleBlockModel = StringUtils.substringBefore(ModelLocationUtils.getModelLocation(targetBlock.get()).getPath(), "_slab").concat("_block");
+        String chosenDoubleBlockModel = BuiltInRegistries.BLOCK.get(CAConstants.prefix(targetDoubleBlockModel)).getDescriptionId().equals("block.minecraft.air") ? fallbackDoubleBlockModel : targetDoubleBlockModel;
+        return slab(targetBlock, CAConstants.prefix(chosenDoubleBlockModel));
     }
 
     /**
@@ -585,6 +643,7 @@ public final class ModelUtil { //TODO Finish Javadocs
      * @see #slabTop(ResourceLocation, boolean)
      * @see #slabTop(ResourceLocation)
      * @see #slab(Supplier, ResourceLocation)
+     * @see #slab(Supplier)
      * @see SlabType
      */
     public static BlockStateDefinition woodenSlab(Supplier<Block> targetBlock) {
@@ -824,7 +883,7 @@ public final class ModelUtil { //TODO Finish Javadocs
     }
 
     /**
-     * Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis.
+     * Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis with a horizontal variant.
      * <p>
      * <h3>Variants / Properties</h3>
      * <ul>
@@ -875,7 +934,7 @@ public final class ModelUtil { //TODO Finish Javadocs
 
     /**
      * Overloaded variant of {@link #rotatedPillarBlock(Supplier, ResourceLocation, ResourceLocation)}. Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator}
-     * to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis. Defaults the {@code horizontalModel} to {@code baseModel + {@code "_horizontal"}}.
+     * to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis with a horizontal variant. Defaults the {@code horizontalModel} to {@code baseModel + {@code "_horizontal"}}.
      * <p>
      * <h3>Variants / Properties</h3>
      * <ul>
@@ -916,7 +975,7 @@ public final class ModelUtil { //TODO Finish Javadocs
 
     /**
      * Overloaded variant of {@link #rotatedPillarBlock(Supplier, ResourceLocation)}. Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator}
-     * to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis. Defaults the {@code baseModel} to the default location of the supplied {@linkplain Block Block's}
+     * to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis with a horizontal variant. Defaults the {@code baseModel} to the default location of the supplied {@linkplain Block Block's}
      * model ({@link ModelLocationUtils#getModelLocation(Block)}).
      * <p>
      * <h3>Variants / Properties</h3>
@@ -953,6 +1012,72 @@ public final class ModelUtil { //TODO Finish Javadocs
      */
     public static BlockStateDefinition rotatedPillarBlock(Supplier<Block> targetBlock) {
         return rotatedPillarBlock(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
+    }
+
+    /**
+     * Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis.
+     * <p>
+     * <h3>Variants / Properties</h3>
+     * <ul>
+     *  <li>{@link VariantProperties#MODEL} -> {@code baseModel}</li>
+     *  <li>{@link BlockStateProperties#AXIS} -> <ul>
+     *      <li>{@link Direction.Axis#X} -> <ul>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *          <li>{@link VariantProperties#Y_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Y} -> <ul>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Z} -> <ul>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@linkplain Block Block} to use as the base for the {@link BlockStateDefinition}.
+     *
+     * @return A {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis.
+     */
+    public static BlockStateDefinition axisAlignedBlock(Supplier<Block> targetBlock, ResourceLocation baseModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get(), Variant.variant().with(VariantProperties.MODEL, baseModel))
+                .with(PropertyDispatch
+                        .property(BlockStateProperties.AXIS)
+                        .select(Direction.Axis.Y, Variant.variant())
+                        .select(Direction.Axis.Z, Variant.variant()
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
+                        .select(Direction.Axis.X, Variant.variant()
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))));
+    }
+
+    /**
+     * Overloaded variant of {@link #axisAlignedBlock(Supplier, ResourceLocation)}. Creates a {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's}
+     * model based on its rotation across all 3 axis. Defaults to the supplied {@linkplain Block Block's} default model location.
+     * <p>
+     * <h3>Variants / Properties</h3>
+     * <ul>
+     *  <li>{@link BlockStateProperties#AXIS} -> <ul>
+     *      <li>{@link Direction.Axis#X} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code horizontalModel}</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *          <li>{@link VariantProperties#Y_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Y} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code baseModel}</li>
+     *      </ul></li>
+     *      <li>{@link Direction.Axis#Z} -> <ul>
+     *          <li>{@link VariantProperties#MODEL} -> {@code horizontalModel}</li>
+     *          <li>{@link VariantProperties#X_ROT} -> {@link VariantProperties.Rotation#R90}</li>
+     *      </ul></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@linkplain Block Block} to use as the base for the {@link BlockStateDefinition}.
+     *
+     * @return A {@link BlockStateDefinition}, using {@link MultiVariantGenerator} to update the supplied {@linkplain Block Block's} model based on its rotation across all 3 axis, with the target model defaulting to
+     * {@link ModelLocationUtils#getModelLocation(Block)}.
+     */
+    public static BlockStateDefinition axisAlignedBlock(Supplier<Block> targetBlock) {
+        return axisAlignedBlock(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
     }
 
     /**
@@ -1679,7 +1804,7 @@ public final class ModelUtil { //TODO Finish Javadocs
                 .withTextureMapping(TextureMapping.defaultTexture(buttonTexture))
                 .withCustomItemModelParent(buttonItemParentBlockModel);
     }
-    
+
     public static ObjectArrayList<BlockModelDefinition> button(ResourceLocation buttonTexture, ResourceLocation buttonPressedTexture, ResourceLocation buttonInventoryTexture, ResourceLocation buttonItemParentBlockModel) {
         return ObjectArrayList.of(buttonDefault(buttonTexture, buttonItemParentBlockModel), buttonPressed(buttonPressedTexture, buttonItemParentBlockModel), buttonInventory(buttonInventoryTexture, buttonItemParentBlockModel));
     }
@@ -1739,6 +1864,38 @@ public final class ModelUtil { //TODO Finish Javadocs
 
     public static BlockStateDefinition button(Supplier<Block> targetBlock) {
         return button(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
+    }
+
+    public static BlockModelDefinition pressurePlateDown(ResourceLocation pressurePlateTexture) {
+        return BlockModelDefinition.of(ModelTemplates.PRESSURE_PLATE_DOWN)
+                .withTextureMapping(TextureMapping.defaultTexture(pressurePlateTexture));
+    }
+
+    public static BlockModelDefinition pressurePlateUp(ResourceLocation pressurePlateTexture) {
+        return BlockModelDefinition.of(ModelTemplates.PRESSURE_PLATE_UP)
+                .withTextureMapping(TextureMapping.defaultTexture(pressurePlateTexture));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> pressurePlate(ResourceLocation pressurePlateDownTexture, ResourceLocation pressurePlateUpTexture) {
+        return ObjectArrayList.of(pressurePlateDown(pressurePlateDownTexture), pressurePlateUp(pressurePlateUpTexture));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> pressurePlate(ResourceLocation pressurePlateTexture) {
+        return pressurePlate(pressurePlateTexture, pressurePlateTexture);
+    }
+
+    public static BlockStateDefinition pressurePlate(Supplier<Block> targetBlock, ResourceLocation pressurePlateDownModel, ResourceLocation pressurePlateUpModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
+                .with(PropertyDispatch
+                        .property(BlockStateProperties.POWERED)
+                        .select(true, Variant.variant()
+                                .with(VariantProperties.MODEL, pressurePlateDownModel))
+                        .select(false, Variant.variant()
+                                .with(VariantProperties.MODEL, pressurePlateUpModel))));
+    }
+
+    public static BlockStateDefinition pressurePlate(Supplier<Block> targetBlock) {
+        return pressurePlate(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get(), "_down"), ModelLocationUtils.getModelLocation(targetBlock.get()));
     }
 
     public static BlockModelDefinition fencePost(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
@@ -1855,5 +2012,107 @@ public final class ModelUtil { //TODO Finish Javadocs
 
     public static BlockStateDefinition fenceGate(Supplier<Block> targetBlock) {
         return fenceGate(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
+    }
+
+    public static BlockModelDefinition wallPost(ResourceLocation wallPostTexture, ResourceLocation wallInventoryModel) {
+        return BlockModelDefinition.of(ModelTemplates.WALL_POST)
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallPostTexture))
+                .withCustomItemModelParent(wallInventoryModel);
+    }
+
+    public static BlockModelDefinition wallSide(ResourceLocation wallSideTexture, ResourceLocation wallInventoryModel) {
+        return BlockModelDefinition.of(ModelTemplates.WALL_LOW_SIDE)
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallSideTexture))
+                .withCustomItemModelParent(wallInventoryModel);
+    }
+
+    public static BlockModelDefinition wallSideTall(ResourceLocation wallSideTallTexture, ResourceLocation wallInventoryModel) {
+        return BlockModelDefinition.of(ModelTemplates.WALL_TALL_SIDE)
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallSideTallTexture))
+                .withCustomItemModelParent(wallInventoryModel);
+    }
+
+    public static BlockModelDefinition wallInventory(ResourceLocation wallInventoryTexture, ResourceLocation wallInventoryModel) {
+        return BlockModelDefinition.of(ModelTemplates.WALL_INVENTORY)
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallInventoryTexture))
+                .withCustomItemModelParent(wallInventoryModel);
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> wall(ResourceLocation wallPostTexture, ResourceLocation wallSideTexture, ResourceLocation wallSideTallTexture, ResourceLocation wallInventoryTexture, ResourceLocation wallInventoryModel) {
+        return ObjectArrayList.of(wallPost(wallPostTexture, wallInventoryModel), wallSide(wallSideTexture, wallInventoryModel), wallSideTall(wallSideTallTexture, wallInventoryModel), wallInventory(wallInventoryTexture, wallInventoryModel));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> wall(ResourceLocation wallTexture, ResourceLocation wallInventoryModel) {
+        return wall(wallTexture, wallTexture, wallTexture, wallTexture, wallInventoryModel);
+    }
+
+    public static BlockStateDefinition wall(Supplier<Block> targetBlock, ResourceLocation wallPostModel, ResourceLocation wallSideModel, ResourceLocation wallSideTallModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiPartGenerator.multiPart(targetBlock.get())
+                .with(Condition.condition()
+                        .term(BlockStateProperties.UP, true), Variant.variant()
+                        .with(VariantProperties.MODEL, wallPostModel))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.NORTH_WALL, WallSide.LOW), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideModel)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.EAST_WALL, WallSide.LOW), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.SOUTH_WALL, WallSide.LOW), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.WEST_WALL, WallSide.LOW), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.NORTH_WALL, WallSide.TALL), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideTallModel)
+                        .with(VariantProperties.UV_LOCK, true)).with(Condition.condition()
+                        .term(BlockStateProperties.EAST_WALL, WallSide.TALL), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideTallModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.SOUTH_WALL, WallSide.TALL), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideTallModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.WEST_WALL, WallSide.TALL), Variant.variant()
+                        .with(VariantProperties.MODEL, wallSideTallModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                        .with(VariantProperties.UV_LOCK, true)));
+    }
+
+    public static BlockStateDefinition wall(Supplier<Block> targetBlock) {
+        return wall(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get(), "_post"), ModelLocationUtils.getModelLocation(targetBlock.get(), "_side"), ModelLocationUtils.getModelLocation(targetBlock.get(), "_side_tall"));
+    }
+
+    public static BlockModelDefinition standingTorch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
+        return BlockModelDefinition.of(ModelTemplates.TORCH)
+                .withTextureMapping(TextureMapping.torch(torchTexture))
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/")));
+    }
+
+    public static BlockModelDefinition wallTorch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
+        return BlockModelDefinition.of(ModelTemplates.WALL_TORCH)
+                .withTextureMapping(TextureMapping.torch(torchTexture))
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/")));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> torch(ResourceLocation torchTexture, ResourceLocation wallTorchTexture, ResourceLocation torchItemTexture) {
+        return ObjectArrayList.of(standingTorch(torchTexture, torchItemTexture), wallTorch(wallTorchTexture, torchItemTexture));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> torch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
+        return torch(torchTexture, torchTexture, torchItemTexture);
     }
 }

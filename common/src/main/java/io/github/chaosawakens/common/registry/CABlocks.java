@@ -5,13 +5,18 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.block.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.util.ModelUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Supplier;
 
@@ -20,7 +25,20 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Block>> BLOCKS = new ObjectArrayList<>();
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
-    public static final Supplier<Block> APPLE_DOOR = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_WOODEN_DOOR, registerBlock("apple_door", () -> new DoorBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops(), CABlockSetTypes.APPLE)))
+    public static final Supplier<Block> APPLE_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("apple_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
+            .cachedBuilder()
+            .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/apple/apple_log"), CAConstants.prefix("wood/apple/apple_log_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> APPLE_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("apple_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/apple/apple_log")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> APPLE_PLANKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOODEN_PLANKS, registerBlock("apple_planks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava())))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("wood/apple/apple_planks")))
+            .build()
             .getParentBlock();
 
     private static Supplier<Block> registerBlock(String id, Supplier<Block> blockSup) {
