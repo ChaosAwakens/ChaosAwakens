@@ -6,9 +6,11 @@ import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -108,7 +110,7 @@ public final class LootUtil {
      *
      * @param targetBlock The {@link Supplier<Block>} representing the {@link Block} that will be treated as a door on drop.
      *
-     * @return A {@link LootTable.Builder} that will treat the given {@link Block} as a slab and drop it based on whether it has its lower half, if it has the {@link DoorBlock#HALF} property.
+     * @return A {@link LootTable.Builder} that will treat the given {@link Block} as a door and drop it based on whether it has its lower half, if it has the {@link DoorBlock#HALF} property.
      */
     public static LootTable.Builder dropDoor(Supplier<Block> targetBlock) {
         return LootTable.lootTable().withPool(LootPool.lootPool()
@@ -118,6 +120,34 @@ public final class LootUtil {
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(targetBlock.get())
                                 .setProperties(StatePropertiesPredicate.Builder.properties()
                                         .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)))));
+    }
+
+    /**
+     * Creates {@link LootTable.Builder} that will treat the given {@link Block} as a bed and drop it based on whether it has its head, if it has the {@link BedBlock#PART} property.
+     * <p>
+     * <h2>LOOT TABLE</h2>
+     * <h3>Pool 1</h3>
+     * <ul>
+     *  <li><b>Rolls:</b> 1.0</li>
+     *  <li><b>Applies:</b> {@link ApplyExplosionDecay#explosionDecay()}</li>
+     *  <li><b>Loot Pool Entries:</b> <ul>
+     *      <li><b>Loot Table Item:</b> {@code targetBlock}</li>
+     *      <li><b>When:</b> {@link LootItemBlockStatePropertyCondition#hasBlockStateProperties(Block)} (Has {@link BedPart#HEAD}, and it's {@link BedBlock#PART})</li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@link Supplier<Block>} representing the {@link Block} that will be treated as a bed on drop.
+     *
+     * @return A {@link LootTable.Builder} that will treat the given {@link Block} as a bed and drop it based on whether it has its head, if it has the {@link BedBlock#PART} property.
+     */
+    public static LootTable.Builder dropBed(Supplier<Block> targetBlock) {
+        return LootTable.lootTable().withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F))
+                .apply(ApplyExplosionDecay.explosionDecay())
+                .add(LootItem.lootTableItem(targetBlock.get())
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(targetBlock.get())
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(BedBlock.PART, BedPart.HEAD)))));
     }
 
     /**

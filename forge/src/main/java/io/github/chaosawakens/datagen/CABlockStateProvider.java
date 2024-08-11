@@ -59,6 +59,7 @@ public class CABlockStateProvider extends BlockStateProvider {
         models().generatedModels.clear();
         itemModels().generatedModels.clear();
         registeredBlocks.clear();
+        mappedVanillaGenerators.clear();
         registerStatesAndModels();
         CompletableFuture<?>[] futures = new CompletableFuture<?>[2 + this.mappedVanillaGenerators.size()];
         int i = 0;

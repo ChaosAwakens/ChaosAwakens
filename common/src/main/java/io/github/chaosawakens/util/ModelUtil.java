@@ -7,17 +7,15 @@ import io.github.chaosawakens.api.block.BlockStateDefinition;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.PropertyDispatch;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.*;
+import net.minecraft.data.models.blockstates.*;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoorHingeSide;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Set;
@@ -27,7 +25,7 @@ import java.util.function.Supplier;
  * Utility class containing helper methods (generally also found in datagen classes) aimed at reducing boilerplate code by natively providing
  * common {@link BlockModelDefinition} and {@link BlockStateDefinition} patterns.
  */
-public final class ModelUtil {
+public final class ModelUtil { //TODO Finish Javadocs
 
     private ModelUtil() {
         throw new IllegalAccessError("Attempted to construct Utility Class!");
@@ -70,6 +68,7 @@ public final class ModelUtil {
      * @see #cubeAll(ResourceLocation)
      * @see #cross(ResourceLocation)
      * @see #crossCutout(ResourceLocation)
+     * @see #sign(ResourceLocation, ResourceLocation)
      */
     public static BlockStateDefinition simpleBlock(Supplier<Block> targetBlock) {
         return BlockStateDefinition.of(targetBlock)
@@ -179,7 +178,7 @@ public final class ModelUtil {
      * @see #slab(ResourceLocation)
      * @see #slab(Supplier, ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slab(Supplier, ResourceLocation)
-     * @see #woodSlab(Supplier)
+     * @see #woodenSlab(Supplier)
      */
     public static BlockModelDefinition slabBottom(ResourceLocation sideTexture, ResourceLocation bottomTexture, ResourceLocation topTexture) {
         return BlockModelDefinition.of(ModelTemplates.SLAB_BOTTOM)
@@ -215,7 +214,7 @@ public final class ModelUtil {
      * @see #slab(ResourceLocation)
      * @see #slab(Supplier, ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slab(Supplier, ResourceLocation)
-     * @see #woodSlab(Supplier)
+     * @see #woodenSlab(Supplier)
      */
     public static BlockModelDefinition slabBottom(ResourceLocation baseTexture, boolean useBaseTexture) {
         return slabBottom(baseTexture, useBaseTexture ? baseTexture : baseTexture.withSuffix("_bottom"), useBaseTexture ? baseTexture : baseTexture.withSuffix("_top"));
@@ -245,7 +244,7 @@ public final class ModelUtil {
      * @see #slab(ResourceLocation)
      * @see #slab(Supplier, ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slab(Supplier, ResourceLocation)
-     * @see #woodSlab(Supplier)
+     * @see #woodenSlab(Supplier)
      */
     public static BlockModelDefinition slabBottom(ResourceLocation baseTexture) {
         return slabBottom(baseTexture, true);
@@ -277,7 +276,7 @@ public final class ModelUtil {
      * @see #slab(ResourceLocation)
      * @see #slab(Supplier, ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slab(Supplier, ResourceLocation)
-     * @see #woodSlab(Supplier)
+     * @see #woodenSlab(Supplier)
      */
     public static BlockModelDefinition slabTop(ResourceLocation sideTexture, ResourceLocation bottomTexture, ResourceLocation topTexture) {
         return BlockModelDefinition.of(ModelTemplates.SLAB_TOP)
@@ -313,7 +312,7 @@ public final class ModelUtil {
      * @see #slab(ResourceLocation)
      * @see #slab(Supplier, ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slab(Supplier, ResourceLocation)
-     * @see #woodSlab(Supplier)
+     * @see #woodenSlab(Supplier)
      */
     public static BlockModelDefinition slabTop(ResourceLocation baseTexture, boolean useBaseTexture) {
         return slabTop(baseTexture, useBaseTexture ? baseTexture : baseTexture.withSuffix("_bottom"), useBaseTexture ? baseTexture : baseTexture.withSuffix("_top"));
@@ -343,7 +342,7 @@ public final class ModelUtil {
      * @see #slab(ResourceLocation)
      * @see #slab(Supplier, ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slab(Supplier, ResourceLocation)
-     * @see #woodSlab(Supplier)
+     * @see #woodenSlab(Supplier)
      */
     public static BlockModelDefinition slabTop(ResourceLocation baseTexture) {
         return slabTop(baseTexture, true);
@@ -543,7 +542,7 @@ public final class ModelUtil {
      * @see #slabTop(ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #slabTop(ResourceLocation, boolean)
      * @see #slabTop(ResourceLocation)
-     * @see #woodSlab(Supplier)
+     * @see #woodenSlab(Supplier)
      * @see SlabType
      */
     public static BlockStateDefinition slab(Supplier<Block> targetBlock, ResourceLocation doubleBlockModel) {
@@ -588,7 +587,7 @@ public final class ModelUtil {
      * @see #slab(Supplier, ResourceLocation)
      * @see SlabType
      */
-    public static BlockStateDefinition woodSlab(Supplier<Block> targetBlock) {
+    public static BlockStateDefinition woodenSlab(Supplier<Block> targetBlock) {
         String targetDoubleBlockModel = ModelLocationUtils.getModelLocation(targetBlock.get()).getPath();
         return slab(targetBlock, CAConstants.prefix(!targetDoubleBlockModel.contains("_slab") ? targetDoubleBlockModel.concat("_planks") : targetDoubleBlockModel.replaceAll("_slab", "_planks")));
     }
@@ -612,7 +611,7 @@ public final class ModelUtil {
     public static BlockModelDefinition cross(ResourceLocation baseCrossTexture) {
         return BlockModelDefinition.of(ModelTemplates.CROSS)
                 .withTextureMapping(TextureMapping.cross(baseCrossTexture.withPrefix("block/")))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(baseCrossTexture.withPrefix("block/")));
     }
 
@@ -956,35 +955,199 @@ public final class ModelUtil {
         return rotatedPillarBlock(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_LEFT} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's bottom left (I.E. When the hinge is on the left side).
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's bottom left (I.E. When the hinge is on the left side).
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_LEFT} template.
+     *
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorBottomLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's bottom left (I.E. When the hinge is on the left side) when it's open.
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's bottom left (I.E. When the hinge is on the left side) when it's open.
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door's bottom left.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN} template.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorBottomLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_LEFT} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's top left (I.E. When the hinge is on the left side).
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's top left (I.E. When the hinge is on the left side).
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_LEFT} template.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorTopLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_LEFT_OPEN} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's top left (I.E. When the hinge is on the left side) when it's open.
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's top left (I.E. When the hinge is on the left side) when it's open.
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door's bottom left.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_LEFT_OPEN} template.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorTopLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
@@ -992,7 +1155,7 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
@@ -1000,7 +1163,7 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
@@ -1008,7 +1171,7 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
@@ -1016,7 +1179,7 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModelLoc(ModelTemplates.FLAT_ITEM)
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
@@ -1164,5 +1327,533 @@ public final class ModelUtil {
 
     public static BlockStateDefinition door(Supplier<Block> targetBlock) {
         return door(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get(), "_top"), ModelLocationUtils.getModelLocation(targetBlock.get(), "_bottom"));
+    }
+
+    public static BlockModelDefinition trapdoorOpen(ResourceLocation trapdoorTexture) {
+        return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_OPEN)
+                .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name));
+    }
+
+    public static BlockModelDefinition trapdoorTop(ResourceLocation trapdoorTexture) {
+        return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_TOP)
+                .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name));
+    }
+
+    public static BlockModelDefinition trapdoorBottom(ResourceLocation trapdoorTexture) {
+        return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_BOTTOM)
+                .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture))
+                .withBlockRenderType(new ResourceLocation(RenderType.cutout().name));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> trapdoor(ResourceLocation trapdoorOpenTexture, ResourceLocation trapDoorTopTexture, ResourceLocation trapdoorBottomTexture) {
+        return ObjectArrayList.of(trapdoorOpen(trapdoorOpenTexture), trapdoorTop(trapDoorTopTexture), trapdoorBottom(trapdoorBottomTexture));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> trapdoor(ResourceLocation trapdoorTexture) {
+        return trapdoor(trapdoorTexture, trapdoorTexture, trapdoorTexture);
+    }
+
+    public static BlockStateDefinition trapdoor(Supplier<Block> targetBlock, ResourceLocation trapdoorOpenModel, ResourceLocation trapdoorTopModel, ResourceLocation trapdoorBottomModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
+                .with(PropertyDispatch
+                        .properties(BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.HALF, BlockStateProperties.OPEN)
+                        .select(Direction.NORTH, Half.BOTTOM, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorBottomModel))
+                        .select(Direction.SOUTH, Half.BOTTOM, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorBottomModel))
+                        .select(Direction.EAST, Half.BOTTOM, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorBottomModel))
+                        .select(Direction.WEST, Half.BOTTOM, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorBottomModel))
+                        .select(Direction.NORTH, Half.TOP, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorTopModel))
+                        .select(Direction.SOUTH, Half.TOP, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorTopModel))
+                        .select(Direction.EAST, Half.TOP, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorTopModel))
+                        .select(Direction.WEST, Half.TOP, false, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorTopModel))
+                        .select(Direction.NORTH, Half.BOTTOM, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel))
+                        .select(Direction.SOUTH, Half.BOTTOM, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(Direction.EAST, Half.BOTTOM, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(Direction.WEST, Half.BOTTOM, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(Direction.NORTH, Half.TOP, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel))
+                        .select(Direction.SOUTH, Half.TOP, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(Direction.EAST, Half.TOP, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(Direction.WEST, Half.TOP, true, Variant.variant()
+                                .with(VariantProperties.MODEL, trapdoorOpenModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))));
+    }
+
+    public static BlockStateDefinition trapdoor(Supplier<Block> targetBlock, ResourceLocation trapdoorModel) {
+        return trapdoor(targetBlock, trapdoorModel.withSuffix("_open"), trapdoorModel.withSuffix("_top"), trapdoorModel.withSuffix("_bottom"));
+    }
+
+    public static BlockStateDefinition trapdoor(Supplier<Block> targetBlock) {
+        return trapdoor(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
+    }
+
+    /**
+     * Creates a {@link BlockModelDefinition} with the {@link ModelTemplates#PARTICLE_ONLY} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#PARTICLE} -> {@code signParticleTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code signItemTexture}</li>
+     * </ul>
+     *
+     * @param signParticleTexture The {@link ResourceLocation} representing the texture of the particle emitted by the {@link BlockEntity} representation of the provided sign {@link Block}.
+     * @param signItemTexture The {@link ResourceLocation} representing the texture of the item model of the provided sign {@link Block}.
+     *
+     * @return A new {@link BlockModelDefinition} with the {@link ModelTemplates#PARTICLE_ONLY} template
+     *
+     * @see #simpleBlock(Supplier)
+     */
+    public static BlockModelDefinition sign(ResourceLocation signParticleTexture, ResourceLocation signItemTexture) {
+        return BlockModelDefinition.of(ModelTemplates.PARTICLE_ONLY)
+                .withTextureMapping(TextureMapping.particle(signParticleTexture))
+                .withItemParentModel(ModelTemplates.FLAT_ITEM)
+                .withItemModelTextureMapping(TextureMapping.layer0(signItemTexture.withPrefix("item/")));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> sign(ResourceLocation signParticleTexture, ResourceLocation ceilingHangingSignTexture, ResourceLocation signItemTexture, String ceilingHangingSignModelName) {
+        return ObjectArrayList.of(sign(signParticleTexture, signItemTexture), sign(ceilingHangingSignTexture, signItemTexture)
+                .withCustomModelName(ceilingHangingSignModelName));
+    }
+
+    public static BlockModelDefinition stairsStraight(ResourceLocation straightStairsTopTexture, ResourceLocation straightStairsSideTexture, ResourceLocation straightStairsBottomTexture) {
+        return BlockModelDefinition.of(ModelTemplates.STAIRS_STRAIGHT)
+                .withTextureMapping(new TextureMapping()
+                        .put(TextureSlot.TOP, straightStairsTopTexture)
+                        .put(TextureSlot.SIDE, straightStairsSideTexture)
+                        .put(TextureSlot.BOTTOM, straightStairsBottomTexture));
+    }
+
+    public static BlockModelDefinition stairsStraight(ResourceLocation straightStairsTexture) {
+        return stairsStraight(straightStairsTexture, straightStairsTexture, straightStairsTexture);
+    }
+
+    public static BlockModelDefinition stairsInner(ResourceLocation innerStairsTopTexture, ResourceLocation innerStairsSideTexture, ResourceLocation innerStairsBottomTexture) {
+        return BlockModelDefinition.of(ModelTemplates.STAIRS_INNER)
+                .withTextureMapping(new TextureMapping()
+                        .put(TextureSlot.TOP, innerStairsTopTexture)
+                        .put(TextureSlot.SIDE, innerStairsSideTexture)
+                        .put(TextureSlot.BOTTOM, innerStairsBottomTexture));
+    }
+
+    public static BlockModelDefinition stairsInner(ResourceLocation innerStairsTexture) {
+        return stairsInner(innerStairsTexture, innerStairsTexture, innerStairsTexture);
+    }
+
+    public static BlockModelDefinition stairsOuter(ResourceLocation outerStairsTopTexture, ResourceLocation outerStairsSideTexture, ResourceLocation outerStairsBottomTexture) {
+        return BlockModelDefinition.of(ModelTemplates.STAIRS_OUTER)
+                .withTextureMapping(new TextureMapping()
+                        .put(TextureSlot.TOP, outerStairsTopTexture)
+                        .put(TextureSlot.SIDE, outerStairsSideTexture)
+                        .put(TextureSlot.BOTTOM, outerStairsBottomTexture));
+    }
+
+    public static BlockModelDefinition stairsOuter(ResourceLocation outerStairsTexture) {
+        return stairsOuter(outerStairsTexture, outerStairsTexture, outerStairsTexture);
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> stairs(ResourceLocation straightStairsTopTexture, ResourceLocation straightStairsSideTexture, ResourceLocation straightStairsBottomTexture, ResourceLocation innerStairsTopTexture, ResourceLocation innerStairsSideTexture, ResourceLocation innerStairsBottomTexture, ResourceLocation outerStairsTopTexture, ResourceLocation outerStairsSideTexture, ResourceLocation outerStairsBottomTexture) {
+        return ObjectArrayList.of(stairsStraight(straightStairsTopTexture, straightStairsSideTexture, straightStairsBottomTexture), stairsInner(innerStairsTopTexture, innerStairsSideTexture, innerStairsBottomTexture), stairsOuter(outerStairsTopTexture, outerStairsSideTexture, outerStairsBottomTexture));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> stairs(ResourceLocation stairsTopTexture, ResourceLocation stairsSideTexture, ResourceLocation stairsBottomTexture) {
+        return stairs(stairsTopTexture, stairsSideTexture, stairsBottomTexture, stairsTopTexture, stairsSideTexture, stairsBottomTexture, stairsTopTexture, stairsSideTexture, stairsBottomTexture);
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> stairs(ResourceLocation stairsTexture) {
+        return stairs(stairsTexture, stairsTexture, stairsTexture);
+    }
+
+    public static BlockStateDefinition stairs(Supplier<Block> targetBlock, ResourceLocation straightStairsModel, ResourceLocation innerStairsModel, ResourceLocation outerStairsModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
+                .with(PropertyDispatch
+                        .properties(BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.HALF, BlockStateProperties.STAIRS_SHAPE)
+                        .select(Direction.EAST, Half.BOTTOM, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel))
+                        .select(Direction.WEST, Half.BOTTOM, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.BOTTOM, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.BOTTOM, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.BOTTOM, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel))
+                        .select(Direction.WEST, Half.BOTTOM, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.BOTTOM, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.BOTTOM, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.BOTTOM, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.WEST, Half.BOTTOM, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.BOTTOM, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel))
+                        .select(Direction.NORTH, Half.BOTTOM, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.BOTTOM, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel))
+                        .select(Direction.WEST, Half.BOTTOM, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.BOTTOM, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.BOTTOM, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.WEST, Half.BOTTOM, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel))
+                        .select(Direction.NORTH, Half.BOTTOM, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.TOP, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.WEST, Half.TOP, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.TOP, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.TOP, StairsShape.STRAIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, straightStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.TOP, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.WEST, Half.TOP, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.TOP, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.TOP, StairsShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.TOP, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.WEST, Half.TOP, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.TOP, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.TOP, StairsShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.TOP, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.WEST, Half.TOP, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.TOP, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.TOP, StairsShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.EAST, Half.TOP, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.WEST, Half.TOP, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.SOUTH, Half.TOP, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(Direction.NORTH, Half.TOP, StairsShape.INNER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, innerStairsModel)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.UV_LOCK, true))));
+    }
+
+    public static BlockStateDefinition stairs(Supplier<Block> targetBlock) {
+        return stairs(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()), ModelLocationUtils.getModelLocation(targetBlock.get(), "_inner"), ModelLocationUtils.getModelLocation(targetBlock.get(), "_outer"));
+    }
+
+    public static BlockModelDefinition buttonDefault(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
+        return BlockModelDefinition.of(ModelTemplates.BUTTON)
+                .withTextureMapping(TextureMapping.defaultTexture(buttonTexture))
+                .withCustomItemModelParent(buttonItemParentBlockModel);
+    }
+
+    public static BlockModelDefinition buttonPressed(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
+        return BlockModelDefinition.of(ModelTemplates.BUTTON_PRESSED)
+                .withTextureMapping(TextureMapping.defaultTexture(buttonTexture))
+                .withCustomItemModelParent(buttonItemParentBlockModel);
+    }
+
+    public static BlockModelDefinition buttonInventory(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
+        return BlockModelDefinition.of(ModelTemplates.BUTTON_INVENTORY)
+                .withTextureMapping(TextureMapping.defaultTexture(buttonTexture))
+                .withCustomItemModelParent(buttonItemParentBlockModel);
+    }
+    
+    public static ObjectArrayList<BlockModelDefinition> button(ResourceLocation buttonTexture, ResourceLocation buttonPressedTexture, ResourceLocation buttonInventoryTexture, ResourceLocation buttonItemParentBlockModel) {
+        return ObjectArrayList.of(buttonDefault(buttonTexture, buttonItemParentBlockModel), buttonPressed(buttonPressedTexture, buttonItemParentBlockModel), buttonInventory(buttonInventoryTexture, buttonItemParentBlockModel));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> button(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
+        return button(buttonTexture, buttonTexture, buttonTexture, buttonItemParentBlockModel);
+    }
+
+    public static BlockStateDefinition button(Supplier<Block> targetBlock, ResourceLocation buttonModel, ResourceLocation buttonPressedModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
+                .with(PropertyDispatch
+                        .property(BlockStateProperties.POWERED)
+                        .select(false, Variant.variant()
+                                .with(VariantProperties.MODEL, buttonModel))
+                        .select(true, Variant.variant()
+                                .with(VariantProperties.MODEL, buttonPressedModel)))
+                .with(PropertyDispatch
+                        .properties(BlockStateProperties.ATTACH_FACE, BlockStateProperties.HORIZONTAL_FACING)
+                        .select(AttachFace.FLOOR, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(AttachFace.FLOOR, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(AttachFace.FLOOR, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(AttachFace.FLOOR, Direction.NORTH, Variant.variant())
+                        .select(AttachFace.WALL, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(AttachFace.WALL, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(AttachFace.WALL, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(AttachFace.WALL, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.UV_LOCK, true))
+                        .select(AttachFace.CEILING, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))
+                        .select(AttachFace.CEILING, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))
+                        .select(AttachFace.CEILING, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))
+                        .select(AttachFace.CEILING, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))));
+    }
+
+    public static BlockStateDefinition button(Supplier<Block> targetBlock, ResourceLocation buttonModel) {
+        return button(targetBlock, buttonModel, buttonModel.withSuffix("_pressed"));
+    }
+
+    public static BlockStateDefinition button(Supplier<Block> targetBlock) {
+        return button(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
+    }
+
+    public static BlockModelDefinition fencePost(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
+        return BlockModelDefinition.of(ModelTemplates.FENCE_POST)
+                .withTextureMapping(TextureMapping.defaultTexture(fenceTexture))
+                .withCustomItemModelParent(fenceItemParentBlockModel);
+    }
+
+    public static BlockModelDefinition fenceSide(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
+        return BlockModelDefinition.of(ModelTemplates.FENCE_SIDE)
+                .withTextureMapping(TextureMapping.defaultTexture(fenceTexture))
+                .withCustomItemModelParent(fenceItemParentBlockModel);
+    }
+
+    public static BlockModelDefinition fenceInventory(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
+        return BlockModelDefinition.of(ModelTemplates.FENCE_INVENTORY)
+                .withTextureMapping(TextureMapping.defaultTexture(fenceTexture))
+                .withCustomItemModelParent(fenceItemParentBlockModel);
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> fence(ResourceLocation fencePostTexture, ResourceLocation fenceSideTexture, ResourceLocation fenceInventoryTexture, ResourceLocation fenceItemParentBlockModel) {
+        return ObjectArrayList.of(fencePost(fencePostTexture, fenceItemParentBlockModel), fenceSide(fenceSideTexture, fenceItemParentBlockModel), fenceInventory(fenceInventoryTexture, fenceItemParentBlockModel));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> fence(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
+        return fence(fenceTexture, fenceTexture, fenceTexture, fenceItemParentBlockModel);
+    }
+
+    public static BlockStateDefinition fence(Supplier<Block> targetBlock, ResourceLocation fencePostModel, ResourceLocation fenceSideModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiPartGenerator.multiPart(targetBlock.get())
+                .with(Variant.variant()
+                        .with(VariantProperties.MODEL, fencePostModel))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.NORTH, true), Variant.variant()
+                        .with(VariantProperties.MODEL, fenceSideModel)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.EAST, true), Variant.variant()
+                        .with(VariantProperties.MODEL, fenceSideModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.SOUTH, true), Variant.variant()
+                        .with(VariantProperties.MODEL, fenceSideModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
+                        .term(BlockStateProperties.WEST, true), Variant.variant()
+                        .with(VariantProperties.MODEL, fenceSideModel)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                        .with(VariantProperties.UV_LOCK, true)));
+    }
+
+    public static BlockStateDefinition fence(Supplier<Block> targetBlock) {
+        return fence(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get(), "_post"), ModelLocationUtils.getModelLocation(targetBlock.get(), "_side"));
+    }
+
+    public static BlockModelDefinition fenceGateClosed(ResourceLocation fenceGateTexture) {
+        return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_CLOSED)
+                .withTextureMapping(TextureMapping.defaultTexture(fenceGateTexture));
+    }
+
+    public static BlockModelDefinition fenceGateOpen(ResourceLocation fenceGateOpenTexture) {
+        return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_OPEN)
+                .withTextureMapping(TextureMapping.defaultTexture(fenceGateOpenTexture));
+    }
+
+    public static BlockModelDefinition fenceGateWall(ResourceLocation fenceGateWallTexture) {
+        return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_WALL_CLOSED)
+                .withTextureMapping(TextureMapping.defaultTexture(fenceGateWallTexture));
+    }
+
+    public static BlockModelDefinition fenceGateWallOpen(ResourceLocation fenceGateWallOpenTexture) {
+        return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_WALL_OPEN)
+                .withTextureMapping(TextureMapping.defaultTexture(fenceGateWallOpenTexture));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> fenceGate(ResourceLocation fenceGateTexture, ResourceLocation fenceGateOpenTexture, ResourceLocation fenceGateWallTexture, ResourceLocation fenceGateWallOpenTexture) {
+        return ObjectArrayList.of(fenceGateClosed(fenceGateTexture), fenceGateOpen(fenceGateOpenTexture), fenceGateWall(fenceGateWallTexture), fenceGateWallOpen(fenceGateWallOpenTexture));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> fenceGate(ResourceLocation fenceGateTexture) {
+        return fenceGate(fenceGateTexture, fenceGateTexture, fenceGateTexture, fenceGateTexture);
+    }
+
+    public static BlockStateDefinition fenceGate(Supplier<Block> targetBlock, ResourceLocation fenceGateModel, ResourceLocation fenceGateOpenModel, ResourceLocation fenceGateWallModel, ResourceLocation fenceGateWallOpenModel, boolean uvLock) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get(), Variant.variant().with(VariantProperties.UV_LOCK, uvLock))
+                .with(PropertyDispatch
+                        .property(BlockStateProperties.HORIZONTAL_FACING)
+                        .select(Direction.SOUTH, Variant.variant())
+                        .select(Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)))
+                .with(PropertyDispatch
+                        .properties(BlockStateProperties.IN_WALL, BlockStateProperties.OPEN)
+                        .select(false, false, Variant.variant()
+                                .with(VariantProperties.MODEL, fenceGateModel))
+                        .select(true, false, Variant.variant()
+                                .with(VariantProperties.MODEL, fenceGateWallModel))
+                        .select(false, true, Variant.variant().with(VariantProperties.MODEL, fenceGateOpenModel))
+                        .select(true, true, Variant.variant().with(VariantProperties.MODEL, fenceGateWallOpenModel))));
+    }
+
+    public static BlockStateDefinition fenceGate(Supplier<Block> targetBlock, ResourceLocation fenceGateModel, ResourceLocation fenceGateOpenModel, ResourceLocation fenceGateWallModel, ResourceLocation fenceGateWallOpenModel) {
+        return fenceGate(targetBlock, fenceGateModel, fenceGateOpenModel, fenceGateWallModel, fenceGateWallOpenModel, true);
+    }
+
+    public static BlockStateDefinition fenceGate(Supplier<Block> targetBlock, ResourceLocation fenceGateModel) {
+        return fenceGate(targetBlock, fenceGateModel, fenceGateModel.withSuffix("_open"), fenceGateModel.withSuffix("_wall"), fenceGateModel.withSuffix("_wall_open"));
+    }
+
+    public static BlockStateDefinition fenceGate(Supplier<Block> targetBlock) {
+        return fenceGate(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()));
     }
 }

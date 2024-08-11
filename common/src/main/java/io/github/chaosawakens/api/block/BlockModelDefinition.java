@@ -34,6 +34,8 @@ public class BlockModelDefinition {
     private final Map<Map<ResourceLocation, Float>, ResourceLocation> itemModelTextureOverrides = new Object2ObjectLinkedOpenHashMap<>();
     @Nullable
     private String customModelName;
+    @Nullable
+    private ResourceLocation customItemModelParent;
 
     private BlockModelDefinition(ModelTemplate parentModel) {
         this.parentModel = parentModel;
@@ -129,12 +131,12 @@ public class BlockModelDefinition {
      * rather than {@code "chaosawakens:marble_wall"}), or for blocks that require generated item models (I.E. parented by {@code "minecraft:item/generated"}),
      * which typically need separate models for state vs item representation in-game.
      *
-     * @param itemModelLoc The custom parent {@link ModelTemplate} for the parent {@linkplain Block Block's} item model.
+     * @param itemParentModel The custom parent {@link ModelTemplate} for the parent {@linkplain Block Block's} item model.
      *
      * @return {@code this} (builder method)
      */
-    public BlockModelDefinition withItemParentModelLoc(ModelTemplate itemModelLoc) {
-        this.itemParentModel = itemModelLoc;
+    public BlockModelDefinition withItemParentModel(ModelTemplate itemParentModel) {
+        this.itemParentModel = itemParentModel;
         return this;
     }
 
@@ -151,6 +153,7 @@ public class BlockModelDefinition {
      * @see TexturedModel
      * @see ModelTemplates
      * @see TextureSlot
+     * @see #withCustomItemModelParent(ResourceLocation)
      */
     public BlockModelDefinition withItemModelTextureMapping(TextureMapping textureLayerDefinition) {
         this.itemModelTextureMapping = textureLayerDefinition;
@@ -181,6 +184,22 @@ public class BlockModelDefinition {
      */
     public BlockModelDefinition withCustomModelName(String customModelName) {
         this.customModelName = customModelName;
+        return this;
+    }
+
+    /**
+     * Defines a custom parent {@link ResourceLocation} for the parent {@linkplain Block Block's} item model (the one in {@code "model/item"}). Defaults
+     * to the parent {@linkplain Block Block's} default model location. Useful for cases where a custom {@link #itemModelTextureMapping} is not necessary, but
+     * you still need to point to a different parent model. This is ignored if {@link #withItemModelTextureMapping(TextureMapping)} is called/defined.
+     *
+     * @param blockModelLocation The custom parent {@link ResourceLocation} for the parent {@linkplain Block Block's} item model.
+     *
+     * @return {@code this} (builder method)
+     *
+     * @see #withItemModelTextureMapping(TextureMapping)
+     */
+    public BlockModelDefinition withCustomItemModelParent(ResourceLocation blockModelLocation) {
+        this.customItemModelParent = blockModelLocation;
         return this;
     }
 
@@ -296,6 +315,16 @@ public class BlockModelDefinition {
     @Nullable
     public String getCustomModelName() {
         return customModelName;
+    }
+
+    /**
+     * Returns the custom item model parent the generated block's item model file will point to instead of the default block model location. May be {@code null} if left undefined.
+     *
+     * @return The custom item model parent, or {@code null} if left undefined.
+     */
+    @Nullable
+    public ResourceLocation getCustomItemModelParent() {
+        return customItemModelParent;
     }
 
     /**

@@ -121,7 +121,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * Creates a new {@link BlockPropertyWrapper} instance based on the provided {@link BlockPropertyWrapper}. If the provided BPW instance is {@code null},
      * returns {@link #create(Supplier)}. You'd typically use this if you have a BPW template you want multiple registered {@linkplain Block Blocks} to inherit from.
      *
-     * @param parentWrapper The parent {@link BlockPropertyWrapper} instance from which {{@link #builder()}} should be copied.
+     * @param parentWrapper The parent {@link BlockPropertyWrapper} instance from which {@link #builder()} should be copied.
      * @param newBlock The new registry entry to use for the newly constructed BPW instance.
      *
      * @return A new {@link BlockPropertyWrapper} instance with copied properties based on the provided BPW, or an entirely new/clean instance if the provided BPW is {@code null}.

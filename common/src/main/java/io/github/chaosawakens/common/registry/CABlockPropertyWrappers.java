@@ -101,11 +101,19 @@ public final class CABlockPropertyWrappers {
             .withTags(ObjectArrayList.of(BlockTags.NEEDS_DIAMOND_TOOL))
             .build();
 
-    public static final BlockPropertyWrapper BASIC_WOOD_SLAB = BlockPropertyWrapper.createTemplate()
+    public static final BlockPropertyWrapper BASIC_WOODEN_SLAB = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSlab)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE))
             .withCustomModelDefinitions(ModelUtil.slab(CAConstants.prefix("base/template")))
-            .withBlockStateDefinition(ModelUtil::woodSlab)
+            .withBlockStateDefinition(ModelUtil::woodenSlab)
+            .build();
+
+    public static final BlockPropertyWrapper BASIC_WOODEN_DOOR = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropDoor)
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE))
+            .withCustomModelDefinitions(ModelUtil.door(CAConstants.prefix("wood/apple/apple_door_top"), CAConstants.prefix("wood/apple/apple_door_bottom")))
+            .withBlockStateDefinition(ModelUtil::door)
             .build();
 }
